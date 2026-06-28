@@ -6,5 +6,5 @@ application logic, agents, and opportunity intelligence workflows are outside
 this package's initial scope.
 """
 
-__all__ = ["core"]
+__all__ = ["core", "graph", "ontology", "reasoning"]
 __version__ = "0.1.0"
