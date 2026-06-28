@@ -13,17 +13,41 @@ from cios.decision_engine import DecisionOutput
 from cios.graph import KnowledgeGraphRecord
 from cios.memory import MemoryRepository
 
-from cios.applications.opportunity_assistant.decision_policy import DEFAULT_DECISION_POLICY, OpportunityDecisionPolicy
-from cios.applications.opportunity_assistant.explainability import OpportunityExplainabilityReport, create_explainability_report
+from cios.applications.opportunity_assistant.decision_policy import (
+    DEFAULT_DECISION_POLICY,
+    OpportunityDecisionPolicy,
+)
+from cios.applications.opportunity_assistant.explainability import (
+    OpportunityExplainabilityReport,
+    create_explainability_report,
+)
 from cios.applications.opportunity_assistant.graph_mapping import create_graph
-from cios.applications.opportunity_assistant.input import SAMPLE_PATH, create_evidence, load_sample_opportunity
-from cios.applications.opportunity_assistant.memory_mapping import persist_memory_records
-from cios.applications.opportunity_assistant.observation_mapping import create_observations
-from cios.applications.opportunity_assistant.ontology_mapping import OpportunityOntologyResult, create_ontology
-from cios.applications.opportunity_assistant.reasoning_mapping import OpportunityReasoningResult, create_reasoning
-from cios.applications.opportunity_assistant.reporting import render_console_report
-from cios.applications.opportunity_assistant.rules import RuleDetection, RuleMatch, detect_rules, score_rule_detections
-from cios.applications.opportunity_assistant.scoring_policy import DEFAULT_SCORING_POLICY, OpportunityScoringPolicy, OpportunityScoringResult
+from cios.applications.opportunity_assistant.input import (
+    SAMPLE_PATH,
+    create_evidence,
+    load_sample_opportunity,
+)
+from cios.applications.opportunity_assistant.memory_mapping import (
+    persist_memory_records,
+)
+from cios.applications.opportunity_assistant.observation_mapping import (
+    create_observations,
+)
+from cios.applications.opportunity_assistant.ontology_mapping import (
+    OpportunityOntologyResult,
+    create_ontology,
+)
+from cios.applications.opportunity_assistant.reasoning_mapping import (
+    OpportunityReasoningResult,
+    create_reasoning,
+)
+from cios.applications.opportunity_assistant.rules import RuleDetection, detect_rules
+from cios.applications.opportunity_assistant.scoring_policy import (
+    DEFAULT_SCORING_POLICY,
+    OpportunityScoringPolicy,
+    OpportunityScoringResult,
+    RuleMatch,
+)
 
 
 class OpportunityPipelineResult(CIOSBaseModel):
@@ -61,12 +85,16 @@ def run_pipeline(
     ontology = create_ontology(source)
     graph = create_graph(ontology, evidence)
     rule_detections = detect_rules(source)
-    rule_matches = score_rule_detections(rule_detections)
+    rule_matches = scoring_policy.score_rule_detections(rule_detections)
     observations = create_observations(rule_matches, evidence)
     reasoning = create_reasoning(rule_matches, observations)
     scoring = scoring_policy.score(rule_matches, reasoning.trace, evidence)
-    decision = decision_policy.decide(source, graph, evidence, observations, reasoning, scoring)
-    explainability_report = create_explainability_report(ontology, evidence, rule_matches, observations, reasoning, scoring, decision)
+    decision = decision_policy.decide(
+        source, graph, evidence, observations, reasoning, scoring
+    )
+    explainability_report = create_explainability_report(
+        ontology, evidence, rule_matches, observations, reasoning, scoring, decision
+    )
 
     result = OpportunityPipelineResult(
         source=source,

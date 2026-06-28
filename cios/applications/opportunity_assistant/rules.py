@@ -1,4 +1,4 @@
-"""Deterministic commercial rules for the Sprint 7A vertical slice."""
+"""Deterministic commercial rule detection for the Sprint 7A vertical slice."""
 
 from __future__ import annotations
 
@@ -26,29 +26,6 @@ class RuleDetection:
         return self.matched_rationale if self.matched else self.absent_rationale
 
 
-@dataclass(frozen=True)
-class RuleScore:
-    """Scoring policy assigned to a detected rule outcome."""
-
-    rule_id: str
-    matched_score: float
-    absent_score: float
-
-
-@dataclass(frozen=True)
-class RuleMatch:
-    """Backward-compatible rule result with detection and score."""
-
-    rule_id: str
-    name: str
-    matched: bool
-    observation: str
-    signal_name: str
-    signal_strength: str
-    score: float
-    rationale: str
-
-
 HIGH_VALUE_THRESHOLD = 10_000_000
 LONG_TERM_MONTHS = 36
 MULTI_COMPETITOR_COUNT = 3
@@ -59,15 +36,6 @@ SECURITY_CRITICAL_RULE_ID = "oa.rule.security_critical"
 MANAGED_SERVICE_RULE_ID = "oa.rule.managed_service"
 LONG_TERM_CONTRACT_RULE_ID = "oa.rule.long_term_contract"
 MULTI_COMPETITOR_RULE_ID = "oa.rule.multi_competitor"
-
-DEFAULT_SCORING_POLICY: dict[str, RuleScore] = {
-    HIGH_VALUE_RULE_ID: RuleScore(rule_id=HIGH_VALUE_RULE_ID, matched_score=90, absent_score=35),
-    ORACLE_TRANSFORMATION_RULE_ID: RuleScore(rule_id=ORACLE_TRANSFORMATION_RULE_ID, matched_score=85, absent_score=20),
-    SECURITY_CRITICAL_RULE_ID: RuleScore(rule_id=SECURITY_CRITICAL_RULE_ID, matched_score=80, absent_score=25),
-    MANAGED_SERVICE_RULE_ID: RuleScore(rule_id=MANAGED_SERVICE_RULE_ID, matched_score=75, absent_score=30),
-    LONG_TERM_CONTRACT_RULE_ID: RuleScore(rule_id=LONG_TERM_CONTRACT_RULE_ID, matched_score=70, absent_score=30),
-    MULTI_COMPETITOR_RULE_ID: RuleScore(rule_id=MULTI_COMPETITOR_RULE_ID, matched_score=65, absent_score=40),
-}
 
 
 def detect_rules(opportunity: dict[str, Any]) -> list[RuleDetection]:
@@ -84,8 +52,14 @@ def detect_rules(opportunity: dict[str, Any]) -> list[RuleDetection]:
             " ".join(opportunity.get("capabilities", [])),
         ]
     ).lower()
-    has_oracle_transformation = "oracle" in text and any(term in text for term in ["modernisation", "modernization", "migration", "transformation"])
-    has_security = any(term in text for term in ["security", "secure", "accreditation", "data protection"])
+    has_oracle_transformation = "oracle" in text and any(
+        term in text
+        for term in ["modernisation", "modernization", "migration", "transformation"]
+    )
+    has_security = any(
+        term in text
+        for term in ["security", "secure", "accreditation", "data protection"]
+    )
     has_managed_service = "managed service" in text or "24/7" in text
 
     return [
@@ -145,33 +119,10 @@ def detect_rules(opportunity: dict[str, Any]) -> list[RuleDetection]:
             matched=len(competitors) >= MULTI_COMPETITOR_COUNT,
             observation=f"{len(competitors)} named competitors are present.",
             signal_name="Competitive intensity",
-            signal_strength="high" if len(competitors) >= MULTI_COMPETITOR_COUNT else "low",
+            signal_strength=(
+                "high" if len(competitors) >= MULTI_COMPETITOR_COUNT else "low"
+            ),
             matched_rationale="Multiple competitors require explicit differentiation and capture discipline.",
             absent_rationale="Fewer than three named competitors are present.",
         ),
     ]
-
-
-def score_rule_detections(detections: list[RuleDetection], policy: dict[str, RuleScore] | None = None) -> list[RuleMatch]:
-    """Apply a scoring policy to rule detections."""
-
-    active_policy = policy or DEFAULT_SCORING_POLICY
-    return [
-        RuleMatch(
-            rule_id=detection.rule_id,
-            name=detection.name,
-            matched=detection.matched,
-            observation=detection.observation,
-            signal_name=detection.signal_name,
-            signal_strength=detection.signal_strength,
-            score=active_policy[detection.rule_id].matched_score if detection.matched else active_policy[detection.rule_id].absent_score,
-            rationale=detection.rationale,
-        )
-        for detection in detections
-    ]
-
-
-def evaluate_rules(opportunity: dict[str, Any]) -> list[RuleMatch]:
-    """Evaluate rules with the default Sprint 7A scoring policy."""
-
-    return score_rule_detections(detect_rules(opportunity))

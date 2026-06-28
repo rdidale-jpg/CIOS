@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from cios.core import ConfidenceLevel, Evidence, Observation
 
-from cios.applications.opportunity_assistant.rules import RuleMatch
+from cios.applications.opportunity_assistant.scoring_policy import RuleMatch
 
 
-def create_observations(rule_matches: list[RuleMatch], evidence: list[Evidence]) -> list[Observation]:
+def create_observations(
+    rule_matches: list[RuleMatch], evidence: list[Evidence]
+) -> list[Observation]:
     """Map scored rule outcomes into core observations."""
 
     evidence_ids = [item.id for item in evidence]
