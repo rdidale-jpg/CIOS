@@ -7,10 +7,18 @@ from pathlib import Path
 
 from cios.applications.opportunity_assistant.pipeline import OpportunityPipelineResult, render_console_report, run_pipeline
 from cios.memory import InMemoryRepository
-from cios.applications.opportunity_assistant.rules import detect_rules, score_rule_detections
+from cios.applications.opportunity_assistant.rules import (
+    HIGH_VALUE_RULE_ID,
+    LONG_TERM_CONTRACT_RULE_ID,
+    ORACLE_TRANSFORMATION_RULE_ID,
+    SECURITY_CRITICAL_RULE_ID,
+    detect_rules,
+    score_rule_detections,
+)
 from cios.applications.opportunity_assistant.reasoning_mapping import create_reasoning
-from cios.applications.opportunity_assistant.scoring_policy import create_scoring
+from cios.applications.opportunity_assistant.scoring_policy import OpportunityScoringPolicy, create_scoring
 from cios.applications.opportunity_assistant.explainability import create_explainability_report
+from cios.applications.opportunity_assistant.decision_policy import OpportunityDecisionPolicy
 
 FIXTURE_DIR = Path(__file__).with_name("fixtures") / "opportunity_assistant"
 LOW_VALUE_SIMPLE = FIXTURE_DIR / "low_value_simple_opportunity.json"
@@ -20,6 +28,66 @@ NO_COMPETITORS_NO_SECURITY = FIXTURE_DIR / "no_competitors_no_security_opportuni
 def _rules_by_name(result: OpportunityPipelineResult):
     return {rule.name: rule for rule in result.rule_matches}
 
+
+
+def test_scoring_policy_can_be_inspected_independently() -> None:
+    policy = OpportunityScoringPolicy()
+
+    assert policy.model_name == "Sprint 7A Deterministic Opportunity Score"
+    assert [(band.name, band.minimum, band.maximum) for band in policy.bands] == [("Low", 0.0, 49.0), ("Medium", 50.0, 74.0), ("High", 75.0, 100.0)]
+    assert policy.transformation_pressure_mapping.urgency_rule_id == LONG_TERM_CONTRACT_RULE_ID
+    assert policy.transformation_pressure_mapping.strategic_importance_rule_id == HIGH_VALUE_RULE_ID
+    assert policy.transformation_pressure_mapping.change_pressure_rule_id == ORACLE_TRANSFORMATION_RULE_ID
+    assert policy.transformation_pressure_mapping.capability_gap_rule_id == SECURITY_CRITICAL_RULE_ID
+
+
+def test_decision_policy_can_be_inspected_independently() -> None:
+    policy = OpportunityDecisionPolicy()
+
+    assert policy.question == "Should this opportunity be qualified for active pursuit?"
+    assert policy.option_title == "Qualify for active pursuit"
+    assert policy.status.value == "approved"
+    assert policy.confidence.value == "high"
+    assert [(criterion.name, criterion.weight) for criterion in policy.criteria] == [
+        ("Commercial attractiveness", 0.4),
+        ("Strategic fit", 0.3),
+        ("Delivery confidence", 0.3),
+    ]
+    assert policy.option_actions == [
+        "Build an Oracle transformation win theme.",
+        "Validate security accreditation evidence.",
+        "Prepare managed-service operating model proof points.",
+        "Create competitor differentiation plan.",
+    ]
+
+
+def test_pipeline_output_remains_unchanged_with_explicit_policy_interfaces() -> None:
+    default_result = run_pipeline()
+    explicit_result = run_pipeline(scoring_policy=OpportunityScoringPolicy(), decision_policy=OpportunityDecisionPolicy())
+
+    assert explicit_result.scoring.result.overall_score.value == default_result.scoring.result.overall_score.value
+    assert explicit_result.scoring.result.band.name == default_result.scoring.result.band.name
+    assert [component.name for component in explicit_result.scoring.result.components] == [component.name for component in default_result.scoring.result.components]
+    assert explicit_result.decision.status == default_result.decision.status
+    assert explicit_result.decision.outcome == default_result.decision.outcome
+    assert explicit_result.decision.recommendations[0].title == default_result.decision.recommendations[0].title
+    assert explicit_result.decision.recommendations[0].actions == default_result.decision.recommendations[0].actions
+
+
+def test_policy_traceability_ids_flow_through_scoring_and_decision() -> None:
+    result = run_pipeline(scoring_policy=OpportunityScoringPolicy(), decision_policy=OpportunityDecisionPolicy())
+
+    evidence_ids = [item.id for item in result.evidence]
+    rule_ids = [rule.rule_id for rule in result.rule_matches]
+
+    assert [component.metadata["rule_id"] for component in result.scoring.result.components] == rule_ids
+    assert all(component.score.evidence_ids == evidence_ids for component in result.scoring.result.components)
+    assert result.decision.assessments[0].evidence_ids == evidence_ids
+    assert result.decision.assessments[0].reasoning_trace_ids == [result.reasoning.trace.id]
+    assert result.decision.assessments[0].scoring_result_ids == [result.scoring.result.id]
+    assert result.decision.rationales[0].reasoning_result_ids == [result.reasoning.result.id]
+    assert result.decision.rationales[0].score_ids == [result.scoring.result.overall_score.id]
+    assert result.decision.recommendations[0].evidence_ids == evidence_ids
 
 def test_opportunity_assistant_pipeline_executes_complete_vertical_slice() -> None:
     result = run_pipeline()
