@@ -51,3 +51,9 @@ Traceability is not only top-down. When implementation, application usage or pro
 - SDK changes cite the engineering specification they implement.
 - Application designs preserve identifiers across evidence, reasoning, scoring, decisions and recommendations.
 - Product decisions identify the applications and standards they depend on.
+
+## CBOK Traceability Extension
+
+CBOK documents add a formal authoring layer for commercial knowledge claims, evidence, models, laws, patterns, validation records and architecture decisions. Each CBOK document should identify upstream doctrine or evidence, internal claims and downstream engineering or operational mappings.
+
+CBOK traceability records should preserve both scientific confidence and operational confidence so that a claim can be scientifically promising without being ready for production use, or operationally useful while still requiring further scientific validation.

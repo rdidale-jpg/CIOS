@@ -76,3 +76,9 @@ Material changes should be reviewed before approval. Review should confirm that:
 - The Master Document Index reflects the current status and version.
 
 Approved documents should be reviewed when related constitutional, scientific, engineering, SDK, application or product decisions change.
+
+## CBOK Authoring System
+
+CBOK documents are governed by the CBOK Authoring System in `docs/CBOK/`. CBOK documents use `CIOS-CBOK-<TYPE>-<NUMBER>` identifiers and may represent constitutions, scientific frameworks, standards, reference models, commercial laws, influence models, enterprise patterns, working papers, literature reviews, experiments, validation reports and architecture documents.
+
+Every controlled CBOK document must include document metadata, purpose, scope, terminology, normative references, content sections, traceability, version history, review history, engineering mapping and appendices. Authors should start from the templates in `docs/CBOK/templates/` and apply the CBOK lifecycle, confidence and review standards before requesting approval.

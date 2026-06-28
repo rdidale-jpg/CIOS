@@ -19,6 +19,15 @@ This index is the authoritative catalogue for controlled CIOS Knowledge Library 
 | CIOS-ENG-003 | Commercial Intelligence Pipeline Specification | Engineering Baseline | 1.0.0 | `docs/CIOS_ENG_003_Commercial_Intelligence_Pipeline_Specification_v1.0.0.md` |
 | CIOS-ENG-004 | Application Composition Standard | Draft Engineering Standard | 0.1.0 | `docs/Engineering/CIOS_ENG_004_Application_Composition_Standard_v0.1.0.md` |
 
+| CIOS-CBOK-001 | CBOK Authoring System | Draft | 0.1.0 | `docs/CBOK/README.md` |
+| CIOS-CBOK-GUIDE-001 | CBOK Authoring Guide | Draft | 0.1.0 | `docs/CBOK/AUTHORING_GUIDE.md` |
+| CIOS-CBOK-STD-ID | CBOK Identifier Standard | Draft | 0.1.0 | `docs/CBOK/IDENTIFIER_STANDARD.md` |
+| CIOS-CBOK-STD-LIFE | CBOK Document Lifecycle | Draft | 0.1.0 | `docs/CBOK/DOCUMENT_LIFECYCLE.md` |
+| CIOS-CBOK-STD-SCI-CONF | CBOK Scientific Confidence Standard | Draft | 0.1.0 | `docs/CBOK/SCIENTIFIC_CONFIDENCE.md` |
+| CIOS-CBOK-STD-OPS-CONF | CBOK Operational Confidence Standard | Draft | 0.1.0 | `docs/CBOK/OPERATIONAL_CONFIDENCE.md` |
+| CIOS-CBOK-STD-TRACE | CBOK Traceability Standard | Draft | 0.1.0 | `docs/CBOK/TRACEABILITY_STANDARD.md` |
+| CIOS-CBOK-STD-REVIEW | CBOK Review Process | Draft | 0.1.0 | `docs/CBOK/REVIEW_PROCESS.md` |
+
 ## Maintenance Rules
 
 - Add a row before introducing or approving a controlled document.
