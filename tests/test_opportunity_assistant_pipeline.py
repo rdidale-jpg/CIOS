@@ -1,5 +1,6 @@
 """End-to-end tests for the Sprint 7A Opportunity Assistant vertical slice."""
 
+import json
 from pathlib import Path
 
 from cios.applications.opportunity_assistant.pipeline import OpportunityPipelineResult, render_console_report, run_pipeline
@@ -88,3 +89,63 @@ def test_rule_detection_is_separate_from_scoring_policy() -> None:
     assert all(detection.matched is False for detection in detections)
     assert all(match.score > 0 for match in matches)
     assert [detection.name for detection in detections] == [match.name for match in matches]
+
+
+def test_explainability_report_is_produced_for_each_recommendation() -> None:
+    result = run_pipeline()
+
+    report = result.explainability_report
+
+    assert report.decision_id == result.decision.id
+    assert report.opportunity_id == result.ontology.opportunity.id
+    assert len(report.recommendation_explanations) == len(result.decision.recommendations)
+
+
+def test_every_recommendation_has_supporting_reason() -> None:
+    result = run_pipeline()
+
+    for explanation in result.explainability_report.recommendation_explanations:
+        assert explanation.supporting_observations
+        assert explanation.supporting_observation_ids
+        assert explanation.evidence_ids
+        assert explanation.scores_used
+        assert explanation.reasoning_trace_ids
+        assert explanation.reasoning_step_ids
+        assert explanation.confidence == result.decision.confidence
+
+
+def test_json_output_is_valid(capsys) -> None:
+    from cios.applications.opportunity_assistant import main as cli
+
+    import sys
+
+    previous_argv = sys.argv
+    try:
+        sys.argv = ["opportunity-assistant", "--json"]
+        cli.main()
+    finally:
+        sys.argv = previous_argv
+
+    payload = json.loads(capsys.readouterr().out)
+
+    assert "explainability_report" in payload
+    assert payload["explainability_report"]["recommendation_explanations"]
+
+
+def test_console_output_still_works(capsys) -> None:
+    from cios.applications.opportunity_assistant import main as cli
+
+    import sys
+
+    previous_argv = sys.argv
+    try:
+        sys.argv = ["opportunity-assistant"]
+        cli.main()
+    finally:
+        sys.argv = previous_argv
+
+    output = capsys.readouterr().out
+
+    assert "Observations:" in output
+    assert "Recommendation:" in output
+    assert "explainability_report" not in output
