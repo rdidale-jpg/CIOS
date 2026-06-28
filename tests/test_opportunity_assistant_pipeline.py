@@ -495,6 +495,110 @@ def test_console_output_still_works(capsys) -> None:
     assert "explainability_report" not in output
 
 
+def test_console_output_with_agent_includes_agent_assessment(capsys) -> None:
+    from cios.applications.opportunity_assistant import main as cli
+
+    import sys
+
+    previous_argv = sys.argv
+    try:
+        sys.argv = ["opportunity-assistant", "--agent"]
+        cli.main()
+    finally:
+        sys.argv = previous_argv
+
+    output = capsys.readouterr().out
+
+    assert "Agent Assessment:" in output
+    assert "- Output ID: agent_output_" in output
+    assert "- Trace decision IDs: decision_" in output
+
+
+def test_json_output_with_agent_includes_agent_output(capsys) -> None:
+    from cios.applications.opportunity_assistant import main as cli
+
+    import sys
+
+    previous_argv = sys.argv
+    try:
+        sys.argv = ["opportunity-assistant", "--json", "--agent"]
+        cli.main()
+    finally:
+        sys.argv = previous_argv
+
+    payload = json.loads(capsys.readouterr().out)
+
+    assert "agent_output" in payload
+    assert payload["agent_output"]["id"].startswith("agent_output_")
+    assert payload["agent_output"]["trace"]["referenced_decision_ids"] == [
+        payload["decision"]["id"]
+    ]
+    assert payload["agent_output"]["trace"]["referenced_evidence_ids"] == [
+        item["id"] for item in payload["evidence"]
+    ]
+
+
+def test_default_cli_outputs_are_unchanged_without_agent(capsys) -> None:
+    from cios.applications.opportunity_assistant import main as cli
+
+    import sys
+
+    expected_console = render_console_report(run_pipeline()) + "\n"
+    previous_argv = sys.argv
+    try:
+        sys.argv = ["opportunity-assistant"]
+        cli.main()
+    finally:
+        sys.argv = previous_argv
+
+    assert capsys.readouterr().out == expected_console
+
+    previous_argv = sys.argv
+    try:
+        sys.argv = ["opportunity-assistant", "--json"]
+        cli.main()
+    finally:
+        sys.argv = previous_argv
+
+    payload = json.loads(capsys.readouterr().out)
+
+    assert "agent_output" not in payload
+
+
+def test_cli_agent_entrypoint_does_not_import_forbidden_services() -> None:
+    import ast
+    import importlib
+
+    module = importlib.import_module("cios.applications.opportunity_assistant.main")
+    source = Path(module.__file__).read_text(encoding="utf-8")
+    tree = ast.parse(source)
+    imported_modules: set[str] = set()
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            imported_modules.update(alias.name for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.module:
+            imported_modules.add(node.module)
+
+    forbidden_prefixes = (
+        "cios.memory",
+        "requests",
+        "httpx",
+        "openai",
+        "anthropic",
+        "sqlalchemy",
+        "fastapi",
+        "django",
+        "flask",
+    )
+
+    assert not any(
+        imported == prefix or imported.startswith(f"{prefix}.")
+        for imported in imported_modules
+        for prefix in forbidden_prefixes
+    )
+
+
 def test_opportunity_assessment_agent_consumes_pipeline_result_and_returns_agent_output() -> (
     None
 ):
