@@ -6,9 +6,17 @@ from pydantic import Field
 
 from cios.core import ConfidenceLevel, Observation
 from cios.core.models import CIOSBaseModel
-from cios.reasoning import Explanation, Hypothesis, Inference, ReasoningResult, ReasoningStep, ReasoningTrace, Signal
+from cios.reasoning import (
+    Explanation,
+    Hypothesis,
+    Inference,
+    ReasoningResult,
+    ReasoningStep,
+    ReasoningTrace,
+    Signal,
+)
 
-from cios.applications.opportunity_assistant.rules import RuleMatch
+from cios.applications.opportunity_assistant.scoring_policy import RuleMatch
 
 
 class OpportunityReasoningResult(CIOSBaseModel):
@@ -22,17 +30,25 @@ class OpportunityReasoningResult(CIOSBaseModel):
     result: ReasoningResult
 
 
-def create_reasoning(rule_matches: list[RuleMatch], observations: list[Observation]) -> OpportunityReasoningResult:
+def create_reasoning(
+    rule_matches: list[RuleMatch], observations: list[Observation]
+) -> OpportunityReasoningResult:
     """Map rule matches and observations into reasoning artefacts."""
 
-    observations_by_rule_id = {observation.metadata["rule_id"]: observation for observation in observations}
+    observations_by_rule_id = {
+        observation.metadata["rule_id"]: observation for observation in observations
+    }
     signals = [
         Signal(
             name=rule.signal_name,
             description=rule.rationale,
             source_ids=[observations_by_rule_id[rule.rule_id].id],
             strength=rule.signal_strength,
-            metadata={"rule": rule.name, "rule_id": rule.rule_id, "matched": rule.matched},
+            metadata={
+                "rule": rule.name,
+                "rule_id": rule.rule_id,
+                "matched": rule.matched,
+            },
         )
         for rule in rule_matches
     ]
@@ -47,9 +63,16 @@ def create_reasoning(rule_matches: list[RuleMatch], observations: list[Observati
     inferences = [
         Inference(
             statement=f"{rule.name}: {'matched' if rule.matched else 'not matched'}; {rule.rationale}",
-            premise_ids=[observations_by_rule_id[rule.rule_id].id, signals_by_rule_id[rule.rule_id].id],
+            premise_ids=[
+                observations_by_rule_id[rule.rule_id].id,
+                signals_by_rule_id[rule.rule_id].id,
+            ],
             confidence=ConfidenceLevel.HIGH if rule.matched else ConfidenceLevel.MEDIUM,
-            metadata={"rule": rule.name, "rule_id": rule.rule_id, "matched": rule.matched},
+            metadata={
+                "rule": rule.name,
+                "rule_id": rule.rule_id,
+                "matched": rule.matched,
+            },
         )
         for rule in rule_matches
     ]
@@ -58,14 +81,23 @@ def create_reasoning(rule_matches: list[RuleMatch], observations: list[Observati
         observation_ids=[obs.id for obs in observations],
         inference_ids=[inf.id for inf in inferences],
     )
-    inferences_by_rule_id = {inference.metadata["rule_id"]: inference for inference in inferences}
+    inferences_by_rule_id = {
+        inference.metadata["rule_id"]: inference for inference in inferences
+    }
     steps = [
         ReasoningStep(
             sequence=index + 1,
             description=f"Evaluate rule: {rule.name}.",
             input_ids=[observations_by_rule_id[rule.rule_id].id],
-            output_ids=[signals_by_rule_id[rule.rule_id].id, inferences_by_rule_id[rule.rule_id].id],
-            metadata={"rule": rule.name, "rule_id": rule.rule_id, "matched": rule.matched},
+            output_ids=[
+                signals_by_rule_id[rule.rule_id].id,
+                inferences_by_rule_id[rule.rule_id].id,
+            ],
+            metadata={
+                "rule": rule.name,
+                "rule_id": rule.rule_id,
+                "matched": rule.matched,
+            },
         )
         for index, rule in enumerate(rule_matches)
     ]
@@ -83,5 +115,12 @@ def create_reasoning(rule_matches: list[RuleMatch], observations: list[Observati
         inferences=inferences,
         explanations=[explanation],
         trace=trace,
-        result=ReasoningResult(summary=explanation.summary, trace=trace, hypotheses=hypotheses, signals=signals, inferences=inferences, explanations=[explanation]),
+        result=ReasoningResult(
+            summary=explanation.summary,
+            trace=trace,
+            hypotheses=hypotheses,
+            signals=signals,
+            inferences=inferences,
+            explanations=[explanation],
+        ),
     )
