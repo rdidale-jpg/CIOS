@@ -13,7 +13,7 @@ from cios.decision_engine import DecisionOutput
 from cios.graph import KnowledgeGraphRecord
 from cios.memory import MemoryRepository
 
-from cios.applications.opportunity_assistant.decision_policy import create_decision
+from cios.applications.opportunity_assistant.decision_policy import DEFAULT_DECISION_POLICY, OpportunityDecisionPolicy
 from cios.applications.opportunity_assistant.explainability import OpportunityExplainabilityReport, create_explainability_report
 from cios.applications.opportunity_assistant.graph_mapping import create_graph
 from cios.applications.opportunity_assistant.input import SAMPLE_PATH, create_evidence, load_sample_opportunity
@@ -23,7 +23,7 @@ from cios.applications.opportunity_assistant.ontology_mapping import Opportunity
 from cios.applications.opportunity_assistant.reasoning_mapping import OpportunityReasoningResult, create_reasoning
 from cios.applications.opportunity_assistant.reporting import render_console_report
 from cios.applications.opportunity_assistant.rules import RuleDetection, RuleMatch, detect_rules, score_rule_detections
-from cios.applications.opportunity_assistant.scoring_policy import OpportunityScoringResult, create_scoring
+from cios.applications.opportunity_assistant.scoring_policy import DEFAULT_SCORING_POLICY, OpportunityScoringPolicy, OpportunityScoringResult
 
 
 class OpportunityPipelineResult(CIOSBaseModel):
@@ -42,7 +42,12 @@ class OpportunityPipelineResult(CIOSBaseModel):
     explainability_report: OpportunityExplainabilityReport
 
 
-def run_pipeline(path: Path = SAMPLE_PATH, memory_repository: MemoryRepository | None = None) -> OpportunityPipelineResult:
+def run_pipeline(
+    path: Path = SAMPLE_PATH,
+    memory_repository: MemoryRepository | None = None,
+    scoring_policy: OpportunityScoringPolicy = DEFAULT_SCORING_POLICY,
+    decision_policy: OpportunityDecisionPolicy = DEFAULT_DECISION_POLICY,
+) -> OpportunityPipelineResult:
     """Run the deterministic evidence-to-recommendation vertical slice.
 
     When a memory repository is provided, passive snapshots of the evidence,
@@ -59,8 +64,8 @@ def run_pipeline(path: Path = SAMPLE_PATH, memory_repository: MemoryRepository |
     rule_matches = score_rule_detections(rule_detections)
     observations = create_observations(rule_matches, evidence)
     reasoning = create_reasoning(rule_matches, observations)
-    scoring = create_scoring(rule_matches, reasoning.trace, evidence)
-    decision = create_decision(source, graph, evidence, observations, reasoning, scoring)
+    scoring = scoring_policy.score(rule_matches, reasoning.trace, evidence)
+    decision = decision_policy.decide(source, graph, evidence, observations, reasoning, scoring)
     explainability_report = create_explainability_report(ontology, evidence, rule_matches, observations, reasoning, scoring, decision)
 
     result = OpportunityPipelineResult(
