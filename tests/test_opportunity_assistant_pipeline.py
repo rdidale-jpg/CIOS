@@ -493,3 +493,114 @@ def test_console_output_still_works(capsys) -> None:
     assert "Observations:" in output
     assert "Recommendation:" in output
     assert "explainability_report" not in output
+
+
+def test_opportunity_assessment_agent_consumes_pipeline_result_and_returns_agent_output() -> (
+    None
+):
+    from cios.agents import AgentOutput, AgentRole
+    from cios.applications.opportunity_assistant.agent_adapter import (
+        OpportunityAssessmentAgent,
+    )
+
+    result = run_pipeline()
+    output = OpportunityAssessmentAgent().assess(result)
+
+    assert isinstance(output, AgentOutput)
+    assert output.role == AgentRole.EXPLAINABILITY_ASSISTANT
+    assert output.metadata["source_pipeline_result"] is True
+    assert output.metadata["decision_id"] == result.decision.id
+    assert result.ontology.opportunity.name in output.summary
+    assert result.decision.outcome in output.summary
+
+
+def test_opportunity_assessment_agent_links_findings_to_pipeline_artifact_ids() -> None:
+    from cios.applications.opportunity_assistant.agent_adapter import (
+        OpportunityAssessmentAgent,
+    )
+
+    result = run_pipeline()
+    output = OpportunityAssessmentAgent().assess(result)
+
+    evidence_ids = [item.id for item in result.evidence]
+    rule_ids = [rule.rule_id for rule in result.rule_matches]
+    score_ids = [component.score.id for component in result.scoring.result.components]
+    score_ids.append(result.scoring.result.overall_score.id)
+
+    assert output.findings
+    assert all(finding.evidence_ids for finding in output.findings)
+    assert all(finding.rule_ids for finding in output.findings)
+    assert all(finding.score_ids for finding in output.findings)
+    assert all(finding.reasoning_trace_ids for finding in output.findings)
+    assert all(
+        finding.metadata["decision_id"] == result.decision.id
+        for finding in output.findings
+    )
+    assert output.findings[0].evidence_ids == evidence_ids
+    assert output.findings[0].rule_ids == rule_ids
+    assert output.findings[0].score_ids == score_ids
+    assert output.findings[0].reasoning_trace_ids == [result.reasoning.trace.id]
+    assert output.trace is not None
+    assert output.trace.referenced_decision_ids == [result.decision.id]
+
+
+def test_opportunity_assessment_agent_recommendations_use_existing_explainability_links() -> (
+    None
+):
+    from cios.applications.opportunity_assistant.agent_adapter import (
+        OpportunityAssessmentAgent,
+    )
+
+    result = run_pipeline()
+    output = OpportunityAssessmentAgent().assess(result)
+    explanation = result.explainability_report.recommendation_explanations[0]
+    recommendation = output.recommendations[0]
+
+    assert recommendation.decision_ids == [result.decision.id]
+    assert recommendation.recommendation_ids == [result.decision.recommendations[0].id]
+    assert recommendation.evidence_ids == explanation.evidence_ids
+    assert recommendation.observation_ids == explanation.supporting_observation_ids
+    assert recommendation.reasoning_trace_ids == explanation.reasoning_trace_ids
+    assert recommendation.score_ids == explanation.score_ids
+    assert recommendation.rule_ids == explanation.triggered_rule_ids
+    assert (
+        recommendation.metadata["reasoning_step_ids"] == explanation.reasoning_step_ids
+    )
+
+
+def test_opportunity_assessment_agent_does_not_import_memory_or_external_services() -> (
+    None
+):
+    import ast
+    import importlib
+
+    module = importlib.import_module(
+        "cios.applications.opportunity_assistant.agent_adapter"
+    )
+    source = Path(module.__file__).read_text(encoding="utf-8")
+    tree = ast.parse(source)
+    imported_modules: set[str] = set()
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            imported_modules.update(alias.name for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.module:
+            imported_modules.add(node.module)
+
+    forbidden_prefixes = (
+        "cios.memory",
+        "requests",
+        "httpx",
+        "openai",
+        "anthropic",
+        "sqlalchemy",
+        "fastapi",
+        "django",
+        "flask",
+    )
+
+    assert not any(
+        imported == prefix or imported.startswith(f"{prefix}.")
+        for imported in imported_modules
+        for prefix in forbidden_prefixes
+    )
