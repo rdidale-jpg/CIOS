@@ -54,6 +54,30 @@ class OpportunityScoringResult(CIOSBaseModel):
     transformation_pressure: TransformationPressureScore
 
 
+class RecommendationExplainability(CIOSBaseModel):
+    """Machine-readable explanation for a single recommendation."""
+
+    recommendation_id: str
+    recommendation_title: str
+    supporting_observation_ids: list[str] = Field(default_factory=list)
+    supporting_observations: list[str] = Field(default_factory=list)
+    triggered_rules: list[str] = Field(default_factory=list)
+    evidence_ids: list[str] = Field(default_factory=list)
+    score_ids: list[str] = Field(default_factory=list)
+    scores_used: dict[str, float] = Field(default_factory=dict)
+    reasoning_trace_ids: list[str] = Field(default_factory=list)
+    reasoning_step_ids: list[str] = Field(default_factory=list)
+    confidence: ConfidenceLevel = ConfidenceLevel.MEDIUM
+
+
+class OpportunityExplainabilityReport(CIOSBaseModel):
+    """Structured report linking recommendations back to evidence, rules, scores, and reasoning."""
+
+    opportunity_id: str
+    decision_id: str
+    recommendation_explanations: list[RecommendationExplainability] = Field(default_factory=list)
+
+
 class OpportunityPipelineResult(CIOSBaseModel):
     """Typed end-to-end result for the deterministic vertical slice."""
 
@@ -67,6 +91,7 @@ class OpportunityPipelineResult(CIOSBaseModel):
     reasoning: OpportunityReasoningResult
     scoring: OpportunityScoringResult
     decision: DecisionOutput
+    explainability_report: OpportunityExplainabilityReport
 
 SAMPLE_PATH = Path(__file__).with_name("sample_opportunity.json")
 
@@ -90,6 +115,7 @@ def run_pipeline(path: Path = SAMPLE_PATH) -> OpportunityPipelineResult:
     reasoning = _create_reasoning(rule_matches, observations)
     scoring = _create_scoring(rule_matches, reasoning.trace, evidence)
     decision = _create_decision(source, graph, evidence, observations, reasoning, scoring)
+    explainability_report = _create_explainability_report(ontology, evidence, rule_matches, observations, reasoning, scoring, decision)
 
     return OpportunityPipelineResult(
         source=source,
@@ -102,6 +128,7 @@ def run_pipeline(path: Path = SAMPLE_PATH) -> OpportunityPipelineResult:
         reasoning=reasoning,
         scoring=scoring,
         decision=decision,
+        explainability_report=explainability_report,
     )
 
 
@@ -196,6 +223,46 @@ def _create_decision(source: dict[str, Any], graph: KnowledgeGraphRecord, eviden
     rationale = DecisionRationale(summary="Qualify because the opportunity combines high value, Oracle transformation pressure, security criticality, managed-service fit, long-term contract potential, and known competitive intensity.", evidence_ids=[item.id for item in evidence], reasoning_trace_ids=[reasoning.trace.id], reasoning_result_ids=[reasoning.result.id], score_ids=[scoring.result.overall_score.id], scoring_result_ids=[scoring.result.id], confidence=ConfidenceLevel.HIGH)
     recommendation = Recommendation(title="Qualify opportunity with focused capture plan", rationale=rationale.summary, actions=option.actions, evidence_ids=[item.id for item in evidence])
     return DecisionOutput(title="Opportunity qualification decision", input_id=input_bundle.id, selected_option_id=option.id, status=DecisionStatus.APPROVED, options=[option], criteria=criteria, assessments=[assessment], rationales=[rationale], recommendations=[recommendation], confidence=ConfidenceLevel.HIGH, outcome="selected", metadata={"decision_input": input_bundle.model_dump()})
+
+
+def _create_explainability_report(
+    ontology: OpportunityOntologyResult,
+    evidence: list[Evidence],
+    rule_matches: list[RuleMatch],
+    observations: list[Observation],
+    reasoning: OpportunityReasoningResult,
+    scoring: OpportunityScoringResult,
+    decision: DecisionOutput,
+) -> OpportunityExplainabilityReport:
+    matched_indexes = [index for index, rule in enumerate(rule_matches) if rule.matched]
+    supporting_indexes = matched_indexes or list(range(len(rule_matches)))
+    supporting_observations = [observations[index] for index in supporting_indexes]
+    supporting_components = [scoring.result.components[index] for index in supporting_indexes]
+    reasoning_steps = [reasoning.trace.steps[index] for index in supporting_indexes]
+
+    explanations = [
+        RecommendationExplainability(
+            recommendation_id=recommendation.id,
+            recommendation_title=recommendation.title,
+            supporting_observation_ids=[observation.id for observation in supporting_observations],
+            supporting_observations=[observation.statement for observation in supporting_observations],
+            triggered_rules=[rule.name for rule in rule_matches if rule.matched],
+            evidence_ids=sorted({evidence_id for item in evidence for evidence_id in [item.id]}),
+            score_ids=[component.score.id for component in supporting_components] + [scoring.result.overall_score.id],
+            scores_used={component.name: component.score.value for component in supporting_components}
+            | {scoring.result.overall_score.name: scoring.result.overall_score.value},
+            reasoning_trace_ids=[reasoning.trace.id],
+            reasoning_step_ids=[step.id for step in reasoning_steps],
+            confidence=decision.confidence,
+        )
+        for recommendation in decision.recommendations
+    ]
+
+    return OpportunityExplainabilityReport(
+        opportunity_id=ontology.opportunity.id,
+        decision_id=decision.id,
+        recommendation_explanations=explanations,
+    )
 
 
 def render_console_report(result: OpportunityPipelineResult) -> str:
