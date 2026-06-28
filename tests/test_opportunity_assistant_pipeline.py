@@ -1,9 +1,12 @@
 """End-to-end tests for the Sprint 7A Opportunity Assistant vertical slice."""
 
+import ast
+import importlib
 import json
 from pathlib import Path
 
 from cios.applications.opportunity_assistant.pipeline import OpportunityPipelineResult, render_console_report, run_pipeline
+from cios.memory import InMemoryRepository
 from cios.applications.opportunity_assistant.rules import detect_rules, score_rule_detections
 
 FIXTURE_DIR = Path(__file__).with_name("fixtures") / "opportunity_assistant"
@@ -40,6 +43,69 @@ def test_opportunity_assistant_pipeline_executes_complete_vertical_slice() -> No
     assert "Recommendation:" in report
     assert "Confidence:" in report
     assert "Reasoning Trace Summary:" in report
+
+
+def test_opportunity_assistant_pipeline_runs_without_memory_repository() -> None:
+    result = run_pipeline()
+
+    assert isinstance(result, OpportunityPipelineResult)
+    assert result.evidence
+    assert result.decision.recommendations
+
+
+def test_opportunity_assistant_pipeline_persists_vertical_slice_to_memory() -> None:
+    repository = InMemoryRepository()
+
+    result = run_pipeline(memory_repository=repository)
+
+    records = repository.list()
+    assert isinstance(result, OpportunityPipelineResult)
+    assert {record.record_type for record in records} == {"evidence", "assessment", "decision"}
+    assert len(repository.find_by_record_type("evidence")) == 1
+    assert len(repository.find_by_record_type("assessment")) == len(result.decision.assessments)
+    assert len(repository.find_by_record_type("decision")) == 1
+
+    evidence_record = repository.find_by_record_type("evidence")[0]
+    assessment_record = repository.find_by_record_type("assessment")[0]
+    decision_record = repository.find_by_record_type("decision")[0]
+
+    assert evidence_record.subject_id == result.ontology.opportunity.id
+    assert evidence_record.evidence_ids == [item.id for item in result.evidence]
+    assert evidence_record.payload["evidence_count"] == len(result.evidence)
+    assert assessment_record.subject_id == result.ontology.opportunity.id
+    assert assessment_record.evidence_ids == [item.id for item in result.evidence]
+    assert assessment_record.graph_record_ids == [result.graph.id]
+    assert decision_record.subject_id == result.ontology.opportunity.id
+    assert decision_record.evidence_ids == [item.id for item in result.evidence]
+    assert decision_record.decision_id == result.decision.id
+    assert decision_record.decision_payload["id"] == result.decision.id
+
+    assert repository.get(evidence_record.id) == evidence_record
+    assert repository.get(assessment_record.id) == assessment_record
+    assert repository.get(decision_record.id) == decision_record
+
+
+def test_opportunity_assistant_memory_integration_does_not_add_forbidden_imports() -> None:
+    module = importlib.import_module("cios.memory.repository")
+    source = Path(module.__file__).read_text(encoding="utf-8")
+    tree = ast.parse(source)
+    imported_modules: set[str] = set()
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            imported_modules.update(alias.name for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.module:
+            imported_modules.add(node.module)
+
+    forbidden_roots = {
+        "cios.reasoning",
+        "cios.scoring",
+        "cios.decision_engine",
+        "cios.agents",
+        "cios.applications",
+    }
+
+    assert not any(imported == root or imported.startswith(f"{root}.") for imported in imported_modules for root in forbidden_roots)
 
 
 def test_low_value_simple_opportunity_does_not_fire_absent_rules() -> None:
