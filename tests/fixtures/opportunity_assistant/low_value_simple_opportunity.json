@@ -1,0 +1,22 @@
+{
+  "name": "Local Website Refresh",
+  "customer": {
+    "name": "Small Retail Co",
+    "sector": "Retail",
+    "region": "US"
+  },
+  "description": "Simple website content refresh for a local retail team.",
+  "value": 50000,
+  "duration_months": 3,
+  "current_platforms": ["Static website"],
+  "requirements": ["content updates", "basic analytics"],
+  "competitors": ["Local Web Studio"],
+  "capabilities": ["Web content delivery"],
+  "evidence": [
+    {
+      "title": "Simple opportunity note",
+      "source": "low_value_simple_opportunity.json",
+      "summary": "Small low-value work package with no transformation, security, managed service, long-term, or multi-competitor indicators."
+    }
+  ]
+}

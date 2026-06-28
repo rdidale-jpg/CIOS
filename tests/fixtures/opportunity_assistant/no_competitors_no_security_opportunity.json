@@ -1,0 +1,22 @@
+{
+  "name": "Acme Oracle Reporting Migration",
+  "customer": {
+    "name": "Acme Finance",
+    "sector": "Financial Services",
+    "region": "UK"
+  },
+  "description": "Migrate Oracle reporting workloads to a modern analytics platform for finance operations.",
+  "value": 15000000,
+  "duration_months": 48,
+  "current_platforms": ["Oracle Database", "Legacy reporting server"],
+  "requirements": ["cloud migration", "business reporting"],
+  "competitors": [],
+  "capabilities": ["Oracle modernisation", "Analytics migration"],
+  "evidence": [
+    {
+      "title": "Migration qualification note",
+      "source": "no_competitors_no_security_opportunity.json",
+      "summary": "High-value Oracle migration without named competitors or stated security requirements."
+    }
+  ]
+}
