@@ -1,5 +1,7 @@
 """Passive memory record primitives for the CIOS SDK."""
 
+from cios.memory.repository import InMemoryRepository, MemoryRepository
+
 from cios.memory.models import (
     MEMORY_SCHEMA_VERSION,
     AssessmentMemoryRecord,
@@ -15,5 +17,7 @@ __all__ = [
     "DecisionMemoryRecord",
     "EvidenceMemoryRecord",
     "MemoryRecord",
+    "MemoryRepository",
+    "InMemoryRepository",
     "OutcomeMemoryRecord",
 ]
