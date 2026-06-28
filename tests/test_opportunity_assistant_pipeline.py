@@ -8,6 +8,9 @@ from pathlib import Path
 from cios.applications.opportunity_assistant.pipeline import OpportunityPipelineResult, render_console_report, run_pipeline
 from cios.memory import InMemoryRepository
 from cios.applications.opportunity_assistant.rules import detect_rules, score_rule_detections
+from cios.applications.opportunity_assistant.reasoning_mapping import create_reasoning
+from cios.applications.opportunity_assistant.scoring_policy import create_scoring
+from cios.applications.opportunity_assistant.explainability import create_explainability_report
 
 FIXTURE_DIR = Path(__file__).with_name("fixtures") / "opportunity_assistant"
 LOW_VALUE_SIMPLE = FIXTURE_DIR / "low_value_simple_opportunity.json"
@@ -178,6 +181,58 @@ def test_every_recommendation_has_supporting_reason() -> None:
         assert explanation.reasoning_trace_ids
         assert explanation.reasoning_step_ids
         assert explanation.confidence == result.decision.confidence
+
+
+def test_rule_traceability_metadata_uses_stable_rule_ids() -> None:
+    result = run_pipeline()
+
+    rule_ids = [rule.rule_id for rule in result.rule_matches]
+
+    assert len(rule_ids) == len(set(rule_ids))
+    assert [detection.rule_id for detection in result.rule_detections] == rule_ids
+    assert [observation.metadata["rule_id"] for observation in result.observations] == rule_ids
+    assert [signal.metadata["rule_id"] for signal in result.reasoning.signals] == rule_ids
+    assert [inference.metadata["rule_id"] for inference in result.reasoning.inferences] == rule_ids
+    assert [step.metadata["rule_id"] for step in result.reasoning.trace.steps] == rule_ids
+    assert [component.metadata["rule_id"] for component in result.scoring.result.components] == rule_ids
+    assert [component.score.metadata["rule_id"] for component in result.scoring.result.components] == rule_ids
+
+    for explanation in result.explainability_report.recommendation_explanations:
+        assert explanation.triggered_rule_ids == rule_ids
+
+
+def test_rule_traceability_survives_reordered_pipeline_lists() -> None:
+    result = run_pipeline()
+
+    reversed_rules = list(reversed(result.rule_matches))
+    reversed_observations = list(reversed(result.observations))
+    reasoning = create_reasoning(reversed_rules, reversed_observations)
+    scoring = create_scoring(reversed_rules, reasoning.trace, result.evidence)
+    report = create_explainability_report(
+        result.ontology,
+        result.evidence,
+        reversed_rules,
+        reversed_observations,
+        reasoning,
+        scoring,
+        result.decision,
+    )
+
+    observations_by_rule_id = {observation.metadata["rule_id"]: observation for observation in reversed_observations}
+    for rule, signal, inference, step, component in zip(
+        reversed_rules, reasoning.signals, reasoning.inferences, reasoning.trace.steps, scoring.result.components
+    ):
+        assert signal.metadata["rule_id"] == rule.rule_id
+        assert signal.source_ids == [observations_by_rule_id[rule.rule_id].id]
+        assert inference.metadata["rule_id"] == rule.rule_id
+        assert observations_by_rule_id[rule.rule_id].id in inference.premise_ids
+        assert step.metadata["rule_id"] == rule.rule_id
+        assert step.input_ids == [observations_by_rule_id[rule.rule_id].id]
+        assert component.metadata["rule_id"] == rule.rule_id
+
+    assert scoring.transformation_pressure.strategic_importance_score.name == "High Value Opportunity"
+    assert scoring.transformation_pressure.urgency_score.name == "Long-Term Contract"
+    assert report.recommendation_explanations[0].triggered_rule_ids == [rule.rule_id for rule in reversed_rules]
 
 
 def test_json_output_is_valid(capsys) -> None:
