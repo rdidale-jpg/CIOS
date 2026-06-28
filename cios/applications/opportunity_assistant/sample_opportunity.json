@@ -1,0 +1,22 @@
+{
+  "name": "Acme Secure Cloud Transformation",
+  "customer": {
+    "name": "Acme Public Services",
+    "sector": "Public Sector",
+    "region": "UK"
+  },
+  "description": "Modernise legacy Oracle workloads into a secure managed cloud platform for citizen services.",
+  "value": 12500000,
+  "duration_months": 60,
+  "current_platforms": ["Oracle E-Business Suite", "Oracle Database", "Legacy data centre"],
+  "requirements": ["cloud migration", "security accreditation", "24/7 managed service", "data protection"],
+  "competitors": ["Global Systems Integrator", "Cloud Native Consultancy", "Incumbent Outsourcer"],
+  "capabilities": ["Cloud transformation", "Oracle modernisation", "Managed security operations"],
+  "evidence": [
+    {
+      "title": "Opportunity qualification note",
+      "source": "sample_opportunity.json",
+      "summary": "High-value public-sector transformation requiring Oracle modernisation, security accreditation, managed service operations, and a five-year contract."
+    }
+  ]
+}
