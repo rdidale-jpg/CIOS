@@ -7,7 +7,7 @@ The library is organised so that high-level constitutional principles can be tra
 ## Library Structure
 
 - `Constitution/` defines durable principles, operating doctrine and non-negotiable system commitments.
-- `Science/` defines commercial science concepts, assumptions, hypotheses and theoretical foundations.
+- `Science/` defines the Commercial Science Registry, including laws, principles, models, heuristics, hypotheses, experiments, evidence and science governance.
 - `Engineering/` defines buildable technical standards, architecture decisions and implementation specifications.
 - `Research/` stores supporting research, literature reviews, papers and validation evidence.
 - `Models/` stores reusable conceptual, analytical and domain models.
