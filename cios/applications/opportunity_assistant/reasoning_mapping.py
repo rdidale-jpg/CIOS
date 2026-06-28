@@ -25,15 +25,16 @@ class OpportunityReasoningResult(CIOSBaseModel):
 def create_reasoning(rule_matches: list[RuleMatch], observations: list[Observation]) -> OpportunityReasoningResult:
     """Map rule matches and observations into reasoning artefacts."""
 
+    observations_by_rule_id = {observation.metadata["rule_id"]: observation for observation in observations}
     signals = [
         Signal(
             name=rule.signal_name,
             description=rule.rationale,
-            source_ids=[observations[index].id],
+            source_ids=[observations_by_rule_id[rule.rule_id].id],
             strength=rule.signal_strength,
-            metadata={"rule": rule.name, "matched": rule.matched},
+            metadata={"rule": rule.name, "rule_id": rule.rule_id, "matched": rule.matched},
         )
-        for index, rule in enumerate(rule_matches)
+        for rule in rule_matches
     ]
     hypotheses = [
         Hypothesis(
@@ -42,26 +43,29 @@ def create_reasoning(rule_matches: list[RuleMatch], observations: list[Observati
             confidence=ConfidenceLevel.HIGH,
         )
     ]
+    signals_by_rule_id = {signal.metadata["rule_id"]: signal for signal in signals}
     inferences = [
         Inference(
             statement=f"{rule.name}: {'matched' if rule.matched else 'not matched'}; {rule.rationale}",
-            premise_ids=[observations[index].id, signals[index].id],
+            premise_ids=[observations_by_rule_id[rule.rule_id].id, signals_by_rule_id[rule.rule_id].id],
             confidence=ConfidenceLevel.HIGH if rule.matched else ConfidenceLevel.MEDIUM,
+            metadata={"rule": rule.name, "rule_id": rule.rule_id, "matched": rule.matched},
         )
-        for index, rule in enumerate(rule_matches)
+        for rule in rule_matches
     ]
     explanation = Explanation(
         summary="Deterministic rules indicate a high-value, security-sensitive transformation opportunity with managed-service and competitive differentiation needs.",
         observation_ids=[obs.id for obs in observations],
         inference_ids=[inf.id for inf in inferences],
     )
+    inferences_by_rule_id = {inference.metadata["rule_id"]: inference for inference in inferences}
     steps = [
         ReasoningStep(
             sequence=index + 1,
             description=f"Evaluate rule: {rule.name}.",
-            input_ids=[observations[index].id],
-            output_ids=[signals[index].id, inferences[index].id],
-            metadata={"matched": rule.matched},
+            input_ids=[observations_by_rule_id[rule.rule_id].id],
+            output_ids=[signals_by_rule_id[rule.rule_id].id, inferences_by_rule_id[rule.rule_id].id],
+            metadata={"rule": rule.name, "rule_id": rule.rule_id, "matched": rule.matched},
         )
         for index, rule in enumerate(rule_matches)
     ]

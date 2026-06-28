@@ -8,7 +8,13 @@ from cios.core.models import CIOSBaseModel
 from cios.reasoning import ReasoningTrace
 from cios.scoring import Score, ScoreBand, ScoreComponent, ScoringModel, ScoringResult, TransformationPressureScore
 
-from cios.applications.opportunity_assistant.rules import RuleMatch
+from cios.applications.opportunity_assistant.rules import (
+    HIGH_VALUE_RULE_ID,
+    LONG_TERM_CONTRACT_RULE_ID,
+    ORACLE_TRANSFORMATION_RULE_ID,
+    SECURITY_CRITICAL_RULE_ID,
+    RuleMatch,
+)
 
 
 class OpportunityScoringResult(CIOSBaseModel):
@@ -24,9 +30,16 @@ def create_scoring(rule_matches: list[RuleMatch], trace: ReasoningTrace, evidenc
     components = [
         ScoreComponent(
             name=rule.name,
-            score=Score(name=rule.name, value=rule.score, rationale=rule.rationale, evidence_ids=[item.id for item in evidence]),
+            score=Score(
+                name=rule.name,
+                value=rule.score,
+                rationale=rule.rationale,
+                evidence_ids=[item.id for item in evidence],
+                metadata={"rule": rule.name, "rule_id": rule.rule_id},
+            ),
             weight=1.0,
             rationale=rule.rationale,
+            metadata={"rule": rule.name, "rule_id": rule.rule_id, "matched": rule.matched},
         )
         for rule in rule_matches
     ]
@@ -41,13 +54,14 @@ def create_scoring(rule_matches: list[RuleMatch], trace: ReasoningTrace, evidenc
         band=band,
         reasoning_trace=trace,
     )
+    components_by_rule_id = {component.metadata["rule_id"]: component for component in components}
     return OpportunityScoringResult(
         result=result,
         transformation_pressure=TransformationPressureScore(
             result=result,
-            urgency_score=components[4].score,
-            strategic_importance_score=components[0].score,
-            change_pressure_score=components[1].score,
-            capability_gap_score=components[2].score,
+            urgency_score=components_by_rule_id[LONG_TERM_CONTRACT_RULE_ID].score,
+            strategic_importance_score=components_by_rule_id[HIGH_VALUE_RULE_ID].score,
+            change_pressure_score=components_by_rule_id[ORACLE_TRANSFORMATION_RULE_ID].score,
+            capability_gap_score=components_by_rule_id[SECURITY_CRITICAL_RULE_ID].score,
         ),
     )

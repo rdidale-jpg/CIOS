@@ -10,6 +10,7 @@ from typing import Any
 class RuleDetection:
     """A deterministic commercial rule detection without scoring policy."""
 
+    rule_id: str
     name: str
     matched: bool
     observation: str
@@ -29,6 +30,7 @@ class RuleDetection:
 class RuleScore:
     """Scoring policy assigned to a detected rule outcome."""
 
+    rule_id: str
     matched_score: float
     absent_score: float
 
@@ -37,6 +39,7 @@ class RuleScore:
 class RuleMatch:
     """Backward-compatible rule result with detection and score."""
 
+    rule_id: str
     name: str
     matched: bool
     observation: str
@@ -50,13 +53,20 @@ HIGH_VALUE_THRESHOLD = 10_000_000
 LONG_TERM_MONTHS = 36
 MULTI_COMPETITOR_COUNT = 3
 
+HIGH_VALUE_RULE_ID = "oa.rule.high_value_opportunity"
+ORACLE_TRANSFORMATION_RULE_ID = "oa.rule.oracle_transformation"
+SECURITY_CRITICAL_RULE_ID = "oa.rule.security_critical"
+MANAGED_SERVICE_RULE_ID = "oa.rule.managed_service"
+LONG_TERM_CONTRACT_RULE_ID = "oa.rule.long_term_contract"
+MULTI_COMPETITOR_RULE_ID = "oa.rule.multi_competitor"
+
 DEFAULT_SCORING_POLICY: dict[str, RuleScore] = {
-    "High Value Opportunity": RuleScore(matched_score=90, absent_score=35),
-    "Oracle Transformation": RuleScore(matched_score=85, absent_score=20),
-    "Security Critical": RuleScore(matched_score=80, absent_score=25),
-    "Managed Service": RuleScore(matched_score=75, absent_score=30),
-    "Long-Term Contract": RuleScore(matched_score=70, absent_score=30),
-    "Multi-Competitor": RuleScore(matched_score=65, absent_score=40),
+    HIGH_VALUE_RULE_ID: RuleScore(rule_id=HIGH_VALUE_RULE_ID, matched_score=90, absent_score=35),
+    ORACLE_TRANSFORMATION_RULE_ID: RuleScore(rule_id=ORACLE_TRANSFORMATION_RULE_ID, matched_score=85, absent_score=20),
+    SECURITY_CRITICAL_RULE_ID: RuleScore(rule_id=SECURITY_CRITICAL_RULE_ID, matched_score=80, absent_score=25),
+    MANAGED_SERVICE_RULE_ID: RuleScore(rule_id=MANAGED_SERVICE_RULE_ID, matched_score=75, absent_score=30),
+    LONG_TERM_CONTRACT_RULE_ID: RuleScore(rule_id=LONG_TERM_CONTRACT_RULE_ID, matched_score=70, absent_score=30),
+    MULTI_COMPETITOR_RULE_ID: RuleScore(rule_id=MULTI_COMPETITOR_RULE_ID, matched_score=65, absent_score=40),
 }
 
 
@@ -80,6 +90,7 @@ def detect_rules(opportunity: dict[str, Any]) -> list[RuleDetection]:
 
     return [
         RuleDetection(
+            rule_id=HIGH_VALUE_RULE_ID,
             name="High Value Opportunity",
             matched=value >= HIGH_VALUE_THRESHOLD,
             observation=f"Opportunity value is {value:,.0f}.",
@@ -89,6 +100,7 @@ def detect_rules(opportunity: dict[str, Any]) -> list[RuleDetection]:
             absent_rationale=f"Value is below the {HIGH_VALUE_THRESHOLD:,.0f} high-value threshold.",
         ),
         RuleDetection(
+            rule_id=ORACLE_TRANSFORMATION_RULE_ID,
             name="Oracle Transformation",
             matched=has_oracle_transformation,
             observation="Opportunity references Oracle and transformation or migration context.",
@@ -98,6 +110,7 @@ def detect_rules(opportunity: dict[str, Any]) -> list[RuleDetection]:
             absent_rationale="No Oracle transformation driver detected.",
         ),
         RuleDetection(
+            rule_id=SECURITY_CRITICAL_RULE_ID,
             name="Security Critical",
             matched=has_security,
             observation="Security, accreditation, or data protection requirements are present.",
@@ -107,6 +120,7 @@ def detect_rules(opportunity: dict[str, Any]) -> list[RuleDetection]:
             absent_rationale="No security, accreditation, or data protection requirement detected.",
         ),
         RuleDetection(
+            rule_id=MANAGED_SERVICE_RULE_ID,
             name="Managed Service",
             matched=has_managed_service,
             observation="Managed service or 24/7 operating model is required.",
@@ -116,6 +130,7 @@ def detect_rules(opportunity: dict[str, Any]) -> list[RuleDetection]:
             absent_rationale="No managed service or 24/7 operating model requirement detected.",
         ),
         RuleDetection(
+            rule_id=LONG_TERM_CONTRACT_RULE_ID,
             name="Long-Term Contract",
             matched=duration_months >= LONG_TERM_MONTHS,
             observation=f"Contract duration is {duration_months} months.",
@@ -125,6 +140,7 @@ def detect_rules(opportunity: dict[str, Any]) -> list[RuleDetection]:
             absent_rationale=f"Duration is below the {LONG_TERM_MONTHS}-month long-term threshold.",
         ),
         RuleDetection(
+            rule_id=MULTI_COMPETITOR_RULE_ID,
             name="Multi-Competitor",
             matched=len(competitors) >= MULTI_COMPETITOR_COUNT,
             observation=f"{len(competitors)} named competitors are present.",
@@ -142,12 +158,13 @@ def score_rule_detections(detections: list[RuleDetection], policy: dict[str, Rul
     active_policy = policy or DEFAULT_SCORING_POLICY
     return [
         RuleMatch(
+            rule_id=detection.rule_id,
             name=detection.name,
             matched=detection.matched,
             observation=detection.observation,
             signal_name=detection.signal_name,
             signal_strength=detection.signal_strength,
-            score=active_policy[detection.name].matched_score if detection.matched else active_policy[detection.name].absent_score,
+            score=active_policy[detection.rule_id].matched_score if detection.matched else active_policy[detection.rule_id].absent_score,
             rationale=detection.rationale,
         )
         for detection in detections

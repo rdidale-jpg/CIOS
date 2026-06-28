@@ -16,7 +16,7 @@ def create_observations(rule_matches: list[RuleMatch], evidence: list[Evidence])
             statement=rule.observation,
             evidence_ids=evidence_ids,
             confidence=ConfidenceLevel.HIGH if rule.matched else ConfidenceLevel.MEDIUM,
-            metadata={"rule": rule.name},
+            metadata={"rule": rule.name, "rule_id": rule.rule_id},
         )
         for rule in rule_matches
     ]
