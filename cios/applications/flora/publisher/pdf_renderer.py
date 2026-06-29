@@ -81,16 +81,23 @@ def render_pdf(ctx: dict[str, Any], output_path: Path) -> Path:
     for bullet in ctx["executive_summary"]:
         story.append(_p(f"• {bullet}", s["bullet"]))
     story.append(PageBreak())
+    _section_title(story, "What Changed", s)
+    wc = ctx['what_changed']
+    story.append(_p(wc['summary'], s['body']))
+    story.append(_p('Strongest movers', s['h2']))
+    for m in wc['strongest_movers']:
+        story.append(_p(f"• {m['organisation']} — {m['movement']}: {m['reason']}", s['body']))
+    story.append(PageBreak())
+    _section_title(story, "Commercial Radar", s)
+    for c in ctx['conditions']:
+        story += [_p(c['condition'], s['h2']), _p(f"Strength: {c['strength']} · Trend: {c['trend']} · Evidence: {c['evidence_status']}", s['body']), _p(f"Affected Organisations: {', '.join(c['affected_organisations']) or 'None in seeded evidence'}", s['body']), _p(f"Why it matters: {c['why_it_matters']}", s['body']), Spacer(1, 2*mm)]
+    story.append(PageBreak())
     _section_title(story, "Today's Priority Opportunity", s)
     for key, value in ctx["priority_opportunity"].items():
         story += [_p(key, s["h2"]), _p(value, s["body"])]
     story.append(PageBreak())
     _section_title(story, "Top Five Organisations", s)
     story.append(_table([["Organisation", "Sector", "Condition Strength", "AI Reinvention Opportunity", "Movement", "Confidence"]] + [[r["organisation"], r["sector"], r["condition_strength"], r["ai_opportunity"], r["movement"], r["confidence"]] for r in ctx["top_organisations"]], [30*mm, 27*mm, 29*mm, 32*mm, 22*mm, 23*mm]))
-    story.append(PageBreak())
-    _section_title(story, "Emerging Commercial Conditions", s)
-    for c in ctx["conditions"]:
-        story += [_p(c["condition"], s["h2"]), _p(f"Strength: {c['strength']} · Trend: {c['trend']}", s["body"]), _p(f"Affected Organisations: {', '.join(c['affected_organisations'])}", s["body"]), _p(f"Primary Drivers: {c['primary_drivers']}", s["body"]), Spacer(1, 2*mm)]
     story.append(PageBreak())
     _section_title(story, "Executive & Market Movements", s)
     for section in ctx["movements"]:
@@ -104,7 +111,17 @@ def render_pdf(ctx: dict[str, Any], output_path: Path) -> Path:
     story.append(PageBreak())
     _section_title(story, "Recommended Actions", s)
     for a in ctx["recommended_actions"]:
-        story += [_p(f"Priority {a['priority']} · {a['organisation']}", s["h2"]), _p(f"Reason: {a['reason']}", s["body"]), _p(f"Expected Commercial Value: {a['expected_value']}", s["body"]), _p(f"Confidence: {a['confidence']}", s["body"]), _p(f"Evidence references: {', '.join(a['evidence_references'])}", s["body"]), Spacer(1, 2*mm)]
+        story += [_p(f"Priority {a['priority']} · {a['organisation']}", s["h2"]), _p("Why this matters to Rob", s["h2"]), _p(a['why_this_matters_to_rob'], s["body"]), _p(f"Target: {a['target_executive_or_function']}", s["body"]), _p(f"Proposition: {a['proposition']}", s["body"]), _p(f"Action: {a['action']}", s["body"]), _p(f"Why now: {a['why_now']}", s["body"]), _p(f"Missing evidence: {', '.join(a['missing_evidence'])}", s["body"]), _p(f"Time required: {a['time_required']}", s["body"]), _p("Evidence Receipt", s["h2"])]
+        for e in a['evidence_receipt']:
+            story.append(_p(f"• {e['signal_ids']} — {e['summary']} ({e['source_type']}, {e['evidence_status']})", s["body"]))
+        story.append(Spacer(1, 2*mm))
+    story.append(PageBreak())
+    _section_title(story, "Three Things Worth Doing Today", s)
+    for item in ctx['three_things_today']:
+        story.append(_p(f"• {item}", s['body']))
+    _section_title(story, "What Flora Cannot Yet Know", s)
+    for item in ctx['cannot_know']:
+        story.append(_p(f"• {item}", s['body']))
     story.append(PageBreak())
     _section_title(story, "Teach Flora", s)
     for key, value in ctx["teach_flora"].items():

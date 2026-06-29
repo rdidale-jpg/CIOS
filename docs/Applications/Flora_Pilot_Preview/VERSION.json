@@ -1,8 +1,8 @@
 {
   "product": "Flora Publisher",
   "edition": "Morning Edition",
-  "version": "0.1",
-  "publication_date": "2026-06-29",
+  "version": "0.2",
+  "publication_date": "2026-06-30",
   "case_files": [
     "BBC",
     "BT",
@@ -15,49 +15,93 @@
   ],
   "conditions": [
     {
-      "condition": "Regulatory scrutiny and resilience pressure remain high.",
-      "strength": 80,
+      "condition": "Regulatory Pressure",
+      "strength": 72,
       "trend": "Stable",
       "affected_organisations": [
-        "Thames Water"
-      ],
-      "primary_drivers": "asset intelligence, customer trust analytics"
-    },
-    {
-      "condition": "Grid transition complexity creates strong AI planning opportunity.",
-      "strength": 77,
-      "trend": "Stable",
-      "affected_organisations": [
-        "National Grid"
-      ],
-      "primary_drivers": "asset intelligence, grid forecasting"
-    },
-    {
-      "condition": "Competitive pressure supports AI-enabled simplification.",
-      "strength": 77,
-      "trend": "Stable",
-      "affected_organisations": [
-        "Vodafone"
-      ],
-      "primary_drivers": "network intelligence, sales operations automation"
-    },
-    {
-      "condition": "Network automation and enterprise simplification are attractive AI areas.",
-      "strength": 69,
-      "trend": "Stable",
-      "affected_organisations": [
-        "BT"
-      ],
-      "primary_drivers": "network intelligence, service assurance"
-    },
-    {
-      "condition": "Regulated performance data can support targeted AI use cases.",
-      "strength": 64,
-      "trend": "Stable",
-      "affected_organisations": [
+        "Thames Water",
         "United Utilities"
       ],
-      "primary_drivers": "asset intelligence, leakage analytics"
+      "why_it_matters": "Creates a focused executive conversation for Thames Water, United Utilities where AI can be tied to operating outcomes.",
+      "evidence_status": "seeded"
+    },
+    {
+      "condition": "Operational Resilience",
+      "strength": 78,
+      "trend": "Strengthened",
+      "affected_organisations": [
+        "Thames Water",
+        "National Grid"
+      ],
+      "why_it_matters": "Creates a focused executive conversation for Thames Water, National Grid where AI can be tied to operating outcomes.",
+      "evidence_status": "seeded"
+    },
+    {
+      "condition": "Customer Trust",
+      "strength": 72,
+      "trend": "Stable",
+      "affected_organisations": [
+        "Thames Water",
+        "United Utilities"
+      ],
+      "why_it_matters": "Creates a focused executive conversation for Thames Water, United Utilities where AI can be tied to operating outcomes.",
+      "evidence_status": "seeded"
+    },
+    {
+      "condition": "Technology Debt",
+      "strength": 73,
+      "trend": "Stable",
+      "affected_organisations": [
+        "BT",
+        "Vodafone"
+      ],
+      "why_it_matters": "Creates a focused executive conversation for BT, Vodafone where AI can be tied to operating outcomes.",
+      "evidence_status": "seeded"
+    },
+    {
+      "condition": "AI Modernisation",
+      "strength": 74,
+      "trend": "Stable",
+      "affected_organisations": [
+        "BT",
+        "Vodafone",
+        "National Grid"
+      ],
+      "why_it_matters": "Creates a focused executive conversation for BT, Vodafone, National Grid where AI can be tied to operating outcomes.",
+      "evidence_status": "seeded"
+    },
+    {
+      "condition": "Operational Efficiency",
+      "strength": 70,
+      "trend": "Stable",
+      "affected_organisations": [
+        "Vodafone",
+        "United Utilities"
+      ],
+      "why_it_matters": "Creates a focused executive conversation for Vodafone, United Utilities where AI can be tied to operating outcomes.",
+      "evidence_status": "seeded"
+    },
+    {
+      "condition": "Digital Leadership",
+      "strength": 73,
+      "trend": "Stable",
+      "affected_organisations": [
+        "BT",
+        "National Grid"
+      ],
+      "why_it_matters": "Creates a focused executive conversation for BT, National Grid where AI can be tied to operating outcomes.",
+      "evidence_status": "seeded"
+    },
+    {
+      "condition": "Cost Pressure",
+      "strength": 78,
+      "trend": "Strengthened",
+      "affected_organisations": [
+        "Thames Water",
+        "Vodafone"
+      ],
+      "why_it_matters": "Creates a focused executive conversation for Thames Water, Vodafone where AI can be tied to operating outcomes.",
+      "evidence_status": "seeded"
     }
   ],
   "playbooks": [
@@ -82,6 +126,5 @@
     "No LLMs",
     "No databases",
     "Pilot placeholders remain blank on Teach Flora page"
-  ],
-  "delivery": "text-only PR preview; binary artefacts intentionally excluded"
+  ]
 }
