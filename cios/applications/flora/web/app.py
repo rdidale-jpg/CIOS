@@ -10,6 +10,8 @@ import os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlparse
 
+from cios.applications.flora.live.collect import collect, current_status
+from cios.applications.flora.live.views import collection_result, dashboard, evidence_page
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, settings_page
 
@@ -46,6 +48,14 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._json(HEALTH_PAYLOAD)
             elif parsed.path == "/":
                 self._html(landing_page())
+            elif parsed.path == "/live":
+                self._html(dashboard())
+            elif parsed.path == "/live/collect":
+                self._html(collection_result(collect()))
+            elif parsed.path == "/live/status":
+                self._json(current_status())
+            elif parsed.path == "/live/evidence":
+                self._html(evidence_page())
             elif parsed.path == "/settings":
                 self._html(settings_page())
             elif parsed.path == "/logbook":
@@ -88,7 +98,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
     def _html(self, html: str, status: int = 200) -> None:
         self._body(html.encode("utf-8"), "text/html; charset=utf-8", status)
 
-    def _json(self, payload: dict[str, str], status: int = 200) -> None:
+    def _json(self, payload: dict, status: int = 200) -> None:
         self._body(json.dumps(payload, separators=(",", ":")).encode("utf-8"), "application/json", status)
 
     def _body(self, body: bytes, content_type: str, status: int) -> None:
@@ -108,9 +118,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 
 
 def _content_type_for_path(path: str) -> str | None:
-    if path == "/health":
+    if path in {"/health", "/live/status"}:
         return "application/json"
-    if path in {"/", "/settings", "/logbook"}:
+    if path in {"/", "/settings", "/logbook", "/live", "/live/collect", "/live/evidence"}:
         return "text/html; charset=utf-8"
     if path.startswith("/case/") and path.removeprefix("/case/") in CASE_SLUGS:
         return "text/html; charset=utf-8"

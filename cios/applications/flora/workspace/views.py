@@ -3,13 +3,14 @@ from __future__ import annotations
 
 from html import escape
 
+from cios.applications.flora.live.views import live_banner_html
 from cios.applications.flora.workspace.state import commercial_dna_context, watchlist_rows, workspace_context, case_context
 
 
 def _page(title: str, body: str) -> str:
     return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><title>{escape(title)}</title><style>
     body{{font-family:Inter,Arial,sans-serif;margin:0;background:#f6f3ee;color:#17211b}} a{{color:#185c4d}} .shell{{max-width:1180px;margin:auto;padding:28px}} .hero,.card{{background:#fff;border:1px solid #ded8ce;border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 1px 3px #0001}} .grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:14px}} .metric{{font-size:32px;font-weight:750}} .pill{{display:inline-block;border-radius:999px;padding:4px 10px;background:#e6f2ec;margin:3px}} .priority-high{{background:#173d33;color:white}} .priority-medium{{background:#f3d99b}} .priority-low{{background:#e1e1e1}} .section{{border-top:1px solid #ece5da;padding-top:14px;margin-top:18px}} button,input,textarea,select{{font:inherit;padding:9px;border:1px solid #cfc6ba;border-radius:10px}} textarea{{width:100%;min-height:56px}} button{{background:#173d33;color:#fff;cursor:pointer}} .nav a{{margin-right:14px}} table{{width:100%;border-collapse:collapse}} td,th{{border-bottom:1px solid #eee;padding:10px;text-align:left}} .muted{{color:#68736c}} .action{{background:#f8fbf9;border-left:5px solid #185c4d}}
-    </style></head><body><div class='shell'><nav class='nav'><a href='/'>Morning Edition</a><a href='/logbook'>Teach Flora / Pilot Logbook</a><a href='/settings'>Commercial DNA</a></nav>{body}</div></body></html>"""
+    </style></head><body><div class='shell'><nav class='nav'><a href='/'>Morning Edition</a><a href='/live'>Live Evidence</a><a href='/logbook'>Teach Flora / Pilot Logbook</a><a href='/settings'>Commercial DNA</a></nav>{body}</div></body></html>"""
 
 
 def landing_page() -> str:
@@ -18,6 +19,7 @@ def landing_page() -> str:
     movers = "".join(f"<li>{escape(m.organisation)} <strong>+{m.score_change}</strong> to {m.current_score}</li>" for m in weekly.biggest_movers)
     watch = "".join(f"<tr><td><a href='/case/{escape(row.slug)}'>{escape(row.organisation)}</a></td><td>{escape(row.sector)}</td><td>{row.score}</td><td>{'+' + str(row.movement) if row.movement is not None else '—'}</td><td><span class='pill priority-{escape(row.priority)}'>{escape(row.priority)}</span></td></tr>" for row in watchlist_rows())
     body = f"""<section class='hero'><h1>Good Morning Rob</h1><p class='muted'>{escape(str(ctx['date_label']))} · Estimated reading time: {ctx['reading_time']} minutes</p><div class='grid'><div><div class='metric'>{ctx['new_evidence_count']}</div><p>new evidence items</p></div><div><div class='metric'>{len(weekly.organisations_to_watch)}</div><p>organisations requiring attention</p></div><div><div class='metric'>{len(weekly.biggest_movers)}</div><p>biggest movers</p></div></div></section>
+    {live_banner_html()}
     <section class='card'><h2>What changed?</h2><ul>{movers}</ul></section>
     <section class='card'><h2>Why does it matter?</h2><p>Top AI reinvention opportunities are ranked by deterministic commercial pressure, suitability, readiness, attractiveness and influence potential.</p><ul>{top}</ul></section>
     <section class='card action'><h2>What should I do?</h2><p><strong>Recommended priority action:</strong> {escape(str(ctx['priority_action']))}</p></section>
