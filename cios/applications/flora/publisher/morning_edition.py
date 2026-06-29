@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import os
+import zipfile
 from collections import Counter, defaultdict
 from datetime import UTC, date, datetime
 from pathlib import Path
@@ -144,6 +145,60 @@ def build_publication_context(publication_date: date | None = None) -> dict[str,
     }
 
 
+
+def _latest_morning_stem(ctx: dict[str, Any]) -> str:
+    return f"Morning_Edition_{ctx['publication_date']}"
+
+
+def write_release_notes(ctx: dict[str, Any], output_dir: Path, package_name: str) -> Path:
+    included = [
+        f"{package_name}",
+        f"{package_name.replace('.zip', '.pdf')}",
+        f"{package_name.replace('.zip', '.html')}",
+        "VERSION.json",
+        "index.html",
+        "previews/",
+    ]
+    notes = [
+        "# Flora Morning Edition Release Notes",
+        "",
+        f"**Morning Edition version:** {ctx['version']}",
+        f"**Publication date:** {ctx['publication_date']}",
+        "",
+        "## Files included",
+        *(f"- `{name}`" for name in included),
+        "",
+        "## Known limitations",
+        *(f"- {limitation}" for limitation in ctx["known_limitations"]),
+        "",
+        "## Instructions for downloading",
+        "1. Download the Pilot Package ZIP from the GitHub Release assets.",
+        "2. Extract the ZIP locally.",
+        "3. Open `index.html` to browse the publication files, or open the PDF/HTML directly.",
+        "4. Open files in `previews/` to view page-level PNG previews when generated.",
+        "",
+        "Do not publish automatically; attach these prepared artefacts to a GitHub Release manually.",
+        "",
+    ]
+    path = output_dir / "RELEASE_NOTES.md"
+    path.write_text("\n".join(notes), encoding="utf-8")
+    return path
+
+
+def write_pilot_package(output_dir: Path, stem: str) -> Path:
+    zip_path = output_dir / f"{stem}.zip"
+    required = [output_dir / f"{stem}.pdf", output_dir / f"{stem}.html", output_dir / "VERSION.json", output_dir / "index.html"]
+    with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for path in required:
+            if path.exists():
+                archive.write(path, path.name)
+        previews_dir = output_dir / "previews"
+        archive.writestr("previews/", "")
+        if previews_dir.exists():
+            for preview in sorted(previews_dir.glob("*.png")):
+                archive.write(preview, f"previews/{preview.name}")
+    return zip_path
+
 def write_version_manifest(ctx: dict[str, Any], output_dir: Path) -> Path:
     manifest = {key: ctx[key] for key in ("product", "edition", "version", "publication_date", "case_files", "conditions", "playbooks", "commercial_laws", "known_limitations")}
     path = output_dir / "VERSION.json"
@@ -164,12 +219,14 @@ def generate_morning_edition(output_dir: Path | None = None, publication_date: d
     output_dir = output_dir or PUBLICATIONS_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
     ctx = build_publication_context(publication_date)
-    stem = f"Morning_Edition_{ctx['publication_date']}"
+    stem = _latest_morning_stem(ctx)
     html_path = write_html(ctx, output_dir / f"{stem}.html")
     pdf_path = render_pdf(ctx, output_dir / f"{stem}.pdf")
     manifest_path = write_version_manifest(ctx, output_dir)
     index_path = write_publication_index(output_dir)
-    return {"pdf": pdf_path, "html": html_path, "manifest": manifest_path, "index": index_path}
+    release_notes_path = write_release_notes(ctx, output_dir, f"{stem}.zip")
+    zip_path = write_pilot_package(output_dir, stem)
+    return {"pdf": pdf_path, "html": html_path, "manifest": manifest_path, "index": index_path, "zip": zip_path, "release_notes": release_notes_path}
 
 
 def main() -> None:
@@ -177,6 +234,8 @@ def main() -> None:
     print(f"Flora Morning Edition generated: {paths['pdf'].resolve()}")
     print(f"HTML version: {paths['html'].resolve()}")
     print(f"Publication index: {paths['index'].resolve()}")
+    print(f"Pilot Package ZIP: {paths['zip'].resolve()}")
+    print(f"Release notes: {paths['release_notes'].resolve()}")
 
 
 if __name__ == "__main__":
