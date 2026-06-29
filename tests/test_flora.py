@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 import ast
+from http.client import HTTPConnection
+from http.server import ThreadingHTTPServer
 import json
 import subprocess
 import sys
+import threading
 from pathlib import Path
 
 from cios.applications.flora.models import CommercialDNA, Priority, Signal, TargetAccount
@@ -147,6 +150,7 @@ def test_cli_case_output_text_and_json() -> None:
     assert payload["timeline"]
 
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
+from cios.applications.flora.workspace.app import FloraWorkspaceHandler
 from cios.applications.flora.workspace.views import case_page, landing_page
 
 
@@ -156,6 +160,23 @@ def test_workspace_landing_page_renders() -> None:
     assert "What changed?" in html
     assert "Watchlist" in html
     assert "/case/ThamesWater" in html
+
+
+def test_workspace_head_request_supported() -> None:
+    server = ThreadingHTTPServer(("127.0.0.1", 0), FloraWorkspaceHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        connection = HTTPConnection("127.0.0.1", server.server_port)
+        connection.request("HEAD", "/")
+        response = connection.getresponse()
+        assert response.status == 200
+        assert response.getheader("Content-Type") == "text/html; charset=utf-8"
+        assert response.read() == b""
+    finally:
+        connection.close()
+        server.shutdown()
+        server.server_close()
 
 
 def test_workspace_case_file_page_renders_expected_sections() -> None:
