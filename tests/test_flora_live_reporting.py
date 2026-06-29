@@ -1,0 +1,73 @@
+from __future__ import annotations
+
+from cios.applications.flora.live.aggregation import aggregate_live_evidence, adjust_score, attention_organisations
+from cios.applications.flora.pipeline import generate_daily_brief
+from cios.applications.flora.publisher import morning_edition
+from cios.applications.flora.seed_data import sample_watchlist
+
+
+def _evidence(org: str = "BT", n: int = 2) -> list[dict[str, object]]:
+    return [
+        {
+            "evidence_id": f"LIVE-{org}-{idx}",
+            "organisation": org,
+            "sector": "Telecommunications",
+            "source_id": f"src-{idx % 2}",
+            "source_name": f"Source {idx % 2}",
+            "source_url": f"https://example.com/{idx}",
+            "source_type": "official_newsroom" if idx % 2 else "investor_results",
+            "snippet": f"{org} network AI operational efficiency update {idx}",
+            "commercial_condition": "Network Intelligence" if idx % 2 else "Operational Efficiency",
+            "likely_capability": "Network Operations AI" if idx % 2 else "Operational Efficiency Analytics",
+            "evidence_tier": "tier_1_company",
+            "confidence": 80,
+            "extraction_timestamp": "2026-06-29T00:00:00+00:00",
+        }
+        for idx in range(n)
+    ]
+
+
+def test_increasing_live_evidence_changes_attention_counts() -> None:
+    daily = generate_daily_brief()
+    none = attention_organisations(daily.items, {}, sample_watchlist())
+    live = attention_organisations(daily.items, aggregate_live_evidence(_evidence("BT", 3) + _evidence("Vodafone", 1)), sample_watchlist())
+    assert len(live) != len(none)
+    assert live[0] == "BT"
+
+
+def test_new_evidence_count_reflects_actual_unique_live_count(monkeypatch) -> None:
+    monkeypatch.setattr(morning_edition, "read_jsonl", lambda *args, **kwargs: _evidence("BT", 4))
+    ctx = morning_edition.build_publication_context()
+    assert ctx["new_evidence_count"] == 4
+    assert ctx["new_evidence_label"] == "live unique evidence objects"
+
+
+def test_what_changed_changes_when_live_evidence_changes(monkeypatch) -> None:
+    monkeypatch.setattr(morning_edition, "read_jsonl", lambda *args, **kwargs: _evidence("BT", 1))
+    bt_ctx = morning_edition.build_publication_context()
+    monkeypatch.setattr(morning_edition, "read_jsonl", lambda *args, **kwargs: _evidence("Vodafone", 3))
+    vodafone_ctx = morning_edition.build_publication_context()
+    assert bt_ctx["what_changed"]["strongest_movers"] != vodafone_ctx["what_changed"]["strongest_movers"]
+    assert "Live evidence uplift" in vodafone_ctx["what_changed"]["strongest_movers"][0]["movement"]
+
+
+def test_score_adjustment_changes_when_live_evidence_exists() -> None:
+    metrics = aggregate_live_evidence(_evidence("BT", 2))["BT"]
+    adjusted = adjust_score("BT", 70, metrics)
+    assert adjusted.final_score > adjusted.base_score
+    assert adjusted.live_evidence_bonus > 0
+
+
+def test_why_this_matters_uses_live_conditions(monkeypatch) -> None:
+    monkeypatch.setattr(morning_edition, "read_jsonl", lambda *args, **kwargs: _evidence("BT", 2))
+    ctx = morning_edition.build_publication_context()
+    bt_action = next(a for a in ctx["recommended_actions"] if a["organisation"] == "BT")
+    assert "Network Intelligence" in bt_action["why_this_matters_to_rob"] or "Operational Efficiency" in bt_action["why_this_matters_to_rob"]
+
+
+def test_seeded_fallback_still_works_when_no_live_evidence(monkeypatch) -> None:
+    monkeypatch.setattr(morning_edition, "read_jsonl", lambda *args, **kwargs: [])
+    ctx = morning_edition.build_publication_context()
+    assert ctx["new_evidence_count"] == 5
+    assert ctx["new_evidence_label"] == "seeded fallback evidence items"
+    assert "Seeded fallback" in ctx["what_changed"]["summary"]
