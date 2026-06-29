@@ -160,7 +160,7 @@ def test_current_status_reports_unique_evidence_objects(tmp_path: Path, monkeypa
     evidence = {
         "evidence_id": "LIVE-1",
         "organisation": "BT",
-        "source_id": "bt-news",
+        "source_id": "bt-official-newsroom",
         "source_url": "https://newsroom.bt.com/",
         "snippet": "BT mentions AI for network operations.",
         "commercial_condition": "AI Modernisation",
@@ -234,8 +234,8 @@ def test_morning_edition_coverage_summary(tmp_path: Path, monkeypatch) -> None:
 
     monkeypatch.chdir(tmp_path)
     write_jsonl([
-        {"source_id": "bt-news", "organisation": "BT", "status": "succeeded", "success": True, "evidence_count": 2, "last_attempted": "2026-06-29T00:00:00+00:00"},
-        {"source_id": "sky-news", "organisation": "Sky", "status": "no evidence", "success": False, "evidence_count": 0, "last_attempted": "2026-06-29T00:00:00+00:00", "failure_reason": "no_relevant_evidence"},
+        {"source_id": "bt-official-newsroom", "organisation": "BT", "status": "succeeded", "success": True, "evidence_count": 2, "last_attempted": "2026-06-29T00:00:00+00:00"},
+        {"source_id": "sky-official-newsroom", "organisation": "Sky", "status": "no evidence", "success": False, "evidence_count": 0, "last_attempted": "2026-06-29T00:00:00+00:00", "failure_reason": "no_relevant_evidence"},
     ], DEFAULT_DIAGNOSTICS_PATH)
 
     ctx = build_publication_context()
@@ -302,3 +302,52 @@ def test_flora_v07_sources_page_and_morning_summary() -> None:
     assert "failed_source_count" in summary
     assert "source_coverage_health" in summary
     assert "Uncovered priority organisations" in render_markdown(ctx)
+
+
+def test_flora_v08_portfolio_radar_and_source_effectiveness(monkeypatch, tmp_path) -> None:
+    from cios.applications.flora.live import store
+    monkeypatch.setattr(store, "DEFAULT_PATH", tmp_path / "evidence.jsonl")
+    monkeypatch.setattr(store, "DEFAULT_DIAGNOSTICS_PATH", tmp_path / "diagnostics.jsonl")
+    monkeypatch.setattr("cios.applications.flora.portfolio.DEFAULT_PATH", tmp_path / "evidence.jsonl")
+    monkeypatch.setattr("cios.applications.flora.portfolio.DEFAULT_DIAGNOSTICS_PATH", tmp_path / "diagnostics.jsonl")
+    monkeypatch.setattr("cios.applications.flora.live.views.DEFAULT_PATH", tmp_path / "evidence.jsonl")
+    monkeypatch.setattr("cios.applications.flora.live.collect.DEFAULT_DIAGNOSTICS_PATH", tmp_path / "diagnostics.jsonl")
+    monkeypatch.setattr("cios.applications.flora.live.collect.read_jsonl", store.read_jsonl)
+    store.write_jsonl([
+        {"source_id": "bt-official-newsroom", "organisation": "BT", "source_name": "BT newsroom", "source_url": "https://example.com", "source_type": "official_newsroom", "snippet": "BT AI network operations", "extraction_timestamp": "2026-06-29T00:00:00+00:00", "commercial_condition": "AI Modernisation", "likely_capability": "network intelligence", "confidence": 90, "overall_evidence_quality": 88, "evidence_tier": "tier_1_company"},
+    ], tmp_path / "evidence.jsonl")
+    store.write_jsonl([
+        {"source_id": "bt-official-newsroom", "organisation": "BT", "status": "succeeded", "success": True, "evidence_count": 1, "last_attempted": "2026-06-29T00:00:00+00:00"},
+        {"source_id": "sky-official-newsroom", "organisation": "Sky", "status": "no evidence", "success": False, "evidence_count": 0, "last_attempted": "2026-06-29T00:00:00+00:00", "failure_reason": "no_relevant_evidence"},
+    ], tmp_path / "diagnostics.jsonl")
+
+    from cios.applications.flora.portfolio import build_radar_rows, evidence_confidence, quadrant_for, source_effectiveness_rows
+    from cios.applications.flora.seed_data import sample_watchlist
+    from cios.applications.flora.workspace.views import radar_page
+    from cios.applications.flora.live.views import source_effectiveness_page, sources_page
+    from cios.applications.flora.publisher.morning_edition import render_markdown, build_publication_context
+
+    assert quadrant_for(80, 80) == "Priority Pursuits"
+    rows = build_radar_rows()
+    assert len(rows) == len(sample_watchlist())
+    bt = next(row for row in rows if row.organisation == "BT")
+    assert bt.evidence_confidence > 0
+    assert evidence_confidence(None) == 0
+    assert "base score" in bt.rank_change_reason.lower() or "Live evidence improved rank" in bt.rank_change_reason
+    radar_html = radar_page()
+    assert "Flora Portfolio Radar" in radar_html
+    assert "rank_change_reason" in radar_html
+    assert "Base score" in radar_html or "Base Score" in radar_html
+    assert "Live uplift" in radar_html or "Live Uplift" in radar_html
+    assert all(account.organisation_name in radar_html for account in sample_watchlist())
+
+    effectiveness = source_effectiveness_rows()
+    assert effectiveness
+    assert any(row.source_id == "bt-official-newsroom" and row.unique_evidence_count == 1 for row in effectiveness)
+    assert "Source effectiveness" in source_effectiveness_page()
+    sources_html = sources_page()
+    assert "succeeded with evidence" in sources_html
+    assert "succeeded but no evidence" in sources_html
+
+    md = render_markdown(build_publication_context())
+    assert "Portfolio Radar Summary" in md
