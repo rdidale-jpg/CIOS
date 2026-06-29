@@ -8,6 +8,7 @@ from http.server import ThreadingHTTPServer
 import json
 import subprocess
 import sys
+import pytest
 import threading
 from pathlib import Path
 
@@ -269,7 +270,7 @@ def test_pilot_logbook_record_creation(tmp_path, monkeypatch) -> None:
     assert stored["flora_value_score"] == 5
     assert stored["flora_should_learn"] == "Track sponsor gaps"
 
-from cios.applications.flora.publisher.morning_edition import generate_morning_edition
+from cios.applications.flora.publisher.morning_edition import build_publication_context, generate_morning_edition
 
 
 def test_publisher_generates_pdf_html_manifest_and_index(tmp_path) -> None:
@@ -294,3 +295,89 @@ def test_publisher_preserves_existing_flora_brief_compatibility(tmp_path) -> Non
     after = generate_daily_brief()
     assert after == before
     assert before.items[0].assessment is not None
+
+from datetime import date
+import types
+import zipfile
+
+from cios.applications.flora.publisher.morning_edition import write_release_notes
+from cios.applications.flora.publisher.preview import generate_previews
+
+
+def test_publisher_generates_zip_and_release_notes(tmp_path) -> None:
+    paths = generate_morning_edition(tmp_path, publication_date=date(2026, 6, 29))
+    assert paths["zip"].is_file()
+    assert paths["release_notes"].is_file()
+
+    notes = paths["release_notes"].read_text(encoding="utf-8")
+    assert "Morning Edition version" in notes
+    assert "Publication date" in notes
+    assert "Morning_Edition_2026-06-29.zip" in notes
+    assert "Known limitations" in notes
+    assert "GitHub Release assets" in notes
+
+    with zipfile.ZipFile(paths["zip"]) as archive:
+        names = set(archive.namelist())
+    assert "Morning_Edition_2026-06-29.pdf" in names
+    assert "Morning_Edition_2026-06-29.html" in names
+    assert "VERSION.json" in names
+    assert "index.html" in names
+    assert "previews/" in names
+
+
+def test_preview_generation_creates_pngs_and_refreshes_zip(tmp_path, monkeypatch) -> None:
+    paths = generate_morning_edition(tmp_path, publication_date=date(2026, 6, 29))
+
+    class FakePixmap:
+        def save(self, output_path: str) -> None:
+            Path(output_path).write_bytes(b"fake-png")
+
+    class FakePage:
+        def get_pixmap(self, matrix, alpha: bool):  # noqa: ANN001
+            return FakePixmap()
+
+    class FakeDocument:
+        def __iter__(self):
+            return iter([FakePage(), FakePage()])
+
+        def close(self) -> None:
+            pass
+
+    fake_fitz = types.SimpleNamespace(open=lambda _path: FakeDocument(), Matrix=lambda _x, _y: object())
+    monkeypatch.setitem(sys.modules, "fitz", fake_fitz)
+
+    previews = generate_previews(paths["pdf"], tmp_path)
+    assert [path.name for path in previews] == ["page-01.png", "page-02.png"]
+    assert all(path.parent == tmp_path / "previews" for path in previews)
+
+    with zipfile.ZipFile(paths["zip"]) as archive:
+        names = set(archive.namelist())
+    assert "previews/page-01.png" in names
+    assert "previews/page-02.png" in names
+
+
+def test_preview_generation_gracefully_handles_missing_dependency(tmp_path, monkeypatch) -> None:
+    paths = generate_morning_edition(tmp_path, publication_date=date(2026, 6, 29))
+    monkeypatch.delitem(sys.modules, "fitz", raising=False)
+
+    import builtins
+
+    real_import = builtins.__import__
+
+    def fake_import(name, *args, **kwargs):  # noqa: ANN001
+        if name == "fitz":
+            raise ImportError("missing fitz")
+        return real_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", fake_import)
+
+    with pytest.raises(RuntimeError, match="PyMuPDF"):
+        generate_previews(paths["pdf"], tmp_path)
+
+
+def test_write_release_notes_includes_required_sections(tmp_path) -> None:
+    ctx = build_publication_context(date(2026, 6, 29))
+    path = write_release_notes(ctx, tmp_path, "Morning_Edition_2026-06-29.zip")
+    text = path.read_text(encoding="utf-8")
+    for expected in ["Morning Edition version", "Publication date", "Files included", "Known limitations", "Instructions for downloading"]:
+        assert expected in text
