@@ -5,14 +5,15 @@ from html import escape
 from typing import Any
 
 from cios.applications.flora.live.collect import current_status
-from cios.applications.flora.live.store import DEFAULT_PATH, read_jsonl
+from cios.applications.flora.live.store import DEFAULT_PATH, load_evidence_fingerprints, read_jsonl
 
 
 def live_banner_html() -> str:
     evidence = read_jsonl(DEFAULT_PATH)
     if evidence:
         sources = {item.get("source_id") or item.get("source_name") for item in evidence}
-        return f"<section class='card action'><strong>LIVE EVIDENCE USED</strong> — {len(evidence)} evidence objects from {len(sources)} sources. <a href='/live'>Open live dashboard</a></section>"
+        unique_count = len(load_evidence_fingerprints(DEFAULT_PATH))
+        return f"<section class='card action'><strong>LIVE EVIDENCE USED</strong> — {unique_count} unique evidence objects from {len(sources)} sources. <a href='/live'>Open live dashboard</a></section>"
     return "<section class='card action'><strong>NO LIVE EVIDENCE AVAILABLE</strong> — use <a href='/live/collect'>/live/collect</a> to attempt collection.</section>"
 
 
@@ -22,13 +23,13 @@ def _page(title: str, body: str) -> str:
 
 def dashboard() -> str:
     status = current_status()
-    body = f"""<h1>Flora Live Evidence</h1>{live_banner_html()}<section class='card'><h2>Status</h2><ul><li>Last collection time: {escape(str(status['last_collection_time'] or 'Never'))}</li><li>Sources attempted: {status['sources_attempted']}</li><li>Sources succeeded: {status['sources_succeeded']}</li><li>Sources failed: {status['sources_failed']}</li><li>Evidence objects collected: {status['evidence_objects_collected']}</li></ul><p><a href='/live/collect'>Run live collection now</a> · <a href='/live/evidence'>View evidence</a></p></section><section class='card warn'><h2>Storage note</h2><p>Live evidence is stored in local JSONL. Render free-tier filesystems may be ephemeral and evidence may reset on redeploy; this is acceptable for pilot v0.2. Persistent storage is a later decision.</p></section>"""
+    body = f"""<h1>Flora Live Evidence</h1>{live_banner_html()}<section class='card'><h2>Status</h2><ul><li>Last collection time: {escape(str(status['last_collection_time'] or 'Never'))}</li><li>Sources attempted: {status['sources_attempted']}</li><li>Sources succeeded: {status['sources_succeeded']}</li><li>Sources failed: {status['sources_failed']}</li><li>Unique evidence objects: {status['total_unique_evidence_objects']}</li></ul><p><a href='/live/collect'>Run live collection now</a> · <a href='/live/evidence'>View evidence</a></p></section><section class='card warn'><h2>Storage note</h2><p>Live evidence is stored in local JSONL. Render free-tier filesystems may be ephemeral and evidence may reset on redeploy; this is acceptable for pilot v0.2. Persistent storage is a later decision.</p></section>"""
     return _page("Flora Live Evidence", body)
 
 
 def collection_result(result: dict[str, Any]) -> str:
     rows = "".join(f"<tr><td>{escape(d['source_id'])}</td><td>{escape(d['organisation'])}</td><td>{escape(d['source_name'])}</td><td>{escape(str(d['success']))}</td><td>{escape(str(d.get('http_status') or d.get('error') or ''))}</td><td>{d['evidence_count']}</td><td>{escape(d['attempted_at'])}</td></tr>" for d in result["diagnostics"])
-    return _page("Flora Live Collection Result", f"<h1>Live collection complete</h1><section class='card'><p>Attempted {result['sources_attempted']} sources; succeeded {result['sources_succeeded']}; failed {result['sources_failed']}; created {result['evidence_objects_created']} evidence objects.</p><p><a href='/live/evidence'>View evidence</a></p></section><table><thead><tr><th>Source ID</th><th>Organisation</th><th>Source</th><th>Success</th><th>Status/error</th><th>Evidence</th><th>Attempted</th></tr></thead><tbody>{rows}</tbody></table>")
+    return _page("Flora Live Collection Result", f"<h1>Live collection complete</h1><section class='card'><p>Attempted {result['sources_attempted']} sources; succeeded {result['sources_succeeded']}; failed {result['sources_failed']}; extracted {result['evidence_objects_extracted']} evidence objects; added {result['new_evidence_added']} new; skipped {result['duplicate_evidence_skipped']} duplicates; total unique evidence objects: {result['total_unique_evidence_objects']}.</p><p><a href='/live/evidence'>View evidence</a></p></section><table><thead><tr><th>Source ID</th><th>Organisation</th><th>Source</th><th>Success</th><th>Status/error</th><th>Evidence</th><th>Attempted</th></tr></thead><tbody>{rows}</tbody></table>")
 
 
 def evidence_page() -> str:

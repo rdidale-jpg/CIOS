@@ -8,7 +8,7 @@ from typing import Any
 from cios.applications.flora.live.extractor import extract_evidence
 from cios.applications.flora.live.fetcher import fetch_html
 from cios.applications.flora.live.source_registry import canonical_organisation, enabled_sources
-from cios.applications.flora.live.store import DEFAULT_DIAGNOSTICS_PATH, DEFAULT_PATH, read_jsonl, write_jsonl
+from cios.applications.flora.live.store import DEFAULT_DIAGNOSTICS_PATH, DEFAULT_PATH, load_evidence_fingerprints, read_jsonl, unique_evidence, write_jsonl
 
 
 def collect(organisation: str | None = None) -> dict[str, Any]:
@@ -35,7 +35,8 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
             "evidence_count": len(source_evidence),
             "attempted_at": attempted_at,
         })
-    output = write_jsonl(evidence) if evidence else DEFAULT_PATH
+    new_evidence, duplicate_count, fingerprints = unique_evidence(evidence)
+    output = write_jsonl(new_evidence) if new_evidence else DEFAULT_PATH
     output.parent.mkdir(parents=True, exist_ok=True)
     output.touch(exist_ok=True)
     write_jsonl(diagnostics, DEFAULT_DIAGNOSTICS_PATH)
@@ -45,7 +46,11 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
         "sources_attempted": len(sources),
         "sources_succeeded": len([d for d in diagnostics if d["success"]]),
         "sources_failed": len(failures),
-        "evidence_objects_created": len(evidence),
+        "evidence_objects_extracted": len(evidence),
+        "evidence_objects_created": len(new_evidence),
+        "new_evidence_added": len(new_evidence),
+        "duplicate_evidence_skipped": duplicate_count,
+        "total_unique_evidence_objects": len(fingerprints),
         "failures": failures,
         "diagnostics": diagnostics,
         "output_location": str(output),
@@ -55,7 +60,7 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
 
 def current_status() -> dict[str, Any]:
     diagnostics = read_jsonl(DEFAULT_DIAGNOSTICS_PATH)
-    evidence = read_jsonl(DEFAULT_PATH)
+    fingerprints = load_evidence_fingerprints(DEFAULT_PATH)
     latest_batch_time = diagnostics[-1]["attempted_at"] if diagnostics else None
     latest = [d for d in diagnostics if d.get("attempted_at") == latest_batch_time] if latest_batch_time else []
     return {
@@ -63,7 +68,8 @@ def current_status() -> dict[str, Any]:
         "sources_attempted": len(latest),
         "sources_succeeded": len([d for d in latest if d.get("success")]),
         "sources_failed": len([d for d in latest if not d.get("success")]),
-        "evidence_objects_collected": len(evidence),
+        "evidence_objects_collected": len(fingerprints),
+        "total_unique_evidence_objects": len(fingerprints),
         "diagnostics": latest,
         "evidence_path": str(DEFAULT_PATH),
         "diagnostics_path": str(DEFAULT_DIAGNOSTICS_PATH),
@@ -80,7 +86,10 @@ def main() -> None:
     print(f"sources attempted: {result['sources_attempted']}")
     print(f"sources succeeded: {result['sources_succeeded']}")
     print(f"sources failed: {result['sources_failed']}")
-    print(f"evidence objects created: {result['evidence_objects_created']}")
+    print(f"evidence extracted: {result['evidence_objects_extracted']}")
+    print(f"new evidence added: {result['new_evidence_added']}")
+    print(f"duplicate evidence skipped: {result['duplicate_evidence_skipped']}")
+    print(f"total unique evidence objects: {result['total_unique_evidence_objects']}")
     print("source diagnostics:")
     for diag in result["diagnostics"]:
         status = diag["http_status"] if diag["http_status"] is not None else diag["error"]
