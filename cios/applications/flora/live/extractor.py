@@ -94,8 +94,8 @@ def extract_evidence(source: SourceRecord, page: str, extracted_at: datetime | N
 
 
 def to_commercial_evidence(item: dict[str, Any]) -> CommercialEvidence:
-    category = EvidenceCategory.REGULATORY_PUBLICATION if item["source_type"] == "regulator" else EvidenceCategory.COMPANY_NEWS
-    if item["source_type"] == "company_investor":
+    category = EvidenceCategory.REGULATORY_PUBLICATION if item["source_type"] in {"regulator", "regulator_publications"} else EvidenceCategory.COMPANY_NEWS
+    if item["source_type"] in {"company_investor", "investor_results", "annual_report_landing"}:
         category = EvidenceCategory.INVESTOR_PRESENTATION
     return CommercialEvidence(
         evidence_id=item["evidence_id"], organisation=item["organisation"], evidence_type="Live public HTML evidence", evidence_category=category,

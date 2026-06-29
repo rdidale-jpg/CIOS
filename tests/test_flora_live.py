@@ -172,3 +172,77 @@ def test_current_status_reports_unique_evidence_objects(tmp_path: Path, monkeypa
 
     assert status["evidence_objects_collected"] == 1
     assert status["total_unique_evidence_objects"] == 1
+
+
+def test_source_diagnostics_categorisation() -> None:
+    from cios.applications.flora.live.collect import categorise_failure
+
+    assert categorise_failure(succeeded=False, http_status=403, error="Forbidden", evidence_count=0) == "access_blocked"
+    assert categorise_failure(succeeded=False, http_status=None, error="timed out", evidence_count=0) == "timeout"
+    assert categorise_failure(succeeded=False, http_status=200, error="non-html content type: application/pdf", evidence_count=0) == "non_html"
+    assert categorise_failure(succeeded=True, http_status=200, error=None, evidence_count=0) == "no_relevant_evidence"
+    assert categorise_failure(succeeded=True, http_status=200, error=None, evidence_count=1) is None
+
+
+def test_no_relevant_evidence_is_not_failure(tmp_path: Path, monkeypatch) -> None:
+    from cios.applications.flora.live import collect as collect_module
+
+    class DummyResult:
+        succeeded = True
+        status_code = 200
+        html = "<html><body><p>Plain page without configured commercial keywords.</p></body></html>"
+        error = None
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(collect_module, "fetch_html", lambda url: DummyResult())
+    result = collect_module.collect("BT")
+
+    assert result["sources_failed"] == 0
+    assert result["sources_succeeded"] == 3
+    assert {d["status"] for d in result["diagnostics"]} == {"no evidence"}
+    assert {d["failure_reason"] for d in result["diagnostics"]} == {"no_relevant_evidence"}
+
+
+def test_source_registry_expanded_organisations() -> None:
+    from cios.applications.flora.live.source_registry import SOURCES
+
+    organisations = {source.organisation for source in SOURCES}
+    assert {"United Utilities", "SSE", "Sky", "BBC"}.issubset(organisations)
+    source_types = {source.source_type for source in SOURCES}
+    assert {"official_newsroom", "official_rss_or_feed", "regulator_publications", "investor_results", "annual_report_landing", "strategy_page"}.issubset(source_types)
+    for organisation in {"United Utilities", "SSE", "Sky", "BBC"}:
+        enabled = [source for source in SOURCES if source.organisation == organisation and source.enabled]
+        assert any(source.source_type == "official_newsroom" for source in enabled)
+        assert any(source.source_type in {"investor_results", "annual_report_landing"} for source in enabled)
+        assert any(source.source_type == "regulator_publications" for source in enabled)
+
+
+def test_sources_page_route(monkeypatch, tmp_path) -> None:
+    from cios.applications.flora.live.views import sources_page
+
+    monkeypatch.chdir(tmp_path)
+    html = sources_page()
+
+    assert "Live source coverage" in html
+    assert "Recommended action" in html
+    assert "united-utilities-news" in html
+
+
+def test_morning_edition_coverage_summary(tmp_path: Path, monkeypatch) -> None:
+    from cios.applications.flora.live.store import DEFAULT_DIAGNOSTICS_PATH, write_jsonl
+    from cios.applications.flora.publisher.morning_edition import build_publication_context, render_markdown
+
+    monkeypatch.chdir(tmp_path)
+    write_jsonl([
+        {"source_id": "bt-news", "organisation": "BT", "status": "succeeded", "success": True, "evidence_count": 2, "last_attempted": "2026-06-29T00:00:00+00:00"},
+        {"source_id": "sky-news", "organisation": "Sky", "status": "no evidence", "success": False, "evidence_count": 0, "last_attempted": "2026-06-29T00:00:00+00:00", "failure_reason": "no_relevant_evidence"},
+    ], DEFAULT_DIAGNOSTICS_PATH)
+
+    ctx = build_publication_context()
+    markdown = render_markdown(ctx)
+
+    assert ctx["live_coverage_summary"]["sources_attempted"] == 2
+    assert ctx["live_coverage_summary"]["sources_produced_evidence"] == 1
+    assert "### Live Evidence Coverage" in markdown
+    assert "Strongest covered organisations: BT" in markdown
+    assert "Uncovered organisations: Sky" in markdown
