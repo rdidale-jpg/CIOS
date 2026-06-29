@@ -22,6 +22,30 @@ http://127.0.0.1:8000
 
 Open that URL in a browser. Stop the server with `Ctrl+C`.
 
+## Static export
+
+Rob can also open Flora Morning Edition and the seeded case files without running a web server. From the repository root, generate a local static export with:
+
+```bash
+python -m cios.applications.flora.workspace.export
+```
+
+The command writes static HTML files under `.flora_pilot/export/` and prints the absolute path to the generated `index.html`. Open that file directly in a browser to review the Morning Edition. The export includes:
+
+- `.flora_pilot/export/index.html`
+- `.flora_pilot/export/settings.html`
+- `.flora_pilot/export/logbook.html`
+- `.flora_pilot/export/case/ThamesWater.html`
+- `.flora_pilot/export/case/BT.html`
+- `.flora_pilot/export/case/NationalGrid.html`
+- `.flora_pilot/export/case/Vodafone.html`
+- `.flora_pilot/export/case/Sky.html`
+- `.flora_pilot/export/case/BBC.html`
+- `.flora_pilot/export/case/SSE.html`
+- `.flora_pilot/export/case/UnitedUtilities.html`
+
+Generated links are relative so the files can be opened locally. Static feedback and logbook forms are rendered for context only; saving entries still requires the local workspace server.
+
 ## Pilot workflow
 
 1. Open the Morning Edition.
@@ -112,6 +136,7 @@ Files created by the workspace:
 
 - `.flora_pilot/feedback.jsonl`
 - `.flora_pilot/logbook.jsonl`
+- `.flora_pilot/export/`
 
 The storage location can be overridden for tests or local experiments with `FLORA_PILOT_DIR`.
 

@@ -149,8 +149,9 @@ def test_cli_case_output_text_and_json() -> None:
     assert payload["evidence"]
     assert payload["timeline"]
 
-from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.workspace.app import FloraWorkspaceHandler, _display_urls, _env_host, _env_port, _print_startup_message
+from cios.applications.flora.workspace.export import CASE_SLUGS, generate_export
+from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.workspace.views import case_page, landing_page
 
 
@@ -222,6 +223,34 @@ def test_workspace_case_file_page_renders_expected_sections() -> None:
     ]:
         assert section in html
 
+
+def test_workspace_static_export_generates_required_files(tmp_path) -> None:
+    index_path = generate_export(tmp_path / "export")
+    assert index_path == tmp_path / "export" / "index.html"
+
+    required_files = [
+        "index.html",
+        "settings.html",
+        "logbook.html",
+        *(f"case/{slug}.html" for slug in CASE_SLUGS),
+    ]
+    for filename in required_files:
+        assert (tmp_path / "export" / filename).is_file()
+
+    index_html = index_path.read_text(encoding="utf-8")
+    assert "Good Morning Rob" in index_html
+    assert "href='case/ThamesWater.html'" in index_html
+    assert "href='settings.html'" in index_html
+    assert "href='logbook.html'" in index_html
+    assert "href='/" not in index_html
+    assert "action='/" not in (tmp_path / "export" / "logbook.html").read_text(encoding="utf-8")
+
+    case_html = (tmp_path / "export" / "case" / "BT.html").read_text(encoding="utf-8")
+    assert "Flora Case File" in case_html
+    assert "href='../index.html'" in case_html
+    assert "action='#feedback'" in case_html
+    assert "href='/" not in case_html
+    assert "action='/" not in case_html
 
 def test_feedback_record_creation(tmp_path, monkeypatch) -> None:
     monkeypatch.setenv("FLORA_PILOT_DIR", str(tmp_path))
