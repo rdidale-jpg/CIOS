@@ -149,7 +149,7 @@ def source_coverage() -> list[dict[str, Any]]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Collect governed Flora live evidence for pilot organisations.")
-    parser.add_argument("--organisation", choices=["ThamesWater", "NationalGrid", "BT", "Vodafone", "UnitedUtilities", "SSE", "Sky", "BBC"], help="Pilot organisation to collect.")
+    parser.add_argument("--organisation", help="Organisation to collect; matched against the governed registry aliases.")
     parser.add_argument("--all", action="store_true", help="Collect all pilot organisations.")
     args = parser.parse_args()
     org = None if args.all or not args.organisation else canonical_organisation(args.organisation)

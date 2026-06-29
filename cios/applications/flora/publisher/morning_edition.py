@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 import os
 import zipfile
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any
@@ -14,6 +14,7 @@ from cios.applications.flora.pipeline import generate_daily_brief, generate_week
 from cios.applications.flora.publisher.html_renderer import write_html
 from cios.applications.flora.publisher.pdf_renderer import render_pdf
 from cios.applications.flora.live.collect import current_status
+from cios.applications.flora.live.source_registry import SOURCES, organisations_without_enabled_sources
 from cios.applications.flora.live.store import read_jsonl
 from cios.applications.flora.live.aggregation import aggregate_live_evidence, adjust_score, attention_organisations, unique_live_evidence
 from cios.applications.flora.seed_data import sample_watchlist
@@ -283,11 +284,31 @@ def build_publication_context(publication_date: date | None = None) -> dict[str,
     strongest = [org for org, count in sorted(evidence_by_org.items(), key=lambda item: item[1], reverse=True) if count > 0][:5]
     attempted_orgs = {diag.get("organisation") for diag in diagnostics}
     uncovered = sorted(org for org in attempted_orgs if evidence_by_org.get(org, 0) == 0)
+    configured_orgs = {source.organisation for source in SOURCES}
+    enabled_orgs = {source.organisation for source in SOURCES if source.enabled}
+    organisations_covered = {item.get("organisation") for item in live_evidence if item.get("organisation")}
+    highest_quality_sources = sorted(
+        ({"source_name": item.get("source_name", ""), "organisation": item.get("organisation", ""), "overall_evidence_quality": item.get("overall_evidence_quality", 0)} for item in live_evidence),
+        key=lambda item: int(item["overall_evidence_quality"] or 0),
+        reverse=True,
+    )[:5]
+    failed_count = coverage_status.get("sources_failed", 0)
+    coverage_health = "healthy" if failed_count == 0 and live_evidence else "degraded" if live_evidence else "no live evidence"
     live_coverage_summary = {
         "sources_attempted": coverage_status.get("sources_attempted", 0),
         "sources_succeeded": coverage_status.get("sources_succeeded", 0),
         "sources_produced_evidence": coverage_status.get("sources_with_evidence", 0),
         "evidence_objects": coverage_status.get("total_unique_evidence_objects", 0),
+        "organisations_configured": len(configured_orgs),
+        "organisations_with_enabled_sources": len(enabled_orgs),
+        "organisations_covered": len(organisations_covered),
+        "organisations_newly_covered": sorted(organisations_covered),
+        "uncovered_priority_organisations": organisations_without_enabled_sources()[:10],
+        "highest_quality_sources": highest_quality_sources,
+        "failed_source_count": failed_count,
+        "source_coverage_health": coverage_health,
+        "sources_by_sector": dict(Counter(source.sector for source in SOURCES if source.enabled)),
+        "sources_by_source_type": dict(Counter(source.source_type for source in SOURCES if source.enabled)),
         "strongest_covered_organisations": strongest,
         "uncovered_organisations": uncovered,
         "commercial_sector_coverage": sum(1 for org in strongest if org not in {"Ministry of Defence", "DWP", "Ministry of Justice"}),
@@ -310,7 +331,7 @@ def _latest_morning_stem(ctx: dict[str, Any]) -> str:
 def render_markdown(ctx: dict[str, Any]) -> str:
     lines = [f"# Flora Morning Edition — {ctx['publication_date']}", "", "**Confidential pilot preview.**", "", f"**Publication date:** {ctx['publication_date_label']}", f"**Version:** {ctx['version']}", f"**Reading time:** {ctx['reading_time']} minutes", f"**Generated:** {ctx['generated_timestamp']}", "", f"## {ctx['live_evidence_banner']}"]
     summary = ctx["live_coverage_summary"]
-    lines += ["", "### Live Evidence Coverage", f"- {summary['sources_attempted']} sources attempted", f"- {summary['sources_succeeded']} succeeded", f"- {summary['sources_produced_evidence']} produced evidence", f"- {summary['evidence_objects']} evidence objects", f"- Commercial-sector coverage: {summary.get('commercial_sector_coverage', 0)}", f"- Public-sector coverage: {summary.get('public_sector_coverage', 0)}", f"- Live evidence by sector: {summary.get('live_evidence_by_sector', {})}", f"- Strongest covered organisations: {', '.join(summary['strongest_covered_organisations']) or 'None'}", f"- Top uncovered organisations: {', '.join(summary.get('top_uncovered_organisations', [])) or 'None'}", f"- Uncovered organisations: {', '.join(summary['uncovered_organisations']) or 'None'}"]
+    lines += ["", "### Live Evidence Coverage", f"- {summary['sources_attempted']} sources attempted", f"- {summary['sources_succeeded']} succeeded", f"- {summary['sources_produced_evidence']} produced evidence", f"- {summary['evidence_objects']} evidence objects", f"- Commercial-sector coverage: {summary.get('commercial_sector_coverage', 0)}", f"- Public-sector coverage: {summary.get('public_sector_coverage', 0)}", f"- Organisations configured: {summary.get('organisations_configured', 0)}", f"- Organisations covered: {summary.get('organisations_covered', 0)}", f"- Organisations newly covered: {', '.join(summary.get('organisations_newly_covered', [])) or 'None'}", f"- Failed source count: {summary.get('failed_source_count', 0)}", f"- Source coverage health: {summary.get('source_coverage_health', 'unknown')}", f"- Highest-quality sources used: {summary.get('highest_quality_sources', [])}", f"- Uncovered priority organisations: {', '.join(summary.get('uncovered_priority_organisations', [])) or 'None'}", f"- Live evidence by sector: {summary.get('live_evidence_by_sector', {})}", f"- Strongest covered organisations: {', '.join(summary['strongest_covered_organisations']) or 'None'}", f"- Top uncovered organisations: {', '.join(summary.get('top_uncovered_organisations', [])) or 'None'}", f"- Uncovered organisations: {', '.join(summary['uncovered_organisations']) or 'None'}"]
     if ctx["live_evidence"]:
         lines += ["", "| Organisation | Source | URL | Snippet | Extracted | Condition | Missing evidence |", "| --- | --- | --- | --- | --- | --- | --- |"]
         lines += [f"| {e['organisation']} | {e['source_name']} | {e['source_url']} | {e['snippet']} | {e['extraction_timestamp']} | {e['commercial_condition']} | {'; '.join(e.get('missing_evidence', []))} |" for e in ctx["live_evidence"]]
