@@ -145,3 +145,51 @@ def test_cli_case_output_text_and_json() -> None:
     assert payload["organisation"] == "BT"
     assert payload["evidence"]
     assert payload["timeline"]
+
+from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
+from cios.applications.flora.workspace.views import case_page, landing_page
+
+
+def test_workspace_landing_page_renders() -> None:
+    html = landing_page()
+    assert "Good Morning Rob" in html
+    assert "What changed?" in html
+    assert "Watchlist" in html
+    assert "/case/ThamesWater" in html
+
+
+def test_workspace_case_file_page_renders_expected_sections() -> None:
+    html = case_page("BT")
+    for section in [
+        "Executive Summary",
+        "Commercial DNA View",
+        "Commercial Timeline",
+        "Evidence Ledger",
+        "Commercial Insights",
+        "Pressure Profile",
+        "AI Reinvention Assessment",
+        "Capability Heatmap",
+        "Competitive Context",
+        "Open Intelligence Questions",
+        "Recommended Actions",
+        "Explainability panel",
+    ]:
+        assert section in html
+
+
+def test_feedback_record_creation(tmp_path, monkeypatch) -> None:
+    monkeypatch.setenv("FLORA_PILOT_DIR", str(tmp_path))
+    record = create_feedback_record(organisation="BT", action_text="Run discovery", feedback_type="Useful", optional_comment="Clear", source_page="/case/BT")
+    assert record["feedback_id"].startswith("flora-feedback-")
+    stored = json.loads((tmp_path / "feedback.jsonl").read_text().strip())
+    assert stored["organisation"] == "BT"
+    assert stored["feedback_type"] == "Useful"
+
+
+def test_pilot_logbook_record_creation(tmp_path, monkeypatch) -> None:
+    monkeypatch.setenv("FLORA_PILOT_DIR", str(tmp_path))
+    record = create_logbook_record(biggest_insight="BT moved", biggest_miss="No sponsor", action_taken="Called account lead", flora_should_learn="Track sponsor gaps", value_score=5)
+    assert record["logbook_id"].startswith("flora-logbook-")
+    stored = json.loads((tmp_path / "logbook.jsonl").read_text().strip())
+    assert stored["flora_value_score"] == 5
+    assert stored["flora_should_learn"] == "Track sponsor gaps"
