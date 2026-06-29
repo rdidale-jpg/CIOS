@@ -5,6 +5,7 @@ from html import escape
 
 from cios.applications.flora.live.views import live_banner_html
 from cios.applications.flora.workspace.state import commercial_dna_context, watchlist_rows, workspace_context, case_context
+from cios.applications.flora.provider_context import default_provider_context
 from cios.applications.flora.publisher.morning_edition import build_publication_context
 
 
@@ -18,13 +19,14 @@ def landing_page() -> str:
     ctx = workspace_context(); pub = build_publication_context(); daily = ctx["daily"]; weekly = ctx["weekly"]
     top = "".join(f"<li><strong>{escape(w['organisation'])}</strong> — {escape(w['narrative'])} <span class='muted'>Sources: {w['source_count']}; evidence: {w['evidence_count']}; missing: {escape(', '.join(w['missing_evidence']))}</span></li>" for w in pub.get("why_matters", [])[:3])
     movers = "".join(f"<li>{escape(m.organisation)} <strong>+{m.score_change}</strong> to {m.current_score}</li>" for m in weekly.biggest_movers)
-    watch = "".join(f"<tr><td><a href='/case/{escape(r['organisation'].replace(' ', ''))}'>{escape(r['organisation'])}</a></td><td>{escape(r['sector'])}</td><td>{r['base_score']}</td><td>+{r['live_uplift']}</td><td>{r['final_score']}</td><td>{r['live_evidence_count']}</td><td>{r['unique_source_count']}</td></tr>" for r in pub["top_organisations"])
+    watch = "".join(f"<tr><td><a href='/case/{escape(r['organisation'].replace(' ', ''))}'>{escape(r['organisation'])}</a></td><td>{escape(r['sector'])}</td><td>{r['base_score']}</td><td><span class='pill'>{'Live uplift +' + str(r['live_uplift']) if r['live_uplift'] else 'Seeded fallback'}</span></td><td>{r['final_score']}</td><td>{r['live_evidence_count']}</td><td>{r['unique_source_count']}</td><td>{escape(', '.join(r.get('strongest_live_conditions', [])) or 'Seeded fallback')}</td><td>{escape(', '.join(r.get('strongest_live_capabilities', [])) or 'Seeded fallback')}</td></tr>" for r in pub["top_organisations"])
     body = f"""<section class='hero'><h1>Good Morning Rob</h1><p class='muted'>{escape(str(ctx['date_label']))} · Estimated reading time: {ctx['reading_time']} minutes</p><div class='grid'><div><div class='metric'>{ctx['new_evidence_count']}</div><p>{escape(str(ctx.get('new_evidence_label', 'new evidence items')))}</p></div><div><div class='metric'>{len(weekly.organisations_to_watch)}</div><p>organisations requiring attention</p></div><div><div class='metric'>{len(weekly.biggest_movers)}</div><p>biggest movers</p></div></div></section>
     {live_banner_html()}
     <section class='card'><h2>What changed?</h2><p>{'Live evidence uplift' if ctx.get('live_organisation_metrics') else 'Seeded fallback movement'}</p><ul>{movers}</ul></section>
-    <section class='card'><h2>Why does it matter?</h2><p>Top AI reinvention opportunities are ranked by deterministic commercial pressure, suitability, readiness, attractiveness and influence potential.</p><ul>{top}</ul></section>
+    <section class='card'><h2>Why does it matter?</h2><p>Top AI reinvention opportunities are ranked by deterministic commercial pressure, suitability, readiness, attractiveness and influence potential. {escape(str(pub.get("provider_relevance_note", "")))}</p><ul>{top}</ul></section>
     <section class='card action'><h2>What should I do?</h2><ol>{"".join(f"<li><strong>{escape(a['organisation'])}</strong> ({escape(a['time_required'])}, {escape(a['target_executive_or_function'])}): {escape(a['action'])} Proposition: {escape(a['proposition'])}. Missing: {escape(', '.join(a['missing_evidence']))}</li>" for a in pub["recommended_actions"][:3])}</ol></section>
-    <section class='card'><h2>Watchlist</h2><table><thead><tr><th>Organisation</th><th>Sector</th><th>Base Score</th><th>Live Uplift</th><th>Final Score</th><th>Live Evidence</th><th>Unique Sources</th></tr></thead><tbody>{watch}</tbody></table></section>"""
+    <section class='card'><h2>Watchlist</h2><p class='muted'>Sorted by final score, then live evidence count, then unique source count. Rows without live evidence are clearly labelled as seeded fallback.</p><table><thead><tr><th>Organisation</th><th>Sector</th><th>Base Score</th><th>Live Uplift</th><th>Final Score</th><th>Live Evidence</th><th>Unique Sources</th><th>Strongest Live Condition</th><th>Strongest Live Capability</th></tr></thead><tbody>{watch}</tbody></table></section>
+    <section class='card'><h2>Provider Context</h2><p><strong>Current provider:</strong> {escape(pub["provider_context"]["provider_name"])}</p><p><strong>Strategic offerings relevant to today’s evidence:</strong> {escape(", ".join(pub["provider_context"]["strategic_offerings"]))}</p><p><strong>Competitors to watch:</strong> {escape(", ".join(pub["provider_context"]["key_competitors"]))}</p><p><strong>Differentiation angles:</strong> {escape(", ".join(pub["provider_context"]["differentiators"]))}</p><p class='muted'>Provider context is configurable.</p></section>"""
     return _page("Flora Morning Edition", body)
 
 
@@ -65,6 +67,8 @@ def logbook_page(saved: bool = False) -> str:
 
 def settings_page() -> str:
     dna = commercial_dna_context()["dna"]
-    fields = [("employer", dna.employer), ("business unit", dna.business_unit), ("sectors", ", ".join(dna.sectors)), ("strategic offerings", ", ".join(dna.strategic_offerings)), ("competitors", ", ".join(dna.competitors)), ("differentiators", ", ".join(dna.differentiators)), ("reference clients", ", ".join(dna.reference_clients)), ("target geographies", ", ".join(dna.target_geographies))]
-    rows = "".join(f"<tr><th>{escape(k.title())}</th><td>{escape(v)}</td></tr>" for k, v in fields)
-    return _page("Commercial DNA", f"<section class='hero'><h1>Commercial DNA</h1><p>Read-only v0.3 pilot settings from seeded local configuration.</p></section><section class='card'><table>{rows}</table></section>")
+    provider = default_provider_context()
+    fields = [("provider_name", provider.provider_name), ("offerings", ", ".join(provider.strategic_offerings)), ("competitors", ", ".join(provider.key_competitors)), ("differentiators", ", ".join(provider.differentiators)), ("target sectors", ", ".join(provider.target_sectors)), ("commercial DNA employer", dna.employer), ("business unit", dna.business_unit), ("sectors", ", ".join(dna.sectors))]
+    rows = "".join(f"<tr><th>{escape(k)}</th><td>{escape(v)}</td></tr>" for k, v in fields)
+    form = "".join(f"<label>{escape(k)}</label><textarea readonly>{escape(v)}</textarea>" for k, v in fields[:5])
+    return _page("Settings", f"<section class='hero'><h1>Settings</h1><p>Provider context is configurable. This local pilot renders default IBM context; fields are shown read-only for deterministic local execution.</p></section><section class='card'><h2>Provider Context</h2><table>{rows}</table></section><section class='card'><h2>Local edit preview</h2><form>{form}<p><button type='button'>Local editing placeholder</button></p></form></section>")
