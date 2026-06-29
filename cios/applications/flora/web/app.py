@@ -11,9 +11,9 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlparse
 
 from cios.applications.flora.live.collect import collect, current_status
-from cios.applications.flora.live.views import collection_result, dashboard, evidence_page, sources_page
+from cios.applications.flora.live.views import collection_result, dashboard, evidence_page, source_effectiveness_page, sources_page
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
-from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, settings_page
+from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, settings_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -56,8 +56,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._json(current_status())
             elif parsed.path == "/live/sources":
                 self._html(sources_page())
+            elif parsed.path == "/live/source-effectiveness":
+                self._html(source_effectiveness_page())
             elif parsed.path == "/live/evidence":
                 self._html(evidence_page())
+            elif parsed.path == "/radar":
+                self._html(radar_page())
             elif parsed.path == "/settings":
                 self._html(settings_page())
             elif parsed.path == "/logbook":
@@ -122,7 +126,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/live/status"}:
         return "application/json"
-    if path in {"/", "/settings", "/logbook", "/live", "/live/collect", "/live/evidence", "/live/sources"}:
+    if path in {"/", "/radar", "/settings", "/logbook", "/live", "/live/collect", "/live/evidence", "/live/sources", "/live/source-effectiveness"}:
         return "text/html; charset=utf-8"
     if path.startswith("/case/") and path.removeprefix("/case/") in CASE_SLUGS:
         return "text/html; charset=utf-8"
