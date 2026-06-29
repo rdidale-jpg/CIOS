@@ -268,3 +268,29 @@ def test_pilot_logbook_record_creation(tmp_path, monkeypatch) -> None:
     stored = json.loads((tmp_path / "logbook.jsonl").read_text().strip())
     assert stored["flora_value_score"] == 5
     assert stored["flora_should_learn"] == "Track sponsor gaps"
+
+from cios.applications.flora.publisher.morning_edition import generate_morning_edition
+
+
+def test_publisher_generates_pdf_html_manifest_and_index(tmp_path) -> None:
+    paths = generate_morning_edition(tmp_path)
+    assert paths["pdf"].is_file()
+    assert paths["pdf"].stat().st_size > 1000
+    assert paths["html"].is_file()
+    assert "Executive Summary" in paths["html"].read_text(encoding="utf-8")
+    manifest = json.loads(paths["manifest"].read_text(encoding="utf-8"))
+    assert manifest["product"] == "Flora Publisher"
+    assert manifest["edition"] == "Morning Edition"
+    assert manifest["case_files"]
+    assert manifest["conditions"]
+    index = paths["index"].read_text(encoding="utf-8")
+    assert paths["pdf"].name in index
+    assert paths["html"].name in index
+
+
+def test_publisher_preserves_existing_flora_brief_compatibility(tmp_path) -> None:
+    before = generate_daily_brief()
+    generate_morning_edition(tmp_path)
+    after = generate_daily_brief()
+    assert after == before
+    assert before.items[0].assessment is not None
