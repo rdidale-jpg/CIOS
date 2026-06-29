@@ -13,6 +13,7 @@ from cios.applications.flora.intelligence.evidence_engine import get_seed_eviden
 from cios.applications.flora.pipeline import generate_daily_brief, generate_weekly_brief
 from cios.applications.flora.publisher.html_renderer import write_html
 from cios.applications.flora.publisher.pdf_renderer import render_pdf
+from cios.applications.flora.live.collect import current_status
 from cios.applications.flora.live.store import DEFAULT_PATH, load_evidence_fingerprints, read_jsonl
 
 VERSION = "0.2"
@@ -193,11 +194,29 @@ def build_publication_context(publication_date: date | None = None) -> dict[str,
         "This edition should be judged on structure, reasoning and usefulness — not real-world freshness.",
     ]
 
+
+    coverage_status = current_status()
+    diagnostics = coverage_status.get("diagnostics", [])
+    evidence_by_org: dict[str, int] = {}
+    for diag in diagnostics:
+        evidence_by_org[diag.get("organisation", "Unknown")] = evidence_by_org.get(diag.get("organisation", "Unknown"), 0) + int(diag.get("evidence_count", 0) or 0)
+    strongest = [org for org, count in sorted(evidence_by_org.items(), key=lambda item: item[1], reverse=True) if count > 0][:5]
+    attempted_orgs = {diag.get("organisation") for diag in diagnostics}
+    uncovered = sorted(org for org in attempted_orgs if evidence_by_org.get(org, 0) == 0)
+    live_coverage_summary = {
+        "sources_attempted": coverage_status.get("sources_attempted", 0),
+        "sources_succeeded": coverage_status.get("sources_succeeded", 0),
+        "sources_produced_evidence": coverage_status.get("sources_with_evidence", 0),
+        "evidence_objects": coverage_status.get("total_unique_evidence_objects", 0),
+        "strongest_covered_organisations": strongest,
+        "uncovered_organisations": uncovered,
+    }
+
     live_sources = len({e.get("source_id") or e.get("source_name") for e in live_evidence})
     live_unique = len(load_evidence_fingerprints(DEFAULT_PATH)) if live_evidence else 0
     live_banner = f"LIVE EVIDENCE USED — {live_unique} unique evidence objects from {live_sources} sources" if live_evidence else "NO LIVE EVIDENCE AVAILABLE — use /live/collect to attempt collection"
 
-    return {"product": "Flora Publisher", "edition": "Morning Edition", "version": VERSION, "publication_date": publication_date.isoformat(), "publication_date_label": publication_date.strftime("%A %d %B %Y"), "generated_timestamp": datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC"), "live_evidence_banner": live_banner, "live_evidence": live_evidence[:12], "reading_time": _reading_time(len(daily.items), evidence_count), "executive_summary": executive_summary, "what_changed": what_changed, "priority_opportunity": priority_opportunity, "top_organisations": top_orgs, "conditions": conditions, "movements": movements, "competitive_intelligence": competitive, "recommended_actions": recommended_actions, "three_things_today": today, "cannot_know": cannot_know, "teach_flora": {"Biggest Insight": "", "Biggest Surprise": "", "Action Taken": "", "What Flora Should Learn": "", "Flora Value Score (0–5)": ""}, "case_files": sorted({display_name(ev.organisation) for ev in evidence}), "playbooks": sorted({pb for item in daily.items if item.assessment for pb in item.assessment.supporting_playbooks}), "commercial_laws": ["Validate sponsor", "Validate funding", "Validate timing", "Validate incumbent and competitor activity"], "known_limitations": ["Live evidence limited to configured public HTML source pages", "PDF ingestion not implemented", "No LLMs", "No databases", "No broad crawling", "Pilot placeholders remain blank on Teach Flora page"]}
+    return {"product": "Flora Publisher", "edition": "Morning Edition", "version": VERSION, "publication_date": publication_date.isoformat(), "publication_date_label": publication_date.strftime("%A %d %B %Y"), "generated_timestamp": datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC"), "live_evidence_banner": live_banner, "live_evidence": live_evidence[:12], "live_coverage_summary": live_coverage_summary, "reading_time": _reading_time(len(daily.items), evidence_count), "executive_summary": executive_summary, "what_changed": what_changed, "priority_opportunity": priority_opportunity, "top_organisations": top_orgs, "conditions": conditions, "movements": movements, "competitive_intelligence": competitive, "recommended_actions": recommended_actions, "three_things_today": today, "cannot_know": cannot_know, "teach_flora": {"Biggest Insight": "", "Biggest Surprise": "", "Action Taken": "", "What Flora Should Learn": "", "Flora Value Score (0–5)": ""}, "case_files": sorted({display_name(ev.organisation) for ev in evidence}), "playbooks": sorted({pb for item in daily.items if item.assessment for pb in item.assessment.supporting_playbooks}), "commercial_laws": ["Validate sponsor", "Validate funding", "Validate timing", "Validate incumbent and competitor activity"], "known_limitations": ["Live evidence limited to configured public HTML source pages", "PDF ingestion not implemented", "No LLMs", "No databases", "No broad crawling", "Pilot placeholders remain blank on Teach Flora page"]}
 
 
 def _latest_morning_stem(ctx: dict[str, Any]) -> str:
@@ -206,6 +225,8 @@ def _latest_morning_stem(ctx: dict[str, Any]) -> str:
 
 def render_markdown(ctx: dict[str, Any]) -> str:
     lines = [f"# Flora Morning Edition — {ctx['publication_date']}", "", "**Confidential pilot preview.**", "", f"**Publication date:** {ctx['publication_date_label']}", f"**Version:** {ctx['version']}", f"**Reading time:** {ctx['reading_time']} minutes", f"**Generated:** {ctx['generated_timestamp']}", "", f"## {ctx['live_evidence_banner']}"]
+    summary = ctx["live_coverage_summary"]
+    lines += ["", "### Live Evidence Coverage", f"- {summary['sources_attempted']} sources attempted", f"- {summary['sources_succeeded']} succeeded", f"- {summary['sources_produced_evidence']} produced evidence", f"- {summary['evidence_objects']} evidence objects", f"- Strongest covered organisations: {', '.join(summary['strongest_covered_organisations']) or 'None'}", f"- Uncovered organisations: {', '.join(summary['uncovered_organisations']) or 'None'}"]
     if ctx["live_evidence"]:
         lines += ["", "| Organisation | Source | URL | Snippet | Extracted | Condition | Missing evidence |", "| --- | --- | --- | --- | --- | --- | --- |"]
         lines += [f"| {e['organisation']} | {e['source_name']} | {e['source_url']} | {e['snippet']} | {e['extraction_timestamp']} | {e['commercial_condition']} | {'; '.join(e['missing_evidence'])} |" for e in ctx["live_evidence"]]

@@ -103,3 +103,13 @@ def test_homepage_morning_edition_live_banner(monkeypatch, tmp_path) -> None:
     status, _, body = _get("/")
     assert status == 200
     assert "NO LIVE EVIDENCE AVAILABLE" in body.decode("utf-8")
+
+
+def test_live_sources_route(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    status, content_type, body = _get("/live/sources")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert content_type == "text/html; charset=utf-8"
+    assert "Live source coverage" in html
+    assert "Recommended action" in html
