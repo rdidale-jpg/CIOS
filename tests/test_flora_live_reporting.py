@@ -122,3 +122,44 @@ def test_public_sector_evidence_maps_to_public_sector_conditions() -> None:
     assert interpret_keyword("service transformation")[0] == "Citizen Experience"
     assert interpret_keyword("cyber")[0] == "Cyber Resilience"
     assert interpret_keyword("procurement")[0] == "Procurement Readiness"
+
+
+def test_watchlist_displays_live_uplift_and_provider_context(monkeypatch, tmp_path) -> None:
+    from cios.applications.flora.publisher import morning_edition
+    from cios.applications.flora.publisher.morning_edition import render_markdown
+    from cios.applications.flora.workspace import views as workspace_views
+    from cios.applications.flora.workspace.views import landing_page, settings_page
+
+    monkeypatch.setattr(morning_edition, "read_jsonl", lambda *args, **kwargs: _evidence("BT", 2))
+    ctx = morning_edition.build_publication_context()
+    monkeypatch.setattr(workspace_views, "build_publication_context", lambda: ctx)
+    html = landing_page()
+    settings = settings_page()
+    markdown = render_markdown(ctx)
+
+    assert ctx["provider_context"]["provider_name"] == "IBM"
+    assert any(row["organisation"] == "BT" and row["live_uplift"] > 0 for row in ctx["top_organisations"])
+    assert "Live uplift +" in html
+    assert "Provider Context" in html
+    assert "Current provider:</strong> IBM" in html
+    assert "provider_name" in settings and "IBM" in settings
+    assert "Provider Context" in markdown
+
+
+def test_expanded_target_organisations_and_public_sector_sources_exist() -> None:
+    from cios.applications.flora.live.source_registry import enabled_sources
+    from cios.applications.flora.seed_data import sample_watchlist
+
+    watchlist = {account.organisation_name for account in sample_watchlist()}
+    expected = {
+        "Severn Trent", "Southern Water", "Yorkshire Water", "Anglian Water", "Northumbrian Water",
+        "Centrica", "EDF Energy UK", "Octopus Energy", "ScottishPower", "E.ON UK",
+        "Virgin Media O2", "TalkTalk", "Three UK", "Openreach",
+        "ITV", "Channel 4", "Channel 5 / Paramount UK", "The Guardian", "News UK",
+        "Premier League", "The Football Association", "England and Wales Cricket Board", "Rugby Football Union", "Wimbledon / AELTC",
+        "HMRC", "DEFRA", "Department of Health and Social Care", "NHS England", "Home Office", "Cabinet Office", "Department for Education", "Department for Transport",
+    }
+    assert expected.issubset(watchlist)
+    assert {"HMRC", "DEFRA", "Department of Health and Social Care"}.issubset(watchlist)
+    sources = {source.organisation for source in enabled_sources()}
+    assert expected.issubset(sources)
