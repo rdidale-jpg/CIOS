@@ -1,0 +1,183 @@
+metadata:
+  identifier: CIOS-CBOK-STD-000
+  title: Commercial Ontology Meta-Model
+  version: 1.0.0
+  status: Approved
+  owner: CIOS Knowledge Governance
+  last_reviewed: 2026-06-29
+  governs:
+    - Enterprise Domain
+    - Human Domain
+    - Market Domain
+    - Capability Domain
+    - Decision Domain
+    - Knowledge Domain
+    - Change Domain
+  human_readable_standard: CBOK-STD-000_Commercial_Ontology_Meta_Model_v1.0.0.md
+
+primitive_types:
+  - identifier: ontology.primitive.entity
+    name: Entity
+    definition: A commercially meaningful object, actor, structure or thing that can be identified.
+    purpose: Represents stable domain concepts and graph nodes.
+    examples: [Enterprise, Capability, Person, Market Segment]
+    allowed_properties: [identifier, canonical_name, definition, domain, parent, attributes, relationships, states, behaviours, constraints, evidence]
+    mapping_notes: Maps primarily to SDK models and knowledge graph nodes.
+  - identifier: ontology.primitive.relationship
+    name: Relationship
+    definition: A governed connection between ontology primitives.
+    purpose: Represents semantic links and graph edges.
+    examples: [owns, depends_on, governs, measures]
+    allowed_properties: [identifier, name, definition, category, source_types, target_types, direction, multiplicity, constraints, evidence]
+    mapping_notes: Maps to graph edge labels and SDK relationship structures.
+  - identifier: ontology.primitive.attribute
+    name: Attribute
+    definition: A governed property of a primitive that is not better represented as a relationship.
+    purpose: Captures intrinsic identity, descriptive, classification, quantitative, temporal and governance data.
+    examples: [canonical_name, status, confidence_level, effective_date]
+    allowed_properties: [identifier, name, definition, category, data_type, cardinality, required, allowed_values, provenance, sensitivity]
+    mapping_notes: Maps to SDK fields and graph node or edge properties.
+  - identifier: ontology.primitive.behaviour
+    name: Behaviour
+    definition: A conceptual action, capability or response associated with a primitive.
+    purpose: Describes domain behaviour without implementing runtime logic.
+    examples: [approves, allocates, transforms, evaluates]
+    allowed_properties: [identifier, name, definition, trigger, actor, input, output, side_effect, evidence, related_relationships]
+    mapping_notes: May map to SDK methods or workflows only through engineering standards.
+  - identifier: ontology.primitive.state
+    name: State
+    definition: A governed condition, lifecycle stage or status of a primitive or relationship.
+    purpose: Captures lifecycle, maturity, confidence, governance and operational positions.
+    examples: [candidate, approved, deprecated, active, inactive]
+    allowed_properties: [identifier, name, definition, category, allowed_values, transition_rules, evidence_required]
+    mapping_notes: Maps to controlled SDK enums or graph properties when approved.
+  - identifier: ontology.primitive.constraint
+    name: Constraint
+    definition: A rule limiting valid ontology structures, values or transitions.
+    purpose: Defines invariants, multiplicity, compatibility and validation gates.
+    examples: [one_primary_parent, stable_identifier, governed_relationship_label]
+    allowed_properties: [identifier, name, definition, category, applies_to, rule, severity, evidence, validation_note]
+    mapping_notes: Maps to schema validation, SDK validators or graph quality checks.
+  - identifier: ontology.primitive.event
+    name: Event
+    definition: A significant occurrence that changes state, evidence or relationships.
+    purpose: Records changes, decisions, approvals, incidents and observations.
+    examples: [concept_approved, relationship_deprecated, evidence_added]
+    allowed_properties: [identifier, name, definition, occurred_at, actor, affected_artefacts, evidence, outcome]
+    mapping_notes: Maps to audit records, graph event nodes or provenance logs.
+  - identifier: ontology.primitive.evidence
+    name: Evidence
+    definition: A traceable support, source, observation or review record.
+    purpose: Justifies definitions, states, constraints and mappings.
+    examples: [standard_reference, review_decision, validation_report, operational_example]
+    allowed_properties: [identifier, title, source, evidence_type, confidence, date, owner, limitations, linked_artefacts]
+    mapping_notes: Maps to provenance metadata and evidence nodes or references.
+  - identifier: ontology.primitive.measure
+    name: Measure
+    definition: A quantified observation, score or indicator.
+    purpose: Represents commercial quantities, performance indicators, confidence scores and maturity measures.
+    examples: [risk_score, confidence_score, value_metric, maturity_level]
+    allowed_properties: [identifier, name, definition, unit, scale, method, value_type, evidence, interpretation]
+    mapping_notes: Maps to typed numeric fields, metric records or graph properties.
+  - identifier: ontology.primitive.role
+    name: Role
+    definition: A responsibility or participation pattern held by an entity in a context.
+    purpose: Represents owners, reviewers, decision makers, actors and participants.
+    examples: [concept_owner, reviewer, decision_actor, accountable_party]
+    allowed_properties: [identifier, name, definition, context, holder_type, responsibilities, permissions, evidence]
+    mapping_notes: Maps to role edges, access metadata or accountable-party fields.
+
+design_principles:
+  - identifier: ODP-001
+    statement: One canonical definition per concept.
+  - identifier: ODP-002
+    statement: Stable identifiers.
+  - identifier: ODP-003
+    statement: One primary parent unless explicitly justified.
+  - identifier: ODP-004
+    statement: Relationships are first-class objects.
+  - identifier: ODP-005
+    statement: Definitions are implementation independent.
+  - identifier: ODP-006
+    statement: Concepts are stable; implementations evolve.
+  - identifier: ODP-007
+    statement: Behaviour belongs to concepts; logic belongs to engineering.
+  - identifier: ODP-008
+    statement: Machine-readable and human-readable versions must remain aligned.
+  - identifier: ODP-009
+    statement: New commercial concepts require CBOK approval before engineering implementation.
+  - identifier: ODP-010
+    statement: Every concept shall be traceable to evidence, standards and implementation.
+
+relationship_types:
+  - Structural
+  - Ownership
+  - Dependency
+  - Governance
+  - Behavioural
+  - Commercial
+  - Knowledge
+  - Temporal
+  - Measurement
+
+attribute_types:
+  - Identity attributes
+  - Descriptive attributes
+  - Classification attributes
+  - Quantitative attributes
+  - Temporal attributes
+  - Evidence attributes
+  - Confidence attributes
+  - Governance attributes
+  - Implementation attributes
+
+state_types:
+  - Lifecycle states
+  - Maturity states
+  - Confidence states
+  - Governance states
+  - Operational states
+  - Relationship states
+
+behaviour_types:
+  - definition
+  - trigger
+  - actor
+  - input
+  - output
+  - side_effect
+  - evidence
+  - related_relationships
+  - engineering_mapping
+
+constraint_types:
+  - Identity constraint
+  - Cardinality constraint
+  - Type constraint
+  - Value constraint
+  - Transition constraint
+  - Evidence constraint
+  - Governance constraint
+  - Mapping constraint
+
+evidence_requirements:
+  required_fields: [identifier, source, evidence_type, confidence, owner, date]
+  required_for:
+    - concept_approval
+    - state_transition
+    - relationship_approval
+    - SDK_mapping
+    - knowledge_graph_mapping
+  notes: Evidence shall be proportionate to ontology maturity, risk and downstream impact.
+
+conformance_rules:
+  - identifier: CONF-001
+    rule: Domain ontologies shall use the primitive types defined by CBOK-STD-000.
+  - identifier: CONF-002
+    rule: Human-readable and machine-readable definitions shall remain aligned.
+  - identifier: CONF-003
+    rule: SDK and knowledge graph implementations shall preserve governed CBOK identifiers.
+  - identifier: CONF-004
+    rule: New commercial concepts require CBOK approval before engineering implementation.
+  - identifier: CONF-005
+    rule: Relationships, attributes, states, behaviours and constraints shall use governed taxonomy categories.

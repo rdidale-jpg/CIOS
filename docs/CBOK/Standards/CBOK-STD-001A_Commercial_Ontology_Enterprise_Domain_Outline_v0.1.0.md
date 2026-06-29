@@ -24,6 +24,10 @@ The purpose of this document is to guide consistent development of enterprise on
 
 This outline covers enterprise structure, governance, capability, resources, strategy, risk and performance. It establishes authoring approach, evidence expectations and engineering traceability. It excludes detailed concept definitions, runtime behaviours and SDK implementation.
 
+## Relationship to CBOK-STD-000
+
+The Enterprise Domain standard shall conform to [CBOK-STD-000 Commercial Ontology Meta-Model](CBOK-STD-000_Commercial_Ontology_Meta_Model_v1.0.0.md). Enterprise concepts, relationships, attributes, states, behaviours and constraints shall use the primitive types, taxonomy rules and machine-readable representation expectations defined by CBOK-STD-000.
+
 ## Relationship to CBOK-SCI-001
 
 This outline applies [CBOK-SCI-001](../Science/CBOK-SCI-001_Scientific_Knowledge_Framework_v1.0.0.md) by treating ontology definitions as governed knowledge artefacts. Future concept specifications shall identify knowledge classification, evidence type, scientific confidence, operational confidence and lifecycle status.

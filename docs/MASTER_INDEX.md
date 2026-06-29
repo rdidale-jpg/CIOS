@@ -29,6 +29,14 @@ This index is the authoritative catalogue for controlled CIOS Knowledge Library 
 | CIOS-CBOK-STD-TRACE | CBOK Traceability Standard | Draft | 0.1.0 | `docs/CBOK/TRACEABILITY_STANDARD.md` |
 | CIOS-CBOK-STD-REVIEW | CBOK Review Process | Draft | 0.1.0 | `docs/CBOK/REVIEW_PROCESS.md` |
 | CIOS-CBOK-SCI-001 | Scientific Knowledge Framework | Approved | 1.0.0 | `docs/CBOK/Science/CBOK-SCI-001_Scientific_Knowledge_Framework_v1.0.0.md` |
+| CIOS-CBOK-STD-000 | Commercial Ontology Meta-Model | Approved | 1.0.0 | `docs/CBOK/Standards/CBOK-STD-000_Commercial_Ontology_Meta_Model_v1.0.0.md` |
+| CIOS-CBOK-STD-000-YAML | Commercial Ontology Meta-Model YAML | Approved | 1.0.0 | `docs/CBOK/Standards/commercial_ontology_meta_model.yaml` |
+| CIOS-CBOK-STD-000-ODP | Ontology Design Principles | Approved | 1.0.0 | `docs/CBOK/Standards/ontology_design_principles.md` |
+| CIOS-CBOK-STD-000-TAX | Ontology Taxonomy Rules | Approved | 1.0.0 | `docs/CBOK/Standards/ontology_taxonomy_rules.md` |
+| CIOS-CBOK-STD-000-REL | Ontology Relationship Taxonomy | Approved | 1.0.0 | `docs/CBOK/Standards/ontology_relationship_taxonomy.md` |
+| CIOS-CBOK-STD-000-ATTR | Ontology Attribute Taxonomy | Approved | 1.0.0 | `docs/CBOK/Standards/ontology_attribute_taxonomy.md` |
+| CIOS-CBOK-STD-000-STATE | Ontology State Taxonomy | Approved | 1.0.0 | `docs/CBOK/Standards/ontology_state_taxonomy.md` |
+| CIOS-CBOK-STD-000-BEH | Ontology Behaviour Taxonomy | Approved | 1.0.0 | `docs/CBOK/Standards/ontology_behaviour_taxonomy.md` |
 | CIOS-CBOK-STD-001A | Commercial Ontology Enterprise Domain Outline | Draft | 0.1.0 | `docs/CBOK/Standards/CBOK-STD-001A_Commercial_Ontology_Enterprise_Domain_Outline_v0.1.0.md` |
 | CIOS-CBOK-SCI-001-CLASS | Knowledge Classification | Approved | 1.0.0 | `docs/CBOK/Science/KNOWLEDGE_CLASSIFICATION.md` |
 | CIOS-CBOK-SCI-001-EVIDENCE | Evidence Hierarchy | Approved | 1.0.0 | `docs/CBOK/Science/EVIDENCE_HIERARCHY.md` |

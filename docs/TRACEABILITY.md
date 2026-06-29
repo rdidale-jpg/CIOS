@@ -89,7 +89,9 @@ This chain ensures that operational findings can be traced back to the scientifi
 Ontology work extends CIOS traceability through governed concept meaning and implementation artefacts:
 
 ```text
-CBOK ontology concept
+CBOK ontology meta-model
+    ↓
+Domain ontology standard
     ↓
 Machine-readable ontology
     ↓
@@ -102,4 +104,4 @@ Application artefact
 Evidence / reasoning output
 ```
 
-This chain ensures that commercial concept meaning remains aligned from CBOK standards through ontology files, SDK implementation, graph representation, application use and reasoning evidence.
+This chain ensures that commercial ontology grammar, domain concept meaning and implementation artefacts remain aligned from CBOK standards through ontology files, SDK implementation, graph representation, application use and reasoning evidence.

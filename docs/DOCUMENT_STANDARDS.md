@@ -89,4 +89,4 @@ CBOK-SCI-001 is the governing framework for scientific knowledge in the Commerci
 
 ## Ontology Standards
 
-Ontology standards must comply with [CIOS-ENG-005 Ontology Engineering Standard](Engineering/CIOS-ENG-005_Ontology_Engineering_Standard_v1.0.0.md). Ontology documents shall keep CBOK meaning, machine-readable ontology representations, SDK mappings and knowledge graph mappings aligned.
+Ontology standards must comply with [CBOK-STD-000 Commercial Ontology Meta-Model](CBOK/Standards/CBOK-STD-000_Commercial_Ontology_Meta_Model_v1.0.0.md) and [CIOS-ENG-005 Ontology Engineering Standard](Engineering/CIOS-ENG-005_Ontology_Engineering_Standard_v1.0.0.md). CBOK-STD-000 defines the ontology grammar and primitive types; CIOS-ENG-005 governs engineering representation. Ontology documents shall keep CBOK meaning, machine-readable ontology representations, SDK mappings and knowledge graph mappings aligned.
