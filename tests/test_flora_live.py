@@ -61,7 +61,7 @@ def test_live_evidence_jsonl_writing(tmp_path: Path) -> None:
 def test_morning_edition_live_and_fallback_banner(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
     fallback = render_markdown(build_publication_context())
-    assert "NO LIVE EVIDENCE AVAILABLE — FALLING BACK TO SEEDED PILOT EVIDENCE" in fallback
+    assert "NO LIVE EVIDENCE AVAILABLE — use /live/collect to attempt collection" in fallback
     write_jsonl([{
         "evidence_id": "LIVE-1", "organisation": "BT", "source_name": "BT newsroom", "source_url": "https://newsroom.bt.com/", "source_type": "company_newsroom", "snippet": "BT mentions AI for network operations.", "extraction_timestamp": "2026-06-29T00:00:00+00:00", "commercial_condition": "AI Modernisation", "missing_evidence": ["budget"], "evidence_tier": "tier_1_company",
     }])
@@ -82,3 +82,41 @@ def test_no_llm_or_database_imports_in_flora() -> None:
             else:
                 continue
             assert forbidden.isdisjoint(imported), f"{path} imports {forbidden & imported}"
+
+
+def test_source_diagnostics_are_written(tmp_path: Path, monkeypatch) -> None:
+    from cios.applications.flora.live import collect as collect_module
+    from cios.applications.flora.live.store import DEFAULT_DIAGNOSTICS_PATH, read_jsonl
+
+    class DummyResult:
+        succeeded = False
+        status_code = 403
+        html = ""
+        error = "HTTP 403: Forbidden"
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(collect_module, "fetch_html", lambda url: DummyResult())
+    result = collect_module.collect("BT")
+    diagnostics = read_jsonl(DEFAULT_DIAGNOSTICS_PATH)
+    assert result["sources_failed"] == 3
+    assert diagnostics
+    assert diagnostics[0]["source_id"]
+    assert diagnostics[0]["success"] is False
+    assert diagnostics[0]["http_status"] == 403
+
+
+def test_collection_failures_display_clearly(tmp_path: Path, monkeypatch) -> None:
+    from cios.applications.flora.live import collect as collect_module
+    from cios.applications.flora.live.views import collection_result
+
+    class DummyResult:
+        succeeded = False
+        status_code = None
+        html = ""
+        error = "tunnel 403"
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(collect_module, "fetch_html", lambda url: DummyResult())
+    html = collection_result(collect_module.collect("BT"))
+    assert "failed 3" in html
+    assert "tunnel 403" in html

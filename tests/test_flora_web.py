@@ -68,3 +68,38 @@ def test_publisher_command_still_works(tmp_path, monkeypatch) -> None:
     monkeypatch.setenv("FLORA_PILOT_DIR", str(tmp_path))
     result = subprocess.run([sys.executable, "-m", "cios.applications.flora.publisher.morning_edition"], check=True, text=True, capture_output=True)
     assert "Flora Morning Edition generated" in result.stdout
+
+
+def test_live_dashboard_renders(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    status, content_type, body = _get("/live")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert content_type == "text/html; charset=utf-8"
+    assert "Flora Live Evidence" in html
+    assert "Sources attempted" in html
+
+
+def test_live_status_returns_json(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    status, content_type, body = _get("/live/status")
+    payload = json.loads(body.decode("utf-8"))
+    assert status == 200
+    assert content_type == "application/json"
+    assert payload["evidence_objects_collected"] == 0
+
+
+def test_live_evidence_empty_state(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    status, _, body = _get("/live/evidence")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "No live evidence available" in html
+    assert "/live/collect" in html
+
+
+def test_homepage_morning_edition_live_banner(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    status, _, body = _get("/")
+    assert status == 200
+    assert "NO LIVE EVIDENCE AVAILABLE" in body.decode("utf-8")

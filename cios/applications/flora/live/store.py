@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 DEFAULT_PATH = Path(".flora_pilot/live_evidence/live_evidence.jsonl")
+DEFAULT_DIAGNOSTICS_PATH = Path(".flora_pilot/live_evidence/source_diagnostics.jsonl")
 
 
 def write_jsonl(items: list[dict[str, Any]], path: Path = DEFAULT_PATH) -> Path:
