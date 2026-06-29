@@ -14,6 +14,18 @@ PORT = 8000
 class FloraWorkspaceHandler(BaseHTTPRequestHandler):
     """Small standard-library HTTP handler for local pilot use."""
 
+    def do_HEAD(self) -> None:  # noqa: N802 - stdlib callback name
+        parsed = urlparse(self.path)
+        try:
+            if parsed.path in {"/", "/logbook", "/settings"} or parsed.path.startswith("/case/"):
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.end_headers()
+            else:
+                self.send_error(404, "Flora workspace route not found")
+        except ValueError as exc:
+            self.send_error(404, str(exc))
+
     def do_GET(self) -> None:  # noqa: N802 - stdlib callback name
         parsed = urlparse(self.path)
         try:
