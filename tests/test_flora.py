@@ -1,0 +1,79 @@
+"""Tests for Flora v0.1."""
+
+from __future__ import annotations
+
+import ast
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+from cios.applications.flora.models import CommercialDNA, Priority, Signal, TargetAccount
+from cios.applications.flora.pipeline import generate_daily_brief
+from cios.applications.flora.scoring import calculate_scores
+from cios.applications.flora.seed_data import sample_commercial_dna, sample_signals, sample_watchlist
+
+
+def test_commercial_dna_model_construction() -> None:
+    dna = sample_commercial_dna()
+    assert isinstance(dna, CommercialDNA)
+    assert "Telecommunications" in dna.sectors
+    assert "Accenture" in dna.competitors
+
+
+def test_watchlist_model_construction() -> None:
+    watchlist = sample_watchlist()
+    assert any(account.organisation_name == "Thames Water" for account in watchlist)
+    assert watchlist[0].priority is Priority.HIGH
+
+
+def test_signal_model_construction() -> None:
+    signal = sample_signals()[0]
+    assert isinstance(signal, Signal)
+    assert signal.signal_id.startswith("FLORA-SIG-")
+    assert signal.related_capabilities
+
+
+def test_deterministic_scoring() -> None:
+    dna = sample_commercial_dna()
+    account = sample_watchlist()[0]
+    signals = [signal for signal in sample_signals() if signal.organisation == account.organisation_name]
+    first = calculate_scores(account, signals, dna)
+    second = calculate_scores(account, signals, dna)
+    assert first == second
+    assert first.ai_reinvention_opportunity_score > 0
+
+
+def test_daily_briefing_generation() -> None:
+    brief = generate_daily_brief()
+    assert brief.title == "Flora Daily Intelligence Brief"
+    assert len(brief.items) == 5
+    assert brief.items[0].rank == 1
+    assert brief.items[0].strongest_detected_signals
+
+
+def test_json_output_shape() -> None:
+    payload = json.loads(generate_daily_brief().model_dump_json())
+    assert payload["version"] == "0.1"
+    assert payload["items"][0]["scores"]["ai_reinvention_opportunity_score"] >= 0
+
+
+def test_cli_execution_text_and_json() -> None:
+    text = subprocess.run([sys.executable, "-m", "cios.applications.flora.main"], check=True, text=True, capture_output=True)
+    assert "Flora Daily Intelligence Brief" in text.stdout
+    structured = subprocess.run([sys.executable, "-m", "cios.applications.flora.main", "--json"], check=True, text=True, capture_output=True)
+    assert json.loads(structured.stdout)["items"]
+
+
+def test_no_forbidden_imports() -> None:
+    forbidden = {"openai", "requests", "httpx", "sqlalchemy", "sqlite", "sqlite3", "pymongo"}
+    for path in Path("cios/applications/flora").glob("*.py"):
+        tree = ast.parse(path.read_text())
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                imported = {alias.name.split(".")[0] for alias in node.names}
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                imported = {node.module.split(".")[0]}
+            else:
+                continue
+            assert forbidden.isdisjoint(imported), f"{path} imports {forbidden & imported}"
