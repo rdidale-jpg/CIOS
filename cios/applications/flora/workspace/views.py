@@ -5,6 +5,7 @@ from html import escape
 
 from cios.applications.flora.live.views import live_banner_html
 from cios.applications.flora.workspace.state import commercial_dna_context, watchlist_rows, workspace_context, case_context
+from cios.applications.flora.publisher.morning_edition import build_publication_context
 
 
 def _page(title: str, body: str) -> str:
@@ -14,16 +15,16 @@ def _page(title: str, body: str) -> str:
 
 
 def landing_page() -> str:
-    ctx = workspace_context(); daily = ctx["daily"]; weekly = ctx["weekly"]
-    top = "".join(f"<li><a href='/case/{escape(item.organisation.replace(' ', ''))}'>{escape(item.organisation)}</a> — {item.scores.ai_reinvention_opportunity_score}: {escape(item.why_interesting)}</li>" for item in daily.items[:3])
+    ctx = workspace_context(); pub = build_publication_context(); daily = ctx["daily"]; weekly = ctx["weekly"]
+    top = "".join(f"<li><strong>{escape(w['organisation'])}</strong> — {escape(w['narrative'])} <span class='muted'>Sources: {w['source_count']}; evidence: {w['evidence_count']}; missing: {escape(', '.join(w['missing_evidence']))}</span></li>" for w in pub.get("why_matters", [])[:3])
     movers = "".join(f"<li>{escape(m.organisation)} <strong>+{m.score_change}</strong> to {m.current_score}</li>" for m in weekly.biggest_movers)
-    watch = "".join(f"<tr><td><a href='/case/{escape(row.slug)}'>{escape(row.organisation)}</a></td><td>{escape(row.sector)}</td><td>{row.score}</td><td>{'+' + str(row.movement) if row.movement is not None else '—'}</td><td><span class='pill priority-{escape(row.priority)}'>{escape(row.priority)}</span></td></tr>" for row in watchlist_rows())
+    watch = "".join(f"<tr><td><a href='/case/{escape(r['organisation'].replace(' ', ''))}'>{escape(r['organisation'])}</a></td><td>{escape(r['sector'])}</td><td>{r['base_score']}</td><td>+{r['live_uplift']}</td><td>{r['final_score']}</td><td>{r['live_evidence_count']}</td><td>{r['unique_source_count']}</td></tr>" for r in pub["top_organisations"])
     body = f"""<section class='hero'><h1>Good Morning Rob</h1><p class='muted'>{escape(str(ctx['date_label']))} · Estimated reading time: {ctx['reading_time']} minutes</p><div class='grid'><div><div class='metric'>{ctx['new_evidence_count']}</div><p>{escape(str(ctx.get('new_evidence_label', 'new evidence items')))}</p></div><div><div class='metric'>{len(weekly.organisations_to_watch)}</div><p>organisations requiring attention</p></div><div><div class='metric'>{len(weekly.biggest_movers)}</div><p>biggest movers</p></div></div></section>
     {live_banner_html()}
     <section class='card'><h2>What changed?</h2><p>{'Live evidence uplift' if ctx.get('live_organisation_metrics') else 'Seeded fallback movement'}</p><ul>{movers}</ul></section>
     <section class='card'><h2>Why does it matter?</h2><p>Top AI reinvention opportunities are ranked by deterministic commercial pressure, suitability, readiness, attractiveness and influence potential.</p><ul>{top}</ul></section>
-    <section class='card action'><h2>What should I do?</h2><p><strong>Recommended priority action:</strong> {escape(str(ctx['priority_action']))}</p></section>
-    <section class='card'><h2>Watchlist</h2><table><thead><tr><th>Organisation</th><th>Sector</th><th>AI Reinvention Opportunity Score</th><th>Movement</th><th>Priority</th></tr></thead><tbody>{watch}</tbody></table></section>"""
+    <section class='card action'><h2>What should I do?</h2><ol>{"".join(f"<li><strong>{escape(a['organisation'])}</strong> ({escape(a['time_required'])}, {escape(a['target_executive_or_function'])}): {escape(a['action'])} Proposition: {escape(a['proposition'])}. Missing: {escape(', '.join(a['missing_evidence']))}</li>" for a in pub["recommended_actions"][:3])}</ol></section>
+    <section class='card'><h2>Watchlist</h2><table><thead><tr><th>Organisation</th><th>Sector</th><th>Base Score</th><th>Live Uplift</th><th>Final Score</th><th>Live Evidence</th><th>Unique Sources</th></tr></thead><tbody>{watch}</tbody></table></section>"""
     return _page("Flora Morning Edition", body)
 
 

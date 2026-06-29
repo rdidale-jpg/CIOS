@@ -10,7 +10,7 @@ from typing import Any
 from cios.applications.flora.intelligence.evidence_engine import CommercialEvidence, EvidenceCategory
 from cios.applications.flora.live.source_registry import SourceRecord
 
-KEYWORDS = ("AI", "automation", "digital transformation", "resilience", "customer service", "customer experience", "operational performance", "cost reduction", "efficiency", "data", "cloud", "regulation", "investment", "modernisation", "asset management", "network", "field operations")
+KEYWORDS = ("AI", "automation", "digital transformation", "resilience", "customer service", "customer experience", "operational performance", "cost reduction", "efficiency", "data", "cloud", "regulation", "investment", "modernisation", "asset management", "network", "field operations", "legacy systems", "reform", "spending", "procurement", "service transformation", "cyber", "shared services")
 
 CONDITION_MAP = {
     "regulation": ("Regulatory Pressure", "governed performance reporting"),
@@ -30,6 +30,13 @@ CONDITION_MAP = {
     "asset management": ("Operational Resilience", "asset management intelligence"),
     "network": ("Network Resilience", "network intelligence"),
     "field operations": ("Operational Efficiency", "field operations optimisation"),
+    "legacy systems": ("Legacy Technology", "legacy modernisation"),
+    "reform": ("Service Transformation", "service reform discovery"),
+    "spending": ("Spending Pressure", "spend optimisation"),
+    "procurement": ("Procurement Readiness", "procurement route validation"),
+    "service transformation": ("Citizen Experience", "citizen service transformation"),
+    "cyber": ("Cyber Resilience", "cyber resilience modernisation"),
+    "shared services": ("Operational Efficiency", "shared services automation"),
 }
 
 

@@ -71,3 +71,54 @@ def test_seeded_fallback_still_works_when_no_live_evidence(monkeypatch) -> None:
     assert ctx["new_evidence_count"] == 5
     assert ctx["new_evidence_label"] == "seeded fallback evidence items"
     assert "Seeded fallback" in ctx["what_changed"]["summary"]
+
+
+def test_why_does_it_matter_changes_when_live_evidence_changes(monkeypatch) -> None:
+    monkeypatch.setattr(morning_edition, "read_jsonl", lambda *args, **kwargs: _evidence("BT", 2))
+    bt = morning_edition.build_publication_context()["why_matters"]
+    monkeypatch.setattr(morning_edition, "read_jsonl", lambda *args, **kwargs: _evidence("DWP", 3))
+    dwp = morning_edition.build_publication_context()["why_matters"]
+    assert bt != dwp
+    assert dwp[0]["organisation"] == "DWP"
+
+
+def test_watchlist_ranking_changes_when_live_evidence_changes(monkeypatch) -> None:
+    monkeypatch.setattr(morning_edition, "read_jsonl", lambda *args, **kwargs: _evidence("BT", 1))
+    bt_top = morning_edition.build_publication_context()["top_organisations"][0]["organisation"]
+    monkeypatch.setattr(morning_edition, "read_jsonl", lambda *args, **kwargs: _evidence("DWP", 4))
+    dwp_ctx = morning_edition.build_publication_context()
+    assert dwp_ctx["top_organisations"][0]["organisation"] != bt_top or dwp_ctx["top_organisations"][0]["live_uplift"] > 0
+    assert {"base_score", "live_uplift", "final_score", "live_evidence_count", "unique_source_count"}.issubset(dwp_ctx["top_organisations"][0])
+
+
+def test_what_should_i_do_changes_when_live_evidence_changes(monkeypatch) -> None:
+    monkeypatch.setattr(morning_edition, "read_jsonl", lambda *args, **kwargs: _evidence("BT", 2))
+    bt_actions = morning_edition.build_publication_context()["recommended_actions"]
+    monkeypatch.setattr(morning_edition, "read_jsonl", lambda *args, **kwargs: _evidence("DWP", 3))
+    dwp_actions = morning_edition.build_publication_context()["recommended_actions"]
+    assert bt_actions != dwp_actions
+    assert dwp_actions[0]["organisation"] == "DWP"
+    assert dwp_actions[0]["time_required"]
+    assert dwp_actions[0]["target_executive_or_function"]
+    assert dwp_actions[0]["proposition"]
+    assert dwp_actions[0]["live_evidence_receipt"]
+    assert dwp_actions[0]["missing_evidence"]
+
+
+def test_public_sector_organisations_exist_in_watchlist_and_registry() -> None:
+    from cios.applications.flora.live.source_registry import enabled_sources
+
+    watchlist = {account.organisation_name for account in sample_watchlist()}
+    assert {"Ministry of Defence", "DWP", "Ministry of Justice"}.issubset(watchlist)
+    assert enabled_sources("Ministry of Defence")
+    assert enabled_sources("DWP")
+    assert enabled_sources("Ministry of Justice")
+
+
+def test_public_sector_evidence_maps_to_public_sector_conditions() -> None:
+    from cios.applications.flora.live.extractor import interpret_keyword
+
+    assert interpret_keyword("legacy systems")[0] == "Legacy Technology"
+    assert interpret_keyword("service transformation")[0] == "Citizen Experience"
+    assert interpret_keyword("cyber")[0] == "Cyber Resilience"
+    assert interpret_keyword("procurement")[0] == "Procurement Readiness"
