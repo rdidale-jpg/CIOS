@@ -16,6 +16,9 @@ CASE_SLUGS = [
     "BBC",
     "SSE",
     "UnitedUtilities",
+    "MinistryofDefence",
+    "DWP",
+    "MinistryofJustice",
 ]
 
 

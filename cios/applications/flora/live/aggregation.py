@@ -12,7 +12,7 @@ from cios.applications.flora.models import BriefingItem, TargetAccount
 RELEVANT_CONDITIONS = {
     "Network Intelligence", "Operational Efficiency", "AI Modernisation", "Operational Resilience",
     "Customer Trust", "Regulatory Pressure", "Data Modernisation", "Digital Leadership", "Technology Debt",
-    "Cost Pressure", "Customer Experience", "Competition",
+    "Cost Pressure", "Customer Experience", "Competition", "Service Transformation", "Digital Modernisation", "Legacy Technology", "Spending Pressure", "Citizen Experience", "Cyber Resilience", "AI Readiness", "Procurement Readiness",
 }
 
 TIER_WEIGHT = {"tier_1_regulator": 5, "tier_1_company": 4, "tier_1_public_body": 4, "tier_2_feed": 2}
