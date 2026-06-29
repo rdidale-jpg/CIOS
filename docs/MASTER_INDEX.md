@@ -27,6 +27,13 @@ This index is the authoritative catalogue for controlled CIOS Knowledge Library 
 | CIOS-CBOK-STD-OPS-CONF | CBOK Operational Confidence Standard | Draft | 0.1.0 | `docs/CBOK/OPERATIONAL_CONFIDENCE.md` |
 | CIOS-CBOK-STD-TRACE | CBOK Traceability Standard | Draft | 0.1.0 | `docs/CBOK/TRACEABILITY_STANDARD.md` |
 | CIOS-CBOK-STD-REVIEW | CBOK Review Process | Draft | 0.1.0 | `docs/CBOK/REVIEW_PROCESS.md` |
+| CIOS-CBOK-SCI-001 | Scientific Knowledge Framework | Approved | 1.0.0 | `docs/CBOK/Science/CBOK-SCI-001_Scientific_Knowledge_Framework_v1.0.0.md` |
+| CIOS-CBOK-SCI-001-CLASS | Knowledge Classification | Approved | 1.0.0 | `docs/CBOK/Science/KNOWLEDGE_CLASSIFICATION.md` |
+| CIOS-CBOK-SCI-001-EVIDENCE | Evidence Hierarchy | Approved | 1.0.0 | `docs/CBOK/Science/EVIDENCE_HIERARCHY.md` |
+| CIOS-CBOK-SCI-001-LIFE | Knowledge Lifecycle | Approved | 1.0.0 | `docs/CBOK/Science/KNOWLEDGE_LIFECYCLE.md` |
+| CIOS-CBOK-SCI-001-PROMOTE | Knowledge Promotion | Approved | 1.0.0 | `docs/CBOK/Science/KNOWLEDGE_PROMOTION.md` |
+| CIOS-CBOK-SCI-001-CHECKLIST | Knowledge Review Checklist | Approved | 1.0.0 | `docs/CBOK/Science/KNOWLEDGE_REVIEW_CHECKLIST.md` |
+| CIOS-CBOK-SCI-001-GLOSSARY | Scientific Glossary | Approved | 1.0.0 | `docs/CBOK/Science/SCIENTIFIC_GLOSSARY.md` |
 
 ## Maintenance Rules
 

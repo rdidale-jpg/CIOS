@@ -4,6 +4,8 @@
 
 Commercial cognitive science is the disciplined study of how commercial actors perceive, decide, coordinate, trust, buy, sell, adopt, retain, and create value within market systems. In CIOS, it provides the scientific foundation for commercial intelligence, ensuring that recommendations, models, workflows, and standards are grounded in explicit reasoning and reviewable evidence.
 
+Science Governance uses [CBOK-SCI-001 Scientific Knowledge Framework](../CBOK/Science/CBOK-SCI-001_Scientific_Knowledge_Framework_v1.0.0.md) as the governing framework for classifying, evaluating, validating, promoting and tracing scientific knowledge before engineering consumption.
+
 The purpose of the Commercial Science Registry is to:
 
 - Preserve institutional knowledge about commercial behaviour and commercial intelligence.
