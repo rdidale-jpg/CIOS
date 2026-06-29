@@ -5,6 +5,7 @@ from html import escape
 from typing import Any
 
 from cios.applications.flora.live.collect import current_status, source_coverage
+from collections import Counter
 from cios.applications.flora.live.store import DEFAULT_PATH, load_evidence_fingerprints, read_jsonl
 from cios.applications.flora.live.aggregation import aggregate_live_evidence, unique_live_evidence
 
@@ -40,8 +41,16 @@ def collection_result(result: dict[str, Any]) -> str:
 
 
 def sources_page() -> str:
-    rows = "".join(f"<tr><td>{escape(r['source_id'])}</td><td>{escape(r['organisation'])}</td><td>{escape(r['source_name'])}</td><td>{escape(r['source_type'])}</td><td><a href='{escape(str(r['url']))}'>{escape(str(r['url']))}</a></td><td>{'enabled' if r['enabled'] else 'disabled'}</td><td>{escape(r['evidence_tier'])}</td><td>{escape(str(r['last_status']))}</td><td>{r['evidence_count']}</td><td>{escape(r['recommended_action'])}</td></tr>" for r in source_coverage())
-    return _page("Flora Live Source Coverage", f"<h1>Live source coverage</h1><section class='card'><p>Governed source-specific collection only: no LLMs, no databases, and no broad crawling.</p></section><table><thead><tr><th>Source ID</th><th>Organisation</th><th>Source</th><th>Type</th><th>URL</th><th>Enabled</th><th>Evidence tier</th><th>Last status</th><th>Evidence count</th><th>Recommended action</th></tr></thead><tbody>{rows}</tbody></table>")
+    coverage = source_coverage()
+    orgs = {r["organisation"] for r in coverage}
+    covered = {r["organisation"] for r in coverage if r["enabled"]}
+    uncovered = sorted(orgs - covered)
+    sector_counts = Counter(r["sector"] for r in coverage if r["enabled"])
+    type_counts = Counter(r["source_type"] for r in coverage if r["enabled"])
+    latest = current_status()
+    summary = f"""<section class='card'><h2>Coverage summary</h2><ul><li>Total organisations configured: {len(orgs)}</li><li>Organisations with at least one enabled source: {len(covered)}</li><li>Organisations with no source coverage: {len(uncovered)}</li><li>Total sources: {len(coverage)}</li><li>Latest status: attempted {latest['sources_attempted']}, succeeded {latest['sources_succeeded']}, failed {latest['sources_failed']}</li></ul><h3>Sources by sector</h3><p>{escape(str(dict(sorted(sector_counts.items()))))}</p><h3>Sources by source_type</h3><p>{escape(str(dict(sorted(type_counts.items()))))}</p><h3>Organisations with no source coverage</h3><p>{escape(', '.join(uncovered) or 'None')}</p></section>"""
+    rows = "".join(f"<tr><td>{escape(r['source_id'])}</td><td>{escape(r['organisation'])}</td><td>{escape(r['source_name'])}</td><td>{escape(r['source_type'])}</td><td><a href='{escape(str(r['url']))}'>{escape(str(r['url']))}</a></td><td>{'enabled' if r['enabled'] else 'disabled'}</td><td>{escape(r['evidence_tier'])}</td><td>{escape(str(r['last_status']))}</td><td>{r['evidence_count']}</td><td>{escape(r['recommended_action'])}</td></tr>" for r in coverage)
+    return _page("Flora Live Source Coverage", f"<h1>Live source coverage</h1>{summary}<section class='card'><p>Governed source-specific collection only: no LLMs, no databases, and no broad crawling.</p></section><table><thead><tr><th>Source ID</th><th>Organisation</th><th>Source</th><th>Type</th><th>URL</th><th>Enabled</th><th>Evidence tier</th><th>Last status</th><th>Evidence count</th><th>Recommended action</th></tr></thead><tbody>{rows}</tbody></table>")
 
 
 def evidence_page() -> str:
@@ -49,8 +58,8 @@ def evidence_page() -> str:
     if not evidence:
         return _page("Flora Live Evidence Objects", "<h1>Live evidence objects</h1><section class='card warn'><strong>No live evidence available.</strong><p>Use <a href='/live/collect'>/live/collect</a> to attempt governed collection. If sources fail, inspect <a href='/live/status'>/live/status</a>.</p></section>")
     rows = "".join(_evidence_row(e) for e in evidence[-100:])
-    return _page("Flora Live Evidence Objects", f"<h1>Live evidence objects</h1><table><thead><tr><th>Organisation</th><th>Source</th><th>URL</th><th>Type</th><th>Snippet</th><th>Condition</th><th>Capability</th><th>Confidence</th><th>Extracted</th></tr></thead><tbody>{rows}</tbody></table>")
+    return _page("Flora Live Evidence Objects", f"<h1>Live evidence objects</h1><table><thead><tr><th>Organisation</th><th>Source</th><th>URL</th><th>Type</th><th>Snippet</th><th>Condition</th><th>Capability</th><th>Confidence</th><th>Quality</th><th>Extracted</th></tr></thead><tbody>{rows}</tbody></table>")
 
 
 def _evidence_row(e: dict[str, Any]) -> str:
-    return f"<tr><td>{escape(str(e.get('organisation','')))}</td><td>{escape(str(e.get('source_name','')))}</td><td><a href='{escape(str(e.get('source_url','')))}'>{escape(str(e.get('source_url','')))}</a></td><td>{escape(str(e.get('source_type','')))}</td><td>{escape(str(e.get('snippet','')))}</td><td>{escape(str(e.get('commercial_condition','')))}</td><td>{escape(str(e.get('likely_capability','')))}</td><td>{escape(str(e.get('confidence','')))}</td><td>{escape(str(e.get('extraction_timestamp','')))}</td></tr>"
+    return f"<tr><td>{escape(str(e.get('organisation','')))}</td><td>{escape(str(e.get('source_name','')))}</td><td><a href='{escape(str(e.get('source_url','')))}'>{escape(str(e.get('source_url','')))}</a></td><td>{escape(str(e.get('source_type','')))}</td><td>{escape(str(e.get('snippet','')))}</td><td>{escape(str(e.get('commercial_condition','')))}</td><td>{escape(str(e.get('likely_capability','')))}</td><td>{escape(str(e.get('confidence','')))}</td><td>{escape(str(e.get('overall_evidence_quality','')))}</td><td>{escape(str(e.get('extraction_timestamp','')))}</td></tr>"

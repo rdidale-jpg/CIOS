@@ -10,7 +10,7 @@ from typing import Any
 from cios.applications.flora.intelligence.evidence_engine import CommercialEvidence, EvidenceCategory
 from cios.applications.flora.live.source_registry import SourceRecord
 
-KEYWORDS = ("AI", "automation", "digital transformation", "resilience", "customer service", "customer experience", "operational performance", "cost reduction", "efficiency", "data", "cloud", "regulation", "investment", "modernisation", "asset management", "network", "field operations", "legacy systems", "reform", "spending", "procurement", "service transformation", "cyber", "shared services")
+KEYWORDS = ("AI", "automation", "digital transformation", "resilience", "customer service", "customer experience", "operational performance", "cost reduction", "efficiency", "data", "cloud", "regulation", "investment", "modernisation", "asset management", "network", "field operations", "legacy systems", "reform", "spending", "procurement", "service transformation", "cyber", "shared services", "legacy technology", "citizen experience", "AI readiness", "managed services", "consulting", "partnership", "delivery capability")
 
 CONDITION_MAP = {
     "regulation": ("Regulatory Pressure", "governed performance reporting"),
@@ -36,7 +36,14 @@ CONDITION_MAP = {
     "procurement": ("Procurement Readiness", "procurement route validation"),
     "service transformation": ("Citizen Experience", "citizen service transformation"),
     "cyber": ("Cyber Resilience", "cyber resilience modernisation"),
-    "shared services": ("Operational Efficiency", "shared services automation"),
+    "shared services": ("Shared Services", "shared services automation"),
+    "legacy technology": ("Legacy Technology", "legacy modernisation"),
+    "citizen experience": ("Citizen Experience", "citizen experience improvement"),
+    "AI readiness": ("AI Readiness", "AI readiness assessment"),
+    "managed services": ("Managed Services", "managed service transformation"),
+    "consulting": ("Consulting Growth", "consulting-led transformation"),
+    "partnership": ("Partnership Ecosystem", "partner ecosystem activation"),
+    "delivery capability": ("Delivery Capability", "delivery assurance"),
 }
 
 
@@ -59,6 +66,14 @@ def interpret_keyword(keyword: str) -> tuple[str, str, str, int]:
     relevance = f"Evidence mentioning {keyword} may indicate a practical AI reinvention conversation around {capability}."
     confidence = 74 if keyword in {"AI", "automation", "operational performance", "regulation", "investment"} else 68
     return condition, capability, relevance, confidence
+
+
+def quality_scores(source: SourceRecord, snippet: str) -> dict[str, int]:
+    reliability = 95 if source.evidence_tier.startswith("tier_1") else 75
+    specificity = 90 if source.coverage_role in {"primary", "regulator", "competitor"} else 65
+    extraction = 85 if len(snippet) > 80 else 70
+    overall = round((reliability + specificity + extraction) / 3)
+    return {"source_reliability": reliability, "source_specificity": specificity, "extraction_quality": extraction, "overall_evidence_quality": overall}
 
 
 def extract_evidence(source: SourceRecord, page: str, extracted_at: datetime | None = None, max_items: int = 4) -> list[dict[str, Any]]:
@@ -86,6 +101,7 @@ def extract_evidence(source: SourceRecord, page: str, extracted_at: datetime | N
             "source_url": str(source.url),
             "sector": source.sector,
             "evidence_tier": source.evidence_tier,
+            **quality_scores(source, snippet),
             "keyword": keyword,
             "snippet": snippet,
             "commercial_condition": condition,

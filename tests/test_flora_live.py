@@ -246,3 +246,59 @@ def test_morning_edition_coverage_summary(tmp_path: Path, monkeypatch) -> None:
     assert "### Live Evidence Coverage" in markdown
     assert "Strongest covered organisations: BT" in markdown
     assert "Uncovered organisations: Sky" in markdown
+
+
+def test_flora_v07_required_groups_and_metadata() -> None:
+    from cios.applications.flora.live.source_registry import SOURCES
+
+    required = {
+        "Utilities": {"Thames Water", "United Utilities", "Severn Trent", "Southern Water", "Yorkshire Water", "Anglian Water", "Northumbrian Water", "South West Water / Pennon", "Wessex Water", "Affinity Water", "Portsmouth Water", "SES Water"},
+        "Energy": {"National Grid", "SSE", "Centrica", "EDF Energy UK", "Octopus Energy", "ScottishPower", "E.ON UK", "RWE UK", "Drax", "OVO Energy", "UK Power Networks", "SP Energy Networks"},
+        "Telecommunications": {"BT", "Vodafone", "Virgin Media O2", "TalkTalk", "Three UK", "Openreach", "CityFibre", "Hyperoptic", "KCOM", "Gamma Communications"},
+        "Media": {"Sky", "BBC", "ITV", "Channel 4", "Channel 5 / Paramount UK", "The Guardian", "News UK", "DMG Media", "Reach plc", "Global", "Bauer Media"},
+        "Sport": {"Premier League", "The Football Association", "England and Wales Cricket Board", "Rugby Football Union", "Wimbledon / AELTC", "British Olympic Association", "UK Sport", "Sport England", "England Netball", "British Cycling", "Formula 1 / Silverstone"},
+        "Public Sector": {"Ministry of Defence", "DWP", "Ministry of Justice", "HMRC", "DEFRA", "Department of Health and Social Care", "NHS England", "Home Office", "Cabinet Office", "Department for Education", "Department for Transport", "DSIT", "DESNZ", "MHCLG", "FCDO", "UKHSA", "Environment Agency", "HM Treasury"},
+        "Regulators": {"Ofwat", "Ofgem", "Ofcom", "CMA", "ICO", "National Audit Office", "Infrastructure and Projects Authority", "UK Regulators Network"},
+        "Competitors": {"IBM", "Accenture", "Capgemini", "Deloitte", "KPMG", "PwC", "Cognizant", "CGI", "TCS", "Infosys", "Wipro", "Atos / Eviden", "Fujitsu", "Sopra Steria", "DXC Technology", "NTT DATA", "Oracle", "Microsoft", "ServiceNow", "Salesforce", "SAP"},
+    }
+    by_sector: dict[str, set[str]] = {}
+    for source in SOURCES:
+        by_sector.setdefault(source.sector, set()).add(source.organisation)
+        if source.enabled:
+            assert source.source_id and source.organisation and source.source_name and source.source_type and source.url
+            assert source.evidence_tier and source.expected_signal_types and source.coverage_role and source.notes
+            assert "search" not in str(source.url).lower()
+            assert "google." not in str(source.url).lower()
+            assert "bing." not in str(source.url).lower()
+    for sector, orgs in required.items():
+        assert orgs.issubset(by_sector.get(sector, set()))
+
+
+def test_flora_v07_quality_and_condition_mapping() -> None:
+    from cios.applications.flora.live.extractor import extract_evidence
+    from cios.applications.flora.live.source_registry import SOURCES
+
+    dwp = next(source for source in SOURCES if source.organisation == "DWP" and source.enabled)
+    public = extract_evidence(dwp, "<p>Citizen experience and procurement readiness for legacy technology.</p>")
+    assert public[0]["overall_evidence_quality"] > 0
+    assert public[0]["commercial_condition"] in {"Citizen Experience", "Cyber Resilience", "Procurement Readiness", "Legacy Technology"}
+
+    ibm = next(source for source in SOURCES if source.organisation == "IBM" and source.enabled)
+    competitor = extract_evidence(ibm, "<p>Managed services and cloud modernisation strengthen consulting growth, partnership ecosystem and delivery capability.</p>")
+    assert competitor[0]["commercial_condition"] in {"Managed Services", "Consulting Growth", "Partnership Ecosystem", "Delivery Capability", "Technology Debt"}
+
+
+def test_flora_v07_sources_page_and_morning_summary() -> None:
+    from cios.applications.flora.live.views import sources_page
+    from cios.applications.flora.publisher.morning_edition import build_publication_context, render_markdown
+
+    html = sources_page()
+    assert "Total organisations configured" in html
+    assert "Sources by sector" in html
+    assert "Sources by source_type" in html
+    ctx = build_publication_context()
+    summary = ctx["live_coverage_summary"]
+    assert summary["organisations_configured"] >= 100
+    assert "failed_source_count" in summary
+    assert "source_coverage_health" in summary
+    assert "Uncovered priority organisations" in render_markdown(ctx)
