@@ -1,0 +1,87 @@
+{
+  "product": "Flora Publisher",
+  "edition": "Morning Edition",
+  "version": "0.1",
+  "publication_date": "2026-06-29",
+  "case_files": [
+    "BBC",
+    "BT",
+    "National Grid",
+    "SSE",
+    "Sky",
+    "Thames Water",
+    "United Utilities",
+    "Vodafone"
+  ],
+  "conditions": [
+    {
+      "condition": "Regulatory scrutiny and resilience pressure remain high.",
+      "strength": 80,
+      "trend": "Stable",
+      "affected_organisations": [
+        "Thames Water"
+      ],
+      "primary_drivers": "asset intelligence, customer trust analytics"
+    },
+    {
+      "condition": "Grid transition complexity creates strong AI planning opportunity.",
+      "strength": 77,
+      "trend": "Stable",
+      "affected_organisations": [
+        "National Grid"
+      ],
+      "primary_drivers": "asset intelligence, grid forecasting"
+    },
+    {
+      "condition": "Competitive pressure supports AI-enabled simplification.",
+      "strength": 77,
+      "trend": "Stable",
+      "affected_organisations": [
+        "Vodafone"
+      ],
+      "primary_drivers": "network intelligence, sales operations automation"
+    },
+    {
+      "condition": "Network automation and enterprise simplification are attractive AI areas.",
+      "strength": 69,
+      "trend": "Stable",
+      "affected_organisations": [
+        "BT"
+      ],
+      "primary_drivers": "network intelligence, service assurance"
+    },
+    {
+      "condition": "Regulated performance data can support targeted AI use cases.",
+      "strength": 64,
+      "trend": "Stable",
+      "affected_organisations": [
+        "United Utilities"
+      ],
+      "primary_drivers": "asset intelligence, leakage analytics"
+    }
+  ],
+  "playbooks": [
+    "CAPABILITY_PLAYBOOK_ASSET_MANAGEMENT",
+    "CAPABILITY_PLAYBOOK_CONTACT_CENTRE",
+    "CAPABILITY_PLAYBOOK_CUSTOMER_OPERATIONS",
+    "EXECUTIVE_PLAYBOOK_CDO",
+    "EXECUTIVE_PLAYBOOK_COO",
+    "SECTOR_PLAYBOOK_ENERGY",
+    "SECTOR_PLAYBOOK_TELECOMMUNICATIONS",
+    "SECTOR_PLAYBOOK_UTILITIES"
+  ],
+  "commercial_laws": [
+    "Validate sponsor",
+    "Validate funding",
+    "Validate timing",
+    "Validate incumbent and competitor activity"
+  ],
+  "known_limitations": [
+    "Seeded local evidence only",
+    "No external APIs",
+    "No LLMs",
+    "No databases",
+    "Pilot placeholders remain blank on Teach Flora page"
+  ],
+  "delivery": "text-only PR preview; binary artefacts intentionally excluded"
+}
