@@ -57,3 +57,7 @@ Potential future increments:
 5. Add persistent memory snapshots through the passive CIOS memory layer.
 6. Add UI/API surfaces after the deterministic CLI workflow is stable.
 7. Introduce carefully governed LLM summarisation only if a future standard approves it.
+
+## Future roadmap note — Commercial Intelligence Playbooks
+
+Future Flora versions will consume the Commercial Intelligence Playbook Library in `docs/CBOK/Playbooks/` to make recommendations more specific, evidence-backed and role-aware. Flora should use playbooks to connect signals, commercial pressure, AI reinvention potential, competitor hypotheses, stakeholder influence and Commercial DNA to context-specific next actions while preserving confidence and traceability.

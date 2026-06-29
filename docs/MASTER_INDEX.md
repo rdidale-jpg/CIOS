@@ -38,6 +38,17 @@ This index is the authoritative catalogue for controlled CIOS Knowledge Library 
 | CIOS-CBOK-STD-000-STATE | Ontology State Taxonomy | Approved | 1.0.0 | `docs/CBOK/Standards/ontology_state_taxonomy.md` |
 | CIOS-CBOK-STD-000-BEH | Ontology Behaviour Taxonomy | Approved | 1.0.0 | `docs/CBOK/Standards/ontology_behaviour_taxonomy.md` |
 | CIOS-CBOK-STD-001A | Commercial Ontology Enterprise Domain Outline | Draft | 0.1.0 | `docs/CBOK/Standards/CBOK-STD-001A_Commercial_Ontology_Enterprise_Domain_Outline_v0.1.0.md` |
+| CIOS-CBOK-PLAYBOOK-README | Commercial Intelligence Playbook Library | Draft | 0.1.0 | `docs/CBOK/Playbooks/README.md` |
+| CIOS-CBOK-PLAYBOOK-FWK-001 | Commercial Intelligence Playbook Framework | Draft | 0.1.0 | `docs/CBOK/Playbooks/PLAYBOOK_FRAMEWORK.md` |
+| CIOS-CBOK-PLAYBOOK-TEMPLATE-001 | Commercial Intelligence Playbook Template | Draft | 0.1.0 | `docs/CBOK/Playbooks/PLAYBOOK_TEMPLATE.md` |
+| CIOS-CBOK-PLAYBOOK-PATTERN-LIB-001 | Commercial Pattern Library | Draft | 0.1.0 | `docs/CBOK/Playbooks/PATTERN_LIBRARY.md` |
+| CIOS-CBOK-PLAYBOOK-ANTI-PATTERN-LIB-001 | Commercial Anti-Pattern Library | Draft | 0.1.0 | `docs/CBOK/Playbooks/ANTI_PATTERN_LIBRARY.md` |
+| CIOS-CBOK-PLAYBOOK-PROP-LIB-001 | AI Reinvention Proposition Library | Draft | 0.1.0 | `docs/CBOK/Playbooks/PROPOSITION_LIBRARY.md` |
+| CIOS-CBOK-PLAYBOOK-PROP-TEMPLATE-001 | AI Reinvention Proposition Template | Draft | 0.1.0 | `docs/CBOK/Playbooks/PROPOSITION_TEMPLATE.md` |
+| CIOS-CBOK-PLAYBOOK-SECTOR | Sector Playbooks | Draft | 0.1.0 | `docs/CBOK/Playbooks/SECTOR_PLAYBOOK_*.md` |
+| CIOS-CBOK-PLAYBOOK-CAPABILITY | Capability Playbooks | Draft | 0.1.0 | `docs/CBOK/Playbooks/CAPABILITY_PLAYBOOK_*.md` |
+| CIOS-CBOK-PLAYBOOK-EXEC | Executive Playbooks | Draft | 0.1.0 | `docs/CBOK/Playbooks/EXECUTIVE_PLAYBOOK_*.md` |
+| CIOS-CBOK-PLAYBOOK-COMP | Competitor Playbooks | Draft | 0.1.0 | `docs/CBOK/Playbooks/COMPETITOR_PLAYBOOK_*.md` |
 | CIOS-CBOK-SCI-001-CLASS | Knowledge Classification | Approved | 1.0.0 | `docs/CBOK/Science/KNOWLEDGE_CLASSIFICATION.md` |
 | CIOS-CBOK-SCI-001-EVIDENCE | Evidence Hierarchy | Approved | 1.0.0 | `docs/CBOK/Science/EVIDENCE_HIERARCHY.md` |
 | CIOS-CBOK-SCI-001-LIFE | Knowledge Lifecycle | Approved | 1.0.0 | `docs/CBOK/Science/KNOWLEDGE_LIFECYCLE.md` |
