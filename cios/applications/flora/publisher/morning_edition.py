@@ -13,6 +13,7 @@ from cios.applications.flora.intelligence.evidence_engine import get_seed_eviden
 from cios.applications.flora.pipeline import generate_daily_brief, generate_weekly_brief
 from cios.applications.flora.publisher.html_renderer import write_html
 from cios.applications.flora.publisher.pdf_renderer import render_pdf
+from cios.applications.flora.live.store import read_jsonl
 
 VERSION = "0.2"
 PUBLICATIONS_DIR = Path(os.environ.get("FLORA_PILOT_DIR", ".flora_pilot")) / "publications"
@@ -90,6 +91,9 @@ def build_publication_context(publication_date: date | None = None) -> dict[str,
     daily = generate_daily_brief()
     weekly = generate_weekly_brief()
     evidence = get_seed_evidence()
+    live_evidence = read_jsonl()
+    pilot_orgs = {"Thames Water", "National Grid", "BT", "Vodafone"}
+    live_evidence = [item for item in live_evidence if item.get("organisation") in pilot_orgs]
     movement_by_org = {m.organisation: m.score_change for m in weekly.score_changes}
     evidence_by_org: dict[str, list[Any]] = defaultdict(list)
     for ev in evidence:
@@ -105,12 +109,12 @@ def build_publication_context(publication_date: date | None = None) -> dict[str,
         "This is a seeded pilot edition. Treat movement as pilot movement inside Flora's deterministic sample set, not live market movement.",
         f"{display_name(top.organisation)} remains the priority because resilience, customer trust and AI reinvention fit are strongest in the current evidence.",
         "The report is now organised around change, commercial conditions, recommended action and evidence gaps rather than static ranking.",
-        "No external APIs, LLMs or databases are used; all evidence receipts are local seeded evidence.",
+        "No LLMs or databases are used. Live evidence, when present, is source-specific governed public HTML evidence stored locally as JSONL.",
     ]
 
     movers = sorted(top_five, key=lambda i: abs(movement_by_org.get(i.organisation, 0)), reverse=True)
     what_changed = {
-        "summary": "Pilot movement is visible in the seeded weekly comparison. Flora has no live market feed yet, so these changes should guide review priorities rather than be read as real-world freshness.",
+        "summary": "Pilot movement is visible in the seeded weekly comparison. Live evidence receipts are shown first when locally available; otherwise these changes should guide review priorities rather than be read as real-world freshness.",
         "strongest_movers": [{"organisation": display_name(i.organisation), "movement": _movement(movement_by_org.get(i.organisation)), "reason": i.why_interesting} for i in movers[:3]],
         "meaningful_movement": [{"organisation": display_name(i.organisation), "movement": _movement(movement_by_org.get(i.organisation))} for i in top_five if abs(movement_by_org.get(i.organisation, 0)) >= 3],
         "strengthened": ["Operational Resilience", "Customer Trust", "AI Modernisation"],
@@ -175,7 +179,7 @@ def build_publication_context(publication_date: date | None = None) -> dict[str,
         evts = evidence_by_org[item.organisation]
         recommended_actions.append({
             "priority": idx, "organisation": display_name(item.organisation), "target_executive_or_function": guide["target"], "proposition": guide["proposition"], "action": guide["action"], "why_now": guide["why_now"],
-            "why_this_matters_to_rob": guide["matters"], "evidence_receipt": _receipt(evts),
+            "why_this_matters_to_rob": guide["matters"], "evidence_receipt": _receipt(evts), "live_evidence_receipt": [le for le in live_evidence if le.get("organisation") == item.organisation][:3],
             "missing_evidence": ["funding", "sponsor", "procurement timing", "incumbent position", "competitor engagement"], "time_required": guide["time_required"], "confidence": a.confidence,
         })
 
@@ -185,11 +189,13 @@ def build_publication_context(publication_date: date | None = None) -> dict[str,
         "5 minutes: Decide whether BT should remain in the top-five watchlist for this week.",
     ]
     cannot_know = [
-        "No live external evidence has been collected yet.", "No real annual reports have been ingested yet.", "No real regulator publications have been ingested yet.", "No real executive appointment feed has been ingested yet.",
+        "Live evidence v0.1 reads only configured public HTML pages; it does not ingest PDFs yet.", "No broad crawling is used.", "No real executive appointment feed has been ingested yet.",
         "This edition should be judged on structure, reasoning and usefulness — not real-world freshness.",
     ]
 
-    return {"product": "Flora Publisher", "edition": "Morning Edition", "version": VERSION, "publication_date": publication_date.isoformat(), "publication_date_label": publication_date.strftime("%A %d %B %Y"), "generated_timestamp": datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC"), "reading_time": _reading_time(len(daily.items), evidence_count), "executive_summary": executive_summary, "what_changed": what_changed, "priority_opportunity": priority_opportunity, "top_organisations": top_orgs, "conditions": conditions, "movements": movements, "competitive_intelligence": competitive, "recommended_actions": recommended_actions, "three_things_today": today, "cannot_know": cannot_know, "teach_flora": {"Biggest Insight": "", "Biggest Surprise": "", "Action Taken": "", "What Flora Should Learn": "", "Flora Value Score (0–5)": ""}, "case_files": sorted({display_name(ev.organisation) for ev in evidence}), "playbooks": sorted({pb for item in daily.items if item.assessment for pb in item.assessment.supporting_playbooks}), "commercial_laws": ["Validate sponsor", "Validate funding", "Validate timing", "Validate incumbent and competitor activity"], "known_limitations": ["Seeded local evidence only", "No external APIs", "No LLMs", "No databases", "Pilot placeholders remain blank on Teach Flora page"]}
+    live_banner = "LIVE EVIDENCE USED" if live_evidence else "NO LIVE EVIDENCE AVAILABLE — FALLING BACK TO SEEDED PILOT EVIDENCE"
+
+    return {"product": "Flora Publisher", "edition": "Morning Edition", "version": VERSION, "publication_date": publication_date.isoformat(), "publication_date_label": publication_date.strftime("%A %d %B %Y"), "generated_timestamp": datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC"), "live_evidence_banner": live_banner, "live_evidence": live_evidence[:12], "reading_time": _reading_time(len(daily.items), evidence_count), "executive_summary": executive_summary, "what_changed": what_changed, "priority_opportunity": priority_opportunity, "top_organisations": top_orgs, "conditions": conditions, "movements": movements, "competitive_intelligence": competitive, "recommended_actions": recommended_actions, "three_things_today": today, "cannot_know": cannot_know, "teach_flora": {"Biggest Insight": "", "Biggest Surprise": "", "Action Taken": "", "What Flora Should Learn": "", "Flora Value Score (0–5)": ""}, "case_files": sorted({display_name(ev.organisation) for ev in evidence}), "playbooks": sorted({pb for item in daily.items if item.assessment for pb in item.assessment.supporting_playbooks}), "commercial_laws": ["Validate sponsor", "Validate funding", "Validate timing", "Validate incumbent and competitor activity"], "known_limitations": ["Live evidence limited to configured public HTML source pages", "PDF ingestion not implemented", "No LLMs", "No databases", "No broad crawling", "Pilot placeholders remain blank on Teach Flora page"]}
 
 
 def _latest_morning_stem(ctx: dict[str, Any]) -> str:
@@ -197,7 +203,13 @@ def _latest_morning_stem(ctx: dict[str, Any]) -> str:
 
 
 def render_markdown(ctx: dict[str, Any]) -> str:
-    lines = [f"# Flora Morning Edition — {ctx['publication_date']}", "", "**Confidential pilot preview.**", "", f"**Publication date:** {ctx['publication_date_label']}", f"**Version:** {ctx['version']}", f"**Reading time:** {ctx['reading_time']} minutes", f"**Generated:** {ctx['generated_timestamp']}", "", "## Executive Summary"]
+    lines = [f"# Flora Morning Edition — {ctx['publication_date']}", "", "**Confidential pilot preview.**", "", f"**Publication date:** {ctx['publication_date_label']}", f"**Version:** {ctx['version']}", f"**Reading time:** {ctx['reading_time']} minutes", f"**Generated:** {ctx['generated_timestamp']}", "", f"## {ctx['live_evidence_banner']}"]
+    if ctx["live_evidence"]:
+        lines += ["", "| Organisation | Source | URL | Snippet | Extracted | Condition | Missing evidence |", "| --- | --- | --- | --- | --- | --- | --- |"]
+        lines += [f"| {e['organisation']} | {e['source_name']} | {e['source_url']} | {e['snippet']} | {e['extraction_timestamp']} | {e['commercial_condition']} | {'; '.join(e['missing_evidence'])} |" for e in ctx["live_evidence"]]
+    else:
+        lines += ["", "Seeded pilot evidence is used because no local live evidence JSONL was found."]
+    lines += ["", "## Executive Summary"]
     lines += [f"- {x}" for x in ctx["executive_summary"]]
     wc = ctx["what_changed"]
     lines += ["", "## What Changed", "", wc["summary"], "", "### Strongest movers"]
@@ -221,6 +233,8 @@ def render_markdown(ctx: dict[str, Any]) -> str:
     lines += ["", "## Recommended Actions"]
     for a in ctx["recommended_actions"]:
         lines += ["", f"### Priority {a['priority']} — {a['organisation']}", "", "## Why this matters to Rob", a["why_this_matters_to_rob"], "", f"- **Target executive or function:** {a['target_executive_or_function']}", f"- **Proposition:** {a['proposition']}", f"- **Action:** {a['action']}", f"- **Why now:** {a['why_now']}", f"- **Time required:** {a['time_required']}", f"- **Missing evidence:** {', '.join(a['missing_evidence'])}", "", "## Evidence Receipt", "", "| Signal IDs | Evidence summary | Source type | Evidence status |", "| --- | --- | --- | --- |"]
+        if a.get("live_evidence_receipt"):
+            lines += ["| Live evidence | " + e["snippet"] + " | " + e["source_type"] + " | " + e["source_name"] + " — " + e["source_url"] + " |" for e in a["live_evidence_receipt"]]
         lines += [f"| {e['signal_ids']} | {e['summary']} | {e['source_type']} | {e['evidence_status']} |" for e in a["evidence_receipt"]]
     lines += ["", "## Three Things Worth Doing Today"] + [f"- {x}" for x in ctx["three_things_today"]]
     lines += ["", "## What Flora Cannot Yet Know"] + [f"- {x}" for x in ctx["cannot_know"]]

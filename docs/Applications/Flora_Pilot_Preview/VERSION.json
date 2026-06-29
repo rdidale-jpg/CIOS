@@ -121,10 +121,11 @@
     "Validate incumbent and competitor activity"
   ],
   "known_limitations": [
-    "Seeded local evidence only",
-    "No external APIs",
+    "Live evidence limited to configured public HTML source pages",
+    "PDF ingestion not implemented",
     "No LLMs",
     "No databases",
+    "No broad crawling",
     "Pilot placeholders remain blank on Teach Flora page"
   ]
 }
