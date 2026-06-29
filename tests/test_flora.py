@@ -150,8 +150,33 @@ def test_cli_case_output_text_and_json() -> None:
     assert payload["timeline"]
 
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
-from cios.applications.flora.workspace.app import FloraWorkspaceHandler
+from cios.applications.flora.workspace.app import FloraWorkspaceHandler, _display_urls, _env_host, _env_port, _print_startup_message
 from cios.applications.flora.workspace.views import case_page, landing_page
+
+
+def test_workspace_server_defaults_to_localhost_port_8000(monkeypatch) -> None:
+    monkeypatch.delenv("FLORA_HOST", raising=False)
+    monkeypatch.delenv("FLORA_PORT", raising=False)
+    assert _env_host() == "127.0.0.1"
+    assert _env_port() == 8000
+
+
+def test_workspace_server_accepts_hosted_preview_bind_env(monkeypatch) -> None:
+    monkeypatch.setenv("FLORA_HOST", "0.0.0.0")
+    monkeypatch.setenv("FLORA_PORT", "8000")
+    assert _env_host() == "0.0.0.0"
+    assert _env_port() == 8000
+    assert _display_urls("0.0.0.0", 8000) == ["http://localhost:8000", "http://127.0.0.1:8000"]
+
+
+def test_workspace_startup_message_prints_access_instructions(capsys, monkeypatch) -> None:
+    monkeypatch.setenv("FLORA_PREVIEW_URL", "https://preview.example.test")
+    _print_startup_message("0.0.0.0", 8000)
+    output = capsys.readouterr().out
+    assert "Listening on: 0.0.0.0:8000" in output
+    assert "https://preview.example.test" in output
+    assert "FLORA_HOST=0.0.0.0" in output
+    assert "FLORA_PORT=8000" in output
 
 
 def test_workspace_landing_page_renders() -> None:
