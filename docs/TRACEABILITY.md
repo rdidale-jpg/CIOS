@@ -57,3 +57,29 @@ Traceability is not only top-down. When implementation, application usage or pro
 CBOK documents add a formal authoring layer for commercial knowledge claims, evidence, models, laws, patterns, validation records and architecture decisions. Each CBOK document should identify upstream doctrine or evidence, internal claims and downstream engineering or operational mappings.
 
 CBOK traceability records should preserve both scientific confidence and operational confidence so that a claim can be scientifically promising without being ready for production use, or operationally useful while still requiring further scientific validation.
+
+## Scientific Knowledge Traceability Chain
+
+CBOK-SCI-001 extends traceability for scientific knowledge through the following chain:
+
+```text
+Evidence
+    ↓
+Claim
+    ↓
+Hypothesis
+    ↓
+Law / Model
+    ↓
+Standard
+    ↓
+Engineering Standard
+    ↓
+SDK
+    ↓
+Application
+    ↓
+Operational Evidence
+```
+
+This chain ensures that operational findings can be traced back to the scientific evidence and assumptions that informed engineering and application behaviour.

@@ -82,3 +82,7 @@ Approved documents should be reviewed when related constitutional, scientific, e
 CBOK documents are governed by the CBOK Authoring System in `docs/CBOK/`. CBOK documents use `CIOS-CBOK-<TYPE>-<NUMBER>` identifiers and may represent constitutions, scientific frameworks, standards, reference models, commercial laws, influence models, enterprise patterns, working papers, literature reviews, experiments, validation reports and architecture documents.
 
 Every controlled CBOK document must include document metadata, purpose, scope, terminology, normative references, content sections, traceability, version history, review history, engineering mapping and appendices. Authors should start from the templates in `docs/CBOK/templates/` and apply the CBOK lifecycle, confidence and review standards before requesting approval.
+
+## CBOK Scientific Knowledge Framework
+
+CBOK-SCI-001 is the governing framework for scientific knowledge in the Commercial Body of Knowledge. It defines how knowledge is classified, evaluated, validated, promoted, traced and consumed by engineering. CBOK scientific artefacts should apply CBOK-SCI-001 when assigning knowledge classes, evidence levels, scientific confidence, operational confidence and downstream traceability.
