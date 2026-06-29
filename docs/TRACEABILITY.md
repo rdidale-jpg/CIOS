@@ -83,3 +83,23 @@ Operational Evidence
 ```
 
 This chain ensures that operational findings can be traced back to the scientific evidence and assumptions that informed engineering and application behaviour.
+
+## Ontology Traceability Chain
+
+Ontology work extends CIOS traceability through governed concept meaning and implementation artefacts:
+
+```text
+CBOK ontology concept
+    ↓
+Machine-readable ontology
+    ↓
+SDK model
+    ↓
+Knowledge graph node / edge
+    ↓
+Application artefact
+    ↓
+Evidence / reasoning output
+```
+
+This chain ensures that commercial concept meaning remains aligned from CBOK standards through ontology files, SDK implementation, graph representation, application use and reasoning evidence.

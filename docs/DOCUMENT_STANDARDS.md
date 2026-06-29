@@ -86,3 +86,7 @@ Every controlled CBOK document must include document metadata, purpose, scope, t
 ## CBOK Scientific Knowledge Framework
 
 CBOK-SCI-001 is the governing framework for scientific knowledge in the Commercial Body of Knowledge. It defines how knowledge is classified, evaluated, validated, promoted, traced and consumed by engineering. CBOK scientific artefacts should apply CBOK-SCI-001 when assigning knowledge classes, evidence levels, scientific confidence, operational confidence and downstream traceability.
+
+## Ontology Standards
+
+Ontology standards must comply with [CIOS-ENG-005 Ontology Engineering Standard](Engineering/CIOS-ENG-005_Ontology_Engineering_Standard_v1.0.0.md). Ontology documents shall keep CBOK meaning, machine-readable ontology representations, SDK mappings and knowledge graph mappings aligned.

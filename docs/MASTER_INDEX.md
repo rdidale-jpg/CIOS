@@ -18,6 +18,7 @@ This index is the authoritative catalogue for controlled CIOS Knowledge Library 
 | CIOS-ENG-002 | Platform Architecture and Dependency Model | Accepted Architecture Baseline | 1.0.0 | `docs/CIOS_ENG_002_Platform_Architecture_and_Dependency_Model_v1.0.0.md` |
 | CIOS-ENG-003 | Commercial Intelligence Pipeline Specification | Engineering Baseline | 1.0.0 | `docs/CIOS_ENG_003_Commercial_Intelligence_Pipeline_Specification_v1.0.0.md` |
 | CIOS-ENG-004 | Application Composition Standard | Draft Engineering Standard | 0.1.0 | `docs/Engineering/CIOS_ENG_004_Application_Composition_Standard_v0.1.0.md` |
+| CIOS-ENG-005 | Ontology Engineering Standard | Engineering Baseline | 1.0.0 | `docs/Engineering/CIOS-ENG-005_Ontology_Engineering_Standard_v1.0.0.md` |
 
 | CIOS-CBOK-001 | CBOK Authoring System | Draft | 0.1.0 | `docs/CBOK/README.md` |
 | CIOS-CBOK-GUIDE-001 | CBOK Authoring Guide | Draft | 0.1.0 | `docs/CBOK/AUTHORING_GUIDE.md` |
@@ -28,6 +29,7 @@ This index is the authoritative catalogue for controlled CIOS Knowledge Library 
 | CIOS-CBOK-STD-TRACE | CBOK Traceability Standard | Draft | 0.1.0 | `docs/CBOK/TRACEABILITY_STANDARD.md` |
 | CIOS-CBOK-STD-REVIEW | CBOK Review Process | Draft | 0.1.0 | `docs/CBOK/REVIEW_PROCESS.md` |
 | CIOS-CBOK-SCI-001 | Scientific Knowledge Framework | Approved | 1.0.0 | `docs/CBOK/Science/CBOK-SCI-001_Scientific_Knowledge_Framework_v1.0.0.md` |
+| CIOS-CBOK-STD-001A | Commercial Ontology Enterprise Domain Outline | Draft | 0.1.0 | `docs/CBOK/Standards/CBOK-STD-001A_Commercial_Ontology_Enterprise_Domain_Outline_v0.1.0.md` |
 | CIOS-CBOK-SCI-001-CLASS | Knowledge Classification | Approved | 1.0.0 | `docs/CBOK/Science/KNOWLEDGE_CLASSIFICATION.md` |
 | CIOS-CBOK-SCI-001-EVIDENCE | Evidence Hierarchy | Approved | 1.0.0 | `docs/CBOK/Science/EVIDENCE_HIERARCHY.md` |
 | CIOS-CBOK-SCI-001-LIFE | Knowledge Lifecycle | Approved | 1.0.0 | `docs/CBOK/Science/KNOWLEDGE_LIFECYCLE.md` |
