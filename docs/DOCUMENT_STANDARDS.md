@@ -90,3 +90,7 @@ CBOK-SCI-001 is the governing framework for scientific knowledge in the Commerci
 ## Ontology Standards
 
 Ontology standards must comply with [CBOK-STD-000 Commercial Ontology Meta-Model](CBOK/Standards/CBOK-STD-000_Commercial_Ontology_Meta_Model_v1.0.0.md) and [CIOS-ENG-005 Ontology Engineering Standard](Engineering/CIOS-ENG-005_Ontology_Engineering_Standard_v1.0.0.md). CBOK-STD-000 defines the ontology grammar and primitive types; CIOS-ENG-005 governs engineering representation. Ontology documents shall keep CBOK meaning, machine-readable ontology representations, SDK mappings and knowledge graph mappings aligned.
+
+## CBOK Playbooks and Propositions
+
+Commercial Intelligence playbooks, patterns, anti-patterns and AI reinvention propositions are CBOK knowledge assets. They must follow CBOK-SCI-001 classification, evidence, confidence, lifecycle, traceability and review rules. Authors shall distinguish standards, models, heuristics, hypotheses, patterns and recommendations, and must not promote playbook guidance into application behaviour without governed engineering review.

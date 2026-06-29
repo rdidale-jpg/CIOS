@@ -105,3 +105,27 @@ Evidence / reasoning output
 ```
 
 This chain ensures that commercial ontology grammar, domain concept meaning and implementation artefacts remain aligned from CBOK standards through ontology files, SDK implementation, graph representation, application use and reasoning evidence.
+
+## Commercial Intelligence Playbook Traceability Chain
+
+The Commercial Intelligence Playbook Library extends traceability for Flora recommendation support:
+
+```text
+Signal
+    ↓
+Pattern / Anti-pattern
+    ↓
+Sector / Capability / Executive / Competitor playbook
+    ↓
+Proposition
+    ↓
+Flora recommendation
+    ↓
+User action
+    ↓
+Outcome evidence
+    ↓
+CBOK refinement
+```
+
+This chain ensures that recommendations can be traced from observed commercial signals through governed knowledge assets to user action and outcome evidence. Outcome evidence should refine patterns, anti-patterns, playbooks and propositions under CBOK-SCI-001 review rules.
