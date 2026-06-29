@@ -46,8 +46,8 @@ def render_html(ctx: dict[str, Any]) -> str:
     pages.append(f"<section class='page'><h2>Commercial Radar</h2>{cond}{_footer(ctx,8)}</section>")
     po = ctx['priority_opportunity']
     pages.append(f"""<section class='page'><h2>Today's Priority Opportunity</h2>{''.join(f"<h3>{_e(k)}</h3><p>{_e(v)}</p>" for k,v in po.items())}{_footer(ctx,3)}</section>""")
-    rows = ''.join(f"<tr><td>{_e(r['organisation'])}</td><td>{_e(r['sector'])}</td><td>{r['condition_strength']}</td><td>{r['ai_opportunity']}</td><td>{_e(r['movement'])}</td><td>{r['confidence']}</td></tr>" for r in ctx['top_organisations'])
-    pages.append(f"<section class='page'><h2>Top Five Organisations</h2><table><thead><tr><th>Organisation</th><th>Sector</th><th>Condition Strength</th><th>AI Reinvention Opportunity</th><th>Movement</th><th>Confidence</th></tr></thead><tbody>{rows}</tbody></table>{_footer(ctx,4)}</section>")
+    rows = ''.join(f"<tr><td>{_e(r['organisation'])}</td><td>{_e(r['sector'])}</td><td>{r['condition_strength']}</td><td>{r['base_score']}</td><td>+{r['live_evidence_adjustment']}</td><td>{r['final_score']}</td><td>{_e(r['movement'])}</td><td>{r['confidence']}</td></tr>" for r in ctx['top_organisations'])
+    pages.append(f"<section class='page'><h2>Top Five Organisations</h2><table><thead><tr><th>Organisation</th><th>Sector</th><th>Condition Strength</th><th>AI Reinvention Opportunity</th><th>Live Adjustment</th><th>Final Score</th><th>Movement</th><th>Confidence</th></tr></thead><tbody>{rows}</tbody></table>{_footer(ctx,4)}</section>")
     moves = ''.join(f"<h3>{_e(s['title'])}</h3><ul>{''.join(f'<li>{_e(x)}</li>' for x in s['items'])}</ul>" for s in ctx['movements'])
     pages.append(f"<section class='page'><h2>Executive &amp; Market Movements</h2>{moves}{_footer(ctx,6)}</section>")
     comp = ''.join(f"<h3>{_e(k)}</h3><p>{_e(v)}</p>" for k,v in ctx['competitive_intelligence'].items())

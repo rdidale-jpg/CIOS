@@ -14,7 +14,9 @@ from cios.applications.flora.pipeline import generate_daily_brief, generate_week
 from cios.applications.flora.publisher.html_renderer import write_html
 from cios.applications.flora.publisher.pdf_renderer import render_pdf
 from cios.applications.flora.live.collect import current_status
-from cios.applications.flora.live.store import DEFAULT_PATH, load_evidence_fingerprints, read_jsonl
+from cios.applications.flora.live.store import read_jsonl
+from cios.applications.flora.live.aggregation import aggregate_live_evidence, adjust_score, attention_organisations, unique_live_evidence
+from cios.applications.flora.seed_data import sample_watchlist
 
 VERSION = "0.2"
 PUBLICATIONS_DIR = Path(os.environ.get("FLORA_PILOT_DIR", ".flora_pilot")) / "publications"
@@ -92,19 +94,18 @@ def build_publication_context(publication_date: date | None = None) -> dict[str,
     daily = generate_daily_brief()
     weekly = generate_weekly_brief()
     evidence = get_seed_evidence()
-    live_evidence = read_jsonl()
-    pilot_orgs = {"Thames Water", "National Grid", "BT", "Vodafone"}
+    live_evidence = unique_live_evidence(read_jsonl())
+    pilot_orgs = {"Thames Water", "National Grid", "BT", "Vodafone", "Sky", "BBC", "SSE", "United Utilities"}
     live_evidence = [item for item in live_evidence if item.get("organisation") in pilot_orgs]
+    live_metrics = aggregate_live_evidence(live_evidence)
     movement_by_org = {m.organisation: m.score_change for m in weekly.score_changes}
     evidence_by_org: dict[str, list[Any]] = defaultdict(list)
     for ev in evidence:
         evidence_by_org[ev.organisation].append(ev)
 
-    top = daily.items[0]
-    assessment = top.assessment
-    assert assessment is not None
     evidence_count = sum(len(item.assessment.evidence) for item in daily.items if item.assessment)
     top_five = daily.items[:5]
+    top = top_five[0]
 
     executive_summary = [
         "This is a seeded pilot edition. Treat movement as pilot movement inside Flora's deterministic sample set, not live market movement.",
@@ -113,27 +114,45 @@ def build_publication_context(publication_date: date | None = None) -> dict[str,
         "No LLMs or databases are used. Live evidence, when present, is source-specific governed public HTML evidence stored locally as JSONL.",
     ]
 
-    movers = sorted(top_five, key=lambda i: abs(movement_by_org.get(i.organisation, 0)), reverse=True)
+    score_adjustments = {item.organisation: adjust_score(item.organisation, item.scores.ai_reinvention_opportunity_score, live_metrics.get(item.organisation)) for item in daily.items}
+    movers = sorted(top_five, key=lambda i: score_adjustments[i.organisation].live_evidence_bonus + score_adjustments[i.organisation].confidence_adjustment, reverse=True)
+    if live_metrics:
+        change_items = []
+        for org, metrics in sorted(live_metrics.items(), key=lambda kv: kv[1].live_evidence_count, reverse=True):
+            caps = ", ".join(metrics.strongest_capabilities) or "AI opportunity discovery"
+            conds = ", ".join(metrics.strongest_conditions) or "unmapped live conditions"
+            change_items.append({"organisation": display_name(org), "movement": "Live evidence uplift", "reason": f"{display_name(org)} has {metrics.live_evidence_count} live evidence objects across {metrics.unique_source_count} sources, mostly mapping to {conds} and {caps}. This strengthens the case for validating a focused AI reinvention conversation.", "evidence_count": metrics.live_evidence_count, "source_count": metrics.unique_source_count, "strongest_live_condition": metrics.strongest_conditions[0] if metrics.strongest_conditions else "Unmapped", "why_it_matters_commercially": f"Commercially, {conds} creates a sharper route to {caps} with Rob's AI reinvention focus.", "evidence_status": "live"})
+        strengthened = sorted({c for m in live_metrics.values() for c in m.strongest_conditions}) or ["Live evidence present but condition mapping is incomplete."]
+        summary_text = f"What Changed is live-driven from {len(live_evidence)} unique evidence object(s); uplift is evidence uplift from this collection snapshot, not true market movement."
+    else:
+        change_items = [{"organisation": display_name(i.organisation), "movement": _movement(movement_by_org.get(i.organisation)), "reason": i.why_interesting, "evidence_status": "seeded fallback"} for i in sorted(top_five, key=lambda i: abs(movement_by_org.get(i.organisation, 0)), reverse=True)[:3]]
+        strengthened = ["Operational Resilience", "Customer Trust", "AI Modernisation"]
+        summary_text = "Seeded fallback is shown because no live evidence exists. These changes should guide review priorities rather than be read as real-world freshness."
     what_changed = {
-        "summary": "Pilot movement is visible in the seeded weekly comparison. Live evidence receipts are shown first when locally available; otherwise these changes should guide review priorities rather than be read as real-world freshness.",
-        "strongest_movers": [{"organisation": display_name(i.organisation), "movement": _movement(movement_by_org.get(i.organisation)), "reason": i.why_interesting} for i in movers[:3]],
-        "meaningful_movement": [{"organisation": display_name(i.organisation), "movement": _movement(movement_by_org.get(i.organisation))} for i in top_five if abs(movement_by_org.get(i.organisation, 0)) >= 3],
-        "strengthened": ["Operational Resilience", "Customer Trust", "AI Modernisation"],
-        "weakened": ["No verified weakening detected in current pilot evidence."],
-        "no_verified_change": [display_name(i.organisation) for i in daily.items if movement_by_org.get(i.organisation, 0) == 0],
+        "summary": summary_text,
+        "strongest_movers": change_items[:5],
+        "meaningful_movement": [{"organisation": display_name(i.organisation), "movement": "Live evidence uplift" if score_adjustments[i.organisation].final_score > score_adjustments[i.organisation].base_score else _movement(movement_by_org.get(i.organisation))} for i in top_five if score_adjustments[i.organisation].final_score > score_adjustments[i.organisation].base_score or abs(movement_by_org.get(i.organisation, 0)) >= 3],
+        "strengthened": strengthened,
+        "weakened": ["No verified weakening detected in current live evidence."],
+        "no_verified_change": [display_name(i.organisation) for i in daily.items if score_adjustments[i.organisation].final_score == score_adjustments[i.organisation].base_score],
     }
+
+    top_five = sorted(top_five, key=lambda item: score_adjustments[item.organisation].final_score, reverse=True)
+    top = top_five[0]
+    assessment = top.assessment
+    assert assessment is not None
 
     priority_opportunity = {
         "Organisation": display_name(top.organisation),
         "What changed": f"{_movement(movement_by_org.get(top.organisation))} pilot movement in the seeded weekly comparison.",
         "AI Reinvention Assessment": assessment.commercial_summary,
         "Recommended Action": ACTION_GUIDANCE[top.organisation]["action"],
-        "Why this matters to Rob": ACTION_GUIDANCE[top.organisation]["matters"],
+        "Why this matters to Rob": (f"{display_name(top.organisation)} matters now because live evidence maps to {', '.join(live_metrics[top.organisation].strongest_conditions)} and {', '.join(live_metrics[top.organisation].strongest_capabilities)}. That gives Rob a specific AI reinvention route while competitor context remains {assessment.competitive_context}. Missing evidence: {', '.join(assessment.missing_evidence)}." if top.organisation in live_metrics else ACTION_GUIDANCE[top.organisation]["matters"]),
         "Why Flora believes this": "; ".join(ev.evidence_summary for ev in assessment.evidence[:3]),
         "What evidence is missing": "; ".join(assessment.missing_evidence),
     }
 
-    top_orgs = [{"organisation": display_name(item.organisation), "sector": item.sector, "condition_strength": item.scores.commercial_pressure_index, "ai_opportunity": item.scores.ai_reinvention_opportunity_score, "movement": _movement(movement_by_org.get(item.organisation)), "confidence": item.assessment.confidence if item.assessment else item.scores.ai_reinvention_opportunity_score} for item in top_five]
+    top_orgs = [{"organisation": display_name(item.organisation), "sector": item.sector, "condition_strength": item.scores.commercial_pressure_index, "ai_opportunity": item.scores.ai_reinvention_opportunity_score, "base_score": score_adjustments[item.organisation].base_score, "live_evidence_adjustment": score_adjustments[item.organisation].live_evidence_bonus + score_adjustments[item.organisation].confidence_adjustment, "final_score": score_adjustments[item.organisation].final_score, "adjustment_reason": score_adjustments[item.organisation].reason, "movement": "Live evidence uplift" if score_adjustments[item.organisation].final_score > score_adjustments[item.organisation].base_score else _movement(movement_by_org.get(item.organisation)), "confidence": item.assessment.confidence if item.assessment else item.scores.ai_reinvention_opportunity_score, "live_evidence_receipts": live_metrics.get(item.organisation).top_receipts if item.organisation in live_metrics else []} for item in top_five]
 
     condition_map = {name: {"condition": name, "strength": 0, "trend": "No verified change", "affected_organisations": [], "why_it_matters": "Evidence missing; retain as a watch condition until real evidence is ingested.", "evidence_status": "missing"} for name in CONDITION_CARDS}
     condition_orgs = {
@@ -180,7 +199,7 @@ def build_publication_context(publication_date: date | None = None) -> dict[str,
         evts = evidence_by_org[item.organisation]
         recommended_actions.append({
             "priority": idx, "organisation": display_name(item.organisation), "target_executive_or_function": guide["target"], "proposition": guide["proposition"], "action": guide["action"], "why_now": guide["why_now"],
-            "why_this_matters_to_rob": guide["matters"], "evidence_receipt": _receipt(evts), "live_evidence_receipt": [le for le in live_evidence if le.get("organisation") == item.organisation][:3],
+            "why_this_matters_to_rob": (f"{display_name(item.organisation)} has live evidence for {', '.join(live_metrics[item.organisation].strongest_conditions)} linked to {', '.join(live_metrics[item.organisation].strongest_capabilities)}. For Rob, this turns the account from a generic {item.sector} watch into a concrete AI reinvention validation; competitor context is {a.competitive_context} Missing evidence remains: funding, sponsor, procurement timing and incumbent position." if item.organisation in live_metrics else guide["matters"]), "evidence_receipt": _receipt(evts), "live_evidence_receipt": (live_metrics[item.organisation].top_receipts if item.organisation in live_metrics else []),
             "missing_evidence": ["funding", "sponsor", "procurement timing", "incumbent position", "competitor engagement"], "time_required": guide["time_required"], "confidence": a.confidence,
         })
 
@@ -213,10 +232,10 @@ def build_publication_context(publication_date: date | None = None) -> dict[str,
     }
 
     live_sources = len({e.get("source_id") or e.get("source_name") for e in live_evidence})
-    live_unique = len(load_evidence_fingerprints(DEFAULT_PATH)) if live_evidence else 0
+    live_unique = len(live_evidence)
     live_banner = f"LIVE EVIDENCE USED — {live_unique} unique evidence objects from {live_sources} sources" if live_evidence else "NO LIVE EVIDENCE AVAILABLE — use /live/collect to attempt collection"
 
-    return {"product": "Flora Publisher", "edition": "Morning Edition", "version": VERSION, "publication_date": publication_date.isoformat(), "publication_date_label": publication_date.strftime("%A %d %B %Y"), "generated_timestamp": datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC"), "live_evidence_banner": live_banner, "live_evidence": live_evidence[:12], "live_coverage_summary": live_coverage_summary, "reading_time": _reading_time(len(daily.items), evidence_count), "executive_summary": executive_summary, "what_changed": what_changed, "priority_opportunity": priority_opportunity, "top_organisations": top_orgs, "conditions": conditions, "movements": movements, "competitive_intelligence": competitive, "recommended_actions": recommended_actions, "three_things_today": today, "cannot_know": cannot_know, "teach_flora": {"Biggest Insight": "", "Biggest Surprise": "", "Action Taken": "", "What Flora Should Learn": "", "Flora Value Score (0–5)": ""}, "case_files": sorted({display_name(ev.organisation) for ev in evidence}), "playbooks": sorted({pb for item in daily.items if item.assessment for pb in item.assessment.supporting_playbooks}), "commercial_laws": ["Validate sponsor", "Validate funding", "Validate timing", "Validate incumbent and competitor activity"], "known_limitations": ["Live evidence limited to configured public HTML source pages", "PDF ingestion not implemented", "No LLMs", "No databases", "No broad crawling", "Pilot placeholders remain blank on Teach Flora page"]}
+    return {"product": "Flora Publisher", "edition": "Morning Edition", "version": VERSION, "publication_date": publication_date.isoformat(), "publication_date_label": publication_date.strftime("%A %d %B %Y"), "generated_timestamp": datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC"), "live_evidence_banner": live_banner, "live_evidence": live_evidence[:12], "live_coverage_summary": live_coverage_summary, "live_organisation_metrics": {org: vars(metrics) for org, metrics in live_metrics.items()}, "new_evidence_count": live_unique if live_evidence else evidence_count, "new_evidence_label": "live unique evidence objects" if live_evidence else "seeded fallback evidence items", "organisations_requiring_attention": attention_organisations(daily.items, live_metrics, sample_watchlist()), "reading_time": _reading_time(len(daily.items), live_unique if live_evidence else evidence_count), "executive_summary": executive_summary, "what_changed": what_changed, "priority_opportunity": priority_opportunity, "top_organisations": top_orgs, "conditions": conditions, "movements": movements, "competitive_intelligence": competitive, "recommended_actions": recommended_actions, "three_things_today": today, "cannot_know": cannot_know, "teach_flora": {"Biggest Insight": "", "Biggest Surprise": "", "Action Taken": "", "What Flora Should Learn": "", "Flora Value Score (0–5)": ""}, "case_files": sorted({display_name(ev.organisation) for ev in evidence}), "playbooks": sorted({pb for item in daily.items if item.assessment for pb in item.assessment.supporting_playbooks}), "commercial_laws": ["Validate sponsor", "Validate funding", "Validate timing", "Validate incumbent and competitor activity"], "known_limitations": ["Live evidence limited to configured public HTML source pages", "PDF ingestion not implemented", "No LLMs", "No databases", "No broad crawling", "Pilot placeholders remain blank on Teach Flora page"]}
 
 
 def _latest_morning_stem(ctx: dict[str, Any]) -> str:
@@ -248,7 +267,12 @@ def render_markdown(ctx: dict[str, Any]) -> str:
     for k, v in ctx["priority_opportunity"].items():
         lines += ["", f"### {k}", str(v)]
     lines += ["", "## Top Five Organisations", "", "| Organisation | Sector | Condition Strength | AI Opportunity | Movement | Confidence |", "| --- | --- | ---: | ---: | --- | ---: |"]
-    lines += [f"| {r['organisation']} | {r['sector']} | {r['condition_strength']} | {r['ai_opportunity']} | {r['movement']} | {r['confidence']} |" for r in ctx["top_organisations"]]
+    lines += [f"| {r['organisation']} | {r['sector']} | {r['condition_strength']} | {r['base_score']} → {r['final_score']} (+{r['live_evidence_adjustment']}) | {r['movement']} | {r['confidence']} |" for r in ctx["top_organisations"]]
+    lines += ["", "### Score adjustment reasons"] + [f"- **{r['organisation']}** — base {r['base_score']}, live adjustment +{r['live_evidence_adjustment']}, final {r['final_score']}. {r['adjustment_reason']}" for r in ctx["top_organisations"]]
+    lines += ["", "### Top live evidence receipts"]
+    for r in ctx["top_organisations"]:
+        if r.get("live_evidence_receipts"):
+            lines += [f"- **{r['organisation']}** — {e['source_name']} ({e['url']}): {e['snippet']} [condition: {e['condition']}; capability: {e['capability']}; confidence: {e['confidence']}]" for e in r["live_evidence_receipts"]]
     lines += ["", "## Executive & Market Movements"]
     for s in ctx["movements"]:
         lines += ["", f"### {s['title']}"] + [f"- {x}" for x in s["items"]]
@@ -257,7 +281,7 @@ def render_markdown(ctx: dict[str, Any]) -> str:
     for a in ctx["recommended_actions"]:
         lines += ["", f"### Priority {a['priority']} — {a['organisation']}", "", "## Why this matters to Rob", a["why_this_matters_to_rob"], "", f"- **Target executive or function:** {a['target_executive_or_function']}", f"- **Proposition:** {a['proposition']}", f"- **Action:** {a['action']}", f"- **Why now:** {a['why_now']}", f"- **Time required:** {a['time_required']}", f"- **Missing evidence:** {', '.join(a['missing_evidence'])}", "", "## Evidence Receipt", "", "| Signal IDs | Evidence summary | Source type | Evidence status |", "| --- | --- | --- | --- |"]
         if a.get("live_evidence_receipt"):
-            lines += ["| Live evidence | " + e["snippet"] + " | " + e["source_type"] + " | " + e["source_name"] + " — " + e["source_url"] + " |" for e in a["live_evidence_receipt"]]
+            lines += ["| Live evidence | " + e["snippet"] + " | " + e["source_type"] + " | " + e["source_name"] + " — " + e["url"] + " |" for e in a["live_evidence_receipt"]]
         lines += [f"| {e['signal_ids']} | {e['summary']} | {e['source_type']} | {e['evidence_status']} |" for e in a["evidence_receipt"]]
     lines += ["", "## Three Things Worth Doing Today"] + [f"- {x}" for x in ctx["three_things_today"]]
     lines += ["", "## What Flora Cannot Yet Know"] + [f"- {x}" for x in ctx["cannot_know"]]

@@ -6,6 +6,7 @@ from typing import Any
 
 from cios.applications.flora.live.collect import current_status, source_coverage
 from cios.applications.flora.live.store import DEFAULT_PATH, load_evidence_fingerprints, read_jsonl
+from cios.applications.flora.live.aggregation import aggregate_live_evidence, unique_live_evidence
 
 
 def live_banner_html() -> str:
@@ -23,7 +24,9 @@ def _page(title: str, body: str) -> str:
 
 def dashboard() -> str:
     status = current_status()
-    body = f"""<h1>Flora Live Evidence</h1>{live_banner_html()}<section class='card'><h2>Status</h2><ul><li>Last collection time: {escape(str(status['last_collection_time'] or 'Never'))}</li><li>Sources attempted: {status['sources_attempted']}</li><li>Sources succeeded: {status['sources_succeeded']}</li><li>Sources failed: {status['sources_failed']}</li><li>Unique evidence objects: {status['total_unique_evidence_objects']}</li></ul><p><a href='/live/collect'>Run live collection now</a> · <a href='/live/sources'>Source coverage</a> · <a href='/live/evidence'>View evidence</a></p></section><section class='card warn'><h2>Storage note</h2><p>Live evidence is stored in local JSONL. Render free-tier filesystems may be ephemeral and evidence may reset on redeploy; this is acceptable for pilot v0.2. Persistent storage is a later decision.</p></section>"""
+    metrics = aggregate_live_evidence(unique_live_evidence(read_jsonl(DEFAULT_PATH)))
+    org_rows = "".join(f"<tr><td>{escape(org)}</td><td>{m.live_evidence_count}</td><td>{m.unique_source_count}</td><td>{escape(', '.join(m.strongest_conditions))}</td><td>{escape(', '.join(m.strongest_capabilities))}</td><td>{escape(m.evidence_freshness)}</td></tr>" for org, m in sorted(metrics.items(), key=lambda kv: kv[1].live_evidence_count, reverse=True))
+    body = f"""<h1>Flora Live Evidence</h1>{live_banner_html()}<section class='card'><h2>Status</h2><ul><li>Last collection time: {escape(str(status['last_collection_time'] or 'Never'))}</li><li>Sources attempted: {status['sources_attempted']}</li><li>Sources succeeded: {status['sources_succeeded']}</li><li>Sources failed: {status['sources_failed']}</li><li>Unique evidence objects: {status['total_unique_evidence_objects']}</li></ul><p><a href='/live/collect'>Run live collection now</a> · <a href='/live/sources'>Source coverage</a> · <a href='/live/evidence'>View evidence</a></p></section><section class='card'><h2>Live organisation aggregation</h2><table><thead><tr><th>Organisation</th><th>Evidence</th><th>Sources</th><th>Strongest conditions</th><th>Strongest capabilities</th><th>Freshness</th></tr></thead><tbody>{org_rows or '<tr><td colspan="6">No live aggregation available.</td></tr>'}</tbody></table></section><section class='card warn'><h2>Storage note</h2><p>Live evidence is stored in local JSONL. Render free-tier filesystems may be ephemeral and evidence may reset on redeploy; this is acceptable for pilot v0.2. Persistent storage is a later decision.</p></section>"""
     return _page("Flora Live Evidence", body)
 
 
