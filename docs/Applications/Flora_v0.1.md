@@ -1,37 +1,93 @@
-# Flora v0.1 — AI Reinvention Intelligence
+# Flora v0.2 — Flora Intelligence Engine
 
 ## Purpose
 
-Flora is a CIOS application for AI Reinvention Intelligence. It helps a commercial team identify target organisations where AI-enabled reinvention may be timely, valuable and commercially actionable.
+Flora is a deterministic CIOS Commercial Intelligence application for identifying organisations where AI-enabled reinvention may be timely, valuable and commercially actionable. Sprint 2 upgrades Flora from a signal-scoring prototype into an explainable assessment engine while preserving the existing SDK-style application architecture.
 
-## What v0.1 does
+Flora v0.2 does **not** use LLMs, external APIs or databases. All intelligence remains seeded and repeatable for local validation.
 
-Flora v0.1 is a deterministic command-line application that:
+## Assessment model
 
-- Defines Commercial DNA for an employer, business unit, target sectors, offerings, competitors, differentiators, reference clients and target geographies.
-- Defines a target account watchlist with organisations, sectors, priorities, notes, incumbents and competitors.
-- Defines seeded intelligence signals with source metadata, evidence text, confidence, strength, freshness and related capabilities.
-- Calculates simple deterministic indices:
-  - Commercial Pressure Index
-  - AI Suitability Index
-  - Organisational Readiness Index
-  - Commercial Attractiveness Index
-  - Influence Potential Index
-  - AI Reinvention Opportunity Score
-- Generates a Daily Intelligence Brief containing the top five organisations, reasons they are interesting, strongest signals, likely capability areas, competitors to watch and recommended next actions.
+Each ranked organisation now carries an `IntelligenceAssessment` with:
 
-## What is mocked or seeded
+- `assessment_id`
+- `organisation`
+- `assessment_date`
+- `commercial_summary`
+- `why_now`
+- `why_this_capability`
+- `why_this_proposition`
+- `why_this_executive`
+- `competitive_context`
+- `confidence`
+- `missing_evidence`
+- `supporting_patterns`
+- `supporting_playbooks`
+- `supporting_propositions`
+- `evidence`
+- `recommended_actions`
 
-Flora v0.1 does not call live news, CRM, market intelligence, LLM, database or web APIs. All Commercial DNA, watchlist accounts and signals are seeded in code for repeatable local execution. The sample data focuses on communications-sector adjacencies: utilities, energy, telecommunications, media and sport.
+The assessment connects deterministic scores, seeded signals, commercial patterns, sector/capability/executive playbooks and propositions into a single explainable object.
 
-Seeded organisations include Thames Water, BT, National Grid, Sky, BBC, Vodafone, SSE and United Utilities. Seeded competitors include IBM, Accenture, Capgemini, Deloitte, KPMG, CGI, TCS, Infosys, Cognizant, Wipro and Sopra Steria.
+## Evidence model
+
+Each assessment includes seeded `EvidenceItem` objects with:
+
+- `source_name`
+- `source_type`
+- `publication_date`
+- `evidence_summary`
+- `related_signal`
+- `confidence`
+
+Evidence is generated from the seeded Flora signals. The `related_signal` field preserves traceability back to the signal that contributed to the assessment.
+
+## Explainability
+
+Every recommended action answers:
+
+- Why this organisation?
+- Why now?
+- Why this capability?
+- Why this executive?
+- Why this proposition?
+- Why this action?
+
+The same recommendation also names the Commercial Pattern, Sector Playbook, Capability Playbook, Executive Playbook and Proposition used to shape the action.
+
+## Missing evidence
+
+Flora v0.2 explicitly exposes evidence gaps so users do not confuse seeded hypotheses with confirmed pursuit intelligence. Initial gaps include:
+
+- Funding not confirmed
+- Executive sponsor unknown
+- Procurement timing unknown
+- Competitor engagement unknown
+
+## Weekly Intelligence Brief
+
+In addition to the daily assessment brief, Flora supports a Weekly Intelligence Brief containing:
+
+- biggest movers
+- score changes
+- new evidence
+- organisations to watch
+- organisations to deprioritise
+
+Weekly score movement is deterministic and seeded; it is intended to validate report shape before live connectors are introduced.
 
 ## How to run
 
-Human-readable briefing:
+Human-readable assessment brief:
 
 ```bash
 python -m cios.applications.flora.main
+```
+
+Weekly brief:
+
+```bash
+python -m cios.applications.flora.main --weekly
 ```
 
 Structured JSON briefing:
@@ -46,18 +102,6 @@ Run tests:
 pytest -q
 ```
 
-## Future roadmap
+## Future live evidence connectors
 
-Potential future increments:
-
-1. Load Commercial DNA and watchlists from reviewed JSON or YAML files.
-2. Add evidence traceability to platform evidence and reasoning artefacts.
-3. Add configurable scoring weights and sector-specific scoring profiles.
-4. Add approved internal data connectors once CIOS integration standards permit them.
-5. Add persistent memory snapshots through the passive CIOS memory layer.
-6. Add UI/API surfaces after the deterministic CLI workflow is stable.
-7. Introduce carefully governed LLM summarisation only if a future standard approves it.
-
-## Future roadmap note — Commercial Intelligence Playbooks
-
-Future Flora versions will consume the Commercial Intelligence Playbook Library in `docs/CBOK/Playbooks/` to make recommendations more specific, evidence-backed and role-aware. Flora should use playbooks to connect signals, commercial pressure, AI reinvention potential, competitor hypotheses, stakeholder influence and Commercial DNA to context-specific next actions while preserving confidence and traceability.
+Future versions may add governed connectors for approved internal CRM, market intelligence, procurement, account-planning or public-source feeds. Those connectors should populate the same evidence model, retain source and publication metadata, preserve confidence scoring and keep missing-evidence gaps visible. No connector should bypass deterministic validation or introduce opaque recommendation logic.

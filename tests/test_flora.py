@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 from cios.applications.flora.models import CommercialDNA, Priority, Signal, TargetAccount
-from cios.applications.flora.pipeline import generate_daily_brief
+from cios.applications.flora.pipeline import generate_daily_brief, generate_weekly_brief
 from cios.applications.flora.scoring import calculate_scores
 from cios.applications.flora.seed_data import sample_commercial_dna, sample_signals, sample_watchlist
 
@@ -54,8 +54,16 @@ def test_daily_briefing_generation() -> None:
 
 def test_json_output_shape() -> None:
     payload = json.loads(generate_daily_brief().model_dump_json())
-    assert payload["version"] == "0.1"
+    assert payload["version"] == "0.2"
     assert payload["items"][0]["scores"]["ai_reinvention_opportunity_score"] >= 0
+    assessment = payload["items"][0]["assessment"]
+    assert assessment["evidence"]
+    assert assessment["missing_evidence"]
+    assert assessment["recommended_actions"][0]["commercial_pattern"]
+    assert assessment["recommended_actions"][0]["sector_playbook"]
+    assert assessment["recommended_actions"][0]["capability_playbook"]
+    assert assessment["recommended_actions"][0]["executive_playbook"]
+    assert assessment["recommended_actions"][0]["proposition"]
 
 
 def test_cli_execution_text_and_json() -> None:
@@ -63,6 +71,18 @@ def test_cli_execution_text_and_json() -> None:
     assert "Flora Daily Intelligence Brief" in text.stdout
     structured = subprocess.run([sys.executable, "-m", "cios.applications.flora.main", "--json"], check=True, text=True, capture_output=True)
     assert json.loads(structured.stdout)["items"]
+    weekly = subprocess.run([sys.executable, "-m", "cios.applications.flora.main", "--weekly"], check=True, text=True, capture_output=True)
+    assert "Flora Weekly Intelligence Brief" in weekly.stdout
+
+
+def test_weekly_brief_generation() -> None:
+    brief = generate_weekly_brief()
+    assert brief.title == "Flora Weekly Intelligence Brief"
+    assert brief.biggest_movers
+    assert brief.score_changes
+    assert brief.new_evidence
+    assert brief.organisations_to_watch
+    assert brief.organisations_to_deprioritise
 
 
 def test_no_forbidden_imports() -> None:
