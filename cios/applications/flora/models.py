@@ -1,4 +1,4 @@
-"""Pydantic models for Flora AI Reinvention Intelligence v0.1."""
+"""Pydantic models for Flora AI Reinvention Intelligence v0.2."""
 
 from __future__ import annotations
 
@@ -42,7 +42,7 @@ class TargetAccount(BaseModel):
 
 
 class Signal(BaseModel):
-    """A seeded intelligence signal used by Flora v0.1 scoring."""
+    """A seeded intelligence signal used by Flora scoring."""
 
     signal_id: str
     source: str
@@ -57,6 +57,57 @@ class Signal(BaseModel):
     freshness: int = Field(ge=0, le=100)
     detected_date: date
     related_capabilities: list[str] = Field(default_factory=list)
+
+
+class EvidenceItem(BaseModel):
+    """Traceable evidence supporting an assessment."""
+
+    source_name: str
+    source_type: str
+    publication_date: date
+    evidence_summary: str
+    related_signal: str
+    confidence: int = Field(ge=0, le=100)
+
+
+class RecommendedAction(BaseModel):
+    """Explainable next action linked to playbooks, patterns and propositions."""
+
+    action_id: str
+    action_summary: str
+    why_this_organisation: str
+    why_now: str
+    why_this_capability: str
+    why_this_executive: str
+    why_this_proposition: str
+    why_this_action: str
+    commercial_pattern: str
+    sector_playbook: str
+    capability_playbook: str
+    executive_playbook: str
+    proposition: str
+    confidence: int = Field(ge=0, le=100)
+
+
+class IntelligenceAssessment(BaseModel):
+    """Explainable commercial intelligence assessment for one organisation."""
+
+    assessment_id: str
+    organisation: str
+    assessment_date: date
+    commercial_summary: str
+    why_now: str
+    why_this_capability: str
+    why_this_proposition: str
+    why_this_executive: str
+    competitive_context: str
+    confidence: int = Field(ge=0, le=100)
+    missing_evidence: list[str] = Field(default_factory=list)
+    supporting_patterns: list[str] = Field(default_factory=list)
+    supporting_playbooks: list[str] = Field(default_factory=list)
+    supporting_propositions: list[str] = Field(default_factory=list)
+    evidence: list[EvidenceItem] = Field(default_factory=list)
+    recommended_actions: list[RecommendedAction] = Field(default_factory=list)
 
 
 class ReinventionScores(BaseModel):
@@ -82,14 +133,40 @@ class BriefingItem(BaseModel):
     likely_capability_areas: list[str] = Field(default_factory=list)
     main_competitors_to_watch: list[str] = Field(default_factory=list)
     recommended_next_action: str
+    assessment: IntelligenceAssessment | None = None
 
 
 class DailyBrief(BaseModel):
     """The complete Flora Daily Intelligence Brief."""
 
     title: str = "Flora Daily Intelligence Brief"
-    version: Literal["0.1"] = "0.1"
+    version: Literal["0.2"] = "0.2"
     generated_for: str
     business_unit: str
     target_geographies: list[str] = Field(default_factory=list)
     items: list[BriefingItem] = Field(default_factory=list)
+
+
+class WeeklyMover(BaseModel):
+    """Weekly movement record for an organisation."""
+
+    organisation: str
+    sector: str
+    previous_score: int = Field(ge=0, le=100)
+    current_score: int = Field(ge=0, le=100)
+    score_change: int
+    reason: str
+
+
+class WeeklyIntelligenceBrief(BaseModel):
+    """Weekly Flora intelligence report."""
+
+    title: str = "Flora Weekly Intelligence Brief"
+    version: Literal["0.2"] = "0.2"
+    generated_for: str
+    business_unit: str
+    biggest_movers: list[WeeklyMover] = Field(default_factory=list)
+    score_changes: list[WeeklyMover] = Field(default_factory=list)
+    new_evidence: list[EvidenceItem] = Field(default_factory=list)
+    organisations_to_watch: list[str] = Field(default_factory=list)
+    organisations_to_deprioritise: list[str] = Field(default_factory=list)
