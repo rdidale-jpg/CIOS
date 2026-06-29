@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: flora
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m cios.applications.flora.web.app
+    envVars:
+      - key: FLORA_HOST
+        value: 0.0.0.0
