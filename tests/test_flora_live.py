@@ -120,3 +120,55 @@ def test_collection_failures_display_clearly(tmp_path: Path, monkeypatch) -> Non
     html = collection_result(collect_module.collect("BT"))
     assert "failed 3" in html
     assert "tunnel 403" in html
+
+
+def test_repeated_collection_does_not_increase_evidence_count(tmp_path: Path, monkeypatch) -> None:
+    from cios.applications.flora.live import collect as collect_module
+    from cios.applications.flora.live.store import DEFAULT_PATH, read_jsonl
+
+    class DummyResult:
+        succeeded = True
+        status_code = 200
+        html = "<html><body><p>BT is investing in network automation and customer experience data.</p></body></html>"
+        error = None
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(collect_module, "fetch_html", lambda url: DummyResult())
+
+    first = collect_module.collect("BT")
+    first_count = len(read_jsonl(DEFAULT_PATH))
+    second = collect_module.collect("BT")
+    second_count = len(read_jsonl(DEFAULT_PATH))
+
+    assert first["sources_attempted"] == 3
+    assert first["evidence_objects_extracted"] > 0
+    assert first["new_evidence_added"] == first_count
+    assert first["duplicate_evidence_skipped"] == 0
+    assert second["sources_attempted"] == 3
+    assert second["evidence_objects_extracted"] == first["evidence_objects_extracted"]
+    assert second["new_evidence_added"] == 0
+    assert second["duplicate_evidence_skipped"] == first["evidence_objects_extracted"]
+    assert second["total_unique_evidence_objects"] == first_count
+    assert second_count == first_count
+
+
+def test_current_status_reports_unique_evidence_objects(tmp_path: Path, monkeypatch) -> None:
+    from cios.applications.flora.live.collect import current_status
+    from cios.applications.flora.live.store import write_jsonl
+
+    monkeypatch.chdir(tmp_path)
+    evidence = {
+        "evidence_id": "LIVE-1",
+        "organisation": "BT",
+        "source_id": "bt-news",
+        "source_url": "https://newsroom.bt.com/",
+        "snippet": "BT mentions AI for network operations.",
+        "commercial_condition": "AI Modernisation",
+        "likely_capability": "AI use-case discovery",
+    }
+    write_jsonl([evidence, {**evidence, "evidence_id": "LIVE-2"}])
+
+    status = current_status()
+
+    assert status["evidence_objects_collected"] == 1
+    assert status["total_unique_evidence_objects"] == 1
