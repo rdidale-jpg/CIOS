@@ -87,7 +87,7 @@ def test_weekly_brief_generation() -> None:
 
 def test_no_forbidden_imports() -> None:
     forbidden = {"openai", "requests", "httpx", "sqlalchemy", "sqlite", "sqlite3", "pymongo"}
-    for path in Path("cios/applications/flora").glob("*.py"):
+    for path in Path("cios/applications/flora").rglob("*.py"):
         tree = ast.parse(path.read_text())
         for node in ast.walk(tree):
             if isinstance(node, ast.Import):
@@ -97,3 +97,51 @@ def test_no_forbidden_imports() -> None:
             else:
                 continue
             assert forbidden.isdisjoint(imported), f"{path} imports {forbidden & imported}"
+
+from cios.applications.flora.intelligence.case_file import generate_case_file
+from cios.applications.flora.intelligence.evidence_engine import CommercialEvidence, EvidenceCategory, get_seed_evidence
+from cios.applications.flora.intelligence.insight_engine import generate_insights
+from cios.applications.flora.intelligence.timeline import build_timeline
+
+
+def test_commercial_evidence_construction() -> None:
+    evidence = get_seed_evidence()[0]
+    assert isinstance(evidence, CommercialEvidence)
+    assert evidence.evidence_category in set(EvidenceCategory)
+    assert evidence.related_patterns
+
+
+def test_insight_generation() -> None:
+    evidence = [item for item in get_seed_evidence() if item.organisation == "Thames Water"]
+    insights = generate_insights("Thames Water", evidence, ["ASSESSMENT-1"])
+    assert insights
+    assert insights[0].supporting_evidence
+    assert "Customer Operations" in insights[0].title
+
+
+def test_timeline_ordering() -> None:
+    evidence = [item for item in get_seed_evidence() if item.organisation == "BT"]
+    timeline = build_timeline(list(reversed(evidence)))
+    assert [entry.entry_date for entry in timeline] == sorted(entry.entry_date for entry in timeline)
+    assert len(timeline) == len(evidence)
+
+
+def test_case_file_generation_and_narrative() -> None:
+    case_file = generate_case_file("ThamesWater")
+    assert case_file.organisation == "Thames Water"
+    assert case_file.evidence
+    assert case_file.timeline
+    assert case_file.insights
+    assert len(case_file.executive_summary.split()) <= 400
+    assert case_file.open_questions
+
+
+def test_cli_case_output_text_and_json() -> None:
+    text = subprocess.run([sys.executable, "-m", "cios.applications.flora.main", "--case", "ThamesWater"], check=True, text=True, capture_output=True)
+    assert "Living Commercial Case File: Thames Water" in text.stdout
+    assert "Commercial Timeline" in text.stdout
+    structured = subprocess.run([sys.executable, "-m", "cios.applications.flora.main", "--case", "BT", "--json"], check=True, text=True, capture_output=True)
+    payload = json.loads(structured.stdout)
+    assert payload["organisation"] == "BT"
+    assert payload["evidence"]
+    assert payload["timeline"]
