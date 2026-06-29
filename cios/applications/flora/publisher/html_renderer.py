@@ -39,18 +39,24 @@ def render_html(ctx: dict[str, Any]) -> str:
     pages: list[str] = []
     pages.append(f"""<section class='page cover'><div class='kicker'>Confidential (Pilot)</div><h1>FLORA</h1><div class='subtitle'>Morning Edition</div><div class='meta-grid'><div class='meta'><span class='label'>Date</span>{_e(ctx['publication_date_label'])}</div><div class='meta'><span class='label'>Reading time</span>{ctx['reading_time']} minutes</div><div class='meta'><span class='label'>Version</span>{_e(ctx['version'])}</div><div class='meta'><span class='label'>Edition</span>Executive intelligence briefing</div></div>{_footer(ctx,1)}</section>""")
     pages.append(f"<section class='page'><h2>Executive Summary</h2><ul>{''.join(f'<li>{_e(b)}</li>' for b in ctx['executive_summary'])}</ul>{_footer(ctx,2)}</section>")
+    wc = ctx['what_changed']
+    movers = ''.join(f"<li><b>{_e(m['organisation'])}</b> — {_e(m['movement'])}: {_e(m['reason'])}</li>" for m in wc['strongest_movers'])
+    pages.append(f"<section class='page'><h2>What Changed</h2><p>{_e(wc['summary'])}</p><h3>Strongest movers</h3><ul>{movers}</ul><h3>Conditions strengthened</h3><ul>{''.join(f'<li>{_e(x)}</li>' for x in wc['strengthened'])}</ul><h3>Conditions weakened</h3><ul>{''.join(f'<li>{_e(x)}</li>' for x in wc['weakened'])}</ul>{_footer(ctx,5)}</section>")
+    cond = ''.join(f"<div class='card'><h3>{_e(c['condition'])}</h3><p><b>Strength:</b> {c['strength']} · <b>Trend:</b> {_e(c['trend'])} · <b>Evidence:</b> {_e(c['evidence_status'])}</p><p><b>Affected Organisations:</b> {_e(', '.join(c['affected_organisations']) or 'None in seeded evidence')}</p><p><b>Why it matters:</b> {_e(c['why_it_matters'])}</p></div>" for c in ctx['conditions'])
+    pages.append(f"<section class='page'><h2>Commercial Radar</h2>{cond}{_footer(ctx,8)}</section>")
     po = ctx['priority_opportunity']
     pages.append(f"""<section class='page'><h2>Today's Priority Opportunity</h2>{''.join(f"<h3>{_e(k)}</h3><p>{_e(v)}</p>" for k,v in po.items())}{_footer(ctx,3)}</section>""")
     rows = ''.join(f"<tr><td>{_e(r['organisation'])}</td><td>{_e(r['sector'])}</td><td>{r['condition_strength']}</td><td>{r['ai_opportunity']}</td><td>{_e(r['movement'])}</td><td>{r['confidence']}</td></tr>" for r in ctx['top_organisations'])
     pages.append(f"<section class='page'><h2>Top Five Organisations</h2><table><thead><tr><th>Organisation</th><th>Sector</th><th>Condition Strength</th><th>AI Reinvention Opportunity</th><th>Movement</th><th>Confidence</th></tr></thead><tbody>{rows}</tbody></table>{_footer(ctx,4)}</section>")
-    cond = ''.join(f"<div class='card'><h3>{_e(c['condition'])}</h3><p><b>Strength:</b> {c['strength']} · <b>Trend:</b> {_e(c['trend'])}</p><p><b>Affected Organisations:</b> {_e(', '.join(c['affected_organisations']))}</p><p><b>Primary Drivers:</b> {_e(c['primary_drivers'])}</p></div>" for c in ctx['conditions'])
-    pages.append(f"<section class='page'><h2>Emerging Commercial Conditions</h2>{cond}{_footer(ctx,5)}</section>")
     moves = ''.join(f"<h3>{_e(s['title'])}</h3><ul>{''.join(f'<li>{_e(x)}</li>' for x in s['items'])}</ul>" for s in ctx['movements'])
     pages.append(f"<section class='page'><h2>Executive &amp; Market Movements</h2>{moves}{_footer(ctx,6)}</section>")
     comp = ''.join(f"<h3>{_e(k)}</h3><p>{_e(v)}</p>" for k,v in ctx['competitive_intelligence'].items())
     pages.append(f"<section class='page'><h2>Competitive Intelligence</h2>{comp}{_footer(ctx,7)}</section>")
-    acts = ''.join(f"<div class='card'><h3>Priority {a['priority']} · {_e(a['organisation'])}</h3><p><b>Reason:</b> {_e(a['reason'])}</p><p><b>Expected Commercial Value:</b> {_e(a['expected_value'])}</p><p><b>Confidence:</b> {a['confidence']}</p><p><b>Evidence references:</b> {_e(', '.join(a['evidence_references']))}</p></div>" for a in ctx['recommended_actions'])
-    pages.append(f"<section class='page'><h2>Recommended Actions</h2>{acts}{_footer(ctx,8)}</section>")
+    acts = ''.join(f"<div class='card'><h3>Priority {a['priority']} · {_e(a['organisation'])}</h3><h4>Why this matters to Rob</h4><p>{_e(a['why_this_matters_to_rob'])}</p><p><b>Target:</b> {_e(a['target_executive_or_function'])}</p><p><b>Proposition:</b> {_e(a['proposition'])}</p><p><b>Action:</b> {_e(a['action'])}</p><p><b>Why now:</b> {_e(a['why_now'])}</p><p><b>Missing evidence:</b> {_e(', '.join(a['missing_evidence']))}</p><p><b>Time required:</b> {_e(a['time_required'])}</p><h4>Evidence Receipt</h4><ul>{''.join(f'<li>{_e(e["signal_ids"])} — {_e(e["summary"])} ({_e(e["source_type"])}, {_e(e["evidence_status"])})</li>' for e in a['evidence_receipt'])}</ul></div>" for a in ctx['recommended_actions'])
+    pages.append(f"<section class='page'><h2>Recommended Actions</h2>{acts}{_footer(ctx,11)}</section>")
+    today = ''.join(f'<li>{_e(x)}</li>' for x in ctx['three_things_today'])
+    unknown = ''.join(f'<li>{_e(x)}</li>' for x in ctx['cannot_know'])
+    pages.append(f"<section class='page'><h2>Three Things Worth Doing Today</h2><ul>{today}</ul><h2>What Flora Cannot Yet Know</h2><ul>{unknown}</ul>{_footer(ctx,10)}</section>")
     teach = ''.join(f"<div class='card'><span class='label'>{_e(k)}</span><span class='placeholder'>{_e(v)}</span></div>" for k,v in ctx['teach_flora'].items())
     pages.append(f"<section class='page'><h2>Teach Flora</h2>{teach}{_footer(ctx,9)}</section>")
     return "<!doctype html><html><head><meta charset='utf-8'><title>Flora Morning Edition</title><link rel='stylesheet' href='assets/flora_publisher.css'></head><body><main class='publication'>" + ''.join(pages) + "</main></body></html>"

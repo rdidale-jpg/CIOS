@@ -381,3 +381,43 @@ def test_write_release_notes_includes_required_sections(tmp_path) -> None:
     text = path.read_text(encoding="utf-8")
     for expected in ["Morning Edition version", "Publication date", "Files included", "Known limitations", "Instructions for downloading"]:
         assert expected in text
+
+
+def test_morning_edition_v02_editorial_sections_and_receipts(tmp_path) -> None:
+    paths = generate_morning_edition(tmp_path, publication_date=date(2026, 6, 30))
+    html = paths["html"].read_text(encoding="utf-8")
+    assert "What Changed" in html
+    assert "Commercial Radar" in html
+    assert "Why this matters to Rob" in html
+    assert "Evidence Receipt" in html
+    assert "Three Things Worth Doing Today" in html
+    assert "What Flora Cannot Yet Know" in html
+    assert "No verified executive movement detected in the current pilot evidence." in html
+    assert "Leadership change may reopen the transformation agenda." not in html
+    assert "Technology spend improves readiness for governed AI use cases." not in html
+    assert "Regulation increases urgency for auditable operating data." not in html
+
+
+def test_morning_edition_v02_preserves_acronym_display_names() -> None:
+    ctx = build_publication_context(date(2026, 6, 30))
+    rendered = json.dumps(ctx)
+    assert "BT" in rendered
+    assert "BBC" in rendered
+    assert "SSE" in rendered
+    assert "Bt" not in rendered
+    assert "Bbc" not in rendered
+    assert "Sse" not in rendered
+
+
+def test_text_only_preview_bundle_is_generated_without_binaries(tmp_path) -> None:
+    from cios.applications.flora.publisher.morning_edition import build_publication_context, write_preview_bundle
+
+    ctx = build_publication_context(date(2026, 6, 30))
+    paths = write_preview_bundle(ctx, tmp_path)
+    expected = {"Morning_Edition_2026-06-30.md", "Morning_Edition_2026-06-30.html", "README.md", "VERSION.json", "RELEASE_NOTES.md"}
+    assert expected == {path.name for path in paths.values()}
+    assert (tmp_path / "Morning_Edition_2026-06-30.md").is_file()
+    assert "## What Changed" in (tmp_path / "Morning_Edition_2026-06-30.md").read_text(encoding="utf-8")
+    assert not list(tmp_path.glob("*.pdf"))
+    assert not list(tmp_path.glob("*.png"))
+    assert not list(tmp_path.glob("*.zip"))

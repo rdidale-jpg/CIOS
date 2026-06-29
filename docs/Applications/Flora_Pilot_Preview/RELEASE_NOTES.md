@@ -1,27 +1,12 @@
 # Flora Pilot Preview Release Notes
 
-## Summary
+This PR delivers Flora Morning Edition v0.2 text-only preview for 2026-06-30.
 
-This PR delivers a text-only accessible Flora Morning Edition preview for 2026-06-29.
+## Highlights
 
-## Binary artefact policy
+- Adds What Changed.
+- Promotes Commercial Radar.
+- Adds Why this matters to Rob and Evidence Receipts.
+- Adds Three Things Worth Doing Today and What Flora Cannot Yet Know.
 
-PDF, PNG and ZIP artefacts are generated locally by the Flora publisher workflow, but they are not committed in this PR because the current PR flow does not support binary artefacts.
-
-The branch intentionally excludes:
-
-- `*.pdf`
-- `*.png`
-- `*.zip`
-
-## Future delivery
-
-Binary delivery should be handled later via GitHub Releases, not PR files. Release assets are the appropriate place for locally generated PDFs, page preview PNGs and packaged ZIP downloads.
-
-## Included files
-
-- `README.md`
-- `Morning_Edition_2026-06-29.md`
-- `Morning_Edition_2026-06-29.html`
-- `VERSION.json`
-- `RELEASE_NOTES.md`
+PDF, PNG and ZIP artefacts remain local publisher outputs and are not committed.
