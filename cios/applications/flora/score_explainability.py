@@ -44,6 +44,9 @@ class ScoreFacet:
     evidence_used: list[str]
     missing_evidence: list[str]
     source_links: list[dict[str, str]]
+    source_type: str = "seeded evidence"
+    evidence_count_used: int = 0
+    mappings: list[str] | None = None
 
 
 @dataclass(frozen=True)
@@ -60,7 +63,9 @@ def score_detail(slug: str) -> dict[str, Any]:
     dna = sample_commercial_dna()
     ranked = _ranked_items(dna, sample_watchlist(), sample_signals())
     item = next(i for i in ranked if i.organisation == organisation)
-    live_items = [e for e in unique_live_evidence(read_jsonl(DEFAULT_PATH)) if e.get("organisation") == organisation]
+    all_live_items = unique_live_evidence(read_jsonl(DEFAULT_PATH))
+    platform_live_count = len(all_live_items)
+    live_items = [e for e in all_live_items if e.get("organisation") == organisation]
     live_metrics = aggregate_live_evidence(live_items).get(organisation)
     adjustment = adjust_score(organisation, item.scores.ai_reinvention_opportunity_score, live_metrics)
     radar = next(r for r in build_radar_rows() if r.organisation == organisation)
@@ -77,16 +82,18 @@ def score_detail(slug: str) -> dict[str, Any]:
     provider_relevance = 100 if item.sector in provider.target_sectors else 55
     freshness_score = 0 if not live_metrics else (80 if "today" in live_metrics.evidence_freshness else 65 if "recent" in live_metrics.evidence_freshness else 45)
     missing_penalty = max(0, len(MISSING_EVIDENCE) - radar.evidence_count)
+    live_snippets = [str(e.get("snippet") or e.get("title") or e.get("source_name") or "live evidence") for e in live_items[:4]]
+    live_mappings = [f"{e.get('commercial_condition') or e.get('condition') or 'Unmapped'} → {e.get('likely_capability') or e.get('capability') or 'AI opportunity discovery'}" for e in live_items[:4]]
     facets = [
-        ScoreFacet("Base strategic fit", adjustment.base_score, "seeded base", "Average of pressure, AI suitability, readiness, attractiveness and influence potential.", seeded_labels, [], []),
-        ScoreFacet("Live evidence uplift", adjustment.live_evidence_bonus, "capped at +14", adjustment.reason, [str(e.get("snippet") or e.get("title") or e.get("source_name") or "live evidence") for e in live_items[:4]], MISSING_EVIDENCE if not live_items else [], live_links),
-        ScoreFacet("Evidence confidence", confidence, "source quality", "Calculated from evidence tier, source diversity, evidence depth and mapped condition relevance.", [r.get("snippet", "") for r in (live_metrics.top_receipts if live_metrics else [])], MISSING_EVIDENCE, live_links),
-        ScoreFacet("Source diversity", source_diversity, "unique sources", f"{radar.unique_source_count} unique source(s) are currently attached to the organisation.", [l["name"] for l in live_links], ["additional independent sources"] if radar.unique_source_count < 2 else [], live_links),
-        ScoreFacet("Condition strength", condition_strength, "25% of base", f"Strongest mapped condition is {strongest_condition}.", seeded_labels[:2], [], []),
-        ScoreFacet("Capability relevance", capability_relevance, "25% of base", f"Strongest mapped capability is {strongest_capability}.", seeded_labels[:2], [], []),
-        ScoreFacet("Provider relevance", provider_relevance, "contextual", f"Sector fit against {provider.provider_name} configured target sectors and offerings.", provider.strategic_offerings[:3], [], []),
-        ScoreFacet("Freshness / recency", freshness_score, "live recency", live_metrics.evidence_freshness if live_metrics else "No live evidence freshness; seeded fallback only.", [str(e.get("publication_date") or e.get("extraction_timestamp") or "") for e in live_items[:4]], ["recent governed live evidence"] if not live_items else [], live_links),
-        ScoreFacet("Missing evidence penalty", missing_penalty, "confidence limiter", "Missing evidence does not reduce the seeded base directly; it limits confidence and explains what to validate next.", [], MISSING_EVIDENCE, []),
+        ScoreFacet("Base strategic fit", adjustment.base_score, "seeded base", "Average of pressure, AI suitability, readiness, attractiveness and influence potential.", seeded_labels, [], [], "seeded evidence", len(seeded_labels), ["seeded commercial conditions → seeded capabilities"]),
+        ScoreFacet("Live evidence uplift", adjustment.live_evidence_bonus, "capped at +14", adjustment.reason, live_snippets, MISSING_EVIDENCE if not live_items else [], live_links, "live evidence" if live_items else "missing evidence penalty", len(live_items), live_mappings),
+        ScoreFacet("Evidence confidence", confidence, "source quality", "Calculated from evidence tier, source diversity, evidence depth and mapped condition relevance.", [r.get("snippet", "") for r in (live_metrics.top_receipts if live_metrics else [])], MISSING_EVIDENCE if not live_items else [], live_links, "live evidence" if live_items else "missing evidence penalty", len(live_items), live_mappings),
+        ScoreFacet("Source diversity", source_diversity, "unique sources", f"{radar.unique_source_count} unique source(s) are currently attached to the organisation.", [l["name"] for l in live_links], ["additional independent sources"] if radar.unique_source_count < 2 else [], live_links, "live evidence" if live_items else "missing evidence penalty", radar.unique_source_count, live_mappings),
+        ScoreFacet("Condition strength", condition_strength, "25% of base", f"Strongest mapped condition is {strongest_condition}.", live_snippets or seeded_labels[:2], [], live_links, "live evidence" if live_items else "seeded evidence", len(live_items) or len(seeded_labels[:2]), live_mappings or [strongest_condition]),
+        ScoreFacet("Capability relevance", capability_relevance, "25% of base", f"Strongest mapped capability is {strongest_capability}.", live_snippets or seeded_labels[:2], [], live_links, "live evidence" if live_items else "seeded evidence", len(live_items) or len(seeded_labels[:2]), live_mappings or [strongest_capability]),
+        ScoreFacet("Provider relevance", provider_relevance, "contextual", f"Sector fit against {provider.provider_name} configured target sectors and offerings.", provider.strategic_offerings[:3], [], [], "provider context", len(provider.strategic_offerings[:3]), [f"{item.sector} → provider target sectors"]),
+        ScoreFacet("Freshness / recency", freshness_score, "live recency", live_metrics.evidence_freshness if live_metrics else "No live evidence freshness; seeded fallback only.", [str(e.get("publication_date") or e.get("extraction_timestamp") or "") for e in live_items[:4]], ["recent governed live evidence"] if not live_items else [], live_links, "live evidence" if live_items else "missing evidence penalty", len(live_items), live_mappings),
+        ScoreFacet("Missing evidence penalty", adjustment.missing_evidence_penalty, "confidence limiter", "Missing evidence limits confidence and is included in the audit arithmetic.", [], MISSING_EVIDENCE, [], "missing evidence penalty", len(MISSING_EVIDENCE), []),
     ]
     evidence_rows = []
     for e in seeded_evidence[:6]:
@@ -94,4 +101,5 @@ def score_detail(slug: str) -> dict[str, Any]:
     for idx, e in enumerate(live_items[:6], 1):
         evidence_rows.append({"id": str(e.get("evidence_id") or e.get("evidence_fingerprint") or f"LIVE-{idx}"), "source_name": str(e.get("source_name") or e.get("source_id") or "Live source"), "source_type": str(e.get("source_type") or "unknown"), "url": str(e.get("source_url") or e.get("url") or ""), "snippet": str(e.get("snippet") or ""), "condition": str(e.get("commercial_condition") or e.get("condition") or "Unmapped"), "capability": str(e.get("likely_capability") or e.get("capability") or "AI opportunity discovery"), "confidence": int(e.get("confidence") or 70), "quality": str(e.get("overall_evidence_quality") or e.get("evidence_tier") or "live")})
     traces = [ScoreTraceRow(r["id"], f"{r['condition']} / {r['capability']}", "Condition strength" if r["quality"] == "seeded" else "Live evidence uplift", "+seeded base" if r["quality"] == "seeded" else f"+{adjustment.live_evidence_bonus} capped live uplift pool", adjustment.final_score) for r in evidence_rows]
-    return {"organisation": organisation, "sector": item.sector, "final_score": adjustment.final_score, "base_score": adjustment.base_score, "live_uplift": adjustment.live_evidence_bonus + adjustment.confidence_adjustment, "evidence_confidence": confidence, "unique_evidence_count": radar.evidence_count, "unique_source_count": radar.unique_source_count, "strongest_condition": strongest_condition, "strongest_capability": strongest_capability, "quadrant": radar.quadrant, "facets": facets, "evidence_rows": evidence_rows, "missing_evidence": MISSING_EVIDENCE, "traces": traces}
+    audit = {"base_seeded_score": adjustment.base_score, "live_evidence_uplift": adjustment.live_evidence_bonus, "source_diversity_uplift": adjustment.source_diversity_uplift, "condition_relevance_uplift": adjustment.condition_relevance_uplift, "evidence_quality_uplift": adjustment.evidence_quality_uplift, "missing_evidence_penalty": adjustment.missing_evidence_penalty, "final_score": adjustment.final_score}
+    return {"organisation": organisation, "sector": item.sector, "final_score": adjustment.final_score, "base_score": adjustment.base_score, "live_uplift": adjustment.live_evidence_bonus + adjustment.confidence_adjustment, "evidence_confidence": confidence, "total_platform_live_evidence_count": platform_live_count, "unique_evidence_count": radar.evidence_count, "unique_source_count": radar.unique_source_count, "live_last_collected": live_metrics.latest_evidence_timestamp if live_metrics else "No live evidence collected", "live_scoring_mode": adjustment.scoring_mode, "strongest_condition": strongest_condition, "strongest_capability": strongest_capability, "quadrant": radar.quadrant, "facets": facets, "evidence_rows": evidence_rows, "missing_evidence": MISSING_EVIDENCE, "traces": traces, "audit": audit}
