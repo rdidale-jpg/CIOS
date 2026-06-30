@@ -6,7 +6,9 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from typing import Any, Iterable
 
-from cios.applications.flora.live.store import evidence_fingerprint
+from cios.applications.flora.live.store import evidence_fingerprint, read_jsonl
+from cios.applications.flora.rob_score import latest_rob_score
+from cios.applications.flora.workspace.feedback import runtime_dir
 from cios.applications.flora.models import BriefingItem, TargetAccount
 
 RELEVANT_CONDITIONS = {
@@ -22,17 +24,28 @@ TIER_WEIGHT = {"tier_1_regulator": 5, "tier_1_company": 4, "tier_1_public_body":
 class ScoreAdjustment:
     organisation: str
     base_score: int
-    live_evidence_bonus: int
-    confidence_adjustment: int
+    live_evidence_score: int
+    learned_evidence_score: int
+    rob_score_adjustment: int
     final_score: int
     reason: str
     source_diversity_uplift: int = 0
     condition_relevance_uplift: int = 0
     evidence_quality_uplift: int = 0
+    seeded_fallback_score: int | None = None
     missing_evidence_penalty: int = 0
     scoring_mode: str = "SEEDED FALLBACK"
     evidence_confidence: int = 0
+    learned_evidence: dict[str, int] = field(default_factory=dict)
     audit_total: int = 0
+
+    @property
+    def live_evidence_bonus(self) -> int:
+        return self.live_evidence_score
+
+    @property
+    def confidence_adjustment(self) -> int:
+        return self.learned_evidence_score
 
 
 @dataclass
@@ -52,6 +65,7 @@ class OrganisationEvidenceMetrics:
     top_receipts: list[dict[str, Any]] = field(default_factory=list)
     tier_score: int = 0
     condition_relevance: int = 0
+    average_quality: int = 0
 
 
 def _parse_timestamp(value: Any) -> datetime | None:
@@ -131,38 +145,73 @@ def aggregate_live_evidence(items: Iterable[dict[str, Any]]) -> dict[str, Organi
             } for r in sorted_rows[:3]],
             tier_score=max((TIER_WEIGHT.get(str(t), 0) for t in tiers), default=0),
             condition_relevance=sum(c for cond, c in conditions.items() if cond in RELEVANT_CONDITIONS),
+            average_quality=round(sum(int(r.get("overall_evidence_quality") or r.get("confidence") or 70) for r in rows) / len(rows)),
         )
     return output
 
 
-def adjust_score(organisation: str, base_score: int, metrics: OrganisationEvidenceMetrics | None) -> ScoreAdjustment:
-    if not metrics or metrics.live_evidence_count == 0:
-        return ScoreAdjustment(organisation, base_score, 0, 0, base_score, "No live evidence; seeded score retained.", scoring_mode="SEEDED FALLBACK", audit_total=base_score)
-    source_diversity = min(8, metrics.unique_source_count * 3)
-    condition_relevance = min(10, metrics.condition_relevance * 2)
-    live_depth = min(8, metrics.live_evidence_count * 2)
-    live_bonus = live_depth
-    diversity = len(metrics.evidence_tier_mix) + len(metrics.source_type_mix)
-    evidence_quality = min(6, metrics.tier_score + max(0, diversity - 1))
-    missing_penalty = 0 if metrics.live_evidence_count >= 3 and metrics.unique_source_count >= 2 else 3
-    final = min(100, max(0, base_score + live_bonus + source_diversity + condition_relevance + evidence_quality - missing_penalty))
-    reason = f"Live uplift from {metrics.live_evidence_count} evidence object(s), {metrics.unique_source_count} source(s), strongest condition(s): {', '.join(metrics.strongest_conditions) or 'unmapped'}."
-    mode = "LIVE" if metrics.live_evidence_count >= 3 and metrics.unique_source_count >= 2 else "MIXED"
-    return ScoreAdjustment(
-        organisation,
-        base_score,
-        live_bonus,
-        evidence_quality - missing_penalty,
-        final,
-        reason,
-        source_diversity_uplift=source_diversity,
-        condition_relevance_uplift=condition_relevance,
-        evidence_quality_uplift=evidence_quality,
-        missing_evidence_penalty=missing_penalty,
-        scoring_mode=mode,
-        audit_total=final,
-    )
+MISSING_EVIDENCE_CATEGORIES = {
+    "sponsor": ("sponsor", "executive owner", "decision maker"),
+    "funding": ("funding", "budget", "investment", "spend"),
+    "timing": ("timing", "deadline", "procurement", "tender", "contract"),
+    "incumbent": ("incumbent", "supplier", "partner", "vendor"),
+    "competitor engagement": ("competitor", "bidder", "engagement", "market engagement"),
+    "internal pain owner": ("pain owner", "function", "department", "director", "chief"),
+}
 
+
+def learned_evidence_score(organisation: str) -> tuple[int, dict[str, int]]:
+    """Return a small deterministic placeholder score for explicitly taught evidence."""
+    feedback = [r for r in read_jsonl(runtime_dir() / "feedback.jsonl") if str(r.get("organisation") or "") == organisation]
+    logbook = read_jsonl(runtime_dir() / "logbook.jsonl")
+    validations = sum(1 for r in feedback if str(r.get("feedback_type") or "").lower() == "useful")
+    corrections = sum(1 for r in feedback if "correction" in str(r.get("feedback_type") or "").lower())
+    actions = sum(1 for r in feedback if "acted" in str(r.get("feedback_type") or "").lower()) + sum(1 for r in logbook if str(r.get("action_taken") or "").strip())
+    rob_feedback = sum(1 for r in logbook if str(r.get("flora_should_learn") or "").strip())
+    outcome_evidence = sum(1 for r in logbook if int(r.get("flora_value_score") or 0) >= 4)
+    score = min(12, validations * 2 + actions * 2 + rob_feedback + outcome_evidence * 2 - corrections * 2)
+    return max(0, score), {"validations": validations, "corrections": corrections, "rob_feedback": rob_feedback, "actions_taken": actions, "outcome_evidence": outcome_evidence}
+
+
+def missing_evidence_penalty(metrics: OrganisationEvidenceMetrics | None) -> int:
+    if not metrics or metrics.live_evidence_count <= 0:
+        return 0
+    haystack = " ".join([*metrics.condition_counts.keys(), *metrics.capability_counts.keys(), *(r.get("snippet", "") for r in metrics.top_receipts)]).lower()
+    missing = [name for name, terms in MISSING_EVIDENCE_CATEGORIES.items() if not any(term in haystack for term in terms)]
+    return min(4, len(missing))
+
+
+def adjust_score(organisation: str, base_score: int, metrics: OrganisationEvidenceMetrics | None) -> ScoreAdjustment:
+    learned_score, learned_breakdown = learned_evidence_score(organisation)
+    rob = latest_rob_score(organisation)
+    if (not metrics or metrics.live_evidence_count == 0) and learned_score == 0:
+        final = min(100, max(0, base_score + rob.rob_score))
+        return ScoreAdjustment(organisation, base_score, 0, 0, rob.rob_score, final, "No live or learned evidence; seeded fallback score retained.", scoring_mode="SEEDED FALLBACK", seeded_fallback_score=base_score, audit_total=final, learned_evidence=learned_breakdown)
+    if not metrics or metrics.live_evidence_count == 0:
+        penalty = 0
+        live_score = 0
+    else:
+        evidence_count = min(20, metrics.live_evidence_count * 4)
+        unique_sources = min(15, metrics.unique_source_count * 5)
+        quality = min(15, round(metrics.average_quality * 0.15))
+        tier = min(15, metrics.tier_score * 3)
+        source_reliability = min(10, round(sum(TIER_WEIGHT.get(t, 1) * c for t, c in metrics.evidence_tier_mix.items()) / max(1, sum(metrics.evidence_tier_mix.values())) * 2))
+        condition_strength = min(10, metrics.condition_relevance * 2)
+        capability_relevance = min(5, len([c for c in metrics.capability_counts if c and c != "AI opportunity discovery"]) * 2)
+        freshness = 7 if "today" in metrics.evidence_freshness else 5 if "recent" in metrics.evidence_freshness or "day" in metrics.evidence_freshness else 2
+        diversity = min(8, len(metrics.evidence_tier_mix) + len(metrics.source_type_mix) + metrics.unique_source_count)
+        live_score = min(100, 10 + evidence_count + unique_sources + quality + tier + source_reliability + condition_strength + capability_relevance + freshness + diversity)
+        penalty = missing_evidence_penalty(metrics)
+    final = min(100, max(0, live_score + learned_score + rob.rob_score - penalty))
+    mode = "LIVE EVIDENCE"
+    if rob.rob_score:
+        mode = "LIVE + HUMAN"
+    if learned_score and live_score:
+        mode = "LEARNED + LIVE"
+    elif learned_score and not live_score:
+        mode = "LEARNED"
+    reason = f"Evidence-first score from live evidence {live_score}, learned evidence {learned_score}, Rob adjustment {rob.rob_score}, missing evidence penalty {penalty}."
+    return ScoreAdjustment(organisation, base_score, live_score, learned_score, rob.rob_score, final, reason, source_diversity_uplift=min(15, metrics.unique_source_count * 5) if metrics else 0, condition_relevance_uplift=min(10, metrics.condition_relevance * 2) if metrics else 0, evidence_quality_uplift=min(15, round(metrics.average_quality * 0.15)) if metrics else 0, missing_evidence_penalty=penalty, scoring_mode=mode, audit_total=final, learned_evidence=learned_breakdown)
 
 def attention_organisations(items: list[BriefingItem], metrics_by_org: dict[str, OrganisationEvidenceMetrics], accounts: list[TargetAccount]) -> list[str]:
     priority = {a.organisation_name: {"high": 3, "medium": 2, "low": 1}[a.priority.value] for a in accounts}

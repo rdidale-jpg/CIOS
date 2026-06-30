@@ -13,7 +13,8 @@ from urllib.parse import parse_qs, urlparse
 from cios.applications.flora.live.collect import collect, current_status
 from cios.applications.flora.live.views import collection_result, dashboard, evidence_page, source_effectiveness_page, sources_page
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
-from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, scoring_page, score_page, settings_page
+from cios.applications.flora.rob_score import create_rob_score_record
+from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -64,6 +65,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(radar_page())
             elif parsed.path == "/scoring":
                 self._html(scoring_page())
+            elif parsed.path.startswith("/score/") and parsed.path.endswith("/rob-score"):
+                self._html(rob_score_page(parsed.path.removeprefix("/score/").removesuffix("/rob-score"), saved=parse_qs(parsed.query).get("saved") == ["1"]))
             elif parsed.path.startswith("/score/"):
                 self._html(score_page(parsed.path.removeprefix("/score/")))
             elif parsed.path == "/settings":
@@ -93,6 +96,11 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 source_page=_one(form, "source_page"),
             )
             self._redirect(_one(form, "source_page") or "/")
+        elif self.path.startswith("/score/") and self.path.endswith("/rob-score"):
+            slug = self.path.removeprefix("/score/").removesuffix("/rob-score")
+            from cios.applications.flora.score_explainability import normalise_score_slug
+            create_rob_score_record(organisation=normalise_score_slug(slug), rob_score=int(_one(form, "rob_score") or 0), rob_score_reason=_one(form, "rob_score_reason"))
+            self._redirect(f"/score/{slug}/rob-score?saved=1")
         elif self.path == "/logbook":
             create_logbook_record(
                 biggest_insight=_one(form, "biggest_insight"),
