@@ -22,7 +22,9 @@ class RadarOrganisation:
     sector: str
     final_score: int
     base_score: int
-    live_uplift: int
+    live_evidence_score: int
+    learned_evidence_score: int
+    rob_score_adjustment: int
     evidence_count: int
     unique_source_count: int
     strongest_condition: str
@@ -94,7 +96,7 @@ def quadrant_diagnostic(final_score: int, confidence: int, metrics: Any | None, 
         reasons.append("insufficient source diversity")
     if not metrics or metrics.condition_relevance <= 0:
         reasons.append("low condition relevance")
-    if mode != "LIVE":
+    if mode not in {"LIVE", "LIVE EVIDENCE", "LIVE + HUMAN", "LEARNED + LIVE"}:
         reasons.append("fallback mode" if mode == "SEEDED FALLBACK" else "mixed live/seeded mode")
     if not reasons:
         reasons.append("passes early-pilot score and evidence thresholds")
@@ -112,26 +114,27 @@ def build_radar_rows(evidence: Iterable[dict[str, Any]] | None = None) -> list[R
         adjustment = adjust_score(item.organisation, item.scores.ai_reinvention_opportunity_score, metrics_by_org.get(item.organisation))
         metrics = metrics_by_org.get(item.organisation)
         confidence = evidence_confidence(metrics)
-        live_uplift = adjustment.live_evidence_bonus + adjustment.confidence_adjustment
-        provisional.append((item, adjustment, metrics, confidence, live_uplift))
+        provisional.append((item, adjustment, metrics, confidence))
     final_rank = {item.organisation: idx for idx, (item, *_rest) in enumerate(sorted(provisional, key=lambda row: (row[1].final_score, row[3], row[2].live_evidence_count if row[2] else 0), reverse=True), 1)}
     rows = []
-    for item, adjustment, metrics, confidence, live_uplift in provisional:
+    for item, adjustment, metrics, confidence in provisional:
         sr = seeded_rank[item.organisation]
         fr = final_rank[item.organisation]
-        if live_uplift and fr < sr:
-            reason = f"Live evidence improved rank from {sr} to {fr}; base score {adjustment.base_score}, live uplift +{live_uplift}."
-        elif live_uplift:
-            reason = f"Live evidence added +{live_uplift}, but seeded base score still dominates rank behaviour."
+        if adjustment.scoring_mode == "SEEDED FALLBACK":
+            reason = f"Seeded fallback score {adjustment.base_score} used because no live or learned evidence exists."
+        elif fr < sr:
+            reason = f"Live evidence improved rank from seeded rank {sr} to {fr}; evidence-first final score is used instead of base score."
         else:
-            reason = f"No live uplift; rank is driven by seeded base score {adjustment.base_score}."
+            reason = "Rank uses evidence-first final score, not seeded base score."
         threshold_result, quadrant_reason = quadrant_diagnostic(adjustment.final_score, confidence, metrics, adjustment.scoring_mode)
         rows.append(RadarOrganisation(
             organisation=item.organisation,
             sector=item.sector,
             final_score=adjustment.final_score,
             base_score=adjustment.base_score,
-            live_uplift=live_uplift,
+            live_evidence_score=adjustment.live_evidence_score,
+            learned_evidence_score=adjustment.learned_evidence_score,
+            rob_score_adjustment=adjustment.rob_score_adjustment,
             evidence_count=metrics.live_evidence_count if metrics else 0,
             unique_source_count=metrics.unique_source_count if metrics else 0,
             strongest_condition=(metrics.strongest_conditions[0] if metrics and metrics.strongest_conditions else (item.strongest_detected_signals[0] if item.strongest_detected_signals else "Seeded fallback")),
@@ -196,7 +199,7 @@ def portfolio_summary() -> dict[str, Any]:
     radar = build_radar_rows()
     counts = Counter(r.quadrant for r in radar)
     high_under = sorted([r for r in radar if r.final_score >= HIGH_POTENTIAL_THRESHOLD], key=lambda r: (r.evidence_confidence, -r.final_score, r.organisation))
-    mover = sorted(radar, key=lambda r: (r.live_uplift, r.evidence_confidence), reverse=True)
+    mover = sorted(radar, key=lambda r: (r.live_evidence_score + r.learned_evidence_score + r.rob_score_adjustment, r.evidence_confidence), reverse=True)
     sources = source_effectiveness_rows()
     weak_types = Counter(r.source_type for r in sources if r.recommendation in {"review", "replace", "disable", "needs better URL"})
-    return {"priority_pursuits": counts["Priority Pursuits"], "investigate": counts["Investigate"], "monitor": counts["Monitor"], "coverage_gaps": counts["Coverage Gap"], "most_under_covered_high_potential": high_under[0].organisation if high_under else "None", "strongest_evidence_backed_mover": mover[0].organisation if mover and mover[0].live_uplift else "None", "best_performing_source": sources[0].source_name if sources else "None", "weakest_source_category": weak_types.most_common(1)[0][0] if weak_types else "None"}
+    return {"priority_pursuits": counts["Priority Pursuits"], "investigate": counts["Investigate"], "monitor": counts["Monitor"], "coverage_gaps": counts["Coverage Gap"], "most_under_covered_high_potential": high_under[0].organisation if high_under else "None", "strongest_evidence_backed_mover": mover[0].organisation if mover and (mover[0].live_evidence_score or mover[0].learned_evidence_score or mover[0].rob_score_adjustment) else "None", "best_performing_source": sources[0].source_name if sources else "None", "weakest_source_category": weak_types.most_common(1)[0][0] if weak_types else "None"}
