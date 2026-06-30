@@ -197,3 +197,68 @@ def test_scoring_renders_model_explanation() -> None:
     assert "Flora scoring model" in html
     assert "Base score" in html
     assert "Final score cap" in html
+
+
+def test_live_scoring_trace_consistency_and_audit(monkeypatch, tmp_path) -> None:
+    from cios.applications.flora.live import store
+    from cios.applications.flora.score_explainability import score_detail
+    from cios.applications.flora.portfolio import HIGH_CONFIDENCE_THRESHOLD, HIGH_POTENTIAL_THRESHOLD, build_radar_rows
+    from cios.applications.flora.publisher.morning_edition import build_publication_context
+    from cios.applications.flora.workspace.views import radar_page
+
+    evidence_path = tmp_path / "evidence.jsonl"
+    rows = [
+        {"source_id": "bt-news", "organisation": "BT", "source_name": "BT newsroom", "source_url": "https://example.com/bt", "source_type": "official_newsroom", "snippet": "BT expands AI network operations for resilience.", "extraction_timestamp": "2026-06-29T00:00:00+00:00", "commercial_condition": "AI Modernisation", "likely_capability": "network intelligence", "confidence": 90, "overall_evidence_quality": 88, "evidence_tier": "tier_1_company"},
+        {"source_id": "bt-reg", "organisation": "BT", "source_name": "Regulator", "source_url": "https://example.com/reg", "source_type": "regulator", "snippet": "Regulatory reporting highlights operational resilience.", "extraction_timestamp": "2026-06-30T00:00:00+00:00", "commercial_condition": "Operational Resilience", "likely_capability": "network intelligence", "confidence": 85, "overall_evidence_quality": 82, "evidence_tier": "tier_1_regulator"},
+    ]
+    store.write_jsonl(rows, evidence_path)
+    monkeypatch.setattr("cios.applications.flora.portfolio.DEFAULT_PATH", evidence_path)
+    monkeypatch.setattr("cios.applications.flora.score_explainability.DEFAULT_PATH", evidence_path)
+    monkeypatch.setattr("cios.applications.flora.publisher.morning_edition.read_jsonl", lambda path=None: store.read_jsonl(evidence_path))
+    monkeypatch.setattr("cios.applications.flora.workspace.state.read_jsonl", lambda path=None: store.read_jsonl(evidence_path))
+
+    radar_bt = next(row for row in build_radar_rows() if row.organisation == "BT")
+    detail = score_detail("BT")
+    pub_bt = next(row for row in build_publication_context()["top_organisations"] if row["organisation"] == "BT")
+
+    assert radar_bt.final_score == detail["final_score"] == pub_bt["final_score"]
+    assert detail["total_platform_live_evidence_count"] == 2
+    assert detail["unique_evidence_count"] == 2
+    assert detail["live_scoring_mode"] in {"LIVE", "MIXED"}
+    audit = detail["audit"]
+    assert (
+        audit["base_seeded_score"]
+        + audit["live_evidence_uplift"]
+        + audit["source_diversity_uplift"]
+        + audit["condition_relevance_uplift"]
+        + audit["evidence_quality_uplift"]
+        - audit["missing_evidence_penalty"]
+    ) == audit["final_score"]
+    assert radar_bt.quadrant_reason
+    assert f"final score &ge; {HIGH_POTENTIAL_THRESHOLD}" in radar_page()
+    assert f"evidence confidence &ge; {HIGH_CONFIDENCE_THRESHOLD}" in radar_page()
+
+
+def test_seeded_fallback_label_when_no_live_evidence(monkeypatch, tmp_path) -> None:
+    from cios.applications.flora.score_explainability import score_detail
+    from cios.applications.flora.workspace.views import score_page
+
+    evidence_path = tmp_path / "empty.jsonl"
+    evidence_path.write_text("", encoding="utf-8")
+    monkeypatch.setattr("cios.applications.flora.portfolio.DEFAULT_PATH", evidence_path)
+    monkeypatch.setattr("cios.applications.flora.score_explainability.DEFAULT_PATH", evidence_path)
+
+    detail = score_detail("BT")
+    assert detail["live_scoring_mode"] == "SEEDED FALLBACK"
+    html = score_page("BT")
+    assert "SEEDED FALLBACK" in html
+    assert "total platform live evidence objects" in html
+
+
+def test_threshold_changes_support_early_pilot_distribution() -> None:
+    from cios.applications.flora.portfolio import quadrant_for
+
+    assert quadrant_for(65, 40) == "Priority Pursuits"
+    assert quadrant_for(65, 39) == "Investigate"
+    assert quadrant_for(64, 40) == "Monitor"
+    assert quadrant_for(64, 39) == "Coverage Gap"

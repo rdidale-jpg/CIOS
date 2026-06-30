@@ -26,6 +26,13 @@ class ScoreAdjustment:
     confidence_adjustment: int
     final_score: int
     reason: str
+    source_diversity_uplift: int = 0
+    condition_relevance_uplift: int = 0
+    evidence_quality_uplift: int = 0
+    missing_evidence_penalty: int = 0
+    scoring_mode: str = "SEEDED FALLBACK"
+    evidence_confidence: int = 0
+    audit_total: int = 0
 
 
 @dataclass
@@ -130,13 +137,31 @@ def aggregate_live_evidence(items: Iterable[dict[str, Any]]) -> dict[str, Organi
 
 def adjust_score(organisation: str, base_score: int, metrics: OrganisationEvidenceMetrics | None) -> ScoreAdjustment:
     if not metrics or metrics.live_evidence_count == 0:
-        return ScoreAdjustment(organisation, base_score, 0, 0, base_score, "No live evidence; seeded score retained.")
-    live_bonus = min(14, metrics.unique_source_count * 3 + metrics.condition_relevance * 2)
+        return ScoreAdjustment(organisation, base_score, 0, 0, base_score, "No live evidence; seeded score retained.", scoring_mode="SEEDED FALLBACK", audit_total=base_score)
+    source_diversity = min(8, metrics.unique_source_count * 3)
+    condition_relevance = min(10, metrics.condition_relevance * 2)
+    live_depth = min(8, metrics.live_evidence_count * 2)
+    live_bonus = live_depth
     diversity = len(metrics.evidence_tier_mix) + len(metrics.source_type_mix)
-    confidence = min(6, metrics.tier_score + max(0, diversity - 1))
-    final = min(100, base_score + live_bonus + confidence)
+    evidence_quality = min(6, metrics.tier_score + max(0, diversity - 1))
+    missing_penalty = 0 if metrics.live_evidence_count >= 3 and metrics.unique_source_count >= 2 else 3
+    final = min(100, max(0, base_score + live_bonus + source_diversity + condition_relevance + evidence_quality - missing_penalty))
     reason = f"Live uplift from {metrics.live_evidence_count} evidence object(s), {metrics.unique_source_count} source(s), strongest condition(s): {', '.join(metrics.strongest_conditions) or 'unmapped'}."
-    return ScoreAdjustment(organisation, base_score, live_bonus, confidence, final, reason)
+    mode = "LIVE" if metrics.live_evidence_count >= 3 and metrics.unique_source_count >= 2 else "MIXED"
+    return ScoreAdjustment(
+        organisation,
+        base_score,
+        live_bonus,
+        evidence_quality - missing_penalty,
+        final,
+        reason,
+        source_diversity_uplift=source_diversity,
+        condition_relevance_uplift=condition_relevance,
+        evidence_quality_uplift=evidence_quality,
+        missing_evidence_penalty=missing_penalty,
+        scoring_mode=mode,
+        audit_total=final,
+    )
 
 
 def attention_organisations(items: list[BriefingItem], metrics_by_org: dict[str, OrganisationEvidenceMetrics], accounts: list[TargetAccount]) -> list[str]:

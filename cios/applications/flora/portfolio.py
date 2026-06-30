@@ -11,8 +11,8 @@ from cios.applications.flora.live.store import DEFAULT_DIAGNOSTICS_PATH, DEFAULT
 from cios.applications.flora.pipeline import _ranked_items
 from cios.applications.flora.seed_data import sample_commercial_dna, sample_signals, sample_watchlist
 
-HIGH_POTENTIAL_THRESHOLD = 70
-HIGH_CONFIDENCE_THRESHOLD = 55
+HIGH_POTENTIAL_THRESHOLD = 65
+HIGH_CONFIDENCE_THRESHOLD = 40
 TIER_WEIGHT = {"tier_1_regulator": 95, "tier_1_company": 88, "tier_1_public_body": 88, "tier_2_feed": 62, "unknown": 35}
 
 
@@ -29,6 +29,8 @@ class RadarOrganisation:
     strongest_capability: str
     evidence_confidence: int
     quadrant: str
+    quadrant_threshold_result: str
+    quadrant_reason: str
     rank_change_reason: str
     seeded_rank: int
     final_rank: int
@@ -79,6 +81,26 @@ def quadrant_for(final_score: int, confidence: int) -> str:
     return "Coverage Gap"
 
 
+def quadrant_diagnostic(final_score: int, confidence: int, metrics: Any | None, mode: str) -> tuple[str, str]:
+    potential = "passes" if final_score >= HIGH_POTENTIAL_THRESHOLD else "fails"
+    evidence = "passes" if confidence >= HIGH_CONFIDENCE_THRESHOLD else "fails"
+    result = f"potential {potential} {HIGH_POTENTIAL_THRESHOLD}; confidence {evidence} {HIGH_CONFIDENCE_THRESHOLD}"
+    reasons = []
+    if final_score < HIGH_POTENTIAL_THRESHOLD:
+        reasons.append("low final score")
+    if confidence < HIGH_CONFIDENCE_THRESHOLD:
+        reasons.append("low evidence confidence")
+    if not metrics or metrics.unique_source_count < 2:
+        reasons.append("insufficient source diversity")
+    if not metrics or metrics.condition_relevance <= 0:
+        reasons.append("low condition relevance")
+    if mode != "LIVE":
+        reasons.append("fallback mode" if mode == "SEEDED FALLBACK" else "mixed live/seeded mode")
+    if not reasons:
+        reasons.append("passes early-pilot score and evidence thresholds")
+    return result, "; ".join(reasons)
+
+
 def build_radar_rows(evidence: Iterable[dict[str, Any]] | None = None) -> list[RadarOrganisation]:
     evidence_items = unique_live_evidence(evidence if evidence is not None else read_jsonl(DEFAULT_PATH))
     pilot_orgs = {a.organisation_name for a in sample_watchlist()}
@@ -103,6 +125,7 @@ def build_radar_rows(evidence: Iterable[dict[str, Any]] | None = None) -> list[R
             reason = f"Live evidence added +{live_uplift}, but seeded base score still dominates rank behaviour."
         else:
             reason = f"No live uplift; rank is driven by seeded base score {adjustment.base_score}."
+        threshold_result, quadrant_reason = quadrant_diagnostic(adjustment.final_score, confidence, metrics, adjustment.scoring_mode)
         rows.append(RadarOrganisation(
             organisation=item.organisation,
             sector=item.sector,
@@ -115,6 +138,8 @@ def build_radar_rows(evidence: Iterable[dict[str, Any]] | None = None) -> list[R
             strongest_capability=(metrics.strongest_capabilities[0] if metrics and metrics.strongest_capabilities else (item.likely_capability_areas[0] if item.likely_capability_areas else "AI opportunity discovery")),
             evidence_confidence=confidence,
             quadrant=quadrant_for(adjustment.final_score, confidence),
+            quadrant_threshold_result=threshold_result,
+            quadrant_reason=quadrant_reason,
             rank_change_reason=reason,
             seeded_rank=sr,
             final_rank=fr,
