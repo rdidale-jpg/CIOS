@@ -33,12 +33,13 @@ def _staticize_root_page(html: str) -> str:
         .replace("href='/logbook'", "href='logbook.html'")
         .replace("href='/settings'", "href='settings.html'")
         .replace("href='/radar'", "href='#radar'")
+        .replace("href='/scoring'", "href='#scoring'")
         .replace("href='/live/collect'", "href='#live-collect'")
         .replace("href='/live/evidence'", "href='#live-evidence'")
         .replace("href='/live'", "href='#live'")
         .replace("action='/logbook'", "action='#logbook'")
     )
-    return _replace_case_links(html, "case/")
+    return _replace_score_links(_replace_case_links(html, "case/"), "#score-")
 
 
 def _staticize_case_page(html: str) -> str:
@@ -47,17 +48,24 @@ def _staticize_case_page(html: str) -> str:
         .replace("href='/logbook'", "href='../logbook.html'")
         .replace("href='/settings'", "href='../settings.html'")
         .replace("href='/radar'", "href='../index.html#radar'")
+        .replace("href='/scoring'", "href='../index.html#scoring'")
         .replace("href='/live/collect'", "href='#live-collect'")
         .replace("href='/live/evidence'", "href='#live-evidence'")
         .replace("href='/live'", "href='#live'")
         .replace("action='/feedback'", "action='#feedback'")
     )
-    return _replace_case_links(html, "")
+    return _replace_score_links(_replace_case_links(html, ""), "../index.html#score-")
 
 
 def _replace_case_links(html: str, prefix: str) -> str:
     for slug in CASE_SLUGS:
         html = html.replace(f"href='/case/{slug}'", f"href='{prefix}{slug}.html'")
+    return html
+
+
+def _replace_score_links(html: str, prefix: str) -> str:
+    for slug in CASE_SLUGS:
+        html = html.replace(f"href='/score/{slug}'", f"href='{prefix}{slug}'")
     return html
 
 

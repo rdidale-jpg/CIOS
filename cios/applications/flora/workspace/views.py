@@ -12,14 +12,14 @@ from cios.applications.flora.publisher.morning_edition import build_publication_
 def _page(title: str, body: str) -> str:
     return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><title>{escape(title)}</title><style>
     body{{font-family:Inter,Arial,sans-serif;margin:0;background:#f6f3ee;color:#17211b}} a{{color:#185c4d}} .shell{{max-width:1180px;margin:auto;padding:28px}} .hero,.card{{background:#fff;border:1px solid #ded8ce;border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 1px 3px #0001}} .grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:14px}} .metric{{font-size:32px;font-weight:750}} .pill{{display:inline-block;border-radius:999px;padding:4px 10px;background:#e6f2ec;margin:3px}} .priority-high{{background:#173d33;color:white}} .priority-medium{{background:#f3d99b}} .priority-low{{background:#e1e1e1}} .section{{border-top:1px solid #ece5da;padding-top:14px;margin-top:18px}} button,input,textarea,select{{font:inherit;padding:9px;border:1px solid #cfc6ba;border-radius:10px}} textarea{{width:100%;min-height:56px}} button{{background:#173d33;color:#fff;cursor:pointer}} .nav a{{margin-right:14px}} table{{width:100%;border-collapse:collapse}} td,th{{border-bottom:1px solid #eee;padding:10px;text-align:left}} .muted{{color:#68736c}} .action{{background:#f8fbf9;border-left:5px solid #185c4d}}
-    </style></head><body><div class='shell'><nav class='nav'><a href='/'>Morning Edition</a><a href='/radar'>Portfolio Radar</a><a href='/live'>Live Evidence</a><a href='/logbook'>Teach Flora / Pilot Logbook</a><a href='/settings'>Commercial DNA</a></nav>{body}</div></body></html>"""
+    </style></head><body><div class='shell'><nav class='nav'><a href='/'>Morning Edition</a><a href='/radar'>Portfolio Radar</a><a href='/scoring'>Scoring Model</a><a href='/live'>Live Evidence</a><a href='/logbook'>Teach Flora / Pilot Logbook</a><a href='/settings'>Commercial DNA</a></nav>{body}</div></body></html>"""
 
 
 def landing_page() -> str:
     ctx = workspace_context(); pub = build_publication_context(); daily = ctx["daily"]; weekly = ctx["weekly"]
     top = "".join(f"<li><strong>{escape(w['organisation'])}</strong> — {escape(w['narrative'])} <span class='muted'>Sources: {w['source_count']}; evidence: {w['evidence_count']}; missing: {escape(', '.join(w['missing_evidence']))}</span></li>" for w in pub.get("why_matters", [])[:3])
     movers = "".join(f"<li>{escape(m.organisation)} <strong>+{m.score_change}</strong> to {m.current_score}</li>" for m in weekly.biggest_movers)
-    watch = "".join(f"<tr><td><a href='/case/{escape(r['organisation'].replace(' ', ''))}'>{escape(r['organisation'])}</a></td><td>{escape(r['sector'])}</td><td>{r['base_score']}</td><td><span class='pill'>{'Live uplift +' + str(r['live_uplift']) if r['live_uplift'] else 'Seeded fallback'}</span></td><td>{r['final_score']}</td><td>{r['live_evidence_count']}</td><td>{r['unique_source_count']}</td><td>{escape(', '.join(r.get('strongest_live_conditions', [])) or 'Seeded fallback')}</td><td>{escape(', '.join(r.get('strongest_live_capabilities', [])) or 'Seeded fallback')}</td></tr>" for r in pub["top_organisations"])
+    watch = "".join(f"<tr><td><a href='/case/{escape(r['organisation'].replace(' ', ''))}'>{escape(r['organisation'])}</a><br><a href='/score/{escape(r['organisation'].replace(' ', ''))}'>Explain score</a></td><td>{escape(r['sector'])}</td><td>{r['base_score']}</td><td><span class='pill'>{'Live uplift +' + str(r['live_uplift']) if r['live_uplift'] else 'Seeded fallback'}</span></td><td>{r['final_score']}</td><td>{r['live_evidence_count']}</td><td>{r['unique_source_count']}</td><td>{escape(', '.join(r.get('strongest_live_conditions', [])) or 'Seeded fallback')}</td><td>{escape(', '.join(r.get('strongest_live_capabilities', [])) or 'Seeded fallback')}</td></tr>" for r in pub["top_organisations"])
     body = f"""<section class='hero'><h1>Good Morning Rob</h1><p class='muted'>{escape(str(ctx['date_label']))} · Estimated reading time: {ctx['reading_time']} minutes</p><div class='grid'><div><div class='metric'>{ctx['new_evidence_count']}</div><p>{escape(str(ctx.get('new_evidence_label', 'new evidence items')))}</p></div><div><div class='metric'>{len(weekly.organisations_to_watch)}</div><p>organisations requiring attention</p></div><div><div class='metric'>{len(weekly.biggest_movers)}</div><p>biggest movers</p></div></div></section>
     {live_banner_html()}
     <section class='card'><h2>What changed?</h2><p>{'Live evidence uplift' if ctx.get('live_organisation_metrics') else 'Seeded fallback movement'}</p><ul>{movers}</ul></section>
@@ -37,7 +37,7 @@ def case_page(slug: str) -> str:
     insights = "".join(f"<li><strong>{escape(i.title)}</strong> — {escape(i.narrative)} Next: {escape(i.recommended_next_step)}</li>" for i in case.insights)
     heatmap = "".join(f"<li>{escape(k)}: {escape(v)}</li>" for k, v in case.capability_heatmap.items())
     actions = "".join(_action_block(case.organisation, action, case) for action in case.recommended_actions)
-    body = f"<section class='hero'><h1>{escape(case.organisation)}</h1><p>{escape(case.sector)} · Review date {case.review_date}</p></section>" + "".join([
+    body = f"<section class='hero'><h1>{escape(case.organisation)}</h1><p>{escape(case.sector)} · Review date {case.review_date}</p><p><a href='/score/{escape(case.organisation.replace(' ', ''))}'>Explain score</a></p></section>" + "".join([
         f"<section class='card'><h2>Executive Summary</h2><p>{escape(case.executive_summary)}</p></section>",
         f"<section class='card'><h2>Commercial DNA View</h2><p>{escape(case.commercial_dna_summary)}</p></section>",
         f"<section class='card'><h2>Commercial Timeline</h2><ul>{timeline}</ul></section>",
@@ -80,18 +80,49 @@ def radar_page() -> str:
 
     rows = build_radar_rows()
     counts = Counter(r.quadrant for r in rows)
-    dots = "".join(
-        f"<div class='radar-dot' style='left:{min(98, max(2, r.final_score))}%;bottom:{min(98, max(2, r.evidence_confidence))}%' title='{escape(r.organisation)}'><strong>{escape(r.organisation)}</strong><br>{escape(r.sector)}<br>Final {r.final_score}; confidence {r.evidence_confidence}<br>{escape(r.quadrant)}</div>"
-        for r in rows
+    quadrant_names = ["Priority Pursuits", "Investigate", "Monitor", "Coverage Gap"]
+    panel_html = "".join(
+        f"<section class='radar-panel'><h3>{escape(name)} <span class='pill'>{counts[name]}</span></h3><ul>"
+        + "".join(
+            f"<li><strong>{escape(r.organisation)}</strong> · {escape(r.sector)} · final {r.final_score} · confidence {r.evidence_confidence}<br><a href='/score/{escape(r.organisation.replace(' ', ''))}'>Explain score</a></li>"
+            for r in rows if r.quadrant == name
+        )
+        + "</ul></section>"
+        for name in quadrant_names
     )
     table_rows = "".join(
-        f"<tr><td>{escape(r.quadrant)}</td><td>{r.final_rank}</td><td>{escape(r.organisation)}</td><td>{escape(r.sector)}</td><td>{r.final_score}</td><td>{r.base_score}</td><td>+{r.live_uplift}</td><td>{r.evidence_count}</td><td>{r.unique_source_count}</td><td>{escape(r.strongest_condition)}</td><td>{escape(r.strongest_capability)}</td><td>{r.evidence_confidence}</td><td>{escape(r.rank_change_reason)}</td></tr>"
+        f"<tr><td>{escape(r.quadrant)}</td><td>{r.final_rank}</td><td>{escape(r.organisation)}<br><a href='/score/{escape(r.organisation.replace(' ', ''))}'>Explain score</a></td><td>{escape(r.sector)}</td><td>{r.final_score}</td><td>{r.base_score}</td><td>+{r.live_uplift}</td><td>{r.evidence_count}</td><td>{r.unique_source_count}</td><td>{escape(r.strongest_condition)}</td><td>{escape(r.strongest_capability)}</td><td>{r.evidence_confidence}</td><td>{escape(r.rank_change_reason)}</td></tr>"
         for r in rows
     )
     body = f"""<section class='hero'><h1>Flora Portfolio Radar</h1><p class='muted'>A dependency-light 2D organisation grid: X-axis is AI Reinvention Potential / final score; Y-axis is Evidence Confidence / source quality.</p></section>
-    <style>.radar{{position:relative;height:620px;background:linear-gradient(90deg,#fff7e8 50%,#eff8ef 50%);border:1px solid #ded8ce;border-radius:18px;margin:18px 0}}.radar:before{{content:'';position:absolute;left:50%;top:0;bottom:0;border-left:2px dashed #b7afa4}}.radar:after{{content:'';position:absolute;left:0;right:0;top:45%;border-top:2px dashed #b7afa4}}.quad{{position:absolute;font-weight:800;background:#ffffffcc;padding:6px;border-radius:8px}}.q1{{right:12px;top:12px}}.q2{{right:12px;bottom:12px}}.q3{{left:12px;top:12px}}.q4{{left:12px;bottom:12px}}.radar-dot{{position:absolute;transform:translate(-50%,50%);max-width:140px;background:#173d33;color:#fff;border-radius:10px;padding:5px;font-size:11px;box-shadow:0 2px 6px #0003}}</style>
+    <style>.radar-panels{{display:grid;grid-template-columns:repeat(2,minmax(260px,1fr));gap:14px;margin:18px 0}}.radar-panel{{min-height:210px;background:#fff;border:1px solid #ded8ce;border-radius:18px;padding:16px}}.radar-panel ul{{margin:0;padding-left:18px}}.radar-panel li{{margin:0 0 10px}}</style>
     <section class='card'><h2>Quadrants</h2><ul><li><strong>Priority Pursuits:</strong> high potential, high evidence confidence ({counts['Priority Pursuits']})</li><li><strong>Investigate:</strong> high potential, low evidence confidence ({counts['Investigate']})</li><li><strong>Monitor:</strong> low potential, high evidence confidence ({counts['Monitor']})</li><li><strong>Coverage Gap:</strong> low potential, low evidence confidence ({counts['Coverage Gap']})</li></ul></section>
-    <section class='radar'><div class='quad q1'>Monitor</div><div class='quad q2'>Priority Pursuits</div><div class='quad q3'>Coverage Gap</div><div class='quad q4'>Investigate</div>{dots}</section>
+    <section class='radar-panels'>{panel_html}</section>
     <section class='card action'><h2>Scoring transparency</h2><p>Top organisations are ranked by deterministic seeded base score plus live uplift. Base score comes from commercial pressure, AI suitability, readiness, attractiveness and influence potential. Live uplift is capped and comes from governed live evidence count, source diversity, relevant conditions and source quality. The <code>rank_change_reason</code> column explains whether live evidence changed the rank or whether seeded base score still dominates.</p></section>
     <section class='card'><h2>Portfolio table grouped by quadrant</h2><table><thead><tr><th>Quadrant</th><th>Rank</th><th>Organisation</th><th>Sector</th><th>Final score</th><th>Base score</th><th>Live uplift</th><th>Evidence count</th><th>Unique sources</th><th>Strongest condition</th><th>Strongest capability</th><th>Evidence confidence</th><th>rank_change_reason</th></tr></thead><tbody>{table_rows}</tbody></table></section>"""
     return _page("Flora Portfolio Radar", body)
+
+
+def score_page(slug: str) -> str:
+    from cios.applications.flora.score_explainability import score_detail
+
+    detail = score_detail(slug)
+    facets = "".join(
+        f"<details class='card'><summary><strong>{escape(f.name)}</strong> — score {f.score}; weighting {escape(f.weighting)}</summary><p>{escape(f.explanation)}</p><p><strong>Evidence used:</strong></p><ul>{''.join(f'<li>{escape(str(e))}</li>' for e in f.evidence_used) or '<li>None yet.</li>'}</ul><p><strong>Missing evidence:</strong> {escape(', '.join(f.missing_evidence) or 'None identified')}</p><p><strong>Source links:</strong> {' '.join(f'<a href="{escape(link["url"])}">{escape(link["name"])}</a>' for link in f.source_links) or 'No direct source links available.'}</p></details>"
+        for f in detail["facets"]
+    )
+    evidence = "".join(
+        f"<tr><td>{escape(r['id'])}</td><td>{escape(r['source_name'])}</td><td>{escape(r['source_type'])}</td><td>{f'<a href="{escape(r["url"])}">source</a>' if r['url'] else 'n/a'}</td><td>{escape(r['snippet'])}</td><td>{escape(r['condition'])}</td><td>{escape(r['capability'])}</td><td>{r['confidence']}</td><td>{escape(str(r['quality']))}</td></tr>"
+        for r in detail["evidence_rows"]
+    )
+    traces = "".join(f"<tr><td>{escape(t.evidence_object)}</td><td>{escape(t.condition_or_capability)}</td><td>{escape(t.facet)}</td><td>{escape(t.score_contribution)}</td><td>{t.final_score}</td></tr>" for t in detail["traces"])
+    missing = "".join(f"<li>{escape(item)}</li>" for item in detail["missing_evidence"])
+    body = f"""<section class='hero'><h1>{escape(detail['organisation'])} score explainability</h1><p>{escape(detail['sector'])} · quadrant: <strong>{escape(detail['quadrant'])}</strong></p><div class='grid'><div><div class='metric'>{detail['final_score']}</div><p>final score</p></div><div><div class='metric'>{detail['base_score']}</div><p>base score</p></div><div><div class='metric'>+{detail['live_uplift']}</div><p>live uplift</p></div><div><div class='metric'>{detail['evidence_confidence']}</div><p>evidence confidence</p></div></div><p>Unique evidence count: {detail['unique_evidence_count']} · unique source count: {detail['unique_source_count']} · strongest condition: {escape(detail['strongest_condition'])} · strongest capability: {escape(detail['strongest_capability'])}</p></section><section class='card'><h2>Score breakdown facets</h2>{facets}</section><section class='card'><h2>Score Trace</h2><table><thead><tr><th>Evidence object</th><th>condition/capability</th><th>facet</th><th>score contribution</th><th>final score</th></tr></thead><tbody>{traces}</tbody></table></section><section class='card'><h2>Top contributing evidence objects</h2><table><thead><tr><th>Evidence</th><th>Source name</th><th>Source type</th><th>URL</th><th>Snippet</th><th>Mapped condition</th><th>Mapped capability</th><th>Confidence</th><th>Evidence quality</th></tr></thead><tbody>{evidence}</tbody></table></section><section class='card'><h2>Missing evidence that would increase confidence</h2><ul>{missing}</ul></section>"""
+    return _page(f"Flora score — {detail['organisation']}", body)
+
+
+def scoring_page() -> str:
+    from cios.applications.flora.portfolio import build_radar_rows
+    links = "".join(f"<li><a href='/score/{escape(r.organisation.replace(' ', ''))}'>{escape(r.organisation)}</a> — {escape(r.quadrant)}; final {r.final_score}</li>" for r in build_radar_rows())
+    body = f"""<section class='hero'><h1>Flora scoring model</h1><p>Plain-English deterministic formula. No LLMs, databases or broad crawling are used.</p></section><section class='card'><h2>Formula transparency</h2><ol><li><strong>Base score:</strong> Flora calculates strategic fit from commercial pressure, AI suitability, organisational readiness, commercial attractiveness and influence potential.</li><li><strong>Live uplift:</strong> governed live evidence can add a capped uplift from unique sources and relevant mapped conditions.</li><li><strong>Confidence adjustment:</strong> evidence tier, source diversity and source type diversity add a small capped confidence adjustment.</li><li><strong>Penalties:</strong> missing evidence limits confidence and is surfaced as validation gaps rather than hidden deductions.</li><li><strong>Final score cap:</strong> final scores are capped at 100.</li></ol></section><section class='card'><h2>Score pages</h2><ul>{links}</ul></section>"""
+    return _page("Flora scoring model", body)

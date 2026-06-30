@@ -113,3 +113,87 @@ def test_live_sources_route(monkeypatch, tmp_path) -> None:
     assert content_type == "text/html; charset=utf-8"
     assert "Live source coverage" in html
     assert "Recommended action" in html
+
+
+def test_radar_quadrant_counts_match_table_counts() -> None:
+    from collections import Counter
+    from cios.applications.flora.portfolio import build_radar_rows
+    from cios.applications.flora.workspace.views import radar_page
+
+    rows = build_radar_rows()
+    counts = Counter(r.quadrant for r in rows)
+    html = radar_page()
+    for quadrant in ["Priority Pursuits", "Investigate", "Monitor", "Coverage Gap"]:
+        assert f"<strong>{quadrant}:</strong>" in html
+        assert f"{quadrant} <span class='pill'>{counts[quadrant]}</span>" in html
+
+
+def test_all_organisations_appear_in_exactly_one_radar_quadrant() -> None:
+    from cios.applications.flora.portfolio import build_radar_rows
+    from cios.applications.flora.seed_data import sample_watchlist
+
+    rows = build_radar_rows()
+    organisations = [r.organisation for r in rows]
+    assert len(organisations) == len(set(organisations))
+    assert set(organisations) == {account.organisation_name for account in sample_watchlist()}
+    assert all(r.quadrant in {"Priority Pursuits", "Investigate", "Monitor", "Coverage Gap"} for r in rows)
+
+
+def test_score_bt_renders() -> None:
+    status, content_type, body = _get("/score/BT")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert content_type == "text/html; charset=utf-8"
+    assert "BT score explainability" in html
+    assert "final score" in html
+
+
+def test_score_facets_render() -> None:
+    status, _, body = _get("/score/BT")
+    html = body.decode("utf-8")
+    assert status == 200
+    for facet in ["Base strategic fit", "Live evidence uplift", "Evidence confidence", "Missing evidence penalty"]:
+        assert facet in html
+
+
+def test_evidence_trace_renders() -> None:
+    status, _, body = _get("/score/BT")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "Score Trace" in html
+    assert "score contribution" in html
+
+
+def test_missing_evidence_renders() -> None:
+    status, _, body = _get("/score/BT")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "Missing evidence that would increase confidence" in html
+    assert "executive sponsor" in html
+    assert "internal pain owner" in html
+
+
+def test_radar_links_to_score_pages() -> None:
+    status, _, body = _get("/radar")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "Explain score" in html
+    assert "/score/BT" in html
+
+
+def test_watchlist_links_to_score_pages() -> None:
+    status, _, body = _get("/")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "Explain score" in html
+    assert "/score/BT" in html
+
+
+def test_scoring_renders_model_explanation() -> None:
+    status, content_type, body = _get("/scoring")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert content_type == "text/html; charset=utf-8"
+    assert "Flora scoring model" in html
+    assert "Base score" in html
+    assert "Final score cap" in html
