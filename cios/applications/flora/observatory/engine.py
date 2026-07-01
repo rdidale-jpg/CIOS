@@ -26,8 +26,12 @@ FACT_PATTERNS = (r"\b\d+(?:\.\d+)?\s*(?:million|billion|bn|m|%)\b", r"£\s*\d+(?
 def build_observatory() -> Observatory:
     live = unique_live_evidence(read_jsonl(DEFAULT_PATH))
     evidence = tuple(_live_evidence(live) or _seed_evidence())
-    organisations = tuple(_organisation(org, sector, evidence, terms, live) for org, (sector, *terms) in ORG_SEEDS.items())
-    return Observatory(CRITIQUE_PATH, evidence, organisations, _weather(evidence, live), _hypotheses(evidence), _graph_edges(evidence))
+    signals = build_commercial_signals(evidence)
+    insights = build_commercial_insights(signals)
+    arguments = build_commercial_arguments(insights, signals)
+    recommendations = build_executive_recommendations(arguments)
+    organisations = tuple(_organisation(org, sector, evidence, terms, live, signals, insights, arguments, recommendations) for org, (sector, *terms) in ORG_SEEDS.items())
+    return Observatory(CRITIQUE_PATH, evidence, organisations, _weather(evidence, live), _hypotheses(evidence), _graph_edges(evidence, signals, insights, arguments, recommendations), signals, insights, arguments, recommendations)
 
 
 def observatory_snapshot(obs: Observatory | None = None) -> dict[str, Any]:
@@ -89,6 +93,94 @@ def compare_observatory_snapshots(before: dict[str, Any], after: dict[str, Any],
         "nothing_changed": not changed,
         "evidence_provenance": tuple({"evidence_id": eid, "caused_changes": _caused_changes(eid, org_changes, hypothesis_changes)} for eid in added),
     }
+
+
+
+BOILERPLATE_PATTERNS = ("skip to content", "cookie", "privacy policy", "modern slavery", "careers", "menu", "navigation", "footer")
+UNSUPPORTED_DEFAULTS = ("budget approval", "procurement timing", "executive sponsorship", "enterprise-wide AI transformation", "transformation window")
+UNKNOWN_DEFAULTS = ("budget", "executive sponsor", "roadmap", "procurement timing", "incumbent supplier posture")
+
+
+def _clean_text(text: str) -> str:
+    cleaned = re.sub(r"\s+", " ", text or "").strip()
+    parts = [p.strip(" -|•") for p in re.split(r"(?<=[.!?])\s+|\s{2,}|[|•]", cleaned) if p.strip()]
+    useful = [p for p in parts if not any(b in p.lower() for b in BOILERPLATE_PATTERNS)]
+    sentence = (useful[0] if useful else cleaned)[:360]
+    return sentence or "Accepted public evidence was collected without an executive-facing sentence."
+
+
+def _words75(text: str) -> str:
+    words = text.split()
+    return " ".join(words[:75])
+
+
+def _signal_supports(e: ObservatoryEvidence) -> tuple[str, ...]:
+    text = f"{e.summary} {e.transformation_theme} {e.mapped_condition} {e.mapped_capability}".lower()
+    supports = []
+    if "ai" in text or "frontier" in text:
+        supports.append("AI adoption")
+    if "cyber" in text or "security" in text or "secure" in text:
+        supports += ["cyber capability", "security modernisation"]
+    if "portfolio" in text or "launch" in text or "product" in text:
+        supports.append("business product innovation")
+    if "network" in text or "telecommunications" in text or "national" in text:
+        supports.append("mission-critical relevance")
+    supports.append(e.mapped_capability or e.transformation_theme)
+    return tuple(dict.fromkeys(s for s in supports if s))[:4]
+
+
+def _classification(e: ObservatoryEvidence) -> tuple[str, ...]:
+    text = f"{e.summary} {e.mapped_condition} {e.mapped_capability}".lower()
+    labels = []
+    for needle, label in (("ai", "AI"), ("cyber", "Cyber"), ("security", "Security"), ("cloud", "Cloud"), ("network", "Network"), ("grid", "Grid"), ("citizen", "Citizen Service"), ("portfolio", "Innovation")):
+        if needle in text:
+            labels.append(label)
+    return tuple(dict.fromkeys(labels or [e.transformation_dimension]))
+
+
+def build_commercial_signals(evidence: tuple[ObservatoryEvidence, ...]) -> tuple[CommercialSignal, ...]:
+    signals = []
+    counters: dict[str, int] = defaultdict(int)
+    for e in evidence:
+        counters[e.organisation] += 1
+        prefix = re.sub(r"[^A-Z0-9]+", "", e.organisation.upper())[:3] or "ORG"
+        observation = _words75(_clean_text(e.summary))
+        title = _words75(observation.rstrip(".")).rstrip(".")
+        signals.append(CommercialSignal(f"SIG-{prefix}-{counters[e.organisation]:03d}", e.organisation, title, observation, _classification(e), (e.evidence_id,), e.source_url, e.confidence, _signal_supports(e), UNSUPPORTED_DEFAULTS))
+    return tuple(signals)
+
+
+def build_commercial_insights(signals: tuple[CommercialSignal, ...]) -> tuple[CommercialInsight, ...]:
+    out = []
+    by_org: dict[str, list[CommercialSignal]] = defaultdict(list)
+    for s in signals:
+        by_org[s.organisation].append(s)
+    for org, rows in by_org.items():
+        ids = tuple(r.signal_id for r in rows[:3])
+        ai_cyber = any(any(x in r.supports for x in ("AI adoption", "cyber capability")) for r in rows)
+        summary = f"{org} shows early signals of AI-enabled cyber or operational modernisation, but current evidence does not prove enterprise-wide AI transformation." if ai_cyber else f"{org} has accepted public signals of operational relevance, but the pattern remains insufficient for a broad transformation claim."
+        kind = "single-signal hypothesis" if len(rows) == 1 else "multi-signal insight"
+        conf = min(85, max(40, round(sum(r.confidence for r in rows) / len(rows)) - (10 if len(rows) == 1 else 0)))
+        out.append(CommercialInsight(f"INS-{re.sub(r'[^A-Z0-9]+','',org.upper())[:3]}-001", org, summary, ids, (), UNKNOWN_DEFAULTS, conf, kind))
+    return tuple(out)
+
+
+def build_commercial_arguments(insights: tuple[CommercialInsight, ...], signals: tuple[CommercialSignal, ...]) -> tuple[CommercialArgument, ...]:
+    out = []
+    sig_by_id = {s.signal_id: s for s in signals}
+    for ins in insights:
+        sig_ids = ins.supporting_signal_ids
+        ev_ids = tuple(eid for sid in sig_ids for eid in sig_by_id[sid].supporting_evidence_ids)
+        out.append(CommercialArgument(f"ARG-{re.sub(r'[^A-Z0-9]+','',ins.organisation.upper())[:3]}-WHY-AI", ins.organisation, "Why AI?", f"There is a credible opening for a focused AI-enabled resilience or assurance conversation with {ins.organisation}, framed as discovery rather than a mature transformation thesis.", (ins.insight_id,), sig_ids, ev_ids, ("Evidence may reflect communications activity rather than funded transformation.", "Internal sponsorship, budget and timing remain unverified."), ins.unknowns, min(ins.confidence, 78), "Validate pain, sponsorship, budget, roadmap and supplier posture before positioning broader transformation.", "Board, COO, CIO or relevant operations/security executive"))
+    return tuple(out)
+
+
+def build_executive_recommendations(arguments: tuple[CommercialArgument, ...]) -> tuple[ExecutiveRecommendation, ...]:
+    out = []
+    for a in arguments:
+        rec = _words75(f"Engage {a.organisation} cautiously around AI-enabled resilience and assurance. Use the conversation to validate sponsorship, budget, roadmap and operational pain before positioning a broader transformation case. This recommendation is supported by {a.argument_id}, not by raw evidence alone.")
+        out.append(ExecutiveRecommendation(f"REC-{a.argument_id[4:]}", a.organisation, rec, (a.argument_id,), min(a.confidence, 75)))
+    return tuple(out)
 
 
 def _reasoning_signature(org: OrganisationObservatory) -> tuple[str, ...]:
@@ -211,7 +303,7 @@ def _seed_evidence() -> list[ObservatoryEvidence]:
     return rows
 
 
-def _organisation(org: str, sector: str, evidence: tuple[ObservatoryEvidence, ...], terms: list[str], live_rows: list[dict[str, Any]]) -> OrganisationObservatory:
+def _organisation(org: str, sector: str, evidence: tuple[ObservatoryEvidence, ...], terms: list[str], live_rows: list[dict[str, Any]], signals: tuple[CommercialSignal, ...], insights: tuple[CommercialInsight, ...], arguments: tuple[CommercialArgument, ...], recommendations: tuple[ExecutiveRecommendation, ...]) -> OrganisationObservatory:
     driver, theme, capability, ai_theme, level = terms
     org_ev = tuple(e for e in evidence if e.organisation == org)
     ev = tuple(e.evidence_id for e in org_ev)
@@ -247,17 +339,24 @@ def _organisation(org: str, sector: str, evidence: tuple[ObservatoryEvidence, ..
         ("Transformation", "Transformation Inevitability Index (TII)", "Transformation looks increasingly difficult to defer, but this is a hypothesis not a prediction.", "Pressure, mission-critical exposure and plausible AI/cloud levers align; inertia remains unknown."),
     ])
     forces = (ForceAssessment("Transformation Pressure", "Elevated" if ev else "Unknown", f"{driver.title()} pressure is visible in the evidence base.", ev[:2], conf), ForceAssessment("Organisational Inertia", "Unknown", "Insufficient evidence on internal resistance or delivery constraints.", (), 35, ("Operating model evidence",)), ForceAssessment("Executive Resolve", "Plausible", "Public priority signals suggest attention but not commitment.", ev[:1], min(conf, 60), ("Sponsor confirmation",)), ForceAssessment("Transformation Capability", "Unproven", "Capability cannot be inferred from external pressure alone.", ev[1:], 52, ("Delivery capacity", "Partner ecosystem")), ForceAssessment("Transformation Momentum", "Building", "Evidence clusters around coherent transformation themes.", ev, conf), ForceAssessment("Transformation Window", "Open but time-bound", "Pressure and technology constraints appear simultaneous.", ev, conf))
-    case = _case(org, driver, theme, capability, ai_theme, level, org_ev, ev, conf)
+    org_signals = tuple(s for s in signals if s.organisation == org)
+    org_insights = tuple(i for i in insights if i.organisation == org)
+    org_arguments = tuple(a for a in arguments if a.organisation == org)
+    org_recommendation = next((r for r in recommendations if r.organisation == org), None)
+    case = _case(org, driver, theme, capability, ai_theme, level, org_ev, ev, conf, org_arguments)
     timeline = _timeline(org_ev)
     costs = _costs(org, org_ev, conf)
     counter = ("No contradictory evidence identified in the current evidence set. This does not mean contradiction does not exist.", "Possible counterarguments: existing transformation may already be underway; budget may be insufficient; current architecture may be more modern than public evidence suggests; an incumbent supplier may already be addressing the issue; executive sponsorship may not exist; the AI use case may not be mature enough.")
-    return OrganisationObservatory(org, sector, genome, forces, forces[-1], TransformationWindow(org, "Next 6–18 months", "Building", conf, (theme, driver, capability), ("unknown delivery capacity", "unknown budget"), "Timeline evidence supports an engagement hypothesis, not a prediction."), StrategicConviction(tuple(f"{e.evidence_id}: {e.summary}" for e in org_ev), f"The commercial issue is uncertainty reduction around {theme} and {capability}, not technology adoption in isolation.", f"{org} may need a secure, data-enabled transformation conversation focused on {ai_theme}.", conf, ("Internal sponsorship", "Business case economics", "Incumbent supplier posture"), f"Open a {level.lower()}-level case-for-change discussion anchored in evidence, unknowns and cost of waiting.", ev), case, facts, strength, timeline, costs, counter)
+    return OrganisationObservatory(org, sector, genome, forces, forces[-1], TransformationWindow(org, "Next 6–18 months", "Building", conf, (theme, driver, capability), ("unknown delivery capacity", "unknown budget"), "Timeline evidence supports an engagement hypothesis, not a prediction."), StrategicConviction(tuple(f"{e.evidence_id}: {e.summary}" for e in org_ev), f"The commercial issue is uncertainty reduction around {theme} and {capability}, not technology adoption in isolation.", f"{org} may need a secure, data-enabled transformation conversation focused on {ai_theme}.", conf, ("Internal sponsorship", "Business case economics", "Incumbent supplier posture"), f"Open a {level.lower()}-level case-for-change discussion anchored in evidence, unknowns and cost of waiting.", ev), case, facts, strength, timeline, costs, counter, org_signals, org_insights, org_arguments, org_recommendation)
 
 
-def _case(org, driver, theme, capability, ai_theme, level, evs, ev, conf):
-    prefix = "" if (evs and conf >= 65) else f"Current evidence is insufficient to support a strong AI transformation claim for {org}. The available snippets may include generic corporate language or single-source signals, but do not yet prove active AI-led network transformation.\n"
-    lines = prefix + ("\n".join(f"Observed fact: {e.summary}\nSupporting evidence: {e.source_name} — {e.source_url} — {e.evidence_id} ({e.evidence_class}, confidence {e.confidence}).\nInterpretation: this receipt suggests {org} should test whether {driver}, {theme} or {capability} creates executive-level risk.\nHypothesis: a focused {ai_theme} transformation may be more defensible than generic digital change.\nUnknowns: {', '.join(e.unknowns)}.\nWhat would strengthen/weaken: named sponsor, budget, architecture detail, supplier posture and quantified outcomes." for e in evs[:3]) or "No live evidence available.")
-    return CaseForChange(org, *(f"{label}\n{lines}" for label in CASE_SECTIONS[:7]), ("Delayed executive alignment", "Supplier lock-in", "Regulatory/customer trust deterioration"), ev, (), ("Quantified cost of waiting", "Confirmed transformation sponsor", "Current architecture"), conf, level, f"The conversation should move to {level} level because evidence concerns enterprise risk, timing and cross-functional trade-offs.")
+def _case(org, driver, theme, capability, ai_theme, level, evs, ev, conf, arguments):
+    arg = arguments[0] if arguments else None
+    claim = arg.claim if arg else f"Current evidence supports only a cautious {ai_theme} discovery hypothesis for {org}."
+    unknowns = arg.unknowns if arg else ("Quantified cost of waiting", "Confirmed transformation sponsor", "Current architecture")
+    why_ai = f"Why AI?\n{claim} Supporting insight and signal IDs are the authority; raw evidence remains in drill-down only."
+    generic = f"Current evidence supports a cautious executive validation discussion for {org}; it does not prove budget, sponsor, procurement timing or enterprise-wide transformation."
+    return CaseForChange(org, *(why_ai if label == "Why AI?" else f"{label}\n{generic}" for label in CASE_SECTIONS[:7]), ("Delayed executive alignment", "Supplier lock-in", "Regulatory/customer trust deterioration"), ev, (), unknowns, conf, level, f"The conversation should move to {level} level only as an evidence-validation discussion, because the pipeline has not proven sponsorship, budget or timing.")
 
 
 def _facts(evs):
@@ -290,8 +389,31 @@ def _hypotheses(evidence):
     return (ResearchHypothesis("ETO-HYP-001", "Legacy pressure plus public scrutiny elevates board-level transformation need", HypothesisStatus.STRENGTHENING, ids[:2] or ids, (), 74, "2026-07-01", f"Lead with risk, resilience and cost-of-waiting; supporting evidence count {len(ids[:2])}." if len(ids[:2]) else "Hypothesis — insufficient evidence."), ResearchHypothesis("ETO-HYP-002", "AI readiness is constrained more by data and operating model evidence than appetite", HypothesisStatus.NEEDS_MORE_EVIDENCE, ids[1:] or ids, (), 61, "2026-07-01", f"Discovery should test data readiness before proposing AI scale-up; supporting evidence count {len(ids[1:] or ids)}."))
 
 
-def _graph_edges(evidence):
+def _graph_edges(evidence, signals=(), insights=(), arguments=(), recommendations=()):
     edges = []
     for e in evidence:
-        edges += [KnowledgeGraphEdge(e.organisation, "supported_by", e.evidence_id, (e.evidence_id,), False, "Observed evidence lineage.", e.confidence), KnowledgeGraphEdge(e.evidence_id, "supports_question", e.commercial_question_supported, (e.evidence_id,), False, "Evidence explicitly mapped to commercial question.", e.confidence), KnowledgeGraphEdge(e.organisation, "has_theme", e.transformation_theme, (e.evidence_id,), True, e.summary, e.confidence)]
+        edges += [KnowledgeGraphEdge(e.organisation, "supported_by", e.evidence_id, (e.evidence_id,), False, "Observed evidence lineage.", e.confidence), KnowledgeGraphEdge(e.evidence_id, "supports_question", e.commercial_question_supported, (e.evidence_id,), False, "Evidence explicitly mapped to commercial question.", e.confidence), KnowledgeGraphEdge(e.organisation, "has_theme", e.transformation_theme, (e.evidence_id,), True, _clean_text(e.summary), e.confidence)]
+    sig_by_id = {s.signal_id: s for s in signals}
+    ins_by_id = {i.insight_id: i for i in insights}
+    arg_by_id = {a.argument_id: a for a in arguments}
+    for s in signals:
+        for eid in s.supporting_evidence_ids:
+            edges.append(KnowledgeGraphEdge(eid, "supports_signal", s.signal_id, (eid,), False, "Accepted evidence normalised into factual commercial signal.", s.confidence))
+            if any(term in s.does_not_support for term in ("enterprise-wide AI transformation",)):
+                edges.append(KnowledgeGraphEdge(eid, "contradicts_signal", s.signal_id, (eid,), False, "Evidence does not support broader extrapolation claims.", s.confidence))
+    for i in insights:
+        for sid in i.supporting_signal_ids:
+            evs = sig_by_id[sid].supporting_evidence_ids
+            edges.append(KnowledgeGraphEdge(sid, "supports_insight", i.insight_id, evs, True, i.summary, i.confidence))
+        if i.hypothesis_type == "single-signal hypothesis":
+            for sid in i.supporting_signal_ids:
+                edges.append(KnowledgeGraphEdge(sid, "weakens_insight", i.insight_id, sig_by_id[sid].supporting_evidence_ids, True, "Single-signal support weakens pattern confidence.", i.confidence))
+    for a in arguments:
+        for iid in a.supporting_insight_ids:
+            edges.append(KnowledgeGraphEdge(iid, "supports_argument", a.argument_id, a.supporting_evidence_ids, True, a.claim, a.confidence))
+            if ins_by_id[iid].hypothesis_type == "single-signal hypothesis":
+                edges.append(KnowledgeGraphEdge(iid, "weakens_argument", a.argument_id, a.supporting_evidence_ids, True, "Argument rests on single-signal hypothesis.", a.confidence))
+    for r in recommendations:
+        for aid in r.supporting_argument_ids:
+            edges.append(KnowledgeGraphEdge(aid, "supports_recommendation", r.recommendation_id, arg_by_id[aid].supporting_evidence_ids, True, r.recommendation, r.confidence))
     return tuple(edges)
