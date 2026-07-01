@@ -17,10 +17,12 @@ from cios.applications.flora.live.collect import current_status
 from cios.applications.flora.live.source_registry import SOURCES, organisations_without_enabled_sources
 from cios.applications.flora.live.store import read_jsonl
 from cios.applications.flora.live.aggregation import aggregate_live_evidence, adjust_score, attention_organisations, unique_live_evidence
-from cios.applications.flora.seed_data import sample_watchlist
+from cios.applications.flora.seed_data import sample_watchlist, sample_signals
 from cios.applications.flora.provider_context import default_provider_context, provider_relevance_note
 from cios.applications.flora.portfolio import portfolio_summary
 from cios.applications.flora.observatory.engine import build_observatory
+from cios.applications.flora.opportunity_shaping import build_opportunity_report
+from dataclasses import asdict
 
 VERSION = "0.2"
 PUBLICATIONS_DIR = Path(os.environ.get("FLORA_PILOT_DIR", ".flora_pilot")) / "publications"
@@ -325,6 +327,12 @@ def build_publication_context(publication_date: date | None = None) -> dict[str,
 
     radar_summary = portfolio_summary()
     observatory = build_observatory()
+    signals_by_org = defaultdict(list)
+    for signal in sample_signals():
+        signals_by_org[signal.organisation].append(signal)
+    accounts_by_name = {account.organisation_name: account for account in sample_watchlist()}
+    eose_reports = {name: asdict(build_opportunity_report(accounts_by_name[name], signals_by_org.get(name, []), provider)) for name in ("BT", "DWP", "National Grid") if name in accounts_by_name}
+
     commercial_pipeline = {
         "top_commercial_signals": [vars(s) for s in observatory.commercial_signals[:5]],
         "top_emerging_insights": [vars(i) for i in observatory.commercial_insights[:5]],
@@ -333,7 +341,7 @@ def build_publication_context(publication_date: date | None = None) -> dict[str,
         "weakest_claims_missing_evidence": ["enterprise-wide AI transformation", "budget approval", "procurement timing", "executive sponsorship", "incumbent supplier posture"],
     }
 
-    return {"product": "Flora Publisher", "edition": "Morning Edition", "version": VERSION, "publication_date": publication_date.isoformat(), "publication_date_label": publication_date.strftime("%A %d %B %Y"), "generated_timestamp": datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC"), "live_evidence_banner": live_banner, "live_evidence": live_evidence[:12], "live_coverage_summary": live_coverage_summary, "portfolio_radar_summary": radar_summary, "commercial_pipeline": commercial_pipeline, "live_organisation_metrics": {org: vars(metrics) for org, metrics in live_metrics.items()}, "new_evidence_count": live_unique if live_evidence else evidence_count, "new_evidence_label": "live unique evidence objects" if live_evidence else "seeded fallback evidence items", "organisations_requiring_attention": attention_organisations(daily.items, live_metrics, sample_watchlist()), "reading_time": _reading_time(len(daily.items), live_unique if live_evidence else evidence_count), "executive_summary": executive_summary, "what_changed": what_changed, "why_matters": why_matters, "priority_opportunity": priority_opportunity, "top_organisations": top_orgs, "conditions": conditions, "movements": movements, "competitive_intelligence": competitive, "recommended_actions": recommended_actions, "three_things_today": today, "cannot_know": cannot_know, "teach_flora": {"Biggest Insight": "", "Biggest Surprise": "", "Action Taken": "", "What Flora Should Learn": "", "Flora Value Score (0–5)": ""}, "case_files": sorted({display_name(ev.organisation) for ev in evidence}), "playbooks": sorted({pb for item in daily.items if item.assessment for pb in item.assessment.supporting_playbooks}), "commercial_laws": ["Validate sponsor", "Validate funding", "Validate timing", "Validate incumbent and competitor activity"], "known_limitations": ["Live evidence limited to configured public HTML source pages", "PDF ingestion not implemented", "No LLMs", "No databases", "No broad crawling", "Pilot placeholders remain blank on Teach Flora page"], "provider_context": provider.model_dump(), "provider_relevance_note": provider_note}
+    return {"product": "Flora Publisher", "edition": "Morning Edition", "version": VERSION, "publication_date": publication_date.isoformat(), "publication_date_label": publication_date.strftime("%A %d %B %Y"), "generated_timestamp": datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC"), "live_evidence_banner": live_banner, "live_evidence": live_evidence[:12], "live_coverage_summary": live_coverage_summary, "portfolio_radar_summary": radar_summary, "commercial_pipeline": commercial_pipeline, "enterprise_opportunity_shaping": eose_reports, "live_organisation_metrics": {org: vars(metrics) for org, metrics in live_metrics.items()}, "new_evidence_count": live_unique if live_evidence else evidence_count, "new_evidence_label": "live unique evidence objects" if live_evidence else "seeded fallback evidence items", "organisations_requiring_attention": attention_organisations(daily.items, live_metrics, sample_watchlist()), "reading_time": _reading_time(len(daily.items), live_unique if live_evidence else evidence_count), "executive_summary": executive_summary, "what_changed": what_changed, "why_matters": why_matters, "priority_opportunity": priority_opportunity, "top_organisations": top_orgs, "conditions": conditions, "movements": movements, "competitive_intelligence": competitive, "recommended_actions": recommended_actions, "three_things_today": today, "cannot_know": cannot_know, "teach_flora": {"Biggest Insight": "", "Biggest Surprise": "", "Action Taken": "", "What Flora Should Learn": "", "Flora Value Score (0–5)": ""}, "case_files": sorted({display_name(ev.organisation) for ev in evidence}), "playbooks": sorted({pb for item in daily.items if item.assessment for pb in item.assessment.supporting_playbooks}), "commercial_laws": ["Validate sponsor", "Validate funding", "Validate timing", "Validate incumbent and competitor activity"], "known_limitations": ["Live evidence limited to configured public HTML source pages", "PDF ingestion not implemented", "No LLMs", "No databases", "No broad crawling", "Pilot placeholders remain blank on Teach Flora page"], "provider_context": provider.model_dump(), "provider_relevance_note": provider_note}
 
 
 def _latest_morning_stem(ctx: dict[str, Any]) -> str:
@@ -353,6 +361,19 @@ def render_markdown(ctx: dict[str, Any]) -> str:
     lines += ["", "### Highest Conviction Arguments"] + [f"- **{a['argument_id']} / {a['question_answered']}** — {a['claim']}" for a in cp.get("highest_conviction_arguments", [])]
     lines += ["", "### Recommended Executive Conversations"] + [f"- **{r['recommendation_id']}** — {r['recommendation']} References: {', '.join(r['supporting_argument_ids'])}." for r in cp.get("recommended_executive_conversations", [])]
     lines += ["", "### Weakest Claims / Missing Evidence"] + [f"- {x}" for x in cp.get("weakest_claims_missing_evidence", [])]
+    eose = ctx.get("enterprise_opportunity_shaping", {})
+    lines += ["", "## Enterprise Opportunity Shaping Engine"]
+    lines += ["", "EOSE is enterprise-generic: it derives executive maps, hypotheses and discovery questions from Enterprise DNA, transformation themes, ownership models, organisation role mapping and traceable evidence."]
+    for org, report in eose.items():
+        dna = report["enterprise_dna"]
+        lines += ["", f"### {org}", f"- **Enterprise DNA:** sector={dna['sector']}; mission criticality={dna['mission_criticality']}; regulatory intensity={dna['regulatory_intensity']}; technology intensity={dna['technology_intensity']}; operational complexity={dna['operational_complexity']}", f"- **Source profile:** {', '.join(report['source_profile'])}", f"- **Themes:** {', '.join(t['name'] for t in report['themes'])}"]
+        lines += ["", "| Executive Role | Business Function | Theme | Strategic Issue | Evidence Strength | Confidence | Recommended Action |", "| --- | --- | --- | --- | --- | ---: | --- |"]
+        for row in report["role_issue_opportunity_map"][:5]:
+            lines.append(f"| {row['Executive Role']} | {row['Business Function']} | {row['Transformation Theme']} | {row['Strategic Issue']} | {row['Evidence Strength']} | {row['Confidence']} | {row['Recommended Action']} |")
+        first = report["hypotheses"][0]
+        lines += ["", "**Discovery questions:**"] + [f"- {q}" for q in first["discovery_questions"]]
+        lines += ["", "**Issue qualification ladder:**"] + [f"- **{k.replace('_', ' ').title()}:** {v}" for k, v in first["issue_qualification_ladder"].items()]
+        lines += ["", "**Conversation plan:**", f"- Primary: {report['conversation_plan']['primary_conversation']}", f"- Secondary: {report['conversation_plan']['secondary_conversation']}", f"- Avoid: {', '.join(report['conversation_plan']['conversations_to_avoid'])}", f"- Board readiness: {report['conversation_plan']['board_readiness']}"]
     if ctx["live_evidence"]:
         lines += ["", "<details><summary>Raw live evidence drill-down</summary>", "", "| Organisation | Source | URL | Snippet | Extracted | Condition | Missing evidence |", "| --- | --- | --- | --- | --- | --- | --- |"]
         lines += [f"| {e['organisation']} | {e['source_name']} | {e['source_url']} | {e['snippet']} | {e['extraction_timestamp']} | {e['commercial_condition']} | {'; '.join(e.get('missing_evidence', []))} |" for e in ctx["live_evidence"]]
