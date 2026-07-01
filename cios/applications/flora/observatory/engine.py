@@ -34,7 +34,9 @@ def _live_evidence(rows: list[dict[str, Any]]) -> list[ObservatoryEvidence]:
     out: list[ObservatoryEvidence] = []
     for i, r in enumerate(rows, 1):
         org = str(r.get("organisation") or "Unknown")
-        if org not in ORG_SEEDS:
+        if org not in ORG_SEEDS or r.get("accepted_for_claims") is False:
+            continue
+        if str(r.get("relevance_level") or "HIGH") not in {"HIGH", "MEDIUM"}:
             continue
         out.append(ObservatoryEvidence(
             str(r.get("evidence_id") or r.get("id") or f"LIVE-EV-{i:04d}"),
@@ -77,6 +79,10 @@ def _organisation(org: str, sector: str, evidence: tuple[ObservatoryEvidence, ..
     ev = tuple(e.evidence_id for e in org_ev)
     metrics = aggregate_live_evidence(live_rows).get(org)
     conf = min(90, max(45, round(sum(e.confidence for e in org_ev) / len(org_ev)))) if org_ev else 45
+    if metrics and metrics.insufficient_claims:
+        conf = max(35, conf - 15)
+    if metrics and metrics.unique_source_count < 2:
+        conf = max(35, conf - 8)
     quality = "Live" if any(e.is_live for e in org_ev) else "SEEDED / SYNTHETIC / FALLBACK"
     facts = _facts(org_ev)
     strength = {
@@ -89,7 +95,11 @@ def _organisation(org: str, sector: str, evidence: tuple[ObservatoryEvidence, ..
         "strongest_evidence_class": (Counter(e.evidence_class for e in org_ev).most_common(1)[0][0] if org_ev else "None"),
         "weakest_evidence_class": "Internal sponsorship / quantified business case",
         "missing_evidence_classes": ["Named executive sponsor", "Current architecture", "Budget authority", "Incumbent supplier posture"],
-        "confidence_explanation": f"Confidence is {conf} because {len(org_ev)} evidence object(s) from {metrics.unique_source_count if metrics else 0} independent source(s) support the case; unknowns remain around sponsor, budget and current architecture.",
+        "accepted_evidence": metrics.accepted_evidence_count if metrics else len(org_ev),
+        "evidence_rejected": metrics.rejected_evidence_count if metrics else 0,
+        "evidence_downgraded": metrics.downgraded_evidence_count if metrics else 0,
+        "claims_with_insufficient_support": metrics.insufficient_claims if metrics else [],
+        "confidence_explanation": f"Confidence is {conf} because {len(org_ev)} accepted evidence object(s) from {metrics.unique_source_count if metrics else 0} independent source(s) support the case; unsupported or single-source claims are treated as hypotheses and unknowns remain around sponsor, budget and current architecture.",
     }
     genome = tuple(GenomeDimension(p, n, h, conf if n != "Executive Resolve" else min(conf, 60), r, ev[:2] or ev, ("Budget", "Sponsor", "Architecture"), quality) for p, n, h, r in [
         ("Technology", "Mission Critical Systems", f"{org} appears exposed to {capability} constraints.", "Observed evidence is treated as a signal, not proof, and mapped to mission-critical transformation questions."),
@@ -107,7 +117,8 @@ def _organisation(org: str, sector: str, evidence: tuple[ObservatoryEvidence, ..
 
 
 def _case(org, driver, theme, capability, ai_theme, level, evs, ev, conf):
-    lines = "\n".join(f"Observed fact: {e.summary}\nSupporting evidence: {e.source_name} — {e.source_url} — {e.evidence_id} ({e.evidence_class}, confidence {e.confidence}).\nInterpretation: this receipt suggests {org} should test whether {driver}, {theme} or {capability} creates executive-level risk.\nHypothesis: a focused {ai_theme} transformation may be more defensible than generic digital change.\nUnknowns: {', '.join(e.unknowns)}.\nWhat would strengthen/weaken: named sponsor, budget, architecture detail, supplier posture and quantified outcomes." for e in evs[:3]) or "No live evidence available."
+    prefix = "" if (evs and conf >= 65) else f"Current evidence is insufficient to support a strong AI transformation claim for {org}. The available snippets may include generic corporate language or single-source signals, but do not yet prove active AI-led network transformation.\n"
+    lines = prefix + ("\n".join(f"Observed fact: {e.summary}\nSupporting evidence: {e.source_name} — {e.source_url} — {e.evidence_id} ({e.evidence_class}, confidence {e.confidence}).\nInterpretation: this receipt suggests {org} should test whether {driver}, {theme} or {capability} creates executive-level risk.\nHypothesis: a focused {ai_theme} transformation may be more defensible than generic digital change.\nUnknowns: {', '.join(e.unknowns)}.\nWhat would strengthen/weaken: named sponsor, budget, architecture detail, supplier posture and quantified outcomes." for e in evs[:3]) or "No live evidence available.")
     return CaseForChange(org, *(f"{label}\n{lines}" for label in CASE_SECTIONS[:7]), ("Delayed executive alignment", "Supplier lock-in", "Regulatory/customer trust deterioration"), ev, (), ("Quantified cost of waiting", "Confirmed transformation sponsor", "Current architecture"), conf, level, f"The conversation should move to {level} level because evidence concerns enterprise risk, timing and cross-functional trade-offs.")
 
 
@@ -138,7 +149,7 @@ def _weather(evidence, live):
 
 def _hypotheses(evidence):
     ids = tuple(e.evidence_id for e in evidence[:3])
-    return (ResearchHypothesis("ETO-HYP-001", "Legacy pressure plus public scrutiny elevates board-level transformation need", HypothesisStatus.STRENGTHENING, ids[:2] or ids, (), 74, "2026-07-01", f"Lead with risk, resilience and cost-of-waiting; supporting evidence count {len(ids[:2])}."), ResearchHypothesis("ETO-HYP-002", "AI readiness is constrained more by data and operating model evidence than appetite", HypothesisStatus.NEEDS_MORE_EVIDENCE, ids[1:] or ids, (), 61, "2026-07-01", f"Discovery should test data readiness before proposing AI scale-up; supporting evidence count {len(ids[1:] or ids)}."))
+    return (ResearchHypothesis("ETO-HYP-001", "Legacy pressure plus public scrutiny elevates board-level transformation need", HypothesisStatus.STRENGTHENING, ids[:2] or ids, (), 74, "2026-07-01", f"Lead with risk, resilience and cost-of-waiting; supporting evidence count {len(ids[:2])}." if len(ids[:2]) else "Hypothesis — insufficient evidence."), ResearchHypothesis("ETO-HYP-002", "AI readiness is constrained more by data and operating model evidence than appetite", HypothesisStatus.NEEDS_MORE_EVIDENCE, ids[1:] or ids, (), 61, "2026-07-01", f"Discovery should test data readiness before proposing AI scale-up; supporting evidence count {len(ids[1:] or ids)}."))
 
 
 def _graph_edges(evidence):

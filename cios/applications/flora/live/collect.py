@@ -5,7 +5,7 @@ import argparse
 from datetime import UTC, datetime
 from typing import Any
 
-from cios.applications.flora.live.extractor import extract_evidence
+from cios.applications.flora.live.extractor import extract_evidence_with_diagnostics
 from cios.applications.flora.live.fetcher import fetch_html
 from cios.applications.flora.live.source_registry import SOURCES, canonical_organisation, enabled_sources
 from cios.applications.flora.live.store import DEFAULT_DIAGNOSTICS_PATH, DEFAULT_PATH, load_evidence_fingerprints, read_jsonl, unique_evidence, write_jsonl
@@ -41,7 +41,7 @@ def _status(succeeded: bool, evidence_count: int) -> str:
     return "failed"
 
 
-def _diagnostic(source: Any, attempted_at: str, result: Any, source_evidence: list[dict[str, Any]], error: str | None = None, succeeded: bool | None = None) -> dict[str, Any]:
+def _diagnostic(source: Any, attempted_at: str, result: Any, source_evidence: list[dict[str, Any]], rejected_evidence: list[dict[str, Any]] | None = None, error: str | None = None, succeeded: bool | None = None) -> dict[str, Any]:
     ok = result.succeeded if succeeded is None else succeeded
     evidence_count = len(source_evidence)
     failure_reason = categorise_failure(succeeded=ok, http_status=result.status_code, error=error if error is not None else result.error, evidence_count=evidence_count)
@@ -59,6 +59,16 @@ def _diagnostic(source: Any, attempted_at: str, result: Any, source_evidence: li
         "last_attempted": attempted_at,
         "attempted_at": attempted_at,
         "failure_reason": failure_reason,
+        "accepted_evidence_count": evidence_count,
+        "rejected_evidence_count": len(rejected_evidence or []),
+        "downgraded_evidence_count": len([e for e in (rejected_evidence or []) if e.get("relevance_level") == "LOW"]),
+        "unsupported_interpretations": [{
+            "snippet": e.get("snippet", ""),
+            "attempted_classification": e.get("attempted_classification") or e.get("commercial_condition", ""),
+            "rejection_reason": "; ".join(e.get("rejection_reasons", [])),
+            "safer_interpretation": e.get("safer_interpretation", "Treat as diagnostics only."),
+            "relevance_level": e.get("relevance_level", "REJECT"),
+        } for e in (rejected_evidence or [])[:8]],
     }
 
 
@@ -72,16 +82,17 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
         attempted_at = collection_started_at
         result = fetch_html(str(source.url))
         source_evidence: list[dict[str, Any]] = []
+        rejected_evidence: list[dict[str, Any]] = []
         parse_error: str | None = None
         succeeded = result.succeeded
         if result.succeeded:
             try:
-                source_evidence = extract_evidence(source, result.html)
+                source_evidence, rejected_evidence = extract_evidence_with_diagnostics(source, result.html)
                 evidence.extend(source_evidence)
             except Exception as exc:  # parser diagnostics must not stop other governed sources
                 succeeded = False
                 parse_error = f"parser_error: {exc}"
-        diagnostics.append(_diagnostic(source, attempted_at, result, source_evidence, parse_error, succeeded))
+        diagnostics.append(_diagnostic(source, attempted_at, result, source_evidence, rejected_evidence, parse_error, succeeded))
     new_evidence, duplicate_count, fingerprints = unique_evidence(evidence)
     output = write_jsonl(new_evidence) if new_evidence else DEFAULT_PATH
     output.parent.mkdir(parents=True, exist_ok=True)

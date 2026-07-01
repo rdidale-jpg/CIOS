@@ -361,3 +361,79 @@ def test_flora_v08_portfolio_radar_and_source_effectiveness(monkeypatch, tmp_pat
 
     md = render_markdown(build_publication_context())
     assert "Portfolio Radar Summary" in md
+
+
+def test_generic_responsible_ai_esg_and_careers_are_not_ai_modernisation() -> None:
+    source = enabled_sources("BT")[0]
+    html = """<p>Responsible AI child rights modern slavery flexible working rewards & benefits our locations search roles careers.</p>"""
+    assert extract_evidence(source, html) == []
+
+
+def test_navigation_heavy_snippets_are_rejected_with_diagnostics() -> None:
+    from cios.applications.flora.live.extractor import extract_evidence_with_diagnostics
+
+    source = enabled_sources("BT")[0]
+    html = "<nav>Home About us Investors Newsroom Careers Search Roles Contact us Menu AI network</nav>"
+    accepted, rejected = extract_evidence_with_diagnostics(source, html)
+    assert accepted == []
+    assert rejected
+    assert rejected[0]["relevance_level"] in {"LOW", "REJECT"}
+    assert rejected[0]["accepted_for_claims"] is False
+
+
+def test_bt_style_policy_snippets_are_downgraded_or_rejected() -> None:
+    from cios.applications.flora.live.extractor import extract_evidence_with_diagnostics
+
+    source = enabled_sources("BT")[0]
+    accepted, rejected = extract_evidence_with_diagnostics(
+        source,
+        "<p>BT Responsible AI policy, child rights, modern slavery statement, flexible working and search roles.</p>",
+    )
+    assert accepted == []
+    assert any(item["relevance_level"] in {"LOW", "REJECT"} for item in rejected)
+
+
+def test_claims_require_high_or_independent_medium_evidence() -> None:
+    from cios.applications.flora.live.aggregation import aggregate_live_evidence
+
+    one_medium = [{"organisation": "BT", "source_id": "s1", "commercial_condition": "AI Modernisation", "likely_capability": "AI use-case discovery", "relevance_level": "MEDIUM", "confidence": 60, "overall_evidence_quality": 60}]
+    metrics = aggregate_live_evidence(one_medium)["BT"]
+    assert "AI Modernisation" in metrics.insufficient_claims
+    assert metrics.condition_counts == {}
+
+    two_medium = [*one_medium, {**one_medium[0], "source_id": "s2"}]
+    metrics = aggregate_live_evidence(two_medium)["BT"]
+    assert metrics.condition_counts["AI Modernisation"] == 2
+    assert metrics.insufficient_claims == []
+
+
+def test_confidence_falls_when_weak_evidence_is_removed_from_claim_support() -> None:
+    from cios.applications.flora.live.aggregation import aggregate_live_evidence
+    from cios.applications.flora.portfolio import evidence_confidence
+
+    weak = [{"organisation": "BT", "source_id": "s1", "commercial_condition": "AI Modernisation", "likely_capability": "AI", "relevance_level": "MEDIUM", "confidence": 55, "overall_evidence_quality": 55, "evidence_tier": "tier_1_company"}]
+    strong = [{**weak[0], "relevance_level": "HIGH", "confidence": 85, "overall_evidence_quality": 85}]
+    assert evidence_confidence(aggregate_live_evidence(weak)["BT"]) < evidence_confidence(aggregate_live_evidence(strong)["BT"])
+
+
+def test_rejected_evidence_is_visible_in_collection_diagnostics(monkeypatch, tmp_path: Path) -> None:
+    from cios.applications.flora.live import collect as collect_module
+    from cios.applications.flora.live.fetcher import FetchResult
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(collect_module, "enabled_sources", lambda organisation=None: [enabled_sources("BT")[0]])
+    monkeypatch.setattr(collect_module, "fetch_html", lambda url: FetchResult(url=url, succeeded=True, status_code=200, html="<p>Responsible AI child rights modern slavery flexible working search roles.</p>", error=None))
+    result = collect_module.collect("BT")
+    diag = result["diagnostics"][0]
+    assert diag["evidence_count"] == 0
+    assert diag["rejected_evidence_count"] > 0
+    assert diag["unsupported_interpretations"]
+
+
+def test_no_llm_database_or_broad_crawling_imports() -> None:
+    extractor_source = Path("cios/applications/flora/live/extractor.py").read_text()
+    collect_source = Path("cios/applications/flora/live/collect.py").read_text()
+    forbidden = ("openai", "anthropic", "sqlite3", "sqlalchemy", "crawl")
+    for term in forbidden:
+        assert term not in extractor_source.lower()
+        assert term not in collect_source.lower()
