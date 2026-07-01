@@ -25,7 +25,8 @@ FACT_PATTERNS = (r"\b\d+(?:\.\d+)?\s*(?:million|billion|bn|m|%)\b", r"£\s*\d+(?
 
 def build_observatory() -> Observatory:
     live = unique_live_evidence(read_jsonl(DEFAULT_PATH))
-    evidence = tuple(_live_evidence(live) or _seed_evidence())
+    live_evs = _live_evidence(live)
+    evidence = tuple((live_evs + list(BT_ENTERPRISE_EVIDENCE)) if live_evs else _seed_evidence())
     signals = build_commercial_signals(evidence)
     insights = build_commercial_insights(signals)
     arguments = build_commercial_arguments(insights, signals)
@@ -99,6 +100,23 @@ def compare_observatory_snapshots(before: dict[str, Any], after: dict[str, Any],
 BOILERPLATE_PATTERNS = ("skip to content", "cookie", "privacy policy", "modern slavery", "careers", "menu", "navigation", "footer", "annual general meeting", "share price")
 UNSUPPORTED_DEFAULTS = ("budget", "budget approval", "procurement", "procurement timing", "executive sponsor", "executive sponsorship", "enterprise-wide AI transformation", "transformation window")
 UNKNOWN_DEFAULTS = ("budget", "executive sponsor", "roadmap", "procurement timing", "incumbent supplier posture")
+
+BT_ENTERPRISE_EVIDENCE: tuple[ObservatoryEvidence, ...] = (
+    ObservatoryEvidence("BT-FIN-001", "Financial Results", "High", "FY2025", "BT", "Telecommunications", "Financial profile", "Cost Pressure", "Why act?", "FY25 revenue was £20.4bn, down 2%; adjusted EBITDA was £8.2bn, up 1%; normalised free cash flow was £1.3bn.", "BT Group FY25 preliminary results", "https://www.bt.com/about/investors/financial-reporting-and-news/quarterly-results", 88, ("Current budget approval", "Deal-specific procurement timing"), ("BT FY25 preliminary results", "deterministic_enterprise_profile"), source_type="investor_relations", mapped_condition="Financial / cost pressure", mapped_capability="operating model transformation"),
+    ObservatoryEvidence("BT-FIN-002", "Capital Allocation", "High", "FY2025", "BT", "Telecommunications", "Capital allocation", "Network Investment", "Why network intelligence?", "Capital expenditure excluding spectrum was £4.8bn as BT continued full fibre and mobile network investment.", "BT Group FY25 preliminary results", "https://www.bt.com/about/investors/financial-reporting-and-news/quarterly-results", 87, ("Programme-level ROI", "Supplier roadmap"), ("BT FY25 preliminary results", "deterministic_enterprise_profile"), source_type="investor_relations", mapped_condition="Capex intensity", mapped_capability="network intelligence"),
+    ObservatoryEvidence("BT-FIN-003", "Annual Report Strategy", "High", "FY2025", "BT", "Telecommunications", "Business overview", "Transformation Pressure", "Why now?", "BT reports Consumer, Business and Openreach as customer-facing units, with Openreach providing fixed access infrastructure to communications providers.", "BT Group Annual Report 2025", "https://www.bt.com/about/investors/financial-reporting-and-news/annual-reports", 86, ("Unit-level transformation budget", "Current enterprise architecture"), ("BT Annual Report 2025", "deterministic_enterprise_profile"), source_type="annual_report", mapped_condition="Enterprise operating model", mapped_capability="enterprise simplification"),
+    ObservatoryEvidence("BT-OP-001", "Productivity Target", "High", "FY2025", "BT", "Telecommunications", "Cost transformation", "Cost Pressure", "Why operating model / cost transformation?", "BT says its cost transformation programme is targeting £3bn of annualised gross cost savings by the end of FY29.", "BT Group FY25 preliminary results", "https://www.bt.com/about/investors/financial-reporting-and-news/quarterly-results", 89, ("Which workstreams are externally addressable", "Approved solution budget"), ("BT FY25 preliminary results", "deterministic_enterprise_profile"), source_type="investor_relations", mapped_condition="Productivity target", mapped_capability="operating model transformation"),
+    ObservatoryEvidence("BT-OP-002", "Workforce / Labour Cost", "High", "FY2025", "BT", "Telecommunications", "Operating model pressure", "Cost Pressure", "What is the cost of waiting?", "BT reports around 97,000 colleagues, making labour productivity and operating model simplification material cost levers.", "BT Group Annual Report 2025", "https://www.bt.com/about/investors/financial-reporting-and-news/annual-reports", 82, ("Role-level workforce plans", "Union or location constraints"), ("BT Annual Report 2025", "deterministic_enterprise_profile"), source_type="annual_report", mapped_condition="Labour cost exposure", mapped_capability="workforce productivity"),
+    ObservatoryEvidence("BT-NET-001", "Network Investment", "High", "FY2025", "BT", "Telecommunications", "Full fibre rollout", "Mission Critical Systems", "Why network intelligence?", "Openreach full fibre footprint passed more than 17m premises and BT targets up to 25m by the end of 2026.", "BT Group FY25 preliminary results", "https://www.bt.com/about/investors/financial-reporting-and-news/quarterly-results", 90, ("Local build economics", "Operational tooling stack"), ("BT FY25 preliminary results", "deterministic_enterprise_profile"), source_type="investor_relations", mapped_condition="Network investment", mapped_capability="network intelligence"),
+    ObservatoryEvidence("BT-NET-002", "Technology Estate", "High", "FY2025", "BT", "Telecommunications", "Legacy transition", "Transformation Programme", "Why now?", "BT is retiring legacy networks including the PSTN as customers migrate to digital voice, fibre and modern network services.", "BT Group Annual Report 2025", "https://www.bt.com/about/investors/financial-reporting-and-news/annual-reports", 84, ("Migration backlog by segment", "Customer operations tooling"), ("BT Annual Report 2025", "deterministic_enterprise_profile"), source_type="annual_report", mapped_condition="Legacy network switch-off", mapped_capability="service assurance"),
+    ObservatoryEvidence("BT-REG-001", "Regulatory Pressure", "High", "2025", "BT", "Telecommunications", "Telecoms resilience", "Regulatory Pressure", "Why now?", "Ofcom states telecoms providers must take appropriate and proportionate measures to identify, reduce and prepare for security compromises.", "Ofcom telecoms security guidance", "https://www.ofcom.org.uk/phones-and-broadband/telecoms-infrastructure/security-resilience/", 88, ("BT-specific compliance spend", "Internal control maturity"), ("Ofcom security and resilience guidance", "deterministic_enterprise_profile"), source_type="regulator", mapped_condition="Legal / Regulatory", mapped_capability="cyber resilience"),
+    ObservatoryEvidence("BT-REG-002", "Customer Operations", "High", "2025", "BT", "Telecommunications", "Customer outcomes", "Regulatory Pressure", "Why service assurance?", "Ofcom monitors broadband, landline and mobile customer service performance across providers, keeping service outcomes visible to the market.", "Ofcom customer service and telecoms reports", "https://www.ofcom.org.uk/phones-and-broadband/service-quality/", 82, ("BT-specific operational root causes", "Transformation funding"), ("Ofcom service quality reporting", "deterministic_enterprise_profile"), source_type="regulator", mapped_condition="Customer operations pressure", mapped_capability="service assurance"),
+    ObservatoryEvidence("BT-CYB-001", "Cyber Risk", "High", "2025", "BT", "Telecommunications", "Cyber resilience", "Mission Critical Systems", "Why AI-enabled cyber / resilience?", "NCSC guidance treats telecoms as critical national infrastructure where cyber resilience and incident preparation are board-level concerns.", "NCSC critical national infrastructure cyber guidance", "https://www.ncsc.gov.uk/section/advice-guidance/all-topics?topics=critical-national-infrastructure", 84, ("BT-specific incident exposure", "Security product budget"), ("NCSC public guidance", "deterministic_enterprise_profile"), source_type="official", mapped_condition="Cyber risk", mapped_capability="cyber resilience"),
+    ObservatoryEvidence("BT-AI-001", "AI Partnership", "High", "2025", "BT", "Telecommunications", "AI-enabled cyber", "AI Readiness", "Why AI-enabled cyber / resilience?", "BT joined Project Glasswing to strengthen cyber defences with frontier AI.", "BT Project Glasswing announcement", "https://newsroom.bt.com/", 83, ("Production deployment scope", "Procurement route", "Budget"), ("BT newsroom", "deterministic_enterprise_profile"), source_type="official_newsroom", mapped_condition="AI partnership", mapped_capability="AI-enabled cyber capability"),
+    ObservatoryEvidence("BT-MKT-001", "Market Competition", "High", "2025", "BT", "Telecommunications", "Competitive context", "Market Competition", "Why now?", "UK fixed and mobile markets remain competitive, with Virgin Media O2, Vodafone, Three UK, CityFibre, TalkTalk and altnets investing in fibre, mobile and business connectivity.", "Governed telecom competitor public sources", "https://www.ofcom.org.uk/phones-and-broadband/coverage-and-speeds/", 78, ("Competitor deal activity at BT", "BT procurement response"), ("Ofcom connected nations and competitor sources", "deterministic_enterprise_profile"), source_type="regulator", mapped_condition="Market competition", mapped_capability="competitive resilience"),
+    ObservatoryEvidence("BT-ENV-001", "Environmental", "Medium", "FY2025", "BT", "Telecommunications", "Energy and sustainability", "Cost Pressure", "Why act?", "BT reports environmental targets and network energy efficiency as relevant to operating performance and responsible business commitments.", "BT Group Annual Report 2025", "https://www.bt.com/about/investors/financial-reporting-and-news/annual-reports", 74, ("Current energy hedge exposure", "Project-level emissions impact"), ("BT Annual Report 2025", "deterministic_enterprise_profile"), source_type="annual_report", mapped_condition="Environmental", mapped_capability="sustainable operations"),
+)
+
 SIGNAL_TYPES = {"technology_signal", "leadership_signal", "procurement_signal", "financial_signal", "regulatory_signal", "risk_signal", "market_signal", "customer_signal", "operational_signal", "supplier_signal", "mission_criticality_signal"}
 
 
@@ -248,10 +266,34 @@ def build_commercial_insights(signals: tuple[CommercialSignal, ...]) -> tuple[Co
             by_org[s.organisation].append(s)
     for s in signals:
         by_org.setdefault(s.organisation, [])
+    categories = (
+        ("Financial / cost pressure", ("financial_signal",), ("Cost Pressure", "Financial / cost pressure", "Productivity target", "Labour cost exposure")),
+        ("Network investment and legacy transition", ("mission_criticality_signal",), ("Network investment", "Legacy network switch-off", "Capex intensity")),
+        ("Cyber resilience and AI-enabled security", ("risk_signal", "technology_signal"), ("Cyber risk", "AI partnership", "Legal / Regulatory")),
+        ("Regulatory pressure", ("regulatory_signal",), ("Legal / Regulatory", "Customer operations pressure")),
+        ("Customer / service assurance", ("customer_signal",), ("Customer operations pressure", "Legacy network switch-off")),
+        ("Enterprise technology opportunity", ("technology_signal", "operational_signal"), ("Enterprise operating model", "AI partnership")),
+        ("Transformation readiness / unknowns", ("operational_signal",), ("Productivity target", "Enterprise operating model")),
+    )
     for org, rows in by_org.items():
         if not rows:
             weak = tuple(s.signal_id for s in signals if s.organisation == org and s.signal_quality_score < 70)[:3]
             out.append(CommercialInsight(f"INS-{re.sub(r'[^A-Z0-9]+','',org.upper())[:3]}-001", org, "insufficient signal quality", weak, (), UNKNOWN_DEFAULTS, 35, "weak/single-signal hypothesis"))
+            continue
+        if org == "BT" and len(rows) > 3:
+            idx = 1
+            for label, types, conditions in categories:
+                matched = [r for r in rows if r.signal_type in types or any(c in (r.observation + ' ' + r.title + ' ' + ' '.join(r.supports)) for c in conditions)]
+                if not matched and label == "Transformation readiness / unknowns":
+                    matched = rows[:3]
+                if not matched:
+                    continue
+                ids = tuple(r.signal_id for r in matched[:4])
+                avg_quality = round(sum(r.signal_quality_score for r in matched) / len(matched))
+                unknowns = tuple(dict.fromkeys(u for r in matched for u in r.missing_evidence))[:6]
+                summary = f"BT {label.lower()} insight: governed public evidence supports a discovery thesis for {label.lower()}, but does not prove enterprise-wide AI transformation while budget, sponsor, procurement timing and detailed technology estate remain unproven. Average signal quality {avg_quality}."
+                out.append(CommercialInsight(f"INS-BT-{idx:03d}", org, summary, ids, (), unknowns or UNKNOWN_DEFAULTS, min(86, avg_quality), "category insight"))
+                idx += 1
             continue
         ids = tuple(r.signal_id for r in rows[:3])
         ai_cyber = any(any(x in r.supports for x in ("AI adoption", "cyber capability", "AI-enabled cyber capability")) for r in rows)
@@ -261,7 +303,6 @@ def build_commercial_insights(signals: tuple[CommercialSignal, ...]) -> tuple[Co
         conf = min(85, max(40, avg_quality - (10 if len(rows) == 1 else 0)))
         out.append(CommercialInsight(f"INS-{re.sub(r'[^A-Z0-9]+','',org.upper())[:3]}-001", org, summary, ids, (), UNKNOWN_DEFAULTS, conf, kind))
     return tuple(out)
-
 
 def build_commercial_arguments(insights: tuple[CommercialInsight, ...], signals: tuple[CommercialSignal, ...]) -> tuple[CommercialArgument, ...]:
     out = []
@@ -394,9 +435,27 @@ def _live_evidence(rows: list[dict[str, Any]]) -> list[ObservatoryEvidence]:
     return out
 
 
+
+def _seeded_bt_enterprise_evidence() -> list[ObservatoryEvidence]:
+    return [
+        ObservatoryEvidence(
+            e.evidence_id,
+            f"SEEDED / SYNTHETIC / FALLBACK — {e.evidence_class}",
+            e.evidence_quality, e.evidence_freshness, e.organisation, e.sector, e.transformation_theme,
+            e.transformation_dimension, e.commercial_question_supported,
+            f"SEEDED / SYNTHETIC / FALLBACK: {e.summary}",
+            e.source_name, e.source_url, e.confidence, e.unknowns, e.evidence_lineage,
+            e.source_type, e.mapped_condition, e.mapped_capability, e.extraction_timestamp, e.is_live,
+        )
+        for e in BT_ENTERPRISE_EVIDENCE
+    ]
+
 def _seed_evidence() -> list[ObservatoryEvidence]:
     rows: list[ObservatoryEvidence] = []
+    rows.extend(_seeded_bt_enterprise_evidence())
     for idx, (org, (sector, driver, theme, capability, ai_theme, _level)) in enumerate(ORG_SEEDS.items(), start=1):
+        if org == "BT":
+            continue
         rows.extend([
             ObservatoryEvidence(f"ETO-EV-{idx}A", "SEEDED / SYNTHETIC / FALLBACK — Governed public signal", "Medium", "Current", org, sector, theme.title(), "Transformation Pressure", "Why now?", f"SEEDED / SYNTHETIC / FALLBACK: Public evidence indicates {driver} pressure is material for {org}.", "Seeded governed source register", "", 76, ("Current programme budget", "Named executive sponsor"), ("seed_data", "observatory_v0.1")),
             ObservatoryEvidence(f"ETO-EV-{idx}B", "SEEDED / SYNTHETIC / FALLBACK — Organisation announcement", "Medium", "Recent", org, sector, ai_theme.title(), "AI Readiness", "Why AI?", f"SEEDED / SYNTHETIC / FALLBACK: Observed transformation language suggests {ai_theme} could be plausible.", "Seeded governed source register", "", 72, ("Data quality", "Internal adoption capacity"), ("seed_data", "observatory_v0.1")),
@@ -464,17 +523,66 @@ def _organisation(org: str, sector: str, evidence: tuple[ObservatoryEvidence, ..
     timeline = _timeline(org_ev)
     costs = _costs(org, org_ev, conf)
     counter = ("No contradictory evidence identified in the current evidence set. This does not mean contradiction does not exist.", "Possible counterarguments: existing transformation may already be underway; budget may be insufficient; current architecture may be more modern than public evidence suggests; an incumbent supplier may already be addressing the issue; executive sponsorship may not exist; the AI use case may not be mature enough.")
-    return OrganisationObservatory(org, sector, genome, forces, forces[-1], TransformationWindow(org, "Next 6–18 months", "Building", conf, (theme, driver, capability), ("unknown delivery capacity", "unknown budget"), "Timeline evidence supports an engagement hypothesis, not a prediction."), StrategicConviction(tuple(f"{e.evidence_id}: {e.summary}" for e in org_ev), f"The commercial issue is uncertainty reduction around {theme} and {capability}, not technology adoption in isolation.", f"{org} may need a secure, data-enabled transformation conversation focused on {ai_theme}.", conf, ("Internal sponsorship", "Business case economics", "Incumbent supplier posture"), f"Open a {level.lower()}-level case-for-change discussion anchored in evidence, unknowns and cost of waiting.", ev), case, facts, strength, timeline, costs, counter, org_signals, org_insights, org_arguments, org_recommendation)
+    enterprise_profile = _bt_enterprise_profile(org_ev, org_signals, org_insights)
+    return OrganisationObservatory(org, sector, genome, forces, forces[-1], TransformationWindow(org, "Next 6–18 months", "Building", conf, (theme, driver, capability), ("unknown delivery capacity", "unknown budget"), "Timeline evidence supports an engagement hypothesis, not a prediction."), StrategicConviction(tuple(f"{e.evidence_id}: {e.summary}" for e in org_ev), f"The commercial issue is uncertainty reduction around {theme} and {capability}, not technology adoption in isolation.", f"{org} may need a secure, data-enabled transformation conversation focused on {ai_theme}.", conf, ("Internal sponsorship", "Business case economics", "Incumbent supplier posture"), f"Open a {level.lower()}-level case-for-change discussion anchored in evidence, unknowns and cost of waiting.", ev), case, facts, strength, timeline, costs, counter, org_signals, org_insights, org_arguments, org_recommendation, enterprise_profile)
 
+
+def _bt_enterprise_profile(org_ev: tuple[ObservatoryEvidence, ...], org_signals: tuple[CommercialSignal, ...], org_insights: tuple[CommercialInsight, ...]) -> dict[str, object]:
+    if not org_ev or org_ev[0].organisation != "BT":
+        return {}
+    return {
+        "business_overview": "BT is a UK telecommunications group with Consumer, Business and Openreach units; Openreach provides fixed access infrastructure to communications providers.",
+        "financial_profile": "FY25 evidence: revenue £20.4bn, adjusted EBITDA £8.2bn, normalised free cash flow £1.3bn and capex excluding spectrum £4.8bn. These facts support cost pressure and capex intensity, not solution budget.",
+        "strategic_priorities": "Full fibre build, mobile/network quality, simplification, cost transformation, customer experience, security and responsible business commitments.",
+        "cost_pressure_profile": "Evidence includes labour scale around 97,000 colleagues, £3bn annualised gross cost savings target by FY29, high network capex, legacy switch-off, pension/debt/financing pressure as areas to validate from annual reporting, and energy/environment exposure where evidenced.",
+        "network_and_technology_profile": "Known: copper/fibre transition, full fibre footprint over 17m premises, mobile network operations, PSTN retirement, cyber/security focus, Project Glasswing AI cyber partnership. Inferred: network intelligence, service assurance and automation may be relevant because cost, capex and resilience signals coincide. Unknown: enterprise software, CRM, ERP, data platforms, contact-centre stack, field-service tooling and cloud estate unless publicly evidenced.",
+        "regulatory_pestle_profile": {
+            "Political": "UK telecoms policy treats connectivity and security as national priorities.",
+            "Economic": "Revenue pressure, capex intensity and savings targets create operating-model pressure.",
+            "Social": "Broadband/mobile service quality and vulnerable customer outcomes remain publicly visible.",
+            "Technological": "Fibre, 5G/mobile, PSTN switch-off, AI cyber and network automation are material technology themes.",
+            "Legal / Regulatory": "Ofcom security, resilience and customer-service obligations constrain telecoms operations.",
+            "Environmental": "Energy efficiency and emissions commitments matter for network operations.",
+        },
+        "competitive_context": "Ofcom and public competitor sources show pressure from Virgin Media O2, Vodafone, Three UK, CityFibre, TalkTalk and other altnets; competitor activity is context, not proof of BT procurement timing.",
+        "known_transformation_themes": "Cost transformation, network modernisation, legacy retirement, service assurance, cyber resilience, AI-enabled security and enterprise simplification.",
+        "unknowns_evidence_gaps": "No public analyst report evidence available from governed sources. Missing: approved transformation budget, named sponsor, procurement route, incumbent supplier posture, detailed software estate and validated business case.",
+        "technology_known_inferred_unknown": {
+            "Known": ["full fibre/copper transition", "mobile network", "PSTN retirement", "cyber resilience", "Project Glasswing AI cyber partnership"],
+            "Inferred": ["network intelligence may matter", "service assurance automation may matter", "operating model simplification may matter"],
+            "Unknown": ["enterprise software", "CRM", "ERP", "contact centre platform", "field service platform", "data platforms", "cloud estate", "security tooling vendors"],
+        },
+        "evidence_sufficiency": {
+            "Financial evidence": "strong", "Regulatory evidence": "strong", "Technology evidence": "medium", "Cost pressure evidence": "strong", "Executive sponsorship evidence": "weak", "Procurement evidence": "weak", "Supplier / incumbent evidence": "weak",
+            "needed_for_qualified_opportunity": "Move from discovery thesis to qualified transformation opportunity by validating sponsor, budget, procurement timing, current architecture, incumbent supplier posture, quantified pain and decision process.",
+        },
+    }
 
 def _case(org, driver, theme, capability, ai_theme, level, evs, ev, conf, arguments):
     arg = arguments[0] if arguments else None
     claim = arg.claim if arg else f"Current evidence supports only a cautious {ai_theme} discovery hypothesis for {org}."
     unknowns = arg.unknowns if arg else ("Quantified cost of waiting", "Confirmed transformation sponsor", "Current architecture")
+    if org == "BT":
+        return CaseForChange(
+            org,
+            "Why act?\nBT has simultaneous public evidence of revenue pressure, high network capex, productivity targets, legacy network transition, cyber resilience obligations and customer-service visibility.",
+            "Why now?\nFY25 results, Openreach fibre milestones, PSTN retirement, Ofcom resilience/customer-outcome focus and AI-enabled cyber evidence create a time-bounded discovery thesis.",
+            "Why AI-enabled cyber / resilience?\nBT's Project Glasswing participation and NCSC/Ofcom cyber-resilience context support an AI-enabled security discovery conversation; they do not prove production deployment, budget or procurement timing.",
+            "Why network intelligence?\nOpenreach full fibre investment and legacy transition support network intelligence and service assurance hypotheses, not a specific platform purchase.",
+            "Why operating model / cost transformation?\nThe £3bn annualised gross savings target by FY29, labour scale and capex intensity support validating operating-model transformation levers.",
+            "What should a board-level discovery conversation validate?\nValidate quantified pain, target operating model, current architecture, accountable sponsor, budget, procurement path, incumbent supplier posture and measurable network/service outcomes.",
+            "Cost of waiting\nDelay could prolong cost pressure, legacy migration risk, service assurance exposure and cyber/regulatory resilience gaps, but quantified financial impact must be validated with BT.",
+            ("Budget may already be allocated", "Incumbent suppliers may already address the issue", "Public evidence may not reveal internal transformation maturity", "AI use cases may be narrower than external signals imply"),
+            ev,
+            (),
+            ("approved budget", "named sponsor", "procurement route", "incumbent supplier posture", "current architecture", "quantified business case"),
+            conf,
+            level,
+            "Board-level only as an evidence-backed discovery conversation: public evidence supports pressure and themes, not a qualified opportunity.",
+        )
     why_ai = f"Why AI?\n{claim} Supporting insight and signal IDs are the authority; raw evidence remains in drill-down only."
     generic = f"Current evidence supports a cautious executive validation discussion for {org}; it does not prove budget, sponsor, procurement timing or enterprise-wide transformation."
     return CaseForChange(org, *(why_ai if label == "Why AI?" else f"{label}\n{generic}" for label in CASE_SECTIONS[:7]), ("Delayed executive alignment", "Supplier lock-in", "Regulatory/customer trust deterioration"), ev, (), unknowns, conf, level, f"The conversation should move to {level} level only as an evidence-validation discussion, because the pipeline has not proven sponsorship, budget or timing.")
-
 
 def _facts(evs):
     facts = []

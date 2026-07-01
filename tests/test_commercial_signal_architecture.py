@@ -134,3 +134,47 @@ def test_no_llm_database_or_broad_crawling_imports_for_pipeline() -> None:
     text = "\n".join(Path(p).read_text(encoding="utf-8") for p in ["cios/applications/flora/observatory/engine.py", "cios/applications/flora/observatory/views.py"])
     forbidden = ["openai", "langchain", "sqlalchemy", "sqlite3", "psycopg", "crawl"]
     assert not any(term in text.lower() for term in forbidden)
+
+
+def _bt_org():
+    return next(o for o in build_observatory().organisations if o.organisation == "BT")
+
+
+def test_bt_enterprise_profile_financial_pestle_and_sufficiency_render() -> None:
+    org = _bt_org()
+    html = organisation_observatory_page("BT")
+    assert org.evidence_strength["accepted_evidence"] >= 12
+    assert any("Financial Results" in e[0] for e in org.evidence_strength["evidence_classes"].items())
+    assert "BT Enterprise Profile" in html
+    for category in ("Political", "Economic", "Social", "Technological", "Legal / Regulatory", "Environmental"):
+        assert category in html
+    assert "Evidence Sufficiency Dashboard" in html
+    assert "Procurement evidence</th><td>weak" in html
+
+
+def test_bt_financial_and_regulatory_evidence_generate_signals_without_budget_overclaim() -> None:
+    org = _bt_org()
+    financial = [s for s in org.commercial_signals if "BT-FIN" in s.supporting_evidence_ids[0] or "BT-OP" in s.supporting_evidence_ids[0]]
+    regulatory = [s for s in org.commercial_signals if "BT-REG" in s.supporting_evidence_ids[0]]
+    assert financial
+    assert regulatory
+    assert all("budget" in s.does_not_support or "budget approval" in s.does_not_support for s in financial)
+    assert not any("approved transformation budget" in s.observation.lower() for s in org.commercial_signals)
+
+
+def test_bt_technology_profile_keeps_known_inferred_unknown_and_does_not_guess_software() -> None:
+    profile = _bt_org().enterprise_profile["technology_known_inferred_unknown"]
+    assert "Project Glasswing AI cyber partnership" in profile["Known"]
+    assert "enterprise software" in profile["Unknown"]
+    joined_known = " ".join(profile["Known"])
+    for guessed in ("Salesforce", "SAP", "ServiceNow", "Oracle", "Workday"):
+        assert guessed not in joined_known
+
+
+def test_bt_case_for_change_contains_multiple_insight_categories() -> None:
+    org = _bt_org()
+    summaries = "\n".join(i.summary for i in org.commercial_insights)
+    for label in ("financial / cost pressure", "network investment", "cyber resilience", "regulatory pressure", "customer / service assurance", "enterprise technology opportunity", "transformation readiness"):
+        assert label in summaries
+    assert "Why network intelligence?" in org.case_for_change.why_cloud
+    assert "Why operating model / cost transformation?" in org.case_for_change.why_secure_by_design
