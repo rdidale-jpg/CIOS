@@ -108,11 +108,29 @@ class CommercialInsight:
 
 
 @dataclass(frozen=True)
+class TransformationThesis:
+    thesis_id: str
+    organisation: str
+    what_appears_to_be_happening: str
+    why_we_believe_this: str
+    supporting_evidence_ids: tuple[str, ...]
+    weakening_evidence_ids: tuple[str, ...]
+    likely_executive_owners: tuple[str, ...]
+    commercial_opportunity: str
+    validation_required: tuple[str, ...]
+    supporting_signal_ids: tuple[str, ...]
+    supporting_insight_ids: tuple[str, ...]
+    reinforcing_patterns: tuple[str, ...]
+    confidence: int
+
+
+@dataclass(frozen=True)
 class CommercialArgument:
     argument_id: str
     organisation: str
     question_answered: str
     claim: str
+    supporting_thesis_ids: tuple[str, ...]
     supporting_insight_ids: tuple[str, ...]
     supporting_signal_ids: tuple[str, ...]
     supporting_evidence_ids: tuple[str, ...]
@@ -202,6 +220,7 @@ class OrganisationObservatory:
     counterarguments: tuple[str, ...] = ()
     commercial_signals: tuple[CommercialSignal, ...] = ()
     commercial_insights: tuple[CommercialInsight, ...] = ()
+    transformation_theses: tuple[TransformationThesis, ...] = ()
     commercial_arguments: tuple[CommercialArgument, ...] = ()
     executive_recommendation: ExecutiveRecommendation | None = None
     enterprise_profile: dict[str, object] = field(default_factory=dict)
@@ -232,5 +251,6 @@ class Observatory:
     graph_edges: tuple[KnowledgeGraphEdge, ...] = field(default_factory=tuple)
     commercial_signals: tuple[CommercialSignal, ...] = field(default_factory=tuple)
     commercial_insights: tuple[CommercialInsight, ...] = field(default_factory=tuple)
+    transformation_theses: tuple[TransformationThesis, ...] = field(default_factory=tuple)
     commercial_arguments: tuple[CommercialArgument, ...] = field(default_factory=tuple)
     executive_recommendations: tuple[ExecutiveRecommendation, ...] = field(default_factory=tuple)

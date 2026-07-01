@@ -2,6 +2,7 @@ from cios.applications.flora.observatory.engine import (
     build_commercial_arguments,
     build_commercial_insights,
     build_commercial_signals,
+    build_transformation_theses,
     build_executive_recommendations,
     build_observatory,
 )
@@ -52,8 +53,10 @@ def test_insights_require_multiple_signals_or_single_signal_label() -> None:
 def test_arguments_and_recommendations_reference_layers_not_raw_evidence() -> None:
     signals = build_commercial_signals((_bt_evidence(), _bt_evidence("BT Business launched Mission Boost as the first capability in a new portfolio.")))
     insights = build_commercial_insights(signals)
-    arguments = build_commercial_arguments(insights, signals)
+    theses = build_transformation_theses(insights, signals)
+    arguments = build_commercial_arguments(theses, insights, signals)
     recommendations = build_executive_recommendations(arguments)
+    assert arguments[0].supporting_thesis_ids == (theses[0].thesis_id,)
     assert arguments[0].supporting_insight_ids
     assert arguments[0].supporting_signal_ids
     assert "Project Glasswing" not in arguments[0].claim
@@ -122,11 +125,37 @@ def test_no_recommendation_uses_low_quality_signal_as_primary_support() -> None:
     assert recommendations == ()
 
 
+def test_transformation_thesis_requires_multiple_signals_and_answers_required_questions() -> None:
+    one_signal_insights = build_commercial_insights(build_commercial_signals((_bt_evidence(),)))
+    assert build_transformation_theses(one_signal_insights, build_commercial_signals((_bt_evidence(),))) == ()
+    signals = build_commercial_signals((_bt_evidence(), _bt_evidence("BT Business launched Mission Boost as the first capability in a new portfolio.")))
+    insights = build_commercial_insights(signals)
+    thesis = build_transformation_theses(insights, signals)[0]
+    assert len(thesis.supporting_signal_ids) >= 2
+    assert thesis.what_appears_to_be_happening
+    assert thesis.why_we_believe_this
+    assert thesis.supporting_evidence_ids
+    assert thesis.likely_executive_owners
+    assert thesis.commercial_opportunity
+    assert thesis.validation_required
+    assert thesis.reinforcing_patterns
+
+
 def test_knowledge_graph_links_full_commercial_chain() -> None:
     obs = build_observatory()
     relationships = {edge.relationship for edge in obs.graph_edges}
-    assert {"supports_signal", "supports_insight", "supports_argument", "supports_recommendation"} <= relationships
+    assert {"supports_signal", "supports_insight", "supports_thesis", "reinforces_thesis", "supports_argument", "supports_recommendation"} <= relationships
     assert "contradicts_signal" in relationships
+
+
+def test_report_metadata_counts_thesis_layer() -> None:
+    html = organisation_observatory_page("BT")
+    assert "Report generated timestamp" in html
+    assert "Evidence cut-off timestamp" in html
+    assert "Observatory version" in html
+    assert "Reasoning engine version" in html
+    assert "Evidence → Signals → Insights → Theses → Arguments" in html
+    assert "Transformation Theses" in html
 
 
 def test_no_llm_database_or_broad_crawling_imports_for_pipeline() -> None:
