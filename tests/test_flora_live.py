@@ -32,6 +32,14 @@ def test_deterministic_extraction_from_sample_html() -> None:
     assert items[0]["organisation"] == "BT"
     assert items[0]["snippet"]
     assert items[0]["source_url"]
+    dossier = items[0]["evidence_dossier"]
+    assert dossier["observed_facts"]
+    assert dossier["named_sources"][0]["source_name"]
+    assert dossier["interpretation"]
+    assert dossier["hypotheses"]
+    assert dossier["implications"]
+    assert dossier["recommended_actions"]
+    assert dossier["richness"]["traceability_score"] >= 80
 
 
 def test_mapping_evidence_to_conditions() -> None:
@@ -49,6 +57,8 @@ def test_commercial_evidence_compatible_mapping() -> None:
     assert evidence.evidence_id == item["evidence_id"]
     assert evidence.extracted_observation == item["snippet"]
     assert evidence.capability_tags
+    assert evidence.dossier
+    assert evidence.dossier.richness.evidence_richness_score > 0
 
 
 def test_live_evidence_jsonl_writing(tmp_path: Path) -> None:

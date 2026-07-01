@@ -35,3 +35,24 @@ def test_knowledge_graph_edges_separate_observed_and_inferred_relationships() ->
     assert any(not edge.inferred for edge in obs.graph_edges)
     assert any(edge.inferred for edge in obs.graph_edges)
     assert all(edge.evidence_ids for edge in obs.graph_edges)
+
+
+def test_seeded_commercial_evidence_includes_structured_dossiers() -> None:
+    from cios.applications.flora.intelligence.evidence_engine import evidence_for_organisation
+
+    evidence = evidence_for_organisation("BT")
+    assert evidence
+    dossier = evidence[0].dossier
+    assert dossier is not None
+    assert dossier.observed_facts
+    assert dossier.quantitative_facts
+    assert dossier.named_sources
+    assert dossier.strategic_messages
+    assert dossier.competitor_comparisons
+    assert dossier.sector_benchmarks
+    assert dossier.transformation_timeline
+    assert dossier.interpretation
+    assert dossier.hypotheses
+    assert dossier.implications
+    assert dossier.recommended_actions
+    assert dossier.richness.evidence_richness_score > 0

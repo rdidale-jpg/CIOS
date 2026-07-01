@@ -9,6 +9,14 @@ def render_case_file(case: CommercialCaseFile) -> str:
     lines.extend(["", "Evidence Ledger"])
     for ev in case.evidence:
         lines.append(f"- {ev.evidence_id}: {ev.evidence_category.value} / {ev.source_name} ({ev.publication_date}) — {ev.summary}")
+        if ev.dossier:
+            richness = ev.dossier.richness.evidence_richness_score
+            lines.append(f"  Evidence richness {richness}; calibrated confidence {ev.dossier.calibrated_confidence}; freshness: {ev.dossier.evidence_freshness}")
+            lines.append(f"  Observed Fact: {'; '.join(ev.dossier.observed_facts[:2])}")
+            lines.append(f"  Interpretation: {'; '.join(ev.dossier.interpretation[:1])}")
+            lines.append(f"  Hypothesis: {'; '.join(ev.dossier.hypotheses[:1])}")
+            lines.append(f"  Implication: {'; '.join(ev.dossier.implications[:1])}")
+            lines.append(f"  Recommended Action: {'; '.join(ev.dossier.recommended_actions[:1])}")
     lines.extend(["", "Commercial Insights"])
     for insight in case.insights:
         lines.append(f"- {insight.title} Confidence {insight.confidence}. {insight.narrative} Next: {insight.recommended_next_step}")

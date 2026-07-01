@@ -26,6 +26,61 @@ class EvidenceCategory(str, Enum):
     CUSTOMER_SIGNAL = "Customer Signal"
 
 
+class EvidenceSourceAttribution(BaseModel):
+    """Named source attribution retained with every evidence claim."""
+
+    source_name: str
+    source_type: str
+    source_url: str | None = None
+    publication_date: date | None = None
+    freshness_note: str = "Publication date recorded; refresh cadence not yet verified."
+
+
+class EvidenceRichnessMetrics(BaseModel):
+    """Evidence-depth metrics that complement calibrated confidence."""
+
+    source_count: int = Field(default=1, ge=0)
+    independent_source_count: int = Field(default=1, ge=0)
+    quantitative_fact_count: int = Field(default=0, ge=0)
+    quote_count: int = Field(default=0, ge=0)
+    competitor_comparison_count: int = Field(default=0, ge=0)
+    benchmark_count: int = Field(default=0, ge=0)
+    timeline_event_count: int = Field(default=1, ge=0)
+    freshness_score: int = Field(default=70, ge=0, le=100)
+    corroboration_score: int = Field(default=35, ge=0, le=100)
+    traceability_score: int = Field(default=80, ge=0, le=100)
+
+    @property
+    def evidence_richness_score(self) -> int:
+        breadth = min(25, self.source_count * 8 + self.independent_source_count * 5)
+        substance = min(30, self.quantitative_fact_count * 6 + self.quote_count * 4)
+        context = min(20, self.competitor_comparison_count * 7 + self.benchmark_count * 6 + self.timeline_event_count * 2)
+        governance = round((self.freshness_score + self.corroboration_score + self.traceability_score) / 12)
+        return min(100, breadth + substance + context + governance)
+
+
+class EvidenceReasoningDossier(BaseModel):
+    """Structured dossier separating facts, interpretation, hypotheses, implications and actions."""
+
+    observed_facts: list[str] = Field(default_factory=list)
+    quantitative_facts: list[str] = Field(default_factory=list)
+    named_sources: list[EvidenceSourceAttribution] = Field(default_factory=list)
+    executive_quotes: list[str] = Field(default_factory=list)
+    strategic_messages: list[str] = Field(default_factory=list)
+    competitor_comparisons: list[str] = Field(default_factory=list)
+    sector_benchmarks: list[str] = Field(default_factory=list)
+    transformation_timeline: list[str] = Field(default_factory=list)
+    interpretation: list[str] = Field(default_factory=list)
+    hypotheses: list[str] = Field(default_factory=list)
+    implications: list[str] = Field(default_factory=list)
+    recommended_actions: list[str] = Field(default_factory=list)
+    evidence_freshness: str = "Publication date captured; monitor for newer filings, news and regulator updates."
+    expected_update_frequency: str = "Refresh during daily live collection and before customer-facing use."
+    independent_corroboration: str = "Single-source until supported by another named source."
+    calibrated_confidence: int = Field(default=70, ge=0, le=100)
+    richness: EvidenceRichnessMetrics = Field(default_factory=EvidenceRichnessMetrics)
+
+
 class CommercialEvidence(BaseModel):
     evidence_id: str
     organisation: str
@@ -37,8 +92,9 @@ class CommercialEvidence(BaseModel):
     title: str
     summary: str
     extracted_observation: str
-    confidence: int = Field(ge=0, le=100)
+    confidence: int = Field(ge=0, le=100, description="Calibrated confidence, not a substitute for evidence richness.")
     freshness: int = Field(ge=0, le=100)
+    dossier: EvidenceReasoningDossier | None = Field(default=None, description="Structured evidence dossier for depth, traceability and reasoning separation.")
     related_signals: list[str] = Field(default_factory=list)
     related_patterns: list[str] = Field(default_factory=list)
     related_playbooks: list[str] = Field(default_factory=list)
@@ -77,12 +133,34 @@ class HiringSignalConnector(EvidenceConnector, Protocol):
     pass
 
 
+def _seed_dossier(org: str, category: EvidenceCategory, title: str, summary: str, observation: str, caps: list[str], sector: str, confidence: int, freshness: int) -> EvidenceReasoningDossier:
+    richness = EvidenceRichnessMetrics(source_count=1, independent_source_count=1, timeline_event_count=1, freshness_score=freshness, corroboration_score=35, traceability_score=85)
+    return EvidenceReasoningDossier(
+        observed_facts=[f"{org}: {summary}", observation],
+        quantitative_facts=["No public quantitative value captured in seeded evidence; quantify budget, capex, customers, employees, deadlines or programme size during live research."],
+        named_sources=[EvidenceSourceAttribution(source_name=f"Seeded {category.value}", source_type="seed", publication_date=date(2026, 1, 1), freshness_note="Seeded public-domain theme; replace with live named source before external use.")],
+        strategic_messages=[title],
+        competitor_comparisons=["Competitor and incumbent comparison not yet evidenced; validate against awards, partner announcements and procurement notices."],
+        sector_benchmarks=[f"Compare against {sector} playbook pressures for resilience, cost, customer and regulatory performance."],
+        transformation_timeline=[f"2026 seeded {category.value}: {title}"],
+        interpretation=[f"The evidence points to {', '.join(caps[:2]) if caps else 'AI transformation'} as a plausible discussion theme."],
+        hypotheses=["Transformation pressure may be increasing, but buying intent is unproven without sponsor, funding and timing evidence."],
+        implications=["Use as preparation context rather than proof of active demand."],
+        recommended_actions=["Find independently corroborating named sources and quantify the business pressure before outreach."],
+        calibrated_confidence=confidence,
+        richness=richness,
+    )
+
+
 def _ev(org: str, idx: int, category: EvidenceCategory, month: int, title: str, summary: str, observation: str, caps: list[str], execs: list[str], sector: str, patterns: list[str]) -> CommercialEvidence:
     slug = org.upper().replace(" ", "-")
+    confidence = 78 + (idx % 12)
+    freshness = 85 - idx
     return CommercialEvidence(
         evidence_id=f"EV-{slug}-{idx:03d}", organisation=org, evidence_type="Seeded public-domain theme", evidence_category=category,
         source_name=f"Seeded {category.value}", source_type="seed", publication_date=date(2026, month, min(28, 10 + idx)),
-        title=title, summary=summary, extracted_observation=observation, confidence=78 + (idx % 12), freshness=85 - idx,
+        title=title, summary=summary, extracted_observation=observation, confidence=confidence, freshness=freshness,
+        dossier=_seed_dossier(org, category, title, summary, observation, caps, sector, confidence, freshness),
         related_signals=[f"FLORA-SIG-{idx:03d}"], related_patterns=patterns,
         related_playbooks=[f"SECTOR_PLAYBOOK_{sector.upper().replace(' ', '_')}"] + [f"CAPABILITY_PLAYBOOK_{c.upper().replace(' ', '_')}" for c in caps[:1]],
         related_propositions=[f"AI Reinvention Discovery for {caps[0].title()}" if caps else "AI Reinvention Discovery"],
