@@ -115,3 +115,27 @@ def test_observatory_no_llm_database_or_broad_crawling_imports() -> None:
     text = "\n".join(Path(p).read_text(encoding="utf-8") for p in ["cios/applications/flora/observatory/engine.py", "cios/applications/flora/observatory/views.py"])
     forbidden = ["openai", "anthropic", "langchain", "sqlalchemy", "sqlite3", "psycopg", "crawl"]
     assert not any(term in text.lower() for term in forbidden)
+
+
+def test_observatory_snapshot_delta_explains_evidence_score_reasoning_and_hypothesis_changes(monkeypatch, tmp_path) -> None:
+    from cios.applications.flora.live import store
+    from cios.applications.flora.observatory import engine
+
+    evidence_path = tmp_path / "live_evidence.jsonl"
+    evidence_path.write_text("", encoding="utf-8")
+    monkeypatch.setattr(engine, "DEFAULT_PATH", evidence_path)
+    before = engine.observatory_snapshot(engine.build_observatory())
+    store.write_jsonl([
+        {"evidence_id": "DWP-LIVE-DELTA", "source_id": "dwp-annual", "organisation": "DWP", "sector": "Public Sector", "source_name": "DWP annual report", "source_url": "https://example.gov.uk/dwp-annual", "source_type": "annual_report", "snippet": "DWP served 20 million citizens and references £240 billion of payments in 2026.", "extraction_timestamp": "2026-06-30T00:00:00+00:00", "commercial_condition": "Citizen Experience", "likely_capability": "casework intelligence", "confidence": 92, "overall_evidence_quality": 90, "evidence_tier": "tier_1_public_body"},
+    ], evidence_path)
+    after = engine.observatory_snapshot(engine.build_observatory())
+
+    delta = engine.compare_observatory_snapshots(before, after, ("DWP-LIVE-DELTA",))
+
+    assert delta["new_evidence_collected"] == 1
+    assert "DWP" in delta["organisations_changed"]
+    assert delta["scores_changed"]
+    assert delta["reasoning_changed"]
+    assert delta["hypotheses_changed"]
+    assert delta["nothing_changed"] is False
+    assert delta["evidence_provenance"][0]["caused_changes"]
