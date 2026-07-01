@@ -204,6 +204,7 @@ class OrganisationObservatory:
     commercial_insights: tuple[CommercialInsight, ...] = ()
     commercial_arguments: tuple[CommercialArgument, ...] = ()
     executive_recommendation: ExecutiveRecommendation | None = None
+    enterprise_profile: dict[str, object] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
