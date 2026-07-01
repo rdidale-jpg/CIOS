@@ -73,6 +73,57 @@ class StrategicConviction:
 
 
 @dataclass(frozen=True)
+class CommercialSignal:
+    signal_id: str
+    organisation: str
+    title: str
+    observation: str
+    classification: tuple[str, ...]
+    supporting_evidence_ids: tuple[str, ...]
+    source_url: str
+    confidence: int
+    supports: tuple[str, ...]
+    does_not_support: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class CommercialInsight:
+    insight_id: str
+    organisation: str
+    summary: str
+    supporting_signal_ids: tuple[str, ...]
+    contradictory_signal_ids: tuple[str, ...]
+    unknowns: tuple[str, ...]
+    confidence: int
+    hypothesis_type: str = "multi-signal insight"
+
+
+@dataclass(frozen=True)
+class CommercialArgument:
+    argument_id: str
+    organisation: str
+    question_answered: str
+    claim: str
+    supporting_insight_ids: tuple[str, ...]
+    supporting_signal_ids: tuple[str, ...]
+    supporting_evidence_ids: tuple[str, ...]
+    counterarguments: tuple[str, ...]
+    unknowns: tuple[str, ...]
+    confidence: int
+    commercial_implication: str
+    recommended_executive_audience: str
+
+
+@dataclass(frozen=True)
+class ExecutiveRecommendation:
+    recommendation_id: str
+    organisation: str
+    recommendation: str
+    supporting_argument_ids: tuple[str, ...]
+    confidence: int
+
+
+@dataclass(frozen=True)
 class CaseForChange:
     organisation: str
     why_act: str
@@ -140,6 +191,10 @@ class OrganisationObservatory:
     transformation_timeline: list[dict[str, str]] = field(default_factory=list)
     cost_of_waiting_categories: list[dict[str, object]] = field(default_factory=list)
     counterarguments: tuple[str, ...] = ()
+    commercial_signals: tuple[CommercialSignal, ...] = ()
+    commercial_insights: tuple[CommercialInsight, ...] = ()
+    commercial_arguments: tuple[CommercialArgument, ...] = ()
+    executive_recommendation: ExecutiveRecommendation | None = None
 
 
 @dataclass(frozen=True)
@@ -165,3 +220,7 @@ class Observatory:
     weather: EnterpriseWeather
     hypotheses: tuple[ResearchHypothesis, ...]
     graph_edges: tuple[KnowledgeGraphEdge, ...] = field(default_factory=tuple)
+    commercial_signals: tuple[CommercialSignal, ...] = field(default_factory=tuple)
+    commercial_insights: tuple[CommercialInsight, ...] = field(default_factory=tuple)
+    commercial_arguments: tuple[CommercialArgument, ...] = field(default_factory=tuple)
+    executive_recommendations: tuple[ExecutiveRecommendation, ...] = field(default_factory=tuple)
