@@ -78,12 +78,21 @@ class CommercialSignal:
     organisation: str
     title: str
     observation: str
+    evidence_quote: str
+    commercial_meaning: str
+    transformation_dimensions: tuple[str, ...]
+    board_questions_supported: tuple[str, ...]
+    supports: tuple[str, ...]
+    does_not_support: tuple[str, ...]
+    signal_type: str
+    signal_quality_score: int
+    signal_strength: str
+    freshness: str
+    missing_evidence: tuple[str, ...]
     classification: tuple[str, ...]
     supporting_evidence_ids: tuple[str, ...]
     source_url: str
     confidence: int
-    supports: tuple[str, ...]
-    does_not_support: tuple[str, ...]
 
 
 @dataclass(frozen=True)

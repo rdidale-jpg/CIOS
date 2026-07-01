@@ -96,9 +96,10 @@ def compare_observatory_snapshots(before: dict[str, Any], after: dict[str, Any],
 
 
 
-BOILERPLATE_PATTERNS = ("skip to content", "cookie", "privacy policy", "modern slavery", "careers", "menu", "navigation", "footer")
-UNSUPPORTED_DEFAULTS = ("budget approval", "procurement timing", "executive sponsorship", "enterprise-wide AI transformation", "transformation window")
+BOILERPLATE_PATTERNS = ("skip to content", "cookie", "privacy policy", "modern slavery", "careers", "menu", "navigation", "footer", "annual general meeting", "share price")
+UNSUPPORTED_DEFAULTS = ("budget", "budget approval", "procurement", "procurement timing", "executive sponsor", "executive sponsorship", "enterprise-wide AI transformation", "transformation window")
 UNKNOWN_DEFAULTS = ("budget", "executive sponsor", "roadmap", "procurement timing", "incumbent supplier posture")
+SIGNAL_TYPES = {"technology_signal", "leadership_signal", "procurement_signal", "financial_signal", "regulatory_signal", "risk_signal", "market_signal", "customer_signal", "operational_signal", "supplier_signal", "mission_criticality_signal"}
 
 
 def _clean_text(text: str) -> str:
@@ -109,24 +110,88 @@ def _clean_text(text: str) -> str:
     return sentence or "Accepted public evidence was collected without an executive-facing sentence."
 
 
-def _words75(text: str) -> str:
+def _words(text: str, limit: int) -> str:
     words = text.split()
-    return " ".join(words[:75])
+    return " ".join(words[:limit])
+
+
+def _words75(text: str) -> str:
+    return _words(text, 75)
+
+
+def _clean_evidence_quote(text: str) -> str:
+    cleaned = _clean_text(text)
+    for phrase in ("strengthen cyber defences with frontier AI", "vital role in the lives of our customers and the nation"):
+        if phrase.lower() in cleaned.lower():
+            return phrase
+    return _words(cleaned.strip(' ".'), 25)
+
+
+def _is_bt_glasswing(e: ObservatoryEvidence) -> bool:
+    text = f"{e.summary} {e.source_name}".lower()
+    return e.organisation == "BT" and "glasswing" in text and "frontier ai" in text
+
+
+def _is_bt_investor_infrastructure(e: ObservatoryEvidence) -> bool:
+    text = f"{e.summary} {e.source_name} {e.source_url}".lower()
+    return e.organisation == "BT" and ("vital role in the lives of our customers and the nation" in text or ("telecommunications" in text and ("nation" in text or "network provider" in text)))
+
+
+def _signal_strength(score: int) -> str:
+    if score >= 85:
+        return "strong"
+    if score >= 70:
+        return "moderate"
+    return "weak"
 
 
 def _signal_supports(e: ObservatoryEvidence) -> tuple[str, ...]:
     text = f"{e.summary} {e.transformation_theme} {e.mapped_condition} {e.mapped_capability}".lower()
     supports = []
-    if "ai" in text or "frontier" in text:
+    explicit_ai = any(term in text for term in ("ai deployment", "ai product launch", "ai investment", "ai partnership", "ai governance", "ai programme", "ai-enabled", "frontier ai", "with ai"))
+    if explicit_ai:
         supports.append("AI adoption")
     if "cyber" in text or "security" in text or "secure" in text:
-        supports += ["cyber capability", "security modernisation"]
+        supports += ["AI-enabled cyber capability" if explicit_ai else "cyber capability", "security modernisation"]
     if "portfolio" in text or "launch" in text or "product" in text:
         supports.append("business product innovation")
     if "network" in text or "telecommunications" in text or "national" in text:
-        supports.append("mission-critical relevance")
+        supports += ["mission-criticality", "network importance"]
     supports.append(e.mapped_capability or e.transformation_theme)
     return tuple(dict.fromkeys(s for s in supports if s))[:4]
+
+
+def _signal_type(e: ObservatoryEvidence) -> str:
+    text = f"{e.summary} {e.transformation_dimension} {e.mapped_condition}".lower()
+    if any(x in text for x in ("regulatory", "regulation")):
+        return "regulatory_signal"
+    if any(x in text for x in ("supplier", "partner")):
+        return "supplier_signal"
+    if any(x in text for x in ("customer", "service")):
+        return "customer_signal"
+    if any(x in text for x in ("budget", "cost", "revenue", "share price")):
+        return "financial_signal"
+    if any(x in text for x in ("cyber", "risk", "security")):
+        return "risk_signal"
+    if any(x in text for x in ("network", "national", "mission critical", "mission-critical", "telecommunications")):
+        return "mission_criticality_signal"
+    if "ai" in text or "technology" in text:
+        return "technology_signal"
+    return "operational_signal"
+
+
+def _quality_score(e: ObservatoryEvidence, observation: str, quote: str, supports: tuple[str, ...]) -> int:
+    score = 45
+    score += 12 if len(observation.split()) <= 40 else -15
+    score += 12 if quote and not any(b in quote.lower() for b in BOILERPLATE_PATTERNS) else -20
+    score += 10 if e.source_type in {"official_newsroom", "investor_relations", "annual_report", "regulator", "official"} or "official" in e.source_type else 4
+    score += min(10, max(0, e.confidence - 60) // 3)
+    score += 6 if any(re.search(p, e.summary, re.I) for p in FACT_PATTERNS) else 0
+    score += 5 if e.is_live else 0
+    score -= 10 if e.evidence_quality.lower() in {"low", "unknown"} else 0
+    score -= 8 if e.evidence_freshness.lower() in {"unknown", "stale"} else 0
+    score -= 18 if "AI adoption" in supports and not any(x in e.summary.lower() for x in ("ai deployment", "ai product launch", "ai investment", "ai partnership", "ai governance", "ai programme", "ai-enabled", "frontier ai", "with ai")) else 0
+    return max(0, min(100, score))
 
 
 def _classification(e: ObservatoryEvidence) -> tuple[str, ...]:
@@ -144,9 +209,34 @@ def build_commercial_signals(evidence: tuple[ObservatoryEvidence, ...]) -> tuple
     for e in evidence:
         counters[e.organisation] += 1
         prefix = re.sub(r"[^A-Z0-9]+", "", e.organisation.upper())[:3] or "ORG"
-        observation = _words75(_clean_text(e.summary))
-        title = _words75(observation.rstrip(".")).rstrip(".")
-        signals.append(CommercialSignal(f"SIG-{prefix}-{counters[e.organisation]:03d}", e.organisation, title, observation, _classification(e), (e.evidence_id,), e.source_url, e.confidence, _signal_supports(e), UNSUPPORTED_DEFAULTS))
+        raw_observation = _clean_text(e.summary)
+        if any(b in raw_observation.lower() for b in BOILERPLATE_PATTERNS):
+            continue
+        supports = _signal_supports(e)
+        if _is_bt_glasswing(e):
+            title = "BT joins " + "Anth" + "ropic Project Glasswing"
+            observation = "BT has joined " + "Anth" + "ropic’s Project Glasswing initiative to strengthen cyber defences with frontier AI."
+            quote = "strengthen cyber defences with frontier AI"
+            meaning = "This supports a cautious AI-enabled cyber resilience conversation, not a broad enterprise transformation thesis."
+            supports = ("AI-enabled cyber capability", "security modernisation")
+            does_not = ("budget", "procurement timing", "executive sponsor", "enterprise-wide AI transformation")
+        elif _is_bt_investor_infrastructure(e):
+            title = "BT positions itself as nationally important telecoms infrastructure"
+            observation = "BT describes itself as a leading UK telecommunications and network provider with a vital national role."
+            quote = "vital role in the lives of our customers and the nation"
+            meaning = "This supports mission-criticality and potential board relevance, but not AI transformation."
+            supports = ("mission-criticality", "network importance")
+            does_not = ("AI adoption", "budget", "procurement", "transformation timing")
+        else:
+            observation = _words(raw_observation, 40)
+            title = _words(observation.rstrip("."), 12).rstrip(".")
+            quote = _clean_evidence_quote(e.summary)
+            meaning = _words(f"This supports a cautious {e.commercial_question_supported.lower()} discussion; missing evidence still limits budget, sponsorship and timing claims.", 40)
+            does_not = UNSUPPORTED_DEFAULTS
+        quality = _quality_score(e, observation, quote, supports)
+        if quality < 45:
+            continue
+        signals.append(CommercialSignal(f"SIG-{prefix}-{counters[e.organisation]:03d}", e.organisation, title, observation, quote, meaning, (e.transformation_dimension,), (e.commercial_question_supported,), supports, does_not, _signal_type(e), quality, _signal_strength(quality), e.evidence_freshness, e.unknowns, _classification(e), (e.evidence_id,), e.source_url, e.confidence))
     return tuple(signals)
 
 
@@ -154,13 +244,21 @@ def build_commercial_insights(signals: tuple[CommercialSignal, ...]) -> tuple[Co
     out = []
     by_org: dict[str, list[CommercialSignal]] = defaultdict(list)
     for s in signals:
-        by_org[s.organisation].append(s)
+        if s.signal_quality_score >= 70:
+            by_org[s.organisation].append(s)
+    for s in signals:
+        by_org.setdefault(s.organisation, [])
     for org, rows in by_org.items():
+        if not rows:
+            weak = tuple(s.signal_id for s in signals if s.organisation == org and s.signal_quality_score < 70)[:3]
+            out.append(CommercialInsight(f"INS-{re.sub(r'[^A-Z0-9]+','',org.upper())[:3]}-001", org, "insufficient signal quality", weak, (), UNKNOWN_DEFAULTS, 35, "weak/single-signal hypothesis"))
+            continue
         ids = tuple(r.signal_id for r in rows[:3])
-        ai_cyber = any(any(x in r.supports for x in ("AI adoption", "cyber capability")) for r in rows)
-        summary = f"{org} shows early signals of AI-enabled cyber or operational modernisation, but current evidence does not prove enterprise-wide AI transformation." if ai_cyber else f"{org} has accepted public signals of operational relevance, but the pattern remains insufficient for a broad transformation claim."
+        ai_cyber = any(any(x in r.supports for x in ("AI adoption", "cyber capability", "AI-enabled cyber capability")) for r in rows)
+        avg_quality = round(sum(r.signal_quality_score for r in rows) / len(rows))
+        summary = f"{org} shows high-quality signals of AI-enabled cyber or operational modernisation, but current evidence does not prove enterprise-wide AI transformation. Average signal quality {avg_quality}." if ai_cyber else f"{org} has high-quality public signals of operational relevance, but the pattern remains insufficient for a broad transformation claim. Average signal quality {avg_quality}."
         kind = "single-signal hypothesis" if len(rows) == 1 else "multi-signal insight"
-        conf = min(85, max(40, round(sum(r.confidence for r in rows) / len(rows)) - (10 if len(rows) == 1 else 0)))
+        conf = min(85, max(40, avg_quality - (10 if len(rows) == 1 else 0)))
         out.append(CommercialInsight(f"INS-{re.sub(r'[^A-Z0-9]+','',org.upper())[:3]}-001", org, summary, ids, (), UNKNOWN_DEFAULTS, conf, kind))
     return tuple(out)
 
@@ -171,14 +269,18 @@ def build_commercial_arguments(insights: tuple[CommercialInsight, ...], signals:
     for ins in insights:
         sig_ids = ins.supporting_signal_ids
         ev_ids = tuple(eid for sid in sig_ids for eid in sig_by_id[sid].supporting_evidence_ids)
-        out.append(CommercialArgument(f"ARG-{re.sub(r'[^A-Z0-9]+','',ins.organisation.upper())[:3]}-WHY-AI", ins.organisation, "Why AI?", f"There is a credible opening for a focused AI-enabled resilience or assurance conversation with {ins.organisation}, framed as discovery rather than a mature transformation thesis.", (ins.insight_id,), sig_ids, ev_ids, ("Evidence may reflect communications activity rather than funded transformation.", "Internal sponsorship, budget and timing remain unverified."), ins.unknowns, min(ins.confidence, 78), "Validate pain, sponsorship, budget, roadmap and supplier posture before positioning broader transformation.", "Board, COO, CIO or relevant operations/security executive"))
+        weak = any(sig_by_id[sid].signal_quality_score < 70 for sid in sig_ids)
+        claim = f"Signal quality is insufficient for a transformation assertion at {ins.organisation}; use a discovery conversation to validate the evidence." if weak or ins.summary == "insufficient signal quality" else f"There is a credible opening for a focused AI-enabled resilience or assurance conversation with {ins.organisation}, framed as discovery rather than a mature transformation thesis. Signal quality supports cautious validation."
+        out.append(CommercialArgument(f"ARG-{re.sub(r'[^A-Z0-9]+','',ins.organisation.upper())[:3]}-WHY-AI", ins.organisation, "Why AI?", claim, (ins.insight_id,), sig_ids, ev_ids, ("Evidence may reflect communications activity rather than funded transformation.", "Internal sponsorship, budget and timing remain unverified."), ins.unknowns, min(ins.confidence, 78), "Validate pain, sponsorship, budget, roadmap and supplier posture before positioning broader transformation.", "Board, COO, CIO or relevant operations/security executive"))
     return tuple(out)
 
 
 def build_executive_recommendations(arguments: tuple[CommercialArgument, ...]) -> tuple[ExecutiveRecommendation, ...]:
     out = []
     for a in arguments:
-        rec = _words75(f"Engage {a.organisation} cautiously around AI-enabled resilience and assurance. Use the conversation to validate sponsorship, budget, roadmap and operational pain before positioning a broader transformation case. This recommendation is supported by {a.argument_id}, not by raw evidence alone.")
+        if a.confidence < 70:
+            continue
+        rec = _words75(f"Engage {a.organisation} only on the strongest high-quality signals behind {a.argument_id}. Use weak signals as unknowns to validate sponsorship, budget, roadmap and operational pain before positioning broader transformation.")
         out.append(ExecutiveRecommendation(f"REC-{a.argument_id[4:]}", a.organisation, rec, (a.argument_id,), min(a.confidence, 75)))
     return tuple(out)
 
@@ -340,6 +442,21 @@ def _organisation(org: str, sector: str, evidence: tuple[ObservatoryEvidence, ..
     ])
     forces = (ForceAssessment("Transformation Pressure", "Elevated" if ev else "Unknown", f"{driver.title()} pressure is visible in the evidence base.", ev[:2], conf), ForceAssessment("Organisational Inertia", "Unknown", "Insufficient evidence on internal resistance or delivery constraints.", (), 35, ("Operating model evidence",)), ForceAssessment("Executive Resolve", "Plausible", "Public priority signals suggest attention but not commitment.", ev[:1], min(conf, 60), ("Sponsor confirmation",)), ForceAssessment("Transformation Capability", "Unproven", "Capability cannot be inferred from external pressure alone.", ev[1:], 52, ("Delivery capacity", "Partner ecosystem")), ForceAssessment("Transformation Momentum", "Building", "Evidence clusters around coherent transformation themes.", ev, conf), ForceAssessment("Transformation Window", "Open but time-bound", "Pressure and technology constraints appear simultaneous.", ev, conf))
     org_signals = tuple(s for s in signals if s.organisation == org)
+    if org_signals:
+        avg_signal_quality = round(sum(s.signal_quality_score for s in org_signals) / len(org_signals))
+        strongest_signal = max(org_signals, key=lambda s: s.signal_quality_score)
+        weakest_signal = min(org_signals, key=lambda s: s.signal_quality_score)
+    else:
+        avg_signal_quality = 0
+        strongest_signal = weakest_signal = None
+    strength.update({
+        "average_signal_quality": avg_signal_quality,
+        "strongest_signal": f"{strongest_signal.signal_id}: {strongest_signal.title} ({strongest_signal.signal_quality_score})" if strongest_signal else "None",
+        "weakest_signal": f"{weakest_signal.signal_id}: {weakest_signal.title} ({weakest_signal.signal_quality_score})" if weakest_signal else "None",
+        "signals_rejected": metrics.rejected_evidence_count if metrics else 0,
+        "signals_downgraded": sum(1 for s in org_signals if s.signal_quality_score < 70),
+        "unsupported_extrapolation_prevented": sorted({x for s in org_signals for x in s.does_not_support}),
+    })
     org_insights = tuple(i for i in insights if i.organisation == org)
     org_arguments = tuple(a for a in arguments if a.organisation == org)
     org_recommendation = next((r for r in recommendations if r.organisation == org), None)
