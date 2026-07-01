@@ -262,3 +262,33 @@ def test_threshold_changes_support_early_pilot_distribution() -> None:
     assert quadrant_for(65, 39) == "Investigate"
     assert quadrant_for(64, 40) == "Monitor"
     assert quadrant_for(64, 39) == "Coverage Gap"
+
+
+def test_observatory_home_renders_enterprise_weather() -> None:
+    status, _, body = _get("/observatory")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "Enterprise Transformation Observatory" in html
+    assert "Enterprise Weather" in html
+    assert "Research Notebook" in html
+    assert "/observatory/DWP" in html
+
+
+def test_observatory_organisation_case_for_change_is_explainable() -> None:
+    status, _, body = _get("/observatory/DWP")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "DWP Transformation Genome" in html
+    assert "Strategic Conviction Engine" in html
+    assert "Case for Change" in html
+    assert "Why Act?" in html
+    assert "Supporting Evidence Framework" in html
+    assert "Never" not in html
+
+
+def test_observatory_critique_route_renders_preimplementation_critique() -> None:
+    status, _, body = _get("/observatory/critique")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "Architectural Critique" in html
+    assert "evidence-to-hypothesis reasoning spine" in html

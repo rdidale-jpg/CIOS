@@ -15,6 +15,7 @@ from cios.applications.flora.live.views import collection_result, dashboard, evi
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
+from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -61,6 +62,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(source_effectiveness_page())
             elif parsed.path == "/live/evidence":
                 self._html(evidence_page())
+            elif parsed.path == "/observatory":
+                self._html(observatory_page())
+            elif parsed.path == "/observatory/critique":
+                self._html(_critique_page())
+            elif parsed.path.startswith("/observatory/"):
+                self._html(organisation_observatory_page(parsed.path.removeprefix("/observatory/")))
             elif parsed.path == "/radar":
                 self._html(radar_page())
             elif parsed.path == "/scoring":
@@ -138,13 +145,24 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/live/status"}:
         return "application/json"
-    if path in {"/", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/evidence", "/live/sources", "/live/source-effectiveness"}:
+    if path in {"/", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/evidence", "/live/sources", "/live/source-effectiveness"}:
+        return "text/html; charset=utf-8"
+    if path.startswith("/observatory/"):
         return "text/html; charset=utf-8"
     if path.startswith("/score/"):
         return "text/html; charset=utf-8"
     if path.startswith("/case/") and path.removeprefix("/case/") in CASE_SLUGS:
         return "text/html; charset=utf-8"
     return None
+
+
+def _critique_page() -> str:
+    from html import escape
+    from pathlib import Path
+    from cios.applications.flora.workspace.views import _page
+    text = Path("docs/Enterprise_Transformation_Observatory_Architectural_Critique.md").read_text()
+    body = "<section class='hero'><h1>Architectural Critique</h1><p>Completed before implementation.</p></section><section class='card'><pre style='white-space:pre-wrap'>" + escape(text) + "</pre></section>"
+    return _page("ETO Architectural Critique", body)
 
 
 def _one(form: dict[str, list[str]], key: str) -> str:
