@@ -30,6 +30,11 @@ class ObservatoryEvidence:
     confidence: int
     unknowns: tuple[str, ...]
     evidence_lineage: tuple[str, ...]
+    source_type: str = "unknown"
+    mapped_condition: str = "Unmapped"
+    mapped_capability: str = "AI opportunity discovery"
+    extraction_timestamp: str = ""
+    is_live: bool = False
 
 
 @dataclass(frozen=True)
@@ -130,6 +135,11 @@ class OrganisationObservatory:
     transformation_window: TransformationWindow
     conviction: StrategicConviction
     case_for_change: CaseForChange
+    key_facts: list[dict[str, str]] = field(default_factory=list)
+    evidence_strength: dict[str, object] = field(default_factory=dict)
+    transformation_timeline: list[dict[str, str]] = field(default_factory=list)
+    cost_of_waiting_categories: list[dict[str, object]] = field(default_factory=list)
+    counterarguments: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -141,6 +151,10 @@ class EnterpriseWeather:
     transformation_tipping_points: tuple[str, ...]
     cross_sector_observations: tuple[str, ...]
     most_significant_evidence_today: tuple[str, ...]
+    total_live_evidence_objects: int = 0
+    total_organisations_covered: int = 0
+    evidence_coverage_by_sector: dict[str, int] = field(default_factory=dict)
+    evidence_coverage_by_class: dict[str, int] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
