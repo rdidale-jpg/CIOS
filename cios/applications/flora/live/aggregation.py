@@ -66,6 +66,11 @@ class OrganisationEvidenceMetrics:
     tier_score: int = 0
     condition_relevance: int = 0
     average_quality: int = 0
+    accepted_evidence_count: int = 0
+    rejected_evidence_count: int = 0
+    downgraded_evidence_count: int = 0
+    insufficient_claims: list[str] = field(default_factory=list)
+    weakest_receipts: list[dict[str, Any]] = field(default_factory=list)
 
 
 def _parse_timestamp(value: Any) -> datetime | None:
@@ -114,13 +119,22 @@ def aggregate_live_evidence(items: Iterable[dict[str, Any]]) -> dict[str, Organi
     output: dict[str, OrganisationEvidenceMetrics] = {}
     for org, rows in grouped.items():
         sources = {str(r.get("source_id") or r.get("source_name") or r.get("source_url") or "unknown") for r in rows}
-        conditions = Counter(str(r.get("commercial_condition") or r.get("condition") or "Unmapped") for r in rows)
+        condition_sources: dict[str, set[str]] = defaultdict(set)
+        condition_levels: dict[str, list[str]] = defaultdict(list)
+        for r in rows:
+            cond = str(r.get("commercial_condition") or r.get("condition") or "Unmapped")
+            condition_sources[cond].add(str(r.get("source_id") or r.get("source_name") or r.get("source_url") or "unknown"))
+            condition_levels[cond].append(str(r.get("relevance_level") or "HIGH"))
+        supported_conditions = {cond for cond, levels in condition_levels.items() if "HIGH" in levels or (levels.count("MEDIUM") >= 2 and len(condition_sources[cond]) >= 2)}
+        insufficient_claims = sorted(cond for cond in condition_levels if cond not in supported_conditions)
+        conditions = Counter(str(r.get("commercial_condition") or r.get("condition") or "Unmapped") for r in rows if str(r.get("commercial_condition") or r.get("condition") or "Unmapped") in supported_conditions)
         capabilities = Counter(str(r.get("likely_capability") or r.get("capability") or "AI opportunity discovery") for r in rows)
         tiers = Counter(str(r.get("evidence_tier") or "unknown") for r in rows)
         source_types = Counter(str(r.get("source_type") or "unknown") for r in rows)
         timestamps = [_parse_timestamp(r.get("extraction_timestamp") or r.get("publication_date")) for r in rows]
         latest = max((ts for ts in timestamps if ts is not None), default=None)
-        sorted_rows = sorted(rows, key=lambda r: (TIER_WEIGHT.get(str(r.get("evidence_tier")), 0), str(r.get("extraction_timestamp") or "")), reverse=True)
+        sorted_rows = sorted(rows, key=lambda r: (r.get("relevance_level") == "HIGH", int(r.get("confidence") or 0), TIER_WEIGHT.get(str(r.get("evidence_tier")), 0), str(r.get("extraction_timestamp") or "")), reverse=True)
+        weak_rows = sorted(rows, key=lambda r: (r.get("relevance_level") == "HIGH", int(r.get("confidence") or 0)))
         output[org] = OrganisationEvidenceMetrics(
             organisation=org,
             sector=str(rows[0].get("sector") or "Unknown"),
@@ -146,6 +160,19 @@ def aggregate_live_evidence(items: Iterable[dict[str, Any]]) -> dict[str, Organi
             tier_score=max((TIER_WEIGHT.get(str(t), 0) for t in tiers), default=0),
             condition_relevance=sum(c for cond, c in conditions.items() if cond in RELEVANT_CONDITIONS),
             average_quality=round(sum(int(r.get("overall_evidence_quality") or r.get("confidence") or 70) for r in rows) / len(rows)),
+            accepted_evidence_count=len([r for r in rows if r.get("accepted_for_claims", True)]),
+            rejected_evidence_count=len([r for r in rows if r.get("accepted_for_claims") is False]),
+            downgraded_evidence_count=len([r for r in rows if r.get("relevance_level") == "LOW"]),
+            insufficient_claims=insufficient_claims,
+            weakest_receipts=[{
+                "source_name": str(r.get("source_name") or r.get("source_id") or "Unknown source"),
+                "url": str(r.get("source_url") or r.get("url") or ""),
+                "snippet": str(r.get("snippet") or ""),
+                "condition": str(r.get("commercial_condition") or "Unmapped"),
+                "confidence": int(r.get("confidence") or 0),
+                "relevance_level": str(r.get("relevance_level") or "MEDIUM"),
+                "rejection_reasons": r.get("rejection_reasons", []),
+            } for r in weak_rows[:3]],
         )
     return output
 
