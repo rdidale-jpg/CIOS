@@ -74,6 +74,9 @@ def _diagnostic(source: Any, attempted_at: str, result: Any, source_evidence: li
 
 def collect(organisation: str | None = None) -> dict[str, Any]:
     """Collect evidence from the governed source allow-list and write diagnostics."""
+    from cios.applications.flora.observatory.engine import build_observatory, compare_observatory_snapshots, observatory_snapshot
+
+    before_observatory = observatory_snapshot(build_observatory())
     sources = enabled_sources(organisation)
     diagnostics: list[dict[str, Any]] = []
     evidence: list[dict[str, Any]] = []
@@ -98,6 +101,12 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
     output.parent.mkdir(parents=True, exist_ok=True)
     output.touch(exist_ok=True)
     write_jsonl(diagnostics, DEFAULT_DIAGNOSTICS_PATH)
+    after_observatory = observatory_snapshot(build_observatory())
+    observatory_delta = compare_observatory_snapshots(
+        before_observatory,
+        after_observatory,
+        tuple(str(item.get("evidence_id") or "") for item in new_evidence if item.get("evidence_id")),
+    )
     failures = [d for d in diagnostics if d["status"] == "failed"]
     return {
         "last_collection_time": diagnostics[-1]["last_attempted"] if diagnostics else None,
@@ -112,6 +121,7 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
         "total_unique_evidence_objects": len(fingerprints),
         "failures": failures,
         "diagnostics": diagnostics,
+        "observatory_delta": observatory_delta,
         "output_location": str(output),
         "diagnostics_location": str(DEFAULT_DIAGNOSTICS_PATH),
     }

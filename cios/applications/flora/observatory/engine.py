@@ -30,6 +30,144 @@ def build_observatory() -> Observatory:
     return Observatory(CRITIQUE_PATH, evidence, organisations, _weather(evidence, live), _hypotheses(evidence), _graph_edges(evidence))
 
 
+def observatory_snapshot(obs: Observatory | None = None) -> dict[str, Any]:
+    """Return a stable, human-auditable snapshot of Observatory reasoning state."""
+
+    obs = obs or build_observatory()
+    return {
+        "evidence_ids": tuple(e.evidence_id for e in obs.evidence),
+        "organisations": {
+            org.organisation: {
+                "case_confidence": org.case_for_change.confidence,
+                "strategic_urgency_state": org.strategic_urgency.state,
+                "strategic_urgency_confidence": org.strategic_urgency.confidence,
+                "supporting_evidence_ids": tuple(org.case_for_change.supporting_evidence_ids),
+                "genome_scores": {d.name: d.confidence for d in org.genome},
+                "force_scores": {f.name: f.confidence for f in org.forces},
+                "reasoning_signature": _reasoning_signature(org),
+            }
+            for org in obs.organisations
+        },
+        "hypotheses": {
+            h.hypothesis_id: {
+                "status": h.status.value,
+                "confidence": h.confidence,
+                "supporting_evidence_ids": tuple(h.supporting_evidence_ids),
+                "contradictory_evidence_ids": tuple(h.contradictory_evidence_ids),
+                "commercial_implications": h.commercial_implications,
+            }
+            for h in obs.hypotheses
+        },
+    }
+
+
+def compare_observatory_snapshots(before: dict[str, Any], after: dict[str, Any], new_evidence_ids: tuple[str, ...] = ()) -> dict[str, Any]:
+    """Explain what changed between two Observatory snapshots and why."""
+
+    before_evidence = set(before.get("evidence_ids", ()))
+    after_evidence = set(after.get("evidence_ids", ()))
+    added = tuple(sorted(new_evidence_ids or tuple(after_evidence - before_evidence)))
+    removed = tuple(sorted(before_evidence - after_evidence))
+    org_changes = _organisation_changes(before.get("organisations", {}), after.get("organisations", {}), set(added))
+    hypothesis_changes = _hypothesis_changes(before.get("hypotheses", {}), after.get("hypotheses", {}), set(added))
+    changed_orgs = tuple(c["organisation"] for c in org_changes if c["changed"])
+    score_changes = tuple(c for org in org_changes for c in org["score_changes"])
+    reasoning_changes = tuple(c for c in org_changes if c["reasoning_changed"])
+    changed = bool(added or removed or changed_orgs or hypothesis_changes)
+    return {
+        "summary": _change_summary(added, changed_orgs, hypothesis_changes, score_changes, reasoning_changes, changed),
+        "new_evidence_collected": len(added),
+        "new_evidence_ids": added,
+        "removed_evidence_ids": removed,
+        "organisations_reanalysed": len(after.get("organisations", {})),
+        "organisations_changed": changed_orgs,
+        "organisation_changes": org_changes,
+        "hypotheses_changed": tuple(h["hypothesis_id"] for h in hypothesis_changes),
+        "hypothesis_changes": hypothesis_changes,
+        "scores_changed": score_changes,
+        "reasoning_changed": reasoning_changes,
+        "nothing_changed": not changed,
+        "evidence_provenance": tuple({"evidence_id": eid, "caused_changes": _caused_changes(eid, org_changes, hypothesis_changes)} for eid in added),
+    }
+
+
+def _reasoning_signature(org: OrganisationObservatory) -> tuple[str, ...]:
+    return (
+        org.conviction.commercial_interpretation,
+        org.conviction.transformation_hypothesis,
+        org.conviction.recommended_commercial_action,
+        org.transformation_window.reasoning,
+        org.case_for_change.why_act,
+        org.case_for_change.why_now,
+        org.case_for_change.why_ai,
+        org.case_for_change.cost_of_waiting,
+    ) + tuple(d.reasoning for d in org.genome) + tuple(f.reasoning for f in org.forces)
+
+
+def _organisation_changes(before_orgs: dict[str, Any], after_orgs: dict[str, Any], added: set[str]) -> tuple[dict[str, Any], ...]:
+    changes = []
+    for org, after in after_orgs.items():
+        before = before_orgs.get(org, {})
+        before_support = set(before.get("supporting_evidence_ids", ()))
+        after_support = set(after.get("supporting_evidence_ids", ()))
+        score_changes = []
+        for label in ("case_confidence", "strategic_urgency_confidence"):
+            if before.get(label) != after.get(label):
+                score_changes.append({"organisation": org, "score": label, "before": before.get(label), "after": after.get(label)})
+        for score_group in ("genome_scores", "force_scores"):
+            for name, after_score in after.get(score_group, {}).items():
+                before_score = before.get(score_group, {}).get(name)
+                if before_score != after_score:
+                    score_changes.append({"organisation": org, "score": name, "before": before_score, "after": after_score})
+        reasoning_changed = before.get("reasoning_signature") != after.get("reasoning_signature")
+        evidence_added = tuple(sorted(after_support - before_support))
+        evidence_causes = tuple(sorted((after_support & added) or set(evidence_added)))
+        changed = bool(score_changes or reasoning_changed or evidence_added or before.get("strategic_urgency_state") != after.get("strategic_urgency_state"))
+        changes.append({
+            "organisation": org,
+            "changed": changed,
+            "reanalysed": True,
+            "evidence_added": evidence_added,
+            "evidence_ids_causing_change": evidence_causes,
+            "score_changes": tuple(score_changes),
+            "reasoning_changed": reasoning_changed,
+            "urgency_before": before.get("strategic_urgency_state"),
+            "urgency_after": after.get("strategic_urgency_state"),
+        })
+    return tuple(changes)
+
+
+def _hypothesis_changes(before_hyp: dict[str, Any], after_hyp: dict[str, Any], added: set[str]) -> tuple[dict[str, Any], ...]:
+    changes = []
+    for hyp_id, after in after_hyp.items():
+        before = before_hyp.get(hyp_id, {})
+        changed_fields = tuple(k for k in ("status", "confidence", "supporting_evidence_ids", "contradictory_evidence_ids", "commercial_implications") if before.get(k) != after.get(k))
+        if changed_fields:
+            support = set(after.get("supporting_evidence_ids", ()))
+            changes.append({
+                "hypothesis_id": hyp_id,
+                "changed_fields": changed_fields,
+                "status_before": before.get("status"),
+                "status_after": after.get("status"),
+                "confidence_before": before.get("confidence"),
+                "confidence_after": after.get("confidence"),
+                "evidence_ids_causing_change": tuple(sorted(support & added)),
+            })
+    return tuple(changes)
+
+
+def _caused_changes(eid: str, org_changes: tuple[dict[str, Any], ...], hypothesis_changes: tuple[dict[str, Any], ...]) -> tuple[str, ...]:
+    caused = [f"organisation:{c['organisation']}" for c in org_changes if eid in c["evidence_ids_causing_change"]]
+    caused += [f"hypothesis:{h['hypothesis_id']}" for h in hypothesis_changes if eid in h["evidence_ids_causing_change"]]
+    return tuple(caused) or ("evidence collected; no downstream reasoning change detected",)
+
+
+def _change_summary(added, changed_orgs, hypothesis_changes, score_changes, reasoning_changes, changed) -> str:
+    if not changed:
+        return "Nothing changed: no new unique evidence, score movement, hypothesis movement or reasoning movement was detected."
+    return f"Collected {len(added)} new unique evidence object(s); re-analysis changed {len(changed_orgs)} organisation(s), {len(hypothesis_changes)} hypothesis/hypotheses, {len(score_changes)} score field(s) and {len(reasoning_changes)} reasoning signature(s)."
+
+
 def _live_evidence(rows: list[dict[str, Any]]) -> list[ObservatoryEvidence]:
     out: list[ObservatoryEvidence] = []
     for i, r in enumerate(rows, 1):

@@ -38,7 +38,32 @@ def _diagnostic_rows(diagnostics: list[dict[str, Any]]) -> str:
 
 def collection_result(result: dict[str, Any]) -> str:
     rows = _diagnostic_rows(result["diagnostics"])
-    return _page("Flora Live Collection Result", f"<h1>Live collection complete</h1><section class='card'><p>Attempted {result['sources_attempted']} sources; succeeded {result['sources_succeeded']}; failed {result['sources_failed']}; produced evidence from {result.get('sources_with_evidence', 0)} sources; extracted {result['evidence_objects_extracted']} evidence objects; added {result['new_evidence_added']} new; skipped {result['duplicate_evidence_skipped']} duplicates; total unique evidence objects: {result['total_unique_evidence_objects']}.</p><p><a href='/live/evidence'>View evidence</a> · <a href='/live/sources'>Source coverage</a></p></section><table><thead><tr><th>Source ID</th><th>Organisation</th><th>Source</th><th>Type</th><th>URL</th><th>Status</th><th>HTTP/error</th><th>Evidence</th><th>Last attempted</th><th>Failure reason</th></tr></thead><tbody>{rows}</tbody></table>")
+    delta = result.get("observatory_delta") or {}
+    delta_html = _observatory_delta_html(delta)
+    return _page("Flora Live Collection Result", f"<h1>Live collection complete</h1><section class='card'><p>Attempted {result['sources_attempted']} sources; succeeded {result['sources_succeeded']}; failed {result['sources_failed']}; produced evidence from {result.get('sources_with_evidence', 0)} sources; extracted {result['evidence_objects_extracted']} evidence objects; added {result['new_evidence_added']} new; skipped {result['duplicate_evidence_skipped']} duplicates; total unique evidence objects: {result['total_unique_evidence_objects']}.</p><p><a href='/live/evidence'>View evidence</a> · <a href='/live/sources'>Source coverage</a> · <a href='/observatory'>Open Observatory</a></p></section>{delta_html}<table><thead><tr><th>Source ID</th><th>Organisation</th><th>Source</th><th>Type</th><th>URL</th><th>Status</th><th>HTTP/error</th><th>Evidence</th><th>Last attempted</th><th>Failure reason</th></tr></thead><tbody>{rows}</tbody></table>")
+
+
+def _observatory_delta_html(delta: dict[str, Any]) -> str:
+    if not delta:
+        return "<section class='card warn'><h2>Observatory intelligence refresh</h2><p>No Observatory delta was produced.</p></section>"
+    new_evidence = "".join(f"<li>{escape(str(eid))}</li>" for eid in delta.get("new_evidence_ids", ())) or "<li>No new unique evidence collected.</li>"
+    org_rows = "".join(
+        f"<tr><td>{escape(str(c.get('organisation')))}</td><td>{'yes' if c.get('reanalysed') else 'no'}</td><td>{'yes' if c.get('changed') else 'no'}</td><td>{escape(', '.join(c.get('evidence_ids_causing_change') or ()) or 'None')}</td><td>{len(c.get('score_changes') or ())}</td><td>{'yes' if c.get('reasoning_changed') else 'no'}</td></tr>"
+        for c in delta.get("organisation_changes", ())
+    )
+    hyp_rows = "".join(
+        f"<tr><td>{escape(str(h.get('hypothesis_id')))}</td><td>{escape(', '.join(h.get('changed_fields') or ()))}</td><td>{escape(str(h.get('status_before')))} → {escape(str(h.get('status_after')))}</td><td>{escape(str(h.get('confidence_before')))} → {escape(str(h.get('confidence_after')))}</td><td>{escape(', '.join(h.get('evidence_ids_causing_change') or ()) or 'None')}</td></tr>"
+        for h in delta.get("hypothesis_changes", ())
+    ) or "<tr><td colspan='5'>No hypothesis changes detected.</td></tr>"
+    score_rows = "".join(
+        f"<tr><td>{escape(str(s.get('organisation')))}</td><td>{escape(str(s.get('score')))}</td><td>{escape(str(s.get('before')))}</td><td>{escape(str(s.get('after')))}</td></tr>"
+        for s in delta.get("scores_changed", ())
+    ) or "<tr><td colspan='4'>No score changes detected.</td></tr>"
+    provenance = "".join(
+        f"<tr><td>{escape(str(p.get('evidence_id')))}</td><td>{escape(', '.join(p.get('caused_changes') or ()))}</td></tr>"
+        for p in delta.get("evidence_provenance", ())
+    ) or "<tr><td colspan='2'>No new evidence provenance to show.</td></tr>"
+    return f"""<section class='card ok'><h2>Observatory intelligence refresh</h2><p><strong>What changed:</strong> {escape(str(delta.get('summary')))}</p><ul><li>New evidence collected: {delta.get('new_evidence_collected', 0)}</li><li>Organisations re-analysed: {delta.get('organisations_reanalysed', 0)}</li><li>Organisations changed: {escape(', '.join(delta.get('organisations_changed') or ()) or 'None')}</li><li>Hypotheses changed: {escape(', '.join(delta.get('hypotheses_changed') or ()) or 'None')}</li><li>Nothing changed: {'yes' if delta.get('nothing_changed') else 'no'}</li></ul><h3>New evidence IDs</h3><ul>{new_evidence}</ul><h3>Organisation re-analysis</h3><table><thead><tr><th>Organisation</th><th>Re-analysed</th><th>Changed</th><th>Evidence causing change</th><th>Score changes</th><th>Reasoning changed</th></tr></thead><tbody>{org_rows}</tbody></table><h3>Hypothesis movement</h3><table><thead><tr><th>Hypothesis</th><th>Changed fields</th><th>Status</th><th>Confidence</th><th>Evidence causing change</th></tr></thead><tbody>{hyp_rows}</tbody></table><h3>Score movement</h3><table><thead><tr><th>Organisation</th><th>Score</th><th>Before</th><th>After</th></tr></thead><tbody>{score_rows}</tbody></table><h3>Evidence provenance</h3><table><thead><tr><th>Evidence ID</th><th>Caused changes</th></tr></thead><tbody>{provenance}</tbody></table></section>"""
 
 
 def _status_badge(status: str, evidence_count: int) -> str:
