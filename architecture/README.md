@@ -18,6 +18,18 @@ CIOS implementation work should be guided by stable institutional memory: foundi
 - `decisions/` contains Architecture Decision Records that explain important choices, trade-offs and consequences.
 - `roadmap/` contains capability evolution plans for CIOS, Flora, Newton and the Observatory.
 
+
+## Founding papers
+
+- FP-001 — CIOS Vision
+- FP-002 — Strategic Signal Standard
+- FP-003 — Flora Intelligence Architecture
+- FP-004 — Evidence Acquisition Standard
+- FP-005 — Enterprise Intelligence Collection Framework
+- FP-006 — Source Quality Standard
+
+These papers define how Flora should acquire, prioritise and govern evidence before downstream reasoning begins.
+
 ## Developer instruction note
 
 Before major implementation work, review:
