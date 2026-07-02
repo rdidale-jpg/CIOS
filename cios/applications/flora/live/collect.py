@@ -10,6 +10,7 @@ from cios.applications.flora.live.fetcher import fetch_html
 from cios.applications.flora.live.source_registry import SOURCES, canonical_organisation, enabled_sources
 from cios.applications.flora.live.store import DEFAULT_DIAGNOSTICS_PATH, DEFAULT_PATH, load_evidence_fingerprints, read_jsonl, unique_evidence, write_jsonl
 from cios.applications.flora.live.progress import complete_state, read_state, start_state, update_state
+from cios.applications.flora.live.alignment import build_acquisition_plans, lifecycle_action
 
 FAILURE_CATEGORIES = {"access_blocked", "timeout", "network_error", "non_html", "no_relevant_evidence", "parser_error", "unknown"}
 
@@ -92,6 +93,7 @@ def _diagnostic(source: Any, attempted_at: str, result: Any, source_evidence: li
             "relevance_level": e.get("relevance_level", "REJECT"),
         } for e in (rejected_evidence or [])[:8]],
     }
+    diag.update(lifecycle_action(diag))
     diag["recommended_source_fix"] = source_improvement_recommendation(diag)
     return diag
 
@@ -135,6 +137,9 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
         tuple(str(item.get("evidence_id") or "") for item in new_evidence if item.get("evidence_id")),
     )
     failures = [d for d in diagnostics if d["status"] == "failed"]
+    plans = build_acquisition_plans(SOURCES, read_jsonl(DEFAULT_PATH) + new_evidence, diagnostics)
+    insufficient = [p["organisation"] for p in plans if p.get("collection_confidence", 0) < 60]
+    urgent = [p for p in plans if p.get("collection_priority") == "collect urgently"]
     final_progress = complete_state("completed", "Collection completed.")
     return {
         "progress_state": final_progress,
@@ -155,6 +160,9 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
         "primary_evidence_count": sum(int(d.get("primary_evidence_count") or 0) for d in diagnostics),
         "secondary_evidence_count": sum(int(d.get("secondary_evidence_count") or 0) for d in diagnostics),
         "context_only_count": sum(int(d.get("context_only_count") or 0) for d in diagnostics),
+        "diagnostics_only_count": len([d for d in diagnostics if d.get("lifecycle_action") == "diagnostics only"]),
+        "organisations_with_insufficient_coverage": insufficient,
+        "recommended_next_collection_actions": [f"{p['organisation']}: {', '.join(p.get('next_collection_objectives', [])[:2])}" for p in urgent[:10]],
         "source_improvement_recommendations": [d.get("recommended_source_fix") for d in diagnostics if d.get("recommended_source_fix")],
         "diagnostics": diagnostics,
         "observatory_delta": observatory_delta,
@@ -201,7 +209,7 @@ def source_coverage() -> list[dict[str, Any]]:
             action = "Keep monitored; consider a more relevant stable page."
         else:
             action = "Keep monitored."
-        rows.append({**source.model_dump(mode="json"), "last_status": status, "evidence_count": evidence_count, "recommended_action": action, "last_attempted": latest.get("last_attempted") or latest.get("attempted_at")})
+        rows.append({**source.model_dump(mode="json"), **lifecycle_action(latest or {"source_type": source.source_type, "source_name": source.source_name, "url": str(source.url), "evidence_count": evidence_count}), "last_status": status, "evidence_count": evidence_count, "recommended_action": action, "last_attempted": latest.get("last_attempted") or latest.get("attempted_at")})
     return rows
 
 

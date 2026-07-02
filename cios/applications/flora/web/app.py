@@ -12,7 +12,7 @@ from urllib.parse import parse_qs, urlparse
 
 from cios.applications.flora.live.collect import collect, current_status
 from cios.applications.flora.live.progress import read_state
-from cios.applications.flora.live.views import collection_progress_page, collection_result, dashboard, evidence_page, source_effectiveness_page, sources_page
+from cios.applications.flora.live.views import acquisition_plans_page, collection_progress_page, collection_result, dashboard, evidence_page, feedback_diagnostics_page, source_effectiveness_page, sources_page
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
@@ -66,6 +66,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._json(current_status())
             elif parsed.path == "/live/sources":
                 self._html(sources_page())
+            elif parsed.path == "/live/acquisition-plans":
+                self._html(acquisition_plans_page())
+            elif parsed.path == "/live/feedback/diagnostics":
+                self._html(feedback_diagnostics_page())
             elif parsed.path == "/live/source-effectiveness":
                 self._html(source_effectiveness_page())
             elif parsed.path == "/live/evidence":
@@ -102,7 +106,11 @@ class FloraWebHandler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:  # noqa: N802 - stdlib callback name
         length = int(self.headers.get("Content-Length", "0"))
         form = parse_qs(self.rfile.read(length).decode("utf-8"), keep_blank_values=True)
-        if self.path == "/feedback":
+        if self.path == "/live/feedback":
+            from cios.applications.flora.live.alignment import persist_feedback
+            persist_feedback(target_type=_one(form, "target_type"), target_id=_one(form, "target_id"), feedback_type=_one(form, "feedback_type"), organisation=_one(form, "organisation"), comment=_one(form, "comment"))
+            self._redirect(self.headers.get("Referer") or "/live/feedback/diagnostics")
+        elif self.path == "/feedback":
             create_feedback_record(
                 organisation=_one(form, "organisation"),
                 action_text=_one(form, "action_text"),
@@ -153,7 +161,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness"}:
+    if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
     if path.startswith("/observatory/"):
         return "text/html; charset=utf-8"

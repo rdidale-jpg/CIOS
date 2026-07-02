@@ -9,6 +9,7 @@ from typing import Any
 
 from cios.applications.flora.intelligence.evidence_engine import CommercialEvidence, EvidenceCategory, EvidenceReasoningDossier, EvidenceRichnessMetrics, EvidenceSourceAttribution
 from cios.applications.flora.live.source_registry import SourceRecord
+from cios.applications.flora.live.alignment import evidence_quality_band, source_tier, can_support_strategic_signal
 
 KEYWORDS = ("AI", "automation", "digital transformation", "resilience", "customer service", "customer experience", "operational performance", "cost reduction", "efficiency", "data", "cloud", "regulation", "investment", "modernisation", "asset management", "network", "field operations", "legacy systems", "reform", "spending", "procurement", "service transformation", "cyber", "shared services", "legacy technology", "citizen experience", "AI readiness", "managed services", "consulting", "partnership", "delivery capability")
 
@@ -305,7 +306,8 @@ def _candidate_items(source: SourceRecord, page: str, extracted_at: datetime | N
         gate = classify_relevance(snippet, condition, source)
         confidence = recalibrated_confidence(confidence, gate, source, snippet)
         evidence_id = "LIVE-" + hashlib.sha1(f"{source.source_id}|{keyword}|{snippet}".encode()).hexdigest()[:12].upper()
-        found.append({
+        tier = source_tier(source.source_type, source.source_name, str(source.url))
+        item = {
             "evidence_id": evidence_id,
             "organisation": source.organisation,
             "source_id": source.source_id,
@@ -314,6 +316,7 @@ def _candidate_items(source: SourceRecord, page: str, extracted_at: datetime | N
             "source_url": str(source.url),
             "sector": source.sector,
             "evidence_tier": source.evidence_tier,
+            "source_tier": tier,
             **quality_scores(source, snippet),
             "keyword": keyword,
             "snippet": clean_observation(snippet),
@@ -328,7 +331,10 @@ def _candidate_items(source: SourceRecord, page: str, extracted_at: datetime | N
             "missing_evidence": ["named executive sponsor", "budget or procurement timing", "incumbent supplier position", "quantified AI outcome"],
             **gate,
             "attempted_classification": condition,
-        })
+        }
+        item["evidence_quality_band"] = evidence_quality_band(item)
+        item["supports_strategic_signals"] = can_support_strategic_signal(item)
+        found.append(item)
         if max_items is not None and len([item for item in found if item["accepted_for_claims"]]) >= max_items:
             break
     return found
