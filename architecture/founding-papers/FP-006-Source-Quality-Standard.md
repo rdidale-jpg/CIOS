@@ -104,35 +104,36 @@ These sources may help diagnose collection quality, page parsing issues or site 
 
 Source quality scoring should estimate how much reasoning weight a source can carry before considering the extracted evidence in detail.
 
-A source quality score should consider:
+A suggested Source Quality Score should consider:
 
 - authority;
-- proximity to decision or event;
+- proximity to decision;
 - specificity potential;
-- freshness expectations;
+- freshness;
 - independence;
-- traceability;
+- historical yield;
 - bias or commercial intent;
-- historical usefulness.
+- parseability;
+- stability of URL;
+- relevance to active evidence demand.
 
-The score should guide collection and reasoning weight, not replace evidence-level judgement.
+The score should guide collection and reasoning weight, not replace evidence-level judgement. For example, an annual report may score highly for authority and stability, while a supplier case study may score lower for independence but higher for specificity potential if it names a programme, platform, client and delivery outcome.
 
 ## 9. Source yield scoring
 
 Source yield scoring measures the usefulness of a source after collection. It asks whether the source produced valuable evidence relative to noise.
 
-Yield should consider:
+A suggested Source Yield Score should consider:
 
-- number of useful evidence objects;
-- specificity of those objects;
-- novelty;
-- corroboration value;
-- duplication rate;
-- rejected-material rate;
-- effort required to collect or parse;
-- relationship to active evidence demand.
+- accepted evidence count;
+- primary evidence count;
+- rejection rate;
+- duplicate rate;
+- signal conversion rate;
+- thesis contribution rate;
+- user usefulness feedback.
 
-A high-quality source can be low-yield for a particular organisation or question. A low-tier source can occasionally produce a high-yield item, but that item may still require corroboration.
+A high-quality source can be low-yield for a particular organisation or question. A low-tier source can occasionally produce a high-yield item, but that item may still require corroboration. Yield should be recalculated over time, because a source that was useful during a procurement cycle may become stale after award or delivery.
 
 ## 10. Source freshness
 
@@ -185,13 +186,47 @@ Replacement should prefer:
 
 Replacement recommendations should be captured as part of collection feedback.
 
-## 15. Source lifecycle
+## 15. Source lifecycle actions
 
 Sources have lifecycles. They may be discovered, classified, collected, scored, used, monitored, downgraded, retired or replaced.
 
+Flora should support the following source lifecycle actions:
+
+- keep: continue using the source at its current tier and cadence;
+- monitor: retain the source but collect less aggressively until new evidence demand appears;
+- downgrade: reduce reasoning weight because evidence is stale, generic, biased or low-specificity;
+- replace: seek a better source family for the same evidence category;
+- retire: stop using the source for current reasoning while preserving traceability;
+- diagnostics only: retain only for parser, site-structure or failure analysis;
+- split into child sources: decompose a noisy parent page into more specific subpages, feeds or document families;
+- promote child source to governed source: elevate a high-yield child page or document family into the governed collection plan.
+
 Lifecycle management should ensure that Flora does not continue to rely on stale, duplicated or low-value sources simply because they are easy to collect. Retirement should reduce current reasoning weight while preserving historical traceability where appropriate.
 
-## 16. Open questions
+A noisy parent page should not necessarily be removed. Flora should first try to discover and promote better child pages. For example, a generic newsroom index may be noisy, but a specific capital investment announcement, contract award tag, regulatory response page or executive speech page beneath it may be high-yield.
+
+## 16. Source and evidence examples
+
+- Bad evidence: “Jobs and contracts Procurement at DWP Working for DWP Publication scheme”. Classification: reject / diagnostics only; likely source action is diagnostics only or split into child sources.
+- Context evidence: a homepage describing services without a named programme, investment, supplier or delivery milestone. Classification: Tier 3 context source.
+- Secondary evidence: a supplier announcement naming a transformation platform for a client. Classification: useful but biased; downgrade unless corroborated by contract, client or regulatory evidence.
+- Primary evidence: “£15 billion investment to transform Armed Forces and keep the UK safe”. Classification: high-specificity primary evidence from an authoritative source.
+- High-value evidence cluster: annual report funding, contract award, named executive statement and regulator or audit finding all pointing to the same transformation thesis. Classification: strong source diversity and high source yield.
+
+## 17. Human feedback loop
+
+Future UI should allow users to mark:
+
+- useful evidence;
+- weak evidence;
+- wrong classification;
+- noisy source;
+- important source;
+- missing source.
+
+This feedback should influence both Source Quality Score and Source Yield Score. “Useful evidence” should improve historical yield and thesis contribution. “Noisy source” should increase rejection-rate concern and may trigger split, downgrade or diagnostics-only actions. “Important source” and “missing source” should inform future evidence acquisition plans and source replacement recommendations.
+
+## 18. Open questions
 
 - What scoring scale should be used for source quality and source yield?
 - Which source tiers should be mandatory for high-confidence signals?
