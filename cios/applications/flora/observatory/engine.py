@@ -8,6 +8,7 @@ from typing import Any
 
 from cios.applications.flora.live.aggregation import aggregate_live_evidence, unique_live_evidence
 from cios.applications.flora.live.store import DEFAULT_PATH, read_jsonl
+from cios.applications.flora.live.source_registry import SOURCES
 from cios.applications.flora.observatory.models import *
 
 CRITIQUE_PATH = "docs/Enterprise_Transformation_Observatory_Architectural_Critique.md"
@@ -18,6 +19,22 @@ ORG_SEEDS = {
     "BT": ("Telecommunications", "network estate", "enterprise productivity", "service assurance", "network intelligence", "Board"),
 }
 
+SECTOR_DEFAULTS = {
+    "Telecommunications": ("network estate", "enterprise productivity", "service assurance", "network intelligence", "Board"),
+    "Utilities": ("asset resilience", "customer and regulatory pressure", "asset planning", "operational intelligence", "Executive"),
+    "Energy": ("energy transition", "grid and asset pressure", "asset planning", "forecasting intelligence", "Executive"),
+    "Public Sector": ("legacy systems", "citizen service", "operational scale", "casework intelligence", "Board"),
+}
+
+
+def monitored_enterprise_profiles() -> dict[str, tuple[str, str, str, str, str, str]]:
+    profiles = dict(ORG_SEEDS)
+    for source in SOURCES:
+        if not source.enabled and source.organisation not in profiles:
+            continue
+        profiles.setdefault(source.organisation, (source.sector, *SECTOR_DEFAULTS.get(source.sector, ("operating pressure", "transformation", "service resilience", "AI-enabled operations", "Executive"))))
+    return profiles
+
 CASE_SECTIONS = ("Why Act?", "Why Now?", "Why AI?", "Why Cloud?", "Why Secure by Design?", "Why this Transformation?", "Cost of Waiting", "Commercial Risks", "Contradictory Evidence", "Unknowns")
 COST_CATEGORIES = ("Operational cost/risk", "Technology debt", "Security exposure", "Citizen/customer experience", "Regulatory/reputational risk", "Competitive or policy risk", "Delivery complexity")
 FACT_PATTERNS = (r"\b\d+(?:\.\d+)?\s*(?:million|billion|bn|m|%)\b", r"£\s*\d+(?:\.\d+)?\s*(?:million|billion|bn|m)?", r"\b20\d{2}\b")
@@ -26,13 +43,13 @@ FACT_PATTERNS = (r"\b\d+(?:\.\d+)?\s*(?:million|billion|bn|m|%)\b", r"£\s*\d+(?
 def build_observatory() -> Observatory:
     live = unique_live_evidence(read_jsonl(DEFAULT_PATH))
     live_evs = _live_evidence(live)
-    evidence = tuple((live_evs + list(BT_ENTERPRISE_EVIDENCE)) if live_evs else _seed_evidence())
+    evidence = tuple((live_evs + list(BT_ENTERPRISE_EVIDENCE) + _seed_evidence()) if live_evs else _seed_evidence())
     signals = build_commercial_signals(evidence)
     insights = build_commercial_insights(signals)
     theses = build_transformation_theses(insights, signals)
     arguments = build_commercial_arguments(theses, insights, signals)
     recommendations = build_executive_recommendations(arguments)
-    organisations = tuple(_organisation(org, sector, evidence, terms, live, signals, insights, theses, arguments, recommendations) for org, (sector, *terms) in ORG_SEEDS.items())
+    organisations = tuple(_organisation(org, sector, evidence, terms, live, signals, insights, theses, arguments, recommendations) for org, (sector, *terms) in monitored_enterprise_profiles().items())
     return Observatory(CRITIQUE_PATH, evidence, organisations, _weather(evidence, live), _hypotheses(evidence), _graph_edges(evidence, signals, insights, theses, arguments, recommendations), signals, insights, theses, arguments, recommendations)
 
 
@@ -528,7 +545,7 @@ def _seeded_bt_enterprise_evidence() -> list[ObservatoryEvidence]:
 def _seed_evidence() -> list[ObservatoryEvidence]:
     rows: list[ObservatoryEvidence] = []
     rows.extend(_seeded_bt_enterprise_evidence())
-    for idx, (org, (sector, driver, theme, capability, ai_theme, _level)) in enumerate(ORG_SEEDS.items(), start=1):
+    for idx, (org, (sector, driver, theme, capability, ai_theme, _level)) in enumerate(monitored_enterprise_profiles().items(), start=1):
         if org == "BT":
             continue
         rows.extend([

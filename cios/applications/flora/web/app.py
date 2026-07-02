@@ -48,9 +48,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         try:
             if parsed.path == "/health":
                 self._json(HEALTH_PAYLOAD)
-            elif parsed.path == "/":
+            elif parsed.path in {"/", "/morning-edition"}:
                 self._html(landing_page())
-            elif parsed.path == "/live":
+            elif parsed.path in {"/live", "/evidence"}:
                 self._html(dashboard())
             elif parsed.path == "/live/collect":
                 self._html(collection_result(collect()))
@@ -68,9 +68,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_critique_page())
             elif parsed.path.startswith("/observatory/"):
                 self._html(organisation_observatory_page(parsed.path.removeprefix("/observatory/")))
-            elif parsed.path == "/radar":
+            elif parsed.path in {"/radar", "/portfolio"}:
                 self._html(radar_page())
-            elif parsed.path == "/scoring":
+            elif parsed.path in {"/scoring", "/reasoning-model"}:
                 self._html(scoring_page())
             elif parsed.path.startswith("/score/") and parsed.path.endswith("/rob-score"):
                 self._html(rob_score_page(parsed.path.removeprefix("/score/").removesuffix("/rob-score"), saved=parse_qs(parsed.query).get("saved") == ["1"]))
@@ -145,7 +145,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/live/status"}:
         return "application/json"
-    if path in {"/", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/evidence", "/live/sources", "/live/source-effectiveness"}:
+    if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/evidence", "/live/sources", "/live/source-effectiveness"}:
         return "text/html; charset=utf-8"
     if path.startswith("/observatory/"):
         return "text/html; charset=utf-8"
