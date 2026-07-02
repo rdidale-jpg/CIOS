@@ -24,11 +24,11 @@ CIOS implementation work should be guided by stable institutional memory: foundi
 - FP-001 — CIOS Vision
 - FP-002 — Strategic Signal Standard
 - FP-003 — Flora Intelligence Architecture
-- FP-004 — Evidence Acquisition Standard
-- FP-005 — Enterprise Intelligence Collection Framework
-- FP-006 — Source Quality Standard
+- FP-004 — Evidence Acquisition Standard: defines evidence acquisition plans, evidence acceptance rules, scoring bands, curation guidance and collection handbrakes for Flora's live intake phase.
+- FP-005 — Enterprise Intelligence Collection Framework: defines enterprise evidence blueprints, coverage scoring and collection priority rules so Flora can adapt evidence collection by enterprise type and commercial priority.
+- FP-006 — Source Quality Standard: defines source tiering, source quality and yield scoring, lifecycle actions and feedback loops for source selection and replacement.
 
-These papers define how Flora should acquire, prioritise and govern evidence before downstream reasoning begins.
+Together FP-004, FP-005 and FP-006 define the Evidence Collection Architecture: how Flora should plan collection, recognise useful evidence, select and curate sources, score coverage, damp weak evidence and learn from user feedback before downstream reasoning begins.
 
 ## Developer instruction note
 

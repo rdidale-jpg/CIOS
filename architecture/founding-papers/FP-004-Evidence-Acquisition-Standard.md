@@ -40,7 +40,29 @@ The collection philosophy is:
 
 Landing pages, navigation, menus and boilerplate are context, not evidence. They may help Flora understand an organisation's public surface, but they should not support strategic signals without more specific corroboration.
 
-## 4. Evidence hierarchy
+## 4. Evidence Acquisition Plan
+
+For every monitored enterprise, Flora should maintain an Evidence Acquisition Plan. The plan is the operational bridge between strategic evidence demand and live collection behaviour.
+
+An Evidence Acquisition Plan should contain:
+
+- enterprise type;
+- sector;
+- priority level;
+- active transformation theses;
+- required evidence categories;
+- current coverage;
+- missing evidence;
+- priority source families;
+- low-yield sources to replace;
+- next collection objectives;
+- collection confidence.
+
+Live collection should increasingly be driven by this plan rather than by static source lists. Static governed source lists remain useful as safe starting points, but they should not determine the whole collection path. The plan should tell Flora what evidence is needed next, which sources are most likely to produce it, which noisy sources should be replaced or split, and when the evidence base is too weak for confident reasoning.
+
+The plan should evolve after each collection run. New evidence may create additional evidence demand, close gaps, expose contradictions, reveal better child sources or reduce confidence if expected evidence is missing.
+
+## 5. Evidence hierarchy
 
 ### Primary Evidence
 
@@ -66,7 +88,78 @@ Rejected evidence is material that should not be used to support strategic signa
 
 Examples include cookie text, footers, accessibility statements, generic publication scheme text, contact pages and repeated menu content.
 
-## 5. Evidence specificity standard
+### Evidence classification examples
+
+- Bad evidence: “Jobs and contracts Procurement at DWP Working for DWP Publication scheme”. Classification: reject / diagnostics only.
+- Context evidence: an organisation landing page that confirms operating areas but contains no programme, owner, investment, contract or milestone. Classification: context only.
+- Secondary evidence: a supplier announcement naming a client, platform and delivery scope, but not independently confirming contract value or benefits. Classification: secondary evidence requiring corroboration.
+- Primary evidence: “£15 billion investment to transform Armed Forces and keep the UK safe”. Classification: primary evidence, investment pressure, high specificity.
+- High-value evidence cluster: a strategy names a modernisation programme, a contract award names the supplier, an annual report allocates funding, and a named executive describes the delivery milestone. Classification: high-confidence evidence cluster.
+
+## 6. Evidence accept, downgrade and reject rules
+
+Flora should classify evidence before it is allowed to influence strategic signals. The rules below are practical guidance for live collection and curation.
+
+### Accept evidence
+
+Accept evidence when it includes at least one specific, commercially useful feature such as:
+
+- named programme;
+- quantified investment;
+- named supplier;
+- named executive or accountable role;
+- contract, tender or award;
+- strategy commitment;
+- regulatory finding;
+- delivery milestone;
+- operational incident;
+- specific technology platform;
+- specific transformation initiative.
+
+### Downgrade evidence
+
+Downgrade evidence when it is useful but limited, including when it is:
+
+- relevant but generic;
+- dated but still useful;
+- from a biased supplier source;
+- single-source only;
+- a partial snippet;
+- marketing-led but specific.
+
+Downgraded evidence may support context, weak signals or search direction, but should normally require corroboration before supporting strong claims.
+
+### Reject evidence
+
+Reject evidence when it is:
+
+- navigation;
+- menu text;
+- cookie text;
+- footer or header;
+- careers landing page;
+- generic service catalogue;
+- generic GOV.UK publication scheme text;
+- accessibility, modern slavery or complaints boilerplate;
+- duplicated without new information.
+
+Rejected evidence may remain useful for diagnostics, parser improvement or source replacement, but it must not support strategic reasoning.
+
+## 7. Evidence scoring bands
+
+Suggested evidence quality bands are:
+
+| Score | Interpretation | Typical use |
+| --- | --- | --- |
+| 90–100 | High-specificity primary evidence | Can support strong signals when current and relevant |
+| 75–89 | Strong specific evidence, may need corroboration | Can support signals with caveats or corroboration |
+| 60–74 | Useful but limited evidence | Supports context, weak signals or collection direction |
+| 40–59 | Context only | Helps source discovery or organisation understanding |
+| 0–39 | Reject / diagnostics only | Should not support strategic reasoning |
+
+These bands are architectural guidance, not final runtime constants. Future implementation may adjust thresholds, weighting and calibration, but should preserve the principle that specificity, authority, freshness and corroboration increase reasoning weight.
+
+## 8. Evidence specificity standard
 
 Evidence should identify at least one commercially useful object: an organisation, programme, leader, supplier, budget, contract, regulation, operating pressure, technology domain, customer group, timeline or measurable outcome.
 
@@ -82,7 +175,7 @@ A useful evidence object should answer at least one of the following:
 
 Generic claims such as "digital transformation is important" or "the organisation uses technology" should be treated as low-specificity unless tied to a concrete programme, decision, obligation or investment.
 
-## 6. Evidence freshness and ageing
+## 9. Evidence freshness and ageing
 
 Evidence has a useful life. Flora should consider how quickly evidence ages based on its type and commercial use.
 
@@ -93,13 +186,13 @@ Evidence has a useful life. Flora should consider how quickly evidence ages base
 
 Freshness should be assessed relative to the commercial question, not as a simple date filter.
 
-## 7. Evidence novelty
+## 10. Evidence novelty
 
 Flora should value evidence that adds new information to an existing picture. Novel evidence may introduce a new programme, confirm a previously weak signal, reveal a contradiction, identify a named supplier, expose a budget or show timing acceleration.
 
 Repeated publication of the same claim across multiple low-value pages should not be treated as new evidence. Duplication increases confidence only when it comes from independent, meaningful sources.
 
-## 8. Evidence corroboration
+## 11. Evidence corroboration
 
 Strong commercial judgement usually requires corroboration. Flora should seek independent support across source types where possible, especially before generating strong signals or recommendations.
 
@@ -112,7 +205,7 @@ Corroboration may occur when:
 
 Contradictory evidence should be preserved and surfaced rather than smoothed away.
 
-## 9. Evidence duplication and retirement
+## 12. Evidence duplication and retirement
 
 Duplicate evidence should be consolidated. Flora should avoid treating repeated snippets, mirrored pages or boilerplate as independent support.
 
@@ -126,7 +219,7 @@ Evidence should be retired or downgraded when:
 
 Retirement does not mean deletion from history. It means the evidence should no longer carry current reasoning weight.
 
-## 10. Source yield measurement
+## 13. Source yield measurement
 
 Flora should measure source yield: the usefulness of a source relative to the effort and noise involved in collecting from it.
 
@@ -143,7 +236,7 @@ Yield should consider:
 
 A source can be authoritative but low-yield, and a noisy source can occasionally produce high-value evidence. Yield should inform collection strategy rather than permanently exclude a source family.
 
-## 11. Evidence coverage thresholds
+## 14. Evidence coverage thresholds
 
 Flora should not treat collection as complete merely because some evidence exists. Each organisation should have coverage thresholds aligned to enterprise type, account priority and active hypotheses.
 
@@ -156,13 +249,13 @@ Minimum coverage should normally include:
 
 Priority accounts should require deeper coverage and stronger corroboration before high-confidence recommendations are produced.
 
-## 12. Evidence gaps as intelligence
+## 15. Evidence gaps as intelligence
 
 Absence of evidence can be meaningful when a source would normally be expected. Missing procurement data, absent strategy updates, unexplained leadership vacancies or lack of supplier announcements may reveal opacity, timing risk, weak market visibility or a need for human follow-up.
 
 Flora should record evidence gaps explicitly. A gap is not proof of absence, but it is intelligence about uncertainty.
 
-## 13. Evidence demand model
+## 16. Evidence demand model
 
 Evidence demand is the set of evidence Flora needs to improve a judgement. Demand should be generated by commercial questions and transformation theses.
 
@@ -174,7 +267,7 @@ For example:
 
 The stronger the thesis, the clearer the evidence demand should become.
 
-## 14. Collection feedback loop
+## 17. Collection feedback loop
 
 Collection should learn from downstream reasoning. When Flora produces weak signals, unsupported claims, contradictory findings or user feedback, those outcomes should inform future collection plans.
 
@@ -188,13 +281,42 @@ The feedback loop should answer:
 
 Collection is therefore adaptive, not a one-time crawl.
 
-## 15. Collection Agent concept
+## 18. Collection Agent concept
 
 A future Collection Agent should plan, execute and evaluate evidence acquisition for an organisation. Its role would be to translate evidence demand into source selection, collection priorities, gap analysis and source replacement recommendations.
 
 The Collection Agent should not simply gather pages. It should understand enterprise type, active theses, evidence hierarchy, expected source families and quality thresholds. It should return governed evidence and explicit gaps for downstream reasoning.
 
-## 16. Governance rules
+## 19. Collection handbrakes
+
+Current and likely Phase 1 collection handbrakes include:
+
+- static governed source lists;
+- landing-page dependence;
+- weak child-page discovery;
+- no active evidence demand per thesis;
+- limited source replacement learning;
+- weak negative-evidence detection;
+- limited contradiction seeking;
+- limited historical trend capture;
+- shallow supplier/incumbent mapping.
+
+Future collection sprints should remove these handbrakes incrementally. Flora should move from “visit known pages” to “pursue missing evidence”, promote useful child pages into governed sources, preserve negative and contradictory evidence, learn which sources repeatedly fail, and build richer historical and supplier context where it improves commercial judgement.
+
+## 20. Human feedback loop
+
+Future UI should allow users to mark evidence and sources as:
+
+- useful evidence;
+- weak evidence;
+- wrong classification;
+- noisy source;
+- important source;
+- missing source.
+
+This feedback should influence future source yield and evidence quality. A source repeatedly marked noisy should be downgraded, split or replaced. Evidence repeatedly marked useful should improve source yield and help Flora learn which evidence categories matter for similar enterprises and theses. Wrong-classification feedback should feed curation rules and scoring calibration.
+
+## 21. Governance rules
 
 Flora's evidence acquisition should follow these governance rules:
 
@@ -208,7 +330,7 @@ Flora's evidence acquisition should follow these governance rules:
 - expose collection quality before presenting downstream confidence;
 - avoid organisation-specific collection logic where enterprise-generic patterns can apply.
 
-## 17. Open questions
+## 22. Open questions
 
 - What minimum coverage threshold should block high-confidence recommendations?
 - How should Flora weight old but authoritative evidence against fresh but weaker evidence?

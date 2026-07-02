@@ -89,136 +89,365 @@ Evidence of cyber risk, operational resilience, safety, continuity, fraud, data 
 
 ## 5. Enterprise type blueprints
 
+Each enterprise type blueprint should describe minimum viable evidence, high-value evidence, weak or noisy evidence, likely hidden gaps and next-best source options. These blueprints should guide deliberate collection without hard-coding organisation-specific logic.
+
 ### Government department
 
-Expected evidence blueprint:
+Minimum viable evidence:
 
-- Annual report and accounts;
-- Outcome Delivery Plan;
-- spending over threshold data;
-- Contracts Finder / Find a Tender;
-- NAO reports;
-- PAC / select committee evidence;
-- digital strategy;
-- GOV.UK news and publications;
-- senior leadership roles;
-- procurement pipeline;
-- supplier announcements.
+- annual report and accounts;
+- spending data;
+- procurement pipeline or contracts;
+- strategy, outcome plan or departmental plan;
+- leadership structure.
+
+High-value evidence:
+
+- NAO / PAC findings;
+- major programme reports;
+- digital, data or technology strategy;
+- named senior responsible owners;
+- large contract awards or tender notices;
+- select committee evidence tied to delivery pressure.
+
+Weak or commonly noisy evidence:
+
+- GOV.UK organisation landing page;
+- publication scheme text;
+- jobs and contracts footer text;
+- generic policy collection pages;
+- accessibility, complaints or modern slavery boilerplate.
+
+Likely hidden evidence gaps:
+
+- supplier incumbency behind framework lots;
+- programme delivery milestones;
+- internal ownership below permanent secretary level;
+- spend linked to a named transformation thesis;
+- negative evidence from audit follow-up or delayed programmes.
+
+Example next-best sources:
+
+- NAO report pages;
+- PAC hearings and transcripts;
+- Contracts Finder and Find a Tender;
+- departmental annual report annexes;
+- spend over threshold files;
+- supplier case studies only where contract or programme detail is specific.
 
 Commercial use: identify policy priorities, delivery pressure, budget constraints, procurement timing, transformation ownership and supplier movement.
 
 ### Regulator
 
-Expected evidence blueprint:
+Minimum viable evidence:
 
 - annual report and corporate plan;
 - strategy and enforcement priorities;
 - consultations and decision documents;
-- market studies;
+- leadership structure;
+- procurement or technology operating evidence.
+
+High-value evidence:
+
+- enforcement action or market study findings;
 - speeches by named executives;
+- supervision, data or digital strategy;
 - regulated entity performance publications;
-- procurement notices;
-- technology, data or supervision strategy.
+- budget or capability-build evidence.
+
+Weak or commonly noisy evidence:
+
+- consultation index pages;
+- generic “how we regulate” pages;
+- careers landing pages;
+- standing guidance without current enforcement or policy movement.
+
+Likely hidden evidence gaps:
+
+- internal analytics and supervisory technology demand;
+- procurement for data platforms;
+- enforcement capacity constraints;
+- cross-regulator collaboration.
+
+Example next-best sources:
+
+- consultation outcome pages;
+- board papers where public;
+- speeches and event transcripts;
+- procurement portals;
+- parliamentary committee evidence.
 
 Commercial use: identify regulatory pressure, market change, digital supervision needs, data capability requirements and sectors under scrutiny.
 
 ### Utility
 
-Expected evidence blueprint:
+Minimum viable evidence:
 
 - annual report;
-- regulatory business plans;
-- price control submissions and determinations;
-- operational performance reports;
-- resilience and security publications;
-- infrastructure investment plans;
-- customer service metrics;
-- procurement and supplier announcements;
-- environmental and sustainability plans.
+- regulatory business plan;
+- price control determination or submission;
+- operational performance report;
+- resilience, safety or security evidence.
+
+High-value evidence:
+
+- capital programme plans;
+- regulator performance penalties or improvement notices;
+- named infrastructure programmes;
+- customer service metrics tied to obligations;
+- supplier awards for field, asset, data or customer platforms.
+
+Weak or commonly noisy evidence:
+
+- generic customer help pages;
+- service area menus;
+- sustainability landing pages without targets or delivery plans;
+- careers overview pages.
+
+Likely hidden evidence gaps:
+
+- asset management platform replacement;
+- field-force transformation;
+- cyber resilience investments;
+- incumbent delivery ecosystems;
+- delayed benefits realisation.
+
+Example next-best sources:
+
+- regulator determinations;
+- performance commitments and outcome delivery reports;
+- capital delivery updates;
+- supplier award announcements;
+- local planning or infrastructure programme material.
 
 Commercial use: identify infrastructure investment, resilience obligations, customer pressure, capital programme risk and technology-enabled operating change.
 
 ### Telecommunications provider
 
-Expected evidence blueprint:
+Minimum viable evidence:
 
-- Annual report;
+- annual report;
 - investor results;
-- Capital Markets Day;
+- regulator publications;
+- network investment evidence;
+- technology partnerships.
+
+High-value evidence:
+
+- Capital Markets Day material;
+- Ofcom resilience/security publications;
+- RNS announcements;
+- major network programme updates;
+- supplier ecosystem announcements;
+- named executive statements on capex, automation, AI, cloud or security.
+
+Weak or commonly noisy evidence:
+
+- generic newsroom index;
+- consumer product pages;
+- careers overview;
+- service menu pages;
+- broadband availability or sales pages.
+
+Likely hidden evidence gaps:
+
+- supplier incumbency by network domain;
+- security remediation activity;
+- automation programme delivery evidence;
+- enterprise technology estate modernisation;
+- operational resilience incidents not visible in marketing.
+
+Example next-best sources:
+
+- annual report strategic and risk sections;
+- investor presentations and results transcripts;
 - Ofcom publications;
-- network resilience/security publications;
-- RNS / corporate announcements;
-- Openreach / infrastructure updates where applicable;
-- technology partnerships;
-- major supplier announcements;
-- executive appointments;
-- job adverts for AI, cloud, cyber, network automation.
+- RNS feeds;
+- vendor ecosystem announcements;
+- specialist network programme updates.
 
 Commercial use: identify network investment, automation priorities, cyber and resilience pressure, regulatory obligations, supplier shifts and transformation timing.
 
 ### Energy provider
 
-Expected evidence blueprint:
+Minimum viable evidence:
 
 - annual report and investor results;
 - transition strategy;
 - regulatory publications;
-- infrastructure and grid investment plans;
-- customer vulnerability and service reports;
-- resilience, safety and security publications;
-- procurement and supplier announcements;
-- sustainability and net zero plans;
-- technology partnerships.
+- infrastructure or grid investment plan;
+- customer service or vulnerability evidence.
+
+High-value evidence:
+
+- named decarbonisation programmes;
+- Ofgem decisions, penalties or resilience findings;
+- smart grid, customer platform or field operations awards;
+- safety and operational incident evidence;
+- executive commitments on net zero delivery.
+
+Weak or commonly noisy evidence:
+
+- tariff and consumer product pages;
+- generic net zero landing pages;
+- broad sustainability claims without investment detail;
+- careers overview pages.
+
+Likely hidden evidence gaps:
+
+- technology architecture behind transition programmes;
+- contractor and supplier ecosystem;
+- grid constraint remediation;
+- customer affordability operating pressure;
+- cyber and operational technology security.
+
+Example next-best sources:
+
+- Ofgem publications;
+- investor presentations;
+- grid and infrastructure programme pages;
+- contract award notices;
+- supplier and technology partner announcements.
 
 Commercial use: identify decarbonisation investment, grid pressure, customer service obligations, resilience risk and digital operations change.
 
 ### Media organisation
 
-Expected evidence blueprint:
+Minimum viable evidence:
 
 - annual report or public service remit documents;
-- audience strategy;
-- technology and distribution strategy;
-- advertising or subscription performance;
-- content operations updates;
-- regulatory or public accountability reports;
-- executive appointments;
-- supplier and platform partnerships;
-- AI, data and rights-management publications.
+- audience or market strategy;
+- technology and distribution evidence;
+- executive leadership evidence;
+- revenue, advertising or subscription performance.
+
+High-value evidence:
+
+- platform migration or distribution strategy;
+- AI, data, rights-management or content workflow programmes;
+- regulator or public accountability findings;
+- major supplier/platform partnerships;
+- named executive statements on audience or operating model change.
+
+Weak or commonly noisy evidence:
+
+- programme or content landing pages;
+- generic newsroom indexes;
+- consumer subscription pages;
+- broad brand marketing pages.
+
+Likely hidden evidence gaps:
+
+- content supply-chain transformation;
+- data and identity platform investment;
+- AI governance and rights-management controls;
+- operational efficiency programmes;
+- supplier dependency on cloud or platform providers.
+
+Example next-best sources:
+
+- annual report strategy/risk sections;
+- regulator publications;
+- platform partnership announcements;
+- executive speeches;
+- technology job adverts for corroboration.
 
 Commercial use: identify platform transition, content economics, audience change, AI disruption, data capability and operational efficiency pressure.
 
 ### Sports organisation
 
-Expected evidence blueprint:
+Minimum viable evidence:
 
 - annual report or governance report;
 - commercial strategy;
-- broadcast, sponsorship and fan engagement publications;
+- broadcast, sponsorship or fan engagement evidence;
 - venue and event operations evidence;
-- safeguarding or integrity reports;
-- digital product announcements;
-- supplier partnerships;
-- executive appointments;
-- regulatory or league governance materials.
+- executive leadership evidence.
+
+High-value evidence:
+
+- digital product or fan data platform announcements;
+- venue infrastructure programmes;
+- integrity, safeguarding or regulatory findings;
+- major sponsorship, broadcast or ticketing technology deals;
+- named supplier partnerships.
+
+Weak or commonly noisy evidence:
+
+- fixture pages;
+- merchandise pages;
+- fan content indexes;
+- generic venue information pages;
+- careers overview pages.
+
+Likely hidden evidence gaps:
+
+- fan identity and CRM architecture;
+- event operations suppliers;
+- safeguarding workflow systems;
+- data commercialisation plans;
+- cyber and venue resilience.
+
+Example next-best sources:
+
+- league or federation governance materials;
+- venue planning documents;
+- supplier announcements;
+- sponsorship and broadcast deal releases;
+- annual or impact reports.
 
 Commercial use: identify fan experience investment, data and digital opportunities, venue operations, integrity risk and commercial growth priorities.
 
 ### Systems integrator / supplier
 
-Expected evidence blueprint:
+Minimum viable evidence:
 
 - annual report and investor results;
 - strategy and capability announcements;
 - major contract wins;
-- case studies;
-- partner ecosystem announcements;
-- executive appointments;
-- hiring patterns;
-- sector-specific offerings;
-- security and delivery credentials.
+- partner ecosystem evidence;
+- sector-specific offerings.
+
+High-value evidence:
+
+- named client awards with value, scope or timeline;
+- delivery case studies tied to measurable outcomes;
+- cloud, AI, cyber or platform partnership status;
+- hiring patterns in priority domains;
+- executive statements on target sectors.
+
+Weak or commonly noisy evidence:
+
+- generic service catalogue pages;
+- undated capability pages;
+- broad thought leadership without client, programme or platform detail;
+- duplicate press release indexes.
+
+Likely hidden evidence gaps:
+
+- actual delivery capability versus marketed capability;
+- incumbent relationships not publicly disclosed;
+- partner certification depth;
+- delivery risk or failed programme history;
+- sector concentration and whitespace.
+
+Example next-best sources:
+
+- procurement award databases;
+- client annual reports naming suppliers;
+- partner marketplaces;
+- investor presentations;
+- specialist case studies with named outcomes.
 
 Commercial use: identify competitive positioning, partnership opportunities, delivery capability, target sectors and supplier momentum.
+
+### Cross-blueprint evidence examples
+
+- Bad evidence: “Jobs and contracts Procurement at DWP Working for DWP Publication scheme”. Classification: reject / diagnostics only.
+- Context evidence: a regulator homepage stating its remit. Classification: context unless tied to current enforcement, strategy or investment.
+- Secondary evidence: a supplier case study naming a platform implementation but omitting value and contract source. Classification: useful but biased; corroborate.
+- Primary evidence: “£15 billion investment to transform Armed Forces and keep the UK safe”. Classification: primary evidence, investment pressure, high specificity.
+- High-value evidence cluster: regulator finding plus investment announcement plus contract award plus named accountable executive. Classification: strong collection coverage for the relevant thesis.
 
 ## 6. Sector-specific source families
 
@@ -279,7 +508,56 @@ Collection should adapt as evidence is found. If procurement evidence reveals a 
 
 Adaptive collection should be governed by the blueprint and active theses, not by arbitrary page discovery.
 
-## 12. Example coverage map
+## 12. Evidence Coverage Score
+
+The Evidence Coverage Score should summarise whether Flora has enough useful evidence to reason about an enterprise and its active transformation theses. It should consider:
+
+- category coverage;
+- source diversity;
+- primary evidence presence;
+- freshness;
+- corroboration;
+- relevance to active thesis;
+- missing critical categories.
+
+Suggested coverage states:
+
+| State | Meaning | Guidance |
+| --- | --- | --- |
+| Coverage sufficient | Required categories are covered by fresh, specific, diverse evidence | Proceed with normal downstream reasoning and continue monitoring |
+| Coverage partial | Some required categories are useful, but gaps or weak corroboration remain | Generate caveats and next collection objectives |
+| Coverage insufficient | Critical categories are missing or stale | Limit confidence and collect before strong recommendations |
+| Coverage misleading / noisy | Available material is dominated by generic, duplicated or biased evidence | Replace sources, split parent pages and avoid high-confidence claims |
+
+The score should not reward volume. Ten noisy pages are weaker than one authoritative source plus one independent corroborating source.
+
+## 13. Collection Priority Matrix
+
+Collection effort should be allocated by commercial priority and evidence strength:
+
+| Commercial priority | Evidence strength | Collection action |
+| --- | --- | --- |
+| High | Weak | Collect urgently |
+| High | Strong | Monitor and corroborate |
+| Low | Weak | Defer |
+| Low | Strong | Monitor |
+
+This matrix should guide which organisations Flora spends collection effort on. High-priority accounts with weak evidence should receive targeted evidence acquisition plans, while low-priority accounts with weak evidence should not consume disproportionate collection capacity unless a new thesis or user signal raises priority.
+
+## 14. Human feedback loop
+
+Future UI should allow users to mark:
+
+- useful evidence;
+- weak evidence;
+- wrong classification;
+- noisy source;
+- important source;
+- missing source.
+
+This feedback should change evidence coverage, source yield and future blueprint behaviour. For example, repeated “missing source” feedback for regulator board papers should make that source family a next-best source for similar regulators. Repeated “weak evidence” feedback for landing pages should lower their value in coverage scoring.
+
+## 15. Example coverage map
 
 Example for a telecommunications provider:
 
@@ -293,7 +571,7 @@ Example for a telecommunications provider:
 | Leadership | Executive appointments and speeches | Found named technology leader | Seek direct statements |
 | Risk / security | Security and resilience publications | Partial evidence | Corroborate with regulatory material |
 
-## 13. Open questions
+## 16. Open questions
 
 - How many enterprise blueprints are needed for Phase 1 without overfitting?
 - Which coverage categories should be mandatory by enterprise type?
