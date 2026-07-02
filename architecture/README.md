@@ -10,6 +10,80 @@ The `architecture/` directory is the source of truth for CIOS design thinking. I
 
 CIOS implementation work should be guided by stable institutional memory: founding papers, design documents, research notes, Architecture Decision Records (ADRs) and capability roadmaps.
 
+
+## CIOS Intelligence Reference Model — CIRM
+
+CIRM defines how CIOS converts observable enterprise reality into strategic commercial judgement. It makes the founding papers read as one intelligence architecture: first observing what is happening, then reasoning about what it means and what action is justified.
+
+### Volume I — Observation
+
+**Purpose:** what is happening?
+
+Volume I includes:
+
+- FP-003 — Flora Intelligence Architecture
+- FP-004 — Evidence Acquisition Standard
+- FP-005 — Enterprise Intelligence Collection Framework
+- FP-006 — Source Quality Standard
+
+### Volume II — Reasoning
+
+**Purpose:** what does it mean?
+
+Volume II includes:
+
+- FP-007 — Strategic Signal Standard
+- FP-008 — Commercial Conviction Model
+- FP-009 — Hypothesis Validation Standard
+
+Future founding papers should explicitly state where they sit within CIRM.
+
+### Canonical intelligence pipeline
+
+```text
+Observable Enterprise Reality
+→ Governed Source Collection
+→ Raw Evidence
+→ Evidence Quality Assessment
+→ Strategic Signals
+→ Commercial Insights
+→ Transformation Themes
+→ Transformation Theses
+→ Hypothesis Validation
+→ Commercial Conviction
+→ Executive Recommendations
+→ Commercial Outcomes
+→ Continuous Learning
+```
+
+### Shared CIRM terminology
+
+- **Observable Enterprise Reality:** The external facts, events, statements, decisions and conditions emitted by an organisation or its environment.
+- **Governed Source Collection:** The controlled acquisition of evidence from approved, explainable and source-specific locations.
+- **Raw Evidence:** A factual, attributable record of something observed.
+- **Evidence Quality:** The assessment of evidence authority, specificity, freshness, relevance, independence and usefulness.
+- **Strategic Signal:** A commercially meaningful interpretation of evidence that indicates potential enterprise change, pressure or opportunity.
+- **Commercial Insight:** A reasoned pattern derived from multiple signals.
+- **Transformation Theme:** A recurring category of enterprise change such as AI transformation, cyber resilience, cloud modernisation, legacy replacement, operating-model change or cost transformation.
+- **Transformation Thesis:** A coherent, evidence-backed judgement about what may be happening in an enterprise and why it matters commercially.
+- **Hypothesis:** A testable proposition used to validate or challenge a transformation interpretation.
+- **Commercial Conviction:** The structured judgement that sufficient evidence and reasoning exist to justify a level of commercial action.
+- **Executive Recommendation:** A recommended next learning or engagement action, grounded in the reasoning chain.
+- **Commercial Outcome:** The result of action, feedback or market development that can improve future judgement.
+
+### Shared transformation concepts
+
+- **Transformation Pressure:** The internal and external forces that make change more likely or necessary. Internal pressure examples include legacy technology, operating cost, service quality, cyber exposure, workforce constraints, fragmented data, delivery failure and technical debt. External pressure examples include regulation, political direction, customer expectations, market disruption, competitive moves, supplier change, economic pressure and technology shifts.
+- **Transformation Inevitability:** The degree to which an enterprise appears structurally compelled to transform, regardless of whether procurement, budget or sponsor evidence is visible. Transformation inevitability is not the same as commercial opportunity: an enterprise may need to transform but still be inaccessible, already committed to another provider, internally constrained or commercially unattractive.
+
+### Standard lifecycle language
+
+- **Strategic Signal lifecycle:** New, Emerging, Strengthening, Stable, Weakening, Dormant, Retired.
+- **Hypothesis lifecycle:** Created, Emerging, Strengthening, Validated, Weakening, Rejected, Retired.
+- **Conviction evolution:** Very Low, Low, Emerging, Medium, Strong, Very Strong.
+- **Evidence lifecycle:** Discovered, Collected, Accepted, Downgraded, Context Only, Rejected, Retired.
+- **Source lifecycle:** Discovered, Classified, Monitored, Downgraded, Replaced, Retired, Diagnostics Only.
+
 ## Repository sections
 
 - `founding-papers/` contains durable principles and thesis-level papers that should remain stable over time.

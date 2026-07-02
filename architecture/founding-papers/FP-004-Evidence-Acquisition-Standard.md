@@ -5,6 +5,44 @@
 **Owner:** Rob / CIOS
 **Last updated:** 2026-07-02
 
+## Relationship to the CIOS Intelligence Reference Model
+
+The CIOS Intelligence Reference Model (CIRM) defines how CIOS converts observable enterprise reality into strategic commercial judgement. Its canonical pipeline is:
+
+```text
+Observable Enterprise Reality
+→ Governed Source Collection
+→ Raw Evidence
+→ Evidence Quality Assessment
+→ Strategic Signals
+→ Commercial Insights
+→ Transformation Themes
+→ Transformation Theses
+→ Hypothesis Validation
+→ Commercial Conviction
+→ Executive Recommendations
+→ Commercial Outcomes
+→ Continuous Learning
+```
+
+FP-004 governs Governed Source Collection and Raw Evidence acquisition before Evidence Quality Assessment, Strategic Signals and reasoning begin.
+
+## Inspectable Reasoning Lineage
+
+No recommendation may exist unless its reasoning chain can be inspected:
+
+```text
+Executive Recommendation
+→ Commercial Conviction
+→ Hypothesis / Transformation Thesis
+→ Commercial Insight
+→ Strategic Signal
+→ Raw Evidence
+→ Source
+```
+
+If any link is missing, the recommendation should be downgraded to a learning action or evidence demand.
+
 ## 1. Purpose
 
 This paper defines the standard for how Flora should acquire evidence before downstream reasoning begins. Collection is not a technical scrape step. It is the first stage of intelligence formation, where Flora decides what reality is worth observing, why it matters, and what further evidence is needed to improve commercial judgement.
@@ -97,6 +135,11 @@ Examples include cookie text, footers, accessibility statements, generic publica
 - High-value evidence cluster: a strategy names a modernisation programme, a contract award names the supplier, an annual report allocates funding, and a named executive describes the delivery milestone. Classification: high-confidence evidence cluster.
 
 ## 6. Evidence accept, downgrade and reject rules
+
+### Evidence lifecycle
+
+Evidence should use the standard CIRM lifecycle states: Discovered, Collected, Accepted, Downgraded, Context Only, Rejected and Retired. These states keep raw evidence distinct from Strategic Signals and prevent weak material from silently entering reasoning.
+
 
 Flora should classify evidence before it is allowed to influence strategic signals. The rules below are practical guidance for live collection and curation.
 
@@ -337,3 +380,7 @@ Flora's evidence acquisition should follow these governance rules:
 - How should evidence acquisition plans be represented in product workflows?
 - What source yield metrics should be visible to users?
 - How should human feedback alter future collection priorities?
+
+## Relationship to CIRM
+
+This paper governs the governed source collection and raw evidence acquisition stages of CIRM. It defines how Flora decides what evidence to seek before evidence quality, signal formation and reasoning begin, and should be read with [FP-005](FP-005-Enterprise-Intelligence-Collection-Framework.md) and [FP-006](FP-006-Source-Quality-Standard.md).

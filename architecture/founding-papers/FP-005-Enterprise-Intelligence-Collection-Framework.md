@@ -5,6 +5,44 @@
 **Owner:** Rob / CIOS
 **Last updated:** 2026-07-02
 
+## Relationship to the CIOS Intelligence Reference Model
+
+The CIOS Intelligence Reference Model (CIRM) defines how CIOS converts observable enterprise reality into strategic commercial judgement. Its canonical pipeline is:
+
+```text
+Observable Enterprise Reality
+→ Governed Source Collection
+→ Raw Evidence
+→ Evidence Quality Assessment
+→ Strategic Signals
+→ Commercial Insights
+→ Transformation Themes
+→ Transformation Theses
+→ Hypothesis Validation
+→ Commercial Conviction
+→ Executive Recommendations
+→ Commercial Outcomes
+→ Continuous Learning
+```
+
+FP-005 governs the collection framework that determines which source families and evidence categories Flora should pursue for different enterprise types.
+
+## Inspectable Reasoning Lineage
+
+No recommendation may exist unless its reasoning chain can be inspected:
+
+```text
+Executive Recommendation
+→ Commercial Conviction
+→ Hypothesis / Transformation Thesis
+→ Commercial Insight
+→ Strategic Signal
+→ Raw Evidence
+→ Source
+```
+
+If any link is missing, the recommendation should be downgraded to a learning action or evidence demand.
+
 ## 1. Purpose
 
 This paper defines an enterprise-generic collection framework for Flora. It describes reusable evidence blueprints that help Flora decide what to collect for different types of organisations and sectors without hard-coding organisation-specific collection logic.
@@ -578,3 +616,7 @@ Example for a telecommunications provider:
 - How should Flora represent hybrid organisations that span multiple enterprise types?
 - What gap score should block a high-confidence recommendation?
 - How should sector blueprints evolve from user feedback and won/lost outcomes?
+
+## Relationship to CIRM
+
+This paper governs the enterprise collection planning layer of CIRM. It defines how collection varies by enterprise type, sector and priority so that [FP-004](FP-004-Evidence-Acquisition-Standard.md) acquisition and [FP-006](FP-006-Source-Quality-Standard.md) source quality controls produce sufficient coverage for downstream reasoning.

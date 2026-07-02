@@ -5,6 +5,66 @@
 **Owner:** Rob / CIOS
 **Last updated:** 2026-07-02
 
+## Relationship to the CIOS Intelligence Reference Model
+
+The CIOS Intelligence Reference Model (CIRM) defines how CIOS converts observable enterprise reality into strategic commercial judgement. Its canonical pipeline is:
+
+```text
+Observable Enterprise Reality
+→ Governed Source Collection
+→ Raw Evidence
+→ Evidence Quality Assessment
+→ Strategic Signals
+→ Commercial Insights
+→ Transformation Themes
+→ Transformation Theses
+→ Hypothesis Validation
+→ Commercial Conviction
+→ Executive Recommendations
+→ Commercial Outcomes
+→ Continuous Learning
+```
+
+FP-008 governs Commercial Conviction: the judgement that evidence, signals, hypotheses, unknowns and fit justify a level of commercial action.
+
+## Transformation Pressure and Transformation Inevitability
+
+**Transformation Pressure** is the internal and external forces that make change more likely or necessary. Internal pressure may include legacy technology, operating cost, service quality, cyber exposure, workforce constraints, fragmented data, delivery failure and technical debt. External pressure may include regulation, political direction, customer expectations, market disruption, competitive moves, supplier change, economic pressure and technology shifts.
+
+**Transformation Inevitability** is the degree to which an enterprise appears structurally compelled to transform, regardless of whether procurement, budget or sponsor evidence is visible. Transformation inevitability is not the same as commercial opportunity: an enterprise may need to transform but still be inaccessible, already committed to another provider, internally constrained or commercially unattractive.
+
+## Commercial Reasoning Loop
+
+```text
+Observe
+→ Interpret
+→ Challenge
+→ Hypothesise
+→ Test
+→ Convict
+→ Recommend
+→ Learn
+→ Observe
+```
+
+This loop describes Newton's desired behaviour. Flora should not only collect evidence and generate outputs; it should continually challenge, validate and improve its commercial judgement.
+
+## Inspectable Reasoning Lineage
+
+No recommendation may exist unless its reasoning chain can be inspected:
+
+```text
+Executive Recommendation
+→ Commercial Conviction
+→ Hypothesis / Transformation Thesis
+→ Commercial Insight
+→ Strategic Signal
+→ Raw Evidence
+→ Source
+```
+
+If any link is missing, the recommendation should be downgraded to a learning action or evidence demand.
+
 ## 1. Purpose
 
 This paper defines the Commercial Conviction Model for CIOS. Commercial conviction is the structured assessment of whether sufficient evidence exists to justify executive engagement.
@@ -14,11 +74,12 @@ Commercial conviction is not a probability model. It does not claim to calculate
 The model exists to keep Flora from confusing available information with actionable judgement.
 
 ```text
-Evidence
-→ Signals
+Raw Evidence
+→ Strategic Signals
 → Hypotheses
 → Commercial Conviction
-→ Executive Readiness
+→ Executive Recommendations
+→ Commercial Outcomes
 ```
 
 ## 2. Why Confidence Is Not Enough
@@ -99,9 +160,9 @@ Material missing information that could change the judgement, such as absence of
 
 Evidence that challenges the commercial interpretation, including deprioritisation, budget cuts, leadership exits, cancelled programmes, strategic reversal or incompatible procurement evidence.
 
-## 4. Conviction Levels
+## 4. Conviction Evolution
 
-Conviction levels are qualitative bands designed to support explainable judgement.
+Conviction evolution uses the standard CIRM states: Very Low, Low, Emerging, Medium, Strong and Very Strong. These qualitative bands are designed to support explainable judgement.
 
 ### Very Low
 
@@ -200,3 +261,7 @@ Human judgement is strongest when it is transparent about why it agrees with, st
 - How should Flora represent high attractiveness with low conviction?
 - How should future commercial outcomes recalibrate conviction components without overfitting to individual pursuits?
 - What should distinguish a Rob Score from ordinary analyst feedback?
+
+## Relationship to CIRM
+
+This paper governs the conviction stage of CIRM. It defines how Flora decides whether evidence quality, signal strength from [FP-007](FP-007-Strategic-Signal-Standard.md), hypotheses validated through [FP-009](FP-009-Hypothesis-Validation-Standard.md) and unresolved unknowns justify commercial action.

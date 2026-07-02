@@ -5,6 +5,66 @@
 **Owner:** Rob / CIOS
 **Last updated:** 2026-07-02
 
+## Relationship to the CIOS Intelligence Reference Model
+
+The CIOS Intelligence Reference Model (CIRM) defines how CIOS converts observable enterprise reality into strategic commercial judgement. Its canonical pipeline is:
+
+```text
+Observable Enterprise Reality
+→ Governed Source Collection
+→ Raw Evidence
+→ Evidence Quality Assessment
+→ Strategic Signals
+→ Commercial Insights
+→ Transformation Themes
+→ Transformation Theses
+→ Hypothesis Validation
+→ Commercial Conviction
+→ Executive Recommendations
+→ Commercial Outcomes
+→ Continuous Learning
+```
+
+FP-003 governs the whole pipeline and establishes the architectural distinction between observation, reasoning, recommendation and learning.
+
+## Transformation Pressure and Transformation Inevitability
+
+**Transformation Pressure** is the internal and external forces that make change more likely or necessary. Internal pressure may include legacy technology, operating cost, service quality, cyber exposure, workforce constraints, fragmented data, delivery failure and technical debt. External pressure may include regulation, political direction, customer expectations, market disruption, competitive moves, supplier change, economic pressure and technology shifts.
+
+**Transformation Inevitability** is the degree to which an enterprise appears structurally compelled to transform, regardless of whether procurement, budget or sponsor evidence is visible. Transformation inevitability is not the same as commercial opportunity: an enterprise may need to transform but still be inaccessible, already committed to another provider, internally constrained or commercially unattractive.
+
+## Commercial Reasoning Loop
+
+```text
+Observe
+→ Interpret
+→ Challenge
+→ Hypothesise
+→ Test
+→ Convict
+→ Recommend
+→ Learn
+→ Observe
+```
+
+This loop describes Newton's desired behaviour. Flora should not only collect evidence and generate outputs; it should continually challenge, validate and improve its commercial judgement.
+
+## Inspectable Reasoning Lineage
+
+No recommendation may exist unless its reasoning chain can be inspected:
+
+```text
+Executive Recommendation
+→ Commercial Conviction
+→ Hypothesis / Transformation Thesis
+→ Commercial Insight
+→ Strategic Signal
+→ Raw Evidence
+→ Source
+```
+
+If any link is missing, the recommendation should be downgraded to a learning action or evidence demand.
+
 ## Source note
 
 This Markdown version preserves the content and intent of `CIOS_Research_Paper_001_Flora_Intelligence_Architecture_Draft_v0_1.docx` as a clean architecture founding paper for the repository. The uploaded DOCX was not present in the working tree, so this document consolidates the Flora intelligence architecture already represented by the repository's Flora documentation and implementation direction, and extends it into a durable founding paper for the CIOS intelligence model.
@@ -74,13 +134,15 @@ Flora's cognitive architecture should convert observable enterprise reality into
 
 ```text
 Observable Enterprise Reality
-→ Governed Sources
+→ Governed Source Collection
 → Raw Evidence
-→ Evidence Normalisation
+→ Evidence Quality Assessment
 → Strategic Signals
 → Commercial Insights
+→ Transformation Themes
 → Transformation Theses
-→ Commercial Arguments
+→ Hypothesis Validation
+→ Commercial Conviction
 → Executive Recommendations
 → Commercial Outcomes
 → Continuous Learning
@@ -88,17 +150,19 @@ Observable Enterprise Reality
 
 Each stage has a distinct purpose:
 
-1. **Observable Enterprise Reality** — the external and internal facts, events, behaviours and artefacts an enterprise emits.
-2. **Governed Sources** — approved, source-aware channels from which Flora may collect or receive evidence.
-3. **Raw Evidence** — unprocessed articles, filings, transcripts, posts, announcements, records or seeded evidence items.
-4. **Evidence Normalisation** — extraction, classification, deduplication, dating, source labelling and provenance capture.
-5. **Strategic Signals** — structured observations that may indicate transformation pressure, capability change or commercial timing.
-6. **Commercial Insights** — interpreted meaning created by connecting signals with enterprise context, capability logic and market understanding.
-7. **Transformation Theses** — testable arguments about what transformation may be forming and why it may matter.
-8. **Commercial Arguments** — reasoned engagement narratives that connect the thesis to value, urgency, risk and possible executive ownership.
-9. **Executive Recommendations** — actions a human should take, including validation, learning, engagement or deprioritisation.
-10. **Commercial Outcomes** — observed results from action, including meetings, disqualification, learning, opportunity creation or thesis revision.
-11. **Continuous Learning** — feedback loops that improve future evidence interpretation, thesis quality and recommendation discipline.
+1. **Observable Enterprise Reality** — the external facts, events, statements, decisions and conditions emitted by an organisation or its environment.
+2. **Governed Source Collection** — the controlled acquisition of evidence from approved, explainable and source-specific locations.
+3. **Raw Evidence** — a factual, attributable record of something observed.
+4. **Evidence Quality Assessment** — assessment of evidence authority, specificity, freshness, relevance, independence and usefulness.
+5. **Strategic Signals** — commercially meaningful interpretations of evidence that indicate potential enterprise change, pressure or opportunity.
+6. **Commercial Insights** — reasoned patterns derived from multiple signals.
+7. **Transformation Themes** — recurring categories of enterprise change such as AI transformation, cyber resilience, cloud modernisation, legacy replacement, operating-model change or cost transformation.
+8. **Transformation Theses** — coherent, evidence-backed judgements about what may be happening in an enterprise and why it matters commercially.
+9. **Hypothesis Validation** — testing discipline used to validate or challenge a transformation interpretation.
+10. **Commercial Conviction** — structured judgement that sufficient evidence and reasoning exist to justify a level of commercial action.
+11. **Executive Recommendations** — recommended next learning or engagement actions, grounded in the reasoning chain.
+12. **Commercial Outcomes** — results of action, feedback or market development that can improve future judgement.
+13. **Continuous Learning** — feedback loops that improve future evidence interpretation, thesis quality and recommendation discipline.
 
 The chain is intentionally inspectable. Flora should never jump directly from evidence to recommendation without preserving the intermediate reasoning.
 
@@ -196,7 +260,7 @@ A transformation thesis should answer:
 A thesis is built by connecting multiple signals into a coherent commercial interpretation. The minimum reasoning path should be:
 
 ```text
-Evidence → Signal → Insight → Thesis → Commercial Argument → Recommendation
+Raw Evidence → Strategic Signal → Commercial Insight → Transformation Thesis → Hypothesis Validation → Commercial Conviction → Executive Recommendation
 ```
 
 A single strong signal may create an early thesis candidate, but a durable thesis should normally require corroboration across different evidence types, time periods or transformation dimensions.
@@ -229,16 +293,15 @@ Unknowns are named missing facts that would materially improve judgement. Exampl
 
 ### Lifecycle
 
-A transformation thesis should have a lifecycle:
+A transformation thesis should remain aligned to the standard CIRM hypothesis lifecycle because theses are validated through testable hypotheses:
 
-1. **Candidate** — early signals suggest a possible transformation.
-2. **Forming** — multiple signals connect into an interpretable pattern.
-3. **Supported** — corroborated evidence gives the thesis meaningful confidence.
-4. **Challenged** — contradictions or missing evidence materially weaken the thesis.
-5. **Actionable** — evidence and commercial context justify a specific recommendation.
-6. **Converted** — the thesis contributes to a commercial outcome or formal opportunity.
-7. **Dormant** — evidence is stale, timing has passed or no action is justified.
-8. **Retired** — evidence disproves the thesis or makes it no longer useful.
+1. **Created** — early Strategic Signals suggest a possible transformation interpretation.
+2. **Emerging** — multiple signals connect into an interpretable pattern, but coverage and corroboration are incomplete.
+3. **Strengthening** — corroborated evidence increases confidence in the thesis and its supporting hypotheses.
+4. **Validated** — evidence and commercial context are sufficient for the intended decision context, while assumptions remain visible.
+5. **Weakening** — contradictions, ageing evidence or missing expected evidence materially weaken the thesis.
+6. **Rejected** — evidence materially disproves the thesis or makes the explanation commercially unreliable.
+7. **Retired** — evidence is stale, timing has passed, the thesis has been superseded or it is no longer useful for current reasoning.
 
 ### Executive engagement
 
@@ -499,3 +562,7 @@ Future versions should expand:
 ## 23. Closing vision
 
 CIOS exists to convert observable enterprise reality into strategic commercial judgement. Every feature, model and agent should make that judgement more accurate, more explainable and more valuable.
+
+## Relationship to CIRM
+
+This paper governs the overall intelligence architecture of CIRM. It explains how Flora connects the whole model from observable enterprise reality through evidence, signals, insights, theses, conviction, recommendations, outcomes and learning, with FP-004 to FP-009 defining the specialised controls within that chain.
