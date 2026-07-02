@@ -30,6 +30,14 @@ CIOS implementation work should be guided by stable institutional memory: foundi
 
 Together FP-004, FP-005 and FP-006 define the Evidence Collection Architecture: how Flora should plan collection, recognise useful evidence, select and curate sources, score coverage, damp weak evidence and learn from user feedback before downstream reasoning begins.
 
+## Phase 2 — Commercial Reasoning
+
+These papers define how Flora converts evidence into strategic commercial judgement.
+
+- FP-007 — Strategic Signal Standard: defines the Strategic Signal as the bridge between observable evidence and commercial reasoning.
+- FP-008 — Commercial Conviction Model: defines how Flora assesses whether evidence is sufficient to justify executive engagement without confusing conviction with opportunity.
+- FP-009 — Hypothesis Validation Standard: defines how Flora creates, tests, strengthens, weakens, rejects and retires commercial hypotheses.
+
 ## Developer instruction note
 
 Before major implementation work, review:
