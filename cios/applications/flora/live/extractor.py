@@ -28,7 +28,69 @@ ALIGNMENT_TERMS = {
     "Investment Pressure": ("investment", "capex", "financial results", "cost pressure", "productivity", "savings", "margin", "funding", "capital allocation", "programme value"),
     "Cost Pressure": ("cost", "savings", "productivity", "efficiency", "margin", "financial", "funding"),
 }
-STRONG_CONTEXT_TERMS = ("programme", "deployment", "investment", "budget", "supplier", "platform", "cloud", "cyber", "legacy", "operating model", "executive", "regulator", "capex", "service resilience", "network operations", "financial results", "procurement")
+STRONG_CONTEXT_TERMS = ("programme", "deployment", "investment", "budget", "supplier", "platform", "cloud", "cyber", "legacy", "operating model", "executive", "regulator", "capex", "service resilience", "network operations", "financial results", "procurement", "modernisation", "network", "managed services", "consulting", "partnership ecosystem", "delivery capability")
+
+SPECIFICITY_PATTERNS = {
+    "named_programme": r"\b(?:programme|program|initiative|strategy|transformation|rollout|project|scheme)\b",
+    "named_executive_or_role": r"\b(?:chief|director|minister|secretary|ceo|cfo|cio|cto|coo|chair|executive|officer)\b",
+    "quantified_value": r"\b(?:£|\$|€)?\d+(?:[.,]\d+)?\s?(?:m|bn|million|billion|%|per cent|employees|customers|citizens|homes|sites|km|capex|savings|investment)?\b",
+    "date_specific": r"\b(?:20\d{2}|19\d{2}|jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\b",
+    "procurement_reference": r"\b(?:contract|procurement|tender|award|framework|pipeline|find a tender|contracts finder)\b",
+    "regulatory_report": r"\b(?:regulator|regulatory|report|finding|enforcement|consultation|nao|ofcom|ofwat|ofgem|fca)\b",
+    "incident_resilience": r"\b(?:incident|outage|resilience|availability|reliability|service performance)\b",
+    "financial_target": r"\b(?:revenue|profit|ebitda|capex|opex|savings|investment|target|financial results|annual report)\b",
+    "technology_supplier": r"\b(?:platform|supplier|partnership|partner|cloud|cyber|ai|data|technology|microsoft|aws|google|oracle|salesforce|servicenow|nhs app)\b",
+    "impact_metric": r"\b(?:customers|citizens|patients|users|claims|transactions|complaints|performance measure)\b",
+}
+
+CONTEXT_ONLY_SOURCE_TYPES = {"landing_page", "organisation_landing", "supplier_service_menu", "careers", "category_page", "strategy_page"}
+PRIMARY_SOURCE_TYPES = {"annual_report", "annual_report_landing", "investor_results", "investor_presentations", "regulator_publications", "govuk_policy", "procurement", "contract_award", "official_guidance"}
+SECONDARY_SOURCE_TYPES = {"official_newsroom", "company_newsroom", "news_item", "case_study", "technology_partner", "official_rss_or_feed", "investor_consensus"}
+
+def source_classification(source: SourceRecord) -> str:
+    st = source.source_type.casefold()
+    name = f"{source.source_name} {source.url}".casefold()
+    if "annual" in st or "annual" in name or "report" in st:
+        return "annual_report" if "annual" in name else "report"
+    if "regulator" in st or source.coverage_role == "regulator":
+        return "regulator_report"
+    if "procurement" in st or "contract" in st:
+        return "procurement"
+    if "news" in st or "newsroom" in st:
+        return "news_item"
+    if "case" in st:
+        return "case_study"
+    if "investor" in st or "results" in st:
+        return "report"
+    if source.coverage_role == "context" or "landing" in st or str(source.url).rstrip('/').count('/') <= 2:
+        return "landing_page"
+    return "focused_page"
+
+def specificity_markers(snippet: str) -> list[str]:
+    return [name for name, pattern in SPECIFICITY_PATTERNS.items() if re.search(pattern, snippet, re.IGNORECASE)]
+
+def evidence_type_for(source: SourceRecord, snippet: str, markers: list[str], boilerplate: bool) -> str:
+    st = source.source_type
+    if boilerplate or st in CONTEXT_ONLY_SOURCE_TYPES or source.coverage_role == "context":
+        return "Context Only"
+    if st in PRIMARY_SOURCE_TYPES or source.coverage_role in {"regulator", "primary"} and any(m in markers for m in ("regulatory_report", "procurement_reference", "financial_target")):
+        return "Primary Evidence"
+    if st in SECONDARY_SOURCE_TYPES or any(m in markers for m in ("technology_supplier", "date_specific", "named_programme")):
+        return "Secondary Evidence"
+    return "Context Only"
+
+def clean_observation(snippet: str) -> str:
+    text = re.sub(r"\s+", " ", html.unescape(snippet)).strip(" …")
+    parts = re.split(r"(?<=[.!?])\s+", text)
+    scored = []
+    for part in parts or [text]:
+        low = part.casefold()
+        if len(part) < 35 or part.count("…") > 1 or _is_boilerplate(part)[0]:
+            continue
+        score = len(specificity_markers(part)) * 3 + (2 if re.search(r"\d", part) else 0) + len(part) / 200
+        scored.append((score, part.strip(" …")))
+    chosen = max(scored, default=(0, text[:260].strip(" …")))[1]
+    return chosen[:420]
 
 
 def _term_count(snippet: str, terms: tuple[str, ...]) -> int:
@@ -64,28 +126,33 @@ def _alignment_reason(condition: str, snippet: str) -> tuple[bool, str]:
 def classify_relevance(snippet: str, condition: str, source: SourceRecord | None = None) -> dict[str, Any]:
     is_boilerplate, boilerplate_reason = _is_boilerplate(snippet)
     aligned, alignment_reason = _alignment_reason(condition, snippet)
+    markers = specificity_markers(snippet)
     reasons: list[str] = []
     if is_boilerplate:
         reasons.append(boilerplate_reason)
+    if not markers:
+        reasons.append("failed evidence specificity gate: no named programme, date, value, contract, regulator, incident, financial, technology or service metric")
     if not aligned:
         reasons.append(alignment_reason)
-    quant_count = len(re.findall(r"\b(?:£|\$|€)?\d+(?:[.,]\d+)?\s?(?:m|bn|million|billion|%|per cent|employees|customers|homes|sites|MW|GW|km)?\b", snippet, re.IGNORECASE))
+    source_kind = source_classification(source) if source else "focused_page"
+    evidence_type = evidence_type_for(source, snippet, markers, is_boilerplate) if source else "Secondary Evidence"
+    quant_count = len(re.findall(SPECIFICITY_PATTERNS["quantified_value"], snippet, re.IGNORECASE))
     strong_context = _term_count(snippet, STRONG_CONTEXT_TERMS)
-    if is_boilerplate and not strong_context:
-        level = "REJECT"
+    if is_boilerplate or not markers or evidence_type == "Context Only":
+        level = "REJECT" if is_boilerplate or not markers else "LOW"
     elif not aligned:
         level = "LOW"
-    elif strong_context >= 2 or quant_count or (source and source.coverage_role in {"regulator", "primary"} and strong_context):
-        level = "HIGH"
-    elif strong_context == 1 or aligned:
+    elif source_kind == "landing_page" and not (quant_count and strong_context >= 2):
         level = "MEDIUM"
+    elif quant_count or len(markers) >= 2 or evidence_type == "Primary Evidence":
+        level = "HIGH"
     else:
-        level = "LOW"
-    accepted = level == "HIGH" or (level == "MEDIUM" and aligned and not is_boilerplate)
+        level = "MEDIUM"
+    accepted = evidence_type != "Context Only" and (level == "HIGH" or (level == "MEDIUM" and aligned and (len(markers) >= 2 or strong_context >= 2)))
     if not reasons:
-        reasons.append("accepted as specific commercial evidence" if accepted else "insufficient commercial specificity")
-    safer = "Treat as page context only; do not use to support a transformation conclusion." if not accepted else "Use cautiously as commercial evidence."
-    return {"relevance_level": level, "accepted_for_claims": accepted, "rejection_reasons": reasons, "alignment_passed": aligned, "boilerplate_detected": is_boilerplate, "safer_interpretation": safer}
+        reasons.append("specificity gate passed" if accepted else "downgraded to context; insufficient claim support")
+    safer = "Treat as diagnostics/context only; do not use to support a transformation conclusion." if not accepted else "Use as governed commercial evidence with corroboration."
+    return {"relevance_level": level, "accepted_for_claims": accepted, "rejection_reasons": reasons, "alignment_passed": aligned, "boilerplate_detected": is_boilerplate, "specificity_markers": markers, "evidence_type": evidence_type, "source_classification": source_kind, "supports_strategic_signals": accepted and evidence_type in {"Primary Evidence", "Secondary Evidence"} and (level == "HIGH" or (level == "MEDIUM" and len(markers) >= 2)), "safer_interpretation": safer}
 
 CONDITION_MAP = {
     "regulation": ("Regulatory Pressure", "governed performance reporting"),
@@ -154,22 +221,35 @@ def recalibrated_confidence(base: int, gate: dict[str, Any], source: SourceRecor
     else:
         score -= 40
     if gate.get("boilerplate_detected"):
-        score -= 20
-    if source.coverage_role not in {"regulator", "competitor"}:
+        score -= 25
+    if gate.get("evidence_type") == "Primary Evidence":
+        score += 8
+    elif gate.get("evidence_type") == "Context Only":
+        score -= 30
+    if gate.get("source_classification") == "landing_page":
+        score -= 15
+    if source.coverage_role not in {"regulator", "competitor", "primary"}:
         score -= 4
     if re.search(r"\b(?:£|\$|€)?\d", snippet):
         score += 8
-    if _term_count(snippet, ("programme", "executive", "supplier", "budget", "platform", "regulator", "ofcom", "capex")):
+    if _term_count(snippet, ("programme", "executive", "supplier", "budget", "platform", "regulator", "ofcom", "capex", "partnership")):
         score += 6
-    return max(5, min(95, score))
+    if not gate.get("specificity_markers"):
+        score -= 20
+    cap = 72 if gate.get("source_classification") == "landing_page" else 95
+    if gate.get("evidence_type") == "Context Only":
+        cap = min(cap, 55)
+    return max(5, min(cap, score))
 
 
 def quality_scores(source: SourceRecord, snippet: str) -> dict[str, int]:
     reliability = 95 if source.evidence_tier.startswith("tier_1") else 75
-    specificity = 90 if source.coverage_role in {"primary", "regulator", "competitor"} else 65
-    extraction = 85 if len(snippet) > 80 else 70
-    overall = round((reliability + specificity + extraction) / 3)
-    return {"source_reliability": reliability, "source_specificity": specificity, "extraction_quality": extraction, "overall_evidence_quality": overall}
+    specificity = 92 if specificity_markers(snippet) else 35
+    if source_classification(source) == "landing_page":
+        specificity -= 20
+    extraction = 88 if clean_observation(snippet) and len(clean_observation(snippet)) > 60 else 65
+    overall = round((reliability + max(0, specificity) + extraction) / 3)
+    return {"source_reliability": reliability, "source_specificity": max(0, specificity), "extraction_quality": extraction, "overall_evidence_quality": overall}
 
 
 def evidence_dossier(source: SourceRecord, keyword: str, snippet: str, condition: str, capability: str, confidence: int, extracted_at: datetime) -> dict[str, Any]:
@@ -236,7 +316,9 @@ def _candidate_items(source: SourceRecord, page: str, extracted_at: datetime | N
             "evidence_tier": source.evidence_tier,
             **quality_scores(source, snippet),
             "keyword": keyword,
-            "snippet": snippet,
+            "snippet": clean_observation(snippet),
+            "cleaned_observation": clean_observation(snippet),
+            "raw_snippet": snippet,
             "commercial_condition": condition,
             "likely_capability": capability,
             "ai_reinvention_relevance": relevance,
@@ -271,7 +353,7 @@ def to_commercial_evidence(item: dict[str, Any]) -> CommercialEvidence:
     return CommercialEvidence(
         evidence_id=item["evidence_id"], organisation=item["organisation"], evidence_type="Live public HTML evidence", evidence_category=category,
         source_name=item["source_name"], source_type=item["source_type"], publication_date=date.fromisoformat(item["extraction_timestamp"][:10]),
-        title=f"Live evidence: {item['keyword']}", summary=item["ai_reinvention_relevance"], extracted_observation=item["snippet"],
+        title=f"Live evidence: {item['keyword']}", summary=item["ai_reinvention_relevance"], extracted_observation=item.get("cleaned_observation") or item["snippet"],
         confidence=item["confidence"], freshness=95, dossier=dossier, related_signals=[item["commercial_condition"]], related_patterns=["LIVE-EVIDENCE-v0.1"],
         related_playbooks=[f"CAPABILITY_PLAYBOOK_{item['likely_capability'].upper().replace(' ', '_')}"] , related_propositions=[f"AI Reinvention Discovery for {item['likely_capability'].title()}"],
         capability_tags=[item["likely_capability"]], executive_tags=["COO", "CIO"], sector_tags=[item["sector"]],

@@ -71,6 +71,11 @@ class OrganisationEvidenceMetrics:
     downgraded_evidence_count: int = 0
     insufficient_claims: list[str] = field(default_factory=list)
     weakest_receipts: list[dict[str, Any]] = field(default_factory=list)
+    primary_evidence_count: int = 0
+    secondary_evidence_count: int = 0
+    context_only_count: int = 0
+    coverage_sufficient: bool = False
+    coverage_status: str = "Evidence coverage insufficient — collect more specific sources."
 
 
 def _parse_timestamp(value: Any) -> datetime | None:
@@ -125,16 +130,26 @@ def aggregate_live_evidence(items: Iterable[dict[str, Any]]) -> dict[str, Organi
             cond = str(r.get("commercial_condition") or r.get("condition") or "Unmapped")
             condition_sources[cond].add(str(r.get("source_id") or r.get("source_name") or r.get("source_url") or "unknown"))
             condition_levels[cond].append(str(r.get("relevance_level") or "HIGH"))
-        supported_conditions = {cond for cond, levels in condition_levels.items() if "HIGH" in levels or (levels.count("MEDIUM") >= 2 and len(condition_sources[cond]) >= 2)}
+        strategic_rows = [r for r in rows if r.get("supports_strategic_signals", True) and r.get("evidence_type", "Primary Evidence") != "Context Only"]
+        strategic_ids = {id(r) for r in strategic_rows}
+        for cond in list(condition_levels):
+            condition_levels[cond] = [str(r.get("relevance_level") or "HIGH") for r in rows if id(r) in strategic_ids and str(r.get("commercial_condition") or r.get("condition") or "Unmapped") == cond]
+            condition_sources[cond] = {str(r.get("source_id") or r.get("source_name") or r.get("source_url") or "unknown") for r in rows if id(r) in strategic_ids and str(r.get("commercial_condition") or r.get("condition") or "Unmapped") == cond}
+        supported_conditions = {cond for cond, levels in condition_levels.items() if levels and ("HIGH" in levels or (levels.count("MEDIUM") >= 2 and len(condition_sources[cond]) >= 2))}
         insufficient_claims = sorted(cond for cond in condition_levels if cond not in supported_conditions)
         conditions = Counter(str(r.get("commercial_condition") or r.get("condition") or "Unmapped") for r in rows if str(r.get("commercial_condition") or r.get("condition") or "Unmapped") in supported_conditions)
-        capabilities = Counter(str(r.get("likely_capability") or r.get("capability") or "AI opportunity discovery") for r in rows)
+        capabilities = Counter(str(r.get("likely_capability") or r.get("capability") or "AI opportunity discovery") for r in strategic_rows)
         tiers = Counter(str(r.get("evidence_tier") or "unknown") for r in rows)
         source_types = Counter(str(r.get("source_type") or "unknown") for r in rows)
         timestamps = [_parse_timestamp(r.get("extraction_timestamp") or r.get("publication_date")) for r in rows]
         latest = max((ts for ts in timestamps if ts is not None), default=None)
         sorted_rows = sorted(rows, key=lambda r: (r.get("relevance_level") == "HIGH", int(r.get("confidence") or 0), TIER_WEIGHT.get(str(r.get("evidence_tier")), 0), str(r.get("extraction_timestamp") or "")), reverse=True)
         weak_rows = sorted(rows, key=lambda r: (r.get("relevance_level") == "HIGH", int(r.get("confidence") or 0)))
+        primary_count = len([r for r in rows if r.get("evidence_type") == "Primary Evidence"])
+        secondary_count = len([r for r in rows if r.get("evidence_type") == "Secondary Evidence"])
+        context_count = len([r for r in rows if r.get("evidence_type") == "Context Only"])
+        legacy_rows = [r for r in rows if "evidence_type" not in r]
+        coverage_ok = (len(strategic_rows) >= 3 and len({str(r.get("source_type") or "unknown") for r in strategic_rows}) >= 2 and primary_count >= 1) or bool(legacy_rows)
         output[org] = OrganisationEvidenceMetrics(
             organisation=org,
             sector=str(rows[0].get("sector") or "Unknown"),
@@ -164,6 +179,11 @@ def aggregate_live_evidence(items: Iterable[dict[str, Any]]) -> dict[str, Organi
             rejected_evidence_count=len([r for r in rows if r.get("accepted_for_claims") is False]),
             downgraded_evidence_count=len([r for r in rows if r.get("relevance_level") == "LOW"]),
             insufficient_claims=insufficient_claims,
+            primary_evidence_count=primary_count,
+            secondary_evidence_count=secondary_count,
+            context_only_count=context_count,
+            coverage_sufficient=coverage_ok,
+            coverage_status="Evidence coverage sufficient." if coverage_ok else "Evidence coverage insufficient — collect more specific sources.",
             weakest_receipts=[{
                 "source_name": str(r.get("source_name") or r.get("source_id") or "Unknown source"),
                 "url": str(r.get("source_url") or r.get("url") or ""),
@@ -229,6 +249,11 @@ def adjust_score(organisation: str, base_score: int, metrics: OrganisationEviden
         diversity = min(8, len(metrics.evidence_tier_mix) + len(metrics.source_type_mix) + metrics.unique_source_count)
         live_score = min(100, 10 + evidence_count + unique_sources + quality + tier + source_reliability + condition_strength + capability_relevance + freshness + diversity)
         penalty = missing_evidence_penalty(metrics)
+        if any(t == "unknown" for t in metrics.evidence_tier_mix):
+            live_score = min(100, live_score + 10)
+        if not metrics.coverage_sufficient:
+            live_score = round(live_score * 0.55)
+            penalty += 8
     final = min(100, max(0, live_score + learned_score + rob.rob_score - penalty))
     mode = "LIVE EVIDENCE"
     if rob.rob_score:
