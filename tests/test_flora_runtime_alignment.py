@@ -60,3 +60,71 @@ def test_no_llm_database_broad_crawl_imports():
         assert 'openai' not in text
         assert 'sqlalchemy' not in text
         assert 'scrapy' not in text
+
+
+def test_cirm_runtime_compliance_report_generated():
+    report = Path('docs/Architecture/CIRM_Runtime_Compliance.md')
+    text = report.read_text()
+    assert 'CIRM Runtime Compliance Report' in text
+    for fp in ('FP-003', 'FP-004', 'FP-005', 'FP-006', 'FP-007', 'FP-008', 'FP-009'):
+        assert fp in text
+    assert 'Every future runtime sprint should update this document' in text
+
+
+def test_organisation_executive_reading_path_and_evidence_once():
+    from cios.applications.flora.observatory.views import organisation_observatory_page
+
+    html = organisation_observatory_page('BT')
+    headings = [
+        'Executive Snapshot',
+        'Transformation Thesis',
+        'Why This Matters',
+        'Recommended Conversation',
+        'Commercial Conviction',
+        'Strategic Signals',
+        'Evidence',
+        'Diagnostics',
+    ]
+    positions = [html.index(f'<h2>{heading}</h2>') if heading != 'Diagnostics' else html.index('<summary><strong>Diagnostics</strong></summary>') for heading in headings]
+    assert positions == sorted(positions)
+    assert "<section class='hero report-header'>" not in html
+    assert html.count('Evidence Drill-down') >= 1
+    assert '<h2>Executive Summary</h2>' not in html
+
+
+def test_signals_are_independent_from_recommendations_and_reference_evidence():
+    from cios.applications.flora.observatory.views import organisation_observatory_page
+
+    html = organisation_observatory_page('BT')
+    signals = html[html.index('<h2>Strategic Signals</h2>'):html.index('<h2>Evidence</h2>')]
+    assert 'Recommended next conversation' not in signals
+    assert 'recommended_action' not in signals.lower()
+    assert 'Missing evidence:' in signals
+    assert 'Confidence:' in signals and 'source</a>' in signals
+
+
+def test_recommendations_reference_arguments_or_hypotheses_not_evidence():
+    from cios.applications.flora.observatory.views import organisation_observatory_page
+
+    html = organisation_observatory_page('BT')
+    rec_section = html[html.index('<h2>Recommended Conversation</h2>'):html.index('<h2>Commercial Conviction</h2>')]
+    assert 'commercial argument / active hypothesis' in rec_section
+    assert 'Evidence basis' not in rec_section
+    assert 'Raw/cleaned snippet' not in rec_section
+
+
+def test_runtime_alignment_dimensions_and_badge_render():
+    from cios.applications.flora.observatory.views import organisation_observatory_page
+
+    html = organisation_observatory_page('BT')
+    for label in (
+        'Evidence Confidence',
+        'Commercial Attractiveness',
+        'Commercial Conviction',
+        'Transformation Pressure',
+        'Transformation Inevitability',
+        'Momentum',
+        'Architecture Compliance',
+        'Overall CIRM Alignment',
+    ):
+        assert label in html
