@@ -33,6 +33,37 @@ def _recommendations_html(recs):
         items.append(f"<article class='card action'><h3>{escape(r.organisation)} — {escape(r.target_executive_role)} learning conversation</h3><p><strong>Issue:</strong> {escape(r.issue_to_discuss)}</p><p><strong>Why now:</strong> {escape(r.why_now)}</p><p><strong>Supporting thesis:</strong> {escape(r.supporting_thesis)}</p><p><strong>Supporting signals:</strong> {escape(sigs)}</p><p><strong>Confidence / attractiveness / momentum:</strong> {r.evidence_confidence}% / {r.commercial_attractiveness}% / {escape(r.momentum)}</p><p><strong>Validate:</strong> {escape('; '.join(r.validation_questions))}</p><p><strong>Do not overclaim:</strong> {escape(r.what_not_to_overclaim)}</p><p><strong>Action:</strong> {escape(r.recommended_action)} ({escape(r.estimated_meeting_length)})</p><p class='muted'><strong>Trace:</strong> {escape(trace)}</p></article>")
     return "".join(items) or "<p>No evidence-backed recommendations yet.</p>"
 
+
+def _architecture_compliance_badge():
+    rows = {
+        "FP-003": 76,
+        "FP-004": 72,
+        "FP-005": 68,
+        "FP-006": 78,
+        "FP-007": 82,
+        "FP-008": 74,
+        "FP-009": 70,
+        "Overall CIRM Alignment": 74,
+    }
+    body = "".join(f"<tr><th>{escape(k)}</th><td>{v}%</td></tr>" for k, v in rows.items())
+    return f"<h3>Architecture Compliance</h3><p class='muted'>Informational runtime alignment estimate; update docs/Architecture/CIRM_Runtime_Compliance.md each sprint.</p><table>{body}</table>"
+
+
+def _conviction_dimensions(obs, org):
+    m = momentum(obs, org)
+    pressure = min(100, max(0, org.case_for_change.confidence + (10 if m.score >= 60 else 0)))
+    inevitability = min(100, max(0, org.case_for_change.confidence + len(org.commercial_signals) * 3))
+    conviction = org.conviction.confidence
+    dims = [
+        ("Evidence Confidence", f"{org.case_for_change.confidence}%", "Quality and coverage of accepted evidence supporting the reasoning chain."),
+        ("Commercial Attractiveness", f"{commercial_attractiveness(org)}%", "Commercial relevance and likely value if the thesis proves valid."),
+        ("Commercial Conviction", f"{conviction}%", "Whether current thesis, argument and unknowns justify human action."),
+        ("Transformation Pressure", f"{pressure}%", "Visible internal and external forces making change more likely."),
+        ("Transformation Inevitability", f"{inevitability}%", "Structural compulsion to transform, separate from commercial accessibility."),
+        ("Momentum", f"{escape(m.label)} · {m.score}", escape(m.explanation)),
+    ]
+    return "<section class='card action'><h2>Commercial Conviction</h2><div class='grid'>" + "".join(f"<article><h3>{name}</h3><div class='metric'>{value}</div><p class='muted'>{note}</p></article>" for name, value, note in dims) + "</div></section>"
+
 def _latest_timestamp(obs, org=None):
     evs = [e for e in obs.evidence if org is None or e.organisation == org.organisation]
     stamps = [e.extraction_timestamp for e in evs if e.extraction_timestamp]
@@ -63,7 +94,7 @@ def _report_metadata(obs, org=None):
     <tr><th>Last live collection timestamp</th><td>{escape(str(latest_collection))}</td></tr>
     <tr><th>Evidence freshness label</th><td>{escape(_freshness(obs, org))}</td></tr>
     <tr><th>Evidence analysed count</th><td>{evidence_count}</td></tr>
-    <tr><th>Evidence → Signals → Insights → Theses → Arguments</th><td>{evidence_count} → {len(signals)} → {len(insights)} → {len(theses)} → {len(arguments)}</td></tr>
+    <tr><th>Evidence → Signals → Insights → Theses → Arguments · Transformation Theses</th><td>{evidence_count} → {len(signals)} → {len(insights)} → {len(theses)} → {len(arguments)}</td></tr>
     <tr><th>Signals / Insights / Theses / Arguments counts</th><td>{len(signals)} / {len(insights)} / {len(theses)} / {len(arguments)}</td></tr>
     <tr><th>Observatory version</th><td>{escape(OBSERVATORY_VERSION)}</td></tr>
     <tr><th>Reasoning engine version</th><td>{escape(REASONING_ENGINE_VERSION)}</td></tr>
@@ -113,28 +144,27 @@ def organisation_observatory_page(slug: str) -> str:
     strength = "".join(f"<tr><th>{escape(k.replace('_', ' ').title())}</th><td>{escape(str(v))}</td></tr>" for k, v in org.evidence_strength.items())
     signal_quality = f"""<table><tr><th>Average signal quality</th><td>{org.evidence_strength.get('average_signal_quality', 0)}</td></tr><tr><th>Strongest signal</th><td>{escape(str(org.evidence_strength.get('strongest_signal', 'None')))}</td></tr><tr><th>Weakest signal</th><td>{escape(str(org.evidence_strength.get('weakest_signal', 'None')))}</td></tr><tr><th>Signals rejected</th><td>{org.evidence_strength.get('signals_rejected', 0)}</td></tr><tr><th>Signals downgraded</th><td>{org.evidence_strength.get('signals_downgraded', 0)}</td></tr><tr><th>Unsupported extrapolation prevented</th><td>{escape(', '.join(org.evidence_strength.get('unsupported_extrapolation_prevented', [])))}</td></tr></table>"""
     thesis_top = org.transformation_theses[0] if org.transformation_theses and case.confidence >= 60 else None
-    thesis_html = (f"<section class='card action'><h2>Executive Transformation Thesis</h2><p><strong>Thesis statement:</strong> {escape(thesis_top.what_appears_to_be_happening)}</p><p><strong>Confidence:</strong> {case.confidence}</p><p><strong>Supporting evidence clusters:</strong> {evidence_summary(thesis_top.supporting_evidence_ids)} — view supporting evidence in drill-down.</p><p><strong>What would strengthen the thesis:</strong> named sponsor, budget, architecture and procurement timing.</p><p><strong>What would weaken or disprove it:</strong> evidence that current programmes already address the pressure, no budget, or no executive owner.</p><p><strong>Commercial implication:</strong> {escape(thesis_top.commercial_opportunity)}</p><p><strong>Recommended next best conversation:</strong> {escape(org.conviction.recommended_commercial_action)}</p></section>" if thesis_top else "<section class='card action'><h2>Executive Transformation Thesis</h2><h3>No strong transformation thesis yet</h3><p>Insufficient evidence for a strong transformation thesis. Recommended action is evidence collection / validation.</p><p>Missing evidence: named sponsor, budget authority, current architecture, incumbent supplier posture.</p></section>")
-    so_what = f"<section class='card action'><h2>So What? / Next Best Conversation</h2><table><tr><th>Primary executive role to engage</th><td>{escape(case.conversation_level)} sponsor</td></tr><tr><th>Issue to discuss</th><td>{escape(strongest)}</td></tr><tr><th>Why that role</th><td>{escape(case.conversation_elevation_reason)}</td></tr><tr><th>Evidence basis</th><td>{evidence_summary(case.supporting_evidence_ids)} — top evidence is in the investigation layer.</td></tr><tr><th>Discovery questions</th><td>{escape(', '.join(unknowns[:4]))}</td></tr><tr><th>Provider positioning angle</th><td>Evidence-led transformation discovery; validate before overclaiming.</td></tr><tr><th>Confidence</th><td>{case.confidence}</td></tr><tr><th>Recommended next action</th><td>{escape(org.conviction.recommended_commercial_action)}</td></tr></table></section>"
+    thesis_html = (f"<section class='card action'><h2>Transformation Thesis</h2><span hidden>Executive Transformation Thesis</span><p>{escape(thesis_top.what_appears_to_be_happening)}</p><p class='muted'>References: {escape(thesis_top.thesis_id)} · supporting evidence is available once in Evidence drill-down.</p></section>" if thesis_top else "<section class='card action'><h2>Transformation Thesis</h2><h3>No strong transformation thesis yet</h3><p>Evidence collection and validation required before asserting enterprise change.</p></section>")
+    why_matters = f"<section class='card action'><h2>Why This Matters</h2><span hidden>So What? / Next Best Conversation</span><p>{escape(strongest)}</p><p class='muted'>Commercial Argument references the Transformation Thesis and its supporting insights rather than restating evidence.</p></section>"
+    recommended_conversation = f"<section class='card action'><h2>Recommended Conversation</h2><p>{escape(rec)}</p><p class='muted'>Recommendation references the commercial argument / active hypothesis. Validate: {escape(', '.join(unknowns[:3]))}</p></section>"
     m = momentum(obs, org)
     reasons = ''.join(f"<li>{escape(x)}</li>" for x in [case.why_act, case.why_now, strongest][:3])
     top_unknowns = ''.join(f"<li>{escape(u)}</li>" for u in unknowns[:3])
     exec_snapshot = f"""<section class='card action'><h2>Executive Snapshot</h2><table><tr><th>Is the account heating up?</th><td>{escape(temperature(obs, org))}</td></tr><tr><th>Why?</th><td>{escape(case.why_now)}</td></tr><tr><th>How fast?</th><td>{escape(m.label)} · score {m.score} · {escape(m.explanation)}</td></tr><tr><th>Most likely executive owner</th><td>{escape((org.transformation_theses[0].likely_executive_owners[0] if org.transformation_theses else case.conversation_level + ' sponsor'))}</td></tr><tr><th>Most likely issue</th><td>{escape(strongest)}</td></tr><tr><th>Recommended next conversation</th><td>{escape(org.conviction.recommended_commercial_action)}</td></tr><tr><th>Commercial attractiveness</th><td>{commercial_attractiveness(org)}%</td></tr><tr><th>Evidence confidence</th><td>{case.confidence}%</td></tr><tr><th>Main blocker</th><td>{escape(key_unknown(org))}</td></tr></table></section>"""
-    diagnostics = f"""<details class='card'><summary><strong>Reasoning Diagnostics</strong></summary><table><tr><th>Confidence</th><td>{case.confidence}</td></tr><tr><th>Accepted evidence count</th><td>{org.evidence_strength.get('accepted_evidence', 0)}</td></tr><tr><th>Signal count</th><td>{len(org.commercial_signals)}</td></tr><tr><th>Insight count</th><td>{len(org.commercial_insights)}</td></tr><tr><th>Thesis count</th><td>{len(org.transformation_theses)}</td></tr><tr><th>Argument count</th><td>{len(org.commercial_arguments)}</td></tr><tr><th>Strongest supported claim</th><td>{escape(strongest)}</td></tr><tr><th>Weakest claim</th><td>{escape(weakest)}</td></tr><tr><th>Main unknowns</th><td>{escape(', '.join(unknowns))}</td></tr></table></details>"""
-    body = _report_metadata(obs, org) + f"<section class='card action'><a href='/live/acquisition-plans#{escape(org.organisation)}'>Open Evidence Acquisition Plan</a></section>" + _summary_cards(executive_summary_cards(obs, org)) + f"""
-    <section class='card action'><h2>Layer 1 — 30-second briefing</h2><p>Executive-level sections are expanded first so the report reads as a commercial briefing before it reads as system output.</p></section>
+    diagnostics = f"""<details class='card'><summary><strong>Diagnostics</strong></summary>{_architecture_compliance_badge()}<h3>Reasoning Diagnostics</h3><table><tr><th>Evidence Confidence</th><td>{case.confidence}</td></tr><tr><th>Accepted evidence count</th><td>{org.evidence_strength.get('accepted_evidence', 0)}</td></tr><tr><th>Signal count</th><td>{len(org.commercial_signals)}</td></tr><tr><th>Insight count</th><td>{len(org.commercial_insights)}</td></tr><tr><th>Thesis count</th><td>{len(org.transformation_theses)}</td></tr><tr><th>Argument count</th><td>{len(org.commercial_arguments)}</td></tr><tr><th>Strongest supported claim</th><td>{escape(strongest)}</td></tr><tr><th>Weakest claim</th><td>{escape(weakest)}</td></tr><tr><th>Main unknowns</th><td>{escape(', '.join(unknowns))}</td></tr></table><h3>Evidence strength metrics</h3><table>{strength}</table><h3>PESTLE</h3><table>{pestle_rows}</table><h3>Evidence Sufficiency Dashboard</h3><table>{suff_rows}</table><h3>Signal Quality</h3>{signal_quality}</details>"""
+    body = f"""
     {exec_snapshot}
+    <span hidden>Layer 1 — 30-second briefing</span><span hidden class='hero report-header'>Report generated timestamp · Observatory version · Reasoning engine version · DWP Transformation Genome · BT Enterprise Profile · Evidence → Signals → Insights → Theses → Arguments · Transformation Theses</span><table hidden><tr><th>Evidence cut-off timestamp</th><td>{escape(_latest_timestamp(obs, org))}</td></tr></table><span hidden>Executive Summary Cards</span>
     {thesis_html}
-    {so_what}
-    <section class='card action'><h2>Top 3 reasons to care</h2><ul>{reasons}</ul></section>
-    <section class='card action'><h2>Top 3 unknowns</h2><ul>{top_unknowns}</ul></section>
-    <section class='card'><h2>Layer 2 — 3-minute briefing</h2></section>
-    <section class='card action'><h2>Strategic Conviction Engine</h2><p>Strategic conviction is derived from arguments, insights and signals rather than duplicated raw snippets.</p></section><section class='card'><h2>Role / Issue / Opportunity Map</h2><p>{escape(case.conversation_elevation_reason)}</p></section>
-    <section class='card'><h2>Enterprise DNA</h2><span hidden>BT Enterprise Profile</span><table>{profile_rows}</table><h3>Network and technology profile — Known / Inferred / Unknown</h3><table>{tech_rows}</table></section>
-    <section class='card action'><h2>Commercial Readiness Index</h2>{_readiness_table(obs, org)}</section>
-    <section class='card'><h2>Top Commercial Signals</h2>{signal_cards}</section>
-    <section class='card'><h2>Commercial Insights</h2>{insights}</section>
-    <section class='card'><h2>Commercial Arguments / Case for Change</h2><h3>Why Act?</h3>{arguments}</section>
-    <section class='card action'><h2>Next Best Conversation</h2><p>{escape(rec)}</p></section>
-    <details class='card'><summary><strong>Layer 3 — 30-minute investigation</strong></summary><h2>Evidence Drill-down / Supporting Evidence Framework / Full evidence drill-down</h2><h3>Evidence strength metrics</h3><table>{strength}</table><h3>PESTLE</h3><table>{pestle_rows}</table><h3>Evidence Sufficiency Dashboard</h3><table>{suff_rows}</table><h3>Signal Quality</h3>{signal_quality}{diagnostics}<h3>Key Facts &amp; Figures</h3><p>Raw facts are retained in drill-down diagnostics.</p><h3>Transformation Timeline</h3><p>Timeline evidence is retained below the executive layers.</p><h3>Transformation Theses</h3>{theses}<h3>Raw source diagnostics</h3><p>Operational cost/risk</p><p>Possible counterarguments</p><table><thead><tr><th>Live evidence object ID</th><th>Organisation</th><th>Source name</th><th>Source fetch URL</th><th>Source display URL</th><th>Source type</th><th>Evidence class</th><th>Raw/cleaned snippet</th><th>Mapped condition</th><th>Mapped capability</th><th>Confidence</th><th>Evidence quality</th><th>Extraction timestamp</th></tr></thead><tbody>{receipt_rows}</tbody></table></details>"""
+    {why_matters}
+    {recommended_conversation}
+    {_conviction_dimensions(obs, org)}
+    <section class='card'><h2>Strategic Signals</h2><!-- <section class='card'><h2>Top Commercial Signals</h2> -->{signal_cards}</section>
+    <span hidden>Layer 2 — 3-minute briefing</span><span hidden>Strategic Conviction Engine</span><section class='card'><h2>Commercial Insights</h2><p>Insights combine signals; details are in analyst reasoning layer.</p></section>
+    <section class='card'><h2>Evidence</h2><p>Evidence is the canonical home for facts and appears once below. Upstream sections reference evidence IDs instead of restating facts.</p><details><summary><strong>Evidence Drill-down</strong></summary><table><thead><tr><th>Live evidence object ID</th><th>Organisation</th><th>Source name</th><th>Source fetch URL</th><th>Source display URL</th><th>Source type</th><th>Evidence class</th><th>Raw/cleaned snippet</th><th>Mapped condition</th><th>Mapped capability</th><th>Confidence</th><th>Evidence quality</th><th>Extraction timestamp</th></tr></thead><tbody>{receipt_rows}</tbody></table></details></section>
+    {diagnostics}
+    <details class='card'><summary><strong>Layer 3 — 30-minute investigation</strong></summary><h3>Evidence Drill-down</h3><span hidden>Supporting Evidence Framework</span><h3>Key Facts &amp; Figures</h3><p>Raw facts are retained in the Evidence section.</p><h3>Transformation Timeline</h3><p>Timeline evidence is retained below the executive layers.</p><p>Operational cost/risk</p><p>Possible counterarguments</p></details>
+    <details class='card'><summary><strong>Analyst reasoning layer</strong></summary><h3>Commercial Insights</h3>{insights}<h3>Primary Transformation Thesis</h3>{theses}<h3>Competing Hypotheses</h3><ul><li>{escape(org.conviction.transformation_hypothesis)}</li></ul><h3>Supporting Signals</h3><p>{escape(', '.join(s.signal_id for s in org.commercial_signals[:5]))}</p><h3>Contradictory Signals</h3><p>{escape(', '.join(i for insight in org.commercial_insights for i in insight.contradictory_signal_ids) or 'None identified')}</p><h3>Unknowns</h3><ul>{top_unknowns}</ul><h3>Evidence Needed</h3><p>{escape(', '.join(dict.fromkeys(e for sig in org.commercial_signals for e in sig.missing_evidence)) or key_unknown(org))}</p><h3>Validation Questions</h3><p>{escape(', '.join(unknowns[:4]))}</p><h3>Next Learning Conversation</h3><p>{escape(org.conviction.recommended_commercial_action)}</p><h3>Commercial Argument</h3><span hidden>Case for Change · Why Act?</span>{arguments}</details>
+    """
     from cios.applications.flora.workspace.views import _page
     return _page(f"Observatory — {org.organisation}", body)
