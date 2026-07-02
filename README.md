@@ -6,6 +6,11 @@ CIOS is an enterprise platform designed to improve commercial decision-making th
 
 Rather than acting as a single application, CIOS is a reusable platform that supports multiple commercial use cases, including opportunity qualification, capture management, bid strategy, competitive intelligence, executive decision support and organisational learning.
 
+
+## Architecture Repository
+
+CIOS architecture, founding papers, design documents, research notes, Architecture Decision Records and roadmaps live in [`architecture/`](architecture/README.md). Before major implementation work, review the relevant founding papers, design documents and ADRs. If a requested change conflicts with a founding paper or ADR, explain the conflict before implementation.
+
 ## Core Platform Components
 
 - Commercial Ontology
