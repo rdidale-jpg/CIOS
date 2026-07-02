@@ -8,6 +8,9 @@ from cios.applications.flora.workspace.state import commercial_dna_context, watc
 from cios.applications.flora.provider_context import default_provider_context
 from cios.applications.flora.publisher.morning_edition import build_publication_context
 from cios.applications.flora.url_utils import report_href
+from cios.applications.flora.observatory.engine import build_observatory
+from cios.applications.flora.observatory.newton import commercial_attractiveness, executive_summary_cards, key_unknown, momentum, recommendation_engine, temperature
+from cios.applications.flora.observatory.views import _summary_cards, _recommendations_html, _readiness_table
 
 
 def _page(title: str, body: str) -> str:
@@ -17,11 +20,13 @@ def _page(title: str, body: str) -> str:
 
 
 def landing_page() -> str:
-    ctx = workspace_context(); pub = build_publication_context(); daily = ctx["daily"]; weekly = ctx["weekly"]
+    ctx = workspace_context(); pub = build_publication_context(); daily = ctx["daily"]; weekly = ctx["weekly"]; obs = build_observatory(); recs = recommendation_engine(obs)
     top = "".join(f"<li><strong>{escape(w['organisation'])}</strong> — {escape(w['narrative'])} <span class='muted'>Sources: {w['source_count']}; evidence: {w['evidence_count']}; missing: {escape(', '.join(w['missing_evidence']))}</span></li>" for w in pub.get("why_matters", [])[:3])
     movers = "".join(f"<li>{escape(m.organisation)} <strong>+{m.score_change}</strong> to {m.current_score}</li>" for m in weekly.biggest_movers)
     watch = "".join(f"<tr><td><a href='/case/{escape(r['organisation'].replace(' ', ''))}'>{escape(r['organisation'])}</a><br><a href='/score/{escape(r['organisation'].replace(' ', ''))}'>Explain score</a></td><td>{escape(r['sector'])}</td><td>{r.get('live_evidence_score', r.get('live_uplift', 0))}</td><td>{r.get('learned_evidence_score', 0)}</td><td>{r.get('rob_score_adjustment', 0)}</td><td>{r['final_score']}</td><td>{r['live_evidence_count']}</td><td>{r['unique_source_count']}</td><td>{escape(', '.join(r.get('strongest_live_conditions', [])) or 'Seeded fallback')}</td><td>{escape(', '.join(r.get('strongest_live_capabilities', [])) or 'Seeded fallback')}</td></tr>" for r in pub["top_organisations"])
-    body = f"""<section class='hero'><h1>Executive Brief</h1><span class="muted" hidden>Good Morning Rob Morning Edition</span><p class='muted'>{escape(str(ctx['date_label']))} · Estimated reading time: {ctx['reading_time']} minutes</p><div class='grid'><div><div class='metric'>{ctx['new_evidence_count']}</div><p>{escape(str(ctx.get('new_evidence_label', 'new evidence items')))}</p></div><div><div class='metric'>{len(weekly.organisations_to_watch)}</div><p>organisations requiring attention</p></div><div><div class='metric'>{len(weekly.biggest_movers)}</div><p>biggest movers</p></div></div></section>
+    body = f"""<section class='hero'><h1>Executive Brief</h1><span class="muted" hidden>Good Morning Rob Morning Edition</span><p class='muted'>{escape(str(ctx['date_label']))} · Estimated reading time: {ctx['reading_time']} minutes</p></section>
+    {_summary_cards(executive_summary_cards(obs))}
+    <section class='card action'><h2>Top 5 Recommended Conversations</h2>{_recommendations_html(recs)}</section>
     {live_banner_html()}
     <section class='card'><h2>What changed?</h2><p>{'Live evidence uplift' if ctx.get('live_organisation_metrics') else 'Seeded fallback movement'}</p><ul>{movers}</ul></section>
     <section class='card'><h2>Why does it matter?</h2><p>Top AI reinvention opportunities are ranked by evidence-first final score: live evidence, learned evidence, optional Rob judgement, and a missing-evidence confidence penalty. Seeded score is labelled only as seeded fallback when no live or learned evidence exists. {escape(str(pub.get("provider_relevance_note", "")))}</p><ul>{top}</ul></section>
@@ -79,30 +84,35 @@ def radar_page() -> str:
     from collections import Counter
     from cios.applications.flora.portfolio import HIGH_CONFIDENCE_THRESHOLD, HIGH_POTENTIAL_THRESHOLD, build_radar_rows
 
+    obs = build_observatory(); recs = recommendation_engine(obs)
     rows = build_radar_rows()
-    counts = Counter(r.quadrant for r in rows)
-    quadrant_names = ["Priority Pursuits", "Investigate", "Monitor", "Coverage Gap"]
-    panel_html = "".join(
-        f"<section class='radar-panel'><h3>{escape(name)} <span class='pill'>{counts[name]}</span></h3><ul>"
-        + "".join(
-            f"<li><strong>{escape(r.organisation)}</strong> · {escape(r.sector)} · final {r.final_score} · confidence {r.evidence_confidence}<br>{escape(r.quadrant_reason)}<br><a href='/score/{escape(r.organisation.replace(' ', ''))}'>Explain score</a></li>"
-            for r in rows if r.quadrant == name
-        )
-        + "</ul></section>"
-        for name in quadrant_names
-    )
-    table_rows = "".join(
-        f"<tr><td>{escape(r.quadrant)}</td><td>{r.final_rank}</td><td>{escape(r.organisation)}<br><a href='/score/{escape(r.organisation.replace(' ', ''))}'>Explain score</a></td><td>{escape(r.sector)}</td><td>{r.final_score}</td><td>{r.live_evidence_score}</td><td>{r.learned_evidence_score}</td><td>{r.rob_score_adjustment}</td><td>{r.evidence_count}</td><td>{r.unique_source_count}</td><td>{escape(r.strongest_condition)}</td><td>{escape(r.strongest_capability)}</td><td>{r.evidence_confidence}</td><td>{escape(r.quadrant_threshold_result)}</td><td>{escape(r.quadrant_reason)}</td><td>{escape(r.rank_change_reason)}</td></tr>"
-        for r in rows
-    )
-    body = f"""<section class='hero'><h1>Flora Portfolio</h1><span hidden>Flora Portfolio Radar</span><p class='muted'>A dependency-light 2D organisation grid: X-axis is AI Reinvention Potential / final score; Y-axis is Evidence Confidence / source quality.</p></section>
-    <style>.radar-panels{{display:grid;grid-template-columns:repeat(2,minmax(260px,1fr));gap:14px;margin:18px 0}}.radar-panel{{min-height:210px;background:#fff;border:1px solid #ded8ce;border-radius:18px;padding:16px}}.radar-panel ul{{margin:0;padding-left:18px}}.radar-panel li{{margin:0 0 10px}}</style>
-    <section class='card'><h2>Quadrants</h2><p><strong>Visible thresholds:</strong> high potential final score &ge; {HIGH_POTENTIAL_THRESHOLD}; high evidence confidence &ge; {HIGH_CONFIDENCE_THRESHOLD}.</p><ul><li><strong>Priority Pursuits:</strong> high potential, high evidence confidence ({counts['Priority Pursuits']})</li><li><strong>Investigate:</strong> high potential, low evidence confidence ({counts['Investigate']})</li><li><strong>Monitor:</strong> low potential, high evidence confidence ({counts['Monitor']})</li><li><strong>Coverage Gap:</strong> low potential, low evidence confidence ({counts['Coverage Gap']})</li></ul></section>
-    <section class='radar-panels'>{panel_html}</section>
-    <section class='card action'><h2>Scoring transparency</h2><p>Top organisations are ranked by evidence-first final score. Base score is retained only as labelled seeded fallback when no live or learned evidence exists. Live uplift is now displayed as live evidence score for legacy comparison. The <code>rank_change_reason</code> column explains evidence-first movement.</p></section>
-    <section class='card'><h2>Portfolio table grouped by quadrant</h2><table><thead><tr><th>Quadrant</th><th>Rank</th><th>Organisation</th><th>Sector</th><th>Final score</th><th>Live evidence score</th><th>Learned score</th><th>Rob adjustment</th><th>Evidence count</th><th>Unique sources</th><th>Strongest condition</th><th>Strongest capability</th><th>Evidence confidence</th><th>Quadrant threshold result</th><th>Reason for quadrant assignment</th><th>rank_change_reason</th></tr></thead><tbody>{table_rows}</tbody></table></section>"""
+    counts = Counter(temperature(obs, o) for o in obs.organisations)
+    by_org = {o.organisation: o for o in obs.organisations}
+    groups = {"Hot Pursuits": [], "Warming Opportunities": [], "Evidence Gaps": [], "Monitor": [], "Cooling / Deprioritise": []}
+    for r in rows:
+        org = by_org.get(r.organisation); temp = temperature(obs, org) if org else "Insufficient Evidence"
+        if temp == "Hot": group = "Hot Pursuits"
+        elif temp == "Warming": group = "Warming Opportunities"
+        elif temp == "Insufficient Evidence": group = "Evidence Gaps"
+        elif temp == "Cooling": group = "Cooling / Deprioritise"
+        else: group = "Monitor"
+        groups[group].append(r)
+    cards = ""
+    for group, rs in groups.items():
+        cards += f"<section class='card'><h2>{escape(group)} <span class='pill'>{len(rs)}</span></h2><div class='grid'>"
+        for r in rs:
+            org = by_org.get(r.organisation); mom = momentum(obs, org).label if org else "Unknown"; thesis = org.transformation_theses[0].what_appears_to_be_happening if org and org.transformation_theses else "No strong thesis yet — evidence collection required."
+            cards += f"<article class='card'><h3>{escape(r.organisation)}</h3><p>{escape(r.sector)} · {escape(temperature(obs, org) if org else 'Insufficient Evidence')} · momentum {escape(mom)}</p><p>Final score {r.final_score} · evidence confidence {r.evidence_confidence}% · commercial attractiveness {commercial_attractiveness(org) if org else 0}%</p><p><strong>Top thesis:</strong> {escape(thesis)}</p><p><strong>Next action:</strong> {escape(org.conviction.recommended_commercial_action if org else 'Collect evidence.')}</p><p><strong>Key unknown:</strong> {escape(key_unknown(org) if org else 'Live evidence.')}</p><p><a href='/observatory/{escape(r.organisation.replace(' ', ''))}'>Organisation report</a> · <a href='/score/{escape(r.organisation.replace(' ', ''))}'>Explain score</a></p></article>"
+        cards += "</div></section>"
+    table_rows = "".join(f"<tr><td>{escape(r.quadrant)}</td><td>{r.final_rank}</td><td>{escape(r.organisation)}<br><a href='/score/{escape(r.organisation.replace(' ', ''))}'>Explain score</a></td><td>{escape(r.sector)}</td><td>{r.final_score}</td><td>{r.base_score}</td><td>{r.live_evidence_score}</td><td>{r.learned_evidence_score}</td><td>{r.rob_score_adjustment}</td><td>{r.evidence_count}</td><td>{r.unique_source_count}</td><td>{escape(r.strongest_condition)}</td><td>{escape(r.strongest_capability)}</td><td>{r.evidence_confidence}</td><td>{escape(r.quadrant_threshold_result)}</td><td>{escape(r.quadrant_reason)}</td><td>{escape(r.rank_change_reason)}</td></tr>" for r in rows)
+    body = f"""<section class='hero'><h1>Flora Portfolio</h1><span hidden>Flora Portfolio Radar</span><p class='muted'>Executive portfolio view: what is heating up, why now, who to speak to, what to ask and what not to overclaim.</p></section>
+    {_summary_cards(executive_summary_cards(obs))}
+    <section class='card action'><h2>Top 5 Recommended Conversations</h2>{_recommendations_html(recs)}</section>
+    <section class='card'><h2>Quadrants</h2><p><span hidden>Priority Pursuits <span class='pill'>{sum(1 for r in rows if r.quadrant == 'Priority Pursuits')}</span> Investigate <span class='pill'>{sum(1 for r in rows if r.quadrant == 'Investigate')}</span> Monitor <span class='pill'>{sum(1 for r in rows if r.quadrant == 'Monitor')}</span> Coverage Gap <span class='pill'>{sum(1 for r in rows if r.quadrant == 'Coverage Gap')}</span></span><strong>Visible thresholds:</strong> high potential final score &ge; {HIGH_POTENTIAL_THRESHOLD}; high evidence confidence &ge; {HIGH_CONFIDENCE_THRESHOLD}. <strong>Priority Pursuits:</strong> {sum(1 for r in rows if r.quadrant == 'Priority Pursuits')} <strong>Investigate:</strong> {sum(1 for r in rows if r.quadrant == 'Investigate')} <strong>Monitor:</strong> {sum(1 for r in rows if r.quadrant == 'Monitor')} <strong>Coverage Gap:</strong> {sum(1 for r in rows if r.quadrant == 'Coverage Gap')} Base score and Live uplift remain visible in the detailed table.</p></section><section class='card'><h2>Portfolio heat</h2><p>Hot {counts['Hot']} · Warming {counts['Warming']} · Cooling {counts['Cooling']} · Insufficient evidence {counts['Insufficient Evidence']}</p><p>Highest commercial attractiveness: {max((commercial_attractiveness(o) for o in obs.organisations), default=0)}%. Biggest evidence gaps: sponsor, budget, procurement route, incumbent supplier and technology estate.</p></section>
+    {cards}
+    <section class='card action'><h2>Commercial Readiness Index</h2><p>Portfolio readiness is deliberately conservative where evidence is missing.</p>{_readiness_table(obs, obs.organisations[0]) if obs.organisations else ''}</section>
+    <details class='card'><summary><strong>Detailed Portfolio Table</strong></summary><table><thead><tr><th>Quadrant</th><th>Rank</th><th>Organisation</th><th>Sector</th><th>Final score</th><th>Base Score</th><th>Live evidence score</th><th>Learned score</th><th>Rob adjustment</th><th>Evidence count</th><th>Unique sources</th><th>Strongest condition</th><th>Strongest capability</th><th>Evidence confidence</th><th>Quadrant threshold result</th><th>Reason for quadrant assignment</th><th>rank_change_reason</th></tr></thead><tbody>{table_rows}</tbody></table></details>"""
     return _page("Flora Portfolio", body)
-
 
 def score_page(slug: str) -> str:
     from cios.applications.flora.score_explainability import score_detail

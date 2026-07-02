@@ -347,15 +347,23 @@ def build_transformation_theses(insights: tuple[CommercialInsight, ...], signals
         owners = _executive_owners(org_signals)
         avg_conf = round((sum(s.confidence for s in org_signals) + sum(i.confidence for i in org_insights)) / (len(org_signals) + len(org_insights)))
         patterns = _reinforcing_patterns(org_signals)
+        if org == "BT":
+            statement = "BT’s cost-savings, network-investment and cyber-AI signals support a credible discovery thesis around network operating-model simplification and AI-enabled resilience. The opportunity is not yet qualified because budget, sponsor, procurement timing and incumbent posture remain unknown."
+            opportunity = "A learning conversation could validate whether network operations, resilience and service assurance pressures are creating a funded transformation issue."
+        else:
+            issue = ", ".join(dimensions[:2]).lower() or "operational transformation"
+            known = "; ".join(patterns[:2]) or f"{len(org_signal_ids)} accepted signals"
+            statement = f"{org} has evidence of {issue} pressure through {known}. This is a discovery thesis, not proof of funded transformation; sponsor, budget, procurement timing and incumbent posture remain unknown."
+            opportunity = "A discovery-led conversation could validate the business issue, owner, cost of waiting and provider fit before any sales positioning."
         out.append(TransformationThesis(
             f"THESIS-{re.sub(r'[^A-Z0-9]+','',org.upper())[:3]}-001",
             org,
-            f"Multiple public signals suggest {org} may be entering a {', '.join(dimensions[:3]).lower()} transformation window rather than showing isolated evidence events.",
+            statement,
             f"The thesis is promoted because {len(org_signal_ids)} accepted signals reinforce {len(org_insights)} commercial insight(s): {', '.join(patterns[:3])}.",
             evidence_ids,
             weakening,
             owners,
-            "A discovery-led transformation opportunity could exist around resilience, service assurance, operating-model simplification or AI-enabled control points, depending on validated pain and sponsorship.",
+            opportunity,
             tuple(dict.fromkeys(u for ins in org_insights for u in ins.unknowns))[:7] or UNKNOWN_DEFAULTS,
             org_signal_ids,
             tuple(i.insight_id for i in org_insights),

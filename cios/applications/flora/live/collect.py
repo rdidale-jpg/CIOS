@@ -9,6 +9,7 @@ from cios.applications.flora.live.extractor import extract_evidence_with_diagnos
 from cios.applications.flora.live.fetcher import fetch_html
 from cios.applications.flora.live.source_registry import SOURCES, canonical_organisation, enabled_sources
 from cios.applications.flora.live.store import DEFAULT_DIAGNOSTICS_PATH, DEFAULT_PATH, load_evidence_fingerprints, read_jsonl, unique_evidence, write_jsonl
+from cios.applications.flora.live.progress import complete_state, read_state, start_state, update_state
 
 FAILURE_CATEGORIES = {"access_blocked", "timeout", "network_error", "non_html", "no_relevant_evidence", "parser_error", "unknown"}
 
@@ -78,10 +79,12 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
 
     before_observatory = observatory_snapshot(build_observatory())
     sources = enabled_sources(organisation)
+    start_state(len(sources))
     diagnostics: list[dict[str, Any]] = []
     evidence: list[dict[str, Any]] = []
     collection_started_at = datetime.now(UTC).isoformat()
     for source in sources:
+        update_state(current_source_name=source.source_name, latest_message=f"Collecting {source.source_name}")
         attempted_at = collection_started_at
         result = fetch_html(str(source.url))
         source_evidence: list[dict[str, Any]] = []
@@ -96,6 +99,7 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
                 succeeded = False
                 parse_error = f"parser_error: {exc}"
         diagnostics.append(_diagnostic(source, attempted_at, result, source_evidence, rejected_evidence, parse_error, succeeded))
+        update_state(sources_attempted=len(diagnostics), sources_succeeded=len([d for d in diagnostics if d["status"] != "failed"]), sources_failed=len([d for d in diagnostics if d["status"] == "failed"]), evidence_extracted=len(evidence), latest_message=f"Finished {source.source_name}")
     new_evidence, duplicate_count, fingerprints = unique_evidence(evidence)
     output = write_jsonl(new_evidence) if new_evidence else DEFAULT_PATH
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -108,7 +112,9 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
         tuple(str(item.get("evidence_id") or "") for item in new_evidence if item.get("evidence_id")),
     )
     failures = [d for d in diagnostics if d["status"] == "failed"]
+    final_progress = complete_state("completed", "Collection completed.")
     return {
+        "progress_state": final_progress,
         "last_collection_time": diagnostics[-1]["last_attempted"] if diagnostics else None,
         "sources_attempted": len(sources),
         "sources_succeeded": len([d for d in diagnostics if d["status"] != "failed"]),
@@ -143,6 +149,7 @@ def current_status() -> dict[str, Any]:
         "diagnostics": latest,
         "evidence_path": str(DEFAULT_PATH),
         "diagnostics_path": str(DEFAULT_DIAGNOSTICS_PATH),
+        "progress_state": read_state(),
     }
 
 

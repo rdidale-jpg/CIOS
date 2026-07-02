@@ -11,7 +11,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlparse
 
 from cios.applications.flora.live.collect import collect, current_status
-from cios.applications.flora.live.views import collection_result, dashboard, evidence_page, source_effectiveness_page, sources_page
+from cios.applications.flora.live.progress import read_state
+from cios.applications.flora.live.views import collection_progress_page, collection_result, dashboard, evidence_page, source_effectiveness_page, sources_page
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
@@ -54,6 +55,13 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(dashboard())
             elif parsed.path == "/live/collect":
                 self._html(collection_result(collect()))
+            elif parsed.path == "/live/collect/start":
+                collect()
+                self._redirect("/live/collect/progress")
+            elif parsed.path == "/live/collect/progress":
+                self._html(collection_progress_page())
+            elif parsed.path == "/live/collect/status":
+                self._json(read_state())
             elif parsed.path == "/live/status":
                 self._json(current_status())
             elif parsed.path == "/live/sources":
@@ -143,9 +151,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 
 
 def _content_type_for_path(path: str) -> str | None:
-    if path in {"/health", "/live/status"}:
+    if path in {"/health", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/evidence", "/live/sources", "/live/source-effectiveness"}:
+    if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness"}:
         return "text/html; charset=utf-8"
     if path.startswith("/observatory/"):
         return "text/html; charset=utf-8"
