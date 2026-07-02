@@ -437,3 +437,42 @@ def test_no_llm_database_or_broad_crawling_imports() -> None:
     for term in forbidden:
         assert term not in extractor_source.lower()
         assert term not in collect_source.lower()
+
+
+def test_specificity_gate_rejects_govuk_boilerplate_and_service_menus() -> None:
+    from cios.applications.flora.live.extractor import extract_evidence, extract_evidence_with_diagnostics
+    from cios.applications.flora.live.source_registry import SourceRecord
+    dwp = SourceRecord(source_id="dwp-govuk", organisation="DWP", source_name="DWP GOV.UK", source_type="organisation_landing", url="https://www.gov.uk/government/organisations/department-for-work-pensions", sector="Public", evidence_tier="tier_1_public_body", expected_signal_types=["procurement"], coverage_role="context")
+    html = "<p>Complaints modern slavery accessibility jobs and contracts working for DWP contact media enquiries publication scheme procurement.</p>"
+    accepted, rejected = extract_evidence_with_diagnostics(dwp, html)
+    assert accepted == []
+    assert rejected
+    assert rejected[0]["evidence_type"] == "Context Only"
+    assert not rejected[0]["supports_strategic_signals"]
+
+    supplier = SourceRecord(source_id="supplier-services", organisation="Supplier", source_name="Supplier services", source_type="supplier_service_menu", url="https://example.com/services", sector="Technology", evidence_tier="tier_1_company", expected_signal_types=["AI"], coverage_role="context")
+    assert extract_evidence(supplier, "<p>Our services include AI cloud cyber data managed services consulting delivery capability contact us.</p>") == []
+
+
+def test_specificity_gate_accepts_named_date_quantified_and_report_facts() -> None:
+    from cios.applications.flora.live.extractor import extract_evidence
+    from cios.applications.flora.live.source_registry import SourceRecord
+    src = SourceRecord(source_id="nhs-news", organisation="NHS England", source_name="NHS announcement", source_type="official_newsroom", url="https://www.england.nhs.uk/news/example", sector="Health", evidence_tier="tier_1_public_body", expected_signal_types=["AI"], coverage_role="primary")
+    item = extract_evidence(src, "<p>On 12 June 2026 NHS England announced the Federated Data Platform rollout to 40 trusts with AI technology supplier support.</p>")[0]
+    assert item["accepted_for_claims"]
+    assert item["evidence_type"] in {"Primary Evidence", "Secondary Evidence"}
+    assert item["cleaned_observation"].startswith("On 12 June 2026")
+
+    report = SourceRecord(source_id="bt-ar", organisation="BT", source_name="BT annual report", source_type="annual_report_landing", url="https://www.bt.com/annual-report", sector="Telecoms", evidence_tier="tier_1_company", expected_signal_types=["investment"], coverage_role="primary")
+    fact = extract_evidence(report, "<p>The annual report states capital investment was £4.8bn in 2026 and the cost savings target is £3bn.</p>")[0]
+    assert fact["evidence_type"] == "Primary Evidence"
+    assert fact["confidence"] >= 70
+
+
+def test_context_only_evidence_does_not_support_signals_and_coverage_dampens_scores() -> None:
+    from cios.applications.flora.live.aggregation import adjust_score, aggregate_live_evidence
+    context = [{"organisation": "DWP", "source_id": "s1", "source_type": "organisation_landing", "commercial_condition": "Procurement Readiness", "evidence_type": "Context Only", "supports_strategic_signals": False, "relevance_level": "LOW", "confidence": 50, "overall_evidence_quality": 40}]
+    metrics = aggregate_live_evidence(context)["DWP"]
+    assert metrics.condition_relevance == 0
+    assert not metrics.coverage_sufficient
+    assert adjust_score("DWP", 80, metrics).live_evidence_score < 50

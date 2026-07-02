@@ -42,15 +42,32 @@ def _status(succeeded: bool, evidence_count: int) -> str:
     return "failed"
 
 
+def source_improvement_recommendation(diag: dict[str, Any]) -> str:
+    org = diag.get("organisation", "Source")
+    kind = diag.get("source_classification") or diag.get("source_type") or "source"
+    if diag.get("status") == "failed":
+        return f"{org} {kind} failed; verify the governed URL or replace with a stable report, results, procurement or named news URL."
+    if diag.get("accepted_evidence_count", 0) == 0 and diag.get("rejected_evidence_count", 0) > 0:
+        if kind == "landing_page" or "govuk" in str(diag.get("source_type", "")).lower():
+            return f"{org} GOV.UK or landing page produced only boilerplate; add annual report/accounts, latest documents and procurement pipeline sources."
+        if "investor" in str(diag.get("source_type", "")).lower():
+            return f"{org} investor landing page produced weak page furniture; add annual report PDF/HTML and FY results page."
+        return f"{org} source produced noisy context; add case-study, press-release-specific, report or named programme URLs."
+    if diag.get("context_only_count", 0) and not diag.get("primary_evidence_count", 0):
+        return f"{org} evidence is context-heavy; add primary report, regulator, procurement or contract-award sources."
+    return "Keep monitored; source produced usable governed evidence."
+
 def _diagnostic(source: Any, attempted_at: str, result: Any, source_evidence: list[dict[str, Any]], rejected_evidence: list[dict[str, Any]] | None = None, error: str | None = None, succeeded: bool | None = None) -> dict[str, Any]:
     ok = result.succeeded if succeeded is None else succeeded
     evidence_count = len(source_evidence)
     failure_reason = categorise_failure(succeeded=ok, http_status=result.status_code, error=error if error is not None else result.error, evidence_count=evidence_count)
-    return {
+    source_kind = source_evidence[0].get("source_classification") if source_evidence else getattr(source, "source_classification", source.source_type)
+    diag = {
         "source_id": source.source_id,
         "organisation": source.organisation,
         "source_name": source.source_name,
         "source_type": source.source_type,
+        "source_classification": source_kind,
         "url": str(source.url),
         "status": _status(ok, evidence_count),
         "success": ok and evidence_count > 0,
@@ -63,6 +80,10 @@ def _diagnostic(source: Any, attempted_at: str, result: Any, source_evidence: li
         "accepted_evidence_count": evidence_count,
         "rejected_evidence_count": len(rejected_evidence or []),
         "downgraded_evidence_count": len([e for e in (rejected_evidence or []) if e.get("relevance_level") == "LOW"]),
+        "primary_evidence_count": len([e for e in source_evidence if e.get("evidence_type") == "Primary Evidence"]),
+        "secondary_evidence_count": len([e for e in source_evidence if e.get("evidence_type") == "Secondary Evidence"]),
+        "context_only_count": len([e for e in [*source_evidence, *(rejected_evidence or [])] if e.get("evidence_type") == "Context Only"]),
+        "boilerplate_only": evidence_count == 0 and any(e.get("boilerplate_detected") for e in (rejected_evidence or [])),
         "unsupported_interpretations": [{
             "snippet": e.get("snippet", ""),
             "attempted_classification": e.get("attempted_classification") or e.get("commercial_condition", ""),
@@ -71,6 +92,8 @@ def _diagnostic(source: Any, attempted_at: str, result: Any, source_evidence: li
             "relevance_level": e.get("relevance_level", "REJECT"),
         } for e in (rejected_evidence or [])[:8]],
     }
+    diag["recommended_source_fix"] = source_improvement_recommendation(diag)
+    return diag
 
 
 def collect(organisation: str | None = None) -> dict[str, Any]:
@@ -126,6 +149,13 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
         "duplicate_evidence_skipped": duplicate_count,
         "total_unique_evidence_objects": len(fingerprints),
         "failures": failures,
+        "accepted_evidence_count": len(evidence),
+        "rejected_evidence_count": sum(int(d.get("rejected_evidence_count") or 0) for d in diagnostics),
+        "downgraded_evidence_count": sum(int(d.get("downgraded_evidence_count") or 0) for d in diagnostics),
+        "primary_evidence_count": sum(int(d.get("primary_evidence_count") or 0) for d in diagnostics),
+        "secondary_evidence_count": sum(int(d.get("secondary_evidence_count") or 0) for d in diagnostics),
+        "context_only_count": sum(int(d.get("context_only_count") or 0) for d in diagnostics),
+        "source_improvement_recommendations": [d.get("recommended_source_fix") for d in diagnostics if d.get("recommended_source_fix")],
         "diagnostics": diagnostics,
         "observatory_delta": observatory_delta,
         "output_location": str(output),
