@@ -5,6 +5,44 @@
 **Owner:** Rob / CIOS
 **Last updated:** 2026-07-02
 
+## Relationship to the CIOS Intelligence Reference Model
+
+The CIOS Intelligence Reference Model (CIRM) defines how CIOS converts observable enterprise reality into strategic commercial judgement. Its canonical pipeline is:
+
+```text
+Observable Enterprise Reality
+→ Governed Source Collection
+→ Raw Evidence
+→ Evidence Quality Assessment
+→ Strategic Signals
+→ Commercial Insights
+→ Transformation Themes
+→ Transformation Theses
+→ Hypothesis Validation
+→ Commercial Conviction
+→ Executive Recommendations
+→ Commercial Outcomes
+→ Continuous Learning
+```
+
+FP-006 governs source classification and source lifecycle discipline so that evidence quality can be assessed before interpretation.
+
+## Inspectable Reasoning Lineage
+
+No recommendation may exist unless its reasoning chain can be inspected:
+
+```text
+Executive Recommendation
+→ Commercial Conviction
+→ Hypothesis / Transformation Thesis
+→ Commercial Insight
+→ Strategic Signal
+→ Raw Evidence
+→ Source
+```
+
+If any link is missing, the recommendation should be downgraded to a learning action or evidence demand.
+
 ## 1. Purpose
 
 This paper defines the source quality standard for Flora. It explains how Flora should assess sources before using them to support evidence, signals, transformation theses or recommendations.
@@ -188,15 +226,15 @@ Replacement recommendations should be captured as part of collection feedback.
 
 ## 15. Source lifecycle actions
 
-Sources have lifecycles. They may be discovered, classified, collected, scored, used, monitored, downgraded, retired or replaced.
+Sources use the standard CIRM lifecycle states: Discovered, Classified, Monitored, Downgraded, Replaced, Retired and Diagnostics Only.
 
 Flora should support the following source lifecycle actions:
 
 - keep: continue using the source at its current tier and cadence;
-- monitor: retain the source but collect less aggressively until new evidence demand appears;
-- downgrade: reduce reasoning weight because evidence is stale, generic, biased or low-specificity;
-- replace: seek a better source family for the same evidence category;
-- retire: stop using the source for current reasoning while preserving traceability;
+- monitored: retain the source but collect less aggressively until new evidence demand appears;
+- downgraded: reduce reasoning weight because evidence is stale, generic, biased or low-specificity;
+- replaced: seek a better source family for the same evidence category;
+- retired: stop using the source for current reasoning while preserving traceability;
 - diagnostics only: retain only for parser, site-structure or failure analysis;
 - split into child sources: decompose a noisy parent page into more specific subpages, feeds or document families;
 - promote child source to governed source: elevate a high-yield child page or document family into the governed collection plan.
@@ -233,3 +271,7 @@ This feedback should influence both Source Quality Score and Source Yield Score.
 - How should source scores be exposed to users without creating false precision?
 - How should Flora learn that a noisy source family is valuable for a specific sector?
 - What diagnostics should trigger parser or collection workflow improvements?
+
+## Relationship to CIRM
+
+This paper governs source quality within CIRM. It defines how Flora classifies, monitors, downgrades, replaces and retires sources so raw evidence entering [FP-004](FP-004-Evidence-Acquisition-Standard.md) and later [FP-007](FP-007-Strategic-Signal-Standard.md) signal reasoning remains explainable.

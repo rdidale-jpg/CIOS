@@ -5,6 +5,66 @@
 **Owner:** Rob / CIOS
 **Last updated:** 2026-07-02
 
+## Relationship to the CIOS Intelligence Reference Model
+
+The CIOS Intelligence Reference Model (CIRM) defines how CIOS converts observable enterprise reality into strategic commercial judgement. Its canonical pipeline is:
+
+```text
+Observable Enterprise Reality
+→ Governed Source Collection
+→ Raw Evidence
+→ Evidence Quality Assessment
+→ Strategic Signals
+→ Commercial Insights
+→ Transformation Themes
+→ Transformation Theses
+→ Hypothesis Validation
+→ Commercial Conviction
+→ Executive Recommendations
+→ Commercial Outcomes
+→ Continuous Learning
+```
+
+FP-009 governs Hypothesis Validation: the testing discipline between Transformation Theses and Commercial Conviction.
+
+## Transformation Pressure and Transformation Inevitability
+
+**Transformation Pressure** is the internal and external forces that make change more likely or necessary. Internal pressure may include legacy technology, operating cost, service quality, cyber exposure, workforce constraints, fragmented data, delivery failure and technical debt. External pressure may include regulation, political direction, customer expectations, market disruption, competitive moves, supplier change, economic pressure and technology shifts.
+
+**Transformation Inevitability** is the degree to which an enterprise appears structurally compelled to transform, regardless of whether procurement, budget or sponsor evidence is visible. Transformation inevitability is not the same as commercial opportunity: an enterprise may need to transform but still be inaccessible, already committed to another provider, internally constrained or commercially unattractive.
+
+## Commercial Reasoning Loop
+
+```text
+Observe
+→ Interpret
+→ Challenge
+→ Hypothesise
+→ Test
+→ Convict
+→ Recommend
+→ Learn
+→ Observe
+```
+
+This loop describes Newton's desired behaviour. Flora should not only collect evidence and generate outputs; it should continually challenge, validate and improve its commercial judgement.
+
+## Inspectable Reasoning Lineage
+
+No recommendation may exist unless its reasoning chain can be inspected:
+
+```text
+Executive Recommendation
+→ Commercial Conviction
+→ Hypothesis / Transformation Thesis
+→ Commercial Insight
+→ Strategic Signal
+→ Raw Evidence
+→ Source
+```
+
+If any link is missing, the recommendation should be downgraded to a learning action or evidence demand.
+
 ## 1. Purpose
 
 This paper defines the Hypothesis Validation Standard for CIOS. Flora should treat commercial hypotheses as scientific reasoning objects: created to be tested, challenged, strengthened, weakened, rejected or retired.
@@ -12,7 +72,7 @@ This paper defines the Hypothesis Validation Standard for CIOS. Flora should tre
 Hypotheses are not conclusions waiting for evidence. They are structured propositions about enterprise transformation that organise evidence demand and guide learning.
 
 ```text
-Signals
+Strategic Signals
 → Hypothesis
 → Validation Questions
 → Evidence Demand
@@ -184,8 +244,9 @@ Raw evidence is too granular to justify action by itself. Recommendations should
 ```text
 Raw Evidence
 → Strategic Signals
-→ Commercial Hypotheses
-→ Recommendations
+→ Hypotheses
+→ Commercial Conviction
+→ Executive Recommendations
 ```
 
 This relationship keeps recommendations explainable. A senior user should be able to inspect the hypothesis behind a recommendation and see why Flora believes the action is justified.
@@ -211,3 +272,7 @@ Learning should also preserve humility. A won pursuit does not prove every suppo
 - When should a rejected hypothesis remain visible for institutional learning?
 - How should commercial outcomes recalibrate hypothesis validation rules?
 - What human review should be required before a hypothesis supports a recommendation?
+
+## Relationship to CIRM
+
+This paper governs the hypothesis validation stage of CIRM. It defines how Flora creates, tests, strengthens, weakens, rejects and retires hypotheses using signals from [FP-007](FP-007-Strategic-Signal-Standard.md) and feeding conviction decisions in [FP-008](FP-008-Commercial-Conviction-Model.md).
