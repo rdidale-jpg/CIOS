@@ -23,6 +23,7 @@ The Reference Architecture defines:
 ## Documents
 
 - [CIOS Reference Architecture v1.0](CIOS-Reference-Architecture-v1.0.md) — the single authoritative architecture entry point for CIOS.
+- [RA-001 — CIOS Enterprise Intelligence Meta Model](meta-model/RA-001-CIOS-Enterprise-Intelligence-Meta-Model.md) — the authoritative conceptual model for first-class objects, relationships, lifecycle, state, temporality and evidence lineage.
 - [Glossary](Glossary.md) — concise definitions for CIOS architecture terminology.
 - [Document Map](Document-Map.md) — navigation map for Founding Papers, Enterprise Intelligence papers and runtime architecture documents.
 - [Architecture Principles](Architecture-Principles.md) — first principles and detailed operating principles.
