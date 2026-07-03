@@ -11,6 +11,17 @@ The `architecture/` directory is the source of truth for CIOS design thinking. I
 CIOS implementation work should be guided by stable institutional memory: founding papers, design documents, research notes, Architecture Decision Records (ADRs) and capability roadmaps.
 
 
+## CIOS Reference Architecture
+
+The [CIOS Reference Architecture](reference-architecture/README.md) is the recommended starting point for anyone trying to understand CIOS. It is the single authoritative architecture entry point that explains how the Founding Papers, CIRM, Enterprise Intelligence and Flora runtime relate.
+
+Start with:
+
+- [Reference Architecture area](reference-architecture/README.md)
+- [CIOS Reference Architecture v1.0](reference-architecture/CIOS-Reference-Architecture-v1.0.md)
+
+Use it before reading a specific paper or changing runtime behaviour.
+
 ## CIOS Intelligence Reference Model — CIRM
 
 CIRM defines how CIOS converts observable enterprise reality into strategic commercial judgement. It makes the founding papers read as one intelligence architecture: first observing what is happening, then reasoning about what it means and what action is justified.
