@@ -1,9 +1,13 @@
-# ADR-002 — Transformation Thesis
+# ADR-008 — Recommendation Engine
 
-**Purpose:** Record the decision basis for the CIOS transformation thesis.  
-**Status:** draft  
+**Purpose:** Record the decision basis for recommendation engine principles.  
+**Status:** Proposed  
 **Owner:** Rob / CIOS  
 **Last updated:** 2026-07-02
+
+## Migration note
+
+This ADR is a migrated placeholder. It must be reviewed before acceptance.
 
 ## Overview
 

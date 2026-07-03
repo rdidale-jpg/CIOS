@@ -51,6 +51,14 @@ Flora should evolve from a report generator into a runtime that maintains living
 
 Future Flora architecture should introduce or strengthen persistent Enterprise Model storage, model update logic, Observation-to-model mapping and views generated from model state.
 
+## Compliance test
+
+- Does the change update or preserve durable Enterprise Model state?
+- Does it treat reports, briefings and dashboards as views over model state?
+- Does it support comparison across collection runs instead of one-off summaries?
+- Does it preserve lineage from model state back to Observations and Evidence?
+- Does it avoid duplicating report text as the primary memory mechanism?
+
 ## Review date
 
 2026-10-03

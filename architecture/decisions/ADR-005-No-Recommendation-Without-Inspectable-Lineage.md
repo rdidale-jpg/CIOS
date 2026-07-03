@@ -54,6 +54,14 @@ Flora should:
 - [FP-009 — Hypothesis Validation Standard](../founding-papers/FP-009-Hypothesis-Validation-Standard.md)
 - [CIOS Design Doctrine](../reference-architecture/CIOS-Design-Doctrine.md)
 
+## Compliance test
+
+- Does every strong recommendation trace to Thesis / Hypothesis / Signal / Observation / Evidence / Source?
+- Are weak recommendations reframed as learning actions, questions or evidence demands?
+- Are unknowns and contradictions visible near the recommendation?
+- Does the output avoid persuasive language when evidence or reasoning lineage is incomplete?
+- Can a human inspect the assumptions behind the recommendation?
+
 ## Review date
 
 2026-10-03

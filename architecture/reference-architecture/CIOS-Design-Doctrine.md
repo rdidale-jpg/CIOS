@@ -102,3 +102,32 @@ CIOS should be:
 - commercially focused;
 - human-calibrated;
 - ethically bounded.
+
+
+## Design Review Heuristics
+
+Future AI assistants should ask:
+
+- Does this improve detection of meaningful enterprise change?
+- Does this strengthen durable enterprise memory?
+- Does this create or improve Observations?
+- Does this improve the Commercial Digital Twin?
+- Does this improve commercial judgement?
+- Does this reduce unsupported inference?
+- Does this reduce repetition?
+- Does this make Flora more executive-useful?
+- Does this preserve traceability?
+
+## What “good” looks like
+
+Good CIOS work is:
+
+- evidence-backed;
+- observation-led;
+- model-centred;
+- graph-aware;
+- hypothesis-driven;
+- commercially specific;
+- executive-relevant;
+- uncertainty-aware;
+- ethically bounded.

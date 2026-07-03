@@ -38,6 +38,7 @@ The Reference Architecture defines:
   - [ADR-003 — CIRM and EI Separation](../decisions/ADR-003-CIRM-and-EI-Separation.md)
   - [ADR-004 — Human-Supplied Knowledge Must Be Labelled](../decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md)
   - [ADR-005 — No Recommendation Without Inspectable Lineage](../decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md)
+  - Proposed ADRs retained for review: [ADR-006 — Signal Architecture](../decisions/ADR-006-Signal-Architecture.md), [ADR-007 — Transformation Thesis](../decisions/ADR-007-Transformation-Thesis.md), [ADR-008 — Recommendation Engine](../decisions/ADR-008-Recommendation-Engine.md)
 
 ## Navigation rule
 

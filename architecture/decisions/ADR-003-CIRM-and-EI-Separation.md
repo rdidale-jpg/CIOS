@@ -39,6 +39,13 @@ CIRM defines how CIOS reasons. Enterprise Intelligence defines what CIOS knows. 
 
 Flora runtime designs should distinguish between reasoning workflow components and persistent Enterprise Model components. A component may bridge both, but its responsibility should be explicit.
 
+## Compliance test
+
+- Does the change distinguish reasoning process concepts from enterprise knowledge-model concepts?
+- Does it state whether the component belongs to CIRM, Enterprise Intelligence or both?
+- Does it avoid allowing Flora implementation labels to become architecture doctrine?
+- Does it use Reference Architecture and Glossary terminology consistently?
+
 ## Review date
 
 2026-10-03
