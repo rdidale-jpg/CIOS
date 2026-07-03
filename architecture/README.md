@@ -1,7 +1,7 @@
 # CIOS Architecture Repository
 
-**Status:** draft  
-**Owner:** Rob / CIOS  
+**Status:** draft
+**Owner:** Rob / CIOS
 **Last updated:** 2026-07-02
 
 ## Purpose
@@ -17,8 +17,11 @@ The [CIOS Reference Architecture](reference-architecture/README.md) is the recom
 
 Start with:
 
+- [CIOS AI Context](../CIOS-AI.md)
 - [Reference Architecture area](reference-architecture/README.md)
 - [CIOS Reference Architecture v1.0](reference-architecture/CIOS-Reference-Architecture-v1.0.md)
+- [CIOS Design Doctrine](reference-architecture/CIOS-Design-Doctrine.md)
+- [AI Session Handoff](reference-architecture/AI-Session-Handoff.md)
 
 Use it before reading a specific paper or changing runtime behaviour.
 
@@ -113,7 +116,7 @@ The Enterprise Intelligence series begins with each monitored enterprise as a li
 - `founding-papers/` contains durable principles and thesis-level papers that should remain stable over time.
 - `design/` contains system design documents for platform, product and capability architecture.
 - `research/` contains evolving models, hypotheses and notes that may later become formal design or decision records.
-- `decisions/` contains Architecture Decision Records that explain important choices, trade-offs and consequences.
+- `decisions/` contains Architecture Decision Records that explain important choices, trade-offs and consequences. Start with the [ADR index](decisions/README.md), including [ADR-001](decisions/ADR-001-Observations-as-Atomic-Intelligence-Unit.md), [ADR-002](decisions/ADR-002-Enterprise-Model-as-Durable-Memory.md), [ADR-003](decisions/ADR-003-CIRM-and-EI-Separation.md), [ADR-004](decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md) and [ADR-005](decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md).
 - `roadmap/` contains capability evolution plans for CIOS, Flora, Newton and the Observatory.
 
 
@@ -140,9 +143,13 @@ These papers define how Flora converts evidence into strategic commercial judgem
 
 Before major implementation work, review:
 
-1. `architecture/founding-papers/`
-2. Relevant `architecture/design/`
-3. Relevant `architecture/decisions/`
+1. `../CIOS-AI.md`
+2. `architecture/reference-architecture/README.md`
+3. `architecture/reference-architecture/CIOS-Design-Doctrine.md`
+4. `architecture/decisions/README.md`
+5. `architecture/founding-papers/`
+6. Relevant `architecture/design/`
+7. Relevant `architecture/decisions/`
 
 If a requested change conflicts with a founding paper or ADR, explain the conflict before implementation.
 

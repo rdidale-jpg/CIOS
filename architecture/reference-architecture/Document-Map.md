@@ -1,10 +1,29 @@
 # CIOS Architecture Document Map
 
-**Status:** Draft  
-**Owner:** Rob / CIOS  
+**Status:** Draft
+**Owner:** Rob / CIOS
 **Last updated:** 2026-07-03
 
 This map helps readers find the architecture paper that owns a concept. The Reference Architecture is the entry point; the documents below remain the primary homes for detailed standards and models.
+
+## Living Context and Doctrine
+
+| Document | Purpose | Status | Folder | Relationship to Reference Architecture |
+| --- | --- | --- | --- | --- |
+| [CIOS AI Context](../../CIOS-AI.md) | Defines AI assistant and Codex working rules for CIOS. | Present | repo root | Required starting point for AI-assisted work. |
+| [CIOS Design Doctrine](CIOS-Design-Doctrine.md) | Captures design philosophy and reasoning style. | Present | `architecture/reference-architecture/` | Explains why CIOS is evidence-first, observation-led and model-centred. |
+| [AI Session Handoff](AI-Session-Handoff.md) | Provides a short briefing and ready-to-copy prompt for new AI sessions. | Present | `architecture/reference-architecture/` | Makes project memory portable across sessions. |
+
+## Architecture Decision Records
+
+| ID | Title | Purpose | Status | Folder | Relationship to Reference Architecture |
+| --- | --- | --- | --- | --- | --- |
+| ADR index | [Architecture Decision Records](../decisions/README.md) | Index of major architecture decisions. | Present | `architecture/decisions/` | Preserves why important choices were made. |
+| ADR-001 | [Observations as Atomic Intelligence Unit](../decisions/ADR-001-Observations-as-Atomic-Intelligence-Unit.md) | Treats Observations as reusable intelligence atoms. | Accepted | `architecture/decisions/` | Reinforces EI-012 and Observation doctrine. |
+| ADR-002 | [Enterprise Model as Durable Memory](../decisions/ADR-002-Enterprise-Model-as-Durable-Memory.md) | Treats the Enterprise Model / Commercial Digital Twin as durable memory. | Accepted | `architecture/decisions/` | Reinforces EI-001 and report-as-view doctrine. |
+| ADR-003 | [CIRM and EI Separation](../decisions/ADR-003-CIRM-and-EI-Separation.md) | Separates reasoning process from enterprise knowledge model. | Accepted | `architecture/decisions/` | Clarifies CIRM, Enterprise Intelligence and Flora responsibilities. |
+| ADR-004 | [Human-Supplied Knowledge Must Be Labelled](../decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md) | Requires labelled, dated human-supplied knowledge. | Accepted | `architecture/decisions/` | Supports governance and provenance clarity. |
+| ADR-005 | [No Recommendation Without Inspectable Lineage](../decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md) | Requires inspectable lineage for strong recommendations. | Accepted | `architecture/decisions/` | Enforces trust, explainability and evidence lineage. |
 
 ## Founding Papers
 
@@ -62,8 +81,11 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 
 ## Reading order
 
-1. Start with [CIOS Reference Architecture v1.0](CIOS-Reference-Architecture-v1.0.md).
-2. Use the [Glossary](Glossary.md) for terms.
-3. Read Founding Papers FP-003 to FP-009 to understand CIRM.
-4. Read Enterprise Intelligence papers EI-001 to EI-012 to understand the Commercial Digital Twin.
-5. Read runtime architecture documents before changing Flora, Newton, Observatory or Publisher behaviour.
+1. Start with [CIOS AI Context](../../CIOS-AI.md).
+2. Read [CIOS Reference Architecture v1.0](CIOS-Reference-Architecture-v1.0.md).
+3. Use the [Glossary](Glossary.md) for terms.
+4. Read [Architecture Principles](Architecture-Principles.md) and [CIOS Design Doctrine](CIOS-Design-Doctrine.md).
+5. Read Founding Papers FP-003 to FP-009 to understand CIRM.
+6. Read Enterprise Intelligence papers EI-001 to EI-012 to understand the Commercial Digital Twin.
+7. Read relevant [ADRs](../decisions/README.md).
+8. Read runtime architecture documents before changing Flora, Newton, Observatory or Publisher behaviour.
