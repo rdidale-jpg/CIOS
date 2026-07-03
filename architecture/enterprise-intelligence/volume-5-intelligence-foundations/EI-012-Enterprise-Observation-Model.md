@@ -33,6 +33,33 @@ CIOS should reason over structured Observations that are:
 
 The Observation is therefore the smallest reusable unit of Enterprise Intelligence: a durable statement about what changed, what condition exists, what relationship matters, what absence is notable or what contradiction has emerged.
 
+# Observation Doctrine
+
+> "The purpose of Enterprise Intelligence is to detect meaningful change.
+>
+> Evidence proves change.
+>
+> Observations remember change.
+>
+> The Enterprise Model accumulates change.
+>
+> Commercial reasoning explains change.
+>
+> Recommendations propose how to act on change."
+
+CIOS does not exist to collect documents. CIOS exists to detect meaningful enterprise change and preserve that change as durable intelligence. Documents are carriers of evidence, not the intelligence product itself. They may be revised, removed, superseded, duplicated, syndicated, reformatted or forgotten; an Observation survives because it records the enterprise fact, condition, movement, absence or contradiction that the document made visible.
+
+This doctrine makes Observations the enduring memory layer of Enterprise Intelligence:
+
+- documents are transient evidence containers;
+- evidence proves that something was stated, published, filed, awarded, appointed, reported or omitted;
+- Observations convert evidence into durable enterprise memory;
+- Enterprise Models accumulate Observations as structured state change;
+- reports render selected Observations for a moment, audience or decision;
+- Commercial Digital Twins become more useful as their Observation memory deepens.
+
+A report is therefore never the source of truth. A report is a view over selected Observations, Signals, Hypotheses, Commercial Theses and Recommendations. If the report disappears, the Enterprise Model should still remember the Observations that mattered. If Flora is rewritten, the Observation doctrine should remain valid because it describes the intelligence philosophy rather than an implementation detail.
+
 ## Why observations exist
 
 Evidence, Observation, Signal, Hypothesis and Recommendation answer different questions.
@@ -107,6 +134,220 @@ Observations must be:
 - **Non-duplicative:** repeated evidence should strengthen the same observation, not create noisy duplicates.
 - **Commercially relevant:** observations should improve understanding of pressure, behaviour, opportunity, risk or timing.
 - **Separate from narrative:** observations are not executive prose.
+
+# The Laws of Observation
+
+These laws govern how Observations are created, interpreted, reused and challenged. They are architectural constraints, not interface preferences.
+
+## Law 1 — One Observation represents exactly one meaningful enterprise fact
+
+**Purpose:** Keep Observations atomic so each one can be independently validated, contradicted, reused, aged and retired. Never combine unrelated changes.
+
+**Commercial rationale:** Commercial reasoning becomes auditable only when each reasoning step can be traced to a single enterprise fact. Combining a CFO change, a cost programme and a cloud migration in one Observation makes it impossible to know which fact supports which conclusion.
+
+**Example:** "New CIO appointed" is one Observation. "New CIO appointed and enterprise likely to modernise ERP" combines fact and speculation and must be split.
+
+## Law 2 — Observations never speculate
+
+**Purpose:** Preserve the boundary between what is known and what may be inferred. Speculation belongs in Hypotheses.
+
+**Commercial rationale:** Separating observed fact from interpretation prevents premature conviction and lets competing hypotheses reuse the same evidence-backed memory.
+
+**Example:** "Cloud migration programme announced" is an Observation. "Cloud migration will reduce supplier spend" is a Hypothesis.
+
+## Law 3 — Observations never contain recommendations
+
+**Purpose:** Keep action proposals separate from intelligence memory. Recommendations are separate reasoning objects.
+
+**Commercial rationale:** An Observation may support several possible engagement moves; embedding a recommendation inside it makes the intelligence less reusable and harder to challenge.
+
+**Example:** "Procurement notice issued for data platform services" is an Observation. "Contact the CIO this week" is a Recommendation.
+
+## Law 4 — Every Observation must update the Enterprise Model
+
+**Purpose:** Ensure Observations change durable enterprise state. If it changes nothing, it should not exist.
+
+**Commercial rationale:** The Enterprise Model is the memory of the Commercial Digital Twin. Observations that do not update state create noise, cost and false analytical activity.
+
+**Example:** A repeated syndicated copy of the same press release should strengthen source lineage on an existing Observation, not create a new one.
+
+## Law 5 — Every Observation must have commercial relevance
+
+**Purpose:** Reject facts that do not improve understanding of pressure, behaviour, timing, opportunity, risk, relationship or transformation.
+
+**Commercial rationale:** Enterprise Intelligence is not trivia collection. Commercial relevance focuses collection and reasoning on intelligence that can improve decisions.
+
+**Example:** "Annual report PDF file size changed" is normally noise. "Annual report introduces a new cost reduction target" is commercially relevant.
+
+## Law 6 — Observations strengthen or weaken understanding
+
+**Purpose:** Treat Observations as contributors to judgement, not guarantees of conclusions.
+
+**Commercial rationale:** Enterprise reality is uncertain. Commercial conviction should grow through accumulating, corroborating and contradicting Observations rather than single-fact certainty.
+
+**Example:** A hiring spike in data engineers strengthens the view that data capability is expanding; it does not prove an enterprise-wide AI transformation.
+
+## Law 7 — Confidence belongs to Observations
+
+**Purpose:** Assign belief to the derived Observation, not only to source evidence. Evidence quality informs confidence but does not determine commercial significance.
+
+**Commercial rationale:** A reliable source can produce a low-significance Observation, and a single modest source can reveal a commercially important change requiring validation.
+
+**Example:** A statutory filing may prove an address change with 100% confidence but little commercial value; a job advert for a transformation director may be lower-confidence but commercially important.
+
+## Law 8 — Observations persist beyond documents
+
+**Purpose:** Preserve enterprise memory after documents disappear, expire or become inaccessible. Documents disappear. Enterprise memory remains.
+
+**Commercial rationale:** Commercial Digital Twins need continuity. Durable Observation memory lets CIOS reason across time rather than repeatedly rediscovering the same enterprise facts.
+
+**Example:** A procurement notice may close after 30 days, but the Observation that a cloud migration procurement occurred remains relevant to supplier landscape and transformation history.
+
+## Law 9 — Observations may support multiple Signals and Hypotheses
+
+**Purpose:** Make Observations reusable across reasoning pathways.
+
+**Commercial rationale:** The same enterprise fact can matter to cost, risk, relationship, timing and opportunity. Reuse increases intelligence leverage and avoids duplicative analysis.
+
+**Example:** "New CIO appointed" may support signals about leadership change, technology strategy reset, supplier review and executive conversation timing.
+
+## Law 10 — Contradictory Observations must coexist until resolved
+
+**Purpose:** Preserve conflicting intelligence instead of overwriting it. Never overwrite conflicting intelligence.
+
+**Commercial rationale:** Contradiction is often the first sign of ambiguity, transition or contested strategy. Keeping contradictions visible prevents false certainty.
+
+**Example:** One source says ERP replacement is delayed while another says mobilisation has begun. Both Observations coexist until validated, dated, scoped or resolved.
+
+# Observation Importance
+
+Observation Importance measures enterprise impact: how materially the Observation changes understanding of the enterprise if true. It is separate from Confidence, Freshness, Quality and Commercial Value.
+
+- **Confidence** measures belief that the Observation is true.
+- **Freshness** measures temporal recency and current relevance.
+- **Quality** measures evidence and construction strength.
+- **Commercial Value** measures usefulness for commercial reasoning.
+- **Importance** measures enterprise impact.
+
+Importance levels are:
+
+- **Critical:** materially changes strategic understanding, executive engagement, transformation pressure or opportunity outlook. Example: "ERP replacement programme approved."
+- **Major:** significantly changes an important area of the Enterprise Model. Example: "New CIO appointed."
+- **Moderate:** useful change in a relevant domain but not enterprise-defining alone. Example: "Cyber hiring increased."
+- **Minor:** small but valid state update. Example: "Technology committee membership updated."
+- **Context:** background that helps interpretation but rarely changes decisions alone. Example: "Annual report published."
+- **Noise:** true or plausible information that does not improve enterprise understanding. Example: "Website banner image changed."
+
+These dimensions are independent. A Critical Observation may begin with low Confidence and demand validation. A 100% confident Observation may have only Context importance. A fresh Observation may still be commercially irrelevant.
+
+# Observation Commercial Value
+
+Commercial Value answers: **"If true, how much better does this help us understand the enterprise?"**
+
+Suggested dimensions are:
+
+- **Commercial usefulness:** Does it improve understanding of need, timing, budget, route to market or buying motion?
+- **Transformation usefulness:** Does it clarify transformation pressure, maturity, direction or blockers?
+- **Relationship usefulness:** Does it reveal sponsors, influencers, incumbents, advisers or partnerships?
+- **Opportunity usefulness:** Does it change opportunity probability, qualification, route or urgency?
+- **Strategic usefulness:** Does it improve understanding of enterprise direction or competitive posture?
+- **Executive usefulness:** Does it help create a better executive conversation?
+- **Overall Commercial Value:** The combined usefulness of the Observation for commercial reasoning.
+
+An Observation may be perfectly true but commercially insignificant.
+
+Example:
+
+- Observation: "Annual report published."
+- Confidence: 100%.
+- Commercial Value: Very Low.
+
+Example:
+
+- Observation: "New CIO appointed."
+- Confidence: 95%.
+- Commercial Value: Very High.
+
+# Observation Actionability
+
+Actionability records what, if anything, the system should do because the Observation exists. Every Observation should indicate whether it requires:
+
+- No action
+- Monitor
+- Validate
+- Collect evidence
+- Generate questions
+- Update Enterprise Model
+- Recalculate Transformation Pressure
+- Recalculate Opportunity Outlook
+- Prepare Executive Conversation
+
+Actionability differs from Commercial Value. Commercial Value describes how useful the Observation is for understanding the enterprise. Actionability describes the operational or reasoning response required now. A high-value Observation may require only monitoring if it is already validated; a moderate-value contradiction may require immediate evidence collection because it blocks a decision.
+
+# Observation Demand
+
+Observation Demand is the follow-on intelligence need created by an Observation. Some Observations automatically create demand for further Observations because they expose unknowns, likely consequences or missing context.
+
+Example:
+
+Observation: New CIO appointed.
+
+Automatically generated evidence demand:
+
+- Has strategy changed?
+- Has supplier landscape changed?
+- Has technology roadmap changed?
+- Has AI strategy changed?
+- Has procurement activity changed?
+- Has executive committee changed?
+
+Observation Demand becomes one of the inputs to the Curiosity Engine. It tells CIOS what it should want to know next because the Enterprise Model has changed.
+
+# Observation Question Generation
+
+Every Observation should generate investigative questions. Questions convert observed change into a structured search for missing context and should eventually feed EI-015 Enterprise Question Model.
+
+## Cloud Migration example
+
+Observation: Cloud migration announced.
+
+Questions:
+
+- Budget?
+- Supplier?
+- Timeline?
+- Programme?
+- Executive Sponsor?
+- Business Units?
+- Target Architecture?
+- Legacy Replacement?
+
+## ERP Replacement example
+
+Observation: ERP replacement indicated.
+
+Questions:
+
+- Business Case?
+- Programme Director?
+- Delivery Partner?
+- Funding?
+- Change Requests?
+- Customer Impact?
+
+## Cyber Investment example
+
+Observation: Cyber investment increased.
+
+Questions:
+
+- Trigger event?
+- Regulatory driver?
+- CISO sponsor?
+- Current controls?
+- Procurement route?
+- Managed service partner?
+- Board-level risk appetite?
 
 ## Observation categories
 
@@ -301,6 +542,13 @@ A standard Observation object should include:
 - Novelty
 - Materiality
 - Commercial Relevance
+- Observation Importance
+- Commercial Value
+- Actionability
+- Observation Demand
+- Generated Questions
+- Observation Maturity
+- Observation Half-Life
 - Transformation Relevance
 - Opportunity Relevance
 - Affected Enterprise Model Attributes
@@ -542,11 +790,128 @@ National Grid may require asset intelligence, forecasting or secure-by-design op
 Unknowns:
 Programme owner, supplier ecosystem, investment route, regulatory driver.
 
+# Observation Networks
+
+Observations rarely exist in isolation. Multiple Observations often describe the same enterprise movement from different angles, dates, functions and source families. An Observation Network is a connected set of Observations that together describe a coherent movement, pressure or behaviour.
+
+Example:
+
+```text
+Hiring freeze
+↓
+Margin pressure
+↓
+Automation investment
+↓
+Productivity speech
+↓
+Cost reduction programme
+↓
+Observation Network
+↓
+Operating Model Transformation
+```
+
+Networks become Patterns. Patterns become Strategic Signals. Strategic Signals support Hypotheses and Commercial Theses.
+
+Observation Networks matter because commercial change is usually distributed. One Observation may be weak; a network can reveal direction. One job advert may be noise; repeated hiring, executive language, procurement and budget movement can indicate enterprise intent.
+
+# Observation Half-Life
+
+Observation Half-Life is the expected period over which an Observation loses half of its current decision relevance if not refreshed, corroborated or converted into more durable state. Half-life formalises decay without erasing history.
+
+Suggested half-life examples:
+
+| Observation source or subject | Indicative half-life |
+| --- | ---: |
+| Press release | 7 days |
+| Conference speech | 14 days |
+| Job advert | 30 days |
+| Quarterly results | 90 days |
+| Procurement notice | 180 days |
+| Executive appointment | 2 years |
+| ERP programme | 5 years |
+| Ownership structure | 10 years |
+
+Half-life matters because it controls review urgency, confidence decay, collection demand and commercial timing. A live procurement notice may be urgent but short-lived. An ownership structure may remain commercially meaningful for years. CIOS should not treat all Observations as equally perishable.
+
+# Observation Maturity
+
+Observation Maturity describes how settled an Observation is in enterprise memory. It differs from Confidence. Confidence measures belief that the Observation is true; Maturity measures how the Observation has aged, been validated, become historically established or lost current relevance.
+
+Stages:
+
+- **Immature:** newly detected, incomplete, weakly corroborated or awaiting validation.
+- **Validated:** supported by sufficient evidence to update the Enterprise Model.
+- **Established:** repeatedly corroborated or stable enough to be treated as durable enterprise state.
+- **Historical:** no longer current but important for understanding trajectory, relationships or precedent.
+- **Dormant:** not currently active in reasoning but retained because it may become relevant again.
+- **Retired:** no longer commercially relevant except for audit or lineage.
+
+A high-confidence Observation can be Immature if it has just appeared and implications are unknown. A lower-confidence Observation can become Established only after corroboration, repeated support and contradiction handling.
+
+# Observation Learning
+
+Repeated Observations allow Enterprise Learning. Over time, CIOS should learn not only isolated facts but enterprise habits: recurring behaviours, preferred suppliers, buying rhythms, executive language, operating constraints and transformation patterns.
+
+Examples of repeated Observations that become learning inputs:
+
+- repeated hiring spikes before major transformation programmes;
+- repeated procurement behaviour using the same frameworks or partners;
+- repeated supplier preference across adjacent programmes;
+- repeated executive language around productivity, resilience, AI, citizen experience or cost;
+- repeated delays after funding announcements;
+- repeated absence of named sponsorship despite strategic ambition.
+
+These repeated Observations become enterprise habits. Future EI-013 Enterprise Learning Model will define how these habits are learned, represented, challenged and reused.
+
+# Observation Ethics
+
+Observation doctrine must preserve trust. Enterprise Intelligence should use only public and appropriately licensed information, trusted human input and auditable sources.
+
+CIOS must not use Observations to justify surveillance, covert monitoring or personal profiling beyond legitimate business context. Observations must not infer protected characteristics. Commercial intelligence must remain explainable, proportionate and auditable, with clear lineage from evidence to Observation to reasoning outcome.
+
+# Observation Principles Diagram
+
+```text
+Enterprise
+↓
+Evidence
+↓
+Observation
+↓
+Observation Network
+↓
+Pattern
+↓
+Signal
+↓
+Hypothesis
+↓
+Commercial Thesis
+↓
+Recommendation
+↓
+Executive Conversation
+↓
+Commercial Outcome
+```
+
+# Cross References
+
 ## Relationship to EI Volume 1
 
-EI-001 stores Observations within the Commercial Digital Twin. EI-002 stores Observation relationships in the Enterprise Knowledge Graph. EI-003 uses Observations to infer Enterprise Behaviour.
+- **EI-001 Commercial Digital Twin:** consumes Observations as durable updates to enterprise state. Observations are how the Commercial Digital Twin remembers meaningful change.
+- **EI-002 Enterprise Knowledge Graph:** consumes Observations as nodes, edges, evidence-backed relationships and contradiction links. Observation relationships make enterprise memory navigable.
+- **EI-003 Enterprise Behaviour Model:** consumes repeated and networked Observations to infer behavioural tendencies, rhythms and habits.
 
 Observations are the update mechanism for the Enterprise Model. They convert evidence into memory, give the Commercial Digital Twin fresh state, create graph relationships and provide the Behaviour Model with structured signals of enterprise movement.
+
+## Relationship to Foundational Papers
+
+- **FP-007:** consumes Observations as the atomic evidence-backed inputs that keep foundational reasoning grounded in explainable enterprise change.
+- **FP-008:** consumes Observations to maintain separation between evidence, memory, interpretation and action.
+- **FP-009:** consumes Observations as reusable commercial intelligence units that can be governed, challenged and audited.
 
 ## Relationship to CIRM
 
@@ -564,13 +929,10 @@ The CIRM reasoning chain should therefore preserve the distinction:
 
 ## Relationship to future Volume 5 papers
 
-EI-013 Enterprise Learning Model will define how observations improve the Enterprise Model over time.
-
-EI-014 Commercial Conversation Model will define how observations support executive conversations.
-
-EI-015 Enterprise Question Model will define the questions Flora asks of an enterprise.
-
-EI-016 Enterprise Curiosity Engine will define how Flora decides what to investigate next.
+- **EI-013 Enterprise Learning Model:** will consume repeated Observations to learn enterprise habits, behavioural patterns, supplier preferences and transformation rhythms.
+- **EI-014 Commercial Conversation Model:** will consume Observations, Networks and Commercial Theses to prepare executive conversations grounded in explainable enterprise memory.
+- **EI-015 Enterprise Question Model:** will consume Observation Questions and turn them into structured investigative prompts, unknowns and validation paths.
+- **EI-016 Enterprise Curiosity Engine:** will consume Observation Demand, Half-Life, Maturity, contradiction state and commercial value to decide what CIOS should investigate next.
 
 ## Open questions
 
@@ -581,3 +943,19 @@ EI-016 Enterprise Curiosity Engine will define how Flora decides what to investi
 - What observation types should be mandatory for Level 2 or Level 3 Commercial Digital Twins?
 - How should absence observations be prevented from becoming false negatives?
 - What quality threshold should be required for an observation to update Opportunity Outlook?
+
+# Final Summary
+
+The Observation is the fundamental reusable unit of Enterprise Intelligence.
+
+Evidence is transient.
+
+Observations persist.
+
+Enterprise Models accumulate observations.
+
+Commercial reasoning interprets observations.
+
+Executive decisions are informed by commercial reasoning.
+
+Every capability within CIOS ultimately exists to detect, understand or exploit meaningful enterprise change.
