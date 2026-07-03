@@ -4,6 +4,11 @@
 **Owner:** Rob / CIOS  
 **Last updated:** 2026-07-03
 
+## Recommended starting point
+
+Start with the [CIOS Reference Architecture](../reference-architecture/README.md) before reading individual Enterprise Intelligence papers. The Reference Architecture explains how Enterprise Intelligence fits with the Founding Papers, CIRM and Flora runtime, and links to the [CIOS Reference Architecture v1.0](../reference-architecture/CIOS-Reference-Architecture-v1.0.md).
+
+
 ## Purpose
 
 Enterprise Intelligence defines the living model CIOS builds for each monitored organisation. It describes what CIOS knows about an enterprise and how that knowledge should be organised, linked, refreshed and used for commercial judgement.
