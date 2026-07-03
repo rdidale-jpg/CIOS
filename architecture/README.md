@@ -84,8 +84,21 @@ Observable Enterprise Reality
 - **Evidence lifecycle:** Discovered, Collected, Accepted, Downgraded, Context Only, Rejected, Retired.
 - **Source lifecycle:** Discovered, Classified, Monitored, Downgraded, Replaced, Retired, Diagnostics Only.
 
+
+
+## Enterprise Intelligence Architecture
+
+Enterprise Intelligence defines the enterprise knowledge model CIOS builds and maintains for each monitored organisation. Where the Founding Papers define the intelligence process, the Enterprise Intelligence papers define what CIOS knows about an enterprise.
+
+- Founding Papers define the intelligence process.
+- Enterprise Intelligence papers define the enterprise knowledge model.
+- Flora is the first runtime implementation.
+
+The Enterprise Intelligence series begins with each monitored enterprise as a living Commercial Digital Twin that supports executive intelligence, account planning, opportunity prediction and strategic business development. See [`enterprise-intelligence/README.md`](enterprise-intelligence/README.md).
+
 ## Repository sections
 
+- `enterprise-intelligence/` contains the EI series defining the enterprise knowledge model and Commercial Digital Twin architecture.
 - `founding-papers/` contains durable principles and thesis-level papers that should remain stable over time.
 - `design/` contains system design documents for platform, product and capability architecture.
 - `research/` contains evolving models, hypotheses and notes that may later become formal design or decision records.
