@@ -1,0 +1,583 @@
+# EI-012 — Enterprise Observation Model
+
+**Purpose:** Define the Observation as the atomic unit of Enterprise Intelligence.  
+**Status:** Draft  
+**Owner:** Rob / CIOS  
+**Last updated:** 2026-07-03
+
+## Architectural position
+
+Enterprise Intelligence defines what CIOS knows about an enterprise. CIRM defines how CIOS reasons. The Enterprise Observation Model defines the intelligence primitive that sits between Evidence Acquisition and Commercial Reasoning.
+
+Evidence supports Observations. Observations update the Enterprise Model. Observations support Strategic Signals. Signals support Hypotheses. Hypotheses support Commercial Theses. Commercial Theses support Recommendations.
+
+This creates the core intelligence chain:
+
+```text
+Evidence → Observation → Strategic Signal → Hypothesis → Commercial Thesis → Recommendation
+```
+
+## Purpose
+
+CIOS should not reason directly over raw documents, scrape fragments or isolated snippets when a structured intelligence primitive can be created. Raw evidence is necessary, but it is not sufficient memory.
+
+CIOS should reason over structured Observations that are:
+
+- atomic;
+- evidence-backed;
+- time-aware;
+- reusable;
+- explainable;
+- commercially relevant;
+- independent of any single report.
+
+The Observation is therefore the smallest reusable unit of Enterprise Intelligence: a durable statement about what changed, what condition exists, what relationship matters, what absence is notable or what contradiction has emerged.
+
+## Why observations exist
+
+Evidence, Observation, Signal, Hypothesis and Recommendation answer different questions.
+
+Evidence:
+Annual report says “operating costs increased by 8%.”
+
+Observation:
+Operating cost pressure increased.
+
+Signal:
+Cost pressure may be creating a need for operating-model transformation.
+
+Hypothesis:
+Enterprise may pursue automation or service redesign to reduce operating cost.
+
+Recommendation:
+Validate the cost pressure and ownership with CFO / COO.
+
+Observations prevent Flora from jumping from document snippets to commercial conclusions. They force the system to preserve a structured memory layer between evidence and reasoning, so that commercial judgement can be inspected, reused, challenged and improved.
+
+## Observation pipeline
+
+The canonical pipeline is:
+
+```text
+Source
+→ Evidence
+→ Observation
+→ Strategic Signal
+→ Pattern
+→ Hypothesis
+→ Commercial Thesis
+→ Recommendation
+```
+
+- **Source:** The origin of potentially useful enterprise information, such as an annual report, procurement notice, regulatory filing, job advert, executive statement or trusted human input.
+- **Evidence:** A collected, attributable record of what was published, stated, observed or supplied.
+- **Observation:** A structured, evidence-backed statement describing a meaningful enterprise change, condition, relationship, absence or contradiction.
+- **Strategic Signal:** A commercially meaningful interpretation indicating possible pressure, behaviour, risk, opportunity or timing.
+- **Pattern:** A cluster of related observations and signals that suggests a recurring enterprise condition or trajectory.
+- **Hypothesis:** A testable interpretation about what may be happening and why it matters commercially.
+- **Commercial Thesis:** A reasoned commercial judgement about enterprise need, likely action, timing and relevance.
+- **Recommendation:** A proposed next action, validation step or engagement move.
+
+## Definition of an Observation
+
+An Observation is a structured statement describing a meaningful change, condition, relationship, absence or contradiction about an enterprise, supported by one or more evidence objects.
+
+Observation types include:
+
+- Change
+- Condition
+- Event
+- Relationship
+- Absence
+- Contradiction
+- Trend
+- Anomaly
+- Confirmation
+- Weakening
+
+## Observation principles
+
+Observations must be:
+
+- **Atomic:** one observation should express one meaningful fact or change.
+- **Evidence-backed:** every observation should reference evidence or be explicitly human-supplied.
+- **Time-aware:** observations have observation date, evidence date and collection date.
+- **Reusable:** the same observation can support multiple signals or hypotheses.
+- **Explainable:** a human can inspect why the observation exists.
+- **Non-duplicative:** repeated evidence should strengthen the same observation, not create noisy duplicates.
+- **Commercially relevant:** observations should improve understanding of pressure, behaviour, opportunity, risk or timing.
+- **Separate from narrative:** observations are not executive prose.
+
+## Observation categories
+
+### Enterprise Strategy observations
+
+Enterprise Strategy observations describe changes in declared direction, strategic priorities, portfolio choices or market positioning. They help CIOS understand where leadership says the enterprise is going and whether that direction creates transformation pressure or opportunity.
+
+Examples:
+
+- Strategy updated.
+- AI becomes strategic priority.
+- Cost reduction target increased.
+- Market exit announced.
+- Expansion announced.
+- Business model repositioning detected.
+
+### Financial observations
+
+Financial observations describe changes in enterprise performance, economics, investment capacity, cost pressure or unit-level financial health. They help CIOS connect commercial reasoning to pressure, affordability, urgency and constraints.
+
+Examples:
+
+- Revenue slowed.
+- Margin deteriorated.
+- Operating costs increased.
+- Debt rose.
+- Capex increased.
+- Capex reduced.
+- Cash flow improved.
+- Business unit underperformed.
+- Cost reduction target announced.
+
+### Executive observations
+
+Executive observations describe leadership changes, sponsor signals, governance structures and public leadership emphasis. They help CIOS identify who may own change and whether executive attention is shifting.
+
+Examples:
+
+- New CIO appointed.
+- CFO changed.
+- COO departure announced.
+- Board reshuffle occurred.
+- Technology committee formed.
+- Transformation sponsor changed.
+- Executive publicly emphasised productivity / AI / cyber / cost.
+
+### Technology observations
+
+Technology observations describe platform choices, digital programmes, security posture, data capability, AI governance and technology modernisation. They help CIOS identify transformation state and likely technology pathways.
+
+Examples:
+
+- Oracle adopted.
+- SAP programme extended.
+- Cloud migration announced.
+- Data platform expanded.
+- AI governance introduced.
+- Legacy retirement announced.
+- Cyber investment increased.
+- Zero Trust programme launched.
+
+### Operating Model observations
+
+Operating Model observations describe how work, accountability, service delivery and organisational structures are changing. They help CIOS detect transformation pressure that may not yet appear as procurement demand.
+
+Examples:
+
+- Shared services expanded.
+- Contact centres consolidated.
+- Field workforce restructured.
+- Business unit merged.
+- Operating model decentralised.
+- Outsourcing increased.
+- Insourcing announced.
+
+### Commercial / Procurement observations
+
+Commercial / Procurement observations describe visible buying activity, supplier movement, contract timing and commercial routes. They help CIOS connect enterprise need to accessible opportunity.
+
+Examples:
+
+- Procurement published.
+- PIN issued.
+- Framework used.
+- Supplier replaced.
+- Contract extended.
+- Incumbent retained.
+- Award notice published.
+- Contract expiry approaching.
+- Supplier spend increased.
+- Supplier spend declined.
+
+### People and workforce observations
+
+People and workforce observations describe labour demand, workforce constraints, capability building, sentiment and employee relations. They help CIOS understand whether transformation is being pulled by skills, capacity, industrial relations or workforce redesign.
+
+Examples:
+
+- AI recruitment increased.
+- Cyber hiring increased.
+- Hiring freeze announced.
+- Redundancy programme announced.
+- Skills shortage evidenced.
+- Graduate programme launched.
+- Union pressure increased.
+- Public workforce sentiment weakened.
+
+### Competition observations
+
+Competition observations describe peer movement, market comparison, challenger activity and relative performance. They help CIOS understand whether external market pressure is increasing transformation inevitability.
+
+Examples:
+
+- Competitor investment increased.
+- Market share declined.
+- AI-first entrant emerged.
+- Strategic acquisition completed.
+- Peer outperformed.
+- Customer churn increased.
+- Regulatory comparison worsened.
+
+### Regulation observations
+
+Regulation observations describe compliance obligations, enforcement, scrutiny and policy change. They help CIOS identify non-discretionary pressure and timing constraints.
+
+Examples:
+
+- Regulator investigation opened.
+- Compliance deadline approaching.
+- Fine issued.
+- Audit criticism published.
+- Licence condition updated.
+- Consultation launched.
+- Parliamentary scrutiny increased.
+
+### Security observations
+
+Security observations describe cyber events, security leadership, programmes, controls, guidance and regulatory pressure. They help CIOS identify resilience pressure and secure-by-design transformation needs.
+
+Examples:
+
+- Cyber incident occurred.
+- CISO appointed.
+- Security programme launched.
+- Zero Trust adopted.
+- NCSC guidance applies.
+- Security investment increased.
+- Regulatory cyber pressure increased.
+
+### Relationship observations
+
+Relationship observations describe meaningful links between people, suppliers, advisers, boards and partnerships. They help CIOS interpret access, influence, incumbent strength and ecosystem movement.
+
+Examples:
+
+- Executive previously worked with supplier.
+- Supplier partnership announced.
+- Board member connected to sector adviser.
+- Incumbent relationship renewed.
+- Strategic alliance expanded.
+
+### Absence observations
+
+Absence observations describe important missing evidence after a defined search. They are valuable because silence can itself change commercial interpretation, but they require careful confidence labelling and must avoid overclaiming.
+
+Examples:
+
+- No AI strategy found despite peer adoption.
+- No procurement evidence found despite transformation pressure.
+- No named sponsor identified.
+- No budget evidence visible.
+- No supplier evidence found for stated programme.
+
+## Observation object
+
+A standard Observation object should include:
+
+- Observation ID
+- Observation Type
+- Category
+- Statement
+- Observed Entity
+- Related Entities
+- Observation Date
+- Evidence Date
+- Collection Date
+- Evidence References
+- Source Families
+- Confidence
+- Freshness
+- Severity
+- Novelty
+- Materiality
+- Commercial Relevance
+- Transformation Relevance
+- Opportunity Relevance
+- Affected Enterprise Model Attributes
+- Supporting Strategic Signals
+- Supporting Hypotheses
+- Contradictory Observations
+- Unknowns
+- Generated By
+- Human Validation State
+- Lifecycle State
+- Expiry / Review Date
+
+## Observation quality
+
+Observation quality should be assessed across these dimensions:
+
+- Specificity
+- Novelty
+- Materiality
+- Authority
+- Corroboration
+- Freshness
+- Commercial usefulness
+- Noise level
+- Explainability
+- Independence
+- Absence significance
+
+Suggested quality bands:
+
+- **90–100:** high-specificity, material, evidence-backed observation.
+- **75–89:** strong observation requiring limited corroboration.
+- **60–74:** useful observation but incomplete or single-source.
+- **40–59:** context observation only.
+- **0–39:** reject or diagnostics only.
+
+## Observation lifecycle
+
+Observation lifecycle states are:
+
+- Detected
+- Validated
+- Corroborated
+- Strengthened
+- Weakened
+- Contradicted
+- Retired
+- Archived
+
+Lifecycle transitions should preserve lineage and explain why the state changed:
+
+- **Detected → Validated:** evidence quality passes threshold.
+- **Validated → Corroborated:** independent evidence supports the observation.
+- **Corroborated → Strengthened:** additional source families support the observation.
+- **Strengthened → Weakened:** evidence ages or contradictions appear.
+- **Any state → Contradicted:** reliable opposing evidence appears.
+- **Any state → Retired:** the observation is no longer commercially relevant.
+- **Retired → Archived:** the observation is preserved only for history.
+
+## Observation relationships
+
+One observation may:
+
+- support multiple Strategic Signals;
+- support multiple Hypotheses;
+- contradict another Observation;
+- strengthen Enterprise Behaviour;
+- modify Transformation Pressure;
+- modify Transformation Inevitability;
+- modify Opportunity Outlook;
+- trigger Enterprise Model updates;
+- create Evidence Demand;
+- generate a Collection Task.
+
+These relationships make Observations reusable intelligence atoms rather than one-off report statements.
+
+## Observation clustering
+
+Observations become patterns when multiple related statements indicate a coherent enterprise movement.
+
+Example:
+
+Observation:
+AI recruitment increased.
+
+Observation:
+Chief AI Officer appointed.
+
+Observation:
+Data platform investment announced.
+
+Observation:
+AI governance policy published.
+
+Pattern:
+AI capability expansion.
+
+Strategic Signal:
+Enterprise AI transformation may be forming.
+
+Hypothesis:
+Enterprise is preparing to scale AI across operations.
+
+Recommendation:
+Validate sponsor, budget, use cases and governance maturity with CIO / Chief AI Officer.
+
+## Observation confidence
+
+Confidence belongs to Observations, not just Evidence. An evidence object may be reliable while the derived Observation remains uncertain because the commercial meaning is ambiguous.
+
+Observation confidence depends on:
+
+- evidence quality;
+- source authority;
+- independent corroboration;
+- recency;
+- specificity;
+- contradiction state;
+- historical reliability;
+- source family diversity;
+- whether the observation is direct, inferred or absence-based.
+
+A highly reliable evidence object may still produce a weak Observation if commercial meaning is ambiguous.
+
+## Observation decay
+
+Observation decay weakens current relevance; it should not erase history. Older observations may remain important as context even when they no longer justify current commercial action.
+
+Fast-decay observations include:
+
+- job adverts;
+- live procurement notices;
+- executive statements;
+- press releases;
+- incidents;
+- conference claims.
+
+Medium-decay observations include:
+
+- transformation programmes;
+- supplier relationships;
+- technology platform use;
+- financial guidance;
+- organisational structures.
+
+Slow-decay observations include:
+
+- executive appointment history;
+- completed ERP replacement;
+- long-term operating model;
+- ownership structure;
+- durable regulatory obligations.
+
+## Observation deduplication
+
+Multiple evidence records may support the same Observation. CIOS should not create five duplicate observations if five sources repeat the same announcement.
+
+Instead, CIOS should:
+
+- strengthen the existing observation;
+- add corroborating evidence;
+- update confidence;
+- update source diversity;
+- preserve source lineage.
+
+Deduplication should compare statement meaning, observed entity, observation type, category, time window, evidence lineage and contradiction state.
+
+## Observation absence and negative intelligence
+
+Absence can be informative when it is grounded in a defined search context.
+
+Examples:
+
+- No procurement evidence despite high transformation pressure.
+- No AI governance evidence despite AI ambition.
+- No named executive sponsor despite programme announcements.
+- No budget evidence despite transformation language.
+
+Absence observations must:
+
+- record what was searched;
+- record where it was searched;
+- record search date;
+- avoid overclaiming;
+- generate evidence demand.
+
+Absence observations should usually carry lower confidence than direct observations unless the search scope is authoritative, repeatable and recent.
+
+## Observation examples
+
+### BT example
+
+Evidence:
+BT announcement states it joined Anthropic Project Glasswing for cyber defence.
+
+Observation:
+BT is publicly associating frontier AI with cyber resilience.
+
+Signal:
+AI-enabled cyber resilience may be becoming strategically relevant.
+
+Hypothesis:
+BT may be exploring AI-enabled resilience as part of wider network operations transformation.
+
+Unknowns:
+Budget, sponsor, operational deployment, procurement route.
+
+### DWP example
+
+Evidence:
+DWP publishes procurement or operational evidence linked to casework, debt, automation or citizen service scale.
+
+Observation:
+DWP operational service pressure is visible in citizen-service processes.
+
+Signal:
+Operational scale and automation pressure may support service transformation.
+
+Hypothesis:
+DWP may need AI-enabled casework or debt-service transformation.
+
+Unknowns:
+Policy sponsor, budget, procurement timing, incumbent position.
+
+### National Grid example
+
+Evidence:
+National Grid reports grid connection, resilience, investment or regulatory pressure.
+
+Observation:
+Grid resilience and capacity pressure increased.
+
+Signal:
+Critical infrastructure digital operations may be becoming more urgent.
+
+Hypothesis:
+National Grid may require asset intelligence, forecasting or secure-by-design operations transformation.
+
+Unknowns:
+Programme owner, supplier ecosystem, investment route, regulatory driver.
+
+## Relationship to EI Volume 1
+
+EI-001 stores Observations within the Commercial Digital Twin. EI-002 stores Observation relationships in the Enterprise Knowledge Graph. EI-003 uses Observations to infer Enterprise Behaviour.
+
+Observations are the update mechanism for the Enterprise Model. They convert evidence into memory, give the Commercial Digital Twin fresh state, create graph relationships and provide the Behaviour Model with structured signals of enterprise movement.
+
+## Relationship to CIRM
+
+Observations are the primary intelligence objects entering CIRM.
+
+CIRM should not reason directly over raw evidence where an Observation can be created. Evidence supports Observations. Observations support Strategic Signals. Strategic Signals support Hypotheses and Commercial Conviction.
+
+The CIRM reasoning chain should therefore preserve the distinction:
+
+- Evidence is proof.
+- Observation is memory.
+- Signal is meaning.
+- Hypothesis is interpretation.
+- Recommendation is action.
+
+## Relationship to future Volume 5 papers
+
+EI-013 Enterprise Learning Model will define how observations improve the Enterprise Model over time.
+
+EI-014 Commercial Conversation Model will define how observations support executive conversations.
+
+EI-015 Enterprise Question Model will define the questions Flora asks of an enterprise.
+
+EI-016 Enterprise Curiosity Engine will define how Flora decides what to investigate next.
+
+## Open questions
+
+- How should observations be deduplicated across enterprises?
+- How should sector-level observations be handled?
+- Should observations be manually validated before supporting high-conviction hypotheses?
+- How should observations learn from human feedback?
+- What observation types should be mandatory for Level 2 or Level 3 Commercial Digital Twins?
+- How should absence observations be prevented from becoming false negatives?
+- What quality threshold should be required for an observation to update Opportunity Outlook?
