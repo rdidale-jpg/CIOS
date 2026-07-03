@@ -94,7 +94,7 @@ Enterprise Intelligence defines the enterprise knowledge model CIOS builds and m
 - Enterprise Intelligence papers define the enterprise knowledge model.
 - Flora is the first runtime implementation.
 
-The Enterprise Intelligence series begins with each monitored enterprise as a living Commercial Digital Twin that supports executive intelligence, account planning, opportunity prediction and strategic business development. See [`enterprise-intelligence/README.md`](enterprise-intelligence/README.md).
+The Enterprise Intelligence series begins with each monitored enterprise as a living Commercial Digital Twin that supports executive intelligence, account planning, opportunity prediction and strategic business development. Volume 5 adds Intelligence Foundations, including the Enterprise Observation Model that defines Observations as reusable intelligence atoms between evidence acquisition and CIRM reasoning. See [`enterprise-intelligence/README.md`](enterprise-intelligence/README.md).
 
 ## Repository sections
 

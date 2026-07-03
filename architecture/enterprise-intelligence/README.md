@@ -69,3 +69,10 @@ The Founding Papers FP-003 to FP-009 define the intelligence process: observatio
 - EI-009 — Transformation Pressure Model
 - EI-010 — Enterprise Momentum Model
 - EI-011 — Enterprise Economics Model
+
+### Volume 5 — Intelligence Foundations
+
+Volume 5 defines the foundational intelligence concepts that sit between evidence acquisition and commercial reasoning. The Observation Model defines the smallest reusable unit of enterprise intelligence. Evidence updates observations; observations update the Commercial Digital Twin and feed Strategic Signals, hypotheses and recommendations.
+
+- [Volume 5 — Intelligence Foundations](volume-5-intelligence-foundations/README.md)
+- [EI-012 — Enterprise Observation Model](volume-5-intelligence-foundations/EI-012-Enterprise-Observation-Model.md)
