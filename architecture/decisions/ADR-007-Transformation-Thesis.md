@@ -1,9 +1,13 @@
-# ADR-001 — Signal Architecture
+# ADR-007 — Transformation Thesis
 
-**Purpose:** Record the decision basis for CIOS signal architecture.  
-**Status:** draft  
+**Purpose:** Record the decision basis for the CIOS transformation thesis.  
+**Status:** Proposed  
 **Owner:** Rob / CIOS  
 **Last updated:** 2026-07-02
+
+## Migration note
+
+This ADR is a migrated placeholder. It must be reviewed before acceptance.
 
 ## Overview
 

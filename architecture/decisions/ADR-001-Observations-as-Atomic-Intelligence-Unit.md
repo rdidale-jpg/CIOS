@@ -59,6 +59,14 @@ This does not require every runtime change to implement the full Observation Eng
 
 The Observation Engine becomes a foundational runtime capability for Flora. Report generation should become a view over Observation-backed Enterprise Model state, not the primary destination of collected evidence.
 
+## Compliance test
+
+- Does the change create or preserve Observations as reusable objects?
+- Does it avoid direct reasoning from raw evidence where Observations should exist?
+- Does it update Enterprise Model state rather than only reports?
+- Does it preserve evidence lineage from Observation back to Source?
+- Does it keep unknowns, contradictions and confidence limits visible at Observation level?
+
 ## Review date
 
 2026-10-03

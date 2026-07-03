@@ -43,6 +43,14 @@ Flora should:
 - [EI-001 — Enterprise Model Specification](../enterprise-intelligence/volume-1-enterprise-modelling/EI-001-Enterprise-Model-Specification.md)
 - [EI-002 — Enterprise Knowledge Graph](../enterprise-intelligence/volume-1-enterprise-modelling/EI-002-Enterprise-Knowledge-Graph.md)
 
+## Compliance test
+
+- Does the change label human-supplied knowledge with source, owner or provenance?
+- Does it date human context so stale relationship intelligence can be challenged?
+- Does it distinguish human judgement from externally evidenced facts in outputs?
+- Does it show where human context affects conviction, hypotheses or recommendations?
+- Does it prevent sensitive human knowledge from silently becoming a fact?
+
 ## Review date
 
 2026-10-03
