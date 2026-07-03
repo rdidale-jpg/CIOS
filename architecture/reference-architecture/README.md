@@ -1,7 +1,7 @@
 # CIOS Reference Architecture
 
-**Status:** Draft  
-**Owner:** Rob / CIOS  
+**Status:** Draft
+**Owner:** Rob / CIOS
 **Last updated:** 2026-07-03
 
 ## Purpose
@@ -22,14 +22,23 @@ The Reference Architecture defines:
 
 ## Documents
 
+- [CIOS AI Context](../../CIOS-AI.md) — top-level working rules for AI assistants and Codex sessions.
 - [CIOS Reference Architecture v1.0](CIOS-Reference-Architecture-v1.0.md) — the single authoritative architecture entry point for CIOS.
 - [RA-001 — CIOS Enterprise Intelligence Meta Model](meta-model/RA-001-CIOS-Enterprise-Intelligence-Meta-Model.md) — the authoritative conceptual model for first-class objects, relationships, lifecycle, state, temporality and evidence lineage.
 - [Glossary](Glossary.md) — concise definitions for CIOS architecture terminology.
-- [Document Map](Document-Map.md) — navigation map for Founding Papers, Enterprise Intelligence papers and runtime architecture documents.
+- [Document Map](Document-Map.md) — navigation map for Founding Papers, Enterprise Intelligence papers, ADRs and runtime architecture documents.
 - [Architecture Principles](Architecture-Principles.md) — first principles and detailed operating principles.
 - [Architecture Maturity Model](Architecture-Maturity-Model.md) — staged model for how CIOS evolves from evidence collection to autonomous business development partnership.
 - [Architecture Roadmap](Architecture-Roadmap.md) — implementation phases that align runtime work to the architecture.
+- [CIOS Design Doctrine](CIOS-Design-Doctrine.md) — design philosophy and reasoning style for CIOS.
+- [AI Session Handoff](AI-Session-Handoff.md) — short copy/paste briefing for new ChatGPT or Codex sessions.
+- [Architecture Decision Records](../decisions/README.md) — index of major architecture decisions and trade-offs.
+  - [ADR-001 — Observations as Atomic Intelligence Unit](../decisions/ADR-001-Observations-as-Atomic-Intelligence-Unit.md)
+  - [ADR-002 — Enterprise Model as Durable Memory](../decisions/ADR-002-Enterprise-Model-as-Durable-Memory.md)
+  - [ADR-003 — CIRM and EI Separation](../decisions/ADR-003-CIRM-and-EI-Separation.md)
+  - [ADR-004 — Human-Supplied Knowledge Must Be Labelled](../decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md)
+  - [ADR-005 — No Recommendation Without Inspectable Lineage](../decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md)
 
 ## Navigation rule
 
-Start here before reading a specific paper or changing runtime behaviour. Use the Reference Architecture to identify the relevant Founding Paper, Enterprise Intelligence paper, runtime design document or compliance standard.
+Start with `CIOS-AI.md` and this Reference Architecture before reading a specific paper or changing runtime behaviour. Use the Reference Architecture to identify the relevant Founding Paper, Enterprise Intelligence paper, runtime design document or compliance standard.
