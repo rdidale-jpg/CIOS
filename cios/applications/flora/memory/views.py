@@ -46,7 +46,7 @@ def factual_digital_twin_workspace(enterprise_id: str, models: EnterpriseModelRe
     maturity = maturity_for_model(model)
     obs_ids = {oid for a in model.attributes.values() for oid in a.observation_ids}
     evidence_ids = {eid for a in model.attributes.values() for eid in a.evidence_ids}
-    overview = f"""<section class='card action'><h1>BT Digital Twin</h1><p>Status: <strong>{escape(maturity)}</strong></p><p>Canonical ID: {escape(enterprise_id)}</p><p>Sector: {escape(str(model.attributes.get('identity.sector').current_value if model.attributes.get('identity.sector') else 'Unknown'))}</p><p>Last refreshed: {escape(model.updated_at)}</p><p>Observation count: {len(obs_ids)} · Evidence count: {len(evidence_ids)} · Unknown count: {len(model.unknowns)} · Contradiction count: {len([a for a in model.attributes.values() if a.contradiction_state == 'contradicted'])} · Stale attribute count: 0</p></section>"""
+    overview = f"""<section class='card action'><h1>BT Digital Twin</h1><p>Status: <strong>{escape(maturity)}</strong></p><p>Canonical ID: {escape(enterprise_id)}</p><p>Sector: {escape(str(model.attributes.get('identity.sector').current_value if model.attributes.get('identity.sector') else 'Unknown'))}</p><p>Last refreshed: {escape(model.updated_at)}</p><p><a href='/financial-intelligence'>Financial Intelligence</a> · <a href='/financial-intelligence'>Refresh Financial Intelligence</a></p><p>Observation count: {len(obs_ids)} · Evidence count: {len(evidence_ids)} · Unknown count: {len(model.unknowns)} · Contradiction count: {len([a for a in model.attributes.values() if a.contradiction_state == 'contradicted'])} · Stale attribute count: 0</p></section>"""
     cov_rows = ''.join(f"<tr><th>{escape(d)}</th><td>{c['coverage_percent']}%</td><td>{len(c['expected_attributes'])}</td><td>{len(c['populated_attributes'])}</td><td>{len(c['unsupported_attributes'])}</td><td>{len(c['contradicted_attributes'])}</td><td>{c['source_count']}</td></tr>" for d,c in coverage.items())
     tabs = "<nav>Overview | Structure | Financials | Strategy | Leadership | Timeline | Unknowns | Evidence</nav>"
     attr_rows=[]
@@ -76,7 +76,7 @@ def factual_digital_twin_page(enterprise_id: str) -> str:
         raise ValueError("Digital Twin enterprise route not found")
     model = EnterpriseModelRepository().get(canonical)
     if not model.attributes:
-        body = """<section class='card action'><h1>BT Digital Twin</h1><p>Status: <strong>Not established</strong></p><p>No accepted factual model state exists yet.</p></section>"""
+        body = """<section class='card action'><h1>BT Digital Twin</h1><p>Status: <strong>Not established</strong></p><p><a href='/financial-intelligence'>Financial Intelligence</a> · <a href='/financial-intelligence'>Refresh Financial Intelligence</a></p><p>No accepted factual model state exists yet.</p></section>"""
     else:
         evidence = [e for e in read_jsonl(DEFAULT_PATH) if (e.get("canonical_enterprise_id") or e.get("enterprise_id") or e.get("organisation")) == canonical]
         body = factual_digital_twin_workspace(canonical, evidence_items=evidence)

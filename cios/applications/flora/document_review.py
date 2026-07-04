@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib, json, os, shutil, uuid
+from types import SimpleNamespace
 from datetime import UTC, datetime
 from html import escape
 from pathlib import Path
@@ -12,12 +13,15 @@ from experiments.document_understanding.schema import ExperimentDocument, Founda
 from cios.applications.flora.memory.service import ObservationMemoryService
 from cios.applications.flora.memory.views import enterprise_memory_panel
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
+from cios.applications.flora.live.documents import fetch_document, parse_pdf_document
 from cios.applications.flora.workspace.views import _page
 
 REVIEW_DIR = Path('.flora_pilot/ai_financial_reports')
 UPLOAD_DIR = REVIEW_DIR / 'uploads'
 RUN_DIR = REVIEW_DIR / 'runs'
 DEFAULT_MODEL = os.getenv('FLORA_DOCUMENT_UNDERSTANDING_MODEL', 'gpt-5.5')
+BT_PROFILE = Path('config/flora/collection_profiles/bt-group-plc.json')
+AUTO_ACCEPT_CONFIDENCE = int(os.getenv('FLORA_FINANCIAL_INTELLIGENCE_AUTO_ACCEPT_CONFIDENCE', '85'))
 
 
 def now_iso() -> str: return datetime.now(UTC).isoformat(timespec='seconds')
@@ -49,6 +53,7 @@ def fact_to_review_claim(fact: FoundationFact, run_id: str) -> dict[str, Any]:
         'value': fact.value_number if fact.value_number is not None else fact.value_text,
         'unit': fact.scale or fact.unit,
         'currency': fact.currency,
+        'business_unit': fact.business_unit or fact.subject_name,
         'period': fact.period_label,
         'state': str(fact.state),
         'confidence': int(round(fact.extraction_confidence * 100)),
@@ -103,6 +108,74 @@ def claim_to_evidence(run: dict[str, Any], claim: dict[str, Any]) -> dict[str, A
         'source_excerpt': claim.get('source_excerpt'),
     }
 
+def _bt_annual_report_source() -> dict[str, Any]:
+    profile = _read_json(BT_PROFILE)
+    for source in profile.get('sources', []):
+        if source.get('source_id') == 'bt-annual-report-2026':
+            return source
+    raise ValueError('BT governed annual-report source not found')
+
+def _source_obj(source: dict[str, Any]) -> SimpleNamespace:
+    return SimpleNamespace(source_id=source['source_id'], source_name=source['source_name'], url=source['url'], source_type=source.get('source_type', 'annual_report'), evidence_tier=source.get('authority_tier', 'tier_1_company_authoritative'), authority_tier=source.get('authority_tier', 'tier_1_company_authoritative'), organisation=source.get('publisher', 'BT Group plc'))
+
+def _is_auto_acceptable(claim: dict[str, Any], run: dict[str, Any]) -> tuple[bool, str]:
+    if not run.get('governed_source') or not run.get('document', {}).get('checksum'):
+        return False, 'source lineage is not governed and complete'
+    if claim.get('claim_type') != 'financial_metric_reported':
+        return False, 'unsupported fact type for automatic financial acceptance'
+    if int(claim.get('confidence') or 0) < AUTO_ACCEPT_CONFIDENCE:
+        return False, 'confidence below governed acceptance threshold'
+    required = ('value', 'unit', 'currency', 'period', 'state', 'page_reference', 'affected_attribute')
+    missing = [field for field in required if not claim.get(field)]
+    if missing:
+        return False, 'missing ' + ', '.join(missing)
+    if not claim.get('business_unit') and 'bt group' not in claim.get('original_statement', '').casefold():
+        return False, 'unclear group or segment scope'
+    return True, 'governed source, page lineage, value, unit, currency, period, basis and confidence verified'
+
+def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
+    svc = ObservationMemoryService(); results=[]; exceptions=[]; accepted=0
+    for claim in run.get('claims', []):
+        ok, reason = _is_auto_acceptable(claim, run)
+        claim['acceptance_reason'] = reason
+        if not ok:
+            claim['review_state'] = 'needs_attention'
+            claim['exception_type'] = reason
+            exceptions.append(claim)
+            continue
+        report = svc.process_evidence(claim_to_evidence(run, claim))
+        results.extend(r.__dict__ for r in report.results)
+        if report.results and not any(r.contradiction for r in report.results):
+            claim['review_state'] = 'auto_applied'
+            accepted += 1
+        else:
+            claim['review_state'] = 'needs_attention'
+            claim['exception_type'] = 'contradiction or validation issue'
+            exceptions.append(claim)
+        exceptions.extend(report.rejected_claims)
+    changed = [r for r in results if r.get('update_result') in {'created', 'updated'}]
+    run.update({'status': 'completed', 'applied_at': now_iso(), 'applied_results': results, 'exceptions': exceptions, 'auto_accepted_count': accepted, 'exception_count': len(exceptions), 'observations_created_or_strengthened': len(results), 'enterprise_attributes_changed': [r.get('affected_attribute') for r in changed]})
+    return run
+
+def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc') -> dict[str, Any]:
+    source = _bt_annual_report_source()
+    run_id = 'fi-' + uuid.uuid4().hex[:12]
+    fetched = fetch_document(source['url'])
+    doc_parse = parse_pdf_document(fetched, _source_obj(source), canonical_enterprise_id='bt-group-plc')
+    document = ExperimentDocument(document_id=doc_parse.document_id, enterprise_id='bt-group-plc', title=source['source_name'], source_url=source['url'], retrieval_timestamp=doc_parse.retrieval_date, checksum=doc_parse.checksum, media_type=doc_parse.media_type or 'application/pdf', page_count=max(doc_parse.page_count, 1), local_path=doc_parse.local_path)
+    provider = OpenAIDirectPDFProvider(model=DEFAULT_MODEL)
+    extraction = provider.extract_facts(document) if fetched.succeeded else None
+    claims = [fact_to_review_claim(f, run_id) for f in (extraction.facts if extraction else [])]
+    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url']}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else DEFAULT_MODEL), 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'claims': claims, 'applied_results': []}
+    if fetched.succeeded and extraction and extraction.status == 'completed':
+        run = _apply_automatic_claims(run)
+    else:
+        run['status'] = 'temporarily_unavailable'
+        run['exceptions'] = [{'exception_type': 'provider_or_source_unavailable', 'rejection_reason': '; '.join(run.get('provider_errors') or [fetched.error])}]
+        run['auto_accepted_count'] = 0; run['exception_count'] = len(run['exceptions']); run['observations_created_or_strengthened'] = 0; run['enterprise_attributes_changed'] = []
+    _write_json(_run_path(run_id), run)
+    return run
+
 def create_upload_run(pdf_path: Path, *, enterprise_id: str = 'bt-group-plc', title: str = 'BT Group plc Annual Report 2026', source_url: str = 'uploaded authoritative PDF') -> dict[str, Any]:
     run_id = 'air-' + uuid.uuid4().hex[:12]
     UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
@@ -147,6 +220,27 @@ def review_home_page(message: str = '') -> str:
     notice = f"<p class='pill'>{escape(message)}</p>" if message else ''
     body = f"""<section class='hero'><h1>AI Financial Report Review</h1><p>Upload an authoritative enterprise financial-report PDF. Flora sends the PDF to a genuine AI document-understanding model, returns strict page-grounded claims for review, and only accepted claims update Observation memory and the Commercial Digital Twin.</p>{notice}</section><section class='card'><h2>Provider status</h2><p>{escape(provider_state)}</p><p class='muted'>Provider route: OpenAI direct PDF · Model: {escape(DEFAULT_MODEL)} · The original PDF is sent to the model as a PDF input file when credentials are present.</p></section><section class='card action'><h2>Collect Financial Report</h2><p>Select an enterprise, add the governed annual report PDF, process it, then accept, amend or reject page-grounded candidate facts before they update Observations and the Commercial Digital Twin.</p><p>Default enterprise: BT Group plc · expected document: BT Group Annual Report 2026.</p><form method='post' action='/ai-financial-report/upload' enctype='multipart/form-data'><label>Enterprise</label><select name='enterprise_id'><option value='bt-group-plc'>BT Group plc</option></select><label>Report title</label><input name='title' value='BT Group plc Annual Report 2026'><label>Source URL or citation</label><input name='source_url' value='https://www.bt.com/about/annual-reports/2026summary/assets/files/BT-Annual-Report-2026.pdf'><label>PDF</label><input type='file' name='pdf' accept='application/pdf'><p><button>Process document</button></p></form></section>"""
     return _page('AI Financial Report Review', body)
+
+def financial_intelligence_page(message: str = '') -> str:
+    source = _bt_annual_report_source()
+    runs = sorted(RUN_DIR.glob('fi-*.json'), key=lambda p: p.stat().st_mtime, reverse=True) if RUN_DIR.exists() else []
+    last = _read_json(runs[0]) if runs else None
+    ready = bool(os.getenv('OPENAI_API_KEY'))
+    state = 'Financial intelligence ready' if ready else 'Financial intelligence is temporarily unavailable'
+    notice = f"<p class='pill'>{escape(message)}</p>" if message else ''
+    summary = _outcome_summary(last) if last else '<p>No Financial Intelligence refresh has run yet.</p>'
+    body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>BT Commercial Digital Twin outcome view. Flora collects the governed annual report, understands the financial facts, updates Observations and the Enterprise Model, then shows what changed and what needs attention.</p>{notice}<p class='pill'>{escape(state)}</p></section><section class='card action'><h2>Active governed source</h2><p><strong>{escape(source['source_name'])}</strong></p><p><a href='{escape(source['url'])}'>{escape(source['url'])}</a></p><p class='muted'>Source is registered in the BT collection profile and collected server-side; no download or upload is required.</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Refresh Financial Intelligence</button></form></section>{summary}<details class='card'><summary><strong>Administrative fallback only</strong></summary><p>Use only when governed automatic collection cannot retrieve a replacement report. This is not the BT sales-user workflow.</p><form method='post' action='/ai-financial-report/upload' enctype='multipart/form-data'><input type='hidden' name='enterprise_id' value='bt-group-plc'><input type='hidden' name='title' value='BT Group plc Annual Report 2026'><input type='hidden' name='source_url' value='{escape(source['url'])}'><input type='file' name='pdf' accept='application/pdf'><button>Admin fallback upload</button></form></details>"""
+    return _page('Financial Intelligence', body)
+
+def _outcome_summary(run: dict[str, Any] | None) -> str:
+    if not run: return ''
+    changes = ''.join(f"<li>{escape(str(r.get('affected_attribute')))} — {escape(str(r.get('update_result')))}</li>" for r in run.get('applied_results', [])[:20]) or '<li>No model changes were applied.</li>'
+    needs = ''.join(f"<li>{escape(str(e.get('exception_type') or e.get('rejection_reason') or e.get('acceptance_reason')))} — page {escape(str(e.get('page_reference') or e.get('page') or e.get('document_page') or 'n/a'))}</li>" for e in run.get('exceptions', [])[:20]) or '<li>No exceptions requiring review.</li>'
+    evidence = ''.join(f"<details><summary>{escape(c.get('original_statement',''))}</summary><p>Page {escape(str(c.get('page_reference')))} · Confidence {escape(str(c.get('confidence')))} · Evidence {escape(c.get('evidence_id',''))}</p><p>{escape(str(c.get('source_excerpt') or ''))}</p></details>" for c in run.get('claims', [])[:20]) or '<p>No page-grounded claims returned.</p>'
+    return f"""<section class='card'><h2>Refresh outcome</h2><p>Reporting period: inferred from accepted facts · Collection status: {escape(run.get('status',''))} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Automatically accepted facts</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{run.get('exception_count',0)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a></p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Inference / Signal:</strong> maintained Enterprise Model financial attributes changed or strengthened; use this as a prompt for account planning, not as a standalone commercial conclusion.</p></section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
+
+def financial_intelligence_run_page(run_id: str) -> str:
+    return _page('Financial Intelligence outcome', _outcome_summary(load_run(run_id)))
 
 def run_page(run_id: str) -> str:
     run = load_run(run_id)
