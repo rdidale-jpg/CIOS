@@ -1,19 +1,32 @@
 """JSONL/JSON repositories for durable Flora memory.
 
-Flora remains dependency-light in this runtime: no database drivers are introduced.
-The migration for this sprint creates file-backed ledgers under .flora_pilot/memory.
+The Observation ledger is the authoritative intelligence history. It is a
+single-writer JSONL file: every append writes one complete JSON record, flushes,
+and fsyncs. Enterprise Model files are derived projections written via atomic
+snapshot replacement and may be rebuilt from the ledger.
 """
 from __future__ import annotations
 
 import json
+import os
+import re
 from pathlib import Path
 from typing import Iterable
 
-from cios.applications.flora.live.store import read_jsonl, write_jsonl
 from cios.applications.flora.memory.models import EnterpriseModel, Observation
 
 OBSERVATION_LEDGER_PATH = Path(".flora_pilot/memory/observations.jsonl")
 ENTERPRISE_MODEL_DIR = Path(".flora_pilot/memory/enterprise_models")
+_SAFE_ID = re.compile(r"[^a-z0-9_-]+")
+
+
+def _safe_enterprise_file_id(enterprise_id: str) -> str:
+    raw = str(enterprise_id or "unknown").strip()
+    folded = raw.casefold()
+    slug = _SAFE_ID.sub("_", folded).strip("._-") or "unknown"
+    slug = slug[:48]
+    digest = __import__("hashlib").sha256(raw.encode()).hexdigest()[:16]
+    return f"{slug}-{digest}"
 
 
 class ObservationRepository:
@@ -21,7 +34,21 @@ class ObservationRepository:
         self.path = path
 
     def list(self) -> list[Observation]:
-        return [Observation.from_dict(row) for row in read_jsonl(self.path)]
+        if not self.path.exists():
+            return []
+        observations: list[Observation] = []
+        with self.path.open("r", encoding="utf-8") as handle:
+            for line_no, line in enumerate(handle, start=1):
+                if not line.strip():
+                    continue
+                try:
+                    row = json.loads(line)
+                except json.JSONDecodeError as exc:
+                    raise ValueError(f"Malformed Observation JSONL record at {self.path}:{line_no}") from exc
+                if not isinstance(row, dict):
+                    raise ValueError(f"Malformed Observation JSONL record at {self.path}:{line_no}")
+                observations.append(Observation.from_dict(row))
+        return observations
 
     def get(self, observation_id: str) -> Observation | None:
         return next((o for o in self.list() if o.observation_id == observation_id), None)
@@ -33,19 +60,38 @@ class ObservationRepository:
         existing = self.get_by_fingerprint(observation.observation_fingerprint or "")
         if existing:
             evidence = tuple(dict.fromkeys([*existing.supporting_evidence_ids, *observation.supporting_evidence_ids]))
-            if evidence != existing.supporting_evidence_ids:
+            history_changed = evidence != existing.supporting_evidence_ids or observation.confidence != existing.confidence
+            if history_changed:
                 existing.supporting_evidence_ids = evidence
                 existing.confidence = max(existing.confidence, observation.confidence)
                 existing.updated_at = observation.updated_at
                 self._rewrite([existing if o.observation_id == existing.observation_id else o for o in self.list()])
             return existing
-        write_jsonl([observation.to_dict()], self.path)
+        self._append_record(observation.to_dict())
         return observation
+
+    def _append_record(self, row: dict) -> None:
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        encoded = json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
+        with self.path.open("a", encoding="utf-8") as handle:
+            handle.write(encoded)
+            handle.flush()
+            os.fsync(handle.fileno())
 
     def _rewrite(self, observations: Iterable[Observation]) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.path.write_text("", encoding="utf-8")
-        write_jsonl([o.to_dict() for o in observations], self.path)
+        tmp = self.path.with_name(f".{self.path.name}.tmp")
+        with tmp.open("w", encoding="utf-8") as handle:
+            for observation in observations:
+                handle.write(json.dumps(observation.to_dict(), ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp, self.path)
+        dir_fd = os.open(str(self.path.parent), os.O_DIRECTORY)
+        try:
+            os.fsync(dir_fd)
+        finally:
+            os.close(dir_fd)
 
 
 class EnterpriseModelRepository:
@@ -53,8 +99,12 @@ class EnterpriseModelRepository:
         self.directory = directory
 
     def path_for(self, enterprise_id: str) -> Path:
-        safe = "".join(ch if ch.isalnum() or ch in "-_" else "_" for ch in enterprise_id.strip()) or "unknown"
-        return self.directory / f"{safe}.json"
+        path = self.directory / f"{_safe_enterprise_file_id(enterprise_id)}.json"
+        resolved_dir = self.directory.resolve()
+        resolved_path = path.resolve(strict=False)
+        if resolved_dir not in resolved_path.parents:
+            raise ValueError("Unsafe enterprise model path")
+        return path
 
     def get(self, enterprise_id: str) -> EnterpriseModel:
         path = self.path_for(enterprise_id)
@@ -65,5 +115,16 @@ class EnterpriseModelRepository:
     def save(self, model: EnterpriseModel) -> EnterpriseModel:
         path = self.path_for(model.enterprise_id)
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps(model.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        tmp = path.with_name(f".{path.name}.tmp")
+        data = json.dumps(model.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+        with tmp.open("w", encoding="utf-8") as handle:
+            handle.write(data)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp, path)
+        dir_fd = os.open(str(path.parent), os.O_DIRECTORY)
+        try:
+            os.fsync(dir_fd)
+        finally:
+            os.close(dir_fd)
         return model

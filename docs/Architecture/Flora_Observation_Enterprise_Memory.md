@@ -1,13 +1,13 @@
-# Flora Observation-backed Enterprise Memory Foundation
+# Flora Observation Enterprise Memory
 
-Implemented on 2026-07-04.
+Flora persists accepted Evidence as durable, schema-versioned Observations in a single canonical memory implementation under `cios/applications/flora/memory/`. The Observation ledger is the authoritative intelligence history; Enterprise Model JSON files are derived projections used by product views.
 
-Accepted Evidence now creates durable atomic Observations in `.flora_pilot/memory/observations.jsonl`. Observation identity is deterministic: enterprise ID, observation type, atomic statement and affected model attribute are normalised and SHA-256 hashed. Reprocessing the same claim returns the existing Observation; new supporting Evidence IDs are appended as corroboration without deleting original provenance.
+`ObservationMemoryService` owns the update path. It converts accepted Evidence into atomic Observations, deduplicates with an `obs-v1-` fingerprint over normalised enterprise ID, Observation type, statement, affected attribute and effective date, and excludes volatile collection timestamps. Reprocessing identical Evidence is idempotent; corroborating Evidence is attached to the existing Observation without erasing original lineage.
 
-The minimal Enterprise Model projection is stored per enterprise under `.flora_pilot/memory/enterprise_models/`. Implemented domains are enterprise identity, transformation programmes, financial pressure, technology events and procurement events. Each attribute stores current value, Observation IDs, reachable Evidence IDs, confidence, freshness, last observed date, provenance type, prior values and contradiction state.
+`ObservationRepository` stores one JSON record per ledger line, validates `schema_version`, detects malformed JSONL, and flushes/fsyncs appends. `EnterpriseModelRepository` writes projections through temporary files, flush, fsync and `os.replace`, with safe enterprise file identifiers based on normalised names plus hashes.
 
-`ObservationMemoryService` owns the update path: accepted Evidence is converted to an Observation, validated for lineage, atomic non-speculative wording and no Recommendation language, then applied to the model. Unknown statements create explicit Unknown records. Contradictory observations are retained as conflicts and do not silently overwrite current state.
+The minimal Enterprise Model projection currently covers enterprise identity, transformation programmes, financial pressure, technology events and procurement events. Attributes expose current value, Observation IDs, Evidence IDs, confidence, confidence history, freshness, last observed date, provenance, prior values and contradiction state. Unknowns expose stable ID, enterprise ID, question, affected domain, lifecycle status, review timing and related Observations.
 
-The selected model-backed output is the organisation Observatory page because it is the narrowest existing user-facing enterprise briefing with lineage expectations. It now renders an Enterprise Memory panel from maintained model state before the generated reasoning layers. The panel exposes confidence, freshness, Unknowns, contradiction warnings, Observation IDs and Evidence IDs.
+The Observatory renders the model-backed Enterprise Memory panel from persisted projections. Reports are views; deleting or regenerating reports must not remove memory. Contradictory Observations coexist, affected attributes are marked contradicted, and output must not present contradicted state as certain.
 
-Deferred capabilities: full EI-001 model coverage, graph persistence, decay formula, automatic contradiction resolution, complete human knowledge governance, historical backfill, Recommendation-engine redesign and Commercial Digital Twin maturity.
+The file-backed implementation is single-writer. Future migration to a database-backed store is expected when Flora requires concurrent writers, immutable event-level corroboration history, cross-enterprise graph queries, transactional governance or operational recovery tooling.

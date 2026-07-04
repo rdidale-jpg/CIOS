@@ -76,7 +76,7 @@ class ObservationMemoryService:
             unknown_id = f"UNK-{hashlib.sha256((observation.enterprise_id + key).encode()).hexdigest()[:12].upper()}"
             existing = model.unknowns.get(unknown_id)
             related = tuple(dict.fromkeys([*(existing.related_observation_ids if existing else ()), observation.observation_id or ""]))
-            model.unknowns[unknown_id] = EnterpriseUnknown(unknown_id, observation.enterprise_id, f"Unknown model state for {key}", domain, "medium", ("accepted corroborating evidence",), "open", related)
+            model.unknowns[unknown_id] = EnterpriseUnknown(unknown_id, observation.enterprise_id, f"Unknown model state for {key}", domain, "medium", ("accepted corroborating evidence",), "open", related, review_at=observation.last_confirmed_date)
             model.updated_at = now_iso(); self.models.save(model)
             return ModelUpdateResult(observation.enterprise_id, observation.observation_id or "", key, "unknown_created", unknown_created=True)
 
@@ -98,7 +98,9 @@ class ObservationMemoryService:
             value = observation.atomic_statement
             conflicts = ()
             state = observation.contradiction_state
-        model.attributes[key] = EnterpriseModelAttribute(domain, key, value, max(observation.confidence, existing.confidence if existing else 0), observation.last_confirmed_date or observation.observation_date, observation.freshness, observation_ids, evidence_ids, observation.provenance_type, state, conflicts, prior)
+        confidence = max(observation.confidence, existing.confidence if existing else 0)
+        confidence_history = (*(existing.confidence_history if existing else ()), {"observation_id": observation.observation_id or "", "confidence": observation.confidence, "recorded_at": now_iso()})
+        model.attributes[key] = EnterpriseModelAttribute(domain, key, value, confidence, observation.last_confirmed_date or observation.observation_date, observation.freshness, observation_ids, evidence_ids, observation.provenance_type, state, conflicts, prior, confidence_history)
         model.updated_at = now_iso()
         self.models.save(model)
         return ModelUpdateResult(observation.enterprise_id, observation.observation_id or "", key, "contradiction_recorded" if contradiction else ("updated" if existing else "created"), contradiction=contradiction)
