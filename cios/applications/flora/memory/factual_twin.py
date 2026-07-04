@@ -72,6 +72,17 @@ def coverage_for_model(model)->dict[str,Any]:
 
 def maturity_for_model(model)->str:
  cov=coverage_for_model(model)
+ if all(cov[d]['populated_attributes'] for d in ['identity','structure','financial_performance','strategy','leadership']) and any('bt-foundation' in eid or str(eid).startswith('bt-') for a in model.attributes.values() for eid in a.evidence_ids):
+  return 'Foundation — calibrated'
  if all(cov[d]['populated_attributes'] for d in ['identity','structure','financial_performance','strategy','leadership']): return 'Foundation'
  if any(cov[d]['populated_attributes'] for d in cov): return 'Foundation — partial'
  return 'Not established'
+
+def automatic_extraction_comparison(golden_facts:list[dict[str,Any]], automatic_evidence:list[dict[str,Any]], accepted_attributes:set[str]|None=None)->list[dict[str,Any]]:
+ rows=[]
+ accepted_attributes=accepted_attributes or set()
+ for fact in golden_facts:
+  matches=[e for e in automatic_evidence if e.get('affected_attribute')==fact.get('affected_attribute') or str(fact.get('atomic_statement')) in str(e.get('cleaned_observation') or e.get('snippet') or '')]
+  best=matches[0] if matches else {}
+  rows.append({'fact_id':fact.get('fact_id'),'automatically_recovered':bool(matches),'claim_type_correct':best.get('commercial_condition')==fact.get('claim_type') if best else False,'value_correct':str(fact.get('structured_value') or '') in str(best.get('cleaned_observation') or best.get('snippet') or best.get('value') or '') if best else False,'period_correct':(not fact.get('period')) or str(fact.get('period')) in str(best.get('affected_attribute') or best.get('period') or best.get('cleaned_observation') or ''),'page_correct':str(best.get('page_number') or best.get('page_range') or '')==str(fact.get('page')) if best else False,'observation_accepted':bool(matches),'model_attribute_correct':str(fact.get('affected_attribute')) in accepted_attributes})
+ return rows
