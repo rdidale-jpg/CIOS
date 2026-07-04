@@ -11,6 +11,7 @@ from cios.applications.flora.live.source_registry import SOURCES, canonical_orga
 from cios.applications.flora.live.store import DEFAULT_DIAGNOSTICS_PATH, DEFAULT_PATH, load_evidence_fingerprints, read_jsonl, unique_evidence, write_jsonl
 from cios.applications.flora.live.progress import complete_state, read_state, start_state, update_state
 from cios.applications.flora.live.alignment import build_acquisition_plans, lifecycle_action
+from cios.applications.flora.memory.service import ObservationMemoryService
 
 FAILURE_CATEGORIES = {"access_blocked", "timeout", "network_error", "non_html", "no_relevant_evidence", "parser_error", "unknown"}
 
@@ -129,6 +130,7 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
     output = write_jsonl(new_evidence) if new_evidence else DEFAULT_PATH
     output.parent.mkdir(parents=True, exist_ok=True)
     output.touch(exist_ok=True)
+    memory_results = [ObservationMemoryService().accept_evidence(item) for item in new_evidence]
     write_jsonl(diagnostics, DEFAULT_DIAGNOSTICS_PATH)
     after_observatory = observatory_snapshot(build_observatory())
     observatory_delta = compare_observatory_snapshots(
@@ -165,6 +167,7 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
         "recommended_next_collection_actions": [f"{p['organisation']}: {', '.join(p.get('next_collection_objectives', [])[:2])}" for p in urgent[:10]],
         "source_improvement_recommendations": [d.get("recommended_source_fix") for d in diagnostics if d.get("recommended_source_fix")],
         "diagnostics": diagnostics,
+        "observations_updated": len(memory_results),
         "observatory_delta": observatory_delta,
         "output_location": str(output),
         "diagnostics_location": str(DEFAULT_DIAGNOSTICS_PATH),
