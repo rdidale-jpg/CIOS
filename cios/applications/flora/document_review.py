@@ -1,6 +1,8 @@
 """AI document-understanding review workflow for Flora financial reports."""
 from __future__ import annotations
 
+from cios.applications.flora.storage import PersistenceError, atomic_write_json, data_path, ensure_writable_dir
+
 import hashlib, json, os, shutil, uuid
 from types import SimpleNamespace
 from datetime import UTC, datetime
@@ -16,7 +18,7 @@ from cios.applications.flora.live.source_registry import canonical_enterprise_id
 from cios.applications.flora.live.documents import fetch_document, parse_pdf_document
 from cios.applications.flora.workspace.views import _page
 
-REVIEW_DIR = Path('.flora_pilot/ai_financial_reports')
+REVIEW_DIR = data_path('ai_financial_reports')
 UPLOAD_DIR = REVIEW_DIR / 'uploads'
 RUN_DIR = REVIEW_DIR / 'runs'
 DEFAULT_MODEL = os.getenv('FLORA_DOCUMENT_UNDERSTANDING_MODEL', 'gpt-5.5')
@@ -63,10 +65,7 @@ def _read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding='utf-8'))
 
 def _write_json(path: Path, data: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_name(f'.{path.name}.tmp')
-    tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')
-    os.replace(tmp, path)
+    atomic_write_json(path, data)
 
 def _run_path(run_id: str) -> Path: return RUN_DIR / f'{run_id}.json'
 
@@ -193,13 +192,14 @@ def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
 def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc') -> dict[str, Any]:
     source = _bt_annual_report_source()
     run_id = 'fi-' + uuid.uuid4().hex[:12]
+    ensure_writable_dir(RUN_DIR)
     fetched = fetch_document(source['url'])
     doc_parse = parse_pdf_document(fetched, _source_obj(source), canonical_enterprise_id='bt-group-plc')
     document = ExperimentDocument(document_id=doc_parse.document_id, enterprise_id='bt-group-plc', title=source['source_name'], source_url=source['url'], retrieval_timestamp=doc_parse.retrieval_date, checksum=doc_parse.checksum, media_type=doc_parse.media_type or 'application/pdf', page_count=max(doc_parse.page_count, 1), local_path=doc_parse.local_path)
     provider = OpenAIDirectPDFProvider(model=DEFAULT_MODEL)
     extraction = provider.extract_facts(document) if fetched.succeeded else None
     claims = [fact_to_review_claim(f, run_id) for f in (extraction.facts if extraction else [])]
-    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url']}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else DEFAULT_MODEL), 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'claims': claims, 'applied_results': []}
+    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url']}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else DEFAULT_MODEL), 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'openai_invoked': bool(extraction), 'claims': claims, 'applied_results': []}
     run['collection'].update({'final_url': fetched.final_url or fetched.url, 'content_type': fetched.media_type, 'redirect_chain': list(fetched.redirect_chain), 'redirected': bool(fetched.redirect_chain)})
     if not fetched.succeeded:
         run = _mark_failure(run, 'source_retrieval_failed', fetched.error or 'governed source retrieval failed')
@@ -212,7 +212,10 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc') -> dict[
             run = _mark_failure(run, 'persistence_failed', f'{type(exc).__name__}: {exc}')
     else:
         run = _mark_failure(run, _provider_failure_category(extraction), '; '.join(run.get('provider_errors') or ['provider did not complete']))
-    _write_json(_run_path(run_id), run)
+    try:
+        _write_json(_run_path(run_id), run)
+    except PersistenceError as exc:
+        run = _mark_failure(run, 'persistence_failed', f'{type(exc).__name__}: {exc}')
     return run
 
 def create_upload_run(pdf_path: Path, *, enterprise_id: str = 'bt-group-plc', title: str = 'BT Group plc Annual Report 2026', source_url: str = 'uploaded authoritative PDF') -> dict[str, Any]:

@@ -122,3 +122,65 @@ def test_outcome_summary_uses_plain_language_and_retry_for_zero_changes():
     assert 'Financial document understanding is temporarily unavailable.' in html
     assert '<button>Retry</button>' in html
     assert 'attributes changed or strengthened' not in html
+
+
+def test_financial_intelligence_refresh_creates_missing_nested_directories(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path / 'flora'))
+    import importlib
+    import cios.applications.flora.document_review as review
+    review = importlib.reload(review)
+    pdf = b'%PDF-1.4\nFLORA PDF PAGE 1 (Revenue was 20.4 billion GBP) Tj\n'
+    class Fetch:
+        succeeded = True; status_code = 200; media_type = 'application/pdf'; content = pdf; checksum = 'b' * 64
+        local_path = str(tmp_path / 'bt.pdf'); retrieval_date = review.now_iso(); error = ''; final_url = 'https://www.bt.com/report.pdf'; url = final_url; redirect_chain = ()
+    def fake_extract(self, document, schema=None, page_ranges=None):
+        return ExtractionRun(run_id='x', route='openai-direct', provider='openai', model='gpt-5.5', status='completed', started_at=review.now_iso(), completed_at=review.now_iso(), latency_seconds=0, facts=[fact()])
+    monkeypatch.setattr(review, 'fetch_document', lambda url: Fetch())
+    monkeypatch.setattr(review.OpenAIDirectPDFProvider, 'extract_facts', fake_extract)
+    monkeypatch.setattr(review, '_bt_annual_report_source', lambda: {'source_id': 'bt-annual-report-2026', 'source_name': 'BT Group plc Annual Report 2026', 'url': 'https://www.bt.com/report.pdf', 'source_type': 'annual_report', 'authority_tier': 'tier_1_company_authoritative', 'publisher': 'BT Group plc'})
+
+    run = review.refresh_financial_intelligence()
+
+    assert run['status'] == 'completed'
+    assert (tmp_path / 'flora' / 'ai_financial_reports' / 'runs' / f"{run['run_id']}.json").exists()
+    assert (tmp_path / 'flora' / 'memory' / 'observations.jsonl').exists()
+    assert (tmp_path / 'flora' / 'memory' / 'enterprise_models').is_dir()
+    assert run['openai_invoked'] is True
+
+
+def test_financial_intelligence_persistence_failure_is_not_provider_failure(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    class Fetch:
+        succeeded = False; status_code = 403; media_type = 'text/plain'; content = b''; checksum = ''; local_path = ''
+        retrieval_date = ai_review.now_iso(); error = 'HTTP 403'; final_url = 'https://www.bt.com/report.pdf'; url = final_url; redirect_chain = ()
+    monkeypatch.setattr(ai_review, 'fetch_document', lambda url: Fetch())
+    monkeypatch.setattr(ai_review, '_bt_annual_report_source', lambda: {'source_id': 'bt-annual-report-2026', 'source_name': 'BT Group plc Annual Report 2026', 'url': 'https://www.bt.com/report.pdf', 'source_type': 'annual_report', 'authority_tier': 'tier_1_company_authoritative', 'publisher': 'BT Group plc'})
+    def fail_write(path, data):
+        from cios.applications.flora.storage import PersistenceError
+        raise PersistenceError('disk read-only')
+    monkeypatch.setattr(ai_review, '_write_json', fail_write)
+
+    run = ai_review.refresh_financial_intelligence()
+
+    assert run['status'] == 'persistence_failed'
+    assert run['failure_category'] == 'persistence_failed'
+    assert run['exceptions'][0]['exception_type'] == 'persistence_failed'
+    assert run['openai_invoked'] is False
+
+
+def test_provider_request_failures_remain_classified(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    pdf = b'%PDF-1.4\nBT Annual Report fixture'
+    class Fetch:
+        succeeded = True; status_code = 200; media_type = 'application/pdf'; content = pdf; checksum = 'c' * 64
+        local_path = str(tmp_path / 'bt.pdf'); retrieval_date = ai_review.now_iso(); error = ''; final_url = 'https://www.bt.com/report.pdf'; url = final_url; redirect_chain = ()
+    def fake_extract(self, document, schema=None, page_ranges=None):
+        return ExtractionRun(run_id='x', route='openai-direct', provider='openai', model='gpt-5.5', status='request_failed', started_at=ai_review.now_iso(), completed_at=ai_review.now_iso(), latency_seconds=0, provider_errors=['timeout'])
+    monkeypatch.setattr(ai_review, 'fetch_document', lambda url: Fetch())
+    monkeypatch.setattr(ai_review.OpenAIDirectPDFProvider, 'extract_facts', fake_extract)
+    monkeypatch.setattr(ai_review, '_bt_annual_report_source', lambda: {'source_id': 'bt-annual-report-2026', 'source_name': 'BT Group plc Annual Report 2026', 'url': 'https://www.bt.com/report.pdf', 'source_type': 'annual_report', 'authority_tier': 'tier_1_company_authoritative', 'publisher': 'BT Group plc'})
+
+    run = ai_review.refresh_financial_intelligence()
+
+    assert run['status'] == 'provider_request_failed'
+    assert run['openai_invoked'] is True

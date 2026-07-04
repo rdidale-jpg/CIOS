@@ -1,6 +1,8 @@
 """Deterministic Flora runtime alignment with FP-004/005/006."""
 from __future__ import annotations
 
+from cios.applications.flora.storage import data_path
+
 import re
 from collections import Counter, defaultdict
 from datetime import UTC, datetime
@@ -9,8 +11,8 @@ from typing import Any
 
 from cios.applications.flora.live.store import read_jsonl, write_jsonl
 
-EVIDENCE_ACQUISITION_PLANS_PATH = Path('.flora_pilot/live_evidence/evidence_acquisition_plans.jsonl')
-USER_FEEDBACK_PATH = Path('.flora_pilot/live_evidence/user_feedback.jsonl')
+EVIDENCE_ACQUISITION_PLANS_PATH = data_path('live_evidence','evidence_acquisition_plans.jsonl')
+USER_FEEDBACK_PATH = data_path('live_evidence','user_feedback.jsonl')
 COVERAGE_CATEGORIES = ('Strategy','Finance','Technology','Procurement','Leadership','Operations','Regulation','Delivery','Suppliers','Customers / citizens','Risk / security')
 DEMAND_TYPES = ('sponsor evidence','budget evidence','procurement evidence','supplier evidence','technology architecture evidence','delivery pressure evidence','regulatory evidence','operating model evidence','skills / workforce evidence','customer/citizen impact evidence')
 

@@ -7,6 +7,8 @@ snapshot replacement and may be rebuilt from the ledger.
 """
 from __future__ import annotations
 
+from cios.applications.flora.storage import atomic_write_text, data_path, ensure_parent_writable
+
 import json
 import os
 import re
@@ -16,8 +18,8 @@ from typing import Iterable
 from cios.applications.flora.memory.models import EnterpriseModel, Observation
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
 
-OBSERVATION_LEDGER_PATH = Path(".flora_pilot/memory/observations.jsonl")
-ENTERPRISE_MODEL_DIR = Path(".flora_pilot/memory/enterprise_models")
+OBSERVATION_LEDGER_PATH = data_path('memory','observations.jsonl')
+ENTERPRISE_MODEL_DIR = data_path('memory','enterprise_models')
 _SAFE_ID = re.compile(r"[^a-z0-9_-]+")
 
 
@@ -31,8 +33,8 @@ def _safe_enterprise_file_id(enterprise_id: str) -> str:
 
 
 class ObservationRepository:
-    def __init__(self, path: Path = OBSERVATION_LEDGER_PATH):
-        self.path = path
+    def __init__(self, path: Path | None = None):
+        self.path = path or data_path("memory", "observations.jsonl")
 
     def list(self) -> list[Observation]:
         if not self.path.exists():
@@ -72,7 +74,7 @@ class ObservationRepository:
         return observation
 
     def _append_record(self, row: dict) -> None:
-        self.path.parent.mkdir(parents=True, exist_ok=True)
+        ensure_parent_writable(self.path)
         encoded = json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
         with self.path.open("a", encoding="utf-8") as handle:
             handle.write(encoded)
@@ -80,24 +82,13 @@ class ObservationRepository:
             os.fsync(handle.fileno())
 
     def _rewrite(self, observations: Iterable[Observation]) -> None:
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        tmp = self.path.with_name(f".{self.path.name}.tmp")
-        with tmp.open("w", encoding="utf-8") as handle:
-            for observation in observations:
-                handle.write(json.dumps(observation.to_dict(), ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n")
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(tmp, self.path)
-        dir_fd = os.open(str(self.path.parent), os.O_DIRECTORY)
-        try:
-            os.fsync(dir_fd)
-        finally:
-            os.close(dir_fd)
+        data = "".join(json.dumps(observation.to_dict(), ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n" for observation in observations)
+        atomic_write_text(self.path, data)
 
 
 class EnterpriseModelRepository:
-    def __init__(self, directory: Path = ENTERPRISE_MODEL_DIR):
-        self.directory = directory
+    def __init__(self, directory: Path | None = None):
+        self.directory = directory or data_path("memory", "enterprise_models")
 
     def path_for(self, enterprise_id: str) -> Path:
         path = self.directory / f"{_safe_enterprise_file_id(enterprise_id)}.json"
@@ -117,17 +108,6 @@ class EnterpriseModelRepository:
     def save(self, model: EnterpriseModel) -> EnterpriseModel:
         model.enterprise_id = canonical_enterprise_id(model.enterprise_id) or model.enterprise_id
         path = self.path_for(model.enterprise_id)
-        path.parent.mkdir(parents=True, exist_ok=True)
-        tmp = path.with_name(f".{path.name}.tmp")
         data = json.dumps(model.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n"
-        with tmp.open("w", encoding="utf-8") as handle:
-            handle.write(data)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(tmp, path)
-        dir_fd = os.open(str(path.parent), os.O_DIRECTORY)
-        try:
-            os.fsync(dir_fd)
-        finally:
-            os.close(dir_fd)
+        atomic_write_text(path, data)
         return model

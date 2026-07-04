@@ -21,6 +21,7 @@ from cios.applications.flora.workspace.feedback import create_feedback_record, c
 from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
+from cios.applications.flora.storage import startup_storage_status
 from cios.applications.flora.document_review import apply_accepted, create_upload_run, financial_intelligence_page, financial_intelligence_run_page, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 
 DEFAULT_HOST = "0.0.0.0"
@@ -53,7 +54,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         try:
             if parsed.path == "/health":
-                self._json(HEALTH_PAYLOAD)
+                self._json({**HEALTH_PAYLOAD, "storage": startup_storage_status()})
             elif parsed.path in {"/", "/morning-edition"}:
                 self._html(landing_page())
             elif parsed.path in {"/live", "/evidence"}:
@@ -293,6 +294,8 @@ def run(host: str | None = None, port: int | None = None) -> None:
 
     bind_host = host or env_host()
     bind_port = port if port is not None else env_port()
+    storage = startup_storage_status()
+    print(f"Flora storage {storage['status']}: {storage['data_root']}", flush=True)
     server = ThreadingHTTPServer((bind_host, bind_port), FloraWebHandler)
     print(f"Flora web service listening on {bind_host}:{bind_port}", flush=True)
     try:

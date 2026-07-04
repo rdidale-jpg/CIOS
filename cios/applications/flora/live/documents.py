@@ -1,6 +1,8 @@
 """Governed document retrieval and PDF extraction for Flora factual sources."""
 from __future__ import annotations
 
+from cios.applications.flora.storage import data_path, ensure_parent_writable
+
 import hashlib, re, tempfile
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
@@ -12,7 +14,7 @@ from urllib.request import Request, urlopen
 MAX_DOCUMENT_BYTES = 25_000_000
 MAX_PDF_PAGES = 350
 EXTRACTION_VERSION = "flora-pdf-text-v1"
-PDF_CACHE_DIR = Path(".flora_pilot/documents")
+PDF_CACHE_DIR = data_path('documents')
 
 @dataclass(frozen=True)
 class DocumentPage:
@@ -74,8 +76,8 @@ def fetch_document(url: str, *, timeout: float = 12.0, max_bytes: int = MAX_DOCU
                 return DocumentFetchResult(url, False, status, media_type, retrieval_date=retrieval_date, error="document exceeded max_bytes", final_url=getattr(resp, "url", None) or resp.geturl())
             checksum = hashlib.sha256(raw).hexdigest()
             suffix = ".pdf" if media_type == "application/pdf" or raw.startswith(b"%PDF") else ".bin"
-            PDF_CACHE_DIR.mkdir(parents=True, exist_ok=True)
             path = PDF_CACHE_DIR / f"{checksum[:16]}{suffix}"
+            ensure_parent_writable(path)
             path.write_bytes(raw)
             final_url = getattr(resp, "url", None) or resp.geturl()
             redirects = (url, final_url) if final_url and final_url != url else ()

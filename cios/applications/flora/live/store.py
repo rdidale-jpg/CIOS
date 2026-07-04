@@ -1,14 +1,16 @@
 """JSONL persistence for local Flora live evidence receipts."""
 from __future__ import annotations
 
+from cios.applications.flora.storage import data_path, ensure_parent_writable
+
 import hashlib
 import json
 import re
 from pathlib import Path
 from typing import Any
 
-DEFAULT_PATH = Path(".flora_pilot/live_evidence/live_evidence.jsonl")
-DEFAULT_DIAGNOSTICS_PATH = Path(".flora_pilot/live_evidence/source_diagnostics.jsonl")
+DEFAULT_PATH = data_path('live_evidence','live_evidence.jsonl')
+DEFAULT_DIAGNOSTICS_PATH = data_path('live_evidence','source_diagnostics.jsonl')
 
 
 def _normalise(value: Any) -> str:
@@ -53,10 +55,12 @@ def unique_evidence(items: list[dict[str, Any]], path: Path = DEFAULT_PATH) -> t
 
 
 def write_jsonl(items: list[dict[str, Any]], path: Path = DEFAULT_PATH) -> Path:
-    path.parent.mkdir(parents=True, exist_ok=True)
+    ensure_parent_writable(path)
     with path.open("a", encoding="utf-8") as handle:
         for item in items:
             handle.write(json.dumps(item, ensure_ascii=False, sort_keys=True) + "\n")
+        handle.flush()
+        __import__("os").fsync(handle.fileno())
     return path
 
 

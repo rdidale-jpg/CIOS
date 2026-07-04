@@ -1,6 +1,8 @@
 """CLI and shared service for governed Flora live evidence collection."""
 from __future__ import annotations
 
+from cios.applications.flora.storage import data_path
+
 import argparse
 from datetime import UTC, datetime
 from typing import Any
@@ -258,9 +260,9 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
         raise ValueError("Source counters do not reconcile")
     if manifest["evidence_candidates"] != manifest["evidence_accepted"] + manifest["evidence_rejected"] + manifest["evidence_downgraded"] + manifest["evidence_duplicate"]:
         raise ValueError("Evidence candidate dispositions do not reconcile")
-    mpath = Path(".flora_pilot/collection_manifests") / f"{run_id}.json"
-    mpath.parent.mkdir(parents=True, exist_ok=True)
-    mpath.write_text(json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8")
+    mpath = data_path('collection_manifests') / f"{run_id}.json"
+    from cios.applications.flora.storage import atomic_write_json
+    atomic_write_json(mpath, manifest)
     final_progress = complete_state(result_state, f"Collection complete\nSources: {len(manifest['sources_retrieved'])}/{len(sources)} retrieved\nEvidence: {manifest['evidence_accepted']} accepted, {manifest['evidence_rejected']} rejected\nObservations: {obs_created} created, {obs_corroborated} corroborated\nModel: {attrs_created} attributes created, {unknowns_created} Unknowns", sources_attempted=len(manifest["sources_attempted"]), sources_succeeded=len(manifest["sources_retrieved"]), sources_retrieved=len(manifest["sources_retrieved"]), sources_failed=len(manifest["sources_failed"]), evidence_candidates=evidence_candidates, evidence_accepted=len(new_evidence), evidence_rejected=evidence_rejected, evidence_downgraded=evidence_downgraded, evidence_context_only=manifest["evidence_context_only"], evidence_duplicate=duplicate_count, evidence_corroborated=obs_corroborated, evidence_extraction_failed=0, documents_retrieved=manifest["documents_retrieved"], pdfs_parsed=manifest["pdfs_parsed"], pages_extracted=manifest["pages_extracted"], tables_detected=manifest["tables_detected"], observations_created=obs_created, observations_corroborated=obs_corroborated, observations_rejected=len(rejected_claims), model_attributes_created=attrs_created, model_attributes_changed=manifest["model_attributes_changed"], model_attributes_reconfirmed=obs_corroborated, unknowns_created=unknowns_created, contradictions_created=contradictions_created, warnings=manifest["warnings"], errors=manifest["errors"], rejected_claims=rejected_claims[:25], accepted_evidence_diagnostics=accepted_diagnostics[:25], decomposition_diagnostics=decomposition_diagnostics[:25], application_revision=application_revision())
     return {
         "progress_state": final_progress,
@@ -312,7 +314,7 @@ def current_status() -> dict[str, Any]:
     manifest: dict[str, Any] = {}
     run_id = progress.get("run_id")
     if run_id:
-        mpath = Path(".flora_pilot/collection_manifests") / f"{run_id}.json"
+        mpath = data_path('collection_manifests') / f"{run_id}.json"
         if mpath.exists():
             try:
                 manifest = json.loads(mpath.read_text(encoding="utf-8"))

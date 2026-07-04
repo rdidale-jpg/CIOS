@@ -1,6 +1,8 @@
 """Lightweight file-backed live collection progress state."""
 from __future__ import annotations
 
+from cios.applications.flora.storage import atomic_write_json, data_path
+
 import json
 import uuid
 from datetime import UTC, datetime
@@ -9,7 +11,7 @@ from typing import Any
 
 from cios.applications.flora.live.runtime import application_revision
 
-STATE_DIR = Path(".flora_pilot/live_evidence")
+STATE_DIR = data_path('live_evidence')
 STATE_PATH = STATE_DIR / "collection_run_state.json"
 TERMINAL_STATES = {"completed", "completed_with_no_accepted_intelligence", "failed", "interrupted", "completed successfully", "Completed with no accepted intelligence"}
 IN_PROGRESS_STATES = {"queued", "starting", "collecting", "parsing", "extracting_evidence", "accepting_evidence", "creating_observations", "updating_model", "running"}
@@ -23,8 +25,7 @@ def default_state() -> dict[str, Any]:
     return {"run_id":"none","started_at":None,"completed_at":None,"status":"queued","canonical_enterprise_id":"","enterprise_display_name":"","profile_id":"","collection_mode":"","collection_pass":"","sources_total":0,"sources_attempted":0,"sources_succeeded":0,"sources_failed":0,"sources_retrieved":0,"evidence_candidates":0,"evidence_accepted":0,"evidence_rejected":0,"evidence_downgraded":0,"evidence_context_only":0,"evidence_duplicate":0,"evidence_corroborated":0,"evidence_extraction_failed":0,"documents_retrieved":0,"pdfs_parsed":0,"pages_extracted":0,"tables_detected":0,"observations_created":0,"observations_corroborated":0,"observations_rejected":0,"model_attributes_created":0,"model_attributes_changed":0,"model_attributes_reconfirmed":0,"unknowns_created":0,"contradictions_created":0,"evidence_extracted":0,"current_source_name":"","percent_complete":0,"latest_message":"No collection has started.","warnings":[],"errors":[],"application_revision":application_revision(),"rejected_claims":[],"accepted_evidence_diagnostics":[],"decomposition_diagnostics":[]}
 
 def write_state(state: dict[str, Any]) -> dict[str, Any]:
-    STATE_DIR.mkdir(parents=True, exist_ok=True)
-    STATE_PATH.write_text(json.dumps(state, indent=2, sort_keys=True), encoding="utf-8")
+    atomic_write_json(STATE_PATH, state)
     return state
 
 def mark_stale_interrupted(max_age_seconds: int = 1800) -> dict[str, Any]:
