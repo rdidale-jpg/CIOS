@@ -7,7 +7,7 @@ from typing import Any
 
 from cios.applications.flora.live.extractor import extract_evidence_with_diagnostics
 from cios.applications.flora.live.fetcher import fetch_html
-from cios.applications.flora.live.source_registry import SOURCES, canonical_organisation, canonical_enterprise_id, collection_scope, enabled_sources, source_canonical_enterprise_id
+from cios.applications.flora.live.source_registry import SOURCES, canonical_organisation, canonical_enterprise_id, collection_scope, enabled_sources, load_collection_profile, source_canonical_enterprise_id
 from cios.applications.flora.live.store import DEFAULT_DIAGNOSTICS_PATH, DEFAULT_PATH, load_evidence_fingerprints, read_jsonl, unique_evidence, write_jsonl
 from pathlib import Path
 import json, os, uuid
@@ -111,10 +111,17 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
     mode = collection_mode or (scope.collection_mode if scope else "live_plus_seeded")
     sources = enabled_sources(organisation, profile_id=profile_id, passes=passes) if profile_id or passes else enabled_sources(organisation)
     scoped_enterprise_id = scope.canonical_enterprise_id if scope else canonical_enterprise_id(organisation)
-    start_state(len(sources))
+    scoped_display_name = scope.display_name if scope else (canonical_organisation(organisation) if organisation else "All configured enterprises")
+    selected_passes = passes or (load_collection_profile(profile_id).get("default_passes", []) if profile_id else [])
+    if scope:
+        permitted = set(scope.permitted_source_ids)
+        out_of_scope = [s.source_id for s in sources if s.source_id not in permitted or source_canonical_enterprise_id(s) != scope.canonical_enterprise_id]
+        if out_of_scope:
+            raise ValueError(f"Collection scope violation for {scope.collection_profile}: {', '.join(out_of_scope)}")
+    collection_started_at = datetime.now(UTC).isoformat()
+    start_state(len(sources), run_id=run_id, canonical_enterprise_id=scoped_enterprise_id, enterprise_display_name=scoped_display_name, profile_id=profile_id, collection_mode=mode, collection_pass=",".join(selected_passes))
     diagnostics: list[dict[str, Any]] = []
     evidence: list[dict[str, Any]] = []
-    collection_started_at = datetime.now(UTC).isoformat()
     for source in sources:
         update_state(current_source_name=source.source_name, latest_message=f"Collecting {source.source_name}")
         attempted_at = collection_started_at
@@ -139,7 +146,8 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
                 succeeded = False
                 parse_error = f"parser_error: {exc}"
         diagnostics.append(_diagnostic(source, attempted_at, result, source_evidence, rejected_evidence, parse_error, succeeded))
-        update_state(sources_attempted=len(diagnostics), sources_succeeded=len([d for d in diagnostics if d["status"] != "failed"]), sources_failed=len([d for d in diagnostics if d["status"] == "failed"]), evidence_extracted=len(evidence), latest_message=f"Finished {source.source_name}")
+        evidence_candidates = len(evidence) + sum(int(d.get("rejected_evidence_count") or 0) for d in diagnostics) + sum(int(d.get("downgraded_evidence_count") or 0) for d in diagnostics)
+        update_state(sources_attempted=len(diagnostics), sources_succeeded=len([d for d in diagnostics if d["status"] != "failed"]), sources_retrieved=len([d for d in diagnostics if d["status"] != "failed"]), sources_failed=len([d for d in diagnostics if d["status"] == "failed"]), evidence_extracted=len(evidence), evidence_candidates=evidence_candidates, evidence_accepted=len(evidence), evidence_rejected=sum(int(d.get("rejected_evidence_count") or 0) for d in diagnostics), evidence_downgraded=sum(int(d.get("downgraded_evidence_count") or 0) for d in diagnostics), latest_message=f"Finished {source.source_name}")
     new_evidence, duplicate_count, fingerprints = unique_evidence(evidence)
     output = write_jsonl(new_evidence) if new_evidence else DEFAULT_PATH
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -162,11 +170,20 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
     attrs_created = len([r for r in memory_results if r.action == "created"])
     unknowns_created = len([r for r in memory_results if r.unknown_created])
     contradictions_created = len([r for r in memory_results if r.contradiction])
-    manifest = {"run_id": run_id, "canonical_enterprise_id": scoped_enterprise_id, "profile_id": profile_id, "started_at": collection_started_at, "completed_at": completed_at, "collection_mode": mode, "passes": passes or (scope and []) or [], "sources_planned": [s.source_id for s in sources], "sources_attempted": [d["source_id"] for d in diagnostics], "sources_retrieved": [d["source_id"] for d in diagnostics if d["status"] != "failed"], "sources_rejected": [d["source_id"] for d in diagnostics if d["status"] == "failed"], "evidence_accepted": len(new_evidence), "evidence_rejected": sum(int(d.get("rejected_evidence_count") or 0) for d in diagnostics), "evidence_downgraded": sum(int(d.get("downgraded_evidence_count") or 0) for d in diagnostics), "observations_created": obs_created, "observations_corroborated": obs_corroborated, "observations_rejected": 0, "enterprise_model_attributes_created": attrs_created, "attributes_changed": len([r for r in memory_results if r.action == "updated"]), "attributes_reconfirmed": obs_corroborated, "unknowns_created": unknowns_created, "contradictions_created": contradictions_created, "errors": [d for d in diagnostics if d.get("status") == "failed"], "warnings": []}
+    evidence_rejected = sum(int(d.get("rejected_evidence_count") or 0) for d in diagnostics)
+    evidence_downgraded = sum(int(d.get("downgraded_evidence_count") or 0) for d in diagnostics)
+    evidence_candidates = len(evidence) + evidence_rejected + evidence_downgraded
+    source_failures = [d for d in diagnostics if d["status"] == "failed"]
+    result_state = "completed successfully" if diagnostics and len([d for d in diagnostics if d["status"] != "failed"]) >= 1 and len(new_evidence) >= 1 and (obs_created + obs_corroborated) >= 1 and (attrs_created + obs_corroborated) >= 1 else "Completed with no accepted intelligence"
+    manifest = {"run_id": run_id, "canonical_enterprise_id": scoped_enterprise_id, "enterprise_display_name": scoped_display_name, "profile_id": profile_id, "started_at": collection_started_at, "completed_at": completed_at, "collection_mode": mode, "passes": selected_passes, "sources_planned": [s.source_id for s in sources], "sources_attempted": [d["source_id"] for d in diagnostics], "sources_retrieved": [d["source_id"] for d in diagnostics if d["status"] != "failed"], "sources_failed": [d["source_id"] for d in source_failures], "evidence_candidates": evidence_candidates, "evidence_accepted": len(new_evidence), "evidence_rejected": evidence_rejected, "evidence_downgraded": evidence_downgraded, "observations_created": obs_created, "observations_corroborated": obs_corroborated, "observations_rejected": 0, "model_attributes_created": attrs_created, "model_attributes_changed": len([r for r in memory_results if r.action == "updated"]), "model_attributes_reconfirmed": obs_corroborated, "unknowns_created": unknowns_created, "contradictions_created": contradictions_created, "result_state": result_state, "errors": [d for d in diagnostics if d.get("status") == "failed"], "warnings": []}
+    if len(manifest["sources_attempted"]) != len(manifest["sources_retrieved"]) + len(manifest["sources_failed"]):
+        raise ValueError("Source counters do not reconcile")
+    if manifest["evidence_candidates"] != manifest["evidence_accepted"] + manifest["evidence_rejected"] + manifest["evidence_downgraded"] + duplicate_count:
+        manifest["warnings"].append("Evidence candidates include duplicate accepted evidence skipped from durable writes.")
     mpath = Path(".flora_pilot/collection_manifests") / f"{run_id}.json"
     mpath.parent.mkdir(parents=True, exist_ok=True)
     mpath.write_text(json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8")
-    final_progress = complete_state("completed", f"Collection complete\nSources: {len(manifest['sources_retrieved'])}/{len(sources)} retrieved\nEvidence: {manifest['evidence_accepted']} accepted, {manifest['evidence_rejected']} rejected\nObservations: {obs_created} created, {obs_corroborated} corroborated\nModel: {attrs_created} attributes created, {unknowns_created} Unknowns")
+    final_progress = complete_state(result_state, f"Collection complete\nSources: {len(manifest['sources_retrieved'])}/{len(sources)} retrieved\nEvidence: {manifest['evidence_accepted']} accepted, {manifest['evidence_rejected']} rejected\nObservations: {obs_created} created, {obs_corroborated} corroborated\nModel: {attrs_created} attributes created, {unknowns_created} Unknowns", sources_attempted=len(manifest["sources_attempted"]), sources_succeeded=len(manifest["sources_retrieved"]), sources_retrieved=len(manifest["sources_retrieved"]), sources_failed=len(manifest["sources_failed"]), evidence_candidates=evidence_candidates, evidence_accepted=len(new_evidence), evidence_rejected=evidence_rejected, evidence_downgraded=evidence_downgraded, observations_created=obs_created, observations_corroborated=obs_corroborated, observations_rejected=0, model_attributes_created=attrs_created, model_attributes_changed=manifest["model_attributes_changed"], model_attributes_reconfirmed=obs_corroborated, unknowns_created=unknowns_created, contradictions_created=contradictions_created, warnings=manifest["warnings"], errors=manifest["errors"])
     return {
         "progress_state": final_progress,
         "last_collection_time": diagnostics[-1]["last_attempted"] if diagnostics else None,
@@ -180,7 +197,9 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
         "duplicate_evidence_skipped": duplicate_count,
         "total_unique_evidence_objects": len(fingerprints),
         "failures": failures,
-        "accepted_evidence_count": len(evidence),
+        "accepted_evidence_count": len(new_evidence),
+        "evidence_candidates": evidence_candidates,
+        "result_state": result_state,
         "rejected_evidence_count": sum(int(d.get("rejected_evidence_count") or 0) for d in diagnostics),
         "downgraded_evidence_count": sum(int(d.get("downgraded_evidence_count") or 0) for d in diagnostics),
         "primary_evidence_count": sum(int(d.get("primary_evidence_count") or 0) for d in diagnostics),

@@ -12,7 +12,7 @@ from urllib.parse import parse_qs, urlparse
 
 from cios.applications.flora.live.collect import collect, current_status
 from cios.applications.flora.live.progress import read_state
-from cios.applications.flora.live.views import acquisition_plans_page, collection_progress_page, collection_result, dashboard, evidence_page, feedback_diagnostics_page, source_effectiveness_page, sources_page
+from cios.applications.flora.live.views import acquisition_plans_page, collection_progress_page, collection_result, collection_start_page, dashboard, evidence_page, feedback_diagnostics_page, source_effectiveness_page, sources_page
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
@@ -54,10 +54,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path in {"/live", "/evidence"}:
                 self._html(dashboard())
             elif parsed.path == "/live/collect":
-                self._html(collection_result(collect()))
+                self._html(collection_result(collect("BT Group plc", profile_id="bt-group-plc", collection_mode="live_authoritative", passes=["baseline"])))
             elif parsed.path == "/live/collect/start":
-                collect()
-                self._redirect("/live/collect/progress")
+                self._html(collection_start_page())
             elif parsed.path == "/live/collect/progress":
                 self._html(collection_progress_page())
             elif parsed.path == "/live/collect/status":
@@ -106,7 +105,14 @@ class FloraWebHandler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:  # noqa: N802 - stdlib callback name
         length = int(self.headers.get("Content-Length", "0"))
         form = parse_qs(self.rfile.read(length).decode("utf-8"), keep_blank_values=True)
-        if self.path == "/live/feedback":
+        if self.path == "/live/collect/start":
+            profile_id = _one(form, "profile_id") or "bt-group-plc"
+            mode = _one(form, "collection_mode") or "live_authoritative"
+            collection_pass = _one(form, "collection_pass") or "baseline"
+            enterprise = _one(form, "enterprise_display_name") or _one(form, "canonical_enterprise_id") or "BT Group plc"
+            collect(enterprise, profile_id=profile_id, collection_mode=mode, passes=[collection_pass])
+            self._redirect("/live/collect/progress")
+        elif self.path == "/live/feedback":
             from cios.applications.flora.live.alignment import persist_feedback
             persist_feedback(target_type=_one(form, "target_type"), target_id=_one(form, "target_id"), feedback_type=_one(form, "feedback_type"), organisation=_one(form, "organisation"), comment=_one(form, "comment"))
             self._redirect(self.headers.get("Referer") or "/live/feedback/diagnostics")

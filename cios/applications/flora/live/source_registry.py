@@ -211,7 +211,7 @@ def organisations_without_enabled_sources() -> list[str]:
     enabled = {s.organisation for s in SOURCES if s.enabled}
     return sorted(org for org in TARGET_ORGANISATIONS if org not in enabled)
 
-PROFILE_DIR = Path("config/flora/collection_profiles")
+PROFILE_DIR = Path(__file__).resolve().parents[4] / "config/flora/collection_profiles"
 COLLECTION_MODES = {"live_authoritative", "live_plus_seeded", "test_fixture"}
 _DEFAULT_ENTERPRISE_ALIASES = {
     "bt": "bt-group-plc",
