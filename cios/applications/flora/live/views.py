@@ -7,6 +7,7 @@ from typing import Any
 from cios.applications.flora.live.collect import current_status, source_coverage
 from cios.applications.flora.live.progress import read_state
 from collections import Counter
+import json
 from cios.applications.flora.live.store import DEFAULT_PATH, load_evidence_fingerprints, read_jsonl
 from cios.applications.flora.live.aggregation import aggregate_live_evidence, unique_live_evidence
 from cios.applications.flora.portfolio import source_effectiveness_rows
@@ -46,14 +47,33 @@ def dashboard() -> str:
 
 def collection_progress_page() -> str:
     state = read_state()
-    pct = int(state.get("percent_complete") or 0)
-    links = "<a href='/live/evidence'>View accepted Evidence</a> · <a href='/live/evidence#rejected'>View rejected Evidence</a> · <a href='/observatory/bt-group-plc'>View Observations</a> · <a href='/observatory/bt-group-plc'>Open BT Digital Twin</a> · <a href='/live/collect/start'>Run recollection test</a>"
-    body = f"""<h1>Live collection progress</h1><section class='card ok'><h2>Status: {escape(str(state.get('status')))}</h2><div style='background:#eee;border-radius:999px;overflow:hidden'><div style='width:{pct}%;background:#185c4d;color:white;padding:8px'>{pct}%</div></div><ul><li>Run ID: {escape(str(state.get('run_id')))}</li><li>Started: {escape(str(state.get('started_at')))}</li><li>Completed: {escape(str(state.get('completed_at')))}</li><li>Selected enterprise: {escape(str(state.get('enterprise_display_name') or ''))}</li><li>Canonical ID: {escape(str(state.get('canonical_enterprise_id') or ''))}</li><li>Profile: {escape(str(state.get('profile_id') or ''))}</li><li>Mode: {escape(str(state.get('collection_mode') or ''))}</li><li>Pass: {escape(str(state.get('collection_pass') or ''))}</li><li>Current source: {escape(str(state.get('current_source_name') or 'n/a'))}</li><li>Sources attempted / total: {state.get('sources_attempted', 0)} / {state.get('sources_total', 0)}</li><li>Retrieved: {state.get('sources_retrieved', state.get('sources_succeeded', 0))}</li><li>Failed: {state.get('sources_failed', 0)}</li><li>Evidence candidates: {state.get('evidence_candidates', 0)}</li><li>Evidence accepted: {state.get('evidence_accepted', 0)}</li><li>Evidence rejected: {state.get('evidence_rejected', 0)}</li><li>Evidence downgraded: {state.get('evidence_downgraded', 0)}</li><li>Observations created: {state.get('observations_created', 0)}</li><li>Observations corroborated: {state.get('observations_corroborated', 0)}</li><li>Model attributes created: {state.get('model_attributes_created', 0)}</li><li>Model attributes changed: {state.get('model_attributes_changed', 0)}</li><li>Warnings: {escape(str(state.get('warnings') or []))}</li><li>Errors: {escape(str(state.get('errors') or []))}</li><li>Latest message: {escape(str(state.get('latest_message')))}</li></ul><p>{links}</p></section><script>setTimeout(function(){{fetch('/live/collect/status').then(r=>r.json()).then(s=>{{if(s.status==='running') location.reload();}}).catch(()=>{{}})}},3000);</script>"""
+    links = "<a href='/live/evidence'>View accepted Evidence</a> · <a href='/observatory/BT'>View Observations</a> · <a href='/digital-twin/bt-group-plc' id='bt-digital-twin-link'>Open BT Digital Twin</a> · <a href='/live/collect/start'>Run recollection test</a>"
+    body = f"""<h1>Live collection progress</h1><section class='card ok'><h2>Status: <span id='status'>{escape(str(state.get('status')))}</span></h2><div style='background:#eee;border-radius:999px;overflow:hidden'><div id='bar' style='width:{state.get('percent_complete',0)}%;background:#185c4d;color:white;padding:8px'>{state.get('percent_complete',0)}%</div></div><dl id='run-fields'></dl><p>{links}</p></section><section class='card'><h2>Source and Evidence counters</h2><table><tbody id='counter-rows'></tbody></table></section><section class='card warn'><h2>Warnings and concise errors</h2><ul id='warnings'></ul><ul id='errors'></ul><details><summary>Analyst diagnostics</summary><pre id='diagnostics'></pre></details></section><script>
+const terminal = new Set(['completed','completed_with_no_accepted_intelligence','failed','interrupted','completed successfully','Completed with no accepted intelligence']);
+function esc(x){{return String(x ?? '').replace(/[&<>]/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;'}}[c]));}}
+function render(s){{
+ document.getElementById('status').textContent=s.status; const pct=s.percent_complete||0; const bar=document.getElementById('bar'); bar.style.width=pct+'%'; bar.textContent=pct+'%';
+ const fields=['run_id','enterprise_display_name','canonical_enterprise_id','profile_id','collection_mode','collection_pass','started_at','completed_at','current_source_name','latest_message'];
+ document.getElementById('run-fields').innerHTML=fields.map(k=>`<dt>${{esc(k.replaceAll('_',' '))}}</dt><dd>${{esc(s[k])}}</dd>`).join('');
+ const counters=['sources_total','sources_attempted','sources_retrieved','sources_failed','documents_retrieved','pdfs_parsed','pages_extracted','tables_detected','evidence_candidates','evidence_accepted','evidence_rejected','evidence_downgraded','evidence_context_only','evidence_duplicate','evidence_corroborated','evidence_extraction_failed','observations_created','observations_corroborated','model_attributes_created','model_attributes_changed'];
+ document.getElementById('counter-rows').innerHTML=counters.filter(k=>Number(s[k]||0)!==0 || ['sources_total','sources_attempted','evidence_candidates'].includes(k)).map(k=>`<tr><th>${{esc(k.replaceAll('_',' '))}}</th><td>${{esc(s[k]||0)}}</td></tr>`).join('');
+ document.getElementById('warnings').innerHTML=(s.warnings||[]).map(w=>`<li>${{esc(w.message||w)}}</li>`).join('') || '<li>None</li>';
+ document.getElementById('errors').innerHTML=(s.errors||[]).map(e=>`<li>${{esc(e.source_name||e.source_id||'Collection')}} — Failed: ${{esc(e.http_status ? 'HTTP '+e.http_status : (e.error||e.message||'unknown'))}}</li>`).join('') || '<li>None</li>';
+ document.getElementById('diagnostics').textContent=JSON.stringify(s,null,2);
+ return terminal.has(s.status);
+}}
+async function poll(){{try{{const r=await fetch('/live/collect/status',{{cache:'no-store'}}); const s=await r.json(); if(!render(s)) setTimeout(poll,2000);}}catch(e){{setTimeout(poll,5000);}}}}
+render({json.dumps(state)}); if(!terminal.has({json.dumps(state.get('status'))})) poll();
+</script>"""
     return _page("Flora Live Collection Progress", body)
 
-def _diagnostic_rows(diagnostics: list[dict[str, Any]]) -> str:
-    return "".join(f"<tr><td>{escape(d['source_id'])}</td><td>{escape(d['organisation'])}</td><td>{escape(d['source_name'])}</td><td>{escape(str(d.get('source_type','')))}</td><td>{escape(str(d.get('source_classification','')))}</td><td><a href='{escape(str(d.get('url','')))}'>{escape(str(d.get('url','')))}</a></td><td>{escape(str(d.get('status') or ('succeeded' if d.get('success') else 'failed')))}</td><td>{escape(str(d.get('http_status') or d.get('error') or ''))}</td><td>{d.get('evidence_count',0)}</td><td>{d.get('rejected_evidence_count',0)}</td><td>{d.get('primary_evidence_count',0)}</td><td>{d.get('secondary_evidence_count',0)}</td><td>{d.get('context_only_count',0)}</td><td>{escape(str(d.get('failure_reason') or ''))}</td><td>{escape(str(d.get('recommended_source_fix') or ''))}</td></tr>" for d in diagnostics)
 
+def _diagnostic_rows(diagnostics: list[dict[str, Any]]) -> str:
+    rows = []
+    for d in diagnostics:
+        concise = f"HTTP {d.get('http_status')}" if d.get('http_status') else (d.get('error') or d.get('failure_reason') or '')
+        rows.append(f"<tr><td>{escape(str(d.get('source_id','')))}</td><td>{escape(str(d.get('organisation','')))}</td><td>{escape(str(d.get('source_name','')))}</td><td>{escape(str(d.get('source_type','')))}</td><td>{escape(str(d.get('source_classification','')))}</td><td>{link_or_label(d.get('url'))}</td><td>{escape(str(d.get('status','')))}</td><td>{escape(str(concise))}</td><td>{d.get('accepted_evidence_count',0)}</td><td>{d.get('rejected_evidence_count',0)}</td><td>{d.get('primary_evidence_count',0)}</td><td>{d.get('secondary_evidence_count',0)}</td><td>{d.get('context_only_count',0)}</td><td>{escape(str(d.get('failure_reason','')))}</td><td>{escape(str(d.get('recommended_source_fix','')))}</td></tr>")
+    return ''.join(rows)
 
 def collection_result(result: dict[str, Any]) -> str:
     rows = _diagnostic_rows(result["diagnostics"])

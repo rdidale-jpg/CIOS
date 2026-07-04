@@ -2,20 +2,192 @@
   "profile_id": "bt-group-plc",
   "profile_name": "BT Group plc Digital Twin calibration",
   "default_collection_mode": "live_authoritative",
-  "default_passes": ["baseline"],
+  "default_passes": [
+    "baseline"
+  ],
   "enterprise_scope": {
     "canonical_enterprise_id": "bt-group-plc",
     "display_name": "BT Group plc",
-    "aliases": ["BT", "BT Group", "British Telecommunications"]
+    "aliases": [
+      "BT",
+      "BT Group",
+      "British Telecommunications"
+    ]
   },
   "sources": [
-    {"source_id":"bt-annual-report-2026","source_name":"BT Group plc Annual Report 2026","url":"https://www.bt.com/about/annual-reports/2026summary/assets/files/BT-Annual-Report-2026.pdf","publisher":"BT Group plc","source_type":"annual_report","source_classification":"annual_report","expected_enterprise_scope":"BT Group plc","collection_purpose":"annual report","authority_tier":"tier_1_company_authoritative","freshness_expectation":"latest annual report for FY2026","enabled":true,"passes":["baseline","recollection"],"expected_signal_types":["strategy","financial results","organisation","leadership","transformation programme"]},
-    {"source_id":"bt-fy26-results-release","source_name":"BT FY26 full-year results release","url":"https://www.bt.com/content/dam/bt-plc/assets/documents/investors/financial-reporting-and-news/quarterly-results/fy26/h2/fy26-release.pdf","publisher":"BT Group plc","source_type":"full_year_results","source_classification":"report","expected_enterprise_scope":"BT Group plc","collection_purpose":"latest full-year results","authority_tier":"tier_1_company_authoritative","freshness_expectation":"latest full-year results release","enabled":true,"passes":["baseline","recollection"],"expected_signal_types":["financial results","cost transformation","network investment"]},
-    {"source_id":"bt-strategy-2026","source_name":"BT Annual Review 2026 strategy","url":"https://www.bt.com/about/annual-reports/2026summary/","publisher":"BT Group plc","source_type":"strategy","source_classification":"focused_page","expected_enterprise_scope":"BT Group plc","collection_purpose":"strategy","authority_tier":"tier_1_company_authoritative","freshness_expectation":"current annual review strategy","enabled":true,"passes":["baseline","recollection"],"expected_signal_types":["strategy","customer experience","network"]},
-    {"source_id":"bt-organisation-emtn-2025","source_name":"BT EMTN prospectus organisation disclosure","url":"https://www.bt.com/bt-plc/assets/documents/investors/financial-reporting-and-news/debt-investors/bt-emtn-prospectus-4-august-2025.pdf","publisher":"BT Group plc","source_type":"regulatory_disclosure","source_classification":"report","expected_enterprise_scope":"BT Group plc","collection_purpose":"organisation and business units","authority_tier":"tier_1_company_authoritative","freshness_expectation":"latest accessible regulated organisation disclosure","enabled":true,"passes":["baseline","recollection"],"expected_signal_types":["organisation","business units","risk"]},
-    {"source_id":"bt-leadership-board","source_name":"BT Board leadership","url":"https://www.bt.com/about/leadership/board","publisher":"BT Group plc","source_type":"leadership","source_classification":"focused_page","expected_enterprise_scope":"BT Group plc","collection_purpose":"leadership","authority_tier":"tier_1_company_authoritative","freshness_expectation":"current leadership page","enabled":true,"passes":["baseline","recollection"],"expected_signal_types":["leadership"]},
-    {"source_id":"bt-transformation-fy26","source_name":"BT FY26 transformation programme disclosure","url":"https://www.bt.com/content/dam/bt-plc/assets/documents/investors/financial-reporting-and-news/quarterly-results/fy26/h2/fy26-release.pdf","publisher":"BT Group plc","source_type":"transformation_programme","source_classification":"report","expected_enterprise_scope":"BT Group plc","collection_purpose":"material transformation programmes","authority_tier":"tier_1_company_authoritative","freshness_expectation":"latest results release transformation disclosure","enabled":true,"passes":["change_event","recollection"],"expected_signal_types":["cost transformation","operating model"]},
-    {"source_id":"bt-ofcom-security-resilience","source_name":"Ofcom telecoms security and resilience","url":"https://www.ofcom.org.uk/phones-and-broadband/telecoms-infrastructure/security-resilience/","publisher":"Ofcom","source_type":"regulatory_disclosure","source_classification":"regulator_report","expected_enterprise_scope":"UK telecoms providers including BT Group plc","collection_purpose":"major regulatory disclosures","authority_tier":"tier_1_regulator","freshness_expectation":"current regulator guidance","enabled":true,"passes":["change_event","recollection"],"expected_signal_types":["regulatory pressure","cyber risk"]},
-    {"source_id":"bt-verizon-jv-announcement","source_name":"BT Group and Verizon joint venture announcement","url":"https://newsroom.bt.com/?h=1&t=corporate","publisher":"BT Group plc newsroom","source_type":"transaction_announcement","source_classification":"news_item","expected_enterprise_scope":"BT International / BT Group plc","collection_purpose":"BT International-Verizon transaction announcements","authority_tier":"tier_1_company_authoritative","freshness_expectation":"29 June 2026 transaction announcement","enabled":true,"passes":["change_event","recollection"],"expected_signal_types":["transaction","business unit change","accounting guidance"]}
+    {
+      "source_id": "bt-annual-report-2026",
+      "source_name": "BT Group plc Annual Report 2026",
+      "url": "https://www.bt.com/about/annual-reports/2026summary/assets/files/BT-Annual-Report-2026.pdf",
+      "publisher": "BT Group plc",
+      "source_type": "annual_report",
+      "source_classification": "annual_report",
+      "expected_enterprise_scope": "BT Group plc",
+      "collection_purpose": "annual report",
+      "authority_tier": "tier_1_company_authoritative",
+      "freshness_expectation": "latest annual report for FY2026",
+      "enabled": true,
+      "passes": [
+        "baseline",
+        "recollection"
+      ],
+      "expected_signal_types": [
+        "strategy",
+        "financial results",
+        "organisation",
+        "leadership",
+        "transformation programme"
+      ]
+    },
+    {
+      "source_id": "bt-fy26-results-release",
+      "source_name": "BT FY26 full-year results release",
+      "url": "https://www.bt.com/content/dam/bt-plc/assets/documents/investors/financial-reporting-and-news/quarterly-results/fy26/h2/fy26-release.pdf",
+      "publisher": "BT Group plc",
+      "source_type": "full_year_results",
+      "source_classification": "report",
+      "expected_enterprise_scope": "BT Group plc",
+      "collection_purpose": "latest full-year results",
+      "authority_tier": "tier_1_company_authoritative",
+      "freshness_expectation": "latest full-year results release",
+      "enabled": true,
+      "passes": [
+        "baseline",
+        "recollection"
+      ],
+      "expected_signal_types": [
+        "financial results",
+        "cost transformation",
+        "network investment"
+      ]
+    },
+    {
+      "source_id": "bt-strategy-2026",
+      "source_name": "BT Annual Review 2026 strategy",
+      "url": "https://www.bt.com/about/annual-reports/2026summary/",
+      "publisher": "BT Group plc",
+      "source_type": "strategy",
+      "source_classification": "focused_page",
+      "expected_enterprise_scope": "BT Group plc",
+      "collection_purpose": "strategy",
+      "authority_tier": "tier_1_company_authoritative",
+      "freshness_expectation": "current annual review strategy",
+      "enabled": true,
+      "passes": [
+        "baseline",
+        "recollection"
+      ],
+      "expected_signal_types": [
+        "strategy",
+        "customer experience",
+        "network"
+      ]
+    },
+    {
+      "source_id": "bt-organisation-emtn-2025",
+      "source_name": "BT EMTN prospectus organisation disclosure",
+      "url": "https://www.bt.com/bt-plc/assets/documents/investors/financial-reporting-and-news/debt-investors/bt-emtn-prospectus-4-august-2025.pdf",
+      "publisher": "BT Group plc",
+      "source_type": "regulatory_disclosure",
+      "source_classification": "report",
+      "expected_enterprise_scope": "BT Group plc",
+      "collection_purpose": "organisation and business units",
+      "authority_tier": "tier_1_company_authoritative",
+      "freshness_expectation": "latest accessible regulated organisation disclosure",
+      "enabled": true,
+      "passes": [
+        "baseline",
+        "recollection"
+      ],
+      "expected_signal_types": [
+        "organisation",
+        "business units",
+        "risk"
+      ]
+    },
+    {
+      "source_id": "bt-leadership-board",
+      "source_name": "BT Board leadership",
+      "url": "https://www.bt.com/about/annual-reports/2026summary/assets/files/BT-Annual-Report-2026.pdf",
+      "publisher": "BT Group plc",
+      "source_type": "leadership",
+      "source_classification": "annual_report_leadership_section",
+      "expected_enterprise_scope": "BT Group plc",
+      "collection_purpose": "leadership from authoritative annual report fallback",
+      "authority_tier": "tier_1_company_authoritative",
+      "freshness_expectation": "FY2026 annual report Board and leadership disclosure; used because former board URL returned HTTP 404",
+      "enabled": true,
+      "passes": [
+        "baseline",
+        "recollection"
+      ],
+      "expected_signal_types": [
+        "leadership"
+      ]
+    },
+    {
+      "source_id": "bt-transformation-fy26",
+      "source_name": "BT FY26 transformation programme disclosure",
+      "url": "https://www.bt.com/content/dam/bt-plc/assets/documents/investors/financial-reporting-and-news/quarterly-results/fy26/h2/fy26-release.pdf",
+      "publisher": "BT Group plc",
+      "source_type": "transformation_programme",
+      "source_classification": "report",
+      "expected_enterprise_scope": "BT Group plc",
+      "collection_purpose": "material transformation programmes",
+      "authority_tier": "tier_1_company_authoritative",
+      "freshness_expectation": "latest results release transformation disclosure",
+      "enabled": true,
+      "passes": [
+        "change_event",
+        "recollection"
+      ],
+      "expected_signal_types": [
+        "cost transformation",
+        "operating model"
+      ]
+    },
+    {
+      "source_id": "bt-ofcom-security-resilience",
+      "source_name": "Ofcom telecoms security and resilience",
+      "url": "https://www.ofcom.org.uk/phones-and-broadband/telecoms-infrastructure/security-resilience/",
+      "publisher": "Ofcom",
+      "source_type": "regulatory_disclosure",
+      "source_classification": "regulator_report",
+      "expected_enterprise_scope": "UK telecoms providers including BT Group plc",
+      "collection_purpose": "major regulatory disclosures",
+      "authority_tier": "tier_1_regulator",
+      "freshness_expectation": "current regulator guidance",
+      "enabled": true,
+      "passes": [
+        "change_event",
+        "recollection"
+      ],
+      "expected_signal_types": [
+        "regulatory pressure",
+        "cyber risk"
+      ]
+    },
+    {
+      "source_id": "bt-verizon-jv-announcement",
+      "source_name": "BT Group and Verizon joint venture announcement",
+      "url": "https://newsroom.bt.com/?h=1&t=corporate",
+      "publisher": "BT Group plc newsroom",
+      "source_type": "transaction_announcement",
+      "source_classification": "news_item",
+      "expected_enterprise_scope": "BT International / BT Group plc",
+      "collection_purpose": "BT International-Verizon transaction announcements",
+      "authority_tier": "tier_1_company_authoritative",
+      "freshness_expectation": "29 June 2026 transaction announcement",
+      "enabled": true,
+      "passes": [
+        "change_event",
+        "recollection"
+      ],
+      "expected_signal_types": [
+        "transaction",
+        "business unit change",
+        "accounting guidance"
+      ]
+    }
   ]
 }

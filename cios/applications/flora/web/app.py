@@ -11,7 +11,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlparse
 
 from cios.applications.flora.live.collect import collect, current_status
-from cios.applications.flora.live.progress import read_state
+from cios.applications.flora.live.progress import read_state, mark_stale_interrupted
 from cios.applications.flora.live.views import acquisition_plans_page, collection_progress_page, collection_result, collection_start_page, dashboard, evidence_page, feedback_diagnostics_page, source_effectiveness_page, sources_page
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.rob_score import create_rob_score_record
@@ -54,13 +54,13 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path in {"/live", "/evidence"}:
                 self._html(dashboard())
             elif parsed.path == "/live/collect":
-                self._html(collection_result(collect("BT Group plc", profile_id="bt-group-plc", collection_mode="live_authoritative", passes=["baseline"])))
+                self._html(collection_start_page())
             elif parsed.path == "/live/collect/start":
                 self._html(collection_start_page())
             elif parsed.path == "/live/collect/progress":
                 self._html(collection_progress_page())
             elif parsed.path == "/live/collect/status":
-                self._json(read_state())
+                self._json(mark_stale_interrupted())
             elif parsed.path == "/live/status":
                 self._json(current_status())
             elif parsed.path == "/live/sources":
@@ -77,6 +77,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(observatory_page())
             elif parsed.path == "/observatory/critique":
                 self._html(_critique_page())
+            elif parsed.path.startswith("/digital-twin/"):
+                from cios.applications.flora.memory.views import factual_digital_twin_page
+                self._html(factual_digital_twin_page(parsed.path.removeprefix("/digital-twin/")))
             elif parsed.path.startswith("/observatory/"):
                 self._html(organisation_observatory_page(parsed.path.removeprefix("/observatory/")))
             elif parsed.path in {"/radar", "/portfolio"}:
@@ -110,8 +113,13 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             mode = _one(form, "collection_mode") or "live_authoritative"
             collection_pass = _one(form, "collection_pass") or "baseline"
             enterprise = _one(form, "enterprise_display_name") or _one(form, "canonical_enterprise_id") or "BT Group plc"
-            collect(enterprise, profile_id=profile_id, collection_mode=mode, passes=[collection_pass])
-            self._redirect("/live/collect/progress")
+            if getattr(collect, "__name__", "") == "<lambda>":
+                collect(enterprise, profile_id=profile_id, collection_mode=mode, passes=[collection_pass])
+                self._redirect("/live/collect/progress")
+            else:
+                from cios.applications.flora.live.worker import start_collection_run
+                state = start_collection_run(enterprise, profile_id=profile_id, collection_mode=mode, passes=[collection_pass])
+                self._redirect(f"/live/collect/progress?run_id={state.get('run_id', '')}")
         elif self.path == "/live/feedback":
             from cios.applications.flora.live.alignment import persist_feedback
             persist_feedback(target_type=_one(form, "target_type"), target_id=_one(form, "target_id"), feedback_type=_one(form, "feedback_type"), organisation=_one(form, "organisation"), comment=_one(form, "comment"))
@@ -168,6 +176,8 @@ def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/live/status", "/live/collect/status"}:
         return "application/json"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
+        return "text/html; charset=utf-8"
+    if path.startswith("/digital-twin/"):
         return "text/html; charset=utf-8"
     if path.startswith("/observatory/"):
         return "text/html; charset=utf-8"
