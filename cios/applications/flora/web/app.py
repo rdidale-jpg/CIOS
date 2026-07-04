@@ -21,7 +21,7 @@ from cios.applications.flora.workspace.feedback import create_feedback_record, c
 from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
-from cios.applications.flora.live.ai_review import apply_accepted, create_upload_run, review_home_page, run_page, update_reviews
+from cios.applications.flora.document_review import apply_accepted, create_upload_run, review_home_page, run_page, update_reviews
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -80,7 +80,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(source_effectiveness_page())
             elif parsed.path == "/live/evidence":
                 self._html(evidence_page())
-            elif parsed.path == "/ai-financial-report":
+            elif parsed.path in {"/ai-financial-report", "/financial-reports"}:
                 self._html(review_home_page())
             elif parsed.path.startswith("/ai-financial-report/"):
                 self._html(run_page(parsed.path.removeprefix("/ai-financial-report/")))
@@ -212,7 +212,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path.startswith("/ai-financial-report"):
+    if path.startswith("/ai-financial-report") or path == "/financial-reports":
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"

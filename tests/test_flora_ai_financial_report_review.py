@@ -1,6 +1,6 @@
 from experiments.document_understanding.schema import ExtractionRun, FoundationFact
-from cios.applications.flora.live import ai_review
-from cios.applications.flora.live.ai_review import apply_accepted, create_upload_run, update_reviews
+from cios.applications.flora import document_review as ai_review
+from cios.applications.flora.document_review import apply_accepted, create_upload_run, update_reviews
 from cios.applications.flora.memory.repository import EnterpriseModelRepository, ObservationRepository
 
 

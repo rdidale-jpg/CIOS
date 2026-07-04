@@ -16,7 +16,7 @@ from cios.applications.flora.observatory.views import _summary_cards, _recommend
 def _page(title: str, body: str) -> str:
     return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><title>{escape(title)}</title><style>
     body{{font-family:Inter,Arial,sans-serif;margin:0;background:#f6f3ee;color:#17211b}} a{{color:#185c4d}} .shell{{max-width:1180px;margin:auto;padding:28px}} .hero,.card{{background:#fff;border:1px solid #ded8ce;border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 1px 3px #0001}} .grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:14px}} .metric{{font-size:32px;font-weight:750}} .pill{{display:inline-block;border-radius:999px;padding:4px 10px;background:#e6f2ec;margin:3px}} .priority-high{{background:#173d33;color:white}} .priority-medium{{background:#f3d99b}} .priority-low{{background:#e1e1e1}} .section{{border-top:1px solid #ece5da;padding-top:14px;margin-top:18px}} button,input,textarea,select{{font:inherit;padding:9px;border:1px solid #cfc6ba;border-radius:10px}} textarea{{width:100%;min-height:56px}} button{{background:#173d33;color:#fff;cursor:pointer}} .nav a{{margin-right:14px}} table{{width:100%;border-collapse:collapse}} td,th{{border-bottom:1px solid #eee;padding:10px;text-align:left}} .muted{{color:#68736c}} .action{{background:#f8fbf9;border-left:5px solid #185c4d}}
-    </style></head><body><div class='shell'><nav class='nav'><a href='/'>Executive Brief</a><a href='/observatory'>Observatory</a><a href='/radar'>Portfolio</a><a href='/live'>Evidence</a><a href='/observatory/critique'>Research</a><a href='/settings'>Settings</a><a href='/logbook' hidden>Learning / Logbook</a></nav>{body}</div></body></html>"""
+    </style></head><body><div class='shell'><nav class='nav'><a href='/'>Executive Brief</a><a href='/observatory'>Observatory</a><a href='/radar'>Portfolio</a><a href='/live'>Evidence</a><a href='/financial-reports'>Collect Financial Report</a><a href='/observatory/critique'>Research</a><a href='/settings'>Settings</a><a href='/logbook' hidden>Learning / Logbook</a></nav>{body}</div></body></html>"""
 
 
 def landing_page() -> str:
@@ -43,7 +43,7 @@ def case_page(slug: str) -> str:
     insights = "".join(f"<li><strong>{escape(i.title)}</strong> — {escape(i.narrative)} Next: {escape(i.recommended_next_step)}</li>" for i in case.insights)
     heatmap = "".join(f"<li>{escape(k)}: {escape(v)}</li>" for k, v in case.capability_heatmap.items())
     actions = "".join(_action_block(case.organisation, action, case) for action in case.recommended_actions)
-    body = f"<section class='hero'><h1>{escape(case.organisation)}</h1><p>{escape(case.sector)} · Review date {case.review_date}</p><p><a href='/score/{escape(case.organisation.replace(' ', ''))}'>Explain score</a></p></section>" + "".join([
+    body = f"<section class='hero'><h1>{escape(case.organisation)}</h1><p>{escape(case.sector)} · Review date {case.review_date}</p><p><a href='/score/{escape(case.organisation.replace(' ', ''))}'>Explain score</a> · <a href='/financial-reports'>Collect Financial Report</a> · <a href='/digital-twin/bt-group-plc'>Commercial Digital Twin</a></p></section>" + "".join([
         f"<section class='card'><h2>Executive Summary</h2><p>{escape(case.executive_summary)}</p></section>",
         f"<section class='card'><h2>Provider Profile View <span hidden>Commercial DNA View</span></h2><p>{escape(case.commercial_dna_summary)}</p></section>",
         f"<section class='card'><h2>Commercial Timeline</h2><ul>{timeline}</ul></section>",
