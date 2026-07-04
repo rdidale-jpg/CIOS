@@ -1,6 +1,8 @@
 """HTML views for Flora live evidence."""
 from __future__ import annotations
 
+from cios.applications.flora.storage import data_path
+
 from html import escape
 from typing import Any
 
@@ -100,7 +102,7 @@ def collection_result(result: dict[str, Any]) -> str:
 
 
 def rejected_claims_page(run_id: str | None = None) -> str:
-    manifest_dir = Path(".flora_pilot/collection_manifests")
+    manifest_dir = data_path("collection_manifests")
     manifests = sorted(manifest_dir.glob("*.json"), key=lambda p: p.stat().st_mtime, reverse=True) if manifest_dir.exists() else []
     manifest = {}
     if run_id:
@@ -220,7 +222,7 @@ def acquisition_plans_page() -> str:
         cov = ''.join(f"<li>{escape(r['category'])}: {escape(r['status'])} ({r['evidence_count']} items, next: {escape(r['recommended_next_source_family'])})</li>" for r in p.get('current_coverage_by_category', []))
         demand = ''.join(f"<li><strong>{escape(d['thesis'])}</strong>: {escape(', '.join(d.get('required_evidence_still_needed', [])))}</li>" for d in p.get('evidence_demand', [])) or '<li>No active thesis demand yet.</li>'
         rows.append(f"<section class='card' id='{escape(p['organisation'])}'><h2>{escape(p['organisation'])}</h2><p><strong>{escape(p.get('sector',''))}</strong> · {escape(p.get('enterprise_type',''))} · priority {escape(p.get('priority_level',''))} · confidence {p.get('collection_confidence',0)} · <strong>{escape(p.get('collection_priority',''))}</strong></p><h3>Coverage map</h3><ul>{cov}</ul><h3>Evidence demand</h3><ul>{demand}</ul><h3>Next objectives</h3><p>{escape('; '.join(p.get('next_collection_objectives', [])) or 'None')}</p><h3>Low-yield sources to replace</h3><p>{escape(', '.join(p.get('low_yield_sources_to_replace', [])) or 'None')}</p></section>")
-    return _page('Flora Evidence Acquisition Plans', "<h1>Evidence Acquisition Plans</h1><p>Plans are persisted as JSONL under <code>.flora_pilot/live_evidence/evidence_acquisition_plans.jsonl</code>.</p>" + ''.join(rows))
+    return _page('Flora Evidence Acquisition Plans', "<h1>Evidence Acquisition Plans</h1><p>Plans are persisted as JSONL under the configured Flora data directory.</p>" + ''.join(rows))
 
 
 def feedback_diagnostics_page() -> str:

@@ -2,23 +2,21 @@
 from __future__ import annotations
 
 import json
-import os
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-RUNTIME_DIR_ENV = "FLORA_PILOT_DIR"
-DEFAULT_RUNTIME_DIR = Path(".flora_pilot")
+from cios.applications.flora.storage import data_root, ensure_parent_writable
 
 
 def runtime_dir() -> Path:
-    return Path(os.environ.get(RUNTIME_DIR_ENV, DEFAULT_RUNTIME_DIR))
+    return data_root()
 
 
 def _append_jsonl(filename: str, record: dict[str, Any]) -> dict[str, Any]:
     path = runtime_dir() / filename
-    path.parent.mkdir(parents=True, exist_ok=True)
+    ensure_parent_writable(path)
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(record, sort_keys=True) + "\n")
     return record

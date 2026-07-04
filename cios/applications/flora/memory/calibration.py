@@ -1,6 +1,8 @@
 """Calibration utilities for scoped Flora Enterprise Model runs."""
 from __future__ import annotations
 
+from cios.applications.flora.storage import data_path
+
 import json
 import shutil
 from datetime import UTC, datetime
@@ -35,7 +37,7 @@ def inspection_rows(enterprise: str, observations: ObservationRepository | None 
     return rows
 
 
-def archive_and_reset_enterprise(enterprise: str, *, confirm: str, observations: ObservationRepository | None = None, models: EnterpriseModelRepository | None = None, archive_root: Path = Path(".flora_pilot/memory/archive")) -> dict:
+def archive_and_reset_enterprise(enterprise: str, *, confirm: str, observations: ObservationRepository | None = None, models: EnterpriseModelRepository | None = None, archive_root: Path | None = None) -> dict:
     cid = canonical_enterprise_id(enterprise) or enterprise
     if confirm != f"reset {cid}":
         raise ValueError(f"Explicit confirmation required: reset {cid}")

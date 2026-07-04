@@ -9,6 +9,7 @@ from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any
 
+from cios.applications.flora.storage import data_path
 from cios.applications.flora.intelligence.evidence_engine import get_seed_evidence
 from cios.applications.flora.pipeline import generate_daily_brief, generate_weekly_brief
 from cios.applications.flora.publisher.html_renderer import write_html
@@ -25,7 +26,7 @@ from cios.applications.flora.opportunity_shaping import build_opportunity_report
 from dataclasses import asdict
 
 VERSION = "0.2"
-PUBLICATIONS_DIR = Path(os.environ.get("FLORA_PILOT_DIR", ".flora_pilot")) / "publications"
+PUBLICATIONS_DIR = data_path("publications")
 PREVIEW_DIR = Path("docs/Applications/Flora_Pilot_Preview")
 COMPETITORS = ("IBM", "Accenture", "Capgemini", "Deloitte")
 CANONICAL_NAMES = {"bt": "BT", "sse": "SSE", "bbc": "BBC", "dwp": "DWP"}
