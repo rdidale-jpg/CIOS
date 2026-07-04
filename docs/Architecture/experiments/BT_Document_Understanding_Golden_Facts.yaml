@@ -1,0 +1,203 @@
+enterprise: bt-group-plc
+review_status: provisional
+facts:
+- id: gf001
+  atomic_statement: BT Group plc is the reporting enterprise
+  structured_value: null
+  scope: identity
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT Group Annual Report 2026
+  page: 1
+  excerpt: "BT Group plc Annual Report 2026"
+  review_status: provisional
+- id: gf002
+  atomic_statement: BT Group plc disclosed Consumer as a customer-facing unit
+  structured_value: null
+  scope: structure
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT Group Annual Report 2026
+  page: 8
+  excerpt: "Consumer, Business and Openreach"
+  review_status: provisional
+- id: gf003
+  atomic_statement: BT Group plc disclosed Business as a customer-facing unit
+  structured_value: null
+  scope: structure
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT Group Annual Report 2026
+  page: 8
+  excerpt: "Consumer, Business and Openreach"
+  review_status: provisional
+- id: gf004
+  atomic_statement: BT Group plc disclosed Openreach as a customer-facing unit
+  structured_value: null
+  scope: structure
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT Group Annual Report 2026
+  page: 8
+  excerpt: "Consumer, Business and Openreach"
+  review_status: provisional
+- id: gf005
+  atomic_statement: BT Group plc reported FY26 revenue
+  structured_value: null
+  scope: group financials
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT FY26 results release
+  page: 1
+  excerpt: "Revenue £20.4bn"
+  review_status: provisional
+- id: gf006
+  atomic_statement: BT Group plc reported FY26 adjusted EBITDA
+  structured_value: null
+  scope: group financials
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT FY26 results release
+  page: 1
+  excerpt: "Adjusted EBITDA £8.2bn"
+  review_status: provisional
+- id: gf007
+  atomic_statement: BT Group plc reported FY26 normalised free cash flow
+  structured_value: null
+  scope: group financials
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT FY26 results release
+  page: 1
+  excerpt: "Normalised free cash flow £1.5bn"
+  review_status: provisional
+- id: gf008
+  atomic_statement: BT Group plc reported FY26 capital expenditure
+  structured_value: null
+  scope: group financials
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT FY26 results release
+  page: 2
+  excerpt: "Capex £4.8bn"
+  review_status: provisional
+- id: gf009
+  atomic_statement: Consumer reported FY26 revenue
+  structured_value: null
+  scope: segment financials
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT FY26 results release
+  page: 4
+  excerpt: "Consumer revenue"
+  review_status: provisional
+- id: gf010
+  atomic_statement: Business reported FY26 revenue
+  structured_value: null
+  scope: segment financials
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT FY26 results release
+  page: 4
+  excerpt: "Business revenue"
+  review_status: provisional
+- id: gf011
+  atomic_statement: Openreach reported FY26 revenue
+  structured_value: null
+  scope: segment financials
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT FY26 results release
+  page: 4
+  excerpt: "Openreach revenue"
+  review_status: provisional
+- id: gf012
+  atomic_statement: BT Group stated Build as a strategic pillar
+  structured_value: null
+  scope: strategy
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT Group Annual Report 2026
+  page: 12
+  excerpt: "Build, Connect and Accelerate"
+  review_status: provisional
+- id: gf013
+  atomic_statement: BT Group stated Connect as a strategic pillar
+  structured_value: null
+  scope: strategy
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT Group Annual Report 2026
+  page: 12
+  excerpt: "Build, Connect and Accelerate"
+  review_status: provisional
+- id: gf014
+  atomic_statement: BT Group stated Accelerate as a strategic pillar
+  structured_value: null
+  scope: strategy
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT Group Annual Report 2026
+  page: 12
+  excerpt: "Build, Connect and Accelerate"
+  review_status: provisional
+- id: gf015
+  atomic_statement: BT Group stated a cost transformation target
+  structured_value: null
+  scope: strategy
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT Group Annual Report 2026
+  page: 14
+  excerpt: "cost transformation target"
+  review_status: provisional
+- id: gf016
+  atomic_statement: BT Group stated a fibre build commitment
+  structured_value: null
+  scope: strategy
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT Group Annual Report 2026
+  page: 16
+  excerpt: "full fibre build"
+  review_status: provisional
+- id: gf017
+  atomic_statement: Allison Kirkby was Group Chief Executive
+  structured_value: null
+  scope: leadership
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT Group Annual Report 2026
+  page: 92
+  excerpt: "Allison Kirkby Group Chief Executive"
+  review_status: provisional
+- id: gf018
+  atomic_statement: Simon Lowth was Chief Financial Officer
+  structured_value: null
+  scope: leadership
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT Group Annual Report 2026
+  page: 92
+  excerpt: "Simon Lowth Chief Financial Officer"
+  review_status: provisional
+- id: gf019
+  atomic_statement: Adam Crozier was Chair
+  structured_value: null
+  scope: leadership
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT Group Annual Report 2026
+  page: 92
+  excerpt: "Adam Crozier Chair"
+  review_status: provisional
+- id: gf020
+  atomic_statement: BT Group reported FY26 outlook guidance
+  structured_value: null
+  scope: guidance
+  period: FY26 where applicable
+  state: provisional
+  source_document: BT FY26 results release
+  page: 3
+  excerpt: "FY27 outlook"
+  review_status: provisional
