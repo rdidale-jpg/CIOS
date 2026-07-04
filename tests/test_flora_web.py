@@ -53,6 +53,27 @@ def test_bt_case_route_renders_case_file() -> None:
     assert "Evidence Ledger" in html
 
 
+
+def test_financial_report_capability_is_visible_in_normal_navigation() -> None:
+    status, _, body = _get("/")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "Collect Financial Report" in html
+    assert "/financial-reports" in html
+
+
+def test_financial_report_alias_renders_enterprise_upload_workflow(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    status, content_type, body = _get("/financial-reports")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert content_type == "text/html; charset=utf-8"
+    assert "Collect Financial Report" in html
+    assert "BT Group plc" in html
+    assert "Process document" in html
+    assert "Provider status" in html
+    assert "OPENAI_API_KEY" in html
+
 def test_web_app_uses_port_environment_variable(monkeypatch) -> None:
     monkeypatch.setenv("PORT", "54321")
     monkeypatch.setenv("FLORA_PORT", "12345")
