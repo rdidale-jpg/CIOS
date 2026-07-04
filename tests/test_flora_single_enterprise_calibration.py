@@ -11,7 +11,7 @@ def svc(tmp_path: Path) -> ObservationMemoryService:
 
 
 def evidence(eid="EV-1", org="BT"):
-    return {"evidence_id": eid, "enterprise_id": org, "organisation": org, "cleaned_observation": "BT reports Consumer as a customer-facing unit.", "commercial_condition": "Organisation", "publication_date": "2026-05-14", "confidence": 88, "evidence_freshness": "current", "source_provenance": "live"}
+    return {"evidence_id": eid, "enterprise_id": org, "organisation": org, "cleaned_observation": "BT reports Consumer as a customer-facing unit.", "commercial_condition": "Organisation", "publication_date": "2026-05-14", "confidence": 88, "evidence_freshness": "current", "source_provenance": "live", "page_range": "1", "page_number": 1}
 
 
 def test_bt_aliases_resolve_to_one_canonical_enterprise_id():

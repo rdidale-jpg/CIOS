@@ -33,23 +33,21 @@ def extract_factual_evidence(doc: DocumentParseResult) -> tuple[list[dict[str,An
   text = re.sub(r"\s+", " ", page.text)
   candidates=[]
   if "BT Group plc" in text:
-   candidates.append(("identity.legal_name", "enterprise_identity_confirmed", "BT Group plc is the legal name.", "identity"))
+   candidates.append(("identity.legal_name", "enterprise_identity_confirmed", "BT Group plc is the reporting enterprise.", "identity"))
   if re.search(r"telecommunications|communications", text, re.I):
    candidates.append(("identity.sector", "enterprise_identity_confirmed", "BT Group plc operates in the telecommunications sector.", "identity"))
   for m in METRIC_RE.finditer(text):
    seg=(m.group('segment') or 'Group').title(); metric=m.group('metric').lower().replace('capex','capital expenditure')
    value=m.group('value'); unit=m.group('unit') or 'm'; period='FY26' if re.search(r"FY26|2026", text) else 'reported period'
    status='target' if re.search(r"target|by FY|aim", text[m.start()-80:m.end()+80], re.I) else 'actual'
-   stmt=f"BT Group plc reported {period} {seg} {metric} of £{value}{unit}"
+   stmt=f"BT Group plc reported {seg} {metric} of GBP {value}{unit} for {period}"
    attr=f"financial_performance.metrics.{seg}.{metric}.{period}.{status}"
-   candidates.append((attr,"reported_financial_metric",stmt,"table" if '|' in page.text else 'narrative'))
+   candidates.append((attr,"financial_metric_reported",stmt,"table" if '|' in page.text else 'narrative'))
   for m in UNIT_RE.finditer(text):
    name=m.group(1); kind=m.group(2).lower().replace('customer-facing ', '').replace(' ', '_')
    candidates.append((f"structure.units.{name}","business_unit_disclosed",f"{name} is reported as a {kind.replace('_',' ')}","narrative"))
-  for m in BRAND_RE.finditer(text):
-   candidates.append((f"structure.brands.{m.group(1)}","brand_disclosed",f"{m.group(1)} is reported as a BT brand","narrative"))
   for m in PILLAR_RE.finditer(text):
-   candidates.append((f"strategy.pillars.{m.group('name')}","strategic_commitment_stated",f"BT Group plc states {m.group('name')} as a strategic pillar","narrative"))
+   candidates.append((f"strategy.pillars.{m.group('name')}","strategic_pillar_stated",f"{m.group('name')} is a stated BT Group strategic pillar","narrative"))
   for m in LEADER_RE.finditer(text):
    role=m.group('role').replace('CEO','Group Chief Executive').replace('CFO','Chief Financial Officer')
    person=re.sub(r"\b(is|was|held|serves as|appointed as)\b.*", "", m.group('person')).strip()
@@ -75,4 +73,5 @@ def coverage_for_model(model)->dict[str,Any]:
 def maturity_for_model(model)->str:
  cov=coverage_for_model(model)
  if all(cov[d]['populated_attributes'] for d in ['identity','structure','financial_performance','strategy','leadership']): return 'Foundation'
+ if any(cov[d]['populated_attributes'] for d in cov): return 'Foundation — partial'
  return 'Not established'
