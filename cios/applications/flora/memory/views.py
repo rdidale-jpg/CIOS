@@ -59,3 +59,21 @@ def factual_digital_twin_workspace(enterprise_id: str, models: EnterpriseModelRe
         attr_rows.append(f"<tr><th>{escape(key)}</th><td>{escape(str(attr.current_value))}</td><td>{escape(attr.freshness)}</td><td>{attr.confidence}</td><td>{escape(attr.last_observed_date)}</td><td>{escape(', '.join(attr.observation_ids))}</td><td>{escape('; '.join(ev_pages) or ', '.join(attr.evidence_ids))}</td><td>{escape(str(attr.prior_values))}</td></tr>")
     ev_rows=''.join(f"<tr><th>{escape(str(e.get('evidence_id')))}</th><td>{escape(str(e.get('source_name')))}</td><td>{escape(str(e.get('publisher')))}</td><td>{escape(str(e.get('source_url')))}</td><td>{escape(str(e.get('page_number') or e.get('page_range')))}</td><td>{escape(str(e.get('extracted_text') or e.get('snippet'))[:360])}</td><td>{escape(str(e.get('extraction_method')))}</td><td>{escape(str(e.get('document_checksum'))[:16])}</td></tr>" for e in evidence_items)
     return overview + tabs + f"<section class='card'><h2>Domain coverage</h2><table><thead><tr><th>Domain</th><th>Coverage</th><th>Expected</th><th>Populated</th><th>Unsupported</th><th>Contradicted</th><th>Sources</th></tr></thead><tbody>{cov_rows}</tbody></table></section>" + f"<section class='card'><h2>Attribute Detail</h2><table><tbody>{''.join(attr_rows) or '<tr><td>No factual attributes yet.</td></tr>'}</tbody></table></section>" + f"<section class='card'><h2>Evidence Detail</h2><table><tbody>{ev_rows or '<tr><td>No evidence detail loaded.</td></tr>'}</tbody></table></section>"
+
+
+def factual_digital_twin_page(enterprise_id: str) -> str:
+    """Render canonical factual Digital Twin route, including empty BT model state."""
+    from cios.applications.flora.live.store import DEFAULT_PATH, read_jsonl
+    from cios.applications.flora.workspace.views import _page
+    canonical = canonical_enterprise_id(enterprise_id)
+    aliases = {"btgroupplc": "bt-group-plc", "bt": "bt-group-plc", "bt-group-plc": "bt-group-plc"}
+    canonical = canonical or aliases.get(str(enterprise_id).replace(" ", "").casefold())
+    if canonical != "bt-group-plc":
+        raise ValueError("Digital Twin enterprise route not found")
+    model = EnterpriseModelRepository().get(canonical)
+    if not model.attributes:
+        body = """<section class='card action'><h1>BT Digital Twin</h1><p>Status: <strong>Not established</strong></p><p>No accepted factual model state exists yet.</p></section>"""
+    else:
+        evidence = [e for e in read_jsonl(DEFAULT_PATH) if (e.get("canonical_enterprise_id") or e.get("enterprise_id") or e.get("organisation")) == canonical]
+        body = factual_digital_twin_workspace(canonical, evidence_items=evidence)
+    return _page("BT Digital Twin", body)

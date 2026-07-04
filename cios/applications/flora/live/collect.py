@@ -125,11 +125,14 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
         if out_of_scope:
             raise ValueError(f"Collection scope violation for {scope.collection_profile}: {', '.join(out_of_scope)}")
     collection_started_at = datetime.now(UTC).isoformat()
-    start_state(len(sources), run_id=run_id, canonical_enterprise_id=scoped_enterprise_id, enterprise_display_name=scoped_display_name, profile_id=profile_id, collection_mode=mode, collection_pass=",".join(selected_passes))
+    if read_state().get("run_id") != run_id:
+        start_state(len(sources), run_id=run_id, canonical_enterprise_id=scoped_enterprise_id, enterprise_display_name=scoped_display_name, profile_id=profile_id, collection_mode=mode, collection_pass=",".join(selected_passes), status="starting")
+    else:
+        update_state(status="collecting", latest_message="Collection started.")
     diagnostics: list[dict[str, Any]] = []
     evidence: list[dict[str, Any]] = []
     for source in sources:
-        update_state(current_source_name=source.source_name, latest_message=f"Collecting {source.source_name}")
+        update_state(status="collecting", current_source_name=source.source_name, latest_message=f"Collecting {source.source_name}")
         attempted_at = collection_started_at
         result = fetch_html(str(source.url))
         source_evidence: list[dict[str, Any]] = []
@@ -137,11 +140,13 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
         parse_error: str | None = None
         succeeded = result.succeeded
         if (not result.succeeded) and (str(source.url).lower().endswith(".pdf") or "non-html content type" in result.error.lower()):
+            update_state(status="parsing", latest_message=f"Parsing document for {source.source_name}")
             doc_fetch = fetch_document(str(source.url))
             doc = parse_pdf_document(doc_fetch, source, canonical_enterprise_id=source_canonical_enterprise_id(source))
             succeeded = doc_fetch.succeeded
             result = type(result)(url=result.url, succeeded=succeeded, status_code=doc_fetch.status_code, html="", error=doc.error)
             if doc.parser_status == "parsed":
+                update_state(status="extracting_evidence", latest_message=f"Extracting factual Evidence from {source.source_name}")
                 source_evidence, rejected_evidence = extract_factual_evidence(doc)
                 parse_error = None
             else:
@@ -151,6 +156,7 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
             diagnostics_extra = {"documents_retrieved": 1 if doc_fetch.succeeded else 0, "pdfs_parsed": 1 if doc.parser_status == "parsed" else 0, "pages_extracted": doc.page_count if doc.parser_status == "parsed" else 0, "tables_detected": len([e for e in source_evidence if e.get("origin") == "table"]), "document_id": doc.document_id, "document_checksum": doc.checksum, "parser_status": doc.parser_status, "extraction_warnings": list(doc.warnings)}
         elif result.succeeded:
             try:
+                update_state(status="extracting_evidence", latest_message=f"Extracting Evidence from {source.source_name}")
                 source_evidence, rejected_evidence = extract_evidence_with_diagnostics(source, result.html)
                 for item in source_evidence:
                     item["enterprise_id"] = source_canonical_enterprise_id(source)
@@ -172,13 +178,19 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
         diag = _diagnostic(source, attempted_at, result, source_evidence, rejected_evidence, parse_error, succeeded)
         diag.update(diagnostics_extra)
         diagnostics.append(diag)
-        evidence_candidates = len(evidence) + sum(int(d.get("rejected_evidence_count") or 0) for d in diagnostics) + sum(int(d.get("downgraded_evidence_count") or 0) for d in diagnostics)
-        update_state(sources_attempted=len(diagnostics), sources_succeeded=len([d for d in diagnostics if d["status"] != "failed"]), sources_retrieved=len([d for d in diagnostics if d["status"] != "failed"]), sources_failed=len([d for d in diagnostics if d["status"] == "failed"]), evidence_extracted=len(evidence), evidence_candidates=evidence_candidates, evidence_accepted=len(evidence), evidence_rejected=sum(int(d.get("rejected_evidence_count") or 0) for d in diagnostics), evidence_downgraded=sum(int(d.get("downgraded_evidence_count") or 0) for d in diagnostics), latest_message=f"Finished {source.source_name}")
+        evidence_rejected_running = sum(int(d.get("rejected_evidence_count") or 0) for d in diagnostics)
+        evidence_downgraded_running = sum(int(d.get("downgraded_evidence_count") or 0) for d in diagnostics)
+        evidence_context_running = sum(int(d.get("context_only_count") or 0) for d in diagnostics)
+        evidence_candidates = len(evidence) + evidence_rejected_running + evidence_downgraded_running
+        update_state(sources_attempted=len(diagnostics), sources_succeeded=len([d for d in diagnostics if d["status"] != "failed"]), sources_retrieved=len([d for d in diagnostics if d["status"] != "failed"]), sources_failed=len([d for d in diagnostics if d["status"] == "failed"]), evidence_extracted=len(evidence), evidence_candidates=evidence_candidates, evidence_accepted=len(evidence), evidence_rejected=evidence_rejected_running, evidence_downgraded=evidence_downgraded_running, evidence_context_only=evidence_context_running, documents_retrieved=sum(int(d.get("documents_retrieved") or 0) for d in diagnostics), pdfs_parsed=sum(int(d.get("pdfs_parsed") or 0) for d in diagnostics), pages_extracted=sum(int(d.get("pages_extracted") or 0) for d in diagnostics), tables_detected=sum(int(d.get("tables_detected") or 0) for d in diagnostics), latest_message=f"Finished {source.source_name}")
+    update_state(status="accepting_evidence", latest_message="Applying Evidence acceptance and duplicate checks.")
     new_evidence, duplicate_count, fingerprints = unique_evidence(evidence)
     output = write_jsonl(new_evidence) if new_evidence else DEFAULT_PATH
     output.parent.mkdir(parents=True, exist_ok=True)
     output.touch(exist_ok=True)
+    update_state(status="creating_observations", latest_message="Creating Observations from accepted Evidence.")
     memory_results = [ObservationMemoryService().accept_evidence(item) for item in new_evidence]
+    update_state(status="updating_model", latest_message="Updating Enterprise Model projection.")
     write_jsonl(diagnostics, DEFAULT_DIAGNOSTICS_PATH)
     after_observatory = observatory_snapshot(build_observatory())
     observatory_delta = compare_observatory_snapshots(
@@ -200,16 +212,16 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
     evidence_downgraded = sum(int(d.get("downgraded_evidence_count") or 0) for d in diagnostics)
     evidence_candidates = len(evidence) + evidence_rejected + evidence_downgraded
     source_failures = [d for d in diagnostics if d["status"] == "failed"]
-    result_state = "completed successfully" if diagnostics and len([d for d in diagnostics if d["status"] != "failed"]) >= 1 and len(new_evidence) >= 1 and (obs_created + obs_corroborated) >= 1 and (attrs_created + obs_corroborated) >= 1 else "Completed with no accepted intelligence"
-    manifest = {"run_id": run_id, "canonical_enterprise_id": scoped_enterprise_id, "enterprise_display_name": scoped_display_name, "profile_id": profile_id, "started_at": collection_started_at, "completed_at": completed_at, "collection_mode": mode, "passes": selected_passes, "sources_planned": [s.source_id for s in sources], "sources_attempted": [d["source_id"] for d in diagnostics], "sources_retrieved": [d["source_id"] for d in diagnostics if d["status"] != "failed"], "sources_failed": [d["source_id"] for d in source_failures], "evidence_candidates": evidence_candidates, "evidence_accepted": len(new_evidence), "evidence_rejected": evidence_rejected, "evidence_downgraded": evidence_downgraded, "documents_retrieved": sum(int(d.get("documents_retrieved") or 0) for d in diagnostics), "pdfs_parsed": sum(int(d.get("pdfs_parsed") or 0) for d in diagnostics), "pages_extracted": sum(int(d.get("pages_extracted") or 0) for d in diagnostics), "tables_detected": sum(int(d.get("tables_detected") or 0) for d in diagnostics), "observations_created": obs_created, "observations_corroborated": obs_corroborated, "observations_rejected": 0, "model_attributes_created": attrs_created, "model_attributes_changed": len([r for r in memory_results if r.action == "updated"]), "model_attributes_reconfirmed": obs_corroborated, "unknowns_created": unknowns_created, "contradictions_created": contradictions_created, "result_state": result_state, "errors": [d for d in diagnostics if d.get("status") == "failed"], "warnings": []}
+    result_state = "completed" if diagnostics and len([d for d in diagnostics if d["status"] != "failed"]) >= 1 and len(new_evidence) >= 1 and (obs_created + obs_corroborated) >= 1 and (attrs_created + obs_corroborated) >= 1 else "completed_with_no_accepted_intelligence"
+    manifest = {"run_id": run_id, "canonical_enterprise_id": scoped_enterprise_id, "enterprise_display_name": scoped_display_name, "profile_id": profile_id, "started_at": collection_started_at, "completed_at": completed_at, "collection_mode": mode, "passes": selected_passes, "sources_planned": [s.source_id for s in sources], "sources_attempted": [d["source_id"] for d in diagnostics], "sources_retrieved": [d["source_id"] for d in diagnostics if d["status"] != "failed"], "sources_failed": [d["source_id"] for d in source_failures], "evidence_candidates": evidence_candidates, "evidence_accepted": len(new_evidence), "evidence_rejected": evidence_rejected, "evidence_downgraded": evidence_downgraded, "evidence_context_only": sum(int(d.get("context_only_count") or 0) for d in diagnostics), "evidence_duplicate": duplicate_count, "evidence_corroborated": obs_corroborated, "evidence_extraction_failed": 0, "documents_retrieved": sum(int(d.get("documents_retrieved") or 0) for d in diagnostics), "pdfs_parsed": sum(int(d.get("pdfs_parsed") or 0) for d in diagnostics), "pages_extracted": sum(int(d.get("pages_extracted") or 0) for d in diagnostics), "tables_detected": sum(int(d.get("tables_detected") or 0) for d in diagnostics), "observations_created": obs_created, "observations_corroborated": obs_corroborated, "observations_rejected": 0, "model_attributes_created": attrs_created, "model_attributes_changed": len([r for r in memory_results if r.action == "updated"]), "model_attributes_reconfirmed": obs_corroborated, "unknowns_created": unknowns_created, "contradictions_created": contradictions_created, "result_state": result_state, "errors": [d for d in diagnostics if d.get("status") == "failed"], "warnings": []}
     if len(manifest["sources_attempted"]) != len(manifest["sources_retrieved"]) + len(manifest["sources_failed"]):
         raise ValueError("Source counters do not reconcile")
-    if manifest["evidence_candidates"] != manifest["evidence_accepted"] + manifest["evidence_rejected"] + manifest["evidence_downgraded"] + duplicate_count:
-        manifest["warnings"].append("Evidence candidates include duplicate accepted evidence skipped from durable writes.")
+    if manifest["evidence_candidates"] != manifest["evidence_accepted"] + manifest["evidence_rejected"] + manifest["evidence_downgraded"] + manifest["evidence_duplicate"]:
+        raise ValueError("Evidence candidate dispositions do not reconcile")
     mpath = Path(".flora_pilot/collection_manifests") / f"{run_id}.json"
     mpath.parent.mkdir(parents=True, exist_ok=True)
     mpath.write_text(json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8")
-    final_progress = complete_state(result_state, f"Collection complete\nSources: {len(manifest['sources_retrieved'])}/{len(sources)} retrieved\nEvidence: {manifest['evidence_accepted']} accepted, {manifest['evidence_rejected']} rejected\nObservations: {obs_created} created, {obs_corroborated} corroborated\nModel: {attrs_created} attributes created, {unknowns_created} Unknowns", sources_attempted=len(manifest["sources_attempted"]), sources_succeeded=len(manifest["sources_retrieved"]), sources_retrieved=len(manifest["sources_retrieved"]), sources_failed=len(manifest["sources_failed"]), evidence_candidates=evidence_candidates, evidence_accepted=len(new_evidence), evidence_rejected=evidence_rejected, evidence_downgraded=evidence_downgraded, observations_created=obs_created, observations_corroborated=obs_corroborated, observations_rejected=0, model_attributes_created=attrs_created, model_attributes_changed=manifest["model_attributes_changed"], model_attributes_reconfirmed=obs_corroborated, unknowns_created=unknowns_created, contradictions_created=contradictions_created, warnings=manifest["warnings"], errors=manifest["errors"])
+    final_progress = complete_state(result_state, f"Collection complete\nSources: {len(manifest['sources_retrieved'])}/{len(sources)} retrieved\nEvidence: {manifest['evidence_accepted']} accepted, {manifest['evidence_rejected']} rejected\nObservations: {obs_created} created, {obs_corroborated} corroborated\nModel: {attrs_created} attributes created, {unknowns_created} Unknowns", sources_attempted=len(manifest["sources_attempted"]), sources_succeeded=len(manifest["sources_retrieved"]), sources_retrieved=len(manifest["sources_retrieved"]), sources_failed=len(manifest["sources_failed"]), evidence_candidates=evidence_candidates, evidence_accepted=len(new_evidence), evidence_rejected=evidence_rejected, evidence_downgraded=evidence_downgraded, evidence_context_only=manifest["evidence_context_only"], evidence_duplicate=duplicate_count, evidence_corroborated=obs_corroborated, evidence_extraction_failed=0, documents_retrieved=manifest["documents_retrieved"], pdfs_parsed=manifest["pdfs_parsed"], pages_extracted=manifest["pages_extracted"], tables_detected=manifest["tables_detected"], observations_created=obs_created, observations_corroborated=obs_corroborated, observations_rejected=0, model_attributes_created=attrs_created, model_attributes_changed=manifest["model_attributes_changed"], model_attributes_reconfirmed=obs_corroborated, unknowns_created=unknowns_created, contradictions_created=contradictions_created, warnings=manifest["warnings"], errors=manifest["errors"])
     return {
         "progress_state": final_progress,
         "last_collection_time": diagnostics[-1]["last_attempted"] if diagnostics else None,

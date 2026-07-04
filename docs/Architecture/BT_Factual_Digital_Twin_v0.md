@@ -43,3 +43,9 @@ The sprint does not implement the full Commercial Digital Twin, Knowledge Graph 
 ## Acceptance process
 
 Accepted facts must flow from authoritative document to governed Evidence, atomic Observation, Enterprise Model attribute and navigable Digital Twin view. Targets, guidance and actuals remain distinct temporal objects.
+
+## 2026-07-04 corrective validation
+
+The BT pilot collection path was corrected so `POST /live/collect/start` returns immediately to a polling progress page while a single in-process worker performs governed collection. Candidate dispositions are reconciled before manifest completion. The BT leadership source now uses the authoritative FY2026 annual report PDF as a governed fallback because the previous board page returned HTTP 404. The Digital Twin is available at the registered `/digital-twin/bt-group-plc` route and renders HTTP 200 both for empty model state (`Not established`) and populated model-backed state.
+
+Validation commands run in this correction: `pytest tests/test_flora_live.py -q`, `pytest tests/test_flora_enterprise_memory.py -q`, `pytest tests/test_flora_observatory.py -q`, `pytest -q`, `python -m compileall cios/applications/flora -q`, and `git diff --check`.
