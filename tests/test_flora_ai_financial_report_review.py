@@ -184,3 +184,83 @@ def test_provider_request_failures_remain_classified(monkeypatch, tmp_path):
 
     assert run['status'] == 'provider_request_failed'
     assert run['openai_invoked'] is True
+
+
+def test_missing_financial_intelligence_run_returns_usable_page(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path / 'flora'))
+    import importlib
+    import cios.applications.flora.document_review as review
+    review = importlib.reload(review)
+
+    html, status = review.financial_intelligence_run_response('fi-0304783822cb')
+
+    assert status == 410
+    assert 'This previous refresh result is no longer available.' in html
+    assert 'Start a new refresh to collect the latest financial intelligence.' in html
+    assert 'Start new refresh' in html
+
+
+def test_old_financial_intelligence_url_does_not_raise(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path / 'flora'))
+    import importlib
+    import cios.applications.flora.document_review as review
+    review = importlib.reload(review)
+
+    html = review.financial_intelligence_run_page('fi-old-missing')
+
+    assert 'This previous refresh result is no longer available.' in html
+    assert 'FileNotFoundError' not in html
+
+
+def test_financial_intelligence_navigation_uses_start_page_not_missing_historic_run(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path / 'flora'))
+    import importlib
+    import cios.applications.flora.document_review as review
+    review = importlib.reload(review)
+    monkeypatch.setattr(review, '_bt_annual_report_source', lambda: {'source_id': 'bt-annual-report-2026', 'source_name': 'BT Group plc Annual Report 2026', 'url': 'https://www.bt.com/report.pdf'})
+
+    html = review.financial_intelligence_page()
+
+    assert "action='/financial-intelligence/bt-group-plc/refresh'" in html
+    assert '/financial-intelligence/fi-0304783822cb' not in html
+    assert 'No Financial Intelligence refresh has run yet.' in html
+
+
+def test_newly_written_financial_intelligence_run_can_be_loaded(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path / 'flora'))
+    import importlib
+    import cios.applications.flora.document_review as review
+    review = importlib.reload(review)
+    run = {'run_id': 'fi-loadable', 'claims': [], 'applied_results': [], 'collection': {}, 'exceptions': []}
+
+    review._write_json(review._run_path(run['run_id']), run)
+
+    assert review.load_run('fi-loadable')['run_id'] == 'fi-loadable'
+
+
+def test_financial_intelligence_reads_and_writes_use_same_resolved_root(monkeypatch, tmp_path):
+    root = tmp_path / 'same-root'
+    monkeypatch.setenv('FLORA_DATA_DIR', str(root))
+    import importlib
+    import cios.applications.flora.document_review as review
+    review = importlib.reload(review)
+    run = {'run_id': 'fi-same-root', 'claims': [], 'applied_results': [], 'collection': {}, 'exceptions': []}
+
+    path = review._run_path(run['run_id'])
+    review._write_json(path, run)
+
+    assert path.resolve().is_relative_to(root.resolve())
+    assert review.load_run('fi-same-root')['run_id'] == 'fi-same-root'
+
+
+def test_flora_data_dir_is_optional_for_ephemeral_pilot_operation(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.delenv('FLORA_DATA_DIR', raising=False)
+    from cios.applications.flora import storage
+
+    status = storage.startup_storage_status()
+
+    assert status['ready'] is True
+    assert status['storage_mode'] == 'ephemeral pilot storage'
+    assert status['ephemeral'] is True
+    assert (tmp_path / '.flora_pilot' / 'ai_financial_reports' / 'runs').is_dir()
