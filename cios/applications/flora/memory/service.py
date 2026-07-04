@@ -18,8 +18,16 @@ CLAIM_VOCABULARY: dict[str, dict[str, Any]] = {
     "business_unit_disclosed": {"domain": "structure", "attribute_prefix": "structure.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value"), "states": ("actual", "current")},
     "financial_metric_reported": {"domain": "financial_performance", "attribute_prefix": "financial_performance.metrics.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value", "period", "state"), "states": ("actual", "target", "guidance")},
     "strategic_pillar_stated": {"domain": "strategy", "attribute_prefix": "strategy.pillars.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value"), "states": ("actual", "current")},
+    "strategic_commitment_stated": {"domain": "strategy", "attribute_prefix": "strategy.commitments.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value", "period"), "states": ("actual", "current", "target")},
     "executive_role_confirmed": {"domain": "leadership", "attribute_prefix": "leadership.roles.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value", "period"), "states": ("current", "actual")},
+    "enterprise_event_announced": {"domain": "events", "attribute_prefix": "events.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute"), "states": ("actual", "current")},
+    "partnership_announced": {"domain": "events", "attribute_prefix": "events.partnerships.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute"), "states": ("actual", "current")},
+    "programme_announced": {"domain": "events", "attribute_prefix": "events.programmes.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute"), "states": ("actual", "current")},
+    "leadership_change_announced": {"domain": "leadership", "attribute_prefix": "leadership.changes.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute"), "states": ("actual", "current")},
+    "executive_appointment_announced": {"domain": "leadership", "attribute_prefix": "leadership.changes.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute"), "states": ("actual", "current")},
+    "executive_departure_confirmed": {"domain": "leadership", "attribute_prefix": "leadership.changes.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute"), "states": ("actual", "current")},
 }
+COMMERCIAL_SIGNAL_CATEGORIES = set(DOMAIN_MAP) | {"Customer Trust", "AI Modernisation", "Operational Resilience", "Operational Efficiency"}
 
 FINANCIAL_RE = re.compile(r"(?P<metric>revenue|adjusted EBITDA|normalised free cash flow|free cash flow|EBITDA|net debt|capital expenditure|capex|operating profit)\s*(?:was|of|:)?\s*(?:£|GBP\s*)(?P<value>[0-9,.]+)\s*(?P<unit>bn|billion|m|million)?", re.I)
 UNIT_LIST_RE = re.compile(r"(?P<names>Consumer|Business|International|Openreach)(?:\s*,\s*(?:Consumer|Business|International|Openreach))*?(?:\s+and\s+(?:Consumer|Business|International|Openreach))?\s+as\s+(?P<kind>customer-facing units?|business units?|reporting segments?)", re.I)
@@ -73,8 +81,8 @@ class FactualClaim:
 def validate_factual_claim(claim: FactualClaim) -> None:
     spec = CLAIM_VOCABULARY.get(claim.claim_type)
     if not spec:
-        if claim.claim_type in DOMAIN_MAP:
-            return
+        if claim.claim_type in COMMERCIAL_SIGNAL_CATEGORIES:
+            raise ValueError(f"commercial Signal classification is not a factual claim type: {claim.claim_type}")
         raise ValueError(f"unsupported claim type: {claim.claim_type}")
     if claim.model_domain != spec["domain"]:
         raise ValueError(f"unsupported model-domain mapping: {claim.claim_type} maps to {spec['domain']}, not {claim.model_domain}")
@@ -122,10 +130,20 @@ def decompose_factual_claims(item: dict[str, Any]) -> list[FactualClaim]:
     if claims:
         return claims
     condition = str(item.get("commercial_condition") or item.get("mapped_condition") or "enterprise identity")
+    if condition in COMMERCIAL_SIGNAL_CATEGORIES or re.search(r"\b(shows how|demonstrates|benefits|innovation|collaboration)\b", text, re.I):
+        if item.get("foundation_eligible") is False:
+            return []
+        if item.get("foundation_eligible") is True and re.search(r"\b(launched|signed|cancelled|paused|ended|appointed)\b", text, re.I) and not re.search(r"\b(may|might|could|possibly|likely)\b", text, re.I):
+            return [FactualClaim(enterprise, "enterprise_event_announced", text + "." if not text.endswith(".") else text, "events", f"events.{hashlib.sha256(text.encode()).hexdigest()[:12]}", None, None, None, period, "actual", evid, page, conf, f"{evid}:event")]
+        if condition in COMMERCIAL_SIGNAL_CATEGORIES:
+            return [FactualClaim(enterprise, condition, text + "." if not text.endswith(".") else text, _domain_for(condition), str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"), None, None, None, None, "actual", evid, page, conf, f"{evid}:commercial")]
+        return []
     value: str | None = None
-    if condition in {"business_unit_disclosed", "strategic_pillar_stated", "executive_role_confirmed"}:
-        value = _names(text)[0] if _names(text) else text.split(" held ", 1)[0].strip()
-    return [FactualClaim(enterprise, condition, text + ".", _domain_for(condition), str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"), value, None, None, None, "actual", evid, page, conf, f"{evid}:original")]
+    if condition in CLAIM_VOCABULARY:
+        value = str(item.get("value") or item.get("structured_value") or "")
+        if not value and condition in {"business_unit_disclosed", "strategic_pillar_stated", "executive_role_confirmed"}:
+            value = _names(text)[0] if _names(text) else text.split(" held ", 1)[0].strip()
+    return [FactualClaim(enterprise, condition, text + "." if not text.endswith(".") else text, _domain_for(condition), str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"), value or None, item.get("unit"), item.get("currency"), item.get("period"), str(item.get("state") or "actual"), evid, page, conf, f"{evid}:original")]
 
 
 @dataclass
@@ -147,15 +165,34 @@ class ObservationMemoryService:
     def observation_from_evidence(self, item: dict[str, Any]) -> Observation:
         statement = str(item.get("cleaned_observation") or item.get("extracted_observation") or item.get("snippet") or "").strip()
         condition = str(item.get("commercial_condition") or item.get("mapped_condition") or "enterprise identity")
+        if condition not in CLAIM_VOCABULARY:
+            raise ValueError(f"unsupported claim type: {condition}")
         collected = str(item.get("extraction_timestamp") or item.get("collection_date") or now_iso()); observed = str(item.get("observation_date") or collected[:10])
         publication = item.get("publication_date") or item.get("evidence_publication_date")
         enterprise = canonical_enterprise_id(str(item.get("enterprise_id") or item.get("canonical_enterprise_id") or item.get("organisation") or "Unknown enterprise")) or "unknown"
-        return Observation(enterprise, condition, statement, observed, collected, str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"), int(item.get("confidence") or item.get("overall_evidence_quality") or 50), (_evidence_id(item),), evidence_publication_date=str(publication) if publication else None, provenance_type="evidence-backed", freshness=str(item.get("evidence_freshness") or "current"), importance=int(item["importance"]) if item.get("importance") is not None else None, commercial_value=int(item["commercial_value"]) if item.get("commercial_value") is not None else None)
+        return Observation(enterprise, condition, statement, observed, collected, str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"), int(item.get("confidence") or item.get("overall_evidence_quality") or 50), (_evidence_id(item),), evidence_publication_date=str(publication) if publication else None, provenance_type=str(item.get("provenance") or item.get("source_provenance") or "evidence-backed"), freshness=str(item.get("evidence_freshness") or "current"), importance=int(item["importance"]) if item.get("importance") is not None else None, commercial_value=int(item["commercial_value"]) if item.get("commercial_value") is not None else None)
 
     def accept_evidence(self, item: dict[str, Any]) -> ModelUpdateResult:
         report = self.process_evidence(item)
         if report.results:
             return report.results[0]
+        condition = str(item.get("commercial_condition") or item.get("mapped_condition") or "")
+        if "foundation_eligible" not in item and condition in COMMERCIAL_SIGNAL_CATEGORIES and report.rejected_claims:
+            collected = str(item.get("extraction_timestamp") or item.get("collection_date") or now_iso())
+            enterprise = canonical_enterprise_id(str(item.get("enterprise_id") or item.get("canonical_enterprise_id") or item.get("organisation") or "Unknown enterprise")) or "unknown"
+            observation = self.observations.save(Observation(
+                enterprise,
+                condition,
+                str(item.get("cleaned_observation") or item.get("extracted_observation") or item.get("snippet") or "").strip(),
+                str(item.get("observation_date") or collected[:10]),
+                collected,
+                str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"),
+                int(item.get("confidence") or item.get("overall_evidence_quality") or 50),
+                (_evidence_id(item),),
+                evidence_publication_date=str(item.get("publication_date")) if item.get("publication_date") else None,
+                freshness=str(item.get("evidence_freshness") or "current"),
+            ))
+            return self.apply_observation(observation)
         reason = report.rejected_claims[0]["rejection_reason"] if report.rejected_claims else "No factual claims extracted"
         raise ValueError(reason)
 

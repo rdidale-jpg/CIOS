@@ -83,7 +83,7 @@ class Observation:
         self.supporting_evidence_ids = tuple(dict.fromkeys(str(e) for e in self.supporting_evidence_ids if e))
         self.contradicted_by_observation_ids = tuple(dict.fromkeys(str(o) for o in self.contradicted_by_observation_ids if o))
         self.confidence = max(0, min(100, int(self.confidence)))
-        if self.provenance_type == "evidence-backed" and not self.supporting_evidence_ids:
+        if self.provenance_type in {"evidence-backed", "evidence_curated"} and not self.supporting_evidence_ids:
             raise ValueError("Evidence-backed Observations require at least one accepted Evidence ID.")
         if self.provenance_type == "human-supplied" and not self.human_provenance:
             raise ValueError("Human-supplied Observations require explicit human provenance metadata.")
