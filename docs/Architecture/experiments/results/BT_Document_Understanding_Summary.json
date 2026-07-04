@@ -1,0 +1,17 @@
+{
+  "starting_main_sha": "e7cc5b2cc0cb3610e3f9740c3be6aaa10888b6fa",
+  "branch": "experiment/ai-document-understanding-spike",
+  "documents": ["BT Group Annual Report 2026", "BT FY26 full-year results release"],
+  "page_ranges": ["annual-report-2026:1-20", "annual-report-2026:90-100", "fy26-results:1-5"],
+  "golden_facts": 20,
+  "human_review_status": "provisional_pending_human_review",
+  "routes": {
+    "flora-baseline": {"status": "implemented_control", "provider": "flora", "model": "deterministic-regex"},
+    "openai-direct": {"status": "not_executed", "provider": "openai", "model": "gpt-5.5", "reason": "OpenAI credential unavailable in workspace"},
+    "anthropic-direct": {"status": "not_executed", "provider": "anthropic", "model": "claude-sonnet-4-5", "reason": "Anthropic credential unavailable in workspace"},
+    "layout-openai": {"status": "not_executed", "provider": "google-or-azure-layout-plus-openai", "model": "gpt-5.5", "reason": "No Google Document AI or Azure Document Intelligence credentials configured"}
+  },
+  "recommendation": "E. None meet the quality threshold yet",
+  "contains_secrets": false,
+  "production_collection_changed": false
+}

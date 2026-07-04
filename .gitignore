@@ -2,3 +2,8 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+
+# AI document understanding experiment transient data
+.document_understanding/
+.flora_pilot/documents/
+*.page-range.pdf
