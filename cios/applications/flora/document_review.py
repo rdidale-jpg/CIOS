@@ -96,6 +96,8 @@ def _safe_provider_diagnostic(run_id: str, source: dict[str, Any], fetched: Any,
         'source_document_retrieval_result': bool(getattr(fetched, 'succeeded', False)),
         'source_content_type': getattr(fetched, 'media_type', None),
         'source_file_size': len(getattr(fetched, 'content', b'') or b''),
+        'source_final_url': getattr(fetched, 'final_url', None) or getattr(fetched, 'url', None),
+        'source_input_mode': None,
         'pdf_upload_succeeded': False,
         'http_status_code': getattr(fetched, 'status_code', None),
         'provider_error_type': 'source_retrieval_failed' if not getattr(fetched, 'succeeded', False) else None,
@@ -245,11 +247,11 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc') -> dict[
     retrieval_started = time.time()
     fetched = fetch_document(source['url'])
     doc_parse = parse_pdf_document(fetched, _source_obj(source), canonical_enterprise_id='bt-group-plc')
-    document = ExperimentDocument(document_id=doc_parse.document_id, enterprise_id='bt-group-plc', title=source['source_name'], source_url=source['url'], retrieval_timestamp=doc_parse.retrieval_date, checksum=doc_parse.checksum, media_type=doc_parse.media_type or 'application/pdf', page_count=max(doc_parse.page_count, 1), local_path=doc_parse.local_path)
+    document = ExperimentDocument(document_id=doc_parse.document_id, enterprise_id='bt-group-plc', title=source['source_name'], source_url=(fetched.final_url or source['url']), retrieval_timestamp=doc_parse.retrieval_date, checksum=doc_parse.checksum, media_type=doc_parse.media_type or 'application/pdf', page_count=max(doc_parse.page_count, 1), local_path=doc_parse.local_path)
     provider = OpenAIDirectPDFProvider(model=DEFAULT_MODEL)
     extraction = provider.extract_facts(document) if fetched.succeeded else None
     claims = [fact_to_review_claim(f, run_id) for f in (extraction.facts if extraction else [])]
-    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url']}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else DEFAULT_MODEL), 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'provider_diagnostics': (getattr(extraction, 'diagnostics', []) if extraction else [_safe_provider_diagnostic(run_id, source, fetched, DEFAULT_MODEL, retrieval_started)]), 'openai_invoked': bool(extraction), 'claims': claims, 'applied_results': []}
+    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b'')}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else DEFAULT_MODEL), 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'provider_diagnostics': (getattr(extraction, 'diagnostics', []) if extraction else [_safe_provider_diagnostic(run_id, source, fetched, DEFAULT_MODEL, retrieval_started)]), 'openai_invoked': bool(extraction), 'claims': claims, 'applied_results': []}
     run['collection'].update({'final_url': fetched.final_url or fetched.url, 'content_type': fetched.media_type, 'redirect_chain': list(fetched.redirect_chain), 'redirected': bool(fetched.redirect_chain)})
     if extraction:
         run['provider_diagnostics'] = [_safe_provider_diagnostic(run_id, source, fetched, DEFAULT_MODEL, retrieval_started)] + run.get('provider_diagnostics', [])
