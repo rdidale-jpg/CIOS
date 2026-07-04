@@ -6,6 +6,7 @@ from datetime import UTC, datetime
 from typing import Any
 
 from cios.applications.flora.memory.models import EnterpriseModelAttribute, EnterpriseUnknown, ModelUpdateResult, Observation, now_iso
+from cios.applications.flora.live.source_registry import canonical_enterprise_id
 from cios.applications.flora.memory.repository import EnterpriseModelRepository, ObservationRepository
 
 DOMAIN_MAP = {
@@ -45,8 +46,9 @@ class ObservationMemoryService:
         collected = str(item.get("extraction_timestamp") or item.get("collection_date") or now_iso())
         observed = str(item.get("observation_date") or collected[:10])
         publication = item.get("publication_date") or item.get("evidence_publication_date")
+        enterprise = canonical_enterprise_id(str(item.get("enterprise_id") or item.get("canonical_enterprise_id") or item.get("organisation") or "Unknown enterprise")) or "unknown"
         return Observation(
-            enterprise_id=str(item.get("organisation") or item.get("enterprise_id") or "Unknown enterprise"),
+            enterprise_id=enterprise,
             observation_type=condition,
             atomic_statement=statement,
             observation_date=observed,

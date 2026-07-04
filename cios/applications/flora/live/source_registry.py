@@ -1,7 +1,20 @@
 """Governed source registry for Flora live evidence v0.7."""
 from __future__ import annotations
 
+from pathlib import Path
+import json
+
 from pydantic import BaseModel, HttpUrl
+
+
+class EnterpriseScope(BaseModel):
+    canonical_enterprise_id: str
+    display_name: str
+    aliases: list[str] = []
+    collection_profile: str | None = None
+    permitted_source_ids: list[str] = []
+    run_id: str | None = None
+    collection_mode: str = "live_plus_seeded"
 
 
 class SourceRecord(BaseModel):
@@ -18,6 +31,11 @@ class SourceRecord(BaseModel):
     notes: str = ""
     source_classification: str = "focused_page"
     preferred_child_paths: list[str] = []
+    canonical_enterprise_id: str | None = None
+    collection_purpose: str = "live evidence collection"
+    authority_tier: str | None = None
+    freshness_expectation: str | None = None
+    profile_passes: list[str] = []
 
 SOURCES: tuple[SourceRecord, ...] = (
 
@@ -192,3 +210,93 @@ def enabled_sources(organisation: str | None = None) -> list[SourceRecord]:
 def organisations_without_enabled_sources() -> list[str]:
     enabled = {s.organisation for s in SOURCES if s.enabled}
     return sorted(org for org in TARGET_ORGANISATIONS if org not in enabled)
+
+PROFILE_DIR = Path("config/flora/collection_profiles")
+COLLECTION_MODES = {"live_authoritative", "live_plus_seeded", "test_fixture"}
+_DEFAULT_ENTERPRISE_ALIASES = {
+    "bt": "bt-group-plc",
+    "bt group": "bt-group-plc",
+    "bt group plc": "bt-group-plc",
+    "british telecommunications": "bt-group-plc",
+}
+
+
+def _norm_identity(value: str) -> str:
+    return " ".join(str(value or "").casefold().replace(".", "").split())
+
+
+def load_collection_profile(profile_id: str) -> dict:
+    path = PROFILE_DIR / f"{profile_id}.json"
+    if not path.exists():
+        raise ValueError(f"Unknown Flora collection profile: {profile_id}")
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def configured_enterprise_aliases() -> dict[str, str]:
+    aliases = dict(_DEFAULT_ENTERPRISE_ALIASES)
+    for source in SOURCES:
+        cid = source.canonical_enterprise_id or source.organisation
+        aliases[_norm_identity(source.organisation)] = cid
+        aliases[_norm_identity(source.organisation).replace(" ", "")] = cid
+    if PROFILE_DIR.exists():
+        for path in PROFILE_DIR.glob("*.json"):
+            data = json.loads(path.read_text(encoding="utf-8"))
+            ent = data.get("enterprise_scope", {})
+            cid = ent.get("canonical_enterprise_id") or data.get("profile_id")
+            for name in [cid, ent.get("display_name"), *(ent.get("aliases") or [])]:
+                if name:
+                    aliases[_norm_identity(str(name))] = cid
+    return aliases
+
+
+def canonical_enterprise_id(name: str | None) -> str | None:
+    if name is None:
+        return None
+    key = _norm_identity(name)
+    aliases = configured_enterprise_aliases()
+    if key in aliases:
+        return aliases[key]
+    return key.replace(" ", "-")
+
+
+def canonical_organisation(name: str) -> str:
+    cid = canonical_enterprise_id(name)
+    if cid == "bt-group-plc":
+        return "BT Group plc"
+    lookup = {_norm_identity(s.organisation): s.organisation for s in SOURCES}
+    return lookup.get(_norm_identity(name), name)
+
+
+def source_canonical_enterprise_id(source: SourceRecord) -> str:
+    return source.canonical_enterprise_id or canonical_enterprise_id(source.organisation) or source.organisation
+
+
+def collection_scope(profile_id: str, *, run_id: str | None = None, mode: str | None = None, passes: list[str] | None = None) -> EnterpriseScope:
+    profile = load_collection_profile(profile_id)
+    ent = profile["enterprise_scope"]
+    selected_mode = mode or profile.get("default_collection_mode", "live_plus_seeded")
+    if selected_mode not in COLLECTION_MODES:
+        raise ValueError(f"Unsupported collection mode: {selected_mode}")
+    sources = profile.get("sources", [])
+    selected_passes = set(passes or profile.get("default_passes") or [])
+    permitted = [s["source_id"] for s in sources if s.get("enabled", True) and (not selected_passes or selected_passes.intersection(s.get("passes", [])))]
+    return EnterpriseScope(canonical_enterprise_id=ent["canonical_enterprise_id"], display_name=ent["display_name"], aliases=ent.get("aliases", []), collection_profile=profile_id, permitted_source_ids=permitted, run_id=run_id, collection_mode=selected_mode)
+
+
+def profile_sources(profile_id: str, *, passes: list[str] | None = None) -> list[SourceRecord]:
+    profile = load_collection_profile(profile_id)
+    ent = profile["enterprise_scope"]
+    selected_passes = set(passes or profile.get("default_passes") or [])
+    records = []
+    for row in profile.get("sources", []):
+        if not row.get("enabled", True) or (selected_passes and not selected_passes.intersection(row.get("passes", []))):
+            continue
+        records.append(SourceRecord(source_id=row["source_id"], organisation=ent["display_name"], source_name=row.get("source_name", row["source_id"]), source_type=row["source_type"], url=row["url"], sector=row.get("sector", "Telecommunications"), evidence_tier=row.get("authority_tier", "tier_1_company"), expected_signal_types=row.get("expected_signal_types", []), enabled=True, coverage_role=row.get("collection_purpose", "primary"), notes=row.get("notes", ""), source_classification=row.get("source_classification", "focused_page"), preferred_child_paths=[], canonical_enterprise_id=ent["canonical_enterprise_id"], collection_purpose=row.get("collection_purpose", ""), authority_tier=row.get("authority_tier"), freshness_expectation=row.get("freshness_expectation"), profile_passes=row.get("passes", [])))
+    return records
+
+
+def enabled_sources(organisation: str | None = None, *, profile_id: str | None = None, passes: list[str] | None = None) -> list[SourceRecord]:
+    if profile_id:
+        return profile_sources(profile_id, passes=passes)
+    canonical = canonical_enterprise_id(organisation) if organisation else None
+    return [s for s in SOURCES if s.enabled and (canonical is None or source_canonical_enterprise_id(s) == canonical)]

@@ -7,8 +7,10 @@ from typing import Any
 
 from cios.applications.flora.live.extractor import extract_evidence_with_diagnostics
 from cios.applications.flora.live.fetcher import fetch_html
-from cios.applications.flora.live.source_registry import SOURCES, canonical_organisation, enabled_sources
+from cios.applications.flora.live.source_registry import SOURCES, canonical_organisation, canonical_enterprise_id, collection_scope, enabled_sources, source_canonical_enterprise_id
 from cios.applications.flora.live.store import DEFAULT_DIAGNOSTICS_PATH, DEFAULT_PATH, load_evidence_fingerprints, read_jsonl, unique_evidence, write_jsonl
+from pathlib import Path
+import json, os, uuid
 from cios.applications.flora.live.progress import complete_state, read_state, start_state, update_state
 from cios.applications.flora.live.alignment import build_acquisition_plans, lifecycle_action
 from cios.applications.flora.memory.service import ObservationMemoryService
@@ -99,12 +101,16 @@ def _diagnostic(source: Any, attempted_at: str, result: Any, source_evidence: li
     return diag
 
 
-def collect(organisation: str | None = None) -> dict[str, Any]:
+def collect(organisation: str | None = None, *, profile_id: str | None = None, collection_mode: str | None = None, run_id: str | None = None, passes: list[str] | None = None) -> dict[str, Any]:
     """Collect evidence from the governed source allow-list and write diagnostics."""
     from cios.applications.flora.observatory.engine import build_observatory, compare_observatory_snapshots, observatory_snapshot
 
     before_observatory = observatory_snapshot(build_observatory())
-    sources = enabled_sources(organisation)
+    run_id = run_id or f"flora-run-{datetime.now(UTC).strftime('%Y%m%dT%H%M%SZ')}-{uuid.uuid4().hex[:8]}"
+    scope = collection_scope(profile_id, run_id=run_id, mode=collection_mode, passes=passes) if profile_id else None
+    mode = collection_mode or (scope.collection_mode if scope else "live_plus_seeded")
+    sources = enabled_sources(organisation, profile_id=profile_id, passes=passes) if profile_id or passes else enabled_sources(organisation)
+    scoped_enterprise_id = scope.canonical_enterprise_id if scope else canonical_enterprise_id(organisation)
     start_state(len(sources))
     diagnostics: list[dict[str, Any]] = []
     evidence: list[dict[str, Any]] = []
@@ -120,6 +126,14 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
         if result.succeeded:
             try:
                 source_evidence, rejected_evidence = extract_evidence_with_diagnostics(source, result.html)
+                for item in source_evidence:
+                    item["enterprise_id"] = source_canonical_enterprise_id(source)
+                    item["canonical_enterprise_id"] = source_canonical_enterprise_id(source)
+                    item["organisation"] = source_canonical_enterprise_id(source)
+                    item["collection_mode"] = mode
+                    item["source_provenance"] = "live"
+                if mode == "live_authoritative":
+                    source_evidence = [e for e in source_evidence if e.get("source_provenance") == "live" and "seed" not in str(e.get("source_type", "")).lower() and "synthetic" not in str(e.get("source_type", "")).lower()]
                 evidence.extend(source_evidence)
             except Exception as exc:  # parser diagnostics must not stop other governed sources
                 succeeded = False
@@ -142,7 +156,17 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
     plans = build_acquisition_plans(SOURCES, read_jsonl(DEFAULT_PATH) + new_evidence, diagnostics)
     insufficient = [p["organisation"] for p in plans if p.get("collection_confidence", 0) < 60]
     urgent = [p for p in plans if p.get("collection_priority") == "collect urgently"]
-    final_progress = complete_state("completed", "Collection completed.")
+    completed_at = datetime.now(UTC).isoformat()
+    obs_created = len([r for r in memory_results if r.action == "created"])
+    obs_corroborated = len([r for r in memory_results if r.action == "updated"])
+    attrs_created = len([r for r in memory_results if r.action == "created"])
+    unknowns_created = len([r for r in memory_results if r.unknown_created])
+    contradictions_created = len([r for r in memory_results if r.contradiction])
+    manifest = {"run_id": run_id, "canonical_enterprise_id": scoped_enterprise_id, "profile_id": profile_id, "started_at": collection_started_at, "completed_at": completed_at, "collection_mode": mode, "passes": passes or (scope and []) or [], "sources_planned": [s.source_id for s in sources], "sources_attempted": [d["source_id"] for d in diagnostics], "sources_retrieved": [d["source_id"] for d in diagnostics if d["status"] != "failed"], "sources_rejected": [d["source_id"] for d in diagnostics if d["status"] == "failed"], "evidence_accepted": len(new_evidence), "evidence_rejected": sum(int(d.get("rejected_evidence_count") or 0) for d in diagnostics), "evidence_downgraded": sum(int(d.get("downgraded_evidence_count") or 0) for d in diagnostics), "observations_created": obs_created, "observations_corroborated": obs_corroborated, "observations_rejected": 0, "enterprise_model_attributes_created": attrs_created, "attributes_changed": len([r for r in memory_results if r.action == "updated"]), "attributes_reconfirmed": obs_corroborated, "unknowns_created": unknowns_created, "contradictions_created": contradictions_created, "errors": [d for d in diagnostics if d.get("status") == "failed"], "warnings": []}
+    mpath = Path(".flora_pilot/collection_manifests") / f"{run_id}.json"
+    mpath.parent.mkdir(parents=True, exist_ok=True)
+    mpath.write_text(json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8")
+    final_progress = complete_state("completed", f"Collection complete\nSources: {len(manifest['sources_retrieved'])}/{len(sources)} retrieved\nEvidence: {manifest['evidence_accepted']} accepted, {manifest['evidence_rejected']} rejected\nObservations: {obs_created} created, {obs_corroborated} corroborated\nModel: {attrs_created} attributes created, {unknowns_created} Unknowns")
     return {
         "progress_state": final_progress,
         "last_collection_time": diagnostics[-1]["last_attempted"] if diagnostics else None,
@@ -167,6 +191,10 @@ def collect(organisation: str | None = None) -> dict[str, Any]:
         "recommended_next_collection_actions": [f"{p['organisation']}: {', '.join(p.get('next_collection_objectives', [])[:2])}" for p in urgent[:10]],
         "source_improvement_recommendations": [d.get("recommended_source_fix") for d in diagnostics if d.get("recommended_source_fix")],
         "diagnostics": diagnostics,
+        "collection_manifest": manifest,
+        "collection_manifest_location": str(mpath),
+        "collection_mode": mode,
+        "canonical_enterprise_id": scoped_enterprise_id,
         "observations_updated": len(memory_results),
         "observatory_delta": observatory_delta,
         "output_location": str(output),
@@ -220,9 +248,13 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Collect governed Flora live evidence for pilot organisations.")
     parser.add_argument("--organisation", help="Organisation to collect; matched against the governed registry aliases.")
     parser.add_argument("--all", action="store_true", help="Collect all pilot organisations.")
+    parser.add_argument("--profile", help="Collection profile ID, for example bt-group-plc.")
+    parser.add_argument("--mode", choices=["live_authoritative", "live_plus_seeded", "test_fixture"], help="Collection mode.")
+    parser.add_argument("--pass", dest="passes", action="append", help="Profile pass to run: baseline, change_event or recollection.")
     args = parser.parse_args()
     org = None if args.all or not args.organisation else canonical_organisation(args.organisation)
-    result = collect(org)
+    result = collect(org, profile_id=args.profile, collection_mode=args.mode, passes=args.passes)
+    print(result.get("progress_state", {}).get("latest_message", "Collection complete"))
     print(f"sources attempted: {result['sources_attempted']}")
     print(f"sources succeeded: {result['sources_succeeded']}")
     print(f"sources failed: {result['sources_failed']}")

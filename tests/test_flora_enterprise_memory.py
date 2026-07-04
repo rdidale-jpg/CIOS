@@ -140,8 +140,8 @@ def test_enterprise_paths_are_safe_stable_and_collision_resistant(tmp_path: Path
     renamed = repo.path_for("BT Group")
     assert evil.parent == tmp_path / "models"
     assert ".." not in evil.name and "/" not in evil.name
-    assert bt != lower
-    assert bt != renamed
+    assert bt == lower
+    assert bt == renamed
 
 
 def test_memory_survives_reconstruction_and_report_deletion(tmp_path: Path) -> None:

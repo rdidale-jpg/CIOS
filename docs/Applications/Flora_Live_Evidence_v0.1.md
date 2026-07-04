@@ -56,3 +56,27 @@ No database is added. Local JSONL is the only persistence format.
 ## No broad crawling
 
 The collector attempts only enabled URLs in the governed source registry and does not discover or crawl additional pages.
+
+## BT Group plc single-enterprise calibration
+
+BT Digital Twin calibration uses the governed profile at `config/flora/collection_profiles/bt-group-plc.json` and the canonical enterprise ID `bt-group-plc`.
+
+Run the baseline pass:
+
+```bash
+python -m cios.applications.flora.live.collect --profile bt-group-plc --mode live_authoritative --pass baseline
+```
+
+Run the change-event pass:
+
+```bash
+python -m cios.applications.flora.live.collect --profile bt-group-plc --mode live_authoritative --pass change_event
+```
+
+Run recollection to validate idempotency:
+
+```bash
+python -m cios.applications.flora.live.collect --profile bt-group-plc --mode live_authoritative --pass recollection
+```
+
+Each run writes a collection manifest under `.flora_pilot/collection_manifests/` and can be inspected through the calibration lineage view showing Evidence → Observation → affected Enterprise Model attribute.
