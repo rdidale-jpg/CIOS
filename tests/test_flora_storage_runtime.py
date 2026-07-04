@@ -18,7 +18,7 @@ def test_startup_validation_is_idempotent_and_reports_durability(monkeypatch, tm
     first = storage.startup_storage_status()
     second = storage.startup_storage_status()
     assert first['ready'] and second['ready']
-    assert first['status'] == 'storage not configured for durability'
+    assert first['status'] == 'configured pilot storage'
     assert Path(first['data_root']).exists()
 
 

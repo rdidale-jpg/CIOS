@@ -80,17 +80,26 @@ def atomic_write_json(path: Path, data: dict[str, Any]) -> None:
     atomic_write_text(path, json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
 
 
+def storage_mode() -> dict[str, Any]:
+    root = data_root()
+    configured = bool(os.getenv(FLORA_DATA_DIR_ENV))
+    durable = configured and str(root.resolve(strict=False)).startswith("/var/data")
+    mode = "configured pilot storage" if configured else "ephemeral pilot storage"
+    return {"mode": mode, "data_root": str(root.resolve(strict=False)), "configured": configured, "durable": durable, "ephemeral": not configured}
+
+
 def startup_storage_status() -> dict[str, Any]:
     root = data_root()
-    durable = bool(os.getenv(FLORA_DATA_DIR_ENV)) and str(root.resolve(strict=False)).startswith("/var/data")
+    mode = storage_mode()
+    durable = bool(mode["durable"])
     try:
         ensure_writable_dir(root)
         for rel in REQUIRED_DIRS:
             ensure_writable_dir(root / rel)
-        status = "persistent storage ready" if durable else "storage not configured for durability"
+        status = "persistent storage ready" if durable else mode["mode"]
         ready = True
     except PersistenceError as exc:
         status = "storage unavailable"
         ready = False
-        return {"ready": ready, "status": status, "data_root": str(root.resolve(strict=False)), "durable": durable, "error": str(exc)}
-    return {"ready": ready, "status": status, "data_root": str(root.resolve(strict=False)), "durable": durable}
+        return {"ready": ready, "status": status, "data_root": mode["data_root"], "durable": durable, "ephemeral": mode["ephemeral"], "storage_mode": mode["mode"], "error": str(exc)}
+    return {"ready": ready, "status": status, "data_root": mode["data_root"], "durable": durable, "ephemeral": mode["ephemeral"], "storage_mode": mode["mode"]}

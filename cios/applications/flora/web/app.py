@@ -22,7 +22,7 @@ from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
-from cios.applications.flora.document_review import apply_accepted, create_upload_run, financial_intelligence_page, financial_intelligence_run_page, refresh_financial_intelligence, review_home_page, run_page, update_reviews
+from cios.applications.flora.document_review import apply_accepted, create_upload_run, financial_intelligence_page, financial_intelligence_run_response, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -54,7 +54,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         try:
             if parsed.path == "/health":
-                self._json({**HEALTH_PAYLOAD, "storage": startup_storage_status()})
+                self._json(HEALTH_PAYLOAD)
             elif parsed.path in {"/", "/morning-edition"}:
                 self._html(landing_page())
             elif parsed.path in {"/live", "/evidence"}:
@@ -81,10 +81,13 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(source_effectiveness_page())
             elif parsed.path == "/live/evidence":
                 self._html(evidence_page())
-            elif parsed.path in {"/financial-intelligence", "/financial-reports"}:
+            elif parsed.path == "/financial-intelligence":
                 self._html(financial_intelligence_page())
+            elif parsed.path == "/financial-reports":
+                self._html(review_home_page())
             elif parsed.path.startswith("/financial-intelligence/"):
-                self._html(financial_intelligence_run_page(parsed.path.removeprefix("/financial-intelligence/")))
+                html, status = financial_intelligence_run_response(parsed.path.removeprefix("/financial-intelligence/"))
+                self._html(html, status=status)
             elif parsed.path == "/ai-financial-report":
                 self._html(review_home_page())
             elif parsed.path.startswith("/ai-financial-report/"):

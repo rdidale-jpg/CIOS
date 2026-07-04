@@ -1,7 +1,7 @@
 """AI document-understanding review workflow for Flora financial reports."""
 from __future__ import annotations
 
-from cios.applications.flora.storage import PersistenceError, atomic_write_json, data_path, ensure_writable_dir
+from cios.applications.flora.storage import PersistenceError, atomic_write_json, data_path, ensure_writable_dir, storage_mode
 
 import hashlib, json, os, shutil, uuid
 from types import SimpleNamespace
@@ -18,11 +18,16 @@ from cios.applications.flora.live.source_registry import canonical_enterprise_id
 from cios.applications.flora.live.documents import fetch_document, parse_pdf_document
 from cios.applications.flora.workspace.views import _page
 
-REVIEW_DIR = data_path('ai_financial_reports')
-UPLOAD_DIR = REVIEW_DIR / 'uploads'
-RUN_DIR = REVIEW_DIR / 'runs'
+def _review_dir() -> Path: return data_path('ai_financial_reports')
+def _upload_dir() -> Path: return data_path('ai_financial_reports', 'uploads')
+def _run_dir() -> Path: return data_path('ai_financial_reports', 'runs')
+
+# Backwards-compatible module attributes; runtime code resolves dynamically through helpers.
+REVIEW_DIR = _review_dir()
+UPLOAD_DIR = _upload_dir()
+RUN_DIR = _run_dir()
 DEFAULT_MODEL = os.getenv('FLORA_DOCUMENT_UNDERSTANDING_MODEL', 'gpt-5.5')
-BT_PROFILE = Path('config/flora/collection_profiles/bt-group-plc.json')
+BT_PROFILE = Path(__file__).resolve().parents[3] / 'config/flora/collection_profiles/bt-group-plc.json'
 AUTO_ACCEPT_CONFIDENCE = int(os.getenv('FLORA_FINANCIAL_INTELLIGENCE_AUTO_ACCEPT_CONFIDENCE', '85'))
 
 FAILURE_MESSAGES = {
@@ -67,7 +72,7 @@ def _read_json(path: Path) -> dict[str, Any]:
 def _write_json(path: Path, data: dict[str, Any]) -> None:
     atomic_write_json(path, data)
 
-def _run_path(run_id: str) -> Path: return RUN_DIR / f'{run_id}.json'
+def _run_path(run_id: str) -> Path: return _run_dir() / f'{run_id}.json'
 
 def _evidence_id(run_id: str, fact_id: str) -> str:
     return 'AI-EV-' + hashlib.sha256(f'{run_id}:{fact_id}'.encode()).hexdigest()[:16].upper()
@@ -192,7 +197,7 @@ def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
 def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc') -> dict[str, Any]:
     source = _bt_annual_report_source()
     run_id = 'fi-' + uuid.uuid4().hex[:12]
-    ensure_writable_dir(RUN_DIR)
+    ensure_writable_dir(_run_dir())
     fetched = fetch_document(source['url'])
     doc_parse = parse_pdf_document(fetched, _source_obj(source), canonical_enterprise_id='bt-group-plc')
     document = ExperimentDocument(document_id=doc_parse.document_id, enterprise_id='bt-group-plc', title=source['source_name'], source_url=source['url'], retrieval_timestamp=doc_parse.retrieval_date, checksum=doc_parse.checksum, media_type=doc_parse.media_type or 'application/pdf', page_count=max(doc_parse.page_count, 1), local_path=doc_parse.local_path)
@@ -220,9 +225,9 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc') -> dict[
 
 def create_upload_run(pdf_path: Path, *, enterprise_id: str = 'bt-group-plc', title: str = 'BT Group plc Annual Report 2026', source_url: str = 'uploaded authoritative PDF') -> dict[str, Any]:
     run_id = 'air-' + uuid.uuid4().hex[:12]
-    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+    ensure_writable_dir(_upload_dir())
     checksum = hashlib.sha256(pdf_path.read_bytes()).hexdigest()
-    stored = UPLOAD_DIR / f'{checksum[:16]}.pdf'
+    stored = _upload_dir() / f'{checksum[:16]}.pdf'
     if pdf_path.resolve() != stored.resolve(): shutil.copyfile(pdf_path, stored)
     document = ExperimentDocument(document_id='DOC-' + checksum[:16].upper(), enterprise_id=canonical_enterprise_id(enterprise_id) or enterprise_id, title=title, source_url=source_url, retrieval_timestamp=now_iso(), checksum=checksum, media_type='application/pdf', page_count=1, local_path=str(stored))
     provider = OpenAIDirectPDFProvider(model=DEFAULT_MODEL)
@@ -233,6 +238,8 @@ def create_upload_run(pdf_path: Path, *, enterprise_id: str = 'bt-group-plc', ti
     return run
 
 def load_run(run_id: str) -> dict[str, Any]: return _read_json(_run_path(run_id))
+
+def run_exists(run_id: str) -> bool: return _run_path(run_id).is_file()
 
 def update_reviews(run_id: str, form: dict[str, list[str]]) -> dict[str, Any]:
     run = load_run(run_id)
@@ -265,12 +272,15 @@ def review_home_page(message: str = '') -> str:
 
 def financial_intelligence_page(message: str = '') -> str:
     source = _bt_annual_report_source()
-    runs = sorted(RUN_DIR.glob('fi-*.json'), key=lambda p: p.stat().st_mtime, reverse=True) if RUN_DIR.exists() else []
+    run_dir = _run_dir()
+    runs = sorted(run_dir.glob('fi-*.json'), key=lambda p: p.stat().st_mtime, reverse=True) if run_dir.exists() else []
     last = _read_json(runs[0]) if runs else None
     ready = bool(os.getenv('OPENAI_API_KEY'))
     state = 'Financial intelligence ready' if ready else 'Financial intelligence is temporarily unavailable'
     notice = f"<p class='pill'>{escape(message)}</p>" if message else ''
     summary = _outcome_summary(last) if last else '<p>No Financial Intelligence refresh has run yet.</p>'
+    mode = storage_mode()
+    print(f"Flora Financial Intelligence storage mode: {mode['mode']} at {mode['data_root']}")
     body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>BT Commercial Digital Twin outcome view. Flora collects the governed annual report, understands the financial facts, updates Observations and the Enterprise Model, then shows what changed and what needs attention.</p>{notice}<p class='pill'>{escape(state)}</p></section><section class='card action'><h2>Active governed source</h2><p><strong>{escape(source['source_name'])}</strong></p><p><a href='{escape(source['url'])}'>{escape(source['url'])}</a></p><p class='muted'>Source is registered in the BT collection profile and collected server-side; no download or upload is required.</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Refresh Financial Intelligence</button></form></section>{summary}<details class='card'><summary><strong>Administrative fallback only</strong></summary><p>Use only when governed automatic collection cannot retrieve a replacement report. This is not the BT sales-user workflow.</p><form method='post' action='/ai-financial-report/upload' enctype='multipart/form-data'><input type='hidden' name='enterprise_id' value='bt-group-plc'><input type='hidden' name='title' value='BT Group plc Annual Report 2026'><input type='hidden' name='source_url' value='{escape(source['url'])}'><input type='file' name='pdf' accept='application/pdf'><button>Admin fallback upload</button></form></details>"""
     return _page('Financial Intelligence', body)
 
@@ -281,8 +291,23 @@ def _outcome_summary(run: dict[str, Any] | None) -> str:
     evidence = ''.join(f"<details><summary>{escape(c.get('original_statement',''))}</summary><p>Page {escape(str(c.get('page_reference')))} · Confidence {escape(str(c.get('confidence')))} · Evidence {escape(c.get('evidence_id',''))}</p><p>{escape(str(c.get('source_excerpt') or ''))}</p></details>" for c in run.get('claims', [])[:20]) or '<p>No page-grounded claims returned.</p>'
     return f"""<section class='card'><h2>Refresh outcome</h2><p>Reporting period: inferred from accepted facts · Collection status: {escape(run.get('status',''))} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Automatically accepted facts</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{run.get('exception_count',0)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a></p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {'maintained Enterprise Model financial attributes changed or strengthened; use this as a prompt for account planning, not as a standalone commercial conclusion.' if run.get('enterprise_attributes_changed') else 'No financial intelligence was added because processing did not complete.'}</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form></section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
 
+def missing_run_page(run_id: str) -> str:
+    body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>This previous refresh result is no longer available.</p><p>Start a new refresh to collect the latest financial intelligence.</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Start new refresh</button></form><p><a href='/financial-intelligence'>Return to Financial Intelligence</a></p></section>"""
+    return _page('Financial Intelligence result unavailable', body)
+
 def financial_intelligence_run_page(run_id: str) -> str:
-    return _page('Financial Intelligence outcome', _outcome_summary(load_run(run_id)))
+    try:
+        return _page('Financial Intelligence outcome', _outcome_summary(load_run(run_id)))
+    except FileNotFoundError:
+        print(f"Flora Financial Intelligence requested missing run {run_id}; storage mode={storage_mode()['mode']}")
+        return missing_run_page(run_id)
+
+def financial_intelligence_run_response(run_id: str) -> tuple[str, int]:
+    try:
+        return _page('Financial Intelligence outcome', _outcome_summary(load_run(run_id))), 200
+    except FileNotFoundError:
+        print(f"Flora Financial Intelligence requested missing run {run_id}; storage mode={storage_mode()['mode']}")
+        return missing_run_page(run_id), 410
 
 def run_page(run_id: str) -> str:
     run = load_run(run_id)
