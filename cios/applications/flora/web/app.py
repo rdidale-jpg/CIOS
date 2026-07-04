@@ -22,7 +22,7 @@ from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
-from cios.applications.flora.document_review import apply_accepted, create_upload_run, financial_intelligence_page, financial_intelligence_run_response, refresh_financial_intelligence, review_home_page, run_page, update_reviews
+from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_run_response, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -83,6 +83,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(evidence_page())
             elif parsed.path == "/financial-intelligence":
                 self._html(financial_intelligence_page())
+            elif parsed.path == "/financial-intelligence/admin/health":
+                self._html(financial_intelligence_admin_health_page())
             elif parsed.path == "/financial-reports":
                 self._html(review_home_page())
             elif parsed.path.startswith("/financial-intelligence/"):
@@ -295,6 +297,7 @@ def _parse_multipart(headers, body: bytes) -> tuple[dict[str, str], dict[str, by
 def run(host: str | None = None, port: int | None = None) -> None:
     """Start the Flora production web service."""
 
+    configure_financial_intelligence_logging()
     bind_host = host or env_host()
     bind_port = port if port is not None else env_port()
     storage = startup_storage_status()

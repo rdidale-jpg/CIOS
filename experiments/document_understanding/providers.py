@@ -1,5 +1,5 @@
 from __future__ import annotations
-import base64, importlib.metadata, json, os, re, time, uuid
+import base64, importlib.metadata, json, logging, os, re, time, uuid
 from pathlib import Path
 from urllib.parse import urlparse
 from .instructions import EXTRACTION_INSTRUCTIONS
@@ -10,12 +10,35 @@ RAW_DIR = Path('.document_understanding/raw_responses')
 OPENAI_FILE_PURPOSE = 'user_data'
 OPENAI_TIMEOUT_SECONDS = float(os.getenv('FLORA_OPENAI_TIMEOUT_SECONDS', '120'))
 MAX_RESPONSES_PDF_BYTES = int(os.getenv('FLORA_OPENAI_RESPONSES_PDF_MAX_BYTES', str(50_000_000)))
+LOGGER = logging.getLogger('flora.financial_intelligence')
 
 
 def _safe_message(message: str) -> str:
     message = re.sub(r'sk-[A-Za-z0-9_\-]+', 'sk-REDACTED', message or '')
     message = re.sub(r'Bearer\s+[A-Za-z0-9._\-]+', 'Bearer REDACTED', message, flags=re.I)
+    message = re.sub(r'(?i)(api[_-]?key|authorization|auth(?:entication)?)[=:]\s*[^\s,;]+', r'\1=REDACTED', message)
     return message[:700]
+
+
+def _log_provider_failure(diag: dict, *, unexpected: bool = False) -> None:
+    event = {
+        'event': 'flora_financial_intelligence_provider_failure',
+        'support_reference': 'FI-' + str(diag.get('correlation_id', '')).replace('FI-', '').replace('fi-', ''),
+        'failure_stage': diag.get('request_stage'),
+        'provider': diag.get('provider'),
+        'requested_model': diag.get('requested_model'),
+        'http_status_code': diag.get('http_status_code'),
+        'provider_error_type': diag.get('provider_error_type'),
+        'provider_error_code': diag.get('provider_error_code'),
+        'sanitised_provider_error_message': diag.get('sanitised_provider_error_message'),
+        'retryable': diag.get('retryable'),
+        'elapsed_time': diag.get('elapsed_time'),
+    }
+    msg = json.dumps(event, sort_keys=True)
+    if unexpected:
+        LOGGER.exception(msg)
+    else:
+        LOGGER.error(msg)
 
 
 def _sdk_version() -> str | None:
@@ -59,9 +82,11 @@ def _diagnostic(*, correlation_id: str, provider: str, model: str, stage: str, s
     }
 
 
-def _not_executed(route, provider, model, error, *, diagnostic=None):
-    t = now_iso()
-    return ExtractionRun(run_id=str(uuid.uuid4()), route=route, provider=provider, model=model, status='not_executed', started_at=t, completed_at=t, latency_seconds=0, provider_errors=[error], diagnostics=[diagnostic] if diagnostic else [])
+def _not_executed(route, provider, model, error, *, diagnostic=None, correlation_id: str | None = None):
+    t = now_iso(); run_id = correlation_id or (diagnostic or {}).get('correlation_id') or str(uuid.uuid4())
+    if diagnostic:
+        _log_provider_failure(diagnostic)
+    return ExtractionRun(run_id=run_id, route=route, provider=provider, model=model, status='not_executed', started_at=t, completed_at=t, latency_seconds=0, provider_errors=[error], diagnostics=[diagnostic] if diagnostic else [])
 
 
 class OpenAIDirectPDFProvider:
@@ -91,8 +116,8 @@ class OpenAIDirectPDFProvider:
             text={'format': {'type': 'json_schema', 'name': 'foundation_fact_set', 'schema': schema.model_json_schema(), 'strict': True}},
         )
 
-    def extract_facts(self, document: ExperimentDocument, schema: type[FoundationFactSet] = FoundationFactSet, page_ranges: list[PageRange] | None = None) -> ExtractionRun:
-        correlation_id = str(uuid.uuid4()); started = time.time(); start_iso = now_iso(); diagnostics = []
+    def extract_facts(self, document: ExperimentDocument, schema: type[FoundationFactSet] = FoundationFactSet, page_ranges: list[PageRange] | None = None, correlation_id: str | None = None) -> ExtractionRun:
+        correlation_id = correlation_id or str(uuid.uuid4()); started = time.time(); start_iso = now_iso(); diagnostics = []
         source_path = Path(document.local_path) if document.local_path else None
         source_size = source_path.stat().st_size if source_path and source_path.is_file() else None
         parsed_url = urlparse(document.source_url or '')
@@ -101,16 +126,16 @@ class OpenAIDirectPDFProvider:
                          source_file_size=source_size, source_final_url=document.source_url)
         if not os.getenv('OPENAI_API_KEY'):
             diag = _diagnostic(**base_diag, stage='configuration', provider_error_type='provider_not_configured', provider_error_message='OPENAI_API_KEY is not configured', retryable=False)
-            return _not_executed('openai-responses-pdf', 'openai', self.model, 'OPENAI_API_KEY is not configured', diagnostic=diag)
+            return _not_executed('openai-responses-pdf', 'openai', self.model, 'OPENAI_API_KEY is not configured', diagnostic=diag, correlation_id=correlation_id)
         if document.media_type != 'application/pdf':
             diag = _diagnostic(**base_diag, stage='source_validation', provider_error_type='source_not_pdf', provider_error_message=f'source returned {document.media_type}', retryable=False)
-            return _not_executed('openai-responses-pdf', 'openai', self.model, 'source is not a PDF', diagnostic=diag)
+            return _not_executed('openai-responses-pdf', 'openai', self.model, 'source is not a PDF', diagnostic=diag, correlation_id=correlation_id)
         if source_size is not None and source_size >= MAX_RESPONSES_PDF_BYTES:
             diag = _diagnostic(**base_diag, stage='source_validation', provider_error_type='source_oversized', provider_error_message='PDF is 50 MB or larger; page-range strategy required before model submission', retryable=False)
-            return _not_executed('openai-responses-pdf', 'openai', self.model, 'PDF is too large for direct Responses PDF submission', diagnostic=diag)
+            return _not_executed('openai-responses-pdf', 'openai', self.model, 'PDF is too large for direct Responses PDF submission', diagnostic=diag, correlation_id=correlation_id)
         if parsed_url.scheme not in {'http', 'https'} or not parsed_url.netloc:
             diag = _diagnostic(**base_diag, stage='source_validation', provider_error_type='invalid_source_url', provider_error_message='governed source URL must be http(s)', retryable=False)
-            return _not_executed('openai-responses-pdf', 'openai', self.model, 'invalid governed source URL', diagnostic=diag)
+            return _not_executed('openai-responses-pdf', 'openai', self.model, 'invalid governed source URL', diagnostic=diag, correlation_id=correlation_id)
         RAW_DIR.mkdir(parents=True, exist_ok=True)
         try:
             from openai import OpenAI
@@ -129,12 +154,15 @@ class OpenAIDirectPDFProvider:
                 except Exception as exc:
                     last_exc = exc
                     status_code = getattr(exc, 'status_code', None); code = getattr(exc, 'code', None) or getattr(getattr(exc, 'error', None), 'code', None)
-                    diagnostics.append(_diagnostic(**base_diag, stage='model_invocation', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=status_code, provider_error_type=type(exc).__name__, provider_error_code=code, provider_error_message=str(exc) or type(exc).__name__, retryable=mode == 'file_url'))
+                    diag = _diagnostic(**base_diag, stage='model_invocation', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=status_code, provider_error_type=type(exc).__name__, provider_error_code=code, provider_error_message=str(exc) or type(exc).__name__, retryable=mode == 'file_url')
+                    diagnostics.append(diag)
                     if mode == 'file_data' or status_code in {401, 429} or type(exc).__name__ in {'AuthenticationError', 'PermissionDeniedError', 'APITimeoutError'}:
                         break
             raise last_exc or RuntimeError('OpenAI Responses PDF request failed')
         except ValidationError as exc:
-            diagnostics.append(_diagnostic(**base_diag, stage='response_parse', pdf_upload_succeeded=False, provider_error_type='ValidationError', provider_error_message=str(exc), retryable=False))
+            diag = _diagnostic(**base_diag, stage='response_parse', pdf_upload_succeeded=False, provider_error_type='ValidationError', provider_error_message=str(exc), retryable=False)
+            diagnostics.append(diag)
+            _log_provider_failure(diag)
             return ExtractionRun(run_id=correlation_id, route='openai-responses-pdf', provider='openai', model=self.model, model_version=self.model, status='invalid_response', started_at=start_iso, completed_at=now_iso(), latency_seconds=time.time()-started, schema_errors=[str(exc)], provider_errors=['provider response failed schema validation'], diagnostics=diagnostics)
         except Exception as exc:
             name = type(exc).__name__; message = str(exc) or name; lower = message.casefold()
@@ -144,7 +172,12 @@ class OpenAIDirectPDFProvider:
             elif status_code == 404 or code in {'model_not_found', 'model_not_available'} or ('model' in lower and 'not' in lower and 'found' in lower): status = 'model_unavailable'
             elif name in {'APITimeoutError', 'TimeoutError'} or 'timeout' in lower: status = 'timeout'
             elif status_code == 400: status = 'invalid_request'
+            elif name == 'APIResponseValidationError' or 'response' in lower and 'valid' in lower: status = 'invalid_response'
             else: status = 'failed'
+            if not diagnostics or diagnostics[-1].get('provider_error_type') != name:
+                diag = _diagnostic(**base_diag, stage='model_invocation', provider_error_type=name, provider_error_code=code, provider_error_message=message, http_status_code=status_code, retryable=status in {'timeout', 'quota_exceeded', 'failed'})
+                diagnostics.append(diag)
+            _log_provider_failure(diagnostics[-1], unexpected=status == 'failed')
             return ExtractionRun(run_id=correlation_id, route='openai-responses-pdf', provider='openai', model=self.model, model_version=self.model, status=status, started_at=start_iso, completed_at=now_iso(), latency_seconds=time.time()-started, provider_errors=[f'{name}: {_safe_message(message)}'], diagnostics=diagnostics)
 
 class AnthropicDirectPDFProvider:

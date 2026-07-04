@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from cios.applications.flora.storage import PersistenceError, atomic_write_json, data_path, ensure_writable_dir, storage_mode
 
-import hashlib, json, os, shutil, time, uuid
+import hashlib, json, logging, os, re, shutil, sys, time, uuid
 from types import SimpleNamespace
 from datetime import UTC, datetime
 from html import escape
@@ -29,6 +29,18 @@ RUN_DIR = _run_dir()
 DEFAULT_MODEL = os.getenv('FLORA_DOCUMENT_UNDERSTANDING_MODEL', 'gpt-5.5')
 BT_PROFILE = Path(__file__).resolve().parents[3] / 'config/flora/collection_profiles/bt-group-plc.json'
 AUTO_ACCEPT_CONFIDENCE = int(os.getenv('FLORA_FINANCIAL_INTELLIGENCE_AUTO_ACCEPT_CONFIDENCE', '85'))
+LOGGER = logging.getLogger('flora.financial_intelligence')
+
+def configure_financial_intelligence_logging() -> logging.Logger:
+    if not LOGGER.handlers:
+        handler = logging.StreamHandler(sys.stderr)
+        handler.setFormatter(logging.Formatter('%(levelname)s:%(name)s:%(message)s'))
+        LOGGER.addHandler(handler)
+    LOGGER.setLevel(logging.ERROR)
+    LOGGER.propagate = False
+    return LOGGER
+
+configure_financial_intelligence_logging()
 
 FAILURE_MESSAGES = {
     'source_retrieval_failed': 'Flora could not retrieve the financial report.',
@@ -86,6 +98,12 @@ def _mark_failure(run: dict[str, Any], category: str, technical_reason: str) -> 
 
 def now_iso() -> str: return datetime.now(UTC).isoformat(timespec='seconds')
 
+def _safe_message(message: str) -> str:
+    message = re.sub(r'sk-[A-Za-z0-9_\-]+', 'sk-REDACTED', message or '')
+    message = re.sub(r'Bearer\s+[A-Za-z0-9._\-]+', 'Bearer REDACTED', message, flags=re.I)
+    message = re.sub(r'(?i)(api[_-]?key|authorization|auth(?:entication)?)[=:]\s*[^\s,;]+', r'\1=REDACTED', message)
+    return message[:700]
+
 def _safe_provider_diagnostic(run_id: str, source: dict[str, Any], fetched: Any, model: str, started: float) -> dict[str, Any]:
     return {
         'correlation_id': run_id,
@@ -102,15 +120,32 @@ def _safe_provider_diagnostic(run_id: str, source: dict[str, Any], fetched: Any,
         'http_status_code': getattr(fetched, 'status_code', None),
         'provider_error_type': 'source_retrieval_failed' if not getattr(fetched, 'succeeded', False) else None,
         'provider_error_code': None,
-        'sanitised_provider_error_message': str(getattr(fetched, 'error', '') or '')[:700],
+        'sanitised_provider_error_message': _safe_message(str(getattr(fetched, 'error', '') or '')),
         'retryable': not bool(getattr(fetched, 'succeeded', False)),
         'elapsed_time': round(time.time() - started, 3),
     }
 
 def _record_provider_diagnostics(run: dict[str, Any]) -> None:
     for event in run.get('provider_diagnostics') or []:
-        print('Flora provider diagnostic ' + json.dumps(event, sort_keys=True))
+        print('Flora provider diagnostic ' + json.dumps(event, sort_keys=True), flush=True)
 
+
+
+def _log_financial_intelligence_failure(event: dict[str, Any]) -> None:
+    payload = {
+        'event': 'flora_financial_intelligence_provider_failure',
+        'support_reference': 'FI-' + str(event.get('correlation_id', '')).replace('FI-', '').replace('fi-', ''),
+        'failure_stage': event.get('request_stage'),
+        'provider': event.get('provider'),
+        'requested_model': event.get('requested_model'),
+        'http_status_code': event.get('http_status_code'),
+        'provider_error_type': event.get('provider_error_type'),
+        'provider_error_code': event.get('provider_error_code'),
+        'sanitised_provider_error_message': event.get('sanitised_provider_error_message'),
+        'retryable': event.get('retryable'),
+        'elapsed_time': event.get('elapsed_time'),
+    }
+    LOGGER.error(json.dumps(payload, sort_keys=True))
 
 def _read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding='utf-8'))
@@ -243,21 +278,33 @@ def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
 def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc') -> dict[str, Any]:
     source = _bt_annual_report_source()
     run_id = 'fi-' + uuid.uuid4().hex[:12]
+    correlation_id = run_id.removeprefix('fi-')
     ensure_writable_dir(_run_dir())
     retrieval_started = time.time()
     fetched = fetch_document(source['url'])
     doc_parse = parse_pdf_document(fetched, _source_obj(source), canonical_enterprise_id='bt-group-plc')
     document = ExperimentDocument(document_id=doc_parse.document_id, enterprise_id='bt-group-plc', title=source['source_name'], source_url=(fetched.final_url or source['url']), retrieval_timestamp=doc_parse.retrieval_date, checksum=doc_parse.checksum, media_type=doc_parse.media_type or 'application/pdf', page_count=max(doc_parse.page_count, 1), local_path=doc_parse.local_path)
     provider = OpenAIDirectPDFProvider(model=DEFAULT_MODEL)
-    extraction = provider.extract_facts(document) if fetched.succeeded else None
+
+    if fetched.succeeded:
+        try:
+            extraction = provider.extract_facts(document, correlation_id=correlation_id)
+        except TypeError as exc:
+            if 'correlation_id' not in str(exc):
+                raise
+            extraction = provider.extract_facts(document)
+    else:
+        extraction = None
     claims = [fact_to_review_claim(f, run_id) for f in (extraction.facts if extraction else [])]
     run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b'')}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else DEFAULT_MODEL), 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'provider_diagnostics': (getattr(extraction, 'diagnostics', []) if extraction else [_safe_provider_diagnostic(run_id, source, fetched, DEFAULT_MODEL, retrieval_started)]), 'openai_invoked': bool(extraction), 'claims': claims, 'applied_results': []}
     run['collection'].update({'final_url': fetched.final_url or fetched.url, 'content_type': fetched.media_type, 'redirect_chain': list(fetched.redirect_chain), 'redirected': bool(fetched.redirect_chain)})
     if extraction:
         run['provider_diagnostics'] = [_safe_provider_diagnostic(run_id, source, fetched, DEFAULT_MODEL, retrieval_started)] + run.get('provider_diagnostics', [])
     if not fetched.succeeded:
+        _log_financial_intelligence_failure(run['provider_diagnostics'][-1])
         run = _mark_failure(run, 'source_retrieval_failed', fetched.error or 'governed source retrieval failed')
     elif document.media_type != 'application/pdf':
+        _log_financial_intelligence_failure(run['provider_diagnostics'][-1])
         run = _mark_failure(run, 'source_not_pdf', doc_parse.error or f"source returned {document.media_type}")
     elif extraction and extraction.status == 'completed':
         try:
@@ -319,6 +366,24 @@ def review_home_page(message: str = '') -> str:
     notice = f"<p class='pill'>{escape(message)}</p>" if message else ''
     body = f"""<section class='hero'><h1>AI Financial Report Review</h1><p>Upload an authoritative enterprise financial-report PDF. Flora sends the PDF to a genuine AI document-understanding model, returns strict page-grounded claims for review, and only accepted claims update Observation memory and the Commercial Digital Twin.</p>{notice}</section><section class='card'><h2>Provider status</h2><p>{escape(provider_state)}</p><p class='muted'>Provider route: OpenAI direct PDF · Model: {escape(DEFAULT_MODEL)} · The original PDF is sent to the model as a PDF input file when credentials are present.</p></section><section class='card action'><h2>Collect Financial Report</h2><p>Select an enterprise, add the governed annual report PDF, process it, then accept, amend or reject page-grounded candidate facts before they update Observations and the Commercial Digital Twin.</p><p>Default enterprise: BT Group plc · expected document: BT Group Annual Report 2026.</p><form method='post' action='/ai-financial-report/upload' enctype='multipart/form-data'><label>Enterprise</label><select name='enterprise_id'><option value='bt-group-plc'>BT Group plc</option></select><label>Report title</label><input name='title' value='BT Group plc Annual Report 2026'><label>Source URL or citation</label><input name='source_url' value='https://www.bt.com/about/annual-reports/2026summary/assets/files/BT-Annual-Report-2026.pdf'><label>PDF</label><input type='file' name='pdf' accept='application/pdf'><p><button>Process document</button></p></form></section>"""
     return _page('AI Financial Report Review', body)
+
+def financial_intelligence_admin_health_page() -> str:
+    run_dir = _run_dir()
+    runs = sorted(run_dir.glob('fi-*.json'), key=lambda p: p.stat().st_mtime, reverse=True) if run_dir.exists() else []
+    last = _read_json(runs[0]) if runs else {}
+    diag = (last.get('provider_diagnostics') or [{}])[-1]
+    mode = storage_mode()
+    rows = [
+        ('OpenAI configuration detected', 'yes' if os.getenv('OPENAI_API_KEY') else 'no'),
+        ('Configured model', DEFAULT_MODEL),
+        ('Last Financial Intelligence run time', last.get('created_at', 'none')),
+        ('Last support reference', last.get('support_reference', 'none')),
+        ('Last failure stage', diag.get('request_stage') or last.get('failure_category') or 'none'),
+        ('Last provider status/code', f"{last.get('provider_status') or 'none'} / {diag.get('http_status_code') or diag.get('provider_error_code') or 'none'}"),
+        ('Storage mode', mode.get('mode', 'unknown')),
+    ]
+    html_rows = ''.join(f"<tr><th>{escape(k)}</th><td>{escape(str(v))}</td></tr>" for k, v in rows)
+    return _page('Financial Intelligence system health', f"<section class='hero'><h1>Financial Intelligence system health</h1><p>Administrator diagnostics only. Secrets and provider messages are not displayed.</p></section><section class='card'><table>{html_rows}</table></section>")
 
 def financial_intelligence_page(message: str = '') -> str:
     source = _bt_annual_report_source()
