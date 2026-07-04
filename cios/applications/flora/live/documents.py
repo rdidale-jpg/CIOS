@@ -44,6 +44,8 @@ class DocumentParseResult:
     pages: tuple[DocumentPage, ...] = ()
     warnings: tuple[str, ...] = ()
     error: str = ""
+    final_url: str = ""
+    redirect_chain: tuple[str, ...] = ()
 
 @dataclass(frozen=True)
 class DocumentFetchResult:
@@ -56,6 +58,8 @@ class DocumentFetchResult:
     local_path: str = ""
     retrieval_date: str = ""
     error: str = ""
+    final_url: str = ""
+    redirect_chain: tuple[str, ...] = ()
 
 
 def fetch_document(url: str, *, timeout: float = 12.0, max_bytes: int = MAX_DOCUMENT_BYTES) -> DocumentFetchResult:
@@ -67,17 +71,19 @@ def fetch_document(url: str, *, timeout: float = 12.0, max_bytes: int = MAX_DOCU
             media_type = (resp.headers.get("Content-Type", "").split(";",1)[0] or "").lower()
             raw = resp.read(max_bytes + 1)
             if len(raw) > max_bytes:
-                return DocumentFetchResult(url, False, status, media_type, retrieval_date=retrieval_date, error="document exceeded max_bytes")
+                return DocumentFetchResult(url, False, status, media_type, retrieval_date=retrieval_date, error="document exceeded max_bytes", final_url=getattr(resp, "url", None) or resp.geturl())
             checksum = hashlib.sha256(raw).hexdigest()
             suffix = ".pdf" if media_type == "application/pdf" or raw.startswith(b"%PDF") else ".bin"
             PDF_CACHE_DIR.mkdir(parents=True, exist_ok=True)
             path = PDF_CACHE_DIR / f"{checksum[:16]}{suffix}"
             path.write_bytes(raw)
-            return DocumentFetchResult(url, True, status, media_type or ("application/pdf" if raw.startswith(b"%PDF") else "application/octet-stream"), raw, checksum, str(path), retrieval_date)
+            final_url = getattr(resp, "url", None) or resp.geturl()
+            redirects = (url, final_url) if final_url and final_url != url else ()
+            return DocumentFetchResult(url, True, status, media_type or ("application/pdf" if raw.startswith(b"%PDF") else "application/octet-stream"), raw, checksum, str(path), retrieval_date, final_url=final_url, redirect_chain=redirects)
     except HTTPError as exc:
-        return DocumentFetchResult(url, False, exc.code, retrieval_date=retrieval_date, error=f"HTTP {exc.code}: {exc.reason}")
+        return DocumentFetchResult(url, False, exc.code, retrieval_date=retrieval_date, error=f"HTTP {exc.code}: {exc.reason}", final_url=getattr(exc, "url", "") or url)
     except (URLError, TimeoutError, OSError) as exc:
-        return DocumentFetchResult(url, False, retrieval_date=retrieval_date, error=str(exc))
+        return DocumentFetchResult(url, False, retrieval_date=retrieval_date, error=str(exc), final_url=url)
 
 _ESC = re.compile(rb"\\([nrtbf()\\])")
 def _decode_pdf_string(raw: bytes) -> str:

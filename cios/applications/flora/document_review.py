@@ -23,6 +23,39 @@ DEFAULT_MODEL = os.getenv('FLORA_DOCUMENT_UNDERSTANDING_MODEL', 'gpt-5.5')
 BT_PROFILE = Path('config/flora/collection_profiles/bt-group-plc.json')
 AUTO_ACCEPT_CONFIDENCE = int(os.getenv('FLORA_FINANCIAL_INTELLIGENCE_AUTO_ACCEPT_CONFIDENCE', '85'))
 
+FAILURE_MESSAGES = {
+    'source_retrieval_failed': 'Flora could not retrieve the financial report.',
+    'source_not_pdf': 'Flora could not retrieve the financial report.',
+    'provider_not_configured': 'Financial document understanding is temporarily unavailable.',
+    'provider_authentication_failed': 'Financial document understanding is temporarily unavailable.',
+    'provider_request_failed': 'Financial document understanding is temporarily unavailable.',
+    'provider_response_invalid': 'Financial document understanding is temporarily unavailable.',
+    'persistence_failed': 'Flora understood the report but could not save the results.',
+}
+
+def _failure_message(category: str) -> str:
+    return FAILURE_MESSAGES.get(category, 'Financial document understanding is temporarily unavailable.')
+
+def _provider_failure_category(extraction) -> str:
+    if not extraction:
+        return 'provider_request_failed'
+    errors = '; '.join(getattr(extraction, 'provider_errors', []) or [])
+    if extraction.status == 'not_executed' and 'OPENAI_API_KEY' in errors:
+        return 'provider_not_configured'
+    if extraction.status == 'authentication_failed':
+        return 'provider_authentication_failed'
+    if extraction.status == 'invalid_response' or getattr(extraction, 'schema_errors', None):
+        return 'provider_response_invalid'
+    return 'provider_request_failed'
+
+def _mark_failure(run: dict[str, Any], category: str, technical_reason: str) -> dict[str, Any]:
+    run['status'] = category
+    run['failure_category'] = category
+    run['user_message'] = _failure_message(category)
+    run['exceptions'] = [{'exception_type': category, 'rejection_reason': technical_reason, 'user_message': run['user_message']}]
+    run['auto_accepted_count'] = 0; run['exception_count'] = len(run['exceptions']); run['observations_created_or_strengthened'] = 0; run['enterprise_attributes_changed'] = []
+    return run
+
 
 def now_iso() -> str: return datetime.now(UTC).isoformat(timespec='seconds')
 
@@ -167,12 +200,18 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc') -> dict[
     extraction = provider.extract_facts(document) if fetched.succeeded else None
     claims = [fact_to_review_claim(f, run_id) for f in (extraction.facts if extraction else [])]
     run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url']}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else DEFAULT_MODEL), 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'claims': claims, 'applied_results': []}
-    if fetched.succeeded and extraction and extraction.status == 'completed':
-        run = _apply_automatic_claims(run)
+    run['collection'].update({'final_url': fetched.final_url or fetched.url, 'content_type': fetched.media_type, 'redirect_chain': list(fetched.redirect_chain), 'redirected': bool(fetched.redirect_chain)})
+    if not fetched.succeeded:
+        run = _mark_failure(run, 'source_retrieval_failed', fetched.error or 'governed source retrieval failed')
+    elif document.media_type != 'application/pdf':
+        run = _mark_failure(run, 'source_not_pdf', doc_parse.error or f"source returned {document.media_type}")
+    elif extraction and extraction.status == 'completed':
+        try:
+            run = _apply_automatic_claims(run)
+        except Exception as exc:
+            run = _mark_failure(run, 'persistence_failed', f'{type(exc).__name__}: {exc}')
     else:
-        run['status'] = 'temporarily_unavailable'
-        run['exceptions'] = [{'exception_type': 'provider_or_source_unavailable', 'rejection_reason': '; '.join(run.get('provider_errors') or [fetched.error])}]
-        run['auto_accepted_count'] = 0; run['exception_count'] = len(run['exceptions']); run['observations_created_or_strengthened'] = 0; run['enterprise_attributes_changed'] = []
+        run = _mark_failure(run, _provider_failure_category(extraction), '; '.join(run.get('provider_errors') or ['provider did not complete']))
     _write_json(_run_path(run_id), run)
     return run
 
@@ -234,10 +273,10 @@ def financial_intelligence_page(message: str = '') -> str:
 
 def _outcome_summary(run: dict[str, Any] | None) -> str:
     if not run: return ''
-    changes = ''.join(f"<li>{escape(str(r.get('affected_attribute')))} — {escape(str(r.get('update_result')))}</li>" for r in run.get('applied_results', [])[:20]) or '<li>No model changes were applied.</li>'
-    needs = ''.join(f"<li>{escape(str(e.get('exception_type') or e.get('rejection_reason') or e.get('acceptance_reason')))} — page {escape(str(e.get('page_reference') or e.get('page') or e.get('document_page') or 'n/a'))}</li>" for e in run.get('exceptions', [])[:20]) or '<li>No exceptions requiring review.</li>'
+    changes = ''.join(f"<li>{escape(str(r.get('affected_attribute')))} — {escape(str(r.get('update_result')))}</li>" for r in run.get('applied_results', [])[:20]) or '<li>No financial intelligence was added because processing did not complete.</li>'
+    needs = ''.join(f"<li>{escape(str(e.get('user_message') or e.get('acceptance_reason') or e.get('rejection_reason')))} — page {escape(str(e.get('page_reference') or e.get('page') or e.get('document_page') or 'n/a'))}</li>" for e in run.get('exceptions', [])[:20]) or '<li>No exceptions requiring review.</li>'
     evidence = ''.join(f"<details><summary>{escape(c.get('original_statement',''))}</summary><p>Page {escape(str(c.get('page_reference')))} · Confidence {escape(str(c.get('confidence')))} · Evidence {escape(c.get('evidence_id',''))}</p><p>{escape(str(c.get('source_excerpt') or ''))}</p></details>" for c in run.get('claims', [])[:20]) or '<p>No page-grounded claims returned.</p>'
-    return f"""<section class='card'><h2>Refresh outcome</h2><p>Reporting period: inferred from accepted facts · Collection status: {escape(run.get('status',''))} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Automatically accepted facts</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{run.get('exception_count',0)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a></p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Inference / Signal:</strong> maintained Enterprise Model financial attributes changed or strengthened; use this as a prompt for account planning, not as a standalone commercial conclusion.</p></section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
+    return f"""<section class='card'><h2>Refresh outcome</h2><p>Reporting period: inferred from accepted facts · Collection status: {escape(run.get('status',''))} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Automatically accepted facts</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{run.get('exception_count',0)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a></p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {'maintained Enterprise Model financial attributes changed or strengthened; use this as a prompt for account planning, not as a standalone commercial conclusion.' if run.get('enterprise_attributes_changed') else 'No financial intelligence was added because processing did not complete.'}</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form></section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
 
 def financial_intelligence_run_page(run_id: str) -> str:
     return _page('Financial Intelligence outcome', _outcome_summary(load_run(run_id)))
