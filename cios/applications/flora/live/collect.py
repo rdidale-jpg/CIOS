@@ -16,6 +16,32 @@ import json, os, uuid
 from cios.applications.flora.live.progress import complete_state, read_state, start_state, update_state
 from cios.applications.flora.live.alignment import build_acquisition_plans, lifecycle_action
 from cios.applications.flora.memory.service import ObservationMemoryService
+from cios.applications.flora.live.runtime import application_revision
+
+
+def _bounded_text(value: Any, limit: int = 500) -> str:
+    text = str(value or "").strip()
+    return text[:limit] + ("…" if len(text) > limit else "")
+
+
+def accepted_evidence_diagnostic(item: dict[str, Any]) -> dict[str, Any]:
+    structured = {k: item.get(k) for k in ("commercial_condition", "mapped_condition", "affected_attribute", "period", "state", "metric", "value", "unit", "currency", "overall_evidence_quality", "confidence") if item.get(k) is not None}
+    return {
+        "evidence_id": item.get("evidence_id") or item.get("id") or item.get("evidence_fingerprint"),
+        "source_id": item.get("source_id"),
+        "source_type": item.get("source_type"),
+        "evidence_class": item.get("evidence_class") or item.get("commercial_condition") or item.get("mapped_condition"),
+        "canonical_enterprise_id": item.get("canonical_enterprise_id") or item.get("enterprise_id") or item.get("organisation"),
+        "publication_date": item.get("publication_date") or item.get("evidence_publication_date"),
+        "page": item.get("page_number") or item.get("page_range"),
+        "page_range": item.get("page_range"),
+        "extracted_factual_text": _bounded_text(item.get("extracted_text") or item.get("cleaned_observation") or item.get("extracted_observation") or item.get("snippet")),
+        "structured_extraction_fields": structured,
+        "provenance_type": item.get("source_provenance") or item.get("provenance_type") or "live",
+        "acceptance_result": "accepted",
+        "extractor_name": item.get("extractor_name") or item.get("extraction_method") or "flora_live_extractor",
+        "extractor_version": item.get("extractor_version") or item.get("schema_version") or "v1",
+    }
 
 FAILURE_CATEGORIES = {"access_blocked", "timeout", "network_error", "non_html", "unsupported_media_type", "pdf_extraction_failure", "table_extraction_failure", "no_relevant_evidence", "parser_error", "unknown"}
 
@@ -190,9 +216,11 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
     output.touch(exist_ok=True)
     update_state(status="creating_observations", latest_message="Creating Observations from accepted Evidence.")
     memory_service = ObservationMemoryService()
+    accepted_diagnostics = [accepted_evidence_diagnostic(item) for item in new_evidence]
     processing_reports = [memory_service.process_evidence(item) for item in new_evidence]
     memory_results = [result for report in processing_reports for result in report.results]
     rejected_claims = [claim for report in processing_reports for claim in report.rejected_claims]
+    decomposition_diagnostics = [report.decomposition_diagnostic for report in processing_reports if report.decomposition_diagnostic]
     update_state(status="updating_model", latest_message="Updating Enterprise Model projection.")
     write_jsonl(diagnostics, DEFAULT_DIAGNOSTICS_PATH)
     after_observatory = observatory_snapshot(build_observatory())
@@ -220,7 +248,7 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
     result_state = "completed_with_no_accepted_intelligence"
     if successful_intelligence:
         result_state = "completed_with_partial_intelligence" if candidate_failures else "completed"
-    manifest = {"run_id": run_id, "canonical_enterprise_id": scoped_enterprise_id, "enterprise_display_name": scoped_display_name, "profile_id": profile_id, "started_at": collection_started_at, "completed_at": completed_at, "collection_mode": mode, "passes": selected_passes, "sources_planned": [s.source_id for s in sources], "sources_attempted": [d["source_id"] for d in diagnostics], "sources_retrieved": [d["source_id"] for d in diagnostics if d["status"] != "failed"], "sources_failed": [d["source_id"] for d in source_failures], "evidence_candidates": evidence_candidates, "evidence_accepted": len(new_evidence), "evidence_rejected": evidence_rejected, "evidence_downgraded": evidence_downgraded, "evidence_context_only": sum(int(d.get("context_only_count") or 0) for d in diagnostics), "evidence_duplicate": duplicate_count, "evidence_corroborated": obs_corroborated, "evidence_extraction_failed": 0, "factual_claims_extracted": sum(r.factual_claims_extracted for r in processing_reports), "factual_claims_accepted": sum(r.factual_claims_accepted for r in processing_reports), "factual_claims_rejected": sum(r.factual_claims_rejected for r in processing_reports), "factual_claims_duplicate": sum(r.factual_claims_duplicate for r in processing_reports), "factual_claims_corroborated": sum(r.factual_claims_corroborated for r in processing_reports), "rejected_claims": rejected_claims, "documents_retrieved": sum(int(d.get("documents_retrieved") or 0) for d in diagnostics), "pdfs_parsed": sum(int(d.get("pdfs_parsed") or 0) for d in diagnostics), "pages_extracted": sum(int(d.get("pages_extracted") or 0) for d in diagnostics), "tables_detected": sum(int(d.get("tables_detected") or 0) for d in diagnostics), "observations_created": obs_created, "observations_corroborated": obs_corroborated, "observations_rejected": len(rejected_claims), "model_attributes_created": attrs_created, "model_attributes_changed": len([r for r in memory_results if r.action == "updated"]), "model_attributes_reconfirmed": obs_corroborated, "unknowns_created": unknowns_created, "contradictions_created": contradictions_created, "result_state": result_state, "errors": [d for d in diagnostics if d.get("status") == "failed"], "warnings": [f"{len(rejected_claims)} factual claims rejected"] if rejected_claims else []}
+    manifest = {"run_id": run_id, "application_revision": application_revision(), "canonical_enterprise_id": scoped_enterprise_id, "enterprise_display_name": scoped_display_name, "profile_id": profile_id, "started_at": collection_started_at, "completed_at": completed_at, "collection_mode": mode, "passes": selected_passes, "sources_planned": [s.source_id for s in sources], "sources_attempted": [d["source_id"] for d in diagnostics], "sources_retrieved": [d["source_id"] for d in diagnostics if d["status"] != "failed"], "sources_failed": [d["source_id"] for d in source_failures], "evidence_candidates": evidence_candidates, "evidence_accepted": len(new_evidence), "evidence_rejected": evidence_rejected, "evidence_downgraded": evidence_downgraded, "evidence_context_only": sum(int(d.get("context_only_count") or 0) for d in diagnostics), "evidence_duplicate": duplicate_count, "evidence_corroborated": obs_corroborated, "evidence_extraction_failed": 0, "factual_claims_extracted": sum(r.factual_claims_extracted for r in processing_reports), "factual_claims_accepted": sum(r.factual_claims_accepted for r in processing_reports), "factual_claims_rejected": sum(r.factual_claims_rejected for r in processing_reports), "factual_claims_duplicate": sum(r.factual_claims_duplicate for r in processing_reports), "factual_claims_corroborated": sum(r.factual_claims_corroborated for r in processing_reports), "rejected_claims": rejected_claims, "accepted_evidence_diagnostics": accepted_diagnostics, "decomposition_diagnostics": decomposition_diagnostics, "documents_retrieved": sum(int(d.get("documents_retrieved") or 0) for d in diagnostics), "pdfs_parsed": sum(int(d.get("pdfs_parsed") or 0) for d in diagnostics), "pages_extracted": sum(int(d.get("pages_extracted") or 0) for d in diagnostics), "tables_detected": sum(int(d.get("tables_detected") or 0) for d in diagnostics), "observations_created": obs_created, "observations_corroborated": obs_corroborated, "observations_rejected": len(rejected_claims), "model_attributes_created": attrs_created, "model_attributes_changed": len([r for r in memory_results if r.action == "updated"]), "model_attributes_reconfirmed": obs_corroborated, "unknowns_created": unknowns_created, "contradictions_created": contradictions_created, "result_state": result_state, "errors": [d for d in diagnostics if d.get("status") == "failed"], "warnings": [f"{len(rejected_claims)} factual claims rejected"] if rejected_claims else []}
     if len(manifest["sources_attempted"]) != len(manifest["sources_retrieved"]) + len(manifest["sources_failed"]):
         raise ValueError("Source counters do not reconcile")
     if manifest["evidence_candidates"] != manifest["evidence_accepted"] + manifest["evidence_rejected"] + manifest["evidence_downgraded"] + manifest["evidence_duplicate"]:
@@ -228,7 +256,7 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
     mpath = Path(".flora_pilot/collection_manifests") / f"{run_id}.json"
     mpath.parent.mkdir(parents=True, exist_ok=True)
     mpath.write_text(json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8")
-    final_progress = complete_state(result_state, f"Collection complete\nSources: {len(manifest['sources_retrieved'])}/{len(sources)} retrieved\nEvidence: {manifest['evidence_accepted']} accepted, {manifest['evidence_rejected']} rejected\nObservations: {obs_created} created, {obs_corroborated} corroborated\nModel: {attrs_created} attributes created, {unknowns_created} Unknowns", sources_attempted=len(manifest["sources_attempted"]), sources_succeeded=len(manifest["sources_retrieved"]), sources_retrieved=len(manifest["sources_retrieved"]), sources_failed=len(manifest["sources_failed"]), evidence_candidates=evidence_candidates, evidence_accepted=len(new_evidence), evidence_rejected=evidence_rejected, evidence_downgraded=evidence_downgraded, evidence_context_only=manifest["evidence_context_only"], evidence_duplicate=duplicate_count, evidence_corroborated=obs_corroborated, evidence_extraction_failed=0, documents_retrieved=manifest["documents_retrieved"], pdfs_parsed=manifest["pdfs_parsed"], pages_extracted=manifest["pages_extracted"], tables_detected=manifest["tables_detected"], observations_created=obs_created, observations_corroborated=obs_corroborated, observations_rejected=len(rejected_claims), model_attributes_created=attrs_created, model_attributes_changed=manifest["model_attributes_changed"], model_attributes_reconfirmed=obs_corroborated, unknowns_created=unknowns_created, contradictions_created=contradictions_created, warnings=manifest["warnings"], errors=manifest["errors"])
+    final_progress = complete_state(result_state, f"Collection complete\nSources: {len(manifest['sources_retrieved'])}/{len(sources)} retrieved\nEvidence: {manifest['evidence_accepted']} accepted, {manifest['evidence_rejected']} rejected\nObservations: {obs_created} created, {obs_corroborated} corroborated\nModel: {attrs_created} attributes created, {unknowns_created} Unknowns", sources_attempted=len(manifest["sources_attempted"]), sources_succeeded=len(manifest["sources_retrieved"]), sources_retrieved=len(manifest["sources_retrieved"]), sources_failed=len(manifest["sources_failed"]), evidence_candidates=evidence_candidates, evidence_accepted=len(new_evidence), evidence_rejected=evidence_rejected, evidence_downgraded=evidence_downgraded, evidence_context_only=manifest["evidence_context_only"], evidence_duplicate=duplicate_count, evidence_corroborated=obs_corroborated, evidence_extraction_failed=0, documents_retrieved=manifest["documents_retrieved"], pdfs_parsed=manifest["pdfs_parsed"], pages_extracted=manifest["pages_extracted"], tables_detected=manifest["tables_detected"], observations_created=obs_created, observations_corroborated=obs_corroborated, observations_rejected=len(rejected_claims), model_attributes_created=attrs_created, model_attributes_changed=manifest["model_attributes_changed"], model_attributes_reconfirmed=obs_corroborated, unknowns_created=unknowns_created, contradictions_created=contradictions_created, warnings=manifest["warnings"], errors=manifest["errors"], rejected_claims=rejected_claims[:25], accepted_evidence_diagnostics=accepted_diagnostics[:25], decomposition_diagnostics=decomposition_diagnostics[:25], application_revision=application_revision())
     return {
         "progress_state": final_progress,
         "last_collection_time": diagnostics[-1]["last_attempted"] if diagnostics else None,
@@ -275,6 +303,21 @@ def current_status() -> dict[str, Any]:
     fingerprints = load_evidence_fingerprints(DEFAULT_PATH)
     latest_batch_time = diagnostics[-1].get("last_attempted") or diagnostics[-1].get("attempted_at") if diagnostics else None
     latest = [d for d in diagnostics if (d.get("last_attempted") or d.get("attempted_at")) == latest_batch_time] if latest_batch_time else []
+    progress = read_state()
+    manifest: dict[str, Any] = {}
+    run_id = progress.get("run_id")
+    if run_id:
+        mpath = Path(".flora_pilot/collection_manifests") / f"{run_id}.json"
+        if mpath.exists():
+            try:
+                manifest = json.loads(mpath.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                manifest = {}
+    bounded_diagnostics = {
+        "accepted_evidence": (manifest.get("accepted_evidence_diagnostics") or progress.get("accepted_evidence_diagnostics") or [])[:25],
+        "decomposition": (manifest.get("decomposition_diagnostics") or progress.get("decomposition_diagnostics") or [])[:25],
+        "rejected_claims": (manifest.get("rejected_claims") or progress.get("rejected_claims") or [])[:25],
+    }
     return {
         "last_collection_time": latest_batch_time,
         "sources_attempted": len(latest),
@@ -283,10 +326,13 @@ def current_status() -> dict[str, Any]:
         "sources_with_evidence": len([d for d in latest if d.get("evidence_count", 0) > 0]),
         "evidence_objects_collected": len(fingerprints),
         "total_unique_evidence_objects": len(fingerprints),
+        "application_revision": application_revision(),
         "diagnostics": latest,
         "evidence_path": str(DEFAULT_PATH),
         "diagnostics_path": str(DEFAULT_DIAGNOSTICS_PATH),
-        "progress_state": read_state(),
+        "progress_state": progress,
+        "bounded_diagnostics": bounded_diagnostics,
+        "rejected_claims": bounded_diagnostics["rejected_claims"],
     }
 
 

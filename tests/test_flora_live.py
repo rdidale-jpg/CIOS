@@ -546,3 +546,88 @@ def test_zero_accepted_bt_run_is_not_successful(tmp_path, monkeypatch) -> None:
     result = collect_module.collect("BT Group plc", profile_id="bt-group-plc", collection_mode="live_authoritative", passes=["baseline"])
     assert result["accepted_evidence_count"] == 0
     assert result["result_state"] != "completed successfully"
+
+
+def test_application_revision_status_and_progress_page(tmp_path: Path, monkeypatch) -> None:
+    from cios.applications.flora.live.progress import write_state, default_state
+    from cios.applications.flora.live.collect import current_status
+    from cios.applications.flora.live.views import collection_progress_page
+
+    monkeypatch.chdir(tmp_path)
+    write_state({**default_state(), "run_id": "run-rev", "application_revision": "sha-test", "status": "completed"})
+    assert current_status()["application_revision"]
+    assert "Application revision: sha-test" in collection_progress_page()
+
+
+def test_rejected_claims_link_and_route_states(tmp_path: Path, monkeypatch) -> None:
+    from cios.applications.flora.live.progress import write_state, default_state
+    from cios.applications.flora.live.views import collection_progress_page, rejected_claims_page
+
+    monkeypatch.chdir(tmp_path)
+    write_state({**default_state(), "run_id": "run-none", "status": "completed", "observations_rejected": 0, "rejected_claims": []})
+    assert "run-none" in collection_progress_page()
+    manifest_dir = tmp_path / ".flora_pilot" / "collection_manifests"
+    manifest_dir.mkdir(parents=True)
+    (manifest_dir / "run-one.json").write_text(json.dumps({"run_id": "run-one", "rejected_claims": [{"claim_text": "BT may win.", "source_id": "src", "page": "1", "failed_validation": "observation", "rejection_reason": "Observation statement is not atomic", "intended_domain": "strategy", "problem_stage": "validation"}]}), encoding="utf-8")
+    write_state({**default_state(), "run_id": "run-one", "status": "completed_with_partial_intelligence", "observations_rejected": 1, "rejected_claims": [{"claim_id": "c1"}]})
+    assert "View rejected factual claims" in collection_progress_page()
+    html = rejected_claims_page("run-one")
+    assert "Rejected factual claims" in html and "BT may win" in html
+    assert "run-missing" in rejected_claims_page("run-missing")
+
+
+def test_live_collection_persists_factual_diagnostics_and_digital_twin(tmp_path: Path, monkeypatch) -> None:
+    from cios.applications.flora.live import collect as collect_module
+    from cios.applications.flora.live.source_registry import enabled_sources
+    from cios.applications.flora.memory.views import factual_digital_twin_page
+
+    source = enabled_sources("BT", profile_id="bt-group-plc", passes=["baseline"])[0]
+
+    class DummyResult:
+        succeeded = True
+        status_code = 200
+        html = "ignored"
+        error = None
+
+    def fake_extract(src, html):
+        base = {
+            "source_id": src.source_id,
+            "source_name": src.source_name,
+            "source_type": src.source_type,
+            "source_url": str(src.url),
+            "organisation": "bt-group-plc",
+            "canonical_enterprise_id": "bt-group-plc",
+            "enterprise_id": "bt-group-plc",
+            "evidence_class": "factual_extraction",
+            "evidence_type": "Primary Evidence",
+            "publication_date": "2026-07-01",
+            "extraction_timestamp": "2026-07-04T00:00:00+00:00",
+            "page_range": "1",
+            "source_provenance": "live",
+            "confidence": 90,
+        }
+        return [
+            {**base, "evidence_id": "LIVE-FIN", "snippet": "Revenue was £20.4bn in FY25.", "commercial_condition": "financial_metric_reported", "extracted_text": "Revenue was £20.4bn in FY25.", "cleaned_observation": "Revenue was £20.4bn in FY25.", "period": "FY25"},
+            {**base, "evidence_id": "LIVE-ORG", "snippet": "BT reports Consumer and Business as customer-facing units.", "commercial_condition": "business_unit_disclosed", "extracted_text": "BT reports Consumer and Business as customer-facing units.", "cleaned_observation": "BT reports Consumer and Business as customer-facing units."},
+            {**base, "evidence_id": "LIVE-BAD", "snippet": "BT may launch Project Falcon.", "commercial_condition": "AI Modernisation", "extracted_text": "BT may launch Project Falcon.", "cleaned_observation": "BT may launch Project Falcon."},
+        ], []
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(collect_module, "enabled_sources", lambda *a, **k: [source])
+    monkeypatch.setattr(collect_module, "fetch_html", lambda url: DummyResult())
+    monkeypatch.setattr(collect_module, "extract_evidence_with_diagnostics", fake_extract)
+    result = collect_module.collect("BT Group plc", profile_id="bt-group-plc", collection_mode="live_authoritative", passes=["baseline"], run_id="run-live-shaped")
+    manifest = result["collection_manifest"]
+    assert manifest["application_revision"]
+    assert len(manifest["accepted_evidence_diagnostics"]) == 3
+    assert manifest["decomposition_diagnostics"][0]["decomposition_function"] == "canonical_decompose_factual_claims"
+    assert manifest["factual_claims_accepted"] >= 3
+    assert manifest["factual_claims_rejected"] == 1
+    rejected = manifest["rejected_claims"][0]
+    assert rejected["exact" if False else "rejection_reason"]
+    assert rejected["responsible_function"] == "ObservationMemoryService.process_evidence"
+    assert manifest["observations_created"] >= 3
+    assert manifest["model_attributes_created"] >= 3
+    twin = factual_digital_twin_page("bt-group-plc")
+    assert "financial_performance.metrics.revenue.FY25.actual" in twin
+    assert "structure.units.Consumer" in twin
