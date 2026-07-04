@@ -291,3 +291,90 @@ def test_provider_timeout_is_distinct_and_records_safe_diagnostic(monkeypatch, t
     assert run['provider_diagnostics'][-1]['request_stage'] == 'model_invocation'
     assert 'sk-' not in str(run['provider_diagnostics'])
     assert 'Support reference: FI-corr-1' in ai_review._outcome_summary(run)
+
+
+def test_openai_governed_pdf_url_uses_file_url_without_files_api(monkeypatch, tmp_path):
+    import sys, types, json
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
+    captured = {}
+    class Resp:
+        id = 'resp-1'; usage = None; output_text = json.dumps({'facts': []})
+        def model_dump(self, mode='json'):
+            return {'id': self.id, 'output_text': self.output_text, 'usage': {}}
+    class Responses:
+        def create(self, **kwargs):
+            captured.update(kwargs); return Resp()
+    class Files:
+        def create(self, **kwargs):
+            raise AssertionError('Files API must not be called')
+    class Client:
+        def __init__(self, **kwargs): self.responses = Responses(); self.files = Files()
+    monkeypatch.setitem(sys.modules, 'openai', types.SimpleNamespace(OpenAI=Client))
+    pdf = tmp_path / 'bt.pdf'; pdf.write_bytes(b'%PDF-1.4\nfixture')
+    doc = ai_review.ExperimentDocument(document_id='DOC', enterprise_id='bt-group-plc', title='BT Annual Report', source_url='https://www.bt.com/report.pdf', retrieval_timestamp=ai_review.now_iso(), checksum='x', media_type='application/pdf', page_count=1, local_path=str(pdf))
+
+    run = ai_review.OpenAIDirectPDFProvider(model='gpt-test').extract_facts(doc)
+
+    assert run.status == 'completed'
+    file_part = captured['input'][0]['content'][0]
+    assert file_part == {'type': 'input_file', 'file_url': 'https://www.bt.com/report.pdf'}
+    assert run.diagnostics[-1]['source_input_mode'] == 'file_url'
+    assert run.diagnostics[-1]['pdf_upload_succeeded'] is False
+
+
+def test_openai_inaccessible_file_url_uses_base64_fallback(monkeypatch, tmp_path):
+    import sys, types, json
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
+    calls = []
+    class BadRequest(Exception):
+        status_code = 400; code = 'invalid_file_url'
+    class Resp:
+        id = 'resp-2'; usage = None; output_text = json.dumps({'facts': []})
+        def model_dump(self, mode='json'):
+            return {'id': self.id, 'output_text': self.output_text, 'usage': {}}
+    class Responses:
+        def create(self, **kwargs):
+            calls.append(kwargs)
+            if len(calls) == 1: raise BadRequest('OpenAI could not retrieve external file URL')
+            return Resp()
+    class Client:
+        def __init__(self, **kwargs): self.responses = Responses(); self.files = types.SimpleNamespace(create=lambda **kw: (_ for _ in ()).throw(AssertionError('Files API must not be called')))
+    monkeypatch.setitem(sys.modules, 'openai', types.SimpleNamespace(OpenAI=Client))
+    pdf = tmp_path / 'bt.pdf'; pdf.write_bytes(b'%PDF-1.4\nfixture')
+    doc = ai_review.ExperimentDocument(document_id='DOC', enterprise_id='bt-group-plc', title='BT Annual Report', source_url='https://www.bt.com/report.pdf', retrieval_timestamp=ai_review.now_iso(), checksum='x', media_type='application/pdf', page_count=1, local_path=str(pdf))
+
+    run = ai_review.OpenAIDirectPDFProvider(model='gpt-test').extract_facts(doc)
+
+    assert run.status == 'completed'
+    assert calls[0]['input'][0]['content'][0]['file_url'] == 'https://www.bt.com/report.pdf'
+    fallback = calls[1]['input'][0]['content'][0]
+    assert fallback['type'] == 'input_file'
+    assert fallback['filename'].endswith('.pdf')
+    assert fallback['file_data'].startswith('data:application/pdf;base64,')
+    assert [d['source_input_mode'] for d in run.diagnostics] == ['file_url', 'file_data']
+
+
+def test_invalid_and_oversized_pdfs_fail_before_provider_request(monkeypatch, tmp_path):
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
+    invalid = ai_review.ExperimentDocument(document_id='DOC', enterprise_id='bt-group-plc', title='BT Annual Report', source_url='https://www.bt.com/report.html', retrieval_timestamp=ai_review.now_iso(), checksum='x', media_type='text/html', page_count=1, local_path=None)
+    invalid_run = ai_review.OpenAIDirectPDFProvider(model='gpt-test').extract_facts(invalid)
+    assert invalid_run.status == 'not_executed'
+    assert invalid_run.diagnostics[0]['provider_error_type'] == 'source_not_pdf'
+
+    import experiments.document_understanding.providers as provider_mod
+    pdf = tmp_path / 'large.pdf'; pdf.write_bytes(b'%PDF-1.4')
+    monkeypatch.setattr(provider_mod, 'MAX_RESPONSES_PDF_BYTES', 4)
+    large = ai_review.ExperimentDocument(document_id='DOC2', enterprise_id='bt-group-plc', title='BT Annual Report', source_url='https://www.bt.com/report.pdf', retrieval_timestamp=ai_review.now_iso(), checksum='y', media_type='application/pdf', page_count=1, local_path=str(pdf))
+    oversized_run = ai_review.OpenAIDirectPDFProvider(model='gpt-test').extract_facts(large)
+    assert oversized_run.status == 'not_executed'
+    assert oversized_run.diagnostics[0]['provider_error_type'] == 'source_oversized'
+
+
+def test_financial_intelligence_page_requires_no_manual_bt_upload(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path / 'flora'))
+    monkeypatch.setattr(ai_review, '_bt_annual_report_source', lambda: {'source_id': 'bt-annual-report-2026', 'source_name': 'BT Group plc Annual Report 2026', 'url': 'https://www.bt.com/report.pdf'})
+
+    html = ai_review.financial_intelligence_page()
+
+    assert 'no download or upload is required' in html
+    assert "action='/financial-intelligence/bt-group-plc/refresh'" in html
