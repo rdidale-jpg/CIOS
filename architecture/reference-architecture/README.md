@@ -31,6 +31,7 @@ The Reference Architecture defines:
 - [Architecture Maturity Model](Architecture-Maturity-Model.md) — staged model for how CIOS evolves from evidence collection to autonomous business development partnership.
 - [Architecture Roadmap](Architecture-Roadmap.md) — implementation phases that align runtime work to the architecture.
 - [CIOS Design Doctrine](CIOS-Design-Doctrine.md) — design philosophy and reasoning style for CIOS.
+- [CIOS Chief Architect Handbook](../handbook/CIOS-Chief-Architect-Handbook.md) — operating companion to the Reference Architecture for Chief Architect judgement, stewardship and working practice.
 - [AI Session Handoff](AI-Session-Handoff.md) — short copy/paste briefing for new ChatGPT or Codex sessions.
 - [Architecture Decision Records](../decisions/README.md) — index of major architecture decisions and trade-offs.
   - [ADR-001 — Observations as Atomic Intelligence Unit](../decisions/ADR-001-Observations-as-Atomic-Intelligence-Unit.md)

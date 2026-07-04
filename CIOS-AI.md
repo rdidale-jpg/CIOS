@@ -8,7 +8,7 @@
 
 This document defines how any AI assistant, Codex session or human contributor should work on CIOS. It preserves project memory, architecture doctrine and AI operating rules outside chat history.
 
-Treat this file, the Reference Architecture and Accepted ADRs as source of truth for CIOS project direction unless Rob explicitly changes the architecture.
+Treat this file, the Reference Architecture and Accepted ADRs as source of truth for CIOS project direction unless Rob explicitly changes the architecture. Treat the CIOS Chief Architect Handbook as the primary guide for judgement and working practice. Treat the Reference Architecture, Accepted ADRs and owning architecture papers as authoritative for detailed architecture and model decisions.
 
 ## One-page quick-start for AI agents
 
@@ -26,10 +26,11 @@ Before major work, read in this order:
 2. [`architecture/reference-architecture/README.md`](architecture/reference-architecture/README.md)
 3. [`architecture/reference-architecture/CIOS-Reference-Architecture-v1.0.md`](architecture/reference-architecture/CIOS-Reference-Architecture-v1.0.md)
 4. [`architecture/reference-architecture/CIOS-Design-Doctrine.md`](architecture/reference-architecture/CIOS-Design-Doctrine.md)
-5. [`architecture/reference-architecture/Glossary.md`](architecture/reference-architecture/Glossary.md)
-6. [`architecture/reference-architecture/Document-Map.md`](architecture/reference-architecture/Document-Map.md)
-7. [`architecture/decisions/README.md`](architecture/decisions/README.md) and relevant Accepted ADRs
-8. Relevant Founding Papers, Enterprise Intelligence papers and runtime documents
+5. [`architecture/handbook/CIOS-Chief-Architect-Handbook.md`](architecture/handbook/CIOS-Chief-Architect-Handbook.md)
+6. [`architecture/reference-architecture/Glossary.md`](architecture/reference-architecture/Glossary.md)
+7. [`architecture/reference-architecture/Document-Map.md`](architecture/reference-architecture/Document-Map.md)
+8. [`architecture/decisions/README.md`](architecture/decisions/README.md) and relevant Accepted ADRs
+9. Relevant Founding Papers, Enterprise Intelligence papers and runtime documents
 
 ## What CIOS is
 
