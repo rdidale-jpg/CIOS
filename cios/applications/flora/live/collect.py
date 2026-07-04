@@ -7,6 +7,8 @@ from typing import Any
 
 from cios.applications.flora.live.extractor import extract_evidence_with_diagnostics
 from cios.applications.flora.live.fetcher import fetch_html
+from cios.applications.flora.live.documents import fetch_document, parse_pdf_document
+from cios.applications.flora.memory.factual_twin import extract_factual_evidence
 from cios.applications.flora.live.source_registry import SOURCES, canonical_organisation, canonical_enterprise_id, collection_scope, enabled_sources, load_collection_profile, source_canonical_enterprise_id
 from cios.applications.flora.live.store import DEFAULT_DIAGNOSTICS_PATH, DEFAULT_PATH, load_evidence_fingerprints, read_jsonl, unique_evidence, write_jsonl
 from pathlib import Path
@@ -15,7 +17,7 @@ from cios.applications.flora.live.progress import complete_state, read_state, st
 from cios.applications.flora.live.alignment import build_acquisition_plans, lifecycle_action
 from cios.applications.flora.memory.service import ObservationMemoryService
 
-FAILURE_CATEGORIES = {"access_blocked", "timeout", "network_error", "non_html", "no_relevant_evidence", "parser_error", "unknown"}
+FAILURE_CATEGORIES = {"access_blocked", "timeout", "network_error", "non_html", "unsupported_media_type", "pdf_extraction_failure", "table_extraction_failure", "no_relevant_evidence", "parser_error", "unknown"}
 
 
 def categorise_failure(*, succeeded: bool, http_status: int | None = None, error: str | None = None, evidence_count: int = 0) -> str | None:
@@ -29,8 +31,12 @@ def categorise_failure(*, succeeded: bool, http_status: int | None = None, error
         return "access_blocked"
     if "timed out" in text or "timeout" in text:
         return "timeout"
+    if "unsupported media type" in text:
+        return "unsupported_media_type"
     if "non-html" in text or "content type" in text or "max_bytes" in text:
         return "non_html"
+    if "pdf" in text or "embedded text" in text or "encryption" in text:
+        return "pdf_extraction_failure"
     if "parser" in text:
         return "parser_error"
     if "urlopen" in text or "name or service" in text or "connection" in text or "network" in text or "tunnel" in text:
@@ -130,7 +136,20 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
         rejected_evidence: list[dict[str, Any]] = []
         parse_error: str | None = None
         succeeded = result.succeeded
-        if result.succeeded:
+        if (not result.succeeded) and (str(source.url).lower().endswith(".pdf") or "non-html content type" in result.error.lower()):
+            doc_fetch = fetch_document(str(source.url))
+            doc = parse_pdf_document(doc_fetch, source, canonical_enterprise_id=source_canonical_enterprise_id(source))
+            succeeded = doc_fetch.succeeded
+            result = type(result)(url=result.url, succeeded=succeeded, status_code=doc_fetch.status_code, html="", error=doc.error)
+            if doc.parser_status == "parsed":
+                source_evidence, rejected_evidence = extract_factual_evidence(doc)
+                parse_error = None
+            else:
+                parse_error = doc.error or "PDF extraction failed"
+            for item in source_evidence:
+                item["collection_mode"] = mode
+            diagnostics_extra = {"documents_retrieved": 1 if doc_fetch.succeeded else 0, "pdfs_parsed": 1 if doc.parser_status == "parsed" else 0, "pages_extracted": doc.page_count if doc.parser_status == "parsed" else 0, "tables_detected": len([e for e in source_evidence if e.get("origin") == "table"]), "document_id": doc.document_id, "document_checksum": doc.checksum, "parser_status": doc.parser_status, "extraction_warnings": list(doc.warnings)}
+        elif result.succeeded:
             try:
                 source_evidence, rejected_evidence = extract_evidence_with_diagnostics(source, result.html)
                 for item in source_evidence:
@@ -142,10 +161,17 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
                 if mode == "live_authoritative":
                     source_evidence = [e for e in source_evidence if e.get("source_provenance") == "live" and "seed" not in str(e.get("source_type", "")).lower() and "synthetic" not in str(e.get("source_type", "")).lower()]
                 evidence.extend(source_evidence)
+                diagnostics_extra = {"documents_retrieved": 0, "pdfs_parsed": 0, "pages_extracted": 0, "tables_detected": 0}
             except Exception as exc:  # parser diagnostics must not stop other governed sources
                 succeeded = False
                 parse_error = f"parser_error: {exc}"
-        diagnostics.append(_diagnostic(source, attempted_at, result, source_evidence, rejected_evidence, parse_error, succeeded))
+                diagnostics_extra = {"documents_retrieved": 0, "pdfs_parsed": 0, "pages_extracted": 0, "tables_detected": 0}
+        else:
+            diagnostics_extra = {"documents_retrieved": 0, "pdfs_parsed": 0, "pages_extracted": 0, "tables_detected": 0}
+        evidence.extend([e for e in source_evidence if e not in evidence])
+        diag = _diagnostic(source, attempted_at, result, source_evidence, rejected_evidence, parse_error, succeeded)
+        diag.update(diagnostics_extra)
+        diagnostics.append(diag)
         evidence_candidates = len(evidence) + sum(int(d.get("rejected_evidence_count") or 0) for d in diagnostics) + sum(int(d.get("downgraded_evidence_count") or 0) for d in diagnostics)
         update_state(sources_attempted=len(diagnostics), sources_succeeded=len([d for d in diagnostics if d["status"] != "failed"]), sources_retrieved=len([d for d in diagnostics if d["status"] != "failed"]), sources_failed=len([d for d in diagnostics if d["status"] == "failed"]), evidence_extracted=len(evidence), evidence_candidates=evidence_candidates, evidence_accepted=len(evidence), evidence_rejected=sum(int(d.get("rejected_evidence_count") or 0) for d in diagnostics), evidence_downgraded=sum(int(d.get("downgraded_evidence_count") or 0) for d in diagnostics), latest_message=f"Finished {source.source_name}")
     new_evidence, duplicate_count, fingerprints = unique_evidence(evidence)
@@ -175,7 +201,7 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
     evidence_candidates = len(evidence) + evidence_rejected + evidence_downgraded
     source_failures = [d for d in diagnostics if d["status"] == "failed"]
     result_state = "completed successfully" if diagnostics and len([d for d in diagnostics if d["status"] != "failed"]) >= 1 and len(new_evidence) >= 1 and (obs_created + obs_corroborated) >= 1 and (attrs_created + obs_corroborated) >= 1 else "Completed with no accepted intelligence"
-    manifest = {"run_id": run_id, "canonical_enterprise_id": scoped_enterprise_id, "enterprise_display_name": scoped_display_name, "profile_id": profile_id, "started_at": collection_started_at, "completed_at": completed_at, "collection_mode": mode, "passes": selected_passes, "sources_planned": [s.source_id for s in sources], "sources_attempted": [d["source_id"] for d in diagnostics], "sources_retrieved": [d["source_id"] for d in diagnostics if d["status"] != "failed"], "sources_failed": [d["source_id"] for d in source_failures], "evidence_candidates": evidence_candidates, "evidence_accepted": len(new_evidence), "evidence_rejected": evidence_rejected, "evidence_downgraded": evidence_downgraded, "observations_created": obs_created, "observations_corroborated": obs_corroborated, "observations_rejected": 0, "model_attributes_created": attrs_created, "model_attributes_changed": len([r for r in memory_results if r.action == "updated"]), "model_attributes_reconfirmed": obs_corroborated, "unknowns_created": unknowns_created, "contradictions_created": contradictions_created, "result_state": result_state, "errors": [d for d in diagnostics if d.get("status") == "failed"], "warnings": []}
+    manifest = {"run_id": run_id, "canonical_enterprise_id": scoped_enterprise_id, "enterprise_display_name": scoped_display_name, "profile_id": profile_id, "started_at": collection_started_at, "completed_at": completed_at, "collection_mode": mode, "passes": selected_passes, "sources_planned": [s.source_id for s in sources], "sources_attempted": [d["source_id"] for d in diagnostics], "sources_retrieved": [d["source_id"] for d in diagnostics if d["status"] != "failed"], "sources_failed": [d["source_id"] for d in source_failures], "evidence_candidates": evidence_candidates, "evidence_accepted": len(new_evidence), "evidence_rejected": evidence_rejected, "evidence_downgraded": evidence_downgraded, "documents_retrieved": sum(int(d.get("documents_retrieved") or 0) for d in diagnostics), "pdfs_parsed": sum(int(d.get("pdfs_parsed") or 0) for d in diagnostics), "pages_extracted": sum(int(d.get("pages_extracted") or 0) for d in diagnostics), "tables_detected": sum(int(d.get("tables_detected") or 0) for d in diagnostics), "observations_created": obs_created, "observations_corroborated": obs_corroborated, "observations_rejected": 0, "model_attributes_created": attrs_created, "model_attributes_changed": len([r for r in memory_results if r.action == "updated"]), "model_attributes_reconfirmed": obs_corroborated, "unknowns_created": unknowns_created, "contradictions_created": contradictions_created, "result_state": result_state, "errors": [d for d in diagnostics if d.get("status") == "failed"], "warnings": []}
     if len(manifest["sources_attempted"]) != len(manifest["sources_retrieved"]) + len(manifest["sources_failed"]):
         raise ValueError("Source counters do not reconcile")
     if manifest["evidence_candidates"] != manifest["evidence_accepted"] + manifest["evidence_rejected"] + manifest["evidence_downgraded"] + duplicate_count:
@@ -198,6 +224,10 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
         "total_unique_evidence_objects": len(fingerprints),
         "failures": failures,
         "accepted_evidence_count": len(new_evidence),
+        "documents_retrieved": manifest.get("documents_retrieved", 0),
+        "pdfs_parsed": manifest.get("pdfs_parsed", 0),
+        "pages_extracted": manifest.get("pages_extracted", 0),
+        "tables_detected": manifest.get("tables_detected", 0),
         "evidence_candidates": evidence_candidates,
         "result_state": result_state,
         "rejected_evidence_count": sum(int(d.get("rejected_evidence_count") or 0) for d in diagnostics),

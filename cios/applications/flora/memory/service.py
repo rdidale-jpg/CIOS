@@ -58,7 +58,7 @@ class ObservationMemoryService:
             provenance_type="evidence-backed",
             confidence=int(item.get("confidence") or item.get("overall_evidence_quality") or 50),
             freshness=str(item.get("evidence_freshness") or "current"),
-            affected_attribute=f"{_domain_for(condition)}.{condition}",
+            affected_attribute=str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"),
             importance=int(item["importance"]) if item.get("importance") is not None else None,
             commercial_value=int(item["commercial_value"]) if item.get("commercial_value") is not None else None,
         )

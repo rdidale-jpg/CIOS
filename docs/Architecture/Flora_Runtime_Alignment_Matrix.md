@@ -48,3 +48,7 @@
 | Contradictions | Partially aligned | Conflicting Observations coexist and model attributes expose contradiction state | No automatic resolution workflow |
 | Unknowns | Partially aligned | Explicit persisted Unknown records for unsupported model state | Minimal lifecycle only |
 | Report-as-view | Partially aligned | Organisation Observatory page renders maintained Enterprise Memory panel | Other reports still render generated objects |
+
+## BT factual Digital Twin foundation update
+
+Flora now separates authoritative document retrieval, PDF parsing, factual Evidence extraction, Observation memory and Enterprise Model projection for BT calibration. Commercial reasoning remains gated until factual maturity is sufficient.
