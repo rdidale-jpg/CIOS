@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from cios.applications.flora.storage import PersistenceError, atomic_write_json, data_path, ensure_writable_dir, storage_mode
 
-import hashlib, json, os, shutil, uuid
+import hashlib, json, os, shutil, time, uuid
 from types import SimpleNamespace
 from datetime import UTC, datetime
 from html import escape
@@ -35,8 +35,13 @@ FAILURE_MESSAGES = {
     'source_not_pdf': 'Flora could not retrieve the financial report.',
     'provider_not_configured': 'Financial document understanding is temporarily unavailable.',
     'provider_authentication_failed': 'Financial document understanding is temporarily unavailable.',
-    'provider_request_failed': 'Financial document understanding is temporarily unavailable.',
-    'provider_response_invalid': 'Financial document understanding is temporarily unavailable.',
+    'provider_request_failed': 'Financial document understanding could not complete.',
+    'provider_quota_exceeded': 'Financial document understanding could not complete.',
+    'provider_model_unavailable': 'Financial document understanding could not complete.',
+    'provider_file_upload_failed': 'Financial document understanding could not complete.',
+    'provider_request_invalid': 'Financial document understanding could not complete.',
+    'provider_timeout': 'Financial document understanding could not complete.',
+    'provider_response_invalid': 'Financial document understanding could not complete.',
     'persistence_failed': 'Flora understood the report but could not save the results.',
 }
 
@@ -47,24 +52,63 @@ def _provider_failure_category(extraction) -> str:
     if not extraction:
         return 'provider_request_failed'
     errors = '; '.join(getattr(extraction, 'provider_errors', []) or [])
-    if extraction.status == 'not_executed' and 'OPENAI_API_KEY' in errors:
+    status = getattr(extraction, 'status', '')
+    if status == 'not_executed' and 'OPENAI_API_KEY' in errors:
         return 'provider_not_configured'
-    if extraction.status == 'authentication_failed':
-        return 'provider_authentication_failed'
-    if extraction.status == 'invalid_response' or getattr(extraction, 'schema_errors', None):
-        return 'provider_response_invalid'
-    return 'provider_request_failed'
+    return {
+        'authentication_failed': 'provider_authentication_failed',
+        'quota_exceeded': 'provider_quota_exceeded',
+        'model_unavailable': 'provider_model_unavailable',
+        'file_upload_failed': 'provider_file_upload_failed',
+        'invalid_request': 'provider_request_invalid',
+        'timeout': 'provider_timeout',
+        'invalid_response': 'provider_response_invalid',
+    }.get(status, 'provider_response_invalid' if getattr(extraction, 'schema_errors', None) else 'provider_request_failed')
+
+def _support_reference(run: dict[str, Any]) -> str:
+    diagnostics = run.get('provider_diagnostics') or []
+    correlation = diagnostics[-1].get('correlation_id') if diagnostics else run.get('run_id', '')
+    return 'FI-' + str(correlation).replace('fi-', '').replace('FI-', '')
 
 def _mark_failure(run: dict[str, Any], category: str, technical_reason: str) -> dict[str, Any]:
     run['status'] = category
     run['failure_category'] = category
-    run['user_message'] = _failure_message(category)
+    run['support_reference'] = _support_reference(run)
+    base_message = _failure_message(category)
+    if category.startswith('provider_') and category != 'provider_not_configured':
+        base_message = 'Financial document understanding could not complete.'
+    run['user_message'] = base_message
+    run['user_message_display'] = f"{base_message} Support reference: {run['support_reference']}"
     run['exceptions'] = [{'exception_type': category, 'rejection_reason': technical_reason, 'user_message': run['user_message']}]
     run['auto_accepted_count'] = 0; run['exception_count'] = len(run['exceptions']); run['observations_created_or_strengthened'] = 0; run['enterprise_attributes_changed'] = []
     return run
 
 
 def now_iso() -> str: return datetime.now(UTC).isoformat(timespec='seconds')
+
+def _safe_provider_diagnostic(run_id: str, source: dict[str, Any], fetched: Any, model: str, started: float) -> dict[str, Any]:
+    return {
+        'correlation_id': run_id,
+        'timestamp': now_iso(),
+        'provider': 'openai',
+        'requested_model': model,
+        'request_stage': 'source_retrieval',
+        'source_document_retrieval_result': bool(getattr(fetched, 'succeeded', False)),
+        'source_content_type': getattr(fetched, 'media_type', None),
+        'source_file_size': len(getattr(fetched, 'content', b'') or b''),
+        'pdf_upload_succeeded': False,
+        'http_status_code': getattr(fetched, 'status_code', None),
+        'provider_error_type': 'source_retrieval_failed' if not getattr(fetched, 'succeeded', False) else None,
+        'provider_error_code': None,
+        'sanitised_provider_error_message': str(getattr(fetched, 'error', '') or '')[:700],
+        'retryable': not bool(getattr(fetched, 'succeeded', False)),
+        'elapsed_time': round(time.time() - started, 3),
+    }
+
+def _record_provider_diagnostics(run: dict[str, Any]) -> None:
+    for event in run.get('provider_diagnostics') or []:
+        print('Flora provider diagnostic ' + json.dumps(event, sort_keys=True))
+
 
 def _read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding='utf-8'))
@@ -198,14 +242,17 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc') -> dict[
     source = _bt_annual_report_source()
     run_id = 'fi-' + uuid.uuid4().hex[:12]
     ensure_writable_dir(_run_dir())
+    retrieval_started = time.time()
     fetched = fetch_document(source['url'])
     doc_parse = parse_pdf_document(fetched, _source_obj(source), canonical_enterprise_id='bt-group-plc')
     document = ExperimentDocument(document_id=doc_parse.document_id, enterprise_id='bt-group-plc', title=source['source_name'], source_url=source['url'], retrieval_timestamp=doc_parse.retrieval_date, checksum=doc_parse.checksum, media_type=doc_parse.media_type or 'application/pdf', page_count=max(doc_parse.page_count, 1), local_path=doc_parse.local_path)
     provider = OpenAIDirectPDFProvider(model=DEFAULT_MODEL)
     extraction = provider.extract_facts(document) if fetched.succeeded else None
     claims = [fact_to_review_claim(f, run_id) for f in (extraction.facts if extraction else [])]
-    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url']}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else DEFAULT_MODEL), 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'openai_invoked': bool(extraction), 'claims': claims, 'applied_results': []}
+    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url']}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else DEFAULT_MODEL), 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'provider_diagnostics': (getattr(extraction, 'diagnostics', []) if extraction else [_safe_provider_diagnostic(run_id, source, fetched, DEFAULT_MODEL, retrieval_started)]), 'openai_invoked': bool(extraction), 'claims': claims, 'applied_results': []}
     run['collection'].update({'final_url': fetched.final_url or fetched.url, 'content_type': fetched.media_type, 'redirect_chain': list(fetched.redirect_chain), 'redirected': bool(fetched.redirect_chain)})
+    if extraction:
+        run['provider_diagnostics'] = [_safe_provider_diagnostic(run_id, source, fetched, DEFAULT_MODEL, retrieval_started)] + run.get('provider_diagnostics', [])
     if not fetched.succeeded:
         run = _mark_failure(run, 'source_retrieval_failed', fetched.error or 'governed source retrieval failed')
     elif document.media_type != 'application/pdf':
@@ -217,6 +264,7 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc') -> dict[
             run = _mark_failure(run, 'persistence_failed', f'{type(exc).__name__}: {exc}')
     else:
         run = _mark_failure(run, _provider_failure_category(extraction), '; '.join(run.get('provider_errors') or ['provider did not complete']))
+    _record_provider_diagnostics(run)
     try:
         _write_json(_run_path(run_id), run)
     except PersistenceError as exc:
@@ -233,7 +281,7 @@ def create_upload_run(pdf_path: Path, *, enterprise_id: str = 'bt-group-plc', ti
     provider = OpenAIDirectPDFProvider(model=DEFAULT_MODEL)
     extraction = provider.extract_facts(document)
     claims = [fact_to_review_claim(f, run_id) for f in extraction.facts]
-    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'ready_for_review' if claims else extraction.status, 'document': document.model_dump(), 'provider': extraction.provider, 'model': extraction.model, 'provider_status': extraction.status, 'provider_errors': extraction.provider_errors, 'raw_response_location': extraction.raw_response_location, 'claims': claims, 'applied_results': []}
+    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'ready_for_review' if claims else extraction.status, 'document': document.model_dump(), 'provider': extraction.provider, 'model': extraction.model, 'provider_status': extraction.status, 'provider_errors': extraction.provider_errors, 'raw_response_location': extraction.raw_response_location, 'provider_diagnostics': getattr(extraction, 'diagnostics', []), 'claims': claims, 'applied_results': []}
     _write_json(_run_path(run_id), run)
     return run
 
@@ -287,7 +335,7 @@ def financial_intelligence_page(message: str = '') -> str:
 def _outcome_summary(run: dict[str, Any] | None) -> str:
     if not run: return ''
     changes = ''.join(f"<li>{escape(str(r.get('affected_attribute')))} — {escape(str(r.get('update_result')))}</li>" for r in run.get('applied_results', [])[:20]) or '<li>No financial intelligence was added because processing did not complete.</li>'
-    needs = ''.join(f"<li>{escape(str(e.get('user_message') or e.get('acceptance_reason') or e.get('rejection_reason')))} — page {escape(str(e.get('page_reference') or e.get('page') or e.get('document_page') or 'n/a'))}</li>" for e in run.get('exceptions', [])[:20]) or '<li>No exceptions requiring review.</li>'
+    needs = ''.join(f"<li>{escape(str(run.get('user_message_display') or e.get('user_message') or e.get('acceptance_reason') or e.get('rejection_reason')))} — page {escape(str(e.get('page_reference') or e.get('page') or e.get('document_page') or 'n/a'))}</li>" for e in run.get('exceptions', [])[:20]) or '<li>No exceptions requiring review.</li>'
     evidence = ''.join(f"<details><summary>{escape(c.get('original_statement',''))}</summary><p>Page {escape(str(c.get('page_reference')))} · Confidence {escape(str(c.get('confidence')))} · Evidence {escape(c.get('evidence_id',''))}</p><p>{escape(str(c.get('source_excerpt') or ''))}</p></details>" for c in run.get('claims', [])[:20]) or '<p>No page-grounded claims returned.</p>'
     return f"""<section class='card'><h2>Refresh outcome</h2><p>Reporting period: inferred from accepted facts · Collection status: {escape(run.get('status',''))} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Automatically accepted facts</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{run.get('exception_count',0)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a></p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {'maintained Enterprise Model financial attributes changed or strengthened; use this as a prompt for account planning, not as a standalone commercial conclusion.' if run.get('enterprise_attributes_changed') else 'No financial intelligence was added because processing did not complete.'}</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form></section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
 

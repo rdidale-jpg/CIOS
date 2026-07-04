@@ -55,7 +55,7 @@ class ExtractionRun(BaseModel):
     run_id:str; route:str; provider:str; model:str; model_version:str|None=None; status:str
     request_id:str|None=None; started_at:str; completed_at:str; latency_seconds:float=Field(ge=0)
     usage:dict[str,Any]=Field(default_factory=dict); estimated_cost_usd:float|None=None; raw_response_location:str|None=None
-    facts:list[FoundationFact]=Field(default_factory=list); schema_errors:list[str]=Field(default_factory=list); provider_errors:list[str]=Field(default_factory=list); verifier:dict[str,Any]=Field(default_factory=dict)
+    facts:list[FoundationFact]=Field(default_factory=list); schema_errors:list[str]=Field(default_factory=list); provider_errors:list[str]=Field(default_factory=list); verifier:dict[str,Any]=Field(default_factory=dict); diagnostics:list[dict[str,Any]]=Field(default_factory=list)
 
 class DocumentUnderstandingProvider(Protocol):
     def extract_facts(self, document:ExperimentDocument, schema:type[FoundationFactSet], page_ranges:list[PageRange]|None=None)->ExtractionRun: ...
