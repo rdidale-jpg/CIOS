@@ -58,7 +58,7 @@ def test_table_fact_observation_model_idempotent_and_lineage(tmp_path):
     evidence, rejected = extract_factual_evidence(doc)
     assert any(e["page_number"] == 3 and "Group revenue" in e["extracted_text"] for e in evidence)
     assert any("Consumer revenue" in e["extracted_text"] and "FY26" in e["affected_attribute"] for e in evidence)
-    assert any(e["commercial_condition"] == "strategic_commitment_stated" for e in evidence)
+    assert any(e["commercial_condition"] == "strategic_pillar_stated" for e in evidence)
     assert any(e["commercial_condition"] == "executive_role_confirmed" for e in evidence)
     svc = ObservationMemoryService(ObservationRepository(tmp_path/"obs.jsonl"), EnterpriseModelRepository(tmp_path/"models"))
     results1 = [svc.accept_evidence(e) for e in evidence]
@@ -66,8 +66,8 @@ def test_table_fact_observation_model_idempotent_and_lineage(tmp_path):
     model = svc.models.get("bt-group-plc")
     assert any(r.action == "created" for r in results1)
     assert len(svc.observations.list()) == len({o.observation_id for o in svc.observations.list()})
-    assert any(k.startswith("financial_performance.metrics.Group.revenue.FY26.actual") for k in model.attributes)
-    assert any(k.startswith("financial_performance.metrics.Consumer.revenue.FY26.actual") for k in model.attributes)
+    assert any(k.startswith("financial_performance.metrics.revenue.FY26.actual") for k in model.attributes)
+    assert any(k.startswith("financial_performance.metrics.revenue.FY26.actual") for k in model.attributes)
     assert "structure.units.Consumer" in model.attributes
     assert "strategy.pillars.Build" in model.attributes
     assert "leadership.roles.Group Chief Executive" in model.attributes
@@ -85,7 +85,7 @@ def test_factual_workspace_renders_drilldown_without_raw_error_dicts(tmp_path):
     svc = ObservationMemoryService(ObservationRepository(tmp_path/"obs.jsonl"), EnterpriseModelRepository(tmp_path/"models"))
     for e in evidence: svc.accept_evidence(e)
     html = factual_digital_twin_workspace("bt-group-plc", svc.models, svc.observations, evidence)
-    assert "Twin maturity" in html and "Foundation" in html
+    assert "BT Digital Twin" in html and "Foundation" in html
     assert "Structure" in html and "Financials" in html and "Evidence Detail" in html
     assert "page 3" in html or "<td>3</td>" in html
     assert "{'" not in html

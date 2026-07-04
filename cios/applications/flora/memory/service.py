@@ -10,11 +10,18 @@ from cios.applications.flora.memory.models import EnterpriseModelAttribute, Ente
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
 from cios.applications.flora.memory.repository import EnterpriseModelRepository, ObservationRepository
 
-DOMAIN_MAP = {"AI Modernisation":"technology_events","AI Readiness":"technology_events","Technology Debt":"technology_events","Procurement Readiness":"procurement_events","Cost Pressure":"financial_pressure","Investment Pressure":"financial_pressure","Spending Pressure":"financial_pressure","Operational Resilience":"transformation_programmes","Network Resilience":"transformation_programmes","Digital Leadership":"transformation_programmes"}
+DOMAIN_MAP = {"AI Modernisation":"technology_events","AI Readiness":"technology_events","Technology Debt":"technology_events","Procurement Readiness":"procurement_events","Cost Pressure":"financial_pressure","Investment Pressure":"financial_pressure","Spending Pressure":"financial_pressure","Operational Resilience":"transformation_programmes","Network Resilience":"transformation_programmes","Digital Leadership":"transformation_programmes","Operational Efficiency":"transformation_programmes"}
 CONFLICT_TERMS = ("cancelled", "paused", "delayed", "ended", "withdrawn", "terminated", "no longer")
 UNKNOWN_MARKERS = ("unknown", "insufficient", "unclear", "unconfirmed")
+CLAIM_VOCABULARY: dict[str, dict[str, Any]] = {
+    "enterprise_identity_confirmed": {"domain": "identity", "attribute_prefix": "identity.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute"), "states": ("actual", "current")},
+    "business_unit_disclosed": {"domain": "structure", "attribute_prefix": "structure.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value"), "states": ("actual", "current")},
+    "financial_metric_reported": {"domain": "financial_performance", "attribute_prefix": "financial_performance.metrics.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value", "period", "state"), "states": ("actual", "target", "guidance")},
+    "strategic_pillar_stated": {"domain": "strategy", "attribute_prefix": "strategy.pillars.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value"), "states": ("actual", "current")},
+    "executive_role_confirmed": {"domain": "leadership", "attribute_prefix": "leadership.roles.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value", "period"), "states": ("current", "actual")},
+}
 
-FINANCIAL_RE = re.compile(r"(?P<metric>revenue|adjusted EBITDA|normalised free cash flow|free cash flow|EBITDA|net debt|capital expenditure|capex|operating profit)\s*(?:was|of|:)?\s*£(?P<value>[0-9,.]+)\s*(?P<unit>bn|billion|m|million)?", re.I)
+FINANCIAL_RE = re.compile(r"(?P<metric>revenue|adjusted EBITDA|normalised free cash flow|free cash flow|EBITDA|net debt|capital expenditure|capex|operating profit)\s*(?:was|of|:)?\s*(?:£|GBP\s*)(?P<value>[0-9,.]+)\s*(?P<unit>bn|billion|m|million)?", re.I)
 UNIT_LIST_RE = re.compile(r"(?P<names>Consumer|Business|International|Openreach)(?:\s*,\s*(?:Consumer|Business|International|Openreach))*?(?:\s+and\s+(?:Consumer|Business|International|Openreach))?\s+as\s+(?P<kind>customer-facing units?|business units?|reporting segments?)", re.I)
 CAPABILITY_RE = re.compile(r"(?P<names>Digital|Networks)(?:\s*,\s*(?:Digital|Networks))*?(?:\s+and\s+(?:Digital|Networks))?\s+provide\s+group capabilities", re.I)
 STRATEGY_RE = re.compile(r"strategy\s+is\s+(?P<names>[A-Z][A-Za-z]+(?:\s*,\s*[A-Z][A-Za-z]+)*(?:\s+and\s+[A-Z][A-Za-z]+)?)", re.I)
@@ -23,6 +30,8 @@ LEADER_RE = re.compile(r"(?P<person>[A-Z][A-Za-z .'-]+)\s+(?:held|holds|is|was|s
 
 
 def _domain_for(condition: str) -> str:
+    if condition in CLAIM_VOCABULARY:
+        return CLAIM_VOCABULARY[condition]["domain"]
     return DOMAIN_MAP.get(condition or "", "enterprise_identity")
 
 
@@ -61,6 +70,23 @@ class FactualClaim:
         return row
 
 
+def validate_factual_claim(claim: FactualClaim) -> None:
+    spec = CLAIM_VOCABULARY.get(claim.claim_type)
+    if not spec:
+        if claim.claim_type in DOMAIN_MAP:
+            return
+        raise ValueError(f"unsupported claim type: {claim.claim_type}")
+    if claim.model_domain != spec["domain"]:
+        raise ValueError(f"unsupported model-domain mapping: {claim.claim_type} maps to {spec['domain']}, not {claim.model_domain}")
+    if not claim.affected_attribute or not claim.affected_attribute.startswith(spec["attribute_prefix"]):
+        raise ValueError(f"missing affected attribute mapping for {claim.claim_type}")
+    if claim.state not in spec["states"]:
+        raise ValueError(f"unsupported state {claim.state!r} for {claim.claim_type}")
+    for field in spec["required"]:
+        if not getattr(claim, field):
+            raise ValueError(f"missing required claim field: {field}")
+
+
 def decompose_factual_claims(item: dict[str, Any]) -> list[FactualClaim]:
     text = str(item.get("cleaned_observation") or item.get("extracted_observation") or item.get("snippet") or "").strip().rstrip(".")
     enterprise = canonical_enterprise_id(str(item.get("enterprise_id") or item.get("canonical_enterprise_id") or item.get("organisation") or "Unknown enterprise")) or "unknown"
@@ -71,12 +97,12 @@ def decompose_factual_claims(item: dict[str, Any]) -> list[FactualClaim]:
     for i, m in enumerate(financial_matches, 1):
         metric = _metric_key(m.group("metric")); unit_raw = (m.group("unit") or "").lower(); unit = "billion" if unit_raw in {"bn", "billion"} else "million" if unit_raw in {"m", "million"} else None
         value = float(m.group("value").replace(",", "")); state = "target" if re.search(r"target|guidance|by FY", text, re.I) else "actual"
-        stmt = text + "." if len(financial_matches) == 1 and item.get("affected_attribute") else f"{enterprise} reported {period} {metric.replace('_',' ')} of GBP {value:g}{(' '+unit) if unit else ''}."
-        attr = str(item.get("affected_attribute")) if len(financial_matches) == 1 and item.get("affected_attribute") else f"financial_performance.metrics.{metric}.{period}.{state}"
-        claims.append(FactualClaim(enterprise, "reported_financial_metric", stmt, "financial_performance", attr, value, unit, "GBP", period, state, evid, page, conf, f"{evid}:financial:{i}"))
+        stmt = f"BT Group plc reported {metric.replace('_',' ')} of GBP {value:g}{(' '+unit) if unit else ''} for {period}."
+        attr = f"financial_performance.metrics.{metric}.{period}.{state}"
+        claims.append(FactualClaim(enterprise, "financial_metric_reported", stmt, "financial_performance", attr, value, unit, "GBP", period, state, evid, page, conf, f"{evid}:financial:{i}"))
     if re.search(r"customer-facing units?|business units?|reporting segments?", text, re.I):
         for name in [n for n in ("Consumer", "Business", "International", "Openreach") if re.search(rf"\b{n}\b", text)]:
-            stmt = f"{name} is a disclosed BT customer-facing business unit."
+            stmt = f"{name} is disclosed as a BT Group business unit."
             claims.append(FactualClaim(enterprise, "business_unit_disclosed", stmt, "structure", f"structure.units.{name}", name, None, None, None, "actual", evid, page, conf, f"{evid}:unit:{name}"))
     if re.search(r"group capabilities|internal capabilit", text, re.I):
         for name in [n for n in ("Digital", "Networks") if re.search(rf"\b{n}\b", text)]:
@@ -85,19 +111,21 @@ def decompose_factual_claims(item: dict[str, Any]) -> list[FactualClaim]:
     sm = STRATEGY_RE.search(text)
     if sm:
         for name in _names(sm.group("names")):
-            claims.append(FactualClaim(enterprise, "strategic_commitment_stated", f"{name} is a stated BT strategic pillar.", "strategy", f"strategy.pillars.{name}", name, None, None, None, "actual", evid, page, conf, f"{evid}:pillar:{name}"))
+            claims.append(FactualClaim(enterprise, "strategic_pillar_stated", f"{name} is a stated BT Group strategic pillar.", "strategy", f"strategy.pillars.{name}", name, None, None, None, "actual", evid, page, conf, f"{evid}:pillar:{name}"))
     tm = TARGET_RE.search(text)
     if tm:
         target = tm.group("target").strip(); date = tm.group("date")
-        claims.append(FactualClaim(enterprise, "strategic_target_stated", f"BT stated a strategic target to {target}.", "strategy", "strategy.targets.target", target, None, None, None, "target", evid, page, conf, f"{evid}:target"))
-        claims.append(FactualClaim(enterprise, "strategic_target_date_stated", f"BT stated the strategic target date as {date}.", "strategy", "strategy.targets.date", date, None, None, date, "target", evid, page, conf, f"{evid}:target_date"))
     for i, m in enumerate(LEADER_RE.finditer(text), 1):
         role = m.group("role").replace("CEO", "Group Chief Executive").replace("CFO", "Chief Financial Officer").replace("Chairman", "Chair")
         person = m.group("person").strip()
-        claims.append(FactualClaim(enterprise, "executive_role_confirmed", f"{person} held the role of {role} at BT.", "leadership", f"leadership.roles.{role}", person, None, None, str(item.get("effective_date") or item.get("publication_date") or "reported date"), "current", evid, page, conf, f"{evid}:leader:{i}"))
+        claims.append(FactualClaim(enterprise, "executive_role_confirmed", f"{person} held the role of {role} at BT Group plc on {str(item.get('effective_date') or item.get('publication_date') or 'reported date')}.", "leadership", f"leadership.roles.{role}", person, None, None, str(item.get("effective_date") or item.get("publication_date") or "reported date"), "current", evid, page, conf, f"{evid}:leader:{i}"))
     if claims:
         return claims
-    return [FactualClaim(enterprise, str(item.get("commercial_condition") or item.get("mapped_condition") or "enterprise identity"), text + ".", _domain_for(str(item.get("commercial_condition") or "")), str(item.get("affected_attribute") or f"{_domain_for(str(item.get('commercial_condition') or ''))}.{str(item.get('commercial_condition') or 'enterprise identity')}"), None, None, None, None, "actual", evid, page, conf, f"{evid}:original")]
+    condition = str(item.get("commercial_condition") or item.get("mapped_condition") or "enterprise identity")
+    value: str | None = None
+    if condition in {"business_unit_disclosed", "strategic_pillar_stated", "executive_role_confirmed"}:
+        value = _names(text)[0] if _names(text) else text.split(" held ", 1)[0].strip()
+    return [FactualClaim(enterprise, condition, text + ".", _domain_for(condition), str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"), value, None, None, None, "actual", evid, page, conf, f"{evid}:original")]
 
 
 @dataclass
@@ -135,6 +163,7 @@ class ObservationMemoryService:
         claims = decompose_factual_claims(item); report.factual_claims_extracted = len(claims)
         for claim in claims:
             try:
+                validate_factual_claim(claim)
                 before = self.observations.get_by_fingerprint(Observation(**self.observation_from_evidence(claim.to_evidence(item)).to_dict()).observation_fingerprint or "")
                 observation = self.observations.save(self.observation_from_evidence(claim.to_evidence(item)))
                 result = self.apply_observation(observation); report.results.append(result)
@@ -142,7 +171,36 @@ class ObservationMemoryService:
                 if before: report.factual_claims_corroborated += 1
             except ValueError as exc:
                 report.factual_claims_rejected += 1
-                report.rejected_claims.append({"claim_text": claim.atomic_statement, "source_evidence_id": claim.evidence_id, "page": claim.page_reference, "rejection_reason": str(exc), "model_domain": claim.model_domain, "candidate_id": claim.candidate_id})
+                reason = str(exc)
+                failed_validation = "factual_claim"
+                if reason.startswith("Observation "):
+                    failed_validation = "observation"
+                elif "mapping" in reason or "attribute" in reason:
+                    failed_validation = "mapping"
+                report.rejected_claims.append({
+                    "claim_id": claim.candidate_id,
+                    "source_id": item.get("source_id"),
+                    "source_evidence_id": claim.evidence_id,
+                    "evidence_id": claim.evidence_id,
+                    "document_page": claim.page_reference,
+                    "page": claim.page_reference,
+                    "extracted_source_text": item.get("extracted_text") or item.get("snippet") or item.get("cleaned_observation"),
+                    "proposed_atomic_statement": claim.atomic_statement,
+                    "claim_text": claim.atomic_statement,
+                    "claim_type": claim.claim_type,
+                    "model_domain": claim.model_domain,
+                    "affected_attribute": claim.affected_attribute,
+                    "structured_value": claim.value,
+                    "period": claim.period,
+                    "state": claim.state,
+                    "confidence": claim.confidence,
+                    "failed_validation": failed_validation,
+                    "validation_rule": reason.split(":", 1)[0],
+                    "rejection_reason": reason,
+                    "exception_type": type(exc).__name__,
+                    "problem_stage": "mapping" if failed_validation == "mapping" else ("validation" if failed_validation == "observation" else "extraction"),
+                    "intended_domain": claim.model_domain,
+                })
         return report
 
     def apply_observation(self, observation: Observation) -> ModelUpdateResult:

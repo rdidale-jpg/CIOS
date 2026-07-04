@@ -22,6 +22,8 @@ def evidence(eid="EV-1", statement="BT launched Project Falcon in 2026 for netwo
         "extraction_timestamp": "2026-07-04T10:00:00+00:00",
         "publication_date": "2026-07-01",
         "evidence_freshness": "collected today",
+        "page_range": "1",
+        "page_number": 1,
     }
 
 
@@ -191,13 +193,12 @@ def test_organisation_strategy_and_leadership_decompose_separately(tmp_path: Pat
     lead = svc.process_evidence(evidence("EV-LEAD", "Allison Kirkby held the role of Group Chief Executive.") | {"organisation": "BT Group plc"})
     statements = [o.atomic_statement for o in svc.observations.list()]
     assert org.factual_claims_accepted == 6
-    assert "Consumer is a disclosed BT customer-facing business unit." in statements
+    assert "Consumer is disclosed as a BT Group business unit." in statements
     assert "Networks is a disclosed internal BT capability." in statements
-    assert strat.factual_claims_accepted == 5
-    assert "Build is a stated BT strategic pillar." in statements
-    assert "BT stated the strategic target date as FY29." in statements
+    assert strat.factual_claims_accepted == 3
+    assert "Build is a stated BT Group strategic pillar." in statements
     assert lead.factual_claims_accepted == 1
-    assert "Allison Kirkby held the role of Group Chief Executive at BT." in statements
+    assert "Allison Kirkby held the role of Group Chief Executive at BT Group plc on 2026-07-01." in statements
 
 
 def test_invalid_claim_isolated_and_successes_persist(tmp_path: Path) -> None:

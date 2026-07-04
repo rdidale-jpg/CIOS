@@ -12,7 +12,7 @@ from urllib.parse import parse_qs, urlparse
 
 from cios.applications.flora.live.collect import collect, current_status
 from cios.applications.flora.live.progress import read_state, mark_stale_interrupted
-from cios.applications.flora.live.views import acquisition_plans_page, collection_progress_page, collection_result, collection_start_page, dashboard, evidence_page, feedback_diagnostics_page, source_effectiveness_page, sources_page
+from cios.applications.flora.live.views import acquisition_plans_page, collection_progress_page, collection_result, collection_start_page, dashboard, evidence_page, feedback_diagnostics_page, rejected_claims_page, source_effectiveness_page, sources_page
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
@@ -63,6 +63,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._json(mark_stale_interrupted())
             elif parsed.path == "/live/status":
                 self._json(current_status())
+            elif parsed.path == "/live/rejected-claims":
+                self._html(rejected_claims_page())
             elif parsed.path == "/live/sources":
                 self._html(sources_page())
             elif parsed.path == "/live/acquisition-plans":
