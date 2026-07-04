@@ -7,6 +7,10 @@ from __future__ import annotations
 
 import json
 import os
+import tempfile
+from pathlib import Path
+from email.parser import BytesParser
+from email.policy import default as email_policy
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlparse
 
@@ -17,6 +21,7 @@ from cios.applications.flora.workspace.feedback import create_feedback_record, c
 from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
+from cios.applications.flora.live.ai_review import apply_accepted, create_upload_run, review_home_page, run_page, update_reviews
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -75,6 +80,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(source_effectiveness_page())
             elif parsed.path == "/live/evidence":
                 self._html(evidence_page())
+            elif parsed.path == "/ai-financial-report":
+                self._html(review_home_page())
+            elif parsed.path.startswith("/ai-financial-report/"):
+                self._html(run_page(parsed.path.removeprefix("/ai-financial-report/")))
             elif parsed.path == "/observatory":
                 self._html(observatory_page())
             elif parsed.path == "/observatory/critique":
@@ -109,8 +118,34 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:  # noqa: N802 - stdlib callback name
         length = int(self.headers.get("Content-Length", "0"))
-        form = parse_qs(self.rfile.read(length).decode("utf-8"), keep_blank_values=True)
-        if self.path == "/live/collect/start":
+        raw_body = self.rfile.read(length)
+        form = {} if "multipart/form-data" in self.headers.get("Content-Type", "") else parse_qs(raw_body.decode("utf-8"), keep_blank_values=True)
+        if self.path == "/ai-financial-report/upload":
+            fields, files = _parse_multipart(self.headers, raw_body)
+            pdf = files.get("pdf")
+            if not pdf:
+                self._html(review_home_page("Choose a PDF to process."), status=400)
+                return
+            with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
+                tmp.write(pdf)
+                tmp_path = Path(tmp.name)
+            try:
+                run = create_upload_run(tmp_path, enterprise_id=fields.get("enterprise_id", "bt-group-plc"), title=fields.get("title", "BT Group plc Annual Report 2026"), source_url=fields.get("source_url", "uploaded authoritative PDF"))
+            finally:
+                try:
+                    tmp_path.unlink()
+                except OSError:
+                    pass
+            self._redirect(f"/ai-financial-report/{run['run_id']}")
+        elif self.path.startswith("/ai-financial-report/") and self.path.endswith("/review"):
+            run_id = self.path.removeprefix("/ai-financial-report/").removesuffix("/review")
+            update_reviews(run_id, form)
+            self._redirect(f"/ai-financial-report/{run_id}")
+        elif self.path.startswith("/ai-financial-report/") and self.path.endswith("/apply"):
+            run_id = self.path.removeprefix("/ai-financial-report/").removesuffix("/apply")
+            apply_accepted(run_id)
+            self._redirect(f"/ai-financial-report/{run_id}")
+        elif self.path == "/live/collect/start":
             profile_id = _one(form, "profile_id") or "bt-group-plc"
             mode = _one(form, "collection_mode") or "live_authoritative"
             collection_pass = _one(form, "collection_pass") or "baseline"
@@ -177,6 +212,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/live/status", "/live/collect/status"}:
         return "application/json"
+    if path.startswith("/ai-financial-report"):
+        return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
     if path.startswith("/digital-twin/"):
@@ -222,6 +259,26 @@ def env_port() -> int:
     if not 1 <= port <= 65535:
         raise ValueError(f"{PORT_ENV} must be between 1 and 65535; got {port}")
     return port
+
+
+def _parse_multipart(headers, body: bytes) -> tuple[dict[str, str], dict[str, bytes]]:
+    content_type = headers.get("Content-Type", "")
+    if "multipart/form-data" not in content_type:
+        return {}, {}
+    msg = BytesParser(policy=email_policy).parsebytes((f"Content-Type: {content_type}\r\nMIME-Version: 1.0\r\n\r\n").encode() + body)
+    fields: dict[str, str] = {}
+    files: dict[str, bytes] = {}
+    for part in msg.iter_parts():
+        name = part.get_param("name", header="content-disposition")
+        if not name:
+            continue
+        filename = part.get_filename()
+        payload = part.get_payload(decode=True) or b""
+        if filename:
+            files[name] = payload
+        else:
+            fields[name] = payload.decode("utf-8", "replace")
+    return fields, files
 
 
 def run(host: str | None = None, port: int | None = None) -> None:
