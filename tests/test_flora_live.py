@@ -476,3 +476,73 @@ def test_context_only_evidence_does_not_support_signals_and_coverage_dampens_sco
     assert metrics.condition_relevance == 0
     assert not metrics.coverage_sufficient
     assert adjust_score("DWP", 80, metrics).live_evidence_score < 50
+
+
+def test_bt_profile_selection_reaches_collection_service_from_web(monkeypatch, tmp_path) -> None:
+    from cios.applications.flora.web.app import FloraWebHandler
+    import http.client
+    from http.server import ThreadingHTTPServer
+
+    calls = []
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr("cios.applications.flora.web.app.collect", lambda organisation, **kwargs: calls.append((organisation, kwargs)) or None)
+    server = ThreadingHTTPServer(("127.0.0.1", 0), FloraWebHandler)
+    try:
+        import threading
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        body = "enterprise_display_name=BT+Group+plc&canonical_enterprise_id=bt-group-plc&profile_id=bt-group-plc&collection_mode=live_authoritative&collection_pass=baseline"
+        conn = http.client.HTTPConnection("127.0.0.1", server.server_address[1])
+        conn.request("POST", "/live/collect/start", body, {"Content-Type": "application/x-www-form-urlencoded"})
+        resp = conn.getresponse(); resp.read()
+    finally:
+        server.shutdown(); server.server_close()
+    assert calls == [("BT Group plc", {"profile_id": "bt-group-plc", "collection_mode": "live_authoritative", "passes": ["baseline"]})]
+
+
+def test_bt_profile_sources_are_scoped_and_exclude_sap() -> None:
+    from cios.applications.flora.live.source_registry import enabled_sources
+    sources = enabled_sources("BT Group plc", profile_id="bt-group-plc", passes=["baseline"])
+    assert sources
+    assert {s.canonical_enterprise_id for s in sources} == {"bt-group-plc"}
+    assert all("sap" not in s.source_id.lower() and "vodafone" not in s.source_id.lower() for s in sources)
+
+
+def test_bt_profile_run_manifest_identity_counts_and_memory_chain(tmp_path, monkeypatch) -> None:
+    from cios.applications.flora.live import collect as collect_module
+
+    class DummyResult:
+        succeeded = True
+        status_code = 200
+        html = "<html><body><p>BT is investing in network automation and customer experience data in 2026.</p></body></html>"
+        error = None
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(collect_module, "fetch_html", lambda url: DummyResult())
+    result = collect_module.collect("BT Group plc", profile_id="bt-group-plc", collection_mode="live_authoritative", passes=["baseline"])
+    manifest = result["collection_manifest"]
+    assert manifest["run_id"]
+    assert manifest["started_at"] and manifest["completed_at"]
+    assert manifest["canonical_enterprise_id"] == "bt-group-plc"
+    assert len(manifest["sources_attempted"]) == len(manifest["sources_retrieved"]) + len(manifest["sources_failed"])
+    assert manifest["evidence_candidates"] >= manifest["evidence_accepted"] + manifest["evidence_rejected"] + manifest["evidence_downgraded"]
+    assert manifest["evidence_accepted"] >= 1
+    assert manifest["observations_created"] >= 1
+    assert manifest["model_attributes_created"] >= 1
+    assert result["collection_mode"] == "live_authoritative"
+
+
+def test_zero_accepted_bt_run_is_not_successful(tmp_path, monkeypatch) -> None:
+    from cios.applications.flora.live import collect as collect_module
+
+    class DummyResult:
+        succeeded = True
+        status_code = 200
+        html = "<html><body><p>Plain page without governed signal keywords.</p></body></html>"
+        error = None
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(collect_module, "fetch_html", lambda url: DummyResult())
+    result = collect_module.collect("BT Group plc", profile_id="bt-group-plc", collection_mode="live_authoritative", passes=["baseline"])
+    assert result["accepted_evidence_count"] == 0
+    assert result["result_state"] != "completed successfully"
