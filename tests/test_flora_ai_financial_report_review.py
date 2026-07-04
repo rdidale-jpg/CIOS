@@ -264,3 +264,30 @@ def test_flora_data_dir_is_optional_for_ephemeral_pilot_operation(monkeypatch, t
     assert status['storage_mode'] == 'ephemeral pilot storage'
     assert status['ephemeral'] is True
     assert (tmp_path / '.flora_pilot' / 'ai_financial_reports' / 'runs').is_dir()
+
+
+def test_provider_timeout_is_distinct_and_records_safe_diagnostic(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    pdf = b'%PDF-1.4\nBT Annual Report fixture'
+    class Fetch:
+        succeeded = True; status_code = 200; media_type = 'application/pdf'; content = pdf; checksum = 'd' * 64
+        local_path = str(tmp_path / 'bt.pdf'); retrieval_date = ai_review.now_iso(); error = ''; final_url = 'https://www.bt.com/report.pdf'; url = final_url; redirect_chain = ()
+    (tmp_path / 'bt.pdf').write_bytes(pdf)
+    def fake_extract(self, document, schema=None, page_ranges=None):
+        return ExtractionRun(
+            run_id='corr-1', route='openai-direct', provider='openai', model='gpt-5.5', status='timeout',
+            started_at=ai_review.now_iso(), completed_at=ai_review.now_iso(), latency_seconds=1,
+            provider_errors=['APITimeoutError: timed out'],
+            diagnostics=[{'correlation_id': 'corr-1', 'timestamp': ai_review.now_iso(), 'provider': 'openai', 'requested_model': 'gpt-5.5', 'request_stage': 'model_invocation', 'source_document_retrieval_result': True, 'source_content_type': 'application/pdf', 'source_file_size': len(pdf), 'pdf_upload_succeeded': True, 'http_status_code': None, 'provider_error_type': 'APITimeoutError', 'provider_error_code': None, 'sanitised_provider_error_message': 'timed out', 'retryable': True, 'elapsed_time': 1}]
+        )
+    monkeypatch.setattr(ai_review, 'fetch_document', lambda url: Fetch())
+    monkeypatch.setattr(ai_review.OpenAIDirectPDFProvider, 'extract_facts', fake_extract)
+    monkeypatch.setattr(ai_review, '_bt_annual_report_source', lambda: {'source_id': 'bt-annual-report-2026', 'source_name': 'BT Group plc Annual Report 2026', 'url': 'https://www.bt.com/report.pdf', 'source_type': 'annual_report', 'authority_tier': 'tier_1_company_authoritative', 'publisher': 'BT Group plc'})
+
+    run = ai_review.refresh_financial_intelligence()
+
+    assert run['status'] == 'provider_timeout'
+    assert run['support_reference'] == 'FI-corr-1'
+    assert run['provider_diagnostics'][-1]['request_stage'] == 'model_invocation'
+    assert 'sk-' not in str(run['provider_diagnostics'])
+    assert 'Support reference: FI-corr-1' in ai_review._outcome_summary(run)
