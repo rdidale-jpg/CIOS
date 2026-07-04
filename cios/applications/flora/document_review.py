@@ -10,8 +10,8 @@ from html import escape
 from pathlib import Path
 from typing import Any
 
-from experiments.document_understanding.providers import OpenAIDirectPDFProvider
-from experiments.document_understanding.schema import ExperimentDocument, FoundationFact
+from cios.applications.flora.financial_intelligence.openai_provider import OpenAIDirectPDFProvider, openai_sdk_readiness
+from cios.applications.flora.financial_intelligence.schema import ExperimentDocument, FoundationFact
 from cios.applications.flora.memory.service import ObservationMemoryService
 from cios.applications.flora.memory.views import enterprise_memory_panel
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
@@ -46,6 +46,7 @@ FAILURE_MESSAGES = {
     'source_retrieval_failed': 'Flora could not retrieve the financial report.',
     'source_not_pdf': 'Flora could not retrieve the financial report.',
     'provider_not_configured': 'Financial document understanding is temporarily unavailable.',
+    'provider_sdk_unavailable': 'Financial document understanding is temporarily unavailable.',
     'provider_authentication_failed': 'Financial document understanding is temporarily unavailable.',
     'provider_request_failed': 'Financial document understanding could not complete.',
     'provider_quota_exceeded': 'Financial document understanding could not complete.',
@@ -65,6 +66,10 @@ def _provider_failure_category(extraction) -> str:
         return 'provider_request_failed'
     errors = '; '.join(getattr(extraction, 'provider_errors', []) or [])
     status = getattr(extraction, 'status', '')
+    diagnostics = getattr(extraction, 'diagnostics', []) or []
+    diagnostic_types = {d.get('provider_error_type') for d in diagnostics if isinstance(d, dict)}
+    if status == 'not_executed' and 'provider_sdk_unavailable' in diagnostic_types:
+        return 'provider_sdk_unavailable'
     if status == 'not_executed' and 'OPENAI_API_KEY' in errors:
         return 'provider_not_configured'
     return {
@@ -361,8 +366,12 @@ def apply_accepted(run_id: str) -> dict[str, Any]:
     return run
 
 def review_home_page(message: str = '') -> str:
-    provider_ready = bool(os.getenv('OPENAI_API_KEY'))
-    provider_state = 'Available: OpenAI document-understanding credentials are configured.' if provider_ready else 'Unavailable until configured: OPENAI_API_KEY is not set. You can still open this workflow, select an enterprise and prepare the report; processing will show a clear provider configuration error instead of hiding the product capability.'
+    sdk_ready = openai_sdk_readiness()
+    provider_ready = bool(os.getenv('OPENAI_API_KEY')) and sdk_ready['available']
+    if not sdk_ready['available']:
+        provider_state = 'Unavailable: OpenAI Python SDK is not installed in this runtime. OPENAI_API_KEY also must be configured before provider execution.'
+    else:
+        provider_state = 'Available: OpenAI document-understanding credentials are configured.' if provider_ready else 'Unavailable until configured: OPENAI_API_KEY is not set. You can still open this workflow, select an enterprise and prepare the report; processing will show a clear provider configuration error instead of hiding the product capability.'
     notice = f"<p class='pill'>{escape(message)}</p>" if message else ''
     body = f"""<section class='hero'><h1>AI Financial Report Review</h1><p>Upload an authoritative enterprise financial-report PDF. Flora sends the PDF to a genuine AI document-understanding model, returns strict page-grounded claims for review, and only accepted claims update Observation memory and the Commercial Digital Twin.</p>{notice}</section><section class='card'><h2>Provider status</h2><p>{escape(provider_state)}</p><p class='muted'>Provider route: OpenAI direct PDF · Model: {escape(DEFAULT_MODEL)} · The original PDF is sent to the model as a PDF input file when credentials are present.</p></section><section class='card action'><h2>Collect Financial Report</h2><p>Select an enterprise, add the governed annual report PDF, process it, then accept, amend or reject page-grounded candidate facts before they update Observations and the Commercial Digital Twin.</p><p>Default enterprise: BT Group plc · expected document: BT Group Annual Report 2026.</p><form method='post' action='/ai-financial-report/upload' enctype='multipart/form-data'><label>Enterprise</label><select name='enterprise_id'><option value='bt-group-plc'>BT Group plc</option></select><label>Report title</label><input name='title' value='BT Group plc Annual Report 2026'><label>Source URL or citation</label><input name='source_url' value='https://www.bt.com/about/annual-reports/2026summary/assets/files/BT-Annual-Report-2026.pdf'><label>PDF</label><input type='file' name='pdf' accept='application/pdf'><p><button>Process document</button></p></form></section>"""
     return _page('AI Financial Report Review', body)
@@ -374,6 +383,7 @@ def financial_intelligence_admin_health_page() -> str:
     diag = (last.get('provider_diagnostics') or [{}])[-1]
     mode = storage_mode()
     rows = [
+        ('OpenAI SDK import ready', 'yes' if openai_sdk_readiness()['available'] else 'no'),
         ('OpenAI configuration detected', 'yes' if os.getenv('OPENAI_API_KEY') else 'no'),
         ('Configured model', DEFAULT_MODEL),
         ('Last Financial Intelligence run time', last.get('created_at', 'none')),

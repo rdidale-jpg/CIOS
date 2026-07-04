@@ -2,7 +2,45 @@ from experiments.document_understanding.schema import ExtractionRun, FoundationF
 from cios.applications.flora import document_review as ai_review
 from cios.applications.flora.document_review import apply_accepted, create_upload_run, update_reviews
 from cios.applications.flora.memory.repository import EnterpriseModelRepository, ObservationRepository
+from cios.applications.flora.financial_intelligence import openai_provider as prod_openai
 
+
+
+def test_production_openai_adapter_imports_with_sdk_available(monkeypatch):
+    import sys, types
+    class Client:
+        pass
+    monkeypatch.setitem(sys.modules, 'openai', types.SimpleNamespace(OpenAI=Client))
+
+    from cios.applications.flora.financial_intelligence.openai_provider import OpenAIDirectPDFProvider, openai_sdk_readiness
+
+    assert OpenAIDirectPDFProvider(model='gpt-test').model == 'gpt-test'
+    assert openai_sdk_readiness()['available'] is True
+
+
+def test_missing_openai_sdk_is_deployment_defect(monkeypatch, tmp_path):
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-test-secret')
+    monkeypatch.setattr(prod_openai, 'openai_sdk_readiness', lambda: {'available': False, 'provider_error_type': 'provider_sdk_unavailable', 'message': 'OpenAI Python SDK is not installed', 'openai_sdk_version': None})
+    pdf = tmp_path / 'bt.pdf'; pdf.write_bytes(b'%PDF-1.4\nfixture')
+    doc = ai_review.ExperimentDocument(document_id='DOC', enterprise_id='bt-group-plc', title='BT Annual Report', source_url='https://www.bt.com/report.pdf', retrieval_timestamp=ai_review.now_iso(), checksum='x', media_type='application/pdf', page_count=1, local_path=str(pdf))
+
+    extraction = ai_review.OpenAIDirectPDFProvider(model='gpt-test').extract_facts(doc)
+
+    assert extraction.status == 'not_executed'
+    assert extraction.diagnostics[0]['provider_error_type'] == 'provider_sdk_unavailable'
+    assert extraction.diagnostics[0]['retryable'] is False
+    assert ai_review._provider_failure_category(extraction) == 'provider_sdk_unavailable'
+
+
+def test_provider_diagnostic_sanitises_secret_before_logging(caplog):
+    diag = prod_openai._diagnostic(correlation_id='corr-secret', provider='openai', model='gpt-test', stage='model_invocation', provider_error_type='AuthenticationError', provider_error_message='bad key sk-secret123 and Bearer token.secret', retryable=False)
+
+    prod_openai._log_provider_failure(diag)
+
+    text = caplog.text + str(diag)
+    assert 'sk-secret123' not in text
+    assert 'token.secret' not in text
+    assert 'sk-REDACTED' in str(diag)
 
 def fact(**overrides):
     base = dict(
@@ -361,7 +399,7 @@ def test_invalid_and_oversized_pdfs_fail_before_provider_request(monkeypatch, tm
     assert invalid_run.status == 'not_executed'
     assert invalid_run.diagnostics[0]['provider_error_type'] == 'source_not_pdf'
 
-    import experiments.document_understanding.providers as provider_mod
+    from cios.applications.flora.financial_intelligence import openai_provider as provider_mod
     pdf = tmp_path / 'large.pdf'; pdf.write_bytes(b'%PDF-1.4')
     monkeypatch.setattr(provider_mod, 'MAX_RESPONSES_PDF_BYTES', 4)
     large = ai_review.ExperimentDocument(document_id='DOC2', enterprise_id='bt-group-plc', title='BT Annual Report', source_url='https://www.bt.com/report.pdf', retrieval_timestamp=ai_review.now_iso(), checksum='y', media_type='application/pdf', page_count=1, local_path=str(pdf))
