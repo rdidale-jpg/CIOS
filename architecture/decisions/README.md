@@ -2,7 +2,7 @@
 
 **Status:** Living index
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-03
+**Last updated:** 2026-07-04
 
 ## Purpose
 
@@ -38,6 +38,7 @@ Do not create ADRs for small implementation details unless the detail changes ar
 - [ADR-003 — CIRM and EI Separation](ADR-003-CIRM-and-EI-Separation.md)
 - [ADR-004 — Human-Supplied Knowledge Must Be Labelled](ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md)
 - [ADR-005 — No Recommendation Without Inspectable Lineage](ADR-005-No-Recommendation-Without-Inspectable-Lineage.md)
+- [ADR-009 — Observation Identity and Minimal Model Projection](ADR-009-Observation-Identity-and-Minimal-Model-Projection.md)
 
 ## Proposed ADRs
 
