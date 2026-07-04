@@ -2,6 +2,7 @@ from __future__ import annotations
 import base64, json, os, time, uuid
 from pathlib import Path
 from .instructions import EXTRACTION_INSTRUCTIONS
+from pydantic import ValidationError
 from .schema import ExperimentDocument, ExtractionRun, FoundationFactSet, PageRange, now_iso
 RAW_DIR=Path('.document_understanding/raw_responses')
 def _not_executed(route, provider, model, error):
@@ -22,8 +23,17 @@ class OpenAIDirectPDFProvider:
             parsed=schema.model_validate_json(output) if output else FoundationFactSet()
             usage=(getattr(resp,'usage',None).model_dump() if getattr(resp,'usage',None) and hasattr(getattr(resp,'usage'),'model_dump') else (raw.get('usage') or {}))
             return ExtractionRun(run_id=str(uuid.uuid4()),route='openai-direct',provider='openai',model=self.model,model_version=self.model,status='completed',request_id=getattr(resp,'id',None) or raw.get('id'),started_at=start_iso,completed_at=now_iso(),latency_seconds=time.time()-started,usage=usage,raw_response_location=str(raw_path),facts=parsed.facts)
+        except ValidationError as exc:
+            return ExtractionRun(run_id=str(uuid.uuid4()),route='openai-direct',provider='openai',model=self.model,model_version=self.model,status='invalid_response',started_at=start_iso,completed_at=now_iso(),latency_seconds=time.time()-started,schema_errors=[str(exc)],provider_errors=['provider response failed schema validation'])
         except Exception as exc:
-            return ExtractionRun(run_id=str(uuid.uuid4()),route='openai-direct',provider='openai',model=self.model,model_version=self.model,status='failed',started_at=start_iso,completed_at=now_iso(),latency_seconds=time.time()-started,provider_errors=[type(exc).__name__])
+            name=type(exc).__name__
+            message=str(exc) or name
+            lower=message.casefold()
+            if 'auth' in lower or 'api key' in lower or name in {'AuthenticationError', 'PermissionDeniedError'}:
+                status='authentication_failed'
+            else:
+                status='failed'
+            return ExtractionRun(run_id=str(uuid.uuid4()),route='openai-direct',provider='openai',model=self.model,model_version=self.model,status=status,started_at=start_iso,completed_at=now_iso(),latency_seconds=time.time()-started,provider_errors=[f'{name}: {message}'])
 class AnthropicDirectPDFProvider:
     def __init__(self, model='claude-sonnet-4-5'): self.model=model
     def extract_facts(self, document, schema=FoundationFactSet, page_ranges=None):
