@@ -33,3 +33,18 @@
 | Outcome capture | Outcomes improve reasoning | Feedback/logbook JSONL; learned score adjustment | `workspace/feedback.py`, `live/aggregation.py` | Partially aligned | Medium | Pilot learning possible | Not linked to recommendations | Recommendation IDs/model | Link outcomes later |
 | Continuous learning | Use improves future reasoning | Learned evidence score exists; no model calibration lifecycle | `live/aggregation.py` | Partially aligned | High | Limited improvement | Learning ungoverned | Outcomes/model | Defer until memory foundation |
 | Architecture test coverage | Doctrine protected by tests | Good tests for no LLM/db, evidence gates, Observatory lineage | `tests/test_flora_live.py`, `tests/test_flora_observatory.py`, `tests/test_flora_runtime_alignment.py` | Partially aligned | High | Prevents some drift | Core memory doctrines untested | New objects | Add architecture tests with sprint |
+
+## 2026-07-04 Implementation Delta — Observation-backed Enterprise Memory Foundation
+
+| Row updated | New runtime status | Implementation evidence | Remaining limitation |
+| --- | --- | --- | --- |
+| Observation creation | Aligned for accepted live Evidence foundation | `cios/applications/flora/memory/models.py`, `service.py` validate atomic, non-speculative, non-Recommendation Observations | Extraction still creates one observation candidate per accepted receipt |
+| Observation persistence | Partially aligned | Durable JSONL ledger at `.flora_pilot/memory/observations.jsonl` via `ObservationRepository` | File-backed, not a production database |
+| Observation deduplication | Partially aligned | Deterministic Observation fingerprint plus corroborating Evidence ID merge | No governed semantic similarity matching yet |
+| Observation-to-model updates | Partially aligned | `ObservationMemoryService.apply_observation` applies accepted Observations to model attributes | Minimal domains only |
+| Enterprise Model persistence | Partially aligned | Per-enterprise JSON projection under `.flora_pilot/memory/enterprise_models/` | Not full EI-001 model |
+| Freshness and decay | Partially aligned | Model attributes store freshness and last observed date | No decay formula |
+| Confidence | Partially aligned | Confidence stored separately from importance and commercial value | No confidence calibration redesign |
+| Contradictions | Partially aligned | Conflicting Observations coexist and model attributes expose contradiction state | No automatic resolution workflow |
+| Unknowns | Partially aligned | Explicit persisted Unknown records for unsupported model state | Minimal lifecycle only |
+| Report-as-view | Partially aligned | Organisation Observatory page renders maintained Enterprise Memory panel | Other reports still render generated objects |
