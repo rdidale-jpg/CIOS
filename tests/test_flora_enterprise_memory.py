@@ -166,3 +166,54 @@ def test_duplicate_memory_implementation_is_not_active() -> None:
     assert hasattr(service_module, "ObservationMemoryService")
     with pytest.raises(ModuleNotFoundError):
         __import__("cios.applications.flora.memory.enterprise_memory")
+
+
+def test_compound_financial_sentence_decomposes_to_atomic_claims(tmp_path: Path) -> None:
+    from cios.applications.flora.memory.service import decompose_factual_claims
+    item = evidence("EV-FIN", "Revenue was £20.4bn, adjusted EBITDA was £8.2bn and normalised free cash flow was £1.3bn.") | {"organisation": "BT Group plc"}
+    claims = decompose_factual_claims(item)
+    assert [c.affected_attribute for c in claims] == [
+        "financial_performance.metrics.revenue.reported period.actual",
+        "financial_performance.metrics.adjusted_ebitda.reported period.actual",
+        "financial_performance.metrics.normalised_free_cash_flow.reported period.actual",
+    ]
+    assert [(c.value, c.unit, c.currency, c.state) for c in claims] == [(20.4, "billion", "GBP", "actual"), (8.2, "billion", "GBP", "actual"), (1.3, "billion", "GBP", "actual")]
+    svc = service(tmp_path)
+    report = svc.process_evidence(item)
+    assert report.factual_claims_accepted == 3
+    assert len(svc.observations.list()) == 3
+
+
+def test_organisation_strategy_and_leadership_decompose_separately(tmp_path: Path) -> None:
+    svc = service(tmp_path)
+    org = svc.process_evidence(evidence("EV-ORG", "BT reports Consumer, Business, International and Openreach as customer-facing units, while Digital and Networks provide group capabilities.") | {"organisation": "BT Group plc"})
+    strat = svc.process_evidence(evidence("EV-STR", "BT's strategy is Build, Connect and Accelerate, with a target to achieve X by FY29.") | {"organisation": "BT Group plc"})
+    lead = svc.process_evidence(evidence("EV-LEAD", "Allison Kirkby held the role of Group Chief Executive.") | {"organisation": "BT Group plc"})
+    statements = [o.atomic_statement for o in svc.observations.list()]
+    assert org.factual_claims_accepted == 6
+    assert "Consumer is a disclosed BT customer-facing business unit." in statements
+    assert "Networks is a disclosed internal BT capability." in statements
+    assert strat.factual_claims_accepted == 5
+    assert "Build is a stated BT strategic pillar." in statements
+    assert "BT stated the strategic target date as FY29." in statements
+    assert lead.factual_claims_accepted == 1
+    assert "Allison Kirkby held the role of Group Chief Executive at BT." in statements
+
+
+def test_invalid_claim_isolated_and_successes_persist(tmp_path: Path) -> None:
+    svc = service(tmp_path)
+    item = evidence("EV-MIX", "Revenue was £20.4bn and BT may launch Project Falcon.") | {"organisation": "BT Group plc"}
+    report = svc.process_evidence(item)
+    assert report.factual_claims_accepted == 1
+    assert report.factual_claims_rejected == 0  # deterministic extraction ignores non-factual interpretation fragment
+    bad = svc.process_evidence(evidence("EV-BAD", "BT may launch Project Falcon.") | {"organisation": "BT Group plc"})
+    assert bad.factual_claims_rejected == 1
+    assert len(svc.observations.list()) == 1
+    assert svc.models.get("bt-group-plc").attributes
+
+
+def test_evidence_primary_dispositions_reconcile_without_secondary_inflation() -> None:
+    manifest = {"evidence_candidates": 4, "evidence_accepted": 1, "evidence_rejected": 1, "evidence_downgraded": 1, "evidence_duplicate": 1, "evidence_context_only": 2}
+    primary_total = manifest["evidence_accepted"] + manifest["evidence_rejected"] + manifest["evidence_downgraded"] + manifest["evidence_duplicate"]
+    assert manifest["evidence_candidates"] == primary_total
+    assert manifest["evidence_candidates"] != primary_total + manifest["evidence_context_only"]
