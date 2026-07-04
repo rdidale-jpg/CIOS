@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Iterable
 
 from cios.applications.flora.memory.models import EnterpriseModel, Observation
+from cios.applications.flora.live.source_registry import canonical_enterprise_id
 
 OBSERVATION_LEDGER_PATH = Path(".flora_pilot/memory/observations.jsonl")
 ENTERPRISE_MODEL_DIR = Path(".flora_pilot/memory/enterprise_models")
@@ -21,7 +22,7 @@ _SAFE_ID = re.compile(r"[^a-z0-9_-]+")
 
 
 def _safe_enterprise_file_id(enterprise_id: str) -> str:
-    raw = str(enterprise_id or "unknown").strip()
+    raw = str(canonical_enterprise_id(enterprise_id) or enterprise_id or "unknown").strip()
     folded = raw.casefold()
     slug = _SAFE_ID.sub("_", folded).strip("._-") or "unknown"
     slug = slug[:48]
@@ -107,12 +108,14 @@ class EnterpriseModelRepository:
         return path
 
     def get(self, enterprise_id: str) -> EnterpriseModel:
+        enterprise_id = canonical_enterprise_id(enterprise_id) or enterprise_id
         path = self.path_for(enterprise_id)
         if not path.exists():
             return EnterpriseModel(enterprise_id=enterprise_id)
         return EnterpriseModel.from_dict(json.loads(path.read_text(encoding="utf-8")))
 
     def save(self, model: EnterpriseModel) -> EnterpriseModel:
+        model.enterprise_id = canonical_enterprise_id(model.enterprise_id) or model.enterprise_id
         path = self.path_for(model.enterprise_id)
         path.parent.mkdir(parents=True, exist_ok=True)
         tmp = path.with_name(f".{path.name}.tmp")
