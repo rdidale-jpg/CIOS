@@ -132,6 +132,7 @@ def decompose_factual_claims(item: dict[str, Any]) -> list[FactualClaim]:
 class EvidenceProcessingReport:
     results: list[ModelUpdateResult]
     rejected_claims: list[dict[str, Any]]
+    decomposition_diagnostic: dict[str, Any] | None = None
     factual_claims_extracted: int = 0
     factual_claims_accepted: int = 0
     factual_claims_rejected: int = 0
@@ -160,7 +161,29 @@ class ObservationMemoryService:
 
     def process_evidence(self, item: dict[str, Any]) -> EvidenceProcessingReport:
         report = EvidenceProcessingReport([], [])
+        evidence_class = str(item.get("evidence_class") or item.get("commercial_condition") or item.get("mapped_condition") or "unknown")
         claims = decompose_factual_claims(item); report.factual_claims_extracted = len(claims)
+        decomposer = "canonical_decompose_factual_claims"
+        message = "" if claims else "Decomposer returned zero claims"
+        report.decomposition_diagnostic = {
+            "evidence_id": _evidence_id(item),
+            "source_id": item.get("source_id"),
+            "evidence_class": evidence_class,
+            "decomposition_function": decomposer,
+            "decomposer_selected": decomposer,
+            "claims_generated": len(claims),
+            "message": message,
+            "claim_ids": [c.candidate_id for c in claims],
+            "claim_types": [c.claim_type for c in claims],
+            "atomic_statements": [c.atomic_statement for c in claims],
+            "model_domains": [c.model_domain for c in claims],
+            "affected_attributes": [c.affected_attribute for c in claims],
+            "structured_values": [c.value for c in claims],
+            "periods": [c.period for c in claims],
+            "states": [c.state for c in claims],
+            "page_lineage": [c.page_reference for c in claims],
+            "confidence": [c.confidence for c in claims],
+        }
         for claim in claims:
             try:
                 validate_factual_claim(claim)
@@ -198,6 +221,14 @@ class ObservationMemoryService:
                     "validation_rule": reason.split(":", 1)[0],
                     "rejection_reason": reason,
                     "exception_type": type(exc).__name__,
+                    "failed_processing_stage": "mapping" if failed_validation == "mapping" else ("observation_validation" if failed_validation == "observation" else "claim_validation"),
+                    "failed_invariant": reason.split(":", 1)[0],
+                    "stack_location": "cios.applications.flora.memory.service.ObservationMemoryService.process_evidence",
+                    "responsible_function": "ObservationMemoryService.process_evidence",
+                    "source_page": claim.page_reference,
+                    "source_excerpt": str(item.get("extracted_text") or item.get("snippet") or item.get("cleaned_observation") or "")[:500],
+                    "domain": claim.model_domain,
+                    "proposed_observation_statement": claim.atomic_statement,
                     "problem_stage": "mapping" if failed_validation == "mapping" else ("validation" if failed_validation == "observation" else "extraction"),
                     "intended_domain": claim.model_domain,
                 })

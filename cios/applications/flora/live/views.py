@@ -14,6 +14,7 @@ from cios.applications.flora.live.aggregation import aggregate_live_evidence, un
 from cios.applications.flora.portfolio import source_effectiveness_rows
 from cios.applications.flora.url_utils import link_or_label
 from cios.applications.flora.live.source_registry import collection_scope, profile_sources
+from cios.applications.flora.live.runtime import application_revision
 
 
 def live_banner_html() -> str:
@@ -48,15 +49,19 @@ def dashboard() -> str:
 
 def collection_progress_page() -> str:
     state = read_state()
-    links = "<a href='/live/evidence'>View accepted Evidence</a> · <a href='/observatory/BT'>View Observations</a> · <a href='/digital-twin/bt-group-plc' id='bt-digital-twin-link'>Open BT Digital Twin</a> · <a href='/live/collect/start'>Run recollection test</a>"
-    body = f"""<h1>Live collection progress</h1><section class='card ok'><h2>Status: <span id='status'>{escape(str(state.get('status')))}</span></h2><div style='background:#eee;border-radius:999px;overflow:hidden'><div id='bar' style='width:{state.get('percent_complete',0)}%;background:#185c4d;color:white;padding:8px'>{state.get('percent_complete',0)}%</div></div><dl id='run-fields'></dl><p>{links}</p></section><section class='card'><h2>Source and Evidence counters</h2><table><tbody id='counter-rows'></tbody></table></section><section class='card warn'><h2>Warnings and concise errors</h2><ul id='warnings'></ul><ul id='errors'></ul><details><summary>Analyst diagnostics</summary><pre id='diagnostics'></pre></details></section><script>
+    run_id = str(state.get('run_id') or '')
+    rejected_count = int(state.get('observations_rejected') or 0) + len(state.get('rejected_claims') or [])
+    rejected_link = f" · <a href='/live/rejected-claims?run_id={escape(run_id)}' id='rejected-claims-link'>View rejected factual claims</a>" if rejected_count > 0 else ""
+    links = "<a href='/live/evidence'>View accepted Evidence</a> · <a href='/observatory/BT'>View Observations</a> · <a href='/digital-twin/bt-group-plc' id='bt-digital-twin-link'>Open BT Digital Twin</a> · <a href='/live/collect/start'>Run recollection test</a>" + rejected_link
+    body = f"""<h1>Live collection progress</h1><p>Application revision: {escape(str(state.get('application_revision') or application_revision()))}</p><section class='card ok'><h2>Status: <span id='status'>{escape(str(state.get('status')))}</span></h2><div style='background:#eee;border-radius:999px;overflow:hidden'><div id='bar' style='width:{state.get('percent_complete',0)}%;background:#185c4d;color:white;padding:8px'>{state.get('percent_complete',0)}%</div></div><dl id='run-fields'></dl><p>{links}</p></section><section class='card'><h2>Source and Evidence counters</h2><table><tbody id='counter-rows'></tbody></table></section><section class='card warn'><h2>Warnings and concise errors</h2><ul id='warnings'></ul><ul id='errors'></ul><details><summary>Analyst diagnostics</summary><pre id='diagnostics'></pre></details></section><script>
 const terminal = new Set(['completed','completed_with_no_accepted_intelligence','failed','interrupted','completed successfully','Completed with no accepted intelligence']);
 function esc(x){{return String(x ?? '').replace(/[&<>]/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;'}}[c]));}}
 function render(s){{
  document.getElementById('status').textContent=s.status; const pct=s.percent_complete||0; const bar=document.getElementById('bar'); bar.style.width=pct+'%'; bar.textContent=pct+'%';
  const fields=['run_id','enterprise_display_name','canonical_enterprise_id','profile_id','collection_mode','collection_pass','started_at','completed_at','current_source_name','latest_message'];
  document.getElementById('run-fields').innerHTML=fields.map(k=>`<dt>${{esc(k.replaceAll('_',' '))}}</dt><dd>${{esc(s[k])}}</dd>`).join('');
- const counters=['sources_total','sources_attempted','sources_retrieved','sources_failed','documents_retrieved','pdfs_parsed','pages_extracted','tables_detected','evidence_candidates','evidence_accepted','evidence_rejected','evidence_downgraded','evidence_context_only','evidence_duplicate','evidence_corroborated','evidence_extraction_failed','observations_created','observations_corroborated','model_attributes_created','model_attributes_changed'];
+ if ((Number(s.observations_rejected||0) + ((s.rejected_claims||[]).length)) > 0 && !document.getElementById('rejected-claims-link')) {{ document.querySelector('section.card.ok p').insertAdjacentHTML('beforeend', ` · <a href='/live/rejected-claims?run_id=${{esc(s.run_id)}}' id='rejected-claims-link'>View rejected factual claims</a>`); }}
+ const counters=['sources_total','sources_attempted','sources_retrieved','sources_failed','documents_retrieved','pdfs_parsed','pages_extracted','tables_detected','evidence_candidates','evidence_accepted','evidence_rejected','evidence_downgraded','evidence_context_only','evidence_duplicate','evidence_corroborated','evidence_extraction_failed','observations_created','observations_corroborated','observations_rejected','model_attributes_created','model_attributes_changed'];
  document.getElementById('counter-rows').innerHTML=counters.filter(k=>Number(s[k]||0)!==0 || ['sources_total','sources_attempted','evidence_candidates'].includes(k)).map(k=>`<tr><th>${{esc(k.replaceAll('_',' '))}}</th><td>${{esc(s[k]||0)}}</td></tr>`).join('');
  document.getElementById('warnings').innerHTML=(s.warnings||[]).map(w=>`<li>${{esc(w.message||w)}}</li>`).join('') || '<li>None</li>';
  document.getElementById('errors').innerHTML=(s.errors||[]).map(e=>`<li>${{esc(e.source_name||e.source_id||'Collection')}} — Failed: ${{esc(e.http_status ? 'HTTP '+e.http_status : (e.error||e.message||'unknown'))}}</li>`).join('') || '<li>None</li>';
@@ -87,16 +92,22 @@ def collection_result(result: dict[str, Any]) -> str:
     fixes = "".join(f"<li>{escape(str(x))}</li>" for x in result.get("source_improvement_recommendations", [])[:20]) or "<li>None</li>"
     manifest = result.get("collection_manifest") or {}
     issue_items = "".join(f"<li>{escape(str(x))}</li>" for x in manifest.get("warnings", [])[:5]) or "<li>No claim-level issues recorded.</li>"
-    rejected_link = "<a href='/live/rejected-claims'>View rejected factual claims</a>"
+    run_id = str(manifest.get("run_id") or "")
+    rejected_link = f"<a href='/live/rejected-claims?run_id={escape(run_id)}'>View rejected factual claims</a>" if (int(manifest.get("observations_rejected") or 0) > 0 or manifest.get("rejected_claims")) else ""
     summary = f"<p>Evidence accepted: {result.get('accepted_evidence_count', result['evidence_objects_extracted'])} · Factual claims extracted: {manifest.get('factual_claims_extracted',0)} · Observations created: {manifest.get('observations_created',0)} · Observations rejected: {manifest.get('observations_rejected',0)} · Model attributes created: {manifest.get('model_attributes_created',0)}</p>"
-    links = "<a href='/digital-twin/bt-group-plc'>Open BT Digital Twin</a> · <a href='/live/evidence'>View accepted Evidence</a> · <a href='/observatory'>View Observations</a> · " + rejected_link
-    return _page("Flora Live Collection Result", f"<h1>Live collection complete</h1><section class='card'><h2>Status: {escape(str(result.get('result_state','')).replace('_',' ').title())}</h2><p>Run ID: {escape(str(manifest.get('run_id','')))} · Started: {escape(str(manifest.get('started_at','')))} · Completed: {escape(str(manifest.get('completed_at','')))}</p><p>Selected enterprise: {escape(str(result.get('canonical_enterprise_id','')))} · Profile: {escape(str(manifest.get('profile_id','')))} · Mode: {escape(str(result.get('collection_mode','')))}</p>{summary}<h3>Issues</h3><ul>{issue_items}</ul><p>{links}</p><details><summary>Analyst diagnostics</summary><p>Attempted {result['sources_attempted']} sources; succeeded {result['sources_succeeded']}; failed {result['sources_failed']}; produced evidence from {result.get('sources_with_evidence', 0)} sources; rejected {result.get('rejected_evidence_count',0)}; downgraded {result.get('downgraded_evidence_count',0)}; primary {result.get('primary_evidence_count',0)}; secondary {result.get('secondary_evidence_count',0)}; context-only {result.get('context_only_count',0)}; added {result['new_evidence_added']} new; skipped {result['duplicate_evidence_skipped']} duplicates; total unique evidence objects: {result['total_unique_evidence_objects']}.</p></details></section><section class='card'><h2>Source performance dashboard</h2><h3>Top 10 highest-yield sources</h3><ul>{mini(top_yield)}</ul><h3>Top 10 noisiest sources</h3><ul>{mini(noisy)}</ul><h3>Sources producing only boilerplate</h3><ul>{mini(only_boiler)}</ul><h3>Recommended source improvements</h3><ul>{fixes}</ul></section>{delta_html}<table><thead><tr><th>Source ID</th><th>Organisation</th><th>Source</th><th>Type</th><th>Source class</th><th>URL</th><th>Status</th><th>HTTP/error</th><th>Accepted</th><th>Rejected</th><th>Primary</th><th>Secondary</th><th>Context</th><th>Failure reason</th><th>Recommended fix</th></tr></thead><tbody>{rows}</tbody></table>")
+    links = "<a href='/digital-twin/bt-group-plc'>Open BT Digital Twin</a> · <a href='/live/evidence'>View accepted Evidence</a> · <a href='/observatory'>View Observations</a>" + ((" · " + rejected_link) if rejected_link else "")
+    return _page("Flora Live Collection Result", f"<h1>Live collection complete</h1><section class='card'><h2>Status: {escape(str(result.get('result_state','')).replace('_',' ').title())}</h2><p>Application revision: {escape(str(manifest.get('application_revision') or application_revision()))} · Run ID: {escape(str(manifest.get('run_id','')))} · Started: {escape(str(manifest.get('started_at','')))} · Completed: {escape(str(manifest.get('completed_at','')))}</p><p>Selected enterprise: {escape(str(result.get('canonical_enterprise_id','')))} · Profile: {escape(str(manifest.get('profile_id','')))} · Mode: {escape(str(result.get('collection_mode','')))}</p>{summary}<h3>Issues</h3><ul>{issue_items}</ul><p>{links}</p><details><summary>Analyst diagnostics</summary><p>Attempted {result['sources_attempted']} sources; succeeded {result['sources_succeeded']}; failed {result['sources_failed']}; produced evidence from {result.get('sources_with_evidence', 0)} sources; rejected {result.get('rejected_evidence_count',0)}; downgraded {result.get('downgraded_evidence_count',0)}; primary {result.get('primary_evidence_count',0)}; secondary {result.get('secondary_evidence_count',0)}; context-only {result.get('context_only_count',0)}; added {result['new_evidence_added']} new; skipped {result['duplicate_evidence_skipped']} duplicates; total unique evidence objects: {result['total_unique_evidence_objects']}.</p></details></section><section class='card'><h2>Source performance dashboard</h2><h3>Top 10 highest-yield sources</h3><ul>{mini(top_yield)}</ul><h3>Top 10 noisiest sources</h3><ul>{mini(noisy)}</ul><h3>Sources producing only boilerplate</h3><ul>{mini(only_boiler)}</ul><h3>Recommended source improvements</h3><ul>{fixes}</ul></section>{delta_html}<table><thead><tr><th>Source ID</th><th>Organisation</th><th>Source</th><th>Type</th><th>Source class</th><th>URL</th><th>Status</th><th>HTTP/error</th><th>Accepted</th><th>Rejected</th><th>Primary</th><th>Secondary</th><th>Context</th><th>Failure reason</th><th>Recommended fix</th></tr></thead><tbody>{rows}</tbody></table>")
 
 
-def rejected_claims_page() -> str:
+def rejected_claims_page(run_id: str | None = None) -> str:
     manifest_dir = Path(".flora_pilot/collection_manifests")
     manifests = sorted(manifest_dir.glob("*.json"), key=lambda p: p.stat().st_mtime, reverse=True) if manifest_dir.exists() else []
-    manifest = json.loads(manifests[0].read_text(encoding="utf-8")) if manifests else {}
+    manifest = {}
+    if run_id:
+        candidate = manifest_dir / f"{run_id}.json"
+        manifest = json.loads(candidate.read_text(encoding="utf-8")) if candidate.exists() else {"run_id": run_id, "not_found": True}
+    elif manifests:
+        manifest = json.loads(manifests[0].read_text(encoding="utf-8"))
     claims = manifest.get("rejected_claims") or []
     rows = "".join(
         "<tr>"
@@ -110,7 +121,7 @@ def rejected_claims_page() -> str:
         "</tr>"
         for c in claims
     )
-    body = f"""<h1>Rejected factual claims</h1><section class='card'><p>Run ID: {escape(str(manifest.get('run_id','latest')))} · Rejected claims: {len(claims)}</p><table><thead><tr><th>Claim</th><th>Source</th><th>Page</th><th>Failed validation</th><th>Reason</th><th>Intended domain</th><th>Problem stage</th></tr></thead><tbody>{rows or '<tr><td colspan="7">No rejected factual claims recorded.</td></tr>'}</tbody></table></section>"""
+    body = f"""<h1>Rejected factual claims</h1><section class='card'><p>Application revision: {escape(str(manifest.get('application_revision') or application_revision()))} · Run ID: {escape(str(manifest.get('run_id','latest')))} · Rejected claims: {len(claims)}</p><table><thead><tr><th>Claim</th><th>Source</th><th>Page</th><th>Failed validation</th><th>Reason</th><th>Intended domain</th><th>Problem stage</th></tr></thead><tbody>{rows or '<tr><td colspan="7">No rejected factual claims recorded.</td></tr>'}</tbody></table></section>"""
     return _page("Rejected factual claims", body)
 
 

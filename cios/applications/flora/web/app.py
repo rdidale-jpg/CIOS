@@ -64,7 +64,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path == "/live/status":
                 self._json(current_status())
             elif parsed.path == "/live/rejected-claims":
-                self._html(rejected_claims_page())
+                self._html(rejected_claims_page(run_id=(parse_qs(parsed.query).get("run_id") or [None])[0]))
             elif parsed.path == "/live/sources":
                 self._html(sources_page())
             elif parsed.path == "/live/acquisition-plans":
