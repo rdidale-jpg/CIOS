@@ -36,8 +36,12 @@ Start here:
 2. [Reference Architecture README](README.md)
 3. [CIOS Reference Architecture v1.0](CIOS-Reference-Architecture-v1.0.md)
 4. [CIOS Design Doctrine](CIOS-Design-Doctrine.md)
-5. [Document Map](Document-Map.md)
-6. [ADR README](../decisions/README.md)
+5. [CIOS Chief Architect Handbook](../handbook/CIOS-Chief-Architect-Handbook.md)
+6. [Glossary](Glossary.md)
+7. [Document Map](Document-Map.md)
+8. [ADR README](../decisions/README.md)
+
+Read the handbook before major architecture, commercial reasoning, review or Codex work. It teaches judgement and stewardship; detailed architecture remains governed by the Reference Architecture, Accepted ADRs and owning papers.
 
 Use Founding Papers for CIRM process standards and Enterprise Intelligence papers for the Commercial Digital Twin model.
 

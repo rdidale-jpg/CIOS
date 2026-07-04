@@ -12,6 +12,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | --- | --- | --- | --- | --- |
 | [CIOS AI Context](../../CIOS-AI.md) | Defines AI assistant and Codex working rules for CIOS. | Present | repo root | Required starting point for AI-assisted work. |
 | [CIOS Design Doctrine](CIOS-Design-Doctrine.md) | Captures design philosophy and reasoning style. | Present | `architecture/reference-architecture/` | Explains why CIOS is evidence-first, observation-led and model-centred. |
+| [CIOS Chief Architect Handbook](../handbook/CIOS-Chief-Architect-Handbook.md) | Defines how the Chief Architect thinks, decides, challenges, collaborates, implements, reviews and learns. | Editorial Draft | `architecture/handbook/` | Operating companion that teaches stewardship and application of CIOS architecture without replacing detailed model authority. |
 | [AI Session Handoff](AI-Session-Handoff.md) | Provides a short briefing and ready-to-copy prompt for new AI sessions. | Present | `architecture/reference-architecture/` | Makes project memory portable across sessions. |
 
 ## Architecture Decision Records
@@ -86,9 +87,11 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 
 1. Start with [CIOS AI Context](../../CIOS-AI.md).
 2. Read [CIOS Reference Architecture v1.0](CIOS-Reference-Architecture-v1.0.md).
-3. Use the [Glossary](Glossary.md) for terms.
-4. Read [Architecture Principles](Architecture-Principles.md) and [CIOS Design Doctrine](CIOS-Design-Doctrine.md).
-5. Read Founding Papers FP-003 to FP-009 to understand CIRM.
-6. Read Enterprise Intelligence papers EI-001 to EI-012 to understand the Commercial Digital Twin.
-7. Read relevant [ADRs](../decisions/README.md).
-8. Read runtime architecture documents before changing Flora, Newton, Observatory or Publisher behaviour.
+3. Read [CIOS Design Doctrine](CIOS-Design-Doctrine.md).
+4. Read the [CIOS Chief Architect Handbook](../handbook/CIOS-Chief-Architect-Handbook.md) for judgement and working practice.
+5. Use the [Glossary](Glossary.md) for terms.
+6. Read [Architecture Principles](Architecture-Principles.md).
+7. Read Founding Papers FP-003 to FP-009 to understand CIRM.
+8. Read Enterprise Intelligence papers EI-001 to EI-012 to understand the Commercial Digital Twin.
+9. Read relevant [ADRs](../decisions/README.md).
+10. Read runtime architecture documents before changing Flora, Newton, Observatory or Publisher behaviour.
