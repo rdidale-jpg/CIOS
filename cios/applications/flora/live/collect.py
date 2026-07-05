@@ -222,7 +222,7 @@ def collect(organisation: str | None = None, *, profile_id: str | None = None, c
     update_state(status="creating_observations", latest_message="Creating Observations from accepted Evidence.")
     memory_service = ObservationMemoryService()
     accepted_diagnostics = [accepted_evidence_diagnostic(item) for item in new_evidence]
-    processing_reports = [memory_service.process_evidence(item) for item in new_evidence if item.get("foundation_eligible")]
+    processing_reports = [memory_service.process_evidence(item) for item in new_evidence]
     memory_results = [result for report in processing_reports for result in report.results]
     rejected_claims = [claim for report in processing_reports for claim in report.rejected_claims]
     decomposition_diagnostics = [report.decomposition_diagnostic for report in processing_reports if report.decomposition_diagnostic]
