@@ -77,8 +77,8 @@ PACKAGE_RECOGNITION_FAILURE_CODES={
     'ixbrl_report_not_found','multiple_ixbrl_reports_ambiguous','report_package_manifest_invalid',
     'unsupported_esef_package_layout','taxonomy_entrypoint_not_found','structured_report_locator_failed'
 }
-TEXT_EXTENSIONS=('.xhtml','.html','.xml','.xsd','.json','.txt','.csv')
-REPORT_EXTENSIONS=('.xhtml','.html')
+TEXT_EXTENSIONS=('.xhtml','.html','.htm','.xml','.xsd','.json','.txt','.csv')
+REPORT_EXTENSIONS=('.xhtml','.html','.htm')
 INSTANCE_EXTENSIONS=('.xbrl','.xml')
 TAXONOMY_EXTENSIONS=('.xsd','.xml')
 NESTED_ARCHIVE_EXTENSIONS=('.zip','.jar','.7z','.tar','.gz','.tgz','.bz2','.xz')
@@ -92,29 +92,54 @@ def _safe_parts(name:str)->tuple[str,...]:
     return Path(name.replace('\\','/')).parts
 
 
+def _is_directory_entry(info:zipfile.ZipInfo)->bool:
+    return info.filename.replace('\\','/').endswith('/') or ((info.external_attr >> 16) & 0o170000) == 0o040000
+
+
+def _classify_archive_entry(name:str)->str:
+    lower=name.replace('\\','/').lower()
+    base=lower.rsplit('/',1)[-1]
+    if lower.endswith(REPORT_EXTENSIONS): return 'html_container'
+    if base == 'catalog.xml' or lower.endswith('/catalog.xml'): return 'catalog_metadata'
+    if base in {'taxonomypackage.xml','taxonomy-package.xml'} or lower.endswith('/taxonomypackage.xml') or lower.endswith('/taxonomy-package.xml'): return 'taxonomy_package_metadata'
+    if lower.endswith('.xsd'): return 'extension_schema'
+    if lower.endswith(('_pre.xml','-pre.xml','_def.xml','-def.xml','_lab.xml','-lab.xml','_lab-en.xml','-lab-en.xml','_cal.xml','-cal.xml')): return 'linkbase'
+    if lower.endswith('.xbrl'): return 'xbrl_instance'
+    if lower.endswith('.xml'): return 'xml_metadata_or_support'
+    return 'other'
+
+
 def inspect_archive(path:Path,cfg:dict[str,Any])->dict[str,Any]:
-    diag={'central_directory_readable':False,'archive_entry_count':0,'total_compressed_size':0,
+    diag={'central_directory_readable':False,'archive_entry_count':0,'file_entry_count':0,
+          'directory_entry_count':0,'total_compressed_size':0,
           'total_expanded_size':0,'maximum_single_entry_size':0,'duplicate_entry_names':[],
           'encrypted_entries':[],'absolute_paths':[],'traversal_paths':[],'symlinks':[],
           'unsupported_entry_types':[],'crc_failures':[],'nested_archives':[],
-          'first_failing_safety_rule':None,'top_level_directories':[],
-          'candidate_xhtml_html':[],'candidate_xml':[],'candidate_xsd_taxonomy':[],
-          'candidate_inline_xbrl_reports':[],'candidate_xbrl_instances':[],
-          'taxonomy_package_metadata':[],'report_package_metadata':[],
-          'manifest_files':[],'locator_decision':None,'locator_reason':None}
+          'first_failing_safety_rule':None,'top_level_directories':[],'top_level_files':[],
+          'candidate_xhtml_html':[],'candidate_html_paths':[],'candidate_xml':[],'candidate_xsd_taxonomy':[],
+          'candidate_inline_xbrl_reports':[],'candidate_xbrl_instances':[],'standalone_xbrl_instances':[],
+          'extension_schemas':[],'linkbases':[],
+          'taxonomy_package_metadata':[],'catalog_metadata':[],'report_package_metadata':[],
+          'manifest_files':[],'locator_decision':None,'locator_reason':None,
+          'inline_xbrl_marker_results':[],'identity_result':None,'period_result':None,
+          'selected_report_path':None,'selection_reason':None}
     try:
         with zipfile.ZipFile(path) as z:
             infos=z.infolist(); diag['central_directory_readable']=True; diag['archive_entry_count']=len(infos)
-            seen=set(); dups=[]; tops=set()
+            seen=set(); dups=[]; top_dirs=set(); top_files=set()
             for info in infos:
-                name=info.filename; norm=name.replace('\\','/')
+                name=info.filename; norm=name.replace('\\','/'); is_dir=_is_directory_entry(info)
                 if name in seen: dups.append(name)
                 seen.add(name)
                 parts=_safe_parts(name)
-                if parts and parts[0] not in ('/','..') and not parts[0].endswith(':'): tops.add(parts[0].rstrip('/'))
+                if parts and parts[0] not in ('/','..') and not parts[0].endswith(':'):
+                    if len(parts)==1 and not is_dir: top_files.add(parts[0])
+                    else: top_dirs.add(parts[0].rstrip('/'))
+                if is_dir: diag['directory_entry_count']+=1
+                else: diag['file_entry_count']+=1
                 diag['total_compressed_size']+=info.compress_size; diag['total_expanded_size']+=info.file_size
                 diag['maximum_single_entry_size']=max(diag['maximum_single_entry_size'], info.file_size)
-                lower=norm.lower()
+                lower=norm.lower(); kind=_classify_archive_entry(norm)
                 if info.flag_bits & 0x1: diag['encrypted_entries'].append(name)
                 if norm.startswith('/') or (len(parts)>0 and (parts[0]=='/' or parts[0].endswith(':'))): diag['absolute_paths'].append(name)
                 if '..' in parts: diag['traversal_paths'].append(name)
@@ -122,27 +147,29 @@ def inspect_archive(path:Path,cfg:dict[str,Any])->dict[str,Any]:
                 mode=(info.external_attr >> 16) & 0o170000
                 if mode and mode not in (0o100000,0o040000,0): diag['unsupported_entry_types'].append(name)
                 if lower.endswith(NESTED_ARCHIVE_EXTENSIONS): diag['nested_archives'].append(name)
-                if lower.endswith(REPORT_EXTENSIONS): diag['candidate_xhtml_html'].append(name)
+                if kind == 'html_container': diag['candidate_xhtml_html'].append(name); diag['candidate_html_paths'].append(name)
                 if lower.endswith('.xml'): diag['candidate_xml'].append(name)
                 if lower.endswith(TAXONOMY_EXTENSIONS): diag['candidate_xsd_taxonomy'].append(name)
-                if lower.endswith(('.xbrl','.xml')): diag['candidate_xbrl_instances'].append(name)
-                if 'taxonomy-package.xml' in lower: diag['taxonomy_package_metadata'].append(name)
+                if kind == 'xbrl_instance': diag['candidate_xbrl_instances'].append(name); diag['standalone_xbrl_instances'].append(name)
+                if kind == 'extension_schema': diag['extension_schemas'].append(name)
+                if kind == 'linkbase': diag['linkbases'].append(name)
+                if kind == 'taxonomy_package_metadata': diag['taxonomy_package_metadata'].append(name)
+                if kind == 'catalog_metadata': diag['catalog_metadata'].append(name)
                 if 'report-package.json' in lower or 'reports.json' in lower or 'manifest' in lower: diag['manifest_files'].append(name)
                 if 'report-package' in lower: diag['report_package_metadata'].append(name)
-            diag['duplicate_entry_names']=dups; diag['top_level_directories']=sorted(t for t in tops if t)
+            diag['duplicate_entry_names']=dups; diag['top_level_directories']=sorted(t for t in top_dirs if t); diag['top_level_files']=sorted(top_files)
             first_bad=z.testzip()
             if first_bad: diag['crc_failures'].append(first_bad)
     except zipfile.BadZipFile:
         diag['first_failing_safety_rule']='invalid_zip'; return diag
     checks=[('zip_crc_failure',diag['crc_failures']),('unsafe_archive_path',diag['absolute_paths'] or diag['traversal_paths']),
-            ('encrypted_archive_unsupported',diag['encrypted_entries']),('unsupported_archive_entry_type',diag['symlinks'] or diag['unsupported_entry_types'])]
+            ('encrypted_archive_unsupported',diag['encrypted_entries']),('unsupported_entry_type',diag['symlinks'] or diag['unsupported_entry_types'])]
     if diag['archive_entry_count']>int(cfg['entry_count_limit']): diag['first_failing_safety_rule']='archive_entry_limit_exceeded'
     if diag['total_expanded_size']>int(cfg['expanded_size_limit_bytes']): diag['first_failing_safety_rule']=diag['first_failing_safety_rule'] or 'archive_expanded_size_exceeded'
     if diag['maximum_single_entry_size']>int(cfg.get('single_entry_size_limit_bytes') or cfg['expanded_size_limit_bytes']): diag['first_failing_safety_rule']=diag['first_failing_safety_rule'] or 'archive_entry_too_large'
     for code, present in checks:
-        if present and not diag['first_failing_safety_rule']: diag['first_failing_safety_rule']=code
+        if present and not diag['first_failing_safety_rule']: diag['first_failing_safety_rule']='unsupported_archive_entry_type' if code=='unsupported_entry_type' else code
     return diag
-
 
 def validate_archive(path:Path,cfg:dict[str,Any])->list[zipfile.ZipInfo]:
     diag=inspect_archive(path,cfg)
@@ -159,25 +186,74 @@ def _read_bounded(z:zipfile.ZipFile, name:str, limit:int=2_000_000)->bytes:
     return z.read(name)
 
 
+def _local(tag:Any)->str:
+    return str(tag).rsplit('}',1)[-1] if '}' in str(tag) else str(tag)
+
+
+def _inspect_ixbrl_candidate(z:zipfile.ZipFile,name:str,cfg:dict[str,Any])->dict[str,Any]:
+    info={'path':name,'inline_xbrl':False,'markers_found':[],'lei_match':False,'legal_name_match':False,
+          'period_start_match':False,'period_end_match':False,'schema_ref_found':False,
+          'required_metric_matches':0,'fact_count':0,'identity_result':'not_evaluated','period_result':'not_evaluated',
+          'parse_error':None}
+    try:
+        with z.open(name) as fh:
+            for event, el in ET.iterparse(fh, events=('start','end')):
+                tag=el.tag
+                if event == 'start' and tag == IX_NS+'header' and 'ix:header' not in info['markers_found']: info['markers_found'].append('ix:header')
+                if event == 'end' and tag in {IX_NS+'nonFraction', IX_NS+'nonNumeric'}:
+                    info['fact_count']+=1
+                    marker='ix:nonFraction' if tag == IX_NS+'nonFraction' else 'ix:nonNumeric'
+                    if marker not in info['markers_found']: info['markers_found'].append(marker)
+                    qn=el.attrib.get('name') or ''
+                    if qn in cfg.get('required_metrics',{}): info['required_metric_matches']+=1
+                if event == 'start' and tag == XBRLI_NS+'context':
+                    if 'xbrli:context' not in info['markers_found']: info['markers_found'].append('xbrli:context')
+                elif event == 'start' and _local(tag) == 'schemaRef':
+                    info['schema_ref_found']=True
+                    if 'schemaRef' not in info['markers_found']: info['markers_found'].append('schemaRef')
+                elif event == 'end' and tag == XBRLI_NS+'identifier':
+                    txt=''.join(el.itertext()).strip()
+                    if txt == cfg['lei']: info['lei_match']=True
+                elif event == 'end' and tag == XBRLI_NS+'startDate':
+                    if ''.join(el.itertext()).strip() == cfg['period_start']: info['period_start_match']=True
+                elif event == 'end' and tag == XBRLI_NS+'endDate':
+                    if ''.join(el.itertext()).strip() == cfg['period_end']: info['period_end_match']=True
+                if event == 'end' and tag in {IX_NS+'nonNumeric', IX_NS+'nonFraction'}:
+                    txt=' '.join(''.join(el.itertext()).split()).upper()
+                    if txt and (cfg.get('legal_name','').upper() in txt or 'BT GROUP PLC' in txt): info['legal_name_match']=True
+                    el.clear()
+    except ET.ParseError as exc:
+        info['parse_error']=str(exc)
+    except Exception as exc:
+        info['parse_error']=str(exc)
+    info['inline_xbrl']=bool(info['fact_count'] and {'ix:nonFraction','ix:nonNumeric'}.intersection(info['markers_found']) and 'xbrli:context' in info['markers_found'])
+    info['identity_result']='matched' if info['lei_match'] else 'mismatch'
+    info['period_result']='matched' if info['period_start_match'] and info['period_end_match'] else 'mismatch'
+    return info
+
+
 def locate_ixbrl_report(zip_path:Path,cfg:dict[str,Any])->dict[str,Any]:
     diag=inspect_archive(zip_path,cfg); selected=[]; candidates=[]
     with zipfile.ZipFile(zip_path) as z:
         names=[n for n in z.namelist() if n.lower().endswith(REPORT_EXTENSIONS)]
         for name in names:
-            data=_read_bounded(z,name)
-            if b'inlineXBRL' not in data and b'<ix:' not in data and b':nonFraction' not in data: continue
-            info={'path':name,'has_inline_xbrl_marker':True,'lei_match':cfg['lei'].encode() in data,
-                  'period_start_match':cfg['period_start'].encode() in data,'period_end_match':cfg['period_end'].encode() in data,
-                  'required_metric_matches':sum(q.encode() in data for q in cfg['required_metrics'])}
+            info=_inspect_ixbrl_candidate(z,name,cfg)
+            if not info['inline_xbrl']:
+                candidates.append(info); continue
             candidates.append(info)
             if info['lei_match'] and info['period_start_match'] and info['period_end_match'] and info['required_metric_matches']>0:
                 selected.append(info)
-    diag['candidate_inline_xbrl_reports']=[c['path'] for c in candidates]
+    inline=[c for c in candidates if c['inline_xbrl']]
+    diag['candidate_inline_xbrl_reports']=[c['path'] for c in inline]
+    diag['inline_xbrl_marker_results']=[{'path':c['path'],'markers_found':c['markers_found'],'fact_count':c['fact_count'],'parse_error':c['parse_error']} for c in candidates]
+    diag['identity_result']={c['path']:c['identity_result'] for c in candidates}
+    diag['period_result']={c['path']:c['period_result'] for c in candidates}
     if len(selected)==1:
-        diag['locator_decision']=selected[0]['path']; diag['locator_reason']='single inline XBRL report matching BT LEI, FY26 period and required metric markers'
-        return {'report_path':selected[0]['path'],'diagnostics':diag,'candidates':candidates}
-    if not candidates:
-        diag['locator_reason']='no XHTML/HTML entry contained inline XBRL markers'
+        diag['locator_decision']=selected[0]['path']; diag['selected_report_path']=selected[0]['path']
+        diag['locator_reason']=diag['selection_reason']='single inline XBRL report matching BT LEI, FY26 period and required metric markers'
+        return {'report_path':selected[0]['path'],'diagnostics':diag,'candidates':candidates,'selected_candidate':selected[0]}
+    if not inline:
+        diag['locator_reason']='no XHTML/HTML/HTM entry contained validated inline XBRL facts and contexts'
         raise StructuredIngestionError('no inline XBRL report found in package', 'ixbrl_report_not_found', 'structured package recognition')
     if not selected:
         diag['locator_reason']='inline XBRL candidates did not match BT LEI, FY26 period and metric markers'
