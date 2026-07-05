@@ -65,7 +65,7 @@ def coverage_for_model(model)->dict[str,Any]:
  out={}
  for domain, expected in DOMAINS.items():
   attrs=[k for k in model.attributes if k.startswith(domain) or (domain=='structure' and k.startswith('organisational_structure'))]
-  materials=[a + ' ' + str(model.attributes[a].current_value or '') for a in attrs]
+  materials=[(a + ' ' + str(model.attributes[a].current_value or '')).replace('_', ' ') for a in attrs]
   populated=sum(1 for exp in expected if any(exp.casefold() in a.casefold() for a in materials))
   out[domain]={"expected_attributes":expected,"populated_attributes":attrs,"unsupported_attributes":[e for e in expected if not any(e.casefold() in a.casefold() for a in materials)],"stale_attributes":[],"contradicted_attributes":[a for a in attrs if model.attributes[a].contradiction_state=='contradicted'],"source_count":len({eid for a in attrs for eid in model.attributes[a].evidence_ids}),"coverage_percent":round(100*populated/len(expected)) if expected else 100}
  return out
