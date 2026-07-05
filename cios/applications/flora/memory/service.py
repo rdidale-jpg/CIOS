@@ -9,7 +9,7 @@ from typing import Any
 
 from cios.applications.flora.memory.models import EnterpriseModelAttribute, EnterpriseUnknown, ModelUpdateResult, Observation, now_iso
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
-from cios.applications.flora.memory.repository import EnterpriseModelRepository, ObservationRepository
+from cios.applications.flora.memory.repository import EnterpriseModelRepository, ObservationRepository, EvidenceRepository
 
 DOMAIN_MAP = {"AI Modernisation":"technology_events","AI Readiness":"technology_events","Technology Debt":"technology_events","Procurement Readiness":"procurement_events","Cost Pressure":"financial_pressure","Investment Pressure":"financial_pressure","Spending Pressure":"financial_pressure","Operational Resilience":"transformation_programmes","Network Resilience":"transformation_programmes","Digital Leadership":"transformation_programmes","Operational Efficiency":"transformation_programmes"}
 CONFLICT_TERMS = ("cancelled", "paused", "delayed", "ended", "withdrawn", "terminated", "no longer")
@@ -176,7 +176,7 @@ class EvidenceProcessingReport:
 
 class ObservationMemoryService:
     def __init__(self, observations: ObservationRepository | None = None, models: EnterpriseModelRepository | None = None):
-        self.observations = observations or ObservationRepository(); self.models = models or EnterpriseModelRepository()
+        self.observations = observations or ObservationRepository(); self.models = models or EnterpriseModelRepository(); self.evidence = EvidenceRepository()
 
     def observation_from_evidence(self, item: dict[str, Any]) -> Observation:
         statement = str(item.get("cleaned_observation") or item.get("extracted_observation") or item.get("snippet") or "").strip()
@@ -219,6 +219,8 @@ class ObservationMemoryService:
 
     def process_evidence(self, item: dict[str, Any]) -> EvidenceProcessingReport:
         report = EvidenceProcessingReport([], [])
+        item = dict(item)
+        self.evidence.save(item)
         evidence_class = str(item.get("evidence_class") or item.get("commercial_condition") or item.get("mapped_condition") or "unknown")
         claims = decompose_factual_claims(item); report.factual_claims_extracted = len(claims)
         decomposer = "canonical_decompose_factual_claims"
