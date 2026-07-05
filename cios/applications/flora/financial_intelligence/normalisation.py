@@ -119,6 +119,26 @@ def normalise_amount(amount: Any, scale: str | None) -> Decimal | None:
     if canonical is None or amount is None: return None
     return Decimal(str(amount).replace(',', '')) * SCALE_FACTORS[canonical]
 
+
+def rounding_interval(amount: Any, scale: str | None) -> tuple[Decimal, Decimal] | None:
+    """Return the base-unit half-open interval implied by reported decimal precision."""
+    canonical = normalise_scale(scale)
+    if canonical is None or amount is None:
+        return None
+    text = str(amount).replace(',', '').strip()
+    decimals = len(text.split('.', 1)[1]) if '.' in text else 0
+    quantum = (Decimal('1').scaleb(-decimals)) * SCALE_FACTORS[canonical]
+    centre = Decimal(text) * SCALE_FACTORS[canonical]
+    half = quantum / Decimal('2')
+    return centre - half, centre + half
+
+def rounding_compatible(rounded_amount: Any, rounded_scale: str | None, precise_normalised: Any) -> bool:
+    interval = rounding_interval(rounded_amount, rounded_scale)
+    if interval is None or precise_normalised is None:
+        return False
+    value = Decimal(str(precise_normalised).replace(',', ''))
+    return interval[0] <= value < interval[1]
+
 def display_amount(amount: Any, currency: str | None, scale: str | None) -> str:
     symbol = '£' if (currency or '').upper() == 'GBP' else ((currency or '') + ' ' if currency else '')
     suffix = {'units':'','thousands':'k','millions':'m','billions':'bn'}.get(normalise_scale(scale) or '', '')

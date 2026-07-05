@@ -12,7 +12,7 @@ from typing import Any
 
 from cios.applications.flora.financial_intelligence.openai_provider import OpenAIDirectPDFProvider, openai_sdk_readiness
 from cios.applications.flora.financial_intelligence.section_packets import SectionAwareOpenAIProvider
-from cios.applications.flora.financial_intelligence.normalisation import canonicalise_financial_claim
+from cios.applications.flora.financial_intelligence.normalisation import canonicalise_financial_claim, rounding_compatible
 from cios.applications.flora.financial_intelligence.config import financial_intelligence_settings
 from cios.applications.flora.financial_intelligence.schema import ExperimentDocument, FoundationFact
 from cios.applications.flora.memory.service import ObservationMemoryService
@@ -313,6 +313,7 @@ def claim_to_evidence(run: dict[str, Any], claim: dict[str, Any]) -> dict[str, A
         'extraction_timestamp': now_iso(), 'provenance': 'evidence-backed', 'source_provenance': 'ai_document_understanding_reviewed',
         'extractor_name': 'OpenAIDirectPDFProvider', 'extractor_model': claim.get('extractor_model'), 'document_checksum': run['document']['checksum'],
         'source_excerpt': claim.get('source_excerpt'),
+        'supporting_evidence_ids': tuple(claim.get('supporting_evidence_ids') or (claim.get('evidence_id'),)),
     }
 
 
@@ -330,7 +331,7 @@ def _successful_cached_run(document: ExperimentDocument, model: str) -> dict[str
         except Exception:
             continue
         doc = run.get('document') or {}
-        if (run.get('status') == 'completed' and doc.get('checksum') == document.checksum and run.get('model') == model and run.get('schema_version') == settings.schema_version and run.get('prompt_version') == settings.prompt_version):
+        if (run.get('status') in {'completed', 'completed_with_exceptions'} and doc.get('checksum') == document.checksum and run.get('model') == model and run.get('schema_version') == settings.schema_version and run.get('prompt_version') == settings.prompt_version):
             return run
     return None
 
@@ -391,63 +392,128 @@ def _is_auto_acceptable(claim: dict[str, Any], run: dict[str, Any]) -> tuple[boo
         return False, 'unclear group or segment scope'
     return True, 'governed source, page lineage, value, unit, currency, period, basis and confidence verified'
 
-def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
-    svc = ObservationMemoryService(); results=[]; exceptions=[]; accepted=0
-    seen_financial = set()
-    deduplicated = 0
-    strengthened = 0
-    dispositions = []
-    for i, claim in enumerate(run.get('claims', [])):
-        canonical, canon_reasons = canonicalise_financial_claim(claim)
-        run['claims'][i] = claim = canonical
-        ok, reason = _is_auto_acceptable(claim, run)
+def _claim_packet_id(claim: dict[str, Any]) -> str | None:
+    return claim.get('packet_id') or claim.get('provider_packet_id') or claim.get('source_packet_id')
 
+def _candidate_disposition_row(claim: dict[str, Any], disposition: str, reason: str, **extra: Any) -> dict[str, Any]:
+    return {
+        'candidate_id': claim.get('claim_id') or claim.get('candidate_id'),
+        'packet_id': _claim_packet_id(claim),
+        'provider_response_id': claim.get('provider_response_id') or claim.get('request_id') or claim.get('response_id'),
+        'source_page': claim.get('page_reference') or claim.get('source_page'),
+        'metric_identity': claim.get('metric_identity'),
+        'reported_value': claim.get('original_display_value') or claim.get('display_value') or claim.get('value'),
+        'normalised_value': claim.get('normalised_amount'),
+        'accounting_basis': claim.get('accounting_basis'),
+        'measurement_state': claim.get('financial_measurement_state') or claim.get('state'),
+        'disposition': disposition,
+        'disposition_reason': reason,
+        'resulting_observation_id': extra.get('observation_id'),
+        'resulting_enterprise_model_path': extra.get('enterprise_model_path') or claim.get('affected_attribute'),
+    }
+
+def _choose_canonical_claim(claims: list[dict[str, Any]]) -> dict[str, Any]:
+    def precision_key(c: dict[str, Any]) -> tuple[int, int]:
+        scale_rank = {'units': 3, 'thousands': 2, 'millions': 1, 'billions': 0}.get(str(c.get('reported_scale')), 0)
+        amount = str(c.get('reported_amount') or '')
+        decimals = len(amount.split('.', 1)[1]) if '.' in amount else 0
+        return scale_rank, decimals
+    chosen = max(claims, key=precision_key)
+    merged = dict(chosen)
+    merged['_canonical_source_candidate_id'] = chosen.get('claim_id') or chosen.get('candidate_id')
+    evidence_ids = tuple(dict.fromkeys(str(c.get('evidence_id')) for c in claims if c.get('evidence_id')))
+    merged['supporting_evidence_ids'] = evidence_ids
+    merged['corroborating_candidates'] = [c.get('claim_id') for c in claims if c is not chosen]
+    return merged
+
+def _group_compatible_claims(claims: list[dict[str, Any]]) -> list[list[dict[str, Any]]]:
+    buckets: dict[str, list[dict[str, Any]]] = {}
+    for c in claims:
+        buckets.setdefault(c.get('canonical_observation_identity') or c.get('claim_id'), []).append(c)
+    groups: list[list[dict[str, Any]]] = []
+    for bucket in buckets.values():
+        remaining = list(bucket)
+        while remaining:
+            base = remaining.pop(0); group = [base]; rest = []
+            for other in remaining:
+                same = base.get('normalised_amount') == other.get('normalised_amount')
+                compatible = same or rounding_compatible(base.get('reported_amount'), base.get('reported_scale'), other.get('normalised_amount')) or rounding_compatible(other.get('reported_amount'), other.get('reported_scale'), base.get('normalised_amount'))
+                (group if compatible else rest).append(other)
+            groups.append(group); remaining = rest
+    return groups
+
+def _read_after_write_ok(svc: ObservationMemoryService, result: Any, expected_evidence: tuple[str, ...]) -> tuple[bool, str]:
+    observation = svc.observations.get(result.observation_id)
+    if not observation:
+        return False, 'persistence_failed: observation not readable after write'
+    model = svc.models.get(result.enterprise_id)
+    attr = model.attributes.get(result.affected_attribute)
+    if not attr:
+        return False, 'model_projection_failed: Enterprise Model path missing after write'
+    if attr.current_value is None:
+        return False, 'model_projection_failed: normalised value missing after write'
+    if result.observation_id not in attr.observation_ids:
+        return False, 'model_projection_failed: Observation lineage missing after write'
+    if not set(expected_evidence).issubset(set(attr.evidence_ids)) or not set(expected_evidence).issubset(set(observation.supporting_evidence_ids)):
+        return False, 'persistence_failed: Evidence lineage missing after write'
+    return True, 'read-after-write validation passed'
+
+def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
+    svc = ObservationMemoryService(); results=[]; exceptions=[]; accepted=0; merges=0; dispositions=[]
+    acceptable: list[dict[str, Any]] = []
+    for i, raw in enumerate(run.get('claims', [])):
+        claim, canon_reasons = canonicalise_financial_claim(raw)
+        run['claims'][i] = claim
+        ok, reason = _is_auto_acceptable(claim, run)
         for terminal in ('non_numeric_narrative','unsupported_metric','metric_identity_ambiguous','financial_scale_ambiguous','measurement_state_ambiguous','accounting_basis_ambiguous','invalid_lineage'):
             if canon_reasons and terminal in canon_reasons:
-                reason = terminal
-                break
+                reason = terminal; break
         claim['acceptance_reason'] = reason
-        if not ok:
-            claim['review_state'] = 'needs_attention'
-            claim['disposition'] = reason if reason in {'non_numeric_narrative','financial_scale_ambiguous','measurement_state_ambiguous','accounting_basis_ambiguous','invalid_lineage','unsupported_metric','metric_identity_ambiguous'} else 'quarantined'
-            claim['exception_type'] = reason
-            dispositions.append({'candidate_id': claim.get('claim_id'), 'disposition': claim['disposition'], 'reason': reason, 'enterprise_model_path': claim.get('affected_attribute')})
-            exceptions.append(claim)
-            continue
-        identity = claim.get('canonical_observation_identity')
-        if identity and identity in seen_financial:
-            claim['review_state'] = 'deduplicated'
-            claim['disposition'] = 'deduplicated'
-            claim['acceptance_reason'] = 'deduplicated into canonical financial Observation'
-            dispositions.append({'candidate_id': claim.get('claim_id'), 'disposition': 'deduplicated', 'reason': claim['acceptance_reason'], 'enterprise_model_path': claim.get('affected_attribute')})
-            deduplicated += 1
-            continue
-        if identity: seen_financial.add(identity)
-        report = svc.process_evidence(claim_to_evidence(run, claim))
-        results.extend(({**r.__dict__, 'update_result': r.action}) for r in report.results)
-        if report.results and not any(r.contradiction for r in report.results):
-            claim['review_state'] = 'auto_applied'
-            claim['disposition'] = 'accepted'
-            accepted += 1
-            strengthened += len([r for r in report.results if r.action not in {'created'}])
-            dispositions.append({'candidate_id': claim.get('claim_id'), 'disposition': 'accepted', 'reason': reason, 'canonical_fact_id': claim.get('canonical_observation_identity'), 'observation_id': report.results[0].observation_id if report.results else None, 'enterprise_model_path': claim.get('affected_attribute')})
+        if ok:
+            acceptable.append(claim)
         else:
-            claim['review_state'] = 'needs_attention'
-            claim['disposition'] = 'quarantined'
-            claim['exception_type'] = 'contradiction or validation issue'
-            dispositions.append({'candidate_id': claim.get('claim_id'), 'disposition': 'quarantined', 'reason': claim['exception_type'], 'enterprise_model_path': claim.get('affected_attribute')})
+            # Keep governed candidate-level exceptions only; do not add generic response-level duplicates.
+            if 'range' in str(claim.get('source_excerpt') or claim.get('original_statement') or '').casefold() or ' to ' in str(claim.get('value') or '').casefold():
+                reason = 'unsupported_financial_range'
+            claim['review_state'] = 'needs_attention'; claim['disposition'] = reason; claim['exception_type'] = reason
+            dispositions.append(_candidate_disposition_row(claim, reason, reason))
             exceptions.append(claim)
-        exceptions.extend(report.rejected_claims)
-    changed = [r for r in results if r.get('update_result') in {'created', 'updated'}]
-    terminal_status = 'completed_with_no_accepted_intelligence' if accepted == 0 and not results else ('completed_with_exceptions' if exceptions else 'completed')
+    for group in _group_compatible_claims(acceptable):
+        canonical = _choose_canonical_claim(group)
+        report = svc.process_evidence(claim_to_evidence(run, canonical))
+        if report.results and not any(r.contradiction for r in report.results):
+            result = report.results[0]
+            ok, validation_reason = _read_after_write_ok(svc, result, tuple(canonical.get('supporting_evidence_ids') or (canonical.get('evidence_id'),)))
+            if not ok:
+                canonical['review_state'] = 'needs_attention'; canonical['disposition'] = validation_reason.split(':',1)[0]
+                dispositions.append(_candidate_disposition_row(canonical, canonical['disposition'], validation_reason))
+                exceptions.append(canonical); continue
+            result_row = {**result.__dict__, 'update_result': result.action}
+            results.append(result_row); accepted += 1
+            canonical['review_state'] = 'auto_applied'; canonical['disposition'] = 'accepted'
+            dispositions.append(_candidate_disposition_row(canonical, 'accepted', validation_reason, observation_id=result.observation_id, enterprise_model_path=result.affected_attribute))
+            for c in group:
+                if (c.get('claim_id') or c.get('candidate_id')) == canonical.get('_canonical_source_candidate_id'): continue
+                c['review_state'] = 'merged'; c['disposition'] = 'merged_as_corroborating_evidence'
+                dispositions.append(_candidate_disposition_row(c, 'merged_as_corroborating_evidence', 'rounding-compatible representation merged as corroborating Evidence', observation_id=result.observation_id, enterprise_model_path=result.affected_attribute))
+                merges += 1
+        else:
+            reason = (report.rejected_claims[0].get('rejection_reason') if report.rejected_claims else 'contradiction or validation issue')
+            for c in group:
+                c['review_state'] = 'needs_attention'; c['disposition'] = 'quarantined'; c['exception_type'] = reason
+                dispositions.append(_candidate_disposition_row(c, 'quarantined', reason)); exceptions.append(c)
+            exceptions.extend(report.rejected_claims)
     for exc in run.get('candidate_exceptions', []):
         disp = exc.get('disposition') or exc.get('exception_type') or 'rejected'
-        if disp not in {'accepted','quarantined','rejected','deduplicated','merged_as_corroborating_evidence','unsupported_metric','metric_identity_ambiguous','financial_scale_ambiguous','measurement_state_ambiguous','accounting_basis_ambiguous','invalid_lineage','non_numeric_narrative','superseded'}:
-            disp = 'rejected'
-        dispositions.append({'candidate_id': exc.get('candidate_id') or exc.get('claim_id') or exc.get('packet_id'), 'disposition': disp, 'reason': exc.get('rejection_reason') or exc.get('safe_explanation') or exc.get('exception_type'), 'packet_id': exc.get('packet_id')})
-    counts = {}
+        reason = exc.get('rejection_reason') or exc.get('safe_explanation') or exc.get('exception_type') or disp
+        if 'range' in str(reason).casefold(): disp = 'unsupported_financial_range'
+        dispositions.append({'candidate_id': exc.get('candidate_id') or exc.get('claim_id') or exc.get('packet_id'), 'packet_id': exc.get('packet_id'), 'provider_response_id': exc.get('provider_response_id') or exc.get('request_id'), 'source_page': exc.get('source_page') or exc.get('document_page') or exc.get('page'), 'metric_identity': exc.get('metric_identity'), 'reported_value': exc.get('value_text') or exc.get('reported_value'), 'normalised_value': None, 'accounting_basis': exc.get('accounting_basis'), 'measurement_state': exc.get('state'), 'disposition': disp, 'disposition_reason': reason, 'resulting_observation_id': None, 'resulting_enterprise_model_path': None})
+    counts: dict[str, int] = {}
     for d in dispositions: counts[d['disposition']] = counts.get(d['disposition'], 0) + 1
-    run.update({'status': terminal_status, 'applied_at': now_iso(), 'applied_results': results, 'exceptions': exceptions, 'auto_accepted_count': accepted, 'exception_count': len(exceptions), 'observations_created_or_strengthened': len(results), 'observations_created': len([r for r in results if r.get('update_result') == 'created']), 'observations_strengthened': len(results) - len([r for r in results if r.get('update_result') == 'created']), 'deduplicated_count': deduplicated, 'candidate_dispositions': dispositions, 'rejected_by_policy_count': len(exceptions), 'candidate_lifecycle_counts': {'packet_candidates_extracted': len(run.get('claims', [])) + len(run.get('candidate_exceptions', [])), 'candidates_returned': len(run.get('claims', [])) + len(run.get('candidate_exceptions', [])), 'valid_candidates': len(run.get('claims', [])), 'quarantined_candidates': len(run.get('candidate_exceptions', [])), 'canonical_facts_accepted': accepted, 'automatically_accepted_candidates': accepted, 'deduplicated_candidates': deduplicated, 'disposition_counts': counts, 'candidates_rejected_by_policy': len(exceptions), 'observations_created_or_strengthened': len(results), 'enterprise_model_attributes_created': len([r for r in changed if r.get('update_result') == 'created']), 'enterprise_model_attributes_updated': len([r for r in changed if r.get('update_result') == 'updated'])}, 'enterprise_attributes_changed': [r.get('affected_attribute') for r in changed]})
+    changed = [r for r in results if r.get('update_result') in {'created', 'updated'}]
+    terminal_status = 'completed_with_no_accepted_intelligence' if accepted == 0 else ('completed_with_exceptions' if exceptions or run.get('candidate_exceptions') else 'completed')
+    model = svc.models.get(canonical_enterprise_id(run.get('document', {}).get('enterprise_id') or 'bt-group-plc') or 'bt-group-plc')
+    run.update({'status': terminal_status, 'applied_at': now_iso(), 'applied_results': results, 'exceptions': exceptions, 'auto_accepted_count': accepted, 'exception_count': len(exceptions), 'observations_created_or_strengthened': len(results), 'observations_created': len([r for r in results if r.get('update_result') == 'created']), 'observations_strengthened': len([r for r in results if r.get('update_result') == 'updated']), 'corroborating_evidence_merges': merges, 'deduplicated_count': merges, 'candidate_dispositions': dispositions, 'rejected_by_policy_count': len(exceptions), 'repository_diagnostics': {'observation_repository': type(svc.observations).__name__, 'enterprise_model_repository': type(svc.models).__name__, 'storage_mode': storage_mode().get('mode'), 'canonical_enterprise_id': model.enterprise_id, 'observation_count_after_write': len(svc.observations.list()), 'enterprise_model_attribute_count_after_projection': len(model.attributes)}, 'candidate_lifecycle_counts': {'packet_candidates_extracted': len(run.get('claims', [])) + len(run.get('candidate_exceptions', [])), 'candidates_returned': len(run.get('claims', [])) + len(run.get('candidate_exceptions', [])), 'valid_candidates': len(run.get('claims', [])), 'quarantined_candidates': len(run.get('candidate_exceptions', [])) + len([e for e in exceptions if e.get('review_state') == 'needs_attention']), 'canonical_facts_accepted': accepted, 'corroborating_evidence_merges': merges, 'automatically_accepted_candidates': accepted, 'deduplicated_candidates': merges, 'disposition_counts': counts, 'candidates_rejected_by_policy': len(exceptions), 'observations_created_or_strengthened': len(results), 'enterprise_model_attributes_created': len([r for r in changed if r.get('update_result') == 'created']), 'enterprise_model_attributes_updated': len([r for r in changed if r.get('update_result') == 'updated'])}, 'enterprise_attributes_changed': [r.get('affected_attribute') for r in changed]})
     return run
 
 def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: str | None = None) -> dict[str, Any]:
@@ -470,6 +536,9 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: 
         run = dict(cached)
         run['run_id'] = run_id
         run['created_at'] = now_iso()
+        run['cached_output_reused'] = True
+        run['openai_invoked'] = False
+        run = _apply_automatic_claims(run)
         run['cached_output_reused'] = True
         run['openai_invoked'] = False
         _write_json(_run_path(run_id), run)
@@ -718,7 +787,7 @@ def _outcome_summary(run: dict[str, Any] | None) -> str:
     accepted_periods = [c.get('period') for c in run.get('claims', []) if c.get('disposition') == 'accepted' and c.get('period')]
     candidate_periods = [c.get('period') for c in run.get('claims', []) if c.get('period')]
     period_text = 'inferred from accepted facts' if accepted_periods else (f"detected from candidates ({escape(str(candidate_periods[0]))})" if candidate_periods else 'not established')
-    return f"""<section class='card'><h2>Refresh outcome</h2><p>{headline}{cost_text} · Candidate facts extracted: {(run.get('candidate_lifecycle_counts') or {}).get('packet_candidates_extracted', len(run.get('claims', [])))} · Reporting period: {period_text} · Collection status: {escape(status)} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Canonical facts accepted</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{len(exceptions)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a></p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {outcome}</p>{("<p><a href='/digital-twin/bt-group-plc'>View updated twin</a> · <a href='#attention'>Review exception</a> · <a href='#evidence'>View evidence</a></p>" if status == 'completed_with_exceptions' else "<form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form>")}</section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
+    return f"""<section class='card'><h2>Refresh outcome</h2><p>{headline}{cost_text} · Candidate facts extracted: {(run.get('candidate_lifecycle_counts') or {}).get('packet_candidates_extracted', len(run.get('claims', [])))} · Reporting period: {period_text} · Collection status: {escape(status)} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Canonical facts accepted</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{len(exceptions)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a></p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {outcome}</p>{("<p><a href='/digital-twin/bt-group-plc'>View updated twin</a> · <a href='#attention'>Review exception</a> · <a href='#evidence'>View evidence</a></p>" if status == 'completed_with_exceptions' and run.get('enterprise_attributes_changed') else "<form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form>")}</section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
 
 def missing_run_page(run_id: str) -> str:
     body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>This previous refresh result is no longer available.</p><p>Start a new refresh to collect the latest financial intelligence.</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Start new refresh</button></form><p><a href='/financial-intelligence'>Return to Financial Intelligence</a></p></section>"""
