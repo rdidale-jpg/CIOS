@@ -13,7 +13,7 @@ from typing import Any
 from cios.applications.flora.financial_intelligence.openai_provider import OpenAIDirectPDFProvider, openai_sdk_readiness
 from cios.applications.flora.financial_intelligence.section_packets import SectionAwareOpenAIProvider
 from cios.applications.flora.financial_intelligence.normalisation import canonicalise_financial_claim, rounding_compatible
-from cios.applications.flora.financial_intelligence.adapters import PdfFinancialTableAdapter, FinancialFactCandidate, ADAPTER_VERSION
+from cios.applications.flora.financial_intelligence.adapters import PdfFinancialTableAdapter, FinancialFactCandidate, ADAPTER_VERSION, StructuredFinancialAdapterResult
 from cios.applications.flora.financial_intelligence.provider_guard import provider_call_guard
 from cios.applications.flora.financial_intelligence.config import financial_intelligence_settings
 from cios.applications.flora.financial_intelligence.schema import ExperimentDocument, FoundationFact
@@ -69,6 +69,15 @@ FAILURE_MESSAGES = {
     'section_selection_failed': 'Flora could not identify the financial sections in this report.',
     'persistence_failed': 'Flora understood the report but could not save the results.',
     'deterministic_route_provider_violation': 'Deterministic financial refresh was blocked before any provider request was transmitted.',
+    'structured_source_unavailable': 'Structured financial source unavailable',
+    'structured_source_identity_failed': 'Structured financial source unavailable',
+    'structured_source_retrieval_failed': 'Structured financial source unavailable',
+    'structured_package_invalid': 'Structured financial source unavailable',
+    'structured_filing_parse_failed': 'Structured financial source unavailable',
+    'structured_entity_mismatch': 'Structured financial source unavailable',
+    'structured_scope_ambiguous': 'Structured financial source unavailable',
+    'structured_facts_unmapped': 'Structured financial source unavailable',
+    'canonical_validation_failed': 'Structured financial source unavailable',
 }
 
 def _failure_message(category: str) -> str:
@@ -165,6 +174,113 @@ def _safe_provider_diagnostic(run_id: str, source: dict[str, Any], fetched: Any,
         'elapsed_time': round(time.time() - started, 3),
     }
 
+STRUCTURED_FINANCIAL_STATUSES = {
+    'structured_source_unavailable',
+    'structured_source_identity_failed',
+    'structured_source_retrieval_failed',
+    'structured_package_invalid',
+    'structured_filing_parse_failed',
+    'structured_entity_mismatch',
+    'structured_scope_ambiguous',
+    'structured_facts_unmapped',
+    'canonical_validation_failed',
+    'completed',
+    'completed_with_exceptions',
+    'completed_with_no_new_evidence',
+}
+
+
+class OfficialStructuredFinancialAdapter:
+    """Governed structured filing adapter boundary for the hosted standard route.
+
+    Live registry credentials/source discovery are intentionally not implemented
+    here. In their absence the adapter returns no candidates and a structured
+    source-unavailable exception so the caller can fail closed without falling
+    back to PDF or AI workflows.
+    """
+
+    adapter_name = 'StructuredFinancialAdapter'
+    adapter_version = 'structured-source-first-v1'
+    source_family = 'governed_structured_filing'
+
+    def discover_source(self, enterprise_id: str, reporting_period: str | None = None) -> dict[str, Any] | None:
+        return None
+
+    def extract(self, document: ExperimentDocument, **kwargs: Any) -> StructuredFinancialAdapterResult:
+        source = self.discover_source(document.enterprise_id, kwargs.get('reporting_period'))
+        if not source:
+            return StructuredFinancialAdapterResult(
+                self.adapter_name,
+                self.adapter_version,
+                document.checksum,
+                (),
+                ({'exception_type': 'structured_source_unavailable', 'failure_stage': 'structured_source_discovery', 'user_message': 'Structured financial source unavailable', 'rejection_reason': 'No governed structured filing source is configured or discoverable for this enterprise and reporting period.'},),
+                ai_calls_made=0,
+            )
+        return StructuredFinancialAdapterResult(self.adapter_name, self.adapter_version, document.checksum, (), (), ai_calls_made=0)
+
+
+def _trusted_state_snapshot(enterprise_id: str) -> dict[str, Any]:
+    svc = ObservationMemoryService()
+    canonical_id = canonical_enterprise_id(enterprise_id) or enterprise_id
+    model = svc.models.get(canonical_id)
+    active_observations = [o for o in svc.observations.list() if not getattr(o, 'retired_at', None) and getattr(o, 'lifecycle_state', 'active') not in {'retired', 'superseded'}]
+    return {
+        'canonical_enterprise_id': canonical_id,
+        'observation_repository': type(svc.observations).__name__,
+        'enterprise_model_repository': type(svc.models).__name__,
+        'storage_mode': storage_mode().get('mode'),
+        'active_observation_count': len(active_observations),
+        'active_enterprise_model_attribute_count': len(model.attributes),
+        'state_existed_before_run': bool(active_observations or model.attributes),
+    }
+
+
+def _structured_diagnostic(event: str, *, run_id: str, enterprise_id: str, acquisition_mode: str, adapter: Any, started: float, final_status: str = 'validating', candidate_count: int = 0, ai_call_count: int = 0, pdf_fallback_count: int = 0) -> dict[str, Any]:
+    return {
+        'event': event,
+        'support_reference': 'FI-' + run_id.removeprefix('fi-'),
+        'enterprise_id': enterprise_id,
+        'acquisition_mode': acquisition_mode,
+        'adapter_class': adapter.__class__.__name__,
+        'adapter_name': getattr(adapter, 'adapter_name', adapter.__class__.__name__),
+        'source_family': getattr(adapter, 'source_family', 'governed_structured_filing'),
+        'candidate_count': candidate_count,
+        'ai_call_count': ai_call_count,
+        'pdf_fallback_count': pdf_fallback_count,
+        'final_status': final_status,
+        'elapsed_time': round(time.time() - started, 3),
+        'pdf_section_selector_calls': 0,
+        'pdf_candidate_extractor_calls': 0,
+        'pdf_packet_calls': 0,
+        'provider_calls': 0,
+    }
+
+
+def _refresh_structured_financial_intelligence(enterprise_id: str, run_id: str) -> dict[str, Any]:
+    started = time.time()
+    adapter = OfficialStructuredFinancialAdapter()
+    document = ExperimentDocument(document_id=f'{enterprise_id}-structured-source', enterprise_id=enterprise_id, title='Governed structured financial filing', source_url='governed-structured-source', retrieval_timestamp=now_iso(), checksum='structured-source-unavailable', media_type='application/xbrl+xml', page_count=1, local_path=None)
+    before = _trusted_state_snapshot(enterprise_id)
+    diagnostics = [
+        _structured_diagnostic('structured_refresh_started', run_id=run_id, enterprise_id=enterprise_id, acquisition_mode='structured_standard_financials', adapter=adapter, started=started),
+        _structured_diagnostic('structured_adapter_selected', run_id=run_id, enterprise_id=enterprise_id, acquisition_mode='structured_standard_financials', adapter=adapter, started=started),
+        _structured_diagnostic('structured_source_discovery_started', run_id=run_id, enterprise_id=enterprise_id, acquisition_mode='structured_standard_financials', adapter=adapter, started=started),
+    ]
+    result = adapter.extract(document)
+    status = 'structured_source_unavailable' if not result.candidates else 'completed'
+    diagnostics.append(_structured_diagnostic('structured_source_discovery_completed', run_id=run_id, enterprise_id=enterprise_id, acquisition_mode='structured_standard_financials', adapter=adapter, started=started, final_status=status, candidate_count=len(result.candidates), ai_call_count=result.ai_calls_made))
+    if status == 'structured_source_unavailable':
+        diagnostics.append(_structured_diagnostic('structured_source_unavailable', run_id=run_id, enterprise_id=enterprise_id, acquisition_mode='structured_standard_financials', adapter=adapter, started=started, final_status=status))
+    after = _trusted_state_snapshot(enterprise_id)
+    diagnostics.append(_structured_diagnostic('structured_refresh_completed', run_id=run_id, enterprise_id=enterprise_id, acquisition_mode='structured_standard_financials', adapter=adapter, started=started, final_status=status, candidate_count=len(result.candidates), ai_call_count=result.ai_calls_made))
+    run = {'run_id': run_id, 'created_at': now_iso(), 'status': status, 'workflow': 'financial_intelligence', 'enterprise_id': enterprise_id, 'extraction_mode': 'structured_standard_financials', 'extraction_mode_label': 'Structured standard financials', 'adapter_class': adapter.__class__.__name__, 'adapter_name': adapter.adapter_name, 'source_family': adapter.source_family, 'collection': {'retrieved': False, 'retrieval_time': now_iso(), 'error': 'structured_source_unavailable'}, 'document': document.model_dump(), 'provider': 'not_executed', 'model': adapter.adapter_name, 'reasoning_effort': None, 'usage': {'openai_calls': 0}, 'estimated_cost_usd': 0, 'actual_cost_usd': 0, 'provider_status': 'not_executed', 'provider_errors': [], 'provider_diagnostics': diagnostics, 'structured_diagnostics': diagnostics, 'openai_invoked': False, 'openai_calls_made': 0, 'ai_calls_made': 0, 'pdf_fallback_calls_made': 0, 'prohibited_path_counters': {'pdf_section_selector_calls': 0, 'pdf_candidate_extractor_calls': 0, 'pdf_packet_calls': 0, 'provider_calls': 0}, 'claims': [], 'applied_results': [], 'candidate_exceptions': list(result.exceptions), 'exceptions': list(result.exceptions), 'candidate_pages_selected': [], 'page_packets_submitted': [], 'packet_count': 0, 'pdf_navigation_diagnostics': {}, 'visual_navigation': {}, 'visual_navigation_fallback_used': False, 'auto_accepted_count': 0, 'observations_created_or_strengthened': 0, 'enterprise_attributes_changed': [], 'candidate_lifecycle_counts': {'packet_candidates_extracted': 0, 'candidates_returned': 0, 'valid_candidates': 0, 'quarantined_candidates': 0, 'canonical_facts_accepted': 0, 'observations_created_or_strengthened': 0}, 'trusted_state_before': before, 'trusted_state_after': after, 'trusted_twin_changed': before['active_observation_count'] != after['active_observation_count'] or before['active_enterprise_model_attribute_count'] != after['active_enterprise_model_attribute_count'], 'ephemeral_state_absent_before_run': not before['state_existed_before_run'], 'no_new_evidence_message': 'Flora could not find or access a governed structured filing for this enterprise and reporting period. The existing trusted Financial Twin was not changed.', 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'terminal': True, 'progress_percent': 100, 'percent_complete': 100}
+    for exc in run['exceptions']:
+        exc.setdefault('support_reference', run['support_reference'])
+    _write_json(_run_path(run_id), run)
+    _write_cost_record(run)
+    return run
+
 def _record_provider_diagnostics(run: dict[str, Any]) -> None:
     for event in run.get('provider_diagnostics') or []:
         print('Flora provider diagnostic ' + json.dumps(event, sort_keys=True), flush=True)
@@ -195,8 +311,8 @@ def _write_json(path: Path, data: dict[str, Any]) -> None:
 
 def _run_path(run_id: str) -> Path: return _run_dir() / f'{run_id}.json'
 
-TERMINAL_RUN_STATES = {'completed','completed_with_exceptions','completed_with_no_accepted_intelligence','failed','candidate_validation_failed','provider_request_failed','provider_response_invalid','provider_response_incomplete','output_token_limit_reached','section_selection_failed','persistence_failed'}
-PROGRESS_ORDER = {'queued':0,'retrieving_source':8,'reading_document':18,'checking_document_quality':18,'selecting_sections':30,'preparing_packets':42,'estimating_cost':52,'analysing':68,'validating':82,'updating_memory':92,'completed':100,'completed_with_exceptions':100,'completed_with_no_accepted_intelligence':100,'failed':100,'candidate_validation_failed':100,'provider_request_failed':100,'provider_response_incomplete':100,'output_token_limit_reached':100,'source_retrieval_failed':100,'source_not_pdf':100,'section_selection_failed':100,'persistence_failed':100}
+TERMINAL_RUN_STATES = {'completed','completed_with_exceptions','completed_with_no_accepted_intelligence','completed_with_no_new_evidence','structured_source_unavailable','structured_source_identity_failed','structured_source_retrieval_failed','structured_package_invalid','structured_filing_parse_failed','structured_entity_mismatch','structured_scope_ambiguous','structured_facts_unmapped','canonical_validation_failed','failed','candidate_validation_failed','provider_request_failed','provider_response_invalid','provider_response_incomplete','output_token_limit_reached','section_selection_failed','persistence_failed'}
+PROGRESS_ORDER = {'queued':0,'retrieving_source':8,'reading_document':18,'checking_document_quality':18,'selecting_sections':30,'preparing_packets':42,'estimating_cost':52,'analysing':68,'validating':82,'updating_memory':92,'completed':100,'completed_with_exceptions':100,'completed_with_no_accepted_intelligence':100,'failed':100,'candidate_validation_failed':100,'provider_request_failed':100,'provider_response_incomplete':100,'output_token_limit_reached':100,'source_retrieval_failed':100,'source_not_pdf':100,'section_selection_failed':100,'structured_source_unavailable':100,'structured_source_identity_failed':100,'structured_source_retrieval_failed':100,'structured_package_invalid':100,'structured_filing_parse_failed':100,'structured_entity_mismatch':100,'structured_scope_ambiguous':100,'structured_facts_unmapped':100,'canonical_validation_failed':100,'completed_with_no_new_evidence':100,'persistence_failed':100}
 ACTIVE_RUN_STATES = {'queued','retrieving_source','reading_document','checking_document_quality','selecting_sections','preparing_packets','estimating_cost','analysing','validating','updating_memory'}
 
 def _normalise_terminal_status(status: str) -> str:
@@ -579,8 +695,19 @@ def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
     return run
 
 def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: str | None = None, extraction_mode: str = 'structured_standard_financials') -> dict[str, Any]:
-    source = _bt_annual_report_source()
     run_id = run_id or ('fi-' + uuid.uuid4().hex[:12])
+    acquisition_mode = extraction_mode or 'structured_standard_financials'
+    if acquisition_mode == 'structured_standard_financials':
+        return _refresh_structured_financial_intelligence(enterprise_id, run_id)
+    if acquisition_mode == 'pdf_supporting_evidence':
+        extraction_mode = 'pdf_supporting_evidence'
+    elif acquisition_mode == 'narrative_financial_interpretation':
+        extraction_mode = 'narrative_financial_interpretation'
+    elif acquisition_mode in {'administrative_review', 'administrative_ai_review'}:
+        extraction_mode = 'administrative_review'
+    else:
+        raise ValueError(f'Unsupported financial intelligence acquisition mode: {acquisition_mode}')
+    source = _bt_annual_report_source()
     correlation_id = run_id.removeprefix('fi-')
     ensure_writable_dir(_run_dir())
     retrieval_started = time.time()
@@ -589,16 +716,16 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: 
     doc_parse = parse_pdf_document(fetched, _source_obj(source), canonical_enterprise_id='bt-group-plc')
     document = ExperimentDocument(document_id=doc_parse.document_id, enterprise_id='bt-group-plc', title=source['source_name'], source_url=(fetched.final_url or source['url']), retrieval_timestamp=doc_parse.retrieval_date, checksum=doc_parse.checksum, media_type=doc_parse.media_type or 'application/pdf', page_count=max(doc_parse.page_count, 1), local_path=doc_parse.local_path)
     settings = financial_intelligence_settings()
-    provider = None if extraction_mode == 'structured_standard_financials' else OpenAIDirectPDFProvider(model=settings.model, reasoning_effort=settings.reasoning_effort, max_output_tokens=settings.max_output_tokens, max_run_cost_usd=settings.max_run_cost_usd)
+    provider = None if extraction_mode == 'pdf_supporting_evidence' else OpenAIDirectPDFProvider(model=settings.model, reasoning_effort=settings.reasoning_effort, max_output_tokens=settings.max_output_tokens, max_run_cost_usd=settings.max_run_cost_usd)
 
     _write_progress(run_id, 'checking_document_quality')
     _write_progress(run_id, 'selecting_sections', collection={'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error})
-    if extraction_mode == 'structured_standard_financials':
+    if extraction_mode == 'pdf_supporting_evidence':
         with provider_call_guard(extraction_mode, allowed_calls=0) as guard:
             _write_progress(run_id, 'validating')
             adapter_result = PdfFinancialTableAdapter().extract(document, embedded_pages=doc_parse.pages) if (fetched.succeeded and document.media_type == 'application/pdf' and doc_parse.pages) else None
             claims = [deterministic_candidate_to_review_claim(c, run_id) for c in (adapter_result.candidates if adapter_result else ())]
-            run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'validating', 'workflow': 'financial_intelligence', 'extraction_mode': 'structured_standard_financials', 'extraction_mode_label': 'Structured standard financials', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b''), 'final_url': fetched.final_url or fetched.url, 'content_type': fetched.media_type, 'redirect_chain': list(fetched.redirect_chain), 'redirected': bool(fetched.redirect_chain)}, 'document': document.model_dump(), 'provider': 'deterministic', 'model': (adapter_result.adapter_name if adapter_result else 'pdf_financial_table'), 'reasoning_effort': None, 'schema_version': settings.schema_version, 'prompt_version': 'deterministic-financial-fact-capture-v2', 'document_hash': document.checksum, 'deterministic_cache_key': hashlib.sha256(f"{document.enterprise_id}:{document.checksum}:{document.source_url}:{ADAPTER_VERSION}:{settings.schema_version}:financial-metric-catalogue-v1".encode()).hexdigest(), 'deterministic_replay': 'fresh deterministic extraction', 'usage': {'openai_calls': 0}, 'estimated_cost_usd': 0, 'actual_cost_usd': 0, 'provider_status': 'not_executed', 'provider_errors': [], 'raw_response_location': None, 'provider_diagnostics': [], 'openai_invoked': False, 'openai_calls_made': 0, 'ai_calls_made': 0, 'claims': claims, 'applied_results': [], 'candidate_exceptions': list(adapter_result.exceptions if adapter_result else ()), 'candidate_pages_selected': sorted({c.source_page for c in (adapter_result.candidates if adapter_result else ()) if c.source_page}), 'page_packets_submitted': [], 'packet_count': 0, 'pdf_navigation_diagnostics': {'selected_parser': doc_parse.extraction_method, 'adapter': 'PdfFinancialTableAdapter', 'deterministic_candidates_extracted': len(claims), 'financial_tables_inspected': (adapter_result.exceptions[0].get('diagnostics', {}).get('approved_financial_tables') if adapter_result and adapter_result.exceptions and isinstance(adapter_result.exceptions[0], dict) else None)}, 'visual_navigation': {}, 'visual_navigation_fallback_used': False}
+            run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'validating', 'workflow': 'financial_intelligence', 'extraction_mode': 'pdf_supporting_evidence', 'extraction_mode_label': 'PDF supporting evidence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b''), 'final_url': fetched.final_url or fetched.url, 'content_type': fetched.media_type, 'redirect_chain': list(fetched.redirect_chain), 'redirected': bool(fetched.redirect_chain)}, 'document': document.model_dump(), 'provider': 'deterministic', 'model': (adapter_result.adapter_name if adapter_result else 'pdf_financial_table'), 'reasoning_effort': None, 'schema_version': settings.schema_version, 'prompt_version': 'deterministic-financial-fact-capture-v2', 'document_hash': document.checksum, 'deterministic_cache_key': hashlib.sha256(f"{document.enterprise_id}:{document.checksum}:{document.source_url}:{ADAPTER_VERSION}:{settings.schema_version}:financial-metric-catalogue-v1".encode()).hexdigest(), 'deterministic_replay': 'fresh deterministic extraction', 'usage': {'openai_calls': 0}, 'estimated_cost_usd': 0, 'actual_cost_usd': 0, 'provider_status': 'not_executed', 'provider_errors': [], 'raw_response_location': None, 'provider_diagnostics': [], 'openai_invoked': False, 'openai_calls_made': 0, 'ai_calls_made': 0, 'claims': claims, 'applied_results': [], 'candidate_exceptions': list(adapter_result.exceptions if adapter_result else ()), 'candidate_pages_selected': sorted({c.source_page for c in (adapter_result.candidates if adapter_result else ()) if c.source_page}), 'page_packets_submitted': [], 'packet_count': 0, 'pdf_navigation_diagnostics': {'selected_parser': doc_parse.extraction_method, 'adapter': 'PdfFinancialTableAdapter', 'deterministic_candidates_extracted': len(claims), 'financial_tables_inspected': (adapter_result.exceptions[0].get('diagnostics', {}).get('approved_financial_tables') if adapter_result and adapter_result.exceptions and isinstance(adapter_result.exceptions[0], dict) else None)}, 'visual_navigation': {}, 'visual_navigation_fallback_used': False}
             if guard.attempted_calls:
                 run = _mark_failure(run, 'deterministic_route_provider_violation', 'Provider request blocked before transmission')
             elif not fetched.succeeded:
@@ -864,6 +991,10 @@ def _business_change_label(run: dict[str, Any], result: dict[str, Any]) -> str:
 
 def _outcome_summary(run: dict[str, Any] | None) -> str:
     if not run: return ''
+    if run.get('extraction_mode') == 'structured_standard_financials' and run.get('status') == 'structured_source_unavailable':
+        support = run.get('support_reference') or _support_reference(run)
+        counts = run.get('candidate_lifecycle_counts') or {}
+        return f"""<section class='card'><h2>Structured financial source unavailable</h2><p>Flora could not find or access a governed structured filing for this enterprise and reporting period. The existing trusted Financial Twin was not changed.</p><p>Extraction mode: {escape(str(run.get('extraction_mode_label') or 'Structured standard financials'))} · AI calls made: {escape(str(run.get('ai_calls_made', 0)))} · PDF fallback calls made: {escape(str(run.get('pdf_fallback_calls_made', 0)))}</p><p>Candidate facts extracted: {escape(str(counts.get('packet_candidates_extracted', len(run.get('claims', [])))))} · Canonical facts accepted: {escape(str(run.get('auto_accepted_count', 0)))} · Trusted twin changed: {'yes' if run.get('trusted_twin_changed') else 'no'} · Support reference: {escape(str(support))}</p><p><a href='/settings'>Configure governed structured financial source</a></p></section><section id='evidence' class='card'><h2>Evidence</h2><p>No structured financial evidence was returned.</p></section>{enterprise_memory_panel('bt-group-plc')}"""
     no_accept = run.get('status') == 'completed_with_no_accepted_intelligence'
     changes = ''.join(f"<li>{escape(_business_change_label(run, r))} — {escape(str(r.get('update_result')))}</li>" for r in run.get('applied_results', [])[:20]) or ('<li>Financial intelligence was updated. Some extracted facts require attention.</li>' if run.get('status') == 'completed_with_exceptions' else ('<li>Flora analysed the financial report, but no facts passed the governed acceptance rules.</li>' if no_accept else '<li>No financial intelligence was added because processing did not complete.</li>'))
     exceptions = _dedupe_exceptions(run.get('exceptions', []))
