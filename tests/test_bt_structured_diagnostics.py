@@ -313,3 +313,31 @@ def test_direct_raw_filing_retrieval_and_temp_cleanup(tmp_path, monkeypatch):
     assert prepared.exists()
     shutil.rmtree(prepared.parent)
     assert not prepared.exists()
+
+
+def test_prepare_raw_report_extracts_selected_zip_entry_not_whole_package(tmp_path):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    package = tmp_path / 'bt.zip'
+    body = _ix_full()
+    with zipfile.ZipFile(package, 'w') as z:
+        z.writestr('ixbrl-viewer.htm', body)
+        z.writestr('taxonomy/bt-2026.xsd', '<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>')
+    prepared = bt.prepare_raw_report_from_package(package, 'ixbrl-viewer.htm', tmp_path / 'work')
+    assert prepared.name == 'ixbrl-viewer.htm'
+    assert prepared.read_text() == body
+    assert not zipfile.is_zipfile(prepared)
+    located = bt.locate_ixbrl_report(package, cfg)
+    assert located['report_path'] == 'ixbrl-viewer.htm'
+
+
+def test_viewer_only_package_has_definitive_non_null_classification(tmp_path):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    package = tmp_path / 'viewer_only.zip'
+    with zipfile.ZipFile(package, 'w') as z:
+        z.writestr('ixbrl-viewer.htm', '<html><head><script src="viewer.js"></script></head><body>Rendered annual report shell</body></html>')
+        z.writestr('META-INF/taxonomyPackage.xml', '<taxonomyPackage><entryPoint><entryPointDocument href="bt-2026.xsd"/></entryPoint></taxonomyPackage>')
+        z.writestr('bt-2026.xsd', '<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>')
+    result = bt.classify_structured_package(package, cfg)
+    assert result['package_type'] == 'viewer_only_no_structured_report'
+    assert result['raw_structured_data_exists_in_package'] is False
+    assert result['raw_report_path'] is None
