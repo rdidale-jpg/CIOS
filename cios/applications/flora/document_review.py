@@ -12,6 +12,7 @@ from typing import Any
 
 from cios.applications.flora.financial_intelligence.openai_provider import OpenAIDirectPDFProvider, openai_sdk_readiness
 from cios.applications.flora.financial_intelligence.section_packets import SectionAwareOpenAIProvider
+from cios.applications.flora.financial_intelligence.normalisation import canonicalise_financial_claim
 from cios.applications.flora.financial_intelligence.config import financial_intelligence_settings
 from cios.applications.flora.financial_intelligence.schema import ExperimentDocument, FoundationFact
 from cios.applications.flora.memory.service import ObservationMemoryService
@@ -231,8 +232,11 @@ def fact_to_review_claim(fact: FoundationFact, run_id: str) -> dict[str, Any]:
         'claim_type': _memory_claim_type(str(fact.claim_type)),
         'canonical_enterprise_id': fact.canonical_enterprise_id,
         'affected_attribute': _affected_attribute(fact),
+        'metric_identity': (fact.predicate or fact.object_type or 'metric').casefold().replace(' ', '_'),
         'value': fact.value_number if fact.value_number is not None else fact.value_text,
-        'unit': fact.scale or fact.unit,
+        'reported_amount': fact.value_number if fact.value_number is not None else None,
+        'reported_scale': fact.scale,
+        'unit': fact.unit,
         'currency': fact.currency,
         'business_unit': fact.business_unit or fact.subject_name,
         'period': fact.period_label,
@@ -240,6 +244,7 @@ def fact_to_review_claim(fact: FoundationFact, run_id: str) -> dict[str, Any]:
         'confidence': int(round(fact.extraction_confidence * 100)),
         'page_reference': str(fact.source_page_start) if fact.source_page_start == fact.source_page_end else f'{fact.source_page_start}-{fact.source_page_end}',
         'source_excerpt': fact.source_excerpt,
+        'supporting_context': fact.source_excerpt,
         'extractor_provider': fact.extractor_provider,
         'extractor_model': fact.extractor_model,
         'evidence_id': _evidence_id(run_id, fact.fact_id),
@@ -275,13 +280,14 @@ def _statement(f: FoundationFact) -> str:
     return f'{f.subject_name}{bu} {f.predicate}{value_part}{scale}{curr}{period}.'.replace('  ', ' ')
 
 def claim_to_evidence(run: dict[str, Any], claim: dict[str, Any]) -> dict[str, Any]:
+    claim, _ = canonicalise_financial_claim(claim)
     return {
         'evidence_id': claim['evidence_id'], 'enterprise_id': claim['canonical_enterprise_id'], 'canonical_enterprise_id': claim['canonical_enterprise_id'],
         'organisation': claim['canonical_enterprise_id'], 'source_id': run['document']['document_id'], 'source_name': run['document']['title'],
         'source_type': 'annual_report', 'source_url': run['document']['source_url'], 'evidence_tier': 'tier_1_company',
         'commercial_condition': claim['claim_type'], 'cleaned_observation': claim.get('amended_statement') or claim['original_statement'],
         'extracted_observation': claim.get('amended_statement') or claim['original_statement'], 'snippet': claim.get('source_excerpt') or '',
-        'affected_attribute': claim['affected_attribute'], 'value': claim.get('value'), 'unit': claim.get('unit'), 'currency': claim.get('currency'),
+        'affected_attribute': claim['affected_attribute'], 'value': claim.get('display_value') or claim.get('value'), 'reported_amount': claim.get('reported_amount'), 'reported_scale': claim.get('reported_scale'), 'normalised_amount': claim.get('normalised_amount'), 'display_value': claim.get('display_value'), 'metric_identity': claim.get('metric_identity'), 'enterprise_scope': claim.get('enterprise_scope'), 'accounting_basis': claim.get('accounting_basis'), 'unit': claim.get('unit'), 'currency': claim.get('currency'),
         'period': claim.get('period'), 'state': claim.get('state', 'actual'), 'confidence': claim.get('confidence', 80),
         'page_range': claim.get('page_reference'), 'page_number': claim.get('page_reference'), 'publication_date': run['document'].get('publication_date'),
         'extraction_timestamp': now_iso(), 'provenance': 'evidence-backed', 'source_provenance': 'ai_document_understanding_reviewed',
@@ -354,8 +360,11 @@ def _is_auto_acceptable(claim: dict[str, Any], run: dict[str, Any]) -> tuple[boo
         return False, 'unsupported fact type for automatic financial acceptance'
     if int(claim.get('confidence') or 0) < AUTO_ACCEPT_CONFIDENCE:
         return False, 'confidence below governed acceptance threshold'
-    required = ('value', 'unit', 'currency', 'period', 'state', 'page_reference', 'affected_attribute')
-    missing = [field for field in required if not claim.get(field)]
+    claim, financial_reasons = canonicalise_financial_claim(claim)
+    if financial_reasons:
+        return False, 'financial_scale_ambiguous' if 'financial_scale_ambiguous' in financial_reasons else ', '.join(financial_reasons)
+    required = ('value', 'currency', 'period', 'state', 'page_reference', 'affected_attribute', 'normalised_amount', 'reported_amount', 'reported_scale', 'source_excerpt', 'accounting_basis', 'enterprise_scope')
+    missing = [field for field in required if claim.get(field) in (None, '')]
     if missing:
         return False, 'missing ' + ', '.join(missing)
     if not claim.get('business_unit') and 'bt group' not in claim.get('original_statement', '').casefold():
@@ -364,8 +373,20 @@ def _is_auto_acceptable(claim: dict[str, Any], run: dict[str, Any]) -> tuple[boo
 
 def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
     svc = ObservationMemoryService(); results=[]; exceptions=[]; accepted=0
-    for claim in run.get('claims', []):
+    seen_financial = set()
+    deduplicated = 0
+    for i, claim in enumerate(run.get('claims', [])):
+        canonical, canon_reasons = canonicalise_financial_claim(claim)
+        run['claims'][i] = claim = canonical
+        identity = claim.get('canonical_observation_identity')
+        if identity and identity in seen_financial:
+            claim['review_state'] = 'deduplicated'
+            claim['acceptance_reason'] = 'deduplicated into canonical financial Observation'
+            deduplicated += 1
+            continue
+        if identity: seen_financial.add(identity)
         ok, reason = _is_auto_acceptable(claim, run)
+        if canon_reasons and 'financial_scale_ambiguous' in canon_reasons: reason = 'financial_scale_ambiguous'
         claim['acceptance_reason'] = reason
         if not ok:
             claim['review_state'] = 'needs_attention'
@@ -373,7 +394,7 @@ def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
             exceptions.append(claim)
             continue
         report = svc.process_evidence(claim_to_evidence(run, claim))
-        results.extend(r.__dict__ for r in report.results)
+        results.extend(({**r.__dict__, 'update_result': r.action}) for r in report.results)
         if report.results and not any(r.contradiction for r in report.results):
             claim['review_state'] = 'auto_applied'
             accepted += 1
@@ -383,7 +404,7 @@ def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
             exceptions.append(claim)
         exceptions.extend(report.rejected_claims)
     changed = [r for r in results if r.get('update_result') in {'created', 'updated'}]
-    run.update({'status': 'completed', 'applied_at': now_iso(), 'applied_results': results, 'exceptions': exceptions, 'auto_accepted_count': accepted, 'exception_count': len(exceptions), 'observations_created_or_strengthened': len(results), 'enterprise_attributes_changed': [r.get('affected_attribute') for r in changed]})
+    run.update({'status': 'completed_with_exceptions' if exceptions else 'completed', 'applied_at': now_iso(), 'applied_results': results, 'exceptions': exceptions, 'auto_accepted_count': accepted, 'exception_count': len(exceptions), 'observations_created_or_strengthened': len(results), 'deduplicated_count': deduplicated, 'rejected_by_policy_count': len(exceptions), 'candidate_lifecycle_counts': {'candidates_returned': len(run.get('claims', [])) + len(run.get('candidate_exceptions', [])), 'valid_candidates': len(run.get('claims', [])), 'quarantined_candidates': len(run.get('candidate_exceptions', [])), 'automatically_accepted_candidates': accepted, 'deduplicated_candidates': deduplicated, 'candidates_rejected_by_policy': len(exceptions), 'observations_created_or_strengthened': len(results), 'enterprise_model_attributes_updated': len(changed)}, 'enterprise_attributes_changed': [r.get('affected_attribute') for r in changed]})
     return run
 
 def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: str | None = None) -> dict[str, Any]:
@@ -575,7 +596,7 @@ def apply_accepted(run_id: str) -> dict[str, Any]:
     for claim in run['claims']:
         if claim.get('review_state') not in {'accept', 'amend'}: continue
         report = svc.process_evidence(claim_to_evidence(run, claim))
-        results.extend(r.__dict__ for r in report.results)
+        results.extend(({**r.__dict__, 'update_result': r.action}) for r in report.results)
         rejected.extend(report.rejected_claims)
     run['status'] = 'applied'; run['applied_at'] = now_iso(); run['applied_results'] = results; run['rejected_on_apply'] = rejected
     _write_json(_run_path(run_id), run)
@@ -626,9 +647,17 @@ def financial_intelligence_page(message: str = '') -> str:
     body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>BT Commercial Digital Twin outcome view. Flora collects the governed annual report, understands the financial facts, updates Observations and the Enterprise Model, then shows what changed and what needs attention.</p>{notice}<p class='pill'>{escape(state)}</p></section><section class='card action'><h2>Active governed source</h2><p><strong>{escape(source['source_name'])}</strong></p><p><a href='{escape(source['url'])}'>{escape(source['url'])}</a></p><p class='muted'>Source is registered in the BT collection profile and collected server-side; no download or upload is required.</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Refresh Financial Intelligence</button></form><form method='post' action='/financial-intelligence/bt-group-plc/refresh?reprocess=1'><button>Administrative Reprocess</button></form></section>{summary}<details class='card'><summary><strong>Administrative fallback only</strong></summary><p>Use only when governed automatic collection cannot retrieve a replacement report. This is not the BT sales-user workflow.</p><form method='post' action='/ai-financial-report/upload' enctype='multipart/form-data'><input type='hidden' name='enterprise_id' value='bt-group-plc'><input type='hidden' name='title' value='BT Group plc Annual Report 2026'><input type='hidden' name='source_url' value='{escape(source['url'])}'><input type='file' name='pdf' accept='application/pdf'><button>Admin fallback upload</button></form></details>"""
     return _page('Financial Intelligence', body)
 
+def _business_change_label(run: dict[str, Any], result: dict[str, Any]) -> str:
+    attr = str(result.get('affected_attribute') or '')
+    claim = next((c for c in run.get('claims', []) if c.get('affected_attribute') == attr), None)
+    if claim and claim.get('display_value'):
+        metric = str(claim.get('metric_identity') or attr.rsplit('.', 4)[0].rsplit('.', 1)[-1]).replace('_', ' ').title().replace('Ebitda', 'EBITDA')
+        return f"{metric}: {claim.get('display_value')}"
+    return attr
+
 def _outcome_summary(run: dict[str, Any] | None) -> str:
     if not run: return ''
-    changes = ''.join(f"<li>{escape(str(r.get('affected_attribute')))} — {escape(str(r.get('update_result')))}</li>" for r in run.get('applied_results', [])[:20]) or '<li>No financial intelligence was added because processing did not complete.</li>'
+    changes = ''.join(f"<li>{escape(_business_change_label(run, r))} — {escape(str(r.get('update_result')))}</li>" for r in run.get('applied_results', [])[:20]) or ('<li>Financial intelligence was updated. Some extracted facts require attention.</li>' if run.get('status') == 'completed_with_exceptions' else '<li>No financial intelligence was added because processing did not complete.</li>')
     exceptions = _dedupe_exceptions(run.get('exceptions', []))
     support = run.get('support_reference') or _support_reference(run)
     needs = ''.join(f"<li>{escape(str(e.get('user_message') or e.get('acceptance_reason') or e.get('rejection_reason') or 'Needs attention'))} Support reference: {escape(str(e.get('support_reference') or support))} — section {escape(str(e.get('packet_id') or 'n/a'))}</li>" for e in exceptions[:20]) or '<li>No exceptions requiring review.</li>'
@@ -637,8 +666,8 @@ def _outcome_summary(run: dict[str, Any] | None) -> str:
     headline = 'Complete' if status == 'completed' else ('Needs attention' if status == 'completed_with_exceptions' else ('In progress' if status in {'queued','retrieving_source','selecting_sections','estimating_cost','analysing','validating','updating_memory'} else 'Failed'))
     cost_value = run.get('actual_cost_usd') if run.get('actual_cost_usd') is not None else run.get('estimated_cost_usd')
     cost_text = f" · Run cost: {escape(str(cost_value))} USD" if cost_value is not None else ''
-    outcome = 'maintained Enterprise Model financial attributes changed or strengthened; use this as a prompt for account planning, not as a standalone commercial conclusion.' if run.get('enterprise_attributes_changed') else 'No financial intelligence was added because processing did not complete.'
-    return f"""<section class='card'><h2>Refresh outcome</h2><p>{headline}{cost_text} · Facts added: {len(run.get('claims', []))} · Reporting period: inferred from accepted facts · Collection status: {escape(status)} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Automatically accepted facts</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{len(exceptions)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a></p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {outcome}</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form></section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
+    outcome = 'Financial intelligence was updated. Some extracted facts require attention.' if status == 'completed_with_exceptions' else ('maintained Enterprise Model financial attributes changed or strengthened; use this as a prompt for account planning, not as a standalone commercial conclusion.' if run.get('enterprise_attributes_changed') else 'No financial intelligence was added because processing did not complete.')
+    return f"""<section class='card'><h2>Refresh outcome</h2><p>{headline}{cost_text} · Facts added: {len(run.get('claims', []))} · Reporting period: inferred from accepted facts · Collection status: {escape(status)} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Automatically accepted facts</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{len(exceptions)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a></p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {outcome}</p>{("<p><a href='/digital-twin/bt-group-plc'>View updated twin</a> · <a href='#attention'>Review exception</a> · <a href='#evidence'>View evidence</a></p>" if status == 'completed_with_exceptions' else "<form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form>")}</section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
 
 def missing_run_page(run_id: str) -> str:
     body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>This previous refresh result is no longer available.</p><p>Start a new refresh to collect the latest financial intelligence.</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Start new refresh</button></form><p><a href='/financial-intelligence'>Return to Financial Intelligence</a></p></section>"""
