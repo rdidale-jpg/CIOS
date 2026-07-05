@@ -62,6 +62,7 @@ FAILURE_MESSAGES = {
     'provider_request_invalid': 'Financial document understanding could not complete.',
     'provider_timeout': 'Financial document understanding could not complete.',
     'provider_response_invalid': 'Financial document understanding could not complete.',
+    'candidate_validation_failed': 'Financial sections were analysed, but extracted facts could not be validated.',
     'section_selection_failed': 'Flora could not identify the financial sections in this report.',
     'persistence_failed': 'Flora understood the report but could not save the results.',
 }
@@ -95,6 +96,7 @@ def _provider_failure_category(extraction) -> str:
         'provider_request_invalid': 'provider_request_invalid',
         'timeout': 'provider_timeout',
         'invalid_response': 'provider_response_invalid',
+        'candidate_validation_failed': 'candidate_validation_failed',
     }.get(status, 'provider_response_invalid' if getattr(extraction, 'schema_errors', None) else 'provider_request_failed')
 
 def _support_reference(run: dict[str, Any]) -> str:
@@ -189,13 +191,30 @@ def _write_json(path: Path, data: dict[str, Any]) -> None:
 
 def _run_path(run_id: str) -> Path: return _run_dir() / f'{run_id}.json'
 
+TERMINAL_RUN_STATES = {'completed','completed_with_exceptions','failed'}
+PROGRESS_ORDER = {'queued':0,'retrieving_source':8,'reading_document':18,'checking_document_quality':18,'selecting_sections':30,'preparing_packets':42,'estimating_cost':52,'analysing':68,'validating':82,'updating_memory':92,'completed':100,'completed_with_exceptions':100,'failed':100,'candidate_validation_failed':100,'provider_request_failed':100,'source_retrieval_failed':100,'source_not_pdf':100,'section_selection_failed':100,'persistence_failed':100}
+ACTIVE_RUN_STATES = {'queued','retrieving_source','reading_document','checking_document_quality','selecting_sections','preparing_packets','estimating_cost','analysing','validating','updating_memory'}
+
+def _normalise_terminal_status(status: str) -> str:
+    return 'failed' if status in {'candidate_validation_failed','provider_request_failed','source_retrieval_failed','source_not_pdf','section_selection_failed','persistence_failed'} else status
+
 def _write_progress(run_id: str, status: str, **extra: Any) -> None:
     try:
-        run = _read_json(_run_path(run_id)) if _run_path(run_id).is_file() else {'run_id': run_id, 'created_at': now_iso(), 'claims': [], 'applied_results': [], 'exceptions': []}
-        run.update({'status': status, **extra})
+        path = _run_path(run_id)
+        run = _read_json(path) if path.is_file() else {'run_id': run_id, 'created_at': now_iso(), 'claims': [], 'applied_results': [], 'exceptions': []}
+        if run.get('status') in TERMINAL_RUN_STATES:
+            return
+        previous = int(run.get('progress_percent') or run.get('percent_complete') or 0)
+        pct = max(previous, PROGRESS_ORDER.get(status, previous))
+        state = _normalise_terminal_status(status)
+        run.update({'status': state, 'state': state, 'current_stage': status, 'progress_percent': pct, 'percent_complete': pct, **extra})
+        if state in TERMINAL_RUN_STATES:
+            run['progress_percent'] = run['percent_complete'] = 100; run['terminal'] = True; run['completed_at'] = run.get('completed_at') or now_iso()
+        else:
+            run['terminal'] = False
         events = run.setdefault('progress_events', [])
-        events.append({'status': status, 'at': now_iso()})
-        _write_json(_run_path(run_id), run)
+        events.append({'status': state, 'stage': status, 'progress_percent': run['progress_percent'], 'at': now_iso()})
+        _write_json(path, run)
     except Exception:
         LOGGER.exception('Could not write Financial Intelligence progress for run_id=%s', run_id)
 
@@ -453,6 +472,8 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: 
             run['exception_count'] = len(run.get('exceptions', []))
     run['support_reference'] = _support_reference(run)
     run['exceptions'] = _dedupe_exceptions(run.get('exceptions', []))
+    run['terminal'] = run.get('status') not in ACTIVE_RUN_STATES
+    run['progress_percent'] = run['percent_complete'] = 100 if run['terminal'] else int(run.get('progress_percent') or 0)
     run['exception_count'] = len(run.get('exceptions', []))
     _record_provider_diagnostics(run)
     _write_cost_record(run)
@@ -472,7 +493,7 @@ def _active_refresh_run() -> dict[str, Any] | None:
     if not _run_dir().exists(): return None
     for path in sorted(_run_dir().glob('fi-*.json'), key=lambda p: p.stat().st_mtime, reverse=True):
         run = _read_json(path)
-        if run.get('status') in {'queued','retrieving_source','selecting_sections','estimating_cost','analysing','validating','updating_memory'}:
+        if run.get('status') in ACTIVE_RUN_STATES:
             return run
     return None
 
@@ -480,7 +501,7 @@ def create_financial_intelligence_progress_run(enterprise_id: str = 'bt-group-pl
     active = _active_refresh_run()
     if active: return active
     run_id = 'fi-' + uuid.uuid4().hex[:12]
-    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'queued', 'workflow': 'financial_intelligence', 'enterprise_id': enterprise_id, 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'claims': [], 'applied_results': [], 'exceptions': []}
+    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'queued', 'state': 'queued', 'terminal': False, 'progress_percent': 0, 'workflow': 'financial_intelligence', 'enterprise_id': enterprise_id, 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'claims': [], 'applied_results': [], 'exceptions': []}
     _write_json(_run_path(run_id), run)
     threading.Thread(target=_background_refresh, args=(enterprise_id, run_id), daemon=True).start()
     return run
@@ -493,6 +514,17 @@ def _background_refresh(enterprise_id: str, run_id: str) -> None:
         run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'failed', 'failure_category': 'failed', 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'exceptions': [{'exception_type': 'failed', 'failure_stage': 'failed', 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'user_message': 'Financial Intelligence refresh failed safely.', 'rejection_reason': f'{type(exc).__name__}: {exc}'}], 'claims': [], 'applied_results': []}
         _write_json(_run_path(run_id), run)
 
+
+def financial_intelligence_progress_status(run_id: str) -> dict[str, Any]:
+    run = load_run(run_id)
+    status = run.get('status') or 'queued'
+    terminal = status in TERMINAL_RUN_STATES or bool(run.get('terminal'))
+    created = run.get('created_at') or now_iso()
+    try: elapsed = int((datetime.now(UTC) - datetime.fromisoformat(created)).total_seconds())
+    except Exception: elapsed = 0
+    pct = int(run.get('progress_percent') or run.get('percent_complete') or (100 if terminal else 0))
+    return {'run_id': run_id, 'state': status, 'terminal': terminal, 'progress_percent': 100 if terminal else pct, 'current_stage': run.get('current_stage') or status, 'elapsed_time': elapsed, 'packet_count': run.get('packet_count',0), 'packets_completed': len([p for p in run.get('page_packets_submitted',[]) if p.get('status')]), 'facts_valid': len(run.get('claims',[])), 'facts_quarantined': len(run.get('candidate_exceptions') or run.get('exceptions') or []), 'final_result_url': f'/financial-intelligence/{run_id}' if terminal else None}
+
 def financial_intelligence_progress_page(run_id: str) -> str:
     try:
         run = load_run(run_id)
@@ -503,7 +535,9 @@ def financial_intelligence_progress_page(run_id: str) -> str:
     try: elapsed = int((datetime.now(UTC) - datetime.fromisoformat(created)).total_seconds())
     except Exception: elapsed = 0
     label = labels.get(run.get('status'), 'Failed' if run.get('status') not in {'queued','retrieving_source','selecting_sections','estimating_cost','analysing','validating','updating_memory'} else 'Working')
-    body = f"""<section class='hero'><h1>Financial Intelligence refresh</h1><p>{escape(label)}</p><p>Elapsed time: {elapsed} seconds. Large reports may take several minutes.</p><meta http-equiv='refresh' content='5'></section>{_outcome_summary(run) if run.get('status') not in {'queued','retrieving_source','selecting_sections','estimating_cost','analysing','validating','updating_memory'} else ''}"""
+    terminal = run.get('status') in TERMINAL_RUN_STATES or bool(run.get('terminal'))
+    pct = int(run.get('progress_percent') or run.get('percent_complete') or (100 if terminal else 0))
+    body = f"""<section class='hero'><h1>Financial Intelligence refresh</h1><p>{escape(label)}</p><div style='background:#eee;border-radius:999px;overflow:hidden'><div id='bar' style='width:{pct}%;background:#185c4d;color:white;padding:8px'>{pct}%</div></div><p>Elapsed time: {elapsed} seconds. Large reports may take several minutes.</p></section>{_outcome_summary(run) if terminal else ''}<script>let polling={str(not terminal).lower()};let timer=null;async function poll(){{if(!polling)return;const r=await fetch('/financial-intelligence/progress/{escape(run_id)}/status',{{cache:'no-store'}});const s=await r.json();document.getElementById('bar').style.width=s.progress_percent+'%';document.getElementById('bar').textContent=s.progress_percent+'%';if(s.terminal){{polling=false;if(timer)clearTimeout(timer);location.href=s.final_result_url;return}}timer=setTimeout(poll,2000)}}if(polling)poll();</script>"""
     return _page('Financial Intelligence progress', body)
 
 def create_upload_run(pdf_path: Path, *, enterprise_id: str = 'bt-group-plc', title: str = 'BT Group plc Annual Report 2026', source_url: str = 'uploaded authoritative PDF') -> dict[str, Any]:

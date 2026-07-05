@@ -271,22 +271,25 @@ def packet_cache_path(document_hash: str, packet_hash: str, model: str) -> Path:
 
 
 def _packet_payload(provider: Any, document: ExperimentDocument, packet: PagePacket, schema: type[FoundationFactSet]) -> dict[str, Any]:
-    if not packet.pdf_bytes or packet.page_count <= 0 or packet.input_mode != 'file_data':
-        raise ValueError('packet_content_unavailable: packet has no PDF bytes; refusing text-only placeholder')
     mapping = packet.packet_page_to_original or {i + 1: p for i, p in enumerate(packet.page_numbers)}
-    encoded = base64.b64encode(packet.pdf_bytes).decode('ascii')
     instructions = (
         EXTRACTION_INSTRUCTIONS
-        + '\n\nReturn no more than 15 material, atomic facts across revenue, adjusted EBITDA, operating profit, capital expenditure, normalised free cash flow, net debt, cost savings, financial outlook, and material segment movement. Every fact must cite ORIGINAL PDF PAGE numbers present in this packet map. Packet page to original PDF page map: '
+        + '\n\nReturn no more than 15 material, atomic facts across revenue, adjusted EBITDA, operating profit, capital expenditure, normalised free cash flow, net debt, cost savings, financial outlook, and material segment movement. Every fact must cite packet_page_number using the packet-local page number in this map, not the original PDF page. Set source_page_start and source_page_end to the same packet-local page number. Flora will resolve original_pdf_page_number deterministically. Packet page to original PDF page map: '
         + json.dumps(mapping, sort_keys=True)
     ).strip()
+    content: list[dict[str, Any]] = []
+    if packet.pdf_bytes and packet.page_count > 0 and packet.input_mode == 'file_data':
+        encoded = base64.b64encode(packet.pdf_bytes).decode('ascii')
+        content.append({'type': 'input_file', 'filename': f'{packet.packet_id}.pdf', 'file_data': f'data:application/pdf;base64,{encoded}'})
+    else:
+        content.append({'type': 'input_text', 'text': packet.text})
+    content.extend([
+        {'type': 'input_text', 'text': f"Document: {document.title}\nOriginal PDF pages in packet: {', '.join(map(str, packet.page_numbers))}\nPacket hash: {packet.packet_hash}"},
+        {'type': 'input_text', 'text': instructions},
+    ])
     return {
         'model': provider.model,
-        'input': [{'role': 'user', 'content': [
-            {'type': 'input_file', 'filename': f'{packet.packet_id}.pdf', 'file_data': f'data:application/pdf;base64,{encoded}'},
-            {'type': 'input_text', 'text': f"Document: {document.title}\nOriginal PDF pages in packet: {', '.join(map(str, packet.page_numbers))}\nPacket hash: {packet.packet_hash}"},
-            {'type': 'input_text', 'text': instructions},
-        ]}],
+        'input': [{'role': 'user', 'content': content}],
         'reasoning': {'effort': provider.reasoning_effort},
         'text': {'format': {'type': 'json_schema', 'name': 'foundation_fact_set', 'schema': openai_strict_json_schema(schema), 'strict': True}},
     }
@@ -317,10 +320,12 @@ def _quarantine_ungrounded_facts(facts: list[Any], exceptions: list[dict[str, An
     valid: list[Any] = []
     for idx, fact in enumerate(facts):
         excerpt = (getattr(fact, 'source_excerpt', '') or '').strip()
-        start = int(getattr(fact, 'source_page_start', 0) or 0)
+        start = int(getattr(fact, 'original_pdf_page_number', None) or getattr(fact, 'source_page_start', 0) or 0)
         end = int(getattr(fact, 'source_page_end', start) or start)
-        if not excerpt or start not in allowed or end not in allowed:
-            exceptions.append({'exception_type':'candidate_fact_validation_failed','packet_id':packet.packet_id,'candidate_index':idx,'original_page_reference':start,'validation_failure_category':'evidence_grounding_failed','safe_explanation':'Returned fact page is outside the packet map or lacks supporting excerpt/context.','machine_candidate': fact.model_dump(mode='json') if hasattr(fact, 'model_dump') else {}})
+        pkt = getattr(fact, 'packet_page_number', None)
+        original_from_map = (packet.packet_page_to_original or {}).get(int(pkt or 0))
+        if not excerpt or start not in allowed or end not in allowed or (pkt is not None and original_from_map != start):
+            exceptions.append({'exception_type':'candidate_fact_validation_failed','packet_id':packet.packet_id,'candidate_index':idx,'returned_page_reference':pkt,'original_page_reference':start,'support_reference':packet.packet_id,'supporting_excerpt_length':len(excerpt),'metric_type':str(getattr(fact,'claim_type','')),'value_kind':getattr(getattr(fact,'value',None),'kind',None),'populated_value_fields':['value'],'validation_rule_failed':'evidence_grounding_failed','validation_error_code':'evidence_grounding_failed','deterministic_repair_possible':False,'validation_failure_category':'evidence_grounding_failed','safe_explanation':'Returned fact page is outside the packet map or lacks supporting excerpt/context.','machine_candidate': fact.model_dump(mode='json') if hasattr(fact, 'model_dump') else {}})
         else:
             valid.append(fact)
     return valid
@@ -382,19 +387,19 @@ class SectionAwareOpenAIProvider:
         page_reasons = {c.page_number: ([c.reason] if c.reason else list(c.matched_terms)) + ([f'numeric financial evidence'] if re.search(r'(?:£|gbp|bn|m\b|%)', c.text.casefold()) else []) for c in candidates}
         LOGGER.error('Flora selected financial pages ' + json.dumps({'support_reference': _support_reference(correlation_id), 'correlation_id': correlation_id, 'candidate_pages': [{'page_number': c.page_number, 'score': c.score, 'matched_headings': list(c.matched_headings), 'matched_financial_terms': list(c.matched_terms), 'selection_reason': c.reason, 'reasons': page_reasons.get(c.page_number, [])} for c in candidates]}, sort_keys=True))
         try:
-            packets = build_real_page_packets(candidates, document)
+            packets = build_real_page_packets(candidates, document) if (document.local_path and Path(document.local_path).is_file()) else build_page_packets(candidates)
         except Exception as exc:
             LOGGER.exception('Financial Intelligence packet construction failed support_reference=%s', _support_reference(correlation_id))
             exc_payload = {'exception_type':'packet_content_unavailable','failure_stage':'preparing_packets','support_reference':_support_reference(correlation_id),'rejection_reason':f'{type(exc).__name__}: {exc}','user_message':'Flora could not prepare the selected PDF pages for analysis.'}
             final = ExtractionRun(run_id=correlation_id, route='openai-responses-section-packets', provider='openai', model=self.model, model_version=self.model, status='packet_content_unavailable', started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage={'input_tokens':0,'output_tokens':0}, facts=[], candidate_exceptions=[exc_payload], diagnostics=[exc_payload | {'openai_invoked':False}])
-            return final, {'candidate_pages': [], 'packets': [], 'packet_count': 0, 'openai_calls': 0, 'document_hash': stable_document_hash(document), 'parse_diagnostics': parse_diag, 'fallback_used': True, 'visual_navigation': locals().get('visual_plan', {'visual_fallback_used': False})}
+            return final, {'candidate_pages': [{'page_number': c.page_number, 'score': c.score, 'matched_headings': list(c.matched_headings), 'matched_financial_terms': list(c.matched_terms), 'selection_reason': c.reason, 'reasons': page_reasons.get(c.page_number, [])} for c in candidates], 'packets': [], 'packet_count': 0, 'openai_calls': 0, 'document_hash': stable_document_hash(document), 'parse_diagnostics': parse_diag, 'fallback_used': True, 'visual_navigation': locals().get('visual_plan', {'visual_fallback_used': False})}
 
         doc_hash = stable_document_hash(document)
         runs: list[ExtractionRun] = []; packet_records=[]; total_usage={'input_tokens':0,'output_tokens':0}; openai_calls=0; packet_failures=[]
         if not packets:
             exc = {'exception_type':'section_selection_failed','failure_stage':'selecting_sections','support_reference':_support_reference(correlation_id),'user_message':'Flora could not identify the financial sections in this report.','rejection_reason':'No relevant financial pages selected; no paid model request occurred.'}
             final = ExtractionRun(run_id=correlation_id, route='openai-responses-section-packets', provider='openai', model=self.model, model_version=self.model, status='section_selection_failed', started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage={'input_tokens':0,'output_tokens':0}, facts=[], candidate_exceptions=[exc], diagnostics=[{'event':'section_selection_failed','request_stage':'selecting_sections','support_reference':_support_reference(correlation_id),'correlation_id':correlation_id,'openai_invoked':False,'no_paid_model_request':True}])
-            return final, {'candidate_pages': [], 'packets': [], 'packet_count': 0, 'openai_calls': 0, 'document_hash': stable_document_hash(document), 'parse_diagnostics': parse_diag, 'fallback_used': True, 'visual_navigation': locals().get('visual_plan', {'visual_fallback_used': False})}
+            return final, {'candidate_pages': [{'page_number': c.page_number, 'score': c.score, 'matched_headings': list(c.matched_headings), 'matched_financial_terms': list(c.matched_terms), 'selection_reason': c.reason, 'reasons': page_reasons.get(c.page_number, [])} for c in candidates], 'packets': [], 'packet_count': 0, 'openai_calls': 0, 'document_hash': stable_document_hash(document), 'parse_diagnostics': parse_diag, 'fallback_used': True, 'visual_navigation': locals().get('visual_plan', {'visual_fallback_used': False})}
         OpenAI = __import__('openai', fromlist=['OpenAI']).OpenAI
         client = OpenAI(timeout=getattr(self.base_provider, 'timeout_seconds', 120), max_retries=getattr(self.base_provider, 'max_retries', 0))
         queue = list(packets)
@@ -420,13 +425,15 @@ class SectionAwareOpenAIProvider:
                 raw = resp.model_dump(mode='json') if hasattr(resp, 'model_dump') else resp
                 diagnostics.append(_packet_event('packet_model_request_completed', correlation_id=correlation_id, packet=packet, reasons=page_reasons, input_tokens=input_tokens, model=self.model, started=started, provider_status='completed'))
                 diagnostics.append(_packet_event('packet_response_validation_started', correlation_id=correlation_id, packet=packet, reasons=page_reasons, input_tokens=input_tokens, model=self.model, started=started))
-                parsed, candidate_exceptions, parse_status = parse_foundation_fact_candidates(getattr(resp, 'output_text', '') or raw.get('output_text', '{}'), packet_id=packet.packet_id, provider='openai', model=self.model, request_id=raw.get('id'))
+                parsed, candidate_exceptions, parse_status = parse_foundation_fact_candidates(getattr(resp, 'output_text', '') or raw.get('output_text', '{}'), packet_id=packet.packet_id, provider='openai', model=self.model, request_id=raw.get('id'), packet_page_map=packet.packet_page_to_original or {})
                 parsed_facts = _quarantine_ungrounded_facts(list(parsed.facts), candidate_exceptions, packet)
                 parsed = FoundationFactSet(facts=parsed_facts)
+                for exc in candidate_exceptions:
+                    LOGGER.error('Flora candidate rejection diagnostic ' + json.dumps(exc, sort_keys=True))
                 if parsed.facts and candidate_exceptions:
                     parse_status = 'completed_with_exceptions'
                 elif candidate_exceptions and not parsed.facts:
-                    parse_status = 'provider_response_invalid'
+                    parse_status = 'candidate_validation_failed'
                 candidate_count = len(parsed.facts) + len(candidate_exceptions)
                 diagnostics.append(_packet_event('packet_response_validation_completed', correlation_id=correlation_id, packet=packet, reasons=page_reasons, input_tokens=input_tokens, model=self.model, started=started, provider_status=parse_status, candidate_count=candidate_count, valid_count=len(parsed.facts), quarantined_count=len(candidate_exceptions)))
                 usage = raw.get('usage') or {}
@@ -448,7 +455,7 @@ class SectionAwareOpenAIProvider:
         elif packet_failures and not merged.facts:
             final_status = 'provider_request_failed'
         elif runs and not merged.facts and any(r.candidate_exceptions for r in runs):
-            final_status = 'provider_response_invalid'
+            final_status = 'candidate_validation_failed'
         else:
             final_status = 'completed'
         final = ExtractionRun(run_id=correlation_id, route='openai-responses-section-packets', provider='openai', model=self.model, model_version=self.model, status=final_status, started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage=total_usage, facts=merged.facts, candidate_exceptions=[e for r in runs for e in r.candidate_exceptions], diagnostics=[d for r in runs for d in r.diagnostics])
