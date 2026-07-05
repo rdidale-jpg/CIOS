@@ -38,6 +38,32 @@ def test_scale_is_retained_and_missing_scale_blocks_acceptance():
     assert reason == 'financial_scale_ambiguous'
 
 
+def test_packet_one_bn_candidates_are_accepted_and_packet_two_missing_scale_stays_quarantined(monkeypatch, tmp_path):
+    svc = ObservationMemoryService(ObservationRepository(tmp_path / 'obs.jsonl'), EnterpriseModelRepository(tmp_path / 'models'))
+    monkeypatch.setattr(document_review, 'ObservationMemoryService', lambda: svc)
+    packet_one = [
+        base_claim(claim_id='revenue', evidence_id='ev-rev', predicate='Revenue', value=19.7, reported_amount=19.7, reported_scale='bn', source_excerpt='Revenue £19.7bn.'),
+        base_claim(claim_id='ebitda', evidence_id='ev-ebitda', predicate='Adjusted EBITDA', value=8.2, reported_amount=8.2, reported_scale='bn', source_excerpt='Adjusted EBITDA £8.2bn.'),
+        base_claim(claim_id='capex', evidence_id='ev-capex', predicate='Capital expenditure', value=5.1, reported_amount=5.1, reported_scale='bn', source_excerpt='Capital expenditure £5.1bn.'),
+        base_claim(claim_id='ocf', evidence_id='ev-ocf', predicate='Cash flow from operating activities', value=7.0, reported_amount=7.0, reported_scale='bn', source_excerpt='Cash flow from operating activities £7.0bn.'),
+        base_claim(claim_id='nfcf', evidence_id='ev-nfcf', predicate='Normalised free cash flow', value=1.5, reported_amount=1.5, reported_scale='bn', source_excerpt='Normalised free cash flow £1.5bn.'),
+    ]
+    packet_two = base_claim(claim_id='p2-revenue', evidence_id='ev-p2', predicate='Revenue', value=19654, reported_amount=19654, reported_scale=None, source_excerpt='Revenue £19654.')
+    run = document_review._apply_automatic_claims(run_for(packet_one + [packet_two]))
+    dispositions = {d['candidate_id']: d['disposition'] for d in run['candidate_dispositions']}
+    assert dispositions['revenue'] == 'accepted'
+    assert dispositions['ebitda'] == 'accepted'
+    assert dispositions['capex'] == 'accepted'
+    assert dispositions['ocf'] == 'accepted'
+    assert dispositions['nfcf'] == 'accepted'
+    assert dispositions['p2-revenue'] == 'financial_scale_ambiguous'
+    assert run['claims'][0]['reported_scale'] == 'billions'
+    assert run['claims'][0]['normalised_amount'] == 19700000000
+    assert run['auto_accepted_count'] == 5
+    model = EnterpriseModelRepository(tmp_path / 'models').get('bt-group-plc')
+    assert model.attributes['financial_performance.metrics.revenue.FY26.actual'].current_value is not None
+
+
 def test_duplicate_financial_metrics_are_reconciled_and_counts_balance(monkeypatch, tmp_path):
     svc = ObservationMemoryService(ObservationRepository(tmp_path / 'obs.jsonl'), EnterpriseModelRepository(tmp_path / 'models'))
     monkeypatch.setattr(document_review, 'ObservationMemoryService', lambda: svc)
