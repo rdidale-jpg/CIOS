@@ -313,3 +313,32 @@ def test_observatory_critique_route_renders_preimplementation_critique() -> None
     assert status == 200
     assert "Architectural Critique" in html
     assert "evidence-to-hypothesis reasoning spine" in html
+
+def test_financial_intelligence_post_accepts_explicit_acquisition_mode(monkeypatch, tmp_path) -> None:
+    from http.client import HTTPConnection
+    from urllib.parse import urlencode
+    from cios.applications.flora import document_review as review
+
+    monkeypatch.chdir(tmp_path)
+    captured = {}
+
+    def fake_create(enterprise_id, extraction_mode='structured_standard_financials'):
+        captured['enterprise_id'] = enterprise_id
+        captured['extraction_mode'] = extraction_mode
+        return {'run_id': 'fi-explicit-mode'}
+
+    monkeypatch.setattr(review, 'create_financial_intelligence_progress_run', fake_create)
+    import cios.applications.flora.web.app as webapp
+    monkeypatch.setattr(webapp, 'create_financial_intelligence_progress_run', fake_create)
+    server = __import__('http.server').server.ThreadingHTTPServer(('127.0.0.1', 0), FloraWebHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    connection = HTTPConnection('127.0.0.1', server.server_port)
+    try:
+        body = urlencode({'acquisition_mode': 'pdf_supporting_evidence'})
+        connection.request('POST', '/financial-intelligence/bt-group-plc/refresh', body=body, headers={'Content-Type': 'application/x-www-form-urlencoded'})
+        response = connection.getresponse(); response.read()
+        assert response.status == 303
+        assert captured == {'enterprise_id': 'bt-group-plc', 'extraction_mode': 'pdf_supporting_evidence'}
+    finally:
+        connection.close(); server.shutdown(); server.server_close(); thread.join(timeout=2)

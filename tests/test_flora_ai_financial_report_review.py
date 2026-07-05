@@ -107,7 +107,7 @@ def test_financial_intelligence_records_source_retrieval_failure(monkeypatch, tm
     monkeypatch.setattr(ai_review, 'fetch_document', lambda url: Fetch())
     monkeypatch.setattr(ai_review, '_bt_annual_report_source', lambda: {'source_id': 'bt-annual-report-2026', 'source_name': 'BT Group plc Annual Report 2026', 'url': 'https://www.bt.com/report.pdf', 'source_type': 'annual_report', 'authority_tier': 'tier_1_company_authoritative', 'publisher': 'BT Group plc'})
 
-    run = ai_review.refresh_financial_intelligence()
+    run = ai_review.refresh_financial_intelligence(extraction_mode='pdf_supporting_evidence')
 
     assert run['status'] == 'source_retrieval_failed'
     assert run['exceptions'][0]['exception_type'] == 'source_retrieval_failed'
@@ -198,7 +198,7 @@ def test_financial_intelligence_persistence_failure_is_not_provider_failure(monk
         raise PersistenceError('disk read-only')
     monkeypatch.setattr(ai_review, '_write_json', fail_write)
 
-    run = ai_review.refresh_financial_intelligence()
+    run = ai_review.refresh_financial_intelligence(extraction_mode='pdf_supporting_evidence')
 
     assert run['status'] == 'persistence_failed'
     assert run['failure_category'] == 'persistence_failed'

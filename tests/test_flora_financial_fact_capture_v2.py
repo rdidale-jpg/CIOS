@@ -15,8 +15,8 @@ def test_route_level_golden_deterministic_refresh_second_refresh_zero_openai(mon
         raise AssertionError('OpenAI must not be called for deterministic standard metrics')
     monkeypatch.setattr(review.OpenAIDirectPDFProvider, 'extract_facts', fail_openai)
 
-    first = review.refresh_financial_intelligence()
-    second = review.refresh_financial_intelligence()
+    first = review.refresh_financial_intelligence(extraction_mode='pdf_supporting_evidence')
+    second = review.refresh_financial_intelligence(extraction_mode='pdf_supporting_evidence')
 
     assert first['openai_invoked'] is False and first['openai_calls_made'] == 0
     assert second['openai_invoked'] is False and second['openai_calls_made'] == 0
