@@ -7,3 +7,6 @@ __pycache__/
 .document_understanding/
 .flora_pilot/documents/
 *.page-range.pdf
+
+# Flora financial intelligence transient data
+.flora_financial_intelligence/
