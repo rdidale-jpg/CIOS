@@ -175,6 +175,8 @@ def _safe_provider_diagnostic(run_id: str, source: dict[str, Any], fetched: Any,
         'elapsed_time': round(time.time() - started, 3),
     }
 
+DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE = 'dual_speed_financial_intelligence'
+
 STRUCTURED_FINANCIAL_STATUSES = {
     'structured_source_unavailable',
     'structured_source_identity_failed',
@@ -317,7 +319,7 @@ def _run_path(run_id: str) -> Path: return _run_dir() / f'{run_id}.json'
 
 TERMINAL_RUN_STATES = {'completed','completed_with_exceptions','completed_with_no_accepted_intelligence','completed_with_no_new_evidence','structured_source_unavailable','structured_source_identity_failed','structured_source_retrieval_failed','structured_package_invalid','structured_filing_parse_failed','structured_entity_mismatch','structured_scope_ambiguous','structured_facts_unmapped','canonical_validation_failed','failed','candidate_validation_failed','provider_request_failed','provider_response_invalid','provider_response_incomplete','output_token_limit_reached','section_selection_failed','persistence_failed'}
 PROGRESS_ORDER = {'queued':0,'retrieving_source':8,'reading_document':18,'checking_document_quality':18,'selecting_sections':30,'preparing_packets':42,'estimating_cost':52,'analysing':68,'validating':82,'updating_memory':92,'completed':100,'completed_with_exceptions':100,'completed_with_no_accepted_intelligence':100,'failed':100,'candidate_validation_failed':100,'provider_request_failed':100,'provider_response_incomplete':100,'output_token_limit_reached':100,'source_retrieval_failed':100,'source_not_pdf':100,'section_selection_failed':100,'structured_source_unavailable':100,'structured_source_identity_failed':100,'structured_source_retrieval_failed':100,'structured_package_invalid':100,'structured_filing_parse_failed':100,'structured_entity_mismatch':100,'structured_scope_ambiguous':100,'structured_facts_unmapped':100,'canonical_validation_failed':100,'completed_with_no_new_evidence':100,'persistence_failed':100}
-ACTIVE_RUN_STATES = {'queued','retrieving_source','reading_document','checking_document_quality','selecting_sections','preparing_packets','estimating_cost','analysing','validating','updating_memory'}
+ACTIVE_RUN_STATES = {'queued','running','retrieving_source','reading_document','checking_document_quality','selecting_sections','preparing_packets','estimating_cost','analysing','validating','updating_memory'}
 
 def _normalise_terminal_status(status: str) -> str:
     return 'failed' if status in {'candidate_validation_failed','provider_request_failed','source_retrieval_failed','source_not_pdf','section_selection_failed','persistence_failed'} else status
@@ -698,9 +700,162 @@ def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
     run.update({'status': terminal_status, 'applied_at': now_iso(), 'applied_results': results, 'exceptions': exceptions, 'auto_accepted_count': accepted, 'exception_count': len(exceptions), 'observations_created_or_strengthened': len(results), 'observations_created': len([r for r in results if r.get('update_result') == 'created']), 'observations_strengthened': len([r for r in results if r.get('update_result') == 'updated']), 'corroborating_evidence_merges': merges, 'deduplicated_count': merges, 'candidate_dispositions': dispositions, 'rejected_by_policy_count': len(exceptions), 'repository_diagnostics': {'observation_repository': type(svc.observations).__name__, 'enterprise_model_repository': type(svc.models).__name__, 'storage_mode': storage_mode().get('mode'), 'canonical_enterprise_id': model.enterprise_id, 'observation_count_after_write': len(svc.observations.list()), 'enterprise_model_attribute_count_after_projection': len(model.attributes)}, 'candidate_lifecycle_counts': {'packet_candidates_extracted': len(run.get('claims', [])) + len(run.get('candidate_exceptions', [])), 'candidates_returned': len(run.get('claims', [])) + len(run.get('candidate_exceptions', [])), 'valid_candidates': len(run.get('claims', [])), 'quarantined_candidates': len(run.get('candidate_exceptions', [])) + len([e for e in exceptions if e.get('review_state') == 'needs_attention']), 'canonical_facts_accepted': accepted, 'corroborating_evidence_merges': merges, 'automatically_accepted_candidates': accepted, 'deduplicated_candidates': merges, 'disposition_counts': counts, 'candidates_rejected_by_policy': len(exceptions), 'observations_created_or_strengthened': len(results), 'enterprise_model_attributes_created': len([r for r in changed if r.get('update_result') == 'created']), 'enterprise_model_attributes_updated': len([r for r in changed if r.get('update_result') == 'updated'])}, 'enterprise_attributes_changed': [r.get('affected_attribute') for r in changed]})
     return run
 
+
+
+def _rapid_lane_from_fixture_result(rapid_result: dict[str, Any], elapsed_ms: int) -> dict[str, Any]:
+    user_result = str(rapid_result.get('user_result') or '')
+    facts = list(rapid_result.get('reported_financial_reality') or [])
+    status = 'ready' if user_result and facts else ('partial' if user_result else 'unavailable')
+    return {
+        'status': status,
+        'evidence_status': 'fixture_only',
+        'source_receipts': list(rapid_result.get('sources') or []),
+        'candidate_fact_count': int(rapid_result.get('candidate_fact_count') or len(facts)),
+        'candidate_facts': facts,
+        'management_commitments': list(rapid_result.get('management_commitments') or []),
+        'hypotheses': list(rapid_result.get('transformation_hypotheses') or []),
+        'unknowns': list(rapid_result.get('unknowns') or []),
+        'contradictions': list(rapid_result.get('contradictions') or []),
+        'user_result': user_result,
+        'exceptions': list(rapid_result.get('verification_exceptions') or []),
+        'elapsed_ms': elapsed_ms,
+        'non_canonical': True,
+        'fixture_only_warning': 'Fixture-only rapid intelligence: seeded candidate data for local orchestration proof; not verified official evidence and not production-ready.',
+        'embedded_rapid_result': rapid_result,
+    }
+
+
+def _verification_unavailable_lane(run_id: str, enterprise_id: str, started: float) -> dict[str, Any]:
+    return {
+        'status': 'unavailable',
+        'source': 'structured_standard_financials',
+        'adapter_handoff_attempted': False,
+        'adapter_result': None,
+        'facts_checked': 0,
+        'facts_verified': 0,
+        'facts_rejected': 0,
+        'facts_contradicted': 0,
+        'exceptions': [{
+            'exception_type': 'structured_source_unavailable',
+            'failure_stage': 'structured_verification_not_executed_in_slice_1',
+            'support_reference': 'FI-' + run_id.removeprefix('fi-'),
+            'user_message': 'Structured verification unavailable in Slice 1 fixture-only dual-speed mode.',
+            'rejection_reason': 'Slice 1 does not retrieve live BT, FCA, ESEF or other external structured sources.',
+        }],
+        'diagnostics': [{
+            'event': 'verification_unavailable',
+            'enterprise_id': enterprise_id,
+            'adapter_handoff_attempted': False,
+            'no_adapter_result_before_handoff': True,
+            'external_source_call_count': 0,
+        }],
+        'elapsed_ms': int((time.time() - started) * 1000),
+    }
+
+
+def _canonical_update_not_applicable() -> dict[str, Any]:
+    return {
+        'status': 'not_applicable',
+        'evidence_ids': [],
+        'observation_ids': [],
+        'enterprise_model_updated': False,
+        'attributes_updated': [],
+        'transaction_result': 'not_started_fixture_only_rapid_candidates',
+        'idempotency_result': 'not_applicable',
+        'exceptions': [],
+    }
+
+
+def _dual_speed_completion_class(rapid: dict[str, Any], verification: dict[str, Any]) -> tuple[str, str]:
+    rapid_status = rapid.get('status')
+    verification_status = verification.get('status')
+    has_rapid = bool(rapid.get('user_result')) and rapid_status in {'ready', 'partial'}
+    if rapid_status == 'ready' and verification_status == 'verified':
+        return 'completed', 'verified'
+    if rapid_status == 'ready' and verification_status in {'unavailable', 'failed'}:
+        return 'completed', 'unverified'
+    if rapid_status == 'partial' and verification_status != 'verified':
+        return 'completed', 'partial'
+    if not has_rapid and verification_status == 'verified':
+        return 'completed', 'verified'
+    return 'failed', 'no_trustworthy_evidence'
+
+
+def coordinate_dual_speed_financial_intelligence_run(enterprise_id: str = 'bt-group-plc', run_id: str | None = None, reporting_period: str = 'FY26') -> dict[str, Any]:
+    """Coordinate Slice 1 dual-speed Financial Intelligence in one standard run record."""
+    run_id = run_id or ('fi-' + uuid.uuid4().hex[:12])
+    ensure_writable_dir(_run_dir())
+    created_at = now_iso()
+    support_reference = 'FI-' + run_id.removeprefix('fi-')
+    result_url = f'/financial-intelligence/{run_id}'
+    before = _trusted_state_snapshot(enterprise_id)
+    run = {
+        'run_id': run_id,
+        'enterprise_id': enterprise_id,
+        'reporting_period': reporting_period,
+        'execution_mode': DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE,
+        'extraction_mode': DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE,
+        'extraction_mode_label': 'Dual-speed financial intelligence',
+        'overall_status': 'running',
+        'completion_class': None,
+        'status': 'running',
+        'state': 'running',
+        'workflow': 'financial_intelligence',
+        'created_at': created_at,
+        'updated_at': created_at,
+        'support_reference': support_reference,
+        'result_url': result_url,
+        'rapid_intelligence': {'status': 'not_started'},
+        'verification': {'status': 'not_started'},
+        'canonical_update': _canonical_update_not_applicable(),
+        'cost_summary': {'ai_call_count': 0, 'provider': 'none', 'model': None, 'input_tokens': 0, 'output_tokens': 0, 'estimated_provider_cost_usd': 0, 'cache_reused': False, 'external_source_call_count': 0},
+        'diagnostics': {'slice': 'slice_1_fixture_orchestration_shell', 'production_ready': False, 'trusted_state_before': before},
+        'claims': [], 'applied_results': [], 'exceptions': [],
+        'terminal': False, 'progress_percent': 0, 'percent_complete': 0,
+    }
+    _write_json(_run_path(run_id), run)
+    rapid_started = time.time()
+    rapid_result = run_rapid_financial_intelligence(enterprise_id=enterprise_id, run_id=run_id)
+    rapid_lane = _rapid_lane_from_fixture_result(rapid_result, int((time.time() - rapid_started) * 1000))
+    run['rapid_intelligence'] = rapid_lane
+    run['updated_at'] = now_iso(); run['progress_percent'] = run['percent_complete'] = 55
+    _write_json(_run_path(run_id), run)
+    verification_started = time.time()
+    verification_lane = _verification_unavailable_lane(run_id, enterprise_id, verification_started)
+    run['verification'] = verification_lane
+    run['canonical_update'] = _canonical_update_not_applicable()
+    overall_status, completion_class = _dual_speed_completion_class(rapid_lane, verification_lane)
+    after = _trusted_state_snapshot(enterprise_id)
+    run.update({
+        'overall_status': overall_status,
+        'completion_class': completion_class,
+        'status': overall_status,
+        'state': overall_status,
+        'current_stage': overall_status,
+        'updated_at': now_iso(),
+        'completed_at': now_iso(),
+        'terminal': True,
+        'progress_percent': 100,
+        'percent_complete': 100,
+        'user_message': rapid_lane.get('user_result') if rapid_lane.get('user_result') else 'No trustworthy Financial Intelligence outcome could be produced.',
+        'exceptions': list(verification_lane.get('exceptions') or []),
+        'ai_calls_made': 0,
+        'openai_calls_made': 0,
+        'estimated_cost_usd': 0,
+        'actual_cost_usd': 0,
+        'trusted_state_before': before,
+        'trusted_state_after': after,
+        'trusted_twin_changed': before['active_observation_count'] != after['active_observation_count'] or before['active_enterprise_model_attribute_count'] != after['active_enterprise_model_attribute_count'],
+    })
+    run['diagnostics'].update({'trusted_state_after': after, 'canonical_memory_changed': run['trusted_twin_changed']})
+    _write_json(_run_path(run_id), run)
+    return run
+
 def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: str | None = None, extraction_mode: str = 'structured_standard_financials') -> dict[str, Any]:
     run_id = run_id or ('fi-' + uuid.uuid4().hex[:12])
     acquisition_mode = extraction_mode or 'structured_standard_financials'
+    if acquisition_mode == DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE:
+        return coordinate_dual_speed_financial_intelligence_run(enterprise_id=enterprise_id, run_id=run_id)
     if acquisition_mode == 'structured_standard_financials':
         return _refresh_structured_financial_intelligence(enterprise_id, run_id)
     if acquisition_mode == 'rapid_financial_intelligence':
@@ -1012,8 +1167,22 @@ def _business_change_label(run: dict[str, Any], result: dict[str, Any]) -> str:
         return f"{metric}: {claim.get('display_value')} — strengthened by {len(claim.get('supporting_evidence_ids') or (claim.get('evidence_id'),))} Evidence records"
     return attr
 
+def _render_dual_speed_outcome(run: dict[str, Any]) -> str:
+    rapid = run.get('rapid_intelligence') or {}
+    verification = run.get('verification') or {}
+    canonical = run.get('canonical_update') or {}
+    cost = run.get('cost_summary') or {}
+    rapid_result = escape(str(rapid.get('user_result') or 'No rapid outlook is available.'))
+    verification_status = escape(str(verification.get('status') or 'not_started'))
+    verification_exceptions = ''.join(f"<li>{escape(str(e.get('user_message') or e.get('rejection_reason') or e.get('exception_type') or 'Verification exception'))}</li>" for e in (verification.get('exceptions') or [])) or '<li>No verification exceptions recorded.</li>'
+    canonical_status = escape(str(canonical.get('status') or 'not_started'))
+    canonical_changed = 'yes' if canonical.get('enterprise_model_updated') else 'no'
+    return f"""<section class='card warning'><h2>Fixture-only evidence warning</h2><p>This Slice 1 dual-speed result uses seeded rapid fixture data for local orchestration proof only. It is not verified official evidence, is not production-ready and has not updated canonical Evidence, Observations or the Enterprise Model.</p></section><section class='card'><h2>Rapid Financial Pressure and Transformation Outlook</h2><p>Rapid lane status: {escape(str(rapid.get('status')))} · Evidence status: {escape(str(rapid.get('evidence_status')))} · Candidate facts: {escape(str(rapid.get('candidate_fact_count', 0)))}</p><pre>{rapid_result}</pre></section><section class='card'><h2>Verification summary</h2><p>Status: {verification_status} · Adapter handoff attempted: {escape(str(verification.get('adapter_handoff_attempted', False)).lower())} · Facts verified: {escape(str(verification.get('facts_verified', 0)))}</p><ul>{verification_exceptions}</ul></section><section class='card'><h2>Canonical update summary</h2><p>Status: {canonical_status} · Enterprise Model updated: {canonical_changed} · Evidence IDs: {escape(str(len(canonical.get('evidence_ids') or [])))} · Observation IDs: {escape(str(len(canonical.get('observation_ids') or [])))} · Attributes updated: {escape(str(len(canonical.get('attributes_updated') or [])))}</p></section><section class='card'><h2>Run outcome</h2><p>Overall status: {escape(str(run.get('overall_status')))} · Completion class: {escape(str(run.get('completion_class')))} · Result URL: {escape(str(run.get('result_url')))} · Support reference: {escape(str(run.get('support_reference')))}</p><p>AI calls: {escape(str(cost.get('ai_call_count', 0)))} · Provider cost: {escape(str(cost.get('estimated_provider_cost_usd', 0)))} USD · Live source calls: {escape(str(cost.get('external_source_call_count', 0)))}</p></section>"""
+
 def _outcome_summary(run: dict[str, Any] | None) -> str:
     if not run: return ''
+    if run.get('execution_mode') == DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE:
+        return _render_dual_speed_outcome(run)
     if run.get('extraction_mode') == 'structured_standard_financials' and run.get('status') == 'structured_source_unavailable':
         support = run.get('support_reference') or _support_reference(run)
         counts = run.get('candidate_lifecycle_counts') or {}

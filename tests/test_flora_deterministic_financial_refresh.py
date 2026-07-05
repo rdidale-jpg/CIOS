@@ -6,6 +6,11 @@ from cios.applications.flora.memory.repository import EnterpriseModelRepository,
 from cios.applications.flora.memory.models import EnterpriseModelAttribute
 
 
+@pytest.fixture(autouse=True)
+def _isolated_flora_storage(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path))
+
+
 def test_standard_refresh_fails_closed_without_ai_fallback(monkeypatch, tmp_path):
     monkeypatch.chdir(tmp_path)
     pdf = b'%PDF-1.4\nBT Annual Report narrative only\n'

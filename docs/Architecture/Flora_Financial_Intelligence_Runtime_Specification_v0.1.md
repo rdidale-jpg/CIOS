@@ -222,3 +222,47 @@ BT is the pilot acceptance case, not hard-coded runtime architecture.
 - [EI-001 — Enterprise Model Specification](../../architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-001-Enterprise-Model-Specification.md)
 - [EI-012 — Enterprise Observation Model](../../architecture/enterprise-intelligence/volume-5-intelligence-foundations/EI-012-Enterprise-Observation-Model.md)
 - [CIOS Reference Architecture v1.0](../../architecture/reference-architecture/CIOS-Reference-Architecture-v1.0.md)
+
+## Slice 1 ADR-011 dual-speed orchestration shell
+
+ADR-011 introduces dual-speed Financial Intelligence as a single user-facing run with separated runtime lanes. Slice 1 implements only the orchestration and persistence shell behind the explicit `dual_speed_financial_intelligence` mode. The production default remains `structured_standard_financials` until official rapid evidence retrieval is approved.
+
+### Unified user-facing run
+
+The authoritative Slice 1 record is the existing standard run file:
+
+```text
+ai_financial_reports/runs/<run_id>.json
+```
+
+The record owns the user-visible run ID, support reference, result URL, overall status, completion class, rapid lane, verification lane, canonical-update lane, cost summary and diagnostics. Legacy `ai_financial_reports/rapid_runs` records may exist for compatibility but are not required by the standard progress or result renderer.
+
+### Overall status and completion class
+
+Allowed overall status values are `queued`, `running`, `completed` and `failed`. `completed` can include partial or unverified outcomes when a trustworthy user result exists. `failed` is reserved for the `no_trustworthy_evidence` completion class.
+
+Allowed terminal completion classes are `verified`, `unverified`, `partial` and `no_trustworthy_evidence`. Slice 1 fixture rapid output with unavailable structured verification completes as `unverified` rather than failing the whole run.
+
+### Rapid lane state
+
+The `rapid_intelligence` lane records `status`, `evidence_status`, `source_receipts`, `candidate_fact_count`, `candidate_facts`, `management_commitments`, `hypotheses`, `unknowns`, `contradictions`, `user_result`, `exceptions` and elapsed time. Slice 1 marks seeded rapid prototype output as `fixture_only`. Fixture-only candidates are non-canonical and are not production evidence.
+
+### Verification lane state
+
+The `verification` lane records `status`, `source`, adapter handoff state, adapter result, facts checked, facts verified, facts rejected, facts contradicted, exceptions, diagnostics and elapsed time. Slice 1 records structured verification as `unavailable` without attempting live BT, FCA, ESEF or other external retrieval. No adapter result is reported before adapter handoff.
+
+### Canonical-update state
+
+The `canonical_update` lane records status, Evidence IDs, Observation IDs, Enterprise Model update flag, updated attributes, transaction result, idempotency result and exceptions. For Slice 1 fixture-only rapid candidates the status is `not_applicable`, `enterprise_model_updated` is false and Evidence, Observation and attribute arrays remain empty.
+
+### Preservation rules
+
+When the rapid lane has a non-empty `user_result` and is `ready` or `partial`, verification unavailability or failure must not blank the rapid result, replace it with a structured-source-unavailable message, fail the overall run solely because verification failed, delete candidate facts or write candidates to canonical memory.
+
+### Fixture-only restriction
+
+Seeded rapid prototype data is permitted only as a local orchestration fixture in Slice 1. User-facing rendering must visibly label it as fixture-only, not verified official evidence and not production-ready. Cost instrumentation for fixture-only Slice 1 runs must show zero AI calls, zero provider cost and zero live source calls.
+
+### Deferred architecture debt
+
+Slice 1 deliberately defers official rapid source retrieval, source identity and period validation, cited source-backed candidates, non-blocking live structured verification, unified candidate classes, canonical acceptance refactoring, removal of legacy rapid persistence and any production default change.
