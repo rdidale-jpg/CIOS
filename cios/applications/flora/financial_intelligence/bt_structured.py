@@ -291,8 +291,18 @@ def classify_structured_package(zip_path:Path,cfg:dict[str,Any])->dict[str,Any]:
     return {'package_type':package_type,'raw_structured_data_exists_in_package':raw_exists,'raw_report_path':raw_path,'source_authority':cfg.get('source_kind'),'issuer_identity_result':'matched' if cfg.get('lei')=='213800LRO7NS5CYQMN21' and cfg.get('company_number')=='04190816' else 'mismatch','period_result':'matched' if cfg.get('period_end')=='2026-03-31' else 'mismatch','consolidated_scope_result':'matched' if cfg.get('scope')=='group_consolidated' else 'mismatch','adapter_handoff_result':'not_attempted','candidate_fact_count':0,'canonical_fact_count':0,'embedded_filing_locations':sorted(set(embedded)),'external_filing_references':sorted(set(external)),'metadata':metadata,'archive_diagnostics':diag}
 
 def prepare_raw_report_from_package(source:Path, report_path:str, workdir:Path)->Path:
+    """Extract a raw report entry from an official package into a temporary workdir.
+
+    The adapter handoff must receive the selected report document, not a renamed
+    copy of the whole ZIP package.  If ``report_path`` is absent, ``source`` is
+    already treated as the report file and is copied as-is.
+    """
     workdir.mkdir(parents=True,exist_ok=True)
-    out=workdir / Path(report_path).name
+    out=workdir / Path(report_path or source.name).name
+    if zipfile.is_zipfile(source) and report_path:
+        with zipfile.ZipFile(source) as z, z.open(report_path) as src, out.open('wb') as dst:
+            shutil.copyfileobj(src,dst,1024*1024)
+        return out
     shutil.copyfile(source,out)
     return out
 
