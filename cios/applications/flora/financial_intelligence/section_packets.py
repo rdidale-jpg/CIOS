@@ -9,7 +9,7 @@ from typing import Any, Iterable
 from cios.applications.flora.storage import atomic_write_json, data_path, ensure_writable_dir
 from cios.applications.flora.live.documents import DocumentPage
 from .instructions import EXTRACTION_INSTRUCTIONS
-from .schema import ExperimentDocument, ExtractionRun, FoundationFactSet, now_iso, openai_strict_json_schema
+from .schema import ExperimentDocument, ExtractionRun, FoundationFactSet, ProviderFoundationFactSet, now_iso, openai_strict_json_schema
 from .candidate_validation import parse_foundation_fact_candidates
 from .config import financial_intelligence_settings
 
@@ -133,7 +133,7 @@ class SectionAwareOpenAIProvider:
         self.max_output_tokens = min(int(getattr(base_provider, 'max_output_tokens', PACKET_MAX_OUTPUT_TOKENS)), PACKET_MAX_OUTPUT_TOKENS)
         self.settings = financial_intelligence_settings()
 
-    def extract_packets(self, document: ExperimentDocument, pages: Iterable[DocumentPage], schema: type[FoundationFactSet] = FoundationFactSet, correlation_id: str | None = None) -> tuple[ExtractionRun, dict[str, Any]]:
+    def extract_packets(self, document: ExperimentDocument, pages: Iterable[DocumentPage], schema: type[ProviderFoundationFactSet] = ProviderFoundationFactSet, correlation_id: str | None = None) -> tuple[ExtractionRun, dict[str, Any]]:
         correlation_id = correlation_id or uuid.uuid4().hex
         candidates = select_candidate_pages(pages)
         packets = build_page_packets(candidates)

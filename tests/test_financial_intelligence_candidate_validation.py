@@ -3,7 +3,7 @@ import json
 import pytest
 from pydantic import ValidationError
 from cios.applications.flora.financial_intelligence.candidate_validation import parse_foundation_fact_candidates
-from cios.applications.flora.financial_intelligence.schema import FoundationFact, FoundationFactSet, NumericFactValue, TextFactValue, openai_strict_json_schema
+from cios.applications.flora.financial_intelligence.schema import FoundationFact, FoundationFactSet, openai_strict_json_schema
 
 
 def candidate(**kw):
@@ -45,6 +45,35 @@ def test_valid_candidates_same_packet_still_proceed_and_invalid_quarantined():
     assert exceptions[0]['machine_candidate']['fact_id'] == 'bad'
 
 
+def provider_candidate(**kw):
+    c = candidate()
+    c.pop('value')
+    c.update(dict(value_kind='numeric', numeric_value='20.8', text_value=None, date_value=None, boolean_value=None))
+    c.update(kw)
+    return c
+
+
+def test_provider_numeric_text_date_and_boolean_map_to_canonical_values():
+    facts = [
+        provider_candidate(fact_id='n', value_kind='numeric', numeric_value='20.8', text_value=None, date_value=None, boolean_value=None),
+        provider_candidate(fact_id='t', claim_type='strategic_pillar_stated', state='current', value_kind='text', numeric_value=None, text_value='cost transformation', date_value=None, boolean_value=None, currency=None, unit=None, scale=None),
+        provider_candidate(fact_id='d', claim_type='executive_appointment_announced', state='announced', value_kind='date', numeric_value=None, text_value=None, date_value='2026-04-01', boolean_value=None, currency=None, unit=None, scale=None),
+        provider_candidate(fact_id='b', claim_type='enterprise_identity_confirmed', state='current', value_kind='boolean', numeric_value=None, text_value=None, date_value=None, boolean_value=True, currency=None, unit=None, scale=None),
+    ]
+    parsed, exceptions, status = parse(facts)
+    assert status == 'completed'
+    assert not exceptions
+    assert [f.value.kind for f in parsed.facts] == ['numeric','text','date','boolean']
+
+
+def test_provider_multiple_value_fields_quarantines_only_that_candidate():
+    bad = provider_candidate(fact_id='bad', text_value='extra')
+    good = provider_candidate(fact_id='good')
+    parsed, exceptions, status = parse([bad, good])
+    assert status == 'completed_with_exceptions'
+    assert [f.fact_id for f in parsed.facts] == ['good']
+    assert exceptions[0]['fact_id'] == 'bad'
+
 def test_entirely_invalid_response_returns_provider_response_invalid_without_unhandled_exception():
     parsed, exceptions, status = parse_foundation_fact_candidates('{bad json', packet_id='packet-1', provider='openai', model='gpt-5.5')
     assert status == 'provider_response_invalid'
@@ -52,11 +81,13 @@ def test_entirely_invalid_response_returns_provider_response_invalid_without_unh
     assert exceptions
 
 
-def test_openai_schema_and_canonical_model_cannot_drift():
+def test_provider_schema_replaces_canonical_union_for_openai():
     schema = openai_strict_json_schema(FoundationFactSet)
-    assert schema['$defs']['FoundationFact']['properties']['value']['discriminator']['propertyName'] == 'kind'
-    assert 'value_text' not in schema['$defs']['FoundationFact']['properties']
-    assert set(schema['$defs']['FoundationFact']['required']) == set(schema['$defs']['FoundationFact']['properties'])
+    assert 'oneOf' not in json.dumps(schema)
+    fact = schema['$defs']['ProviderFoundationFact']
+    assert {'value_kind','numeric_value','text_value','date_value','boolean_value'} <= set(fact['properties'])
+    assert set(fact['required']) == set(fact['properties'])
+    assert 'value' not in fact['properties']
 
 
 def test_discriminated_value_representation_accepts_exactly_one_type():
