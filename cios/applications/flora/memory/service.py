@@ -30,7 +30,7 @@ CLAIM_VOCABULARY: dict[str, dict[str, Any]] = {
 }
 COMMERCIAL_SIGNAL_CATEGORIES = set(DOMAIN_MAP) | {"Customer Trust", "AI Modernisation", "Operational Resilience", "Operational Efficiency"}
 
-FINANCIAL_RE = re.compile(r"(?P<metric>revenue|adjusted EBITDA|normalised free cash flow|free cash flow|EBITDA|net debt|capital expenditure|capex|operating profit)\s*(?:was|of|:)?\s*(?:£|GBP\s*)(?P<value>[0-9,.]+)\s*(?P<unit>bn|billion|m|million)?", re.I)
+FINANCIAL_RE = re.compile(r"(?P<metric>revenue|adjusted EBITDA|normalised free cash flow|free cash flow|EBITDA|net debt|capital expenditure|capex|operating profit|profit before tax)\s*(?:was|of|:)?\s*(?:£|GBP\s*)(?P<value>[0-9,.]+)\s*(?P<unit>bn|billion|m|million)?", re.I)
 UNIT_LIST_RE = re.compile(r"(?P<names>Consumer|Business|International|Openreach)(?:\s*,\s*(?:Consumer|Business|International|Openreach))*?(?:\s+and\s+(?:Consumer|Business|International|Openreach))?\s+as\s+(?P<kind>customer-facing units?|business units?|reporting segments?)", re.I)
 CAPABILITY_RE = re.compile(r"(?P<names>Digital|Networks)(?:\s*,\s*(?:Digital|Networks))*?(?:\s+and\s+(?:Digital|Networks))?\s+provide\s+group capabilities", re.I)
 STRATEGY_RE = re.compile(r"strategy\s+is\s+(?P<names>[A-Z][A-Za-z]+(?:\s*,\s*[A-Z][A-Za-z]+)*(?:\s+and\s+[A-Z][A-Za-z]+)?)", re.I)

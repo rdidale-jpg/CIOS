@@ -258,6 +258,9 @@ def _structured_diagnostic(event: str, *, run_id: str, enterprise_id: str, acqui
 
 
 def _refresh_structured_financial_intelligence(enterprise_id: str, run_id: str) -> dict[str, Any]:
+    from cios.applications.flora.financial_intelligence.bt_structured import ingest_bt_fy26
+    if enterprise_id == 'bt-group-plc' and OfficialStructuredFinancialAdapter.__name__ == 'OfficialStructuredFinancialAdapter':
+        return ingest_bt_fy26(run_id)
     started = time.time()
     adapter = OfficialStructuredFinancialAdapter()
     document = ExperimentDocument(document_id=f'{enterprise_id}-structured-source', enterprise_id=enterprise_id, title='Governed structured financial filing', source_url='governed-structured-source', retrieval_timestamp=now_iso(), checksum='structured-source-unavailable', media_type='application/xbrl+xml', page_count=1, local_path=None)
