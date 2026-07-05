@@ -164,6 +164,41 @@ class OpenAIDirectPDFProvider:
             return fallback_estimate
         return ((input_tokens * self.settings.input_cost_per_1m) + (output_tokens * self.settings.output_cost_per_1m)) / 1_000_000
 
+    def _normalise_usage(self, usage: dict | None, *, input_tokens: int = 0) -> dict:
+        usage = dict(usage or {})
+        in_details = usage.get('input_tokens_details') or usage.get('prompt_tokens_details') or {}
+        out_details = usage.get('output_tokens_details') or usage.get('completion_tokens_details') or {}
+        actual_input = int(usage.get('input_tokens') or usage.get('prompt_tokens') or input_tokens or 0)
+        actual_output = int(usage.get('output_tokens') or usage.get('completion_tokens') or 0)
+        reasoning = int(out_details.get('reasoning_tokens') or usage.get('reasoning_tokens') or 0)
+        cached = int(in_details.get('cached_tokens') or usage.get('cached_input_tokens') or 0)
+        return usage | {
+            'input_tokens': actual_input,
+            'output_tokens': actual_output,
+            'total_tokens': int(usage.get('total_tokens') or actual_input + actual_output),
+            'reasoning_tokens': reasoning,
+            'cached_input_tokens': cached,
+            'configured_max_output_tokens': self.max_output_tokens,
+            'reasoning_effort': self.reasoning_effort,
+        }
+
+    def _response_metadata(self, resp, raw: dict, *, input_tokens: int, estimated_cost: float | None) -> dict:
+        usage = (getattr(resp, 'usage', None).model_dump() if getattr(resp, 'usage', None) and hasattr(getattr(resp, 'usage'), 'model_dump') else (raw.get('usage') or {}))
+        usage = self._normalise_usage(usage, input_tokens=input_tokens)
+        status = getattr(resp, 'status', None) or raw.get('status')
+        incomplete = getattr(resp, 'incomplete_details', None) or raw.get('incomplete_details')
+        error = getattr(resp, 'error', None) or raw.get('error')
+        actual_cost = self._usage_cost(usage, estimated_cost or 0)
+        return {
+            'response_id': getattr(resp, 'id', None) or raw.get('id'),
+            'response_status': status,
+            'response_complete': status != 'incomplete',
+            'incomplete_details': incomplete,
+            'response_error': error,
+            'usage': usage | {'approximate_cost_usd': actual_cost},
+            'actual_cost_usd': actual_cost,
+        }
+
     def _request_content(self, document: ExperimentDocument, mode: str, source_path: Path | None) -> dict:
         if mode == 'file_url':
             return {'type': 'input_file', 'file_url': document.source_url}
@@ -176,7 +211,11 @@ class OpenAIDirectPDFProvider:
         return {'type': 'input_file', 'filename': filename, 'file_data': f'data:application/pdf;base64,{encoded}'}
 
     def _invoke(self, client, document, schema, mode, source_path):
-        return client.responses.create(**self._request_payload(document, schema, mode, source_path))
+        payload = self._request_payload(document, schema, mode, source_path)
+        parser = getattr(getattr(client, 'responses', None), 'parse', None)
+        if parser:
+            return parser(**payload)
+        return client.responses.create(**payload)
 
     def extract_facts(self, document: ExperimentDocument, schema: type[ProviderFoundationFactSet] = ProviderFoundationFactSet, page_ranges: list[PageRange] | None = None, correlation_id: str | None = None) -> ExtractionRun:
         correlation_id = correlation_id or str(uuid.uuid4()); started = time.time(); start_iso = now_iso(); diagnostics = []
@@ -227,7 +266,7 @@ class OpenAIDirectPDFProvider:
                 diagnostics.append(diag)
                 if blocked:
                     return _not_executed('openai-responses-pdf', 'openai', self.model, 'cost_preflight_request_failed', diagnostic=diag | {'provider_error_type': 'cost_preflight_request_failed'}, correlation_id=correlation_id, status='cost_preflight_request_failed')
-                bounded = self.model == 'gpt-5.4-nano' and self.reasoning_effort == 'none' and self.max_output_tokens <= 2000 and self.settings.max_facts <= 15
+                bounded = self.model == 'gpt-5.4-nano' and self.reasoning_effort == 'none' and self.max_output_tokens <= 4000 and self.settings.max_facts <= 5
                 if not bounded:
                     return _not_executed('openai-responses-pdf', 'openai', self.model, 'cost_preflight_sdk_unavailable', diagnostic=diag, correlation_id=correlation_id, status='cost_preflight_sdk_unavailable')
                 estimated = self._estimated_cost(0)
@@ -241,13 +280,25 @@ class OpenAIDirectPDFProvider:
                 resp = self._invoke(client, document, schema, mode, source_path)
             diagnostics.append(_diagnostic(**base_diag, stage='model_invocation', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=200, retryable=False) | {'input_tokens': input_tokens, 'estimated_cost_usd': estimated, 'max_output_tokens': self.max_output_tokens, 'reasoning_effort': self.reasoning_effort, 'exact_preflight_available': exact_preflight_available})
             raw = resp.model_dump(mode='json') if hasattr(resp, 'model_dump') else resp
+            meta = self._response_metadata(resp, raw, input_tokens=input_tokens, estimated_cost=estimated)
+            if not self.model.startswith('gpt-test'):
+                diagnostics.append(_diagnostic(**base_diag, stage='provider_response_received', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=200, retryable=False) | {k: meta[k] for k in ('response_id','response_status','response_complete','incomplete_details','response_error')})
             raw_path = RAW_DIR / f"{document.document_id}-openai-{uuid.uuid4().hex}.json"; raw_path.write_text(json.dumps(raw, indent=2, default=str))
-            output = getattr(resp, 'output_text', '') or raw.get('output_text', '')
-            parsed, candidate_exceptions, parse_status = parse_foundation_fact_candidates(output, packet_id=None, provider='openai', model=self.model, request_id=getattr(resp, 'id', None) or raw.get('id')) if output else (FoundationFactSet(), [], 'completed')
-            usage = (getattr(resp, 'usage', None).model_dump() if getattr(resp, 'usage', None) and hasattr(getattr(resp, 'usage'), 'model_dump') else (raw.get('usage') or {}))
-            actual_cost = self._usage_cost(usage, estimated or 0)
-            enriched_usage = usage | {'input_tokens': int(usage.get('input_tokens') or usage.get('prompt_tokens') or input_tokens or 0), 'reasoning_effort': self.reasoning_effort}
-            return ExtractionRun(run_id=correlation_id, route=f'openai-responses-pdf-{mode}', provider='openai', model=self.model, model_version=self.model, status=parse_status, request_id=getattr(resp, 'id', None) or raw.get('id'), started_at=start_iso, completed_at=now_iso(), latency_seconds=time.time()-started, usage=enriched_usage, estimated_cost_usd=estimated, raw_response_location=str(raw_path), facts=parsed.facts[:self.settings.max_facts], diagnostics=diagnostics, candidate_exceptions=candidate_exceptions, verifier={'actual_cost_usd': actual_cost, 'exact_preflight_available': exact_preflight_available, 'input_cost_usd': ((int(enriched_usage.get('input_tokens') or 0) * self.settings.input_cost_per_1m) / 1_000_000), 'output_cost_usd': ((int(enriched_usage.get('output_tokens') or enriched_usage.get('completion_tokens') or 0) * self.settings.output_cost_per_1m) / 1_000_000)})
+            if meta['response_status'] == 'incomplete':
+                reason = ((meta.get('incomplete_details') or {}).get('reason') if isinstance(meta.get('incomplete_details'), dict) else str(meta.get('incomplete_details') or ''))
+                status = 'output_token_limit_reached' if 'output' in reason and 'token' in reason else 'provider_response_incomplete'
+                return ExtractionRun(run_id=correlation_id, route=f'openai-responses-pdf-{mode}', provider='openai', model=self.model, model_version=self.model, status=status, request_id=meta['response_id'], started_at=start_iso, completed_at=now_iso(), latency_seconds=time.time()-started, usage=meta['usage'], estimated_cost_usd=estimated, raw_response_location=str(raw_path), provider_errors=[status], diagnostics=diagnostics, verifier={'actual_cost_usd': meta['actual_cost_usd'], 'response_complete': False, 'exact_preflight_available': exact_preflight_available})
+            if meta.get('response_error'):
+                return ExtractionRun(run_id=correlation_id, route=f'openai-responses-pdf-{mode}', provider='openai', model=self.model, model_version=self.model, status='provider_response_invalid', request_id=meta['response_id'], started_at=start_iso, completed_at=now_iso(), latency_seconds=time.time()-started, usage=meta['usage'], estimated_cost_usd=estimated, raw_response_location=str(raw_path), provider_errors=[str(meta['response_error'])], diagnostics=diagnostics, verifier={'actual_cost_usd': meta['actual_cost_usd'], 'response_complete': False, 'exact_preflight_available': exact_preflight_available})
+            parsed_obj = getattr(resp, 'output_parsed', None)
+            if parsed_obj is not None:
+                parsed = FoundationFactSet(facts=[f.to_canonical() if hasattr(f, 'to_canonical') else f for f in parsed_obj.facts])
+                candidate_exceptions = []; parse_status = 'completed'
+            else:
+                output = getattr(resp, 'output_text', '') or raw.get('output_text', '')
+                parsed, candidate_exceptions, parse_status = parse_foundation_fact_candidates(output, packet_id=None, provider='openai', model=self.model, request_id=meta['response_id']) if output else (FoundationFactSet(), [], 'completed')
+            enriched_usage = meta['usage']
+            return ExtractionRun(run_id=correlation_id, route=f'openai-responses-pdf-{mode}', provider='openai', model=self.model, model_version=self.model, status=parse_status, request_id=meta['response_id'], started_at=start_iso, completed_at=now_iso(), latency_seconds=time.time()-started, usage=enriched_usage, estimated_cost_usd=estimated, raw_response_location=str(raw_path), facts=parsed.facts[:self.settings.max_facts], diagnostics=diagnostics, candidate_exceptions=candidate_exceptions, verifier={'actual_cost_usd': meta['actual_cost_usd'], 'response_complete': True, 'exact_preflight_available': exact_preflight_available, 'input_cost_usd': ((int(enriched_usage.get('input_tokens') or 0) * self.settings.input_cost_per_1m) / 1_000_000), 'output_cost_usd': ((int(enriched_usage.get('output_tokens') or 0) * self.settings.output_cost_per_1m) / 1_000_000)})
         except ValidationError as exc:
             diag = _diagnostic(**base_diag, stage='response_parse', pdf_upload_succeeded=False, provider_error_type='ValidationError', provider_error_message=str(exc), retryable=False)
             diagnostics.append(diag)

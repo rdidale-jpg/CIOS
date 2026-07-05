@@ -20,6 +20,8 @@ def test_low_cost_defaults_and_overrides(monkeypatch):
     settings = financial_intelligence_settings()
     assert settings.model == 'gpt-5.4-nano'
     assert settings.reasoning_effort == 'none'
+    assert settings.max_output_tokens == 4000
+    assert settings.max_facts == 5
     monkeypatch.setenv('FLORA_FINANCIAL_INTELLIGENCE_MODEL', 'gpt-custom')
     assert financial_intelligence_settings().model == 'gpt-custom'
 
@@ -95,13 +97,13 @@ def test_responses_input_tokens_count_is_used_and_mirrors_extraction(monkeypatch
         def __init__(self, **kwargs): self.responses = Responses()
     monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
     monkeypatch.setitem(sys.modules, 'openai', types.SimpleNamespace(OpenAI=Client))
-    run = OpenAIDirectPDFProvider(model='gpt-5.4-nano', max_output_tokens=2000).extract_facts(_doc(tmp_path))
+    run = OpenAIDirectPDFProvider(model='gpt-5.4-nano', max_output_tokens=4000).extract_facts(_doc(tmp_path))
     assert run.status == 'completed'
     assert calls[0][0] == 'count'
     count_payload = calls[0][1]
     create_payload = calls[1][1]
     assert 'max_output_tokens' not in count_payload
-    assert create_payload['max_output_tokens'] == 2000
+    assert create_payload['max_output_tokens'] == 4000
     assert count_payload == {k: v for k, v in create_payload.items() if k != 'max_output_tokens'}
 
 
@@ -118,12 +120,12 @@ def test_technical_count_failure_allows_one_bounded_nano_request(monkeypatch, tm
         def __init__(self, **kwargs): self.responses = Responses()
     monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
     monkeypatch.setitem(sys.modules, 'openai', types.SimpleNamespace(OpenAI=Client))
-    run = OpenAIDirectPDFProvider(model='gpt-5.4-nano', reasoning_effort='none', max_output_tokens=2000).extract_facts(_doc(tmp_path))
+    run = OpenAIDirectPDFProvider(model='gpt-5.4-nano', reasoning_effort='none', max_output_tokens=4000).extract_facts(_doc(tmp_path))
     assert run.status == 'completed'
     assert len(calls) == 1
     assert calls[0]['model'] == 'gpt-5.4-nano'
     assert calls[0]['reasoning'] == {'effort': 'none'}
-    assert calls[0]['max_output_tokens'] == 2000
+    assert calls[0]['max_output_tokens'] == 4000
     assert run.verifier['exact_preflight_available'] is False
 
 
@@ -139,7 +141,7 @@ def test_auth_quota_and_invalid_count_errors_do_not_bypass_controls(monkeypatch,
             def __init__(self, **kwargs): self.responses = Responses()
         monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
         monkeypatch.setitem(sys.modules, 'openai', types.SimpleNamespace(OpenAI=Client))
-        run = OpenAIDirectPDFProvider(model='gpt-5.4-nano', max_output_tokens=2000).extract_facts(_doc(tmp_path))
+        run = OpenAIDirectPDFProvider(model='gpt-5.4-nano', max_output_tokens=4000).extract_facts(_doc(tmp_path))
         assert run.status == 'cost_preflight_request_failed'
 
 
@@ -155,8 +157,36 @@ def test_actual_usage_and_cost_breakdown_recorded(monkeypatch, tmp_path):
         def __init__(self, **kwargs): self.responses = Responses()
     monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
     monkeypatch.setitem(sys.modules, 'openai', types.SimpleNamespace(OpenAI=Client))
-    run = OpenAIDirectPDFProvider(model='gpt-5.4-nano', max_output_tokens=2000).extract_facts(_doc(tmp_path))
+    run = OpenAIDirectPDFProvider(model='gpt-5.4-nano', max_output_tokens=4000).extract_facts(_doc(tmp_path))
     assert run.usage['input_tokens'] == 100
     assert run.usage['output_tokens'] == 10
     assert run.verifier['input_cost_usd'] > 0
     assert run.verifier['output_cost_usd'] > 0
+
+
+def test_incomplete_response_records_usage_without_json_parse(monkeypatch, tmp_path):
+    class Count:
+        def count(self, **kwargs): return {'input_tokens': 100}
+    class Responses:
+        input_tokens = Count()
+        def create(self, **kwargs):
+            usage = {'input_tokens': 100, 'output_tokens': 4000, 'output_tokens_details': {'reasoning_tokens': 0}}
+            return types.SimpleNamespace(
+                id='resp-incomplete',
+                status='incomplete',
+                incomplete_details={'reason': 'max_output_tokens'},
+                output_text='{"facts":["unterminated',
+                usage=types.SimpleNamespace(model_dump=lambda: usage),
+                model_dump=lambda mode='json': {'id': 'resp-incomplete', 'status': 'incomplete', 'incomplete_details': {'reason': 'max_output_tokens'}, 'output_text': '{"facts":["unterminated', 'usage': usage},
+            )
+    class Client:
+        def __init__(self, **kwargs): self.responses = Responses()
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
+    monkeypatch.setitem(sys.modules, 'openai', types.SimpleNamespace(OpenAI=Client))
+    run = OpenAIDirectPDFProvider(model='gpt-5.4-nano', max_output_tokens=4000).extract_facts(_doc(tmp_path))
+    assert run.status == 'output_token_limit_reached'
+    assert run.request_id == 'resp-incomplete'
+    assert run.usage['input_tokens'] == 100
+    assert run.usage['output_tokens'] == 4000
+    assert run.usage['total_tokens'] == 4100
+    assert run.verifier['response_complete'] is False

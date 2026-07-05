@@ -25,12 +25,12 @@ def doc(tmp_path: Path) -> ExperimentDocument:
 
 
 def test_token_count_payload_excludes_max_output_but_generation_keeps_allowance(tmp_path: Path) -> None:
-    provider = OpenAIDirectPDFProvider(model='gpt-5.4-nano', reasoning_effort='none', max_output_tokens=2000)
+    provider = OpenAIDirectPDFProvider(model='gpt-5.4-nano', reasoning_effort='none', max_output_tokens=4000)
     d = doc(tmp_path)
     count_payload = provider._token_count_payload(d, FoundationFactSet, 'file_url', Path(d.local_path))
     gen_payload = provider._request_payload(d, FoundationFactSet, 'file_url', Path(d.local_path))
     assert 'max_output_tokens' not in count_payload
-    assert gen_payload['max_output_tokens'] == 2000
+    assert gen_payload['max_output_tokens'] == 4000
 
 
 def test_relevant_pages_selected_with_original_page_numbers() -> None:
@@ -69,7 +69,7 @@ def test_full_pdf_is_never_submitted_as_one_extraction_request_and_every_packet_
 
     monkeypatch.setitem(__import__('sys').modules, 'openai', type('OpenAIModule', (), {'OpenAI': Client}))
     pages = [DocumentPage(i, f'revenue adjusted EBITDA net debt £{i}m') for i in range(1, 8)] + [DocumentPage(10, 'FULL PDF SENTINEL')]
-    extraction, plan = SectionAwareOpenAIProvider(OpenAIDirectPDFProvider(model='gpt-5.4-nano', reasoning_effort='none', max_output_tokens=2000)).extract_packets(doc(tmp_path), pages)
+    extraction, plan = SectionAwareOpenAIProvider(OpenAIDirectPDFProvider(model='gpt-5.4-nano', reasoning_effort='none', max_output_tokens=4000)).extract_packets(doc(tmp_path), pages)
     assert extraction.status == 'completed'
     assert len(calls['create']) <= 4
     assert len(calls['count']) == len(calls['create'])
@@ -104,7 +104,7 @@ def test_empty_final_selection_fails_closed_without_openai(monkeypatch, tmp_path
             raise AssertionError('OpenAI must not be constructed when no packet exists')
     monkeypatch.setitem(sys.modules, 'openai', type('OpenAIModule', (), {'OpenAI': Boom}))
     pages = [DocumentPage(1, 'BT Group plc Annual Report 2026 company strategy performance')]
-    extraction, plan = SectionAwareOpenAIProvider(OpenAIDirectPDFProvider(model='gpt-5.4-nano', reasoning_effort='none', max_output_tokens=2000)).extract_packets(doc(tmp_path), pages, correlation_id='empty')
+    extraction, plan = SectionAwareOpenAIProvider(OpenAIDirectPDFProvider(model='gpt-5.4-nano', reasoning_effort='none', max_output_tokens=4000)).extract_packets(doc(tmp_path), pages, correlation_id='empty')
     assert extraction.status == 'section_selection_failed'
     assert extraction.facts == []
     assert plan['packet_count'] == 0

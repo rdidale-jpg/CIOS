@@ -191,8 +191,8 @@ def _write_json(path: Path, data: dict[str, Any]) -> None:
 
 def _run_path(run_id: str) -> Path: return _run_dir() / f'{run_id}.json'
 
-TERMINAL_RUN_STATES = {'completed','completed_with_exceptions','failed'}
-PROGRESS_ORDER = {'queued':0,'retrieving_source':8,'reading_document':18,'checking_document_quality':18,'selecting_sections':30,'preparing_packets':42,'estimating_cost':52,'analysing':68,'validating':82,'updating_memory':92,'completed':100,'completed_with_exceptions':100,'failed':100,'candidate_validation_failed':100,'provider_request_failed':100,'source_retrieval_failed':100,'source_not_pdf':100,'section_selection_failed':100,'persistence_failed':100}
+TERMINAL_RUN_STATES = {'completed','completed_with_exceptions','failed','candidate_validation_failed','provider_request_failed','provider_response_invalid','provider_response_incomplete','output_token_limit_reached','section_selection_failed','persistence_failed'}
+PROGRESS_ORDER = {'queued':0,'retrieving_source':8,'reading_document':18,'checking_document_quality':18,'selecting_sections':30,'preparing_packets':42,'estimating_cost':52,'analysing':68,'validating':82,'updating_memory':92,'completed':100,'completed_with_exceptions':100,'failed':100,'candidate_validation_failed':100,'provider_request_failed':100,'provider_response_incomplete':100,'output_token_limit_reached':100,'source_retrieval_failed':100,'source_not_pdf':100,'section_selection_failed':100,'persistence_failed':100}
 ACTIVE_RUN_STATES = {'queued','retrieving_source','reading_document','checking_document_quality','selecting_sections','preparing_packets','estimating_cost','analysing','validating','updating_memory'}
 
 def _normalise_terminal_status(status: str) -> str:

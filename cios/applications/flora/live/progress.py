@@ -13,7 +13,7 @@ from cios.applications.flora.live.runtime import application_revision
 
 STATE_DIR = data_path('live_evidence')
 STATE_PATH = STATE_DIR / "collection_run_state.json"
-TERMINAL_STATES = {"completed", "completed_with_no_accepted_intelligence", "failed", "interrupted", "completed successfully", "Completed with no accepted intelligence"}
+TERMINAL_STATES = {"completed", "completed_with_exceptions", "completed_with_no_accepted_intelligence", "failed", "interrupted", "completed successfully", "Completed with no accepted intelligence"}
 IN_PROGRESS_STATES = {"queued", "starting", "collecting", "parsing", "extracting_evidence", "accepting_evidence", "creating_observations", "updating_model", "running"}
 
 def percent_complete(attempted: int, total: int) -> int:

@@ -17,8 +17,8 @@ from .config import financial_intelligence_settings
 TARGET_INPUT_TOKENS = 50_000
 ABSOLUTE_INPUT_TOKEN_CEILING = 75_000
 MAX_BT_GOLDEN_CALLS = 4
-PACKET_MAX_OUTPUT_TOKENS = 2_000
-MATERIAL_FACT_LIMIT = 15
+PACKET_MAX_OUTPUT_TOKENS = 4_000
+MATERIAL_FACT_LIMIT = 5
 
 LOGGER = logging.getLogger('flora.financial_intelligence')
 
@@ -274,7 +274,7 @@ def _packet_payload(provider: Any, document: ExperimentDocument, packet: PagePac
     mapping = packet.packet_page_to_original or {i + 1: p for i, p in enumerate(packet.page_numbers)}
     instructions = (
         EXTRACTION_INSTRUCTIONS
-        + '\n\nReturn no more than 15 material, atomic facts across revenue, adjusted EBITDA, operating profit, capital expenditure, normalised free cash flow, net debt, cost savings, financial outlook, and material segment movement. Every fact must cite packet_page_number using the packet-local page number in this map, not the original PDF page. Set source_page_start and source_page_end to the same packet-local page number. Flora will resolve original_pdf_page_number deterministically. Packet page to original PDF page map: '
+        + '\n\nReturn no more than 5 material, atomic facts across revenue, adjusted EBITDA, operating profit, capital expenditure, normalised free cash flow, net debt, cost savings, financial outlook, and material segment movement. Every fact must cite packet_page_number using the packet-local page number in this map, not the original PDF page. Set source_page_start and source_page_end to the same packet-local page number. Flora will resolve original_pdf_page_number deterministically. Packet page to original PDF page map: '
         + json.dumps(mapping, sort_keys=True)
     ).strip()
     content: list[dict[str, Any]] = []
@@ -395,7 +395,7 @@ class SectionAwareOpenAIProvider:
             return final, {'candidate_pages': [{'page_number': c.page_number, 'score': c.score, 'matched_headings': list(c.matched_headings), 'matched_financial_terms': list(c.matched_terms), 'selection_reason': c.reason, 'reasons': page_reasons.get(c.page_number, [])} for c in candidates], 'packets': [], 'packet_count': 0, 'openai_calls': 0, 'document_hash': stable_document_hash(document), 'parse_diagnostics': parse_diag, 'fallback_used': True, 'visual_navigation': locals().get('visual_plan', {'visual_fallback_used': False})}
 
         doc_hash = stable_document_hash(document)
-        runs: list[ExtractionRun] = []; packet_records=[]; total_usage={'input_tokens':0,'output_tokens':0}; openai_calls=0; packet_failures=[]
+        runs: list[ExtractionRun] = []; packet_records=[]; total_usage={'input_tokens':0,'output_tokens':0,'total_tokens':0,'approximate_cost_usd':0.0}; openai_calls=0; packet_failures=[]
         if not packets:
             exc = {'exception_type':'section_selection_failed','failure_stage':'selecting_sections','support_reference':_support_reference(correlation_id),'user_message':'Flora could not identify the financial sections in this report.','rejection_reason':'No relevant financial pages selected; no paid model request occurred.'}
             final = ExtractionRun(run_id=correlation_id, route='openai-responses-section-packets', provider='openai', model=self.model, model_version=self.model, status='section_selection_failed', started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage={'input_tokens':0,'output_tokens':0}, facts=[], candidate_exceptions=[exc], diagnostics=[{'event':'section_selection_failed','request_stage':'selecting_sections','support_reference':_support_reference(correlation_id),'correlation_id':correlation_id,'openai_invoked':False,'no_paid_model_request':True}])
@@ -421,11 +421,35 @@ class SectionAwareOpenAIProvider:
                     continue
                 payload = _packet_payload(self, document, packet, schema) | {'max_output_tokens': self.max_output_tokens}
                 diagnostics.append(_packet_event('packet_model_request_started', correlation_id=correlation_id, packet=packet, reasons=page_reasons, input_tokens=input_tokens, model=self.model, started=started))
-                resp = client.responses.create(**payload); openai_calls += 1
+                parser = getattr(getattr(client, 'responses', None), 'parse', None)
+                resp = parser(**payload) if parser else client.responses.create(**payload); openai_calls += 1
                 raw = resp.model_dump(mode='json') if hasattr(resp, 'model_dump') else resp
+                if hasattr(self.base_provider, '_response_metadata'):
+                    meta = self.base_provider._response_metadata(resp, raw, input_tokens=input_tokens, estimated_cost=self.base_provider._estimated_cost(input_tokens))
+                else:
+                    raw_usage = raw.get('usage') or {}
+                    actual_input = int(raw_usage.get('input_tokens') or raw_usage.get('prompt_tokens') or input_tokens or 0)
+                    actual_output = int(raw_usage.get('output_tokens') or raw_usage.get('completion_tokens') or 0)
+                    settings = financial_intelligence_settings()
+                    cost = ((actual_input * settings.input_cost_per_1m) + (actual_output * settings.output_cost_per_1m)) / 1_000_000
+                    meta = {'response_id': getattr(resp, 'id', None) or raw.get('id'), 'response_status': getattr(resp, 'status', None) or raw.get('status'), 'response_complete': (getattr(resp, 'status', None) or raw.get('status')) != 'incomplete', 'incomplete_details': getattr(resp, 'incomplete_details', None) or raw.get('incomplete_details'), 'response_error': getattr(resp, 'error', None) or raw.get('error'), 'usage': raw_usage | {'input_tokens': actual_input, 'output_tokens': actual_output, 'total_tokens': actual_input + actual_output, 'reasoning_tokens': 0, 'cached_input_tokens': 0, 'configured_max_output_tokens': self.max_output_tokens, 'reasoning_effort': self.reasoning_effort, 'approximate_cost_usd': cost}, 'actual_cost_usd': cost}
                 diagnostics.append(_packet_event('packet_model_request_completed', correlation_id=correlation_id, packet=packet, reasons=page_reasons, input_tokens=input_tokens, model=self.model, started=started, provider_status='completed'))
                 diagnostics.append(_packet_event('packet_response_validation_started', correlation_id=correlation_id, packet=packet, reasons=page_reasons, input_tokens=input_tokens, model=self.model, started=started))
-                parsed, candidate_exceptions, parse_status = parse_foundation_fact_candidates(getattr(resp, 'output_text', '') or raw.get('output_text', '{}'), packet_id=packet.packet_id, provider='openai', model=self.model, request_id=raw.get('id'), packet_page_map=packet.packet_page_to_original or {})
+                diagnostics.append(_packet_event('packet_provider_response_recorded', correlation_id=correlation_id, packet=packet, reasons=page_reasons, input_tokens=input_tokens, model=self.model, started=started, provider_status=meta['response_status']) | {k: meta[k] for k in ('response_id','response_status','response_complete','incomplete_details','response_error')})
+                if meta['response_status'] == 'incomplete':
+                    reason = ((meta.get('incomplete_details') or {}).get('reason') if isinstance(meta.get('incomplete_details'), dict) else str(meta.get('incomplete_details') or ''))
+                    parse_status = 'output_token_limit_reached' if 'output' in reason and 'token' in reason else 'provider_response_incomplete'
+                    parsed = FoundationFactSet(); candidate_exceptions = [{'exception_type': parse_status, 'packet_id': packet.packet_id, 'request_id': meta['response_id'], 'incomplete_details': meta.get('incomplete_details')}]
+                elif meta.get('response_error'):
+                    parse_status = 'provider_response_invalid'
+                    parsed = FoundationFactSet(); candidate_exceptions = [{'exception_type': parse_status, 'packet_id': packet.packet_id, 'request_id': meta['response_id'], 'response_error': meta.get('response_error')}]
+                else:
+                    parsed_obj = getattr(resp, 'output_parsed', None)
+                    if parsed_obj is not None:
+                        parsed = FoundationFactSet(facts=[f.to_canonical() if hasattr(f, 'to_canonical') else f for f in parsed_obj.facts])
+                        candidate_exceptions = []; parse_status = 'completed'
+                    else:
+                        parsed, candidate_exceptions, parse_status = parse_foundation_fact_candidates(getattr(resp, 'output_text', '') or raw.get('output_text', '{}'), packet_id=packet.packet_id, provider='openai', model=self.model, request_id=raw.get('id'), packet_page_map=packet.packet_page_to_original or {})
                 parsed_facts = _quarantine_ungrounded_facts(list(parsed.facts), candidate_exceptions, packet)
                 parsed = FoundationFactSet(facts=parsed_facts)
                 for exc in candidate_exceptions:
@@ -436,10 +460,9 @@ class SectionAwareOpenAIProvider:
                     parse_status = 'candidate_validation_failed'
                 candidate_count = len(parsed.facts) + len(candidate_exceptions)
                 diagnostics.append(_packet_event('packet_response_validation_completed', correlation_id=correlation_id, packet=packet, reasons=page_reasons, input_tokens=input_tokens, model=self.model, started=started, provider_status=parse_status, candidate_count=candidate_count, valid_count=len(parsed.facts), quarantined_count=len(candidate_exceptions)))
-                usage = raw.get('usage') or {}
-                usage = usage | {'input_tokens': int(usage.get('input_tokens') or input_tokens), 'planned_output_allowance': self.max_output_tokens, 'tpm_reservation': input_tokens + self.max_output_tokens}
-                total_usage['input_tokens'] += usage['input_tokens']; total_usage['output_tokens'] += int(usage.get('output_tokens') or 0)
-                run = ExtractionRun(run_id=f'{correlation_id}-{packet.packet_id}', route='openai-responses-section-packet', provider='openai', model=self.model, model_version=self.model, status=parse_status, request_id=raw.get('id'), started_at=now_iso(), completed_at=now_iso(), latency_seconds=round(time.time()-started,3), usage=usage, facts=parsed.facts, candidate_exceptions=candidate_exceptions, diagnostics=diagnostics)
+                usage = meta['usage'] | {'planned_output_allowance': self.max_output_tokens, 'tpm_reservation': input_tokens + self.max_output_tokens}
+                total_usage['input_tokens'] += usage['input_tokens']; total_usage['output_tokens'] += int(usage.get('output_tokens') or 0); total_usage['total_tokens'] += int(usage.get('total_tokens') or 0); total_usage['approximate_cost_usd'] += float(usage.get('approximate_cost_usd') or 0)
+                run = ExtractionRun(run_id=f'{correlation_id}-{packet.packet_id}', route='openai-responses-section-packet', provider='openai', model=self.model, model_version=self.model, status=parse_status, request_id=meta['response_id'], started_at=now_iso(), completed_at=now_iso(), latency_seconds=round(time.time()-started,3), usage=usage, facts=parsed.facts, candidate_exceptions=candidate_exceptions, diagnostics=diagnostics, verifier={'actual_cost_usd': meta['actual_cost_usd'], 'response_complete': meta['response_complete']})
                 ensure_writable_dir(cache_path.parent); atomic_write_json(cache_path, run.model_dump(mode='json'))
                 runs.append(run); packet_records.append({'packet_id': packet.packet_id, 'page_numbers': packet.page_numbers, 'page_selection_reasons': {str(p): page_reasons.get(p, []) for p in packet.page_numbers}, 'packet_hash': packet.packet_hash, 'cached': False, 'input_tokens': input_tokens, 'packet_byte_size': packet.byte_size, 'packet_page_count': packet.page_count, 'input_mode': packet.input_mode, 'packet_page_to_original': packet.packet_page_to_original, 'status': parse_status, 'valid_facts': len(parsed.facts), 'quarantined_facts': len(candidate_exceptions)})
             except Exception as exc:
@@ -450,7 +473,10 @@ class SectionAwareOpenAIProvider:
                 runs.append(run); packet_records.append({'packet_id': packet.packet_id, 'page_numbers': packet.page_numbers, 'page_selection_reasons': {str(p): page_reasons.get(p, []) for p in packet.page_numbers}, 'packet_hash': packet.packet_hash, 'cached': False, 'input_tokens': input_tokens, 'packet_byte_size': packet.byte_size, 'packet_page_count': packet.page_count, 'input_mode': packet.input_mode, 'packet_page_to_original': packet.packet_page_to_original, 'status': 'provider_request_failed', 'valid_facts': 0, 'quarantined_facts': 0})
                 continue
         merged = merge_packet_facts(runs, document)
-        if any(r.candidate_exceptions for r in runs) and merged.facts:
+        terminal_provider_statuses = {'output_token_limit_reached', 'provider_response_incomplete', 'provider_refusal', 'provider_response_invalid'}
+        if runs and not merged.facts and any(r.status in terminal_provider_statuses for r in runs):
+            final_status = next(r.status for r in runs if r.status in terminal_provider_statuses)
+        elif any(r.candidate_exceptions for r in runs) and merged.facts:
             final_status = 'completed_with_exceptions'
         elif packet_failures and not merged.facts:
             final_status = 'provider_request_failed'
