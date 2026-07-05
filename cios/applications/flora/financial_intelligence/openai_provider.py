@@ -6,6 +6,7 @@ from .instructions import EXTRACTION_INSTRUCTIONS
 from .config import financial_intelligence_settings
 from pydantic import ValidationError
 from .schema import ExperimentDocument, ExtractionRun, FoundationFactSet, PageRange, now_iso, openai_strict_json_schema
+from .candidate_validation import parse_foundation_fact_candidates
 
 RAW_DIR = Path('.flora_financial_intelligence/raw_responses')
 OPENAI_FILE_PURPOSE = 'user_data'
@@ -242,11 +243,11 @@ class OpenAIDirectPDFProvider:
             raw = resp.model_dump(mode='json') if hasattr(resp, 'model_dump') else resp
             raw_path = RAW_DIR / f"{document.document_id}-openai-{uuid.uuid4().hex}.json"; raw_path.write_text(json.dumps(raw, indent=2, default=str))
             output = getattr(resp, 'output_text', '') or raw.get('output_text', '')
-            parsed = schema.model_validate_json(output) if output else FoundationFactSet()
+            parsed, candidate_exceptions, parse_status = parse_foundation_fact_candidates(output, packet_id=None, provider='openai', model=self.model, request_id=getattr(resp, 'id', None) or raw.get('id')) if output else (FoundationFactSet(), [], 'completed')
             usage = (getattr(resp, 'usage', None).model_dump() if getattr(resp, 'usage', None) and hasattr(getattr(resp, 'usage'), 'model_dump') else (raw.get('usage') or {}))
             actual_cost = self._usage_cost(usage, estimated or 0)
             enriched_usage = usage | {'input_tokens': int(usage.get('input_tokens') or usage.get('prompt_tokens') or input_tokens or 0), 'reasoning_effort': self.reasoning_effort}
-            return ExtractionRun(run_id=correlation_id, route=f'openai-responses-pdf-{mode}', provider='openai', model=self.model, model_version=self.model, status='completed', request_id=getattr(resp, 'id', None) or raw.get('id'), started_at=start_iso, completed_at=now_iso(), latency_seconds=time.time()-started, usage=enriched_usage, estimated_cost_usd=estimated, raw_response_location=str(raw_path), facts=parsed.facts[:self.settings.max_facts], diagnostics=diagnostics, verifier={'actual_cost_usd': actual_cost, 'exact_preflight_available': exact_preflight_available, 'input_cost_usd': ((int(enriched_usage.get('input_tokens') or 0) * self.settings.input_cost_per_1m) / 1_000_000), 'output_cost_usd': ((int(enriched_usage.get('output_tokens') or enriched_usage.get('completion_tokens') or 0) * self.settings.output_cost_per_1m) / 1_000_000)})
+            return ExtractionRun(run_id=correlation_id, route=f'openai-responses-pdf-{mode}', provider='openai', model=self.model, model_version=self.model, status=parse_status, request_id=getattr(resp, 'id', None) or raw.get('id'), started_at=start_iso, completed_at=now_iso(), latency_seconds=time.time()-started, usage=enriched_usage, estimated_cost_usd=estimated, raw_response_location=str(raw_path), facts=parsed.facts[:self.settings.max_facts], diagnostics=diagnostics, candidate_exceptions=candidate_exceptions, verifier={'actual_cost_usd': actual_cost, 'exact_preflight_available': exact_preflight_available, 'input_cost_usd': ((int(enriched_usage.get('input_tokens') or 0) * self.settings.input_cost_per_1m) / 1_000_000), 'output_cost_usd': ((int(enriched_usage.get('output_tokens') or enriched_usage.get('completion_tokens') or 0) * self.settings.output_cost_per_1m) / 1_000_000)})
         except ValidationError as exc:
             diag = _diagnostic(**base_diag, stage='response_parse', pdf_upload_succeeded=False, provider_error_type='ValidationError', provider_error_message=str(exc), retryable=False)
             diagnostics.append(diag)

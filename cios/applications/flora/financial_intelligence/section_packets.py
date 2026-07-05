@@ -10,6 +10,7 @@ from cios.applications.flora.storage import atomic_write_json, data_path, ensure
 from cios.applications.flora.live.documents import DocumentPage
 from .instructions import EXTRACTION_INSTRUCTIONS
 from .schema import ExperimentDocument, ExtractionRun, FoundationFactSet, now_iso, openai_strict_json_schema
+from .candidate_validation import parse_foundation_fact_candidates
 from .config import financial_intelligence_settings
 
 TARGET_INPUT_TOKENS = 50_000
@@ -155,13 +156,13 @@ class SectionAwareOpenAIProvider:
             payload = _packet_payload(self, document, packet, schema) | {'max_output_tokens': self.max_output_tokens}
             resp = client.responses.create(**payload); openai_calls += 1
             raw = resp.model_dump(mode='json') if hasattr(resp, 'model_dump') else resp
-            parsed = schema.model_validate_json(getattr(resp, 'output_text', '') or raw.get('output_text', '{}'))
+            parsed, candidate_exceptions, parse_status = parse_foundation_fact_candidates(getattr(resp, 'output_text', '') or raw.get('output_text', '{}'), packet_id=packet.packet_id, provider='openai', model=self.model, request_id=raw.get('id'))
             usage = raw.get('usage') or {}
             usage = usage | {'input_tokens': int(usage.get('input_tokens') or input_tokens), 'planned_output_allowance': self.max_output_tokens, 'tpm_reservation': input_tokens + self.max_output_tokens}
             total_usage['input_tokens'] += usage['input_tokens']; total_usage['output_tokens'] += int(usage.get('output_tokens') or 0)
-            run = ExtractionRun(run_id=f'{correlation_id}-{packet.packet_id}', route='openai-responses-section-packet', provider='openai', model=self.model, model_version=self.model, status='completed', request_id=raw.get('id'), started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage=usage, facts=parsed.facts, diagnostics=[{'request_stage':'token_preflight','packet_id':packet.packet_id,'page_numbers':list(packet.page_numbers),'input_tokens':input_tokens,'planned_output_allowance':self.max_output_tokens,'tpm_reservation':input_tokens+self.max_output_tokens,'absolute_input_token_ceiling':ABSOLUTE_INPUT_TOKEN_CEILING}])
+            run = ExtractionRun(run_id=f'{correlation_id}-{packet.packet_id}', route='openai-responses-section-packet', provider='openai', model=self.model, model_version=self.model, status=parse_status, request_id=raw.get('id'), started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage=usage, facts=parsed.facts, candidate_exceptions=candidate_exceptions, diagnostics=[{'request_stage':'token_preflight','packet_id':packet.packet_id,'page_numbers':list(packet.page_numbers),'input_tokens':input_tokens,'planned_output_allowance':self.max_output_tokens,'tpm_reservation':input_tokens+self.max_output_tokens,'absolute_input_token_ceiling':ABSOLUTE_INPUT_TOKEN_CEILING}])
             ensure_writable_dir(cache_path.parent); atomic_write_json(cache_path, run.model_dump(mode='json'))
             runs.append(run); packet_records.append({'packet_id': packet.packet_id, 'page_numbers': packet.page_numbers, 'packet_hash': packet.packet_hash, 'cached': False, 'input_tokens': input_tokens})
         merged = merge_packet_facts(runs, document)
-        final = ExtractionRun(run_id=correlation_id, route='openai-responses-section-packets', provider='openai', model=self.model, model_version=self.model, status='completed', started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage=total_usage, facts=merged.facts, diagnostics=[d for r in runs for d in r.diagnostics])
+        final = ExtractionRun(run_id=correlation_id, route='openai-responses-section-packets', provider='openai', model=self.model, model_version=self.model, status=('completed_with_exceptions' if any(r.candidate_exceptions for r in runs) and merged.facts else ('provider_response_invalid' if runs and not merged.facts and any(r.candidate_exceptions for r in runs) else 'completed')), started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage=total_usage, facts=merged.facts, candidate_exceptions=[e for r in runs for e in r.candidate_exceptions], diagnostics=[d for r in runs for d in r.diagnostics])
         return final, {'candidate_pages': [c.page_number for c in candidates], 'packets': packet_records, 'packet_count': len(packet_records), 'openai_calls': openai_calls, 'document_hash': doc_hash}

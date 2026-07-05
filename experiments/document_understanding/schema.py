@@ -2,19 +2,12 @@ from __future__ import annotations
 from datetime import datetime, UTC
 from enum import StrEnum
 from copy import deepcopy
-from typing import Any, Protocol
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from decimal import Decimal
+from typing import Annotated, Any, Literal, Protocol
+from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, model_validator
 
 
 def openai_strict_json_schema(model: type[BaseModel]) -> dict[str, Any]:
-    """Return the canonical Pydantic schema in OpenAI strict structured-output form.
-
-    OpenAI strict JSON schemas require every object property to be listed in
-    ``required`` and reject unrecognised object properties. Pydantic keeps
-    fields with defaults (including nullable lineage fields such as
-    ``subject_id``) out of ``required`` by default, so this normalises the
-    generated schema without removing any fields from the canonical model.
-    """
     schema = deepcopy(model.model_json_schema())
     _require_all_object_properties(schema)
     return schema
@@ -37,6 +30,21 @@ class ClaimType(StrEnum):
 class FactState(StrEnum):
     current='current'; historical='historical'; actual='actual'; target='target'; guidance='guidance'; announced='announced'; conditional='conditional'
 
+class NumericFactValue(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    kind: Literal['numeric']='numeric'; amount: Decimal; scale: str|None=None; unit: str|None=None; currency: str|None=None
+class TextFactValue(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    kind: Literal['text']='text'; text: str
+class DateFactValue(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    kind: Literal['date']='date'; date: str
+class BooleanFactValue(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    kind: Literal['boolean']='boolean'; value: bool
+FactValue = Annotated[NumericFactValue | TextFactValue | DateFactValue | BooleanFactValue, Field(discriminator='kind')]
+FactValueAdapter = TypeAdapter(FactValue)
+
 class PageRange(BaseModel):
     model_config=ConfigDict(extra='forbid')
     start:int=Field(ge=1); end:int=Field(ge=1)
@@ -54,25 +62,53 @@ class FoundationFact(BaseModel):
     model_config=ConfigDict(extra='forbid')
     fact_id:str; canonical_enterprise_id:str; claim_type:ClaimType
     subject_type:str; subject_name:str; subject_id:str|None=None
-    predicate:str; object_type:str
-    value_text:str|None=None; value_number:float|None=None; scale:str|None=None; unit:str|None=None; currency:str|None=None
+    predicate:str; object_type:str; value: FactValue
     business_unit:str|None=None
     period_label:str|None=None; period_start:str|None=None; period_end:str|None=None
     state:FactState
     source_document_id:str; source_page_start:int=Field(ge=1); source_page_end:int=Field(ge=1); source_excerpt:str=Field(min_length=1,max_length=420)
     extraction_confidence:float=Field(ge=0,le=1); explicit_in_source:bool
     extractor_provider:str; extractor_model:str; extractor_version:str
+
+    @model_validator(mode='before')
+    @classmethod
+    def reject_or_upgrade_legacy_values(cls, data: Any) -> Any:
+        if not isinstance(data, dict): return data
+        legacy = ['value_text','value_number','value_date','value_boolean']
+        populated = [k for k in legacy if k in data and data.get(k) is not None]
+        if 'value' in data:
+            if populated: raise ValueError('fact must use explicit value and not legacy value fields')
+            return data
+        if len(populated) != 1: raise ValueError('financial facts must contain exactly one value')
+        copy = dict(data); k = populated[0]
+        if k == 'value_number':
+            copy['value'] = {'kind':'numeric','amount': copy.pop(k), 'scale': copy.pop('scale', None), 'unit': copy.pop('unit', None), 'currency': copy.pop('currency', None)}
+        elif k == 'value_text': copy['value'] = {'kind':'text','text': copy.pop(k)}
+        elif k == 'value_date': copy['value'] = {'kind':'date','date': copy.pop(k)}
+        else: copy['value'] = {'kind':'boolean','value': copy.pop(k)}
+        for extra in legacy:
+            copy.pop(extra, None)
+        return copy
+
     @model_validator(mode='after')
     def validate_atomic(self):
         if self.source_page_end < self.source_page_start: raise ValueError('source page end must be >= start')
-        metric_values=sum(v is not None for v in (self.value_text,self.value_number))
-        if self.claim_type in {ClaimType.financial_metric_reported,ClaimType.financial_guidance_stated,ClaimType.financial_target_stated} and metric_values != 1:
-            raise ValueError('financial facts must contain exactly one value')
-        if self.claim_type not in {ClaimType.financial_metric_reported,ClaimType.financial_guidance_stated,ClaimType.financial_target_stated} and metric_values > 1:
-            raise ValueError('one fact must contain one metric or relationship')
+        if self.claim_type in {ClaimType.financial_metric_reported,ClaimType.financial_guidance_stated,ClaimType.financial_target_stated} and self.value.kind not in {'numeric','text'}:
+            raise ValueError('financial facts must use numeric or text values')
         if self.claim_type == ClaimType.financial_guidance_stated and self.state != FactState.guidance: raise ValueError('guidance claim must use guidance state')
         if self.claim_type == ClaimType.financial_target_stated and self.state != FactState.target: raise ValueError('target claim must use target state')
         return self
+
+    @property
+    def value_number(self) -> float|None: return float(self.value.amount) if isinstance(self.value, NumericFactValue) else None
+    @property
+    def value_text(self) -> str|None: return self.value.text if isinstance(self.value, TextFactValue) else None
+    @property
+    def scale(self) -> str|None: return self.value.scale if isinstance(self.value, NumericFactValue) else None
+    @property
+    def unit(self) -> str|None: return self.value.unit if isinstance(self.value, NumericFactValue) else None
+    @property
+    def currency(self) -> str|None: return self.value.currency if isinstance(self.value, NumericFactValue) else None
 
 class FoundationFactSet(BaseModel):
     model_config=ConfigDict(extra='forbid')
@@ -83,7 +119,7 @@ class ExtractionRun(BaseModel):
     run_id:str; route:str; provider:str; model:str; model_version:str|None=None; status:str
     request_id:str|None=None; started_at:str; completed_at:str; latency_seconds:float=Field(ge=0)
     usage:dict[str,Any]=Field(default_factory=dict); estimated_cost_usd:float|None=None; raw_response_location:str|None=None
-    facts:list[FoundationFact]=Field(default_factory=list); schema_errors:list[str]=Field(default_factory=list); provider_errors:list[str]=Field(default_factory=list); verifier:dict[str,Any]=Field(default_factory=dict); diagnostics:list[dict[str,Any]]=Field(default_factory=list)
+    facts:list[FoundationFact]=Field(default_factory=list); schema_errors:list[str]=Field(default_factory=list); provider_errors:list[str]=Field(default_factory=list); verifier:dict[str,Any]=Field(default_factory=dict); diagnostics:list[dict[str,Any]]=Field(default_factory=list); candidate_exceptions:list[dict[str,Any]]=Field(default_factory=list)
 
 class DocumentUnderstandingProvider(Protocol):
     def extract_facts(self, document:ExperimentDocument, schema:type[FoundationFactSet], page_ranges:list[PageRange]|None=None)->ExtractionRun: ...

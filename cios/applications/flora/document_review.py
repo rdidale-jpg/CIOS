@@ -391,7 +391,8 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc') -> dict[
         extraction = None
     packet_plan = locals().get('packet_plan', {})
     claims = [fact_to_review_claim(f, run_id) for f in (extraction.facts if extraction else [])]
-    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b'')}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else provider.model), 'reasoning_effort': getattr(provider, 'reasoning_effort', settings.reasoning_effort), 'schema_version': settings.schema_version, 'prompt_version': settings.prompt_version, 'document_hash': document.checksum, 'usage': (extraction.usage if extraction else {}), 'estimated_cost_usd': (extraction.estimated_cost_usd if extraction else None), 'actual_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('actual_cost_usd') if extraction else None, 'cost_breakdown': {'input_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('input_cost_usd'), 'output_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('output_cost_usd')} if extraction else {}, 'exact_preflight_available': (getattr(extraction, 'verifier', {}) or {}).get('exact_preflight_available') if extraction else None, 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'provider_diagnostics': (getattr(extraction, 'diagnostics', []) if extraction else [_safe_provider_diagnostic(run_id, source, fetched, provider.model, retrieval_started)]), 'openai_invoked': bool(extraction), 'claims': claims, 'applied_results': [], 'candidate_pages_selected': packet_plan.get('candidate_pages', []), 'page_packets_submitted': packet_plan.get('packets', []), 'packet_count': packet_plan.get('packet_count', 0)}
+    candidate_exceptions = list(getattr(extraction, 'candidate_exceptions', []) if extraction else [])
+    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b'')}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else provider.model), 'reasoning_effort': getattr(provider, 'reasoning_effort', settings.reasoning_effort), 'schema_version': settings.schema_version, 'prompt_version': settings.prompt_version, 'document_hash': document.checksum, 'usage': (extraction.usage if extraction else {}), 'estimated_cost_usd': (extraction.estimated_cost_usd if extraction else None), 'actual_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('actual_cost_usd') if extraction else None, 'cost_breakdown': {'input_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('input_cost_usd'), 'output_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('output_cost_usd')} if extraction else {}, 'exact_preflight_available': (getattr(extraction, 'verifier', {}) or {}).get('exact_preflight_available') if extraction else None, 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'provider_diagnostics': (getattr(extraction, 'diagnostics', []) if extraction else [_safe_provider_diagnostic(run_id, source, fetched, provider.model, retrieval_started)]), 'openai_invoked': bool(extraction), 'claims': claims, 'applied_results': [], 'candidate_exceptions': candidate_exceptions, 'candidate_pages_selected': packet_plan.get('candidate_pages', []), 'page_packets_submitted': packet_plan.get('packets', []), 'packet_count': packet_plan.get('packet_count', 0)}
     run['collection'].update({'final_url': fetched.final_url or fetched.url, 'content_type': fetched.media_type, 'redirect_chain': list(fetched.redirect_chain), 'redirected': bool(fetched.redirect_chain)})
     if extraction:
         run['provider_diagnostics'] = [_safe_provider_diagnostic(run_id, source, fetched, provider.model, retrieval_started)] + run.get('provider_diagnostics', [])
@@ -401,13 +402,20 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc') -> dict[
     elif document.media_type != 'application/pdf':
         _log_financial_intelligence_failure(run['provider_diagnostics'][-1])
         run = _mark_failure(run, 'source_not_pdf', doc_parse.error or f"source returned {document.media_type}")
-    elif extraction and extraction.status == 'completed':
+    elif extraction and extraction.status in {'completed', 'completed_with_exceptions'}:
         try:
             run = _apply_automatic_claims(run)
+            if candidate_exceptions:
+                run['exceptions'] = run.get('exceptions', []) + candidate_exceptions
+                run['exception_count'] = len(run.get('exceptions', []))
+                run['status'] = 'completed_with_exceptions'
         except Exception as exc:
             run = _mark_failure(run, 'persistence_failed', f'{type(exc).__name__}: {exc}')
     else:
         run = _mark_failure(run, _provider_failure_category(extraction), '; '.join(run.get('provider_errors') or ['provider did not complete']))
+        if candidate_exceptions:
+            run['exceptions'] = run.get('exceptions', []) + candidate_exceptions
+            run['exception_count'] = len(run.get('exceptions', []))
     _record_provider_diagnostics(run)
     _write_cost_record(run)
     if fetched.succeeded:
