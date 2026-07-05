@@ -52,7 +52,8 @@ FAILURE_MESSAGES = {
     'provider_request_failed': 'Financial document understanding could not complete.',
     'provider_quota_exceeded': 'Financial document understanding could not complete.',
     'cost_limit_exceeded': 'Financial document understanding was blocked by the configured cost limit.',
-    'token_count_failed': 'Financial document understanding could not safely estimate cost.',
+    'cost_preflight_sdk_unavailable': 'Financial document understanding could not use SDK token preflight; bounded pilot controls apply.',
+    'cost_preflight_request_failed': 'Financial document understanding could not safely complete token preflight.',
     'context_limit_exceeded': 'Financial document understanding could not complete because the report exceeds model context.',
     'provider_model_unavailable': 'Financial document understanding could not complete.',
     'provider_file_upload_failed': 'Financial document understanding could not complete.',
@@ -81,7 +82,8 @@ def _provider_failure_category(extraction) -> str:
         'quota_exceeded': 'provider_quota_exceeded',
         'provider_quota_exceeded': 'provider_quota_exceeded',
         'cost_limit_exceeded': 'cost_limit_exceeded',
-        'token_count_failed': 'token_count_failed',
+        'cost_preflight_sdk_unavailable': 'cost_preflight_sdk_unavailable',
+        'cost_preflight_request_failed': 'cost_preflight_request_failed',
         'context_limit_exceeded': 'context_limit_exceeded',
         'model_unavailable': 'provider_model_unavailable',
         'file_upload_failed': 'provider_file_upload_failed',
@@ -273,10 +275,14 @@ def _write_cost_record(run: dict[str, Any]) -> None:
         'model': run.get('model'),
         'reasoning_effort': run.get('reasoning_effort'),
         'input_tokens': usage.get('input_tokens') or run.get('input_tokens'),
+        'cached_input_tokens': usage.get('input_tokens_details', {}).get('cached_tokens') if isinstance(usage.get('input_tokens_details'), dict) else usage.get('cached_input_tokens'),
         'output_tokens': usage.get('output_tokens'),
         'reasoning_tokens': usage.get('output_tokens_details', {}).get('reasoning_tokens') if isinstance(usage.get('output_tokens_details'), dict) else usage.get('reasoning_tokens'),
+        'input_cost': (run.get('cost_breakdown') or {}).get('input_cost_usd'),
+        'output_cost': (run.get('cost_breakdown') or {}).get('output_cost_usd'),
         'estimated_cost': run.get('estimated_cost_usd'),
         'actual_calculated_cost': run.get('actual_cost_usd'),
+        'exact_preflight_available': run.get('exact_preflight_available'),
         'timestamp': now_iso(),
         'success': run.get('status') == 'completed',
         'cached_output_reused': bool(run.get('cached_output_reused')),
@@ -376,7 +382,7 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc') -> dict[
     else:
         extraction = None
     claims = [fact_to_review_claim(f, run_id) for f in (extraction.facts if extraction else [])]
-    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b'')}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else provider.model), 'reasoning_effort': getattr(provider, 'reasoning_effort', settings.reasoning_effort), 'schema_version': settings.schema_version, 'prompt_version': settings.prompt_version, 'document_hash': document.checksum, 'usage': (extraction.usage if extraction else {}), 'estimated_cost_usd': (extraction.estimated_cost_usd if extraction else None), 'actual_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('actual_cost_usd') if extraction else None, 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'provider_diagnostics': (getattr(extraction, 'diagnostics', []) if extraction else [_safe_provider_diagnostic(run_id, source, fetched, provider.model, retrieval_started)]), 'openai_invoked': bool(extraction), 'claims': claims, 'applied_results': []}
+    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b'')}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else provider.model), 'reasoning_effort': getattr(provider, 'reasoning_effort', settings.reasoning_effort), 'schema_version': settings.schema_version, 'prompt_version': settings.prompt_version, 'document_hash': document.checksum, 'usage': (extraction.usage if extraction else {}), 'estimated_cost_usd': (extraction.estimated_cost_usd if extraction else None), 'actual_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('actual_cost_usd') if extraction else None, 'cost_breakdown': {'input_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('input_cost_usd'), 'output_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('output_cost_usd')} if extraction else {}, 'exact_preflight_available': (getattr(extraction, 'verifier', {}) or {}).get('exact_preflight_available') if extraction else None, 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'provider_diagnostics': (getattr(extraction, 'diagnostics', []) if extraction else [_safe_provider_diagnostic(run_id, source, fetched, provider.model, retrieval_started)]), 'openai_invoked': bool(extraction), 'claims': claims, 'applied_results': []}
     run['collection'].update({'final_url': fetched.final_url or fetched.url, 'content_type': fetched.media_type, 'redirect_chain': list(fetched.redirect_chain), 'redirected': bool(fetched.redirect_chain)})
     if extraction:
         run['provider_diagnostics'] = [_safe_provider_diagnostic(run_id, source, fetched, provider.model, retrieval_started)] + run.get('provider_diagnostics', [])
