@@ -35,6 +35,9 @@ class CanonicalPdfPage:
     extraction_quality_score: float
     source_document_id: str
     extraction_method: str
+    width: float = 0.0
+    height: float = 0.0
+    renderable: bool = False
 
 @dataclass(frozen=True)
 class ParserAttempt:
@@ -111,10 +114,10 @@ def _quality(pages: list[CanonicalPdfPage], parser: str, error: str = '') -> Par
     else: state=QUALITY_CORRUPT
     return ParserAttempt(parser, 'parsed' if pages else 'failed', len(pages), useful, total, med, pr, ar, cr, repeated, structure, state, score, error)
 
-def _mk_page(idx:int, text:str, doc_id:str, method:str, blocks:Iterable[str]=()) -> CanonicalPdfPage:
+def _mk_page(idx:int, text:str, doc_id:str, method:str, blocks:Iterable[str]=(), width: float = 0.0, height: float = 0.0, renderable: bool = False) -> CanonicalPdfPage:
     text=_normalise(text); pr, ar, _ = _ratios(text)
     score = round((min(len(text),1000)/1000*.4) + (pr*.3) + (ar*.2) + ((0 if _repeated_glyph(text) else .1)), 4)
-    return CanonicalPdfPage(idx, idx+1, _printed(text), text, tuple(blocks) or ((text,) if text else ()), _headings(text), len(text), pr, ar, score, doc_id, method)
+    return CanonicalPdfPage(idx, idx+1, _printed(text), text, tuple(blocks) or ((text,) if text else ()), _headings(text), len(text), pr, ar, score, doc_id, method, float(width or 0), float(height or 0), bool(renderable))
 
 def _from_document_pages(pages: Iterable[DocumentPage], document: ExperimentDocument) -> list[CanonicalPdfPage]:
     return [_mk_page(i, getattr(p,'text','') or '', document.document_id, getattr(p,'extraction_method','embedded_text')) for i,p in enumerate(pages)]
@@ -127,22 +130,14 @@ def _fitz_pages(path: Path, document: ExperimentDocument) -> list[CanonicalPdfPa
             blocks=[]
             try: blocks=[str(b[4]) for b in page.get_text('blocks') if len(b)>4 and str(b[4]).strip()]
             except Exception: blocks=[]
-            out.append(_mk_page(i, page.get_text('text') or '\n'.join(blocks), document.document_id, 'pymupdf', blocks))
-    return out
-
-def _pypdf_pages(path: Path, document: ExperimentDocument) -> list[CanonicalPdfPage]:
-    from pypdf import PdfReader  # type: ignore
-    reader=PdfReader(str(path)); return [_mk_page(i, p.extract_text() or '', document.document_id, 'pypdf') for i,p in enumerate(reader.pages)]
-
-def _pdfplumber_pages(path: Path, document: ExperimentDocument) -> list[CanonicalPdfPage]:
-    import pdfplumber  # type: ignore
-    out=[]
-    with pdfplumber.open(str(path)) as pdf:
-        for i,p in enumerate(pdf.pages):
-            text=p.extract_text() or ''
-            words=p.extract_words() or []
-            blocks=tuple(w.get('text','') for w in words[:200] if w.get('text'))
-            out.append(_mk_page(i, text, document.document_id, 'pdfplumber', blocks))
+            rect = page.rect
+            renderable = False
+            try:
+                pix = page.get_pixmap(matrix=fitz.Matrix(0.05, 0.05), alpha=False)
+                renderable = bool(pix.width and pix.height)
+            except Exception:
+                renderable = False
+            out.append(_mk_page(i, page.get_text('text') or '\n'.join(blocks), document.document_id, 'pymupdf', blocks, rect.width, rect.height, renderable))
     return out
 
 def load_canonical_pdf_document(document: ExperimentDocument, embedded_pages: Iterable[DocumentPage] = ()) -> CanonicalPdfDocument:
@@ -151,9 +146,10 @@ def load_canonical_pdf_document(document: ExperimentDocument, embedded_pages: It
     attempts.append(_quality(embedded, 'embedded_text'))
     candidates.append(('embedded_text', embedded, attempts[-1]))
     path=Path(document.local_path) if document.local_path else None
-    for name, fn in (('pymupdf', _fitz_pages), ('pypdf', _pypdf_pages), ('pdfplumber', _pdfplumber_pages)):
-        if not path or not path.is_file():
-            attempts.append(ParserAttempt(name,'not_available',0,0,0,0,0,0,0,False,False,QUALITY_UNAVAILABLE,0,'local PDF unavailable')); continue
+    name, fn = 'pymupdf', _fitz_pages
+    if not path or not path.is_file():
+        attempts.append(ParserAttempt(name,'not_available',0,0,0,0,0,0,0,False,False,QUALITY_UNAVAILABLE,0,'local PDF unavailable'))
+    else:
         try:
             pages=fn(path, document); att=_quality(pages, name); attempts.append(att); candidates.append((name,pages,att))
         except Exception as exc:

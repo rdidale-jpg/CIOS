@@ -41,6 +41,8 @@ def parse_foundation_fact_candidates(output: str, *, packet_id: str|None, provid
         envelope = json.loads(output or '{}')
     except json.JSONDecodeError as exc:
         return FoundationFactSet(), [validation_exception({}, exc, packet_id=packet_id, candidate_index=-1, provider=provider, model=model, request_id=request_id)], 'provider_response_invalid'
+    if '[EXTRACT NOT AVAILABLE:' in (output or ''):
+        return FoundationFactSet(), [validation_exception({'source_excerpt': '[EXTRACT NOT AVAILABLE]'}, ValueError('packet_content_unavailable placeholder is not candidate evidence'), packet_id=packet_id, candidate_index=-1, provider=provider, model=model, request_id=request_id) | {'exception_type': 'packet_content_unavailable'}], 'packet_content_unavailable'
     if not isinstance(envelope, dict) or not isinstance(envelope.get('facts'), list):
         return FoundationFactSet(), [validation_exception(envelope, ValueError('response envelope must contain a facts array'), packet_id=packet_id, candidate_index=-1, provider=provider, model=model, request_id=request_id)], 'provider_response_invalid'
     valid=[]; exceptions=[]

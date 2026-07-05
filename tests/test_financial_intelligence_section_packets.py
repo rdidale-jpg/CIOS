@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import pytest
 from pathlib import Path
 from typing import Any
 
@@ -44,6 +45,7 @@ def test_relevant_pages_selected_with_original_page_numbers() -> None:
 
 
 def test_full_pdf_is_never_submitted_as_one_extraction_request_and_every_packet_preflighted(monkeypatch, tmp_path: Path) -> None:
+    pytest.importorskip('fitz', reason='PyMuPDF is required to build real page packets')
     calls: dict[str, list[dict[str, Any]]] = {'count': [], 'create': []}
 
     class Count:
