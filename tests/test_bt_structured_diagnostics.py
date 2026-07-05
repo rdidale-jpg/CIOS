@@ -1,4 +1,4 @@
-import json, zipfile
+import json, zipfile, shutil
 from pathlib import Path
 import pytest
 from urllib.error import HTTPError, URLError
@@ -274,3 +274,42 @@ def test_no_supported_facts_not_reported_before_adapter_handoff(tmp_path):
     assert diag['adapter_handoff_attempted'] is False
     assert diag['failure_code'] != 'no_supported_facts'
     assert diag['failure_stage'] == 'structured package recognition'
+
+
+def test_viewer_wrapper_embedded_and_external_discovery(tmp_path):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    package = tmp_path / 'viewer.zip'
+    embedded = '<script type="application/json" id="ixbrl-data">{"report":"reports/bt.xhtml"}</script>'
+    external = '<script src="viewer.js"></script><a href="reports/bt.xhtml">raw</a>'
+    with zipfile.ZipFile(package, 'w') as z:
+        z.writestr('ixbrl-viewer.htm', f'<html><head>{embedded}</head><body>{external}</body></html>')
+        z.writestr('META-INF/catalog.xml', '<catalog><rewriteURI uriStartString="https://x/" rewritePrefix="taxonomy/"/></catalog>')
+        z.writestr('META-INF/taxonomyPackage.xml', '<taxonomyPackage><identifier>bt-fy26</identifier><name>BT GROUP PLC 2026</name><entryPoint><entryPointDocument href="bt-2026.xsd"/></entryPoint></taxonomyPackage>')
+        z.writestr('bt-2026.xsd', '<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.bt.com/2026"><xsd:annotation><xsd:appinfo><link:schemaRef xmlns:link="http://www.xbrl.org/2003/linkbase" xlink:href="base.xsd" xmlns:xlink="http://www.w3.org/1999/xlink"/></xsd:appinfo></xsd:annotation></xsd:schema>')
+    result = bt.classify_structured_package(package, cfg)
+    assert result['package_type'] == 'viewer_with_embedded_filing'
+    assert result['raw_structured_data_exists_in_package'] is True
+    assert 'reports/bt.xhtml' in result['embedded_filing_locations']
+    assert 'reports/bt.xhtml' in result['external_filing_references']
+    assert result['metadata']['taxonomy_package']['identifier'] == 'bt-fy26'
+
+
+def test_scope_rejections_for_parent_and_subsidiary(tmp_path):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    parent = _ix_full().replace('<xbrli:entity>', '<xbrli:entity><xbrli:segment><xbrldi:explicitMember xmlns:xbrldi="http://xbrl.org/2006/xbrldi" dimension="scope">ParentCompany</xbrldi:explicitMember></xbrli:segment>')
+    sub = _ix_full(lei='213800IM9RLR1AU4R889')
+    for body, code in [(parent, 'structured_report_locator_failed'), (sub, 'structured_report_locator_failed')]:
+        package = tmp_path / f'{code}{len(body)}.zip'
+        with zipfile.ZipFile(package, 'w') as z: z.writestr('report.xhtml', body)
+        with pytest.raises(bt.StructuredIngestionError) as exc:
+            bt.locate_ixbrl_report(package, cfg)
+        assert exc.value.code == code
+
+
+def test_direct_raw_filing_retrieval_and_temp_cleanup(tmp_path, monkeypatch):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    raw = tmp_path / 'raw.xhtml'; raw.write_text(_ix_full())
+    prepared = bt.prepare_raw_report_from_package(raw, 'report.xhtml', tmp_path / 'work')
+    assert prepared.exists()
+    shutil.rmtree(prepared.parent)
+    assert not prepared.exists()

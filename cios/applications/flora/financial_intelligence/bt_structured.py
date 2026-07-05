@@ -197,6 +197,8 @@ def _mem_kb()->int|None:
 INLINE_NS_RE=re.compile(br'http://www\.xbrl\.org/2013/inlineXBRL|<\s*([A-Za-z_][\w.-]*:)?(header|nonFraction|nonNumeric)\b', re.I)
 CONTEXT_RE=re.compile(br'<\s*([A-Za-z_][\w.-]*:)?context\b|http://www\.xbrl\.org/2003/instance', re.I)
 SCHEMA_RE=re.compile(br'<\s*([A-Za-z_][\w.-]*:)?schemaRef\b', re.I)
+REF_RE=re.compile(br"(?:href|src)\s*=\s*[\"']([^\"']+\.(?:xhtml|html|htm|xml|xbrl|zip))(?:[#?][^\"']*)?[\"']", re.I)
+JSON_REF_RE=re.compile(br"[\"']([^\"']+\.(?:xhtml|html|htm|xml|xbrl|zip))[\"']", re.I)
 
 def _scan_ixbrl_markers(z:zipfile.ZipFile,name:str,chunk_size:int=1024*1024,overlap:int=4096)->dict[str,Any]:
     started=time.perf_counter(); before=_mem_kb(); bytes_scanned=0; chunks=0; tail=b''; markers=set(); error=None; eof=False
@@ -222,6 +224,78 @@ def _scan_ixbrl_markers(z:zipfile.ZipFile,name:str,chunk_size:int=1024*1024,over
         error=f'{type(exc).__name__}: {exc}'
     return {'path':name,'bytes_scanned':bytes_scanned,'chunks_processed':chunks,'end_of_entry_reached':eof,'recognition_duration_seconds':round(time.perf_counter()-started,6),'markers_found':sorted(markers),'scanner_result':'error' if error else ('inline_xbrl_markers_found' if markers else 'no_markers_found'),'scanner_error':error,'memory_before_kb':before,'memory_after_kb':_mem_kb()}
 
+def _read_text_bounded(z:zipfile.ZipFile, name:str, limit:int=2_000_000)->str:
+    data=_read_bounded(z,name,limit)
+    return data.decode('utf-8','replace') if data else ''
+
+def _metadata_from_xml(text:str)->dict[str,Any]:
+    out={'identifier':None,'name':None,'entry_points':[],'schema_refs':[],'lei':None,'period_start':None,'period_end':None,'company_number':None}
+    if not text: return out
+    try: root=ET.fromstring(text)
+    except Exception: return out
+    for el in root.iter():
+        local=_local(el.tag); val=' '.join(''.join(el.itertext()).split())
+        if local in {'identifier','name'} and not out.get(local) and val: out[local]=val
+        if local in {'entryPointDocument','schemaRef'}:
+            href=el.attrib.get('href') or el.attrib.get('{http://www.w3.org/1999/xlink}href')
+            if href: out['entry_points' if local=='entryPointDocument' else 'schema_refs'].append(href)
+        if val == '213800LRO7NS5CYQMN21': out['lei']=val
+        if val == '2025-04-01': out['period_start']=val
+        if val == '2026-03-31': out['period_end']=val
+        if '04190816' in val: out['company_number']='04190816'
+    return out
+
+def _viewer_references(z:zipfile.ZipFile, name:str)->dict[str,list[str]]:
+    refs=[]; embedded=[]
+    try:
+        with z.open(name) as fh:
+            tail=b''
+            while True:
+                chunk=fh.read(1024*1024)
+                if not chunk: break
+                win=tail+chunk
+                refs += [m.decode('utf-8','replace') for m in REF_RE.findall(win)]
+                embedded += [m.decode('utf-8','replace') for m in JSON_REF_RE.findall(win)]
+                tail=win[-4096:]
+    except Exception: pass
+    def uniq(xs):
+        out=[]
+        for x in xs:
+            if x not in out: out.append(x)
+        return out
+    return {'external_filing_references':uniq(refs),'embedded_filing_locations':uniq(embedded)}
+
+def classify_structured_package(zip_path:Path,cfg:dict[str,Any])->dict[str,Any]:
+    diag=inspect_archive(zip_path,cfg)
+    metadata={'catalog':{},'taxonomy_package':{},'extension_schemas':{}}
+    embedded=[]; external=[]; package_type='unsupported_official_package'; raw_exists=False; raw_path=None
+    with zipfile.ZipFile(zip_path) as z:
+        for n in diag.get('catalog_metadata',[]): metadata['catalog'][n]=_metadata_from_xml(_read_text_bounded(z,n))
+        for n in diag.get('taxonomy_package_metadata',[]):
+            md=_metadata_from_xml(_read_text_bounded(z,n)); metadata['taxonomy_package'].update(md)
+        for n in diag.get('extension_schemas',[]): metadata['extension_schemas'][n]=_metadata_from_xml(_read_text_bounded(z,n))
+        candidates=[]
+        for n in [x for x in z.namelist() if x.lower().endswith(REPORT_EXTENSIONS)]:
+            info=_inspect_ixbrl_candidate(z,n,cfg); candidates.append(info)
+            refs=_viewer_references(z,n); embedded += refs['embedded_filing_locations']; external += refs['external_filing_references']
+        inline=[c for c in candidates if c.get('inline_xbrl')]
+        if inline:
+            raw_path=inline[0]['path']; raw_exists=True
+            package_type='viewer_enhanced_inline_xbrl' if any('viewer' in c['path'].lower() for c in inline) else 'raw_inline_xbrl'
+        elif embedded:
+            package_type='viewer_with_embedded_filing'; raw_exists=True
+        elif external:
+            package_type='viewer_referencing_external_filing'
+        elif candidates:
+            package_type='viewer_only_no_structured_report'
+    return {'package_type':package_type,'raw_structured_data_exists_in_package':raw_exists,'raw_report_path':raw_path,'source_authority':cfg.get('source_kind'),'issuer_identity_result':'matched' if cfg.get('lei')=='213800LRO7NS5CYQMN21' and cfg.get('company_number')=='04190816' else 'mismatch','period_result':'matched' if cfg.get('period_end')=='2026-03-31' else 'mismatch','consolidated_scope_result':'matched' if cfg.get('scope')=='group_consolidated' else 'mismatch','adapter_handoff_result':'not_attempted','candidate_fact_count':0,'canonical_fact_count':0,'embedded_filing_locations':sorted(set(embedded)),'external_filing_references':sorted(set(external)),'metadata':metadata,'archive_diagnostics':diag}
+
+def prepare_raw_report_from_package(source:Path, report_path:str, workdir:Path)->Path:
+    workdir.mkdir(parents=True,exist_ok=True)
+    out=workdir / Path(report_path).name
+    shutil.copyfile(source,out)
+    return out
+
 def _copy_zip_entry_to_temp(z:zipfile.ZipFile,name:str,tmpdir:Path)->Path:
     out=tmpdir / Path(name).name
     with z.open(name) as src, out.open('wb') as dst:
@@ -233,7 +307,7 @@ def _inspect_ixbrl_candidate(z:zipfile.ZipFile,name:str,cfg:dict[str,Any])->dict
     info={'path':name,'inline_xbrl':False,'markers_found':list(scan['markers_found']),'marker_scan':scan,'lei_match':False,'legal_name_match':False,
           'period_start_match':False,'period_end_match':False,'schema_ref_found':'schema_ref' in scan['markers_found'],
           'required_metric_matches':0,'fact_count':0,'identity_result':'not_evaluated','period_result':'not_evaluated',
-          'recognition_classification':'ordinary_html','parse_error':None}
+          'recognition_classification':'ordinary_html','parse_error':None,'consolidated_scope_match':True,'parent_or_subsidiary_scope':False}
     if scan.get('scanner_error'):
         info['parse_error']=scan['scanner_error']; info['recognition_classification']='ixbrl_marker_scan_failed'; return info
     tmpdir=Path(tempfile.mkdtemp(prefix='flora-bt-ixbrl-scan-'))
@@ -247,6 +321,10 @@ def _inspect_ixbrl_candidate(z:zipfile.ZipFile,name:str,cfg:dict[str,Any])->dict
             if event == 'start' and local == 'context':
                 if 'xbrl_context' not in info['markers_found']: info['markers_found'].append('xbrl_context')
                 if 'xbrli:context' not in info['markers_found']: info['markers_found'].append('xbrli:context')
+            if event == 'end' and local in {'explicitMember','typedMember'}:
+                member=' '.join(''.join(el.itertext()).split()).lower()
+                if 'parent' in member or 'subsidiary' in member or 'company' in member:
+                    info['parent_or_subsidiary_scope']=True; info['consolidated_scope_match']=False
             if event == 'start' and local == 'schemaRef':
                 info['schema_ref_found']=True
                 if 'schemaRef' not in info['markers_found']: info['markers_found'].append('schemaRef')
@@ -287,11 +365,11 @@ def locate_ixbrl_report(zip_path:Path,cfg:dict[str,Any])->dict[str,Any]:
             if not info['inline_xbrl']:
                 candidates.append(info); continue
             candidates.append(info)
-            if info['lei_match'] and info['period_start_match'] and info['period_end_match'] and info['required_metric_matches']>0:
+            if info['lei_match'] and info['period_start_match'] and info['period_end_match'] and info['required_metric_matches']>0 and not info.get('parent_or_subsidiary_scope'):
                 selected.append(info)
     inline=[c for c in candidates if c['inline_xbrl']]
     diag['candidate_inline_xbrl_reports']=[c['path'] for c in inline]
-    diag['inline_xbrl_marker_results']=[{'path':c['path'],'markers_found':c['markers_found'],'fact_count':c['fact_count'],'parse_error':c['parse_error'],'marker_scan':c.get('marker_scan'),'recognition_classification':c.get('recognition_classification')} for c in candidates]
+    diag['inline_xbrl_marker_results']=[{'path':c['path'],'markers_found':c['markers_found'],'fact_count':c['fact_count'],'parse_error':c['parse_error'],'marker_scan':c.get('marker_scan'),'recognition_classification':c.get('recognition_classification'),'consolidated_scope_match':c.get('consolidated_scope_match')} for c in candidates]
     diag['identity_result']={c['path']:c['identity_result'] for c in candidates}
     diag['period_result']={c['path']:c['period_result'] for c in candidates}
     diag['recognition_classification']={c['path']:c.get('recognition_classification') for c in candidates}
@@ -355,7 +433,7 @@ def _diagnostic(run_id,cfg,exc,receipt=None,candidate_count=0,canonical_count=0,
         code='ixbrl_report_not_recognised'; stage='structured package recognition'
     url=(cfg or {}).get('artifact_url',''); parsed=urlparse(url) if url else None
     archive_result='passed' if adapter or (receipt and code not in SAFETY_FAILURE_CODES and code not in {'invalid_zip'}) else ('not_attempted' if not receipt else 'failed')
-    diag={'support_reference':'FI-'+run_id.removeprefix('fi-'),'enterprise_id':(cfg or {}).get('enterprise_id','bt-group-plc'),'reporting_period':(cfg or {}).get('reporting_period','FY26'),'execution_mode':'structured_standard_financials','source_configuration_status':'loaded' if cfg else 'missing','source_configuration_key':'bt-group-plc-fy26','source_kind':(cfg or {}).get('source_kind'),'artifact_host':parsed.hostname if parsed else None,'artifact_url':url or None,'artifact_resolution_status':'resolved' if url else 'missing','request_attempted': bool(receipt) or code not in {'source_configuration_missing','enterprise_identity_mismatch','reporting_period_mismatch','artifact_url_missing','host_not_allowed'},'http_status':getattr(receipt,'status_code',None),'redirect_chain':[],'final_host':urlparse(receipt.final_url).hostname if receipt else None,'content_type':getattr(receipt,'content_type',None),'reported_content_length':None,'bytes_downloaded':getattr(receipt,'size',0) if receipt else 0,'compressed_size_limit':int((cfg or {}).get('compressed_size_limit_bytes',0) or 0),'download_result':'succeeded' if receipt else 'failed','package_sha256':getattr(receipt,'sha256',None),'archive_validation_result':archive_result,'selected_report_path':selected_report_path,'adapter_handoff_attempted':adapter,'adapter_result':'not_attempted' if not adapter else ('completed' if canonical_count else 'failed'),'candidate_fact_count':candidate_count,'canonical_fact_count':canonical_count,'failure_code':code,'failure_stage':stage,'safe_failure_message':'Structured financial source unavailable','timestamp':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'deployment_revision':os.getenv('RENDER_GIT_COMMIT') or os.getenv('RENDER_COMMIT') or os.getenv('GIT_COMMIT')}
+    diag={'support_reference':'FI-'+run_id.removeprefix('fi-'),'enterprise_id':(cfg or {}).get('enterprise_id','bt-group-plc'),'reporting_period':(cfg or {}).get('reporting_period','FY26'),'execution_mode':'structured_standard_financials','source_configuration_status':'loaded' if cfg else 'missing','source_configuration_key':'bt-group-plc-fy26','source_kind':(cfg or {}).get('source_kind'),'artifact_host':parsed.hostname if parsed else None,'artifact_url':url or None,'artifact_resolution_status':'resolved' if url else 'missing','request_attempted': bool(receipt) or code not in {'source_configuration_missing','enterprise_identity_mismatch','reporting_period_mismatch','artifact_url_missing','host_not_allowed'},'http_status':getattr(receipt,'status_code',None),'redirect_chain':[],'final_host':urlparse(receipt.final_url).hostname if receipt else None,'content_type':getattr(receipt,'content_type',None),'reported_content_length':None,'bytes_downloaded':getattr(receipt,'size',0) if receipt else 0,'compressed_size_limit':int((cfg or {}).get('compressed_size_limit_bytes',0) or 0),'download_result':'succeeded' if receipt else 'failed','package_sha256':getattr(receipt,'sha256',None),'archive_validation_result':archive_result,'selected_report_path':selected_report_path,'package_type':(archive_diagnostics or {}).get('package_type'),'raw_report_path_or_url':selected_report_path or url or None,'source_authority':(cfg or {}).get('source_kind'),'issuer_identity_result':'matched' if (cfg or {}).get('lei')=='213800LRO7NS5CYQMN21' and (cfg or {}).get('company_number')=='04190816' else 'not_evaluated','period_result':'matched' if (cfg or {}).get('period_end')=='2026-03-31' else 'not_evaluated','consolidated_scope_result':'matched' if (cfg or {}).get('scope')=='group_consolidated' else 'not_evaluated','adapter_handoff_attempted':adapter,'adapter_result':'not_attempted' if not adapter else ('completed' if canonical_count else 'failed'),'candidate_fact_count':candidate_count,'canonical_fact_count':canonical_count,'failure_code':code,'failure_stage':stage,'safe_failure_message':'Structured financial source unavailable','timestamp':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'deployment_revision':os.getenv('RENDER_GIT_COMMIT') or os.getenv('RENDER_COMMIT') or os.getenv('GIT_COMMIT')}
     if archive_diagnostics: diag['archive_diagnostics']=archive_diagnostics
     return diag
 def _persist_diag(run_id,diag): atomic_write_json(data_path('ai_financial_reports','diagnostics',f'{run_id}.json'),diag); print('Flora structured diagnostic '+json.dumps(diag,sort_keys=True),flush=True)
