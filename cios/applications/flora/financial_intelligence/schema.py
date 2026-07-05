@@ -8,9 +8,40 @@ from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, model_validator
 
 
 def openai_strict_json_schema(model: type[BaseModel]) -> dict[str, Any]:
+    if model is FoundationFactSet:
+        model = ProviderFoundationFactSet
     schema = deepcopy(model.model_json_schema())
     _require_all_object_properties(schema)
+    assert_openai_structured_outputs_schema(schema)
     return schema
+
+UNSUPPORTED_OPENAI_SCHEMA_KEYWORDS = {'oneOf','allOf','not','if','then','else'}
+
+def assert_openai_structured_outputs_schema(schema: dict[str, Any]) -> None:
+    """CI/runtime guard for the OpenAI Structured Outputs subset used by Flora."""
+    errors: list[str] = []
+    def walk(node: Any, path: str = '$') -> None:
+        if isinstance(node, dict):
+            for keyword in UNSUPPORTED_OPENAI_SCHEMA_KEYWORDS:
+                if keyword in node:
+                    errors.append(f'{path} contains unsupported keyword {keyword}')
+            properties = node.get('properties')
+            if isinstance(properties, dict):
+                if node.get('additionalProperties') is not False:
+                    errors.append(f'{path} object missing additionalProperties:false')
+                required = set(node.get('required') or [])
+                missing = set(properties) - required
+                if missing:
+                    errors.append(f'{path} required omits {sorted(missing)}')
+            for key, value in node.items():
+                walk(value, f'{path}.{key}')
+        elif isinstance(node, list):
+            for idx, item in enumerate(node):
+                walk(item, f'{path}[{idx}]')
+    walk(schema)
+    if errors:
+        raise ValueError('; '.join(errors))
+
 
 
 def _require_all_object_properties(node: Any) -> None:
@@ -109,6 +140,60 @@ class FoundationFact(BaseModel):
     def unit(self) -> str|None: return self.value.unit if isinstance(self.value, NumericFactValue) else None
     @property
     def currency(self) -> str|None: return self.value.currency if isinstance(self.value, NumericFactValue) else None
+
+
+class ProviderFoundationFact(BaseModel):
+    """OpenAI Structured Outputs-compatible DTO; mapped into canonical FoundationFact after receipt."""
+    model_config=ConfigDict(extra='forbid')
+    fact_id:str; canonical_enterprise_id:str; claim_type:ClaimType
+    subject_type:str; subject_name:str; subject_id:str|None=None
+    predicate:str; object_type:str
+    value_kind: Literal['numeric','text','date','boolean']
+    numeric_value: Decimal|None=None
+    text_value: str|None=None
+    date_value: str|None=None
+    boolean_value: bool|None=None
+    currency:str|None=None; unit:str|None=None; scale:str|None=None
+    business_unit:str|None=None
+    period_label:str|None=None; period_start:str|None=None; period_end:str|None=None
+    state:FactState
+    source_document_id:str; source_page_start:int=Field(ge=1); source_page_end:int=Field(ge=1); source_excerpt:str=Field(min_length=1,max_length=420)
+    extraction_confidence:float=Field(ge=0,le=1); explicit_in_source:bool
+    extractor_provider:str; extractor_model:str; extractor_version:str
+
+    def to_canonical(self) -> FoundationFact:
+        populated = {
+            'numeric': self.numeric_value,
+            'text': self.text_value,
+            'date': self.date_value,
+            'boolean': self.boolean_value,
+        }
+        non_null = [kind for kind, value in populated.items() if value is not None]
+        if non_null != [self.value_kind]:
+            raise ValueError('value_kind must match exactly one populated value field and all other value fields must be null')
+        if self.value_kind == 'numeric':
+            value = {'kind':'numeric','amount': self.numeric_value, 'scale': self.scale, 'unit': self.unit, 'currency': self.currency}
+        elif self.value_kind == 'text':
+            if self.currency is not None or self.unit is not None or self.scale is not None:
+                raise ValueError('text values must not include numeric unit, currency, or scale')
+            value = {'kind':'text','text': self.text_value}
+        elif self.value_kind == 'date':
+            if self.currency is not None or self.unit is not None or self.scale is not None:
+                raise ValueError('date values must not include numeric unit, currency, or scale')
+            value = {'kind':'date','date': self.date_value}
+        else:
+            if self.currency is not None or self.unit is not None or self.scale is not None:
+                raise ValueError('boolean values must not include numeric unit, currency, or scale')
+            value = {'kind':'boolean','value': self.boolean_value}
+        data = self.model_dump()
+        for key in ('value_kind','numeric_value','text_value','date_value','boolean_value','currency','unit','scale'):
+            data.pop(key, None)
+        data['value'] = value
+        return FoundationFact.model_validate(data)
+
+class ProviderFoundationFactSet(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    facts:list[ProviderFoundationFact]=Field(default_factory=list)
 
 class FoundationFactSet(BaseModel):
     model_config=ConfigDict(extra='forbid')

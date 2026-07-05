@@ -4,6 +4,7 @@ from typing import Any
 
 from cios.applications.flora.financial_intelligence.schema import (
     FoundationFactSet,
+    ProviderFoundationFactSet,
     openai_strict_json_schema,
 )
 from cios.applications.flora.financial_intelligence.openai_provider import OpenAIDirectPDFProvider
@@ -29,19 +30,22 @@ def test_foundation_fact_set_schema_is_openai_strict_and_keeps_lineage_fields() 
     _assert_openai_strict_objects(schema)
     assert set(schema['required']) == set(schema['properties'].keys())
 
-    fact = schema['$defs']['FoundationFact']
+    fact = schema['$defs']['ProviderFoundationFact']
     assert 'subject_id' in fact['properties']
     assert 'subject_id' in fact['required']
     assert 'source_document_id' in fact['required']
     assert 'source_page_start' in fact['required']
     assert 'period_label' in fact['required']
-    assert 'value' in fact['required']
-    assert 'value_text' not in fact['properties']
-    assert 'value_number' not in fact['properties']
-    assert 'value' in fact['properties']
+    assert 'value_kind' in fact['required']
+    assert 'numeric_value' in fact['required']
+    assert 'text_value' in fact['required']
+    assert 'date_value' in fact['required']
+    assert 'boolean_value' in fact['required']
+    assert 'oneOf' not in str(schema)
+    assert 'value' not in fact['properties']
 
 
-def test_openai_provider_uses_canonical_strict_foundation_fact_set_schema() -> None:
+def test_openai_provider_uses_provider_strict_foundation_fact_set_schema() -> None:
     captured: dict[str, Any] = {}
 
     class Responses:

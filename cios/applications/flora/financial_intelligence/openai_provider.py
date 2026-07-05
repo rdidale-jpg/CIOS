@@ -5,7 +5,7 @@ from urllib.parse import urlparse
 from .instructions import EXTRACTION_INSTRUCTIONS
 from .config import financial_intelligence_settings
 from pydantic import ValidationError
-from .schema import ExperimentDocument, ExtractionRun, FoundationFactSet, PageRange, now_iso, openai_strict_json_schema
+from .schema import ExperimentDocument, ExtractionRun, FoundationFactSet, ProviderFoundationFactSet, PageRange, now_iso, openai_strict_json_schema
 from .candidate_validation import parse_foundation_fact_candidates
 
 RAW_DIR = Path('.flora_financial_intelligence/raw_responses')
@@ -178,7 +178,7 @@ class OpenAIDirectPDFProvider:
     def _invoke(self, client, document, schema, mode, source_path):
         return client.responses.create(**self._request_payload(document, schema, mode, source_path))
 
-    def extract_facts(self, document: ExperimentDocument, schema: type[FoundationFactSet] = FoundationFactSet, page_ranges: list[PageRange] | None = None, correlation_id: str | None = None) -> ExtractionRun:
+    def extract_facts(self, document: ExperimentDocument, schema: type[ProviderFoundationFactSet] = ProviderFoundationFactSet, page_ranges: list[PageRange] | None = None, correlation_id: str | None = None) -> ExtractionRun:
         correlation_id = correlation_id or str(uuid.uuid4()); started = time.time(); start_iso = now_iso(); diagnostics = []
         source_path = Path(document.local_path) if document.local_path else None
         source_size = source_path.stat().st_size if source_path and source_path.is_file() else None
@@ -275,12 +275,12 @@ class OpenAIDirectPDFProvider:
 
 class AnthropicDirectPDFProvider:
     def __init__(self, model='claude-sonnet-4-5'): self.model=model
-    def extract_facts(self, document, schema=FoundationFactSet, page_ranges=None):
+    def extract_facts(self, document, schema=ProviderFoundationFactSet, page_ranges=None):
         if not os.getenv('ANTHROPIC_API_KEY'): return _not_executed('anthropic-direct','anthropic',self.model,'ANTHROPIC_API_KEY is not configured')
         return _not_executed('anthropic-direct','anthropic',self.model,'Adapter boundary retained; execution requires Anthropic SDK wiring in a credentialed environment')
 class LayoutOpenAIProvider:
     def __init__(self, model=None): self.model=model or financial_intelligence_settings().model
-    def extract_facts(self, document, schema=FoundationFactSet, page_ranges=None):
+    def extract_facts(self, document, schema=ProviderFoundationFactSet, page_ranges=None):
         if not (os.getenv('GOOGLE_APPLICATION_CREDENTIALS') or (os.getenv('AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT') and os.getenv('AZURE_DOCUMENT_INTELLIGENCE_KEY'))):
             return _not_executed('layout-openai','layout+openai',self.model,'No Google Document AI or Azure Document Intelligence credentials configured')
         return _not_executed('layout-openai','layout+openai',self.model,'Provider boundary implemented; select one layout SDK before execution')

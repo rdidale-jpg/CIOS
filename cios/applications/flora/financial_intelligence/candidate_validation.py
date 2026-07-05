@@ -2,19 +2,20 @@ from __future__ import annotations
 import json
 from typing import Any
 from pydantic import ValidationError
-from .schema import FoundationFact, FoundationFactSet
+from .schema import FoundationFact, FoundationFactSet, ProviderFoundationFact
 
 LEGACY_VALUE_FIELDS = ('value_text','value_number','value_date','value_boolean')
+PROVIDER_VALUE_FIELDS = ('numeric_value','text_value','date_value','boolean_value')
 
 def populated_value_fields(candidate: dict[str, Any]) -> list[str]:
     fields=[]
     if candidate.get('value') is not None: fields.append('value')
-    fields += [k for k in LEGACY_VALUE_FIELDS if k in candidate and candidate.get(k) is not None]
+    fields += [k for k in LEGACY_VALUE_FIELDS + PROVIDER_VALUE_FIELDS if k in candidate and candidate.get(k) is not None]
     return fields
 
 def _safe_candidate(candidate: Any) -> Any:
     if not isinstance(candidate, dict): return candidate
-    allowed = {'fact_id','claim_type','predicate','object_type','value','value_text','value_number','value_date','value_boolean','scale','unit','currency','business_unit','period_label','state','source_document_id','source_page_start','source_page_end','source_excerpt','extraction_confidence','explicit_in_source','extractor_provider','extractor_model','extractor_version','canonical_enterprise_id','subject_type','subject_name','subject_id'}
+    allowed = {'fact_id','claim_type','predicate','object_type','value','value_kind','numeric_value','text_value','date_value','boolean_value','value_text','value_number','value_date','value_boolean','scale','unit','currency','business_unit','period_label','period_start','period_end','state','source_document_id','source_page_start','source_page_end','source_excerpt','extraction_confidence','explicit_in_source','extractor_provider','extractor_model','extractor_version','canonical_enterprise_id','subject_type','subject_name','subject_id'}
     return {k:v for k,v in candidate.items() if k in allowed}
 
 def validation_exception(candidate: Any, exc: Exception, *, packet_id: str|None, candidate_index: int, provider: str, model: str, request_id: str|None=None) -> dict[str, Any]:
@@ -45,7 +46,10 @@ def parse_foundation_fact_candidates(output: str, *, packet_id: str|None, provid
     valid=[]; exceptions=[]
     for idx, candidate in enumerate(envelope['facts']):
         try:
-            valid.append(FoundationFact.model_validate(candidate))
+            if isinstance(candidate, dict) and 'value_kind' in candidate:
+                valid.append(ProviderFoundationFact.model_validate(candidate).to_canonical())
+            else:
+                valid.append(FoundationFact.model_validate(candidate))
         except ValidationError as exc:
             exceptions.append(validation_exception(candidate, exc, packet_id=packet_id, candidate_index=idx, provider=provider, model=model, request_id=request_id))
         except ValueError as exc:
