@@ -21,13 +21,30 @@ MATERIAL_FACT_LIMIT = 15
 
 LOGGER = logging.getLogger('flora.financial_intelligence')
 
+STRONG_HEADING_TERMS = (
+    'financial highlights','group financial review','financial review','group income statement','income statement',
+    'group balance sheet','balance sheet','cash flow statement','cash-flow statement','alternative performance measures',
+    'segment performance','outlook','guidance','cost transformation','savings programme'
+)
 SECTION_TERMS = (
     'financial highlights','group income statement','group balance sheet','cash flow statement','cash-flow statement',
     'segment performance','revenue','adjusted ebitda','operating profit','capital expenditure','capex',
     'free cash flow','normalised free cash flow','net debt','outlook','guidance','cost transformation','cost savings','savings commitments',
-    'financial performance','operating costs','cost reduction','cost-reduction','cost efficiencies'
+    'financial performance','operating costs','cost reduction','cost-reduction','cost efficiencies','income statement','balance sheet','alternative performance measures','savings programme'
 )
+GENERIC_TERMS = ('annual report','company','performance','strategy')
 COVER_ONLY_TERMS = ('annual report', 'strategic report', 'report 2026', 'bt group plc')
+
+@dataclass(frozen=True)
+class CanonicalPage:
+    internal_index: int
+    pdf_page_number: int
+    printed_page_number: str | None
+    text: str
+    heading_candidates: tuple[str, ...]
+    extraction_char_count: int
+    source_document_id: str
+    extraction_method: str = 'embedded_text'
 
 @dataclass(frozen=True)
 class PageCandidate:
@@ -35,6 +52,8 @@ class PageCandidate:
     score: int
     matched_terms: tuple[str, ...]
     text: str
+    matched_headings: tuple[str, ...] = ()
+    reason: str = ''
 
 @dataclass(frozen=True)
 class PagePacket:
@@ -48,23 +67,91 @@ def stable_document_hash(document: ExperimentDocument) -> str:
     return document.checksum or hashlib.sha256((document.source_url + document.document_id).encode()).hexdigest()
 
 
-def select_candidate_pages(pages: Iterable[DocumentPage], *, max_pages: int = 24) -> list[PageCandidate]:
-    candidates: list[PageCandidate] = []
-    for page in pages:
-        text = page.text or ''
-        lower = text.casefold()
-        matches = tuple(t for t in SECTION_TERMS if t in lower)
-        numeric = len(re.findall(r'(?:£|gbp|bn|m\b|%)', lower))
-        has_financial_evidence = bool(matches) or numeric >= 3
-        cover_only = any(t in lower for t in COVER_ONLY_TERMS) and not has_financial_evidence
-        toc_bonus = 0 if cover_only else (3 if 'contents' in lower and any(t in lower for t in ('financial', 'strategic report')) else 0)
-        score = 0 if cover_only else len(matches) * 10 + min(numeric, 12) + toc_bonus
-        if score and has_financial_evidence:
-            candidates.append(PageCandidate(page.page_number, score, matches, text))
-    candidates.sort(key=lambda c: (-c.score, c.page_number))
-    chosen = sorted(candidates[:max_pages], key=lambda c: c.page_number)
-    return chosen
+def _normalise_text(text: str) -> str:
+    return re.sub(r'\s+', ' ', text or '').strip()
 
+
+def _heading_candidates(text: str) -> tuple[str, ...]:
+    lines = [re.sub(r'\s+', ' ', line).strip() for line in (text or '').splitlines()]
+    heads: list[str] = []
+    for line in lines[:18]:
+        if 4 <= len(line) <= 96 and not re.search(r'[.!?]$', line):
+            heads.append(line)
+    if not heads and text:
+        heads.append(_normalise_text(text)[:96])
+    return tuple(heads[:5])
+
+
+def _printed_page_number(text: str) -> str | None:
+    for pat in (r'\b(?:page|p\.)\s+(\d{1,3})\b', r'^\s*(\d{1,3})\s*$'):
+        m = re.search(pat, text or '', re.I | re.M)
+        if m:
+            return m.group(1)
+    return None
+
+
+def canonicalise_pages(pages: Iterable[DocumentPage], document: ExperimentDocument | None = None) -> list[CanonicalPage]:
+    canonical: list[CanonicalPage] = []
+    doc_id = document.document_id if document else 'unknown-document'
+    for idx, page in enumerate(pages):
+        raw = getattr(page, 'text', '') or getattr(page, 'content', '') or ''
+        text = _normalise_text(raw)
+        pdf_page = int(getattr(page, 'page_number', idx + 1) or idx + 1)
+        canonical.append(CanonicalPage(idx, pdf_page, _printed_page_number(raw), text, _heading_candidates(raw), len(raw), doc_id, getattr(page, 'extraction_method', 'embedded_text')))
+    return canonical
+
+
+def page_parse_diagnostics(pages: Iterable[DocumentPage], document: ExperimentDocument | None = None) -> dict[str, Any]:
+    canonical = canonicalise_pages(pages, document)
+    counts = [p.extraction_char_count for p in canonical]
+    sorted_counts = sorted(counts)
+    median = sorted_counts[len(sorted_counts)//2] if sorted_counts else 0
+    printed_differs = any(p.printed_page_number and p.printed_page_number.isdigit() and int(p.printed_page_number) != p.pdf_page_number for p in canonical)
+    toc = any('contents' in p.text.casefold() or 'table of contents' in p.text.casefold() for p in canonical)
+    return {'total_pdf_page_count': document.page_count if document else len(canonical), 'parser_used': canonical[0].extraction_method if canonical else 'unknown', 'pages_with_extractable_text': sum(1 for p in canonical if p.text), 'total_extracted_character_count': sum(counts), 'min_characters_per_page': min(counts) if counts else 0, 'max_characters_per_page': max(counts) if counts else 0, 'median_characters_per_page': median, 'zero_character_pages': [p.pdf_page_number for p in canonical if not p.text], 'toc_or_bookmark_available': toc, 'first_five_non_empty_page_samples': [{'page_number': p.pdf_page_number, 'headings': list(p.heading_candidates[:2]), 'sample': p.text[:160]} for p in canonical if p.text][:5], 'printed_page_numbers_differ': printed_differs}
+
+
+def _score_page(page: CanonicalPage) -> PageCandidate | None:
+    lower = page.text.casefold()
+    matched_terms = tuple(t for t in SECTION_TERMS if t in lower)
+    matched_headings = tuple(h for h in page.heading_candidates if any(t in h.casefold() for t in STRONG_HEADING_TERMS))
+    numeric = len(re.findall(r'(?:£|gbp|bn|m\b|%)', lower))
+    toc_only = ('contents' in lower or 'table of contents' in lower) and numeric < 3 and not matched_headings
+    generic_only = any(t in lower for t in GENERIC_TERMS) and not (matched_terms or matched_headings or numeric >= 3)
+    if generic_only or toc_only:
+        return None
+    score = len(matched_terms) * 10 + len(matched_headings) * 25 + min(numeric, 12)
+    if not (matched_terms or matched_headings or numeric >= 3) or score < 10:
+        return None
+    bits = []
+    if matched_headings: bits.append('strong financial heading')
+    if matched_terms: bits.append('matched financial terms: ' + ', '.join(matched_terms[:6]))
+    if numeric >= 3: bits.append('numeric financial evidence')
+    return PageCandidate(page.pdf_page_number, score, matched_terms, page.text, matched_headings, '; '.join(bits))
+
+
+def _fallback_candidates(canonical: list[CanonicalPage], *, max_pages: int) -> list[PageCandidate]:
+    starts: set[int] = set()
+    for page in canonical:
+        lower = page.text.casefold()
+        if 'contents' in lower or 'table of contents' in lower:
+            for m in re.finditer(r'(financial review|financial highlights|income statement|balance sheet|cash.?flow|outlook|guidance|alternative performance measures)', lower):
+                starts.add(page.internal_index)
+        if any(t in lower for t in STRONG_HEADING_TERMS):
+            starts.add(page.internal_index)
+    window = sorted({i for s in starts for i in range(max(0, s-1), min(len(canonical), s+4))})[:max_pages]
+    out = [c for i in window if (c := _score_page(canonical[i]))]
+    return sorted(out, key=lambda c: (-c.score, c.page_number))[:max_pages]
+
+
+def select_candidate_pages(pages: Iterable[DocumentPage] | Iterable[CanonicalPage], *, max_pages: int = 24) -> list[PageCandidate]:
+    raw = list(pages)
+    canonical = raw if raw and isinstance(raw[0], CanonicalPage) else canonicalise_pages(raw)  # type: ignore[arg-type]
+    candidates = [c for p in canonical if (c := _score_page(p))]
+    candidates.sort(key=lambda c: (-c.score, c.page_number))
+    if not candidates:
+        candidates = _fallback_candidates(list(canonical), max_pages=max_pages)
+    return sorted(candidates[:max_pages], key=lambda c: c.page_number)
 
 def build_page_packets(candidates: list[PageCandidate], *, max_packets: int = MAX_BT_GOLDEN_CALLS) -> list[PagePacket]:
     if not candidates:
@@ -169,12 +256,20 @@ class SectionAwareOpenAIProvider:
 
     def extract_packets(self, document: ExperimentDocument, pages: Iterable[DocumentPage], schema: type[ProviderFoundationFactSet] = ProviderFoundationFactSet, correlation_id: str | None = None) -> tuple[ExtractionRun, dict[str, Any]]:
         correlation_id = correlation_id or uuid.uuid4().hex
-        candidates = select_candidate_pages(pages)
-        page_reasons = {c.page_number: list(c.matched_terms) + ([f'numeric financial evidence'] if re.search(r'(?:£|gbp|bn|m\b|%)', c.text.casefold()) else []) for c in candidates}
-        LOGGER.error('Flora selected financial pages ' + json.dumps({'support_reference': _support_reference(correlation_id), 'correlation_id': correlation_id, 'candidate_pages': [{'page_number': c.page_number, 'score': c.score, 'reasons': page_reasons.get(c.page_number, [])} for c in candidates]}, sort_keys=True))
+        page_list = list(pages)
+        parse_diag = page_parse_diagnostics(page_list, document)
+        LOGGER.error('Flora PDF parse diagnostics ' + json.dumps({'support_reference': _support_reference(correlation_id), 'correlation_id': correlation_id, **parse_diag}, sort_keys=True))
+        canonical_pages = canonicalise_pages(page_list, document)
+        candidates = select_candidate_pages(canonical_pages)
+        page_reasons = {c.page_number: ([c.reason] if c.reason else list(c.matched_terms)) + ([f'numeric financial evidence'] if re.search(r'(?:£|gbp|bn|m\b|%)', c.text.casefold()) else []) for c in candidates}
+        LOGGER.error('Flora selected financial pages ' + json.dumps({'support_reference': _support_reference(correlation_id), 'correlation_id': correlation_id, 'candidate_pages': [{'page_number': c.page_number, 'score': c.score, 'matched_headings': list(c.matched_headings), 'matched_financial_terms': list(c.matched_terms), 'selection_reason': c.reason, 'reasons': page_reasons.get(c.page_number, [])} for c in candidates]}, sort_keys=True))
         packets = build_page_packets(candidates)
         doc_hash = stable_document_hash(document)
         runs: list[ExtractionRun] = []; packet_records=[]; total_usage={'input_tokens':0,'output_tokens':0}; openai_calls=0; packet_failures=[]
+        if not packets:
+            exc = {'exception_type':'section_selection_failed','failure_stage':'selecting_sections','support_reference':_support_reference(correlation_id),'user_message':'Flora could not identify the financial sections in this report.','rejection_reason':'No relevant financial pages selected; no paid model request occurred.'}
+            final = ExtractionRun(run_id=correlation_id, route='openai-responses-section-packets', provider='openai', model=self.model, model_version=self.model, status='section_selection_failed', started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage={'input_tokens':0,'output_tokens':0}, facts=[], candidate_exceptions=[exc], diagnostics=[{'event':'section_selection_failed','request_stage':'selecting_sections','support_reference':_support_reference(correlation_id),'correlation_id':correlation_id,'openai_invoked':False,'no_paid_model_request':True}])
+            return final, {'candidate_pages': [], 'packets': [], 'packet_count': 0, 'openai_calls': 0, 'document_hash': stable_document_hash(document), 'parse_diagnostics': parse_diag, 'fallback_used': True}
         OpenAI = __import__('openai', fromlist=['OpenAI']).OpenAI
         client = OpenAI(timeout=getattr(self.base_provider, 'timeout_seconds', 120), max_retries=getattr(self.base_provider, 'max_retries', 0))
         queue = list(packets)
@@ -218,4 +313,4 @@ class SectionAwareOpenAIProvider:
                 continue
         merged = merge_packet_facts(runs, document)
         final = ExtractionRun(run_id=correlation_id, route='openai-responses-section-packets', provider='openai', model=self.model, model_version=self.model, status=('completed_with_exceptions' if any(r.candidate_exceptions for r in runs) and merged.facts else ('provider_request_failed' if packet_failures and not merged.facts else ('provider_response_invalid' if runs and not merged.facts and any(r.candidate_exceptions for r in runs) else 'completed'))), started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage=total_usage, facts=merged.facts, candidate_exceptions=[e for r in runs for e in r.candidate_exceptions], diagnostics=[d for r in runs for d in r.diagnostics])
-        return final, {'candidate_pages': [{'page_number': c.page_number, 'score': c.score, 'reasons': page_reasons.get(c.page_number, [])} for c in candidates], 'packets': packet_records, 'packet_count': len(packet_records), 'openai_calls': openai_calls, 'document_hash': doc_hash}
+        return final, {'candidate_pages': [{'page_number': c.page_number, 'score': c.score, 'matched_headings': list(c.matched_headings), 'matched_financial_terms': list(c.matched_terms), 'selection_reason': c.reason, 'reasons': page_reasons.get(c.page_number, [])} for c in candidates], 'packets': packet_records, 'packet_count': len(packet_records), 'openai_calls': openai_calls, 'document_hash': doc_hash, 'parse_diagnostics': parse_diag, 'fallback_used': False}
