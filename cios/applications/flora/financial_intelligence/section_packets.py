@@ -1,7 +1,7 @@
 """Section-aware, low-cost annual report packet extraction for Flora."""
 from __future__ import annotations
 
-import hashlib, json, logging, re, time, uuid
+import base64, hashlib, json, logging, re, time, uuid
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable
@@ -66,6 +66,11 @@ class PagePacket:
     page_numbers: tuple[int, ...]
     text: str
     packet_hash: str
+    pdf_bytes: bytes = b''
+    packet_page_to_original: dict[int, int] | None = None
+    byte_size: int = 0
+    page_count: int = 0
+    input_mode: str = 'text_only'
 
 
 def stable_document_hash(document: ExperimentDocument) -> str:
@@ -177,6 +182,63 @@ def build_page_packets(candidates: list[PageCandidate], *, max_packets: int = MA
 
 
 
+
+def _contiguous_ranges(candidates: list[PageCandidate], page_count: int, *, before: int = 0, after: int = 3, max_packets: int = MAX_BT_GOLDEN_CALLS) -> list[tuple[int, int]]:
+    starts = sorted({max(1, min(page_count, c.page_number)) for c in candidates})[:max_packets]
+    ranges: list[tuple[int, int]] = []
+    for start in starts:
+        lo, hi = max(1, start - before), min(page_count, start + after)
+        if ranges and lo <= ranges[-1][1] + 1:
+            ranges[-1] = (ranges[-1][0], max(ranges[-1][1], hi))
+        else:
+            ranges.append((lo, hi))
+    return ranges[:max_packets]
+
+def _copy_pdf_pages(source_path: Path, page_numbers: tuple[int, ...]) -> tuple[bytes, dict[int, int]]:
+    import fitz  # type: ignore
+    if not source_path.is_file():
+        raise FileNotFoundError('packet_content_unavailable: original PDF unavailable')
+    with fitz.open(str(source_path)) as src:
+        if src.page_count <= 0:
+            raise ValueError('packet_content_unavailable: source PDF has zero pages')
+        missing = [p for p in page_numbers if p < 1 or p > src.page_count]
+        if missing:
+            raise ValueError(f'packet_content_unavailable: selected original pages absent: {missing}')
+        out = fitz.open()
+        for pno in page_numbers:
+            out.insert_pdf(src, from_page=pno - 1, to_page=pno - 1)
+        data = out.tobytes(garbage=4, deflate=True)
+        out.close()
+    mapping = {i + 1: p for i, p in enumerate(page_numbers)}
+    validate_packet_pdf_bytes(data, page_numbers)
+    return data, mapping
+
+def validate_packet_pdf_bytes(pdf_bytes: bytes, original_pages: tuple[int, ...]) -> None:
+    if not pdf_bytes:
+        raise ValueError('packet_content_unavailable: packet PDF byte size is zero')
+    if not original_pages:
+        raise ValueError('packet_content_unavailable: packet contains zero selected original pages')
+    import fitz  # type: ignore
+    with fitz.open(stream=pdf_bytes, filetype='pdf') as doc:
+        if doc.page_count <= 0:
+            raise ValueError('packet_content_unavailable: packet PDF page count is zero')
+        if doc.page_count != len(original_pages):
+            raise ValueError('packet_content_unavailable: packet page count does not match selected original pages')
+
+def build_real_page_packets(candidates: list[PageCandidate], document: ExperimentDocument, *, max_packets: int = MAX_BT_GOLDEN_CALLS) -> list[PagePacket]:
+    if not candidates:
+        return []
+    source_path = Path(document.local_path) if document.local_path else Path()
+    ranges = _contiguous_ranges(candidates, int(document.page_count or 0) or max(c.page_number for c in candidates), max_packets=max_packets)
+    packets: list[PagePacket] = []
+    for idx, (start, end) in enumerate(ranges, 1):
+        pages = tuple(range(start, end + 1))
+        pdf_bytes, mapping = _copy_pdf_pages(source_path, pages)
+        text = f"Packet page to original PDF page map: {json.dumps(mapping, sort_keys=True)}"
+        digest = hashlib.sha256(pdf_bytes + json.dumps(mapping, sort_keys=True).encode()).hexdigest()
+        packets.append(PagePacket(f'packet-{idx}', pages, text, digest, pdf_bytes, mapping, len(pdf_bytes), len(pages), 'file_data'))
+    return packets
+
 def _support_reference(correlation_id: str) -> str:
     ref = 'FI-' + str(correlation_id or uuid.uuid4().hex).replace('FI-', '').replace('fi-', '')
     return ref if ref != 'FI-' else 'FI-' + uuid.uuid4().hex[:12]
@@ -209,14 +271,25 @@ def packet_cache_path(document_hash: str, packet_hash: str, model: str) -> Path:
 
 
 def _packet_payload(provider: Any, document: ExperimentDocument, packet: PagePacket, schema: type[FoundationFactSet]) -> dict[str, Any]:
-    instructions = (EXTRACTION_INSTRUCTIONS + '\n\nReturn no more than 15 material, atomic facts across revenue, adjusted EBITDA, operating profit, capital expenditure, normalised free cash flow, net debt, cost savings, financial outlook, and material segment movement. Every fact must cite ORIGINAL PDF PAGE numbers present in the packet.').strip()
+    if not packet.pdf_bytes or packet.page_count <= 0 or packet.input_mode != 'file_data':
+        raise ValueError('packet_content_unavailable: packet has no PDF bytes; refusing text-only placeholder')
+    mapping = packet.packet_page_to_original or {i + 1: p for i, p in enumerate(packet.page_numbers)}
+    encoded = base64.b64encode(packet.pdf_bytes).decode('ascii')
+    instructions = (
+        EXTRACTION_INSTRUCTIONS
+        + '\n\nReturn no more than 15 material, atomic facts across revenue, adjusted EBITDA, operating profit, capital expenditure, normalised free cash flow, net debt, cost savings, financial outlook, and material segment movement. Every fact must cite ORIGINAL PDF PAGE numbers present in this packet map. Packet page to original PDF page map: '
+        + json.dumps(mapping, sort_keys=True)
+    ).strip()
     return {
         'model': provider.model,
-        'input': [{'role': 'user', 'content': [{'type': 'input_text', 'text': f"Document: {document.title}\nPacket pages: {', '.join(map(str, packet.page_numbers))}\n\n{packet.text}"}, {'type': 'input_text', 'text': instructions}]}],
+        'input': [{'role': 'user', 'content': [
+            {'type': 'input_file', 'filename': f'{packet.packet_id}.pdf', 'file_data': f'data:application/pdf;base64,{encoded}'},
+            {'type': 'input_text', 'text': f"Document: {document.title}\nOriginal PDF pages in packet: {', '.join(map(str, packet.page_numbers))}\nPacket hash: {packet.packet_hash}"},
+            {'type': 'input_text', 'text': instructions},
+        ]}],
         'reasoning': {'effort': provider.reasoning_effort},
         'text': {'format': {'type': 'json_schema', 'name': 'foundation_fact_set', 'schema': openai_strict_json_schema(schema), 'strict': True}},
     }
-
 
 def count_packet_input_tokens(client: Any, provider: Any, document: ExperimentDocument, packet: PagePacket, schema: type[FoundationFactSet]) -> int:
     payload = _packet_payload(provider, document, packet, schema)
@@ -237,6 +310,20 @@ def split_oversized_packet(packet: PagePacket) -> list[PagePacket]:
         return PagePacket(packet.packet_id + suffix, tuple(sorted(pages)), text, digest)
     return [part(pages_a, 'a'), part(pages_b, 'b')]
 
+
+
+def _quarantine_ungrounded_facts(facts: list[Any], exceptions: list[dict[str, Any]], packet: PagePacket) -> list[Any]:
+    allowed = set(packet.page_numbers)
+    valid: list[Any] = []
+    for idx, fact in enumerate(facts):
+        excerpt = (getattr(fact, 'source_excerpt', '') or '').strip()
+        start = int(getattr(fact, 'source_page_start', 0) or 0)
+        end = int(getattr(fact, 'source_page_end', start) or start)
+        if not excerpt or start not in allowed or end not in allowed:
+            exceptions.append({'exception_type':'candidate_fact_validation_failed','packet_id':packet.packet_id,'candidate_index':idx,'original_page_reference':start,'validation_failure_category':'evidence_grounding_failed','safe_explanation':'Returned fact page is outside the packet map or lacks supporting excerpt/context.','machine_candidate': fact.model_dump(mode='json') if hasattr(fact, 'model_dump') else {}})
+        else:
+            valid.append(fact)
+    return valid
 
 def merge_packet_facts(runs: list[ExtractionRun], document: ExperimentDocument) -> FoundationFactSet:
     seen: set[tuple[Any, ...]] = set(); facts = []
@@ -294,7 +381,14 @@ class SectionAwareOpenAIProvider:
             candidates = select_candidate_pages(canonical_pages)
         page_reasons = {c.page_number: ([c.reason] if c.reason else list(c.matched_terms)) + ([f'numeric financial evidence'] if re.search(r'(?:£|gbp|bn|m\b|%)', c.text.casefold()) else []) for c in candidates}
         LOGGER.error('Flora selected financial pages ' + json.dumps({'support_reference': _support_reference(correlation_id), 'correlation_id': correlation_id, 'candidate_pages': [{'page_number': c.page_number, 'score': c.score, 'matched_headings': list(c.matched_headings), 'matched_financial_terms': list(c.matched_terms), 'selection_reason': c.reason, 'reasons': page_reasons.get(c.page_number, [])} for c in candidates]}, sort_keys=True))
-        packets = build_page_packets(candidates)
+        try:
+            packets = build_real_page_packets(candidates, document)
+        except Exception as exc:
+            LOGGER.exception('Financial Intelligence packet construction failed support_reference=%s', _support_reference(correlation_id))
+            exc_payload = {'exception_type':'packet_content_unavailable','failure_stage':'preparing_packets','support_reference':_support_reference(correlation_id),'rejection_reason':f'{type(exc).__name__}: {exc}','user_message':'Flora could not prepare the selected PDF pages for analysis.'}
+            final = ExtractionRun(run_id=correlation_id, route='openai-responses-section-packets', provider='openai', model=self.model, model_version=self.model, status='packet_content_unavailable', started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage={'input_tokens':0,'output_tokens':0}, facts=[], candidate_exceptions=[exc_payload], diagnostics=[exc_payload | {'openai_invoked':False}])
+            return final, {'candidate_pages': [], 'packets': [], 'packet_count': 0, 'openai_calls': 0, 'document_hash': stable_document_hash(document), 'parse_diagnostics': parse_diag, 'fallback_used': True, 'visual_navigation': locals().get('visual_plan', {'visual_fallback_used': False})}
+
         doc_hash = stable_document_hash(document)
         runs: list[ExtractionRun] = []; packet_records=[]; total_usage={'input_tokens':0,'output_tokens':0}; openai_calls=0; packet_failures=[]
         if not packets:
@@ -309,7 +403,7 @@ class SectionAwareOpenAIProvider:
             cache_path = packet_cache_path(doc_hash, packet.packet_hash, self.model)
             if cache_path.is_file():
                 run = ExtractionRun.model_validate(json.loads(cache_path.read_text()))
-                runs.append(run); packet_records.append({'packet_id': packet.packet_id, 'page_numbers': packet.page_numbers, 'packet_hash': packet.packet_hash, 'cached': True, 'input_tokens': run.usage.get('input_tokens',0)})
+                runs.append(run); packet_records.append({'packet_id': packet.packet_id, 'page_numbers': packet.page_numbers, 'packet_hash': packet.packet_hash, 'cached': True, 'input_tokens': run.usage.get('input_tokens',0), 'packet_byte_size': packet.byte_size, 'packet_page_count': packet.page_count, 'input_mode': packet.input_mode})
                 continue
             started = time.time(); diagnostics=[]; input_tokens = None
             diagnostics.append(_packet_event('packet_selected', correlation_id=correlation_id, packet=packet, reasons=page_reasons, input_tokens=input_tokens, model=self.model, started=started))
@@ -327,6 +421,12 @@ class SectionAwareOpenAIProvider:
                 diagnostics.append(_packet_event('packet_model_request_completed', correlation_id=correlation_id, packet=packet, reasons=page_reasons, input_tokens=input_tokens, model=self.model, started=started, provider_status='completed'))
                 diagnostics.append(_packet_event('packet_response_validation_started', correlation_id=correlation_id, packet=packet, reasons=page_reasons, input_tokens=input_tokens, model=self.model, started=started))
                 parsed, candidate_exceptions, parse_status = parse_foundation_fact_candidates(getattr(resp, 'output_text', '') or raw.get('output_text', '{}'), packet_id=packet.packet_id, provider='openai', model=self.model, request_id=raw.get('id'))
+                parsed_facts = _quarantine_ungrounded_facts(list(parsed.facts), candidate_exceptions, packet)
+                parsed = FoundationFactSet(facts=parsed_facts)
+                if parsed.facts and candidate_exceptions:
+                    parse_status = 'completed_with_exceptions'
+                elif candidate_exceptions and not parsed.facts:
+                    parse_status = 'provider_response_invalid'
                 candidate_count = len(parsed.facts) + len(candidate_exceptions)
                 diagnostics.append(_packet_event('packet_response_validation_completed', correlation_id=correlation_id, packet=packet, reasons=page_reasons, input_tokens=input_tokens, model=self.model, started=started, provider_status=parse_status, candidate_count=candidate_count, valid_count=len(parsed.facts), quarantined_count=len(candidate_exceptions)))
                 usage = raw.get('usage') or {}
@@ -334,13 +434,13 @@ class SectionAwareOpenAIProvider:
                 total_usage['input_tokens'] += usage['input_tokens']; total_usage['output_tokens'] += int(usage.get('output_tokens') or 0)
                 run = ExtractionRun(run_id=f'{correlation_id}-{packet.packet_id}', route='openai-responses-section-packet', provider='openai', model=self.model, model_version=self.model, status=parse_status, request_id=raw.get('id'), started_at=now_iso(), completed_at=now_iso(), latency_seconds=round(time.time()-started,3), usage=usage, facts=parsed.facts, candidate_exceptions=candidate_exceptions, diagnostics=diagnostics)
                 ensure_writable_dir(cache_path.parent); atomic_write_json(cache_path, run.model_dump(mode='json'))
-                runs.append(run); packet_records.append({'packet_id': packet.packet_id, 'page_numbers': packet.page_numbers, 'page_selection_reasons': {str(p): page_reasons.get(p, []) for p in packet.page_numbers}, 'packet_hash': packet.packet_hash, 'cached': False, 'input_tokens': input_tokens, 'status': parse_status, 'valid_facts': len(parsed.facts), 'quarantined_facts': len(candidate_exceptions)})
+                runs.append(run); packet_records.append({'packet_id': packet.packet_id, 'page_numbers': packet.page_numbers, 'page_selection_reasons': {str(p): page_reasons.get(p, []) for p in packet.page_numbers}, 'packet_hash': packet.packet_hash, 'cached': False, 'input_tokens': input_tokens, 'packet_byte_size': packet.byte_size, 'packet_page_count': packet.page_count, 'input_mode': packet.input_mode, 'packet_page_to_original': packet.packet_page_to_original, 'status': parse_status, 'valid_facts': len(parsed.facts), 'quarantined_facts': len(candidate_exceptions)})
             except Exception as exc:
                 LOGGER.exception('Unexpected Financial Intelligence packet exception support_reference=%s packet_id=%s', _support_reference(correlation_id), packet.packet_id)
                 failure = _packet_event('packet_failed', correlation_id=correlation_id, packet=packet, reasons=page_reasons, input_tokens=input_tokens, model=self.model, started=started, provider_status='failed', provider_error=f'{type(exc).__name__}: {exc}')
                 diagnostics.append(failure); packet_failures.append({'exception_type':'packet_failed','failure_stage': diagnostics[-2].get('event') if len(diagnostics)>1 else 'packet_selected','packet_id':packet.packet_id,'support_reference':_support_reference(correlation_id),'rejection_reason':failure['provider_error'],'user_message':'A financial section could not be analysed.'})
                 run = ExtractionRun(run_id=f'{correlation_id}-{packet.packet_id}', route='openai-responses-section-packet', provider='openai', model=self.model, model_version=self.model, status='provider_request_failed', started_at=now_iso(), completed_at=now_iso(), latency_seconds=round(time.time()-started,3), usage={'input_tokens': input_tokens or 0}, facts=[], candidate_exceptions=[packet_failures[-1]], diagnostics=diagnostics)
-                runs.append(run); packet_records.append({'packet_id': packet.packet_id, 'page_numbers': packet.page_numbers, 'page_selection_reasons': {str(p): page_reasons.get(p, []) for p in packet.page_numbers}, 'packet_hash': packet.packet_hash, 'cached': False, 'input_tokens': input_tokens, 'status': 'provider_request_failed', 'valid_facts': 0, 'quarantined_facts': 0})
+                runs.append(run); packet_records.append({'packet_id': packet.packet_id, 'page_numbers': packet.page_numbers, 'page_selection_reasons': {str(p): page_reasons.get(p, []) for p in packet.page_numbers}, 'packet_hash': packet.packet_hash, 'cached': False, 'input_tokens': input_tokens, 'packet_byte_size': packet.byte_size, 'packet_page_count': packet.page_count, 'input_mode': packet.input_mode, 'packet_page_to_original': packet.packet_page_to_original, 'status': 'provider_request_failed', 'valid_facts': 0, 'quarantined_facts': 0})
                 continue
         merged = merge_packet_facts(runs, document)
         if any(r.candidate_exceptions for r in runs) and merged.facts:
