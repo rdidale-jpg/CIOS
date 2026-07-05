@@ -1,8 +1,36 @@
 from __future__ import annotations
 from datetime import datetime, UTC
 from enum import StrEnum
+from copy import deepcopy
 from typing import Any, Protocol
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+
+
+def openai_strict_json_schema(model: type[BaseModel]) -> dict[str, Any]:
+    """Return the canonical Pydantic schema in OpenAI strict structured-output form.
+
+    OpenAI strict JSON schemas require every object property to be listed in
+    ``required`` and reject unrecognised object properties. Pydantic keeps
+    fields with defaults (including nullable lineage fields such as
+    ``subject_id``) out of ``required`` by default, so this normalises the
+    generated schema without removing any fields from the canonical model.
+    """
+    schema = deepcopy(model.model_json_schema())
+    _require_all_object_properties(schema)
+    return schema
+
+
+def _require_all_object_properties(node: Any) -> None:
+    if isinstance(node, dict):
+        properties = node.get('properties')
+        if isinstance(properties, dict):
+            node['required'] = list(properties.keys())
+            node['additionalProperties'] = False
+        for value in node.values():
+            _require_all_object_properties(value)
+    elif isinstance(node, list):
+        for item in node:
+            _require_all_object_properties(item)
 
 class ClaimType(StrEnum):
     enterprise_identity_confirmed='enterprise_identity_confirmed'; business_unit_disclosed='business_unit_disclosed'; financial_metric_reported='financial_metric_reported'; financial_guidance_stated='financial_guidance_stated'; financial_target_stated='financial_target_stated'; strategic_pillar_stated='strategic_pillar_stated'; strategic_commitment_stated='strategic_commitment_stated'; executive_role_confirmed='executive_role_confirmed'; executive_appointment_announced='executive_appointment_announced'

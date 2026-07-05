@@ -4,7 +4,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 from .instructions import EXTRACTION_INSTRUCTIONS
 from pydantic import ValidationError
-from .schema import ExperimentDocument, ExtractionRun, FoundationFactSet, PageRange, now_iso
+from .schema import ExperimentDocument, ExtractionRun, FoundationFactSet, PageRange, now_iso, openai_strict_json_schema
 
 RAW_DIR = Path('.document_understanding/raw_responses')
 OPENAI_FILE_PURPOSE = 'user_data'
@@ -113,7 +113,7 @@ class OpenAIDirectPDFProvider:
                 self._request_content(document, mode, source_path),
                 {'type': 'input_text', 'text': EXTRACTION_INSTRUCTIONS},
             ]}],
-            text={'format': {'type': 'json_schema', 'name': 'foundation_fact_set', 'schema': schema.model_json_schema(), 'strict': True}},
+            text={'format': {'type': 'json_schema', 'name': 'foundation_fact_set', 'schema': openai_strict_json_schema(schema), 'strict': True}},
         )
 
     def extract_facts(self, document: ExperimentDocument, schema: type[FoundationFactSet] = FoundationFactSet, page_ranges: list[PageRange] | None = None, correlation_id: str | None = None) -> ExtractionRun:
@@ -154,9 +154,9 @@ class OpenAIDirectPDFProvider:
                 except Exception as exc:
                     last_exc = exc
                     status_code = getattr(exc, 'status_code', None); code = getattr(exc, 'code', None) or getattr(getattr(exc, 'error', None), 'code', None)
-                    diag = _diagnostic(**base_diag, stage='model_invocation', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=status_code, provider_error_type=type(exc).__name__, provider_error_code=code, provider_error_message=str(exc) or type(exc).__name__, retryable=mode == 'file_url')
+                    diag = _diagnostic(**base_diag, stage='model_invocation', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=status_code, provider_error_type=type(exc).__name__, provider_error_code=code, provider_error_message=str(exc) or type(exc).__name__, retryable=False if code == 'invalid_json_schema' else mode == 'file_url')
                     diagnostics.append(diag)
-                    if mode == 'file_data' or status_code in {401, 429} or type(exc).__name__ in {'AuthenticationError', 'PermissionDeniedError', 'APITimeoutError'}:
+                    if code == 'invalid_json_schema' or mode == 'file_data' or status_code in {401, 429} or type(exc).__name__ in {'AuthenticationError', 'PermissionDeniedError', 'APITimeoutError'}:
                         break
             raise last_exc or RuntimeError('OpenAI Responses PDF request failed')
         except ValidationError as exc:
@@ -171,11 +171,12 @@ class OpenAIDirectPDFProvider:
             elif status_code == 429 or 'quota' in lower or 'rate limit' in lower: status = 'quota_exceeded'
             elif status_code == 404 or code in {'model_not_found', 'model_not_available'} or ('model' in lower and 'not' in lower and 'found' in lower): status = 'model_unavailable'
             elif name in {'APITimeoutError', 'TimeoutError'} or 'timeout' in lower: status = 'timeout'
+            elif status_code == 400 and code == 'invalid_json_schema': status = 'provider_request_invalid'
             elif status_code == 400: status = 'invalid_request'
             elif name == 'APIResponseValidationError' or 'response' in lower and 'valid' in lower: status = 'invalid_response'
             else: status = 'failed'
             if not diagnostics or diagnostics[-1].get('provider_error_type') != name:
-                diag = _diagnostic(**base_diag, stage='model_invocation', provider_error_type=name, provider_error_code=code, provider_error_message=message, http_status_code=status_code, retryable=status in {'timeout', 'quota_exceeded', 'failed'})
+                diag = _diagnostic(**base_diag, stage='model_invocation', provider_error_type=name, provider_error_code=code, provider_error_message=message, http_status_code=status_code, retryable=False if status == 'provider_request_invalid' else status in {'timeout', 'quota_exceeded', 'failed'})
                 diagnostics.append(diag)
             _log_provider_failure(diagnostics[-1], unexpected=status == 'failed')
             return ExtractionRun(run_id=correlation_id, route='openai-responses-pdf', provider='openai', model=self.model, model_version=self.model, status=status, started_at=start_iso, completed_at=now_iso(), latency_seconds=time.time()-started, provider_errors=[f'{name}: {_safe_message(message)}'], diagnostics=diagnostics)
