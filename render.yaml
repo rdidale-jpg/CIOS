@@ -8,3 +8,9 @@ services:
     envVars:
       - key: FLORA_HOST
         value: 0.0.0.0
+      - key: FLORA_DATA_DIR
+        value: /var/data/flora
+    disk:
+      name: flora-pilot-memory
+      mountPath: /var/data/flora
+      sizeGB: 1
