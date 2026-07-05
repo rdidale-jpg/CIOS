@@ -1,3 +1,4 @@
+from pathlib import Path
 from experiments.document_understanding.schema import ExtractionRun, FoundationFact
 from cios.applications.flora import document_review as ai_review
 from cios.applications.flora.document_review import apply_accepted, create_upload_run, update_reviews
@@ -291,17 +292,19 @@ def test_financial_intelligence_reads_and_writes_use_same_resolved_root(monkeypa
     assert review.load_run('fi-same-root')['run_id'] == 'fi-same-root'
 
 
-def test_flora_data_dir_is_optional_for_ephemeral_pilot_operation(monkeypatch, tmp_path):
+def test_flora_data_dir_defaults_to_render_persistent_pilot_storage(monkeypatch, tmp_path):
     monkeypatch.chdir(tmp_path)
     monkeypatch.delenv('FLORA_DATA_DIR', raising=False)
+    monkeypatch.delenv('FLORA_PILOT_DIR', raising=False)
     from cios.applications.flora import storage
 
     status = storage.startup_storage_status()
 
     assert status['ready'] is True
-    assert status['storage_mode'] == 'ephemeral pilot storage'
-    assert status['ephemeral'] is True
-    assert (tmp_path / '.flora_pilot' / 'ai_financial_reports' / 'runs').is_dir()
+    assert status['storage_mode'] == 'persistent pilot storage'
+    assert status['ephemeral'] is False
+    assert status['data_root'] == '/var/data/flora'
+    assert Path('/var/data/flora/ai_financial_reports/runs').is_dir()
 
 
 def test_provider_timeout_is_distinct_and_records_safe_diagnostic(monkeypatch, tmp_path):
