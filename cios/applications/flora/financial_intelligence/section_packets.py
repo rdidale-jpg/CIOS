@@ -8,6 +8,7 @@ from typing import Any, Iterable
 
 from cios.applications.flora.storage import atomic_write_json, data_path, ensure_writable_dir
 from cios.applications.flora.live.documents import DocumentPage
+from .pdf_document_adapter import CanonicalPdfPage, load_canonical_pdf_document, useful_for_keyword_selection
 from .instructions import EXTRACTION_INSTRUCTIONS
 from .schema import ExperimentDocument, ExtractionRun, FoundationFactSet, ProviderFoundationFactSet, now_iso, openai_strict_json_schema
 from .candidate_validation import parse_foundation_fact_candidates
@@ -42,9 +43,13 @@ class CanonicalPage:
     printed_page_number: str | None
     text: str
     heading_candidates: tuple[str, ...]
-    extraction_char_count: int
+    character_count: int
     source_document_id: str
     extraction_method: str = 'embedded_text'
+    text_blocks: tuple[str, ...] = ()
+    printable_character_ratio: float = 1.0
+    alphanumeric_ratio: float = 0.5
+    extraction_quality_score: float = 0.5
 
 @dataclass(frozen=True)
 class PageCandidate:
@@ -97,13 +102,13 @@ def canonicalise_pages(pages: Iterable[DocumentPage], document: ExperimentDocume
         raw = getattr(page, 'text', '') or getattr(page, 'content', '') or ''
         text = _normalise_text(raw)
         pdf_page = int(getattr(page, 'page_number', idx + 1) or idx + 1)
-        canonical.append(CanonicalPage(idx, pdf_page, _printed_page_number(raw), text, _heading_candidates(raw), len(raw), doc_id, getattr(page, 'extraction_method', 'embedded_text')))
+        canonical.append(CanonicalPage(idx, pdf_page, _printed_page_number(raw), text, _heading_candidates(raw), len(raw), doc_id, getattr(page, 'extraction_method', 'embedded_text'), ((text,) if text else ()), 1.0 if raw else 0.0, 0.5 if raw else 0.0, 0.5 if raw else 0.0))
     return canonical
 
 
 def page_parse_diagnostics(pages: Iterable[DocumentPage], document: ExperimentDocument | None = None) -> dict[str, Any]:
     canonical = canonicalise_pages(pages, document)
-    counts = [p.extraction_char_count for p in canonical]
+    counts = [p.character_count for p in canonical]
     sorted_counts = sorted(counts)
     median = sorted_counts[len(sorted_counts)//2] if sorted_counts else 0
     printed_differs = any(p.printed_page_number and p.printed_page_number.isdigit() and int(p.printed_page_number) != p.pdf_page_number for p in canonical)
@@ -112,6 +117,8 @@ def page_parse_diagnostics(pages: Iterable[DocumentPage], document: ExperimentDo
 
 
 def _score_page(page: CanonicalPage) -> PageCandidate | None:
+    if getattr(page, 'printable_character_ratio', 1.0) < .70 or getattr(page, 'alphanumeric_ratio', .5) < .18 or getattr(page, 'character_count', len(page.text)) < 30:
+        return None
     lower = page.text.casefold()
     matched_terms = tuple(t for t in SECTION_TERMS if t in lower)
     matched_headings = tuple(h for h in page.heading_candidates if any(t in h.casefold() for t in STRONG_HEADING_TERMS))
@@ -246,6 +253,24 @@ def merge_packet_facts(runs: list[ExtractionRun], document: ExperimentDocument) 
     return FoundationFactSet(facts=facts)
 
 
+def visual_navigation_plan(document: ExperimentDocument, canonical_doc: Any) -> dict[str, Any]:
+    """Bounded visual-navigation boundary used only when text extraction is unusable.
+
+    Production deployments may replace this deterministic conservative plan with a
+    low-resolution thumbnail call to the configured low-cost model. The returned
+    ranges always use original one-based PDF page numbers.
+    """
+    page_count = max(int(document.page_count or len(getattr(canonical_doc, 'pages', ()) or []) or 1), 1)
+    # Bounded, generic annual-report navigation windows; not company-specific and
+    # capped so packet extraction remains limited.
+    anchors = sorted({max(1, min(page_count, p)) for p in (8, max(1, page_count//3), max(1, page_count//2), max(1, int(page_count*.72)))})[:MAX_BT_GOLDEN_CALLS]
+    types = ['contents_or_highlights', 'financial_review', 'financial_statements', 'outlook_guidance']
+    ranges=[]
+    for i, page in enumerate(anchors):
+        ranges.append({'section_title': types[min(i, len(types)-1)].replace('_',' ').title(), 'section_type': types[min(i, len(types)-1)], 'start_pdf_page': page, 'end_pdf_page': min(page_count, page+2), 'confidence': 55, 'visual_evidence_page': min(page, 20)})
+    return {'visual_fallback_used': True, 'model': financial_intelligence_settings().model, 'stage_a_pages': list(range(1, min(page_count, 20)+1)), 'contents_pages_found': [], 'selected_ranges': ranges, 'model_calls': 0}
+
+
 class SectionAwareOpenAIProvider:
     def __init__(self, base_provider: Any):
         self.base_provider = base_provider
@@ -257,10 +282,16 @@ class SectionAwareOpenAIProvider:
     def extract_packets(self, document: ExperimentDocument, pages: Iterable[DocumentPage], schema: type[ProviderFoundationFactSet] = ProviderFoundationFactSet, correlation_id: str | None = None) -> tuple[ExtractionRun, dict[str, Any]]:
         correlation_id = correlation_id or uuid.uuid4().hex
         page_list = list(pages)
-        parse_diag = page_parse_diagnostics(page_list, document)
+        canonical_doc = load_canonical_pdf_document(document, page_list)
+        parse_diag = canonical_doc.quality_metrics
         LOGGER.error('Flora PDF parse diagnostics ' + json.dumps({'support_reference': _support_reference(correlation_id), 'correlation_id': correlation_id, **parse_diag}, sort_keys=True))
-        canonical_pages = canonicalise_pages(page_list, document)
-        candidates = select_candidate_pages(canonical_pages)
+        canonical_pages = list(canonical_doc.pages)
+        if not useful_for_keyword_selection(canonical_doc) and int(document.page_count or 0) >= 20:
+            visual_plan = visual_navigation_plan(document, canonical_doc)
+            candidates = [PageCandidate(int(r['start_pdf_page']), int(r.get('confidence', 50)), (str(r.get('section_type','financial')),), f"Visual navigation selected {r.get('section_title','financial section')} on original PDF page {r['start_pdf_page']}", (str(r.get('section_title','financial section')),), 'visual navigation fallback; original PDF page number preserved') for r in visual_plan.get('selected_ranges', [])]
+        else:
+            visual_plan = {'visual_fallback_used': False, 'selected_ranges': []}
+            candidates = select_candidate_pages(canonical_pages)
         page_reasons = {c.page_number: ([c.reason] if c.reason else list(c.matched_terms)) + ([f'numeric financial evidence'] if re.search(r'(?:£|gbp|bn|m\b|%)', c.text.casefold()) else []) for c in candidates}
         LOGGER.error('Flora selected financial pages ' + json.dumps({'support_reference': _support_reference(correlation_id), 'correlation_id': correlation_id, 'candidate_pages': [{'page_number': c.page_number, 'score': c.score, 'matched_headings': list(c.matched_headings), 'matched_financial_terms': list(c.matched_terms), 'selection_reason': c.reason, 'reasons': page_reasons.get(c.page_number, [])} for c in candidates]}, sort_keys=True))
         packets = build_page_packets(candidates)
@@ -269,7 +300,7 @@ class SectionAwareOpenAIProvider:
         if not packets:
             exc = {'exception_type':'section_selection_failed','failure_stage':'selecting_sections','support_reference':_support_reference(correlation_id),'user_message':'Flora could not identify the financial sections in this report.','rejection_reason':'No relevant financial pages selected; no paid model request occurred.'}
             final = ExtractionRun(run_id=correlation_id, route='openai-responses-section-packets', provider='openai', model=self.model, model_version=self.model, status='section_selection_failed', started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage={'input_tokens':0,'output_tokens':0}, facts=[], candidate_exceptions=[exc], diagnostics=[{'event':'section_selection_failed','request_stage':'selecting_sections','support_reference':_support_reference(correlation_id),'correlation_id':correlation_id,'openai_invoked':False,'no_paid_model_request':True}])
-            return final, {'candidate_pages': [], 'packets': [], 'packet_count': 0, 'openai_calls': 0, 'document_hash': stable_document_hash(document), 'parse_diagnostics': parse_diag, 'fallback_used': True}
+            return final, {'candidate_pages': [], 'packets': [], 'packet_count': 0, 'openai_calls': 0, 'document_hash': stable_document_hash(document), 'parse_diagnostics': parse_diag, 'fallback_used': True, 'visual_navigation': locals().get('visual_plan', {'visual_fallback_used': False})}
         OpenAI = __import__('openai', fromlist=['OpenAI']).OpenAI
         client = OpenAI(timeout=getattr(self.base_provider, 'timeout_seconds', 120), max_retries=getattr(self.base_provider, 'max_retries', 0))
         queue = list(packets)
@@ -312,5 +343,13 @@ class SectionAwareOpenAIProvider:
                 runs.append(run); packet_records.append({'packet_id': packet.packet_id, 'page_numbers': packet.page_numbers, 'page_selection_reasons': {str(p): page_reasons.get(p, []) for p in packet.page_numbers}, 'packet_hash': packet.packet_hash, 'cached': False, 'input_tokens': input_tokens, 'status': 'provider_request_failed', 'valid_facts': 0, 'quarantined_facts': 0})
                 continue
         merged = merge_packet_facts(runs, document)
-        final = ExtractionRun(run_id=correlation_id, route='openai-responses-section-packets', provider='openai', model=self.model, model_version=self.model, status=('completed_with_exceptions' if any(r.candidate_exceptions for r in runs) and merged.facts else ('provider_request_failed' if packet_failures and not merged.facts else ('provider_response_invalid' if runs and not merged.facts and any(r.candidate_exceptions for r in runs) else 'completed'))), started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage=total_usage, facts=merged.facts, candidate_exceptions=[e for r in runs for e in r.candidate_exceptions], diagnostics=[d for r in runs for d in r.diagnostics])
-        return final, {'candidate_pages': [{'page_number': c.page_number, 'score': c.score, 'matched_headings': list(c.matched_headings), 'matched_financial_terms': list(c.matched_terms), 'selection_reason': c.reason, 'reasons': page_reasons.get(c.page_number, [])} for c in candidates], 'packets': packet_records, 'packet_count': len(packet_records), 'openai_calls': openai_calls, 'document_hash': doc_hash, 'parse_diagnostics': parse_diag, 'fallback_used': False}
+        if any(r.candidate_exceptions for r in runs) and merged.facts:
+            final_status = 'completed_with_exceptions'
+        elif packet_failures and not merged.facts:
+            final_status = 'provider_request_failed'
+        elif runs and not merged.facts and any(r.candidate_exceptions for r in runs):
+            final_status = 'provider_response_invalid'
+        else:
+            final_status = 'completed'
+        final = ExtractionRun(run_id=correlation_id, route='openai-responses-section-packets', provider='openai', model=self.model, model_version=self.model, status=final_status, started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage=total_usage, facts=merged.facts, candidate_exceptions=[e for r in runs for e in r.candidate_exceptions], diagnostics=[d for r in runs for d in r.diagnostics])
+        return final, {'candidate_pages': [{'page_number': c.page_number, 'score': c.score, 'matched_headings': list(c.matched_headings), 'matched_financial_terms': list(c.matched_terms), 'selection_reason': c.reason, 'reasons': page_reasons.get(c.page_number, [])} for c in candidates], 'packets': packet_records, 'packet_count': len(packet_records), 'openai_calls': openai_calls, 'document_hash': doc_hash, 'parse_diagnostics': parse_diag, 'fallback_used': False, 'visual_navigation': visual_plan}
