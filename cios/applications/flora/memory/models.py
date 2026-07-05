@@ -121,6 +121,7 @@ class EnterpriseModelAttribute:
     observation_ids: tuple[str, ...]
     evidence_ids: tuple[str, ...]
     provenance_type: str
+    trust_state: str = "trusted"
     contradiction_state: str = "none"
     conflicting_observation_ids: tuple[str, ...] = ()
     prior_values: tuple[dict[str, Any], ...] = ()

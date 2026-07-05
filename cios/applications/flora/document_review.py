@@ -289,6 +289,10 @@ def deterministic_candidate_to_review_claim(candidate: FinancialFactCandidate, r
         'extractor_version': candidate.extraction_version,
         'evidence_id': evidence_id,
         'candidate_exception': candidate.exception,
+        'evidence_bundle_id': candidate.evidence_bundle_id,
+        'financial_table_evidence_bundle': candidate.evidence_bundle.to_dict() if candidate.evidence_bundle else None,
+        'table_class': candidate.table_class,
+        'source_locator': candidate.source_locator,
     }
 
 def _memory_claim_type(claim_type: str) -> str:
@@ -350,6 +354,9 @@ def claim_to_evidence(run: dict[str, Any], claim: dict[str, Any]) -> dict[str, A
         'extraction_timestamp': now_iso(), 'provenance': 'evidence-backed', 'source_provenance': 'ai_document_understanding_reviewed',
         'extractor_name': 'OpenAIDirectPDFProvider', 'extractor_model': claim.get('extractor_model'), 'document_checksum': run['document']['checksum'],
         'source_excerpt': claim.get('source_excerpt'),
+        'financial_table_evidence_bundle': claim.get('financial_table_evidence_bundle'),
+        'evidence_bundle_id': claim.get('evidence_bundle_id'),
+        'source_locator': claim.get('source_locator'),
         'supporting_evidence_ids': tuple(claim.get('supporting_evidence_ids') or (claim.get('evidence_id'),)),
     }
 
@@ -425,9 +432,21 @@ def _is_auto_acceptable(claim: dict[str, Any], run: dict[str, Any]) -> tuple[boo
     missing = [field for field in required if claim.get(field) in (None, '')]
     if missing:
         return False, 'missing ' + ', '.join(missing)
+    bundle = claim.get('financial_table_evidence_bundle')
+    if claim.get('extractor_provider') == 'deterministic':
+        if not isinstance(bundle, dict):
+            return False, 'incomplete_financial_table_evidence_bundle'
+        bundle_required = ('bundle_id','source_document_id','source_hash','original_pdf_page_number','table_id','table_title','table_unit_text','table_currency','table_scale','column_heading','column_period_text','row_label','raw_cell_text','parsed_amount','supporting_text_blocks','extraction_method','extraction_version','extraction_confidence')
+        missing_bundle = [field for field in bundle_required if bundle.get(field) in (None, '', [])]
+        if missing_bundle:
+            return False, 'incomplete_financial_table_evidence_bundle'
+        if str(bundle.get('raw_cell_text')).strip().casefold() in {'', '£', 'm', 'bn', '£m', '£bn'}:
+            return False, 'unit_only_value'
+        if claim.get('candidate_exception'):
+            return False, str(claim.get('candidate_exception'))
     if not claim.get('business_unit') and 'bt group' not in claim.get('original_statement', '').casefold():
         return False, 'unclear group or segment scope'
-    return True, 'governed source, page lineage, value, unit, currency, period, basis and confidence verified'
+    return True, 'governed source, table cell lineage, value, unit, currency, period, basis and confidence verified'
 
 def _claim_packet_id(claim: dict[str, Any]) -> str | None:
     return claim.get('packet_id') or claim.get('provider_packet_id') or claim.get('source_packet_id')

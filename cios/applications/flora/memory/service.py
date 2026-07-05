@@ -307,7 +307,7 @@ class ObservationMemoryService:
         else:
             prior = (); observation_ids = (observation.observation_id or "",); evidence_ids = observation.supporting_evidence_ids; value = getattr(observation, "normalised_amount", None) or (_financial_model_value(observation.atomic_statement) if observation.observation_type == 'financial_metric_reported' else observation.atomic_statement); conflicts = (); state = observation.contradiction_state
         confidence = max(observation.confidence, existing.confidence if existing else 0); confidence_history = (*(existing.confidence_history if existing else ()), {"observation_id": observation.observation_id or "", "confidence": observation.confidence, "recorded_at": now_iso()})
-        model.attributes[key] = EnterpriseModelAttribute(domain, key, value, confidence, observation.last_confirmed_date or observation.observation_date, observation.freshness, observation_ids, evidence_ids, observation.provenance_type, state, conflicts, prior, confidence_history); model.updated_at = now_iso(); self.models.save(model)
+        model.attributes[key] = EnterpriseModelAttribute(domain, key, value, confidence, observation.last_confirmed_date or observation.observation_date, observation.freshness, observation_ids, evidence_ids, observation.provenance_type, "trusted", state, conflicts, prior, confidence_history); model.updated_at = now_iso(); self.models.save(model)
         return ModelUpdateResult(observation.enterprise_id, observation.observation_id or "", key, "contradiction_recorded" if contradiction else ("updated" if existing else "created"), contradiction=contradiction)
 
     def rebuild_from_ledger(self) -> list[ModelUpdateResult]:
