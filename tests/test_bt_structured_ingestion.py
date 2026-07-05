@@ -59,6 +59,6 @@ def test_bt_structured_quarantines_wrong_period_dimension_and_zip_slip(tmp_path,
     try:
         bt_structured.validate_archive(slip, bt_structured.source_config())
     except bt_structured.StructuredIngestionError as exc:
-        assert 'ZIP-slip' in str(exc)
+        assert exc.code == 'unsafe_archive_path'
     else:
         raise AssertionError('zip slip accepted')

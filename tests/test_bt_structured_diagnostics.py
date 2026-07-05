@@ -96,7 +96,7 @@ def test_package_validation_invalid_zip_and_unsafe_archive(tmp_path):
     with zipfile.ZipFile(unsafe, 'w') as z: z.writestr('../x', 'x')
     with pytest.raises(bt.StructuredIngestionError) as slip:
         bt.validate_archive(unsafe, cfg)
-    assert slip.value.code == 'unsafe_archive'
+    assert slip.value.code == 'unsafe_archive_path'
 
 
 def test_adapter_handoff_diagnostic_and_correlation(tmp_path):
@@ -107,3 +107,66 @@ def test_adapter_handoff_diagnostic_and_correlation(tmp_path):
     assert diag['adapter_handoff_attempted'] is True
     assert diag['candidate_fact_count'] == 4
     assert diag['canonical_fact_count'] == 3
+
+
+def _ix_body(metric=True):
+    facts = '<ix:nonFraction name="ifrs-full:Revenue" contextRef="c1" unitRef="GBP">1</ix:nonFraction>' if metric else ''
+    return f'''<html xmlns:ix="http://www.xbrl.org/2013/inlineXBRL" xmlns:xbrli="http://www.xbrl.org/2003/instance">
+    <xbrli:context id="c1"><xbrli:entity><xbrli:identifier>213800LRO7NS5CYQMN21</xbrli:identifier></xbrli:entity><xbrli:period><xbrli:startDate>2025-04-01</xbrli:startDate><xbrli:endDate>2026-03-31</xbrli:endDate></xbrli:period></xbrli:context>{facts}</html>'''
+
+
+def test_archive_diagnostics_and_nested_ixbrl_locator(tmp_path):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    package = tmp_path / 'nested.zip'
+    with zipfile.ZipFile(package, 'w') as z:
+        z.writestr('META-INF/reports.json', '{}')
+        z.writestr('BT_Group_FY26/reports/consolidated/report.xhtml', _ix_body())
+        z.writestr('BT_Group_FY26/taxonomy/bt-2026.xsd', '<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>')
+    diag = bt.inspect_archive(package, cfg)
+    assert diag['central_directory_readable'] is True
+    assert diag['archive_entry_count'] == 3
+    assert diag['first_failing_safety_rule'] is None
+    located = bt.locate_ixbrl_report(package, cfg)
+    assert located['report_path'] == 'BT_Group_FY26/reports/consolidated/report.xhtml'
+    assert located['diagnostics']['locator_decision'] == 'BT_Group_FY26/reports/consolidated/report.xhtml'
+
+
+def test_precise_safety_failure_codes(tmp_path):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    too_many = tmp_path / 'too_many.zip'
+    with zipfile.ZipFile(too_many, 'w') as z:
+        z.writestr('a.txt', 'a'); z.writestr('b.txt', 'b')
+    with pytest.raises(bt.StructuredIngestionError) as exc:
+        bt.validate_archive(too_many, {**cfg, 'entry_count_limit': 1})
+    assert exc.value.code == 'archive_entry_limit_exceeded'
+    too_big = tmp_path / 'too_big.zip'
+    with zipfile.ZipFile(too_big, 'w') as z: z.writestr('a.txt', 'aaaa')
+    with pytest.raises(bt.StructuredIngestionError) as big:
+        bt.validate_archive(too_big, {**cfg, 'expanded_size_limit_bytes': 2})
+    assert big.value.code == 'archive_expanded_size_exceeded'
+
+
+def test_crc_failure_is_reported(tmp_path):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    package = tmp_path / 'crc.zip'
+    with zipfile.ZipFile(package, 'w', zipfile.ZIP_STORED) as z: z.writestr('a.txt', 'abc')
+    data = bytearray(package.read_bytes()); idx = data.index(b'abc'); data[idx] ^= 0xFF; package.write_bytes(data)
+    with pytest.raises(bt.StructuredIngestionError) as exc:
+        bt.validate_archive(package, cfg)
+    assert exc.value.code in {'zip_crc_failure', 'invalid_zip'}
+
+
+def test_locator_ambiguous_and_unsupported_layout(tmp_path):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    no_ix = tmp_path / 'no_ix.zip'
+    with zipfile.ZipFile(no_ix, 'w') as z: z.writestr('nested/report.xhtml', '<html/>')
+    with pytest.raises(bt.StructuredIngestionError) as missing:
+        bt.locate_ixbrl_report(no_ix, cfg)
+    assert missing.value.code == 'ixbrl_report_not_found'
+    amb = tmp_path / 'amb.zip'
+    with zipfile.ZipFile(amb, 'w') as z:
+        z.writestr('a/report.xhtml', _ix_body())
+        z.writestr('b/report.xhtml', _ix_body())
+    with pytest.raises(bt.StructuredIngestionError) as exc:
+        bt.locate_ixbrl_report(amb, cfg)
+    assert exc.value.code == 'multiple_ixbrl_reports_ambiguous'
