@@ -16,17 +16,17 @@ def test_standard_refresh_fails_closed_without_ai_fallback(monkeypatch, tmp_path
 
     monkeypatch.setattr(review, 'fetch_document', lambda url: Fetch())
     monkeypatch.setattr(review, '_bt_annual_report_source', lambda: {'source_id': 'bt-annual-report-2026', 'source_name': 'BT Group plc Annual Report 2026', 'url': 'https://www.bt.com/report.pdf', 'source_type': 'annual_report', 'authority_tier': 'tier_1_company_authoritative', 'publisher': 'BT Group plc'})
-    monkeypatch.setattr(review.OpenAIDirectPDFProvider, 'extract_facts', lambda *a, **k: pytest.fail('standard route must not silently fall back to OpenAI'))
+    monkeypatch.setattr(review.OpenAIDirectPDFProvider, 'extract_facts', lambda *a, **k: pytest.fail('structured route must not silently fall back to OpenAI'))
 
     run = review.refresh_financial_intelligence()
 
-    assert run['extraction_mode'] == 'standard_financial_metrics'
+    assert run['extraction_mode'] == 'structured_standard_financials'
     assert run['openai_calls_made'] == 0
     assert run['status'] == 'section_selection_failed'
 
 
 def test_provider_guard_blocks_call_before_transmission():
-    with provider_call_guard('standard_financial_metrics', allowed_calls=0) as guard:
+    with provider_call_guard('structured_standard_financials', allowed_calls=0) as guard:
         with pytest.raises(ProviderCallViolation):
             guard.before_provider_call('openai', 'unit.test')
     assert guard.attempted_calls == 1
@@ -44,7 +44,7 @@ def test_route_level_golden_persists_evidence_and_idempotent(monkeypatch, tmp_pa
 
     monkeypatch.setattr(review, 'fetch_document', lambda url: Fetch())
     monkeypatch.setattr(review, '_bt_annual_report_source', lambda: {'source_id': 'bt-annual-report-2026', 'source_name': 'BT Group plc Annual Report 2026', 'url': 'https://www.bt.com/report.pdf', 'source_type': 'annual_report', 'authority_tier': 'tier_1_company_authoritative', 'publisher': 'BT Group plc'})
-    monkeypatch.setattr(review.OpenAIDirectPDFProvider, 'extract_facts', lambda *a, **k: pytest.fail('standard route must not call OpenAI'))
+    monkeypatch.setattr(review.OpenAIDirectPDFProvider, 'extract_facts', lambda *a, **k: pytest.fail('structured route must not call OpenAI'))
 
     first = review.refresh_financial_intelligence(run_id='fi-golden-one')
     before_evidence = len(EvidenceRepository().list())

@@ -137,7 +137,7 @@ def test_financial_intelligence_records_provider_not_configured(monkeypatch, tmp
     monkeypatch.setattr(ai_review, 'fetch_document', lambda url: Fetch())
     monkeypatch.setattr(ai_review, '_bt_annual_report_source', lambda: {'source_id': 'bt-annual-report-2026', 'source_name': 'BT Group plc Annual Report 2026', 'url': 'https://www.bt.com/report.pdf', 'source_type': 'annual_report', 'authority_tier': 'tier_1_company_authoritative', 'publisher': 'BT Group plc'})
 
-    run = ai_review.refresh_financial_intelligence()
+    run = ai_review.refresh_financial_intelligence(extraction_mode='administrative_ai_review')
 
     assert run['status'] == 'provider_not_configured'
     assert run['provider_status'] == 'not_executed'
@@ -177,7 +177,7 @@ def test_financial_intelligence_refresh_creates_missing_nested_directories(monke
     monkeypatch.setattr(review.OpenAIDirectPDFProvider, 'extract_facts', fake_extract)
     monkeypatch.setattr(review, '_bt_annual_report_source', lambda: {'source_id': 'bt-annual-report-2026', 'source_name': 'BT Group plc Annual Report 2026', 'url': 'https://www.bt.com/report.pdf', 'source_type': 'annual_report', 'authority_tier': 'tier_1_company_authoritative', 'publisher': 'BT Group plc'})
 
-    run = review.refresh_financial_intelligence()
+    run = review.refresh_financial_intelligence(extraction_mode='administrative_ai_review')
 
     assert run['status'] == 'completed'
     assert (tmp_path / 'flora' / 'ai_financial_reports' / 'runs' / f"{run['run_id']}.json").exists()
@@ -218,7 +218,7 @@ def test_provider_request_failures_remain_classified(monkeypatch, tmp_path):
     monkeypatch.setattr(ai_review.OpenAIDirectPDFProvider, 'extract_facts', fake_extract)
     monkeypatch.setattr(ai_review, '_bt_annual_report_source', lambda: {'source_id': 'bt-annual-report-2026', 'source_name': 'BT Group plc Annual Report 2026', 'url': 'https://www.bt.com/report.pdf', 'source_type': 'annual_report', 'authority_tier': 'tier_1_company_authoritative', 'publisher': 'BT Group plc'})
 
-    run = ai_review.refresh_financial_intelligence()
+    run = ai_review.refresh_financial_intelligence(extraction_mode='administrative_ai_review')
 
     assert run['status'] == 'provider_request_failed'
     assert run['openai_invoked'] is True
@@ -322,7 +322,7 @@ def test_provider_timeout_is_distinct_and_records_safe_diagnostic(monkeypatch, t
     monkeypatch.setattr(ai_review.OpenAIDirectPDFProvider, 'extract_facts', fake_extract)
     monkeypatch.setattr(ai_review, '_bt_annual_report_source', lambda: {'source_id': 'bt-annual-report-2026', 'source_name': 'BT Group plc Annual Report 2026', 'url': 'https://www.bt.com/report.pdf', 'source_type': 'annual_report', 'authority_tier': 'tier_1_company_authoritative', 'publisher': 'BT Group plc'})
 
-    run = ai_review.refresh_financial_intelligence()
+    run = ai_review.refresh_financial_intelligence(extraction_mode='administrative_ai_review')
 
     assert run['status'] == 'provider_timeout'
     assert run['support_reference'] == 'FI-corr-1'

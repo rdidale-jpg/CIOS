@@ -20,7 +20,13 @@ from cios.applications.flora.live.documents import DocumentPage
 
 
 def doc(tmp_path: Path) -> ExperimentDocument:
-    p = tmp_path / 'report.pdf'; p.write_bytes(b'%PDF fixture')
+    p = tmp_path / 'report.pdf'
+    fitz = pytest.importorskip('fitz', reason='PyMuPDF is required to build real PDF bytes')
+    pdf = fitz.open()
+    for i in range(1, 11):
+        page = pdf.new_page()
+        page.insert_text((72, 72), ('FULL PDF SENTINEL' if i == 10 else f'revenue adjusted EBITDA net debt £{i}m'))
+    p.write_bytes(pdf.tobytes())
     return ExperimentDocument(document_id='DOC', enterprise_id='bt-group-plc', title='BT Annual Report', source_url='https://bt.test/report.pdf', retrieval_timestamp='2026-07-05T00:00:00+00:00', checksum='abc123', media_type='application/pdf', page_count=10, local_path=str(p))
 
 
