@@ -13,6 +13,7 @@ from typing import Any
 from cios.applications.flora.financial_intelligence.openai_provider import OpenAIDirectPDFProvider, openai_sdk_readiness
 from cios.applications.flora.financial_intelligence.section_packets import SectionAwareOpenAIProvider
 from cios.applications.flora.financial_intelligence.normalisation import canonicalise_financial_claim, rounding_compatible
+from cios.applications.flora.financial_intelligence.adapters import PdfFinancialTableAdapter, FinancialFactCandidate
 from cios.applications.flora.financial_intelligence.config import financial_intelligence_settings
 from cios.applications.flora.financial_intelligence.schema import ExperimentDocument, FoundationFact
 from cios.applications.flora.memory.service import ObservationMemoryService
@@ -252,6 +253,42 @@ def fact_to_review_claim(fact: FoundationFact, run_id: str) -> dict[str, Any]:
         'extractor_provider': fact.extractor_provider,
         'extractor_model': fact.extractor_model,
         'evidence_id': _evidence_id(run_id, fact.fact_id),
+    }
+
+
+def deterministic_candidate_to_review_claim(candidate: FinancialFactCandidate, run_id: str) -> dict[str, Any]:
+    evidence_id = 'PDF-EV-' + hashlib.sha256(f'{run_id}:{candidate.candidate_id}'.encode()).hexdigest()[:16].upper()
+    return {
+        'claim_id': candidate.candidate_id,
+        'review_state': 'pending',
+        'original_statement': candidate.supporting_excerpt,
+        'amended_statement': candidate.supporting_excerpt,
+        'claim_type': 'financial_metric_reported',
+        'canonical_enterprise_id': candidate.enterprise_id,
+        'affected_attribute': '',
+        'metric_identity': candidate.raw_metric_label,
+        'value': str(candidate.reported_amount) if candidate.reported_amount is not None else None,
+        'reported_amount': str(candidate.reported_amount) if candidate.reported_amount is not None else None,
+        'raw_value_text': candidate.raw_value_text,
+        'original_display_value': candidate.raw_value_text or None,
+        'reported_scale': candidate.reported_scale,
+        'currency': candidate.currency,
+        'accounting_basis': candidate.accounting_basis_text,
+        'business_unit': candidate.scope_text or 'group',
+        'enterprise_scope': candidate.scope_text or 'group',
+        'period': candidate.raw_period_text,
+        'raw_period_text': candidate.raw_period_text,
+        'state': candidate.measurement_state_text or 'actual',
+        'confidence': candidate.extraction_confidence,
+        'page_reference': str(candidate.source_page or ''),
+        'source_page': candidate.source_page,
+        'source_excerpt': candidate.supporting_excerpt,
+        'supporting_context': candidate.supporting_excerpt,
+        'extractor_provider': 'deterministic',
+        'extractor_model': candidate.source_method,
+        'extractor_version': candidate.extraction_version,
+        'evidence_id': evidence_id,
+        'candidate_exception': candidate.exception,
     }
 
 def _memory_claim_type(claim_type: str) -> str:
@@ -531,6 +568,24 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: 
 
     _write_progress(run_id, 'checking_document_quality')
     _write_progress(run_id, 'selecting_sections', collection={'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error})
+    if fetched.succeeded and document.media_type == 'application/pdf' and doc_parse.pages:
+        _write_progress(run_id, 'validating')
+        adapter_result = PdfFinancialTableAdapter().extract(document, embedded_pages=doc_parse.pages)
+        if any(c.exception is None for c in adapter_result.candidates):
+            claims = [deterministic_candidate_to_review_claim(c, run_id) for c in adapter_result.candidates]
+            run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'validating', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b''), 'final_url': fetched.final_url or fetched.url, 'content_type': fetched.media_type, 'redirect_chain': list(fetched.redirect_chain), 'redirected': bool(fetched.redirect_chain)}, 'document': document.model_dump(), 'provider': 'deterministic', 'model': adapter_result.adapter_name, 'reasoning_effort': None, 'schema_version': settings.schema_version, 'prompt_version': 'deterministic-financial-fact-capture-v2', 'document_hash': document.checksum, 'usage': {'openai_calls': 0}, 'estimated_cost_usd': 0, 'actual_cost_usd': 0, 'provider_status': 'not_executed', 'provider_errors': [], 'raw_response_location': None, 'provider_diagnostics': [], 'openai_invoked': False, 'openai_calls_made': 0, 'claims': claims, 'applied_results': [], 'candidate_exceptions': list(adapter_result.exceptions), 'candidate_pages_selected': sorted({c.source_page for c in adapter_result.candidates if c.source_page}), 'page_packets_submitted': [], 'packet_count': 0, 'pdf_navigation_diagnostics': {'selected_parser': doc_parse.extraction_method, 'deterministic_candidates_extracted': len(claims)}, 'visual_navigation': {}, 'visual_navigation_fallback_used': False}
+            try:
+                _write_progress(run_id, 'updating_memory')
+                run = _apply_automatic_claims(run)
+            except Exception as exc:
+                run = _mark_failure(run, 'persistence_failed', f'{type(exc).__name__}: {exc}')
+            run['support_reference'] = _support_reference(run)
+            run['exceptions'] = _dedupe_exceptions(run.get('exceptions', []))
+            run['terminal'] = True
+            run['progress_percent'] = run['percent_complete'] = 100
+            _write_cost_record(run)
+            _write_json(_run_path(run_id), run)
+            return run
     cached = _successful_cached_run(document, provider.model) if fetched.succeeded else None
     if cached:
         run = dict(cached)

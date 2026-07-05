@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import re
+from decimal import Decimal
 from dataclasses import dataclass
 from typing import Any
 
@@ -74,7 +75,7 @@ class FactualClaim:
 
     def to_evidence(self, base: dict[str, Any]) -> dict[str, Any]:
         row = dict(base)
-        row.update({"enterprise_id": self.canonical_enterprise_id, "canonical_enterprise_id": self.canonical_enterprise_id, "cleaned_observation": self.atomic_statement, "extracted_observation": self.atomic_statement, "commercial_condition": self.claim_type, "affected_attribute": self.affected_attribute, "confidence": self.confidence, "evidence_id": self.evidence_id, "page_range": self.page_reference or base.get("page_range"), "page_number": base.get("page_number")})
+        row.update({"enterprise_id": self.canonical_enterprise_id, "canonical_enterprise_id": self.canonical_enterprise_id, "cleaned_observation": self.atomic_statement, "extracted_observation": self.atomic_statement, "commercial_condition": self.claim_type, "affected_attribute": self.affected_attribute, "confidence": self.confidence, "evidence_id": self.evidence_id, "page_range": self.page_reference or base.get("page_range"), "page_number": base.get("page_number"), "normalised_amount": base.get("normalised_amount"), "reported_amount": base.get("reported_amount"), "reported_scale": base.get("reported_scale"), "display_value": base.get("display_value")})
         return row
 
 
@@ -82,11 +83,11 @@ def _financial_model_value(statement: str) -> Any:
     m = FINANCIAL_RE.search(statement or '')
     if not m:
         return statement
-    value = float(m.group('value').replace(',', ''))
+    value = Decimal(m.group('value').replace(',', ''))
     unit_raw = (m.group('unit') or '').lower()
-    factor = 1_000_000_000 if unit_raw in {'bn','billion'} else 1_000_000 if unit_raw in {'m','million'} else 1
+    factor = Decimal('1000000000') if unit_raw in {'bn','billion'} else Decimal('1000000') if unit_raw in {'m','million'} else Decimal('1')
     normalised = value * factor
-    return int(normalised) if normalised.is_integer() else normalised
+    return format(normalised, 'f')
 
 
 def validate_factual_claim(claim: FactualClaim) -> None:
@@ -185,7 +186,12 @@ class ObservationMemoryService:
         collected = str(item.get("extraction_timestamp") or item.get("collection_date") or now_iso()); observed = str(item.get("observation_date") or collected[:10])
         publication = item.get("publication_date") or item.get("evidence_publication_date")
         enterprise = canonical_enterprise_id(str(item.get("enterprise_id") or item.get("canonical_enterprise_id") or item.get("organisation") or "Unknown enterprise")) or "unknown"
-        return Observation(enterprise, condition, statement, observed, collected, str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"), int(item.get("confidence") or item.get("overall_evidence_quality") or 50), tuple(item.get("supporting_evidence_ids") or (_evidence_id(item),)), evidence_publication_date=str(publication) if publication else None, provenance_type=str(item.get("provenance") or item.get("source_provenance") or "evidence-backed"), freshness=str(item.get("evidence_freshness") or "current"), lifecycle_state=("Validated" if condition == "financial_metric_reported" else "accepted"), importance=int(item["importance"]) if item.get("importance") is not None else None, commercial_value=int(item["commercial_value"]) if item.get("commercial_value") is not None else None)
+        obs = Observation(enterprise, condition, statement, observed, collected, str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"), int(item.get("confidence") or item.get("overall_evidence_quality") or 50), tuple(item.get("supporting_evidence_ids") or (_evidence_id(item),)), evidence_publication_date=str(publication) if publication else None, provenance_type=str(item.get("provenance") or item.get("source_provenance") or "evidence-backed"), freshness=str(item.get("evidence_freshness") or "current"), lifecycle_state=("Validated" if condition == "financial_metric_reported" else "accepted"), importance=int(item["importance"]) if item.get("importance") is not None else None, commercial_value=int(item["commercial_value"]) if item.get("commercial_value") is not None else None)
+        if item.get("normalised_amount") is not None:
+            obs.normalised_amount = item.get("normalised_amount")
+        elif condition == "financial_metric_reported" and item.get("value") is not None and not isinstance(item.get("value"), str):
+            obs.normalised_amount = item.get("value")
+        return obs
 
     def accept_evidence(self, item: dict[str, Any]) -> ModelUpdateResult:
         report = self.process_evidence(item)
@@ -297,7 +303,7 @@ class ObservationMemoryService:
         if existing:
             prior = tuple(existing.prior_values)
             if existing.current_value != observation.atomic_statement and not contradiction: prior = (*prior, {"value": existing.current_value, "confidence": existing.confidence, "superseded_at": now_iso(), "observation_ids": existing.observation_ids})
-            observation_ids = tuple(dict.fromkeys([*existing.observation_ids, observation.observation_id or ""])); evidence_ids = tuple(dict.fromkeys([*existing.evidence_ids, *observation.supporting_evidence_ids])); domain_value = getattr(observation, "normalised_amount", None) or (_financial_model_value(observation.atomic_statement) if observation.observation_type == 'financial_metric_reported' else observation.atomic_statement); value = existing.current_value if contradiction else domain_value; conflicts = tuple(dict.fromkeys([*existing.conflicting_observation_ids, observation.observation_id or ""])) if contradiction else existing.conflicting_observation_ids; state = "contradicted" if contradiction else observation.contradiction_state
+            observation_ids = tuple(dict.fromkeys([*existing.observation_ids, observation.observation_id or ""])); evidence_ids = tuple(dict.fromkeys([*existing.evidence_ids, *observation.supporting_evidence_ids])); domain_value = getattr(observation, "normalised_amount", None) or (existing.current_value if existing and observation.observation_type == 'financial_metric_reported' else (_financial_model_value(observation.atomic_statement) if observation.observation_type == 'financial_metric_reported' else observation.atomic_statement)); value = existing.current_value if contradiction else domain_value; conflicts = tuple(dict.fromkeys([*existing.conflicting_observation_ids, observation.observation_id or ""])) if contradiction else existing.conflicting_observation_ids; state = "contradicted" if contradiction else observation.contradiction_state
         else:
             prior = (); observation_ids = (observation.observation_id or "",); evidence_ids = observation.supporting_evidence_ids; value = getattr(observation, "normalised_amount", None) or (_financial_model_value(observation.atomic_statement) if observation.observation_type == 'financial_metric_reported' else observation.atomic_statement); conflicts = (); state = observation.contradiction_state
         confidence = max(observation.confidence, existing.confidence if existing else 0); confidence_history = (*(existing.confidence_history if existing else ()), {"observation_id": observation.observation_id or "", "confidence": observation.confidence, "recorded_at": now_iso()})
