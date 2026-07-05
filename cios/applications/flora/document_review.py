@@ -78,6 +78,7 @@ def _provider_failure_category(extraction) -> str:
         'model_unavailable': 'provider_model_unavailable',
         'file_upload_failed': 'provider_file_upload_failed',
         'invalid_request': 'provider_request_invalid',
+        'provider_request_invalid': 'provider_request_invalid',
         'timeout': 'provider_timeout',
         'invalid_response': 'provider_response_invalid',
     }.get(status, 'provider_response_invalid' if getattr(extraction, 'schema_errors', None) else 'provider_request_failed')
