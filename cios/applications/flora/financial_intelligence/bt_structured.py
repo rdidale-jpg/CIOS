@@ -68,16 +68,122 @@ def retrieve_package(cfg:dict[str,Any])->RetrievedPackage:
     
     msg=str(last); code=getattr(last,'code',None) or ('download_timeout' if 'timed out' in msg.lower() else 'http_error')
     raise StructuredIngestionError(f'structured source retrieval failed: {last}', code, 'official filing retrieval')
+SAFETY_FAILURE_CODES={
+    'invalid_zip','zip_crc_failure','unsafe_archive_path','archive_entry_limit_exceeded',
+    'archive_expanded_size_exceeded','archive_entry_too_large','encrypted_archive_unsupported',
+    'unsupported_archive_entry_type'
+}
+PACKAGE_RECOGNITION_FAILURE_CODES={
+    'ixbrl_report_not_found','multiple_ixbrl_reports_ambiguous','report_package_manifest_invalid',
+    'unsupported_esef_package_layout','taxonomy_entrypoint_not_found','structured_report_locator_failed'
+}
+TEXT_EXTENSIONS=('.xhtml','.html','.xml','.xsd','.json','.txt','.csv')
+REPORT_EXTENSIONS=('.xhtml','.html')
+INSTANCE_EXTENSIONS=('.xbrl','.xml')
+TAXONOMY_EXTENSIONS=('.xsd','.xml')
+NESTED_ARCHIVE_EXTENSIONS=('.zip','.jar','.7z','.tar','.gz','.tgz','.bz2','.xz')
+
+
+def _is_symlink(info:zipfile.ZipInfo)->bool:
+    return ((info.external_attr >> 16) & 0o170000) == 0o120000
+
+
+def _safe_parts(name:str)->tuple[str,...]:
+    return Path(name.replace('\\','/')).parts
+
+
+def inspect_archive(path:Path,cfg:dict[str,Any])->dict[str,Any]:
+    diag={'central_directory_readable':False,'archive_entry_count':0,'total_compressed_size':0,
+          'total_expanded_size':0,'maximum_single_entry_size':0,'duplicate_entry_names':[],
+          'encrypted_entries':[],'absolute_paths':[],'traversal_paths':[],'symlinks':[],
+          'unsupported_entry_types':[],'crc_failures':[],'nested_archives':[],
+          'first_failing_safety_rule':None,'top_level_directories':[],
+          'candidate_xhtml_html':[],'candidate_xml':[],'candidate_xsd_taxonomy':[],
+          'candidate_inline_xbrl_reports':[],'candidate_xbrl_instances':[],
+          'taxonomy_package_metadata':[],'report_package_metadata':[],
+          'manifest_files':[],'locator_decision':None,'locator_reason':None}
+    try:
+        with zipfile.ZipFile(path) as z:
+            infos=z.infolist(); diag['central_directory_readable']=True; diag['archive_entry_count']=len(infos)
+            seen=set(); dups=[]; tops=set()
+            for info in infos:
+                name=info.filename; norm=name.replace('\\','/')
+                if name in seen: dups.append(name)
+                seen.add(name)
+                parts=_safe_parts(name)
+                if parts and parts[0] not in ('/','..') and not parts[0].endswith(':'): tops.add(parts[0].rstrip('/'))
+                diag['total_compressed_size']+=info.compress_size; diag['total_expanded_size']+=info.file_size
+                diag['maximum_single_entry_size']=max(diag['maximum_single_entry_size'], info.file_size)
+                lower=norm.lower()
+                if info.flag_bits & 0x1: diag['encrypted_entries'].append(name)
+                if norm.startswith('/') or (len(parts)>0 and (parts[0]=='/' or parts[0].endswith(':'))): diag['absolute_paths'].append(name)
+                if '..' in parts: diag['traversal_paths'].append(name)
+                if _is_symlink(info): diag['symlinks'].append(name)
+                mode=(info.external_attr >> 16) & 0o170000
+                if mode and mode not in (0o100000,0o040000,0): diag['unsupported_entry_types'].append(name)
+                if lower.endswith(NESTED_ARCHIVE_EXTENSIONS): diag['nested_archives'].append(name)
+                if lower.endswith(REPORT_EXTENSIONS): diag['candidate_xhtml_html'].append(name)
+                if lower.endswith('.xml'): diag['candidate_xml'].append(name)
+                if lower.endswith(TAXONOMY_EXTENSIONS): diag['candidate_xsd_taxonomy'].append(name)
+                if lower.endswith(('.xbrl','.xml')): diag['candidate_xbrl_instances'].append(name)
+                if 'taxonomy-package.xml' in lower: diag['taxonomy_package_metadata'].append(name)
+                if 'report-package.json' in lower or 'reports.json' in lower or 'manifest' in lower: diag['manifest_files'].append(name)
+                if 'report-package' in lower: diag['report_package_metadata'].append(name)
+            diag['duplicate_entry_names']=dups; diag['top_level_directories']=sorted(t for t in tops if t)
+            first_bad=z.testzip()
+            if first_bad: diag['crc_failures'].append(first_bad)
+    except zipfile.BadZipFile:
+        diag['first_failing_safety_rule']='invalid_zip'; return diag
+    checks=[('zip_crc_failure',diag['crc_failures']),('unsafe_archive_path',diag['absolute_paths'] or diag['traversal_paths']),
+            ('encrypted_archive_unsupported',diag['encrypted_entries']),('unsupported_archive_entry_type',diag['symlinks'] or diag['unsupported_entry_types'])]
+    if diag['archive_entry_count']>int(cfg['entry_count_limit']): diag['first_failing_safety_rule']='archive_entry_limit_exceeded'
+    if diag['total_expanded_size']>int(cfg['expanded_size_limit_bytes']): diag['first_failing_safety_rule']=diag['first_failing_safety_rule'] or 'archive_expanded_size_exceeded'
+    if diag['maximum_single_entry_size']>int(cfg.get('single_entry_size_limit_bytes') or cfg['expanded_size_limit_bytes']): diag['first_failing_safety_rule']=diag['first_failing_safety_rule'] or 'archive_entry_too_large'
+    for code, present in checks:
+        if present and not diag['first_failing_safety_rule']: diag['first_failing_safety_rule']=code
+    return diag
+
+
 def validate_archive(path:Path,cfg:dict[str,Any])->list[zipfile.ZipInfo]:
-    infos=[]; total=0
-    with zipfile.ZipFile(path) as z:
-        for info in z.infolist():
-            parts=Path(info.filename.replace('\\','/')).parts
-            if info.filename.startswith('/') or '..' in parts: raise StructuredIngestionError('ZIP-slip entry rejected', 'unsafe_archive', 'structured package validation')
-            total+=info.file_size; infos.append(info)
-            if total>int(cfg['expanded_size_limit_bytes']): raise StructuredIngestionError('expanded archive size limit exceeded', 'structured_package_invalid', 'structured package validation')
-            if len(infos)>int(cfg['entry_count_limit']): raise StructuredIngestionError('archive entry count limit exceeded', 'structured_package_invalid', 'structured package validation')
-    return infos
+    diag=inspect_archive(path,cfg)
+    if not diag['central_directory_readable']: raise StructuredIngestionError('invalid ZIP package', 'invalid_zip', 'structured package validation')
+    if diag['first_failing_safety_rule']:
+        messages={'zip_crc_failure':'ZIP CRC validation failed','unsafe_archive_path':'unsafe archive path rejected','encrypted_archive_unsupported':'encrypted archive entries are unsupported','unsupported_archive_entry_type':'unsupported archive entry type rejected','archive_entry_limit_exceeded':'archive entry count limit exceeded','archive_expanded_size_exceeded':'expanded archive size limit exceeded','archive_entry_too_large':'archive entry size limit exceeded'}
+        raise StructuredIngestionError(messages.get(diag['first_failing_safety_rule'],'archive safety validation failed'), diag['first_failing_safety_rule'], 'structured package validation')
+    with zipfile.ZipFile(path) as z: return z.infolist()
+
+
+def _read_bounded(z:zipfile.ZipFile, name:str, limit:int=2_000_000)->bytes:
+    info=z.getinfo(name)
+    if info.file_size>limit: return b''
+    return z.read(name)
+
+
+def locate_ixbrl_report(zip_path:Path,cfg:dict[str,Any])->dict[str,Any]:
+    diag=inspect_archive(zip_path,cfg); selected=[]; candidates=[]
+    with zipfile.ZipFile(zip_path) as z:
+        names=[n for n in z.namelist() if n.lower().endswith(REPORT_EXTENSIONS)]
+        for name in names:
+            data=_read_bounded(z,name)
+            if b'inlineXBRL' not in data and b'<ix:' not in data and b':nonFraction' not in data: continue
+            info={'path':name,'has_inline_xbrl_marker':True,'lei_match':cfg['lei'].encode() in data,
+                  'period_start_match':cfg['period_start'].encode() in data,'period_end_match':cfg['period_end'].encode() in data,
+                  'required_metric_matches':sum(q.encode() in data for q in cfg['required_metrics'])}
+            candidates.append(info)
+            if info['lei_match'] and info['period_start_match'] and info['period_end_match'] and info['required_metric_matches']>0:
+                selected.append(info)
+    diag['candidate_inline_xbrl_reports']=[c['path'] for c in candidates]
+    if len(selected)==1:
+        diag['locator_decision']=selected[0]['path']; diag['locator_reason']='single inline XBRL report matching BT LEI, FY26 period and required metric markers'
+        return {'report_path':selected[0]['path'],'diagnostics':diag,'candidates':candidates}
+    if not candidates:
+        diag['locator_reason']='no XHTML/HTML entry contained inline XBRL markers'
+        raise StructuredIngestionError('no inline XBRL report found in package', 'ixbrl_report_not_found', 'structured package recognition')
+    if not selected:
+        diag['locator_reason']='inline XBRL candidates did not match BT LEI, FY26 period and metric markers'
+        raise StructuredIngestionError('structured report locator failed', 'structured_report_locator_failed', 'structured package recognition')
+    diag['locator_reason']='multiple inline XBRL reports matched BT LEI, FY26 period and metric markers'
+    raise StructuredIngestionError('multiple inline XBRL reports remain ambiguous', 'multiple_ixbrl_reports_ambiguous', 'structured package recognition')
 def _contexts(root):
     out={}
     for c in root.iter(XBRLI_NS+'context'):
@@ -87,13 +193,11 @@ def _contexts(root):
     return out
 def extract_candidates(zip_path:Path,cfg:dict[str,Any],receipt:RetrievedPackage):
     
-    try: validate_archive(zip_path,cfg)
-    except zipfile.BadZipFile as exc: raise StructuredIngestionError(f'invalid ZIP package: {exc}', 'invalid_zip', 'structured package validation') from exc
+    validate_archive(zip_path,cfg)
+    location=locate_ixbrl_report(zip_path,cfg); report_path=location['report_path']
     candidates=[]; quarantine=[]; required=cfg['required_metrics']
     with zipfile.ZipFile(zip_path) as z:
-        docs=[n for n in z.namelist() if n.endswith(('.xhtml','.html'))]
-        if not docs: raise StructuredIngestionError('no inline XBRL document in package', 'structured_package_invalid', 'structured package validation')
-        root=ET.fromstring(z.read(docs[0]))
+        root=ET.fromstring(z.read(report_path))
     contexts=_contexts(root)
     for el in root.iter():
         qn=el.attrib.get('name') or ''
@@ -106,7 +210,7 @@ def extract_candidates(zip_path:Path,cfg:dict[str,Any],receipt:RetrievedPackage)
         elif ctx['dimensions']: reason='unsupported_dimension_or_segment'
         if reason: quarantine.append({'qname':qn,'context_ref':el.attrib.get('contextRef'),'reason':reason}); continue
         reported=Decimal(''.join(el.itertext()).strip().replace(',','')); metric=required[qn]
-        candidates.append({'metric_id':metric,'qname':qn,'context':ctx,'unit_ref':el.attrib.get('unitRef'),'decimals':el.attrib.get('decimals'),'precision':el.attrib.get('precision'),'reported_amount':str(reported),'reported_scale':'millions','normalised_amount':str(reported*Decimal(1000000)),'source_locator':f"{receipt.final_url}#{docs[0]}#{qn}:{ctx['context_id']}"})
+        candidates.append({'metric_id':metric,'qname':qn,'context':ctx,'unit_ref':el.attrib.get('unitRef'),'decimals':el.attrib.get('decimals'),'precision':el.attrib.get('precision'),'reported_amount':str(reported),'reported_scale':'millions','normalised_amount':str(reported*Decimal(1000000)),'source_locator':f"{receipt.final_url}#{report_path}#{qn}:{ctx['context_id']}"})
     return candidates, quarantine
 def _statement(metric, amount):
     labels={'revenue':'revenue','operating_profit':'operating profit','profit_before_tax':'profit before tax'}
@@ -117,13 +221,20 @@ def _snapshot():
 def _reload_ok(obs_ids, attrs):
     svc=ObservationMemoryService(); model=svc.models.get('bt-group-plc')
     return all(svc.observations.get(o) for o in obs_ids) and all(a in model.attributes for a in attrs)
-def _diagnostic(run_id,cfg,exc,receipt=None,candidate_count=0,canonical_count=0,adapter=False):
+def _diagnostic(run_id,cfg,exc,receipt=None,candidate_count=0,canonical_count=0,adapter=False,archive_diagnostics=None,selected_report_path=None):
     code=getattr(exc,'code','unexpected_runtime_error'); stage=getattr(exc,'stage','unexpected runtime error')
     url=(cfg or {}).get('artifact_url',''); parsed=urlparse(url) if url else None
-    return {'support_reference':'FI-'+run_id.removeprefix('fi-'),'enterprise_id':(cfg or {}).get('enterprise_id','bt-group-plc'),'reporting_period':(cfg or {}).get('reporting_period','FY26'),'execution_mode':'structured_standard_financials','source_configuration_status':'loaded' if cfg else 'missing','source_configuration_key':'bt-group-plc-fy26','source_kind':(cfg or {}).get('source_kind'),'artifact_host':parsed.hostname if parsed else None,'artifact_url':url or None,'artifact_resolution_status':'resolved' if url else 'missing','request_attempted': bool(receipt) or code not in {'source_configuration_missing','enterprise_identity_mismatch','reporting_period_mismatch','artifact_url_missing','host_not_allowed'},'http_status':getattr(receipt,'status_code',None),'redirect_chain':[],'final_host':urlparse(receipt.final_url).hostname if receipt else None,'content_type':getattr(receipt,'content_type',None),'reported_content_length':None,'bytes_downloaded':getattr(receipt,'size',0) if receipt else 0,'compressed_size_limit':int((cfg or {}).get('compressed_size_limit_bytes',0) or 0),'download_result':'succeeded' if receipt else 'failed','package_sha256':getattr(receipt,'sha256',None),'archive_validation_result':'passed' if adapter else ('not_attempted' if not receipt else 'failed'),'adapter_handoff_attempted':adapter,'adapter_result':'not_attempted' if not adapter else ('completed' if canonical_count else 'failed'),'candidate_fact_count':candidate_count,'canonical_fact_count':canonical_count,'failure_code':code,'failure_stage':stage,'safe_failure_message':'Structured financial source unavailable','timestamp':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'deployment_revision':os.getenv('RENDER_GIT_COMMIT') or os.getenv('RENDER_COMMIT') or os.getenv('GIT_COMMIT')}
+    archive_result='passed' if adapter or (receipt and code not in SAFETY_FAILURE_CODES and code not in {'invalid_zip'}) else ('not_attempted' if not receipt else 'failed')
+    diag={'support_reference':'FI-'+run_id.removeprefix('fi-'),'enterprise_id':(cfg or {}).get('enterprise_id','bt-group-plc'),'reporting_period':(cfg or {}).get('reporting_period','FY26'),'execution_mode':'structured_standard_financials','source_configuration_status':'loaded' if cfg else 'missing','source_configuration_key':'bt-group-plc-fy26','source_kind':(cfg or {}).get('source_kind'),'artifact_host':parsed.hostname if parsed else None,'artifact_url':url or None,'artifact_resolution_status':'resolved' if url else 'missing','request_attempted': bool(receipt) or code not in {'source_configuration_missing','enterprise_identity_mismatch','reporting_period_mismatch','artifact_url_missing','host_not_allowed'},'http_status':getattr(receipt,'status_code',None),'redirect_chain':[],'final_host':urlparse(receipt.final_url).hostname if receipt else None,'content_type':getattr(receipt,'content_type',None),'reported_content_length':None,'bytes_downloaded':getattr(receipt,'size',0) if receipt else 0,'compressed_size_limit':int((cfg or {}).get('compressed_size_limit_bytes',0) or 0),'download_result':'succeeded' if receipt else 'failed','package_sha256':getattr(receipt,'sha256',None),'archive_validation_result':archive_result,'selected_report_path':selected_report_path,'adapter_handoff_attempted':adapter,'adapter_result':'not_attempted' if not adapter else ('completed' if canonical_count else 'failed'),'candidate_fact_count':candidate_count,'canonical_fact_count':canonical_count,'failure_code':code,'failure_stage':stage,'safe_failure_message':'Structured financial source unavailable','timestamp':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'deployment_revision':os.getenv('RENDER_GIT_COMMIT') or os.getenv('RENDER_COMMIT') or os.getenv('GIT_COMMIT')}
+    if archive_diagnostics: diag['archive_diagnostics']=archive_diagnostics
+    return diag
 def _persist_diag(run_id,diag): atomic_write_json(data_path('ai_financial_reports','diagnostics',f'{run_id}.json'),diag); print('Flora structured diagnostic '+json.dumps(diag,sort_keys=True),flush=True)
 def _failure(run_id,before,exc,cfg=None,receipt=None):
-    diag=_diagnostic(run_id,cfg,exc,receipt); _persist_diag(run_id,diag)
+    archive_diag=None
+    if cfg and receipt:
+        try: archive_diag=inspect_archive(receipt.path,cfg)
+        except Exception: archive_diag=None
+    diag=_diagnostic(run_id,cfg,exc,receipt,archive_diagnostics=archive_diag); _persist_diag(run_id,diag)
     after=_snapshot(); run={'run_id':run_id,'created_at':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'status':'structured_source_unavailable','failure_category':'structured_source_unavailable','support_reference':'FI-'+run_id.removeprefix('fi-'),'failure_code':diag['failure_code'],'failure_stage':diag['failure_stage'],'user_message':'Structured financial source unavailable','user_message_display':'Structured financial source unavailable Support reference: FI-'+run_id.removeprefix('fi-')+' Failure stage: '+diag['failure_stage'],'structured_diagnostics':[diag],'provider_diagnostics':[diag],'exceptions':[{'exception_type':type(exc).__name__,'failure_stage':diag['failure_stage'],'failure_code':diag['failure_code'],'support_reference':'FI-'+run_id.removeprefix('fi-'),'user_message':'Structured financial source unavailable','rejection_reason':str(exc)}],'trusted_state_before':before,'trusted_state_after':after,'trusted_twin_changed':before.get('active_observation_count')!=after.get('active_observation_count') or before.get('active_enterprise_model_attribute_count')!=after.get('active_enterprise_model_attribute_count'),'ephemeral_state_absent_before_run':not before.get('state_existed_before_run'),'openai_calls_made':0,'ai_calls_made':0,'pdf_fallback_calls_made':0,'extraction_mode':'structured_standard_financials','provider_status':'not_executed','openai_invoked':False,'prohibited_path_counters':{'provider_calls':0,'pdf_section_selector_calls':0,'pdf_candidate_extractor_calls':0,'pdf_packet_calls':0},'usage':{'openai_calls':0},'collection':{'retrieved':False,'error':str(exc)},'run_status':{'structured_source':'unavailable','ai_calls_made':0,'pdf_fallback_calls_made':0}}
     atomic_write_json(data_path('ai_financial_reports','runs',f'{run_id}.json'),run); return run
 def ingest_bt_fy26(run_id:str)->dict[str,Any]:
@@ -140,7 +251,9 @@ def ingest_bt_fy26(run_id:str)->dict[str,Any]:
             if len(report.results)!=1 or report.rejected_claims: raise StructuredIngestionError(f"canonical validation failed for {c['metric_id']}: {report.rejected_claims}", 'adapter_handoff_failed', 'structured fact validation')
             result=report.results[0]; results.append(result.__dict__); evidence_ids.append(eid); observation_ids.append(result.observation_id); attrs.append(attr)
         after=_snapshot(); status={'structured_source':'available','ai_calls_made':0,'pdf_fallback_calls_made':0,'canonical_facts_accepted':3,'structured_evidence_records':3,'financial_observations':3,'enterprise_model_attributes':3,'trusted_twin_changed':before!=after,'persistent_state_verified_after_restart':_reload_ok(observation_ids,attrs)}
-        diag=_diagnostic(run_id,cfg,StructuredIngestionError('', 'none', 'completed'),receipt,len(candidates),3,True); _persist_diag(run_id,diag)
+        
+        loc=locate_ixbrl_report(receipt.path,cfg)
+        diag=_diagnostic(run_id,cfg,StructuredIngestionError('', 'none', 'completed'),receipt,len(candidates),3,True,loc['diagnostics'],loc['report_path']); _persist_diag(run_id,diag)
         run={'run_id':run_id,'status':'completed','support_reference':'FI-'+run_id.removeprefix('fi-'),'structured_diagnostics':[diag],'provider_diagnostics':[diag],'collection':{'retrieved':True,'sha256':receipt.sha256,'final_url':receipt.final_url,'document_size':receipt.size},'claims':candidates,'candidate_exceptions':quarantine,'applied_results':results,'evidence_ids':evidence_ids,'observation_ids':observation_ids,'enterprise_attributes_changed':attrs,'run_status':status,'trusted_state_before':before,'trusted_state_after':after,'trusted_twin_changed':status['trusted_twin_changed'],'openai_calls_made':0,'ai_calls_made':0,'pdf_fallback_calls_made':0,'extraction_mode':'structured_standard_financials','provider_status':'not_executed','openai_invoked':False,'prohibited_path_counters':{'provider_calls':0,'pdf_section_selector_calls':0,'pdf_candidate_extractor_calls':0,'pdf_packet_calls':0}}
         atomic_write_json(data_path('ai_financial_reports','runs',f'{run_id}.json'),run); return run
     except Exception as exc: return _failure(run_id,before,exc,cfg,receipt)
