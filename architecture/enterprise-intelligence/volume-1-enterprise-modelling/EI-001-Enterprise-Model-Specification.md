@@ -1,15 +1,15 @@
 # EI-001 — Enterprise Model Specification
 
-**Purpose:** Define the canonical enterprise object that CIOS builds and maintains for each monitored organisation.  
-**Status:** Draft  
-**Owner:** Rob / CIOS  
+**Purpose:** Define the canonical enterprise object that CIOS builds and maintains for each monitored organisation.
+**Status:** Draft
+**Owner:** Rob / CIOS
 **Last updated:** 2026-07-03
 
 ## Architectural position
 
 Enterprise Intelligence defines what CIOS knows about an enterprise. CIRM defines how CIOS reasons over evidence and signals. Flora is the first runtime implementation that combines both into operational intelligence.
 
-The Enterprise Model is the durable memory of CIOS. Evidence updates the model. Reports, briefs, hypotheses, recommendations and opportunity predictions are generated from the model.
+The Enterprise Model is the durable memory of CIOS. Accepted Evidence supports Observations; Observations update the model. Reports, briefs, hypotheses, recommendations and opportunity predictions are generated from the model as views or reasoning products.
 
 ## Purpose
 
@@ -333,7 +333,7 @@ The twin should support five questions:
 
 Every material model attribute must link to one or more evidence records or be labelled as inferred or human-supplied. Evidence lineage should retain source, publication date, observed date, collection date, affected attributes and whether the evidence creates, updates, weakens, contradicts or retires an attribute.
 
-Evidence should not be treated as the output. Evidence is the input that updates the Enterprise Model; the model is the durable memory used to generate outputs.
+Evidence should not be treated as the output. Evidence supports Observations that update the Enterprise Model; the model is the durable memory used to generate outputs.
 
 ## Confidence and freshness
 
@@ -373,3 +373,117 @@ Decay lowers confidence or actionability when attributes are not refreshed. Deca
 ## Relationship to other EI Volume 1 papers
 
 EI-001 defines the canonical Enterprise Model and Commercial Digital Twin. EI-002 defines the Enterprise Knowledge Graph that stores and connects model entities, attributes and evidence-backed relationships. EI-003 defines the Enterprise Behaviour Model that supplies behavioural scores and predictive tendencies used by Transformation Pressure, Transformation Inevitability and Opportunity Outlook.
+
+## Normative Annex — Financial Metric Data Contract
+
+**Status:** Normative for Financial Intelligence runtime implementation.
+**Owner:** EI-001 Enterprise Model Specification.
+**Date added:** 2026-07-05.
+**Authority:** This annex defines canonical Enterprise Model financial metric facts. EI-012 owns Observation lifecycle. ADR-010 owns structured-source-first acquisition. Runtime documents must map into this contract rather than inventing financial fields, state meanings or Enterprise Model paths.
+
+### Purpose
+
+A canonical financial metric fact is the governed domain fact that may support a financial Observation and update the Commercial Digital Twin. Provider output, extracted table rows and model responses are candidate data until they satisfy this contract and are accepted through governed validation.
+
+### Required fields
+
+A canonical financial metric fact MUST include, or explicitly mark unavailable where permitted by the field, the following fields:
+
+| Field | Requirement |
+| --- | --- |
+| `enterprise_id` | Canonical enterprise identifier for the monitored entity. |
+| `canonical_metric_id` | Stable metric identifier such as `revenue`, `adjusted_ebitda` or `operating_profit`. |
+| `metric_label` | Human-readable label preserved from the source or canonical metric catalogue. |
+| `reported_amount` | Numeric amount as reported before scale expansion. |
+| `currency` | ISO currency or explicitly reported currency label. |
+| `reported_scale` | Evidence-grounded scale: `units`, `thousands`, `millions` or `billions`. |
+| `normalised_amount` | Base-unit amount after applying `reported_scale`. |
+| `original_display_value` | Source display value, including symbols and suffixes where available. |
+| `precision` | Precision implied by the reported value, decimal places or exact source representation. |
+| `rounding_status` | `reported_exact`, `reported_rounded`, `derived_rounded` or `unknown_rounding`. |
+| `reporting_period` | Period label used for identity and display, such as `FY26`, `H1 FY26` or `Q1 FY26`. |
+| `period_start` / `period_end` | Start and end dates where available from the source or filing metadata. |
+| `scope` | Enterprise, group, segment, business unit or geography covered by the metric. |
+| `financial_measurement_state` | Domain state of the value: `actual`, `guidance`, `target`, `forecast` or `prior_period_comparator`. |
+| `accounting_basis` | Reporting basis: `statutory`, `adjusted`, `alternative_performance_measure` or `other_explicitly_reported_basis`. |
+| `source_identity` | Source document, API, filing, record or governed human source. |
+| `source_locator` | Page, table, row, record id, XBRL tag or equivalent locator. |
+| `supporting_evidence_lineage` | Evidence ids or lineage references supporting the fact. |
+| `confidence` | Belief in the canonical fact after validation and contradiction review. |
+| `freshness` | Current decision relevance based on reporting period, observed date and expected half-life. |
+| `observed_date` | Date CIOS observed or collected the evidence. |
+| `effective_date` | Date or period from which the value is effective, where available. |
+| `enterprise_model_attribute_path` | Canonical target path in the Enterprise Model. |
+
+### Financial scale
+
+`reported_scale` MUST be explicit and grounded in Evidence. Supported values are:
+
+- `units` — the reported amount is already in base currency units.
+- `thousands` — the reported amount is stated in thousands.
+- `millions` — the reported amount is stated in millions.
+- `billions` — the reported amount is stated in billions.
+
+A numeric value MUST NOT be accepted as canonical if scale is absent, contradictory or inferred solely from numerical magnitude. Scale may come from a table heading, note, axis label, source metadata, XBRL context, filing unit or unambiguous display suffix.
+
+Examples:
+
+| reported_amount | currency | reported_scale | normalised_amount | original_display_value |
+| ---: | --- | --- | ---: | --- |
+| 19.7 | GBP | billion | 19,700,000,000 | £19.7bn |
+| 19,654 | GBP | million | 19,654,000,000 | £19,654m |
+
+### Financial measurement state
+
+Financial measurement state is a property of the reported financial value, not an EI-012 Observation lifecycle state and not a freshness marker. The controlled vocabulary is:
+
+- `actual` — reported historical or current-period result.
+- `guidance` — management guidance or outlook.
+- `target` — stated objective, ambition or plan.
+- `forecast` — forecast estimate or projection.
+- `prior_period_comparator` — comparator value for an earlier period.
+
+`current` MUST NOT be used as a financial measurement state. Current, historical or stale relevance belongs to freshness, maturity, effective period and observation date.
+
+### Accounting basis
+
+Accounting basis is independent from measurement state. Supported values are:
+
+- `statutory` — prepared under the reported statutory accounting framework.
+- `adjusted` — adjusted by the enterprise from statutory results.
+- `alternative_performance_measure` — explicitly presented as an APM or non-GAAP equivalent.
+- `other_explicitly_reported_basis` — another basis named by the source.
+
+Example: adjusted EBITDA for FY26 may use `canonical_metric_id: adjusted_ebitda`, `financial_measurement_state: actual` and `accounting_basis: adjusted`.
+
+### Temporal relevance
+
+Temporal relevance MUST be represented through effective period, observed date, freshness, decay, maturity or half-life. It MUST NOT be overloaded into financial measurement state, accounting basis or EI-012 Observation lifecycle.
+
+### Canonical metric identity and deduplication
+
+Financial Observation identity MUST include at least:
+
+```text
+enterprise_id + canonical_metric_id + reporting_period + scope + accounting_basis + financial_measurement_state
+```
+
+Rounded and precise representations may support the same Observation when their normalised values are materially equivalent for the decision context. For example, `£19.7bn` and `£19,654m` may be corroborating representations of the same metric and period. CIOS MUST preserve both Evidence records, retain rounding and precision differences, and avoid duplicate Enterprise Model attributes.
+
+### Enterprise Model financial path
+
+The canonical Enterprise Model attribute path for financial metrics is:
+
+```text
+financial_performance.metrics.<canonical_metric_id>.<reporting_period>.<financial_measurement_state>
+```
+
+Segment meanings:
+
+- `financial_performance` — EI-001 domain that owns financial condition, trajectory and pressure.
+- `metrics` — canonical collection of governed financial metric facts.
+- `<canonical_metric_id>` — stable metric identifier.
+- `<reporting_period>` — period identity such as `FY26`, normalised consistently by the runtime.
+- `<financial_measurement_state>` — one of the controlled states above.
+
+Scope and accounting basis remain mandatory fields on the fact. Runtime implementations may index by scope or basis for query efficiency, but MUST NOT create a parallel canonical financial memory structure without updating EI-001 or creating an ADR.

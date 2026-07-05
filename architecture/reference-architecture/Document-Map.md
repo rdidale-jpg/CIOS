@@ -25,6 +25,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | ADR-003 | [CIRM and EI Separation](../decisions/ADR-003-CIRM-and-EI-Separation.md) | Separates reasoning process from enterprise knowledge model. | Accepted | `architecture/decisions/` | Clarifies CIRM, Enterprise Intelligence and Flora responsibilities. |
 | ADR-004 | [Human-Supplied Knowledge Must Be Labelled](../decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md) | Requires labelled, dated human-supplied knowledge. | Accepted | `architecture/decisions/` | Supports governance and provenance clarity. |
 | ADR-005 | [No Recommendation Without Inspectable Lineage](../decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md) | Requires inspectable lineage for strong recommendations. | Accepted | `architecture/decisions/` | Enforces trust, explainability and evidence lineage. |
+| ADR-010 | [Structured-Source-First, AI-Assisted Evidence Acquisition](../decisions/ADR-010-Structured-Source-First-AI-Assisted-Evidence-Acquisition.md) | Selects the governed acquisition hierarchy and treats provider output as candidate data. | Accepted | `architecture/decisions/` | Governs Financial Intelligence source acquisition and provider boundaries. |
 | ADR-006 | [Signal Architecture](../decisions/ADR-006-Signal-Architecture.md) | Migrated placeholder for future signal architecture review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
 | ADR-007 | [Transformation Thesis](../decisions/ADR-007-Transformation-Thesis.md) | Migrated placeholder for future transformation thesis review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
 | ADR-008 | [Recommendation Engine](../decisions/ADR-008-Recommendation-Engine.md) | Migrated placeholder for future recommendation engine review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
@@ -47,7 +48,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 
 | ID | Title | Purpose | Status | Folder | Relationship to Reference Architecture |
 | --- | --- | --- | --- | --- | --- |
-| EI-001 | Enterprise Model Specification | Defines the durable Enterprise Model. | Present | `architecture/enterprise-intelligence/volume-1-enterprise-modelling/` | Owns Commercial Digital Twin structure. |
+| EI-001 | Enterprise Model Specification | Defines the durable Enterprise Model and Financial Metric Data Contract. | Present | `architecture/enterprise-intelligence/volume-1-enterprise-modelling/` | Owns Commercial Digital Twin structure and canonical financial data. |
 | EI-002 | Enterprise Knowledge Graph | Defines graph entities, edges and relationship intelligence. | Present | `architecture/enterprise-intelligence/volume-1-enterprise-modelling/` | Owns Knowledge Graph Layer. |
 | EI-003 | Enterprise Behaviour Model | Defines enterprise behaviour patterns. | Present | `architecture/enterprise-intelligence/volume-1-enterprise-modelling/` | Supports Behaviour and Dynamics Layer. |
 | EI-004 | Commercial Reasoning Framework | Defines commercial reasoning over enterprise knowledge. | Present | `architecture/enterprise-intelligence/volume-2-commercial-intelligence/` | Connects Enterprise Intelligence to CIRM reasoning. |
@@ -58,7 +59,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | EI-009 | Transformation Pressure Model | Defines internal and external pressure. | Present | `architecture/enterprise-intelligence/volume-4-enterprise-dynamics/` | Owns Transformation Pressure. |
 | EI-010 | Enterprise Momentum Model | Defines direction and velocity of change. | Present | `architecture/enterprise-intelligence/volume-4-enterprise-dynamics/` | Owns Enterprise Momentum. |
 | EI-011 | Enterprise Economics Model | Defines enterprise economics and financial pressure. | Present | `architecture/enterprise-intelligence/volume-4-enterprise-dynamics/` | Owns economics in the Commercial Digital Twin. |
-| EI-012 | Enterprise Observation Model | Defines Observations as intelligence atoms. | Present | `architecture/enterprise-intelligence/volume-5-intelligence-foundations/` | Owns Observation Doctrine. |
+| EI-012 | Enterprise Observation Model | Defines Observations as intelligence atoms and owns Observation lifecycle state. | Present | `architecture/enterprise-intelligence/volume-5-intelligence-foundations/` | Owns Observation Doctrine and state-semantics separation. |
 | EI-013 | Enterprise Learning Model | Future paper for outcome learning and model improvement. | Future | `architecture/enterprise-intelligence/` | Will own Learning and Feedback Layer. |
 | EI-014 | Commercial Conversation Model | Future paper for commercial conversation and action interface. | Future | `architecture/enterprise-intelligence/` | Will own conversation-led recommendations. |
 | EI-015 | Enterprise Question Model | Future paper for questions as architecture objects. | Future | `architecture/enterprise-intelligence/` | Will own structured unknowns and question generation. |
@@ -71,7 +72,8 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | Flora | Flora v0.1 | Describes Flora application concept. | Present | `docs/Applications/` | Product surface for first CIOS runtime. |
 | Flora | Flora Live Evidence v0.1 | Describes live evidence capability. | Present | `docs/Applications/` | Implements parts of Source and Evidence Layer. |
 | Flora | Flora Pilot Workspace v0.3 | Describes pilot workspace experience. | Present | `docs/Applications/` | Runtime surface for evidence and research workflows. |
-| Flora | Flora Case Files | Describes case file organisation. | Present | `docs/Applications/` | Report/view layer over evidence and model state. |
+| Flora | Flora Case Files | Describes case file organisation. | Present | `docs/Applications/` | Workspace/product view over Evidence, Observations, Enterprise Model state and reasoning. |
+| Flora | [Flora Financial Intelligence Runtime Specification v0.1](../../docs/Architecture/Flora_Financial_Intelligence_Runtime_Specification_v0.1.md) | Defines operational Financial Intelligence behaviour for governed financial sources, candidate facts, Observations and Enterprise Model projection. | Working Draft | `docs/Architecture/` | Runtime capability over Source, Evidence, Observation and Enterprise Model layers; does not own EI-001 or EI-012 semantics. |
 | Flora | Flora Publisher v0.1 | Describes briefing/report generation. | Present | `docs/Applications/` | Publisher role for generated executive outputs. |
 | Flora | Flora Runtime Alignment Audit | Audits runtime alignment. | Present | `docs/Architecture/` | Compliance evidence for Flora vs architecture. |
 | Flora | Flora Product Maturity Review | Reviews Flora product maturity. | Present | `docs/Architecture/` | Connects runtime maturity to architecture maturity. |
@@ -92,6 +94,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 5. Use the [Glossary](Glossary.md) for terms.
 6. Read [Architecture Principles](Architecture-Principles.md).
 7. Read Founding Papers FP-003 to FP-009 to understand CIRM.
-8. Read Enterprise Intelligence papers EI-001 to EI-012 to understand the Commercial Digital Twin.
-9. Read relevant [ADRs](../decisions/README.md).
-10. Read runtime architecture documents before changing Flora, Newton, Observatory or Publisher behaviour.
+8. Read Enterprise Intelligence papers EI-001 to EI-012 to understand the Commercial Digital Twin; EI-001 owns financial metric data and EI-012 owns Observation lifecycle.
+9. For Financial Intelligence, read ADR-010 and the Flora Financial Intelligence Runtime Specification.
+10. Read relevant [ADRs](../decisions/README.md).
+11. Read runtime architecture documents before changing Flora, Newton, Observatory or Publisher behaviour.

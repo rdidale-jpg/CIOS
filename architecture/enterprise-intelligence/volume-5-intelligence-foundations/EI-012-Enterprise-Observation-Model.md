@@ -1,8 +1,8 @@
 # EI-012 — Enterprise Observation Model
 
-**Purpose:** Define the Observation as the atomic unit of Enterprise Intelligence.  
-**Status:** Draft  
-**Owner:** Rob / CIOS  
+**Purpose:** Define the Observation as the atomic unit of Enterprise Intelligence.
+**Status:** Draft
+**Owner:** Rob / CIOS
 **Last updated:** 2026-07-03
 
 ## Architectural position
@@ -959,3 +959,34 @@ Commercial reasoning interprets observations.
 Executive decisions are informed by commercial reasoning.
 
 Every capability within CIOS ultimately exists to detect, understand or exploit meaningful enterprise change.
+
+## Normative Clarification — Observation State Semantics for Financial Intelligence
+
+**Status:** Normative clarification.
+**Owner:** EI-012 Enterprise Observation Model.
+**Date added:** 2026-07-05.
+**Authority:** EI-012 owns Observation lifecycle semantics. EI-001 owns financial metric fact structure and Enterprise Model paths. ADR-010 owns structured-source-first acquisition.
+
+### Separate state concepts
+
+CIOS MUST keep the following concepts separate:
+
+- **Observation lifecycle:** how an Observation progresses through validation, corroboration, strengthening, weakening, contradiction, retirement and archival. The EI-012 lifecycle remains `Detected`, `Validated`, `Corroborated`, `Strengthened`, `Weakened`, `Contradicted`, `Retired` and `Archived`.
+- **Observation maturity:** how settled or historically established the Observation is in enterprise memory. Maturity can describe whether a fact is newly observed, repeatedly established, historical or dormant without changing lifecycle meaning.
+- **Confidence:** how strongly CIOS believes the Observation is true after considering Evidence quality, corroboration, contradiction and validation.
+- **Freshness and temporal relevance:** how current and decision-relevant the Observation remains based on effective period, observed date, half-life, decay and business context.
+- **Domain measurement state:** a property owned by the observed domain fact, such as a financial value being `actual`, `guidance`, `target`, `forecast` or `prior_period_comparator`.
+- **Accounting basis:** a property of how a financial metric was reported, such as `statutory`, `adjusted`, `alternative_performance_measure` or another explicitly reported basis.
+
+`current` is not an EI-012 Observation lifecycle state. A financial metric's measurement state MUST NOT be placed into the Observation lifecycle field. Freshness MUST NOT be placed into a domain measurement-state field. Accounting basis MUST NOT be confused with measurement state.
+
+### Worked financial example
+
+- **Evidence:** BT annual report page reference for the disclosed metric.
+- **Financial fact:** Adjusted EBITDA, FY26, £8.2bn, measurement state `actual`, accounting basis `adjusted`.
+- **Observation:** BT Group reported FY26 adjusted EBITDA of £8.2bn.
+- **Observation lifecycle:** `Validated`.
+- **Freshness:** current according to its reporting period, observed date and applicable financial-reporting half-life.
+- **Enterprise Model attribute:** `financial_performance.metrics.adjusted_ebitda.FY26.actual`.
+
+This example is illustrative, not a hard-coded runtime fixture. It shows that financial fact state, accounting basis, freshness and Observation lifecycle are different fields even when a product view renders them together.
