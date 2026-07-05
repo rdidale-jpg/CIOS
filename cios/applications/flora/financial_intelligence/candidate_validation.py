@@ -15,20 +15,27 @@ def populated_value_fields(candidate: dict[str, Any]) -> list[str]:
 
 def _safe_candidate(candidate: Any) -> Any:
     if not isinstance(candidate, dict): return candidate
-    allowed = {'fact_id','claim_type','predicate','object_type','value','value_kind','numeric_value','text_value','date_value','boolean_value','value_text','value_number','value_date','value_boolean','scale','unit','currency','business_unit','period_label','period_start','period_end','state','source_document_id','source_page_start','source_page_end','source_excerpt','extraction_confidence','explicit_in_source','extractor_provider','extractor_model','extractor_version','canonical_enterprise_id','subject_type','subject_name','subject_id'}
+    allowed = {'packet_page_number','original_pdf_page_number','fact_id','claim_type','predicate','object_type','value','value_kind','numeric_value','text_value','date_value','boolean_value','value_text','value_number','value_date','value_boolean','scale','unit','currency','business_unit','period_label','period_start','period_end','state','source_document_id','source_page_start','source_page_end','source_excerpt','extraction_confidence','explicit_in_source','extractor_provider','extractor_model','extractor_version','canonical_enterprise_id','subject_type','subject_name','subject_id'}
     return {k:v for k,v in candidate.items() if k in allowed}
 
-def validation_exception(candidate: Any, exc: Exception, *, packet_id: str|None, candidate_index: int, provider: str, model: str, request_id: str|None=None) -> dict[str, Any]:
+def validation_exception(candidate: Any, exc: Exception, *, packet_id: str|None, candidate_index: int, provider: str, model: str, request_id: str|None=None, rule: str|None=None, repair_possible: bool=False) -> dict[str, Any]:
     cand = candidate if isinstance(candidate, dict) else {}
     return {
         'exception_type':'candidate_fact_validation_failed',
         'packet_id': packet_id,
-        'original_page_reference': cand.get('source_page_start') or cand.get('page_reference'),
+        'returned_page_reference': cand.get('packet_page_number') or cand.get('source_page_start') or cand.get('page_reference'),
+        'original_page_reference': cand.get('original_pdf_page_number') or cand.get('source_page_start') or cand.get('page_reference'),
         'candidate_index': candidate_index,
         'fact_id': cand.get('fact_id'),
-        'support_reference': cand.get('source_excerpt'),
+        'support_reference': request_id or packet_id,
+        'supporting_excerpt_length': len(cand.get('source_excerpt') or ''),
+        'metric_type': cand.get('claim_type') or cand.get('predicate'),
+        'value_kind': cand.get('value_kind') or ((cand.get('value') or {}).get('kind') if isinstance(cand.get('value'), dict) else None),
         'populated_value_fields': populated_value_fields(cand),
         'validation_failure_category':'candidate_fact_validation_failed',
+        'validation_rule_failed': rule or str(exc).split('\n')[0][:180],
+        'validation_error_code': (rule or type(exc).__name__),
+        'deterministic_repair_possible': repair_possible,
         'safe_explanation': str(exc).split('\n')[0][:500],
         'provider': provider,
         'model': model,
@@ -36,7 +43,7 @@ def validation_exception(candidate: Any, exc: Exception, *, packet_id: str|None,
         'machine_candidate': _safe_candidate(candidate),
     }
 
-def parse_foundation_fact_candidates(output: str, *, packet_id: str|None, provider: str, model: str, request_id: str|None=None) -> tuple[FoundationFactSet, list[dict[str, Any]], str]:
+def parse_foundation_fact_candidates(output: str, *, packet_id: str|None, provider: str, model: str, request_id: str|None=None, packet_page_map: dict[int, int] | None=None) -> tuple[FoundationFactSet, list[dict[str, Any]], str]:
     try:
         envelope = json.loads(output or '{}')
     except json.JSONDecodeError as exc:
@@ -48,13 +55,21 @@ def parse_foundation_fact_candidates(output: str, *, packet_id: str|None, provid
     valid=[]; exceptions=[]
     for idx, candidate in enumerate(envelope['facts']):
         try:
+            if isinstance(candidate, dict) and packet_page_map:
+                pkt = candidate.get('packet_page_number') or candidate.get('source_page_start')
+                try: pkt_int = int(pkt)
+                except Exception: pkt_int = 0
+                if pkt_int in packet_page_map:
+                    candidate = dict(candidate); candidate['packet_page_number'] = pkt_int; candidate['original_pdf_page_number'] = packet_page_map[pkt_int]; candidate['source_page_start'] = packet_page_map[pkt_int]; candidate['source_page_end'] = packet_page_map.get(int(candidate.get('source_page_end') or pkt_int), packet_page_map[pkt_int])
+                else:
+                    raise ValueError('packet_page_out_of_range')
             if isinstance(candidate, dict) and 'value_kind' in candidate:
                 valid.append(ProviderFoundationFact.model_validate(candidate).to_canonical())
             else:
                 valid.append(FoundationFact.model_validate(candidate))
         except ValidationError as exc:
-            exceptions.append(validation_exception(candidate, exc, packet_id=packet_id, candidate_index=idx, provider=provider, model=model, request_id=request_id))
+            exceptions.append(validation_exception(candidate, exc, packet_id=packet_id, candidate_index=idx, provider=provider, model=model, request_id=request_id, rule=str(exc).split('\n')[0][:180], repair_possible=False))
         except ValueError as exc:
-            exceptions.append(validation_exception(candidate, exc, packet_id=packet_id, candidate_index=idx, provider=provider, model=model, request_id=request_id))
-    status = 'completed_with_exceptions' if valid and exceptions else ('completed' if valid or not exceptions else 'provider_response_invalid')
+            exceptions.append(validation_exception(candidate, exc, packet_id=packet_id, candidate_index=idx, provider=provider, model=model, request_id=request_id, rule=str(exc).split('\n')[0][:180], repair_possible=False))
+    status = 'completed_with_exceptions' if valid and exceptions else ('completed' if valid or not exceptions else ('candidate_validation_failed' if packet_page_map else 'provider_response_invalid'))
     return FoundationFactSet(facts=valid), exceptions, status

@@ -98,6 +98,7 @@ class FoundationFact(BaseModel):
     period_label:str|None=None; period_start:str|None=None; period_end:str|None=None
     state:FactState
     source_document_id:str; source_page_start:int=Field(ge=1); source_page_end:int=Field(ge=1); source_excerpt:str=Field(min_length=1,max_length=420)
+    packet_page_number:int|None=None; original_pdf_page_number:int|None=None
     extraction_confidence:float=Field(ge=0,le=1); explicit_in_source:bool
     extractor_provider:str; extractor_model:str; extractor_version:str
 
@@ -158,6 +159,7 @@ class ProviderFoundationFact(BaseModel):
     period_label:str|None=None; period_start:str|None=None; period_end:str|None=None
     state:FactState
     source_document_id:str; source_page_start:int=Field(ge=1); source_page_end:int=Field(ge=1); source_excerpt:str=Field(min_length=1,max_length=420)
+    packet_page_number:int|None=None; original_pdf_page_number:int|None=None
     extraction_confidence:float=Field(ge=0,le=1); explicit_in_source:bool
     extractor_provider:str; extractor_model:str; extractor_version:str
 
