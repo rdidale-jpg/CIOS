@@ -75,7 +75,7 @@ def test_ai_financial_report_review_applies_accepted_claim(monkeypatch, tmp_path
     assert applied['applied_results']
     assert ObservationRepository().list()
     model = EnterpriseModelRepository().get('bt-group-plc')
-    assert 'financial_performance.metrics.reported_revenue.FY26.group.actual' in model.attributes
+    assert 'financial_performance.metrics.revenue.FY26.actual' in model.attributes
 
 
 def test_review_page_exposes_accept_amend_reject(monkeypatch, tmp_path):

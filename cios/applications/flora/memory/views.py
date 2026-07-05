@@ -57,7 +57,18 @@ def factual_digital_twin_workspace(enterprise_id: str, models: EnterpriseModelRe
             page=ev.get('page_number') or ev.get('page_range') or 'unknown page'
             ev_pages.append(f"{escape(eid)} page {escape(str(page))}")
         attr_rows.append(f"<tr><th>{escape(key)}</th><td>{escape(str(attr.current_value))}</td><td>{escape(attr.freshness)}</td><td>{attr.confidence}</td><td>{escape(attr.last_observed_date)}</td><td>{escape(', '.join(attr.observation_ids))}</td><td>{escape('; '.join(ev_pages) or ', '.join(attr.evidence_ids))}</td><td>{escape(str(attr.prior_values))}</td></tr>")
+    def _business_financial_row(key: str, attr) -> str:
+        parts = key.split('.')
+        metric = parts[2].replace('_', ' ').title().replace('Ebitda', 'EBITDA') if len(parts) > 2 else key
+        period = parts[3] if len(parts) > 3 else 'reported period'
+        state = parts[4] if len(parts) > 4 else 'actual'
+        return f"<tr><th>{escape(metric)}</th><td>{escape(str(attr.current_value))}</td><td>{escape(period)}</td><td>{escape(state)}</td><td>{escape(attr.freshness)}</td><td>{attr.confidence}</td><td>{escape(', '.join(attr.observation_ids))}</td><td>{escape(', '.join(attr.evidence_ids))}</td></tr>"
+
     def domain_panel(title: str, prefix: str) -> str:
+        if prefix == 'financial_performance.':
+            rows = [_business_financial_row(k, model.attributes[k]) for k in sorted(model.attributes) if k.startswith(prefix)]
+            head = '<thead><tr><th>Metric</th><th>Value</th><th>Period</th><th>State</th><th>Freshness</th><th>Confidence</th><th>Observations</th><th>Evidence</th></tr></thead>'
+            return f"<section class='card'><h2>{escape(title)}</h2>{'<table>'+head+'<tbody>'+''.join(rows)+'</tbody></table>' if rows else '<p>Not yet established</p>'}</section>"
         rows = [r for k, r in zip(sorted(model.attributes), attr_rows) if k.startswith(prefix)]
         return f"<section class='card'><h2>{escape(title)}</h2>{'<table><tbody>'+''.join(rows)+'</tbody></table>' if rows else '<p>Not yet established</p>'}</section>"
     ev_rows=''.join(f"<tr><th>{escape(str(e.get('evidence_id')))}</th><td>{escape(str(e.get('source_name')))}</td><td>{escape(str(e.get('publisher')))}</td><td>{escape(str(e.get('source_url')))}</td><td>{escape(str(e.get('page_number') or e.get('page_range')))}</td><td>{escape(str(e.get('extracted_text') or e.get('snippet'))[:360])}</td><td>{escape(str(e.get('extraction_method')))}</td><td>{escape(str(e.get('document_checksum'))[:16])}</td></tr>" for e in evidence_items)
