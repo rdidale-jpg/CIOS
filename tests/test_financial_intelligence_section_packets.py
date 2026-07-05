@@ -88,3 +88,62 @@ def test_packet_results_are_merged_and_deduplicated(tmp_path: Path) -> None:
     run = ExtractionRun(run_id='r', route='x', provider='openai', model='gpt-5.4-nano', status='completed', started_at='x', completed_at='x', latency_seconds=0, facts=[fact, fact.model_copy(update={'fact_id':'f2'})])
     merged = merge_packet_facts([run], doc(tmp_path))
     assert len(merged.facts) == 1
+
+
+def test_generic_cover_pages_are_not_selected_without_financial_evidence() -> None:
+    pages = [DocumentPage(1, 'BT Group plc Annual Report 2026 company strategy performance')]
+    assert select_candidate_pages(pages) == []
+
+
+def test_empty_final_selection_fails_closed_without_openai(monkeypatch, tmp_path: Path) -> None:
+    import sys
+    class Boom:
+        def __init__(self, **kwargs: Any):
+            raise AssertionError('OpenAI must not be constructed when no packet exists')
+    monkeypatch.setitem(sys.modules, 'openai', type('OpenAIModule', (), {'OpenAI': Boom}))
+    pages = [DocumentPage(1, 'BT Group plc Annual Report 2026 company strategy performance')]
+    extraction, plan = SectionAwareOpenAIProvider(OpenAIDirectPDFProvider(model='gpt-5.4-nano', reasoning_effort='none', max_output_tokens=2000)).extract_packets(doc(tmp_path), pages, correlation_id='empty')
+    assert extraction.status == 'section_selection_failed'
+    assert extraction.facts == []
+    assert plan['packet_count'] == 0
+    assert plan['openai_calls'] == 0
+    assert extraction.candidate_exceptions[0]['user_message'] == 'Flora could not identify the financial sections in this report.'
+
+
+def test_empty_primary_selection_invokes_bounded_fallback() -> None:
+    from cios.applications.flora.financial_intelligence.section_packets import CanonicalPage, select_candidate_pages
+    pages = [
+        CanonicalPage(0, 1, None, 'Contents\nFinancial review 10\nOutlook 14', (), 39, 'DOC'),
+        CanonicalPage(1, 2, None, 'cover strategy company', (), 22, 'DOC'),
+        CanonicalPage(2, 3, None, 'Revenue £20bn adjusted EBITDA £8bn net debt £15bn', (), 54, 'DOC'),
+    ]
+    selected = select_candidate_pages(pages)
+    assert selected
+    assert selected[0].page_number == 3
+
+
+def test_page_numbers_preserved_through_packet_lineage() -> None:
+    pages = [DocumentPage(7, 'Financial highlights revenue £20bn adjusted EBITDA £8bn')]
+    selected = select_candidate_pages(pages)
+    packets = build_page_packets(selected)
+    assert packets[0].page_numbers == (7,)
+    assert 'ORIGINAL PDF PAGE 7' in packets[0].text
+
+
+def test_bt_golden_manifest_covers_at_least_three_financial_domains() -> None:
+    manifest = [
+        DocumentPage(5, 'Financial highlights revenue £20.4bn adjusted EBITDA £8.2bn'),
+        DocumentPage(42, 'Group financial review revenue operating profit capital expenditure'),
+        DocumentPage(47, 'Free cash flow and net debt £15bn cash flow statement'),
+        DocumentPage(55, 'Outlook guidance cost transformation savings programme'),
+    ]
+    selected = select_candidate_pages(manifest)
+    assert selected
+    text = ' '.join(p.text.casefold() for p in selected)
+    domains = [
+        any(t in text for t in ('financial highlights', 'group financial review')),
+        any(t in text for t in ('revenue', 'adjusted ebitda')),
+        any(t in text for t in ('cash flow', 'net debt')),
+        any(t in text for t in ('outlook', 'guidance', 'cost transformation')),
+    ]
+    assert sum(domains) >= 3
