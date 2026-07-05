@@ -35,7 +35,7 @@ def source_config()->dict[str,Any]:
     if not path.exists(): raise StructuredIngestionError(f'structured source configuration missing: {path}', 'source_configuration_missing', 'governed source configuration')
     cfg=json.loads(path.read_text())
     if cfg.get('enterprise_id')!='bt-group-plc': raise StructuredIngestionError('BT governed source not selected for canonical enterprise', 'enterprise_identity_mismatch', 'governed source configuration')
-    if cfg.get('source_kind')!='official_issuer_esef' or cfg.get('scope')!='group_consolidated': raise StructuredIngestionError('BT governed structured source not selected', 'source_configuration_not_selected', 'governed source configuration')
+    if cfg.get('source_kind') not in {'official_nsm_esef','official_issuer_esef'} or cfg.get('scope')!='group_consolidated': raise StructuredIngestionError('BT governed structured source not selected', 'source_configuration_not_selected', 'governed source configuration')
     if cfg.get('reporting_period')!='FY26' or cfg.get('period_start')!='2025-04-01' or cfg.get('period_end')!='2026-03-31': raise StructuredIngestionError('BT governed source period does not match FY26', 'reporting_period_mismatch', 'governed source configuration')
     if not cfg.get('artifact_url'): raise StructuredIngestionError('structured artifact URL missing', 'artifact_url_missing', 'governed source configuration')
     return cfg
@@ -48,7 +48,8 @@ def retrieve_package(cfg:dict[str,Any])->RetrievedPackage:
         try:
             with opener.open(Request(url,headers={'User-Agent':'Flora structured financial ingestion/1.0'}),timeout=30) as r, tmp.open('wb') as out:
                 content_type = r.headers.get('content-type')
-                if content_type and 'zip' not in content_type.lower() and 'octet-stream' not in content_type.lower(): raise StructuredIngestionError(f'content type rejected: {content_type}', 'content_type_rejected', 'official filing retrieval')
+                allowed_types = ('zip', 'octet-stream') if cfg.get('artifact_type', 'zip') == 'zip' else ('xhtml', 'html', 'xml', 'octet-stream')
+                if content_type and not any(t in content_type.lower() for t in allowed_types): raise StructuredIngestionError(f'content type rejected: {content_type}', 'content_type_rejected', 'official filing retrieval')
                 content_length = int(r.headers.get('content-length') or 0)
                 while True:
                     chunk=r.read(1024*1024)
