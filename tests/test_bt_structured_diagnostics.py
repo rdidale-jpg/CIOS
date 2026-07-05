@@ -170,3 +170,70 @@ def test_locator_ambiguous_and_unsupported_layout(tmp_path):
     with pytest.raises(bt.StructuredIngestionError) as exc:
         bt.locate_ixbrl_report(amb, cfg)
     assert exc.value.code == 'multiple_ixbrl_reports_ambiguous'
+
+
+def _ix_full(lei='213800LRO7NS5CYQMN21', start='2025-04-01', end='2026-03-31', facts=True):
+    fact = '<ix:nonFraction name="ifrs-full:Revenue" contextRef="c1" unitRef="GBP">1</ix:nonFraction>' if facts else ''
+    return f'''<html xmlns:ix="http://www.xbrl.org/2013/inlineXBRL" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <head><ix:header><ix:references><link:schemaRef xlink:href="bt-2026.xsd"/></ix:references></ix:header></head>
+    <body><xbrli:context id="c1"><xbrli:entity><xbrli:identifier>{lei}</xbrli:identifier></xbrli:entity><xbrli:period><xbrli:startDate>{start}</xbrli:startDate><xbrli:endDate>{end}</xbrli:endDate></xbrli:period></xbrli:context>
+    <ix:nonNumeric name="lei:LegalName" contextRef="c1">BT GROUP PLC</ix:nonNumeric>{fact}</body></html>'''
+
+
+def test_htm_case_insensitive_candidate_discovery_and_marker_validation(tmp_path):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    package = tmp_path / 'bt.zip'
+    with zipfile.ZipFile(package, 'w') as z:
+        z.writestr('ixbrl-viewer.HTM', _ix_full())
+    diag = bt.inspect_archive(package, cfg)
+    assert diag['candidate_xhtml_html'] == ['ixbrl-viewer.HTM']
+    located = bt.locate_ixbrl_report(package, cfg)
+    assert located['report_path'] == 'ixbrl-viewer.HTM'
+    selected = located['selected_candidate']
+    assert {'ix:header', 'ix:nonFraction', 'ix:nonNumeric', 'xbrli:context', 'schemaRef'}.issubset(set(selected['markers_found']))
+    assert selected['fact_count'] > 0
+    assert selected['identity_result'] == 'matched'
+    assert selected['period_result'] == 'matched'
+
+
+def test_ordinary_html_and_viewer_wrapper_without_inline_facts_rejected(tmp_path):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    package = tmp_path / 'ordinary.zip'
+    with zipfile.ZipFile(package, 'w') as z:
+        z.writestr('index.htm', '<html><body>BT GROUP PLC</body></html>')
+        z.writestr('viewer.html', '<html xmlns:ix="http://www.xbrl.org/2013/inlineXBRL"><body>viewer shell</body></html>')
+    with pytest.raises(bt.StructuredIngestionError) as exc:
+        bt.locate_ixbrl_report(package, cfg)
+    assert exc.value.code == 'ixbrl_report_not_found'
+
+
+@pytest.mark.parametrize('body', [_ix_full(lei='00000000000000000000'), _ix_full(start='2024-04-01', end='2025-03-31')])
+def test_identity_and_period_mismatch_rejected(tmp_path, body):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    package = tmp_path / 'mismatch.zip'
+    with zipfile.ZipFile(package, 'w') as z: z.writestr('ixbrl-viewer.htm', body)
+    with pytest.raises(bt.StructuredIngestionError) as exc:
+        bt.locate_ixbrl_report(package, cfg)
+    assert exc.value.code == 'structured_report_locator_failed'
+
+
+def test_taxonomy_linkbase_and_top_level_classification(tmp_path):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    package = tmp_path / 'classify.zip'
+    with zipfile.ZipFile(package, 'w') as z:
+        z.writestr('ixbrl-viewer.htm', _ix_full())
+        z.writestr('bt-2026.xsd', '<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>')
+        z.writestr('bt-2026_pre.xml', '<link:linkbase xmlns:link="http://www.xbrl.org/2003/linkbase"/>')
+        z.writestr('bt-2026_def.xml', '<link:linkbase xmlns:link="http://www.xbrl.org/2003/linkbase"/>')
+        z.writestr('bt-2026_lab-en.xml', '<link:linkbase xmlns:link="http://www.xbrl.org/2003/linkbase"/>')
+        z.writestr('bt-2026_cal.xml', '<link:linkbase xmlns:link="http://www.xbrl.org/2003/linkbase"/>')
+        z.writestr('META-INF/catalog.xml', '<catalog/>')
+        z.writestr('META-INF/taxonomyPackage.xml', '<tp/>')
+    diag = bt.inspect_archive(package, cfg)
+    assert 'META-INF' in diag['top_level_directories']
+    assert 'ixbrl-viewer.htm' in diag['top_level_files']
+    assert diag['standalone_xbrl_instances'] == []
+    assert 'bt-2026.xsd' in diag['extension_schemas']
+    assert {'bt-2026_pre.xml','bt-2026_def.xml','bt-2026_lab-en.xml','bt-2026_cal.xml'} == set(diag['linkbases'])
+    assert diag['catalog_metadata'] == ['META-INF/catalog.xml']
+    assert diag['taxonomy_package_metadata'] == ['META-INF/taxonomyPackage.xml']
