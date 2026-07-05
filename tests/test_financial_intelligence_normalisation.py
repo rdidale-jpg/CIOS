@@ -31,7 +31,7 @@ def test_scale_is_retained_and_missing_scale_blocks_acceptance():
     ok, reasons = canonicalise_financial_claim(base_claim())
     assert ok['reported_scale'] == 'billions'
     assert ok['normalised_amount'] == 19700000000
-    missing, reasons = canonicalise_financial_claim(base_claim(reported_scale=None, unit=None))
+    missing, reasons = canonicalise_financial_claim(base_claim(reported_scale=None, unit=None, source_excerpt='Revenue was 19.7 GBP.', original_statement='BT Group plc Revenue 19.7 GBP for FY26.'))
     assert 'financial_scale_ambiguous' in reasons
     acceptable, reason = document_review._is_auto_acceptable(missing, run_for([missing]))
     assert acceptable is False
@@ -46,9 +46,9 @@ def test_duplicate_financial_metrics_are_reconciled_and_counts_balance(monkeypat
     counts = run['candidate_lifecycle_counts']
     assert counts['valid_candidates'] == counts['automatically_accepted_candidates'] + counts['deduplicated_candidates'] + counts['candidates_rejected_by_policy']
     assert counts['deduplicated_candidates'] == 1
-    assert run['applied_results'][0]['affected_attribute'] == 'financial_performance.metrics.revenue.FY26.group.actual'
+    assert run['applied_results'][0]['affected_attribute'] == 'financial_performance.metrics.revenue.FY26.actual'
     model = EnterpriseModelRepository(tmp_path / 'models').get('bt-group-plc')
-    attr = model.attributes['financial_performance.metrics.revenue.FY26.group.actual']
+    attr = model.attributes['financial_performance.metrics.revenue.FY26.actual']
     assert attr.current_value is not None
 
 
@@ -59,17 +59,39 @@ def test_accounting_bases_remain_distinct(monkeypatch, tmp_path):
     adjusted = base_claim(claim_id='c2', evidence_id='ev2', predicate='Operating profit adjusted', reported_amount=2, value=2)
     run = document_review._apply_automatic_claims(run_for([statutory, adjusted]))
     attrs = EnterpriseModelRepository(tmp_path / 'models').get('bt-group-plc').attributes
-    assert 'financial_performance.metrics.operating_profit_statutory.FY26.group.statutory' in attrs
-    assert 'financial_performance.metrics.operating_profit_adjusted.FY26.group.adjusted' in attrs
+    assert 'financial_performance.metrics.operating_profit_statutory.FY26.actual' in attrs
+    assert 'financial_performance.metrics.operating_profit_adjusted.FY26.actual' in attrs
     assert run['deduplicated_count'] == 0
 
 
 def test_completed_with_exceptions_language_and_reprocess_without_openai(monkeypatch, tmp_path):
     svc = ObservationMemoryService(ObservationRepository(tmp_path / 'obs.jsonl'), EnterpriseModelRepository(tmp_path / 'models'))
     monkeypatch.setattr(document_review, 'ObservationMemoryService', lambda: svc)
-    run = document_review._apply_automatic_claims(run_for([base_claim(), base_claim(claim_id='bad', evidence_id='evb', predicate='Adjusted EBITDA', reported_scale=None)]))
+    run = document_review._apply_automatic_claims(run_for([base_claim(), base_claim(claim_id='bad', evidence_id='evb', predicate='Adjusted EBITDA', reported_scale=None, source_excerpt='Adjusted EBITDA was 8.2 GBP.', original_statement='Adjusted EBITDA 8.2 GBP')]))
     html = document_review._outcome_summary(run)
     assert run['status'] == 'completed_with_exceptions'
     assert 'Financial intelligence was updated. Some extracted facts require attention.' in html
     assert 'Retry</button>' not in html
     assert 'Revenue: £19.7bn' in html
+
+
+def test_route_level_golden_financial_twin_without_openai(monkeypatch, tmp_path):
+    """Stored provider-candidate fixture reaches canonical fact, Validated Observation, model and readable twin view."""
+    from cios.applications.flora.memory.views import factual_digital_twin_workspace
+
+    svc = ObservationMemoryService(ObservationRepository(tmp_path / 'obs.jsonl'), EnterpriseModelRepository(tmp_path / 'models'))
+    monkeypatch.setattr(document_review, 'ObservationMemoryService', lambda: svc)
+    run = document_review._apply_automatic_claims(run_for([base_claim()]))
+
+    assert run['openai_invoked'] is False if 'openai_invoked' in run else True
+    assert run['claims'][0]['canonical_financial_fact']['enterprise_model_attribute_path'] == 'financial_performance.metrics.revenue.FY26.actual'
+    assert run['claims'][0]['canonical_financial_fact']['financial_measurement_state'] == 'actual'
+    assert run['claims'][0]['canonical_financial_fact']['reported_scale'] == 'billions'
+    obs = ObservationRepository(tmp_path / 'obs.jsonl').list()[0]
+    assert obs.lifecycle_state == 'Validated'
+    model = EnterpriseModelRepository(tmp_path / 'models').get('bt-group-plc')
+    assert model.attributes['financial_performance.metrics.revenue.FY26.actual'].current_value
+    twin_html = factual_digital_twin_workspace('bt-group-plc', EnterpriseModelRepository(tmp_path / 'models'), ObservationRepository(tmp_path / 'obs.jsonl'))
+    assert 'Revenue' in twin_html
+    assert '£19.7bn' in twin_html
+    assert obs.observation_id in twin_html

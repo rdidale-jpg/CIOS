@@ -192,8 +192,8 @@ def _write_json(path: Path, data: dict[str, Any]) -> None:
 
 def _run_path(run_id: str) -> Path: return _run_dir() / f'{run_id}.json'
 
-TERMINAL_RUN_STATES = {'completed','completed_with_exceptions','failed','candidate_validation_failed','provider_request_failed','provider_response_invalid','provider_response_incomplete','output_token_limit_reached','section_selection_failed','persistence_failed'}
-PROGRESS_ORDER = {'queued':0,'retrieving_source':8,'reading_document':18,'checking_document_quality':18,'selecting_sections':30,'preparing_packets':42,'estimating_cost':52,'analysing':68,'validating':82,'updating_memory':92,'completed':100,'completed_with_exceptions':100,'failed':100,'candidate_validation_failed':100,'provider_request_failed':100,'provider_response_incomplete':100,'output_token_limit_reached':100,'source_retrieval_failed':100,'source_not_pdf':100,'section_selection_failed':100,'persistence_failed':100}
+TERMINAL_RUN_STATES = {'completed','completed_with_exceptions','completed_with_no_accepted_intelligence','failed','candidate_validation_failed','provider_request_failed','provider_response_invalid','provider_response_incomplete','output_token_limit_reached','section_selection_failed','persistence_failed'}
+PROGRESS_ORDER = {'queued':0,'retrieving_source':8,'reading_document':18,'checking_document_quality':18,'selecting_sections':30,'preparing_packets':42,'estimating_cost':52,'analysing':68,'validating':82,'updating_memory':92,'completed':100,'completed_with_exceptions':100,'completed_with_no_accepted_intelligence':100,'failed':100,'candidate_validation_failed':100,'provider_request_failed':100,'provider_response_incomplete':100,'output_token_limit_reached':100,'source_retrieval_failed':100,'source_not_pdf':100,'section_selection_failed':100,'persistence_failed':100}
 ACTIVE_RUN_STATES = {'queued','retrieving_source','reading_document','checking_document_quality','selecting_sections','preparing_packets','estimating_cost','analysing','validating','updating_memory'}
 
 def _normalise_terminal_status(status: str) -> str:
@@ -240,7 +240,9 @@ def fact_to_review_claim(fact: FoundationFact, run_id: str) -> dict[str, Any]:
         'currency': fact.currency,
         'business_unit': fact.business_unit or fact.subject_name,
         'period': fact.period_label,
-        'state': str(fact.state),
+        'state': _financial_state_from_fact(fact),
+        'period_start': fact.period_start,
+        'period_end': fact.period_end,
         'confidence': int(round(fact.extraction_confidence * 100)),
         'page_reference': str(fact.source_page_start) if fact.source_page_start == fact.source_page_end else f'{fact.source_page_start}-{fact.source_page_end}',
         'source_excerpt': fact.source_excerpt,
@@ -256,13 +258,23 @@ def _memory_claim_type(claim_type: str) -> str:
     return claim_type
 
 
+def _financial_state_from_fact(f: FoundationFact) -> str:
+    text = f'{f.claim_type} {f.predicate} {f.source_excerpt} {f.period_label}'.casefold()
+    if str(f.claim_type) == 'financial_guidance_stated' or 'guidance' in text or 'outlook' in text:
+        return 'guidance'
+    if str(f.claim_type) == 'financial_target_stated' or 'target' in text:
+        return 'target'
+    if str(f.state) == 'actual' or (str(f.state) in {'current','historical'} and any(w in text for w in ('reported','annual report','results','financial highlights','year ended','fy'))):
+        return 'actual'
+    return str(f.state)
+
 def _affected_attribute(f: FoundationFact) -> str:
     ct = str(f.claim_type)
     period = (f.period_label or 'reported_period').replace(' ', '_')
     pred = hashlib.sha256(f'{f.subject_name}:{f.predicate}:{f.business_unit}:{f.value_text}:{f.value_number}'.encode()).hexdigest()[:10]
     if 'financial_' in ct:
         metric = (f.predicate or f.object_type or 'metric').casefold().replace(' ', '_')
-        return f'financial_performance.metrics.{metric}.{period}.{f.state}'
+        return f'financial_performance.metrics.{metric}.{period}.{_financial_state_from_fact(f)}'
     if ct == 'business_unit_disclosed': return f'structure.units.{f.subject_name}'
     if ct == 'strategic_pillar_stated': return f'strategy.pillars.{f.value_text or f.subject_name}'
     if ct == 'strategic_commitment_stated': return f'strategy.commitments.{pred}'
@@ -279,14 +291,20 @@ def _statement(f: FoundationFact) -> str:
     bu = f' in {f.business_unit}' if f.business_unit else ''
     return f'{f.subject_name}{bu} {f.predicate}{value_part}{scale}{curr}{period}.'.replace('  ', ' ')
 
+def _canonical_financial_statement(claim: dict[str, Any]) -> str:
+    if claim.get('claim_type') == 'financial_metric_reported' and claim.get('display_value') and claim.get('metric_identity') and claim.get('period'):
+        metric = str(claim.get('metric_identity')).replace('_', ' ')
+        return f"BT Group plc reported {metric} of {claim.get('display_value')} for {claim.get('period')}."
+    return claim.get('amended_statement') or claim.get('original_statement') or ''
+
 def claim_to_evidence(run: dict[str, Any], claim: dict[str, Any]) -> dict[str, Any]:
     claim, _ = canonicalise_financial_claim(claim)
     return {
         'evidence_id': claim['evidence_id'], 'enterprise_id': claim['canonical_enterprise_id'], 'canonical_enterprise_id': claim['canonical_enterprise_id'],
         'organisation': claim['canonical_enterprise_id'], 'source_id': run['document']['document_id'], 'source_name': run['document']['title'],
         'source_type': 'annual_report', 'source_url': run['document']['source_url'], 'evidence_tier': 'tier_1_company',
-        'commercial_condition': claim['claim_type'], 'cleaned_observation': claim.get('amended_statement') or claim['original_statement'],
-        'extracted_observation': claim.get('amended_statement') or claim['original_statement'], 'snippet': claim.get('source_excerpt') or '',
+        'commercial_condition': claim['claim_type'], 'cleaned_observation': _canonical_financial_statement(claim),
+        'extracted_observation': _canonical_financial_statement(claim), 'snippet': claim.get('source_excerpt') or '',
         'affected_attribute': claim['affected_attribute'], 'value': claim.get('display_value') or claim.get('value'), 'reported_amount': claim.get('reported_amount'), 'reported_scale': claim.get('reported_scale'), 'normalised_amount': claim.get('normalised_amount'), 'display_value': claim.get('display_value'), 'metric_identity': claim.get('metric_identity'), 'enterprise_scope': claim.get('enterprise_scope'), 'accounting_basis': claim.get('accounting_basis'), 'unit': claim.get('unit'), 'currency': claim.get('currency'),
         'period': claim.get('period'), 'state': claim.get('state', 'actual'), 'confidence': claim.get('confidence', 80),
         'page_range': claim.get('page_reference'), 'page_number': claim.get('page_reference'), 'publication_date': run['document'].get('publication_date'),
@@ -375,13 +393,17 @@ def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
     svc = ObservationMemoryService(); results=[]; exceptions=[]; accepted=0
     seen_financial = set()
     deduplicated = 0
+    strengthened = 0
+    dispositions = []
     for i, claim in enumerate(run.get('claims', [])):
         canonical, canon_reasons = canonicalise_financial_claim(claim)
         run['claims'][i] = claim = canonical
         identity = claim.get('canonical_observation_identity')
         if identity and identity in seen_financial:
             claim['review_state'] = 'deduplicated'
+            claim['disposition'] = 'deduplicated'
             claim['acceptance_reason'] = 'deduplicated into canonical financial Observation'
+            dispositions.append({'candidate_id': claim.get('claim_id'), 'disposition': 'deduplicated', 'reason': claim['acceptance_reason'], 'enterprise_model_path': claim.get('affected_attribute')})
             deduplicated += 1
             continue
         if identity: seen_financial.add(identity)
@@ -390,21 +412,31 @@ def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
         claim['acceptance_reason'] = reason
         if not ok:
             claim['review_state'] = 'needs_attention'
+            claim['disposition'] = reason if reason in {'financial_scale_ambiguous','measurement_state_ambiguous','accounting_basis_ambiguous','invalid_lineage','unsupported_metric'} else 'quarantined'
             claim['exception_type'] = reason
+            dispositions.append({'candidate_id': claim.get('claim_id'), 'disposition': claim['disposition'], 'reason': reason, 'enterprise_model_path': claim.get('affected_attribute')})
             exceptions.append(claim)
             continue
         report = svc.process_evidence(claim_to_evidence(run, claim))
         results.extend(({**r.__dict__, 'update_result': r.action}) for r in report.results)
         if report.results and not any(r.contradiction for r in report.results):
             claim['review_state'] = 'auto_applied'
+            claim['disposition'] = 'accepted'
             accepted += 1
+            strengthened += len([r for r in report.results if r.action not in {'created'}])
+            dispositions.append({'candidate_id': claim.get('claim_id'), 'disposition': 'accepted', 'reason': reason, 'canonical_fact_id': claim.get('canonical_observation_identity'), 'observation_id': report.results[0].observation_id if report.results else None, 'enterprise_model_path': claim.get('affected_attribute')})
         else:
             claim['review_state'] = 'needs_attention'
+            claim['disposition'] = 'quarantined'
             claim['exception_type'] = 'contradiction or validation issue'
+            dispositions.append({'candidate_id': claim.get('claim_id'), 'disposition': 'quarantined', 'reason': claim['exception_type'], 'enterprise_model_path': claim.get('affected_attribute')})
             exceptions.append(claim)
         exceptions.extend(report.rejected_claims)
     changed = [r for r in results if r.get('update_result') in {'created', 'updated'}]
-    run.update({'status': 'completed_with_exceptions' if exceptions else 'completed', 'applied_at': now_iso(), 'applied_results': results, 'exceptions': exceptions, 'auto_accepted_count': accepted, 'exception_count': len(exceptions), 'observations_created_or_strengthened': len(results), 'deduplicated_count': deduplicated, 'rejected_by_policy_count': len(exceptions), 'candidate_lifecycle_counts': {'candidates_returned': len(run.get('claims', [])) + len(run.get('candidate_exceptions', [])), 'valid_candidates': len(run.get('claims', [])), 'quarantined_candidates': len(run.get('candidate_exceptions', [])), 'automatically_accepted_candidates': accepted, 'deduplicated_candidates': deduplicated, 'candidates_rejected_by_policy': len(exceptions), 'observations_created_or_strengthened': len(results), 'enterprise_model_attributes_updated': len(changed)}, 'enterprise_attributes_changed': [r.get('affected_attribute') for r in changed]})
+    terminal_status = 'completed_with_no_accepted_intelligence' if accepted == 0 and not results else ('completed_with_exceptions' if exceptions else 'completed')
+    counts = {}
+    for d in dispositions: counts[d['disposition']] = counts.get(d['disposition'], 0) + 1
+    run.update({'status': terminal_status, 'applied_at': now_iso(), 'applied_results': results, 'exceptions': exceptions, 'auto_accepted_count': accepted, 'exception_count': len(exceptions), 'observations_created_or_strengthened': len(results), 'observations_created': len([r for r in results if r.get('update_result') == 'created']), 'observations_strengthened': len(results) - len([r for r in results if r.get('update_result') == 'created']), 'deduplicated_count': deduplicated, 'candidate_dispositions': dispositions, 'rejected_by_policy_count': len(exceptions), 'candidate_lifecycle_counts': {'candidates_returned': len(run.get('claims', [])) + len(run.get('candidate_exceptions', [])), 'valid_candidates': len(run.get('claims', [])), 'quarantined_candidates': len(run.get('candidate_exceptions', [])), 'canonical_facts_accepted': accepted, 'automatically_accepted_candidates': accepted, 'deduplicated_candidates': deduplicated, 'disposition_counts': counts, 'candidates_rejected_by_policy': len(exceptions), 'observations_created_or_strengthened': len(results), 'enterprise_model_attributes_updated': len(changed)}, 'enterprise_attributes_changed': [r.get('affected_attribute') for r in changed]})
     return run
 
 def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: str | None = None) -> dict[str, Any]:
@@ -551,7 +583,7 @@ def financial_intelligence_progress_page(run_id: str) -> str:
         run = load_run(run_id)
     except FileNotFoundError:
         return missing_run_page(run_id)
-    labels = {'queued': 'Queued', 'retrieving_source': 'Retrieving the financial report', 'selecting_sections': 'Reading the report structure / Finding relevant financial sections', 'estimating_cost': 'Estimating processing cost', 'analysing': 'Analysing financial sections', 'validating': 'Validating financial facts', 'updating_memory': 'Updating the Commercial Digital Twin', 'completed': 'Complete', 'completed_with_exceptions': 'Needs attention', 'checking_document_quality': 'Checking document quality', 'document_parsing_failed': 'Checking document quality — Failed', 'section_selection_failed': 'Finding financial sections — Needs attention', 'provider_response_invalid': 'Needs attention', 'provider_request_failed': 'Failed', 'failed': 'Failed'}
+    labels = {'queued': 'Queued', 'retrieving_source': 'Retrieving the financial report', 'selecting_sections': 'Reading the report structure / Finding relevant financial sections', 'estimating_cost': 'Estimating processing cost', 'analysing': 'Analysing financial sections', 'validating': 'Validating financial facts', 'updating_memory': 'Updating the Commercial Digital Twin', 'completed': 'Complete', 'completed_with_exceptions': 'Needs attention', 'completed_with_no_accepted_intelligence': 'No accepted intelligence', 'checking_document_quality': 'Checking document quality', 'document_parsing_failed': 'Checking document quality — Failed', 'section_selection_failed': 'Finding financial sections — Needs attention', 'provider_response_invalid': 'Needs attention', 'provider_request_failed': 'Failed', 'failed': 'Failed'}
     created = run.get('created_at') or now_iso()
     try: elapsed = int((datetime.now(UTC) - datetime.fromisoformat(created)).total_seconds())
     except Exception: elapsed = 0
@@ -663,11 +695,11 @@ def _outcome_summary(run: dict[str, Any] | None) -> str:
     needs = ''.join(f"<li>{escape(str(e.get('user_message') or e.get('acceptance_reason') or e.get('rejection_reason') or 'Needs attention'))} Support reference: {escape(str(e.get('support_reference') or support))} — section {escape(str(e.get('packet_id') or 'n/a'))}</li>" for e in exceptions[:20]) or '<li>No exceptions requiring review.</li>'
     evidence = ''.join(f"<details><summary>{escape(c.get('original_statement',''))}</summary><p>Page {escape(str(c.get('page_reference')))} · Confidence {escape(str(c.get('confidence')))} · Evidence {escape(c.get('evidence_id',''))}</p><p>{escape(str(c.get('source_excerpt') or ''))}</p></details>" for c in run.get('claims', [])[:20]) or '<p>No page-grounded claims returned.</p>'
     status = run.get('status','')
-    headline = 'Complete' if status == 'completed' else ('Needs attention' if status == 'completed_with_exceptions' else ('In progress' if status in {'queued','retrieving_source','selecting_sections','estimating_cost','analysing','validating','updating_memory'} else 'Failed'))
+    headline = 'Complete' if status == 'completed' else ('Needs attention' if status == 'completed_with_exceptions' else ('No accepted intelligence' if status == 'completed_with_no_accepted_intelligence' else ('In progress' if status in {'queued','retrieving_source','selecting_sections','estimating_cost','analysing','validating','updating_memory'} else 'Failed')))
     cost_value = run.get('actual_cost_usd') if run.get('actual_cost_usd') is not None else run.get('estimated_cost_usd')
     cost_text = f" · Run cost: {escape(str(cost_value))} USD" if cost_value is not None else ''
-    outcome = 'Financial intelligence was updated. Some extracted facts require attention.' if status == 'completed_with_exceptions' else ('maintained Enterprise Model financial attributes changed or strengthened; use this as a prompt for account planning, not as a standalone commercial conclusion.' if run.get('enterprise_attributes_changed') else 'No financial intelligence was added because processing did not complete.')
-    return f"""<section class='card'><h2>Refresh outcome</h2><p>{headline}{cost_text} · Facts added: {len(run.get('claims', []))} · Reporting period: inferred from accepted facts · Collection status: {escape(status)} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Automatically accepted facts</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{len(exceptions)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a></p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {outcome}</p>{("<p><a href='/digital-twin/bt-group-plc'>View updated twin</a> · <a href='#attention'>Review exception</a> · <a href='#evidence'>View evidence</a></p>" if status == 'completed_with_exceptions' else "<form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form>")}</section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
+    outcome = 'Financial intelligence was updated. Some extracted facts require attention.' if status == 'completed_with_exceptions' else ('Flora analysed the financial report, but no facts passed the governed acceptance rules.' if status == 'completed_with_no_accepted_intelligence' else ('maintained Enterprise Model financial attributes changed or strengthened; use this as a prompt for account planning, not as a standalone commercial conclusion.' if run.get('enterprise_attributes_changed') else 'No financial intelligence was added because processing did not complete.'))
+    return f"""<section class='card'><h2>Refresh outcome</h2><p>{headline}{cost_text} · Candidate facts extracted: {len(run.get('claims', []))} · Reporting period: inferred from accepted facts · Collection status: {escape(status)} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Canonical facts accepted</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{len(exceptions)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a></p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {outcome}</p>{("<p><a href='/digital-twin/bt-group-plc'>View updated twin</a> · <a href='#attention'>Review exception</a> · <a href='#evidence'>View evidence</a></p>" if status == 'completed_with_exceptions' else "<form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form>")}</section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
 
 def missing_run_page(run_id: str) -> str:
     body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>This previous refresh result is no longer available.</p><p>Start a new refresh to collect the latest financial intelligence.</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Start new refresh</button></form><p><a href='/financial-intelligence'>Return to Financial Intelligence</a></p></section>"""

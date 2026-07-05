@@ -16,7 +16,7 @@ UNKNOWN_MARKERS = ("unknown", "insufficient", "unclear", "unconfirmed")
 CLAIM_VOCABULARY: dict[str, dict[str, Any]] = {
     "enterprise_identity_confirmed": {"domain": "identity", "attribute_prefix": "identity.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute"), "states": ("actual", "current")},
     "business_unit_disclosed": {"domain": "structure", "attribute_prefix": "structure.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value"), "states": ("actual", "current")},
-    "financial_metric_reported": {"domain": "financial_performance", "attribute_prefix": "financial_performance.metrics.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value", "period", "state"), "states": ("actual", "target", "guidance")},
+    "financial_metric_reported": {"domain": "financial_performance", "attribute_prefix": "financial_performance.metrics.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value", "period", "state"), "states": ("actual", "target", "guidance", "forecast", "prior_period_comparator")},
     "strategic_pillar_stated": {"domain": "strategy", "attribute_prefix": "strategy.pillars.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value"), "states": ("actual", "current")},
     "strategic_commitment_stated": {"domain": "strategy", "attribute_prefix": "strategy.commitments.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value", "period"), "states": ("actual", "current", "target")},
     "executive_role_confirmed": {"domain": "leadership", "attribute_prefix": "leadership.roles.", "required": ("canonical_enterprise_id", "evidence_id", "page_reference", "affected_attribute", "value", "period"), "states": ("current", "actual")},
@@ -105,7 +105,7 @@ def decompose_factual_claims(item: dict[str, Any]) -> list[FactualClaim]:
     for i, m in enumerate(financial_matches, 1):
         metric = _metric_key(m.group("metric")); unit_raw = (m.group("unit") or "").lower(); unit = "billion" if unit_raw in {"bn", "billion"} else "million" if unit_raw in {"m", "million"} else None
         value = float(m.group("value").replace(",", "")); state = "target" if re.search(r"target|guidance|by FY", text, re.I) else "actual"
-        stmt = f"BT Group plc reported {metric.replace('_',' ')} of GBP {value:g}{(' '+unit) if unit else ''} for {period}."
+        stmt = f"BT Group plc reported {metric.replace('_',' ')} of £{value:g}{('bn' if unit == 'billion' else 'm' if unit == 'million' else '')} for {period}."
         attr = f"financial_performance.metrics.{metric}.{period}.{state}"
         claims.append(FactualClaim(enterprise, "financial_metric_reported", stmt, "financial_performance", attr, value, unit, "GBP", period, state, evid, page, conf, f"{evid}:financial:{i}"))
     if re.search(r"customer-facing units?|business units?|reporting segments?", text, re.I):
@@ -174,7 +174,7 @@ class ObservationMemoryService:
         collected = str(item.get("extraction_timestamp") or item.get("collection_date") or now_iso()); observed = str(item.get("observation_date") or collected[:10])
         publication = item.get("publication_date") or item.get("evidence_publication_date")
         enterprise = canonical_enterprise_id(str(item.get("enterprise_id") or item.get("canonical_enterprise_id") or item.get("organisation") or "Unknown enterprise")) or "unknown"
-        return Observation(enterprise, condition, statement, observed, collected, str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"), int(item.get("confidence") or item.get("overall_evidence_quality") or 50), (_evidence_id(item),), evidence_publication_date=str(publication) if publication else None, provenance_type=str(item.get("provenance") or item.get("source_provenance") or "evidence-backed"), freshness=str(item.get("evidence_freshness") or "current"), importance=int(item["importance"]) if item.get("importance") is not None else None, commercial_value=int(item["commercial_value"]) if item.get("commercial_value") is not None else None)
+        return Observation(enterprise, condition, statement, observed, collected, str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"), int(item.get("confidence") or item.get("overall_evidence_quality") or 50), (_evidence_id(item),), evidence_publication_date=str(publication) if publication else None, provenance_type=str(item.get("provenance") or item.get("source_provenance") or "evidence-backed"), freshness=str(item.get("evidence_freshness") or "current"), lifecycle_state=("Validated" if condition == "financial_metric_reported" else "accepted"), importance=int(item["importance"]) if item.get("importance") is not None else None, commercial_value=int(item["commercial_value"]) if item.get("commercial_value") is not None else None)
 
     def accept_evidence(self, item: dict[str, Any]) -> ModelUpdateResult:
         report = self.process_evidence(item)
@@ -276,7 +276,7 @@ class ObservationMemoryService:
         return report
 
     def apply_observation(self, observation: Observation) -> ModelUpdateResult:
-        if observation.lifecycle_state != "accepted": return ModelUpdateResult(observation.enterprise_id, observation.observation_id or "", observation.affected_attribute, "ignored")
+        if observation.lifecycle_state not in {"accepted", "Validated"}: return ModelUpdateResult(observation.enterprise_id, observation.observation_id or "", observation.affected_attribute, "ignored")
         model = self.models.get(observation.enterprise_id); key = observation.affected_attribute; domain = key.split(".", 1)[0]; lower = observation.atomic_statement.casefold()
         if any(marker in lower for marker in UNKNOWN_MARKERS):
             unknown_id = f"UNK-{hashlib.sha256((observation.enterprise_id + key).encode()).hexdigest()[:12].upper()}"; existing = model.unknowns.get(unknown_id); related = tuple(dict.fromkeys([*(existing.related_observation_ids if existing else ()), observation.observation_id or ""]))
