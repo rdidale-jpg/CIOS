@@ -35,9 +35,10 @@ def test_foundation_fact_set_schema_is_openai_strict_and_keeps_lineage_fields() 
     assert 'source_document_id' in fact['required']
     assert 'source_page_start' in fact['required']
     assert 'period_label' in fact['required']
-    assert 'value_text' in fact['required']
-    assert 'value_number' in fact['required']
-    assert 'unit' in fact['required']
+    assert 'value' in fact['required']
+    assert 'value_text' not in fact['properties']
+    assert 'value_number' not in fact['properties']
+    assert 'value' in fact['properties']
 
 
 def test_openai_provider_uses_canonical_strict_foundation_fact_set_schema() -> None:
