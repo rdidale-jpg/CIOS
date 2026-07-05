@@ -8,7 +8,7 @@ from typing import Any
 
 FLORA_DATA_DIR_ENV = "FLORA_DATA_DIR"
 LEGACY_FLORA_PILOT_DIR_ENV = "FLORA_PILOT_DIR"
-DEFAULT_DATA_DIR = Path(".flora_pilot")
+DEFAULT_DATA_DIR = Path("/var/data/flora")
 REQUIRED_DIRS = (
     "ai_financial_reports/uploads",
     "ai_financial_reports/runs",
@@ -82,10 +82,16 @@ def atomic_write_json(path: Path, data: dict[str, Any]) -> None:
 
 def storage_mode() -> dict[str, Any]:
     root = data_root()
-    configured = bool(os.getenv(FLORA_DATA_DIR_ENV))
-    durable = configured and str(root.resolve(strict=False)).startswith("/var/data")
-    mode = "configured pilot storage" if configured else "ephemeral pilot storage"
-    return {"mode": mode, "data_root": str(root.resolve(strict=False)), "configured": configured, "durable": durable, "ephemeral": not configured}
+    configured = bool(os.getenv(FLORA_DATA_DIR_ENV) or os.getenv(LEGACY_FLORA_PILOT_DIR_ENV))
+    resolved_root = root.resolve(strict=False)
+    durable = str(resolved_root).startswith("/var/data")
+    if durable:
+        mode = "persistent pilot storage"
+    elif configured:
+        mode = "configured pilot storage"
+    else:
+        mode = "ephemeral pilot storage"
+    return {"mode": mode, "data_root": str(resolved_root), "configured": configured, "durable": durable, "ephemeral": not durable}
 
 
 def startup_storage_status() -> dict[str, Any]:
@@ -96,7 +102,7 @@ def startup_storage_status() -> dict[str, Any]:
         ensure_writable_dir(root)
         for rel in REQUIRED_DIRS:
             ensure_writable_dir(root / rel)
-        status = "persistent storage ready" if durable else mode["mode"]
+        status = mode["mode"]
         ready = True
     except PersistenceError as exc:
         status = "storage unavailable"

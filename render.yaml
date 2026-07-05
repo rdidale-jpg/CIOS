@@ -2,7 +2,7 @@ services:
   - type: web
     name: flora
     runtime: python
-    plan: free
+    plan: standard
     buildCommand: pip install -r requirements.txt
     startCommand: python -m cios.applications.flora.web.app
     envVars:

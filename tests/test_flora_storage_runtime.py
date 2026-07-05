@@ -22,6 +22,19 @@ def test_startup_validation_is_idempotent_and_reports_durability(monkeypatch, tm
     assert Path(first['data_root']).exists()
 
 
+def test_default_storage_uses_render_persistent_pilot_disk(monkeypatch):
+    monkeypatch.delenv('FLORA_DATA_DIR', raising=False)
+    monkeypatch.delenv('FLORA_PILOT_DIR', raising=False)
+    from cios.applications.flora import storage
+
+    status = storage.startup_storage_status()
+
+    assert status['ready'] is True
+    assert status['status'] == 'persistent pilot storage'
+    assert status['data_root'] == '/var/data/flora'
+    assert status['durable'] is True
+
+
 def test_accepted_facts_observations_and_model_persist_under_flora_data_dir(monkeypatch, tmp_path):
     monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path / 'flora'))
     import cios.applications.flora.memory.repository as repo
