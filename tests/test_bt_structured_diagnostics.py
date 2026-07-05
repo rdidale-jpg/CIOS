@@ -27,6 +27,7 @@ def test_missing_source_configuration_classified(monkeypatch, tmp_path):
     ({'enterprise_id':'BT'}, 'enterprise_identity_mismatch'),
     ({'reporting_period':'FY2026'}, 'reporting_period_mismatch'),
     ({'artifact_url':''}, 'artifact_url_missing'),
+    ({'artifact_url':'https://data.fca.org.uk/#/nsm/nationalstoragemechanism'}, 'artifact_url_not_downloadable'),
     ({'artifact_url':'https://evil.example/file.zip'}, 'host_not_allowed'),
 ])
 def test_configuration_and_selection_failures(monkeypatch, tmp_path, override, code):
@@ -37,6 +38,11 @@ def test_configuration_and_selection_failures(monkeypatch, tmp_path, override, c
     assert run['failure_code'] == code
     assert run['user_message'] == 'Structured financial source unavailable'
     assert 'Failure stage:' in run['user_message_display']
+    if code == 'artifact_url_not_downloadable':
+        diagnostic = run['structured_diagnostics'][0]
+        assert diagnostic['failure_stage'] == 'governed source configuration'
+        assert diagnostic['request_attempted'] is False
+        assert diagnostic['safe_failure_message'] == 'The configured source is a search page rather than a filing download.'
 
 
 def test_off_host_redirect_and_http_error_classification(tmp_path, monkeypatch):
