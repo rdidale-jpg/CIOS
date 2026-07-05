@@ -17,6 +17,7 @@ from cios.applications.flora.financial_intelligence.adapters import PdfFinancial
 from cios.applications.flora.financial_intelligence.provider_guard import provider_call_guard
 from cios.applications.flora.financial_intelligence.config import financial_intelligence_settings
 from cios.applications.flora.financial_intelligence.schema import ExperimentDocument, FoundationFact
+from cios.applications.flora.financial_intelligence.rapid import run_rapid_financial_intelligence
 from cios.applications.flora.memory.service import ObservationMemoryService
 from cios.applications.flora.memory.views import enterprise_memory_panel
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
@@ -702,6 +703,8 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: 
     acquisition_mode = extraction_mode or 'structured_standard_financials'
     if acquisition_mode == 'structured_standard_financials':
         return _refresh_structured_financial_intelligence(enterprise_id, run_id)
+    if acquisition_mode == 'rapid_financial_intelligence':
+        return run_rapid_financial_intelligence(enterprise_id=enterprise_id, run_id=run_id)
     if acquisition_mode == 'pdf_supporting_evidence':
         extraction_mode = 'pdf_supporting_evidence'
     elif acquisition_mode == 'narrative_financial_interpretation':
