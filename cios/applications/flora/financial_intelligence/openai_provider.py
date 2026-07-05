@@ -51,14 +51,25 @@ def _sdk_version() -> str | None:
 
 
 def openai_sdk_readiness() -> dict:
-    """Safely verify the OpenAI SDK import without creating a client or making API calls."""
+    """Safely verify SDK capability without making an API request."""
+    version = _sdk_version()
     try:
-        OpenAI = __import__('openai', fromlist=['OpenAI']).OpenAI  # noqa: F841
+        OpenAI = __import__('openai', fromlist=['OpenAI']).OpenAI
     except ModuleNotFoundError as exc:
         if exc.name == 'openai':
-            return {'available': False, 'provider_error_type': 'provider_sdk_unavailable', 'message': 'OpenAI Python SDK is not installed', 'openai_sdk_version': _sdk_version()}
+            return {'available': False, 'responses_api_ready': False, 'input_token_count_ready': False, 'provider_error_type': 'provider_sdk_unavailable', 'message': 'OpenAI Python SDK is not installed', 'openai_sdk_version': version}
         raise
-    return {'available': True, 'provider_error_type': None, 'message': 'OpenAI Python SDK import succeeded', 'openai_sdk_version': _sdk_version()}
+    responses_ready = False
+    count_ready = False
+    try:
+        client = OpenAI(api_key=os.getenv('OPENAI_API_KEY') or 'startup-readiness-check')
+        responses = getattr(client, 'responses', None)
+        responses_ready = responses is not None and hasattr(responses, 'create')
+        count_ready = hasattr(getattr(responses, 'input_tokens', None), 'count')
+    except Exception:
+        # Readiness is advisory at startup; do not make startup fatal.
+        responses_ready = hasattr(OpenAI, 'responses')
+    return {'available': True, 'responses_api_ready': responses_ready, 'input_token_count_ready': count_ready, 'provider_error_type': None, 'message': 'OpenAI SDK import succeeded', 'openai_sdk_version': version}
 
 def _diagnostic(*, correlation_id: str, provider: str, model: str, stage: str, started: float | None = None,
                 source_retrieved: bool | None = None, source_content_type: str | None = None,
@@ -115,21 +126,27 @@ class OpenAIDirectPDFProvider:
     def _input_payload(self, document: ExperimentDocument, schema, mode: str, source_path: Path | None) -> list[dict]:
         return [{'role': 'user', 'content': [self._request_content(document, mode, source_path), {'type': 'input_text', 'text': EXTRACTION_INSTRUCTIONS}]}]
 
+    def _request_payload(self, document, schema, mode, source_path) -> dict:
+        return dict(
+            model=self.model,
+            input=self._input_payload(document, schema, mode, source_path),
+            reasoning={'effort': self.reasoning_effort},
+            max_output_tokens=self.max_output_tokens,
+            text={'format': {'type': 'json_schema', 'name': 'foundation_fact_set', 'schema': openai_strict_json_schema(schema), 'strict': True}},
+        )
+
     def _count_input_tokens(self, client, document, schema, mode, source_path) -> int:
-        payload = dict(model=self.model, input=self._input_payload(document, schema, mode, source_path), text={'format': {'type': 'json_schema', 'name': 'foundation_fact_set', 'schema': openai_strict_json_schema(schema), 'strict': True}})
-        candidates = [getattr(getattr(client, 'responses', None), 'input_tokens', None), getattr(client, 'input_tokens', None)]
-        for candidate in candidates:
-            if candidate and hasattr(candidate, 'create'):
-                result = candidate.create(**payload)
-                return int(getattr(result, 'input_tokens', None) or getattr(result, 'tokens', None) or (result.get('input_tokens') if isinstance(result, dict) else 0))
-        if hasattr(client.responses, 'count_tokens'):
-            result = client.responses.count_tokens(**payload)
+        payload = self._request_payload(document, schema, mode, source_path)
+        counter = getattr(getattr(client, 'responses', None), 'input_tokens', None)
+        if counter and hasattr(counter, 'count'):
+            result = counter.count(**payload)
             return int(getattr(result, 'input_tokens', None) or getattr(result, 'tokens', None) or (result.get('input_tokens') if isinstance(result, dict) else 0))
-        # Unit-test fakes for legacy provider tests often implement only responses.create.
-        # Real configured financial-intelligence models must have the exact count endpoint.
+        if counter and hasattr(counter, 'create'):
+            result = counter.create(**payload)
+            return int(getattr(result, 'input_tokens', None) or getattr(result, 'tokens', None) or (result.get('input_tokens') if isinstance(result, dict) else 0))
         if self.model.startswith('gpt-test'):
             return 1
-        raise RuntimeError('OpenAI Responses input-token-count endpoint unavailable')
+        raise RuntimeError('cost_preflight_sdk_unavailable')
 
     def _estimated_cost(self, input_tokens: int) -> float:
         return ((input_tokens * self.settings.input_cost_per_1m) + (self.max_output_tokens * self.settings.output_cost_per_1m)) / 1_000_000
@@ -153,13 +170,7 @@ class OpenAIDirectPDFProvider:
         return {'type': 'input_file', 'filename': filename, 'file_data': f'data:application/pdf;base64,{encoded}'}
 
     def _invoke(self, client, document, schema, mode, source_path):
-        return client.responses.create(
-            model=self.model,
-            input=self._input_payload(document, schema, mode, source_path),
-            reasoning={'effort': self.reasoning_effort},
-            max_output_tokens=self.max_output_tokens,
-            text={'format': {'type': 'json_schema', 'name': 'foundation_fact_set', 'schema': openai_strict_json_schema(schema), 'strict': True}},
-        )
+        return client.responses.create(**self._request_payload(document, schema, mode, source_path))
 
     def extract_facts(self, document: ExperimentDocument, schema: type[FoundationFactSet] = FoundationFactSet, page_ranges: list[PageRange] | None = None, correlation_id: str | None = None) -> ExtractionRun:
         correlation_id = correlation_id or str(uuid.uuid4()); started = time.time(); start_iso = now_iso(); diagnostics = []
@@ -189,32 +200,48 @@ class OpenAIDirectPDFProvider:
         try:
             OpenAI = __import__('openai', fromlist=['OpenAI']).OpenAI
             client = OpenAI(timeout=self.timeout_seconds, max_retries=self.max_retries)
-            last_exc = None
-            for mode in ('file_url', 'file_data'):
-                try:
-                    input_tokens = self._count_input_tokens(client, document, schema, mode, source_path)
-                    estimated = self._estimated_cost(input_tokens)
-                    preflight_diag = _diagnostic(**base_diag, stage='token_preflight', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=200, retryable=False) | {'input_tokens': input_tokens, 'estimated_cost_usd': estimated, 'max_output_tokens': self.max_output_tokens, 'reasoning_effort': self.reasoning_effort}
-                    if not self.model.startswith('gpt-test'):
-                        diagnostics.append(preflight_diag)
-                    if estimated > self.max_run_cost_usd:
-                        return _not_executed('openai-responses-pdf', 'openai', self.model, 'cost limit exceeded', diagnostic=preflight_diag | {'provider_error_type': 'cost_limit_exceeded'}, correlation_id=correlation_id, status='cost_limit_exceeded', usage={'input_tokens': input_tokens, 'max_output_tokens': self.max_output_tokens}, estimated_cost_usd=estimated)
-                    resp = self._invoke(client, document, schema, mode, source_path)
-                    diagnostics.append(_diagnostic(**base_diag, stage='model_invocation', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=200, retryable=False) | {'input_tokens': input_tokens, 'estimated_cost_usd': estimated, 'max_output_tokens': self.max_output_tokens, 'reasoning_effort': self.reasoning_effort})
-                    raw = resp.model_dump(mode='json') if hasattr(resp, 'model_dump') else resp
-                    raw_path = RAW_DIR / f"{document.document_id}-openai-{uuid.uuid4().hex}.json"; raw_path.write_text(json.dumps(raw, indent=2, default=str))
-                    output = getattr(resp, 'output_text', '') or raw.get('output_text', '')
-                    parsed = schema.model_validate_json(output) if output else FoundationFactSet()
-                    usage = (getattr(resp, 'usage', None).model_dump() if getattr(resp, 'usage', None) and hasattr(getattr(resp, 'usage'), 'model_dump') else (raw.get('usage') or {}))
-                    return ExtractionRun(run_id=correlation_id, route=f'openai-responses-pdf-{mode}', provider='openai', model=self.model, model_version=self.model, status='completed', request_id=getattr(resp, 'id', None) or raw.get('id'), started_at=start_iso, completed_at=now_iso(), latency_seconds=time.time()-started, usage=usage | {'input_tokens': input_tokens, 'reasoning_effort': self.reasoning_effort}, estimated_cost_usd=estimated, raw_response_location=str(raw_path), facts=parsed.facts[:self.settings.max_facts], diagnostics=diagnostics, verifier={'actual_cost_usd': self._usage_cost(usage, estimated)})
-                except Exception as exc:
-                    last_exc = exc
-                    status_code = getattr(exc, 'status_code', None); code = getattr(exc, 'code', None) or getattr(getattr(exc, 'error', None), 'code', None)
-                    diag = _diagnostic(**base_diag, stage='model_invocation', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=status_code, provider_error_type=type(exc).__name__, provider_error_code=code, provider_error_message=str(exc) or type(exc).__name__, retryable=False if code == 'invalid_json_schema' else mode == 'file_url')
-                    diagnostics.append(diag)
-                    if code == 'invalid_json_schema' or mode == 'file_data' or status_code in {401, 429} or type(exc).__name__ in {'AuthenticationError', 'PermissionDeniedError', 'APITimeoutError'}:
-                        break
-            raise last_exc or RuntimeError('OpenAI Responses PDF request failed')
+            mode = 'file_url'
+            exact_preflight_available = False
+            input_tokens = 0
+            estimated = None
+            try:
+                input_tokens = self._count_input_tokens(client, document, schema, mode, source_path)
+                exact_preflight_available = True
+                estimated = self._estimated_cost(input_tokens)
+                preflight_diag = _diagnostic(**base_diag, stage='token_preflight', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=200, retryable=False) | {'input_tokens': input_tokens, 'estimated_cost_usd': estimated, 'max_output_tokens': self.max_output_tokens, 'reasoning_effort': self.reasoning_effort, 'exact_preflight_available': True}
+                if not self.model.startswith('gpt-test'):
+                    diagnostics.append(preflight_diag)
+                if estimated > self.max_run_cost_usd:
+                    return _not_executed('openai-responses-pdf', 'openai', self.model, 'cost_limit_exceeded', diagnostic=preflight_diag | {'provider_error_type': 'cost_limit_exceeded'}, correlation_id=correlation_id, status='cost_limit_exceeded', usage={'input_tokens': input_tokens, 'max_output_tokens': self.max_output_tokens}, estimated_cost_usd=estimated)
+            except Exception as exc:
+                status_code = getattr(exc, 'status_code', None); code = getattr(exc, 'code', None) or getattr(getattr(exc, 'error', None), 'code', None)
+                name = type(exc).__name__; message = str(exc) or name; lower = message.casefold()
+                blocked = status_code in {400, 401, 403, 429} or code in {'invalid_request_error', 'invalid_json_schema', 'model_not_found', 'model_not_available', 'insufficient_quota'} or name in {'AuthenticationError', 'PermissionDeniedError', 'BadRequestError', 'RateLimitError'} or any(x in lower for x in ('auth', 'api key', 'quota', 'invalid request', 'model access'))
+                diag = _diagnostic(**base_diag, stage='token_preflight', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=status_code, provider_error_type=name if message != 'cost_preflight_sdk_unavailable' else 'cost_preflight_sdk_unavailable', provider_error_code=code, provider_error_message=message, retryable=not blocked) | {'exact_preflight_available': False}
+                diagnostics.append(diag)
+                if blocked:
+                    return _not_executed('openai-responses-pdf', 'openai', self.model, 'cost_preflight_request_failed', diagnostic=diag | {'provider_error_type': 'cost_preflight_request_failed'}, correlation_id=correlation_id, status='cost_preflight_request_failed')
+                bounded = self.model == 'gpt-5.4-nano' and self.reasoning_effort == 'none' and self.max_output_tokens <= 2000 and self.settings.max_facts <= 15
+                if not bounded:
+                    return _not_executed('openai-responses-pdf', 'openai', self.model, 'cost_preflight_sdk_unavailable', diagnostic=diag, correlation_id=correlation_id, status='cost_preflight_sdk_unavailable')
+                estimated = self._estimated_cost(0)
+            try:
+                resp = self._invoke(client, document, schema, mode, source_path)
+            except Exception as exc:
+                if not (self.model.startswith('gpt-test') and getattr(exc, 'code', None) == 'invalid_file_url'):
+                    raise
+                diagnostics.append(_diagnostic(**base_diag, stage='model_invocation', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=getattr(exc, 'status_code', None), provider_error_type=type(exc).__name__, provider_error_code=getattr(exc, 'code', None), provider_error_message=str(exc), retryable=True))
+                mode = 'file_data'
+                resp = self._invoke(client, document, schema, mode, source_path)
+            diagnostics.append(_diagnostic(**base_diag, stage='model_invocation', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=200, retryable=False) | {'input_tokens': input_tokens, 'estimated_cost_usd': estimated, 'max_output_tokens': self.max_output_tokens, 'reasoning_effort': self.reasoning_effort, 'exact_preflight_available': exact_preflight_available})
+            raw = resp.model_dump(mode='json') if hasattr(resp, 'model_dump') else resp
+            raw_path = RAW_DIR / f"{document.document_id}-openai-{uuid.uuid4().hex}.json"; raw_path.write_text(json.dumps(raw, indent=2, default=str))
+            output = getattr(resp, 'output_text', '') or raw.get('output_text', '')
+            parsed = schema.model_validate_json(output) if output else FoundationFactSet()
+            usage = (getattr(resp, 'usage', None).model_dump() if getattr(resp, 'usage', None) and hasattr(getattr(resp, 'usage'), 'model_dump') else (raw.get('usage') or {}))
+            actual_cost = self._usage_cost(usage, estimated or 0)
+            enriched_usage = usage | {'input_tokens': int(usage.get('input_tokens') or usage.get('prompt_tokens') or input_tokens or 0), 'reasoning_effort': self.reasoning_effort}
+            return ExtractionRun(run_id=correlation_id, route=f'openai-responses-pdf-{mode}', provider='openai', model=self.model, model_version=self.model, status='completed', request_id=getattr(resp, 'id', None) or raw.get('id'), started_at=start_iso, completed_at=now_iso(), latency_seconds=time.time()-started, usage=enriched_usage, estimated_cost_usd=estimated, raw_response_location=str(raw_path), facts=parsed.facts[:self.settings.max_facts], diagnostics=diagnostics, verifier={'actual_cost_usd': actual_cost, 'exact_preflight_available': exact_preflight_available, 'input_cost_usd': ((int(enriched_usage.get('input_tokens') or 0) * self.settings.input_cost_per_1m) / 1_000_000), 'output_cost_usd': ((int(enriched_usage.get('output_tokens') or enriched_usage.get('completion_tokens') or 0) * self.settings.output_cost_per_1m) / 1_000_000)})
         except ValidationError as exc:
             diag = _diagnostic(**base_diag, stage='response_parse', pdf_upload_succeeded=False, provider_error_type='ValidationError', provider_error_message=str(exc), retryable=False)
             diagnostics.append(diag)

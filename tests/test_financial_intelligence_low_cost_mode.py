@@ -74,3 +74,87 @@ def test_schema_still_valid_and_no_hard_coded_fallback():
     schema = openai_strict_json_schema(FoundationFactSet)
     assert schema['additionalProperties'] is False
     assert 'gpt-5.5' not in Path('cios/applications/flora/financial_intelligence/openai_provider.py').read_text()
+
+
+def test_production_openai_constraint_requires_2_5_or_later():
+    req = Path('requirements.txt').read_text()
+    assert 'openai>=2.5,<3' in req
+
+
+def test_responses_input_tokens_count_is_used_and_mirrors_extraction(monkeypatch, tmp_path):
+    calls = []
+    class Count:
+        def count(self, **kwargs):
+            calls.append(('count', kwargs)); return {'input_tokens': 120}
+    class Responses:
+        input_tokens = Count()
+        def create(self, **kwargs):
+            calls.append(('create', kwargs))
+            return types.SimpleNamespace(id='r1', output_text=json.dumps({'facts': []}), usage=types.SimpleNamespace(model_dump=lambda: {'input_tokens': 120, 'output_tokens': 7}), model_dump=lambda mode='json': {'id': 'r1', 'output_text': json.dumps({'facts': []}), 'usage': {'input_tokens': 120, 'output_tokens': 7}})
+    class Client:
+        def __init__(self, **kwargs): self.responses = Responses()
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
+    monkeypatch.setitem(sys.modules, 'openai', types.SimpleNamespace(OpenAI=Client))
+    run = OpenAIDirectPDFProvider(model='gpt-5.4-nano', max_output_tokens=2000).extract_facts(_doc(tmp_path))
+    assert run.status == 'completed'
+    assert calls[0][0] == 'count'
+    count_payload = calls[0][1]
+    create_payload = calls[1][1]
+    assert count_payload == create_payload
+
+
+def test_technical_count_failure_allows_one_bounded_nano_request(monkeypatch, tmp_path):
+    calls = []
+    class Count:
+        def count(self, **kwargs): raise RuntimeError('temporary counter outage')
+    class Responses:
+        input_tokens = Count()
+        def create(self, **kwargs):
+            calls.append(kwargs)
+            return types.SimpleNamespace(id='r1', output_text=json.dumps({'facts': []}), usage=types.SimpleNamespace(model_dump=lambda: {'input_tokens': 1000, 'output_tokens': 10}), model_dump=lambda mode='json': {'id': 'r1', 'output_text': json.dumps({'facts': []}), 'usage': {'input_tokens': 1000, 'output_tokens': 10}})
+    class Client:
+        def __init__(self, **kwargs): self.responses = Responses()
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
+    monkeypatch.setitem(sys.modules, 'openai', types.SimpleNamespace(OpenAI=Client))
+    run = OpenAIDirectPDFProvider(model='gpt-5.4-nano', reasoning_effort='none', max_output_tokens=2000).extract_facts(_doc(tmp_path))
+    assert run.status == 'completed'
+    assert len(calls) == 1
+    assert calls[0]['model'] == 'gpt-5.4-nano'
+    assert calls[0]['reasoning'] == {'effort': 'none'}
+    assert calls[0]['max_output_tokens'] == 2000
+    assert run.verifier['exact_preflight_available'] is False
+
+
+def test_auth_quota_and_invalid_count_errors_do_not_bypass_controls(monkeypatch, tmp_path):
+    for status_code, code in [(401, 'unauthorized'), (429, 'insufficient_quota'), (400, 'invalid_request_error')]:
+        class Count:
+            def count(self, **kwargs):
+                exc = Exception(code); exc.status_code = status_code; exc.code = code; raise exc
+        class Responses:
+            input_tokens = Count()
+            def create(self, **kwargs): raise AssertionError('must not invoke model')
+        class Client:
+            def __init__(self, **kwargs): self.responses = Responses()
+        monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
+        monkeypatch.setitem(sys.modules, 'openai', types.SimpleNamespace(OpenAI=Client))
+        run = OpenAIDirectPDFProvider(model='gpt-5.4-nano', max_output_tokens=2000).extract_facts(_doc(tmp_path))
+        assert run.status == 'cost_preflight_request_failed'
+
+
+def test_actual_usage_and_cost_breakdown_recorded(monkeypatch, tmp_path):
+    class Count:
+        def count(self, **kwargs): return {'input_tokens': 100}
+    class Responses:
+        input_tokens = Count()
+        def create(self, **kwargs):
+            usage = {'input_tokens': 100, 'input_tokens_details': {'cached_tokens': 20}, 'output_tokens': 10, 'output_tokens_details': {'reasoning_tokens': 0}}
+            return types.SimpleNamespace(id='r1', output_text=json.dumps({'facts': []}), usage=types.SimpleNamespace(model_dump=lambda: usage), model_dump=lambda mode='json': {'id': 'r1', 'output_text': json.dumps({'facts': []}), 'usage': usage})
+    class Client:
+        def __init__(self, **kwargs): self.responses = Responses()
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
+    monkeypatch.setitem(sys.modules, 'openai', types.SimpleNamespace(OpenAI=Client))
+    run = OpenAIDirectPDFProvider(model='gpt-5.4-nano', max_output_tokens=2000).extract_facts(_doc(tmp_path))
+    assert run.usage['input_tokens'] == 100
+    assert run.usage['output_tokens'] == 10
+    assert run.verifier['input_cost_usd'] > 0
+    assert run.verifier['output_cost_usd'] > 0
