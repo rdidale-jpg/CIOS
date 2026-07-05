@@ -73,6 +73,37 @@ class CanonicalFinancialMetricFact:
     enterprise_id: str; canonical_metric_id: str; metric_label: str; reported_amount: Any; currency: str; reported_scale: str; normalised_amount: Any; original_display_value: str; precision: str; rounding_status: str; reporting_period: str; period_start: str | None; period_end: str | None; scope: str; financial_measurement_state: str; accounting_basis: str; source_identity: str; source_locator: str; supporting_evidence_lineage: tuple[str, ...]; confidence: int; freshness: str; observed_date: str; effective_date: str | None; enterprise_model_attribute_path: str
     def to_dict(self) -> dict[str, Any]: return asdict(self)
 
+
+@dataclass(frozen=True)
+class CanonicalReportingPeriod:
+    canonical_period_id: str
+    original_period_text: str
+    period_start: str | None
+    period_end: str | None
+    fiscal_year_label: str
+
+def normalise_reporting_period(raw: str | None, period_start: str | None = None, period_end: str | None = None) -> CanonicalReportingPeriod | None:
+    text = str(raw or '').strip()
+    if not text and not period_end:
+        return None
+    year: int | None = None
+    m = re.search(r'fy\s*(20\d{2}|\d{2})', text, re.I)
+    if m:
+        token = m.group(1)
+        year = int('20' + token) if len(token) == 2 else int(token)
+    if year is None:
+        m = re.search(r'year\s+ended\s+31\s+march\s+(20\d{2})', text, re.I) or re.search(r'\b(20\d{2})\b', text)
+        if m:
+            year = int(m.group(1))
+    if year is None and period_end:
+        m = re.match(r'(20\d{2})-03-31', str(period_end))
+        if m:
+            year = int(m.group(1))
+    if year is None:
+        return None
+    fiscal = f'FY{year % 100:02d}'
+    return CanonicalReportingPeriod(fiscal, text or fiscal, period_start or f'{year-1}-04-01', period_end or f'{year}-03-31', fiscal)
+
 def accounting_basis(claim: dict[str, Any]) -> str | None:
     explicit = claim.get('accounting_basis')
     if explicit in SUPPORTED_ACCOUNTING_BASES: return explicit
@@ -80,15 +111,15 @@ def accounting_basis(claim: dict[str, Any]) -> str | None:
     if 'adjusted' in text: return 'adjusted'
     if 'statutory' in text: return 'statutory'
     if 'alternative performance' in text or re.search(r'\bapm\b', text): return 'alternative_performance_measure'
+    if re.search(r'normalised|normalized|net debt', text): return 'alternative_performance_measure'
     if 'basis' in text and any(w in text for w in ('reported basis','constant currency')): return 'other_explicitly_reported_basis'
     metric_entry, _ = resolve_metric(claim.get('predicate') or claim.get('metric_identity') or claim.get('affected_attribute'))
     if metric_entry and len(metric_entry.permitted_accounting_bases) == 1:
         return metric_entry.permitted_accounting_bases[0]
+    if metric_entry and metric_entry.canonical_metric_id == 'revenue' and re.search(r'\bbt group plc revenue\b', str(claim.get('original_statement') or ''), re.I):
+        return 'statutory'
     if metric_entry and metric_entry.canonical_metric_id in {'capital_expenditure', 'cash_flow_from_operating_activities'} and not re.search(r'\badjusted\b|\bapm\b|alternative performance|normalised|normalized', text):
         return 'statutory'
-    # Legacy hosted/report fixtures use provider text such as 'Revenue was £19.7bn' with no separate basis field.
-    # Keep this narrow to revenue so non-revenue metrics still surface accounting_basis_ambiguous.
-    if re.search(r'\brevenue\b', text) and not re.search(r'\badjusted\b|\bapm\b|alternative performance', text): return 'statutory'
     return None
 
 def measurement_state(claim: dict[str, Any]) -> str | None:
@@ -177,16 +208,17 @@ def canonicalise_financial_claim(claim: dict[str, Any]) -> tuple[dict[str, Any],
         metric_path = f'operating_profit_{basis}'
         metric_label = f"Operating profit ({basis})"
     scope = claim.get('enterprise_scope') or ('segment' if claim.get('business_unit') and 'bt group' not in str(claim.get('business_unit')).casefold() else 'group')
-    period = claim.get('period')
+    period_info = normalise_reporting_period(claim.get('period') or claim.get('period_label') or claim.get('raw_period_text'), claim.get('period_start'), claim.get('period_end'))
+    period = period_info.canonical_period_id if period_info else None
     if not period: reasons.append('financial_period_missing')
     if not claim.get('source_excerpt'): reasons.append('invalid_lineage')
-    normalised_value = int(normalised) if normalised is not None and normalised == normalised.to_integral_value() else (str(normalised) if normalised is not None else None)
+    normalised_value = int(normalised) if normalised is not None and normalised == normalised.to_integral_value() else (format(normalised, 'f') if normalised is not None else None)
     path = f"financial_performance.metrics.{metric_path}.{period}.{state}" if period and state and not metric_reason else claim.get('affected_attribute')
     evidence = tuple(e for e in (claim.get('evidence_id'), claim.get('source_identity'), claim.get('source_locator')) if e)
     canonical_fact = None
     display = claim.get('original_display_value') or claim.get('display_value') or display_amount(amount, currency, scale)
     if not reasons:
-        canonical_fact = CanonicalFinancialMetricFact(claim.get('canonical_enterprise_id') or claim.get('enterprise_id'), metric_path, metric_label, amount, currency, scale, normalised_value, display, claim.get('precision') or _precision(amount), claim.get('rounding_status') or ('reported_rounded' if scale in {'billions','millions'} and '.' in str(amount) else 'unknown_rounding'), period, claim.get('period_start'), claim.get('period_end'), scope, state, basis, str(claim.get('source_identity') or claim.get('source_id') or ''), str(claim.get('source_locator') or claim.get('page_reference') or claim.get('page_range') or ''), evidence, int(claim.get('confidence') or 0), str(claim.get('freshness') or claim.get('evidence_freshness') or 'current'), str(claim.get('observed_date') or claim.get('extraction_timestamp') or '')[:10], claim.get('effective_date') or claim.get('period_end'), path)
-    claim.update({'reported_amount': amount, 'reported_scale': scale, 'normalised_amount': normalised_value, 'value': normalised_value if normalised_value is not None else claim.get('value'), 'display_value': display, 'original_display_value': display, 'metric_identity': metric_path, 'metric_label': metric_label, 'enterprise_scope': scope, 'accounting_basis': basis, 'financial_measurement_state': state, 'state': state or claim.get('state'), 'original_pdf_page': claim.get('page_reference'), 'affected_attribute': path, 'canonical_financial_fact': canonical_fact.to_dict() if canonical_fact else None})
+        canonical_fact = CanonicalFinancialMetricFact(claim.get('canonical_enterprise_id') or claim.get('enterprise_id'), metric_path, metric_label, amount, currency, scale, normalised_value, display, claim.get('precision') or _precision(amount), claim.get('rounding_status') or ('reported_rounded' if scale in {'billions','millions'} and '.' in str(amount) else 'unknown_rounding'), period, period_info.period_start if period_info else claim.get('period_start'), period_info.period_end if period_info else claim.get('period_end'), scope, state, basis, str(claim.get('source_identity') or claim.get('source_id') or ''), str(claim.get('source_locator') or claim.get('page_reference') or claim.get('page_range') or ''), evidence, int(claim.get('confidence') or 0), str(claim.get('freshness') or claim.get('evidence_freshness') or 'current'), str(claim.get('observed_date') or claim.get('extraction_timestamp') or '')[:10], claim.get('effective_date') or claim.get('period_end'), path)
+    claim.update({'reported_amount': amount, 'reported_scale': scale, 'normalised_amount': normalised_value, 'value': normalised_value if normalised_value is not None else claim.get('value'), 'display_value': display, 'original_display_value': display, 'metric_identity': metric_path, 'metric_label': metric_label, 'enterprise_scope': scope, 'accounting_basis': basis, 'financial_measurement_state': state, 'period': period or claim.get('period'), 'canonical_period_id': period, 'original_period_text': (period_info.original_period_text if period_info else claim.get('period')), 'period_start': (period_info.period_start if period_info else claim.get('period_start')), 'period_end': (period_info.period_end if period_info else claim.get('period_end')), 'fiscal_year_label': (period_info.fiscal_year_label if period_info else None), 'state': state or claim.get('state'), 'original_pdf_page': claim.get('page_reference'), 'affected_attribute': path, 'canonical_financial_fact': canonical_fact.to_dict() if canonical_fact else None})
     claim['canonical_observation_identity'] = '|'.join(map(str, [claim.get('canonical_enterprise_id'), metric_path, period, scope, basis, state]))
     return claim, list(dict.fromkeys(reasons))
