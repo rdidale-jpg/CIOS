@@ -13,6 +13,7 @@ from .instructions import EXTRACTION_INSTRUCTIONS
 from .schema import ExperimentDocument, ExtractionRun, FoundationFactSet, ProviderFoundationFactSet, now_iso, openai_strict_json_schema
 from .candidate_validation import parse_foundation_fact_candidates
 from .config import financial_intelligence_settings
+from .provider_guard import enforce_provider_call_allowed
 
 TARGET_INPUT_TOKENS = 50_000
 ABSOLUTE_INPUT_TOKEN_CEILING = 75_000
@@ -398,6 +399,7 @@ class SectionAwareOpenAIProvider:
             exc = {'exception_type':'section_selection_failed','failure_stage':'selecting_sections','support_reference':_support_reference(correlation_id),'user_message':'Flora could not identify the financial sections in this report.','rejection_reason':'No relevant financial pages selected; no paid model request occurred.'}
             final = ExtractionRun(run_id=correlation_id, route='openai-responses-section-packets', provider='openai', model=self.model, model_version=self.model, status='section_selection_failed', started_at=now_iso(), completed_at=now_iso(), latency_seconds=0, usage={'input_tokens':0,'output_tokens':0}, facts=[], candidate_exceptions=[exc], diagnostics=[{'event':'section_selection_failed','request_stage':'selecting_sections','support_reference':_support_reference(correlation_id),'correlation_id':correlation_id,'openai_invoked':False,'no_paid_model_request':True}])
             return final, {'candidate_pages': [{'page_number': c.page_number, 'score': c.score, 'matched_headings': list(c.matched_headings), 'matched_financial_terms': list(c.matched_terms), 'selection_reason': c.reason, 'reasons': page_reasons.get(c.page_number, [])} for c in candidates], 'packets': [], 'packet_count': 0, 'openai_calls': 0, 'document_hash': stable_document_hash(document), 'parse_diagnostics': parse_diag, 'fallback_used': True, 'visual_navigation': locals().get('visual_plan', {'visual_fallback_used': False})}
+        enforce_provider_call_allowed('openai', 'SectionAwareOpenAIProvider.extract_packets')
         OpenAI = __import__('openai', fromlist=['OpenAI']).OpenAI
         client = OpenAI(timeout=getattr(self.base_provider, 'timeout_seconds', 120), max_retries=getattr(self.base_provider, 'max_retries', 0))
         queue = list(packets)

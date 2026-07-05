@@ -4,7 +4,7 @@ from __future__ import annotations
 from html import escape
 import re
 
-from cios.applications.flora.memory.repository import EnterpriseModelRepository, ObservationRepository
+from cios.applications.flora.memory.repository import EnterpriseModelRepository, ObservationRepository, EvidenceRepository
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
 from cios.applications.flora.memory.calibration import inspection_rows
 
@@ -17,7 +17,7 @@ def enterprise_memory_panel(enterprise_id: str, models: EnterpriseModelRepositor
     rows = []
     for key, attr in sorted(model.attributes.items()):
         certainty = "Contradicted — do not present as certain" if attr.contradiction_state == "contradicted" else "Maintained model state"
-        rows.append(f"<tr><th>{escape(key)}</th><td>{escape(str(attr.current_value))}</td><td>{attr.confidence}</td><td>{escape(attr.freshness)}</td><td>{escape(attr.last_observed_date)}</td><td>{escape(certainty)}</td><td>{escape(', '.join(attr.observation_ids))}</td><td>{escape(', '.join(attr.evidence_ids))}</td></tr>")
+        rows.append(f"<tr><th>{escape(key)}</th><td>{escape(str(attr.current_value))}</td><td>{attr.confidence}</td><td>{escape(attr.freshness)}</td><td>{escape(attr.last_observed_date)}</td><td>{escape(certainty)}</td><td>{''.join(f"<a href='#obs-{escape(str(oid))}'>{escape(str(oid))}</a> " for oid in attr.observation_ids)}</td><td>{''.join(f"<a href='#evidence-{escape(str(eid))}'>{escape(str(eid))}</a> " for eid in attr.evidence_ids)}</td></tr>")
     unknowns = "".join(f"<li>{escape(u.question)} · {escape(u.status)} · related observations: {escape(', '.join(u.related_observation_ids))}</li>" for u in model.unknowns.values()) or "<li>No persisted Unknowns for this enterprise.</li>"
     lineage = []
     for obs_id in {oid for a in model.attributes.values() for oid in a.observation_ids}:
@@ -41,13 +41,13 @@ def factual_digital_twin_workspace(enterprise_id: str, models: EnterpriseModelRe
     enterprise_id = canonical_enterprise_id(enterprise_id) or enterprise_id
     model = (models or EnterpriseModelRepository()).get(enterprise_id)
     obs_repo = observations or ObservationRepository()
-    evidence_items = evidence_items or []
+    evidence_items = evidence_items or EvidenceRepository().list()
     evidence_by_id = {str(e.get("evidence_id")): e for e in evidence_items}
     coverage = coverage_for_model(model)
     maturity = maturity_for_model(model)
     obs_ids = {oid for a in model.attributes.values() for oid in a.observation_ids}
     evidence_ids = {eid for a in model.attributes.values() for eid in a.evidence_ids}
-    overview = f"""<section class='card action'><h1>BT Digital Twin</h1><p>Status: <strong>{escape(maturity)}</strong></p><p>Canonical ID: {escape(enterprise_id)}</p><p>Sector: {escape(str(model.attributes.get('identity.sector').current_value if model.attributes.get('identity.sector') else 'Unknown'))}</p><p>Last refreshed: {escape(model.updated_at)}</p><p><a href='/financial-intelligence'>Financial Intelligence</a> · <a href='/financial-intelligence'>Refresh Financial Intelligence</a></p><p>Observation count: {len(obs_ids)} · Evidence count: {len(evidence_ids)} · Unknown count: {len(model.unknowns)} · Contradiction count: {len([a for a in model.attributes.values() if a.contradiction_state == 'contradicted'])} · Stale attribute count: 0</p></section>"""
+    overview = f"""<section class='card action'><h1>BT Digital Twin</h1><p>Status: <strong>{escape(maturity)}</strong></p><p>Canonical ID: {escape(enterprise_id)}</p><p>Sector: {escape(str(model.attributes.get('identity.sector').current_value if model.attributes.get('identity.sector') else 'Unknown'))}</p><p>Last refreshed: {escape(model.updated_at)}</p><p><a href='/financial-intelligence'>Financial Intelligence</a> · <a href='/financial-intelligence'>Refresh Financial Intelligence</a></p><p>Active Observation count: {len(obs_ids)} · Supporting Evidence count: {len(evidence_ids)} · Retired or superseded Observation count: {len([o for o in obs_repo.list() if o.retired_at or o.lifecycle_state in {'retired','superseded'}])} · Unknown count: {len(model.unknowns)} · Contradiction count: {len([a for a in model.attributes.values() if a.contradiction_state == 'contradicted'])} · Stale attribute count: 0</p></section>"""
     cov_rows = ''.join(f"<tr><th>{escape(d)}</th><td>{c['coverage_percent']}%</td><td>{len(c['expected_attributes'])}</td><td>{len(c['populated_attributes'])}</td><td>{len(c['unsupported_attributes'])}</td><td>{len(c['contradicted_attributes'])}</td><td>{c['source_count']}</td></tr>" for d,c in coverage.items())
     tabs = "<nav>Overview | Structure | Financials | Strategy | Leadership | Timeline | Unknowns | Evidence</nav>"
     attr_rows=[]
@@ -57,7 +57,7 @@ def factual_digital_twin_workspace(enterprise_id: str, models: EnterpriseModelRe
             ev=evidence_by_id.get(eid,{})
             page=ev.get('page_number') or ev.get('page_range') or 'unknown page'
             ev_pages.append(f"{escape(eid)} page {escape(str(page))}")
-        attr_rows.append(f"<tr><th>{escape(key)}</th><td>{escape(str(attr.current_value))}</td><td>{escape(attr.freshness)}</td><td>{attr.confidence}</td><td>{escape(attr.last_observed_date)}</td><td>{escape(', '.join(attr.observation_ids))}</td><td>{escape('; '.join(ev_pages) or ', '.join(attr.evidence_ids))}</td><td>{escape(str(attr.prior_values))}</td></tr>")
+        attr_rows.append(f"<tr><th>{escape(key)}</th><td>{escape(str(attr.current_value))}</td><td>{escape(attr.freshness)}</td><td>{attr.confidence}</td><td>{escape(attr.last_observed_date)}</td><td>{''.join(f"<a href='#obs-{escape(str(oid))}'>{escape(str(oid))}</a> " for oid in attr.observation_ids)}</td><td>{escape('; '.join(ev_pages) or ', '.join(attr.evidence_ids))}</td><td>{escape(str(attr.prior_values))}</td></tr>")
     def _business_financial_row(key: str, attr) -> str:
         parts = key.split('.')
         metric = parts[2].replace('_', ' ').title().replace('Ebitda', 'EBITDA') if len(parts) > 2 else key
@@ -71,7 +71,7 @@ def factual_digital_twin_workspace(enterprise_id: str, models: EnterpriseModelRe
                 if m:
                     display_value = m.group(1).replace(' ', '').replace('billion', 'bn').replace('million', 'm')
                     break
-        return f"<tr><th>{escape(metric)}</th><td>{escape(display_value)}</td><td>{escape(period)}</td><td>{escape(state)}</td><td>{escape(attr.freshness)}</td><td>{attr.confidence}</td><td>{escape(', '.join(attr.observation_ids))}</td><td>{escape(', '.join(attr.evidence_ids))}</td></tr>"
+        return f"<tr><th>{escape(metric)}</th><td>{escape(display_value)}</td><td>{escape(period)}</td><td>{escape(state)}</td><td>{escape(attr.freshness)}</td><td>{attr.confidence}</td><td>{''.join(f"<a href='#obs-{escape(str(oid))}'>{escape(str(oid))}</a> " for oid in attr.observation_ids)}</td><td>{''.join(f"<a href='#evidence-{escape(str(eid))}'>{escape(str(eid))}</a> " for eid in attr.evidence_ids)}</td></tr>"
 
     def domain_panel(title: str, prefix: str) -> str:
         if prefix == 'financial_performance.':
@@ -80,9 +80,9 @@ def factual_digital_twin_workspace(enterprise_id: str, models: EnterpriseModelRe
             return f"<section class='card'><h2>{escape(title)}</h2>{'<table>'+head+'<tbody>'+''.join(rows)+'</tbody></table>' if rows else '<p>Not yet established</p>'}</section>"
         rows = [r for k, r in zip(sorted(model.attributes), attr_rows) if k.startswith(prefix)]
         return f"<section class='card'><h2>{escape(title)}</h2>{'<table><tbody>'+''.join(rows)+'</tbody></table>' if rows else '<p>Not yet established</p>'}</section>"
-    ev_rows=''.join(f"<tr><th>{escape(str(e.get('evidence_id')))}</th><td>{escape(str(e.get('source_name')))}</td><td>{escape(str(e.get('publisher')))}</td><td>{escape(str(e.get('source_url')))}</td><td>{escape(str(e.get('page_number') or e.get('page_range')))}</td><td>{escape(str(e.get('extracted_text') or e.get('snippet'))[:360])}</td><td>{escape(str(e.get('extraction_method')))}</td><td>{escape(str(e.get('document_checksum'))[:16])}</td></tr>" for e in evidence_items)
+    ev_rows=''.join(f"<tr id='evidence-{escape(str(e.get('evidence_id')))}'><th><a href='#evidence-{escape(str(e.get('evidence_id')))}'>{escape(str(e.get('evidence_id')))}</a></th><td>{escape(str(e.get('metric_identity') or e.get('metric_label') or e.get('commercial_condition')))}</td><td>{escape(str(e.get('display_value') or e.get('value')))}</td><td>{escape(str(e.get('normalised_amount')))}</td><td>{escape(str(e.get('period')))} / {escape(str(e.get('state')))} / {escape(str(e.get('enterprise_scope')))} / {escape(str(e.get('accounting_basis')))}</td><td><a href='{escape(str(e.get('source_url') or '#'))}'>source</a> page {escape(str(e.get('page_number') or e.get('page_range')))}</td><td>{escape(str((e.get('financial_table_evidence_bundle') or {}).get('table_title') or ''))} · {escape(str((e.get('financial_table_evidence_bundle') or {}).get('row_label') or ''))} / {escape(str((e.get('financial_table_evidence_bundle') or {}).get('column_heading') or ''))}</td><td>{escape(str(e.get('source_excerpt') or e.get('extracted_text') or e.get('snippet'))[:360])}</td><td>{escape(str(e.get('extractor_name') or e.get('extraction_method')))} · {escape(str(e.get('extraction_timestamp')))}</td><td>{escape(str(e.get('observation_id')))} · {escape(str(e.get('enterprise_model_path') or e.get('affected_attribute')))}</td></tr>" for e in evidence_items if str(e.get('evidence_id')) in evidence_ids)
     domains_html = domain_panel("Financials", "financial_performance.") + domain_panel("Structure", "structure.") + domain_panel("Strategy", "strategy.") + domain_panel("Leadership", "leadership.") + domain_panel("Identity", "identity.")
-    return overview + tabs + domains_html + f"<section class='card'><h2>Domain coverage</h2><table><thead><tr><th>Domain</th><th>Coverage</th><th>Expected</th><th>Populated</th><th>Unsupported</th><th>Contradicted</th><th>Sources</th></tr></thead><tbody>{cov_rows}</tbody></table></section>" + f"<section class='card'><h2>Attribute Detail</h2><table><tbody>{''.join(attr_rows) or '<tr><td>No factual attributes yet.</td></tr>'}</tbody></table></section>" + f"<section class='card'><h2>Evidence Detail</h2><table><tbody>{ev_rows or '<tr><td>No evidence detail loaded.</td></tr>'}</tbody></table></section>"
+    return overview + tabs + domains_html + f"<section class='card'><h2>Domain coverage</h2><table><thead><tr><th>Domain</th><th>Coverage</th><th>Expected</th><th>Populated</th><th>Unsupported</th><th>Contradicted</th><th>Sources</th></tr></thead><tbody>{cov_rows}</tbody></table></section>" + f"<section class='card'><h2>Attribute Detail</h2><table><tbody>{''.join(attr_rows) or '<tr><td>No factual attributes yet.</td></tr>'}</tbody></table></section>" + f"<section class='card'><h2>Evidence Detail</h2><table><thead><tr><th>Evidence</th><th>Metric</th><th>Reported</th><th>Normalised</th><th>Period / state / scope / basis</th><th>Source page</th><th>Table context</th><th>Excerpt</th><th>Extraction</th><th>Lineage</th></tr></thead><tbody>{ev_rows or '<tr><td>No evidence detail loaded.</td></tr>'}</tbody></table></section>"
 
 
 def factual_digital_twin_page(enterprise_id: str) -> str:
@@ -99,5 +99,6 @@ def factual_digital_twin_page(enterprise_id: str) -> str:
         body = """<section class='card action'><h1>BT Digital Twin</h1><p>Status: <strong>Not established</strong></p><p><a href='/financial-intelligence'>Financial Intelligence</a> · <a href='/financial-intelligence'>Refresh Financial Intelligence</a></p><p>No accepted factual model state exists yet.</p></section>"""
     else:
         evidence = [e for e in read_jsonl(DEFAULT_PATH) if (e.get("canonical_enterprise_id") or e.get("enterprise_id") or e.get("organisation")) == canonical]
+        evidence.extend([e for e in EvidenceRepository().list() if (e.get("canonical_enterprise_id") or e.get("enterprise_id") or e.get("organisation")) == canonical])
         body = factual_digital_twin_workspace(canonical, evidence_items=evidence)
     return _page("BT Digital Twin", body)

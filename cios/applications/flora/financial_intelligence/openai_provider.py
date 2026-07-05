@@ -4,6 +4,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 from .instructions import EXTRACTION_INSTRUCTIONS
 from .config import financial_intelligence_settings
+from .provider_guard import enforce_provider_call_allowed
 from pydantic import ValidationError
 from .schema import ExperimentDocument, ExtractionRun, FoundationFactSet, ProviderFoundationFactSet, PageRange, now_iso, openai_strict_json_schema
 from .candidate_validation import parse_foundation_fact_candidates

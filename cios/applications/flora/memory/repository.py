@@ -111,3 +111,49 @@ class EnterpriseModelRepository:
         data = json.dumps(model.to_dict(), ensure_ascii=False, indent=2, sort_keys=True) + "\n"
         atomic_write_text(path, data)
         return model
+
+
+class EvidenceRepository:
+    """Append/rewrite JSONL repository for canonical Evidence records."""
+
+    def __init__(self, path: Path | None = None):
+        self.path = path or data_path("memory", "evidence.jsonl")
+
+    def list(self) -> list[dict]:
+        if not self.path.exists():
+            return []
+        rows = []
+        with self.path.open("r", encoding="utf-8") as handle:
+            for line_no, line in enumerate(handle, start=1):
+                if not line.strip():
+                    continue
+                try:
+                    row = json.loads(line)
+                except json.JSONDecodeError as exc:
+                    raise ValueError(f"Malformed Evidence JSONL record at {self.path}:{line_no}") from exc
+                if isinstance(row, dict):
+                    rows.append(row)
+        return rows
+
+    def get(self, evidence_id: str) -> dict | None:
+        return next((e for e in self.list() if str(e.get("evidence_id")) == str(evidence_id)), None)
+
+    def save(self, evidence: dict) -> dict:
+        if not evidence.get("evidence_id"):
+            raise ValueError("Evidence requires evidence_id")
+        rows = self.list()
+        for i, row in enumerate(rows):
+            if str(row.get("evidence_id")) == str(evidence.get("evidence_id")):
+                merged = {**row, **{k: v for k, v in evidence.items() if v not in (None, "", [])}}
+                rows[i] = merged
+                self._rewrite(rows)
+                return merged
+        ensure_parent_writable(self.path)
+        encoded = json.dumps(evidence, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
+        with self.path.open("a", encoding="utf-8") as handle:
+            handle.write(encoded); handle.flush(); os.fsync(handle.fileno())
+        return evidence
+
+    def _rewrite(self, rows: Iterable[dict]) -> None:
+        data = "".join(json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n" for row in rows)
+        atomic_write_text(self.path, data)

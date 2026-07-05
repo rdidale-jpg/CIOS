@@ -134,8 +134,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         length = int(self.headers.get("Content-Length", "0"))
         raw_body = self.rfile.read(length)
         form = {} if "multipart/form-data" in self.headers.get("Content-Type", "") else parse_qs(raw_body.decode("utf-8"), keep_blank_values=True)
-        if self.path == "/financial-intelligence/bt-group-plc/refresh":
-            run = create_financial_intelligence_progress_run("bt-group-plc")
+        if self.path.startswith("/financial-intelligence/bt-group-plc/refresh"):
+            mode = "administrative_ai_review" if "reprocess=1" in self.path else "standard_financial_metrics"
+            run = create_financial_intelligence_progress_run("bt-group-plc", extraction_mode=mode)
             self._redirect(f"/financial-intelligence/progress/{run['run_id']}")
         elif self.path == "/ai-financial-report/upload":
             fields, files = _parse_multipart(self.headers, raw_body)
