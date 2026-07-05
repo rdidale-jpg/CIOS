@@ -57,6 +57,11 @@ CIOS is not a generic scraping, dashboarding or report-generation system. It is 
 - No strong recommendation without lineage.
 - Human knowledge must be labelled.
 
+- Do not invent canonical fields, enums, lifecycles, object meanings or Enterprise Model paths in runtime code when the owning specification is silent. Identify the owning architecture document, raise an architecture question, update the data contract or create an ADR before implementation.
+- Provider output is candidate data, not canonical intelligence.
+- Provider-specific DTOs must be mapped into canonical CIOS objects before reasoning or model updates.
+- Preserve state-semantics separation: Observation lifecycle, domain measurement state, accounting basis, freshness and runtime run state are different concepts.
+
 ## AI operating rules
 
 - Do not treat evidence as intelligence.

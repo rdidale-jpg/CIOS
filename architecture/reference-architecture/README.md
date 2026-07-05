@@ -27,6 +27,7 @@ The Reference Architecture defines:
 - [RA-001 — CIOS Enterprise Intelligence Meta Model](meta-model/RA-001-CIOS-Enterprise-Intelligence-Meta-Model.md) — the authoritative conceptual model for first-class objects, relationships, lifecycle, state, temporality and evidence lineage.
 - [Glossary](Glossary.md) — concise definitions for CIOS architecture terminology.
 - [Document Map](Document-Map.md) — navigation map for Founding Papers, Enterprise Intelligence papers, ADRs and runtime architecture documents.
+- [Flora Financial Intelligence Runtime Specification v0.1](../../docs/Architecture/Flora_Financial_Intelligence_Runtime_Specification_v0.1.md) — pilot runtime contract for governed financial evidence, Observations and Enterprise Model projection.
 - [Architecture Principles](Architecture-Principles.md) — first principles and detailed operating principles.
 - [Architecture Maturity Model](Architecture-Maturity-Model.md) — staged model for how CIOS evolves from evidence collection to autonomous business development partnership.
 - [Architecture Roadmap](Architecture-Roadmap.md) — implementation phases that align runtime work to the architecture.
@@ -39,6 +40,7 @@ The Reference Architecture defines:
   - [ADR-003 — CIRM and EI Separation](../decisions/ADR-003-CIRM-and-EI-Separation.md)
   - [ADR-004 — Human-Supplied Knowledge Must Be Labelled](../decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md)
   - [ADR-005 — No Recommendation Without Inspectable Lineage](../decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md)
+  - [ADR-010 — Structured-Source-First, AI-Assisted Evidence Acquisition](../decisions/ADR-010-Structured-Source-First-AI-Assisted-Evidence-Acquisition.md)
   - Proposed ADRs retained for review: [ADR-006 — Signal Architecture](../decisions/ADR-006-Signal-Architecture.md), [ADR-007 — Transformation Thesis](../decisions/ADR-007-Transformation-Thesis.md), [ADR-008 — Recommendation Engine](../decisions/ADR-008-Recommendation-Engine.md)
 
 ## Navigation rule

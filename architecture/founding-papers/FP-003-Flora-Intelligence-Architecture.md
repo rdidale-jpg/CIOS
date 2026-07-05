@@ -14,14 +14,15 @@ Observable Enterprise Reality
 → Governed Source Collection
 → Raw Evidence
 → Evidence Quality Assessment
-→ Strategic Signals
-→ Commercial Insights
-→ Transformation Themes
-→ Transformation Theses
+→ Observation
+→ Strategic Signal
+→ Commercial Insight
+→ Transformation Theme
+→ Transformation Thesis / Hypothesis
 → Hypothesis Validation
 → Commercial Conviction
-→ Executive Recommendations
-→ Commercial Outcomes
+→ Executive Recommendation
+→ Commercial Outcome
 → Continuous Learning
 ```
 
@@ -59,6 +60,7 @@ Executive Recommendation
 → Hypothesis / Transformation Thesis
 → Commercial Insight
 → Strategic Signal
+→ Observation
 → Raw Evidence
 → Source
 ```
@@ -137,14 +139,15 @@ Observable Enterprise Reality
 → Governed Source Collection
 → Raw Evidence
 → Evidence Quality Assessment
-→ Strategic Signals
-→ Commercial Insights
-→ Transformation Themes
-→ Transformation Theses
+→ Observation
+→ Strategic Signal
+→ Commercial Insight
+→ Transformation Theme
+→ Transformation Thesis / Hypothesis
 → Hypothesis Validation
 → Commercial Conviction
-→ Executive Recommendations
-→ Commercial Outcomes
+→ Executive Recommendation
+→ Commercial Outcome
 → Continuous Learning
 ```
 
@@ -154,7 +157,8 @@ Each stage has a distinct purpose:
 2. **Governed Source Collection** — the controlled acquisition of evidence from approved, explainable and source-specific locations.
 3. **Raw Evidence** — a factual, attributable record of something observed.
 4. **Evidence Quality Assessment** — assessment of evidence authority, specificity, freshness, relevance, independence and usefulness.
-5. **Strategic Signals** — commercially meaningful interpretations of evidence that indicate potential enterprise change, pressure or opportunity.
+5. **Observation** — the required memory object created from accepted evidence before higher-order reasoning where an Observation can be created.
+6. **Strategic Signals** — commercially meaningful interpretations of Observation-backed evidence that indicate potential enterprise change, pressure or opportunity.
 6. **Commercial Insights** — reasoned patterns derived from multiple signals.
 7. **Transformation Themes** — recurring categories of enterprise change such as AI transformation, cyber resilience, cloud modernisation, legacy replacement, operating-model change or cost transformation.
 8. **Transformation Theses** — coherent, evidence-backed judgements about what may be happening in an enterprise and why it matters commercially.
@@ -181,7 +185,7 @@ Flora should reason across a small number of durable intelligence objects:
 - **Unknown** — a named missing fact, unresolved question, assumption or evidence gap.
 - **Contradiction** — evidence that weakens, narrows or challenges a signal, insight or thesis.
 - **Recommendation** — an action Flora suggests, with rationale, confidence and caveats.
-- **Case file** — the living memory object that accumulates evidence, timeline, insights, theses, unknowns and actions for an organisation.
+- **Case file** — a workspace or product view that organises Evidence, Observations, Enterprise Model state, reasoning, unknowns and actions for an organisation; it is not an independent canonical memory store.
 
 These objects should remain conceptually stable even as the implementation changes. Code may introduce different modules, services or storage mechanisms, but it should preserve the reasoning distinction between evidence, signal, insight, thesis, recommendation and outcome.
 
@@ -260,7 +264,7 @@ A transformation thesis should answer:
 A thesis is built by connecting multiple signals into a coherent commercial interpretation. The minimum reasoning path should be:
 
 ```text
-Raw Evidence → Strategic Signal → Commercial Insight → Transformation Thesis → Hypothesis Validation → Commercial Conviction → Executive Recommendation
+Raw Evidence → Observation → Strategic Signal → Commercial Insight → Transformation Thesis → Hypothesis Validation → Commercial Conviction → Executive Recommendation
 ```
 
 A single strong signal may create an early thesis candidate, but a durable thesis should normally require corroboration across different evidence types, time periods or transformation dimensions.
@@ -361,9 +365,9 @@ This function may eventually be performed by a specialist Challenge Agent, but t
 
 ## 11. Enterprise DNA
 
-Enterprise DNA is the durable contextual model of an organisation. It describes the structural characteristics that shape how signals should be interpreted and how transformation may happen.
+Enterprise DNA is retained as a historical and descriptive term for a view over relatively stable Enterprise Model attributes. It is not a second canonical memory store. The Enterprise Model / Commercial Digital Twin owns durable enterprise state; Enterprise DNA describes the structural characteristics within that model that shape how signals should be interpreted and how transformation may happen.
 
-Flora should build and maintain Enterprise DNA across at least these dimensions:
+Flora should represent Enterprise DNA-like context through the Enterprise Model across at least these dimensions:
 
 - **Business Model** — how the enterprise creates, delivers and captures value.
 - **Technology Estate** — major platforms, legacy systems, data architecture and integration constraints.
@@ -414,7 +418,7 @@ Observe
 The loop is not a linear sales process. It is an institutional learning cycle.
 
 - **Observe** enterprise reality through governed sources.
-- **Understand** evidence in context using Enterprise DNA and sector logic.
+- **Understand** evidence in context using Enterprise Model context and sector logic.
 - **Hypothesise** about transformation pressure and commercial meaning.
 - **Challenge** the hypothesis through contradiction, falsification and unknowns.
 - **Recommend** the next action that is justified by the reasoning.
@@ -433,7 +437,7 @@ Potential agent roles include:
 - **Research Agent** — collects or receives governed evidence from approved sources.
 - **Evidence Agent** — records provenance, source quality, timestamps, limitations and evidence receipts.
 - **Signal Agent** — classifies evidence into structured strategic signals.
-- **Insight Agent** — connects signals with Enterprise DNA, sector context and capability logic.
+- **Insight Agent** — connects Observation-backed signals with Enterprise Model context, sector context and capability logic.
 - **Thesis Agent** — builds, updates and manages transformation theses.
 - **Challenge Agent** — searches for contradictions, weakening evidence and alternative explanations.
 - **Recommendation Agent** — proposes next actions with rationale, caveats and learning objectives.
@@ -447,18 +451,19 @@ Flora's default reasoning flow should be:
 
 1. Collect or load governed evidence.
 2. Preserve evidence receipts and source context.
-3. Classify evidence into strategic signals.
-4. Normalise signals into the strategic signal standard.
-5. Assess transformation pressure and commercial relevance.
-6. Identify capability themes and possible executive owners.
-7. Compare evidence strength against unknowns and contradictions.
-8. Generate or update transformation theses.
-9. Challenge theses through falsification and alternative explanations.
-10. Generate ranked opportunities, attention items or learning actions.
-11. Explain why Flora believes each item matters.
-12. State what Flora cannot yet know.
-13. Recommend next actions that a human can validate.
-14. Capture feedback and outcomes in the living case file.
+3. Convert accepted evidence into Observations.
+4. Classify Observations into strategic signals.
+5. Normalise signals into the strategic signal standard.
+6. Assess transformation pressure and commercial relevance.
+7. Identify capability themes and possible executive owners.
+8. Compare evidence strength against unknowns and contradictions.
+9. Generate or update transformation theses.
+10. Challenge theses through falsification and alternative explanations.
+11. Generate ranked opportunities, attention items or learning actions.
+12. Explain why Flora believes each item matters.
+13. State what Flora cannot yet know.
+14. Recommend next actions that a human can validate.
+15. Capture feedback and outcomes as governed learning and product-view updates over canonical memory.
 
 ## 16. Explainability requirements
 
@@ -507,7 +512,7 @@ Flora may express the same intelligence architecture through multiple product su
 - unknowns and contradiction queues;
 - teach-Flora feedback loops.
 
-These surfaces should remain consistent with the same evidence, reasoning and governance model. A user should be able to move from a recommendation back to the evidence, signal, insight, thesis and unknowns that produced it.
+These surfaces should remain consistent with the same evidence, reasoning and governance model. A user should be able to move from a recommendation back to the evidence, Observation, signal, insight, thesis and unknowns that produced it.
 
 ## 19. Relationship to CIOS
 
@@ -520,7 +525,7 @@ Flora is not a standalone application in architectural terms. It is an applied e
 - agent-supported analysis;
 - learning and memory.
 
-Flora should therefore create reusable knowledge assets rather than isolated outputs. Its evidence receipts, signals, Enterprise DNA, theses, contradictions, unknowns, recommendations and outcomes should become part of the wider CIOS intelligence substrate.
+Flora should therefore create reusable knowledge assets rather than isolated outputs. Its evidence receipts, Observations, signals, Enterprise Model context, theses, contradictions, unknowns, recommendations and outcomes should become part of the wider CIOS intelligence substrate.
 
 ## 20. Laws of commercial intelligence
 

@@ -132,18 +132,32 @@ Observable Enterprise Reality
 → Governed Source Collection
 → Raw Evidence
 → Evidence Quality Assessment
-→ Strategic Signals
-→ Commercial Insights
-→ Transformation Themes
-→ Transformation Theses
+→ Observation
+→ Strategic Signal
+→ Commercial Insight
+→ Transformation Theme
+→ Transformation Thesis / Hypothesis
 → Hypothesis Validation
 → Commercial Conviction
-→ Executive Recommendations
-→ Commercial Outcomes
+→ Executive Recommendation
+→ Commercial Outcome
 → Continuous Learning
 ```
 
-The Founding Papers FP-003 to FP-009 define the core CIRM volumes.
+The Founding Papers FP-003 to FP-009 define the core CIRM volumes. The canonical chain requires an Observation between accepted Evidence and Strategic Signal wherever an Observation can be created. Observation Networks and Patterns may aggregate multiple Observations during reasoning, but they are optional reasoning structures rather than mandatory stages for every individual Observation.
+
+Inspectable recommendation lineage uses the reverse chain:
+
+```text
+Executive Recommendation
+→ Commercial Conviction
+→ Hypothesis or Transformation Thesis
+→ Commercial Insight
+→ Strategic Signal
+→ Observation
+→ Raw Evidence
+→ Source
+```
 
 ### Volume I — Observation
 
