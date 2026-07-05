@@ -442,7 +442,7 @@ def test_section_packet_diagnostics_page_reasons_and_partial_success(monkeypatch
     class Client:
         def __init__(self, **kwargs): self.responses = Responses()
     monkeypatch.setitem(sys.modules, 'openai', types.SimpleNamespace(OpenAI=Client))
-    provider = types.SimpleNamespace(model='gpt-test', reasoning_effort='none', max_output_tokens=2000, timeout_seconds=1, max_retries=0)
+    provider = types.SimpleNamespace(model='gpt-test', reasoning_effort='none', max_output_tokens=4000, timeout_seconds=1, max_retries=0)
     doc = ExperimentDocument(document_id='DOC', enterprise_id='bt-group-plc', title='BT Annual Report', source_url='https://example.com/bt.pdf', retrieval_timestamp=ai_review.now_iso(), checksum='z'*64, media_type='application/pdf', page_count=8, local_path='bt.pdf')
     pages = [
         DocumentPage(1, 'BT Group plc Annual Report 2026'),
