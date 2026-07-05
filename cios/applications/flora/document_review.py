@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from cios.applications.flora.financial_intelligence.openai_provider import OpenAIDirectPDFProvider, openai_sdk_readiness
+from cios.applications.flora.financial_intelligence.section_packets import SectionAwareOpenAIProvider
 from cios.applications.flora.financial_intelligence.config import financial_intelligence_settings
 from cios.applications.flora.financial_intelligence.schema import ExperimentDocument, FoundationFact
 from cios.applications.flora.memory.service import ObservationMemoryService
@@ -51,6 +52,7 @@ FAILURE_MESSAGES = {
     'provider_authentication_failed': 'Financial document understanding is temporarily unavailable.',
     'provider_request_failed': 'Financial document understanding could not complete.',
     'provider_quota_exceeded': 'Financial document understanding could not complete.',
+    'request_exceeds_tpm_limit': 'Flora is dividing this large report into manageable financial sections.',
     'cost_limit_exceeded': 'Financial document understanding was blocked by the configured cost limit.',
     'cost_preflight_sdk_unavailable': 'Financial document understanding could not use SDK token preflight; bounded pilot controls apply.',
     'cost_preflight_request_failed': 'Financial document understanding could not safely complete token preflight.',
@@ -81,6 +83,7 @@ def _provider_failure_category(extraction) -> str:
         'authentication_failed': 'provider_authentication_failed',
         'quota_exceeded': 'provider_quota_exceeded',
         'provider_quota_exceeded': 'provider_quota_exceeded',
+        'request_exceeds_tpm_limit': 'request_exceeds_tpm_limit',
         'cost_limit_exceeded': 'cost_limit_exceeded',
         'cost_preflight_sdk_unavailable': 'cost_preflight_sdk_unavailable',
         'cost_preflight_request_failed': 'cost_preflight_request_failed',
@@ -374,15 +377,21 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc') -> dict[
 
     if fetched.succeeded:
         try:
-            extraction = provider.extract_facts(document, correlation_id=correlation_id)
+            if os.getenv('OPENAI_API_KEY') and doc_parse.pages:
+                extraction, packet_plan = SectionAwareOpenAIProvider(provider).extract_packets(document, doc_parse.pages, correlation_id=correlation_id)
+            else:
+                extraction = provider.extract_facts(document, correlation_id=correlation_id)
+                packet_plan = {}
         except TypeError as exc:
             if 'correlation_id' not in str(exc):
                 raise
             extraction = provider.extract_facts(document)
+            packet_plan = {}
     else:
         extraction = None
+    packet_plan = locals().get('packet_plan', {})
     claims = [fact_to_review_claim(f, run_id) for f in (extraction.facts if extraction else [])]
-    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b'')}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else provider.model), 'reasoning_effort': getattr(provider, 'reasoning_effort', settings.reasoning_effort), 'schema_version': settings.schema_version, 'prompt_version': settings.prompt_version, 'document_hash': document.checksum, 'usage': (extraction.usage if extraction else {}), 'estimated_cost_usd': (extraction.estimated_cost_usd if extraction else None), 'actual_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('actual_cost_usd') if extraction else None, 'cost_breakdown': {'input_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('input_cost_usd'), 'output_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('output_cost_usd')} if extraction else {}, 'exact_preflight_available': (getattr(extraction, 'verifier', {}) or {}).get('exact_preflight_available') if extraction else None, 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'provider_diagnostics': (getattr(extraction, 'diagnostics', []) if extraction else [_safe_provider_diagnostic(run_id, source, fetched, provider.model, retrieval_started)]), 'openai_invoked': bool(extraction), 'claims': claims, 'applied_results': []}
+    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'processing', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b'')}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else provider.model), 'reasoning_effort': getattr(provider, 'reasoning_effort', settings.reasoning_effort), 'schema_version': settings.schema_version, 'prompt_version': settings.prompt_version, 'document_hash': document.checksum, 'usage': (extraction.usage if extraction else {}), 'estimated_cost_usd': (extraction.estimated_cost_usd if extraction else None), 'actual_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('actual_cost_usd') if extraction else None, 'cost_breakdown': {'input_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('input_cost_usd'), 'output_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('output_cost_usd')} if extraction else {}, 'exact_preflight_available': (getattr(extraction, 'verifier', {}) or {}).get('exact_preflight_available') if extraction else None, 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'provider_diagnostics': (getattr(extraction, 'diagnostics', []) if extraction else [_safe_provider_diagnostic(run_id, source, fetched, provider.model, retrieval_started)]), 'openai_invoked': bool(extraction), 'claims': claims, 'applied_results': [], 'candidate_pages_selected': packet_plan.get('candidate_pages', []), 'page_packets_submitted': packet_plan.get('packets', []), 'packet_count': packet_plan.get('packet_count', 0)}
     run['collection'].update({'final_url': fetched.final_url or fetched.url, 'content_type': fetched.media_type, 'redirect_chain': list(fetched.redirect_chain), 'redirected': bool(fetched.redirect_chain)})
     if extraction:
         run['provider_diagnostics'] = [_safe_provider_diagnostic(run_id, source, fetched, provider.model, retrieval_started)] + run.get('provider_diagnostics', [])

@@ -100,7 +100,9 @@ def test_responses_input_tokens_count_is_used_and_mirrors_extraction(monkeypatch
     assert calls[0][0] == 'count'
     count_payload = calls[0][1]
     create_payload = calls[1][1]
-    assert count_payload == create_payload
+    assert 'max_output_tokens' not in count_payload
+    assert create_payload['max_output_tokens'] == 2000
+    assert count_payload == {k: v for k, v in create_payload.items() if k != 'max_output_tokens'}
 
 
 def test_technical_count_failure_allows_one_bounded_nano_request(monkeypatch, tmp_path):
