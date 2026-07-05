@@ -340,8 +340,6 @@ def merge_packet_facts(runs: list[ExtractionRun], document: ExperimentDocument) 
             if key in seen:
                 continue
             seen.add(key); facts.append(fact)
-            if len(facts) >= MATERIAL_FACT_LIMIT:
-                return FoundationFactSet(facts=facts)
     return FoundationFactSet(facts=facts)
 
 

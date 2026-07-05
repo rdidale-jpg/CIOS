@@ -235,9 +235,11 @@ def fact_to_review_claim(fact: FoundationFact, run_id: str) -> dict[str, Any]:
         'metric_identity': (fact.predicate or fact.object_type or 'metric').casefold().replace(' ', '_'),
         'value': fact.value_number if fact.value_number is not None else fact.value_text,
         'reported_amount': fact.value_number if fact.value_number is not None else None,
+        'original_display_value': None,
         'reported_scale': fact.scale,
         'unit': fact.unit,
         'currency': fact.currency,
+        'accounting_basis': 'statutory' if str(fact.predicate).casefold().startswith('reported revenue') else None,
         'business_unit': fact.business_unit or fact.subject_name,
         'period': fact.period_label,
         'state': _financial_state_from_fact(fact),
@@ -293,8 +295,8 @@ def _statement(f: FoundationFact) -> str:
 
 def _canonical_financial_statement(claim: dict[str, Any]) -> str:
     if claim.get('claim_type') == 'financial_metric_reported' and claim.get('display_value') and claim.get('metric_identity') and claim.get('period'):
-        metric = str(claim.get('metric_identity')).replace('_', ' ')
-        return f"BT Group plc reported {metric} of {claim.get('display_value')} for {claim.get('period')}."
+        metric = str(claim.get('metric_label') or claim.get('metric_identity')).replace('_', ' ')
+        return f"BT Group plc reported {claim.get('period')} {metric} of {claim.get('display_value')}."
     return claim.get('amended_statement') or claim.get('original_statement') or ''
 
 def claim_to_evidence(run: dict[str, Any], claim: dict[str, Any]) -> dict[str, Any]:
@@ -408,11 +410,15 @@ def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
             continue
         if identity: seen_financial.add(identity)
         ok, reason = _is_auto_acceptable(claim, run)
-        if canon_reasons and 'financial_scale_ambiguous' in canon_reasons: reason = 'financial_scale_ambiguous'
+
+        for terminal in ('non_numeric_narrative','unsupported_metric','metric_identity_ambiguous','financial_scale_ambiguous','measurement_state_ambiguous','accounting_basis_ambiguous','invalid_lineage'):
+            if canon_reasons and terminal in canon_reasons:
+                reason = terminal
+                break
         claim['acceptance_reason'] = reason
         if not ok:
             claim['review_state'] = 'needs_attention'
-            claim['disposition'] = reason if reason in {'financial_scale_ambiguous','measurement_state_ambiguous','accounting_basis_ambiguous','invalid_lineage','unsupported_metric'} else 'quarantined'
+            claim['disposition'] = reason if reason in {'non_numeric_narrative','financial_scale_ambiguous','measurement_state_ambiguous','accounting_basis_ambiguous','invalid_lineage','unsupported_metric','metric_identity_ambiguous'} else 'quarantined'
             claim['exception_type'] = reason
             dispositions.append({'candidate_id': claim.get('claim_id'), 'disposition': claim['disposition'], 'reason': reason, 'enterprise_model_path': claim.get('affected_attribute')})
             exceptions.append(claim)
@@ -434,9 +440,14 @@ def _apply_automatic_claims(run: dict[str, Any]) -> dict[str, Any]:
         exceptions.extend(report.rejected_claims)
     changed = [r for r in results if r.get('update_result') in {'created', 'updated'}]
     terminal_status = 'completed_with_no_accepted_intelligence' if accepted == 0 and not results else ('completed_with_exceptions' if exceptions else 'completed')
+    for exc in run.get('candidate_exceptions', []):
+        disp = exc.get('disposition') or exc.get('exception_type') or 'rejected'
+        if disp not in {'accepted','quarantined','rejected','deduplicated','merged_as_corroborating_evidence','unsupported_metric','metric_identity_ambiguous','financial_scale_ambiguous','measurement_state_ambiguous','accounting_basis_ambiguous','invalid_lineage','non_numeric_narrative','superseded'}:
+            disp = 'rejected'
+        dispositions.append({'candidate_id': exc.get('candidate_id') or exc.get('claim_id') or exc.get('packet_id'), 'disposition': disp, 'reason': exc.get('rejection_reason') or exc.get('safe_explanation') or exc.get('exception_type'), 'packet_id': exc.get('packet_id')})
     counts = {}
     for d in dispositions: counts[d['disposition']] = counts.get(d['disposition'], 0) + 1
-    run.update({'status': terminal_status, 'applied_at': now_iso(), 'applied_results': results, 'exceptions': exceptions, 'auto_accepted_count': accepted, 'exception_count': len(exceptions), 'observations_created_or_strengthened': len(results), 'observations_created': len([r for r in results if r.get('update_result') == 'created']), 'observations_strengthened': len(results) - len([r for r in results if r.get('update_result') == 'created']), 'deduplicated_count': deduplicated, 'candidate_dispositions': dispositions, 'rejected_by_policy_count': len(exceptions), 'candidate_lifecycle_counts': {'candidates_returned': len(run.get('claims', [])) + len(run.get('candidate_exceptions', [])), 'valid_candidates': len(run.get('claims', [])), 'quarantined_candidates': len(run.get('candidate_exceptions', [])), 'canonical_facts_accepted': accepted, 'automatically_accepted_candidates': accepted, 'deduplicated_candidates': deduplicated, 'disposition_counts': counts, 'candidates_rejected_by_policy': len(exceptions), 'observations_created_or_strengthened': len(results), 'enterprise_model_attributes_updated': len(changed)}, 'enterprise_attributes_changed': [r.get('affected_attribute') for r in changed]})
+    run.update({'status': terminal_status, 'applied_at': now_iso(), 'applied_results': results, 'exceptions': exceptions, 'auto_accepted_count': accepted, 'exception_count': len(exceptions), 'observations_created_or_strengthened': len(results), 'observations_created': len([r for r in results if r.get('update_result') == 'created']), 'observations_strengthened': len(results) - len([r for r in results if r.get('update_result') == 'created']), 'deduplicated_count': deduplicated, 'candidate_dispositions': dispositions, 'rejected_by_policy_count': len(exceptions), 'candidate_lifecycle_counts': {'packet_candidates_extracted': len(run.get('claims', [])) + len(run.get('candidate_exceptions', [])), 'candidates_returned': len(run.get('claims', [])) + len(run.get('candidate_exceptions', [])), 'valid_candidates': len(run.get('claims', [])), 'quarantined_candidates': len(run.get('candidate_exceptions', [])), 'canonical_facts_accepted': accepted, 'automatically_accepted_candidates': accepted, 'deduplicated_candidates': deduplicated, 'disposition_counts': counts, 'candidates_rejected_by_policy': len(exceptions), 'observations_created_or_strengthened': len(results), 'enterprise_model_attributes_created': len([r for r in changed if r.get('update_result') == 'created']), 'enterprise_model_attributes_updated': len([r for r in changed if r.get('update_result') == 'updated'])}, 'enterprise_attributes_changed': [r.get('affected_attribute') for r in changed]})
     return run
 
 def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: str | None = None) -> dict[str, Any]:
@@ -693,13 +704,13 @@ def _outcome_summary(run: dict[str, Any] | None) -> str:
     exceptions = _dedupe_exceptions(run.get('exceptions', []))
     support = run.get('support_reference') or _support_reference(run)
     needs = ''.join(f"<li>{escape(str(e.get('user_message') or e.get('acceptance_reason') or e.get('rejection_reason') or 'Needs attention'))} Support reference: {escape(str(e.get('support_reference') or support))} — section {escape(str(e.get('packet_id') or 'n/a'))}</li>" for e in exceptions[:20]) or '<li>No exceptions requiring review.</li>'
-    evidence = ''.join(f"<details><summary>{escape(c.get('original_statement',''))}</summary><p>Page {escape(str(c.get('page_reference')))} · Confidence {escape(str(c.get('confidence')))} · Evidence {escape(c.get('evidence_id',''))}</p><p>{escape(str(c.get('source_excerpt') or ''))}</p></details>" for c in run.get('claims', [])[:20]) or '<p>No page-grounded claims returned.</p>'
+    evidence = ''.join(f"<details><summary>{escape(str(c.get('metric_label') or c.get('metric_identity') or c.get('original_statement','')))} — {escape(str(c.get('original_display_value') or c.get('display_value') or c.get('value') or ''))} — {escape(str(c.get('period') or ''))} {escape(str(c.get('state') or ''))} — {escape(str(c.get('business_unit') or c.get('enterprise_scope') or ''))} — {escape(str(c.get('accounting_basis') or 'basis not resolved'))} — source page {escape(str(c.get('page_reference')))}</summary><p>Page {escape(str(c.get('page_reference')))} · Confidence {escape(str(c.get('confidence')))} · Evidence {escape(c.get('evidence_id',''))} · Normalised {escape(str(c.get('normalised_amount') or ''))}</p><p>{escape(str(c.get('source_excerpt') or ''))}</p></details>" for c in run.get('claims', [])[:20]) or '<p>No page-grounded claims returned.</p>'
     status = run.get('status','')
     headline = 'Complete' if status == 'completed' else ('Needs attention' if status == 'completed_with_exceptions' else ('No accepted intelligence' if status == 'completed_with_no_accepted_intelligence' else ('In progress' if status in {'queued','retrieving_source','selecting_sections','estimating_cost','analysing','validating','updating_memory'} else 'Failed')))
     cost_value = run.get('actual_cost_usd') if run.get('actual_cost_usd') is not None else run.get('estimated_cost_usd')
     cost_text = f" · Run cost: {escape(str(cost_value))} USD" if cost_value is not None else ''
     outcome = 'Financial intelligence was updated. Some extracted facts require attention.' if status == 'completed_with_exceptions' else ('Flora analysed the financial report, but no facts passed the governed acceptance rules.' if status == 'completed_with_no_accepted_intelligence' else ('maintained Enterprise Model financial attributes changed or strengthened; use this as a prompt for account planning, not as a standalone commercial conclusion.' if run.get('enterprise_attributes_changed') else 'No financial intelligence was added because processing did not complete.'))
-    return f"""<section class='card'><h2>Refresh outcome</h2><p>{headline}{cost_text} · Candidate facts extracted: {len(run.get('claims', []))} · Reporting period: inferred from accepted facts · Collection status: {escape(status)} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Canonical facts accepted</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{len(exceptions)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a></p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {outcome}</p>{("<p><a href='/digital-twin/bt-group-plc'>View updated twin</a> · <a href='#attention'>Review exception</a> · <a href='#evidence'>View evidence</a></p>" if status == 'completed_with_exceptions' else "<form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form>")}</section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
+    return f"""<section class='card'><h2>Refresh outcome</h2><p>{headline}{cost_text} · Candidate facts extracted: {(run.get('candidate_lifecycle_counts') or {}).get('packet_candidates_extracted', len(run.get('claims', [])))} · Reporting period: inferred from accepted facts · Collection status: {escape(status)} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Canonical facts accepted</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{len(exceptions)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a></p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {outcome}</p>{("<p><a href='/digital-twin/bt-group-plc'>View updated twin</a> · <a href='#attention'>Review exception</a> · <a href='#evidence'>View evidence</a></p>" if status == 'completed_with_exceptions' else "<form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form>")}</section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
 
 def missing_run_page(run_id: str) -> str:
     body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>This previous refresh result is no longer available.</p><p>Start a new refresh to collect the latest financial intelligence.</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Start new refresh</button></form><p><a href='/financial-intelligence'>Return to Financial Intelligence</a></p></section>"""

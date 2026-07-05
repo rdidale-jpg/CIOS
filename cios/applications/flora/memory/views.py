@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from html import escape
+import re
 
 from cios.applications.flora.memory.repository import EnterpriseModelRepository, ObservationRepository
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
@@ -62,7 +63,15 @@ def factual_digital_twin_workspace(enterprise_id: str, models: EnterpriseModelRe
         metric = parts[2].replace('_', ' ').title().replace('Ebitda', 'EBITDA') if len(parts) > 2 else key
         period = parts[3] if len(parts) > 3 else 'reported period'
         state = parts[4] if len(parts) > 4 else 'actual'
-        return f"<tr><th>{escape(metric)}</th><td>{escape(str(attr.current_value))}</td><td>{escape(period)}</td><td>{escape(state)}</td><td>{escape(attr.freshness)}</td><td>{attr.confidence}</td><td>{escape(', '.join(attr.observation_ids))}</td><td>{escape(', '.join(attr.evidence_ids))}</td></tr>"
+        display_value = str(attr.current_value)
+        for oid in attr.observation_ids:
+            obs = obs_repo.get(oid)
+            if obs:
+                m = re.search(r'(£\s*[0-9][0-9,]*(?:\.[0-9]+)?\s*(?:bn|billion|m|million)?)', obs.atomic_statement, re.I)
+                if m:
+                    display_value = m.group(1).replace(' ', '').replace('billion', 'bn').replace('million', 'm')
+                    break
+        return f"<tr><th>{escape(metric)}</th><td>{escape(display_value)}</td><td>{escape(period)}</td><td>{escape(state)}</td><td>{escape(attr.freshness)}</td><td>{attr.confidence}</td><td>{escape(', '.join(attr.observation_ids))}</td><td>{escape(', '.join(attr.evidence_ids))}</td></tr>"
 
     def domain_panel(title: str, prefix: str) -> str:
         if prefix == 'financial_performance.':
