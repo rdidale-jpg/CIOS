@@ -416,3 +416,83 @@ def test_financial_intelligence_page_requires_no_manual_bt_upload(monkeypatch, t
 
     assert 'no download or upload is required' in html
     assert "action='/financial-intelligence/bt-group-plc/refresh'" in html
+
+
+def test_section_packet_diagnostics_page_reasons_and_partial_success(monkeypatch, tmp_path):
+    import sys, types, json
+    from cios.applications.flora.financial_intelligence.section_packets import SectionAwareOpenAIProvider
+    from cios.applications.flora.live.documents import DocumentPage
+    from cios.applications.flora.financial_intelligence.schema import ExperimentDocument
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
+    calls = {'n': 0}
+    class Counter:
+        def count(self, **kwargs): return {'input_tokens': 1235}
+    class Responses:
+        input_tokens = Counter()
+        def create(self, **kwargs):
+            calls['n'] += 1
+            if calls['n'] == 2:
+                raise RuntimeError('provider_request_failed')
+            class Resp:
+                output_text = json.dumps({'facts': [fact(fact_id=f'f{calls["n"]}', source_page_start=2, source_page_end=2).model_dump(mode='json')]})
+                def model_dump(self, mode='json'):
+                    return {'id': f'resp-{calls["n"]}', 'output_text': self.output_text, 'usage': {'input_tokens': 1235, 'output_tokens': 50}}
+            return Resp()
+    class Client:
+        def __init__(self, **kwargs): self.responses = Responses()
+    monkeypatch.setitem(sys.modules, 'openai', types.SimpleNamespace(OpenAI=Client))
+    provider = types.SimpleNamespace(model='gpt-test', reasoning_effort='none', max_output_tokens=2000, timeout_seconds=1, max_retries=0)
+    doc = ExperimentDocument(document_id='DOC', enterprise_id='bt-group-plc', title='BT Annual Report', source_url='https://example.com/bt.pdf', retrieval_timestamp=ai_review.now_iso(), checksum='z'*64, media_type='application/pdf', page_count=8, local_path='bt.pdf')
+    pages = [
+        DocumentPage(1, 'BT Group plc Annual Report 2026'),
+        DocumentPage(2, 'Financial highlights revenue £20.4bn adjusted EBITDA £8.2bn.'),
+        DocumentPage(3, 'Operating profit and free cash flow £1.5bn net debt guidance.'),
+    ]
+
+    extraction, plan = SectionAwareOpenAIProvider(provider).extract_packets(doc, pages, correlation_id='corr-test')
+
+    assert plan['candidate_pages'][0]['page_number'] == 2
+    assert 1 not in [p['page_number'] for p in plan['candidate_pages']]
+    assert plan['packets'][0]['page_selection_reasons']
+    events_by_packet = {}
+    for diag in extraction.diagnostics:
+        events_by_packet.setdefault(diag.get('packet_id'), set()).add(diag.get('event'))
+        assert diag.get('support_reference') == 'FI-corr-test'
+    assert {'packet_selected', 'packet_preflight_started', 'packet_preflight_completed', 'packet_model_request_started', 'packet_model_request_completed', 'packet_response_validation_started', 'packet_response_validation_completed'} <= events_by_packet['packet-1']
+    assert 'packet_failed' in events_by_packet['packet-2']
+    assert extraction.status == 'completed_with_exceptions'
+    assert extraction.facts
+
+
+def test_duplicate_needs_attention_and_failed_headline_are_safe():
+    run = {'run_id': 'fi-safe', 'status': 'provider_request_failed', 'support_reference': 'FI-safe', 'collection': {}, 'claims': [], 'applied_results': [], 'exceptions': [
+        {'exception_type': 'packet_failed', 'failure_stage': 'packet_model_request_started', 'packet_id': 'packet-1', 'support_reference': 'FI-safe', 'user_message': 'A financial section could not be analysed.'},
+        {'exception_type': 'packet_failed', 'failure_stage': 'packet_model_request_started', 'packet_id': 'packet-1', 'support_reference': 'FI-safe', 'user_message': 'A financial section could not be analysed.'},
+    ]}
+    html = ai_review._outcome_summary(run)
+    assert 'Model run completed' not in html
+    assert 'Failed' in html
+    assert html.count('A financial section could not be analysed.') == 1
+    assert 'FI-None' not in html
+
+
+def test_progress_run_deduplicates_refresh_clicks(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path / 'flora'))
+    import importlib
+    import cios.applications.flora.document_review as review
+    review = importlib.reload(review)
+    started = []
+    class Thread:
+        def __init__(self, target, args=(), daemon=None): started.append((target, args, daemon))
+        def start(self): pass
+    monkeypatch.setattr(review.threading, 'Thread', Thread)
+
+    first = review.create_financial_intelligence_progress_run()
+    second = review.create_financial_intelligence_progress_run()
+    html = review.financial_intelligence_progress_page(first['run_id'])
+
+    assert first['run_id'] == second['run_id']
+    assert len(started) == 1
+    assert 'Elapsed time:' in html
+    assert 'Large reports may take several minutes.' in html

@@ -22,7 +22,7 @@ from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
-from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_run_response, refresh_financial_intelligence, review_home_page, run_page, update_reviews
+from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_run_response, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -85,6 +85,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(financial_intelligence_page())
             elif parsed.path == "/financial-intelligence/admin/health":
                 self._html(financial_intelligence_admin_health_page())
+            elif parsed.path.startswith("/financial-intelligence/progress/"):
+                self._html(financial_intelligence_progress_page(parsed.path.removeprefix("/financial-intelligence/progress/")))
             elif parsed.path == "/financial-reports":
                 self._html(review_home_page())
             elif parsed.path.startswith("/financial-intelligence/"):
@@ -131,8 +133,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         raw_body = self.rfile.read(length)
         form = {} if "multipart/form-data" in self.headers.get("Content-Type", "") else parse_qs(raw_body.decode("utf-8"), keep_blank_values=True)
         if self.path == "/financial-intelligence/bt-group-plc/refresh":
-            run = refresh_financial_intelligence("bt-group-plc")
-            self._redirect(f"/financial-intelligence/{run['run_id']}")
+            run = create_financial_intelligence_progress_run("bt-group-plc")
+            self._redirect(f"/financial-intelligence/progress/{run['run_id']}")
         elif self.path == "/ai-financial-report/upload":
             fields, files = _parse_multipart(self.headers, raw_body)
             pdf = files.get("pdf")
