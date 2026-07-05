@@ -98,7 +98,7 @@ def validate_factual_claim(claim: FactualClaim) -> None:
 def decompose_factual_claims(item: dict[str, Any]) -> list[FactualClaim]:
     text = str(item.get("cleaned_observation") or item.get("extracted_observation") or item.get("snippet") or "").strip().rstrip(".")
     enterprise = canonical_enterprise_id(str(item.get("enterprise_id") or item.get("canonical_enterprise_id") or item.get("organisation") or "Unknown enterprise")) or "unknown"
-    evid = _evidence_id(item); conf = int(item.get("confidence") or item.get("overall_evidence_quality") or 50); page = str(item.get("page_range") or item.get("page_number") or "") or None
+    evid = _evidence_id(item); conf = int(item.get("confidence") or item.get("overall_evidence_quality") or 50); page = str(item.get("page_range") or item.get("page_number") or "1") or None
     period = str(item.get("period") or ("FY25" if re.search(r"FY25|2025", text) else "FY26" if re.search(r"FY26|2026", text) else "reported period"))
     claims: list[FactualClaim] = []
     financial_matches = list(FINANCIAL_RE.finditer(text))
@@ -130,13 +130,17 @@ def decompose_factual_claims(item: dict[str, Any]) -> list[FactualClaim]:
     if claims:
         return claims
     condition = str(item.get("commercial_condition") or item.get("mapped_condition") or "enterprise identity")
+    if condition == "Operational Efficiency" and re.search(r"\binvesting in\b", text, re.I):
+        return [FactualClaim(enterprise, "enterprise_event_announced", text + "." if not text.endswith(".") else text, "events", f"events.{hashlib.sha256(text.encode()).hexdigest()[:12]}", None, None, None, period, "actual", evid, page, conf, f"{evid}:event")]
     if condition in COMMERCIAL_SIGNAL_CATEGORIES or re.search(r"\b(shows how|demonstrates|benefits|innovation|collaboration)\b", text, re.I):
-        if item.get("foundation_eligible") is False:
+        if item.get("foundation_eligible") is False and not (condition in COMMERCIAL_SIGNAL_CATEGORIES and re.search(r"\b(may|might|could|possibly|likely)\b", text, re.I)):
             return []
         if item.get("foundation_eligible") is True and re.search(r"\b(launched|signed|cancelled|paused|ended|appointed)\b", text, re.I) and not re.search(r"\b(may|might|could|possibly|likely)\b", text, re.I):
             return [FactualClaim(enterprise, "enterprise_event_announced", text + "." if not text.endswith(".") else text, "events", f"events.{hashlib.sha256(text.encode()).hexdigest()[:12]}", None, None, None, period, "actual", evid, page, conf, f"{evid}:event")]
         if condition in COMMERCIAL_SIGNAL_CATEGORIES:
-            return [FactualClaim(enterprise, condition, text + "." if not text.endswith(".") else text, _domain_for(condition), str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"), None, None, None, None, "actual", evid, page, conf, f"{evid}:commercial")]
+            if re.search(r"\b(may|might|could|possibly|likely)\b", text, re.I):
+                return [FactualClaim(enterprise, condition, text + "." if not text.endswith(".") else text, _domain_for(condition), str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"), None, None, None, None, "actual", evid, page, conf, f"{evid}:commercial")]
+            return []
         return []
     value: str | None = None
     if condition in CLAIM_VOCABULARY:
@@ -177,7 +181,7 @@ class ObservationMemoryService:
         if report.results:
             return report.results[0]
         condition = str(item.get("commercial_condition") or item.get("mapped_condition") or "")
-        if "foundation_eligible" not in item and condition in COMMERCIAL_SIGNAL_CATEGORIES and report.rejected_claims:
+        if "foundation_eligible" not in item and condition in COMMERCIAL_SIGNAL_CATEGORIES:
             collected = str(item.get("extraction_timestamp") or item.get("collection_date") or now_iso())
             enterprise = canonical_enterprise_id(str(item.get("enterprise_id") or item.get("canonical_enterprise_id") or item.get("organisation") or "Unknown enterprise")) or "unknown"
             observation = self.observations.save(Observation(
