@@ -135,8 +135,13 @@ class OpenAIDirectPDFProvider:
             text={'format': {'type': 'json_schema', 'name': 'foundation_fact_set', 'schema': openai_strict_json_schema(schema), 'strict': True}},
         )
 
-    def _count_input_tokens(self, client, document, schema, mode, source_path) -> int:
+    def _token_count_payload(self, document, schema, mode, source_path) -> dict:
         payload = self._request_payload(document, schema, mode, source_path)
+        payload.pop('max_output_tokens', None)
+        return payload
+
+    def _count_input_tokens(self, client, document, schema, mode, source_path) -> int:
+        payload = self._token_count_payload(document, schema, mode, source_path)
         counter = getattr(getattr(client, 'responses', None), 'input_tokens', None)
         if counter and hasattr(counter, 'count'):
             result = counter.count(**payload)
@@ -208,7 +213,7 @@ class OpenAIDirectPDFProvider:
                 input_tokens = self._count_input_tokens(client, document, schema, mode, source_path)
                 exact_preflight_available = True
                 estimated = self._estimated_cost(input_tokens)
-                preflight_diag = _diagnostic(**base_diag, stage='token_preflight', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=200, retryable=False) | {'input_tokens': input_tokens, 'estimated_cost_usd': estimated, 'max_output_tokens': self.max_output_tokens, 'reasoning_effort': self.reasoning_effort, 'exact_preflight_available': True}
+                preflight_diag = _diagnostic(**base_diag, stage='token_preflight', source_input_mode=mode, pdf_upload_succeeded=False, http_status_code=200, retryable=False) | {'input_tokens': input_tokens, 'estimated_cost_usd': estimated, 'planned_output_allowance': self.max_output_tokens, 'max_output_tokens': self.max_output_tokens, 'tpm_reservation': input_tokens + self.max_output_tokens, 'reasoning_effort': self.reasoning_effort, 'exact_preflight_available': True}
                 if not self.model.startswith('gpt-test'):
                     diagnostics.append(preflight_diag)
                 if estimated > self.max_run_cost_usd:
@@ -253,6 +258,7 @@ class OpenAIDirectPDFProvider:
             if name == 'RuntimeError' and 'token' in lower and 'count' in lower: status = 'token_count_failed'
             elif status_code == 400 and ('context' in lower or code == 'context_length_exceeded'): status = 'context_limit_exceeded'
             elif 'auth' in lower or 'api key' in lower or status_code in {401, 403} or name in {'AuthenticationError', 'PermissionDeniedError'}: status = 'authentication_failed'
+            elif status_code == 429 and ('requested tokens' in lower or 'tpm' in lower): status = 'request_exceeds_tpm_limit'
             elif status_code == 429 or 'quota' in lower or 'rate limit' in lower: status = 'provider_quota_exceeded'
             elif status_code == 404 or code in {'model_not_found', 'model_not_available'} or ('model' in lower and 'not' in lower and 'found' in lower): status = 'model_unavailable'
             elif name in {'APITimeoutError', 'TimeoutError'} or 'timeout' in lower: status = 'timeout'
