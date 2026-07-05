@@ -78,6 +78,17 @@ class FactualClaim:
         return row
 
 
+def _financial_model_value(statement: str) -> Any:
+    m = FINANCIAL_RE.search(statement or '')
+    if not m:
+        return statement
+    value = float(m.group('value').replace(',', ''))
+    unit_raw = (m.group('unit') or '').lower()
+    factor = 1_000_000_000 if unit_raw in {'bn','billion'} else 1_000_000 if unit_raw in {'m','million'} else 1
+    normalised = value * factor
+    return int(normalised) if normalised.is_integer() else normalised
+
+
 def validate_factual_claim(claim: FactualClaim) -> None:
     spec = CLAIM_VOCABULARY.get(claim.claim_type)
     if not spec:
@@ -282,13 +293,13 @@ class ObservationMemoryService:
             unknown_id = f"UNK-{hashlib.sha256((observation.enterprise_id + key).encode()).hexdigest()[:12].upper()}"; existing = model.unknowns.get(unknown_id); related = tuple(dict.fromkeys([*(existing.related_observation_ids if existing else ()), observation.observation_id or ""]))
             model.unknowns[unknown_id] = EnterpriseUnknown(unknown_id, observation.enterprise_id, f"Unknown model state for {key}", domain, "medium", ("accepted corroborating evidence",), "open", related, review_at=observation.last_confirmed_date); model.updated_at = now_iso(); self.models.save(model)
             return ModelUpdateResult(observation.enterprise_id, observation.observation_id or "", key, "unknown_created", unknown_created=True)
-        existing = model.attributes.get(key); contradiction = bool(existing and existing.current_value and existing.current_value != observation.atomic_statement and any(t in lower or t in existing.current_value.casefold() for t in CONFLICT_TERMS))
+        existing = model.attributes.get(key); contradiction = bool(existing and existing.current_value and existing.current_value != observation.atomic_statement and any(t in lower or t in str(existing.current_value).casefold() for t in CONFLICT_TERMS))
         if existing:
             prior = tuple(existing.prior_values)
             if existing.current_value != observation.atomic_statement and not contradiction: prior = (*prior, {"value": existing.current_value, "confidence": existing.confidence, "superseded_at": now_iso(), "observation_ids": existing.observation_ids})
-            observation_ids = tuple(dict.fromkeys([*existing.observation_ids, observation.observation_id or ""])); evidence_ids = tuple(dict.fromkeys([*existing.evidence_ids, *observation.supporting_evidence_ids])); value = existing.current_value if contradiction else observation.atomic_statement; conflicts = tuple(dict.fromkeys([*existing.conflicting_observation_ids, observation.observation_id or ""])) if contradiction else existing.conflicting_observation_ids; state = "contradicted" if contradiction else observation.contradiction_state
+            observation_ids = tuple(dict.fromkeys([*existing.observation_ids, observation.observation_id or ""])); evidence_ids = tuple(dict.fromkeys([*existing.evidence_ids, *observation.supporting_evidence_ids])); domain_value = _financial_model_value(observation.atomic_statement) if observation.observation_type == 'financial_metric_reported' else observation.atomic_statement; value = existing.current_value if contradiction else domain_value; conflicts = tuple(dict.fromkeys([*existing.conflicting_observation_ids, observation.observation_id or ""])) if contradiction else existing.conflicting_observation_ids; state = "contradicted" if contradiction else observation.contradiction_state
         else:
-            prior = (); observation_ids = (observation.observation_id or "",); evidence_ids = observation.supporting_evidence_ids; value = observation.atomic_statement; conflicts = (); state = observation.contradiction_state
+            prior = (); observation_ids = (observation.observation_id or "",); evidence_ids = observation.supporting_evidence_ids; value = _financial_model_value(observation.atomic_statement) if observation.observation_type == 'financial_metric_reported' else observation.atomic_statement; conflicts = (); state = observation.contradiction_state
         confidence = max(observation.confidence, existing.confidence if existing else 0); confidence_history = (*(existing.confidence_history if existing else ()), {"observation_id": observation.observation_id or "", "confidence": observation.confidence, "recorded_at": now_iso()})
         model.attributes[key] = EnterpriseModelAttribute(domain, key, value, confidence, observation.last_confirmed_date or observation.observation_date, observation.freshness, observation_ids, evidence_ids, observation.provenance_type, state, conflicts, prior, confidence_history); model.updated_at = now_iso(); self.models.save(model)
         return ModelUpdateResult(observation.enterprise_id, observation.observation_id or "", key, "contradiction_recorded" if contradiction else ("updated" if existing else "created"), contradiction=contradiction)
