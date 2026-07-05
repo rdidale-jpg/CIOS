@@ -3,7 +3,7 @@ import json
 import pytest
 from pydantic import ValidationError
 from cios.applications.flora.financial_intelligence.candidate_validation import parse_foundation_fact_candidates
-from cios.applications.flora.financial_intelligence.schema import FoundationFact, FoundationFactSet, openai_strict_json_schema
+from cios.applications.flora.financial_intelligence.schema import FoundationFact, FoundationFactSet, ProviderFoundationFact, openai_strict_json_schema
 
 
 def candidate(**kw):
@@ -73,6 +73,48 @@ def test_provider_multiple_value_fields_quarantines_only_that_candidate():
     assert status == 'completed_with_exceptions'
     assert [f.fact_id for f in parsed.facts] == ['good']
     assert exceptions[0]['fact_id'] == 'bad'
+
+
+def test_validation_diagnostics_include_exact_provider_field_locations():
+    bad = provider_candidate(fact_id='bt-p1-revenue', extractor_provider='user_provided', extractor_model=None, extractor_version=None)
+    parsed, exceptions, status = parse_foundation_fact_candidates(json.dumps({'facts': [bad]}), packet_id='packet-1', provider='user_provided', model='')
+    assert status == 'provider_response_invalid'
+    assert parsed.facts == []
+    fields = {tuple(e['field_location']) for e in exceptions[0]['validation_errors']}
+    assert ('extractor_model',) in fields
+    assert ('extractor_version',) in fields
+    assert {e['candidate_id'] for e in exceptions[0]['validation_errors']} == {'bt-p1-revenue'}
+    assert {e['packet_id'] for e in exceptions[0]['validation_errors']} == {'packet-1'}
+
+
+def test_stored_packet_one_regression_revalidates_with_runtime_provenance_and_single_provider_validation(monkeypatch):
+    facts = [
+        provider_candidate(fact_id='p1-revenue', predicate='Revenue', numeric_value='19.7', scale='bn', unit='billion', source_excerpt='Revenue £19.7bn', extractor_provider='user_provided', extractor_model=None, extractor_version=None),
+        provider_candidate(fact_id='p1-adjusted-ebitda', predicate='Adjusted EBITDA', numeric_value='8.2', scale='bn', unit='billion', source_excerpt='Adjusted EBITDA £8.2bn', extractor_provider='user_provided', extractor_model=None, extractor_version=None),
+        provider_candidate(fact_id='p1-capex', predicate='Capital expenditure', numeric_value='5.1', scale='bn', unit='billion', source_excerpt='Capital expenditure £5.1bn', extractor_provider='user_provided', extractor_model=None, extractor_version=None),
+        provider_candidate(fact_id='p1-ocf', predicate='Cash flow from operating activities', numeric_value='7.0', scale='bn', unit='billion', source_excerpt='Cash flow from operating activities £7.0bn', extractor_provider='user_provided', extractor_model=None, extractor_version=None),
+        provider_candidate(fact_id='p1-nfcf', predicate='Normalised free cash flow', numeric_value='1.5', scale='bn', unit='billion', source_excerpt='Normalised free cash flow £1.5bn', extractor_provider='user_provided', extractor_model=None, extractor_version=None),
+    ]
+    calls = {'count': 0}
+    original = ProviderFoundationFact.model_validate
+
+    def counted(value, *args, **kwargs):
+        calls['count'] += 1
+        return original(value, *args, **kwargs)
+
+    monkeypatch.setattr(ProviderFoundationFact, 'model_validate', counted)
+    parsed, exceptions, status = parse_foundation_fact_candidates(
+        json.dumps({'facts': facts}), packet_id='packet-1', provider='openai', model='gpt-5.4-nano',
+        request_id='resp_07843598d30e9a5f006a4a5911f57c819e9ce03e825aac62e7', packet_page_map={3: 3}
+    )
+    assert status == 'completed'
+    assert exceptions == []
+    assert calls['count'] == 5
+    assert [f.extractor_provider for f in parsed.facts] == ['openai'] * 5
+    assert [f.extractor_model for f in parsed.facts] == ['gpt-5.4-nano'] * 5
+    assert [f.subject_id for f in parsed.facts] == ['bt-group-plc'] * 5
+    assert parsed.facts[0].scale == 'bn'
+    assert parsed.facts[0].unit == 'billion'
 
 def test_entirely_invalid_response_returns_provider_response_invalid_without_unhandled_exception():
     parsed, exceptions, status = parse_foundation_fact_candidates('{bad json', packet_id='packet-1', provider='openai', model='gpt-5.5')
