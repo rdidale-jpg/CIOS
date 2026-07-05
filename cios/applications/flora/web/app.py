@@ -86,7 +86,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path == "/financial-intelligence/admin/health":
                 self._html(financial_intelligence_admin_health_page())
             elif parsed.path.startswith("/financial-intelligence/progress/") and parsed.path.endswith("/status"):
-                self._json(financial_intelligence_progress_status(parsed.path.removeprefix("/financial-intelligence/progress/").removesuffix("/status")))
+                
+                status_payload = financial_intelligence_progress_status(parsed.path.removeprefix("/financial-intelligence/progress/").removesuffix("/status"))
+                self._json(status_payload, status=404 if status_payload.get('status') == 'not_found' else 200)
             elif parsed.path.startswith("/financial-intelligence/progress/"):
                 self._html(financial_intelligence_progress_page(parsed.path.removeprefix("/financial-intelligence/progress/")))
             elif parsed.path == "/financial-reports":
