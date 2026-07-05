@@ -96,3 +96,20 @@ def test_zero_packets_cannot_complete_status(tmp_path):
     run = {'run_id':'fi-zero','created_at':document_review.now_iso(),'status':'validating','document':doc.model_dump(),'claims':[],'applied_results':[],'provider_diagnostics':[],'exceptions':[]}
     marked = document_review._mark_failure(run, 'failed', 'zero packets/facts/Observations cannot produce completed status')
     assert marked['status'] != 'completed'
+
+def test_missing_progress_status_returns_terminal_safe_404_payload(monkeypatch):
+    monkeypatch.setattr(document_review, 'load_run', lambda run_id: (_ for _ in ()).throw(FileNotFoundError('/var/data/flora/ai_financial_reports/runs/'+run_id+'.json')))
+    status = document_review.financial_intelligence_progress_status('fi-old')
+    assert status['status'] == 'not_found'
+    assert status['terminal'] is True
+    assert status['requested_run_id'] == 'fi-old'
+    assert 'Please start a new run' in status['message']
+    assert '/var/data' not in str(status)
+    assert status['final_result_url'] is None
+
+
+def test_missing_progress_page_terminal_browser_script_does_not_redirect_none(monkeypatch):
+    monkeypatch.setattr(document_review, 'load_run', lambda run_id: {'run_id': run_id, 'created_at': document_review.now_iso(), 'status': 'queued', 'claims': [], 'applied_results': [], 'exceptions': []})
+    html = document_review.financial_intelligence_progress_page('fi-old')
+    assert 'if(s.final_result_url)' in html
+    assert 'This financial intelligence run is no longer available' in html

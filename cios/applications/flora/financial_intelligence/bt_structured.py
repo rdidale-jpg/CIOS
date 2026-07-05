@@ -1,6 +1,6 @@
 """BT FY26 governed ESEF/iXBRL ingestion for Flora's structured route."""
 from __future__ import annotations
-import hashlib,json,os,shutil,tempfile,time,zipfile
+import hashlib,json,os,re,resource,shutil,tempfile,time,zipfile
 from dataclasses import dataclass
 from decimal import Decimal
 from pathlib import Path
@@ -190,47 +190,93 @@ def _local(tag:Any)->str:
     return str(tag).rsplit('}',1)[-1] if '}' in str(tag) else str(tag)
 
 
-def _inspect_ixbrl_candidate(z:zipfile.ZipFile,name:str,cfg:dict[str,Any])->dict[str,Any]:
-    info={'path':name,'inline_xbrl':False,'markers_found':[],'lei_match':False,'legal_name_match':False,
-          'period_start_match':False,'period_end_match':False,'schema_ref_found':False,
-          'required_metric_matches':0,'fact_count':0,'identity_result':'not_evaluated','period_result':'not_evaluated',
-          'parse_error':None}
+def _mem_kb()->int|None:
+    try: return int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
+    except Exception: return None
+
+INLINE_NS_RE=re.compile(br'http://www\.xbrl\.org/2013/inlineXBRL|<\s*([A-Za-z_][\w.-]*:)?(header|nonFraction|nonNumeric)\b', re.I)
+CONTEXT_RE=re.compile(br'<\s*([A-Za-z_][\w.-]*:)?context\b|http://www\.xbrl\.org/2003/instance', re.I)
+SCHEMA_RE=re.compile(br'<\s*([A-Za-z_][\w.-]*:)?schemaRef\b', re.I)
+
+def _scan_ixbrl_markers(z:zipfile.ZipFile,name:str,chunk_size:int=1024*1024,overlap:int=4096)->dict[str,Any]:
+    started=time.perf_counter(); before=_mem_kb(); bytes_scanned=0; chunks=0; tail=b''; markers=set(); error=None; eof=False
     try:
         with z.open(name) as fh:
-            for event, el in ET.iterparse(fh, events=('start','end')):
-                tag=el.tag
-                if event == 'start' and tag == IX_NS+'header' and 'ix:header' not in info['markers_found']: info['markers_found'].append('ix:header')
-                if event == 'end' and tag in {IX_NS+'nonFraction', IX_NS+'nonNumeric'}:
-                    info['fact_count']+=1
-                    marker='ix:nonFraction' if tag == IX_NS+'nonFraction' else 'ix:nonNumeric'
-                    if marker not in info['markers_found']: info['markers_found'].append(marker)
-                    qn=el.attrib.get('name') or ''
-                    if qn in cfg.get('required_metrics',{}): info['required_metric_matches']+=1
-                if event == 'start' and tag == XBRLI_NS+'context':
-                    if 'xbrli:context' not in info['markers_found']: info['markers_found'].append('xbrli:context')
-                elif event == 'start' and _local(tag) == 'schemaRef':
-                    info['schema_ref_found']=True
-                    if 'schemaRef' not in info['markers_found']: info['markers_found'].append('schemaRef')
-                elif event == 'end' and tag == XBRLI_NS+'identifier':
-                    txt=''.join(el.itertext()).strip()
-                    if txt == cfg['lei']: info['lei_match']=True
-                elif event == 'end' and tag == XBRLI_NS+'startDate':
-                    if ''.join(el.itertext()).strip() == cfg['period_start']: info['period_start_match']=True
-                elif event == 'end' and tag == XBRLI_NS+'endDate':
-                    if ''.join(el.itertext()).strip() == cfg['period_end']: info['period_end_match']=True
-                if event == 'end' and tag in {IX_NS+'nonNumeric', IX_NS+'nonFraction'}:
-                    txt=' '.join(''.join(el.itertext()).split()).upper()
-                    if txt and (cfg.get('legal_name','').upper() in txt or 'BT GROUP PLC' in txt): info['legal_name_match']=True
-                    el.clear()
+            while True:
+                chunk=fh.read(chunk_size)
+                if not chunk: eof=True; break
+                chunks+=1; bytes_scanned+=len(chunk); window=tail+chunk
+                if INLINE_NS_RE.search(window): markers.add('inline_xbrl_namespace_or_fact')
+                if re.search(br'<\s*([A-Za-z_][\w.-]*:)?header\b', window, re.I): markers.add('inline_header')
+                if re.search(br'<\s*([A-Za-z_][\w.-]*:)?nonFraction\b', window, re.I): markers.add('tagged_numeric_fact')
+                if re.search(br'<\s*([A-Za-z_][\w.-]*:)?nonNumeric\b', window, re.I): markers.add('tagged_non_numeric_fact')
+                if CONTEXT_RE.search(window): markers.add('xbrl_context')
+                if SCHEMA_RE.search(window): markers.add('schema_ref')
+                if b'213800LRO7NS5CYQMN21' in window: markers.add('bt_lei')
+                if b'2026-03-31' in window: markers.add('fy26_period_end')
+                if b'2025-04-01' in window: markers.add('fy26_period_start')
+                upper=window.upper()
+                if b'BT GROUP' in upper: markers.add('bt_identity_text')
+                tail=window[-overlap:]
+    except Exception as exc:
+        error=f'{type(exc).__name__}: {exc}'
+    return {'path':name,'bytes_scanned':bytes_scanned,'chunks_processed':chunks,'end_of_entry_reached':eof,'recognition_duration_seconds':round(time.perf_counter()-started,6),'markers_found':sorted(markers),'scanner_result':'error' if error else ('inline_xbrl_markers_found' if markers else 'no_markers_found'),'scanner_error':error,'memory_before_kb':before,'memory_after_kb':_mem_kb()}
+
+def _copy_zip_entry_to_temp(z:zipfile.ZipFile,name:str,tmpdir:Path)->Path:
+    out=tmpdir / Path(name).name
+    with z.open(name) as src, out.open('wb') as dst:
+        shutil.copyfileobj(src,dst,1024*1024)
+    return out
+
+def _inspect_ixbrl_candidate(z:zipfile.ZipFile,name:str,cfg:dict[str,Any])->dict[str,Any]:
+    scan=_scan_ixbrl_markers(z,name)
+    info={'path':name,'inline_xbrl':False,'markers_found':list(scan['markers_found']),'marker_scan':scan,'lei_match':False,'legal_name_match':False,
+          'period_start_match':False,'period_end_match':False,'schema_ref_found':'schema_ref' in scan['markers_found'],
+          'required_metric_matches':0,'fact_count':0,'identity_result':'not_evaluated','period_result':'not_evaluated',
+          'recognition_classification':'ordinary_html','parse_error':None}
+    if scan.get('scanner_error'):
+        info['parse_error']=scan['scanner_error']; info['recognition_classification']='ixbrl_marker_scan_failed'; return info
+    tmpdir=Path(tempfile.mkdtemp(prefix='flora-bt-ixbrl-scan-'))
+    try:
+        path=_copy_zip_entry_to_temp(z,name,tmpdir)
+        for event, el in ET.iterparse(path, events=('start','end')):
+            local=_local(el.tag)
+            if event == 'start' and local == 'header':
+                if 'inline_header' not in info['markers_found']: info['markers_found'].append('inline_header')
+                if 'ix:header' not in info['markers_found']: info['markers_found'].append('ix:header')
+            if event == 'start' and local == 'context':
+                if 'xbrl_context' not in info['markers_found']: info['markers_found'].append('xbrl_context')
+                if 'xbrli:context' not in info['markers_found']: info['markers_found'].append('xbrli:context')
+            if event == 'start' and local == 'schemaRef':
+                info['schema_ref_found']=True
+                if 'schemaRef' not in info['markers_found']: info['markers_found'].append('schemaRef')
+            if event == 'end' and local in {'nonFraction','nonNumeric'}:
+                info['fact_count']+=1
+                qn=el.attrib.get('name') or ''
+                if qn in cfg.get('required_metrics',{}): info['required_metric_matches']+=1
+                compat='ix:nonFraction' if local == 'nonFraction' else 'ix:nonNumeric'
+                if compat not in info['markers_found']: info['markers_found'].append(compat)
+                txt=' '.join(''.join(el.itertext()).split()).upper()
+                if cfg.get('legal_name','').upper() in txt or 'BT GROUP PLC' in txt: info['legal_name_match']=True
+                el.clear()
+            elif event == 'end' and local == 'identifier':
+                if ''.join(el.itertext()).strip() == cfg['lei']: info['lei_match']=True
+            elif event == 'end' and local == 'startDate':
+                if ''.join(el.itertext()).strip() == cfg['period_start']: info['period_start_match']=True
+            elif event == 'end' and local == 'endDate':
+                if ''.join(el.itertext()).strip() == cfg['period_end']: info['period_end_match']=True
     except ET.ParseError as exc:
         info['parse_error']=str(exc)
     except Exception as exc:
         info['parse_error']=str(exc)
-    info['inline_xbrl']=bool(info['fact_count'] and {'ix:nonFraction','ix:nonNumeric'}.intersection(info['markers_found']) and 'xbrli:context' in info['markers_found'])
+    finally:
+        shutil.rmtree(tmpdir,ignore_errors=True)
+    info['inline_xbrl']=bool(info['fact_count'] and 'xbrl_context' in info['markers_found'])
+    if info['inline_xbrl']: info['recognition_classification']='viewer_enhanced_inline_xbrl' if 'viewer' in name.lower() else 'inline_xbrl_filing'
+    elif scan['markers_found']: info['recognition_classification']='viewer_wrapper_or_partial_inline_xbrl'
     info['identity_result']='matched' if info['lei_match'] else 'mismatch'
     info['period_result']='matched' if info['period_start_match'] and info['period_end_match'] else 'mismatch'
     return info
-
 
 def locate_ixbrl_report(zip_path:Path,cfg:dict[str,Any])->dict[str,Any]:
     diag=inspect_archive(zip_path,cfg); selected=[]; candidates=[]
@@ -245,9 +291,10 @@ def locate_ixbrl_report(zip_path:Path,cfg:dict[str,Any])->dict[str,Any]:
                 selected.append(info)
     inline=[c for c in candidates if c['inline_xbrl']]
     diag['candidate_inline_xbrl_reports']=[c['path'] for c in inline]
-    diag['inline_xbrl_marker_results']=[{'path':c['path'],'markers_found':c['markers_found'],'fact_count':c['fact_count'],'parse_error':c['parse_error']} for c in candidates]
+    diag['inline_xbrl_marker_results']=[{'path':c['path'],'markers_found':c['markers_found'],'fact_count':c['fact_count'],'parse_error':c['parse_error'],'marker_scan':c.get('marker_scan'),'recognition_classification':c.get('recognition_classification')} for c in candidates]
     diag['identity_result']={c['path']:c['identity_result'] for c in candidates}
     diag['period_result']={c['path']:c['period_result'] for c in candidates}
+    diag['recognition_classification']={c['path']:c.get('recognition_classification') for c in candidates}
     if len(selected)==1:
         diag['locator_decision']=selected[0]['path']; diag['selected_report_path']=selected[0]['path']
         diag['locator_reason']=diag['selection_reason']='single inline XBRL report matching BT LEI, FY26 period and required metric markers'
@@ -273,7 +320,12 @@ def extract_candidates(zip_path:Path,cfg:dict[str,Any],receipt:RetrievedPackage)
     location=locate_ixbrl_report(zip_path,cfg); report_path=location['report_path']
     candidates=[]; quarantine=[]; required=cfg['required_metrics']
     with zipfile.ZipFile(zip_path) as z:
-        root=ET.fromstring(z.read(report_path))
+        tmpdir=Path(tempfile.mkdtemp(prefix='flora-bt-adapter-'))
+        try:
+            report_file=_copy_zip_entry_to_temp(z,report_path,tmpdir)
+            root=ET.parse(report_file).getroot()
+        finally:
+            shutil.rmtree(tmpdir,ignore_errors=True)
     contexts=_contexts(root)
     for el in root.iter():
         qn=el.attrib.get('name') or ''
@@ -299,6 +351,8 @@ def _reload_ok(obs_ids, attrs):
     return all(svc.observations.get(o) for o in obs_ids) and all(a in model.attributes for a in attrs)
 def _diagnostic(run_id,cfg,exc,receipt=None,candidate_count=0,canonical_count=0,adapter=False,archive_diagnostics=None,selected_report_path=None):
     code=getattr(exc,'code','unexpected_runtime_error'); stage=getattr(exc,'stage','unexpected runtime error')
+    if not adapter and code == 'no_supported_facts':
+        code='ixbrl_report_not_recognised'; stage='structured package recognition'
     url=(cfg or {}).get('artifact_url',''); parsed=urlparse(url) if url else None
     archive_result='passed' if adapter or (receipt and code not in SAFETY_FAILURE_CODES and code not in {'invalid_zip'}) else ('not_attempted' if not receipt else 'failed')
     diag={'support_reference':'FI-'+run_id.removeprefix('fi-'),'enterprise_id':(cfg or {}).get('enterprise_id','bt-group-plc'),'reporting_period':(cfg or {}).get('reporting_period','FY26'),'execution_mode':'structured_standard_financials','source_configuration_status':'loaded' if cfg else 'missing','source_configuration_key':'bt-group-plc-fy26','source_kind':(cfg or {}).get('source_kind'),'artifact_host':parsed.hostname if parsed else None,'artifact_url':url or None,'artifact_resolution_status':'resolved' if url else 'missing','request_attempted': bool(receipt) or code not in {'source_configuration_missing','enterprise_identity_mismatch','reporting_period_mismatch','artifact_url_missing','host_not_allowed'},'http_status':getattr(receipt,'status_code',None),'redirect_chain':[],'final_host':urlparse(receipt.final_url).hostname if receipt else None,'content_type':getattr(receipt,'content_type',None),'reported_content_length':None,'bytes_downloaded':getattr(receipt,'size',0) if receipt else 0,'compressed_size_limit':int((cfg or {}).get('compressed_size_limit_bytes',0) or 0),'download_result':'succeeded' if receipt else 'failed','package_sha256':getattr(receipt,'sha256',None),'archive_validation_result':archive_result,'selected_report_path':selected_report_path,'adapter_handoff_attempted':adapter,'adapter_result':'not_attempted' if not adapter else ('completed' if canonical_count else 'failed'),'candidate_fact_count':candidate_count,'canonical_fact_count':canonical_count,'failure_code':code,'failure_stage':stage,'safe_failure_message':'Structured financial source unavailable','timestamp':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'deployment_revision':os.getenv('RENDER_GIT_COMMIT') or os.getenv('RENDER_COMMIT') or os.getenv('GIT_COMMIT')}

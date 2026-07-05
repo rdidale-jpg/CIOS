@@ -237,3 +237,40 @@ def test_taxonomy_linkbase_and_top_level_classification(tmp_path):
     assert {'bt-2026_pre.xml','bt-2026_def.xml','bt-2026_lab-en.xml','bt-2026_cal.xml'} == set(diag['linkbases'])
     assert diag['catalog_metadata'] == ['META-INF/catalog.xml']
     assert diag['taxonomy_package_metadata'] == ['META-INF/taxonomyPackage.xml']
+
+def test_incremental_marker_scanner_late_and_boundary_markers(tmp_path):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    package = tmp_path / 'late.zip'
+    late = b'a' * 3_000_000 + b'<html xmlns:abc="http://www.xbrl.org/2013/inlineXBRL"><abc:nonFraction>1</abc:nonFraction>'
+    with zipfile.ZipFile(package, 'w', compression=zipfile.ZIP_DEFLATED) as z:
+        z.writestr('ixbrl-viewer.htm', late)
+    with zipfile.ZipFile(package) as z:
+        scan = bt._scan_ixbrl_markers(z, 'ixbrl-viewer.htm', chunk_size=1_000_001, overlap=64)
+    assert scan['chunks_processed'] > 1
+    assert scan['bytes_scanned'] == len(late)
+    assert scan['end_of_entry_reached'] is True
+    assert 'inline_xbrl_namespace_or_fact' in scan['markers_found']
+    assert scan['memory_before_kb'] is not None
+
+
+def test_namespace_equivalent_inline_xbrl_is_selected(tmp_path):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    package = tmp_path / 'ns.zip'
+    body = '''<html xmlns:i="http://www.xbrl.org/2013/inlineXBRL" xmlns:x="http://www.xbrl.org/2003/instance"><i:header><i:references><link:schemaRef xmlns:link="http://www.xbrl.org/2003/linkbase"/></i:references></i:header><x:context id="c1"><x:entity><x:identifier>213800LRO7NS5CYQMN21</x:identifier></x:entity><x:period><x:startDate>2025-04-01</x:startDate><x:endDate>2026-03-31</x:endDate></x:period></x:context><i:nonFraction name="ifrs-full:Revenue" contextRef="c1" unitRef="GBP">1</i:nonFraction></html>'''
+    with zipfile.ZipFile(package, 'w') as z:
+        z.writestr('ixbrl-viewer.htm', body)
+    located = bt.locate_ixbrl_report(package, cfg)
+    assert located['report_path'] == 'ixbrl-viewer.htm'
+    diag = located['diagnostics']
+    assert diag['selected_report_path'] == 'ixbrl-viewer.htm'
+    assert diag['identity_result']['ixbrl-viewer.htm'] == 'matched'
+    assert diag['period_result']['ixbrl-viewer.htm'] == 'matched'
+    assert diag['inline_xbrl_marker_results'][0]['marker_scan']['end_of_entry_reached'] is True
+
+
+def test_no_supported_facts_not_reported_before_adapter_handoff(tmp_path):
+    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    diag = bt._diagnostic('fi-x', cfg, bt.StructuredIngestionError('missing', 'no_supported_facts', 'structured fact validation'), adapter=False)
+    assert diag['adapter_handoff_attempted'] is False
+    assert diag['failure_code'] != 'no_supported_facts'
+    assert diag['failure_stage'] == 'structured package recognition'

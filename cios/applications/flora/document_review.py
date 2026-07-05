@@ -873,8 +873,25 @@ def _background_refresh(enterprise_id: str, run_id: str, extraction_mode: str = 
         _write_json(_run_path(run_id), run)
 
 
+def missing_run_status(run_id: str) -> dict[str, Any]:
+    return {
+        'run_id': run_id,
+        'requested_run_id': run_id,
+        'status': 'not_found',
+        'state': 'not_found',
+        'terminal': True,
+        'progress_percent': 100,
+        'current_stage': 'not_found',
+        'message': 'This financial intelligence run is no longer available. Please start a new run.',
+        'final_result_url': None,
+    }
+
 def financial_intelligence_progress_status(run_id: str) -> dict[str, Any]:
-    run = load_run(run_id)
+    try:
+        run = load_run(run_id)
+    except FileNotFoundError:
+        print(f"Flora Financial Intelligence requested missing progress run {run_id}; storage mode={storage_mode()['mode']}")
+        return missing_run_status(run_id)
     status = run.get('status') or 'queued'
     terminal = status in TERMINAL_RUN_STATES or bool(run.get('terminal'))
     created = run.get('created_at') or now_iso()
@@ -895,7 +912,7 @@ def financial_intelligence_progress_page(run_id: str) -> str:
     label = labels.get(run.get('status'), 'Failed' if run.get('status') not in {'queued','retrieving_source','selecting_sections','estimating_cost','analysing','validating','updating_memory'} else 'Working')
     terminal = run.get('status') in TERMINAL_RUN_STATES or bool(run.get('terminal'))
     pct = int(run.get('progress_percent') or run.get('percent_complete') or (100 if terminal else 0))
-    body = f"""<section class='hero'><h1>Financial Intelligence refresh</h1><p>{escape(label)}</p><div style='background:#eee;border-radius:999px;overflow:hidden'><div id='bar' style='width:{pct}%;background:#185c4d;color:white;padding:8px'>{pct}%</div></div><p>Elapsed time: {elapsed} seconds. Large reports may take several minutes.</p></section>{_outcome_summary(run) if terminal else ''}<script>let polling={str(not terminal).lower()};let timer=null;async function poll(){{if(!polling)return;const r=await fetch('/financial-intelligence/progress/{escape(run_id)}/status',{{cache:'no-store'}});const s=await r.json();document.getElementById('bar').style.width=s.progress_percent+'%';document.getElementById('bar').textContent=s.progress_percent+'%';if(s.terminal){{polling=false;if(timer)clearTimeout(timer);location.href=s.final_result_url;return}}timer=setTimeout(poll,2000)}}if(polling)poll();</script>"""
+    body = f"""<section class='hero'><h1>Financial Intelligence refresh</h1><p>{escape(label)}</p><div style='background:#eee;border-radius:999px;overflow:hidden'><div id='bar' style='width:{pct}%;background:#185c4d;color:white;padding:8px'>{pct}%</div></div><p>Elapsed time: {elapsed} seconds. Large reports may take several minutes.</p></section>{_outcome_summary(run) if terminal else ''}<script>let polling={str(not terminal).lower()};let timer=null;async function poll(){{if(!polling)return;const r=await fetch('/financial-intelligence/progress/{escape(run_id)}/status',{{cache:'no-store'}});const s=await r.json();document.getElementById('bar').style.width=s.progress_percent+'%';document.getElementById('bar').textContent=s.progress_percent+'%';if(s.terminal){{polling=false;if(timer)clearTimeout(timer);if(s.final_result_url){{location.href=s.final_result_url}}else{{document.querySelector('.hero p').textContent=s.message||'This financial intelligence run is no longer available. Please start a new run.'}}return}}timer=setTimeout(poll,2000)}}if(polling)poll();</script>"""
     return _page('Financial Intelligence progress', body)
 
 def create_upload_run(pdf_path: Path, *, enterprise_id: str = 'bt-group-plc', title: str = 'BT Group plc Annual Report 2026', source_url: str = 'uploaded authoritative PDF') -> dict[str, Any]:
