@@ -2,10 +2,15 @@ from __future__ import annotations
 
 import zipfile
 from pathlib import Path
-from types import SimpleNamespace
 
 from cios.applications.flora.document_review import refresh_financial_intelligence
 from cios.applications.flora.financial_intelligence import bt_structured
+
+FIXTURE_CONFIG = Path(__file__).parent / "fixtures" / "bt_structured_source_config.json"
+
+
+def _use_fixture_config(monkeypatch):
+    monkeypatch.setenv("FLORA_STRUCTURED_SOURCE_CONFIG", str(FIXTURE_CONFIG))
 
 
 def _zip(path: Path, body: str, name='report.xhtml'):
@@ -24,6 +29,7 @@ def _body(extra=''):
 
 def test_bt_structured_ingestion_creates_evidence_observations_model_and_is_idempotent(tmp_path, monkeypatch):
     monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
+    _use_fixture_config(monkeypatch)
     z = tmp_path/'bt.zip'; _zip(z, _body())
     cfg = bt_structured.source_config()
     monkeypatch.setattr(bt_structured, 'retrieve_package', lambda cfg: bt_structured.RetrievedPackage(z, 'abc123', cfg['artifact_url'], 200, 'application/zip', z.stat().st_size))
@@ -48,6 +54,7 @@ def test_bt_structured_ingestion_creates_evidence_observations_model_and_is_idem
 
 def test_bt_structured_quarantines_wrong_period_dimension_and_zip_slip(tmp_path, monkeypatch):
     monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
+    _use_fixture_config(monkeypatch)
     bad = '<xbrli:context id="seg"><xbrli:entity><xbrli:identifier>213800LRO7NS5CYQMN21</xbrli:identifier><xbrli:segment><xbrldi:explicitMember dimension="x:y">x:z</xbrldi:explicitMember></xbrli:segment></xbrli:entity><xbrli:period><xbrli:startDate>2025-04-01</xbrli:startDate><xbrli:endDate>2026-03-31</xbrli:endDate></xbrli:period></xbrli:context><ix:nonFraction name="ifrs-full:Revenue" contextRef="seg" unitRef="GBP">1</ix:nonFraction>'
     z = tmp_path/'bt.zip'; _zip(z, _body(bad))
     receipt = bt_structured.RetrievedPackage(z, 'abc123', 'https://www.bt.com/a.zip', 200, 'application/zip', z.stat().st_size)

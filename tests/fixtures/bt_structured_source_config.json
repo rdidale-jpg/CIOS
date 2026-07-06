@@ -1,0 +1,37 @@
+{
+  "enterprise_id": "bt-group-plc",
+  "legal_name": "BT GROUP PLC",
+  "company_number": "04190816",
+  "lei": "213800LRO7NS5CYQMN21",
+  "reporting_period": "FY26",
+  "period_start": "2025-04-01",
+  "period_end": "2026-03-31",
+  "scope": "group_consolidated",
+  "source_kind": "official_issuer_esef",
+  "discovery_url": "https://www.bt.com/about/investors/financial-reporting-and-news/annual-reports",
+  "artifact_url": "https://www.bt.com/content/dam/bt-plc/assets/documents/investors/financial-reporting-and-news/annual-reports/2026/2026-bt-group-plc-esef-filing.zip",
+  "viewer_url": "https://www.bt.com/content/dam/bt-plc/assets/documents/investors/financial-reporting-and-news/annual-reports/2026/2026-annual-report-ixbrl-viewer.xhtml",
+  "approved_hosts": [
+    "www.bt.com",
+    "bt.com"
+  ],
+  "compressed_size_limit_bytes": 125000000,
+  "expanded_size_limit_bytes": 350000000,
+  "entry_count_limit": 5000,
+  "required_metrics": {
+    "ifrs-full:Revenue": "revenue",
+    "ifrs-full:OperatingProfitLoss": "operating_profit",
+    "ifrs-full:ProfitLossBeforeTax": "profit_before_tax"
+  },
+  "source_authority": "BT Group plc Investor Relations fixture configuration",
+  "nsm_identifier": "BT.A-17635334",
+  "nsm_record_url": "https://data.fca.org.uk/#/nsm/nationalstoragemechanism",
+  "nsm_search_evidence_url": "https://www.londonstockexchange.com/news-article/BT.A/annual-financial-report/17635334",
+  "artifact_type": "zip",
+  "corroborating_issuer_source": {
+    "source_kind": "official_issuer_esef_corroboration",
+    "discovery_url": "https://www.bt.com/about/investors/financial-reporting-and-news/annual-reports",
+    "artifact_url": "https://www.bt.com/content/dam/bt-plc/assets/documents/investors/financial-reporting-and-news/annual-reports/2026/2026-bt-group-plc-esef-filing.zip",
+    "viewer_url": "https://www.bt.com/content/dam/bt-plc/assets/documents/investors/financial-reporting-and-news/annual-reports/2026/2026-annual-report-ixbrl-viewer.xhtml"
+  }
+}

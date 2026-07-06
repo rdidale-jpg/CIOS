@@ -13,9 +13,7 @@ from cios.applications.flora.storage import data_path, atomic_write_json
 from cios.applications.flora.memory.service import ObservationMemoryService
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
 
-CONFIG_PATH = Path(__file__).resolve().parents[3] / "config/flora/structured_sources/bt-group-plc-fy26.json"
-if not CONFIG_PATH.exists():
-    CONFIG_PATH = Path(__file__).resolve().parents[4] / "config/flora/structured_sources/bt-group-plc-fy26.json"
+CONFIG_PATH = Path(__file__).resolve().parents[4] / "config" / "flora" / "structured_sources" / "bt-group-plc-fy26.json"
 IX_NS="{http://www.xbrl.org/2013/inlineXBRL}"; XBRLI_NS="{http://www.xbrl.org/2003/instance}"; XBRLDI_NS="{http://xbrl.org/2006/xbrldi}"
 class OffHostRedirect(Exception): pass
 class StructuredIngestionError(Exception):
