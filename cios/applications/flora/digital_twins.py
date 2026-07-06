@@ -179,5 +179,5 @@ def _history_section() -> str:
     for r in rs:
         rapid=r.get('rapid_intelligence') or {}; n=len(rapid.get('candidates') or [])
         outcome, verify, twin = _research_outcome(r, list(rapid.get('candidates') or []))
-        rows += f"<li>{escape(_human_date(r.get('created_at')))} · {escape(str(r.get('reporting_period') or PERIOD))} · {escape(outcome.rstrip('.'))} · {escape(verify.rstrip('.'))} · Trusted Twin {escape(twin)} · <a href='/financial-intelligence/{escape(str(r.get('run_id')))}'>Open result</a> · <a class='support-report-link' href='/financial-intelligence/{escape(str(r.get('run_id')))}/support-report/download'>Download support report</a></li>"
+        rows += f"<li>{escape(_human_date(r.get('created_at')))} · {escape(str(r.get('reporting_period') or PERIOD))} · {escape(outcome.rstrip('.'))} · {escape(verify.rstrip('.'))} · Trusted Twin {escape(twin)} · <a href='/financial-intelligence/{escape(str(r.get('run_id')))}'>Open result</a> · <a class='support-report-link' href='/financial-intelligence/{escape(str(r.get('run_id')))}/support-report'>Download support report</a></li>"
     return f"<section class='card'><h2>Research history</h2><ul>{rows}</ul></section>"
