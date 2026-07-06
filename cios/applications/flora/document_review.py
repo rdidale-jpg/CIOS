@@ -162,7 +162,28 @@ def _safe_message(message: str) -> str:
     message = re.sub(r'sk-[A-Za-z0-9_\-]+', 'sk-REDACTED', message or '')
     message = re.sub(r'Bearer\s+[A-Za-z0-9._\-]+', 'Bearer REDACTED', message, flags=re.I)
     message = re.sub(r'(?i)(api[_-]?key|authorization|auth(?:entication)?)[=:]\s*[^\s,;]+', r'\1=REDACTED', message)
+    message = _redact_filesystem_paths(message)
     return message[:700]
+
+_FILE_URL_RE = re.compile(r'file:///[^\s<>"\']+', re.I)
+_WIN_PATH_RE = re.compile(r'(?<![A-Za-z0-9])(?:[A-Za-z]:\\|\\\\)[^\s<>"\']+')
+_UNIX_PATH_RE = re.compile(r'(?<![A-Za-z0-9])/(?:tmp|var|home|workspace|Users|private/tmp|opt/render|mnt|data)(?:/[^\s<>"\']*)?', re.I)
+
+def _redact_filesystem_paths(value: str) -> str:
+    text = str(value or '')
+    text = _FILE_URL_RE.sub('REDACTED_PATH', text)
+    text = _WIN_PATH_RE.sub('REDACTED_PATH', text)
+    text = _UNIX_PATH_RE.sub('REDACTED_PATH', text)
+    return text
+
+def _sanitize_diagnostic_payload(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {str(_sanitize_diagnostic_payload(k)): _sanitize_diagnostic_payload(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple, set)):
+        return [_sanitize_diagnostic_payload(v) for v in value]
+    if isinstance(value, str):
+        return _safe_message(value)
+    return value
 
 def _safe_provider_diagnostic(run_id: str, source: dict[str, Any], fetched: Any, model: str, started: float) -> dict[str, Any]:
     return {
@@ -202,6 +223,8 @@ def _sanitize_url(value: Any) -> str:
     raw = str(value or '')
     if not raw:
         return 'unknown'
+    if raw.lower().startswith('file:'):
+        return 'REDACTED_PATH'
     try:
         from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
         parts = urlsplit(raw)
@@ -210,7 +233,7 @@ def _sanitize_url(value: Any) -> str:
             netloc += f':{parts.port}'
         sensitive = {'token','key','api_key','apikey','access_token','auth','authorization','signature','sig','password','secret','cookie'}
         query = urlencode([(k, 'REDACTED' if k.lower() in sensitive or any(x in k.lower() for x in ('token','key','secret','auth','password','cookie','sig')) else v) for k, v in parse_qsl(parts.query, keep_blank_values=True)])
-        return urlunsplit((parts.scheme, netloc, parts.path, query, ''))
+        return _redact_filesystem_paths(urlunsplit((parts.scheme, netloc, parts.path, query, '')))
     except Exception:
         return _safe_message(raw)
 
@@ -256,19 +279,21 @@ def _run_diagnostic(run: dict[str, Any]) -> dict[str, Any]:
         'request_attempted': bool(receipt.get('request_attempted', coll.get('retrieved') is not None or coll.get('http_status') is not None or coll.get('error') is not None or coll.get('active_source_url') is not None)), 'requested_url': _sanitize_url(requested), 'final_host': receipt.get('artifact_host') or ('unknown' if not final_url else __import__('urllib.parse').parse.urlsplit(str(final_url)).hostname or 'unknown'),
         'http_status': _not_reached(receipt.get('http_status', coll.get('http_status')), 'unknown' if bool(receipt.get('request_attempted', coll)) else 'not_reached'), 'content_type': _not_reached(receipt.get('content_type', coll.get('content_type')), 'not_reached'), 'bytes_downloaded': int(receipt.get('bytes_downloaded', coll.get('document_size') or 0) or 0), 'redirect_count': len(receipt.get('redirect_chain') or coll.get('redirect_chain') or []),
         'pdf_magic_result': receipt.get('pdf_magic_valid', 'not_reached' if not coll.get('retrieved') else bool(str(doc.get('media_type')).lower() == 'application/pdf')), 'parser_name': diag.get('parser_name') or receipt.get('parser_name') or nav.get('selected_parser') or doc.get('extraction_method') or 'not_reached', 'parser_version': diag.get('parser_version') or receipt.get('parser_version') or doc.get('extraction_version') or 'not_reached', 'page_count': receipt.get('page_count') or doc.get('page_count') or 'not_reached', 'pages_successfully_read': receipt.get('pages_successfully_read') or diag.get('pages_successfully_read') or ('not_reached' if not doc.get('page_count') else list(range(1, int(doc.get('page_count') or 0)+1))),
-        'identity_result': receipt.get('identity_result') or 'not_reached', 'reporting_period_result': receipt.get('period_result') or 'not_reached', 'extraction_status': rapid.get('extraction_status') or ('completed' if run.get('claims') else ('not_reached' if failure_stage in {'retrieval','parsing','validation'} else 'failed')), 'candidate_count': int(candidate_count or 0),
+        'identity_result': receipt.get('identity_result') or 'not_reached', 'reporting_period_result': receipt.get('period_result') or 'not_reached', 'extraction_status': rapid.get('extraction_status') or ('completed' if run.get('claims') else ('not_reached' if failure_stage in {'retrieval','parsing','validation','unknown'} or status in {'queued','running','retrieving_source','reading_document','checking_document_quality','selecting_sections','preparing_packets','estimating_cost','analysing','validating','updating_memory'} else 'failed')), 'candidate_count': int(candidate_count or 0),
         'failure_stage': failure_stage, 'failure_code': first_exc.get('exception_type') or receipt.get('failure_code') or run.get('failure_category') or ('none' if status.startswith('completed') else 'unknown'), 'safe_failure_message': _safe_message(first_exc.get('user_message') or receipt.get('safe_failure_message') or _diagnostic_user_message(failure_stage)),
         'ai_call_count': int(run.get('ai_calls_made', run.get('openai_calls_made', (run.get('cost_summary') or {}).get('ai_call_count', 0))) or 0), 'canonical_write_count': int(canonical_write_count or 0), 'trusted_twin_changed': bool(run.get('trusted_twin_changed') or (run.get('canonical_update') or {}).get('enterprise_model_updated')),
     }
-    return out
+    return _sanitize_diagnostic_payload(out)
 
 def attach_financial_run_diagnostic(run: dict[str, Any]) -> dict[str, Any]:
     run.setdefault('deployed_revision', deployed_revision())
+    run.setdefault('support_reference', _support_reference(run))
     run['support_diagnostic'] = _run_diagnostic(run)
     return run
 
 def financial_intelligence_support_diagnostic_payload(run_id: str) -> dict[str, Any]:
-    return _run_diagnostic(load_run(run_id))
+    run = load_run(run_id)
+    return _sanitize_diagnostic_payload(run.get('support_diagnostic') or _run_diagnostic(run))
 
 def financial_intelligence_support_diagnostic_page(run_id: str) -> str:
     payload = financial_intelligence_support_diagnostic_payload(run_id)
@@ -415,6 +440,11 @@ def _read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding='utf-8'))
 
 def _write_json(path: Path, data: dict[str, Any]) -> None:
+    try:
+        if path.parent == _run_dir() and isinstance(data, dict) and (str(data.get('run_id', '')).startswith('fi-') or data.get('workflow') == 'financial_intelligence'):
+            attach_financial_run_diagnostic(data)
+    except Exception:
+        LOGGER.exception('Could not attach Financial Intelligence diagnostic before persistence path=%s', path)
     atomic_write_json(path, data)
 
 def _run_path(run_id: str) -> Path: return _run_dir() / f'{run_id}.json'
