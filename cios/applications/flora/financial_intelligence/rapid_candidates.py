@@ -14,9 +14,9 @@ from typing import Any
 
 from .adapters import FinancialFactCandidate
 from .rapid_sources import AcquiredRapidSource, RapidSourceReceipt
-from .page_aware_pdf import parse_page_aware_pdf
+from .page_aware_pdf import parse_page_aware_pdf, ParsedPdfPage
 
-EXTRACTION_VERSION = "rapid-core-candidates-v1"
+EXTRACTION_VERSION = "rapid-core-candidates-v2-layout"
 PROFILE_DIR = Path(__file__).resolve().parents[4] / "config" / "flora" / "rapid_extraction"
 _EXCEPTION_CATEGORIES = {
     "source precondition failed", "metric label not found", "multiple metric rows matched", "period column not identified",
@@ -50,6 +50,7 @@ class RapidFinancialCandidateExtractionResult:
     pages_examined: tuple[int, ...]
     table_or_section_matches: tuple[str, ...]
     elapsed_ms: int
+    diagnostics: dict[str, Any] | None = None
     ai_call_count: int = 0
     provider_cost: float = 0.0
     canonical_write_count: int = 0
@@ -58,7 +59,7 @@ class RapidFinancialCandidateExtractionResult:
 
 @dataclass(frozen=True)
 class _Row:
-    page:int; section:str; scale_context:str; headers:tuple[str,...]; label:str; values:tuple[str,...]; excerpt:str
+    page:int; section:str; scale_context:str; headers:tuple[str,...]; label:str; values:tuple[str,...]; excerpt:str; column_labels:tuple[str,...]=()
 
 def _exc(metric, category, receipt, explanation, page=None, location=None, retry=True, evidence="Clear source text resolving the extraction ambiguity"):
     assert category in _EXCEPTION_CATEGORIES
@@ -82,11 +83,11 @@ def load_rapid_extraction_profile(configuration_key: str, profile_dir: Path = PR
             return data
     raise FileNotFoundError(configuration_key)
 
-def _pdf_pages(path: Path) -> list[tuple[int,str]]:
+def _pdf_pages(path: Path) -> list[ParsedPdfPage]:
     parsed = parse_page_aware_pdf(path)
     if parsed.status != "parsed":
         raise RuntimeError(f"parser failure: {parsed.failure_class or parsed.status}")
-    return [(p.page_number, p.text) for p in parsed.pages if p.text.strip()]
+    return [p for p in parsed.pages if p.text.strip()]
 
 def _scale(text: str, profile: dict[str,Any]) -> tuple[str|None,str|None,str|None]:
     found=[]
@@ -106,25 +107,75 @@ def _amount(cell: str) -> Decimal:
 
 def _norm(s: str) -> str: return re.sub(r"[^a-z0-9]+", " ", s.casefold()).strip()
 
-def _extract_rows(pages: list[tuple[int,str]], profile: dict[str,Any]) -> tuple[list[_Row], list[CandidateExtractionException], list[str]]:
-    rows=[]; exceptions=[]; matches=[]
-    section_markers=[m.casefold() for m in profile.get("table_or_section_markers",())]
-    for page_no,text in pages:
-        lines=[re.sub(r"\s+", " ", l).strip() for l in text.splitlines() if l.strip()]
+def _old_line_rows(pages: list[ParsedPdfPage], profile: dict[str,Any]) -> tuple[list[_Row], list[str]]:
+    rows=[]; matches=[]; section_markers=[m.casefold() for m in profile.get("table_or_section_markers",())]
+    for page in pages:
+        lines=[re.sub(r"\s+", " ", l).strip() for l in page.text.splitlines() if l.strip()]
         section=""; headers=(); scale_context=""
-        for i,line in enumerate(lines):
+        for line in lines:
             low=line.casefold()
             if any(m in low for m in section_markers): section=line; matches.append(line)
-            cur,sc,marker=_scale(line, profile)
-            if marker: scale_context=line
+            if _scale(line, profile)[2]: scale_context=line
             if any(h.casefold() in low for h in profile.get("current_period_column_markers",())) and any(h.casefold() in low for h in profile.get("prior_period_column_markers",())):
                 headers=tuple(re.split(r"\s{2,}|\|", line)) if "|" in line or re.search(r"\s{2,}", line) else tuple(line.split())
-            # pipe-delimited fixture row: label | FY26 | FY25 | basis | scope
             if "|" in line:
                 parts=[p.strip() for p in line.split("|")]
                 if len(parts)>=3 and not any(h.casefold() in parts[0].casefold() for h in profile.get("current_period_column_markers",())):
-                    rows.append(_Row(page_no, section, scale_context, headers, parts[0], tuple(parts[1:]), line))
-    return rows, exceptions, tuple(dict.fromkeys(matches))
+                    rows.append(_Row(page.page_number, section, scale_context, headers, parts[0], tuple(parts[1:]), line, tuple(h.strip() for h in headers[1:])))
+    return rows, tuple(dict.fromkeys(matches))
+
+def _line_text(words): return " ".join(w.text for w in sorted(words, key=lambda w:(w.x0,w.word)))
+def _mid_y(ws): return sum((w.y0+w.y1)/2 for w in ws)/len(ws)
+def _geometric_rows(pages: list[ParsedPdfPage], profile: dict[str,Any]) -> tuple[list[_Row], list[str], dict[str,Any]]:
+    rows=[]; matches=[]; diag={"layout_strategy":"word_geometry","table_regions_found":[],"period_columns_found":[],"scale_markers_found":[],"normalized_labels_encountered":[]}
+    markers=[m.casefold() for m in profile.get("table_or_section_markers",())]
+    current=[m.casefold() for m in profile.get("current_period_column_markers",())]; prior=[m.casefold() for m in profile.get("prior_period_column_markers",())]
+    for page in pages:
+        by_line={}
+        for w in page.words: by_line.setdefault((w.block,w.line),[]).append(w)
+        lines=sorted(by_line.values(), key=lambda ws:(min(w.y0 for w in ws), min(w.x0 for w in ws)))
+        section=""; scale_context=""; header_ws=None
+        for ws in lines:
+            txt=_line_text(ws); low=txt.casefold()
+            if any(m in low for m in markers): section=txt; matches.append(txt); diag["table_regions_found"].append({"page":page.page_number,"title":txt[:120]})
+            if _scale(txt, profile)[2]: scale_context=txt; diag["scale_markers_found"].append({"page":page.page_number,"marker":txt[:80]})
+            if any(c in low for c in current) and any(p in low for p in prior): header_ws=ws
+        if not header_ws:
+            header_candidates=[w for w in page.words if w.text.casefold() in set(current+prior)]
+            if header_candidates:
+                ys=[round(((w.y0+w.y1)/2)/3)*3 for w in header_candidates]
+                best=max(set(ys), key=ys.count)
+                header_ws=[w for w,y in zip(header_candidates,ys) if y==best]
+        if not header_ws: continue
+        header_y=_mid_y(header_ws); cols=[]
+        for w in sorted(header_ws, key=lambda w:w.x0):
+            wt=w.text.casefold()
+            if wt in current or wt in prior: cols.append((wt, (w.x0+w.x1)/2))
+        if not any(c[0] in current for c in cols): continue
+        diag["period_columns_found"].append({"page":page.page_number,"columns":[c[0] for c in cols]})
+        left_edge=min(w.x0 for w in header_ws)
+        label_words=[w for w in page.words if w.y0>header_y+2 and w.x0 < left_edge-10]
+        val_words=[w for w in page.words if w.y0>header_y+2 and w.x0 >= left_edge-10]
+        by_y={}
+        for w in label_words: by_y.setdefault(round(((w.y0+w.y1)/2)/3)*3,[]).append(w)
+        for y,lws in sorted(by_y.items()):
+            label=_line_text(lws); nlabel=_norm(label)
+            if not label or not any(_norm(a) in nlabel or nlabel in _norm(a) for m in profile.get("metric_definitions",()) for a in m.get("accepted_source_labels",())) and not label.casefold().startswith(("adjusted","segment")): continue
+            vals=[]
+            for col_label,cx in cols:
+                aligned=[w for w in val_words if abs(((w.y0+w.y1)/2)-y)<=4 and abs(((w.x0+w.x1)/2)-cx)<=35]
+                vals.append(_line_text(aligned))
+            if any(vals):
+                excerpt=(label+" | "+" | ".join(vals)).strip()
+                diag["normalized_labels_encountered"].append({"page":page.page_number,"label":_norm(label)[:80]})
+                rows.append(_Row(page.page_number, section, scale_context, tuple(c[0] for c in cols), label, tuple(vals), excerpt, tuple(c[0] for c in cols)))
+    return rows, tuple(dict.fromkeys(matches)), diag
+
+def _extract_rows(pages: list[ParsedPdfPage], profile: dict[str,Any]) -> tuple[list[_Row], list[CandidateExtractionException], list[str], dict[str,Any]]:
+    old_rows, old_matches = _old_line_rows(pages, profile)
+    geo_rows, geo_matches, diag = _geometric_rows(pages, profile)
+    diag["old_line_row_count"]=len(old_rows); diag["geometric_row_count"]=len(geo_rows)
+    return old_rows + [r for r in geo_rows if (r.page,_norm(r.label)) not in {(o.page,_norm(o.label)) for o in old_rows}], [], tuple(dict.fromkeys(tuple(old_matches)+tuple(geo_matches))), diag
 
 def _candidate_id(material: dict[str,Any]) -> str:
     return "RFC-"+hashlib.sha256(json.dumps(material, sort_keys=True, default=str).encode()).hexdigest()[:20].upper()
@@ -134,15 +185,15 @@ def extract_rapid_financial_candidates(acquired: AcquiredRapidSource, *, profile
     pre=_preconditions(r)
     if pre:
         ex=(_exc(None,"source precondition failed",r,"Rapid source receipt failed preconditions: "+", ".join(pre), retry=False, evidence="Accepted Slice 2A receipt with valid PDF parsing, identity, period, SHA-256 and bytes"),)
-        return RapidFinancialCandidateExtractionResult("failed_precondition", receipt_ref, r.sha256, EXTRACTION_VERSION, 0, (), len(ex), ex, (), (), int((time.monotonic()-start)*1000))
+        return RapidFinancialCandidateExtractionResult("failed_precondition", receipt_ref, r.sha256, EXTRACTION_VERSION, 0, (), len(ex), ex, (), (), int((time.monotonic()-start)*1000), {})
     if r.sha256 and hashlib.sha256(acquired.path.read_bytes()).hexdigest()!=r.sha256:
         ex=(_exc(None,"source precondition failed",r,"Source receipt SHA-256 does not match acquired PDF bytes.", retry=False, evidence="Matching actual-byte receipt and acquired temporary source"),)
-        return RapidFinancialCandidateExtractionResult("failed_precondition", receipt_ref, r.sha256, EXTRACTION_VERSION, 0, (), len(ex), ex, (), (), int((time.monotonic()-start)*1000))
+        return RapidFinancialCandidateExtractionResult("failed_precondition", receipt_ref, r.sha256, EXTRACTION_VERSION, 0, (), len(ex), ex, (), (), int((time.monotonic()-start)*1000), {})
     try: pages=_pdf_pages(acquired.path)
     except RuntimeError as e:
         ex=(_exc(None,"parser failure",r,str(e), retry=True, evidence="Parser-readable PDF text"),)
-        return RapidFinancialCandidateExtractionResult("failed_extraction", receipt_ref, r.sha256, EXTRACTION_VERSION, 0, (), len(ex), ex, (), (), int((time.monotonic()-start)*1000))
-    rows, exceptions, matches = _extract_rows(pages, profile)
+        return RapidFinancialCandidateExtractionResult("failed_extraction", receipt_ref, r.sha256, EXTRACTION_VERSION, 0, (), len(ex), ex, (), (), int((time.monotonic()-start)*1000), {})
+    rows, exceptions, matches, diagnostics = _extract_rows(pages, profile)
     candidates=[]; seen=set()
     current_markers=[m.casefold() for m in profile.get("current_period_column_markers",())]
     for metric in profile.get("metric_definitions",()):
@@ -164,14 +215,18 @@ def extract_rapid_financial_candidates(acquired: AcquiredRapidSource, *, profile
         if not cur: exceptions.append(_exc(mid,"currency missing",r,"No explicit permitted currency marker found in table context.",row.page)); continue
         if not row.section: exceptions.append(_exc(mid,"supporting excerpt unavailable",r,"No section/table context marker found.",row.page)); continue
         if not any(m in " ".join(row.headers).casefold() for m in current_markers): exceptions.append(_exc(mid,"period column not identified",r,"FY26/current-period column marker not identified.",row.page)); continue
-        value=row.values[0]
+        try:
+            idx = [h.casefold() for h in (row.column_labels or row.headers)].index(profile["reporting_period"].casefold())
+        except ValueError:
+            idx = 0
+        value=row.values[idx] if idx < len(row.values) else ""
         try: amount=_amount(value)
         except Exception: exceptions.append(_exc(mid,"amount ambiguous",r,f"Could not parse amount {value!r} safely.",row.page)); continue
-        locator={"page":row.page,"section":row.section,"table":row.section,"row":row.label,"column":profile["reporting_period"],"scale_context":row.scale_context,"source_sha256":r.sha256}
+        locator={"page":row.page,"section":row.section,"table":row.section,"row":row.label,"column":(row.column_labels[idx] if idx < len(row.column_labels) else profile["reporting_period"]),"scale_context":row.scale_context,"source_sha256":r.sha256}
         material={"enterprise_id":r.enterprise_id,"metric":mid,"period":r.reporting_period,"scope":profile["expected_scope"],"basis":metric["required_accounting_basis"],"state":metric["required_measurement_state"],"source_sha256":r.sha256,"source_locator":locator,"reported_amount":str(amount),"reported_scale":sc}
         cid=_candidate_id(material)
         if cid in seen: exceptions.append(_exc(mid,"duplicate candidate",r,"Duplicate deterministic candidate fingerprint.",row.page,locator)); continue
         seen.add(cid)
         candidates.append(FinancialFactCandidate(candidate_id=cid, enterprise_id=r.enterprise_id, source_id=r.source_id, source_locator=json.dumps(locator, sort_keys=True), source_page=row.page, source_method="deterministic_official_issuer_results_pdf", raw_metric_label=row.label, raw_value_text=value, reported_amount=amount, currency=cur, reported_scale=sc, raw_period_text=r.reporting_period, scope_text=profile["expected_scope"], accounting_basis_text=metric["required_accounting_basis"], measurement_state_text=metric["required_measurement_state"], supporting_excerpt=row.excerpt, extraction_confidence=95, source_hash=r.sha256 or "", extraction_version=EXTRACTION_VERSION, proposed_canonical_metric_id=mid, original_displayed_value=value, period_start=profile["period_start"], period_end=profile["period_end"], verification_status="candidate_unverified"))
     status="completed" if len(candidates)==3 else ("partial" if candidates else "failed_extraction")
-    return RapidFinancialCandidateExtractionResult(status, receipt_ref, r.sha256, EXTRACTION_VERSION, len(candidates), tuple(candidates), len(exceptions), tuple(exceptions), tuple(p for p,_ in pages), matches, int((time.monotonic()-start)*1000))
+    return RapidFinancialCandidateExtractionResult(status, receipt_ref, r.sha256, EXTRACTION_VERSION, len(candidates), tuple(candidates), len(exceptions), tuple(exceptions), tuple(p.page_number for p in pages), matches, int((time.monotonic()-start)*1000), diagnostics)
