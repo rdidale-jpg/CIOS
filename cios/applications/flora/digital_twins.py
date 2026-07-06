@@ -13,6 +13,7 @@ from urllib.parse import urlparse
 
 from cios.applications.flora.document_review import _run_dir, _read_json, coordinate_dual_speed_financial_intelligence_run, financial_intelligence_support_report_link
 from cios.applications.flora.financial_intelligence.rapid_sources import load_rapid_source_manifest
+from cios.applications.flora.financial_intelligence.rapid_ai_twin import build_csv
 from cios.applications.flora.memory.repository import EnterpriseModelRepository
 from cios.applications.flora.workspace.views import _page
 
@@ -93,6 +94,7 @@ def bt_twin_page(highlight_run_id: str | None = None) -> str:
     body = f"""<section class='hero'><h1>BT Group</h1><p>Commercial Digital Twin</p></section>
     <section class='card'><h2>Twin summary</h2><dl><dt>Enterprise</dt><dd>BT Group</dd><dt>Current reporting period available for research</dt><dd>{PERIOD}</dd><dt>Latest trusted update</dt><dd>{escape(_trusted_update(model))}</dd><dt>Trusted Twin state</dt><dd>{escape(_trusted_state(model))}</dd><dt>Latest research</dt><dd>{escape(_human_date(run.get('created_at')) if run else 'Not yet available.')}</dd><dt>Latest research outcome</dt><dd>{escape(latest_outcome)}</dd></dl></section>
     <section class='card action'><h2>Research BT</h2><p>Checks approved BT official reporting sources for new financial information.</p><p>Reporting period: {PERIOD}</p><form method='post' action='/digital-twins/bt-group-plc/search'><button>Search for new information</button></form>{'' if _manifest_available() else '<p class="muted">Approved source manifest is not currently available.</p>'}</section>
+    {_rapid_snapshot_section(run)}
     {_trusted_section(model)}
     {_latest_findings(run, candidates, highlight_run_id)}
     {_history_section()}"""
@@ -181,3 +183,58 @@ def _history_section() -> str:
         outcome, verify, twin = _research_outcome(r, list(rapid.get('candidates') or []))
         rows += f"<li>{escape(_human_date(r.get('created_at')))} · {escape(str(r.get('reporting_period') or PERIOD))} · {escape(outcome.rstrip('.'))} · {escape(verify.rstrip('.'))} · Trusted Twin {escape(twin)} · <a href='/financial-intelligence/{escape(str(r.get('run_id')))}'>Open result</a> · <a class='support-report-link' href='/financial-intelligence/{escape(str(r.get('run_id')))}/support-report'>Download support report</a></li>"
     return f"<section class='card'><h2>Research history</h2><ul>{rows}</ul></section>"
+
+
+def _snapshot(run: dict | None) -> dict:
+    return (((run or {}).get('rapid_intelligence') or {}).get('rapid_ai_twin_snapshot') or {})
+
+def rapid_snapshot_csv(run_id: str) -> str:
+    run = _read_json(_run_dir() / (run_id + '.json'))
+    return build_csv(_snapshot(run))
+
+def _text_item(item) -> str:
+    if isinstance(item, dict):
+        return str(item.get('statement') or item.get('summary') or item.get('proposition') or item.get('question') or item.get('action') or item.get('commitment') or item.get('programme_name') or item.get('theme') or item)
+    return str(item)
+
+def _lineage(item) -> str:
+    if not isinstance(item, dict): return ''
+    refs = item.get('supporting_fact_ids') or item.get('supporting_ids') or item.get('lineage_ids') or item.get('fact_ids') or []
+    return ' · Lineage: ' + escape(', '.join(map(str, refs))) if refs else ''
+
+def _list_section(title: str, items, label: str | None = None) -> str:
+    if not items: return f"<section class='card'><h2>{escape(title)}</h2><p>No source-backed items available yet.</p></section>"
+    lis = ''.join(f"<li>{('<strong>'+escape(label)+'</strong> ') if label else ''}{escape(_text_item(i))}{_lineage(i)}</li>" for i in items)
+    return f"<section class='card'><h2>{escape(title)}</h2><ul>{lis}</ul></section>"
+
+def _financial_tables(snapshot: dict, run_id: str) -> str:
+    tables = ((snapshot.get('extraction_result') or {}).get('financial_tables') or [])
+    if not tables: return "<section class='card'><h2>Financial tables</h2><p>No financial tables are available in the rapid snapshot.</p></section>"
+    blocks=[]
+    for t in tables:
+        headers = ''.join(f"<th>{escape(str(h))}</th>" for h in (t.get('column_headings') or ['Metric','Current','Comparator','Source']))
+        rows=''
+        for r in t.get('rows') or []:
+            rows += f"<tr><td>{escape(str(r.get('reported_label')))}</td><td>{escape(str(r.get('current_period_display_value')))}</td><td>{escape(str(r.get('comparator_display_value') or r.get('comparator_display_values') or ''))}</td><td><details><summary>View source</summary><p>Page {escape(str(r.get('source_page')))} · {escape(str(t.get('section') or r.get('section') or ''))}</p><p>{escape(str(r.get('supporting_excerpt') or ''))}</p><p>Status: {escape(str(r.get('ambiguity') or 'Verification pending'))}</p></details></td></tr>"
+        blocks.append(f"<details open><summary><strong>{escape(str(t.get('title') or t.get('table_id')))}</strong> · Page {escape(str(t.get('page') or ''))}</summary><table><thead><tr>{headers}</tr></thead><tbody>{rows}</tbody></table></details>")
+    return f"<section class='card'><h2>Financial tables</h2><p><a href='/digital-twins/bt-group-plc/rapid-snapshot/{escape(run_id)}/financial-tables.csv'>Download financial tables as CSV</a></p>{''.join(blocks)}</section>"
+
+def _rapid_snapshot_section(run: dict | None) -> str:
+    snapshot = _snapshot(run)
+    if not snapshot: return ""
+    analysis = snapshot.get('report_analysis') or {}
+    status = snapshot.get('user_status') or 'AI-built snapshot — verification pending'
+    explanation = snapshot.get('user_explanation') or 'Flora reviewed the approved BT report and created this source-backed snapshot. It has not yet completed structured verification or canonical acceptance.'
+    run_id = str((run or {}).get('run_id') or '')
+    return f"""<section class='card warning' id='rapid-ai-twin-snapshot'><h2>Rapid AI Twin Snapshot</h2><p><strong>{escape(status)}</strong></p><p>{escape(explanation)}</p><p>Trusted Commercial Digital Twin changed: no. Canonical writes: 0.</p></section>
+    {_list_section('Executive view', analysis.get('executive_summary') or [])}
+    {_financial_tables(snapshot, run_id)}
+    {_list_section('What changed', analysis.get('what_changed') or [])}
+    {_list_section('Management commitments', snapshot.get('commitments') or [], 'Management commitment')}
+    {_list_section('Transformation programmes', snapshot.get('programmes') or [], 'Reported programme')}
+    {_list_section('Pressures and Signals', (analysis.get('enterprise_pressures') or []) + (snapshot.get('signals') or []), 'Signal')}
+    {_list_section('Hypotheses', snapshot.get('hypotheses') or [], 'Hypothesis')}
+    {_list_section('Commercial themes', analysis.get('commercial_themes') or [])}
+    {_list_section('Unknowns and Contradictions', (snapshot.get('unknowns') or []) + (snapshot.get('contradictions') or []))}
+    {_list_section('Questions and next learning actions', (analysis.get('questions_to_investigate') or []) + (snapshot.get('learning_actions') or []))}
+    <section class='card'><h2>Trusted Twin status</h2><p>Rapid AI Twin Snapshot available; verification pending; trusted Commercial Digital Twin unchanged.</p></section>"""
