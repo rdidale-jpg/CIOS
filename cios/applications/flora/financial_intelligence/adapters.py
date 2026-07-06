@@ -84,6 +84,12 @@ class FinancialFactCandidate:
     evidence_bundle_id: str | None = None
     evidence_bundle: FinancialTableEvidenceBundle | None = None
     table_class: str | None = None
+    proposed_canonical_metric_id: str | None = None
+    original_displayed_value: str | None = None
+    period_start: str | None = None
+    period_end: str | None = None
+    verification_status: str | None = None
+    ambiguity_details: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         row = asdict(self)

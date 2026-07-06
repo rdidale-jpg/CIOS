@@ -304,3 +304,21 @@ This increment implements ADR-010's structured-source-first discipline for rapid
 ### Explicit deferral to Slice 2B
 
 Source-backed financial fact candidates, page/table locators, metric interpretation, scale and basis handling, rapid outlook generation, verification, canonical acceptance and production-default changes are deferred to Slice 2B or later architecture-approved increments.
+
+## Slice 2B-1 source-backed runtime candidate extraction
+
+Slice 2B-1 adds a deterministic, runtime-only extraction boundary for accepted Slice 2A official issuer results PDFs. `FinancialFactCandidate` is the authoritative runtime candidate contract for this slice. It may carry a proposed canonical metric identity, original displayed value, period start and end, verification status, ambiguity details, source SHA-256, source locator and evidence bundle metadata, but it remains candidate data and is not EI-001 canonical state.
+
+The Slice 2B-1 extractor is limited to three statutory Group actual metrics: revenue, operating profit and profit before tax. It returns a candidate extraction result with status `completed`, `partial`, `failed_precondition` or `failed_extraction`, the source receipt reference, source SHA-256, extraction version, candidate and exception counts, candidates, exceptions, pages examined, table or section matches, elapsed time, AI call count, provider cost and canonical write count. `completed` means all three facts were safely produced; `partial` means one or two were produced and missing or ambiguous facts remain explicit exceptions.
+
+Source preconditions are mandatory: the receipt must be accepted, PDF magic valid, parser validation successful, issuer identity matched, reporting period matched, actual-byte SHA-256 present and bytes downloaded greater than zero. A receipt/byte SHA mismatch fails precondition. The extractor makes zero AI calls, incurs zero provider cost, performs no OCR, performs no external calls after acquisition and writes nothing to Evidence, Observation or Enterprise Model repositories.
+
+Candidate source locators are structured JSON strings using one-based PDF page numbers. Where available they include page, section, table, row, column, scale context and source SHA-256. A URL alone is not an adequate locator.
+
+Scale must be explicit in source context, such as `GBP m`, `£m` or `GBP millions`, and maps to EI-001 scale values such as `millions`. Scale must not be guessed from magnitude. The current-period column must be explicitly identified from configured period markers such as `FY26`; prior-period comparators are not successful Slice 2B-1 candidates. Measurement state for successful candidates is `actual`; accounting basis for successful candidates is `statutory`. Adjusted rows and segment rows are rejected as candidate exceptions rather than silently substituted.
+
+Candidate identity is deterministic. The fingerprint includes enterprise ID, proposed metric identity, reporting period, scope, accounting basis, measurement state, source SHA-256, source locator, reported amount and reported scale. Repeated extraction over identical bytes produces the same candidate IDs and no duplicate successful candidates.
+
+The candidate exception catalogue for this slice includes: source precondition failed, metric label not found, multiple metric rows matched, period column not identified, amount ambiguous, scale missing, scale contradictory, currency missing, scope ambiguous, segment value rejected, accounting basis ambiguous, adjusted value rejected, supporting excerpt unavailable, source locator incomplete, duplicate candidate and parser failure. Each exception records metric identity where known, category, page/location where known, source SHA-256, a human-readable explanation, retry usefulness and evidence needed to resolve it.
+
+Run integration, live UI enablement, broader metrics, rapid outlook generation, structured verification, canonical acceptance, Evidence creation, Observation creation and Enterprise Model updates remain deferred.
