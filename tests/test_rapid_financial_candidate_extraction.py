@@ -104,3 +104,43 @@ def test_source_receipt_sha_mismatch_fails_precondition(tmp_path):
     result=extract_rapid_financial_candidates(AcquiredRapidSource(p,r))
     assert result.extraction_status=='failed_precondition'
     assert result.candidate_count==0
+
+def layout_pdf(tmp_path: Path) -> Path:
+    p=tmp_path/'synthetic-bt-results-layout-regression-fixture.pdf'
+    import fitz
+    doc=fitz.open(); page=doc.new_page(width=595, height=842)
+    page.insert_text((72,72),'synthetic BT-results-layout regression fixture',fontsize=10)
+    page.insert_text((72,92),'Group statutory results',fontsize=10)
+    page.insert_text((72,112),'GBP m',fontsize=10)
+    # Deliberately insert comparator column before FY26 and keep labels/values in separate positioned blocks.
+    page.insert_text((300,132),'FY25',fontsize=10)
+    page.insert_text((380,132),'FY26',fontsize=10)
+    labels=[('Revenue',152),('Operating profit',172),('Profit before tax',192),('Adjusted operating profit',212),('Segment revenue',232)]
+    for txt,y in labels: page.insert_text((72,y),txt,fontsize=10)
+    fy25=['20,800','2,700','1,200','3,000','888']; fy26=['19,654','2,897','1,436','3,100','999']
+    for v,(_,y) in zip(fy25,labels): page.insert_text((300,y),v,fontsize=10)
+    for v,(_,y) in zip(fy26,labels): page.insert_text((380,y),v,fontsize=10)
+    doc.save(str(p)); doc.close(); return p
+
+def test_structural_bt_layout_fixture_reproduces_old_matcher_failure_and_new_extractor_reconstructs_rows(tmp_path):
+    p=layout_pdf(tmp_path); res=extract_rapid_financial_candidates(AcquiredRapidSource(p, receipt(p)))
+    facts=by_metric(res)
+    assert res.diagnostics['old_line_row_count']==0
+    assert res.diagnostics['geometric_row_count']>=3
+    assert res.extraction_status=='completed' and res.candidate_count==3
+    assert facts['revenue'].raw_value_text=='19,654'
+    assert facts['operating_profit'].raw_value_text=='2,897'
+    assert facts['profit_before_tax'].raw_value_text=='1,436'
+    for c in facts.values():
+        loc=json.loads(c.source_locator)
+        assert loc['page']==1 and loc['column']=='fy26'
+        assert loc['table']=='Group statutory results'
+        assert loc['scale_context']=='GBP m'
+        assert c.currency=='GBP' and c.reported_scale=='millions'
+        assert c.scope_text=='BT Group consolidated / Group'
+        assert c.accounting_basis_text=='statutory' and c.measurement_state_text=='actual'
+        assert c.verification_status=='candidate_unverified'
+        assert len(c.supporting_excerpt) < 300
+    assert any(e.category=='adjusted value rejected' for e in res.exceptions)
+    assert any(e.category=='segment value rejected' for e in res.exceptions)
+    assert 'document_text' not in res.diagnostics and 'words' not in json.dumps(res.diagnostics).lower()

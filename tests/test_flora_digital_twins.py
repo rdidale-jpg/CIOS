@@ -89,9 +89,9 @@ def test_partial_and_unavailable_states_are_honest(monkeypatch, tmp_path):
             yield a
     review.coordinate_dual_speed_financial_intelligence_run(run_id='fi-partial', acquisition_boundary=acq, extraction_boundary=extract_rapid_financial_candidates)
     html = bt_twin_page()
-    assert 'Partial financial findings' in html
+    assert 'Partial source-backed financial findings' in html
     assert 'Flora found some usable information' in html
-    assert 'Unresolved metrics: operating_profit' in html
+    assert 'Unresolved financial figures: Operating Profit' in html
     assert '>0<' not in html
     p = pdf(tmp_path); rec = receipt(p, validation_result='rejected', failure_code='rapid_source_period_mismatch', failure_stage='validation', safe_failure_message='Period mismatch', external_source_call_count=0)
     @contextmanager

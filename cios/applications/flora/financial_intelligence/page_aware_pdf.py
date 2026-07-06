@@ -8,9 +8,22 @@ from typing import Any
 
 
 @dataclass(frozen=True)
+class ParsedPdfWord:
+    text: str
+    x0: float
+    y0: float
+    x1: float
+    y1: float
+    block: int
+    line: int
+    word: int
+
+
+@dataclass(frozen=True)
 class ParsedPdfPage:
     page_number: int
     text: str
+    words: tuple[ParsedPdfWord, ...] = ()
     error: str | None = None
 
 
@@ -65,11 +78,16 @@ def parse_page_aware_pdf(path: Path) -> PageAwarePdfParseResult:
                 page_no = idx + 1
                 try:
                     text = doc[idx].get_text("text") or ""
-                    pages.append(ParsedPdfPage(page_no, text))
+                    word_rows = doc[idx].get_text("words") or []
+                    words = tuple(
+                        ParsedPdfWord(str(w[4]), round(float(w[0]), 2), round(float(w[1]), 2), round(float(w[2]), 2), round(float(w[3]), 2), int(w[5]), int(w[6]), int(w[7]))
+                        for w in word_rows
+                    )
+                    pages.append(ParsedPdfPage(page_no, text, words))
                     if not text.strip():
                         errors.append({"page_number": page_no, "failure_class": "no_meaningful_text"})
                 except Exception as exc:  # bounded page-level diagnostic only
-                    pages.append(ParsedPdfPage(page_no, "", type(exc).__name__))
+                    pages.append(ParsedPdfPage(page_no, "", (), type(exc).__name__))
                     errors.append({"page_number": page_no, "failure_class": type(exc).__name__})
     except Exception as exc:
         return PageAwarePdfParseResult(name, ver, 0, (), (), "failed", type(exc).__name__)

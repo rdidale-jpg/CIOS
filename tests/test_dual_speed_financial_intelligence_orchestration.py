@@ -57,9 +57,9 @@ def test_dual_speed_progress_and_result_render_from_standard_run_only(monkeypatc
     assert code == 200
     assert 'Official-source candidate facts' in html
     assert 'Verification summary' in html
-    assert 'Status: unavailable' in html
+    assert 'Status: Unavailable' in html
     assert 'Canonical update summary' in html
-    assert 'Status: not_applicable' in html
+    assert 'Status: No canonical update required' in html
     assert 'These figures were extracted from an approved official document' in html
 
 def test_dual_speed_fixture_is_not_default(monkeypatch, tmp_path):
@@ -124,7 +124,7 @@ def test_slice_2c_success_persists_source_candidates_and_renders(monkeypatch, tm
     assert 'Official-source candidate facts' in html
     assert 'These figures were extracted from an approved official document' in html
     assert 'Page 1' in html
-    assert 'candidate_unverified' in html
+    assert 'Verification pending' in html
     assert 'Canonical memory has not been updated' in html
 
 def test_slice_2c_acquisition_failure_does_not_extract(monkeypatch, tmp_path):
@@ -171,3 +171,26 @@ def test_default_structured_mode_does_not_invoke_rapid_acquisition(monkeypatch, 
     monkeypatch.setattr(review, 'acquire_rapid_financial_source', lambda *a, **k: pytest.fail('default mode must not acquire rapid source'))
     run = review.refresh_financial_intelligence(run_id='fi-default', extraction_mode='structured_standard_financials')
     assert run['extraction_mode'] == 'structured_standard_financials'
+
+def test_official_source_zero_candidate_result_uses_honest_wording(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path))
+    @contextmanager
+    def acq(e, r):
+        with acquired(tmp_path, BASE.replace('GBP m\n','')) as a:
+            yield a
+    review.coordinate_dual_speed_financial_intelligence_run(run_id='fi-zero-candidates', acquisition_boundary=acq, extraction_boundary=extract_rapid_financial_candidates)
+    html, code = review.financial_intelligence_run_response('fi-zero-candidates')
+    assert code == 200
+    assert 'Official BT report retrieved — no safe financial findings identified' in html
+    assert 'Flora reached and validated the approved BT FY26 report, but it could not identify the required financial figures safely.' in html
+    assert 'No fixture or seeded information was substituted, and the trusted Commercial Digital Twin was unchanged.' in html
+    assert 'Revenue' in html and 'Operating profit' in html and 'Profit before tax' in html
+    assert 'Official-source candidate facts' not in html
+    assert 'These figures were extracted' not in html
+    assert '<table><thead><tr><th>Metric</th>' not in html
+    assert 'operating_profit' not in html
+    assert 'official_source_retrieved' not in html
+    assert 'no_trustworthy_evidence' not in html
+    assert 'not_applicable' not in html
+    assert 'candidate_unverified' not in html
+    assert 'Support reference: FI-zero-candidates' in html
