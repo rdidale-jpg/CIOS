@@ -16,7 +16,8 @@ from types import SimpleNamespace
 from typing import Any, Iterator
 from urllib.parse import urlparse
 
-from cios.applications.flora.live.documents import DocumentFetchResult, fetch_document, parse_pdf_document
+from cios.applications.flora.live.documents import DocumentFetchResult, fetch_document
+from .page_aware_pdf import parse_page_aware_pdf
 
 CONFIG_DIR = Path(__file__).resolve().parents[4] / "config" / "flora" / "rapid_sources"
 
@@ -47,6 +48,7 @@ class RapidSourceReceipt:
     pdf_magic_valid: bool; document_parse_result: str; identity_result: str; period_result: str
     validation_result: str; failure_code: str | None; failure_stage: str | None; safe_failure_message: str | None
     ai_call_count: int = 0; provider_cost: float = 0.0; external_source_call_count: int = 0; retry_count: int = 0; elapsed_ms: int = 0
+    parser_name: str | None = None; parser_version: str | None = None; page_count: int = 0; pages_successfully_read: tuple[int, ...] = (); pages_with_extraction_errors: tuple[int, ...] = (); validation_marker_results: dict[str, bool] | None = None; support_diagnostics: dict[str, Any] | None = None
     def to_dict(self) -> dict[str, Any]: return asdict(self)
 
 @dataclass(frozen=True)
@@ -60,7 +62,7 @@ class RapidSourceAcquisitionError(RuntimeError):
 
 def _receipt(m: RapidSourceManifest | None, **kw: Any) -> RapidSourceReceipt:
     now = datetime.now(UTC).isoformat(timespec="seconds")
-    base = dict(source_id="", configuration_key="", enterprise_id="", legal_name="", authority="", source_kind="", document_title="", publication_date="", reporting_period="", period_start="", period_end="", scope="", requested_url=None, final_url=None, artifact_host=None, http_status=None, content_type=None, bytes_downloaded=0, sha256=None, retrieved_at=now, request_attempted=False, redirect_chain=(), pdf_magic_valid=False, document_parse_result="not_attempted", identity_result="not_attempted", period_result="not_attempted", validation_result="rejected", failure_code=None, failure_stage=None, safe_failure_message=None)
+    base = dict(source_id="", configuration_key="", enterprise_id="", legal_name="", authority="", source_kind="", document_title="", publication_date="", reporting_period="", period_start="", period_end="", scope="", requested_url=None, final_url=None, artifact_host=None, http_status=None, content_type=None, bytes_downloaded=0, sha256=None, retrieved_at=now, request_attempted=False, redirect_chain=(), pdf_magic_valid=False, document_parse_result="not_attempted", identity_result="not_attempted", period_result="not_attempted", validation_result="rejected", failure_code=None, failure_stage=None, safe_failure_message=None, parser_name=None, parser_version=None, page_count=0, pages_successfully_read=(), pages_with_extraction_errors=(), validation_marker_results=None, support_diagnostics=None)
     if m:
         base.update({"source_id":m.source_id,"configuration_key":m.configuration_key,"enterprise_id":m.enterprise_id,"legal_name":m.legal_name,"authority":m.authority,"source_kind":m.source_kind,"document_title":m.document_title,"publication_date":m.publication_date,"reporting_period":m.reporting_period,"period_start":m.period_start,"period_end":m.period_end,"scope":m.scope,"requested_url":m.artifact_url})
     base.update(kw); return RapidSourceReceipt(**base)
@@ -115,13 +117,19 @@ def acquire_rapid_financial_source(enterprise_id: str, reporting_period: str, co
         if len(fetched.content) > m.maximum_bytes: _fail("rapid_source_too_large", "validation", "Rapid source is larger than the configured maximum.", m, **base)
         if not fetched.content.startswith(b"%PDF"): _fail("rapid_source_not_pdf", "validation", "Rapid source is not a valid PDF.", m, **base)
         temp = tempfile.NamedTemporaryFile(prefix="flora-rapid-source-", suffix=".pdf", delete=False); temp.write(fetched.content); temp.close(); temp_path=Path(temp.name)
-        parse = parse_pdf_document(replace(fetched, local_path=str(temp_path)), _source(m), canonical_enterprise_id=m.enterprise_id)
-        parse_result = "parsed" if parse.parser_status == "parsed" and parse.page_count > 0 else "failed"
-        if parse_result != "parsed": _fail("rapid_source_parse_failed", "validation", "Rapid source PDF parsing failed.", m, document_parse_result=parse_result, pdf_magic_valid=True, **base)
-        text="\n".join(p.text for p in parse.pages)
-        if not any(marker in text for marker in m.identity_markers): _fail("rapid_source_identity_mismatch", "validation", "Rapid source issuer identity marker was not found.", m, document_parse_result="parsed", pdf_magic_valid=True, identity_result="mismatch", **base)
-        if not any(marker in text for marker in m.period_markers): _fail("rapid_source_period_mismatch", "validation", "Rapid source reporting-period marker was not found.", m, document_parse_result="parsed", pdf_magic_valid=True, identity_result="matched", period_result="mismatch", **base)
-        receipt=_receipt(m, **base, pdf_magic_valid=True, document_parse_result="parsed", identity_result="matched", period_result="matched", validation_result="accepted", elapsed_ms=int((time.monotonic()-start)*1000))
+        parse = parse_page_aware_pdf(temp_path)
+        diag = parse.diagnostics()
+        parsed_base = dict(base, parser_name=parse.parser_name, parser_version=parse.parser_version, page_count=parse.page_count, pages_successfully_read=parse.pages_successfully_read, pages_with_extraction_errors=tuple(e.get("page_number") for e in parse.page_errors), support_diagnostics=diag)
+        parse_result = "parsed" if parse.status == "parsed" and parse.page_count > 0 and parse.pages_successfully_read else "failed"
+        if parse_result != "parsed": _fail("rapid_source_parse_failed", "validation", "Rapid source PDF parsing failed.", m, document_parse_result=parse_result, pdf_magic_valid=True, **parsed_base)
+        text="\n".join(p.text for p in parse.pages if p.text.strip())
+        identity_ok = any(marker in text for marker in m.identity_markers)
+        period_ok = any(marker in text for marker in m.period_markers)
+        marker_results={"identity": identity_ok, "reporting_period": period_ok}
+        parsed_base["validation_marker_results"] = marker_results
+        if not identity_ok: _fail("rapid_source_identity_mismatch", "validation", "Rapid source issuer identity marker was not found.", m, document_parse_result="parsed", pdf_magic_valid=True, identity_result="mismatch", **parsed_base)
+        if not period_ok: _fail("rapid_source_period_mismatch", "validation", "Rapid source reporting-period marker was not found.", m, document_parse_result="parsed", pdf_magic_valid=True, identity_result="matched", period_result="mismatch", **parsed_base)
+        receipt=_receipt(m, **parsed_base, pdf_magic_valid=True, document_parse_result="parsed", identity_result="matched", period_result="matched", validation_result="accepted", elapsed_ms=int((time.monotonic()-start)*1000))
         yield AcquiredRapidSource(temp_path, receipt)
     except RapidSourceAcquisitionError as exc:
         if exc.receipt and temp_path and temp_path.exists(): object.__setattr__(exc, "receipt", replace(exc.receipt, elapsed_ms=int((time.monotonic()-start)*1000)))

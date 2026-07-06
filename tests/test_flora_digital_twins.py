@@ -49,7 +49,7 @@ def test_bt_twin_keeps_trusted_and_candidate_state_separate(monkeypatch, tmp_pat
     trusted = html.split('<h2>What the Twin knows</h2>', 1)[1].split('<h2>New financial findings</h2>', 1)[0]
     findings = html.split('<h2>New financial findings</h2>', 1)[1]
     assert before == after
-    assert 'No FY26 financial facts have completed verification and acceptance' in trusted
+    assert 'No accepted FY26 financial facts yet' in trusted
     assert 'Revenue' not in trusted
     assert 'Revenue' in findings
     assert 'Operating Profit' in findings
@@ -102,7 +102,7 @@ def test_partial_and_unavailable_states_are_honest(monkeypatch, tmp_path):
     html = bt_twin_page()
     assert 'No trustworthy new financial information found' in html
     assert 'No fixture or seeded information was substituted' in html
-    assert 'trusted Twin was unchanged' in html
+    assert 'trusted Commercial Digital Twin was unchanged' in html
     assert '<article class=\'card\'><h3>' not in html
 
 

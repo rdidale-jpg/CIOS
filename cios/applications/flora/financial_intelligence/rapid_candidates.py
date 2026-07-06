@@ -14,6 +14,7 @@ from typing import Any
 
 from .adapters import FinancialFactCandidate
 from .rapid_sources import AcquiredRapidSource, RapidSourceReceipt
+from .page_aware_pdf import parse_page_aware_pdf
 
 EXTRACTION_VERSION = "rapid-core-candidates-v1"
 PROFILE_DIR = Path(__file__).resolve().parents[4] / "config" / "flora" / "rapid_extraction"
@@ -82,12 +83,10 @@ def load_rapid_extraction_profile(configuration_key: str, profile_dir: Path = PR
     raise FileNotFoundError(configuration_key)
 
 def _pdf_pages(path: Path) -> list[tuple[int,str]]:
-    try:
-        import fitz  # type: ignore
-        with fitz.open(str(path)) as doc:
-            return [(i+1, page.get_text("text") or "") for i, page in enumerate(doc)]
-    except Exception as exc:
-        raise RuntimeError(f"parser failure: {exc}") from exc
+    parsed = parse_page_aware_pdf(path)
+    if parsed.status != "parsed":
+        raise RuntimeError(f"parser failure: {parsed.failure_class or parsed.status}")
+    return [(p.page_number, p.text) for p in parsed.pages if p.text.strip()]
 
 def _scale(text: str, profile: dict[str,Any]) -> tuple[str|None,str|None,str|None]:
     found=[]

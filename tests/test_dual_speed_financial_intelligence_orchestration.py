@@ -144,7 +144,7 @@ def test_slice_2c_acquisition_failure_does_not_extract(monkeypatch, tmp_path):
     assert lane['exceptions'][0]['exception_type'] == 'rapid_source_period_mismatch'
     html, _ = review.financial_intelligence_run_response('fi-2c-fail')
     assert 'Official source unavailable' in html
-    assert 'No fixture data or seeded values were used' in html
+    assert 'No financial findings were created. No fixture or seeded information was substituted' in html
 
 def test_slice_2c_partial_and_zero_extraction_are_honest(monkeypatch, tmp_path):
     monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path))
