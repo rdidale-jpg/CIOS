@@ -87,6 +87,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(digital_twins_landing_page())
             elif parsed.path == "/digital-twins/bt-group-plc":
                 self._html(bt_twin_page((parse_qs(parsed.query).get("run_id") or [None])[0]))
+            elif parsed.path.startswith("/digital-twins/bt-group-plc/rapid-snapshot/") and parsed.path.endswith("/financial-tables.csv"):
+                run_id = parsed.path.removeprefix("/digital-twins/bt-group-plc/rapid-snapshot/").removesuffix("/financial-tables.csv")
+                body = rapid_snapshot_csv(run_id).encode("utf-8")
+                self.send_response(200); self.send_header("Content-Type", "text/csv; charset=utf-8"); self.send_header("Content-Disposition", "attachment; filename=bt-rapid-financial-tables.csv"); self.send_header("Content-Length", str(len(body))); self.end_headers(); self.wfile.write(body)
             elif parsed.path.startswith("/digital-twins/bt-group-plc/progress/"):
                 self._html(bt_search_progress_page(parsed.path.removeprefix("/digital-twins/bt-group-plc/progress/")))
             elif parsed.path == "/financial-intelligence":

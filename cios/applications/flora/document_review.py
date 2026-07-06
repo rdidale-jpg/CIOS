@@ -20,6 +20,7 @@ from cios.applications.flora.financial_intelligence.schema import ExperimentDocu
 from cios.applications.flora.financial_intelligence.rapid import run_rapid_financial_intelligence
 from cios.applications.flora.financial_intelligence.rapid_sources import RapidSourceAcquisitionError, acquire_rapid_financial_source
 from cios.applications.flora.financial_intelligence.rapid_candidates import extract_rapid_financial_candidates
+from cios.applications.flora.financial_intelligence.rapid_ai_twin import create_rapid_ai_twin_snapshot
 from cios.applications.flora.memory.service import ObservationMemoryService
 from cios.applications.flora.memory.views import enterprise_memory_panel
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
@@ -929,6 +930,49 @@ def _rapid_lane_from_source_receipt(receipt: Any, elapsed_ms: int, *, extraction
         'user_result': 'Flora found an approved official BT FY26 financial document and identified three cited, unverified candidate facts.' if len(candidates) == 3 else '',
     }
 
+
+def _rapid_ai_lane_from_snapshot(receipt: Any, snapshot: dict[str, Any], elapsed_ms: int) -> dict[str, Any]:
+    receipt_dict = receipt.to_dict() if hasattr(receipt, 'to_dict') else dict(receipt or {})
+    cost = snapshot.get('model_and_cost_record') or {}
+    coverage = snapshot.get('citation_coverage') or {}
+    status = snapshot.get('status') or 'unavailable'
+    return {
+        'status': status,
+        'evidence_status': 'official_source_retrieved' if receipt_dict.get('validation_result') == 'accepted' else 'official_source_unavailable',
+        'source_receipt': receipt_dict,
+        'source_receipts': [receipt_dict] if receipt_dict else [],
+        'source_configuration_key': receipt_dict.get('configuration_key'),
+        'source_validation_result': receipt_dict.get('validation_result'),
+        'extraction_status': 'rapid_ai_snapshot_' + status,
+        'rapid_ai_twin_snapshot': snapshot,
+        'financial_tables': snapshot.get('financial_tables') or [],
+        'candidate_count': int(coverage.get('reported_fact_count') or len(snapshot.get('candidate_facts') or [])),
+        'candidate_fact_count': int(coverage.get('reported_fact_count') or len(snapshot.get('candidate_facts') or [])),
+        'candidates': snapshot.get('candidate_facts') or [],
+        'candidate_facts': snapshot.get('candidate_facts') or [],
+        'management_commitments': snapshot.get('commitments') or [],
+        'transformation_programmes': snapshot.get('programmes') or [],
+        'signals': snapshot.get('signals') or [],
+        'hypotheses': snapshot.get('hypotheses') or [],
+        'unknowns': snapshot.get('unknowns') or [],
+        'contradictions': snapshot.get('contradictions') or [],
+        'learning_actions': snapshot.get('learning_actions') or [],
+        'exception_count': len((snapshot.get('validation') or {}).get('extraction_errors') or []) + len((snapshot.get('validation') or {}).get('synthesis_errors') or []),
+        'exceptions': ((snapshot.get('validation') or {}).get('extraction_errors') or []) + ((snapshot.get('validation') or {}).get('synthesis_errors') or []),
+        'source_call_count': int(receipt_dict.get('external_source_call_count') or 0),
+        'ai_call_count': int(cost.get('ai_call_count') or len(cost.get('provider_calls') or [])),
+        'estimated_provider_cost_usd': float(cost.get('estimated_provider_cost_usd') or 0),
+        'provider_cost': float(cost.get('estimated_provider_cost_usd') or 0),
+        'cache_reused': cost.get('cache_state') == 'hit' or snapshot.get('cache_state') == 'hit',
+        'canonical_write_count': 0,
+        'elapsed_ms': elapsed_ms,
+        'non_canonical': True,
+        'verification_pending': True,
+        'canonical_state': snapshot.get('canonical_state') or {'trusted_twin_changed': False, 'canonical_writes': 0},
+        'support_diagnostics': {'rapid_ai_twin_snapshot': {'status': status, 'coverage': coverage, 'validation': snapshot.get('validation') or {}}},
+        'user_result': snapshot.get('user_explanation') or '',
+    }
+
 def _rapid_lane_from_acquisition_error(exc: RapidSourceAcquisitionError, elapsed_ms: int) -> dict[str, Any]:
     receipt = exc.receipt.to_dict() if exc.receipt else {}
     return {
@@ -1001,7 +1045,8 @@ def _dual_speed_completion_class(rapid: dict[str, Any], verification: dict[str, 
 def coordinate_dual_speed_financial_intelligence_run(enterprise_id: str = 'bt-group-plc', run_id: str | None = None, reporting_period: str = 'FY26', *, acquisition_boundary: Any = None, extraction_boundary: Any = None) -> dict[str, Any]:
     """Coordinate BT Financial Intelligence research in one standard run record."""
     acquisition_boundary = acquisition_boundary or acquire_rapid_financial_source
-    extraction_boundary = extraction_boundary or extract_rapid_financial_candidates
+    ai_first_default = extraction_boundary is None
+    extraction_boundary = extraction_boundary or create_rapid_ai_twin_snapshot
     run_id = run_id or ('fi-' + uuid.uuid4().hex[:12])
     ensure_writable_dir(_run_dir())
     created_at = now_iso()
@@ -1043,13 +1088,16 @@ def coordinate_dual_speed_financial_intelligence_run(enterprise_id: str = 'bt-gr
         with acquisition_boundary(enterprise_id, reporting_period) as acquired:
             temp_path = Path(acquired.path)
             extraction = extraction_boundary(acquired)
-            rapid_lane = _rapid_lane_from_source_receipt(acquired.receipt, int((time.time() - rapid_started) * 1000), extraction=extraction, temp_path_removed=False)
+            if ai_first_default or (isinstance(extraction, dict) and extraction.get('version') == 'rapid-ai-twin-snapshot-v1'):
+                rapid_lane = _rapid_ai_lane_from_snapshot(acquired.receipt, extraction, int((time.time() - rapid_started) * 1000))
+            else:
+                rapid_lane = _rapid_lane_from_source_receipt(acquired.receipt, int((time.time() - rapid_started) * 1000), extraction=extraction, temp_path_removed=False)
         rapid_lane['source_temporary_file_removed'] = (not temp_path.exists()) if temp_path else None
     except RapidSourceAcquisitionError as exc:
         rapid_lane = _rapid_lane_from_acquisition_error(exc, int((time.time() - rapid_started) * 1000))
     run['rapid_intelligence'] = rapid_lane
     run['updated_at'] = now_iso(); run['progress_percent'] = run['percent_complete'] = 55
-    run['cost_summary'].update({'ai_call_count': 0, 'estimated_provider_cost_usd': 0, 'external_source_call_count': rapid_lane.get('source_call_count', 0), 'canonical_write_count': 0})
+    run['cost_summary'].update({'ai_call_count': rapid_lane.get('ai_call_count', 0), 'estimated_provider_cost_usd': rapid_lane.get('estimated_provider_cost_usd', 0), 'external_source_call_count': rapid_lane.get('source_call_count', 0), 'canonical_write_count': 0, 'cache_reused': rapid_lane.get('cache_reused', False)})
     _write_json(_run_path(run_id), run)
     verification_started = time.time()
     verification_lane = _verification_unavailable_lane(run_id, enterprise_id, verification_started)
@@ -1070,10 +1118,10 @@ def coordinate_dual_speed_financial_intelligence_run(enterprise_id: str = 'bt-gr
         'percent_complete': 100,
         'user_message': rapid_lane.get('user_result') if rapid_lane.get('user_result') else 'No trustworthy Financial Intelligence outcome could be produced.',
         'exceptions': list(verification_lane.get('exceptions') or []),
-        'ai_calls_made': 0,
-        'openai_calls_made': 0,
-        'estimated_cost_usd': 0,
-        'actual_cost_usd': 0,
+        'ai_calls_made': rapid_lane.get('ai_call_count', 0),
+        'openai_calls_made': rapid_lane.get('ai_call_count', 0),
+        'estimated_cost_usd': rapid_lane.get('estimated_provider_cost_usd', 0),
+        'actual_cost_usd': rapid_lane.get('estimated_provider_cost_usd', 0),
         'trusted_state_before': before,
         'trusted_state_after': after,
         'trusted_twin_changed': before['active_observation_count'] != after['active_observation_count'] or before['active_enterprise_model_attribute_count'] != after['active_enterprise_model_attribute_count'],
