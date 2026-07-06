@@ -57,6 +57,25 @@ def _manifest_available() -> bool:
         return False
 
 
+def _source_retrieved(rapid: dict) -> bool:
+    receipt = rapid.get('source_receipt') or {}
+    return bool(receipt and rapid.get('evidence_status') == 'official_source_retrieved')
+
+def _research_outcome(run: dict | None, candidates: list[dict]) -> tuple[str, str, str]:
+    if not run:
+        return 'Not yet available.', '', 'Unchanged'
+    rapid = run.get('rapid_intelligence') or {}
+    n = len(candidates)
+    if _source_retrieved(rapid):
+        if n >= 3:
+            return 'Three new financial findings.', 'Verification pending.', 'Unchanged'
+        if n > 0:
+            return 'Partial financial findings available.', 'Verification pending.', 'Unchanged'
+        return 'Official report retrieved; no safe findings identified.', 'No findings to verify.', 'Unchanged'
+    if rapid.get('evidence_status') == 'official_source_unavailable' or rapid.get('status') == 'unavailable':
+        return 'Official source unavailable.', 'No findings to verify.', 'Unchanged'
+    return 'No trustworthy information found.', 'No findings to verify.', 'Unchanged'
+
 def digital_twins_landing_page() -> str:
     run = _latest_run(); candidates = _candidates(run)
     latest_research = escape(_human_date(run.get('created_at'))) if run else 'No recent source-backed research.'
@@ -69,7 +88,8 @@ def digital_twins_landing_page() -> str:
 def bt_twin_page(highlight_run_id: str | None = None) -> str:
     run = _latest_run(); candidates = _candidates(run); model = EnterpriseModelRepository().get(BT_ID)
     state = _state_label(model, run, candidates)
-    latest_outcome = 'Three new findings; Verification pending; Trusted Twin unchanged.' if len(candidates) == 3 else ('No trustworthy information found; No findings to verify; Trusted Twin unchanged.' if run else 'Not yet available.')
+    outcome, verification, twin_change = _research_outcome(run, candidates)
+    latest_outcome = f"{outcome} {verification} Trusted Twin {twin_change}." if run else outcome
     body = f"""<section class='hero'><h1>BT Group</h1><p>Commercial Digital Twin</p></section>
     <section class='card'><h2>Twin summary</h2><dl><dt>Enterprise</dt><dd>BT Group</dd><dt>Current reporting period available for research</dt><dd>{PERIOD}</dd><dt>Latest trusted update</dt><dd>{escape(_trusted_update(model))}</dd><dt>Trusted Twin state</dt><dd>{escape(_trusted_state(model))}</dd><dt>Latest research</dt><dd>{escape(_human_date(run.get('created_at')) if run else 'Not yet available.')}</dd><dt>Latest research outcome</dt><dd>{escape(latest_outcome)}</dd></dl></section>
     <section class='card action'><h2>Research BT</h2><p>Checks approved BT official reporting sources for new financial information.</p><p>Reporting period: {PERIOD}</p><form method='post' action='/digital-twins/bt-group-plc/search'><button>Search for new information</button></form>{'' if _manifest_available() else '<p class="muted">Approved source manifest is not currently available.</p>'}</section>
@@ -120,14 +140,14 @@ def _latest_findings(run, candidates, highlight_run_id=None) -> str:
     if not run:
         return "<section class='card'><h2>Latest findings</h2><p>No trustworthy new financial information found</p><p>No previous source-backed research.</p></section>"
     rapid = run.get('rapid_intelligence') or {}; status = rapid.get('status'); receipt = rapid.get('source_receipt') or {}
-    if status == 'unavailable' and not candidates:
+    if (rapid.get('evidence_status') == 'official_source_unavailable' or status == 'unavailable') and not _source_retrieved(rapid) and not candidates:
         support = escape(str(run.get('support_reference') or ''))
         receipt = rapid.get('source_receipt') or {}
         parse_failed = receipt.get('failure_code') == 'rapid_source_parse_failed' or (receipt.get('failure_stage') == 'validation' and receipt.get('document_parse_result') == 'failed')
         msg = 'Flora reached the approved BT financial report but could not read it safely.' if parse_failed else 'The approved official source was unavailable.'
         return f"<section class='card'><h2>No trustworthy new financial information found</h2><p>{msg}</p><p>No financial findings were created. No fixture or seeded information was substituted, and the trusted Commercial Digital Twin was unchanged.</p><p>Support reference: {support}</p><form method='post' action='/digital-twins/bt-group-plc/search'><button>Try again</button></form></section>"
 
-    if receipt and rapid.get('evidence_status') == 'official_source_retrieved' and not candidates:
+    if receipt and _source_retrieved(rapid) and not candidates:
         unresolved = ['Revenue', 'Operating profit', 'Profit before tax']
         return "<section class='card' id='new-findings'><h2>Official BT report retrieved — no safe financial findings identified</h2><p>Flora reached and validated the approved BT FY26 report, but it could not identify the required financial figures safely.</p><p>No fixture or seeded information was substituted, and the trusted Commercial Digital Twin was unchanged.</p><h3>Unresolved financial figures</h3><ul>" + ''.join(f"<li>{escape(m)}</li>" for m in unresolved) + "</ul><p>The Commercial Digital Twin has not been updated.</p><p><a href='/financial-intelligence/" + escape(str(run.get('run_id'))) + "'>View full research result</a></p></section>"
     heading = 'New financial findings' if status == 'ready' else 'Partial source-backed financial findings'
@@ -158,7 +178,6 @@ def _history_section() -> str:
     rows=''
     for r in rs:
         rapid=r.get('rapid_intelligence') or {}; n=len(rapid.get('candidates') or [])
-        outcome='Three new findings' if n==3 else ('Partial findings' if n else 'No trustworthy information found')
-        verify = 'Verification pending' if n else 'No findings to verify'
-        rows += f"<li>{escape(_human_date(r.get('created_at')))} · {escape(str(r.get('reporting_period') or PERIOD))} · {outcome} · {verify} · Trusted Twin unchanged · <a href='/financial-intelligence/{escape(str(r.get('run_id')))}'>Open result</a></li>"
+        outcome, verify, twin = _research_outcome(r, list(rapid.get('candidates') or []))
+        rows += f"<li>{escape(_human_date(r.get('created_at')))} · {escape(str(r.get('reporting_period') or PERIOD))} · {escape(outcome.rstrip('.'))} · {escape(verify.rstrip('.'))} · Trusted Twin {escape(twin)} · <a href='/financial-intelligence/{escape(str(r.get('run_id')))}'>Open result</a></li>"
     return f"<section class='card'><h2>Research history</h2><ul>{rows}</ul></section>"

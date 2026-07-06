@@ -32,3 +32,14 @@ The extractor still requires explicit scale, section/table context, period-colum
 Rapid extraction diagnostics expose bounded structural fields: layout strategy, table regions found, period columns found, scale markers found, normalized labels encountered, and legacy/geometric row counts. They do not persist complete document text, temporary paths, or full word collections.
 
 The normal product view translates runtime codes into business language. Zero-candidate official-source results now say that the report was retrieved but no safe financial findings were identified. Partial results show successful candidates separately from unresolved business metric names.
+
+## Outcome-state mapping
+
+Commercial Digital Twin views now derive the latest research outcome from source evidence and extraction results separately:
+
+- acquisition failure: `Official source unavailable` and `No findings to verify`;
+- source retrieved/validated with zero candidates: `Official report retrieved; no safe findings identified` and `No findings to verify`;
+- source retrieved with one or two candidates: `Partial financial findings available` and `Verification pending`;
+- source retrieved with three candidates: `Three new financial findings` and `Verification pending`.
+
+Candidate facts remain unverified rapid-extraction candidates. They are not written to Evidence, Observations or the Enterprise Model, and the trusted Commercial Digital Twin remains unchanged until a governed verification and canonical-acceptance path is used.

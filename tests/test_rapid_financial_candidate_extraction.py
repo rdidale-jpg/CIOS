@@ -144,3 +144,29 @@ def test_structural_bt_layout_fixture_reproduces_old_matcher_failure_and_new_ext
     assert any(e.category=='adjusted value rejected' for e in res.exceptions)
     assert any(e.category=='segment value rejected' for e in res.exceptions)
     assert 'document_text' not in res.diagnostics and 'words' not in json.dumps(res.diagnostics).lower()
+
+def split_label_layout_pdf(tmp_path: Path) -> Path:
+    p=tmp_path/'synthetic-bt-split-label-regression-fixture.pdf'
+    import fitz
+    doc=fitz.open(); page=doc.new_page(width=595, height=842)
+    page.insert_text((72,72),'synthetic BT-results-layout regression fixture',fontsize=10)
+    page.insert_text((72,92),'Group statutory results',fontsize=10)
+    page.insert_text((72,112),'GBP m',fontsize=10)
+    page.insert_text((300,132),'FY25',fontsize=10); page.insert_text((380,132),'FY26',fontsize=10)
+    page.insert_text((72,152),'Revenue',fontsize=10)
+    page.insert_text((72,172),'Operating',fontsize=10); page.insert_text((132,172),'profit',fontsize=10)
+    page.insert_text((72,192),'Profit before tax',fontsize=10)
+    for v,y in [('20,800',152),('2,700',172),('1,200',192)]: page.insert_text((300,y),v,fontsize=10)
+    for v,y in [('19,654',152),('2,897',172),('1,436',192)]: page.insert_text((380,y),v,fontsize=10)
+    doc.save(str(p)); doc.close(); return p
+
+def test_split_operating_profit_label_is_reconstructed_across_spans(tmp_path):
+    p=split_label_layout_pdf(tmp_path)
+    res=extract_rapid_financial_candidates(AcquiredRapidSource(p, receipt(p)))
+    facts=by_metric(res)
+    assert res.extraction_status=='completed'
+    assert facts['operating_profit'].raw_metric_label == 'Operating profit'
+    assert facts['operating_profit'].raw_value_text == '2,897'
+    assert res.diagnostics['candidate_count'] == 3
+    assert res.diagnostics['extraction_status'] == 'completed'
+    assert res.diagnostics['metric_aliases_attempted']

@@ -115,3 +115,13 @@ def test_research_history_uses_standard_runs(monkeypatch, tmp_path):
     html = bt_twin_page()
     assert html.count('Open result') == 5
     assert '/financial-intelligence/fi-h' in html
+
+def test_source_retrieved_zero_candidate_twin_history_is_not_unavailable(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path))
+    run = {'run_id':'fi-zero-history','created_at':'2026-07-06T00:00:00+00:00','workflow':'financial_intelligence','enterprise_id':'bt-group-plc','reporting_period':'FY26','rapid_intelligence': {'status':'unavailable','evidence_status':'official_source_retrieved','source_receipt': {'validation_result':'accepted'}, 'candidates': []}}
+    d = tmp_path / 'ai_financial_reports' / 'runs'; d.mkdir(parents=True, exist_ok=True)
+    (d / 'fi-zero-history.json').write_text(json.dumps(run))
+    html = bt_twin_page()
+    assert 'Official report retrieved; no safe findings identified' in html
+    assert 'No findings to verify' in html
+    assert 'Official source unavailable' not in html

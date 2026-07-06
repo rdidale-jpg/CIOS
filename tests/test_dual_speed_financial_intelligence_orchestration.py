@@ -193,4 +193,9 @@ def test_official_source_zero_candidate_result_uses_honest_wording(monkeypatch, 
     assert 'no_trustworthy_evidence' not in html
     assert 'not_applicable' not in html
     assert 'candidate_unverified' not in html
+    assert 'scale missing' not in html
+    assert 'metric label not found' not in html
+    assert 'adjusted value rejected' not in html
+    assert 'Revenue: the required statutory Group figure could not be identified safely.' in html
+    assert 'Profit before tax: the amount was found' in html
     assert 'Support reference: FI-zero-candidates' in html

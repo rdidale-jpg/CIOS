@@ -126,13 +126,27 @@ def _old_line_rows(pages: list[ParsedPdfPage], profile: dict[str,Any]) -> tuple[
 
 def _line_text(words): return " ".join(w.text for w in sorted(words, key=lambda w:(w.x0,w.word)))
 def _mid_y(ws): return sum((w.y0+w.y1)/2 for w in ws)/len(ws)
+def _y_bands(words, tolerance: float = 4.0):
+    bands=[]
+    for w in sorted(words, key=lambda w: ((w.y0+w.y1)/2, w.x0)):
+        y=(w.y0+w.y1)/2
+        for band in bands:
+            if abs(band[0]-y) <= tolerance:
+                band[1].append(w); band[0]=sum((x.y0+x.y1)/2 for x in band[1])/len(band[1]); break
+        else:
+            bands.append([y,[w]])
+    return [(y, ws) for y, ws in bands]
 def _geometric_rows(pages: list[ParsedPdfPage], profile: dict[str,Any]) -> tuple[list[_Row], list[str], dict[str,Any]]:
-    rows=[]; matches=[]; diag={"layout_strategy":"word_geometry","table_regions_found":[],"period_columns_found":[],"scale_markers_found":[],"normalized_labels_encountered":[]}
+    rows=[]; matches=[]; diag={"layout_strategy":"word_geometry","pages_examined":[],"table_regions_found":[],"period_columns_found":[],"scale_markers_found":[],"normalized_labels_encountered":[],"metric_aliases_attempted":[],"statutory_adjusted_context_decisions":[],"rows_rejected":[]}
     markers=[m.casefold() for m in profile.get("table_or_section_markers",())]
     current=[m.casefold() for m in profile.get("current_period_column_markers",())]; prior=[m.casefold() for m in profile.get("prior_period_column_markers",())]
+    aliases_for_diag=tuple(dict.fromkeys(a for m in profile.get("metric_definitions",()) for a in m.get("accepted_source_labels",())))
+    diag["metric_aliases_attempted"] = list(aliases_for_diag)
     for page in pages:
+        diag["pages_examined"].append(page.page_number)
         by_line={}
         for w in page.words: by_line.setdefault((w.block,w.line),[]).append(w)
+        # Keep native lines for titles/scale, but reconstruct data rows from page-wide y-bands so labels split across spans/blocks are joined.
         lines=sorted(by_line.values(), key=lambda ws:(min(w.y0 for w in ws), min(w.x0 for w in ws)))
         section=""; scale_context=""; header_ws=None
         for ws in lines:
@@ -156,18 +170,19 @@ def _geometric_rows(pages: list[ParsedPdfPage], profile: dict[str,Any]) -> tuple
         left_edge=min(w.x0 for w in header_ws)
         label_words=[w for w in page.words if w.y0>header_y+2 and w.x0 < left_edge-10]
         val_words=[w for w in page.words if w.y0>header_y+2 and w.x0 >= left_edge-10]
-        by_y={}
-        for w in label_words: by_y.setdefault(round(((w.y0+w.y1)/2)/3)*3,[]).append(w)
-        for y,lws in sorted(by_y.items()):
+        for y,lws in _y_bands(label_words):
             label=_line_text(lws); nlabel=_norm(label)
-            if not label or not any(_norm(a) in nlabel or nlabel in _norm(a) for m in profile.get("metric_definitions",()) for a in m.get("accepted_source_labels",())) and not label.casefold().startswith(("adjusted","segment")): continue
+            is_known=any(_norm(a) in nlabel or nlabel in _norm(a) for m in profile.get("metric_definitions",()) for a in m.get("accepted_source_labels",()))
+            is_rejected_decoy=label.casefold().startswith(("adjusted","segment"))
+            if not label or not (is_known or is_rejected_decoy): continue
             vals=[]
             for col_label,cx in cols:
-                aligned=[w for w in val_words if abs(((w.y0+w.y1)/2)-y)<=4 and abs(((w.x0+w.x1)/2)-cx)<=35]
+                aligned=[w for w in val_words if abs(((w.y0+w.y1)/2)-y)<=5 and abs(((w.x0+w.x1)/2)-cx)<=35]
                 vals.append(_line_text(aligned))
             if any(vals):
                 excerpt=(label+" | "+" | ".join(vals)).strip()
                 diag["normalized_labels_encountered"].append({"page":page.page_number,"label":_norm(label)[:80]})
+                diag["statutory_adjusted_context_decisions"].append({"page":page.page_number,"row":label[:80],"decision":"reject_adjusted_or_segment" if is_rejected_decoy else "candidate_statutory_group_row"})
                 rows.append(_Row(page.page_number, section, scale_context, tuple(c[0] for c in cols), label, tuple(vals), excerpt, tuple(c[0] for c in cols)))
     return rows, tuple(dict.fromkeys(matches)), diag
 
@@ -201,8 +216,12 @@ def extract_rapid_financial_candidates(acquired: AcquiredRapidSource, *, profile
         matched=[row for row in rows if _norm(row.label) in aliases]
         adjusted=[row for row in rows if _norm(row.label).startswith("adjusted ") and any(a in _norm(row.label) for a in aliases)]
         segment=[row for row in rows if "segment" in row.excerpt.casefold() and any(a in _norm(row.label) for a in aliases)]
-        for row in adjusted: exceptions.append(_exc(mid,"adjusted value rejected",r,"Adjusted row is outside statutory Slice 2B-1 scope.",row.page,{"row":row.label},False,"Statutory row for the metric"))
-        for row in segment: exceptions.append(_exc(mid,"segment value rejected",r,"Segment row is outside Group scope.",row.page,{"row":row.label},False,"Group consolidated row for the metric"))
+        for row in adjusted:
+            exceptions.append(_exc(mid,"adjusted value rejected",r,"Adjusted row is outside statutory Slice 2B-1 scope.",row.page,{"row":row.label},False,"Statutory row for the metric"))
+            diagnostics.setdefault("rows_rejected", []).append({"metric":mid,"page":row.page,"row":row.label,"reason":"adjusted value rejected"})
+        for row in segment:
+            exceptions.append(_exc(mid,"segment value rejected",r,"Segment row is outside Group scope.",row.page,{"row":row.label},False,"Group consolidated row for the metric"))
+            diagnostics.setdefault("rows_rejected", []).append({"metric":mid,"page":row.page,"row":row.label,"reason":"segment value rejected"})
         matched=[m for m in matched if "segment" not in m.excerpt.casefold()]
         if not matched:
             exceptions.append(_exc(mid,"metric label not found",r,f"No statutory Group row matched {mid}.", evidence="A statutory Group row with accepted metric label")); continue
@@ -229,4 +248,12 @@ def extract_rapid_financial_candidates(acquired: AcquiredRapidSource, *, profile
         seen.add(cid)
         candidates.append(FinancialFactCandidate(candidate_id=cid, enterprise_id=r.enterprise_id, source_id=r.source_id, source_locator=json.dumps(locator, sort_keys=True), source_page=row.page, source_method="deterministic_official_issuer_results_pdf", raw_metric_label=row.label, raw_value_text=value, reported_amount=amount, currency=cur, reported_scale=sc, raw_period_text=r.reporting_period, scope_text=profile["expected_scope"], accounting_basis_text=metric["required_accounting_basis"], measurement_state_text=metric["required_measurement_state"], supporting_excerpt=row.excerpt, extraction_confidence=95, source_hash=r.sha256 or "", extraction_version=EXTRACTION_VERSION, proposed_canonical_metric_id=mid, original_displayed_value=value, period_start=profile["period_start"], period_end=profile["period_end"], verification_status="candidate_unverified"))
     status="completed" if len(candidates)==3 else ("partial" if candidates else "failed_extraction")
+    # Bound support diagnostics and consolidate duplicate row/reason entries.
+    dedup=[]; keys=set()
+    for item in diagnostics.get("rows_rejected", []):
+        key=(item.get("metric"), item.get("page"), item.get("row"), item.get("reason"))
+        if key not in keys: keys.add(key); dedup.append(item)
+    diagnostics["rows_rejected"] = dedup
+    diagnostics["candidate_count"] = len(candidates)
+    diagnostics["extraction_status"] = status
     return RapidFinancialCandidateExtractionResult(status, receipt_ref, r.sha256, EXTRACTION_VERSION, len(candidates), tuple(candidates), len(exceptions), tuple(exceptions), tuple(p.page_number for p in pages), matches, int((time.monotonic()-start)*1000), diagnostics)
