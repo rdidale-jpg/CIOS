@@ -266,3 +266,41 @@ Seeded rapid prototype data is permitted only as a local orchestration fixture i
 ### Deferred architecture debt
 
 Slice 1 deliberately defers official rapid source retrieval, source identity and period validation, cited source-backed candidates, non-blocking live structured verification, unified candidate classes, canonical acceptance refactoring, removal of legacy rapid persistence and any production default change.
+
+## Slice 2A governed rapid official-source acquisition
+
+Slice 2A adds a runtime-only acquisition boundary for official rapid Financial Intelligence sources. It is limited to source configuration, governed retrieval, deterministic PDF validation and an inspectable `RapidSourceReceipt`. It does not extract financial facts, generate candidate facts, update Evidence, create Observations, update Enterprise Models, change UI routes or change the production default mode.
+
+### Runtime objects
+
+`RapidSourceManifest` represents the validated source configuration loaded from `config/flora/rapid_sources/*.json`. The approved Slice 2A manifest is `config/flora/rapid_sources/bt-group-plc-fy26.json` and contains the source identity, reporting period, artifact URL, approved hosts, accepted content types, byte limits and deterministic identity and period markers.
+
+`RapidSourceReceipt` is runtime lineage, not canonical Evidence. It records source identity, requested and final URLs, final artifact host, HTTP status, content type, actual bytes downloaded, SHA-256 over the actual downloaded bytes, retrieval time, redirect chain, PDF magic result, parse result, identity result, period result, validation result and controlled failure fields. A receipt must not report acceptance merely because source metadata exists.
+
+`AcquiredRapidSource` represents the temporary source file available only inside the acquisition context manager together with its receipt. `RapidSourceAcquisitionError` is the controlled failure type and carries a precise code, stage, user-safe message, optional field-level errors and the rejected receipt where available.
+
+### Acquisition boundary and acceptance rules
+
+The acquisition boundary is `acquire_rapid_financial_source(enterprise_id, reporting_period, configuration_key=None)`. It loads a selected manifest, validates configuration before any network request, retrieves through Flora's governed `fetch_document` boundary, applies rapid-source-specific validation, computes lineage from actual bytes and yields the temporary PDF path plus receipt in a context manager.
+
+`official_source_retrieved` is meaningful only when configuration is valid, a request was attempted, HTTP retrieval succeeded, the final host is approved, content type is accepted, size is within configured bounds, PDF magic is valid, deterministic PDF parsing succeeds with at least one page, issuer identity markers are present, reporting-period markers are present and SHA-256 is available. Validation failures are rejected states, not success with warnings.
+
+### Failure codes
+
+Slice 2A uses these controlled rapid acquisition failures: `rapid_source_configuration_missing`, `rapid_source_configuration_invalid`, `rapid_source_not_selected`, `rapid_source_url_missing`, `rapid_source_url_invalid`, `rapid_source_host_not_approved`, `rapid_source_http_error`, `rapid_source_redirect_rejected`, `rapid_source_content_type_rejected`, `rapid_source_too_small`, `rapid_source_too_large`, `rapid_source_not_pdf`, `rapid_source_parse_failed`, `rapid_source_identity_mismatch`, `rapid_source_period_mismatch`, `rapid_source_integrity_failed` and `rapid_source_timeout`.
+
+Configuration failures occur before retrieval and must have `request_attempted=false`. Identity mismatch, period mismatch and parser failure are validation failures, not download or configuration failures. User-safe messages must not expose stack traces or temporary filesystem paths.
+
+### Resource, cost and memory rules
+
+The full PDF is not persisted by Slice 2A. The temporary source file is deleted when the context exits on success or failure. If the reused governed fetch boundary writes its existing cache file, the rapid-source wrapper removes that cache file before returning control. Production persistence of the full PDF remains prohibited for this slice.
+
+The Slice 2A boundary has a zero-AI contract: AI call count is zero, provider cost is zero and no provider dependency is introduced. A successful live acquisition records one external source call; configuration validation failures record zero external source calls. The boundary must not instantiate or call Evidence, Observation, Enterprise Model or observation-memory repositories.
+
+### Relationship to ADR-010 and ADR-011
+
+This increment implements ADR-010's structured-source-first discipline for rapid official-source lineage by validating an official issuer document before any interpretation. It implements ADR-011's dual-speed separation by preparing the rapid lane to carry inspected official source receipts while keeping provider output and future extracted facts outside canonical memory until governed acceptance.
+
+### Explicit deferral to Slice 2B
+
+Source-backed financial fact candidates, page/table locators, metric interpretation, scale and basis handling, rapid outlook generation, verification, canonical acceptance and production-default changes are deferred to Slice 2B or later architecture-approved increments.
