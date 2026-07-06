@@ -1,0 +1,106 @@
+import hashlib, json
+from pathlib import Path
+
+import pytest
+
+from cios.applications.flora.financial_intelligence.rapid_candidates import extract_rapid_financial_candidates
+from cios.applications.flora.financial_intelligence.rapid_sources import AcquiredRapidSource, RapidSourceReceipt
+
+BASE = """BT Group plc Results for the full year to 31 March 2026 FY26
+synthetic source-family test fixture
+Group statutory results
+GBP m
+Metric | FY26 | FY25 | Basis | Scope
+Revenue | 19,654 | 20,800 | statutory | Group
+Operating profit | 2,897 | 2,700 | statutory | Group
+Profit before tax | 1,436 | 1,200 | statutory | Group
+Adjusted operating profit | 3,100 | 3,000 | adjusted | Group
+Segment revenue | 999 | 888 | statutory | Consumer segment
+"""
+
+def pdf(tmp_path: Path, text=BASE) -> Path:
+    p=tmp_path/(hashlib.sha1(text.encode()).hexdigest()+'.pdf')
+    import fitz
+    doc=fitz.open(); page=doc.new_page(); page.insert_text((72,72), text, fontsize=10, fontname='courier'); doc.save(str(p)); doc.close()
+    assert p.read_bytes().startswith(b'%PDF')
+    return p
+
+def receipt(path: Path, **overrides):
+    raw=path.read_bytes(); data=dict(source_id='bt-fy26-results-release', configuration_key='bt-group-plc-fy26-results-release', enterprise_id='bt-group-plc', legal_name='BT Group plc', authority='BT Group plc', source_kind='official_results_pdf', document_title='FY26 results', publication_date='2026-05-22', reporting_period='FY26', period_start='2025-04-01', period_end='2026-03-31', scope='BT Group consolidated / Group', requested_url='https://www.bt.com/fy26.pdf', final_url='https://www.bt.com/fy26.pdf', artifact_host='www.bt.com', http_status=200, content_type='application/pdf', bytes_downloaded=len(raw), sha256=hashlib.sha256(raw).hexdigest(), retrieved_at='2026-07-06T00:00:00+00:00', request_attempted=True, redirect_chain=(), pdf_magic_valid=True, document_parse_result='parsed', identity_result='matched', period_result='matched', validation_result='accepted', failure_code=None, failure_stage=None, safe_failure_message=None)
+    data.update(overrides); return RapidSourceReceipt(**data)
+
+def run(tmp_path, text=BASE, **rkw):
+    p=pdf(tmp_path,text); return extract_rapid_financial_candidates(AcquiredRapidSource(p, receipt(p, **rkw)))
+
+def by_metric(result): return {c.proposed_canonical_metric_id:c for c in result.candidates}
+
+def test_rejected_source_receipt_produces_zero_candidates(tmp_path):
+    p=pdf(tmp_path); r=receipt(p, validation_result='rejected')
+    result=extract_rapid_financial_candidates(AcquiredRapidSource(p,r))
+    assert result.extraction_status=='failed_precondition'
+    assert result.candidate_count==0
+    assert result.exceptions[0].category=='source precondition failed'
+
+def test_extracts_three_core_statutory_group_candidates_with_lineage(tmp_path):
+    result=run(tmp_path); facts=by_metric(result)
+    assert result.extraction_status=='completed'
+    assert result.ai_call_count==0 and result.provider_cost==0 and result.canonical_write_count==0
+    assert facts['revenue'].reported_amount.as_tuple() and str(facts['revenue'].reported_amount)=='19654'
+    assert facts['operating_profit'].reported_amount == facts['operating_profit'].reported_amount.__class__('2897')
+    assert facts['profit_before_tax'].reported_amount == facts['profit_before_tax'].reported_amount.__class__('1436')
+    for metric,c in facts.items():
+        loc=json.loads(c.source_locator)
+        assert c.currency=='GBP' and c.reported_scale=='millions'
+        assert c.raw_period_text=='FY26' and c.period_start=='2025-04-01' and c.period_end=='2026-03-31'
+        assert c.scope_text=='BT Group consolidated / Group'
+        assert c.accounting_basis_text=='statutory' and c.measurement_state_text=='actual'
+        assert loc['page']==1 and loc['row']==c.raw_metric_label and loc['column']=='FY26'
+        assert loc['scale_context']=='GBP m' and loc['source_sha256']==c.source_hash
+        assert c.original_displayed_value in {'19,654','2,897','1,436'}
+        assert c.supporting_excerpt
+    assert any(e.category=='adjusted value rejected' for e in result.exceptions)
+    assert any(e.category=='segment value rejected' for e in result.exceptions)
+
+def test_prior_period_not_selected_and_display_text_retained(tmp_path):
+    facts=by_metric(run(tmp_path))
+    assert facts['revenue'].raw_value_text=='19,654'
+    assert facts['revenue'].reported_amount.__class__('20800') != facts['revenue'].reported_amount
+
+def test_candidate_ids_are_deterministic_and_no_duplicates(tmp_path):
+    p=pdf(tmp_path); acquired=AcquiredRapidSource(p, receipt(p))
+    a=extract_rapid_financial_candidates(acquired); b=extract_rapid_financial_candidates(acquired)
+    assert [c.candidate_id for c in a.candidates] == [c.candidate_id for c in b.candidates]
+    assert len({c.candidate_id for c in a.candidates}) == 3
+
+def test_missing_scale_creates_partial_with_exception(tmp_path):
+    result=run(tmp_path, BASE.replace('GBP m\n',''))
+    assert result.extraction_status=='failed_extraction'
+    assert result.candidate_count==0
+    assert {e.category for e in result.exceptions} >= {'scale missing'}
+
+def test_ambiguous_period_creates_exception(tmp_path):
+    result=run(tmp_path, BASE.replace('Metric | FY26 | FY25 | Basis | Scope','Metric | Current | FY25 | Basis | Scope'))
+    assert result.candidate_count==0
+    assert any(e.category=='period column not identified' for e in result.exceptions)
+
+def test_duplicate_revenue_rows_create_exception_and_partial(tmp_path):
+    text=BASE.replace('Operating profit | 2,897 | 2,700 | statutory | Group', 'Revenue | 21,000 | 20,000 | statutory | Group\nOperating profit | 2,897 | 2,700 | statutory | Group')
+    result=run(tmp_path, text)
+    assert result.extraction_status=='partial'
+    assert any(e.category=='multiple metric rows matched' and e.metric_identity=='revenue' for e in result.exceptions)
+
+def test_negative_fixtures_fail_safely(tmp_path):
+    cases=[
+        (BASE.replace('Revenue | 19,654','Revenue | not-a-number'), 'amount ambiguous'),
+        (BASE.replace('Revenue | 19,654 | 20,800 | statutory | Group\n',''), 'metric label not found'),
+        (BASE.replace('synthetic source-family test fixture','x').replace('Group statutory results','No matching section'), 'supporting excerpt unavailable'),
+    ]
+    for text,cat in cases:
+        result=run(tmp_path,text)
+        assert any(e.category==cat for e in result.exceptions)
+
+def test_source_receipt_sha_mismatch_fails_precondition(tmp_path):
+    p=pdf(tmp_path); r=receipt(p, sha256='0'*64)
+    result=extract_rapid_financial_candidates(AcquiredRapidSource(p,r))
+    assert result.extraction_status=='failed_precondition'
+    assert result.candidate_count==0

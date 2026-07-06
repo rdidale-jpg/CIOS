@@ -1,0 +1,20 @@
+{
+  "configuration_key": "bt-group-plc-fy26-core-candidates",
+  "source_id": "bt-fy26-results-release",
+  "enterprise_id": "bt-group-plc",
+  "reporting_period": "FY26",
+  "period_start": "2025-04-01",
+  "period_end": "2026-03-31",
+  "source_family": "official_issuer_results_pdf",
+  "expected_scope": "BT Group consolidated / Group",
+  "allowed_currency": ["GBP"],
+  "permitted_scale_markers": {"GBP m": "millions", "£m": "millions", "GBP millions": "millions"},
+  "current_period_column_markers": ["FY26", "2026", "year ended 31 March 2026"],
+  "prior_period_column_markers": ["FY25", "2025", "year ended 31 March 2025"],
+  "table_or_section_markers": ["synthetic source-family test fixture", "Group statutory results", "Consolidated income statement", "Group financial results"],
+  "metric_definitions": [
+    {"proposed_canonical_metric_id": "revenue", "accepted_source_labels": ["Revenue"], "required_accounting_basis": "statutory", "required_measurement_state": "actual", "mandatory": true},
+    {"proposed_canonical_metric_id": "operating_profit", "accepted_source_labels": ["Operating profit", "Statutory operating profit"], "required_accounting_basis": "statutory", "required_measurement_state": "actual", "mandatory": true},
+    {"proposed_canonical_metric_id": "profit_before_tax", "accepted_source_labels": ["Profit before tax", "Statutory profit before tax"], "required_accounting_basis": "statutory", "required_measurement_state": "actual", "mandatory": true}
+  ]
+}
