@@ -23,7 +23,7 @@ from cios.applications.flora.workspace.views import case_page, landing_page, log
 from cios.applications.flora.digital_twins import digital_twins_landing_page, bt_twin_page, search_bt_twin, bt_search_progress_page
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
-from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
+from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -100,8 +100,19 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(financial_intelligence_progress_page(parsed.path.removeprefix("/financial-intelligence/progress/")))
             elif parsed.path == "/financial-reports":
                 self._html(review_home_page())
+            elif parsed.path.startswith("/financial-intelligence/") and parsed.path.endswith("/support-diagnostic/download"):
+                if not _support_authorised(self.headers):
+                    self.send_error(403, "Support diagnostic access requires an authorised support user")
+                    return
+                run_id = parsed.path.removeprefix("/financial-intelligence/").removesuffix("/support-diagnostic/download")
+                self._download_json(financial_intelligence_support_diagnostic_payload(run_id), f"{run_id}-support-diagnostic.json")
+            elif parsed.path.startswith("/financial-intelligence/") and parsed.path.endswith("/support-diagnostic"):
+                if not _support_authorised(self.headers):
+                    self.send_error(403, "Support diagnostic access requires an authorised support user")
+                    return
+                self._html(financial_intelligence_support_diagnostic_page(parsed.path.removeprefix("/financial-intelligence/").removesuffix("/support-diagnostic")))
             elif parsed.path.startswith("/financial-intelligence/"):
-                html, status = financial_intelligence_run_response(parsed.path.removeprefix("/financial-intelligence/"))
+                html, status = financial_intelligence_run_response(parsed.path.removeprefix("/financial-intelligence/"), show_support_control=_support_authorised(self.headers))
                 self._html(html, status=status)
             elif parsed.path == "/ai-financial-report":
                 self._html(review_home_page())
@@ -224,6 +235,15 @@ class FloraWebHandler(BaseHTTPRequestHandler):
     def _json(self, payload: dict, status: int = 200) -> None:
         self._body(json.dumps(payload, separators=(",", ":")).encode("utf-8"), "application/json", status)
 
+    def _download_json(self, payload: dict, filename: str) -> None:
+        body = json.dumps(payload, indent=2, sort_keys=True).encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Disposition", f'attachment; filename="{filename}"')
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
     def _body(self, body: bytes, content_type: str, status: int) -> None:
         self.send_response(status)
         self.send_header("Content-Type", content_type)
@@ -239,6 +259,14 @@ class FloraWebHandler(BaseHTTPRequestHandler):
     def log_message(self, format: str, *args: object) -> None:
         return
 
+
+def _support_authorised(headers) -> bool:
+    expected = os.environ.get("FLORA_SUPPORT_TOKEN") or os.environ.get("FLORA_ADMIN_TOKEN")
+    if not expected:
+        return False
+    auth = headers.get("Authorization", "")
+    cookie = headers.get("Cookie", "")
+    return auth == f"Bearer {expected}" or f"flora_support_token={expected}" in cookie
 
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/live/status", "/live/collect/status"}:

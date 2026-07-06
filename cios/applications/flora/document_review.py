@@ -138,6 +138,14 @@ def _mark_failure(run: dict[str, Any], category: str, technical_reason: str) -> 
     run['failure_category'] = category
     run['support_reference'] = _support_reference(run)
     base_message = _failure_message(category)
+    if category in {'source_retrieval_failed'}:
+        base_message = 'Flora could not reach the approved BT financial source.'
+    elif category in {'source_not_pdf', 'section_selection_failed'}:
+        base_message = 'Flora reached the approved BT financial report but could not read it safely.'
+    elif category in {'structured_source_identity_failed', 'structured_entity_mismatch', 'structured_scope_ambiguous'}:
+        base_message = 'Flora reached a document but could not confirm it as the approved BT FY26 financial report.'
+    elif category in {'candidate_validation_failed', 'provider_response_invalid', 'failed'}:
+        base_message = 'Flora read the approved BT report but could not identify safe financial findings.'
     if category.startswith('provider_') and category != 'provider_not_configured':
         base_message = 'Financial document understanding could not complete.'
     run['user_message'] = base_message
@@ -176,6 +184,97 @@ def _safe_provider_diagnostic(run_id: str, source: dict[str, Any], fetched: Any,
         'retryable': not bool(getattr(fetched, 'succeeded', False)),
         'elapsed_time': round(time.time() - started, 3),
     }
+
+
+DEPLOYED_REVISION_ENV_VARS = (
+    'RENDER_GIT_COMMIT', 'RENDER_COMMIT', 'RENDER_EXTERNAL_HOSTNAME_COMMIT',
+    'GIT_COMMIT', 'SOURCE_VERSION', 'COMMIT_SHA', 'HEROKU_SLUG_COMMIT',
+)
+
+def deployed_revision() -> str:
+    for key in DEPLOYED_REVISION_ENV_VARS:
+        value = (os.getenv(key) or '').strip()
+        if value:
+            return value
+    return 'unknown'
+
+def _sanitize_url(value: Any) -> str:
+    raw = str(value or '')
+    if not raw:
+        return 'unknown'
+    try:
+        from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+        parts = urlsplit(raw)
+        netloc = parts.hostname or ''
+        if parts.port:
+            netloc += f':{parts.port}'
+        sensitive = {'token','key','api_key','apikey','access_token','auth','authorization','signature','sig','password','secret','cookie'}
+        query = urlencode([(k, 'REDACTED' if k.lower() in sensitive or any(x in k.lower() for x in ('token','key','secret','auth','password','cookie','sig')) else v) for k, v in parse_qsl(parts.query, keep_blank_values=True)])
+        return urlunsplit((parts.scheme, netloc, parts.path, query, ''))
+    except Exception:
+        return _safe_message(raw)
+
+def _not_reached(value: Any, default: str = 'not_reached') -> Any:
+    return default if value in (None, '', [], (), {}) else value
+
+def _diagnostic_user_message(stage: str) -> str:
+    if stage == 'retrieval':
+        return 'Flora could not reach the approved BT financial source.'
+    if stage == 'parsing':
+        return 'Flora reached the approved BT financial report but could not read it safely.'
+    if stage == 'validation':
+        return 'Flora reached a document but could not confirm it as the approved BT FY26 financial report.'
+    if stage == 'extraction':
+        return 'Flora read the approved BT report but could not identify safe financial findings.'
+    return 'Financial Intelligence could not complete.'
+
+def _run_diagnostic(run: dict[str, Any]) -> dict[str, Any]:
+    coll = run.get('collection') or {}
+    doc = run.get('document') or {}
+    rapid = run.get('rapid_intelligence') or {}
+    receipt = rapid.get('source_receipt') or {}
+    diag = (run.get('diagnostics') or {}).get('rapid_support_diagnostics') or rapid.get('support_diagnostics') or run.get('support_diagnostics') or {}
+    nav = run.get('pdf_navigation_diagnostics') or {}
+    exceptions = run.get('exceptions') or run.get('candidate_exceptions') or []
+    first_exc = exceptions[0] if exceptions else {}
+    failure_stage = first_exc.get('failure_stage') or receipt.get('failure_stage') or run.get('failure_stage')
+    status = str(run.get('status') or run.get('overall_status') or '')
+    if not failure_stage:
+        if status in {'source_retrieval_failed'} or receipt.get('failure_stage') == 'retrieval': failure_stage = 'retrieval'
+        elif status in {'source_not_pdf','section_selection_failed'} or receipt.get('failure_code') == 'rapid_source_parse_failed': failure_stage = 'parsing'
+        elif 'identity' in status or 'period' in status or receipt.get('identity_result') == 'mismatch' or receipt.get('period_result') == 'mismatch': failure_stage = 'validation'
+        elif status in {'failed','completed_with_no_accepted_intelligence'} or rapid.get('extraction_status') == 'failed_extraction': failure_stage = 'extraction'
+        elif status.startswith('completed'): failure_stage = 'none'
+        else: failure_stage = 'unknown'
+    candidate_count = rapid.get('candidate_count', rapid.get('candidate_fact_count', len(run.get('claims') or [])))
+    canonical_write_count = (run.get('cost_summary') or {}).get('canonical_write_count', run.get('observations_created_or_strengthened', len(run.get('applied_results') or [])))
+    requested = receipt.get('requested_url') or coll.get('active_source_url') or (run.get('governed_source') or {}).get('url') or doc.get('source_url')
+    final_url = receipt.get('final_url') or coll.get('final_url') or doc.get('source_url')
+    out = {
+        'run_id': run.get('run_id','unknown'), 'support_reference': run.get('support_reference') or _support_reference(run), 'timestamp': run.get('completed_at') or run.get('updated_at') or run.get('created_at') or now_iso(),
+        'deployed_revision': run.get('deployed_revision') or 'unknown', 'execution_mode': run.get('execution_mode') or run.get('extraction_mode') or 'unknown', 'source_configuration_key': receipt.get('configuration_key') or rapid.get('source_configuration_key') or (run.get('governed_source') or {}).get('source_id') or 'unknown',
+        'request_attempted': bool(receipt.get('request_attempted', coll.get('retrieved') is not None or coll.get('http_status') is not None or coll.get('error') is not None or coll.get('active_source_url') is not None)), 'requested_url': _sanitize_url(requested), 'final_host': receipt.get('artifact_host') or ('unknown' if not final_url else __import__('urllib.parse').parse.urlsplit(str(final_url)).hostname or 'unknown'),
+        'http_status': _not_reached(receipt.get('http_status', coll.get('http_status')), 'unknown' if bool(receipt.get('request_attempted', coll)) else 'not_reached'), 'content_type': _not_reached(receipt.get('content_type', coll.get('content_type')), 'not_reached'), 'bytes_downloaded': int(receipt.get('bytes_downloaded', coll.get('document_size') or 0) or 0), 'redirect_count': len(receipt.get('redirect_chain') or coll.get('redirect_chain') or []),
+        'pdf_magic_result': receipt.get('pdf_magic_valid', 'not_reached' if not coll.get('retrieved') else bool(str(doc.get('media_type')).lower() == 'application/pdf')), 'parser_name': diag.get('parser_name') or receipt.get('parser_name') or nav.get('selected_parser') or doc.get('extraction_method') or 'not_reached', 'parser_version': diag.get('parser_version') or receipt.get('parser_version') or doc.get('extraction_version') or 'not_reached', 'page_count': receipt.get('page_count') or doc.get('page_count') or 'not_reached', 'pages_successfully_read': receipt.get('pages_successfully_read') or diag.get('pages_successfully_read') or ('not_reached' if not doc.get('page_count') else list(range(1, int(doc.get('page_count') or 0)+1))),
+        'identity_result': receipt.get('identity_result') or 'not_reached', 'reporting_period_result': receipt.get('period_result') or 'not_reached', 'extraction_status': rapid.get('extraction_status') or ('completed' if run.get('claims') else ('not_reached' if failure_stage in {'retrieval','parsing','validation'} else 'failed')), 'candidate_count': int(candidate_count or 0),
+        'failure_stage': failure_stage, 'failure_code': first_exc.get('exception_type') or receipt.get('failure_code') or run.get('failure_category') or ('none' if status.startswith('completed') else 'unknown'), 'safe_failure_message': _safe_message(first_exc.get('user_message') or receipt.get('safe_failure_message') or _diagnostic_user_message(failure_stage)),
+        'ai_call_count': int(run.get('ai_calls_made', run.get('openai_calls_made', (run.get('cost_summary') or {}).get('ai_call_count', 0))) or 0), 'canonical_write_count': int(canonical_write_count or 0), 'trusted_twin_changed': bool(run.get('trusted_twin_changed') or (run.get('canonical_update') or {}).get('enterprise_model_updated')),
+    }
+    return out
+
+def attach_financial_run_diagnostic(run: dict[str, Any]) -> dict[str, Any]:
+    run.setdefault('deployed_revision', deployed_revision())
+    run['support_diagnostic'] = _run_diagnostic(run)
+    return run
+
+def financial_intelligence_support_diagnostic_payload(run_id: str) -> dict[str, Any]:
+    return _run_diagnostic(load_run(run_id))
+
+def financial_intelligence_support_diagnostic_page(run_id: str) -> str:
+    payload = financial_intelligence_support_diagnostic_payload(run_id)
+    rows = ''.join(f"<tr><th>{escape(str(k))}</th><td>{escape(json.dumps(v) if isinstance(v,(dict,list,tuple)) else str(v))}</td></tr>" for k,v in payload.items())
+    body = f"""<section class='hero'><h1>Financial Intelligence support diagnostic</h1><p>Run {escape(run_id)} · Support reference {escape(str(payload.get('support_reference')))}</p><p><a href='/financial-intelligence/{escape(run_id)}/support-diagnostic/download'>Download diagnostic report</a></p></section><section class='card'><table>{rows}</table></section>"""
+    return _page('Financial Intelligence support diagnostic', body)
 
 DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE = 'dual_speed_financial_intelligence'
 
@@ -285,6 +384,7 @@ def _refresh_structured_financial_intelligence(enterprise_id: str, run_id: str) 
     run = {'run_id': run_id, 'created_at': now_iso(), 'status': status, 'workflow': 'financial_intelligence', 'enterprise_id': enterprise_id, 'extraction_mode': 'structured_standard_financials', 'extraction_mode_label': 'Structured standard financials', 'adapter_class': adapter.__class__.__name__, 'adapter_name': adapter.adapter_name, 'source_family': adapter.source_family, 'collection': {'retrieved': False, 'retrieval_time': now_iso(), 'error': 'structured_source_unavailable'}, 'document': document.model_dump(), 'provider': 'not_executed', 'model': adapter.adapter_name, 'reasoning_effort': None, 'usage': {'openai_calls': 0}, 'estimated_cost_usd': 0, 'actual_cost_usd': 0, 'provider_status': 'not_executed', 'provider_errors': [], 'provider_diagnostics': diagnostics, 'structured_diagnostics': diagnostics, 'openai_invoked': False, 'openai_calls_made': 0, 'ai_calls_made': 0, 'pdf_fallback_calls_made': 0, 'prohibited_path_counters': {'pdf_section_selector_calls': 0, 'pdf_candidate_extractor_calls': 0, 'pdf_packet_calls': 0, 'provider_calls': 0}, 'claims': [], 'applied_results': [], 'candidate_exceptions': list(result.exceptions), 'exceptions': list(result.exceptions), 'candidate_pages_selected': [], 'page_packets_submitted': [], 'packet_count': 0, 'pdf_navigation_diagnostics': {}, 'visual_navigation': {}, 'visual_navigation_fallback_used': False, 'auto_accepted_count': 0, 'observations_created_or_strengthened': 0, 'enterprise_attributes_changed': [], 'candidate_lifecycle_counts': {'packet_candidates_extracted': 0, 'candidates_returned': 0, 'valid_candidates': 0, 'quarantined_candidates': 0, 'canonical_facts_accepted': 0, 'observations_created_or_strengthened': 0}, 'trusted_state_before': before, 'trusted_state_after': after, 'trusted_twin_changed': before['active_observation_count'] != after['active_observation_count'] or before['active_enterprise_model_attribute_count'] != after['active_enterprise_model_attribute_count'], 'ephemeral_state_absent_before_run': not before['state_existed_before_run'], 'no_new_evidence_message': 'Flora could not find or access a governed structured filing for this enterprise and reporting period. The existing trusted Financial Twin was not changed.', 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'terminal': True, 'progress_percent': 100, 'percent_complete': 100}
     for exc in run['exceptions']:
         exc.setdefault('support_reference', run['support_reference'])
+    attach_financial_run_diagnostic(run)
     _write_json(_run_path(run_id), run)
     _write_cost_record(run)
     return run
@@ -856,6 +956,7 @@ def coordinate_dual_speed_financial_intelligence_run(enterprise_id: str = 'bt-gr
         'created_at': created_at,
         'updated_at': created_at,
         'support_reference': support_reference,
+        'deployed_revision': deployed_revision(),
         'result_url': result_url,
         'rapid_intelligence': {'status': 'not_started'},
         'verification': {'status': 'not_started'},
@@ -911,6 +1012,7 @@ def coordinate_dual_speed_financial_intelligence_run(enterprise_id: str = 'bt-gr
         'trusted_twin_changed': before['active_observation_count'] != after['active_observation_count'] or before['active_enterprise_model_attribute_count'] != after['active_enterprise_model_attribute_count'],
     })
     run['diagnostics'].update({'trusted_state_after': after, 'canonical_memory_changed': run['trusted_twin_changed'], 'rapid_support_diagnostics': rapid_lane.get('support_diagnostics')})
+    attach_financial_run_diagnostic(run)
     _write_json(_run_path(run_id), run)
     return run
 
@@ -949,7 +1051,7 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: 
             _write_progress(run_id, 'validating')
             adapter_result = PdfFinancialTableAdapter().extract(document, embedded_pages=doc_parse.pages) if (fetched.succeeded and document.media_type == 'application/pdf' and doc_parse.pages) else None
             claims = [deterministic_candidate_to_review_claim(c, run_id) for c in (adapter_result.candidates if adapter_result else ())]
-            run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'validating', 'workflow': 'financial_intelligence', 'extraction_mode': 'pdf_supporting_evidence', 'extraction_mode_label': 'PDF supporting evidence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b''), 'final_url': fetched.final_url or fetched.url, 'content_type': fetched.media_type, 'redirect_chain': list(fetched.redirect_chain), 'redirected': bool(fetched.redirect_chain)}, 'document': document.model_dump(), 'provider': 'deterministic', 'model': (adapter_result.adapter_name if adapter_result else 'pdf_financial_table'), 'reasoning_effort': None, 'schema_version': settings.schema_version, 'prompt_version': 'deterministic-financial-fact-capture-v2', 'document_hash': document.checksum, 'deterministic_cache_key': hashlib.sha256(f"{document.enterprise_id}:{document.checksum}:{document.source_url}:{ADAPTER_VERSION}:{settings.schema_version}:financial-metric-catalogue-v1".encode()).hexdigest(), 'deterministic_replay': 'fresh deterministic extraction', 'usage': {'openai_calls': 0}, 'estimated_cost_usd': 0, 'actual_cost_usd': 0, 'provider_status': 'not_executed', 'provider_errors': [], 'raw_response_location': None, 'provider_diagnostics': [], 'openai_invoked': False, 'openai_calls_made': 0, 'ai_calls_made': 0, 'claims': claims, 'applied_results': [], 'candidate_exceptions': list(adapter_result.exceptions if adapter_result else ()), 'candidate_pages_selected': sorted({c.source_page for c in (adapter_result.candidates if adapter_result else ()) if c.source_page}), 'page_packets_submitted': [], 'packet_count': 0, 'pdf_navigation_diagnostics': {'selected_parser': doc_parse.extraction_method, 'adapter': 'PdfFinancialTableAdapter', 'deterministic_candidates_extracted': len(claims), 'financial_tables_inspected': (adapter_result.exceptions[0].get('diagnostics', {}).get('approved_financial_tables') if adapter_result and adapter_result.exceptions and isinstance(adapter_result.exceptions[0], dict) else None)}, 'visual_navigation': {}, 'visual_navigation_fallback_used': False}
+            run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'validating', 'workflow': 'financial_intelligence', 'deployed_revision': deployed_revision(), 'extraction_mode': 'pdf_supporting_evidence', 'extraction_mode_label': 'PDF supporting evidence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b''), 'final_url': fetched.final_url or fetched.url, 'content_type': fetched.media_type, 'redirect_chain': list(fetched.redirect_chain), 'redirected': bool(fetched.redirect_chain)}, 'document': document.model_dump(), 'provider': 'deterministic', 'model': (adapter_result.adapter_name if adapter_result else 'pdf_financial_table'), 'reasoning_effort': None, 'schema_version': settings.schema_version, 'prompt_version': 'deterministic-financial-fact-capture-v2', 'document_hash': document.checksum, 'deterministic_cache_key': hashlib.sha256(f"{document.enterprise_id}:{document.checksum}:{document.source_url}:{ADAPTER_VERSION}:{settings.schema_version}:financial-metric-catalogue-v1".encode()).hexdigest(), 'deterministic_replay': 'fresh deterministic extraction', 'usage': {'openai_calls': 0}, 'estimated_cost_usd': 0, 'actual_cost_usd': 0, 'provider_status': 'not_executed', 'provider_errors': [], 'raw_response_location': None, 'provider_diagnostics': [], 'openai_invoked': False, 'openai_calls_made': 0, 'ai_calls_made': 0, 'claims': claims, 'applied_results': [], 'candidate_exceptions': list(adapter_result.exceptions if adapter_result else ()), 'candidate_pages_selected': sorted({c.source_page for c in (adapter_result.candidates if adapter_result else ()) if c.source_page}), 'page_packets_submitted': [], 'packet_count': 0, 'pdf_navigation_diagnostics': {'selected_parser': doc_parse.extraction_method, 'adapter': 'PdfFinancialTableAdapter', 'deterministic_candidates_extracted': len(claims), 'financial_tables_inspected': (adapter_result.exceptions[0].get('diagnostics', {}).get('approved_financial_tables') if adapter_result and adapter_result.exceptions and isinstance(adapter_result.exceptions[0], dict) else None)}, 'visual_navigation': {}, 'visual_navigation_fallback_used': False}
             if guard.attempted_calls:
                 run = _mark_failure(run, 'deterministic_route_provider_violation', 'Provider request blocked before transmission')
             elif not fetched.succeeded:
@@ -972,6 +1074,7 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: 
             run['terminal'] = True; run['progress_percent'] = run['percent_complete'] = 100
             _write_cost_record(run)
             try:
+                attach_financial_run_diagnostic(run)
                 _write_json(_run_path(run_id), run)
             except PersistenceError as exc:
                 run = _mark_failure(run, 'persistence_failed', f'{type(exc).__name__}: {exc}')
@@ -1021,7 +1124,7 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: 
     _write_progress(run_id, 'validating')
     claims = [fact_to_review_claim(f, run_id) for f in (extraction.facts if extraction else [])]
     candidate_exceptions = list(getattr(extraction, 'candidate_exceptions', []) if extraction else [])
-    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'validating', 'workflow': 'financial_intelligence', 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b'')}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else provider.model), 'reasoning_effort': getattr(provider, 'reasoning_effort', settings.reasoning_effort), 'schema_version': settings.schema_version, 'prompt_version': settings.prompt_version, 'document_hash': document.checksum, 'usage': (extraction.usage if extraction else {}), 'estimated_cost_usd': (extraction.estimated_cost_usd if extraction else None), 'actual_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('actual_cost_usd') if extraction else None, 'cost_breakdown': {'input_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('input_cost_usd'), 'output_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('output_cost_usd')} if extraction else {}, 'exact_preflight_available': (getattr(extraction, 'verifier', {}) or {}).get('exact_preflight_available') if extraction else None, 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'provider_diagnostics': (getattr(extraction, 'diagnostics', []) if extraction else [_safe_provider_diagnostic(run_id, source, fetched, provider.model, retrieval_started)]), 'openai_invoked': bool(extraction and (not packet_plan or packet_plan.get('packet_count', 0))), 'claims': claims, 'applied_results': [], 'candidate_exceptions': candidate_exceptions, 'candidate_pages_selected': packet_plan.get('candidate_pages', []), 'page_packets_submitted': packet_plan.get('packets', []), 'packet_count': packet_plan.get('packet_count', 0), 'pdf_navigation_diagnostics': packet_plan.get('parse_diagnostics', {}), 'visual_navigation': packet_plan.get('visual_navigation', {}), 'visual_navigation_fallback_used': bool((packet_plan.get('visual_navigation') or {}).get('visual_fallback_used'))}
+    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'validating', 'workflow': 'financial_intelligence', 'deployed_revision': deployed_revision(), 'governed_source': source, 'collection': {'retrieved': fetched.succeeded, 'retrieval_time': fetched.retrieval_date, 'http_status': fetched.status_code, 'error': fetched.error, 'active_source_url': source['url'], 'document_size': len(fetched.content or b'')}, 'document': document.model_dump(), 'provider': (extraction.provider if extraction else 'openai'), 'model': (extraction.model if extraction else provider.model), 'reasoning_effort': getattr(provider, 'reasoning_effort', settings.reasoning_effort), 'schema_version': settings.schema_version, 'prompt_version': settings.prompt_version, 'document_hash': document.checksum, 'usage': (extraction.usage if extraction else {}), 'estimated_cost_usd': (extraction.estimated_cost_usd if extraction else None), 'actual_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('actual_cost_usd') if extraction else None, 'cost_breakdown': {'input_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('input_cost_usd'), 'output_cost_usd': (getattr(extraction, 'verifier', {}) or {}).get('output_cost_usd')} if extraction else {}, 'exact_preflight_available': (getattr(extraction, 'verifier', {}) or {}).get('exact_preflight_available') if extraction else None, 'provider_status': (extraction.status if extraction else 'not_executed'), 'provider_errors': (extraction.provider_errors if extraction else [fetched.error]), 'raw_response_location': (extraction.raw_response_location if extraction else None), 'provider_diagnostics': (getattr(extraction, 'diagnostics', []) if extraction else [_safe_provider_diagnostic(run_id, source, fetched, provider.model, retrieval_started)]), 'openai_invoked': bool(extraction and (not packet_plan or packet_plan.get('packet_count', 0))), 'claims': claims, 'applied_results': [], 'candidate_exceptions': candidate_exceptions, 'candidate_pages_selected': packet_plan.get('candidate_pages', []), 'page_packets_submitted': packet_plan.get('packets', []), 'packet_count': packet_plan.get('packet_count', 0), 'pdf_navigation_diagnostics': packet_plan.get('parse_diagnostics', {}), 'visual_navigation': packet_plan.get('visual_navigation', {}), 'visual_navigation_fallback_used': bool((packet_plan.get('visual_navigation') or {}).get('visual_fallback_used'))}
     run['collection'].update({'final_url': fetched.final_url or fetched.url, 'content_type': fetched.media_type, 'redirect_chain': list(fetched.redirect_chain), 'redirected': bool(fetched.redirect_chain)})
     if extraction:
         run['provider_diagnostics'] = [_safe_provider_diagnostic(run_id, source, fetched, provider.model, retrieval_started)] + run.get('provider_diagnostics', [])
@@ -1062,6 +1165,7 @@ def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: 
         except Exception:
             pass
     try:
+        attach_financial_run_diagnostic(run)
         _write_json(_run_path(run_id), run)
     except PersistenceError as exc:
         run = _mark_failure(run, 'persistence_failed', f'{type(exc).__name__}: {exc}')
@@ -1080,7 +1184,7 @@ def create_financial_intelligence_progress_run(enterprise_id: str = 'bt-group-pl
     active = _active_refresh_run()
     if active: return active
     run_id = 'fi-' + uuid.uuid4().hex[:12]
-    run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'queued', 'state': 'queued', 'terminal': False, 'progress_percent': 0, 'workflow': 'financial_intelligence', 'enterprise_id': enterprise_id, 'extraction_mode': extraction_mode, 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'claims': [], 'applied_results': [], 'exceptions': []}
+    run = {'run_id': run_id, 'created_at': now_iso(), 'deployed_revision': deployed_revision(), 'status': 'queued', 'state': 'queued', 'terminal': False, 'progress_percent': 0, 'workflow': 'financial_intelligence', 'enterprise_id': enterprise_id, 'extraction_mode': extraction_mode, 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'claims': [], 'applied_results': [], 'exceptions': []}
     _write_json(_run_path(run_id), run)
     threading.Thread(target=_background_refresh, args=(enterprise_id, run_id, extraction_mode), daemon=True).start()
     return run
@@ -1090,7 +1194,8 @@ def _background_refresh(enterprise_id: str, run_id: str, extraction_mode: str = 
         refresh_financial_intelligence(enterprise_id=enterprise_id, run_id=run_id, extraction_mode=extraction_mode)
     except Exception as exc:
         LOGGER.exception('Financial Intelligence background refresh failed support_reference=%s', 'FI-' + run_id.removeprefix('fi-'))
-        run = {'run_id': run_id, 'created_at': now_iso(), 'status': 'failed', 'failure_category': 'failed', 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'exceptions': [{'exception_type': 'failed', 'failure_stage': 'failed', 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'user_message': 'Financial Intelligence refresh failed safely.', 'rejection_reason': f'{type(exc).__name__}: {exc}'}], 'claims': [], 'applied_results': []}
+        run = {'run_id': run_id, 'created_at': now_iso(), 'deployed_revision': deployed_revision(), 'status': 'failed', 'failure_category': 'failed', 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'exceptions': [{'exception_type': 'failed', 'failure_stage': 'failed', 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'user_message': 'Financial Intelligence refresh failed safely.', 'rejection_reason': f'{type(exc).__name__}: {exc}'}], 'claims': [], 'applied_results': []}
+        attach_financial_run_diagnostic(run)
         _write_json(_run_path(run_id), run)
 
 
@@ -1258,7 +1363,7 @@ def _render_dual_speed_outcome(run: dict[str, Any]) -> str:
     rapid_result = escape(str(rapid.get('user_result') or 'No rapid outlook is available.'))
     return f"""<section class='card warning'><h2>Fixture-only evidence warning</h2><p>This legacy result uses seeded rapid fixture data for local orchestration proof only. It is not verified official evidence and has not updated canonical Evidence, Observations or the Enterprise Model.</p></section><section class='card'><h2>Rapid Financial Pressure and Transformation Outlook</h2><p>Rapid lane status: {escape(str(rapid.get('status')))} · Evidence status: {escape(str(rapid.get('evidence_status')))} · Candidate facts: {escape(str(rapid.get('candidate_fact_count', 0)))}</p><pre>{rapid_result}</pre></section>"""
 
-def _outcome_summary(run: dict[str, Any] | None) -> str:
+def _outcome_summary(run: dict[str, Any] | None, show_support_control: bool = False) -> str:
     if not run: return ''
     if run.get('execution_mode') == DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE:
         return _render_dual_speed_outcome(run)
@@ -1284,7 +1389,8 @@ def _outcome_summary(run: dict[str, Any] | None) -> str:
     accepted_periods = [c.get('period') for c in run.get('claims', []) if c.get('disposition') == 'accepted' and c.get('period')]
     candidate_periods = [c.get('period') for c in run.get('claims', []) if c.get('period')]
     period_text = 'inferred from accepted facts' if accepted_periods else (f"detected from candidates ({escape(str(candidate_periods[0]))})" if candidate_periods else 'not established')
-    return f"""<section class='card'><h2>Refresh outcome</h2><p>Extraction mode: {escape(str(run.get('extraction_mode_label') or run.get('extraction_mode') or 'AI financial report review'))} · AI calls made: {escape(str(run.get('ai_calls_made', run.get('openai_calls_made', 0))))}</p><p>{headline}{cost_text} · Candidate facts extracted: {(run.get('candidate_lifecycle_counts') or {}).get('packet_candidates_extracted', len(run.get('claims', [])))} · Reporting period: {period_text} · Collection status: {escape(status)} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Canonical facts accepted</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{len(exceptions)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a></p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {escape(str(run.get('no_new_evidence_message') or outcome))}</p>{("<p><a href='/digital-twin/bt-group-plc'>View updated twin</a> · <a href='#attention'>Review exception</a> · <a href='#evidence'>View evidence</a></p>" if status == 'completed_with_exceptions' and run.get('enterprise_attributes_changed') else "<form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form>")}</section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
+    support_link = f" · <a class='support-diagnostic-link' href='/financial-intelligence/{escape(run['run_id'])}/support-diagnostic'>View support diagnostic</a>" if show_support_control else ''
+    return f"""<section class='card'><h2>Refresh outcome</h2><p>Extraction mode: {escape(str(run.get('extraction_mode_label') or run.get('extraction_mode') or 'AI financial report review'))} · AI calls made: {escape(str(run.get('ai_calls_made', run.get('openai_calls_made', 0))))}</p><p>{headline}{cost_text} · Candidate facts extracted: {(run.get('candidate_lifecycle_counts') or {}).get('packet_candidates_extracted', len(run.get('claims', [])))} · Reporting period: {period_text} · Collection status: {escape(status)} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Canonical facts accepted</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{len(exceptions)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a>{support_link}</p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {escape(str(run.get('no_new_evidence_message') or outcome))}</p>{("<p><a href='/digital-twin/bt-group-plc'>View updated twin</a> · <a href='#attention'>Review exception</a> · <a href='#evidence'>View evidence</a></p>" if status == 'completed_with_exceptions' and run.get('enterprise_attributes_changed') else "<form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form>")}</section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
 
 def missing_run_page(run_id: str) -> str:
     body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>This previous refresh result is no longer available.</p><p>Start a new refresh to collect the latest financial intelligence.</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Start new refresh</button></form><p><a href='/financial-intelligence'>Return to Financial Intelligence</a></p></section>"""
@@ -1297,9 +1403,9 @@ def financial_intelligence_run_page(run_id: str) -> str:
         print(f"Flora Financial Intelligence requested missing run {run_id}; storage mode={storage_mode()['mode']}")
         return missing_run_page(run_id)
 
-def financial_intelligence_run_response(run_id: str) -> tuple[str, int]:
+def financial_intelligence_run_response(run_id: str, show_support_control: bool = False) -> tuple[str, int]:
     try:
-        return _page('Financial Intelligence outcome', _outcome_summary(load_run(run_id))), 200
+        return _page('Financial Intelligence outcome', _outcome_summary(load_run(run_id), show_support_control=show_support_control)), 200
     except FileNotFoundError:
         print(f"Flora Financial Intelligence requested missing run {run_id}; storage mode={storage_mode()['mode']}")
         return missing_run_page(run_id), 410
