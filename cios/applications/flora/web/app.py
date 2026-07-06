@@ -101,8 +101,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(financial_intelligence_progress_page(parsed.path.removeprefix("/financial-intelligence/progress/")))
             elif parsed.path == "/financial-reports":
                 self._html(review_home_page())
-            elif parsed.path.startswith("/financial-intelligence/") and parsed.path.endswith("/support-report/download"):
-                run_id = parsed.path.removeprefix("/financial-intelligence/").removesuffix("/support-report/download")
+            elif _is_support_report_path(parsed.path):
+                run_id = _support_report_run_id(parsed.path)
                 if not valid_financial_intelligence_run_id(run_id):
                     self.send_error(404, "Financial Intelligence run not found")
                     return
@@ -128,12 +128,16 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(financial_intelligence_support_diagnostic_page(parsed.path.removeprefix("/financial-intelligence/").removesuffix("/support-diagnostic")))
             elif parsed.path.startswith("/financial-intelligence/"):
                 run_id = parsed.path.removeprefix("/financial-intelligence/")
-                show_support_report = False
                 try:
-                    show_support_report = can_view_financial_intelligence_run(self.headers, load_run(run_id))
+                    run = load_run(run_id)
                 except FileNotFoundError:
-                    pass
-                html, status = financial_intelligence_run_response(run_id, show_support_control=show_support_report)
+                    html, status = financial_intelligence_run_response(run_id, show_support_control=False)
+                    self._html(html, status=status)
+                    return
+                if not (_support_authorised(self.headers) or can_view_financial_intelligence_run(self.headers, run)):
+                    self.send_error(403, "Financial Intelligence run access denied")
+                    return
+                html, status = financial_intelligence_run_response(run_id, show_support_control=True)
                 self._html(html, status=status)
             elif parsed.path == "/ai-financial-report":
                 self._html(review_home_page())
@@ -281,6 +285,13 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         return
 
 
+def _is_support_report_path(path: str) -> bool:
+    return path.startswith("/financial-intelligence/") and (path.endswith("/support-report") or path.endswith("/support-report/download"))
+
+
+def _support_report_run_id(path: str) -> str:
+    suffix = "/support-report/download" if path.endswith("/support-report/download") else "/support-report"
+    return path.removeprefix("/financial-intelligence/").removesuffix(suffix)
 
 
 def _support_authorised(headers) -> bool:
