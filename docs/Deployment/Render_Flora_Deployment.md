@@ -106,7 +106,7 @@ The BT FY26 structured route uses the existing Flora storage-root mechanism. For
 | Persistent disk name | `flora-pilot-memory` |
 | Persistent disk mount | `/var/data/flora` |
 | Application storage key | `FLORA_DATA_DIR` |
-| Source configuration | `cios/config/flora/structured_sources/bt-group-plc-fy26.json` |
+| Source configuration | `config/flora/structured_sources/bt-group-plc-fy26.json` |
 | Structured route | `structured_standard_financials` |
 
 The route retrieves the issuer-hosted ESEF ZIP over public HTTPS, validates archive limits, writes canonical Evidence / Observation / Enterprise Model JSONL/JSON memory beneath `FLORA_DATA_DIR`, and removes temporary ZIP storage after processing. The ZIP itself is not canonical memory and must not be placed in the repository or in an environment variable.

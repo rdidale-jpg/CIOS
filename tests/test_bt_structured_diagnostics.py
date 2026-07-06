@@ -7,7 +7,7 @@ from cios.applications.flora.financial_intelligence import bt_structured as bt
 
 
 def _cfg(tmp_path, **overrides):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     cfg.update(overrides)
     path = tmp_path / 'cfg.json'; path.write_text(json.dumps(cfg))
     return cfg, path
@@ -22,6 +22,17 @@ def test_missing_source_configuration_classified(monkeypatch, tmp_path):
     assert run['support_reference'] == 'FI-missing'
     assert run['ai_calls_made'] == run['pdf_fallback_calls_made'] == 0
     assert not run['trusted_twin_changed']
+
+
+def test_production_search_page_configuration_remains_rejected(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path / 'data'))
+    monkeypatch.delenv('FLORA_STRUCTURED_SOURCE_CONFIG', raising=False)
+    run = bt.ingest_bt_fy26('fi-production-search-page')
+    assert run['failure_code'] == 'artifact_url_not_downloadable'
+    diagnostic = run['structured_diagnostics'][0]
+    assert diagnostic['failure_stage'] == 'governed source configuration'
+    assert diagnostic['request_attempted'] is False
+    assert diagnostic['safe_failure_message'] == 'The configured source is a search page rather than a filing download.'
 
 @pytest.mark.parametrize('override,code', [
     ({'enterprise_id':'BT'}, 'enterprise_identity_mismatch'),
@@ -93,7 +104,7 @@ def test_timeout_dns_tls_incomplete_and_size_classification(tmp_path, monkeypatc
 
 def test_package_validation_invalid_zip_and_unsafe_archive(tmp_path):
     bad = tmp_path / 'bad.zip'; bad.write_bytes(b'not zip')
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     receipt = bt.RetrievedPackage(bad, '0'*64, cfg['artifact_url'], 200, 'application/zip', 7)
     with pytest.raises(bt.StructuredIngestionError) as exc:
         bt.extract_candidates(bad, cfg, receipt)
@@ -106,7 +117,7 @@ def test_package_validation_invalid_zip_and_unsafe_archive(tmp_path):
 
 
 def test_adapter_handoff_diagnostic_and_correlation(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     receipt = bt.RetrievedPackage(tmp_path/'x.zip', 'a'*64, cfg['artifact_url'], 200, 'application/zip', 10)
     diag = bt._diagnostic('fi-ok', cfg, bt.StructuredIngestionError('', 'none', 'completed'), receipt, 4, 3, True)
     assert diag['support_reference'] == 'FI-ok'
@@ -122,7 +133,7 @@ def _ix_body(metric=True):
 
 
 def test_archive_diagnostics_and_nested_ixbrl_locator(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     package = tmp_path / 'nested.zip'
     with zipfile.ZipFile(package, 'w') as z:
         z.writestr('META-INF/reports.json', '{}')
@@ -138,7 +149,7 @@ def test_archive_diagnostics_and_nested_ixbrl_locator(tmp_path):
 
 
 def test_precise_safety_failure_codes(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     too_many = tmp_path / 'too_many.zip'
     with zipfile.ZipFile(too_many, 'w') as z:
         z.writestr('a.txt', 'a'); z.writestr('b.txt', 'b')
@@ -153,7 +164,7 @@ def test_precise_safety_failure_codes(tmp_path):
 
 
 def test_crc_failure_is_reported(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     package = tmp_path / 'crc.zip'
     with zipfile.ZipFile(package, 'w', zipfile.ZIP_STORED) as z: z.writestr('a.txt', 'abc')
     data = bytearray(package.read_bytes()); idx = data.index(b'abc'); data[idx] ^= 0xFF; package.write_bytes(data)
@@ -163,7 +174,7 @@ def test_crc_failure_is_reported(tmp_path):
 
 
 def test_locator_ambiguous_and_unsupported_layout(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     no_ix = tmp_path / 'no_ix.zip'
     with zipfile.ZipFile(no_ix, 'w') as z: z.writestr('nested/report.xhtml', '<html/>')
     with pytest.raises(bt.StructuredIngestionError) as missing:
@@ -187,7 +198,7 @@ def _ix_full(lei='213800LRO7NS5CYQMN21', start='2025-04-01', end='2026-03-31', f
 
 
 def test_htm_case_insensitive_candidate_discovery_and_marker_validation(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     package = tmp_path / 'bt.zip'
     with zipfile.ZipFile(package, 'w') as z:
         z.writestr('ixbrl-viewer.HTM', _ix_full())
@@ -203,7 +214,7 @@ def test_htm_case_insensitive_candidate_discovery_and_marker_validation(tmp_path
 
 
 def test_ordinary_html_and_viewer_wrapper_without_inline_facts_rejected(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     package = tmp_path / 'ordinary.zip'
     with zipfile.ZipFile(package, 'w') as z:
         z.writestr('index.htm', '<html><body>BT GROUP PLC</body></html>')
@@ -215,7 +226,7 @@ def test_ordinary_html_and_viewer_wrapper_without_inline_facts_rejected(tmp_path
 
 @pytest.mark.parametrize('body', [_ix_full(lei='00000000000000000000'), _ix_full(start='2024-04-01', end='2025-03-31')])
 def test_identity_and_period_mismatch_rejected(tmp_path, body):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     package = tmp_path / 'mismatch.zip'
     with zipfile.ZipFile(package, 'w') as z: z.writestr('ixbrl-viewer.htm', body)
     with pytest.raises(bt.StructuredIngestionError) as exc:
@@ -224,7 +235,7 @@ def test_identity_and_period_mismatch_rejected(tmp_path, body):
 
 
 def test_taxonomy_linkbase_and_top_level_classification(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     package = tmp_path / 'classify.zip'
     with zipfile.ZipFile(package, 'w') as z:
         z.writestr('ixbrl-viewer.htm', _ix_full())
@@ -245,7 +256,7 @@ def test_taxonomy_linkbase_and_top_level_classification(tmp_path):
     assert diag['taxonomy_package_metadata'] == ['META-INF/taxonomyPackage.xml']
 
 def test_incremental_marker_scanner_late_and_boundary_markers(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     package = tmp_path / 'late.zip'
     late = b'a' * 3_000_000 + b'<html xmlns:abc="http://www.xbrl.org/2013/inlineXBRL"><abc:nonFraction>1</abc:nonFraction>'
     with zipfile.ZipFile(package, 'w', compression=zipfile.ZIP_DEFLATED) as z:
@@ -260,7 +271,7 @@ def test_incremental_marker_scanner_late_and_boundary_markers(tmp_path):
 
 
 def test_namespace_equivalent_inline_xbrl_is_selected(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     package = tmp_path / 'ns.zip'
     body = '''<html xmlns:i="http://www.xbrl.org/2013/inlineXBRL" xmlns:x="http://www.xbrl.org/2003/instance"><i:header><i:references><link:schemaRef xmlns:link="http://www.xbrl.org/2003/linkbase"/></i:references></i:header><x:context id="c1"><x:entity><x:identifier>213800LRO7NS5CYQMN21</x:identifier></x:entity><x:period><x:startDate>2025-04-01</x:startDate><x:endDate>2026-03-31</x:endDate></x:period></x:context><i:nonFraction name="ifrs-full:Revenue" contextRef="c1" unitRef="GBP">1</i:nonFraction></html>'''
     with zipfile.ZipFile(package, 'w') as z:
@@ -275,7 +286,7 @@ def test_namespace_equivalent_inline_xbrl_is_selected(tmp_path):
 
 
 def test_no_supported_facts_not_reported_before_adapter_handoff(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     diag = bt._diagnostic('fi-x', cfg, bt.StructuredIngestionError('missing', 'no_supported_facts', 'structured fact validation'), adapter=False)
     assert diag['adapter_handoff_attempted'] is False
     assert diag['failure_code'] != 'no_supported_facts'
@@ -283,7 +294,7 @@ def test_no_supported_facts_not_reported_before_adapter_handoff(tmp_path):
 
 
 def test_viewer_wrapper_embedded_and_external_discovery(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     package = tmp_path / 'viewer.zip'
     embedded = '<script type="application/json" id="ixbrl-data">{"report":"reports/bt.xhtml"}</script>'
     external = '<script src="viewer.js"></script><a href="reports/bt.xhtml">raw</a>'
@@ -301,7 +312,7 @@ def test_viewer_wrapper_embedded_and_external_discovery(tmp_path):
 
 
 def test_scope_rejections_for_parent_and_subsidiary(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     parent = _ix_full().replace('<xbrli:entity>', '<xbrli:entity><xbrli:segment><xbrldi:explicitMember xmlns:xbrldi="http://xbrl.org/2006/xbrldi" dimension="scope">ParentCompany</xbrldi:explicitMember></xbrli:segment>')
     sub = _ix_full(lei='213800IM9RLR1AU4R889')
     for body, code in [(parent, 'structured_report_locator_failed'), (sub, 'structured_report_locator_failed')]:
@@ -313,7 +324,7 @@ def test_scope_rejections_for_parent_and_subsidiary(tmp_path):
 
 
 def test_direct_raw_filing_retrieval_and_temp_cleanup(tmp_path, monkeypatch):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     raw = tmp_path / 'raw.xhtml'; raw.write_text(_ix_full())
     prepared = bt.prepare_raw_report_from_package(raw, 'report.xhtml', tmp_path / 'work')
     assert prepared.exists()
@@ -322,7 +333,7 @@ def test_direct_raw_filing_retrieval_and_temp_cleanup(tmp_path, monkeypatch):
 
 
 def test_prepare_raw_report_extracts_selected_zip_entry_not_whole_package(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     package = tmp_path / 'bt.zip'
     body = _ix_full()
     with zipfile.ZipFile(package, 'w') as z:
@@ -337,7 +348,7 @@ def test_prepare_raw_report_extracts_selected_zip_entry_not_whole_package(tmp_pa
 
 
 def test_viewer_only_package_has_definitive_non_null_classification(tmp_path):
-    cfg = json.loads(Path('cios/config/flora/structured_sources/bt-group-plc-fy26.json').read_text())
+    cfg = json.loads(Path('tests/fixtures/bt_structured_source_config.json').read_text())
     package = tmp_path / 'viewer_only.zip'
     with zipfile.ZipFile(package, 'w') as z:
         z.writestr('ixbrl-viewer.htm', '<html><head><script src="viewer.js"></script></head><body>Rendered annual report shell</body></html>')

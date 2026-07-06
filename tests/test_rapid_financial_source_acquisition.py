@@ -28,6 +28,20 @@ def _config_dir(tmp_path: Path, **overrides):
     return d, data
 
 
+def test_production_bt_fy26_rapid_manifest_is_discoverable_through_runtime_loader():
+    manifests = sorted(rapid.CONFIG_DIR.glob("*.json"))
+    assert [path.name for path in manifests] == ["bt-group-plc-fy26.json"]
+    manifest = rapid.load_rapid_source_manifest(
+        "bt-group-plc",
+        "FY26",
+        "bt-group-plc-fy26-results-release",
+    )
+    rapid.validate_rapid_source_manifest(manifest, "bt-group-plc", "FY26")
+    assert manifest.enterprise_id == "bt-group-plc"
+    assert manifest.reporting_period == "FY26"
+    assert manifest.configuration_key == "bt-group-plc-fy26-results-release"
+
+
 def _fetch(raw: bytes, media_type="application/pdf", final_url=None, status=200):
     url = "https://www.bt.com/fy26-release.pdf"
     return DocumentFetchResult(url, True, status, media_type, raw, hashlib.sha256(raw).hexdigest(), "", "2026-07-06T00:00:00+00:00", final_url=final_url or url, redirect_chain=())
