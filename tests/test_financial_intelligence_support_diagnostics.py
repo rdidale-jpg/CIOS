@@ -202,3 +202,27 @@ def test_missing_persisted_support_report_has_friendly_message(monkeypatch, tmp_
     assert payload['report_available'] is False
     assert payload['message'] == 'A support report is not available for this earlier run.'
     assert payload['support_reference'] == 'FI-old'
+
+
+def test_safe_support_report_support_token_and_malformed_run_id(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path))
+    monkeypatch.setenv('FLORA_SUPPORT_TOKEN', 'support-token')
+    run = {'run_id':'fi-support-token','created_at':'2026-07-06T00:00:00+00:00','status':'failed','workflow':'financial_intelligence','enterprise_id':'bt-group-plc','support_reference':'FI-support-token','support_diagnostic':{'run_id':'fi-support-token','support_reference':'FI-support-token','safe_failure_message':'safe'},'claims':[], 'applied_results':[]}
+    path = tmp_path / 'ai_financial_reports' / 'runs'; path.mkdir(parents=True)
+    (path / 'fi-support-token.json').write_text(json.dumps(run))
+    server = ThreadingHTTPServer(('127.0.0.1', 0), FloraWebHandler)
+    try:
+        import threading
+        t = threading.Thread(target=server.serve_forever, daemon=True); t.start()
+        host, port = server.server_address
+        c = HTTPConnection(host, port)
+        c.request('GET', '/financial-intelligence/fi-support-token/support-report/download', headers={'Authorization':'Bearer support-token'})
+        r = c.getresponse(); body = r.read().decode()
+        assert r.status == 200
+        assert 'FI-support-token' in body
+        c = HTTPConnection(host, port)
+        c.request('GET', '/financial-intelligence/../secret/support-report/download', headers={'X-Flora-User':'rob','X-Flora-Enterprises':'*'})
+        r = c.getresponse(); r.read()
+        assert r.status == 404
+    finally:
+        server.shutdown()
