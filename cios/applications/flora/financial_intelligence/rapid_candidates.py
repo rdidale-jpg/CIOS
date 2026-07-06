@@ -89,10 +89,21 @@ def _pdf_pages(path: Path) -> list[ParsedPdfPage]:
         raise RuntimeError(f"parser failure: {parsed.failure_class or parsed.status}")
     return [p for p in parsed.pages if p.text.strip()]
 
+def _scale_marker_pattern(marker: str) -> re.Pattern[str]:
+    """Match controlled currency/scale markers without requiring word chars.
+
+    Markers such as ``£m`` begin with a symbol, so ``\b`` boundaries do not
+    apply.  The lookarounds keep the match bounded without inferring scale from
+    amount magnitude or unrelated prose.
+    """
+    parts = [re.escape(p) for p in marker.split()]
+    body = r"\s+".join(parts)
+    return re.compile(r"(?<![A-Za-z0-9])" + body + r"(?![A-Za-z0-9])", re.I)
+
 def _scale(text: str, profile: dict[str,Any]) -> tuple[str|None,str|None,str|None]:
     found=[]
     for marker, scale in (profile.get("permitted_scale_markers") or {}).items():
-        if re.search(r"\b"+re.escape(marker)+r"\b", text, re.I): found.append(("GBP", scale, marker))
+        if _scale_marker_pattern(marker).search(text): found.append(("GBP", scale, marker))
     uniq={(c,s) for c,s,_ in found}
     if len(uniq)>1: return None, None, "contradictory"
     return found[0] if found else (None,None,None)

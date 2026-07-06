@@ -72,11 +72,26 @@ def test_candidate_ids_are_deterministic_and_no_duplicates(tmp_path):
     assert [c.candidate_id for c in a.candidates] == [c.candidate_id for c in b.candidates]
     assert len({c.candidate_id for c in a.candidates}) == 3
 
+def test_table_scale_marker_variants_are_controlled_and_propagated(tmp_path):
+    for marker in ('£m', 'GBP m', 'GBP millions'):
+        result = run(tmp_path, BASE.replace('GBP m', marker))
+        assert result.extraction_status == 'completed'
+        assert {c.reported_scale for c in result.candidates} == {'millions'}
+        assert {json.loads(c.source_locator)['scale_context'] for c in result.candidates} == {marker}
+
 def test_missing_scale_creates_partial_with_exception(tmp_path):
     result=run(tmp_path, BASE.replace('GBP m\n',''))
     assert result.extraction_status=='failed_extraction'
     assert result.candidate_count==0
     assert {e.category for e in result.exceptions} >= {'scale missing'}
+
+def test_contradictory_table_scale_creates_exception(tmp_path):
+    profile = json.loads(Path('config/flora/rapid_extraction/bt-group-plc-fy26.json').read_text())
+    profile['permitted_scale_markers'] = {**profile['permitted_scale_markers'], 'GBP bn': 'billions'}
+    p = pdf(tmp_path, BASE.replace('GBP m', 'GBP m and GBP bn'))
+    result = extract_rapid_financial_candidates(AcquiredRapidSource(p, receipt(p)), profile=profile)
+    assert result.candidate_count == 0
+    assert any(e.category == 'scale contradictory' for e in result.exceptions)
 
 def test_ambiguous_period_creates_exception(tmp_path):
     result=run(tmp_path, BASE.replace('Metric | FY26 | FY25 | Basis | Scope','Metric | Current | FY25 | Basis | Scope'))
