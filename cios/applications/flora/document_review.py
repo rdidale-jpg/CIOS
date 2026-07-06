@@ -18,6 +18,8 @@ from cios.applications.flora.financial_intelligence.provider_guard import provid
 from cios.applications.flora.financial_intelligence.config import financial_intelligence_settings
 from cios.applications.flora.financial_intelligence.schema import ExperimentDocument, FoundationFact
 from cios.applications.flora.financial_intelligence.rapid import run_rapid_financial_intelligence
+from cios.applications.flora.financial_intelligence.rapid_sources import RapidSourceAcquisitionError, acquire_rapid_financial_source
+from cios.applications.flora.financial_intelligence.rapid_candidates import extract_rapid_financial_candidates
 from cios.applications.flora.memory.service import ObservationMemoryService
 from cios.applications.flora.memory.views import enterprise_memory_panel
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
@@ -725,6 +727,53 @@ def _rapid_lane_from_fixture_result(rapid_result: dict[str, Any], elapsed_ms: in
     }
 
 
+def _rapid_lane_from_source_receipt(receipt: Any, elapsed_ms: int, *, extraction: Any | None = None, temp_path_removed: bool | None = None) -> dict[str, Any]:
+    receipt_dict = receipt.to_dict() if hasattr(receipt, 'to_dict') else dict(receipt or {})
+    extraction_dict = extraction.to_dict() if extraction and hasattr(extraction, 'to_dict') else None
+    candidates = list((extraction_dict or {}).get('candidates') or [])
+    exceptions = list((extraction_dict or {}).get('exceptions') or [])
+    status = 'ready' if extraction and extraction.extraction_status == 'completed' else ('partial' if extraction and extraction.candidate_count else 'unavailable')
+    if extraction and extraction.extraction_status == 'failed_extraction':
+        status = 'unavailable'
+    return {
+        'status': status,
+        'evidence_status': 'official_source_retrieved' if receipt_dict.get('validation_result') == 'accepted' else 'official_source_unavailable',
+        'source_receipt': receipt_dict,
+        'source_receipts': [receipt_dict] if receipt_dict else [],
+        'source_configuration_key': receipt_dict.get('configuration_key'),
+        'source_validation_result': receipt_dict.get('validation_result'),
+        'extraction_status': (extraction.extraction_status if extraction else 'not_run'),
+        'candidate_count': len(candidates),
+        'candidate_fact_count': len(candidates),
+        'candidates': candidates,
+        'candidate_facts': candidates,
+        'exception_count': len(exceptions),
+        'exceptions': exceptions,
+        'source_call_count': int(receipt_dict.get('external_source_call_count') or 0),
+        'ai_call_count': 0,
+        'provider_cost': 0,
+        'canonical_write_count': 0,
+        'elapsed_ms': elapsed_ms,
+        'pages_examined': list((extraction_dict or {}).get('pages_examined') or []),
+        'extraction_version': (extraction_dict or {}).get('extraction_version'),
+        'non_canonical': True,
+        'source_temporary_file_removed': temp_path_removed,
+        'user_result': 'Flora found an approved official BT FY26 financial document and identified three cited, unverified candidate facts.' if len(candidates) == 3 else '',
+    }
+
+def _rapid_lane_from_acquisition_error(exc: RapidSourceAcquisitionError, elapsed_ms: int) -> dict[str, Any]:
+    receipt = exc.receipt.to_dict() if exc.receipt else {}
+    return {
+        'status': 'unavailable', 'evidence_status': 'official_source_unavailable',
+        'source_receipt': receipt, 'source_receipts': [receipt] if receipt else [],
+        'source_configuration_key': receipt.get('configuration_key'), 'source_validation_result': receipt.get('validation_result') or 'rejected',
+        'extraction_status': 'not_run', 'candidate_count': 0, 'candidate_fact_count': 0, 'candidates': [], 'candidate_facts': [],
+        'exception_count': 1, 'exceptions': [{'exception_type': exc.code, 'failure_stage': exc.stage, 'user_message': exc.safe_message, 'rejection_reason': exc.safe_message}],
+        'source_call_count': int(receipt.get('external_source_call_count') or 0), 'ai_call_count': 0, 'provider_cost': 0, 'canonical_write_count': 0,
+        'elapsed_ms': elapsed_ms, 'pages_examined': [], 'extraction_version': None, 'non_canonical': True, 'user_result': '',
+    }
+
+
 def _verification_unavailable_lane(run_id: str, enterprise_id: str, started: float) -> dict[str, Any]:
     return {
         'status': 'unavailable',
@@ -781,8 +830,10 @@ def _dual_speed_completion_class(rapid: dict[str, Any], verification: dict[str, 
     return 'failed', 'no_trustworthy_evidence'
 
 
-def coordinate_dual_speed_financial_intelligence_run(enterprise_id: str = 'bt-group-plc', run_id: str | None = None, reporting_period: str = 'FY26') -> dict[str, Any]:
-    """Coordinate Slice 1 dual-speed Financial Intelligence in one standard run record."""
+def coordinate_dual_speed_financial_intelligence_run(enterprise_id: str = 'bt-group-plc', run_id: str | None = None, reporting_period: str = 'FY26', *, acquisition_boundary: Any = None, extraction_boundary: Any = None) -> dict[str, Any]:
+    """Coordinate explicit dual-speed Financial Intelligence in one standard run record."""
+    acquisition_boundary = acquisition_boundary or acquire_rapid_financial_source
+    extraction_boundary = extraction_boundary or extract_rapid_financial_candidates
     run_id = run_id or ('fi-' + uuid.uuid4().hex[:12])
     ensure_writable_dir(_run_dir())
     created_at = now_iso()
@@ -815,10 +866,21 @@ def coordinate_dual_speed_financial_intelligence_run(enterprise_id: str = 'bt-gr
     }
     _write_json(_run_path(run_id), run)
     rapid_started = time.time()
-    rapid_result = run_rapid_financial_intelligence(enterprise_id=enterprise_id, run_id=run_id)
-    rapid_lane = _rapid_lane_from_fixture_result(rapid_result, int((time.time() - rapid_started) * 1000))
+    run['rapid_intelligence'] = {'status': 'running', 'ai_call_count': 0, 'canonical_write_count': 0}
+    run['updated_at'] = now_iso(); run['progress_percent'] = run['percent_complete'] = 15
+    _write_json(_run_path(run_id), run)
+    try:
+        temp_path = None
+        with acquisition_boundary(enterprise_id, reporting_period) as acquired:
+            temp_path = Path(acquired.path)
+            extraction = extraction_boundary(acquired)
+            rapid_lane = _rapid_lane_from_source_receipt(acquired.receipt, int((time.time() - rapid_started) * 1000), extraction=extraction, temp_path_removed=False)
+        rapid_lane['source_temporary_file_removed'] = (not temp_path.exists()) if temp_path else None
+    except RapidSourceAcquisitionError as exc:
+        rapid_lane = _rapid_lane_from_acquisition_error(exc, int((time.time() - rapid_started) * 1000))
     run['rapid_intelligence'] = rapid_lane
     run['updated_at'] = now_iso(); run['progress_percent'] = run['percent_complete'] = 55
+    run['cost_summary'].update({'ai_call_count': 0, 'estimated_provider_cost_usd': 0, 'external_source_call_count': rapid_lane.get('source_call_count', 0), 'canonical_write_count': 0})
     _write_json(_run_path(run_id), run)
     verification_started = time.time()
     verification_lane = _verification_unavailable_lane(run_id, enterprise_id, verification_started)
@@ -1172,12 +1234,28 @@ def _render_dual_speed_outcome(run: dict[str, Any]) -> str:
     verification = run.get('verification') or {}
     canonical = run.get('canonical_update') or {}
     cost = run.get('cost_summary') or {}
-    rapid_result = escape(str(rapid.get('user_result') or 'No rapid outlook is available.'))
-    verification_status = escape(str(verification.get('status') or 'not_started'))
-    verification_exceptions = ''.join(f"<li>{escape(str(e.get('user_message') or e.get('rejection_reason') or e.get('exception_type') or 'Verification exception'))}</li>" for e in (verification.get('exceptions') or [])) or '<li>No verification exceptions recorded.</li>'
+    receipt = rapid.get('source_receipt') or {}
+    candidates = rapid.get('candidates') or rapid.get('candidate_facts') or []
     canonical_status = escape(str(canonical.get('status') or 'not_started'))
     canonical_changed = 'yes' if canonical.get('enterprise_model_updated') else 'no'
-    return f"""<section class='card warning'><h2>Fixture-only evidence warning</h2><p>This Slice 1 dual-speed result uses seeded rapid fixture data for local orchestration proof only. It is not verified official evidence, is not production-ready and has not updated canonical Evidence, Observations or the Enterprise Model.</p></section><section class='card'><h2>Rapid Financial Pressure and Transformation Outlook</h2><p>Rapid lane status: {escape(str(rapid.get('status')))} · Evidence status: {escape(str(rapid.get('evidence_status')))} · Candidate facts: {escape(str(rapid.get('candidate_fact_count', 0)))}</p><pre>{rapid_result}</pre></section><section class='card'><h2>Verification summary</h2><p>Status: {verification_status} · Adapter handoff attempted: {escape(str(verification.get('adapter_handoff_attempted', False)).lower())} · Facts verified: {escape(str(verification.get('facts_verified', 0)))}</p><ul>{verification_exceptions}</ul></section><section class='card'><h2>Canonical update summary</h2><p>Status: {canonical_status} · Enterprise Model updated: {canonical_changed} · Evidence IDs: {escape(str(len(canonical.get('evidence_ids') or [])))} · Observation IDs: {escape(str(len(canonical.get('observation_ids') or [])))} · Attributes updated: {escape(str(len(canonical.get('attributes_updated') or [])))}</p></section><section class='card'><h2>Run outcome</h2><p>Overall status: {escape(str(run.get('overall_status')))} · Completion class: {escape(str(run.get('completion_class')))} · Result URL: {escape(str(run.get('result_url')))} · Support reference: {escape(str(run.get('support_reference')))}</p><p>AI calls: {escape(str(cost.get('ai_call_count', 0)))} · Provider cost: {escape(str(cost.get('estimated_provider_cost_usd', 0)))} USD · Live source calls: {escape(str(cost.get('external_source_call_count', 0)))}</p></section>"""
+    if receipt and rapid.get('evidence_status') == 'official_source_retrieved':
+        rows = ''.join(
+            f"<tr><td>{escape(str(c.get('raw_metric_label') or c.get('proposed_canonical_metric_id')))}</td>"
+            f"<td>{escape(str(c.get('original_displayed_value') or c.get('raw_value_text')))}</td>"
+            f"<td>{escape(str(c.get('reported_amount')))} {escape(str(c.get('currency')))} {escape(str(c.get('reported_scale')))}</td>"
+            f"<td>Page {escape(str(c.get('source_page')))} · {escape(str(c.get('source_locator')))}</td>"
+            f"<td>{escape(str(c.get('verification_status') or 'candidate_unverified'))}</td></tr>"
+            for c in candidates
+        ) or '<tr><td colspan="5">No source-backed candidate facts were safely extracted.</td></tr>'
+        unresolved = {'revenue', 'operating_profit', 'profit_before_tax'} - {str(c.get('proposed_canonical_metric_id')) for c in candidates}
+        unresolved_html = f"<p>Unresolved metrics: {escape(', '.join(sorted(unresolved)))}</p>" if unresolved else ''
+        exception_items = ''.join(f"<li>{escape(str(e.get('metric_identity') or 'source'))}: {escape(str(e.get('category') or e.get('exception_type')))}</li>" for e in (rapid.get('exceptions') or [])) or '<li>No candidate exceptions recorded.</li>'
+        return f"""<section class='card warning'><h2>Official-source candidate facts</h2><p>These figures were extracted from an approved official document but have not yet completed structured verification or canonical acceptance.</p><p><strong>{escape(str(receipt.get('document_title')))}</strong> · Authority: {escape(str(receipt.get('authority')))} · Reporting period: {escape(str(receipt.get('reporting_period')))} · Source retrieval status: {escape(str(rapid.get('evidence_status')))}</p><table><thead><tr><th>Metric</th><th>Displayed value</th><th>Reported amount</th><th>Page/table citation</th><th>Verification</th></tr></thead><tbody>{rows}</tbody></table>{unresolved_html}<p>Canonical memory has not been updated. Evidence IDs: {escape(str(len(canonical.get('evidence_ids') or [])))} · Observation IDs: {escape(str(len(canonical.get('observation_ids') or [])))} · Enterprise Model updated: {canonical_changed}</p><ul>{exception_items}</ul></section><section class='card'><h2>Verification summary</h2><p>Status: {escape(str(verification.get('status') or 'not_started'))} · Facts verified: {escape(str(verification.get('facts_verified', 0)))}</p></section><section class='card'><h2>Canonical update summary</h2><p>Status: {canonical_status} · Enterprise Model updated: {canonical_changed}</p></section><section class='card'><h2>Run outcome</h2><p>Overall status: {escape(str(run.get('overall_status')))} · Completion class: {escape(str(run.get('completion_class')))} · Result URL: {escape(str(run.get('result_url')))} · Support reference: {escape(str(run.get('support_reference')))}</p><p>AI calls: {escape(str(cost.get('ai_call_count', 0)))} · Provider cost: {escape(str(cost.get('estimated_provider_cost_usd', 0)))} USD · Live source calls: {escape(str(cost.get('external_source_call_count', 0)))}</p></section>"""
+    if rapid.get('evidence_status') == 'official_source_unavailable':
+        exc = (rapid.get('exceptions') or [{}])[0]
+        return f"""<section class='card warning'><h2>Official source unavailable</h2><p>Flora could not retrieve an approved official financial document for this explicit dual-speed run.</p><p>Stage: {escape(str(exc.get('failure_stage') or receipt.get('failure_stage') or 'unknown'))} · Cause: {escape(str(exc.get('user_message') or receipt.get('safe_failure_message') or 'Source unavailable'))}</p><p>No fixture data or seeded values were used. Canonical memory has not been updated.</p></section>"""
+    rapid_result = escape(str(rapid.get('user_result') or 'No rapid outlook is available.'))
+    return f"""<section class='card warning'><h2>Fixture-only evidence warning</h2><p>This legacy dual-speed result uses seeded rapid fixture data for local orchestration proof only. It is not verified official evidence and has not updated canonical Evidence, Observations or the Enterprise Model.</p></section><section class='card'><h2>Rapid Financial Pressure and Transformation Outlook</h2><p>Rapid lane status: {escape(str(rapid.get('status')))} · Evidence status: {escape(str(rapid.get('evidence_status')))} · Candidate facts: {escape(str(rapid.get('candidate_fact_count', 0)))}</p><pre>{rapid_result}</pre></section>"""
 
 def _outcome_summary(run: dict[str, Any] | None) -> str:
     if not run: return ''
