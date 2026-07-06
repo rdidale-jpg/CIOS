@@ -20,6 +20,7 @@ from cios.applications.flora.live.views import acquisition_plans_page, collectio
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
+from cios.applications.flora.digital_twins import digital_twins_landing_page, bt_twin_page, search_bt_twin, bt_search_progress_page
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
 from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
@@ -81,6 +82,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(source_effectiveness_page())
             elif parsed.path == "/live/evidence":
                 self._html(evidence_page())
+            elif parsed.path == "/digital-twins":
+                self._html(digital_twins_landing_page())
+            elif parsed.path == "/digital-twins/bt-group-plc":
+                self._html(bt_twin_page((parse_qs(parsed.query).get("run_id") or [None])[0]))
+            elif parsed.path.startswith("/digital-twins/bt-group-plc/progress/"):
+                self._html(bt_search_progress_page(parsed.path.removeprefix("/digital-twins/bt-group-plc/progress/")))
             elif parsed.path == "/financial-intelligence":
                 self._html(financial_intelligence_page())
             elif parsed.path == "/financial-intelligence/admin/health":
@@ -136,7 +143,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         length = int(self.headers.get("Content-Length", "0"))
         raw_body = self.rfile.read(length)
         form = {} if "multipart/form-data" in self.headers.get("Content-Type", "") else parse_qs(raw_body.decode("utf-8"), keep_blank_values=True)
-        if self.path.startswith("/financial-intelligence/bt-group-plc/refresh"):
+        if self.path == "/digital-twins/bt-group-plc/search":
+            run = search_bt_twin()
+            self._redirect(f"/digital-twins/bt-group-plc/progress/{run['run_id']}")
+        elif self.path.startswith("/financial-intelligence/bt-group-plc/refresh"):
             requested_mode = (form.get("acquisition_mode") or form.get("extraction_mode") or [""])[0]
             mode = requested_mode or ("administrative_review" if "reprocess=1" in self.path else "structured_standard_financials")
             run = create_financial_intelligence_progress_run("bt-group-plc", extraction_mode=mode)
@@ -233,7 +243,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports":
+    if path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports":
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
