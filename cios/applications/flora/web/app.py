@@ -23,7 +23,7 @@ from cios.applications.flora.workspace.views import case_page, landing_page, log
 from cios.applications.flora.digital_twins import digital_twins_landing_page, bt_twin_page, search_bt_twin, bt_search_progress_page
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
-from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
+from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, financial_intelligence_safe_support_report_payload, load_run, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -100,6 +100,17 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(financial_intelligence_progress_page(parsed.path.removeprefix("/financial-intelligence/progress/")))
             elif parsed.path == "/financial-reports":
                 self._html(review_home_page())
+            elif parsed.path.startswith("/financial-intelligence/") and parsed.path.endswith("/support-report/download"):
+                run_id = parsed.path.removeprefix("/financial-intelligence/").removesuffix("/support-report/download")
+                try:
+                    run = load_run(run_id)
+                except FileNotFoundError:
+                    self.send_error(404, "Financial Intelligence run not found")
+                    return
+                if not _financial_run_authorised(self.headers, run):
+                    self.send_error(403, "Financial Intelligence run access denied")
+                    return
+                self._download_json(financial_intelligence_safe_support_report_payload(run_id), f"{run_id}-support-report.json")
             elif parsed.path.startswith("/financial-intelligence/") and parsed.path.endswith("/support-diagnostic/download"):
                 if not _support_authorised(self.headers):
                     self.send_error(403, "Support diagnostic access requires an authorised support user")
@@ -259,6 +270,29 @@ class FloraWebHandler(BaseHTTPRequestHandler):
     def log_message(self, format: str, *args: object) -> None:
         return
 
+
+
+def _cookie_value(headers, name: str) -> str:
+    for part in (headers.get("Cookie", "") or "").split(";"):
+        if "=" not in part:
+            continue
+        key, value = part.strip().split("=", 1)
+        if key == name:
+            return value
+    return ""
+
+def _financial_run_authorised(headers, run: dict) -> bool:
+    # The safe support report follows the normal product-session boundary, not
+    # the administrator support-token boundary. In this stdlib pilot web app the
+    # authenticated session is represented by the existing edge/session headers
+    # or cookies supplied by the hosting layer.
+    user = headers.get("X-Flora-User") or _cookie_value(headers, "flora_user")
+    if not user:
+        return False
+    enterprise_id = str(run.get("enterprise_id") or (run.get("document") or {}).get("enterprise_id") or "bt-group-plc")
+    allowed = headers.get("X-Flora-Enterprises") or _cookie_value(headers, "flora_enterprises")
+    allowed_set = {item.strip() for item in allowed.replace("|", ",").split(",") if item.strip()}
+    return "*" in allowed_set or enterprise_id in allowed_set
 
 def _support_authorised(headers) -> bool:
     expected = os.environ.get("FLORA_SUPPORT_TOKEN") or os.environ.get("FLORA_ADMIN_TOKEN")

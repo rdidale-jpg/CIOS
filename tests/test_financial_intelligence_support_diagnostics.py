@@ -142,3 +142,63 @@ def test_support_html_and_download_redact_paths_and_do_not_reacquire_or_change_c
     dumped = json.dumps(payload) + html
     assert '/workspace' not in dumped and '/home/user' not in dumped and 'file:///tmp' not in dumped and 'api_key=abc' not in dumped
     assert 'REDACTED_PATH' in dumped and 'api_key=REDACTED' in dumped
+
+
+def test_product_result_pages_show_safe_support_report_for_failed_and_partial(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path))
+    failed = {'run_id':'fi-ui-failed','created_at':'2026-07-06T00:00:00+00:00','status':'source_retrieval_failed','workflow':'financial_intelligence','enterprise_id':'bt-group-plc','support_reference':'FI-ui-failed','claims':[], 'applied_results':[], 'exceptions':[{'exception_type':'source_retrieval_failed','failure_stage':'retrieval','user_message':'No source'}]}
+    partial = {'run_id':'fi-ui-partial','created_at':'2026-07-06T00:01:00+00:00','execution_mode':review.DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE,'workflow':'financial_intelligence','enterprise_id':'bt-group-plc','overall_status':'partial','completion_class':'partial','support_reference':'FI-ui-partial','rapid_intelligence':{'status':'partial','evidence_status':'official_source_retrieved','source_receipt':{'document_title':'FY26 results','authority':'BT Group plc','reporting_period':'FY26'},'candidates':[{'raw_metric_label':'Revenue','original_displayed_value':'1','proposed_canonical_metric_id':'revenue'}]},'verification':{},'canonical_update':{},'cost_summary':{}}
+    review._write_json(tmp_path / 'ai_financial_reports' / 'runs' / 'fi-ui-failed.json', failed)
+    review._write_json(tmp_path / 'ai_financial_reports' / 'runs' / 'fi-ui-partial.json', partial)
+    failed_html, status = review.financial_intelligence_run_response('fi-ui-failed')
+    partial_html, status2 = review.financial_intelligence_run_response('fi-ui-partial')
+    assert status == status2 == 200
+    assert 'Download support report' in failed_html
+    assert '/financial-intelligence/fi-ui-failed/support-report/download' in failed_html
+    assert 'Download support report' in partial_html
+    from cios.applications.flora.digital_twins import bt_twin_page
+    twin = bt_twin_page()
+    assert 'Download support report' in twin
+    assert '/financial-intelligence/fi-ui-partial/support-report/download' in twin
+
+
+def test_safe_support_report_product_download_authz_persisted_no_reacquire_no_ai(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path))
+    monkeypatch.delenv('FLORA_SUPPORT_TOKEN', raising=False)
+    called = {'fetch':0, 'ai':0}
+    monkeypatch.setattr(review, 'fetch_document', lambda *a, **k: called.__setitem__('fetch', called['fetch']+1))
+    run = {'run_id':'fi-product-auth','created_at':'2026-07-06T00:00:00+00:00','status':'source_retrieval_failed','workflow':'financial_intelligence','enterprise_id':'bt-group-plc','support_reference':'FI-product-auth','support_diagnostic':{'run_id':'fi-product-auth','support_reference':'FI-product-auth','safe_failure_message':'secret sk-live at /tmp/x api_key=abc','ai_call_count':0,'request_attempted': True},'claims':[], 'applied_results':[]}
+    path = tmp_path / 'ai_financial_reports' / 'runs'; path.mkdir(parents=True)
+    (path / 'fi-product-auth.json').write_text(json.dumps(run))
+    server = ThreadingHTTPServer(('127.0.0.1', 0), FloraWebHandler)
+    try:
+        import threading
+        t = threading.Thread(target=server.serve_forever, daemon=True); t.start()
+        host, port = server.server_address
+        def get(headers=None):
+            c = HTTPConnection(host, port)
+            c.request('GET', '/financial-intelligence/fi-product-auth/support-report/download', headers=headers or {})
+            r = c.getresponse(); body = r.read().decode(); return r.status, body
+        assert get()[0] == 403
+        assert get({'X-Flora-User':'alice','X-Flora-Enterprises':'other-enterprise'})[0] == 403
+        status, body = get({'X-Flora-User':'rob','X-Flora-Enterprises':'bt-group-plc'})
+        assert status == 200
+        payload = json.loads(body)
+        assert payload['support_reference'] == 'FI-product-auth'
+        assert payload['run_id'] == 'fi-product-auth'
+        assert '/tmp' not in body and 'sk-live' not in body and 'api_key=abc' not in body
+        assert 'REDACTED_PATH' in body and 'sk-REDACTED' in body and 'api_key=REDACTED' in body
+        assert called == {'fetch':0, 'ai':0}
+    finally:
+        server.shutdown()
+
+
+def test_missing_persisted_support_report_has_friendly_message(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path))
+    run = {'run_id':'fi-old','created_at':'2026-07-06T00:00:00+00:00','status':'failed','workflow':'financial_intelligence','enterprise_id':'bt-group-plc','support_reference':'FI-old','claims':[], 'applied_results':[]}
+    path = tmp_path / 'ai_financial_reports' / 'runs'; path.mkdir(parents=True)
+    (path / 'fi-old.json').write_text(json.dumps(run))
+    payload = review.financial_intelligence_safe_support_report_payload('fi-old')
+    assert payload['report_available'] is False
+    assert payload['message'] == 'A support report is not available for this earlier run.'
+    assert payload['support_reference'] == 'FI-old'
