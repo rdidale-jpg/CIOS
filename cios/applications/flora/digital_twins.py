@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 from html import escape
+from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -18,6 +19,16 @@ from cios.applications.flora.workspace.views import _page
 BT_ID = 'bt-group-plc'
 BT_NAME = 'BT Group'
 PERIOD = 'FY26'
+
+
+def _human_date(value) -> str:
+    if not value:
+        return 'Not yet available.'
+    try:
+        dt = datetime.fromisoformat(str(value).replace('Z', '+00:00'))
+        return dt.strftime('%-d %B %Y, %H:%M UTC')
+    except Exception:
+        return str(value)
 
 
 def _runs() -> list[dict]:
@@ -48,19 +59,20 @@ def _manifest_available() -> bool:
 
 def digital_twins_landing_page() -> str:
     run = _latest_run(); candidates = _candidates(run)
-    latest_research = escape(str(run.get('created_at'))) if run else 'No recent source-backed research.'
+    latest_research = escape(_human_date(run.get('created_at'))) if run else 'No recent source-backed research.'
     count = f"<p>{len(candidates)} new candidate findings awaiting verification.</p>" if candidates else ''
     body = f"""<section class='hero'><h1>Digital Twins</h1><p class='muted'>Authenticated product area for durable Commercial Digital Twins.</p></section>
-    <section class='card action'><h2>{BT_NAME}</h2><p>Commercial Digital Twin</p><p>Latest trusted-model update: {escape(_trusted_update())}</p><p>Latest research date: {latest_research}</p>{count}<p><a href='/digital-twins/bt-group-plc'>Open Twin</a></p></section>"""
+    <section class='card action'><h2>{BT_NAME}</h2><p>Commercial Digital Twin</p><p>Latest trusted update: {escape(_trusted_update())}</p><p>Latest research date: {latest_research}</p>{count}<p><a href='/digital-twins/bt-group-plc'>Open Twin</a></p></section>"""
     return _page('Digital Twins', body)
 
 
 def bt_twin_page(highlight_run_id: str | None = None) -> str:
     run = _latest_run(); candidates = _candidates(run); model = EnterpriseModelRepository().get(BT_ID)
     state = _state_label(model, run, candidates)
+    latest_outcome = 'Three new findings; Verification pending; Trusted Twin unchanged.' if len(candidates) == 3 else ('No trustworthy information found; No findings to verify; Trusted Twin unchanged.' if run else 'Not yet available.')
     body = f"""<section class='hero'><h1>BT Group</h1><p>Commercial Digital Twin</p></section>
-    <section class='card'><h2>Twin summary</h2><ul><li>Enterprise: BT Group</li><li>Identifier: bt-group-plc</li><li>Current reporting period available for research: {PERIOD}</li><li>Latest trusted-model update: {escape(_trusted_update(model))}</li><li>Latest research date: {escape(str(run.get('created_at')) if run else 'No previous source-backed research.')}</li><li>Current state: {escape(state)}</li></ul></section>
-    <section class='card action'><h2>Search action</h2><p>Checks approved BT official reporting sources for new financial information.</p><p>Reporting period: {PERIOD}</p><form method='post' action='/digital-twins/bt-group-plc/search'><button>Search for new information</button></form>{'' if _manifest_available() else '<p class="muted">Approved source manifest is not currently available.</p>'}</section>
+    <section class='card'><h2>Twin summary</h2><dl><dt>Enterprise</dt><dd>BT Group</dd><dt>Current reporting period available for research</dt><dd>{PERIOD}</dd><dt>Latest trusted update</dt><dd>{escape(_trusted_update(model))}</dd><dt>Trusted Twin state</dt><dd>{escape(_trusted_state(model))}</dd><dt>Latest research</dt><dd>{escape(_human_date(run.get('created_at')) if run else 'Not yet available.')}</dd><dt>Latest research outcome</dt><dd>{escape(latest_outcome)}</dd></dl></section>
+    <section class='card action'><h2>Research BT</h2><p>Checks approved BT official reporting sources for new financial information.</p><p>Reporting period: {PERIOD}</p><form method='post' action='/digital-twins/bt-group-plc/search'><button>Search for new information</button></form>{'' if _manifest_available() else '<p class="muted">Approved source manifest is not currently available.</p>'}</section>
     {_trusted_section(model)}
     {_latest_findings(run, candidates, highlight_run_id)}
     {_history_section()}"""
@@ -79,8 +91,11 @@ def bt_search_progress_page(run_id: str) -> str:
 
 def _trusted_update(model=None) -> str:
     model = model or EnterpriseModelRepository().get(BT_ID)
-    return model.updated_at if model.attributes else 'No accepted financial facts yet.'
+    return _human_date(model.updated_at) if model.attributes else 'Not yet available.'
 
+
+def _trusted_state(model) -> str:
+    return 'Trusted financial facts available.' if any(k.startswith('financial_performance.') for k in model.attributes) else 'No accepted FY26 financial facts yet.'
 
 def _state_label(model, run, candidates) -> str:
     if candidates: return 'New findings awaiting verification.'
@@ -94,7 +109,7 @@ def _trusted_section(model) -> str:
     for k, a in sorted(model.attributes.items()):
         if k.startswith('financial_performance.'):
             rows.append(f"<tr><th>{escape(k)}</th><td>{escape(str(a.current_value))}</td><td>{escape(a.last_observed_date)}</td></tr>")
-    return "<section class='card'><h2>What the Twin knows</h2><h3>Trusted Twin knowledge</h3>" + ("<table><tbody>"+''.join(rows)+"</tbody></table>" if rows else "<p>No FY26 financial facts have completed verification and acceptance into the Commercial Digital Twin.</p>") + "</section>"
+    return "<section class='card'><h2>What the Twin knows</h2><h3>Trusted Twin knowledge</h3>" + ("<table><tbody>"+''.join(rows)+"</tbody></table>" if rows else "<p>No accepted FY26 financial facts yet.</p>") + "</section>"
 
 
 def _pretty_metric(c):
@@ -107,9 +122,12 @@ def _latest_findings(run, candidates, highlight_run_id=None) -> str:
     rapid = run.get('rapid_intelligence') or {}; status = rapid.get('status')
     if status == 'unavailable' and not candidates:
         support = escape(str(run.get('support_reference') or ''))
-        return f"<section class='card'><h2>No trustworthy new financial information found</h2><p>The official source could not be used, or no safe candidate facts could be identified.</p><p>No fixture or seeded information was substituted. The trusted Twin was unchanged.</p><p>Support reference: {support}</p><form method='post' action='/digital-twins/bt-group-plc/search'><button>Try again</button></form></section>"
+        receipt = rapid.get('source_receipt') or {}
+        parse_failed = receipt.get('failure_code') == 'rapid_source_parse_failed' or (receipt.get('failure_stage') == 'validation' and receipt.get('document_parse_result') == 'failed')
+        msg = 'Flora reached the approved BT financial report but could not read it safely.' if parse_failed else 'The approved official source was unavailable.'
+        return f"<section class='card'><h2>No trustworthy new financial information found</h2><p>{msg}</p><p>No financial findings were created. No fixture or seeded information was substituted, and the trusted Commercial Digital Twin was unchanged.</p><p>Support reference: {support}</p><form method='post' action='/digital-twins/bt-group-plc/search'><button>Try again</button></form></section>"
     heading = 'New financial findings' if status == 'ready' else 'Partial financial findings'
-    msg = 'Flora identified financial figures in an approved official BT document. They remain outside the trusted Twin until verification and canonical acceptance are complete.' if status == 'ready' else 'Flora found some usable information, but not every financial figure could be established safely.'
+    msg = 'Flora identified these figures in an approved official BT document. They remain outside the trusted Twin until verification and canonical acceptance are complete.' if status == 'ready' else 'Flora found some usable information, but not every financial figure could be established safely.'
     cards = ''.join(_finding_card(c, rapid.get('source_receipt') or {}) for c in candidates)
     unresolved = {'revenue','operating_profit','profit_before_tax'} - {str(c.get('proposed_canonical_metric_id')) for c in candidates}
     un = f"<p>Unresolved metrics: {escape(', '.join(sorted(unresolved)))}</p>" if unresolved else ''
@@ -137,5 +155,6 @@ def _history_section() -> str:
     for r in rs:
         rapid=r.get('rapid_intelligence') or {}; n=len(rapid.get('candidates') or [])
         outcome='Three new findings' if n==3 else ('Partial findings' if n else 'No trustworthy information found')
-        rows += f"<li>{escape(str(r.get('created_at')))} · {escape(str(r.get('reporting_period') or PERIOD))} · {outcome} · Verification pending · Trusted Twin unchanged · <a href='/financial-intelligence/{escape(str(r.get('run_id')))}'>Open result</a></li>"
+        verify = 'Verification pending' if n else 'No findings to verify'
+        rows += f"<li>{escape(_human_date(r.get('created_at')))} · {escape(str(r.get('reporting_period') or PERIOD))} · {outcome} · {verify} · Trusted Twin unchanged · <a href='/financial-intelligence/{escape(str(r.get('run_id')))}'>Open result</a></li>"
     return f"<section class='card'><h2>Research history</h2><ul>{rows}</ul></section>"
