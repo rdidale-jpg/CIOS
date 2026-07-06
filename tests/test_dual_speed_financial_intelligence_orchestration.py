@@ -2,6 +2,7 @@ import pytest
 
 from cios.applications.flora import document_review as review
 from cios.applications.flora.memory.repository import EvidenceRepository, EnterpriseModelRepository, ObservationRepository
+from tests.fixtures.rapid_financial import persisted_bt_fy26_seeded_rapid_result
 
 
 def _repo_snapshot():
@@ -18,6 +19,7 @@ def test_dual_speed_mode_persists_combined_standard_run_and_preserves_rapid_resu
     monkeypatch.setattr(review, 'fetch_document', lambda *a, **k: pytest.fail('dual-speed slice 1 must not retrieve live sources'))
     monkeypatch.setattr(review.OpenAIDirectPDFProvider, 'extract_facts', lambda *a, **k: pytest.fail('dual-speed slice 1 must not call OpenAI'))
     monkeypatch.setattr(review.SectionAwareOpenAIProvider, 'extract_packets', lambda *a, **k: pytest.fail('dual-speed slice 1 must not call OpenAI packets'))
+    monkeypatch.setattr(review, 'run_rapid_financial_intelligence', lambda enterprise_id='bt-group-plc', run_id=None, **kwargs: persisted_bt_fy26_seeded_rapid_result(run_id or 'fi-dual-speed'))
 
     before = _repo_snapshot()
     run = review.refresh_financial_intelligence(run_id='fi-dual-speed', extraction_mode='dual_speed_financial_intelligence')
@@ -47,6 +49,7 @@ def test_dual_speed_mode_persists_combined_standard_run_and_preserves_rapid_resu
 
 def test_dual_speed_progress_and_result_render_from_standard_run_only(monkeypatch, tmp_path):
     monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path))
+    monkeypatch.setattr(review, 'run_rapid_financial_intelligence', lambda enterprise_id='bt-group-plc', run_id=None, **kwargs: persisted_bt_fy26_seeded_rapid_result(run_id or 'fi-dual-render'))
     run = review.refresh_financial_intelligence(run_id='fi-dual-render', extraction_mode='dual_speed_financial_intelligence')
     legacy = tmp_path / 'ai_financial_reports' / 'rapid_runs' / 'fi-dual-render.json'
     assert legacy.exists()
