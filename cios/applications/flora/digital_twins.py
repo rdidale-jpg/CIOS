@@ -251,6 +251,29 @@ def _financial_tables(snapshot: dict, run_id: str) -> str:
         blocks.append(f"<details open><summary><strong>{escape(str(t.get('title') or t.get('table_id')))}</strong> · Page {escape(str(t.get('page') or ''))}</summary><table><thead><tr>{headers}</tr></thead><tbody>{rows}</tbody></table></details>")
     return f"<section class='card'><h2>Financial tables</h2><p><a href='/digital-twins/bt-group-plc/rapid-snapshot/{escape(run_id)}/financial-tables.csv'>Download financial tables as CSV</a></p>{''.join(blocks)}</section>"
 
+
+def _snapshot_counts(snapshot: dict) -> dict[str, int | bool]:
+    truth = snapshot.get('snapshot_truthfulness') or {}
+    if truth:
+        return truth
+    tables = ((snapshot.get('extraction_result') or {}).get('financial_tables') or snapshot.get('financial_tables') or [])
+    analysis = snapshot.get('report_analysis') or {}
+    rows = sum(len(t.get('rows') or []) for t in tables if isinstance(t, dict))
+    analysis_sections = sum(1 for v in analysis.values() if isinstance(v, list) and v)
+    rendered = int(bool(rows)) + analysis_sections + int(bool(snapshot.get('unstructured_ai_report')))
+    return {'usable_structured_sections': int(bool(rows)) + analysis_sections, 'financial_table_count': len(tables), 'financial_row_count': rows, 'analysis_section_count': analysis_sections, 'unstructured_fallback_available': bool(snapshot.get('unstructured_ai_report')), 'rendered_section_count': rendered}
+
+def _execution_summary(run: dict | None, snapshot: dict) -> str:
+    receipt = snapshot.get('provider_receipt') or {}
+    counts = _snapshot_counts(snapshot)
+    run_id = str((run or {}).get('run_id') or 'unknown')
+    rev = str((run or {}).get('deployed_revision') or 'unknown')
+    ai_sent = 'yes' if receipt.get('request_attempted') or ((snapshot.get('model_and_cost_record') or {}).get('ai_call_count')) else 'no'
+    ai_received = 'yes' if receipt.get('response_received') else 'no'
+    content = 'yes' if int(receipt.get('response_text_length') or receipt.get('raw_response_length') or 0) > 0 else 'no'
+    status = snapshot.get('user_status') or snapshot.get('status') or 'unknown'
+    return f"<section class='card'><h2>Execution summary</h2><p>Run ID: {escape(run_id)} · Deployed revision: {escape(rev)} · AI request sent: {ai_sent} · AI response received: {ai_received} · Response content received: {content} · Usable sections recovered: {escape(str(counts.get('usable_structured_sections', 0)))} · Final snapshot status: {escape(str(status))}</p></section>"
+
 def _rapid_snapshot_section(run: dict | None) -> str:
     snapshot = _snapshot(run)
     if not snapshot:
@@ -262,14 +285,14 @@ def _rapid_snapshot_section(run: dict | None) -> str:
         preflight = snapshot.get('provider_preflight') or {}
         failed = ', '.join(preflight.get('failed_checks') or [])
         detail = f" Provider boundary unavailable: {escape(failed)}." if failed else ''
-        return f"<section class='card' id='rapid-ai-twin-snapshot'><h2>Rapid AI Twin Snapshot</h2><p><strong>{escape(str(snapshot.get('user_status') or 'AI-built snapshot unavailable'))}</strong></p><p>{escape(str(snapshot.get('user_explanation') or 'AI Twin Snapshot is not available for this run.'))}{detail}</p><p>Trusted Commercial Digital Twin changed: no. Canonical writes: 0.</p></section>"
+        return _execution_summary(run, snapshot) + f"<section class='card' id='rapid-ai-twin-snapshot'><h2>Rapid AI Twin Snapshot</h2><p><strong>{escape(str(snapshot.get('user_status') or 'AI response unavailable'))}</strong></p><p class='muted'>AI-built snapshot unavailable</p><p>{escape(str(snapshot.get('user_explanation') or 'AI Twin Snapshot is not available for this run.'))}{detail}</p><p>Trusted Commercial Digital Twin changed: no. Canonical writes: 0.</p></section>"
     if snapshot.get('unstructured_ai_report'):
-        return f"<section class='card warning' id='rapid-ai-twin-snapshot'><h2>Rapid AI Twin Snapshot</h2><p><strong>{escape(str(snapshot.get('user_status') or 'Partial AI Twin Snapshot — report available'))}</strong></p><p>{escape(str(snapshot.get('user_explanation') or 'Provider report available; structured extraction is partial.'))}</p><p>Trusted Commercial Digital Twin changed: no. Canonical writes: 0.</p></section><section class='card'><h2>Executive view</h2><pre>{escape(str(snapshot.get('unstructured_ai_report')))}</pre></section>"
+        return _execution_summary(run, snapshot) + f"<section class='card warning' id='rapid-ai-twin-snapshot'><h2>Rapid AI Twin Snapshot</h2><p><strong>{escape(str(snapshot.get('user_status') or 'Partial AI Twin Snapshot — report available'))}</strong></p><p>{escape(str(snapshot.get('user_explanation') or 'Provider report available; structured extraction is partial.'))}</p><p>Trusted Commercial Digital Twin changed: no. Canonical writes: 0.</p></section><section class='card'><h2>Executive view</h2><pre>{escape(str(snapshot.get('unstructured_ai_report')))}</pre></section>"
     analysis = snapshot.get('report_analysis') or {}
     status = snapshot.get('user_status') or 'AI-built snapshot — verification pending'
     explanation = snapshot.get('user_explanation') or 'Flora reviewed the approved BT report and created this source-backed snapshot. It has not yet completed structured verification or canonical acceptance.'
     run_id = str((run or {}).get('run_id') or '')
-    return f"""<section class='card warning' id='rapid-ai-twin-snapshot'><h2>Rapid AI Twin Snapshot</h2><p><strong>{escape(status)}</strong></p><p>{escape(explanation)}</p><p>Trusted Commercial Digital Twin changed: no. Canonical writes: 0.</p></section>
+    return _execution_summary(run, snapshot) + f"""<section class='card warning' id='rapid-ai-twin-snapshot'><h2>Rapid AI Twin Snapshot</h2><p><strong>{escape(status)}</strong></p><p>{escape(explanation)}</p><p>Trusted Commercial Digital Twin changed: no. Canonical writes: 0.</p></section>
     {_list_section('Executive view', analysis.get('executive_summary') or [])}
     {_financial_tables(snapshot, run_id)}
     {_list_section('What changed', analysis.get('what_changed') or [])}
