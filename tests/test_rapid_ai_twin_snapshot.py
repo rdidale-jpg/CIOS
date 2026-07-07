@@ -112,6 +112,28 @@ def test_partial_snapshot_status_is_honest_in_digital_twin(tmp_path, monkeypatch
     assert 'AI-built snapshot — verification pending' not in html
 
 
+def test_provider_preflight_failure_renders_compact_unavailable_state(tmp_path, monkeypatch):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
+    monkeypatch.delenv('OPENAI_API_KEY', raising=False)
+    p=_pdf(tmp_path); acquired=AcquiredRapidSource(p,_receipt(p))
+    def acq(*a, **k):
+        class CM:
+            def __enter__(self): return acquired
+            def __exit__(self, *exc): return False
+        return CM()
+    run=review.coordinate_dual_speed_financial_intelligence_run(run_id='fi-ai-preflight', acquisition_boundary=acq)
+    snapshot=run['rapid_intelligence']['rapid_ai_twin_snapshot']
+    assert snapshot['status'] == 'unavailable'
+    assert snapshot['provider_preflight']['status'] == 'failed'
+    assert snapshot['provider_preflight']['failed_checks'] == ['credential_present']
+    assert snapshot['model_and_cost_record']['ai_call_count'] == 0
+    html=digital_twins.bt_twin_page('fi-ai-preflight')
+    assert 'AI-built snapshot unavailable' in html
+    assert 'Provider boundary unavailable: credential_present' in html
+    assert 'No source-backed items available yet' not in html
+    assert 'Rapid AI Twin Snapshot available' not in html
+
+
 def test_bt_click_render_prefers_requested_ai_run_and_ignores_structured_standard(tmp_path, monkeypatch):
     monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
     p=_pdf(tmp_path); acquired=AcquiredRapidSource(p,_receipt(p)); provider=MockProvider()

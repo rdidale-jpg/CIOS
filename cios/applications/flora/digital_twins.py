@@ -224,7 +224,7 @@ def _lineage(item) -> str:
     return ' · Lineage: ' + escape(', '.join(map(str, refs))) if refs else ''
 
 def _list_section(title: str, items, label: str | None = None) -> str:
-    if not items: return f"<section class='card'><h2>{escape(title)}</h2><p>No source-backed items available yet.</p></section>"
+    if not items: return ''
     lis = ''.join(f"<li>{('<strong>'+escape(label)+'</strong> ') if label else ''}{escape(_text_item(i))}{_lineage(i)}</li>" for i in items)
     return f"<section class='card'><h2>{escape(title)}</h2><ul>{lis}</ul></section>"
 
@@ -247,6 +247,11 @@ def _rapid_snapshot_section(run: dict | None) -> str:
         if status in {"queued", "running", "retrieving_source", "analysing", "validating"}:
             return "<section class='card' id='rapid-ai-twin-snapshot'><h2>Rapid AI Twin Snapshot</h2><p>Flora is reviewing the approved BT report.</p></section>"
         return "<section class='card' id='rapid-ai-twin-snapshot'><h2>Rapid AI Twin Snapshot</h2><p>AI Twin Snapshot is not available for this run.</p></section>"
+    if snapshot.get('status') == 'unavailable':
+        preflight = snapshot.get('provider_preflight') or {}
+        failed = ', '.join(preflight.get('failed_checks') or [])
+        detail = f" Provider boundary unavailable: {escape(failed)}." if failed else ''
+        return f"<section class='card' id='rapid-ai-twin-snapshot'><h2>Rapid AI Twin Snapshot</h2><p><strong>{escape(str(snapshot.get('user_status') or 'AI-built snapshot unavailable'))}</strong></p><p>{escape(str(snapshot.get('user_explanation') or 'AI Twin Snapshot is not available for this run.'))}{detail}</p><p>Trusted Commercial Digital Twin changed: no. Canonical writes: 0.</p></section>"
     analysis = snapshot.get('report_analysis') or {}
     status = snapshot.get('user_status') or 'AI-built snapshot — verification pending'
     explanation = snapshot.get('user_explanation') or 'Flora reviewed the approved BT report and created this source-backed snapshot. It has not yet completed structured verification or canonical acceptance.'
