@@ -10,6 +10,10 @@ services:
         value: 0.0.0.0
       - key: FLORA_DATA_DIR
         value: /var/data/flora
+      - key: FLORA_RAPID_AI_TWIN_ENABLED
+        value: "true"
+      - key: OPENAI_API_KEY
+        sync: false
     disk:
       name: flora-pilot-memory
       mountPath: /var/data/flora

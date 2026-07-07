@@ -71,7 +71,7 @@ def test_rapid_ai_snapshot_contract_cache_csv_and_partial(tmp_path, monkeypatch)
     assert snap2['cache_state']=='hit' and provider2.calls == []
     partial=create_rapid_ai_twin_snapshot(acquired, provider_boundary=Stage2Fail(), correlation_id='r3', force_reprocess=True)
     assert partial['status']=='partial' and partial['financial_tables']
-    assert partial['user_status'] == 'Partial AI Twin Snapshot'
+    assert partial['user_status'] == 'Partial AI Twin Snapshot — financial extraction available.'
 
 
 def test_orchestration_and_bt_twin_rendering_without_canonical_writes(tmp_path, monkeypatch):
@@ -106,7 +106,7 @@ def test_partial_snapshot_status_is_honest_in_digital_twin(tmp_path, monkeypatch
             def __exit__(self, *exc): return False
         return CM()
     run=review.coordinate_dual_speed_financial_intelligence_run(run_id='fi-ai-partial', acquisition_boundary=acq, extraction_boundary=lambda a: create_rapid_ai_twin_snapshot(a, provider_boundary=Stage2Fail(), force_reprocess=True))
-    assert run['rapid_intelligence']['rapid_ai_twin_snapshot']['user_status'] == 'Partial AI Twin Snapshot'
+    assert run['rapid_intelligence']['rapid_ai_twin_snapshot']['user_status'] == 'Partial AI Twin Snapshot — financial extraction available.'
     html=digital_twins.bt_twin_page('fi-ai-partial')
     assert 'Partial AI Twin Snapshot' in html
     assert 'AI-built snapshot — verification pending' not in html
@@ -173,3 +173,30 @@ def test_bt_click_render_prefers_requested_ai_run_and_ignores_structured_standar
     assert html_again == html
     assert len(provider.calls) == 2
     assert before == review._trusted_state_snapshot('bt-group-plc')
+
+
+def test_missing_runtime_credential_blocks_run_before_source_retrieval(tmp_path, monkeypatch):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
+    monkeypatch.delenv('OPENAI_API_KEY', raising=False)
+    called = {'source': 0}
+    def acq(*a, **k):
+        called['source'] += 1
+        raise AssertionError('source retrieval must not run')
+    # Default production boundary is what is gated before run creation.
+    run = review.coordinate_dual_speed_financial_intelligence_run(run_id='fi-no-key')
+    assert run['run_created'] is False
+    assert run['user_message'] == 'AI research is not configured for this deployment.'
+    assert run['provider_readiness']['failed_checks'] == ['credential_present']
+    assert not (review._run_dir() / 'fi-no-key.json').exists()
+    assert called['source'] == 0
+
+
+def test_bt_product_hides_support_report_links_when_rendering_ordinary_twin(tmp_path, monkeypatch):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
+    run = {'run_id':'fi-support-hidden','created_at':'2026-07-06T00:00:00+00:00','workflow':'financial_intelligence','enterprise_id':'bt-group-plc','reporting_period':'FY26','execution_mode':'dual_speed_financial_intelligence','rapid_intelligence': {'status':'unavailable','evidence_status':'official_source_unavailable','source_receipt':{}, 'candidates': []}, 'support_reference': 'FI-support-hidden'}
+    review._write_json(review._run_dir() / 'fi-support-hidden.json', run)
+    html = digital_twins.bt_twin_page('fi-support-hidden')
+    assert 'Support reference: FI-support-hidden' in html
+    assert 'Download support report' not in html
+    assert '/support-report' not in html

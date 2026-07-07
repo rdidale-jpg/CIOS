@@ -202,7 +202,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         form = {} if "multipart/form-data" in self.headers.get("Content-Type", "") else parse_qs(raw_body.decode("utf-8"), keep_blank_values=True)
         if self.path == "/digital-twins/bt-group-plc/search":
             run = search_bt_twin()
-            self._redirect(f"/digital-twins/bt-group-plc/progress/{run['run_id']}")
+            if run.get('run_id'):
+                self._redirect(f"/digital-twins/bt-group-plc/progress/{run['run_id']}")
+            else:
+                self._redirect("/digital-twins/bt-group-plc")
         elif self.path.startswith("/financial-intelligence/bt-group-plc/refresh"):
             requested_mode = (form.get("acquisition_mode") or form.get("extraction_mode") or [""])[0]
             mode = requested_mode or ("administrative_review" if "reprocess=1" in self.path else "structured_standard_financials")

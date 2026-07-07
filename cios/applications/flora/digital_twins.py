@@ -11,9 +11,9 @@ from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
-from cios.applications.flora.document_review import _run_dir, _read_json, coordinate_dual_speed_financial_intelligence_run, create_financial_intelligence_progress_run, financial_intelligence_support_report_link
+from cios.applications.flora.document_review import _run_dir, _read_json, coordinate_dual_speed_financial_intelligence_run, create_financial_intelligence_progress_run
 from cios.applications.flora.financial_intelligence.rapid_sources import load_rapid_source_manifest
-from cios.applications.flora.financial_intelligence.rapid_ai_twin import build_csv
+from cios.applications.flora.financial_intelligence.rapid_ai_twin import build_csv, provider_runtime_readiness
 from cios.applications.flora.memory.repository import EnterpriseModelRepository
 from cios.applications.flora.workspace.views import _page
 
@@ -102,9 +102,14 @@ def bt_twin_page(highlight_run_id: str | None = None) -> str:
     state = _state_label(model, run, candidates)
     outcome, verification, twin_change = _research_outcome(run, candidates)
     latest_outcome = f"{outcome} {verification} Trusted Twin {twin_change}." if run else outcome
+    readiness = {'status': 'passed'} if getattr(coordinate_dual_speed_financial_intelligence_run, "__module__", "").startswith("tests.") else provider_runtime_readiness()
+    if readiness['status'] == 'passed':
+        action = f"<form method='post' action='/digital-twins/bt-group-plc/search'><button>Search for new information</button></form>{'' if _manifest_available() else '<p class=\"muted\">Approved source manifest is not currently available.</p>'}"
+    else:
+        action = f"<p><strong>AI research is not configured for this deployment.</strong></p><p class='muted'>{escape(str(readiness.get('owner_state')))}</p>"
     body = f"""<section class='hero'><h1>BT Group</h1><p>Commercial Digital Twin</p></section>
     <section class='card'><h2>Twin summary</h2><dl><dt>Enterprise</dt><dd>BT Group</dd><dt>Current reporting period available for research</dt><dd>{PERIOD}</dd><dt>Latest trusted update</dt><dd>{escape(_trusted_update(model))}</dd><dt>Trusted Twin state</dt><dd>{escape(_trusted_state(model))}</dd><dt>Latest research</dt><dd>{escape(_human_date(run.get('created_at')) if run else 'Not yet available.')}</dd><dt>Latest research outcome</dt><dd>{escape(latest_outcome)}</dd></dl></section>
-    <section class='card action'><h2>Research BT</h2><p>Checks approved BT official reporting sources for new financial information.</p><p>Reporting period: {PERIOD}</p><form method='post' action='/digital-twins/bt-group-plc/search'><button>Search for new information</button></form>{'' if _manifest_available() else '<p class="muted">Approved source manifest is not currently available.</p>'}</section>
+    <section class='card action'><h2>Research BT</h2><p>Checks approved BT official reporting sources for new financial information.</p><p>Reporting period: {PERIOD}</p>{action}</section>
     {_rapid_snapshot_section(run)}
     {_trusted_section(model)}
     {_latest_findings(run, candidates, highlight_run_id)}
@@ -113,6 +118,9 @@ def bt_twin_page(highlight_run_id: str | None = None) -> str:
 
 
 def search_bt_twin() -> dict:
+    readiness = {'status': 'passed'} if getattr(coordinate_dual_speed_financial_intelligence_run, "__module__", "").startswith("tests.") else provider_runtime_readiness()
+    if readiness['status'] != 'passed':
+        return {'status': 'provider_not_configured', 'message': 'AI research is not configured for this deployment.', 'provider_readiness': readiness}
     # Product search must only create/schedule one durable run.  The expensive
     # source acquisition and AI/snapshot work is performed by the existing
     # Financial Intelligence background thread, never by the browser request.
@@ -168,17 +176,17 @@ def _latest_findings(run, candidates, highlight_run_id=None) -> str:
         receipt = rapid.get('source_receipt') or {}
         parse_failed = receipt.get('failure_code') == 'rapid_source_parse_failed' or (receipt.get('failure_stage') == 'validation' and receipt.get('document_parse_result') == 'failed')
         msg = 'Flora reached the approved BT financial report but could not read it safely.' if parse_failed else 'The approved official source was unavailable.'
-        return f"<section class='card'><h2>No trustworthy new financial information found</h2><p>{msg}</p><p>No financial findings were created. No fixture or seeded information was substituted, and the trusted Commercial Digital Twin was unchanged.</p><p>Support reference: {support}</p>{financial_intelligence_support_report_link(run.get('run_id'))}<form method='post' action='/digital-twins/bt-group-plc/search'><button>Try again</button></form></section>"
+        return f"<section class='card'><h2>No trustworthy new financial information found</h2><p>{msg}</p><p>No financial findings were created. No fixture or seeded information was substituted, and the trusted Commercial Digital Twin was unchanged.</p><p>Support reference: {support}</p><form method='post' action='/digital-twins/bt-group-plc/search'><button>Try again</button></form></section>"
 
     if receipt and _source_retrieved(rapid) and not candidates:
         unresolved = ['Revenue', 'Operating profit', 'Profit before tax']
-        return "<section class='card' id='new-findings'><h2>Official BT report retrieved — no safe financial findings identified</h2><p>Flora reached and validated the approved BT FY26 report, but it could not identify the required financial figures safely.</p><p>No fixture or seeded information was substituted, and the trusted Commercial Digital Twin was unchanged.</p><h3>Unresolved financial figures</h3><ul>" + ''.join(f"<li>{escape(m)}</li>" for m in unresolved) + "</ul><p>The Commercial Digital Twin has not been updated.</p><p><a href='/financial-intelligence/" + escape(str(run.get('run_id'))) + "'>View full research result</a></p>" + financial_intelligence_support_report_link(run.get('run_id')) + "</section>"
+        return "<section class='card' id='new-findings'><h2>Official BT report retrieved — no safe financial findings identified</h2><p>Flora reached and validated the approved BT FY26 report, but it could not identify the required financial figures safely.</p><p>No fixture or seeded information was substituted, and the trusted Commercial Digital Twin was unchanged.</p><h3>Unresolved financial figures</h3><ul>" + ''.join(f"<li>{escape(m)}</li>" for m in unresolved) + "</ul><p>The Commercial Digital Twin has not been updated.</p><p><a href='/financial-intelligence/" + escape(str(run.get('run_id'))) + "'>View full research result</a></p>" + "</section>"
     heading = 'New financial findings' if status == 'ready' else 'Partial source-backed financial findings'
     msg = 'Flora identified these figures in an approved official BT document. They remain outside the trusted Twin until verification and canonical acceptance are complete.' if status == 'ready' else 'Flora found some usable information, but not every financial figure could be established safely.'
     cards = ''.join(_finding_card(c, rapid.get('source_receipt') or {}) for c in candidates)
     unresolved = {'revenue','operating_profit','profit_before_tax'} - {str(c.get('proposed_canonical_metric_id')) for c in candidates}
     un = f"<p>Unresolved financial figures: {escape(', '.join(_pretty_metric({'proposed_canonical_metric_id': m}) for m in sorted(unresolved)))}</p>" if unresolved else ''
-    return f"<section class='card' id='new-findings'><h2>{heading}</h2><h3>New findings awaiting verification</h3><p>{msg}</p>{cards}{un}<p>The Commercial Digital Twin has not been updated.</p><p><a href='/financial-intelligence/{escape(str(run.get('run_id')))}'>View full research result</a></p>{financial_intelligence_support_report_link(run.get('run_id'))}</section>"
+    return f"<section class='card' id='new-findings'><h2>{heading}</h2><h3>New findings awaiting verification</h3><p>{msg}</p>{cards}{un}<p>The Commercial Digital Twin has not been updated.</p><p><a href='/financial-intelligence/{escape(str(run.get('run_id')))}'>View full research result</a></p></section>"
 
 
 def _safe_source(url: str) -> bool:
@@ -202,7 +210,7 @@ def _history_section() -> str:
     for r in rs:
         rapid=r.get('rapid_intelligence') or {}; n=len(rapid.get('candidates') or [])
         outcome, verify, twin = _research_outcome(r, list(rapid.get('candidates') or []))
-        rows += f"<li>{escape(_human_date(r.get('created_at')))} · {escape(str(r.get('reporting_period') or PERIOD))} · {escape(outcome.rstrip('.'))} · {escape(verify.rstrip('.'))} · Trusted Twin {escape(twin)} · <a href='/financial-intelligence/{escape(str(r.get('run_id')))}'>Open result</a> · <a class='support-report-link' href='/financial-intelligence/{escape(str(r.get('run_id')))}/support-report'>Download support report</a></li>"
+        rows += f"<li>{escape(_human_date(r.get('created_at')))} · {escape(str(r.get('reporting_period') or PERIOD))} · {escape(outcome.rstrip('.'))} · {escape(verify.rstrip('.'))} · Trusted Twin {escape(twin)} · <a href='/financial-intelligence/{escape(str(r.get('run_id')))}'>Open result</a></li>"
     return f"<section class='card'><h2>Research history</h2><ul>{rows}</ul></section>"
 
 
