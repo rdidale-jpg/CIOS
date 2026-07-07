@@ -322,6 +322,34 @@ def _raw_text(value: Any) -> str:
     except Exception:
         return str(value)
 
+def _response_text_candidates(value: Any) -> list[str]:
+    """Return likely provider-visible text bodies without exposing secrets.
+
+    OpenAI SDK objects and test doubles do not always expose `output_text` in
+    the same place.  The previous pilot path treated a raw response dictionary
+    itself as the candidate JSON object, which could hide useful JSON nested in
+    `output_text` or `output[].content[].text`.
+    """
+    candidates: list[str] = []
+    def add(v: Any) -> None:
+        if isinstance(v, str) and v.strip():
+            candidates.append(v)
+    if isinstance(value, str):
+        add(value); return candidates
+    if isinstance(value, dict):
+        for key in ('output_text', 'text', 'content'):
+            add(value.get(key))
+        for item in value.get('output') or []:
+            if isinstance(item, dict):
+                for content in item.get('content') or []:
+                    if isinstance(content, dict):
+                        add(content.get('text') or content.get('output_text'))
+        if not candidates:
+            add(_raw_text(value))
+        return candidates
+    add(getattr(value, 'output_text', None))
+    return candidates or [_raw_text(value)]
+
 def _persist_provider_response(correlation_id: str, call: dict[str, Any], raw_response: Any, started: float) -> dict[str, Any]:
     raw = _raw_text(raw_response if raw_response is not None else call.get('raw_response') or call.get('raw_body') or call.get('output_text') or '')
     bounded = raw[:MAX_RAW_RESPONSE_BYTES]
@@ -384,11 +412,21 @@ def _extract_json_object(text: str) -> dict[str, Any] | None:
 def _recover_payload(result: ProviderStageResult) -> tuple[dict[str, Any] | None, str | None]:
     if isinstance(result.payload, dict) and result.payload:
         return result.payload, None
-    text = _raw_text(result.raw_response or result.call_record.get('raw_response') or result.call_record.get('raw_body') or result.call_record.get('output_text'))
-    parsed = _extract_json_object(text)
-    if parsed:
-        return parsed, None
-    return None, text.strip() or None
+    raw_value = result.raw_response or result.call_record.get('raw_response') or result.call_record.get('raw_body') or result.call_record.get('output_text')
+    first_text: str | None = None
+    for text in _response_text_candidates(raw_value):
+        first_text = first_text or text.strip()
+        parsed = _extract_json_object(text)
+        if parsed:
+            # If the parsed object is the provider envelope, recurse into common
+            # body fields rather than accepting an empty wrapper as the result.
+            if not any(k in parsed for k in ('document_identity', 'financial_tables', 'executive_summary', 'signals', 'hypotheses')):
+                for nested in _response_text_candidates(parsed):
+                    nested_parsed = _extract_json_object(nested)
+                    if nested_parsed and any(k in nested_parsed for k in ('document_identity', 'financial_tables', 'executive_summary', 'signals', 'hypotheses')):
+                        return nested_parsed, None
+            return parsed, None
+    return None, first_text or None
 
 def _split_one_call_payload(payload: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     extraction_keys = {'document_identity','financial_tables','reported_facts','management_commitments','strategic_priorities','transformation_programmes','risks_and_pressures','technology_digital_ai','leadership_and_governance','customer_market_and_regulation','unknowns','extraction_coverage','citation_index'}
@@ -404,6 +442,8 @@ def _split_one_call_payload(payload: dict[str, Any]) -> tuple[dict[str, Any], di
     for src, dst in synthesis_map.items():
         if src in payload and dst not in synthesis:
             synthesis[dst] = payload.get(src)
+    if 'executive_summary' in payload and 'executive_summary' not in synthesis:
+        synthesis['executive_summary'] = payload.get('executive_summary')
     if 'commercial_themes' in payload:
         synthesis['commercial_themes'] = payload.get('commercial_themes')
     return extraction, synthesis
