@@ -238,13 +238,13 @@ def _list_section(title: str, items, label: str | None = None) -> str:
 
 def _financial_tables(snapshot: dict, run_id: str) -> str:
     tables = ((snapshot.get('extraction_result') or {}).get('financial_tables') or [])
-    if not tables: return "<section class='card'><h2>Financial tables</h2><p>No financial tables are available in the rapid snapshot.</p></section>"
+    if not tables: return ""
     blocks=[]
     for t in tables:
         headers = ''.join(f"<th>{escape(str(h))}</th>" for h in (t.get('column_headings') or ['Metric','Current','Comparator','Source']))
         rows=''
         for r in t.get('rows') or []:
-            rows += f"<tr><td>{escape(str(r.get('reported_label')))}</td><td>{escape(str(r.get('current_period_display_value')))}</td><td>{escape(str(r.get('comparator_display_value') or r.get('comparator_display_values') or ''))}</td><td><details><summary>View source</summary><p>Page {escape(str(r.get('source_page')))} · {escape(str(t.get('section') or r.get('section') or ''))}</p><p>{escape(str(r.get('supporting_excerpt') or ''))}</p><p>Status: {escape(str(r.get('ambiguity') or 'Verification pending'))}</p></details></td></tr>"
+            rows += f"<tr><td>{escape(str(r.get('reported_label')))}</td><td>{escape(str(r.get('current_period_display_value') or r.get('fy26_displayed_value') or ''))}</td><td>{escape(str(r.get('comparator_display_value') or r.get('comparator_display_values') or ''))}</td><td><details><summary>View source details</summary><p>Page {escape(str(r.get('source_page')))} · {escape(str(t.get('section') or r.get('section') or ''))}</p><p>{escape(str(r.get('supporting_excerpt') or ''))}</p><p>Status: {escape(str(r.get('ambiguity') or 'Verification pending'))}</p></details></td></tr>"
         blocks.append(f"<details open><summary><strong>{escape(str(t.get('title') or t.get('table_id')))}</strong> · Page {escape(str(t.get('page') or ''))}</summary><table><thead><tr>{headers}</tr></thead><tbody>{rows}</tbody></table></details>")
     return f"<section class='card'><h2>Financial tables</h2><p><a href='/digital-twins/bt-group-plc/rapid-snapshot/{escape(run_id)}/financial-tables.csv'>Download financial tables as CSV</a></p>{''.join(blocks)}</section>"
 
@@ -260,6 +260,8 @@ def _rapid_snapshot_section(run: dict | None) -> str:
         failed = ', '.join(preflight.get('failed_checks') or [])
         detail = f" Provider boundary unavailable: {escape(failed)}." if failed else ''
         return f"<section class='card' id='rapid-ai-twin-snapshot'><h2>Rapid AI Twin Snapshot</h2><p><strong>{escape(str(snapshot.get('user_status') or 'AI-built snapshot unavailable'))}</strong></p><p>{escape(str(snapshot.get('user_explanation') or 'AI Twin Snapshot is not available for this run.'))}{detail}</p><p>Trusted Commercial Digital Twin changed: no. Canonical writes: 0.</p></section>"
+    if snapshot.get('unstructured_ai_report'):
+        return f"<section class='card warning' id='rapid-ai-twin-snapshot'><h2>Rapid AI Twin Snapshot</h2><p><strong>{escape(str(snapshot.get('user_status') or 'Partial AI Twin Snapshot — report available'))}</strong></p><p>{escape(str(snapshot.get('user_explanation') or 'Provider report available; structured extraction is partial.'))}</p><p>Trusted Commercial Digital Twin changed: no. Canonical writes: 0.</p></section><section class='card'><h2>Executive view</h2><pre>{escape(str(snapshot.get('unstructured_ai_report')))}</pre></section>"
     analysis = snapshot.get('report_analysis') or {}
     status = snapshot.get('user_status') or 'AI-built snapshot — verification pending'
     explanation = snapshot.get('user_explanation') or 'Flora reviewed the approved BT report and created this source-backed snapshot. It has not yet completed structured verification or canonical acceptance.'
