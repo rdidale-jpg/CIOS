@@ -36,7 +36,7 @@ def _is_bt_twin_research_run(run: dict) -> bool:
     if run.get('enterprise_id', BT_ID) != BT_ID or run.get('workflow') != 'financial_intelligence':
         return False
     mode = run.get('execution_mode') or run.get('extraction_mode')
-    return mode in {None, 'dual_speed_financial_intelligence'}
+    return mode != 'structured_standard_financials'
 
 
 def _runs() -> list[dict]:
@@ -132,6 +132,9 @@ def search_bt_twin() -> dict:
     return create_financial_intelligence_progress_run(
         BT_ID,
         extraction_mode="dual_speed_financial_intelligence",
+        reporting_period=PERIOD,
+        product_surface="bt_digital_twin",
+        ordinary_research=True,
     )
 
 

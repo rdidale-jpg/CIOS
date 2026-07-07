@@ -208,9 +208,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._redirect("/digital-twins/bt-group-plc")
         elif self.path.startswith("/financial-intelligence/bt-group-plc/refresh"):
             requested_mode = (form.get("acquisition_mode") or form.get("extraction_mode") or [""])[0]
-            mode = requested_mode or ("administrative_review" if "reprocess=1" in self.path else "structured_standard_financials")
-            run = create_financial_intelligence_progress_run("bt-group-plc", extraction_mode=mode)
-            self._redirect(f"/financial-intelligence/progress/{run['run_id']}")
+            run = create_financial_intelligence_progress_run("bt-group-plc", extraction_mode=requested_mode, product_surface="legacy_refresh", ordinary_research=True)
+            self._redirect(f"/digital-twins/bt-group-plc/progress/{run['run_id']}")
         elif self.path == "/ai-financial-report/upload":
             fields, files = _parse_multipart(self.headers, raw_body)
             pdf = files.get("pdf")
