@@ -20,7 +20,7 @@ from cios.applications.flora.live.views import acquisition_plans_page, collectio
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
-from cios.applications.flora.digital_twins import digital_twins_landing_page, bt_twin_page, search_bt_twin, bt_search_progress_page
+from cios.applications.flora.digital_twins import digital_twins_landing_page, bt_twin_page, search_bt_twin, bt_search_progress_page, rapid_snapshot_csv
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
 from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, financial_intelligence_safe_support_report_payload, load_run, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
@@ -115,10 +115,16 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 except FileNotFoundError:
                     self.send_error(404, "Financial Intelligence run not found")
                     return
+                except Exception as exc:
+                    self._html(_safe_financial_route_failure_page(run_id, exc), status=200)
+                    return
                 if not (_support_authorised(self.headers) or can_view_financial_intelligence_run(self.headers, run)):
                     self.send_error(403, "Financial Intelligence run access denied")
                     return
-                self._download_json(financial_intelligence_safe_support_report_payload(run_id), f"{run_id}-support-report.json")
+                try:
+                    self._download_json(financial_intelligence_safe_support_report_payload(run_id), f"{run_id}-support-report.json")
+                except Exception as exc:
+                    self._html(_safe_financial_route_failure_page(run_id, exc), status=200)
             elif parsed.path.startswith("/financial-intelligence/") and parsed.path.endswith("/support-diagnostic/download"):
                 if not _support_authorised(self.headers):
                     self.send_error(403, "Support diagnostic access requires an authorised support user")
@@ -138,10 +144,16 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                     html, status = financial_intelligence_run_response(run_id, show_support_control=False)
                     self._html(html, status=status)
                     return
+                except Exception as exc:
+                    self._html(_safe_financial_route_failure_page(run_id, exc), status=200)
+                    return
                 if not (_support_authorised(self.headers) or can_view_financial_intelligence_run(self.headers, run)):
                     self.send_error(403, "Financial Intelligence run access denied")
                     return
-                html, status = financial_intelligence_run_response(run_id, show_support_control=True)
+                try:
+                    html, status = financial_intelligence_run_response(run_id, show_support_control=True)
+                except Exception as exc:
+                    html, status = _safe_financial_route_failure_page(run_id, exc), 200
                 self._html(html, status=status)
             elif parsed.path == "/ai-financial-report":
                 self._html(review_home_page())
@@ -178,6 +190,11 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self.send_error(404, "Flora web route not found")
         except ValueError as exc:
             self.send_error(404, str(exc))
+        except Exception as exc:
+            if parsed.path.startswith("/financial-intelligence/") or parsed.path.startswith("/digital-twins/bt-group-plc"):
+                self._html(_safe_financial_route_failure_page(parsed.path, exc), status=200)
+                return
+            raise
 
     def do_POST(self) -> None:  # noqa: N802 - stdlib callback name
         length = int(self.headers.get("Content-Length", "0"))
@@ -296,6 +313,19 @@ def _is_support_report_path(path: str) -> bool:
 def _support_report_run_id(path: str) -> str:
     suffix = "/support-report/download" if path.endswith("/support-report/download") else "/support-report"
     return path.removeprefix("/financial-intelligence/").removesuffix(suffix)
+
+
+def _safe_financial_route_failure_page(run_id: str, exc: Exception) -> str:
+    from cios.applications.flora.workspace.views import _page
+    safe_id = str(run_id).replace("<", "").replace(">", "")[:120]
+    body = (
+        "<section class='hero'><h1>Financial Intelligence result unavailable</h1>"
+        "<p>Flora could not render this persisted Financial Intelligence state safely.</p>"
+        f"<p>Support reference: {safe_id}</p>"
+        f"<p>Business stage: result rendering. Error class: {type(exc).__name__}</p>"
+        "</section>"
+    )
+    return _page("Financial Intelligence safe failure", body)
 
 
 def _support_authorised(headers) -> bool:

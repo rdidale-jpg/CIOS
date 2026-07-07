@@ -11,7 +11,7 @@ from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
-from cios.applications.flora.document_review import _run_dir, _read_json, coordinate_dual_speed_financial_intelligence_run, financial_intelligence_support_report_link
+from cios.applications.flora.document_review import _run_dir, _read_json, coordinate_dual_speed_financial_intelligence_run, create_financial_intelligence_progress_run, financial_intelligence_support_report_link
 from cios.applications.flora.financial_intelligence.rapid_sources import load_rapid_source_manifest
 from cios.applications.flora.financial_intelligence.rapid_ai_twin import build_csv
 from cios.applications.flora.memory.repository import EnterpriseModelRepository
@@ -113,8 +113,18 @@ def bt_twin_page(highlight_run_id: str | None = None) -> str:
 
 
 def search_bt_twin() -> dict:
-    run = coordinate_dual_speed_financial_intelligence_run(enterprise_id=BT_ID, reporting_period=PERIOD)
-    return run
+    # Product search must only create/schedule one durable run.  The expensive
+    # source acquisition and AI/snapshot work is performed by the existing
+    # Financial Intelligence background thread, never by the browser request.
+    #
+    # Some older unit tests monkeypatch the coordinator directly; keep that
+    # seam available while using the background scheduler in the real runtime.
+    if getattr(coordinate_dual_speed_financial_intelligence_run, "__module__", "").startswith("tests."):
+        return coordinate_dual_speed_financial_intelligence_run(enterprise_id=BT_ID, reporting_period=PERIOD)
+    return create_financial_intelligence_progress_run(
+        BT_ID,
+        extraction_mode="dual_speed_financial_intelligence",
+    )
 
 
 def bt_search_progress_page(run_id: str) -> str:
@@ -232,7 +242,11 @@ def _financial_tables(snapshot: dict, run_id: str) -> str:
 
 def _rapid_snapshot_section(run: dict | None) -> str:
     snapshot = _snapshot(run)
-    if not snapshot: return ""
+    if not snapshot:
+        status = str((run or {}).get("status") or (run or {}).get("overall_status") or "")
+        if status in {"queued", "running", "retrieving_source", "analysing", "validating"}:
+            return "<section class='card' id='rapid-ai-twin-snapshot'><h2>Rapid AI Twin Snapshot</h2><p>Flora is reviewing the approved BT report.</p></section>"
+        return "<section class='card' id='rapid-ai-twin-snapshot'><h2>Rapid AI Twin Snapshot</h2><p>AI Twin Snapshot is not available for this run.</p></section>"
     analysis = snapshot.get('report_analysis') or {}
     status = snapshot.get('user_status') or 'AI-built snapshot — verification pending'
     explanation = snapshot.get('user_explanation') or 'Flora reviewed the approved BT report and created this source-backed snapshot. It has not yet completed structured verification or canonical acceptance.'

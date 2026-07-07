@@ -40,6 +40,8 @@ DEFAULT_MODEL = financial_intelligence_settings().model
 BT_PROFILE = Path(__file__).resolve().parents[3] / 'config/flora/collection_profiles/bt-group-plc.json'
 AUTO_ACCEPT_CONFIDENCE = int(os.getenv('FLORA_FINANCIAL_INTELLIGENCE_AUTO_ACCEPT_CONFIDENCE', '85'))
 LOGGER = logging.getLogger('flora.financial_intelligence')
+MAX_SUPPORT_REPORT_BYTES = int(os.getenv('FLORA_FINANCIAL_SUPPORT_REPORT_MAX_BYTES', '65536'))
+MAX_SNAPSHOT_ARTIFACT_BYTES = int(os.getenv('FLORA_RAPID_SNAPSHOT_MAX_BYTES', '262144'))
 
 def configure_financial_intelligence_logging() -> logging.Logger:
     if not LOGGER.handlers:
@@ -322,6 +324,17 @@ def financial_intelligence_safe_support_report_payload(run_id: str) -> dict[str,
         payload.setdefault('run_id', run.get('run_id', run_id))
         payload.setdefault('support_reference', support_reference)
         payload.setdefault('report_available', True)
+    encoded = json.dumps(payload, sort_keys=True, default=str).encode('utf-8')
+    if len(encoded) > MAX_SUPPORT_REPORT_BYTES:
+        return {
+            'run_id': run.get('run_id', run_id),
+            'support_reference': support_reference,
+            'report_available': True,
+            'truncated': True,
+            'message': 'The persisted support report is larger than the safe download limit; a bounded summary is shown.',
+            'status': run.get('status') or run.get('overall_status') or 'unknown',
+            'failure_stage': (payload or {}).get('failure_stage') if isinstance(payload, dict) else 'unknown',
+        }
     return payload
 
 def financial_intelligence_support_report_link(run_id: str) -> str:
@@ -472,7 +485,10 @@ def _log_financial_intelligence_failure(event: dict[str, Any]) -> None:
     LOGGER.error(json.dumps(payload, sort_keys=True))
 
 def _read_json(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding='utf-8'))
+    data = json.loads(path.read_text(encoding='utf-8'))
+    if not isinstance(data, dict):
+        raise ValueError('Financial Intelligence run record is malformed')
+    return data
 
 def _write_json(path: Path, data: dict[str, Any]) -> None:
     try:
@@ -483,7 +499,7 @@ def _write_json(path: Path, data: dict[str, Any]) -> None:
     atomic_write_json(path, data)
 
 def _run_path(run_id: str) -> Path:
-    if not valid_financial_intelligence_run_id(run_id):
+    if not (valid_financial_intelligence_run_id(run_id) or str(run_id or '').startswith('air-')):
         raise FileNotFoundError(str(run_id))
     return _run_dir() / f'{run_id}.json'
 
@@ -1518,7 +1534,7 @@ def _render_dual_speed_outcome(run: dict[str, Any], show_support_control: bool =
     return f"""<section class='card warning'><h2>Fixture-only evidence warning</h2><p>This legacy result uses seeded rapid fixture data for local orchestration proof only. It is not verified official evidence and has not updated canonical Evidence, Observations or the Enterprise Model.</p></section><section class='card'><h2>Rapid Financial Pressure and Transformation Outlook</h2><p>Rapid lane status: {escape(_display_enum(str(rapid.get('status'))))} · Evidence status: {escape(_display_enum(str(rapid.get('evidence_status'))))} · Candidate facts: {escape(str(rapid.get('candidate_fact_count', 0)))}</p><pre>{rapid_result}</pre></section>"""
 
 def _outcome_summary(run: dict[str, Any] | None, show_support_control: bool = False) -> str:
-    support_report_link = financial_intelligence_support_report_link(run.get('run_id')) if (run and show_support_control) else ''
+    support_report_link = financial_intelligence_support_report_link(run.get('run_id')) if (run and show_support_control and run.get('run_id')) else ''
     if not run: return ''
     if run.get('execution_mode') == DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE:
         return _render_dual_speed_outcome(run, show_support_control=show_support_control)
@@ -1544,8 +1560,8 @@ def _outcome_summary(run: dict[str, Any] | None, show_support_control: bool = Fa
     accepted_periods = [c.get('period') for c in run.get('claims', []) if c.get('disposition') == 'accepted' and c.get('period')]
     candidate_periods = [c.get('period') for c in run.get('claims', []) if c.get('period')]
     period_text = 'inferred from accepted facts' if accepted_periods else (f"detected from candidates ({escape(str(candidate_periods[0]))})" if candidate_periods else 'not established')
-    support_link = f" · <a class='support-report-link' href='/financial-intelligence/{escape(run['run_id'])}/support-report'>Download support report</a>" if show_support_control else ''
-    return f"""<section class='card'><h2>Refresh outcome</h2><p>Extraction mode: {escape(str(run.get('extraction_mode_label') or run.get('extraction_mode') or 'AI financial report review'))} · AI calls made: {escape(str(run.get('ai_calls_made', run.get('openai_calls_made', 0))))}</p><p>{headline}{cost_text} · Candidate facts extracted: {(run.get('candidate_lifecycle_counts') or {}).get('packet_candidates_extracted', len(run.get('claims', [])))} · Reporting period: {period_text} · Collection status: {escape(status)} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Canonical facts accepted</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{len(exceptions)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(run['run_id'])}'>View financial changes</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(run['run_id'])}#attention'>Review exceptions</a>{support_link}</p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {escape(str(run.get('no_new_evidence_message') or outcome))}</p>{("<p><a href='/digital-twin/bt-group-plc'>View updated twin</a> · <a href='#attention'>Review exception</a> · <a href='#evidence'>View evidence</a></p>" if status == 'completed_with_exceptions' and run.get('enterprise_attributes_changed') else "<form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form>")}</section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
+    support_link = f" · <a class='support-report-link' href='/financial-intelligence/{escape(str(run.get('run_id', '')))}/support-report'>Download support report</a>" if show_support_control and run.get('run_id') else ''
+    return f"""<section class='card'><h2>Refresh outcome</h2><p>Extraction mode: {escape(str(run.get('extraction_mode_label') or run.get('extraction_mode') or 'AI financial report review'))} · AI calls made: {escape(str(run.get('ai_calls_made', run.get('openai_calls_made', 0))))}</p><p>{headline}{cost_text} · Candidate facts extracted: {(run.get('candidate_lifecycle_counts') or {}).get('packet_candidates_extracted', len(run.get('claims', [])))} · Reporting period: {period_text} · Collection status: {escape(status)} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Canonical facts accepted</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{len(exceptions)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(str(run.get('run_id', '')))}'>View financial changes</a> · <a href='/financial-intelligence/{escape(str(run.get('run_id', '')))}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(str(run.get('run_id', '')))}#attention'>Review exceptions</a>{support_link}</p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {escape(str(run.get('no_new_evidence_message') or outcome))}</p>{("<p><a href='/digital-twin/bt-group-plc'>View updated twin</a> · <a href='#attention'>Review exception</a> · <a href='#evidence'>View evidence</a></p>" if status == 'completed_with_exceptions' and run.get('enterprise_attributes_changed') else "<form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form>")}</section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
 
 def missing_run_page(run_id: str) -> str:
     body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>This previous refresh result is no longer available.</p><p>Start a new refresh to collect the latest financial intelligence.</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Start new refresh</button></form><p><a href='/financial-intelligence'>Return to Financial Intelligence</a></p></section>"""
