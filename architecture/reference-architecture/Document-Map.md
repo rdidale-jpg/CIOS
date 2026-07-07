@@ -68,8 +68,8 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 ## Commercial Digital Twin Contracts and Research Guides
 | ID | Title | Purpose | Status | Folder | Relationship to Reference Architecture |
 | --- | --- | --- | --- | --- | --- |
-| n/a | Commercial Digital Twin Blueprint Contract | Defines the required research depth, enterprise domains, evidence discipline, outputs and acceptance criteria for constructing a Commercial Digital Twin Blueprint | Working Draft | 'architecture/enterprise-intelligence/' | Canonical operational contract. Applies EI-001, EI-002, EI-003, EI-012 and FP-009 without replacing those owning papers. |
-| n/a | Commercial Digital Twin Research Agent Guide | Provides the operational research workflow and instructions used by the Enterprise Blueprint Researcher agent to produce a Digital Twin that complies with the Contract. | Working Draft |  'architecture/research/' | Derived implementation guide. The Blueprint Contract takes precedence where the documents |
+| n/a | Commercial Digital Twin Blueprint Contract](enterprise-intelligence/Commercial-Digital-Twin-Blueprint-Contract.md) | Defines the required research depth, enterprise domains, evidence discipline, outputs and acceptance criteria for constructing a Commercial Digital Twin Blueprint | Working Draft | 'architecture/enterprise-intelligence/' | Canonical operational contract. Applies EI-001, EI-002, EI-003, EI-012 and FP-009 without replacing those owning papers. |
+| n/a | Commercial Digital Twin Research Agent Guide](research/Commercial-Digital-Twin-Research-Agent-Guide.docx) | Provides the operational research workflow and instructions used by the Enterprise Blueprint Researcher agent to produce a Digital Twin that complies with the Contract. | Working Draft |  'architecture/research/' | Derived implementation guide. The Blueprint Contract takes precedence where the documents |
 
 ## Runtime Architecture
 
