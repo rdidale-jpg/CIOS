@@ -50,3 +50,21 @@ def test_completed_run_synthesizes_required_transcript_and_twin(monkeypatch, tmp
     assert 'Financial tables' in html and 'Revenue' in html
     assert 'Executive view' in html or 'Twin summary' in html
     assert 'Trusted Twin changed: no' in html and 'Canonical writes: 0' in html
+
+def test_rejected_provider_request_transcript_is_truthful(monkeypatch, tmp_path):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path))
+    d=tmp_path/'ai_financial_reports'/'runs'; d.mkdir(parents=True)
+    run={'run_id':'fi-reject','created_at':'2026-07-07T00:00:00+00:00','status':'failed','terminal':True,'workflow':'financial_intelligence','enterprise_id':'bt-group-plc','reporting_period':'FY26','execution_mode':'dual_speed_financial_intelligence','rapid_intelligence':{'status':'unavailable','source_receipt':{'document_title':'BT Annual Report 2026','sha256':'abc','byte_count':123},'provider_receipt':{'response_received':False,'http_status':400,'provider_error_code':'invalid_json_schema','provider_status':'provider_request_invalid','model':'gpt-test','input_tokens':0,'output_tokens':0,'response_text_length':0,'elapsed_ms':42},'validation':{'safe_failure_code':'provider_rejected_request','error':'invalid_json_schema'},'snapshot_truthfulness':{'snapshot_record_persisted':False,'financial_row_count':0,'analysis_section_count':0,'rendered_section_count':0}}}
+    (d/'fi-reject.json').write_text(json.dumps(run))
+    payload=flora_payload(); events={e['stage']:e for e in payload['events']}
+    assert events['ai_request_sent']['status']=='passed'
+    assert events['provider_request_rejected']['status']=='failed'
+    assert 'invalid_json_schema' in events['provider_request_rejected']['safe_output_summary']
+    assert events['provider_accepted_request']['status']=='skipped'
+    assert events['ai_response_received']['status']=='skipped'
+    assert events['provider_response_persisted']['status']=='skipped'
+    assert events['snapshot_persisted']['status']=='skipped'
+    assert events['provider_request_rejected']['elapsed_ms'] == 42
+    assert events['source_url_selected']['elapsed_ms'] == 0
+    html=page()
+    assert 'Provider rejected Flora’s AI request because its requested output format was invalid' in html

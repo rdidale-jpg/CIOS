@@ -16,7 +16,7 @@ BT_ID='bt-group-plc'; PERIOD='FY26'
 APP_VERSION=os.getenv('FLORA_APP_VERSION') or os.getenv('RENDER_GIT_COMMIT','local')[:12]
 SOURCE_CONFIG_VERSION='bt-fy26-approved-source-v1'
 REQUIRED_STAGES=[
-('button_received','Button received','POST /flora/bt-digital-twin'),('run_created','Run created','create_financial_intelligence_progress_run'),('strategy_selected','Execution strategy selected','resolve_financial_intelligence_execution_policy'),('source_configuration_loaded','Source configuration loaded','load_rapid_source_manifest'),('source_url_selected','Source URL selected','acquire_rapid_financial_source'),('source_request_started','Source request started','fetch approved BT source'),('source_response_received','Source response received','fetch_document'),('content_type_and_byte_count_checked','Content type and byte count checked','AcquiredRapidSourceReceipt'),('pdf_identity_checked','PDF identity checked','provider_preflight'),('reporting_period_checked','Reporting period checked','validate_extraction'),('source_checksum_calculated','Source checksum calculated','sha256'),('ai_provider_readiness_checked','AI provider readiness checked','provider_preflight'),('ai_model_selected','AI model selected','financial_intelligence_settings'),('cost_limit_checked','Cost limit checked','OpenAIDirectPDFProvider._estimated_cost'),('ai_request_constructed','AI request constructed','RapidAITwinProvider.analyse'),('ai_request_sent','AI request sent','OpenAI responses API'),('ai_response_received','AI response received','_persist_provider_response'),('provider_response_status','Provider response status','_response_metadata'),('provider_response_id','Provider response ID','_response_metadata'),('input_and_output_tokens','Input and output tokens','provider usage'),('finish_or_incomplete_reason','Finish or incomplete reason','provider finish reason'),('response_content_length','Response content length','_persist_provider_response'),('provider_response_persisted','Provider response persisted','rapid_ai_twin_raw'),('json_or_structured_content_recovery_attempted','JSON or structured content recovery attempted','_recover_payload'),('financial_tables_recovered','Financial tables recovered','validate_extraction'),('analysis_sections_recovered','Analysis sections recovered','_split_one_call_payload'),('citations_checked','Citations checked','validate_synthesis'),('partial_or_complete_snapshot_constructed','Partial or complete snapshot constructed','create_rapid_ai_twin_snapshot'),('snapshot_persisted','Snapshot persisted','rapid_ai_twin_cache'),('digital_twin_view_model_constructed','Digital Twin view model constructed','flora_page'),('final_page_sections_rendered','Final page sections rendered','flora_page'),('canonical_write_check_completed','Canonical-write check completed','canonical_state'),('run_terminal','Run completed or failed','coordinate_dual_speed_financial_intelligence_run')]
+('button_received','Button received','POST /flora/bt-digital-twin'),('run_created','Run created','create_financial_intelligence_progress_run'),('strategy_selected','Execution strategy selected','resolve_financial_intelligence_execution_policy'),('source_configuration_loaded','Source configuration loaded','load_rapid_source_manifest'),('source_url_selected','Source URL selected','acquire_rapid_financial_source'),('source_request_started','Source request started','fetch approved BT source'),('source_response_received','Source response received','fetch_document'),('content_type_and_byte_count_checked','Content type and byte count checked','AcquiredRapidSourceReceipt'),('pdf_identity_checked','PDF identity checked','provider_preflight'),('reporting_period_checked','Reporting period checked','validate_extraction'),('source_checksum_calculated','Source checksum calculated','sha256'),('ai_provider_readiness_checked','AI provider readiness checked','provider_preflight'),('ai_model_selected','AI model selected','financial_intelligence_settings'),('cost_limit_checked','Cost limit checked','OpenAIDirectPDFProvider._estimated_cost'),('ai_request_constructed','AI request constructed','RapidAITwinProvider.analyse'),('ai_request_sent','AI request sent','OpenAI responses API'),('provider_accepted_request','Provider accepted request','OpenAI accepted request for model execution'),('provider_request_rejected','Provider request rejected','OpenAI request validation'),('ai_response_received','AI response received','_persist_provider_response'),('provider_response_status','Provider response status','_response_metadata'),('provider_response_id','Provider response ID','_response_metadata'),('input_and_output_tokens','Input and output tokens','provider usage'),('finish_or_incomplete_reason','Finish or incomplete reason','provider finish reason'),('response_content_length','Response content length','_persist_provider_response'),('provider_response_persisted','Provider response persisted','rapid_ai_twin_raw'),('json_or_structured_content_recovery_attempted','JSON or structured content recovery attempted','_recover_payload'),('financial_tables_recovered','Financial tables recovered','validate_extraction'),('analysis_sections_recovered','Analysis sections recovered','_split_one_call_payload'),('citations_checked','Citations checked','validate_synthesis'),('partial_or_complete_snapshot_constructed','Partial or complete snapshot constructed','create_rapid_ai_twin_snapshot'),('snapshot_persisted','Snapshot persisted','rapid_ai_twin_cache'),('digital_twin_view_model_constructed','Digital Twin view model constructed','flora_page'),('final_page_sections_rendered','Final page sections rendered','flora_page'),('canonical_write_check_completed','Canonical-write check completed','canonical_state'),('run_terminal','Run completed or failed','coordinate_dual_speed_financial_intelligence_run')]
 
 def now_iso(): return datetime.now(UTC).isoformat()
 def deployed_revision(): return os.getenv('RENDER_GIT_COMMIT') or os.getenv('GIT_COMMIT') or 'local'
@@ -63,7 +63,11 @@ def _snapshot(run):
     return rapid.get('snapshot') or rapid.get('rapid_ai_twin_snapshot') or rapid.get('ai_twin_snapshot') or rapid
 
 def _provider(run):
-    snap=_snapshot(run); return snap.get('provider_receipt') or (snap.get('model_and_cost_record') or {}).get('provider_calls',[{}])[0] if isinstance((snap.get('model_and_cost_record') or {}).get('provider_calls'),list) else {}
+    snap=_snapshot(run)
+    if snap.get('provider_receipt'):
+        return snap.get('provider_receipt') or {}
+    calls=(snap.get('model_and_cost_record') or {}).get('provider_calls')
+    return calls[0] if isinstance(calls,list) and calls else {}
 
 def _raw_response(provider):
     p=provider.get('raw_response_path')
@@ -77,25 +81,43 @@ def ensure_journal(run: dict, created_by_button: bool=False) -> list[dict]:
     journal=list(run.get('flora_event_journal') or [])
     have={e.get('stage') for e in journal}; seq=len(journal); created=run.get('created_at') or now_iso(); terminal=bool(run.get('terminal')) or run.get('status') in {'completed','completed_with_exceptions','completed_with_no_accepted_intelligence','failed'}
     snap=_snapshot(run); rec=_receipt(run); prov=_provider(run); counts=snap.get('snapshot_truthfulness') or {}
+    validation=snap.get('validation') or {}
+    rejected = (prov.get('http_status') == 400 or validation.get('safe_failure_code') == 'provider_rejected_request' or prov.get('provider_error_code') in {'invalid_json_schema','invalid_request_error'} or (prov.get('provider_status') in {'provider_request_invalid','invalid_request'}))
+    post_response_stages={'ai_response_received','provider_response_persisted','json_or_structured_content_recovery_attempted','financial_tables_recovered','analysis_sections_recovered','citations_checked','partial_or_complete_snapshot_constructed','snapshot_persisted','digital_twin_view_model_constructed','final_page_sections_rendered'}
     for stage,label,boundary in REQUIRED_STAGES:
         if stage in have: continue
         if not terminal and stage not in {'button_received','run_created','strategy_selected'}: continue
         seq+=1; status='passed'; out='Completed.'
-        if stage=='button_received': out='Create BT Digital Twin button was received.'
+        if rejected and stage in post_response_stages:
+            status='skipped'; out='Skipped because the provider rejected the request before model execution.'
+        if stage=='provider_request_rejected':
+            if rejected:
+                status='failed'; out=f"Provider rejected Flora’s AI request because its requested output format was invalid. Safe provider code: {prov.get('provider_error_code') or 'invalid_json_schema'}"
+            else:
+                status='skipped'; out='No provider request rejection was reported.'
+        elif stage=='provider_accepted_request':
+            if rejected:
+                status='skipped'; out='Provider did not accept the request for model execution.'
+            elif prov.get('provider_response_id') or prov.get('response_received'):
+                out='Provider accepted the request for model execution.'
+            else:
+                status='skipped'; out='No provider acceptance evidence is available yet.'
+        elif stage=='button_received': out='Create BT Digital Twin button was received.'
         elif stage=='run_created': out=f"Run {run.get('run_id')} was persisted."
         elif stage=='strategy_selected': out='AI Rapid Twin selected; structured_standard_financials not selected.'
         elif stage=='source_url_selected': out=rec.get('final_url') or rec.get('requested_url') or 'Approved BT source selected.'
         elif stage=='source_checksum_calculated': out=rec.get('sha256') or 'Checksum unavailable.'
         elif stage=='ai_model_selected': out=prov.get('model') or financial_intelligence_settings().model
-        elif stage=='provider_response_id': out=prov.get('provider_response_id') or 'No provider response ID.'
-        elif stage=='input_and_output_tokens': out=f"Input {prov.get('input_tokens',0)}; output {prov.get('output_tokens',0)}."
-        elif stage=='response_content_length': out=f"{prov.get('response_text_length') or prov.get('raw_response_length') or 0} bytes/chars captured."
-        elif stage=='financial_tables_recovered': out=f"{counts.get('financial_row_count',0)} financial rows recovered."
-        elif stage=='analysis_sections_recovered': out=f"{counts.get('analysis_section_count',0)} analysis sections recovered."
+        elif status!='skipped' and stage=='provider_response_id': out=prov.get('provider_response_id') or 'No provider response ID.'
+        elif status!='skipped' and stage=='input_and_output_tokens': out=f"Input {prov.get('input_tokens',0)}; output {prov.get('output_tokens',0)}."
+        elif status!='skipped' and stage=='response_content_length': out=f"{prov.get('response_text_length') or prov.get('raw_response_length') or 0} bytes/chars captured."
+        elif status!='skipped' and stage=='financial_tables_recovered': out=f"{counts.get('financial_row_count',0)} financial rows recovered."
+        elif status!='skipped' and stage=='analysis_sections_recovered': out=f"{counts.get('analysis_section_count',0)} analysis sections recovered."
         elif stage=='canonical_write_check_completed': out='Trusted Twin changed: no. Canonical writes: 0. Verification: pending.'
         elif stage=='run_terminal':
             status='passed' if terminal_state(run)[0] != 'UNAVAILABLE' else 'failed'; out=terminal_state(run)[1]
-        journal.append({'sequence':seq,'timestamp_utc':now_iso() if created_by_button and seq==1 else created,'stage':stage,'application_action':label,'code_boundary':boundary,'safe_input_summary':_safe('BT Group FY26 approved document; one AI Rapid Twin run.'),'safe_output_summary':_safe(out),'status':status,'elapsed_ms':int((time.time()-Path(_run_path(run['run_id'])).stat().st_mtime)*1000) if _run_path(run['run_id']).exists() else 0})
+        elapsed = int(prov.get('elapsed_ms') or 0) if stage in {'ai_request_sent','provider_accepted_request','ai_response_received','provider_request_rejected'} else 0
+        journal.append({'sequence':seq,'timestamp_utc':now_iso() if created_by_button and seq==1 else created,'stage':stage,'application_action':label,'code_boundary':boundary,'safe_input_summary':_safe('BT Group FY26 approved document; one AI Rapid Twin run.'),'safe_output_summary':_safe(out),'status':status,'elapsed_ms':elapsed})
     run['flora_event_journal']=journal; _persist(run); return journal
 
 def terminal_state(run):
