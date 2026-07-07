@@ -64,6 +64,8 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | EI-014 | Commercial Conversation Model | Future paper for commercial conversation and action interface. | Future | `architecture/enterprise-intelligence/` | Will own conversation-led recommendations. |
 | EI-015 | Enterprise Question Model | Future paper for questions as architecture objects. | Future | `architecture/enterprise-intelligence/` | Will own structured unknowns and question generation. |
 | EI-016 | Enterprise Curiosity Engine | Future paper for curiosity-driven collection and reasoning. | Future | `architecture/enterprise-intelligence/` | Will own targeted learning from unknowns and contradictions. |
+| [Commercial Digital Twin Blueprint Contract](enterprise-intelligence/Commercial-Digital-Twin-Blueprint-Contract.md)|
+| [Commercial Digital Twin Research Agent Guide](research/Commercial-Digital-Twin-Research-Agent-Guide.docx)|
 
 ## Runtime Architecture
 
