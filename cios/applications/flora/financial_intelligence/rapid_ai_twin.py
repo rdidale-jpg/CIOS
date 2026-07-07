@@ -157,6 +157,45 @@ def _run_openai_text_stage(provider: OpenAIDirectPDFProvider, extraction: dict[s
 def _stage2_prompt(extraction: dict[str, Any], citation_index: list[dict[str, Any]]) -> str:
     return 'Create Stage 2 Rapid AI Twin synthesis JSON. Use only this Stage 1 extraction and citation index. Distinguish reported facts, interpretation, Signals, Hypotheses, Unknowns and Contradictions. Every Signal and Hypothesis must reference valid Stage 1 fact or table-row IDs. Do not add uncited assumptions. Stage 1 extraction: ' + json.dumps({'extraction': extraction, 'citation_index': citation_index}, sort_keys=True, default=str)
 
+
+
+def _provider_model(provider_boundary: Any, settings: Any) -> str:
+    provider = getattr(provider_boundary, 'provider', provider_boundary)
+    return str(getattr(provider, 'model', None) or settings.model or '')
+
+def provider_preflight(acquired: AcquiredRapidSource, provider_boundary: Any, settings: Any) -> dict[str, Any]:
+    """Validate the explicit provider boundary before Stage 1.
+
+    Test doubles are accepted as configured providers so unit tests can prove the
+    lifecycle without real credentials.  The production OpenAI adapter still
+    requires OPENAI_API_KEY and a bounded max-run cost before any provider call.
+    """
+    receipt = acquired.receipt.to_dict()
+    provider = getattr(provider_boundary, 'provider', provider_boundary)
+    is_openai_adapter = isinstance(provider_boundary, RapidAITwinProvider) or isinstance(provider, OpenAIDirectPDFProvider)
+    source_path = Path(acquired.path)
+    size = source_path.stat().st_size if source_path.exists() else 0
+    max_bytes = int(receipt.get('maximum_bytes') or 25000000)
+    checks = {
+        'ai_feature_enabled': os.getenv('FLORA_RAPID_AI_TWIN_ENABLED', '1').lower() not in {'0', 'false', 'no'},
+        'provider_configured': bool(provider_boundary),
+        'model_configured': bool(_provider_model(provider_boundary, settings)),
+        'credential_present': bool(os.getenv('OPENAI_API_KEY')) if is_openai_adapter else True,
+        'source_pdf_available': source_path.exists() and size > 0 and source_path.read_bytes()[:4] == b'%PDF',
+        'source_size_supported': 0 < size <= max_bytes,
+        'maximum_run_cost_configured': float(getattr(settings, 'max_run_cost_usd', 0) or 0) > 0,
+    }
+    failed = [name for name, ok in checks.items() if not ok]
+    return {
+        'status': 'passed' if not failed else 'failed',
+        'checks': checks,
+        'failed_checks': failed,
+        'provider': 'openai' if is_openai_adapter else provider_boundary.__class__.__name__,
+        'model': _provider_model(provider_boundary, settings),
+        'source_bytes': size,
+        'maximum_source_bytes': max_bytes,
+    }
+
 def _cache_dir() -> Path: return data_path('ai_financial_reports', 'rapid_ai_twin_cache')
 def cache_key(sha256: str | None, model: str) -> str:
     raw = '|'.join([sha256 or '', model, EXTRACTION_SCHEMA_VERSION, SYNTHESIS_SCHEMA_VERSION, EXTRACTION_PROMPT_VERSION, SYNTHESIS_PROMPT_VERSION])
@@ -233,6 +272,9 @@ def create_rapid_ai_twin_snapshot(acquired: AcquiredRapidSource, *, provider_bou
     if cpath.exists() and not force_reprocess:
         cached=json.loads(cpath.read_text()); cached['cache_state']='hit'; return cached
     provider_boundary = provider_boundary or RapidAITwinProvider()
+    preflight = provider_preflight(acquired, provider_boundary, settings)
+    if preflight['status'] != 'passed':
+        return _failure(receipt, [], 'provider_preflight_failed', started, [{'code':'provider_preflight_failed','failed_checks':preflight['failed_checks']}], preflight=preflight)
     s1=provider_boundary.extraction(acquired, correlation_id)
     calls=[s1.call_record]
     if s1.error or not s1.payload:
@@ -248,12 +290,12 @@ def create_rapid_ai_twin_snapshot(acquired: AcquiredRapidSource, *, provider_bou
     status = 'ready' if synthesis else 'partial'
     user_status = 'AI-built snapshot — verification pending' if status == 'ready' else 'Partial AI Twin Snapshot'
     user_explanation = 'Flora reviewed the approved BT report and created this source-backed snapshot. It has not yet completed structured verification or canonical acceptance.' if status == 'ready' else 'Flora reviewed the approved BT report and persisted a partial source-backed snapshot. Structured verification and canonical acceptance have not completed.'
-    snapshot={'version':'rapid-ai-twin-snapshot-v1','status':status,'verification_state':'verification_pending','canonical_state':{'trusted_twin_changed':False,'canonical_writes':0,'evidence_writes':0,'observation_writes':0,'enterprise_model_writes':0},'source_receipt':receipt,'extraction_result':extraction,'financial_tables':extraction.get('financial_tables') or [],'candidate_facts':extraction.get('reported_facts') or [],'commitments':extraction.get('management_commitments') or [],'programmes':extraction.get('transformation_programmes') or [],'report_analysis':synthesis,'signals':synthesis.get('strategic_signals') or [],'hypotheses':synthesis.get('hypotheses') or [],'unknowns':(extraction.get('unknowns') or []) + (synthesis.get('unknowns') or []),'contradictions':synthesis.get('contradictions') or [],'learning_actions':synthesis.get('recommended_learning_actions') or [],'citation_coverage':_coverage(extraction, synthesis),'model_and_cost_record':{'provider_calls':calls,'ai_call_count':len([c for c in calls if c.get('status') not in {'not_executed'}]),'model':model,'input_tokens':sum(int((c.get('usage') or {}).get('input_tokens') or 0) for c in calls),'output_tokens':sum(int((c.get('usage') or {}).get('output_tokens') or 0) for c in calls),'estimated_provider_cost_usd':sum(float(c.get('estimated_or_actual_cost_usd') or 0) for c in calls),'elapsed_ms':int((time.time()-started)*1000),'cache_key':key,'cache_state':'miss','schema_versions':{'extraction':EXTRACTION_SCHEMA_VERSION,'synthesis':SYNTHESIS_SCHEMA_VERSION},'prompt_versions':{'extraction':EXTRACTION_PROMPT_VERSION,'synthesis':SYNTHESIS_PROMPT_VERSION}},'validation':{'extraction_errors':extraction_errors,'synthesis_errors':synthesis_errors,'partial_result': bool(extraction_errors or s2.error)},'user_status':user_status,'user_explanation':user_explanation}
+    snapshot={'version':'rapid-ai-twin-snapshot-v1','status':status,'verification_state':'verification_pending','canonical_state':{'trusted_twin_changed':False,'canonical_writes':0,'evidence_writes':0,'observation_writes':0,'enterprise_model_writes':0},'source_receipt':receipt,'extraction_result':extraction,'financial_tables':extraction.get('financial_tables') or [],'candidate_facts':extraction.get('reported_facts') or [],'commitments':extraction.get('management_commitments') or [],'programmes':extraction.get('transformation_programmes') or [],'report_analysis':synthesis,'signals':synthesis.get('strategic_signals') or [],'hypotheses':synthesis.get('hypotheses') or [],'unknowns':(extraction.get('unknowns') or []) + (synthesis.get('unknowns') or []),'contradictions':synthesis.get('contradictions') or [],'learning_actions':synthesis.get('recommended_learning_actions') or [],'citation_coverage':_coverage(extraction, synthesis),'model_and_cost_record':{'provider_calls':calls,'ai_call_count':len([c for c in calls if c.get('status') not in {'not_executed'}]),'model':model,'input_tokens':sum(int((c.get('usage') or {}).get('input_tokens') or 0) for c in calls),'output_tokens':sum(int((c.get('usage') or {}).get('output_tokens') or 0) for c in calls),'estimated_provider_cost_usd':sum(float(c.get('estimated_or_actual_cost_usd') or 0) for c in calls),'elapsed_ms':int((time.time()-started)*1000),'cache_key':key,'cache_state':'miss','schema_versions':{'extraction':EXTRACTION_SCHEMA_VERSION,'synthesis':SYNTHESIS_SCHEMA_VERSION},'prompt_versions':{'extraction':EXTRACTION_PROMPT_VERSION,'synthesis':SYNTHESIS_PROMPT_VERSION}},'provider_preflight':preflight,'validation':{'extraction_errors':extraction_errors,'synthesis_errors':synthesis_errors,'partial_result': bool(extraction_errors or s2.error)},'user_status':user_status,'user_explanation':user_explanation}
     ensure_writable_dir(_cache_dir()); atomic_write_json(cpath, snapshot)
     return snapshot
 
-def _failure(receipt, calls, error, started, validation_errors=None):
-    return {'version':'rapid-ai-twin-snapshot-v1','status':'unavailable','verification_state':'verification_pending','canonical_state':{'trusted_twin_changed':False,'canonical_writes':0},'source_receipt':receipt,'extraction_result':{},'financial_tables':[],'report_analysis':{},'signals':[],'hypotheses':[],'unknowns':['Flora retrieved the approved BT report but could not create a safe AI Twin Snapshot.'],'contradictions':[],'learning_actions':[],'model_and_cost_record':{'provider_calls':calls,'ai_call_count':len(calls),'elapsed_ms':int((time.time()-started)*1000)},'validation':{'error':error,'errors':validation_errors or []},'user_status':'AI-built snapshot unavailable','user_explanation':'Flora retrieved the approved BT report but could not create a safe AI Twin Snapshot.'}
+def _failure(receipt, calls, error, started, validation_errors=None, preflight=None):
+    return {'version':'rapid-ai-twin-snapshot-v1','status':'unavailable','verification_state':'verification_pending','canonical_state':{'trusted_twin_changed':False,'canonical_writes':0},'source_receipt':receipt,'extraction_result':{},'financial_tables':[],'report_analysis':{},'signals':[],'hypotheses':[],'unknowns':['Flora retrieved the approved BT report but could not create a safe AI Twin Snapshot.'],'contradictions':[],'learning_actions':[],'provider_preflight':preflight or {},'model_and_cost_record':{'provider_calls':calls,'ai_call_count':len([c for c in calls if c.get('status') not in {'not_executed'}]),'elapsed_ms':int((time.time()-started)*1000)},'validation':{'error':error,'errors':validation_errors or []},'user_status':'AI-built snapshot unavailable','user_explanation':'Flora retrieved the approved BT report but could not create a safe AI Twin Snapshot.'}
 
 def _coverage(extraction, synthesis):
     row_count=sum(len(t.get('rows') or []) for t in extraction.get('financial_tables') or [])
