@@ -151,7 +151,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                     self.send_error(403, "Financial Intelligence run access denied")
                     return
                 try:
-                    html, status = financial_intelligence_run_response(run_id, show_support_control=True)
+                    html, status = financial_intelligence_run_response(run_id, show_support_control=(str(run.get('execution_mode') or run.get('extraction_mode') or '') != 'dual_speed_financial_intelligence'))
                 except Exception as exc:
                     html, status = _safe_financial_route_failure_page(run_id, exc), 200
                 self._html(html, status=status)

@@ -357,19 +357,30 @@ def _persist_provider_response(correlation_id: str, call: dict[str, Any], raw_re
     raw_path = _raw_dir() / f'{correlation_id}-{uuid.uuid4().hex[:10]}.json'
     atomic_write_json(raw_path, {'raw_response_body': bounded, 'truncated_for_storage': len(raw) > len(bounded)})
     usage = call.get('usage') or {}
+    response_received = raw_response is not None or bool(raw) or call.get('http_status') is not None or call.get('provider_response_id') or call.get('response_id') or call.get('id')
     receipt = {
+        'request_attempted': call.get('status') not in {'not_executed', 'skipped'},
+        'response_received': bool(response_received),
+        'http_status': call.get('http_status') or call.get('http_status_code'),
         'provider_response_id': call.get('provider_response_id') or call.get('response_id') or call.get('id'),
+        'provider_status': call.get('provider_status') or call.get('response_status') or call.get('status'),
+        'provider_error_type': call.get('provider_error_type') or call.get('error_type'),
+        'provider_error_safe_message': call.get('sanitised_provider_error_message') or call.get('safe_error_message') or call.get('error_message') or call.get('error'),
         'model': call.get('model'),
-        'finish_reason': call.get('finish_reason') or call.get('response_status') or call.get('status'),
+        'finish_reason': call.get('finish_reason') or call.get('incomplete_details') or call.get('response_status') or call.get('status'),
+        'input_tokens': int(usage.get('input_tokens') or 0),
+        'output_tokens': int(usage.get('output_tokens') or 0),
         'token_usage': usage,
+        'calculated_cost_usd': float(call.get('estimated_or_actual_cost_usd') or usage.get('approximate_cost_usd') or call.get('actual_cost_usd') or 0),
         'cost': call.get('estimated_or_actual_cost_usd') or usage.get('approximate_cost_usd') or call.get('actual_cost_usd') or 0,
         'elapsed_ms': call.get('elapsed_ms') or int((time.time() - started) * 1000),
+        'response_text_length': len(raw),
         'raw_response_length': len(raw),
+        'structured_payload_present': isinstance(raw_response, dict) or isinstance(call.get('output_parsed'), dict) or bool(call.get('structured_payload_present')),
         'raw_response_type': type(raw_response).__name__,
         'raw_response_path': str(raw_path),
         'prompt_version': call.get('prompt_version') or ONE_CALL_PROMPT_VERSION,
         'schema_version': call.get('schema_version') or ONE_CALL_SCHEMA_VERSION,
-        'provider_status': call.get('provider_status') or call.get('response_status') or call.get('status'),
     }
     call['provider_receipt'] = receipt
     return receipt
@@ -448,6 +459,28 @@ def _split_one_call_payload(payload: dict[str, Any]) -> tuple[dict[str, Any], di
         synthesis['commercial_themes'] = payload.get('commercial_themes')
     return extraction, synthesis
 
+
+def _usable_counts(snapshot: dict[str, Any]) -> dict[str, int | bool]:
+    analysis = snapshot.get('report_analysis') or {}
+    analysis_sections = sum(1 for v in analysis.values() if isinstance(v, list) and v)
+    financial_tables = snapshot.get('financial_tables') or ((snapshot.get('extraction_result') or {}).get('financial_tables') or [])
+    financial_rows = sum(len(t.get('rows') or []) for t in financial_tables if isinstance(t, dict))
+    rendered = sum(1 for v in [analysis.get('executive_summary'), financial_tables, analysis.get('what_changed'), snapshot.get('commitments'), snapshot.get('programmes'), analysis.get('enterprise_pressures'), snapshot.get('signals'), snapshot.get('hypotheses'), analysis.get('commercial_themes'), snapshot.get('unknowns'), snapshot.get('contradictions'), analysis.get('questions_to_investigate'), snapshot.get('learning_actions'), [snapshot.get('unstructured_ai_report')] if snapshot.get('unstructured_ai_report') else []] if v)
+    return {'usable_structured_sections': int(bool(financial_rows)) + analysis_sections, 'financial_table_count': len(financial_tables), 'financial_row_count': financial_rows, 'analysis_section_count': analysis_sections, 'unstructured_fallback_available': bool(snapshot.get('unstructured_ai_report')), 'rendered_section_count': rendered}
+
+def _safe_provider_failure(error: str | None, call: dict[str, Any], receipt: dict[str, Any] | None = None) -> tuple[str, str]:
+    status = str(call.get('status') or call.get('provider_status') or '')
+    error_text = str(error or call.get('error') or '').strip()
+    if status == 'timeout' or 'timeout' in error_text.lower():
+        return 'provider_timed_out', 'AI response unavailable — the provider timed out before returning usable content.'
+    if status == 'cost_limit_exceeded':
+        return 'cost_limit_exceeded', 'AI response unavailable — the configured cost limit prevented completion.'
+    if status in {'provider_request_invalid', 'request_failed', 'provider_request_failed'} or error_text:
+        return 'provider_rejected_request', 'AI response unavailable — the provider rejected the request.'
+    if receipt and receipt.get('response_received') and not receipt.get('response_text_length'):
+        return 'provider_empty_response', 'AI response unavailable — the provider returned an empty response.'
+    return 'provider_empty_response', 'AI response unavailable — the provider returned no usable response content.'
+
 def create_rapid_ai_twin_snapshot(acquired: AcquiredRapidSource, *, provider_boundary: Any | None = None, correlation_id: str | None = None, force_reprocess: bool = False) -> dict[str, Any]:
     started=time.time(); correlation_id=correlation_id or ('rapid-ai-'+uuid.uuid4().hex[:8]); receipt=acquired.receipt.to_dict(); settings=financial_intelligence_settings(); model=settings.model
     key=cache_key(receipt.get('sha256'), model); cpath=_cache_path(key)
@@ -462,14 +495,14 @@ def create_rapid_ai_twin_snapshot(acquired: AcquiredRapidSource, *, provider_bou
     calls=[s1.call_record]
     provider_receipt = _persist_provider_response(correlation_id, s1.call_record, s1.raw_response or s1.payload, started)
     if s1.error and not (s1.payload or s1.raw_response or s1.call_record.get('raw_body') or s1.call_record.get('output_text')):
-        return _failure(receipt, calls, s1.error or 'provider_empty', started)
+        return _failure(receipt, calls, s1.error or 'provider_empty', started, provider_receipt=provider_receipt, preflight=preflight)
     payload, unstructured = _recover_payload(s1)
     if not payload:
         if unstructured:
             snapshot=_partial_unstructured(receipt, calls, unstructured, started, provider_receipt, key, preflight)
             ensure_writable_dir(_cache_dir()); atomic_write_json(cpath, snapshot)
             return snapshot
-        return _failure(receipt, calls, s1.error or 'provider_empty', started)
+        return _failure(receipt, calls, s1.error or 'provider_empty', started, provider_receipt=provider_receipt, preflight=preflight)
     extraction_payload, synthesis = _split_one_call_payload(payload)
     extraction, extraction_errors = validate_extraction(extraction_payload, receipt)
     if not extraction:
@@ -487,14 +520,21 @@ def create_rapid_ai_twin_snapshot(acquired: AcquiredRapidSource, *, provider_bou
     user_status = 'AI-built snapshot — verification pending' if status == 'ready' else 'Partial AI Twin Snapshot — verification pending'
     user_explanation = 'Flora reviewed the approved BT report in one bounded AI call and created this source-backed snapshot. It has not yet completed structured verification or canonical acceptance.' if status == 'ready' else 'Flora retained the largest useful provider response subset from one bounded AI call. Some extraction or synthesis fields are partial; verification and canonical acceptance have not completed.'
     snapshot={'version':'rapid-ai-twin-snapshot-v2','status':status,'verification_state':'verification_pending','canonical_state':{'trusted_twin_changed':False,'canonical_writes':0,'evidence_writes':0,'observation_writes':0,'enterprise_model_writes':0},'source_receipt':receipt,'provider_receipt':provider_receipt,'extraction_result':extraction,'financial_tables':extraction.get('financial_tables') or [],'candidate_facts':extraction.get('reported_facts') or [],'commitments':extraction.get('management_commitments') or [],'programmes':extraction.get('transformation_programmes') or [],'report_analysis':synthesis,'signals':synthesis.get('strategic_signals') or synthesis.get('signals') or [],'hypotheses':synthesis.get('hypotheses') or [],'unknowns':(extraction.get('unknowns') or []) + (synthesis.get('unknowns') or []),'contradictions':synthesis.get('contradictions') or [],'learning_actions':synthesis.get('recommended_learning_actions') or synthesis.get('questions_to_investigate') or [],'citation_coverage':_coverage(extraction, synthesis),'model_and_cost_record':{'provider_calls':calls,'ai_call_count':len([c for c in calls if c.get('status') not in {'not_executed','skipped'}]),'model':model,'input_tokens':sum(int((c.get('usage') or {}).get('input_tokens') or 0) for c in calls),'output_tokens':sum(int((c.get('usage') or {}).get('output_tokens') or 0) for c in calls),'estimated_provider_cost_usd':sum(float(c.get('estimated_or_actual_cost_usd') or 0) for c in calls),'elapsed_ms':int((time.time()-started)*1000),'cache_key':key,'cache_state':'miss','schema_versions':{'one_call':ONE_CALL_SCHEMA_VERSION},'prompt_versions':{'one_call':ONE_CALL_PROMPT_VERSION}},'provider_preflight':preflight,'validation':{'extraction_errors':extraction_errors,'synthesis_errors':synthesis_errors,'partial_result': bool(extraction_errors or synthesis_errors or truncated),'truncated':truncated},'user_status':user_status,'user_explanation':user_explanation}
+    snapshot['snapshot_truthfulness'] = {'snapshot_record_persisted': True, 'provider_response_persisted': bool(provider_receipt), **_usable_counts(snapshot)}
     ensure_writable_dir(_cache_dir()); atomic_write_json(cpath, snapshot)
     return snapshot
 
-def _failure(receipt, calls, error, started, validation_errors=None, preflight=None):
-    return {'version':'rapid-ai-twin-snapshot-v1','status':'unavailable','verification_state':'verification_pending','canonical_state':{'trusted_twin_changed':False,'canonical_writes':0},'source_receipt':receipt,'extraction_result':{},'financial_tables':[],'report_analysis':{},'signals':[],'hypotheses':[],'unknowns':['Flora retrieved the approved BT report but could not create a safe AI Twin Snapshot.'],'contradictions':[],'learning_actions':[],'provider_preflight':preflight or {},'model_and_cost_record':{'provider_calls':calls,'ai_call_count':len([c for c in calls if c.get('status') not in {'not_executed'}]),'elapsed_ms':int((time.time()-started)*1000)},'validation':{'error':error,'errors':validation_errors or []},'user_status':'AI-built snapshot unavailable','user_explanation':'Flora retrieved the approved BT report but could not create a safe AI Twin Snapshot.'}
+def _failure(receipt, calls, error, started, validation_errors=None, preflight=None, provider_receipt=None):
+    last_call = calls[-1] if calls else {}
+    failure_code, message = _safe_provider_failure(error, last_call, provider_receipt)
+    snapshot = {'version':'rapid-ai-twin-snapshot-v2','status':'unavailable','verification_state':'no_provider_content','canonical_state':{'trusted_twin_changed':False,'canonical_writes':0,'evidence_writes':0,'observation_writes':0,'enterprise_model_writes':0},'source_receipt':receipt,'provider_receipt':provider_receipt or {},'extraction_result':{},'financial_tables':[],'report_analysis':{},'signals':[],'hypotheses':[],'unknowns':[],'contradictions':[],'learning_actions':[],'provider_preflight':preflight or {},'model_and_cost_record':{'provider_calls':calls,'ai_call_count':len([c for c in calls if c.get('status') not in {'not_executed','skipped'}]),'input_tokens':sum(int((c.get('usage') or {}).get('input_tokens') or 0) for c in calls),'output_tokens':sum(int((c.get('usage') or {}).get('output_tokens') or 0) for c in calls),'estimated_provider_cost_usd':sum(float(c.get('estimated_or_actual_cost_usd') or 0) for c in calls),'elapsed_ms':int((time.time()-started)*1000)},'validation':{'error':error,'safe_failure_code':failure_code,'errors':validation_errors or []},'user_status':'AI response unavailable','user_explanation':message}
+    snapshot['snapshot_truthfulness'] = {'snapshot_record_persisted': True, 'provider_response_persisted': bool(provider_receipt), **_usable_counts(snapshot)}
+    return snapshot
 
 def _partial_unstructured(receipt, calls, report_text, started, provider_receipt, key, preflight):
-    return {'version':'rapid-ai-twin-snapshot-v2','status':'partial','verification_state':'verification_pending','canonical_state':{'trusted_twin_changed':False,'canonical_writes':0,'evidence_writes':0,'observation_writes':0,'enterprise_model_writes':0},'source_receipt':receipt,'provider_receipt':provider_receipt,'extraction_result':{},'financial_tables':[],'candidate_facts':[],'report_analysis':{},'unstructured_ai_report':report_text[:MAX_RAW_RESPONSE_BYTES],'signals':[],'hypotheses':[],'unknowns':[],'contradictions':[],'learning_actions':[],'citation_coverage':{'financial_table_row_count':0,'reported_fact_count':0,'signal_count':0,'hypothesis_count':0},'provider_preflight':preflight,'model_and_cost_record':{'provider_calls':calls,'ai_call_count':len([c for c in calls if c.get('status') not in {'not_executed','skipped'}]),'input_tokens':sum(int((c.get('usage') or {}).get('input_tokens') or 0) for c in calls),'output_tokens':sum(int((c.get('usage') or {}).get('output_tokens') or 0) for c in calls),'estimated_provider_cost_usd':sum(float(c.get('estimated_or_actual_cost_usd') or 0) for c in calls),'elapsed_ms':int((time.time()-started)*1000),'cache_key':key,'cache_state':'miss','schema_versions':{'one_call':ONE_CALL_SCHEMA_VERSION},'prompt_versions':{'one_call':ONE_CALL_PROMPT_VERSION}},'validation':{'partial_result':True,'unstructured':True},'user_status':'Partial AI Twin Snapshot — report available','user_explanation':'Flora received and persisted a non-empty provider report, but no recoverable JSON object was available. The report is shown for review and remains outside trusted Twin state.'}
+    snapshot = {'version':'rapid-ai-twin-snapshot-v2','status':'partial','verification_state':'verification_pending','canonical_state':{'trusted_twin_changed':False,'canonical_writes':0,'evidence_writes':0,'observation_writes':0,'enterprise_model_writes':0},'source_receipt':receipt,'provider_receipt':provider_receipt,'extraction_result':{},'financial_tables':[],'candidate_facts':[],'report_analysis':{},'unstructured_ai_report':report_text[:MAX_RAW_RESPONSE_BYTES],'signals':[],'hypotheses':[],'unknowns':[],'contradictions':[],'learning_actions':[],'citation_coverage':{'financial_table_row_count':0,'reported_fact_count':0,'signal_count':0,'hypothesis_count':0},'provider_preflight':preflight,'model_and_cost_record':{'provider_calls':calls,'ai_call_count':len([c for c in calls if c.get('status') not in {'not_executed','skipped'}]),'input_tokens':sum(int((c.get('usage') or {}).get('input_tokens') or 0) for c in calls),'output_tokens':sum(int((c.get('usage') or {}).get('output_tokens') or 0) for c in calls),'estimated_provider_cost_usd':sum(float(c.get('estimated_or_actual_cost_usd') or 0) for c in calls),'elapsed_ms':int((time.time()-started)*1000),'cache_key':key,'cache_state':'miss','schema_versions':{'one_call':ONE_CALL_SCHEMA_VERSION},'prompt_versions':{'one_call':ONE_CALL_PROMPT_VERSION}},'validation':{'partial_result':True,'unstructured':True},'user_status':'Partial AI Twin Snapshot — report available','user_explanation':'Flora received and persisted a non-empty provider report, but no recoverable JSON object was available. The report is shown for review and remains outside trusted Twin state.'}
+    snapshot['snapshot_truthfulness'] = {'snapshot_record_persisted': True, 'provider_response_persisted': bool(provider_receipt), **_usable_counts(snapshot)}
+    return snapshot
 
 def _coverage(extraction, synthesis):
     row_count=sum(len(t.get('rows') or []) for t in extraction.get('financial_tables') or [])

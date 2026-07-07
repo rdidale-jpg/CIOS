@@ -1595,11 +1595,13 @@ def _display_enum(value: str) -> str:
 
 
 def _dual_speed_run_status_panel(run: dict[str, Any], rapid: dict[str, Any], cost: dict[str, Any]) -> str:
-    provider_attempted = 'yes' if cost.get('ai_call_count', 0) else 'no'
     snapshot = rapid.get('rapid_ai_twin_snapshot') or {}
-    snapshot_persisted = 'yes' if snapshot.get('persisted') or snapshot else 'no'
+    receipt = snapshot.get('provider_receipt') or {}
+    truth = snapshot.get('snapshot_truthfulness') or {}
+    provider_attempted = 'yes' if receipt.get('request_attempted') or cost.get('ai_call_count', 0) else 'no'
+    provider_received = 'yes' if receipt.get('response_received') else 'no'
     cache = 'reused' if (cost.get('cache_reused') or rapid.get('cache_reused')) else 'fresh execution'
-    return f"""<section class='card'><h2>Run status</h2><p>Execution strategy: AI Rapid Twin · Deployed revision: {escape(str(run.get('deployed_revision') or 'unknown'))} · Run ID: {escape(str(run.get('run_id')))} · Cache: {cache} · Provider call attempted: {provider_attempted} · Snapshot persisted: {snapshot_persisted}</p></section>"""
+    return f"""<section class='card'><h2>Run status</h2><p>Execution strategy: AI Rapid Twin · Deployed revision: {escape(str(run.get('deployed_revision') or 'unknown'))} · Run ID: {escape(str(run.get('run_id')))} · Cache: {cache} · Provider request attempted: {provider_attempted} · Provider call attempted: {provider_attempted} · Provider response received: {provider_received} · Snapshot record persisted: {('yes' if snapshot else 'no')} · Provider response persisted: {('yes' if truth.get('provider_response_persisted') or receipt else 'no')} · Usable structured sections: {escape(str(truth.get('usable_structured_sections', 0)))} · Financial tables: {escape(str(truth.get('financial_table_count', 0)))} · Financial rows: {escape(str(truth.get('financial_row_count', 0)))} · Analysis sections: {escape(str(truth.get('analysis_section_count', 0)))} · Unstructured fallback available: {('yes' if truth.get('unstructured_fallback_available') else 'no')} · Rendered sections: {escape(str(truth.get('rendered_section_count', 0)))}</p></section>"""
 
 def _render_dual_speed_outcome(run: dict[str, Any], show_support_control: bool = False) -> str:
     support_report_link = financial_intelligence_support_report_link(run.get('run_id')) if show_support_control else ''
