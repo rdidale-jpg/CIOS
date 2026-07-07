@@ -25,6 +25,7 @@ from cios.applications.flora.observatory.views import observatory_page, organisa
 from cios.applications.flora.storage import startup_storage_status
 from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, financial_intelligence_safe_support_report_payload, load_run, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id
+from cios.applications.flora.flora_transparent import page as flora_page, start_bt_digital_twin, flora_payload
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -57,6 +58,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         try:
             if parsed.path == "/health":
                 self._json(HEALTH_PAYLOAD)
+            elif parsed.path == "/flora":
+                self._html(flora_page())
+            elif parsed.path == "/flora/events":
+                self._json(flora_payload())
+            elif _redirects_to_flora(parsed.path):
+                self._redirect("/flora")
             elif parsed.path in {"/", "/morning-edition"}:
                 self._html(landing_page())
             elif parsed.path in {"/live", "/evidence"}:
@@ -200,12 +207,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         length = int(self.headers.get("Content-Length", "0"))
         raw_body = self.rfile.read(length)
         form = {} if "multipart/form-data" in self.headers.get("Content-Type", "") else parse_qs(raw_body.decode("utf-8"), keep_blank_values=True)
-        if self.path == "/digital-twins/bt-group-plc/search":
-            run = search_bt_twin()
-            if run.get('run_id'):
-                self._redirect(f"/digital-twins/bt-group-plc/progress/{run['run_id']}")
-            else:
-                self._redirect("/digital-twins/bt-group-plc")
+        if self.path == "/flora/bt-digital-twin":
+            start_bt_digital_twin()
+            self._redirect("/flora")
+        elif self.path == "/digital-twins/bt-group-plc/search" or self.path.startswith("/financial-intelligence/bt-group-plc/refresh"):
+            start_bt_digital_twin()
+            self._redirect("/flora")
         elif self.path.startswith("/financial-intelligence/bt-group-plc/refresh"):
             requested_mode = (form.get("acquisition_mode") or form.get("extraction_mode") or [""])[0]
             run = create_financial_intelligence_progress_run("bt-group-plc", extraction_mode=requested_mode, product_surface="legacy_refresh", ordinary_research=True)
@@ -338,10 +345,15 @@ def _support_authorised(headers) -> bool:
     cookie = headers.get("Cookie", "")
     return auth == f"Bearer {expected}" or cookie_value(headers, "flora_support_token") == expected
 
+def _redirects_to_flora(path: str) -> bool:
+    if path in {"/", "/morning-edition", "/live", "/evidence", "/portfolio", "/radar", "/scoring", "/reasoning-model", "/observatory", "/observatory/critique", "/settings", "/logbook", "/digital-twins", "/digital-twins/bt-group-plc", "/financial-intelligence", "/financial-reports", "/ai-financial-report"}:
+        return True
+    return path.startswith(("/live/", "/digital-twins/bt-group-plc/", "/financial-intelligence/", "/ai-financial-report/", "/observatory/", "/digital-twin/", "/score/", "/case/"))
+
 def _content_type_for_path(path: str) -> str | None:
-    if path in {"/health", "/live/status", "/live/collect/status"}:
+    if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports":
+    if path == "/flora" or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports":
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
