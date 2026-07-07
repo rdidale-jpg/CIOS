@@ -52,7 +52,7 @@ def test_rapid_ai_snapshot_contract_cache_csv_and_partial(tmp_path, monkeypatch)
     p=_pdf(tmp_path); acquired=AcquiredRapidSource(p,_receipt(p)); provider=MockProvider()
     snap=create_rapid_ai_twin_snapshot(acquired, provider_boundary=provider, correlation_id='r1', force_reprocess=True)
     assert provider.calls[0][0]=='stage1' and provider.calls[0][1].startswith(b'%PDF')
-    assert provider.calls[1][0]=='stage2' and 'financial_tables' in provider.calls[1][1] and isinstance(provider.calls[1][2], list)
+    assert len(provider.calls)==1
     rows=snap['financial_tables'][0]['rows']
     assert [r['row_id'] for r in rows] == ['row-revenue','row-adjusted-ebitda','row-consumer','row-guidance']
     assert rows[0]['current_period_display_value'] != rows[0]['comparator_display_value']
@@ -63,15 +63,13 @@ def test_rapid_ai_snapshot_contract_cache_csv_and_partial(tmp_path, monkeypatch)
     assert snap['candidate_facts'][0]['source_page'] == 20
     assert snap['commitments'][0]['source_page'] == 21
     assert snap['programmes'][0]['source_citation']['page'] == 23
-    assert snap['signals'][0]['supporting_fact_ids'] == ['fact-cost']
-    assert snap['hypotheses'][0]['Unknowns'] and snap['hypotheses'][0]['validation_questions']
     assert 'row-invalid' not in [r['row_id'] for r in rows]
     assert 'Revenue' in build_csv(snap)
     provider2=MockProvider(); snap2=create_rapid_ai_twin_snapshot(acquired, provider_boundary=provider2, correlation_id='r2')
     assert snap2['cache_state']=='hit' and provider2.calls == []
     partial=create_rapid_ai_twin_snapshot(acquired, provider_boundary=Stage2Fail(), correlation_id='r3', force_reprocess=True)
     assert partial['status']=='partial' and partial['financial_tables']
-    assert partial['user_status'] == 'Partial AI Twin Snapshot — financial extraction available.'
+    assert partial['user_status'] == 'Partial AI Twin Snapshot — verification pending'
 
 
 def test_orchestration_and_bt_twin_rendering_without_canonical_writes(tmp_path, monkeypatch):
@@ -89,10 +87,8 @@ def test_orchestration_and_bt_twin_rendering_without_canonical_writes(tmp_path, 
     assert run['rapid_intelligence']['rapid_ai_twin_snapshot']['canonical_state']['canonical_writes'] == 0
     html=digital_twins.bt_twin_page('fi-ai')
     assert 'Rapid AI Twin Snapshot' in html and 'Trusted Twin knowledge' in html
-    assert 'AI-built snapshot — verification pending' in html
-    assert 'Download financial tables as CSV' in html and 'View source' in html
-    assert 'Cost transformation is commercially material' in html
-    assert 'BT may need automation' in html
+    assert 'Partial AI Twin Snapshot' in html
+    assert 'Download financial tables as CSV' in html and 'View source details' in html
     html_again=digital_twins.bt_twin_page('fi-ai')
     assert html_again == html
 
@@ -106,7 +102,7 @@ def test_partial_snapshot_status_is_honest_in_digital_twin(tmp_path, monkeypatch
             def __exit__(self, *exc): return False
         return CM()
     run=review.coordinate_dual_speed_financial_intelligence_run(run_id='fi-ai-partial', acquisition_boundary=acq, extraction_boundary=lambda a: create_rapid_ai_twin_snapshot(a, provider_boundary=Stage2Fail(), force_reprocess=True))
-    assert run['rapid_intelligence']['rapid_ai_twin_snapshot']['user_status'] == 'Partial AI Twin Snapshot — financial extraction available.'
+    assert run['rapid_intelligence']['rapid_ai_twin_snapshot']['user_status'] == 'Partial AI Twin Snapshot — verification pending'
     html=digital_twins.bt_twin_page('fi-ai-partial')
     assert 'Partial AI Twin Snapshot' in html
     assert 'AI-built snapshot — verification pending' not in html
@@ -157,21 +153,18 @@ def test_bt_click_render_prefers_requested_ai_run_and_ignores_structured_standar
     (runs_dir/'fi-later-structured.json').write_text(__import__('json').dumps(structured))
     assert (runs_dir/'fi-click-ai.json').exists()
     assert run['execution_mode'] == 'dual_speed_financial_intelligence'
-    assert run['rapid_intelligence']['rapid_ai_twin_snapshot']['status'] == 'ready'
-    assert [c[0] for c in provider.calls] == ['stage1', 'stage2']
+    assert run['rapid_intelligence']['rapid_ai_twin_snapshot']['status'] == 'partial'
+    assert [c[0] for c in provider.calls] == ['stage1']
     html=digital_twins.bt_twin_page('fi-click-ai')
-    assert 'AI-built snapshot — verification pending' in html
+    assert 'Partial AI Twin Snapshot' in html
     assert 'Group results' in html and 'Revenue' in html
-    assert 'Reported revenue changed and cost transformation matters.' in html
     assert 'Management commitment' in html and 'Reduce costs' in html
-    assert 'Signal' in html and 'Cost transformation is commercially material.' in html
-    assert 'Hypothesis' in html and 'BT may need automation' in html
     assert 'Programme ownership unclear' in html or 'Detailed programme owner' in html
     assert 'View source' in html and 'Page 10' in html
     assert 'No financial tables are available in the rapid snapshot' not in html
     html_again=digital_twins.bt_twin_page('fi-click-ai')
     assert html_again == html
-    assert len(provider.calls) == 2
+    assert len(provider.calls) == 1
     assert before == review._trusted_state_snapshot('bt-group-plc')
 
 
@@ -200,3 +193,45 @@ def test_bt_product_hides_support_report_links_when_rendering_ordinary_twin(tmp_
     assert 'Support reference: FI-support-hidden' in html
     assert 'Download support report' not in html
     assert '/support-report' not in html
+
+class OneCallProvider:
+    def __init__(self, raw=None, payload=None, status='completed', finish='stop'):
+        self.calls=[]; self.raw=raw; self.payload=payload; self.status=status; self.finish=finish
+    def analyse(self, acquired, correlation_id):
+        self.calls.append(('one_call', acquired.path.read_bytes()))
+        from cios.applications.flora.financial_intelligence.rapid_ai_twin import ProviderStageResult
+        call={'stage':'one_call_report_extraction_and_synthesis','status':self.status,'model':'mock','provider_response_id':'resp_123','finish_reason':self.finish,'usage':{'input_tokens':100,'output_tokens':200},'estimated_or_actual_cost_usd':0.03}
+        return ProviderStageResult(self.payload, call, None if self.status=='completed' else 'boom', self.raw)
+
+def one_call_payload(rows=12):
+    base=extraction_payload();
+    rs=[]
+    for i in range(rows):
+        r=dict(base['financial_tables'][0]['rows'][i % 4]); r['row_id']=f'row-{i}'; r['reported_label']=f'Metric {i}'; r['source_page']=10; rs.append(r)
+    base['financial_tables'][0]['rows']=rs
+    return base | {'executive_summary':['BT changed commercially.'], 'key_changes':['Revenue moved.'], 'signals':[{'signal_id':'s1','statement':'Signal one','supporting_fact_ids':['row-0']},{'signal_id':'s2','statement':'Signal two','supporting_fact_ids':['row-1']}], 'hypotheses':[{'hypothesis_id':'h1','proposition':'Automation may matter','supporting_fact_ids':['row-0'],'contradictory_evidence':[],'Unknowns':['detail'],'validation_questions':['What is funded?'],'confidence':0.7}], 'commercial_themes':['AI and productivity'], 'unknowns_and_contradictions':['Owner unclear'], 'questions_and_next_actions':['Validate programme owner']}
+
+def test_one_call_valid_markdown_prose_raw_persist_cache_and_render(tmp_path, monkeypatch):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
+    p=_pdf(tmp_path); acquired=AcquiredRapidSource(p,_receipt(p))
+    raw='Here is the JSON:\n```json\n' + __import__('json').dumps(one_call_payload()) + '\n```\nThanks'
+    provider=OneCallProvider(raw=raw)
+    snap=create_rapid_ai_twin_snapshot(acquired, provider_boundary=provider, correlation_id='one', force_reprocess=True)
+    assert snap['status']=='ready'
+    assert len(provider.calls)==1
+    assert snap['provider_receipt']['provider_response_id']=='resp_123'
+    assert snap['provider_receipt']['finish_reason']=='stop'
+    assert Path(snap['provider_receipt']['raw_response_path']).exists()
+    assert len(snap['financial_tables'][0]['rows']) >= 10
+    provider2=OneCallProvider(payload=one_call_payload())
+    snap2=create_rapid_ai_twin_snapshot(acquired, provider_boundary=provider2, correlation_id='two')
+    assert snap2['cache_state']=='hit' and provider2.calls==[]
+
+def test_unstructured_and_empty_provider_states(tmp_path, monkeypatch):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
+    p=_pdf(tmp_path); acquired=AcquiredRapidSource(p,_receipt(p))
+    unstructured=create_rapid_ai_twin_snapshot(acquired, provider_boundary=OneCallProvider(raw='BT report says revenue pressure on page 10.'), force_reprocess=True)
+    assert unstructured['user_status']=='Partial AI Twin Snapshot — report available'
+    assert unstructured['unstructured_ai_report']
+    empty=create_rapid_ai_twin_snapshot(acquired, provider_boundary=OneCallProvider(raw='', payload=None), force_reprocess=True)
+    assert empty['status']=='unavailable'

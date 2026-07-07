@@ -1117,7 +1117,7 @@ def coordinate_dual_speed_financial_intelligence_run(enterprise_id: str = 'bt-gr
         with acquisition_boundary(enterprise_id, reporting_period) as acquired:
             temp_path = Path(acquired.path)
             extraction = extraction_boundary(acquired)
-            if ai_first_default or (isinstance(extraction, dict) and extraction.get('version') == 'rapid-ai-twin-snapshot-v1'):
+            if ai_first_default or (isinstance(extraction, dict) and str(extraction.get('version') or '').startswith('rapid-ai-twin-snapshot-v')):
                 rapid_lane = _rapid_ai_lane_from_snapshot(acquired.receipt, extraction, int((time.time() - rapid_started) * 1000))
             else:
                 rapid_lane = _rapid_lane_from_source_receipt(acquired.receipt, int((time.time() - rapid_started) * 1000), extraction=extraction, temp_path_removed=False)
