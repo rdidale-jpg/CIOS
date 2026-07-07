@@ -260,7 +260,7 @@ def test_financial_intelligence_navigation_uses_start_page_not_missing_historic_
 
     html = review.financial_intelligence_page()
 
-    assert "action='/financial-intelligence/bt-group-plc/refresh'" in html
+    assert "action='/digital-twins/bt-group-plc/search'" in html
     assert '/financial-intelligence/fi-0304783822cb' not in html
     assert 'No Financial Intelligence refresh has run yet.' in html
 
@@ -418,7 +418,7 @@ def test_financial_intelligence_page_requires_no_manual_bt_upload(monkeypatch, t
     html = ai_review.financial_intelligence_page()
 
     assert 'no download or upload is required' in html
-    assert "action='/financial-intelligence/bt-group-plc/refresh'" in html
+    assert "action='/digital-twins/bt-group-plc/search'" in html
 
 
 def test_section_packet_diagnostics_page_reasons_and_partial_success(monkeypatch, tmp_path):

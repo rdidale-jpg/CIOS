@@ -77,7 +77,7 @@ def test_search_action_invokes_dual_speed_once_and_default_unchanged(monkeypatch
     assert run['execution_mode'] == 'dual_speed_financial_intelligence'
     assert calls == [{'enterprise_id': 'bt-group-plc', 'reporting_period': 'FY26'}]
     default_run = review.refresh_financial_intelligence(run_id='fi-default')
-    assert default_run['extraction_mode'] == 'structured_standard_financials'
+    assert default_run['execution_mode'] == 'dual_speed_financial_intelligence'
 
 
 def test_partial_and_unavailable_states_are_honest(monkeypatch, tmp_path):

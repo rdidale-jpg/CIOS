@@ -351,6 +351,83 @@ def financial_intelligence_support_diagnostic_page(run_id: str) -> str:
 
 DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE = 'dual_speed_financial_intelligence'
 
+BT_RAPID_TWIN_ENTERPRISE_ID = 'bt-group-plc'
+BT_RAPID_TWIN_REPORTING_PERIOD = 'FY26'
+BT_STRUCTURED_VERIFICATION_MODE = 'structured_standard_financials'
+BT_ORDINARY_RESEARCH_SURFACES = {
+    'bt_digital_twin',
+    'financial_intelligence',
+    'research_history',
+    'progress_restart',
+    'generic_refresh',
+    'legacy_refresh',
+}
+BT_STRUCTURED_VERIFICATION_SURFACES = {'restricted_structured_verification'}
+
+
+def resolve_financial_intelligence_execution_policy(
+    *,
+    enterprise_id: str,
+    reporting_period: str = BT_RAPID_TWIN_REPORTING_PERIOD,
+    product_surface: str = 'financial_intelligence',
+    requested_execution_strategy: str | None = None,
+    ordinary_research: bool = True,
+    explicit_verification: bool = False,
+) -> dict[str, Any]:
+    """Resolve the authoritative Financial Intelligence execution strategy."""
+    canonical = canonical_enterprise_id(enterprise_id) or enterprise_id
+    requested = (requested_execution_strategy or '').strip() or None
+    is_bt_fy26 = canonical == BT_RAPID_TWIN_ENTERPRISE_ID and reporting_period == BT_RAPID_TWIN_REPORTING_PERIOD
+    if is_bt_fy26 and ordinary_research:
+        return {
+            'enterprise_id': canonical,
+            'reporting_period': reporting_period,
+            'product_surface': product_surface,
+            'requested_execution_strategy': requested,
+            'execution_strategy': DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE,
+            'execution_strategy_label': 'AI Rapid Twin',
+            'ordinary_research': True,
+            'explicit_verification': False,
+            'policy_reason': 'BT FY26 ordinary research is forced onto the AI-first Rapid Twin path.',
+        }
+    if is_bt_fy26 and requested == BT_STRUCTURED_VERIFICATION_MODE:
+        if explicit_verification and product_surface in BT_STRUCTURED_VERIFICATION_SURFACES:
+            return {
+                'enterprise_id': canonical,
+                'reporting_period': reporting_period,
+                'product_surface': product_surface,
+                'requested_execution_strategy': requested,
+                'execution_strategy': BT_STRUCTURED_VERIFICATION_MODE,
+                'execution_strategy_label': 'Restricted structured verification',
+                'ordinary_research': False,
+                'explicit_verification': True,
+                'policy_reason': 'Explicit restricted structured verification action selected.',
+            }
+        return {
+            'enterprise_id': canonical,
+            'reporting_period': reporting_period,
+            'product_surface': product_surface,
+            'requested_execution_strategy': requested,
+            'execution_strategy': DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE,
+            'execution_strategy_label': 'AI Rapid Twin',
+            'ordinary_research': ordinary_research,
+            'explicit_verification': explicit_verification,
+            'policy_reason': 'Structured mode request rejected for ordinary BT FY26 research.',
+        }
+    strategy = requested or BT_STRUCTURED_VERIFICATION_MODE
+    return {
+        'enterprise_id': canonical,
+        'reporting_period': reporting_period,
+        'product_surface': product_surface,
+        'requested_execution_strategy': requested,
+        'execution_strategy': strategy,
+        'execution_strategy_label': 'AI Rapid Twin' if strategy == DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE else str(strategy).replace('_', ' ').title(),
+        'ordinary_research': ordinary_research,
+        'explicit_verification': explicit_verification,
+        'policy_reason': 'Default Financial Intelligence policy.',
+    }
+
+
 STRUCTURED_FINANCIAL_STATUSES = {
     'structured_source_unavailable',
     'structured_source_identity_failed',
@@ -1160,9 +1237,11 @@ def coordinate_dual_speed_financial_intelligence_run(enterprise_id: str = 'bt-gr
     _write_json(_run_path(run_id), run)
     return run
 
-def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: str | None = None, extraction_mode: str = 'structured_standard_financials') -> dict[str, Any]:
+def refresh_financial_intelligence(enterprise_id: str = 'bt-group-plc', run_id: str | None = None, extraction_mode: str = 'structured_standard_financials', *, reporting_period: str = BT_RAPID_TWIN_REPORTING_PERIOD, product_surface: str = 'financial_intelligence', ordinary_research: bool = True, explicit_verification: bool = False) -> dict[str, Any]:
     run_id = run_id or ('fi-' + uuid.uuid4().hex[:12])
-    acquisition_mode = extraction_mode or 'structured_standard_financials'
+    policy = resolve_financial_intelligence_execution_policy(enterprise_id=enterprise_id, reporting_period=reporting_period, product_surface=product_surface, requested_execution_strategy=extraction_mode, ordinary_research=ordinary_research, explicit_verification=explicit_verification)
+    enterprise_id = policy['enterprise_id']
+    acquisition_mode = policy['execution_strategy']
     if acquisition_mode == DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE:
         return coordinate_dual_speed_financial_intelligence_run(enterprise_id=enterprise_id, run_id=run_id)
     if acquisition_mode == 'structured_standard_financials':
@@ -1324,18 +1403,20 @@ def _active_refresh_run() -> dict[str, Any] | None:
             return run
     return None
 
-def create_financial_intelligence_progress_run(enterprise_id: str = 'bt-group-plc', extraction_mode: str = 'structured_standard_financials') -> dict[str, Any]:
+def create_financial_intelligence_progress_run(enterprise_id: str = 'bt-group-plc', extraction_mode: str = 'structured_standard_financials', *, reporting_period: str = BT_RAPID_TWIN_REPORTING_PERIOD, product_surface: str = 'financial_intelligence', ordinary_research: bool = True, explicit_verification: bool = False) -> dict[str, Any]:
+    policy = resolve_financial_intelligence_execution_policy(enterprise_id=enterprise_id, reporting_period=reporting_period, product_surface=product_surface, requested_execution_strategy=extraction_mode, ordinary_research=ordinary_research, explicit_verification=explicit_verification)
     active = _active_refresh_run()
-    if active: return active
+    if active and (active.get('execution_mode') or active.get('extraction_mode')) == policy['execution_strategy']:
+        return active
     run_id = 'fi-' + uuid.uuid4().hex[:12]
-    run = {'run_id': run_id, 'created_at': now_iso(), 'deployed_revision': deployed_revision(), 'status': 'queued', 'state': 'queued', 'terminal': False, 'progress_percent': 0, 'workflow': 'financial_intelligence', 'enterprise_id': enterprise_id, 'extraction_mode': extraction_mode, 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'claims': [], 'applied_results': [], 'exceptions': []}
+    run = {'run_id': run_id, 'created_at': now_iso(), 'deployed_revision': deployed_revision(), 'status': 'queued', 'state': 'queued', 'terminal': False, 'progress_percent': 0, 'workflow': 'financial_intelligence', 'enterprise_id': policy['enterprise_id'], 'reporting_period': policy['reporting_period'], 'execution_mode': policy['execution_strategy'], 'extraction_mode': policy['execution_strategy'], 'extraction_mode_label': policy['execution_strategy_label'], 'execution_policy': policy, 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'claims': [], 'applied_results': [], 'exceptions': []}
     _write_json(_run_path(run_id), run)
-    threading.Thread(target=_background_refresh, args=(enterprise_id, run_id, extraction_mode), daemon=True).start()
+    threading.Thread(target=_background_refresh, args=(policy['enterprise_id'], run_id, policy['execution_strategy']), daemon=True).start()
     return run
 
 def _background_refresh(enterprise_id: str, run_id: str, extraction_mode: str = 'structured_standard_financials') -> None:
     try:
-        refresh_financial_intelligence(enterprise_id=enterprise_id, run_id=run_id, extraction_mode=extraction_mode)
+        refresh_financial_intelligence(enterprise_id=enterprise_id, run_id=run_id, extraction_mode=extraction_mode, product_surface='background_refresh', ordinary_research=(extraction_mode != BT_STRUCTURED_VERIFICATION_MODE))
     except Exception as exc:
         LOGGER.exception('Financial Intelligence background refresh failed support_reference=%s', 'FI-' + run_id.removeprefix('fi-'))
         run = {'run_id': run_id, 'created_at': now_iso(), 'deployed_revision': deployed_revision(), 'status': 'failed', 'failure_category': 'failed', 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'exceptions': [{'exception_type': 'failed', 'failure_stage': 'failed', 'support_reference': 'FI-' + run_id.removeprefix('fi-'), 'user_message': 'Financial Intelligence refresh failed safely.', 'rejection_reason': f'{type(exc).__name__}: {exc}'}], 'claims': [], 'applied_results': []}
@@ -1468,7 +1549,7 @@ def financial_intelligence_page(message: str = '') -> str:
     summary = _outcome_summary(last) if last else '<p>No Financial Intelligence refresh has run yet.</p>'
     mode = storage_mode()
     print(f"Flora Financial Intelligence storage mode: {mode['mode']} at {mode['data_root']}")
-    body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>BT Commercial Digital Twin outcome view. Flora collects the governed annual report, understands the financial facts, updates Observations and the Enterprise Model, then shows what changed and what needs attention.</p>{notice}<p class='pill'>{escape(state)}</p></section><section class='card action'><h2>Active governed source</h2><p><strong>{escape(source['source_name'])}</strong></p><p><a href='{escape(source['url'])}'>{escape(source['url'])}</a></p><p class='muted'>Source is registered in the BT collection profile and collected server-side; no download or upload is required.</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Refresh Financial Intelligence</button></form><form method='post' action='/financial-intelligence/bt-group-plc/refresh?reprocess=1'><button>Administrative Reprocess</button></form></section>{summary}<details class='card'><summary><strong>Administrative fallback only</strong></summary><p>Use only when governed automatic collection cannot retrieve a replacement report. This is not the BT sales-user workflow.</p><form method='post' action='/ai-financial-report/upload' enctype='multipart/form-data'><input type='hidden' name='enterprise_id' value='bt-group-plc'><input type='hidden' name='title' value='BT Group plc Annual Report 2026'><input type='hidden' name='source_url' value='{escape(source['url'])}'><input type='file' name='pdf' accept='application/pdf'><button>Admin fallback upload</button></form></details>"""
+    body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>BT Commercial Digital Twin outcome view. Flora collects the governed annual report, understands the financial facts, updates Observations and the Enterprise Model, then shows what changed and what needs attention.</p>{notice}<p class='pill'>{escape(state)}</p></section><section class='card action'><h2>Active governed source</h2><p><strong>{escape(source['source_name'])}</strong></p><p><a href='{escape(source['url'])}'>{escape(source['url'])}</a></p><p class='muted'>Source is registered in the BT collection profile and collected server-side; no download or upload is required.</p><form method='post' action='/digital-twins/bt-group-plc/search'><button>Refresh Financial Intelligence</button></form><form method='post' action='/digital-twins/bt-group-plc/search'><button>Reprocess Financial Intelligence</button></form></section>{summary}<details class='card'><summary><strong>Administrative fallback only</strong></summary><p>Use only when governed automatic collection cannot retrieve a replacement report. This is not the BT sales-user workflow.</p><form method='post' action='/ai-financial-report/upload' enctype='multipart/form-data'><input type='hidden' name='enterprise_id' value='bt-group-plc'><input type='hidden' name='title' value='BT Group plc Annual Report 2026'><input type='hidden' name='source_url' value='{escape(source['url'])}'><input type='file' name='pdf' accept='application/pdf'><button>Admin fallback upload</button></form></details>"""
     return _page('Financial Intelligence', body)
 
 def _business_change_label(run: dict[str, Any], result: dict[str, Any]) -> str:
@@ -1512,6 +1593,14 @@ def _display_enum(value: str) -> str:
         'not_started': 'Not started',
     }.get(str(value), str(value).replace('_',' ').title())
 
+
+def _dual_speed_run_status_panel(run: dict[str, Any], rapid: dict[str, Any], cost: dict[str, Any]) -> str:
+    provider_attempted = 'yes' if cost.get('ai_call_count', 0) else 'no'
+    snapshot = rapid.get('rapid_ai_twin_snapshot') or {}
+    snapshot_persisted = 'yes' if snapshot.get('persisted') or snapshot else 'no'
+    cache = 'reused' if (cost.get('cache_reused') or rapid.get('cache_reused')) else 'fresh execution'
+    return f"""<section class='card'><h2>Run status</h2><p>Execution strategy: AI Rapid Twin · Deployed revision: {escape(str(run.get('deployed_revision') or 'unknown'))} · Run ID: {escape(str(run.get('run_id')))} · Cache: {cache} · Provider call attempted: {provider_attempted} · Snapshot persisted: {snapshot_persisted}</p></section>"""
+
 def _render_dual_speed_outcome(run: dict[str, Any], show_support_control: bool = False) -> str:
     support_report_link = financial_intelligence_support_report_link(run.get('run_id')) if show_support_control else ''
     rapid = run.get('rapid_intelligence') or {}
@@ -1527,7 +1616,7 @@ def _render_dual_speed_outcome(run: dict[str, Any], show_support_control: bool =
         unresolved_html = '<ul>' + ''.join(f"<li>{escape(_display_metric(m))}</li>" for m in sorted(unresolved)) + '</ul>' if unresolved else ''
         business_items = ''.join(f"<li>{escape(m)}</li>" for m in _rapid_exception_business_summaries(rapid.get('exceptions') or [])) or '<li>The required statutory Group figures could not be identified safely.</li>'
         if not candidates:
-            return f"""<section class='card warning'><h2>Official BT report retrieved — no safe financial findings identified</h2><p>Flora reached and validated the approved BT FY26 report, but it could not identify the required financial figures safely.</p><p>No fixture or seeded information was substituted, and the trusted Commercial Digital Twin was unchanged.</p><h3>Unresolved financial figures</h3>{unresolved_html}<ul>{business_items}</ul><p><strong>{escape(str(receipt.get('document_title')))}</strong> · Authority: {escape(str(receipt.get('authority')))} · Reporting period: {escape(str(receipt.get('reporting_period')))} · Source retrieval status: Official source retrieved</p></section><section class='card'><h2>Canonical update summary</h2><p>Status: No canonical update required · Enterprise Model updated: {canonical_changed}</p></section><section class='card'><h2>Run outcome</h2><p>Overall status: {escape(_display_enum(str(run.get('overall_status'))))} · Completion class: {escape(_display_enum(str(run.get('completion_class'))))} · Result URL: {escape(str(run.get('result_url')))} · Support reference: {escape(str(run.get('support_reference')))}</p><p>AI calls: {escape(str(cost.get('ai_call_count', 0)))} · Provider cost: {escape(str(cost.get('estimated_provider_cost_usd', 0)))} USD · Live source calls: {escape(str(cost.get('external_source_call_count', 0)))}</p>{support_report_link}</section>"""
+            return f"""<section class='card warning'><h2>Official BT report retrieved — no safe financial findings identified</h2><p>Flora reached and validated the approved BT FY26 report, but it could not identify the required financial figures safely.</p><p>No fixture or seeded information was substituted, and the trusted Commercial Digital Twin was unchanged.</p><h3>Unresolved financial figures</h3>{unresolved_html}<ul>{business_items}</ul><p><strong>{escape(str(receipt.get('document_title')))}</strong> · Authority: {escape(str(receipt.get('authority')))} · Reporting period: {escape(str(receipt.get('reporting_period')))} · Source retrieval status: Official source retrieved</p></section><section class='card'><h2>Canonical update summary</h2><p>Status: No canonical update required · Enterprise Model updated: {canonical_changed}</p></section>{_dual_speed_run_status_panel(run, rapid, cost)}<section class='card'><h2>Run outcome</h2><p>Overall status: {escape(_display_enum(str(run.get('overall_status'))))} · Completion class: {escape(_display_enum(str(run.get('completion_class'))))} · Result URL: {escape(str(run.get('result_url')))} · Support reference: {escape(str(run.get('support_reference')))}</p><p>AI calls: {escape(str(cost.get('ai_call_count', 0)))} · Provider cost: {escape(str(cost.get('estimated_provider_cost_usd', 0)))} USD · Live source calls: {escape(str(cost.get('external_source_call_count', 0)))}</p>{support_report_link}</section>"""
         rows = ''.join(
             f"<tr><td>{escape(str(c.get('raw_metric_label') or _display_metric(c.get('proposed_canonical_metric_id'))))}</td>"
             f"<td>{escape(str(c.get('original_displayed_value') or c.get('raw_value_text')))}</td>"
@@ -1539,10 +1628,10 @@ def _render_dual_speed_outcome(run: dict[str, Any], show_support_control: bool =
         heading = 'Official-source candidate facts' if not unresolved else 'Partial source-backed financial findings'
         msg = 'These figures were extracted from an approved official document but have not yet completed structured verification or canonical acceptance.' if not unresolved else 'Flora identified some source-backed financial findings, but not every required figure could be established safely.'
         unresolved_block = f"<h3>Unresolved financial figures</h3>{unresolved_html}" if unresolved else ''
-        return f"""<section class='card warning'><h2>{heading}</h2><p>{msg}</p><p><strong>{escape(str(receipt.get('document_title')))}</strong> · Authority: {escape(str(receipt.get('authority')))} · Reporting period: {escape(str(receipt.get('reporting_period')))} · Source retrieval status: Official source retrieved</p><table><thead><tr><th>Metric</th><th>Displayed value</th><th>Reported amount</th><th>Page/table citation</th><th>Verification</th></tr></thead><tbody>{rows}</tbody></table>{unresolved_block}<p>Canonical memory has not been updated. Evidence IDs: {escape(str(len(canonical.get('evidence_ids') or [])))} · Observation IDs: {escape(str(len(canonical.get('observation_ids') or [])))} · Enterprise Model updated: {canonical_changed}</p><ul>{business_items}</ul></section><section class='card'><h2>Verification summary</h2><p>Status: {escape(_display_enum(str(verification.get('status') or 'not_started')))} · Facts verified: {escape(str(verification.get('facts_verified', 0)))}</p></section><section class='card'><h2>Canonical update summary</h2><p>Status: {canonical_status} · Enterprise Model updated: {canonical_changed}</p></section><section class='card'><h2>Run outcome</h2><p>Overall status: {escape(_display_enum(str(run.get('overall_status'))))} · Completion class: {escape(_display_enum(str(run.get('completion_class'))))} · Result URL: {escape(str(run.get('result_url')))} · Support reference: {escape(str(run.get('support_reference')))}</p><p>AI calls: {escape(str(cost.get('ai_call_count', 0)))} · Provider cost: {escape(str(cost.get('estimated_provider_cost_usd', 0)))} USD · Live source calls: {escape(str(cost.get('external_source_call_count', 0)))}</p>{support_report_link}</section>"""
+        return f"""<section class='card warning'><h2>{heading}</h2><p>{msg}</p><p><strong>{escape(str(receipt.get('document_title')))}</strong> · Authority: {escape(str(receipt.get('authority')))} · Reporting period: {escape(str(receipt.get('reporting_period')))} · Source retrieval status: Official source retrieved</p><table><thead><tr><th>Metric</th><th>Displayed value</th><th>Reported amount</th><th>Page/table citation</th><th>Verification</th></tr></thead><tbody>{rows}</tbody></table>{unresolved_block}<p>Canonical memory has not been updated. Evidence IDs: {escape(str(len(canonical.get('evidence_ids') or [])))} · Observation IDs: {escape(str(len(canonical.get('observation_ids') or [])))} · Enterprise Model updated: {canonical_changed}</p><ul>{business_items}</ul></section><section class='card'><h2>Verification summary</h2><p>Status: {escape(_display_enum(str(verification.get('status') or 'not_started')))} · Facts verified: {escape(str(verification.get('facts_verified', 0)))}</p></section><section class='card'><h2>Canonical update summary</h2><p>Status: {canonical_status} · Enterprise Model updated: {canonical_changed}</p></section>{_dual_speed_run_status_panel(run, rapid, cost)}<section class='card'><h2>Run outcome</h2><p>Overall status: {escape(_display_enum(str(run.get('overall_status'))))} · Completion class: {escape(_display_enum(str(run.get('completion_class'))))} · Result URL: {escape(str(run.get('result_url')))} · Support reference: {escape(str(run.get('support_reference')))}</p><p>AI calls: {escape(str(cost.get('ai_call_count', 0)))} · Provider cost: {escape(str(cost.get('estimated_provider_cost_usd', 0)))} USD · Live source calls: {escape(str(cost.get('external_source_call_count', 0)))}</p>{support_report_link}</section>"""
     if rapid.get('evidence_status') == 'official_source_unavailable':
         exc = (rapid.get('exceptions') or [{}])[0]
-        return f"""<section class='card warning'><h2>Official source unavailable</h2><p>Flora reached the approved BT financial report but could not read it safely.</p><p>Stage: {escape(str(exc.get('failure_stage') or receipt.get('failure_stage') or 'unknown'))} · Cause: {escape(str(exc.get('user_message') or receipt.get('safe_failure_message') or 'Source unavailable'))}</p><p>No financial findings were created. No fixture or seeded information was substituted, and the trusted Commercial Digital Twin was unchanged.</p></section>"""
+        return f"""{_dual_speed_run_status_panel(run, rapid, cost)}<section class='card warning'><h2>Official source unavailable</h2><p>Flora reached the approved BT financial report but could not read it safely.</p><p>Stage: {escape(str(exc.get('failure_stage') or receipt.get('failure_stage') or 'unknown'))} · Cause: {escape(str(exc.get('user_message') or receipt.get('safe_failure_message') or 'Source unavailable'))}</p><p>No financial findings were created. No fixture or seeded information was substituted, and the trusted Commercial Digital Twin was unchanged.</p></section>"""
     rapid_result = escape(str(rapid.get('user_result') or 'No rapid outlook is available.'))
     return f"""<section class='card warning'><h2>Fixture-only evidence warning</h2><p>This legacy result uses seeded rapid fixture data for local orchestration proof only. It is not verified official evidence and has not updated canonical Evidence, Observations or the Enterprise Model.</p></section><section class='card'><h2>Rapid Financial Pressure and Transformation Outlook</h2><p>Rapid lane status: {escape(_display_enum(str(rapid.get('status'))))} · Evidence status: {escape(_display_enum(str(rapid.get('evidence_status'))))} · Candidate facts: {escape(str(rapid.get('candidate_fact_count', 0)))}</p><pre>{rapid_result}</pre></section>"""
 
@@ -1574,10 +1663,10 @@ def _outcome_summary(run: dict[str, Any] | None, show_support_control: bool = Fa
     candidate_periods = [c.get('period') for c in run.get('claims', []) if c.get('period')]
     period_text = 'inferred from accepted facts' if accepted_periods else (f"detected from candidates ({escape(str(candidate_periods[0]))})" if candidate_periods else 'not established')
     support_link = f" · <a class='support-report-link' href='/financial-intelligence/{escape(str(run.get('run_id', '')))}/support-report'>Download support report</a>" if show_support_control and run.get('run_id') else ''
-    return f"""<section class='card'><h2>Refresh outcome</h2><p>Extraction mode: {escape(str(run.get('extraction_mode_label') or run.get('extraction_mode') or 'AI financial report review'))} · AI calls made: {escape(str(run.get('ai_calls_made', run.get('openai_calls_made', 0))))}</p><p>{headline}{cost_text} · Candidate facts extracted: {(run.get('candidate_lifecycle_counts') or {}).get('packet_candidates_extracted', len(run.get('claims', [])))} · Reporting period: {period_text} · Collection status: {escape(status)} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Canonical facts accepted</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{len(exceptions)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(str(run.get('run_id', '')))}'>View financial changes</a> · <a href='/financial-intelligence/{escape(str(run.get('run_id', '')))}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(str(run.get('run_id', '')))}#attention'>Review exceptions</a>{support_link}</p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {escape(str(run.get('no_new_evidence_message') or outcome))}</p>{("<p><a href='/digital-twin/bt-group-plc'>View updated twin</a> · <a href='#attention'>Review exception</a> · <a href='#evidence'>View evidence</a></p>" if status == 'completed_with_exceptions' and run.get('enterprise_attributes_changed') else "<form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Retry</button></form>")}</section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
+    return f"""<section class='card'><h2>Refresh outcome</h2><p>Extraction mode: {escape(str(run.get('extraction_mode_label') or run.get('extraction_mode') or 'AI financial report review'))} · AI calls made: {escape(str(run.get('ai_calls_made', run.get('openai_calls_made', 0))))}</p><p>{headline}{cost_text} · Candidate facts extracted: {(run.get('candidate_lifecycle_counts') or {}).get('packet_candidates_extracted', len(run.get('claims', [])))} · Reporting period: {period_text} · Collection status: {escape(status)} · Collected: {escape(run.get('collection',{}).get('retrieval_time',''))}</p><div class='grid'><div><div class='metric'>{run.get('auto_accepted_count',0)}</div><p>Canonical facts accepted</p></div><div><div class='metric'>{run.get('observations_created_or_strengthened',0)}</div><p>New or strengthened Observations</p></div><div><div class='metric'>{len([r for r in run.get('applied_results',[]) if r.get('contradiction')])}</div><p>Contradictions</p></div><div><div class='metric'>{len(exceptions)}</div><p>Needs Attention</p></div></div><p><a href='/financial-intelligence/{escape(str(run.get('run_id', '')))}'>View financial changes</a> · <a href='/financial-intelligence/{escape(str(run.get('run_id', '')))}#evidence'>View supporting evidence</a> · <a href='/financial-intelligence/{escape(str(run.get('run_id', '')))}#attention'>Review exceptions</a>{support_link}</p></section><section class='card'><h2>What changed</h2><ul>{changes}</ul></section><section class='card'><h2>Why it matters</h2><p><strong>Outcome:</strong> {escape(str(run.get('no_new_evidence_message') or outcome))}</p>{("<p><a href='/digital-twin/bt-group-plc'>View updated twin</a> · <a href='#attention'>Review exception</a> · <a href='#evidence'>View evidence</a></p>" if status == 'completed_with_exceptions' and run.get('enterprise_attributes_changed') else "<form method='post' action='/digital-twins/bt-group-plc/search'><button>Retry</button></form>")}</section><section id='attention' class='card'><h2>What needs attention</h2><ul>{needs}</ul></section><section id='evidence' class='card'><h2>Evidence</h2>{evidence}</section>{enterprise_memory_panel('bt-group-plc')}"""
 
 def missing_run_page(run_id: str) -> str:
-    body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>This previous refresh result is no longer available.</p><p>Start a new refresh to collect the latest financial intelligence.</p><form method='post' action='/financial-intelligence/bt-group-plc/refresh'><button>Start new refresh</button></form><p><a href='/financial-intelligence'>Return to Financial Intelligence</a></p></section>"""
+    body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>This previous refresh result is no longer available.</p><p>Start a new refresh to collect the latest financial intelligence.</p><form method='post' action='/digital-twins/bt-group-plc/search'><button>Start new refresh</button></form><p><a href='/financial-intelligence'>Return to Financial Intelligence</a></p></section>"""
     return _page('Financial Intelligence result unavailable', body)
 
 def financial_intelligence_run_page(run_id: str) -> str:
