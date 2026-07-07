@@ -264,3 +264,62 @@ def test_empty_sections_hidden_and_non_empty_never_unavailable(tmp_path, monkeyp
     assert 'Financial tables' in html
     assert 'Management commitments' not in html
     assert 'Transformation programmes' not in html
+
+def test_bt_one_call_real_provider_payload_uses_json_mode_and_pdf(monkeypatch, tmp_path):
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-test')
+    p=_pdf(tmp_path); acquired=AcquiredRapidSource(p,_receipt(p))
+    captured=[]
+    class Count:
+        def count(self, **kwargs):
+            captured.append(('count', kwargs))
+            return {'input_tokens': 123}
+    class Responses:
+        input_tokens=Count()
+        def create(self, **kwargs):
+            captured.append(('create', kwargs))
+            class Usage:
+                def model_dump(self): return {'input_tokens':123,'output_tokens':45}
+            class Resp:
+                id='resp_json_mode'; status='completed'; usage=Usage(); output_text=__import__('json').dumps(one_call_payload(rows=1))
+                def model_dump(self, mode='json'):
+                    return {'id':self.id,'status':self.status,'usage':self.usage.model_dump(),'output_text':self.output_text}
+            return Resp()
+    class Client:
+        def __init__(self, **kwargs): self.responses=Responses()
+    monkeypatch.setitem(__import__('sys').modules, 'openai', type('OpenAIModule', (), {'OpenAI': Client}))
+    from cios.applications.flora.financial_intelligence.rapid_ai_twin import RapidAITwinProvider
+    from cios.applications.flora.financial_intelligence.openai_provider import OpenAIDirectPDFProvider
+    provider=RapidAITwinProvider(OpenAIDirectPDFProvider(model='gpt-test'))
+    snap=create_rapid_ai_twin_snapshot(acquired, provider_boundary=provider, correlation_id='json-mode', force_reprocess=True)
+    creates=[x for x in captured if x[0]=='create']
+    assert len(creates)==1
+    create_payload=creates[0][1]
+    assert create_payload['text']['format'] == {'type':'json_object'}
+    assert 'foundation_fact_set' not in __import__('json').dumps(create_payload)
+    assert 'json_schema' not in __import__('json').dumps(create_payload['text'])
+    content=create_payload['input'][0]['content']
+    assert content[0]['type']=='input_file' and content[0]['file_url']=='https://www.bt.com/report.pdf'
+    assert 'Return exactly one JSON object' in content[1]['text']
+    assert snap['provider_receipt']['provider_response_id']=='resp_json_mode'
+    assert snap['model_and_cost_record']['input_tokens'] == 123
+
+
+def test_provider_request_rejection_not_cached_and_safe_code(tmp_path, monkeypatch):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
+    p=_pdf(tmp_path); acquired=AcquiredRapidSource(p,_receipt(p))
+    class RejectingProvider:
+        def __init__(self): self.calls=0
+        def analyse(self, acquired, correlation_id):
+            self.calls+=1
+            from cios.applications.flora.financial_intelligence.rapid_ai_twin import ProviderStageResult
+            call={'stage':'one_call_report_extraction_and_synthesis','status':'provider_request_invalid','http_status':400,'provider_error_code':'invalid_json_schema','model':'mock','usage':{},'elapsed_ms':37}
+            return ProviderStageResult(None, call, 'invalid_json_schema', None)
+    provider=RejectingProvider()
+    snap=create_rapid_ai_twin_snapshot(acquired, provider_boundary=provider, correlation_id='reject', force_reprocess=True)
+    assert snap['status']=='unavailable'
+    assert snap['validation']['safe_failure_code']=='provider_rejected_request'
+    assert 'output format was invalid' in snap['user_explanation']
+    assert snap['snapshot_truthfulness']['snapshot_record_persisted'] is False
+    provider2=RejectingProvider()
+    create_rapid_ai_twin_snapshot(acquired, provider_boundary=provider2, correlation_id='reject2')
+    assert provider2.calls == 1
