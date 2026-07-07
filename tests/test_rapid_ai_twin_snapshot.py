@@ -71,6 +71,7 @@ def test_rapid_ai_snapshot_contract_cache_csv_and_partial(tmp_path, monkeypatch)
     assert snap2['cache_state']=='hit' and provider2.calls == []
     partial=create_rapid_ai_twin_snapshot(acquired, provider_boundary=Stage2Fail(), correlation_id='r3', force_reprocess=True)
     assert partial['status']=='partial' and partial['financial_tables']
+    assert partial['user_status'] == 'Partial AI Twin Snapshot'
 
 
 def test_orchestration_and_bt_twin_rendering_without_canonical_writes(tmp_path, monkeypatch):
@@ -92,3 +93,20 @@ def test_orchestration_and_bt_twin_rendering_without_canonical_writes(tmp_path, 
     assert 'Download financial tables as CSV' in html and 'View source' in html
     assert 'Cost transformation is commercially material' in html
     assert 'BT may need automation' in html
+    html_again=digital_twins.bt_twin_page('fi-ai')
+    assert html_again == html
+
+
+def test_partial_snapshot_status_is_honest_in_digital_twin(tmp_path, monkeypatch):
+    monkeypatch.setenv('FLORA_DATA_ROOT', str(tmp_path/'data'))
+    p=_pdf(tmp_path); acquired=AcquiredRapidSource(p,_receipt(p))
+    def acq(*a, **k):
+        class CM:
+            def __enter__(self): return acquired
+            def __exit__(self, *exc): return False
+        return CM()
+    run=review.coordinate_dual_speed_financial_intelligence_run(run_id='fi-ai-partial', acquisition_boundary=acq, extraction_boundary=lambda a: create_rapid_ai_twin_snapshot(a, provider_boundary=Stage2Fail(), force_reprocess=True))
+    assert run['rapid_intelligence']['rapid_ai_twin_snapshot']['user_status'] == 'Partial AI Twin Snapshot'
+    html=digital_twins.bt_twin_page('fi-ai-partial')
+    assert 'Partial AI Twin Snapshot' in html
+    assert 'AI-built snapshot — verification pending' not in html
