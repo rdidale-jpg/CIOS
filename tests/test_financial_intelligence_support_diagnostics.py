@@ -158,8 +158,9 @@ def test_product_result_pages_show_safe_support_report_for_failed_and_partial(mo
     assert 'Download support report' in partial_html
     from cios.applications.flora.digital_twins import bt_twin_page
     twin = bt_twin_page()
-    assert 'Download support report' in twin
-    assert '/financial-intelligence/fi-ui-partial/support-report' in twin
+    assert 'Open result' in twin
+    assert 'Download support report' not in twin
+    assert '/financial-intelligence/fi-ui-partial/support-report' not in twin
 
 
 def test_safe_support_report_product_download_authz_persisted_no_reacquire_no_ai(monkeypatch, tmp_path):

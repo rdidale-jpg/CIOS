@@ -20,7 +20,7 @@ from cios.applications.flora.financial_intelligence.schema import ExperimentDocu
 from cios.applications.flora.financial_intelligence.rapid import run_rapid_financial_intelligence
 from cios.applications.flora.financial_intelligence.rapid_sources import RapidSourceAcquisitionError, acquire_rapid_financial_source
 from cios.applications.flora.financial_intelligence.rapid_candidates import extract_rapid_financial_candidates
-from cios.applications.flora.financial_intelligence.rapid_ai_twin import create_rapid_ai_twin_snapshot
+from cios.applications.flora.financial_intelligence.rapid_ai_twin import create_rapid_ai_twin_snapshot, provider_runtime_readiness
 from cios.applications.flora.memory.service import ObservationMemoryService
 from cios.applications.flora.memory.views import enterprise_memory_panel
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
@@ -1063,6 +1063,19 @@ def coordinate_dual_speed_financial_intelligence_run(enterprise_id: str = 'bt-gr
     acquisition_boundary = acquisition_boundary or acquire_rapid_financial_source
     ai_first_default = extraction_boundary is None
     extraction_boundary = extraction_boundary or create_rapid_ai_twin_snapshot
+    readiness = provider_runtime_readiness() if (ai_first_default and acquisition_boundary is acquire_rapid_financial_source) else {'status': 'passed'}
+    if readiness.get('status') != 'passed':
+        return {
+            'status': 'provider_not_configured',
+            'state': 'provider_not_configured',
+            'workflow': 'financial_intelligence',
+            'execution_mode': DUAL_SPEED_FINANCIAL_INTELLIGENCE_MODE,
+            'enterprise_id': enterprise_id,
+            'reporting_period': reporting_period,
+            'provider_readiness': readiness,
+            'user_message': 'AI research is not configured for this deployment.',
+            'run_created': False,
+        }
     run_id = run_id or ('fi-' + uuid.uuid4().hex[:12])
     ensure_writable_dir(_run_dir())
     created_at = now_iso()
