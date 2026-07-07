@@ -235,3 +235,32 @@ def test_unstructured_and_empty_provider_states(tmp_path, monkeypatch):
     assert unstructured['unstructured_ai_report']
     empty=create_rapid_ai_twin_snapshot(acquired, provider_boundary=OneCallProvider(raw='', payload=None), force_reprocess=True)
     assert empty['status']=='unavailable'
+
+def test_provider_envelope_json_and_truncation_preserve_largest_subset(tmp_path, monkeypatch):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
+    p=_pdf(tmp_path); acquired=AcquiredRapidSource(p,_receipt(p))
+    payload=one_call_payload(rows=3)
+    payload['financial_tables'][0]['rows'].append({'row_id':'bad-page','reported_label':'Bad page','source_page':999,'supporting_excerpt':'bad'})
+    raw={'id':'resp_nested','status':'incomplete','output':[{'content':[{'text':'Leading prose before JSON\\n' + __import__('json').dumps(payload)}]}]}
+    provider=OneCallProvider(raw=raw, finish='max_output_tokens')
+    snap=create_rapid_ai_twin_snapshot(acquired, provider_boundary=provider, correlation_id='truncated', force_reprocess=True)
+    assert snap['status']=='partial'
+    assert snap['validation']['truncated'] is True
+    assert len(snap['financial_tables'][0]['rows']) == 3
+    assert 'bad-page' not in [r['row_id'] for r in snap['financial_tables'][0]['rows']]
+    assert snap['user_status'] == 'Partial AI Twin Snapshot — verification pending'
+    assert snap['provider_receipt']['raw_response_length'] > 0
+
+def test_empty_sections_hidden_and_non_empty_never_unavailable(tmp_path, monkeypatch):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
+    p=_pdf(tmp_path); acquired=AcquiredRapidSource(p,_receipt(p))
+    payload=one_call_payload(rows=2)
+    payload.pop('management_commitments', None)
+    payload.pop('transformation_programmes', None)
+    snap=create_rapid_ai_twin_snapshot(acquired, provider_boundary=OneCallProvider(payload=payload), correlation_id='hidden', force_reprocess=True)
+    assert snap['status'] != 'unavailable'
+    run={'run_id':'hidden','rapid_intelligence':{'rapid_ai_twin_snapshot':snap}}
+    html=digital_twins._rapid_snapshot_section(run)
+    assert 'Financial tables' in html
+    assert 'Management commitments' not in html
+    assert 'Transformation programmes' not in html
