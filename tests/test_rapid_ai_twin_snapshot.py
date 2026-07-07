@@ -48,7 +48,7 @@ class Stage2Fail(MockProvider):
 
 
 def test_rapid_ai_snapshot_contract_cache_csv_and_partial(tmp_path, monkeypatch):
-    monkeypatch.setenv('FLORA_DATA_ROOT', str(tmp_path/'data'))
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
     p=_pdf(tmp_path); acquired=AcquiredRapidSource(p,_receipt(p)); provider=MockProvider()
     snap=create_rapid_ai_twin_snapshot(acquired, provider_boundary=provider, correlation_id='r1', force_reprocess=True)
     assert provider.calls[0][0]=='stage1' and provider.calls[0][1].startswith(b'%PDF')
@@ -75,7 +75,7 @@ def test_rapid_ai_snapshot_contract_cache_csv_and_partial(tmp_path, monkeypatch)
 
 
 def test_orchestration_and_bt_twin_rendering_without_canonical_writes(tmp_path, monkeypatch):
-    monkeypatch.setenv('FLORA_DATA_ROOT', str(tmp_path/'data'))
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
     p=_pdf(tmp_path); acquired=AcquiredRapidSource(p,_receipt(p))
     before=review._trusted_state_snapshot('bt-group-plc')
     def acq(*a, **k):
@@ -98,7 +98,7 @@ def test_orchestration_and_bt_twin_rendering_without_canonical_writes(tmp_path, 
 
 
 def test_partial_snapshot_status_is_honest_in_digital_twin(tmp_path, monkeypatch):
-    monkeypatch.setenv('FLORA_DATA_ROOT', str(tmp_path/'data'))
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
     p=_pdf(tmp_path); acquired=AcquiredRapidSource(p,_receipt(p))
     def acq(*a, **k):
         class CM:
@@ -110,3 +110,44 @@ def test_partial_snapshot_status_is_honest_in_digital_twin(tmp_path, monkeypatch
     html=digital_twins.bt_twin_page('fi-ai-partial')
     assert 'Partial AI Twin Snapshot' in html
     assert 'AI-built snapshot — verification pending' not in html
+
+
+def test_bt_click_render_prefers_requested_ai_run_and_ignores_structured_standard(tmp_path, monkeypatch):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path/'data'))
+    p=_pdf(tmp_path); acquired=AcquiredRapidSource(p,_receipt(p)); provider=MockProvider()
+    def acq(*a, **k):
+        class CM:
+            def __enter__(self): return acquired
+            def __exit__(self, *exc): return False
+        return CM()
+    before=review._trusted_state_snapshot('bt-group-plc')
+    run=review.coordinate_dual_speed_financial_intelligence_run(run_id='fi-click-ai', acquisition_boundary=acq, extraction_boundary=lambda a: create_rapid_ai_twin_snapshot(a, provider_boundary=provider, force_reprocess=True))
+    runs_dir=review._run_dir()
+    structured={
+        'run_id':'fi-later-structured',
+        'created_at':'2026-07-07T00:00:00+00:00',
+        'workflow':'financial_intelligence',
+        'enterprise_id':'bt-group-plc',
+        'execution_mode':'structured_standard_financials',
+        'extraction_mode':'structured_standard_financials',
+        'rapid_intelligence':{},
+    }
+    (runs_dir/'fi-later-structured.json').write_text(__import__('json').dumps(structured))
+    assert (runs_dir/'fi-click-ai.json').exists()
+    assert run['execution_mode'] == 'dual_speed_financial_intelligence'
+    assert run['rapid_intelligence']['rapid_ai_twin_snapshot']['status'] == 'ready'
+    assert [c[0] for c in provider.calls] == ['stage1', 'stage2']
+    html=digital_twins.bt_twin_page('fi-click-ai')
+    assert 'AI-built snapshot — verification pending' in html
+    assert 'Group results' in html and 'Revenue' in html
+    assert 'Reported revenue changed and cost transformation matters.' in html
+    assert 'Management commitment' in html and 'Reduce costs' in html
+    assert 'Signal' in html and 'Cost transformation is commercially material.' in html
+    assert 'Hypothesis' in html and 'BT may need automation' in html
+    assert 'Programme ownership unclear' in html or 'Detailed programme owner' in html
+    assert 'View source' in html and 'Page 10' in html
+    assert 'No financial tables are available in the rapid snapshot' not in html
+    html_again=digital_twins.bt_twin_page('fi-click-ai')
+    assert html_again == html
+    assert len(provider.calls) == 2
+    assert before == review._trusted_state_snapshot('bt-group-plc')

@@ -32,14 +32,25 @@ def _human_date(value) -> str:
         return str(value)
 
 
+def _is_bt_twin_research_run(run: dict) -> bool:
+    if run.get('enterprise_id', BT_ID) != BT_ID or run.get('workflow') != 'financial_intelligence':
+        return False
+    mode = run.get('execution_mode') or run.get('extraction_mode')
+    return mode in {None, 'dual_speed_financial_intelligence'}
+
+
 def _runs() -> list[dict]:
     rd = _run_dir()
     paths = sorted(rd.glob('fi-*.json'), key=lambda p: p.stat().st_mtime, reverse=True) if rd.exists() else []
-    return [r for p in paths if (r := _read_json(p)).get('enterprise_id', BT_ID) == BT_ID and r.get('workflow') == 'financial_intelligence']
+    return [r for p in paths if _is_bt_twin_research_run(r := _read_json(p))]
 
 
-def _latest_run() -> dict | None:
+def _latest_run(highlight_run_id: str | None = None) -> dict | None:
     rs = _runs()
+    if highlight_run_id:
+        for run in rs:
+            if run.get('run_id') == highlight_run_id:
+                return run
     return rs[0] if rs else None
 
 
@@ -87,7 +98,7 @@ def digital_twins_landing_page() -> str:
 
 
 def bt_twin_page(highlight_run_id: str | None = None) -> str:
-    run = _latest_run(); candidates = _candidates(run); model = EnterpriseModelRepository().get(BT_ID)
+    run = _latest_run(highlight_run_id); candidates = _candidates(run); model = EnterpriseModelRepository().get(BT_ID)
     state = _state_label(model, run, candidates)
     outcome, verification, twin_change = _research_outcome(run, candidates)
     latest_outcome = f"{outcome} {verification} Trusted Twin {twin_change}." if run else outcome
