@@ -217,7 +217,7 @@ def _content_type_for_path(path: str) -> str | None:
 
 
 def _flora_home_page() -> str:
-    body = f"""<section class='hero'><h1>Flora Home</h1><p>Start with the governed Flora product journeys.</p><p class='muted'>Release {RELEASE_IDENTIFIER}</p></section>
+    body = f"""<section class='hero'><h1>Flora Home</h1><p>Start with the governed Flora product journeys.</p><p class='muted'>Release {RELEASE_IDENTIFIER} · Deployed revision visible</p></section>
     <section class='card action'><h2>Import Blueprint</h2><p>Upload, validate, review, dry-run and explicitly approve Blueprint promotion.</p><p><a href='/flora/blueprint-import'>Open Import Blueprint</a></p></section>
     <section class='card'><h2>Navigation</h2><ul><li><a href='/flora/enterprise-canvas'>Enterprise Canvas</a></li><li><a href='/flora/blueprint-import/history'>Import History</a></li><li><a href='/radar'>Portfolio</a></li><li><a href='/live'>Evidence</a></li></ul></section>"""
     return _page("Flora Home", body)
