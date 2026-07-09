@@ -105,3 +105,17 @@ pytest -q
 ## Future live evidence connectors
 
 Future versions may add governed connectors for approved internal CRM, market intelligence, procurement, account-planning or public-source feeds. Those connectors should populate the same evidence model, retain source and publication metadata, preserve confidence scoring and keep missing-evidence gaps visible. No connector should bypass deterministic validation or introduce opaque recommendation logic.
+
+## Governed Blueprint Import product workflow
+
+Normal authorised users import Commercial Digital Twin Blueprint packages through Flora, not through PowerShell, shell scripts, repository checkout, or manual `FLORA_DATA_DIR` configuration.
+
+1. Open Flora.
+2. Choose **Import Blueprint** at `/blueprint-import`.
+3. Select the Blueprint ZIP from the local computer with the file chooser.
+4. Review the validation result, checksum, discovered files, workbook/worksheet summary, warnings, errors, and accepted/quarantined/rejected/unsupported counts.
+5. Review proposed canonical effects in plain language, including create/update/mapped/duplicate/conflict/unresolved/projection totals and important exceptions.
+6. Explicitly approve with **Approve and update governed Twin**, including a rationale, or decline promotion.
+7. Open the resulting Enterprise Canvas from the completion screen.
+
+Flora preserves the original ZIP in governed runtime storage outside source control. Upload and validation do not create canonical intelligence; canonical promotion remains an explicit governed approval and execution step. Technical command-line operation remains an administrative fallback only.

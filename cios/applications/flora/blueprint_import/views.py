@@ -1,0 +1,169 @@
+"""Plain-language Flora Blueprint Import web experience."""
+from __future__ import annotations
+
+from collections import Counter
+from html import escape
+from typing import Any
+
+from cios.applications.flora.access import authenticated_flora_user, can_receive_blueprint_package, user_enterprise_access
+from cios.applications.flora.workspace.views import _page
+
+from .archive import sha256_bytes
+from .candidates import CandidateStagingRepository
+from .mapping import ImportMappingService
+from .planning import DryRunPlanRepository, DryRunPlanningService
+from .promotion import CanonicalPromotionRepository, CanonicalPromotionService, BlueprintPromotionError, can_approve_blueprint_promotion, can_execute_blueprint_promotion
+from .registry import BlueprintPackageRegistry
+from .review import CandidateReviewRepository, CandidateReviewService, can_review_blueprint_candidate
+from .validator import BlueprintPackageValidator, BlueprintValidationError, can_inspect_blueprint_package
+from .models import PackageReceiptError
+
+MAX_UPLOAD_BYTES = 50 * 1024 * 1024
+ZIP_MIME_TYPES = {"application/zip", "application/x-zip-compressed", "application/octet-stream", ""}
+
+
+def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, int]:
+    if not can_receive_blueprint_package(headers):
+        return _safe_failure("Blueprint import access denied", "upload", False, False, "Ask an administrator for Blueprint upload permission."), 403
+    body = f"""<section class='hero'><h1>Import Blueprint</h1><p>Select a Commercial Digital Twin Blueprint ZIP from your computer.</p>{_notice(message)}</section>
+    <section class='card'><h2>Upload package</h2><p><strong>Supported format:</strong> .zip Blueprint package. <strong>Maximum size:</strong> {MAX_UPLOAD_BYTES // (1024*1024)} MB.</p><p class='muted'>Blueprint packages may contain confidential enterprise intelligence. Upload only packages you are authorised to use.</p><p><strong>Uploading a Blueprint does not change the governed Twin. Flora will validate and stage the package for review first.</strong></p><form method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><label for='blueprint_zip'>Blueprint ZIP file</label><input id='blueprint_zip' name='blueprint_zip' type='file' accept='.zip,application/zip' required><p><button type='submit'>Upload and validate</button></p></form></section>
+    <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous Blueprint imports</a></p></section>"""
+    return _page("Import Blueprint", body), 200
+
+
+def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str], headers: Any) -> tuple[str, int, str]:
+    actor = authenticated_flora_user(headers)
+    filename = fields.get("blueprint_zip.filename") or fields.get("filename") or "blueprint.zip"
+    mime = fields.get("blueprint_zip.content_type") or fields.get("content_type") or ""
+    try:
+        if not can_receive_blueprint_package(headers):
+            raise PermissionError("You are not authorised to upload Blueprint packages.")
+        content = files.get("blueprint_zip") or files.get("file") or b""
+        if not filename.lower().endswith(".zip") or mime not in ZIP_MIME_TYPES:
+            raise PackageReceiptError("Choose a valid Blueprint ZIP file.")
+        if len(content) > MAX_UPLOAD_BYTES:
+            raise PackageReceiptError(f"The selected file is larger than the {MAX_UPLOAD_BYTES // (1024*1024)} MB upload limit.")
+        before = _canonical_marker()
+        record = BlueprintPackageRegistry().receive(content, filename, actor)
+        result = BlueprintPackageValidator().validate_and_stage(record.package_ref, actor, headers)
+        assert before == _canonical_marker(), "Upload and validation must not mutate canonical memory"
+        return validation_result_page(record.import_run_id, headers)[0], 200, f"/blueprint-import/{record.import_run_id}"
+    except PermissionError as exc:
+        return _safe_failure(str(exc), "upload", False, False, "Sign in with Blueprint upload permission."), 403, "/blueprint-import"
+    except Exception as exc:
+        return _safe_failure(str(exc), "upload", False, False, "Choose a safe Blueprint ZIP and try again. No governed Twin changes occurred."), 400, "/blueprint-import"
+
+
+def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
+    ctx = _context(import_run_id)
+    if not ctx or not can_inspect_blueprint_package(headers, ctx["package"]):
+        return _safe_failure("Blueprint import record is unavailable or access is denied.", "validation", False, True, "Open an import you are authorised to review."), 403
+    package = ctx["package"]; summary = ctx["summary"] or {}; candidates = ctx["candidates"]
+    worksheets = _worksheets(summary.get("warnings", [])); status = "Passed with warnings" if summary.get("warnings") and not summary.get("errors") else ("Failed" if summary.get("errors") else "Passed")
+    counts = _candidate_counts(candidates)
+    body = _package_header(package) + f"""<section class='card'><h2>Validation result</h2><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr><tr><th>Workbook discovered</th><td>{'Yes' if any(str(f).endswith(('.xlsx','.xlsm','.xls')) for f in summary.get('files_inspected', [])) else 'Not declared'}</td></tr><tr><th>Worksheets discovered</th><td>{escape(', '.join(worksheets) or 'None reported')}</td></tr><tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section>""" + _counts_section(counts) + "<section class='card'><p><a href='/blueprint-import/{0}/review'>Review proposed changes</a></p></section>".format(escape(import_run_id))
+    return _page("Blueprint validation result", body), 200
+
+
+def review_page(import_run_id: str, headers: Any, message: str = "") -> tuple[str, int]:
+    ctx = _context(import_run_id)
+    if not ctx or not can_review_blueprint_candidate(headers, ctx["package"].identity.enterprise_id):
+        return _safe_failure("You are not authorised to review this Blueprint import.", "review", False, True, "Ask for Blueprint review permission."), 403
+    _ensure_reviews_and_mappings(ctx, headers)
+    plan = DryRunPlanningService().create_plan(import_run_id, authenticated_flora_user(headers), headers)
+    totals = Counter(e.effect_type for e in plan.effects)
+    exceptions = [e for e in plan.effects if e.effect_type in {"conflict", "unresolved", "quarantine", "unsupported", "reject", "defer", "projection"}]
+    rows = "".join(f"<tr><th>{escape(k.replace('_',' '))}</th><td>{v}</td></tr>" for k,v in {
+        "records to create": totals["create"], "records to update": totals["update"], "records mapped without change": totals["mapped"] + totals["unchanged"], "duplicates": totals["duplicate"], "conflicts": totals["conflict"], "unresolved references": totals["unresolved"], "analytical projections retained outside canonical memory": totals["projection"]}.items())
+    body = _package_header(ctx["package"]) + _notice(message) + f"<section class='card'><h2>Review proposed changes</h2><table>{rows}</table><p><strong>Expected governed Twin mutation count:</strong> {plan.expected_canonical_mutation_count}</p>{_exceptions(exceptions)}</section>"
+    body += f"""<section class='card'><h2>Approval</h2><p>Approve only if you have reviewed the plan, expected mutation count and unresolved warnings.</p><form method='post' action='/blueprint-import/{escape(import_run_id)}/approve'><input type='hidden' name='plan_id' value='{escape(plan.plan_id)}'><label><input type='checkbox' name='confirm_plan' value='yes' required> I reviewed the plan</label><label><input type='checkbox' name='confirm_mutations' value='yes' required> I understand the expected mutation count is {plan.expected_canonical_mutation_count}</label><label>Approval rationale</label><textarea name='rationale' required></textarea><p><button type='submit'>Approve and update governed Twin</button></p></form><form method='post' action='/blueprint-import/{escape(import_run_id)}/decline'><p><button type='submit'>Decline promotion</button></p></form></section>"""
+    return _page("Review Blueprint proposed changes", body), 200
+
+
+def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers: Any) -> tuple[str, int]:
+    ctx = _context(import_run_id)
+    if not ctx or not (can_approve_blueprint_promotion(headers, ctx["package"].identity.enterprise_id) and can_execute_blueprint_promotion(headers, ctx["package"].identity.enterprise_id)):
+        return _safe_failure("You are not authorised to approve and execute Blueprint promotion.", "approval", False, True, "Ask for Blueprint promotion permission."), 403
+    if form.get("confirm_plan") != ["yes"] or form.get("confirm_mutations") != ["yes"] or not (form.get("rationale") or [""])[0].strip():
+        return review_page(import_run_id, headers, "Approval requires review confirmation, mutation-count confirmation and a rationale.")
+    try:
+        svc = CanonicalPromotionService(); plan_id = (form.get("plan_id") or [""])[0]
+        approval = svc.approve_plan(import_run_id, plan_id, authenticated_flora_user(headers), (form.get("rationale") or [""])[0], headers)
+        result = svc.execute_approved_plan(import_run_id, approval.approval_id, authenticated_flora_user(headers), headers)
+        return completion_page(import_run_id, result.to_dict(), headers), 200
+    except BlueprintPromotionError as exc:
+        return _safe_failure(str(exc), "promotion", False, True, "The package remains available. Review the plan and retry after resolving the issue."), 400
+
+
+def decline_promotion(import_run_id: str, headers: Any) -> tuple[str, int]:
+    return review_page(import_run_id, headers, "Promotion declined. No canonical changes occurred; the preserved package remains available for later review.")
+
+
+def completion_page(import_run_id: str, result: dict[str, Any], headers: Any) -> str:
+    ctx = _context(import_run_id); package = ctx["package"] if ctx else None; enterprise = package.identity.enterprise_id if package else ""
+    body = ( _package_header(package) if package else "") + f"""<section class='card'><h2>Completion</h2><table><tr><th>Promotion status</th><td>{escape(result.get('final_execution_status','unknown'))}</td></tr><tr><th>Records created</th><td>{len(result.get('records_created', []))}</td></tr><tr><th>Records updated</th><td>{len(result.get('records_updated', []))}</td></tr><tr><th>Projections retained</th><td>{_projection_count(import_run_id)}</td></tr><tr><th>Exceptions</th><td>{len(result.get('records_blocked', [])) + len(result.get('records_failed', []))}</td></tr></table><p>The original ZIP was preserved unchanged in governed runtime storage.</p><p><a href='/digital-twins/{escape(enterprise)}/canvas'>Open Enterprise Canvas</a> · <a href='/blueprint-import/{escape(import_run_id)}'>Open import record</a></p></section>"""
+    return _page("Blueprint import complete", body)
+
+
+def history_page(headers: Any) -> tuple[str, int]:
+    if not authenticated_flora_user(headers):
+        return _safe_failure("Sign in to view Blueprint import history.", "history", False, True, "Sign in and try again."), 403
+    rows = []
+    allowed = user_enterprise_access(headers)
+    for p in BlueprintPackageRegistry().list():
+        if "*" not in allowed and p.identity.enterprise_id not in allowed: continue
+        summary = BlueprintPackageValidator().staging_summary(p.import_run_id) or {}
+        plans = DryRunPlanRepository().list(p.import_run_id)
+        promo = _latest_promotion_status(p.import_run_id)
+        rows.append(f"<tr><td>{escape(_package_name(p))}</td><td>{escape(p.identity.enterprise_id)}</td><td>{escape(p.identity.package_version)}</td><td>{escape(p.received_by)}</td><td>{escape(p.received_at)}</td><td>{'complete' if summary else p.status}</td><td>{'planned' if plans else 'not reviewed'}</td><td>{escape(promo)}</td><td>{escape(_twin_version(p))}</td><td><a href='/blueprint-import/{escape(p.import_run_id)}'>details</a></td></tr>")
+    table = "<table><thead><tr><th>Package name</th><th>Enterprise</th><th>Package version</th><th>Uploaded by</th><th>Uploaded date</th><th>Validation status</th><th>Review status</th><th>Promotion status</th><th>Resulting Twin version</th><th>Details</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table>"
+    return _page("Blueprint import history", f"<section class='hero'><h1>Blueprint import history</h1></section><section class='card'>{table}</section>"), 200
+
+# helpers
+
+def _context(import_run_id):
+    for p in BlueprintPackageRegistry().list():
+        if p.import_run_id == import_run_id:
+            s = BlueprintPackageValidator().staging_summary(import_run_id)
+            return {"package": p, "summary": s, "candidates": (s or {}).get("candidates", [])}
+    return None
+
+def _ensure_reviews_and_mappings(ctx, headers):
+    reviewer = authenticated_flora_user(headers); reviews = CandidateReviewRepository().latest_by_candidate(ctx["package"].import_run_id); mapper = ImportMappingService(); reviewer_svc = CandidateReviewService()
+    for c in ctx["candidates"]:
+        cid = c["candidate_record_id"]
+        if cid not in reviews:
+            decision = "approve" if c.get("validation_status") == "accepted" else ("unsupported" if c.get("validation_status") == "quarantined" else "reject")
+            reviewer_svc.record_decision(cid, decision, reviewer, "UI default review summary for staged package", headers)
+        if c.get("validation_status") == "accepted" and c.get("candidate_object_class") in {"evidence", "observation"} and not c.get("payload", {}).get("proposed_effect"):
+            mapper.record_mapping(c, "propose_create", reviewer, headers, c.get("candidate_object_class", "").title())
+
+def _candidate_counts(candidates): return Counter(c.get("validation_status", "unsupported") for c in candidates)
+def _counts_section(c): return f"<section class='card'><h2>Candidate staging summary</h2><p>Accepted {c['accepted']} · Quarantined {c['quarantined']} · Rejected {c['rejected']} · Unsupported {c['unsupported']}</p></section>"
+def _package_name(p): return getattr(p.identity, "package_name", "") or p.identity.package_id
+def _twin_version(p): return getattr(p.identity, "twin_version", "") or p.identity.package_version
+def _package_header(p): return f"<section class='hero'><h1>{escape(_package_name(p))}</h1><p>Version {escape(p.identity.package_version)} · Enterprise {escape(p.identity.enterprise_id)}</p></section>"
+def _notice(m): return f"<p class='pill'>{escape(m)}</p>" if m else ""
+def _list(t, xs): return f"<h3>{escape(t)}</h3><ul>{''.join(f'<li>{escape(str(x))}</li>' for x in xs) or '<li>None</li>'}</ul>"
+def _worksheets(warnings):
+    for w in warnings:
+        if str(w).startswith("Worksheets discovered:"): return [x.strip() for x in str(w).split(":",1)[1].split(",") if x.strip()]
+    return []
+def _exceptions(effects): return "<details><summary>Important exceptions</summary><ul>" + "".join(f"<li>{escape(e.external_id)} — {escape(e.effect_type)}: {escape(e.reason)}</li>" for e in effects) + "</ul></details>"
+def _projection_count(import_run_id): return sum(1 for p in DryRunPlanRepository().list(import_run_id) for e in p.get("effects",[]) if e.get("effect_type") == "projection")
+def _latest_promotion_status(import_run_id):
+    import json
+    from cios.applications.flora.storage import data_path
+    root=data_path("blueprint_import","promotion","executions",import_run_id)
+    if not root.exists(): return "not promoted"
+    vals=[json.loads(p.read_text()).get("final_execution_status", "unknown") for p in root.glob("*.json")]
+    return vals[-1] if vals else "not promoted"
+def _safe_failure(message, stage, changed, retry, next_step):
+    body=f"<section class='hero'><h1>Blueprint import needs attention</h1></section><section class='card'><h2>What happened</h2><p>{escape(message)}</p><ul><li>Stage failed: {escape(stage)}</li><li>Canonical changes occurred: {'yes' if changed else 'no'}</li><li>Package available for retry: {'yes' if retry else 'no'}</li><li>Next step: {escape(next_step)}</li></ul></section>"
+    return _page("Blueprint import failure", body)
+def _canonical_marker():
+    from cios.applications.flora.storage import data_path
+    files=[]
+    for rel in [("memory","evidence.jsonl"),("memory","observations.jsonl")]:
+        p=data_path(*rel); files.append(sha256_bytes(p.read_bytes()) if p.exists() else "missing")
+    return tuple(files)
