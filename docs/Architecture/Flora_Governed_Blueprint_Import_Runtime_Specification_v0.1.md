@@ -656,3 +656,11 @@ Each implementation PR must report:
 - architecture debt;
 - screenshots or test evidence for the acceptance workspace;
 - commit and PR details.
+
+## Sprint 1 PR2 runtime note — validation and candidate staging
+
+Flora now implements the bounded PR2 validation and staging layer on top of the PR1 package registry. The runtime validates the exact immutable archive recorded by PR1, verifies its checksum, compares `blueprint_manifest.json` identity fields with the registry record, discovers declared `.ndjson` record sets, and creates reviewable candidate import records under `blueprint_import/staging/{import_run_id}/`.
+
+The staging layer is deliberately non-canonical. Every dry-run summary reports zero canonical mutations, and candidate records include `canonical_mutation_count: 0`. Projection-only records such as Pain Points, Burning Platforms and Transformation Pressures are retained as quarantined staging records, not promoted into new canonical object types. Unsupported classes such as Provider Fit remain visibly quarantined.
+
+Validation findings are recorded on candidate records and in the staging summary. Valid records can be accepted into staging while unsupported, unresolved or malformed records are quarantined or rejected. Re-running validation against the same package reuses the existing staging summary and does not create duplicate candidate identities.
