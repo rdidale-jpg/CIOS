@@ -148,6 +148,22 @@ class EnterpriseCanvasService:
                 groups[key].append(attr)
         if not groups and attrs:
             groups["enterprise"].extend(attrs.values())
+        if not groups and projections:
+            yield EnterpriseCanvasTile(
+                tile_view_id="canvas-tile-" + sha256_bytes(f"{enterprise_id}\norganisation\nimported-projections".encode())[:20],
+                lens="organisation", sort_order=1, underlying_reference=f"{enterprise_id}:imported-projections",
+                display_name="Imported Twin intelligence",
+                plain_english_role="Governed intelligence staged from an accepted CIOS Commercial Digital Twin package.",
+                accountable_role="Unknown", current_state="Imported analytical baseline",
+                principal_pain_or_pressure=projections[0].display_label, material_change="Unknown",
+                what_has_been_done_so_far=self._projection_label(projections, {"current_response", "response_effectiveness"}),
+                what_remains_unresolved=self._projection_label(projections, {"residual_pain"}),
+                unknown_indicator=False, contradiction_indicator=False, stale_evidence_indicator=False, nested_twin_available=False,
+                effective_date=projections[0].effective_date or "Unknown", source_cut_off="Unknown", last_refreshed_date="Unknown",
+                core_facts=("No promoted Enterprise Model attributes are available for this imported package yet.",),
+                analytical_projections=tuple(projections[:8]),
+                lineage_references=tuple(l for p in projections[:8] for l in p.lineage), inspection={"source":"analytical_projection_fallback"})
+            return
         for order, (key, facts) in enumerate(sorted(groups.items()), start=1):
             ref = f"{enterprise_id}:{key}"
             projections_for_tile = tuple(p for p in projections if key.casefold() in " ".join([p.display_label, *p.supporting_record_refs]).casefold() or p.projection_type in {"pain_point", "burning_platform", "transformation_pressure_view"})[:8]

@@ -16,6 +16,7 @@ from .candidates import (CandidateImportRecord, CandidateStagingRepository, Impo
 from .ledger import BlueprintImportLedger, utc_now
 from .models import BlueprintPackageRecord, PackageReceiptError
 from .registry import BlueprintPackageRegistry
+from .cios_twin_adapter import CiosCommercialTwinAdapter
 
 class BlueprintValidationError(PackageReceiptError):
     pass
@@ -35,6 +36,7 @@ class BlueprintPackageValidator:
         self.registry = registry or BlueprintPackageRegistry()
         self.staging = staging or CandidateStagingRepository()
         self.ledger = ledger or BlueprintImportLedger()
+        self.twin_adapter = CiosCommercialTwinAdapter()
 
     def validate_and_stage(self, package_ref: str, actor: str, headers: Any | None = None) -> ImportRunDryRunResult:
         package = self.registry.get(package_ref)
@@ -89,6 +91,13 @@ class BlueprintPackageValidator:
                 if "blueprint_manifest.json" not in seen: errors.append("Missing blueprint_manifest.json")
                 manifest = json.loads(zf.read("blueprint_manifest.json").decode("utf-8")) if "blueprint_manifest.json" in seen else {}
                 self._validate_manifest(package, manifest, seen, warnings, errors)
+                inspection = self.twin_adapter.inspect(package, zf, manifest) if isinstance(manifest, dict) else None
+                if inspection:
+                    files.append(inspection.workbook_path)
+                    warnings.extend([f"Worksheets discovered: {', '.join(inspection.worksheets)}"] if inspection.worksheets else [])
+                    warnings.extend(inspection.warnings)
+                    errors.extend(inspection.errors)
+                    candidates.extend(inspection.candidates)
                 record_sets = manifest.get("record_sets") if isinstance(manifest, dict) else []
                 if isinstance(record_sets, list):
                     for record_set in record_sets:
