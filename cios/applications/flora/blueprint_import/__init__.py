@@ -7,6 +7,7 @@ from .candidates import CandidateImportRecord, ImportRunDryRunResult
 from .review import CandidateReviewDecision, CandidateReviewService, BlueprintReviewError
 from .mapping import ImportMappingRecord, ImportMappingService
 from .planning import DryRunCanonicalEffectPlan, DryRunPlanningService
+from .promotion import CanonicalPromotionApproval, CanonicalPromotionResult, CanonicalPromotionService, BlueprintPromotionError
 
 __all__ = [
     "BlueprintPackageRecord",
@@ -25,4 +26,8 @@ __all__ = [
     "ImportMappingService",
     "DryRunCanonicalEffectPlan",
     "DryRunPlanningService",
+    "CanonicalPromotionApproval",
+    "CanonicalPromotionResult",
+    "CanonicalPromotionService",
+    "BlueprintPromotionError",
 ]

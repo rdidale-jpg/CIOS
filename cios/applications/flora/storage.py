@@ -25,6 +25,8 @@ REQUIRED_DIRS = (
     "blueprint_import/reviews",
     "blueprint_import/mappings",
     "blueprint_import/plans",
+    "blueprint_import/promotion/approvals",
+    "blueprint_import/promotion/executions",
 )
 
 class PersistenceError(OSError):
