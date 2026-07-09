@@ -563,3 +563,15 @@ Review after:
 - evidence that tile summaries obscure material distinctions;
 - accessibility audit;
 - user feedback showing document navigation is still required for basic understanding.
+
+## Sprint 1 PR5 implementation note — Enterprise Canvas read-model foundation
+
+Flora now provides a bounded, read-only Enterprise Canvas service under `cios/applications/flora/enterprise_canvas/`. The first supported lens is the organisation lens. It assembles an enterprise header and deterministic top-level tiles from existing Enterprise Model attributes, Unknown records, Evidence references and Blueprint-import analytical projection candidates.
+
+The Canvas DTOs intentionally prioritise plain-language display fields such as `plain_english_role`, `what_has_been_done_so_far` and `what_remains_unresolved`. Internal references remain available for inspection and lineage, but they are not the primary display language.
+
+Analytical projection candidates such as Pain Points, Burning Platforms, Transformation Pressures, current responses, response-effectiveness views and residual-pain views remain projections. The Canvas may display them with projection type, package or Twin version, effective date, confidence or qualification, status and lineage, but it does not promote them into canonical Enterprise Model object types.
+
+Freshness and uncertainty are represented separately in the header and tiles: effective date, source cut-off, last refreshed date, stale-evidence indicator, Unknown indicator, Contradiction indicator, human-supplied provenance via canonical attributes, and accepted Evidence-backed state remain distinct fields.
+
+Lineage references are preserved from displayed judgement to canonical attribute or analytical projection, Observation IDs, Evidence IDs, Source IDs where known, package reference, import run and package location. The visual lineage explorer and full drill-down panel remain deferred.
