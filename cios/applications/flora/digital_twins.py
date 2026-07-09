@@ -92,7 +92,7 @@ def digital_twins_landing_page() -> str:
     run = _latest_run(); candidates = _candidates(run)
     latest_research = escape(_human_date(run.get('created_at'))) if run else 'No recent source-backed research.'
     count = f"<p>{len(candidates)} new candidate findings awaiting verification.</p>" if candidates else ''
-    body = f"""<section class='hero'><h1>Digital Twins</h1><p class='muted'>Authenticated product area for durable Commercial Digital Twins.</p></section>
+    body = f"""<section class='hero'><h1>Digital Twins</h1><p class='muted'>Authenticated product area for durable Commercial Digital Twins.</p><p><a href='/blueprint-import'>Import Blueprint</a></p></section>
     <section class='card action'><h2>{BT_NAME}</h2><p>Commercial Digital Twin</p><p>Latest trusted update: {escape(_trusted_update())}</p><p>Latest research date: {latest_research}</p>{count}<p><a href='/digital-twins/bt-group-plc'>Open Twin</a></p></section>"""
     return _page('Digital Twins', body)
 

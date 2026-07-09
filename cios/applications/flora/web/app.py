@@ -27,6 +27,7 @@ from cios.applications.flora.document_review import apply_accepted, configure_fi
 from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id
 from cios.applications.flora.flora_transparent import page as flora_page, start_bt_digital_twin, flora_payload
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
+from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -93,6 +94,20 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(evidence_page())
             elif parsed.path == "/digital-twins":
                 self._html(digital_twins_landing_page())
+            elif parsed.path == "/blueprint-import":
+                html, status = import_blueprint_entry_page(self.headers)
+                self._html(html, status=status)
+            elif parsed.path == "/blueprint-import/history":
+                html, status = blueprint_history_page(self.headers)
+                self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/review"):
+                run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/review")
+                html, status = blueprint_review_page(run_id, self.headers)
+                self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/"):
+                run_id = parsed.path.removeprefix("/blueprint-import/")
+                html, status = validation_result_page(run_id, self.headers)
+                self._html(html, status=status)
             elif _is_enterprise_canvas_path(parsed.path):
                 html, status = _enterprise_canvas_response(parsed.path, self.headers)
                 self._html(html, status=status)
@@ -211,7 +226,19 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         length = int(self.headers.get("Content-Length", "0"))
         raw_body = self.rfile.read(length)
         form = {} if "multipart/form-data" in self.headers.get("Content-Type", "") else parse_qs(raw_body.decode("utf-8"), keep_blank_values=True)
-        if self.path.startswith("/digital-twins/") and self.path.endswith("/canvas/feedback"):
+        if self.path == "/blueprint-import/upload":
+            fields, files = _parse_multipart(self.headers, raw_body)
+            html, status, _target = upload_and_validate_blueprint(files, fields, self.headers)
+            self._html(html, status=status)
+        elif self.path.startswith("/blueprint-import/") and self.path.endswith("/approve"):
+            run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/approve")
+            html, status = blueprint_approve_and_promote(run_id, form, self.headers)
+            self._html(html, status=status)
+        elif self.path.startswith("/blueprint-import/") and self.path.endswith("/decline"):
+            run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/decline")
+            html, status = blueprint_decline_promotion(run_id, self.headers)
+            self._html(html, status=status)
+        elif self.path.startswith("/digital-twins/") and self.path.endswith("/canvas/feedback"):
             html, status, _target = submit_enterprise_canvas_feedback(form, self.headers)
             self._html(html, status=status)
         elif self.path == "/flora/bt-digital-twin":
@@ -374,7 +401,7 @@ def _redirects_to_flora(path: str) -> bool:
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path == "/flora" or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports":
+    if path == "/flora" or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports":
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
@@ -438,6 +465,8 @@ def _parse_multipart(headers, body: bytes) -> tuple[dict[str, str], dict[str, by
         payload = part.get_payload(decode=True) or b""
         if filename:
             files[name] = payload
+            fields[f"{name}.filename"] = filename
+            fields[f"{name}.content_type"] = part.get_content_type()
         else:
             fields[name] = payload.decode("utf-8", "replace")
     return fields, files
