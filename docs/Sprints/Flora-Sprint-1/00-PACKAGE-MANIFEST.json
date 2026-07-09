@@ -1,0 +1,89 @@
+{
+  "package_id": "cios-flora-sprint-1-architecture-v0.1",
+  "version": "0.1",
+  "created_at": "2026-07-09",
+  "owner": "Rob / CIOS",
+  "purpose": "Architecture and Codex baseline for governed Blueprint import and Enterprise Canvas implementation.",
+  "status": "approved_architecture_baseline",
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "406bc5941430d8a9429eb80815b49194cda9deb6962cd206fef79053b246f692",
+      "bytes": 1352
+    },
+    {
+      "path": "README.md",
+      "sha256": "f92741f14c75a41caa009e13a21bab5764d12dd5e3320c34f7375566fb221dc4",
+      "bytes": 3157
+    },
+    {
+      "path": "architecture/decisions/ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md",
+      "sha256": "a8bfebc13e2a3759907efb787bc12de89714d25df57af2629ccc670a538df540",
+      "bytes": 11988
+    },
+    {
+      "path": "architecture/decisions/ADR-013-Enterprise-Canvas-as-Primary-Living-Twin-Navigation.md",
+      "sha256": "cec087fb0f1130cd57970f17106bebb42d77f9520380ae3bfd6025edf21294ae",
+      "bytes": 9827
+    },
+    {
+      "path": "architecture/decisions/README.md",
+      "sha256": "8339be6cc5b6c5cde515a79bf68011deb8beec2527dadb734b440b3920ba98a5",
+      "bytes": 2522
+    },
+    {
+      "path": "architecture/reference-architecture/CIOS-Reference-Architecture-v1.0.md",
+      "sha256": "c2b9790b0312c741cbd74be021bc33cc6ead4bc997698a5a3864b5ae7b21c12d",
+      "bytes": 19894
+    },
+    {
+      "path": "architecture/reference-architecture/Document-Map.md",
+      "sha256": "297211a65c64615d9de49cece8d8fe62b7a06cc8c6f0093ee19d03645c186469",
+      "bytes": 16184
+    },
+    {
+      "path": "architecture/reference-architecture/Glossary.md",
+      "sha256": "f7cd3ab824f3d9e108fbb16b35278b1f3e4f25718a967ea95c5b41dc6a918ba3",
+      "bytes": 14708
+    },
+    {
+      "path": "docs/Architecture/CIOS_Blueprint_Package_Import_Profile_v0.1.md",
+      "sha256": "ec0f4380c8b09e1da57156fe61e34eb3341bbc0cc415a59d41a1a67b9403b678",
+      "bytes": 11451
+    },
+    {
+      "path": "docs/Architecture/CIOS_Enterprise_Intelligence_Experience_Standard_v0.1.md",
+      "sha256": "2b1daaa6fa8126391a2940ff34f185230175205bf6e471bcc0da037f34e8854f",
+      "bytes": 12161
+    },
+    {
+      "path": "docs/Architecture/Flora_Enterprise_Canvas_and_Drill_Down_Pattern_v0.1.md",
+      "sha256": "1dcab2af9291ff075bd5d6d4008ed4c60d1f16271f4c1c4834d1ae2142ca195f",
+      "bytes": 14641
+    },
+    {
+      "path": "docs/Architecture/Flora_Governed_Blueprint_Import_Runtime_Specification_v0.1.md",
+      "sha256": "7af44126df8e6e857b02f5d0a80af6a9f83ef7f2d10e39fae5a8f3bcab733974",
+      "bytes": 18652
+    },
+    {
+      "path": "docs/Sprints/Flora-Sprint-1/Architecture_Compliance_Statement.md",
+      "sha256": "51c6aa2fdd6cc110a60864bcad4a7e1346bfcaf12d3fd90b14b7e2c2e1b9a706",
+      "bytes": 4792
+    },
+    {
+      "path": "docs/Sprints/Flora-Sprint-1/Codex_PR0_Read_Only_Runtime_Binding_Audit.md",
+      "sha256": "0cc7304d6394350d5dfa22fa1f6184244a0ea227c830c872ff23550f0cda8a2a",
+      "bytes": 6638
+    },
+    {
+      "path": "docs/Sprints/Flora-Sprint-1/Flora_Sprint_1_Governed_Blueprint_Import_and_Enterprise_Canvas_Delivery_Plan_v0.1.md",
+      "sha256": "b8349f39ada1fe085b1e2498cedccefb671157987f55ef9270f2c42f6a5d08ea",
+      "bytes": 13384
+    }
+  ],
+  "known_dependencies": [
+    "Existing CIOS repository architecture, Founding Papers, EI papers, earlier ADRs and Flora source code.",
+    "Accepted MOD-CDT-v1.2-HSK-Incorporated-Clean-Release.zip as secure pilot input; not included in this package."
+  ]
+}
