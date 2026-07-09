@@ -7,7 +7,7 @@ import sys
 import threading
 from http.client import HTTPConnection
 
-from cios.applications.flora.web.app import FloraWebHandler, env_port
+from cios.applications.flora.web.app import FloraWebHandler, RELEASE_IDENTIFIER, env_port
 
 
 def _get(path: str) -> tuple[int, str, bytes]:
@@ -34,14 +34,63 @@ def test_health_returns_200_plain_json() -> None:
     assert json.loads(body.decode("utf-8")) == {"status": "healthy", "service": "flora"}
 
 
-def test_root_renders_morning_edition_content() -> None:
+def test_root_renders_flora_home_from_production_handler() -> None:
     status, content_type, body = _get("/")
     html = body.decode("utf-8")
     assert status == 200
     assert content_type == "text/html; charset=utf-8"
-    assert "Good Morning Rob" in html
-    assert "Morning Edition" in html
+    assert "Flora Home" in html
+    assert "Import Blueprint" in html
+    assert "Enterprise Canvas" in html
+    assert "Import History" in html
+    assert "BT Collection" in html
+    assert f"Release {RELEASE_IDENTIFIER}" in html
+    assert "<h1>Executive Brief</h1>" not in html
 
+
+def test_flora_route_renders_same_home_experience() -> None:
+    status, content_type, body = _get("/flora")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert content_type == "text/html; charset=utf-8"
+    assert "Flora Home" in html
+    assert "Import Blueprint" in html
+    assert "Enterprise Canvas" in html
+    assert "Import History" in html
+    assert f"Release {RELEASE_IDENTIFIER}" in html
+    assert "<h1>Executive Brief</h1>" not in html
+
+
+def test_bt_collection_is_labelled_specialist_route_not_default() -> None:
+    status, _, body = _get("/flora/bt-collection")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "<h1>Executive Brief</h1>" in html
+    assert "Flora Home" not in html
+
+
+
+def test_render_start_command_uses_production_web_entrypoint() -> None:
+    render_config = __import__("pathlib").Path("render.yaml").read_text(encoding="utf-8")
+    assert "startCommand: python -m cios.applications.flora.web.app" in render_config
+
+
+def test_home_responses_disable_stale_proxy_cache() -> None:
+    server = __import__("http.server").server.ThreadingHTTPServer(("127.0.0.1", 0), FloraWebHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    connection = HTTPConnection("127.0.0.1", server.server_port)
+    try:
+        connection.request("GET", "/")
+        response = connection.getresponse()
+        response.read()
+        assert response.getheader("Cache-Control") == "no-store, max-age=0"
+        assert response.getheader("Pragma") == "no-cache"
+    finally:
+        connection.close()
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=2)
 
 def test_bt_case_route_renders_case_file() -> None:
     status, content_type, body = _get("/case/BT")
@@ -98,11 +147,13 @@ def test_live_evidence_empty_state(monkeypatch, tmp_path) -> None:
     assert "/live/collect" in html
 
 
-def test_homepage_morning_edition_live_banner(monkeypatch, tmp_path) -> None:
+def test_homepage_does_not_auth_redirect_to_bt_collection(monkeypatch, tmp_path) -> None:
     monkeypatch.chdir(tmp_path)
     status, _, body = _get("/")
+    html = body.decode("utf-8")
     assert status == 200
-    assert "NO LIVE EVIDENCE AVAILABLE" in body.decode("utf-8")
+    assert "Access denied" not in html
+    assert "<h1>Executive Brief</h1>" not in html
 
 
 def test_live_sources_route(monkeypatch, tmp_path) -> None:
@@ -181,12 +232,21 @@ def test_radar_links_to_score_pages() -> None:
     assert "/score/BT" in html
 
 
-def test_watchlist_links_to_score_pages() -> None:
+def test_home_import_blueprint_navigation_uses_governed_route() -> None:
     status, _, body = _get("/")
     html = body.decode("utf-8")
     assert status == 200
-    assert "Explain score" in html
-    assert "/score/BT" in html
+    assert "Open Import Blueprint" in html
+    assert "/flora/blueprint-import" in html
+
+
+def test_blueprint_import_get_does_not_mutate_canonical_data(tmp_path, monkeypatch) -> None:
+    monkeypatch.setenv("FLORA_BLUEPRINT_IMPORT_DIR", str(tmp_path / "imports"))
+    status, _, body = _get("/flora/blueprint-import")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "Import Blueprint" in html
+    assert not (tmp_path / "imports" / "history.jsonl").exists()
 
 
 def test_scoring_renders_model_explanation() -> None:
