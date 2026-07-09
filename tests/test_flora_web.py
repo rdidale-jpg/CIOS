@@ -45,13 +45,13 @@ def _wait_for_port(port: int, process: subprocess.Popen[str]) -> None:
     raise AssertionError(f"production server did not listen on port {port}")
 
 
-def _subprocess_get(port: int, path: str) -> tuple[int, str, str]:
+def _subprocess_get(port: int, path: str, headers: dict[str, str] | None = None) -> tuple[int, str, str, str]:
     connection = HTTPConnection("127.0.0.1", port, timeout=5)
     try:
-        connection.request("GET", path)
+        connection.request("GET", path, headers=headers or {})
         response = connection.getresponse()
         body = response.read().decode("utf-8", errors="replace")
-        return response.status, response.getheader("Content-Type") or "", body
+        return response.status, response.getheader("Content-Type") or "", response.getheader("X-Flora-Route") or "", body
     finally:
         connection.close()
 
@@ -72,17 +72,32 @@ def test_render_start_command_serves_flora_home_from_actual_server(tmp_path) -> 
     )
     try:
         _wait_for_port(port, process)
-        for path in ("/flora", "/flora/"):
-            status, content_type, html = _subprocess_get(port, path)
-            assert status == 200
-            assert content_type == "text/html; charset=utf-8"
-            assert re.search(r"<title>Flora Home</title>", html)
-            assert "Flora Home" in html
-            assert "Import Blueprint" in html
-            assert "Enterprise Canvas" in html
-            assert "Import History" in html
-            assert "Release " in html
-            assert "<h1>Executive Brief</h1>" not in html
+        request_scenarios = (
+            None,
+            {"Cookie": "product-session=BT; flora_enterprise=BT; selected_enterprise=BT"},
+            {"Cookie": "flora-session=authorised; flora_role=admin"},
+            {"Cookie": "flora-session=expired; product-session=BT"},
+        )
+        legacy_cookie = request_scenarios[1]
+        for path in ("/", "/flora", "/flora/"):
+            for headers in request_scenarios:
+                status, content_type, route, html = _subprocess_get(port, path, headers=headers)
+                assert status == 200
+                assert content_type == "text/html; charset=utf-8"
+                assert route == "home"
+                assert re.search(r"<title>Flora Home</title>", html)
+                assert "Flora Home" in html
+                assert "Import Blueprint" in html
+                assert "Enterprise Canvas" in html
+                assert "Import History" in html
+                assert "Release " in html
+                assert "<h1>Executive Brief</h1>" not in html
+        status, content_type, route, html = _subprocess_get(port, "/flora/bt-collection", headers=legacy_cookie)
+        assert status == 200
+        assert content_type == "text/html; charset=utf-8"
+        assert route == ""
+        assert "<h1>Executive Brief</h1>" in html
+        assert "Flora Home" not in html
     finally:
         process.terminate()
         try:

@@ -53,7 +53,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             if parsed.path == "/health":
                 self._json(HEALTH_PAYLOAD)
             elif parsed.path in {"/", "/flora", "/flora/"}:
-                self._html(_flora_home_page())
+                self._html(_flora_home_page(), headers={"X-Flora-Route": "home"})
             elif parsed.path == "/morning-edition":
                 self._html(landing_page())
             elif parsed.path in {"/live", "/evidence"}:
@@ -85,8 +85,6 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_critique_page())
             elif parsed.path.startswith("/observatory/"):
                 self._html(organisation_observatory_page(parsed.path.removeprefix("/observatory/")))
-            elif parsed.path in {"/bt-collection", "/flora/bt-collection"}:
-                self._html(landing_page())
             elif parsed.path in {"/flora/blueprint-import", "/blueprint-import"}:
                 self._html(upload_page())
             elif parsed.path in {"/flora/blueprint-import/history", "/blueprint-import/history"}:
@@ -99,6 +97,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(lineage_page())
             elif parsed.path in {"/flora/enterprise-canvas/feedback", "/enterprise-canvas/feedback"}:
                 self._html(canvas_feedback_page())
+            elif parsed.path in {"/bt-collection", "/flora/bt-collection"}:
+                self._html(landing_page())
             elif parsed.path in {"/radar", "/portfolio"}:
                 self._html(radar_page())
             elif parsed.path in {"/scoring", "/reasoning-model"}:
@@ -175,18 +175,20 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         else:
             self.send_error(404, "Flora web route not found")
 
-    def _html(self, html: str, status: int = 200) -> None:
-        self._body(html.encode("utf-8"), "text/html; charset=utf-8", status)
+    def _html(self, html: str, status: int = 200, headers: dict[str, str] | None = None) -> None:
+        self._body(html.encode("utf-8"), "text/html; charset=utf-8", status, headers=headers)
 
     def _json(self, payload: dict, status: int = 200) -> None:
         self._body(json.dumps(payload, separators=(",", ":")).encode("utf-8"), "application/json", status)
 
-    def _body(self, body: bytes, content_type: str, status: int) -> None:
+    def _body(self, body: bytes, content_type: str, status: int, headers: dict[str, str] | None = None) -> None:
         self.send_response(status)
         self.send_header("Content-Type", content_type)
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-store, max-age=0")
         self.send_header("Pragma", "no-cache")
+        for name, value in (headers or {}).items():
+            self.send_header(name, value)
         self.end_headers()
         self.wfile.write(body)
 
