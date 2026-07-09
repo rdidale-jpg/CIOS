@@ -22,6 +22,9 @@ REQUIRED_DIRS = (
     "blueprint_import/packages",
     "blueprint_import/runs",
     "blueprint_import/staging",
+    "blueprint_import/reviews",
+    "blueprint_import/mappings",
+    "blueprint_import/plans",
 )
 
 class PersistenceError(OSError):
