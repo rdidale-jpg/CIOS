@@ -97,8 +97,6 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(lineage_page())
             elif parsed.path in {"/flora/enterprise-canvas/feedback", "/enterprise-canvas/feedback"}:
                 self._html(canvas_feedback_page())
-            elif parsed.path in {"/bt-collection", "/flora/bt-collection"}:
-                self._html(landing_page())
             elif parsed.path in {"/radar", "/portfolio"}:
                 self._html(radar_page())
             elif parsed.path in {"/scoring", "/reasoning-model"}:
@@ -204,7 +202,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path in {"/", "/flora", "/flora/", "/morning-edition", "/bt-collection", "/flora/bt-collection", "/flora/blueprint-import", "/blueprint-import", "/flora/blueprint-import/history", "/blueprint-import/history", "/flora/enterprise-canvas", "/enterprise-canvas", "/canvas", "/flora/enterprise-canvas/lineage", "/enterprise-canvas/lineage", "/lineage", "/flora/enterprise-canvas/feedback", "/enterprise-canvas/feedback", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
+    if path in {"/", "/flora", "/flora/", "/morning-edition", "/flora/blueprint-import", "/blueprint-import", "/flora/blueprint-import/history", "/blueprint-import/history", "/flora/enterprise-canvas", "/enterprise-canvas", "/canvas", "/flora/enterprise-canvas/lineage", "/enterprise-canvas/lineage", "/lineage", "/flora/enterprise-canvas/feedback", "/enterprise-canvas/feedback", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
     if path.startswith("/flora/blueprint-import/"):
         return "text/html; charset=utf-8"
@@ -219,9 +217,9 @@ def _content_type_for_path(path: str) -> str | None:
 
 
 def _flora_home_page() -> str:
-    body = f"""<section class='hero'><h1>Flora Home</h1><p>Start with the governed product journeys, not the legacy BT Collection default.</p><p class='muted'>Release {RELEASE_IDENTIFIER}</p><span hidden>Good Morning Rob Morning Edition NO LIVE EVIDENCE AVAILABLE Explain score /score/BT</span></section>
+    body = f"""<section class='hero'><h1>Flora Home</h1><p>Start with the governed Flora product journeys.</p><p class='muted'>Release {RELEASE_IDENTIFIER}</p></section>
     <section class='card action'><h2>Import Blueprint</h2><p>Upload, validate, review, dry-run and explicitly approve Blueprint promotion.</p><p><a href='/flora/blueprint-import'>Open Import Blueprint</a></p></section>
-    <section class='card'><h2>Navigation</h2><ul><li><a href='/flora/enterprise-canvas'>Enterprise Canvas</a></li><li><a href='/flora/blueprint-import/history'>Import History</a></li><li><a href='/flora/bt-collection'>BT Collection</a></li><li><a href='/radar'>Portfolio</a></li><li><a href='/live'>Evidence</a></li></ul></section>"""
+    <section class='card'><h2>Navigation</h2><ul><li><a href='/flora/enterprise-canvas'>Enterprise Canvas</a></li><li><a href='/flora/blueprint-import/history'>Import History</a></li><li><a href='/radar'>Portfolio</a></li><li><a href='/live'>Evidence</a></li></ul></section>"""
     return _page("Flora Home", body)
 
 def _critique_page() -> str:

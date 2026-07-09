@@ -4,7 +4,8 @@ from __future__ import annotations
 from pathlib import Path
 
 from cios.applications.flora.workspace.feedback import runtime_dir
-from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, settings_page
+from cios.applications.flora.web.app import _flora_home_page
+from cios.applications.flora.workspace.views import case_page, logbook_page, settings_page
 
 EXPORT_DIRNAME = "export"
 CASE_SLUGS = [
@@ -40,6 +41,9 @@ def _staticize_root_page(html: str) -> str:
         .replace("href='/live/collect'", "href='#live-collect'")
         .replace("href='/live/evidence'", "href='#live-evidence'")
         .replace("href='/live'", "href='#live'")
+        .replace("href='/flora/blueprint-import/history'", "href='#import-history'")
+        .replace("href='/flora/blueprint-import'", "href='#import-blueprint'")
+        .replace("href='/flora/enterprise-canvas'", "href='#enterprise-canvas'")
         .replace("action='/logbook'", "action='#logbook'")
     )
     return _replace_score_links(_replace_case_links(html, "case/"), "#score-")
@@ -58,6 +62,9 @@ def _staticize_case_page(html: str) -> str:
         .replace("href='/live/collect'", "href='#live-collect'")
         .replace("href='/live/evidence'", "href='#live-evidence'")
         .replace("href='/live'", "href='#live'")
+        .replace("href='/flora/blueprint-import/history'", "href='#import-history'")
+        .replace("href='/flora/blueprint-import'", "href='#import-blueprint'")
+        .replace("href='/flora/enterprise-canvas'", "href='#enterprise-canvas'")
         .replace("action='/feedback'", "action='#feedback'")
     )
     return _replace_score_links(_replace_case_links(html, ""), "../index.html#score-")
@@ -81,7 +88,7 @@ def generate_export(destination: Path | None = None) -> Path:
     case_destination = destination / "case"
     case_destination.mkdir(parents=True, exist_ok=True)
 
-    (destination / "index.html").write_text(_staticize_root_page(landing_page()), encoding="utf-8")
+    (destination / "index.html").write_text(_staticize_root_page(_flora_home_page()), encoding="utf-8")
     (destination / "settings.html").write_text(_staticize_root_page(settings_page()), encoding="utf-8")
     (destination / "logbook.html").write_text(_staticize_root_page(logbook_page()), encoding="utf-8")
 

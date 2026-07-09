@@ -93,11 +93,14 @@ def test_render_start_command_serves_flora_home_from_actual_server(tmp_path) -> 
                 assert "Release " in html
                 assert "<h1>Executive Brief</h1>" not in html
         status, content_type, route, html = _subprocess_get(port, "/flora/bt-collection", headers=legacy_cookie)
-        assert status == 200
-        assert content_type == "text/html; charset=utf-8"
+        assert status == 404
         assert route == ""
-        assert "<h1>Executive Brief</h1>" in html
         assert "Flora Home" not in html
+        assert "<h1>Executive Brief</h1>" not in html
+        status, _, _, html = _subprocess_get(port, "/unknown-route", headers=legacy_cookie)
+        assert status == 404
+        assert "Flora web route not found" in html
+        assert "<h1>Executive Brief</h1>" not in html
     finally:
         process.terminate()
         try:
@@ -123,7 +126,7 @@ def test_root_renders_flora_home_from_production_handler() -> None:
     assert "Import Blueprint" in html
     assert "Enterprise Canvas" in html
     assert "Import History" in html
-    assert "BT Collection" in html
+    assert "BT Collection" not in html
     assert f"Release {RELEASE_IDENTIFIER}" in html
     assert "<h1>Executive Brief</h1>" not in html
 
@@ -154,14 +157,36 @@ def test_flora_trailing_slash_route_renders_same_home_experience() -> None:
     assert "<h1>Executive Brief</h1>" not in html
 
 
-def test_bt_collection_is_labelled_specialist_route_not_default() -> None:
-    status, _, body = _get("/flora/bt-collection")
-    html = body.decode("utf-8")
-    assert status == 200
-    assert "<h1>Executive Brief</h1>" in html
-    assert "Flora Home" not in html
+def test_bt_collection_routes_are_retired() -> None:
+    for route in ("/flora/bt-collection", "/bt-collection"):
+        status, _, body = _get(route)
+        html = body.decode("utf-8")
+        assert status == 404
+        assert "<h1>Executive Brief</h1>" not in html
+        assert "Flora Home" not in html
 
 
+def test_retired_bt_collection_presentation_is_not_renderable(tmp_path) -> None:
+    from pathlib import Path
+    from cios.applications.flora.workspace.export import generate_export
+
+    export_root = tmp_path / "export"
+    generate_export(export_root)
+    runtime_roots = [Path("cios/applications/flora"), Path("tests"), export_root]
+    retired_needles = ["BT Collection", "bt-collection", "legacy BT Collection default"]
+    allowed_files = {Path("tests/test_flora_web.py")}
+    offenders: list[str] = []
+    for root in runtime_roots:
+        for path in root.rglob("*"):
+            if not path.is_file() or path.suffix not in {".py", ".html", ".css", ".js"}:
+                continue
+            if path in allowed_files:
+                continue
+            text = path.read_text(encoding="utf-8")
+            for needle in retired_needles:
+                if needle in text:
+                    offenders.append(f"{path}:{needle}")
+    assert offenders == []
 
 def test_render_start_command_uses_production_web_entrypoint() -> None:
     render_config = __import__("pathlib").Path("render.yaml").read_text(encoding="utf-8")
