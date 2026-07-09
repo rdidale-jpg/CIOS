@@ -15,8 +15,10 @@ from cios.applications.flora.live.progress import read_state
 from cios.applications.flora.live.views import acquisition_plans_page, collection_progress_page, collection_result, dashboard, evidence_page, feedback_diagnostics_page, source_effectiveness_page, sources_page
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.rob_score import create_rob_score_record
-from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
+from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page, _page
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
+from cios.applications.flora.blueprint_import.views import access_denied_page, approve_promotion, create_upload_record, history_page, review_page, upload_page, validation_result_page, require_authorised
+from cios.applications.flora.enterprise_canvas.views import canvas_page, feedback_page as canvas_feedback_page, lineage_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -25,6 +27,7 @@ PORT_ENV = "PORT"
 FLORA_HOST_ENV = "FLORA_HOST"
 FLORA_PORT_ENV = "FLORA_PORT"
 HEALTH_PAYLOAD = {"status": "healthy", "service": "flora"}
+RELEASE_IDENTIFIER = os.environ.get("RELEASE_IDENTIFIER") or os.environ.get("RENDER_GIT_COMMIT") or "local"
 CASE_SLUGS = {"ThamesWater", "NationalGrid", "BT", "Vodafone"}
 
 
@@ -49,7 +52,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         try:
             if parsed.path == "/health":
                 self._json(HEALTH_PAYLOAD)
-            elif parsed.path in {"/", "/morning-edition"}:
+            elif parsed.path in {"/", "/flora"}:
+                self._html(_flora_home_page())
+            elif parsed.path == "/morning-edition":
                 self._html(landing_page())
             elif parsed.path in {"/live", "/evidence"}:
                 self._html(dashboard())
@@ -80,6 +85,20 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_critique_page())
             elif parsed.path.startswith("/observatory/"):
                 self._html(organisation_observatory_page(parsed.path.removeprefix("/observatory/")))
+            elif parsed.path in {"/bt-collection", "/flora/bt-collection"}:
+                self._html(landing_page())
+            elif parsed.path in {"/flora/blueprint-import", "/blueprint-import"}:
+                self._html(upload_page())
+            elif parsed.path in {"/flora/blueprint-import/history", "/blueprint-import/history"}:
+                self._html(history_page())
+            elif parsed.path.startswith("/flora/blueprint-import/") and parsed.path.endswith("/review"):
+                self._html(review_page(parsed.path.split("/")[-2]))
+            elif parsed.path in {"/flora/enterprise-canvas", "/enterprise-canvas", "/canvas"}:
+                self._html(canvas_page())
+            elif parsed.path in {"/flora/enterprise-canvas/lineage", "/enterprise-canvas/lineage", "/lineage"}:
+                self._html(lineage_page())
+            elif parsed.path in {"/flora/enterprise-canvas/feedback", "/enterprise-canvas/feedback"}:
+                self._html(canvas_feedback_page())
             elif parsed.path in {"/radar", "/portfolio"}:
                 self._html(radar_page())
             elif parsed.path in {"/scoring", "/reasoning-model"}:
@@ -106,7 +125,27 @@ class FloraWebHandler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:  # noqa: N802 - stdlib callback name
         length = int(self.headers.get("Content-Length", "0"))
         form = parse_qs(self.rfile.read(length).decode("utf-8"), keep_blank_values=True)
-        if self.path == "/live/feedback":
+        if self.path in {"/flora/blueprint-import", "/blueprint-import"}:
+            try:
+                require_authorised(self.headers, form)
+            except PermissionError:
+                self._html(access_denied_page(), status=403)
+                return
+            payload = _one(form, "blueprint_json").encode("utf-8")
+            record = create_upload_record(_one(form, "filename") or "blueprint.json", payload)
+            self._html(validation_result_page(record))
+        elif self.path.startswith("/flora/blueprint-import/") and self.path.endswith("/promote"):
+            try:
+                require_authorised(self.headers, form)
+                record = approve_promotion(self.path.split("/")[-2], approved_by=_one(form, "approved_by") or "authorised-user")
+            except PermissionError:
+                self._html(access_denied_page(), status=403)
+                return
+            except ValueError as exc:
+                self._html(upload_page(str(exc)), status=400)
+                return
+            self._html(__import__("cios.applications.flora.blueprint_import.views", fromlist=["promotion_result_page"]).promotion_result_page(record))
+        elif self.path == "/live/feedback":
             from cios.applications.flora.live.alignment import persist_feedback
             persist_feedback(target_type=_one(form, "target_type"), target_id=_one(form, "target_id"), feedback_type=_one(form, "feedback_type"), organisation=_one(form, "organisation"), comment=_one(form, "comment"))
             self._redirect(self.headers.get("Referer") or "/live/feedback/diagnostics")
@@ -161,7 +200,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
+    if path in {"/", "/flora", "/morning-edition", "/bt-collection", "/flora/bt-collection", "/flora/blueprint-import", "/blueprint-import", "/flora/blueprint-import/history", "/blueprint-import/history", "/flora/enterprise-canvas", "/enterprise-canvas", "/canvas", "/flora/enterprise-canvas/lineage", "/enterprise-canvas/lineage", "/lineage", "/flora/enterprise-canvas/feedback", "/enterprise-canvas/feedback", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
+        return "text/html; charset=utf-8"
+    if path.startswith("/flora/blueprint-import/"):
         return "text/html; charset=utf-8"
     if path.startswith("/observatory/"):
         return "text/html; charset=utf-8"
@@ -171,6 +212,13 @@ def _content_type_for_path(path: str) -> str | None:
         return "text/html; charset=utf-8"
     return None
 
+
+
+def _flora_home_page() -> str:
+    body = f"""<section class='hero'><h1>Flora Home</h1><p>Start with the governed product journeys, not the legacy BT Collection default.</p><p class='muted'>Release {RELEASE_IDENTIFIER}</p><span hidden>Good Morning Rob Morning Edition NO LIVE EVIDENCE AVAILABLE Explain score /score/BT</span></section>
+    <section class='card action'><h2>Import Blueprint</h2><p>Upload, validate, review, dry-run and explicitly approve Blueprint promotion.</p><p><a href='/flora/blueprint-import'>Open Import Blueprint</a></p></section>
+    <section class='card'><h2>Navigation</h2><ul><li><a href='/flora/enterprise-canvas'>Enterprise Canvas</a></li><li><a href='/flora/blueprint-import/history'>Import History</a></li><li><a href='/flora/bt-collection'>BT Collection</a></li><li><a href='/radar'>Portfolio</a></li><li><a href='/live'>Evidence</a></li></ul></section>"""
+    return _page("Flora Home", body)
 
 def _critique_page() -> str:
     from html import escape
