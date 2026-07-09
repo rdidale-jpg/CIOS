@@ -26,6 +26,7 @@ from cios.applications.flora.storage import startup_storage_status
 from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, financial_intelligence_safe_support_report_payload, load_run, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id
 from cios.applications.flora.flora_transparent import page as flora_page, start_bt_digital_twin, flora_payload
+from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -92,6 +93,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(evidence_page())
             elif parsed.path == "/digital-twins":
                 self._html(digital_twins_landing_page())
+            elif _is_enterprise_canvas_path(parsed.path):
+                html, status = _enterprise_canvas_response(parsed.path, self.headers)
+                self._html(html, status=status)
             elif parsed.path == "/digital-twins/bt-group-plc":
                 self._html(bt_twin_page((parse_qs(parsed.query).get("run_id") or [None])[0]))
             elif parsed.path.startswith("/digital-twins/bt-group-plc/rapid-snapshot/") and parsed.path.endswith("/financial-tables.csv"):
@@ -313,6 +317,17 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 
     def log_message(self, format: str, *args: object) -> None:
         return
+
+
+def _is_enterprise_canvas_path(path: str) -> bool:
+    parts = [part for part in path.split("/") if part]
+    return len(parts) in {3, 5} and parts[0] == "digital-twins" and parts[2] == "canvas" and (len(parts) == 3 or parts[3] == "tiles")
+
+
+def _enterprise_canvas_response(path: str, headers) -> tuple[str, int]:
+    parts = [part for part in path.split("/") if part]
+    tile_id = parts[4] if len(parts) == 5 else ""
+    return enterprise_canvas_page(parts[1], headers, tile_id)
 
 
 def _is_support_report_path(path: str) -> bool:

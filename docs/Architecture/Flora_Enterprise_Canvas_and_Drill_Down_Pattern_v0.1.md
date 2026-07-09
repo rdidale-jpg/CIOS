@@ -575,3 +575,9 @@ Analytical projection candidates such as Pain Points, Burning Platforms, Transfo
 Freshness and uncertainty are represented separately in the header and tiles: effective date, source cut-off, last refreshed date, stale-evidence indicator, Unknown indicator, Contradiction indicator, human-supplied provenance via canonical attributes, and accepted Evidence-backed state remain distinct fields.
 
 Lineage references are preserved from displayed judgement to canonical attribute or analytical projection, Observation IDs, Evidence IDs, Source IDs where known, package reference, import run and package location. The visual lineage explorer and full drill-down panel remain deferred.
+
+## Sprint 1 PR6 implementation note — organisation experience
+
+Flora now exposes the first visible Enterprise Canvas organisation experience at `/digital-twins/{enterprise_id}/canvas`, with tile detail at `/digital-twins/{enterprise_id}/canvas/tiles/{tile_view_id}`. The page is a read-only rendering of the PR5 `EnterpriseCanvasService` DTO: it does not create a new source of truth, does not add canonical writes and does not recalculate organisation intelligence in the view layer.
+
+The implemented organisation lens renders the enterprise header, deterministic read-model tile ordering, separate Unknown, Contradiction, stale-evidence and nested-Twin markers, and a plain-language detail panel with an Inspect evidence entry point. Full lineage exploration, additional lenses, feedback capture and editable Canvas workflows remain deferred.

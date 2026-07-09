@@ -84,3 +84,80 @@ def test_canvas_handles_incomplete_data_and_blocks_unauthorised_access(tmp_path,
     assert canvas.tiles == ()
     with pytest.raises(EnterpriseCanvasAccessError):
         EnterpriseCanvasService().get_canvas("synthetic-enterprise", {"X-Flora-User":"mallory","X-Flora-Enterprises":"other"})
+
+
+def test_enterprise_canvas_organisation_experience_renders_human_usable_page(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    model(tmp_path); stage_projections()
+    from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
+
+    html, status = enterprise_canvas_page("synthetic-enterprise", HEADERS)
+    assert status == 200
+    assert "Synthetic Health" in html
+    assert "Improve care outcomes" in html
+    assert "Twin version" in html
+    assert "Source cut-off" in html
+    assert "Organisation lens" in html
+    assert "Care Board" in html
+    assert "Coordinates regional care delivery" in html
+    assert "Principal pain or pressure" in html
+    assert "Unknown present" in html
+    assert "Contradiction present" in html
+    assert "Stale evidence" in html
+    assert "Nested Twin available" in html
+    assert "aria-label='Open Care Board organisation tile" in html
+    assert "href='/digital-twins/synthetic-enterprise/canvas/tiles/canvas-tile-" in html
+    assert "Select an organisation tile" in html
+    assert "MOD" not in html
+    assert "<form" not in html
+    assert "method='post'" not in html
+
+
+def test_enterprise_canvas_tile_detail_plain_language_and_lineage(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    model(tmp_path); stage_projections()
+    from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
+
+    canvas = EnterpriseCanvasService().get_canvas("synthetic-enterprise", HEADERS)
+    tile_id = canvas.tiles[0].tile_view_id
+    html, status = enterprise_canvas_page("synthetic-enterprise", HEADERS, selected_tile_id=tile_id)
+    assert status == 200
+    for heading in [
+        "What this area does",
+        "Why it matters",
+        "Core facts",
+        "What has changed",
+        "What is causing pressure",
+        "What has been done so far",
+        "What remains unresolved",
+        "Stakeholders or accountable roles",
+        "What we still do not know",
+        "Evidence freshness",
+        "Suggested next posture",
+        "Inspect evidence",
+    ]:
+        assert heading in html
+    assert "Workforce pressure is affecting care access" in html
+    assert "expanded community triage" in html
+    assert "weekend capacity remains unclear" in html
+    assert "Source type/reference" in html
+    assert "Evidence/date reference" in html
+    assert "Close detail panel" in html
+    assert "residual pain" not in html
+    assert "analytical disposition" not in html
+    assert "response-state maturity" not in html
+
+
+def test_enterprise_canvas_ui_blocks_unauthorised_and_handles_empty(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
+
+    denied_html, denied_status = enterprise_canvas_page("synthetic-enterprise", {"X-Flora-User":"mallory","X-Flora-Enterprises":"other"})
+    assert denied_status == 403
+    assert "Access denied" in denied_html
+    assert "Care Board" not in denied_html
+
+    empty_html, empty_status = enterprise_canvas_page("synthetic-enterprise", HEADERS)
+    assert empty_status == 200
+    assert "No organisation areas available" in empty_html
+    assert "Select an organisation tile" in empty_html
