@@ -12,7 +12,7 @@ from cios.applications.flora.live.source_registry import canonical_enterprise_id
 from cios.applications.flora.memory.models import EnterpriseModelAttribute, EnterpriseUnknown
 from cios.applications.flora.memory.repository import EnterpriseModelRepository, EvidenceRepository, ObservationRepository
 
-from .models import CANVAS_SCHEMA_VERSION, CanvasAnalyticalProjection, CanvasLineageReference, EnterpriseCanvas, EnterpriseCanvasHeader, EnterpriseCanvasTile
+from .models import CANVAS_SCHEMA_VERSION, CanvasAnalyticalProjection, CanvasLineageReference, CanvasLineageInspection, EnterpriseCanvas, EnterpriseCanvasHeader, EnterpriseCanvasTile
 
 
 class EnterpriseCanvasAccessError(PermissionError):
@@ -50,6 +50,75 @@ class EnterpriseCanvasService:
         header = self._header(enterprise_id, attributes, unknowns, projections)
         tiles = tuple(self._tiles(enterprise_id, attributes, unknowns, evidence_rows, projections))
         return EnterpriseCanvas(CANVAS_SCHEMA_VERSION, enterprise_id, lens, header, tiles, True)
+
+
+    def get_lineage_inspection(self, enterprise_id: str, tile_id: str, headers: Any) -> CanvasLineageInspection:
+        canvas = self.get_canvas(enterprise_id, headers)
+        tile = next((t for t in canvas.tiles if t.tile_view_id == tile_id), None)
+        if tile is None:
+            raise ValueError("The requested Canvas tile is not available in this read model")
+        observations_by_id = {str(o.observation_id): o for o in self.observations.list()}
+        evidence_by_id = {str(e.get("evidence_id")): e for e in self.evidence.list()}
+        observation_ids = tuple(dict.fromkeys(oid for ref in tile.lineage_references for oid in ref.observation_ids))
+        evidence_ids = tuple(dict.fromkeys(eid for ref in tile.lineage_references for eid in ref.evidence_ids))
+        broken: list[str] = []
+        observations = []
+        human = []
+        contradictions = []
+        for oid in observation_ids:
+            obs = observations_by_id.get(oid)
+            if not obs:
+                broken.append(f"Observation reference {oid} could not be resolved.")
+                continue
+            row = obs.to_dict()
+            row["plain_english_summary"] = obs.atomic_statement
+            observations.append(row)
+            if obs.provenance_type == "human-supplied":
+                human.append({"observation_id": oid, "statement": obs.atomic_statement, **(obs.human_provenance or {})})
+            if obs.contradiction_state != "none" or obs.contradicted_by_observation_ids:
+                contradictions.append({"observation_id": oid, "statement": obs.atomic_statement, "conflicting_positions": list(obs.contradicted_by_observation_ids), "why_retained": "Flora preserves conflicting governed observations until resolved."})
+        evidence = []
+        sources = []
+        packages = []
+        package_refs = {ref.package_ref for ref in tile.lineage_references if ref.package_ref}
+        for eid in evidence_ids:
+            ev = evidence_by_id.get(eid)
+            if not ev:
+                broken.append(f"Evidence reference {eid} could not be resolved.")
+                continue
+            relation = str(ev.get("relationship_to_judgement") or ev.get("stance") or ev.get("support_type") or "supports")
+            evidence.append({
+                "evidence_id": eid,
+                "source_title": ev.get("source_title") or ev.get("source_name") or ev.get("title") or "Source title not supplied",
+                "source_type": ev.get("source_type") or ev.get("type") or "Unknown source type",
+                "publication_or_effective_date": ev.get("publication_date") or ev.get("effective_date") or ev.get("observed_at") or "Unknown date",
+                "supporting_summary": ev.get("summary") or ev.get("snippet") or ev.get("claim") or "No short supporting summary supplied.",
+                "source_location": ev.get("source_locator") or ev.get("source_location") or ev.get("page_range") or "Source location not supplied",
+                "freshness": ev.get("freshness") or "Unknown freshness",
+                "confidence_or_qualification": ev.get("confidence") or ev.get("qualification") or "Not supplied",
+                "relationship_to_judgement": relation,
+                "package_ref": ev.get("package_ref") or ev.get("source_package_ref") or "",
+                "import_run_id": ev.get("import_run_id") or "",
+            })
+            sid = ev.get("source_id") or ev.get("source")
+            if sid:
+                sources.append({"source_id": sid, "title": ev.get("source_title") or ev.get("source_name") or "Source title not supplied", "type": ev.get("source_type") or "Unknown", "url_or_reference": ev.get("source_url") or ev.get("url") or "Not supplied"})
+            if ev.get("package_ref") or ev.get("source_package_ref"):
+                package_refs.add(ev.get("package_ref") or ev.get("source_package_ref"))
+        for ref in sorted(package_refs):
+            pkg = self.registry.get(ref)
+            if pkg:
+                packages.append({"package_ref": pkg.package_ref, "package_id": pkg.identity.package_id, "package_version": pkg.identity.package_version, "import_run_id": pkg.import_run_id, "archive_path": pkg.archive_path, "source_files": [i.path for i in pkg.inventory]})
+            else:
+                broken.append(f"Package reference {ref} could not be resolved.")
+        unknowns = [{"unknown_id": u.unknown_id, "question": u.question, "why_it_matters": f"It affects {u.affected_domain}.", "what_could_resolve_it": "; ".join(u.evidence_required) or "Additional governed evidence or authorised human validation."} for u in self.models.get(canvas.enterprise_id).unknowns.values() if u.status == "open"]
+        missing = []
+        if not observations: missing.append("No Observation could be resolved for this displayed statement.")
+        if not evidence: missing.append("No Evidence could be resolved for this displayed statement.")
+        if not sources: missing.append("No Source details could be resolved for this displayed statement.")
+        if not packages: missing.append("No imported package location could be resolved for this displayed statement.")
+        statement = tile.principal_pain_or_pressure if tile.principal_pain_or_pressure != "Unknown" else tile.display_name
+        return CanvasLineageInspection(canvas.enterprise_id, tile.tile_view_id, statement, tile.underlying_reference, tuple(observations), tuple(evidence), tuple(sources), tuple(packages), tuple(human), tuple(unknowns), tuple(contradictions), tuple(missing), tuple(broken), True)
 
     def _header(self, enterprise_id, attrs, unknowns, projections):
         def attr(name, default="Unknown"):

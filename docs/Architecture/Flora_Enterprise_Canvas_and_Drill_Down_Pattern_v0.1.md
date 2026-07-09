@@ -310,6 +310,10 @@ The UI states:
 - consequence;
 - recommended Evidence request.
 
+### 10.4 PR7 implementation note
+
+The first implemented lineage inspection uses the existing tile detail **Inspect evidence** entry point and routes to `/digital-twins/{enterprise_id}/canvas/tiles/{tile_id}/lineage`. The route is read-only, server-side access controlled and presents the lineage chain as accessible headings and ordered lists rather than a graph. Missing Observations, Evidence, Source details or imported package locations are displayed as incomplete lineage, not application errors.
+
 ## 11. Lens architecture
 
 The shared Canvas shell supports later lenses.
