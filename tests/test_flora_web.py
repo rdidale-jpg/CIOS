@@ -2,9 +2,13 @@
 from __future__ import annotations
 
 import json
+import os
+import re
+import socket
 import subprocess
 import sys
 import threading
+import time
 from http.client import HTTPConnection
 
 from cios.applications.flora.web.app import FloraWebHandler, RELEASE_IDENTIFIER, env_port
@@ -25,6 +29,67 @@ def _get(path: str) -> tuple[int, str, bytes]:
         server.shutdown()
         server.server_close()
         thread.join(timeout=2)
+
+
+def _wait_for_port(port: int, process: subprocess.Popen[str]) -> None:
+    deadline = time.time() + 10
+    while time.time() < deadline:
+        if process.poll() is not None:
+            output = process.stdout.read() if process.stdout else ""
+            raise AssertionError(f"production server exited before listening: {output}")
+        try:
+            with socket.create_connection(("127.0.0.1", port), timeout=0.2):
+                return
+        except OSError:
+            time.sleep(0.1)
+    raise AssertionError(f"production server did not listen on port {port}")
+
+
+def _subprocess_get(port: int, path: str) -> tuple[int, str, str]:
+    connection = HTTPConnection("127.0.0.1", port, timeout=5)
+    try:
+        connection.request("GET", path)
+        response = connection.getresponse()
+        body = response.read().decode("utf-8", errors="replace")
+        return response.status, response.getheader("Content-Type") or "", body
+    finally:
+        connection.close()
+
+
+def test_render_start_command_serves_flora_home_from_actual_server(tmp_path) -> None:
+    port = 8766
+    env = os.environ.copy()
+    env["PORT"] = str(port)
+    env["FLORA_HOST"] = "127.0.0.1"
+    env["FLORA_PILOT_DIR"] = str(tmp_path / "pilot")
+    env.pop("HOST", None)
+    process = subprocess.Popen(
+        [sys.executable, "-m", "cios.applications.flora.web.app"],
+        env=env,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+    )
+    try:
+        _wait_for_port(port, process)
+        for path in ("/flora", "/flora/"):
+            status, content_type, html = _subprocess_get(port, path)
+            assert status == 200
+            assert content_type == "text/html; charset=utf-8"
+            assert re.search(r"<title>Flora Home</title>", html)
+            assert "Flora Home" in html
+            assert "Import Blueprint" in html
+            assert "Enterprise Canvas" in html
+            assert "Import History" in html
+            assert "Release " in html
+            assert "<h1>Executive Brief</h1>" not in html
+    finally:
+        process.terminate()
+        try:
+            process.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            process.wait(timeout=5)
 
 
 def test_health_returns_200_plain_json() -> None:
@@ -50,6 +115,19 @@ def test_root_renders_flora_home_from_production_handler() -> None:
 
 def test_flora_route_renders_same_home_experience() -> None:
     status, content_type, body = _get("/flora")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert content_type == "text/html; charset=utf-8"
+    assert "Flora Home" in html
+    assert "Import Blueprint" in html
+    assert "Enterprise Canvas" in html
+    assert "Import History" in html
+    assert f"Release {RELEASE_IDENTIFIER}" in html
+    assert "<h1>Executive Brief</h1>" not in html
+
+
+def test_flora_trailing_slash_route_renders_same_home_experience() -> None:
+    status, content_type, body = _get("/flora/")
     html = body.decode("utf-8")
     assert status == 200
     assert content_type == "text/html; charset=utf-8"
