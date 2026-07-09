@@ -17,6 +17,10 @@ REQUIRED_DIRS = (
     "collection_manifests",
     "memory",
     "memory/enterprise_models",
+    "blueprint_import/archives",
+    "blueprint_import/audit",
+    "blueprint_import/packages",
+    "blueprint_import/runs",
 )
 
 class PersistenceError(OSError):

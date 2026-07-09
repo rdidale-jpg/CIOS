@@ -45,3 +45,15 @@ def can_view_financial_intelligence_run(headers: Any, run: dict[str, Any]) -> bo
     enterprise_id = financial_run_enterprise_id(run)
     run_id = str(run.get("run_id") or "")
     return valid_financial_intelligence_run_id(run_id) and ("*" in allowed or enterprise_id in allowed)
+
+
+_BLUEPRINT_IMPORT_ROLES = {"blueprint_import_admin", "package.upload"}
+
+
+def can_receive_blueprint_package(headers: Any) -> bool:
+    """Return True when the product session can receive Blueprint packages."""
+    if not authenticated_flora_user(headers):
+        return False
+    raw_roles = headers.get("X-Flora-Roles") or cookie_value(headers, "flora_roles")
+    roles = {item.strip() for item in str(raw_roles or "").replace("|", ",").split(",") if item.strip()}
+    return bool(roles & _BLUEPRINT_IMPORT_ROLES)
