@@ -50,6 +50,30 @@ class CanvasAnalyticalProjection:
 
 
 @dataclass(frozen=True)
+class CanvasLineageInspection:
+    enterprise_id: str
+    tile_view_id: str
+    displayed_statement: str
+    projection_or_record: str
+    observations: tuple[dict[str, Any], ...] = ()
+    evidence: tuple[dict[str, Any], ...] = ()
+    sources: tuple[dict[str, Any], ...] = ()
+    packages: tuple[dict[str, Any], ...] = ()
+    human_supplied_knowledge: tuple[dict[str, Any], ...] = ()
+    unknowns: tuple[dict[str, Any], ...] = ()
+    contradictions: tuple[dict[str, Any], ...] = ()
+    missing_lineage: tuple[str, ...] = ()
+    broken_references: tuple[str, ...] = ()
+    read_only: bool = True
+
+    def to_dict(self) -> dict[str, Any]:
+        data = asdict(self)
+        for key in ("observations", "evidence", "sources", "packages", "human_supplied_knowledge", "unknowns", "contradictions", "missing_lineage", "broken_references"):
+            data[key] = list(data[key])
+        return data
+
+
+@dataclass(frozen=True)
 class EnterpriseCanvasHeader:
     enterprise_name: str
     enterprise_purpose: str

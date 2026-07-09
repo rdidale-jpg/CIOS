@@ -26,7 +26,7 @@ from cios.applications.flora.storage import startup_storage_status
 from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, financial_intelligence_safe_support_report_payload, load_run, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id
 from cios.applications.flora.flora_transparent import page as flora_page, start_bt_digital_twin, flora_payload
-from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
+from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -321,11 +321,14 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 
 def _is_enterprise_canvas_path(path: str) -> bool:
     parts = [part for part in path.split("/") if part]
-    return len(parts) in {3, 5} and parts[0] == "digital-twins" and parts[2] == "canvas" and (len(parts) == 3 or parts[3] == "tiles")
+    return len(parts) in {3, 5, 6} and parts[0] == "digital-twins" and parts[2] == "canvas" and (len(parts) == 3 or parts[3] == "tiles") and (len(parts) != 6 or parts[5] == "lineage")
 
 
 def _enterprise_canvas_response(path: str, headers) -> tuple[str, int]:
     parts = [part for part in path.split("/") if part]
+    
+    if len(parts) == 6:
+        return enterprise_canvas_lineage_page(parts[1], parts[4], headers)
     tile_id = parts[4] if len(parts) == 5 else ""
     return enterprise_canvas_page(parts[1], headers, tile_id)
 

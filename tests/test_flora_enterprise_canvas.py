@@ -161,3 +161,55 @@ def test_enterprise_canvas_ui_blocks_unauthorised_and_handles_empty(tmp_path, mo
     assert empty_status == 200
     assert "No organisation areas available" in empty_html
     assert "Select an organisation tile" in empty_html
+
+
+def test_enterprise_canvas_lineage_inspection_read_only_accessible_and_complete(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    model(tmp_path); stage_projections()
+    from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page
+
+    canvas = EnterpriseCanvasService().get_canvas("synthetic-enterprise", HEADERS)
+    tile_id = canvas.tiles[0].tile_view_id
+    html, status = enterprise_canvas_lineage_page("synthetic-enterprise", tile_id, HEADERS)
+    assert status == 200
+    for heading in [
+        "Why Flora shows this",
+        "What was observed",
+        "Evidence supporting this",
+        "Where the evidence came from",
+        "What remains uncertain",
+        "Conflicting evidence",
+        "Original Blueprint location",
+        "Missing or incomplete lineage",
+        "Technical inspection references",
+    ]:
+        assert heading in html
+    assert "Read-only lineage inspection" in html
+    assert "Return to tile detail" in html
+    assert "Supporting Evidence" in html
+    assert "src-state" in html
+    assert "bpi-pkg-" in html
+    assert "records/sources.ndjson" in html
+    assert "No human-supplied knowledge is linked" in html
+    assert "Which workforce constraints are material?" in html
+    assert "No canonical" not in html
+    assert "<form" not in html
+
+
+def test_enterprise_canvas_lineage_blocks_unauthorised_and_distinguishes_missing_from_error(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    model(tmp_path)
+    from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page
+
+    canvas = EnterpriseCanvasService().get_canvas("synthetic-enterprise", HEADERS)
+    tile_id = canvas.tiles[0].tile_view_id
+    denied, denied_status = enterprise_canvas_lineage_page("synthetic-enterprise", tile_id, {"X-Flora-User":"mallory","X-Flora-Enterprises":"other"})
+    assert denied_status == 403
+    assert "Access denied" in denied
+    assert "src-state" not in denied
+
+    html, status = enterprise_canvas_lineage_page("synthetic-enterprise", tile_id, HEADERS)
+    assert status == 200
+    assert "No imported package location is available" in html
+    assert "No Observation could be resolved" in html or "Observation reference" in html
+    assert "Broken references" in html
