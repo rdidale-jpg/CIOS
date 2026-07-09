@@ -193,7 +193,7 @@ def test_enterprise_canvas_lineage_inspection_read_only_accessible_and_complete(
     assert "No human-supplied knowledge is linked" in html
     assert "Which workforce constraints are material?" in html
     assert "No canonical" not in html
-    assert "<form" not in html
+    assert "Contribute governed feedback" in html
 
 
 def test_enterprise_canvas_lineage_blocks_unauthorised_and_distinguishes_missing_from_error(tmp_path, monkeypatch):

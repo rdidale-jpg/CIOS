@@ -585,3 +585,11 @@ Lineage references are preserved from displayed judgement to canonical attribute
 Flora now exposes the first visible Enterprise Canvas organisation experience at `/digital-twins/{enterprise_id}/canvas`, with tile detail at `/digital-twins/{enterprise_id}/canvas/tiles/{tile_view_id}`. The page is a read-only rendering of the PR5 `EnterpriseCanvasService` DTO: it does not create a new source of truth, does not add canonical writes and does not recalculate organisation intelligence in the view layer.
 
 The implemented organisation lens renders the enterprise header, deterministic read-model tile ordering, separate Unknown, Contradiction, stale-evidence and nested-Twin markers, and a plain-language detail panel with an Inspect evidence entry point. Full lineage exploration, additional lenses, feedback capture and editable Canvas workflows remain deferred.
+
+## 13. Governed Canvas feedback implementation note
+
+Canvas tile detail and lineage inspection views may expose a bounded feedback entry point for authorised users. The control must state that the contribution is stored as candidate human knowledge and does not change the governed Twin until reviewed and accepted.
+
+Supported feedback actions are confirmation, challenge, correction suggestion, context addition, labelled Human-Supplied Knowledge, Unknown candidate, Contradiction candidate, Evidence request and refresh suggestion. Submitted feedback remains workflow state with its own lifecycle and audit history; it is not Evidence, an Observation, an Enterprise Model mutation or a pain-priority change.
+
+Restricted and account-confidential feedback must be filtered server-side using the current enterprise and product-session access patterns. Corrections must supersede earlier feedback by appending a new record or event rather than silently editing the original statement.
