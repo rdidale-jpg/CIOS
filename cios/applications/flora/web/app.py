@@ -52,7 +52,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         try:
             if parsed.path == "/health":
                 self._json(HEALTH_PAYLOAD)
-            elif parsed.path in {"/", "/flora"}:
+            elif parsed.path in {"/", "/flora", "/flora/"}:
                 self._html(_flora_home_page())
             elif parsed.path == "/morning-edition":
                 self._html(landing_page())
@@ -202,7 +202,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path in {"/", "/flora", "/morning-edition", "/bt-collection", "/flora/bt-collection", "/flora/blueprint-import", "/blueprint-import", "/flora/blueprint-import/history", "/blueprint-import/history", "/flora/enterprise-canvas", "/enterprise-canvas", "/canvas", "/flora/enterprise-canvas/lineage", "/enterprise-canvas/lineage", "/lineage", "/flora/enterprise-canvas/feedback", "/enterprise-canvas/feedback", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
+    if path in {"/", "/flora", "/flora/", "/morning-edition", "/bt-collection", "/flora/bt-collection", "/flora/blueprint-import", "/blueprint-import", "/flora/blueprint-import/history", "/blueprint-import/history", "/flora/enterprise-canvas", "/enterprise-canvas", "/canvas", "/flora/enterprise-canvas/lineage", "/enterprise-canvas/lineage", "/lineage", "/flora/enterprise-canvas/feedback", "/enterprise-canvas/feedback", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
     if path.startswith("/flora/blueprint-import/"):
         return "text/html; charset=utf-8"
