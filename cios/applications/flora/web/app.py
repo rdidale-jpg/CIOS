@@ -19,7 +19,7 @@ from cios.applications.flora.live.progress import read_state, mark_stale_interru
 from cios.applications.flora.live.views import acquisition_plans_page, collection_progress_page, collection_result, collection_start_page, dashboard, evidence_page, feedback_diagnostics_page, rejected_claims_page, source_effectiveness_page, sources_page
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.rob_score import create_rob_score_record
-from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
+from cios.applications.flora.workspace.views import case_page, flora_home_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
 from cios.applications.flora.digital_twins import digital_twins_landing_page, bt_twin_page, search_bt_twin, bt_search_progress_page, rapid_snapshot_csv
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
@@ -27,6 +27,7 @@ from cios.applications.flora.document_review import apply_accepted, configure_fi
 from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id
 from cios.applications.flora.flora_transparent import page as flora_page, start_bt_digital_twin, flora_payload
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
+from cios.applications.flora.blueprint_import.views import approve_blueprint_import, blueprint_import_page, blueprint_review_page, import_history_page, receive_blueprint_upload
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -59,13 +60,22 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         try:
             if parsed.path == "/health":
                 self._json(HEALTH_PAYLOAD)
-            elif parsed.path == "/flora":
-                self._html(flora_page())
+            elif parsed.path in {"/", "/flora"}:
+                self._html(flora_home_page())
             elif parsed.path == "/flora/events":
                 self._json(flora_payload())
+            elif parsed.path == "/blueprint-import":
+                html, status = blueprint_import_page(self.headers)
+                self._html(html, status=status)
+            elif parsed.path == "/blueprint-import/history":
+                html, status = import_history_page(self.headers)
+                self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/review"):
+                html, status = blueprint_review_page(parsed.path.removeprefix("/blueprint-import/").removesuffix("/review"), self.headers)
+                self._html(html, status=status)
             elif _redirects_to_flora(parsed.path):
                 self._redirect("/flora")
-            elif parsed.path in {"/", "/morning-edition"}:
+            elif parsed.path == "/morning-edition":
                 self._html(landing_page())
             elif parsed.path in {"/live", "/evidence"}:
                 self._html(dashboard())
@@ -214,15 +224,29 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         if self.path.startswith("/digital-twins/") and self.path.endswith("/canvas/feedback"):
             html, status, _target = submit_enterprise_canvas_feedback(form, self.headers)
             self._html(html, status=status)
+        elif self.path == "/blueprint-import/upload":
+            fields, files = _parse_multipart(self.headers, raw_body)
+            filename = fields.get("blueprint_zip_filename", "blueprint.zip")
+            content = files.get("blueprint_zip")
+            if not content:
+                html, status = blueprint_import_page(self.headers, "Choose a Blueprint ZIP to upload.")
+                self._html(html, status=400 if status == 200 else status)
+                return
+            html, status = receive_blueprint_upload(self.headers, filename, content)
+            self._html(html, status=status)
+        elif self.path.startswith("/blueprint-import/") and self.path.endswith("/approve"):
+            import_run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/approve")
+            html, status = approve_blueprint_import(import_run_id, self.headers, _one(form, "rationale"))
+            self._html(html, status=status)
         elif self.path == "/flora/bt-digital-twin":
             start_bt_digital_twin()
             self._redirect("/flora")
-        elif self.path == "/digital-twins/bt-group-plc/search" or self.path.startswith("/financial-intelligence/bt-group-plc/refresh"):
+        elif self.path == "/digital-twins/bt-group-plc/search":
             start_bt_digital_twin()
             self._redirect("/flora")
         elif self.path.startswith("/financial-intelligence/bt-group-plc/refresh"):
             requested_mode = (form.get("acquisition_mode") or form.get("extraction_mode") or [""])[0]
-            run = create_financial_intelligence_progress_run("bt-group-plc", extraction_mode=requested_mode, product_surface="legacy_refresh", ordinary_research=True)
+            run = create_financial_intelligence_progress_run("bt-group-plc", extraction_mode=requested_mode)
             self._redirect(f"/digital-twins/bt-group-plc/progress/{run['run_id']}")
         elif self.path == "/ai-financial-report/upload":
             fields, files = _parse_multipart(self.headers, raw_body)
@@ -367,14 +391,12 @@ def _support_authorised(headers) -> bool:
     return auth == f"Bearer {expected}" or cookie_value(headers, "flora_support_token") == expected
 
 def _redirects_to_flora(path: str) -> bool:
-    if path in {"/", "/morning-edition", "/live", "/evidence", "/portfolio", "/radar", "/scoring", "/reasoning-model", "/observatory", "/observatory/critique", "/settings", "/logbook", "/digital-twins", "/digital-twins/bt-group-plc", "/financial-intelligence", "/financial-reports", "/ai-financial-report"}:
-        return True
-    return path.startswith(("/live/", "/digital-twins/bt-group-plc/", "/financial-intelligence/", "/ai-financial-report/", "/observatory/", "/digital-twin/", "/score/", "/case/"))
+    return False
 
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path == "/flora" or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports":
+    if path in {"/flora", "/blueprint-import", "/blueprint-import/history"} or (path.startswith("/blueprint-import/") and path.endswith("/review")) or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports":
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"

@@ -34,13 +34,13 @@ def test_health_returns_200_plain_json() -> None:
     assert json.loads(body.decode("utf-8")) == {"status": "healthy", "service": "flora"}
 
 
-def test_root_renders_morning_edition_content() -> None:
+def test_root_renders_flora_home_content() -> None:
     status, content_type, body = _get("/")
     html = body.decode("utf-8")
     assert status == 200
     assert content_type == "text/html; charset=utf-8"
-    assert "Good Morning Rob" in html
-    assert "Morning Edition" in html
+    assert "Flora Home" in html
+    assert "Import Blueprint" in html
 
 
 def test_bt_case_route_renders_case_file() -> None:
@@ -103,6 +103,9 @@ def test_live_dashboard_renders(monkeypatch, tmp_path) -> None:
 
 def test_live_status_returns_json(monkeypatch, tmp_path) -> None:
     monkeypatch.chdir(tmp_path)
+    import cios.applications.flora.live.collect as collect_mod
+    monkeypatch.setattr(collect_mod, "DEFAULT_PATH", tmp_path / "evidence.jsonl")
+    monkeypatch.setattr(collect_mod, "DEFAULT_DIAGNOSTICS_PATH", tmp_path / "diagnostics.jsonl")
     status, content_type, body = _get("/live/status")
     payload = json.loads(body.decode("utf-8"))
     assert status == 200
@@ -112,6 +115,8 @@ def test_live_status_returns_json(monkeypatch, tmp_path) -> None:
 
 def test_live_evidence_empty_state(monkeypatch, tmp_path) -> None:
     monkeypatch.chdir(tmp_path)
+    import cios.applications.flora.live.views as live_views
+    monkeypatch.setattr(live_views, "DEFAULT_PATH", tmp_path / "evidence.jsonl")
     status, _, body = _get("/live/evidence")
     html = body.decode("utf-8")
     assert status == 200
@@ -119,9 +124,11 @@ def test_live_evidence_empty_state(monkeypatch, tmp_path) -> None:
     assert "/live/collect" in html
 
 
-def test_homepage_morning_edition_live_banner(monkeypatch, tmp_path) -> None:
+def test_morning_edition_live_banner_remains_available(monkeypatch, tmp_path) -> None:
     monkeypatch.chdir(tmp_path)
-    status, _, body = _get("/")
+    import cios.applications.flora.live.views as live_views
+    monkeypatch.setattr(live_views, "DEFAULT_PATH", tmp_path / "evidence.jsonl")
+    status, _, body = _get("/morning-edition")
     assert status == 200
     assert "NO LIVE EVIDENCE AVAILABLE" in body.decode("utf-8")
 
@@ -203,7 +210,7 @@ def test_radar_links_to_score_pages() -> None:
 
 
 def test_watchlist_links_to_score_pages() -> None:
-    status, _, body = _get("/")
+    status, _, body = _get("/morning-edition")
     html = body.decode("utf-8")
     assert status == 200
     assert "Explain score" in html
@@ -342,3 +349,114 @@ def test_financial_intelligence_post_accepts_explicit_acquisition_mode(monkeypat
         assert captured == {'enterprise_id': 'bt-group-plc', 'extraction_mode': 'pdf_supporting_evidence'}
     finally:
         connection.close(); server.shutdown(); server.server_close(); thread.join(timeout=2)
+
+
+def _get_with_headers(path: str, headers: dict[str, str]) -> tuple[int, str, bytes]:
+    server = __import__("http.server").server.ThreadingHTTPServer(("127.0.0.1", 0), FloraWebHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    connection = HTTPConnection("127.0.0.1", server.server_port)
+    try:
+        connection.request("GET", path, headers=headers)
+        response = connection.getresponse()
+        body = response.read()
+        return response.status, response.getheader("Content-Type") or "", body
+    finally:
+        connection.close()
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=2)
+
+
+def test_flora_entry_route_exposes_primary_product_journey(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("FLORA_RELEASE_ID", "test-release-visible")
+    status, content_type, body = _get("/")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert content_type == "text/html; charset=utf-8"
+    assert "Flora Home" in html
+    assert "Import Blueprint" in html
+    assert "href='/blueprint-import'" in html
+    assert "Enterprise Canvas" in html
+    assert "Import History" in html
+    assert "BT Collection" in html
+    assert "test-release-visible" in html
+    assert "BT Collection screen" not in html
+
+
+def test_import_blueprint_route_requires_authorised_user(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    status, _, body = _get("/blueprint-import")
+    html = body.decode("utf-8")
+    assert status == 403
+    assert "Access denied" in html
+    assert "package-upload" in html
+
+
+def test_authorised_import_blueprint_route_opens_upload_interface(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    headers = {"X-Flora-User": "alice", "X-Flora-Enterprises": "synthetic-enterprise", "X-Flora-Roles": "package.upload,package.review,candidate.promote"}
+    status, _, body = _get_with_headers("/blueprint-import", headers)
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "Choose Blueprint ZIP" in html
+    assert "Upload and validate" in html
+    assert "Review the proposed changes" in html
+    assert "Approve promotion" in html
+
+
+def test_primary_navigation_links_do_not_require_hidden_routes(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    status, _, body = _get("/")
+    html = body.decode("utf-8")
+    assert status == 200
+    for label, href in [("Import Blueprint", "/blueprint-import"), ("Enterprise Canvas", "/digital-twins/bt-group-plc/canvas"), ("Import History", "/blueprint-import/history"), ("BT Collection", "/digital-twins")]:
+        assert label in html
+        assert href in html
+
+
+def test_import_history_requires_authorised_user(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    status, _, body = _get("/blueprint-import/history")
+    assert status == 403
+    assert "Access denied" in body.decode("utf-8")
+
+
+def test_authorised_import_history_navigation_opens(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    headers = {"X-Flora-User": "alice", "X-Flora-Enterprises": "*", "X-Flora-Roles": "package.upload"}
+    status, _, body = _get_with_headers("/blueprint-import/history", headers)
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "Import History" in html
+    assert "No Blueprint imports" in html
+
+
+def test_enterprise_canvas_navigation_remains_server_authorised(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    denied_status, _, denied_body = _get("/digital-twins/bt-group-plc/canvas")
+    assert denied_status == 403
+    assert "Access denied" in denied_body.decode("utf-8")
+    ok_headers = {"X-Flora-User": "alice", "X-Flora-Enterprises": "bt-group-plc", "X-Flora-Roles": "canvas.view"}
+    ok_status, _, ok_body = _get_with_headers("/digital-twins/bt-group-plc/canvas", ok_headers)
+    assert ok_status in {200, 404}
+    assert "Access denied" not in ok_body.decode("utf-8")
+
+
+def test_bt_collection_remains_reachable_as_labelled_legacy_area(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    status, _, home = _get("/")
+    assert status == 200
+    assert "BT Collection" in home.decode("utf-8")
+    collection_status, _, collection = _get("/digital-twins")
+    assert collection_status == 200
+    assert "BT" in collection.decode("utf-8")
+
+
+def test_navigation_does_not_mutate_canonical_state(monkeypatch, tmp_path) -> None:
+    monkeypatch.chdir(tmp_path)
+    status, _, _ = _get("/")
+    assert status == 200
+    assert not (tmp_path / "data" / "blueprint_import").exists()
+    assert not (tmp_path / "blueprint_import").exists()

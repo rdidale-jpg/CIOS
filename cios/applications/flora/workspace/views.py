@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from html import escape
+import os
 
 from cios.applications.flora.live.views import live_banner_html
 from cios.applications.flora.workspace.state import commercial_dna_context, watchlist_rows, workspace_context, case_context
@@ -13,11 +14,22 @@ from cios.applications.flora.observatory.newton import commercial_attractiveness
 from cios.applications.flora.observatory.views import _summary_cards, _recommendations_html, _readiness_table
 
 
-def _page(title: str, body: str) -> str:
-    return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><title>{escape(title)}</title><style>
-    body{{font-family:Inter,Arial,sans-serif;margin:0;background:#f6f3ee;color:#17211b}} a{{color:#185c4d}} .shell{{max-width:1180px;margin:auto;padding:28px}} .hero,.card{{background:#fff;border:1px solid #ded8ce;border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 1px 3px #0001}} .grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:14px}} .metric{{font-size:32px;font-weight:750}} .pill{{display:inline-block;border-radius:999px;padding:4px 10px;background:#e6f2ec;margin:3px}} .priority-high{{background:#173d33;color:white}} .priority-medium{{background:#f3d99b}} .priority-low{{background:#e1e1e1}} .section{{border-top:1px solid #ece5da;padding-top:14px;margin-top:18px}} button,input,textarea,select{{font:inherit;padding:9px;border:1px solid #cfc6ba;border-radius:10px}} textarea{{width:100%;min-height:56px}} button{{background:#173d33;color:#fff;cursor:pointer}} .nav a{{margin-right:14px}} table{{width:100%;border-collapse:collapse}} td,th{{border-bottom:1px solid #eee;padding:10px;text-align:left}} .muted{{color:#68736c}} .action{{background:#f8fbf9;border-left:5px solid #185c4d}}
-    </style></head><body><div class='shell'><nav class='nav'><a href='/'>Executive Brief</a><a href='/observatory'>Observatory</a><a href='/radar'>Portfolio</a><a href='/live'>Evidence</a><a href='/digital-twins'>Digital Twins</a><a href='/financial-intelligence'>Financial Intelligence</a><a href='/observatory/critique'>Research</a><a href='/settings'>Settings</a><a href='/logbook' hidden>Learning / Logbook</a><a href='/financial-reports' hidden>Collect Financial Report</a></nav>{body}</div></body></html>"""
+def _release_id() -> str:
+    return os.environ.get("FLORA_RELEASE_ID") or os.environ.get("RENDER_RELEASE_ID") or "flora-primary-navigation"
 
+
+def _page(title: str, body: str) -> str:
+    release_id = escape(_release_id())
+    return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><title>{escape(title)}</title><style>
+    body{{font-family:Inter,Arial,sans-serif;margin:0;background:#f6f3ee;color:#17211b}} a{{color:#185c4d}} .shell{{max-width:1180px;margin:auto;padding:28px}} .hero,.card{{background:#fff;border:1px solid #ded8ce;border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 1px 3px #0001}} .grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:14px}} .metric{{font-size:32px;font-weight:750}} .pill{{display:inline-block;border-radius:999px;padding:4px 10px;background:#e6f2ec;margin:3px}} .priority-high{{background:#173d33;color:white}} .priority-medium{{background:#f3d99b}} .priority-low{{background:#e1e1e1}} .section{{border-top:1px solid #ece5da;padding-top:14px;margin-top:18px}} button,input,textarea,select{{font:inherit;padding:9px;border:1px solid #cfc6ba;border-radius:10px}} textarea{{width:100%;min-height:56px}} button{{background:#173d33;color:#fff;cursor:pointer}} .nav a{{margin-right:14px}} .primary-action{{display:inline-block;background:#173d33;color:#fff;border-radius:999px;padding:7px 12px;text-decoration:none}} .button{{display:inline-block;background:#173d33;color:#fff;border-radius:10px;padding:10px 14px;text-decoration:none}} footer{{margin:24px 0;color:#68736c;font-size:13px}} table{{width:100%;border-collapse:collapse}} td,th{{border-bottom:1px solid #eee;padding:10px;text-align:left}} .muted{{color:#68736c}} .action{{background:#f8fbf9;border-left:5px solid #185c4d}}
+    </style></head><body><div class='shell'><nav class='nav'><a href='/morning-edition'>Executive Brief</a><a class='primary-action' href='/blueprint-import'>Import Blueprint</a><a href='/digital-twins/bt-group-plc/canvas'>Enterprise Canvas</a><a href='/blueprint-import/history'>Import History</a><a href='/digital-twins'>BT Collection</a><a href='/observatory'>Observatory</a><a href='/radar'>Portfolio</a><a href='/live'>Evidence</a><a href='/financial-intelligence'>Financial Intelligence</a><a href='/observatory/critique'>Research</a><a href='/settings'>Settings</a><a href='/logbook' hidden>Learning / Logbook</a><a href='/financial-reports' hidden>Collect Financial Report</a></nav>{body}<footer>Flora release: <span data-testid='flora-release-id'>{release_id}</span></footer></div></body></html>"""
+
+
+
+def flora_home_page() -> str:
+    body = """<section class='hero'><h1>Flora Home</h1><p>Start with governed Blueprint Import, inspect the Enterprise Canvas, or return to the labelled BT Collection when needed.</p><p><a class='button' href='/blueprint-import'>Import Blueprint</a></p></section>
+    <section class='grid'><article class='card action'><h2>Import Blueprint</h2><p>Upload a Blueprint ZIP, validate it, review proposed changes and explicitly approve promotion.</p><p><a href='/blueprint-import'>Import Blueprint</a></p></article><article class='card'><h2>Enterprise Canvas</h2><p>Open the governed Living Twin Canvas after promotion or for existing accepted state.</p><p><a href='/digital-twins/bt-group-plc/canvas'>Enterprise Canvas</a></p></article><article class='card'><h2>Import History</h2><p>Review received Blueprint packages and staged import runs.</p><p><a href='/blueprint-import/history'>Import History</a></p></article><article class='card'><h2>BT Collection</h2><p>Legacy and specialist BT collection remains available, but is no longer the unexplained default.</p><p><a href='/digital-twins'>BT Collection</a></p></article></section>"""
+    return _page("Flora Home", body)
 
 def landing_page() -> str:
     ctx = workspace_context(); pub = build_publication_context(); daily = ctx["daily"]; weekly = ctx["weekly"]; obs = build_observatory(); recs = recommendation_engine(obs)

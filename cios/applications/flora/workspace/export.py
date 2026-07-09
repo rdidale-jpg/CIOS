@@ -30,6 +30,12 @@ def export_dir() -> Path:
 def _staticize_root_page(html: str) -> str:
     html = (
         html.replace("href='/'", "href='index.html'")
+        .replace("href='/morning-edition'", "href='index.html'")
+        .replace("href='/blueprint-import/history'", "href='#blueprint-import-history'")
+        .replace("href='/blueprint-import'", "href='#blueprint-import'")
+        .replace("href='/digital-twins/bt-group-plc/canvas'", "href='#enterprise-canvas'")
+        .replace("href='/digital-twins/bt-group-plc'", "href='#bt-collection'")
+        .replace("href='/digital-twins'", "href='#bt-collection'")
         .replace("href='/logbook'", "href='logbook.html'")
         .replace("href='/settings'", "href='settings.html'")
         .replace("href='/financial-intelligence'", "href='#financial-intelligence'")
@@ -41,6 +47,7 @@ def _staticize_root_page(html: str) -> str:
         .replace("href='/live/collect/start'", "href='#live-collect'")
         .replace("href='/live/collect'", "href='#live-collect'")
         .replace("href='/live/evidence'", "href='#live-evidence'")
+        .replace("href='/evidence'", "href='#live'")
         .replace("href='/live'", "href='#live'")
         .replace("action='/logbook'", "action='#logbook'")
     )
@@ -50,6 +57,12 @@ def _staticize_root_page(html: str) -> str:
 def _staticize_case_page(html: str) -> str:
     html = (
         html.replace("href='/'", "href='../index.html'")
+        .replace("href='/morning-edition'", "href='../index.html'")
+        .replace("href='/blueprint-import/history'", "href='../index.html#blueprint-import-history'")
+        .replace("href='/blueprint-import'", "href='../index.html#blueprint-import'")
+        .replace("href='/digital-twins/bt-group-plc/canvas'", "href='../index.html#enterprise-canvas'")
+        .replace("href='/digital-twins/bt-group-plc'", "href='../index.html#bt-collection'")
+        .replace("href='/digital-twins'", "href='../index.html#bt-collection'")
         .replace("href='/logbook'", "href='../logbook.html'")
         .replace("href='/settings'", "href='../settings.html'")
         .replace("href='/financial-intelligence'", "href='../index.html#financial-intelligence'")
@@ -62,6 +75,7 @@ def _staticize_case_page(html: str) -> str:
         .replace("href='/live/collect/start'", "href='#live-collect'")
         .replace("href='/live/collect'", "href='#live-collect'")
         .replace("href='/live/evidence'", "href='#live-evidence'")
+        .replace("href='/evidence'", "href='#live'")
         .replace("href='/live'", "href='#live'")
         .replace("action='/feedback'", "action='#feedback'")
     )
