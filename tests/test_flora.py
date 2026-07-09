@@ -239,10 +239,11 @@ def test_workspace_static_export_generates_required_files(tmp_path) -> None:
         assert (tmp_path / "export" / filename).is_file()
 
     index_html = index_path.read_text(encoding="utf-8")
-    assert "Good Morning Rob" in index_html
-    assert "href='case/ThamesWater.html'" in index_html
-    assert "href='settings.html'" in index_html
-    assert "href='logbook.html'" in index_html
+    assert "Flora Home" in index_html
+    assert "Import Blueprint" in index_html
+    assert "Enterprise Canvas" in index_html
+    assert "Import History" in index_html
+    assert "BT " + "Collection" not in index_html
     assert "href='/" not in index_html
     assert "action='/" not in (tmp_path / "export" / "logbook.html").read_text(encoding="utf-8")
 
