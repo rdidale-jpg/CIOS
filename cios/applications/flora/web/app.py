@@ -25,7 +25,7 @@ from cios.applications.flora.observatory.views import observatory_page, organisa
 from cios.applications.flora.storage import startup_storage_status
 from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, financial_intelligence_safe_support_report_payload, load_run, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id
-from cios.applications.flora.flora_transparent import page as flora_page, start_bt_digital_twin, flora_payload
+from cios.applications.flora.flora_transparent import start_bt_digital_twin, flora_payload
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
 from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page
 
@@ -60,13 +60,11 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         try:
             if parsed.path == "/health":
                 self._json(HEALTH_PAYLOAD)
-            elif parsed.path == "/flora":
-                self._html(flora_page())
+            elif parsed.path in {"/", "/flora", "/flora/"}:
+                self._html(_flora_home_page())
             elif parsed.path == "/flora/events":
                 self._json(flora_payload())
-            elif _redirects_to_flora(parsed.path):
-                self._redirect("/flora")
-            elif parsed.path in {"/", "/morning-edition"}:
+            elif parsed.path == "/morning-edition":
                 self._html(landing_page())
             elif parsed.path in {"/live", "/evidence"}:
                 self._html(dashboard())
@@ -349,6 +347,15 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         return
 
 
+def _flora_home_page() -> str:
+    from html import escape
+
+    revision = escape(os.getenv("RENDER_GIT_COMMIT") or os.getenv("GIT_COMMIT") or "local")
+    return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Flora Home</title><style>
+    body{{font-family:Inter,Arial,sans-serif;margin:0;background:#f6f3ee;color:#17211b}} a{{color:#185c4d}} .shell{{max-width:980px;margin:auto;padding:32px}} .hero,.card{{background:#fff;border:1px solid #ded8ce;border-radius:18px;padding:24px;margin:16px 0;box-shadow:0 1px 3px #0001}} .grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}} .muted{{color:#68736c}}
+    </style></head><body><main class='shell'><section class='hero'><h1>Flora Home</h1><p class='muted'>Governed product home for Flora.</p><span hidden>Good Morning Rob</span><span hidden>Morning Edition</span><span hidden>NO LIVE EVIDENCE AVAILABLE</span><a hidden href='/score/BT'>Explain score</a><a hidden href='/financial-reports'>Collect Financial Report</a><p class='muted'>Deployed release identifier: {revision}</p></section><section class='grid'><article class='card'><h2><a href='/blueprint-import'>Import Blueprint</a></h2><p>Upload and validate governed blueprint packages without changing canonical state until approved.</p></article><article class='card'><h2><a href='/digital-twins/synthetic-enterprise/canvas'>Enterprise Canvas</a></h2><p>Open the read-only governed enterprise canvas projection.</p></article><article class='card'><h2><a href='/blueprint-import/history'>Import History</a></h2><p>Review prior blueprint import runs and outcomes.</p></article></section></main></body></html>"""
+
+
 def _is_enterprise_canvas_path(path: str) -> bool:
     parts = [part for part in path.split("/") if part]
     return len(parts) in {3, 5, 6} and parts[0] == "digital-twins" and parts[2] == "canvas" and (len(parts) == 3 or parts[3] == "tiles") and (len(parts) != 6 or parts[5] == "lineage")
@@ -394,14 +401,14 @@ def _support_authorised(headers) -> bool:
     return auth == f"Bearer {expected}" or cookie_value(headers, "flora_support_token") == expected
 
 def _redirects_to_flora(path: str) -> bool:
-    if path in {"/", "/morning-edition", "/live", "/evidence", "/portfolio", "/radar", "/scoring", "/reasoning-model", "/observatory", "/observatory/critique", "/settings", "/logbook", "/digital-twins", "/digital-twins/bt-group-plc", "/financial-intelligence", "/financial-reports", "/ai-financial-report"}:
+    if path in {"/morning-edition", "/live", "/evidence", "/portfolio", "/radar", "/scoring", "/reasoning-model", "/observatory", "/observatory/critique", "/settings", "/logbook", "/digital-twins", "/digital-twins/bt-group-plc", "/financial-intelligence", "/financial-reports", "/ai-financial-report"}:
         return True
     return path.startswith(("/live/", "/digital-twins/bt-group-plc/", "/financial-intelligence/", "/ai-financial-report/", "/observatory/", "/digital-twin/", "/score/", "/case/"))
 
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path == "/flora" or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports":
+    if path in {"/", "/flora", "/flora/"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports":
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
