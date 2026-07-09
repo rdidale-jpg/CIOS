@@ -664,3 +664,19 @@ Flora now implements the bounded PR2 validation and staging layer on top of the 
 The staging layer is deliberately non-canonical. Every dry-run summary reports zero canonical mutations, and candidate records include `canonical_mutation_count: 0`. Projection-only records such as Pain Points, Burning Platforms and Transformation Pressures are retained as quarantined staging records, not promoted into new canonical object types. Unsupported classes such as Provider Fit remain visibly quarantined.
 
 Validation findings are recorded on candidate records and in the staging summary. Valid records can be accepted into staging while unsupported, unresolved or malformed records are quarantined or rejected. Re-running validation against the same package reuses the existing staging summary and does not create duplicate candidate identities.
+
+## Sprint 1 PR3 runtime note — governed review, mapping and dry-run effects
+
+Flora now implements the bounded PR3 review and planning layer after PR1 package receipt and PR2 candidate staging. The runtime records candidate-level review decisions, external-source-to-canonical mapping intent and dry-run canonical effect plans without executing canonical promotion.
+
+Review decisions are append-only records under `blueprint_import/reviews/{import_run_id}/`. Each record preserves the candidate ID, import-run ID, package reference, original source ID, object class, decision, reviewer identity, timestamp, rationale, validation findings, unresolved issues and mapped canonical target ID where applicable. Supported review decisions are `approve`, `reject`, `defer`, `quarantine` and `unsupported`.
+
+Mapping records are stored under `blueprint_import/mappings/{import_run_id}/` and support mapping to an existing canonical record, proposing a new canonical record, proposing an update to an existing record, duplicate marking, conflict marking, unresolved marking, rejection, deferral, quarantine retention and unsupported marking. Mapping records preserve the original external ID and deterministic mapping identity. They do not overwrite existing canonical records and do not silently resolve conflicts.
+
+Dry-run effect plans are stored under `blueprint_import/plans/{import_run_id}/`. A plan shows candidate effects as `create`, `update`, `unchanged`, `mapped`, `duplicate`, `conflict`, `contradiction`, `reject`, `defer`, `quarantine`, `unsupported`, `unresolved` or `projection`. Plans include expected canonical mutation counts for later promotion analysis and always report actual canonical mutation count as zero. The PR3 runtime writes no canonical Evidence, Observation or Enterprise Model files.
+
+Idempotency uses deterministic mapping, effect and plan identities based on import-run, candidate, package, review and mapping state. Repeating the same dry-run against the same staged candidates, decisions and mappings reuses the prior equivalent plan file instead of creating duplicates.
+
+Analytical projection classes, including Pain Points, Burning Platforms, Transformation Pressure views, residual-pain views, response-effectiveness views, priority selections and solution patterns, remain non-canonical. PR3 classifies them as projection/quarantine/unsupported for planning only and does not create canonical objects for them.
+
+Access control follows the existing Flora product-session header/cookie pattern. Candidate review, mapping creation and dry-run planning require an authenticated Flora user, enterprise access and either `package.review` or `blueprint_import_admin` role. Unauthorised users cannot create or change review, mapping or planning state.
