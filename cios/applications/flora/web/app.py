@@ -26,7 +26,7 @@ from cios.applications.flora.storage import startup_storage_status
 from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, financial_intelligence_safe_support_report_payload, load_run, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id
 from cios.applications.flora.flora_transparent import page as flora_page, start_bt_digital_twin, flora_payload
-from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page
+from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -211,7 +211,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         length = int(self.headers.get("Content-Length", "0"))
         raw_body = self.rfile.read(length)
         form = {} if "multipart/form-data" in self.headers.get("Content-Type", "") else parse_qs(raw_body.decode("utf-8"), keep_blank_values=True)
-        if self.path == "/flora/bt-digital-twin":
+        if self.path.startswith("/digital-twins/") and self.path.endswith("/canvas/feedback"):
+            html, status, _target = submit_enterprise_canvas_feedback(form, self.headers)
+            self._html(html, status=status)
+        elif self.path == "/flora/bt-digital-twin":
             start_bt_digital_twin()
             self._redirect("/flora")
         elif self.path == "/digital-twins/bt-group-plc/search" or self.path.startswith("/financial-intelligence/bt-group-plc/refresh"):
