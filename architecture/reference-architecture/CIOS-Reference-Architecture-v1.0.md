@@ -3,7 +3,7 @@
 **Purpose:** Define the single authoritative architecture entry point for CIOS.  
 **Status:** Draft  
 **Owner:** Rob / CIOS  
-**Last updated:** 2026-07-03
+**Last updated:** 2026-07-09
 
 ## Executive Summary
 
@@ -113,6 +113,22 @@ Learning improves future reasoning.
 - **Major objects:** runtime workflow, research workspace, evidence library, executive view, report, briefing, product surface, runtime compliance check.
 - **Related architecture papers:** FP-003 Flora Intelligence Architecture, docs/Architecture/CIRM_Runtime_Compliance.md, Flora runtime alignment and product maturity documents.
 - **Future runtime implications:** Product surfaces should be views over evidence, Observations, Enterprise Models and reasoning lineage rather than independent memory stores.
+
+#### Governed external Twin import
+
+Flora may ingest accepted external Commercial Digital Twin Blueprint packages through a staged, versioned and object-level acceptance boundary.
+
+Package acceptance does not equal canonical acceptance. The immutable package, candidate imported records and canonical Enterprise Model state remain distinct. Import must preserve original identifiers and locations, support partial acceptance, prevent duplicate re-import, record every canonical mutation and keep analytical projections distinguishable from canonical Enterprise Intelligence objects.
+
+ADR-012 and the Flora Governed Blueprint Import Runtime Specification own the detailed import decision and runtime behaviour.
+
+#### Living Twin experience
+
+Flora should begin with the enterprise rather than a document library. The Enterprise Canvas is the primary navigation model for a Living Commercial Digital Twin, while remaining a view over governed state rather than a new canonical object.
+
+Organisation is the initial lens. Future lenses may expose outcomes, transformation, pain, stakeholders, technology, suppliers and time using the same underlying Twin. Progressive disclosure should allow a user to understand the enterprise first and inspect Evidence, Unknowns, Contradictions and original package lineage when needed.
+
+ADR-013, the CIOS Enterprise Intelligence Experience Standard and the Flora Enterprise Canvas and Drill-Down Pattern own the detailed experience decision.
 
 ### 10. Learning and Feedback Layer
 
@@ -288,6 +304,9 @@ Runtime roles are architectural rather than final branding if product names chan
 - collects evidence;
 - creates Observations;
 - updates Enterprise Models;
+- receives and stages governed Blueprint packages without bypassing canonical object governance;
+- maintains package, import and mapping lineage;
+- renders Living Twin views through an Enterprise Canvas and progressively disclosed detail;
 - renders executive views;
 - manages research and evidence libraries.
 
@@ -331,6 +350,9 @@ Architecture compliance should become a future runtime and PR governance mechani
 - Does this improve commercial judgement?
 - Does this preserve evidence lineage?
 - Does this reduce unsupported inference?
+- Does imported package acceptance remain separate from canonical object acceptance?
+- Does the product surface render governed state rather than become an independent memory store?
+- Are time, Unknowns, Contradictions and human-supplied knowledge visible in the user experience?
 
 ## Maturity Model
 

@@ -2,7 +2,7 @@
 
 **Status:** Draft
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-03
+**Last updated:** 2026-07-09
 
 This map helps readers find the architecture paper that owns a concept. The Reference Architecture is the entry point; the documents below remain the primary homes for detailed standards and models.
 
@@ -26,6 +26,8 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | ADR-004 | [Human-Supplied Knowledge Must Be Labelled](../decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md) | Requires labelled, dated human-supplied knowledge. | Accepted | `architecture/decisions/` | Supports governance and provenance clarity. |
 | ADR-005 | [No Recommendation Without Inspectable Lineage](../decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md) | Requires inspectable lineage for strong recommendations. | Accepted | `architecture/decisions/` | Enforces trust, explainability and evidence lineage. |
 | ADR-010 | [Structured-Source-First, AI-Assisted Evidence Acquisition](../decisions/ADR-010-Structured-Source-First-AI-Assisted-Evidence-Acquisition.md) | Selects the governed acquisition hierarchy and treats provider output as candidate data. | Accepted | `architecture/decisions/` | Governs Financial Intelligence source acquisition and provider boundaries. |
+| ADR-012 | [Governed Blueprint Package Import and Canonical Acceptance Boundary](../decisions/ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md) | Separates package acceptance, candidate staging and object-level canonical promotion. | Accepted | `architecture/decisions/` | Governs Blueprint import, idempotency, reversibility and analytical projections. |
+| ADR-013 | [Enterprise Canvas as Primary Living Twin Navigation](../decisions/ADR-013-Enterprise-Canvas-as-Primary-Living-Twin-Navigation.md) | Establishes the enterprise-first, progressively disclosed Living Twin experience. | Accepted | `architecture/decisions/` | Governs Flora Canvas, Intelligence Tiles, lenses, lineage and governed feedback. |
 | ADR-006 | [Signal Architecture](../decisions/ADR-006-Signal-Architecture.md) | Migrated placeholder for future signal architecture review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
 | ADR-007 | [Transformation Thesis](../decisions/ADR-007-Transformation-Thesis.md) | Migrated placeholder for future transformation thesis review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
 | ADR-008 | [Recommendation Engine](../decisions/ADR-008-Recommendation-Engine.md) | Migrated placeholder for future recommendation engine review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
@@ -80,6 +82,10 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | Flora | Flora Pilot Workspace v0.3 | Describes pilot workspace experience. | Present | `docs/Applications/` | Runtime surface for evidence and research workflows. |
 | Flora | Flora Case Files | Describes case file organisation. | Present | `docs/Applications/` | Workspace/product view over Evidence, Observations, Enterprise Model state and reasoning. |
 | Flora | [Flora Financial Intelligence Runtime Specification v0.1](../../docs/Architecture/Flora_Financial_Intelligence_Runtime_Specification_v0.1.md) | Defines operational Financial Intelligence behaviour for governed financial sources, candidate facts, Observations and Enterprise Model projection. | Working Draft | `docs/Architecture/` | Runtime capability over Source, Evidence, Observation and Enterprise Model layers; does not own EI-001 or EI-012 semantics. |
+| Flora | [Flora Governed Blueprint Import Runtime Specification v0.1](../../docs/Architecture/Flora_Governed_Blueprint_Import_Runtime_Specification_v0.1.md) | Defines package receipt, staging, mapping, promotion, ledger, idempotency, reversal and lineage behaviour. | Approved Sprint 1 baseline | `docs/Architecture/` | Implements ADR-012 without changing EI object semantics. |
+| Exchange | [CIOS Blueprint Package Import Profile v0.1](../../docs/Architecture/CIOS_Blueprint_Package_Import_Profile_v0.1.md) | Defines package metadata, record envelopes, truth classes and referential integrity for governed import. | Approved Sprint 1 baseline | `docs/Architecture/` | Standardises the package boundary while preserving owning object contracts. |
+| Experience | [CIOS Enterprise Intelligence Experience Standard v0.1](../../docs/Architecture/CIOS_Enterprise_Intelligence_Experience_Standard_v0.1.md) | Defines enterprise-first comprehension, progressive disclosure, uncertainty, lineage, action and accessibility. | Approved working standard | `docs/Architecture/` | Cross-product standard for rendering governed Enterprise Intelligence. |
+| Flora | [Flora Enterprise Canvas and Drill-Down Pattern v0.1](../../docs/Architecture/Flora_Enterprise_Canvas_and_Drill_Down_Pattern_v0.1.md) | Defines the tile-based Enterprise Canvas, detail panel, lenses, lineage and feedback pattern. | Approved Sprint 1 baseline | `docs/Architecture/` | Implements ADR-013 for the MOD pilot and later Living Twins. |
 | Flora | Flora Publisher v0.1 | Describes briefing/report generation. | Present | `docs/Applications/` | Publisher role for generated executive outputs. |
 | Flora | Flora Runtime Alignment Audit | Audits runtime alignment. | Present | `docs/Architecture/` | Compliance evidence for Flora vs architecture. |
 | Flora | Flora Product Maturity Review | Reviews Flora product maturity. | Present | `docs/Architecture/` | Connects runtime maturity to architecture maturity. |
@@ -102,5 +108,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 7. Read Founding Papers FP-003 to FP-009 to understand CIRM.
 8. Read Enterprise Intelligence papers EI-001 to EI-012 to understand the Commercial Digital Twin; EI-001 owns financial metric data and EI-012 owns Observation lifecycle.
 9. For Financial Intelligence, read ADR-010 and the Flora Financial Intelligence Runtime Specification.
-10. Read relevant [ADRs](../decisions/README.md).
-11. Read runtime architecture documents before changing Flora, Newton, Observatory or Publisher behaviour.
+10. For Blueprint import, read ADR-012, the Blueprint Package Import Profile and the Flora Governed Blueprint Import Runtime Specification.
+11. For Living Twin experience work, read ADR-013, the Enterprise Intelligence Experience Standard and the Flora Enterprise Canvas and Drill-Down Pattern.
+12. Read relevant [ADRs](../decisions/README.md).
+13. Read runtime architecture documents before changing Flora, Newton, Observatory or Publisher behaviour.

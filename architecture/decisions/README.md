@@ -2,7 +2,7 @@
 
 **Status:** Living index
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-03
+**Last updated:** 2026-07-09
 
 ## Purpose
 
@@ -39,6 +39,8 @@ Do not create ADRs for small implementation details unless the detail changes ar
 - [ADR-004 — Human-Supplied Knowledge Must Be Labelled](ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md)
 - [ADR-005 — No Recommendation Without Inspectable Lineage](ADR-005-No-Recommendation-Without-Inspectable-Lineage.md)
 - [ADR-010 — Structured-Source-First, AI-Assisted Evidence Acquisition](ADR-010-Structured-Source-First-AI-Assisted-Evidence-Acquisition.md)
+- [ADR-012 — Governed Blueprint Package Import and Canonical Acceptance Boundary](ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md)
+- [ADR-013 — Enterprise Canvas as Primary Living Twin Navigation](ADR-013-Enterprise-Canvas-as-Primary-Living-Twin-Navigation.md)
 
 ## Proposed ADRs
 
@@ -51,6 +53,10 @@ These are migrated placeholders retained for future review. They are not accepte
 ## Superseded / archived ADRs
 
 No superseded or archived ADRs currently exist. If an ADR is superseded, keep the file available, update its status, link the replacing ADR and list it here.
+
+## Numbering
+
+ADR numbers preserve project history and may not be contiguous. Do not renumber existing decisions to close gaps.
 
 ## ADR naming convention
 
