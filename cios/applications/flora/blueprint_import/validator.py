@@ -49,8 +49,8 @@ class BlueprintPackageValidator:
             raise BlueprintValidationError("Immutable archive checksum does not match registry record")
         existing = self.staging.load_summary(package.import_run_id)
         if existing:
-            return ImportRunDryRunResult(**{k: tuple(v) if isinstance(v, list) and k in {"files_inspected","unsupported_classes","unresolved_references","warnings","errors"} else v for k,v in existing.items()})
-        candidates, warnings, errors, files, unsupported, unresolved = self._inspect(package, content)
+            return ImportRunDryRunResult(**{k: tuple(v) if isinstance(v, list) and k in {"files_inspected","unsupported_classes","unresolved_references","warnings","errors","execution_trace"} else v for k,v in existing.items()})
+        candidates, warnings, errors, files, unsupported, unresolved, trace = self._inspect(package, content)
         accepted = sum(1 for c in candidates if c.validation_status == "accepted")
         quarantined = sum(1 for c in candidates if c.validation_status == "quarantined")
         rejected = sum(1 for c in candidates if c.validation_status == "rejected")
@@ -58,7 +58,7 @@ class BlueprintPackageValidator:
             self.staging.save_candidate(candidate)
         result = ImportRunDryRunResult("1.0", package.import_run_id, package_ref, package.package_sha256, tuple(files),
             sum(1 for c in candidates if c.candidate_object_class in SUPPORTED_RECORD_CLASSES), len(candidates), accepted, quarantined, rejected,
-            tuple(sorted(unsupported)), tuple(sorted(unresolved)), tuple(warnings), tuple(errors), 0)
+            tuple(sorted(unsupported)), tuple(sorted(unresolved)), tuple(warnings), tuple(errors), 0, tuple(trace))
         self.staging.save_result(result)
         self.ledger.append("package_validation_staged", result.to_dict() | {"actor": actor})
         return result
@@ -74,6 +74,7 @@ class BlueprintPackageValidator:
         warnings: list[str] = []; errors: list[str] = []; unsupported: set[str] = set(); unresolved: set[str] = set(); files: list[str] = []
         candidates: list[CandidateImportRecord] = []
         names: list[str] = []
+        trace: list[dict[str, Any]] = []
         try:
             with zipfile.ZipFile(BytesIO(content)) as zf:
                 seen: set[str] = set(); duplicates: set[str] = set()
@@ -96,7 +97,7 @@ class BlueprintPackageValidator:
                     errors.append(str(exc))
                     manifest = {}
                 self._validate_manifest(package, manifest, seen, warnings, errors)
-                inspection = self.twin_adapter.inspect(package, zf, manifest) if isinstance(manifest, dict) else None
+                inspection = self.twin_adapter.inspect(package, zf, manifest, trace) if isinstance(manifest, dict) else None
                 if inspection:
                     files.append(inspection.workbook_path)
                     warnings.extend([f"Worksheets discovered: {', '.join(inspection.worksheets)}"] if inspection.worksheets else [])
@@ -114,7 +115,7 @@ class BlueprintPackageValidator:
         if errors:
             # create a rejected package-metadata record so failed runs remain inspectable
             candidates.append(self._candidate(package, "blueprint_manifest.json", "package", "package_metadata", "package_metadata", {}, "rejected", [ValidationFinding("error", "package_invalid", "; ".join(errors))]))
-        return candidates, warnings, errors, files, unsupported, unresolved
+        return candidates, warnings, errors, files, unsupported, unresolved, trace
 
     def _validate_manifest(self, package, manifest, seen, warnings, errors):
         if not isinstance(manifest, dict): errors.append(INVALID_SCHEMA_MESSAGE); return

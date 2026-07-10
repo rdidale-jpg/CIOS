@@ -21,7 +21,7 @@ def application_revision() -> str:
     try:
         return subprocess.check_output(["git", "rev-parse", "--short=12", "HEAD"], text=True, stderr=subprocess.DEVNULL).strip()
     except Exception:
-        return "unknown"
+        return "Unavailable — deployment metadata not configured"
 
 
 def _first_env(names: tuple[str, ...]) -> str:
@@ -38,9 +38,9 @@ def application_branch() -> str:
     if value:
         return value
     try:
-        return subprocess.check_output(["git", "branch", "--show-current"], text=True, stderr=subprocess.DEVNULL).strip()[:128] or "unknown"
+        return subprocess.check_output(["git", "branch", "--show-current"], text=True, stderr=subprocess.DEVNULL).strip()[:128] or "Unavailable — deployment metadata not configured"
     except Exception:
-        return "unknown"
+        return "Unavailable — deployment metadata not configured"
 
 
 def build_timestamp() -> str:
@@ -51,7 +51,7 @@ def build_timestamp() -> str:
             return datetime.fromtimestamp(int(value), UTC).isoformat()
         except (OverflowError, ValueError, OSError):
             return value
-    return value or "unknown"
+    return value or "Unavailable — deployment metadata not configured"
 
 
 def deployment_version() -> str:

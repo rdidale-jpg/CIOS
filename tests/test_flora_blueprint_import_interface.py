@@ -18,7 +18,11 @@ BAD={"X-Flora-User":"mallory","X-Flora-Enterprises":"other","X-Flora-Roles":"can
 def test_authorised_upload_validation_history_and_no_git_write(monkeypatch,tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     before=set(tmp_path.rglob("*"))
-    html,status,target=upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, HEADERS)
+    from cios.applications.flora.live.runtime import application_revision
+    application_revision.cache_clear()
+    from tests.test_flora_blueprint_import_validation import xlsx_workbook, pkg_with_workbook
+    wb=xlsx_workbook([("Observations","rId1","worksheets/sheet1.xml",[["external_id","record_class","statement"],["OBS-1","observation","ok"]])])
+    html,status,target=upload_and_validate_blueprint({"blueprint_zip":pkg_with_workbook(wb)}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, HEADERS)
     assert status == 200
     assert "Validation result" in html and "Checksum" in html and "Accepted" in html
     assert target.startswith("/blueprint-import/bpi-run-")
@@ -147,6 +151,8 @@ def test_owner_enterprise_boundary_still_blocks_cross_workspace(monkeypatch,tmp_
 def test_owner_cookie_upload_audit_captures_authorisation_decision(monkeypatch,tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     headers={"Cookie":"flora_user=rob; flora_enterprises=synthetic-enterprise; flora_roles=owner%2Ccanvas.view"}
+    from cios.applications.flora.live.runtime import application_revision
+    application_revision.cache_clear()
     html,status,target=upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, headers)
     assert status == 200
     assert "Validation result" in html
@@ -265,3 +271,55 @@ def test_failed_validation_disables_review_and_promotion(monkeypatch,tmp_path):
     blocked,bs=approve_and_promote(run_id,{"plan_id":["anything"],"confirm_plan":["yes"],"confirm_mutations":["yes"],"rationale":["reviewed"]}, HEADERS)
     assert bs == 400 and "Validation failed" in blocked
     assert not (tmp_path/"memory").exists()
+
+
+def test_blueprint_execution_trace_visible_on_validation_review_and_no_secrets(monkeypatch,tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("RENDER_GIT_COMMIT", "abcdef1234567890")
+    monkeypatch.setenv("RENDER_GIT_BRANCH", "trace-branch")
+    from cios.applications.flora.live.runtime import application_revision
+    application_revision.cache_clear()
+    from tests.test_flora_blueprint_import_validation import xlsx_workbook, pkg_with_workbook
+    wb=xlsx_workbook([("Observations","rId1","worksheets/sheet1.xml",[["external_id","record_class","statement"],["OBS-1","observation","ok"]])])
+    html,status,target=upload_and_validate_blueprint({"blueprint_zip":pkg_with_workbook(wb)}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, HEADERS)
+    assert status == 200
+    assert "Blueprint import execution trace" in html
+    assert "Git commit SHA" in html and "abcdef1234567890" in html
+    assert "Git branch" in html and "trace-branch" in html
+    assert "Workbook path selected" in html
+    assert "Resolver function name" in html and "resolve_ooxml_relationship_target" in html
+    assert "Source OOXML part" in html and "xl/workbook.xml" in html
+    assert "Original relationship target" in html
+    assert "Normalized target" in html
+    assert "Final ZIP lookup path" in html
+    assert "ZIP member exists" in html
+    assert "Copy diagnostic trace" in html
+    assert "session" not in html.lower() and "token" not in html.lower()
+    run_id=target.rsplit("/",1)[-1]
+    review,rs=review_page(run_id, HEADERS)
+    assert rs == 200
+    assert "Blueprint import execution trace" not in review  # successful review proceeds to plan without fatal trace duplication
+
+
+def test_failed_blueprint_execution_trace_disables_promotion_and_shows_nearest(monkeypatch,tmp_path):
+    from tests.test_flora_blueprint_import_validation import xlsx_workbook, pkg_with_workbook
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    wb=xlsx_workbook([('00_Control','rId1','worksheets/missing.xml',[['external_id','record_class'],['OBS-1','observation']])])
+    html,status,target=upload_and_validate_blueprint({"blueprint_zip":pkg_with_workbook(wb)}, {"blueprint_zip.filename":"MOD-CDT-v1.3-Flora-Blueprint.zip","blueprint_zip.content_type":"application/zip"}, HEADERS)
+    assert status == 200
+    assert "Blueprint import execution trace" in html
+    assert "00_Control" in html
+    assert "worksheets/missing.xml" in html
+    assert "xl/worksheets/missing.xml" in html
+    assert "ZIP member exists" in html and "no" in html.lower()
+    assert "Nearest matching ZIP members" in html and "xl/worksheets/sheet1.xml" in html
+    assert "Processing stopped" in html and "before candidate staging" in html
+    assert "Canonical changes made" in html and "no" in html.lower()
+    assert "Promotion enabled" in html and "no" in html.lower()
+    assert "approval are disabled" in html
+    assert "Do not recreate or alter the package" in html
+    run_id=target.rsplit("/",1)[-1]
+    review,rs=review_page(run_id, HEADERS)
+    assert rs == 200 and "Approval controls are disabled" in review and "Blueprint import execution trace" in review
+    denied,ds=validation_result_page(run_id, BAD)
+    assert ds == 403
