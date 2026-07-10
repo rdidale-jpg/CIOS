@@ -19,6 +19,7 @@ from .ledger import BlueprintImportLedger
 from .candidates import CandidateStagingRepository
 from .mapping import ImportMappingService
 from .planning import DryRunPlanRepository, DryRunPlanningService
+from .review_plan import BlueprintReviewPlanCoordinator, PAGE_SIZE_DEFAULT, PAGE_SIZE_MAX
 from .promotion import CanonicalPromotionRepository, CanonicalPromotionService, BlueprintPromotionError, can_approve_blueprint_promotion, can_execute_blueprint_promotion
 from .registry import BlueprintPackageRegistry
 from .review import CandidateReviewRepository, CandidateReviewService, can_review_blueprint_candidate
@@ -86,25 +87,32 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     return _page("Blueprint validation result", body), 200
 
 
-def review_page(import_run_id: str, headers: Any, message: str = "") -> tuple[str, int]:
-    ctx = _context(import_run_id)
-    if not ctx or not (can_access_enterprise(headers, ctx["package"].identity.enterprise_id, getattr(ctx["package"], "workspace_id", "")) and can_review_blueprint_candidate(headers, ctx["package"].identity.enterprise_id)):
-        return _safe_failure("You are not authorised to review this Blueprint import.", "review", False, True, "Ask for Blueprint review permission."), 403
-    summary = ctx.get("summary") or {}
-    if summary.get("errors"):
-        body = _package_header(ctx["package"]) + _notice(message) + "<section class='card'><h2>Review proposed changes</h2><p><strong>Validation failed.</strong> Proposed-change planning is disabled because workbook or package inspection did not complete safely.</p>{}</section>".format(_list('Errors', summary.get('errors', []))) + _execution_trace_section(ctx["package"], summary, True)
-        body += "<section class='card'><h2>Approval</h2><p>Approval controls are disabled until fatal validation errors are resolved.</p><button type='button' disabled>Approve and update governed Twin</button></section>"
-        return _page("Review Blueprint proposed changes", body), 200
-    _ensure_reviews_and_mappings(ctx, headers)
-    plan = DryRunPlanningService().create_plan(import_run_id, authenticated_flora_user(headers), headers)
-    totals = Counter(e.effect_type for e in plan.effects)
-    exceptions = [e for e in plan.effects if e.effect_type in {"conflict", "unresolved", "quarantine", "unsupported", "reject", "defer", "projection"}]
-    rows = "".join(f"<tr><th>{escape(k.replace('_',' '))}</th><td>{v}</td></tr>" for k,v in {
-        "records to create": totals["create"], "records to update": totals["update"], "records mapped without change": totals["mapped"] + totals["unchanged"], "duplicates": totals["duplicate"], "conflicts": totals["conflict"], "unresolved references": totals["unresolved"], "analytical projections retained outside canonical memory": totals["projection"]}.items())
-    body = _package_header(ctx["package"]) + _notice(message) + f"<section class='card'><h2>Review proposed changes</h2><table>{rows}</table><p><strong>Expected governed Twin mutation count:</strong> {plan.expected_canonical_mutation_count}</p>{_exceptions(exceptions)}</section>"
-    body += f"""<section class='card'><h2>Approval</h2><p>Approve only if you have reviewed the plan, expected mutation count and unresolved warnings.</p><form method='post' action='/blueprint-import/{escape(import_run_id)}/approve'><input type='hidden' name='plan_id' value='{escape(plan.plan_id)}'><label><input type='checkbox' name='confirm_plan' value='yes' required> I reviewed the plan</label><label><input type='checkbox' name='confirm_mutations' value='yes' required> I understand the expected mutation count is {plan.expected_canonical_mutation_count}</label><label>Approval rationale</label><textarea name='rationale' required></textarea><p><button type='submit'>Approve and update governed Twin</button></p></form><form method='post' action='/blueprint-import/{escape(import_run_id)}/decline'><p><button type='submit'>Decline promotion</button></p></form></section>"""
-    return _page("Review Blueprint proposed changes", body), 200
-
+def review_page(import_run_id: str, headers: Any, message: str = "", query: dict[str, list[str]] | None = None) -> tuple[str, int]:
+    correlation_id = f"bpi-review-{uuid4().hex[:12]}"
+    try:
+        query = query or {}
+        ctx = _context(import_run_id)
+        if not ctx or not (can_access_enterprise(headers, ctx["package"].identity.enterprise_id, getattr(ctx["package"], "workspace_id", "")) and can_review_blueprint_candidate(headers, ctx["package"].identity.enterprise_id)):
+            return _safe_failure("You are not authorised to review this Blueprint import.", "review", False, True, "Ask for Blueprint review permission."), 403
+        summary = ctx.get("summary") or {}
+        if summary.get("errors"):
+            body = _package_header(ctx["package"]) + _notice(message) + "<section class='card'><h2>Review proposed changes</h2><p><strong>Validation failed.</strong> Proposed-change planning is disabled because workbook or package inspection did not complete safely.</p>{}</section>".format(_list('Errors', summary.get('errors', []))) + _execution_trace_section(ctx["package"], summary, True)
+            body += "<section class='card'><h2>Approval</h2><p>Approval controls are disabled until fatal validation errors are resolved.</p><button type='button' disabled>Approve and update governed Twin</button></section>"
+            return _page("Review Blueprint proposed changes", body), 200
+        coord = BlueprintReviewPlanCoordinator()
+        def defaults(): _ensure_reviews_and_mappings(ctx, headers)
+        job = coord.ensure_job(import_run_id, authenticated_flora_user(headers), headers, defaults)
+        LOGGER.info("Blueprint review preparation trace", extra={"correlation_id": correlation_id, "review_job_id": job.get("job_id"), "import_run_id": import_run_id, "stage": job.get("stage"), "records_processed": job.get("records_processed", 0)})
+        if job.get("status") == "Failed":
+            return _review_failure_page(ctx, job, correlation_id), 200
+        if job.get("status") != "Ready":
+            return _review_progress_page(ctx, job, correlation_id, message), 200
+        return _review_ready_page(ctx, job, coord, query, message, correlation_id), 200
+    except Exception as exc:
+        LOGGER.exception("Blueprint review route failed", extra={"correlation_id": correlation_id, "import_run_id": import_run_id})
+        job = {"diagnostic_reference": correlation_id, "stage": "Blueprint review route", "records_processed": 0, "records_total": 0, "error_category": type(exc).__name__, "status": "Failed", "job_id": correlation_id, "plan_persisted": False}
+        ctx = locals().get("ctx") or {}
+        return _review_failure_page(ctx, job, correlation_id), 200
 
 def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers: Any) -> tuple[str, int]:
     ctx = _context(import_run_id)
@@ -160,12 +168,155 @@ def _ensure_reviews_and_mappings(ctx, headers):
     reviewer = authenticated_flora_user(headers); reviews = CandidateReviewRepository().latest_by_candidate(ctx["package"].import_run_id); mapper = ImportMappingService(); reviewer_svc = CandidateReviewService()
     for c in ctx["candidates"]:
         cid = c["candidate_record_id"]
-        if cid not in reviews:
+        if cid not in reviews and c.get("validation_status") == "accepted":
             decision = "approve" if c.get("validation_status") == "accepted" else ("unsupported" if c.get("validation_status") == "quarantined" else "reject")
             reviewer_svc.record_decision(cid, decision, reviewer, "UI default review summary for staged package", headers)
         if c.get("validation_status") == "accepted" and c.get("candidate_object_class") in {"evidence", "observation"} and not c.get("payload", {}).get("proposed_effect"):
             mapper.record_mapping(c, "propose_create", reviewer, headers, c.get("candidate_object_class", "").title())
 
+
+def _review_progress_page(ctx, job, correlation_id: str, message: str = "") -> str:
+    counts = job.get("candidate_summary") or _review_candidate_counts(ctx.get("candidates", []))
+    proposed = job.get("proposed") or {}
+    body = _package_header(ctx["package"]) + _notice(message)
+    body += _review_summary_section(ctx, job, counts, proposed)
+    body += _review_trace_section(ctx, job, correlation_id)
+    body += "<section class='card'><h2>Next action</h2><p>Review exceptions and quarantine reasons after preparation completes.</p><p><strong>Approval controls are disabled</strong> until the review plan is complete and fatal errors are absent.</p><p><a href=''>Refresh review status</a></p></section>"
+    return _page("Review Blueprint proposed changes", body)
+
+
+def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str) -> str:
+    details = _load_review_details(coord, ctx["package"].import_run_id)
+    counts = job.get("candidate_summary") or _review_candidate_counts(details.get("candidates", []))
+    proposed = job.get("proposed") or {}
+    body = _package_header(ctx["package"]) + _notice(message)
+    body += _review_summary_section(ctx, job, counts, proposed)
+    body += _review_trace_section(ctx, job, correlation_id)
+    body += _quarantine_reasons_section(job)
+    body += _review_sections(ctx["package"].import_run_id, details, query)
+    plan_id = escape(str(job.get("plan_id", "")))
+    expected = int(proposed.get("Creates", 0)) + int(proposed.get("Updates", 0))
+    body += f"""<section class='card'><h2>Approval</h2><p>Promotion remains disabled until the owner has reviewed required exceptions and confirms the expected canonical mutation count.</p><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/approve'><input type='hidden' name='plan_id' value='{plan_id}'><label><input type='checkbox' name='confirm_plan' value='yes' required> I reviewed the plan</label><label><input type='checkbox' name='confirm_mutations' value='yes' required> I understand the expected mutation count is {expected}</label><label>Approval rationale</label><textarea name='rationale' required></textarea><p><button type='submit'>Approve and update governed Twin</button></p></form><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/decline'><p><button type='submit'>Decline promotion</button></p></form></section>"""
+    return _page("Review Blueprint proposed changes", body)
+
+
+def _review_failure_page(ctx, job, correlation_id: str) -> str:
+    header = _package_header(ctx["package"]) if ctx and ctx.get("package") else "<section class='hero'><h1>Blueprint review</h1></section>"
+    body = header + f"""<section class='card warning'><h2>Blueprint review could not be prepared.</h2><table>
+    <tr><th>Diagnostic reference</th><td><code>{escape(str(job.get('diagnostic_reference') or correlation_id))}</code></td></tr>
+    <tr><th>Current review stage</th><td>{escape(str(job.get('stage', 'unknown')))}</td></tr>
+    <tr><th>Records processed</th><td>{escape(str(job.get('records_processed', 0)))}</td></tr>
+    <tr><th>Records remaining</th><td>{max(0, int(job.get('records_total', 0)) - int(job.get('records_processed', 0)))}</td></tr>
+    <tr><th>Exception category</th><td>{escape(str(job.get('error_category', 'BlueprintReviewError')))}</td></tr>
+    <tr><th>Canonical changes made</th><td>No</td></tr>
+    <tr><th>Next action</th><td>Retry review after support inspects the diagnostic reference.</td></tr>
+    </table></section>"""
+    body += _review_trace_section(ctx or {}, job, correlation_id)
+    return _page("Blueprint review could not be prepared", body)
+
+
+def _review_summary_section(ctx, job, counts, proposed) -> str:
+    package = ctx["package"]
+    def val(name): return int(proposed.get(name, 0))
+    return f"""<section class='card'><h2>Review proposed changes</h2><h3>Summary</h3><table>
+    <tr><th>Blueprint</th><td>{escape(_package_name(package))} {escape(package.identity.package_version)}</td></tr>
+    <tr><th>Review status</th><td>{escape(str(job.get('status', 'Preparing')))}</td></tr>
+    <tr><th>Accepted</th><td>{int(counts.get('Accepted', 0))}</td></tr>
+    <tr><th>Quarantined</th><td>{int(counts.get('Quarantined', 0))}</td></tr>
+    <tr><th>Rejected</th><td>{int(counts.get('Rejected', 0))}</td></tr>
+    <tr><th>Unsupported</th><td>{int(counts.get('Unsupported', 0))}</td></tr>
+    <tr><th>Creates</th><td>{val('Creates')}</td></tr>
+    <tr><th>Updates</th><td>{val('Updates')}</td></tr>
+    <tr><th>Unchanged</th><td>{val('Unchanged')}</td></tr>
+    <tr><th>Conflicts</th><td>{val('Conflicts')}</td></tr>
+    <tr><th>Unresolved references</th><td>{val('Unresolved references')}</td></tr>
+    <tr><th>Projection-only</th><td>{val('Projection-only')} analytical projections retained outside canonical memory</td></tr>
+    <tr><th>Canonical changes made</th><td>No</td></tr>
+    <tr><th>Next action</th><td>Review exceptions and quarantine reasons</td></tr>
+    </table></section>"""
+
+
+def _review_trace_section(ctx, job, correlation_id: str) -> str:
+    elapsed = max(0, int((job.get("completed_at") or __import__("time").time()) - (job.get("started_at") or __import__("time").time())))
+    package = ctx.get("package") if isinstance(ctx, dict) else None
+    rows = {
+        "Review job ID": job.get("job_id", ""),
+        "Package reference": job.get("package_ref", getattr(package, "package_ref", "")),
+        "Staged candidate count": job.get("records_total", job.get("candidate_count", 0)),
+        "Current stage": job.get("stage", ""),
+        "Records processed": job.get("records_processed", 0),
+        "Elapsed time": f"{elapsed}s",
+        "Memory-safe batching enabled": "yes",
+        "Pagination enabled": "yes",
+        "Plan persisted": "yes" if job.get("plan_persisted") else "no",
+        "Deployed commit SHA": job.get("deployment_commit_sha") or deployment_metadata().get("commit_sha") or "Unavailable",
+        "Correlation ID": correlation_id,
+    }
+    return "<section class='card'><h2>Review preparation trace</h2><table>" + "".join(f"<tr><th>{escape(k)}</th><td><code>{escape(str(v))}</code></td></tr>" for k, v in rows.items()) + "</table></section>"
+
+
+def _quarantine_reasons_section(job) -> str:
+    reasons = job.get("quarantine_reasons") or {}
+    rows = "".join(f"<tr><td>{escape(str(k))}</td><td>{int(v)}</td></tr>" for k, v in sorted(reasons.items(), key=lambda kv: str(kv[0]))) or "<tr><td colspan='2'>No quarantined records.</td></tr>"
+    return "<section class='card'><h2>Quarantine reasons</h2><table><thead><tr><th>Reason</th><th>Count</th></tr></thead><tbody>" + rows + "</tbody></table></section>"
+
+
+def _review_sections(import_run_id: str, details: dict[str, Any], query: dict[str, list[str]]) -> str:
+    size = min(PAGE_SIZE_MAX, max(1, int((query.get("page_size") or [PAGE_SIZE_DEFAULT])[0] or PAGE_SIZE_DEFAULT)))
+    page = max(1, int((query.get("page") or [1])[0] or 1))
+    candidates = _filter_candidates(details.get("candidates", []), query)
+    effects = {e.get("candidate_id"): e for e in details.get("effects", [])}
+    sections = [
+        ("Records ready for canonical acceptance", lambda c: effects.get(c.get("candidate_record_id"), {}).get("effect_type") in {"create","update","unchanged","mapped"}),
+        ("Quarantined records", lambda c: c.get("validation_status") == "quarantined"),
+        ("Rejected records", lambda c: c.get("validation_status") == "rejected"),
+        ("Conflicts", lambda c: effects.get(c.get("candidate_record_id"), {}).get("effect_type") == "conflict"),
+        ("Unresolved references", lambda c: effects.get(c.get("candidate_record_id"), {}).get("effect_type") == "unresolved"),
+        ("Projection-only records", lambda c: effects.get(c.get("candidate_record_id"), {}).get("effect_type") == "projection"),
+        ("Sheet-by-sheet breakdown", lambda c: True),
+    ]
+    out = _filter_form(import_run_id, query)
+    for title, pred in sections:
+        out += _candidate_table(title, [c for c in candidates if pred(c)], effects, page, size)
+    return out
+
+
+def _filter_form(import_run_id, query):
+    fields = ["source worksheet", "record class", "disposition", "quarantine reason", "rejection reason", "canonical/projection-only", "external ID"]
+    inputs = "".join(f"<label>{escape(f.title())}<input name='{escape(f.replace(' ', '_').replace('/', '_'))}' value='{escape((query.get(f.replace(' ', '_').replace('/', '_')) or [''])[0])}'></label>" for f in fields)
+    return f"<section class='card'><h2>Filters</h2><form method='get' action='/blueprint-import/{escape(import_run_id)}/review'>{inputs}<label>Page size<input name='page_size' value='{PAGE_SIZE_DEFAULT}'></label><p><button>Apply filters</button></p></form></section>"
+
+
+def _filter_candidates(candidates, query):
+    def q(name): return ((query.get(name) or [""])[0] or "").lower()
+    out = []
+    for c in candidates:
+        if q("source_worksheet") and q("source_worksheet") not in str(c.get("source_sheet","")).lower(): continue
+        if q("record_class") and q("record_class") not in str(c.get("candidate_object_class","")).lower(): continue
+        if q("disposition") and q("disposition") not in str(c.get("validation_status","")).lower(): continue
+        if q("external_ID".lower()) and q("external_ID".lower()) not in str(c.get("original_source_id","")).lower(): continue
+        out.append(c)
+    return out
+
+
+def _candidate_table(title, candidates, effects, page, size):
+    total = len(candidates); start = (page - 1) * size; page_rows = candidates[start:start + size]
+    rows = []
+    for c in page_rows:
+        e = effects.get(c.get("candidate_record_id"), {})
+        reason = e.get("reason") or "; ".join(str(f.get("message", "")) for f in c.get("validation_findings", []))
+        rows.append(f"<tr><td>{escape(str(c.get('source_sheet','')))}</td><td>{escape(str(c.get('original_source_id','')))}</td><td>{escape(str(c.get('candidate_object_class','')))}</td><td>{escape(str(c.get('validation_status','')))}</td><td>{escape(str(e.get('effect_type','')))}</td><td>{escape(reason)}</td></tr>")
+    return f"<section class='card'><h2>{escape(title)}</h2><p>Showing {len(page_rows)} of {total}; page size {size}.</p><table><thead><tr><th>Worksheet</th><th>External ID</th><th>Class</th><th>Disposition</th><th>Proposed effect</th><th>Reason</th></tr></thead><tbody>{''.join(rows) or '<tr><td colspan=\"6\">No records.</td></tr>'}</tbody></table></section>"
+
+
+def _load_review_details(coord, import_run_id):
+    path = coord.detail_path(import_run_id)
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"effects": [], "candidates": []}
+
+
+def _review_candidate_counts(candidates):
+    c = Counter(x.get("validation_status") for x in candidates)
+    return {"Accepted": c["accepted"], "Quarantined": c["quarantined"], "Rejected": c["rejected"], "Unsupported": c["unsupported"]}
 
 
 def _blueprint_deployment_metadata(summary: dict[str, Any]) -> dict[str, str]:
