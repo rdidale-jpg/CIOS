@@ -24,6 +24,8 @@ from .promotion import CanonicalPromotionRepository, CanonicalPromotionService, 
 from .registry import BlueprintPackageRegistry
 from .review import CandidateReviewRepository, CandidateReviewService, can_review_blueprint_candidate
 from .validator import BlueprintPackageValidator, BlueprintValidationError, can_inspect_blueprint_package
+from .cios_twin_adapter import MAPPING_VERSION
+from .restage import BlueprintRestageService, can_restage_blueprint_package, RESTAGE_STAGES
 from .models import PackageReceiptError
 
 MAX_UPLOAD_BYTES = 50 * 1024 * 1024
@@ -83,9 +85,66 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     review_link = "<section class='card'><p><a href='/blueprint-import/{0}/review'>Review proposed changes</a></p></section>".format(escape(import_run_id)) if not summary.get('errors') else "<section class='card'><p><strong>Validation failed.</strong> Proposed-change review and approval are disabled until fatal validation errors are resolved.</p></section>"
     deployment = _blueprint_deployment_metadata(summary)
     deployment_rows = "".join(f"<tr><th>{escape(key.replace('_', ' ').title())}</th><td><code>{escape(value)}</code></td></tr>" for key, value in deployment.items())
-    body = _package_header(package) + f"""<section class='card'><h2>Validation result</h2><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr><tr><th>Workbook discovered</th><td>{'Yes' if any(str(f).endswith(('.xlsx','.xlsm','.xls')) for f in summary.get('files_inspected', [])) else 'Not declared'}</td></tr><tr><th>Worksheets discovered</th><td>{escape(', '.join(worksheets) or 'None reported')}</td></tr><tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section><details class='card'><summary><strong>Safe deployment diagnostics</strong></summary><table>{deployment_rows}</table></details>""" + _execution_trace_section(package, summary, bool(summary.get("errors"))) + _counts_section(counts) + review_link
+    body = _package_header(package) + f"""<section class='card'><h2>Validation result</h2><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr><tr><th>Workbook discovered</th><td>{'Yes' if any(str(f).endswith(('.xlsx','.xlsm','.xls')) for f in summary.get('files_inspected', [])) else 'Not declared'}</td></tr><tr><th>Worksheets discovered</th><td>{escape(', '.join(worksheets) or 'None reported')}</td></tr><tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section><details class='card'><summary><strong>Safe deployment diagnostics</strong></summary><table>{deployment_rows}</table></details>""" + _execution_trace_section(package, summary, bool(summary.get("errors"))) + _counts_section(counts) + _available_actions_section(package, summary, counts, headers) + review_link
     return _page("Blueprint validation result", body), 200
 
+
+
+def restage_confirm_page(import_run_id: str, headers: Any) -> tuple[str, int]:
+    ctx = _context(import_run_id)
+    if not ctx or not can_access_enterprise(headers, ctx["package"].identity.enterprise_id, getattr(ctx["package"], "workspace_id", "")):
+        return _safe_failure("Blueprint import record is unavailable or access is denied.", "restage", False, True, "Open an import you are authorised to restage."), 403
+    if not can_restage_blueprint_package(headers, ctx["package"]):
+        return _safe_failure("You are not authorised to restage this Blueprint package.", "restage", False, True, "Ask for Blueprint staging capability."), 403
+    summary = ctx.get("summary") or {}; counts = _candidate_counts(ctx.get("candidates", []))
+    body = _package_header(ctx["package"]) + _restage_intro(ctx["package"], summary, counts)
+    return _page("Restage Blueprint package", body), 200
+
+
+def restage_history_page(import_run_id: str, headers: Any) -> tuple[str, int]:
+    ctx = _context(import_run_id)
+    if not ctx or not can_access_enterprise(headers, ctx["package"].identity.enterprise_id, getattr(ctx["package"], "workspace_id", "")):
+        return _safe_failure("Blueprint import record is unavailable or access is denied.", "staging history", False, True, "Open an import you are authorised to view."), 403
+    hist = BlueprintRestageService().history(import_run_id)
+    rows = ''.join(f"<tr><td><code>{escape(str(h.get('staging_version','')))}</code></td><td><code>{escape(str(h.get('mapping_version','')))}</code></td><td>{escape(str(h.get('created_at','')))}</td><td><code>{escape(str(h.get('package_checksum','')))}</code></td><td>{escape(str(h.get('records_accepted_into_staging',0)))}</td></tr>" for h in hist) or "<tr><td colspan='5'>No prior staging history recorded.</td></tr>"
+    body = _package_header(ctx["package"]) + f"<section class='card'><h2>Prior staging history</h2><table><thead><tr><th>Staging version</th><th>Mapping version</th><th>Created</th><th>Package checksum</th><th>Accepted</th></tr></thead><tbody>{rows}</tbody></table></section>"
+    return _page("Blueprint staging history", body), 200
+
+
+def restage_package(import_run_id: str, form: dict[str, list[str]], headers: Any) -> tuple[str, int]:
+    ctx = _context(import_run_id)
+    if not ctx or not can_access_enterprise(headers, ctx["package"].identity.enterprise_id, getattr(ctx["package"], "workspace_id", "")):
+        return _safe_failure("Blueprint import record is unavailable or access is denied.", "restage", False, True, "Open an import you are authorised to restage."), 403
+    if form.get("confirm_restage") != ["yes"]:
+        return restage_confirm_page(import_run_id, headers)
+    before = _canonical_marker()
+    try:
+        job = BlueprintRestageService().ensure_restage(import_run_id, authenticated_flora_user(headers), headers)
+        assert before == _canonical_marker(), "Restaging must not mutate canonical memory"
+        return restage_progress_page(import_run_id, headers, job), 200
+    except PermissionError as exc:
+        return _safe_failure(str(exc), "restage", False, True, "Ask for Blueprint staging capability."), 403
+
+
+def restage_progress_page(import_run_id: str, headers: Any, job: dict[str, Any] | None = None) -> tuple[str, int] | str:
+    direct_render = job is not None
+    ctx = _context(import_run_id)
+    if not ctx:
+        html = _safe_failure("Blueprint import record is unavailable or access is denied.", "restage progress", False, True, "Open an import you are authorised to restage.")
+        return html if direct_render else (html, 403)
+    job = job or (BlueprintRestageService()._jobs(import_run_id)[-1] if BlueprintRestageService()._jobs(import_run_id) else {})
+    if job.get("already_completed"):
+        body = _package_header(ctx["package"]) + f"<section class='card'><h2>Already restaged</h2><p>This package has already been restaged with mapping version <code>{escape(str(job.get('mapping_version')))}</code>.</p><p><a href='/blueprint-import/{escape(import_run_id)}/review'>View latest review</a></p></section>"
+        html = _page("Blueprint restage already complete", body)
+        return html if direct_render else (html, 200)
+    if job.get("status") == "Failed":
+        body = _package_header(ctx["package"]) + f"<section class='card warning'><h2>Restaging failed</h2><table><tr><th>Diagnostic reference</th><td><code>{escape(str(job.get('diagnostic_reference','')))}</code></td></tr><tr><th>Package reference</th><td><code>{escape(str(job.get('package_ref','')))}</code></td></tr><tr><th>Mapping version</th><td><code>{escape(str(job.get('mapping_version','')))}</code></td></tr><tr><th>Stage failed</th><td>{escape(str(job.get('stage','')))}</td></tr><tr><th>Records processed</th><td>{escape(str(job.get('records_processed',0)))}</td></tr><tr><th>Canonical changes made</th><td>No</td></tr><tr><th>Prior active staging remains available</th><td>{escape(str(job.get('prior_active_staging_available','yes')))}</td></tr><tr><th>Next action</th><td>Retry restaging after support inspects the diagnostic reference.</td></tr></table></section>"
+        html = _page("Blueprint restage failed", body); return html if direct_render else (html, 200)
+    done = set(RESTAGE_STAGES[:RESTAGE_STAGES.index(job.get('stage','package located'))+1]) if job.get('stage') in RESTAGE_STAGES else set()
+    items = ''.join(f"<li>{'✓' if s in done else '…'} {escape(s)}</li>" for s in RESTAGE_STAGES)
+    cs = job.get('candidate_summary') or {}
+    body = _package_header(ctx["package"]) + f"<section class='card'><h2>Restage with current mapping</h2><p>Status: <strong>{escape(str(job.get('status','Not started')))}</strong></p><ul>{items}</ul><table><tr><th>Staging version</th><td><code>{escape(str(job.get('staging_version','')))}</code></td></tr><tr><th>Mapping version</th><td><code>{escape(str(job.get('mapping_version', MAPPING_VERSION)))}</code></td></tr><tr><th>Canonical changes made</th><td>No</td></tr><tr><th>Accepted</th><td>{int(cs.get('Accepted',0))}</td></tr><tr><th>Quarantined</th><td>{int(cs.get('Quarantined',0))}</td></tr><tr><th>Rejected</th><td>{int(cs.get('Rejected',0))}</td></tr><tr><th>Projection-only</th><td>{int(cs.get('Projection-only',0))}</td></tr></table><p><a href='/blueprint-import/{escape(import_run_id)}/review'>View latest review</a> · <a href='/blueprint-import/{escape(import_run_id)}/staging-history'>View prior staging history</a></p></section>"
+    html = _page("Blueprint restage progress", body); return html if direct_render else (html, 200)
 
 def review_page(import_run_id: str, headers: Any, message: str = "", query: dict[str, list[str]] | None = None) -> tuple[str, int]:
     correlation_id = f"bpi-review-{uuid4().hex[:12]}"
@@ -221,6 +280,9 @@ def _review_summary_section(ctx, job, counts, proposed) -> str:
     return f"""<section class='card'><h2>Review proposed changes</h2><h3>Summary</h3><table>
     <tr><th>Blueprint</th><td>{escape(_package_name(package))} {escape(package.identity.package_version)}</td></tr>
     <tr><th>Review status</th><td>{escape(str(job.get('status', 'Preparing')))}</td></tr>
+    <tr><th>Staging version</th><td><code>{escape(str((ctx.get('summary') or {}).get('staging_version', 'staging-v1')))}</code></td></tr>
+    <tr><th>Mapping version</th><td><code>{escape(str(job.get('mapping_version') or (ctx.get('summary') or {}).get('mapping_version') or MAPPING_VERSION))}</code></td></tr>
+    <tr><th>Review generated from</th><td><code>{escape(str((ctx.get('summary') or {}).get('staging_version', 'staging-v1')))}</code></td></tr>
     <tr><th>Accepted</th><td>{int(counts.get('Accepted', 0))}</td></tr>
     <tr><th>Quarantined</th><td>{int(counts.get('Quarantined', 0))}</td></tr>
     <tr><th>Rejected</th><td>{int(counts.get('Rejected', 0))}</td></tr>
@@ -318,6 +380,18 @@ def _review_candidate_counts(candidates):
     c = Counter(x.get("validation_status") for x in candidates)
     return {"Accepted": c["accepted"], "Quarantined": c["quarantined"], "Rejected": c["rejected"], "Unsupported": c["unsupported"]}
 
+
+
+def _available_actions_section(package, summary, counts, headers) -> str:
+    if not can_restage_blueprint_package(headers, package):
+        return ""
+    run = escape(package.import_run_id)
+    return f"<section class='card'><h2>Available actions</h2><ul><li><a href='/blueprint-import/{run}/restage'>Restage with current mapping</a></li><li><a href='/blueprint-import/{run}/review'>View current proposed changes</a></li><li><a href='/blueprint-import/{run}/staging-history'>View prior staging history</a></li></ul></section>"
+
+def _restage_intro(package, summary, counts) -> str:
+    run=escape(package.import_run_id)
+    projection = sum(1 for c in (summary.get('candidates') or []) if c.get('candidate_object_class') in __import__('cios.applications.flora.blueprint_import.candidates', fromlist=['PROJECTION_ONLY_CLASSES']).PROJECTION_ONLY_CLASSES)
+    return f"""<section class='card'><h2>Restage with current mapping</h2><p><strong>Current mapping version:</strong> <code>{escape(MAPPING_VERSION)}</code></p><h3>Current staged result</h3><table><tr><th>Accepted</th><td>{counts['accepted']}</td></tr><tr><th>Quarantined</th><td>{counts['quarantined']}</td></tr><tr><th>Rejected</th><td>{counts['rejected']}</td></tr><tr><th>Projection-only</th><td>{projection}</td></tr></table><h3>Restaging will:</h3><ul><li>reuse the preserved package;</li><li>rerun workbook mapping;</li><li>create a new staging version;</li><li>invalidate the previous review plan;</li><li>make no canonical changes.</li></ul><form method='post' action='/blueprint-import/{run}/restage'><label><input type='checkbox' name='confirm_restage' value='yes' required> I understand this will replace the active staging result but preserve prior history.</label><p><button type='submit'>Restage package</button></p></form></section>"""
 
 def _blueprint_deployment_metadata(summary: dict[str, Any]) -> dict[str, str]:
     meta = deployment_metadata()

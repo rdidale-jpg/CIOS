@@ -29,7 +29,7 @@ from cios.applications.flora.access import can_view_financial_intelligence_run, 
 from cios.applications.flora.pilot_auth import audit as pilot_audit, clear_session_cookie, issue_session_cookie, sign_in_page, validate_secret
 from cios.applications.flora.flora_transparent import start_bt_digital_twin, flora_payload
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
-from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page
+from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page, restage_confirm_page as blueprint_restage_confirm_page, restage_package as blueprint_restage_package, restage_progress_page as blueprint_restage_progress_page, restage_history_page as blueprint_restage_history_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -106,6 +106,18 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(html, status=status)
             elif parsed.path == "/blueprint-import/history":
                 html, status = blueprint_history_page(self.headers)
+                self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/restage/progress"):
+                run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/restage/progress")
+                html, status = blueprint_restage_progress_page(run_id, self.headers)
+                self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/restage"):
+                run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/restage")
+                html, status = blueprint_restage_confirm_page(run_id, self.headers)
+                self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/staging-history"):
+                run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/staging-history")
+                html, status = blueprint_restage_history_page(run_id, self.headers)
                 self._html(html, status=status)
             elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/review"):
                 run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/review")
@@ -248,6 +260,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         elif self.path == "/blueprint-import/upload":
             fields, files = _parse_multipart(self.headers, raw_body)
             html, status, _target = upload_and_validate_blueprint(files, fields, self.headers)
+            self._html(html, status=status)
+        elif self.path.startswith("/blueprint-import/") and self.path.endswith("/restage"):
+            run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/restage")
+            html, status = blueprint_restage_package(run_id, form, self.headers)
             self._html(html, status=status)
         elif self.path.startswith("/blueprint-import/") and self.path.endswith("/approve"):
             run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/approve")
