@@ -159,5 +159,7 @@ def _mapping_quality(candidates):
         "top_unresolved_lineage_patterns": dict(Counter(_finding_reason(c) for c in rows if "lineage" in _finding_reason(c).casefold()).most_common(10)),
         "derived_id_count": derived,
         "source_supplied_id_count": source_supplied,
+        "derived_id_collisions": sum(1 for c in rows if isinstance((c.get("payload") or {}).get("identifier_collision_resolution"), dict)),
+        "derived_id_failures": sum(1 for c in rows if any((f.get("code") == "quarantined_missing_identifier") for f in (c.get("validation_findings") or []))),
         "twin_completeness_indicators": {name: (name in classes) for name in ["source", "evidence", "observation", "unknown", "contradiction", "entity", "relationship", "human_knowledge"]} | {"projection_layer": bool(projection)},
     }

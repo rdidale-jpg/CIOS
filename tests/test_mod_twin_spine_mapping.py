@@ -137,3 +137,78 @@ def test_v11_deterministic_ids_collision_and_package_metadata_removed(tmp_path, 
     assert all(c['payload'].get('identifier_derivation',{}).get('derived') for c in candidates if c['candidate_object_class'] in {'unknown','contradiction','entity','relationship'})
     assert all(c['candidate_object_class'] != 'package_metadata' for c in candidates)
     assert again.candidate_records_staged == result.candidate_records_staged
+
+
+def test_v12_core_mapping_contract_and_review_summary(tmp_path, monkeypatch):
+    sheets={
+        '03_Sources': [['source_id','source_title','url'], ['SRC-1','MOD source','https://example.test/src']],
+        '04A_Evidence': [['evidence_id','source_id','summary','source_locator'], ['EVD-1','SRC-1','Evidence summary','p.1']],
+        '05_Observations': [['observation_id','supporting_source','supporting_evidence','atomic_statement','confidence','freshness'], ['OBS-S',' src-1 ','','Source-backed obs','0.8','2026-01-01'], ['OBS-E','','evd-1','Evidence-backed obs','0.9','2026-01-02'], ['OBS-M','SRC-1 | EVD-1; missing-ref','','Multi-backed obs','0.7','2026-01-03'], ['OBS-BAD','','','No lineage','0.1','']],
+        '16_Unknowns': [['question','scope','significance','evidence_gap','owner','status'], ['What is unresolved?','MOD','High','No evidence yet','Owner A','open']],
+        '22_Provenance_Risk': [['statement','scope','significance','status'], ['Unresolved provenance risk','MOD','Medium','open']],
+        '17_Contradictions': [['statement_a','statement_b','scope','evidence_id','significance','status'], ['A','B','MOD','EVD-1','High','open']],
+        '06_Entities_Rels': [['record_type','entity_type','name','source','target','relationship_type'], ['entity','organisation','Entity A','','',''], ['relationship','','','Entity A','Entity B','owns']],
+        '07_Executives_Rights': [['record_type','entity_type','name'], ['entity','person','Jane Doe']],
+        '08_Programmes': [['record_type','entity_type','name'], ['entity','programme','Programme A']],
+        '09_Capabilities': [['record_type','entity_type','name'], ['entity','capability','Capability A']],
+        '10_Systems_Data': [['record_type','entity_type','name'], ['entity','system','System A']],
+        '11_Suppliers_Contracts': [['record_type','entity_type','name'], ['entity','supplier','Supplier A']],
+        '12_Measures_Resources': [['record_type','entity_type','name'], ['entity','measure','Measure A']],
+        '13_Causal_Edges': [['source','target','relationship_type','evidence_id'], ['Capability A','Outcome B','influences','EVD-1']],
+        '24_Human_Knowledge': [['provider','statement','confidence','caveat','date','evidence_id'], ['SME','Human supplied context','low','unverified','2026-01-04','EVD-1']],
+        '00_Control': [['stable_id','note'], ['CTRL-1','ignored']],
+        '02_Dashboard': [['metric','formula'], ['Rows','=A1']],
+        'Workflow': [['step','owner'], ['route','alice']],
+        '99_Mystery': [['stable_id','name'], ['X-1','Unsupported']],
+    }
+    rec, result, candidates = stage(tmp_path, monkeypatch, sheets)
+    summary = BlueprintReviewPlanCoordinator().ensure_job(rec.import_run_id, 'alice', HEADERS, lambda: None)
+    accepted = summary['mapping_quality']['accepted_by_class']
+    assert accepted['observation'] == 3
+    assert accepted['unknown'] == 2
+    assert accepted['contradiction'] == 1
+    assert accepted['entity'] >= 7
+    assert accepted['relationship'] >= 2
+    assert accepted['human_knowledge'] == 1
+    assert summary['mapping_version'] == 'mod-cdt-twin-spine-mapping-v1.2.0'
+    assert summary['candidate_summary']['Rejected'] == 0
+    assert summary['ignored_reasons']['ignored_control_row'] == 1
+    assert summary['ignored_reasons']['ignored_dashboard_row'] == 1
+    assert summary['ignored_reasons']['ignored_workflow_row'] == 1
+    bad = [c for c in candidates if c['original_source_id']=='OBS-BAD'][0]
+    assert bad['validation_status'] == 'quarantined'
+    assert bad['validation_findings'][0]['code'] == 'quarantined_missing_lineage'
+    multi = [c for c in candidates if c['original_source_id']=='OBS-M'][0]
+    assert len(multi['payload']['lineage_resolution']) == 3
+    assert any(r['resolved_staged_candidate'] for r in multi['payload']['lineage_resolution'])
+    assert any(not r['resolved_staged_candidate'] for r in multi['payload']['lineage_resolution'])
+    hk = [c for c in candidates if c['candidate_object_class']=='human_knowledge'][0]
+    assert hk['payload']['human_supplied'] is True
+    assert hk['truth_class'] == 'human-supplied'
+    assert result.canonical_mutations == 0
+    assert all(c['candidate_object_class'] != 'package_metadata' for c in candidates)
+
+
+def test_v12_ignored_rows_collision_and_stable_derived_ids(tmp_path, monkeypatch):
+    sheets={
+        '03_Sources': [['source_id','title'], ['SRC-1','Source']],
+        '04A_Evidence': [['evidence_id','source_id','summary'], ['EVD-1','SRC-1','Evidence']],
+        '16_Unknowns': [['question','scope'], ['question','scope'], ['Same unknown','MOD'], ['Same unknown','MOD'], ['', '']],
+        '02_Dashboard': [['metric','formula'], ['=SUM(A1:A2)','=A1']],
+        'Workflow': [['step','owner'], ['handoff','bob']],
+    }
+    rec, result, candidates = stage(tmp_path, monkeypatch, sheets)
+    ids = [c['original_source_id'] for c in candidates if c['candidate_object_class']=='unknown']
+    assert len(ids) == 2 and len(set(ids)) == 2
+    assert any((c['payload'].get('identifier_collision_resolution')) for c in candidates if c['candidate_object_class']=='unknown')
+    assert any(c['validation_status']=='ignored' and c['payload']['ignore_reason']=='ignored_repeated_header' for c in candidates)
+    assert any(c['validation_status']=='ignored' and c['payload']['ignore_reason']=='ignored_blank_row' for c in candidates)
+    assert any(c['validation_status']=='ignored' and c['payload']['ignore_reason']=='ignored_dashboard_row' for c in candidates)
+    assert any(c['validation_status']=='ignored' and c['payload']['ignore_reason']=='ignored_workflow_row' for c in candidates)
+    BlueprintPackageValidator().validate_and_stage(rec.package_ref,'alice',HEADERS)
+    candidates2 = BlueprintPackageValidator().staging_summary(rec.import_run_id)['candidates']
+    ids2 = [c['original_source_id'] for c in candidates2 if c['candidate_object_class']=='unknown']
+    assert ids == ids2
+    summary = BlueprintReviewPlanCoordinator().ensure_job(rec.import_run_id, 'alice', HEADERS, lambda: None)
+    assert summary['mapping_quality']['derived_id_collisions'] >= 1
+    assert result.canonical_mutations == 0

@@ -67,7 +67,7 @@ def _event(trace: list[dict[str, Any]] | None, step_id: int, component: str, act
     trace.append(payload)
 from .models import BlueprintPackageRecord
 
-MAPPING_VERSION = "mod-cdt-twin-spine-mapping-v1.1.0"
+MAPPING_VERSION = "mod-cdt-twin-spine-mapping-v1.2.0"
 
 
 def _norm(value: Any) -> str:
@@ -99,7 +99,7 @@ def _ref_key(value: Any) -> str:
     return re.sub(r"[^a-z0-9]+", "", text)
 
 
-def _derive_identifier(enterprise_id: str, record_class: str, sheet: str, row: dict[str, Any], row_number: int, *, allow_row_fallback: bool = True) -> tuple[str, str]:
+def _derive_identifier(enterprise_id: str, record_class: str, sheet: str, row: dict[str, Any], row_number: int, *, allow_row_fallback: bool = False) -> tuple[str, str]:
     natural = []
     for key in TEXT_COLUMNS + ("record_type", "type", "scope", "owner", "source_id", "evidence_id"):
         value = _clean(row.get(key))
@@ -132,22 +132,22 @@ class SheetMapping:
 CANONICAL_MAPPINGS: tuple[SheetMapping, ...] = (
     SheetMapping(("03_Sources", "Sources", "Source"), "source", required_any=(("source_id","stable_id","id","external_id"),), lineage_any=(), truth_default="source_record"),
     SheetMapping(("04A_Evidence", "Evidence"), "evidence", required_any=(("evidence_id","stable_id","id","external_id"),), lineage_any=("source_id","source_title","source_locator","url","citation","document"), truth_default="evidence_record"),
-    SheetMapping(("05_Observations", "Observations", "Observation"), "observation", required_any=(("observation_id","stable_id","id","external_id"),), truth_default="observed"),
-    SheetMapping(("06_Entities_Rels", "Entities Rels", "Entities and Relationships"), "enterprise_model_candidate", required_any=(("entity_id","relationship_id","stable_id","id","external_id"),)),
-    SheetMapping(("07_Executives_Rights",), "enterprise_model_candidate"), SheetMapping(("08_Programmes",), "enterprise_model_candidate"),
-    SheetMapping(("09_Capabilities",), "enterprise_model_candidate"), SheetMapping(("10_Systems_Data",), "enterprise_model_candidate"),
-    SheetMapping(("11_Suppliers_Contracts",), "enterprise_model_candidate"), SheetMapping(("12_Measures_Resources",), "enterprise_model_candidate"),
+    SheetMapping(("05_Observations", "Observations", "Observation"), "observation", required_any=(("observation_id","stable_id","id","external_id"),), lineage_any=("source_id","source_ids","evidence_id","evidence_ids","source_ref","evidence_ref","source_reference","evidence_reference","supporting_source","supporting_evidence","citation_id","claim_id"), truth_default="observed"),
+    SheetMapping(("06_Entities_Rels", "Entities Rels", "Entities and Relationships"), "enterprise_model_candidate", required_any=(("entity_id","relationship_id","stable_id","id","external_id"),), lineage_any=()),
+    SheetMapping(("07_Executives_Rights",), "enterprise_model_candidate", lineage_any=()), SheetMapping(("08_Programmes",), "enterprise_model_candidate", lineage_any=()),
+    SheetMapping(("09_Capabilities",), "enterprise_model_candidate", lineage_any=()), SheetMapping(("10_Systems_Data",), "enterprise_model_candidate", lineage_any=()),
+    SheetMapping(("11_Suppliers_Contracts",), "enterprise_model_candidate", lineage_any=()), SheetMapping(("12_Measures_Resources",), "enterprise_model_candidate", lineage_any=()),
     SheetMapping(("13_Causal_Edges",), "relationship", required_any=(("edge_id","relationship_id","stable_id","id","external_id"),)),
     SheetMapping(("16_Unknowns", "Unknowns", "Unknown"), "unknown", required_any=(("unknown_id","stable_id","id","external_id"),), lineage_any=(), truth_default="unknown"),
     SheetMapping(("17_Contradictions", "Contradictions", "Contradiction"), "contradiction", required_any=(("contradiction_id","stable_id","id","external_id"),), lineage_any=("source_id","evidence_id","claim_id","observation_id"), truth_default="contradiction"),
-    SheetMapping(("21_Document_Refresh",), "refresh_trigger"), SheetMapping(("22_Provenance_Risk",), "unknown", truth_default="provenance_risk"),
+    SheetMapping(("21_Document_Refresh",), "refresh_trigger"), SheetMapping(("22_Provenance_Risk",), "unknown", lineage_any=(), truth_default="provenance_risk"),
     SheetMapping(("24_Human_Knowledge", "Human Supplied Knowledge", "Human Knowledge"), "human_knowledge", truth_default="human-supplied", human_supplied=True),
     SheetMapping(("04_Claims", "Claims"), "enterprise_model_candidate", truth_default="claim"),
     SheetMapping(("15_Theses", "Theses"), "enterprise_model_candidate", disposition="reasoning_artifact", truth_default="hypothesis"),
 )
 PROJECTION_MAPPINGS: tuple[SheetMapping, ...] = tuple(SheetMapping((name,), klass, "projection_only", truth_default="analytical_projection", lineage_any=()) for name, klass in {
     "30_Pain_Portfolio":"pain_point", "31_Pain_Evidence_Conseq":"pain_point", "32_Pain_Class_Select":"priority_disposition", "33_Pain_Disposition":"priority_disposition", "34_Pain_Stakeholders":"stakeholder_hot_button", "35_Pain_Response_Map":"solution_pattern", "36_Current_Responses":"current_response", "37_Response_Effect":"response_effectiveness", "38_Residual_Pain":"residual_pain", "39_Burning_Platform":"burning_platform", "40_Transform_Pressure":"transformation_pressure_view", "41_Pain_Solution_Map":"solution_pattern", "42_Future_Demand":"transformation_pressure_view", "43_Pain_Evidence_Demand":"pain_point", "61_v13_Pain_Selection":"priority_disposition", "62_v13_Flagship_Candidates":"solution_pattern", "92_v13_Shaping_Dossiers":"executive_publication", "93_v13_Buyer_Coalitions":"stakeholder_hot_button", "94_v13_Proof_Architecture":"executive_publication", "95_v13_Conversation_Packs":"executive_publication", "99_v13_Campaign_Sequence":"executive_publication", "106_v13_Sponsor_Map":"stakeholder_hot_button", "115_v13_Outreach_Targets":"stakeholder_hot_button", "Pain Points":"pain_point", "Current Responses":"current_response", "Burning Platforms":"burning_platform", "Transformation Pressures":"transformation_pressure_view", "Response Effectiveness":"response_effectiveness", "Residual Pains":"residual_pain", "Priority Selections":"priority_disposition", "Solution Patterns":"solution_pattern", "Executive Publications":"executive_publication"}.items())
-IGNORED_SHEET_PATTERNS = ("control", "dashboard", "calculation", "gate", "release", "acceptance", "workflow", "session_charter", "return_form", "technical_reconciliation", "register_dictionary", "plan", "document_refresh_control", "reconciliation")
+IGNORED_SHEET_PATTERNS = ("control", "dashboard", "calculation", "gate", "release", "acceptance", "workflow", "session_charter", "charter", "handoff", "routing", "return_form", "technical_reconciliation", "summary", "register_dictionary", "plan", "document_refresh_control", "reconciliation")
 SHEET_REGISTRY = { _norm(alias): m for m in CANONICAL_MAPPINGS + PROJECTION_MAPPINGS for alias in m.aliases }
 _TRUTH = {"unknown": "unknown", "contradiction": "contradiction", "human_supplied_knowledge": "human-supplied", "human_knowledge": "human-supplied"}
 @dataclass(frozen=True)
@@ -245,10 +245,12 @@ class CiosCommercialTwinAdapter:
                 shared=self._shared(wb)
                 sheet_map=self._sheets(wb, trace, correlation_id)
                 seen_ids: set[tuple[str, str]] = set()
+                ref_index: dict[str, str] = {}
+                claim_lineage: dict[str, list[dict[str, str]]] = {}
                 for sheet_name, sheet_file in sheet_map:
                     sheet_names.append(sheet_name)
                     rows=self._rows(wb, sheet_file, shared)
-                    out.extend(self._candidates(package, workbook_path, sheet_name, rows, seen_ids))
+                    out.extend(self._candidates(package, workbook_path, sheet_name, rows, seen_ids, ref_index, claim_lineage))
         except (zipfile.BadZipFile, ET.ParseError, KeyError, ValueError) as exc:
             errors.append(f"Workbook could not be inspected safely: {exc}")
         _event(trace, 7, __name__, "Candidate staging", str(len(out)), "Candidates staged" if not errors else "Stopped because workbook inspection failed", "Passed" if not errors else "Not started", correlation_id, current_stage="candidate_staging" if not errors else "validation_stop", previous_completed_stage="worksheet_parsing" if not errors else "workbook_relationship_parsing", next_intended_stage="proposed_change_review", processing_stopped=bool(errors), stop_reason="; ".join(errors), canonical_changes_made=False, promotion_enabled=not bool(errors))
@@ -359,9 +361,11 @@ class CiosCommercialTwinAdapter:
         key=_norm(sheet)
         return any(p in key for p in IGNORED_SHEET_PATTERNS) or key.startswith(("00_", "01_", "02_", "20_"))
 
-    def _candidates(self, package, workbook_path, sheet, rows, seen_ids: set[tuple[str, str]] | None = None):
+    def _candidates(self, package, workbook_path, sheet, rows, seen_ids: set[tuple[str, str]] | None = None, ref_index: dict[str, str] | None = None, claim_lineage: dict[str, list[dict[str, str]]] | None = None):
         if len(rows)<1: return []
         seen_ids = seen_ids if seen_ids is not None else set()
+        ref_index = ref_index if ref_index is not None else {}
+        claim_lineage = claim_lineage if claim_lineage is not None else {}
         header_pos, headers = self._header_index(rows); out=[]
         mapping=self._mapping_for_sheet(sheet)
         control_sheet=self._is_control_sheet(sheet)
@@ -370,8 +374,11 @@ class CiosCommercialTwinAdapter:
             non_blank = any(_clean(v) for v in vals)
             row={headers[i] or f"column_{i+1}": vals[i] if i < len(vals) else "" for i in range(len(headers))}
             ignore_reason = ""
+            normalized_vals=[_norm(v) for v in vals]
             if not non_blank:
                 ignore_reason = "ignored_blank_row"
+            elif normalized_vals[:len(headers)] == headers[:len(normalized_vals)] and sum(1 for v in normalized_vals if v) >= 2:
+                ignore_reason = "ignored_repeated_header"
             elif _is_formula_only(row_obj, vals):
                 ignore_reason = "ignored_formula_only"
             elif self._is_section_header(row, vals):
@@ -415,10 +422,20 @@ class CiosCommercialTwinAdapter:
                 lineage_values=[]
                 for c in mapping.lineage_any:
                     lineage_values.extend(_split_refs(row.get(_norm(c))))
-                if rc not in PROJECTION_ONLY_CLASSES and re.match(r"^[0-9]", str(sheet)) and mapping.lineage_any and not lineage_values:
+                resolutions=[]; resolved_any=False
+                for ref in lineage_values:
+                    rk=_ref_key(ref); resolved=ref_index.get(rk, "")
+                    if not resolved and _norm(c) == "claim_id":
+                        inherited = claim_lineage.get(rk, [])
+                        resolved = ";".join(x.get("resolved_staged_candidate", "") for x in inherited if x.get("resolved_staged_candidate"))
+                    resolved_any = resolved_any or bool(resolved)
+                    resolutions.append({"original_reference": ref, "normalized_reference": rk, "resolved_staged_candidate": resolved, "unresolved_reason": "" if resolved else "reference_not_found_in_staged_sources_or_evidence"})
+                if rc == "observation" and (_norm(sheet) == "05_observations") and not resolved_any:
+                    status="quarantined"; findings.append(ValidationFinding("error","quarantined_missing_lineage" if not lineage_values else "quarantined_invalid_reference",f"Missing resolved evidence/source lineage for {rc}",f"{workbook_path}:{sheet}!{idx}"))
+                elif rc not in PROJECTION_ONLY_CLASSES and re.match(r"^[0-9]", str(sheet)) and mapping.lineage_any and not lineage_values:
                     status="quarantined"; findings.append(ValidationFinding("error","quarantined_missing_lineage",f"Missing required evidence/source lineage for {rc}",f"{workbook_path}:{sheet}!{idx}"))
-                if lineage_values:
-                    row["lineage_resolution"] = [{"original_reference": ref, "normalized_reference": _ref_key(ref), "resolved_staged_candidate": _ref_key(ref), "unresolved_reason": ""} for ref in lineage_values]
+                if resolutions:
+                    row["lineage_resolution"] = resolutions
             ext=""
             preferred_ids = {"source": ("source_id","stable_id","external_id","id"), "evidence": ("evidence_id","stable_id","external_id","id"), "observation": ("observation_id","stable_id","external_id","id"), "unknown": ("unknown_id","stable_id","external_id","id"), "contradiction": ("contradiction_id","stable_id","external_id","id"), "entity": ("entity_id","stable_id","external_id","id"), "relationship": ("relationship_id","edge_id","stable_id","external_id","id"), "human_knowledge": ("stable_id","external_id","id")}.get(rc, ID_COLUMNS)
             for key in preferred_ids:
@@ -430,6 +447,17 @@ class CiosCommercialTwinAdapter:
                 ext=f"{ext}-{suffix}"
                 row.setdefault("identifier_collision_resolution", {"collision_checked": True, "collision_suffix": suffix})
             seen_ids.add((rc, ext))
+            if rc == "relationship":
+                row.setdefault("source_entity_id", _clean(row.get("source_entity_id") or row.get("from") or row.get("source")))
+                row.setdefault("target_entity_id", _clean(row.get("target_entity_id") or row.get("to") or row.get("target")))
+                row.setdefault("relationship_type", _norm(row.get("relationship_type") or row.get("type") or row.get("record_type")))
+                if not (_clean(row.get("source_entity_id")) and _clean(row.get("target_entity_id")) and _clean(row.get("relationship_type"))):
+                    status="quarantined"; findings.append(ValidationFinding("error","quarantined_ambiguous_row_type","Relationship rows require source endpoint, target endpoint and relationship type",f"{workbook_path}:{sheet}!{idx}"))
+            if rc == "entity":
+                row.setdefault("entity_name", _clean(row.get("entity_name") or row.get("name") or row.get("label") or row.get("title")))
+                row.setdefault("entity_type", _norm(row.get("entity_type") or row.get("type") or row.get("record_type") or sheet))
+                if not (_clean(row.get("entity_name")) and _clean(row.get("entity_type"))):
+                    status="quarantined"; findings.append(ValidationFinding("error","quarantined_ambiguous_row_type","Entity rows require clear identity and type",f"{workbook_path}:{sheet}!{idx}"))
             payload={k:v for k,v in row.items() if v not in ("", None)}
             payload.setdefault("twin_version", package.identity.package_version)
             payload["mapping_version"] = MAPPING_VERSION
@@ -438,5 +466,12 @@ class CiosCommercialTwinAdapter:
             payload.setdefault("identifier_metadata", {"source_supplied": bool('ext_supplied' in locals() and ext_supplied), "derived": bool(isinstance(payload.get("identifier_derivation"), dict))})
             if mapping and mapping.human_supplied: payload["human_supplied"] = True; payload.setdefault("truth_class", "human-supplied")
             loc={"workbook": workbook_path, "sheet": sheet, "row": idx, "stable_id": ext, "mapping_version": MAPPING_VERSION, "header_row": header_pos+1}
-            out.append(CandidateImportRecord("1.0", candidate_id(package.package_ref, workbook_path, ext, rc), package.package_ref, package.package_sha256, workbook_path, sheet, loc, ext, rc, truth, payload, status, tuple(findings), sha256_bytes(json.dumps(payload, sort_keys=True).encode()), utc_now(), package.import_run_id, 0))
+            cand = CandidateImportRecord("1.0", candidate_id(package.package_ref, workbook_path, ext, rc), package.package_ref, package.package_sha256, workbook_path, sheet, loc, ext, rc, truth, payload, status, tuple(findings), sha256_bytes(json.dumps(payload, sort_keys=True).encode()), utc_now(), package.import_run_id, 0)
+            out.append(cand)
+            if status == "accepted" and rc in {"source", "evidence"}:
+                ref_index[_ref_key(ext)] = cand.candidate_record_id
+                for k in preferred_ids:
+                    if _clean(row.get(k)): ref_index[_ref_key(row.get(k))] = cand.candidate_record_id
+            if rc == "enterprise_model_candidate" and _clean(row.get("claim_id")) and payload.get("lineage_resolution"):
+                claim_lineage[_ref_key(row.get("claim_id"))] = payload.get("lineage_resolution") or []
         return out
