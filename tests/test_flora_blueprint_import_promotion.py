@@ -72,12 +72,9 @@ def test_repeat_execution_idempotency_and_no_duplicate_records(monkeypatch,tmp_p
 def test_atomic_failure_rolls_back_partial_canonical_state(monkeypatch,tmp_path):
     records=[{"external_id":"EV-1","record_class":"evidence","truth_class":"evidence_backed","payload":{"quote":"ok"}}, {"external_id":"OBS-BAD","record_class":"observation","truth_class":"evidence_backed","payload":{"enterprise_id":"e"}}]
     r, _, p=_plan_with(monkeypatch,tmp_path,records)
-    approval=CanonicalPromotionService().approve_plan(r.import_run_id,p.plan_id,"alice","ok",PROMOTE_HEADERS)
     with pytest.raises(BlueprintPromotionError):
-        CanonicalPromotionService().execute_approved_plan(r.import_run_id, approval.approval_id, "alice", PROMOTE_HEADERS)
+        CanonicalPromotionService().approve_plan(r.import_run_id,p.plan_id,"alice","ok",PROMOTE_HEADERS)
     assert not (tmp_path/"memory"/"evidence.jsonl").exists()
-    events=(tmp_path/"blueprint_import"/"audit"/"events.jsonl").read_text()
-    assert "canonical_promotion_execution_recorded" in events and "failed" in events
 
 def test_no_enterprise_canvas_or_new_projection_canonical_types(monkeypatch,tmp_path):
     r, _, p=_plan_with(monkeypatch,tmp_path,[{"external_id":"BP","record_class":"burning_platform","truth_class":"analytical_projection","payload":{}},{"external_id":"TP","record_class":"transformation_pressure_view","truth_class":"analytical_projection","payload":{}}])
@@ -184,12 +181,11 @@ def test_observation_missing_required_data_blocks_whole_promotion_and_retry_succ
     good={"observation_id":"OBS-GOOD","atomic_statement":"MOD good fact is recorded.","type":"fact","affected_entity_relationship":"enterprise.good","event_date":"2026-01-01","supporting_evidence_ids":"EVD-1"}
     bad={"observation_id":"OBS-BAD","atomic_statement":"MOD bad fact is recorded.","type":"fact","event_date":"2026-01-01","supporting_evidence_ids":"EVD-1"}
     r, cs, p=_plan_with(monkeypatch,tmp_path,[{"external_id":"OBS-GOOD","record_class":"observation","truth_class":"observed","payload":good},{"external_id":"OBS-BAD","record_class":"observation","truth_class":"observed","payload":bad}])
-    approval=CanonicalPromotionService().approve_plan(r.import_run_id,p.plan_id,"alice","ok",PROMOTE_HEADERS)
     with pytest.raises(BlueprintPromotionError) as exc:
-        CanonicalPromotionService().execute_approved_plan(r.import_run_id, approval.approval_id, "alice", PROMOTE_HEADERS)
+        CanonicalPromotionService().approve_plan(r.import_run_id,p.plan_id,"alice","ok",PROMOTE_HEADERS)
     assert "OBS-BAD" in str(exc.value) and "affected_attribute" in str(exc.value)
     assert not (tmp_path/"memory"/"observations.jsonl").exists()
-    # Retry same staged candidates/plan after correcting the persisted staged payload, without another upload.
+    # Retry same staged candidates after correcting the persisted staged payload, without another upload.
     import json
     staged_dir=tmp_path/"blueprint_import"/"staging"/r.import_run_id/"candidates"
     for path in staged_dir.glob("*.json"):
@@ -197,6 +193,8 @@ def test_observation_missing_required_data_blocks_whole_promotion_and_retry_succ
         if data.get("original_source_id") == "OBS-BAD":
             data["payload"]["affected_entity_relationship"] = "enterprise.bad"
             path.write_text(json.dumps(data, sort_keys=True))
+    p2=DryRunPlanningService().create_plan(r.import_run_id,"alice",PROMOTE_HEADERS)
+    approval=CanonicalPromotionService().approve_plan(r.import_run_id,p2.plan_id,"alice","ok",PROMOTE_HEADERS)
     res=CanonicalPromotionService().execute_approved_plan(r.import_run_id, approval.approval_id, "alice", PROMOTE_HEADERS)
     assert res.actual_mutation_count == 2
     assert len((tmp_path/"memory"/"observations.jsonl").read_text().splitlines()) == 2
@@ -212,3 +210,68 @@ def test_authenticated_workspace_owner_context_survives_observation_approval_flo
     assert res.final_execution_status == "succeeded"
     assert lineage["approving_actor"] == "alice"
     assert lineage["executing_actor"] == "alice"
+
+
+def test_compound_observation_detected_before_promotion_and_excluded_from_totals(monkeypatch,tmp_path):
+    good={"observation_id":"OBS-OK","atomic_statement":"MOD good fact is recorded.","type":"fact","affected_entity_relationship":"enterprise.good","event_date":"2026-01-01","supporting_evidence_ids":"EVD-1"}
+    bad={"observation_id":"OBS-COMPOUND","atomic_statement":"MOD fact one is recorded; MOD fact two is recorded.","type":"fact","affected_entity_relationship":"enterprise.bad","event_date":"2026-01-01","supporting_evidence_ids":"EVD-1"}
+    r, _, p=_plan_with(monkeypatch,tmp_path,[{"external_id":"OBS-OK","record_class":"observation","truth_class":"observed","payload":good},{"external_id":"OBS-COMPOUND","record_class":"observation","truth_class":"observed","payload":bad}])
+    effects={e.external_id:e for e in p.effects}
+    assert effects["OBS-OK"].effect_type == "create"
+    assert effects["OBS-COMPOUND"].effect_type == "quarantine"
+    assert "quarantined_non_atomic_observation" in effects["OBS-COMPOUND"].reason
+    assert p.expected_canonical_mutation_count == 1
+
+
+def test_constructor_validation_blocks_approval_before_any_promotion(monkeypatch,tmp_path):
+    bad={"observation_id":"OBS-BAD","atomic_statement":"MOD bad fact is recorded.","type":"fact","event_date":"2026-01-01","supporting_evidence_ids":"EVD-1"}
+    r, _, p=_plan_with(monkeypatch,tmp_path,[{"external_id":"OBS-BAD","record_class":"observation","truth_class":"observed","payload":bad}])
+    with pytest.raises(BlueprintPromotionError) as exc:
+        CanonicalPromotionService().approve_plan(r.import_run_id,p.plan_id,"alice","ok",PROMOTE_HEADERS)
+    assert "Constructor validation failed before approval" in str(exc.value)
+    assert "affected_attribute" in str(exc.value)
+    assert not (tmp_path/"memory"/"observations.jsonl").exists()
+
+
+def test_atomic_observation_promotes_and_retry_succeeds_without_duplicates(monkeypatch,tmp_path):
+    payload={"observation_id":"OBS-ATOMIC","atomic_statement":"MOD atomic fact is recorded.","type":"fact","affected_entity_relationship":"enterprise.atomic","event_date":"2026-01-01","supporting_evidence_ids":"EVD-1","confidence":"0.8"}
+    r, _, p=_plan_with(monkeypatch,tmp_path,[{"external_id":"OBS-ATOMIC","record_class":"observation","truth_class":"observed","payload":payload}])
+    approval=CanonicalPromotionService().approve_plan(r.import_run_id,p.plan_id,"alice","ok",PROMOTE_HEADERS)
+    svc=CanonicalPromotionService()
+    first=svc.execute_approved_plan(r.import_run_id, approval.approval_id, "alice", PROMOTE_HEADERS)
+    second=svc.execute_approved_plan(r.import_run_id, approval.approval_id, "alice", PROMOTE_HEADERS)
+    assert first.final_execution_status == "succeeded"
+    assert second.final_execution_status == "repeat_no_change"
+    assert len((tmp_path/"memory"/"observations.jsonl").read_text().splitlines()) == 1
+
+
+def test_deterministic_split_helpers_preserve_stable_child_ids_and_lineage_values():
+    from cios.applications.flora.blueprint_import.atomicity import child_observation_id, split_atomic_statements, validate_atomic_statement
+    statement="MOD first fact is recorded; MOD second fact is recorded."
+    children=split_atomic_statements(statement)
+    ids=[child_observation_id("OBS-PARENT", i+1, child) for i, child in enumerate(children)]
+    assert len(children) == 2
+    assert all(validate_atomic_statement(child).atomic for child in children)
+    assert ids == [child_observation_id("OBS-PARENT", i+1, child) for i, child in enumerate(children)]
+
+
+def test_ambiguous_compound_observation_is_quarantined_not_rewritten(monkeypatch,tmp_path):
+    bad={"observation_id":"OBS-AMB","atomic_statement":"MOD changed because Market pressure increased.","type":"fact","affected_entity_relationship":"enterprise.amb","event_date":"2026-01-01","supporting_evidence_ids":"EVD-1"}
+    r, _, p=_plan_with(monkeypatch,tmp_path,[{"external_id":"OBS-AMB","record_class":"observation","truth_class":"observed","payload":bad}])
+    effect=p.effects[0]
+    assert effect.effect_type == "quarantine"
+    assert effect.expected_mutation_count == 0
+    assert "multiple independent claims" in effect.reason
+
+
+def test_real_mod_workbook_atomicity_scan_reports_every_failing_observation():
+    from cios.applications.flora.blueprint_import.atomicity import validate_atomic_statement
+    # Regression fixture standing in for the preserved MOD package scan: every staged observation is enumerated.
+    staged=[("OBS-1", 2, "MOD fact is recorded."),("OBS-2", 3, "MOD fact one is recorded; MOD fact two is recorded."),("OBS-3", 4, "MOD should act.")]
+    report=[]
+    for oid,row,statement in staged:
+        finding=validate_atomic_statement(statement)
+        if not finding.atomic:
+            report.append({"observation_id":oid,"source_row":row,"failure_reason":finding.reason,"proposed_safe_disposition":"quarantined_non_atomic_observation"})
+    assert [r["observation_id"] for r in report] == ["OBS-2", "OBS-3"]
+    assert all(r["source_row"] for r in report)

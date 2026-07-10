@@ -13,6 +13,7 @@ from .ledger import BlueprintImportLedger, utc_now
 from .mapping import ImportMappingRepository
 from .review import CandidateReviewRepository, BlueprintReviewError, can_review_blueprint_candidate
 from .registry import BlueprintPackageRegistry
+from .atomicity import validate_atomic_statement
 
 EffectType = Literal["create", "update", "unchanged", "mapped", "duplicate", "conflict", "contradiction", "reject", "defer", "quarantine", "unsupported", "unresolved", "projection", "ignored"]
 
@@ -94,6 +95,9 @@ class DryRunPlanningService:
         elif c.get("validation_status") == "quarantined": typ="quarantine"; reason="Candidate is quarantined"
         elif c.get("validation_status") == "rejected": typ="reject"; reason="Candidate is rejected by staging validation"
         elif not d: typ="unresolved"; reason="No review decision recorded"
+        elif rc == "observation" and d.get("decision") == "approve" and str((c.get("payload") or {}).get("proposed_effect") or "create") in {"create", "update"} and ((c.get("payload") or {}).get("atomic_statement") or (c.get("payload") or {}).get("statement") or (c.get("payload") or {}).get("claim") or (c.get("payload") or {}).get("summary")) and not validate_atomic_statement((c.get("payload") or {}).get("atomic_statement") or (c.get("payload") or {}).get("statement") or (c.get("payload") or {}).get("claim") or (c.get("payload") or {}).get("summary")).atomic:
+            finding = validate_atomic_statement((c.get("payload") or {}).get("atomic_statement") or (c.get("payload") or {}).get("statement") or (c.get("payload") or {}).get("claim") or (c.get("payload") or {}).get("summary"))
+            typ="quarantine"; reason="quarantined_non_atomic_observation: " + finding.reason
         elif d["decision"] == "reject": typ="reject"; reason=d.get("rationale", "")
         elif d["decision"] == "defer": typ="defer"; reason=d.get("rationale", "")
         elif d["decision"] == "quarantine": typ="quarantine"; reason=d.get("rationale", "")

@@ -8,6 +8,7 @@ from typing import Any, Literal
 
 from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise, flora_roles
 from cios.applications.flora.memory.models import Observation
+from cios.applications.flora.blueprint_import.atomicity import validate_atomic_statement, normalise_statement
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
 from cios.applications.flora.memory.repository import EvidenceRepository, ObservationRepository, ContradictionRepository
 from cios.applications.flora.storage import atomic_write_json, data_path, ensure_writable_dir
@@ -156,6 +157,7 @@ class CanonicalPromotionService:
         if not package or not can_approve_blueprint_promotion(headers, package.identity.enterprise_id): raise BlueprintPromotionError("Actor is not authorised to approve Blueprint canonical promotion")
         if any(e["effect_type"]=="conflict" for e in plan["effects"]): raise BlueprintPromotionError("Unresolved blocking conflicts remain")
         if not _plan_reconciles(plan): raise BlueprintPromotionError("Accepted canonical candidates do not reconcile with create, update and unchanged effects")
+        self._assert_constructor_valid(import_run_id, plan)
         a=CanonicalPromotionApproval("1.0", _approval_id(plan_id, approver), plan_id, import_run_id, plan["package_ref"], package.package_sha256, approver, utc_now(), rationale, tuple(plan["effects"]), int(plan["expected_canonical_mutation_count"]), unresolved_warnings_accepted, expiry_or_invalidation_condition, _fp(plan), self._reviews_fingerprint(import_run_id), _fp(self.mappings.list(import_run_id)))
         self.repo.save_approval(a); self.ledger.append("canonical_promotion_approved", a.to_dict()); return a
     def execute_approved_plan(self, import_run_id: str, approval_id: str, actor: str, headers: Any) -> CanonicalPromotionResult:
@@ -190,6 +192,23 @@ class CanonicalPromotionService:
         if root.exists():
             rows=[json.loads(p.read_text(encoding="utf-8")) for p in sorted(root.glob("*.json"))]
         return _fp(rows)
+    def _assert_constructor_valid(self, import_run_id: str, plan: dict[str, Any]) -> None:
+        candidates={c["candidate_record_id"]: c for c in self.staging.list_candidates(import_run_id)}; reviews=self.reviews.latest_by_candidate(import_run_id); maps={m["candidate_id"]:m for m in self.mappings.list(import_run_id)}
+        failures=[]
+        dummy=CanonicalPromotionApproval("1.0", "prevalidation", plan["plan_id"], import_run_id, plan["package_ref"], "", "prevalidation", utc_now(), "", tuple(plan["effects"]), int(plan.get("expected_canonical_mutation_count",0)), (), "", "", "", "")
+        for raw in plan.get("effects") or []:
+            e=ProposedCanonicalEffect(**raw); c=candidates.get(e.candidate_id); d=reviews.get(e.candidate_id); m=maps.get(e.candidate_id, {})
+            if e.effect_type not in {"create","update"} or e.record_class not in SUPPORTED_PROMOTION_CLASSES: continue
+            if not c or not d or d.get("decision") != "approve": failures.append(f"{e.candidate_id}: approved candidate/review missing"); continue
+            try:
+                payload=dict(c.get("payload") or {})
+                if e.record_class == "observation": self._observation_from_payload(e, c, payload, self._lineage(e,c,d,m,dummy,"prevalidation"), dummy)
+                elif e.record_class == "contradiction":
+                    if not (payload.get("statement_a") or payload.get("position_a") or payload.get("claim_a")): raise BlueprintPromotionError("statement_a missing")
+                    if not (payload.get("statement_b") or payload.get("position_b") or payload.get("claim_b")): raise BlueprintPromotionError("statement_b missing")
+                elif e.record_class == "evidence": pass
+            except Exception as exc: failures.append(f"{e.candidate_id} ({c.get('original_source_id')}): {exc}")
+        if failures: raise BlueprintPromotionError("Constructor validation failed before approval: " + "; ".join(failures))
     def _load_plan(self, import_run_id, plan_id):
         for p in self.plans.list(import_run_id):
             if p.get("plan_id")==plan_id: return p
@@ -240,6 +259,9 @@ class CanonicalPromotionService:
             missing.append("supporting_evidence_ids")
         if missing:
             raise BlueprintPromotionError(f"Observation candidate {e.candidate_id} ({c.get('original_source_id')}) missing required canonical field(s): {', '.join(missing)}")
+        atomicity = validate_atomic_statement(atomic_statement)
+        if not atomicity.atomic:
+            raise BlueprintPromotionError(f"Observation candidate {e.candidate_id} ({c.get('original_source_id')}) failed atomicity: {atomicity.reason}; original={atomic_statement!r}; normalized={normalise_statement(atomic_statement)!r}")
         hp = dict(payload.get("human_provenance") or {})
         hp["blueprint_import_lineage"] = lineage
         hp["source_worksheet"] = payload.get("source_worksheet") or c.get("source_sheet")
