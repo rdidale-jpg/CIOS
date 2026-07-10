@@ -18,6 +18,53 @@ from xml.etree import ElementTree as ET
 from .archive import sha256_bytes
 from .candidates import CandidateImportRecord, PROJECTION_ONLY_CLASSES, SUPPORTED_RECORD_CLASSES, ValidationFinding, candidate_id
 from .ledger import utc_now
+
+RESOLVER_FUNCTION_NAME = "cios.applications.flora.blueprint_import.cios_twin_adapter.resolve_ooxml_relationship_target"
+ADAPTER_IMPLEMENTATION_ID = "cios-commercial-twin-adapter-v1"
+
+def _target_classification(target: str, mode: str = "") -> str:
+    if str(mode or "").casefold() == "external":
+        return "external"
+    target = str(target or "")
+    if target.startswith("/"):
+        return "package-rooted"
+    if target == "xl" or target.startswith("xl/"):
+        return "already prefixed"
+    return "relative"
+
+def _nearest_members(requested: str, names: set[str], limit: int = 5) -> list[str]:
+    leaf = PurePosixPath(requested).name
+    scored = []
+    for name in names:
+        if name.endswith("/"):
+            continue
+        score = 0
+        if PurePosixPath(name).name == leaf:
+            score += 100
+        if name.endswith(leaf):
+            score += 20
+        if "worksheets/" in name and "worksheets/" in requested:
+            score += 10
+        if score:
+            scored.append((-score, len(name), name))
+    return [name for _, __, name in sorted(scored)[:limit]]
+
+def _event(trace: list[dict[str, Any]] | None, step_id: int, component: str, action: str, safe_input: str, safe_output: str, status: str, correlation_id: str, failure_reason: str = "", **details: Any) -> None:
+    if trace is None:
+        return
+    payload = {
+        "timestamp": utc_now(),
+        "step_id": step_id,
+        "component": component,
+        "action": action,
+        "safe_input_summary": safe_input,
+        "safe_output_summary": safe_output,
+        "status": status,
+        "failure_reason": failure_reason,
+        "correlation_id": correlation_id,
+    }
+    payload.update({k: v for k, v in details.items() if v not in (None, "")})
+    trace.append(payload)
 from .models import BlueprintPackageRecord
 
 _CANON = {
@@ -84,18 +131,22 @@ def resolve_ooxml_relationship_target(source_part: str, target: str) -> str:
 class CiosCommercialTwinAdapter:
     """Read a final Twin Spine workbook from an accepted package manifest."""
 
-    def inspect(self, package: BlueprintPackageRecord, outer_zip: zipfile.ZipFile, manifest: dict[str, Any]) -> TwinWorkbookInspection | None:
+    def inspect(self, package: BlueprintPackageRecord, outer_zip: zipfile.ZipFile, manifest: dict[str, Any], trace: list[dict[str, Any]] | None = None) -> TwinWorkbookInspection | None:
+        correlation_id = package.import_run_id
+        _event(trace, 1, __name__, "Read Blueprint manifest", "blueprint_manifest.json", f"Package {package.identity.package_id} {package.identity.package_version} identified", "Passed", correlation_id, package_id=package.identity.package_id, package_version=package.identity.package_version, enterprise_id=package.identity.enterprise_id, package_checksum=package.package_sha256)
         workbook_path = self._workbook_path(manifest)
         if not workbook_path:
             return None
         warnings: list[str] = [] ; errors: list[str] = []
+        _event(trace, 2, __name__, "Select final Twin workbook", workbook_path, "Workbook found" if workbook_path in outer_zip.namelist() else "Workbook missing", "Passed" if workbook_path in outer_zip.namelist() else "Failed", correlation_id, workbook_path_selected=workbook_path)
         if workbook_path not in outer_zip.namelist():
             return TwinWorkbookInspection(workbook_path, (), (), (), (f"Declared final Twin Spine workbook missing: {workbook_path}",))
         expected = self._declared_hash(manifest, workbook_path)
         data = outer_zip.read(workbook_path)
+        _event(trace, 3, __name__, "Hash selected workbook", workbook_path, sha256_bytes(data), "Passed", correlation_id, workbook_sha256=sha256_bytes(data))
         if expected and sha256_bytes(data) != expected:
             return TwinWorkbookInspection(workbook_path, (), (), (), (f"Workbook hash mismatch: {workbook_path}",))
-        candidates, sheets = self._read_workbook(package, workbook_path, data, warnings, errors)
+        candidates, sheets = self._read_workbook(package, workbook_path, data, warnings, errors, trace, correlation_id)
         return TwinWorkbookInspection(workbook_path, tuple(sheets), tuple(candidates), tuple(warnings), tuple(errors))
 
     def _workbook_path(self, manifest: dict[str, Any]) -> str:
@@ -113,7 +164,7 @@ class CiosCommercialTwinAdapter:
                 return str(f.get("sha256") or f.get("hash") or "")
         return ""
 
-    def _read_workbook(self, package, workbook_path: str, data: bytes, warnings: list[str], errors: list[str]):
+    def _read_workbook(self, package, workbook_path: str, data: bytes, warnings: list[str], errors: list[str], trace: list[dict[str, Any]] | None = None, correlation_id: str = ""):
         out=[]; sheet_names=[]
         try:
             with zipfile.ZipFile(BytesIO(data)) as wb:
@@ -121,13 +172,14 @@ class CiosCommercialTwinAdapter:
                 if any(n.endswith("vbaProject.bin") or n.startswith("xl/externalLinks/") for n in names):
                     warnings.append("Workbook macros, scripts or external links were ignored")
                 shared=self._shared(wb)
-                sheet_map=self._sheets(wb)
+                sheet_map=self._sheets(wb, trace, correlation_id)
                 for sheet_name, sheet_file in sheet_map:
                     sheet_names.append(sheet_name)
                     rows=self._rows(wb, sheet_file, shared)
                     out.extend(self._candidates(package, workbook_path, sheet_name, rows))
         except (zipfile.BadZipFile, ET.ParseError, KeyError, ValueError) as exc:
             errors.append(f"Workbook could not be inspected safely: {exc}")
+        _event(trace, 7, __name__, "Candidate staging", str(len(out)), "Candidates staged" if not errors else "Stopped because workbook inspection failed", "Passed" if not errors else "Not started", correlation_id, current_stage="candidate_staging" if not errors else "validation_stop", previous_completed_stage="worksheet_parsing" if not errors else "workbook_relationship_parsing", next_intended_stage="proposed_change_review", processing_stopped=bool(errors), stop_reason="; ".join(errors), canonical_changes_made=False, promotion_enabled=not bool(errors))
         return out, sheet_names
 
     def _shared(self, wb):
@@ -135,10 +187,11 @@ class CiosCommercialTwinAdapter:
         root=ET.fromstring(wb.read("xl/sharedStrings.xml")); ns={"x":"http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
         return ["".join(t.text or "" for t in si.findall(".//x:t", ns)) for si in root.findall("x:si", ns)]
 
-    def _sheets(self, wb):
+    def _sheets(self, wb, trace: list[dict[str, Any]] | None = None, correlation_id: str = ""):
         ns={"x":"http://schemas.openxmlformats.org/spreadsheetml/2006/main", "r":"http://schemas.openxmlformats.org/officeDocument/2006/relationships"}
         book=ET.fromstring(wb.read("xl/workbook.xml")); rels=ET.fromstring(wb.read("xl/_rels/workbook.xml.rels"))
         names=set(wb.namelist()); targets={}; seen_relationship_ids=set()
+        _event(trace, 4, __name__, "Read workbook sheet list", "xl/workbook.xml", "Workbook relationships loaded", "Passed", correlation_id, source_ooxml_part="xl/workbook.xml", relationship_file="xl/_rels/workbook.xml.rels", workbook_adapter_module=__name__, workbook_adapter_implementation_identifier=ADAPTER_IMPLEMENTATION_ID)
         for rel in rels:
             rid=str(rel.attrib.get("Id") or "")
             target=str(rel.attrib.get("Target") or "")
@@ -147,18 +200,24 @@ class CiosCommercialTwinAdapter:
             seen_relationship_ids.add(rid)
             if str(rel.attrib.get("TargetMode") or "").casefold() == "external":
                 continue
-            targets[rid]=self._resolve_part_target("xl/workbook.xml", target)
+            resolved=self._resolve_part_target("xl/workbook.xml", target)
+            exists = resolved in names
+            _event(trace, 5, __name__, "Read and normalize worksheet relationship", rid, f"Target: {target}; resolved: {resolved}; exists: {'yes' if exists else 'no'}", "Passed" if exists else "Failed", correlation_id, failure_reason="ZIP member not found" if not exists else "", resolver_function_name=RESOLVER_FUNCTION_NAME, source_ooxml_part="xl/workbook.xml", relationship_file="xl/_rels/workbook.xml.rels", relationship_id=rid, original_relationship_target=target, target_classification=_target_classification(target, rel.attrib.get("TargetMode", "")), normalized_target=resolved, final_zip_lookup_path=resolved, zip_member_exists=exists, nearest_matching_zip_members=_nearest_members(resolved, names))
+            targets[rid]=resolved
         sheets=[]; missing=[]
         for sheet in book.findall(".//x:sheet", ns):
             sheet_name=sheet.attrib.get("name", "Sheet")
             rid=sheet.attrib.get('{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id', "")
             resolved=targets.get(rid, "")
             if not resolved:
+                _event(trace, 6, __name__, "Resolve worksheet for parsing", sheet_name, "Relationship missing", "Failed", correlation_id, sheet_name=sheet_name, relationship_id=rid, current_stage="workbook_processing", previous_completed_stage="workbook_relationship_parsing", next_intended_stage="candidate_staging", processing_stopped=True, stop_reason="worksheet relationship missing", canonical_changes_made=False, promotion_enabled=False)
                 missing.append(f"Worksheet relationship could not be resolved: sheet={sheet_name}; relationship_id={rid}; target=; resolved=; missing=")
                 continue
             if resolved not in names:
+                _event(trace, 6, __name__, "Check workbook archive", resolved, "File not found; processing stopped before candidate staging", "Failed", correlation_id, sheet_name=sheet_name, relationship_id=rid, final_zip_lookup_path=resolved, zip_member_exists=False, nearest_matching_zip_members=_nearest_members(resolved, names), current_stage="workbook_processing", previous_completed_stage="workbook_relationship_parsing", next_intended_stage="candidate_staging", processing_stopped=True, stop_reason="workbook inspection failed", canonical_changes_made=False, promotion_enabled=False)
                 missing.append(f"Worksheet relationship could not be resolved: sheet={sheet_name}; relationship_id={rid}; target={self._relationship_target(rels, rid)}; resolved={resolved}; missing={resolved}")
                 continue
+            _event(trace, 6, __name__, "Check workbook archive", resolved, "File found; worksheet ready for parsing", "Passed", correlation_id, sheet_name=sheet_name, relationship_id=rid, final_zip_lookup_path=resolved, zip_member_exists=True)
             sheets.append((sheet_name, resolved))
         if missing: raise ValueError("; ".join(missing))
         return sheets

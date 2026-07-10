@@ -4,6 +4,7 @@ from __future__ import annotations
 from collections import Counter
 import json
 import logging
+import os
 from html import escape
 from typing import Any
 from uuid import uuid4
@@ -79,9 +80,9 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     worksheets = _worksheets(summary.get("warnings", [])); status = "Passed with warnings" if summary.get("warnings") and not summary.get("errors") else ("Failed" if summary.get("errors") else "Passed")
     counts = _candidate_counts(candidates)
     review_link = "<section class='card'><p><a href='/blueprint-import/{0}/review'>Review proposed changes</a></p></section>".format(escape(import_run_id)) if not summary.get('errors') else "<section class='card'><p><strong>Validation failed.</strong> Proposed-change review and approval are disabled until fatal validation errors are resolved.</p></section>"
-    deployment = deployment_metadata()
+    deployment = _blueprint_deployment_metadata(summary)
     deployment_rows = "".join(f"<tr><th>{escape(key.replace('_', ' ').title())}</th><td><code>{escape(value)}</code></td></tr>" for key, value in deployment.items())
-    body = _package_header(package) + f"""<section class='card'><h2>Validation result</h2><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr><tr><th>Workbook discovered</th><td>{'Yes' if any(str(f).endswith(('.xlsx','.xlsm','.xls')) for f in summary.get('files_inspected', [])) else 'Not declared'}</td></tr><tr><th>Worksheets discovered</th><td>{escape(', '.join(worksheets) or 'None reported')}</td></tr><tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section><details class='card'><summary><strong>Safe deployment diagnostics</strong></summary><table>{deployment_rows}</table></details>""" + _counts_section(counts) + review_link
+    body = _package_header(package) + f"""<section class='card'><h2>Validation result</h2><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr><tr><th>Workbook discovered</th><td>{'Yes' if any(str(f).endswith(('.xlsx','.xlsm','.xls')) for f in summary.get('files_inspected', [])) else 'Not declared'}</td></tr><tr><th>Worksheets discovered</th><td>{escape(', '.join(worksheets) or 'None reported')}</td></tr><tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section><details class='card'><summary><strong>Safe deployment diagnostics</strong></summary><table>{deployment_rows}</table></details>""" + _execution_trace_section(package, summary, bool(summary.get("errors"))) + _counts_section(counts) + review_link
     return _page("Blueprint validation result", body), 200
 
 
@@ -91,7 +92,7 @@ def review_page(import_run_id: str, headers: Any, message: str = "") -> tuple[st
         return _safe_failure("You are not authorised to review this Blueprint import.", "review", False, True, "Ask for Blueprint review permission."), 403
     summary = ctx.get("summary") or {}
     if summary.get("errors"):
-        body = _package_header(ctx["package"]) + _notice(message) + "<section class='card'><h2>Review proposed changes</h2><p><strong>Validation failed.</strong> Proposed-change planning is disabled because workbook or package inspection did not complete safely.</p>{}</section>".format(_list('Errors', summary.get('errors', [])))
+        body = _package_header(ctx["package"]) + _notice(message) + "<section class='card'><h2>Review proposed changes</h2><p><strong>Validation failed.</strong> Proposed-change planning is disabled because workbook or package inspection did not complete safely.</p>{}</section>".format(_list('Errors', summary.get('errors', []))) + _execution_trace_section(ctx["package"], summary, True)
         body += "<section class='card'><h2>Approval</h2><p>Approval controls are disabled until fatal validation errors are resolved.</p><button type='button' disabled>Approve and update governed Twin</button></section>"
         return _page("Review Blueprint proposed changes", body), 200
     _ensure_reviews_and_mappings(ctx, headers)
@@ -164,6 +165,93 @@ def _ensure_reviews_and_mappings(ctx, headers):
             reviewer_svc.record_decision(cid, decision, reviewer, "UI default review summary for staged package", headers)
         if c.get("validation_status") == "accepted" and c.get("candidate_object_class") in {"evidence", "observation"} and not c.get("payload", {}).get("proposed_effect"):
             mapper.record_mapping(c, "propose_create", reviewer, headers, c.get("candidate_object_class", "").title())
+
+
+
+def _blueprint_deployment_metadata(summary: dict[str, Any]) -> dict[str, str]:
+    meta = deployment_metadata()
+    unavailable = "Unavailable — deployment metadata not configured"
+    trace = summary.get("execution_trace") or []
+    adapter_id = ""
+    adapter_module = ""
+    for event in trace:
+        adapter_id = adapter_id or str(event.get("workbook_adapter_implementation_identifier") or "")
+        adapter_module = adapter_module or str(event.get("workbook_adapter_module") or "")
+    return {
+        "Git commit SHA": meta.get("commit_sha") or unavailable,
+        "Git branch": meta.get("branch") or unavailable,
+        "Render service name": os.getenv("RENDER_SERVICE_NAME", "").strip() or unavailable,
+        "Build timestamp": meta.get("build_timestamp") or unavailable,
+        "Deployment version": meta.get("deployment_version") or unavailable,
+        "Service environment": os.getenv("RENDER_ENVIRONMENT", "").strip() or os.getenv("FLORA_ENVIRONMENT", "").strip() or unavailable,
+        "Code module version": adapter_module or unavailable,
+        "Workbook adapter implementation identifier": adapter_id or unavailable,
+    }
+
+def _trace_latest(trace: list[dict[str, Any]], key: str, default: str = "Not recorded") -> str:
+    for event in reversed(trace):
+        if key in event and event.get(key) not in (None, "", []):
+            value = event.get(key)
+            if isinstance(value, bool):
+                return "yes" if value else "no"
+            if isinstance(value, list):
+                return ", ".join(str(v) for v in value) or default
+            return str(value)
+    return default
+
+def _execution_trace_section(package, summary: dict[str, Any], fatal: bool) -> str:
+    trace = list(summary.get("execution_trace") or [])
+    deployment = _blueprint_deployment_metadata(summary)
+    rows = []
+    for event in trace:
+        rows.append("<tr><td>{}</td><td>{}</td><td><code>{}</code></td><td>{}</td><td>{}</td></tr>".format(
+            escape(str(event.get("step_id", ""))),
+            escape(str(event.get("action", ""))),
+            escape(str(event.get("safe_input_summary", ""))),
+            escape(str(event.get("safe_output_summary", ""))),
+            escape(str(event.get("status", ""))),
+        ))
+    trace_table = "<table><thead><tr><th>Step</th><th>Action Flora took</th><th>Input</th><th>Result</th><th>Status</th></tr></thead><tbody>{}</tbody></table>".format("".join(rows) or "<tr><td colspan='5'>No execution trace recorded.</td></tr>")
+    pkg_rows = {
+        "Package ID": package.identity.package_id,
+        "Package version": package.identity.package_version,
+        "Enterprise ID": package.identity.enterprise_id,
+        "Package checksum": package.package_sha256,
+        "Uploaded filename": getattr(package, "original_filename", "") or getattr(package, "filename", "") or "Unavailable — deployment metadata not configured",
+        "Workbook path selected": _trace_latest(trace, "workbook_path_selected"),
+        "Workbook SHA-256 result": _trace_latest(trace, "workbook_sha256"),
+    }
+    workbook_rows = {
+        "Workbook adapter module": _trace_latest(trace, "workbook_adapter_module"),
+        "Resolver function name": _trace_latest(trace, "resolver_function_name"),
+        "Source OOXML part": _trace_latest(trace, "source_ooxml_part"),
+        "Relationship file": _trace_latest(trace, "relationship_file"),
+        "Sheet name": _trace_latest(trace, "sheet_name"),
+        "Relationship ID": _trace_latest(trace, "relationship_id"),
+        "Original relationship target": _trace_latest(trace, "original_relationship_target"),
+        "Target classification": _trace_latest(trace, "target_classification"),
+        "Normalized target": _trace_latest(trace, "normalized_target"),
+        "Final ZIP lookup path": _trace_latest(trace, "final_zip_lookup_path"),
+        "ZIP member exists": _trace_latest(trace, "zip_member_exists"),
+        "Nearest matching ZIP members": _trace_latest(trace, "nearest_matching_zip_members"),
+    }
+    flow_rows = {
+        "Current stage": _trace_latest(trace, "current_stage", "validation_result"),
+        "Previous completed stage": _trace_latest(trace, "previous_completed_stage"),
+        "Next intended stage": _trace_latest(trace, "next_intended_stage"),
+        "Processing stopped": _trace_latest(trace, "processing_stopped", "yes" if fatal else "no"),
+        "Stop reason": _trace_latest(trace, "stop_reason", "; ".join(summary.get("errors", [])) or "None"),
+        "Canonical changes made": _trace_latest(trace, "canonical_changes_made", "no"),
+        "Promotion enabled": "no" if fatal else _trace_latest(trace, "promotion_enabled", "yes"),
+    }
+    def table(title, values):
+        return "<h3>{}</h3><table>{}</table>".format(escape(title), "".join(f"<tr><th>{escape(k)}</th><td><code>{escape(str(v))}</code></td></tr>" for k,v in values.items()))
+    requested = _trace_latest(trace, "final_zip_lookup_path")
+    expected = _trace_latest(trace, "nearest_matching_zip_members")
+    guidance = "Flora has found the workbook, but its worksheet path resolver or workbook relationship lookup produced an internal path that could not be found. This is a Flora parser defect, not a problem with your Blueprint ZIP. Do not recreate or alter the package." if fatal and requested != "Not recorded" else ("Review the proposed changes when validation passes." if not fatal else "Keep the package unchanged and share this diagnostic trace with support.")
+    plain = f"<p><strong>Plain-English explanation:</strong> Flora read worksheet relationship target <code>{escape(_trace_latest(trace, 'original_relationship_target'))}</code>, normalized it to <code>{escape(_trace_latest(trace, 'normalized_target'))}</code>, checked <code>{escape(requested)}</code>, and found ZIP member exists: <strong>{escape(_trace_latest(trace, 'zip_member_exists'))}</strong>. Processing stopped before candidate staging: <strong>{'yes' if fatal else 'no'}</strong>. No canonical Twin changes were made.</p>"
+    copy = json.dumps({"deployment": deployment, "package": pkg_rows, "workbook_processing": workbook_rows, "validation_flow": flow_rows, "events": trace}, sort_keys=True)
+    return "<section class='card'><h2>Blueprint import execution trace</h2>{plain}{trace_table}{deployment}{package}{workbook}{flow}<h3>Owner next action</h3><p>{guidance}</p><p><button type='button' data-diagnostic-trace='{copy}'>Copy diagnostic trace</button> <a download='blueprint-import-trace.json' href='data:application/json,{copy}'>Download diagnostic trace as JSON</a></p></section>".format(plain=plain, trace_table=trace_table, deployment=table("Deployment", deployment), package=table("Package", pkg_rows), workbook=table("Workbook processing", workbook_rows), flow=table("Validation flow", flow_rows), guidance=escape(guidance), copy=escape(copy, quote=True))
 
 def _candidate_counts(candidates): return Counter(c.get("validation_status", "unsupported") for c in candidates)
 def _counts_section(c): return f"<section class='card'><h2>Candidate staging summary</h2><p>Accepted {c['accepted']} · Quarantined {c['quarantined']} · Rejected {c['rejected']} · Unsupported {c['unsupported']}</p></section>"

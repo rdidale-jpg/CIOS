@@ -80,10 +80,11 @@ class ImportRunDryRunResult:
     warnings: tuple[str, ...]
     errors: tuple[str, ...]
     canonical_mutations: int = 0
+    execution_trace: tuple[dict[str, Any], ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
         data = asdict(self)
-        for key in ("files_inspected", "unsupported_classes", "unresolved_references", "warnings", "errors"):
+        for key in ("files_inspected", "unsupported_classes", "unresolved_references", "warnings", "errors", "execution_trace"):
             data[key] = list(data[key])
         return data
 
