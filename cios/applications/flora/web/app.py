@@ -487,6 +487,8 @@ def run(host: str | None = None, port: int | None = None) -> None:
     bind_port = port if port is not None else env_port()
     storage = startup_storage_status()
     print(f"Flora storage {storage['status']}: {storage['data_root']}", flush=True)
+    if not storage.get("ready"):
+        print({"event": "flora_storage_unavailable", "data_root": storage.get("data_root"), "storage_mode": storage.get("storage_mode"), "error": storage.get("error")}, flush=True)
     server = ThreadingHTTPServer((bind_host, bind_port), FloraWebHandler)
     print(f"Flora web service listening on {bind_host}:{bind_port}", flush=True)
     try:

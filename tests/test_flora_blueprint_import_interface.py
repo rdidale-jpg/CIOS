@@ -156,3 +156,74 @@ def test_owner_cookie_upload_audit_captures_authorisation_decision(monkeypatch,t
     assert "policy_name" in events and "can_receive_blueprint_package" in events
     assert "effective_permissions" in events and "candidate.promote" in events
     assert target.startswith("/blueprint-import/bpi-run-")
+
+
+def test_denied_entry_page_renders_when_audit_persistence_fails(monkeypatch, tmp_path, caplog):
+    from cios.applications.flora.blueprint_import import ledger
+    from cios.applications.flora.storage import PersistenceError
+
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+
+    def fail_append(self, event_type, payload):
+        raise PersistenceError("Flora storage directory is not writable: /var/data/flora/blueprint_import/audit: permission denied")
+
+    monkeypatch.setattr(ledger.BlueprintImportLedger, "append", fail_append)
+    caplog.set_level("WARNING")
+
+    html, status = import_blueprint_entry_page(READ_ONLY)
+
+    assert status == 403
+    assert "Blueprint import needs attention" in html
+    assert "You do not have permission to import Blueprints in this workspace." in html
+    assert "Canonical changes occurred: no" in html
+    assert "Diagnostic reference" in html and "bpi-diag-" in html
+    assert "Blueprint diagnostics could not be persisted." in html
+    assert "No canonical changes occurred." in html
+    assert not (tmp_path / "memory").exists()
+    assert not (tmp_path / "blueprint_import" / "packages").exists()
+    assert any(record.message.startswith("blueprint_audit_persistence_failed") for record in caplog.records)
+    warning = next(record.flora_event for record in caplog.records if record.message.startswith("blueprint_audit_persistence_failed"))
+    assert warning["event_type"] == "package_upload_authorisation_denied"
+    assert warning["diagnostic_reference"].startswith("bpi-diag-")
+    assert warning["exception_type"] == "PersistenceError"
+    assert "blueprint_import/audit" in warning["storage_path"]
+
+
+def test_unavailable_var_data_style_path_no_longer_crashes_denied_page(monkeypatch, tmp_path, caplog):
+    blocked_root = tmp_path / "var" / "data" / "flora"
+    blocked_root.parent.mkdir(parents=True)
+    blocked_root.write_text("not a directory", encoding="utf-8")
+    monkeypatch.setenv("FLORA_DATA_DIR", str(blocked_root))
+    caplog.set_level("WARNING")
+
+    html, status = import_blueprint_entry_page(READ_ONLY)
+
+    assert status == 403
+    assert "Blueprint import needs attention" in html
+    assert "Blueprint diagnostics could not be persisted." in html
+    assert "Blueprint upload capability resolved</th><td>Failed" in html
+    assert "Diagnostic reference" in html and "bpi-diag-" in html
+    assert not (tmp_path / "memory").exists()
+    assert any(record.message.startswith("blueprint_audit_persistence_failed") for record in caplog.records)
+
+
+def test_writable_configured_directory_records_authorisation_audit(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path / "flora-data"))
+
+    html, status = import_blueprint_entry_page(READ_ONLY)
+
+    assert status == 403
+    assert "Blueprint diagnostics could not be persisted" not in html
+    events = (tmp_path / "flora-data" / "blueprint_import" / "audit" / "events.jsonl").read_text(encoding="utf-8")
+    assert "package_upload_authorisation_denied" in events
+    assert "diagnostic_reference" in events
+
+
+def test_owner_and_non_owner_authorisation_outcomes_unchanged_by_audit_fix(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+
+    owner_page, owner_status = import_blueprint_entry_page(OWNER)
+    reader_page, reader_status = import_blueprint_entry_page(READ_ONLY)
+
+    assert owner_status == 200 and "Upload and validate" in owner_page
+    assert reader_status == 403 and "Blueprint upload capability resolved</th><td>Failed" in reader_page

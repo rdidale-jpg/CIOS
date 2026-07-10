@@ -112,3 +112,13 @@ The BT FY26 structured route uses the existing Flora storage-root mechanism. For
 The route retrieves the issuer-hosted ESEF ZIP over public HTTPS, validates archive limits, writes canonical Evidence / Observation / Enterprise Model JSONL/JSON memory beneath `FLORA_DATA_DIR`, and removes temporary ZIP storage after processing. The ZIP itself is not canonical memory and must not be placed in the repository or in an environment variable.
 
 ADR-009 limitations still apply: this is accepted file-backed pilot memory for one service instance and one writer. It does not claim production-grade database concurrency.
+
+## Flora runtime data directory and Blueprint audit resilience
+
+Flora runtime persistence is rooted at `FLORA_DATA_DIR` (falling back to the legacy `FLORA_PILOT_DIR`, then `/var/data/flora`). Render deployments must set `FLORA_DATA_DIR` to a writable location. If durable file-backed runtime state is required, attach a Render persistent disk and mount it at the same path configured in `FLORA_DATA_DIR` (for example `/var/data/flora`). Do not assume `/var/data` exists on a Render service unless a disk is explicitly provisioned and mounted there.
+
+Blueprint import audit records are append-only JSONL diagnostics under `${FLORA_DATA_DIR}/blueprint_import/audit/events.jsonl`. These records are important for operator support, but they are optional for rendering the denied Blueprint import page: if the audit directory is unavailable or unwritable, Flora keeps the authorisation decision intact, renders the normal failure screen, shows the diagnostic reference, and writes a structured `blueprint_audit_persistence_failed` warning to application logs. The warning includes the diagnostic reference, event type, storage path, exception type, safe exception summary, deployment version and storage mode; it must not include secrets, raw package contents or tokens.
+
+At startup, Flora validates the configured storage root and expected subdirectories. Unavailable storage is reported as `flora_storage_unavailable` in process logs so operators can fix `FLORA_DATA_DIR` or the Render disk mount without turning optional Blueprint diagnostics into a blank page.
+
+To correlate a user report with Render logs, copy the `bpi-diag-...` reference shown on the Blueprint import page and search Render logs for the same diagnostic reference or the `blueprint_audit_persistence_failed` event.
