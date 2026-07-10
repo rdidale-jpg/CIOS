@@ -143,8 +143,10 @@ class CiosCommercialTwinAdapter:
             return TwinWorkbookInspection(workbook_path, (), (), (), (f"Declared final Twin Spine workbook missing: {workbook_path}",))
         expected = self._declared_hash(manifest, workbook_path)
         data = outer_zip.read(workbook_path)
-        _event(trace, 3, __name__, "Hash selected workbook", workbook_path, sha256_bytes(data), "Passed", correlation_id, workbook_sha256=sha256_bytes(data))
-        if expected and sha256_bytes(data) != expected:
+        actual = sha256_bytes(data)
+        hash_matches = (not expected) or actual == expected
+        _event(trace, 3, __name__, "Hash selected workbook", workbook_path, "hash match" if hash_matches else "hash mismatch", "Passed" if hash_matches else "Failed", correlation_id, workbook_sha256=actual, workbook_sha256_expected=expected or "not declared", workbook_sha256_actual=actual, workbook_sha256_matches=hash_matches, workbook_adapter_module=__name__, workbook_adapter_implementation_identifier=ADAPTER_IMPLEMENTATION_ID, manifest_workbook_path=workbook_path, resolved_zip_member_path=workbook_path)
+        if expected and actual != expected:
             return TwinWorkbookInspection(workbook_path, (), (), (), (f"Workbook hash mismatch: {workbook_path}",))
         candidates, sheets = self._read_workbook(package, workbook_path, data, warnings, errors, trace, correlation_id)
         return TwinWorkbookInspection(workbook_path, tuple(sheets), tuple(candidates), tuple(warnings), tuple(errors))
@@ -189,20 +191,34 @@ class CiosCommercialTwinAdapter:
 
     def _sheets(self, wb, trace: list[dict[str, Any]] | None = None, correlation_id: str = ""):
         ns={"x":"http://schemas.openxmlformats.org/spreadsheetml/2006/main", "r":"http://schemas.openxmlformats.org/officeDocument/2006/relationships"}
-        book=ET.fromstring(wb.read("xl/workbook.xml")); rels=ET.fromstring(wb.read("xl/_rels/workbook.xml.rels"))
-        names=set(wb.namelist()); targets={}; seen_relationship_ids=set()
-        _event(trace, 4, __name__, "Read workbook sheet list", "xl/workbook.xml", "Workbook relationships loaded", "Passed", correlation_id, source_ooxml_part="xl/workbook.xml", relationship_file="xl/_rels/workbook.xml.rels", workbook_adapter_module=__name__, workbook_adapter_implementation_identifier=ADAPTER_IMPLEMENTATION_ID)
+        names=set(wb.namelist())
+        _event(trace, 4, __name__, "Open workbook part", "xl/workbook.xml", "Opening workbook sheet list", "Started", correlation_id, source_ooxml_part="xl/workbook.xml", workbook_adapter_module=__name__, workbook_adapter_implementation_identifier=ADAPTER_IMPLEMENTATION_ID, archive_member_count=len(names))
+        book=ET.fromstring(wb.read("xl/workbook.xml"))
+        sheet_rids: dict[str, str] = {}
+        for sheet in book.findall(".//x:sheet", ns):
+            sheet_name=sheet.attrib.get("name", "Sheet")
+            rid=sheet.attrib.get('{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id', "")
+            if rid:
+                sheet_rids[rid]=sheet_name
+        _event(trace, 4, __name__, "Open workbook relationships", "xl/_rels/workbook.xml.rels", "Opening workbook relationships", "Started", correlation_id, source_ooxml_part="xl/workbook.xml", relationship_file="xl/_rels/workbook.xml.rels", archive_member_count=len(names))
+        rels=ET.fromstring(wb.read("xl/_rels/workbook.xml.rels"))
+        targets={}; seen_relationship_ids=set()
+        _event(trace, 4, __name__, "Read workbook sheet list", "xl/workbook.xml", "Workbook relationships loaded", "Passed", correlation_id, source_ooxml_part="xl/workbook.xml", relationship_file="xl/_rels/workbook.xml.rels", workbook_adapter_module=__name__, workbook_adapter_implementation_identifier=ADAPTER_IMPLEMENTATION_ID, archive_member_count=len(names))
         for rel in rels:
             rid=str(rel.attrib.get("Id") or "")
             target=str(rel.attrib.get("Target") or "")
+            mode=str(rel.attrib.get("TargetMode") or "")
+            sheet_name=sheet_rids.get(rid, "")
             if not rid: continue
             if rid in seen_relationship_ids: raise ValueError(f"Duplicate workbook relationship ID: {rid}")
             seen_relationship_ids.add(rid)
-            if str(rel.attrib.get("TargetMode") or "").casefold() == "external":
+            if mode.casefold() == "external":
+                _event(trace, 5, __name__, "Skip external worksheet relationship", rid, "External relationship ignored", "Passed", correlation_id, sheet_name=sheet_name, source_ooxml_part="xl/workbook.xml", relationship_file="xl/_rels/workbook.xml.rels", relationship_id=rid, original_relationship_target=target, target_mode=mode, target_classification=_target_classification(target, mode))
                 continue
+            _event(trace, 5, __name__, "Resolve worksheet relationship target", target, "Resolver entered before ZIP lookup", "Started", correlation_id, resolver_function_name=RESOLVER_FUNCTION_NAME, sheet_name=sheet_name, source_ooxml_part="xl/workbook.xml", relationship_file="xl/_rels/workbook.xml.rels", relationship_id=rid, original_relationship_target=target, target_mode=mode, target_classification=_target_classification(target, mode))
             resolved=self._resolve_part_target("xl/workbook.xml", target)
             exists = resolved in names
-            _event(trace, 5, __name__, "Read and normalize worksheet relationship", rid, f"Target: {target}; resolved: {resolved}; exists: {'yes' if exists else 'no'}", "Passed" if exists else "Failed", correlation_id, failure_reason="ZIP member not found" if not exists else "", resolver_function_name=RESOLVER_FUNCTION_NAME, source_ooxml_part="xl/workbook.xml", relationship_file="xl/_rels/workbook.xml.rels", relationship_id=rid, original_relationship_target=target, target_classification=_target_classification(target, rel.attrib.get("TargetMode", "")), normalized_target=resolved, final_zip_lookup_path=resolved, zip_member_exists=exists, nearest_matching_zip_members=_nearest_members(resolved, names))
+            _event(trace, 5, __name__, "Read and normalize worksheet relationship", rid, f"Target: {target}; resolved: {resolved}; exists: {'yes' if exists else 'no'}", "Passed" if exists else "Failed", correlation_id, failure_reason="ZIP member not found" if not exists else "", resolver_function_name=RESOLVER_FUNCTION_NAME, sheet_name=sheet_name, source_ooxml_part="xl/workbook.xml", relationship_file="xl/_rels/workbook.xml.rels", relationship_id=rid, original_relationship_target=target, target_mode=mode, target_classification=_target_classification(target, mode), normalized_target=resolved, final_zip_lookup_path=resolved, zip_member_exists=exists, nearest_matching_zip_members=_nearest_members(resolved, names), archive_member_count=len(names))
             targets[rid]=resolved
         sheets=[]; missing=[]
         for sheet in book.findall(".//x:sheet", ns):
@@ -213,11 +229,11 @@ class CiosCommercialTwinAdapter:
                 _event(trace, 6, __name__, "Resolve worksheet for parsing", sheet_name, "Relationship missing", "Failed", correlation_id, sheet_name=sheet_name, relationship_id=rid, current_stage="workbook_processing", previous_completed_stage="workbook_relationship_parsing", next_intended_stage="candidate_staging", processing_stopped=True, stop_reason="worksheet relationship missing", canonical_changes_made=False, promotion_enabled=False)
                 missing.append(f"Worksheet relationship could not be resolved: sheet={sheet_name}; relationship_id={rid}; target=; resolved=; missing=")
                 continue
-            if resolved not in names:
-                _event(trace, 6, __name__, "Check workbook archive", resolved, "File not found; processing stopped before candidate staging", "Failed", correlation_id, sheet_name=sheet_name, relationship_id=rid, final_zip_lookup_path=resolved, zip_member_exists=False, nearest_matching_zip_members=_nearest_members(resolved, names), current_stage="workbook_processing", previous_completed_stage="workbook_relationship_parsing", next_intended_stage="candidate_staging", processing_stopped=True, stop_reason="workbook inspection failed", canonical_changes_made=False, promotion_enabled=False)
+            exists = resolved in names
+            _event(trace, 6, __name__, "Check workbook archive", resolved, "File found; worksheet ready for parsing" if exists else "File not found; processing stopped before candidate staging", "Passed" if exists else "Failed", correlation_id, sheet_name=sheet_name, relationship_id=rid, requested_member_path=resolved, final_zip_lookup_path=resolved, zip_member_exists=exists, nearest_matching_zip_members=_nearest_members(resolved, names), archive_member_count=len(names), current_stage="worksheet_parsing" if exists else "workbook_processing", previous_completed_stage="workbook_relationship_parsing", next_intended_stage="candidate_staging", processing_stopped=not exists, stop_reason="" if exists else "workbook inspection failed", canonical_changes_made=False, promotion_enabled=exists)
+            if not exists:
                 missing.append(f"Worksheet relationship could not be resolved: sheet={sheet_name}; relationship_id={rid}; target={self._relationship_target(rels, rid)}; resolved={resolved}; missing={resolved}")
                 continue
-            _event(trace, 6, __name__, "Check workbook archive", resolved, "File found; worksheet ready for parsing", "Passed", correlation_id, sheet_name=sheet_name, relationship_id=rid, final_zip_lookup_path=resolved, zip_member_exists=True)
             sheets.append((sheet_name, resolved))
         if missing: raise ValueError("; ".join(missing))
         return sheets
