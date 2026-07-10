@@ -42,6 +42,45 @@ class TwinWorkbookInspection:
     warnings: tuple[str, ...]
     errors: tuple[str, ...]
 
+def resolve_ooxml_relationship_target(source_part: str, target: str) -> str:
+    """Resolve an OOXML relationship target to a safe package ZIP member path.
+
+    Relationship targets are part-relative unless they are rooted with a
+    leading slash.  Some producer workbooks incorrectly emit package-rooted
+    paths without that slash (for example ``xl/worksheets/sheet1.xml``); those
+    are preserved rather than being joined to ``xl/`` again.
+    """
+
+    original = target
+    target = unquote(str(target or ""))
+    if "\\" in target:
+        raise ValueError(f"Malformed relationship target: {original}")
+    parsed = urlsplit(target)
+    if parsed.scheme or parsed.netloc:
+        raise ValueError(f"Malformed relationship target: {original}")
+    target = parsed.path
+    if not target or target.startswith("//"):
+        raise ValueError(f"Malformed relationship target: {original}")
+    if target.startswith("/"):
+        candidate = PurePosixPath(target.lstrip("/"))
+    else:
+        source_dir = PurePosixPath(source_part).parent
+        candidate = PurePosixPath(target) if target == "xl" or target.startswith("xl/") else source_dir / target
+    parts: list[str] = []
+    for part in candidate.parts:
+        if part in ("", "."):
+            continue
+        if part == "..":
+            if not parts:
+                raise ValueError(f"Relationship target escapes package: {original}")
+            parts.pop()
+            continue
+        parts.append(part)
+    if not parts or parts[0] == "..":
+        raise ValueError(f"Malformed relationship target: {original}")
+    return "/".join(parts)
+
+
 class CiosCommercialTwinAdapter:
     """Read a final Twin Spine workbook from an accepted package manifest."""
 
@@ -130,31 +169,7 @@ class CiosCommercialTwinAdapter:
         return ""
 
     def _resolve_part_target(self, source_part: str, target: str) -> str:
-        original=target
-        target=unquote(str(target or ""))
-        if "\\" in target:
-            raise ValueError(f"Malformed relationship target: {original}")
-        parsed=urlsplit(target)
-        if parsed.scheme or parsed.netloc:
-            raise ValueError(f"Malformed relationship target: {original}")
-        target=parsed.path
-        if not target or target.startswith("//"):
-            raise ValueError(f"Malformed relationship target: {original}")
-        if target.startswith("/"):
-            candidate=PurePosixPath(target.lstrip("/"))
-        else:
-            source_dir=PurePosixPath(source_part).parent
-            # Some workbooks incorrectly store package-root-relative targets without a leading slash.
-            candidate=PurePosixPath(target) if target == "xl" or target.startswith("xl/") else source_dir / target
-        parts=[]
-        for part in candidate.parts:
-            if part in ("", "."): continue
-            if part == "..":
-                if not parts: raise ValueError(f"Relationship target escapes package: {original}")
-                parts.pop(); continue
-            parts.append(part)
-        if not parts or parts[0] == "..": raise ValueError(f"Malformed relationship target: {original}")
-        return "/".join(parts)
+        return resolve_ooxml_relationship_target(source_part, target)
 
     def _rows(self, wb, sheet_file, shared):
         ns={"x":"http://schemas.openxmlformats.org/spreadsheetml/2006/main"}; root=ET.fromstring(wb.read(sheet_file)); rows=[]
