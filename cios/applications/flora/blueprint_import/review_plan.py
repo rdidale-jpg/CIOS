@@ -1,7 +1,7 @@
 """Scalable persisted review-plan preparation for Blueprint imports."""
 from __future__ import annotations
 
-from collections import Counter
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 import json, os, threading, time, traceback
 from typing import Any
@@ -12,6 +12,7 @@ from .archive import sha256_bytes
 from .candidates import CandidateStagingRepository
 from .planning import DryRunPlanRepository, DryRunPlanningService
 from .registry import BlueprintPackageRegistry
+from .cios_twin_adapter import MAPPING_VERSION
 
 STAGES = [
     "Loading staged candidates", "Classifying records", "Detecting duplicates", "Resolving references",
@@ -91,7 +92,7 @@ class BlueprintReviewPlanCoordinator:
             job.update(stage=STAGES[5], records_processed=len(effects)); self._save_job(job)
             q = Counter(_finding_reason(c) for c in candidates.values() if c.get("validation_status") == "quarantined")
             rejected = [c for c in candidates.values() if c.get("validation_status") == "rejected"]
-            summary = {**job, "status":"Ready", "stage":"Complete", "completed_at":time.time(), "plan_id":plan.plan_id, "plan_persisted":True, "proposed":{"Creates":totals["create"],"Updates":totals["update"],"Unchanged":totals["unchanged"]+totals["mapped"],"Conflicts":totals["conflict"],"Unresolved references":totals["unresolved"],"Projection-only":totals["projection"]}, "candidate_summary": _candidate_counts(candidates.values()), "quarantine_reasons": dict(q), "rejected_count": len(rejected), "deployment_commit_sha": deployment_metadata().get("commit_sha") or "Unavailable"}
+            summary = {**job, "status":"Ready", "stage":"Complete", "completed_at":time.time(), "plan_id":plan.plan_id, "plan_persisted":True, "proposed":{"Creates":totals["create"],"Updates":totals["update"],"Unchanged":totals["unchanged"]+totals["mapped"],"Conflicts":totals["conflict"],"Unresolved references":totals["unresolved"],"Projection-only":totals["projection"]}, "mapping_version": MAPPING_VERSION, "candidate_summary": _candidate_counts(candidates.values()), "class_summary": _class_counts(candidates.values()), "sheet_mapping_summary": _sheet_counts(candidates.values()), "examples_by_class": _examples_by_class(candidates.values()), "quarantine_reasons": dict(q), "rejected_count": len(rejected), "deployment_commit_sha": deployment_metadata().get("commit_sha") or "Unavailable"}
             atomic_write_json(self.detail_path(job["import_run_id"]), {"effects": effects, "candidates": list(candidates.values())})
             self._save_job(summary)
             atomic_write_json(self.summary_path(job["import_run_id"]), summary)
@@ -106,6 +107,23 @@ class BlueprintReviewPlanCoordinator:
 def _candidate_counts(candidates):
     c = Counter(x.get("validation_status") for x in candidates)
     return {"Accepted": c["accepted"], "Quarantined": c["quarantined"], "Rejected": c["rejected"], "Unsupported": 0}
+
+def _class_counts(candidates):
+    by=defaultdict(Counter)
+    for c in candidates: by[c.get("validation_status")][c.get("candidate_object_class")] += 1
+    return {str(k): dict(v) for k,v in by.items()}
+
+def _sheet_counts(candidates):
+    by=defaultdict(Counter)
+    for c in candidates: by[c.get("source_sheet")][c.get("candidate_object_class")] += 1
+    return {str(k): dict(v) for k,v in by.items()}
+
+def _examples_by_class(candidates):
+    out={}
+    for c in candidates:
+        rc=str(c.get("candidate_object_class"))
+        out.setdefault(rc, {"external_id": c.get("original_source_id"), "sheet": c.get("source_sheet"), "status": c.get("validation_status")})
+    return out
 
 def _finding_reason(candidate):
     findings = candidate.get("validation_findings") or []

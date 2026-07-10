@@ -17,7 +17,7 @@ from .ledger import BlueprintImportLedger, utc_now
 from .manifest import DUPLICATE_MANIFEST_MESSAGE, INVALID_SCHEMA_MESSAGE, ROOT_MANIFEST, read_root_manifest
 from .models import BlueprintPackageRecord, PackageReceiptError
 from .registry import BlueprintPackageRegistry
-from .cios_twin_adapter import CiosCommercialTwinAdapter
+from .cios_twin_adapter import CiosCommercialTwinAdapter, MAPPING_VERSION
 
 class BlueprintValidationError(PackageReceiptError):
     pass
@@ -48,8 +48,8 @@ class BlueprintPackageValidator:
             self.ledger.append("package_validation_failed", {"package_ref": package_ref, "actor": actor, "error": "checksum mismatch"})
             raise BlueprintValidationError("Immutable archive checksum does not match registry record")
         existing = self.staging.load_summary(package.import_run_id)
-        if existing and existing.get("execution_trace"):
-            return ImportRunDryRunResult(**{k: tuple(v) if isinstance(v, list) and k in {"files_inspected","unsupported_classes","unresolved_references","warnings","errors","execution_trace"} else v for k,v in existing.items()})
+        if existing and existing.get("execution_trace") and existing.get("mapping_version") == MAPPING_VERSION:
+            return ImportRunDryRunResult(**{k: tuple(v) if isinstance(v, list) and k in {"files_inspected","unsupported_classes","unresolved_references","warnings","errors","execution_trace"} else v for k,v in existing.items() if k != "mapping_version"})
         candidates, warnings, errors, files, unsupported, unresolved, trace = self._inspect(package, content)
         accepted = sum(1 for c in candidates if c.validation_status == "accepted")
         quarantined = sum(1 for c in candidates if c.validation_status == "quarantined")
@@ -60,7 +60,12 @@ class BlueprintPackageValidator:
             sum(1 for c in candidates if c.candidate_object_class in SUPPORTED_RECORD_CLASSES), len(candidates), accepted, quarantined, rejected,
             tuple(sorted(unsupported)), tuple(sorted(unresolved)), tuple(warnings), tuple(errors), 0, tuple(trace))
         self.staging.save_result(result)
-        self.ledger.append("package_validation_staged", result.to_dict() | {"actor": actor})
+        # Persist mapping_version alongside the dataclass result without changing older constructor callers.
+        summary = self.staging.load_summary(package.import_run_id) or result.to_dict()
+        summary["mapping_version"] = MAPPING_VERSION
+        from cios.applications.flora.storage import atomic_write_json
+        atomic_write_json(self.staging.root_for(package.import_run_id) / "summary.json", summary)
+        self.ledger.append("package_validation_staged", summary | {"actor": actor})
         return result
 
     def staging_summary(self, import_run_id: str) -> dict[str, Any] | None:
