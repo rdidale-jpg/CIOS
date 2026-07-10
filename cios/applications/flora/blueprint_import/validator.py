@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import shutil
+from dataclasses import replace
 import zipfile
 from io import BytesIO
 from pathlib import PurePosixPath
@@ -19,6 +20,7 @@ from .manifest import DUPLICATE_MANIFEST_MESSAGE, INVALID_SCHEMA_MESSAGE, ROOT_M
 from .models import BlueprintPackageRecord, PackageReceiptError
 from .registry import BlueprintPackageRegistry
 from .cios_twin_adapter import CiosCommercialTwinAdapter, MAPPING_VERSION
+from .atomicity import validate_atomic_statement, normalise_statement
 
 class BlueprintValidationError(PackageReceiptError):
     pass
@@ -52,6 +54,7 @@ class BlueprintPackageValidator:
         if existing and existing.get("execution_trace") and existing.get("mapping_version") == MAPPING_VERSION:
             return ImportRunDryRunResult(**{k: tuple(v) if isinstance(v, list) and k in {"files_inspected","unsupported_classes","unresolved_references","warnings","errors","execution_trace"} else v for k,v in existing.items() if k != "mapping_version"})
         candidates, warnings, errors, files, unsupported, unresolved, trace = self._inspect(package, content)
+        candidates = [self._apply_constructor_validation(c) for c in candidates]
         accepted = sum(1 for c in candidates if c.validation_status == "accepted")
         quarantined = sum(1 for c in candidates if c.validation_status == "quarantined")
         rejected = sum(1 for c in candidates if c.validation_status == "rejected")
@@ -69,6 +72,33 @@ class BlueprintPackageValidator:
         atomic_write_json(self.staging.root_for(package.import_run_id) / "summary.json", summary)
         self.ledger.append("package_validation_staged", summary | {"actor": actor})
         return result
+
+    def _apply_constructor_validation(self, candidate: CandidateImportRecord) -> CandidateImportRecord:
+        if candidate.validation_status != "accepted" or candidate.candidate_object_class != "observation":
+            return candidate
+        payload = candidate.payload or {}
+        statement = payload.get("atomic_statement") or payload.get("statement") or payload.get("claim") or payload.get("summary")
+        if not statement:
+            return candidate
+        finding = validate_atomic_statement(statement)
+        if finding.atomic:
+            return candidate
+        preserved_payload = dict(payload)
+        preserved_payload.setdefault("original_statement", normalise_statement(statement))
+        preserved_payload["constructor_validation_failure"] = {
+            "code": "quarantined_non_atomic_observation",
+            "reason": finding.reason,
+            "original_statement": normalise_statement(statement),
+            "affected_entity": payload.get("entity_id") or payload.get("entity") or payload.get("subject") or "",
+            "affected_relationship": payload.get("relationship_id") or payload.get("relationship") or "",
+        }
+        findings = tuple(candidate.validation_findings) + (ValidationFinding(
+            "error",
+            "quarantined_non_atomic_observation",
+            f"quarantined_non_atomic_observation: {finding.reason}",
+            f"{candidate.source_file}#{candidate.source_location.get('row') or candidate.source_location.get('line') or ''}",
+        ),)
+        return replace(candidate, payload=preserved_payload, validation_status="quarantined", validation_findings=findings, canonical_mutation_count=0)
 
     def staging_summary(self, import_run_id: str) -> dict[str, Any] | None:
         summary = self.staging.load_summary(import_run_id)

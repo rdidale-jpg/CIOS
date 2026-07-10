@@ -62,6 +62,10 @@ class BlueprintReviewPlanCoordinator:
         path = self.summary_path(import_run_id)
         if not path.exists(): return None
         data = json.loads(path.read_text())
+        if data.get("mapping_version") != MAPPING_VERSION:
+            data.update(status="Stale", stale=True, stale_reason="Review was generated with an older mapping or validation version", current_mapping_version=MAPPING_VERSION)
+            atomic_write_json(path, data)
+            return None
         return data if data.get("staging_fingerprint") == fp and data.get("status") == "Ready" else None
     def ensure_job(self, import_run_id: str, actor: str, headers: Any, ensure_defaults) -> dict[str, Any]:
         candidates = self.staging.list_candidates(import_run_id); fp = self.fingerprint(import_run_id, candidates)
@@ -91,12 +95,13 @@ class BlueprintReviewPlanCoordinator:
             candidates = {c["candidate_record_id"]: c for c in self.staging.list_candidates(job["import_run_id"])}
             job.update(stage=STAGES[5], records_processed=len(effects)); self._save_job(job)
             q = Counter(_finding_reason(c) for c in candidates.values() if c.get("validation_status") == "quarantined")
+            constructor_failures = sum(1 for c in candidates.values() if any((f.get("code") == "quarantined_non_atomic_observation") for f in (c.get("validation_findings") or [])))
             rejected = [c for c in candidates.values() if c.get("validation_status") == "rejected"]
             proposed = {"Creates":totals["create"],"Updates":totals["update"],"Unchanged":totals["unchanged"]+totals["mapped"],"Conflicts":totals["conflict"],"Unresolved references":totals["unresolved"],"Projection-only":totals["projection"], "Ignored":totals["ignored"], "Accepted but non-persistable": 0}
             accepted_canonical = sum(1 for c in candidates.values() if c.get("validation_status") == "accepted") - proposed["Accepted but non-persistable"]
             canonical_actions = proposed["Creates"] + proposed["Updates"] + proposed["Unchanged"]
             reconciles = accepted_canonical == canonical_actions
-            summary = {**job, "status":"Ready" if reconciles else "Not ready", "stage":"Complete", "completed_at":time.time(), "plan_id":plan.plan_id, "plan_persisted":True, "proposed": proposed, "accepted_canonical": accepted_canonical, "reconciliation": {"accepted_canonical": accepted_canonical, "creates": proposed["Creates"], "updates": proposed["Updates"], "unchanged": proposed["Unchanged"], "accepted_but_non_persistable": 0, "passes": reconciles, "mismatch": accepted_canonical - canonical_actions}, "mapping_version": MAPPING_VERSION, "candidate_summary": _candidate_counts(candidates.values(), accepted_canonical), "class_summary": _class_counts(candidates.values()), "sheet_mapping_summary": _sheet_counts(candidates.values()), "examples_by_class": _examples_by_class(candidates.values()), "quarantine_reasons": dict(q), "ignored_reasons": _ignored_reasons(candidates.values()), "rejected_reasons": _rejected_reasons(rejected), "mapping_quality": _mapping_quality(candidates.values()), "rejected_count": len(rejected), "deployment_commit_sha": deployment_metadata().get("commit_sha") or "Unavailable"}
+            summary = {**job, "status":"Ready" if reconciles else "Not ready", "stage":"Complete", "completed_at":time.time(), "plan_id":plan.plan_id, "plan_persisted":True, "proposed": proposed, "accepted_canonical": accepted_canonical, "constructor_validation_failures": constructor_failures, "non_atomic_observations": constructor_failures, "reconciliation": {"accepted_canonical": accepted_canonical, "creates": proposed["Creates"], "updates": proposed["Updates"], "unchanged": proposed["Unchanged"], "accepted_but_non_persistable": 0, "passes": reconciles, "mismatch": accepted_canonical - canonical_actions}, "mapping_version": MAPPING_VERSION, "candidate_summary": _candidate_counts(candidates.values(), accepted_canonical), "class_summary": _class_counts(candidates.values()), "sheet_mapping_summary": _sheet_counts(candidates.values()), "examples_by_class": _examples_by_class(candidates.values()), "quarantine_reasons": dict(q), "ignored_reasons": _ignored_reasons(candidates.values()), "rejected_reasons": _rejected_reasons(rejected), "mapping_quality": _mapping_quality(candidates.values()), "rejected_count": len(rejected), "deployment_commit_sha": deployment_metadata().get("commit_sha") or "Unavailable"}
             atomic_write_json(self.detail_path(job["import_run_id"]), {"effects": effects, "candidates": list(candidates.values())})
             self._save_job(summary)
             atomic_write_json(self.summary_path(job["import_run_id"]), summary)

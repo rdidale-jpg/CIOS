@@ -23,11 +23,11 @@ def test_restage_action_visible_to_owner_and_hidden_for_unauthorised(monkeypatch
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     rec=_stage(tmp_path)
     html,status=validation_result_page(rec.import_run_id, OWNER)
-    assert status == 200 and "Available actions" in html and "Restage with current mapping" in html
+    assert status == 200 and "Available actions" in html and "Regenerate review with current validation" in html
     denied,status=validation_result_page(rec.import_run_id, READ_ONLY)
-    assert status == 403 or "Restage with current mapping" not in denied
+    assert status == 403 or "Regenerate review with current validation" not in denied
     confirm,status=restage_confirm_page(rec.import_run_id, OWNER)
-    assert status == 200 and "Current mapping version" in confirm and "Restage package" in confirm
+    assert status == 200 and "Current mapping version" in confirm and "Regenerate review with current validation" in confirm
     assert "blueprint_zip" not in confirm
 
 
@@ -79,3 +79,29 @@ def test_progress_page_renders_large_package(monkeypatch,tmp_path):
     BlueprintPackageValidator().validate_and_stage(rec.package_ref,"alice",OWNER)
     html,status=restage_package(rec.import_run_id,{"confirm_restage":["yes"]},OWNER)
     assert status == 200 and "candidates staged" in html and "Accepted" in html
+
+
+def test_regenerate_current_validation_quarantines_non_atomic_and_blocks_stale_approval(monkeypatch,tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    records=[
+        {"external_id":"SRC-1","record_class":"source","truth_class":"package_metadata","payload":{"name":"Source"},"source_location":{"sheet":"Sources","row":2}},
+        {"external_id":"OBS-NA","record_class":"observation","truth_class":"evidence_backed","payload":{"statement":"MOD has legacy risk; MOD has budget pressure","proposed_effect":"create","evidence_id":"E-1","confidence":0.8,"freshness":"current","date":"2026-07-10"},"source_location":{"sheet":"Observations","row":7}},
+    ]
+    rec=BlueprintPackageRegistry().receive(__import__('tests.test_flora_blueprint_import_validation', fromlist=['pkg']).pkg(records=records), "synthetic.zip", "alice")
+    BlueprintPackageValidator().validate_and_stage(rec.package_ref,"alice",OWNER)
+    summary=BlueprintPackageValidator().staging_summary(rec.import_run_id)
+    non_atomic=[c for c in summary["candidates"] if c["original_source_id"] == "OBS-NA"][0]
+    assert non_atomic["validation_status"] == "quarantined"
+    assert any(f["code"] == "quarantined_non_atomic_observation" for f in non_atomic["validation_findings"])
+    assert non_atomic["payload"]["original_statement"] == "MOD has legacy risk; MOD has budget pressure"
+    html,status=validation_result_page(rec.import_run_id, OWNER)
+    assert status == 200 and "Regenerate review with current validation" in html and "blueprint_zip" not in html
+    review,status=review_page(rec.import_run_id, OWNER)
+    assert status == 200 and "Non-atomic observations" in review and "Quarantined" in review
+    old_plans=DryRunPlanRepository().list(rec.import_run_id)
+    regen,status=restage_package(rec.import_run_id,{"confirm_restage":["yes"]},OWNER)
+    assert status == 200 and "Canonical changes made" in regen and "No" in regen
+    new_summary=BlueprintPackageValidator().staging_summary(rec.import_run_id)
+    assert new_summary["staging_version"] != summary.get("staging_version", "staging-v1")
+    assert new_summary["records_quarantined"] == summary["records_quarantined"]
+    assert len(DryRunPlanRepository().list(rec.import_run_id)) >= len(old_plans)

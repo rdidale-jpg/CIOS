@@ -143,7 +143,7 @@ def restage_progress_page(import_run_id: str, headers: Any, job: dict[str, Any] 
     done = set(RESTAGE_STAGES[:RESTAGE_STAGES.index(job.get('stage','package located'))+1]) if job.get('stage') in RESTAGE_STAGES else set()
     items = ''.join(f"<li>{'✓' if s in done else '…'} {escape(s)}</li>" for s in RESTAGE_STAGES)
     cs = job.get('candidate_summary') or {}
-    body = _package_header(ctx["package"]) + f"<section class='card'><h2>Restage with current mapping</h2><p>Status: <strong>{escape(str(job.get('status','Not started')))}</strong></p><ul>{items}</ul><table><tr><th>Staging version</th><td><code>{escape(str(job.get('staging_version','')))}</code></td></tr><tr><th>Mapping version</th><td><code>{escape(str(job.get('mapping_version', MAPPING_VERSION)))}</code></td></tr><tr><th>Canonical changes made</th><td>No</td></tr><tr><th>Accepted</th><td>{int(cs.get('Accepted',0))}</td></tr><tr><th>Quarantined</th><td>{int(cs.get('Quarantined',0))}</td></tr><tr><th>Rejected</th><td>{int(cs.get('Rejected',0))}</td></tr><tr><th>Projection-only</th><td>{int(cs.get('Projection-only',0))}</td></tr></table><p><a href='/blueprint-import/{escape(import_run_id)}/review'>View latest review</a> · <a href='/blueprint-import/{escape(import_run_id)}/staging-history'>View prior staging history</a></p></section>"
+    body = _package_header(ctx["package"]) + f"<section class='card'><h2>Regenerate review with current validation</h2><p>Status: <strong>{escape(str(job.get('status','Not started')))}</strong></p><ul>{items}</ul><table><tr><th>Staging version</th><td><code>{escape(str(job.get('staging_version','')))}</code></td></tr><tr><th>Mapping version</th><td><code>{escape(str(job.get('mapping_version', MAPPING_VERSION)))}</code></td></tr><tr><th>Canonical changes made</th><td>No</td></tr><tr><th>Accepted</th><td>{int(cs.get('Accepted',0))}</td></tr><tr><th>Quarantined</th><td>{int(cs.get('Quarantined',0))}</td></tr><tr><th>Rejected</th><td>{int(cs.get('Rejected',0))}</td></tr><tr><th>Projection-only</th><td>{int(cs.get('Projection-only',0))}</td></tr></table><p><a href='/blueprint-import/{escape(import_run_id)}/review'>View latest review</a> · <a href='/blueprint-import/{escape(import_run_id)}/staging-history'>View prior staging history</a></p></section>"
     html = _page("Blueprint restage progress", body); return html if direct_render else (html, 200)
 
 def review_page(import_run_id: str, headers: Any, message: str = "", query: dict[str, list[str]] | None = None) -> tuple[str, int]:
@@ -164,6 +164,9 @@ def review_page(import_run_id: str, headers: Any, message: str = "", query: dict
         LOGGER.info("Blueprint review preparation trace", extra={"correlation_id": correlation_id, "review_job_id": job.get("job_id"), "import_run_id": import_run_id, "stage": job.get("stage"), "records_processed": job.get("records_processed", 0)})
         if job.get("status") == "Failed":
             return _review_failure_page(ctx, job, correlation_id), 200
+        if job.get("status") == "Stale":
+            body = _package_header(ctx["package"]) + _stale_review_section(ctx["package"], job)
+            return _page("Review Blueprint proposed changes", body), 200
         if job.get("status") == "Not ready":
             return _review_ready_page(ctx, job, coord, query, message, correlation_id), 200
         if job.get("status") != "Ready":
@@ -181,6 +184,9 @@ def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers:
         return _safe_failure("You are not authorised to approve and execute Blueprint promotion.", "approval", False, True, "Ask for Blueprint promotion permission."), 403
     if (ctx.get("summary") or {}).get("errors"):
         return _safe_failure("Validation failed; approval is disabled until fatal inspection errors are resolved.", "approval", False, True, "Resolve validation errors, then stage and review again."), 400
+    review_summary = BlueprintReviewPlanCoordinator().latest_job(import_run_id) or {}
+    if review_summary.get("stale") or review_summary.get("status") in {"Stale", "Not ready", "Failed"} or review_summary.get("mapping_version") != MAPPING_VERSION:
+        return _safe_failure("This review plan is stale or not ready; approval is disabled. Regenerate review with current validation before approval.", "approval", False, True, "Use Regenerate review with current validation."), 400
     if form.get("confirm_plan") != ["yes"] or form.get("confirm_mutations") != ["yes"] or not (form.get("rationale") or [""])[0].strip():
         return review_page(import_run_id, headers, "Approval requires review confirmation, mutation-count confirmation and a rationale.")
     try:
@@ -236,6 +242,11 @@ def _ensure_reviews_and_mappings(ctx, headers):
             mapper.record_mapping(c, "propose_create", reviewer, headers, c.get("candidate_object_class", "").title())
 
 
+def _stale_review_section(package, job) -> str:
+    run = escape(package.import_run_id)
+    why = escape(str(job.get("stale_reason") or "Constructor validation rules, canonical constructors, mapping version or promotion contract changed since this review was generated."))
+    return f"""<section class='card warning'><h2>Review plan is stale</h2><p>{why}</p><p><strong>Approval blocked:</strong> stale review plans cannot be retried.</p><form method='post' action='/blueprint-import/{run}/restage'><input type='hidden' name='confirm_restage' value='yes'><p><button type='submit'>Regenerate review with current validation</button></p></form><p><a href='/blueprint-import/{run}'>Return to Blueprint</a></p></section>"""
+
 def _review_progress_page(ctx, job, correlation_id: str, message: str = "") -> str:
     counts = job.get("candidate_summary") or _review_candidate_counts(ctx.get("candidates", []))
     proposed = job.get("proposed") or {}
@@ -276,6 +287,8 @@ def _review_failure_page(ctx, job, correlation_id: str) -> str:
     <tr><th>Canonical changes made</th><td>No</td></tr>
     <tr><th>Next action</th><td>Retry review after support inspects the diagnostic reference.</td></tr>
     </table></section>"""
+    if ctx and ctx.get("package"):
+        body += _stale_review_section(ctx["package"], job)
     body += _review_trace_section(ctx or {}, job, correlation_id)
     return _page("Blueprint review could not be prepared", body)
 
@@ -307,6 +320,8 @@ def _review_summary_section(ctx, job, counts, proposed) -> str:
     <tr><th>Conflicts</th><td>{val('Conflicts')}</td></tr>
     <tr><th>Unresolved references</th><td>{val('Unresolved references')}</td></tr>
     <tr><th>Projection-only</th><td>{val('Projection-only')} analytical projections retained outside canonical memory</td></tr>
+    <tr><th>Constructor validation failures</th><td>{int(job.get('constructor_validation_failures', 0))}</td></tr>
+    <tr><th>Non-atomic observations</th><td>{int(job.get('non_atomic_observations', 0))}</td></tr>
     <tr><th>Canonical changes made</th><td>No</td></tr>
     <tr><th>Next action</th><td>Review exceptions and quarantine reasons</td></tr>
     </table></section>"""
@@ -400,12 +415,12 @@ def _available_actions_section(package, summary, counts, headers) -> str:
     if not can_restage_blueprint_package(headers, package):
         return ""
     run = escape(package.import_run_id)
-    return f"<section class='card'><h2>Available actions</h2><ul><li><a href='/blueprint-import/{run}/restage'>Restage with current mapping</a></li><li><a href='/blueprint-import/{run}/review'>View current proposed changes</a></li><li><a href='/blueprint-import/{run}/staging-history'>View prior staging history</a></li></ul></section>"
+    return f"<section class='card'><h2>Available actions</h2><ul><li><a href='/blueprint-import/{run}/restage'>Regenerate review with current validation</a></li><li><a href='/blueprint-import/{run}/review'>View current proposed changes</a></li><li><a href='/blueprint-import/{run}/staging-history'>View prior staging history</a></li></ul></section>"
 
 def _restage_intro(package, summary, counts) -> str:
     run=escape(package.import_run_id)
     projection = sum(1 for c in (summary.get('candidates') or []) if c.get('candidate_object_class') in __import__('cios.applications.flora.blueprint_import.candidates', fromlist=['PROJECTION_ONLY_CLASSES']).PROJECTION_ONLY_CLASSES)
-    return f"""<section class='card'><h2>Restage with current mapping</h2><p><strong>Current mapping version:</strong> <code>{escape(MAPPING_VERSION)}</code></p><h3>Current staged result</h3><table><tr><th>Accepted</th><td>{counts['accepted']}</td></tr><tr><th>Quarantined</th><td>{counts['quarantined']}</td></tr><tr><th>Rejected</th><td>{counts['rejected']}</td></tr><tr><th>Projection-only</th><td>{projection}</td></tr></table><h3>Restaging will:</h3><ul><li>reuse the preserved package;</li><li>rerun workbook mapping;</li><li>create a new staging version;</li><li>invalidate the previous review plan;</li><li>make no canonical changes.</li></ul><form method='post' action='/blueprint-import/{run}/restage'><label><input type='checkbox' name='confirm_restage' value='yes' required> I understand this will replace the active staging result but preserve prior history.</label><p><button type='submit'>Restage package</button></p></form></section>"""
+    return f"""<section class='card'><h2>Regenerate review with current validation</h2><p><strong>Current mapping version:</strong> <code>{escape(MAPPING_VERSION)}</code></p><h3>Current staged result</h3><table><tr><th>Accepted</th><td>{counts['accepted']}</td></tr><tr><th>Quarantined</th><td>{counts['quarantined']}</td></tr><tr><th>Rejected</th><td>{counts['rejected']}</td></tr><tr><th>Projection-only</th><td>{projection}</td></tr></table><h3>Regeneration will:</h3><ul><li>reuse the preserved package;</li><li>rerun workbook mapping and constructor validation;</li><li>apply current atomicity rules and quarantine non-promotable observations;</li><li>create a new staging version;</li><li>invalidate the previous review plan;</li><li>generate a new review plan;</li><li>make no canonical changes.</li></ul><form method='post' action='/blueprint-import/{run}/restage'><label><input type='checkbox' name='confirm_restage' value='yes' required> I understand this will replace the active staging result but preserve prior history.</label><p><button type='submit'>Regenerate review with current validation</button></p></form></section>"""
 
 def _blueprint_deployment_metadata(summary: dict[str, Any]) -> dict[str, str]:
     meta = deployment_metadata()
@@ -578,16 +593,29 @@ def _stage_statuses(failed_stage: str, decision=None) -> dict[str, str]:
     return statuses
 
 
+def _failure_summary(message: str) -> str:
+    import re
+    parts = [p.strip() for p in re.split(r"[;\n]+", str(message or "")) if p.strip()]
+    if len(parts) <= 3 and len(str(message)) <= 500:
+        return f"<p>{escape(str(message))}</p>"
+    grouped = Counter(p.split(":", 1)[0].strip() for p in parts)
+    examples = "".join(f"<li>{escape(p)}</li>" for p in parts[:5])
+    groups = "".join(f"<tr><td>{escape(k)}</td><td>{v}</td></tr>" for k, v in grouped.most_common())
+    details = escape(str(message), quote=True)
+    return f"<p>{len(parts)} validation failure details were reported. First affected items:</p><ul>{examples}</ul><h3>Grouped failure reasons</h3><table><tbody>{groups}</tbody></table><details><summary>Expandable failure details</summary><pre>{details}</pre></details><p><a download='blueprint-failure-details.txt' href='data:text/plain,{details}'>Download details</a></p>"
+
 def _safe_failure(message, stage, changed, retry, next_step, decision=None, diagnostic_ref: str = "", audit_warning: str = ""):
     diagnostic_ref = diagnostic_ref or f"bpi-diag-{uuid4().hex[:12]}"
-    account = decision.user_id if decision and decision.user_id else "Not signed in"
-    workspace = decision.active_workspace if decision and decision.active_workspace else "No active workspace"
-    role = decision.resolved_role if decision and decision.resolved_role else "No effective Blueprint role"
+    unavailable = "Authorisation context unavailable after failure"
+    account = decision.user_id if decision and decision.user_id else unavailable
+    workspace = decision.active_workspace if decision and decision.active_workspace else ("No active workspace" if decision else unavailable)
+    role = decision.resolved_role if decision and decision.resolved_role else ("No effective Blueprint role" if decision else unavailable)
     owner = "yes" if decision and decision.owner_recognised else "no"
     capability = decision.required_permission if decision else "package.upload"
     rows = "".join(f"<tr><th>{escape(name)}</th><td>{escape(status)}</td></tr>" for name, status in _stage_statuses(stage, decision).items())
     warning_panel = f"<section class='card warning'><h2>Diagnostics warning</h2><p>{escape(audit_warning)}</p><p>Diagnostic reference: <code>{escape(diagnostic_ref)}</code></p><p>No canonical changes occurred.</p></section>" if audit_warning else ""
-    body=f"<section class='hero'><h1>Blueprint import needs attention</h1></section>{warning_panel}<section class='card'><h2>What happened</h2><p>{escape(message)}</p><ul><li>Stage failed: {escape(stage)}</li><li>Canonical changes occurred: {'yes' if changed else 'no'}</li><li>Package available for retry: {'yes' if retry else 'no'}</li><li>Diagnostic reference: <code>{escape(diagnostic_ref)}</code></li><li>Next step: {escape(next_step)}</li></ul></section><section class='card'><h2>Authorisation context</h2><table><tr><th>Signed-in account</th><td>{escape(account)}</td></tr><tr><th>Active workspace</th><td>{escape(workspace)}</td></tr><tr><th>Effective role</th><td>{escape(role)}</td></tr><tr><th>Owner recognised</th><td>{owner}</td></tr><tr><th>Required Blueprint capability</th><td><code>{escape(capability)}</code></td></tr></table></section><section class='card'><h2>Live import stages</h2><table>{rows}</table></section>"
+    failure_summary = _failure_summary(message)
+    body=f"<section class='hero'><h1>Blueprint import needs attention</h1></section>{warning_panel}<section class='card'><h2>What happened</h2>{failure_summary}<ul><li>Stage failed: {escape(stage)}</li><li>Canonical changes occurred: {'yes' if changed else 'no'}</li><li>Package available for retry: {'yes' if retry else 'no'}</li><li>Diagnostic reference: <code>{escape(diagnostic_ref)}</code></li><li>Next step: {escape(next_step)}</li></ul><p><a href='/blueprint-import'>Return to Blueprint</a></p></section><section class='card'><h2>Authorisation context</h2><table><tr><th>Signed-in account</th><td>{escape(account)}</td></tr><tr><th>Active workspace</th><td>{escape(workspace)}</td></tr><tr><th>Effective role</th><td>{escape(role)}</td></tr><tr><th>Owner recognised</th><td>{owner}</td></tr><tr><th>Required Blueprint capability</th><td><code>{escape(capability)}</code></td></tr></table></section><section class='card'><h2>Live import stages</h2><table>{rows}</table></section>"
     return _page("Blueprint import failure", body)
 def _canonical_marker():
     from cios.applications.flora.storage import data_path
