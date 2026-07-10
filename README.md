@@ -1,102 +1,32 @@
-# CIOS – Commercial Intelligence Operating System
+# CIOS Progressive Assurance Architecture Pack v1.0
 
-> AI-native Commercial Intelligence Platform.
+**Date:** 10 July 2026  
+**Owner:** Rob / CIOS  
+**Decision:** Implement ADR-009 and return to Flora testing.
 
-CIOS is an enterprise platform designed to improve commercial decision-making through structured knowledge, explainable reasoning and AI-assisted intelligence.
+## Canonical repository documents
 
-Rather than acting as a single application, CIOS is a reusable platform that supports multiple commercial use cases, including opportunity qualification, capture management, bid strategy, competitive intelligence, executive decision support and organisational learning.
+- `architecture/decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md`
+- `architecture/decisions/README.md`
+- `CIOS-AI.md`
+- `architecture/founding-papers/FP-003-Flora-Intelligence-Architecture.md`
+- `architecture/reference-architecture/CIOS-Reference-Architecture-v1.0.md`
+- `architecture/handbook/CIOS-Chief-Architect-Handbook.md`
+- `architecture/reference-architecture/Glossary.md`
+- `architecture/reference-architecture/Document-Map.md`
+- `docs/decisions/MOD-CDT-05-Owner-Acceptance-Decision-v1.3.md`
+- `docs/testing/FLORA-TP-001-Progressive-Assurance-Test-Plan-v0.1.md`
 
+## Deliberately unchanged
 
-## Architecture Repository
+- EI-001 Enterprise Model Specification
+- EI-002 Enterprise Knowledge Graph
+- EI-003 Enterprise Behaviour Model
+- EI-012 Enterprise Observation Model
+- FP-009 Hypothesis Validation Standard
 
-CIOS architecture, founding papers, design documents, research notes, Architecture Decision Records and roadmaps live in [`architecture/`](architecture/README.md). Before major implementation work, review the relevant founding papers, design documents and ADRs. If a requested change conflicts with a founding paper or ADR, explain the conflict before implementation.
+Their core object, lineage, uncertainty and hypothesis requirements remain authoritative.
 
-## Core Platform Components
+## Review copies
 
-- Commercial Ontology
-- Commercial Knowledge Graph
-- Commercial Reasoning Language (CRL)
-- Commercial Decision Engine (CDE)
-- Agent Society
-- Learning Engine
-
-## Current Development Phase
-
-**Phase:** Genesis  
-**Current Sprint:** Sprint 1 – MVP Foundation  
-**Current Objective:** Build `CIOS-MVP-001 – Commercial Opportunity Intelligence Assistant`.
-
-## Repository Structure
-
-```text
-CIOS/
-├── docs/
-├── ontology/
-├── graph/
-├── reasoning/
-├── decision_engine/
-├── agents/
-├── scoring/
-├── memory/
-├── app/
-├── tests/
-└── data/
-```
-
-## MVP-001
-
-The first application will:
-
-- Assess commercial opportunities
-- Calculate Transformation Pressure
-- Identify capability gaps
-- Recommend win themes
-- Generate evidence-backed recommendations
-- Produce an explainable reasoning trail
-
-## Core Principles
-
-1. Evidence before opinion.
-2. Explainability by design.
-3. Humans remain accountable for decisions.
-4. Knowledge is a strategic organisational asset.
-5. Learning is continuous.
-6. Every recommendation is traceable.
-
-## Technology Direction
-
-Initial implementation:
-
-- Python
-- Structured JSON data
-- Local knowledge store
-- Modular architecture
-- GitHub source control
-- ChatGPT + Codex assisted development
-
-Future evolution:
-
-- Graph database
-- API layer
-- Web interface
-- Multi-agent orchestration
-- Enterprise integrations
-
-## Immediate Next Steps
-
-1. Build repository skeleton.
-2. Create core data models.
-3. Implement Opportunity Intelligence Assistant.
-4. Build scoring engine.
-5. Add reasoning engine.
-6. Add evidence traceability.
-7. Introduce persistent commercial memory.
-
-## Project Status
-
-**Version:** Genesis v0.1  
-**Status:** Active Development  
-**Owner:** Rob  
-**Design Partner:** ChatGPT  
-
-This repository is the implementation home for the CIOS platform specification.
+The `review-copies` folder contains DOCX renderings of each changed or new document. Markdown files remain the canonical repository form.

@@ -2,7 +2,7 @@
 
 **Status:** Living document
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-03
+**Last updated:** 2026-07-10
 
 ## Purpose
 
@@ -17,6 +17,43 @@ CIOS is an Enterprise Intelligence platform that detects meaningful enterprise c
 The current north-star is: **Move Flora from report generation to living Commercial Digital Twins.**
 
 Before proposing work, ask whether the change improves durable enterprise memory, evidence-backed Observations, inspectable reasoning lineage and commercially useful action. If it only creates more output text, dashboards or summaries without improving memory or traceability, challenge the assumption.
+
+
+## Progressive Assurance operating rule
+
+ADR-009 governs Commercial Digital Twin production.
+
+The default operating mode is **Initial Decision Twin**. AI agents and Researchers should complete a useful governed Twin autonomously, with the shortest practical elapsed time and the minimum required output set:
+
+1. governed Commercial Digital Twin state;
+2. executive decision view;
+3. source, uncertainty and lineage ledger.
+
+Do not require intermediate owner approval for ordinary source selection, Observation creation, outside-in Hypothesis formation, pressure prioritisation or bounded learning recommendations.
+
+Do not create manifests, completion reports, duplicate publication formats, release JSON, package inventories or release ZIPs unless the owner requests **Assured Release** or a promotion trigger in ADR-009 applies.
+
+### Mandatory integrity checks
+
+Run these once near completion and report exceptions rather than turning each check into a conversational gate:
+
+- **Truth:** material claims are attributable and correctly classified.
+- **Memory:** useful findings update durable Observations and Twin state.
+- **Decision value:** the output improves a named decision or learning action.
+- **Safety:** Unknowns, Contradictions, boundaries and recommendation limits remain visible.
+
+### Stop rule
+
+Stop research when the immediate decision is adequately supported and further collection is unlikely to change it materially. Record residual Evidence Demands instead of pursuing exhaustive completeness.
+
+### Escalation rule
+
+Escalate only for provider-specific pursuit or rejection, external outreach, material unsupported inference, unclear legal/security boundary, decisive confidential account knowledge, or explicit Assured Release.
+
+### Interaction expectation
+
+Optimise for one autonomous run and one completion response. Ask Rob only for information that materially changes the bounded decision. Rob is the strategic sales director and should not be required to administer research workflow.
+
 
 ## Mandatory reading order
 
