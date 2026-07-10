@@ -20,6 +20,10 @@ class EnterpriseCanvasAccessError(PermissionError):
     """Raised when a product session cannot view an Enterprise Canvas."""
 
 
+class EnterpriseCanvasNotFoundError(LookupError):
+    """Raised when no governed Canvas/read model exists for an enterprise."""
+
+
 def can_view_enterprise_canvas(headers: Any, enterprise_id: str) -> bool:
     if not authenticated_flora_user(headers):
         return False
@@ -48,8 +52,11 @@ class EnterpriseCanvasService:
         model = self.models.get(enterprise_id)
         attributes = dict(sorted(model.attributes.items()))
         unknowns = tuple(model.unknowns.values())
-        evidence_rows = {str(e.get("evidence_id")): e for e in self.evidence.list()}
         projections = self._accepted_projections(enterprise_id)
+        access_record = EnterpriseCanvasAccessRepository().get(enterprise_id)
+        if not access_record and not attributes and not unknowns and not projections:
+            raise EnterpriseCanvasNotFoundError(f"Enterprise Canvas not found for {enterprise_id}; diagnostic reference: canvas-missing:{enterprise_id}")
+        evidence_rows = {str(e.get("evidence_id")): e for e in self.evidence.list()}
         header = self._header(enterprise_id, attributes, unknowns, projections)
         tiles = tuple(self._tiles(enterprise_id, attributes, unknowns, evidence_rows, projections))
         return EnterpriseCanvas(CANVAS_SCHEMA_VERSION, enterprise_id, lens, header, tiles, True)
