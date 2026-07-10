@@ -63,9 +63,22 @@ def financial_run_enterprise_id(run: dict[str, Any]) -> str:
     return str(run.get("enterprise_id") or (run.get("document") or {}).get("enterprise_id") or "bt-group-plc")
 
 
+def canonical_enterprise_id(value: str) -> str:
+    """Return the canonical comparison form for workspace and enterprise IDs."""
+    return str(value or "").strip().casefold()
+
+
+def _contains_id(values: set[str], candidate: str) -> bool:
+    wanted = canonical_enterprise_id(candidate)
+    return any(canonical_enterprise_id(value) == wanted for value in values)
+
+
 def user_enterprise_access(headers: Any) -> set[str]:
     session = resolve_pilot_session(headers)
     if session:
+        # Pilot owner sessions deliberately expose the active workspace only;
+        # managed-enterprise authority is resolved by server policy below, not
+        # by browser-supplied enterprise claims.
         return {session.workspace}
     allowed = _trusted_header(headers, "X-Flora-Enterprises") or cookie_value(headers, "flora_enterprises")
     return {item.strip() for item in str(allowed or "").replace("|", ",").split(",") if item.strip()}
@@ -78,7 +91,7 @@ def active_flora_workspace(headers: Any) -> str:
         return session.workspace
     selected = _trusted_header(headers, "X-Flora-Active-Workspace") or cookie_value(headers, "flora_active_workspace")
     allowed = user_enterprise_access(headers)
-    if selected and ("*" in allowed or selected in allowed):
+    if selected and ("*" in allowed or _contains_id(allowed, selected)):
         return selected
     concrete = sorted(w for w in allowed if w != "*")
     return concrete[0] if len(concrete) == 1 else ""
@@ -158,7 +171,7 @@ def blueprint_upload_authorisation(headers: Any) -> BlueprintAuthorisationDecisi
     raw_roles = raw_flora_roles(headers) if user and active_workspace else set()
     roles = flora_roles(headers) if user and active_workspace else set()
     permissions = sorted(roles & (BLUEPRINT_IMPORT_OWNER_PERMISSIONS | {BLUEPRINT_UPLOAD_PERMISSION}))
-    membership_resolved = bool(user and active_workspace and ("*" in workspaces or active_workspace in workspaces))
+    membership_resolved = bool(user and active_workspace and ("*" in workspaces or _contains_id(set(workspaces), active_workspace)))
     owner_recognised = bool(membership_resolved and raw_roles & CANONICAL_OWNER_ROLES)
     allowed = membership_resolved and bool(roles & _BLUEPRINT_IMPORT_ROLES)
     if allowed:
@@ -197,8 +210,17 @@ def can_receive_blueprint_package(headers: Any) -> bool:
     return blueprint_upload_authorisation(headers).decision == "allowed"
 
 
-def can_access_enterprise(headers: Any, enterprise_id: str) -> bool:
+def can_access_enterprise(headers: Any, enterprise_id: str, workspace_id: str = "") -> bool:
     if not authenticated_flora_user(headers):
         return False
     allowed = user_enterprise_access(headers)
-    return "*" in allowed or enterprise_id in allowed
+    if "*" in allowed or _contains_id(allowed, enterprise_id):
+        return True
+    if not is_cios_owner(headers):
+        return False
+    active_workspace = active_flora_workspace(headers)
+    if not active_workspace:
+        return False
+    if workspace_id and canonical_enterprise_id(workspace_id) != canonical_enterprise_id(active_workspace):
+        return False
+    return _contains_id(allowed, active_workspace)

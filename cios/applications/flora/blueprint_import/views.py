@@ -8,7 +8,7 @@ from html import escape
 from typing import Any
 from uuid import uuid4
 
-from cios.applications.flora.access import authenticated_flora_user, blueprint_upload_authorisation, flora_roles, is_cios_owner, user_enterprise_access
+from cios.applications.flora.access import authenticated_flora_user, active_flora_workspace, blueprint_upload_authorisation, can_access_enterprise, flora_roles, is_cios_owner, user_enterprise_access
 from cios.applications.flora.workspace.views import _page
 from cios.applications.flora.storage import PersistenceError, storage_mode
 
@@ -54,7 +54,7 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
         if len(content) > MAX_UPLOAD_BYTES:
             raise PackageReceiptError(f"The selected file is larger than the {MAX_UPLOAD_BYTES // (1024*1024)} MB upload limit.")
         before = _canonical_marker()
-        record = BlueprintPackageRegistry().receive(content, filename, actor)
+        record = BlueprintPackageRegistry().receive(content, filename, actor, active_flora_workspace(headers))
         _audit_authorisation("package_upload_authorisation_allowed", headers, "Upload request accepted", decision, record.package_ref, record.import_run_id, record.identity.enterprise_id)
         result = BlueprintPackageValidator().validate_and_stage(record.package_ref, actor, headers)
         assert before == _canonical_marker(), "Upload and validation must not mutate canonical memory"
@@ -62,13 +62,18 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
     except PermissionError as exc:
         return _safe_failure(str(exc), "Blueprint upload capability resolved", False, False, _permission_guidance(headers, decision), decision, ref, audit_warning), 403, "/blueprint-import"
     except Exception as exc:
-        return _safe_failure(str(exc), "Upload request accepted", False, False, "Choose a safe Blueprint ZIP and try again. No governed Twin changes occurred.", decision), 400, "/blueprint-import"
+        failed_stage = "Package inspection authorised" if isinstance(exc, BlueprintValidationError) else "Package received"
+        return _safe_failure(str(exc), failed_stage, False, False, "Choose a safe Blueprint ZIP and try again. No governed Twin changes occurred.", decision), 400, "/blueprint-import"
 
 
 def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     ctx = _context(import_run_id)
-    if not ctx or not can_inspect_blueprint_package(headers, ctx["package"]):
-        return _safe_failure("Blueprint import record is unavailable or access is denied.", "validation", False, True, "Open an import you are authorised to review."), 403
+    if not ctx:
+        return _safe_failure("Blueprint import record is unavailable or access is denied.", "Package identity read", False, True, "Open an import you are authorised to review."), 403
+    if not can_access_enterprise(headers, ctx["package"].identity.enterprise_id, getattr(ctx["package"], "workspace_id", "")):
+        return _safe_failure("Blueprint import record is unavailable or access is denied.", "Package enterprise access resolved", False, True, "Open an import you are authorised to review."), 403
+    if not can_inspect_blueprint_package(headers, ctx["package"]):
+        return _safe_failure("Blueprint import record is unavailable or access is denied.", "Package inspection authorised", False, True, "Open an import you are authorised to review."), 403
     package = ctx["package"]; summary = ctx["summary"] or {}; candidates = ctx["candidates"]
     worksheets = _worksheets(summary.get("warnings", [])); status = "Passed with warnings" if summary.get("warnings") and not summary.get("errors") else ("Failed" if summary.get("errors") else "Passed")
     counts = _candidate_counts(candidates)
@@ -78,7 +83,7 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
 
 def review_page(import_run_id: str, headers: Any, message: str = "") -> tuple[str, int]:
     ctx = _context(import_run_id)
-    if not ctx or not can_review_blueprint_candidate(headers, ctx["package"].identity.enterprise_id):
+    if not ctx or not (can_access_enterprise(headers, ctx["package"].identity.enterprise_id, getattr(ctx["package"], "workspace_id", "")) and can_review_blueprint_candidate(headers, ctx["package"].identity.enterprise_id)):
         return _safe_failure("You are not authorised to review this Blueprint import.", "review", False, True, "Ask for Blueprint review permission."), 403
     _ensure_reviews_and_mappings(ctx, headers)
     plan = DryRunPlanningService().create_plan(import_run_id, authenticated_flora_user(headers), headers)
@@ -93,7 +98,7 @@ def review_page(import_run_id: str, headers: Any, message: str = "") -> tuple[st
 
 def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers: Any) -> tuple[str, int]:
     ctx = _context(import_run_id)
-    if not ctx or not (can_approve_blueprint_promotion(headers, ctx["package"].identity.enterprise_id) and can_execute_blueprint_promotion(headers, ctx["package"].identity.enterprise_id)):
+    if not ctx or not (can_access_enterprise(headers, ctx["package"].identity.enterprise_id, getattr(ctx["package"], "workspace_id", "")) and can_approve_blueprint_promotion(headers, ctx["package"].identity.enterprise_id) and can_execute_blueprint_promotion(headers, ctx["package"].identity.enterprise_id)):
         return _safe_failure("You are not authorised to approve and execute Blueprint promotion.", "approval", False, True, "Ask for Blueprint promotion permission."), 403
     if form.get("confirm_plan") != ["yes"] or form.get("confirm_mutations") != ["yes"] or not (form.get("rationale") or [""])[0].strip():
         return review_page(import_run_id, headers, "Approval requires review confirmation, mutation-count confirmation and a rationale.")
@@ -122,7 +127,7 @@ def history_page(headers: Any) -> tuple[str, int]:
     rows = []
     allowed = user_enterprise_access(headers)
     for p in BlueprintPackageRegistry().list():
-        if "*" not in allowed and p.identity.enterprise_id not in allowed: continue
+        if not can_access_enterprise(headers, p.identity.enterprise_id, getattr(p, "workspace_id", "")): continue
         summary = BlueprintPackageValidator().staging_summary(p.import_run_id) or {}
         plans = DryRunPlanRepository().list(p.import_run_id)
         promo = _latest_promotion_status(p.import_run_id)
@@ -176,7 +181,11 @@ _DIAGNOSTIC_STAGES = (
     "Owner status resolved",
     "Blueprint upload capability resolved",
     "Upload request accepted",
-    "Package stored temporarily",
+    "Package received",
+    "Package identity read",
+    "Package enterprise access resolved",
+    "Package inspection authorised",
+    "Package stored",
     "Package validated",
     "Import preview generated",
     "Canonical import committed",
@@ -203,6 +212,24 @@ def _stage_statuses(failed_stage: str, decision=None) -> dict[str, str]:
             return statuses
         statuses["Owner status resolved"] = "Passed"
         statuses["Blueprint upload capability resolved"] = "Passed" if decision.decision == "allowed" else "Failed"
+        if decision.decision != "allowed":
+            return statuses
+        passed_after_upload = {
+            "Upload request accepted": ["Upload request accepted", "Package received", "Package identity read", "Package enterprise access resolved", "Package inspection authorised", "Package stored", "Package validated", "Import preview generated", "Canonical import committed"],
+            "Package received": ["Package received", "Package identity read", "Package enterprise access resolved", "Package inspection authorised", "Package stored", "Package validated", "Import preview generated", "Canonical import committed"],
+            "Package identity read": ["Package identity read", "Package enterprise access resolved", "Package inspection authorised", "Package stored", "Package validated", "Import preview generated", "Canonical import committed"],
+            "Package enterprise access resolved": ["Package enterprise access resolved", "Package inspection authorised", "Package stored", "Package validated", "Import preview generated", "Canonical import committed"],
+            "Package inspection authorised": ["Package inspection authorised", "Package stored", "Package validated", "Import preview generated", "Canonical import committed"],
+            "Package stored": ["Package stored", "Package validated", "Import preview generated", "Canonical import committed"],
+            "Package validated": ["Package validated", "Import preview generated", "Canonical import committed"],
+        }
+        for stage in _DIAGNOSTIC_STAGES:
+            if stage in {"Account recognised", "Workspace recognised", "Membership resolved", "Owner status resolved", "Blueprint upload capability resolved"}:
+                continue
+            if failed_stage in passed_after_upload and stage not in passed_after_upload[failed_stage]:
+                statuses[stage] = "Passed"
+        if failed_stage in statuses:
+            statuses[failed_stage] = "Failed"
         return statuses
     if failed_stage in statuses:
         statuses[failed_stage] = "Failed"

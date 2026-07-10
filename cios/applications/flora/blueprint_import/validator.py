@@ -25,7 +25,7 @@ class BlueprintValidationError(PackageReceiptError):
 def can_inspect_blueprint_package(headers: Any, package: BlueprintPackageRecord) -> bool:
     if not authenticated_flora_user(headers):
         return False
-    if not can_access_enterprise(headers, package.identity.enterprise_id):
+    if not can_access_enterprise(headers, package.identity.enterprise_id, getattr(package, "workspace_id", "")):
         return False
     return bool(flora_roles(headers) & {"package.review", "blueprint_import_admin"})
 

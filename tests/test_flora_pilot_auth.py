@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import pytest
 from cios.applications.flora.access import (
     authenticated_flora_user,
     active_flora_workspace,
@@ -133,3 +134,57 @@ def test_sign_out_clears_persistent_cookie(monkeypatch):
     assert "flora_pilot_session=" in cleared
     assert "Max-Age=0" in cleared
     assert "Expires=Thu, 01 Jan 1970 00:00:00 GMT" in cleared
+
+
+def test_cios_owner_can_upload_inspect_and_stage_mod_package_without_canonical_mutation(monkeypatch, tmp_path):
+    enable(monkeypatch)
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    cookie_headers = headers(issue_session_cookie(secure=False))
+
+    html, post_status, target = upload_and_validate_blueprint(
+        {"blueprint_zip": pkg({"enterprise_id": "MOD"})},
+        {"blueprint_zip.filename": "MOD-CDT-v1.3-Flora-Blueprint.zip", "blueprint_zip.content_type": "application/zip"},
+        cookie_headers,
+    )
+
+    assert post_status == 200
+    assert "Validation result" in html
+    assert "Enterprise MOD" in html
+    assert target.startswith("/blueprint-import/bpi-run-")
+    assert not (tmp_path / "memory" / "evidence.jsonl").exists()
+    package_records = list((tmp_path / "blueprint_import" / "packages").glob("*.json"))
+    assert package_records
+    import json
+    record = json.loads(package_records[0].read_text())
+    assert record["identity"]["enterprise_id"] == "MOD"
+    assert record["workspace_id"] == "CIOS"
+
+
+def test_owner_managed_enterprise_policy_is_case_normalised_and_workspace_bound(monkeypatch, tmp_path):
+    from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, BlueprintPackageValidator, BlueprintValidationError
+
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
+    owner = {"X-Flora-User": "rob", "X-Flora-Enterprises": "cios", "X-Flora-Active-Workspace": "CIOS", "X-Flora-Roles": "cios_owner"}
+    other_workspace_owner = {"X-Flora-User": "sam", "X-Flora-Enterprises": "OTHER", "X-Flora-Active-Workspace": "OTHER", "X-Flora-Roles": "cios_owner"}
+    non_owner = {"X-Flora-User": "alice", "X-Flora-Enterprises": "CIOS", "X-Flora-Active-Workspace": "CIOS", "X-Flora-Roles": "package.upload,package.review"}
+    direct_mod_reviewer = {"X-Flora-User": "alice", "X-Flora-Enterprises": "mod", "X-Flora-Active-Workspace": "MOD", "X-Flora-Roles": "package.review"}
+
+    r = BlueprintPackageRegistry().receive(pkg({"enterprise_id": "MOD"}), "mod.zip", "rob", "CIOS")
+    staged = BlueprintPackageValidator().validate_and_stage(r.package_ref, "rob", owner)
+    assert staged.canonical_mutations == 0
+
+    # GET and POST policies both use the same package enterprise/workspace rule.
+    from cios.applications.flora.blueprint_import.views import validation_result_page
+    page, status = validation_result_page(r.import_run_id, owner)
+    assert status == 200 and "Enterprise MOD" in page
+    page, status = validation_result_page(r.import_run_id, non_owner)
+    assert status == 403 and "Package enterprise access resolved" in page
+
+    with pytest.raises(BlueprintValidationError):
+        BlueprintPackageValidator().validate_and_stage(r.package_ref, "alice", non_owner)
+    with pytest.raises(BlueprintValidationError):
+        BlueprintPackageValidator().validate_and_stage(r.package_ref, "sam", other_workspace_owner)
+    assert validation_result_page(r.import_run_id, other_workspace_owner)[1] == 403
+    assert validation_result_page(r.import_run_id, {})[1] == 403
+    assert validation_result_page(r.import_run_id, direct_mod_reviewer)[1] == 200
