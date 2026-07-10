@@ -29,10 +29,9 @@ def test_digital_twins_landing_navigation_and_empty_state(monkeypatch, tmp_path)
     monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path))
     assert 'Digital Twins' in landing_page()
     html = digital_twins_landing_page()
-    assert 'BT Group' in html
-    assert 'Commercial Digital Twin' in html
-    assert 'No recent source-backed research.' in html
-    assert '/digital-twins/bt-group-plc' in html
+    assert 'No governed Digital Twins are available' in html
+    assert 'BT Group' not in html
+    assert '/digital-twins/bt-group-plc' not in html
     assert 'Vodafone' not in html and 'National Grid' not in html
 
 

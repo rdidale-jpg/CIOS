@@ -294,3 +294,59 @@ def test_existing_blueprint_canvas_is_repaired_not_duplicated_and_no_reimport_re
     assert len(records) == 1
     assert records[0].import_run_ids == (package.import_run_id,)
     assert len(BlueprintPackageRegistry().list()) == 1
+
+
+def test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
+    from cios.applications.flora.blueprint_import.views import approve_and_promote, history_page, review_page, upload_and_validate_blueprint, validation_result_page
+    from cios.applications.flora.digital_twins import digital_twins_landing_page, governed_twin_list
+    from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRepository
+    from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
+    import re
+
+    owner = {"X-Flora-User":"rob", "X-Flora-Enterprises":"cios-workspace", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"cios_owner"}
+    records=[{"external_id":"PP-MOD-REG","record_class":"pain_point","truth_class":"analytical_projection","payload":{"statement":"MOD registry pressure"}}]
+    _, status, target = upload_and_validate_blueprint({"blueprint_zip":pkg(manifest_extra={"enterprise_id":"MOD", "package_id":"MOD-CDT-Blueprint", "package_version":"1.3"}, records=records)}, {"blueprint_zip.filename":"MOD-CDT-v1.3-Flora-Blueprint.zip","blueprint_zip.content_type":"application/zip"}, owner)
+    assert status == 200
+    run_id = target.rsplit("/", 1)[-1]
+    review, review_status = review_page(run_id, owner)
+    assert review_status == 200
+    plan_id = re.search(r"name='plan_id' value='([^']+)'", review).group(1)
+    done, done_status = approve_and_promote(run_id, {"plan_id":[plan_id],"confirm_plan":["yes"],"confirm_mutations":["yes"],"rationale":["owner approved"]}, owner)
+    assert done_status == 200
+
+    home = digital_twins_landing_page(owner)
+    hist, hist_status = history_page(owner)
+    registry = governed_twin_list(owner)
+    assert hist_status == 200
+    assert len(registry) == 1
+    assert registry[0].enterprise_id == "MOD"
+    assert registry[0].canvas_id == "canvas-mod"
+    assert "MOD" in home and "BT Group" not in home
+    assert "/digital-twins/MOD/canvas" in home
+    assert f"/blueprint-import/{run_id}" in home
+    assert "View import record" in hist
+
+    canvas, canvas_status = enterprise_canvas_page("MOD", owner)
+    assert canvas_status == 200 and "Enterprise Canvas" in canvas and "MOD" in canvas
+    detail, detail_status = validation_result_page(run_id, owner)
+    assert detail_status == 200
+    assert "Digital Twins</a> &gt;" in detail
+    assert "Back to Digital Twins" in detail
+    assert "Back to MOD Twin" in detail
+
+    assert len(EnterpriseCanvasAccessRepository().list()) == 1
+    assert len([t for t in governed_twin_list(owner) if t.enterprise_id == "MOD"]) == 1
+
+
+def test_unauthorised_and_empty_governed_twin_registry(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
+    from cios.applications.flora.digital_twins import digital_twins_landing_page, governed_twin_list
+
+    reader = {"X-Flora-User":"reader", "X-Flora-Enterprises":"cios-workspace", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"canvas.view"}
+    assert governed_twin_list(reader) == []
+    html = digital_twins_landing_page(reader)
+    assert "No governed Digital Twins are available" in html
+    assert "BT Group" not in html

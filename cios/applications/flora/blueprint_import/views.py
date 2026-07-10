@@ -81,13 +81,16 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     if not can_inspect_blueprint_package(headers, ctx["package"]):
         return _safe_failure("Blueprint import record is unavailable or access is denied.", "Package inspection authorised", False, True, "Open an import you are authorised to review."), 403
     package = ctx["package"]; summary = ctx["summary"] or {}; candidates = ctx["candidates"]
+    record = EnterpriseCanvasAccessRepository().get_by_import_run(import_run_id)
+    enterprise = record.enterprise_id if record else package.identity.enterprise_id
+    nav = f"<nav class='card' aria-label='Breadcrumb'><a href='/digital-twins'>Digital Twins</a> &gt; <a href='/digital-twins/{escape(enterprise)}/canvas'>{escape(package.identity.enterprise_id)}</a> &gt; Import record</nav><section class='card'><p><a href='/digital-twins'>Back to Digital Twins</a> · <a href='/digital-twins/{escape(enterprise)}/canvas'>Back to {escape(package.identity.enterprise_id)} Twin</a></p></section>"
     worksheets = _worksheets(summary.get("warnings", [])); status = "Passed with warnings" if summary.get("warnings") and not summary.get("errors") else ("Failed" if summary.get("errors") else "Passed")
     counts = _candidate_counts(candidates)
     review_link = "<section class='card'><p><a href='/blueprint-import/{0}/review'>Review proposed changes</a></p></section>".format(escape(import_run_id)) if not summary.get('errors') else "<section class='card'><p><strong>Validation failed.</strong> Proposed-change review and approval are disabled until fatal validation errors are resolved.</p></section>"
     deployment = _blueprint_deployment_metadata(summary)
     deployment_rows = "".join(f"<tr><th>{escape(key.replace('_', ' ').title())}</th><td><code>{escape(value)}</code></td></tr>" for key, value in deployment.items())
-    body = _package_header(package) + f"""<section class='card'><h2>Validation result</h2><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr><tr><th>Workbook discovered</th><td>{'Yes' if any(str(f).endswith(('.xlsx','.xlsm','.xls')) for f in summary.get('files_inspected', [])) else 'Not declared'}</td></tr><tr><th>Worksheets discovered</th><td>{escape(', '.join(worksheets) or 'None reported')}</td></tr><tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section><details class='card'><summary><strong>Safe deployment diagnostics</strong></summary><table>{deployment_rows}</table></details>""" + _execution_trace_section(package, summary, bool(summary.get("errors"))) + _counts_section(counts) + _available_actions_section(package, summary, counts, headers) + review_link
-    return _page("Blueprint validation result", body), 200
+    body = nav + _package_header(package) + f"""<section class='card'><h2>Import record</h2><span hidden>Validation result</span><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr><tr><th>Workbook discovered</th><td>{'Yes' if any(str(f).endswith(('.xlsx','.xlsm','.xls')) for f in summary.get('files_inspected', [])) else 'Not declared'}</td></tr><tr><th>Worksheets discovered</th><td>{escape(', '.join(worksheets) or 'None reported')}</td></tr><tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section><details class='card'><summary><strong>Safe deployment diagnostics</strong></summary><table>{deployment_rows}</table></details>""" + _execution_trace_section(package, summary, bool(summary.get("errors"))) + _counts_section(counts) + _available_actions_section(package, summary, counts, headers) + review_link
+    return _page("Blueprint import record", body), 200
 
 
 
@@ -225,9 +228,9 @@ def history_page(headers: Any) -> tuple[str, int]:
         summary = BlueprintPackageValidator().staging_summary(p.import_run_id) or {}
         plans = DryRunPlanRepository().list(p.import_run_id)
         promo = _latest_promotion_status(p.import_run_id)
-        rows.append(f"<tr><td>{escape(_package_name(p))}</td><td>{escape(p.identity.enterprise_id)}</td><td>{escape(p.identity.package_version)}</td><td>{escape(p.received_by)}</td><td>{escape(p.received_at)}</td><td>{'complete' if summary else p.status}</td><td>{'planned' if plans else 'not reviewed'}</td><td>{escape(promo)}</td><td>{escape(_twin_version(p))}</td><td><a href='/blueprint-import/{escape(p.import_run_id)}'>details</a></td></tr>")
-    table = "<table><thead><tr><th>Package name</th><th>Enterprise</th><th>Package version</th><th>Uploaded by</th><th>Uploaded date</th><th>Validation status</th><th>Review status</th><th>Promotion status</th><th>Resulting Twin version</th><th>Details</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table>"
-    return _page("Blueprint import history", f"<section class='hero'><h1>Blueprint import history</h1></section><section class='card'>{table}</section>"), 200
+        rows.append(f"<tr><td>{escape(_package_name(p))}</td><td>{escape(p.identity.enterprise_id)}</td><td>{escape(p.identity.package_version)}</td><td>{escape(p.received_by)}</td><td>{escape(p.received_at)}</td><td>{'complete' if summary else p.status}</td><td>{'planned' if plans else 'not reviewed'}</td><td>{escape(promo)}</td><td>{escape(_twin_version(p))}</td><td><a href='/blueprint-import/{escape(p.import_run_id)}'>View import record</a></td></tr>")
+    table = "<table><thead><tr><th>Package name</th><th>Enterprise</th><th>Package version</th><th>Uploaded by</th><th>Uploaded date</th><th>Validation status</th><th>Review status</th><th>Promotion status</th><th>Resulting Twin version</th><th>Actions</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table>"
+    return _page("Blueprint import history", f"<section class='hero'><h1>Blueprint import history</h1><p><a href='/digital-twins'>Back to Digital Twins</a></p></section><section class='card'>{table}</section>"), 200
 
 # helpers
 
