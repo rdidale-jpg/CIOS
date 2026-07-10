@@ -67,7 +67,7 @@ def _event(trace: list[dict[str, Any]] | None, step_id: int, component: str, act
     trace.append(payload)
 from .models import BlueprintPackageRecord
 
-MAPPING_VERSION = "mod-cdt-twin-spine-mapping-v1.0.0"
+MAPPING_VERSION = "mod-cdt-twin-spine-mapping-v1.1.0"
 
 
 def _norm(value: Any) -> str:
@@ -76,6 +76,48 @@ def _norm(value: Any) -> str:
     text = text.replace("&", " and ")
     text = re.sub(r"[^a-z0-9]+", "_", text).strip("_")
     return text
+
+
+ID_COLUMNS = ("stable_id","external_id","id","source_id","evidence_id","observation_id","unknown_id","contradiction_id","entity_id","relationship_id","edge_id","claim_id")
+TEXT_COLUMNS = ("statement","atomic_statement","claim","question","name","label","title","summary","description","statement_a","statement_b","source","target")
+
+
+def _clean(value: Any) -> str:
+    return str(value or "").strip()
+
+
+def _split_refs(value: Any) -> list[str]:
+    text = _clean(value)
+    if not text:
+        return []
+    return [_clean(part) for part in re.split(r"[,;|]\s*|\n+", text) if _clean(part)]
+
+
+def _ref_key(value: Any) -> str:
+    text = _clean(value).casefold()
+    text = re.sub(r"^(source|src|evidence|ev)\s*[:#-]\s*", "", text)
+    return re.sub(r"[^a-z0-9]+", "", text)
+
+
+def _derive_identifier(enterprise_id: str, record_class: str, sheet: str, row: dict[str, Any], row_number: int, *, allow_row_fallback: bool = True) -> tuple[str, str]:
+    natural = []
+    for key in TEXT_COLUMNS + ("record_type", "type", "scope", "owner", "source_id", "evidence_id"):
+        value = _clean(row.get(key))
+        if value:
+            natural.append(f"{key}={value}")
+    if not natural:
+        return "", ""
+    basis = f"enterprise={enterprise_id}|class={record_class}|sheet={sheet}|" + "|".join(natural[:8])
+    if allow_row_fallback:
+        basis += f"|row={row_number}"
+    digest = sha256_bytes(basis.casefold().encode("utf-8"))[:16]
+    ent = _norm(enterprise_id) or "enterprise"
+    return f"{ent}-{_norm(record_class) or 'record'}-{digest}", basis
+
+
+def _is_formula_only(row_obj: dict[str, Any], vals: list[str]) -> bool:
+    non_empty = [v for v in vals if _clean(v)]
+    return bool(row_obj.get("formula_cells")) and len(non_empty) <= int(row_obj.get("formula_cells") or 0)
 
 @dataclass(frozen=True)
 class SheetMapping:
@@ -96,8 +138,8 @@ CANONICAL_MAPPINGS: tuple[SheetMapping, ...] = (
     SheetMapping(("09_Capabilities",), "enterprise_model_candidate"), SheetMapping(("10_Systems_Data",), "enterprise_model_candidate"),
     SheetMapping(("11_Suppliers_Contracts",), "enterprise_model_candidate"), SheetMapping(("12_Measures_Resources",), "enterprise_model_candidate"),
     SheetMapping(("13_Causal_Edges",), "relationship", required_any=(("edge_id","relationship_id","stable_id","id","external_id"),)),
-    SheetMapping(("16_Unknowns", "Unknowns", "Unknown"), "unknown", required_any=(("unknown_id","stable_id","id","external_id"),), truth_default="unknown"),
-    SheetMapping(("17_Contradictions", "Contradictions", "Contradiction"), "contradiction", required_any=(("contradiction_id","stable_id","id","external_id"),), truth_default="contradiction"),
+    SheetMapping(("16_Unknowns", "Unknowns", "Unknown"), "unknown", required_any=(("unknown_id","stable_id","id","external_id"),), lineage_any=(), truth_default="unknown"),
+    SheetMapping(("17_Contradictions", "Contradictions", "Contradiction"), "contradiction", required_any=(("contradiction_id","stable_id","id","external_id"),), lineage_any=("source_id","evidence_id","claim_id","observation_id"), truth_default="contradiction"),
     SheetMapping(("21_Document_Refresh",), "refresh_trigger"), SheetMapping(("22_Provenance_Risk",), "unknown", truth_default="provenance_risk"),
     SheetMapping(("24_Human_Knowledge", "Human Supplied Knowledge", "Human Knowledge"), "human_knowledge", truth_default="human-supplied", human_supplied=True),
     SheetMapping(("04_Claims", "Claims"), "enterprise_model_candidate", truth_default="claim"),
@@ -105,7 +147,7 @@ CANONICAL_MAPPINGS: tuple[SheetMapping, ...] = (
 )
 PROJECTION_MAPPINGS: tuple[SheetMapping, ...] = tuple(SheetMapping((name,), klass, "projection_only", truth_default="analytical_projection", lineage_any=()) for name, klass in {
     "30_Pain_Portfolio":"pain_point", "31_Pain_Evidence_Conseq":"pain_point", "32_Pain_Class_Select":"priority_disposition", "33_Pain_Disposition":"priority_disposition", "34_Pain_Stakeholders":"stakeholder_hot_button", "35_Pain_Response_Map":"solution_pattern", "36_Current_Responses":"current_response", "37_Response_Effect":"response_effectiveness", "38_Residual_Pain":"residual_pain", "39_Burning_Platform":"burning_platform", "40_Transform_Pressure":"transformation_pressure_view", "41_Pain_Solution_Map":"solution_pattern", "42_Future_Demand":"transformation_pressure_view", "43_Pain_Evidence_Demand":"pain_point", "61_v13_Pain_Selection":"priority_disposition", "62_v13_Flagship_Candidates":"solution_pattern", "92_v13_Shaping_Dossiers":"executive_publication", "93_v13_Buyer_Coalitions":"stakeholder_hot_button", "94_v13_Proof_Architecture":"executive_publication", "95_v13_Conversation_Packs":"executive_publication", "99_v13_Campaign_Sequence":"executive_publication", "106_v13_Sponsor_Map":"stakeholder_hot_button", "115_v13_Outreach_Targets":"stakeholder_hot_button", "Pain Points":"pain_point", "Current Responses":"current_response", "Burning Platforms":"burning_platform", "Transformation Pressures":"transformation_pressure_view", "Response Effectiveness":"response_effectiveness", "Residual Pains":"residual_pain", "Priority Selections":"priority_disposition", "Solution Patterns":"solution_pattern", "Executive Publications":"executive_publication"}.items())
-IGNORED_SHEET_PATTERNS = ("control", "dashboard", "calculation", "gate", "release", "acceptance", "workflow", "session_charter", "return_form", "technical_reconciliation", "register_dictionary", "plan")
+IGNORED_SHEET_PATTERNS = ("control", "dashboard", "calculation", "gate", "release", "acceptance", "workflow", "session_charter", "return_form", "technical_reconciliation", "register_dictionary", "plan", "document_refresh_control", "reconciliation")
 SHEET_REGISTRY = { _norm(alias): m for m in CANONICAL_MAPPINGS + PROJECTION_MAPPINGS for alias in m.aliases }
 _TRUTH = {"unknown": "unknown", "contradiction": "contradiction", "human_supplied_knowledge": "human-supplied", "human_knowledge": "human-supplied"}
 @dataclass(frozen=True)
@@ -202,10 +244,11 @@ class CiosCommercialTwinAdapter:
                     warnings.append("Workbook macros, scripts or external links were ignored")
                 shared=self._shared(wb)
                 sheet_map=self._sheets(wb, trace, correlation_id)
+                seen_ids: set[tuple[str, str]] = set()
                 for sheet_name, sheet_file in sheet_map:
                     sheet_names.append(sheet_name)
                     rows=self._rows(wb, sheet_file, shared)
-                    out.extend(self._candidates(package, workbook_path, sheet_name, rows))
+                    out.extend(self._candidates(package, workbook_path, sheet_name, rows, seen_ids))
         except (zipfile.BadZipFile, ET.ParseError, KeyError, ValueError) as exc:
             errors.append(f"Workbook could not be inspected safely: {exc}")
         _event(trace, 7, __name__, "Candidate staging", str(len(out)), "Candidates staged" if not errors else "Stopped because workbook inspection failed", "Passed" if not errors else "Not started", correlation_id, current_stage="candidate_staging" if not errors else "validation_stop", previous_completed_stage="worksheet_parsing" if not errors else "workbook_relationship_parsing", next_intended_stage="proposed_change_review", processing_stopped=bool(errors), stop_reason="; ".join(errors), canonical_changes_made=False, promotion_enabled=not bool(errors))
@@ -316,55 +359,84 @@ class CiosCommercialTwinAdapter:
         key=_norm(sheet)
         return any(p in key for p in IGNORED_SHEET_PATTERNS) or key.startswith(("00_", "01_", "02_", "20_"))
 
-    def _candidates(self, package, workbook_path, sheet, rows):
+    def _candidates(self, package, workbook_path, sheet, rows, seen_ids: set[tuple[str, str]] | None = None):
         if len(rows)<1: return []
+        seen_ids = seen_ids if seen_ids is not None else set()
         header_pos, headers = self._header_index(rows); out=[]
         mapping=self._mapping_for_sheet(sheet)
         control_sheet=self._is_control_sheet(sheet)
         for row_obj in rows[header_pos+1:]:
             idx=row_obj["row_number"]; vals=row_obj["values"]
-            if not any(str(v).strip() for v in vals):
-                continue
+            non_blank = any(_clean(v) for v in vals)
             row={headers[i] or f"column_{i+1}": vals[i] if i < len(vals) else "" for i in range(len(headers))}
-            if row_obj.get("formula_cells") and not any(str(v).strip() for v in vals):
-                continue
-            if self._is_section_header(row, vals):
-                continue
-            if control_sheet:
+            ignore_reason = ""
+            if not non_blank:
+                ignore_reason = "ignored_blank_row"
+            elif _is_formula_only(row_obj, vals):
+                ignore_reason = "ignored_formula_only"
+            elif self._is_section_header(row, vals):
+                ignore_reason = "ignored_section_header"
+            elif control_sheet:
+                key = _norm(sheet)
+                ignore_reason = "ignored_dashboard_row" if "dashboard" in key else "ignored_workflow_row" if "workflow" in key else "ignored_release_control" if "release" in key else "ignored_control_row"
+            if ignore_reason:
+                ext=f"{_norm(sheet)}-{idx}-{ignore_reason}"
+                payload={"mapping_version": MAPPING_VERSION, "mapping_disposition": "ignored", "ignore_reason": ignore_reason, "source_worksheet": sheet, "source_row": idx, "header_row": header_pos+1}
+                loc={"workbook": workbook_path, "sheet": sheet, "row": idx, "stable_id": ext, "mapping_version": MAPPING_VERSION, "header_row": header_pos+1}
+                out.append(CandidateImportRecord("1.0", candidate_id(package.package_ref, workbook_path, ext, "ignored_row"), package.package_ref, package.package_sha256, workbook_path, sheet, loc, ext, "ignored_row", "ignored", payload, "ignored", (), sha256_bytes(json.dumps(payload, sort_keys=True).encode()), utc_now(), package.import_run_id, 0))
                 continue
             findings=[]
             if not mapping:
                 rc=str(row.get("record_class") or "unsupported_twin_spine_row"); status="quarantined"; truth="unknown"
-                findings=[ValidationFinding("warning","unsupported_twin_spine_sheet",f"Unsupported Twin Spine worksheet: {sheet}",f"{workbook_path}:{sheet}!{idx}")]
+                findings=[ValidationFinding("warning","quarantined_unsupported_schema",f"Unsupported Twin Spine worksheet: {sheet}",f"{workbook_path}:{sheet}!{idx}")]
             else:
                 rc=str(row.get("record_class") or mapping.candidate_class)
-                # special case mixed entity/relationship sheets where a clear type column exists
-                row_type=str(row.get("record_type") or row.get("type") or row.get("class") or "").casefold()
-                if mapping.candidate_class == "enterprise_model_candidate" and "relationship" in row_type: rc="relationship"
-                elif mapping.candidate_class == "enterprise_model_candidate" and "entity" in row_type: rc="entity"
+                row_type=str(row.get("record_type") or row.get("type") or row.get("class") or row.get("relationship_type") or row.get("entity_type") or "").casefold()
+                if mapping.candidate_class == "enterprise_model_candidate" and ("relationship" in row_type or (_clean(row.get("source")) and _clean(row.get("target")))): rc="relationship"
+                elif mapping.candidate_class == "enterprise_model_candidate" and ("entity" in row_type or _clean(row.get("name")) or _clean(row.get("label"))): rc="entity"
                 truth=str(row.get("truth_class") or row.get("truth") or _TRUTH.get(_norm(sheet)) or mapping.truth_default)
                 status="accepted" if rc in SUPPORTED_RECORD_CLASSES and rc not in PROJECTION_ONLY_CLASSES else "quarantined"
-                if rc in PROJECTION_ONLY_CLASSES:
-                    findings.append(ValidationFinding("warning","projection_only","Projection-only class retained outside canonical intelligence",f"{workbook_path}:{sheet}!{idx}"))
+                if mapping.disposition in {"projection_only", "reasoning_artifact"} or rc in PROJECTION_ONLY_CLASSES:
+                    status = "accepted" if rc in SUPPORTED_RECORD_CLASSES and rc not in PROJECTION_ONLY_CLASSES and mapping.disposition == "reasoning_artifact" else "quarantined"
+                    findings.append(ValidationFinding("warning","projection_only","Projection-only/reasoning class retained outside canonical intelligence",f"{workbook_path}:{sheet}!{idx}"))
                 if rc not in SUPPORTED_RECORD_CLASSES:
-                    status="quarantined"; findings.append(ValidationFinding("warning","unsupported_record_class",f"Unsupported record class in mapped sheet: {rc}",f"{workbook_path}:{sheet}!{idx}"))
+                    status="quarantined"; findings.append(ValidationFinding("warning","quarantined_unsupported_schema",f"Unsupported record class in mapped sheet: {rc}",f"{workbook_path}:{sheet}!{idx}"))
                 missing=[]
                 for group in mapping.required_any:
-                    if not any(str(row.get(_norm(c)) or "").strip() for c in group): missing.append("/".join(group))
+                    if not any(_clean(row.get(_norm(c))) for c in group): missing.append("/".join(group))
+                ext_supplied = any(_clean(row.get(k)) for k in ID_COLUMNS)
                 if missing:
-                    status="quarantined"; findings.append(ValidationFinding("error","missing_required_identifier",f"Missing required identifier column value: {', '.join(missing)}",f"{workbook_path}:{sheet}!{idx}"))
-                if rc not in PROJECTION_ONLY_CLASSES and re.match(r"^[0-9]", str(sheet)) and mapping.lineage_any and not any(str(row.get(_norm(c)) or "").strip() for c in mapping.lineage_any):
-                    status="quarantined"; findings.append(ValidationFinding("error","missing_required_lineage",f"Missing required evidence/source lineage for {rc}",f"{workbook_path}:{sheet}!{idx}"))
+                    derived, basis = _derive_identifier(package.identity.enterprise_id, rc, sheet, row, idx)
+                    if derived:
+                        row["stable_id"] = derived; row["identifier_derivation"] = {"derived": True, "basis": basis, "strategy": "sha256-natural-key-v1", "source_supplied": False}
+                        missing=[]
+                    else:
+                        status="quarantined"; findings.append(ValidationFinding("error","quarantined_missing_identifier",f"Missing required identifier column value: {', '.join(missing)}",f"{workbook_path}:{sheet}!{idx}"))
+                lineage_values=[]
+                for c in mapping.lineage_any:
+                    lineage_values.extend(_split_refs(row.get(_norm(c))))
+                if rc not in PROJECTION_ONLY_CLASSES and re.match(r"^[0-9]", str(sheet)) and mapping.lineage_any and not lineage_values:
+                    status="quarantined"; findings.append(ValidationFinding("error","quarantined_missing_lineage",f"Missing required evidence/source lineage for {rc}",f"{workbook_path}:{sheet}!{idx}"))
+                if lineage_values:
+                    row["lineage_resolution"] = [{"original_reference": ref, "normalized_reference": _ref_key(ref), "resolved_staged_candidate": _ref_key(ref), "unresolved_reason": ""} for ref in lineage_values]
             ext=""
-            for key in ("stable_id","external_id","id","source_id","evidence_id","observation_id","unknown_id","contradiction_id","entity_id","relationship_id","edge_id"):
-                if str(row.get(key) or "").strip(): ext=str(row.get(key)).strip(); break
+            preferred_ids = {"source": ("source_id","stable_id","external_id","id"), "evidence": ("evidence_id","stable_id","external_id","id"), "observation": ("observation_id","stable_id","external_id","id"), "unknown": ("unknown_id","stable_id","external_id","id"), "contradiction": ("contradiction_id","stable_id","external_id","id"), "entity": ("entity_id","stable_id","external_id","id"), "relationship": ("relationship_id","edge_id","stable_id","external_id","id"), "human_knowledge": ("stable_id","external_id","id")}.get(rc, ID_COLUMNS)
+            for key in preferred_ids:
+                if _clean(row.get(key)): ext=_clean(row.get(key)); break
             ext=ext or f"{_norm(sheet)}-{idx}"
+            key=(rc, ext)
+            if key in seen_ids:
+                suffix=sha256_bytes(json.dumps(row, sort_keys=True).encode())[:8]
+                ext=f"{ext}-{suffix}"
+                row.setdefault("identifier_collision_resolution", {"collision_checked": True, "collision_suffix": suffix})
+            seen_ids.add((rc, ext))
             payload={k:v for k,v in row.items() if v not in ("", None)}
             payload.setdefault("twin_version", package.identity.package_version)
             payload["mapping_version"] = MAPPING_VERSION
             payload["mapping_disposition"] = "unsupported" if not mapping else mapping.disposition
             payload["source_worksheet"] = sheet; payload["source_row"] = idx
-            if mapping and mapping.human_supplied: payload["human_supplied"] = True
+            payload.setdefault("identifier_metadata", {"source_supplied": bool('ext_supplied' in locals() and ext_supplied), "derived": bool(isinstance(payload.get("identifier_derivation"), dict))})
+            if mapping and mapping.human_supplied: payload["human_supplied"] = True; payload.setdefault("truth_class", "human-supplied")
             loc={"workbook": workbook_path, "sheet": sheet, "row": idx, "stable_id": ext, "mapping_version": MAPPING_VERSION, "header_row": header_pos+1}
             out.append(CandidateImportRecord("1.0", candidate_id(package.package_ref, workbook_path, ext, rc), package.package_ref, package.package_sha256, workbook_path, sheet, loc, ext, rc, truth, payload, status, tuple(findings), sha256_bytes(json.dumps(payload, sort_keys=True).encode()), utc_now(), package.import_run_id, 0))
         return out

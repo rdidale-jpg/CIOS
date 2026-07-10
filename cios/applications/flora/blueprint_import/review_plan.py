@@ -92,7 +92,7 @@ class BlueprintReviewPlanCoordinator:
             job.update(stage=STAGES[5], records_processed=len(effects)); self._save_job(job)
             q = Counter(_finding_reason(c) for c in candidates.values() if c.get("validation_status") == "quarantined")
             rejected = [c for c in candidates.values() if c.get("validation_status") == "rejected"]
-            summary = {**job, "status":"Ready", "stage":"Complete", "completed_at":time.time(), "plan_id":plan.plan_id, "plan_persisted":True, "proposed":{"Creates":totals["create"],"Updates":totals["update"],"Unchanged":totals["unchanged"]+totals["mapped"],"Conflicts":totals["conflict"],"Unresolved references":totals["unresolved"],"Projection-only":totals["projection"]}, "mapping_version": MAPPING_VERSION, "candidate_summary": _candidate_counts(candidates.values()), "class_summary": _class_counts(candidates.values()), "sheet_mapping_summary": _sheet_counts(candidates.values()), "examples_by_class": _examples_by_class(candidates.values()), "quarantine_reasons": dict(q), "rejected_count": len(rejected), "deployment_commit_sha": deployment_metadata().get("commit_sha") or "Unavailable"}
+            summary = {**job, "status":"Ready", "stage":"Complete", "completed_at":time.time(), "plan_id":plan.plan_id, "plan_persisted":True, "proposed":{"Creates":totals["create"],"Updates":totals["update"],"Unchanged":totals["unchanged"]+totals["mapped"],"Conflicts":totals["conflict"],"Unresolved references":totals["unresolved"],"Projection-only":totals["projection"], "Ignored":totals["ignored"]}, "mapping_version": MAPPING_VERSION, "candidate_summary": _candidate_counts(candidates.values()), "class_summary": _class_counts(candidates.values()), "sheet_mapping_summary": _sheet_counts(candidates.values()), "examples_by_class": _examples_by_class(candidates.values()), "quarantine_reasons": dict(q), "ignored_reasons": _ignored_reasons(candidates.values()), "rejected_reasons": _rejected_reasons(rejected), "mapping_quality": _mapping_quality(candidates.values()), "rejected_count": len(rejected), "deployment_commit_sha": deployment_metadata().get("commit_sha") or "Unavailable"}
             atomic_write_json(self.detail_path(job["import_run_id"]), {"effects": effects, "candidates": list(candidates.values())})
             self._save_job(summary)
             atomic_write_json(self.summary_path(job["import_run_id"]), summary)
@@ -106,7 +106,7 @@ class BlueprintReviewPlanCoordinator:
 
 def _candidate_counts(candidates):
     c = Counter(x.get("validation_status") for x in candidates)
-    return {"Accepted": c["accepted"], "Quarantined": c["quarantined"], "Rejected": c["rejected"], "Unsupported": 0}
+    return {"Accepted": c["accepted"], "Quarantined": c["quarantined"], "Rejected": c["rejected"], "Ignored": c["ignored"], "Unsupported": 0}
 
 def _class_counts(candidates):
     by=defaultdict(Counter)
@@ -128,3 +128,36 @@ def _examples_by_class(candidates):
 def _finding_reason(candidate):
     findings = candidate.get("validation_findings") or []
     return str((findings[0] or {}).get("message") or (findings[0] or {}).get("code") or "Quarantined by staging validation") if findings else "Quarantined by staging validation"
+
+
+def _ignored_reasons(candidates):
+    out = Counter()
+    for c in candidates:
+        if c.get("validation_status") == "ignored":
+            out[str((c.get("payload") or {}).get("ignore_reason") or "ignored_row")] += 1
+    return dict(out)
+
+
+def _rejected_reasons(candidates):
+    out = Counter()
+    for c in candidates:
+        out[_finding_reason(c)] += 1
+    return dict(out)
+
+
+def _mapping_quality(candidates):
+    rows = list(candidates)
+    accepted = [c for c in rows if c.get("validation_status") == "accepted"]
+    projection = [c for c in rows if c.get("candidate_object_class") in {"pain_point", "current_response", "response_effectiveness", "residual_pain", "burning_platform", "transformation_pressure_view", "priority_disposition", "stakeholder_hot_button", "solution_pattern", "executive_publication"}]
+    derived = sum(1 for c in rows if isinstance((c.get("payload") or {}).get("identifier_derivation"), dict))
+    source_supplied = sum(1 for c in rows if ((c.get("payload") or {}).get("identifier_metadata") or {}).get("source_supplied"))
+    classes = {c.get("candidate_object_class") for c in accepted}
+    return {
+        "accepted_by_class": _class_counts(accepted).get("accepted", {}),
+        "projection_only_by_class": dict(Counter(c.get("candidate_object_class") for c in projection)),
+        "top_source_worksheets": dict(Counter(c.get("source_sheet") for c in rows).most_common(10)),
+        "top_unresolved_lineage_patterns": dict(Counter(_finding_reason(c) for c in rows if "lineage" in _finding_reason(c).casefold()).most_common(10)),
+        "derived_id_count": derived,
+        "source_supplied_id_count": source_supplied,
+        "twin_completeness_indicators": {name: (name in classes) for name in ["source", "evidence", "observation", "unknown", "contradiction", "entity", "relationship", "human_knowledge"]} | {"projection_layer": bool(projection)},
+    }
