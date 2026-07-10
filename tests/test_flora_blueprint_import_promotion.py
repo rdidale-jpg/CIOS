@@ -275,3 +275,47 @@ def test_real_mod_workbook_atomicity_scan_reports_every_failing_observation():
             report.append({"observation_id":oid,"source_row":row,"failure_reason":finding.reason,"proposed_safe_disposition":"quarantined_non_atomic_observation"})
     assert [r["observation_id"] for r in report] == ["OBS-2", "OBS-3"]
     assert all(r["source_row"] for r in report)
+
+
+def test_blueprint_persistence_contract_accounts_all_mod_classes(monkeypatch,tmp_path):
+    records=[
+        {"external_id":"SRC-1","record_class":"source","truth_class":"package_metadata","payload":{}},
+        {"external_id":"EVD-1","record_class":"evidence","truth_class":"evidence_backed","payload":{"quote":"q"}},
+        {"external_id":"OBS-1","record_class":"observation","truth_class":"observed","payload":{"atomic_statement":"MOD fact is recorded.","type":"fact","affected_entity_relationship":"enterprise.fact","event_date":"2026-01-01","supporting_evidence_ids":"EVD-1"}},
+        {"external_id":"UNK-1","record_class":"unknown","truth_class":"unknown","payload":{"question":"What remains unknown?"}},
+        {"external_id":"CON-1","record_class":"contradiction","truth_class":"contradiction","payload":{"statement_a":"A","statement_b":"B"}},
+        {"external_id":"ENT-1","record_class":"entity","truth_class":"entity","payload":{"name":"Entity"}},
+        {"external_id":"REL-1","record_class":"relationship","truth_class":"relationship","payload":{"from":"A","to":"B"}},
+        {"external_id":"HK-1","record_class":"human_knowledge","truth_class":"human_supplied","payload":{"statement":"Human supplied fact"}},
+        {"external_id":"EMC-1","record_class":"enterprise_model_candidate","truth_class":"candidate","payload":{}},
+    ]
+    r, _, p=_plan_with(monkeypatch,tmp_path,records)
+    effects={e.external_id:e for e in p.effects}
+    assert effects["SRC-1"].effect_type == "mapped" and effects["SRC-1"].expected_mutation_count == 0
+    assert effects["EMC-1"].effect_type == "mapped" and effects["EMC-1"].expected_mutation_count == 0
+    assert p.expected_canonical_mutation_count == 7
+    approval=CanonicalPromotionService().approve_plan(r.import_run_id,p.plan_id,"alice","ok",PROMOTE_HEADERS)
+    res=CanonicalPromotionService().execute_approved_plan(r.import_run_id, approval.approval_id, "alice", PROMOTE_HEADERS)
+    assert res.actual_mutation_count == res.expected_mutation_count == 7
+    assert len(res.records_mapped) == 2
+    for name in ["evidence","observations","unknown","contradiction","entity","relationship","human_knowledge"]:
+        path = tmp_path/"memory"/f"{name}.jsonl"
+        if name == "observations": path = tmp_path/"memory"/"observations.jsonl"
+        if name == "contradiction": path = tmp_path/"memory"/"contradictions.jsonl"
+        assert path.exists(), name
+
+
+def test_review_candidate_reconciliation_distinct_from_mutation_count(monkeypatch,tmp_path):
+    records=[
+        {"external_id":"SRC-1","record_class":"source","truth_class":"package_metadata","payload":{}},
+        {"external_id":"EMC-1","record_class":"enterprise_model_candidate","truth_class":"candidate","payload":{}},
+        {"external_id":"UNK-1","record_class":"unknown","truth_class":"unknown","payload":{}},
+    ]
+    r, _, p=_plan_with(monkeypatch,tmp_path,records)
+    from cios.applications.flora.blueprint_import.review_plan import BlueprintReviewPlanCoordinator
+    job=BlueprintReviewPlanCoordinator().ensure_job(r.import_run_id,"alice",PROMOTE_HEADERS, lambda: None)
+    assert job["accepted_canonical"] == 3
+    assert job["proposed"]["Accepted support records"] == 2
+    assert job["proposed"]["Expected canonical mutations"] == 1
+    assert job["reconciliation"]["passes"] is True
+    assert job["reconciliation"]["expected_mutations"] == 1

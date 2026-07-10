@@ -22,7 +22,8 @@ from .registry import BlueprintPackageRegistry
 from .review import CandidateReviewRepository
 
 PromotionStatus = Literal["succeeded", "repeat_no_change", "failed"]
-SUPPORTED_PROMOTION_CLASSES = {"evidence", "observation", "contradiction"}
+SUPPORTED_PROMOTION_CLASSES = {"evidence", "observation", "contradiction", "unknown", "entity", "relationship", "human_knowledge"}
+SUPPORT_RECORD_CLASSES = {"source", "enterprise_model_candidate"}
 NON_MUTATING_EFFECTS = {"mapped", "unchanged", "duplicate", "reject", "defer", "quarantine", "unsupported", "unresolved", "projection", "conflict"}
 
 
@@ -121,11 +122,8 @@ class CanonicalPromotionResult:
 
 def _plan_reconciles(plan: dict[str, Any]) -> bool:
     effects = plan.get("effects") or []
-    accepted = sum(1 for e in effects if e.get("effect_type") in {"create", "update", "unchanged", "mapped"})
-    creates = sum(1 for e in effects if e.get("effect_type") == "create")
-    updates = sum(1 for e in effects if e.get("effect_type") == "update")
-    unchanged = sum(1 for e in effects if e.get("effect_type") in {"unchanged", "mapped"})
-    return accepted == creates + updates + unchanged
+    account = {"create", "update", "unchanged", "mapped", "duplicate"}
+    return all(e.get("effect_type") in account or e.get("effect_type") not in {"create", "update", "unchanged", "mapped", "duplicate"} for e in effects)
 
 class CanonicalPromotionRepository:
     def _approval_dir(self, import_run_id: str): return data_path("blueprint_import", "promotion", "approvals", import_run_id)
@@ -145,13 +143,43 @@ class CanonicalPromotionRepository:
                 return CanonicalPromotionResult(**{**d, **{k:tuple(d.get(k,())) for k in ("records_created","records_updated","records_mapped","records_unchanged","records_skipped","records_blocked","records_failed")}})
         return None
 
+
+class CanonicalJsonlRepository:
+    """Generic durable JSONL canonical store for Blueprint-owned classes."""
+    def __init__(self, record_class: str):
+        self.record_class = record_class
+        self.path = data_path("memory", f"{record_class}.jsonl")
+
+    def list(self) -> list[dict[str, Any]]:
+        if not self.path.exists(): return []
+        return [json.loads(line) for line in self.path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+    def get(self, canonical_id: str) -> dict[str, Any] | None:
+        return next((r for r in self.list() if str(r.get("canonical_id")) == str(canonical_id)), None)
+
+    def save(self, row: dict[str, Any]) -> dict[str, Any]:
+        if not row.get("canonical_id"): raise ValueError(f"{self.record_class} requires canonical_id")
+        rows = self.list()
+        for i, existing in enumerate(rows):
+            if str(existing.get("canonical_id")) == str(row.get("canonical_id")):
+                rows[i] = {**existing, **{k:v for k,v in row.items() if v not in (None, "", [])}}
+                self._rewrite(rows); return rows[i]
+        ensure_writable_dir(self.path.parent)
+        with self.path.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"); handle.flush(); os.fsync(handle.fileno())
+        return row
+
+    def _rewrite(self, rows):
+        from cios.applications.flora.storage import atomic_write_text
+        atomic_write_text(self.path, "".join(json.dumps(r, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n" for r in rows))
+
 def _fp(obj: Any) -> str: return sha256_bytes(json.dumps(obj, sort_keys=True, separators=(",", ":")).encode())
 def _execution_id(plan_id: str, approval_id: str) -> str: return "bpi-promote-"+sha256_bytes(f"{plan_id}\n{approval_id}".encode())[:24]
 def _approval_id(plan_id: str, approver: str) -> str: return "bpi-approval-"+sha256_bytes(f"{plan_id}\n{approver}".encode())[:24]
 
 class CanonicalPromotionService:
     def __init__(self, registry=None, staging=None, reviews=None, mappings=None, plans=None, repo=None, ledger=None, evidence_repo=None, observation_repo=None):
-        self.registry=registry or BlueprintPackageRegistry(); self.staging=staging or CandidateStagingRepository(); self.reviews=reviews or CandidateReviewRepository(); self.mappings=mappings or ImportMappingRepository(); self.plans=plans or DryRunPlanRepository(); self.repo=repo or CanonicalPromotionRepository(); self.ledger=ledger or BlueprintImportLedger(); self.evidence_repo=evidence_repo or EvidenceRepository(); self.observation_repo=observation_repo or ObservationRepository(); self.contradiction_repo=ContradictionRepository()
+        self.registry=registry or BlueprintPackageRegistry(); self.staging=staging or CandidateStagingRepository(); self.reviews=reviews or CandidateReviewRepository(); self.mappings=mappings or ImportMappingRepository(); self.plans=plans or DryRunPlanRepository(); self.repo=repo or CanonicalPromotionRepository(); self.ledger=ledger or BlueprintImportLedger(); self.evidence_repo=evidence_repo or EvidenceRepository(); self.observation_repo=observation_repo or ObservationRepository(); self.contradiction_repo=ContradictionRepository(); self.generic_repos={rc: CanonicalJsonlRepository(rc) for rc in ("unknown", "entity", "relationship", "human_knowledge")}
     def approve_plan(self, import_run_id: str, plan_id: str, approver: str, rationale: str, headers: Any, unresolved_warnings_accepted: tuple[str,...]=(), expiry_or_invalidation_condition: str="invalid if plan, package, review decisions or mappings change"):
         plan=self._load_plan(import_run_id, plan_id); package=self.registry.get(plan["package_ref"])
         if not package or not can_approve_blueprint_promotion(headers, package.identity.enterprise_id): raise BlueprintPromotionError("Actor is not authorised to approve Blueprint canonical promotion")
@@ -175,7 +203,8 @@ class CanonicalPromotionService:
                 c=candidates.get(e.candidate_id); d=reviews.get(e.candidate_id); m=maps.get(e.candidate_id)
                 if not c or not d or d.get("decision")!="approve": blocked.append(e.candidate_id); continue
                 if e.effect_type in NON_MUTATING_EFFECTS: (mapped if e.effect_type=="mapped" else unchanged if e.effect_type in {"unchanged","duplicate"} else skipped).append(e.candidate_id); continue
-                if e.effect_type not in {"create","update"} or e.record_class not in SUPPORTED_PROMOTION_CLASSES: skipped.append(e.candidate_id); continue
+                if e.effect_type not in {"create","update"} or e.record_class not in SUPPORTED_PROMOTION_CLASSES:
+                    skipped.append(f"{e.record_class}:{e.candidate_id}"); continue
                 cid=self._promote(e, c, d, m or {}, a, actor)
                 (created if e.effect_type=="create" else updated).append(cid)
             actual=len(created)+len(updated)
@@ -207,6 +236,7 @@ class CanonicalPromotionService:
                     if not (payload.get("statement_a") or payload.get("position_a") or payload.get("claim_a")): raise BlueprintPromotionError("statement_a missing")
                     if not (payload.get("statement_b") or payload.get("position_b") or payload.get("claim_b")): raise BlueprintPromotionError("statement_b missing")
                 elif e.record_class == "evidence": pass
+                elif e.record_class in self.generic_repos: self._generic_row(e, c, payload, self._lineage(e,c,d,m,dummy,"prevalidation"), {})
             except Exception as exc: failures.append(f"{e.candidate_id} ({c.get('original_source_id')}): {exc}")
         if failures: raise BlueprintPromotionError("Constructor validation failed before approval: " + "; ".join(failures))
     def _load_plan(self, import_run_id, plan_id):
@@ -232,7 +262,16 @@ class CanonicalPromotionService:
             prior=self.contradiction_repo.get(cid)
             row={**payload, "contradiction_id": cid, "statement_a": payload.get("statement_a") or payload.get("position_a") or payload.get("claim_a") or "", "statement_b": payload.get("statement_b") or payload.get("position_b") or payload.get("claim_b") or "", "contradiction_class": payload.get("contradiction_class") or payload.get("class") or "", "judgement": payload.get("current_judgement") or payload.get("judgement") or "", "evidence_need": payload.get("evidence_needed") or payload.get("evidence_need") or "", "affected_outputs": payload.get("affected_outputs") or "", "status": payload.get("status") or "open", "blueprint_import_lineage": {**lineage, "canonical_id": cid, "prior_canonical_version": prior}}
             return self.contradiction_repo.save(row)["contradiction_id"]
+        if e.record_class in self.generic_repos:
+            row = self._generic_row(e, c, payload, lineage, m)
+            return self.generic_repos[e.record_class].save(row)["canonical_id"]
         raise BlueprintPromotionError("Unsupported canonical class")
+
+    def _generic_row(self, e, c, payload, lineage, m):
+        ids = {"unknown":"unknown_id", "entity":"entity_id", "relationship":"relationship_id", "human_knowledge":"human_knowledge_id"}
+        key = ids[e.record_class]
+        cid = e.canonical_id or m.get("canonical_id") or m.get("proposed_canonical_id") or payload.get(key) or c.get("original_source_id") or f"{e.record_class.upper()}-" + sha256_bytes(e.effect_id.encode())[:16].upper()
+        return {**payload, key: cid, "canonical_id": cid, "record_class": e.record_class, "blueprint_import_lineage": {**lineage, "canonical_id": cid, "prior_canonical_version": self.generic_repos[e.record_class].get(cid)}}
 
     def _observation_from_payload(self, e: ProposedCanonicalEffect, c: dict[str, Any], payload: dict[str, Any], lineage: dict[str, Any], a: CanonicalPromotionApproval) -> Observation:
         package = self.registry.get(a.package_ref)
@@ -293,7 +332,7 @@ class CanonicalPromotionService:
             observation_fingerprint=_clean(payload.get("observation_fingerprint")) or None,
         )
     def _backup_paths(self):
-        paths=[self.evidence_repo.path, self.observation_repo.path, self.contradiction_repo.path]; b=[]
+        paths=[self.evidence_repo.path, self.observation_repo.path, self.contradiction_repo.path] + [r.path for r in self.generic_repos.values()]; b=[]
         for p in paths:
             bp=Path(str(p)+".bpi_backup")
             if p.exists(): ensure_writable_dir(bp.parent); shutil.copy2(p,bp); b.append((p,bp,True))

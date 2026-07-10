@@ -9,6 +9,9 @@ from cios.applications.flora.storage import atomic_write_json, data_path
 
 from .archive import sha256_bytes
 from .candidates import PROJECTION_ONLY_CLASSES, CandidateStagingRepository
+
+PERSISTABLE_CANONICAL_CLASSES = {"evidence", "observation", "contradiction", "unknown", "entity", "relationship", "human_knowledge"}
+SUPPORT_RECORD_CLASSES = {"source", "enterprise_model_candidate"}
 from .ledger import BlueprintImportLedger, utc_now
 from .mapping import ImportMappingRepository
 from .review import CandidateReviewRepository, BlueprintReviewError, can_review_blueprint_candidate
@@ -96,6 +99,8 @@ class DryRunPlanningService:
             typ="quarantine"
             reason=next((str(f.get("message") or f.get("code")) for f in (c.get("validation_findings") or []) if f.get("code") == "quarantined_non_atomic_observation"), "Candidate is quarantined")
         elif c.get("validation_status") == "rejected": typ="reject"; reason="Candidate is rejected by staging validation"
+        elif c.get("validation_status") == "accepted" and rc in SUPPORT_RECORD_CLASSES:
+            typ="mapped"; reason="Accepted support metadata; retained in import lineage, not a standalone canonical mutation"
         elif not d: typ="unresolved"; reason="No review decision recorded"
         elif rc == "observation" and d.get("decision") == "approve" and str((c.get("payload") or {}).get("proposed_effect") or "create") in {"create", "update"} and ((c.get("payload") or {}).get("atomic_statement") or (c.get("payload") or {}).get("statement") or (c.get("payload") or {}).get("claim") or (c.get("payload") or {}).get("summary")) and not validate_atomic_statement((c.get("payload") or {}).get("atomic_statement") or (c.get("payload") or {}).get("statement") or (c.get("payload") or {}).get("claim") or (c.get("payload") or {}).get("summary")).atomic:
             finding = validate_atomic_statement((c.get("payload") or {}).get("atomic_statement") or (c.get("payload") or {}).get("statement") or (c.get("payload") or {}).get("claim") or (c.get("payload") or {}).get("summary"))
@@ -112,7 +117,7 @@ class DryRunPlanningService:
             # payload test hook: unchanged/conflict/duplicate/unresolved can be expressed without canonical writes
             proposed=str(c.get("payload",{}).get("proposed_effect") or "create")
             typ=proposed if proposed in EffectType.__args__ else "create"; reason="Approved candidate dry-run proposal"
-        mutations = 1 if typ in {"create","update"} else 0
+        mutations = 1 if typ in {"create","update"} and rc in PERSISTABLE_CANONICAL_CLASSES else 0
         canonical_id = (m or {}).get("canonical_id", "") or (m or {}).get("proposed_canonical_id", "")
         conflicts = tuple(c.get("payload",{}).get("conflicts", [])) if isinstance(c.get("payload",{}).get("conflicts", []), list) else ()
         return ProposedCanonicalEffect(effect_id(str(c["import_run_id"]), cid, typ), cid, ext, rc, typ, canonical_id, reason, mutations, 0, conflicts)

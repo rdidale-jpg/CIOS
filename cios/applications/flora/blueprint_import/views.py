@@ -267,7 +267,7 @@ def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str
     body += _quarantine_reasons_section(job)
     body += _review_sections(ctx["package"].import_run_id, details, query)
     plan_id = escape(str(job.get("plan_id", "")))
-    expected = int(proposed.get("Creates", 0)) + int(proposed.get("Updates", 0))
+    expected = int(proposed.get("Expected canonical mutations", int(proposed.get("Creates", 0)) + int(proposed.get("Updates", 0))))
     rec = job.get("reconciliation") or {}
     if rec and not rec.get("passes", True):
         body += f"""<section class='card warning'><h2>Approval</h2><p><strong>Approval blocked:</strong> accepted canonical candidates do not reconcile with creates, updates and unchanged.</p><p>Mismatch: {int(rec.get("mismatch", 0))}</p><button type='button' disabled>Approve and update governed Twin</button></section>"""
@@ -309,7 +309,10 @@ def _review_summary_section(ctx, job, counts, proposed) -> str:
     <tr><th>Mapping version</th><td><code>{escape(str(job.get('mapping_version') or (ctx.get('summary') or {}).get('mapping_version') or MAPPING_VERSION))}</code></td></tr>
     <tr><th>Review generated from</th><td><code>{escape(str((ctx.get('summary') or {}).get('staging_version', 'staging-v1')))}</code></td></tr>
     <tr><th>Accepted canonical candidates</th><td>{int(counts.get('Accepted canonical candidates', counts.get('Accepted', 0)))}</td></tr>
+    <tr><th>Accepted support records</th><td>{val('Accepted support records')}</td></tr>
     <tr><th>Accepted but non-persistable</th><td>{int(counts.get('Accepted but non-persistable', proposed.get('Accepted but non-persistable', 0)))}</td></tr>
+    <tr><th>Collapsed/deduplicated candidates</th><td>{val('Collapsed/deduplicated candidates')}</td></tr>
+    <tr><th>Expected canonical mutations</th><td>{val('Expected canonical mutations')}</td></tr>
     <tr><th>Quarantined</th><td>{int(counts.get('Quarantined', 0))}</td></tr>
     <tr><th>Rejected</th><td>{int(counts.get('Rejected', 0))}</td></tr>
     <tr><th>Unsupported</th><td>{int(counts.get('Unsupported', 0))}</td></tr>

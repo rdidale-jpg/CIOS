@@ -10,7 +10,7 @@ from cios.applications.flora.storage import atomic_write_json, data_path
 from cios.applications.flora.live.runtime import deployment_metadata
 from .archive import sha256_bytes
 from .candidates import CandidateStagingRepository
-from .planning import DryRunPlanRepository, DryRunPlanningService
+from .planning import DryRunPlanRepository, DryRunPlanningService, PERSISTABLE_CANONICAL_CLASSES, SUPPORT_RECORD_CLASSES
 from .registry import BlueprintPackageRegistry
 from .cios_twin_adapter import MAPPING_VERSION
 
@@ -97,11 +97,15 @@ class BlueprintReviewPlanCoordinator:
             q = Counter(_finding_reason(c) for c in candidates.values() if c.get("validation_status") == "quarantined")
             constructor_failures = sum(1 for c in candidates.values() if any((f.get("code") == "quarantined_non_atomic_observation") for f in (c.get("validation_findings") or [])))
             rejected = [c for c in candidates.values() if c.get("validation_status") == "rejected"]
-            proposed = {"Creates":totals["create"],"Updates":totals["update"],"Unchanged":totals["unchanged"]+totals["mapped"],"Conflicts":totals["conflict"],"Unresolved references":totals["unresolved"],"Projection-only":totals["projection"], "Ignored":totals["ignored"], "Accepted but non-persistable": 0}
-            accepted_canonical = sum(1 for c in candidates.values() if c.get("validation_status") == "accepted") - proposed["Accepted but non-persistable"]
-            canonical_actions = proposed["Creates"] + proposed["Updates"] + proposed["Unchanged"]
-            reconciles = accepted_canonical == canonical_actions
-            summary = {**job, "status":"Ready" if reconciles else "Not ready", "stage":"Complete", "completed_at":time.time(), "plan_id":plan.plan_id, "plan_persisted":True, "proposed": proposed, "accepted_canonical": accepted_canonical, "constructor_validation_failures": constructor_failures, "non_atomic_observations": constructor_failures, "reconciliation": {"accepted_canonical": accepted_canonical, "creates": proposed["Creates"], "updates": proposed["Updates"], "unchanged": proposed["Unchanged"], "accepted_but_non_persistable": 0, "passes": reconciles, "mismatch": accepted_canonical - canonical_actions}, "mapping_version": MAPPING_VERSION, "candidate_summary": _candidate_counts(candidates.values(), accepted_canonical), "class_summary": _class_counts(candidates.values()), "sheet_mapping_summary": _sheet_counts(candidates.values()), "examples_by_class": _examples_by_class(candidates.values()), "quarantine_reasons": dict(q), "ignored_reasons": _ignored_reasons(candidates.values()), "rejected_reasons": _rejected_reasons(rejected), "mapping_quality": _mapping_quality(candidates.values()), "rejected_count": len(rejected), "deployment_commit_sha": deployment_metadata().get("commit_sha") or "Unavailable"}
+            support_records = sum(1 for c in candidates.values() if c.get("validation_status") == "accepted" and c.get("candidate_object_class") in SUPPORT_RECORD_CLASSES)
+            non_persistable = 0
+            collapsed = totals["duplicate"]
+            proposed = {"Creates":totals["create"],"Updates":totals["update"],"Unchanged":totals["unchanged"],"Accepted support records": support_records,"Collapsed/deduplicated candidates": collapsed,"Conflicts":totals["conflict"],"Unresolved references":totals["unresolved"],"Projection-only":totals["projection"], "Ignored":totals["ignored"], "Accepted but non-persistable": non_persistable, "Expected canonical mutations": plan.expected_canonical_mutation_count}
+            accepted_canonical = sum(1 for c in candidates.values() if c.get("validation_status") == "accepted")
+            candidate_actions = proposed["Creates"] + proposed["Updates"] + proposed["Unchanged"] + proposed["Accepted support records"] + proposed["Accepted but non-persistable"] + proposed["Collapsed/deduplicated candidates"]
+            unaccounted = accepted_canonical - candidate_actions
+            reconciles = unaccounted == 0
+            summary = {**job, "status":"Ready" if reconciles else "Not ready", "stage":"Complete", "completed_at":time.time(), "plan_id":plan.plan_id, "plan_persisted":True, "proposed": proposed, "accepted_canonical": accepted_canonical, "constructor_validation_failures": constructor_failures, "non_atomic_observations": constructor_failures, "reconciliation": {"accepted_canonical": accepted_canonical, "creates": proposed["Creates"], "updates": proposed["Updates"], "unchanged": proposed["Unchanged"], "accepted_support_records": support_records, "accepted_but_non_persistable": non_persistable, "collapsed_deduplicated_candidates": collapsed, "expected_mutations": plan.expected_canonical_mutation_count, "passes": reconciles, "mismatch": unaccounted}, "class_persistence_readiness": _class_persistence_readiness(candidates.values(), effects), "mapping_version": MAPPING_VERSION, "candidate_summary": _candidate_counts(candidates.values(), accepted_canonical), "class_summary": _class_counts(candidates.values()), "sheet_mapping_summary": _sheet_counts(candidates.values()), "examples_by_class": _examples_by_class(candidates.values()), "quarantine_reasons": dict(q), "ignored_reasons": _ignored_reasons(candidates.values()), "rejected_reasons": _rejected_reasons(rejected), "mapping_quality": _mapping_quality(candidates.values()), "rejected_count": len(rejected), "deployment_commit_sha": deployment_metadata().get("commit_sha") or "Unavailable"}
             atomic_write_json(self.detail_path(job["import_run_id"]), {"effects": effects, "candidates": list(candidates.values())})
             self._save_job(summary)
             atomic_write_json(self.summary_path(job["import_run_id"]), summary)
@@ -115,7 +119,7 @@ class BlueprintReviewPlanCoordinator:
 
 def _candidate_counts(candidates, accepted_canonical: int | None = None):
     c = Counter(x.get("validation_status") for x in candidates)
-    return {"Accepted": c["accepted"] if accepted_canonical is None else accepted_canonical, "Accepted canonical candidates": c["accepted"] if accepted_canonical is None else accepted_canonical, "Accepted but non-persistable": 0, "Quarantined": c["quarantined"], "Rejected": c["rejected"], "Ignored": c["ignored"], "Unsupported": 0}
+    return {"Accepted": c["accepted"], "Accepted canonical candidates": c["accepted"] if accepted_canonical is None else accepted_canonical, "Accepted support records": 0, "Accepted but non-persistable": 0, "Collapsed/deduplicated candidates": 0, "Quarantined": c["quarantined"], "Rejected": c["rejected"], "Ignored": c["ignored"], "Unsupported": 0}
 
 def _class_counts(candidates):
     by=defaultdict(Counter)
@@ -172,3 +176,16 @@ def _mapping_quality(candidates):
         "derived_id_failures": sum(1 for c in rows if any((f.get("code") == "quarantined_missing_identifier") for f in (c.get("validation_findings") or []))),
         "twin_completeness_indicators": {name: (name in classes) for name in ["source", "evidence", "observation", "unknown", "contradiction", "entity", "relationship", "human_knowledge"]} | {"projection_layer": bool(projection)},
     }
+
+
+def _class_persistence_readiness(candidates, effects):
+    accepted = Counter(c.get("candidate_object_class") for c in candidates if c.get("validation_status") == "accepted")
+    by_class = defaultdict(lambda: Counter())
+    for e in effects:
+        by_class[e["record_class"]][e["effect_type"]] += 1
+        by_class[e["record_class"]]["expected_mutations"] += int(e.get("expected_mutation_count") or 0)
+    rows = []
+    for rc in sorted(accepted):
+        disposition = "persistable" if rc in PERSISTABLE_CANONICAL_CLASSES else "support_metadata" if rc in SUPPORT_RECORD_CLASSES else "non_persistable"
+        rows.append({"class": rc, "accepted": accepted[rc], "persistable": rc in PERSISTABLE_CANONICAL_CLASSES, "planned_effects": dict(by_class[rc]), "expected_mutations": by_class[rc]["expected_mutations"], "disposition": disposition})
+    return rows
