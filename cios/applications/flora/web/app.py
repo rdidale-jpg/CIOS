@@ -30,6 +30,7 @@ from cios.applications.flora.pilot_auth import audit as pilot_audit, clear_sessi
 from cios.applications.flora.flora_transparent import start_bt_digital_twin, flora_payload
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
 from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page, restage_confirm_page as blueprint_restage_confirm_page, restage_package as blueprint_restage_package, restage_progress_page as blueprint_restage_progress_page, restage_history_page as blueprint_restage_history_page
+from cios.applications.flora.enterprise_intelligence.views import executive_intelligence_brief_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -126,6 +127,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path.startswith("/blueprint-import/"):
                 run_id = parsed.path.removeprefix("/blueprint-import/")
                 html, status = validation_result_page(run_id, self.headers)
+                self._html(html, status=status)
+            elif _is_enterprise_intelligence_path(parsed.path):
+                enterprise_id = [part for part in parsed.path.split('/') if part][1]
+                html, status = executive_intelligence_brief_page(enterprise_id, self.headers)
                 self._html(html, status=status)
             elif _is_enterprise_canvas_path(parsed.path):
                 html, status = _enterprise_canvas_response(parsed.path, self.headers)
@@ -401,6 +406,10 @@ def _flora_home_page(headers=None) -> str:
     </style></head><body><main class='shell'><section class='hero'><h1>Flora Home</h1><p class='muted'>Governed product home for Flora.</p><span hidden>Good Morning Rob</span><span hidden>Morning Edition</span><span hidden>NO LIVE EVIDENCE AVAILABLE</span><a hidden href='/score/BT'>Explain score</a><a hidden href='/financial-reports'>Collect Financial Report</a><p class='muted'>Deployed release identifier: {revision}</p></section><section class='grid'><article class='card'><h2><a href='/blueprint-import'>Import Blueprint</a></h2><p>Upload and validate governed blueprint packages without changing canonical state until approved.</p></article><article class='card'><h2><a href='/blueprint-import/history'>Enterprise Canvas</a></h2><p>Open a governed Enterprise Canvas from its persisted import history.</p></article><article class='card'><h2><a href='/blueprint-import/history'>Import History</a></h2><p>Review prior blueprint import runs and outcomes.</p></article></section>{auth}</main></body></html>"""
 
 
+def _is_enterprise_intelligence_path(path: str) -> bool:
+    parts = [part for part in path.split('/') if part]
+    return len(parts) == 3 and parts[0] == 'digital-twins' and parts[2] in {'executive-intelligence-brief', 'intelligence'}
+
 def _is_enterprise_canvas_path(path: str) -> bool:
     parts = [part for part in path.split("/") if part]
     return len(parts) in {3, 5, 6} and parts[0] == "digital-twins" and parts[2] == "canvas" and (len(parts) == 3 or parts[3] == "tiles") and (len(parts) != 6 or parts[5] == "lineage")
@@ -424,7 +433,7 @@ def _legacy_twin_redirect_target(path: str, query: dict[str, list[str]]) -> str:
     enterprise_id = [part for part in path.split("/") if part][1]
     if (query.get("audit") or [""])[0] in {"1", "true", "yes"} and (query.get("import_run_id") or [""])[0]:
         return f"/blueprint-import/{(query.get('import_run_id') or [''])[0]}"
-    return f"/digital-twins/{enterprise_id}/canvas"
+    return f"/digital-twins/{enterprise_id}/executive-intelligence-brief"
 
 
 def _is_support_report_path(path: str) -> bool:
