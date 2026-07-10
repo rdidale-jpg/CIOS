@@ -9,7 +9,7 @@ import json
 from dataclasses import asdict, dataclass, field
 from typing import Any, Literal
 
-from cios.applications.flora.access import authenticated_flora_user, user_enterprise_access
+from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise, flora_roles
 from cios.applications.flora.storage import atomic_write_json, data_path
 
 from .archive import sha256_bytes
@@ -24,18 +24,12 @@ class BlueprintReviewError(PermissionError):
     """Raised when a review decision cannot be recorded."""
 
 
-def _roles(headers: Any) -> set[str]:
-    raw = headers.get("X-Flora-Roles", "") or ""
-    return {item.strip() for item in str(raw).replace("|", ",").split(",") if item.strip()}
-
-
 def can_review_blueprint_candidate(headers: Any, enterprise_id: str) -> bool:
     if not authenticated_flora_user(headers):
         return False
-    allowed = user_enterprise_access(headers)
-    if "*" not in allowed and enterprise_id not in allowed:
+    if not can_access_enterprise(headers, enterprise_id):
         return False
-    return bool(_roles(headers) & {"package.review", "blueprint_import_admin"})
+    return bool(flora_roles(headers) & {"package.review", "blueprint_import_admin"})
 
 
 @dataclass(frozen=True)

@@ -5,10 +5,11 @@ from collections import Counter
 from html import escape
 from typing import Any
 
-from cios.applications.flora.access import authenticated_flora_user, can_receive_blueprint_package, user_enterprise_access
+from cios.applications.flora.access import authenticated_flora_user, can_receive_blueprint_package, flora_roles, is_cios_owner, user_enterprise_access
 from cios.applications.flora.workspace.views import _page
 
 from .archive import sha256_bytes
+from .ledger import BlueprintImportLedger
 from .candidates import CandidateStagingRepository
 from .mapping import ImportMappingService
 from .planning import DryRunPlanRepository, DryRunPlanningService
@@ -24,7 +25,7 @@ ZIP_MIME_TYPES = {"application/zip", "application/x-zip-compressed", "applicatio
 
 def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, int]:
     if not can_receive_blueprint_package(headers):
-        return _safe_failure("Blueprint import access denied", "upload", False, False, "Ask an administrator for Blueprint upload permission."), 403
+        return _safe_failure("Blueprint import access denied", "upload", False, False, _permission_guidance(headers)), 403
     body = f"""<section class='hero'><h1>Import Blueprint</h1><p>Select a Commercial Digital Twin Blueprint ZIP from your computer.</p>{_notice(message)}</section>
     <section class='card'><h2>Upload package</h2><p><strong>Supported format:</strong> .zip Blueprint package. <strong>Maximum size:</strong> {MAX_UPLOAD_BYTES // (1024*1024)} MB.</p><p class='muted'>Blueprint packages may contain confidential enterprise intelligence. Upload only packages you are authorised to use.</p><p><strong>Uploading a Blueprint does not change the governed Twin. Flora will validate and stage the package for review first.</strong></p><form method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><label for='blueprint_zip'>Blueprint ZIP file</label><input id='blueprint_zip' name='blueprint_zip' type='file' accept='.zip,application/zip' required><p><button type='submit'>Upload and validate</button></p></form></section>
     <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous Blueprint imports</a></p></section>"""
@@ -37,7 +38,8 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
     mime = fields.get("blueprint_zip.content_type") or fields.get("content_type") or ""
     try:
         if not can_receive_blueprint_package(headers):
-            raise PermissionError("You are not authorised to upload Blueprint packages.")
+            _audit_authorisation("package_upload_authorisation_denied", headers, "upload", "denied", "missing package.upload or owner-inherited authority")
+            raise PermissionError("You do not have permission to import Blueprints in this workspace.")
         content = files.get("blueprint_zip") or files.get("file") or b""
         if not filename.lower().endswith(".zip") or mime not in ZIP_MIME_TYPES:
             raise PackageReceiptError("Choose a valid Blueprint ZIP file.")
@@ -45,11 +47,12 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
             raise PackageReceiptError(f"The selected file is larger than the {MAX_UPLOAD_BYTES // (1024*1024)} MB upload limit.")
         before = _canonical_marker()
         record = BlueprintPackageRegistry().receive(content, filename, actor)
+        _audit_authorisation("package_upload_authorisation_allowed", headers, "upload", "allowed", "", record.package_ref, record.import_run_id, record.identity.enterprise_id)
         result = BlueprintPackageValidator().validate_and_stage(record.package_ref, actor, headers)
         assert before == _canonical_marker(), "Upload and validation must not mutate canonical memory"
         return validation_result_page(record.import_run_id, headers)[0], 200, f"/blueprint-import/{record.import_run_id}"
     except PermissionError as exc:
-        return _safe_failure(str(exc), "upload", False, False, "Sign in with Blueprint upload permission."), 403, "/blueprint-import"
+        return _safe_failure(str(exc), "upload", False, False, _permission_guidance(headers)), 403, "/blueprint-import"
     except Exception as exc:
         return _safe_failure(str(exc), "upload", False, False, "Choose a safe Blueprint ZIP and try again. No governed Twin changes occurred."), 400, "/blueprint-import"
 
@@ -167,3 +170,26 @@ def _canonical_marker():
     for rel in [("memory","evidence.jsonl"),("memory","observations.jsonl")]:
         p=data_path(*rel); files.append(sha256_bytes(p.read_bytes()) if p.exists() else "missing")
     return tuple(files)
+
+
+def _permission_guidance(headers: Any) -> str:
+    if is_cios_owner(headers):
+        return "Owner Blueprint import authority is misconfigured. The attempt was logged for investigation."
+    if not authenticated_flora_user(headers):
+        return "Sign in to import Blueprints in this workspace."
+    return "You do not have permission to import Blueprints in this workspace."
+
+
+def _audit_authorisation(event_type: str, headers: Any, stage: str, decision: str, reason: str, package_ref: str = "", import_run_id: str = "", enterprise_id: str = "") -> None:
+    BlueprintImportLedger().append(event_type, {
+        "actor": authenticated_flora_user(headers),
+        "enterprise_id": enterprise_id,
+        "roles": sorted(flora_roles(headers)),
+        "permission_decision": decision,
+        "blueprint_package_ref": package_ref,
+        "import_run_id": import_run_id,
+        "stage": stage,
+        "result": "failed" if decision == "denied" else "allowed",
+        "failure_reason": reason,
+        "import_job_id": "",
+    })

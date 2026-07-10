@@ -7,7 +7,7 @@ from io import BytesIO
 from pathlib import PurePosixPath
 from typing import Any
 
-from cios.applications.flora.access import authenticated_flora_user, user_enterprise_access
+from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise, flora_roles
 from cios.applications.flora.storage import data_path
 
 from .archive import _validate_zip_member, sha256_bytes
@@ -24,12 +24,9 @@ class BlueprintValidationError(PackageReceiptError):
 def can_inspect_blueprint_package(headers: Any, package: BlueprintPackageRecord) -> bool:
     if not authenticated_flora_user(headers):
         return False
-    allowed = user_enterprise_access(headers)
-    if "*" not in allowed and package.identity.enterprise_id not in allowed:
+    if not can_access_enterprise(headers, package.identity.enterprise_id):
         return False
-    raw_roles = headers.get("X-Flora-Roles", "") or ""
-    roles = {item.strip() for item in str(raw_roles).replace("|", ",").split(",") if item.strip()}
-    return bool(roles & {"package.review", "blueprint_import_admin"})
+    return bool(flora_roles(headers) & {"package.review", "blueprint_import_admin"})
 
 class BlueprintPackageValidator:
     def __init__(self, registry: BlueprintPackageRegistry | None = None, staging: CandidateStagingRepository | None = None, ledger: BlueprintImportLedger | None = None):
