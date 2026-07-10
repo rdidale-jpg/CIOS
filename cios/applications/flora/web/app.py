@@ -9,9 +9,11 @@ import json
 import os
 import tempfile
 from pathlib import Path
+from http.cookies import SimpleCookie
 from email.parser import BytesParser
 from email.policy import default as email_policy
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import quote_plus
 from urllib.parse import parse_qs, urlparse
 
 from cios.applications.flora.live.collect import collect, current_status
@@ -242,12 +244,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         elif self.path == "/flora/bt-digital-twin":
             start_bt_digital_twin()
             self._redirect("/flora")
-        elif self.path == "/digital-twins/bt-group-plc/search" or self.path.startswith("/financial-intelligence/bt-group-plc/refresh"):
+        elif self.path == "/digital-twins/bt-group-plc/search":
             start_bt_digital_twin()
             self._redirect("/flora")
         elif self.path.startswith("/financial-intelligence/bt-group-plc/refresh"):
             requested_mode = (form.get("acquisition_mode") or form.get("extraction_mode") or [""])[0]
-            run = create_financial_intelligence_progress_run("bt-group-plc", extraction_mode=requested_mode, product_surface="legacy_refresh", ordinary_research=True)
+            run = create_financial_intelligence_progress_run("bt-group-plc", extraction_mode=requested_mode)
             self._redirect(f"/digital-twins/bt-group-plc/progress/{run['run_id']}")
         elif self.path == "/ai-financial-report/upload":
             fields, files = _parse_multipart(self.headers, raw_body)
@@ -335,12 +337,16 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         self.send_response(status)
         self.send_header("Content-Type", content_type)
         self.send_header("Content-Length", str(len(body)))
+        for cookie in _flora_session_cookie_headers(self.headers):
+            self.send_header("Set-Cookie", cookie)
         self.end_headers()
         self.wfile.write(body)
 
     def _redirect(self, location: str) -> None:
         self.send_response(303)
         self.send_header("Location", location)
+        for cookie in _flora_session_cookie_headers(self.headers):
+            self.send_header("Set-Cookie", cookie)
         self.end_headers()
 
     def log_message(self, format: str, *args: object) -> None:
@@ -399,6 +405,56 @@ def _support_authorised(headers) -> bool:
     auth = headers.get("Authorization", "")
     cookie = headers.get("Cookie", "")
     return auth == f"Bearer {expected}" or cookie_value(headers, "flora_support_token") == expected
+
+
+def _header_value(headers, *names: str) -> str:
+    for name in names:
+        value = str(headers.get(name) or "").strip()
+        if value:
+            return value
+    return ""
+
+
+def _normalise_header_list(value: str) -> str:
+    return ",".join(item.strip() for item in str(value or "").replace("|", ",").split(",") if item.strip())
+
+
+def _cookie_header(name: str, value: str, secure: bool) -> str:
+    encoded = quote_plus(value)
+    cookie = SimpleCookie()
+    cookie[name] = encoded
+    morsel = cookie[name]
+    morsel["path"] = "/"
+    morsel["samesite"] = "Lax"
+    morsel["httponly"] = True
+    if secure:
+        morsel["secure"] = True
+    return morsel.OutputString()
+
+
+def _flora_session_cookie_headers(headers) -> list[str]:
+    """Persist the canonical Flora session context at the root path.
+
+    Render/auth-proxy headers are only used to mint Flora's own root-scoped
+    session cookies; Blueprint routes then consume the same cookies as every
+    other product surface instead of depending on route-local headers.
+    """
+
+    user = _header_value(headers, "X-Flora-User", "X-Auth-Request-User", "X-Auth-Request-Email", "X-Forwarded-User", "X-Forwarded-Email")
+    if not user:
+        return []
+    enterprises = _normalise_header_list(_header_value(headers, "X-Flora-Enterprises", "X-Flora-Workspaces", "X-Auth-Request-Enterprises", "X-Auth-Request-Workspaces"))
+    active_workspace = _header_value(headers, "X-Flora-Active-Workspace", "X-Flora-Workspace", "X-Auth-Request-Active-Workspace", "X-Auth-Request-Workspace")
+    roles = _normalise_header_list(_header_value(headers, "X-Flora-Roles", "X-Auth-Request-Roles", "X-Forwarded-Roles"))
+    secure = str(headers.get("X-Forwarded-Proto") or "").lower() == "https" or str(headers.get("X-Forwarded-Ssl") or "").lower() in {"on", "1", "true"}
+    cookies = [_cookie_header("flora_user", user, secure)]
+    if enterprises:
+        cookies.append(_cookie_header("flora_enterprises", enterprises, secure))
+    if active_workspace:
+        cookies.append(_cookie_header("flora_active_workspace", active_workspace, secure))
+    if roles:
+        cookies.append(_cookie_header("flora_roles", roles, secure))
+    return cookies
 
 def _redirects_to_flora(path: str) -> bool:
     if path in {"/morning-edition", "/live", "/evidence", "/portfolio", "/radar", "/scoring", "/reasoning-model", "/observatory", "/observatory/critique", "/settings", "/logbook", "/digital-twins", "/digital-twins/bt-group-plc", "/financial-intelligence", "/financial-reports", "/ai-financial-report"}:

@@ -342,3 +342,35 @@ def test_financial_intelligence_post_accepts_explicit_acquisition_mode(monkeypat
         assert captured == {'enterprise_id': 'bt-group-plc', 'extraction_mode': 'pdf_supporting_evidence'}
     finally:
         connection.close(); server.shutdown(); server.server_close(); thread.join(timeout=2)
+
+
+def _get_with_headers(path: str, headers: dict[str, str]) -> tuple[int, list[str], bytes]:
+    server = __import__("http.server").server.ThreadingHTTPServer(("127.0.0.1", 0), FloraWebHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    connection = HTTPConnection("127.0.0.1", server.server_port)
+    try:
+        connection.request("GET", path, headers=headers)
+        response = connection.getresponse()
+        body = response.read()
+        return response.status, [value for key, value in response.getheaders() if key.lower() == "set-cookie"], body
+    finally:
+        connection.close()
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=2)
+
+
+def test_authenticated_flora_page_mints_root_session_cookies_for_blueprint_navigation(monkeypatch, tmp_path) -> None:
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    status, cookies, body = _get_with_headers("/digital-twins/synthetic-enterprise/canvas", {
+        "X-Auth-Request-Email": "rob@example.test",
+        "X-Auth-Request-Workspaces": "synthetic-enterprise",
+        "X-Auth-Request-Workspace": "synthetic-enterprise",
+        "X-Auth-Request-Roles": "owner,canvas.view",
+        "X-Forwarded-Proto": "https",
+    })
+    assert status in {200, 404}
+    assert body
+    assert any(cookie.startswith("flora_user=") and "Path=/" in cookie and "SameSite=Lax" in cookie and "Secure" in cookie for cookie in cookies)
+    assert any(cookie.startswith("flora_active_workspace=") and "Path=/" in cookie for cookie in cookies)

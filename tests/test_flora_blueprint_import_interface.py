@@ -249,3 +249,51 @@ def test_blueprint_get_and_post_share_cookie_session_identity(monkeypatch, tmp_p
     result_html, post_status, _ = upload_and_validate_blueprint({"blueprint_zip": pkg()}, {"blueprint_zip.filename": "synthetic.zip", "blueprint_zip.content_type": "application/zip"}, cookie_headers)
     assert post_status == 200
     assert "Validation result" in result_html
+
+
+def test_signed_in_owner_blueprint_page_resolves_real_session_context(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    headers = {
+        "X-Auth-Request-Email": "rob@example.test",
+        "X-Auth-Request-Workspaces": "CIOS",
+        "X-Auth-Request-Workspace": "CIOS",
+        "X-Auth-Request-Roles": "owner,canvas.view",
+    }
+    html, status = import_blueprint_entry_page(headers)
+    assert status == 200
+    assert "Signed-in account</th><td>rob@example.test" in html
+    assert "Active workspace</th><td>CIOS" in html
+    assert "Owner recognised</th><td>yes" in html
+    assert "Account recognised</th><td>Passed" in html
+    assert "Workspace recognised</th><td>Passed" in html
+    assert "Membership resolved</th><td>Passed" in html
+    assert "Owner status resolved</th><td>Passed" in html
+    assert "Blueprint upload capability resolved</th><td>Passed" in html
+
+
+def test_blueprint_post_uses_same_proxy_session_context_and_denied_requests_do_not_write(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    owner_headers = {
+        "X-Auth-Request-Email": "rob@example.test",
+        "X-Auth-Request-Workspaces": "CIOS",
+        "X-Auth-Request-Workspace": "CIOS",
+        "X-Auth-Request-Roles": "owner,canvas.view",
+    }
+    result_html, post_status, target = upload_and_validate_blueprint(
+        {"blueprint_zip": pkg(manifest_extra={"package_id":"cios-blueprint","package_version":"1.0.0","enterprise_id":"CIOS","profile_version":"0.1"})},
+        {"blueprint_zip.filename": "cios.zip", "blueprint_zip.content_type": "application/zip"},
+        owner_headers,
+    )
+    assert post_status == 200
+    assert "Validation result" in result_html
+    assert target.startswith("/blueprint-import/bpi-run-")
+
+    denied_html, denied_status, _ = upload_and_validate_blueprint(
+        {"blueprint_zip": pkg()},
+        {"blueprint_zip.filename": "synthetic.zip", "blueprint_zip.content_type": "application/zip"},
+        {"X-Auth-Request-Email": "reader@example.test", "X-Auth-Request-Workspaces": "synthetic-enterprise", "X-Auth-Request-Workspace": "synthetic-enterprise", "X-Auth-Request-Roles": "canvas.view"},
+    )
+    assert denied_status == 403
+    assert "Canonical changes occurred: no" in denied_html
+    packages = list((tmp_path / "blueprint_import" / "packages").glob("*.json"))
+    assert len(packages) == 1

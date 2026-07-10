@@ -34,6 +34,7 @@ def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, i
         ref, audit_warning = _audit_authorisation("package_upload_authorisation_denied", headers, "Blueprint upload capability resolved", decision)
         return _safe_failure("Blueprint import access denied", "Blueprint upload capability resolved", False, False, _permission_guidance(headers, decision), decision, ref, audit_warning), 403
     body = f"""<section class='hero'><h1>Import Blueprint</h1><p>Select a Commercial Digital Twin Blueprint ZIP from your computer.</p>{_notice(message)}</section>
+    {_authorisation_context(decision)}
     <section class='card'><h2>Upload package</h2><p><strong>Supported format:</strong> .zip Blueprint package. <strong>Maximum size:</strong> {MAX_UPLOAD_BYTES // (1024*1024)} MB.</p><p class='muted'>Blueprint packages may contain confidential enterprise intelligence. Upload only packages you are authorised to use.</p><p><strong>Uploading a Blueprint does not change the governed Twin. Flora will validate and stage the package for review first.</strong></p><form method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><label for='blueprint_zip'>Blueprint ZIP file</label><input id='blueprint_zip' name='blueprint_zip' type='file' accept='.zip,application/zip' required><p><button type='submit'>Upload and validate</button></p></form></section>
     <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous Blueprint imports</a></p></section>"""
     return _page("Import Blueprint", body), 200
@@ -220,6 +221,20 @@ def _safe_failure(message, stage, changed, retry, next_step, decision=None, diag
     warning_panel = f"<section class='card warning'><h2>Diagnostics warning</h2><p>{escape(audit_warning)}</p><p>Diagnostic reference: <code>{escape(diagnostic_ref)}</code></p><p>No canonical changes occurred.</p></section>" if audit_warning else ""
     body=f"<section class='hero'><h1>Blueprint import needs attention</h1></section>{warning_panel}<section class='card'><h2>What happened</h2><p>{escape(message)}</p><ul><li>Stage failed: {escape(stage)}</li><li>Canonical changes occurred: {'yes' if changed else 'no'}</li><li>Package available for retry: {'yes' if retry else 'no'}</li><li>Diagnostic reference: <code>{escape(diagnostic_ref)}</code></li><li>Next step: {escape(next_step)}</li></ul></section><section class='card'><h2>Authorisation context</h2><table><tr><th>Signed-in account</th><td>{escape(account)}</td></tr><tr><th>Active workspace</th><td>{escape(workspace)}</td></tr><tr><th>Effective role</th><td>{escape(role)}</td></tr><tr><th>Owner recognised</th><td>{owner}</td></tr><tr><th>Required Blueprint capability</th><td><code>{escape(capability)}</code></td></tr></table></section><section class='card'><h2>Live import stages</h2><table>{rows}</table></section>"
     return _page("Blueprint import failure", body)
+
+
+def _authorisation_context(decision) -> str:
+    rows = "".join(f"<tr><th>{escape(name)}</th><td>{escape(status)}</td></tr>" for name, status in _stage_statuses("Blueprint upload capability resolved", decision).items())
+    return (
+        "<section class='card'><h2>Authorisation context</h2><table>"
+        f"<tr><th>Signed-in account</th><td>{escape(decision.user_id)}</td></tr>"
+        f"<tr><th>Active workspace</th><td>{escape(decision.active_workspace)}</td></tr>"
+        f"<tr><th>Effective role</th><td>{escape(decision.resolved_role or 'No effective Blueprint role')}</td></tr>"
+        f"<tr><th>Owner recognised</th><td>{'yes' if decision.owner_recognised else 'no'}</td></tr>"
+        f"<tr><th>Required Blueprint capability</th><td><code>{escape(decision.required_permission)}</code></td></tr>"
+        "</table></section><section class='card'><h2>Live import stages</h2><table>"
+        f"{rows}</table></section>"
+    )
 def _canonical_marker():
     from cios.applications.flora.storage import data_path
     files=[]

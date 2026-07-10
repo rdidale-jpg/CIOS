@@ -29,10 +29,14 @@ def _trusted_proxy_headers_enabled() -> bool:
     return os.environ.get("FLORA_TRUST_PROXY_HEADERS", "1").strip().lower() not in {"0", "false", "no"}
 
 
-def _trusted_header(headers: Any, name: str) -> str:
+def _trusted_header(headers: Any, name: str, *aliases: str) -> str:
     if not _trusted_proxy_headers_enabled():
         return ""
-    return str(headers.get(name) or "").strip()
+    for candidate in (name, *aliases):
+        value = str(headers.get(candidate) or "").strip()
+        if value:
+            return value
+    return ""
 
 
 def authenticated_flora_user(headers: Any) -> str:
@@ -42,11 +46,11 @@ def authenticated_flora_user(headers: Any) -> str:
     available for the existing in-process tests and for deployments that
     explicitly choose to map an upstream identity provider into Flora headers.
     """
-    return str(_trusted_header(headers, "X-Flora-User") or cookie_value(headers, "flora_user") or "").strip()
+    return str(_trusted_header(headers, "X-Flora-User", "X-Auth-Request-User", "X-Auth-Request-Email", "X-Forwarded-User", "X-Forwarded-Email") or cookie_value(headers, "flora_user") or "").strip()
 
 
 def flora_authentication_source(headers: Any) -> str:
-    if _trusted_header(headers, "X-Flora-User"):
+    if _trusted_header(headers, "X-Flora-User", "X-Auth-Request-User", "X-Auth-Request-Email", "X-Forwarded-User", "X-Forwarded-Email"):
         return "trusted_proxy_header"
     if cookie_value(headers, "flora_user"):
         return "flora_session_cookie"
@@ -58,13 +62,13 @@ def financial_run_enterprise_id(run: dict[str, Any]) -> str:
 
 
 def user_enterprise_access(headers: Any) -> set[str]:
-    allowed = _trusted_header(headers, "X-Flora-Enterprises") or cookie_value(headers, "flora_enterprises")
+    allowed = _trusted_header(headers, "X-Flora-Enterprises", "X-Flora-Workspaces", "X-Auth-Request-Enterprises", "X-Auth-Request-Workspaces") or cookie_value(headers, "flora_enterprises")
     return {item.strip() for item in str(allowed or "").replace("|", ",").split(",") if item.strip()}
 
 
 def active_flora_workspace(headers: Any) -> str:
     """Resolve Flora's active workspace from the canonical session state."""
-    selected = _trusted_header(headers, "X-Flora-Active-Workspace") or cookie_value(headers, "flora_active_workspace")
+    selected = _trusted_header(headers, "X-Flora-Active-Workspace", "X-Flora-Workspace", "X-Auth-Request-Active-Workspace", "X-Auth-Request-Workspace") or cookie_value(headers, "flora_active_workspace")
     allowed = user_enterprise_access(headers)
     if selected and ("*" in allowed or selected in allowed):
         return selected
@@ -120,7 +124,7 @@ class BlueprintAuthorisationDecision:
 
 
 def raw_flora_roles(headers: Any) -> set[str]:
-    raw_roles = _trusted_header(headers, "X-Flora-Roles") or cookie_value(headers, "flora_roles")
+    raw_roles = _trusted_header(headers, "X-Flora-Roles", "X-Auth-Request-Roles", "X-Forwarded-Roles") or cookie_value(headers, "flora_roles")
     return {item.strip() for item in str(raw_roles or "").replace("|", ",").split(",") if item.strip()}
 
 
