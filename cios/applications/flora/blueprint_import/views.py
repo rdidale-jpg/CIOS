@@ -220,6 +220,10 @@ def _execution_trace_section(package, summary: dict[str, Any], fatal: bool) -> s
         "Uploaded filename": getattr(package, "original_filename", "") or getattr(package, "filename", "") or "Unavailable — deployment metadata not configured",
         "Workbook path selected": _trace_latest(trace, "workbook_path_selected"),
         "Workbook SHA-256 result": _trace_latest(trace, "workbook_sha256"),
+        "Workbook SHA-256 expected": _trace_latest(trace, "workbook_sha256_expected"),
+        "Workbook SHA-256 actual": _trace_latest(trace, "workbook_sha256_actual"),
+        "Workbook hash matches": _trace_latest(trace, "workbook_sha256_matches"),
+        "Resolved workbook ZIP member": _trace_latest(trace, "resolved_zip_member_path"),
     }
     workbook_rows = {
         "Workbook adapter module": _trace_latest(trace, "workbook_adapter_module"),
@@ -248,7 +252,7 @@ def _execution_trace_section(package, summary: dict[str, Any], fatal: bool) -> s
         return "<h3>{}</h3><table>{}</table>".format(escape(title), "".join(f"<tr><th>{escape(k)}</th><td><code>{escape(str(v))}</code></td></tr>" for k,v in values.items()))
     requested = _trace_latest(trace, "final_zip_lookup_path")
     expected = _trace_latest(trace, "nearest_matching_zip_members")
-    guidance = "Flora has found the workbook, but its worksheet path resolver or workbook relationship lookup produced an internal path that could not be found. This is a Flora parser defect, not a problem with your Blueprint ZIP. Do not recreate or alter the package." if fatal and requested != "Not recorded" else ("Review the proposed changes when validation passes." if not fatal else "Keep the package unchanged and share this diagnostic trace with support.")
+    guidance = "Flora found the workbook but generated an invalid internal worksheet path. The Blueprint package should remain unchanged. A Flora workbook-adapter fix is required." if fatal and requested != "Not recorded" else ("Review the proposed changes when validation passes." if not fatal else "Keep the package unchanged and share this diagnostic trace with support.")
     plain = f"<p><strong>Plain-English explanation:</strong> Flora read worksheet relationship target <code>{escape(_trace_latest(trace, 'original_relationship_target'))}</code>, normalized it to <code>{escape(_trace_latest(trace, 'normalized_target'))}</code>, checked <code>{escape(requested)}</code>, and found ZIP member exists: <strong>{escape(_trace_latest(trace, 'zip_member_exists'))}</strong>. Processing stopped before candidate staging: <strong>{'yes' if fatal else 'no'}</strong>. No canonical Twin changes were made.</p>"
     copy = json.dumps({"deployment": deployment, "package": pkg_rows, "workbook_processing": workbook_rows, "validation_flow": flow_rows, "events": trace}, sort_keys=True)
     return "<section class='card'><h2>Blueprint import execution trace</h2>{plain}{trace_table}{deployment}{package}{workbook}{flow}<h3>Owner next action</h3><p>{guidance}</p><p><button type='button' data-diagnostic-trace='{copy}'>Copy diagnostic trace</button> <a download='blueprint-import-trace.json' href='data:application/json,{copy}'>Download diagnostic trace as JSON</a></p></section>".format(plain=plain, trace_table=trace_table, deployment=table("Deployment", deployment), package=table("Package", pkg_rows), workbook=table("Workbook processing", workbook_rows), flow=table("Validation flow", flow_rows), guidance=escape(guidance), copy=escape(copy, quote=True))

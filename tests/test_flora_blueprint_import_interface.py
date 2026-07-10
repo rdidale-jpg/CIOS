@@ -317,7 +317,7 @@ def test_failed_blueprint_execution_trace_disables_promotion_and_shows_nearest(m
     assert "Canonical changes made" in html and "no" in html.lower()
     assert "Promotion enabled" in html and "no" in html.lower()
     assert "approval are disabled" in html
-    assert "Do not recreate or alter the package" in html
+    assert "Blueprint package should remain unchanged" in html
     run_id=target.rsplit("/",1)[-1]
     review,rs=review_page(run_id, HEADERS)
     assert rs == 200 and "Approval controls are disabled" in review and "Blueprint import execution trace" in review

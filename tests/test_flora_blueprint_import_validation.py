@@ -275,3 +275,59 @@ def test_mod_blueprint_equivalent_workbook_proceeds_beyond_inspection(monkeypatc
     assert result.records_accepted_into_staging > 0
     assert result.records_quarantined > 0
     assert result.canonical_mutations == 0
+
+
+def test_workbook_execution_trace_records_selection_relationship_lookup_and_hash(monkeypatch,tmp_path):
+    wb=xlsx_workbook([('00_Control','rId1','worksheets/missing.xml',[['external_id','record_class'],['OBS-1','observation']])])
+    r=receive(monkeypatch,tmp_path,pkg_with_workbook(wb))
+    result=BlueprintPackageValidator().validate_and_stage(r.package_ref,'alice')
+    trace=list(result.execution_trace)
+    assert trace
+    latest={}
+    for event in trace:
+        latest.update({k:v for k,v in event.items() if v not in (None,'',[])})
+    assert latest['workbook_path_selected'] == 'final.xlsx'
+    assert latest['workbook_sha256_expected'] == latest['workbook_sha256_actual']
+    assert latest['workbook_sha256_matches'] is True
+    assert latest['workbook_adapter_module'] == 'cios.applications.flora.blueprint_import.cios_twin_adapter'
+    assert latest['resolver_function_name'].endswith('resolve_ooxml_relationship_target')
+    assert latest['source_ooxml_part'] == 'xl/workbook.xml'
+    assert latest['relationship_file'] == 'xl/_rels/workbook.xml.rels'
+    assert latest['sheet_name'] == '00_Control'
+    assert latest['relationship_id'] == 'rId1'
+    assert latest['original_relationship_target'] == 'worksheets/missing.xml'
+    assert latest['normalized_target'] == 'xl/worksheets/missing.xml'
+    assert latest['final_zip_lookup_path'] == 'xl/worksheets/missing.xml'
+    assert latest['zip_member_exists'] is False
+    assert 'xl/worksheets/sheet1.xml' in latest['nearest_matching_zip_members']
+    assert latest['archive_member_count'] > 0
+    assert result.errors and result.execution_trace
+
+
+def test_workbook_execution_trace_survives_missing_part_keyerror_and_malformed_xml(monkeypatch,tmp_path):
+    def bad_xlsx(entries):
+        b=io.BytesIO()
+        with zipfile.ZipFile(b,'w',zipfile.ZIP_DEFLATED) as z:
+            for name, data in entries.items(): z.writestr(name, data)
+        return b.getvalue()
+    missing_workbook=bad_xlsx({'xl/_rels/workbook.xml.rels':'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"/>', 'xl/sharedStrings.xml':'<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"/>'})
+    malformed=bad_xlsx({'xl/workbook.xml':'<workbook><sheets>', 'xl/_rels/workbook.xml.rels':'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"/>'})
+    for wb in (missing_workbook, malformed):
+        r=receive(monkeypatch,tmp_path,pkg_with_workbook(wb))
+        result=BlueprintPackageValidator().validate_and_stage(r.package_ref,'alice')
+        assert result.errors
+        assert result.execution_trace
+        assert any(e.get('action') == 'Open workbook part' for e in result.execution_trace)
+        assert any(e.get('action') == 'Candidate staging' and e.get('processing_stopped') is True for e in result.execution_trace)
+
+
+def test_empty_cached_summary_is_revalidated_to_populate_canonical_trace_store(monkeypatch,tmp_path):
+    from cios.applications.flora.blueprint_import.candidates import CandidateStagingRepository
+    wb=xlsx_workbook([('Observations','rId1','worksheets/sheet1.xml',[['external_id','record_class'],['OBS-1','observation']])])
+    r=receive(monkeypatch,tmp_path,pkg_with_workbook(wb))
+    result=BlueprintPackageValidator().validate_and_stage(r.package_ref,'alice')
+    data=result.to_dict(); data['execution_trace']=[]
+    CandidateStagingRepository().save_result(type(result)(**{k: tuple(v) if isinstance(v, list) and k in {'files_inspected','unsupported_classes','unresolved_references','warnings','errors','execution_trace'} else v for k,v in data.items()}))
+    refreshed=BlueprintPackageValidator().validate_and_stage(r.package_ref,'alice')
+    assert refreshed.execution_trace
+    assert CandidateStagingRepository().load_summary(r.import_run_id)['execution_trace']

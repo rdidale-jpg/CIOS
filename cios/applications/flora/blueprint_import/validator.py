@@ -48,7 +48,7 @@ class BlueprintPackageValidator:
             self.ledger.append("package_validation_failed", {"package_ref": package_ref, "actor": actor, "error": "checksum mismatch"})
             raise BlueprintValidationError("Immutable archive checksum does not match registry record")
         existing = self.staging.load_summary(package.import_run_id)
-        if existing:
+        if existing and existing.get("execution_trace"):
             return ImportRunDryRunResult(**{k: tuple(v) if isinstance(v, list) and k in {"files_inspected","unsupported_classes","unresolved_references","warnings","errors","execution_trace"} else v for k,v in existing.items()})
         candidates, warnings, errors, files, unsupported, unresolved, trace = self._inspect(package, content)
         accepted = sum(1 for c in candidates if c.validation_status == "accepted")
