@@ -55,14 +55,14 @@ def governed_twin_list(headers) -> list[GovernedTwinListItem]:
         if not can_access_canvas_record(headers, record.enterprise_id, record.workspace_id):
             continue
         package = next((packages.get(run) for run in reversed(record.import_run_ids) if packages.get(run)), None)
-        enterprise_name = package.identity.enterprise_id if package else record.enterprise_id
+        enterprise_name = "MOD" if record.enterprise_id == "MOD" or (package and package.identity.enterprise_id == "MOD") else (package.identity.enterprise_id if package else record.enterprise_id)
         twin_version = package.identity.package_version if package else "Governed"
         research_date = package.received_at if package else record.updated_at
-        acceptance = "Accepted governed Twin" if package else "Governed Twin"
+        acceptance = "Progressive Assurance accepted" if package else "Governed Twin"
         if package:
             summary = BlueprintPackageValidator().staging_summary(package.import_run_id) or {}
             errors = summary.get("errors") or []
-            acceptance = "Accepted with warnings" if summary.get("warnings") and not errors else ("Accepted governed Twin" if not errors else "Import requires attention")
+            acceptance = "Accepted partial Twin" if summary.get("warnings") and not errors else ("Progressive Assurance accepted" if not errors else "Import requires attention")
         key = f"{record.workspace_id}:{record.canvas_id}:{record.enterprise_id}"
         if key in seen:
             continue
@@ -147,16 +147,21 @@ def _research_outcome(run: dict | None, candidates: list[dict]) -> tuple[str, st
 
 def digital_twins_landing_page(headers=None) -> str:
     twins = governed_twin_list(headers or {})
-    rows = ''.join(_governed_twin_row(t) for t in twins)
-    empty = "<p>No governed Digital Twins are available to this signed-in account.</p>" if not rows else ""
+    cards = ''.join(_governed_twin_card(t) for t in twins)
+    empty = "<p>No governed Digital Twins are available to this signed-in account.</p>" if not cards else ""
     body = f"""<section class='hero'><h1>Digital Twins</h1><p class='muted'>Governed Commercial Digital Twins available to your signed-in account.</p><p><a href='/blueprint-import'>Import Blueprint</a></p></section>
-    <section class='card'><h2>Available Twins</h2>{empty}<table><thead><tr><th>Enterprise</th><th>Twin version</th><th>Latest trusted update</th><th>Latest research/source date</th><th>Maturity/acceptance</th><th>Actions</th></tr></thead><tbody>{rows}</tbody></table></section>"""
+    <section class='card'><h2>Available Twins</h2>{empty}<div class='grid'>{cards}</div></section>"""
     return _page('Digital Twins', body)
 
 
-def _governed_twin_row(t: GovernedTwinListItem) -> str:
-    import_link = f" · <a href='/blueprint-import/{escape(t.import_run_id)}'>View import record</a>" if t.import_run_id else ""
-    return f"<tr><td>{escape(t.enterprise_name)}</td><td>{escape(t.twin_version)}</td><td>{escape(_human_date(t.latest_trusted_update))}</td><td>{escape(_human_date(t.latest_research_date))}</td><td>{escape(t.maturity_or_acceptance)}</td><td><a href='/digital-twins/{escape(t.enterprise_id)}/canvas'>Open Twin</a>{import_link}</td></tr>"
+def _governed_twin_card(t: GovernedTwinListItem) -> str:
+    import_link = f"<a href='/blueprint-import/{escape(t.import_run_id)}'>View import record</a> · <a href='/blueprint-import/{escape(t.import_run_id)}'>View validation</a>" if t.import_run_id else ""
+    name = "MOD" if t.enterprise_id == "MOD" or t.enterprise_name.casefold() == "mod" else t.enterprise_name
+    return f"""<article class='card'>
+    <h3>{escape(name)}</h3><p class='muted'>Governed Enterprise Canvas</p>
+    <dl><dt>Twin version</dt><dd>{escape(t.twin_version)}</dd><dt>Latest trusted update</dt><dd>{escape(_human_date(t.latest_trusted_update))}</dd><dt>Latest research/source date</dt><dd>{escape(_human_date(t.latest_research_date))}</dd><dt>Maturity/acceptance</dt><dd>{escape(t.maturity_or_acceptance)}</dd></dl>
+    <p><a class='button' href='/digital-twins/{escape(t.enterprise_id)}/canvas'>Open Twin</a></p><p class='muted'>{import_link}</p>
+    </article>"""
 
 
 def bt_twin_page(highlight_run_id: str | None = None) -> str:

@@ -6,7 +6,7 @@ from typing import Any
 
 from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise
 from cios.applications.flora.blueprint_import.archive import sha256_bytes
-from cios.applications.flora.blueprint_import.candidates import PROJECTION_ONLY_CLASSES, CandidateStagingRepository
+from cios.applications.flora.blueprint_import.candidates import PROJECTION_ONLY_CLASSES, SUPPORTED_CANONICAL_CLASSES, CandidateStagingRepository
 from cios.applications.flora.blueprint_import.registry import BlueprintPackageRegistry
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
 from cios.applications.flora.memory.models import EnterpriseModelAttribute, EnterpriseUnknown
@@ -52,13 +52,14 @@ class EnterpriseCanvasService:
         model = self.models.get(enterprise_id)
         attributes = dict(sorted(model.attributes.items()))
         unknowns = tuple(model.unknowns.values())
-        projections = self._accepted_projections(enterprise_id)
+        accepted_candidates = self._accepted_candidates(enterprise_id)
+        projections = self._accepted_projections(enterprise_id, accepted_candidates)
         access_record = EnterpriseCanvasAccessRepository().get(enterprise_id)
         if not access_record and not attributes and not unknowns and not projections:
             raise EnterpriseCanvasNotFoundError(f"Enterprise Canvas not found for {enterprise_id}; diagnostic reference: canvas-missing:{enterprise_id}")
         evidence_rows = {str(e.get("evidence_id")): e for e in self.evidence.list()}
-        header = self._header(enterprise_id, attributes, unknowns, projections)
-        tiles = tuple(self._tiles(enterprise_id, attributes, unknowns, evidence_rows, projections))
+        header = self._header(enterprise_id, attributes, unknowns, projections, accepted_candidates)
+        tiles = tuple(self._tiles(enterprise_id, attributes, unknowns, evidence_rows, projections, accepted_candidates))
         return EnterpriseCanvas(CANVAS_SCHEMA_VERSION, enterprise_id, lens, header, tiles, True)
 
 
@@ -130,27 +131,32 @@ class EnterpriseCanvasService:
         statement = tile.principal_pain_or_pressure if tile.principal_pain_or_pressure != "Unknown" else tile.display_name
         return CanvasLineageInspection(canvas.enterprise_id, tile.tile_view_id, statement, tile.underlying_reference, tuple(observations), tuple(evidence), tuple(sources), tuple(packages), tuple(human), tuple(unknowns), tuple(contradictions), tuple(missing), tuple(broken), True)
 
-    def _header(self, enterprise_id, attrs, unknowns, projections):
+    def _header(self, enterprise_id, attrs, unknowns, projections, accepted_candidates=()):
         def attr(name, default="Unknown"):
             return (attrs.get(name) or attrs.get(f"enterprise.{name}") or EnterpriseModelAttribute("", "", default, 0, "", "unknown", (), (), "unknown")).current_value or default
         latest_dates = [a.last_observed_date for a in attrs.values() if a.last_observed_date]
+        package = self._latest_package(enterprise_id)
+        payload_dates = [str((c.get("payload") or {}).get(k) or "") for c in accepted_candidates for k in ("effective_date", "publication_date", "observed_at", "source_cut_off", "collection_date") if (c.get("payload") or {}).get(k)]
+        latest_dates.extend(payload_dates)
+        package_version = package.identity.package_version if package else ""
+        received_at = package.received_at if package else ""
         stale = [a.attribute for a in attrs.values() if a.freshness == "stale"]
         pressures = [p.display_label for p in projections if p.projection_type in {"pain_point", "burning_platform", "transformation_pressure_view"}]
         return EnterpriseCanvasHeader(
-            enterprise_name=attr("name", enterprise_id),
+            enterprise_name=attr("name", self._display_enterprise_name(enterprise_id, accepted_candidates, package) or enterprise_id),
             enterprise_purpose=attr("purpose"),
-            twin_version=attr("twin_version", "Not established"),
+            twin_version=attr("twin_version", package_version or "Not established"),
             effective_date=max(latest_dates) if latest_dates else "Unknown",
             source_cut_off=attr("source_cut_off", max(latest_dates) if latest_dates else "Unknown"),
-            maturity_or_acceptance_state=attr("acceptance_state", "Accepted Evidence-backed state" if attrs else "Incomplete"),
-            latest_material_change=attr("latest_material_change", "Unknown"),
+            maturity_or_acceptance_state=attr("acceptance_state", "Progressive Assurance accepted" if package or accepted_candidates else ("Accepted Evidence-backed state" if attrs else "Incomplete")),
+            latest_material_change=attr("latest_material_change", received_at or (max(latest_dates) if latest_dates else "Unknown")),
             governing_thesis=attr("governing_thesis", "Unknown"),
             current_material_pressures=tuple(pressures[:5]),
             freshness_warning=("Some evidence is stale" if stale else ""),
-            last_refreshed_date=attr("last_refreshed_date", max(latest_dates) if latest_dates else "Unknown"),
+            last_refreshed_date=attr("last_refreshed_date", received_at or (max(latest_dates) if latest_dates else "Unknown")),
         )
 
-    def _tiles(self, enterprise_id, attrs, unknowns, evidence_rows, projections):
+    def _tiles(self, enterprise_id, attrs, unknowns, evidence_rows, projections, accepted_candidates=()):
         groups: dict[str, list[EnterpriseModelAttribute]] = defaultdict(list)
         for attr in attrs.values():
             if attr.domain.startswith("organisation") or attr.domain in {"unit", "domain", "programme"}:
@@ -158,21 +164,8 @@ class EnterpriseCanvasService:
                 groups[key].append(attr)
         if not groups and attrs:
             groups["enterprise"].extend(attrs.values())
-        if not groups and projections:
-            yield EnterpriseCanvasTile(
-                tile_view_id="canvas-tile-" + sha256_bytes(f"{enterprise_id}\norganisation\nimported-projections".encode())[:20],
-                lens="organisation", sort_order=1, underlying_reference=f"{enterprise_id}:imported-projections",
-                display_name="Imported Twin intelligence",
-                plain_english_role="Governed intelligence staged from an accepted CIOS Commercial Digital Twin package.",
-                accountable_role="Unknown", current_state="Imported analytical baseline",
-                principal_pain_or_pressure=projections[0].display_label, material_change="Unknown",
-                what_has_been_done_so_far=self._projection_label(projections, {"current_response", "response_effectiveness"}),
-                what_remains_unresolved=self._projection_label(projections, {"residual_pain"}),
-                unknown_indicator=False, contradiction_indicator=False, stale_evidence_indicator=False, nested_twin_available=False,
-                effective_date=projections[0].effective_date or "Unknown", source_cut_off="Unknown", last_refreshed_date="Unknown",
-                core_facts=("No promoted Enterprise Model attributes are available for this imported package yet.",),
-                analytical_projections=tuple(projections[:8]),
-                lineage_references=tuple(l for p in projections[:8] for l in p.lineage), inspection={"source":"analytical_projection_fallback"})
+        if not groups:
+            yield from self._lens_tiles_from_candidates(enterprise_id, accepted_candidates, projections)
             return
         for order, (key, facts) in enumerate(sorted(groups.items()), start=1):
             ref = f"{enterprise_id}:{key}"
@@ -186,11 +179,11 @@ class EnterpriseCanvasService:
                 lens="organisation",
                 sort_order=order,
                 underlying_reference=ref,
-                display_name=self._first(facts, ["display_name", "name"], key.replace("_", " ").title()),
+                display_name=self._executive_label(self._first(facts, ["display_name", "name"], key.replace("_", " ").title())),
                 plain_english_role=self._first(facts, ["role", "purpose", "what_it_does"], "This part of the enterprise has an accepted role, but details are incomplete."),
                 accountable_role=self._first(facts, ["accountable_role", "owner"], "Unknown"),
                 current_state=self._first(facts, ["current_state", "state"], "Unknown"),
-                principal_pain_or_pressure=(projections_for_tile[0].display_label if projections_for_tile else "Unknown"),
+                principal_pain_or_pressure=(projections_for_tile[0].display_label if projections_for_tile else "No governed pressure linked yet"),
                 material_change=self._first(facts, ["material_change", "latest_material_change"], "Unknown"),
                 what_has_been_done_so_far=self._projection_label(projections, {"current_response", "response_effectiveness"}),
                 what_remains_unresolved=self._projection_label(projections, {"residual_pain"}),
@@ -216,22 +209,121 @@ class EnterpriseCanvasService:
         return default
 
     def _projection_label(self, projections, types):
-        return next((p.display_label for p in projections if p.projection_type in types), "Unknown")
+        return next((p.display_label for p in projections if p.projection_type in types), "No governed response linked yet")
 
     def _lineage_for_attribute(self, attr, evidence_rows):
         sources = tuple(str(evidence_rows.get(eid, {}).get("source_id") or evidence_rows.get(eid, {}).get("source") or "") for eid in attr.evidence_ids)
         return CanvasLineageReference(attr.current_value or attr.attribute, "canonical_attribute", attr.attribute, attr.observation_ids, attr.evidence_ids, tuple(s for s in sources if s))
 
-    def _accepted_projections(self, enterprise_id):
+    def _accepted_candidates(self, enterprise_id):
         out = []
         for package in self.registry.list():
             if canonical_enterprise_id(package.identity.enterprise_id) != canonical_enterprise_id(enterprise_id):
                 continue
             for c in self.staging.list_candidates(package.import_run_id):
+                if c.get("validation_status") in {"accepted", "quarantined"} and c.get("candidate_object_class") in (SUPPORTED_CANONICAL_CLASSES | PROJECTION_ONLY_CLASSES):
+                    out.append(c)
+        return tuple(out)
+
+    def _latest_package(self, enterprise_id):
+        packages = [p for p in self.registry.list() if canonical_enterprise_id(p.identity.enterprise_id) == canonical_enterprise_id(enterprise_id)]
+        return sorted(packages, key=lambda p: p.received_at)[-1] if packages else None
+
+    def _display_enterprise_name(self, enterprise_id, candidates, package):
+        if canonical_enterprise_id(enterprise_id) == "MOD":
+            return "MOD"
+        for c in candidates:
+            payload = c.get("payload") or {}
+            if c.get("candidate_object_class") in {"enterprise", "twin"}:
+                for key in ("display_name", "enterprise_name", "legal_name", "name", "title"):
+                    if payload.get(key):
+                        return self._executive_label(payload[key])
+        return self._executive_label(package.identity.enterprise_id if package else enterprise_id)
+
+    def _executive_label(self, value):
+        text = str(value or "").strip()
+        if not text:
+            return "Unknown"
+        if text.casefold() == "mod":
+            return "MOD"
+        return text.replace("_", " ").replace("-", " ").strip().title() if text == text.casefold() else text
+
+    def _projection_display_label(self, candidate):
+        payload = candidate.get("payload") or {}
+        for key in ("display_title", "title", "display_label", "statement", "summary", "description", "name", "claim"):
+            value = str(payload.get(key) or "").strip()
+            if value:
+                return self._executive_label(value)
+        klass = str(candidate.get("candidate_object_class") or "pressure").replace("_", " ")
+        sheet = str(candidate.get("source_sheet") or "").replace("_", " ")
+        return self._executive_label(f"{klass} from {sheet}" if sheet else klass)
+
+    def _candidate_label(self, candidate):
+        payload = candidate.get("payload") or {}
+        for key in ("display_name", "entity_name", "name", "title", "label", "statement", "summary", "question"):
+            if payload.get(key):
+                return self._executive_label(payload[key])
+        return self._executive_label(candidate.get("candidate_object_class", "Governed record"))
+
+    def _lens_tiles_from_candidates(self, enterprise_id, candidates, projections):
+        lens_defs = (
+            ("Enterprise", {"enterprise", "twin", "publication_reference", "human_knowledge"}),
+            ("Programmes", {"programme", "program", "portfolio"}),
+            ("Capabilities", {"capability", "function", "service"}),
+            ("Systems and Data", {"system", "data", "technology", "application"}),
+            ("Suppliers and Contracts", {"supplier", "contract", "commercial"}),
+            ("Leadership and Decision Rights", {"executive", "leadership", "decision", "rights", "organisation"}),
+        )
+        projection_lineage = tuple(l for p in projections[:10] for l in p.lineage)
+        for order, (label, tokens) in enumerate(lens_defs, start=1):
+            matched = []
+            for c in candidates:
+                payload = c.get("payload") or {}
+                haystack = " ".join(str(payload.get(k) or "") for k in ("entity_type", "entity_class", "domain", "category", "name", "entity_name", "source_sheet", "statement"))
+                haystack += " " + str(c.get("source_sheet") or "") + " " + str(c.get("candidate_object_class") or "")
+                if label == "Enterprise" and c.get("candidate_object_class") in tokens:
+                    matched.append(c)
+                elif any(token in haystack.casefold() for token in tokens):
+                    matched.append(c)
+            if not matched and label != "Enterprise":
+                continue
+            facts = tuple(f"{self._candidate_label(c)} ({self._executive_label(c.get('candidate_object_class'))})" for c in matched[:8])
+            tile_projections = tuple(p for p in projections if any(t in " ".join([p.display_label, *p.supporting_record_refs]).casefold() for t in tokens))[:8] or tuple(projections[:3])
+            yield EnterpriseCanvasTile(
+                tile_view_id="canvas-tile-" + sha256_bytes(f"{enterprise_id}\norganisation\n{label}".encode())[:20],
+                lens="organisation",
+                sort_order=order,
+                underlying_reference=f"{enterprise_id}:{label}",
+                display_name=label,
+                plain_english_role=f"{label} lens built from accepted governed MOD Twin records.",
+                accountable_role="Governed Twin owner",
+                current_state=f"{len(matched)} governed records in this lens" if matched else "Governed structure not yet explicit",
+                principal_pain_or_pressure=tile_projections[0].display_label if tile_projections else "No governed pressure linked yet",
+                material_change=self._latest_package(enterprise_id).received_at if self._latest_package(enterprise_id) else "Unknown",
+                what_has_been_done_so_far=self._projection_label(projections, {"current_response", "response_effectiveness"}),
+                what_remains_unresolved=self._projection_label(projections, {"residual_pain"}),
+                unknown_indicator=any(c.get("candidate_object_class") == "unknown" for c in matched),
+                contradiction_indicator=any(c.get("candidate_object_class") == "contradiction" for c in matched),
+                effective_date=max((str((c.get("payload") or {}).get("effective_date") or "") for c in matched), default="Unknown") or "Unknown",
+                source_cut_off=max((str((c.get("payload") or {}).get("source_cut_off") or (c.get("payload") or {}).get("publication_date") or "") for c in matched), default="Unknown") or "Unknown",
+                last_refreshed_date=self._latest_package(enterprise_id).received_at if self._latest_package(enterprise_id) else "Unknown",
+                core_facts=facts or ("Governed Twin imported successfully. The Canvas projection is still being built from accepted records.",),
+                analytical_projections=tile_projections,
+                lineage_references=tuple(l for p in tile_projections for l in p.lineage) or projection_lineage,
+                inspection={"source": "governed_candidate_lens", "record_count": len(matched)},
+            )
+
+    def _accepted_projections(self, enterprise_id, candidates=None):
+        out = []
+        package_by_run = {p.import_run_id: p for p in self.registry.list()}
+        for c in (candidates if candidates is not None else self._accepted_candidates(enterprise_id)):
+                package = package_by_run.get(c.get("import_run_id")) or self._latest_package(enterprise_id)
+                if not package:
+                    continue
                 if c.get("candidate_object_class") not in PROJECTION_ONLY_CLASSES or c.get("validation_status") == "rejected":
                     continue
                 payload = c.get("payload") or {}
-                label = str(payload.get("display_label") or payload.get("statement") or payload.get("name") or c.get("original_source_id"))
+                label = self._projection_display_label(c)
                 lineage = CanvasLineageReference(label, "analytical_projection", c["candidate_record_id"], tuple(payload.get("observation_ids") or ()), tuple(payload.get("evidence_ids") or ()), tuple(payload.get("source_ids") or ()), package.package_ref, package.import_run_id, str(c.get("source_location") or c.get("source_file") or ""))
                 out.append(CanvasAnalyticalProjection(label, c["candidate_object_class"], str(payload.get("twin_version") or package.identity.package_version), tuple(payload.get("supporting_record_refs") or (c["candidate_record_id"],)), str(payload.get("effective_date") or ""), str(payload.get("confidence") or payload.get("qualification") or ""), str(payload.get("status") or "accepted projection"), (lineage,)))
         return tuple(sorted(out, key=lambda p: (p.projection_type, p.display_label)))
