@@ -232,5 +232,29 @@ def test_xlsx_missing_malformed_and_traversal_targets_fail_safely(monkeypatch,tm
 
 
 def test_xlsx_relative_parent_target_uses_source_part_semantics():
-    from cios.applications.flora.blueprint_import.cios_twin_adapter import CiosCommercialTwinAdapter
+    from cios.applications.flora.blueprint_import.cios_twin_adapter import CiosCommercialTwinAdapter, resolve_ooxml_relationship_target
+    assert resolve_ooxml_relationship_target('xl/workbook.xml','worksheets/sheet1.xml') == 'xl/worksheets/sheet1.xml'
+    assert resolve_ooxml_relationship_target('xl/workbook.xml','xl/worksheets/sheet1.xml') == 'xl/worksheets/sheet1.xml'
+    assert resolve_ooxml_relationship_target('xl/workbook.xml','/xl/worksheets/sheet1.xml') == 'xl/worksheets/sheet1.xml'
     assert CiosCommercialTwinAdapter()._resolve_part_target('xl/workbook.xml','../worksheets/sheet1.xml') == 'worksheets/sheet1.xml'
+
+
+def test_mod_blueprint_equivalent_workbook_proceeds_beyond_inspection(monkeypatch,tmp_path):
+    # Representative MOD Blueprint-shaped workbook because MOD-CDT-v1.3-Flora-Blueprint.zip
+    # is not present in this repository: a control sheet plus multiple governed Twin Spine sheets,
+    # including a package-rooted worksheet target that previously produced xl/xl.
+    wb=xlsx_workbook([
+        ('00_Control','rIdCtrl','xl/worksheets/sheet1.xml',[['external_id','record_class','statement'],['CTRL-1','observation','control ok']]),
+        ('Observations','rIdObs','worksheets/sheet2.xml',[['external_id','record_class','statement'],['OBS-1','observation','observation ok']]),
+        ('Pain Points','rIdPain','/xl/worksheets/sheet3.xml',[['external_id','text'],['PP-1','pain']]),
+    ])
+    r=receive(monkeypatch,tmp_path,pkg_with_workbook(wb))
+    result=BlueprintPackageValidator().validate_and_stage(r.package_ref,'alice')
+    joined='\n'.join(result.errors + result.warnings)
+    assert not result.errors
+    assert 'Worksheets discovered: 00_Control, Observations, Pain Points' in result.warnings
+    assert 'xl/xl/worksheets/sheet1.xml' not in joined
+    assert result.candidate_records_staged > 0
+    assert result.records_accepted_into_staging > 0
+    assert result.records_quarantined > 0
+    assert result.canonical_mutations == 0

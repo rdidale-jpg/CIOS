@@ -23,6 +23,7 @@ from cios.applications.flora.workspace.views import case_page, landing_page, log
 from cios.applications.flora.digital_twins import digital_twins_landing_page, bt_twin_page, search_bt_twin, bt_search_progress_page, rapid_snapshot_csv
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
+from cios.applications.flora.live.runtime import application_revision
 from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, financial_intelligence_safe_support_report_payload, load_run, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id, blueprint_upload_authorisation
 from cios.applications.flora.pilot_auth import audit as pilot_audit, clear_session_cookie, issue_session_cookie, sign_in_page, validate_secret
@@ -37,6 +38,9 @@ PORT_ENV = "PORT"
 FLORA_HOST_ENV = "FLORA_HOST"
 FLORA_PORT_ENV = "FLORA_PORT"
 HEALTH_PAYLOAD = {"status": "healthy", "service": "flora"}
+
+def deployment_payload() -> dict[str, str]:
+    return {"service": "flora", "commit_sha": application_revision()}
 CASE_SLUGS = {"ThamesWater", "NationalGrid", "BT", "Vodafone"}
 
 
@@ -61,6 +65,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         try:
             if parsed.path == "/health":
                 self._json(HEALTH_PAYLOAD)
+            elif parsed.path == "/deployment":
+                self._json(deployment_payload())
             elif parsed.path in {"/", "/flora", "/flora/"}:
                 self._html(_flora_home_page(self.headers))
             elif parsed.path == "/pilot-sign-in":
@@ -367,7 +373,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 def _flora_home_page(headers=None) -> str:
     from html import escape
 
-    revision = escape(os.getenv("RENDER_GIT_COMMIT") or os.getenv("GIT_COMMIT") or "local")
+    revision = escape(application_revision())
     decision = blueprint_upload_authorisation(headers or {})
     auth = (f"<section class='card'><h2>Pilot session</h2><p>Signed in as <strong>{escape(decision.user_id)}</strong> in workspace <strong>{escape(decision.active_workspace)}</strong>. Owner recognised: {'yes' if decision.owner_recognised else 'no'}. package.upload: {'allowed' if decision.decision == 'allowed' else 'denied'}.</p><form method='post' action='/pilot-sign-out'><button type='submit'>Sign out</button></form></section>" if decision.user_id else "<section class='card action'><h2>Pilot access</h2><p>Protected Flora functions require pilot owner access.</p><p><a href='/pilot-sign-in'>Sign in for pilot access</a></p></section>")
     return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Flora Home</title><style>
@@ -505,6 +511,7 @@ def run(host: str | None = None, port: int | None = None) -> None:
     bind_host = host or env_host()
     bind_port = port if port is not None else env_port()
     storage = startup_storage_status()
+    print(f"Flora startup deployment commit_sha={application_revision()}", flush=True)
     print(f"Flora storage {storage['status']}: {storage['data_root']}", flush=True)
     if not storage.get("ready"):
         print({"event": "flora_storage_unavailable", "data_root": storage.get("data_root"), "storage_mode": storage.get("storage_mode"), "error": storage.get("error")}, flush=True)
