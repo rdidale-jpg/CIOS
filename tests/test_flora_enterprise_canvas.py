@@ -370,3 +370,57 @@ def test_unauthorised_and_empty_governed_twin_registry(tmp_path, monkeypatch):
     html = digital_twins_landing_page(reader)
     assert "No governed Digital Twins are available" in html
     assert "BT Group" not in html
+
+
+def test_mod_executive_commercial_canvas_read_model(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
+    from cios.applications.flora.blueprint_import.views import approve_and_promote, review_page, upload_and_validate_blueprint
+    from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
+    from cios.applications.flora.memory.repository import EnterpriseModelRepository
+    import re
+
+    owner = {"X-Flora-User":"rob", "X-Flora-Enterprises":"cios-workspace", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"cios_owner"}
+    records = [
+        {"external_id":"OBS-MOD-1","record_class":"observation","truth_class":"observed","payload":{"observation_id":"OBS-MOD-1","atomic_statement":"MOD readiness pressure is linked to portfolio delivery.","type":"fact","affected_entity_relationship":"enterprise.readiness","event_date":"2026-06-30","supporting_evidence_ids":"EVD-MOD-1","confidence":"0.8","linked_unknowns":"UNK-MOD-1"}},
+        {"external_id":"EVD-MOD-1","record_class":"evidence","truth_class":"observed","payload":{"evidence_id":"EVD-MOD-1","summary":"Readiness and delivery pressure evidence.","source_title":"MOD public evidence pack","publication_date":"2026-06-30","freshness":"current"}},
+        {"external_id":"UNK-MOD-1","record_class":"unknown","truth_class":"unknown","payload":{"unknown_id":"UNK-MOD-1","statement":"Which owner controls access to the readiness intervention?","scope":"MOD","significance":"High","status":"Open"}},
+        {"external_id":"CTR-MOD-1","record_class":"contradiction","truth_class":"contradiction","payload":{"contradiction_id":"CTR-MOD-1","statement_a":"Delivery authority is centralised.","statement_b":"Delivery authority is fragmented.","significance":"High","status":"Open"}},
+        {"external_id":"HSK-MOD-1","record_class":"human_knowledge","truth_class":"human_supplied","payload":{"statement":"Account knowledge suggests access should be validated before shaping.","confidence":"medium"}},
+        {"external_id":"PP-MOD-10","record_class":"pain_point","truth_class":"analytical_projection","payload":{"statement":"Readiness and availability pressure affects commercial access","effective_date":"2026-06-30","confidence":"medium","status":"accepted projection","observation_ids":["OBS-MOD-1"],"evidence_ids":["EVD-MOD-1"]},"source_location":{"sheet":"17_Contradictions","row":99}},
+        {"external_id":"BP-MOD-20","record_class":"burning_platform","truth_class":"analytical_projection","payload":{"statement":"Decision-right fragmentation slows programme-to-operational-effect conversion","effective_date":"2026-07-01","confidence":"medium","status":"accepted projection","observation_ids":["OBS-MOD-1"],"evidence_ids":["EVD-MOD-1"]}},
+    ]
+    _, status, target = upload_and_validate_blueprint({"blueprint_zip":pkg(manifest_extra={"enterprise_id":"MOD", "package_id":"MOD-CDT-Blueprint", "package_version":"1.3"}, records=records)}, {"blueprint_zip.filename":"MOD-CDT-v1.3-Flora-Blueprint.zip","blueprint_zip.content_type":"application/zip"}, owner)
+    assert status == 200
+    run_id = target.rsplit("/", 1)[-1]
+    review, review_status = review_page(run_id, owner)
+    assert review_status == 200
+    plan_id = re.search(r"name='plan_id' value='([^']+)'", review).group(1)
+    done, done_status = approve_and_promote(run_id, {"plan_id":[plan_id],"confirm_plan":["yes"],"confirm_mutations":["yes"],"rationale":["owner approved"]}, owner)
+    assert done_status == 200
+    before = EnterpriseModelRepository().get("MOD").to_dict()
+
+    html, canvas_status = enterprise_canvas_page("MOD", owner)
+
+    assert canvas_status == 200
+    assert "executive situation briefing" in html
+    assert html.index("Overview") < html.index("Model Explorer")
+    assert "Governed records in this lens" not in html
+    assert "17_Contradictions" not in html and "worksheet" not in html.lower() and "source row" not in html.lower()
+    executive_part = html.split("Model Explorer", 1)[0]
+    assert "OBS-MOD-1" not in executive_part and "EVD-MOD-1" not in executive_part and "PP-MOD-10" not in executive_part
+    assert "Readiness and availability pressure affects commercial access" in html
+    assert "Inspect evidence lineage" in html
+    assert "Unknown" in html and "Contradiction" in html
+    assert "Human-supplied knowledge" in html or "human knowledge" in html.lower()
+    assert "Projection" in html
+    assert "Recommendations require evidence lineage" in html or "Recommendation" in html
+    assert "not by record count" in html
+    assert "Authority confidence" in html
+    assert "Route to market" in html and "Access constraints" in html
+    assert "Evidence incomplete" in html and "Owner not confirmed" in html and "Decision authority unresolved" in html
+    assert "Governed record structure remains inspectable" in html
+    assert "source of truth" in html or "governed Twin" in html
+    assert "strategic sales director" not in html.lower() or "commercial" in html.lower()
+    after = EnterpriseModelRepository().get("MOD").to_dict()
+    assert before == after
