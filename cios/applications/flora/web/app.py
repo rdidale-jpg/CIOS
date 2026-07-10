@@ -130,6 +130,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif _is_enterprise_canvas_path(parsed.path):
                 html, status = _enterprise_canvas_response(parsed.path, self.headers)
                 self._html(html, status=status)
+            elif _is_legacy_twin_detail_path(parsed.path):
+                self._redirect(_legacy_twin_redirect_target(parsed.path, parse_qs(parsed.query)))
+            elif parsed.path in {"/digital-twins/registry", "/digital-twins/list", "/digital-twins/twins"}:
+                self._redirect("/digital-twins")
             elif parsed.path == "/digital-twins/bt-group-plc":
                 self._html(bt_twin_page((parse_qs(parsed.query).get("run_id") or [None])[0]))
             elif parsed.path.startswith("/digital-twins/bt-group-plc/rapid-snapshot/") and parsed.path.endswith("/financial-tables.csv"):
@@ -409,6 +413,18 @@ def _enterprise_canvas_response(path: str, headers) -> tuple[str, int]:
         return enterprise_canvas_lineage_page(parts[1], parts[4], headers)
     tile_id = parts[4] if len(parts) == 5 else ""
     return enterprise_canvas_page(parts[1], headers, tile_id)
+
+
+def _is_legacy_twin_detail_path(path: str) -> bool:
+    parts = [part for part in path.split("/") if part]
+    return len(parts) == 2 and parts[0] == "digital-twins" and parts[1] != "bt-group-plc"
+
+
+def _legacy_twin_redirect_target(path: str, query: dict[str, list[str]]) -> str:
+    enterprise_id = [part for part in path.split("/") if part][1]
+    if (query.get("audit") or [""])[0] in {"1", "true", "yes"} and (query.get("import_run_id") or [""])[0]:
+        return f"/blueprint-import/{(query.get('import_run_id') or [''])[0]}"
+    return f"/digital-twins/{enterprise_id}/canvas"
 
 
 def _is_support_report_path(path: str) -> bool:

@@ -306,7 +306,10 @@ def test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs(tmp_pa
     import re
 
     owner = {"X-Flora-User":"rob", "X-Flora-Enterprises":"cios-workspace", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"cios_owner"}
-    records=[{"external_id":"PP-MOD-REG","record_class":"pain_point","truth_class":"analytical_projection","payload":{"statement":"MOD registry pressure"}}]
+    records=[
+        {"external_id":"burning_platform-10","record_class":"burning_platform","truth_class":"analytical_projection","payload":{"statement":"MOD delivery pressure is material to leadership decisions","effective_date":"2026-06-30","confidence":"medium"}},
+        {"external_id":"SH-MOD-1","record_class":"stakeholder_hot_button","truth_class":"analytical_projection","payload":{"statement":"Leadership and Decision Rights require clearer delivery sequencing","effective_date":"2026-06-30","confidence":"medium"}},
+    ]
     _, status, target = upload_and_validate_blueprint({"blueprint_zip":pkg(manifest_extra={"enterprise_id":"MOD", "package_id":"MOD-CDT-Blueprint", "package_version":"1.3"}, records=records)}, {"blueprint_zip.filename":"MOD-CDT-v1.3-Flora-Blueprint.zip","blueprint_zip.content_type":"application/zip"}, owner)
     assert status == 200
     run_id = target.rsplit("/", 1)[-1]
@@ -326,10 +329,19 @@ def test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs(tmp_pa
     assert "MOD" in home and "BT Group" not in home
     assert "/digital-twins/MOD/canvas" in home
     assert f"/blueprint-import/{run_id}" in home
+    assert "<table" not in home and "Details" not in home
+    assert "Open Twin" in home and "View validation" in home and "View import record" in home
     assert "View import record" in hist
 
     canvas, canvas_status = enterprise_canvas_page("MOD", owner)
     assert canvas_status == 200 and "Enterprise Canvas" in canvas and "MOD" in canvas
+    assert "MOD delivery pressure is material to leadership decisions" in canvas
+    assert "burning_platform-10" not in canvas
+    assert "Imported Twin intelligence" not in canvas
+    assert "Leadership and Decision Rights" in canvas
+    assert "Twin version</dt><dd>1.3" in canvas
+    assert "Progressive Assurance accepted" in canvas
+    assert "Unknown" not in canvas.split("Twin version</dt>", 1)[1].split("</dl>", 1)[0]
     detail, detail_status = validation_result_page(run_id, owner)
     assert detail_status == 200
     assert "Digital Twins</a> &gt;" in detail
@@ -338,6 +350,14 @@ def test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs(tmp_pa
 
     assert len(EnterpriseCanvasAccessRepository().list()) == 1
     assert len([t for t in governed_twin_list(owner) if t.enterprise_id == "MOD"]) == 1
+
+
+def test_legacy_twin_routes_redirect_to_primary_canvas_or_audit():
+    from cios.applications.flora.web.app import _is_legacy_twin_detail_path, _legacy_twin_redirect_target
+
+    assert _is_legacy_twin_detail_path("/digital-twins/MOD")
+    assert _legacy_twin_redirect_target("/digital-twins/MOD", {}) == "/digital-twins/MOD/canvas"
+    assert _legacy_twin_redirect_target("/digital-twins/MOD", {"audit":["true"], "import_run_id":["bpi-run-1"]}) == "/blueprint-import/bpi-run-1"
 
 
 def test_unauthorised_and_empty_governed_twin_registry(tmp_path, monkeypatch):
