@@ -323,3 +323,43 @@ def test_failed_blueprint_execution_trace_disables_promotion_and_shows_nearest(m
     assert rs == 200 and "Approval controls are disabled" in review and "Blueprint import execution trace" in review
     denied,ds=validation_result_page(run_id, BAD)
     assert ds == 403
+
+def test_large_review_is_non_blocking_paginated_reusable_and_safe(monkeypatch,tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_BLUEPRINT_REVIEW_ASYNC_THRESHOLD", "100")
+    from cios.applications.flora.blueprint_import import review_plan
+    review_plan.ASYNC_THRESHOLD = 100
+    records=[{"external_id":f"Q-{i}","record_class":"unsupported_kind","truth_class":"unknown","payload":{}} for i in range(5000)]
+    records.append({"external_id":"R-1","record_class":"observation","truth_class":"invalid","payload":{}})
+    _,status,target=upload_and_validate_blueprint({"blueprint_zip":pkg(records=records)}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, HEADERS)
+    assert status == 200
+    run_id=target.rsplit("/",1)[-1]
+    import time
+    start=time.perf_counter(); html,rs=review_page(run_id, HEADERS); elapsed=time.perf_counter()-start
+    assert rs == 200 and elapsed < 3 and "Review preparation trace" in html and "Canonical changes made</th><td>No" in html
+    assert "Approve and update governed Twin" not in html
+    deadline=time.time()+5; ready=""
+    while time.time() < deadline:
+        ready,rs=review_page(run_id, HEADERS)
+        if "Review status</th><td>Ready" in ready: break
+        time.sleep(0.05)
+    assert "Review status</th><td>Ready" in ready
+    assert "Quarantined</th><td>" in ready and "Rejected</th><td>" in ready
+    assert "Approval" in ready and "Approve and update governed Twin" in ready
+    jobs=list((tmp_path/"blueprint_import"/"review_jobs"/run_id).glob("*.json"))
+    again,_=review_page(run_id, HEADERS)
+    assert len(list((tmp_path/"blueprint_import"/"review_jobs"/run_id).glob("*.json"))) == len(jobs)
+    assert "Review status</th><td>Ready" in again
+    assert not (tmp_path/"memory"/"observations.jsonl").exists()
+
+
+def test_review_plan_failure_renders_normal_page(monkeypatch,tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    _,status,target=upload_and_validate_blueprint({"blueprint_zip":pkg(records=[{"external_id":"OBS","record_class":"observation","truth_class":"evidence_backed","payload":{}}])}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, HEADERS)
+    assert status == 200
+    run_id=target.rsplit("/",1)[-1]
+    from cios.applications.flora.blueprint_import import review_plan
+    def boom(*a, **k): raise RuntimeError("synthetic failure")
+    monkeypatch.setattr(review_plan.DryRunPlanningService, "create_plan", boom)
+    html,rs=review_page(run_id, HEADERS)
+    assert rs == 200 and "Blueprint review could not be prepared" in html and "Canonical changes made</th><td>No" in html and "RuntimeError" in html

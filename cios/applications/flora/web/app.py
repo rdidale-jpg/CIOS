@@ -109,7 +109,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(html, status=status)
             elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/review"):
                 run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/review")
-                html, status = blueprint_review_page(run_id, self.headers)
+                html, status = blueprint_review_page(run_id, self.headers, query=parse_qs(parsed.query))
                 self._html(html, status=status)
             elif parsed.path.startswith("/blueprint-import/"):
                 run_id = parsed.path.removeprefix("/blueprint-import/")
