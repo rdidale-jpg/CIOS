@@ -8,6 +8,8 @@ canonical records.
 from __future__ import annotations
 
 import json, re, zipfile
+from pathlib import PurePosixPath
+from urllib.parse import unquote, urlsplit
 from dataclasses import dataclass
 from io import BytesIO
 from typing import Any
@@ -85,7 +87,7 @@ class CiosCommercialTwinAdapter:
                     sheet_names.append(sheet_name)
                     rows=self._rows(wb, sheet_file, shared)
                     out.extend(self._candidates(package, workbook_path, sheet_name, rows))
-        except (zipfile.BadZipFile, ET.ParseError, KeyError) as exc:
+        except (zipfile.BadZipFile, ET.ParseError, KeyError, ValueError) as exc:
             errors.append(f"Workbook could not be inspected safely: {exc}")
         return out, sheet_names
 
@@ -97,8 +99,62 @@ class CiosCommercialTwinAdapter:
     def _sheets(self, wb):
         ns={"x":"http://schemas.openxmlformats.org/spreadsheetml/2006/main", "r":"http://schemas.openxmlformats.org/officeDocument/2006/relationships"}
         book=ET.fromstring(wb.read("xl/workbook.xml")); rels=ET.fromstring(wb.read("xl/_rels/workbook.xml.rels"))
-        targets={r.attrib["Id"]: "xl/"+r.attrib["Target"].lstrip("/") for r in rels}
-        return [(s.attrib.get("name", "Sheet"), targets.get(s.attrib.get('{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id'), "")) for s in book.findall(".//x:sheet", ns)]
+        names=set(wb.namelist()); targets={}; seen_relationship_ids=set()
+        for rel in rels:
+            rid=str(rel.attrib.get("Id") or "")
+            target=str(rel.attrib.get("Target") or "")
+            if not rid: continue
+            if rid in seen_relationship_ids: raise ValueError(f"Duplicate workbook relationship ID: {rid}")
+            seen_relationship_ids.add(rid)
+            if str(rel.attrib.get("TargetMode") or "").casefold() == "external":
+                continue
+            targets[rid]=self._resolve_part_target("xl/workbook.xml", target)
+        sheets=[]; missing=[]
+        for sheet in book.findall(".//x:sheet", ns):
+            sheet_name=sheet.attrib.get("name", "Sheet")
+            rid=sheet.attrib.get('{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id', "")
+            resolved=targets.get(rid, "")
+            if not resolved:
+                missing.append(f"Worksheet relationship could not be resolved: sheet={sheet_name}; relationship_id={rid}; target=; resolved=; missing=")
+                continue
+            if resolved not in names:
+                missing.append(f"Worksheet relationship could not be resolved: sheet={sheet_name}; relationship_id={rid}; target={self._relationship_target(rels, rid)}; resolved={resolved}; missing={resolved}")
+                continue
+            sheets.append((sheet_name, resolved))
+        if missing: raise ValueError("; ".join(missing))
+        return sheets
+
+    def _relationship_target(self, rels, rid: str) -> str:
+        for rel in rels:
+            if rel.attrib.get("Id") == rid: return str(rel.attrib.get("Target") or "")
+        return ""
+
+    def _resolve_part_target(self, source_part: str, target: str) -> str:
+        original=target
+        target=unquote(str(target or ""))
+        if "\\" in target:
+            raise ValueError(f"Malformed relationship target: {original}")
+        parsed=urlsplit(target)
+        if parsed.scheme or parsed.netloc:
+            raise ValueError(f"Malformed relationship target: {original}")
+        target=parsed.path
+        if not target or target.startswith("//"):
+            raise ValueError(f"Malformed relationship target: {original}")
+        if target.startswith("/"):
+            candidate=PurePosixPath(target.lstrip("/"))
+        else:
+            source_dir=PurePosixPath(source_part).parent
+            # Some workbooks incorrectly store package-root-relative targets without a leading slash.
+            candidate=PurePosixPath(target) if target == "xl" or target.startswith("xl/") else source_dir / target
+        parts=[]
+        for part in candidate.parts:
+            if part in ("", "."): continue
+            if part == "..":
+                if not parts: raise ValueError(f"Relationship target escapes package: {original}")
+                parts.pop(); continue
+            parts.append(part)
+        if not parts or parts[0] == "..": raise ValueError(f"Malformed relationship target: {original}")
+        return "/".join(parts)
 
     def _rows(self, wb, sheet_file, shared):
         ns={"x":"http://schemas.openxmlformats.org/spreadsheetml/2006/main"}; root=ET.fromstring(wb.read(sheet_file)); rows=[]

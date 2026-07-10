@@ -145,3 +145,92 @@ def test_manifest_missing_nested_duplicate_invalid_json_and_schema_messages(monk
         monkeypatch, tmp_path, zip_bytes([("blueprint_manifest.json", b"[]")]),
         "blueprint_manifest.json does not match the required Blueprint manifest structure.",
     )
+
+
+def xlsx_workbook(sheet_targets, missing_parts=(), extra_entries=None):
+    """Build a minimal workbook with [(sheet_name, rel_id, target, rows)]."""
+    def cell(ref, value):
+        return f'<c r="{ref}" t="s"><v>{value}</v></c>'
+    strings=[]; sheet_entries={}
+    for idx,(name,rid,target,rows) in enumerate(sheet_targets, start=1):
+        xml_rows=[]
+        for rnum,row in enumerate(rows, start=1):
+            cells=[]
+            for cidx,value in enumerate(row, start=1):
+                strings.append(str(value)); cells.append(cell(f"{chr(64+cidx)}{rnum}", len(strings)-1))
+            xml_rows.append(f'<row r="{rnum}">{"".join(cells)}</row>')
+        default=f"xl/worksheets/sheet{idx}.xml"
+        part = target.lstrip('/') if target.startswith('/xl/') else (target if target.startswith('xl/') else 'xl/' + target.replace('../',''))
+        if target == '../worksheets/sheet1.xml': part = 'worksheets/sheet1.xml'
+        sheet_entries[default if default not in missing_parts else default] = f'<?xml version="1.0"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>{"".join(xml_rows)}</sheetData></worksheet>'
+    sheets=''.join(f'<sheet name="{n}" sheetId="{i}" r:id="{rid}"/>' for i,(n,rid,_,__) in enumerate(sheet_targets, start=1))
+    rels=''.join(f'<Relationship Id="{rid}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="{target}"/>' for _,rid,target,__ in sheet_targets)
+    shared=''.join(f'<si><t>{s}</t></si>' for s in strings)
+    b=io.BytesIO()
+    with zipfile.ZipFile(b,'w',zipfile.ZIP_DEFLATED) as z:
+        z.writestr('[Content_Types].xml','<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"/>')
+        z.writestr('xl/workbook.xml', f'<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>{sheets}</sheets></workbook>')
+        z.writestr('xl/_rels/workbook.xml.rels', f'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">{rels}</Relationships>')
+        z.writestr('xl/sharedStrings.xml', f'<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">{shared}</sst>')
+        for name, xml in sheet_entries.items():
+            if name not in missing_parts: z.writestr(name, xml)
+        for name, data in (extra_entries or {}).items(): z.writestr(name, data)
+    return b.getvalue()
+
+
+def pkg_with_workbook(workbook):
+    files={'final.xlsx': workbook}
+    manifest={"package_id":"synthetic-blueprint","package_version":"1.0.0","enterprise_id":"synthetic-enterprise","profile_version":"0.1",
+        "files":[{"path":"final.xlsx","sha256":sha256_bytes(workbook),"required":True,"role":"final_twin_spine"}],"record_sets":[]}
+    b=io.BytesIO()
+    with zipfile.ZipFile(b,'w',zipfile.ZIP_DEFLATED) as z:
+        z.writestr('blueprint_manifest.json', json.dumps(manifest)); z.writestr('final.xlsx', workbook)
+    return b.getvalue()
+
+
+def test_xlsx_relationship_targets_resolve_without_xl_duplication(monkeypatch,tmp_path):
+    for target in ['worksheets/sheet1.xml','xl/worksheets/sheet1.xml','/xl/worksheets/sheet1.xml']:
+        wb=xlsx_workbook([('Observations','rId1',target,[['external_id','record_class','statement'],['OBS-1','observation','ok']])])
+        r=receive(monkeypatch,tmp_path,pkg_with_workbook(wb))
+        result=BlueprintPackageValidator().validate_and_stage(r.package_ref,'alice')
+        assert not result.errors
+        assert 'Worksheets discovered: Observations' in result.warnings
+        assert result.records_accepted_into_staging == 1
+        assert 'xl/xl/worksheets/sheet1.xml' not in '\n'.join(result.errors + result.warnings)
+
+
+def test_xlsx_multiple_sheets_ids_staging_and_macro_warning(monkeypatch,tmp_path):
+    wb=xlsx_workbook([
+        ('Observations','rIdObs','worksheets/sheet1.xml',[['external_id','record_class','statement'],['OBS-1','observation','ok']]),
+        ('Pain Points','rIdPain','worksheets/sheet2.xml',[['external_id','text'],['PP-1','pain']]),
+    ], extra_entries={'xl/vbaProject.bin': b'macro bytes', 'xl/externalLinks/externalLink1.xml': b'<x/>'})
+    r=receive(monkeypatch,tmp_path,pkg_with_workbook(wb))
+    result=BlueprintPackageValidator().validate_and_stage(r.package_ref,'alice')
+    assert not result.errors
+    assert any('Observations, Pain Points' in w for w in result.warnings)
+    assert any('macros' in w for w in result.warnings)
+    summary=BlueprintPackageValidator().staging_summary(r.import_run_id)
+    assert {c['source_sheet'] for c in summary['candidates']} == {'Observations','Pain Points'}
+    assert result.records_accepted_into_staging == 1 and result.records_quarantined == 1
+    assert not (tmp_path/'memory').exists()
+
+
+def test_xlsx_missing_malformed_and_traversal_targets_fail_safely(monkeypatch,tmp_path):
+    cases=[
+        xlsx_workbook([('00_Control','rId1','worksheets/sheet1.xml',[['external_id'],['X']])], missing_parts={'xl/worksheets/sheet1.xml'}),
+        xlsx_workbook([('Bad','rId1','http://example.com/sheet.xml',[['external_id'],['X']])]),
+        xlsx_workbook([('Bad','rId1','../../evil.xml',[['external_id'],['X']])]),
+        xlsx_workbook([('Bad','rId1','worksheets\\sheet1.xml',[['external_id'],['X']])]),
+    ]
+    for wb in cases:
+        r=receive(monkeypatch,tmp_path,pkg_with_workbook(wb))
+        result=BlueprintPackageValidator().validate_and_stage(r.package_ref,'alice')
+        joined='\n'.join(result.errors)
+        assert 'Workbook could not be inspected safely' in joined
+        assert result.records_rejected == 1
+        assert not (tmp_path/'memory').exists()
+
+
+def test_xlsx_relative_parent_target_uses_source_part_semantics():
+    from cios.applications.flora.blueprint_import.cios_twin_adapter import CiosCommercialTwinAdapter
+    assert CiosCommercialTwinAdapter()._resolve_part_target('xl/workbook.xml','../worksheets/sheet1.xml') == 'worksheets/sheet1.xml'
