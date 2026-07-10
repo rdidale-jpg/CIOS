@@ -8,6 +8,11 @@ services:
     envVars:
       - key: FLORA_HOST
         value: 0.0.0.0
+      - key: FLORA_PILOT_AUTH_ENABLED
+        value: "1"
+      - key: FLORA_TRUST_PROXY_HEADERS
+        value: "0"
+      # Configure FLORA_PILOT_ACCESS_SECRET, FLORA_PILOT_OWNER_ID, FLORA_PILOT_WORKSPACE, and FLORA_PILOT_ROLE in the Render dashboard. Do not commit secret values.
       - key: FLORA_DATA_DIR
         value: /var/data/flora
       - key: FLORA_RAPID_AI_TWIN_ENABLED

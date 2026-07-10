@@ -24,7 +24,8 @@ from cios.applications.flora.digital_twins import digital_twins_landing_page, bt
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
 from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, financial_intelligence_safe_support_report_payload, load_run, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
-from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id
+from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id, blueprint_upload_authorisation
+from cios.applications.flora.pilot_auth import audit as pilot_audit, clear_session_cookie, issue_session_cookie, sign_in_page, validate_secret
 from cios.applications.flora.flora_transparent import start_bt_digital_twin, flora_payload
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
 from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page
@@ -61,7 +62,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             if parsed.path == "/health":
                 self._json(HEALTH_PAYLOAD)
             elif parsed.path in {"/", "/flora", "/flora/"}:
-                self._html(_flora_home_page())
+                self._html(_flora_home_page(self.headers))
+            elif parsed.path == "/pilot-sign-in":
+                self._html(sign_in_page())
             elif parsed.path == "/flora/events":
                 self._json(flora_payload())
             elif parsed.path == "/morning-edition":
@@ -224,7 +227,19 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         length = int(self.headers.get("Content-Length", "0"))
         raw_body = self.rfile.read(length)
         form = {} if "multipart/form-data" in self.headers.get("Content-Type", "") else parse_qs(raw_body.decode("utf-8"), keep_blank_values=True)
-        if self.path == "/blueprint-import/upload":
+        if self.path == "/pilot-sign-in":
+            secret = _one(form, "pilot_secret")
+            if validate_secret(secret):
+                decision = blueprint_upload_authorisation({"Cookie": issue_session_cookie(secure=False).split(";",1)[0]})
+                pilot_audit("sign_in_success", correlation_id=self.headers.get("X-Request-Id", ""), workspace=decision.active_workspace, role=decision.resolved_role, authorisation=decision.decision)
+                self._redirect("/flora", set_cookie=issue_session_cookie())
+            else:
+                pilot_audit("sign_in_failure", correlation_id=self.headers.get("X-Request-Id", ""))
+                self._html(sign_in_page("Invalid pilot access secret."), status=403)
+        elif self.path == "/pilot-sign-out":
+            pilot_audit("sign_out", correlation_id=self.headers.get("X-Request-Id", ""))
+            self._redirect("/flora", set_cookie=clear_session_cookie())
+        elif self.path == "/blueprint-import/upload":
             fields, files = _parse_multipart(self.headers, raw_body)
             html, status, _target = upload_and_validate_blueprint(files, fields, self.headers)
             self._html(html, status=status)
@@ -242,12 +257,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         elif self.path == "/flora/bt-digital-twin":
             start_bt_digital_twin()
             self._redirect("/flora")
-        elif self.path == "/digital-twins/bt-group-plc/search" or self.path.startswith("/financial-intelligence/bt-group-plc/refresh"):
+        elif self.path == "/digital-twins/bt-group-plc/search":
             start_bt_digital_twin()
             self._redirect("/flora")
         elif self.path.startswith("/financial-intelligence/bt-group-plc/refresh"):
             requested_mode = (form.get("acquisition_mode") or form.get("extraction_mode") or [""])[0]
-            run = create_financial_intelligence_progress_run("bt-group-plc", extraction_mode=requested_mode, product_surface="legacy_refresh", ordinary_research=True)
+            run = create_financial_intelligence_progress_run("bt-group-plc", extraction_mode=requested_mode)
             self._redirect(f"/digital-twins/bt-group-plc/progress/{run['run_id']}")
         elif self.path == "/ai-financial-report/upload":
             fields, files = _parse_multipart(self.headers, raw_body)
@@ -338,22 +353,26 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
-    def _redirect(self, location: str) -> None:
+    def _redirect(self, location: str, set_cookie: str = "") -> None:
         self.send_response(303)
         self.send_header("Location", location)
+        if set_cookie:
+            self.send_header("Set-Cookie", set_cookie)
         self.end_headers()
 
     def log_message(self, format: str, *args: object) -> None:
         return
 
 
-def _flora_home_page() -> str:
+def _flora_home_page(headers=None) -> str:
     from html import escape
 
     revision = escape(os.getenv("RENDER_GIT_COMMIT") or os.getenv("GIT_COMMIT") or "local")
+    decision = blueprint_upload_authorisation(headers or {})
+    auth = (f"<section class='card'><h2>Pilot session</h2><p>Signed in as <strong>{escape(decision.user_id)}</strong> in workspace <strong>{escape(decision.active_workspace)}</strong>. Owner recognised: {'yes' if decision.owner_recognised else 'no'}. package.upload: {'allowed' if decision.decision == 'allowed' else 'denied'}.</p><form method='post' action='/pilot-sign-out'><button type='submit'>Sign out</button></form></section>" if decision.user_id else "<section class='card action'><h2>Pilot access</h2><p>Protected Flora functions require pilot owner access.</p><p><a href='/pilot-sign-in'>Sign in for pilot access</a></p></section>")
     return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Flora Home</title><style>
     body{{font-family:Inter,Arial,sans-serif;margin:0;background:#f6f3ee;color:#17211b}} a{{color:#185c4d}} .shell{{max-width:980px;margin:auto;padding:32px}} .hero,.card{{background:#fff;border:1px solid #ded8ce;border-radius:18px;padding:24px;margin:16px 0;box-shadow:0 1px 3px #0001}} .grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}} .muted{{color:#68736c}}
-    </style></head><body><main class='shell'><section class='hero'><h1>Flora Home</h1><p class='muted'>Governed product home for Flora.</p><span hidden>Good Morning Rob</span><span hidden>Morning Edition</span><span hidden>NO LIVE EVIDENCE AVAILABLE</span><a hidden href='/score/BT'>Explain score</a><a hidden href='/financial-reports'>Collect Financial Report</a><p class='muted'>Deployed release identifier: {revision}</p></section><section class='grid'><article class='card'><h2><a href='/blueprint-import'>Import Blueprint</a></h2><p>Upload and validate governed blueprint packages without changing canonical state until approved.</p></article><article class='card'><h2><a href='/digital-twins/synthetic-enterprise/canvas'>Enterprise Canvas</a></h2><p>Open the read-only governed enterprise canvas projection.</p></article><article class='card'><h2><a href='/blueprint-import/history'>Import History</a></h2><p>Review prior blueprint import runs and outcomes.</p></article></section></main></body></html>"""
+    </style></head><body><main class='shell'><section class='hero'><h1>Flora Home</h1><p class='muted'>Governed product home for Flora.</p><span hidden>Good Morning Rob</span><span hidden>Morning Edition</span><span hidden>NO LIVE EVIDENCE AVAILABLE</span><a hidden href='/score/BT'>Explain score</a><a hidden href='/financial-reports'>Collect Financial Report</a><p class='muted'>Deployed release identifier: {revision}</p></section><section class='grid'><article class='card'><h2><a href='/blueprint-import'>Import Blueprint</a></h2><p>Upload and validate governed blueprint packages without changing canonical state until approved.</p></article><article class='card'><h2><a href='/digital-twins/synthetic-enterprise/canvas'>Enterprise Canvas</a></h2><p>Open the read-only governed enterprise canvas projection.</p></article><article class='card'><h2><a href='/blueprint-import/history'>Import History</a></h2><p>Review prior blueprint import runs and outcomes.</p></article></section>{auth}</main></body></html>"""
 
 
 def _is_enterprise_canvas_path(path: str) -> bool:
@@ -408,7 +427,7 @@ def _redirects_to_flora(path: str) -> bool:
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path in {"/", "/flora", "/flora/"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports":
+    if path in {"/", "/flora", "/flora/", "/pilot-sign-in"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports":
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"

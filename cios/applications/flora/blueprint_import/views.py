@@ -237,7 +237,7 @@ def _permission_guidance(headers: Any, decision=None) -> str:
             return "Blueprint upload capability is missing from the owner role."
         return "Sign out and sign back in to refresh owner permissions. If it still fails, contact support with the diagnostic reference."
     if not authenticated_flora_user(headers):
-        return "Sign in to import Blueprints in this workspace."
+        return "Sign in for pilot access to import Blueprints in this workspace."
     return "You do not have permission to import Blueprints in this workspace."
 
 

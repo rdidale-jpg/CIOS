@@ -122,3 +122,26 @@ Blueprint import audit records are append-only JSONL diagnostics under `${FLORA_
 At startup, Flora validates the configured storage root and expected subdirectories. Unavailable storage is reported as `flora_storage_unavailable` in process logs so operators can fix `FLORA_DATA_DIR` or the Render disk mount without turning optional Blueprint diagnostics into a blank page.
 
 To correlate a user report with Render logs, copy the `bpi-diag-...` reference shown on the Blueprint import page and search Render logs for the same diagnostic reference or the `blueprint_audit_persistence_failed` event.
+
+## Pilot-only Flora owner authentication
+
+Flora now includes a **pilot-only authentication mechanism** so the configured CIOS owner can use protected functions such as Blueprint import before the enterprise identity architecture exists. This mechanism is intentionally small: the application validates a deployment-owned secret on `POST /pilot-sign-in`, issues one signed `flora_pilot_session` cookie, and derives the owner identifier, workspace and role from server-side environment variables.
+
+Required Render environment variables:
+
+| Key | Value | Notes |
+| --- | --- | --- |
+| `FLORA_PILOT_AUTH_ENABLED` | `1` | Enables the pilot sign-in route and signed pilot session resolver. |
+| `FLORA_PILOT_ACCESS_SECRET` | Create in Render dashboard | Deployment-owned secret. Do not commit it and do not place it in URLs. |
+| `FLORA_PILOT_OWNER_ID` | Non-sensitive owner identifier | Example: an email-style or stable internal owner ID. |
+| `FLORA_PILOT_WORKSPACE` | `CIOS` | Workspace resolved from the signed pilot session. |
+| `FLORA_PILOT_ROLE` | `cios_owner` | Owner role; existing Flora policy expands this to Blueprint capabilities including `package.upload`. |
+| `FLORA_TRUST_PROXY_HEADERS` | `0` | Public `X-Flora-*` headers are ignored by default. |
+
+Cookie security: the pilot session cookie is HttpOnly, SameSite=Lax, Path=/, bounded by Max-Age, tamper-evident with HMAC, and marked Secure in Render/HTTPS deployments. Sign-out uses `POST /pilot-sign-out` and clears the same cookie.
+
+Header-trust boundary: keep `FLORA_TRUST_PROXY_HEADERS=0` unless a real upstream identity proxy exists. If a future deployment sets it to `1`, the edge must strip all public client-supplied `X-Flora-*` headers before injecting trusted identity, workspace and role values.
+
+Blueprint import: anonymous users and synthetic browser-supplied `X-Flora-*` headers remain denied. The denied Blueprint page offers a pilot sign-in action. Signed-in pilot owners resolve as the configured owner in the configured CIOS workspace with `cios_owner`, and Blueprint GET/POST use the same signed session and existing role/capability policy.
+
+Future migration path: replace this pilot-only mechanism with enterprise SSO, identity-provider integration, database-backed memberships, durable workspace ownership, and centrally managed roles/capabilities. The pilot cookie should then be removed rather than expanded into an enterprise identity platform.
