@@ -52,6 +52,7 @@ class BlueprintPackageRecord:
     received_at: str
     received_by: str
     import_run_id: str
+    workspace_id: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         data = asdict(self)
@@ -74,6 +75,7 @@ class BlueprintPackageRecord:
             received_at=str(data["received_at"]),
             received_by=str(data["received_by"]),
             import_run_id=str(data["import_run_id"]),
+            workspace_id=str(data.get("workspace_id") or ""),
         )
 
 

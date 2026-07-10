@@ -32,7 +32,7 @@ class BlueprintPackageRegistry:
             return []
         return [BlueprintPackageRecord.from_dict(json.loads(path.read_text(encoding="utf-8"))) for path in sorted(root.glob("*.json"))]
 
-    def receive(self, content: bytes, original_filename: str, actor: str) -> BlueprintPackageRecord:
+    def receive(self, content: bytes, original_filename: str, actor: str, workspace_id: str = "") -> BlueprintPackageRecord:
         if not actor or not str(actor).strip():
             raise PackageReceiptError("Actor is required for governed package receipt")
         if not content:
@@ -64,6 +64,7 @@ class BlueprintPackageRegistry:
                 received_at=utc_now(),
                 received_by=str(actor).strip(),
                 import_run_id=run.import_run_id,
+                workspace_id=str(workspace_id or "").strip(),
             )
             ensure_writable_dir(data_path("blueprint_import", "packages"))
             atomic_write_json(self._path_for_ref(package_ref), record.to_dict())
@@ -77,5 +78,5 @@ class BlueprintPackageRegistry:
             raise
 
 
-def receive_blueprint_package(content: bytes, original_filename: str, actor: str) -> BlueprintPackageRecord:
-    return BlueprintPackageRegistry().receive(content, original_filename, actor)
+def receive_blueprint_package(content: bytes, original_filename: str, actor: str, workspace_id: str = "") -> BlueprintPackageRecord:
+    return BlueprintPackageRegistry().receive(content, original_filename, actor, workspace_id)
