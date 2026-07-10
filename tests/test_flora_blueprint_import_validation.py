@@ -45,6 +45,23 @@ def test_valid_package_validation_and_supported_record_staging(monkeypatch,tmp_p
     assert any(c["source_sheet"] == "Sources" for c in summary["candidates"])
 
 
+def test_validation_page_shows_safe_deployed_commit(monkeypatch,tmp_path):
+    from cios.applications.flora.live import runtime
+    runtime.application_revision.cache_clear()
+    monkeypatch.setenv("RENDER_GIT_COMMIT", "abc123live")
+    monkeypatch.setenv("RENDER_GIT_BRANCH", "main")
+    monkeypatch.setenv("FLORA_BUILD_TIMESTAMP", "2026-07-10T12:00:00Z")
+    r=receive(monkeypatch,tmp_path)
+    BlueprintPackageValidator().validate_and_stage(r.package_ref,"alice", {"X-Flora-User":"alice","X-Flora-Enterprises":"synthetic-enterprise","X-Flora-Roles":"package.review"})
+    from cios.applications.flora.blueprint_import.views import validation_result_page
+    html,status=validation_result_page(r.import_run_id, {"X-Flora-User":"alice","X-Flora-Enterprises":"synthetic-enterprise","X-Flora-Roles":"package.review"})
+    assert status == 200
+    assert "Safe deployment diagnostics" in html
+    assert "abc123live" in html
+    assert "main" in html
+    assert "2026-07-10T12:00:00Z" in html
+
+
 def test_manifest_to_registry_mismatch_is_rejected_inspectably(monkeypatch,tmp_path):
     r=receive(monkeypatch,tmp_path)
     p=tmp_path / r.archive_path
