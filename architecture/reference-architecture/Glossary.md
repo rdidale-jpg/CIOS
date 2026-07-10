@@ -2,7 +2,7 @@
 
 **Status:** Draft  
 **Owner:** Rob / CIOS  
-**Last updated:** 2026-07-09
+**Last updated:** 2026-07-10
 
 Use this glossary as the common vocabulary for CIOS architecture. Primary documents are linked where they currently exist.
 
@@ -46,21 +46,15 @@ Use this glossary as the common vocabulary for CIOS architecture. Primary docume
 | Observation Lifecycle State | EI-012 state describing validation, corroboration, strengthening, weakening, contradiction, retirement or archival. | [EI-012](../enterprise-intelligence/volume-5-intelligence-foundations/EI-012-Enterprise-Observation-Model.md) |
 | Temporal Relevance | Degree to which an Observation or attribute remains current and decision-relevant based on effective period, freshness and decay. | [EI-012](../enterprise-intelligence/volume-5-intelligence-foundations/EI-012-Enterprise-Observation-Model.md) |
 | Financial Intelligence | Governed capability that converts financial sources into Evidence-backed Observations and Enterprise Model state. | [Flora Financial Intelligence Runtime Specification](../../docs/Architecture/Flora_Financial_Intelligence_Runtime_Specification_v0.1.md) |
-| Blueprint Package | Versioned, bounded and immutable delivery containing governed structured state, publications, metadata and lineage for a Commercial Digital Twin research baseline. | [ADR-012](../decisions/ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md), [Import Profile](../../docs/Architecture/CIOS_Blueprint_Package_Import_Profile_v0.1.md) |
-| Blueprint Import | Governed Flora workflow that receives, validates, stages, reviews and selectively promotes eligible Blueprint records while preserving the original package. | [ADR-012](../decisions/ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md), [Import Runtime Specification](../../docs/Architecture/Flora_Governed_Blueprint_Import_Runtime_Specification_v0.1.md) |
-| Package Acceptance | Approval of a Blueprint package as a governed analytical baseline for its stated boundary; it does not imply automatic canonical acceptance of every record. | [ADR-012](../decisions/ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md) |
-| Import Run | One attributable runtime attempt to validate, parse, stage, review, promote or reverse a Blueprint Package. Import Run state is separate from intelligence-object lifecycle state. | [Import Runtime Specification](../../docs/Architecture/Flora_Governed_Blueprint_Import_Runtime_Specification_v0.1.md) |
-| Candidate Import Record | Parsed external record held in Flora's staging boundary before object-level validation, mapping and Canonical Promotion. | [Import Runtime Specification](../../docs/Architecture/Flora_Governed_Blueprint_Import_Runtime_Specification_v0.1.md) |
-| Canonical Promotion | Explicit governed transaction that creates or updates canonical CIOS state through the owning object contract after candidate validation and acceptance. | [ADR-012](../decisions/ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md) |
-| Import Mapping | Versioned relationship between an external package stable ID and a Flora canonical object ID, including mapping method and acceptance state. | [Import Runtime Specification](../../docs/Architecture/Flora_Governed_Blueprint_Import_Runtime_Specification_v0.1.md) |
-| Quarantined Record | Candidate Import Record retained for inspection but blocked from Canonical Promotion because of invalid structure, unresolved identity, missing lineage, unsupported semantics or another material issue. | [Import Runtime Specification](../../docs/Architecture/Flora_Governed_Blueprint_Import_Runtime_Specification_v0.1.md) |
-| Import Ledger | Immutable record of accepted, rejected, unchanged, quarantined, contradictory and reversed effects from an Import Run. | [Import Runtime Specification](../../docs/Architecture/Flora_Governed_Blueprint_Import_Runtime_Specification_v0.1.md) |
-| Analytical Projection | Versioned view derived from governed intelligence, such as a pain portfolio, Burning Platform assessment or executive synthesis; it is not automatically a canonical EI object. | [ADR-012](../decisions/ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md) |
-| Enterprise Canvas | Primary Flora navigation view that presents an understandable model of the enterprise and allows progressive drill-down into governed Living Twin state. | [ADR-013](../decisions/ADR-013-Enterprise-Canvas-as-Primary-Living-Twin-Navigation.md), [Canvas Pattern](../../docs/Architecture/Flora_Enterprise_Canvas_and_Drill_Down_Pattern_v0.1.md) |
-| Intelligence Tile | Selectable view component on the Enterprise Canvas representing an enterprise unit, domain, programme, capability, nested Twin or Analytical Projection. It is not a canonical intelligence object. | [Canvas Pattern](../../docs/Architecture/Flora_Enterprise_Canvas_and_Drill_Down_Pattern_v0.1.md) |
-| Enterprise Lens | Consistent view over the same Living Twin organised around a perspective such as organisation, outcomes, transformation, pain, stakeholders, technology, suppliers or time. | [ADR-013](../decisions/ADR-013-Enterprise-Canvas-as-Primary-Living-Twin-Navigation.md) |
-| Intelligence Detail Panel | Progressive drill-down view that explains a selected tile's purpose, facts, changes, pains, current responses, unresolved state, stakeholders, uncertainty and lineage. | [Canvas Pattern](../../docs/Architecture/Flora_Enterprise_Canvas_and_Drill_Down_Pattern_v0.1.md) |
-| Lineage View | User-facing representation of the path from a displayed judgement through analytical reasoning or model state to Observations, Evidence, Sources and original package location. | [Experience Standard](../../docs/Architecture/CIOS_Enterprise_Intelligence_Experience_Standard_v0.1.md) |
-| Nested-Twin Navigation | Navigation between a parent Commercial Digital Twin and a bounded programme, unit, value stream, service or ecosystem Twin that inherits governed parent context. | [Canvas Pattern](../../docs/Architecture/Flora_Enterprise_Canvas_and_Drill_Down_Pattern_v0.1.md) |
-| Progressive Disclosure | Experience method that presents enterprise understanding first and reveals mechanism, taxonomy, uncertainty and detailed lineage only as the user drills deeper. | [Experience Standard](../../docs/Architecture/CIOS_Enterprise_Intelligence_Experience_Standard_v0.1.md) |
-| Twin Version | Immutable versioned boundary of accepted Commercial Digital Twin state, including effective date, source cut-off, package lineage and maturity. | [ADR-012](../decisions/ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md) |
+
+
+## Progressive Assurance terms
+
+| Term | Definition | Primary documents |
+| --- | --- | --- |
+
+| Progressive Assurance | Assurance model in which governance depth increases with recommendation strength, audience and consequence while core lineage and uncertainty rules remain invariant. | [ADR-009](../decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md), [FP-003](../founding-papers/FP-003-Flora-Intelligence-Architecture.md) |
+| Initial Decision Twin | Default operating mode that creates or refreshes governed, decision-useful Commercial Digital Twin state without requiring formal release packaging. | [ADR-009](../decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md) |
+| Assured Release | Explicit promotion mode that adds deeper review, reconciliation, publication validation and owner acceptance for external or high-consequence use. | [ADR-009](../decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md) |
+| Evidence Saturation | Decision-relative point at which additional collection is unlikely to change the immediate bounded judgement materially; residual gaps remain explicit as Unknowns, Contradictions or Evidence Demands. | [ADR-009](../decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md), [FP-003](../founding-papers/FP-003-Flora-Intelligence-Architecture.md) |
+| Promotion Trigger | A condition requiring an Initial Decision Twin to move to Assured Release, such as external publication, provider-specific pursuit, sponsor outreach or material reliance. | [ADR-009](../decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md) |
