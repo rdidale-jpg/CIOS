@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 import zipfile
 from io import BytesIO
 from pathlib import PurePosixPath
@@ -54,6 +55,7 @@ class BlueprintPackageValidator:
         accepted = sum(1 for c in candidates if c.validation_status == "accepted")
         quarantined = sum(1 for c in candidates if c.validation_status == "quarantined")
         rejected = sum(1 for c in candidates if c.validation_status == "rejected")
+        shutil.rmtree(self.staging.root_for(package.import_run_id) / "candidates", ignore_errors=True)
         for candidate in candidates:
             self.staging.save_candidate(candidate)
         result = ImportRunDryRunResult("1.0", package.import_run_id, package_ref, package.package_sha256, tuple(files),

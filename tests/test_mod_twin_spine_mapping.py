@@ -170,7 +170,7 @@ def test_v12_core_mapping_contract_and_review_summary(tmp_path, monkeypatch):
     assert accepted['entity'] >= 7
     assert accepted['relationship'] >= 2
     assert accepted['human_knowledge'] == 1
-    assert summary['mapping_version'] == 'mod-cdt-twin-spine-mapping-v1.2.0'
+    assert summary['mapping_version'] == 'mod-cdt-twin-spine-mapping-v1.3.0'
     assert summary['candidate_summary']['Rejected'] == 0
     assert summary['ignored_reasons']['ignored_control_row'] == 1
     assert summary['ignored_reasons']['ignored_dashboard_row'] == 1
@@ -212,3 +212,53 @@ def test_v12_ignored_rows_collision_and_stable_derived_ids(tmp_path, monkeypatch
     summary = BlueprintReviewPlanCoordinator().ensure_job(rec.import_run_id, 'alice', HEADERS, lambda: None)
     assert summary['mapping_quality']['derived_id_collisions'] >= 1
     assert result.canonical_mutations == 0
+
+
+def test_v13_proven_mod_header_shapes_and_safety(tmp_path, monkeypatch):
+    sheets={
+        '03_Sources': [['source_id','source_title','url'], ['SRC-MOD-1','MOD source','https://example.test/src']],
+        '04A_Evidence': [['evidence_id','source_id','summary','source_locator'], ['EVD-MOD-1','SRC-MOD-1','Evidence one','p.1'], ['EVD-MOD-2','SRC-MOD-1','Evidence two','p.2']],
+        '05_Observations': [['Observation ID','Atomic statement','Type','Affected entity/relationship','Event date','Evidence date','Collection date','Last confirmed','Supporting Evidence IDs','Prior state','Current state','Confidence','Freshness','Contradiction state','Linked Unknowns','Candidate downstream Signals'], ['OBS-MOD-1','Observed one','fact','','','','','','EVD-MOD-1; EVD-MOD-2','','','0.9','','','UNK-MOD-1','']],
+        '16_Unknowns': [['Unknown ID','Statement','Domain','Why material','Affected thesis/mechanism','Current evidence boundary','Best validation route','Owner/validator sought','Priority','Status'], ['UNK-MOD-1','Unknown statement','MOD','Material','Thesis','Boundary','Validate','Owner','High','Open']],
+        '17_Contradictions': [['Contradiction ID - preserve both positions','Statement A','Statement B','Class','Why material','Current judgement','Evidence needed','Affected outputs','Status'], ['CTR-MOD-1','A','B','tension','Material','open','Need evidence','outputs','Open']],
+        '06_Entities_Rels': [['Item ID','Item type','Name','Entity class','Parent/source entity','Target entity','Relationship type','Effective from','Effective to','Evidence IDs','Confidence','Status','Notes'], ['ENT-MOD-1','Entity','Entity A','organisation','','','','','','EVD-MOD-1','High','Active',''], ['REL-MOD-1','Relationship','','','ENT-MOD-1','ENT-MOD-2','owns','','','EVD-MOD-1','High','Active','']],
+        '13_Causal_Edges': [['Edge ID','From entity/state','Relationship','To entity/state','Mechanism summary','Supporting Observation IDs','Supporting Evidence IDs','Contrary Evidence','Scope','Confidence','Status: evidenced/hypothesised','Consequence','Validation action'], ['EDGE-MOD-1','ENT-MOD-1','causes','ENT-MOD-2','Mechanism','OBS-MOD-1','EVD-MOD-1','None','MOD','Medium','evidenced','Consequence','Validate']],
+        '24_Human_Knowledge': [['explanatory row'], ['not','the','header'], [''], ['Knowledge ID - HSK only; not MOD Evidence','Contributor','Date supplied','Statement','Scope','Sensitivity','Evidence class','Linked entities/theses','Confidence','Validation need','Treatment'], ['HSK-MOD-1','SME','2026-01-01','Human supplied statement','MOD','Internal','Human-supplied knowledge','ENT-MOD-1','Medium','Validate','Treat as unverified']],
+    }
+    rec, result, candidates = stage(tmp_path, monkeypatch, sheets)
+    by_id={c['original_source_id']: c for c in candidates}
+    obs=by_id['OBS-MOD-1']
+    assert obs['validation_status'] == 'accepted'
+    assert obs['payload']['supporting_evidence_ids'] == 'EVD-MOD-1; EVD-MOD-2'
+    assert len(obs['payload']['lineage_resolution']) == 2
+    assert all(r['resolved_staged_candidate'] for r in obs['payload']['lineage_resolution'])
+    unk=by_id['UNK-MOD-1']
+    assert unk['candidate_object_class'] == 'unknown'
+    assert 'identifier_derivation' not in unk['payload']
+    ctr=by_id['CTR-MOD-1']
+    assert ctr['candidate_object_class'] == 'contradiction'
+    assert ctr['payload']['contradiction_id'] == 'CTR-MOD-1'
+    ent=by_id['ENT-MOD-1']; rel=by_id['REL-MOD-1']
+    assert ent['candidate_object_class'] == 'entity'
+    assert ent['payload']['entity_type'] == 'organisation'
+    assert rel['candidate_object_class'] == 'relationship'
+    assert rel['payload']['source_entity_id'] == 'ENT-MOD-1'
+    assert rel['payload']['target_entity_id'] == 'ENT-MOD-2'
+    edge=by_id['EDGE-MOD-1']
+    assert edge['candidate_object_class'] == 'relationship'
+    assert edge['payload']['source_entity_id'] == 'ENT-MOD-1'
+    assert edge['payload']['target_entity_id'] == 'ENT-MOD-2'
+    assert edge['payload']['statement'] == 'Mechanism'
+    hk=by_id['HSK-MOD-1']
+    assert hk['source_location']['header_row'] == 4
+    assert hk['candidate_object_class'] == 'human_knowledge'
+    assert hk['validation_status'] == 'accepted'
+    assert hk['payload']['human_supplied'] is True
+    assert hk['payload']['truth_class'] == 'human-supplied'
+    assert hk['truth_class'] == 'human-supplied'
+    assert result.canonical_mutations == 0
+    assert all(c['candidate_object_class'] != 'package_metadata' for c in candidates)
+    summary = BlueprintReviewPlanCoordinator().ensure_job(rec.import_run_id, 'alice', HEADERS, lambda: None)
+    assert summary['mapping_version'] == 'mod-cdt-twin-spine-mapping-v1.3.0'
+    assert summary['candidate_summary']['Rejected'] == 0
+    assert summary['mapping_quality']['accepted_by_class']['human_knowledge'] == 1

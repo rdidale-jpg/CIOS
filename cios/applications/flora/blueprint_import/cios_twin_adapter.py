@@ -67,7 +67,7 @@ def _event(trace: list[dict[str, Any]] | None, step_id: int, component: str, act
     trace.append(payload)
 from .models import BlueprintPackageRecord
 
-MAPPING_VERSION = "mod-cdt-twin-spine-mapping-v1.2.0"
+MAPPING_VERSION = "mod-cdt-twin-spine-mapping-v1.3.0"
 
 
 def _norm(value: Any) -> str:
@@ -78,7 +78,7 @@ def _norm(value: Any) -> str:
     return text
 
 
-ID_COLUMNS = ("stable_id","external_id","id","source_id","evidence_id","observation_id","unknown_id","contradiction_id","entity_id","relationship_id","edge_id","claim_id")
+ID_COLUMNS = ("stable_id","external_id","id","source_id","evidence_id","observation_id","unknown_id","contradiction_id","entity_id","relationship_id","edge_id","human_knowledge_id","claim_id")
 TEXT_COLUMNS = ("statement","atomic_statement","claim","question","name","label","title","summary","description","statement_a","statement_b","source","target")
 
 
@@ -90,7 +90,7 @@ def _split_refs(value: Any) -> list[str]:
     text = _clean(value)
     if not text:
         return []
-    return [_clean(part) for part in re.split(r"[,;|]\s*|\n+", text) if _clean(part)]
+    return [_clean(part) for part in re.split(r"[,;|\t]\s*|\n+", text) if _clean(part)]
 
 
 def _ref_key(value: Any) -> str:
@@ -132,16 +132,16 @@ class SheetMapping:
 CANONICAL_MAPPINGS: tuple[SheetMapping, ...] = (
     SheetMapping(("03_Sources", "Sources", "Source"), "source", required_any=(("source_id","stable_id","id","external_id"),), lineage_any=(), truth_default="source_record"),
     SheetMapping(("04A_Evidence", "Evidence"), "evidence", required_any=(("evidence_id","stable_id","id","external_id"),), lineage_any=("source_id","source_title","source_locator","url","citation","document"), truth_default="evidence_record"),
-    SheetMapping(("05_Observations", "Observations", "Observation"), "observation", required_any=(("observation_id","stable_id","id","external_id"),), lineage_any=("source_id","source_ids","evidence_id","evidence_ids","source_ref","evidence_ref","source_reference","evidence_reference","supporting_source","supporting_evidence","citation_id","claim_id"), truth_default="observed"),
+    SheetMapping(("05_Observations", "Observations", "Observation"), "observation", required_any=(("observation_id","stable_id","id","external_id"),), lineage_any=("source_id","source_ids","evidence_id","evidence_ids","supporting_evidence_ids","source_ref","evidence_ref","source_reference","evidence_reference","supporting_source","supporting_evidence","citation_id","claim_id"), truth_default="observed"),
     SheetMapping(("06_Entities_Rels", "Entities Rels", "Entities and Relationships"), "enterprise_model_candidate", required_any=(("entity_id","relationship_id","stable_id","id","external_id"),), lineage_any=()),
     SheetMapping(("07_Executives_Rights",), "enterprise_model_candidate", lineage_any=()), SheetMapping(("08_Programmes",), "enterprise_model_candidate", lineage_any=()),
     SheetMapping(("09_Capabilities",), "enterprise_model_candidate", lineage_any=()), SheetMapping(("10_Systems_Data",), "enterprise_model_candidate", lineage_any=()),
     SheetMapping(("11_Suppliers_Contracts",), "enterprise_model_candidate", lineage_any=()), SheetMapping(("12_Measures_Resources",), "enterprise_model_candidate", lineage_any=()),
-    SheetMapping(("13_Causal_Edges",), "relationship", required_any=(("edge_id","relationship_id","stable_id","id","external_id"),)),
+    SheetMapping(("13_Causal_Edges",), "relationship", required_any=(("edge_id","relationship_id","stable_id","id","external_id"),), lineage_any=()),
     SheetMapping(("16_Unknowns", "Unknowns", "Unknown"), "unknown", required_any=(("unknown_id","stable_id","id","external_id"),), lineage_any=(), truth_default="unknown"),
-    SheetMapping(("17_Contradictions", "Contradictions", "Contradiction"), "contradiction", required_any=(("contradiction_id","stable_id","id","external_id"),), lineage_any=("source_id","evidence_id","claim_id","observation_id"), truth_default="contradiction"),
+    SheetMapping(("17_Contradictions", "Contradictions", "Contradiction"), "contradiction", required_any=(("contradiction_id","stable_id","id","external_id"),), lineage_any=(), truth_default="contradiction"),
     SheetMapping(("21_Document_Refresh",), "refresh_trigger"), SheetMapping(("22_Provenance_Risk",), "unknown", lineage_any=(), truth_default="provenance_risk"),
-    SheetMapping(("24_Human_Knowledge", "Human Supplied Knowledge", "Human Knowledge"), "human_knowledge", truth_default="human-supplied", human_supplied=True),
+    SheetMapping(("24_Human_Knowledge", "Human Supplied Knowledge", "Human Knowledge"), "human_knowledge", lineage_any=(), truth_default="human-supplied", human_supplied=True),
     SheetMapping(("04_Claims", "Claims"), "enterprise_model_candidate", truth_default="claim"),
     SheetMapping(("15_Theses", "Theses"), "enterprise_model_candidate", disposition="reasoning_artifact", truth_default="hypothesis"),
 )
@@ -343,9 +343,53 @@ class CiosCommercialTwinAdapter:
             vals=row["values"]
             normalized=[_norm(v) for v in vals]
             non_empty=[h for h in normalized if h]
-            if len(non_empty) >= 2 and any(h in {"stable_id","external_id","id","source_id","evidence_id","observation_id","record_class"} for h in non_empty):
+            has_human_knowledge_header = (
+                any("knowledge_id" in h for h in non_empty)
+                and "statement" in non_empty
+                and "evidence_class" in non_empty
+            )
+            if has_human_knowledge_header:
+                return pos, normalized
+            if len(non_empty) >= 2 and any(h in set(ID_COLUMNS) | {"record_class","item_id","item_type","contradiction_id_preserve_both_positions"} for h in non_empty):
                 return pos, normalized
         return (0, [_norm(v) for v in rows[0]["values"]]) if rows else (0, [])
+
+    def _apply_v13_aliases(self, row: dict[str, Any]) -> None:
+        aliases = {
+            "contradiction_id_preserve_both_positions": ("contradiction_id",),
+            "item_id": ("stable_id",),
+            "item_type": ("record_type",),
+            "entity_class": ("entity_type",),
+            "parent_source_entity": ("source_entity_id",),
+            "target_entity": ("target_entity_id",),
+            "from_entity_state": ("source_entity_id",),
+            "to_entity_state": ("target_entity_id",),
+            "relationship": ("relationship_type",),
+            "mechanism_summary": ("statement",),
+            "supporting_observation_ids": ("observation_ids",),
+            "supporting_evidence_ids": ("evidence_ids", "supporting_evidence_ids"),
+            "status_evidenced_hypothesised": ("status",),
+            "knowledge_id_hsk_only_not_mod_evidence": ("human_knowledge_id", "stable_id"),
+            "contributor": ("provider",),
+            "linked_entities_theses": ("references",),
+            "validation_need": ("validation_need",),
+            "treatment": ("caveat",),
+            "why_material": ("significance",),
+            "affected_thesis_mechanism": ("affected_thesis_mechanism",),
+            "current_evidence_boundary": ("evidence_boundary",),
+            "best_validation_route": ("validation_route",),
+            "owner_validator_sought": ("owner",),
+            "class": ("contradiction_class",),
+            "evidence_needed": ("evidence_needed",),
+            "affected_outputs": ("affected_outputs",),
+            "current_judgement": ("current_judgement",),
+        }
+        for source, targets in aliases.items():
+            value = row.get(source)
+            if not _clean(value):
+                continue
+            for target in targets:
+                row.setdefault(target, value)
 
     def _is_section_header(self, row: dict[str, str], vals: list[str]) -> bool:
         non=[str(v).strip() for v in vals if str(v).strip()]
@@ -392,6 +436,8 @@ class CiosCommercialTwinAdapter:
                 loc={"workbook": workbook_path, "sheet": sheet, "row": idx, "stable_id": ext, "mapping_version": MAPPING_VERSION, "header_row": header_pos+1}
                 out.append(CandidateImportRecord("1.0", candidate_id(package.package_ref, workbook_path, ext, "ignored_row"), package.package_ref, package.package_sha256, workbook_path, sheet, loc, ext, "ignored_row", "ignored", payload, "ignored", (), sha256_bytes(json.dumps(payload, sort_keys=True).encode()), utc_now(), package.import_run_id, 0))
                 continue
+            self._apply_v13_aliases(row)
+            row["__has_evidence_class"] = "evidence_class" in row
             findings=[]
             if not mapping:
                 rc=str(row.get("record_class") or "unsupported_twin_spine_row"); status="quarantined"; truth="unknown"
@@ -399,7 +445,7 @@ class CiosCommercialTwinAdapter:
             else:
                 rc=str(row.get("record_class") or mapping.candidate_class)
                 row_type=str(row.get("record_type") or row.get("type") or row.get("class") or row.get("relationship_type") or row.get("entity_type") or "").casefold()
-                if mapping.candidate_class == "enterprise_model_candidate" and ("relationship" in row_type or (_clean(row.get("source")) and _clean(row.get("target")))): rc="relationship"
+                if mapping.candidate_class == "enterprise_model_candidate" and ("relationship" in row_type or (_clean(row.get("source_entity_id") or row.get("source")) and _clean(row.get("target_entity_id") or row.get("target")))): rc="relationship"
                 elif mapping.candidate_class == "enterprise_model_candidate" and ("entity" in row_type or _clean(row.get("name")) or _clean(row.get("label"))): rc="entity"
                 truth=str(row.get("truth_class") or row.get("truth") or _TRUTH.get(_norm(sheet)) or mapping.truth_default)
                 status="accepted" if rc in SUPPORTED_RECORD_CLASSES and rc not in PROJECTION_ONLY_CLASSES else "quarantined"
@@ -422,10 +468,11 @@ class CiosCommercialTwinAdapter:
                 lineage_values=[]
                 for c in mapping.lineage_any:
                     lineage_values.extend(_split_refs(row.get(_norm(c))))
+                lineage_values=list(dict.fromkeys(lineage_values))
                 resolutions=[]; resolved_any=False
                 for ref in lineage_values:
                     rk=_ref_key(ref); resolved=ref_index.get(rk, "")
-                    if not resolved and _norm(c) == "claim_id":
+                    if not resolved and _ref_key(ref).startswith("claim") and row.get("claim_id"):
                         inherited = claim_lineage.get(rk, [])
                         resolved = ";".join(x.get("resolved_staged_candidate", "") for x in inherited if x.get("resolved_staged_candidate"))
                     resolved_any = resolved_any or bool(resolved)
@@ -437,7 +484,7 @@ class CiosCommercialTwinAdapter:
                 if resolutions:
                     row["lineage_resolution"] = resolutions
             ext=""
-            preferred_ids = {"source": ("source_id","stable_id","external_id","id"), "evidence": ("evidence_id","stable_id","external_id","id"), "observation": ("observation_id","stable_id","external_id","id"), "unknown": ("unknown_id","stable_id","external_id","id"), "contradiction": ("contradiction_id","stable_id","external_id","id"), "entity": ("entity_id","stable_id","external_id","id"), "relationship": ("relationship_id","edge_id","stable_id","external_id","id"), "human_knowledge": ("stable_id","external_id","id")}.get(rc, ID_COLUMNS)
+            preferred_ids = {"source": ("source_id","stable_id","external_id","id"), "evidence": ("evidence_id","stable_id","external_id","id"), "observation": ("observation_id","stable_id","external_id","id"), "unknown": ("unknown_id","stable_id","external_id","id"), "contradiction": ("contradiction_id","stable_id","external_id","id"), "entity": ("entity_id","stable_id","external_id","id"), "relationship": ("relationship_id","edge_id","stable_id","external_id","id"), "human_knowledge": ("human_knowledge_id","stable_id","external_id","id")}.get(rc, ID_COLUMNS)
             for key in preferred_ids:
                 if _clean(row.get(key)): ext=_clean(row.get(key)); break
             ext=ext or f"{_norm(sheet)}-{idx}"
@@ -456,9 +503,14 @@ class CiosCommercialTwinAdapter:
             if rc == "entity":
                 row.setdefault("entity_name", _clean(row.get("entity_name") or row.get("name") or row.get("label") or row.get("title")))
                 row.setdefault("entity_type", _norm(row.get("entity_type") or row.get("type") or row.get("record_type") or sheet))
-                if not (_clean(row.get("entity_name")) and _clean(row.get("entity_type"))):
+                if not (_clean(row.get("stable_id") or row.get("entity_id") or row.get("id")) and _clean(row.get("entity_name")) and _clean(row.get("entity_type"))):
                     status="quarantined"; findings.append(ValidationFinding("error","quarantined_ambiguous_row_type","Entity rows require clear identity and type",f"{workbook_path}:{sheet}!{idx}"))
-            payload={k:v for k,v in row.items() if v not in ("", None)}
+            if rc == "human_knowledge":
+                evidence_class = _clean(row.get("evidence_class")).casefold()
+                marker_ok = ("human" in evidence_class and ("supplied" in evidence_class or "knowledge" in evidence_class)) or not row.get("__has_evidence_class")
+                if not (_clean(row.get("human_knowledge_id") or row.get("stable_id")) and _clean(row.get("statement")) and marker_ok):
+                    status="quarantined"; findings.append(ValidationFinding("error","quarantined_human_knowledge_requirements","Human Knowledge rows require HSK ID, statement and human-supplied evidence class",f"{workbook_path}:{sheet}!{idx}"))
+            payload={k:v for k,v in row.items() if v not in ("", None) and not str(k).startswith("__")}
             payload.setdefault("twin_version", package.identity.package_version)
             payload["mapping_version"] = MAPPING_VERSION
             payload["mapping_disposition"] = "unsupported" if not mapping else mapping.disposition
