@@ -8,6 +8,7 @@ from typing import Any, Literal
 
 from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise, flora_roles
 from cios.applications.flora.memory.models import Observation
+from cios.applications.flora.live.source_registry import canonical_enterprise_id
 from cios.applications.flora.memory.repository import EvidenceRepository, ObservationRepository, ContradictionRepository
 from cios.applications.flora.storage import atomic_write_json, data_path, ensure_writable_dir
 
@@ -22,6 +23,36 @@ from .review import CandidateReviewRepository
 PromotionStatus = Literal["succeeded", "repeat_no_change", "failed"]
 SUPPORTED_PROMOTION_CLASSES = {"evidence", "observation", "contradiction"}
 NON_MUTATING_EFFECTS = {"mapped", "unchanged", "duplicate", "reject", "defer", "quarantine", "unsupported", "unresolved", "projection", "conflict"}
+
+
+def _clean(value: Any) -> str:
+    return str(value or "").strip()
+
+def _split_refs(value: Any) -> tuple[str, ...]:
+    if isinstance(value, (list, tuple)):
+        return tuple(dict.fromkeys(_clean(v) for v in value if _clean(v)))
+    text = _clean(value)
+    if not text:
+        return ()
+    import re
+    return tuple(dict.fromkeys(part.strip() for part in re.split(r"[,;|\t]\s*|\n+", text) if part.strip()))
+
+def _as_confidence(value: Any) -> int:
+    if value in (None, ""):
+        return 50
+    try:
+        n = float(value)
+    except (TypeError, ValueError):
+        labels = {"low": 30, "medium": 60, "high": 85}
+        return labels.get(str(value).strip().casefold(), 50)
+    return int(round(n * 100)) if 0 <= n <= 1 else int(round(n))
+
+def _first_present(payload: dict[str, Any], keys: tuple[str, ...]) -> tuple[str, str]:
+    for key in keys:
+        value = _clean(payload.get(key))
+        if value:
+            return value, key
+    return "", ""
 
 class BlueprintPromotionError(PermissionError):
     """Raised when approved canonical promotion cannot proceed."""
@@ -175,7 +206,7 @@ class CanonicalPromotionService:
             row={**payload, "evidence_id": eid, "blueprint_import_lineage": {**lineage, "canonical_id": eid, "prior_canonical_version": prior}}
             return self.evidence_repo.save(row)["evidence_id"]
         if e.record_class=="observation":
-            obs=Observation(**{k:v for k,v in payload.items() if k in Observation.__dataclass_fields__}, human_provenance={**payload.get("human_provenance",{}), "blueprint_import_lineage": lineage} if payload.get("provenance_type")=="human-supplied" else payload.get("human_provenance",{}))
+            obs = self._observation_from_payload(e, c, payload, lineage, a)
             return self.observation_repo.save(obs).observation_id or ""
         if e.record_class=="contradiction":
             cid=e.canonical_id or m.get("canonical_id") or m.get("proposed_canonical_id") or payload.get("contradiction_id") or c["original_source_id"] or "CON-"+sha256_bytes(e.effect_id.encode())[:16].upper()
@@ -183,6 +214,62 @@ class CanonicalPromotionService:
             row={**payload, "contradiction_id": cid, "statement_a": payload.get("statement_a") or payload.get("position_a") or payload.get("claim_a") or "", "statement_b": payload.get("statement_b") or payload.get("position_b") or payload.get("claim_b") or "", "contradiction_class": payload.get("contradiction_class") or payload.get("class") or "", "judgement": payload.get("current_judgement") or payload.get("judgement") or "", "evidence_need": payload.get("evidence_needed") or payload.get("evidence_need") or "", "affected_outputs": payload.get("affected_outputs") or "", "status": payload.get("status") or "open", "blueprint_import_lineage": {**lineage, "canonical_id": cid, "prior_canonical_version": prior}}
             return self.contradiction_repo.save(row)["contradiction_id"]
         raise BlueprintPromotionError("Unsupported canonical class")
+
+    def _observation_from_payload(self, e: ProposedCanonicalEffect, c: dict[str, Any], payload: dict[str, Any], lineage: dict[str, Any], a: CanonicalPromotionApproval) -> Observation:
+        package = self.registry.get(a.package_ref)
+        enterprise_id = _clean(payload.get("enterprise_id")) or _clean(getattr(package.identity, "enterprise_id", "") if package else "")
+        enterprise_id = canonical_enterprise_id(enterprise_id) or enterprise_id
+        observation_type = _clean(payload.get("observation_type") or payload.get("type") or payload.get("record_type") or payload.get("truth_class") or c.get("truth_class"))
+        observation_date, observation_date_source = _first_present(payload, ("event_date", "evidence_date", "collection_date", "last_confirmed", "last_confirmed_date", "observation_date", "observed_at"))
+        if not observation_date:
+            observation_date = "undated"
+            observation_date_source = "canonical-undated"
+        collection_date = _clean(payload.get("collection_date") or payload.get("collected_at") or payload.get("source_row_collected_at") or observation_date)
+        affected_attribute = _clean(payload.get("affected_attribute") or payload.get("affected_entity_relationship") or payload.get("affected_entity") or payload.get("relationship_id") or payload.get("entity_id"))
+        atomic_statement = _clean(payload.get("atomic_statement") or payload.get("statement") or payload.get("claim") or payload.get("summary"))
+        missing = []
+        if not enterprise_id: missing.append("enterprise_id")
+        if not observation_type: missing.append("observation_type")
+        if not observation_date: missing.append("observation_date")
+        if not collection_date: missing.append("collection_date")
+        if not affected_attribute: missing.append("affected_attribute")
+        if not atomic_statement: missing.append("atomic_statement")
+        supporting = _split_refs(payload.get("supporting_evidence_ids") or payload.get("evidence_ids") or payload.get("evidence_id"))
+        provenance = _clean(payload.get("provenance_type") or ("human-supplied" if payload.get("human_supplied") else "evidence-backed"))
+        if provenance in {"evidence-backed", "evidence_curated"} and not supporting:
+            missing.append("supporting_evidence_ids")
+        if missing:
+            raise BlueprintPromotionError(f"Observation candidate {e.candidate_id} ({c.get('original_source_id')}) missing required canonical field(s): {', '.join(missing)}")
+        hp = dict(payload.get("human_provenance") or {})
+        hp["blueprint_import_lineage"] = lineage
+        hp["source_worksheet"] = payload.get("source_worksheet") or c.get("source_sheet")
+        hp["source_row"] = payload.get("source_row") or (c.get("source_location") or {}).get("row")
+        hp["observation_payload_lineage"] = {k: payload.get(k) for k in ("prior_state", "current_state", "linked_unknowns", "lineage_resolution", "candidate_downstream_signals") if k in payload}
+        hp["observation_date_source"] = observation_date_source
+        return Observation(
+            enterprise_id=enterprise_id,
+            observation_type=observation_type,
+            atomic_statement=atomic_statement,
+            observation_date=observation_date,
+            collection_date=collection_date,
+            affected_attribute=affected_attribute,
+            confidence=_as_confidence(payload.get("confidence")),
+            supporting_evidence_ids=supporting,
+            evidence_publication_date=_clean(payload.get("evidence_publication_date") or payload.get("evidence_date")) or None,
+            provenance_type=provenance,
+            freshness=_clean(payload.get("freshness")) or "current",
+            last_confirmed_date=_clean(payload.get("last_confirmed_date") or payload.get("last_confirmed")) or None,
+            lifecycle_state=_clean(payload.get("lifecycle_state")) or "accepted",
+            importance=int(payload["importance"]) if payload.get("importance") not in (None, "") else None,
+            commercial_value=int(payload["commercial_value"]) if payload.get("commercial_value") not in (None, "") else None,
+            contradiction_state=_clean(payload.get("contradiction_state")) or "none",
+            contradicted_by_observation_ids=_split_refs(payload.get("contradicted_by_observation_ids")),
+            supersedes_observation_id=_clean(payload.get("supersedes_observation_id")) or None,
+            retired_at=_clean(payload.get("retired_at")) or None,
+            human_provenance=hp,
+            observation_id=_clean(payload.get("observation_id")) or e.canonical_id or None,
+            observation_fingerprint=_clean(payload.get("observation_fingerprint")) or None,
+        )
     def _backup_paths(self):
         paths=[self.evidence_repo.path, self.observation_repo.path, self.contradiction_repo.path]; b=[]
         for p in paths:

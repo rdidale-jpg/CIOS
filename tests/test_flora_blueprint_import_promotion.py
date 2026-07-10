@@ -119,3 +119,96 @@ def test_reconciliation_mismatch_blocks_approval_controls(monkeypatch,tmp_path):
     assert "Approval blocked" in html
     assert "type='button' disabled" in html
     assert "type='submit'>Approve and update governed Twin" not in html
+
+def test_observation_promotion_completes_canonical_contract_and_preserves_lineage(monkeypatch,tmp_path):
+    payload={
+        "observation_id":"OBS-MOD-1",
+        "atomic_statement":"MOD baseline is governed.",
+        "type":"fact",
+        "affected_entity_relationship":"enterprise.governance",
+        "event_date":"2026-01-04",
+        "evidence_date":"2026-01-03",
+        "collection_date":"2026-01-02",
+        "last_confirmed":"2026-01-01",
+        "supporting_evidence_ids":"EVD-MOD-1; EVD-MOD-2",
+        "confidence":"0.9",
+        "freshness":"current",
+        "prior_state":"draft",
+        "current_state":"approved",
+        "contradiction_state":"none",
+        "linked_unknowns":"UNK-MOD-1",
+        "lineage_resolution":[{"resolved_staged_candidate":"cand-evidence"}],
+        "source_worksheet":"05_Observations",
+        "source_row":7,
+    }
+    r, _, p=_plan_with(monkeypatch,tmp_path,[{"external_id":"OBS-MOD-1","record_class":"observation","truth_class":"observed","payload":payload}])
+    approval=CanonicalPromotionService().approve_plan(r.import_run_id,p.plan_id,"alice","ok",PROMOTE_HEADERS)
+    result=CanonicalPromotionService().execute_approved_plan(r.import_run_id, approval.approval_id, "alice", PROMOTE_HEADERS)
+    assert result.actual_mutation_count == 1
+    row=__import__('json').loads((tmp_path/"memory"/"observations.jsonl").read_text().splitlines()[0])
+    assert row["enterprise_id"] == "synthetic-enterprise"
+    assert row["observation_type"] == "fact"
+    assert row["observation_date"] == "2026-01-04"
+    assert row["affected_attribute"] == "enterprise.governance"
+    assert row["supporting_evidence_ids"] == ["EVD-MOD-1", "EVD-MOD-2"]
+    assert row["confidence"] == 90
+    assert row["freshness"] == "current"
+    assert row["contradiction_state"] == "none"
+    hp=row["human_provenance"]
+    assert hp["blueprint_import_lineage"]["approval_id"] == approval.approval_id
+    assert hp["source_worksheet"] == "05_Observations"
+    assert hp["source_row"] == 7
+    assert hp["observation_payload_lineage"]["prior_state"] == "draft"
+    assert hp["observation_payload_lineage"]["current_state"] == "approved"
+    assert hp["observation_payload_lineage"]["linked_unknowns"] == "UNK-MOD-1"
+
+
+def test_observation_date_fallback_order_and_no_import_timestamp(monkeypatch,tmp_path):
+    cases=[("EV","evidence_date","2026-02-03"),("COL","collection_date","2026-02-02"),("LC","last_confirmed","2026-02-01"),("UND",None,"undated")]
+    records=[]
+    for suffix,key,expected in cases:
+        payload={"observation_id":f"OBS-{suffix}","atomic_statement":f"MOD fact {suffix} is recorded.","type":"fact","affected_entity_relationship":f"enterprise.{suffix.lower()}","supporting_evidence_ids":"EVD-1"}
+        if key: payload[key]=expected
+        records.append({"external_id":f"OBS-{suffix}","record_class":"observation","truth_class":"observed","payload":payload})
+    r, _, p=_plan_with(monkeypatch,tmp_path,records)
+    approval=CanonicalPromotionService().approve_plan(r.import_run_id,p.plan_id,"alice","ok",PROMOTE_HEADERS)
+    CanonicalPromotionService().execute_approved_plan(r.import_run_id, approval.approval_id, "alice", PROMOTE_HEADERS)
+    rows=[__import__('json').loads(x) for x in (tmp_path/"memory"/"observations.jsonl").read_text().splitlines()]
+    by={row["observation_id"]: row for row in rows}
+    for suffix,_,expected in cases:
+        assert by[f"OBS-{suffix}"]["observation_date"] == expected
+    assert all("T" not in row["observation_date"] for row in rows if row["observation_date"] != "undated")
+
+
+def test_observation_missing_required_data_blocks_whole_promotion_and_retry_succeeds(monkeypatch,tmp_path):
+    good={"observation_id":"OBS-GOOD","atomic_statement":"MOD good fact is recorded.","type":"fact","affected_entity_relationship":"enterprise.good","event_date":"2026-01-01","supporting_evidence_ids":"EVD-1"}
+    bad={"observation_id":"OBS-BAD","atomic_statement":"MOD bad fact is recorded.","type":"fact","event_date":"2026-01-01","supporting_evidence_ids":"EVD-1"}
+    r, cs, p=_plan_with(monkeypatch,tmp_path,[{"external_id":"OBS-GOOD","record_class":"observation","truth_class":"observed","payload":good},{"external_id":"OBS-BAD","record_class":"observation","truth_class":"observed","payload":bad}])
+    approval=CanonicalPromotionService().approve_plan(r.import_run_id,p.plan_id,"alice","ok",PROMOTE_HEADERS)
+    with pytest.raises(BlueprintPromotionError) as exc:
+        CanonicalPromotionService().execute_approved_plan(r.import_run_id, approval.approval_id, "alice", PROMOTE_HEADERS)
+    assert "OBS-BAD" in str(exc.value) and "affected_attribute" in str(exc.value)
+    assert not (tmp_path/"memory"/"observations.jsonl").exists()
+    # Retry same staged candidates/plan after correcting the persisted staged payload, without another upload.
+    import json
+    staged_dir=tmp_path/"blueprint_import"/"staging"/r.import_run_id/"candidates"
+    for path in staged_dir.glob("*.json"):
+        data=json.loads(path.read_text())
+        if data.get("original_source_id") == "OBS-BAD":
+            data["payload"]["affected_entity_relationship"] = "enterprise.bad"
+            path.write_text(json.dumps(data, sort_keys=True))
+    res=CanonicalPromotionService().execute_approved_plan(r.import_run_id, approval.approval_id, "alice", PROMOTE_HEADERS)
+    assert res.actual_mutation_count == 2
+    assert len((tmp_path/"memory"/"observations.jsonl").read_text().splitlines()) == 2
+
+
+def test_authenticated_workspace_owner_context_survives_observation_approval_flow(monkeypatch,tmp_path):
+    payload={"observation_id":"OBS-AUTH","atomic_statement":"MOD auth fact is recorded.","type":"fact","affected_entity_relationship":"enterprise.auth","event_date":"2026-01-01","supporting_evidence_ids":"EVD-1"}
+    r, _, p=_plan_with(monkeypatch,tmp_path,[{"external_id":"OBS-AUTH","record_class":"observation","truth_class":"observed","payload":payload}])
+    approval=CanonicalPromotionService().approve_plan(r.import_run_id,p.plan_id,"alice","ok",PROMOTE_HEADERS)
+    res=CanonicalPromotionService().execute_approved_plan(r.import_run_id, approval.approval_id, "alice", PROMOTE_HEADERS)
+    row=__import__('json').loads((tmp_path/"memory"/"observations.jsonl").read_text())
+    lineage=row["human_provenance"]["blueprint_import_lineage"]
+    assert res.final_execution_status == "succeeded"
+    assert lineage["approving_actor"] == "alice"
+    assert lineage["executing_actor"] == "alice"
