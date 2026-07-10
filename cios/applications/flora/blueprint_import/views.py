@@ -11,6 +11,7 @@ from uuid import uuid4
 
 from cios.applications.flora.access import authenticated_flora_user, active_flora_workspace, blueprint_upload_authorisation, can_access_enterprise, flora_roles, is_cios_owner, user_enterprise_access
 from cios.applications.flora.workspace.views import _page
+from cios.applications.flora.enterprise_canvas.access import repair_blueprint_canvas_access
 from cios.applications.flora.storage import PersistenceError, storage_mode
 from cios.applications.flora.live.runtime import deployment_metadata
 
@@ -193,6 +194,7 @@ def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers:
         svc = CanonicalPromotionService(); plan_id = (form.get("plan_id") or [""])[0]
         approval = svc.approve_plan(import_run_id, plan_id, authenticated_flora_user(headers), (form.get("rationale") or [""])[0], headers)
         result = svc.execute_approved_plan(import_run_id, approval.approval_id, authenticated_flora_user(headers), headers)
+        repair_blueprint_canvas_access(import_run_id, headers)
         return completion_page(import_run_id, result.to_dict(), headers), 200
     except BlueprintPromotionError as exc:
         return _safe_failure(str(exc), "promotion", False, True, "The package remains available. Review the plan and retry after resolving the issue."), 400
@@ -203,6 +205,7 @@ def decline_promotion(import_run_id: str, headers: Any) -> tuple[str, int]:
 
 
 def completion_page(import_run_id: str, result: dict[str, Any], headers: Any) -> str:
+    repair_blueprint_canvas_access(import_run_id, headers)
     ctx = _context(import_run_id); package = ctx["package"] if ctx else None; enterprise = package.identity.enterprise_id if package else ""
     body = ( _package_header(package) if package else "") + f"""<section class='card'><h2>Completion</h2><table><tr><th>Promotion status</th><td>{escape(result.get('final_execution_status','unknown'))}</td></tr><tr><th>Records created</th><td>{len(result.get('records_created', []))}</td></tr><tr><th>Records updated</th><td>{len(result.get('records_updated', []))}</td></tr><tr><th>Projections retained</th><td>{_projection_count(import_run_id)}</td></tr><tr><th>Exceptions</th><td>{len(result.get('records_blocked', [])) + len(result.get('records_failed', []))}</td></tr></table><p>The original ZIP was preserved unchanged in governed runtime storage.</p><p><a href='/digital-twins/{escape(enterprise)}/canvas'>Open Enterprise Canvas</a> · <a href='/blueprint-import/{escape(import_run_id)}'>Open import record</a></p></section>"""
     return _page("Blueprint import complete", body)

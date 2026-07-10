@@ -4,7 +4,7 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import Any
 
-from cios.applications.flora.access import authenticated_flora_user, user_enterprise_access
+from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise
 from cios.applications.flora.blueprint_import.archive import sha256_bytes
 from cios.applications.flora.blueprint_import.candidates import PROJECTION_ONLY_CLASSES, CandidateStagingRepository
 from cios.applications.flora.blueprint_import.registry import BlueprintPackageRegistry
@@ -12,6 +12,7 @@ from cios.applications.flora.live.source_registry import canonical_enterprise_id
 from cios.applications.flora.memory.models import EnterpriseModelAttribute, EnterpriseUnknown
 from cios.applications.flora.memory.repository import EnterpriseModelRepository, EvidenceRepository, ObservationRepository
 
+from .access import EnterpriseCanvasAccessRepository, can_access_canvas_record, repair_enterprise_canvas_access
 from .models import CANVAS_SCHEMA_VERSION, CanvasAnalyticalProjection, CanvasLineageReference, CanvasLineageInspection, EnterpriseCanvas, EnterpriseCanvasHeader, EnterpriseCanvasTile
 
 
@@ -22,8 +23,9 @@ class EnterpriseCanvasAccessError(PermissionError):
 def can_view_enterprise_canvas(headers: Any, enterprise_id: str) -> bool:
     if not authenticated_flora_user(headers):
         return False
-    allowed = user_enterprise_access(headers)
-    return "*" in allowed or enterprise_id in allowed
+    record = EnterpriseCanvasAccessRepository().get(enterprise_id)
+    workspace_id = record.workspace_id if record else ""
+    return can_access_canvas_record(headers, enterprise_id, workspace_id)
 
 
 class EnterpriseCanvasService:
@@ -40,6 +42,7 @@ class EnterpriseCanvasService:
         enterprise_id = canonical_enterprise_id(enterprise_id) or enterprise_id
         if lens != "organisation":
             raise ValueError("Only the organisation lens is supported in this bounded read model")
+        self._repair_known_blueprint_canvas(enterprise_id, headers)
         if not can_view_enterprise_canvas(headers, enterprise_id):
             raise EnterpriseCanvasAccessError("Actor is not authorised to view this Enterprise Canvas")
         model = self.models.get(enterprise_id)
@@ -215,7 +218,7 @@ class EnterpriseCanvasService:
     def _accepted_projections(self, enterprise_id):
         out = []
         for package in self.registry.list():
-            if package.identity.enterprise_id != enterprise_id:
+            if canonical_enterprise_id(package.identity.enterprise_id) != canonical_enterprise_id(enterprise_id):
                 continue
             for c in self.staging.list_candidates(package.import_run_id):
                 if c.get("candidate_object_class") not in PROJECTION_ONLY_CLASSES or c.get("validation_status") == "rejected":
@@ -225,3 +228,13 @@ class EnterpriseCanvasService:
                 lineage = CanvasLineageReference(label, "analytical_projection", c["candidate_record_id"], tuple(payload.get("observation_ids") or ()), tuple(payload.get("evidence_ids") or ()), tuple(payload.get("source_ids") or ()), package.package_ref, package.import_run_id, str(c.get("source_location") or c.get("source_file") or ""))
                 out.append(CanvasAnalyticalProjection(label, c["candidate_object_class"], str(payload.get("twin_version") or package.identity.package_version), tuple(payload.get("supporting_record_refs") or (c["candidate_record_id"],)), str(payload.get("effective_date") or ""), str(payload.get("confidence") or payload.get("qualification") or ""), str(payload.get("status") or "accepted projection"), (lineage,)))
         return tuple(sorted(out, key=lambda p: (p.projection_type, p.display_label)))
+
+
+    def _repair_known_blueprint_canvas(self, enterprise_id: str, headers: Any) -> None:
+        user = authenticated_flora_user(headers)
+        if not user:
+            return
+        for package in self.registry.list():
+            if canonical_enterprise_id(package.identity.enterprise_id) == canonical_enterprise_id(enterprise_id) and can_access_enterprise(headers, package.identity.enterprise_id, getattr(package, "workspace_id", "")):
+                repair_enterprise_canvas_access(package.identity.enterprise_id, getattr(package, "workspace_id", ""), user, package.import_run_id)
+                return
