@@ -164,6 +164,8 @@ def review_page(import_run_id: str, headers: Any, message: str = "", query: dict
         LOGGER.info("Blueprint review preparation trace", extra={"correlation_id": correlation_id, "review_job_id": job.get("job_id"), "import_run_id": import_run_id, "stage": job.get("stage"), "records_processed": job.get("records_processed", 0)})
         if job.get("status") == "Failed":
             return _review_failure_page(ctx, job, correlation_id), 200
+        if job.get("status") == "Not ready":
+            return _review_ready_page(ctx, job, coord, query, message, correlation_id), 200
         if job.get("status") != "Ready":
             return _review_progress_page(ctx, job, correlation_id, message), 200
         return _review_ready_page(ctx, job, coord, query, message, correlation_id), 200
@@ -255,7 +257,11 @@ def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str
     body += _review_sections(ctx["package"].import_run_id, details, query)
     plan_id = escape(str(job.get("plan_id", "")))
     expected = int(proposed.get("Creates", 0)) + int(proposed.get("Updates", 0))
-    body += f"""<section class='card'><h2>Approval</h2><p>Promotion remains disabled until the owner has reviewed required exceptions and confirms the expected canonical mutation count.</p><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/approve'><input type='hidden' name='plan_id' value='{plan_id}'><label><input type='checkbox' name='confirm_plan' value='yes' required> I reviewed the plan</label><label><input type='checkbox' name='confirm_mutations' value='yes' required> I understand the expected mutation count is {expected}</label><label>Approval rationale</label><textarea name='rationale' required></textarea><p><button type='submit'>Approve and update governed Twin</button></p></form><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/decline'><p><button type='submit'>Decline promotion</button></p></form></section>"""
+    rec = job.get("reconciliation") or {}
+    if rec and not rec.get("passes", True):
+        body += f"""<section class='card warning'><h2>Approval</h2><p><strong>Approval blocked:</strong> accepted canonical candidates do not reconcile with creates, updates and unchanged.</p><p>Mismatch: {int(rec.get("mismatch", 0))}</p><button type='button' disabled>Approve and update governed Twin</button></section>"""
+    else:
+        body += f"""<section class='card'><h2>Approval</h2><p>Promotion remains disabled until the owner has reviewed required exceptions and confirms the expected canonical mutation count.</p><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/approve'><input type='hidden' name='plan_id' value='{plan_id}'><label><input type='checkbox' name='confirm_plan' value='yes' required> I reviewed the plan</label><label><input type='checkbox' name='confirm_mutations' value='yes' required> I understand the expected mutation count is {expected}</label><label>Approval rationale</label><textarea name='rationale' required></textarea><p><button type='submit'>Approve and update governed Twin</button></p></form><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/decline'><p><button type='submit'>Decline promotion</button></p></form></section>"""
     return _page("Review Blueprint proposed changes", body)
 
 
@@ -289,13 +295,15 @@ def _review_summary_section(ctx, job, counts, proposed) -> str:
     <tr><th>Staging version</th><td><code>{escape(str((ctx.get('summary') or {}).get('staging_version', 'staging-v1')))}</code></td></tr>
     <tr><th>Mapping version</th><td><code>{escape(str(job.get('mapping_version') or (ctx.get('summary') or {}).get('mapping_version') or MAPPING_VERSION))}</code></td></tr>
     <tr><th>Review generated from</th><td><code>{escape(str((ctx.get('summary') or {}).get('staging_version', 'staging-v1')))}</code></td></tr>
-    <tr><th>Accepted</th><td>{int(counts.get('Accepted', 0))}</td></tr>
+    <tr><th>Accepted canonical candidates</th><td>{int(counts.get('Accepted canonical candidates', counts.get('Accepted', 0)))}</td></tr>
+    <tr><th>Accepted but non-persistable</th><td>{int(counts.get('Accepted but non-persistable', proposed.get('Accepted but non-persistable', 0)))}</td></tr>
     <tr><th>Quarantined</th><td>{int(counts.get('Quarantined', 0))}</td></tr>
     <tr><th>Rejected</th><td>{int(counts.get('Rejected', 0))}</td></tr>
     <tr><th>Unsupported</th><td>{int(counts.get('Unsupported', 0))}</td></tr>
     <tr><th>Creates</th><td>{val('Creates')}</td></tr>
     <tr><th>Updates</th><td>{val('Updates')}</td></tr>
     <tr><th>Unchanged</th><td>{val('Unchanged')}</td></tr>
+    <tr><th>Reconciliation check</th><td>{'Passed' if (job.get('reconciliation') or {}).get('passes', True) else 'Failed'}</td></tr>
     <tr><th>Conflicts</th><td>{val('Conflicts')}</td></tr>
     <tr><th>Unresolved references</th><td>{val('Unresolved references')}</td></tr>
     <tr><th>Projection-only</th><td>{val('Projection-only')} analytical projections retained outside canonical memory</td></tr>
@@ -384,7 +392,7 @@ def _load_review_details(coord, import_run_id):
 
 def _review_candidate_counts(candidates):
     c = Counter(x.get("validation_status") for x in candidates)
-    return {"Accepted": c["accepted"], "Quarantined": c["quarantined"], "Rejected": c["rejected"], "Unsupported": c["unsupported"]}
+    return {"Accepted": c["accepted"], "Accepted canonical candidates": c["accepted"], "Accepted but non-persistable": 0, "Quarantined": c["quarantined"], "Rejected": c["rejected"], "Unsupported": c["unsupported"]}
 
 
 

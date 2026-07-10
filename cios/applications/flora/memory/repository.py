@@ -157,3 +157,49 @@ class EvidenceRepository:
     def _rewrite(self, rows: Iterable[dict]) -> None:
         data = "".join(json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n" for row in rows)
         atomic_write_text(self.path, data)
+
+
+class ContradictionRepository:
+    """Append/rewrite JSONL repository for canonical Contradiction records."""
+
+    def __init__(self, path: Path | None = None):
+        self.path = path or data_path("memory", "contradictions.jsonl")
+
+    def list(self) -> list[dict]:
+        if not self.path.exists():
+            return []
+        rows = []
+        with self.path.open("r", encoding="utf-8") as handle:
+            for line_no, line in enumerate(handle, start=1):
+                if not line.strip():
+                    continue
+                try:
+                    row = json.loads(line)
+                except json.JSONDecodeError as exc:
+                    raise ValueError(f"Malformed Contradiction JSONL record at {self.path}:{line_no}") from exc
+                if isinstance(row, dict):
+                    rows.append(row)
+        return rows
+
+    def get(self, contradiction_id: str) -> dict | None:
+        return next((c for c in self.list() if str(c.get("contradiction_id")) == str(contradiction_id)), None)
+
+    def save(self, contradiction: dict) -> dict:
+        if not contradiction.get("contradiction_id"):
+            raise ValueError("Contradiction requires contradiction_id")
+        rows = self.list()
+        for i, row in enumerate(rows):
+            if str(row.get("contradiction_id")) == str(contradiction.get("contradiction_id")):
+                merged = {**row, **{k: v for k, v in contradiction.items() if v not in (None, "", [])}}
+                rows[i] = merged
+                self._rewrite(rows)
+                return merged
+        ensure_parent_writable(self.path)
+        encoded = json.dumps(contradiction, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
+        with self.path.open("a", encoding="utf-8") as handle:
+            handle.write(encoded); handle.flush(); os.fsync(handle.fileno())
+        return contradiction
+
+    def _rewrite(self, rows: Iterable[dict]) -> None:
+        data = "".join(json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n" for row in rows)
+        atomic_write_text(self.path, data)
