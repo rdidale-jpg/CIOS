@@ -23,7 +23,7 @@ from cios.applications.flora.workspace.views import case_page, landing_page, log
 from cios.applications.flora.digital_twins import digital_twins_landing_page, bt_twin_page, search_bt_twin, bt_search_progress_page, rapid_snapshot_csv
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
-from cios.applications.flora.live.runtime import application_revision
+from cios.applications.flora.live.runtime import application_revision, deployment_metadata
 from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, financial_intelligence_safe_support_report_payload, load_run, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id, blueprint_upload_authorisation
 from cios.applications.flora.pilot_auth import audit as pilot_audit, clear_session_cookie, issue_session_cookie, sign_in_page, validate_secret
@@ -40,7 +40,7 @@ FLORA_PORT_ENV = "FLORA_PORT"
 HEALTH_PAYLOAD = {"status": "healthy", "service": "flora"}
 
 def deployment_payload() -> dict[str, str]:
-    return {"service": "flora", "commit_sha": application_revision()}
+    return {"service": "flora", **deployment_metadata()}
 CASE_SLUGS = {"ThamesWater", "NationalGrid", "BT", "Vodafone"}
 
 
@@ -511,7 +511,15 @@ def run(host: str | None = None, port: int | None = None) -> None:
     bind_host = host or env_host()
     bind_port = port if port is not None else env_port()
     storage = startup_storage_status()
-    print(f"Flora startup deployment commit_sha={application_revision()}", flush=True)
+    deployment = deployment_metadata()
+    print(
+        "Flora startup deployment "
+        f"version={deployment['deployment_version']} "
+        f"commit_sha={deployment['commit_sha']} "
+        f"branch={deployment['branch']} "
+        f"build_timestamp={deployment['build_timestamp']}",
+        flush=True,
+    )
     print(f"Flora storage {storage['status']}: {storage['data_root']}", flush=True)
     if not storage.get("ready"):
         print({"event": "flora_storage_unavailable", "data_root": storage.get("data_root"), "storage_mode": storage.get("storage_mode"), "error": storage.get("error")}, flush=True)
