@@ -277,7 +277,13 @@ def _review_failure_page(ctx, job, correlation_id: str) -> str:
 def _review_summary_section(ctx, job, counts, proposed) -> str:
     package = ctx["package"]
     def val(name): return int(proposed.get(name, 0))
-    return f"""<section class='card'><h2>Review proposed changes</h2><h3>Summary</h3><table>
+    mq = job.get("mapping_quality") or {}
+    def rows(title, data):
+        body = "".join(f"<tr><td>{escape(str(k))}</td><td>{int(v)}</td></tr>" for k, v in sorted((data or {}).items(), key=lambda kv: str(kv[0]))) or "<tr><td colspan='2'>None</td></tr>"
+        return f"<h3>{escape(title)}</h3><table><tbody>{body}</tbody></table>"
+    completeness = "".join(f"<tr><td>{escape(str(k))}</td><td>{'Yes' if v else 'No'}</td></tr>" for k, v in (mq.get("twin_completeness_indicators") or {}).items())
+    top = rows("Accepted by class", mq.get("accepted_by_class")) + rows("Projection-only by class", mq.get("projection_only_by_class")) + rows("Ignored by reason", job.get("ignored_reasons")) + rows("Quarantined by reason", job.get("quarantine_reasons")) + f"<h3>Derived IDs</h3><table><tr><th>Source-supplied IDs</th><td>{int(mq.get('source_supplied_id_count',0))}</td></tr><tr><th>Derived IDs</th><td>{int(mq.get('derived_id_count',0))}</td></tr><tr><th>Derived-ID collisions</th><td>{int(mq.get('derived_id_collisions',0))}</td></tr><tr><th>Derived-ID failures</th><td>{int(mq.get('derived_id_failures',0))}</td></tr></table><h3>Twin completeness indicators</h3><table>{completeness}</table>"
+    return f"""<section class='card'><h2>Review proposed changes</h2>{top}<h3>Summary</h3><table>
     <tr><th>Blueprint</th><td>{escape(_package_name(package))} {escape(package.identity.package_version)}</td></tr>
     <tr><th>Review status</th><td>{escape(str(job.get('status', 'Preparing')))}</td></tr>
     <tr><th>Staging version</th><td><code>{escape(str((ctx.get('summary') or {}).get('staging_version', 'staging-v1')))}</code></td></tr>
