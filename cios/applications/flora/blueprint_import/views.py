@@ -5,7 +5,7 @@ from collections import Counter
 from html import escape
 from typing import Any
 
-from cios.applications.flora.access import authenticated_flora_user, can_receive_blueprint_package, flora_roles, is_cios_owner, user_enterprise_access
+from cios.applications.flora.access import authenticated_flora_user, blueprint_upload_authorisation, can_receive_blueprint_package, flora_roles, is_cios_owner, user_enterprise_access
 from cios.applications.flora.workspace.views import _page
 
 from .archive import sha256_bytes
@@ -37,8 +37,9 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
     filename = fields.get("blueprint_zip.filename") or fields.get("filename") or "blueprint.zip"
     mime = fields.get("blueprint_zip.content_type") or fields.get("content_type") or ""
     try:
-        if not can_receive_blueprint_package(headers):
-            _audit_authorisation("package_upload_authorisation_denied", headers, "upload", "denied", "missing package.upload or owner-inherited authority")
+        decision = blueprint_upload_authorisation(headers)
+        if decision.decision != "allowed":
+            _audit_authorisation("package_upload_authorisation_denied", headers, "upload", decision)
             raise PermissionError("You do not have permission to import Blueprints in this workspace.")
         content = files.get("blueprint_zip") or files.get("file") or b""
         if not filename.lower().endswith(".zip") or mime not in ZIP_MIME_TYPES:
@@ -47,7 +48,7 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
             raise PackageReceiptError(f"The selected file is larger than the {MAX_UPLOAD_BYTES // (1024*1024)} MB upload limit.")
         before = _canonical_marker()
         record = BlueprintPackageRegistry().receive(content, filename, actor)
-        _audit_authorisation("package_upload_authorisation_allowed", headers, "upload", "allowed", "", record.package_ref, record.import_run_id, record.identity.enterprise_id)
+        _audit_authorisation("package_upload_authorisation_allowed", headers, "upload", decision, record.package_ref, record.import_run_id, record.identity.enterprise_id)
         result = BlueprintPackageValidator().validate_and_stage(record.package_ref, actor, headers)
         assert before == _canonical_marker(), "Upload and validation must not mutate canonical memory"
         return validation_result_page(record.import_run_id, headers)[0], 200, f"/blueprint-import/{record.import_run_id}"
@@ -180,16 +181,23 @@ def _permission_guidance(headers: Any) -> str:
     return "You do not have permission to import Blueprints in this workspace."
 
 
-def _audit_authorisation(event_type: str, headers: Any, stage: str, decision: str, reason: str, package_ref: str = "", import_run_id: str = "", enterprise_id: str = "") -> None:
+def _audit_authorisation(event_type: str, headers: Any, stage: str, decision, package_ref: str = "", import_run_id: str = "", enterprise_id: str = "") -> None:
     BlueprintImportLedger().append(event_type, {
-        "actor": authenticated_flora_user(headers),
-        "enterprise_id": enterprise_id,
-        "roles": sorted(flora_roles(headers)),
-        "permission_decision": decision,
+        "actor": decision.user_id,
+        "user_id": decision.user_id,
+        "workspace_ids": list(decision.workspace_ids),
+        "enterprise_id": enterprise_id or (decision.workspace_ids[0] if len(decision.workspace_ids) == 1 else ""),
+        "raw_roles": list(decision.raw_roles),
+        "roles": list(decision.effective_roles),
+        "effective_permissions": list(decision.effective_permissions),
+        "required_permission": decision.required_permission,
+        "policy_name": decision.policy_name,
+        "policy_source": decision.policy_source,
+        "permission_decision": decision.decision,
         "blueprint_package_ref": package_ref,
         "import_run_id": import_run_id,
         "stage": stage,
-        "result": "failed" if decision == "denied" else "allowed",
-        "failure_reason": reason,
+        "result": "failed" if decision.decision == "denied" else "allowed",
+        "failure_reason": decision.denial_reason,
         "import_job_id": "",
     })

@@ -133,3 +133,8 @@ def test_access_control_for_blueprint_package_receipt():
 def test_cios_owner_inherits_blueprint_import_permissions():
     owner = {"X-Flora-User": "rob", "X-Flora-Enterprises": "synthetic-enterprise", "X-Flora-Roles": "cios_owner"}
     assert can_receive_blueprint_package(owner)
+
+
+def test_canonical_owner_alias_and_encoded_cookie_inherit_blueprint_permissions():
+    headers = {"Cookie": "flora_user=rob; flora_enterprises=synthetic-enterprise; flora_roles=owner%2Ccanvas.view"}
+    assert can_receive_blueprint_package(headers)

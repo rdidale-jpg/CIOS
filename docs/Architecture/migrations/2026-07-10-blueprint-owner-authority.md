@@ -11,7 +11,7 @@ The canonical Blueprint import capabilities remain:
 - `candidate.promote` for approval and canonical promotion execution.
 - `blueprint_import_admin` as the existing Blueprint import administrative aggregate.
 
-The `cios_owner` role is the highest operational authority in CIOS. Product sessions that carry `cios_owner` automatically inherit the Blueprint import capability set above. This is a role-policy backfill, so existing owner accounts receive the authority at their next session/policy evaluation without manual database edits or hidden user-specific grants.
+The `cios_owner` role is the highest operational authority in CIOS. Product sessions that carry `cios_owner` or a canonical workspace owner alias (`owner`, `workspace.owner`, or `workspace_owner`) automatically inherit the Blueprint import capability set above. This is a role-policy backfill, so existing owner accounts receive the authority at their next session/policy evaluation without manual database edits or hidden user-specific grants.
 
 ## Runtime behaviour
 
@@ -21,4 +21,4 @@ Unauthorised users should see: "You do not have permission to import Blueprints 
 
 ## Safety and audit
 
-Authorisation occurs before package registry writes, import-run creation, validation staging, dry-run planning or canonical promotion. Denied uploads leave no canonical changes, no import job and no retry package. Blueprint import audit events record actor, workspace/enterprise when known, effective roles, permission decision, stage, result and failure reason without logging package contents or secrets.
+Authorisation occurs before package registry writes, import-run creation, validation staging, dry-run planning or canonical promotion. Denied uploads leave no canonical changes, no import job and no retry package. Blueprint import audit events record actor, user ID, workspace/enterprise when known, raw roles, effective roles, effective permissions, required permission, policy name, policy source, permission decision, stage, result and failure reason without logging package contents or secrets.
