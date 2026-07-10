@@ -54,7 +54,7 @@ def test_mod_core_canonical_projection_and_ignore_mapping(tmp_path, monkeypatch)
     rec, result, candidates = stage(tmp_path, monkeypatch, sheets)
     classes={c['candidate_object_class'] for c in candidates}
     assert {'source','evidence','observation','unknown','contradiction','human_knowledge','entity','relationship','pain_point','unsupported_twin_spine_row'} <= classes
-    assert not any(c['source_sheet']=='00_Control' for c in candidates)
+    assert any(c['source_sheet']=='00_Control' and c['validation_status']=='ignored' for c in candidates)
     assert any(c['candidate_object_class']=='pain_point' and c['validation_status']=='quarantined' for c in candidates)
     assert any(c['candidate_object_class']=='human_knowledge' and c['payload'].get('human_supplied') is True for c in candidates)
     assert result.canonical_mutations == 0
@@ -68,7 +68,72 @@ def test_missing_lineage_quarantines_specifically_and_restaging_idempotent(tmp_p
     rec, result, candidates = stage(tmp_path, monkeypatch, sheets)
     bad=[c for c in candidates if c['original_source_id']=='OBS-NO-LINEAGE'][0]
     assert bad['validation_status']=='quarantined'
-    assert bad['validation_findings'][0]['code']=='missing_required_lineage'
+    assert bad['validation_findings'][0]['code']=='quarantined_missing_lineage'
     again=BlueprintPackageValidator().validate_and_stage(rec.package_ref,'alice',HEADERS)
     assert again.candidate_records_staged == result.candidate_records_staged
     assert all(c['candidate_object_class'] != 'package_metadata' for c in candidates)
+
+
+def test_v11_mapping_quality_counts_and_ignored_rows(tmp_path, monkeypatch):
+    sheets={
+        '03_Sources': [['source_id','source_title','url'], ['SRC-1','MOD source','https://example.test/src']],
+        '04A_Evidence': [['evidence_id','source_id','summary','source_locator'], ['EV-1','SRC-1','Evidence summary','p.1']],
+        '05_Observations': [['observation_id','source_id','atomic_statement','confidence'], ['OBS-1',' SRC-1 ; EV-1 ','Observed fact','0.8'], ['OBS-NO','', 'No lineage','0.2']],
+        '16_Unknowns': [['question','scope','significance','status'], ['What is missing?','MOD','High','open']],
+        '17_Contradictions': [['statement_a','statement_b','severity','source_id'], ['A','B','high','SRC-1']],
+        '06_Entities_Rels': [['record_type','name','source_id','target','relationship_type'], ['entity','Entity A','SRC-1','',''], ['relationship','Entity A','SRC-1','Entity B','owns']],
+        '13_Causal_Edges': [['source','target','relationship_type','evidence_id'], ['A','B','influences','EV-1']],
+        '24_Human_Knowledge': [['stable_id','source_id','statement','caveat'], ['HK-1','human interview','Human supplied context','unverified']],
+        '04_Claims': [['claim','truth_class','source_id'], ['Backed claim','asserted','SRC-1'], ['Unsupported claim','','']],
+        '15_Theses': [['thesis_id','thesis'], ['T-1','Projection only thesis']],
+        '00_Control': [['stable_id','note'], ['CTRL-1','should be ignored']],
+        '02_Dashboard': [['metric','formula'], ['=SUM(A1:A2)','=A1']],
+    }
+    rec, result, candidates = stage(tmp_path, monkeypatch, sheets)
+    summary = BlueprintReviewPlanCoordinator().ensure_job(rec.import_run_id, 'alice', HEADERS, lambda: None)
+    accepted = summary['class_summary']['accepted']
+    assert accepted['source'] == 1
+    assert accepted['evidence'] == 1
+    assert accepted['observation'] == 1
+    assert accepted['unknown'] == 1
+    assert accepted['contradiction'] == 1
+    assert accepted['entity'] == 1
+    assert accepted['relationship'] >= 1
+    assert accepted['human_knowledge'] == 1
+    assert summary['candidate_summary']['Ignored'] >= 2
+    assert summary['ignored_reasons']['ignored_control_row'] == 1
+    assert summary['mapping_quality']['derived_id_count'] >= 4
+    assert summary['mapping_quality']['twin_completeness_indicators']['observation'] is True
+    obs = [c for c in candidates if c['original_source_id']=='OBS-1'][0]
+    refs = obs['payload']['lineage_resolution']
+    assert [r['normalized_reference'] for r in refs] == ['1', '1']
+    bad = [c for c in candidates if c['original_source_id']=='OBS-NO'][0]
+    assert bad['validation_status'] == 'quarantined'
+    assert bad['validation_findings'][0]['code'] == 'quarantined_missing_lineage'
+    hk = [c for c in candidates if c['candidate_object_class']=='human_knowledge'][0]
+    assert hk['payload']['human_supplied'] is True
+    thesis = [c for c in candidates if c['source_sheet']=='15_Theses'][0]
+    assert thesis['payload']['mapping_disposition'] == 'reasoning_artifact'
+    assert any(c['candidate_object_class']=='ignored_row' for c in candidates)
+    assert result.canonical_mutations == 0
+
+
+def test_v11_deterministic_ids_collision_and_package_metadata_removed(tmp_path, monkeypatch):
+    sheets={
+        '03_Sources': [['source_id','title'], ['SRC-1','Source']],
+        '04A_Evidence': [['evidence_id','source_id','summary'], ['EV-1','SRC-1','Evidence']],
+        '16_Unknowns': [['question','scope'], ['Same unknown','MOD'], ['Same unknown','MOD']],
+        '17_Contradictions': [['statement_a','statement_b','source_id'], ['A','B','SRC-1']],
+        '06_Entities_Rels': [['record_type','name','source_id'], ['entity','Entity A','SRC-1']],
+        '13_Causal_Edges': [['source','target','evidence_id'], ['A','B','EV-1']],
+    }
+    rec, result, candidates = stage(tmp_path, monkeypatch, sheets)
+    ids = [c['original_source_id'] for c in candidates if c['candidate_object_class'] in {'unknown','contradiction','entity','relationship'}]
+    again = BlueprintPackageValidator().validate_and_stage(rec.package_ref,'alice',HEADERS)
+    candidates2 = BlueprintPackageValidator().staging_summary(rec.import_run_id)['candidates']
+    ids2 = [c['original_source_id'] for c in candidates2 if c['candidate_object_class'] in {'unknown','contradiction','entity','relationship'}]
+    assert ids == ids2
+    assert len(ids) == len(set(ids))
+    assert all(c['payload'].get('identifier_derivation',{}).get('derived') for c in candidates if c['candidate_object_class'] in {'unknown','contradiction','entity','relationship'})
+    assert all(c['candidate_object_class'] != 'package_metadata' for c in candidates)
+    assert again.candidate_records_staged == result.candidate_records_staged

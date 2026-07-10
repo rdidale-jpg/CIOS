@@ -14,7 +14,7 @@ from cios.applications.flora.storage import atomic_write_json, data_path, ensure
 from .archive import sha256_bytes
 from .ledger import utc_now
 
-CandidateStatus = Literal["accepted", "quarantined", "rejected"]
+CandidateStatus = Literal["accepted", "quarantined", "rejected", "ignored"]
 
 SUPPORTED_CANONICAL_CLASSES = {
     "enterprise", "twin", "source", "evidence", "observation", "entity", "relationship",

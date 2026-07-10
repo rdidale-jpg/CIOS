@@ -14,7 +14,7 @@ from .mapping import ImportMappingRepository
 from .review import CandidateReviewRepository, BlueprintReviewError, can_review_blueprint_candidate
 from .registry import BlueprintPackageRegistry
 
-EffectType = Literal["create", "update", "unchanged", "mapped", "duplicate", "conflict", "contradiction", "reject", "defer", "quarantine", "unsupported", "unresolved", "projection"]
+EffectType = Literal["create", "update", "unchanged", "mapped", "duplicate", "conflict", "contradiction", "reject", "defer", "quarantine", "unsupported", "unresolved", "projection", "ignored"]
 
 @dataclass(frozen=True)
 class ProposedCanonicalEffect:
@@ -90,6 +90,7 @@ class DryRunPlanningService:
     def _effect(self, c, d, m):
         cid=c["candidate_record_id"]; rc=c["candidate_object_class"]; ext=c["original_source_id"]
         if rc in PROJECTION_ONLY_CLASSES: typ="projection"; reason="Analytical projection remains non-canonical"
+        elif c.get("validation_status") == "ignored": typ="ignored"; reason="Non-intelligence/control row ignored"
         elif c.get("validation_status") == "quarantined": typ="quarantine"; reason="Candidate is quarantined"
         elif c.get("validation_status") == "rejected": typ="reject"; reason="Candidate is rejected by staging validation"
         elif not d: typ="unresolved"; reason="No review decision recorded"
