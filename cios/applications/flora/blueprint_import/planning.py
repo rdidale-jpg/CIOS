@@ -79,8 +79,10 @@ class DryRunPlanningService:
         mappings = {m["candidate_id"]: m for m in self.mappings.list(import_run_id)}
         effects = tuple(self._effect(c, decisions.get(c["candidate_record_id"]), mappings.get(c["candidate_record_id"])) for c in candidates)
         expected = sum(e.expected_mutation_count for e in effects)
+        summary = self.staging.load_summary(import_run_id) or {}
+        staging_version = str(summary.get("staging_version") or "staging-v1")
         dfp = sha256_bytes(json.dumps(decisions, sort_keys=True).encode())
-        mfp = sha256_bytes(json.dumps(mappings, sort_keys=True).encode())
+        mfp = sha256_bytes(json.dumps(mappings | {"__staging_version__": staging_version}, sort_keys=True).encode())
         plan = DryRunCanonicalEffectPlan("1.0", plan_id(import_run_id, dfp, mfp), package.package_ref, import_run_id, utc_now(), effects, expected, 0)
         saved = self.repository.save(plan)
         self.ledger.append("dry_run_canonical_effect_plan_recorded", saved.to_dict() | {"actor": actor})
