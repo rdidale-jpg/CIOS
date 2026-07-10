@@ -213,3 +213,66 @@ def test_enterprise_canvas_lineage_blocks_unauthorised_and_distinguishes_missing
     assert "No imported package location is available" in html
     assert "No Observation could be resolved" in html or "Observation reference" in html
     assert "Broken references" in html
+
+
+def test_blueprint_owner_canvas_access_repair_preserves_workspace_enterprise_acl_and_link(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
+    from cios.applications.flora.blueprint_import.views import approve_and_promote, review_page, upload_and_validate_blueprint
+    from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRepository, repair_blueprint_canvas_access
+    from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
+    import re
+
+    owner = {"X-Flora-User":"rob", "X-Flora-Enterprises":"cios-workspace", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"cios_owner"}
+    records=[{"external_id":"PP-MOD-1","record_class":"pain_point","truth_class":"analytical_projection","payload":{"statement":"MOD pressure is visible"}}]
+    _, status, target = upload_and_validate_blueprint({"blueprint_zip":pkg(manifest_extra={"enterprise_id":"MOD", "package_id":"MOD-CDT-Blueprint", "package_version":"1.3"}, records=records)}, {"blueprint_zip.filename":"MOD-CDT-v1.3-Flora-Blueprint.zip","blueprint_zip.content_type":"application/zip"}, owner)
+    assert status == 200
+    run_id = target.rsplit("/", 1)[-1]
+    review, review_status = review_page(run_id, owner)
+    assert review_status == 200
+    plan_id = re.search(r"name='plan_id' value='([^']+)'", review).group(1)
+    done, done_status = approve_and_promote(run_id, {"plan_id":[plan_id],"confirm_plan":["yes"],"confirm_mutations":["yes"],"rationale":["owner approved"]}, owner)
+
+    assert done_status == 200
+    assert "/digital-twins/MOD/canvas" in done
+    record = EnterpriseCanvasAccessRepository().get("MOD")
+    assert record.canvas_id == "canvas-mod"
+    assert record.enterprise_id == "MOD"
+    assert record.workspace_id == "cios-workspace"
+    assert record.owner_account == "rob"
+    assert record.workspace_members == ("rob",)
+    assert record.enterprise_members == ("rob",)
+    assert [a for a in record.acl if a["principal_id"] == "rob"] == [{"principal_id":"rob", "role":"owner", "grant_source":"blueprint_promotion_owner"}]
+    repair_blueprint_canvas_access(run_id, owner)
+    repaired = EnterpriseCanvasAccessRepository().get("MOD")
+    assert len([a for a in repaired.acl if a["principal_id"] == "rob"]) == 1
+    assert len(EnterpriseCanvasAccessRepository().list()) == 1
+
+    html, canvas_status = enterprise_canvas_page("MOD", owner)
+    assert canvas_status == 200
+    assert "MOD pressure is visible" in html
+    denied, denied_status = enterprise_canvas_page("MOD", {"X-Flora-User":"mallory", "X-Flora-Enterprises":"cios-workspace", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"reader"})
+    assert denied_status == 403
+    assert "MOD pressure is visible" not in denied
+
+
+def test_existing_blueprint_canvas_is_repaired_not_duplicated_and_no_reimport_required(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
+    from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, BlueprintPackageValidator
+    from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRepository
+    from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
+
+    owner = {"X-Flora-User":"rob", "X-Flora-Enterprises":"cios-workspace", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"cios_owner"}
+    content = pkg(manifest_extra={"enterprise_id":"MOD", "package_id":"MOD-CDT-Blueprint", "package_version":"1.3"}, records=[{"external_id":"PP-MOD-2","record_class":"pain_point","truth_class":"analytical_projection","payload":{"statement":"Existing import data remains visible"}}])
+    package = BlueprintPackageRegistry().receive(content, "MOD-CDT-v1.3-Flora-Blueprint.zip", "rob", "cios-workspace")
+    BlueprintPackageValidator().validate_and_stage(package.package_ref, "rob", owner)
+    assert EnterpriseCanvasAccessRepository().list() == []
+
+    html, status = enterprise_canvas_page("MOD", owner)
+    assert status == 200
+    assert "Existing import data remains visible" in html
+    records = EnterpriseCanvasAccessRepository().list()
+    assert len(records) == 1
+    assert records[0].import_run_ids == (package.import_run_id,)
+    assert len(BlueprintPackageRegistry().list()) == 1
