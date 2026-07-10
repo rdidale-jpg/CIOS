@@ -73,6 +73,10 @@ class BlueprintAuthorisationDecision:
     effective_roles: tuple[str, ...]
     effective_permissions: tuple[str, ...]
     required_permission: str
+    owner_recognised: bool
+    active_workspace: str
+    resolved_membership: str
+    resolved_role: str
     policy_name: str
     policy_source: str
     decision: str
@@ -100,20 +104,30 @@ def blueprint_upload_authorisation(headers: Any) -> BlueprintAuthorisationDecisi
     raw_roles = raw_flora_roles(headers)
     roles = flora_roles(headers)
     permissions = sorted(roles & (BLUEPRINT_IMPORT_OWNER_PERMISSIONS | {BLUEPRINT_UPLOAD_PERMISSION}))
-    allowed = bool(user) and bool(roles & _BLUEPRINT_IMPORT_ROLES)
+    workspaces = tuple(sorted(user_enterprise_access(headers)))
+    owner_recognised = bool(raw_roles & CANONICAL_OWNER_ROLES)
+    allowed = bool(user) and (bool(workspaces) or not owner_recognised) and bool(roles & _BLUEPRINT_IMPORT_ROLES)
     if allowed:
         reason = ""
     elif not user:
         reason = "missing authenticated Flora user"
+    elif not workspaces:
+        reason = "no active workspace in product session"
+    elif owner_recognised and BLUEPRINT_UPLOAD_PERMISSION not in permissions:
+        reason = "Blueprint upload capability is missing from the owner role"
     else:
         reason = "missing package.upload or owner-inherited authority"
     return BlueprintAuthorisationDecision(
         user_id=user,
-        workspace_ids=tuple(sorted(user_enterprise_access(headers))),
+        workspace_ids=workspaces,
         raw_roles=tuple(sorted(raw_roles)),
         effective_roles=tuple(sorted(roles)),
         effective_permissions=tuple(permissions),
         required_permission=BLUEPRINT_UPLOAD_PERMISSION,
+        owner_recognised=owner_recognised,
+        active_workspace=workspaces[0] if len(workspaces) == 1 else ("multiple workspaces" if workspaces else ""),
+        resolved_membership="resolved" if user and workspaces else "unresolved",
+        resolved_role=next((role for role in (CIOS_OWNER_ROLE, BLUEPRINT_IMPORT_ADMIN_ROLE, BLUEPRINT_UPLOAD_PERMISSION) if role in roles), sorted(roles)[0] if roles else ""),
         policy_name="can_receive_blueprint_package",
         policy_source="product-session header/cookie role policy",
         decision="allowed" if allowed else "denied",

@@ -106,6 +106,33 @@ def test_denied_uploads_have_role_aware_message_audit_and_no_state(monkeypatch,t
     assert status == 403
 
 
+def test_denied_upload_screen_shows_live_diagnostics_for_non_owner(monkeypatch,tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    html,status,_=upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, READ_ONLY)
+    assert status == 403
+    assert "Signed-in account" in html and "reader" in html
+    assert "Active workspace" in html and "synthetic-enterprise" in html
+    assert "Owner recognised</th><td>no" in html
+    assert "Required Blueprint capability" in html and "package.upload" in html
+    assert "Blueprint upload capability resolved</th><td>Failed" in html
+    assert "Canonical import committed</th><td>Not started" in html
+    assert "Diagnostic reference" in html and "bpi-diag-" in html
+    assert "Ask an administrator" not in html
+    events=(tmp_path/"blueprint_import"/"audit"/"events.jsonl").read_text()
+    assert "request_correlation_id" in events and "denial_reason" in events and "deployment_version" in events
+
+
+def test_owner_denial_gets_owner_recovery_not_admin(monkeypatch,tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    owner_without_workspace={"X-Flora-User":"rob","X-Flora-Roles":"cios_owner"}
+    html,status,_=upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, owner_without_workspace)
+    assert status == 403
+    assert "Owner recognised</th><td>yes" in html
+    assert "Switch to the owning workspace." in html
+    assert "Ask an administrator" not in html
+    assert "Canonical changes occurred: no" in html
+
+
 def test_owner_enterprise_boundary_still_blocks_cross_workspace(monkeypatch,tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     _,status,target=upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, OWNER)
