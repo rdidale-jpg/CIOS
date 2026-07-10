@@ -92,7 +92,9 @@ class DryRunPlanningService:
         cid=c["candidate_record_id"]; rc=c["candidate_object_class"]; ext=c["original_source_id"]
         if rc in PROJECTION_ONLY_CLASSES: typ="projection"; reason="Analytical projection remains non-canonical"
         elif c.get("validation_status") == "ignored": typ="ignored"; reason="Non-intelligence/control row ignored"
-        elif c.get("validation_status") == "quarantined": typ="quarantine"; reason="Candidate is quarantined"
+        elif c.get("validation_status") == "quarantined":
+            typ="quarantine"
+            reason=next((str(f.get("message") or f.get("code")) for f in (c.get("validation_findings") or []) if f.get("code") == "quarantined_non_atomic_observation"), "Candidate is quarantined")
         elif c.get("validation_status") == "rejected": typ="reject"; reason="Candidate is rejected by staging validation"
         elif not d: typ="unresolved"; reason="No review decision recorded"
         elif rc == "observation" and d.get("decision") == "approve" and str((c.get("payload") or {}).get("proposed_effect") or "create") in {"create", "update"} and ((c.get("payload") or {}).get("atomic_statement") or (c.get("payload") or {}).get("statement") or (c.get("payload") or {}).get("claim") or (c.get("payload") or {}).get("summary")) and not validate_atomic_statement((c.get("payload") or {}).get("atomic_statement") or (c.get("payload") or {}).get("statement") or (c.get("payload") or {}).get("claim") or (c.get("payload") or {}).get("summary")).atomic:
