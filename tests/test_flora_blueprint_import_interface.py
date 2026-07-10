@@ -115,3 +115,17 @@ def test_owner_enterprise_boundary_still_blocks_cross_workspace(monkeypatch,tmp_
     assert vs == 403
     review,rs=review_page(run_id, OTHER_OWNER)
     assert rs == 403
+
+
+def test_owner_cookie_upload_audit_captures_authorisation_decision(monkeypatch,tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    headers={"Cookie":"flora_user=rob; flora_enterprises=synthetic-enterprise; flora_roles=owner%2Ccanvas.view"}
+    html,status,target=upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, headers)
+    assert status == 200
+    assert "Validation result" in html
+    events=(tmp_path/"blueprint_import"/"audit"/"events.jsonl").read_text()
+    assert "package_upload_authorisation_allowed" in events
+    assert "required_permission" in events and "package.upload" in events
+    assert "policy_name" in events and "can_receive_blueprint_package" in events
+    assert "effective_permissions" in events and "candidate.promote" in events
+    assert target.startswith("/blueprint-import/bpi-run-")
