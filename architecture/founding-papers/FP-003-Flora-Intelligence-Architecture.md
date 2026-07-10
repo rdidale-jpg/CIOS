@@ -3,7 +3,7 @@
 **Purpose:** Establish the durable intelligence philosophy and architecture for Flora as a CIOS founding capability.
 **Status:** draft
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-02
+**Last updated:** 2026-07-10
 
 ## Relationship to the CIOS Intelligence Reference Model
 
@@ -66,6 +66,55 @@ Executive Recommendation
 ```
 
 If any link is missing, the recommendation should be downgraded to a learning action or evidence demand.
+
+
+## Progressive Assurance and autonomous Twin construction
+
+ADR-009 separates governed Twin construction from formal release production.
+
+### Default fast path
+
+Flora defaults to **Initial Decision Twin** mode. The runtime should:
+
+1. establish the monitored enterprise and decision boundary;
+2. collect the highest-yield permissible Evidence;
+3. create or update reusable Observations;
+4. update only affected Enterprise Model and graph state;
+5. form, challenge and bound Hypotheses;
+6. identify the most consequential pressures and candidate reinvention seams;
+7. propose proportionate learning or commercial actions;
+8. run final integrity checks;
+9. render the minimum output set.
+
+This is not a reduced reasoning chain. It is a reduced administration and publication chain.
+
+### Research saturation
+
+Research may stop when:
+
+- the leading decision is supported by sufficient independent Evidence;
+- material counter-evidence has been considered;
+- unresolved gaps are represented as Unknowns, Contradictions or Evidence Demands;
+- another collection cycle is unlikely to alter the immediate recommendation materially.
+
+Saturation is assessed against the decision, not against exhaustive source coverage or complete field population.
+
+### Owner interaction
+
+Owner input is conditional rather than a mandatory stage. Flora should request it when account knowledge, provider capability, relationship access or risk authority materially affects the decision. Absence of that input should be represented honestly and should not block an Initial Decision Twin.
+
+### Validation timing
+
+Integrity and publication validation should occur once near completion. Flora should not repeatedly interrupt reasoning for release administration. Machine checks should be silent unless they fail or change the decision boundary.
+
+### Publisher boundary
+
+Flora Publisher renders views over governed Twin state. It does not own Twin memory and must not make formal release packaging a prerequisite for research completion.
+
+### Assured Release promotion
+
+Promotion is explicit. It adds assurance for external publication or consequential action without rebuilding the Twin from scratch. The promoted release must preserve lineage to the Initial Decision Twin and identify what additional evidence, review and acceptance changed.
+
 
 ## Source note
 
