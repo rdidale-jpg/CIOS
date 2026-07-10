@@ -249,3 +249,19 @@ def test_blueprint_get_and_post_share_cookie_session_identity(monkeypatch, tmp_p
     result_html, post_status, _ = upload_and_validate_blueprint({"blueprint_zip": pkg()}, {"blueprint_zip.filename": "synthetic.zip", "blueprint_zip.content_type": "application/zip"}, cookie_headers)
     assert post_status == 200
     assert "Validation result" in result_html
+
+
+def test_failed_validation_disables_review_and_promotion(monkeypatch,tmp_path):
+    from tests.test_flora_blueprint_import_validation import pkg_with_workbook, xlsx_workbook
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    wb=xlsx_workbook([('00_Control','rId1','worksheets/sheet1.xml',[['external_id'],['X']])], missing_parts={'xl/worksheets/sheet1.xml'})
+    html,status,target=upload_and_validate_blueprint({"blueprint_zip":pkg_with_workbook(wb)}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, HEADERS)
+    assert status == 200
+    run_id=target.rsplit("/",1)[-1]
+    val,vs=validation_result_page(run_id, HEADERS)
+    assert vs == 200 and "Validation failed" in val and "approval are disabled" in val
+    review,rs=review_page(run_id, HEADERS)
+    assert rs == 200 and "Approval controls are disabled" in review and "disabled>Approve" in review
+    blocked,bs=approve_and_promote(run_id,{"plan_id":["anything"],"confirm_plan":["yes"],"confirm_mutations":["yes"],"rationale":["reviewed"]}, HEADERS)
+    assert bs == 400 and "Validation failed" in blocked
+    assert not (tmp_path/"memory").exists()

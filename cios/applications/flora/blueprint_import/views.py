@@ -77,7 +77,8 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     package = ctx["package"]; summary = ctx["summary"] or {}; candidates = ctx["candidates"]
     worksheets = _worksheets(summary.get("warnings", [])); status = "Passed with warnings" if summary.get("warnings") and not summary.get("errors") else ("Failed" if summary.get("errors") else "Passed")
     counts = _candidate_counts(candidates)
-    body = _package_header(package) + f"""<section class='card'><h2>Validation result</h2><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr><tr><th>Workbook discovered</th><td>{'Yes' if any(str(f).endswith(('.xlsx','.xlsm','.xls')) for f in summary.get('files_inspected', [])) else 'Not declared'}</td></tr><tr><th>Worksheets discovered</th><td>{escape(', '.join(worksheets) or 'None reported')}</td></tr><tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section>""" + _counts_section(counts) + "<section class='card'><p><a href='/blueprint-import/{0}/review'>Review proposed changes</a></p></section>".format(escape(import_run_id))
+    review_link = "<section class='card'><p><a href='/blueprint-import/{0}/review'>Review proposed changes</a></p></section>".format(escape(import_run_id)) if not summary.get('errors') else "<section class='card'><p><strong>Validation failed.</strong> Proposed-change review and approval are disabled until fatal validation errors are resolved.</p></section>"
+    body = _package_header(package) + f"""<section class='card'><h2>Validation result</h2><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr><tr><th>Workbook discovered</th><td>{'Yes' if any(str(f).endswith(('.xlsx','.xlsm','.xls')) for f in summary.get('files_inspected', [])) else 'Not declared'}</td></tr><tr><th>Worksheets discovered</th><td>{escape(', '.join(worksheets) or 'None reported')}</td></tr><tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section>""" + _counts_section(counts) + review_link
     return _page("Blueprint validation result", body), 200
 
 
@@ -85,6 +86,11 @@ def review_page(import_run_id: str, headers: Any, message: str = "") -> tuple[st
     ctx = _context(import_run_id)
     if not ctx or not (can_access_enterprise(headers, ctx["package"].identity.enterprise_id, getattr(ctx["package"], "workspace_id", "")) and can_review_blueprint_candidate(headers, ctx["package"].identity.enterprise_id)):
         return _safe_failure("You are not authorised to review this Blueprint import.", "review", False, True, "Ask for Blueprint review permission."), 403
+    summary = ctx.get("summary") or {}
+    if summary.get("errors"):
+        body = _package_header(ctx["package"]) + _notice(message) + "<section class='card'><h2>Review proposed changes</h2><p><strong>Validation failed.</strong> Proposed-change planning is disabled because workbook or package inspection did not complete safely.</p>{}</section>".format(_list('Errors', summary.get('errors', [])))
+        body += "<section class='card'><h2>Approval</h2><p>Approval controls are disabled until fatal validation errors are resolved.</p><button type='button' disabled>Approve and update governed Twin</button></section>"
+        return _page("Review Blueprint proposed changes", body), 200
     _ensure_reviews_and_mappings(ctx, headers)
     plan = DryRunPlanningService().create_plan(import_run_id, authenticated_flora_user(headers), headers)
     totals = Counter(e.effect_type for e in plan.effects)
@@ -100,6 +106,8 @@ def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers:
     ctx = _context(import_run_id)
     if not ctx or not (can_access_enterprise(headers, ctx["package"].identity.enterprise_id, getattr(ctx["package"], "workspace_id", "")) and can_approve_blueprint_promotion(headers, ctx["package"].identity.enterprise_id) and can_execute_blueprint_promotion(headers, ctx["package"].identity.enterprise_id)):
         return _safe_failure("You are not authorised to approve and execute Blueprint promotion.", "approval", False, True, "Ask for Blueprint promotion permission."), 403
+    if (ctx.get("summary") or {}).get("errors"):
+        return _safe_failure("Validation failed; approval is disabled until fatal inspection errors are resolved.", "approval", False, True, "Resolve validation errors, then stage and review again."), 400
     if form.get("confirm_plan") != ["yes"] or form.get("confirm_mutations") != ["yes"] or not (form.get("rationale") or [""])[0].strip():
         return review_page(import_run_id, headers, "Approval requires review confirmation, mutation-count confirmation and a rationale.")
     try:
