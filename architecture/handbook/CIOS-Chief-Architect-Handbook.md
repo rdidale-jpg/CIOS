@@ -5,7 +5,7 @@
 **Version:** 1.0 — Editorial Draft  
 **Status:** Living handbook  
 **Owner:** Rob / CIOS  
-**Last updated:** 2026-07-04  
+**Last updated:** 2026-07-10
 **Canonical source:** `architecture/handbook/CIOS-Chief-Architect-Handbook.md`
 
 ---
@@ -6777,3 +6777,57 @@ Commercial reasoning explains change.
 Recommendations propose proportionate action.
 
 Learning makes the system more valuable over time.
+
+---
+
+# Doctrine Amendment — Progressive Assurance
+
+**Authority:** ADR-009  
+**Purpose:** Clarify proportionate governance for Commercial Digital Twin research and publication.
+
+## Governance should change a decision
+
+Governance exists to protect trust, memory and consequential action. It should not become a ritual that delays reversible learning without improving the decision.
+
+Apply assurance in proportion to:
+
+- recommendation strength;
+- audience;
+- reversibility;
+- commercial consequence;
+- legal, security and reputational exposure;
+- cost of being wrong.
+
+A learning action with visible Unknowns does not require the same release process as provider-specific Pursue or external executive outreach.
+
+## Separate research, model construction and publication
+
+These are related but distinct activities:
+
+- **Research** collects and interprets Evidence.
+- **Model construction** creates or updates durable Observations and Twin state.
+- **Publication** renders selected state for an audience and decision.
+
+Do not force formal publication controls into every research iteration. Complete the model first, then apply the publication controls justified by the intended use.
+
+## Worked example: MOD Twin refresh
+
+A Researcher identifies a changed defence policy, updates the relevant Evidence and Observations, revises two pressure judgements and records a new Contradiction.
+
+For an Initial Decision Twin, the correct outcome is:
+
+- updated Twin state;
+- a concise change view;
+- revised Unknowns and Evidence Demands.
+
+It does not require regeneration of a manifest, full publication, completion report, validation JSON, duplicate PDF set and release archive.
+
+When the same state is later used for provider-specific pursuit or external circulation, promote it to Assured Release and apply the additional controls.
+
+## Chief Architect test
+
+Ask:
+
+> What risk does this control reduce, and what decision becomes safer because it exists?
+
+Where the answer is unclear, simplify, automate, defer or remove the control. Preserve the architectural invariant, not the ceremony that once expressed it.
