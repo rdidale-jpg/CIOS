@@ -100,7 +100,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path == "/live/evidence":
                 self._html(evidence_page())
             elif parsed.path == "/digital-twins":
-                self._html(digital_twins_landing_page())
+                self._html(digital_twins_landing_page(self.headers))
             elif parsed.path == "/blueprint-import":
                 html, status = import_blueprint_entry_page(self.headers)
                 self._html(html, status=status)

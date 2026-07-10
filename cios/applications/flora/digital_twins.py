@@ -8,10 +8,15 @@ from __future__ import annotations
 import json
 from html import escape
 from datetime import datetime
+from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import urlparse
 
+from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise
+from cios.applications.flora.blueprint_import.registry import BlueprintPackageRegistry
+from cios.applications.flora.blueprint_import.validator import BlueprintPackageValidator
 from cios.applications.flora.document_review import _run_dir, _read_json, coordinate_dual_speed_financial_intelligence_run, create_financial_intelligence_progress_run
+from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRepository, can_access_canvas_record
 from cios.applications.flora.financial_intelligence.rapid_sources import load_rapid_source_manifest
 from cios.applications.flora.financial_intelligence.rapid_ai_twin import build_csv, provider_runtime_readiness
 from cios.applications.flora.memory.repository import EnterpriseModelRepository
@@ -20,6 +25,58 @@ from cios.applications.flora.workspace.views import _page
 BT_ID = 'bt-group-plc'
 BT_NAME = 'BT Group'
 PERIOD = 'FY26'
+
+
+@dataclass(frozen=True)
+class GovernedTwinListItem:
+    enterprise_id: str
+    enterprise_name: str
+    canvas_id: str
+    workspace_id: str
+    twin_version: str
+    latest_trusted_update: str
+    latest_research_date: str
+    maturity_or_acceptance: str
+    import_run_id: str = ""
+
+
+def governed_twin_list(headers) -> list[GovernedTwinListItem]:
+    """Authoritative production list of governed Twins visible to a session.
+
+    This deliberately does not synthesize BT Group. A Twin appears here only
+    when durable Canvas access exists for a governed imported/accepted Twin.
+    """
+    if not authenticated_flora_user(headers):
+        return []
+    packages = {p.import_run_id: p for p in BlueprintPackageRegistry().list()}
+    items: list[GovernedTwinListItem] = []
+    seen: set[str] = set()
+    for record in EnterpriseCanvasAccessRepository().list():
+        if not can_access_canvas_record(headers, record.enterprise_id, record.workspace_id):
+            continue
+        package = next((packages.get(run) for run in reversed(record.import_run_ids) if packages.get(run)), None)
+        enterprise_name = package.identity.enterprise_id if package else record.enterprise_id
+        twin_version = package.identity.package_version if package else "Governed"
+        research_date = package.received_at if package else record.updated_at
+        acceptance = "Accepted governed Twin" if package else "Governed Twin"
+        if package:
+            summary = BlueprintPackageValidator().staging_summary(package.import_run_id) or {}
+            errors = summary.get("errors") or []
+            acceptance = "Accepted with warnings" if summary.get("warnings") and not errors else ("Accepted governed Twin" if not errors else "Import requires attention")
+        key = f"{record.workspace_id}:{record.canvas_id}:{record.enterprise_id}"
+        if key in seen:
+            continue
+        seen.add(key)
+        items.append(GovernedTwinListItem(record.enterprise_id, enterprise_name, record.canvas_id, record.workspace_id, twin_version, record.updated_at or research_date, research_date, acceptance, package.import_run_id if package else ""))
+    for package in packages.values():
+        if not can_access_enterprise(headers, package.identity.enterprise_id, getattr(package, "workspace_id", "")):
+            continue
+        if any(package.import_run_id == item.import_run_id for item in items):
+            continue
+        record = EnterpriseCanvasAccessRepository().get_by_import_run(package.import_run_id)
+        if record:
+            items.append(GovernedTwinListItem(record.enterprise_id, package.identity.enterprise_id, record.canvas_id, record.workspace_id, package.identity.package_version, record.updated_at or package.received_at, package.received_at, "Accepted governed Twin", package.import_run_id))
+    return sorted(items, key=lambda x: (x.enterprise_name.casefold(), x.twin_version.casefold()))
 
 
 def _human_date(value) -> str:
@@ -88,13 +145,18 @@ def _research_outcome(run: dict | None, candidates: list[dict]) -> tuple[str, st
         return 'Official source unavailable.', 'No findings to verify.', 'Unchanged'
     return 'No trustworthy information found.', 'No findings to verify.', 'Unchanged'
 
-def digital_twins_landing_page() -> str:
-    run = _latest_run(); candidates = _candidates(run)
-    latest_research = escape(_human_date(run.get('created_at'))) if run else 'No recent source-backed research.'
-    count = f"<p>{len(candidates)} new candidate findings awaiting verification.</p>" if candidates else ''
-    body = f"""<section class='hero'><h1>Digital Twins</h1><p class='muted'>Authenticated product area for durable Commercial Digital Twins.</p><p><a href='/blueprint-import'>Import Blueprint</a></p></section>
-    <section class='card action'><h2>{BT_NAME}</h2><p>Commercial Digital Twin</p><p>Latest trusted update: {escape(_trusted_update())}</p><p>Latest research date: {latest_research}</p>{count}<p><a href='/digital-twins/bt-group-plc'>Open Twin</a></p></section>"""
+def digital_twins_landing_page(headers=None) -> str:
+    twins = governed_twin_list(headers or {})
+    rows = ''.join(_governed_twin_row(t) for t in twins)
+    empty = "<p>No governed Digital Twins are available to this signed-in account.</p>" if not rows else ""
+    body = f"""<section class='hero'><h1>Digital Twins</h1><p class='muted'>Governed Commercial Digital Twins available to your signed-in account.</p><p><a href='/blueprint-import'>Import Blueprint</a></p></section>
+    <section class='card'><h2>Available Twins</h2>{empty}<table><thead><tr><th>Enterprise</th><th>Twin version</th><th>Latest trusted update</th><th>Latest research/source date</th><th>Maturity/acceptance</th><th>Actions</th></tr></thead><tbody>{rows}</tbody></table></section>"""
     return _page('Digital Twins', body)
+
+
+def _governed_twin_row(t: GovernedTwinListItem) -> str:
+    import_link = f" · <a href='/blueprint-import/{escape(t.import_run_id)}'>View import record</a>" if t.import_run_id else ""
+    return f"<tr><td>{escape(t.enterprise_name)}</td><td>{escape(t.twin_version)}</td><td>{escape(_human_date(t.latest_trusted_update))}</td><td>{escape(_human_date(t.latest_research_date))}</td><td>{escape(t.maturity_or_acceptance)}</td><td><a href='/digital-twins/{escape(t.enterprise_id)}/canvas'>Open Twin</a>{import_link}</td></tr>"
 
 
 def bt_twin_page(highlight_run_id: str | None = None) -> str:
