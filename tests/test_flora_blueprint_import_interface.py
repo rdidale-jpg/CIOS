@@ -67,3 +67,51 @@ def test_validation_review_decline_approval_completion_and_canvas_link(monkeypat
     done,ok=approve_and_promote(run_id,{"plan_id":[plan_id],"confirm_plan":["yes"],"confirm_mutations":["yes"],"rationale":["reviewed"]}, HEADERS)
     assert ok == 200 and "Open Enterprise Canvas" in done and "/digital-twins/synthetic-enterprise/canvas" in done
     assert "original ZIP was preserved" in done
+
+OWNER={"X-Flora-User":"rob","X-Flora-Enterprises":"synthetic-enterprise","X-Flora-Roles":"cios_owner"}
+READ_ONLY={"X-Flora-User":"reader","X-Flora-Enterprises":"synthetic-enterprise","X-Flora-Roles":"canvas.view"}
+UNAUTH={"X-Flora-Enterprises":"synthetic-enterprise","X-Flora-Roles":"cios_owner"}
+OTHER_OWNER={"X-Flora-User":"other-owner","X-Flora-Enterprises":"other-enterprise","X-Flora-Roles":"cios_owner"}
+
+
+def test_owner_can_upload_review_and_import_without_explicit_blueprint_roles(monkeypatch,tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    html,status,target=upload_and_validate_blueprint({"blueprint_zip":pkg(records=[{"external_id":"OBS-OWNER","record_class":"observation","truth_class":"evidence_backed","payload":{"proposed_effect":"unchanged"}}])}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, OWNER)
+    assert status == 200
+    assert "Validation result" in html
+    run_id=target.rsplit("/",1)[-1]
+    review,rs=review_page(run_id, OWNER)
+    assert rs == 200 and "Approve and update governed Twin" in review
+    import re
+    plan_id=re.search(r"name='plan_id' value='([^']+)'", review).group(1)
+    done,ok=approve_and_promote(run_id,{"plan_id":[plan_id],"confirm_plan":["yes"],"confirm_mutations":["yes"],"rationale":["owner reviewed"]}, OWNER)
+    assert ok == 200 and "Blueprint import complete" in done
+    events=(tmp_path/"blueprint_import"/"audit"/"events.jsonl").read_text()
+    assert "package_received" in events and "canonical_promotion_execution_recorded" in events
+
+
+def test_denied_uploads_have_role_aware_message_audit_and_no_state(monkeypatch,tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    page,status=import_blueprint_entry_page(READ_ONLY)
+    assert status == 403
+    assert "You do not have permission to import Blueprints in this workspace." in page
+    assert "Ask an administrator" not in page
+    html,status,_=upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, READ_ONLY)
+    assert status == 403
+    assert "Canonical changes occurred: no" in html
+    assert not (tmp_path/"memory").exists()
+    assert not (tmp_path/"blueprint_import"/"packages").exists()
+    assert "package_upload_authorisation_denied" in (tmp_path/"blueprint_import"/"audit"/"events.jsonl").read_text()
+    html,status,_=upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, UNAUTH)
+    assert status == 403
+
+
+def test_owner_enterprise_boundary_still_blocks_cross_workspace(monkeypatch,tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    _,status,target=upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, OWNER)
+    assert status == 200
+    run_id=target.rsplit("/",1)[-1]
+    val,vs=validation_result_page(run_id, OTHER_OWNER)
+    assert vs == 403
+    review,rs=review_page(run_id, OTHER_OWNER)
+    assert rs == 403

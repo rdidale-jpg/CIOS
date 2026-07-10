@@ -6,7 +6,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Literal
 
-from cios.applications.flora.access import authenticated_flora_user, user_enterprise_access
+from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise, flora_roles
 from cios.applications.flora.memory.models import Observation
 from cios.applications.flora.memory.repository import EvidenceRepository, ObservationRepository
 from cios.applications.flora.storage import atomic_write_json, data_path, ensure_writable_dir
@@ -26,10 +26,6 @@ NON_MUTATING_EFFECTS = {"mapped", "unchanged", "duplicate", "reject", "defer", "
 class BlueprintPromotionError(PermissionError):
     """Raised when approved canonical promotion cannot proceed."""
 
-def _roles(headers: Any) -> set[str]:
-    raw = headers.get("X-Flora-Roles", "") or ""
-    return {item.strip() for item in str(raw).replace("|", ",").split(",") if item.strip()}
-
 def can_approve_blueprint_promotion(headers: Any, enterprise_id: str) -> bool:
     return _has(headers, enterprise_id, {"candidate.promote", "blueprint_import_admin"})
 
@@ -38,8 +34,7 @@ def can_execute_blueprint_promotion(headers: Any, enterprise_id: str) -> bool:
 
 def _has(headers: Any, enterprise_id: str, roles: set[str]) -> bool:
     if not authenticated_flora_user(headers): return False
-    allowed = user_enterprise_access(headers)
-    return ("*" in allowed or enterprise_id in allowed) and bool(_roles(headers) & roles)
+    return can_access_enterprise(headers, enterprise_id) and bool(flora_roles(headers) & roles)
 
 @dataclass(frozen=True)
 class CanonicalPromotionApproval:

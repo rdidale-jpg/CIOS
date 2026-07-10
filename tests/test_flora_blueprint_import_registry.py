@@ -128,3 +128,8 @@ def test_access_control_for_blueprint_package_receipt():
     assert can_receive_blueprint_package({"X-Flora-User": "alice", "X-Flora-Roles": "blueprint_import_admin"})
     assert not can_receive_blueprint_package({"X-Flora-Roles": "package.upload"})
     assert not can_receive_blueprint_package({"X-Flora-User": "alice", "X-Flora-Roles": "canvas.view"})
+
+
+def test_cios_owner_inherits_blueprint_import_permissions():
+    owner = {"X-Flora-User": "rob", "X-Flora-Enterprises": "synthetic-enterprise", "X-Flora-Roles": "cios_owner"}
+    assert can_receive_blueprint_package(owner)
