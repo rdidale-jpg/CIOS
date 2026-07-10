@@ -12,6 +12,8 @@ services:
         value: "1"
       - key: FLORA_TRUST_PROXY_HEADERS
         value: "0"
+      - key: FLORA_PILOT_SESSION_DAYS
+        value: "30"
       # Configure FLORA_PILOT_ACCESS_SECRET, FLORA_PILOT_OWNER_ID, FLORA_PILOT_WORKSPACE, and FLORA_PILOT_ROLE in the Render dashboard. Do not commit secret values.
       - key: FLORA_DATA_DIR
         value: /var/data/flora

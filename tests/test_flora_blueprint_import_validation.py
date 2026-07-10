@@ -103,3 +103,45 @@ def test_authorised_unauthorised_failed_cleanup_and_no_canonical_mutation(monkey
     assert not (tmp_path/"memory"/"evidence.jsonl").exists()
     assert not (tmp_path/"memory"/"observations.jsonl").exists()
     assert not (tmp_path/"memory"/"enterprise_models").exists()
+
+
+def zip_bytes(entries):
+    b = io.BytesIO()
+    with zipfile.ZipFile(b, "w", zipfile.ZIP_DEFLATED) as z:
+        for name, data in entries:
+            z.writestr(name, data)
+    return b.getvalue()
+
+
+def assert_receipt_error(monkeypatch, tmp_path, content, message):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    with pytest.raises(Exception) as exc:
+        BlueprintPackageRegistry().receive(content, "synthetic.zip", "alice")
+    assert message in str(exc.value)
+    assert not (tmp_path / "memory" / "evidence.jsonl").exists()
+    assert not (tmp_path / "memory" / "observations.jsonl").exists()
+    assert not (tmp_path / "memory" / "enterprise_models").exists()
+
+
+def test_manifest_missing_nested_duplicate_invalid_json_and_schema_messages(monkeypatch, tmp_path):
+    assert_receipt_error(
+        monkeypatch, tmp_path, zip_bytes([("records/sources.ndjson", b"")]),
+        "Blueprint package is missing blueprint_manifest.json. Place blueprint_manifest.json at the root of the ZIP package.",
+    )
+    assert_receipt_error(
+        monkeypatch, tmp_path, zip_bytes([("nested/blueprint_manifest.json", b"{}")]),
+        "blueprint_manifest.json was found inside a folder. Move it to the root of the ZIP package and try again.",
+    )
+    valid = json.dumps({"package_id":"p1","package_version":"1","enterprise_id":"e1","profile_version":"0.1"})
+    assert_receipt_error(
+        monkeypatch, tmp_path, zip_bytes([("blueprint_manifest.json", valid), ("copy/blueprint_manifest.json", valid)]),
+        "The package contains more than one blueprint_manifest.json. Keep one canonical manifest at the ZIP root.",
+    )
+    assert_receipt_error(
+        monkeypatch, tmp_path, zip_bytes([("blueprint_manifest.json", b"{")]),
+        "blueprint_manifest.json is not valid JSON.",
+    )
+    assert_receipt_error(
+        monkeypatch, tmp_path, zip_bytes([("blueprint_manifest.json", b"[]")]),
+        "blueprint_manifest.json does not match the required Blueprint manifest structure.",
+    )
