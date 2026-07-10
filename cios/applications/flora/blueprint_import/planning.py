@@ -98,7 +98,6 @@ class DryRunPlanningService:
         elif d["decision"] == "defer": typ="defer"; reason=d.get("rationale", "")
         elif d["decision"] == "quarantine": typ="quarantine"; reason=d.get("rationale", "")
         elif d["decision"] == "unsupported": typ="unsupported"; reason=d.get("rationale", "")
-        elif rc == "contradiction": typ="contradiction"; reason="Contradiction proposal remains inspectable"
         elif m:
             disp=m["disposition"]
             typ={"map_existing":"mapped","propose_create":"create","propose_update":"update","duplicate":"duplicate","conflict":"conflict","unresolved":"unresolved","reject":"reject","defer":"defer","quarantine":"quarantine","unsupported":"unsupported"}.get(disp,"unresolved")
@@ -107,7 +106,7 @@ class DryRunPlanningService:
             # payload test hook: unchanged/conflict/duplicate/unresolved can be expressed without canonical writes
             proposed=str(c.get("payload",{}).get("proposed_effect") or "create")
             typ=proposed if proposed in EffectType.__args__ else "create"; reason="Approved candidate dry-run proposal"
-        mutations = 1 if typ in {"create","update","contradiction"} else 0
+        mutations = 1 if typ in {"create","update"} else 0
         canonical_id = (m or {}).get("canonical_id", "") or (m or {}).get("proposed_canonical_id", "")
         conflicts = tuple(c.get("payload",{}).get("conflicts", [])) if isinstance(c.get("payload",{}).get("conflicts", []), list) else ()
         return ProposedCanonicalEffect(effect_id(str(c["import_run_id"]), cid, typ), cid, ext, rc, typ, canonical_id, reason, mutations, 0, conflicts)

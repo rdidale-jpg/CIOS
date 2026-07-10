@@ -170,7 +170,7 @@ def test_v12_core_mapping_contract_and_review_summary(tmp_path, monkeypatch):
     assert accepted['entity'] >= 7
     assert accepted['relationship'] >= 2
     assert accepted['human_knowledge'] == 1
-    assert summary['mapping_version'] == 'mod-cdt-twin-spine-mapping-v1.3.0'
+    assert summary['mapping_version'] == 'mod-cdt-twin-spine-mapping-v1.3.1'
     assert summary['candidate_summary']['Rejected'] == 0
     assert summary['ignored_reasons']['ignored_control_row'] == 1
     assert summary['ignored_reasons']['ignored_dashboard_row'] == 1
@@ -259,6 +259,6 @@ def test_v13_proven_mod_header_shapes_and_safety(tmp_path, monkeypatch):
     assert result.canonical_mutations == 0
     assert all(c['candidate_object_class'] != 'package_metadata' for c in candidates)
     summary = BlueprintReviewPlanCoordinator().ensure_job(rec.import_run_id, 'alice', HEADERS, lambda: None)
-    assert summary['mapping_version'] == 'mod-cdt-twin-spine-mapping-v1.3.0'
+    assert summary['mapping_version'] == 'mod-cdt-twin-spine-mapping-v1.3.1'
     assert summary['candidate_summary']['Rejected'] == 0
     assert summary['mapping_quality']['accepted_by_class']['human_knowledge'] == 1

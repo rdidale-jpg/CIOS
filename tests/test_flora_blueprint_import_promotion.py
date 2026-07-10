@@ -86,3 +86,36 @@ def test_no_enterprise_canvas_or_new_projection_canonical_types(monkeypatch,tmp_
     assert res.actual_mutation_count == 0
     assert not (tmp_path/"enterprise_canvas").exists()
     assert not (tmp_path/"memory"/"pain_points.jsonl").exists()
+
+def test_accepted_contradiction_creates_preserves_payload_and_is_idempotent(monkeypatch,tmp_path):
+    payload={"contradiction_id":"CON-1","statement_a":"Position A","statement_b":"Position B","class":"forecast tension","current_judgement":"open","evidence_needed":"source needed","affected_outputs":"brief","status":"open"}
+    r, cs, p=_plan_with(monkeypatch,tmp_path,[{"external_id":"CON-1","record_class":"contradiction","truth_class":"contradiction","payload":payload}])
+    effects={e.external_id:e for e in p.effects}
+    assert effects["CON-1"].effect_type == "create"
+    assert effects["CON-1"].expected_mutation_count == 1
+    approval=CanonicalPromotionService().approve_plan(r.import_run_id,p.plan_id,"alice","ok",PROMOTE_HEADERS)
+    svc=CanonicalPromotionService()
+    first=svc.execute_approved_plan(r.import_run_id, approval.approval_id, "alice", PROMOTE_HEADERS)
+    second=svc.execute_approved_plan(r.import_run_id, approval.approval_id, "alice", PROMOTE_HEADERS)
+    assert first.actual_mutation_count == 1
+    assert second.final_execution_status == "repeat_no_change"
+    rows=(tmp_path/"memory"/"contradictions.jsonl").read_text().splitlines()
+    assert len(rows) == 1
+    import json
+    row=json.loads(rows[0])
+    assert row["contradiction_id"] == "CON-1"
+    assert row["statement_a"] == "Position A"
+    assert row["statement_b"] == "Position B"
+    assert row["contradiction_class"] == "forecast tension"
+    assert row["blueprint_import_lineage"]["original_external_id"] == "CON-1"
+
+def test_reconciliation_mismatch_blocks_approval_controls(monkeypatch,tmp_path):
+    from cios.applications.flora.blueprint_import.views import _review_ready_page
+    from cios.applications.flora.blueprint_import.review_plan import BlueprintReviewPlanCoordinator
+    r, _, p=_plan_with(monkeypatch,tmp_path,[{"external_id":"CON-1","record_class":"contradiction","truth_class":"contradiction","payload":{"statement_a":"A","statement_b":"B"}}])
+    ctx={"package": r, "summary": {"staging_version":"staging-v1"}}
+    job={"status":"Not ready","proposed":{"Creates":0,"Updates":0,"Unchanged":0,"Projection-only":0,"Accepted but non-persistable":0},"candidate_summary":{"Accepted canonical candidates":1,"Accepted but non-persistable":0,"Quarantined":0,"Rejected":0,"Unsupported":0},"mapping_quality":{},"plan_id":p.plan_id,"reconciliation":{"accepted_canonical":1,"creates":0,"updates":0,"unchanged":0,"accepted_but_non_persistable":0,"passes":False,"mismatch":1}}
+    html=_review_ready_page(ctx, job, BlueprintReviewPlanCoordinator(), {}, "", "corr")
+    assert "Approval blocked" in html
+    assert "type='button' disabled" in html
+    assert "type='submit'>Approve and update governed Twin" not in html

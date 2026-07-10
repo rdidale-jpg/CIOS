@@ -67,7 +67,7 @@ def _event(trace: list[dict[str, Any]] | None, step_id: int, component: str, act
     trace.append(payload)
 from .models import BlueprintPackageRecord
 
-MAPPING_VERSION = "mod-cdt-twin-spine-mapping-v1.3.0"
+MAPPING_VERSION = "mod-cdt-twin-spine-mapping-v1.3.1"
 
 
 def _norm(value: Any) -> str:

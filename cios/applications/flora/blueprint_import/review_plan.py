@@ -92,7 +92,11 @@ class BlueprintReviewPlanCoordinator:
             job.update(stage=STAGES[5], records_processed=len(effects)); self._save_job(job)
             q = Counter(_finding_reason(c) for c in candidates.values() if c.get("validation_status") == "quarantined")
             rejected = [c for c in candidates.values() if c.get("validation_status") == "rejected"]
-            summary = {**job, "status":"Ready", "stage":"Complete", "completed_at":time.time(), "plan_id":plan.plan_id, "plan_persisted":True, "proposed":{"Creates":totals["create"],"Updates":totals["update"],"Unchanged":totals["unchanged"]+totals["mapped"],"Conflicts":totals["conflict"],"Unresolved references":totals["unresolved"],"Projection-only":totals["projection"], "Ignored":totals["ignored"]}, "mapping_version": MAPPING_VERSION, "candidate_summary": _candidate_counts(candidates.values()), "class_summary": _class_counts(candidates.values()), "sheet_mapping_summary": _sheet_counts(candidates.values()), "examples_by_class": _examples_by_class(candidates.values()), "quarantine_reasons": dict(q), "ignored_reasons": _ignored_reasons(candidates.values()), "rejected_reasons": _rejected_reasons(rejected), "mapping_quality": _mapping_quality(candidates.values()), "rejected_count": len(rejected), "deployment_commit_sha": deployment_metadata().get("commit_sha") or "Unavailable"}
+            proposed = {"Creates":totals["create"],"Updates":totals["update"],"Unchanged":totals["unchanged"]+totals["mapped"],"Conflicts":totals["conflict"],"Unresolved references":totals["unresolved"],"Projection-only":totals["projection"], "Ignored":totals["ignored"], "Accepted but non-persistable": 0}
+            accepted_canonical = sum(1 for c in candidates.values() if c.get("validation_status") == "accepted") - proposed["Accepted but non-persistable"]
+            canonical_actions = proposed["Creates"] + proposed["Updates"] + proposed["Unchanged"]
+            reconciles = accepted_canonical == canonical_actions
+            summary = {**job, "status":"Ready" if reconciles else "Not ready", "stage":"Complete", "completed_at":time.time(), "plan_id":plan.plan_id, "plan_persisted":True, "proposed": proposed, "accepted_canonical": accepted_canonical, "reconciliation": {"accepted_canonical": accepted_canonical, "creates": proposed["Creates"], "updates": proposed["Updates"], "unchanged": proposed["Unchanged"], "accepted_but_non_persistable": 0, "passes": reconciles, "mismatch": accepted_canonical - canonical_actions}, "mapping_version": MAPPING_VERSION, "candidate_summary": _candidate_counts(candidates.values(), accepted_canonical), "class_summary": _class_counts(candidates.values()), "sheet_mapping_summary": _sheet_counts(candidates.values()), "examples_by_class": _examples_by_class(candidates.values()), "quarantine_reasons": dict(q), "ignored_reasons": _ignored_reasons(candidates.values()), "rejected_reasons": _rejected_reasons(rejected), "mapping_quality": _mapping_quality(candidates.values()), "rejected_count": len(rejected), "deployment_commit_sha": deployment_metadata().get("commit_sha") or "Unavailable"}
             atomic_write_json(self.detail_path(job["import_run_id"]), {"effects": effects, "candidates": list(candidates.values())})
             self._save_job(summary)
             atomic_write_json(self.summary_path(job["import_run_id"]), summary)
@@ -104,9 +108,9 @@ class BlueprintReviewPlanCoordinator:
         finally:
             with _LOCK: _RUNNING.discard(job["job_id"])
 
-def _candidate_counts(candidates):
+def _candidate_counts(candidates, accepted_canonical: int | None = None):
     c = Counter(x.get("validation_status") for x in candidates)
-    return {"Accepted": c["accepted"], "Quarantined": c["quarantined"], "Rejected": c["rejected"], "Ignored": c["ignored"], "Unsupported": 0}
+    return {"Accepted": c["accepted"] if accepted_canonical is None else accepted_canonical, "Accepted canonical candidates": c["accepted"] if accepted_canonical is None else accepted_canonical, "Accepted but non-persistable": 0, "Quarantined": c["quarantined"], "Rejected": c["rejected"], "Ignored": c["ignored"], "Unsupported": 0}
 
 def _class_counts(candidates):
     by=defaultdict(Counter)

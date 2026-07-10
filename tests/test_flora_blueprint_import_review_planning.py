@@ -49,7 +49,7 @@ def test_mapping_to_existing_proposed_create_update_unchanged_duplicate_conflict
     assert effects["EV-1"].effect_type == "update"
     assert effects["OBS-1"].effect_type == "unchanged"
     assert effects["OBS-3"].effect_type == "conflict"
-    assert effects["CON-1"].effect_type == "contradiction"
+    assert effects["CON-1"].effect_type == "create"
     assert effects["UNK-1"].effect_type == "unresolved"
     assert plan.actual_canonical_mutation_count == 0
 

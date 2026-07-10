@@ -8,7 +8,7 @@ from typing import Any, Literal
 
 from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise, flora_roles
 from cios.applications.flora.memory.models import Observation
-from cios.applications.flora.memory.repository import EvidenceRepository, ObservationRepository
+from cios.applications.flora.memory.repository import EvidenceRepository, ObservationRepository, ContradictionRepository
 from cios.applications.flora.storage import atomic_write_json, data_path, ensure_writable_dir
 
 from .archive import sha256_bytes
@@ -20,7 +20,7 @@ from .registry import BlueprintPackageRegistry
 from .review import CandidateReviewRepository
 
 PromotionStatus = Literal["succeeded", "repeat_no_change", "failed"]
-SUPPORTED_PROMOTION_CLASSES = {"evidence", "observation"}
+SUPPORTED_PROMOTION_CLASSES = {"evidence", "observation", "contradiction"}
 NON_MUTATING_EFFECTS = {"mapped", "unchanged", "duplicate", "reject", "defer", "quarantine", "unsupported", "unresolved", "projection", "conflict"}
 
 class BlueprintPromotionError(PermissionError):
@@ -85,6 +85,16 @@ class CanonicalPromotionResult:
             d[k]=list(getattr(self,k))
         return d
 
+
+
+def _plan_reconciles(plan: dict[str, Any]) -> bool:
+    effects = plan.get("effects") or []
+    accepted = sum(1 for e in effects if e.get("effect_type") in {"create", "update", "unchanged", "mapped"})
+    creates = sum(1 for e in effects if e.get("effect_type") == "create")
+    updates = sum(1 for e in effects if e.get("effect_type") == "update")
+    unchanged = sum(1 for e in effects if e.get("effect_type") in {"unchanged", "mapped"})
+    return accepted == creates + updates + unchanged
+
 class CanonicalPromotionRepository:
     def _approval_dir(self, import_run_id: str): return data_path("blueprint_import", "promotion", "approvals", import_run_id)
     def _execution_dir(self, import_run_id: str): return data_path("blueprint_import", "promotion", "executions", import_run_id)
@@ -109,11 +119,12 @@ def _approval_id(plan_id: str, approver: str) -> str: return "bpi-approval-"+sha
 
 class CanonicalPromotionService:
     def __init__(self, registry=None, staging=None, reviews=None, mappings=None, plans=None, repo=None, ledger=None, evidence_repo=None, observation_repo=None):
-        self.registry=registry or BlueprintPackageRegistry(); self.staging=staging or CandidateStagingRepository(); self.reviews=reviews or CandidateReviewRepository(); self.mappings=mappings or ImportMappingRepository(); self.plans=plans or DryRunPlanRepository(); self.repo=repo or CanonicalPromotionRepository(); self.ledger=ledger or BlueprintImportLedger(); self.evidence_repo=evidence_repo or EvidenceRepository(); self.observation_repo=observation_repo or ObservationRepository()
+        self.registry=registry or BlueprintPackageRegistry(); self.staging=staging or CandidateStagingRepository(); self.reviews=reviews or CandidateReviewRepository(); self.mappings=mappings or ImportMappingRepository(); self.plans=plans or DryRunPlanRepository(); self.repo=repo or CanonicalPromotionRepository(); self.ledger=ledger or BlueprintImportLedger(); self.evidence_repo=evidence_repo or EvidenceRepository(); self.observation_repo=observation_repo or ObservationRepository(); self.contradiction_repo=ContradictionRepository()
     def approve_plan(self, import_run_id: str, plan_id: str, approver: str, rationale: str, headers: Any, unresolved_warnings_accepted: tuple[str,...]=(), expiry_or_invalidation_condition: str="invalid if plan, package, review decisions or mappings change"):
         plan=self._load_plan(import_run_id, plan_id); package=self.registry.get(plan["package_ref"])
         if not package or not can_approve_blueprint_promotion(headers, package.identity.enterprise_id): raise BlueprintPromotionError("Actor is not authorised to approve Blueprint canonical promotion")
         if any(e["effect_type"]=="conflict" for e in plan["effects"]): raise BlueprintPromotionError("Unresolved blocking conflicts remain")
+        if not _plan_reconciles(plan): raise BlueprintPromotionError("Accepted canonical candidates do not reconcile with create, update and unchanged effects")
         a=CanonicalPromotionApproval("1.0", _approval_id(plan_id, approver), plan_id, import_run_id, plan["package_ref"], package.package_sha256, approver, utc_now(), rationale, tuple(plan["effects"]), int(plan["expected_canonical_mutation_count"]), unresolved_warnings_accepted, expiry_or_invalidation_condition, _fp(plan), self._reviews_fingerprint(import_run_id), _fp(self.mappings.list(import_run_id)))
         self.repo.save_approval(a); self.ledger.append("canonical_promotion_approved", a.to_dict()); return a
     def execute_approved_plan(self, import_run_id: str, approval_id: str, actor: str, headers: Any) -> CanonicalPromotionResult:
@@ -166,9 +177,14 @@ class CanonicalPromotionService:
         if e.record_class=="observation":
             obs=Observation(**{k:v for k,v in payload.items() if k in Observation.__dataclass_fields__}, human_provenance={**payload.get("human_provenance",{}), "blueprint_import_lineage": lineage} if payload.get("provenance_type")=="human-supplied" else payload.get("human_provenance",{}))
             return self.observation_repo.save(obs).observation_id or ""
+        if e.record_class=="contradiction":
+            cid=e.canonical_id or m.get("canonical_id") or m.get("proposed_canonical_id") or payload.get("contradiction_id") or c["original_source_id"] or "CON-"+sha256_bytes(e.effect_id.encode())[:16].upper()
+            prior=self.contradiction_repo.get(cid)
+            row={**payload, "contradiction_id": cid, "statement_a": payload.get("statement_a") or payload.get("position_a") or payload.get("claim_a") or "", "statement_b": payload.get("statement_b") or payload.get("position_b") or payload.get("claim_b") or "", "contradiction_class": payload.get("contradiction_class") or payload.get("class") or "", "judgement": payload.get("current_judgement") or payload.get("judgement") or "", "evidence_need": payload.get("evidence_needed") or payload.get("evidence_need") or "", "affected_outputs": payload.get("affected_outputs") or "", "status": payload.get("status") or "open", "blueprint_import_lineage": {**lineage, "canonical_id": cid, "prior_canonical_version": prior}}
+            return self.contradiction_repo.save(row)["contradiction_id"]
         raise BlueprintPromotionError("Unsupported canonical class")
     def _backup_paths(self):
-        paths=[self.evidence_repo.path, self.observation_repo.path]; b=[]
+        paths=[self.evidence_repo.path, self.observation_repo.path, self.contradiction_repo.path]; b=[]
         for p in paths:
             bp=Path(str(p)+".bpi_backup")
             if p.exists(): ensure_writable_dir(bp.parent); shutil.copy2(p,bp); b.append((p,bp,True))
