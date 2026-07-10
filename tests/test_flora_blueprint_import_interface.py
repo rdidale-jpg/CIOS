@@ -127,8 +127,8 @@ def test_owner_denial_gets_owner_recovery_not_admin(monkeypatch,tmp_path):
     owner_without_workspace={"X-Flora-User":"rob","X-Flora-Roles":"cios_owner"}
     html,status,_=upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, owner_without_workspace)
     assert status == 403
-    assert "Owner recognised</th><td>yes" in html
-    assert "Switch to the owning workspace." in html
+    assert "Owner recognised</th><td>no" in html
+    assert "No active workspace" in html
     assert "Ask an administrator" not in html
     assert "Canonical changes occurred: no" in html
 
@@ -227,3 +227,25 @@ def test_owner_and_non_owner_authorisation_outcomes_unchanged_by_audit_fix(monke
 
     assert owner_status == 200 and "Upload and validate" in owner_page
     assert reader_status == 403 and "Blueprint upload capability resolved</th><td>Failed" in reader_page
+
+
+def test_anonymous_blueprint_diagnostics_stop_after_account_failure(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    html, status = import_blueprint_entry_page({})
+    assert status == 403
+    assert "Account recognised</th><td>Failed" in html
+    assert "Workspace recognised</th><td>Not started" in html
+    assert "Membership resolved</th><td>Not started" in html
+    assert "Owner status resolved</th><td>Not started" in html
+    assert "Blueprint upload capability resolved</th><td>Not started" in html
+
+
+def test_blueprint_get_and_post_share_cookie_session_identity(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    cookie_headers = {"Cookie": "flora_user=rob; flora_enterprises=synthetic-enterprise; flora_active_workspace=synthetic-enterprise; flora_roles=owner%2Ccanvas.view"}
+    html, status = import_blueprint_entry_page(cookie_headers)
+    assert status == 200
+    assert "Upload and validate" in html
+    result_html, post_status, _ = upload_and_validate_blueprint({"blueprint_zip": pkg()}, {"blueprint_zip.filename": "synthetic.zip", "blueprint_zip.content_type": "application/zip"}, cookie_headers)
+    assert post_status == 200
+    assert "Validation result" in result_html

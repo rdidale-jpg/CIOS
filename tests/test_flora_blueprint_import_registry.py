@@ -124,8 +124,8 @@ def test_receipt_does_not_mutate_canonical_memory(monkeypatch, tmp_path):
 
 
 def test_access_control_for_blueprint_package_receipt():
-    assert can_receive_blueprint_package({"X-Flora-User": "alice", "X-Flora-Roles": "package.upload"})
-    assert can_receive_blueprint_package({"X-Flora-User": "alice", "X-Flora-Roles": "blueprint_import_admin"})
+    assert not can_receive_blueprint_package({"X-Flora-User": "alice", "X-Flora-Roles": "package.upload"})
+    assert not can_receive_blueprint_package({"X-Flora-User": "alice", "X-Flora-Roles": "blueprint_import_admin"})
     assert not can_receive_blueprint_package({"X-Flora-Roles": "package.upload"})
     assert not can_receive_blueprint_package({"X-Flora-User": "alice", "X-Flora-Roles": "canvas.view"})
 

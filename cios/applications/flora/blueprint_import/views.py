@@ -186,19 +186,26 @@ _DIAGNOSTIC_STAGES = (
 def _stage_statuses(failed_stage: str, decision=None) -> dict[str, str]:
     statuses = {stage: "Not started" for stage in _DIAGNOSTIC_STAGES}
     if decision:
-        statuses["Account recognised"] = "Passed" if decision.user_id else "Failed"
-        statuses["Workspace recognised"] = "Passed" if decision.workspace_ids else ("Not started" if not decision.user_id else "Failed")
-        statuses["Membership resolved"] = "Passed" if decision.resolved_membership == "resolved" else ("Not started" if not decision.workspace_ids else "Failed")
+        if not decision.user_id:
+            statuses["Account recognised"] = "Failed"
+            return statuses
+        statuses["Account recognised"] = "Passed"
+        if not decision.active_workspace:
+            statuses["Workspace recognised"] = "Failed"
+            return statuses
+        statuses["Workspace recognised"] = "Passed"
+        if decision.resolved_membership != "resolved":
+            statuses["Membership resolved"] = "Failed"
+            return statuses
+        statuses["Membership resolved"] = "Passed"
+        if not decision.resolved_role:
+            statuses["Owner status resolved"] = "Failed"
+            return statuses
         statuses["Owner status resolved"] = "Passed"
         statuses["Blueprint upload capability resolved"] = "Passed" if decision.decision == "allowed" else "Failed"
+        return statuses
     if failed_stage in statuses:
-        failed_index = _DIAGNOSTIC_STAGES.index(failed_stage)
-        for stage in _DIAGNOSTIC_STAGES[:failed_index]:
-            statuses.setdefault(stage, "Passed")
-            if statuses[stage] == "Not started":
-                statuses[stage] = "Passed"
-        if statuses[failed_stage] == "Not started":
-            statuses[failed_stage] = "Failed"
+        statuses[failed_stage] = "Failed"
     return statuses
 
 
@@ -257,8 +264,14 @@ def _audit_authorisation(event_type: str, headers: Any, stage: str, decision, pa
         "permission_decision": decision.decision,
         "decision": decision.decision,
         "denial_reason": decision.denial_reason,
+        "authenticated": "yes" if decision.user_id else "no",
+        "authentication_source": getattr(decision, "authentication_source", "none"),
+        "workspace_resolved": "yes" if decision.active_workspace else "no",
+        "membership_resolved": "yes" if decision.resolved_membership == "resolved" else "no",
+        "owner_recognised": "yes" if decision.owner_recognised else "no",
+        "request_route": "blueprint_import",
         "deployment_version": __import__("os").environ.get("FLORA_DEPLOYMENT_VERSION", "unknown"),
-        "migration_version": "2026-07-10-blueprint-owner-authority",
+        "migration_version": "2026-07-10-blueprint-session-context",
         "blueprint_package_ref": package_ref,
         "import_run_id": import_run_id,
         "stage": stage,
