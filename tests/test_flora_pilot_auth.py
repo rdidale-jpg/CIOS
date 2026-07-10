@@ -111,3 +111,25 @@ def test_pilot_sign_in_route_accepts_secret_only_by_post_and_sets_cookie(monkeyp
         assert "HttpOnly" in headers["Set-Cookie"]
     finally:
         server.shutdown(); server.server_close(); thread.join(timeout=2)
+
+def test_persistent_cookie_has_30_day_expiry_survives_restart_and_rejects_expired(monkeypatch):
+    import time
+    from cios.applications.flora.pilot_auth import resolve_pilot_session, session_ttl_seconds
+    enable(monkeypatch)
+    monkeypatch.setenv("FLORA_PILOT_SESSION_DAYS", "30")
+    cookie = issue_session_cookie(secure=False)
+    assert session_ttl_seconds() == 30 * 24 * 60 * 60
+    assert "Max-Age=2592000" in cookie
+    assert "Expires=" in cookie
+    browser_restarted_cookie = cookie.split(";", 1)[0]
+    assert resolve_pilot_session({"Cookie": browser_restarted_cookie}).user_id == "owner-1"
+    expired = issue_session_cookie(secure=False, now=int(time.time()) - session_ttl_seconds() - 5).split(";", 1)[0]
+    assert resolve_pilot_session({"Cookie": expired}) is None
+
+
+def test_sign_out_clears_persistent_cookie(monkeypatch):
+    enable(monkeypatch)
+    cleared = clear_session_cookie(secure=False)
+    assert "flora_pilot_session=" in cleared
+    assert "Max-Age=0" in cleared
+    assert "Expires=Thu, 01 Jan 1970 00:00:00 GMT" in cleared

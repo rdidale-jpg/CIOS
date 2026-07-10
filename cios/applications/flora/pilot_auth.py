@@ -8,6 +8,7 @@ environment configuration.
 from __future__ import annotations
 
 import base64, hashlib, hmac, json, logging, os, time
+from email.utils import formatdate
 from dataclasses import dataclass
 from html import escape
 from typing import Any
@@ -15,7 +16,8 @@ from typing import Any
 from cios.applications.flora.workspace.views import _page
 
 COOKIE_NAME = "flora_pilot_session"
-SESSION_TTL_SECONDS = 8 * 60 * 60
+DEFAULT_SESSION_DAYS = 30
+SESSION_DAYS_ENV = "FLORA_PILOT_SESSION_DAYS"
 LOGGER = logging.getLogger(__name__)
 
 
@@ -60,12 +62,32 @@ class PilotSession:
     expires_at: int
 
 
-def issue_session_cookie(*, secure: bool | None = None) -> str:
-    now = int(time.time())
-    payload = {"v": 1, "sub": _owner_id(), "workspace": _workspace(), "role": _role(), "iat": now, "exp": now + SESSION_TTL_SECONDS}
+def session_ttl_seconds() -> int:
+    raw = os.getenv(SESSION_DAYS_ENV, str(DEFAULT_SESSION_DAYS)).strip()
+    try:
+        days = int(raw)
+    except ValueError:
+        days = DEFAULT_SESSION_DAYS
+    if days < 1:
+        days = DEFAULT_SESSION_DAYS
+    return days * 24 * 60 * 60
+
+
+def issue_session_cookie(*, secure: bool | None = None, now: int | None = None) -> str:
+    issued_at = int(time.time() if now is None else now)
+    ttl = session_ttl_seconds()
+    expires_at = issued_at + ttl
+    payload = {"v": 1, "sub": _owner_id(), "workspace": _workspace(), "role": _role(), "iat": issued_at, "exp": expires_at}
     payload_b64 = _b64(json.dumps(payload, separators=(",", ":"), sort_keys=True).encode())
     sig = _b64(hmac.new(_signing_key(), payload_b64.encode(), hashlib.sha256).digest())
-    attrs = [f"{COOKIE_NAME}={payload_b64}.{sig}", "Path=/", "HttpOnly", "SameSite=Lax", f"Max-Age={SESSION_TTL_SECONDS}"]
+    attrs = [
+        f"{COOKIE_NAME}={payload_b64}.{sig}",
+        "Path=/",
+        "HttpOnly",
+        "SameSite=Lax",
+        f"Max-Age={ttl}",
+        f"Expires={formatdate(expires_at, usegmt=True)}",
+    ]
     if secure if secure is not None else _secure_cookies():
         attrs.append("Secure")
     return "; ".join(attrs)

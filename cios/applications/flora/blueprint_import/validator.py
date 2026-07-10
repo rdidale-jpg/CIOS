@@ -14,6 +14,7 @@ from .archive import _validate_zip_member, sha256_bytes
 from .candidates import (CandidateImportRecord, CandidateStagingRepository, ImportRunDryRunResult,
     PROJECTION_ONLY_CLASSES, SUPPORTED_RECORD_CLASSES, ValidationFinding, candidate_id)
 from .ledger import BlueprintImportLedger, utc_now
+from .manifest import DUPLICATE_MANIFEST_MESSAGE, INVALID_SCHEMA_MESSAGE, ROOT_MANIFEST, read_root_manifest
 from .models import BlueprintPackageRecord, PackageReceiptError
 from .registry import BlueprintPackageRegistry
 from .cios_twin_adapter import CiosCommercialTwinAdapter
@@ -84,9 +85,16 @@ class BlueprintPackageValidator:
                         errors.append(str(exc)); continue
                     if path in seen: duplicates.add(path)
                     seen.add(path); names.append(path); files.append(path)
-                if duplicates: errors.append("Duplicate package files: " + ", ".join(sorted(duplicates)))
-                if "blueprint_manifest.json" not in seen: errors.append("Missing blueprint_manifest.json")
-                manifest = json.loads(zf.read("blueprint_manifest.json").decode("utf-8")) if "blueprint_manifest.json" in seen else {}
+                if duplicates:
+                    if ROOT_MANIFEST in duplicates:
+                        errors.append(DUPLICATE_MANIFEST_MESSAGE)
+                    else:
+                        errors.append("Duplicate package files: " + ", ".join(sorted(duplicates)))
+                try:
+                    manifest = read_root_manifest(zf)
+                except PackageReceiptError as exc:
+                    errors.append(str(exc))
+                    manifest = {}
                 self._validate_manifest(package, manifest, seen, warnings, errors)
                 inspection = self.twin_adapter.inspect(package, zf, manifest) if isinstance(manifest, dict) else None
                 if inspection:
@@ -109,7 +117,7 @@ class BlueprintPackageValidator:
         return candidates, warnings, errors, files, unsupported, unresolved
 
     def _validate_manifest(self, package, manifest, seen, warnings, errors):
-        if not isinstance(manifest, dict): errors.append("blueprint_manifest.json must contain an object"); return
+        if not isinstance(manifest, dict): errors.append(INVALID_SCHEMA_MESSAGE); return
         checks = {"package_id": package.identity.package_id, "enterprise_id": package.identity.enterprise_id, "profile_version": package.identity.profile_version}
         checks["package_version"] = package.identity.package_version
         for key, expected in checks.items():
