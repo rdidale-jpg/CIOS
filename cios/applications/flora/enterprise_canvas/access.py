@@ -60,7 +60,13 @@ class EnterpriseCanvasAccessRepository:
 
     def get(self, enterprise_id: str) -> EnterpriseCanvasAccessRecord | None:
         wanted = canonical_enterprise_id(enterprise_id)
-        return next((r for r in self.list() if canonical_enterprise_id(r.enterprise_id) == wanted), None)
+        return next((r for r in self.list() if canonical_enterprise_id(r.enterprise_id) == wanted or canonical_enterprise_id(r.canvas_id) == wanted), None)
+
+    def get_by_import_run(self, import_run_id: str) -> EnterpriseCanvasAccessRecord | None:
+        wanted = str(import_run_id or "").strip()
+        if not wanted:
+            return None
+        return next((r for r in self.list() if wanted in r.import_run_ids), None)
 
     def save(self, record: EnterpriseCanvasAccessRecord) -> EnterpriseCanvasAccessRecord:
         records = self.list()

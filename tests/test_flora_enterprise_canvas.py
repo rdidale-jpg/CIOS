@@ -4,6 +4,7 @@ import pytest
 
 from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, BlueprintPackageValidator
 from cios.applications.flora.enterprise_canvas import EnterpriseCanvasAccessError, EnterpriseCanvasService
+from cios.applications.flora.enterprise_canvas.service import EnterpriseCanvasNotFoundError
 from cios.applications.flora.memory.models import EnterpriseModel, EnterpriseModelAttribute, EnterpriseUnknown
 from cios.applications.flora.memory.repository import EnterpriseModelRepository, EvidenceRepository
 from tests.test_flora_blueprint_import_validation import pkg
@@ -77,11 +78,10 @@ def test_enterprise_canvas_read_model_foundation(tmp_path, monkeypatch):
     assert "MOD" not in json.dumps(canvas.to_dict())
 
 
-def test_canvas_handles_incomplete_data_and_blocks_unauthorised_access(tmp_path, monkeypatch):
+def test_canvas_handles_missing_data_and_blocks_unauthorised_access(tmp_path, monkeypatch):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
-    canvas = EnterpriseCanvasService().get_canvas("synthetic-enterprise", HEADERS)
-    assert canvas.header.enterprise_name == "synthetic-enterprise"
-    assert canvas.tiles == ()
+    with pytest.raises(EnterpriseCanvasNotFoundError):
+        EnterpriseCanvasService().get_canvas("synthetic-enterprise", HEADERS)
     with pytest.raises(EnterpriseCanvasAccessError):
         EnterpriseCanvasService().get_canvas("synthetic-enterprise", {"X-Flora-User":"mallory","X-Flora-Enterprises":"other"})
 
@@ -158,10 +158,28 @@ def test_enterprise_canvas_ui_blocks_unauthorised_and_handles_empty(tmp_path, mo
     assert "Care Board" not in denied_html
 
     empty_html, empty_status = enterprise_canvas_page("synthetic-enterprise", HEADERS)
-    assert empty_status == 200
-    assert "No organisation areas available" in empty_html
-    assert "Select an organisation tile" in empty_html
+    assert empty_status == 404
+    assert "Enterprise Canvas not found" in empty_html
+    assert "synthetic-enterprise" in empty_html
 
+
+
+def test_missing_canvas_does_not_fall_back_to_synthetic_enterprise(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
+
+    html, status = enterprise_canvas_page("MOD", {"X-Flora-User":"rob", "X-Flora-Enterprises":"MOD", "X-Flora-Roles":"canvas.view"})
+    assert status == 404
+    assert "Enterprise Canvas not found" in html
+    assert "Synthetic Health" not in html
+
+
+def test_home_page_does_not_expose_synthetic_canvas_route(monkeypatch):
+    from cios.applications.flora.web.app import _flora_home_page
+
+    html = _flora_home_page({})
+    assert "/digital-twins/synthetic-enterprise/canvas" not in html
+    assert "/blueprint-import/history" in html
 
 def test_enterprise_canvas_lineage_inspection_read_only_accessible_and_complete(tmp_path, monkeypatch):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))

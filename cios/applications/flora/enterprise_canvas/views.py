@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from html import escape
 
-from cios.applications.flora.enterprise_canvas.service import EnterpriseCanvasAccessError, EnterpriseCanvasService
+from cios.applications.flora.enterprise_canvas.service import EnterpriseCanvasAccessError, EnterpriseCanvasNotFoundError, EnterpriseCanvasService
 from cios.applications.flora.enterprise_canvas.feedback import ACTIONS, EnterpriseCanvasFeedbackService, FeedbackAccessError
 from cios.applications.flora.workspace.views import _page
 
@@ -14,6 +14,8 @@ def enterprise_canvas_page(enterprise_id: str, headers, selected_tile_id: str = 
         canvas = EnterpriseCanvasService().get_canvas(enterprise_id, headers)
     except EnterpriseCanvasAccessError:
         return _page("Enterprise Canvas access denied", "<section class='hero'><h1>Access denied</h1><p>You do not have access to this Enterprise Canvas.</p></section>"), 403
+    except EnterpriseCanvasNotFoundError as exc:
+        return _page("Enterprise Canvas not found", f"<section class='hero'><h1>Enterprise Canvas not found</h1><p>{escape(str(exc))}</p></section>"), 404
     except ValueError as exc:
         return _page("Enterprise Canvas unavailable", f"<section class='hero'><h1>Canvas unavailable</h1><p>{escape(str(exc))}</p></section>"), 404
 
