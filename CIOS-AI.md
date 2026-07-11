@@ -120,6 +120,18 @@ CIOS is not a generic scraping, dashboarding or report-generation system. It is 
 - Market Participant Twin work should model supplier, competitor and partner roles, account-relative strengths and weaknesses, fit, access, incumbent position, evidence quality, Unknowns and Contradictions.
 
 
+## Research GPT and Knowledge Pack publishing rules
+
+Research GPTs must use the canonical Markdown [Commercial Digital Twin Research Agent Guide](architecture/research/Commercial-Digital-Twin-Research-Agent-Guide.md). The DOCX copy in `architecture/research/` is a historical review copy, not canonical source.
+
+For Knowledge Pack publishing, Research GPT outputs must be compatible with `manifest.json`, `metadata.json`, `validation.json`, `lineage.json`, `checksums.sha256`, `payload/twin/`, `payload/presentation-model/` and `attachments/` where appropriate. Do not require a GPT to create a ZIP unless an existing text-based publishing workflow explicitly gives it that job.
+
+Research GPTs must produce governed Twin candidate data, atomic Observations, Twin Presentation Models, enterprise topology, executive themes, stakeholder landscape, commercial relevance, Unknowns, Contradictions, Recommendations, lineage manifests, validation reports, release manifests and completion reports. They must use enterprise-specific language, stable IDs, explicit truth status, source cut-off, confidence and freshness. Facts must remain separate from interpretation; projections and human-supplied knowledge must be labelled; Recommendations must link to Hypotheses and Evidence; Unknowns and Contradictions must be preserved.
+
+Executive-facing output for `strategic_sales_director_v1` must answer: Who? Why now? Why them? What evidence? What remains unknown? What contradicts the current view? What next? What not to claim? It must not expose raw worksheet or database labels and must not assert profit-centre or cost-centre classifications without support.
+
+Industry Research GPTs must review the Flora Change Queue, distinguish signal from material change, create atomic Industry Observations, publish incremental Industry Knowledge Packs, run weekly triage, monthly governed release, quarterly structural assurance and event-driven release for material events, propose cross-Twin impacts and make no silent updates to related Twins.
+
 ## AI operating rules
 
 - Do not treat evidence as intelligence.
