@@ -139,3 +139,26 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 - EI-001, EI-002, EI-003 and EI-012 remain the authority for canonical Enterprise Model, graph, behaviour and Observation acceptance. Knowledge Pack acceptance does not bypass those processes.
 - FP-009 continues to govern hypothesis validation and recommendation lineage for hypotheses or recommendations carried inside Knowledge Packs.
 - Flora runtime implementation remains out of scope for this documentation update; later runtime contracts must follow ADR-016, FP-010, FP-011, EI-013 and the v1.0 specifications.
+
+## Architecture v2.0 accepted authority chains
+
+The Architecture v2 document chain is: **Accepted ADR → owning paper → normative specification → runtime contract → implementation documentation**. Runtime contracts and implementation documentation are intentionally marked as Phase 3 where not yet created.
+
+| Accepted ADR | Owning paper | Normative specification | Runtime contract | Implementation documentation |
+| --- | --- | --- | --- | --- |
+| [ADR-016](../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) | [FP-010](../founding-papers/FP-010-Knowledge-Pack-Architecture.md), [FP-011](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md), [EI-013](../enterprise-intelligence/EI-013-Knowledge-Asset-Exchange-Model.md) | [Knowledge Pack Specification v1.0](../specifications/knowledge-packs/Knowledge-Pack-Specification-v1.0.md) | Phase 3: Flora Knowledge Pack Import/Export Runtime Contract | Phase 3: Flora Knowledge Repository implementation docs |
+| [ADR-016](../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) | [FP-011](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md) | [Twin Presentation Model Specification v1.0](../specifications/presentation-models/Twin-Presentation-Model-Specification-v1.0.md) | Phase 3: Flora Presentation Model Rendering Contract | Phase 3: Presentation renderer implementation docs |
+| [ADR-016](../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) | [FP-011](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md) | [Industry Twin Lifecycle Specification v1.0](../specifications/industry-twins/Industry-Twin-Lifecycle-Specification-v1.0.md) | Phase 3: Industry Change Queue Runtime Contract | Phase 3: Industry Twin maintenance implementation docs |
+
+## Architecture v2.0 document ownership register
+
+| Document | Owner |
+| --- | --- |
+| [ADR-016](../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) | CIOS Architecture Decision Register |
+| [FP-010](../founding-papers/FP-010-Knowledge-Pack-Architecture.md) | Knowledge Pack Architecture owner |
+| [FP-011](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md) | Knowledge Exchange Architecture owner |
+| [EI-013](../enterprise-intelligence/EI-013-Knowledge-Asset-Exchange-Model.md) | Enterprise Intelligence owner |
+| [Knowledge Pack Specification v1.0](../specifications/knowledge-packs/Knowledge-Pack-Specification-v1.0.md) | Knowledge Pack specification owner |
+| [Twin Presentation Model Specification v1.0](../specifications/presentation-models/Twin-Presentation-Model-Specification-v1.0.md) | Presentation Intelligence specification owner |
+| [Industry Twin Lifecycle Specification v1.0](../specifications/industry-twins/Industry-Twin-Lifecycle-Specification-v1.0.md) | Industry Twin lifecycle owner |
+| [Architecture v2.0 Documentation Update Register](../programmes/cios-architecture-v2/Architecture-v2.0-Documentation-Update-Register.md) | Architecture v2 programme owner |
