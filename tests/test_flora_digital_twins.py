@@ -124,3 +124,22 @@ def test_source_retrieved_zero_candidate_twin_history_is_not_unavailable(monkeyp
     assert 'Official report retrieved; no safe findings identified' in html
     assert 'No findings to verify' in html
     assert 'Official source unavailable' not in html
+
+
+def test_flora_home_enterprise_canvas_opens_twin_selection():
+    from cios.applications.flora.web.app import _flora_home_page
+    html = _flora_home_page({})
+    assert "<a href='/digital-twins'>Enterprise Canvas</a>" in html
+    assert "<a href='/blueprint-import/history'>Enterprise Canvas</a>" not in html
+    assert 'Details' not in html
+
+
+def test_governed_twin_card_primary_and_secondary_actions():
+    from cios.applications.flora.digital_twins import GovernedTwinListItem, _governed_twin_card
+    html = _governed_twin_card(GovernedTwinListItem('MOD','MOD','canvas-1','mod','v1.3','2026-07-10T12:00:00+00:00','2026-07-10T10:00:00+00:00','Progressive Assurance accepted','run-mod'))
+    assert 'MOD' in html
+    assert 'v1.3' in html
+    assert 'Progressive Assurance accepted' in html
+    assert "href='/digital-twins/MOD/canvas'>Open Twin" in html
+    assert "href='/blueprint-import/run-mod'>View import history" in html
+    assert 'Details' not in html

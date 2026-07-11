@@ -118,3 +118,22 @@ def test_successful_reasoning_provider_validation_and_transient_store(tmp_path, 
     assert result['audit']['validation_outcome']=='valid'
     assert (tmp_path/'enterprise_intelligence'/'briefs'/'mod.json').exists()
     assert [o.to_dict() for o in obs.list()] == before
+
+
+def test_canvas_diagnostics_configured_provider_ready_without_secret(tmp_path, monkeypatch):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path))
+    monkeypatch.setenv('FLORA_REASONING_PROVIDER', 'openai')
+    monkeypatch.setenv('FLORA_REASONING_MODEL', 'gpt-test')
+    monkeypatch.setenv('FLORA_REASONING_API_KEY', 'super-secret-key')
+    monkeypatch.setenv('FLORA_REASONING_TIMEOUT_SECONDS', '45')
+    from cios.applications.flora.enterprise_canvas.access import repair_enterprise_canvas_access
+    repair_enterprise_canvas_access('mod','mod','alice','run-1')
+    from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
+    html, status=enterprise_canvas_page('mod', {'X-Flora-User':'alice','X-Flora-Enterprises':'mod','X-Flora-Active-Workspace':'mod'})
+    assert status == 200
+    assert '<th>Reasoning status</th><td>Ready</td>' in html
+    assert '<th>API key available</th><td>yes</td>' in html
+    assert '<th>Timeout</th><td>45</td>' in html
+    assert 'super-secret-key' not in html
+    assert 'Executive Commercial Canvas · governed read model · Overview default' not in html
+    assert 'Legacy diagnostic view only' in html
