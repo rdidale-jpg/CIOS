@@ -29,6 +29,13 @@ This registry records architecture authority status and release-profile membersh
 | reviewer-pack | Material approved for production reviewer use. |
 | none | No production release-profile membership. |
 
+
+## Accepted architecture process standards
+
+| ID | Title | Path | Status | Authority classification | Release-profile membership | Dependencies | Validation trigger |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| AP-001 | Architecture Compilation Standard | `architecture/reference-architecture/standards/AP-001-Architecture-Compilation-Standard.md` | Accepted | Architecture process standard governing compilation from the Authority Registry; documentation-only and non-runtime | architecture-authority | Architecture Authority Registry; Reference Architecture; Document Map | Registry-backed compilation check before any future architecture pack promotion |
+
 ## Review-material registry entries
 
 | ID | Title | Path | Status | Authority classification | Release-profile membership | Dependencies | Validation trigger |
