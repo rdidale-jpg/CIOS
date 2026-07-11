@@ -20,6 +20,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | ID | Title | Purpose | Status | Folder | Relationship to Reference Architecture |
 | --- | --- | --- | --- | --- | --- |
 | ADR index | [Architecture Decision Records](../decisions/README.md) | Index of major architecture decisions. | Present | `architecture/decisions/` | Preserves why important choices were made. |
+| AP-001 | [Architecture Compilation Standard](standards/AP-001-Architecture-Compilation-Standard.md) | Defines registry-backed compilation profiles and non-promotion rules for architecture packs. | Accepted | `architecture/reference-architecture/standards/` | Uses the Authority Registry as the foundation for architecture compilation without changing runtime behaviour. |
 | ADR-001 | [Observations as Atomic Intelligence Unit](../decisions/ADR-001-Observations-as-Atomic-Intelligence-Unit.md) | Treats Observations as reusable intelligence atoms. | Accepted | `architecture/decisions/` | Reinforces EI-012 and Observation doctrine. |
 | ADR-002 | [Enterprise Model as Durable Memory](../decisions/ADR-002-Enterprise-Model-as-Durable-Memory.md) | Treats the Enterprise Model / Commercial Digital Twin as durable memory. | Accepted | `architecture/decisions/` | Reinforces EI-001 and report-as-view doctrine. |
 | ADR-003 | [CIRM and EI Separation](../decisions/ADR-003-CIRM-and-EI-Separation.md) | Separates reasoning process from enterprise knowledge model. | Accepted | `architecture/decisions/` | Clarifies CIRM, Enterprise Intelligence and Flora responsibilities. |
