@@ -106,5 +106,29 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | ID | Document | Purpose | Status | Folder | Relationship to Reference Architecture |
 | --- | --- | --- | --- | --- | --- |
 | ADR-009 | [Progressive Assurance for Commercial Digital Twins](../decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md) | Establishes Initial Decision Twin and Assured Release modes, bounded Researcher autonomy and proportionate assurance. | Accepted | `architecture/decisions/` | Governs cross-cutting Twin production and promotion. |
-| MOD-CDT-05 | [MOD v1.3 Owner Acceptance Decision](../../docs/decisions/MOD-CDT-05-Owner-Acceptance-Decision-v1.3.md) | Accepts the MOD v1.3 intelligence state with explicit commercial and process constraints. | Accepted | `docs/decisions/` | Records learning evidence for ADR-009; does not own architecture. |
-| FLORA-TP-001 | [Progressive Assurance Test Plan](../../docs/testing/FLORA-TP-001-Progressive-Assurance-Test-Plan-v0.1.md) | Tests ingestion, incremental refresh, autonomous Initial Decision Twin creation and promotion. | Working Draft | `docs/testing/` | Runtime validation evidence for ADR-009 and FP-003. |
+| MOD-CDT-05 | [MOD v1.3 Owner Acceptance Decision](../../docs/MOD-CDT-05-Owner-Acceptance-Decision-v1.3.md) | Accepts the MOD v1.3 intelligence state with explicit commercial and process constraints. | Accepted | `docs/decisions/` | Records learning evidence for ADR-009; does not own architecture. |
+| FLORA-TP-001 | [Progressive Assurance Test Plan](../../docs/FLORA-TP-001-Progressive-Assurance-Test-Plan-v0.1.md) | Tests ingestion, incremental refresh, autonomous Initial Decision Twin creation and promotion. | Working Draft | `docs/testing/` | Runtime validation evidence for ADR-009 and FP-003. |
+
+## Architecture v2.0 Knowledge Pack Foundations
+
+**Authority chain:** Accepted ADR → owning Founding Paper or EI paper → normative specification → runtime implementation contract.
+
+| ID | Document | Purpose | Status | Folder | Authority relationship |
+| --- | --- | --- | --- | --- | --- |
+| ADR-016 | [Knowledge Packs as the Standard Exchange Mechanism](../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) | Establishes Knowledge Pack as the standard exchange mechanism without making package acceptance canonical fact. | Proposed for Acceptance | `architecture/decisions/` | Starts the v2.0 authority chain once accepted. |
+| FP-010 | [Knowledge Pack Architecture](../founding-papers/FP-010-Knowledge-Pack-Architecture.md) | Owns the conceptual Knowledge Pack architecture. | Proposed Foundation | `architecture/founding-papers/` | Owning Founding Paper for Knowledge Pack concepts. |
+| FP-011 | [Knowledge Exchange Architecture](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md) | Owns Knowledge Exchange Architecture and the Knowledge Supply Chain. | Proposed Foundation | `architecture/founding-papers/` | Owning Founding Paper for exchange flow and repository boundaries. |
+| EI-013 | [Knowledge Asset Exchange Model](../enterprise-intelligence/EI-013-Knowledge-Asset-Exchange-Model.md) | Owns exchanged Knowledge Asset semantics. | Proposed Foundation | `architecture/enterprise-intelligence/` | EI owner for portable asset semantics. |
+| KP-SPEC-001 | [Knowledge Pack Specification v1.0](../specifications/knowledge-packs/Knowledge-Pack-Specification-v1.0.md) | Owns the package contract. | Draft Normative Specification | `architecture/specifications/knowledge-packs/` | Normative specification under FP-010, FP-011 and EI-013. |
+| TPM-SPEC-001 | [Twin Presentation Model Specification v1.0](../specifications/presentation-models/Twin-Presentation-Model-Specification-v1.0.md) | Owns presentation payload semantics. | Draft Normative Specification | `architecture/specifications/presentation-models/` | Normative specification for accepted presentation payloads. |
+| ITL-SPEC-001 | [Industry Twin Lifecycle Specification v1.0](../specifications/industry-twins/Industry-Twin-Lifecycle-Specification-v1.0.md) | Owns Industry Twin maintenance and cadence. | Draft Normative Specification | `architecture/specifications/industry-twins/` | Normative specification for Industry Twin lifecycle. |
+| V2-REGISTER | [Architecture v2.0 Documentation Update Register](../programmes/cios-architecture-v2/Architecture-v2.0-Documentation-Update-Register.md) | Registers Phase 1 Architecture v2.0 additions. | Phase 1 Register | `architecture/programmes/cios-architecture-v2/` | Programme governance record. |
+
+### Architecture v2.0 authority allocation
+
+- FP-010 owns the conceptual Knowledge Pack architecture.
+- FP-011 owns Knowledge Exchange Architecture.
+- EI-013 owns exchanged Knowledge Asset semantics.
+- Knowledge Pack Specification v1.0 owns the package contract.
+- Twin Presentation Model Specification v1.0 owns presentation payload semantics.
+- Industry Twin Lifecycle Specification v1.0 owns Industry maintenance and cadence.

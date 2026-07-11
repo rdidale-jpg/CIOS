@@ -58,3 +58,20 @@ Use this glossary as the common vocabulary for CIOS architecture. Primary docume
 | Assured Release | Explicit promotion mode that adds deeper review, reconciliation, publication validation and owner acceptance for external or high-consequence use. | [ADR-009](../decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md) |
 | Evidence Saturation | Decision-relative point at which additional collection is unlikely to change the immediate bounded judgement materially; residual gaps remain explicit as Unknowns, Contradictions or Evidence Demands. | [ADR-009](../decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md), [FP-003](../founding-papers/FP-003-Flora-Intelligence-Architecture.md) |
 | Promotion Trigger | A condition requiring an Initial Decision Twin to move to Assured Release, such as external publication, provider-specific pursuit, sponsor outreach or material reliance. | [ADR-009](../decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md) |
+
+## Architecture v2.0 Knowledge Exchange terms
+
+| Term | Definition | Primary documents |
+| --- | --- | --- |
+| Knowledge Pack | Governed exchange container for Knowledge Assets, provenance, validation metadata, Unknowns, Contradictions, recommendations and optional payloads such as Twin Presentation Models. | [ADR-016](../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md), [FP-010](../founding-papers/FP-010-Knowledge-Pack-Architecture.md) |
+| Knowledge Asset | Inspectable unit of portable intelligence carried by a Knowledge Pack. | [EI-013](../enterprise-intelligence/EI-013-Knowledge-Asset-Exchange-Model.md) |
+| Knowledge Exchange Architecture | Architecture for creating, receiving, validating, storing, rendering and learning from Knowledge Packs. | [FP-011](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md) |
+| Knowledge Repository | Governed store for accepted Knowledge Packs and related validation metadata. | [FP-011](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md) |
+| Twin Presentation Model | Versioned interpretation payload for rendering, review and navigation over governed knowledge. | [Twin Presentation Model Specification v1.0](../specifications/presentation-models/Twin-Presentation-Model-Specification-v1.0.md) |
+| Enterprise Twin | Governed enterprise-level digital twin model. | [EI-001](../enterprise-intelligence/volume-1-enterprise-modelling/EI-001-Enterprise-Model-Specification.md), [ADR-016](../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) |
+| Industry Twin | Governed industry-level twin maintained through lifecycle and cadence rules. | [Industry Twin Lifecycle Specification v1.0](../specifications/industry-twins/Industry-Twin-Lifecycle-Specification-v1.0.md) |
+| Market Participant Twin | Governed twin for a market participant within an Industry Twin context. | [ADR-016](../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) |
+| Opportunity Twin | Governed twin focused on a commercial opportunity and its evidence, participants, timing and constraints. | [ADR-016](../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) |
+| Relational Twin | Governed twin representing relationships across enterprises, participants, opportunities or portfolio contexts. | [ADR-016](../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) |
+| Cross-Twin Intelligence | Intelligence derived by comparing or reasoning across multiple Twins while preserving lineage and canonical boundaries. | [FP-011](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md) |
+| Knowledge Supply Chain | End-to-end flow for authoring, packaging, validating, storing, rendering and promoting exchanged knowledge. | [FP-011](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md) |
