@@ -5,6 +5,7 @@ from html import escape
 
 from cios.applications.flora.enterprise_canvas.service import EnterpriseCanvasAccessError, EnterpriseCanvasNotFoundError, EnterpriseCanvasService
 from cios.applications.flora.enterprise_canvas.feedback import ACTIONS, EnterpriseCanvasFeedbackService, FeedbackAccessError
+from cios.applications.flora.enterprise_intelligence.runtime import latest_result
 from cios.applications.flora.workspace.views import _page
 
 EXEC_NAV = ("Overview","How Enterprise Works","Material Pressures","Change Portfolio","Decision Landscape","Commercial Relevance","Unknowns & Contradictions","Recommended Next Moves","Model Explorer","Evidence & Lineage")
@@ -49,7 +50,7 @@ def _executive_canvas(canvas, headers) -> str:
     changes = _change_portfolio(canvas)
     recs = _recommendations(canvas)
     explorer = _model_explorer(canvas)
-    return f"""
+    return _reasoning_panel(canvas) + f"""
     <section class='hero' id='overview'><p><a href='/digital-twins'>Digital Twins</a></p><p class='pill'>Executive Commercial Canvas · governed read model · Overview default</p><h1>{escape(h.enterprise_name)} executive situation briefing</h1><p>{escape(_summary(h, canvas))}</p><dl><div><dt>Twin version</dt><dd>{escape(h.twin_version)}</dd></div><div><dt>Source cut-off</dt><dd>{escape(h.source_cut_off)}</dd></div><div><dt>Progressive Assurance status</dt><dd>{escape(h.maturity_or_acceptance_state)}</dd></div></dl><div class='brief-grid'>
     {_brief('Enterprise summary', h.enterprise_purpose if h.enterprise_purpose != 'Unknown' else 'Evidence incomplete')}
     {_brief('Current strategic context', h.governing_thesis if h.governing_thesis != 'Unknown' else 'Evidence-backed interpretation: MOD is being read through accepted Twin pressures and changes; strategic context needs stronger evidence.')}
@@ -71,6 +72,21 @@ def _executive_canvas(canvas, headers) -> str:
     <section class='card' id='evidence-and-lineage'><h2>Evidence &amp; Lineage</h2><p>Executive statements can be inspected for Evidence, Observations, Unknowns, Contradictions, confidence, freshness and source lineage. Select any Model Explorer area to inspect detailed lineage.</p></section>
     """
 
+
+def _reasoning_panel(canvas):
+    if canvas.enterprise_id.upper() != 'MOD': return ''
+    result=latest_result(canvas.enterprise_id)
+    audit=(result or {}).get('audit') or {}; brief=(result or {}).get('brief') or {}; lineage=brief.get('lineage_manifest') or {}
+    status=audit.get('status') or 'Not configured'; reason=audit.get('failure') or brief.get('unavailable_reason') or ('No successful Executive Intelligence Brief has been generated.' if not result else '')
+    if status != 'Succeeded':
+        unavailable=f"""<section class='card warning' id='executive-intelligence-brief'><h2>Executive Intelligence Brief unavailable</h2><p><strong>Reason:</strong> {escape(reason or status)}</p><h3>Actions</h3><form method='post' action='/digital-twins/{escape(canvas.enterprise_id)}/executive-intelligence-brief/generate'><button type='submit'>Generate Executive Intelligence Brief</button></form><form method='post' action='/digital-twins/{escape(canvas.enterprise_id)}/executive-intelligence-brief/generate'><button type='submit'>Retry generation</button></form><p><a href='#model-explorer'>Open Model Explorer</a> · <a href='#reasoning-diagnostics'>View reasoning diagnostics</a></p></section>"""
+    else:
+        summary=brief.get('executive_summary') or {}
+        pressures=''.join(f"<article class='pressure'><h3>{escape(str(p.get('title','')))}</h3><p>{escape(str(p.get('situation','')))}</p><p><strong>Why now:</strong> {escape(str(p.get('why_now','')))}</p><details><summary>Inspectable lineage</summary><p>{escape(', '.join((p.get('supporting_observation_ids') or [])+(p.get('supporting_evidence_ids') or [])))}</p></details></article>" for p in brief.get('material_pressures',[])[:5])
+        unavailable=f"""<section class='card' id='executive-intelligence-brief'><h2>Executive Intelligence Brief</h2><p>{escape(str(summary.get('what_is_happening') or ''))}</p><p>{escape(str(summary.get('why_it_matters') or ''))}</p>{pressures}</section>"""
+    diag={'Reasoning status':status,'Reasoning request ID':audit.get('request_id',''),'Brief ID':audit.get('generated_brief_id',''),'Enterprise':canvas.enterprise_id,'Twin version':audit.get('twin_version',''),'Reasoning profile':audit.get('reasoning_profile',''),'Evidence package hash':audit.get('evidence_package_hash') or lineage.get('evidence_package_hash',''),'Evidence object count':audit.get('evidence_object_count',''),'Model provider':audit.get('model_provider',''),'Model name':audit.get('model_name',''),'Prompt version':audit.get('prompt_version',''),'Validation status':audit.get('validation_outcome',''),'Rejected claim count':len(audit.get('rejected_claims') or []),'Execution duration':str(audit.get('execution_duration_ms',''))+' ms' if audit.get('execution_duration_ms') is not None else '','Last generated':brief.get('generated_at',''),'Fallback reason':reason if status!='Succeeded' else ''}
+    rows=''.join(f"<tr><th>{escape(k)}</th><td>{escape(str(v))}</td></tr>" for k,v in diag.items())
+    return unavailable + f"<section class='card diagnostics' id='reasoning-diagnostics'><h2>Reasoning diagnostics</h2><table>{rows}</table></section>"
 
 def _brief(title, value): return f"<article class='statement'><h3>{escape(title)}</h3><p>{escape(str(value or 'Evidence incomplete'))}</p></article>"
 def _join_pressures(items): return '; '.join(items[:5])
