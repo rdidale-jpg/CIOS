@@ -3,7 +3,7 @@
 **Purpose:** Define entities, relationships and evidence-backed links that connect the enterprise model.  
 **Status:** Draft  
 **Owner:** Rob / CIOS  
-**Last updated:** 2026-07-03
+**Last updated:** 2026-07-11
 
 ## Architectural position
 
@@ -189,6 +189,21 @@ Attributes include question, affected conviction, priority, evidence needed, own
 - `Competitor OUTPERFORMS Enterprise`
 - `Market Force PRESSURES Enterprise`
 - `Regulator PRESSURES Enterprise`
+
+### Market participant relationships
+
+Market participant relationships extend the graph for participant-aware account and opportunity reasoning. They are governed by the Market Participant Twin and Account-Participant Position Assessment specifications. All inferred participant relationships must preserve explanation, confidence, freshness, Evidence lineage and Observation lineage. Assessment acceptance does not automatically promote an inferred edge to canonical graph fact.
+
+- `Participant SUPPLIES Enterprise`
+- `Participant COMPETES_FOR Opportunity`
+- `Participant PARTNERS_WITH Participant`
+- `Participant INCUMBENT_FOR Capability`
+- `Participant HAS_STRENGTH Capability`
+- `Participant HAS_WEAKNESS Capability`
+- `Participant HAS_ACCESS_TO Stakeholder`
+- `Participant ALIGNS_WITH Account Need`
+- `Participant CONFLICTS_WITH Account Constraint`
+- `Participant VULNERABLE_IN Account Context`
 
 ## Evidence-backed edges
 
