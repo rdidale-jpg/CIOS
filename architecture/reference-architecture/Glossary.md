@@ -2,7 +2,7 @@
 
 **Status:** Draft  
 **Owner:** Rob / CIOS  
-**Last updated:** 2026-07-10
+**Last updated:** 2026-07-11
 
 Use this glossary as the common vocabulary for CIOS architecture. Primary documents are linked where they currently exist.
 
@@ -75,3 +75,4 @@ Use this glossary as the common vocabulary for CIOS architecture. Primary docume
 | Relational Twin | Governed twin representing relationships across enterprises, participants, opportunities or portfolio contexts. | [ADR-016](../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) |
 | Cross-Twin Intelligence | Intelligence derived by comparing or reasoning across multiple Twins while preserving lineage and canonical boundaries. | [FP-011](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md) |
 | Knowledge Supply Chain | End-to-end flow for authoring, packaging, validating, storing, rendering and promoting exchanged knowledge. | [FP-011](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md) |
+| Flora Knowledge Pack Validation | Future Flora responsibility for validating, versioning, storing, rendering and distributing accepted Knowledge Packs without silently promoting contents to canonical fact. | [FP-011](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md), [Knowledge Pack Specification v1.0](../specifications/knowledge-packs/Knowledge-Pack-Specification-v1.0.md) |

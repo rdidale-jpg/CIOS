@@ -1,11 +1,11 @@
 # ADR-016 — Knowledge Packs as the Standard Exchange Mechanism
 
-**Status:** Proposed for Acceptance  
-**Date:** 2026-07-11  
-**Owner:** Rob / CIOS  
-**Supersedes:** Earlier unmerged architecture update pack as a merge baseline, not its carried-forward concepts  
-**Superseded by:** None  
-**Owning documents:** FP-010, FP-011, EI-013, Knowledge Pack Specification v1.0, Twin Presentation Model Specification v1.0, Industry Twin Lifecycle Specification v1.0  
+**Status:** Accepted
+**Date:** 2026-07-11
+**Owner:** Rob / CIOS
+**Supersedes:** Earlier unmerged architecture update pack as a merge baseline, not its carried-forward concepts
+**Superseded by:** None
+**Owning documents:** FP-010, FP-011, EI-013, Knowledge Pack Specification v1.0, Twin Presentation Model Specification v1.0, Industry Twin Lifecycle Specification v1.0
 **Implementation state:** Documentation foundation only; no Flora runtime implementation in this phase.
 
 ## Context
@@ -28,4 +28,4 @@ Flora may later validate, version, store and render accepted Knowledge Packs and
 
 ## Acceptance step
 
-This ADR is marked **Proposed for Acceptance** because the repository does not contain a separate explicit acceptance record for this task. Formal acceptance requires the architecture owner to change the status to Accepted or add an acceptance decision record following the ADR process.
+Accepted as the Architecture v2.0 Knowledge Pack authority for this reconciliation phase.

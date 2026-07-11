@@ -2,7 +2,7 @@
 
 **Status:** Living doctrine
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-03
+**Last updated:** 2026-07-11
 
 ## 1. Purpose
 
@@ -131,3 +131,10 @@ Good CIOS work is:
 - executive-relevant;
 - uncertainty-aware;
 - ethically bounded.
+
+
+## Architecture v2.0 exchange doctrine
+
+Architecture v2.0 adds exchange and presentation without weakening the evidence-first doctrine. Knowledge Packs move governed Knowledge Assets between contexts; they do not convert exchanged statements into canonical Enterprise Model, graph, behaviour or Observation state by themselves. Twin Presentation Models help humans navigate and understand governed knowledge; they are Presentation Intelligence and must remain labelled as interpretation unless their claims are separately accepted by the owning model process.
+
+Good design must therefore preserve three boundaries: Evidence proves; Observations and Enterprise Models remember; Knowledge Packs and Twin Presentation Models exchange and present governed knowledge without silent canonical promotion.

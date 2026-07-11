@@ -8,7 +8,7 @@
 
 This document defines how any AI assistant, Codex session or human contributor should work on CIOS. It preserves project memory, architecture doctrine and AI operating rules outside chat history.
 
-Treat this file, the Reference Architecture and Accepted ADRs as source of truth for CIOS project direction unless Rob explicitly changes the architecture. Treat the CIOS Chief Architect Handbook as the primary guide for judgement and working practice. Treat the Reference Architecture, Accepted ADRs and owning architecture papers as authoritative for detailed architecture and model decisions.
+Treat this file, the Reference Architecture, Accepted ADRs and the Architecture v2.0 Phase 1 authorities as source of truth for CIOS project direction unless Rob explicitly changes the architecture. Treat the CIOS Chief Architect Handbook as the primary guide for judgement and working practice. Treat the Reference Architecture, Accepted ADRs and owning architecture papers as authoritative for detailed architecture and model decisions.
 
 ## One-page quick-start for AI agents
 
@@ -98,6 +98,15 @@ CIOS is not a generic scraping, dashboarding or report-generation system. It is 
 - Provider output is candidate data, not canonical intelligence.
 - Provider-specific DTOs must be mapped into canonical CIOS objects before reasoning or model updates.
 - Preserve state-semantics separation: Observation lifecycle, domain measurement state, accounting basis, freshness and runtime run state are different concepts.
+
+
+## Architecture v2.0 operating rules
+
+- Treat ADR-016, FP-010, FP-011, EI-013, the Knowledge Pack Specification v1.0, Twin Presentation Model Specification v1.0, Industry Twin Lifecycle Specification v1.0, the Phase 1 Conflict and Reconciliation Report, the ADR index and the Document Map as governing inputs for Architecture v2.0 documentation work.
+- Do not implement Knowledge Repository, Knowledge Pack import/export, presentation rendering, Industry monitoring or Flora runtime behaviour unless explicitly asked in a runtime implementation task.
+- Specialist GPT-authored Twin Presentation Models are labelled interpretation payloads. They may be rendered or exchanged but are not evidence and are not canonical fact without separate owning-model acceptance.
+- Knowledge Pack acceptance means valid repository handling; canonical promotion remains governed by EI-001, EI-002, EI-003, EI-012 and other owning model papers.
+- Hypotheses and recommendations carried in Knowledge Packs must retain FP-009 and ADR-005 lineage.
 
 ## AI operating rules
 

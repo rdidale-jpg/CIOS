@@ -2,7 +2,7 @@
 
 **Status:** Draft  
 **Owner:** Rob / CIOS  
-**Last updated:** 2026-07-03
+**Last updated:** 2026-07-11
 
 ## First Principles of CIOS
 
@@ -36,3 +36,11 @@
 ## Compliance implications
 
 Significant runtime changes should explain which principles they implement, which they defer and whether they improve traceability, evidence lineage and commercial judgement.
+
+
+## Architecture v2.0 principles
+
+- **Exchange is not canonical promotion.** Knowledge Pack acceptance validates package handling; canonical acceptance remains with the owning Enterprise Twin, Industry Twin, Market Participant Twin, Opportunity Twin, Relational Twin or EI model process.
+- **Presentation is interpretation.** Twin Presentation Models render, navigate and explain governed knowledge; they must not be treated as evidence or durable memory unless their claims are separately accepted.
+- **Repository handling preserves lineage.** Knowledge Repository validation must retain source, Evidence, Observation, Unknown, Contradiction, authorship and recommendation lineage.
+- **Runtime follows authority.** Flora implementation contracts must follow Accepted ADRs, FP-010, FP-011, EI-013 and the normative specifications; documentation reconciliation must not imply runtime functionality has been built.
