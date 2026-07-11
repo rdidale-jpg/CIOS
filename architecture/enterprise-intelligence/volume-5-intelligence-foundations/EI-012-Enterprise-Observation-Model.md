@@ -990,3 +990,37 @@ CIOS MUST keep the following concepts separate:
 - **Enterprise Model attribute:** `financial_performance.metrics.adjusted_ebitda.FY26.actual`.
 
 This example is illustrative, not a hard-coded runtime fixture. It shows that financial fact state, accounting basis, freshness and Observation lifecycle are different fields even when a product view renders them together.
+
+## Phase 3 extension — Industry, Participant and cross-Twin Observations
+
+**Status:** Normative documentation extension.  
+**Date added:** 2026-07-11.
+
+### Industry Observation categories
+
+Industry Observations may include market structure, participant movement, regulation and policy, demand, investment, procurement, technology adoption, supplier performance, alliances, acquisitions, capability gaps and opportunity clusters.
+
+### Participant Observation categories
+
+Participant Observations may include contract wins/losses, delivery performance, alliance changes, capability expansion, leadership changes, financial pressure, account entry/exit, incumbent renewal, credibility signals and vulnerability signals.
+
+### Cross-Twin impact proposal rule
+
+A material Industry Observation should identify potentially affected Enterprise, Participant, Opportunity or Relational Twins. Cross-Twin impact is a proposal, not an automatic update. The target Twin owner or owning process must validate, accept, reject or defer the proposed change.
+
+### Additional Observation fields
+
+Where an Observation may affect more than one Twin, it should include:
+
+| Field | Meaning |
+| --- | --- |
+| `affected_twin_ids` | Candidate Enterprise, Industry, Participant, Opportunity or Relational Twins that may be affected. |
+| `originating_twin_id` | Twin from which the Observation or proposed impact originated. |
+| `cross_twin_impact_type` | Nature of proposed impact, such as pressure, risk, opportunity, participant fit, incumbent change, capability gap or contradiction. |
+| `impact_materiality` | Assessed significance for the target Twin and decision context. |
+| `proposed_action` | Suggested validation, learning, update, retirement, contradiction review or release action. |
+| `propagation_status` | Proposed, under review, accepted, rejected, deferred, superseded or retired. |
+
+### Incremental Twin release rule
+
+Twin updates should be incremental where possible. Each release should identify prior version, changed objects, unchanged areas, retired assumptions, new Unknowns, new Contradictions, cross-Twin impact proposals, source cut-off, effective date and supersession. A partial update does not require full reconstruction when only part of a Twin changed.

@@ -487,3 +487,45 @@ Segment meanings:
 - `<financial_measurement_state>` — one of the controlled states above.
 
 Scope and accounting basis remain mandatory fields on the fact. Runtime implementations may index by scope or basis for query efficiency, but MUST NOT create a parallel canonical financial memory structure without updating EI-001 or creating an ADR.
+
+## Phase 3 extension — Twin types, shared governance and cross-Twin intelligence
+
+**Status:** Normative documentation extension.  
+**Date added:** 2026-07-11.  
+**Authority alignment:** ADR-016, FP-010, FP-011, EI-013, Knowledge Pack Specification v1.0, Twin Presentation Model Specification v1.0, Industry Twin Lifecycle Specification v1.0, Market Participant Twin Specification v1.0 and Account–Participant Position Assessment Specification v1.0.
+
+### Supported Twin types
+
+EI-001 supports five governed Twin types:
+
+- **Enterprise Twin:** governed enterprise-level Commercial Digital Twin containing accepted enterprise state, Observations, relationships, pressures, behaviours, Unknowns, Contradictions and opportunity reasoning.
+- **Industry Twin:** governed industry-level Twin containing industry structure, segments, value chains, participants, market forces, regulation, economic flows, common capabilities, opportunity clusters, monitoring tier, structural assurance state and release history.
+- **Market Participant Twin:** governed Twin for a supplier, competitor, partner, adviser, systems integrator, technology vendor or specialist challenger, including capabilities, account presence, incumbent positions, strategy, relationships, delivery evidence, vulnerabilities and account-relative fit.
+- **Opportunity Twin:** governed Twin for a commercial opportunity, including need, pressure, timing, stakeholders, participants, hypotheses, constraints, evidence lineage, confidence, Unknowns, Contradictions and recommendation state.
+- **Relational Twin:** governed relationship Twin that records positions, dependencies or assessed fit between two or more Twins while preserving lineage to each source Twin.
+
+### Shared governance requirements
+
+Every material Twin attribute, relationship, behaviour score, release and recommendation must preserve evidence lineage, Observation lineage, truth status, confidence, freshness, Unknowns, Contradictions, human-supplied knowledge labels, versioning and supersession state. Human-supplied knowledge may enrich a Twin only when contributor, date, rationale, confidence and calibration status remain visible.
+
+Versioning must distinguish current state from superseded state. Supersession retires or narrows prior claims; it does not delete the historical lineage that explains why earlier interpretations existed.
+
+### Industry Twin extensions
+
+An Industry Twin extends the Enterprise Model family with industry structure, segments, value chains, participants, market forces, regulation, economic flows, common capabilities and opportunity clusters. It must declare monitoring tier, structural assurance state and incremental release status. Industry-level intelligence may propose impacts to Enterprise, Participant, Opportunity or Relational Twins, but it must not overwrite direct account evidence or silently update another Twin.
+
+### Market Participant Twin extensions
+
+A Market Participant Twin records participant strengths, weaknesses, capabilities, account presence, incumbent positions, strategy, relationships, delivery evidence and vulnerabilities. Strengths and weaknesses are never absolute: they are evidence-governed claims whose commercial meaning depends on account need, procurement route, incumbent context, delivery requirement, timing, constraints and competing alternatives. Account-relative fit must cite both account-side evidence and participant-side evidence.
+
+### Relational Twin semantics
+
+A Relational Twin represents governed relationships between Twins. It may include account–participant position assessment, participant-to-participant partnership or competition, opportunity-to-industry emergence, supplier-to-enterprise incumbent status or industry-to-enterprise pressure impact. It does not replace either source Twin and must preserve lineage to all source Twins, source Observations, supporting Evidence, confidence, freshness and contradiction state.
+
+### Presentation Models and Knowledge Packs
+
+Twin Presentation Models and Knowledge Packs are governed exchange, rendering and packaging assets. They are not canonical Enterprise Model state. A Presentation Model remains a view over governed knowledge. A Knowledge Pack may present a Twin or propose an update to a Twin depending on pack type, validation outcome and owning model acceptance, but pack acceptance alone does not prove every interpretation inside the pack.
+
+### Incremental Twin release rule
+
+Twin updates should be incremental where possible. A release should identify prior version, changed objects, unchanged areas, retired assumptions, new Unknowns, new Contradictions, cross-Twin impact proposals, source cut-off, effective date and supersession. CIOS must not require full reconstruction when only part of a Twin changed.

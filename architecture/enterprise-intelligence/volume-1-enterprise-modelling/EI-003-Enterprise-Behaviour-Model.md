@@ -261,3 +261,19 @@ Engagement recommendations should cite the behaviour dimension, evidence, confid
 ## Relationship to other EI Volume 1 papers
 
 EI-003 supplies the predictive behaviour layer for EI-001's Enterprise Model and Commercial Digital Twin. EI-001 defines where behaviour, Confidence, Freshness, Decay, Contradiction and Opportunity Outlook sit in the canonical model. EI-002 defines how behaviour evidence, scores and relationships are stored in the Enterprise Knowledge Graph and connected to signals, hypotheses, theses and recommendations.
+
+## Phase 3 extension — Industry and participant behaviour
+
+Behaviour may be modelled for Enterprise, Industry and Market Participant Twins where repeated Observations justify a pattern. Behaviour is derived from repeated Observations, is context-sensitive, remains evidence-linked and must be contradiction-aware.
+
+### Participant behaviour dimensions
+
+Participant behaviour dimensions may include supplier loyalty, framework dependence, partnership tendency, procurement responsiveness, innovation adoption, acquisition behaviour, account concentration, delivery reliability, incumbent resilience, decision velocity and alliance formation. Participant behaviour may vary by account, segment, procurement route, geography or capability. A participant can be strong in one account-relative context and weak in another.
+
+### Industry behaviour dimensions
+
+Industry behaviour dimensions may include regulatory responsiveness, innovation adoption, investment cyclicality, consolidation/acquisition behaviour, alliance formation, procurement responsiveness, supplier concentration, capability-gap persistence and demand volatility. Industry behaviour must not override direct account evidence and must not silently update Enterprise, Participant, Opportunity or Relational Twins.
+
+### Governance rules
+
+Behaviour scores must cite supporting Observations and Evidence, confidence, freshness, context, contradiction state and validation status. Contradictory behaviour evidence should split behaviour by context or reduce confidence rather than being averaged away. Behaviour may shape hypotheses and recommendations only when lineage remains inspectable.
