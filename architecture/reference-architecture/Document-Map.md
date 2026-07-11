@@ -166,3 +166,13 @@ The Architecture v2 document chain is: **Accepted ADR → owning paper → norma
 | [Market Participant Twin Specification v1.0](../specifications/market-participants/Market-Participant-Twin-Specification-v1.0.md) | Market Participant Twin specification owner |
 | [Account-Participant Position Assessment Specification v1.0](../specifications/market-participants/Account-Participant-Position-Assessment-Specification-v1.0.md) | Account-relative assessment specification owner |
 | [Architecture v2.0 Documentation Update Register](../programmes/cios-architecture-v2/Architecture-v2.0-Documentation-Update-Register.md) | Architecture v2 programme owner |
+
+## Phase 3 Enterprise Intelligence extension ownership
+
+| Area | Owning document | Owned sections or concepts | Notes |
+| --- | --- | --- | --- |
+| Supported Twin types and shared Twin governance | [EI-001](../enterprise-intelligence/volume-1-enterprise-modelling/EI-001-Enterprise-Model-Specification.md) | Enterprise, Industry, Market Participant, Opportunity and Relational Twin support; shared governance; incremental release rule | Presentation Models and Knowledge Packs remain non-canonical views or exchange assets unless separately accepted by the owning Twin process. |
+| Cross-Twin and pack graph relationships | [EI-002](../enterprise-intelligence/volume-1-enterprise-modelling/EI-002-Enterprise-Knowledge-Graph.md) | Cross-Twin edge patterns, inferred edge governance and Pack-to-Twin relationships | Cross-Twin propagation is proposal-based and evidence-linked. |
+| Industry and participant behaviour | [EI-003](../enterprise-intelligence/volume-1-enterprise-modelling/EI-003-Enterprise-Behaviour-Model.md) | Participant Behaviour and Industry behaviour dimensions | Behaviour is derived from repeated Observations and does not override direct account evidence. |
+| Industry and Participant Observations | [EI-012](../enterprise-intelligence/volume-5-intelligence-foundations/EI-012-Enterprise-Observation-Model.md) | Industry Observation categories, Participant Observation categories, cross-Twin impact proposal fields and incremental release rule | Cross-Twin impact is a proposal, not an automatic update. |
+| Cross-Twin hypothesis validation | [FP-009](../founding-papers/FP-009-Hypothesis-Validation-Standard.md) | Participant, Industry, Account–Participant fit, Opportunity and cross-Twin recommendation validation rules | Strong recommendations require lineage across relevant Twins. |

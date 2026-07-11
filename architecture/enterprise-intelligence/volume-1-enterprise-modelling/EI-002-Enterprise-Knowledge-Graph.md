@@ -317,3 +317,38 @@ The graph must support queries such as:
 ## Relationship to other EI Volume 1 papers
 
 EI-002 implements the connected structure required by EI-001's Enterprise Model and Commercial Digital Twin. EI-001 defines the domains and attribute governance that become graph nodes and properties. EI-003 supplies behaviour dimensions and scores that the graph stores, connects to evidence and uses in opportunity reasoning.
+
+## Phase 3 extension — Cross-Twin and Knowledge Pack relationships
+
+The Enterprise Knowledge Graph must support cross-Twin relationships between Enterprise, Industry, Market Participant, Opportunity and Relational Twins. Cross-Twin edges are governed relationship objects, not automatic model updates.
+
+### Required cross-Twin relationship patterns
+
+The graph must support, at minimum, the following relationship patterns:
+
+- `Industry CONTAINS Participant`
+- `Participant SUPPLIES Enterprise`
+- `Participant COMPETES_FOR Opportunity`
+- `Participant PARTNERS_WITH Participant`
+- `Participant INCUMBENT_FOR Capability`
+- `Participant HAS_STRENGTH Capability`
+- `Participant HAS_WEAKNESS Capability`
+- `Participant ALIGNS_WITH Account Need`
+- `Participant CONFLICTS_WITH Account Constraint`
+- `Industry PRESSURE AFFECTS Enterprise`
+- `Industry CHANGE IMPACTS Twin`
+- `Opportunity EMERGES_FROM Pattern`
+- `Knowledge Pack PRESENTS Twin`
+- `Knowledge Pack UPDATES Twin`
+- `Knowledge Pack DERIVED_FROM Knowledge Pack`
+- `Knowledge Pack SUPERSEDES Knowledge Pack`
+
+### Cross-Twin edge governance
+
+Every inferred cross-Twin edge must preserve explanation, supporting Evidence, supporting Observations, confidence, freshness, contradiction state, producer, validation status and affected Twin identifiers. Where an edge is derived from a Knowledge Pack, the edge must retain pack identity, pack validation status, pack lineage and whether the pack presents existing Twin state or proposes an update.
+
+Contradictory cross-Twin edges must remain visible. A participant marketing claim may support a candidate edge, but it is insufficient on its own for strong account-relative fit, incumbent advantage or commercial recommendation edges.
+
+### Pack-to-Twin relationship semantics
+
+`Knowledge Pack PRESENTS Twin` means the pack carries a governed view, release or related assets for a Twin. `Knowledge Pack UPDATES Twin` means the pack proposes or supplies accepted update material for the owning Twin process. Neither relationship makes every interpretation canonical without the target Twin owner's validation and acceptance.

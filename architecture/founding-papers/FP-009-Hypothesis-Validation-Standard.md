@@ -276,3 +276,19 @@ Learning should also preserve humility. A won pursuit does not prove every suppo
 ## Relationship to CIRM
 
 This paper governs the hypothesis validation stage of CIRM. It defines how Flora creates, tests, strengthens, weakens, rejects and retires hypotheses using signals from [FP-007](FP-007-Strategic-Signal-Standard.md) and feeding conviction decisions in [FP-008](FP-008-Commercial-Conviction-Model.md).
+
+## Phase 3 extension — Cross-Twin hypothesis validation
+
+Hypothesis validation applies to Participant hypotheses, Industry hypotheses, Account–Participant fit hypotheses, Opportunity hypotheses and cross-Twin commercial recommendations.
+
+### Cross-Twin hypothesis classes
+
+- **Participant hypothesis:** proposition about a participant capability, strength, weakness, strategy, delivery reliability, vulnerability, account presence or incumbent position.
+- **Industry hypothesis:** proposition about market structure, regulation, demand, investment, participant movement, capability gaps or opportunity clusters.
+- **Account–Participant fit hypothesis:** proposition that a participant is strong, weak or partially fit for a specific account need under declared procurement, incumbent, relationship, delivery and constraint conditions.
+- **Opportunity hypothesis:** proposition about why an opportunity exists, when it may become actionable, which participants matter and what evidence would strengthen or weaken pursuit.
+- **Cross-Twin commercial recommendation:** recommendation that depends on inspectable lineage across at least two Twins.
+
+### Required validation rules
+
+No recommendation may rely only on a Participant marketing claim. Account-relative fit must cite both account evidence and participant evidence. Contradictory account or participant evidence must remain visible in the hypothesis and any recommendation derived from it. Weak fit must default to learning, validation or evidence-demand posture. Strong recommendations require inspectable lineage across both Twins, including Evidence, Observations, confidence, freshness, Unknowns, Contradictions and validation status.
