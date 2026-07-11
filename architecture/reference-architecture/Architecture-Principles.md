@@ -40,7 +40,14 @@ Significant runtime changes should explain which principles they implement, whic
 
 ## Architecture v2.0 principles
 
+- **Separate intelligence creation from governance.** Creation processes may identify, infer, draft or package intelligence, but governance decides truth status, acceptance, release and promotion.
+- **Knowledge Packs are the standard exchange mechanism.** CIOS exchanges governed portable knowledge through Knowledge Packs rather than ad hoc files, untracked summaries or presentation-only artefacts.
 - **Exchange is not canonical promotion.** Knowledge Pack acceptance validates package handling; canonical acceptance remains with the owning Enterprise Twin, Industry Twin, Market Participant Twin, Opportunity Twin, Relational Twin or EI model process.
-- **Presentation is interpretation.** Twin Presentation Models render, navigate and explain governed knowledge; they must not be treated as evidence or durable memory unless their claims are separately accepted.
+- **Presentation Models are governed interpretations.** Twin Presentation Models render, navigate and explain governed knowledge for a defined audience and purpose; they are not themselves Evidence, Observations or durable model memory.
+- **Accepted interpretation is not canonical fact.** A rendered or accepted interpretation may be approved for use while its claims remain labelled as interpretation unless the owning model process separately promotes them.
+- **Industry maintenance is event-driven and risk-based.** Industry Twins should refresh when monitoring events, impact thresholds, assurance tier or market risk justify action, not only on fixed calendar cadence.
+- **Cross-Twin intelligence is a primary Flora differentiator.** Flora should compound value by comparing Enterprise, Industry, Market Participant, Opportunity and Relational Twins while preserving their authority boundaries.
+- **Cross-Twin impacts are proposed, not silently applied.** Intelligence discovered in one Twin may create Cross-Twin Impact Proposals for another Twin, but it must not overwrite target Twin state without acceptance by the target owner.
+- **Truth status and lineage must survive exchange.** Fact, inference, hypothesis, recommendation, contradiction, unknown, provenance, authorship, validation and supersession metadata must remain inspectable after packaging, repository storage and rendering.
 - **Repository handling preserves lineage.** Knowledge Repository validation must retain source, Evidence, Observation, Unknown, Contradiction, authorship and recommendation lineage.
 - **Runtime follows authority.** Flora implementation contracts must follow Accepted ADRs, FP-010, FP-011, EI-013 and the normative specifications; documentation reconciliation must not imply runtime functionality has been built.

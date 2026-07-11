@@ -39,6 +39,32 @@ CIOS exists to answer:
 - Recommendations should maximise learning before selling.
 - Commercial value comes from specificity, timing and executive relevance.
 
+
+## 4.1 Architecture v2 doctrine
+
+Architecture v2 uses one governing maxim:
+
+> Generate meaning once.
+> Structure it.
+> Retain lineage.
+> Render it many ways.
+
+Meaning should be created at the point where evidence, context and judgement are properly governed. Once created, that meaning must be structured into Knowledge Assets, Observations, Enterprise Model state, graph relationships or governed interpretations according to the owning model. Lineage must remain attached through every exchange, repository and presentation boundary. Multiple products, audiences and renderings may then use the same governed meaning without recreating or obscuring the underlying truth status.
+
+## 4.2 Change doctrine
+
+Architecture v2 treats change as a governed supply chain rather than a reporting event:
+
+- Signals suggest change.
+- Evidence proves change.
+- Observations remember change.
+- Enterprise Models accumulate change.
+- Twin releases govern change.
+- Knowledge Packs exchange change.
+- Flora compounds change across the market.
+
+This chain prevents presentation, packaging or downstream reuse from weakening the core CIOS rule: proof, memory, interpretation, exchange and action are related but separate responsibilities.
+
 ## 5. Why Observations matter
 
 Evidence is transient. It may be duplicated, stale, partial, contradictory or too granular to be reusable by itself.
