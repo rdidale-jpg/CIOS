@@ -1121,6 +1121,47 @@ Editorial changes, examples and research workflow improvements MAY update this C
 
 ---
 
+## 19. Twin Knowledge Pack release contract
+
+Future authoritative Commercial Digital Twin releases MUST be released as Knowledge Packs under ADR-016, FP-010, FP-011, EI-013, the Knowledge Pack Specification v1.0 and the Twin Presentation Model Specification v1.0.
+
+A release archive MUST contain this top-level structure:
+
+```text
+manifest.json
+metadata.json
+validation.json
+lineage.json
+checksums.sha256
+payload/twin/
+payload/presentation-model/
+attachments/
+```
+
+`manifest.json` is the authoritative release manifest and MUST validate against `architecture/specifications/knowledge-packs/twin-release-manifest.schema.json`. It MUST declare pack ID and version, Twin ID and Twin version, release ID, audience and purpose, source cut-off, producer identity, truth status, stable object ID policy, Evidence and Observation lineage references, Unknowns, Contradictions, human-supplied knowledge labels, validation state, supersession references and checksum location.
+
+The release MUST preserve stable object IDs for material Twin objects, Presentation Model objects, Evidence references, Observations, Unknowns, Contradictions and human-supplied knowledge labels. Re-release, refresh or correction MUST update versions and supersession references without rewriting object identity history.
+
+`payload/twin/` carries governed Twin state or candidate Twin state. Imported data in that payload is candidate intelligence until accepted through the relevant owning model process. Knowledge Pack acceptance confirms valid repository handling; it does not by itself make imported content canonical Enterprise Model, Enterprise Knowledge Graph, Enterprise Behaviour or Observation fact.
+
+`payload/presentation-model/` carries one or more Twin Presentation Models. Presentation Models are governed interpretations for a stated audience and purpose. Acceptance of a Knowledge Pack or Presentation Model does not make the interpretation canonical fact; individual claims still require separate canonical acceptance where the owning model requires it. Multiple audience-specific Presentation Models MAY exist for one Twin and one release, provided each declares its audience, purpose, lineage and interpretation labels.
+
+Reports, PDFs, slide decks, executive summaries and generated narratives remain views over the Twin and Presentation Model payloads. They MUST NOT become the system-of-record boundary and MUST NOT override `manifest.json`, `metadata.json`, `validation.json` or `lineage.json`.
+
+Unsupported content MUST be quarantined, explicitly labelled and reported in validation outputs. It MUST NOT be silently promoted into Twin payloads, Presentation Models, canonical memory or reports.
+
+Unknowns MUST remain first-class release content. They MUST be carried in `lineage.json` or referenced payload files with stable IDs, materiality, source context, affected claims or objects and next learning actions. A release MUST NOT replace an Unknown with invented precision.
+
+Contradictions MUST remain first-class release content. They MUST be carried in `lineage.json` or referenced payload files with stable IDs, competing claims, Evidence references, affected objects, current adjudication state and next resolution action. A release MUST NOT hide contradictions behind a single confident narrative.
+
+Human-supplied knowledge MUST remain labelled at claim or object level. Labels MUST distinguish human input from public Evidence, machine extraction, inference, Hypothesis, Recommendation and Presentation Model interpretation.
+
+Validation state MUST be explicit. A valid Knowledge Pack can be accepted for repository storage while individual claims remain candidate, unsupported, contradicted, Unknown, rejected, quarantined or awaiting canonical promotion.
+
+Backward compatibility: existing Flora Blueprint ZIPs using `blueprint_manifest.json` MAY be received as legacy packages. A compatibility adapter SHOULD map the legacy identity, source cut-off, files, checksum and validation record into the Knowledge Pack structure above, preserve the original ZIP as an attachment or immutable source artefact, assign a new pack ID and release ID, and label all imported content as candidate intelligence until governed acceptance. Legacy reports MUST remain views; unsupported legacy rows or files MUST be quarantined rather than promoted.
+
+---
+
 ## Appendix A — Minimal transformation causal trace
 
 ```text
