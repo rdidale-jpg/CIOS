@@ -11,13 +11,31 @@ from cios.applications.flora.web.app import _content_type_for_path
 OWNER = {"X-Flora-User":"rob","X-Flora-Active-Workspace":"CIOS","X-Flora-Enterprises":"CIOS","X-Flora-Roles":"owner"}
 NON_OWNER = {"X-Flora-User":"alice","X-Flora-Active-Workspace":"CIOS","X-Flora-Enterprises":"CIOS","X-Flora-Roles":"viewer"}
 
+VALID_METADATA = {
+    "package_name": "FLORA-Architecture-Baseline-abc1234.zip",
+    "repository": "Rob/CIOS",
+    "branch": "main",
+    "commit_sha": "abc1234567890",
+    "generated_at": "2026-07-11T00:00:00Z",
+    "release_tag": "architecture-baseline-latest",
+    "release_url": "https://github.com/Rob/CIOS/releases/tag/architecture-baseline-latest",
+    "asset_url": "https://github.com/Rob/CIOS/releases/download/architecture-baseline-latest/FLORA-Architecture-Baseline-abc1234.zip",
+    "checksum": "a" * 64,
+    "file_count": 12,
+    "total_size": 3456,
+    "export_profile": "architecture-reconciliation",
+    "workflow_run_id": "12345",
+}
+
 
 def test_owner_can_access_architecture_export(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setattr(ae, "validated_export_metadata", lambda: None)
     html, status = ae.architecture_export_page(OWNER)
     assert status == 200
     assert "Architecture Export" in html
-    assert "Generate architecture package unavailable" in html
+    assert "Architecture package unavailable" in html
+    assert "Generate architecture package" not in html
 
 
 def test_non_owner_cannot_access_architecture_export(monkeypatch, tmp_path):
@@ -25,18 +43,6 @@ def test_non_owner_cannot_access_architecture_export(monkeypatch, tmp_path):
     html, status = ae.architecture_export_page(NON_OWNER)
     assert status == 403
     assert "User not authorised" in html
-
-
-def test_generate_dispatches_correct_workflow(monkeypatch, tmp_path):
-    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
-    monkeypatch.setenv("FLORA_GITHUB_TOKEN", "server-only-token")
-    calls = []
-    monkeypatch.setattr(ae, "_github", lambda method, endpoint, payload=None: calls.append((method, endpoint, payload)) or {})
-    record = ae.dispatch_export(OWNER, requested_ref="abc123", export_profile="architecture-reconciliation")
-    assert record.requested_ref == "abc123"
-    assert calls[0][0] == "POST"
-    assert calls[0][1].endswith("/actions/workflows/export-flora-architecture.yml/dispatches")
-    assert calls[0][2]["inputs"]["git_ref"] == "abc123"
 
 
 def _repo(tmp_path: Path, files: dict[str, str], manifest_files: list[dict]):
@@ -89,22 +95,35 @@ def test_relative_paths_are_preserved(tmp_path):
     assert ae.validate_manifest(tmp_path)["files"] == ["docs/a.md"]
 
 
-def test_successful_workflow_exposes_one_download_button(monkeypatch, tmp_path):
+def test_valid_metadata_shows_ready_commit_checksum_and_download(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
-    rec = ae.ExportAuditRecord("id","rob","CIOS","Rob/CIOS","main",status="Succeeded",requested_at="now")
-    d = rec.__dict__.copy(); ae.save_records([d])
+    monkeypatch.setattr(ae, "validated_export_metadata", lambda: VALID_METADATA)
     html, status = ae.architecture_export_page(OWNER)
     assert status == 200
+    assert "Ready" in html
+    assert VALID_METADATA["commit_sha"] in html
+    assert VALID_METADATA["checksum"] in html
     assert html.count("Download latest package") == 1
+    assert "Open GitHub release" in html
 
 
-def test_expired_artifact_shows_regeneration_action(monkeypatch, tmp_path):
+def test_missing_metadata_shows_clear_unavailable_state(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
-    d = ae.ExportAuditRecord("id","rob","CIOS","Rob/CIOS","main",status="Succeeded",requested_at="now").__dict__; d["artifact_expired"] = True
-    ae.save_records([d])
-    html, _ = ae.architecture_export_page(OWNER)
-    assert "Architecture package expired" in html
-    assert "Generate a new package" in html
+    monkeypatch.setattr(ae, "validated_export_metadata", lambda: (_ for _ in ()).throw(RuntimeError("No published architecture baseline was found.")))
+    html, status = ae.architecture_export_page(OWNER)
+    assert status == 200
+    assert "Architecture package unavailable" in html
+    assert "No published architecture baseline was found." in html
+    assert "Open GitHub Actions" in html
+    assert "Open GitHub releases" in html
+
+
+def test_download_link_points_to_published_release_asset(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setattr(ae, "validated_export_metadata", lambda: VALID_METADATA)
+    metadata = ae.record_download(OWNER)
+    assert metadata["asset_url"] == VALID_METADATA["asset_url"]
+    assert "releases/download/architecture-baseline-latest" in metadata["asset_url"]
 
 
 def test_download_requires_authorisation(monkeypatch, tmp_path):
@@ -113,89 +132,39 @@ def test_download_requires_authorisation(monkeypatch, tmp_path):
         ae.record_download(NON_OWNER)
 
 
-def test_github_token_never_returned_to_browser(monkeypatch, tmp_path):
-    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path)); monkeypatch.setenv("FLORA_GITHUB_TOKEN", "super-secret-token")
-    monkeypatch.setattr(ae, "_remote_integration_reason", lambda repo: "Ready")
+def test_flora_does_not_require_or_render_github_token(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_GITHUB_TOKEN", "super-secret-token")
+    monkeypatch.setattr(ae, "validated_export_metadata", lambda: VALID_METADATA)
     html, _ = ae.architecture_export_page(OWNER)
     assert "super-secret-token" not in html
+    assert ae.github_integration_status()["status"] == "Ready"
+
+
+def test_no_workflow_dispatch_or_polling_is_attempted(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    calls = []
+    monkeypatch.setattr(ae, "_fetch_json", lambda url: calls.append(url) or VALID_METADATA)
+    assert ae.github_integration_status()["status"] == "Ready"
+    assert len(calls) == 1
+    assert "/dispatches" not in calls[0]
+    assert "/actions/" not in calls[0]
+
+
+def test_optional_export_url_overrides_metadata_asset(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_ARCHITECTURE_EXPORT_URL", "https://cdn.example.com/export.zip")
+    monkeypatch.setattr(ae, "load_export_metadata", lambda: VALID_METADATA)
+    assert ae.validated_export_metadata()["asset_url"] == "https://cdn.example.com/export.zip"
 
 
 def test_export_does_not_mutate_canonical_twin_data(monkeypatch, tmp_path):
-    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path)); monkeypatch.setenv("FLORA_GITHUB_TOKEN", "t")
-    monkeypatch.setattr(ae, "_github", lambda *a, **k: {})
-    ae.dispatch_export(OWNER)
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setattr(ae, "validated_export_metadata", lambda: VALID_METADATA)
+    ae.record_download(OWNER)
     assert not (tmp_path / "memory").exists()
-    assert (tmp_path / "architecture_exports" / "audit_records.json").exists()
-
-
-def test_optional_release_publishing_requires_confirmation(monkeypatch, tmp_path):
-    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path)); monkeypatch.setenv("FLORA_GITHUB_TOKEN", "t")
-    with pytest.raises(PermissionError):
-        ae.dispatch_export(OWNER, publish_mode="release")
-
-
-def test_export_audit_records_are_retained(monkeypatch, tmp_path):
-    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path)); monkeypatch.setenv("FLORA_GITHUB_TOKEN", "t")
-    monkeypatch.setattr(ae, "_github", lambda *a, **k: {})
-    ae.dispatch_export(OWNER, requested_ref="main")
-    records = ae.load_records()
-    assert records and records[0]["requested_by"] == "rob"
+    assert (tmp_path / "architecture_exports" / "download_log.jsonl").exists()
 
 
 def test_content_type_covers_architecture_export_route():
     assert _content_type_for_path("/settings/architecture-export") == "text/html; charset=utf-8"
-
-
-def test_missing_credential_shows_not_configured(monkeypatch, tmp_path):
-    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
-    status = ae.github_integration_status()
-    assert status["status"] == "Not configured"
-    assert status["reason"] == "GitHub credential unavailable"
-
-
-def test_invalid_credential_shows_exact_failure(monkeypatch, tmp_path):
-    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
-    monkeypatch.setenv("FLORA_GITHUB_TOKEN", "invalid-token")
-    monkeypatch.setattr(ae, "_remote_integration_reason", lambda repo: (_ for _ in ()).throw(RuntimeError("Credential invalid")))
-    assert ae.github_integration_status()["reason"] == "Credential invalid"
-
-
-def test_insufficient_permission_shows_exact_failure(monkeypatch, tmp_path):
-    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
-    monkeypatch.setenv("FLORA_GITHUB_TOKEN", "limited-token")
-    monkeypatch.setattr(ae, "_remote_integration_reason", lambda repo: (_ for _ in ()).throw(RuntimeError("Insufficient Actions permission")))
-    assert ae.github_integration_status()["reason"] == "Insufficient Actions permission"
-
-
-def test_valid_credential_shows_ready(monkeypatch, tmp_path):
-    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
-    monkeypatch.setenv("FLORA_GITHUB_TOKEN", "valid-token")
-    monkeypatch.setattr(ae, "_remote_integration_reason", lambda repo: "Ready")
-    status = ae.github_integration_status()
-    assert status["status"] == "Ready"
-    assert status["token_available"] is True
-
-
-def test_workflow_status_and_artifact_metadata_checks_are_called(monkeypatch):
-    calls = []
-    def fake_github(method, endpoint, payload=None):
-        calls.append((method, endpoint, payload)); return {}
-    monkeypatch.setattr(ae, "_github", fake_github)
-    assert ae._remote_integration_reason("rdidale-jpg/CIOS") == "Ready"
-    endpoints = [call[1] for call in calls]
-    assert any("/runs?per_page=1" in endpoint for endpoint in endpoints)
-    assert any("/actions/artifacts?per_page=1" in endpoint for endpoint in endpoints)
-
-
-def test_artifact_read_forbidden_exact_failure():
-    assert ae._github_failure_reason("/repos/rdidale-jpg/CIOS/actions/artifacts", 403) == "Artifact read forbidden"
-
-
-def test_credential_value_is_never_logged(monkeypatch, tmp_path, capsys):
-    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
-    monkeypatch.setenv("FLORA_GITHUB_TOKEN", "super-secret-token")
-    monkeypatch.setattr(ae, "_remote_integration_reason", lambda repo: "Ready")
-    ae.github_integration_status()
-    captured = capsys.readouterr()
-    assert "super-secret-token" not in captured.out
-    assert "super-secret-token" not in captured.err

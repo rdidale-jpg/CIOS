@@ -33,7 +33,7 @@ from cios.applications.flora.blueprint_import.views import import_blueprint_entr
 from cios.applications.flora.enterprise_intelligence.views import executive_intelligence_brief_page
 from cios.applications.flora.enterprise_intelligence.models import ReasoningRequestV1
 from cios.applications.flora.enterprise_intelligence.runtime import EnterpriseIntelligenceRuntime
-from cios.applications.flora.architecture_export import architecture_export_page, dispatch_export, record_download
+from cios.applications.flora.architecture_export import architecture_export_page, record_download
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -238,16 +238,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(html, status=status)
             elif parsed.path == "/settings/architecture-export/download":
                 try:
-                    record_download(self.headers)
-                    self._redirect("/settings/architecture-export")
+                    metadata = record_download(self.headers)
+                    self._redirect(metadata["asset_url"])
                 except PermissionError:
                     self.send_error(403, "User not authorised")
                 except RuntimeError as exc:
-                    self._html(settings_page() + str(exc), status=410 if "expired" in str(exc).lower() else 400)
-            elif parsed.path == "/settings/architecture-export/manifest":
-                self._download_json({"manifest_source":"FLORA_ARCHITECTURE_DOWNLOAD_MANIFEST.json"}, "architecture-export-manifest.json")
-            elif parsed.path == "/settings/architecture-export/exclusions":
-                self._download_json({"sensitive_exclusions":[".env","credentials","API keys","private keys","tokens","database files","logs","node_modules","caches","build outputs",".git"]}, "architecture-export-exclusions.json")
+                    self._html(settings_page() + str(exc), status=404)
             elif parsed.path == "/settings.html":
                 self._redirect("/settings")
             elif parsed.path == "/settings":
@@ -314,14 +310,6 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             req = ReasoningRequestV1.create(enterprise_id=enterprise_id, workspace_id=self.headers.get('X-Flora-Active-Workspace') or enterprise_id, requested_by=self.headers.get('X-Flora-User') or 'unknown')
             EnterpriseIntelligenceRuntime().generate(req)
             self._redirect(f"/digital-twins/{enterprise_id}/canvas#executive-intelligence-brief")
-        elif self.path == "/settings/architecture-export/generate":
-            try:
-                dispatch_export(self.headers, requested_ref=_one(form, "git_ref"), export_profile=_one(form, "export_profile") or "architecture-reconciliation", publish_mode=_one(form, "publish_mode") or "artifact", explicit_release_confirmation=_one(form, "confirm_release") == "yes")
-                self._redirect("/settings/architecture-export")
-            except PermissionError as exc:
-                self.send_error(403, str(exc))
-            except RuntimeError as exc:
-                self._html(settings_page() + f"<p>{str(exc)}</p>", status=503)
         elif self.path == "/flora/bt-digital-twin":
             start_bt_digital_twin()
             self._redirect("/flora")
