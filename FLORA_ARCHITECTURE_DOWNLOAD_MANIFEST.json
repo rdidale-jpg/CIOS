@@ -1,0 +1,17 @@
+{
+  "manifest_version": "1.0",
+  "export_profiles": {
+    "architecture-reconciliation": {
+      "bundles": ["root-governance", "reference-architecture", "architecture-decisions"],
+      "excluded_categories": ["secrets", "runtime-data", "dependencies", "build-outputs", "logs", "caches", "vcs-metadata"],
+      "files": [
+        {"path": "README.md", "required": true, "bundle": "root-governance"},
+        {"path": "CIOS-AI.md", "required": true, "bundle": "root-governance"},
+        {"path": "architecture/reference-architecture/CIOS-Reference-Architecture-v1.0.md", "required": true, "bundle": "reference-architecture"},
+        {"path": "architecture/reference-architecture/Document-Map.md", "required": true, "bundle": "reference-architecture"},
+        {"path": "architecture/reference-architecture/Glossary.md", "required": true, "bundle": "reference-architecture"},
+        {"path": "architecture/decisions/README.md", "required": true, "bundle": "architecture-decisions"}
+      ]
+    }
+  }
+}

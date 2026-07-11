@@ -33,6 +33,7 @@ from cios.applications.flora.blueprint_import.views import import_blueprint_entr
 from cios.applications.flora.enterprise_intelligence.views import executive_intelligence_brief_page
 from cios.applications.flora.enterprise_intelligence.models import ReasoningRequestV1
 from cios.applications.flora.enterprise_intelligence.runtime import EnterpriseIntelligenceRuntime
+from cios.applications.flora.architecture_export import architecture_export_page, dispatch_export, record_download
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -232,6 +233,21 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(rob_score_page(parsed.path.removeprefix("/score/").removesuffix("/rob-score"), saved=parse_qs(parsed.query).get("saved") == ["1"]))
             elif parsed.path.startswith("/score/"):
                 self._html(score_page(parsed.path.removeprefix("/score/")))
+            elif parsed.path == "/settings/architecture-export":
+                html, status = architecture_export_page(self.headers)
+                self._html(html, status=status)
+            elif parsed.path == "/settings/architecture-export/download":
+                try:
+                    record_download(self.headers)
+                    self._redirect("/settings/architecture-export")
+                except PermissionError:
+                    self.send_error(403, "User not authorised")
+                except RuntimeError as exc:
+                    self._html(settings_page() + str(exc), status=410 if "expired" in str(exc).lower() else 400)
+            elif parsed.path == "/settings/architecture-export/manifest":
+                self._download_json({"manifest_source":"FLORA_ARCHITECTURE_DOWNLOAD_MANIFEST.json"}, "architecture-export-manifest.json")
+            elif parsed.path == "/settings/architecture-export/exclusions":
+                self._download_json({"sensitive_exclusions":[".env","credentials","API keys","private keys","tokens","database files","logs","node_modules","caches","build outputs",".git"]}, "architecture-export-exclusions.json")
             elif parsed.path == "/settings":
                 self._html(settings_page())
             elif parsed.path == "/logbook":
@@ -292,6 +308,14 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             req = ReasoningRequestV1.create(enterprise_id=enterprise_id, workspace_id=self.headers.get('X-Flora-Active-Workspace') or enterprise_id, requested_by=self.headers.get('X-Flora-User') or 'unknown')
             EnterpriseIntelligenceRuntime().generate(req)
             self._redirect(f"/digital-twins/{enterprise_id}/canvas#executive-intelligence-brief")
+        elif self.path == "/settings/architecture-export/generate":
+            try:
+                dispatch_export(self.headers, requested_ref=_one(form, "git_ref"), export_profile=_one(form, "export_profile") or "architecture-reconciliation", publish_mode=_one(form, "publish_mode") or "artifact", explicit_release_confirmation=_one(form, "confirm_release") == "yes")
+                self._redirect("/settings/architecture-export")
+            except PermissionError as exc:
+                self.send_error(403, str(exc))
+            except RuntimeError as exc:
+                self._html(settings_page() + f"<p>{str(exc)}</p>", status=503)
         elif self.path == "/flora/bt-digital-twin":
             start_bt_digital_twin()
             self._redirect("/flora")
@@ -481,7 +505,7 @@ def _redirects_to_flora(path: str) -> bool:
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path in {"/", "/flora", "/flora/", "/pilot-sign-in"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports":
+    if path in {"/", "/flora", "/flora/", "/pilot-sign-in"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export"):
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
