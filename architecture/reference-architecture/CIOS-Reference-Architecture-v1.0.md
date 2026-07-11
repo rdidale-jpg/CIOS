@@ -69,12 +69,48 @@ Observable Reality
 → Observations
 → Enterprise Models
 → Commercial Digital Twins
-→ Twin Presentation Models
+→ Presentation Models
 → Knowledge Packs
-→ Flora validation, repository and distribution
-→ Executive understanding and action
-→ outcomes and learning
+→ Flora
+→ Executive action and learning
 ```
+
+
+### Architecture v2.0 intelligence domains
+
+**Enterprise Intelligence** is the governed discipline that turns evidence-backed Observations into durable Enterprise Models, graph state, behaviour state, commercial reasoning and learning. It owns canonical meaning through EI-001, EI-002, EI-003, EI-012 and related Enterprise Intelligence papers.
+
+**Commercial Digital Twins** are governed, time-aware representations of commercially relevant reality. The v2.0 twin taxonomy includes:
+
+- **Enterprise Twin** — durable model of a monitored enterprise and its leadership, economics, operations, technologies, pressures, behaviours, opportunities and relationships.
+- **Industry Twin** — durable model of industry structure, change, demand, regulation, participant movement and common transformation pressure.
+- **Market Participant Twin** — durable model of a supplier, competitor, partner or other participant in a market, including role, capabilities, account-relative strengths, weaknesses, fit, access, incumbent position and supporting evidence.
+- **Opportunity Twin** — durable model of a specific potential commercial opportunity, including need, timing, route to market, blockers, hypotheses, conviction and next best learning action.
+- **Relational Twin** — durable model of relationships between enterprises, executives, suppliers, partners, competitors, programmes, contracts and opportunities.
+
+**Presentation Intelligence** is governed interpretation for human consumption. Presentation Models, including Twin Presentation Models, explain and render what the system understands, but they are not canonical fact unless their claims are separately accepted by the owning model process.
+
+**Knowledge Exchange Architecture** is the exchange boundary for portable intelligence. Knowledge Packs package Knowledge Assets, Presentation Models, lineage and metadata for validation, repository handling, rendering, comparison and distribution without silently mutating canonical memory.
+
+### Cross-Twin intelligence and change flow
+
+Commercial advantage compounds when CIOS compares Twins rather than repeatedly reconstructing single-account context. Cross-Twin intelligence compares Enterprise, Industry, Market Participant, Opportunity and Relational Twins to identify patterns, contradictions, role changes, account-relative strengths and weaknesses, participant fit, opportunity adjacency and portfolio-level learning.
+
+The **Industry Change Queue** is the governed queue of material industry events, weak signals, participant moves, regulation, demand shifts and contradictions awaiting triage against Industry Twins and affected Enterprise, Market Participant, Opportunity and Relational Twins. It supports continuous monitoring, weekly triage, monthly release, quarterly assurance and event-driven review as documented lifecycle cadences; these cadences are documentation commitments, not runtime implementation in this reference update.
+
+An **account–participant assessment** compares a Market Participant Twin against an Enterprise Twin or Opportunity Twin. It must distinguish supplier, competitor and partner roles; account-relative strengths and weaknesses; relationship access; incumbent position; provider fit; evidence quality; Unknowns; and Contradictions.
+
+### GPT, Flora and canonical-memory responsibility split
+
+GPT and other generative providers may create candidate intelligence, including draft Twin releases, Presentation Models and Knowledge Packs. Their output remains candidate interpretation until governed validation and acceptance occur.
+
+Flora is responsible, as target architecture, for Knowledge Repository handling, Knowledge Pack validation, Twin Registry lookup, Presentation rendering, lineage services, release and comparison services, change queues and Cross-Twin Intelligence workflows. Flora governs, versions, renders, compares and compounds accepted packages and models; it does not convert interpretation into fact merely because it accepted, rendered or distributed a package.
+
+Flora-native AI should focus preferentially where accumulated context creates advantage: cross-Twin intelligence, release comparison, change detection, account–participant assessment and learning across accepted Knowledge Packs.
+
+### Runtime reasoning boundary
+
+Account-level runtime reasoning remains permitted. It is optional when an accepted Presentation Model already exists for the intended executive view. Runtime reasoning output must never silently mutate canonical Enterprise Models, graph state, behaviour state or Observations; canonical writes require the owning model acceptance process.
 
 This flow extends rather than replaces CIRM. FP-009 continues to govern hypothesis validation and inspectable recommendation lineage. Knowledge Pack acceptance means the package is valid for repository handling; it does not silently promote contained claims into EI-001 Enterprise Models, EI-002 graph state, EI-003 behaviour state or EI-012 Observations. Flora may later validate, version, store, render and distribute accepted Knowledge Packs, but this reference update is documentation-only and does not implement Flora runtime functionality.
 

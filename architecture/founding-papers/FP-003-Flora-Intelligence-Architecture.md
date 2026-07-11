@@ -119,9 +119,30 @@ Promotion is explicit. It adds assurance for external publication or consequenti
 
 ## Architecture v2.0 Flora boundary
 
-Under Architecture v2.0, Flora remains the first CIOS runtime implementation, not the owner of canonical architecture semantics. Flora may later validate, version, store, render and distribute accepted Knowledge Packs and accepted Twin Presentation Models according to ADR-016, FP-010, FP-011, EI-013, the Knowledge Pack Specification v1.0 and the Twin Presentation Model Specification v1.0. That later runtime role must preserve the accepted boundary that package acceptance is repository acceptance, not automatic canonical fact acceptance.
+Under Architecture v2.0, Flora remains the first CIOS runtime implementation, not the owner of canonical architecture semantics. Flora may later validate, version, store, render, compare and distribute accepted Knowledge Packs and accepted Twin Presentation Models according to ADR-016, FP-010, FP-011, EI-013, the Knowledge Pack Specification v1.0 and the Twin Presentation Model Specification v1.0. That later runtime role must preserve the accepted boundary that package acceptance is repository acceptance, not automatic canonical fact acceptance.
 
-When an accepted Twin Presentation Model exists, Flora may render it as Presentation Intelligence without re-performing full account-level reasoning solely to produce the same executive view. Any contained hypotheses or recommendations remain governed by FP-009 and ADR-005 lineage rules, and any claim promoted into an Enterprise Model, Enterprise Knowledge Graph, behaviour model or Observation must satisfy the owning EI acceptance process.
+GPT and other generative providers may create candidate intelligence, including draft Twin releases, Presentation Models and Knowledge Packs. Acceptance of those artefacts does not upgrade interpretation into fact. Any claim promoted into an Enterprise Model, Enterprise Knowledge Graph, behaviour model or Observation must satisfy the owning EI acceptance process.
+
+### Flora capability state
+
+| Capability | Architecture v2.0 responsibility | State |
+| --- | --- | --- |
+| Knowledge Repository | Store accepted Knowledge Packs and Knowledge Assets with metadata, lineage and retrieval controls. | planned |
+| Knowledge Pack Validator | Validate package structure, required metadata, lineage, compatibility and acceptance status. | target |
+| Twin Registry | Register and resolve Enterprise, Industry, Market Participant, Opportunity and Relational Twins and their releases. | planned |
+| Presentation Renderer | Render accepted Presentation Models and Knowledge Pack views without reinterpreting them as fact. | partial |
+| Lineage Service | Preserve traceability from rendered claims through packages, models, Observations, Evidence and Sources. | partial |
+| Release and Comparison Service | Version, compare and explain differences between Twin releases, Presentation Models and Knowledge Packs. | planned |
+| Change Queue | Maintain Industry Change Queue and account-level review queues for triage, release and event-driven review. | planned |
+| Cross-Twin Intelligence platform | Compare Twins to identify market patterns, account-participant fit, contradictions, adjacency and portfolio learning. | target |
+
+### Cross-Twin Intelligence focus
+
+Flora-native AI should focus preferentially on Cross-Twin Intelligence because accumulated context creates durable advantage. The target role is to compare Enterprise Twins, Industry Twins, Market Participant Twins, Opportunity Twins and Relational Twins; identify account-relative participant strengths and weaknesses; detect industry change; surface contradictions; and compound learning across accepted Knowledge Packs.
+
+Industry Twin operation should recognise continuous monitoring, weekly triage, monthly release, quarterly assurance and event-driven review as lifecycle cadences. Market Participant Twin operation should explicitly model supplier, competitor and partner roles plus account-relative strengths, weaknesses, fit, access and incumbent position. These are architecture obligations for future runtime work, not an implementation in this documentation repair.
+
+When an accepted Twin Presentation Model exists, Flora may render it as Presentation Intelligence without re-performing full account-level reasoning solely to produce the same executive view. Account-level runtime reasoning remains permitted when no accepted Presentation Model exists, when the decision boundary changes, when fresh evidence or contradictions require reinterpretation, or when the user requests reasoning. Any reasoning output must never silently mutate canonical memory; canonical writes require the relevant owning-model acceptance process.
 
 ## Source note
 
