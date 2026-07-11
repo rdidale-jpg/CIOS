@@ -54,3 +54,16 @@ When the provider is unavailable or structured output fails, Flora does not pres
 
 ## Consequences
 Flora gains executive-grade interpretation while preserving inspectable lineage, uncertainty and governance boundaries. The Model Explorer remains the data-oriented read model; Executive Intelligence Brief becomes the default MOD Twin view.
+
+## 2026-07-11 Architecture v2.0 reconciliation amendment
+
+This amendment narrows interpretation of ADR-014 without contradicting the accepted decision.
+
+- Account-level runtime reasoning remains permitted.
+- Account-level runtime reasoning is not required when an accepted Twin Presentation Model is supplied through the Knowledge Exchange Architecture.
+- Specialist GPTs may create account-level interpretation, provided human-supplied knowledge, Unknowns, Contradictions and recommendations remain labelled with inspectable lineage.
+- Flora may validate, version, store and render accepted Twin Presentation Models when later runtime implementation is approved.
+- Flora-native AI should preferentially focus on Cross-Twin Intelligence across Industry Twin, Market Participant Twin, Opportunity Twin, Relational Twin and portfolio contexts.
+- Runtime reasoning must never silently upgrade interpretation into canonical fact.
+
+ADR-016 and the Architecture v2.0 specifications govern Knowledge Pack and Twin Presentation Model exchange boundaries. ADR-014 remains the accepted decision for evidence-governed account-level runtime reasoning where Flora performs interpretation directly.

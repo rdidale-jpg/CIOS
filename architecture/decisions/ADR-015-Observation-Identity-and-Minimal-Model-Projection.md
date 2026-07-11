@@ -1,7 +1,12 @@
-# ADR-009: Observation Identity and Minimal Model Projection
+# ADR-015: Observation Identity and Minimal Model Projection
 
 Status: Proposed
 Date: 2026-07-04
+Owner: Rob / CIOS
+Supersedes: None
+Superseded by: None
+
+> Renumbering note: this proposed ADR was formerly ADR-009. It was renumbered to ADR-015 on 2026-07-11 to preserve accepted ADR-009 — Progressive Assurance for Commercial Digital Twins.
 
 ## Context
 
