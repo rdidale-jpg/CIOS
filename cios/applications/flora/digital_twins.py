@@ -150,16 +150,19 @@ def digital_twins_landing_page(headers=None) -> str:
     cards = ''.join(_governed_twin_card(t) for t in twins)
     empty = "<p>No governed Digital Twins are available to this signed-in account.</p>" if not cards else ""
     body = f"""<section class='hero'><h1>Digital Twins</h1><p class='muted'>Governed Commercial Digital Twins available to your signed-in account.</p><p><a href='/blueprint-import'>Import Blueprint</a></p></section>
-    <section class='card'><h2>Available Twins</h2>{empty}<div class='grid'>{cards}</div></section>"""
+    <section class='card'><h2>Available Twins</h2><p class='muted'>Select a governed Twin to open its Canvas.</p>{empty}<div class='grid'>{cards}</div></section>"""
     return _page('Digital Twins', body)
 
 
 def _governed_twin_card(t: GovernedTwinListItem) -> str:
-    import_link = f"<a href='/blueprint-import/{escape(t.import_run_id)}'>View import record</a> · <a href='/blueprint-import/{escape(t.import_run_id)}'>View validation</a>" if t.import_run_id else ""
+    import_link = f"<a href='/blueprint-import/{escape(t.import_run_id)}'>View import history</a>" if t.import_run_id else "<span>Import history unavailable</span>"
     name = "MOD" if t.enterprise_id == "MOD" or t.enterprise_name.casefold() == "mod" else t.enterprise_name
-    return f"""<article class='card'>
+    latest = _human_date(t.latest_trusted_update)
+    source = _human_date(t.latest_research_date)
+    status = "Ready to open governed Canvas" if t.maturity_or_acceptance else "Governed Twin available"
+    return f"""<article class='card twin-tile'>
     <h3>{escape(name)}</h3><p class='muted'>Governed Enterprise Canvas</p>
-    <dl><dt>Twin version</dt><dd>{escape(t.twin_version)}</dd><dt>Latest trusted update</dt><dd>{escape(_human_date(t.latest_trusted_update))}</dd><dt>Latest research/source date</dt><dd>{escape(_human_date(t.latest_research_date))}</dd><dt>Maturity/acceptance</dt><dd>{escape(t.maturity_or_acceptance)}</dd></dl>
+    <dl><dt>Enterprise name</dt><dd>{escape(name)}</dd><dt>Twin version</dt><dd>{escape(t.twin_version)}</dd><dt>Progressive Assurance</dt><dd>{escape(t.maturity_or_acceptance)}</dd><dt>Latest refresh</dt><dd>{escape(latest)}</dd><dt>Source cut-off</dt><dd>{escape(source)}</dd><dt>Status summary</dt><dd>{escape(status)}</dd></dl>
     <p><a class='button' href='/digital-twins/{escape(t.enterprise_id)}/canvas'>Open Twin</a></p><p class='muted'>{import_link}</p>
     </article>"""
 

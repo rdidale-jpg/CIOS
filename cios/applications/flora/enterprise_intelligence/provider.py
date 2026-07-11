@@ -28,11 +28,16 @@ class StaticJSONProvider(LLMProvider):
 
 class OpenAIResponsesProvider(LLMProvider):
     provider_name='openai'
-    def __init__(self, api_key: str, model: str): self.api_key=api_key; self.model=model
+    def __init__(self, api_key: str, model: str, base_url: str = '', api_version: str = ''):
+        self.api_key=api_key; self.model=model; self.base_url=(base_url or 'https://api.openai.com/v1').rstrip('/'); self.api_version=api_version
     def generate_structured(self, *, prompt, schema, timeout_s, token_budget):
         start=time.time()
         body={'model':self.model,'input':prompt,'max_output_tokens':int(os.getenv('FLORA_REASONING_MAX_OUTPUT_TOKENS','2000')),'text':{'format':{'type':'json_schema','name':schema.get('name','ExecutiveCommercialBriefV1'),'schema':{'type':'object','additionalProperties':True, **{k:v for k,v in schema.items() if k in {'required'}}},'strict':True}}}
-        req=urllib.request.Request('https://api.openai.com/v1/responses', data=json.dumps(body).encode(), headers={'Authorization':'Bearer '+self.api_key,'Content-Type':'application/json'})
+        url=self.base_url + '/responses'
+        if self.api_version:
+            sep='&' if '?' in url else '?'
+            url=f'{url}{sep}api-version={self.api_version}'
+        req=urllib.request.Request(url, data=json.dumps(body).encode(), headers={'Authorization':'Bearer '+self.api_key,'Content-Type':'application/json'})
         try:
             with urllib.request.urlopen(req, timeout=timeout_s) as resp: data=json.loads(resp.read().decode())
         except Exception as exc:
@@ -52,7 +57,8 @@ def provider_diagnostics() -> dict[str,Any]:
     provider=os.getenv('FLORA_REASONING_PROVIDER') or os.getenv('FLORA_ENTERPRISE_INTELLIGENCE_PROVIDER') or ''
     model=os.getenv('FLORA_REASONING_MODEL') or os.getenv('FLORA_ENTERPRISE_INTELLIGENCE_MODEL') or ''
     key=bool(os.getenv('FLORA_REASONING_API_KEY') or os.getenv('OPENAI_API_KEY'))
-    return {'provider':provider or 'not configured','model':model or 'not configured','api_key_available':key,'timeout_seconds':os.getenv('FLORA_REASONING_TIMEOUT_SECONDS','30'),'max_input_tokens':os.getenv('FLORA_REASONING_MAX_INPUT_TOKENS','24000'),'max_output_tokens':os.getenv('FLORA_REASONING_MAX_OUTPUT_TOKENS','2000')}
+    configured=bool(provider and model and key)
+    return {'provider':provider or 'not configured','model':model or 'not configured','configured':configured,'api_key_available':key,'timeout_seconds':os.getenv('FLORA_REASONING_TIMEOUT_SECONDS','30'),'max_input_tokens':os.getenv('FLORA_REASONING_MAX_INPUT_TOKENS','24000'),'max_output_tokens':os.getenv('FLORA_REASONING_MAX_OUTPUT_TOKENS','2000'),'base_url_configured':bool(os.getenv('FLORA_REASONING_BASE_URL') or os.getenv('FLORA_REASONING_API_BASE')),'api_version_configured':bool(os.getenv('FLORA_REASONING_API_VERSION'))}
 
 def provider_from_env() -> LLMProvider:
     if os.environ.get('FLORA_ENTERPRISE_INTELLIGENCE_STATIC_JSON'):
@@ -62,5 +68,5 @@ def provider_from_env() -> LLMProvider:
     if not model: return UnavailableProvider('FLORA_REASONING_MODEL is not configured')
     key=os.getenv('FLORA_REASONING_API_KEY') or (os.getenv('OPENAI_API_KEY') if provider=='openai' else '')
     if not key: return UnavailableProvider('FLORA_REASONING_API_KEY is not configured')
-    if provider=='openai': return OpenAIResponsesProvider(key, model)
+    if provider=='openai': return OpenAIResponsesProvider(key, model, os.getenv('FLORA_REASONING_BASE_URL') or os.getenv('FLORA_REASONING_API_BASE') or '', os.getenv('FLORA_REASONING_API_VERSION') or '')
     return UnavailableProvider(f'Unsupported FLORA_REASONING_PROVIDER {provider!r}')
