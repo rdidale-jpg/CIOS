@@ -6840,3 +6840,18 @@ The Chief Architect must steward Architecture v2.0 as an extension of CIOS, not 
 For Knowledge Exchange work, the Chief Architect must test whether the design preserves the boundary between repository acceptance and canonical acceptance. Knowledge Packs may be valid for Flora validation, repository handling, rendering and distribution without making their contents canonical Enterprise Model, Enterprise Knowledge Graph, Enterprise Behaviour or Observation state. Twin Presentation Models are Presentation Intelligence: useful for executive understanding and review, but still interpretation unless their claims are separately accepted by the owning model process.
 
 The Chief Architect should require every v2.0 implementation proposal to cite ADR-016, FP-010, FP-011, EI-013, the Knowledge Pack Specification v1.0, the Twin Presentation Model Specification v1.0 and the Industry Twin Lifecycle Specification v1.0 when relevant, and to explain how EI-001, EI-002, EI-003, EI-012 and FP-009 boundaries are preserved.
+
+## Architecture v2.0 Operating Checklist
+
+Use this checklist when reviewing Architecture v2.0 documentation, runtime proposals or AI-produced intelligence:
+
+1. **Separate intelligence creation from governance.** GPTs, researchers and runtimes may create candidate Twin releases, Presentation Models and Knowledge Packs, but governance decides repository acceptance and canonical promotion.
+2. **Do not make runtime rediscover governed meaning.** If an accepted Presentation Model or Knowledge Pack already captures the intended executive view, render and compare it rather than forcing account-level runtime reasoning to reproduce the same interpretation.
+3. **Use Knowledge Packs as the exchange boundary.** Exchange packages, lineage, Presentation Models and release metadata through Knowledge Packs; do not use ad hoc report text as the system-of-record boundary.
+4. **Prefer incremental release over reconstruction.** Refresh affected Observations, Twin state, Presentation Models and Knowledge Packs; do not rebuild whole Twins unless the decision boundary or lineage integrity requires it.
+5. **Place AI where accumulated context creates advantage.** Prefer Flora-native AI for Cross-Twin Intelligence, release comparison, Industry Change Queue triage, account-participant assessment and learning across accepted Knowledge Packs.
+6. **Preserve the four pillars.** Enterprise Intelligence owns canonical meaning; Commercial Digital Twins hold governed state; Presentation Intelligence renders interpretation; Knowledge Exchange Architecture moves governed packages between parties and systems.
+7. **Preserve runtime reasoning boundaries.** Account-level runtime reasoning remains permitted, but it is optional when an accepted Presentation Model exists, and reasoning output must never silently mutate canonical memory.
+8. **Preserve Market Participant semantics.** Market Participant Twins must distinguish supplier, competitor and partner roles and assess account-relative strengths, weaknesses, fit, access, incumbent position, evidence quality, Unknowns and Contradictions.
+9. **Preserve Industry Twin cadence.** Industry Twin work must recognise continuous monitoring, weekly triage, monthly release, quarterly assurance and event-driven review as the target lifecycle cadence.
+10. **Preserve Flora's target responsibilities.** Flora should govern Knowledge Repository handling, Knowledge Pack validation, Twin Registry resolution, Presentation rendering, lineage, release comparison, Change Queues and Cross-Twin Intelligence without turning accepted interpretation into fact.

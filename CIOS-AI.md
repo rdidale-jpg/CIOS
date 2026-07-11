@@ -2,7 +2,7 @@
 
 **Status:** Living document
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-10
+**Last updated:** 2026-07-11
 
 ## Purpose
 
@@ -107,6 +107,18 @@ CIOS is not a generic scraping, dashboarding or report-generation system. It is 
 - Specialist GPT-authored Twin Presentation Models are labelled interpretation payloads. They may be rendered or exchanged but are not evidence and are not canonical fact without separate owning-model acceptance.
 - Knowledge Pack acceptance means valid repository handling; canonical promotion remains governed by EI-001, EI-002, EI-003, EI-012 and other owning model papers.
 - Hypotheses and recommendations carried in Knowledge Packs must retain FP-009 and ADR-005 lineage.
+
+### Architecture v2.0 AI responsibility rules
+
+- GPT output is candidate intelligence. It may be useful, structured and persuasive, but it is not canonical Enterprise Intelligence by default.
+- GPTs may create draft Twin releases, Presentation Models and Knowledge Packs. Those artefacts must preserve lineage, Unknowns, Contradictions and interpretation labels.
+- Flora governs, versions, renders, compares and compounds accepted Presentation Models, Twin releases and Knowledge Packs through repository, registry, rendering, lineage, release-comparison, Change Queue and Cross-Twin Intelligence services.
+- Acceptance of a Presentation Model, Twin release or Knowledge Pack does not upgrade interpretation into fact. Canonical promotion remains governed by EI-001, EI-002, EI-003, EI-012, FP-009 and other owning model papers.
+- Flora-native AI should focus preferentially on Cross-Twin Intelligence: comparing Enterprise, Industry, Market Participant, Opportunity and Relational Twins; identifying account-relative strengths and weaknesses; detecting contradictions; and compounding learning across accepted Knowledge Packs.
+- Account-level runtime reasoning remains permitted. It is optional when an accepted Presentation Model already exists for the executive view, and its output must never silently mutate canonical memory.
+- Industry Twin work should preserve the lifecycle cadences of continuous monitoring, weekly triage, monthly release, quarterly assurance and event-driven review.
+- Market Participant Twin work should model supplier, competitor and partner roles, account-relative strengths and weaknesses, fit, access, incumbent position, evidence quality, Unknowns and Contradictions.
+
 
 ## AI operating rules
 
