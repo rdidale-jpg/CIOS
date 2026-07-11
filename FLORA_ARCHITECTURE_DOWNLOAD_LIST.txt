@@ -1,0 +1,6 @@
+README.md
+CIOS-AI.md
+architecture/reference-architecture/CIOS-Reference-Architecture-v1.0.md
+architecture/reference-architecture/Document-Map.md
+architecture/reference-architecture/Glossary.md
+architecture/decisions/README.md
