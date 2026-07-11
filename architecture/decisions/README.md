@@ -23,10 +23,10 @@ Architecture Decision Records preserve enduring decisions affecting doctrine, co
 | [ADR-013](ADR-013-Enterprise-Canvas-as-Primary-Living-Twin-Navigation.md) | Enterprise Canvas as the Primary Living Twin Navigation Model | Accepted | Unknown | Rob / CIOS | None | None | Architecture decision record | Implemented/active doctrine |
 | [ADR-014](ADR-014-Evidence-Governed-Enterprise-Intelligence-Reasoning-Runtime.md) | Enterprise Intelligence Reasoning Runtime | Accepted | Unknown; amended 2026-07-11 | Rob / CIOS | None | None | See ADR body | Implemented/active doctrine |
 | [ADR-015](ADR-015-Observation-Identity-and-Minimal-Model-Projection.md) | Identity and Minimal Model Projection | Proposed | 2026-07-04 | Rob / CIOS | None | None | Architecture decision record | Historical/proposed |
-| [ADR-016](ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) | Knowledge Packs as the Standard Exchange Mechanism | Proposed for Acceptance | 2026-07-11 | Rob / CIOS | Earlier unmerged architecture update pack as merge baseline | None | See ADR body | Documentation only |
+| [ADR-016](ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) | Knowledge Packs as the Standard Exchange Mechanism | Accepted | 2026-07-11 | Rob / CIOS | Earlier unmerged architecture update pack as merge baseline | None | See ADR body | Documentation only |
 
 ## Reconciliation notes
 
 - Accepted ADR-009 — Progressive Assurance for Commercial Digital Twins is preserved. The formerly conflicting proposed Observation Identity ADR has been renumbered to ADR-015.
 - ADR-014 contains a 2026-07-11 Architecture v2.0 reconciliation amendment for Twin Presentation Models and account-level runtime reasoning.
-- ADR-016 is the Knowledge Pack ADR and remains Proposed for Acceptance pending explicit architecture-owner acceptance.
+- ADR-016 is the Knowledge Pack ADR and is accepted as the Architecture v2.0 exchange authority.

@@ -2,7 +2,7 @@
 
 **Status:** Draft
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-10
+**Last updated:** 2026-07-11
 
 This map helps readers find the architecture paper that owns a concept. The Reference Architecture is the entry point; the documents below remain the primary homes for detailed standards and models.
 
@@ -115,13 +115,13 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 
 | ID | Document | Purpose | Status | Folder | Authority relationship |
 | --- | --- | --- | --- | --- | --- |
-| ADR-016 | [Knowledge Packs as the Standard Exchange Mechanism](../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) | Establishes Knowledge Pack as the standard exchange mechanism without making package acceptance canonical fact. | Proposed for Acceptance | `architecture/decisions/` | Starts the v2.0 authority chain once accepted. |
-| FP-010 | [Knowledge Pack Architecture](../founding-papers/FP-010-Knowledge-Pack-Architecture.md) | Owns the conceptual Knowledge Pack architecture. | Proposed Foundation | `architecture/founding-papers/` | Owning Founding Paper for Knowledge Pack concepts. |
-| FP-011 | [Knowledge Exchange Architecture](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md) | Owns Knowledge Exchange Architecture and the Knowledge Supply Chain. | Proposed Foundation | `architecture/founding-papers/` | Owning Founding Paper for exchange flow and repository boundaries. |
-| EI-013 | [Knowledge Asset Exchange Model](../enterprise-intelligence/EI-013-Knowledge-Asset-Exchange-Model.md) | Owns exchanged Knowledge Asset semantics. | Proposed Foundation | `architecture/enterprise-intelligence/` | EI owner for portable asset semantics. |
-| KP-SPEC-001 | [Knowledge Pack Specification v1.0](../specifications/knowledge-packs/Knowledge-Pack-Specification-v1.0.md) | Owns the package contract. | Draft Normative Specification | `architecture/specifications/knowledge-packs/` | Normative specification under FP-010, FP-011 and EI-013. |
-| TPM-SPEC-001 | [Twin Presentation Model Specification v1.0](../specifications/presentation-models/Twin-Presentation-Model-Specification-v1.0.md) | Owns presentation payload semantics. | Draft Normative Specification | `architecture/specifications/presentation-models/` | Normative specification for accepted presentation payloads. |
-| ITL-SPEC-001 | [Industry Twin Lifecycle Specification v1.0](../specifications/industry-twins/Industry-Twin-Lifecycle-Specification-v1.0.md) | Owns Industry Twin maintenance and cadence. | Draft Normative Specification | `architecture/specifications/industry-twins/` | Normative specification for Industry Twin lifecycle. |
+| ADR-016 | [Knowledge Packs as the Standard Exchange Mechanism](../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) | Establishes Knowledge Pack as the standard exchange mechanism without making package acceptance canonical fact. | Accepted | `architecture/decisions/` | Starts the v2.0 authority chain. |
+| FP-010 | [Knowledge Pack Architecture](../founding-papers/FP-010-Knowledge-Pack-Architecture.md) | Owns the conceptual Knowledge Pack architecture. | Accepted Foundation | `architecture/founding-papers/` | Owning Founding Paper for Knowledge Pack concepts. |
+| FP-011 | [Knowledge Exchange Architecture](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md) | Owns Knowledge Exchange Architecture and the Knowledge Supply Chain. | Accepted Foundation | `architecture/founding-papers/` | Owning Founding Paper for exchange flow and repository boundaries. |
+| EI-013 | [Knowledge Asset Exchange Model](../enterprise-intelligence/EI-013-Knowledge-Asset-Exchange-Model.md) | Owns exchanged Knowledge Asset semantics. | Accepted Foundation | `architecture/enterprise-intelligence/` | EI owner for portable asset semantics. |
+| KP-SPEC-001 | [Knowledge Pack Specification v1.0](../specifications/knowledge-packs/Knowledge-Pack-Specification-v1.0.md) | Owns the package contract. | Normative Specification | `architecture/specifications/knowledge-packs/` | Normative specification under FP-010, FP-011 and EI-013. |
+| TPM-SPEC-001 | [Twin Presentation Model Specification v1.0](../specifications/presentation-models/Twin-Presentation-Model-Specification-v1.0.md) | Owns presentation payload semantics. | Normative Specification | `architecture/specifications/presentation-models/` | Normative specification for accepted presentation payloads. |
+| ITL-SPEC-001 | [Industry Twin Lifecycle Specification v1.0](../specifications/industry-twins/Industry-Twin-Lifecycle-Specification-v1.0.md) | Owns Industry Twin maintenance and cadence. | Normative Specification | `architecture/specifications/industry-twins/` | Normative specification for Industry Twin lifecycle. |
 | V2-REGISTER | [Architecture v2.0 Documentation Update Register](../programmes/cios-architecture-v2/Architecture-v2.0-Documentation-Update-Register.md) | Registers Phase 1 Architecture v2.0 additions. | Phase 1 Register | `architecture/programmes/cios-architecture-v2/` | Programme governance record. |
 
 ### Architecture v2.0 authority allocation
@@ -132,3 +132,10 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 - Knowledge Pack Specification v1.0 owns the package contract.
 - Twin Presentation Model Specification v1.0 owns presentation payload semantics.
 - Industry Twin Lifecycle Specification v1.0 owns Industry maintenance and cadence.
+
+## Architecture v2.0 reconciliation notes
+
+- The Reference Architecture now defines the four Architecture v2.0 pillars: Enterprise Intelligence, Commercial Digital Twins, Presentation Intelligence and Knowledge Exchange Architecture.
+- EI-001, EI-002, EI-003 and EI-012 remain the authority for canonical Enterprise Model, graph, behaviour and Observation acceptance. Knowledge Pack acceptance does not bypass those processes.
+- FP-009 continues to govern hypothesis validation and recommendation lineage for hypotheses or recommendations carried inside Knowledge Packs.
+- Flora runtime implementation remains out of scope for this documentation update; later runtime contracts must follow ADR-016, FP-010, FP-011, EI-013 and the v1.0 specifications.

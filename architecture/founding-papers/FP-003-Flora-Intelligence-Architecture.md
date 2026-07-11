@@ -3,7 +3,7 @@
 **Purpose:** Establish the durable intelligence philosophy and architecture for Flora as a CIOS founding capability.
 **Status:** draft
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-10
+**Last updated:** 2026-07-11
 
 ## Relationship to the CIOS Intelligence Reference Model
 
@@ -115,6 +115,13 @@ Flora Publisher renders views over governed Twin state. It does not own Twin mem
 
 Promotion is explicit. It adds assurance for external publication or consequential action without rebuilding the Twin from scratch. The promoted release must preserve lineage to the Initial Decision Twin and identify what additional evidence, review and acceptance changed.
 
+
+
+## Architecture v2.0 Flora boundary
+
+Under Architecture v2.0, Flora remains the first CIOS runtime implementation, not the owner of canonical architecture semantics. Flora may later validate, version, store, render and distribute accepted Knowledge Packs and accepted Twin Presentation Models according to ADR-016, FP-010, FP-011, EI-013, the Knowledge Pack Specification v1.0 and the Twin Presentation Model Specification v1.0. That later runtime role must preserve the accepted boundary that package acceptance is repository acceptance, not automatic canonical fact acceptance.
+
+When an accepted Twin Presentation Model exists, Flora may render it as Presentation Intelligence without re-performing full account-level reasoning solely to produce the same executive view. Any contained hypotheses or recommendations remain governed by FP-009 and ADR-005 lineage rules, and any claim promoted into an Enterprise Model, Enterprise Knowledge Graph, behaviour model or Observation must satisfy the owning EI acceptance process.
 
 ## Source note
 

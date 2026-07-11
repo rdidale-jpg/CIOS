@@ -3,7 +3,7 @@
 **Purpose:** Define the single authoritative architecture entry point for CIOS.  
 **Status:** Draft  
 **Owner:** Rob / CIOS  
-**Last updated:** 2026-07-10
+**Last updated:** 2026-07-11
 
 ## Executive Summary
 
@@ -49,6 +49,34 @@ Learning improves future reasoning.
 9. Human expertise calibrates the model but must be labelled.
 10. The platform should become more valuable as enterprise memory deepens.
 
+
+
+## Architecture v2.0 pillars
+
+Architecture v2.0 organises CIOS around four architectural pillars:
+
+1. **Enterprise Intelligence** — the evidence-backed modelling discipline for Enterprise Models, Enterprise Knowledge Graphs, Observations, behaviour, commercial reasoning and hypothesis validation. EI-001 owns the Enterprise Model, EI-002 owns graph structure, EI-003 owns behaviour semantics and EI-012 owns Observation lifecycle.
+2. **Commercial Digital Twins** — governed enterprise, industry, market-participant, opportunity and relational twins that hold durable state and make change inspectable. Twin state is canonical only when accepted through the owning model process.
+3. **Presentation Intelligence** — Twin Presentation Models and related views that render governed knowledge for review, navigation and executive understanding. Presentation payloads are interpretation unless their claims are separately accepted by the canonical owner.
+4. **Knowledge Exchange Architecture** — Knowledge Packs, Knowledge Assets, Knowledge Repository handling and the Knowledge Supply Chain governed by ADR-016, FP-010, FP-011, EI-013 and the v1.0 specifications.
+
+The principal Architecture v2.0 flow is:
+
+```text
+Observable Reality
+→ Sources
+→ Evidence
+→ Observations
+→ Enterprise Models
+→ Commercial Digital Twins
+→ Twin Presentation Models
+→ Knowledge Packs
+→ Flora validation, repository and distribution
+→ Executive understanding and action
+→ outcomes and learning
+```
+
+This flow extends rather than replaces CIRM. FP-009 continues to govern hypothesis validation and inspectable recommendation lineage. Knowledge Pack acceptance means the package is valid for repository handling; it does not silently promote contained claims into EI-001 Enterprise Models, EI-002 graph state, EI-003 behaviour state or EI-012 Observations. Flora may later validate, version, store, render and distribute accepted Knowledge Packs, but this reference update is documentation-only and does not implement Flora runtime functionality.
 
 ## Progressive Assurance operating modes
 
