@@ -17,7 +17,7 @@ def test_owner_can_access_architecture_export(monkeypatch, tmp_path):
     html, status = ae.architecture_export_page(OWNER)
     assert status == 200
     assert "Architecture Export" in html
-    assert "Generate architecture package" in html
+    assert "Generate architecture package unavailable" in html
 
 
 def test_non_owner_cannot_access_architecture_export(monkeypatch, tmp_path):
@@ -115,6 +115,7 @@ def test_download_requires_authorisation(monkeypatch, tmp_path):
 
 def test_github_token_never_returned_to_browser(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path)); monkeypatch.setenv("FLORA_GITHUB_TOKEN", "super-secret-token")
+    monkeypatch.setattr(ae, "_remote_integration_reason", lambda repo: "Ready")
     html, _ = ae.architecture_export_page(OWNER)
     assert "super-secret-token" not in html
 
@@ -143,3 +144,58 @@ def test_export_audit_records_are_retained(monkeypatch, tmp_path):
 
 def test_content_type_covers_architecture_export_route():
     assert _content_type_for_path("/settings/architecture-export") == "text/html; charset=utf-8"
+
+
+def test_missing_credential_shows_not_configured(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    status = ae.github_integration_status()
+    assert status["status"] == "Not configured"
+    assert status["reason"] == "GitHub credential unavailable"
+
+
+def test_invalid_credential_shows_exact_failure(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_GITHUB_TOKEN", "invalid-token")
+    monkeypatch.setattr(ae, "_remote_integration_reason", lambda repo: (_ for _ in ()).throw(RuntimeError("Credential invalid")))
+    assert ae.github_integration_status()["reason"] == "Credential invalid"
+
+
+def test_insufficient_permission_shows_exact_failure(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_GITHUB_TOKEN", "limited-token")
+    monkeypatch.setattr(ae, "_remote_integration_reason", lambda repo: (_ for _ in ()).throw(RuntimeError("Insufficient Actions permission")))
+    assert ae.github_integration_status()["reason"] == "Insufficient Actions permission"
+
+
+def test_valid_credential_shows_ready(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_GITHUB_TOKEN", "valid-token")
+    monkeypatch.setattr(ae, "_remote_integration_reason", lambda repo: "Ready")
+    status = ae.github_integration_status()
+    assert status["status"] == "Ready"
+    assert status["token_available"] is True
+
+
+def test_workflow_status_and_artifact_metadata_checks_are_called(monkeypatch):
+    calls = []
+    def fake_github(method, endpoint, payload=None):
+        calls.append((method, endpoint, payload)); return {}
+    monkeypatch.setattr(ae, "_github", fake_github)
+    assert ae._remote_integration_reason("rdidale-jpg/CIOS") == "Ready"
+    endpoints = [call[1] for call in calls]
+    assert any("/runs?per_page=1" in endpoint for endpoint in endpoints)
+    assert any("/actions/artifacts?per_page=1" in endpoint for endpoint in endpoints)
+
+
+def test_artifact_read_forbidden_exact_failure():
+    assert ae._github_failure_reason("/repos/rdidale-jpg/CIOS/actions/artifacts", 403) == "Artifact read forbidden"
+
+
+def test_credential_value_is_never_logged(monkeypatch, tmp_path, capsys):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_GITHUB_TOKEN", "super-secret-token")
+    monkeypatch.setattr(ae, "_remote_integration_reason", lambda repo: "Ready")
+    ae.github_integration_status()
+    captured = capsys.readouterr()
+    assert "super-secret-token" not in captured.out
+    assert "super-secret-token" not in captured.err
