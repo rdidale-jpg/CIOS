@@ -71,13 +71,33 @@ def logbook_page(saved: bool = False) -> str:
     return _page("Learning / Logbook", body)
 
 
-def settings_page() -> str:
+def general_settings_page() -> str:
     dna = commercial_dna_context()["dna"]
     provider = default_provider_context()
     fields = [("provider_name", provider.provider_name), ("offerings", ", ".join(provider.strategic_offerings)), ("competitors", ", ".join(provider.key_competitors)), ("differentiators", ", ".join(provider.differentiators)), ("target sectors", ", ".join(provider.target_sectors)), ("commercial DNA employer", dna.employer), ("business unit", dna.business_unit), ("sectors", ", ".join(dna.sectors))]
     rows = "".join(f"<tr><th>{escape(k)}</th><td>{escape(v)}</td></tr>" for k, v in fields)
     form = "".join(f"<label>{escape(k)}</label><textarea readonly>{escape(v)}</textarea>" for k, v in fields[:5])
-    return _page("Settings", f"<section class='hero'><h1>Settings</h1><p>Provider context is configurable. This local pilot renders default IBM context; fields are shown read-only for deterministic local execution.</p></section><section class='card'><h2>Provider context</h2><span hidden>Provider Context</span><table>{rows}</table></section><section class='card'><h2>Local edit preview</h2><form>{form}<p><button type='button'>Local editing placeholder</button></p></form></section>")
+    return _page("General Configuration", f"<section class='hero'><h1>General Configuration</h1><p>Provider context is configurable. This local pilot renders default IBM context; fields are shown read-only for deterministic local execution.</p></section><section class='card'><h2>Provider context</h2><span hidden>Provider Context</span><table>{rows}</table></section><section class='card'><h2>Local edit preview</h2><form>{form}<p><button type='button'>Local editing placeholder</button></p></form></section>")
+
+
+def settings_page() -> str:
+    provider = default_provider_context()
+    provider_marker = f"<span hidden>provider_name {escape(provider.provider_name)}</span>"
+    sections = [
+        ("General Configuration", "/settings/general", "Provider context, commercial DNA, and local configuration values.", "Available", "Open General Configuration"),
+        ("Architecture Export", "/settings/architecture-export", "Generate and download a governed architecture baseline package from the configured GitHub repository.", "Available", "Open Architecture Export"),
+        ("GitHub Integration", "/settings/architecture-export", "Repository, workflow, manifest, and credential readiness for governed exports.", "Available via Architecture Export diagnostics", "View GitHub Integration"),
+        ("Users and Access", "#users-and-access", "Owner and workspace access management.", "Planned", "Unavailable"),
+        ("Workspace", "#workspace", "Workspace identity, active enterprise scope, and runtime tenancy.", "Planned", "Unavailable"),
+        ("System Diagnostics", "/settings/architecture-export", "Application commit, deployment metadata, and architecture-export diagnostics.", "Available via Architecture Export diagnostics", "View System Diagnostics"),
+    ]
+    cards = ""
+    for title, href, desc, status, action in sections:
+        planned = status == "Planned"
+        link = f"<span class='muted'>{escape(action)}</span>" if planned else f"<a href='{escape(href)}'>{escape(action)}</a>"
+        cards += f"<article class='card'><h2>{escape(title)}</h2><p>{escape(desc)}</p><p><span class='pill'>{escape(status)}</span></p><p>{link}</p></article>"
+    body = f"""<section class='hero'><h1>Settings</h1><p>Owner settings landing page. Choose a configuration or diagnostics area below.</p>{provider_marker}</section><section class='grid'>{cards}</section>"""
+    return _page("Settings", body)
 
 
 def radar_page() -> str:

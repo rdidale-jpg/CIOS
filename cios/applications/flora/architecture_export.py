@@ -118,6 +118,40 @@ def _github(method: str, endpoint: str, payload: dict[str, Any] | None = None) -
         raise RuntimeError(f"GitHub API failed: {exc.code}") from exc
 
 
+
+def github_integration_status() -> dict[str, Any]:
+    repo = configured_repository()
+    credential = bool(_github_token())
+    workflow_available = bool(WORKFLOW_FILE)
+    workflow_found = (Path(WORKFLOW_FILE).exists() or Path(".github/workflows").joinpath(WORKFLOW_FILE).exists())
+    manifest_found = Path("FLORA_ARCHITECTURE_DOWNLOAD_MANIFEST.json").exists()
+    reasons = []
+    if not repo:
+        reasons.append("GitHub repository not configured")
+    if not credential:
+        reasons.append("GitHub credential unavailable")
+    if not workflow_found:
+        reasons.append("Workflow file not found")
+    if not manifest_found:
+        reasons.append("Manifest not found")
+    latest = latest_record() or {}
+    if latest.get("status") in {"failed", "Failed", "failure"}:
+        reasons.append("Latest workflow failed")
+    if not latest:
+        reasons.append("No export package generated")
+    status = "Ready" if repo and credential and workflow_found and manifest_found else "Not configured"
+    if latest.get("status") in {"failed", "Failed", "failure"}:
+        status = "Error"
+    return {
+        "status": status,
+        "repository_configured": bool(repo),
+        "workflow_available": workflow_available,
+        "token_available": credential,
+        "workflow_file_found": workflow_found,
+        "manifest_found": manifest_found,
+        "reason": reasons[0] if reasons else "Ready",
+    }
+
 def dispatch_export(headers: Any, *, requested_ref: str = "", export_profile: str = DEFAULT_PROFILE, publish_mode: str = "artifact", include_audit_reports: bool = True, explicit_release_confirmation: bool = False) -> ExportAuditRecord:
     if not is_cios_owner(headers):
         raise PermissionError("User not authorised")
@@ -206,11 +240,15 @@ def architecture_export_page(headers: Any) -> tuple[str, int]:
     if not is_cios_owner(headers):
         return _page("User not authorised", "<section class='hero'><h1>User not authorised</h1><p>Architecture Export requires owner-level permission.</p></section>"), 403
     rec = latest_record() or {}
+    integration = github_integration_status()
     status = rec.get("status") or ("GitHub integration not configured" if not github_configured() else "No export requested")
     artifact_expired = bool(rec.get("artifact_expired"))
+    ready_to_generate = integration["status"] == "Ready"
     download = "<p><a role='button' href='/settings/architecture-export/download'>Download latest package</a></p>" if rec.get("status") in {"Succeeded", "success", "completed"} and not artifact_expired else ""
+    generate = f"<form method='post' action='/settings/architecture-export/generate'><input name='export_profile' value='{DEFAULT_PROFILE}'><button>Generate architecture package</button></form>" if ready_to_generate else "<p class='muted'>Generate architecture package unavailable until the integration status is Ready.</p>"
+    empty = "" if ready_to_generate else f"<section class='card action'><h2>Architecture Export unavailable</h2><p><strong>Reason:</strong> {escape(integration['reason'])}</p><p><a href='/settings/general'>View configuration</a> · <a href='/settings/architecture-export'>Retry status</a> · <a href='https://github.com/{escape(configured_repository())}/actions/workflows/{WORKFLOW_FILE}'>Open workflow run</a></p></section>"
     expired = "<p class='warn'>Architecture package expired</p><p><button>Generate a new package</button></p>" if artifact_expired else ""
-    rows = [("Repository", configured_repository()), ("Default branch", default_branch()), ("Current application commit", application_revision()), ("Production commit, if known", production_commit() or "Unknown"), ("Latest export status", status), ("Latest export commit", rec.get("resolved_commit", "")), ("Latest export time", rec.get("completed_at") or rec.get("requested_at", "")), ("Export profile", rec.get("export_profile", DEFAULT_PROFILE)), ("Included bundle count", str(len(rec.get("included_bundles", [])))), ("Included file count", str(rec.get("file_count", ""))), ("Sensitive exclusions", ".env, credentials, keys, tokens, data, logs, caches, build outputs"), ("Package checksum", rec.get("checksum", "")), ("Package expiry", rec.get("expires_at", ""))]
+    rows = [("Repository", configured_repository()), ("Branch", default_branch()), ("Current commit", application_revision()), ("Production commit, if known", production_commit() or "Unknown"), ("Export profile", rec.get("export_profile", DEFAULT_PROFILE)), ("Latest export status", status), ("Latest export date", rec.get("completed_at") or rec.get("requested_at", "")), ("Package checksum", rec.get("checksum", "")), ("GitHub integration status", integration["status"]), ("Repository configured", "yes" if integration["repository_configured"] else "no"), ("Workflow available", "yes" if integration["workflow_available"] else "no"), ("Token/app credential available", "yes" if integration["token_available"] else "no"), ("Workflow file found", "yes" if integration["workflow_file_found"] else "no"), ("Manifest found", "yes" if integration["manifest_found"] else "no"), ("Sensitive exclusions", ".env, credentials, keys, tokens, data, logs, caches, build outputs")]
     table = "".join(f"<tr><th>{escape(k)}</th><td>{escape(str(v))}</td></tr>" for k,v in rows)
-    body = f"""<section class='hero'><h1>Architecture Export</h1><p>Owner-only governed GitHub architecture reconciliation export.</p></section><section class='card'><table>{table}</table></section><section class='card action'><form method='post' action='/settings/architecture-export/generate'><input name='export_profile' value='{DEFAULT_PROFILE}'><button>Generate architecture package</button></form><p><a href='/settings/architecture-export'>Refresh status</a></p>{download}<p><a href='/settings/architecture-export/manifest'>View export manifest</a> · <a href='/settings/architecture-export/exclusions'>View exclusions</a> · <a href='https://github.com/{escape(configured_repository())}/actions/workflows/{WORKFLOW_FILE}'>View workflow run</a></p>{expired}</section>"""
+    body = f"""<section class='hero'><h1>Architecture Export</h1><p>Generate and download a governed architecture baseline package from the configured GitHub repository.</p></section><section class='card'><table>{table}</table></section>{empty}<section class='card action'>{generate}<p><a href='/settings/architecture-export'>Retry status</a></p>{download}<p><a href='/settings/architecture-export/manifest'>View manifest</a> · <a href='/settings/architecture-export/exclusions'>View exclusions</a> · <a href='https://github.com/{escape(configured_repository())}/actions/workflows/{WORKFLOW_FILE}'>View workflow run</a></p>{expired}</section>"""
     return _page("Architecture Export", body), 200

@@ -19,7 +19,7 @@ from cios.applications.flora.live.progress import read_state, mark_stale_interru
 from cios.applications.flora.live.views import acquisition_plans_page, collection_progress_page, collection_result, collection_start_page, dashboard, evidence_page, feedback_diagnostics_page, rejected_claims_page, source_effectiveness_page, sources_page
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.rob_score import create_rob_score_record
-from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page
+from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page, general_settings_page
 from cios.applications.flora.digital_twins import digital_twins_landing_page, bt_twin_page, search_bt_twin, bt_search_progress_page, rapid_snapshot_csv
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
@@ -248,8 +248,14 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._download_json({"manifest_source":"FLORA_ARCHITECTURE_DOWNLOAD_MANIFEST.json"}, "architecture-export-manifest.json")
             elif parsed.path == "/settings/architecture-export/exclusions":
                 self._download_json({"sensitive_exclusions":[".env","credentials","API keys","private keys","tokens","database files","logs","node_modules","caches","build outputs",".git"]}, "architecture-export-exclusions.json")
+            elif parsed.path == "/settings.html":
+                self._redirect("/settings")
             elif parsed.path == "/settings":
                 self._html(settings_page())
+            elif parsed.path == "/settings/general":
+                self._html(general_settings_page())
+            elif parsed.path in {"/configuration", "/config", "/settings/configuration"}:
+                self._redirect("/settings/general")
             elif parsed.path == "/logbook":
                 self._html(logbook_page(saved=parse_qs(parsed.query).get("saved") == ["1"]))
             elif parsed.path.startswith("/case/"):
@@ -431,10 +437,11 @@ def _flora_home_page(headers=None) -> str:
 
     revision = escape(application_revision())
     decision = blueprint_upload_authorisation(headers or {})
+    owner_settings = "<p><a href='/settings'>Settings</a></p>" if decision.owner_recognised else ""
     auth = (f"<section class='card'><h2>Pilot session</h2><p>Signed in as <strong>{escape(decision.user_id)}</strong> in workspace <strong>{escape(decision.active_workspace)}</strong>. Owner recognised: {'yes' if decision.owner_recognised else 'no'}. package.upload: {'allowed' if decision.decision == 'allowed' else 'denied'}.</p><form method='post' action='/pilot-sign-out'><button type='submit'>Sign out</button></form></section>" if decision.user_id else "<section class='card action'><h2>Pilot access</h2><p>Protected Flora functions require pilot owner access.</p><p><a href='/pilot-sign-in'>Sign in for pilot access</a></p></section>")
     return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Flora Home</title><style>
     body{{font-family:Inter,Arial,sans-serif;margin:0;background:#f6f3ee;color:#17211b}} a{{color:#185c4d}} .shell{{max-width:980px;margin:auto;padding:32px}} .hero,.card{{background:#fff;border:1px solid #ded8ce;border-radius:18px;padding:24px;margin:16px 0;box-shadow:0 1px 3px #0001}} .grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}} .muted{{color:#68736c}}
-    </style></head><body><main class='shell'><section class='hero'><h1>Flora Home</h1><p class='muted'>Governed product home for Flora.</p><span hidden>Good Morning Rob</span><span hidden>Morning Edition</span><span hidden>NO LIVE EVIDENCE AVAILABLE</span><a hidden href='/score/BT'>Explain score</a><a hidden href='/financial-reports'>Collect Financial Report</a><p class='muted'>Deployed release identifier: {revision}</p></section><section class='grid'><article class='card'><h2><a href='/blueprint-import'>Import Blueprint</a></h2><p>Upload and validate governed blueprint packages without changing canonical state until approved.</p></article><article class='card'><h2><a href='/digital-twins'>Enterprise Canvas</a></h2><p>Choose a governed Twin, then open its Enterprise Canvas.</p></article><article class='card'><h2><a href='/blueprint-import/history'>Import History</a></h2><p>Review prior blueprint import runs and outcomes.</p></article></section>{auth}</main></body></html>"""
+    </style></head><body><main class='shell'><section class='hero'><h1>Flora Home</h1><p class='muted'>Governed product home for Flora.</p><span hidden>Good Morning Rob</span><span hidden>Morning Edition</span><span hidden>NO LIVE EVIDENCE AVAILABLE</span><a hidden href='/score/BT'>Explain score</a><a hidden href='/financial-reports'>Collect Financial Report</a><p class='muted'>Deployed release identifier: {revision}</p>{owner_settings}</section><section class='grid'><article class='card'><h2><a href='/blueprint-import'>Import Blueprint</a></h2><p>Upload and validate governed blueprint packages without changing canonical state until approved.</p></article><article class='card'><h2><a href='/digital-twins'>Enterprise Canvas</a></h2><p>Choose a governed Twin, then open its Enterprise Canvas.</p></article><article class='card'><h2><a href='/blueprint-import/history'>Import History</a></h2><p>Review prior blueprint import runs and outcomes.</p></article></section>{auth}</main></body></html>"""
 
 
 def _is_enterprise_intelligence_path(path: str) -> bool:
@@ -505,7 +512,7 @@ def _redirects_to_flora(path: str) -> bool:
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path in {"/", "/flora", "/flora/", "/pilot-sign-in"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export"):
+    if path in {"/", "/flora", "/flora/", "/pilot-sign-in"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export") or path == "/settings/general":
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
