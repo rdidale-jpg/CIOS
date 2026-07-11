@@ -11,76 +11,79 @@ on:
         description: Manifest export profile
         required: false
         default: architecture-reconciliation
-      publish_mode:
-        description: artifact or release
+      immutable_release:
+        description: Publish immutable historical release instead of replacing latest baseline
         required: false
-        default: artifact
-        type: choice
-        options: [artifact, release]
-      include_audit_reports:
-        description: Include audit/list/manifest files at ZIP root
-        required: false
-        default: true
+        default: false
         type: boolean
+  push:
+    branches: [main]
+    paths:
+      - architecture/**
+      - docs/**
+      - adr/**
+      - specifications/**
+      - FLORA_ARCHITECTURE_DOWNLOAD_MANIFEST.json
+      - .github/workflows/export-flora-architecture.yml
+  schedule:
+    - cron: "17 4 * * 1"
 
 permissions:
-  contents: read
-  actions: read
+  contents: write
 
 jobs:
   export:
     name: Generate governed architecture baseline
     runs-on: ubuntu-latest
-    permissions:
-      contents: ${{ inputs.publish_mode == 'release' && 'write' || 'read' }}
-      actions: read
     steps:
-      - name: Checkout requested ref
+      - name: Checkout requested ref exactly
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.git_ref || github.event.repository.default_branch }}
+          ref: ${{ inputs.git_ref || github.sha }}
           fetch-depth: 0
 
-      - name: Generate package from manifest
+      - name: Generate package and metadata from manifest
         id: package
         shell: bash
         env:
           EXPORT_PROFILE: ${{ inputs.export_profile || 'architecture-reconciliation' }}
-          REQUESTED_REF: ${{ inputs.git_ref || github.event.repository.default_branch }}
+          REQUESTED_REF: ${{ inputs.git_ref || github.ref_name }}
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
           REPOSITORY: ${{ github.repository }}
           REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}
           WORKFLOW_RUN_ID: ${{ github.run_id }}
-          WORKFLOW_FILE_VERSION: "1.0"
-          GENERATOR_VERSION: "flora-architecture-export-v1"
-          INCLUDE_AUDIT_REPORTS: ${{ inputs.include_audit_reports }}
+          GENERATOR_VERSION: flora-architecture-export-v2
+          IMMUTABLE_RELEASE: ${{ inputs.immutable_release || 'false' }}
         run: |
           python - <<'PY'
-          import hashlib, json, os, re, shutil, stat, subprocess, sys, zipfile
+          import hashlib, json, os, re, shutil, subprocess, zipfile
           from datetime import datetime, timezone
           from pathlib import Path
 
           root = Path.cwd().resolve()
           manifest_file = root / 'FLORA_ARCHITECTURE_DOWNLOAD_MANIFEST.json'
           if not manifest_file.exists(): raise SystemExit('Manifest missing')
-          try: manifest = json.loads(manifest_file.read_text(encoding='utf-8'))
-          except Exception as exc: raise SystemExit(f'Manifest invalid: {exc}')
+          manifest = json.loads(manifest_file.read_text(encoding='utf-8'))
           profile = os.environ['EXPORT_PROFILE']
           selected = manifest.get('export_profiles', {}).get(profile)
-          if not isinstance(selected, dict): raise SystemExit('Manifest invalid: selected profile missing')
-          files = selected.get('files')
-          if not isinstance(files, list): raise SystemExit('Manifest invalid: files must be a list')
-          prohibited = re.compile(r'(^|/)(\.git|node_modules|\.venv|venv|__pycache__|\.cache|dist|build|coverage|\.idea|\.vscode|__MACOSX)(/|$)|(^|/)\.DS_Store$|(^|/)\.env(\..*)?$', re.I)
+          if not isinstance(selected, dict) or not isinstance(selected.get('files'), list):
+              raise SystemExit('Manifest invalid: selected profile files missing')
+
+          prohibited = re.compile(r'(^|/)(\.git|node_modules|\.venv|venv|__pycache__|\.cache|dist|build|coverage|\.idea|\.vscode|__MACOSX|logs?)(/|$)|(^|/)\.DS_Store$|(^|/)\.env(\..*)?$', re.I)
           secret = re.compile(r'(gh[pousr]_[A-Za-z0-9_]{20,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN (RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----|(api[_-]?key|secret|token|password)\s*[:=]\s*[\'\"]?([A-Za-z0-9_./+=-]{16,}))', re.I)
           resolved = subprocess.check_output(['git','rev-parse','HEAD'], text=True).strip()
+          branch = subprocess.check_output(['git','rev-parse','--abbrev-ref','HEAD'], text=True).strip()
+          if branch == 'HEAD': branch = os.environ.get('REQUESTED_REF') or os.environ['DEFAULT_BRANCH']
           short = resolved[:7]
-          date = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
-          name = f'FLORA-Architecture-Baseline-{short}-{date}'
-          staging = root / '.flora_architecture_export' / name
+          generated_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00','Z')
+          release_date = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+          release_tag = f"architecture-baseline-{release_date}-{short}" if os.environ.get('IMMUTABLE_RELEASE','false').lower() == 'true' else 'architecture-baseline-latest'
+          package_name = f'FLORA-Architecture-Baseline-{release_date}-{short}.zip' if release_tag != 'architecture-baseline-latest' else 'FLORA-Architecture-Baseline-latest.zip'
+          staging = root / '.flora_architecture_export' / package_name.removesuffix('.zip')
           if staging.exists(): shutil.rmtree(staging)
           (staging / 'repository').mkdir(parents=True)
           included, missing_optional, total_size = [], [], 0
-          for entry in files:
+          for entry in selected['files']:
               rel = entry.get('path') if isinstance(entry, dict) else str(entry)
               required = bool(entry.get('required', True)) if isinstance(entry, dict) else True
               if not rel or Path(rel).is_absolute() or '..' in Path(rel).parts or prohibited.search(rel):
@@ -92,60 +95,48 @@ jobs:
               real = src.resolve()
               if real != root and root not in real.parents: raise SystemExit(f'Symbolic-link escape rejected: {rel}')
               if src.is_file() and src.stat().st_size < 1000000:
-                  data = src.read_bytes()
-                  if b'\0' not in data and secret.search(data.decode('utf-8','ignore')):
+                  raw = src.read_bytes()
+                  if b'\0' not in raw and secret.search(raw.decode('utf-8','ignore')):
                       raise SystemExit(f'Sensitive content detected: {rel}')
               dst = staging / 'repository' / rel
               dst.parent.mkdir(parents=True, exist_ok=True)
               shutil.copy2(src, dst, follow_symlinks=True)
               total_size += dst.stat().st_size
               included.append(rel)
-          root_files = ['FLORA_ARCHITECTURE_DOWNLOAD_MANIFEST.json']
-          if os.environ.get('INCLUDE_AUDIT_REPORTS','true').lower() == 'true':
-              root_files += ['FLORA_ARCHITECTURE_FILE_AUDIT.md','FLORA_ARCHITECTURE_DOWNLOAD_LIST.txt']
-          for rel in root_files:
-              if not (root/rel).exists(): raise SystemExit(f'Required file missing: {rel}')
-              shutil.copy2(root/rel, staging/rel)
-          exclusions = staging/'EXPORT_EXCLUSIONS.md'
-          exclusions.write_text('# Export Exclusions\n\nExcluded: secrets, .env files, credentials, API keys, private keys, GitHub tokens, database files, production data, logs, dependencies, virtual environments, caches, build outputs, coverage, .git, IDE metadata, __MACOSX, .DS_Store, binary secrets, and files outside manifest scope.\n', encoding='utf-8')
-          baseline = {
-            'repository': os.environ['REPOSITORY'], 'repository_url': os.environ['REPOSITORY_URL'], 'branch_or_tag': os.environ['REQUESTED_REF'], 'requested_ref': os.environ['REQUESTED_REF'], 'resolved_commit_sha': resolved, 'default_branch': os.environ['DEFAULT_BRANCH'], 'production_commit': os.environ.get('FLORA_PRODUCTION_COMMIT') or None, 'export_date': date, 'export_profile': profile, 'workflow_run_id': os.environ['WORKFLOW_RUN_ID'], 'workflow_file_version': os.environ['WORKFLOW_FILE_VERSION'], 'file_count': len(included), 'total_uncompressed_size': total_size, 'zip_checksum': None, 'included_bundles': selected.get('bundles', []), 'excluded_categories': selected.get('excluded_categories', []), 'missing_optional_files': missing_optional, 'generator_version': os.environ['GENERATOR_VERSION']}
+          for rel in ['FLORA_ARCHITECTURE_DOWNLOAD_MANIFEST.json','FLORA_ARCHITECTURE_FILE_AUDIT.md','FLORA_ARCHITECTURE_DOWNLOAD_LIST.txt']:
+              if (root / rel).exists(): shutil.copy2(root / rel, staging / rel)
+          baseline = {'repository': os.environ['REPOSITORY'], 'repository_url': os.environ['REPOSITORY_URL'], 'branch': branch, 'commit_sha': resolved, 'generated_at': generated_at, 'export_profile': profile, 'workflow_run_id': os.environ['WORKFLOW_RUN_ID'], 'file_count': len(included), 'total_size': total_size, 'included_bundles': selected.get('bundles', []), 'excluded_categories': selected.get('excluded_categories', []), 'missing_optional_files': missing_optional, 'generator_version': os.environ['GENERATOR_VERSION']}
           (staging/'ARCHITECTURE_BASELINE_MANIFEST.json').write_text(json.dumps(baseline, indent=2, sort_keys=True), encoding='utf-8')
-          (staging/'ARCHITECTURE_BASELINE_MANIFEST.md').write_text(f"# Flora Architecture Baseline Manifest\n\n- Repository: {baseline['repository']}\n- Requested ref: {baseline['requested_ref']}\n- Resolved commit SHA: {resolved}\n- Export profile: {profile}\n- File count: {len(included)}\n", encoding='utf-8')
+          (staging/'EXPORT_EXCLUSIONS.md').write_text('# Export Exclusions\n\nExcluded: .env files, credentials, keys, tokens, production data, logs, caches, build outputs, dependency folders, Git internals, and paths outside the approved manifest.\n', encoding='utf-8')
           sums=[]
           for path in sorted(p for p in staging.rglob('*') if p.is_file() and p.name != 'SHA256SUMS.txt'):
               sums.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.relative_to(staging).as_posix()}")
           (staging/'SHA256SUMS.txt').write_text('\n'.join(sums)+'\n', encoding='utf-8')
-          zip_path = root / f'{name}.zip'
+          zip_path = root / package_name
           with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zf:
               for path in sorted(p for p in staging.rglob('*') if p.is_file()):
                   arc = path.relative_to(staging).as_posix()
                   if prohibited.search(arc): raise SystemExit(f'Generated ZIP contains prohibited path: {arc}')
                   zf.write(path, arc)
           checksum = hashlib.sha256(zip_path.read_bytes()).hexdigest()
-          baseline['zip_checksum'] = checksum
-          (staging/'ARCHITECTURE_BASELINE_MANIFEST.json').write_text(json.dumps(baseline, indent=2, sort_keys=True), encoding='utf-8')
-          with zipfile.ZipFile(zip_path, 'a', zipfile.ZIP_DEFLATED) as zf:
-              zf.write(staging/'ARCHITECTURE_BASELINE_MANIFEST.json', 'ARCHITECTURE_BASELINE_MANIFEST.json')
-          print(f'zip_path={zip_path}' )
+          release_url = f"{os.environ.get('GITHUB_SERVER_URL','https://github.com')}/{os.environ['REPOSITORY']}/releases/tag/{release_tag}"
+          asset_url = f"{os.environ.get('GITHUB_SERVER_URL','https://github.com')}/{os.environ['REPOSITORY']}/releases/download/{release_tag}/{package_name}"
+          metadata = {'package_name': package_name, 'repository': os.environ['REPOSITORY'], 'branch': branch, 'commit_sha': resolved, 'generated_at': generated_at, 'release_tag': release_tag, 'release_url': release_url, 'asset_url': asset_url, 'checksum': checksum, 'file_count': len(included), 'total_size': total_size, 'export_profile': profile, 'workflow_run_id': os.environ['WORKFLOW_RUN_ID']}
+          metadata_path = root / 'architecture-export-latest.json'
+          metadata_path.write_text(json.dumps(metadata, indent=2, sort_keys=True), encoding='utf-8')
           with open(os.environ['GITHUB_OUTPUT'],'a') as out:
-              out.write(f'zip_name={zip_path.name}\nzip_path={zip_path}\nzip_checksum={checksum}\nshort_sha={short}\nexport_date={date}\n')
+              out.write(f'zip_name={package_name}\nzip_path={zip_path}\nmetadata_path={metadata_path}\nrelease_tag={release_tag}\nshort_sha={short}\n')
           PY
 
-      - name: Upload architecture package artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ steps.package.outputs.zip_name }}
-          path: ${{ steps.package.outputs.zip_path }}
-          if-no-files-found: error
-          retention-days: 30
-
-      - name: Publish governed release asset
-        if: ${{ inputs.publish_mode == 'release' }}
+      - name: Publish ZIP and metadata as release assets
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: architecture-baseline-${{ steps.package.outputs.export_date }}-${{ steps.package.outputs.short_sha }}
-          name: Architecture baseline ${{ steps.package.outputs.short_sha }}
-          files: ${{ steps.package.outputs.zip_path }}
+          tag_name: ${{ steps.package.outputs.release_tag }}
+          name: Architecture baseline ${{ steps.package.outputs.release_tag }}
+          body: Governed Flora architecture baseline package and public metadata for owner download.
+          files: |
+            ${{ steps.package.outputs.zip_path }}
+            ${{ steps.package.outputs.metadata_path }}
           fail_on_unmatched_files: true
           make_latest: false
+          overwrite_files: true

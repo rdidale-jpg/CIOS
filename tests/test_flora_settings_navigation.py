@@ -42,13 +42,13 @@ def test_general_settings_renders_legacy_configuration():
 
 def test_architecture_export_owner_non_owner_commit_and_status(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setattr(ae, "validated_export_metadata", lambda: None)
     owner_html, owner_status = ae.architecture_export_page(OWNER)
     denied_html, denied_status = ae.architecture_export_page(NON_OWNER)
     assert owner_status == 200
-    assert "Current commit" in owner_html
-    assert "GitHub integration status" in owner_html
-    assert "Architecture Export unavailable" in owner_html
-    assert "Reason:</strong> GitHub credential unavailable" in owner_html
+    assert "Package status" in owner_html
+    assert "Architecture package unavailable" in owner_html
+    assert "Open GitHub Actions" in owner_html
     assert "<button>Generate architecture package</button>" not in owner_html
     assert denied_status == 403
     assert "Repository" not in denied_html
