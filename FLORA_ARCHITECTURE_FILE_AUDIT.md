@@ -1,0 +1,353 @@
+# Flora Architecture File Audit
+
+## Repository baseline
+
+- **repository name:** CIOS (Flora application repository)
+- **repository URL:** not confirmed
+- **default branch:** not confirmed
+- **current branch:** work
+- **current commit SHA:** bf72502bb234a5bdb60e97bb2f5da188e926c576
+- **latest tag:** not confirmed
+- **production deployment commit:** not confirmed
+- **audit date:** 2026-07-11
+- **audit tool/version:** GPT-5.5 Codex repository audit using git, find, rg, Python AST/text inspection
+- **root directory:** /workspace/CIOS
+
+## Executive findings
+- Flora is a Python 3.11 stdlib HTTP application, not a framework app; no package manager/frontend tree was found.
+- Deployment exists for Render with persistent disk and secret names only; no GitHub workflows or CODEOWNERS were found.
+- Domain, memory, blueprint import, Enterprise Canvas, pilot auth, reasoning, live collection and tests are implemented as Python modules, with durable state primarily JSON/JSONL file repositories rather than a database migration stack.
+- Architecture governance documents exist but include duplicate ADR/FP identifiers and historical Sprint package artefacts.
+
+## Classification summary
+
+### Found and relevant
+
+#### Bundle 1
+- `README.md`
+- `CHANGELOG.md`
+- `LICENSE.md`
+- `CONTRIBUTING.md`
+- `CODE_OF_CONDUCT.md`
+- `ARCHITECTURE.md`
+- `ROADMAP.md`
+- `CIOS-AI.md`
+- `pyproject.toml`
+- `requirements.txt`
+- `render.yaml`
+- `cios/applications/flora/web/app.py`
+- `cios/applications/flora/storage.py`
+- `cios/applications/flora/live/runtime.py`
+
+#### Bundle 2
+- `cios/core/models.py`
+- `cios/memory/models.py`
+- `cios/memory/repository.py`
+- `cios/ontology/models.py`
+- `cios/graph/models.py`
+- `cios/reasoning/models.py`
+- `cios/applications/flora/models.py`
+- `cios/applications/flora/memory/models.py`
+- `cios/applications/flora/memory/repository.py`
+- `cios/applications/flora/memory/service.py`
+- `cios/applications/flora/memory/source_contracts.py`
+- `cios/applications/flora/financial_intelligence/schema.py`
+- `cios/applications/flora/financial_intelligence/normalisation.py`
+- `cios/applications/flora/enterprise_canvas/models.py`
+- `cios/applications/flora/observatory/models.py`
+
+#### Bundle 3
+- `cios/applications/flora/blueprint_import/archive.py`
+- `cios/applications/flora/blueprint_import/atomicity.py`
+- `cios/applications/flora/blueprint_import/candidates.py`
+- `cios/applications/flora/blueprint_import/cios_twin_adapter.py`
+- `cios/applications/flora/blueprint_import/ledger.py`
+- `cios/applications/flora/blueprint_import/manifest.py`
+- `cios/applications/flora/blueprint_import/mapping.py`
+- `cios/applications/flora/blueprint_import/models.py`
+- `cios/applications/flora/blueprint_import/planning.py`
+- `cios/applications/flora/blueprint_import/promotion.py`
+- `cios/applications/flora/blueprint_import/registry.py`
+- `cios/applications/flora/blueprint_import/restage.py`
+- `cios/applications/flora/blueprint_import/review.py`
+- `cios/applications/flora/blueprint_import/review_plan.py`
+- `cios/applications/flora/blueprint_import/runs.py`
+- `cios/applications/flora/blueprint_import/validator.py`
+- `cios/applications/flora/blueprint_import/views.py`
+- `MOD-CDT-v1.3-Flora-Blueprint 2.zip`
+
+#### Bundle 4
+- `cios/applications/flora/digital_twins.py`
+- `cios/applications/flora/enterprise_canvas/access.py`
+- `cios/applications/flora/enterprise_canvas/feedback.py`
+- `cios/applications/flora/enterprise_canvas/service.py`
+- `cios/applications/flora/enterprise_canvas/views.py`
+- `cios/applications/flora/enterprise_intelligence/views.py`
+- `cios/applications/flora/memory/views.py`
+- `cios/applications/flora/observatory/views.py`
+- `cios/applications/flora/workspace/views.py`
+
+#### Bundle 5
+- `cios/applications/flora/enterprise_intelligence/models.py`
+- `cios/applications/flora/enterprise_intelligence/persistence.py`
+- `cios/applications/flora/enterprise_intelligence/profile.py`
+- `cios/applications/flora/enterprise_intelligence/provider.py`
+- `cios/applications/flora/enterprise_intelligence/retrieval.py`
+- `cios/applications/flora/enterprise_intelligence/runtime.py`
+- `cios/applications/flora/enterprise_intelligence/validator.py`
+- `cios/applications/flora/financial_intelligence/openai_provider.py`
+- `cios/applications/flora/financial_intelligence/rapid_ai_twin.py`
+- `cios/applications/flora/financial_intelligence/provider_guard.py`
+- `experiments/document_understanding/providers.py`
+- `experiments/document_understanding/schema.py`
+
+#### Bundle 6
+- `cios/applications/flora/access.py`
+- `cios/applications/flora/pilot_auth.py`
+- `cios/applications/flora/enterprise_canvas/access.py`
+- `cios/applications/flora/enterprise_canvas/feedback.py`
+- `docs/Architecture/Flora_Pilot_Authentication_Model_Finding_2026-07-10.md`
+
+#### Bundle 7
+- `cios/applications/flora/live/collect.py`
+- `cios/applications/flora/live/worker.py`
+- `cios/applications/flora/live/progress.py`
+- `cios/applications/flora/live/source_registry.py`
+- `cios/applications/flora/live/alignment.py`
+- `cios/applications/flora/live/aggregation.py`
+- `cios/applications/flora/live/store.py`
+- `cios/applications/flora/live/views.py`
+- `cios/applications/flora/observatory/engine.py`
+- `cios/applications/flora/observatory/newton.py`
+- `config/flora/collection_profiles/bt-group-plc.json`
+- `config/flora/rapid_sources/bt-group-plc-fy26.json`
+- `config/flora/rapid_extraction/bt-group-plc-fy26.json`
+- `config/flora/structured_sources/bt-group-plc-fy26.json`
+
+#### Bundle 8
+- `tests/fixtures/__init__.py`
+- `tests/fixtures/bt_structured_source_config.json`
+- `tests/fixtures/opportunity_assistant/low_value_simple_opportunity.json`
+- `tests/fixtures/opportunity_assistant/no_competitors_no_security_opportunity.json`
+- `tests/fixtures/rapid_financial.py`
+- `tests/test_bt_foundation_golden_facts.py`
+- `tests/test_bt_pilot_execution_route_cutover.py`
+- `tests/test_bt_structured_diagnostics.py`
+- `tests/test_bt_structured_ingestion.py`
+- `tests/test_dual_speed_financial_intelligence_orchestration.py`
+- `tests/test_enterprise_intelligence_reasoning.py`
+- `tests/test_financial_intelligence_candidate_validation.py`
+- `tests/test_financial_intelligence_grounding_progress.py`
+- `tests/test_financial_intelligence_low_cost_mode.py`
+- `tests/test_financial_intelligence_normalisation.py`
+- `tests/test_financial_intelligence_pdf_navigation.py`
+- `tests/test_financial_intelligence_provider_logging.py`
+- `tests/test_financial_intelligence_real_pdf_packets.py`
+- `tests/test_financial_intelligence_section_packets.py`
+- `tests/test_financial_intelligence_support_diagnostics.py`
+- `tests/test_flora_ai_financial_report_review.py`
+- `tests/test_flora_blueprint_import_interface.py`
+- `tests/test_flora_blueprint_import_promotion.py`
+- `tests/test_flora_blueprint_import_registry.py`
+- `tests/test_flora_blueprint_import_restage.py`
+- `tests/test_flora_blueprint_import_review_planning.py`
+- `tests/test_flora_blueprint_import_validation.py`
+- `tests/test_flora_deterministic_financial_refresh.py`
+- `tests/test_flora_digital_twins.py`
+- `tests/test_flora_enterprise_canvas.py`
+- `tests/test_flora_enterprise_canvas_feedback.py`
+- `tests/test_flora_enterprise_memory.py`
+- `tests/test_flora_financial_canonicalisation.py`
+- `tests/test_flora_financial_fact_capture_v2.py`
+- `tests/test_flora_financial_table_adapter.py`
+- `tests/test_flora_financial_twin_hardening.py`
+- `tests/test_flora_live.py`
+- `tests/test_flora_live_reporting.py`
+- `tests/test_flora_observatory.py`
+- `tests/test_flora_pilot_auth.py`
+- `tests/test_flora_runtime_alignment.py`
+- `tests/test_flora_runtime_metadata.py`
+- `tests/test_flora_storage_runtime.py`
+- `tests/test_live_rapid_integration_smoke.py`
+- `tests/test_memory_models.py`
+- `tests/test_memory_repository.py`
+- `tests/test_rapid_financial_candidate_extraction.py`
+- `tests/test_rapid_financial_intelligence.py`
+- `tests/test_rapid_financial_source_acquisition.py`
+- `tests/test_reasoning_models.py`
+
+#### Bundle 9
+- `render.yaml`
+
+#### Bundle 10
+- `architecture/decisions/README.md`
+- `architecture/reference-architecture/Document-Map.md`
+- `docs/MASTER_INDEX.md`
+- `docs/Architecture/Flora_Runtime_Alignment_Matrix.md`
+- `docs/Architecture/Flora_Runtime_Alignment_Audit.md`
+- `docs/Architecture/Flora_Blueprint_Import_Code_Binding_Audit_v0.1.md`
+- `docs/Architecture/Flora_Governed_Blueprint_Import_Runtime_Specification_v0.1.md`
+- `docs/Architecture/Flora_Enterprise_Canvas_and_Drill_Down_Pattern_v0.1.md`
+- `docs/Architecture/Flora_Observation_Enterprise_Memory.md`
+- `docs/Architecture/Flora_Collection_Execution_Model.md`
+- `docs/Sprints/Flora-Sprint-1/package/PACKAGE-MANIFEST.json`
+- `docs/Sprints/Flora-Sprint-1/package/FILE-INVENTORY.md`
+
+### Found but historical or superseded
+- `architecture/decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md`
+- `docs/Sprints/Flora-Sprint-1/CIOS-Flora-Sprint-1-Architecture-Package-v0.1.zip`
+- `docs/Sprints/Flora-Sprint-1/package/`
+
+### Found but duplicate
+- architecture/decisions/ADR-009-Observation-Identity-and-Minimal-Model-Projection.md and architecture/decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md
+- architecture/founding-papers/FP-002-Strategic-Signal-Standard.md and architecture/founding-papers/FP-007-Strategic-Signal-Standard.md
+
+### Not found
+- `.github/workflows/`
+- `CODEOWNERS`
+- `SECURITY.md`
+- `Dockerfile`
+- `docker-compose.yml`
+- `Procfile`
+- `runtime.txt`
+- `.env.example`
+- `migrations/`
+- `alembic/`
+- `prisma/`
+- `database/`
+- `db/`
+- `package.json`
+- `poetry.lock`
+- `requirements-dev.txt`
+- `Pipfile`
+- `pnpm-lock.yaml`
+- `yarn.lock`
+- `frontend/`
+- `components/`
+- `pages/`
+- `celery/`
+- `rq/`
+- `apscheduler/`
+
+### Uncertain relevance
+- `docs/CBOK/**` broad knowledge/governance corpus may inform doctrine but is wider than Flora runtime reconciliation.
+- `experiments/document_understanding/**` is relevant to AI document understanding but experimental rather than production route code.
+- `reportlab/**` appears to be a local stub for tests/runtime compatibility, not architecture source.
+
+### Excluded because sensitive
+- No secret values exported. render.yaml references OPENAI_API_KEY sync:false and pilot secret names only. Runtime data directories under data/ are not included except .gitkeep; production data not inspected/exported.
+
+### Generated or irrelevant artefacts
+- reportlab/ local stub package
+- docs/Applications/Flora_Pilot_Preview generated preview bundle
+- docs/Architecture/experiments/results/BT_Document_Understanding_Summary.json
+- *.zip architecture/package artefacts including MOD blueprint zip and Sprint package zip
+
+## Parts A-O detailed audit
+
+### A — Root and release files
+- Present: `README.md`, `CHANGELOG.md`, `LICENSE.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `ARCHITECTURE.md`, `ROADMAP.md`, `render.yaml`, `pyproject.toml`, `requirements.txt`.
+- Not found: `VERSION`, `SECURITY.md`, `CODEOWNERS`, `Procfile`, `Dockerfile`, `docker-compose.yml`, `runtime.txt`, `.env.example`.
+
+### B — Dependency and framework files
+- Present dependencies: `pydantic`, `pytest`, `openai`, `PyMuPDF`. Application runtime uses stdlib `http.server`; no database, queue, scheduler or auth framework dependency was found.
+- Observability is mainly diagnostic JSON/HTML and runtime metadata modules; authentication is bespoke pilot/header/cookie code.
+
+### C — Configuration
+- Configuration files: `render.yaml`, `config/flora/collection_profiles/bt-group-plc.json`, `config/flora/rapid_extraction/bt-group-plc-fy26.json`, `config/flora/rapid_sources/bt-group-plc-fy26.json`, `config/flora/structured_sources/bt-group-plc-fy26.json`, and Python settings/provider modules.
+- Environment variable names observed: ABSOLUTE_INPUT_TOKEN_CEILING, ANTHROPIC_API_KEY, API, APPLICATION_BRANCH, APPLICATION_REVISION, APP_BRANCH, APP_REVISION, AUTH, AUTHORING_GUIDE, AZURE_DOCUMENT_INTELLIGENCE_KEY, BLUEPRINT_IMPORT_ADMIN_ROLE, BLUEPRINT_IMPORT_OWNER_PERMISSIONS, BRANCH_ENV_NAMES, CANONICAL_OWNER_ROLES, CIOS_OWNER_ROLE, DATA, DEFAULT_DATA_DIR, DEFAULT_HOST, DEFAULT_PORT, ENTERPRISE_MODEL_DIR, FLORA, FLORA_ADMIN_TOKEN, FLORA_BLUEPRINT_REVIEW_ASYNC_THRESHOLD, FLORA_BUILD_TIMESTAMP, FLORA_DATA_DIR, FLORA_DATA_DIR_ENV, FLORA_DATA_ROOT, FLORA_DEPLOYMENT_VERSION, FLORA_DOCUMENT_UNDERSTANDING_MODEL, FLORA_ENTERPRISE_INTELLIGENCE_MODEL, FLORA_ENTERPRISE_INTELLIGENCE_PROVIDER, FLORA_ENTERPRISE_INTELLIGENCE_STATIC_JSON, FLORA_ENVIRONMENT, FLORA_FINANCIAL_INTELLIGENCE_MODEL, FLORA_HOST, FLORA_HOST_ENV, FLORA_LIVE_RAPID_INTEGRATION_TEST, FLORA_LIVE_RAPID_SOURCE_TEST, FLORA_OPENAI_RESPONSES_PDF_MAX_BYTES, FLORA_OPENAI_TIMEOUT_SECONDS, FLORA_PILOT_ACCESS_SECRET, FLORA_PILOT_AUTH_ENABLED, FLORA_PILOT_DIR, FLORA_PILOT_OWNER_ID, FLORA_PILOT_ROLE, FLORA_PILOT_SESSION_DAYS, FLORA_PILOT_WORKSPACE, FLORA_PORT, FLORA_PORT_ENV, FLORA_RAPID_AI_TWIN_ENABLED, FLORA_RAPID_AI_TWIN_MAX_RAW_RESPONSE_BYTES, FLORA_REASONING_API_BASE, FLORA_REASONING_API_KEY, FLORA_REASONING_API_VERSION, FLORA_REASONING_BASE_URL, FLORA_REASONING_MAX_INPUT_TOKENS, FLORA_REASONING_MAX_OUTPUT_TOKENS, FLORA_REASONING_MODEL, FLORA_REASONING_PROVIDER, FLORA_REASONING_TIMEOUT_SECONDS, FLORA_SECURE_COOKIES, FLORA_STRUCTURED_SOURCE_CONFIG, FLORA_SUPPORT_TOKEN, FLORA_TRUST_PROXY_HEADERS, GIT_BRANCH, GIT_COMMIT, HOST, HOST_ENV, LEGACY_FLORA_PILOT_DIR_ENV, MODEL_REGISTRY, OPENAI_API_KEY, OPENAI_FILE_PURPOSE, OPENAI_TIMEOUT_SECONDS, PACKET_MAX_OUTPUT_TOKENS, PORT, PORT_ENV, RENDER, RENDER_BUILD_TIMESTAMP, RENDER_ENVIRONMENT, RENDER_GIT_BRANCH, RENDER_GIT_COMMIT, RENDER_SERVICE_NAME, REPORT, REVISION_ENV_NAMES, SOURCE_BRANCH, SUPPORTED_ACCOUNTING_BASES, SUPPORTED_CANONICAL_CLASSES, SUPPORTED_PROMOTION_CLASSES, SUPPORTED_RECORD_CLASSES, SUPPORT_RECORD_CLASSES, UNAUTH, UNSUPPORTED_DEFAULTS, UNSUPPORTED_OPENAI_SCHEMA_KEYWORDS.
+
+### D — Domain models and schemas
+
+- `cios/applications/flora/web/app.py`: FloraWebHandler
+- `cios/applications/flora/storage.py`: PersistenceError
+- `cios/core/models.py`: CIOSBaseModel, Entity, Relationship, Evidence, Observation, Recommendation, Decision, Opportunity, Capability
+- `cios/memory/models.py`: MemoryRecord, EvidenceMemoryRecord, AssessmentMemoryRecord, DecisionMemoryRecord, OutcomeMemoryRecord
+- `cios/memory/repository.py`: MemoryRepository, InMemoryRepository
+- `cios/ontology/models.py`: OntologyBaseModel, CommercialObject, Customer, Competitor, Supplier, Market, Capability, Contract, Opportunity
+- `cios/graph/models.py`: GraphNode, GraphEdge, EvidenceLink, Dependency, Influence, KnowledgeGraphRecord
+- `cios/reasoning/models.py`: ReasoningStep, Hypothesis, Signal, Inference, Explanation, ReasoningTrace, ReasoningResult
+- `cios/applications/flora/models.py`: Priority, CommercialDNA, TargetAccount, Signal, EvidenceItem, RecommendedAction, IntelligenceAssessment, ReinventionScores, BriefingItem, DailyBrief, WeeklyMover, WeeklyIntelligenceBrief
+- `cios/applications/flora/memory/models.py`: Observation, EnterpriseModelAttribute, EnterpriseUnknown, EnterpriseModel, ModelUpdateResult
+- `cios/applications/flora/memory/repository.py`: ObservationRepository, EnterpriseModelRepository, EvidenceRepository, ContradictionRepository
+- `cios/applications/flora/memory/service.py`: FactualClaim, EvidenceProcessingReport, ObservationMemoryService
+- `cios/applications/flora/memory/source_contracts.py`: SourceFactualContract
+- `cios/applications/flora/financial_intelligence/schema.py`: ClaimType, FactState, NumericFactValue, TextFactValue, DateFactValue, BooleanFactValue, PageRange, ExperimentDocument, FoundationFact, ProviderFoundationFact, ProviderFoundationFactSet, FoundationFactSet, ExtractionRun, DocumentUnderstandingProvider
+- `cios/applications/flora/financial_intelligence/normalisation.py`: MetricCatalogueEntry, CanonicalFinancialMetricFact, CanonicalReportingPeriod
+- `cios/applications/flora/enterprise_canvas/models.py`: CanvasLineageReference, CanvasAnalyticalProjection, CanvasLineageInspection, EnterpriseCanvasHeader, EnterpriseCanvasTile, EnterpriseCanvas
+- `cios/applications/flora/observatory/models.py`: HypothesisStatus, ObservatoryEvidence, ForceAssessment, GenomeDimension, StrategicConviction, CommercialSignal, CommercialInsight, TransformationThesis, CommercialArgument, ExecutiveRecommendation, CaseForChange, TransformationWindow, ResearchHypothesis, KnowledgeGraphEdge, OrganisationObservatory, EnterpriseWeather, Observatory
+- `cios/applications/flora/blueprint_import/atomicity.py`: AtomicityFinding
+- `cios/applications/flora/blueprint_import/candidates.py`: ValidationFinding, CandidateImportRecord, ImportRunDryRunResult, CandidateStagingRepository
+- `cios/applications/flora/blueprint_import/cios_twin_adapter.py`: SheetMapping, TwinWorkbookInspection, CiosCommercialTwinAdapter
+- `cios/applications/flora/blueprint_import/ledger.py`: BlueprintImportLedger
+- `cios/applications/flora/blueprint_import/mapping.py`: ImportMappingRecord, ImportMappingRepository, ImportMappingService
+- `cios/applications/flora/blueprint_import/models.py`: PackageReceiptError, FileInventoryItem, BlueprintPackageIdentity, BlueprintPackageRecord, ImportRunRecord
+- `cios/applications/flora/blueprint_import/planning.py`: ProposedCanonicalEffect, DryRunCanonicalEffectPlan, DryRunPlanRepository, DryRunPlanningService
+- `cios/applications/flora/blueprint_import/promotion.py`: BlueprintPromotionError, CanonicalPromotionApproval, CanonicalPromotionResult, CanonicalPromotionRepository, CanonicalJsonlRepository, CanonicalPromotionService
+- `cios/applications/flora/blueprint_import/registry.py`: BlueprintPackageRegistry
+- `cios/applications/flora/blueprint_import/restage.py`: BlueprintRestageService
+- `cios/applications/flora/blueprint_import/review.py`: BlueprintReviewError, CandidateReviewDecision, CandidateReviewRepository, CandidateReviewService
+- `cios/applications/flora/blueprint_import/review_plan.py`: ReviewJob, BlueprintReviewPlanCoordinator
+- `cios/applications/flora/blueprint_import/runs.py`: ImportRunRepository
+- `cios/applications/flora/blueprint_import/validator.py`: BlueprintValidationError, BlueprintPackageValidator
+- `cios/applications/flora/digital_twins.py`: GovernedTwinListItem
+- `cios/applications/flora/enterprise_canvas/access.py`: EnterpriseCanvasAccessRecord, EnterpriseCanvasAccessRepository
+- `cios/applications/flora/enterprise_canvas/feedback.py`: FeedbackAuditEvent, EnterpriseCanvasFeedback, FeedbackAccessError, EnterpriseCanvasFeedbackRepository, EnterpriseCanvasFeedbackService
+- `cios/applications/flora/enterprise_canvas/service.py`: EnterpriseCanvasAccessError, EnterpriseCanvasNotFoundError, EnterpriseCanvasService
+- `cios/applications/flora/enterprise_intelligence/models.py`: ReasoningRequestV1, EvidencePackageItem, EvidencePackageV1
+- `cios/applications/flora/enterprise_intelligence/persistence.py`: InterpretationPersistenceService
+- `cios/applications/flora/enterprise_intelligence/provider.py`: LLMResult, LLMProviderError, LLMProvider, UnavailableProvider, StaticJSONProvider, OpenAIResponsesProvider
+- `cios/applications/flora/enterprise_intelligence/retrieval.py`: BoundedTwinRetrievalService
+- `cios/applications/flora/enterprise_intelligence/runtime.py`: EnterpriseIntelligenceRuntime
+- `cios/applications/flora/enterprise_intelligence/validator.py`: ClaimValidator
+- `cios/applications/flora/financial_intelligence/openai_provider.py`: OpenAIDirectPDFProvider, AnthropicDirectPDFProvider, LayoutOpenAIProvider
+- `cios/applications/flora/financial_intelligence/rapid_ai_twin.py`: RapidAIExtraction, RapidAISynthesis, ProviderStageResult, RapidAITwinProvider
+- `cios/applications/flora/financial_intelligence/provider_guard.py`: ProviderCallViolation, ProviderCallGuard
+- `experiments/document_understanding/providers.py`: OpenAIDirectPDFProvider, AnthropicDirectPDFProvider, LayoutOpenAIProvider
+- `experiments/document_understanding/schema.py`: ClaimType, FactState, NumericFactValue, TextFactValue, DateFactValue, BooleanFactValue, PageRange, ExperimentDocument, FoundationFact, FoundationFactSet, ExtractionRun, DocumentUnderstandingProvider
+- `cios/applications/flora/access.py`: BlueprintAuthorisationDecision
+- `cios/applications/flora/pilot_auth.py`: PilotSession
+- `cios/applications/flora/live/source_registry.py`: EnterpriseScope, SourceRecord
+- `cios/applications/flora/live/aggregation.py`: ScoreAdjustment, OrganisationEvidenceMetrics
+- `cios/applications/flora/observatory/newton.py`: MomentumAssessment, ConversationRecommendation
+- `tests/test_bt_pilot_execution_route_cutover.py`: FormParser, NoStartThread
+- `tests/test_enterprise_intelligence_reasoning.py`: RecordingProvider
+
+Persistence status: Flora memory, blueprint import, promotion, feedback and financial/document runs use file-backed repositories under configured data directories where clear; generic SDK/domain objects are canonical contract models or projections depending on module; Canvas and observatory types are read models/projections.
+
+### E — Database and migrations
+- No database technology, SQL schema, Alembic, Prisma or ORM migration stack found.
+- Documentation migration notes exist under `docs/Architecture/migrations/`. Runtime persistence is JSON/JSONL/file archive based through `storage.py`, memory repositories, blueprint repositories and run directories.
+
+### F — Blueprint import and Twin release implementation
+- Implemented across `cios/applications/flora/blueprint_import/**`: ZIP preservation/inventory, manifest identity, workbook inspection/mapping, validation, staging, review, dry-run effects, restage, promotion, ledger and web views.
+- Release versioning exists in package/import records and promotion ledger concepts; no separate `TwinRelease` database table found.
+
+### G — Digital Twin routes and UI
+- Routes are centralized in `cios/applications/flora/web/app.py`: `/digital-twins`, `/digital-twins/{id}`, `/digital-twins/{id}/canvas`, `/digital-twins/{id}/canvas/tiles/{tile_id}`, legacy `/digital-twin/{id}`, blueprint, observatory and financial routes.
+- UI/read models are in `digital_twins.py`, `enterprise_canvas/*`, `enterprise_intelligence/views.py`, `memory/views.py`, `observatory/views.py`, and workspace views.
+
+### H — Reasoning and AI runtime
+- Implemented/partially implemented: enterprise intelligence runtime/provider/retrieval/validator/persistence, financial AI providers, rapid AI twin provider, structured schema, and document-understanding experiments.
+- Provider abstraction and structured output handling exist; runtime can fall back/deterministically brief. No evidence found for exact profile names `strategic_sales_director_v1` or `enterprise_topology_architect_v1`.
+
+### I — Authentication, security and tenancy
+- Bespoke pilot auth/session code, header/cookie access helper, workspace/enterprise membership checks, owner role aliases, Canvas access and feedback permissions are present.
+- Critical gap: no full identity provider, sign-in membership database, RBAC framework or database-backed tenant isolation found; this matches the repository auth finding document.
+
+### J — Jobs, monitoring and lifecycle automation
+- Present: live collection worker/progress/source registry/alignment/aggregation, observatory engine/newton, in-process background collection and freshness/lifecycle scoring.
+- Not found: Celery/RQ/APScheduler/cron workflow definitions or event bus.
+
+### K — Tests and fixtures
+- Extensive pytest coverage exists for blueprint import, Canvas, digital twins, pilot auth, reasoning, memory, financial intelligence, live collection, observatory, runtime metadata and BT fixtures.
+- Stale/synthetic fixture indicators: BT Group pilot fixtures/configs, MOD blueprint zip and tests, opportunity assistant sample JSON; no `synthetic-enterprise` path found.
+
+### L — GitHub governance and delivery
+- `.github/workflows/`, issue templates, PR templates and CODEOWNERS were not found. Build/start commands are in `render.yaml`. Secret names only: OPENAI_API_KEY and pilot auth variables. Production deployment commit not confirmed.
+
+### M — Documentation governance
+- ADR index exists, Document Map exists, master docs index exists. Duplicate ADR-009 identifiers and duplicate Strategic Signal founding paper titles/numbering are present. Sprint package folders/zips appear historical/generated and likely superseded by current runtime/spec documents.
+
+### N/O — Recommended download bundles
+See `FLORA_ARCHITECTURE_DOWNLOAD_LIST.txt` and `FLORA_ARCHITECTURE_DOWNLOAD_MANIFEST.json`.
