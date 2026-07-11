@@ -59,7 +59,9 @@ def test_runtime_fallback_no_canonical_mutation_and_telemetry(tmp_path, monkeypa
     models, obs, ev=seed(tmp_path); before=[o.to_dict() for o in obs.list()]
     rt=EnterpriseIntelligenceRuntime(BoundedTwinRetrievalService(models,obs,ev))
     result=rt.generate(req())
-    assert result['brief']['model_metadata']['provider']=='deterministic-fallback'
+    assert result['audit']['status']=='Failed'
+    assert result['audit']['fallback_active'] is True
+    assert result['brief']['unavailable_reason']
     assert result['audit']['execution_duration_ms'] >= 0
     assert [o.to_dict() for o in obs.list()] == before
     assert safe_fallback('provider unavailable')['title']=='Executive Intelligence Brief unavailable'
@@ -77,3 +79,42 @@ def test_schema_profile_persistence_and_render_quality(tmp_path, monkeypatch):
         assert bad not in rendered
     assert len({p['title'] for p in brief['material_pressures']}) >= 3
     assert all((p['supporting_observation_ids'] or p['supporting_evidence_ids'] or p['linked_unknown_ids']) for p in brief['material_pressures'])
+
+
+def test_canvas_diagnostics_missing_provider_and_no_secret(tmp_path, monkeypatch):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path))
+    models, obs, ev=seed(tmp_path)
+    from cios.applications.flora.enterprise_canvas.access import repair_enterprise_canvas_access
+    repair_enterprise_canvas_access('mod','mod','alice','run-1')
+    from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
+    html, status=enterprise_canvas_page('mod', {'X-Flora-User':'alice','X-Flora-Enterprises':'mod','X-Flora-Active-Workspace':'mod'})
+    assert status==200
+    assert 'Executive Intelligence Brief unavailable' in html
+    assert 'Reasoning diagnostics' in html
+    assert 'Generate Executive Intelligence Brief' in html
+    assert 'FLORA_REASONING_API_KEY' not in html and 'secret' not in html.lower()
+
+class RecordingProvider:
+    provider_name='recording'
+    def __init__(self, payload): self.payload=payload; self.called=False
+    def generate_structured(self, *, prompt, schema, timeout_s, token_budget):
+        from cios.applications.flora.enterprise_intelligence.provider import LLMResult
+        self.called=True
+        assert schema['name']=='ExecutiveCommercialBriefV1'
+        assert 'Other enterprise pressure' not in prompt
+        return LLMResult(self.payload, 'recording', 'unit-model', {'prompt_tokens':1,'completion_tokens':1}, 7)
+
+def test_successful_reasoning_provider_validation_and_transient_store(tmp_path, monkeypatch):
+    monkeypatch.setenv('FLORA_DATA_DIR', str(tmp_path))
+    models, obs, ev=seed(tmp_path); request=req()
+    pkg=BoundedTwinRetrievalService(models,obs,ev).retrieve(request)
+    oid=pkg.selected_observations[0].stable_id
+    payload={'brief_id':'brief-unit','enterprise_id':'mod','twin_version':'accepted','reasoning_profile':'strategic_sales_director_v1','generated_at':'2026-07-10T00:00:00Z','evidence_cut_off':'','executive_summary':{'what_is_happening':'Distinct MOD affordability and readiness themes','why_it_matters':'They shape commercial access'},'material_pressures':[{'title':'Affordability pressure','situation':'MOD affordability pressure is material.','why_now':'Evidence says now','supporting_observation_ids':[oid],'supporting_evidence_ids':[],'linked_unknown_ids':[],'linked_contradiction_ids':[],'confidence':'medium'}],'unknowns':[],'contradictions':[],'recommended_next_moves':[{'action':'Inspect pressure lineage','lineage':[oid]}],'lineage_manifest':{'evidence_package_id':pkg.package_id,'evidence_package_hash':'x','retrieved_object_ids':[oid]},'validation_status':{}}
+    provider=RecordingProvider(payload)
+    before=[o.to_dict() for o in obs.list()]
+    result=EnterpriseIntelligenceRuntime(BoundedTwinRetrievalService(models,obs,ev), provider=provider).generate(request)
+    assert provider.called
+    assert result['audit']['status']=='Succeeded'
+    assert result['audit']['validation_outcome']=='valid'
+    assert (tmp_path/'enterprise_intelligence'/'briefs'/'mod.json').exists()
+    assert [o.to_dict() for o in obs.list()] == before

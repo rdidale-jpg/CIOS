@@ -4,7 +4,7 @@ from typing import Any
 from cios.applications.flora.storage import atomic_write_text, data_path
 from .models import ReasoningRequestV1, now_iso, stable_hash, SCHEMA_VERSION, PROFILE_ID
 from .profile import PROFILE
-from .provider import provider_from_env, LLMProviderError
+from .provider import provider_from_env, LLMProviderError, provider_diagnostics
 from .retrieval import BoundedTwinRetrievalService
 from .validator import ClaimValidator
 
@@ -42,16 +42,34 @@ class EnterpriseIntelligenceRuntime:
     def __init__(self, retrieval=None, provider=None, validator=None): self.retrieval=retrieval or BoundedTwinRetrievalService(); self.provider=provider or provider_from_env(); self.validator=validator or ClaimValidator()
     def generate(self, request):
         start=time.time(); package=self.retrieval.retrieve(request); audit={'request_id':request.request_id,'enterprise_id':package.enterprise_id,'twin_version':request.twin_version,'evidence_package_hash':stable_hash(package.to_dict()),'retrieved_object_ids':[i.stable_id for i in package.all_items()],'prompt_version':request.prompt_version_ref,'reasoning_profile':request.reasoning_profile}
+        prompt=json.dumps({'profile':PROFILE,'request':request.to_dict(),'evidence_package':package.to_dict()}, ensure_ascii=False)
+        diag=provider_diagnostics(); status='Running'; failure=''; brief=None
         try:
-            prompt=json.dumps({'profile':PROFILE,'request':request.to_dict(),'evidence_package':package.to_dict()}, ensure_ascii=False)
-            result=self.provider.generate_structured(prompt=prompt, schema=output_schema(), timeout_s=30, token_budget=request.maximum_evidence_volume)
-            brief=result.payload; brief.setdefault('model_metadata',{}).update({'provider':result.provider,'model':result.model,'token_usage':result.token_usage,'duration_ms':result.duration_ms})
+            timeout=int(diag.get('timeout_seconds') or 30); max_in=int(diag.get('max_input_tokens') or request.maximum_evidence_volume)
+            result=self.provider.generate_structured(prompt=prompt, schema=output_schema(), timeout_s=timeout, token_budget=max_in)
+            brief=result.payload
+            missing=[k for k in output_schema().get('required', []) if k not in brief]
+            if missing: raise LLMProviderError('Structured output missing required fields: '+', '.join(missing))
+            brief.setdefault('model_metadata',{}).update({'provider':result.provider,'model':result.model,'token_usage':result.token_usage,'duration_ms':result.duration_ms,'prompt_version':request.prompt_version_ref})
+            status='Succeeded'
         except Exception as exc:
-            brief=deterministic_brief(request, package, type(exc).__name__+': '+str(exc))
-            result=None
-        brief=self.validator.validate(brief, package); audit.update({'model_provider':brief.get('model_metadata',{}).get('provider'),'model_name':brief.get('model_metadata',{}).get('model'),'token_usage':brief.get('model_metadata',{}).get('token_usage',{}),'execution_duration_ms':int((time.time()-start)*1000),'validation_outcome':brief.get('validation_status',{}).get('status'),'rejected_claims':brief.get('validation_status',{}).get('rejected_claims',[]),'generated_brief_id':brief.get('brief_id')})
+            failure=type(exc).__name__+': '+str(exc); status='Failed'; result=None
+            brief={'brief_id':'','enterprise_id':package.enterprise_id,'twin_version':request.twin_version,'reasoning_profile':request.reasoning_profile,'generated_at':now_iso(),'evidence_cut_off':request.evidence_cut_off,'executive_summary':{},'material_pressures':[],'unknowns':[],'contradictions':[],'recommended_next_moves':[],'lineage_manifest':{'evidence_package_id':package.package_id,'evidence_package_hash':stable_hash(package.to_dict()),'retrieved_object_ids':[i.stable_id for i in package.all_items()]},'model_metadata':{'provider':diag.get('provider'),'model':diag.get('model'),'prompt_version':request.prompt_version_ref},'validation_status':{'status':'not_run','rejected_claims':[]},'unavailable_reason':failure}
+        if status=='Succeeded': brief=self.validator.validate(brief, package)
+        audit.update({'status':status,'failure':failure,'fallback_active':status!='Succeeded','model_provider':brief.get('model_metadata',{}).get('provider'),'model_name':brief.get('model_metadata',{}).get('model'),'token_usage':brief.get('model_metadata',{}).get('token_usage',{}),'execution_duration_ms':int((time.time()-start)*1000),'validation_outcome':brief.get('validation_status',{}).get('status'),'rejected_claims':brief.get('validation_status',{}).get('rejected_claims',[]),'generated_brief_id':brief.get('brief_id'),'evidence_object_count':len(package.all_items())})
         atomic_write_text(data_path('enterprise_intelligence','audit',request.request_id+'.json'), json.dumps(audit, indent=2, sort_keys=True))
+        if status=='Succeeded': atomic_write_text(data_path('enterprise_intelligence','briefs',package.enterprise_id+'.json'), json.dumps({'request':request.to_dict(),'evidence_package':package.to_dict(),'brief':brief,'audit':audit}, indent=2, sort_keys=True))
+        else: atomic_write_text(data_path('enterprise_intelligence','last_failure',package.enterprise_id+'.json'), json.dumps({'request':request.to_dict(),'evidence_package':package.to_dict(),'brief':brief,'audit':audit}, indent=2, sort_keys=True))
         return {'request':request.to_dict(),'evidence_package':package.to_dict(),'brief':brief,'audit':audit}
 
 def safe_fallback(reason, last_successful_brief=None, evidence_cut_off='', enterprise_id='MOD'):
     return {'title':'Executive Intelligence Brief unavailable','reason':reason,'last_successful_brief':last_successful_brief,'evidence_cut_off':evidence_cut_off,'retry_action':'Retry generation when the reasoning provider is available or use deterministic bounded fallback explicitly.','model_explorer_url':f'/digital-twins/{enterprise_id}/canvas'}
+
+
+def latest_result(enterprise_id: str):
+    enterprise_id = enterprise_id.lower() if enterprise_id.upper() == 'MOD' else enterprise_id
+    for folder in ('briefs','last_failure'):
+        path=data_path('enterprise_intelligence',folder,enterprise_id+'.json')
+        try: return json.loads(path.read_text())
+        except FileNotFoundError: continue
+    return None

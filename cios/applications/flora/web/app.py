@@ -31,6 +31,8 @@ from cios.applications.flora.flora_transparent import start_bt_digital_twin, flo
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
 from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page, restage_confirm_page as blueprint_restage_confirm_page, restage_package as blueprint_restage_package, restage_progress_page as blueprint_restage_progress_page, restage_history_page as blueprint_restage_history_page
 from cios.applications.flora.enterprise_intelligence.views import executive_intelligence_brief_page
+from cios.applications.flora.enterprise_intelligence.models import ReasoningRequestV1
+from cios.applications.flora.enterprise_intelligence.runtime import EnterpriseIntelligenceRuntime
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -285,6 +287,11 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         elif self.path.startswith("/digital-twins/") and self.path.endswith("/canvas/feedback"):
             html, status, _target = submit_enterprise_canvas_feedback(form, self.headers)
             self._html(html, status=status)
+        elif self.path.startswith("/digital-twins/") and self.path.endswith("/executive-intelligence-brief/generate"):
+            enterprise_id = [part for part in self.path.split('/') if part][1]
+            req = ReasoningRequestV1.create(enterprise_id=enterprise_id, workspace_id=self.headers.get('X-Flora-Active-Workspace') or enterprise_id, requested_by=self.headers.get('X-Flora-User') or 'unknown')
+            EnterpriseIntelligenceRuntime().generate(req)
+            self._redirect(f"/digital-twins/{enterprise_id}/canvas#executive-intelligence-brief")
         elif self.path == "/flora/bt-digital-twin":
             start_bt_digital_twin()
             self._redirect("/flora")
@@ -433,7 +440,7 @@ def _legacy_twin_redirect_target(path: str, query: dict[str, list[str]]) -> str:
     enterprise_id = [part for part in path.split("/") if part][1]
     if (query.get("audit") or [""])[0] in {"1", "true", "yes"} and (query.get("import_run_id") or [""])[0]:
         return f"/blueprint-import/{(query.get('import_run_id') or [''])[0]}"
-    return f"/digital-twins/{enterprise_id}/executive-intelligence-brief"
+    return f"/digital-twins/{enterprise_id}/canvas"
 
 
 def _is_support_report_path(path: str) -> bool:
