@@ -18,3 +18,20 @@ Accepting a Knowledge Pack means the package contract is valid for Knowledge Rep
 ## Payloads
 
 A Knowledge Pack may carry Twin Presentation Models, Industry Twin lifecycle updates, Market Participant Twin intelligence, Opportunity Twin intelligence, Relational Twin mappings and Cross-Twin Intelligence.
+
+## Twin release package profile
+
+Commercial Digital Twin releases MUST use the Knowledge Pack release structure defined by the Twin Contract:
+
+```text
+manifest.json
+metadata.json
+validation.json
+lineage.json
+checksums.sha256
+payload/twin/
+payload/presentation-model/
+attachments/
+```
+
+The normative manifest schema is `architecture/specifications/knowledge-packs/twin-release-manifest.schema.json`. Pack acceptance means the release is valid for repository handling; imported data remains candidate intelligence until separately accepted by the owning model process. Presentation Models carried in `payload/presentation-model/` are governed interpretations for declared audiences and purposes, not canonical fact by default. Unsupported content must be quarantined, and Unknowns, Contradictions, Evidence lineage, Observation lineage and human-supplied knowledge labels must remain inspectable.

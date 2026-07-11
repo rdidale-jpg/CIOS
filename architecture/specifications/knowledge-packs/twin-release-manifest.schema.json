@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cios.local/schemas/knowledge-packs/twin-release-manifest.schema.json",
+  "title": "CIOS Twin Knowledge Pack Release Manifest",
+  "description": "Normative manifest.json schema for Commercial Digital Twin releases packaged as Knowledge Packs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "pack",
+    "twin",
+    "release",
+    "audience",
+    "purpose",
+    "source_cut_off",
+    "producer",
+    "truth_status",
+    "object_identity",
+    "lineage",
+    "unknowns",
+    "contradictions",
+    "human_supplied_knowledge",
+    "validation",
+    "supersession",
+    "checksums",
+    "structure"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "pack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pack_id", "pack_version", "pack_type"],
+      "properties": {
+        "pack_id": { "type": "string", "minLength": 1 },
+        "pack_version": { "type": "string", "minLength": 1 },
+        "pack_type": { "const": "commercial-digital-twin-knowledge-pack" }
+      }
+    },
+    "twin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["twin_id", "twin_version"],
+      "properties": {
+        "twin_id": { "type": "string", "minLength": 1 },
+        "twin_version": { "type": "string", "minLength": 1 }
+      }
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["release_id", "created_at"],
+      "properties": {
+        "release_id": { "type": "string", "minLength": 1 },
+        "created_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "audience": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+    "purpose": { "type": "string", "minLength": 1 },
+    "source_cut_off": { "type": "string", "format": "date" },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["producer_id", "producer_name", "producer_type"],
+      "properties": {
+        "producer_id": { "type": "string", "minLength": 1 },
+        "producer_name": { "type": "string", "minLength": 1 },
+        "producer_type": { "enum": ["human", "organisation", "system", "gpt", "mixed"] }
+      }
+    },
+    "truth_status": { "enum": ["candidate", "accepted-pack", "canonical-promoted", "superseded", "rejected", "quarantined"] },
+    "object_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stable_object_ids_required", "identifier_scheme"],
+      "properties": {
+        "stable_object_ids_required": { "const": true },
+        "identifier_scheme": { "type": "string", "minLength": 1 }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_lineage", "observation_lineage"],
+      "properties": {
+        "evidence_lineage": { "type": "string", "minLength": 1 },
+        "observation_lineage": { "type": "string", "minLength": 1 }
+      }
+    },
+    "unknowns": { "type": "string", "minLength": 1 },
+    "contradictions": { "type": "string", "minLength": 1 },
+    "human_supplied_knowledge": { "type": "string", "minLength": 1 },
+    "validation": { "type": "string", "minLength": 1 },
+    "supersession": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supersedes", "superseded_by"],
+      "properties": {
+        "supersedes": { "type": "array", "items": { "type": "string" } },
+        "superseded_by": { "type": ["string", "null"] }
+      }
+    },
+    "checksums": { "type": "string", "pattern": "^checksums\\.sha256$" },
+    "structure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metadata", "validation", "lineage", "twin_payload", "presentation_model_payload", "attachments"],
+      "properties": {
+        "metadata": { "const": "metadata.json" },
+        "validation": { "const": "validation.json" },
+        "lineage": { "const": "lineage.json" },
+        "twin_payload": { "const": "payload/twin/" },
+        "presentation_model_payload": { "const": "payload/presentation-model/" },
+        "attachments": { "const": "attachments/" }
+      }
+    }
+  }
+}
