@@ -176,3 +176,9 @@ The Architecture v2 document chain is: **Accepted ADR → owning paper → norma
 | Industry and participant behaviour | [EI-003](../enterprise-intelligence/volume-1-enterprise-modelling/EI-003-Enterprise-Behaviour-Model.md) | Participant Behaviour and Industry behaviour dimensions | Behaviour is derived from repeated Observations and does not override direct account evidence. |
 | Industry and Participant Observations | [EI-012](../enterprise-intelligence/volume-5-intelligence-foundations/EI-012-Enterprise-Observation-Model.md) | Industry Observation categories, Participant Observation categories, cross-Twin impact proposal fields and incremental release rule | Cross-Twin impact is a proposal, not an automatic update. |
 | Cross-Twin hypothesis validation | [FP-009](../founding-papers/FP-009-Hypothesis-Validation-Standard.md) | Participant, Industry, Account–Participant fit, Opportunity and cross-Twin recommendation validation rules | Strong recommendations require lineage across relevant Twins. |
+
+## Knowledge Pack profile governance
+
+| Area | Document | Purpose | Status | Location | Notes |
+| --- | --- | --- | --- | --- | --- |
+| Knowledge Pack role profiles | [Researcher and Reviewer Knowledge-Pack Profile Audit](../specifications/knowledge-packs/Researcher-Reviewer-Knowledge-Pack-Profile-Audit.md) | Audits generated role-pack profiles, explains the 93-file Researcher and 68-file Reviewer counts, and records exclusion rules for draft, historical, duplicate, sprint, experiment and generated files. | Governance audit | `architecture/specifications/knowledge-packs/` | Use before approving generated Researcher or Reviewer pack manifests. |
