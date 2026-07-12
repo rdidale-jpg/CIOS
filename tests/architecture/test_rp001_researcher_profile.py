@@ -49,7 +49,12 @@ def test_researcher_pack_compiles_non_empty_and_traceable_to_registry() -> None:
     compilation = compile_architecture_profile("researcher-pack", ROOT)
     included_ids = {document.document_id for document in compilation.included_documents}
 
-    assert included_ids == {"AP-001", "AP-002", "RP-001"}
+    assert included_ids == {
+        "AP-001", "AP-002", "RP-001", "DD-001", "RA-001", "EI-001", "EI-012",
+        "EI-002", "EI-003", "FP-009", "GL-001", "ADR-001", "ADR-002",
+        "ADR-003", "ADR-004", "ADR-005", "ADR-009", "ADR-010", "ADR-011",
+        "ADR-012", "ADR-013", "ADR-014", "ADR-016",
+    }
     assert included_ids.issubset(registry_ids)
     assert compilation.dependencies
     assert compilation.non_promotion_statement
