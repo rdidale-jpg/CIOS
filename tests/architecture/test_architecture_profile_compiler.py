@@ -14,7 +14,7 @@ def test_compiler_parses_registry_rows() -> None:
     documents = parse_authority_registry(REGISTRY.read_text(encoding="utf-8"))
 
     ids = {document.document_id for document in documents}
-    assert {"AP-001", "AP-002", "EU-001", "ADR-023"}.issubset(ids)
+    assert {"AP-001", "AP-002", "RP-001", "EU-001", "ADR-023"}.issubset(ids)
 
 
 def test_architecture_authority_profile_includes_only_accepted_authority() -> None:
@@ -22,7 +22,7 @@ def test_architecture_authority_profile_includes_only_accepted_authority() -> No
 
     included_ids = {document.document_id for document in compilation.included_documents}
     excluded_ids = {document.document_id for document in compilation.excluded_documents}
-    assert included_ids == {"AP-001", "AP-002"}
+    assert included_ids == {"AP-001", "AP-002", "RP-001"}
     assert {"EU-001", "ADR-023"}.issubset(excluded_ids)
     assert compilation.source_registry_path == "architecture/reference-architecture/Architecture-Authority-Registry.md"
     assert compilation.non_promotion_statement
@@ -36,7 +36,8 @@ def test_review_context_preserves_review_and_proposed_statuses() -> None:
 
 
 def test_production_agent_profiles_do_not_infer_membership() -> None:
-    assert compile_architecture_profile("researcher-pack", ROOT).included_documents == ()
+    researcher_ids = {document.document_id for document in compile_architecture_profile("researcher-pack", ROOT).included_documents}
+    assert researcher_ids == {"AP-001", "AP-002", "RP-001"}
     assert compile_architecture_profile("reviewer-pack", ROOT).included_documents == ()
 
 

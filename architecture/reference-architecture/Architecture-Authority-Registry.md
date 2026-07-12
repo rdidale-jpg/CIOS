@@ -34,8 +34,9 @@ This registry records architecture authority status and release-profile membersh
 
 | ID | Title | Path | Status | Authority classification | Release-profile membership | Dependencies | Validation trigger |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| AP-001 | Architecture Compilation Standard | `architecture/reference-architecture/standards/AP-001-Architecture-Compilation-Standard.md` | Accepted | Architecture process standard governing compilation from the Authority Registry; documentation-only and non-runtime | architecture-authority | Architecture Authority Registry; Reference Architecture; Document Map | Registry-backed compilation check before any future architecture pack promotion |
-| AP-002 | Architecture Metadata Standard | `architecture/reference-architecture/standards/AP-002-Architecture-Metadata-Standard.md` | Accepted | Architecture process standard governing canonical document metadata semantics; documentation-only and non-runtime | architecture-authority | Architecture Authority Registry; AP-001; Document Map | Registry-backed metadata compatibility check before compiler enforcement |
+| AP-001 | Architecture Compilation Standard | `architecture/reference-architecture/standards/AP-001-Architecture-Compilation-Standard.md` | Accepted | Architecture process standard governing compilation from the Authority Registry; documentation-only and non-runtime | architecture-authority; researcher-pack | Architecture Authority Registry; Reference Architecture; Document Map | Registry-backed compilation check before any future architecture pack promotion |
+| AP-002 | Architecture Metadata Standard | `architecture/reference-architecture/standards/AP-002-Architecture-Metadata-Standard.md` | Accepted | Architecture process standard governing canonical document metadata semantics; documentation-only and non-runtime | architecture-authority; researcher-pack | Architecture Authority Registry; AP-001; Document Map | Registry-backed metadata compatibility check before compiler enforcement |
+| RP-001 | Enterprise Blueprint Researcher Profile | `architecture/reference-architecture/profiles/RP-001-Enterprise-Blueprint-Researcher-Profile.md` | Accepted | Architecture role profile governing Enterprise Blueprint Researcher responsibilities and researcher-pack composition; documentation-only and non-runtime | architecture-authority; researcher-pack | Architecture Authority Registry; AP-001; AP-002; Document Map | Researcher-pack compilation must be non-empty and fully registry-traceable |
 
 ## Review-material registry entries
 
@@ -46,4 +47,4 @@ This registry records architecture authority status and release-profile membersh
 
 ## Production profile note
 
-EU-001 and ADR-023 are intentionally absent from the current `FLORA_ARCHITECTURE_DOWNLOAD_MANIFEST.json` export profile. They must not be added to production Researcher or Reviewer packs until a separate accepted architecture decision approves that change.
+EU-001 and ADR-023 are intentionally absent from the current `FLORA_ARCHITECTURE_DOWNLOAD_MANIFEST.json` export profile. They must not be added to production Researcher or Reviewer packs until a separate accepted architecture decision approves that change. The approved Researcher-pack membership is limited to accepted registry rows with explicit `researcher-pack` membership, currently AP-001, AP-002 and RP-001.
