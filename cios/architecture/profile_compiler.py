@@ -18,7 +18,7 @@ import zipfile
 COMPILER_VERSION = "0.1.0"
 REGISTRY_PATH = Path("architecture/reference-architecture/Architecture-Authority-Registry.md")
 ARCHITECTURE_VERSION = "CIOS Architecture v2.0"
-SUPPORTED_PROFILES = {"architecture-authority", "researcher-pack", "reviewer-pack", "review-context"}
+SUPPORTED_PROFILES = {"architecture-authority", "researcher-pack", "assurance-pack", "reviewer-pack", "review-context"}
 ACCEPTED_STATUS = "Accepted"
 DETERMINISTIC_ZIP_TIMESTAMP = (2026, 7, 12, 0, 0, 0)
 
@@ -26,6 +26,20 @@ STANDALONE_RESEARCHER_DOCUMENT_IDS = (
     "AP-001",
     "AP-002",
     "RP-001",
+    "DD-001",
+    "RA-001",
+    "EI-001",
+    "EI-012",
+    "EI-002",
+    "EI-003",
+    "FP-009",
+    "GL-001",
+)
+
+STANDALONE_ASSURANCE_DOCUMENT_IDS = (
+    "AP-001",
+    "AP-002",
+    "RP-002",
     "DD-001",
     "RA-001",
     "EI-001",
@@ -81,6 +95,11 @@ class ResearcherRuntimePackage:
         expected_names = sorted(file.name for file in self.upload_files)
         with zipfile.ZipFile(BytesIO(zip_bytes), "r") as archive:
             return archive.testzip() is None and sorted(archive.namelist()) == expected_names
+
+
+@dataclass(frozen=True)
+class AssuranceRuntimePackage(ResearcherRuntimePackage):
+    """Compiled Enterprise Intelligence Assurance GPT runtime upload package."""
 
 
 @dataclass(frozen=True)
@@ -209,6 +228,39 @@ def compile_researcher_runtime_package(root: str | Path = ".") -> ResearcherRunt
         upload_files.append(_compile_adr_pack(pack_title, documents, root_path))
 
     return ResearcherRuntimePackage(upload_files=tuple(upload_files), source_profile=profile)
+
+
+def compile_assurance_runtime_package(root: str | Path = ".") -> AssuranceRuntimePackage:
+    """Compile the Enterprise Intelligence Assurance GPT runtime package.
+
+    The package follows the same registry-backed, documentation-only and
+    deterministic runtime upload model as the RP-001 Researcher package.
+    Canonical architecture documents remain unchanged; ADRs are copied into
+    generated compilation artefacts that retain ID, title, status and source
+    path traceability.
+    """
+
+    root_path = Path(root)
+    profile = compile_architecture_profile("assurance-pack", root_path)
+    by_id = {document.document_id: document for document in profile.included_documents}
+
+    upload_files: list[RuntimeUploadFile] = []
+    for document_id in STANDALONE_ASSURANCE_DOCUMENT_IDS:
+        document = by_id[document_id]
+        content = (root_path / document.path).read_text(encoding="utf-8")
+        upload_files.append(
+            RuntimeUploadFile(
+                name=Path(document.path).name,
+                content=content,
+                source_paths=(document.path,),
+            )
+        )
+
+    for pack_title, adr_ids in ADR_RUNTIME_PACKS:
+        documents = tuple(by_id[adr_id] for adr_id in adr_ids)
+        upload_files.append(_compile_adr_pack(pack_title.replace("ADR ", "Assurance ADR ", 1), documents, root_path))
+
+    return AssuranceRuntimePackage(upload_files=tuple(upload_files), source_profile=profile)
 
 
 def _compile_adr_pack(pack_title: str, documents: tuple[RegistryDocument, ...], root: Path) -> RuntimeUploadFile:
