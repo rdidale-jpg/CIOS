@@ -14,7 +14,7 @@ def test_compiler_parses_registry_rows() -> None:
     documents = parse_authority_registry(REGISTRY.read_text(encoding="utf-8"))
 
     ids = {document.document_id for document in documents}
-    assert {"AP-001", "AP-002", "RP-001", "EU-001", "ADR-023"}.issubset(ids)
+    assert {"AP-001", "AP-002", "RP-001", "RP-002", "EU-001", "ADR-023"}.issubset(ids)
 
 
 def test_architecture_authority_profile_includes_only_accepted_authority() -> None:
@@ -23,7 +23,7 @@ def test_architecture_authority_profile_includes_only_accepted_authority() -> No
     included_ids = {document.document_id for document in compilation.included_documents}
     excluded_ids = {document.document_id for document in compilation.excluded_documents}
     assert included_ids == {
-        "AP-001", "AP-002", "RP-001", "DD-001", "RA-001", "EI-001", "EI-012",
+        "AP-001", "AP-002", "RP-001", "RP-002", "DD-001", "RA-001", "EI-001", "EI-012",
         "EI-002", "EI-003", "FP-009", "GL-001", "ADR-001", "ADR-002",
         "ADR-003", "ADR-004", "ADR-005", "ADR-009", "ADR-010", "ADR-011",
         "ADR-012", "ADR-013", "ADR-014", "ADR-016",
