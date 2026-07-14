@@ -2,7 +2,7 @@
 
 **Status:** Draft
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-11
+**Last updated:** 2026-07-14
 
 This map helps readers find the architecture paper that owns a concept. The Reference Architecture is the entry point; the documents below remain the primary homes for detailed standards and models.
 
@@ -58,6 +58,9 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | EI-004 | Commercial Reasoning Framework | Defines commercial reasoning over enterprise knowledge. | Present | `architecture/enterprise-intelligence/volume-2-commercial-intelligence/` | Connects Enterprise Intelligence to CIRM reasoning. |
 | EI-005 | Transformation Prediction Model | Defines how CIOS predicts transformation. | Present | `architecture/enterprise-intelligence/volume-2-commercial-intelligence/` | Owns Transformation Prediction concepts. |
 | EI-006 | Opportunity Prediction Engine | Defines commercial opportunity prediction. | Present | `architecture/enterprise-intelligence/volume-2-commercial-intelligence/` | Owns Opportunity Outlook and accessibility logic. |
+| OT-001 | [Opportunity Twin Specification](../specifications/opportunity-twins/OT-001-Opportunity-Twin-Specification.md) | Defines the Review Opportunity Twin interface, including explicit OPI-001 and RTP-001 relationships. | Review | `architecture/specifications/opportunity-twins/` | Documentation-only Review specification beneath EI-006; not Accepted and not production profile material. |
+| OPI-001 | [Opportunity Positioning Intelligence](standards/OPI-001-Opportunity-Positioning-Intelligence.md) | Defines the Review method for candidate positioning objects contributed to Opportunity Twins. | Review | `architecture/reference-architecture/standards/` | Explicit Review input to OT-001; not Accepted and not production profile material. |
+| RTP-001 | [Research-to-Positioning Input Contract](../enterprise-intelligence/contracts/RTP-001-Research-to-Positioning-Input-Contract.md) | Defines the Review governed handover from Research to Positioning. | Review | `architecture/enterprise-intelligence/contracts/` | Explicit Review handover into OT-001 and OPI-001; not Accepted and not production profile material. |
 | EI-007 | Executive Intelligence Model | Defines executive actors, ownership and influence. | Present | `architecture/enterprise-intelligence/volume-3-human-intelligence/` | Owns Executive Intelligence Layer. |
 | EI-008 | Enterprise Weather Model | Defines current conditions affecting enterprise change. | Present | `architecture/enterprise-intelligence/volume-4-enterprise-dynamics/` | Owns Enterprise Weather. |
 | EI-009 | Transformation Pressure Model | Defines internal and external pressure. | Present | `architecture/enterprise-intelligence/volume-4-enterprise-dynamics/` | Owns Transformation Pressure. |

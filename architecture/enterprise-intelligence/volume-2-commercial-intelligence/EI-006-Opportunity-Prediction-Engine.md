@@ -75,3 +75,13 @@ Relationship to recommendations describes the architectural expectations for thi
 - What additional evidence types should strengthen this model?
 - Which confidence thresholds should be standardised across EI papers?
 - How should user feedback update this part of the Commercial Digital Twin?
+
+## Review interfaces for Opportunity Twin positioning
+
+EI-006 remains the owner for Opportunity Prediction and Opportunity Twin logic. The current Review interface material beneath EI-006 is:
+
+- **OT-001 — Opportunity Twin Specification:** defines the Review Opportunity Twin object and interface shape.
+- **OPI-001 — Opportunity Positioning Intelligence:** contributes candidate positioning objects to the Opportunity Twin.
+- **RTP-001 — Research-to-Positioning Input Contract:** defines the governed handover from Research to Positioning.
+
+These relationships are explicit Review interfaces, not Unknown relationships. OPI-001 candidate positioning objects and RTP-001 handover fields remain Review material pending wider validation. They do not change runtime behaviour, production Researcher profiles or production Assurance profiles, and they do not mark OT-001, OPI-001 or RTP-001 as Accepted.
