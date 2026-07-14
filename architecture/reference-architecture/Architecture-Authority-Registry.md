@@ -3,7 +3,7 @@
 **Document class:** Architecture governance registry  
 **Status:** Draft  
 **Owner:** Rob / CIOS  
-**Last updated:** 2026-07-12
+**Last updated:** 2026-07-14
 
 ## Purpose
 
@@ -92,10 +92,13 @@ This registry records architecture authority status and release-profile membersh
 | ID | Title | Path | Status | Authority classification | Release-profile membership | Dependencies | Validation trigger |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | EU-001 | Enterprise Understanding Contract | `architecture/enterprise-intelligence/contracts/EU-001-Enterprise-Understanding-Contract.md` | Review | Proposed operational contract / review material; not accepted and not authoritative | none — excluded from `architecture-authority`, `researcher-pack`, `assurance-pack` and `reviewer-pack` | Reference Architecture; EI-001; EI-002; EI-003; EI-012; FP-009; ADR-009; Commercial Digital Twin Blueprint Contract | MOD and one materially different enterprise |
+| OT-001 | Opportunity Twin Specification | `architecture/specifications/opportunity-twins/OT-001-Opportunity-Twin-Specification.md` | Review | Proposed method / proposed operational contract; documentation-only; not accepted and not authoritative | none — excluded from `architecture-authority`, `researcher-pack`, `assurance-pack` and `reviewer-pack` | EI-006; EI-012; FP-009; OPI-001; RTP-001 | Wider validation across materially different enterprises and opportunity types |
+| OPI-001 | Opportunity Positioning Intelligence | `architecture/reference-architecture/standards/OPI-001-Opportunity-Positioning-Intelligence.md` | Review | Proposed method / proposed operational contract; documentation-only; not accepted and not authoritative | none — excluded from `architecture-authority`, `researcher-pack`, `assurance-pack` and `reviewer-pack` | OT-001; RTP-001; EI-006; FP-009 | Wider validation across materially different enterprises and positioning use cases |
+| RTP-001 | Research-to-Positioning Input Contract | `architecture/enterprise-intelligence/contracts/RTP-001-Research-to-Positioning-Input-Contract.md` | Review | Proposed method / proposed operational contract; documentation-only; not accepted and not authoritative | none — excluded from `architecture-authority`, `researcher-pack`, `assurance-pack` and `reviewer-pack` | OT-001; OPI-001; EI-006; EI-012; FP-009 | Wider validation across materially different research-to-positioning handovers |
 | ADR-023 | Enterprise Understanding as the Primary Governed Asset | `architecture/decisions/ADR-023-Enterprise-Understanding-as-the-Primary-Governed-Asset.md` | Proposed | Proposed ADR; not accepted and not authoritative | none — excluded from `architecture-authority`, `researcher-pack`, `assurance-pack` and `reviewer-pack` | Reference Architecture; EI-001; EI-002; EI-003; EI-012; FP-009; ADR-009; Commercial Digital Twin Blueprint Contract; EU-001 | MOD and one materially different enterprise |
 
 ## Production profile note
 
-EU-001 and ADR-023 remain excluded from `architecture-authority`, `researcher-pack` and `reviewer-pack`; they are also excluded from `assurance-pack`.
+EU-001, OT-001, OPI-001, RTP-001 and ADR-023 remain excluded from `architecture-authority`, `researcher-pack` and `reviewer-pack`; they are also excluded from `assurance-pack`.
 
-EU-001 and ADR-023 are intentionally absent from the current `FLORA_ARCHITECTURE_DOWNLOAD_MANIFEST.json` export profile. They must not be added to production Researcher, Assurance or Reviewer packs until a separate accepted architecture decision approves that change. The approved Researcher-pack membership is limited to accepted registry rows with explicit `researcher-pack` membership. As of 2026-07-12, this includes AP-001, AP-002, RP-001, accepted Researcher architecture foundations, relevant accepted ADRs and the Glossary listed above.
+EU-001, OT-001, OPI-001, RTP-001 and ADR-023 are intentionally absent from the current `FLORA_ARCHITECTURE_DOWNLOAD_MANIFEST.json` export profile. They must not be added to production Researcher, Assurance or Reviewer packs until a separate accepted architecture decision approves that change. The approved Researcher-pack membership is limited to accepted registry rows with explicit `researcher-pack` membership. As of 2026-07-12, this includes AP-001, AP-002, RP-001, accepted Researcher architecture foundations, relevant accepted ADRs and the Glossary listed above.
