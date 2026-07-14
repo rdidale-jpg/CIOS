@@ -55,6 +55,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | EI-001 | Enterprise Model Specification | Defines the durable Enterprise Model and Financial Metric Data Contract. | Present | `architecture/enterprise-intelligence/volume-1-enterprise-modelling/` | Owns Commercial Digital Twin structure and canonical financial data. |
 | EI-002 | Enterprise Knowledge Graph | Defines graph entities, edges and relationship intelligence. | Present | `architecture/enterprise-intelligence/volume-1-enterprise-modelling/` | Owns Knowledge Graph Layer. |
 | EI-003 | Enterprise Behaviour Model | Defines enterprise behaviour patterns. | Present | `architecture/enterprise-intelligence/volume-1-enterprise-modelling/` | Supports Behaviour and Dynamics Layer. |
+| EIF-001 | [Enterprise Intelligence Foundation Model](standards/EIF-001-Enterprise-Intelligence-Foundation-Model.md) | Defines the Review method for constructing the initial Enterprise Twin from public-domain evidence before Opportunity Discovery. | Review | `architecture/reference-architecture/standards/` | Documentation-only Review input to EOD-001; extends EI-001, EI-002, EI-003 and EI-012 without changing canonical models or production packs. |
 | EI-004 | Commercial Reasoning Framework | Defines commercial reasoning over enterprise knowledge. | Present | `architecture/enterprise-intelligence/volume-2-commercial-intelligence/` | Connects Enterprise Intelligence to CIRM reasoning. |
 | EI-005 | Transformation Prediction Model | Defines how CIOS predicts transformation. | Present | `architecture/enterprise-intelligence/volume-2-commercial-intelligence/` | Owns Transformation Prediction concepts. |
 | EI-006 | Opportunity Prediction Engine | Defines commercial opportunity prediction. | Present | `architecture/enterprise-intelligence/volume-2-commercial-intelligence/` | Owns Opportunity Outlook and accessibility logic. |
@@ -102,9 +103,10 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 6. Read [Architecture Principles](Architecture-Principles.md).
 7. Read Founding Papers FP-003 to FP-009 to understand CIRM.
 8. Read Enterprise Intelligence papers EI-001 to EI-012 to understand the Commercial Digital Twin; EI-001 owns financial metric data and EI-012 owns Observation lifecycle.
-9. For Financial Intelligence, read ADR-010 and the Flora Financial Intelligence Runtime Specification.
-10. Read relevant [ADRs](../decisions/README.md).
-11. Read runtime architecture documents before changing Flora, Newton, Observatory or Publisher behaviour.
+9. Read EIF-001 before EOD-001 when constructing a new Enterprise Twin from public-domain evidence.
+10. For Financial Intelligence, read ADR-010 and the Flora Financial Intelligence Runtime Specification.
+11. Read relevant [ADRs](../decisions/README.md).
+12. Read runtime architecture documents before changing Flora, Newton, Observatory or Publisher behaviour.
 
 
 
