@@ -76,6 +76,41 @@ Observable Reality
 ```
 
 
+The canonical Enterprise Intelligence lifecycle for enterprise-specific work is:
+
+```text
+Enterprise
+  ↓
+EIF-001 — Enterprise Intelligence Foundation
+  ↓
+Enterprise Twin
+  ↓
+EOD-001 — Enterprise Opportunity Discovery
+  ↓
+Opportunity Portfolio
+  ↓
+Opportunity Prioritisation
+  ↓
+OT-001 — Opportunity Twin
+  ↓
+Research Sprint
+  ↓
+RTP-001
+  ↓
+OPI-001
+  ↓
+Provider Fit
+  ↓
+Executive Pursuit
+  ↓
+Learning
+  ↓
+Enterprise Twin evolves
+```
+
+EIF-001 comes before EOD-001 because durable enterprise understanding must exist before CIOS reasons about opportunity candidates. EOD-001 derives opportunities from the Enterprise Twin rather than reconstructing identity, purpose, value model, operating model, behaviour, technology, ecosystem, risk and change foundations.
+
+
 ### Architecture v2.0 intelligence domains
 
 **Enterprise Intelligence** is the governed discipline that turns evidence-backed Observations into durable Enterprise Models, graph state, behaviour state, commercial reasoning and learning. It owns canonical meaning through EI-001, EI-002, EI-003, EI-012 and related Enterprise Intelligence papers.

@@ -5,13 +5,13 @@
 **Owner:** Rob / CIOS  
 **Last updated:** 2026-07-14  
 **Production behaviour:** Documentation-only architecture standard. Does not change runtime behaviour, production Researcher packs, Enterprise Model, Observation Model, Knowledge Graph, AP-001 or AP-002.  
-**Relationship:** EOD precedes EIRS.
+**Relationship:** EOD begins after EIF-001 has produced the initial Enterprise Twin and precedes EIRS.
 
 ## Purpose
 
 Define how CIOS discovers opportunities before researching them.
 
-EOD-001 establishes an enterprise-first discovery method so future Research Sprints no longer assume that the opportunity is already known.
+EOD-001 establishes an enterprise-first discovery method so future Research Sprints no longer assume that the opportunity is already known. EOD-001 starts from the Enterprise Twin produced by EIF-001 and must not duplicate Foundation work.
 
 ## Mission
 
@@ -172,21 +172,25 @@ EOD precedes EIRS.
 The enterprise intelligence lifecycle is:
 
 1. Enterprise.
-2. Enterprise Opportunity Discovery.
-3. Opportunity Selection.
-4. Research Object Validation.
-5. Enterprise Understanding.
-6. Research-to-Positioning Handover.
-7. Opportunity Positioning.
-8. Positioning Insight Deepening.
-9. Decision Envelope.
-10. Provider Fit outside public research.
-11. Executive Pursuit.
-12. Learning.
+2. EIF-001 Enterprise Intelligence Foundation.
+3. Enterprise Twin.
+4. Enterprise Opportunity Discovery.
+5. Opportunity Portfolio.
+6. Opportunity Prioritisation.
+7. OT-001 Opportunity Twin.
+8. Research Sprint.
+9. Research-to-Positioning Handover.
+10. Opportunity Positioning.
+11. Positioning Insight Deepening.
+12. Decision Envelope.
+13. Provider Fit outside public research.
+14. Executive Pursuit.
+15. Learning.
+16. Enterprise Twin evolves.
 
 ## Boundary with EIRS
 
-EOD identifies and prioritises opportunity candidates. EIRS researches a selected and validated opportunity.
+EOD identifies and prioritises opportunity candidates from the EIF-001 Enterprise Twin. EIRS researches a selected and validated opportunity.
 
 EOD must not produce provider-specific fit claims. Provider Fit requires private account knowledge, delivery capability context or supplier-specific qualification and is outside public-domain research.
 
