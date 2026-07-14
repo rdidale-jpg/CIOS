@@ -96,6 +96,59 @@ The Industry Research GPT must:
 
 Cross-Twin impact proposals are proposals until accepted by the relevant owning Twin or model process.
 
+
+## Enterprise Intelligence Research Sprint lifecycle
+
+**Status:** Review methodology extension derived from AL-001 and EOD-001. This section is architecture only and does not change runtime prompts, production Researcher packs or accepted model state.
+
+Future Research Sprints must not assume the opportunity is already known. The lifecycle is:
+
+```text
+Enterprise
+    ↓
+Enterprise Opportunity Discovery
+    ↓
+Opportunity Selection
+    ↓
+Research Object Validation
+    ↓
+Enterprise Understanding
+    ↓
+Research-to-Positioning Handover
+    ↓
+Opportunity Positioning
+    ↓
+Positioning Insight Deepening
+    ↓
+Decision Envelope
+    ↓
+Provider Fit (outside public research)
+    ↓
+Executive Pursuit
+```
+
+### Stage definitions
+
+1. **Enterprise** — Begin with the named enterprise and its public-domain context, not with a procurement reference or assumed buying event.
+2. **Enterprise Opportunity Discovery** — Build the enterprise change portfolio, programme landscape, procurement landscape, opportunity landscape, programme relationship map, emerging opportunities, prioritisation and evidence demand register.
+3. **Opportunity Selection** — Select the opportunity candidate that deserves a full Research Sprint, explaining why other candidates were not selected or should be sequenced later.
+4. **Research Object Validation** — Validate that the selected object is the correct research object and not merely a visible procurement, partial implementation route, stale artefact or misleading proxy for a wider transformation.
+5. **Enterprise Understanding** — Research the enterprise context, transformation drivers, stakeholders, constraints, evidence, unknowns and contradictions needed to understand the opportunity.
+6. **Research-to-Positioning Handover** — Produce a contract stating what is evidenced, inferred, unknown, contradictory, usable for positioning and not claimable.
+7. **Opportunity Positioning** — Convert enterprise understanding into opportunity positioning intelligence: strategic relevance, executive problem, likely decision frame, competitive context and evidence-governed pursuit implications.
+8. **Positioning Insight Deepening** — Develop strategic theses, executive narratives, proof architecture and conversation plays while preserving evidence boundaries.
+9. **Decision Envelope** — State whether pursuit conclusions are Supported, Supported with Caveats or Not Supported, including confidence, freshness, contradictions and evidence demand.
+10. **Provider Fit (outside public research)** — Assess supplier-specific fit only outside public research, using appropriate private account knowledge, delivery context and governance.
+11. **Executive Pursuit** — Use validated positioning and separate Provider Fit to shape executive pursuit activity.
+
+### CSM sprint validation demonstration
+
+The completed CSM sprint demonstrates why the lifecycle is needed. An EOD-first approach would have started from CSM as an enterprise and mapped transformation initiatives, programmes, platforms, suppliers and procurements before selecting a research object.
+
+That enterprise-first mapping would have been designed to identify Transformation Partner, Implementation Partner, Phase 2, Phase 2b, Oracle and related procurements as connected elements of the opportunity landscape without requiring Rob to already know about SIDP. SIDP would have been treated as evidence inside the Programme Relationship Map rather than as the automatic definition of the opportunity.
+
+The CSM validation remains Review material. It shows a learning-based improvement to methodology, but it does not promote Review material to Accepted architecture or prove the method across materially different enterprises.
+
 ## Completion checklist
 
 Before completion, the Research GPT must confirm:
