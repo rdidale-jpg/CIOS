@@ -31,6 +31,12 @@ This registry records architecture authority status and release-profile membersh
 | none | No production release-profile membership. |
 
 
+## Review commercial intelligence specifications
+
+| ID | Name | Path | Status | Scope | Release profiles | Authority chain | Validation expectation |
+|---|---|---|---|---|---|---|---|
+| OT-001 | Opportunity Twin Specification | `architecture/specifications/opportunities/OT-001-Opportunity-Twin-Specification.md` | Review | Proposed subordinate model specification defining durable Opportunity Twin memory under EI-006; documentation-only and non-runtime | Not in accepted release profiles | EI-006; EOD-001; FP-008; EI-001; EI-002; EI-012; ADR-002; ADR-005; ADR-009; ADR-012; ADR-014; ADR-016 | Naming, ownership, lifecycle and Provider Fit boundary checks before any promotion |
+
 ## Accepted architecture process standards
 
 | ID | Title | Path | Status | Authority classification | Release-profile membership | Dependencies | Validation trigger |
