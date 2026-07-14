@@ -56,12 +56,14 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | EI-002 | Enterprise Knowledge Graph | Defines graph entities, edges and relationship intelligence. | Present | `architecture/enterprise-intelligence/volume-1-enterprise-modelling/` | Owns Knowledge Graph Layer. |
 | EI-003 | Enterprise Behaviour Model | Defines enterprise behaviour patterns. | Present | `architecture/enterprise-intelligence/volume-1-enterprise-modelling/` | Supports Behaviour and Dynamics Layer. |
 | EIF-001 | [Enterprise Intelligence Foundation Model](standards/EIF-001-Enterprise-Intelligence-Foundation-Model.md) | Defines the Review method for constructing the initial Enterprise Twin from public-domain evidence before Opportunity Discovery. | Review | `architecture/reference-architecture/standards/` | Documentation-only Review input to EOD-001; extends EI-001, EI-002, EI-003 and EI-012 without changing canonical models or production packs. |
+| EOD-001 | [Enterprise Opportunity Discovery Standard](standards/EOD-001-Enterprise-Opportunity-Discovery-Standard.md) | Defines the Review method for enterprise-first opportunity portfolio discovery after EIF-001. | Review | `architecture/reference-architecture/standards/` | Documentation-only Review input to OT-001, RTP-001 and OPI-001 validation; not Accepted and not production profile material. |
 | EI-004 | Commercial Reasoning Framework | Defines commercial reasoning over enterprise knowledge. | Present | `architecture/enterprise-intelligence/volume-2-commercial-intelligence/` | Connects Enterprise Intelligence to CIRM reasoning. |
 | EI-005 | Transformation Prediction Model | Defines how CIOS predicts transformation. | Present | `architecture/enterprise-intelligence/volume-2-commercial-intelligence/` | Owns Transformation Prediction concepts. |
 | EI-006 | Opportunity Prediction Engine | Defines commercial opportunity prediction. | Present | `architecture/enterprise-intelligence/volume-2-commercial-intelligence/` | Owns Opportunity Outlook and accessibility logic. |
 | OT-001 | [Opportunity Twin Specification](../specifications/opportunity-twins/OT-001-Opportunity-Twin-Specification.md) | Defines the Review Opportunity Twin interface, including explicit OPI-001 and RTP-001 relationships. | Review | `architecture/specifications/opportunity-twins/` | Documentation-only Review specification beneath EI-006; not Accepted and not production profile material. |
 | OPI-001 | [Opportunity Positioning Intelligence](standards/OPI-001-Opportunity-Positioning-Intelligence.md) | Defines the Review method for candidate positioning objects contributed to Opportunity Twins. | Review | `architecture/reference-architecture/standards/` | Explicit Review input to OT-001; not Accepted and not production profile material. |
 | RTP-001 | [Research-to-Positioning Input Contract](../enterprise-intelligence/contracts/RTP-001-Research-to-Positioning-Input-Contract.md) | Defines the Review governed handover from Research to Positioning. | Review | `architecture/enterprise-intelligence/contracts/` | Explicit Review handover into OT-001 and OPI-001; not Accepted and not production profile material. |
+| VAL-ROADMAP-001 | [CIOS Validation Roadmap v1.0](../validation/CIOS-Validation-Roadmap-v1.0.md) | Establishes the Review validation programme for Commercial Digital Twin artefacts before any promotion is considered. | Review | `architecture/validation/` | Programme governance roadmap only; records MOD as completed evidence and VodafoneThree, National Grid and United Utilities as planned validation enterprises without promoting Review artefacts. |
 | EI-007 | Executive Intelligence Model | Defines executive actors, ownership and influence. | Present | `architecture/enterprise-intelligence/volume-3-human-intelligence/` | Owns Executive Intelligence Layer. |
 | EI-008 | Enterprise Weather Model | Defines current conditions affecting enterprise change. | Present | `architecture/enterprise-intelligence/volume-4-enterprise-dynamics/` | Owns Enterprise Weather. |
 | EI-009 | Transformation Pressure Model | Defines internal and external pressure. | Present | `architecture/enterprise-intelligence/volume-4-enterprise-dynamics/` | Owns Transformation Pressure. |
@@ -104,9 +106,10 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 7. Read Founding Papers FP-003 to FP-009 to understand CIRM.
 8. Read Enterprise Intelligence papers EI-001 to EI-012 to understand the Commercial Digital Twin; EI-001 owns financial metric data and EI-012 owns Observation lifecycle.
 9. Read EIF-001 before EOD-001 when constructing a new Enterprise Twin from public-domain evidence.
-10. For Financial Intelligence, read ADR-010 and the Flora Financial Intelligence Runtime Specification.
-11. Read relevant [ADRs](../decisions/README.md).
-12. Read runtime architecture documents before changing Flora, Newton, Observatory or Publisher behaviour.
+10. Read the CIOS Validation Roadmap before proposing Accepted promotion for EIF-001, EOD-001, OT-001, RTP-001 or OPI-001.
+11. For Financial Intelligence, read ADR-010 and the Flora Financial Intelligence Runtime Specification.
+12. Read relevant [ADRs](../decisions/README.md).
+13. Read runtime architecture documents before changing Flora, Newton, Observatory or Publisher behaviour.
 
 
 
