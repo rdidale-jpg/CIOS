@@ -2,7 +2,7 @@
 
 **Status:** Draft  
 **Owner:** Rob / CIOS  
-**Last updated:** 2026-07-03
+**Last updated:** 2026-07-15
 
 ## Recommended starting point
 
@@ -63,6 +63,7 @@ The Founding Papers FP-003 to FP-009 define the intelligence process: observatio
 - EI-004 — Commercial Reasoning Framework
 - EI-005 — Transformation Prediction Model
 - EI-006 — Opportunity Prediction Engine
+- [EI-014 — Solution Positioning Intelligence Model](EI-014-Solution-Positioning-Intelligence-Model.md) — Review model that bridges Opportunity Twins to governed executive positioning intelligence without proposals, Provider Fit or runtime behaviour.
 
 ### Volume 3 — Human Intelligence
 
