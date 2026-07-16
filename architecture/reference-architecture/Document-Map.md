@@ -2,7 +2,7 @@
 
 **Status:** Draft
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-14
+**Last updated:** 2026-07-16
 
 This map helps readers find the architecture paper that owns a concept. The Reference Architecture is the entry point; the documents below remain the primary homes for detailed standards and models.
 
@@ -62,6 +62,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | EI-006 | Opportunity Prediction Engine | Defines commercial opportunity prediction. | Present | `architecture/enterprise-intelligence/volume-2-commercial-intelligence/` | Owns Opportunity Outlook and accessibility logic. |
 | OT-001 | [Opportunity Twin Specification](../specifications/opportunity-twins/OT-001-Opportunity-Twin-Specification.md) | Defines the Review Opportunity Twin interface, including explicit OPI-001 and RTP-001 relationships. | Review | `architecture/specifications/opportunity-twins/` | Documentation-only Review specification beneath EI-006; not Accepted and not production profile material. |
 | EI-014 | [Solution Positioning Intelligence Model](../enterprise-intelligence/EI-014-Solution-Positioning-Intelligence-Model.md) | Defines the Review Enterprise Intelligence model that turns a governed Opportunity Twin into evidence-backed executive positioning intelligence. | Review | `architecture/enterprise-intelligence/` | Documentation-only Review model immediately after OT-001; generates governed positioning intelligence, not proposals, Provider Fit, supplier recommendations or runtime behaviour. |
+| EI-015 | [Enterprise Intelligence Pattern Model](../enterprise-intelligence/EI-015-Enterprise-Intelligence-Pattern-Model.md) | Documents the Review model for evidence-governed, cross-enterprise Enterprise Intelligence Patterns. | Review | `architecture/enterprise-intelligence/` | Documentation-only comparative reasoning model; patterns emerge from mechanisms across multiple Enterprise Twins, do not create opportunities or Solution Patterns, and have no production-profile membership. |
 | OPI-001 | [Opportunity Positioning Intelligence](standards/OPI-001-Opportunity-Positioning-Intelligence.md) | Defines the Review method for candidate positioning objects contributed to Opportunity Twins. | Review | `architecture/reference-architecture/standards/` | Explicit Review input to OT-001; not Accepted and not production profile material. |
 | RTP-001 | [Research-to-Positioning Input Contract](../enterprise-intelligence/contracts/RTP-001-Research-to-Positioning-Input-Contract.md) | Defines the Review governed handover from Research to Positioning. | Review | `architecture/enterprise-intelligence/contracts/` | Explicit Review handover into OT-001 and OPI-001; not Accepted and not production profile material. |
 | VAL-ROADMAP-001 | [CIOS Validation Roadmap v1.0](../validation/CIOS-Validation-Roadmap-v1.0.md) | Establishes the Review validation programme for Commercial Digital Twin artefacts before any promotion is considered. | Review | `architecture/validation/` | Programme governance roadmap only; records MOD as completed evidence and VodafoneThree, National Grid and United Utilities as planned validation enterprises without promoting Review artefacts. |
@@ -72,7 +73,6 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | EI-011 | Enterprise Economics Model | Defines enterprise economics and financial pressure. | Present | `architecture/enterprise-intelligence/volume-4-enterprise-dynamics/` | Owns economics in the Commercial Digital Twin. |
 | EI-012 | Enterprise Observation Model | Defines Observations as intelligence atoms and owns Observation lifecycle state. | Present | `architecture/enterprise-intelligence/volume-5-intelligence-foundations/` | Owns Observation Doctrine and state-semantics separation. |
 | EI-013 | Enterprise Learning Model | Future paper for outcome learning and model improvement. | Future | `architecture/enterprise-intelligence/` | Will own Learning and Feedback Layer. |
-| EI-015 | Enterprise Question Model | Future paper for questions as architecture objects. | Future | `architecture/enterprise-intelligence/` | Will own structured unknowns and question generation. |
 | EI-016 | Enterprise Curiosity Engine | Future paper for curiosity-driven collection and reasoning. | Future | `architecture/enterprise-intelligence/` | Will own targeted learning from unknowns and contradictions. |
 
 ## Operational Intelligence Commissions
