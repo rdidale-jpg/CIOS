@@ -11,6 +11,7 @@ The library is organised so that high-level constitutional principles can be tra
 - `Engineering/` defines buildable technical standards, architecture decisions and implementation specifications.
 - `Research/` stores supporting research, literature reviews, papers and validation evidence.
 - `Models/` stores reusable conceptual, analytical and domain models.
+- `Founder_Knowledge/` preserves Founder Knowledge and governs its recovery without treating it as public evidence or accepted architecture.
 - `Images/` stores diagrams, figures and other documentation assets.
 - `MASTER_INDEX.md` is the authoritative catalogue of controlled documents.
 - `DOCUMENT_STANDARDS.md` defines numbering, naming, versioning and governance rules.
