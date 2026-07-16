@@ -75,6 +75,12 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | EI-015 | Enterprise Question Model | Future paper for questions as architecture objects. | Future | `architecture/enterprise-intelligence/` | Will own structured unknowns and question generation. |
 | EI-016 | Enterprise Curiosity Engine | Future paper for curiosity-driven collection and reasoning. | Future | `architecture/enterprise-intelligence/` | Will own targeted learning from unknowns and contradictions. |
 
+## Operational Intelligence Commissions
+
+| ID | Title | Purpose | Status | Folder | Relationship to Architecture |
+| --- | --- | --- | --- | --- | --- |
+| IC-001 | [Enterprise Foundation Intelligence Commission](../../operations/intelligence-commissions/IC-001-Enterprise-Foundation-Intelligence-Commission.md) | Defines the reusable operational commission and enterprise-configuration model for executing EIF-001 Enterprise Foundation research. | Review | `operations/intelligence-commissions/` | Consumes EIF-001 and related architecture without redefining it; documentation-only and excluded from production Researcher and Assurance packs pending validation across multiple enterprises. |
+
 ## Runtime Architecture
 
 | Area | Document | Purpose | Status | Folder | Relationship to Reference Architecture |
