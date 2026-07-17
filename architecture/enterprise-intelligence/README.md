@@ -82,3 +82,4 @@ Volume 5 defines the foundational intelligence concepts that sit between evidenc
 
 - [Volume 5 — Intelligence Foundations](volume-5-intelligence-foundations/README.md)
 - [EI-012 — Enterprise Observation Model](volume-5-intelligence-foundations/EI-012-Enterprise-Observation-Model.md)
+- [EI-017 — Enterprise Mechanism Model](EI-017-Enterprise-Mechanism-Model.md) — Review, documentation-only model for evidence-governed causal explanations; it preserves Observation primacy and has no production-profile membership.
