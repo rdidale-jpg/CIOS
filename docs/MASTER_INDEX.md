@@ -20,7 +20,9 @@ This index is the authoritative catalogue for controlled CIOS Knowledge Library 
 | CIOS-ENG-003 | Commercial Intelligence Pipeline Specification | Engineering Baseline | 1.0.0 | `docs/CIOS_ENG_003_Commercial_Intelligence_Pipeline_Specification_v1.0.0.md` |
 | CIOS-ENG-004 | Application Composition Standard | Draft Engineering Standard | 0.1.0 | `docs/Engineering/CIOS_ENG_004_Application_Composition_Standard_v0.1.0.md` |
 | CIOS-ENG-005 | Ontology Engineering Standard | Engineering Baseline | 1.0.0 | `docs/Engineering/CIOS-ENG-005_Ontology_Engineering_Standard_v1.0.0.md` |
-| FDK-001 | Founder Knowledge Register and Recovery Governance | Draft | 0.1.0 | `docs/Founder_Knowledge/FDK-001_Founder_Knowledge_Register_and_Recovery_Governance_v0.1.0.md` |
+| Founder Knowledge README | Founder Knowledge | Review | 1.0 | `knowledge/founder/README.md` |
+| FDK-001 | Founder Knowledge Register | Review | 1.0 | `knowledge/founder/FDK-001-Founder-Knowledge-Register.md` |
+| EGM-001 | Enterprise Growth Method | Review | 1.0 Founder Review Draft | `knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md` |
 
 | CIOS-CBOK-001 | CBOK Authoring System | Draft | 0.1.0 | `docs/CBOK/README.md` |
 | CIOS-CBOK-GUIDE-001 | CBOK Authoring Guide | Draft | 0.1.0 | `docs/CBOK/AUTHORING_GUIDE.md` |

@@ -77,6 +77,14 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | EI-013 | Enterprise Learning Model | Future paper for outcome learning and model improvement. | Future | `architecture/enterprise-intelligence/` | Will own Learning and Feedback Layer. |
 | EI-016 | Enterprise Curiosity Engine | Future paper for curiosity-driven collection and reasoning. | Future | `architecture/enterprise-intelligence/` | Will own targeted learning from unknowns and contradictions. |
 
+## Founder Knowledge (Non-Architecture)
+
+| Document | Purpose | Status | Folder | Relationship to Reference Architecture |
+| --- | --- | --- | --- | --- |
+| [Founder Knowledge README](../../knowledge/founder/README.md) | Entry point for preserved Founder Knowledge. | Review | `knowledge/founder/` | Discoverability only; not public evidence, architecture authority or production-profile material. |
+| [FDK-001 — Founder Knowledge Register](../../knowledge/founder/FDK-001-Founder-Knowledge-Register.md) | Governs Founder Knowledge preservation and recovery. | Review | `knowledge/founder/` | Governance only; does not override Accepted ADRs or owning architecture papers. |
+| [EGM-001 — Enterprise Growth Method](../../knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md) | Preserves the recovered Enterprise Growth Method. | Review | `knowledge/founder/recovered-methods/` | Founder Design Knowledge; no architecture authority and no production-profile membership. |
+
 ## Operational Intelligence Commissions
 
 | ID | Title | Purpose | Status | Folder | Relationship to Architecture |
