@@ -3,7 +3,7 @@
 **Document class:** Architecture governance registry  
 **Status:** Draft  
 **Owner:** Rob / CIOS  
-**Last updated:** 2026-07-16
+**Last updated:** 2026-07-17
 
 ## Purpose
 
@@ -91,6 +91,7 @@ This registry records architecture authority status and release-profile membersh
 
 | ID | Title | Path | Status | Authority classification | Release-profile membership | Dependencies | Validation trigger |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| FP-010 | Enterprise Reinvention Intelligence | `architecture/founding-papers/FP-010-Enterprise-Reinvention-Intelligence.md` | Review | Founding rationale / documentation-only; not accepted and not authoritative; does not supersede the legacy FP-010 Knowledge Pack Architecture allocation under ADR-016 | none — excluded from `architecture-authority`, `researcher-pack`, `assurance-pack` and `reviewer-pack` | EGM-001; CIOS Design Doctrine; Reference Architecture; EI-001; EI-012; OT-001; EI-014; EI-015; IT-001; IC-001; Accepted ADRs | Editorial reconciliation of the legacy FP-010 identifier collision; accepted ADR-016 and owning architecture papers prevail |
 | EIF-001 | Enterprise Intelligence Foundation Model | `architecture/reference-architecture/standards/EIF-001-Enterprise-Intelligence-Foundation-Model.md` | Review | Proposed method / documentation-only Foundation architecture; not accepted and not authoritative | none — excluded from `architecture-authority`, `researcher-pack`, `assurance-pack` and `reviewer-pack` | Reference Architecture; CIOS Design Doctrine; EI-001; EI-002; EI-003; EI-012; EOD-001; OT-001; AP-001; AP-002; RP-001; Accepted ADRs | VodafoneThree and one further materially different enterprise |
 | EOD-001 | Enterprise Opportunity Discovery Standard | `architecture/reference-architecture/standards/EOD-001-Enterprise-Opportunity-Discovery-Standard.md` | Review | Proposed method / documentation-only opportunity discovery architecture; not accepted and not authoritative | none — excluded from `architecture-authority`, `researcher-pack`, `assurance-pack` and `reviewer-pack` | EIF-001; OT-001; OPI-001; RTP-001; EI-006; EI-012; FP-009; Accepted ADRs | MOD evidence plus VodafoneThree, National Grid and United Utilities validation under VAL-ROADMAP-001 |
 | EU-001 | Enterprise Understanding Contract | `architecture/enterprise-intelligence/contracts/EU-001-Enterprise-Understanding-Contract.md` | Review | Proposed operational contract / review material; not accepted and not authoritative | none — excluded from `architecture-authority`, `researcher-pack`, `assurance-pack` and `reviewer-pack` | Reference Architecture; EI-001; EI-002; EI-003; EI-012; FP-009; ADR-009; Commercial Digital Twin Blueprint Contract | MOD and one materially different enterprise |

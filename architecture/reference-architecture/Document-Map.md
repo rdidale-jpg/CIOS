@@ -2,7 +2,7 @@
 
 **Status:** Draft
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-16
+**Last updated:** 2026-07-17
 
 This map helps readers find the architecture paper that owns a concept. The Reference Architecture is the entry point; the documents below remain the primary homes for detailed standards and models.
 
@@ -41,6 +41,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | FP-001 | CIOS Vision | Defines the founding vision for CIOS. | Present | `architecture/founding-papers/` | Provides the strategic origin and purpose of CIOS. |
 | FP-002 | Strategic Signal Standard | Earlier signal standard retained as founding context. | Present | `architecture/founding-papers/` | Historical/parallel signal language; FP-007 is the CIRM Volume II standard. |
 | FP-003 | Flora Intelligence Architecture | Defines Flora as the first operational intelligence architecture. | Present | `architecture/founding-papers/` | Anchors Flora runtime role in CIRM. |
+| FP-010 | [Enterprise Reinvention Intelligence](../founding-papers/FP-010-Enterprise-Reinvention-Intelligence.md) | Establishes the Review founding rationale linking EGM, CIOS, Flora, specialist Intelligence Companions, Commercial Asset Generation and continuous learning. | Review | `architecture/founding-papers/` | Documentation-only, non-runtime and excluded from production profiles; does not alter accepted ADR or owning-paper decisions. |
 | FP-004 | Evidence Acquisition Standard | Defines evidence acquisition, acceptance and curation rules. | Present | `architecture/founding-papers/` | Owns Source and Evidence Layer standards. |
 | FP-005 | Enterprise Intelligence Collection Framework | Defines enterprise evidence blueprints and collection priorities. | Present | `architecture/founding-papers/` | Connects governed collection to Enterprise Intelligence needs. |
 | FP-006 | Source Quality Standard | Defines source tiering, quality, yield and lifecycle actions. | Present | `architecture/founding-papers/` | Governs source trust, decay and replacement. |
