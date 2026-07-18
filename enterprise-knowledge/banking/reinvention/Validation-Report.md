@@ -20,6 +20,7 @@
 | No recommendations | **PASS** | No strategy, product, provider or pursuit recommendation is made. |
 | No implementation advice | **PASS** | Monitoring indicators and evidence required are validation fields, not implementation plans. |
 | No predictions | **PASS** | The register states possible evolution and learning requirements; it does not forecast winners or outcomes. |
+| Methodology ownership resolved | **PASS** | Required review determined EGM-001 owns the methodology for industry reinvention hypotheses; no separate Enterprise Reinvention Blueprint asset is required. |
 
 ## Cross-reference validation
 
@@ -28,7 +29,7 @@
 | Observation IDs | 47 unique Observation Register references resolved locally |
 | Mechanism IDs | 21 unique Mechanism Catalogue references resolved locally |
 | Enterprise models | Industry Twin, Infrastructure Twin and Enterprise Twins referenced as current-state model inputs |
-| Methodology | EGM-001 and EP16 used as methodology inputs, not public Banking evidence |
+| Methodology | EGM-001 governs the methodology relationship; section-level references resolve to the Universal Enterprise Reinvention Model and Industry Blueprint Method; EP16 remains a methodology input, not public Banking evidence |
 
 ## Boundary Tests
 
@@ -46,7 +47,7 @@
 
 - The register depends on the v0.1 Observation Register and the v0.1 Mechanism Catalogue as produced/candidate assets.
 - Observation source lineage is inherited from the Observation Register; this hypotheses asset does not restate every underlying source claim.
-- EP16 and EGM-001 are methodology inputs and Founder/method knowledge; they are not used as public Banking evidence.
+- EGM-001 is the owning methodology and EP16 remains a methodology input; neither is used as public Banking evidence.
 - Some hypotheses remain Medium or Medium-Low because governed evidence identifies a plausible direction but not sufficient causal proof.
 
 ## Acceptance State

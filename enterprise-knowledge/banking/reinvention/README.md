@@ -16,9 +16,9 @@ This folder governs Banking-domain Enterprise Knowledge assets for evidence-deri
 
 ## Methodology relationship
 
-The repository does not contain an asset titled `Enterprise Reinvention Blueprint`. The related governing methodology currently found in the repository is [EGM-001 — Enterprise Growth Method](../../../knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md), a Review / governed draft Founder Design Knowledge asset. Until a distinct Enterprise Reinvention Blueprint is governed, the formal blueprint relationship is unresolved.
+Methodology ownership is resolved to [EGM-001 — Enterprise Growth Method](../../../knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md). Required review confirmed that EGM-001 owns the strategic methodology, its Universal Enterprise Reinvention Model structures Industry Reinvention Models across the ten domains, and its Industry Blueprint Method governs the future-state industry-participant design process while preserving evidence, assumptions, strategic hypotheses, aspirations and Unknowns. No duplicate Enterprise Reinvention Blueprint asset is required or created.
 
-**Chief Architect action:** confirm whether `EGM-001` is the intended governing methodology for Banking Reinvention Hypotheses or provide/govern the missing Enterprise Reinvention Blueprint without deriving it from this Banking release.
+Section-level references are preserved for the [Universal Enterprise Reinvention Model](../../../knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md#chapter-2--the-universal-enterprise-reinvention-model) and [Industry Blueprint Method](../../../knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md#appendix-b--industry-blueprint-method).
 
 ## Intake artefact status
 

@@ -10,6 +10,8 @@
 
 Created the first governed Banking Reinvention Hypotheses knowledge asset. The asset identifies evidence-backed, falsifiable, commercially meaningful hypotheses about how the UK Banking industry could evolve over a 5–10 year horizon.
 
+The methodology ownership issue is resolved: required review determined that EGM-001 already owns the strategic methodology used to produce industry reinvention hypotheses. The release now links to EGM-001 as the governing methodology and preserves section-level references to the Universal Enterprise Reinvention Model and Industry Blueprint Method. No duplicate Enterprise Reinvention Blueprint asset was created.
+
 ## Inputs used
 
 | Input family | Assets |
@@ -60,6 +62,7 @@ Created the first governed Banking Reinvention Hypotheses knowledge asset. The a
 - Did not add external evidence.
 - Did not predict winners or future outcomes.
 - Did not create a Future Enterprise Model or Industry Reinvention Model.
+- Did not create a duplicate Enterprise Reinvention Blueprint methodology asset.
 
 ## Remaining limitations
 

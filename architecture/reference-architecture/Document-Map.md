@@ -82,7 +82,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 
 | Document | Purpose | Status | Folder | Relationship to Reference Architecture |
 | --- | --- | --- | --- | --- |
-| [Banking Reinvention Hypotheses v0.1](../../enterprise-knowledge/banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md) | Governs candidate, evidence-derived Banking-domain Reinvention Hypotheses. | Candidate | `enterprise-knowledge/banking/reinvention/` | Industry-specific Enterprise Knowledge; not an architecture specification, Accepted ADR, Enterprise Reinvention Blueprint or cross-industry methodology. Enterprise Reinvention Blueprint relationship is unresolved because no distinct blueprint asset exists in the repository; EGM-001 is recorded only as existing methodology input. |
+| [Banking Reinvention Hypotheses v0.1](../../enterprise-knowledge/banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md) | Governs candidate, evidence-derived Banking-domain Reinvention Hypotheses. | Candidate | `enterprise-knowledge/banking/reinvention/` | Industry-specific Enterprise Knowledge; not an architecture specification, Accepted ADR, Enterprise Reinvention Blueprint or cross-industry methodology. Methodology ownership resolved to EGM-001; section-level references preserved to the Universal Enterprise Reinvention Model and Industry Blueprint Method; no duplicate Enterprise Reinvention Blueprint asset created. |
 
 ## Founder Knowledge (Non-Architecture)
 
