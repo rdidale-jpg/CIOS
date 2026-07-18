@@ -85,3 +85,54 @@ def test_health_endpoint_still_passes() -> None:
         assert json.loads(response.read().decode("utf-8"))["status"] == "healthy"
     finally:
         conn.close(); server.shutdown(); server.server_close(); thread.join(timeout=2)
+
+
+def test_shape_banking_routes_and_explore_link_work() -> None:
+    for path in ("/shape", "/shape/banking", "/shape/strategic-sales-brief", "/shape/banking/strategic-sales-brief"):
+        status, html = _get(path)
+        assert status == 200
+        assert "Prepare an evidence-backed executive engagement." in html
+        assert "Build Strategic Sales Brief" in html
+    status, html = _get("/explore")
+    assert status == 200
+    assert "Shape the Strategic Sales Brief" in html
+    assert "href='/shape'" in html
+
+
+def test_strategic_sales_brief_required_sections_and_safety() -> None:
+    status, html = _get("/shape/banking/strategic-sales-brief")
+    assert status == 200
+    for text in [
+        "Derived runtime view — not authoritative Enterprise Knowledge",
+        "Current interpretation",
+        "Who should care",
+        "Why now",
+        "Why them",
+        "Supporting evidence",
+        "Supporting observations",
+        "Underlying mechanisms",
+        "BRH-003",
+        "What remains Unknown",
+        "Alternative interpretations",
+        "Confidence",
+        "Recommended next action",
+        "What should not yet be done",
+        "Lineage",
+    ]:
+        assert text in html
+    assert "Named executive: <strong>Unknown</strong>" in html
+    assert "Enterprise specificity is currently limited" in html
+    assert "validate with executive" in html
+    assert "approved recommendation" in html
+    assert "do not claim enterprise-specific urgency" in html
+
+
+def test_lineage_and_evidence_references_resolve() -> None:
+    status, html = _get("/shape")
+    assert status == 200
+    for object_id in ("BRH-003", "BK-OBS-014", "BK-OBS-015", "BK-OBS-016", "BK-OBS-029", "BK-OBS-047", "BM-04", "BM-02", "BM-14", "BM-15", "BK-IND-001"):
+        assert object_id in html
+        detail_status, detail_html = _get(f"/evidence/{object_id}")
+        assert detail_status == 200
+        assert object_id in detail_html
+        assert "Lineage" in detail_html
