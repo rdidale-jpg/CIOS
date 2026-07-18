@@ -1,67 +1,145 @@
 domain:
   id: banking
   name: Banking
-  status: candidate_reference_domain
-  version: "0.1"
-
-purpose:
-  - Govern the Banking Enterprise Intelligence knowledge base.
-  - Preserve research lineage and discoverability.
-  - Support Flora reasoning without treating reports as unqualified facts.
-
-architecture_dependencies:
-  - CIOS Chief Architect Handbook
-  - CIOS Reference Architecture
-  - CIOS-AI
-  - EI-001 Enterprise Model Specification
-  - EI-002 Enterprise Knowledge Graph
-  - EI-003 Enterprise Behaviour Model
-  - EI-012 Enterprise Observation Model
-  - EI-017 Enterprise Mechanism Model
-  - FP-009 Hypothesis Validation Standard
-
-asset_types:
-  industry:
-    - Banking Industry Foundation
-    - Banking Industry Twin
-    - Banking Mechanism Catalogue
-
-  enterprise_twins:
-    - Lloyds Banking Group
-    - NatWest Group
-    - Nationwide / Virgin Money
-    - Monzo
-    - Starling Bank
-    - Barclays
-    - Santander UK
-
-  infrastructure_twins:
-    - UK Banking Payments Infrastructure Twin
-
-  comparisons:
-    - Four-Bank Mechanism Differential Matrix v2.1
-    - Mechanism Identifier Reconciliation Register
-    - Participant-Type Variant Register
-    - Enterprise-Specific Mechanism Candidate Register
-    - Compound Mechanism Register
+  status: governed_reference_domain
+  version: "1.0"
 
 governance:
-  canonical_mechanism_authority: Banking Mechanism Catalogue
+  repository: Enterprise Knowledge
+  asset_ids_are_stable: true
+  derive_relationships_from_filenames: false
+  preserve_existing_content: true
   preserve_unknowns: true
   preserve_contradictions: true
-  require_evidence_lineage: true
-  distinguish_human_supplied_knowledge: true
-  separate_mechanism_confidence_from_enterprise_applicability: true
-  quarantine_commercial_opportunity_material_from_mechanism_validation: true
+
+assets:
+  - asset_id: BK-IND-001
+    title: "Banking Industry Foundation"
+    asset_type: "Industry Foundation"
+    domain: Banking
+    status: Validated
+    version: "1.0"
+    owner: TBD
+    location: "banking/industry/Banking-Industry-Foundation.md"
+    relationships: []
+  - asset_id: BK-IND-002
+    title: "Banking Industry Twin"
+    asset_type: "Industry Twin"
+    domain: Banking
+    status: Validated
+    version: "1.0"
+    owner: TBD
+    location: "banking/industry/Banking-Industry-Twin.md"
+    relationships: []
+  - asset_id: BK-MEC-001
+    title: "Banking Mechanism Catalogue and Executive Tension Model"
+    asset_type: "Mechanism Catalogue"
+    domain: Banking
+    status: Validated
+    version: "1.0"
+    owner: TBD
+    location: "banking/industry/Banking-Mechanism-Catalogue.md"
+    relationships: []
+  - asset_id: BK-INF-001
+    title: "UK Banking Payments Infrastructure Twin"
+    asset_type: "Infrastructure Twin"
+    domain: Banking
+    status: Validated
+    version: "0.1"
+    owner: TBD
+    location: "banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md"
+    relationships: []
+  - asset_id: BK-ENT-001
+    title: "Lloyds Enterprise Twin"
+    asset_type: "Enterprise Twin"
+    domain: Banking
+    status: Validated
+    version: "1.0"
+    owner: TBD
+    location: "banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md"
+    relationships: []
+  - asset_id: BK-ENT-002
+    title: "NatWest Enterprise Twin"
+    asset_type: "Enterprise Twin"
+    domain: Banking
+    status: Validated
+    version: "1.0"
+    owner: TBD
+    location: "banking/enterprises/natwest/NatWest-Enterprise-Twin.md"
+    relationships: []
+  - asset_id: BK-ENT-003
+    title: "Nationwide Virgin Money Enterprise Twin"
+    asset_type: "Enterprise Twin"
+    domain: Banking
+    status: Validated
+    version: "1.0"
+    owner: TBD
+    location: "banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md"
+    relationships: []
+  - asset_id: BK-ENT-004
+    title: "Monzo Enterprise Twin"
+    asset_type: "Enterprise Twin"
+    domain: Banking
+    status: Validated
+    version: "1.0"
+    owner: TBD
+    location: "banking/enterprises/monzo/Monzo-Enterprise-Twin.md"
+    relationships: []
+  - asset_id: BK-ENT-005
+    title: "Starling Enterprise Twin"
+    asset_type: "Enterprise Twin"
+    domain: Banking
+    status: Validated
+    version: "1.0"
+    owner: TBD
+    location: "banking/enterprises/starling/Starling-Enterprise-Twin.md"
+    relationships: []
+  - asset_id: BK-ENT-006
+    title: "Barclays Enterprise Twin"
+    asset_type: "Enterprise Twin"
+    domain: Banking
+    status: Validated
+    version: "1.0"
+    owner: TBD
+    location: "banking/enterprises/barclays/Barclays-Enterprise-Twin.md"
+    relationships: []
+  - asset_id: BK-ENT-007
+    title: "Santander UK Enterprise Twin"
+    asset_type: "Enterprise Twin"
+    domain: Banking
+    status: Validated
+    version: "1.0"
+    owner: TBD
+    location: "banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md"
+    relationships: []
+  - asset_id: BK-CMP-001
+    title: "Banking Mechanism Differential Matrix"
+    asset_type: "Differential Matrix"
+    domain: Banking
+    status: Validated
+    version: "1.0"
+    owner: TBD
+    location: "banking/comparisons/Banking-Mechanism-Differential-Matrix.md"
+    relationships: []
+  - asset_id: BK-CMP-002
+    title: "Four-Bank Mechanism Differential Matrix"
+    asset_type: "Differential Matrix"
+    domain: Banking
+    status: Validated
+    version: "2.1"
+    owner: TBD
+    location: "banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md"
+    relationships: []
+  - asset_id: BK-FLR-001
+    title: "Banking Knowledge Register for Flora"
+    asset_type: "Discovery Register"
+    domain: Banking
+    status: Validated
+    version: "1.0"
+    owner: TBD
+    location: "banking/flora/Banking-Knowledge-Register.md"
+    relationships: []
 
 flora:
-  discovery_register: flora/Banking-Knowledge-Register.md
-  machine_manifest: flora/Banking-Knowledge-Manifest.json
-  ingest_full_documents_automatically: false
-  require_governed_registration: true
-
-known_gaps:
-  - Final filenames and repository paths for research artefacts remain pending upload.
-  - Some Twins remain Foundation or Candidate assets rather than Accepted models.
-  - Ecosystem Twin is not yet validated as a formal Twin type.
-  - Mechanism Mapping Model has not yet been promoted into an accepted EI paper.
+  discovery_register: "banking/flora/Banking-Knowledge-Register.md"
+  machine_manifest: "banking/flora/Banking-Knowledge-Manifest.json"

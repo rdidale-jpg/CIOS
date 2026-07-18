@@ -1,18 +1,20 @@
 # Enterprise Knowledge Register
 
-This register records governed Enterprise Knowledge assets and placeholders for assets pending upload. No placeholder row is an acceptance decision.
+This register records every governed Enterprise Knowledge asset in the repository. Asset IDs are stable identifiers and must not be inferred from filenames.
 
-| Asset ID | Asset Name | Asset Type | Domain | Enterprise | Version | Status | Evidence Cut-off | Repository Path | Owning Architecture | Supersedes | Notes |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| EK-BANK-FOUNDATION-PENDING | Banking Industry Foundation | Industry Foundation | Banking | — | Pending upload | Pending upload | Path pending upload | EI-001; EI-017; FP-009 | — | Placeholder; final metadata pending upload. |
-| EK-BANK-INDUSTRY-TWIN-PENDING | Banking Industry Twin | Industry Twin | Banking | — | Pending upload | Pending upload | Path pending upload | EI-001; EI-002; EI-003 | — | Placeholder; do not treat as Accepted. |
-| EK-BANK-MECH-CAT-PENDING | Banking Mechanism Catalogue | Mechanism Catalogue | Banking | — | Pending upload | Pending upload | Path pending upload | EI-017 Enterprise Mechanism Model | — | Placeholder; canonical authority after governed upload. |
-| EK-BANK-DIFF-MATRIX-2-1-PENDING | Four-Bank Mechanism Differential Matrix v2.1 | Differential Matrix | Banking | Multiple | Pending upload | Pending upload | Path pending upload | EI-017; FP-009 | — | Placeholder; comparison input pending upload. |
-| EK-BANK-INFRA-PAYMENTS-PENDING | UK Banking Payments Infrastructure Twin | Infrastructure Twin | Banking | UK payments infrastructure | Pending upload | Pending upload | Path pending upload | EI-001; EI-012 | — | Placeholder. |
-| EK-BANK-LLOYDS-TWIN-PENDING | Lloyds Enterprise Twin | Enterprise Twin | Banking | Lloyds Banking Group | Pending upload | Pending upload | Path pending upload | EI-001; EI-017 | — | Placeholder. |
-| EK-BANK-NATWEST-TWIN-PENDING | NatWest Enterprise Twin | Enterprise Twin | Banking | NatWest Group | Pending upload | Pending upload | Path pending upload | EI-001; EI-017 | — | Placeholder. |
-| EK-BANK-NATIONWIDE-TWIN-PENDING | Nationwide / Virgin Money Enterprise Twin | Enterprise Twin | Banking | Nationwide / Virgin Money | Pending upload | Pending upload | Path pending upload | EI-001; EI-017 | — | Placeholder. |
-| EK-BANK-MONZO-TWIN-PENDING | Monzo Enterprise Twin | Enterprise Twin | Banking | Monzo | Pending upload | Pending upload | Path pending upload | EI-001; EI-017 | — | Placeholder. |
-| EK-BANK-STARLING-TWIN-PENDING | Starling Enterprise Twin | Enterprise Twin | Banking | Starling Bank | Pending upload | Pending upload | Path pending upload | EI-001; EI-017 | — | Placeholder. |
-| EK-BANK-BARCLAYS-TWIN-PENDING | Barclays Enterprise Twin | Enterprise Twin | Banking | Barclays | Pending upload | Pending upload | Path pending upload | EI-001; EI-017 | — | Placeholder. |
-| EK-BANK-SANTANDER-UK-TWIN-PENDING | Santander UK Enterprise Twin | Enterprise Twin | Banking | Santander UK | Pending upload | Pending upload | Path pending upload | EI-001; EI-017 | — | Placeholder. |
+| Asset ID | Title | Asset Type | Domain | Status | Version | Owner | Location |
+|---|---|---|---|---|---|---|---|
+| BK-IND-001 | Banking Industry Foundation | Industry Foundation | Banking | Validated | 1.0 | TBD | [banking/industry/Banking-Industry-Foundation.md](banking/industry/Banking-Industry-Foundation.md) |
+| BK-IND-002 | Banking Industry Twin | Industry Twin | Banking | Validated | 1.0 | TBD | [banking/industry/Banking-Industry-Twin.md](banking/industry/Banking-Industry-Twin.md) |
+| BK-MEC-001 | Banking Mechanism Catalogue and Executive Tension Model | Mechanism Catalogue | Banking | Validated | 1.0 | TBD | [banking/industry/Banking-Mechanism-Catalogue.md](banking/industry/Banking-Mechanism-Catalogue.md) |
+| BK-INF-001 | UK Banking Payments Infrastructure Twin | Infrastructure Twin | Banking | Validated | 0.1 | TBD | [banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md](banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md) |
+| BK-ENT-001 | Lloyds Enterprise Twin | Enterprise Twin | Banking | Validated | 1.0 | TBD | [banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md](banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md) |
+| BK-ENT-002 | NatWest Enterprise Twin | Enterprise Twin | Banking | Validated | 1.0 | TBD | [banking/enterprises/natwest/NatWest-Enterprise-Twin.md](banking/enterprises/natwest/NatWest-Enterprise-Twin.md) |
+| BK-ENT-003 | Nationwide Virgin Money Enterprise Twin | Enterprise Twin | Banking | Validated | 1.0 | TBD | [banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md](banking/enterprises/nationwide/Nationwide-Virgin-Money-Enterprise-Twin.md) |
+| BK-ENT-004 | Monzo Enterprise Twin | Enterprise Twin | Banking | Validated | 1.0 | TBD | [banking/enterprises/monzo/Monzo-Enterprise-Twin.md](banking/enterprises/monzo/Monzo-Enterprise-Twin.md) |
+| BK-ENT-005 | Starling Enterprise Twin | Enterprise Twin | Banking | Validated | 1.0 | TBD | [banking/enterprises/starling/Starling-Enterprise-Twin.md](banking/enterprises/starling/Starling-Enterprise-Twin.md) |
+| BK-ENT-006 | Barclays Enterprise Twin | Enterprise Twin | Banking | Validated | 1.0 | TBD | [banking/enterprises/barclays/Barclays-Enterprise-Twin.md](banking/enterprises/barclays/Barclays-Enterprise-Twin.md) |
+| BK-ENT-007 | Santander UK Enterprise Twin | Enterprise Twin | Banking | Validated | 1.0 | TBD | [banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md](banking/enterprises/santander-uk/Santander-UK-Enterprise-Twin.md) |
+| BK-CMP-001 | Banking Mechanism Differential Matrix | Differential Matrix | Banking | Validated | 1.0 | TBD | [banking/comparisons/Banking-Mechanism-Differential-Matrix.md](banking/comparisons/Banking-Mechanism-Differential-Matrix.md) |
+| BK-CMP-002 | Four-Bank Mechanism Differential Matrix | Differential Matrix | Banking | Validated | 2.1 | TBD | [banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md](banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md) |
+| BK-FLR-001 | Banking Knowledge Register for Flora | Discovery Register | Banking | Validated | 1.0 | TBD | [banking/flora/Banking-Knowledge-Register.md](banking/flora/Banking-Knowledge-Register.md) |

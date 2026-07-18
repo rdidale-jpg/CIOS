@@ -1,3 +1,16 @@
+---
+asset_id: "BK-MEC-001"
+title: "Banking Mechanism Catalogue and Executive Tension Model"
+asset_type: "Mechanism Catalogue"
+domain: "Banking"
+status: "Validated"
+version: "1.0"
+owner: TBD
+repository: "Enterprise Knowledge"
+created_from: "Industry Foundation synthesis"
+confidence: "High"
+---
+
 # Banking Mechanism Catalogue and Executive Tension Model — New Build Synthesis
 
 This commission converts the completed UK Retail and Commercial Banking Industry Foundation into reusable causal intelligence: mechanisms, executive tensions, Decision Envelopes and Reinvention Signals. It follows the supplied synthesis brief and does not use the Banking Reinvention Blueprint, Founder Design Knowledge, Provider Fit, private account knowledge or future-bank design. 

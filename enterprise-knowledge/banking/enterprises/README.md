@@ -17,3 +17,17 @@ Do not place canonical industry mechanism catalogues, comparison matrices, archi
 Asset ID; Asset Type; Domain; Version; Status; Evidence Cut-off; Produced By; Reviewed By; Owning Architecture; Supersedes; Source Conversation; Known Unknowns; Known Contradictions.
 
 Uploaded assets must preserve provenance, evidence cut-off, status, version, scope, confidence, Unknowns, Contradictions, human-supplied knowledge labels and links to owning architecture. Missing values must be labelled `Pending upload` or `Unknown`, not inferred.
+
+## Governed contents
+
+- [Lloyds](lloyds/README.md)
+- [NatWest](natwest/README.md)
+- [Nationwide / Virgin Money](nationwide/README.md)
+- [Monzo](monzo/README.md)
+- [Starling Bank](starling/README.md)
+- [Barclays](barclays/README.md)
+- [Santander UK](santander-uk/README.md)
+
+## Relationship to other assets
+
+Enterprise Twins link back to the Banking [MANIFEST.yaml](../MANIFEST.yaml) and repository [REGISTER.md](../../REGISTER.md).

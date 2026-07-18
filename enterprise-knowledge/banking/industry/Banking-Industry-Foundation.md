@@ -1,3 +1,16 @@
+---
+asset_id: "BK-IND-001"
+title: "Banking Industry Foundation"
+asset_type: "Industry Foundation"
+domain: "Banking"
+status: "Validated"
+version: "1.0"
+owner: TBD
+repository: "Enterprise Knowledge"
+created_from: "Research"
+confidence: "High"
+---
+
 # UK Retail and Commercial Banking Industry Foundation — New Build
 
 ## 1. Delivery and input manifest

@@ -1,3 +1,16 @@
+---
+asset_id: "BK-ENT-003"
+title: "Nationwide Virgin Money Enterprise Twin"
+asset_type: "Enterprise Twin"
+domain: "Banking"
+status: "Validated"
+version: "1.0"
+owner: TBD
+repository: "Enterprise Knowledge"
+created_from: "Research"
+confidence: "High"
+---
+
 Enterprise Twin 003 — Nationwide Building Society including Virgin Money
 
 Run mode: New Build.

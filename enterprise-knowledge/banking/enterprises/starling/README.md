@@ -33,3 +33,11 @@ Known Contradictions:
 ```
 
 Unknowns and Contradictions must be preserved. Enterprise-local mechanism identifiers must not be treated as canonical unless reconciled to the Banking Mechanism Catalogue.
+
+## Governed contents
+
+- [Starling-Enterprise-Twin.md](Starling-Enterprise-Twin.md)
+
+## Relationship to other assets
+
+This asset is controlled by the Banking [MANIFEST.yaml](../../MANIFEST.yaml), the enterprise index [README](../README.md), and the repository [REGISTER.md](../../../REGISTER.md).

@@ -1,3 +1,16 @@
+---
+asset_id: "BK-CMP-001"
+title: "Banking Mechanism Differential Matrix"
+asset_type: "Differential Matrix"
+domain: "Banking"
+status: "Validated"
+version: "1.0"
+owner: TBD
+repository: "Enterprise Knowledge"
+created_from: "Research"
+confidence: "High"
+---
+
 # Banking Mechanism Differential Matrix v1
 
 **Commission type:** Comparative intelligence synthesis.

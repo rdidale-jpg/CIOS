@@ -1,3 +1,16 @@
+---
+asset_id: "BK-ENT-001"
+title: "Lloyds Enterprise Twin"
+asset_type: "Enterprise Twin"
+domain: "Banking"
+status: "Validated"
+version: "1.0"
+owner: TBD
+repository: "Enterprise Knowledge"
+created_from: "Research"
+confidence: "High"
+---
+
 # Lloyds Banking Group Enterprise Twin Deepening
 
 Run mode: Refresh / deepening of Enterprise Twin 001, not rebuild.

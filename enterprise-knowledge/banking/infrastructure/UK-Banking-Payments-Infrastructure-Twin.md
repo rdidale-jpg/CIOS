@@ -1,3 +1,16 @@
+---
+asset_id: "BK-INF-001"
+title: "UK Banking Payments Infrastructure Twin"
+asset_type: "Infrastructure Twin"
+domain: "Banking"
+status: "Validated"
+version: "0.1"
+owner: TBD
+repository: "Enterprise Knowledge"
+created_from: "Research"
+confidence: "High"
+---
+
 
 UK BANKING PAYMENTS INFRASTRUCTURE TWIN
 Industry Infrastructure Twin v0.1
