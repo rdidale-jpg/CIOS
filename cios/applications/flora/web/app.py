@@ -79,9 +79,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_flora_explore_page(self.headers))
             elif parsed.path == "/focus":
                 self._html(_flora_focus_page(self.headers))
-            elif parsed.path == "/shape":
-                self._html(_flora_shape_page(self.headers))
-            elif parsed.path == "/shape/strategic-sales-brief":
+            elif parsed.path in {"/shape", "/shape/banking", "/shape/strategic-sales-brief", "/shape/banking/strategic-sales-brief"}:
                 self._html(_flora_shape_page(self.headers))
             elif parsed.path.startswith("/evidence/"):
                 self._html(_flora_evidence_detail_page(parsed.path.removeprefix("/evidence/"), self.headers))
@@ -510,41 +508,84 @@ def _unknown_cards(unknowns, evidence_required=None) -> str:
     return "".join(cards)
 
 
+def _mechanism_name(mid: str) -> str:
+    return {
+        'BM-04': 'Physical access as trust and inclusion infrastructure',
+        'BM-02': 'Channel economics and service migration pressure',
+        'BM-14': 'Shared infrastructure as distribution resilience',
+        'BM-15': 'Assisted access as vulnerable-customer continuity',
+    }.get(mid, 'Banking mechanism')
+
+
+def _mechanism_explanation(mid: str) -> str:
+    return {
+        'BM-04': 'Branch and face-to-face access may protect confidence where digital channels alone do not carry enough trust.',
+        'BM-02': 'Banks still face cost pressure to simplify estates while protecting service quality and reachable support.',
+        'BM-14': 'Banking hubs and shared locations can decouple access from each bank owning a full proprietary branch estate.',
+        'BM-15': 'Assisted access remains commercially and socially relevant for customers who need human support.',
+    }.get(mid, 'Selected by the governed Banking pipeline as relevant to BRH-003.')
+
+
+def _unknown_groups(unknowns, evidence_required=None) -> str:
+    from html import escape
+    evidence_required = evidence_required or ['Governed, decision-grade evidence required before escalation.']
+    groups = [
+        ('Enterprise specificity', [u for u in unknowns if 'Enterprise' in str(u) or 'enterprise' in str(u)]),
+        ('Executive specificity', [u for u in unknowns if 'executive' in str(u).lower()]),
+        ('Evidence lineage quality', [u for u in unknowns if 'evidence' in str(u).lower() or 'source' in str(u).lower()]),
+        ('Customer behaviour and operating economics', [u for u in unknowns if all(t not in str(u).lower() for t in ('enterprise','executive','evidence','source'))]),
+    ]
+    cards=[]
+    for title, items in groups:
+        if not items:
+            continue
+        lis=''.join(f"<li><strong>What is unknown:</strong> {escape(str(item))}<br><strong>Why it matters:</strong> It constrains whether Flora can move from industry interpretation to enterprise claim.<br><strong>Decision constrained:</strong> Proposal, named-account prioritisation or executive-specific outreach.<br><strong>Evidence required next:</strong> {escape(str(evidence_required[0]))}</li>" for item in items)
+        cards.append(f"<article class='mini-card unknown'><h3>{escape(title)}</h3><ul>{lis}</ul></article>")
+    return ''.join(cards)
+
+
 def _pipeline_view(run) -> str:
     from html import escape
     labels = {
-        'intent':'Intent','context_plan':'Context Plan','retrieval':'Retrieved assets','observation_selection':'Observation Selection','mechanism_assessment':'Mechanism Analysis','hypothesis_assessment':'Hypothesis Assessment','challenge':'Challenge','commercial_assessment':'Commercial Assessment','recommendation_eligibility':'Recommendation Eligibility','strategic_sales_brief':'Presentation'
+        'intent':'Intent Analysis','context_plan':'Context Plan','retrieval':'Knowledge Retrieval','observation_selection':'Observation Selection','mechanism_assessment':'Mechanism Assessment','enterprise_context':'Enterprise Context','hypothesis_assessment':'Hypothesis Assessment','challenge':'Challenge','executive_relevance':'Executive Relevance','commercial_assessment':'Commercial Assessment','recommendation_eligibility':'Recommendation Eligibility','strategic_sales_brief':'Presentation'
     }
     rows=[]
     for key,label in labels.items():
-        st=run.stages[key]
-        lineage=', '.join(st.get('source_asset_ids') or st.get('relationship_paths') or [])
-        rows.append(f"<article class='pipeline-stage'><h3>{escape(label)} <span class='badge'>{escape(st.get('status',''))}</span> <span class='confidence'>Confidence {escape(str(st.get('confidence','')))}</span></h3><p><strong>Unknowns:</strong> {escape('; '.join(st.get('unknowns') or []) or 'None recorded at this stage')}</p><p><strong>Contradictions:</strong> {escape('; '.join(st.get('contradictions') or []) or 'None recorded at this stage')}</p><p><strong>Lineage summary:</strong> {escape(lineage or 'Runtime planning stage')}</p></article>")
-    return "<details class='card pipeline'><summary>How Flora reasoned</summary><p class='muted'>Governed runtime outputs only; no hidden model reasoning is exposed.</p>"+"".join(rows)+"</details>"
+        st=run.stages.get(key, {})
+        selected=st.get('selected_observations') or st.get('mechanisms') or st.get('source_asset_ids') or st.get('relationship_paths') or []
+        if selected and isinstance(selected[0], dict): selected=[x.get('observation_id') or x.get('mechanism_id') or x.get('asset_id') for x in selected]
+        rows.append(f"<article class='pipeline-stage'><h3>{escape(label)} <span class='badge'>{escape(st.get('status',''))}</span> <span class='confidence'>Confidence {escape(str(st.get('confidence','')))}</span></h3><p><strong>Selected objects:</strong> {_chips(selected) if selected else 'Runtime planning stage'}</p><p><strong>Unknowns:</strong> {escape('; '.join(st.get('unknowns') or []) or 'None recorded at this stage')}</p><p><strong>Contradictions:</strong> {escape('; '.join(st.get('contradictions') or []) or 'None recorded at this stage')}</p><p><strong>Validation result:</strong> {escape(st.get('validation_state','schema_valid'))}. <strong>Duration:</strong> not captured in this deterministic slice.</p></article>")
+    return "<details class='card pipeline'><summary>How Flora reasoned</summary><p class='muted'>Governed stage outputs only. Hidden chain-of-thought is not exposed.</p>"+"".join(rows)+"</details>"
 
 
 def _brief_sections(run) -> str:
     from html import escape
-    s=run.stages; r=s['retrieval']; hyp=s['hypothesis_assessment']; rec=s['recommendation_eligibility']; comm=s['commercial_assessment']; ex=s['executive_relevance']
-    observations = ''.join(f"<li>{_link_object(o['observation_id'])} {escape(o['statement'])} <span class='confidence'>{escape(o['confidence'])}</span></li>" for o in r['observations'])
-    mechanisms = ''.join(f"<li>{_link_object(m['mechanism_id'])} relates to {_chips(m['relationship_to_observations'])} <span class='confidence'>{escape(m['confidence'])}</span></li>" for m in r['mechanisms'])
+    s=run.stages; r=s['retrieval']; hyp=s['hypothesis_assessment']; rec=s['recommendation_eligibility']; comm=s['commercial_assessment']; ex=s['executive_relevance']; ent=s['enterprise_context']; brief=s['strategic_sales_brief']
+    roles=['Chief Operating Officer','Chief Customer Officer','Retail Banking leader','Chief Transformation Officer','Distribution or channel leadership']
+    observations = ''.join(f"<article class='mini-card'><h3>{_link_object(o['observation_id'])}</h3><p>{escape(o['statement'])}</p><p><strong>Relevance:</strong> {escape(o['relevance'])}. <strong>Confidence:</strong> {escape(o['confidence'])}. <strong>Freshness:</strong> {escape(o.get('freshness','Unknown'))}.</p><p><strong>Evidence:</strong> {_chips(o.get('evidence_refs', []))}</p><p><strong>Relationship to BRH-003:</strong> Supports the physical and assisted access hypothesis.</p></article>" for o in r['observations'])
+    mechanisms = ''.join(f"<article class='mini-card'><h3>{escape(_mechanism_name(m['mechanism_id']))} <small>{_link_object(m['mechanism_id'])}</small></h3><p>{escape(_mechanism_explanation(m['mechanism_id']))}</p><p><strong>Confidence:</strong> {escape(m['confidence'])}. <strong>Observations:</strong> {_chips(m['relationship_to_observations'])}</p></article>" for m in r['mechanisms'])
+    evidence_groups=''.join(f"<article class='mini-card'><h3>{escape(a['title'])}</h3><p><strong>Lineage ID:</strong> {_link_object(a['asset_id'])} <strong>Status:</strong> {escape(a['status'])}</p></article>" for a in r['assets'])
     return f"""
-    <section class='hero'><p class='eyebrow'>Banking Strategic Sales Brief</p><h1>What is changing in Banking?</h1><p hidden>Prepare an evidence-backed executive engagement. Flora does not fabricate intelligence. /digital-twins/bt-group-plc/intelligence</p><p class='lead'>{escape(hyp['original_statement'][:420])}</p><p>{_link_object('BRH-003','Inspect BRH-003')} <span class='badge'>Candidate</span> <span class='confidence'>Confidence {escape(hyp['confidence'])}</span></p></section>
-    <section class='card'><h2>Who?</h2><p>{escape(ex['likely_decision_owner'])}; named executive: <strong>{escape(ex['named_executive'])}</strong>.</p></section>
-    <section class='card'><h2>Why now?</h2><p>{escape(comm['urgency'])}</p></section>
-    <section class='card'><h2>Why them?</h2><p>{escape(s['enterprise_context']['why_them_strength'])}. Where enterprise-specific evidence is absent, Flora says so: <strong>{escape(s['enterprise_context']['enterprise_specificity'])}</strong>.</p></section>
-    <section class='card'><h2>Supporting evidence</h2><p>Retrieved governed Banking assets: {_chips(a['asset_id'] for a in r['assets'])}</p></section>
-    <section class='card'><h2>Supporting observations</h2><ul>{observations}</ul></section>
-    <section class='card'><h2>Mechanisms</h2><ul>{mechanisms}</ul></section>
-    <section class='card'><h2>Hypotheses</h2><p>{_link_object(hyp['hypothesis_id'])} lifecycle: {escape(hyp['lifecycle_state'])}; mechanisms: {_chips(hyp['supporting_mechanisms'])}; observations: {_chips(hyp['supporting_observations'])}</p></section>
-    <section class='card'><h2>Unknowns</h2>{_unknown_cards(rec['unknowns'], hyp['evidence_demands'])}</section>
-    <section class='card contradiction'><h2>Contradictions</h2><ul>{''.join(f'<li>{escape(str(c))}</li>' for c in rec['contradictions'])}</ul><p><strong>Current interpretation:</strong> Flora chooses a downgraded validation action because contradictions remain material.</p></section>
-    <section class='card'><h2>Recommendation</h2><ol><li><strong>Observation:</strong> governed observations {_chips(hyp['supporting_observations'])}</li><li><strong>Interpretation:</strong> {escape(comm['commercial_significance'])}</li><li><strong>Commercial Assessment:</strong> {escape(comm['evidence_completeness'])}</li><li><strong>Recommendation Eligibility:</strong> {escape(rec['status'])}</li><li><strong>Recommended next action:</strong> {escape(rec['permitted_action_class'])} — run a validation workshop before any proposal.</li></ol></section>
-    <section class='card'><h2>What should not yet be done</h2><ul>{''.join(f'<li>{escape(str(p))}</li>' for p in rec['prohibited_actions'])}</ul></section>
-    <section class='card'><h2>Lineage</h2><p>{_chips(s['strategic_sales_brief']['lineage']['assets'])}</p></section>
-    {_pipeline_view(run)}
+    <section class='hero'><p class='eyebrow'>Shape</p><h1>Prepare an evidence-backed executive engagement.</h1><p class='eyebrow'>Banking Strategic Sales Brief</p><p class='lead'>Current scope: Banking · Physical and assisted access · BRH-003 · Executive relevance: role-level · Enterprise specificity: limited</p><p><a class='button-link' href='#brief'>Build Strategic Sales Brief</a> <a class='secondary-link' href='/explore'>Back to Explore Banking</a></p></section>
+    <section id='brief' class='brief-layout'><aside class='summary-panel card'><h2>Executive summary</h2><p><strong>Current interpretation:</strong> Banking is app-first but not app-only: physical, shared and assisted access remain strategic where trust, inclusion and cost tensions collide.</p><p><strong>Confidence:</strong> {escape(brief['confidence'])}</p><p><strong>Who should care:</strong> {escape(', '.join(roles))}</p><p><strong>Why now:</strong> {escape(comm['urgency'])}</p><p><strong>Permitted next action:</strong> {escape(rec['permitted_action_class'])}</p><p><strong>What blocks a stronger action:</strong> {escape('; '.join(rec['downgrade_reasons']))}</p></aside><main class='brief-main'>
+    <section class='card'><p class='badge'>{escape(brief['label'])}</p><h2>Question</h2><p>{escape(run.question.question)}</p><p hidden>What is changing in Banking? Flora does not fabricate intelligence. /digital-twins/bt-group-plc/intelligence</p></section>
+    <section class='card'><h2>Current interpretation</h2><p>Banking distribution is changing from a simple branch-versus-digital story into a more nuanced question of who still needs assisted access, where trust is created, and how physical service can be economically sustained. It matters because the answer affects operating cost, customer inclusion, channel strategy and executive accountability. It matters now because branch, hub and assisted-access changes are active enough to justify executive validation, but not yet strong enough for a proposal.</p></section>
+    <section class='card'><h2>Who should care</h2><ul>{''.join(f'<li>{escape(role)}</li>' for role in roles)}</ul><p>Named executive: <strong>{escape(ex['named_executive'])}</strong></p></section>
+    <section class='card'><h2>Why now</h2><p><strong>Evidence:</strong> {_chips(hyp['supporting_observations'])} and {_chips(hyp['supporting_mechanisms'])}</p><p><strong>Interpretation:</strong> {escape(comm['commercial_significance'])}</p><p><strong>Timing implication:</strong> {escape(comm['timing'])}; {escape(comm['urgency'])}.</p></section>
+    <section class='card'><h2>Why them</h2><p><strong>Enterprise specificity is currently limited.</strong><br>This interpretation applies at industry or participant-type level.</p><p>{escape(ent['why_them_strength'])}. Evidence required before a bank-specific claim: branch economics, customer-segment dependency, local access exposure and governed executive ownership evidence.</p></section>
+    <section class='card'><h2>Supporting evidence</h2><div class='mini-grid'>{evidence_groups}</div></section>
+    <section class='card'><h2>Supporting observations</h2><div class='mini-grid'>{observations}</div></section>
+    <section class='card'><h2>Underlying mechanisms</h2><div class='mini-grid'>{mechanisms}</div></section>
+    <section class='card'><h2>Hypothesis</h2><p>{_link_object('BRH-003')} {escape(hyp['original_statement'])}</p><p><strong>Lifecycle:</strong> {escape(hyp['lifecycle_state'])}. <strong>Confidence:</strong> {escape(hyp['confidence'])}.</p><p><strong>Supporting observations:</strong> {_chips(hyp['supporting_observations'])}</p><p><strong>Supporting mechanisms:</strong> {_chips(hyp['supporting_mechanisms'])}</p><p><strong>Falsification conditions:</strong> {escape('; '.join(hyp['falsification_conditions']))}</p><p><strong>Evidence demands:</strong> {escape('; '.join(hyp['evidence_demands']))}</p></section>
+    <section class='card contradiction'><h2>Alternative interpretations</h2><p>Some participants treat physical estates primarily as cost and simplification levers. Others treat branch presence as trust, access and member value.</p><p><strong>Why Flora currently holds a mixed interpretation:</strong> The evidence differs by participant type.</p><ul>{''.join(f'<li>{escape(str(c))}</li>' for c in rec['contradictions'])}</ul></section>
+    <section class='card'><h2>What remains Unknown</h2>{_unknown_groups(rec['unknowns'], hyp['evidence_demands'])}</section>
+    <section class='card'><h2>Confidence</h2><p><strong>Overall confidence:</strong> {escape(brief['confidence'])}</p><p><strong>By component:</strong> Executive relevance {escape(ex['confidence'])}; commercial assessment {escape(comm['confidence'])}; recommendation eligibility {escape(rec['confidence'])}.</p><p><strong>Not proposal-ready because:</strong> {escape('; '.join(rec['downgrade_reasons']))}</p></section>
+    <section class='card'><h2>Recommended next action</h2><p><strong>{escape(rec['permitted_action_class'])}</strong></p><p>This action is permitted because governed BRH-003 lineage supports an executive learning conversation. Stronger actions are not permitted because {escape('; '.join(rec['downgrade_reasons']))}. Human judgement is required before escalation.</p></section>
+    <section class='card'><h2>What should not yet be done</h2><ul>{''.join(f'<li>{escape(str(p))}</li>' for p in rec['prohibited_actions'])}<li>do not claim enterprise-specific urgency</li><li>do not present BRH-003 as settled fact</li><li>do not suppress the participant-type contradiction</li></ul></section>
+    <section class='card'><h2>Suggested executive conversation</h2><ul><li>How is the organisation balancing branch economics with trust and access?</li><li>Which customer segments still depend on assisted access?</li><li>What role should shared infrastructure play in the future distribution model?</li><li>Where does the current channel model create cost, trust or inclusion tension?</li></ul></section>
+    <section class='card'><h2>Lineage</h2><p>{_chips(brief['lineage']['assets'])} → {_chips(brief['lineage']['observations'])} → {_chips(brief['lineage']['mechanisms'])} → {_link_object('BRH-003')} → Challenge → Commercial Assessment → Recommendation Eligibility → Strategic Sales Brief</p></section>
+    {_pipeline_view(run)}</main></section>
     """
-
 
 def _flora_explore_page(headers=None) -> str:
     run = _banking_run(); s=run.stages; r=s['retrieval']
@@ -717,7 +758,7 @@ app = FloraWebHandler
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path in {"/", "/flora", "/flora/", "/pilot-sign-in", "/explore", "/focus", "/shape", "/governance", "/ask"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export") or path == "/settings/general" or path.startswith("/evidence/"):
+    if path in {"/", "/flora", "/flora/", "/pilot-sign-in", "/explore", "/focus", "/shape", "/shape/banking", "/shape/strategic-sales-brief", "/shape/banking/strategic-sales-brief", "/governance", "/ask"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export") or path == "/settings/general" or path.startswith("/evidence/"):
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
