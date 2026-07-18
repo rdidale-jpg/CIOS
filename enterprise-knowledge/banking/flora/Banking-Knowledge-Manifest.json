@@ -1,0 +1,15 @@
+{
+  "domain": "banking",
+  "version": "0.1",
+  "status": "candidate_reference_domain",
+  "assets": [],
+  "governance": {
+    "canonicalMechanismAuthority": "Banking Mechanism Catalogue",
+    "preserveUnknowns": true,
+    "preserveContradictions": true,
+    "requireEvidenceLineage": true,
+    "separateMechanismConfidenceFromEnterpriseApplicability": true,
+    "commercialOpportunityMaterialValidatesMechanisms": false,
+    "automaticFullDocumentIngestion": false
+  }
+}
