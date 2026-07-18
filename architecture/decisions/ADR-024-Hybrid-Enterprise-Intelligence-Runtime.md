@@ -1,7 +1,7 @@
 # ADR-024: Hybrid Enterprise Intelligence Runtime
 
 ## Status
-Proposed
+Accepted
 
 ## Date
 2026-07-18
@@ -135,7 +135,7 @@ This ADR preserves accepted decisions in ADR-001, ADR-002, ADR-003, ADR-004, ADR
 
 ## Conflicts
 
-No conflict with accepted architecture was identified during this commission. This ADR remains Proposed pending established Chief Architect governance.
+No conflict with accepted architecture was identified during this commission. Banking Strategic Sales Navigation reconciliation confirmed the named Banking assets exist on the current branch, preserve the Strategic Sales outcome required by FEIR-001 and expose no material conflict with the hybrid governed runtime. ADR-024 is Accepted as of 2026-07-18.
 
 ## Consequences
 

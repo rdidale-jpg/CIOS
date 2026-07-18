@@ -198,8 +198,15 @@ assets:
     relationships:
       - relationship: "validates"
         target: "BK-FLR-SSN-SPEC-001"
-      - relationship: "samples_hypotheses"
-        target: "BRH-003, BRH-007, BRH-008"
+      - relationship: "samples_hypothesis"
+        target: "BRH-003"
+        location: "banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md#brh-003--physical-access-may-become-shared-trust-infrastructure-rather-than-proprietary-distribution"
+      - relationship: "samples_hypothesis"
+        target: "BRH-007"
+        location: "banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md#brh-007--banking-ai-may-mature-as-governed-decision-infrastructure-not-only-productivity-tooling"
+      - relationship: "samples_hypothesis"
+        target: "BRH-008"
+        location: "banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md#brh-008--cloud-and-core-migration-may-become-a-strategic-optionality-problem"
       - relationship: "reports_on"
         target: "BK-FLR-001"
   - asset_id: BK-GOV-SSN-COMP-001
