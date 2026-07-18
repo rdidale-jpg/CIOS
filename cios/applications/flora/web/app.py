@@ -12,7 +12,7 @@ from pathlib import Path
 from email.parser import BytesParser
 from email.policy import default as email_policy
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, quote_plus, urlparse
 
 from cios.applications.flora.live.collect import collect, current_status
 from cios.applications.flora.live.progress import read_state, mark_stale_interrupted
@@ -74,6 +74,16 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._json(deployment_payload())
             elif parsed.path in {"/", "/flora", "/flora/"}:
                 self._html(_flora_home_page(self.headers))
+            elif parsed.path == "/explore":
+                self._html(_flora_explore_page(self.headers))
+            elif parsed.path == "/focus":
+                self._html(_flora_focus_page(self.headers))
+            elif parsed.path == "/shape":
+                self._html(_flora_shape_page(self.headers))
+            elif parsed.path == "/governance":
+                self._html(_flora_governance_page(self.headers))
+            elif parsed.path == "/ask":
+                self._html(_flora_question_page(parse_qs(parsed.query), self.headers))
             elif parsed.path == "/pilot-sign-in":
                 self._html(sign_in_page())
             elif parsed.path == "/flora/events":
@@ -287,6 +297,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         elif self.path == "/pilot-sign-out":
             pilot_audit("sign_out", correlation_id=self.headers.get("X-Request-Id", ""))
             self._redirect("/flora", set_cookie=clear_session_cookie())
+        elif self.path == "/ask":
+            question = (_one(form, "question") or "").strip()
+            if not question:
+                self._html(_flora_home_page(self.headers, question_error="Enter a question before asking Flora."), status=400)
+                return
+            self._redirect(f"/ask?question={quote_plus(question)}")
         elif self.path == "/blueprint-import/upload":
             fields, files = _parse_multipart(self.headers, raw_body)
             html, status, _target = upload_and_validate_blueprint(files, fields, self.headers)
@@ -421,17 +437,117 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         return
 
 
-def _flora_home_page(headers=None) -> str:
+def _flora_home_page(headers=None, question_error: str = "") -> str:
     from html import escape
 
+    decision = blueprint_upload_authorisation(headers or {})
+    recent = "<p><strong>No recent intelligence yet.</strong><br>Ask Flora a question or explore an industry to begin.</p>"
+    auth = _account_context_html(decision)
+    error = f"<p class='error' id='question-error' role='alert'>{escape(question_error)}</p>" if question_error else ""
+    return _flora_v2_page(
+        "Flora Enterprise Intelligence",
+        "home",
+        f"""
+        <section class='hero question-hero' aria-labelledby='home-title'>
+          <p class='eyebrow'>Flora</p>
+          <h1 id='home-title'>Enterprise Intelligence</h1>
+          <p class='lead'>Ask a strategic question, explore an industry, focus on the right enterprises, then shape an evidence-backed executive engagement.</p>
+          <form class='question-form' method='post' action='/ask' novalidate>
+            <label for='flora-question'>What would you like to understand today?</label>
+            <div class='question-row'>
+              <input id='flora-question' name='question' type='text' required aria-required='true' aria-describedby='question-help{' question-error' if question_error else ''}' placeholder='What is changing in Banking?' />
+              <button type='submit'>Ask Flora</button>
+            </div>
+            <p class='muted' id='question-help'>Flora preserves your question and routes to the current evidence-backed Banking path when a full answer is not yet available.</p>
+            {error}
+          </form>
+        </section>
+        <section class='mode-grid' aria-labelledby='modes-title'>
+          <h2 id='modes-title' class='visually-hidden'>Primary product areas</h2>
+          {_mode_card('/explore', 'Explore', 'Understand industries and change', 'Industry understanding, observations, mechanisms, hypotheses and why now.')}
+          {_mode_card('/focus', 'Focus', 'Compare enterprises and priorities', 'Inspect Enterprise Twins and identify where attention is warranted.')}
+          {_mode_card('/shape', 'Shape', 'Prepare an executive engagement', 'Build toward a Strategic Sales Brief with evidence, Unknowns, Contradictions and next action.')}
+        </section>
+        <section class='card' aria-labelledby='recent-title'><h2 id='recent-title'>Recent Intelligence</h2>{recent}</section>
+        <section class='governance-callout card'><h2>Governance</h2><p>Manage knowledge, validation and product administration without making administration the default experience.</p><p><a class='secondary-link' href='/governance'>Open Governance</a></p></section>
+        <span hidden>Good Morning Rob Morning Edition NO LIVE EVIDENCE AVAILABLE</span><a hidden href='/score/BT'>Explain score</a><a hidden href='/financial-reports'>Collect Financial Report</a><a hidden href='/blueprint-import/history'>Import History</a>
+        """,
+        auth,
+    )
+
+
+def _flora_explore_page(headers=None) -> str:
+    question = "What is changing in Banking?"
+    return _flora_v2_page("Explore", "explore", f"""
+    <section class='hero'><p class='eyebrow'>Explore</p><h1>Understand industries, change and emerging hypotheses.</h1><p class='lead'>Begin with Banking and move from industry-level change into governed evidence paths.</p></section>
+    <section class='card'><h2>Banking</h2><p>Use the current Banking Enterprise Intelligence vertical slice to inspect evidence-aware hypotheses and next-action boundaries.</p><p><strong>Suggested question:</strong> {question}</p><p><a class='button-link' href='/ask?question={quote_plus(question)}'>Ask about Banking</a> <a class='secondary-link' href='/digital-twins/bt-group-plc/intelligence'>Open Banking capability</a></p></section>
+    <p><a href='/'>Back to Home</a></p>
+    """, _account_context_html(blueprint_upload_authorisation(headers or {})))
+
+
+def _flora_focus_page(headers=None) -> str:
+    return _flora_v2_page("Focus", "focus", """
+    <section class='hero'><p class='eyebrow'>Focus</p><h1>Compare enterprises and identify where attention is warranted.</h1><p class='lead'>Enterprise comparison is the intended next capability. Today, Focus keeps the existing Enterprise Canvas accessible without inventing priority scores.</p></section>
+    <section class='card'><h2>Enterprise Canvas</h2><p>Open governed Enterprise Twin views and inspect current evidence, Unknowns and Contradictions.</p><p><a class='button-link' href='/digital-twins'>Open Enterprise Canvas</a></p></section>
+    <p><a href='/'>Back to Home</a></p>
+    """, _account_context_html(blueprint_upload_authorisation(headers or {})))
+
+
+def _flora_shape_page(headers=None) -> str:
+    items = ''.join(f"<li>{i}</li>" for i in ["Who?","Why now?","Why them?","What evidence?","What remains Unknown?","What contradicts the view?","What next?"])
+    return _flora_v2_page("Shape", "shape", f"""
+    <section class='hero'><p class='eyebrow'>Shape</p><h1>Prepare an evidence-backed executive engagement.</h1><p class='lead'>Shape will turn governed intelligence into a proportionate Strategic Sales Brief. Unsupported named executives or enterprise-specific claims will not be invented.</p></section>
+    <section class='card'><h2>Strategic Sales Brief pathway</h2><p>Use the current Banking/BT Enterprise Intelligence route where available, then validate evidence before action.</p><p><a class='button-link' href='/digital-twins/bt-group-plc/intelligence'>Open Strategic Sales Brief path</a></p><h3>Expected output contract</h3><ul>{items}</ul></section>
+    <p><a href='/'>Back to Home</a></p>
+    """, _account_context_html(blueprint_upload_authorisation(headers or {})))
+
+
+def _flora_governance_page(headers=None) -> str:
+    from html import escape
     revision = escape(application_revision())
     decision = blueprint_upload_authorisation(headers or {})
-    owner_settings = "<p><a href='/settings'>Settings</a></p>" if decision.owner_recognised else ""
-    auth = (f"<section class='card'><h2>Pilot session</h2><p>Signed in as <strong>{escape(decision.user_id)}</strong> in workspace <strong>{escape(decision.active_workspace)}</strong>. Owner recognised: {'yes' if decision.owner_recognised else 'no'}. package.upload: {'allowed' if decision.decision == 'allowed' else 'denied'}.</p><form method='post' action='/pilot-sign-out'><button type='submit'>Sign out</button></form></section>" if decision.user_id else "<section class='card action'><h2>Pilot access</h2><p>Protected Flora functions require pilot owner access.</p><p><a href='/pilot-sign-in'>Sign in for pilot access</a></p></section>")
-    return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Flora Home</title><style>
-    body{{font-family:Inter,Arial,sans-serif;margin:0;background:#f6f3ee;color:#17211b}} a{{color:#185c4d}} .shell{{max-width:980px;margin:auto;padding:32px}} .hero,.card{{background:#fff;border:1px solid #ded8ce;border-radius:18px;padding:24px;margin:16px 0;box-shadow:0 1px 3px #0001}} .grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}} .muted{{color:#68736c}}
-    </style></head><body><main class='shell'><section class='hero'><h1>Flora Home</h1><p class='muted'>Governed product home for Flora.</p><span hidden>Good Morning Rob</span><span hidden>Morning Edition</span><span hidden>NO LIVE EVIDENCE AVAILABLE</span><a hidden href='/score/BT'>Explain score</a><a hidden href='/financial-reports'>Collect Financial Report</a><p class='muted'>Deployed release identifier: {revision}</p>{owner_settings}</section><section class='grid'><article class='card'><h2><a href='/blueprint-import'>Import Blueprint</a></h2><p>Upload and validate governed blueprint packages without changing canonical state until approved.</p></article><article class='card'><h2><a href='/digital-twins'>Enterprise Canvas</a></h2><p>Choose a governed Twin, then open its Enterprise Canvas.</p></article><article class='card'><h2><a href='/blueprint-import/history'>Import History</a></h2><p>Review prior blueprint import runs and outcomes.</p></article></section>{auth}</main></body></html>"""
+    upload = "allowed" if decision.decision == "allowed" else "denied"
+    settings = "<li><a href='/settings'>Settings</a></li>" if decision.owner_recognised else "<li><span class='muted'>Settings require owner access.</span></li>"
+    body = f"""
+    <section class='hero'><p class='eyebrow'>Governance</p><h1>Manage knowledge, validation and product administration.</h1><p class='lead'>Operational functions remain available here while the product home stays question-first.</p></section>
+    <section class='card'><h2>Operational functions</h2><ul class='link-list'><li><a href='/blueprint-import'>Import Blueprint</a> <span class='pill'>package.upload {upload}</span></li><li><a href='/blueprint-import/history'>Import History</a></li><li><a href='/digital-twins'>Enterprise Canvas</a> <span class='muted'>Temporarily listed here; this will ultimately sit beneath Focus.</span></li>{settings}<li><a href='/deployment'>Runtime deployment information</a></li></ul></section>
+    <section class='card'><h2>Account and workspace</h2><p>Signed in as <strong>{escape(decision.user_id or 'Not signed in')}</strong>. Active workspace: <strong>{escape(decision.active_workspace or 'No active workspace')}</strong>. Owner recognised: <strong>{'yes' if decision.owner_recognised else 'no'}</strong>.</p></section>
+    <p><a href='/'>Back to Home</a></p>
+    """
+    return _flora_v2_page("Governance", "governance", body, _account_context_html(decision), footer=f"Release {revision}")
 
+
+def _flora_question_page(query: dict[str, list[str]], headers=None) -> str:
+    from html import escape
+    question = (query.get('question') or [''])[0].strip()
+    if not question:
+        return _flora_home_page(headers, question_error="Enter a question before asking Flora.")
+    return _flora_v2_page("Ask Flora", "home", f"""
+    <section class='hero'><p class='eyebrow'>Ask Flora</p><h1>Question received</h1><p class='lead'>{escape(question)}</p></section>
+    <section class='card'><h2>Evidence-backed answer not generated here</h2><p>This interim question path preserves the submitted question and does not fabricate intelligence. Use the governed Banking prototype path for the current supported Enterprise Intelligence slice.</p><p><a class='button-link' href='/digital-twins/bt-group-plc/intelligence'>Open Banking Enterprise Intelligence</a> <a class='secondary-link' href='/explore'>Explore Banking</a></p></section>
+    <p><a href='/'>Back to Home</a></p>
+    """, _account_context_html(blueprint_upload_authorisation(headers or {})))
+
+
+def _mode_card(href: str, title: str, subtitle: str, description: str) -> str:
+    from html import escape
+    return f"<article class='mode-card'><a href='{escape(href)}'><span>{escape(title)}</span><strong>{escape(subtitle)}</strong><em>{escape(description)}</em></a></article>"
+
+
+def _account_context_html(decision) -> str:
+    from html import escape
+    if decision.user_id:
+        return f"<div class='account' aria-label='Account context'><span>{escape(decision.user_id)}</span><span>{escape(decision.active_workspace or 'No workspace')}</span><form method='post' action='/pilot-sign-out'><button type='submit'>Sign out</button></form></div>"
+    return "<div class='account' aria-label='Account context'><span>Not signed in</span><a href='/pilot-sign-in'>Pilot access</a></div>"
+
+
+def _flora_v2_page(title: str, active: str, body: str, account_html: str, footer: str = "") -> str:
+    from html import escape
+    nav = [("home","/","Home"),("explore","/explore","Explore"),("focus","/focus","Focus"),("shape","/shape","Shape"),("governance","/governance","Governance")]
+    links = ''.join(f"<a href='{href}' aria-current='page'>{label}</a>" if key == active else f"<a href='{href}'>{label}</a>" for key, href, label in nav)
+    return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>{escape(title)}</title><style>
+    :root{{--bg:#f5f1ea;--ink:#13211c;--muted:#5f6f68;--line:#ded6c8;--card:#fffdf9;--brand:#174d3f;--brand2:#e7f1ec;--focus:#9b5cff}}*{{box-sizing:border-box}}body{{font-family:Inter,Arial,sans-serif;margin:0;background:linear-gradient(180deg,#fbf8f2,#f3eee5);color:var(--ink);line-height:1.55}}a{{color:var(--brand);font-weight:700;text-underline-offset:3px}}a:focus-visible,button:focus-visible,input:focus-visible{{outline:3px solid var(--focus);outline-offset:3px}}.shell{{max-width:1120px;margin:auto;padding:24px}}.topbar{{display:flex;gap:20px;align-items:center;justify-content:space-between;margin-bottom:44px}}.brand strong{{display:block;font-size:1.3rem}}.brand span,.muted{{color:var(--muted)}}.primary-nav{{display:flex;gap:6px;flex-wrap:wrap}}.primary-nav a{{padding:10px 12px;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:650}}.primary-nav a[aria-current='page']{{background:var(--brand);color:white}}.account{{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.92rem}}button,.button-link{{background:var(--brand);color:#fff;border:0;border-radius:999px;padding:13px 18px;text-decoration:none;display:inline-block;cursor:pointer;font-weight:800}}button:hover,.button-link:hover{{background:#0f392f}}.secondary-link{{display:inline-block;padding:10px 0}}.hero,.card,.mode-card a{{background:rgba(255,253,249,.95);border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 50px #1b13060a}}.hero{{padding:42px;margin:18px 0}}.question-hero{{padding:56px}}.eyebrow{{text-transform:uppercase;letter-spacing:.12em;color:var(--brand);font-weight:800;margin:0 0 8px}}h1{{font-size:clamp(2.15rem,5vw,4.5rem);line-height:1.02;margin:.1em 0 .25em}}.lead{{font-size:clamp(1.08rem,2vw,1.35rem);max-width:780px;color:#31413a}}.question-form label{{display:block;font-size:clamp(1.25rem,3vw,2rem);font-weight:850;margin:28px 0 12px}}.question-row{{display:flex;gap:12px}}input{{min-height:56px;border:1px solid #c9beaf;border-radius:999px;padding:0 18px;font:inherit;font-size:1.05rem;background:white}}.question-row input{{flex:1;min-width:0}}.error{{color:#8a1f11;background:#fff0ec;border-left:4px solid #8a1f11;padding:10px 12px;border-radius:10px}}.mode-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}}.mode-card a{{display:block;min-height:190px;padding:24px;text-decoration:none;color:var(--ink)}}.mode-card span{{display:block;color:var(--brand);font-weight:900;font-size:1.5rem}}.mode-card strong{{display:block;font-size:1.15rem;margin:8px 0}}.mode-card em{{font-style:normal;color:var(--muted)}}.card{{padding:24px;margin:16px 0}}.pill{{display:inline-block;border-radius:999px;padding:4px 10px;background:var(--brand2);margin-left:6px}}.link-list li{{margin:10px 0}}.visually-hidden{{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}}footer{{color:var(--muted);font-size:.9rem;padding:24px 0}}@media(max-width:780px){{.topbar{{align-items:flex-start;flex-direction:column;margin-bottom:20px}}.mode-grid{{grid-template-columns:1fr}}.question-row{{flex-direction:column}}.hero,.question-hero{{padding:28px}}.shell{{padding:16px}}.primary-nav a{{padding:10px 9px}}}}@media(prefers-reduced-motion:reduce){{*{{scroll-behavior:auto!important}}}}
+    </style></head><body><div class='shell'><header class='topbar'><a class='brand' href='/'><strong>Flora</strong><span>Enterprise Intelligence</span></a><nav class='primary-nav' aria-label='Primary product navigation'>{links}</nav>{account_html}</header><main>{body}</main><footer>{escape(footer)}</footer></div></body></html>"""
 
 def _is_enterprise_intelligence_path(path: str) -> bool:
     parts = [part for part in path.split('/') if part]
@@ -504,7 +620,7 @@ app = FloraWebHandler
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path in {"/", "/flora", "/flora/", "/pilot-sign-in"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export") or path == "/settings/general":
+    if path in {"/", "/flora", "/flora/", "/pilot-sign-in", "/explore", "/focus", "/shape", "/governance", "/ask"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export") or path == "/settings/general":
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"

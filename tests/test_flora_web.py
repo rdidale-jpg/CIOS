@@ -342,3 +342,72 @@ def test_financial_intelligence_post_accepts_explicit_acquisition_mode(monkeypat
         assert captured == {'enterprise_id': 'bt-group-plc', 'extraction_mode': 'pdf_supporting_evidence'}
     finally:
         connection.close(); server.shutdown(); server.server_close(); thread.join(timeout=2)
+
+
+def test_root_renders_flora_v2_home() -> None:
+    status, content_type, body = _get("/")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert content_type == "text/html; charset=utf-8"
+    assert "Enterprise Intelligence" in html
+    assert "What would you like to understand today?" in html
+    for label in ["Explore", "Focus", "Shape", "Governance"]:
+        assert label in html
+    hero = html.split("</section>", 1)[0]
+    assert "Import Blueprint" not in hero
+    assert "Deployed release identifier" not in hero
+
+
+def test_flora_v2_navigation_routes_work() -> None:
+    for path, expected in [
+        ("/", "What would you like to understand today?"),
+        ("/explore", "Understand industries, change and emerging hypotheses."),
+        ("/focus", "Compare enterprises and identify where attention is warranted."),
+        ("/shape", "Prepare an evidence-backed executive engagement."),
+        ("/governance", "Manage knowledge, validation and product administration."),
+        ("/blueprint-import", "Blueprint import"),
+        ("/blueprint-import/history", "Blueprint import"),
+        ("/digital-twins", "Digital Twins"),
+        ("/settings", "Settings"),
+    ]:
+        status, _, body = _get(path)
+        assert status in {200, 403}
+        assert expected in body.decode("utf-8")
+
+
+def test_question_route_preserves_question_without_fabricating_answer() -> None:
+    status, _, body = _get("/ask?question=What+is+changing+in+Banking%3F")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "What is changing in Banking?" in html
+    assert "does not fabricate intelligence" in html
+    assert "/digital-twins/bt-group-plc/intelligence" in html
+
+
+def test_empty_question_state_is_accessible() -> None:
+    status, _, body = _get("/ask")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "role='alert'" in html
+    assert "Enter a question before asking Flora." in html
+    assert "for='flora-question'" in html
+
+
+def test_home_accessibility_basics() -> None:
+    status, _, body = _get("/")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert html.count("<h1") == 1
+    assert "aria-label='Primary product navigation'" in html
+    assert "id='flora-question'" in html
+    assert "type='submit'" in html
+
+
+def test_governance_preserves_permission_context() -> None:
+    status, _, body = _get("/governance")
+    html = body.decode("utf-8")
+    assert status == 200
+    assert "package.upload denied" in html
+    assert "Owner recognised" in html
+    assert "No active workspace" in html
+    assert "Settings require owner access" in html
