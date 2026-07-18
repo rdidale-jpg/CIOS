@@ -1,1 +1,1 @@
-"""Evidence-governed enterprise intelligence reasoning for Flora."""
+from .pipeline import run_pipeline

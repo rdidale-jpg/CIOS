@@ -10,3 +10,6 @@ __pycache__/
 
 # Flora financial intelligence transient data
 .flora_financial_intelligence/
+
+# Flora Enterprise Intelligence prototype transient outputs
+.flora_enterprise_intelligence/
