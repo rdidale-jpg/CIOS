@@ -2,7 +2,7 @@
 
 **Status:** Draft
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-17
+**Last updated:** 2026-07-18
 
 This map helps readers find the architecture paper that owns a concept. The Reference Architecture is the entry point; the documents below remain the primary homes for detailed standards and models.
 
@@ -33,6 +33,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | ADR-006 | [Signal Architecture](../decisions/ADR-006-Signal-Architecture.md) | Migrated placeholder for future signal architecture review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
 | ADR-007 | [Transformation Thesis](../decisions/ADR-007-Transformation-Thesis.md) | Migrated placeholder for future transformation thesis review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
 | ADR-008 | [Recommendation Engine](../decisions/ADR-008-Recommendation-Engine.md) | Migrated placeholder for future recommendation engine review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
+| ADR-024 | [Hybrid Enterprise Intelligence Runtime](../decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md) | Proposes Flora as the hybrid governed Enterprise Intelligence runtime with bounded GPT workers and deterministic validation. | Proposed | `architecture/decisions/` | Not authoritative until accepted; owning paper is FEIR-001. |
 
 ## Founding Papers
 
@@ -107,6 +108,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | Flora | Flora Pilot Workspace v0.3 | Describes pilot workspace experience. | Present | `docs/Applications/` | Runtime surface for evidence and research workflows. |
 | Flora | Flora Case Files | Describes case file organisation. | Present | `docs/Applications/` | Workspace/product view over Evidence, Observations, Enterprise Model state and reasoning. |
 | Flora | [Flora Financial Intelligence Runtime Specification v0.1](../../docs/Architecture/Flora_Financial_Intelligence_Runtime_Specification_v0.1.md) | Defines operational Financial Intelligence behaviour for governed financial sources, candidate facts, Observations and Enterprise Model projection. | Working Draft | `docs/Architecture/` | Runtime capability over Source, Evidence, Observation and Enterprise Model layers; does not own EI-001 or EI-012 semantics. |
+| FEIR-001 | [Flora Enterprise Intelligence Runtime Architecture v1.0](../specifications/flora/FEIR-001-Flora-Enterprise-Intelligence-Runtime-Architecture-v1.0.md) | Proposes the owning Flora hybrid Enterprise Intelligence runtime architecture, worker model, validation controls, write-back flow and Strategic Sales contract. | Proposed | `architecture/specifications/flora/` | Proposed; preserves accepted ADR-014 and Enterprise Intelligence ownership boundaries until accepted. |
 | Flora | Flora Publisher v0.1 | Describes briefing/report generation. | Present | `docs/Applications/` | Publisher role for generated executive outputs. |
 | Flora | Flora Runtime Alignment Audit | Audits runtime alignment. | Present | `docs/Architecture/` | Compliance evidence for Flora vs architecture. |
 | Flora | Flora Product Maturity Review | Reviews Flora product maturity. | Present | `docs/Architecture/` | Connects runtime maturity to architecture maturity. |
