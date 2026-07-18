@@ -6839,7 +6839,7 @@ The Chief Architect must steward Architecture v2.0 as an extension of CIOS, not 
 
 For Knowledge Exchange work, the Chief Architect must test whether the design preserves the boundary between repository acceptance and canonical acceptance. Knowledge Packs may be valid for Flora validation, repository handling, rendering and distribution without making their contents canonical Enterprise Model, Enterprise Knowledge Graph, Enterprise Behaviour or Observation state. Twin Presentation Models are Presentation Intelligence: useful for executive understanding and review, but still interpretation unless their claims are separately accepted by the owning model process.
 
-The Chief Architect should require every v2.0 implementation proposal to cite ADR-016, FP-010, FP-011, EI-013, the Knowledge Pack Specification v1.0, the Twin Presentation Model Specification v1.0 and the Industry Twin Lifecycle Specification v1.0 when relevant, and to explain how EI-001, EI-002, EI-003, EI-012 and FP-009 boundaries are preserved.
+The Chief Architect should require every v2.0 implementation proposal to cite ADR-016, FP-010, FP-011, EI-013, the Knowledge Pack Specification v1.0, the Enterprise Knowledge Production Protocol v1.0, the Twin Presentation Model Specification v1.0 and the Industry Twin Lifecycle Specification v1.0 when relevant, and to explain how EI-001, EI-002, EI-003, EI-012 and FP-009 boundaries are preserved. The Enterprise Knowledge Production Protocol governs production practice only and does not alter the accepted precedence of ADRs, Reference Architecture, Enterprise Knowledge Architecture or Knowledge Pack Specification authority.
 
 ## Architecture v2.0 Operating Checklist
 

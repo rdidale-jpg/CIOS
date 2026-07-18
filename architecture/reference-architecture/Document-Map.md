@@ -149,6 +149,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | FP-011 | [Knowledge Exchange Architecture](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md) | Owns Knowledge Exchange Architecture and the Knowledge Supply Chain. | Accepted Foundation | `architecture/founding-papers/` | Owning Founding Paper for exchange flow and repository boundaries. |
 | EI-013 | [Knowledge Asset Exchange Model](../enterprise-intelligence/EI-013-Knowledge-Asset-Exchange-Model.md) | Owns exchanged Knowledge Asset semantics. | Accepted Foundation | `architecture/enterprise-intelligence/` | EI owner for portable asset semantics. |
 | KP-SPEC-001 | [Knowledge Pack Specification v1.0](../specifications/knowledge-packs/Knowledge-Pack-Specification-v1.0.md) | Owns the package contract. | Normative Specification | `architecture/specifications/knowledge-packs/` | Normative specification under FP-010, FP-011 and EI-013. |
+| EKPP-001 | [Enterprise Knowledge Production Protocol v1.0](../specifications/enterprise-knowledge/Enterprise-Knowledge-Production-Protocol-v1.0.md) | Owns the standard operating model for creating, reviewing, governing and publishing Enterprise Knowledge. | Accepted Normative Protocol | `architecture/specifications/enterprise-knowledge/` | Complements accepted doctrine, Reference Architecture, Enterprise Knowledge Architecture, Knowledge Pack Specification and Accepted ADRs without changing their precedence. |
 | TPM-SPEC-001 | [Twin Presentation Model Specification v1.0](../specifications/presentation-models/Twin-Presentation-Model-Specification-v1.0.md) | Owns presentation payload semantics. | Normative Specification | `architecture/specifications/presentation-models/` | Normative specification for accepted presentation payloads. |
 | ITL-SPEC-001 | [Industry Twin Lifecycle Specification v1.0](../specifications/industry-twins/Industry-Twin-Lifecycle-Specification-v1.0.md) | Owns Industry Twin maintenance and cadence. | Normative Specification | `architecture/specifications/industry-twins/` | Normative specification for Industry Twin lifecycle. |
 | MPT-SPEC-001 | [Market Participant Twin Specification v1.0](../specifications/market-participants/Market-Participant-Twin-Specification-v1.0.md) | Owns Market Participant Twin structure, evidence-governed strengths and weaknesses, account presence and participant Knowledge Pack profile. | Normative Specification | `architecture/specifications/market-participants/` | Normative specification under FP-010, FP-011, EI-013 and EI-002. |
@@ -161,6 +162,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 - FP-011 owns Knowledge Exchange Architecture.
 - EI-013 owns exchanged Knowledge Asset semantics.
 - Knowledge Pack Specification v1.0 owns the package contract.
+- Enterprise Knowledge Production Protocol v1.0 owns the Enterprise Knowledge production operating model beneath the accepted precedence chain.
 - Twin Presentation Model Specification v1.0 owns presentation payload semantics.
 - Industry Twin Lifecycle Specification v1.0 owns Industry maintenance and cadence.
 
@@ -190,6 +192,7 @@ The Architecture v2 document chain is: **Accepted ADR → owning paper → norma
 | [FP-011](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md) | Knowledge Exchange Architecture owner |
 | [EI-013](../enterprise-intelligence/EI-013-Knowledge-Asset-Exchange-Model.md) | Enterprise Intelligence owner |
 | [Knowledge Pack Specification v1.0](../specifications/knowledge-packs/Knowledge-Pack-Specification-v1.0.md) | Knowledge Pack specification owner |
+| [Enterprise Knowledge Production Protocol v1.0](../specifications/enterprise-knowledge/Enterprise-Knowledge-Production-Protocol-v1.0.md) | Chief Architect / Enterprise Knowledge production owner |
 | [Twin Presentation Model Specification v1.0](../specifications/presentation-models/Twin-Presentation-Model-Specification-v1.0.md) | Presentation Intelligence specification owner |
 | [Industry Twin Lifecycle Specification v1.0](../specifications/industry-twins/Industry-Twin-Lifecycle-Specification-v1.0.md) | Industry Twin lifecycle owner |
 | [Market Participant Twin Specification v1.0](../specifications/market-participants/Market-Participant-Twin-Specification-v1.0.md) | Market Participant Twin specification owner |
