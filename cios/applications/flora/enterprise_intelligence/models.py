@@ -1,56 +1,79 @@
 from __future__ import annotations
-from dataclasses import dataclass, field, asdict
-from datetime import UTC, datetime
-from typing import Any
-import hashlib, json, uuid
+from datetime import datetime, timezone
+from typing import Any, Literal
+from pydantic import BaseModel, ConfigDict, Field
 
-PROFILE_ID='strategic_sales_director_v1'
-PROMPT_VERSION='executive_commercial_brief_prompt_v1'
-SCHEMA_VERSION='ExecutiveCommercialBriefV1'
+Authority = Literal['governed_source','derived_runtime_assessment','candidate_intelligence','transient_presentation']
+Status = Literal['PASS','PARTIAL','DOWNGRADED','FAIL']
 
-def now_iso(): return datetime.now(UTC).isoformat(timespec='seconds')
-def stable_hash(data: Any) -> str: return hashlib.sha256(json.dumps(data, sort_keys=True, default=str).encode()).hexdigest()
+def now(): return datetime.now(timezone.utc)
 
-@dataclass(frozen=True)
-class ReasoningRequestV1:
-    request_id: str
-    enterprise_id: str
-    workspace_id: str
-    twin_version: str
-    reasoning_profile: str
-    user_role: str
-    purpose: str
-    requested_sections: tuple[str,...]
-    evidence_cut_off: str
-    maximum_evidence_volume: int
-    model_configuration_ref: str
-    prompt_version_ref: str
-    created_at: str
-    requested_by: str
-    include_projections: bool = True
-    version: str = 'ReasoningRequestV1'
-    @classmethod
-    def create(cls, enterprise_id, workspace_id, requested_by, twin_version='accepted', evidence_cut_off='', maximum_evidence_volume=24000, user_role='strategic_sales_director'):
-        return cls('rr-'+uuid.uuid4().hex[:16], enterprise_id, workspace_id, twin_version, PROFILE_ID, user_role,
-            'Understand the enterprise, identify evidence-backed reinvention pressures, assess commercial relevance, and define the next learning or engagement moves.',
-            ('executive_summary','material_changes','material_pressures','operating_model_summary','change_portfolio','stakeholders','commercial_relevance','unknowns','contradictions','recommended_next_moves','evidence_lineage'),
-            evidence_cut_off, maximum_evidence_volume, 'env:FLORA_ENTERPRISE_INTELLIGENCE_MODEL', PROMPT_VERSION, now_iso(), requested_by)
-    def to_dict(self):
-        d=asdict(self); d['requested_sections']=list(self.requested_sections); return d
+class RuntimeObject(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    object_id: str
+    object_type: str
+    run_id: str
+    status: Status = 'PASS'
+    authority: Authority
+    created_at: datetime = Field(default_factory=now)
+    created_by: str = 'flora-banking-prototype'
+    source_asset_ids: list[str] = Field(default_factory=list)
+    relationship_paths: list[str] = Field(default_factory=list)
+    confidence: str = 'Medium'
+    unknowns: list[str] = Field(default_factory=list)
+    contradictions: list[str] = Field(default_factory=list)
+    validation_state: str = 'schema_valid'
+    persistence_class: str = 'transient_runtime'
 
-@dataclass(frozen=True)
-class EvidencePackageItem:
-    stable_id: str; object_class: str; statement: str; truth_status: str; confidence: int|str; freshness: str; lineage: tuple[str,...]=(); linked_objects: tuple[str,...]=(); source_location: str=''; enterprise_id: str=''
-    def to_dict(self):
-        d=asdict(self); d['lineage']=list(self.lineage); d['linked_objects']=list(self.linked_objects); return d
-
-@dataclass(frozen=True)
-class EvidencePackageV1:
-    package_id: str; enterprise_id: str; enterprise_metadata: dict[str,Any]; accepted_twin_version: str; source_cut_off: str; progressive_assurance_status: str; selected_observations: tuple[EvidencePackageItem,...]; selected_entities_and_relationships: tuple[EvidencePackageItem,...]; selected_programmes_and_initiatives: tuple[EvidencePackageItem,...]; selected_unknowns: tuple[EvidencePackageItem,...]; selected_contradictions: tuple[EvidencePackageItem,...]; selected_human_supplied_knowledge: tuple[EvidencePackageItem,...]; selected_projections: tuple[EvidencePackageItem,...]; lineage_references: tuple[str,...]; freshness: str; confidence: str; retrieval_rationale: tuple[str,...]
-    def all_items(self):
-        return tuple(x for group in (self.selected_observations,self.selected_entities_and_relationships,self.selected_programmes_and_initiatives,self.selected_unknowns,self.selected_contradictions,self.selected_human_supplied_knowledge,self.selected_projections) for x in group)
-    def to_dict(self):
-        d=asdict(self)
-        for k in ('selected_observations','selected_entities_and_relationships','selected_programmes_and_initiatives','selected_unknowns','selected_contradictions','selected_human_supplied_knowledge','selected_projections'):
-            d[k]=[i.to_dict() for i in getattr(self,k)]
-        d['lineage_references']=list(self.lineage_references); d['retrieval_rationale']=list(self.retrieval_rationale); return d
+class QuestionObject(RuntimeObject):
+    object_type: Literal['question']='question'; authority: Authority='derived_runtime_assessment'
+    question: str; user_role: str; industry_scope: list[str]; mode: str; required_output: str
+class IntentObject(RuntimeObject):
+    object_type: Literal['intent']='intent'; authority: Authority='derived_runtime_assessment'
+    interpretations: list[str]; progression: str; prohibited_claims: list[str]
+class ContextPlan(RuntimeObject):
+    object_type: Literal['context_plan']='context_plan'; authority: Authority='derived_runtime_assessment'
+    required_asset_classes: list[str]; hypothesis_id: str; observation_ids: list[str]; mechanism_ids: list[str]; manifest_asset_ids: list[str]; required_stages: list[str]; required_output: str
+class GovernedAsset(BaseModel):
+    asset_id: str; title: str; asset_type: str; status: str; location: str; content_sha256: str; authority: Authority='governed_source'; metadata: dict[str, Any]=Field(default_factory=dict)
+class RetrievalSet(RuntimeObject):
+    object_type: Literal['retrieval_set']='retrieval_set'; authority: Authority='derived_runtime_assessment'
+    assets: list[GovernedAsset]; hypothesis: dict[str, Any]; observations: list[dict[str, Any]]; mechanisms: list[dict[str, Any]]
+class ObservationSelection(RuntimeObject):
+    object_type: Literal['observation_selection']='observation_selection'; authority: Authority='derived_runtime_assessment'
+    selected_observations: list[dict[str, Any]]; missing_evidence: list[str]
+class MechanismAssessment(RuntimeObject):
+    object_type: Literal['mechanism_assessment']='mechanism_assessment'; authority: Authority='derived_runtime_assessment'
+    mechanisms: list[dict[str, Any]]; alternatives: list[str]; applicability_constraints: list[str]
+class EnterpriseContextAssessment(RuntimeObject):
+    object_type: Literal['enterprise_context_assessment']='enterprise_context_assessment'; authority: Authority='derived_runtime_assessment'
+    participant_scope: str; enterprise_specificity: str; why_them_strength: str
+class HypothesisAssessment(RuntimeObject):
+    object_type: Literal['hypothesis_assessment']='hypothesis_assessment'; authority: Authority='derived_runtime_assessment'
+    hypothesis_id: str; original_statement: str; lifecycle_state: str; supporting_observations: list[str]; supporting_mechanisms: list[str]; evidence_demands: list[str]; falsification_conditions: list[str]; competing_explanations: list[str]
+class ChallengeReport(RuntimeObject):
+    object_type: Literal['challenge_report']='challenge_report'; authority: Authority='derived_runtime_assessment'
+    contradictory_evidence: list[str]; unresolved_unknowns: list[str]; competing_explanations: list[str]; weak_lineage: list[str]; proposed_confidence_downgrade: str; evidence_required_next: list[str]
+class ExecutiveRelevanceAssessment(RuntimeObject):
+    object_type: Literal['executive_relevance_assessment']='executive_relevance_assessment'; authority: Authority='derived_runtime_assessment'
+    likely_decision_owner: str; likely_sponsor: str; likely_affected_executive: str; named_executive: str; why_matters: str; evidence_strength: str
+class CommercialAssessment(RuntimeObject):
+    object_type: Literal['commercial_assessment']='commercial_assessment'; authority: Authority='derived_runtime_assessment'
+    commercial_significance: str; urgency: str; enterprise_exposure: str; timing: str; evidence_completeness: str; executive_ownership_confidence: str; transformation_appetite: str; permitted_action_range: list[str]
+class RecommendationEligibilityResult(RuntimeObject):
+    object_type: Literal['recommendation_eligibility']='recommendation_eligibility'; authority: Authority='derived_runtime_assessment'
+    permitted_action_class: str; downgrade_reasons: list[str]; prohibited_actions: list[str]
+class StrategicSalesBrief(RuntimeObject):
+    object_type: Literal['strategic_sales_brief']='strategic_sales_brief'; authority: Authority='transient_presentation'
+    label: str; markdown: str; lineage: dict[str, Any]
+class LearningCaptureDecision(RuntimeObject):
+    object_type: Literal['learning_capture_decision']='learning_capture_decision'; authority: Authority='candidate_intelligence'
+    decision: str; evidence_demands: list[str]; repository_mutation_allowed: bool
+class AuditEvent(BaseModel):
+    stage: str; status: Status; message: str; object_id: str; created_at: datetime=Field(default_factory=now)
+class PipelineValidationResult(RuntimeObject):
+    object_type: Literal['pipeline_validation']='pipeline_validation'; authority: Authority='derived_runtime_assessment'
+    passed: bool; gates: list[dict[str, str]]; governed_knowledge_mutated: bool
+class PipelineRun(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    run_id: str; question: QuestionObject; stages: dict[str, Any]; audit_events: list[AuditEvent]; validation: PipelineValidationResult; telemetry: dict[str, Any]
