@@ -77,3 +77,107 @@ class PipelineValidationResult(RuntimeObject):
 class PipelineRun(BaseModel):
     model_config=ConfigDict(extra='forbid')
     run_id: str; question: QuestionObject; stages: dict[str, Any]; audit_events: list[AuditEvent]; validation: PipelineValidationResult; telemetry: dict[str, Any]
+
+# Compatibility contract for the Flora Enterprise Intelligence reasoning runtime.
+# The Banking vertical-slice models above are runtime objects used by the CLI
+# pipeline.  The deployed web service still serves the executive reasoning
+# route, whose importer expects these bounded request/evidence contracts.
+SCHEMA_VERSION = 'enterprise_intelligence_v1'
+PROFILE_ID = 'strategic_sales_director_v1'
+
+def now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec='seconds')
+
+def stable_hash(value: Any) -> str:
+    import hashlib, json
+    return hashlib.sha256(json.dumps(value, sort_keys=True, default=str).encode('utf-8')).hexdigest()
+
+class ReasoningRequestV1(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    request_id: str
+    enterprise_id: str
+    workspace_id: str
+    requested_by: str
+    twin_version: str = 'accepted'
+    evidence_cut_off: str = ''
+    maximum_evidence_volume: int = 12000
+    prompt_version_ref: str = 'executive_commercial_brief_prompt_v1'
+    reasoning_profile: str = PROFILE_ID
+    schema_version: str = SCHEMA_VERSION
+    created_at: str = Field(default_factory=now_iso)
+
+    @classmethod
+    def create(
+        cls,
+        enterprise_id: str,
+        workspace_id: str,
+        requested_by: str,
+        *,
+        evidence_cut_off: str = '',
+        maximum_evidence_volume: int = 12000,
+        twin_version: str = 'accepted',
+        prompt_version_ref: str = 'executive_commercial_brief_prompt_v1',
+        reasoning_profile: str = PROFILE_ID,
+    ) -> 'ReasoningRequestV1':
+        return cls(
+            request_id='rr-' + stable_hash({'enterprise_id': enterprise_id, 'workspace_id': workspace_id, 'requested_by': requested_by, 'created_at': now_iso()})[:16],
+            enterprise_id=enterprise_id,
+            workspace_id=workspace_id,
+            requested_by=requested_by,
+            evidence_cut_off=evidence_cut_off,
+            maximum_evidence_volume=maximum_evidence_volume,
+            twin_version=twin_version,
+            prompt_version_ref=prompt_version_ref,
+            reasoning_profile=reasoning_profile,
+        )
+
+    def to_dict(self) -> dict[str, Any]:
+        return self.model_dump()
+
+class EvidencePackageItem(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    stable_id: str
+    object_class: str
+    statement: str
+    truth_status: str
+    confidence: Any = ''
+    freshness: str = ''
+    lineage: tuple[str, ...] = ()
+    linked_objects: tuple[str, ...] = ()
+    source_location: str = ''
+    enterprise_id: str = ''
+
+    def __init__(self, stable_id: str, object_class: str, statement: str, truth_status: str, confidence: Any = '', freshness: str = '', lineage: tuple[str, ...] = (), linked_objects: tuple[str, ...] = (), source_location: str = '', enterprise_id: str = ''):
+        super().__init__(stable_id=stable_id, object_class=object_class, statement=statement, truth_status=truth_status, confidence=confidence, freshness=freshness, lineage=tuple(lineage), linked_objects=tuple(linked_objects), source_location=source_location, enterprise_id=enterprise_id)
+
+    def to_dict(self) -> dict[str, Any]:
+        return self.model_dump()
+
+class EvidencePackageV1(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    package_id: str
+    enterprise_id: str
+    enterprise_context: dict[str, Any]
+    twin_version: str
+    evidence_cut_off: str
+    source_scope: str
+    selected_observations: tuple[EvidencePackageItem, ...] = ()
+    selected_entities_and_relationships: tuple[EvidencePackageItem, ...] = ()
+    selected_programmes_and_initiatives: tuple[EvidencePackageItem, ...] = ()
+    selected_unknowns: tuple[EvidencePackageItem, ...] = ()
+    selected_contradictions: tuple[EvidencePackageItem, ...] = ()
+    selected_human_supplied_knowledge: tuple[EvidencePackageItem, ...] = ()
+    selected_projections: tuple[EvidencePackageItem, ...] = ()
+    lineage_manifest: tuple[str, ...] = ()
+    freshness: str = 'current'
+    retrieval_strategy: str = 'bounded'
+    retrieval_notes: tuple[str, ...] = ()
+
+    def __init__(self, package_id: str, enterprise_id: str, enterprise_context: dict[str, Any], twin_version: str, evidence_cut_off: str, source_scope: str, selected_observations: tuple[EvidencePackageItem, ...] = (), selected_entities_and_relationships: tuple[EvidencePackageItem, ...] = (), selected_programmes_and_initiatives: tuple[EvidencePackageItem, ...] = (), selected_unknowns: tuple[EvidencePackageItem, ...] = (), selected_contradictions: tuple[EvidencePackageItem, ...] = (), selected_human_supplied_knowledge: tuple[EvidencePackageItem, ...] = (), selected_projections: tuple[EvidencePackageItem, ...] = (), lineage_manifest: tuple[str, ...] = (), freshness: str = 'current', retrieval_strategy: str = 'bounded', retrieval_notes: tuple[str, ...] = ()):
+        super().__init__(package_id=package_id, enterprise_id=enterprise_id, enterprise_context=enterprise_context, twin_version=twin_version, evidence_cut_off=evidence_cut_off, source_scope=source_scope, selected_observations=tuple(selected_observations), selected_entities_and_relationships=tuple(selected_entities_and_relationships), selected_programmes_and_initiatives=tuple(selected_programmes_and_initiatives), selected_unknowns=tuple(selected_unknowns), selected_contradictions=tuple(selected_contradictions), selected_human_supplied_knowledge=tuple(selected_human_supplied_knowledge), selected_projections=tuple(selected_projections), lineage_manifest=tuple(lineage_manifest), freshness=freshness, retrieval_strategy=retrieval_strategy, retrieval_notes=tuple(retrieval_notes))
+
+    def all_items(self) -> list[EvidencePackageItem]:
+        return [*self.selected_observations, *self.selected_entities_and_relationships, *self.selected_programmes_and_initiatives, *self.selected_unknowns, *self.selected_contradictions, *self.selected_human_supplied_knowledge, *self.selected_projections]
+
+    def to_dict(self) -> dict[str, Any]:
+        return self.model_dump()
