@@ -11,6 +11,7 @@ The Banking knowledge domain governs Banking Enterprise Intelligence research as
 - [infrastructure/](infrastructure/README.md) contains infrastructure Twins and infrastructure-scoped evidence.
 - [enterprises/](enterprises/README.md) contains enterprise-scoped Twin directories.
 - [comparisons/](comparisons/README.md) contains differential and comparison artefacts.
+- [reinvention/](reinvention/README.md) contains Banking-domain Reinvention Hypotheses and supporting release governance reports.
 - [flora/](flora/README.md) contains discovery metadata for Flora.
 
 ## Governance rules
@@ -19,7 +20,8 @@ The Banking knowledge domain governs Banking Enterprise Intelligence research as
 - Use stable asset identifiers from [MANIFEST.yaml](MANIFEST.yaml); never derive relationships from filenames.
 - Convert legacy text assets to Markdown and retain provenance through metadata.
 - Keep commercial opportunity material separate from mechanism validation.
+- Treat Banking Reinvention Hypotheses as candidate, falsifiable learning objects until owner acceptance; do not promote them into accepted facts or cross-industry methodology.
 
 ## Relationship to other assets
 
-The domain is registered in the repository-level [REGISTER.md](../REGISTER.md). The manifest is the domain-level control point; folder README files provide human navigation only.
+The domain is registered in the repository-level [REGISTER.md](../REGISTER.md). The manifest is the domain-level control point; folder README files provide human navigation only. The Banking Reinvention Hypotheses release is governed by methodology only through existing repository methodology assets; the distinct Enterprise Reinvention Blueprint relationship remains unresolved until that blueprint is present and governed.

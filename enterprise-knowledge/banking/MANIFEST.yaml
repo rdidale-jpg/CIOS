@@ -130,6 +130,32 @@ assets:
     owner: TBD
     location: "banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md"
     relationships: []
+
+  - asset_id: EK-BANK-RHYP-001
+    title: "Banking Reinvention Hypotheses v0.1"
+    asset_type: "Reinvention Hypothesis Register"
+    domain: Banking
+    status: Candidate
+    version: "0.1"
+    owner: TBD
+    location: "banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md"
+    relationships:
+      - relationship: "governed_by_methodology_unresolved"
+        target: "Enterprise Reinvention Blueprint"
+        status: "Unresolved - blueprint not found in repository"
+      - relationship: "methodology_input"
+        target: "EGM-001 — Enterprise Growth Method"
+        location: "knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md"
+      - relationship: "supported_by"
+        target: "banking/reinvention/Delivery-Manifest.md"
+      - relationship: "supported_by"
+        target: "banking/reinvention/Validation-Report.md"
+      - relationship: "supported_by"
+        target: "banking/reinvention/Hypothesis-Statistics.md"
+      - relationship: "supported_by"
+        target: "banking/reinvention/Architectural-Observations.md"
+      - relationship: "supported_by"
+        target: "banking/reinvention/Completion-Report.md"
   - asset_id: BK-FLR-001
     title: "Banking Knowledge Register for Flora"
     asset_type: "Discovery Register"

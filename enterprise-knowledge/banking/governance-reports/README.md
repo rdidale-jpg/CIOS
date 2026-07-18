@@ -17,3 +17,7 @@ Reports describe repository governance actions only. They must not rewrite or re
 ## Relationship to other assets
 
 These reports support the Banking [MANIFEST.yaml](../MANIFEST.yaml) and repository [REGISTER.md](../../REGISTER.md).
+
+## Reinvention governance
+
+- [Banking-Reinvention-Hypotheses-Governance-Report.md](Banking-Reinvention-Hypotheses-Governance-Report.md) records intake inspection, duplicate checks, manifest validation, methodology relationship status and integration results for `EK-BANK-RHYP-001`.
