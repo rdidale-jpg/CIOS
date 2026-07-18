@@ -26,14 +26,14 @@
       "relationships": "[]"
     },
     {
-      "asset_id": "BK-MEC-001",
-      "title": "Banking Mechanism Catalogue and Executive Tension Model",
-      "asset_type": "Mechanism Catalogue",
+      "asset_id": "BK-REF-001",
+      "title": "Banking Mechanisms and Tensions Model",
+      "asset_type": "Reference Model",
       "domain": "Banking",
       "status": "Validated",
       "version": "1.0",
       "owner": "TBD",
-      "location": "banking/industry/Banking-Mechanism-Catalogue.md",
+      "location": "banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
       "relationships": "[]"
     },
     {
@@ -159,7 +159,8 @@
     }
   ],
   "governance": {
-    "canonicalMechanismAuthority": "BK-MEC-001",
+    "canonicalMechanismAuthority": "BK-CMP-002",
+    "futureMechanismCatalogueAssetId": "BK-MEC-001",
     "preserveUnknowns": true,
     "preserveContradictions": true,
     "requireEvidenceLineage": true,

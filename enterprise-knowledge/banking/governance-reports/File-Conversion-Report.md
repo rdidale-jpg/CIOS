@@ -4,7 +4,7 @@
 |---|---|---|
 | legacy `.txt` where applicable | `banking/industry/Banking-Industry-Foundation.md` | Converted to Markdown with original content preserved and YAML metadata added. |
 | legacy `.txt` where applicable | `banking/industry/Banking-Industry-Twin.md` | Converted to Markdown with original content preserved and YAML metadata added. |
-| legacy `.txt` where applicable | `banking/industry/Banking-Mechanism-Catalogue.md` | Converted to Markdown with original content preserved and YAML metadata added. |
+| legacy `.txt` where applicable | `banking/industry/Banking-Mechanism-Catalogue.md` → `banking/industry/Banking-Mechanisms-and-Tensions-Model.md` | Converted to Markdown with original content preserved and YAML metadata added; subsequent semantic misclassification correction applied with body content preserved except governed metadata/title. |
 | legacy `.txt` where applicable | `banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md` | Converted to Markdown with original content preserved and YAML metadata added. |
 | legacy `.txt` where applicable | `banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md` | Converted to Markdown with original content preserved and YAML metadata added. |
 | legacy `.txt` where applicable | `banking/enterprises/natwest/NatWest-Enterprise-Twin.md` | Converted to Markdown with original content preserved and YAML metadata added. |

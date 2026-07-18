@@ -32,7 +32,7 @@ Files in this directory are governed knowledge assets, not automatically accepte
 
 ## Supported asset types
 
-This hierarchy is intended to support Industry Twins, Enterprise Twins, Infrastructure Twins, future Ecosystem Twins, Mechanism Catalogues, Differential Matrices, Mechanism Reconciliation Registers, Participant-Type Variant Registers, Compound Mechanism Registers, Mechanism Candidate Registers, Future Industry Models, Future Enterprise Models, Opportunity Twins, Commercial Assets and supporting research registers.
+This hierarchy is intended to support Industry Twins, Enterprise Twins, Infrastructure Twins, future Ecosystem Twins, Mechanism Catalogues, Reference Models, Differential Matrices, Mechanism Reconciliation Registers, Participant-Type Variant Registers, Compound Mechanism Registers, Mechanism Candidate Registers, Future Industry Models, Future Enterprise Models, Opportunity Twins, Commercial Assets and supporting research registers.
 
 `Ecosystem Twin` is reserved as an anticipated asset type and must not be presented as already validated.
 

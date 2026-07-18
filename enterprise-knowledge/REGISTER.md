@@ -6,7 +6,7 @@ This register records every governed Enterprise Knowledge asset in the repositor
 |---|---|---|---|---|---|---|---|
 | BK-IND-001 | Banking Industry Foundation | Industry Foundation | Banking | Validated | 1.0 | TBD | [banking/industry/Banking-Industry-Foundation.md](banking/industry/Banking-Industry-Foundation.md) |
 | BK-IND-002 | Banking Industry Twin | Industry Twin | Banking | Validated | 1.0 | TBD | [banking/industry/Banking-Industry-Twin.md](banking/industry/Banking-Industry-Twin.md) |
-| BK-MEC-001 | Banking Mechanism Catalogue and Executive Tension Model | Mechanism Catalogue | Banking | Validated | 1.0 | TBD | [banking/industry/Banking-Mechanism-Catalogue.md](banking/industry/Banking-Mechanism-Catalogue.md) |
+| BK-REF-001 | Banking Mechanisms and Tensions Model | Reference Model | Banking | Validated | 1.0 | TBD | [banking/industry/Banking-Mechanisms-and-Tensions-Model.md](banking/industry/Banking-Mechanisms-and-Tensions-Model.md) |
 | BK-INF-001 | UK Banking Payments Infrastructure Twin | Infrastructure Twin | Banking | Validated | 0.1 | TBD | [banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md](banking/infrastructure/UK-Banking-Payments-Infrastructure-Twin.md) |
 | BK-ENT-001 | Lloyds Enterprise Twin | Enterprise Twin | Banking | Validated | 1.0 | TBD | [banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md](banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md) |
 | BK-ENT-002 | NatWest Enterprise Twin | Enterprise Twin | Banking | Validated | 1.0 | TBD | [banking/enterprises/natwest/NatWest-Enterprise-Twin.md](banking/enterprises/natwest/NatWest-Enterprise-Twin.md) |

@@ -17,5 +17,5 @@ This register controls Flora discovery and reasoning over governed Banking knowl
 
 | Asset ID | Name | Type | Enterprise or Scope | Version | Status | Confidence | Evidence Cut-off | Canonical Authority | Depends On | Repository Path | Flora Usage |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| EK-BANK-MECH-CAT-PENDING | Banking Mechanism Catalogue | Mechanism Catalogue | Banking | Pending upload | pending_upload | Pending upload | Pending upload | Banking Mechanism Catalogue | Banking Industry Foundation | Path pending upload | Mechanism evidence |
-| EK-BANK-DIFF-MATRIX-2-1-PENDING | Four-Bank Mechanism Differential Matrix v2.1 | Differential Matrix | Four-bank comparison | Pending upload | pending_upload | Pending upload | Pending upload | Banking Mechanism Catalogue | Enterprise Twins; Mechanism Identifier Reconciliation Register | Path pending upload | Comparison input |
+| BK-MEC-001 | Banking Mechanism Catalogue v1.0 | Mechanism Catalogue | Banking | Planned | planned | Pending upload | Pending upload | Future planned Banking Mechanism Catalogue | Banking Industry Foundation; Banking Mechanisms and Tensions Model | Path pending upload | Not for runtime use |
+| EK-BANK-DIFF-MATRIX-2-1-PENDING | Four-Bank Mechanism Differential Matrix v2.1 | Differential Matrix | Four-bank comparison | Pending upload | pending_upload | Pending upload | Pending upload | Four-Bank Mechanism Differential Matrix v2.1 | Enterprise Twins; Mechanism Identifier Reconciliation Register | Path pending upload | Comparison input |

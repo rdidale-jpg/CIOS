@@ -14,7 +14,7 @@ confidence: "High"
 # Four-Bank Mechanism Differential Matrix v2.1 — Correction
 
 Run mode: correction / reconciliation, not rebuild.
-Authority: the original Banking Mechanism Catalogue is the sole authority for BM-01 through BM-22.
+Authority: the Four-Bank Mechanism Differential Matrix v2.1 is the identifier-control authority for BM-01 through BM-22; the Banking Mechanisms and Tensions Model remains source lineage, not a canonical catalogue content file.
 Correction target: Four-Bank Mechanism Differential Matrix v2.
 Correction reason: mechanism identifier drift occurred where enterprise-local labels were treated as canonical BM identifiers. The most material issues are Monzo’s local use of BM-03, NatWest’s local use of BM-06, and Nationwide’s local use of BM-10.
 
@@ -326,4 +326,4 @@ This affects especially the Nationwide file, where commercial opportunity sectio
 | Commercial-analysis sections do not influence validation | Met |
 | Material changes to v2 reported | Met |
 
-The Four-Bank Mechanism Differential Matrix v2.1 correction is complete. Canonical Banking Mechanism identifiers have been reconciled against all enterprise-local labels, semantic conflicts and variants are explicit, and the revised confidence and applicability judgements retain inspectable lineage to the original Banking Mechanism Catalogue.
+The Four-Bank Mechanism Differential Matrix v2.1 correction is complete. Canonical Banking Mechanism identifiers have been reconciled against all enterprise-local labels, semantic conflicts and variants are explicit, and the revised confidence and applicability judgements retain inspectable lineage to the original Banking Mechanisms and Tensions Model.
