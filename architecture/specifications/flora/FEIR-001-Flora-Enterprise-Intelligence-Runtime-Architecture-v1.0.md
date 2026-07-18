@@ -5,7 +5,7 @@
 **Owner:** Rob / CIOS  
 **Last updated:** 2026-07-18  
 **Decision record:** [ADR-024](../../decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md)  
-**Authority:** Proposed Flora runtime architecture; does not supersede accepted Enterprise Intelligence, Founding Paper or ADR authority.
+**Authority:** Proposed Flora runtime specification under accepted ADR-024; does not supersede accepted Enterprise Intelligence, Founding Paper or ADR authority.
 
 ## 1. Mission and outcomes
 
@@ -209,7 +209,15 @@ Banking industry change
 
 Available governed assets include the Banking Industry Twin, Banking Industry Foundation, Banking Mechanisms and Tensions Model, UK Banking Payments Infrastructure Twin, enterprise twins for Barclays, Lloyds, NatWest, Nationwide/Virgin Money, Santander UK, Starling and Monzo, the Banking Reinvention Hypotheses v0.1 candidate register, Four-Bank Mechanism Differential Matrix and the Banking Knowledge Register for Flora.
 
-Minimum example: select Banking; select an existing Banking pressure from governed industry/tension assets; select a governed enterprise such as Barclays or NatWest; retrieve enterprise-specific Observations and candidate hypotheses where present; run one challenge pass; preserve any missing executive ownership as an Unknown; produce a proportionate next action such as gather evidence, monitor, engage executive or defer according to lineage. This paper does not invent unsupported Banking facts. Architectural gap: the commission refers to Banking Strategic Sales Navigation Specification and Validation Report, but those exact document titles were not located during validation and must be confirmed by the Chief Architect or supplied before relying on them.
+Minimum example: select Banking; select an existing Banking pressure from governed industry/tension assets; select a governed enterprise such as Barclays or NatWest; retrieve enterprise-specific Observations and candidate hypotheses where present; run one challenge pass; preserve any missing executive ownership as an Unknown; produce a proportionate next action such as gather evidence, monitor, engage executive or defer according to lineage. This paper does not invent unsupported Banking facts.
+
+Authoritative Banking Strategic Sales Navigation inputs were subsequently located on this branch and reviewed:
+
+- `BK-FLR-SSN-SPEC-001` — `enterprise-knowledge/banking/flora/Banking-Strategic-Sales-Navigation-Specification.md`.
+- `BK-GOV-SSN-VAL-001` — `enterprise-knowledge/banking/governance-reports/Banking-Strategic-Sales-Navigation-Validation-Report.md`.
+- `BK-GOV-SSN-COMP-001` — `enterprise-knowledge/banking/governance-reports/Banking-Strategic-Sales-Navigation-Completion-Report.md`.
+
+The Banking specification preserves the Strategic Sales Director outcome, Explore/Focus/Shape modes, Who / Why now / Why them / What evidence / What next contract, evidence and contradiction controls, hypothesis lifecycle expectations, executive-specificity limits and proportional next-best action boundaries. The Banking validation report confirms repository discovery is partial but usable, runtime ingestion readiness requires derived journey views and direct relationship exposure, runtime UX validation is not proven by repository validation alone, and gaps remain around machine-addressable lineage, executive specificity and derived Flora views. These findings strengthen FEIR-001's hybrid architecture rather than altering the decision.
 
 ## 16. Security and access considerations
 
@@ -380,7 +388,7 @@ Explore industry change -> Focus on enterprise exposure
 
 ### Authoritative documents reviewed
 
-CIOS Chief Architect Handbook, CIOS Reference Architecture, CIOS-AI, Accepted ADRs, Enterprise Knowledge Architecture, Enterprise Knowledge Production Protocol, EI-001, EI-002, EI-003, EI-012, FP-003, FP-009, EGM-001, CIOS Design Doctrine, Architecture Principles, Glossary, Document Map, Banking governed asset registers and available Banking twin/reinvention assets were reviewed. The exact Banking Strategic Sales Navigation Specification and Banking Strategic Sales Navigation Validation Report were not found by title.
+CIOS Chief Architect Handbook, CIOS Reference Architecture, CIOS-AI, Accepted ADRs, Enterprise Knowledge Architecture, Enterprise Knowledge Production Protocol, EI-001, EI-002, EI-003, EI-012, FP-003, FP-009, EGM-001, CIOS Design Doctrine, Architecture Principles, Glossary, Document Map, Banking governed asset registers, available Banking twin/reinvention assets, `BK-FLR-SSN-SPEC-001`, `BK-GOV-SSN-VAL-001` and `BK-GOV-SSN-COMP-001` were reviewed. The earlier statement that the exact Banking Strategic Sales Navigation documents were not found was inaccurate for the committed repository state after the Banking branch merge.
 
 ### Existing decisions preserved
 
@@ -388,11 +396,11 @@ Observation primacy, Enterprise Model durable memory, CIRM/EI separation, labell
 
 ### Conflicts found
 
-No accepted-architecture conflict was found. The missing Banking Strategic Sales Navigation documents are an Architectural Unknown.
+No accepted-architecture conflict was found. The Banking Strategic Sales Navigation documents exist on the current branch and expose no material conflict with FEIR-001. The previous Architectural Unknown about exact Banking source documents is resolved.
 
 ### ADR identifier and status
 
-ADR-024 — Hybrid Enterprise Intelligence Runtime — Proposed.
+ADR-024 — Hybrid Enterprise Intelligence Runtime — Accepted.
 
 ### Owning architecture paper identifier and status
 
@@ -416,7 +424,7 @@ Flora is a hybrid governed runtime; GPT workers are bounded; outputs are candida
 
 ### Architectural Unknowns
 
-Physical runtime graph design; exact Banking Strategic Sales Navigation source documents; final accepted recommendation thresholds; audit retention/privacy periods; external-output approval workflow details.
+Physical runtime graph design; final accepted recommendation thresholds; audit retention/privacy periods; external-output approval workflow details. The exact Banking Strategic Sales Navigation source document Unknown is resolved by `BK-FLR-SSN-SPEC-001`, `BK-GOV-SSN-VAL-001` and `BK-GOV-SSN-COMP-001`.
 
 ### Subsequent ADRs recommended
 
@@ -436,7 +444,7 @@ Repository search for AGENTS, ADR numbering, document-map conventions, authority
 
 ### Validation failures and corrections
 
-No duplicate ADR identifier was found. A new Flora specifications directory was created because no governed Flora architecture-specification hierarchy existed under `architecture/specifications/`. Missing Banking Strategic Sales Navigation documents were recorded as an Architectural Unknown rather than invented.
+No duplicate ADR identifier was found. A new Flora specifications directory was created because no governed Flora architecture-specification hierarchy existed under `architecture/specifications/`. Follow-up reconciliation found the Banking Strategic Sales Navigation documents in the merged current branch; the earlier missing-document statement was a validation timing/search discrepancy, not evidence that the assets were absent from committed repository history.
 
 ### Commit hash and PR reference
 
@@ -444,4 +452,4 @@ To be completed by the implementing agent after commit and PR creation.
 
 ### Chief Architect decisions still required
 
-Acceptance of ADR-024 and FEIR-001; runtime graph persistence approach; recommendation policy promotion; audit retention/privacy constraints; external sharing approval boundary; confirmation or supply of Banking Strategic Sales Navigation materials.
+FEIR-001 specification acceptance; runtime graph persistence approach; recommendation policy promotion; audit retention/privacy constraints; external sharing approval boundary; implementation of Banking derived journey views and relationship exposure gaps.
