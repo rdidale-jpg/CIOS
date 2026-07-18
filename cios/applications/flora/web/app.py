@@ -48,6 +48,7 @@ def deployment_payload() -> dict[str, str]:
 CASE_SLUGS = {"ThamesWater", "NationalGrid", "BT", "Vodafone"}
 
 
+
 class FloraWebHandler(BaseHTTPRequestHandler):
     """Production-safe HTTP routes for the Flora Render web service."""
 
@@ -496,6 +497,9 @@ def _redirects_to_flora(path: str) -> bool:
     if path in {"/morning-edition", "/live", "/evidence", "/portfolio", "/radar", "/scoring", "/reasoning-model", "/observatory", "/observatory/critique", "/settings", "/logbook", "/digital-twins", "/digital-twins/bt-group-plc", "/financial-intelligence", "/financial-reports", "/ai-financial-report"}:
         return True
     return path.startswith(("/live/", "/digital-twins/bt-group-plc/", "/financial-intelligence/", "/ai-financial-report/", "/observatory/", "/digital-twin/", "/score/", "/case/"))
+
+app = FloraWebHandler
+
 
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
