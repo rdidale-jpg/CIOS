@@ -170,6 +170,51 @@ assets:
     location: "banking/flora/Banking-Knowledge-Register.md"
     relationships: []
 
+  - asset_id: BK-FLR-SSN-SPEC-001
+    title: "Banking Strategic Sales Navigation Specification"
+    asset_type: "Flora Navigation Specification"
+    domain: Banking
+    status: Candidate
+    version: "0.1"
+    owner: TBD
+    location: "banking/flora/Banking-Strategic-Sales-Navigation-Specification.md"
+    relationships:
+      - relationship: "validates_navigation_for"
+        target: "EK-BANK-RHYP-001"
+      - relationship: "governed_by_methodology"
+        target: "EGM-001 — Enterprise Growth Method"
+        location: "knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md"
+      - relationship: "governed_by_standard"
+        target: "FP-009 — Hypothesis Validation Standard"
+        location: "architecture/founding-papers/FP-009-Hypothesis-Validation-Standard.md"
+  - asset_id: BK-GOV-SSN-VAL-001
+    title: "Banking Strategic Sales Navigation Validation Report"
+    asset_type: "Governance Validation Report"
+    domain: Banking
+    status: Candidate
+    version: "0.1"
+    owner: TBD
+    location: "banking/governance-reports/Banking-Strategic-Sales-Navigation-Validation-Report.md"
+    relationships:
+      - relationship: "validates"
+        target: "BK-FLR-SSN-SPEC-001"
+      - relationship: "samples_hypotheses"
+        target: "BRH-003, BRH-007, BRH-008"
+      - relationship: "reports_on"
+        target: "BK-FLR-001"
+  - asset_id: BK-GOV-SSN-COMP-001
+    title: "Banking Strategic Sales Navigation Completion Report"
+    asset_type: "Completion Report"
+    domain: Banking
+    status: Candidate
+    version: "0.1"
+    owner: TBD
+    location: "banking/governance-reports/Banking-Strategic-Sales-Navigation-Completion-Report.md"
+    relationships:
+      - relationship: "completes"
+        target: "BK-GOV-SSN-VAL-001"
+      - relationship: "reports_on"
+        target: "BK-FLR-SSN-SPEC-001"
 flora:
   discovery_register: "banking/flora/Banking-Knowledge-Register.md"
   machine_manifest: "banking/flora/Banking-Knowledge-Manifest.json"
