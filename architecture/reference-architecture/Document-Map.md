@@ -78,6 +78,12 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | EI-013 | Enterprise Learning Model | Future paper for outcome learning and model improvement. | Future | `architecture/enterprise-intelligence/` | Will own Learning and Feedback Layer. |
 | EI-016 | Enterprise Curiosity Engine | Future paper for curiosity-driven collection and reasoning. | Future | `architecture/enterprise-intelligence/` | Will own targeted learning from unknowns and contradictions. |
 
+## Enterprise Knowledge
+
+| Document | Purpose | Status | Folder | Relationship to Reference Architecture |
+| --- | --- | --- | --- | --- |
+| [Banking Reinvention Hypotheses v0.1](../../enterprise-knowledge/banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md) | Governs candidate, evidence-derived Banking-domain Reinvention Hypotheses. | Candidate | `enterprise-knowledge/banking/reinvention/` | Industry-specific Enterprise Knowledge; not an architecture specification, Accepted ADR, Enterprise Reinvention Blueprint or cross-industry methodology. Enterprise Reinvention Blueprint relationship is unresolved because no distinct blueprint asset exists in the repository; EGM-001 is recorded only as existing methodology input. |
+
 ## Founder Knowledge (Non-Architecture)
 
 | Document | Purpose | Status | Folder | Relationship to Reference Architecture |

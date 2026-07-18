@@ -156,6 +156,48 @@
       "owner": "TBD",
       "location": "banking/flora/Banking-Knowledge-Register.md",
       "relationships": "[]"
+    },
+    {
+      "asset_id": "EK-BANK-RHYP-001",
+      "title": "Banking Reinvention Hypotheses v0.1",
+      "asset_type": "Reinvention Hypothesis Register",
+      "domain": "Banking",
+      "status": "Candidate",
+      "version": "0.1",
+      "owner": "TBD",
+      "location": "banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md",
+      "relationships": [
+        {
+          "relationship": "governed_by_methodology_unresolved",
+          "target": "Enterprise Reinvention Blueprint",
+          "status": "Unresolved - blueprint not found in repository"
+        },
+        {
+          "relationship": "methodology_input",
+          "target": "EGM-001 \u2014 Enterprise Growth Method",
+          "location": "knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md"
+        },
+        {
+          "relationship": "supporting_report",
+          "target": "banking/reinvention/Hypothesis-Statistics.md"
+        },
+        {
+          "relationship": "supporting_report",
+          "target": "banking/reinvention/Validation-Report.md"
+        },
+        {
+          "relationship": "supporting_report",
+          "target": "banking/reinvention/Architectural-Observations.md"
+        },
+        {
+          "relationship": "supporting_report",
+          "target": "banking/reinvention/Completion-Report.md"
+        },
+        {
+          "relationship": "delivery_manifest",
+          "target": "banking/reinvention/Delivery-Manifest.md"
+        }
+      ]
     }
   ],
   "governance": {
@@ -166,6 +208,8 @@
     "requireEvidenceLineage": true,
     "separateMechanismConfidenceFromEnterpriseApplicability": true,
     "commercialOpportunityMaterialValidatesMechanisms": false,
-    "automaticFullDocumentIngestion": false
+    "automaticFullDocumentIngestion": false,
+    "enterpriseReinventionBlueprintRelationship": "unresolved_missing_repository_asset",
+    "enterpriseReinventionMethodologyInput": "knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md"
   }
 }

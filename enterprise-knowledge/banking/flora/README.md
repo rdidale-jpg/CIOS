@@ -22,6 +22,7 @@ Uploaded assets must preserve provenance, evidence cut-off, status, version, sco
 
 - [Banking-Knowledge-Register.md](Banking-Knowledge-Register.md)
 - [Banking-Knowledge-Manifest.json](Banking-Knowledge-Manifest.json)
+- The register and manifest include `EK-BANK-RHYP-001` for discoverability as context-only candidate Banking Reinvention Hypotheses; Flora must preserve candidate status, Unknowns, Contradictions and evidence lineage.
 
 ## Relationship to other assets
 
