@@ -31,11 +31,13 @@ The authoritative hypotheses document is `enterprise-knowledge/banking/reinventi
 
 Repository search found no existing governed copy of `EK-BANK-RHYP-001`, `BRH-001`, or `Banking-Reinvention-Hypotheses` before extraction. No duplicate authoritative copies were created.
 
-## Methodology relationship
+## Methodology ownership review
 
-No distinct repository asset titled `Enterprise Reinvention Blueprint` was found. The repository does contain `EGM-001 — Enterprise Growth Method` at `knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md`; it is recorded as a methodology input only and not promoted to a missing blueprint.
+Required review inspected EGM-001, its Universal Enterprise Reinvention Model, its Industry Blueprint Method, relevant Founding Papers, Accepted ADRs, the Enterprise Knowledge Production Protocol through current Enterprise Knowledge governance architecture, and current repository terminology and authority rules.
 
-**Chief Architect action:** resolve whether `EGM-001` is the intended governing methodology for this release or provide/govern the missing Enterprise Reinvention Blueprint as a separate asset.
+Decision: EGM-001 already owns the strategic methodology used to produce industry reinvention hypotheses. EGM-001 explicitly owns the strategic methodology; the Universal Enterprise Reinvention Model states that the ten domains structure an Industry Reinvention Model in the Reinvent horizon; the Industry Blueprint Method defines the future-state industry-participant design process and requires evidence, benchmarks, Founder assumptions, strategic hypotheses, aspirations and Unknowns to remain distinguished. FP-010 confirms that EGM-001 owns strategic methodology while CIOS owns architecture and Flora operationalises governed intelligence. Accepted ADRs and Enterprise Knowledge governance rules preserve evidence lineage, hypothesis truth status, Unknowns and Contradictions; they do not require a separate Enterprise Reinvention Blueprint methodology asset.
+
+Resolution: `EK-BANK-RHYP-001` is governed by methodology relationship to `EGM-001 — Enterprise Growth Method`, with section-level references to EGM-001's Universal Enterprise Reinvention Model and Industry Blueprint Method. The previous unresolved Enterprise Reinvention Blueprint governance issue is removed. No duplicate Enterprise Reinvention Blueprint document was created.
 
 ## ZIP retention status
 

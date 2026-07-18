@@ -24,4 +24,4 @@ The Banking knowledge domain governs Banking Enterprise Intelligence research as
 
 ## Relationship to other assets
 
-The domain is registered in the repository-level [REGISTER.md](../REGISTER.md). The manifest is the domain-level control point; folder README files provide human navigation only. The Banking Reinvention Hypotheses release is governed by methodology only through existing repository methodology assets; the distinct Enterprise Reinvention Blueprint relationship remains unresolved until that blueprint is present and governed.
+The domain is registered in the repository-level [REGISTER.md](../REGISTER.md). The manifest is the domain-level control point; folder README files provide human navigation only. The Banking Reinvention Hypotheses release is governed by EGM-001 as the existing repository methodology owner for industry reinvention hypotheses, with section-level references to the Universal Enterprise Reinvention Model and Industry Blueprint Method. No duplicate Enterprise Reinvention Blueprint asset is required or created.

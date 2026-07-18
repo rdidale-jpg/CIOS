@@ -168,14 +168,20 @@
       "location": "banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md",
       "relationships": [
         {
-          "relationship": "governed_by_methodology_unresolved",
-          "target": "Enterprise Reinvention Blueprint",
-          "status": "Unresolved - blueprint not found in repository"
+          "relationship": "governed_by_methodology",
+          "target": "EGM-001 \u2014 Enterprise Growth Method",
+          "location": "knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md",
+          "status": "Resolved - EGM-001 owns the strategic methodology for industry reinvention hypotheses"
         },
         {
-          "relationship": "methodology_input",
-          "target": "EGM-001 \u2014 Enterprise Growth Method",
-          "location": "knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md"
+          "relationship": "section_reference",
+          "target": "EGM-001 \u2014 Universal Enterprise Reinvention Model",
+          "location": "knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md#chapter-2--the-universal-enterprise-reinvention-model"
+        },
+        {
+          "relationship": "section_reference",
+          "target": "EGM-001 \u2014 Industry Blueprint Method",
+          "location": "knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md#appendix-b--industry-blueprint-method"
         },
         {
           "relationship": "supporting_report",
@@ -209,7 +215,11 @@
     "separateMechanismConfidenceFromEnterpriseApplicability": true,
     "commercialOpportunityMaterialValidatesMechanisms": false,
     "automaticFullDocumentIngestion": false,
-    "enterpriseReinventionBlueprintRelationship": "unresolved_missing_repository_asset",
-    "enterpriseReinventionMethodologyInput": "knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md"
+    "enterpriseReinventionMethodologyRelationship": "resolved_to_EGM-001",
+    "enterpriseReinventionMethodologyOwner": "knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md",
+    "enterpriseReinventionSectionReferences": [
+      "knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md#chapter-2--the-universal-enterprise-reinvention-model",
+      "knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md#appendix-b--industry-blueprint-method"
+    ]
   }
 }
