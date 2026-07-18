@@ -1,0 +1,1612 @@
+
+UK BANKING PAYMENTS INFRASTRUCTURE TWIN
+Industry Infrastructure Twin v0.1
+Effective date: 18 July 2026
+Run mode: NEW BUILD
+Twin type: Industry Infrastructure Twin, not Enterprise Twin
+Primary validation question: Which banking mechanisms depend upon infrastructure rather than enterprise behaviour?
+
+================================================================================
+0. DELIVERY AND INPUT MANIFEST
+================================================================================
+
+Requested by:
+- User brief: "Researcher Brief — Banking Payments Infrastructure Twin"
+
+Mission:
+- Construct the first UK Banking Payments Infrastructure Twin.
+- Model the ecosystem that enables UK banking, not one bank.
+- Separate what banks control from what the wider payments ecosystem controls.
+
+Scope explicitly included:
+- Faster Payments
+- Bacs
+- CHAPS
+- LINK
+- Open Banking
+- Pay.UK
+- Bank of England settlement
+- Mastercard
+- Visa
+- card acquiring
+- payment gateways
+- Confirmation of Payee
+- APP reimbursement
+- ISO 20022
+- Request to Pay
+- Open Banking payments
+- merchant acquiring
+
+Boundary:
+- United Kingdom banking payments infrastructure.
+- Retail and wholesale sterling payments where they affect UK banking mechanisms.
+- Account-to-account, bulk, high-value, card, cash-access, open-banking and overlay-service mechanisms.
+- Participant behaviour is modelled only where it explains infrastructure dependency.
+
+Not an Enterprise Twin:
+- This Twin does not reconstruct a single enterprise's strategy, governance, business-unit economics or commercial opportunity portfolio.
+- It adapts the CIOS doctrine into an Industry Infrastructure Twin: infrastructure observations, patterns, mechanisms, dependencies, participants, constraints, unknowns and validation.
+
+Named decisions supported:
+D-01 Separate banking mechanisms controlled by banks from mechanisms controlled by shared infrastructure.
+D-02 Identify which payment mechanisms are infrastructure-owned, enterprise-owned, shared or externally dependent.
+D-03 Determine whether material mechanisms exist around network effects, settlement economics, scheme dependency, fraud propagation, cloud concentration, real-time resilience, third-party dependency, merchant economics and Open Banking competition.
+D-04 Prioritise future validation where infrastructure dependency is material but current public evidence is incomplete.
+
+Accountability horizon:
+- Near term: July 2026 to September 2026, covering RPIB consultation and current infrastructure modernisation.
+- Strategic horizon: 2027 to early 2030s, covering CHAPS extended hours, enhanced ISO 20022, future retail payments infrastructure and incumbent infrastructure contracts.
+
+Source cut-off:
+- Sources searched and used up to 18 July 2026.
+
+Materiality rule:
+- Include a mechanism when it affects one or more of: payment reachability, settlement finality, liquidity, fraud liability, customer access, merchant economics, scheme compliance, operational resilience, third-party concentration, bank channel design, or Open Banking competition.
+
+Exclusions:
+- No proprietary bank data.
+- No internal Pay.UK, Bank of England, Mastercard, Visa, LINK, acquirer, gateway or Open Banking operational data.
+- No legal advice.
+- No commercial opportunity ranking.
+- No total programme or market sizing unless directly sourced.
+
+Stop conditions applied:
+- Where public evidence supports the existence of a mechanism but not its full economics or ownership, the item is preserved as an Unknown rather than over-claimed.
+- Where evidence is provider-authored, supplier-side statements are labelled and not treated as independent proof of benefit.
+
+Refresh triggers:
+- RPIB consultation outcome after 11 September 2026.
+- Publication of detailed Delivery Company operating model or procurement model.
+- Final PSR/FCA directions on Visa/Mastercard scheme and processing fee remedies.
+- Further Critical Third Party designations.
+- Bank of England/HMT decision on digital pound design phase.
+- Material outage or resilience incident in FPS, CHAPS, Bacs, LINK, Visa/Mastercard, major acquirer/gateway or cloud provider.
+- APP reimbursement policy or liability changes.
+- Open Banking commercial model or VRP regime changes.
+
+Artifact:
+- This file: UK_Banking_Payments_Infrastructure_Twin_v0_1.txt
+
+================================================================================
+1. SOURCE REGISTER
+================================================================================
+
+S-001 CIOS Researcher doctrine pack / uploaded manifest. Used to apply New Build discipline, governed state, Unknowns, evidence lineage and downloadable artifact delivery.
+Source type: Uploaded instruction/doctrine pack.
+
+S-010 Pay.UK "Our Work" page.
+URL: https://www.wearepay.uk/what-we-do/
+Key evidence: Pay.UK states it runs UK retail payments operations including Bacs, Faster Payments and Image Clearing, and delivers services including Confirmation of Payee and Request to Pay. Pay.UK describes its infrastructure, rules, standards, controls and policies as a payments platform.
+Source class: Primary infrastructure operator.
+
+S-011 Pay.UK Faster Payment System page.
+URL: https://www.wearepay.uk/what-we-do/payment-systems/faster-payment-system/
+Key evidence: Faster Payments is available day and night, 365 days per year; supports real-time payments up to £1m; used by individuals, businesses and charities.
+Source class: Primary infrastructure operator.
+
+S-012 Pay.UK Bacs Payment System page.
+URL: https://www.wearepay.uk/what-we-do/payment-systems/bacs-payment-system/
+Key evidence: Bacs is an electronic transfer service between accounts; Direct Debit and Direct Credit are its two principal categories; in 2024 it facilitated 6.81bn payments with £5.8tn value.
+Source class: Primary infrastructure operator.
+
+S-013 Pay.UK Access to Payment Systems page.
+URL: https://www.wearepay.uk/what-we-do/payment-systems/access-to-payment-systems/
+Key evidence: Direct and indirect access routes; access is vital for PSPs; direct access requires arrangement with the payment system operator; indirect access requires contractual arrangement with a direct participant/indirect access provider.
+Source class: Primary infrastructure operator.
+
+S-014 Pay.UK Confirmation of Payee page.
+URL: https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/
+Key evidence: CoP is an account name-checking service to reduce misdirected payments; over 300 organisations implemented it; more than 2m checks completed daily; API-based peer-to-peer service with directory and no central infrastructure.
+Source class: Primary infrastructure operator / overlay service.
+
+S-015 Pay.UK Request to Pay page.
+URL: https://www.wearepay.uk/what-we-do/overlay-services/request-to-pay/
+Key evidence: Request to Pay is an overlay messaging service within existing payment infrastructure; allows billers to send secure payment requests and customers to pay, query, part-pay, pay later or decline.
+Source class: Primary infrastructure operator / overlay service.
+
+S-016 Pay.UK Payment Systems page.
+URL: https://www.wearepay.uk/what-we-do/payment-systems/
+Key evidence: Pay.UK is extending and enhancing its systems in line with the National Payments Vision, including ISO 20022 messaging, resilience, Certainty of Fate and Open Banking support.
+Source class: Primary infrastructure operator.
+
+S-020 Bank of England RTGS and CHAPS annual report 2024/25.
+URL: https://www.bankofengland.co.uk/report/2025/rtgs-and-chaps-annual-report-2024-25
+Key evidence: RTGS lies at the heart of every electronic payment in the UK and settles over £800bn on an average working day.
+Source class: Central bank / settlement operator.
+
+S-021 Bank of England "A brief introduction to RTGS and CHAPS".
+URL: https://www.bankofengland.co.uk/payment-and-settlement/a-brief-introduction-to-the-real-time-gross-settlement-system-and-chaps
+Key evidence: RTGS settles payment obligations in central bank money; RTGS provides settlement facilities to CHAPS, Bacs, ICS, Faster Payments, LINK, Mastercard Europe, PEXA and Visa Europe; daily 2024 settlement values include CHAPS, FPS, Bacs, LINK, Visa Europe and Mastercard.
+Source class: Central bank / settlement operator.
+
+S-022 Bank of England Payment and Settlement page.
+URL: https://www.bankofengland.co.uk/payment-and-settlement
+Key evidence: CHAPS uses real-time gross settlement; settlement risk is eliminated at the cost of higher liquidity need; Bank supports CHAPS with secured intraday liquidity and liquidity-saving mechanism; Bacs, Faster Payments, LINK, Mastercard Europe and Visa Europe use RTGS accounts for net settlement.
+Source class: Central bank / settlement operator.
+
+S-023 Bank of England ISO 20022 page.
+URL: https://www.bankofengland.co.uk/payment-and-settlement/rtgs-renewal-programme/iso-20022
+Key evidence: CHAPS and RTGS migrated to ISO 20022 on 19 June 2023; ISO 20022 enables richer, structured data and common language across payments.
+Source class: Central bank / standards implementation.
+
+S-024 Bank of England policy statement on CHAPS settlement hours.
+URL: https://www.bankofengland.co.uk/paper/2026/ps/extending-rtgs-and-chaps-settlement-hours-early-morning-extension
+Key evidence: Bank decided to extend CHAPS settlement hours from 06:00 to 01:30, intended for September 2027 subject to confirmation.
+Source class: Central bank / policy.
+
+S-025 Bank of England RPIB consultation launch, 25 June 2026.
+URL: https://www.bankofengland.co.uk/news/2026/june/rpib-launches-consultation-on-next-generation-uk-payments-infrastructure
+Key evidence: RPIB launched consultation on next-generation retail payments infrastructure; future infrastructure may support A2A point-of-sale and enhanced cross-border payments; Pay.UK continues central role in maintaining existing systems; Delivery Company will lead and own delivery of core infrastructure.
+Source class: Central bank / infrastructure governance.
+
+S-026 Bank of England National Payments Vision page.
+URL: https://www.bankofengland.co.uk/payment-and-settlement/the-national-payments-vision
+Key evidence: PVDC strategy, public/private collaboration model, reset of responsibilities, Pay.UK continues as operator of existing systems, Payments Forward Plan.
+Source class: Central bank / cross-authority governance.
+
+S-030 PSR APP scams deadlines page.
+URL: https://www.psr.org.uk/our-work/app-scams/deadlines-for-firms/
+Key evidence: APP reimbursement requirement came into effect on 7 October 2024; affects all payment firms using Faster Payments; Pay.UK placed the requirement into FPS rules and provides operational systems for communication, claims management and compliance data.
+Source class: Payment regulator.
+
+S-031 PSR card scheme and processing fees market review page.
+URL: https://www.psr.org.uk/our-work/market-reviews/market-review-into-card-scheme-and-processing-fees/
+Key evidence: PSR found Mastercard and Visa do not face effective competition in scheme and processing fees, with fees rising and lack of clarity; remedies were consulted in 2025/2026.
+Source class: Payment regulator.
+
+S-032 PSR market reviews page.
+URL: https://www.psr.org.uk/our-work/market-reviews/
+Key evidence: PSR card-acquiring market review found the market did not work well for merchants with annual card turnover below £50m.
+Source class: Payment regulator.
+
+S-040 Open Banking Limited "Open Banking in 2025".
+URL: https://www.openbanking.org.uk/insights/open-banking-in-2025-now-part-of-the-uks-everyday-financial-life/
+Key evidence: Open Banking payments reached 351m in 2025, up 57%; API calls 24bn, up 27%; user connections 16.5m by December 2025; sweeping VRP up 98%.
+Source class: Open Banking ecosystem body.
+
+S-041 FCA "Open banking: a year of progress".
+URL: https://www.fca.org.uk/news/news-stories/open-banking-2025-progress
+Key evidence: Open Banking payments grew 53% year-on-year; VRPs account for 16% of open banking transactions.
+Source class: Regulator.
+
+S-050 LINK "Cash remains a vital payment choice as £76bn withdrawn in 2025".
+URL: https://www.link.co.uk/news/link-cash-remains-a-vital-payment-choice-as-76-billion-withdrawn-in-2025/
+Key evidence: £76.7bn withdrawn from LINK ATMs in 2025, 1.27bn transactions; LINK represents 77% of ATM transactions.
+Source class: Cash-access network operator.
+
+S-060 Visa annual report 2025.
+URL: https://annualreport.visa.com/financials/default.aspx
+Key evidence: Visa reported 2025 total volume $16.7tn, payments volume $14.2tn, 257.5bn processed transactions and 4.9bn payment credentials globally.
+Source class: Card network operator.
+
+S-061 Mastercard 2025 Form 10-K.
+URL: https://s25.q4cdn.com/479285134/files/doc_financials/2025/ar/MA-12-31-2025-10-K-as-filed-with-standard-exhibits.pdf
+Key evidence: Mastercard network revenue generated by charging issuers, acquirers and other participants for switching and network-related services.
+Source class: Card network operator.
+
+S-062 Mastercard SEC filing text.
+URL: https://www.sec.gov/Archives/edgar/data/1141391/000114139126000013/ma-20251231.htm
+Key evidence: Mastercard's payment network links issuers and acquirers; interchange fees balance costs and benefits for consumers and merchants and are generally collected from acquirers and paid to issuers.
+Source class: Card network operator / SEC filing.
+
+S-070 UK Finance Payment Markets Report Summary 2025.
+URL: https://www.ukfinance.org.uk/system/files/2025-10/Payment%20Markets%20Report%20Summary.pdf
+Key evidence: UK payments in 2024 were 48.8bn; card payments' share was 64% of transactions; payments transformation driven by Open Banking, behavioural change and National Payments Vision.
+Source class: Trade body.
+
+S-080 Bank of England Critical Third Parties news release.
+URL: https://www.bankofengland.co.uk/news/2026/july/uk-financial-regulators-to-begin-overseeing-critical-third-parties-announced-by-hmt
+Key evidence: Bank, PRA and FCA start overseeing designated Critical Third Parties from 13 July 2026; first designations are Amazon Web Services EMEA SARL, Google Cloud EMEA Limited, Microsoft Ireland Operations Ltd and Oracle Corporation UK Limited; disruption could affect multiple firms or markets at the same time.
+Source class: Regulators.
+
+S-081 HM Treasury Critical Third Parties news release.
+URL: https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers
+Key evidence: Four global cloud providers designated as Critical Third Parties from 13 July 2026; oversight to reduce disruption risk to online services used by millions and to critical financial services.
+Source class: Government.
+
+S-090 Vocalink by Mastercard homepage.
+URL: https://www.vocalink.com/
+Key evidence: Vocalink provides tools and connectivity for Bacs, Faster Payments, ICS and card-initiated ATM transactions.
+Source class: Supplier/operator; provider-authored.
+
+S-091 Vocalink UK Faster Payments case study.
+URL: https://www.vocalink.com/newsroom/success-stories/case-study-uk-faster-payments/
+Key evidence: UK Faster Payments runs on Vocalink real-time payments infrastructure; provider-authored.
+Source class: Supplier/operator; provider-authored.
+
+S-092 Mastercard/Pay.UK/Vocalink contract extension announcement.
+URL: https://www.mastercard.com/news/europe/en-uk/newsroom/press-releases/en-gb/pay-uk-and-vocalink-extend-contracts-securing-continuity-for-uk-payments-systems/
+Key evidence: Pay.UK extended central infrastructure services contracts with Vocalink into the early 2030s for FPS, Bacs and ICS.
+Source class: Supplier/operator; provider-authored.
+
+S-093 Reuters/FT reporting on possible Vocalink sale.
+URL: https://www.reuters.com/business/mastercard-examines-sale-uk-payments-subsidiary-vocalink-ft-reports-2026-07-13/
+Key evidence: Reports that Mastercard is examining sale of UK payments subsidiary Vocalink; used only as a strategic signal, not as proof of transaction.
+Source class: News / market signal.
+
+================================================================================
+2. EXECUTIVE ANSWER
+================================================================================
+
+Primary validation answer:
+Most high-consequence UK banking mechanisms depend on shared infrastructure rather than enterprise behaviour alone.
+
+A bank owns its customer relationship, interface, risk appetite, authentication design, account ledger, fraud models, operations, compliance interpretation and third-party controls. But a bank does not independently own the reachability, settlement finality, clearing rules, scheme economics, rail availability, network acceptance, cross-bank directory, reimbursement rails, common messaging or central-bank settlement layer that make UK payments work.
+
+The clearest infrastructure-dependent banking mechanisms are:
+- cross-bank account-to-account payment reachability;
+- 24/7 near-real-time retail transfer availability;
+- final settlement in central bank money;
+- bulk salary, benefit, bill and Direct Debit processing;
+- card acceptance at merchants;
+- ATM cash access;
+- Confirmation of Payee name checking;
+- APP reimbursement claim routing and liability allocation;
+- Open Banking payment initiation and VRP execution;
+- scheme access and indirect access;
+- merchant acquiring economics;
+- ISO 20022 data interoperability;
+- systemic resilience and cloud concentration management.
+
+The most bank-owned mechanisms are:
+- customer authentication and channel experience;
+- account ledger management before/after infrastructure handoff;
+- customer fraud education and transaction monitoring;
+- internal liquidity and treasury posture;
+- risk appetite and exception handling;
+- bank-specific pricing, products and service design;
+- bank-specific third-party due diligence and contingency planning.
+
+The critical control boundary is therefore not "bank versus fintech" or "cards versus account-to-account". It is:
+Bank-controlled interaction and account state
+-> shared rail and scheme rules
+-> central or net settlement
+-> overlay trust and liability services
+-> external technology and access dependencies
+-> customer/merchant behavioural adoption.
+
+================================================================================
+3. GOVERNED INDUSTRY INFRASTRUCTURE STATE
+================================================================================
+
+Twin state identifier:
+- UK-BPI-TWIN-2026-07-18-v0.1
+
+Infrastructure model:
+- This Twin treats UK payments infrastructure as a layered operating system, not as a list of payment methods.
+
+Layer 0: Public authority and regulatory direction
+- HM Treasury
+- Bank of England
+- FCA
+- Payment Systems Regulator
+- PVDC
+- RPIB
+- Future Delivery Company
+
+Layer 1: Settlement foundation
+- Bank of England RTGS
+- CHAPS
+- RTGS settlement accounts, reserves, central bank money
+- Net settlement for retail payment systems and card schemes
+
+Layer 2: Core retail interbank rails
+- Faster Payments
+- Bacs
+- Image Clearing System (out of user core scope except Pay.UK context)
+- Access routes: direct, indirect, sponsored/agency access
+
+Layer 3: Cash-access rail
+- LINK ATM network
+- ATM deployers
+- card-initiated cash transactions
+- cash-access rules and interchange
+
+Layer 4: Card scheme rails
+- Visa
+- Mastercard
+- issuers
+- acquirers
+- processors
+- merchant service providers
+- gateways
+- tokenisation/wallet providers
+
+Layer 5: Overlay trust and messaging services
+- Confirmation of Payee
+- Payer Name Verification
+- Request to Pay
+- APP reimbursement communication and claims-management systems
+- Directories and standards
+
+Layer 6: Open Banking rails
+- Account-servicing payment service providers (ASPSPs)
+- Third-party providers (TPPs)
+- Open Banking APIs
+- Payment initiation
+- Variable Recurring Payments
+- Open Banking Limited standards/performance ecosystem
+
+Layer 7: External technology and third-party substrate
+- Cloud providers
+- managed service providers
+- payment processors
+- gateways
+- scheme connectivity providers
+- bureaux
+- identity, fraud and device-intelligence services
+
+================================================================================
+4. INFRASTRUCTURE PARTICIPANTS
+================================================================================
+
+IP-001 Pay.UK
+Role:
+- Operator of UK retail payments operations including Bacs and Faster Payments.
+- Operator/deliverer of overlay services including CoP and Request to Pay.
+Mechanism influence:
+- Owns rules, standards, central services and operational coordination for Pay.UK-operated rails and overlays.
+Evidence:
+- S-010, S-011, S-012, S-013, S-014, S-015, S-016.
+Dependency significance:
+- Banks cannot unilaterally alter FPS, Bacs, CoP or RtP interoperability; they operate inside Pay.UK rules and services.
+
+IP-002 Bank of England
+Role:
+- Settlement-account provider, RTGS operator and CHAPS operator/risk manager.
+- Settlement agent for CHAPS and retail payment systems using RTGS.
+Mechanism influence:
+- Defines central-bank-money settlement, RTGS access, settlement models, CHAPS operating hours and liquidity tools.
+Evidence:
+- S-020, S-021, S-022, S-023, S-024, S-025, S-026.
+Dependency significance:
+- Final settlement and settlement-risk elimination are infrastructure-owned.
+
+IP-003 HM Treasury, FCA, PSR and PVDC
+Role:
+- Public authority and regulatory direction for payments.
+- PVDC coordinates National Payments Vision implementation.
+Mechanism influence:
+- Sets policy direction and prioritisation for future retail payments infrastructure, APP reimbursement and competition remedies.
+Evidence:
+- S-025, S-026, S-030, S-031, S-080, S-081.
+Dependency significance:
+- Banks adapt to mandated scheme, reimbursement, resilience and infrastructure-design changes.
+
+IP-004 Retail Payments Infrastructure Board (RPIB)
+Role:
+- Bank-chaired senior industry advisory board shaping next-generation retail payments infrastructure.
+Mechanism influence:
+- Consults on future design, payment journeys, A2A point of sale and cross-border enhancements.
+Evidence:
+- S-025.
+Dependency significance:
+- Future rail capabilities depend on ecosystem architecture, not single-bank execution.
+
+IP-005 Delivery Company
+Role:
+- New industry-led entity expected to lead and own delivery of future core retail infrastructure.
+Mechanism influence:
+- Will shape core infrastructure delivery and possibly commercial model.
+Evidence:
+- S-025, S-026.
+Dependency significance:
+- Strategic unknown: governance, funding, procurement and supplier model not yet fully evidenced.
+
+IP-006 LINK
+Role:
+- UK cash-access and ATM network.
+Mechanism influence:
+- Provides the shared network enabling cash withdrawal across institutions and independent ATM deployers.
+Evidence:
+- S-050, S-021.
+Dependency significance:
+- Cash access is infrastructure-shared, not purely bank branch-owned.
+
+IP-007 Visa
+Role:
+- Global card scheme/network; provides acceptance, rules, processing and settlement structures via issuers/acquirers.
+Mechanism influence:
+- Determines scheme rules, processing fees, global acceptance economics, tokenisation and card-payment interoperability.
+Evidence:
+- S-031, S-060, S-070.
+Dependency significance:
+- UK card acceptance is materially dependent on Visa infrastructure and scheme economics.
+
+IP-008 Mastercard
+Role:
+- Global card scheme/network and owner of Vocalink.
+Mechanism influence:
+- Card network and processing services; UK infrastructure supplier role via Vocalink.
+Evidence:
+- S-031, S-061, S-062, S-090, S-091, S-092, S-093.
+Dependency significance:
+- Scheme dependency and infrastructure supplier concentration are material.
+
+IP-009 Vocalink by Mastercard
+Role:
+- Provider of central infrastructure/connectivity services for multiple UK rails, according to provider-authored and Pay.UK/Mastercard sources.
+Mechanism influence:
+- Technical infrastructure for FPS/Bacs/ICS and connectivity/access solutions.
+Evidence:
+- S-090, S-091, S-092.
+Contradiction/epistemic note:
+- Supplier-authored evidence confirms provider positioning; independent confirmation of full current contract terms is not in this file.
+Dependency significance:
+- High: potential strategic infrastructure concentration and sovereignty signal.
+
+IP-010 Banks / account-servicing PSPs / building societies
+Role:
+- Customer account providers, direct or indirect rail participants, issuers, acquirers, ASPSPs and settlement participants depending on role.
+Mechanism influence:
+- Own customer channels, authentication, account ledgers, customer risk decisions and direct/indirect access choices.
+Evidence:
+- S-013, S-021, S-022, S-030, S-040.
+Dependency significance:
+- Banks consume and contribute to infrastructure but do not fully own it.
+
+IP-011 Non-bank PSPs and e-money institutions
+Role:
+- Direct or indirect users of payment systems; TPPs, payment initiators, acquirers, gateways and wallet/payment providers.
+Mechanism influence:
+- Increase reach, competition and complexity; depend on access rules and sponsor banks where indirect.
+Evidence:
+- S-013, S-040, S-041.
+Dependency significance:
+- Important for Open Banking competition, indirect access and third-party risk.
+
+IP-012 Merchants and billers
+Role:
+- Payment acceptors and originators of bill requests/Direct Debits.
+Mechanism influence:
+- Shape acceptance, method routing, customer choice and cost pass-through.
+Evidence:
+- S-012, S-015, S-031, S-032, S-070.
+Dependency significance:
+- Merchant economics are set by acquirer contracts, scheme fees, gateway services, consumer adoption and alternative rail availability.
+
+IP-013 Acquirers, merchant service providers and gateways
+Role:
+- Provide merchant acceptance, onboarding, authorisation routing, settlement, fraud tools, tokenisation and e-commerce checkout orchestration.
+Mechanism influence:
+- Translate scheme rules and rail access into merchant acceptance.
+Evidence:
+- S-031, S-032, S-061, S-062.
+Dependency significance:
+- Banks may own some acquiring businesses but many gateway/acquirer dependencies sit outside issuing-bank control.
+
+IP-014 Open Banking Limited / OBL ecosystem
+Role:
+- Standards, performance reporting and ecosystem coordination for Open Banking.
+Mechanism influence:
+- Enables API-based account access and payment initiation across ASPSPs and TPPs.
+Evidence:
+- S-040, S-041.
+Dependency significance:
+- Competition through Open Banking is infrastructure/API-standard dependent and adoption-dependent.
+
+IP-015 Critical Third Parties / major cloud providers
+Role:
+- Provide cloud and technology services used across the financial system.
+Mechanism influence:
+- Operational resilience dependency; systemic concentration if many firms depend on same providers.
+Evidence:
+- S-080, S-081.
+Dependency significance:
+- Cloud concentration is external infrastructure dependency, not bank-enterprise behaviour alone.
+
+================================================================================
+5. INFRASTRUCTURE OBSERVATIONS
+================================================================================
+
+IO-001 Pay.UK operates core retail payment rails and overlay services.
+Atomic observation:
+- Pay.UK states it runs UK retail payments operations including Bacs, Faster Payments and Image Clearing, and delivers Confirmation of Payee and Request to Pay.
+Evidence:
+- S-010.
+Confidence: High.
+Freshness: Current page accessed July 2026.
+Consequence:
+- Bank retail payment mechanics depend on Pay.UK rule, service and infrastructure choices.
+
+IO-002 Faster Payments is a 24/7/365 real-time retail rail with a high transaction limit.
+Atomic observation:
+- Pay.UK states Faster Payments is available day and night, 365 days per year and supports real-time payments up to £1m.
+Evidence:
+- S-011.
+Confidence: High.
+Consequence:
+- Real-time banking payments are infrastructure-enabled; a bank's channel can request a payment but cannot unilaterally provide universal cross-bank real-time reach.
+
+IO-003 Bacs is the bulk electronic payment mechanism for Direct Debit and Direct Credit.
+Atomic observation:
+- Pay.UK states Bacs is used for payments between accounts and falls into Direct Debit and Direct Credit categories.
+Evidence:
+- S-012.
+Confidence: High.
+Consequence:
+- Salary, benefits, bill and recurring-collection banking mechanisms depend on batch infrastructure and scheme rules.
+
+IO-004 Direct/indirect access is a structural dependency.
+Atomic observation:
+- Pay.UK states PSPs access payment systems directly through arrangements with the payment system operator or indirectly through a direct participant/indirect access provider.
+Evidence:
+- S-013.
+Confidence: High.
+Consequence:
+- A bank or PSP's ability to provide services is partly an infrastructure-access and sponsor-dependency issue.
+
+IO-005 RTGS is the foundation of final settlement in central bank money.
+Atomic observation:
+- Bank of England states settlement in RTGS occurs in central bank money and supports payment obligations for CHAPS and retail systems.
+Evidence:
+- S-021, S-022.
+Confidence: High.
+Consequence:
+- Settlement finality and systemic risk reduction are infrastructure-owned.
+
+IO-006 RTGS lies at the heart of electronic payments in the UK.
+Atomic observation:
+- Bank of England states RTGS lies at the heart of every electronic payment in the UK and settles over £800bn on an average working day.
+Evidence:
+- S-020.
+Confidence: High.
+Consequence:
+- Even retail payment mechanisms ultimately inherit central-bank-settlement dependence.
+
+IO-007 CHAPS gross settlement eliminates settlement risk at a liquidity cost.
+Atomic observation:
+- Bank of England states CHAPS obligations settle individually on a gross basis throughout the day; settlement risk is eliminated at the cost of increased liquidity need, supported by secured intraday liquidity and a liquidity saving mechanism.
+Evidence:
+- S-022.
+Confidence: High.
+Consequence:
+- High-value banking mechanisms depend on infrastructure liquidity design, not only bank treasury behaviour.
+
+IO-008 Retail rails and card schemes settle net in RTGS.
+Atomic observation:
+- Bank of England states Bacs, Faster Payments, LINK, Mastercard Europe and Visa Europe use RTGS accounts to settle net obligations.
+Evidence:
+- S-022.
+Confidence: High.
+Consequence:
+- Card, cash and account-to-account rails share a central-bank settlement substrate.
+
+IO-009 CHAPS and RTGS migrated to ISO 20022 in 2023.
+Atomic observation:
+- Bank of England states CHAPS and RTGS migrated to ISO 20022 on 19 June 2023.
+Evidence:
+- S-023.
+Confidence: High.
+Consequence:
+- Data richness for high-value payments is an infrastructure and standards issue.
+
+IO-010 Future retail infrastructure is being redesigned at ecosystem level.
+Atomic observation:
+- Bank of England states RPIB launched a 25 June 2026 consultation on the future design of next-generation retail payments infrastructure, including A2A point-of-sale and enhanced cross-border payments.
+Evidence:
+- S-025.
+Confidence: High.
+Consequence:
+- Future payment competition and resilience depend on infrastructure design choices currently outside individual bank control.
+
+IO-011 APP reimbursement is embedded into FPS rules and operations.
+Atomic observation:
+- PSR states the APP scams reimbursement requirement came into effect on 7 October 2024, affects all payment firms using FPS, and Pay.UK placed the requirement into FPS rules and provides operational systems for communication, claims management and compliance data.
+Evidence:
+- S-030.
+Confidence: High.
+Consequence:
+- Scam reimbursement is a shared liability and infrastructure-operational mechanism, not just a bank policy choice.
+
+IO-012 Confirmation of Payee is a distributed API/directory overlay.
+Atomic observation:
+- Pay.UK states CoP is API-based peer-to-peer with no central infrastructure but uses a directory; more than 300 organisations implemented it and over 2m checks are completed daily.
+Evidence:
+- S-014.
+Confidence: High.
+Consequence:
+- Payee verification depends on ecosystem participation, directory accuracy and API availability.
+
+IO-013 Request to Pay is an overlay messaging service, not a settlement rail.
+Atomic observation:
+- Pay.UK states Request to Pay sits within existing payments infrastructure and allows secure biller-payer communication with options such as pay part, pay later and decline.
+Evidence:
+- S-015.
+Confidence: High.
+Consequence:
+- RtP changes biller/customer interaction, but settlement still depends on another chosen payment method.
+
+IO-014 Open Banking payments are scaling but remain small versus total UK payments.
+Atomic observation:
+- OBL states Open Banking payments reached 351m in 2025, a 57% increase, with 16.5m user connections by December 2025; UK Finance reported 48.8bn UK payments in 2024 and card payments at 64% share.
+Evidence:
+- S-040, S-070.
+Confidence: Medium-high.
+Consequence:
+- Open Banking competition exists but is not yet structurally equivalent to cards in acceptance and recourse.
+
+IO-015 LINK remains material to access-to-cash mechanisms.
+Atomic observation:
+- LINK states £76.7bn was withdrawn through LINK ATMs in 2025 across 1.27bn transactions and LINK represented 77% of ATM transactions.
+Evidence:
+- S-050.
+Confidence: High.
+Consequence:
+- Cash-access banking depends on shared ATM infrastructure beyond branch networks.
+
+IO-016 Visa and Mastercard card economics are scheme-driven.
+Atomic observation:
+- PSR states Mastercard and Visa do not face effective competition in scheme and processing fees, with rising fees and lack of clarity for businesses.
+Evidence:
+- S-031.
+Confidence: High for PSR finding.
+Consequence:
+- Merchant card economics are infrastructure/scheme-owned more than bank-enterprise-owned.
+
+IO-017 Card-acquiring market issues disproportionately affect smaller merchants.
+Atomic observation:
+- PSR market reviews page states the card-acquiring review found the market did not work well for merchants with annual card turnover below £50m.
+Evidence:
+- S-032.
+Confidence: High.
+Consequence:
+- Merchant payment economics depend on acquiring and scheme-market structure.
+
+IO-018 Cloud concentration has become a directly overseen financial-system dependency.
+Atomic observation:
+- Bank of England/PRA/FCA started overseeing designated Critical Third Parties on 13 July 2026; the first four are major global cloud providers.
+Evidence:
+- S-080, S-081.
+Confidence: High.
+Consequence:
+- Payment resilience depends on external technology providers as well as bank and rail operators.
+
+IO-019 Vocalink is a material UK payments infrastructure supplier, but supplier evidence must be handled carefully.
+Atomic observation:
+- Vocalink and Mastercard-authored sources state Vocalink provides infrastructure/connectivity for UK payment rails including FPS, Bacs and ICS, and Pay.UK/Vocalink contracts extend central infrastructure services into the early 2030s.
+Evidence:
+- S-090, S-091, S-092.
+Confidence: Medium-high for existence of role; lower for detailed contractual scope due to provider-authored evidence.
+Consequence:
+- Infrastructure supplier concentration is material and needs independent validation.
+
+IO-020 Recent reporting indicates political/commercial sensitivity around Vocalink ownership.
+Atomic observation:
+- Reuters/FT reported in July 2026 that Mastercard is examining sale of its UK payments subsidiary Vocalink.
+Evidence:
+- S-093.
+Confidence: Medium; news report, not completed transaction.
+Consequence:
+- Infrastructure sovereignty and ownership are live strategic signals, not settled facts.
+
+================================================================================
+6. INFRASTRUCTURE PATTERNS
+================================================================================
+
+PAT-001 Rail reachability pattern
+Statement:
+- A bank's customer promise to "pay anyone in the UK" is not created by the bank alone. It is produced by sort-code/account addressing, Pay.UK rail participation, direct/indirect access, receiving PSP reachability, and settlement arrangements.
+Mechanism relevance:
+- Faster Payments, Bacs, CoP, Open Banking PIS, Direct Debit, Direct Credit.
+Control state:
+- Shared, with infrastructure-owned reachability.
+
+PAT-002 Settlement abstraction pattern
+Statement:
+- Customers experience payment completion in bank apps or merchant checkouts, but final inter-institution obligation discharge occurs through RTGS gross or net settlement models.
+Mechanism relevance:
+- CHAPS, FPS, Bacs, LINK, Visa, Mastercard.
+Control state:
+- Infrastructure-owned settlement; bank-owned customer presentation.
+
+PAT-003 Scheme-rule inheritance pattern
+Statement:
+- Banks, PSPs, acquirers, gateways and merchants inherit rulebooks, liability rules, data standards and operating requirements from payment systems and card schemes.
+Mechanism relevance:
+- Card acquiring, FPS APP reimbursement, Bacs Direct Debit, CoP, Open Banking.
+Control state:
+- Shared; scheme/infrastructure owns rule substrate.
+
+PAT-004 Real-time finality/risk-shift pattern
+Statement:
+- Faster payment speed improves customer utility but shifts fraud, exception and liquidity stress into shorter decision windows. This creates reliance on preventive overlays such as CoP and after-the-event liability/reimbursement infrastructure.
+Mechanism relevance:
+- Faster Payments, APP reimbursement, CoP, fraud monitoring.
+Control state:
+- Shared; risk originates at interaction layer but propagates through rail.
+
+PAT-005 Merchant acceptance two-sided network pattern
+Statement:
+- Card value depends on consumer credentials, issuer participation, merchant acceptance, acquirer/gateway integration and scheme rules. Account-to-account alternatives must reproduce enough of this acceptance and trust stack to compete.
+Mechanism relevance:
+- Visa/Mastercard, Open Banking payments, A2A point of sale, merchant acquiring.
+Control state:
+- Infrastructure-owned network effects with merchant/bank adoption behaviours.
+
+PAT-006 Net settlement efficiency pattern
+Statement:
+- Retail rails and card schemes use net settlement to reduce liquidity demands versus real-time gross settlement; this creates dependency on prefunding, risk controls, settlement timing and failure management.
+Mechanism relevance:
+- Bacs, FPS, LINK, Visa, Mastercard.
+Control state:
+- Infrastructure-owned model; shared participant funding obligations.
+
+PAT-007 Overlay trust pattern
+Statement:
+- CoP, Payer Name Verification, Request to Pay and APP claims systems add trust, communication or liability primitives above payment rails without becoming the settlement rail themselves.
+Mechanism relevance:
+- CoP, PNV, RtP, APP reimbursement.
+Control state:
+- Shared overlay infrastructure.
+
+PAT-008 Indirect-access dependency pattern
+Statement:
+- Non-bank PSPs and smaller institutions may depend on direct participants or sponsor banks for payment system access, creating operational, commercial and resilience dependence outside their enterprise.
+Mechanism relevance:
+- FPS, Bacs, CHAPS, Open Banking, acquiring.
+Control state:
+- Shared/external dependency.
+
+PAT-009 Critical-third-party concentration pattern
+Statement:
+- As banks, payment firms and FMIs consume common cloud and technology providers, an outage can become system-wide even if each bank's internal controls are adequate.
+Mechanism relevance:
+- Cloud concentration, operational resilience, gateways, fraud services, Open Banking APIs.
+Control state:
+- External dependency with regulatory oversight; enterprise controls remain necessary but insufficient.
+
+PAT-010 Future-infrastructure transition pattern
+Statement:
+- The UK is simultaneously maintaining legacy-critical rails and designing next-generation retail infrastructure. Mechanisms must therefore be modelled as current-state plus transition-state.
+Mechanism relevance:
+- FPS enhancement, ISO 20022, Certainty of Fate, A2A POS, Open Banking support.
+Control state:
+- Infrastructure-led, public/private transition.
+
+================================================================================
+7. INFRASTRUCTURE MECHANISMS
+================================================================================
+
+IM-001 Account-to-account retail payment mechanism
+Causal chain:
+- Customer/payment initiator -> bank/PSP channel or Open Banking TPP -> account identifiers and authentication -> FPS clearing/messaging -> recipient PSP availability -> net settlement in RTGS -> ledger credit/debit -> confirmation and exception handling.
+Rail objects:
+- FPS, Open Banking PIS, Pay.UK rules, RTGS net settlement, bank ledgers.
+Control:
+- Enterprise-owned: customer interface, authentication, account checks, fraud decision, ledger posting.
+- Infrastructure-owned: FPS availability, interbank rules, reachability, scheme limits, settlement model.
+- Shared: confirmation, exception handling, APP liability.
+- External dependency: TPPs, access providers, cloud, fraud vendors.
+Validation:
+- Infrastructure-dependent.
+
+IM-002 Bulk recurring collection mechanism
+Causal chain:
+- Biller obtains mandate -> PSP/service user submits Direct Debit -> Bacs processing cycle -> payer bank applies collection -> settlement in RTGS -> Direct Debit guarantee/indemnity and exceptions.
+Rail objects:
+- Bacs, Direct Debit, Bacs service users, bureaux, payer banks.
+Control:
+- Enterprise-owned: customer mandate capture quality, account servicing, exception service.
+- Infrastructure-owned: Bacs cycle, rules, access, settlement.
+- Shared: mandate governance, indemnity, returns.
+Validation:
+- Infrastructure-dependent.
+
+IM-003 Payroll and benefits disbursement mechanism
+Causal chain:
+- Employer/government submits file -> Bacs Direct Credit or FPS contingency -> processing cycle -> beneficiary bank credits accounts -> settlement.
+Rail objects:
+- Bacs Direct Credit, bureaux, Pay.UK, receiving PSPs.
+Control:
+- Enterprise-owned: file creation, customer account ledger, reconciliation.
+- Infrastructure-owned: Bacs clearing and settlement.
+- Shared: service-user rules and errors.
+Validation:
+- Infrastructure-dependent.
+
+IM-004 High-value time-critical payment mechanism
+Causal chain:
+- Customer/institution initiates CHAPS -> direct/indirect CHAPS participant -> liquidity check -> RTGS gross settlement -> finality -> beneficiary bank credit.
+Rail objects:
+- CHAPS, RTGS, settlement accounts, intraday liquidity, liquidity saving mechanism.
+Control:
+- Enterprise-owned: treasury liquidity strategy, customer screening, instructions, operations.
+- Infrastructure-owned: CHAPS/RTGS settlement, operating hours, finality rules, liquidity tools.
+- Shared: indirect access/agency banking.
+Validation:
+- Infrastructure-dependent.
+
+IM-005 Card payment acceptance mechanism
+Causal chain:
+- Cardholder presents credential -> merchant terminal/gateway -> acquirer/processor -> Visa/Mastercard network -> issuer authorisation -> clearing -> net settlement -> merchant funding -> chargeback/dispute flows.
+Rail objects:
+- Visa, Mastercard, issuers, acquirers, gateways, tokenisation, merchant service agreements.
+Control:
+- Enterprise-owned: issuer risk model, card proposition, merchant acquirer service model where owned.
+- Infrastructure-owned: scheme rules, network routing, acceptance standards, scheme/processing fees.
+- Shared: fraud, chargebacks, tokenisation, wallet experience, settlement.
+Validation:
+- Infrastructure-dependent and scheme-dependent.
+
+IM-006 Cash access mechanism
+Causal chain:
+- Card/customer authenticates at ATM -> ATM deployer and card network/LINK routing -> issuer authorisation -> cash dispense -> net settlement -> interchange and cash replenishment.
+Rail objects:
+- LINK, ATMs, issuers, independent ATM deployers, settlement through RTGS.
+Control:
+- Enterprise-owned: issuer authorisation and customer account.
+- Infrastructure-owned: LINK network reach, ATM switching, cash access rules.
+- Shared: access footprint, interchange, branch/ATM strategy.
+Validation:
+- Infrastructure-dependent.
+
+IM-007 Payee verification mechanism
+Causal chain:
+- Payer enters account details -> payer PSP invokes CoP -> payee PSP responds through API/directory model -> match/no-match result -> payer decision -> payment proceeds or stops.
+Rail objects:
+- CoP directory, PSP APIs, sort code/account identifiers, Secondary Reference Data.
+Control:
+- Enterprise-owned: data quality, customer warning design, decisioning.
+- Infrastructure-owned: CoP standards, directory, participation rules.
+- Shared: customer interpretation and fraud prevention.
+Validation:
+- Infrastructure-dependent.
+
+IM-008 APP scam reimbursement mechanism
+Causal chain:
+- Customer reports APP scam -> sending/receiving PSP exchange claim data -> Pay.UK systems support communication and compliance data -> liability apportioned under FPS reimbursement scheme -> reimbursement and reporting.
+Rail objects:
+- FPS rules, Pay.UK RCMS/core communication/claims systems, PSR directions, PSP operations.
+Control:
+- Enterprise-owned: case handling, evidence gathering, customer treatment, fraud prevention.
+- Infrastructure-owned: scheme rules and operational claims/reporting infrastructure.
+- Shared: liability split and prevention incentive.
+Validation:
+- Infrastructure-dependent.
+
+IM-009 Open Banking payment mechanism
+Causal chain:
+- Customer consents to TPP -> TPP initiates via ASPSP API -> customer authenticates with ASPSP -> ASPSP initiates payment, commonly over FPS -> confirmation to TPP/customer -> settlement through rail.
+Rail objects:
+- Open Banking APIs, TPPs, ASPSPs, FPS, VRP consent model.
+Control:
+- Enterprise-owned: API availability/performance, SCA journey, account risk controls.
+- Infrastructure-owned: Open Banking standards, API ecosystem, underlying rail, consent primitives.
+- Shared: customer adoption, commercial model, TPP proposition, liability.
+Validation:
+- Infrastructure-dependent and adoption-dependent.
+
+IM-010 Request-to-Pay bill management mechanism
+Causal chain:
+- Biller sends secure payment request through RtP-enabled provider -> customer receives request in app/service -> customer pays, part-pays, delays, queries or declines -> payment executed by chosen method -> reconciliation.
+Rail objects:
+- RtP overlay, billers, PSPs, technical service providers, existing payment methods.
+Control:
+- Enterprise-owned: biller/customer servicing and channel integration.
+- Infrastructure-owned: RtP messaging framework and standards.
+- Shared: adoption, integration and reconciliation value.
+Validation:
+- Overlay-infrastructure-dependent; not settlement-rail-owned.
+
+IM-011 Merchant economics mechanism
+Causal chain:
+- Merchant chooses acceptance methods -> gateway/acquirer prices service -> card scheme and processing fees/interchange flow through -> merchant service charge and settlement timing affect margin -> alternative A2A/Open Banking methods compete only if accepted/trusted.
+Rail objects:
+- Visa/Mastercard, acquirers, gateways, Open Banking payments, A2A POS future infrastructure.
+Control:
+- Enterprise-owned: merchant payment strategy and bank/acquirer proposition.
+- Infrastructure-owned: scheme fees, network acceptance, rule economics.
+- Shared: acquirer competition, gateway value, customer behaviour.
+Validation:
+- Infrastructure and scheme economics dominate.
+
+IM-012 ISO 20022 enhanced-data mechanism
+Causal chain:
+- Sender creates structured payment message -> bank/PSP systems capture and validate data -> rail carries ISO 20022 payload -> recipient systems consume data -> reconciliation, compliance, analytics and automation improve if data quality is adopted.
+Rail objects:
+- CHAPS/RTGS ISO 20022, future Pay.UK ISO 20022, mapping libraries, bank core systems.
+Control:
+- Enterprise-owned: data capture, systems changes, operating adoption.
+- Infrastructure-owned: standard, message rules and mandatory fields.
+- Shared: network-wide adoption and end-to-end data quality.
+Validation:
+- Shared; infrastructure sets the language, banks must use it.
+
+IM-013 Cloud and critical-third-party resilience mechanism
+Causal chain:
+- Bank/PSP/FMI workloads depend on common technology providers -> outage or cyber incident disrupts multiple firms or markets -> regulators oversee CTPs -> firms remain responsible for own outsourcing and resilience controls.
+Rail objects:
+- AWS, Google Cloud, Microsoft, Oracle, regulators, bank systems, FMI systems.
+Control:
+- Enterprise-owned: architecture, exit plans, due diligence, contingency.
+- Infrastructure/external-owned: provider service resilience, shared platforms, regulatory CTP oversight.
+- Shared: incident communication, testing, recovery.
+Validation:
+- External dependency with shared control.
+
+================================================================================
+8. INFRASTRUCTURE DEPENDENCY MATRIX
+================================================================================
+
+Legend:
+- Enterprise owned: the bank/PSP/merchant can materially control this mechanism internally.
+- Infrastructure owned: the rail, scheme, central bank, operator, directory or shared service controls the mechanism.
+- Shared: both enterprise and infrastructure must operate correctly.
+- External dependency: third parties outside the bank and rail operator materially shape the mechanism.
+- Primary classification: the most important control state.
+
+| ID | Banking Mechanism | Principal rails / services | Enterprise owned | Infrastructure owned | Shared | External dependency | Primary classification | Why it matters |
+|---|---|---|---|---|---|---|---|---|
+| BM-001 | Account addressability | Sort codes, account numbers, Pay.UK directories | Customer account data quality | National addressing conventions and scheme reachability | Sort-code/account maintenance | Technical service providers | Shared | Banks issue accounts, but national reachability requires common addressing. |
+| BM-002 | Retail A2A payment initiation | Bank channels, FPS, Open Banking PIS | Channel UX, authentication, fraud decision | FPS and Open Banking standards | Customer consent, confirmation | TPPs, cloud, fraud vendors | Shared | Customer action is bank/TPP-owned; cross-bank execution is infrastructure-owned. |
+| BM-003 | Faster Payments clearing | FPS | Submission quality | FPS rules, availability, processing, limits | Exceptions | Central infrastructure provider | Infrastructure owned | 24/7 real-time reach cannot be created by one bank. |
+| BM-004 | Faster Payments settlement | FPS, RTGS | Funding readiness | Net settlement in RTGS | Participant obligations | Settlement service providers | Infrastructure owned | Final interbank settlement depends on Bank of England RTGS. |
+| BM-005 | Certainty/confirmation of payment fate | FPS enhancements, bank channels | Customer notification | Scheme rule clarification and rail messaging | End-to-end status handling | TSPs | Shared | Real-time confidence requires rail standards plus bank UI/ops. |
+| BM-006 | Bacs Direct Debit mandate creation | Bacs, service users, payer bank | Mandate capture and customer data | Bacs scheme rules | Validation, amendments | Bureaux, FM providers | Shared | Mandate quality is enterprise-owned; enforceability is scheme-owned. |
+| BM-007 | Direct Debit collection and indemnity | Bacs | Account treatment, customer service | Bacs processing cycle, guarantee/rules | Returns/indemnities | Bureaux | Shared | Bill collection depends on scheme timing and bank exception handling. |
+| BM-008 | Bacs Direct Credit payroll/benefits | Bacs | File creation, reconciliation | Batch processing and settlement | Exception recovery | Bureaux/payroll processors | Infrastructure owned | Mass salary/benefit payment depends on shared batch rail. |
+| BM-009 | CHAPS payment initiation | CHAPS | Instruction control, screening, liquidity planning | CHAPS access and RTGS gross settlement | Agency banking | Correspondents | Shared | Bank action matters, but finality is infrastructure-owned. |
+| BM-010 | CHAPS gross settlement | RTGS/CHAPS | Liquidity funding | RTGS final settlement and operating hours | Liquidity tools usage | Collateral markets | Infrastructure owned | Settlement risk elimination is central-bank infrastructure. |
+| BM-011 | Settlement account/reserve mechanics | RTGS | Treasury management | Central bank accounts and Bank Rate remuneration | Eligibility/access | Central-bank policy | Infrastructure owned | Banks cannot create central bank money settlement privately. |
+| BM-012 | Card authorisation | Visa/Mastercard | Issuer risk decision | Scheme network routing | Merchant/acquirer/issuer coordination | Wallets, processors | Shared | Authorisation spans issuer controls and global scheme infrastructure. |
+| BM-013 | Card clearing and settlement | Visa/Mastercard, RTGS net settlement | Merchant/issuer reconciliation | Scheme clearing, net settlement | Dispute cycles | Processors | Infrastructure owned | Card payment completion depends on scheme and settlement rails. |
+| BM-014 | Interchange/scheme fee economics | Visa/Mastercard | Product pricing response | Scheme fee rules and pricing | Merchant service charge pass-through | Acquirers/processors | Infrastructure owned | Merchant costs are materially scheme-owned. |
+| BM-015 | Merchant acquiring onboarding | Acquirers, schemes | Merchant risk assessment, KYC | Scheme eligibility/rules | Contracting, settlement | Gateways/ISOs | Shared | Acquirers control onboarding but must satisfy scheme and regulatory rules. |
+| BM-016 | Payment gateway orchestration | Gateways, schemes, acquirers | Checkout configuration | Scheme protocols | Routing, retries, tokenisation | Gateway/cloud providers | External dependency | Banks often do not control gateway layer used by merchants. |
+| BM-017 | Contactless/mobile wallet acceptance | Visa/Mastercard, wallets, terminals | Issuer token provisioning/risk | Scheme/contactless standards | Terminal readiness | Apple/Google/device vendors | Shared/external | Acceptance depends on device, wallet, scheme and terminal stack. |
+| BM-018 | ATM cash withdrawal | LINK, card networks | Issuer authorisation | Network switching and cash-access rules | Cash dispense exceptions | ATM deployers/cash logistics | Infrastructure owned | Cash access is network-distributed, not only branch-owned. |
+| BM-019 | ATM/cash access footprint | LINK, banks, IADs | Branch/ATM estate choices | LINK network rules/interchange | Coverage commitments | Cash logistics, retailers | Shared | Access-to-cash policy depends on shared network economics. |
+| BM-020 | Open Banking account data consent | Open Banking APIs | ASPSP API and consent journey | Open Banking standards | Customer consent and TPP access | TPPs/cloud | Shared | Data access is API-standard dependent. |
+| BM-021 | Open Banking single domestic payment | Open Banking PIS + FPS | ASPSP authentication and risk | API standards and FPS rail | TPP/customer journey | TPPs | Shared | Open Banking payment relies on underlying A2A rail. |
+| BM-022 | Sweeping VRP | Open Banking VRP | ASPSP consent and controls | Standards/API capability | Customer/TPP use cases | TPPs | Shared | Recurring account movement depends on common consent rails. |
+| BM-023 | Non-sweeping VRP / recurring A2A | Future Open Banking policy | Product/channel integration | Standards and commercial model not settled | Adoption | TPPs/merchants | Shared/Unknown | Competition mechanism not fully mature; policy/commercial model critical. |
+| BM-024 | Confirmation of Payee | CoP | Data quality, warnings | CoP directory/API rules | Peer-to-peer responses | TSPs | Shared | Fraud prevention depends on ecosystem participation and bank UX. |
+| BM-025 | Payer Name Verification | Pay.UK overlay/Bacs | Mandate setup controls | PNV service and directory | Biller/PSP adoption | TSPs | Shared | Direct Debit setup assurance extends CoP-style dependency. |
+| BM-026 | APP reimbursement claims | FPS reimbursement regime | Claims handling, prevention | FPS rules and Pay.UK systems | Sending/receiving PSP liability | Fraud data providers | Shared | Liability split and operational exchange are infrastructure-embedded. |
+| BM-027 | Fraud detection at payment point | Bank channels, FPS/cards | Models, holds, customer warnings | Rail data fields and response windows | Industry data-sharing | Device, telco, social platforms | Shared/external | Fraud originates outside banks and propagates through fast rails. |
+| BM-028 | Fraud signal sharing and mule detection | Banks, Pay.UK, law enforcement | Internal intelligence | Cross-industry data mechanisms | Reporting and repatriation | Telcos, tech platforms | Shared/external | No single bank sees the full fraud graph. |
+| BM-029 | Request to Pay messaging | RtP | Biller app/customer servicing | RtP standard/framework | Adoption and reconciliation | Technical service providers | Shared | RtP is useful only where both biller and payer ecosystems connect. |
+| BM-030 | ISO 20022 data enrichment | CHAPS/RTGS, future retail | Data capture/use | Message standard and mandatory fields | End-to-end adoption | Vendors/core banking | Shared | Infrastructure mandates data language; banks realise benefits. |
+| BM-031 | Payment system access | Pay.UK, CHAPS, LINK, schemes | Eligibility preparation | Access criteria/direct participation | Sponsor relationships | Indirect access providers | Infrastructure owned/shared | Competitive entry depends on access model. |
+| BM-032 | Operational resilience | All rails | Internal continuity | Rail/operator resilience requirements | Incident coordination | Cloud/MSPs | Shared/external | Failure can cross firm boundaries. |
+| BM-033 | Cloud concentration | Bank, FMI and provider tech stacks | Architecture and vendor risk | CTP regulatory oversight | Resilience testing/reporting | AWS, Google, Microsoft, Oracle | External dependency | A common provider failure can affect many firms simultaneously. |
+| BM-034 | Customer dispute and recourse | Cards, FPS APP, DD guarantee | Case handling | Scheme or regulatory liability framework | Evidence exchange | Ombudsman/legal channels | Shared | Customer protection differs by rail and is infrastructure-rule-dependent. |
+| BM-035 | Liquidity optimisation | CHAPS/RTGS | Treasury and collateral management | RTGS liquidity saving/intraday liquidity | Queue/settlement behaviour | Collateral markets | Shared | Settlement economics combine bank funding decisions and central tools. |
+| BM-036 | Merchant payment method steering | Cards, OB payments, A2A POS | Checkout design, incentives | Availability of card/A2A rails | Consumer trust and acceptance | Gateways, wallets | Shared/external | A2A competition depends on infrastructure plus merchant and consumer adoption. |
+| BM-037 | Cross-border retail enhancement | Future infrastructure, cards, correspondent rails | Product offering | Future infrastructure/scheme design | Compliance and FX | correspondent banks/schemes | Infrastructure owned/shared | Domestic banks cannot modernise cross-border payments alone. |
+| BM-038 | Economic monitoring via payment flows | Payment datasets/rails | Internal analytics | System data and reporting standards | Public/private data governance | ONS/regulators/vendors | Shared | Payment data has public policy value but privacy/governance constraints. |
+
+Matrix conclusion:
+- Infrastructure-owned or shared mechanisms dominate the UK payments stack.
+- No systemically important payment mechanism is purely enterprise-owned end-to-end.
+- Enterprise behaviour determines quality, risk and adoption at the edge; infrastructure determines interoperability, finality, network reach, common liability and resilience.
+
+================================================================================
+9. MECHANISM VALIDATION: REQUIRED THEMES
+================================================================================
+
+VM-001 Payment network effects
+Validation: EXISTS.
+Evidence:
+- Card payments represent a dominant share of UK payment transactions (S-070). Visa and Mastercard operate global networks with issuers/acquirers and large payment volumes (S-060, S-061, S-062). Open Banking payments are growing but remain far smaller than total UK payments (S-040, S-070).
+Mechanism:
+- Value increases with the number of usable credentials, accepting merchants, issuers/acquirers, TPP integrations and customer trust.
+Control allocation:
+- Infrastructure owned: scheme acceptance rules, network routing, standards.
+- Shared: issuer/acquirer participation, merchant acceptance, consumer adoption.
+- Enterprise owned: product design, channel friction, incentives.
+Judgement:
+- Strong mechanism. Cards have mature network effects; Open Banking is developing early network effects but still lacks equivalent universal acceptance and consumer recourse.
+
+VM-002 Settlement economics
+Validation: EXISTS.
+Evidence:
+- CHAPS gross settlement eliminates settlement risk but requires liquidity (S-022). RTGS supports central-bank-money settlement and settlement across CHAPS and retail systems (S-021, S-022). RTGS settles over £800bn average working day (S-020).
+Mechanism:
+- Infrastructure chooses gross versus net settlement; banks manage liquidity, prefunding and collateral inside that model.
+Control allocation:
+- Infrastructure owned: settlement model, RTGS account design, operating hours, finality.
+- Enterprise owned: treasury operations, funding, collateral optimisation.
+Judgement:
+- Strong mechanism. Settlement economics are infrastructure-owned at model level and bank-owned at position-management level.
+
+VM-003 Scheme dependency
+Validation: EXISTS.
+Evidence:
+- Pay.UK operates core retail rails and overlay services (S-010). Bank of England operates settlement/CHAPS (S-021, S-022). Visa/Mastercard do not face effective competition in scheme/processing fees according to PSR (S-031).
+Mechanism:
+- Banks and payment firms inherit scheme rules, access requirements, settlement windows, fee structures and liability arrangements.
+Control allocation:
+- Infrastructure owned: rulebooks, scheme fees, access models.
+- Shared: compliance, operational execution.
+Judgement:
+- Strong mechanism. Banking payments are rule-inherited, not enterprise-autonomous.
+
+VM-004 Fraud propagation
+Validation: EXISTS.
+Evidence:
+- APP reimbursement applies to firms using FPS and is built into FPS rules and Pay.UK operational systems (S-030). CoP performs account name checking and processes more than 2m checks daily (S-014).
+Mechanism:
+- Real-time payment rails compress fraud decision windows; fraud losses propagate through sending and receiving PSPs, mule accounts, customer deception and rail speed.
+Control allocation:
+- Enterprise owned: monitoring, warnings, holds, customer service.
+- Infrastructure owned: FPS reimbursement rules, CoP service, claims communication infrastructure.
+- External dependency: social media, telecoms, device intelligence, mule networks.
+Judgement:
+- Strong mechanism. Fraud is not merely an enterprise behaviour problem; it is shaped by rail speed, shared identity/name-checking services and liability infrastructure.
+
+VM-005 Cloud concentration
+Validation: EXISTS.
+Evidence:
+- HMT designated AWS, Google Cloud, Microsoft and Oracle as Critical Third Parties; Bank/PRA/FCA oversight began on 13 July 2026 (S-080, S-081).
+Mechanism:
+- Common technology providers can become systemic failure points for banks, PSPs and FMIs.
+Control allocation:
+- External dependency: provider infrastructure.
+- Enterprise owned: resilience architecture and vendor risk.
+- Regulatory/infrastructure oversight: CTP regime.
+Judgement:
+- Strong mechanism. Cloud concentration is now explicitly recognised as a system-level financial-infrastructure dependency.
+
+VM-006 Real-time payment resilience
+Validation: EXISTS.
+Evidence:
+- FPS is 24/7/365 (S-011). RPIB consultation aims at next-generation infrastructure that remains resilient and trusted while supporting innovation (S-025). Pay.UK is enhancing resilience including Certainty of Fate (S-016).
+Mechanism:
+- The more banking depends on immediate A2A transfer, the more rail availability, confirmation, exception handling and contingency become critical.
+Control allocation:
+- Infrastructure owned: rail availability, rules, central processing, future design.
+- Shared: bank connectivity, incident response, customer communication.
+Judgement:
+- Strong mechanism. Real-time resilience is a shared system property, not a single-bank feature.
+
+VM-007 Third-party dependency
+Validation: EXISTS.
+Evidence:
+- Pay.UK direct/indirect access routes depend on direct participants/IAPs for indirect access (S-013). Vocalink/Pay.UK sources show central infrastructure supplier roles for FPS/Bacs/ICS (S-090, S-091, S-092). CTP regime identifies cloud provider dependency (S-080, S-081).
+Mechanism:
+- Participants often rely on sponsor banks, bureaux, processors, connectivity providers, gateways and cloud.
+Control allocation:
+- Enterprise owned: due diligence, contractual controls, contingency.
+- External dependency: provider performance and concentration.
+- Infrastructure owned: access and assurance rules.
+Judgement:
+- Strong mechanism. Third-party dependency is structurally embedded.
+
+VM-008 Merchant economics
+Validation: EXISTS.
+Evidence:
+- PSR found Mastercard/Visa scheme and processing fees lack effective competition and clarity (S-031). PSR found card acquiring did not work well for merchants with annual card turnover below £50m (S-032). UK Finance shows cards remain 64% of transactions (S-070).
+Mechanism:
+- Merchant costs and payment-method choices depend on scheme fees, interchange, acquirer pricing, gateway services, settlement timing, chargebacks and consumer preference.
+Control allocation:
+- Infrastructure owned: scheme fee/processing economics.
+- Shared: acquirer competition, merchant checkout choice.
+- Enterprise owned: merchant contract negotiation and steering.
+Judgement:
+- Strong mechanism. Merchant economics are infrastructure and scheme controlled more than bank controlled.
+
+VM-009 Open Banking competition
+Validation: EXISTS, but maturity is still emerging.
+Evidence:
+- OBL reports 351m Open Banking payments in 2025, 57% growth and 16.5m user connections (S-040). FCA reports 53% year-on-year payment growth and VRPs at 16% of Open Banking transactions (S-041). RPIB future infrastructure may support A2A point-of-sale (S-025). UK Finance shows 48.8bn UK payments and card payments at 64% share (S-070).
+Mechanism:
+- Open Banking competes by using bank APIs and A2A rails to bypass card economics, but must solve acceptance, recourse, trust, refund/dispute handling, consumer habit and merchant integration.
+Control allocation:
+- Infrastructure owned: API standards, FPS/A2A rails, future A2A POS infrastructure.
+- Shared: ASPSP implementation, TPP innovation, merchant acceptance, customer trust.
+Judgement:
+- Real but incomplete. Open Banking is a competitive pressure mechanism, not yet a dominant replacement mechanism.
+
+================================================================================
+10. DEPENDENCY CHAINS BY PAYMENT DOMAIN
+================================================================================
+
+10.1 Faster Payments chain
+Mechanism:
+- Instant bank-account transfer.
+Dependency chain:
+- Customer/account holder
+-> bank channel or Open Banking TPP
+-> authentication and fraud checks
+-> sort code/account reachability
+-> FPS rule and central processing
+-> receiving PSP availability
+-> net settlement through RTGS
+-> confirmation/exception handling
+-> APP reimbursement if scam occurs.
+
+Control separation:
+- Bank controls interaction, authentication and account ledger.
+- Pay.UK/FPS controls central rail rules and processing.
+- Bank of England controls central-bank settlement.
+- PSR/Pay.UK control reimbursement rule embedding.
+- External providers may control cloud, fraud tooling, connectivity and TPP access.
+
+Infrastructure dependency:
+- Critical.
+
+10.2 Bacs chain
+Mechanism:
+- Bulk recurring payments and collections.
+Dependency chain:
+- Employer/biller/service user
+-> bureau or direct submission
+-> Bacs rules and processing cycle
+-> payer/beneficiary bank processing
+-> net settlement through RTGS
+-> exception, return, indemnity or reconciliation flow.
+
+Control separation:
+- Enterprise controls mandate/file quality.
+- Pay.UK/Bacs controls scheme and processing.
+- Bank of England RTGS provides settlement.
+- Bureaux and FM providers may mediate access.
+
+Infrastructure dependency:
+- Critical.
+
+10.3 CHAPS/RTGS chain
+Mechanism:
+- High-value same-day, final sterling payment.
+Dependency chain:
+- Customer/institution instruction
+-> CHAPS participant or agency bank
+-> liquidity and compliance controls
+-> RTGS gross settlement in central bank money
+-> beneficiary credit and finality.
+
+Control separation:
+- Bank controls instruction validation and liquidity position.
+- Bank of England controls CHAPS/RTGS infrastructure, hours, finality and liquidity tools.
+
+Infrastructure dependency:
+- Critical.
+
+10.4 LINK cash-access chain
+Mechanism:
+- Cash withdrawal away from own bank branch.
+Dependency chain:
+- Cardholder
+-> ATM and deployer
+-> LINK/network routing
+-> issuer authorisation
+-> dispense
+-> settlement/interchange/cash logistics.
+
+Control separation:
+- Bank controls issuer authorisation.
+- LINK/network controls shared access.
+- ATM deployers and cash logistics create external dependency.
+
+Infrastructure dependency:
+- Critical.
+
+10.5 Card acquiring and gateway chain
+Mechanism:
+- Merchant accepts cards in store or online.
+Dependency chain:
+- Merchant checkout
+-> terminal/gateway
+-> acquirer/processor
+-> Visa/Mastercard network
+-> issuer authorisation
+-> clearing and net settlement
+-> merchant funding
+-> disputes/chargebacks.
+
+Control separation:
+- Issuer controls customer risk and cardholder relationship.
+- Acquirer controls merchant relationship.
+- Gateway controls merchant technical route.
+- Visa/Mastercard control scheme rules and economics.
+- Bank of England supports net settlement for Visa Europe/Mastercard Europe obligations through RTGS.
+
+Infrastructure dependency:
+- Critical.
+
+10.6 Open Banking payment chain
+Mechanism:
+- Bank API-enabled account-to-account payment.
+Dependency chain:
+- Customer consents to TPP
+-> TPP calls ASPSP API
+-> ASPSP authenticates and authorises
+-> underlying payment rail executes, often FPS
+-> confirmation to TPP/customer
+-> settlement and reconciliation.
+
+Control separation:
+- ASPSP controls API availability and SCA journey.
+- Open Banking standards and TPP ecosystem control interoperability.
+- FPS/RTGS controls actual payment execution and settlement.
+- TPP controls proposition and customer experience.
+
+Infrastructure dependency:
+- High and shared.
+
+================================================================================
+11. INFRASTRUCTURE CONSTRAINTS
+================================================================================
+
+IC-001 Shared rail rule constraint
+Description:
+- Banks cannot unilaterally change cross-bank payment rail rules.
+Affected mechanisms:
+- FPS, Bacs, CoP, APP reimbursement, Open Banking payment initiation, RtP.
+Consequence:
+- Innovation, fraud controls and customer experience must work within common rules.
+
+IC-002 Settlement finality constraint
+Description:
+- Final inter-institution settlement depends on RTGS and central bank money, not bank preference.
+Affected mechanisms:
+- CHAPS, FPS, Bacs, LINK, Visa, Mastercard.
+Consequence:
+- Liquidity, timing and risk management are bounded by settlement infrastructure.
+
+IC-003 Legacy-to-next-generation transition constraint
+Description:
+- Existing rails must remain resilient while next-generation infrastructure is designed and delivered.
+Affected mechanisms:
+- FPS, Bacs, Open Banking, A2A POS, ISO 20022.
+Consequence:
+- Banks and infrastructure operators must invest in both continuity and transformation.
+
+IC-004 Scheme economics constraint
+Description:
+- Visa/Mastercard scheme and processing fees are set by schemes and challenged by PSR due to competition concerns.
+Affected mechanisms:
+- Card acquiring, merchant economics, A2A competition.
+Consequence:
+- Merchant costs and competitive pressure depend on regulatory and scheme changes.
+
+IC-005 Consumer trust/recourse constraint
+Description:
+- Cards have mature dispute/chargeback expectations; bank transfers historically differed, and APP reimbursement partially changes the recourse profile.
+Affected mechanisms:
+- Cards, Open Banking, FPS, APP reimbursement.
+Consequence:
+- A2A/Open Banking competition must solve trust and recourse, not only price.
+
+IC-006 Fraud-speed constraint
+Description:
+- Real-time payment speed reduces the time available for fraud detection, confirmation and intervention.
+Affected mechanisms:
+- FPS, Open Banking PIS, CoP, APP reimbursement.
+Consequence:
+- Prevention must move upstream; after-the-event reimbursement changes incentives but does not eliminate fraud.
+
+IC-007 Cloud/third-party concentration constraint
+Description:
+- Multiple firms and infrastructure providers may rely on common technology providers.
+Affected mechanisms:
+- API availability, bank channels, gateways, rail operations, fraud tooling.
+Consequence:
+- Single-provider failures can become multi-firm incidents.
+
+IC-008 Indirect-access constraint
+Description:
+- Indirect PSPs depend on sponsor banks/direct participants for reachability.
+Affected mechanisms:
+- FPS, Bacs, CHAPS, Open Banking payment execution.
+Consequence:
+- Competition and resilience may depend on indirect access quality and sponsor relationships.
+
+IC-009 Data-quality constraint
+Description:
+- ISO 20022 and CoP benefits require accurate, structured data and adoption across many parties.
+Affected mechanisms:
+- CHAPS, future retail ISO 20022, CoP, PNV, fraud analytics.
+Consequence:
+- Infrastructure mandates are necessary but insufficient without bank/process adoption.
+
+IC-010 Merchant adoption constraint
+Description:
+- A2A and Open Banking payments must compete against cards' installed acceptance base, consumer familiarity and recourse.
+Affected mechanisms:
+- Open Banking payments, A2A POS, merchant acquiring.
+Consequence:
+- Competition will be constrained unless merchant incentives and customer trust align.
+
+================================================================================
+12. INFRASTRUCTURE UNKNOWN REGISTER
+================================================================================
+
+IU-001 Future Delivery Company governance
+Unknown:
+- Detailed governance, funding, procurement, supplier selection and accountability model of the new Delivery Company.
+Why it matters:
+- Determines who controls next-generation infrastructure delivery and commercial model.
+Evidence needed:
+- Delivery Company constitutional documents, board composition, funding model, procurement notices, supplier decisions.
+Refresh trigger:
+- Publication by PVDC/RPIB/HMT/Bank of England.
+
+IU-002 Future retail infrastructure commercial model
+Unknown:
+- Whether future A2A POS or core infrastructure will use transaction fees, membership fees, public/private funding, regulated pricing or other economics.
+Why it matters:
+- Determines merchant economics, PSP incentives and competition with cards.
+Evidence needed:
+- RPIB consultation outcome and detailed commercial-model proposals.
+
+IU-003 Vocalink current contractual scope and concentration
+Unknown:
+- Full current contractual obligations, service levels, termination rights, subcontractors and transition risk for Vocalink central infrastructure services.
+Why it matters:
+- Affects infrastructure concentration and resilience.
+Evidence needed:
+- Pay.UK contract register, procurement documents, regulatory resilience assessments.
+Current state:
+- Provider-authored evidence and public announcements show material role; detailed independent evidence not captured.
+
+IU-004 Open Banking non-sweeping VRP model
+Unknown:
+- Final commercial, liability and technical model for non-sweeping VRPs and recurring A2A payments.
+Why it matters:
+- Determines whether Open Banking can compete materially with Direct Debit and cards.
+Evidence needed:
+- FCA/PSR/JROC/OBL decisions, mandated rules, commercial framework, bank implementation roadmaps.
+
+IU-005 APP reimbursement behavioural impact
+Unknown:
+- How reimbursement changes fraud prevention investment, customer behaviour, mule-account controls, smaller PSP economics and scam losses over time.
+Why it matters:
+- Determines whether liability infrastructure reduces fraud or mainly reallocates losses.
+Evidence needed:
+- PSR reimbursement monitoring data, Pay.UK claims data, UK Finance fraud data post-October 2024.
+
+IU-006 CoP false positives/false negatives and liability effect
+Unknown:
+- Current ecosystem rates of CoP no-match, close-match, customer override, fraud reduction and misdirected-payment outcomes.
+Why it matters:
+- Determines actual effectiveness of name-checking infrastructure.
+Evidence needed:
+- Pay.UK or PSR performance statistics, bank outcomes, fraud/misdirection data.
+
+IU-007 Gateway and acquirer concentration
+Unknown:
+- Current UK concentration by merchant segment across acquirers, payment facilitators and gateways.
+Why it matters:
+- Merchant economics and resilience may be shaped by gateway concentration as much as card scheme economics.
+Evidence needed:
+- PSR/FCA/market data, acquirer financials, merchant surveys, outage data.
+
+IU-008 Cloud mapping across payment rails
+Unknown:
+- Which payment rails, gateways, acquirers, PSP APIs and bank payment workloads depend on which designated cloud providers.
+Why it matters:
+- Determines true systemic cloud concentration, not just regulator designation.
+Evidence needed:
+- Confidential outsourcing registers, resilience tests, incident maps.
+
+IU-009 ISO 20022 end-to-end benefit realisation
+Unknown:
+- Whether richer payment data is being captured, transmitted and consumed in operations, reconciliation, sanctions, fraud and analytics.
+Why it matters:
+- Standards adoption does not guarantee business benefit.
+Evidence needed:
+- Bank implementation evidence, operational metrics, exception-rate trends.
+
+IU-010 Cash access future economics
+Unknown:
+- Long-term economics of maintaining ATM/cash access with declining volume but continuing social need.
+Why it matters:
+- Cash-access infrastructure may require policy and subsidy choices.
+Evidence needed:
+- LINK/FCA access-to-cash data, ATM deployment economics, protected-premises policies.
+
+================================================================================
+13. MECHANISM CLASSIFICATION SUMMARY
+================================================================================
+
+Highest infrastructure dependency:
+1. RTGS settlement finality
+2. CHAPS gross settlement
+3. Faster Payments cross-bank reachability
+4. Bacs Direct Debit/Direct Credit
+5. Card scheme acceptance and processing
+6. LINK ATM network access
+7. APP reimbursement infrastructure
+8. Confirmation of Payee directory/API interoperability
+9. Open Banking API standards and payment initiation
+10. Cloud/critical third-party resilience
+
+Highest enterprise-control mechanisms:
+1. Customer authentication
+2. Channel warning and payment journey design
+3. Account-ledger management
+4. Internal fraud scoring and holds
+5. Customer service/case handling
+6. Treasury liquidity positioning
+7. Merchant/issuer/acquirer product pricing where the enterprise is the provider
+8. Internal supplier management and exit planning
+
+Most important shared-control mechanisms:
+1. Fraud prevention and APP reimbursement
+2. Open Banking payments
+3. ISO 20022 benefit realisation
+4. Card authorisation/disputes
+5. Merchant acquiring economics
+6. Operational resilience
+7. Payment system direct/indirect access
+8. Confirmation of Payee effectiveness
+9. Request to Pay adoption
+10. Future A2A point-of-sale competition
+
+================================================================================
+14. INFRASTRUCTURE PRESSURE MAP
+================================================================================
+
+Political / public authority pressure:
+- National Payments Vision and RPIB consultation are resetting UK retail payments infrastructure responsibility and design.
+Mechanism consequence:
+- Future A2A POS, cross-border, resilience and innovation capabilities move from enterprise initiatives to public/private infrastructure delivery.
+Evidence:
+- S-025, S-026.
+
+Economic pressure:
+- Merchant card fees and scheme processing economics are under PSR scrutiny.
+Mechanism consequence:
+- A2A/Open Banking competition becomes commercially relevant if it can reduce merchant costs while preserving trust and conversion.
+Evidence:
+- S-031, S-032, S-070.
+
+Social pressure:
+- Consumers expect real-time digital payments but scams and access-to-cash needs persist.
+Mechanism consequence:
+- CoP, APP reimbursement and LINK remain critical trust/access infrastructure.
+Evidence:
+- S-014, S-030, S-050.
+
+Technological pressure:
+- Open Banking API scale, ISO 20022, cloud adoption and potential next-generation infrastructure reshape payments.
+Mechanism consequence:
+- Banks must integrate to standards and external platforms; competitive differentiation depends on enterprise adoption of shared infrastructure.
+Evidence:
+- S-023, S-040, S-080, S-081.
+
+Legal/regulatory pressure:
+- APP reimbursement and CTP oversight make cross-firm and third-party dependencies regulated mechanisms.
+Mechanism consequence:
+- Banks remain responsible for controls but cannot manage systemic risk alone.
+Evidence:
+- S-030, S-080, S-081.
+
+Environmental/physical resilience pressure:
+- Cash access, branch/ATM estate, data centres and service continuity require physical infrastructure resilience.
+Mechanism consequence:
+- Digital payment substitution does not remove the need for cash-access infrastructure and robust third-party resilience.
+Evidence:
+- S-050, S-080, S-081.
+Confidence:
+- Medium because environmental-specific payment-infrastructure evidence was not deeply researched in this first build.
+
+================================================================================
+15. ANSWER TO "WHICH BANKING MECHANISMS DEPEND UPON INFRASTRUCTURE RATHER THAN ENTERPRISE BEHAVIOUR?"
+================================================================================
+
+Direct answer:
+The following mechanisms depend primarily on infrastructure, although enterprise behaviour affects performance at the edge:
+
+- Settlement finality: infrastructure-owned through Bank of England RTGS and central bank money.
+- CHAPS high-value final payment: infrastructure-owned through CHAPS/RTGS; bank-owned liquidity decisions sit inside that system.
+- Faster Payments reachability and 24/7 operation: infrastructure-owned through FPS/Pay.UK and central infrastructure.
+- Bacs Direct Debit and Direct Credit processing: infrastructure-owned through Pay.UK/Bacs, with bank/biller operational obligations.
+- Card acceptance and scheme economics: infrastructure-owned through Visa/Mastercard rules, network effects and scheme fees; acquirers/gateways intermediate merchant access.
+- LINK cash access: infrastructure-owned network reach, with bank issuer authorisation and cash-estate choices.
+- Confirmation of Payee: shared overlay; no bank can provide universal name checking without ecosystem API/directory participation.
+- APP reimbursement: shared liability and rule infrastructure embedded into FPS; banks execute claims but do not unilaterally define the regime.
+- Open Banking payments: shared API/standards/FPS dependency; banks expose APIs and authenticate customers but do not own the whole payment mechanism.
+- ISO 20022: infrastructure-owned standards adoption; banks realise value only if they capture/use structured data.
+- Merchant acquiring economics: scheme/acquirer/gateway infrastructure dominates cost and acceptance; merchants and banks can optimise but not fully control.
+- Cloud and critical third-party resilience: external infrastructure dependency with regulatory oversight; enterprise controls are necessary but insufficient.
+
+Mechanisms that are more enterprise-owned but still infrastructure-constrained:
+- customer authentication;
+- payment warning and user-experience design;
+- internal fraud models;
+- treasury liquidity positioning;
+- ledger posting and reconciliation;
+- complaint handling;
+- product pricing and merchant steering;
+- supplier due diligence.
+
+Therefore:
+- The bank owns "how it participates".
+- The infrastructure owns "what is interoperable, settled, reachable, trusted, and economically possible across the market".
+- The customer and merchant experience emerges from both.
+
+================================================================================
+16. VALIDATION STATUS
+================================================================================
+
+Current maturity:
+- Foundation-covered and mechanism-modelled for public-source UK banking payments infrastructure.
+- Not decision-complete.
+- Not a full regulatory/legal assessment.
+- Not a full quantitative market model.
+
+Evidence strength by domain:
+- Pay.UK core rails: High.
+- Bank of England settlement: High.
+- APP reimbursement: High.
+- CoP/RtP: High for design, lower for outcome impact.
+- Open Banking adoption: Medium-high.
+- Visa/Mastercard scheme economics: High for PSR findings, lower for merchant-specific cost decomposition.
+- Merchant acquiring: Medium-high.
+- Cloud concentration: High for CTP designation, lower for rail-by-rail cloud exposure.
+- Vocalink supplier concentration: Medium-high for existence of role; lower for detailed contract/procurement state.
+- Future infrastructure: Medium; consultation and governance exist, details pending.
+
+Contradiction state:
+- No direct contradiction found in this first build.
+- However, supplier-authored claims about infrastructure operation should not be treated as independent proof of service quality or contractual scope.
+
+Evidence demand:
+ED-001 Obtain RPIB consultation document and future infrastructure design options in full.
+ED-002 Capture PVDC Payments Forward Plan and strategy in full.
+ED-003 Validate Pay.UK/Vocalink contractual scope through independent/public procurement or regulatory documents.
+ED-004 Obtain current Pay.UK FPS/Bacs system principles and CoP rule documents.
+ED-005 Capture PSR/FCA final card-scheme remedy directions when published.
+ED-006 Obtain post-October-2024 APP reimbursement claims and compliance metrics.
+ED-007 Capture Open Banking commercial model, VRP roadmap and non-sweeping VRP decisions.
+ED-008 Map major UK acquirers/gateways by merchant segment and failure criticality.
+ED-009 Map designated CTP services to payment mechanisms where public evidence permits.
+ED-010 Build quantitative flow model using Pay.UK/Bank/LINK/UK Finance/OBL time series.
+
+================================================================================
+17. RESEARCH COMPLETION AND VALIDATION REPORT
+================================================================================
+
+What was completed:
+- New Build run declared.
+- Industry Infrastructure Twin boundary defined.
+- Source register created.
+- Infrastructure participants created.
+- Infrastructure observations created.
+- Infrastructure patterns created.
+- Infrastructure mechanisms created.
+- Infrastructure dependencies created.
+- Infrastructure constraints created.
+- Infrastructure unknowns created.
+- Mechanism validation completed for all user-specified themes.
+- Infrastructure Dependency Matrix created for 38 banking mechanisms.
+- Downloadable text artifact created.
+
+What was not completed:
+- No spreadsheet/workbook matrix.
+- No full source PDF page-level extraction.
+- No confidential or proprietary data.
+- No exhaustive quantitative time series.
+- No legal/regulatory advice.
+- No formal commercial opportunity portfolio.
+
+Recommended next version:
+- v0.2 should turn the Dependency Matrix into a structured workbook with columns for owner, rulebook, participant, settlement model, data object, exception state, source evidence, confidence, change trigger and commercial consequence.
+- v0.3 should create rail-specific mechanism cards for FPS, Bacs, CHAPS, LINK, Visa/Mastercard, Open Banking and overlays.
+- v1.0 should be accepted only after independent review of the evidence register, especially supplier concentration and future infrastructure governance.
+
+END OF FILE
