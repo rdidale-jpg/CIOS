@@ -1,25 +1,25 @@
 # Banking Knowledge Domain
 
-The Banking knowledge domain governs Banking Enterprise Intelligence research assets and their reusable knowledge outputs. Banking is the first reference implementation of the Enterprise Intelligence research method.
+## Purpose
 
-## Asset areas
+The Banking knowledge domain governs Banking Enterprise Intelligence research assets and their reusable knowledge outputs. Banking is the reference implementation for the reusable Enterprise Knowledge governance model.
 
-- `industry/` contains Banking industry-level foundations, Industry Twins and canonical mechanism catalogues.
-- `enterprises/` contains Enterprise Twins and enterprise-scoped research assets for named banking participants.
-- `infrastructure/` contains Infrastructure Twins such as UK banking payments infrastructure assets.
-- `comparisons/` contains differential matrices, reconciliation registers, participant-type variants, enterprise-specific candidates and compound mechanism registers.
-- `flora/` contains Flora-facing discovery registers and machine-readable manifests.
+## Contents
 
-Canonical Banking Mechanism identifiers are governed by the original Banking Mechanism Catalogue after it is uploaded and registered. Enterprise-local identifiers must not automatically be treated as canonical identifiers. Mechanism Confidence and Enterprise Applicability are separate judgements.
+- [MANIFEST.yaml](MANIFEST.yaml) defines the governed asset inventory and stable asset identifiers.
+- [industry/](industry/README.md) contains industry foundations, Industry Twins and mechanism catalogues.
+- [infrastructure/](infrastructure/README.md) contains infrastructure Twins and infrastructure-scoped evidence.
+- [enterprises/](enterprises/README.md) contains enterprise-scoped Twin directories.
+- [comparisons/](comparisons/README.md) contains differential and comparison artefacts.
+- [flora/](flora/README.md) contains discovery metadata for Flora.
 
-Participant variants, enterprise variants, compound mechanisms and mechanism candidates must remain distinguishable. Commercial opportunity analysis must not influence mechanism validation and must remain quarantined from mechanism confidence decisions.
+## Governance rules
 
-## Research lineage
+- Preserve original Enterprise Knowledge content; do not rewrite Twins, research, observations or evidence during governance work.
+- Use stable asset identifiers from [MANIFEST.yaml](MANIFEST.yaml); never derive relationships from filenames.
+- Convert legacy text assets to Markdown and retain provenance through metadata.
+- Keep commercial opportunity material separate from mechanism validation.
 
-Industry Foundation → Banking Mechanism Catalogue → Enterprise Twins → Differential Matrix → Identifier Reconciliation → Corrected Matrix → Validated Banking Knowledge Base
+## Relationship to other assets
 
-## Minimum metadata for uploaded assets
-
-Asset ID; Asset Type; Domain; Version; Status; Evidence Cut-off; Produced By; Reviewed By; Owning Architecture; Supersedes; Source Conversation; Known Unknowns; Known Contradictions.
-
-Do not place architecture papers, ADRs, doctrine or runtime specifications in this domain.
+The domain is registered in the repository-level [REGISTER.md](../REGISTER.md). The manifest is the domain-level control point; folder README files provide human navigation only.

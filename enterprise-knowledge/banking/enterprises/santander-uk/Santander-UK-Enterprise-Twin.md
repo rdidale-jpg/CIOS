@@ -1,3 +1,16 @@
+---
+asset_id: "BK-ENT-007"
+title: "Santander UK Enterprise Twin"
+asset_type: "Enterprise Twin"
+domain: "Banking"
+status: "Validated"
+version: "1.0"
+owner: TBD
+repository: "Enterprise Knowledge"
+created_from: "Research"
+confidence: "High"
+---
+
 Enterprise Twin 007 — Santander UK
 
 Run mode: New Build. No accepted Santander UK Twin Spine is available in this conversation.

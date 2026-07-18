@@ -1,3 +1,16 @@
+---
+asset_id: "BK-ENT-004"
+title: "Monzo Enterprise Twin"
+asset_type: "Enterprise Twin"
+domain: "Banking"
+status: "Validated"
+version: "1.0"
+owner: TBD
+repository: "Enterprise Knowledge"
+created_from: "Research"
+confidence: "High"
+---
+
 Enterprise Twin 004 — Monzo Bank
 Run mode: New Build
 Effective date: 17 July 2026

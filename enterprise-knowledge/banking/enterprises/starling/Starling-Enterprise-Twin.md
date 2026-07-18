@@ -1,3 +1,16 @@
+---
+asset_id: "BK-ENT-005"
+title: "Starling Enterprise Twin"
+asset_type: "Enterprise Twin"
+domain: "Banking"
+status: "Validated"
+version: "1.0"
+owner: TBD
+repository: "Enterprise Knowledge"
+created_from: "Research"
+confidence: "High"
+---
+
 Enterprise Twin 005 — Starling Bank
 
 Run mode: New Build.

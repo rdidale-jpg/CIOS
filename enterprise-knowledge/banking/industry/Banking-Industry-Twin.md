@@ -1,3 +1,16 @@
+---
+asset_id: "BK-IND-002"
+title: "Banking Industry Twin"
+asset_type: "Industry Twin"
+domain: "Banking"
+status: "Validated"
+version: "1.0"
+owner: TBD
+repository: "Enterprise Knowledge"
+created_from: "Validated Enterprise Knowledge repository"
+confidence: "High"
+---
+
 # Banking Industry Twin v1.0
 
 **Repository target:** `enterprise-knowledge/banking/industry/Banking-Industry-Twin.md`  

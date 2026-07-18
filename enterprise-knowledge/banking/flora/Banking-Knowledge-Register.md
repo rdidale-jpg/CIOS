@@ -1,3 +1,16 @@
+---
+asset_id: "BK-FLR-001"
+title: "Banking Knowledge Register for Flora"
+asset_type: "Discovery Register"
+domain: "Banking"
+status: "Validated"
+version: "1.0"
+owner: TBD
+repository: "Enterprise Knowledge"
+created_from: "Research"
+confidence: "High"
+---
+
 # Banking Knowledge Register for Flora
 
 This register controls Flora discovery and reasoning over governed Banking knowledge assets. Missing research artefacts are pending upload. Flora Usage values supported here are: Discoverable, Context only, Comparison input, Mechanism evidence, Architecture reference, Deferred opportunity input and Not for runtime use.

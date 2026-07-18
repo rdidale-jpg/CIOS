@@ -1,3 +1,16 @@
+---
+asset_id: "BK-ENT-002"
+title: "NatWest Enterprise Twin"
+asset_type: "Enterprise Twin"
+domain: "Banking"
+status: "Validated"
+version: "1.0"
+owner: TBD
+repository: "Enterprise Knowledge"
+created_from: "Research"
+confidence: "High"
+---
+
 NatWest Group Enterprise Twin 002 — Governed First Release
 
 Run mode: New Build. Lloyds BM-01, BM-05 and BM-06 are treated as human-supplied comparison mechanisms, not NatWest evidence. The run follows the CIOS Researcher pack requirement to build enterprise understanding before candidate selection and to keep strategic importance, enterprise need, commercial relevance and accessibility separate.

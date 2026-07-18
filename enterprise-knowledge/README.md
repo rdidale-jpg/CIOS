@@ -55,3 +55,9 @@ Flora may discover and reason over registered knowledge assets but must preserve
 - distinction between source evidence and generated interpretation.
 
 Flora must not treat full documents or reports as unqualified facts merely because they are present in this repository.
+
+## Repository navigation
+
+- [Enterprise Knowledge Register](REGISTER.md) lists every governed asset.
+- [Banking](banking/README.md) is the first governed reference domain and reusable governance model.
+- Future domains include [Insurance](insurance/README.md), [Telecommunications](telecommunications/README.md) and [Utilities](utilities/README.md).

@@ -1,3 +1,16 @@
+---
+asset_id: "BK-CMP-002"
+title: "Four-Bank Mechanism Differential Matrix"
+asset_type: "Differential Matrix"
+domain: "Banking"
+status: "Validated"
+version: "2.1"
+owner: TBD
+repository: "Enterprise Knowledge"
+created_from: "Correction / reconciliation"
+confidence: "High"
+---
+
 # Four-Bank Mechanism Differential Matrix v2.1 — Correction
 
 Run mode: correction / reconciliation, not rebuild.
