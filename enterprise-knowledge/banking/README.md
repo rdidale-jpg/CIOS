@@ -7,7 +7,7 @@ The Banking knowledge domain governs Banking Enterprise Intelligence research as
 ## Contents
 
 - [MANIFEST.yaml](MANIFEST.yaml) defines the governed asset inventory and stable asset identifiers.
-- [industry/](industry/README.md) contains industry foundations, Industry Twins and mechanism catalogues.
+- [industry/](industry/README.md) contains industry foundations, Industry Twins and reference models; the canonical Banking Mechanism Catalogue remains a future planned asset.
 - [infrastructure/](infrastructure/README.md) contains infrastructure Twins and infrastructure-scoped evidence.
 - [enterprises/](enterprises/README.md) contains enterprise-scoped Twin directories.
 - [comparisons/](comparisons/README.md) contains differential and comparison artefacts.

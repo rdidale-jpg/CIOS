@@ -10,7 +10,7 @@ Enterprise Twin, Future Enterprise Model, enterprise-specific mechanism evidence
 
 ## What must not be placed here
 
-Do not place canonical Banking Mechanism Catalogues, industry-wide comparison matrices, infrastructure Twins, commercial opportunity material that influences mechanism validation, architecture papers, ADRs, doctrine or runtime specifications here.
+Do not place canonical Banking Mechanism Catalogue files, industry-wide comparison matrices, infrastructure Twins, commercial opportunity material that influences mechanism validation, architecture papers, ADRs, doctrine or runtime specifications here.
 
 ## Minimum metadata for uploaded assets
 
@@ -25,14 +25,14 @@ Evidence Cut-off:
 Produced By:
 Reviewed By:
 Owning Architecture:
-Canonical Mechanism Catalogue:
+Canonical Reference Model:
 Supersedes:
 Source Conversation:
 Known Unknowns:
 Known Contradictions:
 ```
 
-Unknowns and Contradictions must be preserved. Enterprise-local mechanism identifiers must not be treated as canonical unless reconciled to the Banking Mechanism Catalogue.
+Unknowns and Contradictions must be preserved. Enterprise-local mechanism identifiers must not be treated as canonical unless reconciled to the governed comparison/identifier-control authority.
 
 ## Governed contents
 

@@ -14,7 +14,7 @@ confidence: "High"
 # Banking Mechanism Differential Matrix v1
 
 **Commission type:** Comparative intelligence synthesis.
-**Inputs used:** UK Banking Industry Foundation, Banking Mechanism Catalogue, Lloyds Banking Group Enterprise Twin.
+**Inputs used:** UK Banking Industry Foundation, Banking Mechanisms and Tensions Model, Lloyds Banking Group Enterprise Twin.
 **Purpose:** Separate **Mechanism Confidence** from **Enterprise Applicability** and determine which banking mechanisms should become durable Enterprise Intelligence.
 **Boundary:** No Future Enterprise Model, Transformation Gap, Opportunity Twin, Provider Fit, supplier recommendation, technology recommendation, Commercial Asset or outcome prediction.
 

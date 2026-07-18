@@ -9,3 +9,6 @@
 | Every governed asset has metadata | Passed | `python /tmp/validate_governance.py`. |
 | Every directory has README | Passed | `python /tmp/validate_governance.py`. |
 | Banking repository consistent | Passed | `python /tmp/validate_governance.py`. |
+
+| Banking mechanisms-and-tensions classification corrected | Passed | `Banking-Mechanism-Catalogue.md` renamed to `Banking-Mechanisms-and-Tensions-Model.md`; asset ID changed from `BK-MEC-001` to `BK-REF-001`; `BK-MEC-001` reserved only for future planned Banking Mechanism Catalogue. |
+| No canonical Banking Mechanism Catalogue content file exists | Passed | No governed file remains at `banking/industry/Banking-Mechanism-Catalogue.md`; Flora records the future catalogue as planned/pending only. |

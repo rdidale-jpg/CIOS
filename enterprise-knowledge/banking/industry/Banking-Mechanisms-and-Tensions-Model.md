@@ -1,7 +1,7 @@
 ---
-asset_id: "BK-MEC-001"
-title: "Banking Mechanism Catalogue and Executive Tension Model"
-asset_type: "Mechanism Catalogue"
+asset_id: "BK-REF-001"
+title: "Banking Mechanisms and Tensions Model"
+asset_type: "Reference Model"
 domain: "Banking"
 status: "Validated"
 version: "1.0"
@@ -11,7 +11,7 @@ created_from: "Industry Foundation synthesis"
 confidence: "High"
 ---
 
-# Banking Mechanism Catalogue and Executive Tension Model — New Build Synthesis
+# Banking Mechanisms and Tensions Model — New Build Synthesis
 
 This commission converts the completed UK Retail and Commercial Banking Industry Foundation into reusable causal intelligence: mechanisms, executive tensions, Decision Envelopes and Reinvention Signals. It follows the supplied synthesis brief and does not use the Banking Reinvention Blueprint, Founder Design Knowledge, Provider Fit, private account knowledge or future-bank design. 
 
@@ -69,7 +69,7 @@ The strongest later Opportunity Discovery candidates sit where mechanisms collid
 
 ---
 
-# 2. Banking Mechanism Catalogue
+# 2. Banking Mechanisms and Tensions Model
 
 Confidence uses public evidence only.
 
@@ -465,7 +465,7 @@ BM-01, BM-07, BM-11, BM-13, BM-15, BM-17, BM-19 and BM-22 should become structur
 
 Exact bank-specific supplier workshare, platform architecture, primary-account migration, AI benefit, BPO exposure, operational root causes, credit model fairness, Consumer Duty outcome evidence, fraud false positives and executive ownership remain Unknown from public evidence alone.
 
-**The Banking Mechanism Catalogue is complete. It converts the Industry Foundation into reusable causal intelligence, executive tensions, Decision Envelopes and Reinvention Signals suitable for Enterprise Twin validation and later Opportunity Discovery.**
+**The Banking mechanisms and tensions model is complete. It converts the Industry Foundation into reusable causal intelligence, executive tensions, Decision Envelopes and Reinvention Signals suitable for Enterprise Twin validation and later Opportunity Discovery.**
 
 [1]: https://www.fca.org.uk/publications/multi-firm-reviews/strategic-review-retail-banking-business-models?utm_source=chatgpt.com "Strategic review of retail banking business models"
 [2]: https://www.gov.uk/cma-cases/review-of-banking-for-small-and-medium-sized-businesses-smes-in-the-uk?utm_source=chatgpt.com "Retail banking market investigation"

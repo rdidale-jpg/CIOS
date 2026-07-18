@@ -2,11 +2,11 @@
 
 ## Purpose
 
-This directory contains Banking industry-level foundations, Industry Twins and canonical mechanism catalogues.
+This directory contains Banking industry-level foundations, Industry Twins and reference models. The canonical Banking Mechanism Catalogue remains a future planned asset and is not present as a governed content file.
 
 ## Asset types that belong here
 
-Industry Foundation, Industry Twin, Mechanism Catalogue and supporting research register.
+Industry Foundation, Industry Twin, Reference Model and supporting research register.
 
 ## What must not be placed here
 
@@ -22,7 +22,7 @@ Uploaded assets must preserve provenance, evidence cut-off, status, version, sco
 
 - [Banking-Industry-Foundation.md](Banking-Industry-Foundation.md)
 - [Banking-Industry-Twin.md](Banking-Industry-Twin.md)
-- [Banking-Mechanism-Catalogue.md](Banking-Mechanism-Catalogue.md)
+- [Banking-Mechanisms-and-Tensions-Model.md](Banking-Mechanisms-and-Tensions-Model.md)
 
 ## Relationship to other assets
 
