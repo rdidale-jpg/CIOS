@@ -7,6 +7,7 @@
 **Semantic owner:** [EI-013 — Knowledge Asset Exchange Model](../../enterprise-intelligence/EI-013-Knowledge-Asset-Exchange-Model.md)
 **Owning ADR:** [ADR-016 — Knowledge Packs as the Standard Exchange Mechanism](../../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md)
 **Reference architecture:** [CIOS Reference Architecture v1.0](../../reference-architecture/CIOS-Reference-Architecture-v1.0.md)
+**Related protocol:** [Enterprise Knowledge Production Protocol v1.0](../enterprise-knowledge/Enterprise-Knowledge-Production-Protocol-v1.0.md)
 
 ## 1. Purpose
 
@@ -16,7 +17,7 @@ Knowledge Packs are transport. They are not memory.
 
 The Enterprise Knowledge Repository remains the system of record. A Knowledge Pack is a reproducible release generated from governed knowledge held in the repository or in other accepted canonical architecture stores. A pack may make knowledge easier to consume, inspect or deliver, but it must never become the master copy of that knowledge.
 
-Knowledge Packs support situations where selected governed knowledge must be assembled for a specific audience, question, engagement, review or workflow. Examples include a researcher context pack, a cross-industry comparison pack, an executive briefing pack, a client opportunity pack, a review-board evidence pack or a Presentation Intelligence input pack.
+Knowledge Packs support situations where selected governed knowledge must be assembled for a specific audience, question, engagement, review or workflow. Enterprise Knowledge production before pack release is governed by the [Enterprise Knowledge Production Protocol v1.0](../enterprise-knowledge/Enterprise-Knowledge-Production-Protocol-v1.0.md). Examples include a researcher context pack, a cross-industry comparison pack, an executive briefing pack, a client opportunity pack, a review-board evidence pack or a Presentation Intelligence input pack.
 
 ### 1.1 Relationship to other knowledge forms
 

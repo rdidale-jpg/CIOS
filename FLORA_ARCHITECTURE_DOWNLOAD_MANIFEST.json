@@ -10,7 +10,8 @@
         {"path": "architecture/reference-architecture/CIOS-Reference-Architecture-v1.0.md", "required": true, "bundle": "reference-architecture"},
         {"path": "architecture/reference-architecture/Document-Map.md", "required": true, "bundle": "reference-architecture"},
         {"path": "architecture/reference-architecture/Glossary.md", "required": true, "bundle": "reference-architecture"},
-        {"path": "architecture/decisions/README.md", "required": true, "bundle": "architecture-decisions"}
+        {"path": "architecture/decisions/README.md", "required": true, "bundle": "architecture-decisions"},
+        {"path": "architecture/specifications/enterprise-knowledge/Enterprise-Knowledge-Production-Protocol-v1.0.md", "required": true, "bundle": "reference-architecture"}
       ]
     }
   }
