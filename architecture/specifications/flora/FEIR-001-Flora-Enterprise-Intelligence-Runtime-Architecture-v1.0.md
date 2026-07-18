@@ -453,3 +453,7 @@ To be completed by the implementing agent after commit and PR creation.
 ### Chief Architect decisions still required
 
 FEIR-001 specification acceptance; runtime graph persistence approach; recommendation policy promotion; audit retention/privacy constraints; external sharing approval boundary; implementation of Banking derived journey views and relationship exposure gaps.
+
+## 21. Subordinate reasoning pipeline specification
+
+[EIRP-001 — Enterprise Intelligence Reasoning Pipeline Specification](EIRP-001-Enterprise-Intelligence-Reasoning-Pipeline-Specification.md) defines the proposed operational stage contracts, runtime object contracts, lineage propagation, validation gates, recommendation eligibility rules and Banking walkthrough beneath this owning FEIR-001 architecture. FEIR-001 remains the owning runtime architecture; EIRP-001 must not be used as a competing architecture.
