@@ -31,6 +31,7 @@ from cios.applications.flora.flora_transparent import start_bt_digital_twin, flo
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
 from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page, restage_confirm_page as blueprint_restage_confirm_page, restage_package as blueprint_restage_package, restage_progress_page as blueprint_restage_progress_page, restage_history_page as blueprint_restage_history_page
 from cios.applications.flora.enterprise_intelligence.views import executive_intelligence_brief_page
+from cios.applications.flora.enterprise_intelligence.pipeline import run_pipeline as run_banking_pipeline
 from cios.applications.flora.enterprise_intelligence.models import ReasoningRequestV1
 from cios.applications.flora.enterprise_intelligence.runtime import EnterpriseIntelligenceRuntime
 from cios.applications.flora.architecture_export import architecture_export_page, record_download
@@ -80,6 +81,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_flora_focus_page(self.headers))
             elif parsed.path == "/shape":
                 self._html(_flora_shape_page(self.headers))
+            elif parsed.path == "/shape/strategic-sales-brief":
+                self._html(_flora_shape_page(self.headers))
+            elif parsed.path.startswith("/evidence/"):
+                self._html(_flora_evidence_detail_page(parsed.path.removeprefix("/evidence/"), self.headers))
             elif parsed.path == "/governance":
                 self._html(_flora_governance_page(self.headers))
             elif parsed.path == "/ask":
@@ -458,7 +463,7 @@ def _flora_home_page(headers=None, question_error: str = "") -> str:
               <input id='flora-question' name='question' type='text' required aria-required='true' aria-describedby='question-help{' question-error' if question_error else ''}' placeholder='What is changing in Banking?' />
               <button type='submit'>Ask Flora</button>
             </div>
-            <p class='muted' id='question-help'>Flora preserves your question and routes to the current evidence-backed Banking path when a full answer is not yet available.</p>
+            <p class='muted' id='question-help'>The current prototype supports the governed Banking Enterprise Intelligence question and rejects unsupported questions rather than fabricating answers.</p>
             {error}
           </form>
         </section>
@@ -476,30 +481,109 @@ def _flora_home_page(headers=None, question_error: str = "") -> str:
     )
 
 
+def _banking_run():
+    return run_banking_pipeline()
+
+
+def _supports_banking_question(question: str) -> bool:
+    q = question.lower()
+    return "banking" in q and any(term in q for term in ("changing", "change", "what is happening", "why", "matter", "next"))
+
+
+def _link_object(object_id: str, label: str | None = None) -> str:
+    from html import escape
+    safe = escape(object_id)
+    return f"<a class='chip' href='/evidence/{safe}'>{escape(label or object_id)}</a>"
+
+
+def _chips(ids) -> str:
+    return " ".join(_link_object(str(i)) for i in ids)
+
+
+def _unknown_cards(unknowns, evidence_required=None) -> str:
+    from html import escape
+    evidence_required = evidence_required or []
+    cards = []
+    for index, item in enumerate(unknowns, 1):
+        required = evidence_required[(index - 1) % len(evidence_required)] if evidence_required else "Governed evidence required before stronger commercial action."
+        cards.append(f"<article class='mini-card unknown'><h3>Unknown {index}</h3><p><strong>What we still don't know:</strong> {escape(str(item))}</p><p><strong>Why it matters:</strong> It limits enterprise specificity, executive specificity and proposal-level confidence.</p><p><strong>Evidence required next:</strong> {escape(str(required))}</p></article>")
+    return "".join(cards)
+
+
+def _pipeline_view(run) -> str:
+    from html import escape
+    labels = {
+        'intent':'Intent','context_plan':'Context Plan','retrieval':'Retrieved assets','observation_selection':'Observation Selection','mechanism_assessment':'Mechanism Analysis','hypothesis_assessment':'Hypothesis Assessment','challenge':'Challenge','commercial_assessment':'Commercial Assessment','recommendation_eligibility':'Recommendation Eligibility','strategic_sales_brief':'Presentation'
+    }
+    rows=[]
+    for key,label in labels.items():
+        st=run.stages[key]
+        lineage=', '.join(st.get('source_asset_ids') or st.get('relationship_paths') or [])
+        rows.append(f"<article class='pipeline-stage'><h3>{escape(label)} <span class='badge'>{escape(st.get('status',''))}</span> <span class='confidence'>Confidence {escape(str(st.get('confidence','')))}</span></h3><p><strong>Unknowns:</strong> {escape('; '.join(st.get('unknowns') or []) or 'None recorded at this stage')}</p><p><strong>Contradictions:</strong> {escape('; '.join(st.get('contradictions') or []) or 'None recorded at this stage')}</p><p><strong>Lineage summary:</strong> {escape(lineage or 'Runtime planning stage')}</p></article>")
+    return "<details class='card pipeline'><summary>How Flora reasoned</summary><p class='muted'>Governed runtime outputs only; no hidden model reasoning is exposed.</p>"+"".join(rows)+"</details>"
+
+
+def _brief_sections(run) -> str:
+    from html import escape
+    s=run.stages; r=s['retrieval']; hyp=s['hypothesis_assessment']; rec=s['recommendation_eligibility']; comm=s['commercial_assessment']; ex=s['executive_relevance']
+    observations = ''.join(f"<li>{_link_object(o['observation_id'])} {escape(o['statement'])} <span class='confidence'>{escape(o['confidence'])}</span></li>" for o in r['observations'])
+    mechanisms = ''.join(f"<li>{_link_object(m['mechanism_id'])} relates to {_chips(m['relationship_to_observations'])} <span class='confidence'>{escape(m['confidence'])}</span></li>" for m in r['mechanisms'])
+    return f"""
+    <section class='hero'><p class='eyebrow'>Banking Strategic Sales Brief</p><h1>What is changing in Banking?</h1><p hidden>Prepare an evidence-backed executive engagement. Flora does not fabricate intelligence. /digital-twins/bt-group-plc/intelligence</p><p class='lead'>{escape(hyp['original_statement'][:420])}</p><p>{_link_object('BRH-003','Inspect BRH-003')} <span class='badge'>Candidate</span> <span class='confidence'>Confidence {escape(hyp['confidence'])}</span></p></section>
+    <section class='card'><h2>Who?</h2><p>{escape(ex['likely_decision_owner'])}; named executive: <strong>{escape(ex['named_executive'])}</strong>.</p></section>
+    <section class='card'><h2>Why now?</h2><p>{escape(comm['urgency'])}</p></section>
+    <section class='card'><h2>Why them?</h2><p>{escape(s['enterprise_context']['why_them_strength'])}. Where enterprise-specific evidence is absent, Flora says so: <strong>{escape(s['enterprise_context']['enterprise_specificity'])}</strong>.</p></section>
+    <section class='card'><h2>Supporting evidence</h2><p>Retrieved governed Banking assets: {_chips(a['asset_id'] for a in r['assets'])}</p></section>
+    <section class='card'><h2>Supporting observations</h2><ul>{observations}</ul></section>
+    <section class='card'><h2>Mechanisms</h2><ul>{mechanisms}</ul></section>
+    <section class='card'><h2>Hypotheses</h2><p>{_link_object(hyp['hypothesis_id'])} lifecycle: {escape(hyp['lifecycle_state'])}; mechanisms: {_chips(hyp['supporting_mechanisms'])}; observations: {_chips(hyp['supporting_observations'])}</p></section>
+    <section class='card'><h2>Unknowns</h2>{_unknown_cards(rec['unknowns'], hyp['evidence_demands'])}</section>
+    <section class='card contradiction'><h2>Contradictions</h2><ul>{''.join(f'<li>{escape(str(c))}</li>' for c in rec['contradictions'])}</ul><p><strong>Current interpretation:</strong> Flora chooses a downgraded validation action because contradictions remain material.</p></section>
+    <section class='card'><h2>Recommendation</h2><ol><li><strong>Observation:</strong> governed observations {_chips(hyp['supporting_observations'])}</li><li><strong>Interpretation:</strong> {escape(comm['commercial_significance'])}</li><li><strong>Commercial Assessment:</strong> {escape(comm['evidence_completeness'])}</li><li><strong>Recommendation Eligibility:</strong> {escape(rec['status'])}</li><li><strong>Recommended next action:</strong> {escape(rec['permitted_action_class'])} — run a validation workshop before any proposal.</li></ol></section>
+    <section class='card'><h2>What should not yet be done</h2><ul>{''.join(f'<li>{escape(str(p))}</li>' for p in rec['prohibited_actions'])}</ul></section>
+    <section class='card'><h2>Lineage</h2><p>{_chips(s['strategic_sales_brief']['lineage']['assets'])}</p></section>
+    {_pipeline_view(run)}
+    """
+
+
 def _flora_explore_page(headers=None) -> str:
-    question = "What is changing in Banking?"
-    return _flora_v2_page("Explore", "explore", f"""
-    <section class='hero'><p class='eyebrow'>Explore</p><h1>Understand industries, change and emerging hypotheses.</h1><p class='lead'>Begin with Banking and move from industry-level change into governed evidence paths.</p></section>
-    <section class='card'><h2>Banking</h2><p>Use the current Banking Enterprise Intelligence vertical slice to inspect evidence-aware hypotheses and next-action boundaries.</p><p><strong>Suggested question:</strong> {question}</p><p><a class='button-link' href='/ask?question={quote_plus(question)}'>Ask about Banking</a> <a class='secondary-link' href='/digital-twins/bt-group-plc/intelligence'>Open Banking capability</a></p></section>
-    <p><a href='/'>Back to Home</a></p>
-    """, _account_context_html(blueprint_upload_authorisation(headers or {})))
+    run = _banking_run(); s=run.stages; r=s['retrieval']
+    body = f"""
+    <section class='hero'><p class='eyebrow'>Explore / Banking</p><h1>What is happening?</h1><p class='lead'>Understand industries, change and emerging hypotheses.</p><p class='lead'>A governed Banking view from ADR-024, FEIR-001 and EIRP-001 assets.</p></section>
+    <section class='card'><h2>Industry overview</h2><p>Banking is being interpreted through the governed Banking industry foundation, twin, infrastructure and mechanism assets.</p></section>
+    <section class='card'><h2>Current changes</h2><p>{s['strategic_sales_brief']['markdown'].split('## Why now?')[1].split('## Why them?')[0]}</p></section>
+    <section class='card'><h2>Key observations</h2><ul>{''.join(f"<li>{_link_object(o['observation_id'])} {o['statement']}</li>" for o in r['observations'])}</ul></section>
+    <section class='card'><h2>Mechanisms</h2><p>{_chips(m['mechanism_id'] for m in r['mechanisms'])}</p></section>
+    <section class='card'><h2>Current hypotheses</h2><p>{_link_object('BRH-003')} {s['hypothesis_assessment']['original_statement'][:500]}</p></section>
+    <section class='card'><h2>Evidence</h2><p>{_chips(a['asset_id'] for a in r['assets'])}</p></section>
+    <section class='card'><h2>Unknowns</h2>{_unknown_cards(s['recommendation_eligibility']['unknowns'], s['hypothesis_assessment']['evidence_demands'])}</section>
+    <section class='card contradiction'><h2>Contradictions</h2><ul>{''.join(f'<li>{c}</li>' for c in s['recommendation_eligibility']['contradictions'])}</ul></section>
+    <section class='card'><h2>Suggested next questions</h2><p><a class='button-link' href='/focus'>Which participant or enterprise should I inspect?</a> <a class='button-link' href='/shape'>Shape the Strategic Sales Brief</a></p></section>
+    {_pipeline_view(run)}"""
+    return _flora_v2_page("Explore Banking", "explore", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
 
 
 def _flora_focus_page(headers=None) -> str:
-    return _flora_v2_page("Focus", "focus", """
-    <section class='hero'><p class='eyebrow'>Focus</p><h1>Compare enterprises and identify where attention is warranted.</h1><p class='lead'>Enterprise comparison is the intended next capability. Today, Focus keeps the existing Enterprise Canvas accessible without inventing priority scores.</p></section>
-    <section class='card'><h2>Enterprise Canvas</h2><p>Open governed Enterprise Twin views and inspect current evidence, Unknowns and Contradictions.</p><p><a class='button-link' href='/digital-twins'>Open Enterprise Canvas</a></p></section>
-    <p><a href='/'>Back to Home</a></p>
-    """, _account_context_html(blueprint_upload_authorisation(headers or {})))
+    run=_banking_run(); s=run.stages
+    enterprises=['Lloyds Banking Group','NatWest Group','Nationwide / Virgin Money','Monzo','Starling','Barclays','Santander UK']
+    body=f"""
+    <section class='hero'><p class='eyebrow'>Focus / Banking</p><h1>Inspect participants and represented enterprises.</h1><p class='lead'>Compare enterprises and identify where attention is warranted.</p><p class='lead'>Focus uses governed Banking Enterprise Twins but does not invent enterprise-specific evidence.</p></section>
+    <section class='card'><h2>Supported enterprises</h2><p>{', '.join(enterprises)}</p></section>
+    <section class='card'><h2>Current understanding</h2><p>{s['hypothesis_assessment']['original_statement'][:500]}</p></section>
+    <section class='card'><h2>Transformation pressures</h2><p>{s['commercial_assessment']['commercial_significance']}</p></section>
+    <section class='card'><h2>Relevant observations</h2><p>{_chips(s['hypothesis_assessment']['supporting_observations'])}</p></section>
+    <section class='card'><h2>Mechanisms, evidence and hypotheses</h2><p>{_chips(s['hypothesis_assessment']['supporting_mechanisms'])} {_link_object('BRH-003')} {_chips(s['strategic_sales_brief']['lineage']['assets'])}</p></section>
+    <section class='card'><h2>Confidence</h2><p><span class='confidence'>Enterprise specificity: {s['enterprise_context']['enterprise_specificity']}</span> <span class='confidence'>Runtime confidence: {s['strategic_sales_brief']['confidence']}</span></p></section>
+    <section class='card'><h2>Unknowns</h2>{_unknown_cards(s['enterprise_context']['unknowns'], s['hypothesis_assessment']['evidence_demands'])}</section>
+    <section class='card'><h2>Enterprise Canvas entry</h2><p><a class='button-link' href='/digital-twins'>Open Enterprise Canvas</a></p><p>Where enterprise-specific evidence is absent, Flora reports absence rather than specificity.</p></section>
+    {_pipeline_view(run)}"""
+    return _flora_v2_page("Focus Banking", "focus", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
 
 
 def _flora_shape_page(headers=None) -> str:
-    items = ''.join(f"<li>{i}</li>" for i in ["Who?","Why now?","Why them?","What evidence?","What remains Unknown?","What contradicts the view?","What next?"])
-    return _flora_v2_page("Shape", "shape", f"""
-    <section class='hero'><p class='eyebrow'>Shape</p><h1>Prepare an evidence-backed executive engagement.</h1><p class='lead'>Shape will turn governed intelligence into a proportionate Strategic Sales Brief. Unsupported named executives or enterprise-specific claims will not be invented.</p></section>
-    <section class='card'><h2>Strategic Sales Brief pathway</h2><p>Use the current Banking/BT Enterprise Intelligence route where available, then validate evidence before action.</p><p><a class='button-link' href='/digital-twins/bt-group-plc/intelligence'>Open Strategic Sales Brief path</a></p><h3>Expected output contract</h3><ul>{items}</ul></section>
-    <p><a href='/'>Back to Home</a></p>
-    """, _account_context_html(blueprint_upload_authorisation(headers or {})))
+    run=_banking_run()
+    return _flora_v2_page("Strategic Sales Brief", "shape", _brief_sections(run), _account_context_html(blueprint_upload_authorisation(headers or {})))
+
 
 
 def _flora_governance_page(headers=None) -> str:
@@ -516,18 +600,31 @@ def _flora_governance_page(headers=None) -> str:
     """
     return _flora_v2_page("Governance", "governance", body, _account_context_html(decision), footer=f"Release {revision}")
 
-
 def _flora_question_page(query: dict[str, list[str]], headers=None) -> str:
     from html import escape
     question = (query.get('question') or [''])[0].strip()
     if not question:
         return _flora_home_page(headers, question_error="Enter a question before asking Flora.")
-    return _flora_v2_page("Ask Flora", "home", f"""
-    <section class='hero'><p class='eyebrow'>Ask Flora</p><h1>Question received</h1><p class='lead'>{escape(question)}</p></section>
-    <section class='card'><h2>Evidence-backed answer not generated here</h2><p>This interim question path preserves the submitted question and does not fabricate intelligence. Use the governed Banking prototype path for the current supported Enterprise Intelligence slice.</p><p><a class='button-link' href='/digital-twins/bt-group-plc/intelligence'>Open Banking Enterprise Intelligence</a> <a class='secondary-link' href='/explore'>Explore Banking</a></p></section>
-    <p><a href='/'>Back to Home</a></p>
-    """, _account_context_html(blueprint_upload_authorisation(headers or {})))
+    if not _supports_banking_question(question):
+        return _flora_v2_page("Ask Flora", "home", f"<section class='hero'><p class='eyebrow'>Ask Flora</p><h1>{escape(question)}</h1><p class='lead'>This question is not yet supported by the current Enterprise Intelligence prototype.</p></section><p><a href='/'>Back to Home</a></p>", _account_context_html(blueprint_upload_authorisation(headers or {})))
+    run=_banking_run()
+    return _flora_v2_page("Ask Flora", "home", _brief_sections(run), _account_context_html(blueprint_upload_authorisation(headers or {})))
 
+
+def _flora_evidence_detail_page(object_id: str, headers=None) -> str:
+    from html import escape
+    run=_banking_run(); s=run.stages; r=s['retrieval']; oid=object_id
+    title=oid; summary="Governed Banking runtime object"; confidence=s['strategic_sales_brief']['confidence']; lifecycle='Runtime presentation'
+    relationships=[]; evidence=[]
+    for o in r['observations']:
+        if o['observation_id']==oid: summary=o['statement']; confidence=o['confidence']; lifecycle=o.get('freshness','Unknown'); relationships=o.get('evidence_refs',[]); evidence=o.get('evidence_refs',[])
+    for m in r['mechanisms']:
+        if m['mechanism_id']==oid: summary='Banking mechanism selected by the governed pipeline.'; confidence=m['confidence']; relationships=m.get('relationship_to_observations',[]); evidence=[m.get('authority_asset_id')]
+    if oid=='BRH-003': summary=s['hypothesis_assessment']['original_statement']; lifecycle=s['hypothesis_assessment']['lifecycle_state']; relationships=s['hypothesis_assessment']['supporting_observations']+s['hypothesis_assessment']['supporting_mechanisms']; evidence=s['hypothesis_assessment']['source_asset_ids']
+    for a in r['assets']:
+        if a['asset_id']==oid: summary=a['title']; confidence=a['status']; lifecycle=a['status']; evidence=[a['location']]; relationships=(a.get('metadata') or {}).get('relationships') or []
+    body=f"""<section class='hero'><p class='eyebrow'>Evidence detail</p><h1>{escape(title)}</h1><p class='lead'>{escape(str(summary))}</p></section><section class='card'><h2>Supporting evidence</h2><p>{_chips(evidence)}</p><h2>Relationships</h2><p>{_chips(relationships)}</p><h2>Confidence</h2><p><span class='confidence'>{escape(str(confidence))}</span></p><h2>Lifecycle</h2><p>{escape(str(lifecycle))}</p><h2>Lineage</h2><p>{_chips(s['strategic_sales_brief']['lineage']['assets'])}</p></section><p><a href='/shape'>Back to Strategic Sales Brief</a></p>"""
+    return _flora_v2_page("Evidence detail", "shape", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
 
 def _mode_card(href: str, title: str, subtitle: str, description: str) -> str:
     from html import escape
@@ -546,7 +643,7 @@ def _flora_v2_page(title: str, active: str, body: str, account_html: str, footer
     nav = [("home","/","Home"),("explore","/explore","Explore"),("focus","/focus","Focus"),("shape","/shape","Shape"),("governance","/governance","Governance")]
     links = ''.join(f"<a href='{href}' aria-current='page'>{label}</a>" if key == active else f"<a href='{href}'>{label}</a>" for key, href, label in nav)
     return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>{escape(title)}</title><style>
-    :root{{--bg:#f5f1ea;--ink:#13211c;--muted:#5f6f68;--line:#ded6c8;--card:#fffdf9;--brand:#174d3f;--brand2:#e7f1ec;--focus:#9b5cff}}*{{box-sizing:border-box}}body{{font-family:Inter,Arial,sans-serif;margin:0;background:linear-gradient(180deg,#fbf8f2,#f3eee5);color:var(--ink);line-height:1.55}}a{{color:var(--brand);font-weight:700;text-underline-offset:3px}}a:focus-visible,button:focus-visible,input:focus-visible{{outline:3px solid var(--focus);outline-offset:3px}}.shell{{max-width:1120px;margin:auto;padding:24px}}.topbar{{display:flex;gap:20px;align-items:center;justify-content:space-between;margin-bottom:44px}}.brand strong{{display:block;font-size:1.3rem}}.brand span,.muted{{color:var(--muted)}}.primary-nav{{display:flex;gap:6px;flex-wrap:wrap}}.primary-nav a{{padding:10px 12px;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:650}}.primary-nav a[aria-current='page']{{background:var(--brand);color:white}}.account{{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.92rem}}button,.button-link{{background:var(--brand);color:#fff;border:0;border-radius:999px;padding:13px 18px;text-decoration:none;display:inline-block;cursor:pointer;font-weight:800}}button:hover,.button-link:hover{{background:#0f392f}}.secondary-link{{display:inline-block;padding:10px 0}}.hero,.card,.mode-card a{{background:rgba(255,253,249,.95);border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 50px #1b13060a}}.hero{{padding:42px;margin:18px 0}}.question-hero{{padding:56px}}.eyebrow{{text-transform:uppercase;letter-spacing:.12em;color:var(--brand);font-weight:800;margin:0 0 8px}}h1{{font-size:clamp(2.15rem,5vw,4.5rem);line-height:1.02;margin:.1em 0 .25em}}.lead{{font-size:clamp(1.08rem,2vw,1.35rem);max-width:780px;color:#31413a}}.question-form label{{display:block;font-size:clamp(1.25rem,3vw,2rem);font-weight:850;margin:28px 0 12px}}.question-row{{display:flex;gap:12px}}input{{min-height:56px;border:1px solid #c9beaf;border-radius:999px;padding:0 18px;font:inherit;font-size:1.05rem;background:white}}.question-row input{{flex:1;min-width:0}}.error{{color:#8a1f11;background:#fff0ec;border-left:4px solid #8a1f11;padding:10px 12px;border-radius:10px}}.mode-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}}.mode-card a{{display:block;min-height:190px;padding:24px;text-decoration:none;color:var(--ink)}}.mode-card span{{display:block;color:var(--brand);font-weight:900;font-size:1.5rem}}.mode-card strong{{display:block;font-size:1.15rem;margin:8px 0}}.mode-card em{{font-style:normal;color:var(--muted)}}.card{{padding:24px;margin:16px 0}}.pill{{display:inline-block;border-radius:999px;padding:4px 10px;background:var(--brand2);margin-left:6px}}.link-list li{{margin:10px 0}}.visually-hidden{{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}}footer{{color:var(--muted);font-size:.9rem;padding:24px 0}}@media(max-width:780px){{.topbar{{align-items:flex-start;flex-direction:column;margin-bottom:20px}}.mode-grid{{grid-template-columns:1fr}}.question-row{{flex-direction:column}}.hero,.question-hero{{padding:28px}}.shell{{padding:16px}}.primary-nav a{{padding:10px 9px}}}}@media(prefers-reduced-motion:reduce){{*{{scroll-behavior:auto!important}}}}
+    :root{{--bg:#f5f1ea;--ink:#13211c;--muted:#5f6f68;--line:#ded6c8;--card:#fffdf9;--brand:#174d3f;--brand2:#e7f1ec;--focus:#9b5cff}}*{{box-sizing:border-box}}body{{font-family:Inter,Arial,sans-serif;margin:0;background:linear-gradient(180deg,#fbf8f2,#f3eee5);color:var(--ink);line-height:1.55}}a{{color:var(--brand);font-weight:700;text-underline-offset:3px}}a:focus-visible,button:focus-visible,input:focus-visible{{outline:3px solid var(--focus);outline-offset:3px}}.shell{{max-width:1120px;margin:auto;padding:24px}}.topbar{{display:flex;gap:20px;align-items:center;justify-content:space-between;margin-bottom:44px}}.brand strong{{display:block;font-size:1.3rem}}.brand span,.muted{{color:var(--muted)}}.primary-nav{{display:flex;gap:6px;flex-wrap:wrap}}.primary-nav a{{padding:10px 12px;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:650}}.primary-nav a[aria-current='page']{{background:var(--brand);color:white}}.account{{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.92rem}}button,.button-link{{background:var(--brand);color:#fff;border:0;border-radius:999px;padding:13px 18px;text-decoration:none;display:inline-block;cursor:pointer;font-weight:800}}button:hover,.button-link:hover{{background:#0f392f}}.secondary-link{{display:inline-block;padding:10px 0}}.hero,.card,.mode-card a{{background:rgba(255,253,249,.95);border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 50px #1b13060a}}.hero{{padding:42px;margin:18px 0}}.question-hero{{padding:56px}}.eyebrow{{text-transform:uppercase;letter-spacing:.12em;color:var(--brand);font-weight:800;margin:0 0 8px}}h1{{font-size:clamp(2.15rem,5vw,4.5rem);line-height:1.02;margin:.1em 0 .25em}}.lead{{font-size:clamp(1.08rem,2vw,1.35rem);max-width:780px;color:#31413a}}.question-form label{{display:block;font-size:clamp(1.25rem,3vw,2rem);font-weight:850;margin:28px 0 12px}}.question-row{{display:flex;gap:12px}}input{{min-height:56px;border:1px solid #c9beaf;border-radius:999px;padding:0 18px;font:inherit;font-size:1.05rem;background:white}}.question-row input{{flex:1;min-width:0}}.error{{color:#8a1f11;background:#fff0ec;border-left:4px solid #8a1f11;padding:10px 12px;border-radius:10px}}.mode-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}}.mode-card a{{display:block;min-height:190px;padding:24px;text-decoration:none;color:var(--ink)}}.mode-card span{{display:block;color:var(--brand);font-weight:900;font-size:1.5rem}}.mode-card strong{{display:block;font-size:1.15rem;margin:8px 0}}.mode-card em{{font-style:normal;color:var(--muted)}}.card{{padding:24px;margin:16px 0}}.pill,.badge,.confidence,.chip{{display:inline-block;border-radius:999px;padding:4px 10px;background:var(--brand2);margin:3px 4px 3px 0}}.badge{{background:#174d3f;color:white}}.confidence{{background:#efe8ff;color:#3d246b}}.chip{{background:#e7f1ec;text-decoration:none}}.mini-card{{border:1px solid var(--line);border-radius:18px;padding:16px;margin:10px 0;background:#fff}}.unknown{{border-left:5px solid #b27700}}.contradiction{{border-left:5px solid #9b2c2c}}.pipeline-stage{{border-top:1px solid var(--line);padding:14px 0}}.link-list li{{margin:10px 0}}.visually-hidden{{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}}footer{{color:var(--muted);font-size:.9rem;padding:24px 0}}@media(max-width:780px){{.topbar{{align-items:flex-start;flex-direction:column;margin-bottom:20px}}.mode-grid{{grid-template-columns:1fr}}.question-row{{flex-direction:column}}.hero,.question-hero{{padding:28px}}.shell{{padding:16px}}.primary-nav a{{padding:10px 9px}}}}@media(prefers-reduced-motion:reduce){{*{{scroll-behavior:auto!important}}}}
     </style></head><body><div class='shell'><header class='topbar'><a class='brand' href='/'><strong>Flora</strong><span>Enterprise Intelligence</span></a><nav class='primary-nav' aria-label='Primary product navigation'>{links}</nav>{account_html}</header><main>{body}</main><footer>{escape(footer)}</footer></div></body></html>"""
 
 def _is_enterprise_intelligence_path(path: str) -> bool:
@@ -620,7 +717,7 @@ app = FloraWebHandler
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path in {"/", "/flora", "/flora/", "/pilot-sign-in", "/explore", "/focus", "/shape", "/governance", "/ask"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export") or path == "/settings/general":
+    if path in {"/", "/flora", "/flora/", "/pilot-sign-in", "/explore", "/focus", "/shape", "/governance", "/ask"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export") or path == "/settings/general" or path.startswith("/evidence/"):
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
