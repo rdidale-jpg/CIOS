@@ -1,0 +1,209 @@
+NatWest Group Enterprise Twin 002 — Governed First Release
+
+Run mode: New Build. Lloyds BM-01, BM-05 and BM-06 are treated as human-supplied comparison mechanisms, not NatWest evidence. The run follows the CIOS Researcher pack requirement to build enterprise understanding before candidate selection and to keep strategic importance, enterprise need, commercial relevance and accessibility separate.
+
+Boundary: NatWest Group; principal banking brands; Retail Banking; Private Banking & Wealth Management where material to group economics; Commercial & Institutional, including business and commercial banking, payments, lending, deposits, risk, transformation, technology and partner ecosystem.
+Effective date: 17 July 2026.
+Source cut-off: public evidence available to 17 July 2026. NatWest’s H1 2026 results are due 31 July 2026 and are not included.
+Named decisions supported: whether Lloyds incumbent-bank mechanisms generalise to NatWest; which NatWest transformation seams are commercially relevant to Rob’s domain; which opportunities deserve Learn, Validate, Shape or Monitor action.
+Evidence boundary: public reporting, investor materials, regulator data and supplier/partner announcements only. Current Lloyds Twin state was not available as evidence; Lloyds references are controlled-comparison placeholders supplied in the brief.
+
+1. Executive thesis
+
+NatWest is the closest public controlled comparison to Lloyds because it is another UK-concentrated incumbent bank whose economics depend on a large deposit/current-account franchise, digitally engaged retail customers, a material commercial-banking engine, simplification, AI, cloud and operating-cost discipline. The strongest NatWest evidence supports three recurrent incumbent mechanisms: deposit franchise economics, commercial relationship flywheel, and simplification-to-investment-capacity loop. It weakens any Lloyds-only claim that AI value in UK incumbents is primarily a back-office productivity story: NatWest expresses AI as a relationship-bank operating model, spanning Cora, colleagues, coders, relationship managers, fraud/scams and external customer journeys.
+
+NatWest’s 2025 performance shows the economic base. Total operating profit was £7.7bn, RoTE 19.2%, customer deposits excluding central items rose £10.4bn to £441.7bn, net loans excluding central items rose £20.7bn, and 2025 simplification included £1.2bn invested in technology, AI and simplification, £600m gross cost savings, about £100m incremental investment capacity and around 200 business applications decommissioned.
+
+The control comparison is not exact. Lloyds appears, from the user’s prior mechanism labels, to be more retail-current-account/mortgage-led. NatWest has a more visibly evidenced Commercial & Institutional relationship engine, with C&I generating £8.8bn 2025 income, £154.2bn net loans, £196.4bn deposits and £4.1bn operating profit. In Q1 2026, C&I had £201.5bn deposits and £158.0bn net loans, materially larger than Retail on deposits and close to Retail on loans.
+
+2. Enterprise Understanding Scorecard
+
+Domain | Depth | Evidence strength | Freshness | Twin judgement
+--- | --- | --- | --- | ---
+Identity, perimeter, brands | 4 | High | Current | Group, Retail, PBWM and C&I boundary is clear. Legal-entity detail is not fully modelled.
+Economics and funding | 5 | High | Current | Deposit margin, structural hedge, lending growth, RWA and RoTE mechanics are well evidenced.
+Current accounts and deposits | 5 | High | Current | Current-account share, savings growth, digital engagement and deposit mix are evidenced; granular current-account flow data remains Unknown.
+Commercial and SME banking | 5 | Medium-high | Current | C&I economics, digital-first adoption, FX and Bankline/API capability are evidenced; SME sub-segmentation and KYB performance remain partly opaque.
+Simplification | 4 | High for activity, medium for causality | Current | Spend, savings, investment capacity and app retirement are evidenced; causal proof from app decommissioning to speed/resilience is incomplete.
+AI and colleague augmentation | 5 | High | Current | Customer, colleague, coder and RM adoption evidence is unusually strong for a bank outside-in study.
+Cloud and critical dependencies | 4 | Medium-high | Current | AWS/Accenture/OpenAI/Google dependencies are visible; exit, concentration and workload criticality are Unknown.
+Trust and history | 4 | Medium-high | Current | Return to full private ownership is strategically material; complaint and conduct signals remain mixed, not resolved.
+Commercial opportunity qualification | 4 | Medium | Current | Strong demand seams exist; exact procurement routes, contract values and incumbent workshare are incomplete.
+
+3. Twin Spine — core operating model
+
+External force → pressure → response → capability → supplier → outcome
+
+Higher rates and deposit competition increase the value of stable current-account and savings relationships. NatWest responds through relationship depth, digital engagement, dynamic savings pricing and disciplined balance-sheet growth. That feeds deposit margin expansion, structural hedge income and investment capacity. In 2025, income growth was driven partly by deposit margin expansion, higher balances and hedge income; in Q1 2026, NIM rose to 2.47%, and income excluding notable items was £271m higher year-on-year mainly from deposit margin expansion and lending growth.
+
+Customer relationship → data/AI platform → personalisation → deeper relationship → deposits/lending/fee income
+
+NatWest’s AWS/Accenture collaboration is explicitly aimed at a holistic view of each customer relationship and state-of-the-art data capabilities for relationship managers, while Cora, ChatGPT mortgage guidance and GenAI journeys extend the customer interface beyond traditional digital banking. This supports a relationship-bank mechanism rather than only a channel-cost mechanism.
+
+Simplification → cost savings → investment capacity → AI/cloud/platform modernisation → productivity/trust
+
+NatWest reports £600m gross cost savings, £100m additional investment capacity and around 200 business applications decommissioned in 2025. The credible mechanism is not “decommissioning alone causes performance”; it is decommissioning plus process simplification, cloud transition, AI assistants and branch/digital transformation creating capacity to fund the next wave.
+
+4. Priority question findings
+
+A. Current-account and deposit franchise
+
+NatWest’s deposit franchise is material and recurring. Retail Banking had £202.6bn customer deposits at 2025 year-end, while C&I had £196.4bn and PBWM £42.7bn. Group customer deposits excluding central items reached £441.7bn at 2025 year-end and £444.8bn in Q1 2026.
+
+The retail franchise is not only a balance sheet. NatWest’s Retail Spotlight states a 16.4% current-account market share, #4 market rank, 10.1% overall Bank of England deposit share, about 70% of current-account holders holding two or more products, and a roughly one-third share of UK family segments. Current-account balances fell from £75.9bn in FY21 to £64.8bn in Q3 2025 while savings rose from £113.0bn to £131.0bn, indicating a mix shift rather than simple deposit-franchise growth.
+
+Digital engagement strengthens BM-01/BM-06 applicability. NatWest reports 12.3m digitally active retail and business banking customers, 11.4m mobile-app users, 81.8% of Retail customers banking entirely digitally, and 84.5% of C&I customers banking digitally first. That means the deposit/current-account franchise is increasingly mediated by digital behaviour, mobile usage, APIs and assisted AI.
+
+Judgement: BM-01 generalises strongly. NatWest evidence strengthens the Lloyds mechanism if BM-01 means “low-cost deposit/current-account relationship base funds bank economics and creates cross-sell optionality.” BM-06 also generalises if it means “digital engagement deepens and defends primary relationship,” but NatWest expresses it with stronger visible AI and embedded-finance variants.
+
+B. Commercial and SME banking
+
+NatWest’s C&I business is central, not peripheral. It serves start-ups to large corporates and financial institutions through sector knowledge across banking, payments, fixed income and FX, and in 2025 generated £8.8bn income, £4.1bn operating profit, £154.2bn net loans and £196.4bn customer deposits.
+
+The C&I mechanism is relationship plus digital capability, not relationship versus automation. In 2025 NatWest reported 13% customer growth on its Agile Markets digital platform, about 20% FX income growth, around 10% lending growth driven by Commercial Mid-market and Corporate & Institutions, and first-time use of FX/international payment services by about 700 mid-market businesses after faster onboarding and simpler digital experience.
+
+The product seam is clear in Bankline Direct Digital APIs and Bank of APIs. NatWest says Bankline Direct APIs provide building blocks for digital treasury systems, support ISO 20022 transition, real-time secure payments and data integration, and that its API ecosystem helps business and corporate customers access services through their own systems, everyday banking in new ways, and onboarding/authentication.
+
+Judgement: BM-05 is strengthened. NatWest provides stronger public validation than Lloyds alone for a commercial-banking relationship flywheel: sector relationship → cash-management/payments/FX/lending need → digital/API enablement → richer data and higher switching cost → deeper relationship → deposit and fee-income resilience.
+
+C. Simplification
+
+NatWest’s simplification is measurable at the programme-result level. It reports £1.2bn invested in technology, AI and simplification, £600m gross cost savings, about £100m of investment capacity created through process simplification, AI assistants/agents and cloud transition, and around 200 business applications decommissioned in 2025.
+
+Retail evidence shows operating-model consequences: FTE fell from 14.6k in 9M21 to 11.6k in 9M25, Retail cost-income ratio fell from 53% to 44%, and FTE per 1,000 customers reduced by more than 20%. However, cost per customer was broadly stable despite 21% cumulative CPI, so the evidence suggests efficiency absorption and scalability, not simply absolute cost collapse.
+
+The causal claim that “application decommissioning improves cost, speed or resilience” remains only partially supported. NatWest has evidenced app retirement and reported savings, but has not publicly isolated how much of the £600m savings came from decommissioning rather than branch transformation, digital migration, restructuring, AI, cloud or business mix. This must remain a hypothesis, not a proven causal mechanism.
+
+D. AI and colleague augmentation
+
+NatWest’s AI operating model is broader than a use-case count. Cora handled 12.9m Retail customer conversations in 2025, with 50% needing no human intervention; GenAI was added to 17 new Cora journeys, reaching 21 journeys, with about a 20 percentage-point uplift in queries requiring no human intervention versus comparable non-GenAI Cora journeys.
+
+Colleague augmentation is visible across contact centres, coding and relationship management. NatWest reports about 9,000 contact-centre colleagues using AI to transcribe conversations and reduce search time, more than 12,000 coders using AI to accelerate software development, 70,000 hours saved in Retail banking through automated call summaries and simplified complaint responses, and 30% more time with customers for PBWM relationship managers using AI tools.
+
+The governance signal is also visible. NatWest has an AI and Data Ethics Code of Conduct, launched AI ethics learning for 60,000 colleagues, and frames OpenAI access around privacy guardrails and responsible deployment. The adoption risk is therefore not whether AI exists; it is whether governance, quality assurance, model risk, customer trust and operational controls scale at the same speed as adoption.
+
+Judgement: NatWest strengthens the “AI-enabled relationship bank” variant. Compared with a pure productivity mechanism, NatWest ties AI to customer journeys, fraud/scam handling, mortgage discovery, Cora, colleagues, coding and relationship managers.
+
+E. Cloud and critical dependencies
+
+NatWest has a material hyperscaler/SI dependency. Its five-year AWS/Accenture collaboration is designed to modernise digital, data, analytics and AI capabilities for 20m customers, improve relationship-manager insight, support real-time customer engagement and strengthen colleague data culture.
+
+OpenAI adds a second critical AI-platform dependency: NatWest became the first UK-headquartered bank to work with OpenAI, with access to latest technology and insights, and with a focus on Cora, AskArchie, fraud/scams, customer understanding and colleague support.
+
+Regulatory pressure makes the cloud relationship commercially and operationally material. The Bank of England, PRA and FCA finalised a Critical Third Parties oversight regime to manage risks to UK financial stability or confidence arising from failure or disruption at service providers used by financial firms. That does not prove AWS or OpenAI are designated for NatWest-specific services, but it raises the required standard for resilience, exit planning, concentration-risk governance and service mapping.
+
+Unknowns: workload criticality, exit strategies, multi-cloud posture, data residency, RTO/RPO targets, contractual audit rights, SI subcontracting and whether OpenAI/AWS services support any critical business service.
+
+F. Trust and enterprise history
+
+NatWest’s public-ownership legacy remains strategically relevant because full private ownership only returned in May 2025. HMT’s economic ownership peaked at 84.4% after 2008–09 recapitalisations, and NatWest framed the exit as a turning point while explicitly linking the past crisis to a simpler, safer, more customer-focused bank.
+
+Trust is not resolved by ownership exit. FCA H2 2025 complaints data records National Westminster Bank plc with 97,511 opened complaints and 91,185 closed complaints across product groups, with 46.97% upheld, while The Royal Bank of Scotland plc had 19,433 opened and 19,433 closed, with 46.44% upheld. This is not a direct customer-trust score, but it is a conduct/service-quality pressure signal.
+
+Judgement: NatWest exhibits a public-trust recovery mechanism: crisis legacy → simplification/safety/customer focus narrative → private ownership milestone → growth and shareholder return → need to prove customer outcomes. The mechanism is strategically real, but still under pressure from complaints, service quality, AI governance and conduct history.
+
+5. NatWest-specific mechanism register
+
+Mechanism ID | Mechanism | NatWest evidence state | What it supports | What it does not prove
+--- | --- | --- | --- | ---
+NTW-BM-01 | Deposit/current-account franchise economics | Strong | Stable customer deposits, current-account share, savings growth and digital engagement fund NIM and investment capacity. | It does not prove NatWest has superior primary-account primacy versus Lloyds without direct CACI/current-account flow evidence.
+NTW-BM-05 | Commercial-banking relationship flywheel | Strong | C&I scale, C&I deposits, lending growth, Agile Markets, FX growth, Bankline/API evidence support relationship + digital automation. | It does not prove KYB/onboarding cycle times or SME economics by sub-segment.
+NTW-BM-06 | Digital primary-relationship reinforcement | Medium-high | 12.3m digitally active customers, 11.4m app users, 81.8% Retail entirely digital and 84.5% C&I digitally first. | It does not prove digital engagement is causal for retention or deposit beta.
+NTW-SIMP-01 | Simplification-to-investment-capacity loop | Strong for loop, medium for attribution | £600m savings, £100m investment capacity, £1.2bn investment and 200 app retirements show a repeatable loop. | It does not isolate app decommissioning as the causal driver.
+NTW-AI-01 | AI-enabled relationship bank | Strong | Cora, OpenAI, ChatGPT mortgage app, colleague transcription, coder AI, PBWM RM time and AI ethics show enterprise AI model. | It does not prove sustained quality, fairness or risk outcomes at scale.
+NTW-CLOUD-01 | Cloud partnership dependency | Medium-high | AWS/Accenture five-year collaboration makes cloud/data platform central to transformation. | It does not reveal critical workload mapping or exit readiness.
+NTW-TRUST-01 | Public-trust recovery | Medium | Full private ownership, taxpayer legacy and “simpler, safer” narrative are material. | It does not prove trust recovery in customer outcomes.
+
+6. PESTLE and external environment assessment
+
+Force | Enterprise pressure | Behaviour / decision | Capability consequence | Commercial demand
+--- | --- | --- | --- | ---
+Political: post-bailout ownership exit | Prove NatWest can grow as a private UK-focused bank without forgetting crisis lessons | Reframes strategy around trusted partner, UK growth and customer focus | Stronger need for measurable trust, resilience, governance and customer outcomes | Trust analytics, complaints transformation, customer-outcome governance
+Economic: rate environment and deposit competition | Defend deposit margin while retaining balances and fair value | Dynamic savings pricing, relationship deepening, structural hedge benefit | Deposit analytics, pricing, customer propensity and retention tools | Data/AI for deposit pricing and relationship management
+Social: digital banking expectations and vulnerability | Customers expect immediate digital service but need support for complex moments | Cora, app, ChatGPT mortgage guidance, contact-centre augmentation | Omnichannel AI, assisted advice, human escalation, accessibility | AI service design, contact-centre transformation, governed adoption
+Technological: AI/cloud platform shift | Need speed, personalisation and productivity while controlling risk | OpenAI, AWS/Accenture, AI ethics, coder tools | Platform engineering, data fabric, model governance, cloud resilience | AI operating model, cloud migration, DevSecOps, model risk
+Legal/regulatory: Consumer Duty, complaints, CTP regime | Must evidence good outcomes, operational resilience and third-party control | Complaints oversight, AI guardrails, supplier governance | Outcome MI, critical-service mapping, third-party exit planning | Operational resilience, service mapping, regulatory data controls
+Environmental: transition finance and supplier emissions | Need to support UK transition finance and reduce supply-chain emissions | £200bn climate/transition finance target; supplier emissions data improvement | Data quality, ESG reporting, customer transition-finance workflows | ESG data platforms, reporting controls, portfolio analytics
+
+7. Executive tensions
+
+Tension | NatWest expression | Twin judgement
+--- | --- | ---
+Cost savings vs service quality | £600m gross savings and lower cost-income ratio coexist with large complaint volumes. | Savings thesis must be tested against complaint, resolution and customer-outcome metrics.
+Relationship depth vs automation | C&I relationship bank rhetoric is increasingly delivered through Bankline, APIs, Agile Markets and AI. | Strongest model is hybrid: automation increases relationship-manager leverage.
+AI scale vs governed adoption | Cora, 9,000 contact-centre users, 12,000 coders, OpenAI and ChatGPT app show scale. | Governance, model risk, auditability and customer comprehension become core constraints.
+Application retirement vs operational risk | 200 apps decommissioned, but no public critical-service mapping. | Decommissioning is commercially relevant but needs resilience evidence before strong claims.
+Shareholder return vs strategic investment | 2025 TSR and RoTE were strong while £1.2bn was invested in tech/AI/simplification. | The loop currently works; it could strain if margins fall or integration costs rise.
+UK concentration vs resilience | UK-focused scale supports relationship/deposit franchise. | Concentration increases sensitivity to UK macro, regulation, housing and SME cycles.
+Cloud partnership vs supplier dependency | AWS/Accenture and OpenAI accelerate transformation. | Supplier concentration, exit, control and regulatory scrutiny are material opportunities and risks.
+
+8. Opportunity Candidate Universe and disposition
+
+Candidate ID | Candidate | Source family | Disposition | Depth
+--- | --- | --- | --- | ---
+NTW-CU-001 | Bank-wide data, analytics and AI modernisation with AWS/Accenture | Live strategic partnership | Rob-relevant commercial portfolio | Tier 1
+NTW-CU-002 | AI-enabled customer and colleague service transformation | Cora, OpenAI, contact-centre, complaints | Rob-relevant commercial portfolio | Tier 1
+NTW-CU-003 | Commercial banking digital relationship, onboarding, FX, Bankline/API and cash-management transformation | C&I growth, Agile Markets, Bankline APIs | Rob-relevant commercial portfolio | Tier 1
+NTW-CU-004 | Application decommissioning and technology simplification factory | 200 app retirements, savings, investment capacity | Rob-relevant commercial portfolio | Tier 1
+NTW-CU-005 | Cloud resilience, critical third-party control and exit planning | AWS/Accenture, CTP regime | Rob-relevant commercial portfolio | Tier 1
+NTW-CU-006 | Fraud, scams and financial-crime AI | OpenAI fraud/scam focus, UK fraud pressure | Rob-relevant commercial portfolio | Tier 2
+NTW-CU-007 | Digital mortgage and home-buying ecosystem | ChatGPT mortgage app, mortgage digital channel | Rob-relevant commercial portfolio | Tier 2
+NTW-CU-008 | PBWM/Evelyn integration and AI-enabled relationship management | Evelyn acquisition, PBWM AI RM evidence | Watch / Tier 2 after integration evidence | Tier 2
+NTW-CU-009 | Embedded finance and NatWest Boxed partnerships | Saga/AA evidence, Boxed platform | Watch | Tier 3
+NTW-CU-010 | Sainsbury’s Bank customer and platform integration | 1m accounts, balances acquired | Watch / mostly internal integration | Tier 3
+NTW-CU-011 | SME AI enablement through Google/NatWest Accelerator | Google Cloud collaboration | Watch / ecosystem not core bank transformation | Tier 3
+NTW-CU-012 | ESG, climate and transition-finance data platform | C&I climate/transition finance | Watch | Tier 3
+NTW-CU-013 | Complaints and customer-outcomes transformation | FCA complaints and AI summarisation | Rob-relevant commercial portfolio | Tier 2
+NTW-CU-014 | Procurement/supplier governance and supplier emissions data | Supply-chain disclosure and CTP pressure | Watch | Tier 3
+
+9. Rob-Relevant Commercial Opportunity Portfolio
+
+Tier 1 — full commercial opportunity models
+
+Opportunity | Commercial Intervention Boundary | Incumbents / route | Decision action
+--- | --- | --- | ---
+Bank-wide data and AI platform modernisation | Data architecture, customer 360, analytics, AI enablement, relationship-manager insight, platform engineering, adoption and controls. Excludes total bank technology spend unless tied to contractable scope. | AWS and Accenture are visible incumbents; OpenAI is adjacent AI platform dependency. | Shape / Partner-map around integration, data governance, controls, migration assurance and adoption.
+AI-enabled customer and colleague operations | Cora journeys, complaints summarisation, contact-centre transcription, fraud/scam resolution, colleague copilots, RM assistants and quality controls. | OpenAI, existing NatWest AI estate, internal CIO/Responsible AI. | Validate / Shape around governed scaling, model-risk assurance, service design and measurable outcomes.
+Commercial digital relationship bank | Bankline APIs, ISO 20022, digital treasury, FX onboarding, Agile Markets, cashflow insight, SME/corporate relationship intelligence. | NatWest C&I digital, Bankline, Agile Markets; unclear SI incumbency. | Learn / Shape with C&I owners around cash-management, payments and onboarding seams.
+Application decommissioning and simplification factory | App rationalisation, process simplification, platform consolidation, cloud migration, testing, data migration, operational-risk control and benefits tracking. | Incumbents not fully public; AWS/Accenture likely touch data/platform scope, not necessarily all decommissioning. | Validate attribution, criticality and change capacity before pursuit.
+Cloud resilience and critical dependency management | Critical-service mapping, CTP governance, exit planning, resilience testing, supplier control, operational resilience reporting. | AWS/Accenture, OpenAI; regulatory regime external. | Shape as risk-led complement to transformation, not as generic cloud migration.
+
+Tier 2 — emerging opportunity models
+
+Fraud/scams AI, complaints/customer-outcomes transformation, digital mortgage ecosystem, PBWM/Evelyn integration and embedded-finance operating model are credible but need better evidence of ownership, procurement route, benefits baseline and incumbent workshare before any Pursue action.
+
+10. Lloyds–NatWest Controlled Comparison
+
+Mechanism | Lloyds applicability | NatWest applicability | Shared causal structure | Material difference | Evidence gap
+--- | --- | --- | --- | --- | ---
+BM-01 Current-account and deposit franchise | Human-supplied: strong | Strong | Current accounts/savings → stable deposits → NIM/hedge income → investment capacity → growth | NatWest shows visible mix shift from current accounts to savings and very material C&I deposit engine. | Need direct Lloyds/NatWest comparable CACI flows, primary-account data and deposit beta.
+BM-06 Digital-primary relationship mechanism | Human-supplied: strong | Strong | Digital engagement → lower service friction → more frequent interactions → cross-sell/retention → lower marginal cost | NatWest expresses BM-06 through Cora, ChatGPT, APIs and digitally-first C&I; Lloyds expression may be more app/AI-productivity led. | Need identical Lloyds digital engagement metrics and customer-depth measures.
+BM-05 Commercial-banking relationship flywheel | Human-supplied: medium/strong | Stronger | RM + sector expertise + payments/FX/lending + digital channels → deeper data and switching costs → deposits/fees/lending | NatWest C&I appears more central to group economics and more visible in public evidence. | Need SME vs mid-market vs corporate sub-segment economics and KYB/onboarding metrics.
+Simplification-to-investment-capacity | Human-supplied: strong | Strong | Simplification → gross savings → investment capacity → tech/AI/cloud → productivity | NatWest explicitly quantifies £100m investment capacity and 200 app retirements; causality remains partly unproven. | Need benefits attribution and app-criticality map.
+AI colleague augmentation | Human-supplied: strong | Strong | AI assistants → faster colleague work → more customer time / lower handling cost → service and cost outcomes | NatWest has broader relationship-bank expression: Cora, RM tools, coders, contact centres, ChatGPT. | Need quality, risk and adoption metrics beyond hours saved.
+Cloud critical dependency | Human-supplied: likely | Strong | Cloud/data platform → speed/personalisation/AI → supplier concentration/resilience risk | NatWest’s AWS/Accenture five-year collaboration is explicit and recent. | Need critical workload, exit and multi-cloud evidence for both banks.
+Trust recovery/history mechanism | Lloyds-specific or weaker | NatWest-specific strong | Legacy conduct/crisis pressure → governance/customer focus → public trust proof | NatWest’s government-ownership exit is uniquely material. | Need longitudinal trust, NPS and complaints resolution comparisons.
+
+Controlled-comparison conclusion: NatWest strengthens the recurrence of incumbent UK banking mechanisms around deposit franchise, digital engagement, simplification and AI. It also creates a distinct NatWest variant: a commercial-and-institutional relationship bank using data, APIs, AI and cloud to deepen relationships rather than simply automate them.
+
+11. Evidence Demand Register
+
+Evidence demand | Why it matters | Next validation action
+--- | --- | ---
+Direct Lloyds–NatWest current-account flow, primary-account and deposit-beta comparison | Required to prove BM-01/BM-06 equivalence rather than similarity | Obtain CACI/BoE comparable data and internal Twin state from Lloyds
+NatWest application decommissioning attribution | Needed to prove app retirement improves cost, speed or resilience | Validate app count, baseline run cost, criticality and post-retirement service metrics
+AWS/Accenture contract scope and critical workloads | Required for route-to-market and supplier dependency judgement | Map contract, SOWs, workloads, governance and renewal/exit terms
+OpenAI deployment architecture and model-risk controls | Needed before strong AI recommendation | Validate model inventory, human oversight, quality testing, data handling and audit controls
+C&I SME/mid-market KYB and onboarding metrics | Determines BM-05 intervention boundary | Gather product/process metrics and owner interviews
+Complaints root-cause and AI impact | Tests cost-saving vs service-quality tension | Compare complaint volumes, uphold rates, resolution times and AI summarisation outcomes
+PBWM/Evelyn integration roadmap | Determines commercial accessibility | Refresh after completion/integration disclosures
+
+12. Validation report
+
+This Twin is decision-ready for the named comparison decision: which Lloyds incumbent-bank mechanisms recur in NatWest and which are NatWest-specific variants. It is also directionally ready for Rob’s commercial qualification decisions at Learn, Validate and Shape levels. It is not yet Pursue-ready for any opportunity because procurement route, incumbent workshare, budget ownership and relationship access remain incomplete.
+
+The strongest evidence-backed mechanisms are: BM-01 deposit/current-account franchise, BM-05 commercial-banking relationship flywheel, simplification-to-investment-capacity, and AI-enabled relationship bank. The weakest or most conditional mechanism is application decommissioning as causal operating-model change, because NatWest evidences app retirement and savings but not isolated causality.
+
+Refresh triggers: NatWest H1 2026 results on 31 July 2026; Evelyn integration milestones; any AWS/Accenture/OpenAI delivery update; operational incident or regulator action; new FCA complaints data; NatWest strategy update; Lloyds controlled-comparison source pack becoming available.
+
+Within the evidence boundary above: The NatWest Enterprise Twin is complete. It provides the first controlled cross-enterprise validation of incumbent UK Banking Mechanisms and distinguishes recurring incumbent mechanisms from enterprise-specific variants.
