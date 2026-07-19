@@ -7,6 +7,7 @@
 **Related documents:**
 
 - `CIOS/architecture/FP-0XX-Flora-Enterprise-Intelligence-Workspace-Product-Architecture.md`
+- `CIOS/architecture/reference-architectures/FA-001-Flora-Enterprise-Intelligence-Workspace-Reference-Architecture.md`
 - `CIOS/architecture/Flora-Workspace-Architecture-Reconciliation-Report.md`
 - `CIOS/architecture/decisions/ADR-025-Flora-as-the-Enterprise-Intelligence-Workspace.md`
 

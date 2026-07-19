@@ -4,7 +4,7 @@
 **Owner:** Rob / CIOS  
 **Last updated:** 2026-07-18
 
-This folder contains governed Flora runtime architecture specifications that sit beneath accepted CIOS architecture, Enterprise Intelligence models, Founding Papers and ADRs.
+This folder contains governed Flora runtime architecture specifications that sit beneath accepted CIOS architecture, Enterprise Intelligence models, Founding Papers, Reference Architectures and ADRs. For workspace composition and experience context, start with [FA-001 — Flora Enterprise Intelligence Workspace Reference Architecture](../../reference-architectures/FA-001-Flora-Enterprise-Intelligence-Workspace-Reference-Architecture.md).
 
 | ID | Title | Status | Purpose |
 | --- | --- | --- | --- |

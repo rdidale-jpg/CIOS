@@ -26,7 +26,8 @@ The Reference Architecture defines:
 - [CIOS Reference Architecture v1.0](CIOS-Reference-Architecture-v1.0.md) — the single authoritative architecture entry point for CIOS.
 - [RA-001 — CIOS Enterprise Intelligence Meta Model](meta-model/RA-001-CIOS-Enterprise-Intelligence-Meta-Model.md) — the authoritative conceptual model for first-class objects, relationships, lifecycle, state, temporality and evidence lineage.
 - [Glossary](Glossary.md) — concise definitions for CIOS architecture terminology.
-- [Document Map](Document-Map.md) — navigation map for Founding Papers, Enterprise Intelligence papers, ADRs and runtime architecture documents.
+- [Document Map](Document-Map.md) — navigation map for Founding Papers, Enterprise Intelligence papers, Reference Architectures, ADRs and runtime architecture documents.
+- [Reference Architectures (FA)](../reference-architectures/README.md) — capability composition and experience reference architectures, including [FA-001 — Flora Enterprise Intelligence Workspace Reference Architecture](../reference-architectures/FA-001-Flora-Enterprise-Intelligence-Workspace-Reference-Architecture.md).
 - [Flora Financial Intelligence Runtime Specification v0.1](../../docs/Architecture/Flora_Financial_Intelligence_Runtime_Specification_v0.1.md) — pilot runtime contract for governed financial evidence, Observations and Enterprise Model projection.
 - [Architecture Principles](Architecture-Principles.md) — first principles and detailed operating principles.
 - [Architecture Maturity Model](Architecture-Maturity-Model.md) — staged model for how CIOS evolves from evidence collection to autonomous business development partnership.

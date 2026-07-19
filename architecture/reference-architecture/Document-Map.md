@@ -34,7 +34,13 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | ADR-007 | [Transformation Thesis](../decisions/ADR-007-Transformation-Thesis.md) | Migrated placeholder for future transformation thesis review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
 | ADR-008 | [Recommendation Engine](../decisions/ADR-008-Recommendation-Engine.md) | Migrated placeholder for future recommendation engine review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
 | ADR-024 | [Hybrid Enterprise Intelligence Runtime](../decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md) | Accepts Flora as the hybrid governed Enterprise Intelligence runtime with bounded GPT workers and deterministic validation. | Accepted | `architecture/decisions/` | Accepted after Banking Strategic Sales Navigation reconciliation; owning paper is FEIR-001. |
-| ADR-025 | [Flora as the Enterprise Intelligence Workspace](../decisions/ADR-025-Flora-as-the-Enterprise-Intelligence-Workspace.md) | Proposes Flora as the contextual Enterprise Intelligence workspace over governed Enterprise Intelligence. | Proposed | `architecture/decisions/` | Not authoritative until accepted; preserves governed Enterprise Intelligence ownership and report-as-view boundaries. |
+| ADR-025 | [Flora as the Enterprise Intelligence Workspace](../decisions/ADR-025-Flora-as-the-Enterprise-Intelligence-Workspace.md) | Proposes Flora as the contextual Enterprise Intelligence workspace over governed Enterprise Intelligence. | Proposed | `architecture/decisions/` | Not authoritative until accepted; FA-001 applies the workspace decision as reference architecture while preserving governed Enterprise Intelligence ownership and report-as-view boundaries. |
+
+## Reference Architectures
+
+| ID | Title | Purpose | Status | Folder | Relationship to Reference Architecture |
+| --- | --- | --- | --- | --- | --- |
+| FA-001 | [Flora Enterprise Intelligence Workspace Reference Architecture](../reference-architectures/FA-001-Flora-Enterprise-Intelligence-Workspace-Reference-Architecture.md) | Defines the conceptual operating architecture, workspace model, universal interaction contract, boundaries and design review standard for Flora as the Enterprise Intelligence Workspace. | Proposed | `architecture/reference-architectures/` | Applies accepted CIOS architecture and ADR decisions to the Flora workspace interaction model; bridges CIOS Reference Architecture, Enterprise Intelligence papers, ADR-025, the Flora Product Architecture Blueprint and UX-001 without redefining governed intelligence ownership. |
 
 ## Founding Papers
 
@@ -138,9 +144,10 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 8. Read Enterprise Intelligence papers EI-001 to EI-012 to understand the Commercial Digital Twin; EI-001 owns financial metric data and EI-012 owns Observation lifecycle.
 9. Read EIF-001 before EOD-001 when constructing a new Enterprise Twin from public-domain evidence.
 10. Read the CIOS Validation Roadmap before proposing Accepted promotion for EIF-001, EOD-001, OT-001, RTP-001 or OPI-001.
-11. For Financial Intelligence, read ADR-010 and the Flora Financial Intelligence Runtime Specification.
-12. Read relevant [ADRs](../decisions/README.md).
-13. Read runtime architecture documents before changing Flora, Newton, Observatory or Publisher behaviour.
+11. For Flora workspace composition and experience, read [FA-001](../reference-architectures/FA-001-Flora-Enterprise-Intelligence-Workspace-Reference-Architecture.md), then the Flora Product Architecture Blueprint and relevant UX specifications.
+12. For Financial Intelligence, read ADR-010 and the Flora Financial Intelligence Runtime Specification.
+13. Read relevant [ADRs](../decisions/README.md).
+14. Read runtime architecture documents before changing Flora, Newton, Observatory or Publisher behaviour.
 
 
 
