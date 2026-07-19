@@ -38,7 +38,7 @@ from cios.applications.flora.enterprise_intelligence.runtime import EnterpriseIn
 from cios.applications.flora.architecture_export import architecture_export_page, record_download
 from cios.applications.flora.runtime.increment1_views import increment1_workspace_page
 from cios.applications.flora.enterprise_intelligence.explain import executive_presentation_for_explanation, increment2_runtime_path, audit_event, evidence_trust_view, claim_evidence_summaries
-from cios.applications.flora.banking_portfolio import portfolio_page as banking_portfolio_page, banking_landing_page, industry_outlook_page, ai_native_page, ai_native_capability_model_page, timeline_page, heatmap_page, heatmap_detail_page, pipeline_page, opportunity_page as banking_opportunity_page, bank_page as banking_bank_page, compare_page as banking_compare_page, evidence_page as banking_evidence_page, competitors_page as banking_competitors_page, industry_signal_explorer_page, global_industry_portfolio_page
+from cios.applications.flora.banking_portfolio import portfolio_page as banking_portfolio_page, banking_landing_page, industry_outlook_page, ai_native_page, ai_native_capability_model_page, timeline_page, heatmap_page, heatmap_detail_page, pipeline_page, opportunity_page as banking_opportunity_page, bank_page as banking_bank_page, compare_page as banking_compare_page, evidence_page as banking_evidence_page, competitors_page as banking_competitors_page, industry_signal_explorer_page, global_industry_portfolio_page, financial_history_page, market_reaction_page, analyst_history_page, enterprise_event_timeline_page, research_backlog_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -109,6 +109,19 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(*banking_bank_page(parsed.path.removeprefix("/flora/banking/").removesuffix("/briefing"), briefing=True))
             elif parsed.path.startswith("/flora/banking/") and parsed.path.endswith("/evidence"):
                 self._html(*banking_evidence_page(parsed.path.removeprefix("/flora/banking/").removesuffix("/evidence")))
+            elif parsed.path.startswith("/flora/banking/") and parsed.path.endswith("/financial-performance"):
+                self._html(financial_history_page(parsed.path.removeprefix("/flora/banking/").removesuffix("/financial-performance")))
+            elif parsed.path.startswith("/flora/banking/") and parsed.path.endswith("/market-analyst-view"):
+                slug = parsed.path.removeprefix("/flora/banking/").removesuffix("/market-analyst-view")
+                self._html(market_reaction_page(slug) + analyst_history_page(slug))
+            elif parsed.path.startswith("/flora/banking/") and parsed.path.endswith("/market-reaction"):
+                self._html(market_reaction_page(parsed.path.removeprefix("/flora/banking/").removesuffix("/market-reaction")))
+            elif parsed.path.startswith("/flora/banking/") and parsed.path.endswith("/analyst-history"):
+                self._html(analyst_history_page(parsed.path.removeprefix("/flora/banking/").removesuffix("/analyst-history")))
+            elif parsed.path.startswith("/flora/banking/") and parsed.path.endswith("/event-timeline"):
+                self._html(enterprise_event_timeline_page(parsed.path.removeprefix("/flora/banking/").removesuffix("/event-timeline")))
+            elif parsed.path.startswith("/flora/banking/") and parsed.path.endswith("/research-backlog"):
+                self._html(research_backlog_page(parsed.path.removeprefix("/flora/banking/").removesuffix("/research-backlog")))
             elif "/opportunity/" in parsed.path and parsed.path.startswith("/flora/banking/"):
                 rest=parsed.path.removeprefix("/flora/banking/"); slug, opp_id = rest.split("/opportunity/", 1); self._html(*banking_opportunity_page(slug, opp_id))
             elif parsed.path.startswith("/flora/banking/"):
