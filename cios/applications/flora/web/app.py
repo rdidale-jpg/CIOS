@@ -38,7 +38,7 @@ from cios.applications.flora.enterprise_intelligence.runtime import EnterpriseIn
 from cios.applications.flora.architecture_export import architecture_export_page, record_download
 from cios.applications.flora.runtime.increment1_views import increment1_workspace_page
 from cios.applications.flora.enterprise_intelligence.explain import executive_presentation_for_explanation, increment2_runtime_path, audit_event, evidence_trust_view, claim_evidence_summaries
-from cios.applications.flora.banking_portfolio import portfolio_page as banking_portfolio_page, banking_landing_page, industry_outlook_page, ai_native_page, ai_native_capability_model_page, timeline_page, heatmap_page, heatmap_detail_page, pipeline_page, opportunity_page as banking_opportunity_page, bank_page as banking_bank_page, compare_page as banking_compare_page, evidence_page as banking_evidence_page, competitors_page as banking_competitors_page, industry_signal_explorer_page
+from cios.applications.flora.banking_portfolio import portfolio_page as banking_portfolio_page, banking_landing_page, industry_outlook_page, ai_native_page, ai_native_capability_model_page, timeline_page, heatmap_page, heatmap_detail_page, pipeline_page, opportunity_page as banking_opportunity_page, bank_page as banking_bank_page, compare_page as banking_compare_page, evidence_page as banking_evidence_page, competitors_page as banking_competitors_page, industry_signal_explorer_page, global_industry_portfolio_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -78,7 +78,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path == "/deployment":
                 self._json(deployment_payload())
             elif parsed.path in {"/", "/flora", "/flora/"}:
-                self._html(_flora_home_page(self.headers))
+                self._html(global_industry_portfolio_page())
             elif parsed.path in {"/workspace/reference", "/flora/reference"}:
                 self._html(reference_workspace_page(self.headers, saved=parse_qs(parsed.query).get("saved") == ["1"]), set_cookie=reference_resume_cookie())
             elif parsed.path == "/flora/banking":
