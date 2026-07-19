@@ -29,3 +29,14 @@ Detailed evidence UX work is deferred, not rejected.
 | FLR-023 Date-quality repair | Improve periods | Analyst | Medium | Deferred | Source cleanup | Incomplete dates labelled | Deterministic dates |
 | FLR-024 Evidence sufficiency rules | Formal fail-closed | Architecture reviewer | High | In progress | Validation | Safe unavailable tests | Reusable validator |
 | FLR-025 Human judgement annotation | Label curated mappings | Analyst | Medium | Done | Fixtures | Human-supplied labels | Audit lineage |
+| FLR-059 Executive landing-page design | Explain UK Banking in under two minutes | Sales director | High | Done | Existing banking intelligence | Landing answers one question with four primary sections | Presentation projection only |
+| FLR-060 Progressive insight architecture | Move from conclusion to detail | Sales director | High | Done | Routes and breadcrumbs | Level 1–4 journey links render | No canonical model mutation |
+| FLR-061 Single-purpose page model | Keep pages focused | Sales director | High | Done | Page budgets | Each page declares one primary question | UI constraint |
+| FLR-062 Selectable heatmap modes | Show one visual pattern at a time | Sales director | High | Done | Heatmap route | Selected mode controls all cells | Derived display only |
+| FLR-063 Insight-card standard | Standardise executive insight cards | Sales director | High | Done | Narrative content | Cards contain conclusion, implication, banks, conviction and Explore | Reusable component function |
+| FLR-064 Narrative quality validator | Flag weak executive narrative | Product reviewer | High | Done | Tests | Duplicate and jargon checks fail invalid text | Validation only |
+| FLR-065 Page-content budgets | Prevent overloaded pages | Product reviewer | High | Done | Page metadata | Tests assert limits | UI governance |
+| FLR-066 Context-preserving drill-down | Keep user oriented | Sales director | High | Done | Breadcrumbs | Drill-down pages retain parent trail | Navigation pattern |
+| FLR-067 Account tab navigation | Simplify account pages | Sales director | High | Done | Account overview | Seven overview sections plus secondary tabs | Presentation projection only |
+| FLR-068 Opportunity detail journey | Show opportunity before metadata | Sales director | High | Done | Opportunity routes | Opportunity detail follows twelve-step journey | Detail remains accessible |
+| FLR-069 Executive usability testing | Validate sales-director readiness | Reviewer | Medium | Added | Rendered artefacts | Commercial acceptance checklist can be answered | Future research task |

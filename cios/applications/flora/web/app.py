@@ -38,7 +38,7 @@ from cios.applications.flora.enterprise_intelligence.runtime import EnterpriseIn
 from cios.applications.flora.architecture_export import architecture_export_page, record_download
 from cios.applications.flora.runtime.increment1_views import increment1_workspace_page
 from cios.applications.flora.enterprise_intelligence.explain import executive_presentation_for_explanation, increment2_runtime_path, audit_event, evidence_trust_view, claim_evidence_summaries
-from cios.applications.flora.banking_portfolio import portfolio_page as banking_portfolio_page, bank_page as banking_bank_page, compare_page as banking_compare_page, evidence_page as banking_evidence_page, competitors_page as banking_competitors_page
+from cios.applications.flora.banking_portfolio import portfolio_page as banking_portfolio_page, banking_landing_page, industry_outlook_page, ai_native_page, ai_native_capability_model_page, timeline_page, heatmap_page, heatmap_detail_page, pipeline_page, opportunity_page as banking_opportunity_page, bank_page as banking_bank_page, compare_page as banking_compare_page, evidence_page as banking_evidence_page, competitors_page as banking_competitors_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -82,7 +82,23 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path in {"/workspace/reference", "/flora/reference"}:
                 self._html(reference_workspace_page(self.headers, saved=parse_qs(parsed.query).get("saved") == ["1"]), set_cookie=reference_resume_cookie())
             elif parsed.path == "/flora/banking":
+                self._html(banking_landing_page())
+            elif parsed.path == "/flora/banking/portfolio":
                 self._html(banking_portfolio_page())
+            elif parsed.path == "/flora/banking/outlook":
+                self._html(industry_outlook_page())
+            elif parsed.path == "/flora/banking/ai-native":
+                self._html(ai_native_page())
+            elif parsed.path == "/flora/banking/ai-native/capability-model":
+                self._html(ai_native_capability_model_page())
+            elif parsed.path == "/flora/banking/timeline":
+                self._html(timeline_page())
+            elif parsed.path == "/flora/banking/pipeline":
+                self._html(pipeline_page())
+            elif parsed.path == "/flora/banking/heatmap":
+                self._html(heatmap_page((parse_qs(parsed.query).get("mode") or ["theme-relevance"])[0]))
+            elif parsed.path == "/flora/banking/heatmap/detail":
+                q=parse_qs(parsed.query); self._html(*heatmap_detail_page((q.get("mode") or ["theme-relevance"])[0], (q.get("theme") or [""])[0], (q.get("bank") or ["lloyds"])[0]))
             elif parsed.path == "/flora/banking/compare":
                 self._html(banking_compare_page())
             elif parsed.path == "/flora/banking/competitors":
@@ -91,6 +107,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(*banking_bank_page(parsed.path.removeprefix("/flora/banking/").removesuffix("/briefing"), briefing=True))
             elif parsed.path.startswith("/flora/banking/") and parsed.path.endswith("/evidence"):
                 self._html(*banking_evidence_page(parsed.path.removeprefix("/flora/banking/").removesuffix("/evidence")))
+            elif "/opportunity/" in parsed.path and parsed.path.startswith("/flora/banking/"):
+                rest=parsed.path.removeprefix("/flora/banking/"); slug, opp_id = rest.split("/opportunity/", 1); self._html(*banking_opportunity_page(slug, opp_id))
             elif parsed.path.startswith("/flora/banking/"):
                 self._html(*banking_bank_page(parsed.path.removeprefix("/flora/banking/")))
             elif parsed.path == "/flora/object/BK-ENT-001/explain":
