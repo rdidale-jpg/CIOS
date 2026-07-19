@@ -249,6 +249,55 @@ def explain_lloyds_changes(package: ContextPackage | None = None) -> BoundedExpl
     )
 
 
+def executive_presentation_for_explanation(package: ContextPackage, explanation: BoundedExplanation) -> dict[str, Any]:
+    """Return a deterministic non-canonical presentation view for the bounded result."""
+    titles_by_change_id = {
+        "CHG-LBG-001": "Digital engagement has accelerated",
+        "CHG-LBG-002": "Deposit economics have become more commercially significant",
+        "CHG-LBG-003": "Technology transformation is visible, but outcome proof remains incomplete",
+        "CHG-LBG-004": "Halifax is moving toward a unified Lloyds customer experience",
+    }
+    unknowns_by_text = {u.statement: u for u in package.unknowns}
+    unknowns_by_lineage = {ref: u for u in package.unknowns for ref in u.lineage}
+    cards = []
+    for change in explanation.changes:
+        linked_unknowns = []
+        for limit in change.limits:
+            match = unknowns_by_text.get(limit) or next((u for u in package.unknowns if limit.rstrip(".") in u.statement or u.statement.rstrip(".") in limit), None)
+            if match and match not in linked_unknowns:
+                linked_unknowns.append(match)
+        for evidence_id in change.evidence_ids:
+            evidence = next((e for e in package.evidence if e.evidence_id == evidence_id), None)
+            if evidence:
+                for ref in evidence.lineage:
+                    match = unknowns_by_lineage.get(ref)
+                    if match and match not in linked_unknowns:
+                        linked_unknowns.append(match)
+        next_evidence = tuple(u.evidence_demand for u in linked_unknowns) or tuple(change.limits)
+        cards.append({
+            "title": titles_by_change_id.get(change.change_id, change.what_changed),
+            "change": change,
+            "what_changed": change.what_changed,
+            "why_it_matters": change.interpretation,
+            "what_we_know": change.fact_basis,
+            "what_we_do_not_know": change.limits,
+            "what_to_learn_next": next_evidence,
+            "unknowns": tuple(linked_unknowns),
+        })
+    return {
+        "headline": "What has changed at Lloyds?",
+        "introduction": f"{len(explanation.changes)} evidence-supported changes are visible in the governed Lloyds evidence. Each is separated from what remains uncertain.",
+        "synthesis": (
+            "Lloyds shows stronger evidence of digital engagement and mobile-led acquisition activity, anchored in reported digital customer scale and current-account opening patterns.",
+            "The clearest commercial spine is deposit economics: the selected evidence connects current-account liabilities, structural hedge balances and hedge income without claiming how Lloyds will allocate the economics internally.",
+            "Technology simplification, cloud and AI activity are visible, but the result remains bounded: cost and migration activity do not by themselves prove net productivity, resilience or supplier-control outcomes.",
+            "The Halifax app and brand migration is a concrete Lloyds-specific simplification signal, while operational continuity indicators mean the change should not be read as full operational separation or disruption proof.",
+            "Major Unknowns remain material, including primary-account primacy, investment allocation, technology estate detail and customer outcomes from the Halifax migration.",
+        ),
+        "cards": tuple(cards),
+    }
+
+
 SAFE_UNAVAILABLE_REASONS = {
     "unsupported_focus_object": "This Explain action is only approved for Lloyds Banking Group (BK-ENT-001).",
     "unsupported_question": "This route only supports the approved Increment 2 Lloyds change question.",

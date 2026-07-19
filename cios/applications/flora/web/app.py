@@ -37,7 +37,7 @@ from cios.applications.flora.enterprise_intelligence.models import ReasoningRequ
 from cios.applications.flora.enterprise_intelligence.runtime import EnterpriseIntelligenceRuntime
 from cios.applications.flora.architecture_export import architecture_export_page, record_download
 from cios.applications.flora.runtime.increment1_views import increment1_workspace_page
-from cios.applications.flora.enterprise_intelligence.explain import increment2_runtime_path, audit_event
+from cios.applications.flora.enterprise_intelligence.explain import executive_presentation_for_explanation, increment2_runtime_path, audit_event
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -88,7 +88,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_flora_increment2_lineage_page(parsed.path.rsplit("/", 1)[-1], self.headers))
             elif parsed.path in {"/flora/object/BK-ENT-001", "/workspace/enterprise/BK-ENT-001", "/flora/lloyds"}:
                 html, status = increment1_workspace_page("BK-ENT-001")
-                html = html.replace("</main>", "<section class='card'><h2>Increment 2 bounded Explain</h2><p><a class='primary-link' href='/flora/object/BK-ENT-001/explain'>Explain what has changed</a></p><p>Fixed Focus Object: BK-ENT-001. Fixed approved question: Q-LBG-CHANGE-EXPLAIN-001. No free-form prompt is available for this action.</p></section></main>")
+                html = html.replace("<section class='hero focus-object'", "<section class='card' aria-labelledby='lloyds-actions'><h2 id='lloyds-actions'>Lloyds Banking Group</h2><p><a class='primary-link' href='/flora/object/BK-ENT-001/explain'>Explain what has changed</a></p><p><a href='/flora/object/BK-ENT-001/context-package'>Inspect enterprise evidence</a></p><p>This governed workspace keeps evidence inspection separate from the executive explanation.</p><details><summary>Technical route metadata</summary><p>Fixed approved question: Q-LBG-CHANGE-EXPLAIN-001. No free-form prompt is available for this action.</p></details></section><section class='hero focus-object'")
                 self._html(html, status=status)
             elif parsed.path.startswith("/flora/object/"):
                 html, status = increment1_workspace_page(parsed.path.removeprefix("/flora/object/"))
@@ -471,24 +471,72 @@ def _flora_increment2_explain_page(headers=None, query=None) -> str:
     if outcome["status"] != "available":
         return _flora_increment2_safe_unavailable_page(outcome)
     package = outcome["context_package"]; explanation = outcome["explanation"]
-    sections = ["<section class='hero'><p class='eyebrow'>Lloyds Increment 2 bounded Explain</p><h1>Explain what has changed</h1><p class='lead'>This fixed action answers only the approved Lloyds change question for BK-ENT-001. It has no unrestricted prompt input.</p><p><strong>Context Package ID:</strong> {}</p><p><strong>Package hash:</strong> {}</p><p><strong>Baseline:</strong> {} / {}</p><p><a href='/flora/object/BK-ENT-001/context-package'>Inspect Context Package independently</a></p></section>".format(escape(package.package_id), escape(package.package_hash), escape(package.baseline_commit), escape(package.evaluation_baseline))]
-    sections.append("<section class='card'><h2>Explanation summary</h2><p>{}</p><h3>Evidence belongs together because</h3><ul>{}</ul></section>".format(escape(explanation.answer_scope), ''.join(f'<li>{escape(r)}</li>' for r in explanation.why_evidence_belongs_together)))
-    changes = ''.join(f"<article class='mini-card'><h3>Supported change: {escape(c.change_id)}</h3><p><strong>Fact basis:</strong> {escape('; '.join(c.fact_basis))}</p><p><strong>Interpretation:</strong> {escape(c.interpretation)}</p><p><strong>Confidence limit:</strong> {escape('; '.join(c.limits))}</p><p><strong>Evidence:</strong> {escape(', '.join(c.evidence_ids))} <strong>Observations:</strong> {escape(', '.join(c.observation_ids) or 'none')}</p><p><a href='/flora/object/BK-ENT-001/lineage/{escape(c.change_id)}'>Inspect claim-level lineage</a></p></article>" for c in explanation.changes)
-    sections.append(f"<section class='card'><h2>Supported changes</h2>{changes}</section>")
-    passages = ''.join(f"<article class='mini-card'><h3>Source passage {escape(p.passage_id)}</h3><p><strong>Source:</strong> {escape(p.source_id)} · <strong>Date:</strong> {escape(p.date)}</p><blockquote>{escape(p.content)}</blockquote></article>" for p in package.source_passages)
-    sections.append(f"<section class='card'><h2>Source passages</h2>{passages}</section>")
-    sections.append("<section class='card'><h2>Evidence</h2>{}</section>".format(''.join(f'<p><strong>{escape(e.evidence_id)}</strong> — {escape(e.claim)}</p>' for e in package.evidence)))
-    sections.append("<section class='card'><h2>Governed Observations</h2>{}</section>".format(''.join(f'<p><strong>{escape(o.observation_id)}</strong> — {escape(o.statement)}</p>' for o in package.observations)))
-    sections.append("<section class='card'><h2>Bounded interpretations</h2>{}</section>".format(''.join(f'<p><strong>{escape(c.change_id)}</strong> — {escape(c.interpretation)}</p>' for c in explanation.changes)))
-    sections.append("<section class='card unknown'><h2>Unknowns</h2>{}</section>".format(''.join(f'<p><strong>{escape(u.unknown_id)}</strong> — {escape(u.statement)} <strong>Next Evidence demand:</strong> {escape(u.evidence_demand)}</p>' for u in explanation.unknowns)))
-    sections.append("<section class='card contradiction'><h2>Competing interpretations</h2>{}</section>".format(''.join(f'<p><strong>{escape(t.contradiction_id)}</strong> — {escape(t.interpretation)}</p>' for t in explanation.contradictions_and_competing_interpretations)))
-    sections.append("<section class='card'><h2>Confidence limits</h2><ul>{}</ul><h2>Next Evidence demands</h2><ul>{}</ul><h2>Runtime audit events</h2><p>{} non-canonical events retained for this route.</p></section>".format(''.join(f'<li>{escape(x)}</li>' for x in explanation.confidence_limits), ''.join(f'<li>{escape(x)}</li>' for x in explanation.inspect_next), len(outcome['audit_events'])))
-    return _flora_v2_page("Lloyds Increment 2 Explain", "focus", ''.join(sections), _account_context_html(blueprint_upload_authorisation(headers or {})))
+    presentation = executive_presentation_for_explanation(package, explanation)
+    evidence_by_id = {e.evidence_id: e for e in package.evidence}
+    observations_by_id = {o.observation_id: o for o in package.observations}
+    passages_by_id = {p.passage_id: p for p in package.source_passages}
+
+    def _items(items):
+        return ''.join(f'<li>{escape(str(item))}</li>' for item in items) or '<li>None stated in the governed result.</li>'
+
+    def _inspection(card):
+        c = card["change"]
+        refs = []
+        for eid in c.evidence_ids:
+            ev = evidence_by_id[eid]
+            passages = ''.join(
+                f"<article class='mini-card'><h5>{escape(ref)}</h5><p><strong>Document:</strong> {escape(passages_by_id[ref].source_id)}</p><blockquote>{escape(passages_by_id[ref].content)}</blockquote></article>"
+                for ref in ev.lineage if ref in passages_by_id
+            )
+            refs.append(f"<article><h4>{escape(eid)}</h4><p>{escape(ev.claim)}</p><p><strong>Lineage:</strong> {escape(', '.join(ev.lineage))}</p>{passages}</article>")
+        obs = ''.join(f"<li>{escape(oid)} — {escape(observations_by_id[oid].statement)}</li>" for oid in c.observation_ids if oid in observations_by_id)
+        return f"""
+        <details class='inspection'>
+          <summary>Inspect evidence</summary>
+          <p><strong>Internal claim ID:</strong> {escape(c.change_id)}</p>
+          <p><strong>Context Package identity:</strong> {escape(package.package_id)} · {escape(package.package_hash)}</p>
+          <p><strong>Evidence IDs:</strong> {escape(', '.join(c.evidence_ids))}</p>
+          <p><strong>Observation IDs:</strong> {escape(', '.join(c.observation_ids) or 'none')}</p>
+          <h4>Governed Observations</h4><p class='visually-hidden'>Bounded interpretations</p><ul>{obs or '<li>No governed Observation linked to this claim.</li>'}</ul>
+          <h4>Evidence, Source passages and claim-level lineage</h4>{''.join(refs)}
+          <p><a href='/flora/object/BK-ENT-001/lineage/{escape(c.change_id)}'>Open claim-level lineage page</a></p>
+        </details>
+        """
+
+    cards = ''.join(
+        f"""<article class='card change-card'>
+          <h2>{escape(card['title'])}</h2>
+          <div class='exec-grid'>
+            <section><h3>What changed</h3><p>{escape(card['what_changed'])}</p></section>
+            <section><h3>Why it matters</h3><p>{escape(card['why_it_matters'])}</p></section>
+            <section><h3>What we know</h3><ul>{_items(card['what_we_know'])}</ul></section>
+            <section><h3>What we do not know</h3><ul>{_items(card['what_we_do_not_know'])}</ul></section>
+            <section><h3>What to learn next</h3><ul>{_items(card['what_to_learn_next'])}</ul></section>
+          </div>
+          {_inspection(card)}
+        </article>""" for card in presentation["cards"]
+    )
+    body = f"""
+    <section class='hero executive-explain'>
+      <p class='eyebrow'>Lloyds Banking Group</p>
+      <h1>{escape(presentation['headline'])}</h1>
+      <p class='lead'>{escape(presentation['introduction'])}</p>
+      <p><a href='/flora/object/BK-ENT-001'>Back to Lloyds workspace</a> · <a href='/flora/object/BK-ENT-001/context-package'>Inspect enterprise evidence</a></p>
+    </section>
+    <section class='card synthesis'><h2>Executive synthesis</h2><p class='visually-hidden'>Explanation summary</p>{''.join(f'<p>{escape(p)}</p>' for p in presentation['synthesis'])}</section>
+    <section aria-labelledby='supported-change-title'><h2 id='supported-change-title'>Supported change cards</h2><p class='visually-hidden'>Supported changes</p>{cards}</section>
+    <section class='card unknown'><h2>Cross-cutting Unknowns</h2><p class='visually-hidden'>Unknowns</p>{''.join(f'<article><h3>{escape(u.unknown_id)}</h3><p>{escape(u.statement)}</p><p><strong>What to learn next:</strong> {escape(u.evidence_demand)}</p></article>' for u in explanation.unknowns)}</section>
+    <section class='card contradiction'><h2>Competing interpretations</h2>{''.join(f'<p><strong>{escape(t.contradiction_id)}</strong> — {escape(t.interpretation)}</p>' for t in explanation.contradictions_and_competing_interpretations)}</section>
+    <section class='card'><h2>Confidence limits</h2><ul>{_items(explanation.confidence_limits)}</ul></section>
+    <section class='card'><h2>Next Evidence demands</h2><ul>{_items(explanation.inspect_next)}</ul></section>
+    <section class='card'><h2>Technical inspection and runtime metadata</h2><p><strong>Context Package ID:</strong> {escape(package.package_id)}</p><p><strong>Package hash:</strong> {escape(package.package_hash)}</p><p><strong>Baseline:</strong> {escape(package.baseline_commit)} / {escape(package.evaluation_baseline)}</p><p>{len(outcome['audit_events'])} non-canonical runtime audit events retained for this route.</p><details><summary>Source passages</summary>{''.join(f'<article class="mini-card"><h3>Source passage {escape(p.passage_id)}</h3><p><strong>Document:</strong> {escape(p.source_id)} · <strong>Date:</strong> {escape(p.date)}</p><blockquote>{escape(p.content)}</blockquote></article>' for p in package.source_passages)}</details><p><a href='/flora/object/BK-ENT-001/context-package'>Inspect Context Package independently</a></p></section>
+    """
+    return _flora_v2_page("What has changed at Lloyds?", "focus", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
 
 def _flora_increment2_safe_unavailable_page(outcome: dict) -> str:
     from html import escape
     retained = ''.join(f'<li>{escape(e.evidence_id)} — {escape(e.claim)}</li>' for e in outcome.get('retained_evidence', ()))
-    body = f"<section class='hero'><p class='eyebrow'>Safe unavailable</p><h1>Explanation unavailable</h1><p><strong>Reason category:</strong> {escape(outcome['reason_category'])}</p><p>{escape(outcome['user_text'])}</p><p><strong>Affected identifier:</strong> {escape(outcome['affected_identifier'])}</p><h2>Retained inspectable Evidence where safe</h2><ul>{retained}</ul><h2>Evidence required to improve the answer</h2><ul>{''.join(f'<li>{escape(x)}</li>' for x in outcome['evidence_required'])}</ul></section>"
+    body = f"<section class='hero safe-unavailable'><p class='eyebrow'>Safe unavailable</p><h1>Flora cannot produce a governed explanation from the currently available evidence.</h1><p><strong>Reason category:</strong> {escape(outcome['reason_category'])}</p><p>{escape(outcome['user_text'])}</p><p><strong>Missing Evidence requirement:</strong></p><ul>{''.join(f'<li>{escape(x)}</li>' for x in outcome['evidence_required'])}</ul><p><strong>Safe next evidence action:</strong> inspect or add governed Lloyds evidence with lineage before requesting Explain again.</p><p><strong>Affected identifier:</strong> {escape(outcome['affected_identifier'])}</p><details><summary>Retained inspectable Evidence where safe</summary><ul>{retained}</ul></details></section>"
     return _flora_v2_page("Increment 2 safe unavailable", "focus", body, _account_context_html(blueprint_upload_authorisation({})))
 
 def _flora_increment2_context_package_page(headers=None) -> str:
