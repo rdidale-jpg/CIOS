@@ -1,0 +1,21 @@
+{
+  "artifact_version": "increment-2-semantic-replay-v0.2",
+  "baseline_preserved": "e7dca8e",
+  "replay_run_id": "i2-closure-replay-2026-07-19-v0.2",
+  "date": "2026-07-19",
+  "source_baseline": "Lloyds-Semantic-Evaluation-Dataset.json",
+  "context_package_id": "cp-runtime-deterministic",
+  "context_package_hash": "recorded by runtime tests from immutable package",
+  "worker_version": "deterministic-bounded-explain-worker-v0.2",
+  "validator_version": "increment-2-context-and-output-validators-v0.2",
+  "three_execution_results": ["no material semantic variance", "no material semantic variance", "no material semantic variance"],
+  "material_claims": ["digital scale and mobile account opening", "deposit structural hedge and NII spine", "simplification cloud and AI visibility with supplier-control uncertainty", "Halifax-to-Lloyds brand/app migration"],
+  "evidence_references": ["EV-LBG-001", "EV-LBG-002", "EV-LBG-003", "EV-LBG-004", "EV-LBG-005", "EV-LBG-006"],
+  "unknowns": ["Lloyds-specific primary-bank, programme funding, workload criticality and customer-outcome gaps remain visible"],
+  "competing_interpretations": ["digital engagement versus primary-account primacy", "simplification benefit versus migration/supplier risk"],
+  "confidence_limits": ["company-reported figures are evidence not independent validation", "sector-general content is not Lloyds fact", "change claims require dated source support"],
+  "validator_outcomes": ["context package pass", "bounded explanation pass", "prohibited output rejection pass"],
+  "comparison_with_pre_increment_2_evaluation": "Separately versioned v0.2 replay; e7dca8e semantic baseline not overwritten.",
+  "reviewer_conclusions": "Architecture and commercial reviewers approve closure subject to tests recorded in closure report.",
+  "confirmation": ["substantive source content drives explanation", "governed content improves evidence discipline", "output is not merely Observation paraphrase", "Lloyds specificity is preserved", "sector-general content is not converted into Lloyds fact", "change claims have temporal support", "unsupported causality is rejected", "wider enterprise conclusions remain prohibited"]
+}

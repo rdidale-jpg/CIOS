@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any, Literal
+from uuid import uuid4
 from pydantic import BaseModel, ConfigDict, Field
 
 from .models import stable_hash, now_iso
@@ -234,7 +236,7 @@ def explain_lloyds_changes(package: ContextPackage | None = None) -> BoundedExpl
         explanation_id="explain-" + stable_hash({"package": package.package_hash, "question": package.approved_question})[:16],
         context_package_id=package.package_id, context_package_hash=package.package_hash,
         focus_object=package.focus_object, question=package.approved_question,
-        answer_scope="Bounded Lloyds explanation derived only from the Context Package; no recommendations, opportunity scores, broad strategy, or uncited claims.",
+        answer_scope="Bounded Lloyds explanation derived only from the Context Package; no recommendations; bounded evidence-only explanation; prohibited capabilities remain absent.",
         changes=changes,
         why_evidence_belongs_together=("Evidence is linked by explicit lineage from source passages to derived evidence and governed observations.", "Lloyds-specific claims are separated from sector context; the Critical Third Party item is related only through Lloyds' Google Cloud usage.", "Unknowns and tensions are retained beside supporting facts rather than hidden."),
         directly_about_lloyds=tuple(e.evidence_id for e in package.evidence if e.lloyds_direct),
@@ -245,6 +247,106 @@ def explain_lloyds_changes(package: ContextPackage | None = None) -> BoundedExpl
         inspect_next=("Comparable Lloyds transaction-flow or primary-bank data.", "Board/investment governance or programme funding evidence.", "Technology estate and resilience evidence below public-report granularity.", "Customer outcome evidence from Halifax/Lloyds brand and app migration."),
         prohibited_outputs=("recommendation", "opportunity_score", "named sponsor assertion", "budget assertion", "causality beyond package lineage"),
     )
+
+
+SAFE_UNAVAILABLE_REASONS = {
+    "unsupported_focus_object": "This Explain action is only approved for Lloyds Banking Group (BK-ENT-001).",
+    "unsupported_question": "This route only supports the approved Increment 2 Lloyds change question.",
+    "invalid_context_package": "The Context Package did not pass deterministic validation.",
+    "insufficient_substantive_evidence": "There is not enough substantive Lloyds Evidence to answer safely.",
+    "insufficient_temporal_baseline": "The package does not contain enough dated source content to support change claims.",
+    "invalid_lineage": "One or more claims cannot be traced back to package Evidence and source passages.",
+    "bounded_explanation_validation_failed": "The bounded explanation did not pass output validation.",
+    "prohibited_output_detected": "The generated output contained prohibited capability language and was not rendered.",
+    "source_content_inaccessible": "Required source content is not currently accessible.",
+}
+
+
+def audit_event(event_type: str, package: ContextPackage | None, *, correlation_id: str, route_identifier: str, validator_outcome: str = "not_applicable", failure_reason: str = "") -> dict[str, Any]:
+    event = {
+        "event_id": "audit-" + stable_hash({"event_type": event_type, "correlation_id": correlation_id, "route": route_identifier})[:16],
+        "event_type": event_type,
+        "correlation_id": correlation_id,
+        "focus_object_id": package.focus_object_id if package else "BK-ENT-001",
+        "approved_question_id": package.approved_question_id if package else "Q-LBG-CHANGE-EXPLAIN-001",
+        "context_package_id": package.package_id if package else "not_available",
+        "context_package_version": "increment-2-context-package-v0.2",
+        "context_package_hash": package.package_hash if package else "not_available",
+        "retrieval_policy_version": package.retrieval_policy_version if package else "flora-increment-2-retrieval-policy-v0.1",
+        "corpus_baseline": package.corpus_baseline if package else "not_available",
+        "evaluation_baseline": package.evaluation_baseline if package else "lloyds-semantic-evaluation-v1",
+        "worker_or_model_identifier": "deterministic-bounded-explain-worker-v0.2",
+        "prompt_version": "not_applicable",
+        "execution_timestamp": now_iso(),
+        "validator_outcome": validator_outcome,
+        "failure_reason": failure_reason,
+        "route_identifier": route_identifier,
+        "lifecycle_classification": "non_canonical_runtime_audit_event",
+    }
+    append_runtime_audit_event(event)
+    return event
+
+
+def runtime_audit_log_path() -> Path:
+    base = Path(os.environ.get("FLORA_DATA_DIR", str(ROOT / ".flora_runtime")))
+    return base / "non_canonical_runtime_audit" / "increment-2-lloyds-explain.jsonl"
+
+
+def append_runtime_audit_event(event: dict[str, Any]) -> None:
+    path = runtime_audit_log_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(event, sort_keys=True) + "\n")
+
+
+def increment2_runtime_path(*, focus_object_id: str = "BK-ENT-001", approved_question_id: str = "Q-LBG-CHANGE-EXPLAIN-001", correlation_id: str | None = None, route_identifier: str = "/flora/object/BK-ENT-001/explain") -> dict[str, Any]:
+    correlation_id = correlation_id or "corr-" + uuid4().hex[:12]
+    package = None
+    events: list[dict[str, Any]] = []
+    if focus_object_id != "BK-ENT-001":
+        return safe_unavailable_payload("unsupported_focus_object", None, correlation_id, route_identifier, events)
+    package = assemble_lloyds_context_package()
+    events.append(audit_event("approved_question_validation", package, correlation_id=correlation_id, route_identifier=route_identifier, validator_outcome="pending"))
+    if approved_question_id != package.approved_question_id:
+        return safe_unavailable_payload("unsupported_question", package, correlation_id, route_identifier, events)
+    for event_type in ("context_plan_creation", "governed_retrieval", "exclusions", "context_package_assembly"):
+        events.append(audit_event(event_type, package, correlation_id=correlation_id, route_identifier=route_identifier))
+    valid_package, package_failures = validate_context_package(package)
+    events.append(audit_event("package_validation", package, correlation_id=correlation_id, route_identifier=route_identifier, validator_outcome="pass" if valid_package else "fail", failure_reason="; ".join(package_failures)))
+    if not valid_package:
+        reason = "invalid_lineage" if any("lineage" in f for f in package_failures) else "invalid_context_package"
+        return safe_unavailable_payload(reason, package, correlation_id, route_identifier, events, package_failures)
+    if not any(e.lloyds_direct for e in package.evidence):
+        return safe_unavailable_payload("insufficient_substantive_evidence", package, correlation_id, route_identifier, events)
+    if len({p.date for p in package.source_passages if p.date}) < 2:
+        return safe_unavailable_payload("insufficient_temporal_baseline", package, correlation_id, route_identifier, events)
+    if any(p.access_state != "available" for p in package.source_passages):
+        return safe_unavailable_payload("source_content_inaccessible", package, correlation_id, route_identifier, events)
+    events.append(audit_event("package_freezing", package, correlation_id=correlation_id, route_identifier=route_identifier, validator_outcome="pass"))
+    explanation = explain_lloyds_changes(package)
+    events.append(audit_event("bounded_explain_execution", package, correlation_id=correlation_id, route_identifier=route_identifier))
+    valid_explanation, output_failures = validate_bounded_explanation(package, explanation)
+    events.append(audit_event("output_validation", package, correlation_id=correlation_id, route_identifier=route_identifier, validator_outcome="pass" if valid_explanation else "fail", failure_reason="; ".join(output_failures)))
+    if not valid_explanation:
+        reason = "prohibited_output_detected" if any("prohibited" in f for f in output_failures) else "bounded_explanation_validation_failed"
+        return safe_unavailable_payload(reason, package, correlation_id, route_identifier, events, output_failures)
+    return {"status": "available", "correlation_id": correlation_id, "context_package": package, "explanation": explanation, "audit_events": tuple(events)}
+
+
+def safe_unavailable_payload(reason_category: str, package: ContextPackage | None, correlation_id: str, route_identifier: str, events: list[dict[str, Any]], failures: tuple[str, ...] = ()) -> dict[str, Any]:
+    events.append(audit_event("safe_unavailable_outcome", package, correlation_id=correlation_id, route_identifier=route_identifier, validator_outcome="fail", failure_reason=reason_category))
+    return {
+        "status": "safe_unavailable",
+        "reason_category": reason_category,
+        "user_text": SAFE_UNAVAILABLE_REASONS[reason_category],
+        "affected_identifier": package.package_id if package else "BK-ENT-001",
+        "evidence_required": ("Accessible Lloyds source passages with dates, claim lineage, governed Evidence, Observations, Unknowns and competing interpretations.",),
+        "retained_evidence": package.evidence if package else (),
+        "context_package": package,
+        "failures": failures,
+        "correlation_id": correlation_id,
+        "audit_events": tuple(events),
+    }
 
 
 def run_increment2_explain(output_path: Path | None = None) -> dict[str, Any]:
