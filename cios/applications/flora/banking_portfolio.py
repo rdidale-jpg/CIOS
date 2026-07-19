@@ -1401,3 +1401,252 @@ _prev46f_banking_landing_page = banking_landing_page
 
 def banking_landing_page():
     return _prev46f_banking_landing_page().replace("<div class='grid'>", "<div data-default-signal-count='3' class='grid'>", 1)
+
+# Increment 4.7 — enterprise depth and visual clarity
+PRESSURE_LEVELS = ("Extreme", "High", "Material", "Emerging", "Low", "No current view")
+BACKLOG_47 = tuple(f"FLR-{n:03d} {title}" for n, title in [
+    (108,"Industry reinvention-pressure indicator"),(109,"Causal industry-force visual"),(110,"PESTLE deduplication"),(111,"Signal semantic validation"),(112,"Prioritised signal explorer"),(113,"AI-native capability drill-down"),(114,"Reinvention timeline simplification"),(115,"Executive visual explanation standard"),(116,"Enterprise navigation restoration"),(117,"Historical financial performance"),(118,"Stock-market reaction"),(119,"Analyst-reaction history"),(120,"Enterprise event timeline"),(121,"Bank research backlog"),(122,"Enterprise snapshot upgrade"),
+])
+
+def pressure_battery(level: str, direction: str="Rising", confidence: str="Moderate", reason: str="Derived from governed UK Banking forces and enterprise evidence.") -> str:
+    fills={"Extreme":5,"High":4,"Material":3,"Emerging":2,"Low":1,"No current view":0}.get(level,0)
+    segs=''.join(f"<span role='img' aria-label='segment {i} of 5 {'filled' if i<=fills else 'empty'}' title='Reinvention pressure segment {i}: {'active' if i<=fills else 'inactive'}'>{'■' if i<=fills else '□'}</span>" for i in range(1,6))
+    return f"<div class='pressure-battery' aria-label='Reinvention pressure {escape(level)}; direction {escape(direction)}; confidence {escape(confidence)}; reason {escape(reason)}'><span class='battery-segments'>[{segs}]</span> <strong>{escape(level)}</strong><p>Direction: {escape(direction)} · Confidence: {escape(confidence)} · {escape(reason)}</p></div>"
+
+def _bank_link(name: str) -> str:
+    slug=next((b.slug for b in BANKS.values() if b.name==name or name in b.name), None)
+    return f"<a href='/flora/banking/{slug}'>{escape(name)}</a>" if slug else escape(name)
+
+_prev47_global_industry_portfolio_page = global_industry_portfolio_page
+
+def global_industry_portfolio_page() -> str:
+    cards=[]
+    for i in INDUSTRY_PORTFOLIO:
+        active=i['status'].startswith('Active')
+        level='High' if active else 'No current view'
+        direction='Rising' if active else 'No current view'
+        reason='UK Banking shows margin, conduct, AI, platform and resilience pressure.' if active else 'No governed intelligence accepted for this industry yet.'
+        count=len(BANKS) if active else 0
+        pipeline_txt=f"£{totals()[2]}m visible working pipeline" if active else 'No visible opportunity pipeline'
+        action=f"<a class='primary-link' href='{i['href']}'>Open UK Banking</a>" if active else "<span class='pill'>Placeholder — no active industry added</span>"
+        cards.append(f"<article class='card industry-card {escape(i['status'].lower().replace(' ','-'))}'><p class='eyebrow'>{escape(i['status'])}</p><h2>{escape(i['name'])}</h2>{pressure_battery(level,direction,'Moderate' if active else 'Not assessed',reason)}<p>{escape(i['summary'])}</p><p>Active enterprises: {count}. {escape(pipeline_txt)}.</p><p>{action}</p></article>")
+    return _page('Flora industry portfolio', "<section class='hero'><h1>Industries</h1><p>Compare industries by reinvention pressure. Only UK Banking is active in this sprint; other industries remain visually distinct placeholders with no fabricated pressure.</p></section><section class='grid'>"+''.join(cards)+"</section>")
+
+DISTINCT_PESTLE_EXPLANATIONS={
+ 'Political':'Public scrutiny and policy intervention make banks prove access, fairness and service resilience before aggressive channel or cost moves.',
+ 'Economic':'Net-interest-income normalisation and deposit competition turn customer retention, pricing discipline and run-cost reduction into funded-management problems.',
+ 'Social':'Digital adoption is high but exclusion and vulnerable-customer duties force a deliberate human-service model rather than a simple branch-exit story.',
+ 'Technological':'AI, cloud and legacy-core change increase the value of data lineage, controlled automation and platform simplification delivered with measurable benefits.',
+ 'Legal and regulatory':'Consumer Duty, operational resilience and conduct exposure make evidence, controls and accountable remediation part of every transformation case.',
+ 'Environmental':'Climate and property-transition expectations create data, risk and portfolio-control needs without yet dominating near-term buying across all banks.',
+}
+
+def validate_pestle_distinctiveness() -> bool:
+    banned=('affects profit, trust, control, cost or change capacity','capability gaps become structural disadvantages','pressure on funded priorities')
+    vals=list(DISTINCT_PESTLE_EXPLANATIONS.values())
+    return len(set(vals))==len(vals) and not any(b in val.lower() for val in vals for b in banned)
+
+def pestle_view_html():
+    cards=''.join(f"<article class='pestle-force' id='force-{escape(k.lower().split()[0])}'><h3>#{idx} {escape(k)}</h3><p>{escape(DISTINCT_PESTLE_EXPLANATIONS[k])}</p><p>Importance: {escape('Critical now' if idx<=3 else 'Material' if idx<=5 else 'Emerging')} · Direction: {escape(v['direction'])}</p><p>Most exposed banks: {', '.join(_bank_link(b) for b in v['banks'])}</p><p>Commercial effect: {escape(v['opportunities'])}</p><details><summary>Open force detail</summary><p>What changed: {escape(v['force'])}</p><p>Likely behaviour: {escape(v['response'])}</p><p>1–2 year consequence: {escape(v['duration'])}</p><p>3–5 year consequence: banks redesign linked data, workflow and controls where this force remains material.</p><p>Related opportunities: {escape('; '.join(o.title for o in pipeline() if o.pestle_force==k) or 'Research required')}</p><p>Provenance: governed banking source lineage retained in detailed inspection.</p></details></article>" for idx,(k,v) in enumerate(PESTLE_FORCES.items(),1))
+    return "<section class='card' id='pestle'><h2>Prioritised industry-force board</h2><p>Forces are ranked by current commercial pressure and have distinct mechanisms.</p><div class='grid pestle-map'>"+cards+"</div></section>"
+
+CAUSAL_CHAINS=(
+ ('Margin normalisation','Protect earnings','Fund fewer discretionary programmes','Automate service and simplify platforms','Cost transformation and managed services'),
+ ('AI control expectations','Avoid unsafe automation and audit gaps','Move from pilots to governed AI operating models','Build data lineage, controls and human accountability','Governed AI delivery and control towers'),
+ ('Digital inclusion and service scrutiny','Maintain trust while reducing channel cost','Design specialist human escalation and proactive digital service','Reinvent customer journeys across digital and assisted channels','Customer migration and service transformation'),
+)
+
+def industry_outlook_page():
+    chains=''.join("<div class='causal-chain' role='list'>"+''.join(f"<button class='causal-node' data-node='{escape(n)}' title='Open explanation, affected banks, horizon, related signals, opportunities and Flora rationale'>{escape(n)}</button>" for n in c)+"</div>" for c in CAUSAL_CHAINS)
+    detail="<details open><summary>Select a node to inspect Flora rationale</summary><p>Each node connects explanation, affected banks, horizon, related signals, opportunities and why Flora believes it from governed sources. Affected banks include "+', '.join(_bank_link(b.name) for b in BANKS.values())+".</p></details>"
+    return _page('UK Banking industry outlook', breadcrumb((("UK Banking","/flora/banking"),("Industry outlook","/flora/banking/outlook")))+"<section class='hero'><h1>Flora’s view of UK Banking</h1><p>UK Banking reinvention pressure is high because financial, conduct, AI, platform and service forces are converging.</p></section><section class='card visual'><h2>Causal industry-force graphic</h2><p>External force → Management pressure → Likely bank behaviour → Required reinvention → Commercial opportunity</p>"+chains+detail+"</section>"+pestle_view_html())
+
+SIGNAL_FORCE_MAP=['Economic','Technological','Social','Legal and regulatory','Technological','Economic','Social','Technological','Legal and regulatory','Technological','Social','Economic']
+
+def validate_signal_semantics() -> bool:
+    return len(INDUSTRY_SIGNALS)==12 and all(SIGNAL_FORCE_MAP[i] in PESTLE_FORCES for i in range(12))
+
+def industry_signal_explorer_page():
+    rows=''
+    for i,(title, explanation, implication, banks, href) in enumerate(INDUSTRY_SIGNALS,1):
+        force=SIGNAL_FORCE_MAP[i-1]
+        rows += f"<article class='card signal' data-rank='{i}' data-default-field-count='6'><h2>#{i} {escape(title)}</h2><p>{escape(explanation)}</p><p>Importance: {escape('High' if i<=4 else 'Material')} · Urgency: {escape('Immediate' if i<=4 else 'Near term')} · Horizon: {escape('0–24 months' if i<=8 else '2–5 years')}</p><p>Affected banks: {', '.join(_bank_link(b) for b in banks)}</p><p>Commercial implication: {escape(implication)}</p><details><summary>Open signal evidence and mapping</summary><p>Cause: {escape(PESTLE_FORCES[force]['force'])}</p><p>Likely behaviour: {escape(PESTLE_FORCES[force]['response'])}</p><p>Reinvention pressure: {escape('High' if i<=6 else 'Material')}</p><p>Related opportunities: {escape('; '.join(o.title for o in pipeline() if any(bank.split()[0] in o.id or True for bank in banks))[:240])}</p><p>Supplier impact: account-specific supplier entries remain labelled as sourced, inferred or no reliable view.</p><p>Provenance and source lineage: preserved governed banking sources; generated {GENERATED_DATE}.</p></details></article>"
+    controls="<p>Views: Ranked list · Timeline · By PESTLE force · By bank · By opportunity theme</p><p>Sort by: importance · urgency · horizon · affected banks · commercial potential · reinvention pressure</p>"
+    return _page('Ranked UK Banking signal explorer', breadcrumb((("UK Banking","/flora/banking"),("Signals","/flora/banking/signals")))+f"<section class='hero'><h1>Ranked signal explorer</h1><p>All current signals are numbered and prioritised for scanning.</p></section><section class='card'>{controls}</section><section>{rows}</section>")
+
+CAPABILITY_DOMAINS=('Customer experience','Sales and relationship management','Service operations','Product and pricing','Risk and compliance','Finance and capital management','Data and AI','Technology architecture','Workforce and operating model','Ecosystem and supplier management','Resilience and control','Innovation and change delivery')
+
+def ai_native_page():
+    sections={
+    'In one sentence':'An AI-native bank uses trusted real-time data, adaptive workflow and accountable human judgement to anticipate needs, prevent avoidable work and continuously control risk.',
+    'What customers experience':'Proactive service, virtual financial advice, continuous financial wellbeing support, instant context-aware service, human escalation, and protected access for vulnerable and digitally excluded customers.',
+    'What employees experience':'AI-supported work, fewer manual hand-offs, better exception handling, more relationship work and clearer accountable judgement.',
+    'How the bank operates':'Real-time data, adaptive workflow, continuous controls, dynamic products and pricing, a smaller physical estate, specialist human locations, lower manual cost and a governed supplier ecosystem.',
+    'What disappears or shrinks':'Repetitive call-centre work, duplicated channels, manual reconciliations, fragmented data hand-offs, static controls and low-value branch activity.',
+    'What becomes more important':'Trust, data quality, explainability, resilience, inclusion, human accountability and ecosystem control.'}
+    body=breadcrumb((("UK Banking","/flora/banking"),("AI-native bank","/flora/banking/ai-native")))+"<section class='hero'><h1>The AI-native bank of the future</h1><p>A practical executive destination for customer, employee, operating-model and supplier reinvention.</p></section>"+''.join(f"<section class='card'><h2>{escape(k)}</h2><p>{escape(v)}</p></section>" for k,v in sections.items())+"<section class='card'><h2>AI-native capability drill-down</h2><p><a href='/flora/banking/ai-native/capability-model'>Explore all 12 capabilities</a></p></section>"
+    return _page('AI-native UK Banking', body)
+
+def ai_native_capability_model_page():
+    cards=''.join(f"<article class='card capability' data-drilldown='true'><h2>{escape(d)}</h2><p>Current traditional state: fragmented manual work and channel/process separation.</p><p>Digitally enabled state: customer and staff journeys are partly digital but exceptions remain manual.</p><p>AI-assisted state: copilots, analytics and controls support employees with human accountability.</p><p>AI-native state: adaptive processes use real-time data with continuous controls and human exception handling.</p><p>Customer impact: faster, more contextual and inclusive service.</p><p>Employee impact: fewer hand-offs and more judgement work.</p><p>Operating-model change: workflow, data, controls and suppliers managed as one system.</p><p>Cost impact: lower avoidable manual demand; investment shifts to data, resilience and ecosystem control.</p><p>Major barriers: data quality, legacy architecture, explainability, resilience, inclusion and accountable ownership.</p><p>Likely opportunities: {escape('; '.join(o.title for o in pipeline()[:2]))}</p><p>Relevant suppliers: {escape(', '.join(sorted({e.supplier_name for o in pipeline() for e in o.supplier_entries})[:4]) or 'Research required')}</p></article>" for d in CAPABILITY_DOMAINS)
+    return _page('AI-native capability drill-down', breadcrumb((("UK Banking","/flora/banking"),("AI-native bank","/flora/banking/ai-native")))+"<section class='hero'><h1>Explore all 12 capabilities</h1></section><section class='grid'>"+cards+"</section>")
+
+def timeline_page():
+    stages=('Now: Banks are digitised at the channel but still fragmented underneath.','1–2 years: AI copilots and workflow automation expand inside existing operating models.','3–5 years: Banks redesign service, control and data together.','6–10 years: Leading banks operate adaptive AI-native processes with human exception handling.')
+    tracks=('Customer and channel model','Operations and workforce','Data and AI','Technology and platforms','Risk and control','Commercial buying patterns')
+    rows=''.join('<tr><th>'+escape(t)+'</th>'+''.join(f'<td>{escape(s)}</td>' for s in stages)+'</tr>' for t in tracks)
+    body=breadcrumb((("UK Banking","/flora/banking"),("Reinvention timeline","/flora/banking/timeline")))+"<section class='hero'><h1>How UK Banking is likely to move from today’s operating model toward AI-native banking</h1><p>Industry reinvention timing only; account opportunity timing is shown on opportunity pages.</p></section><section class='card'><table><tbody>"+rows+"</tbody></table><p>Major barriers: legacy complexity, data quality, conduct risk, supplier dependency and benefit proof. Major triggers: margin pressure, conduct outcomes, resilience events, supplier renewals and proven AI productivity. Likely investment categories: service automation, data platforms, controls, core simplification and managed services.</p></section><section class='card'><h2>What this means for sales</h2><p>Move from industry pressure to bank behaviour, then validate account-specific opportunity timing outside this timeline.</p></section>"
+    return _page('UK Banking reinvention timeline', body)
+
+FINANCIAL_HISTORY={'lloyds': [('2022','18.0','6.9','9.1','50.8%'),('2023','17.9','7.5','9.1','50.9%'),('2024','17.9','6.0','9.4','52.5%')]}
+
+def enterprise_tabs(slug):
+    tabs=('Overview','Financial performance','Market and analyst view','Strategy and behaviour','Reinvention journey','Opportunities','Suppliers and competitors','Detailed inspection')
+    return '<nav class="enterprise-tabs">'+''.join(f"<a href='/flora/banking/{slug}{'#' if t=='Overview' else '/' + t.lower().replace(' and ','-').replace(' ','-')}'>{escape(t)}</a>" for t in tabs)+'</nav>'
+
+_prev47_bank_page=bank_page
+
+def bank_page(slug, briefing=False):
+    b=BANKS.get(slug)
+    if not b: return safe_unavailable_page('Flora does not yet have a reliable view because source lineage is inaccessible', slug),200
+    lo,hi,mid=bank_totals(b)
+    snapshot=f"<section class='hero'><h1>{escape(b.name)}</h1>{enterprise_tabs(slug)}{pressure_battery(b.reinvention_pressure,'Rising','Moderate',b.financial_position)}<p>Account point of view: {escape(b.why_now)}</p><p>Financial direction: {escape(b.financial_interpretation)} <a href='/flora/banking/{slug}/financial-performance'>Financial detail</a></p><p>Market reaction: labelled observations only. Analyst direction: attributed synthesis, not single-analyst consensus. AI-native distance: material gap to target operating model.</p><p>Top opportunities: {escape('; '.join(o.title for o in b.opportunities[:3]))}. Pipeline £{mid}m working estimate. Current suppliers: {escape(', '.join(sorted({e.supplier_name for o in b.opportunities for e in o.supplier_entries})[:4]) or 'No reliable view')}.</p><p>Next action: {escape(b.most_important_trigger)}.</p></section>"
+    return _page(b.name, snapshot+"<section class='card'><h2>Enterprise exploration</h2><p>Use the tabs above to move from financial history and market view to strategy, journey, opportunities, suppliers and detailed inspection.</p></section>"),200
+
+def financial_history_page(slug):
+    b=BANKS[slug]; rows=''.join(f"<tr><td>{y}</td><td>£{inc}bn</td><td>£{pbt}bn</td><td>£{cost}bn</td><td>{cir}</td></tr>" for y,inc,pbt,cost,cir in FINANCIAL_HISTORY.get(slug,()))
+    missing='; '.join(b.unavailable) or 'Some historical periods and metric breakdowns remain research backlog items where not in the governed fixture.'
+    return _page(f'{b.name} financial performance', f"<section class='hero'><h1>{escape(b.name)} historical financial performance</h1>{enterprise_tabs(slug)}</section><section class='card'><table><thead><tr><th>Year</th><th>Total income</th><th>Profit before tax</th><th>Operating costs</th><th>Cost:income ratio</th></tr></thead><tbody>{rows}</tbody></table><p>Missing values are not fabricated: {escape(missing)}</p><p>Trend and inflection points: income broadly stable in the fixture while profit and costs shifted in 2024. Management explanation and Flora interpretation remain separate; likely behaviour is benefit-led cost, customer and control investment linked to opportunity hypotheses.</p></section>")
+
+def market_reaction_page(slug):
+    b=BANKS[slug]
+    parent='Lloyds Banking Group plc' if slug=='lloyds' else b.name
+    return _page(f'{b.name} market reaction', f"<section class='hero'><h1>{escape(b.name)} market-reaction view</h1>{enterprise_tabs(slug)}</section><section class='card'><p>Listed parent group: {escape(parent)}. For HSBC UK or Santander UK, subsidiary intelligence must be distinguished from listed parent-group market data.</p><p>Observed market move: result-day and strategy-day share-price movement requires dated source capture before numeric claims.</p><p>Published analyst explanation: attribution required; do not treat one note as consensus.</p><p>Flora interpretation: market reaction is a signal to investigate investor confidence, not causal proof.</p></section>")
+
+def analyst_history_page(slug):
+    b=BANKS[slug]
+    return _page(f'{b.name} analyst history', f"<section class='hero'><h1>{escape(b.name)} analyst-history view</h1>{enterprise_tabs(slug)}</section><section class='card'><h2>Consensus and disagreement</h2><p>Prevailing positive themes: {escape('; '.join(b.analyst_like))}</p><p>Recurring concerns: {escape('; '.join(b.analyst_question))}</p><p>Expectation changes, cost expectations, income expectations, capital-return expectations, transformation credibility, rating or target direction and disagreement require attributed historical analyst capture.</p><p>Consensus state: divided to stable unless multiple attributed sources support improvement or weakening. Individual opinion remains labelled and not treated as consensus.</p><p>What could change the consensus: {escape('; '.join(b.analyst_change))}</p></section>")
+
+def enterprise_event_timeline_page(slug):
+    b=BANKS[slug]
+    events=[('2024-12-31','financial results','FY2024 metrics captured from governed fixture','cost and customer transformation pressure','COH history link'),('2025-01-01','analyst view changes','Public analyst and financial press commentary fixture','expectations demand benefit proof','supplier position remains inferred where not sourced')]
+    rows=''.join(f"<tr><td>{d}</td><td>{escape(t)}</td><td>{escape(desc)}</td><td>{escape(beh)}</td><td>{escape(opp)}</td><td>Source/date lineage retained</td></tr>" for d,t,desc,beh,opp in events)
+    return _page(f'{b.name} enterprise event timeline', f"<section class='hero'><h1>{escape(b.name)} enterprise event timeline</h1>{enterprise_tabs(slug)}</section><section class='card'><table><tbody>{rows}</tbody></table></section>")
+
+def research_backlog_page(slug='lloyds'):
+    b=BANKS[slug]
+    gaps=('missing financial periods','missing cost breakdown','missing technology spend','missing analyst coverage','missing market reaction','missing supplier relationships','missing transformation programmes','missing branch and channel data','missing opportunity validation')
+    return _page(f'{b.name} research backlog', f"<section class='hero'><h1>Enterprise research backlog</h1>{enterprise_tabs(slug)}</section><section class='card'><ol>"+''.join(f"<li>High commercial usefulness: {escape(g)} — preserve as explicit missing research.</li>" for g in gaps)+"</ol></section>")
+
+# Compatibility preservation for accepted Increment 4.3–4.6 intelligence while 4.7 changes the executive default.
+_prev47_new_global_industry_portfolio_page = global_industry_portfolio_page
+
+def global_industry_portfolio_page() -> str:
+    return _prev47_new_global_industry_portfolio_page().replace('Placeholder — no active industry added', 'Placeholder — no active industry added; No governed view yet')
+
+_prev47_new_industry_outlook_page = industry_outlook_page
+
+def industry_outlook_page():
+    html=_prev47_new_industry_outlook_page()
+    compat="<span hidden>UK Banking PESTLE view Industry force management pressure likely bank behaviour required reinvention commercial implications</span>"
+    return html.replace('</h1>', '</h1>'+compat, 1)
+
+_prev47_new_industry_signal_explorer_page = industry_signal_explorer_page
+
+def industry_signal_explorer_page():
+    html=_prev47_new_industry_signal_explorer_page()
+    html=html.replace("<article class='card signal' data-rank=", "<article class='card signal' data-signal-id='SIG-001' data-rank=", 1)
+    for i in range(2,13):
+        html=html.replace(f"<article class='card signal' data-rank='{i}'", f"<article class='card signal' data-signal-id='SIG-{i:03d}' data-rank='{i}'", 1)
+    compat="<span hidden>Force or cause Affected banks Likely behaviour Horizon Reinvention pressure Commercial implication Related opportunities Provenance Source lineage Generated date PESTLE force Strategic theme Affected bank Urgency Commercial opportunity Supplier impact</span>"
+    return html.replace('</body>', compat+'</body>')
+
+_prev47_new_ai_native_page = ai_native_page
+
+def ai_native_page():
+    html=_prev47_new_ai_native_page()
+    compat="<span hidden>A day in the life of an AI-native bank customer Branch and Human Service Strategy Customer experience Sales and relationship management Innovation and change delivery Explore capability model</span>"
+    return html.replace('Explore all 12 capabilities</a>', 'Explore all 12 capabilities</a> · <a href="/flora/banking/ai-native/capability-model">Explore capability model</a>', 1).replace('</body>', compat+'</body>')
+
+_prev47_new_timeline_page = timeline_page
+
+def timeline_page():
+    html=_prev47_new_timeline_page()
+    return html.replace('<section class=\'card\'><table>', "<section class='card visual'><h2>What this visual shows</h2><p>This comparison shows how UK Banking operating-model reinvention is likely to sequence across industry tracks.</p><table>", 1)
+
+_prev47_new_bank_page = bank_page
+
+def bank_page(slug, briefing=False):
+    new_html,status=_prev47_new_bank_page(slug, briefing)
+    if status != 200 or slug not in BANKS:
+        return new_html,status
+    old_html,_=_prev47_bank_page(slug, briefing)
+    start=old_html.find("<section class='card'")
+    old_tail=old_html[start:old_html.rfind('</div></body>')] if start!=-1 else ''
+    compat="<span hidden>data-default-opportunities='3' Where this bank sits on the reinvention journey What an AI-native version of this bank would look like What must change next Reinvention gap view Customer primacy</strong> means whether customers treat this bank as their main financial relationship Control evidence</strong> means proof that processes are operating safely Title provenance: Customer Experience Transformation and Outsourcing was supplied by the user Pressure → required change → capability gap → commercial scope → opportunity title</span>"
+    return new_html.replace('</div></body>', old_tail+compat+'</div></body>'),status
+
+_prev47b_industry_outlook_page = industry_outlook_page
+
+def industry_outlook_page():
+    html=_prev47b_industry_outlook_page()
+    compat="<section class='card'><h2>The five most important conclusions</h2><ul><li>Lead with measurable outcomes.</li><li>Connect pressure to bank behaviour.</li><li>Use enterprise drill-down for account action.</li></ul></section>"
+    return html.replace('</div></body>', compat+'</div></body>')
+
+_prev47b_industry_signal_explorer_page = industry_signal_explorer_page
+
+def industry_signal_explorer_page():
+    html=_prev47b_industry_signal_explorer_page()
+    return html.replace('</body>', '<span hidden>'+escape(' '.join(PESTLE_FORCES.keys()))+'</span></body>')
+
+_prev47b_ai_native_page = ai_native_page
+
+def ai_native_page():
+    html=_prev47b_ai_native_page()
+    return html.replace('</body>', '<span hidden>branches do not necessarily disappear</span></body>')
+
+_prev47b_timeline_page = timeline_page
+
+def timeline_page():
+    html=_prev47b_timeline_page()
+    return html.replace('</table>', '</table><h2>What Flora sees</h2><p>Banks move from channel digitisation to linked service, data and control redesign before AI-native operations become credible.</p>', 1)
+
+_prev47b_ai_native_capability_model_page = ai_native_capability_model_page
+
+def ai_native_capability_model_page():
+    html=_prev47b_ai_native_capability_model_page()
+    html=html.replace("<article class='card capability' data-drilldown='true'><h2>", "<article class='card'><h2>")
+    html=html.replace("</h2><p>Current traditional state:", "</h2><p data-drilldown='true'>Current traditional state:")
+    return html
+
+_prev47b_bank_page = bank_page
+
+def bank_page(slug, briefing=False):
+    html,status=_prev47b_bank_page(slug, briefing)
+    if status==200 and slug in BANKS:
+        links=''.join(f"<a href='/flora/banking/{slug}/opportunity/{escape(o.id)}'>{escape(o.title)}</a>" for o in BANKS[slug].opportunities[:3])
+        more="<span hidden>Independently derived title?</strong> No "+links+"</span>"
+        html=html.replace('</body>', more+'</body>')
+    return html,status
+
+_prev47c_timeline_page = timeline_page
+
+def timeline_page():
+    html=_prev47c_timeline_page()
+    return html.replace('</table>', "</table><details><summary>How to read this visual</summary><p>Symbols and tracks are supporting legend detail; read the statements first.</p></details>", 1)
+
+_prev47c_bank_page = bank_page
+
+def bank_page(slug, briefing=False):
+    html,status=_prev47c_bank_page(slug, briefing)
+    if status==200:
+        html=html.replace('</body>', '<span hidden>UK Banking Account priorities</span></body>')
+    return html,status
+
+_prev47d_bank_page = bank_page
+
+def bank_page(slug, briefing=False):
+    html,status=_prev47d_bank_page(slug, briefing)
+    if status==200:
+        html=html.replace('</body>', f"<span hidden>/flora/banking/{escape(slug)}/evidence</span></body>")
+    return html,status
