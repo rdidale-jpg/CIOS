@@ -2,6 +2,8 @@ from cios.applications.flora.enterprise_intelligence.explain import (
     QUESTION,
     assemble_lloyds_context_package,
     explain_lloyds_changes,
+    validate_bounded_explanation,
+    validate_context_package,
 )
 
 
@@ -54,3 +56,46 @@ def test_sector_context_is_related_only_through_lloyds_usage():
     assert ctp_evidence.sector_context is True
     explanation = explain_lloyds_changes(package)
     assert any("Google Cloud" in reason for reason in explanation.why_evidence_belongs_together)
+
+
+def test_context_package_validation_lineage_and_source_passages():
+    package = assemble_lloyds_context_package()
+
+    valid, failures = validate_context_package(package)
+
+    assert valid, failures
+    assert package.focus_object_id == "BK-ENT-001"
+    assert package.approved_question_id == "Q-LBG-CHANGE-EXPLAIN-001"
+    assert package.source_passages
+    assert any("mobile current-account" in p.content for p in package.source_passages)
+    assert package.retrieval_policy_version == "flora-increment-2-retrieval-policy-v0.1"
+    assert package.exclusions
+    assert package.limitations
+
+
+def test_output_validator_rejects_unknown_lineage_and_prohibited_language():
+    package = assemble_lloyds_context_package()
+    explanation = explain_lloyds_changes(package)
+    valid, failures = validate_bounded_explanation(package, explanation)
+    assert valid, failures
+
+    bad_change = explanation.changes[0].model_copy(update={"evidence_ids": ("EV-UNKNOWN",)})
+    bad = explanation.model_copy(update={"changes": (bad_change,) + explanation.changes[1:]})
+    valid, failures = validate_bounded_explanation(package, bad)
+    assert not valid
+    assert any("unknown evidence reference" in failure for failure in failures)
+
+    bad_scope = explanation.model_copy(update={"answer_scope": "recommend pursuit with an opportunity score"})
+    valid, failures = validate_bounded_explanation(package, bad_scope)
+    assert not valid
+    assert any("prohibited language" in failure for failure in failures)
+
+
+def test_repeatability_against_same_context_package_is_semantically_stable():
+    package = assemble_lloyds_context_package()
+    runs = [explain_lloyds_changes(package) for _ in range(3)]
+
+    assert len({run.context_package_hash for run in runs}) == 1
+    assert len({tuple(c.what_changed for c in run.changes) for run in runs}) == 1
+    assert len({tuple(c.evidence_ids for c in run.changes) for run in runs}) == 1
+    assert len({tuple(u.unknown_id for u in run.unknowns) for run in runs}) == 1

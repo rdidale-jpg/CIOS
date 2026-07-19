@@ -18,6 +18,17 @@ class FrozenModel(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
 
+class SourcePassage(FrozenModel):
+    passage_id: str
+    source_id: str
+    date: str
+    content: str
+    coverage_tags: tuple[str, ...]
+    authority: str
+    freshness: str = "fixed-evaluation-corpus"
+    access_state: str = "available"
+
+
 class ContextEvidence(FrozenModel):
     evidence_id: str
     claim: str
@@ -25,6 +36,8 @@ class ContextEvidence(FrozenModel):
     authority: str
     lloyds_direct: bool
     sector_context: bool = False
+    access_state: str = "available"
+    freshness: str = "fixed-evaluation-corpus"
 
 
 class ContextObservation(FrozenModel):
@@ -51,17 +64,25 @@ class ContextTension(FrozenModel):
 class ContextPackage(FrozenModel):
     package_id: str
     focus_object: str
+    focus_object_id: str
     approved_question: str
+    approved_question_id: str
+    retrieval_policy_version: str
+    corpus_baseline: str
+    evaluation_baseline: str
     baseline_commit: str
     created_at: str
     source_dataset_id: str
     source_dataset_path: str
     authority_note: str
+    source_passages: tuple[SourcePassage, ...]
     evidence: tuple[ContextEvidence, ...]
     observations: tuple[ContextObservation, ...]
     unknowns: tuple[ContextUnknown, ...]
     tensions: tuple[ContextTension, ...]
     source_manifest: tuple[dict[str, Any], ...]
+    exclusions: tuple[dict[str, str], ...]
+    limitations: tuple[str, ...]
     package_hash: str = ""
 
     def with_hash(self) -> "ContextPackage":
@@ -118,6 +139,17 @@ def assemble_lloyds_context_package(path: Path = DATASET) -> ContextPackage:
                 return True
         return False
 
+    source_passages = tuple(
+        SourcePassage(
+            passage_id=p["passage_id"],
+            source_id=p["source_id"],
+            date=p["date"],
+            content=p["content"],
+            coverage_tags=tuple(p.get("coverage_tags", ())),
+            authority=source_by_id[p["source_id"]]["authority"],
+        )
+        for p in sorted(data["passages"], key=lambda p: p["passage_id"])
+    )
     evidence = tuple(
         ContextEvidence(
             evidence_id=e["evidence_id"],
@@ -127,26 +159,41 @@ def assemble_lloyds_context_package(path: Path = DATASET) -> ContextPackage:
             lloyds_direct=is_direct(e["lineage"]),
             sector_context=any(ref == "SRC-UK-CTP-2026" or ref == "P10" for ref in e["lineage"]),
         )
-        for e in data["derived_evidence"]
+        for e in sorted(data["derived_evidence"], key=lambda e: e["evidence_id"])
     )
-    observations = tuple(ContextObservation(observation_id=o["observation_id"], statement=o["statement"], lineage=tuple(o["lineage"]), confidence=o["confidence"]) for o in data["observations"])
-    unknowns = tuple(ContextUnknown(unknown_id=u["unknown_id"], statement=u["statement"], evidence_demand=u["evidence_demand"], lineage=tuple(u["lineage"])) for u in data["unknowns"])
-    tensions = tuple(ContextTension(contradiction_id=c["contradiction_id"], interpretation=f"{c['proposition_a']} / {c['proposition_b']}", expected_status=c["expected_status"], lineage=tuple(c["lineage"])) for c in data["candidate_contradictions"])
+    observations = tuple(ContextObservation(observation_id=o["observation_id"], statement=o["statement"], lineage=tuple(o["lineage"]), confidence=o["confidence"]) for o in sorted(data["observations"], key=lambda o: o["observation_id"]))
+    unknowns = tuple(ContextUnknown(unknown_id=u["unknown_id"], statement=u["statement"], evidence_demand=u["evidence_demand"], lineage=tuple(u["lineage"])) for u in sorted(data["unknowns"], key=lambda u: u["unknown_id"]))
+    tensions = tuple(ContextTension(contradiction_id=c["contradiction_id"], interpretation=f"{c['proposition_a']} / {c['proposition_b']}", expected_status=c["expected_status"], lineage=tuple(c["lineage"])) for c in sorted(data["candidate_contradictions"], key=lambda c: c["contradiction_id"]))
     source_manifest = tuple({"source_id": s["source_id"], "title": s["title"], "date": s["date"], "authority": s["authority"], "url": s["url"]} for s in data["source_documents"])
     package = ContextPackage(
         package_id="cp-" + stable_hash({"dataset": data["dataset_id"], "question": QUESTION, "baseline": BASELINE_COMMIT})[:16],
         focus_object=FOCUS_OBJECT,
+        focus_object_id="BK-ENT-001",
         approved_question=QUESTION,
+        approved_question_id="Q-LBG-CHANGE-EXPLAIN-001",
+        retrieval_policy_version="flora-increment-2-retrieval-policy-v0.1",
+        corpus_baseline=data["dataset_id"],
+        evaluation_baseline="lloyds-semantic-evaluation-v1",
         baseline_commit=BASELINE_COMMIT,
         created_at=now_iso(),
         source_dataset_id=data["dataset_id"],
         source_dataset_path=str(path.relative_to(ROOT)),
         authority_note="Runtime explanation is derived only from the immutable semantic evaluation fixture and is not accepted enterprise knowledge.",
+        source_passages=source_passages,
         evidence=evidence,
         observations=observations,
         unknowns=unknowns,
         tensions=tensions,
         source_manifest=source_manifest,
+        exclusions=(
+            {"excluded_id": "P10-as-direct-Lloyds-fact", "reason": "Sector CTP designation is included only as related context through Lloyds Google Cloud usage."},
+            {"excluded_id": "recommendations-and-scoring", "reason": "Increment 2 explain is bounded and cannot recommend pursuit or score opportunities."},
+        ),
+        limitations=(
+            "The package is a fixed runtime evaluation view and not canonical Enterprise Knowledge.",
+            "Temporal change claims require passage dates or explicit source dates in lineage.",
+            "Unknowns and competing interpretations must remain visible in any explanation.",
+        ),
     )
     return package.with_hash()
 
@@ -208,3 +255,38 @@ def run_increment2_explain(output_path: Path | None = None) -> dict[str, Any]:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(json.dumps(result, indent=2, sort_keys=True))
     return result
+
+
+def validate_context_package(package: ContextPackage) -> tuple[bool, tuple[str, ...]]:
+    ids = {p.passage_id for p in package.source_passages} | {p.source_id for p in package.source_passages} | {s["source_id"] for s in package.source_manifest}
+    ids |= {e.evidence_id for e in package.evidence} | {o.observation_id for o in package.observations} | {u.unknown_id for u in package.unknowns} | {t.contradiction_id for t in package.tensions}
+    failures = []
+    if package.focus_object_id != "BK-ENT-001": failures.append("unsupported focus object")
+    if package.approved_question_id != "Q-LBG-CHANGE-EXPLAIN-001": failures.append("unsupported question")
+    for group in (package.evidence, package.observations, package.unknowns, package.tensions):
+        for item in group:
+            for ref in item.lineage:
+                if ref not in ids:
+                    failures.append(f"unknown lineage reference: {ref}")
+    if not package.source_passages: failures.append("missing substantive source passages")
+    if not package.unknowns: failures.append("missing material Unknowns")
+    if not package.tensions: failures.append("missing competing interpretations")
+    return (not failures, tuple(failures))
+
+
+def validate_bounded_explanation(package: ContextPackage, explanation: BoundedExplanation) -> tuple[bool, tuple[str, ...]]:
+    evidence_ids = {e.evidence_id for e in package.evidence}
+    observation_ids = {o.observation_id for o in package.observations}
+    failures = []
+    if explanation.context_package_hash != package.package_hash: failures.append("package hash mismatch")
+    prohibited = ("recommend pursuit", "with an opportunity score", "target executive", "enterprise-wide strategy")
+    material_text = " ".join([explanation.answer_scope] + [c.what_changed + " " + c.interpretation for c in explanation.changes]).lower()
+    for phrase in prohibited:
+        if phrase in material_text: failures.append(f"prohibited language: {phrase}")
+    for change in explanation.changes:
+        if not set(change.evidence_ids) <= evidence_ids: failures.append(f"unknown evidence reference: {change.change_id}")
+        if not set(change.observation_ids) <= observation_ids: failures.append(f"unknown observation reference: {change.change_id}")
+        if not change.limits: failures.append(f"missing limits: {change.change_id}")
+    if not explanation.unknowns: failures.append("omitted Unknowns")
+    if not explanation.contradictions_and_competing_interpretations: failures.append("omitted competing interpretations")
+    return (not failures, tuple(failures))
