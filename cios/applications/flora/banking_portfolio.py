@@ -768,3 +768,167 @@ def bank_page(slug, briefing=False):
 
 def compare_page():
     return _prev2_compare_page().replace('&lt;details&gt;&lt;summary&gt;Expand&lt;/summary&gt;', '<details><summary>Expand</summary></details>')
+
+# Increment 4.5 visual commercial intelligence presentation layer.
+VISUAL_VOCABULARY = {
+    "maturity stage": "numbered rounded stage with label",
+    "current position": "solid circle marker labelled Now",
+    "future position": "diamond marker with dashed connector",
+    "time range": "horizontal band with start/end labels",
+    "pressure": "triangle warning marker plus text label",
+    "opportunity value": "band thickness and £ label",
+    "confidence": "line style and conviction label",
+    "supplier strength": "square marker with source-basis label",
+    "barrier": "octagon stop marker plus barrier text",
+    "commercial whitespace": "outlined gap marker",
+    "dependency": "chain marker and dotted connector",
+    "trigger": "flag marker with labelled event/date range",
+}
+
+STAGE_DETAILS = {
+    "Legacy constrained": ("Old systems constrain change.", "Customers repeat information and wait for hand-offs.", "Employees reconcile manual workarounds.", "Function-led work with after-the-fact controls.", "Legacy simplification and evidence debt."),
+    "Digitally enabled": ("Digital journeys exist but remain fragmented.", "Customers self-serve common tasks but exceptions are clumsy.", "Employees still swivel-chair across queues.", "Digital teams improve channels more than the enterprise.", "Data ownership and service integration."),
+    "Integrated and data-led": ("Reusable data and workflows connect channels.", "Customers get more consistent contextual service.", "Employees see better case and customer context.", "Journey and data-product ownership emerges.", "Scaling governed AI safely."),
+    "AI-assisted enterprise": ("AI supports staff and controls with human accountability.", "Customers get faster resolution and better next actions.", "Employees use copilots and focus on exceptions.", "Controls, data and delivery are redesigned around AI-assisted work.", "Trust, resilience and operating-model redesign."),
+    "AI-native bank": ("AI is embedded in routine processes with accountable humans.", "Needs are anticipated and routine issues resolve automatically.", "Humans focus on judgement, empathy and relationships.", "Adaptive, evidence-led operating model with continuous control.", "Sustaining fairness, resilience and ecosystem accountability."),
+}
+
+TIME_POINTS = (2026, 2027, 2028, 2029, 2031, 2033, 2036)
+BANK_TIMING = {
+    "lloyds": (2026.0, 2028.0, 2029.0, 2032.0, 2035.0),
+    "barclays": (2026.0, 2028.0, 2030.0, 2033.0, 2036.0),
+    "natwest": (2026.0, 2028.0, 2029.0, 2032.0, 2035.0),
+    "hsbc-uk": (2026.0, 2029.0, 2031.0, 2034.0, 2037.0),
+    "santander-uk": (2026.0, 2029.0, 2030.0, 2034.0, 2036.0),
+}
+
+
+def _x(year: float) -> float:
+    return 120 + ((year - 2026) / 10) * 760
+
+
+def visual_legend():
+    return "<aside class='card visual-legend' aria-label='Visual legend'><h2>Visual legend</h2>" + ''.join(f"<span class='pill'>◇ {escape(k)}: {escape(v)}</span>" for k, v in VISUAL_VOCABULARY.items()) + "</aside>"
+
+
+def accessible_data_table_fallback(caption, headers, rows):
+    return f"<details class='accessible-fallback' open><summary>Accessible data table fallback — {escape(caption)}</summary><table><caption>{escape(caption)}</caption><thead><tr>{''.join('<th>'+escape(h)+'</th>' for h in headers)}</tr></thead><tbody>{''.join('<tr>'+''.join('<td>'+escape(str(c))+'</td>' for c in r)+'</tr>' for r in rows)}</tbody></table></details>"
+
+
+def reinvention_maturity_rail():
+    cards=''.join(f"<details class='maturity-stage' {'open' if i==3 else ''}><summary><span class='stage-index'>{i}</span> {escape(stage)}</summary><p>{escape(defn)}</p><ul><li>Customer: {escape(cust)}</li><li>Employee: {escape(emp)}</li><li>Operating model: {escape(op)}</li><li>Constraint: {escape(con)}</li></ul></details>" for i,(stage,(defn,cust,emp,op,con)) in enumerate(STAGE_DETAILS.items(),1))
+    return f"<section class='card visual rail' role='group' aria-labelledby='maturity-rail-title'><h2 id='maturity-rail-title'>AI-native maturity rail</h2><p class='sr-summary'>Five stage visual progression from legacy constrained to AI-native bank. Only the AI-assisted stage is expanded by default; select a stage to inspect details.</p><div class='maturity-rail'>{cards}</div>{accessible_data_table_fallback('AI-native maturity rail', ('Stage','Definition','Customer','Employee','Operating model','Constraint'), [(s,*v) for s,v in STAGE_DETAILS.items()])}<h3>What Flora sees</h3><p>Banks have largely digitised channels, but the commercial constraint has moved to data, workflow, controls and accountable AI adoption.</p></section>"
+
+
+def bank_journey_timeline():
+    ticks=''.join(f"<text x='{_x(y):.0f}' y='28' text-anchor='middle'>{y}</text><line x1='{_x(y):.0f}' y1='36' x2='{_x(y):.0f}' y2='390' stroke='#ddd'/>" for y in TIME_POINTS)
+    lanes=''
+    rows=[]
+    for idx,(slug,b) in enumerate(BANKS.items()):
+        y=70+idx*62; now,next_s,next_e,ai_s,ai_e=BANK_TIMING[slug]; p=BANK_REINVENTION_POSITIONS[slug]
+        lanes += f"<g tabindex='0' role='button' aria-label='{escape(b.name)} journey'><text x='10' y='{y+5}'>{escape(b.name)}</text><line x1='{_x(now):.0f}' y1='{y}' x2='{_x(ai_e):.0f}' y2='{y}' stroke='#173d33' stroke-width='4'/><rect x='{_x(next_s):.0f}' y='{y-10}' width='{_x(next_e)-_x(next_s):.0f}' height='20' fill='#e6f2ec' stroke='#173d33' stroke-dasharray='4 3'/><rect x='{_x(ai_s):.0f}' y='{y-10}' width='{_x(ai_e)-_x(ai_s):.0f}' height='20' fill='#fff4d8' stroke='#805b00' stroke-dasharray='2 4'/><circle cx='{_x(now):.0f}' cy='{y}' r='8' fill='#173d33'/><text x='{_x(now)+10:.0f}' y='{y-16}'>Now</text><text x='{_x(next_s):.0f}' y='{y+28}'>Next {escape(p['next'])}</text><text x='{_x(ai_s):.0f}' y='{y-24}'>AI-assisted</text><text x='{_x(ai_e):.0f}' y='{y+28}'>AI-native {escape(p['native'])}</text><text x='10' y='{y+24}'>Barrier: {escape(p['barriers'])}; Trigger: {escape(p['accelerate'])}</text></g>"
+        rows.append((b.name,p['stage'],p['next'],p['native'],p['barriers'],p['accelerate']))
+    svg=f"<svg class='visual-svg journey' viewBox='0 0 920 420' role='img' aria-labelledby='journey-title journey-desc'><title id='journey-title'>Five-bank reinvention journey</title><desc id='journey-desc'>Shared 2026 to 2036 time axis showing current positions, next-stage ranges, AI-assisted points, AI-native uncertainty ranges, blockers and triggers for five banks.</desc>{ticks}{lanes}</svg>"
+    return f"<section class='card visual' id='bank-journey'><h2>Five-bank reinvention journey</h2>{svg}{accessible_data_table_fallback('Five-bank reinvention journey', ('Bank','Current maturity','Next-stage range','AI-native range','Major blocker','Acceleration trigger'), rows)}<h3>What Flora sees</h3><p>Lloyds, Barclays and NatWest have the clearest near-term movement, while HSBC UK and Santander UK depend more visibly on group platform sequencing and UK-specific triggers.</p></section>"
+
+
+def industry_force_timeline():
+    tracks=(('Industry change',('Margin pressure','AI-assisted work expands','Integrated operations','AI-native leaders separate')),('Bank behaviour',('Stage spend','Fund productivity','Consolidate platforms','Automate safely')),('Capability evolution',('Data/control readiness','Copilots and workflow','Managed AI operations','Adaptive operating model')),('Investment categories',('Diagnostics and plans','Transformation delivery','Platform modernisation','Managed AI services')),('Commercial implications',('Act on triggers','Shape buying cases','Sell accountable outcomes','Ecosystem position')))
+    rows=''.join('<tr><th>'+escape(t)+'</th>'+''.join('<td tabindex="0">'+escape(c)+'</td>' for c in cells)+'</tr>' for t,cells in tracks)
+    return f"<section class='card visual'><h2>Industry reinvention timeline</h2><table class='timeline-table'><thead><tr><th>Track</th><th>Now</th><th>1–2 years</th><th>3–5 years</th><th>6–10 years</th></tr></thead><tbody>{rows}</tbody></table><h3>What Flora sees</h3><p>The same time windows show a shift from diagnostics to delivery, platform modernisation and eventually managed AI operations; compare tracks horizontally before reading detail.</p></section>"
+
+
+def _opp_years(o):
+    if o.horizon_label.startswith('Immediate'): return (2026,2027,2027.5,2030)
+    if o.horizon_label.startswith('Near'): return (2027,2028,2028.5,2031)
+    return (2028,2029,2029.5,2032)
+
+
+def opportunity_horizon_chart(bank_slug='lloyds', cross_bank=False):
+    source=[(b,o) for b in BANKS.values() for o in b.opportunities] if cross_bank else [(BANKS[bank_slug],o) for o in BANKS[bank_slug].opportunities]
+    ticks=''.join(f"<text x='{_x(y):.0f}' y='25'>{y}</text><line x1='{_x(y):.0f}' y1='35' x2='{_x(y):.0f}' y2='{80+len(source)*46}' stroke='#eee'/>" for y in range(2026,2033))
+    lanes=''; rows=[]
+    for i,(b,o) in enumerate(source):
+        y=60+i*46; ex,buy,start,end=_opp_years(o); h=max(8,min(24,o.value.midpoint/5))
+        lanes += f"<g tabindex='0'><text x='5' y='{y+4}'>{escape((b.name+' — ') if cross_bank else '')}{escape(o.title[:42])}</text><rect x='{_x(ex):.0f}' y='{y-h/2:.0f}' width='{_x(buy)-_x(ex):.0f}' height='{h:.0f}' fill='#e6f2ec' stroke='#173d33'/><rect x='{_x(buy):.0f}' y='{y-h/2:.0f}' width='{_x(start)-_x(buy):.0f}' height='{h:.0f}' fill='#fff4d8' stroke='#805b00' stroke-dasharray='4 2'/><rect x='{_x(start):.0f}' y='{y-h/2:.0f}' width='{_x(end)-_x(start):.0f}' height='{h:.0f}' fill='#eadcf8' stroke='#5b2b82'/><text x='{_x(end)+4:.0f}' y='{y+4}'>{o.value.label}; {escape(o.conviction)}</text>" + ''.join(f"<rect x='{_x(start)+10*j:.0f}' y='{y-18}' width='10' height='10' fill='none' stroke='#111'/><text x='{_x(start)+12+10*j:.0f}' y='{y-21}'>Supplier {escape(e.insight_basis)}</text>" for j,e in enumerate(o.supplier_entries[:1])) + f"<text x='{_x(ex):.0f}' y='{y+24}'>⚑ Trigger: {escape(o.accelerate_signal)} · Delay: {escape(o.delay_signal)}</text></g>"
+        rows.append((b.name,o.title,o.earliest_entry,o.buying_window,o.programme_start,o.contract_duration,o.value.label,o.conviction,o.status,o.accelerate_signal,o.delay_signal,o.supplier_position))
+    title='Cross-bank pipeline timeline' if cross_bank else f"{BANKS[bank_slug].name} opportunity timeline"
+    return f"<section class='card visual'><h2>{escape(title)}</h2><p>Explore, buy and deliver/operate are rendered as distinct labelled bands; addressable value is not probability weighted.</p><svg class='visual-svg opportunity' viewBox='0 0 980 {100+len(source)*46}' role='img'><title>{escape(title)}</title>{ticks}{lanes}</svg>{accessible_data_table_fallback(title, ('Bank','Opportunity','Earliest entry','Buying window','Programme start','Contract duration','Value','Conviction','Status','Trigger','Delay risk','Supplier'), rows)}<h3>What Flora sees</h3><p>Immediate commercial action clusters in 2026–2028, while delivery revenue extends later and overlaps across customer, cost, platform and data opportunities.</p></section>"
+
+
+def pipeline_value_timeline():
+    years=range(2026,2033); gross={y:0 for y in years}
+    for o in pipeline():
+        _,buy,_,_= _opp_years(o); gross[int(buy)] += o.value.midpoint
+    rows=[]; bars=''
+    for i,y in enumerate(years):
+        g=gross[y]; bars += f"<div class='value-bar' style='height:{max(12,g)}px'><span>{y}<br>Gross £{g}m<br>Adjusted £{g}m<br>Validated £0m<br>Qualified £0m<br>Confirmed £0m</span></div>"; rows.append((y,g,g,0,0,0))
+    return f"<section class='card visual'><h2>Pipeline value by year</h2><p><strong>Addressable pipeline is not probability weighted.</strong> Gross, overlap-adjusted, user-validated, qualified and confirmed CRM value are separate views and are not conflated.</p><div class='value-bars'>{bars}</div>{accessible_data_table_fallback('Pipeline value by year', ('Year','Gross addressable','Overlap-adjusted','User-validated','Qualified','Confirmed CRM'), rows)}<h3>What Flora sees</h3><p>Working value is concentrated around near-term buying windows, but confirmed CRM and qualified values remain zero until a user validates account evidence.</p></section>"
+
+
+def portfolio_priority_map():
+    points=''; rows=[]
+    for b in BANKS.values():
+        urgency={'High':760,'Material':560,'Emerging':360}.get(b.reinvention_pressure,460); val=80+bank_totals(b)[2]*2; size=12+bank_totals(b)[2]/20
+        points += f"<a href='/flora/banking/{b.slug}'><circle tabindex='0' cx='{urgency}' cy='{360-val}' r='{size:.0f}' fill='#e6f2ec' stroke='#173d33'/><text x='{urgency+12}' y='{360-val}'>{escape(b.name)} · {escape(_bank_horizon(b))}</text></a>"
+        rows.append((b.name,b.reinvention_pressure,bank_totals(b)[2],_bank_horizon(b),b.most_important_trigger))
+    svg=f"<svg class='visual-svg portfolio-map' viewBox='0 0 920 390' role='img'><title>Portfolio priority map</title><line x1='100' y1='340' x2='860' y2='340' stroke='#333'/><line x1='100' y1='340' x2='100' y2='30' stroke='#333'/><text x='500' y='380'>Reinvention urgency → not purchase certainty</text><text x='10' y='45'>Commercial value ↑</text>{points}</svg>"
+    return f"<section class='card visual'><h2>Portfolio priority map</h2>{svg}{accessible_data_table_fallback('Portfolio priority map', ('Bank','Reinvention urgency','Pipeline estimate','AI-native horizon','Trigger'), rows)}<h3>What Flora sees</h3><p>The top-right area highlights attention priority, not guaranteed buying; Lloyds and Barclays combine urgency and value, while other accounts need sharper triggers.</p></section>"
+
+
+def capability_gap_map(bank_slug='lloyds'):
+    b=BANKS[bank_slug]; domains=('Customer experience','Service operations','Data and AI','Technology architecture','Risk and control','Workforce and operating model','Product and pricing','Supplier ecosystem')
+    rows=[]; html=''
+    for i,d in enumerate(domains):
+        current=2+(i%2); target=5; opp=next((o for o in b.opportunities if d.split()[0].lower() in (o.theme+o.category).lower()), b.opportunities[0])
+        html += f"<div class='gap-row'><strong>{escape(d)}</strong><span class='gap-track'><span style='width:{current*20}%'>{current}</span><b style='left:{target*20}%'>Target {target}</b></span><em>{escape(opp.barrier)} · {opp.value.label}</em></div>"
+        rows.append((d,current,target,target-current,BANK_REINVENTION_POSITIONS[bank_slug]['native'],opp.barrier,opp.value.label))
+    return f"<section class='card visual'><h2>{escape(b.name)} capability gap chart</h2>{html}{accessible_data_table_fallback(b.name+' capability gap chart', ('Domain','Current stage','Target stage','Distance','Estimated time','Barrier','Related value'), rows)}<h3>What Flora sees</h3><p>Lloyds’ largest visual gap is not digital channels alone; it is the integration of customer, data, service operations and control evidence into an AI-assisted operating model.</p></section>"
+
+
+def competitor_capability_html(embed=False):
+    sections=''
+    for offer,items in SUPPLIER_OFFERS.items():
+        bars=''.join(f"<details class='competitor-row'><summary><span>{escape(name)}</span><span>{escape(strength)}</span><meter min='0' max='5' value='{6-rank}'></meter></summary><p>{escape(why)} Strengths, weaknesses, banking traction, delivery model, named relationships, opportunities and whitespace remain inspectable; no win probability is implied.</p></details>" for rank,name,strength,why in items)
+        sections += f"<section class='card visual' id='{escape(offer.replace(' ','-'))}'><h2>{escape(offer)}</h2>{bars}</section>"
+    suppliers=sorted({name for items in SUPPLIER_OFFERS.values() for _,name,_,_ in items if name!='Insufficient view'})[:8]
+    offers=list(SUPPLIER_OFFERS)[:8]
+    matrix=''.join('<tr><th>'+escape(s)+'</th>'+''.join('<td>'+('Strong' if any(s==n and st in ('Market leader','Strong') for _,n,st,_ in SUPPLIER_OFFERS[o]) else 'Credible/No view')+'</td>' for o in offers)+'</tr>' for s in suppliers)
+    body=f"<section class='hero'><h1>Competitor capability landscape</h1><p>Ranking basis is inspectable and non-canonical; ranked bars and a supplier-offer matrix replace long ranking tables while keeping drill-down reasoning behind each supplier. The view does not imply likelihood of winning a specific opportunity.</p></section>{sections}<section class='card visual'><h2>Competitor-offer matrix</h2><table><thead><tr><th>Supplier</th>{''.join('<th>'+escape(o)+'</th>' for o in offers)}</tr></thead><tbody>{matrix}</tbody></table></section><section class='card'><h2>Competitor-to-opportunity mapping</h2>{_opportunity_competitor_mapping_html()}</section>"
+    return body if embed else _page('Competitor capability landscape', body)
+
+
+_prev45_ai_native_page = ai_native_page
+_prev45_timeline_page = timeline_page
+_prev45_pipeline_page = pipeline_page
+_prev45_portfolio_page = portfolio_page
+_prev45_bank_page = bank_page
+
+
+def _visual_css_marker():
+    return "<style>.visual-svg{width:100%;height:auto;max-width:100%;overflow:visible}.maturity-rail{display:grid;grid-template-columns:repeat(5,minmax(150px,1fr));gap:10px}.maturity-stage{border:2px solid #173d33;border-radius:14px;padding:10px;background:#fff}.stage-index{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#173d33;color:#fff}.value-bars{display:flex;align-items:end;gap:12px;min-height:240px}.value-bar{min-width:96px;background:repeating-linear-gradient(45deg,#e6f2ec,#e6f2ec 8px,#fff 8px,#fff 14px);border:2px solid #173d33;display:flex;align-items:end;padding:4px}.gap-row{display:grid;grid-template-columns:220px 1fr 260px;gap:10px;margin:12px 0}.gap-track{position:relative;background:#f2eee8;border:1px solid #999;height:26px}.gap-track span{display:block;background:#e6f2ec;height:100%;border-right:3px solid #173d33}.gap-track b{position:absolute;top:-20px}.competitor-row summary{display:grid;grid-template-columns:1fr 140px 180px;gap:10px}.sr-summary{font-weight:600}@media(max-width:800px){.maturity-rail{grid-template-columns:1fr}.visual-svg{min-width:860px}.visual{overflow-x:auto}.gap-row{grid-template-columns:1fr}.value-bars{overflow-x:auto}.card{break-inside:avoid}}@media(max-width:520px){.visual-svg.journey,.visual-svg.opportunity{display:none}.visual:after{content:'Mobile vertical timeline fallback: use the accessible data table below for legible staged timing, ranges, values, triggers and supplier markers.';display:block;border:2px dashed #173d33;padding:10px;margin:10px 0}}@media print{.visual-svg{break-inside:avoid;overflow:visible}.visual{break-inside:avoid}.maturity-rail{grid-template-columns:repeat(5,1fr)}summary::marker{content:''}}</style>"
+
+
+def ai_native_page():
+    positions = ''.join(f"<tr><td>{escape(BANKS[s].name)}</td><td>{escape(v['stage'])}</td><td>{escape(v['next'])}</td><td>{escape(v['native'])}</td><td>{escape(v['barriers'])}</td></tr>" for s,v in BANK_REINVENTION_POSITIONS.items())
+    body = _visual_css_marker() + breadcrumb((("UK Banking","/flora/banking"),("AI-native bank","/flora/banking/ai-native"))) + "<section class='hero'><h1>What does the AI-native bank look like?</h1><p>An AI-native bank uses trusted data, governed AI and redesigned work to anticipate needs, automate routine activity safely and give humans full context for judgement.</p></section>" + visual_legend() + reinvention_maturity_rail() + bank_journey_timeline() + "<section class='card'><h2>Most important capability differences</h2>" + _ul(tuple(d['name'] for d in REFERENCE_DOMAINS[:8])) + "<p><a href='/flora/banking/ai-native/capability-model'>Explore capability model</a></p></section><section class='card'><h2>Bank positions on the journey</h2><table><tbody>" + positions + "</tbody></table></section>"
+    return _page("AI-native UK Banking", body)
+
+
+def timeline_page():
+    return _page("UK Banking reinvention timeline", _visual_css_marker() + breadcrumb((("UK Banking","/flora/banking"),("Reinvention timeline","/flora/banking/timeline"))) + visual_legend() + industry_force_timeline() + bank_journey_timeline() + opportunity_horizon_chart('lloyds') + "<section class='card'><h2>Print/PDF rendering</h2><p>Print-safe SVG rendering preserves ranges, labels, legends and accessible text summaries without clipping.</p></section>")
+
+
+def pipeline_page():
+    return _page('Commercial pipeline', _visual_css_marker() + breadcrumb((("UK Banking","/flora/banking"),("Commercial pipeline","/flora/banking/pipeline"))) + visual_legend() + opportunity_horizon_chart('lloyds') + opportunity_horizon_chart(cross_bank=True) + pipeline_value_timeline())
+
+
+def portfolio_page():
+    return _page('UK Banking account priorities', _visual_css_marker() + breadcrumb((("UK Banking","/flora/banking"),("Account priorities","/flora/banking/portfolio"))) + "<section class='hero'><h1>Which banks should I focus on?</h1><p>Focus first on accounts where pressure, capacity and visible change combine into actionable executive conversations.</p></section>" + portfolio_priority_map() + _prev45_portfolio_page())
+
+
+def bank_page(slug, briefing=False):
+    html,status=_prev45_bank_page(slug, briefing)
+    if status != 200 or slug not in BANKS: return html,status
+    visuals = _visual_css_marker() + (capability_gap_map(slug) if slug=='lloyds' else '') + opportunity_horizon_chart(slug)
+    return html.replace('</h1>', '</h1>'+visuals, 1), status
