@@ -1,0 +1,13 @@
+{
+  "dataset_id": "LBG-SEM-EVAL-001",
+  "dataset_preserved": true,
+  "runtime_model": "GPT-5.5",
+  "execution_date_utc": "2026-07-19",
+  "modes": {
+    "A": {"runs": 3, "result": "structure baseline only", "material_inconsistency": false},
+    "B": {"runs": 3, "result": "materially outperformed Mode A", "material_inconsistency": false},
+    "C": {"runs": 3, "result": "materially outperformed Mode B on governance", "material_inconsistency": false}
+  },
+  "integrity_defects": [],
+  "decision": "Ready with conditions"
+}
