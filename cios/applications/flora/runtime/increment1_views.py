@@ -4,7 +4,7 @@ from __future__ import annotations
 from html import escape
 from typing import Any
 
-from cios.applications.flora.runtime.increment1 import SUPPORTED_OBJECT_ID, open_focus_object
+from cios.applications.flora.runtime.increment1 import SUPPORTED_OBJECT_ID, load_fixture, open_focus_object
 
 
 def _value(value: Any) -> str:
@@ -23,7 +23,7 @@ def _safe_notice(notice: dict[str, Any]) -> str:
         "<h3>Safe-unavailable state</h3>"
         f"<p><strong>Status:</strong> {_value(notice.get('status', 'safe_unavailable'))}</p>"
         f"<p><strong>Reason:</strong> {_value(notice.get('reason_code'))}</p>"
-        f"<p>{_value(notice.get('message'))}</p>"
+        f"<p>{_value(notice.get('user_safe_explanation') or notice.get('message'))}</p>"
         f"<p><strong>Retryable:</strong> {_value(notice.get('retryable'))}</p>"
         "</article>"
     )
@@ -56,6 +56,7 @@ def increment1_workspace_page(object_id: str = SUPPORTED_OBJECT_ID) -> tuple[str
       {_unknowns(w['unknowns'])}
       {_contradictions(w['contradictions'])}
       {_lineage(w['lineage'])}
+      {_lineage_examples()}
       {_workspace_state(w['workspace_state'])}
       <section class='card'><h2>Safe-unavailable test states</h2><p>Contract-defined unavailable responses are rendered without fabricated fallback content.</p><p><a href='/flora/object/unsupported-object'>Open unresolved identity safe-unavailable state</a></p>{''.join(_safe_notice(n) for n in w['safe_unavailable_notices']) or '<p>No runtime section notices for this read projection.</p>'}</section>
     </main>
@@ -88,6 +89,22 @@ def _lineage(l):
     nodes="".join(f"<li><strong>{_value(n.get('node_type'))}</strong> → {_value(n.get('node_id'))} · {_value(n.get('provenance_reference'))}</li>" for n in l.get('lineage_nodes', []))
     edges="".join(f"<li>{_value(e.get('from'))} → {_value(e.get('to'))} ({_value(e.get('edge_type'))})</li>" for e in l.get('lineage_edges', []))
     return f"<section class='card lineage'><h2>Inspectable lineage</h2><p><strong>Completeness:</strong> {_value(l.get('completeness_status'))}</p><ol>{nodes}</ol><h3>Presentation projection path</h3><ul>{edges}</ul><p>Partial and access-redacted segments: {_value(len(l.get('unavailable_segments', [])))} unavailable; {_value(len(l.get('access_redacted_segments', [])))} redacted.</p></section>"
+
+
+def _lineage_examples() -> str:
+    partial = load_fixture("partial", "lineage-partial.json")
+    redacted = load_fixture("partial", "lineage-access-redacted.json")
+    unresolved = load_fixture("partial", "relationship-unresolved-target.json")
+    partial_segments = "; ".join(partial.get("unavailable_segments", []))
+    redacted_segments = "; ".join(redacted.get("access_redacted_segments", []))
+    return (
+        "<section class='card lineage'><h2>Partial and inaccessible lineage examples</h2>"
+        "<p>Unavailable lineage is labelled as incomplete rather than shown as absent.</p>"
+        f"<p><strong>Partial lineage:</strong> {_value(partial.get('completeness_status'))} — {_value(partial_segments)}</p>"
+        f"<p><strong>Access-redacted lineage:</strong> {_value(redacted.get('completeness_status'))} — {_value(redacted_segments)}</p>"
+        f"<p><strong>Unresolved relationship:</strong> {_value(unresolved.get('target_original_identifier'))}; status {_value(unresolved.get('resolution_status'))}.</p>"
+        "</section>"
+    )
 
 
 def _workspace_state(s):
