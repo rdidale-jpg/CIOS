@@ -42,6 +42,32 @@ class ContextEvidence(FrozenModel):
     freshness: str = "fixed-evaluation-corpus"
 
 
+
+
+class EvidenceTrustItem(FrozenModel):
+    evidence_id: str
+    source_authority: str
+    evidence_role: Literal["direct support", "contextual support", "contradictory evidence", "limitation evidence", "unknown role"]
+    scope: Literal["Lloyds-specific", "sector-level", "supplier-level", "cross-enterprise", "unknown scope"]
+    publication_date: str
+    evidence_period: str
+    freshness_status: Literal["current", "dated", "temporally uncertain"]
+    data_quality_flags: tuple[str, ...]
+    corroboration: Literal["independently corroborated", "internally corroborated", "single-source", "not assessed"]
+    limitation: str
+    confidence_contribution: Literal["strong factual support", "moderate factual support", "contextual support only", "weak or incomplete support", "unavailable"]
+
+
+class ClaimEvidenceSummary(FrozenModel):
+    change_id: str
+    evidence_strength: str
+    primary_source_basis: str
+    corroboration_status: str
+    temporal_quality: str
+    important_limitation: str
+    summary: str
+
+
 class ContextObservation(FrozenModel):
     observation_id: str
     statement: str
@@ -248,6 +274,83 @@ def explain_lloyds_changes(package: ContextPackage | None = None) -> BoundedExpl
         prohibited_outputs=("recommendation", "opportunity_score", "named sponsor assertion", "budget assertion", "causality beyond package lineage"),
     )
 
+
+
+def _has_partial_or_missing_date(date: str) -> bool:
+    return not date or "XX" in date or date.lower() in {"unknown", "not available"}
+
+
+def _source_authority_label(source_authorities: tuple[str, ...], source_ids: tuple[str, ...]) -> str:
+    authorities = set(source_authorities)
+    if "government-regulatory-context" in authorities:
+        return "UK regulator or government source"
+    if "primary-company-results" in authorities:
+        return "Lloyds investor reporting"
+    if any(a in authorities for a in ("primary-company-report", "primary-company-announcement")):
+        return "Lloyds corporate disclosure"
+    if any("GOOGLE" in sid for sid in source_ids):
+        return "technology supplier statement"
+    if any("secondary" in a for a in authorities):
+        return "secondary research source"
+    return "unknown authority"
+
+
+def evidence_trust_view(package: ContextPackage, explanation: BoundedExplanation) -> tuple[EvidenceTrustItem, ...]:
+    passages_by_id = {p.passage_id: p for p in package.source_passages}
+    source_by_id = {s["source_id"]: s for s in package.source_manifest}
+    direct_eids = {eid for c in explanation.changes for eid in c.evidence_ids}
+    contextual_eids = {"EV-LBG-006"}
+    limitation_eids = {e.evidence_id for e in package.evidence if "not identify" in e.claim or "do not" in e.claim}
+    items: list[EvidenceTrustItem] = []
+    for ev in package.evidence:
+        source_ids = tuple(ref for ref in ev.lineage if ref in source_by_id)
+        passage_ids = tuple(ref for ref in ev.lineage if ref in passages_by_id)
+        source_dates = tuple(source_by_id[sid].get("date", "") for sid in source_ids)
+        passage_dates = tuple(passages_by_id[pid].date for pid in passage_ids)
+        publication_date = ", ".join(dict.fromkeys(d or "missing" for d in source_dates)) or "missing"
+        evidence_period = ", ".join(dict.fromkeys(d or "missing" for d in passage_dates)) or "missing"
+        flags = []
+        if any(_has_partial_or_missing_date(d) for d in source_dates): flags.append("missing or partial publication date")
+        if any(_has_partial_or_missing_date(d) for d in passage_dates): flags.append("missing or partial evidence period")
+        if ev.access_state != "available": flags.append("inaccessible source")
+        if ev.sector_context and ev.lloyds_direct: flags.append("sector evidence attached to enterprise claim; not Lloyds-specific proof")
+        if ev.evidence_id in contextual_eids: flags.append("source-role ambiguity preserved")
+        role = "contextual support" if ev.evidence_id in contextual_eids else "limitation evidence" if ev.evidence_id in limitation_eids else "direct support" if ev.evidence_id in direct_eids else "unknown role"
+        if any("potential_conflict" in passages_by_id[pid].coverage_tags for pid in passage_ids): role = "contradictory evidence" if ev.evidence_id not in direct_eids else role
+        if ev.sector_context and not ev.lloyds_direct: scope = "sector-level"
+        elif ev.sector_context and ev.lloyds_direct: scope = "cross-enterprise"
+        elif any("supplier_dependency" in passages_by_id[pid].coverage_tags for pid in passage_ids): scope = "supplier-level"
+        elif ev.lloyds_direct: scope = "Lloyds-specific"
+        else: scope = "unknown scope"
+        freshness = "temporally uncertain" if flags and any("date" in f or "period" in f for f in flags) else "current" if any(d.startswith("2026") for d in (*source_dates, *passage_dates)) else "dated"
+        distinct_authorities = {_source_authority_label((source_by_id[sid].get("authority", ""),), (sid,)) for sid in source_ids}
+        if len(source_ids) == 1:
+            corroboration = "single-source"
+        elif distinct_authorities and all(label.startswith("Lloyds") for label in distinct_authorities):
+            corroboration = "internally corroborated"
+        else:
+            corroboration = "not assessed"
+            flags.append("unsupported corroboration assumption avoided")
+        limitation = "Supports the stated passage-level fact only; it does not prove future outcomes, internal governance, causality or commercial prioritisation."
+        if scope == "sector-level": limitation = "Provides sector context only; it does not prove a Lloyds-specific condition."
+        if scope == "cross-enterprise": limitation = "Shows a governed relationship between Lloyds supplier usage and sector oversight; it does not prove Lloyds workload criticality or supplier-control outcomes."
+        confidence = "contextual support only" if role == "contextual support" or scope == "sector-level" else "weak or incomplete support" if freshness == "temporally uncertain" or role in {"unknown role", "limitation evidence"} else "moderate factual support" if corroboration == "single-source" else "strong factual support"
+        items.append(EvidenceTrustItem(evidence_id=ev.evidence_id, source_authority=_source_authority_label(tuple(source_by_id[sid].get("authority", "") for sid in source_ids), source_ids), evidence_role=role, scope=scope, publication_date=publication_date, evidence_period=evidence_period, freshness_status=freshness, data_quality_flags=tuple(flags) or ("none",), corroboration=corroboration, limitation=limitation, confidence_contribution=confidence))
+    return tuple(items)
+
+
+def claim_evidence_summaries(package: ContextPackage, explanation: BoundedExplanation) -> tuple[ClaimEvidenceSummary, ...]:
+    trust = {t.evidence_id: t for t in evidence_trust_view(package, explanation)}
+    summaries = []
+    for c in explanation.changes:
+        linked = [trust[eid] for eid in c.evidence_ids]
+        strength = "Strong company-reported factual support" if linked and all(t.source_authority.startswith("Lloyds") and t.evidence_role == "direct support" for t in linked) else "Mixed direct and contextual factual support"
+        basis = "; ".join(dict.fromkeys(t.source_authority for t in linked)) or "unavailable"
+        corr = "single-source" if len(linked) == 1 else "not independently corroborated" if any(t.corroboration != "independently corroborated" for t in linked) else "independently corroborated"
+        temporal = "temporally uncertain" if any(t.freshness_status == "temporally uncertain" for t in linked) else "current" if any(t.freshness_status == "current" for t in linked) else "dated"
+        limitation = c.limits[0] if c.limits else "Important limitation unavailable."
+        summaries.append(ClaimEvidenceSummary(change_id=c.change_id, evidence_strength=strength, primary_source_basis=basis, corroboration_status=corr, temporal_quality=temporal, important_limitation=limitation, summary=f"{strength}, {temporal}. {corr}. Supports selected facts, but not internal capital allocation, causality, future realised outcomes or commercial action."))
+    return tuple(summaries)
 
 def executive_presentation_for_explanation(package: ContextPackage, explanation: BoundedExplanation) -> dict[str, Any]:
     """Return a deterministic non-canonical presentation view for the bounded result."""
