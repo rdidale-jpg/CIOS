@@ -5,7 +5,9 @@
 **Owner:** Rob / CIOS  
 **Architecture owner:** CIOS Chief Architect  
 **Date:** 2026-07-19  
-**Authority:** Subordinate to Accepted ADRs, the CIOS Reference Architecture and owning Enterprise Intelligence papers.
+**Authority:** Subordinate to Accepted ADRs, the CIOS Reference Architecture, FA-001 and owning Enterprise Intelligence papers.
+
+**Related reference architecture:** `CIOS/architecture/reference-architectures/FA-001-Flora-Enterprise-Intelligence-Workspace-Reference-Architecture.md`
 
 ## 1. Purpose
 

@@ -9,6 +9,7 @@
 **Related documents:**
 
 - `CIOS/architecture/FP-0XX-Flora-Enterprise-Intelligence-Workspace-Product-Architecture.md`
+- `CIOS/architecture/reference-architectures/FA-001-Flora-Enterprise-Intelligence-Workspace-Reference-Architecture.md`
 - `CIOS/architecture/Flora-Workspace-Architecture-Reconciliation-Report.md`
 - `CIOS/architecture/CIOS-Reference-Architecture-v1.0.md`
 - `CIOS/architecture/CIOS-AI.md`

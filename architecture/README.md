@@ -20,6 +20,7 @@ Start with:
 - [CIOS AI Context](../CIOS-AI.md)
 - [Reference Architecture area](reference-architecture/README.md)
 - [CIOS Reference Architecture v1.0](reference-architecture/CIOS-Reference-Architecture-v1.0.md)
+- [Reference Architectures (FA)](reference-architectures/README.md), including [FA-001 — Flora Enterprise Intelligence Workspace Reference Architecture](reference-architectures/FA-001-Flora-Enterprise-Intelligence-Workspace-Reference-Architecture.md)
 - [CIOS Design Doctrine](reference-architecture/CIOS-Design-Doctrine.md)
 - [CIOS Chief Architect Handbook](handbook/CIOS-Chief-Architect-Handbook.md)
 - [AI Session Handoff](reference-architecture/AI-Session-Handoff.md)
@@ -116,6 +117,7 @@ The Enterprise Intelligence series begins with each monitored enterprise as a li
 
 - `handbook/` contains the CIOS Chief Architect Handbook, the operating companion for judgement and stewardship.
 - `enterprise-intelligence/` contains the EI series defining the enterprise knowledge model and Commercial Digital Twin architecture.
+- `reference-architectures/` contains FA documents that describe how significant architectural capabilities are composed and experienced, including FA-001 for Flora.
 - `founding-papers/` contains durable principles and thesis-level papers that should remain stable over time.
 - `design/` contains system design documents for platform, product and capability architecture.
 - `research/` contains evolving models, hypotheses and notes that may later become formal design or decision records.
