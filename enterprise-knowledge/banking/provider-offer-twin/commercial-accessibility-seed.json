@@ -1,0 +1,59 @@
+{
+  "schema_version": "commercial-accessibility-seed-v0.1",
+  "commercial_accessibility": [
+    {
+      "object_type": "CommercialAccessibility",
+      "commercial_accessibility_id": "CACC-GOOGLE-CLOUD-LLOYDS-001",
+      "enterprise_id": "BK-ENT-001",
+      "candidate_or_opportunity_id": "BRH-007",
+      "provider_id": "PROV-GOOGLE-CLOUD",
+      "accessibility_statement": "Commercial accessibility is not established by capability evidence; procurement route and relationship access remain unknown.",
+      "buying_authority": "unknown",
+      "procurement_route": "unknown",
+      "contract_or_framework_route": "unknown",
+      "incumbent_position": "public partnership evidence exists but current workshare is unknown",
+      "relationship_access": "unknown",
+      "timing_window": "unknown",
+      "barriers": [
+        "BK-OSI-UNK-002",
+        "BK-OSI-UNK-008"
+      ],
+      "accessibility_strength": "weak",
+      "evidence_lineage": [
+        {
+          "canonical_object_id": "WEB-001",
+          "source_document_id": "SDOC-736301E7B93E",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/08-Evidence-Register.md",
+          "archive_member_sha256": "7686458145b118604385eb2d274951de9ce4785e2674ba72af09db913c41e445",
+          "lineage_status": "complete"
+        },
+        {
+          "canonical_object_id": "BK-OSI-UNK-002",
+          "source_document_id": "SDOC-1FBD2ADF3F39",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/06-Unknown-Register.md",
+          "archive_member_sha256": "7c9057719d6f0687b1d8ed60048b59efc72b26e8453389cbc2688698c3fc95b5",
+          "lineage_status": "complete"
+        },
+        {
+          "canonical_object_id": "BK-OSI-UNK-008",
+          "source_document_id": "SDOC-1FBD2ADF3F39",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/06-Unknown-Register.md",
+          "archive_member_sha256": "7c9057719d6f0687b1d8ed60048b59efc72b26e8453389cbc2688698c3fc95b5",
+          "lineage_status": "complete"
+        }
+      ],
+      "unknowns": [
+        "BK-OSI-UNK-002",
+        "BK-OSI-UNK-008"
+      ],
+      "confidence": "low",
+      "review_status": "owner_review_required"
+    }
+  ]
+}

@@ -281,6 +281,88 @@ assets:
     relationships:
       - relationship: "validates"
         target: "BK-CAN-RES-001"
+
+  - asset_id: BK-POT-SCHEMA-001
+    title: "Provider Offer Twin Schema"
+    asset_type: "Canonical Schema"
+    domain: Banking
+    status: Candidate
+    version: "0.1"
+    owner: TBD
+    location: "../schemas/provider-offer-twin.schema.json"
+    relationships:
+      - relationship: "defines"
+        target: "BK-POT-001"
+  - asset_id: BK-CR-SCHEMA-001
+    title: "Commercial Reasoning Schema"
+    asset_type: "Canonical Schema"
+    domain: Banking
+    status: Candidate
+    version: "0.1"
+    owner: TBD
+    location: "../schemas/commercial-reasoning.schema.json"
+    relationships:
+      - relationship: "defines"
+        target: "BK-POT-CR-001"
+  - asset_id: BK-POT-001
+    title: "Banking Provider Offer Twin Seed"
+    asset_type: "Provider Offer Twin"
+    domain: Banking
+    status: Candidate
+    version: "0.1"
+    owner: TBD
+    location: "banking/provider-offer-twin/banking-provider-offer-twin.json"
+    relationships:
+      - relationship: "mapped_from"
+        target: "BK-CAN-RES-001"
+  - asset_id: BK-POT-CR-001
+    title: "Banking Commercial Reasoning Seeds"
+    asset_type: "Commercial Reasoning Seed"
+    domain: Banking
+    status: Candidate
+    version: "0.1"
+    owner: TBD
+    location: "banking/provider-offer-twin/commercial-conviction-seed.json"
+    relationships:
+      - relationship: "uses"
+        target: "BK-POT-001"
+      - relationship: "supported_by"
+        target: "banking/provider-offer-twin/provider-fit-assessment-seed.json"
+      - relationship: "supported_by"
+        target: "banking/provider-offer-twin/commercial-accessibility-seed.json"
+  - asset_id: BK-POT-REV-001
+    title: "Banking Provider Offer Twin Review Items"
+    asset_type: "Review Register"
+    domain: Banking
+    status: Candidate
+    version: "0.1"
+    owner: TBD
+    location: "banking/provider-offer-twin/provider-offer-twin-review-items.json"
+    relationships:
+      - relationship: "preserves_review_items_for"
+        target: "BK-POT-001"
+  - asset_id: BK-POT-REP-001
+    title: "Provider Offer Twin Implementation Report"
+    asset_type: "Implementation Report"
+    domain: Banking
+    status: Candidate
+    version: "0.1"
+    owner: TBD
+    location: "banking/provider-offer-twin/Provider-Offer-Twin-Implementation-Report.md"
+    relationships:
+      - relationship: "documents"
+        target: "BK-POT-001"
+  - asset_id: BK-POT-VAL-001
+    title: "Provider Offer Twin Validation Script"
+    asset_type: "Validation Script"
+    domain: Banking
+    status: Candidate
+    version: "0.1"
+    owner: TBD
+    location: "../tools/enterprise_knowledge/validate_provider_offer_twin.py"
+    relationships:
+      - relationship: "validates"
+        target: "BK-POT-001"
 flora:
   discovery_register: "banking/flora/Banking-Knowledge-Register.md"
   machine_manifest: "banking/flora/Banking-Knowledge-Manifest.json"

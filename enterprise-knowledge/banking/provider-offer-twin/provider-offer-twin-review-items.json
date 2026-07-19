@@ -1,0 +1,36 @@
+{
+  "schema_version": "provider-offer-twin-review-items-v0.1",
+  "review_items": [
+    {
+      "review_item_id": "POT-REV-001",
+      "object_type": "ProviderOfferTwinReviewItem",
+      "review_reason": "Provider Offer Catalogue, Supplier Footprint Register and Offer Fit Matrix detail was not migrated as structured canonical objects; do not invent offer facts.",
+      "related_canonical_object_ids": [
+        "BK-OSI-UNK-001",
+        "BK-OSI-UNK-007"
+      ],
+      "source_lineage": [
+        {
+          "canonical_object_id": "BK-OSI-UNK-001",
+          "source_document_id": "SDOC-1FBD2ADF3F39",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/06-Unknown-Register.md",
+          "archive_member_sha256": "7c9057719d6f0687b1d8ed60048b59efc72b26e8453389cbc2688698c3fc95b5",
+          "lineage_status": "complete"
+        },
+        {
+          "canonical_object_id": "BK-OSI-UNK-007",
+          "source_document_id": "SDOC-1FBD2ADF3F39",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/06-Unknown-Register.md",
+          "archive_member_sha256": "7c9057719d6f0687b1d8ed60048b59efc72b26e8453389cbc2688698c3fc95b5",
+          "lineage_status": "complete"
+        }
+      ],
+      "confidence": "high",
+      "review_status": "owner_review_required"
+    }
+  ]
+}

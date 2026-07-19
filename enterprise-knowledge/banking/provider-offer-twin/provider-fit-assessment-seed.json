@@ -1,0 +1,61 @@
+{
+  "schema_version": "provider-fit-seed-v0.1",
+  "provider_fits": [
+    {
+      "object_type": "ProviderFit",
+      "provider_fit_id": "PFIT-CAPABILITY-ONLY-GOOGLE-CLOUD-001",
+      "enterprise_id": "BK-ENT-001",
+      "candidate_or_opportunity_id": "BRH-007",
+      "provider_id": "PROV-GOOGLE-CLOUD",
+      "linked_capability_ids": [
+        "PCAP-GOOGLE-CLOUD-DATA-AI-001"
+      ],
+      "linked_offer_ids": [],
+      "fit_statement": "Capability-only fit seed: migrated evidence supports a possible data and AI capability relationship, but no canonical ProviderOffer is created.",
+      "fit_basis": "capability_only",
+      "fit_strength": "medium",
+      "fit_limits": [
+        "No packaged offer lineage",
+        "No procurement or relationship assessment in ProviderFit"
+      ],
+      "required_non_provider_conditions": [
+        "Enterprise need linkage requires owner review"
+      ],
+      "evidence_lineage": [
+        {
+          "canonical_object_id": "WEB-001",
+          "source_document_id": "SDOC-736301E7B93E",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/08-Evidence-Register.md",
+          "archive_member_sha256": "7686458145b118604385eb2d274951de9ce4785e2674ba72af09db913c41e445",
+          "lineage_status": "complete"
+        },
+        {
+          "canonical_object_id": "WEB-002",
+          "source_document_id": "SDOC-736301E7B93E",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/08-Evidence-Register.md",
+          "archive_member_sha256": "7686458145b118604385eb2d274951de9ce4785e2674ba72af09db913c41e445",
+          "lineage_status": "complete"
+        },
+        {
+          "canonical_object_id": "BRH-ED-007",
+          "source_document_id": "SDOC-BBCD00530D64",
+          "source_zip_path": "docs/Research/banking-reinvention-hypotheses-release.zip",
+          "source_zip_sha256": "cc683f10f8d9df3182db8677b2003bdc6ec375228be58d12d401ad25670a25e8",
+          "archive_member_path": "enterprise-knowledge/banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md",
+          "archive_member_sha256": "cba9c89746267d05b5192f0c0567f5a2e8ad9cc5e5d89e775487f9986f80043b",
+          "lineage_status": "complete"
+        }
+      ],
+      "unknowns": [
+        "BK-OSI-UNK-001",
+        "BK-OSI-UNK-007"
+      ],
+      "confidence": "low",
+      "review_status": "owner_review_required"
+    }
+  ]
+}
