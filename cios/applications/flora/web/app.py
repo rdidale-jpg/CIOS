@@ -38,6 +38,7 @@ from cios.applications.flora.enterprise_intelligence.runtime import EnterpriseIn
 from cios.applications.flora.architecture_export import architecture_export_page, record_download
 from cios.applications.flora.runtime.increment1_views import increment1_workspace_page
 from cios.applications.flora.enterprise_intelligence.explain import executive_presentation_for_explanation, increment2_runtime_path, audit_event, evidence_trust_view, claim_evidence_summaries
+from cios.applications.flora.banking_portfolio import portfolio_page as banking_portfolio_page, bank_page as banking_bank_page, compare_page as banking_compare_page, evidence_page as banking_evidence_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -80,6 +81,16 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_flora_home_page(self.headers))
             elif parsed.path in {"/workspace/reference", "/flora/reference"}:
                 self._html(reference_workspace_page(self.headers, saved=parse_qs(parsed.query).get("saved") == ["1"]), set_cookie=reference_resume_cookie())
+            elif parsed.path == "/flora/banking":
+                self._html(banking_portfolio_page())
+            elif parsed.path == "/flora/banking/compare":
+                self._html(banking_compare_page())
+            elif parsed.path.startswith("/flora/banking/") and parsed.path.endswith("/briefing"):
+                self._html(*banking_bank_page(parsed.path.removeprefix("/flora/banking/").removesuffix("/briefing"), briefing=True))
+            elif parsed.path.startswith("/flora/banking/") and parsed.path.endswith("/evidence"):
+                self._html(*banking_evidence_page(parsed.path.removeprefix("/flora/banking/").removesuffix("/evidence")))
+            elif parsed.path.startswith("/flora/banking/"):
+                self._html(*banking_bank_page(parsed.path.removeprefix("/flora/banking/")))
             elif parsed.path == "/flora/object/BK-ENT-001/explain":
                 self._html(_flora_increment2_explain_page(self.headers, parse_qs(parsed.query)))
             elif parsed.path == "/flora/object/BK-ENT-001/context-package":
@@ -588,7 +599,8 @@ def _flora_home_page(headers=None, question_error: str = "") -> str:
             {error}
           </form>
         </section>
-        <section class='card' aria-labelledby='increment1-title'><h2 id='increment1-title'>Increment 1 workspace</h2><p>The Lloyds Banking Group read-only workspace is the visible Increment 1 experience. The cards below remain legacy prototype navigation while migration continues.</p><p><a class='primary-link' href='/flora/object/BK-ENT-001'>Open Lloyds Banking Group Increment 1 workspace</a></p></section>
+        <section class='card' aria-labelledby='banking-title'><h2 id='banking-title'>UK Banking</h2><p>Open the governed UK Banking portfolio for Lloyds, Barclays, NatWest, HSBC UK and Santander UK.</p><p><a class='primary-link' href='/flora/banking'>Open UK Banking portfolio</a></p></section>
+        <section class='card' aria-labelledby='workspace-title'><h2 id='workspace-title'>Workspace tools</h2><p><a href='/digital-twins'>Enterprise Canvas</a> · <a href='/blueprint-import'>Import Blueprint</a> · <a href='/blueprint-import/history'>Import History</a>{" · <a href='/settings'>Settings</a>" if decision.owner_recognised else ""}</p></section>
         <section class='mode-grid' aria-labelledby='modes-title'>
           <h2 id='modes-title' class='visually-hidden'>Primary product areas</h2>
           {_mode_card('/explore', 'Explore', 'Understand industries and change', 'Industry understanding, observations, mechanisms, hypotheses and why now.')}
