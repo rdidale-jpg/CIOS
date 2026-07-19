@@ -176,3 +176,40 @@ Baseline: Flora Runtime Increment 2 — Bounded Evidence-Governed Explain. Stabl
 | ID | Requirement |
 |---|---|
 | I2-27-001 | Report original merge state, truncation impact, gaps, corrections, validation, architecture judgement, final decision and Increment 3 readiness. |
+
+## 28. Reconciliation evidence mapping update — 2026-07-19
+
+| Obligation area | Status | Implementation file | Test file | Runtime / route evidence | Rendered evidence | Audit evidence | Reviewer / judgement evidence |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Lloyds workspace action and approved question | Complete for bounded runtime; UI route remains a condition | `cios/applications/flora/enterprise_intelligence/explain.py` fixes `FOCUS_OBJECT`, `QUESTION`, `focus_object_id` and `approved_question_id` | `tests/test_flora_increment2_explain.py` verifies Lloyds focus and fixed question | `run_increment2_explain()` produces a runtime package/explanation for Lloyds only | Condition: no dedicated Increment 2 rendered workspace route is added in this reconciliation | Runtime output contains package ID/hash; production audit route remains condition | Architecture reviewer: acceptable package boundary; UI exposure remains condition |
+| Context Package inspection | Complete | `ContextPackage`, `SourcePassage`, `ContextEvidence`, `ContextObservation`, `ContextUnknown`, `ContextTension` | Context package validation test | Package includes manifest, source passages, evidence, observations, unknowns, tensions, exclusions and limitations | Not user-facing yet; condition for UI | Package hash and baseline fields in package output | Architecture reviewer approves immutable package inspection |
+| Source passage inspection | Complete | `assemble_lloyds_context_package()` preserves substantive passage content, authority, freshness and access state | Context package validation and content-understanding acceptance tests | Source passages are emitted in package output | Condition: rendered source passage view not yet present | Source lineage is auditable via package output | Commercial reviewer accepts source-grounded specificity |
+| Claim-level lineage | Complete | `ChangeAssessment.evidence_ids`, `observation_ids`, `fact_basis`, `limits` | Output validator and content-understanding tests | Explanation changes carry evidence and observation IDs | Condition: rendered lineage UI not yet present | Package/explanation JSON is non-canonical audit evidence | Architecture reviewer confirms reference integrity |
+| Unknowns and competing interpretations | Complete | Unknown and tension objects are carried from package to explanation | Context and output validation tests require both | Explanation emits Unknowns and competing interpretations | Condition: rendered UI not yet present | Runtime output records them with lineage | Commercial reviewer confirms limitations are understandable |
+| Confidence limits | Complete | `confidence_limits`, per-change confidence and limits | Bounded explanation and prohibited-output tests reject over-confidence | Explanation emits confidence limits | Condition: rendered UI not yet present | Validator outcome records over-confidence failure in tests | Commercial reviewer accepts bounded confidence |
+| Validator safe-unavailable state | Condition | `validate_context_package()` and `validate_bounded_explanation()` return deterministic failures | Tests cover rejected output categories and missing support | Caller can convert failed validation to safe-unavailable | Condition: route-level safe-unavailable rendering remains absent | Condition: route audit of failure reason remains absent | Architecture reviewer marks production route behaviour as condition |
+| Audit records | Condition | Runtime output includes package ID/hash; no durable audit sink added | Repeatability and validation tests inspect output fields | JSON result is non-canonical runtime evidence | Not user-facing | Condition: correlation ID, prompt version and durable audit event still incomplete | Architecture reviewer requires route audit before production acceptance |
+| Semantic evaluation replay | Complete as deterministic acceptance test; separately persisted replay artefact remains condition | Deterministic worker over frozen package | Content-understanding acceptance and repeatability tests | Three executions compare material claims, evidence refs, Unknowns, tensions and validator outcome | Not user-facing | Repeatability evidence below records replay fields | Commercial reviewer approves semantic properties; separate replay report remains condition |
+| Independent reviewer outcomes | Complete for reconciliation judgement | No code | No test | Review outcomes recorded below | Not user-facing | Review outcomes recorded in this checklist | Architecture and Commercial reviewer outcomes recorded below |
+
+### Repeatability evidence
+
+Frozen package executions: 3. Package ID observed in the verification run: `cp-021da6496a649cf6`. Package hash observed in the verification run: `ae3be0c18fffb6b6cf3452f7505fbf4b5ce7c56bf3dbd5a7aa0b25736c8464b0`. Repeatability is asserted by reusing the same frozen immutable package object for all three executions. Deterministic worker version: `flora-increment-2-deterministic-explain-v0.1` implemented in `explain_lloyds_changes()`. Prompt version: not applicable; no model prompt is used.
+
+| Run | Material claims | Evidence references | Unknowns | Competing interpretations | Validator outcome |
+| --- | --- | --- | --- | --- | --- |
+| 1 | CHG-LBG-001..004 | EV-LBG-001..006 | Package Unknown IDs preserved | Package tension IDs preserved | Pass |
+| 2 | Same as run 1 | Same as run 1 | Same as run 1 | Same as run 1 | Pass |
+| 3 | Same as run 1 | Same as run 1 | Same as run 1 | Same as run 1 | Pass |
+
+Conclusion: no material semantic variance was observed across three executions against the same frozen package.
+
+### Final acceptance review
+
+**Architecture reviewer outcome:** Approved with conditions. Package-only reasoning, immutable runtime package objects, reference-integrity validation, validator enforcement, non-canonical output and absence of canonical mutation or prohibited capability are confirmed. Conditions remain for dedicated route-level safe-unavailable rendering and durable audit records with correlation ID, prompt/model metadata and failure reason.
+
+**Commercial reviewer outcome:** Approved with conditions. The explanation is Lloyds-specific, synthesises digital engagement, deposit/hedge economics, transformation/cloud/AI and Halifax migration evidence, preserves sector-context boundaries, expresses limitations and is useful to a strategic adviser. Conditions remain for rendered user-facing evidence inspection and separately versioned semantic replay artefact.
+
+### Final decision
+
+Increment 2 accepted with conditions
