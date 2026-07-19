@@ -555,7 +555,7 @@ def _pipeline_view(run) -> str:
         selected=st.get('selected_observations') or st.get('mechanisms') or st.get('source_asset_ids') or st.get('relationship_paths') or []
         if selected and isinstance(selected[0], dict): selected=[x.get('observation_id') or x.get('mechanism_id') or x.get('asset_id') for x in selected]
         rows.append(f"<article class='pipeline-stage'><h3>{escape(label)} <span class='badge'>{escape(st.get('status',''))}</span> <span class='confidence'>Confidence {escape(str(st.get('confidence','')))}</span></h3><p><strong>Selected objects:</strong> {_chips(selected) if selected else 'Runtime planning stage'}</p><p><strong>Unknowns:</strong> {escape('; '.join(st.get('unknowns') or []) or 'None recorded at this stage')}</p><p><strong>Contradictions:</strong> {escape('; '.join(st.get('contradictions') or []) or 'None recorded at this stage')}</p><p><strong>Validation result:</strong> {escape(st.get('validation_state','schema_valid'))}. <strong>Duration:</strong> not captured in this deterministic slice.</p></article>")
-    return "<details class='card pipeline'><summary>How Flora reasoned</summary><p class='muted'>Governed stage outputs only. Hidden chain-of-thought is not exposed.</p>"+"".join(rows)+"</details>"
+    return f"<details class='card pipeline'><summary>How Flora reasoned</summary><p class='muted'>Governed stage outputs only. Hidden chain-of-thought is not exposed. Semantic reasoning mode: {escape(run.telemetry.get('semantic_reasoning_mode','Deterministic fallback'))}</p>"+"".join(rows)+"</details>"
 
 
 def _brief_sections(run) -> str:
@@ -588,21 +588,33 @@ def _brief_sections(run) -> str:
     """
 
 def _flora_explore_page(headers=None) -> str:
-    run = _banking_run(); s=run.stages; r=s['retrieval']
+    run = _banking_run(); s=run.stages; r=s['retrieval']; sem=s.get('semantic_context', {})
+    interp = "Banking distribution is moving from a branch-ownership model toward a mixed access model in which app-first service coexists with shared, physical and assisted access."
+    why = "This matters because channel strategy now affects cost, trust, inclusion, regulatory outcome evidence and executive accountability rather than only branch volumes."
+    why_now = "It matters now because branch withdrawals, banking hubs, Consumer Duty evidence demands and legacy simplification pressures are active while the sustainable economics remain unresolved."
+    participant = sem.get('participant_differences', [])
+    observations = ''.join(f"<article class='mini-card'><h3>{_link_object(o['observation_id'])}</h3><p>{o.get('what_it_says') or o['statement']}</p><p><strong>Why it matters:</strong> {o.get('why_it_matters','It supports the Banking change interpretation.')}</p><p><strong>Mechanisms:</strong> {_chips(o.get('related_mechanisms', []))}</p><p><strong>Evidence:</strong> {_chips(o.get('evidence_refs', []))}</p><p><strong>Limitations:</strong> {o.get('limitations','Requires further source validation.')}</p></article>" for o in r['observations'])
+    mechanisms = ''.join(f"<article class='mini-card'><h3>{m.get('name',m['mechanism_id'])} <small>{_link_object(m['mechanism_id'])}</small></h3><p>{m.get('meaning','Unsupported by current governed knowledge')}</p><p><strong>How it operates:</strong> {m.get('how_it_operates','')}</p><p><strong>Why it matters:</strong> {m.get('why_it_matters','')}</p><p><strong>Alternative mechanisms:</strong> {', '.join(m.get('alternative_mechanisms', []))}</p></article>" for m in r['mechanisms'])
+    evidence_groups=''.join(f"<article class='mini-card'><h3>{a['title']}</h3><p>{_link_object(a['asset_id'])} · {a['asset_type']} · {a['status']}</p></article>" for a in r['assets'])
+    unknowns = sem.get('unknowns') or []
+    unknown_html=''.join(f"<article class='mini-card unknown'><h3>{u['unknown_id']}</h3><p><strong>Question:</strong> {u['question']}</p><p><strong>Why it matters:</strong> {u['why_it_matters']}</p><p><strong>Evidence required:</strong> {', '.join(u['evidence_required'])}</p><p><strong>Decision constrained:</strong> {u['decision_constrained']}</p></article>" for u in unknowns)
+    contradictions = sem.get('contradictions') or []
+    contra_html=''.join(f"<article class='mini-card'><h3>{c['contradiction_id']}</h3><p>{c['claim_a']} / {c['claim_b']}</p><p><strong>Participant difference:</strong> {c['participant_difference']}</p><p><strong>Effect:</strong> {c['effect_on_recommendation']}</p></article>" for c in contradictions)
     body = f"""
-    <section class='hero'><p class='eyebrow'>Explore / Banking</p><h1>What is happening?</h1><p class='lead'>Understand industries, change and emerging hypotheses.</p><p class='lead'>A governed Banking view from ADR-024, FEIR-001 and EIRP-001 assets.</p></section>
-    <section class='card'><h2>Industry overview</h2><p>Banking is being interpreted through the governed Banking industry foundation, twin, infrastructure and mechanism assets.</p></section>
-    <section class='card'><h2>Current changes</h2><p>{s['strategic_sales_brief']['markdown'].split('## Why now?')[1].split('## Why them?')[0]}</p></section>
-    <section class='card'><h2>Key observations</h2><ul>{''.join(f"<li>{_link_object(o['observation_id'])} {o['statement']}</li>" for o in r['observations'])}</ul></section>
-    <section class='card'><h2>Mechanisms</h2><p>{_chips(m['mechanism_id'] for m in r['mechanisms'])}</p></section>
-    <section class='card'><h2>Current hypotheses</h2><p>{_link_object('BRH-003')} {s['hypothesis_assessment']['original_statement'][:500]}</p></section>
-    <section class='card'><h2>Evidence</h2><p>{_chips(a['asset_id'] for a in r['assets'])}</p></section>
-    <section class='card'><h2>Unknowns</h2>{_unknown_cards(s['recommendation_eligibility']['unknowns'], s['hypothesis_assessment']['evidence_demands'])}</section>
-    <section class='card contradiction'><h2>Contradictions</h2><ul>{''.join(f'<li>{c}</li>' for c in s['recommendation_eligibility']['contradictions'])}</ul></section>
-    <section class='card'><h2>Suggested next questions</h2><p><a class='button-link' href='/focus'>Which participant or enterprise should I inspect?</a> <a class='button-link' href='/shape'>Shape the Strategic Sales Brief</a></p></section>
+    <section class='hero'><p class='eyebrow'>Explore / Banking</p><h1>What is changing in Banking?</h1><p class='lead'>Understand industries, change and emerging hypotheses.</p><p class='lead'>{interp}</p></section>
+    <section class='card'><h2>Current interpretation</h2><p>{interp}</p><p><strong>Confidence:</strong> {s['strategic_sales_brief']['confidence']} · <span class='muted'>Semantic reasoning mode: {run.telemetry.get('semantic_reasoning_mode','Deterministic fallback')}</span></p></section>
+    <section class='card'><h2>Why it matters</h2><p>{why}</p></section>
+    <section class='card'><h2>Why now</h2><p>{why_now}</p></section>
+    <section class='card'><h2>Participant differences</h2><ul>{''.join(f'<li>{p}</li>' for p in participant)}</ul></section>
+    <section class='card'><h2>Supporting observations</h2><div class='mini-grid'>{observations}</div></section>
+    <section class='card'><h2>Underlying mechanisms</h2><div class='mini-grid'>{mechanisms}</div></section>
+    <section class='card'><h2>Current hypothesis</h2><p>{_link_object('BRH-003')} {s['hypothesis_assessment']['original_statement'][:500]}</p><p><strong>Why plausible:</strong> Observations and mechanisms support a mixed-access interpretation while preserving evidence gaps.</p></section>
+    <section class='card'><h2>Alternative interpretations</h2><ul>{''.join(f'<li>{a}</li>' for a in s['mechanism_assessment']['alternatives'])}</ul>{contra_html}</section>
+    <section class='card'><h2>Unknowns</h2><div class='mini-grid'>{unknown_html}</div></section>
+    <section class='card'><h2>Evidence</h2><div class='mini-grid'>{evidence_groups}</div></section>
+    <section class='card'><h2>Next question</h2><p>The proportionate next action is to validate operating economics, customer dependence and role-level ownership before shaping a proposal.</p><p><a class='button-link' href='/focus'>Which participant or enterprise should I inspect?</a> <a class='button-link' href='/shape'>Shape the Strategic Sales Brief</a></p></section>
     {_pipeline_view(run)}"""
     return _flora_v2_page("Explore Banking", "explore", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
-
 
 def _flora_focus_page(headers=None) -> str:
     run=_banking_run(); s=run.stages
