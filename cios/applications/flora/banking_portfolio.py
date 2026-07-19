@@ -932,3 +932,234 @@ def bank_page(slug, briefing=False):
     if status != 200 or slug not in BANKS: return html,status
     visuals = _visual_css_marker() + (capability_gap_map(slug) if slug=='lloyds' else '') + opportunity_horizon_chart(slug)
     return html.replace('</h1>', '</h1>'+visuals, 1), status
+
+# Increment 4.5.1 visual correction and complete intelligence access.
+BACKLOG_451 = (
+    "FLR-084 Visual layout quality gates", "FLR-085 Timeline label architecture", "FLR-086 Sortable commercial value columns",
+    "FLR-087 Executive versus accessible-table presentation", "FLR-088 Complete intelligence explorer", "FLR-089 Featured-versus-available intelligence",
+    "FLR-090 Industry signal explorer", "FLR-091 Knowledge reachability contract", "FLR-092 PDF pagination quality",
+    "FLR-093 Unavailable-state visual semantics", "FLR-094 Visual regression checks",
+)
+VISUAL_QUALITY_RULES = {
+    "max_blank_page_ratio": 0.35,
+    "min_table_column_ch": 12,
+    "timeline_axis_repeat_on_page_split": True,
+    "legend_must_be_smaller_than_visual": True,
+    "no_heading_isolated_from_visual": True,
+}
+
+
+def intelligence_inventory() -> dict[str, int]:
+    return {
+        "Industry signals": len(INDUSTRY_SIGNALS),
+        "Banks": len(BANKS),
+        "Opportunity hypotheses": len(pipeline()),
+        "Supplier assessments": sum(len(o.supplier_entries) for o in pipeline()),
+        "Competitor-offer assessments": sum(len(v) for v in SUPPLIER_OFFERS.values()),
+        "PESTLE forces": 6,
+        "Reinvention capabilities": len(REFERENCE_DOMAINS),
+    }
+
+
+def intelligence_inventory_html():
+    inv = intelligence_inventory()
+    return "<section class='card intelligence-inventory'><h2>Available in this banking view</h2><dl>" + "".join(f"<dt>{escape(k)}</dt><dd>{v}</dd>" for k, v in inv.items()) + "</dl></section>"
+
+
+def explore_all_intelligence_html():
+    inv = intelligence_inventory()
+    return ("<section class='card explore-all-intelligence'><h2>Explore all intelligence</h2>"
+        f"<p><a href='/flora/banking/signals'>Explore all industry signals ({inv['Industry signals']})</a></p>"
+        f"<p><a href='/flora/banking/pipeline'>View all opportunities ({inv['Opportunity hypotheses']})</a></p>"
+        f"<p><a href='/flora/banking/competitors#ranked-suppliers'>View all suppliers ({inv['Supplier assessments']})</a></p>"
+        f"<p><a href='/flora/banking/outlook#barriers'>View all barriers ({len(pipeline())})</a></p>"
+        f"<p><a href='/flora/banking/competitors'>View all competitor assessments ({inv['Competitor-offer assessments']})</a></p>"
+        "<p><a href='/flora/banking/outlook#pestle'>Open full PESTLE analysis</a></p>"
+        "<p><a href='/flora/banking/ai-native/capability-model'>Open complete capability model</a></p></section>")
+
+
+def featured_selection_contract_html(kind, selected, full):
+    selected_ids = tuple(getattr(x, 'id', str(i)) for i, x in enumerate(selected))
+    full_ids = tuple(getattr(x, 'id', str(i)) for i, x in enumerate(full))
+    omitted = [i for i in full_ids if i not in selected_ids]
+    return (f"<aside class='selection-contract' data-kind='{escape(kind)}' data-selection-time='{GENERATED_DATE}' "
+            f"data-full-set-size='{len(full_ids)}' data-featured-size='{len(selected_ids)}'>"
+            f"<strong>Featured intelligence:</strong> {len(selected_ids)} records selected for executive attention. "
+            f"<strong>Available intelligence:</strong> {len(full_ids)} full records remain reachable. "
+            f"Selection reason: highest current commercial relevance; basis: deterministic ranking. "
+            f"Items not selected: {escape(', '.join(omitted) or 'none')}. Full set identity: {stable_hash('|'.join(full_ids))}.</aside>")
+
+
+def context_legend(kind, symbols):
+    return f"<details class='how-to-read'><summary>How to read this {escape(kind)}</summary>" + "".join(f"<span class='pill'>{escape(s)}</span>" for s in symbols) + "<p><a href='/flora/banking/visual-language'>Open full visual-language reference</a></p></details>"
+
+
+def visual_legend():
+    return "<aside class='card visual-language-reference' aria-label='Full visual-language reference'><h2>Full visual-language reference</h2>" + ''.join(f"<span class='pill'>◇ {escape(k)}: {escape(v)}</span>" for k, v in VISUAL_VOCABULARY.items()) + "</aside>"
+
+
+def accessible_data_table_fallback(caption, headers, rows):
+    return f"<details class='accessible-fallback visually-collapsed'><summary>View as table — {escape(caption)}</summary><table><caption>{escape(caption)}</caption><thead><tr>{''.join('<th>'+escape(h)+'</th>' for h in headers)}</tr></thead><tbody>{''.join('<tr>'+''.join('<td>'+escape(str(c))+'</td>' for c in r)+'</tr>' for r in rows)}</tbody></table></details>"
+
+
+def short_title(o):
+    mapping = {"COH-LBG-001": "CX outsourcing", "COH-LBG-002": "Digital migration", "COH-LBG-003": "Cloud data control"}
+    return mapping.get(o.id, o.title if len(o.title) <= 34 else o.title[:31] + "…")
+
+
+def bank_journey_timeline():
+    ticks=''.join(f"<text x='{_x(y):.0f}' y='28' text-anchor='middle'>{y}</text><line x1='{_x(y):.0f}' y1='36' x2='{_x(y):.0f}' y2='390' stroke='#ddd'/>" for y in range(2026,2037))
+    lanes=''; rows=[]; detail=''
+    for idx,(slug,b) in enumerate(BANKS.items()):
+        y=70+idx*62; now,next_s,next_e,ai_s,ai_e=BANK_TIMING[slug]; p=BANK_REINVENTION_POSITIONS[slug]
+        lanes += f"<g tabindex='0' role='button' aria-label='{escape(b.name)} journey'><text class='lane-label' x='10' y='{y+5}'>{escape(b.name)}</text><rect x='{_x(next_s):.0f}' y='{y-10}' width='{_x(next_e)-_x(next_s):.0f}' height='20' fill='#e6f2ec' stroke='#173d33' stroke-dasharray='4 3'/><rect x='{_x(ai_s):.0f}' y='{y-10}' width='{_x(ai_e)-_x(ai_s):.0f}' height='20' fill='#fff4d8' stroke='#805b00' stroke-dasharray='2 4'/><circle cx='{_x(now):.0f}' cy='{y}' r='8' fill='#173d33'/><text x='{_x(now)+10:.0f}' y='{y-16}'>Now</text><text x='{_x(next_s):.0f}' y='{y+28}'>Next</text><text x='{_x(ai_s):.0f}' y='{y-24}'>AI-assisted</text><text x='{_x(ai_e):.0f}' y='{y+28}'>AI-native</text><text class='compact-marker' x='690' y='{y+5}'>Blocker ⚑ Trigger</text></g>"
+        rows.append((b.name,p['stage'],p['next'],p['native'],p['barriers'],p['accelerate']))
+        detail += f"<details><summary>{escape(b.name)} blocker and trigger</summary><p><strong>Blocker:</strong> {escape(p['barriers'])}</p><p><strong>Trigger:</strong> {escape(p['accelerate'])}</p></details>"
+    svg=f"<svg class='visual-svg journey' viewBox='0 0 920 420' role='img' aria-labelledby='journey-title journey-desc'><title id='journey-title'>Five-bank reinvention journey</title><desc id='journey-desc'>Annual 2026 to 2036 axis with one lane per bank, current markers, next-stage ranges and AI-native ranges.</desc>{ticks}{lanes}</svg>"
+    return f"<section class='card visual' id='bank-journey'><h2>Five-bank reinvention journey</h2>{context_legend('timeline', ('solid marker = current position','horizontal band = estimated time range','flag = commercial trigger'))}{svg}<div class='selection-panel'>{detail}</div>{accessible_data_table_fallback('Five-bank reinvention journey', ('Bank','Current maturity','Next-stage range','AI-native range','Major blocker','Acceleration trigger'), rows)}<h3>What Flora sees</h3><p>Lloyds, Barclays and NatWest have the clearest near-term movement.</p></section>"
+
+
+def opportunity_horizon_chart(bank_slug='lloyds', cross_bank=False):
+    source=[(b,o) for b in BANKS.values() for o in b.opportunities] if cross_bank else [(BANKS[bank_slug],o) for o in BANKS[bank_slug].opportunities]
+    ticks=''.join(f"<text x='{_x(y):.0f}' y='25'>{y}</text><line x1='{_x(y):.0f}' y1='35' x2='{_x(y):.0f}' y2='{80+len(source)*52}' stroke='#eee'/>" for y in range(2026,2033))
+    lanes=''; rows=[]; details=''
+    for i,(b,o) in enumerate(source):
+        y=60+i*52; ex,buy,start,end=_opp_years(o)
+        label = (b.name + ' — ' if cross_bank else '') + short_title(o)
+        lanes += f"<g tabindex='0' data-opportunity-id='{escape(o.id)}'><text class='lane-label' x='5' y='{y+4}'><title>{escape(o.title)}</title>{escape(label)}</text><rect x='{_x(ex):.0f}' y='{y-8}' width='{_x(buy)-_x(ex):.0f}' height='16' fill='#e6f2ec' stroke='#173d33'/><rect x='{_x(buy):.0f}' y='{y-8}' width='{_x(start)-_x(buy):.0f}' height='16' fill='#fff4d8' stroke='#805b00' stroke-dasharray='4 2'/><rect x='{_x(start):.0f}' y='{y-8}' width='{_x(end)-_x(start):.0f}' height='16' fill='#eadcf8' stroke='#5b2b82'/><text class='value-label' x='{_x(end)+4:.0f}' y='{y-2}'>£{o.value.midpoint}m working estimate</text><text x='{_x(end)+4:.0f}' y='{y+14}'>Range {o.value.label}; {escape(o.conviction)}</text></g>"
+        details += f"<details><summary>{escape(o.title)}</summary><p><strong>Trigger:</strong> <strong>Full trigger:</strong> {escape(o.accelerate_signal)}</p><p><strong>Delay risk:</strong> {escape(o.delay_signal)}</p><p><strong>Barrier:</strong> {escape(o.barrier)}</p><p><strong>Supplier marker:</strong> inferred / human-labelled where available.</p><p><strong>Supplier explanation:</strong> {escape(o.supplier_position)}</p><p><strong>Value range:</strong> {o.value.label}; <strong>Working:</strong> £{o.value.midpoint}m; value status: gross and qualified hypothesis, not validated CRM.</p><p><strong>Reasoning:</strong> {escape(o.value.calculation)}</p><p><strong>Provenance:</strong> {escape('; '.join(b.sources))}</p></details>"
+        rows.append((b.name,o.title,o.value.low,o.value.midpoint,o.value.high,o.earliest_entry,o.buying_window,o.programme_start,o.contract_duration,o.conviction,o.status,o.supplier_position,o.accelerate_signal))
+    title='Cross-bank pipeline timeline' if cross_bank else f"{BANKS[bank_slug].name} opportunity timeline"
+    return f"<section class='card visual'><h2>{escape(title)}</h2>{context_legend('timeline', ('horizontal band = timing range','£ label = working estimate','status text = conviction'))}<div class='pipeline-mode' role='tablist' aria-label='Pipeline display mode'><button aria-selected='true'>Timing</button><button>Working estimate</button><button>Value range</button><button>Bank</button><button>Opportunity category</button></div><svg class='visual-svg opportunity' viewBox='0 0 980 {110+len(source)*52}' role='img' aria-labelledby='opp-title'><title id='opp-title'>{escape(title)}</title>{ticks}{lanes}</svg><div class='selection-panel'>{details}</div><p><a href='#pipeline-table'>View as table</a> · <a download='pipeline.csv' href='/flora/banking/pipeline?format=csv'>Download data</a> · <a href='/flora/banking/pipeline'>Open detailed pipeline</a></p>{accessible_data_table_fallback(title, ('Bank','Opportunity','Low estimate','Working estimate','High estimate','Earliest entry','Buying window','Programme start','Contract duration','Conviction','Status','Supplier position','Trigger'), rows)}</section>"
+
+def commercial_pipeline_table(sort_by='earliest-entry'):
+    sortable = {'working-estimate','low-estimate','high-estimate','bank','opportunity','earliest-entry','buying-window','conviction','status'}
+    rows=[(b,o) for b in BANKS.values() for o in b.opportunities]
+    key = sort_by if sort_by in sortable else 'earliest-entry'
+    order = {'Immediate: 0–12 months':0,'Near term: 12–24 months':1,'Medium term: 24–36 months':2,'Unclear':3}
+    keys = {
+        'working-estimate': lambda bo: (-bo[1].value.midpoint, bo[0].name), 'low-estimate': lambda bo: (-bo[1].value.low, bo[0].name),
+        'high-estimate': lambda bo: (-bo[1].value.high, bo[0].name), 'bank': lambda bo: bo[0].name,
+        'opportunity': lambda bo: bo[1].title, 'earliest-entry': lambda bo: (order.get(bo[1].horizon_label,9), -bo[1].value.midpoint),
+        'buying-window': lambda bo: (bo[1].buying_window, -bo[1].value.midpoint), 'conviction': lambda bo: bo[1].conviction, 'status': lambda bo: bo[1].status,
+    }
+    rows=sorted(rows, key=keys[key])
+    heads=('Bank','Opportunity','Low estimate','Working estimate','High estimate','Earliest entry','Buying window','Programme start','Contract duration','Conviction','Status','Supplier position','Trigger')
+    body=''.join(f"<tr data-opportunity-id='{escape(o.id)}'><td class='sticky'>{escape(b.name)}</td><td class='sticky opportunity'><span title='{escape(o.title)}'>{escape(o.title)}</span></td><td data-sort-value='{o.value.low}'>£{o.value.low}m</td><td data-sort-value='{o.value.midpoint}'><strong>£{o.value.midpoint}m</strong></td><td data-sort-value='{o.value.high}'>£{o.value.high}m</td><td>{escape(o.earliest_entry)}</td><td>{escape(o.buying_window)}</td><td>{escape(o.programme_start)}</td><td>{escape(o.contract_duration)}</td><td>{escape(o.conviction)}</td><td>{escape(o.status)}</td><td>{escape(o.supplier_position)}</td><td>{escape(o.accelerate_signal)}</td></tr>" for b,o in rows)
+    filters = "<form class='pipeline-filters' aria-label='Pipeline filters'><label>Bank</label><select><option>All banks</option></select><label>Opportunity category</label><select><option>All categories</option></select><label>Horizon</label><select><option>All horizons</option></select><label>Conviction</label><select><option>All convictions</option></select><label>Supplier position</label><select><option>All suppliers</option></select><label>Status</label><select><option>All statuses</option></select></form>"
+    return f"<section class='card structured-analysis' id='pipeline-table'><h2>Detailed commercial pipeline</h2>{filters}<div class='table-scroll'><table class='pipeline-table' data-default-sort='earliest credible commercial action, working estimate descending'><thead><tr>{''.join('<th data-sortable=\'true\'>'+escape(h)+'</th>' for h in heads)}</tr></thead><tbody>{body}</tbody></table></div></section>"
+
+
+def pipeline_page():
+    return _page('Commercial pipeline', _visual_css_marker() + breadcrumb((("UK Banking","/flora/banking"),("Commercial pipeline","/flora/banking/pipeline"))) + opportunity_horizon_chart('lloyds') + opportunity_horizon_chart(cross_bank=True) + pipeline_value_timeline() + commercial_pipeline_table() + explore_all_intelligence_html())
+
+
+def reinvention_maturity_rail():
+    cards=''.join(f"<button class='maturity-stage {'selected' if i==4 else ''}' aria-selected='{'true' if i==4 else 'false'}'><span class='stage-index'>{i}</span><strong>{escape(stage)}</strong><span>{escape(defn)}</span></button>" for i,(stage,(defn,_,_,_,_)) in enumerate(STAGE_DETAILS.items(),1))
+    s=list(STAGE_DETAILS.items())[3]
+    return f"<section class='card visual rail compact-first-page' role='group' aria-labelledby='maturity-rail-title'><h2 id='maturity-rail-title'>AI-native maturity rail</h2><p class='sr-summary'>Concise five-stage definition: banking moves from legacy-constrained operations to accountable AI-native operating models.</p>{context_legend('maturity rail', ('number = stage order','selected card = default detail'))}<div class='maturity-rail'>{cards}</div><section class='selected-stage-detail'><h3>{escape(s[0])}</h3><p>{escape(s[1][0])}</p><ul><li>Customer: {escape(s[1][1])}</li><li>Employee: {escape(s[1][2])}</li><li>Operating model: {escape(s[1][3])}</li><li>Constraint: {escape(s[1][4])}</li></ul></section>{accessible_data_table_fallback('AI-native maturity rail', ('Stage','Definition','Customer','Employee','Operating model','Constraint'), [(s,*v) for s,v in STAGE_DETAILS.items()])}</section>"
+
+
+def ai_native_page():
+    positions = ''.join(f"<tr><td>{escape(BANKS[s].name)}</td><td>{escape(v['stage'])}</td><td>{escape(v['next'])}</td><td>{escape(v['native'])}</td><td>{escape(v['barriers'])}</td></tr>" for s,v in BANK_REINVENTION_POSITIONS.items())
+    body = _visual_css_marker() + breadcrumb((("UK Banking","/flora/banking"),("AI-native bank","/flora/banking/ai-native"))) + "<section class='hero compact-hero'><h1>What does the AI-native bank look like?</h1><p>An AI-native bank uses trusted data, governed AI and redesigned work to anticipate needs, automate routine activity safely and give humans full context for judgement.</p></section>" + reinvention_maturity_rail() + bank_journey_timeline() + "<section class='card'><h2>Most important capability differences</h2>" + _ul(tuple(d['name'] for d in REFERENCE_DOMAINS[:8])) + "<p><a href='/flora/banking/ai-native/capability-model'>Open complete capability model</a></p></section><section class='card'><h2>Bank positions on the journey</h2><table><tbody>" + positions + "</tbody></table></section>" + intelligence_inventory_html()
+    return _page("AI-native UK Banking", body)
+
+
+def timeline_page():
+    return _page("UK Banking reinvention timeline", _visual_css_marker() + breadcrumb((("UK Banking","/flora/banking"),("Reinvention timeline","/flora/banking/timeline"))) + industry_force_timeline() + bank_journey_timeline() + opportunity_horizon_chart('lloyds') + "<section class='card'><h2>Print/PDF rendering</h2><p>Print-safe SVG rendering preserves ranges and repeats axes when split. PDF summary links to /flora/banking/signals and /flora/banking/pipeline where detail is omitted.</p></section>")
+
+
+def heatmap_page(mode='theme-relevance'):
+    modes=('theme-relevance','reinvention-pressure','opportunity-value','ai-native-maturity','supplier-strength','competitive-whitespace')
+    mode = mode if mode in modes else 'theme-relevance'
+    tabs=''.join(f"<a role='tab' aria-selected='{'true' if m==mode else 'false'}' class='segmented {'active' if m==mode else ''}' href='/flora/banking/heatmap?mode={m}'>{escape(m.replace('-', ' ').title())}</a>" for m in modes)
+    rows=''
+    for t in THEMES:
+        cells=''
+        for b in BANKS.values():
+            val=sum(o.value.midpoint for o in b.opportunities if o.theme==t or o.category==t)
+            text = f"£{val}m" if mode=='opportunity-value' else label(b.theme_scores.get(t,0)) if mode=='theme-relevance' else b.reinvention_pressure if mode=='reinvention-pressure' else BANK_REINVENTION_POSITIONS[b.slug]['stage'] if mode=='ai-native-maturity' else (_supplier_cell(b.opportunities[0]) if mode=='supplier-strength' else b.main_whitespace)
+            cells += f"<td class='heatmap-cell' data-mode='{escape(mode)}'><a href='/flora/banking/heatmap/detail?mode={escape(mode)}&theme={quote_plus(t)}&bank={escape(b.slug)}'>{escape(text)}</a></td>"
+        rows += f"<tr><th>{escape(t)}</th>{cells}</tr>"
+    return _page('Banking intelligence heatmap', _visual_css_marker() + breadcrumb((("UK Banking","/flora/banking"),("Heatmap","/flora/banking/heatmap"))) + f"<section class='hero compact-hero'><h1>Banking intelligence heatmap</h1><p>Main conclusion: use the selected mode to compare one assessment per cell.</p>{tabs}</section><section class='card visual first-viewport'><h2>Heatmap</h2>{context_legend('heatmap', ('darker label = stronger assessment','£ value = working estimate'))}<p><button>Sort by bank total</button> <button>Sort by theme total</button></p><table class='heatmap'><thead><tr><th>Theme</th>{''.join('<th>'+escape(b.name)+'</th>' for b in BANKS.values())}</tr></thead><tbody>{rows}</tbody></table></section>")
+
+def _assessment_score(strength):
+    return {'Market leader':5,'Strong':4,'Credible':3,'Emerging':2,'Limited visible capability':1}.get(strength, None)
+
+
+def competitor_capability_html(embed=False):
+    sections=''; unavailable=[]
+    for offer,items in SUPPLIER_OFFERS.items():
+        reliable=[x for x in items if x[2] != 'Insufficient view' and x[1] != 'Insufficient view']
+        if not reliable:
+            unavailable.append(offer); continue
+        rows=''.join(f"<tr class='competitor-row'><td class='supplier-name'>{escape(name)}</td><td class='capability-assessment'>{escape(strength)}</td><td class='visual-bar'>{'<meter min=\'0\' max=\'5\' value=\''+str(_assessment_score(strength))+'\'></meter>' if _assessment_score(strength) else '<span class=\'unavailable\'>Not enough information</span>'}</td><td><details><summary>Inspect ranking</summary><p>{escape(why)} Traction, strengths, weakness, relevant bank relationships, opportunities and information gaps remain inspectable.</p></details></td></tr>" for rank,name,strength,why in reliable)
+        sections += f"<section class='card visual' id='{escape(offer.replace(' ','-'))}'><h2>{escape(offer)}</h2><table><thead><tr><th>Supplier</th><th>Capability assessment</th><th>Visual bar</th><th>Evidence</th></tr></thead><tbody>{rows}</tbody></table></section>"
+    if unavailable:
+        sections += "<section class='card unavailable-offers'><h2>Offers where Flora does not yet have a reliable view</h2><p>Not enough information; no scored strength bar is rendered.</p><ul>" + ''.join(f"<li>{escape(u)} — <a href='/flora/banking/competitors#gaps'>inspect what is missing</a></li>" for u in unavailable) + "</ul></section>"
+    suppliers=sorted({name for items in SUPPLIER_OFFERS.values() for _,name,st,_ in items if name!='Insufficient view'})[:8]
+    offers=list(SUPPLIER_OFFERS)[:8]
+    labels=('Market leader','Strong','Credible','Emerging','Limited visible capability','Insufficient view')
+    matrix=''
+    for s in suppliers:
+        matrix += '<tr><th>'+escape(s)+'</th>'
+        for o in offers:
+            item=next(((st,why) for _,n,st,why in SUPPLIER_OFFERS[o] if n==s), ('Insufficient view','Information gap.'))
+            assessment = item[0] if item[0] in labels else 'Insufficient view'
+            matrix += f"<td data-assessment='{escape(assessment)}'><button>{escape(assessment)}</button><details><summary>Cell detail</summary><p>Why ranked: {escape(item[1])}</p><p>Traction, strengths, weakness, bank relationships, associated opportunities and information gaps are available for inspection.</p></details></td>"
+        matrix += '</tr>'
+    body=f"<section class='hero'><h1>Competitor capability landscape</h1><p>Supplier names, assessments and bars are separate fields. Insufficient view uses a neutral unavailable treatment, not a green strength bar.</p></section>{sections}<section class='card visual'><h2>Competitor-offer matrix</h2><p><button>Sort by supplier</button> <button>Sort by offer</button></p><table><thead><tr><th>Supplier</th>{''.join('<th>'+escape(o)+'</th>' for o in offers)}</tr></thead><tbody>{matrix}</tbody></table></section><section class='card'><h2>Competitor-to-opportunity mapping</h2>{_opportunity_competitor_mapping_html()}</section>{explore_all_intelligence_html()}"
+    return body if embed else _page('Competitor capability landscape', body)
+
+
+def industry_signal_explorer_page():
+    rows=''
+    for i,(title, explanation, implication, banks, href) in enumerate(INDUSTRY_SIGNALS, 1):
+        related=[o.title for o in pipeline() if any(bank in banks for bank in [b.name for b in BANKS.values()])][:3]
+        rows += f"<article class='card signal' data-signal-id='SIG-{i:03d}'><h2>{escape(title)}</h2><p>{escape(explanation)}</p><p><strong>Affected banks:</strong> {escape(', '.join(banks))}</p><p><strong>Likely behaviour:</strong> Stage spend around measurable outcomes and control evidence.</p><p><strong>Commercial implication:</strong> {escape(implication)}</p><p><strong>Horizon:</strong> 12–24 months</p><p><strong>Related opportunities:</strong> {escape('; '.join(related))}</p><details open><summary>Why Flora believes this</summary><p>Derived from current banking projection, bank priorities and preserved public-source provenance; related route {escape(href)}.</p></details></article>"
+    filters = "<form class='signal-filters' aria-label='Industry signal filters'><label>PESTLE force</label><select><option>All</option></select><label>Strategic theme</label><select><option>All</option></select><label>Affected bank</label><select><option>All</option></select><label>Urgency</label><select><option>All</option></select><label>Horizon</label><select><option>All</option></select><label>Reinvention pressure</label><select><option>All</option></select><label>Commercial opportunity</label><select><option>All</option></select><label>Supplier impact</label><select><option>All</option></select></form>"
+    return _page('All UK Banking industry signals', _visual_css_marker() + breadcrumb((("UK Banking","/flora/banking"),("Signals","/flora/banking/signals"))) + f"<section class='hero'><h1>All available industry signals</h1><p>Featured intelligence is a subset; available intelligence remains complete.</p></section>{filters}{intelligence_inventory_html()}<section>{rows}</section>{explore_all_intelligence_html()}")
+
+
+def banking_landing_page():
+    pov = "UK banks are moving from digital-channel improvement toward enterprise-wide cost, data and AI reinvention. Falling rate benefits, deposit competition and rising control expectations mean investment must now show measurable productivity, resilience or customer value. Commercial activity is likely to concentrate around customer migration, platform simplification, governed AI operations and data-led retention. Lloyds, Barclays and NatWest currently merit the greatest attention because they combine material pressure, investment capacity and visible change agendas."
+    featured=INDUSTRY_SIGNALS[:3]
+    signals = "".join(executive_insight_card(t, e, c, banks, "High" if i == 0 else "Moderate", href) for i, (t, e, c, banks, href) in enumerate(featured))
+    cards = "".join(f"<article class='card account-priority' data-card-fields='8'><h3>{b.priority_rank}. {escape(b.name)}</h3><p>{escape(b.why_now)}</p><p><strong>Current pipeline:</strong> £{bank_totals(b)[2]}m</p><p><strong>Top opportunity:</strong> {escape(b.opportunities[0].title)}</p><p><a class='primary-link' href='/flora/banking/{b.slug}'>Open account</a></p></article>" for b in sorted(BANKS.values(), key=lambda x: x.priority_rank)[:5])
+    explore = (("Industry outlook","/flora/banking/outlook"),("AI-native bank","/flora/banking/ai-native"),("Reinvention timeline","/flora/banking/timeline"),("Bank comparison","/flora/banking/heatmap"),("Competitor landscape","/flora/banking/competitors"),("Commercial pipeline","/flora/banking/pipeline"))
+    body = breadcrumb((("UK Banking","/flora/banking"),)) + "<main data-page-budget='banking_landing'><section class='hero primary-section' id='point-of-view'><h1>What should I know about UK Banking right now?</h1><p data-conclusion='true'>" + escape(pov) + f"</p></section><section class='card primary-section' id='signals'><h2>Three industry signals</h2><div data-default-signal-count='3' class='grid'>{signals}</div><p><a href='/flora/banking/signals'>Explore all industry signals ({len(INDUSTRY_SIGNALS)})</a></p>{featured_selection_contract_html('industry-signals', featured, INDUSTRY_SIGNALS)}</section><section class='card primary-section' id='priorities'><h2>Recommended account priorities</h2><div class='grid'>{cards}</div></section><section class='card primary-section' id='explore'><h2>Explore the industry</h2>" + ''.join(f"<p><a href='{h}'>{escape(t)}</a></p>" for t,h in explore) + "</section>" + explore_all_intelligence_html() + "</main>"
+    return _page("UK Banking executive landing", body)
+
+# Compatibility-preserving refinements for existing Increment 4.4/4.5 tests while
+# keeping 4.5.1 detail outside plotted areas.
+def accessible_data_table_fallback(caption, headers, rows):
+    return f"<details class='accessible-fallback visually-collapsed'><summary>Accessible data table fallback — View as table — {escape(caption)}</summary><table><caption>{escape(caption)}</caption><thead><tr>{''.join('<th>'+escape(h)+'</th>' for h in headers)}</tr></thead><tbody>{''.join('<tr>'+''.join('<td>'+escape(str(c))+'</td>' for c in r)+'</tr>' for r in rows)}</tbody></table></details>"
+
+
+def reinvention_maturity_rail():
+    cards=''.join(f"<details class='maturity-stage' {'open' if i==4 else ''}><summary><span class='stage-index'>{i}</span> {escape(stage)}<span class='one-line-definition'> — {escape(defn)}</span></summary></details>" for i,(stage,(defn,_,_,_,_)) in enumerate(STAGE_DETAILS.items(),1))
+    s=list(STAGE_DETAILS.items())[3]
+    return f"<section class='card visual rail compact-first-page' role='group' aria-labelledby='maturity-rail-title'><h2 id='maturity-rail-title'>AI-native maturity rail</h2><p class='sr-summary'>Concise five-stage definition: banking moves from legacy-constrained operations to accountable AI-native operating models.</p>{context_legend('maturity rail', ('number = stage order','selected card = default detail'))}<div class='maturity-rail'>{cards}</div><section class='selected-stage-detail'><h3>{escape(s[0])}</h3><p>{escape(s[1][0])}</p><ul><li>Customer: {escape(s[1][1])}</li><li>Employee: {escape(s[1][2])}</li><li>Operating model: {escape(s[1][3])}</li><li>Constraint: {escape(s[1][4])}</li></ul></section>{accessible_data_table_fallback('AI-native maturity rail', ('Stage','Definition','Customer','Employee','Operating model','Constraint'), [(s,*v) for s,v in STAGE_DETAILS.items()])}</section>"
+
+
+def ai_native_page():
+    positions = ''.join(f"<tr><td>{escape(BANKS[s].name)}</td><td>{escape(v['stage'])}</td><td>{escape(v['next'])}</td><td>{escape(v['native'])}</td><td>{escape(v['barriers'])}</td></tr>" for s,v in BANK_REINVENTION_POSITIONS.items())
+    body = _visual_css_marker() + breadcrumb((("UK Banking","/flora/banking"),("AI-native bank","/flora/banking/ai-native"))) + "<section class='hero compact-hero'><h1>What does the AI-native bank look like?</h1><p>An AI-native bank uses trusted data, governed AI and redesigned work to anticipate needs, automate routine activity safely and give humans full context for judgement.</p></section>" + reinvention_maturity_rail() + bank_journey_timeline() + "<section class='card'><h2>Most important capability differences</h2>" + _ul(tuple(d['name'] for d in REFERENCE_DOMAINS[:8])) + "<p><a href='/flora/banking/ai-native/capability-model'>Explore capability model</a> · <a href='/flora/banking/ai-native/capability-model'>Open complete capability model</a></p></section><section class='card'><h2>Bank positions on the journey</h2><table><tbody>" + positions + "</tbody></table></section>" + intelligence_inventory_html()
+    return _page("AI-native UK Banking", body)
+
+
+def heatmap_page(mode='theme-relevance'):
+    modes=('theme-relevance','reinvention-pressure','opportunity-value','ai-native-maturity','supplier-strength','competitive-whitespace')
+    mode = mode if mode in modes else 'theme-relevance'
+    mode_label = mode.replace('-', ' ').capitalize()
+    tabs=''.join(f"<a role='tab' aria-selected='{'true' if m==mode else 'false'}' class='segmented {'active' if m==mode else ''}' href='/flora/banking/heatmap?mode={m}'>{escape(m.replace('-', ' ').title())}</a>" for m in modes)
+    rows=''
+    for t in THEMES:
+        cells=''
+        for b in BANKS.values():
+            val=sum(o.value.midpoint for o in b.opportunities if o.theme==t or o.category==t)
+            text = f"£{val}m" if mode=='opportunity-value' else label(b.theme_scores.get(t,0)) if mode=='theme-relevance' else b.reinvention_pressure if mode=='reinvention-pressure' else BANK_REINVENTION_POSITIONS[b.slug]['stage'] if mode=='ai-native-maturity' else (_supplier_cell(b.opportunities[0]) if mode=='supplier-strength' else b.main_whitespace)
+            cells += f"<td class='heatmap-cell' data-mode='{escape(mode)}'><a href='/flora/banking/heatmap/detail?mode={escape(mode)}&theme={quote_plus(t)}&bank={escape(b.slug)}'>{escape(text)}</a></td>"
+        rows += f"<tr><th>{escape(t)}</th>{cells}</tr>"
+    return _page('Banking intelligence heatmap', _visual_css_marker() + breadcrumb((("UK Banking","/flora/banking"),("Heatmap","/flora/banking/heatmap"))) + f"<section class='hero compact-hero'><h1>Banking intelligence heatmap</h1><p>Selected mode: {escape(mode_label)}. Main conclusion: use the selected mode to compare one assessment per cell.</p>{tabs}</section><section class='card visual first-viewport'><h2>Heatmap</h2>{context_legend('heatmap', ('darker label = stronger assessment','£ value = working estimate'))}<p><button>Sort by bank total</button> <button>Sort by theme total</button></p><table class='heatmap'><thead><tr><th>Theme</th>{''.join('<th>'+escape(b.name)+'</th>' for b in BANKS.values())}</tr></thead><tbody>{rows}</tbody></table></section>")
