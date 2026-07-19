@@ -62,3 +62,32 @@ def test_architecture_compliance_preserves_separation_and_lineage():
     assert workspace["contradictions"][0]["conflicting_references"]
     node_types = {node["node_type"] for node in workspace["lineage"]["lineage_nodes"]}
     assert {"source", "evidence", "observation", "governed_object", "projection"}.issubset(node_types)
+
+
+def test_increment1_lloyds_workspace_route_renders_visible_contract_sections():
+    from cios.applications.flora.runtime.increment1_views import increment1_workspace_page
+
+    html, status = increment1_workspace_page("BK-ENT-001")
+
+    assert status == 200
+    assert "Lloyds Enterprise Twin" in html
+    assert "Focus Object" in html
+    assert "Governed relationships only" in html
+    assert "Evidence available" in html and "Observations available" in html
+    assert "Governed Unknowns" in html
+    assert "Open Contradictions" in html
+    assert "Inspectable lineage" in html
+    assert "Workspace state (non-canonical)" in html
+    assert "data-contract-version='flora-runtime-v0.1'" in html
+    assert "combined intelligence score" not in html.lower()
+
+
+def test_increment1_unsupported_object_route_renders_safe_unavailable():
+    from cios.applications.flora.runtime.increment1_views import increment1_workspace_page
+
+    html, status = increment1_workspace_page("unsupported-object")
+
+    assert status == 200
+    assert "Safe-unavailable state" in html
+    assert "identifier_unresolved" in html
+    assert "without fabricated fallback" not in html
