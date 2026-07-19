@@ -1,72 +1,84 @@
-from cios.applications.flora.banking_portfolio import BANKS, THEMES, bank_page, compare_page, portfolio_page
+from cios.applications.flora.banking_portfolio import BANKS, THEMES, bank_page, compare_page, portfolio_page, pipeline, totals, FEEDBACK_ACTIONS
 
 
-def test_all_five_bank_focus_objects_are_available_and_rendered():
-    assert [b["name"] for b in BANKS.values()] == ["Lloyds Banking Group", "Barclays", "NatWest Group", "HSBC UK", "Santander UK"]
+def test_all_five_bank_accounts_have_commercial_snapshots():
+    assert [b.name for b in BANKS.values()] == ["Lloyds Banking Group", "Barclays", "NatWest Group", "HSBC UK", "Santander UK"]
     html = portfolio_page()
     for bank in BANKS.values():
-        assert bank["name"] in html
-        assert bank["id"] in html
-        assert "Understand this bank" in html
-        assert "Inspect evidence" in html
+        assert bank.name in html
+        assert "Open account" in html
+        assert "Why Flora ranks it here" in html
+    assert "Enterprise Model:" not in html
+    assert "Material Unknowns" not in html
+    assert "Context Package" not in html
+    assert "This is not a Recommendation" not in html
 
 
-def test_each_bank_has_bounded_briefing_or_safe_unavailable_state():
+def test_each_bank_page_uses_executive_structure_and_preserves_inspection():
     for slug, bank in BANKS.items():
         html, status = bank_page(slug, briefing=True)
         assert status == 200
-        assert "Account preparation briefing" in html
-        assert "Why this bank now?" in html
-        assert "This is not a Recommendation" in html
-        assert "Questions worth exploring" in html
-        assert len(bank["questions"]) <= 7
+        for section in ["1. Account in one minute", "2. Financial snapshot", "5. Analyst view", "8. Recommended opportunities", "9. Estimated pipeline", "12. Why Flora believes this", "13. Detailed inspection"]:
+            assert section in html
+        assert "Current to 2026-07-19" in html
+        assert "Estimated contract value" in html
+        assert "Flora working estimate" in html
+        assert "Valuation method" in html
+        assert bank.id in html  # only Level 3
     html, status = bank_page("unknown-bank")
     assert status == 200
-    assert "Safe unavailable" in html
-    assert "Missing evidence" in html
+    assert "Flora does not yet have a reliable view" in html
 
 
-def test_common_themes_reused_and_sector_enterprise_scope_distinguished():
-    assert len(THEMES) == 8
-    html = compare_page()
-    for theme in THEMES:
-        assert theme in html
-    assert "Specific to this bank" in html
-    assert "Also visible across peers" not in html or "safe-unavailable" in html
-    assert "Not enough evidence to compare" in html
+def test_financial_metrics_render_and_missing_metrics_not_fabricated():
+    lloyds, _ = bank_page("lloyds")
+    assert "£17.9bn FY2024" in lloyds
+    hsbc, _ = bank_page("hsbc-uk")
+    assert "not publicly disclosed" in hsbc
+    assert "£0.0bn" not in hsbc
 
 
-def test_peer_comparison_does_not_rank_score_or_imply_absence():
-    html = compare_page().lower()
-    for prohibited in ["winner", "leader", "laggard", "best", "worst", "score", "ranking"]:
-        assert prohibited not in html
-    assert "this does not mean lack of activity" in html
-
-
-def test_questions_originate_from_unknowns_or_tensions_and_lineage_is_visible():
-    for slug, bank in BANKS.items():
+def test_analyst_views_preserve_attribution_without_fake_consensus():
+    for slug in BANKS:
         html, _ = bank_page(slug)
-        assert "Originating Unknown or tension and Evidence" in html
-        assert "Lineage" in html or "lineage" in html
-        for question in bank["questions"]:
-            assert question in html
+        assert "What analysts broadly like" in html
+        assert "No single analyst view is presented as consensus" in html
+        assert "Analyst synthesis preserves attribution" in html
 
 
-def test_briefings_are_transient_evidence_diagnostics_collapsed_and_deterministic():
-    first, _ = bank_page("lloyds", briefing=True)
-    second, _ = bank_page("lloyds", briefing=True)
+def test_theme_relevance_ranking_and_pipeline_are_deterministic():
+    first = compare_page()
+    second = compare_page()
     assert first == second
-    assert "Generated date: 2026-07-19" in first
-    assert "transient" not in first.lower() or "canonical" not in first.lower()
-    assert "Based mainly on recent company reporting" in first
-    assert "Authority, freshness, corroboration" not in first
+    for theme in THEMES:
+        assert theme in first
+    assert "Most relevant bank" in first
+    assert "Highest-value associated opportunity" in first
+    assert "probability of winning" in first
+    assert "safe-unavailable" not in first
 
 
-def test_no_unrestricted_prompt_recommendation_scores_or_targets():
-    combined = portfolio_page() + compare_page() + "".join(bank_page(slug)[0] for slug in BANKS)
-    lower = combined.lower()
-    assert "name='question'" not in lower
-    assert "opportunity score" not in lower
-    assert "propensity" not in lower
-    assert "contact a named executive" not in lower
-    assert "sales play" not in lower
+def test_opportunities_have_values_feedback_and_preserve_originals():
+    opps = pipeline()
+    assert len(opps) >= 15
+    for o in opps:
+        assert o.id
+        assert o.value.low < o.value.midpoint < o.value.high
+        assert o.value.low % 5 == 0 and o.value.high % 5 == 0 and o.value.midpoint % 5 == 0
+        assert o.value.method
+        assert o.assumptions
+    html, _ = bank_page("lloyds")
+    for action in FEEDBACK_ACTIONS:
+        assert action in html
+    assert "preserves the original Recommendation and estimate" in html
+
+
+def test_pipeline_totals_calculate_correctly_and_no_probability_of_winning():
+    lo, hi, mid = totals()
+    assert lo == sum(o.value.low for o in pipeline())
+    assert hi == sum(o.value.high for o in pipeline())
+    assert mid == sum(o.value.midpoint for o in pipeline())
+    html = portfolio_page() + compare_page()
+    assert f"£{lo}m–£{hi}m" in html
+    assert "probability of winning" in html
+    assert "likelihood of winning" not in html.lower()
