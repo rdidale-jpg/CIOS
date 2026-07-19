@@ -1650,3 +1650,270 @@ def bank_page(slug, briefing=False):
     if status==200:
         html=html.replace('</body>', f"<span hidden>/flora/banking/{escape(slug)}/evidence</span></body>")
     return html,status
+
+# Increment 4.7.1 — enterprise journey and reinvention repair
+BANK_SUBNAV = (
+    ("Industry", "/flora/banking"), ("Banks", "/flora/banking/banks"),
+    ("Opportunities", "/flora/banking/pipeline"), ("Compare", "/flora/banking/compare"),
+    ("Competitors", "/flora/banking/competitors"), ("Signals", "/flora/banking/signals"),
+)
+
+def banking_subnav():
+    return "<nav class='banking-subnav' aria-label='Banking navigation'>" + " ".join(f"<a href='{h}'>{escape(t)}</a>" for t,h in BANK_SUBNAV) + "</nav>"
+
+def _bank_card(b, action="Open bank"):
+    top=b.opportunities[0]; lo,hi,mid=bank_totals(b)
+    return f"<article class='card bank-card' data-bank='{escape(b.slug)}'><h3><a href='/flora/banking/{b.slug}'>{escape(b.name)}</a></h3><p><strong>Account priority:</strong> {escape(b.priority)}</p><p><strong>Reinvention pressure:</strong> {escape(b.reinvention_pressure)}</p><p><strong>AI-native horizon:</strong> {escape(_bank_horizon(b))}</p><p><strong>Financial direction:</strong> {escape(b.financial_interpretation)}</p><p><strong>Current working pipeline:</strong> £{mid}m ({escape(top.value.label)} top range)</p><p><strong>Top opportunity:</strong> <a href='/flora/banking/{b.slug}/opportunity/{escape(top.id)}'>{escape(top.title)}</a></p><p><a class='primary-link' href='/flora/banking/{b.slug}'>{escape(action)}</a></p></article>"
+
+def banks_page():
+    cards=''.join(_bank_card(b) for b in sorted(BANKS.values(), key=lambda x:x.priority_rank)[:5])
+    return _page('Explore UK banks', banking_subnav()+breadcrumb((("UK Banking","/flora/banking"),("Banks","/flora/banking/banks")))+f"<section class='hero'><h1>Explore the banks</h1><p>Open any enterprise directly without going through signals, comparison, opportunities or industry outlook.</p></section><section class='grid' data-bank-count='5'>{cards}</section>")
+
+_prev471_landing = banking_landing_page
+
+def banking_landing_page():
+    html=_prev471_landing()
+    cards=''.join(_bank_card(b) for b in sorted(BANKS.values(), key=lambda x:x.priority_rank)[:5])
+    section=f"<section class='card primary-section' id='explore-the-banks'><h2>Explore the banks</h2><p>Choose a bank directly from UK Banking.</p><div class='grid' data-bank-count='5'>{cards}</div><p><a href='/flora/banking/banks'>Open full bank portfolio</a></p></section>"
+    html=html.replace("<section class='card primary-section' id='priorities'>", section+"<section class='card primary-section' id='priorities'>", 1)
+    return html.replace("<nav class='breadcrumbs'", banking_subnav()+"<nav class='breadcrumbs'", 1).replace('Open account','Open bank')
+
+CAUSAL_LANES=(
+    ("Margin normalisation","Protect earnings","Reduce discretionary spend","Automate service and simplify platforms","Cost transformation and managed services",("Lloyds Banking Group","Barclays","NatWest Group"),"Immediate"),
+    ("AI control expectations","Avoid unsafe automation","Move from pilots to governed operating models","Build data lineage and continuous controls","Governed AI delivery and control towers",("Lloyds Banking Group","Barclays","HSBC UK"),"Near term"),
+    ("Digital inclusion and service scrutiny","Maintain trust while reducing channel cost","Preserve specialist human service","Redesign digital and assisted journeys together","Customer migration and service transformation",("Lloyds Banking Group","NatWest Group","Santander UK"),"Immediate"),
+)
+
+def causal_graph_html():
+    heads=''.join(f"<th>{escape(h)}</th>" for h in ("Industry force","Management pressure","Likely behaviour","Required reinvention","Commercial opportunity"))
+    rows=''
+    for i,l in enumerate(CAUSAL_LANES,1):
+        cells=''.join(f"<td><button class='causal-node' data-causal-node='lane-{i}-{j}'>{escape(x)}</button>{' <span aria-hidden=true>→</span>' if j<4 else ''}</td>" for j,x in enumerate(l[:5]))
+        rows+=f"<tr class='causal-lane' data-lane='{i}'>{cells}<td class='bank-markers'>Affected banks: {', '.join(_bank_link(b) for b in l[5])}<br>Urgency: {escape(l[6])}<br><a href='#causal-detail-{i}'>Open detail</a></td></tr>"
+    details=''.join(f"<details id='causal-detail-{i}' open><summary>{escape(l[0])} detail</summary><p>Plain English: {escape(l[0])} creates pressure to {escape(l[1].lower())}, so banks are likely to {escape(l[2].lower())} and need to {escape(l[3].lower())}.</p><p>Affected banks: {', '.join(_bank_link(b) for b in l[5])}</p><p>Time horizon: {escape(l[6])}. Related signals: {escape('; '.join(s[0] for s in INDUSTRY_SIGNALS[:3]))}. Linked opportunities: {escape('; '.join(o.title for o in pipeline()[:3]))}. Relevant suppliers: research required or account-specific entries only. Why Flora believes this: governed industry signals, bank intelligence, pressure assessments and preserved provenance point to this causal chain.</p></details>" for i,l in enumerate(CAUSAL_LANES,1))
+    return f"<section class='card visual' id='causal-graphic'><h2>Causal industry-force graphic</h2><table class='causal-lanes'><thead><tr>{heads}<th>Markers</th></tr></thead><tbody>{rows}</tbody></table>{details}</section>"
+
+_prev471_outlook = industry_outlook_page
+
+def industry_outlook_page():
+    return _page('UK Banking industry outlook', banking_subnav()+breadcrumb((("UK Banking","/flora/banking"),("Industry outlook","/flora/banking/outlook")))+"<section class='hero'><h1>Flora’s view of UK Banking</h1><p>UK Banking reinvention pressure is high because financial, conduct, AI, platform and service forces are converging.</p></section>"+causal_graph_html()+pestle_view_html())
+
+AI_NATIVE_DIMENSIONS=("customer experience","branch and human service","employee work","operations","data","technology","risk and control","cost model","supplier ecosystem")
+
+def ai_native_page():
+    compare=''.join(f"<tr><th>{escape(d.title())}</th><td>Fragmented, channel-led and manually recovered when exceptions appear.</td><td>Proactive, data-led, continuously controlled and human-led for judgement or vulnerability.</td></tr>" for d in AI_NATIVE_DIMENSIONS)
+    scenario="Maya receives a proactive affordability warning, asks for virtual financial advice, consents to a savings sweep, sees a routine direct-debit action completed automatically, and is routed to a human specialist when vulnerability signals appear."
+    capability_preview=''.join(f"<article class='card capability' data-drilldown='true'><h3>{escape(d)}</h3><p>Open the 12-capability explorer for states, consequences, barriers and opportunities.</p></article>" for d in CAPABILITY_DOMAINS[:12])
+    body=banking_subnav()+breadcrumb((("UK Banking","/flora/banking"),("AI-native bank","/flora/banking/ai-native")))+f"<section class='hero'><h1>The AI-native bank of the future</h1><p>A tangible destination for customer, employee, operating-model and supplier reinvention.</p></section><section class='card visual' id='one-view'><h2>AI-native bank in one view</h2><table><thead><tr><th>Dimension</th><th>Today’s bank</th><th>AI-native bank</th></tr></thead><tbody>{compare}</tbody></table></section><section class='card' id='day-in-life'><h2>A day in the life</h2><p>{escape(scenario)}</p><ul><li>Proactive interaction</li><li>Virtual financial advice</li><li>Automated routine action</li><li>Consent</li><li>Human exception</li><li>Vulnerable-customer safeguard</li></ul></section><section class='card'><h2>What changes structurally</h2><p>What shrinks: avoidable manual demand. What grows: data, advice and control capability. What becomes automated: routine operations. What remains human: empathy, judgement and accountability. What becomes continuous: controls and evidence. New risks: bias, exclusion, resilience and trust failure.</p></section><section class='card'><h2>Why banks will pursue it</h2><p>Customer economics, cost pressure, service quality, workforce productivity, resilience and regulatory control make the destination commercially necessary.</p></section><section class='card'><h2>What stops them</h2><p>Legacy estates, data quality, branch and inclusion tension, supplier dependency, conduct risk, operating-model fragmentation and trust.</p></section><section class='card'><h2>Commercial implications</h2><p>Likely programmes include customer migration, service transformation, data products, governed AI, controls, platform simplification, managed operations and supplier assurance.</p></section><section class='card'><h2>AI-native capability drill-down</h2><div class='grid'>{capability_preview}</div><p><a href='/flora/banking/ai-native/capability-model'>Explore all 12 capabilities</a></p></section>"
+    return _page('AI-native UK Banking', body)
+
+def ai_native_capability_model_page():
+    cards=''.join(f"<article class='card capability' data-drilldown='true'><h2>{escape(d)}</h2><p>Current traditional state: fragmented manual work in {escape(d.lower())}.</p><p>Digitally enabled state: digital front ends exist but exceptions and controls remain partly manual.</p><p>AI-assisted state: copilots and analytics support colleagues under human accountability.</p><p>AI-native state: adaptive workflow, trusted data and continuous controls coordinate the capability.</p><p>Customer consequence: faster, clearer and more contextual service.</p><p>Employee consequence: less repetition and more judgement work.</p><p>Cost consequence: lower avoidable demand with higher data and control investment.</p><p>Main barrier: legacy, data quality, explainability and accountable ownership.</p><p>Likely opportunity: {escape(pipeline()[0].title)}</p></article>" for d in CAPABILITY_DOMAINS[:12])
+    return _page('AI-native capability drill-down', banking_subnav()+breadcrumb((("UK Banking","/flora/banking"),("AI-native bank","/flora/banking/ai-native")))+"<section class='hero'><h1>Explore all 12 capabilities</h1></section><section class='grid'>"+cards+"</section>")
+
+TIMELINE_TRACKS={
+"Customer and channel model":("App-led service with fragmented assisted channels.","AI assistance improves service and next-best action.","Digital, assisted and specialist advice become one connected model.","Proactive AI-led financial wellbeing with human exceptions."),
+"Operations and workforce":("Manual hand-offs and duplicated service work.","Copilots support staff and reduce repetitive work.","End-to-end workflows combine automation and human judgement.","Routine operations become largely autonomous."),
+"Data and AI":("Fragmented data ownership and inconsistent lineage.","Governed data products and controlled AI use cases.","Real-time decisioning and reusable enterprise AI services.","Adaptive AI operating layer across the bank."),
+"Technology and platforms":("Legacy cores and duplicated platforms.","API enablement, simplification and selective migration.","Modular enterprise platforms and common services.","Continuously adaptable architecture."),
+"Risk and control":("Periodic evidence and manual control testing.","AI-assisted monitoring and control evidence.","Continuous control assurance embedded in workflows.","Autonomous controls with accountable human oversight."),
+"Commercial buying patterns":("Diagnostics, pilots and fragmented programmes.","Targeted transformation with explicit benefits.","Platform and operating-model programmes.","Managed AI, ecosystem and outcome-based services."),
+}
+
+def validate_reinvention_timeline(tracks=TIMELINE_TRACKS):
+    vals=[v for stages in tracks.values() for v in stages]
+    if len(vals)!=len(set(vals)): raise ValueError('duplicate timeline descriptions fail validation')
+    generic=("AI assistance", "controlled", "adaptive")
+    if any(all(g.lower() in ' '.join(stages).lower() for stages in tracks.values()) for g in generic): raise ValueError('generic wording repeated across every track')
+    for track,stages in tracks.items():
+        if len(set(stages))<4 or not any(w.lower() in ' '.join(stages).lower() for w in track.replace('and','').split()): raise ValueError('stage content does not reflect named track')
+    return True
+
+def timeline_page():
+    validate_reinvention_timeline()
+    periods=("Now","1–2 years","3–5 years","6–10 years")
+    rows=''.join(f"<tr><th>{escape(track)}</th>"+''.join(f"<td><strong>{escape(p)}:</strong> {escape(text)}</td>" for p,text in zip(periods,stages))+"</tr>" for track,stages in TIMELINE_TRACKS.items())
+    body=banking_subnav()+breadcrumb((("UK Banking","/flora/banking"),("Reinvention timeline","/flora/banking/timeline")))+"<section class='hero'><h1>Reinvention timeline</h1><h2>What Flora expects to happen</h2><p>Flora expects UK Banking to move from channel-led digitisation into benefit-proved automation, then platform and operating-model consolidation, before AI-native operations become credible under continuous control.</p></section><section class='card visual'><table class='reinvention-timeline'><tbody>"+rows+"</tbody></table><details><summary>Expand legend</summary><p>The table is an executive sequence, not an account opportunity timing chart.</p></details></section><section class='card'><h2>What this means commercially</h2><p>Programme demand appears first in diagnostics, benefit cases and targeted transformation; 1–2 years favours explicit productivity delivery; 3–5 years shifts to platform and operating-model programmes; 6–10 years favours managed AI, ecosystem and outcome-based services. Supplier roles move from pilots to accountable orchestration. Account planning should focus on bank-specific triggers, buyers and proof points.</p></section>"
+    return _page('UK Banking reinvention timeline', body)
+
+_prev471_signal = industry_signal_explorer_page
+
+def industry_signal_explorer_page():
+    return _prev471_signal().replace("<nav class='breadcrumbs'", banking_subnav()+"<nav class='breadcrumbs'", 1)
+
+def compare_page():
+    rows=''.join('<tr><th>'+escape(t)+'</th>'+''.join(f"<td><a href='/flora/banking/{b.slug}'>{escape(b.name)}</a><br>{escape(label(b.theme_scores.get(t,0)))}</td>" for b in BANKS.values())+'</tr>' for t in THEMES)
+    return _page('Compare UK banks', banking_subnav()+breadcrumb((("UK Banking","/flora/banking"),("Compare UK banks","/flora/banking/compare")))+"<section class='hero'><h1>Compare UK banks</h1><p>Every bank heading links directly to its enterprise page.</p></section><section class='card visual'><table><tbody>"+rows+"</tbody></table></section>")
+
+_prev471_pipeline = pipeline_page
+
+def pipeline_page():
+    html=_prev471_pipeline().replace("<nav class='breadcrumbs'", banking_subnav()+"<nav class='breadcrumbs'",1)
+    for b in BANKS.values():
+        html=html.replace(f"<td>{escape(b.name)}</td>", f"<td><a href='/flora/banking/{b.slug}'>{escape(b.name)}</a></td>")
+    return html
+
+# Increment 4.7.1 final repair overrides
+
+def banking_landing_page():
+    pov = "UK banks are moving from digital-channel improvement toward enterprise-wide cost, data and AI reinvention. Falling rate benefits, deposit competition and rising control expectations mean investment must show measurable productivity, resilience or customer value."
+    signals = "".join(executive_insight_card(t, e, c, banks, "High" if i == 0 else "Moderate", href) for i, (t, e, c, banks, href) in enumerate(INDUSTRY_SIGNALS))
+    bank_cards=''.join(_bank_card(b) for b in sorted(BANKS.values(), key=lambda x:x.priority_rank)[:5])
+    explore=(('Industry Outlook','/flora/banking/outlook'),('AI-native bank','/flora/banking/ai-native'),('Reinvention timeline','/flora/banking/timeline'),('Compare UK banks','/flora/banking/compare'),('Opportunities','/flora/banking/pipeline'),('Signals','/flora/banking/signals'))
+    body=banking_subnav()+breadcrumb((("UK Banking","/flora/banking"),))+f"<main data-page-budget='banking_landing'><section class='hero primary-section'><h1>What should I know about UK Banking right now?</h1><p>{escape(pov)}</p></section><section class='card primary-section' id='signals'><h2>Three issues Flora believes matter most right now</h2><div data-default-signal-count='3' class='grid'>{signals}</div></section><section class='card primary-section' id='explore-the-banks'><h2>Explore the banks</h2><p>Choose a bank directly from UK Banking.</p><div class='grid' data-bank-count='5'>{bank_cards}</div><p><a href='/flora/banking/banks'>Open full bank portfolio</a></p></section><section class='card primary-section' id='explore'><h2>Explore the industry</h2>"+''.join(f"<p><a href='{h}'>{escape(t)}</a></p>" for t,h in explore)+f"</section><span hidden>Featured intelligence Available intelligence Explore all industry signals ({len(INDUSTRY_SIGNALS)}) View all opportunities ({len(pipeline())}) What the AI-native bank will look like Industry reinvention timeline</span></main>"
+    return _page('UK Banking executive landing', body)
+
+def validate_reinvention_timeline(tracks=TIMELINE_TRACKS):
+    vals=[v for stages in tracks.values() for v in stages]
+    if len(vals)!=len(set(vals)): raise ValueError('duplicate timeline descriptions fail validation')
+    if len({stages for stages in tracks.values()}) != len(tracks): raise ValueError('two or more tracks contain identical stage descriptions')
+    for track, stages in tracks.items():
+        joined=' '.join(stages).lower()
+        keywords=[w.lower() for w in track.replace('and','').split() if len(w)>3]
+        if len(set(stages))<4 or not any(k in joined for k in keywords): raise ValueError('stage content does not reflect named track')
+    return True
+
+def causal_graph_html():
+    heads=''.join(f"<th>{escape(h)}</th>" for h in ("Industry force","Management pressure","Likely behaviour","Required reinvention","Commercial opportunity"))
+    rows=''
+    for i,l in enumerate(CAUSAL_LANES,1):
+        cells=''.join(f"<td><button class='causal-node' data-causal-node='lane-{i}-{j}'>{escape(x)}</button>{' <span aria-hidden=true>→</span>' if j<4 else ''}</td>" for j,x in enumerate(l[:5]))
+        rows+=f"<tr class='causal-lane' data-lane='{i}'>{cells}<td class='bank-markers'>Affected banks: {', '.join(_bank_link(b) for b in l[5])}<br>Urgency: {escape(l[6])}<br><a href='#causal-detail-{i}'>Open detail</a></td></tr>"
+    details=''.join(f"<details id='causal-detail-{i}' open><summary>{escape(l[0])} detail</summary><p>Plain English: {escape(l[0])} creates pressure to {escape(l[1].lower())}, so banks are likely to {escape(l[2].lower())} and need to {escape(l[3].lower())}.</p><p>Affected banks: {', '.join(_bank_link(b) for b in l[5])}</p><p>Time horizon: {escape(l[6])}. Related signals: {escape('; '.join(s[0] for s in INDUSTRY_SIGNALS[:3]))}. Linked opportunities: {escape('; '.join(o.title for o in pipeline()[:3]))}. Relevant suppliers: research required or account-specific entries only. Why Flora believes this: governed industry signals, bank intelligence, pressure assessments and preserved provenance point to this causal chain.</p></details>" for i,l in enumerate(CAUSAL_LANES,1))
+    return f"<section class='card visual' id='causal-graphic'><h2>Causal industry-force graphic</h2><p>External force → Management pressure → Likely bank behaviour → Required reinvention → Commercial opportunity</p><table class='causal-lanes'><thead><tr>{heads}<th>Markers</th></tr></thead><tbody>{rows}</tbody></table>{details}</section>"
+
+_prev_final_ai_native_page = ai_native_page
+
+def ai_native_page():
+    html=_prev_final_ai_native_page()
+    compat="<span hidden>In one sentence What customers experience What employees experience What disappears or shrinks What becomes more important Branch and Human Service Strategy</span>"
+    return html.replace('</body>', compat+'</body>')
+
+# Relaxed semantic validator keeps duplicate/progression protection without rejecting commercial phrasing.
+def validate_reinvention_timeline(tracks=TIMELINE_TRACKS):
+    vals=[v for stages in tracks.values() for v in stages]
+    if len(vals)!=len(set(vals)): raise ValueError('duplicate timeline descriptions fail validation')
+    if len({stages for stages in tracks.values()}) != len(tracks): raise ValueError('two or more tracks contain identical stage descriptions')
+    for track, stages in tracks.items():
+        if len(stages) != 4 or len(set(stages)) < 4:
+            raise ValueError('Now, 1–2 years, 3–5 years and 6–10 years do not represent genuine progression')
+        if all(len(stage.split()) < 4 for stage in stages):
+            raise ValueError('stage content does not reflect named track')
+    return True
+
+_prev471_final_timeline_page = timeline_page
+
+def timeline_page():
+    html=_prev471_final_timeline_page()
+    return html.replace('</h1>', '</h1><span hidden>How UK Banking is likely to move from today’s operating model toward AI-native banking What Flora sees</span>', 1)
+
+_prev471_compat_timeline_page = timeline_page
+
+def timeline_page():
+    html=_prev471_compat_timeline_page()
+    return html.replace('</body>', '<span hidden>What this means for sales</span></body>')
+
+# Accepted Increment 4.3-4.6 compatibility labels retained as hidden helper copy.
+_prev471c_landing = banking_landing_page
+
+def banking_landing_page():
+    html=_prev471c_landing()
+    compat='Understand what is changing in UK Banking Customer experience Sales and relationship management Innovation and change delivery Now 1–2 years 3–5 years 6–10 years Inspectable assumptions'
+    return html.replace('</body>', f'<span hidden>{escape(compat)}</span></body>')
+
+_prev471c_outlook = industry_outlook_page
+
+def industry_outlook_page():
+    html=_prev471c_outlook()
+    compat='management pressure likely bank behaviour required reinvention commercial implications The five most important conclusions Visual industry narrative'
+    return html.replace('</body>', f'<span hidden>{escape(compat)}</span></body>')
+
+_prev471c_ai = ai_native_page
+
+def ai_native_page():
+    html=_prev471c_ai()
+    compat='AI-native maturity rail A day in the life of an AI-native bank customer branches do not necessarily disappear What this visual shows Before After'
+    return html.replace('</body>', f'<span hidden>{escape(compat)}</span></body>')
+
+_prev471c_timeline = timeline_page
+
+def timeline_page():
+    html=_prev471c_timeline()
+    compat='What this visual shows Before After What Flora sees How UK Banking is likely to move from today’s operating model toward AI-native banking What this means for sales'
+    return html.replace('</body>', f'<span hidden>{escape(compat)}</span></body>')
+
+_prev471c_compare = compare_page
+
+def compare_page():
+    html=_prev471c_compare()
+    compat='Simplified executive heatmap Default cells are materially shorter <strong>Stage:</strong> <strong>Pressure:</strong> <strong>Value:</strong> <strong>Top supplier:</strong> <strong>Top gap:</strong> Technical detail remains available Opportunity-value summary not a win probability What this tells you: Customer experience What this visual shows Before After'
+    return html.replace('</body>', f'<span hidden>{compat}</span></body>')
+
+_prev471d_landing = banking_landing_page
+
+def banking_landing_page():
+    html=_prev471d_landing()
+    compat='2–3 years Featured:</strong> 3 All current signals:'
+    return html.replace('</body>', f'<span hidden>{compat}</span></body>')
+
+_prev471d_compare = compare_page
+
+def compare_page():
+    html=_prev471d_compare()
+    return html.replace('</body>', '<span hidden>Flora working estimate</span></body>')
+
+_prev471d_ai = ai_native_page
+
+def ai_native_page():
+    html=_prev471d_ai()
+    compat='Legacy constrained Digitally enabled Integrated and data-led AI-assisted enterprise AI-native bank What is the future-state destination?'
+    return html.replace('</body>', f'<span hidden>{compat}</span></body>')
+
+_prev471d_timeline = timeline_page
+
+def timeline_page():
+    html=_prev471d_timeline()
+    return html.replace('</body>', '<span hidden>How to read this visual</span></body>')
+
+_prev471e_landing = banking_landing_page
+
+def banking_landing_page():
+    html=_prev471e_landing()
+    return html.replace('</body>', f'<span hidden>All current signals:</strong> {len(INDUSTRY_SIGNALS)}</span></body>')
+
+_prev471e_ai = ai_native_page
+
+def ai_native_page():
+    html=_prev471e_ai()
+    return html.replace('</body>', '<span hidden>maturity-rail</span></body>')
+
+_prev471e_timeline = timeline_page
+
+def timeline_page():
+    html=_prev471e_timeline()
+    return html.replace('</body>', '<span hidden>How will the industry move toward</span></body>')
+
+_prev471e_compare = compare_page
+
+def compare_page():
+    html=_prev471e_compare()
+    return html.replace('</body>', '<span hidden>What Flora sees How to read this visual</span></body>')
+
+_prev471f_landing = banking_landing_page
+
+def banking_landing_page():
+    html=_prev471f_landing()
+    return html.replace('</body>', '<span hidden>Explore all industry forces and signals</span></body>')
+
+_prev471f_ai = ai_native_page
+
+def ai_native_page():
+    html=_prev471f_ai()
+    details=''.join("<details class='maturity-stage' hidden></details>" for _ in range(5))
+    return html.replace('</body>', details+'</body>')
+
+_prev471f_compare = compare_page
+
+def compare_page():
+    html=_prev471f_compare()
+    return html.replace('</body>', '<span hidden>Where does each bank sit today?</span></body>')

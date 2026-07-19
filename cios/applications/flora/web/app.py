@@ -38,7 +38,7 @@ from cios.applications.flora.enterprise_intelligence.runtime import EnterpriseIn
 from cios.applications.flora.architecture_export import architecture_export_page, record_download
 from cios.applications.flora.runtime.increment1_views import increment1_workspace_page
 from cios.applications.flora.enterprise_intelligence.explain import executive_presentation_for_explanation, increment2_runtime_path, audit_event, evidence_trust_view, claim_evidence_summaries
-from cios.applications.flora.banking_portfolio import portfolio_page as banking_portfolio_page, banking_landing_page, industry_outlook_page, ai_native_page, ai_native_capability_model_page, timeline_page, heatmap_page, heatmap_detail_page, pipeline_page, opportunity_page as banking_opportunity_page, bank_page as banking_bank_page, compare_page as banking_compare_page, evidence_page as banking_evidence_page, competitors_page as banking_competitors_page, industry_signal_explorer_page, global_industry_portfolio_page, financial_history_page, market_reaction_page, analyst_history_page, enterprise_event_timeline_page, research_backlog_page
+from cios.applications.flora.banking_portfolio import portfolio_page as banking_portfolio_page, banking_landing_page, industry_outlook_page, ai_native_page, ai_native_capability_model_page, timeline_page, heatmap_page, heatmap_detail_page, pipeline_page, opportunity_page as banking_opportunity_page, bank_page as banking_bank_page, compare_page as banking_compare_page, evidence_page as banking_evidence_page, competitors_page as banking_competitors_page, industry_signal_explorer_page, global_industry_portfolio_page, financial_history_page, market_reaction_page, analyst_history_page, enterprise_event_timeline_page, research_backlog_page, banks_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -85,6 +85,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(banking_landing_page())
             elif parsed.path == "/flora/banking/portfolio":
                 self._html(banking_portfolio_page())
+            elif parsed.path == "/flora/banking/banks":
+                self._html(banks_page())
             elif parsed.path == "/flora/banking/outlook":
                 self._html(industry_outlook_page())
             elif parsed.path == "/flora/banking/ai-native":
