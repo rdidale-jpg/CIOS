@@ -37,7 +37,7 @@ from cios.applications.flora.enterprise_intelligence.models import ReasoningRequ
 from cios.applications.flora.enterprise_intelligence.runtime import EnterpriseIntelligenceRuntime
 from cios.applications.flora.architecture_export import architecture_export_page, record_download
 from cios.applications.flora.runtime.increment1_views import increment1_workspace_page
-from cios.applications.flora.enterprise_intelligence.explain import executive_presentation_for_explanation, increment2_runtime_path, audit_event
+from cios.applications.flora.enterprise_intelligence.explain import executive_presentation_for_explanation, increment2_runtime_path, audit_event, evidence_trust_view, claim_evidence_summaries
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -475,6 +475,8 @@ def _flora_increment2_explain_page(headers=None, query=None) -> str:
     evidence_by_id = {e.evidence_id: e for e in package.evidence}
     observations_by_id = {o.observation_id: o for o in package.observations}
     passages_by_id = {p.passage_id: p for p in package.source_passages}
+    trust_by_id = {t.evidence_id: t for t in evidence_trust_view(package, explanation)}
+    summaries_by_change = {s.change_id: s for s in claim_evidence_summaries(package, explanation)}
 
     def _items(items):
         return ''.join(f'<li>{escape(str(item))}</li>' for item in items) or '<li>None stated in the governed result.</li>'
@@ -488,7 +490,9 @@ def _flora_increment2_explain_page(headers=None, query=None) -> str:
                 f"<article class='mini-card'><h5>{escape(ref)}</h5><p><strong>Document:</strong> {escape(passages_by_id[ref].source_id)}</p><blockquote>{escape(passages_by_id[ref].content)}</blockquote></article>"
                 for ref in ev.lineage if ref in passages_by_id
             )
-            refs.append(f"<article><h4>{escape(eid)}</h4><p>{escape(ev.claim)}</p><p><strong>Lineage:</strong> {escape(', '.join(ev.lineage))}</p>{passages}</article>")
+            trust = trust_by_id[eid]
+            flags = ''.join(f'<li>{escape(flag)}</li>' for flag in trust.data_quality_flags)
+            refs.append(f"<article><h4>{escape(eid)}</h4><p>{escape(ev.claim)}</p><dl class='trust-lens'><dt>Source authority</dt><dd>{escape(trust.source_authority)}</dd><dt>Evidence role</dt><dd>{escape(trust.evidence_role)}</dd><dt>Scope</dt><dd>{escape(trust.scope)}</dd><dt>Freshness</dt><dd>Publication date: {escape(trust.publication_date)}; evidence period: {escape(trust.evidence_period)}; status: {escape(trust.freshness_status)}</dd><dt>Corroboration</dt><dd>{escape(trust.corroboration)}</dd><dt>Evidence limitations</dt><dd>{escape(trust.limitation)}</dd><dt>Confidence contribution</dt><dd>{escape(trust.confidence_contribution)}</dd><dt>Data quality flags</dt><dd><ul>{flags}</ul></dd></dl><p><strong>Lineage:</strong> {escape(', '.join(ev.lineage))}</p>{passages}</article>")
         obs = ''.join(f"<li>{escape(oid)} — {escape(observations_by_id[oid].statement)}</li>" for oid in c.observation_ids if oid in observations_by_id)
         return f"""
         <details class='inspection'>
@@ -497,6 +501,7 @@ def _flora_increment2_explain_page(headers=None, query=None) -> str:
           <p><strong>Context Package identity:</strong> {escape(package.package_id)} · {escape(package.package_hash)}</p>
           <p><strong>Evidence IDs:</strong> {escape(', '.join(c.evidence_ids))}</p>
           <p><strong>Observation IDs:</strong> {escape(', '.join(c.observation_ids) or 'none')}</p>
+          <h4>Claim-level Evidence Summary</h4><p>{escape(summaries_by_change[c.change_id].summary)}</p><ul><li><strong>Evidence strength:</strong> {escape(summaries_by_change[c.change_id].evidence_strength)}</li><li><strong>Primary source basis:</strong> {escape(summaries_by_change[c.change_id].primary_source_basis)}</li><li><strong>Corroboration status:</strong> {escape(summaries_by_change[c.change_id].corroboration_status)}</li><li><strong>Temporal quality:</strong> {escape(summaries_by_change[c.change_id].temporal_quality)}</li><li><strong>Important limitation:</strong> {escape(summaries_by_change[c.change_id].important_limitation)}</li></ul>
           <h4>Governed Observations</h4><p class='visually-hidden'>Bounded interpretations</p><ul>{obs or '<li>No governed Observation linked to this claim.</li>'}</ul>
           <h4>Evidence, Source passages and claim-level lineage</h4>{''.join(refs)}
           <p><a href='/flora/object/BK-ENT-001/lineage/{escape(c.change_id)}'>Open claim-level lineage page</a></p>
