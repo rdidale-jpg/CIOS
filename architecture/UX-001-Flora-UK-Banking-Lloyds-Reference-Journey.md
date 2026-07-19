@@ -1,8 +1,16 @@
-# UX-0XX — Flora UK Banking → Lloyds Reference Journey
+# UX-001 — Flora UK Banking → Lloyds Reference Journey
 
 **Status:** Proposed  
 **Document class:** UX Journey Specification  
 **Purpose:** Define the first end-to-end reference experience proving the Flora Enterprise Intelligence Workspace.
+
+**Related documents:**
+
+- `CIOS/architecture/FP-0XX-Flora-Enterprise-Intelligence-Workspace-Product-Architecture.md`
+- `CIOS/architecture/Flora-Workspace-Architecture-Reconciliation-Report.md`
+- `CIOS/architecture/decisions/ADR-025-Flora-as-the-Enterprise-Intelligence-Workspace.md`
+
+> Numbering note: this is the first repository-numbered UX Journey Specification and uses the `UX-001` identifier. The parent Flora Product Architecture Blueprint still uses the provisional `FP-0XX` filename in this branch.
 
 ## Mission
 
@@ -147,10 +155,6 @@ The journey succeeds when a user can:
 7. Create a validation action.
 8. Resume later with context preserved.
 
-## Repository
+## Repository path
 
-Upload as:
-
-`CIOS/architecture/UX-0XX-Flora-UK-Banking-Lloyds-Reference-Journey.md`
-
-Codex should replace `UX-0XX` with the next valid repository identifier and update references.
+`CIOS/architecture/UX-001-Flora-UK-Banking-Lloyds-Reference-Journey.md`
