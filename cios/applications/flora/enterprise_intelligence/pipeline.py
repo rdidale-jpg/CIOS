@@ -5,6 +5,7 @@ from typing import Any
 from .models import *
 from .reasoning import DeterministicDevelopmentAdapter, ReasoningAdapter, configured_reasoning_adapter
 from .semantic import OBS_TEXT, MECHANISM_DETAILS, build_semantic_context
+from .explain import run_increment2_explain
 
 ROOT=Path(__file__).resolve().parents[4]
 KNOW=ROOT/'enterprise-knowledge'
@@ -96,6 +97,10 @@ def trace(run):
     return '\n'.join(s)+'\n'
 
 def main(argv=None):
-    ap=argparse.ArgumentParser(); ap.add_argument('domain',choices=['banking']); ap.add_argument('--output-dir',default=str(OUT)); ns=ap.parse_args(argv)
+    ap=argparse.ArgumentParser(); ap.add_argument('domain',choices=['banking']); ap.add_argument('--output-dir',default=str(OUT)); ap.add_argument('--increment2-explain', action='store_true'); ns=ap.parse_args(argv)
+    if ns.increment2_explain:
+        result=run_increment2_explain(Path(ns.output_dir)/'lloyds-bounded-explain.json')
+        print(json.dumps({'context_package_id': result['context_package']['package_id'], 'context_package_hash': result['context_package']['package_hash'], 'explanation_id': result['explanation']['explanation_id'], 'change_count': len(result['explanation']['changes'])}, indent=2))
+        return 0
     run=run_pipeline(Path(ns.output_dir)); print(trace(run)); return 0 if run.validation.passed else 1
 if __name__=='__main__': raise SystemExit(main())
