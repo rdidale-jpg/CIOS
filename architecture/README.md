@@ -123,6 +123,7 @@ The Enterprise Intelligence series begins with each monitored enterprise as a li
 - `research/` contains evolving models, hypotheses and notes that may later become formal design or decision records.
 - `decisions/` contains Architecture Decision Records that explain important choices, trade-offs and consequences. Start with the [ADR index](decisions/README.md), including accepted [ADR-001](decisions/ADR-001-Observations-as-Atomic-Intelligence-Unit.md), [ADR-002](decisions/ADR-002-Enterprise-Model-as-Durable-Memory.md), [ADR-003](decisions/ADR-003-CIRM-and-EI-Separation.md), [ADR-004](decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md) and [ADR-005](decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md). Proposed ADR placeholders retained for review are [ADR-006](decisions/ADR-006-Signal-Architecture.md), [ADR-007](decisions/ADR-007-Transformation-Thesis.md) and [ADR-008](decisions/ADR-008-Recommendation-Engine.md).
 - `roadmap/` contains capability evolution plans for CIOS, Flora, Newton and the Observatory.
+- `governance/` contains Flora architecture governance workflow documents, including the compliance checklist, implementation review template, architectural decision workflow and definition of done.
 
 
 ## Founding papers
