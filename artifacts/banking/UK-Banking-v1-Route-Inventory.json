@@ -1,0 +1,617 @@
+{
+  "generated_date": "2026-07-19",
+  "routes": [
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "industry portfolio",
+      "required_navigation_present": true,
+      "route": "/flora",
+      "sha256": "19e7cf1f37d6be1bfa19cf0d068f43b0239d00e1989f854da8de621d9575cfb7",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "UK Banking landing",
+      "required_navigation_present": true,
+      "route": "/flora/banking",
+      "sha256": "d6a6d109a25e87f3dfce34b62c6b2e67feedd4677542112770828447f87ef28b",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "industry outlook",
+      "required_navigation_present": true,
+      "route": "/flora/banking/outlook",
+      "sha256": "b3b91af578f1c63d268a38eba56612b113f418d21d27d21dcf19e0ad6a2b7a5c",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "ranked signals",
+      "required_navigation_present": true,
+      "route": "/flora/banking/signals",
+      "sha256": "87f13ba1e02605e782d2947fc3ef542300d3562d618fcbbdd859775546f2382d",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "AI-native Banking",
+      "required_navigation_present": true,
+      "route": "/flora/banking/ai-native",
+      "sha256": "e2f7b038fbc1037c36e7c8b772ab428d1645fd7c1d9e3ef498729e1b3ad31efc",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "AI-native capability model",
+      "required_navigation_present": true,
+      "route": "/flora/banking/ai-native/capability-model",
+      "sha256": "26e2b7a84f17aeb6e355cb26e452f6d94852a3a476ed29bd432a916eec39e711",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "reinvention timeline",
+      "required_navigation_present": true,
+      "route": "/flora/banking/timeline",
+      "sha256": "b98c4a7256f733d199a44d73c255e6291c657c04477954c8f94021a651cc74a7",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "bank comparison",
+      "required_navigation_present": true,
+      "route": "/flora/banking/compare",
+      "sha256": "1b592d4d5a7592ee35a1cb49d7c9a4b893d2ec4a81d68bdf424f397a3f8b6ddf",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "bank exploration",
+      "required_navigation_present": true,
+      "route": "/flora/banking/banks",
+      "sha256": "7b52ca2e4a78e73a437e1c4d9b5069e62354e74b79f33faf253b1ecf48faa257",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "commercial pipeline",
+      "required_navigation_present": true,
+      "route": "/flora/banking/pipeline",
+      "sha256": "7a0e7f7d2083724a6c8d221ef96194b1a71e30374857521d175eef7c6ca5af4a",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "suppliers and competitors",
+      "required_navigation_present": true,
+      "route": "/flora/banking/competitors",
+      "sha256": "20f9ccfd62e48541f1fe24a14dad7ea59e46c2bbc06b8fe37bf3cc72e4683f1c",
+      "status": "verified"
+    },
+    {
+      "error": "heatmap_detail_page() missing 3 required positional arguments: 'mode', 'theme', and 'bank_slug'",
+      "http_status_expected": 200,
+      "journey": "Lloyds detailed inspection",
+      "required_navigation_present": true,
+      "route": "/flora/banking/lloyds/evidence",
+      "sha256": "3be272239dc0a6ee2dd11d7702391918bf330ea41154aac7f82d425101375dc7",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 404,
+      "journey": "safe-unavailable state",
+      "required_navigation_present": true,
+      "route": "/flora/banking/unknown-bank",
+      "sha256": "dabd3aff769f07eb2965401eb029974ebba3407afd02b26ddb564ea5f8efae72",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Lloyds Banking Group overview",
+      "required_navigation_present": true,
+      "route": "/flora/banking/lloyds",
+      "sha256": "05f89a57f21ca5b07c0bae1f56ccc807468d3b212dacee1d13487949c0c4c153",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Lloyds Banking Group financial performance",
+      "required_navigation_present": true,
+      "route": "/flora/banking/lloyds/financial-performance",
+      "sha256": "d83f7df845cfee998dcb6d36fe39d153bc05504adcb2b8dc15684f7734457819",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Lloyds Banking Group market and analyst view",
+      "required_navigation_present": true,
+      "route": "/flora/banking/lloyds/market-analyst-view",
+      "sha256": "d43e858057afcf9106830cce1d72533050942badee168f70327271aaf9090eb4",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Lloyds Banking Group market reaction",
+      "required_navigation_present": true,
+      "route": "/flora/banking/lloyds/market-reaction",
+      "sha256": "e229392dc3685660068b165f737d102eb885ef034bb6b494040600d634ce4cb5",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Lloyds Banking Group analyst history",
+      "required_navigation_present": true,
+      "route": "/flora/banking/lloyds/analyst-history",
+      "sha256": "5c944eb9d1d577a0f2a8aceeb82d414a56dfe8385a913d11a97508376a567290",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Lloyds Banking Group opportunity timing",
+      "required_navigation_present": true,
+      "route": "/flora/banking/lloyds/event-timeline",
+      "sha256": "651083f3214dbf9852723721ee5664fe6de69bf9900e49f9f0f1c0f712f26a2e",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Lloyds Banking Group Lloyds detailed inspection",
+      "required_navigation_present": true,
+      "route": "/flora/banking/lloyds/evidence",
+      "sha256": "3be272239dc0a6ee2dd11d7702391918bf330ea41154aac7f82d425101375dc7",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Lloyds Banking Group research backlog",
+      "required_navigation_present": true,
+      "route": "/flora/banking/lloyds/research-backlog",
+      "sha256": "ff6882ecad1fdf02f3d903b14d6f4e769e8924b7fa312b64cff034c2c48f8b78",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Lloyds Banking Group opportunity COH-LBG-001",
+      "required_navigation_present": true,
+      "route": "/flora/banking/lloyds/opportunity/COH-LBG-001",
+      "sha256": "c31732767ef6a512c40277520711046221f34c495e8c8b007280b2cd574ffc51",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Lloyds Banking Group opportunity COH-LBG-002",
+      "required_navigation_present": true,
+      "route": "/flora/banking/lloyds/opportunity/COH-LBG-002",
+      "sha256": "ab95a90ab16a36862fb5cc235c1929255b984cc22206ce9ffccb2e0fffa17aa8",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Lloyds Banking Group opportunity COH-LBG-003",
+      "required_navigation_present": true,
+      "route": "/flora/banking/lloyds/opportunity/COH-LBG-003",
+      "sha256": "136f7c55e7f8eca2c011894519ee73a4a952d9a2d3b439df8d243f7afbe52850",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Barclays overview",
+      "required_navigation_present": true,
+      "route": "/flora/banking/barclays",
+      "sha256": "c56551d7d02160ff15a9a78b182c9e04eae48a8a6b3c67b4a67d31a761e9d5e3",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Barclays financial performance",
+      "required_navigation_present": true,
+      "route": "/flora/banking/barclays/financial-performance",
+      "sha256": "652ef31013a5b672536b7cd8313e4bc1aaf36d07d22a8a778c732bb29ad9be0a",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Barclays market and analyst view",
+      "required_navigation_present": true,
+      "route": "/flora/banking/barclays/market-analyst-view",
+      "sha256": "034f10caf4ddf67ce3842d96e901ebb88b952e08542356374e637e00ff8b4a05",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Barclays market reaction",
+      "required_navigation_present": true,
+      "route": "/flora/banking/barclays/market-reaction",
+      "sha256": "f26c9f9e46264e644c055e0bb97671bda03385c33dd961eef4a4b3627da81c74",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Barclays analyst history",
+      "required_navigation_present": true,
+      "route": "/flora/banking/barclays/analyst-history",
+      "sha256": "498d44268e9e2b68d31ba95bef2063ab574a7ff21f73210e4e903b78a4dcce2c",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Barclays opportunity timing",
+      "required_navigation_present": true,
+      "route": "/flora/banking/barclays/event-timeline",
+      "sha256": "2868c612aaaf40d159567f878b0c9eccc204bf9df5bd8981a38a9fa16d82fbc5",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Barclays Lloyds detailed inspection",
+      "required_navigation_present": true,
+      "route": "/flora/banking/barclays/evidence",
+      "sha256": "90202c972e2db3d42133d3f129f67271e1ed58b315b9ffec4a8bb15f720a9df5",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Barclays research backlog",
+      "required_navigation_present": true,
+      "route": "/flora/banking/barclays/research-backlog",
+      "sha256": "a664a13340cc9fbd5943529dbe59ec4966d0cd75f2c0738364260177dee6ca10",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Barclays opportunity COH-BAR-001",
+      "required_navigation_present": true,
+      "route": "/flora/banking/barclays/opportunity/COH-BAR-001",
+      "sha256": "4796659a014c50e457d7b57e53bc32d3aedb0bc60e59a4281149af2639c909aa",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Barclays opportunity COH-BAR-002",
+      "required_navigation_present": true,
+      "route": "/flora/banking/barclays/opportunity/COH-BAR-002",
+      "sha256": "5b81c8bd685fe2acc7b209bead661fca35a0ee9bed90958b893f05818205f855",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Barclays opportunity COH-BAR-003",
+      "required_navigation_present": true,
+      "route": "/flora/banking/barclays/opportunity/COH-BAR-003",
+      "sha256": "065ba1ea877a3006ca22fbbd107a45dab209a7df3510d7d867718933e8e6af04",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "NatWest Group overview",
+      "required_navigation_present": true,
+      "route": "/flora/banking/natwest",
+      "sha256": "0fcc316b4e1cbbbfe8c37190094fcd99fdeede809855368f4084ac3312881e20",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "NatWest Group financial performance",
+      "required_navigation_present": true,
+      "route": "/flora/banking/natwest/financial-performance",
+      "sha256": "95d5021a167de0188887088b417245f6174c1eae8555b721fbb0f7a5cf1dda3b",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "NatWest Group market and analyst view",
+      "required_navigation_present": true,
+      "route": "/flora/banking/natwest/market-analyst-view",
+      "sha256": "9d876307770adf1a71dfd4695ae72367edf2f7fa5e80bbffa9fdd4c13c63ac61",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "NatWest Group market reaction",
+      "required_navigation_present": true,
+      "route": "/flora/banking/natwest/market-reaction",
+      "sha256": "b8318216230b41803cca9e64dd75f644944a91ad185f82f5bb2c66f9b099e90a",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "NatWest Group analyst history",
+      "required_navigation_present": true,
+      "route": "/flora/banking/natwest/analyst-history",
+      "sha256": "36b9d56e17cd60f494a29068b983123fe5459747e574fd1cbb2bce74437403ef",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "NatWest Group opportunity timing",
+      "required_navigation_present": true,
+      "route": "/flora/banking/natwest/event-timeline",
+      "sha256": "8e7603c88c23b4bb3b5debb018080562df1b777a30489dede6a010bf258f41b3",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "NatWest Group Lloyds detailed inspection",
+      "required_navigation_present": true,
+      "route": "/flora/banking/natwest/evidence",
+      "sha256": "22023ef04457cad4a6667addbf9e84e3004e8fbd2b496bd9f6e5dee8be4a515d",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "NatWest Group research backlog",
+      "required_navigation_present": true,
+      "route": "/flora/banking/natwest/research-backlog",
+      "sha256": "5256bae7ff4fecce13b5106efd17da3607768d55be6dc63a58c12c93c72e70b1",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "NatWest Group opportunity COH-NWG-001",
+      "required_navigation_present": true,
+      "route": "/flora/banking/natwest/opportunity/COH-NWG-001",
+      "sha256": "5d20babf1dda94aa57b7ac95d997013d5439650f1595784bb42ef84523d48cd9",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "NatWest Group opportunity COH-NWG-002",
+      "required_navigation_present": true,
+      "route": "/flora/banking/natwest/opportunity/COH-NWG-002",
+      "sha256": "ef9b1cab6746affd634ec4f23767ef7915a0db41642941514a0bb5dce0e7c0ee",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "NatWest Group opportunity COH-NWG-003",
+      "required_navigation_present": true,
+      "route": "/flora/banking/natwest/opportunity/COH-NWG-003",
+      "sha256": "732a5c40fe19dfdd14592b6b1294079121bfdae617464bd7754a4c39b1a29d73",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "HSBC UK overview",
+      "required_navigation_present": true,
+      "route": "/flora/banking/hsbc-uk",
+      "sha256": "7e3b9ccd46e1f4b48168610f73a573fc7deb254f57cf6d1eb9479f2ba75e6f30",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "HSBC UK financial performance",
+      "required_navigation_present": true,
+      "route": "/flora/banking/hsbc-uk/financial-performance",
+      "sha256": "ac221cd3fbfcd8f49ad7ba679b14744bc83b62897ffbbfe4b7cdd7d37b5f43a3",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "HSBC UK market and analyst view",
+      "required_navigation_present": true,
+      "route": "/flora/banking/hsbc-uk/market-analyst-view",
+      "sha256": "9a1ad2a8643e1768f5bd5b6c9905baf1d9d1dfa7ecb5133bcdc58d5783a9a168",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "HSBC UK market reaction",
+      "required_navigation_present": true,
+      "route": "/flora/banking/hsbc-uk/market-reaction",
+      "sha256": "07985cae85a73ef56fa79729b87a0dec6067a122ccf9de3ebebeea84f11421c3",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "HSBC UK analyst history",
+      "required_navigation_present": true,
+      "route": "/flora/banking/hsbc-uk/analyst-history",
+      "sha256": "182923cbcf1834530a2bf572840c8285e534e9f0ddfddd6aa0741693919d1499",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "HSBC UK opportunity timing",
+      "required_navigation_present": true,
+      "route": "/flora/banking/hsbc-uk/event-timeline",
+      "sha256": "16d7ff285c52e9c6304a07d6f0a2703bd4562627a39362d496aa1187c39446c9",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "HSBC UK Lloyds detailed inspection",
+      "required_navigation_present": true,
+      "route": "/flora/banking/hsbc-uk/evidence",
+      "sha256": "1b6c965f018a8486894f7067e80e91faef0af500c292a4f81fa551515199c9a1",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "HSBC UK research backlog",
+      "required_navigation_present": true,
+      "route": "/flora/banking/hsbc-uk/research-backlog",
+      "sha256": "375cacadfecd45dcd3312f8e9ddcdd8c3ed9421954d929b0d1e0a1a0c2275456",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "HSBC UK opportunity COH-HBUK-001",
+      "required_navigation_present": true,
+      "route": "/flora/banking/hsbc-uk/opportunity/COH-HBUK-001",
+      "sha256": "9a52834a3cea3cc964538d8f73c203f2f12d3367d94e83fdca23399f81369222",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "HSBC UK opportunity COH-HBUK-002",
+      "required_navigation_present": true,
+      "route": "/flora/banking/hsbc-uk/opportunity/COH-HBUK-002",
+      "sha256": "640f0c2ec5beddcb610ba209ed2bb17f2565b4975a5b950b200a95c21f8f2e95",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "HSBC UK opportunity COH-HBUK-003",
+      "required_navigation_present": true,
+      "route": "/flora/banking/hsbc-uk/opportunity/COH-HBUK-003",
+      "sha256": "6e122dcedb861012188432710b904c4230439f5ac6ff7b797dfa7cff408d103b",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Santander UK overview",
+      "required_navigation_present": true,
+      "route": "/flora/banking/santander-uk",
+      "sha256": "6a76022c5f7ca5f0288f72020a0a239152eedf235f70d5ca2263918da811a3ce",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Santander UK financial performance",
+      "required_navigation_present": true,
+      "route": "/flora/banking/santander-uk/financial-performance",
+      "sha256": "c5a7ae7c9a93abb6028e01ddee9605b0cb02f1eb7b73ad3ae8216724330a1241",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Santander UK market and analyst view",
+      "required_navigation_present": true,
+      "route": "/flora/banking/santander-uk/market-analyst-view",
+      "sha256": "a450aee6d82d9c6b347e5babba6f7d741f3f56fdb6948eab9521b5885b0864e4",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Santander UK market reaction",
+      "required_navigation_present": true,
+      "route": "/flora/banking/santander-uk/market-reaction",
+      "sha256": "7f5f0b32c6f2b526bea3f53a79b1f308533165f67eb1345db332301f412e5439",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Santander UK analyst history",
+      "required_navigation_present": true,
+      "route": "/flora/banking/santander-uk/analyst-history",
+      "sha256": "4fa33b4ac8807613450cd0405097f0e119053b7df77324d3280172e91b497359",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Santander UK opportunity timing",
+      "required_navigation_present": true,
+      "route": "/flora/banking/santander-uk/event-timeline",
+      "sha256": "47ee5c086424fc84c8b56df7b7169a99091989d2b96806997bd41544fb442691",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Santander UK Lloyds detailed inspection",
+      "required_navigation_present": true,
+      "route": "/flora/banking/santander-uk/evidence",
+      "sha256": "fb7f5054163c78a642580fd1204696108a841dbaa27f99c11339ea58fdebf9b6",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Santander UK research backlog",
+      "required_navigation_present": true,
+      "route": "/flora/banking/santander-uk/research-backlog",
+      "sha256": "27581d91d487183a45548eb02b0c70c6f05c477daa90f79e28be7aebde43005c",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Santander UK opportunity COH-SAN-001",
+      "required_navigation_present": true,
+      "route": "/flora/banking/santander-uk/opportunity/COH-SAN-001",
+      "sha256": "7f48ef3f50f2af5112e3cdfced251875d33c28d6a19e0c1249091135f06e9a78",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Santander UK opportunity COH-SAN-002",
+      "required_navigation_present": true,
+      "route": "/flora/banking/santander-uk/opportunity/COH-SAN-002",
+      "sha256": "8d5b8a6fbc951dbfd41f944d38b9a3ee24c3eaa653d019d0cdc09e9814295e48",
+      "status": "verified"
+    },
+    {
+      "contains_expected_page": true,
+      "http_status_expected": 200,
+      "journey": "Santander UK opportunity COH-SAN-003",
+      "required_navigation_present": true,
+      "route": "/flora/banking/santander-uk/opportunity/COH-SAN-003",
+      "sha256": "63a60622c32effca53b2e4437b53c32df8674f7fa3d05febf2efe56c40c6643b",
+      "status": "verified"
+    }
+  ]
+}

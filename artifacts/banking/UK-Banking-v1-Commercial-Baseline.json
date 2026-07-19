@@ -1,0 +1,718 @@
+{
+  "account_priorities": [
+    {
+      "name": "Lloyds Banking Group",
+      "priority": "Priority 1",
+      "rank": 1,
+      "slug": "lloyds",
+      "why_now": "Prioritise Lloyds now because visible customer migration, cost discipline and technology-modernisation themes combine into a high-value, near-term change agenda."
+    },
+    {
+      "name": "Barclays",
+      "priority": "Priority 2",
+      "rank": 2,
+      "slug": "barclays",
+      "why_now": "Prioritise Barclays after Lloyds because transformation is material, but UK retail opportunities must be separated from wider group agenda."
+    },
+    {
+      "name": "NatWest Group",
+      "priority": "Priority 3",
+      "rank": 3,
+      "slug": "natwest",
+      "why_now": "Prioritise NatWest because franchise momentum and simplification pressure create plausible customer, data and operating-model opportunities."
+    },
+    {
+      "name": "HSBC UK",
+      "priority": "Monitor",
+      "rank": 4,
+      "slug": "hsbc-uk",
+      "why_now": "Monitor HSBC UK and pursue targeted conversations where UK-specific resilience, risk or platform evidence is confirmed."
+    },
+    {
+      "name": "Santander UK",
+      "priority": "Monitor",
+      "rank": 5,
+      "slug": "santander-uk",
+      "why_now": "Monitor Santander UK while exploring channel and cost conversations where UK-specific operating-model evidence emerges."
+    }
+  ],
+  "ai_native_horizons": {
+    "barclays": {
+      "accelerate": "External delivery capacity tied to announced efficiency plan",
+      "assumptions": "Strong capabilities exist, but universal-bank complexity makes enterprise-wide AI-native operation slower.",
+      "barriers": "Operating-model complexity and capital-return scrutiny",
+      "delay": "Investment-bank volatility or programme overload",
+      "native": "7–10 years",
+      "next": "2–4 years",
+      "path": "Efficiency-led simplification, platform modernisation and AI-assisted productivity",
+      "stage": "Integrated and data-led in parts, digitally enabled elsewhere",
+      "strong": "Group investment capacity, cost discipline, complex-platform engineering",
+      "weak": "Multi-business complexity, execution risk, UK/group separation"
+    },
+    "hsbc-uk": {
+      "accelerate": "UK-specific regulatory or resilience trigger",
+      "assumptions": "Scale helps capability, but UK ring-fenced delivery depends on wider HSBC decisions.",
+      "barriers": "Group sequencing and regulatory complexity",
+      "delay": "Group platform roadmap conflicts with UK priorities",
+      "native": "8–11 years",
+      "next": "3–5 years",
+      "path": "Targeted resilience, third-party control and AI-assisted operations within group platforms",
+      "stage": "Digitally enabled with strong control and group dependency",
+      "strong": "Resilience, control discipline, group technology scale",
+      "weak": "UK-specific autonomy, platform dependency, standalone evidence"
+    },
+    "lloyds": {
+      "accelerate": "Clear funded technology roadmap and conduct uncertainty resolution",
+      "assumptions": "Large UK scale and digital momentum shorten the path; legacy and conduct drag extend it.",
+      "barriers": "Brand migration risk, control evidence, operating-model fragmentation",
+      "delay": "Remediation, weak data ownership or migration failures",
+      "native": "6–9 years",
+      "next": "2–3 years",
+      "path": "Customer migration plus platform simplification and governed AI operations",
+      "stage": "Between Digitally enabled and Integrated and data-led",
+      "strong": "Digital scale, brand reach, customer migration agenda, technology investment",
+      "weak": "Legacy complexity, data quality, conduct uncertainty, channel fragmentation"
+    },
+    "natwest": {
+      "accelerate": "Deposit retention or SME growth programmes get funded",
+      "assumptions": "Focused UK franchise helps pace; legacy service and data work still need integration.",
+      "barriers": "Revenue normalisation and deposit competition",
+      "delay": "Income pressure narrows discretionary spend",
+      "native": "6–9 years",
+      "next": "2–3 years",
+      "path": "Customer-value analytics, SME workflow and service productivity",
+      "stage": "Digitally enabled moving toward Integrated and data-led",
+      "strong": "Deposit franchise, customer data opportunity, simplification agenda",
+      "weak": "Commercial-banking manual effort, data consistency, service cost"
+    },
+    "santander-uk": {
+      "accelerate": "Clear UK-owned investment roadmap",
+      "assumptions": "Group assets help, but UK-specific control of change is less visible.",
+      "barriers": "Group platform dependency and benefit proof",
+      "delay": "Group sequencing or cost pressure limits scope",
+      "native": "8–10 years",
+      "next": "3–4 years",
+      "path": "Focused customer-value, channel productivity and platform-dependency work",
+      "stage": "Digitally enabled with selected data-led capability",
+      "strong": "Capital position, customer base, group platforms",
+      "weak": "UK margin pressure, standalone technology detail, channel productivity"
+    }
+  },
+  "bank_theme_assessments": {
+    "barclays": {
+      "Cloud and platform modernisation": 86,
+      "Cost transformation": 94,
+      "Customer experience transformation": 68,
+      "Data and AI transformation": 78,
+      "Digital channel modernisation": 66,
+      "Operational resilience": 76,
+      "Payments transformation": 64,
+      "Regulatory remediation": 72
+    },
+    "hsbc-uk": {
+      "Cloud and platform modernisation": 76,
+      "Cost transformation": 56,
+      "Customer experience transformation": 60,
+      "Data and AI transformation": 70,
+      "Digital channel modernisation": 58,
+      "Operational resilience": 86,
+      "Payments transformation": 54,
+      "Regulatory remediation": 82
+    },
+    "lloyds": {
+      "Cloud and platform modernisation": 80,
+      "Cost transformation": 82,
+      "Customer experience transformation": 95,
+      "Data and AI transformation": 74,
+      "Digital channel modernisation": 90,
+      "Operational resilience": 72,
+      "Payments transformation": 58,
+      "Regulatory remediation": 70
+    },
+    "natwest": {
+      "Cost transformation": 80,
+      "Customer experience transformation": 84,
+      "Data and AI transformation": 78,
+      "Deposits and customer value management": 92,
+      "Digital channel modernisation": 75,
+      "Operational resilience": 70,
+      "Payments transformation": 58,
+      "Regulatory remediation": 62
+    },
+    "santander-uk": {
+      "Cloud and platform modernisation": 64,
+      "Cost transformation": 82,
+      "Customer experience transformation": 76,
+      "Data and AI transformation": 60,
+      "Digital channel modernisation": 74,
+      "Operational resilience": 62,
+      "Payments transformation": 52,
+      "Regulatory remediation": 58
+    }
+  },
+  "competitor_assessments": "Rendered in /flora/banking/competitors; directional non-canonical competitor capability view.",
+  "featured_industry_signals": [
+    {
+      "banks": [
+        "Lloyds Banking Group",
+        "NatWest Group",
+        "Santander UK"
+      ],
+      "commercial_implication": "Transformation propositions must prove measurable financial benefit, not just digital improvement.",
+      "description": "As rate benefits fade, banks need to protect profit through customer retention and lower operating cost.",
+      "route": "/flora/banking/outlook#spending",
+      "title": "Margin pressure is changing investment behaviour"
+    },
+    {
+      "banks": [
+        "Lloyds Banking Group",
+        "Barclays",
+        "HSBC UK"
+      ],
+      "commercial_implication": "Suppliers that combine AI enablement with assurance, data quality and human accountability will be easier to sponsor.",
+      "description": "Banks want AI productivity, but conduct, resilience and evidence obligations mean adoption must be controlled and explainable.",
+      "route": "/flora/banking/ai-native",
+      "title": "Control expectations are pulling AI into governed operations"
+    },
+    {
+      "banks": [
+        "Lloyds Banking Group",
+        "Barclays",
+        "NatWest Group"
+      ],
+      "commercial_implication": "Commercial activity concentrates around migration, integration, managed service and platform-modernisation work.",
+      "description": "Digital channels have improved, but duplicated platforms and manual operations still slow change and raise cost.",
+      "route": "/flora/banking/timeline",
+      "title": "Legacy complexity is turning simplification into a board-level buying trigger"
+    }
+  ],
+  "full_signal_inventory": [
+    {
+      "banks": [
+        "Lloyds Banking Group",
+        "NatWest Group",
+        "Santander UK"
+      ],
+      "commercial_implication": "Transformation propositions must prove measurable financial benefit, not just digital improvement.",
+      "description": "As rate benefits fade, banks need to protect profit through customer retention and lower operating cost.",
+      "route": "/flora/banking/outlook#spending",
+      "title": "Margin pressure is changing investment behaviour"
+    },
+    {
+      "banks": [
+        "Lloyds Banking Group",
+        "Barclays",
+        "HSBC UK"
+      ],
+      "commercial_implication": "Suppliers that combine AI enablement with assurance, data quality and human accountability will be easier to sponsor.",
+      "description": "Banks want AI productivity, but conduct, resilience and evidence obligations mean adoption must be controlled and explainable.",
+      "route": "/flora/banking/ai-native",
+      "title": "Control expectations are pulling AI into governed operations"
+    },
+    {
+      "banks": [
+        "Lloyds Banking Group",
+        "Barclays",
+        "NatWest Group"
+      ],
+      "commercial_implication": "Commercial activity concentrates around migration, integration, managed service and platform-modernisation work.",
+      "description": "Digital channels have improved, but duplicated platforms and manual operations still slow change and raise cost.",
+      "route": "/flora/banking/timeline",
+      "title": "Legacy complexity is turning simplification into a board-level buying trigger"
+    },
+    {
+      "banks": [
+        "Lloyds Banking Group",
+        "NatWest Group",
+        "Santander UK"
+      ],
+      "commercial_implication": "Sell migration assurance and specialist human-service design rather than assuming branch closure is always maturity.",
+      "description": "Banks must balance branch reduction, assisted service, vulnerable customers, digital exclusion, trust and the cost of parallel channels.",
+      "route": "/flora/banking/ai-native#human-service",
+      "title": "Branch and human-service strategy is becoming a reinvention choice"
+    },
+    {
+      "banks": [
+        "Lloyds Banking Group",
+        "Barclays",
+        "HSBC UK"
+      ],
+      "commercial_implication": "Position supplier-risk, ecosystem governance and integration assurance around named account dependencies.",
+      "description": "Cloud, core-platform, consulting and managed-service dependencies create resilience and value-evidence pressure.",
+      "route": "/flora/banking/competitors",
+      "title": "Supplier concentration is raising ecosystem-control demand"
+    },
+    {
+      "banks": [
+        "Lloyds Banking Group",
+        "NatWest Group",
+        "Santander UK"
+      ],
+      "commercial_implication": "Lead with retention analytics, fair pricing controls and measurable margin protection.",
+      "description": "Economic pressure makes customer value, pricing and deposit behaviour more commercially important.",
+      "route": "/flora/banking/pipeline",
+      "title": "Customer deposit competition is forcing data-led retention"
+    },
+    {
+      "banks": [
+        "Lloyds Banking Group",
+        "HSBC UK",
+        "Santander UK"
+      ],
+      "commercial_implication": "Bundle journey change with control evidence, vulnerable-customer safeguards and outcome measurement.",
+      "description": "Regulation makes banks prove customer outcomes when moving service to digital and assisted channels.",
+      "route": "/flora/banking/outlook#pestle",
+      "title": "Consumer Duty keeps outcome evidence close to the investment case"
+    },
+    {
+      "banks": [
+        "Lloyds Banking Group",
+        "Barclays",
+        "NatWest Group"
+      ],
+      "commercial_implication": "Start with governed data products, model controls and staff augmentation use cases with traceable benefits.",
+      "description": "Technology ambition is visible, but weak data ownership and lineage slow safe automation.",
+      "route": "/flora/banking/ai-native",
+      "title": "AI productivity will be constrained by data quality"
+    },
+    {
+      "banks": [
+        "Lloyds Banking Group",
+        "Barclays",
+        "NatWest Group"
+      ],
+      "commercial_implication": "Shape transformation around end-to-end journeys, not channel enhancements alone.",
+      "description": "Digital demand still creates manual rework when service ownership, workflow and controls stay fragmented.",
+      "route": "/flora/banking/timeline",
+      "title": "Operating-model pressure is moving beyond app features"
+    },
+    {
+      "banks": [
+        "Lloyds Banking Group",
+        "NatWest Group",
+        "Santander UK"
+      ],
+      "commercial_implication": "Target AI-supported employee journeys, exception handling and benefits ownership.",
+      "description": "Employees need copilots, better case context and clear accountability as routine work automates.",
+      "route": "/flora/banking/ai-native#human-service",
+      "title": "Workforce change is shifting humans toward judgement and empathy"
+    },
+    {
+      "banks": [
+        "Barclays",
+        "Lloyds Banking Group",
+        "NatWest Group"
+      ],
+      "commercial_implication": "Build business cases around measured run-cost reduction and commercial trigger events.",
+      "description": "Investors are less tolerant of transformation spend without visible productivity, returns or risk reduction.",
+      "route": "/flora/banking/compare",
+      "title": "Analyst expectations reward proof of cost delivery"
+    },
+    {
+      "banks": [
+        "Lloyds Banking Group",
+        "Barclays",
+        "NatWest Group"
+      ],
+      "commercial_implication": "Treat ESG data lineage and portfolio-transition analytics as emerging opportunities, not headline near-term pipeline.",
+      "description": "Climate, property and financed-emissions expectations are gradual but durable and data intensive.",
+      "route": "/flora/banking/outlook#pestle",
+      "title": "Environmental transition remains a data-and-control opportunity"
+    }
+  ],
+  "generated_date": "2026-07-19",
+  "industry_pipeline_totals": {
+    "gross_range_m": [
+      630,
+      1280
+    ],
+    "working_estimate_m": 910
+  },
+  "opportunities": [
+    {
+      "bank": "lloyds",
+      "buying_window": "12–24 months",
+      "category": "Customer service transformation and outsourcing",
+      "conviction": "Moderate",
+      "id": "COH-LBG-001",
+      "provenance_identifiers": [
+        "mobile growth",
+        "brand and channel simplification",
+        "cost-income pressure"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [
+        {
+          "bank": "Lloyds Banking Group",
+          "confidence": "Medium",
+          "insight_basis": "inferred",
+          "relationship_status": "human-labelled judgement",
+          "relationship_type": "consulting / systems integration",
+          "relevant_opportunity": "Customer Experience Transformation and Outsourcing",
+          "source_date": "2025-01-01",
+          "supplier_name": "IBM",
+          "supporting_rationale": "Public-sector fixture and analyst commentary support IBM as a credible enterprise-services participant; exact opportunity ownership is not claimed.",
+          "traction_label": "Established relationship"
+        },
+        {
+          "bank": "Lloyds Banking Group",
+          "confidence": "Medium",
+          "insight_basis": "inferred",
+          "relationship_status": "active",
+          "relationship_type": "cloud provider",
+          "relevant_opportunity": "Customer Experience Transformation and Outsourcing",
+          "source_date": "2025-01-01",
+          "supplier_name": "Microsoft Azure",
+          "supporting_rationale": "Cloud provider landscape is visible but account-specific contract control is not asserted.",
+          "traction_label": "Competitive field"
+        }
+      ],
+      "timing_window": "12–36 months",
+      "title": "Customer Experience Transformation and Outsourcing",
+      "value_range": "£110m–£225m",
+      "working_estimate_m": 160
+    },
+    {
+      "bank": "lloyds",
+      "buying_window": "0–12 months",
+      "category": "Deposits and customer value management",
+      "conviction": "Moderate",
+      "id": "COH-LBG-002",
+      "provenance_identifiers": [
+        "deposit base materiality",
+        "margin pressure",
+        "digital engagement"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [],
+      "timing_window": "6–24 months",
+      "title": "Deposits and Customer Value Management",
+      "value_range": "£50m–£100m",
+      "working_estimate_m": 70
+    },
+    {
+      "bank": "lloyds",
+      "buying_window": "12–24 months",
+      "category": "Data and AI transformation",
+      "conviction": "Moderate",
+      "id": "COH-LBG-003",
+      "provenance_identifiers": [
+        "technology transformation",
+        "AI adoption",
+        "resilience control"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [
+        {
+          "bank": "Lloyds Banking Group",
+          "confidence": "Medium",
+          "insight_basis": "inferred",
+          "relationship_status": "active",
+          "relationship_type": "cloud provider",
+          "relevant_opportunity": "Cloud, Data and AI Control Tower",
+          "source_date": "2025-01-01",
+          "supplier_name": "Google Cloud",
+          "supporting_rationale": "Public cloud and AI market signals suggest relevance; needs account validation.",
+          "traction_label": "Early signal"
+        }
+      ],
+      "timing_window": "12–30 months",
+      "title": "Cloud, Data and AI Control Tower",
+      "value_range": "£40m–£85m",
+      "working_estimate_m": 60
+    },
+    {
+      "bank": "barclays",
+      "buying_window": "12–24 months",
+      "category": "Cost transformation",
+      "conviction": "Strong",
+      "id": "COH-BAR-001",
+      "provenance_identifiers": [
+        "announced simplification agenda",
+        "cost-income pressure",
+        "capital discipline"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [
+        {
+          "bank": "Barclays",
+          "confidence": "Medium",
+          "insight_basis": "inferred",
+          "relationship_status": "active",
+          "relationship_type": "consulting / systems integration",
+          "relevant_opportunity": "Enterprise Cost and Simplification Programme",
+          "source_date": "2025-01-01",
+          "supplier_name": "Accenture",
+          "supporting_rationale": "Major-bank transformation services market presence creates a difficult displacement assumption; treated as inferred.",
+          "traction_label": "Strong incumbent position"
+        }
+      ],
+      "timing_window": "12–36 months",
+      "title": "Enterprise Cost and Simplification Programme",
+      "value_range": "£60m–£120m",
+      "working_estimate_m": 85
+    },
+    {
+      "bank": "barclays",
+      "buying_window": "12–24 months",
+      "category": "Cloud and platform modernisation",
+      "conviction": "Moderate",
+      "id": "COH-BAR-002",
+      "provenance_identifiers": [
+        "platform complexity",
+        "resilience obligations",
+        "multi-year plan"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [
+        {
+          "bank": "Barclays",
+          "confidence": "Medium",
+          "insight_basis": "inferred",
+          "relationship_status": "active",
+          "relationship_type": "cloud provider",
+          "relevant_opportunity": "Platform Modernisation and Resilience Assurance",
+          "source_date": "2025-01-01",
+          "supplier_name": "AWS",
+          "supporting_rationale": "Cloud-platform relevance is visible; programme ownership is not claimed.",
+          "traction_label": "Established relationship"
+        }
+      ],
+      "timing_window": "12–36 months",
+      "title": "Platform Modernisation and Resilience Assurance",
+      "value_range": "£55m–£110m",
+      "working_estimate_m": 80
+    },
+    {
+      "bank": "barclays",
+      "buying_window": "0–12 months",
+      "category": "Data and AI transformation",
+      "conviction": "Exploratory",
+      "id": "COH-BAR-003",
+      "provenance_identifiers": [
+        "productivity ambition",
+        "cost discipline",
+        "digital operations"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [],
+      "timing_window": "6–18 months",
+      "title": "AI Productivity Factory",
+      "value_range": "£30m–£55m",
+      "working_estimate_m": 40
+    },
+    {
+      "bank": "natwest",
+      "buying_window": "12–24 months",
+      "category": "Customer experience transformation",
+      "conviction": "Moderate",
+      "id": "COH-NWG-001",
+      "provenance_identifiers": [
+        "customer franchise momentum",
+        "digital engagement",
+        "service outcomes"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [],
+      "timing_window": "12–30 months",
+      "title": "Customer Franchise Growth and Service Transformation",
+      "value_range": "£75m–£155m",
+      "working_estimate_m": 110
+    },
+    {
+      "bank": "natwest",
+      "buying_window": "0–12 months",
+      "category": "Data and AI transformation",
+      "conviction": "Moderate",
+      "id": "COH-NWG-002",
+      "provenance_identifiers": [
+        "SME franchise",
+        "data priorities",
+        "cost discipline"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [
+        {
+          "bank": "NatWest Group",
+          "confidence": "Medium",
+          "insight_basis": "inferred",
+          "relationship_status": "active",
+          "relationship_type": "major technology platform",
+          "relevant_opportunity": "Commercial Banking Data and AI Transformation",
+          "source_date": "2025-01-01",
+          "supplier_name": "Microsoft",
+          "supporting_rationale": "Data, productivity and platform ecosystem signals suggest momentum requiring validation.",
+          "traction_label": "Gaining traction"
+        }
+      ],
+      "timing_window": "9–24 months",
+      "title": "Commercial Banking Data and AI Transformation",
+      "value_range": "£40m–£85m",
+      "working_estimate_m": 60
+    },
+    {
+      "bank": "natwest",
+      "buying_window": "12–24 months",
+      "category": "Cost transformation",
+      "conviction": "Moderate",
+      "id": "COH-NWG-003",
+      "provenance_identifiers": [
+        "cost pressure",
+        "simplification agenda",
+        "deposit sensitivity"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [],
+      "timing_window": "12–36 months",
+      "title": "Operating Model Simplification",
+      "value_range": "£45m–£90m",
+      "working_estimate_m": 65
+    },
+    {
+      "bank": "hsbc-uk",
+      "buying_window": "0–12 months",
+      "category": "Operational resilience",
+      "conviction": "Moderate",
+      "id": "COH-HBUK-001",
+      "provenance_identifiers": [
+        "regulatory scrutiny",
+        "group platform dependency",
+        "third-party control"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [
+        {
+          "bank": "HSBC UK",
+          "confidence": "Medium",
+          "insight_basis": "inferred",
+          "relationship_status": "active",
+          "relationship_type": "incumbent platform dependency",
+          "relevant_opportunity": "Operational Resilience and Third-Party Control",
+          "source_date": "2025-01-01",
+          "supplier_name": "HSBC Group technology ecosystem",
+          "supporting_rationale": "Group platform dependency suggests displacement would be difficult; this is inferred rather than confirmed contract ownership.",
+          "traction_label": "Strong incumbent position"
+        }
+      ],
+      "timing_window": "6–18 months",
+      "title": "Operational Resilience and Third-Party Control",
+      "value_range": "£15m–£30m",
+      "working_estimate_m": 20
+    },
+    {
+      "bank": "hsbc-uk",
+      "buying_window": "0–12 months",
+      "category": "Digital channel modernisation",
+      "conviction": "Exploratory",
+      "id": "COH-HBUK-002",
+      "provenance_identifiers": [
+        "digital banking context",
+        "customer expectations",
+        "UK scope limits"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [],
+      "timing_window": "9–24 months",
+      "title": "UK Digital Service Modernisation",
+      "value_range": "£20m–£40m",
+      "working_estimate_m": 30
+    },
+    {
+      "bank": "hsbc-uk",
+      "buying_window": "0–12 months",
+      "category": "Regulatory remediation",
+      "conviction": "Exploratory",
+      "id": "COH-HBUK-003",
+      "provenance_identifiers": [
+        "control pressure",
+        "regulatory reporting",
+        "operational complexity"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [],
+      "timing_window": "6–18 months",
+      "title": "Finance and Risk Control Automation",
+      "value_range": "£15m–£30m",
+      "working_estimate_m": 20
+    },
+    {
+      "bank": "santander-uk",
+      "buying_window": "12–24 months",
+      "category": "Branch and assisted-channel transformation",
+      "conviction": "Moderate",
+      "id": "COH-SAN-001",
+      "provenance_identifiers": [
+        "channel change",
+        "cost-income pressure",
+        "customer outcome risk"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [],
+      "timing_window": "12–30 months",
+      "title": "Channel Productivity and Customer Outcomes",
+      "value_range": "£30m–£65m",
+      "working_estimate_m": 45
+    },
+    {
+      "bank": "santander-uk",
+      "buying_window": "0–12 months",
+      "category": "Cloud and platform modernisation",
+      "conviction": "Exploratory",
+      "id": "COH-SAN-002",
+      "provenance_identifiers": [
+        "group platform dependency",
+        "limited UK tech detail",
+        "efficiency pressure"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [
+        {
+          "bank": "Santander UK",
+          "confidence": "Medium",
+          "insight_basis": "inferred",
+          "relationship_status": "active",
+          "relationship_type": "major technology platform",
+          "relevant_opportunity": "UK Platform Dependency and Modernisation Assessment",
+          "source_date": "2025-01-01",
+          "supplier_name": "Santander Group technology platforms",
+          "supporting_rationale": "UK scope appears shaped by group platforms; whitespace depends on UK-owned decisions.",
+          "traction_label": "Strong incumbent position"
+        }
+      ],
+      "timing_window": "6–18 months",
+      "title": "UK Platform Dependency and Modernisation Assessment",
+      "value_range": "£25m–£50m",
+      "working_estimate_m": 35
+    },
+    {
+      "bank": "santander-uk",
+      "buying_window": "0–12 months",
+      "category": "Deposits and customer value management",
+      "conviction": "Exploratory",
+      "id": "COH-SAN-003",
+      "provenance_identifiers": [
+        "customer deposits",
+        "margin pressure",
+        "retention need"
+      ],
+      "qualification_status": "Flora strategic hypothesis",
+      "supplier_positions": [],
+      "timing_window": "6–18 months",
+      "title": "Deposits and Customer Value Analytics",
+      "value_range": "£20m–£40m",
+      "working_estimate_m": 30
+    }
+  ],
+  "reinvention_pressure_assessments": {
+    "barclays": "High",
+    "hsbc-uk": "Material",
+    "lloyds": "High",
+    "natwest": "Material",
+    "santander-uk": "High"
+  },
+  "snapshot_role": "deterministic non-canonical commercial drift baseline",
+  "source_package_identities": [
+    "Named executive sponsors not publicly asserted",
+    "Several financial metrics are not publicly disclosed on a comparable standalone basis"
+  ]
+}
