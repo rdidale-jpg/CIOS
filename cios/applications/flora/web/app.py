@@ -38,7 +38,7 @@ from cios.applications.flora.enterprise_intelligence.runtime import EnterpriseIn
 from cios.applications.flora.architecture_export import architecture_export_page, record_download
 from cios.applications.flora.runtime.increment1_views import increment1_workspace_page
 from cios.applications.flora.enterprise_intelligence.explain import executive_presentation_for_explanation, increment2_runtime_path, audit_event, evidence_trust_view, claim_evidence_summaries
-from cios.applications.flora.banking_portfolio import portfolio_page as banking_portfolio_page, bank_page as banking_bank_page, compare_page as banking_compare_page, evidence_page as banking_evidence_page
+from cios.applications.flora.banking_portfolio import portfolio_page as banking_portfolio_page, bank_page as banking_bank_page, compare_page as banking_compare_page, evidence_page as banking_evidence_page, competitors_page as banking_competitors_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -85,6 +85,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(banking_portfolio_page())
             elif parsed.path == "/flora/banking/compare":
                 self._html(banking_compare_page())
+            elif parsed.path == "/flora/banking/competitors":
+                self._html(*banking_competitors_page())
             elif parsed.path.startswith("/flora/banking/") and parsed.path.endswith("/briefing"):
                 self._html(*banking_bank_page(parsed.path.removeprefix("/flora/banking/").removesuffix("/briefing"), briefing=True))
             elif parsed.path.startswith("/flora/banking/") and parsed.path.endswith("/evidence"):
