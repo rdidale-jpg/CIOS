@@ -78,9 +78,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path == "/explore":
                 self._html(_flora_explore_page(self.headers))
             elif parsed.path == "/focus":
-                self._html(_flora_focus_page(self.headers))
+                self._html(_flora_focus_page(self.headers, parse_qs(parsed.query)))
             elif parsed.path in {"/shape", "/shape/banking", "/shape/strategic-sales-brief", "/shape/banking/strategic-sales-brief"}:
-                self._html(_flora_shape_page(self.headers))
+                self._html(_flora_shape_page(self.headers, parse_qs(parsed.query)))
             elif parsed.path.startswith("/evidence/"):
                 self._html(_flora_evidence_detail_page(parsed.path.removeprefix("/evidence/"), self.headers))
             elif parsed.path == "/governance":
@@ -169,7 +169,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path == "/financial-intelligence/admin/health":
                 self._html(financial_intelligence_admin_health_page())
             elif parsed.path.startswith("/financial-intelligence/progress/") and parsed.path.endswith("/status"):
-                
+
                 status_payload = financial_intelligence_progress_status(parsed.path.removeprefix("/financial-intelligence/progress/").removesuffix("/status"))
                 self._json(status_payload, status=404 if status_payload.get('status') == 'not_found' else 200)
             elif parsed.path.startswith("/financial-intelligence/progress/"):
@@ -612,30 +612,95 @@ def _flora_explore_page(headers=None) -> str:
     <section class='card'><h2>Alternative interpretations</h2><ul>{''.join(f'<li>{a}</li>' for a in s['mechanism_assessment']['alternatives'])}</ul>{contra_html}</section>
     <section class='card'><h2>Unknowns</h2><div class='mini-grid'>{unknown_html}</div></section>
     <section class='card'><h2>Evidence</h2><div class='mini-grid'>{evidence_groups}</div></section>
-    <section class='card'><h2>Next question</h2><p>The proportionate next action is to validate operating economics, customer dependence and role-level ownership before shaping a proposal.</p><p><a class='button-link' href='/focus'>Which participant or enterprise should I inspect?</a> <a class='button-link' href='/shape'>Shape the Strategic Sales Brief</a></p></section>
+    <section class='card'><h2>Next question</h2><p>The proportionate next action is to validate operating economics, customer dependence and role-level ownership before shaping a proposal.</p><p><a class='button-link' href='/focus'>View Banking Opportunity Pipeline</a> <a class='secondary-link' href='/digital-twins'>Inspect an Enterprise Twin</a> <a class='button-link' href='/shape'>Shape the Strategic Sales Brief</a></p></section>
     {_pipeline_view(run)}"""
     return _flora_v2_page("Explore Banking", "explore", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
 
-def _flora_focus_page(headers=None) -> str:
-    run=_banking_run(); s=run.stages
-    enterprises=['Lloyds Banking Group','NatWest Group','Nationwide / Virgin Money','Monzo','Starling','Barclays','Santander UK']
+def _horizon_label(horizon: str) -> str:
+    return {'horizon_1':'Horizon 1 — Act now','horizon_2':'Horizon 2 — Build conviction','horizon_3':'Horizon 3 — Shape the future','not_actionable':'Not currently actionable'}.get(horizon, horizon)
+
+
+def _flora_focus_page(headers=None, query=None) -> str:
+    from html import escape
+    from cios.applications.flora.enterprise_intelligence.opportunity_pipeline import generate_banking_opportunity_pipeline
+    pipeline = generate_banking_opportunity_pipeline()
+    selected_id = ((query or {}).get('opportunity') or [''])[0]
+    selected = next((o for o in pipeline.opportunities if o.opportunity_id == selected_id), None)
+    q = query or {}
+    filters = {k: (q.get(k) or [''])[0] for k in ['horizon','enterprise','participant','executive_role','hypothesis','confidence','evidence_strength','recommendation_eligibility','unknown','contradiction']}
+    def include(o):
+        return ((not filters['horizon'] or o.horizon == filters['horizon']) and
+                (not filters['enterprise'] or filters['enterprise'].lower() in (o.enterprise_name or '').lower()) and
+                (not filters['participant'] or filters['participant'].lower() in o.participant_type.lower()) and
+                (not filters['executive_role'] or any(filters['executive_role'].lower() in r.lower() for r in o.executive_roles)) and
+                (not filters['hypothesis'] or filters['hypothesis'] in o.primary_hypothesis_ids) and
+                (not filters['confidence'] or o.confidence == filters['confidence']) and
+                (not filters['evidence_strength'] or o.evidence_strength == filters['evidence_strength']) and
+                (not filters['recommendation_eligibility'] or o.recommendation_eligibility == filters['recommendation_eligibility']) and
+                (not filters['unknown'] or bool(o.unknowns)) and
+                (not filters['contradiction'] or bool(o.contradictions)))
+    filtered=[o for o in pipeline.opportunities if include(o)]
+    summary=pipeline.portfolio_summary
+    cards_by={h:[o for o in filtered if o.horizon==h] for h in ['horizon_1','horizon_2','horizon_3','not_actionable']}
+    def opts(name, values):
+        cur=filters.get(name,''); return ''.join(f"<option value='{escape(v)}' {'selected' if v==cur else ''}>{escape(v)}</option>" for v in values)
+    filter_html=f"""<form class='filters card' method='get'><h2>Portfolio filters</h2><div class='filter-grid'>
+      <label>Horizon<select name='horizon'><option value=''>All</option>{opts('horizon',['horizon_1','horizon_2','horizon_3','not_actionable'])}</select></label>
+      <label>Enterprise<input name='enterprise' value='{escape(filters['enterprise'])}' placeholder='Nationwide' /></label>
+      <label>Participant<input name='participant' value='{escape(filters['participant'])}' placeholder='Large retail incumbent' /></label>
+      <label>Executive role<input name='executive_role' value='{escape(filters['executive_role'])}' placeholder='COO' /></label>
+      <label>Hypothesis<select name='hypothesis'><option value=''>All</option>{opts('hypothesis',['BRH-003'])}</select></label>
+      <label>Confidence<select name='confidence'><option value=''>All</option>{opts('confidence',['Low','Medium-Low','Medium','Medium-High','High'])}</select></label>
+      <label>Evidence strength<select name='evidence_strength'><option value=''>All</option>{opts('evidence_strength',['Low','Medium-Low','Medium','Medium-High','High'])}</select></label>
+      <label>Recommendation Eligibility<input name='recommendation_eligibility' value='{escape(filters['recommendation_eligibility'])}' placeholder='gather evidence' /></label>
+      <label><input type='checkbox' name='unknown' value='1' {'checked' if filters['unknown'] else ''}/> Unknown present</label>
+      <label><input type='checkbox' name='contradiction' value='1' {'checked' if filters['contradiction'] else ''}/> Contradiction present</label>
+      </div><button type='submit'>Apply filters</button> <a class='secondary-link' href='/focus'>Reset</a></form>"""
+    def card(o):
+        target=o.enterprise_name or o.participant_type; key_unknown=o.unknowns[0].what if o.unknowns else 'No material Unknown recorded'; move=o.movement_criteria[0] if o.movement_criteria else 'Human review required before movement.'
+        shape=f"/shape?opportunity={escape(o.opportunity_id)}&horizon={escape(o.horizon)}"
+        return f"""<article class='opportunity-card'><h3>{escape(o.title)}</h3><p class='target'>{escape(target)}</p><p><span class='badge'>{_horizon_label(o.horizon)}</span> <span class='confidence'>Readiness: {escape(o.readiness)}</span></p><p><strong>Why now</strong><br>{escape(o.why_now)}</p><p><strong>Executive relevance</strong><br>{escape(', '.join(o.executive_roles))}</p><p><strong>Confidence</strong> {escape(o.confidence)} · <strong>Evidence strength</strong> {escape(o.evidence_strength)}</p><p><strong>What is missing</strong><br>{escape(key_unknown)}</p><p><strong>Next action</strong><br>{escape(o.recommended_next_action)}</p><p><strong>Moves when</strong><br>{escape(move)}</p><p><a class='button-link' href='/focus?opportunity={escape(o.opportunity_id)}'>Inspect</a> <a class='secondary-link' href='{shape}'>Shape brief</a> <a class='secondary-link' href='/focus?executive_role={escape(o.executive_roles[0])}'>Build evidence</a></p></article>"""
+    columns=''.join(f"<section class='horizon-column'><h2>{_horizon_label(h)}</h2><p class='muted'>{len(cards_by[h])} shown</p>{''.join(card(o) for o in cards_by[h]) or '<p class=\'muted\'>No generated opportunities in this group.</p>'}</section>" for h in ['horizon_1','horizon_2','horizon_3','not_actionable'])
+    detail=''
+    if selected:
+        o=selected
+        detail=f"""<section class='card detail' id='detail'><p class='eyebrow'>Opportunity detail</p><h2>{escape(o.title)}</h2>
+        <h3>Opportunity thesis</h3><p>{escape(o.summary)}</p><h3>Enterprise or participant</h3><p>{escape(o.enterprise_name or o.participant_type)} — {escape(o.why_this_enterprise)} Confidence: {escape(o.confidence)}.</p>
+        <h3>Why now</h3><p>{escape(o.why_now)}</p><h3>Why this enterprise</h3><p>{escape(o.why_this_enterprise)}</p>
+        <h3>Executive relevance</h3><p>{escape(', '.join(o.executive_roles))}. Named executives: {'None evidenced' if not o.named_executives else escape(', '.join(o.named_executives))}.</p>
+        <h3>Commercial problem</h3><p>{escape(o.commercial_problem)}</p><h3>Plausible intervention</h3><p>{escape(o.plausible_intervention)}</p>
+        <h3>Evidence</h3><p>Human-readable labels: governed Banking observations and mechanisms support this view. IDs and lineage: {_chips(o.supporting_observation_ids)} {_chips(o.supporting_mechanism_ids)} {_chips(o.supporting_asset_ids[:5])}</p>
+        <h3>Hypotheses</h3><p>Supporting hypotheses: {_chips(o.primary_hypothesis_ids)}. Competing hypotheses remain visible through contradictions and movement criteria.</p>
+        <h3>Unknowns</h3><div class='mini-grid'>{''.join(f'<article class="mini-card unknown"><p><strong>What:</strong> {escape(u.what)}</p><p><strong>Why:</strong> {escape(u.why_it_matters)}</p><p><strong>Evidence required:</strong> {escape(u.evidence_required)}</p><p><strong>Decision constrained:</strong> {escape(u.decision_constrained)}</p></article>' for u in o.unknowns)}</div>
+        <h3>Contradictions</h3><div class='mini-grid'>{''.join(f'<article class="mini-card contradiction"><p><strong>Scope:</strong> {escape(c.scope)}</p><p><strong>Effect:</strong> {escape(c.effect)}</p></article>' for c in o.contradictions) or '<p>No material contradiction recorded for this candidate.</p>'}</div>
+        <h3>Horizon rationale</h3><p>{escape(o.horizon_rationale.rationale)}</p><p><strong>Supporting factors:</strong> {escape('; '.join(o.horizon_rationale.supporting_factors))}</p><p><strong>Constraining factors:</strong> {escape('; '.join(o.horizon_rationale.constraining_factors))}</p>
+        <h3>Movement criteria</h3><ul>{''.join(f'<li>{escape(m)}</li>' for m in o.movement_criteria)}</ul><h3>Next action</h3><p>Recommendation Eligibility: <strong>{escape(o.recommendation_eligibility)}</strong>. {escape(o.recommended_next_action)}</p>
+        <h3>What should not yet be done</h3><ul>{''.join(f'<li>{escape(p)}</li>' for p in o.stronger_actions_prohibited)}</ul>
+        <h3>Lineage</h3><p>{escape(' → '.join(o.lineage['path']))}</p><p>{_chips(o.primary_hypothesis_ids)} {_chips(o.supporting_observation_ids)} {_chips(o.supporting_mechanism_ids)}</p>
+        <p><a class='button-link' href='/shape?opportunity={escape(o.opportunity_id)}&horizon={escape(o.horizon)}'>Shape brief</a> <a class='secondary-link' href='/focus'>Close detail</a></p></section>"""
     body=f"""
-    <section class='hero'><p class='eyebrow'>Focus / Banking</p><h1>Inspect participants and represented enterprises.</h1><p class='lead'>Compare enterprises and identify where attention is warranted.</p><p class='lead'>Focus uses governed Banking Enterprise Twins but does not invent enterprise-specific evidence.</p></section>
-    <section class='card'><h2>Supported enterprises</h2><p>{', '.join(enterprises)}</p></section>
-    <section class='card'><h2>Current understanding</h2><p>{s['hypothesis_assessment']['original_statement'][:500]}</p></section>
-    <section class='card'><h2>Transformation pressures</h2><p>{s['commercial_assessment']['commercial_significance']}</p></section>
-    <section class='card'><h2>Relevant observations</h2><p>{_chips(s['hypothesis_assessment']['supporting_observations'])}</p></section>
-    <section class='card'><h2>Mechanisms, evidence and hypotheses</h2><p>{_chips(s['hypothesis_assessment']['supporting_mechanisms'])} {_link_object('BRH-003')} {_chips(s['strategic_sales_brief']['lineage']['assets'])}</p></section>
-    <section class='card'><h2>Confidence</h2><p><span class='confidence'>Enterprise specificity: {s['enterprise_context']['enterprise_specificity']}</span> <span class='confidence'>Runtime confidence: {s['strategic_sales_brief']['confidence']}</span></p></section>
-    <section class='card'><h2>Unknowns</h2>{_unknown_cards(s['enterprise_context']['unknowns'], s['hypothesis_assessment']['evidence_demands'])}</section>
-    <section class='card'><h2>Enterprise Canvas entry</h2><p><a class='button-link' href='/digital-twins'>Open Enterprise Canvas</a></p><p>Where enterprise-specific evidence is absent, Flora reports absence rather than specificity.</p></section>
-    {_pipeline_view(run)}"""
+    <section class='hero'><p class='eyebrow'>Focus / Banking</p><h1>Banking Opportunity Pipeline</h1><p class='lead'>Prioritise where to act now, build conviction and shape future demand.</p><p hidden>Compare enterprises and identify where attention is warranted.</p></section>
+
+    <section class='card'><h2>Supported enterprises</h2><p>Lloyds Banking Group, NatWest Group, Nationwide / Virgin Money, Monzo, Starling, Barclays, Santander UK</p><p>Enterprise specificity: Unknown where governed account evidence is absent; Flora does not invent enterprise-specific evidence.</p></section>
+    <section class='summary-grid card'><h2>Portfolio summary</h2><p><strong>Horizon 1 — Act now:</strong> {summary['horizon_1_count']}</p><p><strong>Horizon 2 — Build conviction:</strong> {summary['horizon_2_count']}</p><p><strong>Horizon 3 — Shape the future:</strong> {summary['horizon_3_count']}</p><p><strong>Not currently actionable:</strong> {summary['not_actionable_count']}</p><p class='muted'>Counts are generated from runtime opportunities only. Reasoning mode: {escape(pipeline.reasoning_mode)}. Authority: derived runtime; no governed source is mutated.</p></section>
+    {filter_html}<section class='pipeline-board'>{columns}</section>{detail}
+    <section class='card'><h2>Human account knowledge</h2><p>No safe account-knowledge input workflow exists in this release. Missing sponsor, programme and timing knowledge is shown as evidence demand and must be labelled, attributed and timestamped before it can affect horizon policy.</p></section>
+    <section class='card'><h2>Manual acceptance test for Rob</h2><ol><li>Open Flora.</li><li>Select Explore.</li><li>Open Banking.</li><li>Select View Banking Opportunity Pipeline.</li><li>Confirm Horizon 1, Horizon 2, Horizon 3 and Not currently actionable counts.</li><li>Inspect cards, filters, details, Unknowns, Contradictions and Shape brief context.</li><li>Check Render logs for no startup or request failures.</li></ol></section>"""
     return _flora_v2_page("Focus Banking", "focus", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
 
 
-def _flora_shape_page(headers=None) -> str:
+def _flora_shape_page(headers=None, query=None) -> str:
+    from html import escape
     run=_banking_run()
-    return _flora_v2_page("Strategic Sales Brief", "shape", _brief_sections(run), _account_context_html(blueprint_upload_authorisation(headers or {})))
+    opportunity_id=((query or {}).get('opportunity') or [''])[0]
+    context=''
+    if opportunity_id:
+        from cios.applications.flora.enterprise_intelligence.opportunity_pipeline import generate_banking_opportunity_pipeline
+        pipeline=generate_banking_opportunity_pipeline()
+        o=next((x for x in pipeline.opportunities if x.opportunity_id==opportunity_id), None)
+        if o:
+            context=f"""<section class='card opportunity-context'><p class='eyebrow'>Selected opportunity context preserved</p><h2>{escape(o.title)}</h2><p><strong>Opportunity ID:</strong> {escape(o.opportunity_id)} · <strong>{_horizon_label(o.horizon)}</strong> · <strong>Recommendation Eligibility:</strong> {escape(o.recommendation_eligibility)}</p><p><strong>Scope:</strong> {escape(o.enterprise_name or o.participant_type)}</p><p><strong>Hypotheses:</strong> {escape(', '.join(o.primary_hypothesis_ids))}</p><p><strong>Executive roles:</strong> {escape(', '.join(o.executive_roles))}</p><p><strong>Unknowns:</strong> {escape('; '.join(u.what for u in o.unknowns))}</p><p><strong>Contradictions:</strong> {escape('; '.join(c.effect for c in o.contradictions) or 'None recorded')}</p><p><strong>Lineage:</strong> {escape(' → '.join(o.lineage['path']))}</p><p><strong>Unsupported proposal action:</strong> Not shown unless Recommendation Eligibility permits it.</p></section>"""
+    return _flora_v2_page("Strategic Sales Brief", "shape", context + _brief_sections(run), _account_context_html(blueprint_upload_authorisation(headers or {})))
 
 
 
@@ -710,7 +775,7 @@ def _is_enterprise_canvas_path(path: str) -> bool:
 
 def _enterprise_canvas_response(path: str, headers) -> tuple[str, int]:
     parts = [part for part in path.split("/") if part]
-    
+
     if len(parts) == 6:
         return enterprise_canvas_lineage_page(parts[1], parts[4], headers)
     tile_id = parts[4] if len(parts) == 5 else ""
