@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cios.local/enterprise-knowledge/schemas/commercial-reasoning.schema.json",
+  "title": "Commercial Reasoning canonical schema",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "object_families",
+    "separation_rules"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "commercial-reasoning-v0.1"
+    },
+    "object_families": {
+      "type": "object"
+    },
+    "separation_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "ProviderFit": {
+      "type": "object",
+      "required": [
+        "object_type",
+        "provider_fit_id",
+        "enterprise_id",
+        "candidate_or_opportunity_id",
+        "provider_id",
+        "linked_capability_ids",
+        "linked_offer_ids",
+        "fit_statement",
+        "fit_basis",
+        "fit_strength",
+        "fit_limits",
+        "required_non_provider_conditions",
+        "evidence_lineage",
+        "unknowns",
+        "confidence",
+        "review_status"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "object_type": {},
+        "provider_fit_id": {},
+        "enterprise_id": {},
+        "candidate_or_opportunity_id": {},
+        "provider_id": {},
+        "linked_capability_ids": {},
+        "linked_offer_ids": {},
+        "fit_statement": {},
+        "fit_basis": {},
+        "fit_strength": {},
+        "fit_limits": {},
+        "required_non_provider_conditions": {},
+        "evidence_lineage": {},
+        "unknowns": {},
+        "confidence": {},
+        "review_status": {}
+      }
+    },
+    "CommercialAccessibility": {
+      "type": "object",
+      "required": [
+        "object_type",
+        "commercial_accessibility_id",
+        "enterprise_id",
+        "candidate_or_opportunity_id",
+        "provider_id",
+        "accessibility_statement",
+        "buying_authority",
+        "procurement_route",
+        "contract_or_framework_route",
+        "incumbent_position",
+        "relationship_access",
+        "timing_window",
+        "barriers",
+        "accessibility_strength",
+        "evidence_lineage",
+        "unknowns",
+        "confidence",
+        "review_status"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "object_type": {},
+        "commercial_accessibility_id": {},
+        "enterprise_id": {},
+        "candidate_or_opportunity_id": {},
+        "provider_id": {},
+        "accessibility_statement": {},
+        "buying_authority": {},
+        "procurement_route": {},
+        "contract_or_framework_route": {},
+        "incumbent_position": {},
+        "relationship_access": {},
+        "timing_window": {},
+        "barriers": {},
+        "accessibility_strength": {},
+        "evidence_lineage": {},
+        "unknowns": {},
+        "confidence": {},
+        "review_status": {}
+      }
+    },
+    "CommercialConviction": {
+      "type": "object",
+      "required": [
+        "object_type",
+        "commercial_conviction_id",
+        "enterprise_id",
+        "candidate_or_opportunity_id",
+        "provider_id",
+        "enterprise_need_ref",
+        "provider_fit_ref",
+        "commercial_accessibility_ref",
+        "evidence_strength",
+        "timing_state",
+        "constraint_summary",
+        "conviction_level",
+        "recommended_action",
+        "lineage_path",
+        "unknowns",
+        "contradictions",
+        "invalidation_conditions",
+        "next_review_date",
+        "confidence",
+        "review_status"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "object_type": {},
+        "commercial_conviction_id": {},
+        "enterprise_id": {},
+        "candidate_or_opportunity_id": {},
+        "provider_id": {},
+        "enterprise_need_ref": {},
+        "provider_fit_ref": {},
+        "commercial_accessibility_ref": {},
+        "evidence_strength": {},
+        "timing_state": {},
+        "constraint_summary": {},
+        "conviction_level": {},
+        "recommended_action": {},
+        "lineage_path": {},
+        "unknowns": {},
+        "contradictions": {},
+        "invalidation_conditions": {},
+        "next_review_date": {},
+        "confidence": {},
+        "review_status": {}
+      }
+    },
+    "Recommendation": {
+      "type": "object",
+      "required": [
+        "object_type",
+        "recommendation_id",
+        "commercial_conviction_ref",
+        "recommended_action",
+        "recommendation_statement",
+        "lineage_path",
+        "confidence",
+        "review_status"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "object_type": {},
+        "recommendation_id": {},
+        "commercial_conviction_ref": {},
+        "recommended_action": {},
+        "recommendation_statement": {},
+        "lineage_path": {},
+        "confidence": {},
+        "review_status": {}
+      }
+    }
+  },
+  "recommended_actions": [
+    "Monitor",
+    "Evidence Demand",
+    "Validate",
+    "Learn",
+    "Map",
+    "Shape",
+    "Partner",
+    "Pursue",
+    "Defer",
+    "Reject",
+    "Retire"
+  ]
+}

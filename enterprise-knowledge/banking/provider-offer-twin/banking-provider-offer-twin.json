@@ -1,0 +1,241 @@
+{
+  "schema_version": "banking-provider-offer-twin-v0.1",
+  "source_canonical_store": "enterprise-knowledge/banking/canonical/banking-research-canonical-objects.json",
+  "relationship_types": [
+    "Provider HAS_CAPABILITY ProviderCapability",
+    "ProviderCapability EXPRESSED_AS ProviderOffer",
+    "ProviderOffer HAS_VARIANT OfferVariant",
+    "ProviderOffer SUPPORTED_BY ProviderProof",
+    "ProviderCapability SUPPORTED_BY ProviderProof",
+    "ProviderOffer CONSTRAINED_BY ProviderConstraint",
+    "ProviderCapability CONSTRAINED_BY ProviderConstraint",
+    "ProviderOffer DEPENDS_ON PartnerDependency",
+    "ProviderCapability DEPENDS_ON PartnerDependency",
+    "ProviderCapability FITS_ENTERPRISE_NEED EnterpriseNeed",
+    "ProviderOffer ADDRESSES_ENTERPRISE_NEED EnterpriseNeed",
+    "ProviderFit ASSESSES Provider + EnterpriseNeed + OpportunityCandidate",
+    "CommercialAccessibility ASSESSES Provider + OpportunityCandidate + RouteToMarket",
+    "CommercialConviction SYNTHESISES EnterpriseNeed + ProviderFit + CommercialAccessibility + EvidenceStrength + Timing + Constraints",
+    "Recommendation REQUIRES CommercialConviction"
+  ],
+  "providers": [
+    {
+      "object_type": "Provider",
+      "provider_id": "PROV-GOOGLE-CLOUD",
+      "provider_name": "Google Cloud",
+      "legal_entity_name": null,
+      "parent_provider_id": "PROV-ALPHABET",
+      "provider_type": "cloud provider",
+      "market_roles": [
+        "hyperscaler",
+        "data and AI platform provider"
+      ],
+      "jurisdictions": [
+        "UK banking evidence present"
+      ],
+      "regulated_or_critical_status": "Potential major technology provider status is a review consideration from migrated evidence register, not asserted for this provider object.",
+      "known_banking_presence": "Migrate only public evidence references for Lloyds Banking Group, Monzo Bank and Starling.",
+      "source_lineage": [
+        {
+          "canonical_object_id": "WEB-001",
+          "source_document_id": "SDOC-736301E7B93E",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/08-Evidence-Register.md",
+          "archive_member_sha256": "7686458145b118604385eb2d274951de9ce4785e2674ba72af09db913c41e445",
+          "lineage_status": "complete"
+        },
+        {
+          "canonical_object_id": "WEB-002",
+          "source_document_id": "SDOC-736301E7B93E",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/08-Evidence-Register.md",
+          "archive_member_sha256": "7686458145b118604385eb2d274951de9ce4785e2674ba72af09db913c41e445",
+          "lineage_status": "complete"
+        },
+        {
+          "canonical_object_id": "WEB-009",
+          "source_document_id": "SDOC-736301E7B93E",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/08-Evidence-Register.md",
+          "archive_member_sha256": "7686458145b118604385eb2d274951de9ce4785e2674ba72af09db913c41e445",
+          "lineage_status": "complete"
+        },
+        {
+          "canonical_object_id": "WEB-011",
+          "source_document_id": "SDOC-736301E7B93E",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/08-Evidence-Register.md",
+          "archive_member_sha256": "7686458145b118604385eb2d274951de9ce4785e2674ba72af09db913c41e445",
+          "lineage_status": "complete"
+        }
+      ],
+      "confidence": "medium",
+      "review_status": "owner_review_lineage_verified"
+    }
+  ],
+  "provider_capabilities": [
+    {
+      "object_type": "ProviderCapability",
+      "capability_id": "PCAP-GOOGLE-CLOUD-DATA-AI-001",
+      "provider_id": "PROV-GOOGLE-CLOUD",
+      "capability_name": "Banking data and AI cloud capability",
+      "capability_domain": "data and AI",
+      "capability_description": "Canonical migration indicates public evidence for banking data/AI and cloud use cases involving Google Cloud; detailed delivery scope is not inferred.",
+      "capability_type": "platform capability",
+      "delivery_model": "cloud platform",
+      "technology_dependencies": [
+        "Google Cloud platform"
+      ],
+      "people_or_operating_model_dependencies": [],
+      "partner_dependencies": [],
+      "evidence_lineage": [
+        {
+          "canonical_object_id": "WEB-001",
+          "source_document_id": "SDOC-736301E7B93E",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/08-Evidence-Register.md",
+          "archive_member_sha256": "7686458145b118604385eb2d274951de9ce4785e2674ba72af09db913c41e445",
+          "lineage_status": "complete"
+        },
+        {
+          "canonical_object_id": "WEB-002",
+          "source_document_id": "SDOC-736301E7B93E",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/08-Evidence-Register.md",
+          "archive_member_sha256": "7686458145b118604385eb2d274951de9ce4785e2674ba72af09db913c41e445",
+          "lineage_status": "complete"
+        },
+        {
+          "canonical_object_id": "WEB-009",
+          "source_document_id": "SDOC-736301E7B93E",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/08-Evidence-Register.md",
+          "archive_member_sha256": "7686458145b118604385eb2d274951de9ce4785e2674ba72af09db913c41e445",
+          "lineage_status": "complete"
+        },
+        {
+          "canonical_object_id": "WEB-011",
+          "source_document_id": "SDOC-736301E7B93E",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/08-Evidence-Register.md",
+          "archive_member_sha256": "7686458145b118604385eb2d274951de9ce4785e2674ba72af09db913c41e445",
+          "lineage_status": "complete"
+        }
+      ],
+      "proof_strength": "public supplier/customer evidence; operational benefit realisation not fully proven",
+      "constraints": [
+        "PCON-GOOGLE-CLOUD-EVIDENCE-001"
+      ],
+      "unknowns": [
+        "BK-OSI-UNK-002",
+        "BK-OSI-UNK-004",
+        "BK-OSI-UNK-007"
+      ],
+      "confidence": "medium",
+      "review_status": "owner_review_lineage_verified"
+    }
+  ],
+  "provider_offers": [],
+  "offer_variants": [],
+  "provider_proofs": [
+    {
+      "object_type": "ProviderProof",
+      "proof_id": "PPROOF-GOOGLE-CLOUD-LLOYDS-001",
+      "provider_id": "PROV-GOOGLE-CLOUD",
+      "related_capability_ids": [
+        "PCAP-GOOGLE-CLOUD-DATA-AI-001"
+      ],
+      "related_offer_ids": [],
+      "proof_type": "customer-authored claim",
+      "proof_statement": "Migrated evidence register contains Lloyds Banking Group and Google Cloud customer case-study sources for AI/cloud work.",
+      "customer_or_context": "Lloyds Banking Group",
+      "source_type": "migrated evidence register",
+      "independence": "mixed customer and supplier sources",
+      "benefit_claimed": "AI innovation acceleration is present in the source title; benefit realisation details are not added.",
+      "benefit_evidence_status": "claim_requires_owner_review",
+      "limits_of_proof": "Does not define a packaged Banking offer, share of wallet, active delivery role, or realised outcomes.",
+      "evidence_lineage": [
+        {
+          "canonical_object_id": "WEB-001",
+          "source_document_id": "SDOC-736301E7B93E",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/08-Evidence-Register.md",
+          "archive_member_sha256": "7686458145b118604385eb2d274951de9ce4785e2674ba72af09db913c41e445",
+          "lineage_status": "complete"
+        },
+        {
+          "canonical_object_id": "WEB-002",
+          "source_document_id": "SDOC-736301E7B93E",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/08-Evidence-Register.md",
+          "archive_member_sha256": "7686458145b118604385eb2d274951de9ce4785e2674ba72af09db913c41e445",
+          "lineage_status": "complete"
+        }
+      ],
+      "confidence": "medium",
+      "review_status": "owner_review_lineage_verified"
+    }
+  ],
+  "provider_constraints": [
+    {
+      "object_type": "ProviderConstraint",
+      "constraint_id": "PCON-GOOGLE-CLOUD-EVIDENCE-001",
+      "provider_id": "PROV-GOOGLE-CLOUD",
+      "related_capability_ids": [
+        "PCAP-GOOGLE-CLOUD-DATA-AI-001"
+      ],
+      "related_offer_ids": [],
+      "constraint_type": "evidence weakness",
+      "constraint_statement": "Public supplier evidence rarely proves share of wallet, role split, active delivery status or benefit realisation.",
+      "affected_enterprise_context": "Banking provider-side reasoning",
+      "severity": "medium",
+      "evidence_lineage": [
+        {
+          "canonical_object_id": "BK-OSI-UNK-002",
+          "source_document_id": "SDOC-1FBD2ADF3F39",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/06-Unknown-Register.md",
+          "archive_member_sha256": "7c9057719d6f0687b1d8ed60048b59efc72b26e8453389cbc2688698c3fc95b5",
+          "lineage_status": "complete"
+        },
+        {
+          "canonical_object_id": "BK-OSI-UNK-004",
+          "source_document_id": "SDOC-1FBD2ADF3F39",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/06-Unknown-Register.md",
+          "archive_member_sha256": "7c9057719d6f0687b1d8ed60048b59efc72b26e8453389cbc2688698c3fc95b5",
+          "lineage_status": "complete"
+        },
+        {
+          "canonical_object_id": "BK-OSI-CON-006",
+          "source_document_id": "SDOC-4F48CAA46784",
+          "source_zip_path": "docs/Research/banking-offer-supplier-intelligence-release.zip",
+          "source_zip_sha256": "30d3c90cc95986e4f6ced0ad478412a5706cd0d50b4039c610ddb486b3fa025c",
+          "archive_member_path": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/07-Contradiction-Register.md",
+          "archive_member_sha256": "a6ecbbc27f20766bc46de4f6c48651f405acf84d6f32411d522abe5f34082512",
+          "lineage_status": "complete"
+        }
+      ],
+      "unknowns": [
+        "BK-OSI-UNK-002",
+        "BK-OSI-UNK-004"
+      ],
+      "mitigation_or_validation_action": "Demand inspectable delivery, role and outcome evidence before offer-fit or recommendation escalation.",
+      "confidence": "high",
+      "review_status": "owner_review_required"
+    }
+  ],
+  "partner_dependencies": []
+}
