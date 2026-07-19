@@ -2,7 +2,7 @@
 
 **Status:** Draft
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-18
+**Last updated:** 2026-07-19
 
 This map helps readers find the architecture paper that owns a concept. The Reference Architecture is the entry point; the documents below remain the primary homes for detailed standards and models.
 
@@ -34,6 +34,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | ADR-007 | [Transformation Thesis](../decisions/ADR-007-Transformation-Thesis.md) | Migrated placeholder for future transformation thesis review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
 | ADR-008 | [Recommendation Engine](../decisions/ADR-008-Recommendation-Engine.md) | Migrated placeholder for future recommendation engine review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
 | ADR-024 | [Hybrid Enterprise Intelligence Runtime](../decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md) | Accepts Flora as the hybrid governed Enterprise Intelligence runtime with bounded GPT workers and deterministic validation. | Accepted | `architecture/decisions/` | Accepted after Banking Strategic Sales Navigation reconciliation; owning paper is FEIR-001. |
+| ADR-025 | [Flora as the Enterprise Intelligence Workspace](../decisions/ADR-025-Flora-as-the-Enterprise-Intelligence-Workspace.md) | Proposes Flora as the contextual Enterprise Intelligence workspace over governed Enterprise Intelligence. | Proposed | `architecture/decisions/` | Not authoritative until accepted; preserves governed Enterprise Intelligence ownership and report-as-view boundaries. |
 
 ## Founding Papers
 
