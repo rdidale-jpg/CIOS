@@ -82,3 +82,61 @@ def test_pipeline_totals_calculate_correctly_and_no_probability_of_winning():
     assert f"£{lo}m–£{hi}m" in html
     assert "probability of winning" in html
     assert "likelihood of winning" not in html.lower()
+
+
+def test_increment_41_pipeline_reconciliation_horizons_and_value_meaning():
+    for bank in BANKS.values():
+        lo, hi, mid = totals(list(bank.opportunities))
+        assert lo == sum(o.value.low for o in bank.opportunities)
+        assert hi == sum(o.value.high for o in bank.opportunities)
+        assert mid == sum(o.value.midpoint for o in bank.opportunities)
+        assert bank.financial_interpretation
+        assert bank.likely_accelerate and bank.likely_buying_posture
+        html, _ = bank_page(bank.slug)
+        assert "What the financial results are telling us" in html
+        assert "Gross addressable pipeline" in html
+        assert "Overlap-adjusted pipeline" in html
+        assert "Qualified pipeline" in html
+        assert "User-validated pipeline" in html
+        assert "Confirmed CRM pipeline" in html
+        assert "not probability-weighted" in html
+        assert "Near-term total" in html and "Medium-term total" in html and "Longer-term total" in html
+        for o in bank.opportunities:
+            assert o.horizon_label in ("Immediate: 0–12 months", "Near term: 12–24 months", "Medium term: 24–36 months", "Longer term: 36–60 months", "Monitor", "Unclear")
+            assert o.earliest_entry and o.buying_window and o.programme_start and o.contract_duration
+            assert o.horizon_rationale and o.accelerate_signal and o.delay_signal
+            assert o.supplier_position
+            if not o.supplier_entries:
+                assert o.supplier_position == "No reliable view"
+
+
+def test_increment_41_supplier_traction_is_sourced_or_human_labelled_and_unknown_is_bounded():
+    allowed = {"Strong incumbent position", "Gaining traction", "Established relationship", "Competitive field", "Early signal", "No reliable view"}
+    for o in pipeline():
+        assert o.supplier_position in allowed
+        for e in o.supplier_entries:
+            assert e.supplier_name and e.source_date and e.supporting_rationale
+            assert e.insight_basis in ("confirmed", "inferred", "human-supplied")
+            assert e.traction_label in allowed
+    html, _ = bank_page("santander-uk")
+    assert "No reliable view" in html
+
+
+def test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion():
+    html = portfolio_page()
+    for text in ("Near-term pipeline", "Medium-term pipeline", "Supplier signal", "Timing trigger", "Next commercial action"):
+        assert text in html
+    compare = compare_page()
+    assert "Commercial heatmap" in compare
+    assert "Supplier field:" in compare
+    assert "<details><summary>Expand</summary>" in compare
+    assert "Commercial driver:" not in compare
+
+
+def test_increment_41_analyst_rendering_quality_gates():
+    html, _ = bank_page("lloyds")
+    for text in ("writing-mode:horizontal-tb", "word-break:normal", "overflow-wrap:break-word", "@media print", "page-break-inside:avoid"):
+        assert text in html
+    assert "analyst-view" in html
+    executive = html.split("12. Detailed inspection", 1)[0]
+    assert "BK-ENT-" not in executive

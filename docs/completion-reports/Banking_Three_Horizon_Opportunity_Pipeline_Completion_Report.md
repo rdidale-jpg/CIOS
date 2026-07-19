@@ -144,3 +144,15 @@ Commit: final git commit recorded in PR metadata and final response.
 PR: prepared with make_pr tool.
 Merge status: unmerged.
 Dependency commits: none identified.
+
+## Increment 4.1 backlog additions
+
+- FLR-037 Financial behaviour interpretation
+- FLR-038 Opportunity horizon model
+- FLR-039 Supplier traction
+- FLR-040 Account pipeline reconciliation
+- FLR-041 Pipeline overlap handling
+- FLR-042 Commercial heatmap
+- FLR-043 Enterprise behaviour outlook
+- FLR-044 Supplier whitespace
+- FLR-045 Rendered layout quality gates
