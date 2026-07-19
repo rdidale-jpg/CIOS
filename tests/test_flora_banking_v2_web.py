@@ -136,3 +136,44 @@ def test_lineage_and_evidence_references_resolve() -> None:
         assert detail_status == 200
         assert object_id in detail_html
         assert "Lineage" in detail_html
+
+
+def test_reference_workspace_completes_required_journey() -> None:
+    status, html = _get("/workspace/reference")
+    assert status == 200
+    for text in [
+        "What Changed",
+        "UK Banking",
+        "APP Fraud",
+        "Lloyds Banking Group",
+        "Explainability panel",
+        "Evidence panel",
+        "Unknowns panel",
+        "Contradictions panel",
+        "Opportunity panel",
+        "Enterprise Need",
+        "Provider Fit",
+        "Commercial Accessibility",
+        "Commercial Conviction",
+        "Validation Action creation",
+        "No duplicate enterprise objects are introduced",
+    ]:
+        assert text in html
+    assert "Not inferred" in html
+    assert "Architecture-safe placeholder" in html
+
+
+def test_reference_workspace_validation_action_preserves_resume_state() -> None:
+    server = __import__("http.server").server.ThreadingHTTPServer(("127.0.0.1", 0), FloraWebHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start(); conn = HTTPConnection("127.0.0.1", server.server_port)
+    try:
+        body = "action=validate&journey=uk-banking-app-fraud-lloyds"
+        conn.request("POST", "/workspace/reference/validation-action", body=body, headers={"Content-Type": "application/x-www-form-urlencoded"})
+        response = conn.getresponse()
+        response.read()
+        assert response.status == 303
+        cookie = response.getheader("Set-Cookie") or ""
+        assert "flora_reference_investigation=uk-banking-app-fraud-lloyds" in cookie
+    finally:
+        conn.close(); server.shutdown(); server.server_close(); thread.join(timeout=2)

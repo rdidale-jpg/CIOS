@@ -20,6 +20,7 @@ from cios.applications.flora.live.views import acquisition_plans_page, collectio
 from cios.applications.flora.workspace.feedback import create_feedback_record, create_logbook_record
 from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page, general_settings_page
+from cios.applications.flora.workspace.reference_slice import VALIDATION_PATH, reference_resume_cookie, reference_workspace_page
 from cios.applications.flora.digital_twins import digital_twins_landing_page, bt_twin_page, search_bt_twin, bt_search_progress_page, rapid_snapshot_csv
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
@@ -75,6 +76,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._json(deployment_payload())
             elif parsed.path in {"/", "/flora", "/flora/"}:
                 self._html(_flora_home_page(self.headers))
+            elif parsed.path in {"/workspace/reference", "/flora/reference"}:
+                self._html(reference_workspace_page(self.headers, saved=parse_qs(parsed.query).get("saved") == ["1"]), set_cookie=reference_resume_cookie())
             elif parsed.path == "/explore":
                 self._html(_flora_explore_page(self.headers))
             elif parsed.path == "/focus":
@@ -300,6 +303,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         elif self.path == "/pilot-sign-out":
             pilot_audit("sign_out", correlation_id=self.headers.get("X-Request-Id", ""))
             self._redirect("/flora", set_cookie=clear_session_cookie())
+        elif self.path == VALIDATION_PATH:
+            self._redirect("/workspace/reference?saved=1", set_cookie=reference_resume_cookie())
         elif self.path == "/ask":
             question = (_one(form, "question") or "").strip()
             if not question:
@@ -407,8 +412,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         else:
             self.send_error(404, "Flora web route not found")
 
-    def _html(self, html: str, status: int = 200) -> None:
-        self._body(html.encode("utf-8"), "text/html; charset=utf-8", status)
+    def _html(self, html: str, status: int = 200, set_cookie: str = "") -> None:
+        self._body(html.encode("utf-8"), "text/html; charset=utf-8", status, set_cookie=set_cookie)
 
     def _json(self, payload: dict, status: int = 200) -> None:
         self._body(json.dumps(payload, separators=(",", ":")).encode("utf-8"), "application/json", status)
@@ -422,10 +427,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
-    def _body(self, body: bytes, content_type: str, status: int) -> None:
+    def _body(self, body: bytes, content_type: str, status: int, set_cookie: str = "") -> None:
         self.send_response(status)
         self.send_header("Content-Type", content_type)
         self.send_header("Content-Length", str(len(body)))
+        if set_cookie:
+            self.send_header("Set-Cookie", set_cookie)
         self.end_headers()
         self.wfile.write(body)
 
@@ -835,7 +842,7 @@ app = FloraWebHandler
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path in {"/", "/flora", "/flora/", "/pilot-sign-in", "/explore", "/focus", "/shape", "/shape/banking", "/shape/strategic-sales-brief", "/shape/banking/strategic-sales-brief", "/governance", "/ask"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export") or path == "/settings/general" or path.startswith("/evidence/"):
+    if path in {"/", "/flora", "/flora/", "/pilot-sign-in", "/workspace/reference", "/flora/reference", "/explore", "/focus", "/shape", "/shape/banking", "/shape/strategic-sales-brief", "/shape/banking/strategic-sales-brief", "/governance", "/ask"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export") or path == "/settings/general" or path.startswith("/evidence/"):
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
