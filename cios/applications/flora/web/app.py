@@ -36,6 +36,7 @@ from cios.applications.flora.enterprise_intelligence.pipeline import run_pipelin
 from cios.applications.flora.enterprise_intelligence.models import ReasoningRequestV1
 from cios.applications.flora.enterprise_intelligence.runtime import EnterpriseIntelligenceRuntime
 from cios.applications.flora.architecture_export import architecture_export_page, record_download
+from cios.applications.flora.runtime.increment1_views import increment1_workspace_page
 
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_PORT = 8000
@@ -78,6 +79,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_flora_home_page(self.headers))
             elif parsed.path in {"/workspace/reference", "/flora/reference"}:
                 self._html(reference_workspace_page(self.headers, saved=parse_qs(parsed.query).get("saved") == ["1"]), set_cookie=reference_resume_cookie())
+            elif parsed.path in {"/flora/object/BK-ENT-001", "/workspace/enterprise/BK-ENT-001", "/flora/lloyds"}:
+                html, status = increment1_workspace_page("BK-ENT-001")
+                self._html(html, status=status)
+            elif parsed.path.startswith("/flora/object/"):
+                html, status = increment1_workspace_page(parsed.path.removeprefix("/flora/object/"))
+                self._html(html, status=status)
             elif parsed.path == "/explore":
                 self._html(_flora_explore_page(self.headers))
             elif parsed.path == "/focus":
@@ -472,6 +479,7 @@ def _flora_home_page(headers=None, question_error: str = "") -> str:
             {error}
           </form>
         </section>
+        <section class='card' aria-labelledby='increment1-title'><h2 id='increment1-title'>Increment 1 workspace</h2><p>The Lloyds Banking Group read-only workspace is the visible Increment 1 experience. The cards below remain legacy prototype navigation while migration continues.</p><p><a class='primary-link' href='/flora/object/BK-ENT-001'>Open Lloyds Banking Group Increment 1 workspace</a></p></section>
         <section class='mode-grid' aria-labelledby='modes-title'>
           <h2 id='modes-title' class='visually-hidden'>Primary product areas</h2>
           {_mode_card('/explore', 'Explore', 'Understand industries and change', 'Industry understanding, observations, mechanisms, hypotheses and why now.')}
@@ -842,7 +850,7 @@ app = FloraWebHandler
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path in {"/", "/flora", "/flora/", "/pilot-sign-in", "/workspace/reference", "/flora/reference", "/explore", "/focus", "/shape", "/shape/banking", "/shape/strategic-sales-brief", "/shape/banking/strategic-sales-brief", "/governance", "/ask"} or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export") or path == "/settings/general" or path.startswith("/evidence/"):
+    if path in {"/", "/flora", "/flora/", "/pilot-sign-in", "/workspace/reference", "/flora/reference", "/flora/object/BK-ENT-001", "/workspace/enterprise/BK-ENT-001", "/flora/lloyds", "/explore", "/focus", "/shape", "/shape/banking", "/shape/strategic-sales-brief", "/shape/banking/strategic-sales-brief", "/governance", "/ask"} or path.startswith("/flora/object/") or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export") or path == "/settings/general" or path.startswith("/evidence/"):
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
