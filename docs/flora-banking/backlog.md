@@ -40,3 +40,17 @@ Detailed evidence UX work is deferred, not rejected.
 | FLR-067 Account tab navigation | Simplify account pages | Sales director | High | Done | Account overview | Seven overview sections plus secondary tabs | Presentation projection only |
 | FLR-068 Opportunity detail journey | Show opportunity before metadata | Sales director | High | Done | Opportunity routes | Opportunity detail follows twelve-step journey | Detail remains accessible |
 | FLR-069 Executive usability testing | Validate sales-director readiness | Reviewer | Medium | Added | Rendered artefacts | Commercial acceptance checklist can be answered | Future research task |
+| FLR-070 Visual intelligence design system | Govern visual vocabulary | Sales director | High | Done | Existing intelligence | Legend and non-colour meanings render | Presentation-only vocabulary |
+| FLR-071 Reinvention maturity rail | Replace text-first maturity paragraphs | Sales director | High | Done | FLR-070 | Five-stage rail with drill-down | Transient view |
+| FLR-072 Bank journey timeline | Show five banks on shared axis | Sales director | High | Done | FLR-071 | Current, next and AI-native ranges visible | Deterministic axis |
+| FLR-073 Opportunity horizon visualisation | Show opportunity timing bands | Sales director | High | Done | Pipeline fixtures | Explore/buy/deliver bands render | No false precision |
+| FLR-074 Industry pipeline timeline | Compare cross-bank pipeline timing | Sales director | High | Done | FLR-073 | Cross-bank modes represented in table/SVG | Derived display |
+| FLR-075 Time-distributed pipeline value | Separate value states by year | Sales director | High | Done | Pipeline values | Gross/adjusted/validated/qualified/confirmed separate | No conflated totals |
+| FLR-076 Portfolio priority map | Show urgency versus value | Sales director | High | Done | Bank positions | Bubble map links to accounts | Not purchase certainty |
+| FLR-077 Capability gap visual | Show current-to-target gaps | Sales director | High | Done | Capability domains | Lloyds bars render with barriers and value | No radar primary |
+| FLR-078 Competitor capability chart | Replace long ranking tables | Sales director | High | Done | Supplier offers | Ranked bars and matrix render | Supplier hypotheses only |
+| FLR-079 Supplier timeline markers | Show sourced/labelled supplier markers | Sales director | High | Done | Supplier entries | Markers expose basis labels | No contract ownership invention |
+| FLR-080 Commercial trigger events | Show commercial event markers | Sales director | High | Done | Opportunity triggers | Trigger markers use existing ranges/text | No fabricated dates |
+| FLR-081 Print-safe SVG rendering | Preserve visual output in PDF/print | Reviewer | High | Done | Visual components | Print CSS keeps labels/ranges | Deterministic fallback |
+| FLR-082 Accessible visual fallback | Ensure visuals are not sole access path | Reviewer | High | Done | Tables | Data table fallback follows visuals | Accessibility preserved |
+| FLR-083 Visual narrative validator | Require commercial interpretation | Reviewer | Medium | Done | Visual components | What Flora sees follows visuals | Decision question required |
