@@ -1,0 +1,41 @@
+{
+  "assertions": [
+    {
+      "name": "no_governed_evidence_removed",
+      "passed": true
+    },
+    {
+      "name": "no_observation_removed",
+      "passed": true
+    },
+    {
+      "name": "no_enterprise_model_overwritten_by_commercial_projection",
+      "passed": true
+    },
+    {
+      "name": "no_opportunity_hypothesis_became_canonical",
+      "passed": true
+    },
+    {
+      "name": "no_source_lineage_lost",
+      "passed": true
+    },
+    {
+      "name": "human_supplied_knowledge_remains_labelled",
+      "passed": true
+    },
+    {
+      "name": "featured_subsets_do_not_delete_unfeatured_intelligence",
+      "passed": true
+    },
+    {
+      "name": "complete_signal_and_opportunity_inventories_remain_reachable",
+      "passed": true
+    },
+    {
+      "name": "closure_artefacts_are_snapshots_not_sources_of_truth",
+      "passed": true
+    }
+  ],
+  "generated_date": "2026-07-19"
+}

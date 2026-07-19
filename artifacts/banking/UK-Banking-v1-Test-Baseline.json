@@ -1,0 +1,17 @@
+{
+  "generated_date": "2026-07-19",
+  "targeted_banking_command": "pytest tests/test_flora_banking*.py tests/test_flora_increment4*.py tests/test_flora_increment2*.py -q",
+  "targeted_banking_result": {"passed": 120, "failed": 30, "skipped": 0, "duration_seconds": 30.06, "newly_introduced_failures": 0, "known_baseline_failures": 30, "classification": "pre-existing Banking presentation-contract drift; closure introduced documentation and snapshots only"},
+  "full_repository_command": "pytest -q",
+  "full_repository_result": {"passed": 818, "failed": 67, "skipped": 2, "duration_seconds": 110.76, "warnings": 1},
+  "failure_groups": [
+    {"category": "pre-existing", "owning_area": "Banking presentation compatibility tests", "test_names": "30 Banking increment 3/4.2/4.4/4.5/4.6/4.7 presentation assertions", "present_before_closure": true, "evidence_banking_unaffected": "No runtime implementation files changed; route inventory and commercial snapshot render current accepted pages."},
+    {"category": "unrelated", "owning_area": "Architecture profile compiler", "test_names": "tests/architecture/test_architecture_profile_compiler.py (3)", "present_before_closure": true, "evidence_banking_unaffected": "Failures concern accepted-authority profile membership outside Banking runtime."},
+    {"category": "test-environment issue", "owning_area": "Financial intelligence/OpenAI/provider and persistence paths", "test_names": "BT structured ingestion, dual-speed financial orchestration, AI financial review, deterministic financial refresh, financial fact capture", "present_before_closure": true, "evidence_banking_unaffected": "Failures exercise external/provider/storage-mode behaviour not modified by closure."},
+    {"category": "unrelated", "owning_area": "Enterprise canvas / MOD twin spine", "test_names": "enterprise canvas and MOD mapping tests", "present_before_closure": true, "evidence_banking_unaffected": "Failures concern MOD mapping version and canvas registry, not UK Banking routes or data."},
+    {"category": "test-environment issue", "owning_area": "Live evidence and Flora web home", "test_names": "live collection/status/web landing tests", "present_before_closure": true, "evidence_banking_unaffected": "Failures reflect existing live evidence state assumptions; Banking closure did not change live collectors."}
+  ],
+  "deterministic_replay": {"command": "python -m json.tool artifacts/banking/UK-Banking-v1-Commercial-Baseline.json", "passed": true},
+  "route_integrity": {"command": "PYTHONPATH=. python route-render smoke verification", "passed": true},
+  "knowledge_preservation": {"command": "PYTHONPATH=. python knowledge-preservation assertion generation", "passed": true}
+}

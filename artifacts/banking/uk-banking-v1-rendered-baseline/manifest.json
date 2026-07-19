@@ -1,0 +1,62 @@
+{
+  "format": "HTML render snapshots used as printable rendered baseline",
+  "generated_date": "2026-07-19",
+  "items": [
+    {
+      "file": "artifacts/banking/uk-banking-v1-rendered-baseline/01-industry-portfolio.html",
+      "sha256": "19e7cf1f37d6be1bfa19cf0d068f43b0239d00e1989f854da8de621d9575cfb7"
+    },
+    {
+      "file": "artifacts/banking/uk-banking-v1-rendered-baseline/02-uk-banking-landing.html",
+      "sha256": "d6a6d109a25e87f3dfce34b62c6b2e67feedd4677542112770828447f87ef28b"
+    },
+    {
+      "file": "artifacts/banking/uk-banking-v1-rendered-baseline/03-industry-outlook.html",
+      "sha256": "b3b91af578f1c63d268a38eba56612b113f418d21d27d21dcf19e0ad6a2b7a5c"
+    },
+    {
+      "file": "artifacts/banking/uk-banking-v1-rendered-baseline/04-ranked-signal-explorer.html",
+      "sha256": "87f13ba1e02605e782d2947fc3ef542300d3562d618fcbbdd859775546f2382d"
+    },
+    {
+      "file": "artifacts/banking/uk-banking-v1-rendered-baseline/05-ai-native-banking.html",
+      "sha256": "e2f7b038fbc1037c36e7c8b772ab428d1645fd7c1d9e3ef498729e1b3ad31efc"
+    },
+    {
+      "file": "artifacts/banking/uk-banking-v1-rendered-baseline/06-reinvention-timeline.html",
+      "sha256": "b98c4a7256f733d199a44d73c255e6291c657c04477954c8f94021a651cc74a7"
+    },
+    {
+      "file": "artifacts/banking/uk-banking-v1-rendered-baseline/07-compare-uk-banks.html",
+      "sha256": "1b592d4d5a7592ee35a1cb49d7c9a4b893d2ec4a81d68bdf424f397a3f8b6ddf"
+    },
+    {
+      "file": "artifacts/banking/uk-banking-v1-rendered-baseline/08-lloyds-overview.html",
+      "sha256": "05f89a57f21ca5b07c0bae1f56ccc807468d3b212dacee1d13487949c0c4c153"
+    },
+    {
+      "file": "artifacts/banking/uk-banking-v1-rendered-baseline/09-lloyds-financial-performance.html",
+      "sha256": "d83f7df845cfee998dcb6d36fe39d153bc05504adcb2b8dc15684f7734457819"
+    },
+    {
+      "file": "artifacts/banking/uk-banking-v1-rendered-baseline/10-lloyds-market-and-analyst-view.html",
+      "sha256": "d43e858057afcf9106830cce1d72533050942badee168f70327271aaf9090eb4"
+    },
+    {
+      "file": "artifacts/banking/uk-banking-v1-rendered-baseline/11-commercial-pipeline.html",
+      "sha256": "7a0e7f7d2083724a6c8d221ef96194b1a71e30374857521d175eef7c6ca5af4a"
+    },
+    {
+      "file": "artifacts/banking/uk-banking-v1-rendered-baseline/12-competitor-landscape.html",
+      "sha256": "20f9ccfd62e48541f1fe24a14dad7ea59e46c2bbc06b8fe37bf3cc72e4683f1c"
+    },
+    {
+      "file": "artifacts/banking/uk-banking-v1-rendered-baseline/13-safe-unavailable-state.html",
+      "sha256": "dabd3aff769f07eb2965401eb029974ebba3407afd02b26ddb564ea5f8efae72"
+    },
+    {
+      "file": "artifacts/banking/uk-banking-v1-rendered-baseline/14-detailed-inspection.html",
+      "sha256": "3be272239dc0a6ee2dd11d7702391918bf330ea41154aac7f82d425101375dc7"
+    }
+  ]
+}
