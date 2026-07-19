@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cios.local/schemas/flora-runtime/v0.1/safe-unavailable-response-v0.1.schema.json",
+  "title": "Safe Unavailable Response V0.1",
+  "identifier": "safe-unavailable-response-v0.1",
+  "version": "0.1.0",
+  "description": "Consistent fail-closed response when information cannot be safely presented.",
+  "type": "object",
+  "required": [
+    "status",
+    "reason_code",
+    "user_safe_explanation",
+    "correlation_id",
+    "retryable",
+    "audit_event_reference"
+  ],
+  "properties": {
+    "status": {
+      "const": "safe_unavailable"
+    },
+    "reason_code": {
+      "enum": [
+        "object_not_found",
+        "identifier_unresolved",
+        "identifier_collision",
+        "access_denied",
+        "source_unavailable",
+        "source_stale_beyond_policy",
+        "unsupported_object_type",
+        "missing_authority_metadata",
+        "missing_lineage",
+        "invalid_source_schema",
+        "ingestion_incomplete",
+        "relationship_target_unresolved",
+        "dependency_unavailable"
+      ]
+    },
+    "user_safe_explanation": {
+      "type": "string"
+    },
+    "technical_reference": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "affected_object_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "affected_asset_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "correlation_id": {
+      "type": "string"
+    },
+    "retryable": {
+      "type": "boolean"
+    },
+    "recommended_next_action": {
+      "type": "string"
+    },
+    "audit_event_reference": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "status": "safe_unavailable",
+      "reason_code": "missing_authority_metadata",
+      "user_safe_explanation": "Flora cannot safely present this object because the governed source does not provide enough authority metadata.",
+      "technical_reference": "owner=TBD for BK-ENT-001 in Banking manifest; do not invent canonical owner.",
+      "affected_object_id": "BK-ENT-001",
+      "affected_asset_id": "BK-ENT-001",
+      "correlation_id": "corr-synthetic-missing-authority-001",
+      "retryable": false,
+      "recommended_next_action": "Inspect source governance metadata or request owner-authority completion outside Increment 1.",
+      "audit_event_reference": "aud-synthetic-001"
+    }
+  ]
+}

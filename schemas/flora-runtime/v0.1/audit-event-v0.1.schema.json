@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cios.local/schemas/flora-runtime/v0.1/audit-event-v0.1.schema.json",
+  "title": "Audit Event V0.1",
+  "identifier": "audit-event-v0.1",
+  "version": "0.1.0",
+  "description": "Minimum audit event for read activity, ingestion, validation and safe failure.",
+  "type": "object",
+  "required": [
+    "audit_event_id",
+    "event_type",
+    "timestamp",
+    "actor",
+    "tenant_context",
+    "operation",
+    "access_decision",
+    "outcome",
+    "correlation_id"
+  ],
+  "properties": {
+    "audit_event_id": {
+      "type": "string"
+    },
+    "event_type": {
+      "enum": [
+        "read_activity",
+        "ingestion",
+        "access_decision",
+        "validation",
+        "safe_failure"
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor": {
+      "type": "string"
+    },
+    "tenant_context": {
+      "type": "string"
+    },
+    "focus_object_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_asset_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_asset_versions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "operation": {
+      "type": "string"
+    },
+    "access_decision": {
+      "enum": [
+        "allowed",
+        "denied",
+        "not_evaluated"
+      ]
+    },
+    "validation_result": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "outcome": {
+      "enum": [
+        "success",
+        "failure",
+        "safe_unavailable"
+      ]
+    },
+    "failure_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "component": {
+      "type": "string"
+    },
+    "component_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "correlation_id": {
+      "type": "string"
+    },
+    "safe_unavailable_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cios.local/schemas/flora-runtime/v0.1/focus-object-projection-v0.1.schema.json",
+  "title": "Focus Object Projection V0.1",
+  "identifier": "focus-object-projection-v0.1",
+  "version": "0.1.0",
+  "description": "Minimum governed projection required to place an Enterprise Intelligence object in focus.",
+  "type": "object",
+  "required": [
+    "identity",
+    "display_name",
+    "object_type",
+    "authority_status",
+    "persistence_class",
+    "provenance_summary",
+    "available_perspectives",
+    "available_universal_actions"
+  ],
+  "properties": {
+    "identity": {
+      "$ref": "common-definitions.schema.json#/$defs/IdentityEnvelopeV0_1"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "object_type": {
+      "type": "string"
+    },
+    "short_description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "enterprise_context": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "authority_status": {
+      "type": "string"
+    },
+    "lifecycle_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "freshness_status": {
+      "type": "string"
+    },
+    "provenance_summary": {
+      "type": "string"
+    },
+    "available_perspectives": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "available_universal_actions": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "inspect_lineage",
+          "view_relationships",
+          "view_evidence_observation_availability",
+          "view_unknowns",
+          "view_contradictions",
+          "open_source_asset"
+        ]
+      }
+    },
+    "relationship_availability": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "evidence_availability": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "observation_availability": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "unknown_availability": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "contradiction_availability": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "lineage_availability": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "safe_unavailable_notices": {
+      "type": "array",
+      "items": {
+        "$ref": "common-definitions.schema.json#/$defs/SafeNotice"
+      }
+    },
+    "persistence_class": {
+      "enum": [
+        "read_projection"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "identity": {
+        "object_id": "BK-ENT-001",
+        "object_type": "Enterprise Twin",
+        "schema_version": "0.1.0",
+        "source_asset_id": "BK-ENT-001",
+        "source_asset_version": "1.0",
+        "canonical_owner": "TBD",
+        "authority_status": "validated",
+        "lifecycle_status": "Validated",
+        "persistence_class": "read_projection",
+        "enterprise_id": "lloyds",
+        "created_at": null,
+        "updated_at": null,
+        "valid_from": null,
+        "valid_to": null,
+        "freshness_status": "unknown",
+        "human_supplied": false,
+        "provenance_reference": "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+        "access_classification": "internal"
+      },
+      "display_name": "Lloyds Enterprise Twin",
+      "object_type": "Enterprise Twin",
+      "short_description": "Governed UK Banking enterprise twin projection for Lloyds.",
+      "enterprise_context": {
+        "domain": "Banking",
+        "country": "UK"
+      },
+      "authority_status": "validated",
+      "lifecycle_status": "Validated",
+      "freshness_status": "unknown",
+      "provenance_summary": "Manifest asset BK-ENT-001 version 1.0; owner is TBD in governed corpus.",
+      "available_perspectives": [
+        "overview",
+        "relationships",
+        "lineage"
+      ],
+      "available_universal_actions": [
+        "inspect_lineage",
+        "view_relationships",
+        "view_evidence_observation_availability",
+        "view_unknowns",
+        "view_contradictions",
+        "open_source_asset"
+      ],
+      "relationship_availability": {
+        "count": 1,
+        "has_unresolved": false
+      },
+      "evidence_availability": {
+        "available": true,
+        "count": 3
+      },
+      "observation_availability": {
+        "available": true,
+        "count": 2
+      },
+      "unknown_availability": {
+        "available": true,
+        "count": 1
+      },
+      "contradiction_availability": {
+        "available": true,
+        "count": 1
+      },
+      "lineage_availability": {
+        "status": "partial"
+      },
+      "safe_unavailable_notices": [],
+      "persistence_class": "read_projection"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cios.local/schemas/flora-runtime/v0.1/unknown-response-v0.1.schema.json",
+  "title": "Unknown Response V0.1",
+  "identifier": "unknown-response-v0.1",
+  "version": "0.1.0",
+  "description": "Explicit Unknowns connected to the Focus Object.",
+  "type": "object",
+  "required": [
+    "unknown_id",
+    "focus_object_id",
+    "statement",
+    "category",
+    "authority_status",
+    "provenance"
+  ],
+  "properties": {
+    "unknown_id": {
+      "type": "string"
+    },
+    "focus_object_id": {
+      "type": "string"
+    },
+    "statement": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "origin": {
+      "type": "string"
+    },
+    "authority_status": {
+      "type": "string"
+    },
+    "lifecycle_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "last_reviewed_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "owner": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence_demand": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "linked_objects": {
+      "type": "array",
+      "items": {
+        "$ref": "common-definitions.schema.json#/$defs/Ref"
+      }
+    },
+    "linked_observations": {
+      "type": "array",
+      "items": {
+        "$ref": "common-definitions.schema.json#/$defs/Ref"
+      }
+    },
+    "impact_description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "provenance": {
+      "type": "string"
+    },
+    "human_supplied": {
+      "type": "boolean"
+    },
+    "distinction": {
+      "enum": [
+        "governed_unknown",
+        "unavailable_data",
+        "inaccessible_data",
+        "unresolved_identity",
+        "not_applicable"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "unknown_id": "BK-UNK-001",
+      "focus_object_id": "BRH-003",
+      "statement": "Named executive ownership for mixed physical and assisted access remains unresolved in the governed Banking corpus.",
+      "category": "ownership_gap",
+      "origin": "Semantic Banking completion report and strategic sales navigation corpus",
+      "authority_status": "candidate",
+      "lifecycle_status": "Open",
+      "created_at": null,
+      "last_reviewed_at": null,
+      "owner": null,
+      "evidence_demand": "Governed account evidence identifying accountable executive roles without inventing names.",
+      "linked_objects": [
+        {
+          "id": "BRH-003",
+          "type": "hypothesis",
+          "source_asset_id": "EK-BANK-RHYP-001"
+        }
+      ],
+      "linked_observations": [],
+      "impact_description": "Prevents specific account-action presentation in Increment 1.",
+      "provenance": "docs/Semantic_Banking_Completion_Report.md",
+      "human_supplied": false,
+      "distinction": "governed_unknown"
+    }
+  ]
+}

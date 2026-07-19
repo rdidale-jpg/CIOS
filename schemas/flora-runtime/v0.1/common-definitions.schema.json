@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cios.local/schemas/flora-runtime/v0.1/common-definitions.schema.json",
+  "title": "Flora Runtime Increment 1 Common Definitions",
+  "version": "0.1.0",
+  "$defs": {
+    "IdentityEnvelopeV0_1": {
+      "type": "object",
+      "required": [
+        "object_id",
+        "object_type",
+        "schema_version",
+        "source_asset_id",
+        "source_asset_version",
+        "authority_status",
+        "persistence_class",
+        "provenance_reference",
+        "access_classification"
+      ],
+      "properties": {
+        "object_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "object_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "schema_version": {
+          "const": "0.1.0"
+        },
+        "source_asset_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_asset_version": {
+          "type": "string"
+        },
+        "canonical_owner": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "authority_status": {
+          "enum": [
+            "accepted",
+            "validated",
+            "candidate",
+            "proposed",
+            "unclassified",
+            "missing",
+            "unknown"
+          ]
+        },
+        "lifecycle_status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "persistence_class": {
+          "enum": [
+            "canonical_reference",
+            "read_projection",
+            "workspace_state",
+            "audit_record",
+            "ingestion_report",
+            "safe_unavailable",
+            "transient"
+          ]
+        },
+        "enterprise_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "created_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "valid_from": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "valid_to": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "freshness_status": {
+          "enum": [
+            "current",
+            "stale",
+            "incomplete",
+            "unknown",
+            "not_applicable"
+          ]
+        },
+        "human_supplied": {
+          "type": "boolean"
+        },
+        "provenance_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "access_classification": {
+          "enum": [
+            "public_reference",
+            "internal",
+            "restricted",
+            "redacted",
+            "unknown"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "SafeNotice": {
+      "type": "object",
+      "required": [
+        "reason_code",
+        "message"
+      ],
+      "properties": {
+        "reason_code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "correlation_id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Ref": {
+      "type": "object",
+      "required": [
+        "id",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "source_asset_id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "examples": [
+    {
+      "object_id": "BK-ENT-001",
+      "object_type": "Enterprise Twin",
+      "schema_version": "0.1.0",
+      "source_asset_id": "BK-ENT-001",
+      "source_asset_version": "1.0",
+      "canonical_owner": "TBD",
+      "authority_status": "validated",
+      "lifecycle_status": "Validated",
+      "persistence_class": "read_projection",
+      "enterprise_id": "lloyds",
+      "created_at": null,
+      "updated_at": null,
+      "valid_from": null,
+      "valid_to": null,
+      "freshness_status": "unknown",
+      "human_supplied": false,
+      "provenance_reference": "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+      "access_classification": "internal"
+    }
+  ]
+}

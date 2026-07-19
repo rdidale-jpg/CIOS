@@ -1,0 +1,69 @@
+{
+  "identity": {
+    "object_id": "BK-REF-001",
+    "object_type": "Reference Model",
+    "schema_version": "0.1.0",
+    "source_asset_id": "BK-REF-001",
+    "source_asset_version": "1.0",
+    "canonical_owner": "TBD",
+    "authority_status": "validated",
+    "lifecycle_status": "Validated",
+    "persistence_class": "read_projection",
+    "enterprise_id": null,
+    "created_at": null,
+    "updated_at": null,
+    "valid_from": null,
+    "valid_to": null,
+    "freshness_status": "incomplete",
+    "human_supplied": false,
+    "provenance_reference": "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+    "access_classification": "internal"
+  },
+  "display_name": "Banking Mechanisms and Tensions Model",
+  "object_type": "Reference Model",
+  "short_description": "Governed model with incomplete temporal freshness metadata.",
+  "enterprise_context": {
+    "domain": "Banking"
+  },
+  "authority_status": "validated",
+  "lifecycle_status": "Validated",
+  "freshness_status": "incomplete",
+  "provenance_summary": "Manifest asset BK-REF-001 version 1.0; source lacks created_at/updated_at validity dates.",
+  "available_perspectives": [
+    "overview",
+    "lineage"
+  ],
+  "available_universal_actions": [
+    "inspect_lineage",
+    "open_source_asset"
+  ],
+  "relationship_availability": {
+    "count": 0
+  },
+  "evidence_availability": {
+    "available": false,
+    "reason": "not_bounded_in_projection"
+  },
+  "observation_availability": {
+    "available": false,
+    "reason": "not_bounded_in_projection"
+  },
+  "unknown_availability": {
+    "available": false,
+    "reason": "not_bounded_in_projection"
+  },
+  "contradiction_availability": {
+    "available": false,
+    "reason": "not_bounded_in_projection"
+  },
+  "lineage_availability": {
+    "status": "partial"
+  },
+  "safe_unavailable_notices": [
+    {
+      "reason_code": "incomplete_freshness_metadata",
+      "message": "Temporal freshness dates are not provided by the governed source."
+    }
+  ],
+  "persistence_class": "read_projection"
+}
