@@ -177,3 +177,80 @@ def test_reference_workspace_validation_action_preserves_resume_state() -> None:
         assert "flora_reference_investigation=uk-banking-app-fraud-lloyds" in cookie
     finally:
         conn.close(); server.shutdown(); server.server_close(); thread.join(timeout=2)
+
+
+def test_increment43_ai_native_reference_model_and_timelines_exist() -> None:
+    status, html = _get("/flora/banking")
+    assert status == 200
+    for text in [
+        "What the AI-native bank will look like",
+        "Customer experience",
+        "Sales and relationship management",
+        "Innovation and change delivery",
+        "Industry reinvention timeline",
+        "Now",
+        "1–2 years",
+        "3–5 years",
+        "6–10 years",
+        "Inspectable assumptions",
+    ]:
+        assert text in html
+    for bank in ["Lloyds Banking Group", "Barclays", "NatWest Group", "HSBC UK", "Santander UK"]:
+        assert bank in html
+    assert "2–3 years" in html
+    assert "6–9 years" in html
+
+
+def test_increment43_account_pages_are_plain_language_and_do_not_duplicate_full_pestle() -> None:
+    status, html = _get("/flora/banking/lloyds")
+    assert status == 200
+    for text in [
+        "Where this bank sits on the reinvention journey",
+        "What an AI-native version of this bank would look like",
+        "What must change next",
+        "Reinvention gap view",
+        "Customer primacy</strong> means whether customers treat this bank as their main financial relationship",
+        "Control evidence</strong> means proof that processes are operating safely",
+        "Title provenance:",
+        "Customer Experience Transformation and Outsourcing was supplied by the user",
+        "Pressure → required change → capability gap → commercial scope → opportunity title",
+    ]:
+        assert text in html
+    assert "<h2>PESTLE analysis</h2>" not in html
+    assert "Independently derived title?</strong> No" in html
+
+
+def test_increment43_competitor_page_ranks_suppliers_without_win_probability() -> None:
+    status, html = _get("/flora/banking/competitors")
+    assert status == 200
+    for text in [
+        "Competitor capability landscape",
+        "Customer experience",
+        "Data and AI",
+        "Accenture",
+        "Microsoft",
+        "Ranking basis is inspectable and non-canonical",
+        "does not imply likelihood of winning a specific opportunity",
+        "Competitor-to-opportunity mapping",
+        "This is a competitive hypothesis, not a confirmed procurement view",
+    ]:
+        assert text in html
+
+
+def test_increment43_simplified_heatmap_keeps_expandable_detail_and_pipeline_values() -> None:
+    status, html = _get("/flora/banking/compare")
+    assert status == 200
+    for text in [
+        "Simplified executive heatmap",
+        "Default cells are materially shorter",
+        "<strong>Stage:</strong>",
+        "<strong>Pressure:</strong>",
+        "<strong>Value:</strong>",
+        "<strong>Top supplier:</strong>",
+        "<strong>Top gap:</strong>",
+        "Technical detail remains available",
+        "Opportunity-value summary",
+        "not a win probability",
+    ]:
+        assert text in html
+    assert "Flora working estimate" in html
