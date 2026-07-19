@@ -222,6 +222,32 @@ assets:
         target: "BK-GOV-SSN-VAL-001"
       - relationship: "reports_on"
         target: "BK-FLR-SSN-SPEC-001"
+  - asset_id: BK-RES-MIG-001
+    title: "Banking Research Package Discovery, Validation and Migration Report"
+    asset_type: "Research Migration Governance Report"
+    domain: Banking
+    status: Candidate
+    version: "0.1"
+    owner: TBD
+    location: "banking/research-migration/Banking-Research-Package-Migration-Report.md"
+    relationships:
+      - relationship: "validates_source_package"
+        target: "docs/Research/banking-market-participant-intelligence-release.zip"
+      - relationship: "validates_source_package"
+        target: "docs/Research/banking-offer-supplier-intelligence-release.zip"
+      - relationship: "validates_source_package"
+        target: "docs/Research/banking-reinvention-hypotheses-release.zip"
+  - asset_id: BK-CAN-RES-001
+    title: "Banking Research Canonical Object Store"
+    asset_type: "Canonical Enterprise Knowledge Object Store"
+    domain: Banking
+    status: Candidate
+    version: "0.1"
+    owner: TBD
+    location: "banking/canonical/banking-research-canonical-objects.json"
+    relationships:
+      - relationship: "migrated_from"
+        target: "BK-RES-MIG-001"
 flora:
   discovery_register: "banking/flora/Banking-Knowledge-Register.md"
   machine_manifest: "banking/flora/Banking-Knowledge-Manifest.json"

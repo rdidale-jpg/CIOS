@@ -1,0 +1,342 @@
+{
+  "duplicate_object_ids": {
+    "BRIEF-001": [
+      {
+        "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/00-Delivery-and-Input-Manifest.md",
+        "release": "market-participant",
+        "object_id": "BRIEF-001",
+        "object_type": "manifest",
+        "label": "Pasted markdown.md \u2014 Build Governed Banking Market Participant Intelligence",
+        "migration_timestamp": "2026-07-19T00:00:00Z",
+        "migration_version": "banking-research-migration-v0.1"
+      },
+      {
+        "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/01-Repository-Reconnaissance-Report.md",
+        "release": "market-participant",
+        "object_id": "BRIEF-001",
+        "object_type": "research-document",
+        "label": "Pasted markdown.md \u2014 Build Governed Banking Market Participant Intelligence",
+        "migration_timestamp": "2026-07-19T00:00:00Z",
+        "migration_version": "banking-research-migration-v0.1"
+      },
+      {
+        "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/14-Evidence-Source-Register.md",
+        "release": "market-participant",
+        "object_id": "BRIEF-001",
+        "object_type": "evidence-register",
+        "label": "Pasted markdown.md \u2014 Build Governed Banking Market Participant Intelligence",
+        "migration_timestamp": "2026-07-19T00:00:00Z",
+        "migration_version": "banking-research-migration-v0.1"
+      }
+    ],
+    "METH-001": [
+      {
+        "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/00-Delivery-and-Input-Manifest.md",
+        "release": "market-participant",
+        "object_id": "METH-001",
+        "object_type": "manifest",
+        "label": "Researcher Operating Guide / CIOS Researcher pack",
+        "migration_timestamp": "2026-07-19T00:00:00Z",
+        "migration_version": "banking-research-migration-v0.1"
+      },
+      {
+        "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/01-Repository-Reconnaissance-Report.md",
+        "release": "market-participant",
+        "object_id": "METH-001",
+        "object_type": "research-document",
+        "label": "Researcher Operating Guide / CIOS Researcher pack",
+        "migration_timestamp": "2026-07-19T00:00:00Z",
+        "migration_version": "banking-research-migration-v0.1"
+      },
+      {
+        "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/14-Evidence-Source-Register.md",
+        "release": "market-participant",
+        "object_id": "METH-001",
+        "object_type": "evidence-register",
+        "label": "Researcher Operating Guide / CIOS Researcher pack",
+        "migration_timestamp": "2026-07-19T00:00:00Z",
+        "migration_version": "banking-research-migration-v0.1"
+      },
+      {
+        "source_document": "enterprise-knowledge/banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md",
+        "release": "reinvention",
+        "object_id": "METH-001",
+        "object_type": "hypothesis-register",
+        "label": "EGM-001 \u2014 Enterprise Growth Method",
+        "migration_timestamp": "2026-07-19T00:00:00Z",
+        "migration_version": "banking-research-migration-v0.1"
+      }
+    ],
+    "BRH-003": [
+      {
+        "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/09-Opportunity-to-Participant-Analysis.md",
+        "release": "market-participant",
+        "object_id": "BRH-003",
+        "object_type": "market-participant-intelligence",
+        "label": "Mixed physical and assisted access",
+        "migration_timestamp": "2026-07-19T00:00:00Z",
+        "migration_version": "banking-research-migration-v0.1"
+      },
+      {
+        "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/09-Opportunity-to-Participant-Analysis.md",
+        "release": "market-participant",
+        "object_id": "BRH-003",
+        "object_type": "market-participant-intelligence",
+        "label": "Mixed physical and assisted access",
+        "migration_timestamp": "2026-07-19T00:00:00Z",
+        "migration_version": "banking-research-migration-v0.1"
+      },
+      {
+        "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/09-Opportunity-to-Participant-Analysis.md",
+        "release": "market-participant",
+        "object_id": "BRH-003",
+        "object_type": "market-participant-intelligence",
+        "label": "Mixed physical and assisted access",
+        "migration_timestamp": "2026-07-19T00:00:00Z",
+        "migration_version": "banking-research-migration-v0.1"
+      }
+    ],
+    "BRH-004": [
+      {
+        "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/09-Opportunity-to-Participant-Analysis.md",
+        "release": "market-participant",
+        "object_id": "BRH-004",
+        "object_type": "market-participant-intelligence",
+        "label": "SME/commercial relationship-data platform",
+        "migration_timestamp": "2026-07-19T00:00:00Z",
+        "migration_version": "banking-research-migration-v0.1"
+      },
+      {
+        "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/09-Opportunity-to-Participant-Analysis.md",
+        "release": "market-participant",
+        "object_id": "BRH-004",
+        "object_type": "market-participant-intelligence",
+        "label": "SME/commercial relationship-data platform",
+        "migration_timestamp": "2026-07-19T00:00:00Z",
+        "migration_version": "banking-research-migration-v0.1"
+      }
+    ]
+  },
+  "duplicate_enterprise_definitions": [
+    "barclays",
+    "lloyds",
+    "monzo",
+    "nationwide",
+    "natwest",
+    "santander-uk",
+    "starling"
+  ],
+  "duplicate_commercial_positions": "No duplicate commercial-position IDs discovered in parsed governed rows; narrative overlap preserved for review.",
+  "duplicate_offers": "Offer duplicates are preserved by source document/row in canonical offer intelligence; no automatic merge performed.",
+  "duplicate_supplier_references": "Supplier name repeats are preserved by source document/row; no automatic merge performed.",
+  "duplicate_opportunities": "Opportunity narrative overlap detected between market-participant whitespace propositions and offer hypotheses; no automatic reconciliation performed.",
+  "conflicting_ids": [
+    "BRIEF-001",
+    "METH-001",
+    "BRH-003",
+    "BRH-004"
+  ],
+  "inconsistent_terminology": [
+    "Commercial Position package expected by commission maps to banking-reinvention-hypotheses-release.zip / reinvention hypothesis terminology in uploaded estate.",
+    "docs/research requested path differs by case from actual docs/Research path.",
+    "Provider offer, supplier footprint, offer fit, and reinvention offer hypothesis are distinct terms and are not collapsed."
+  ],
+  "conflicting_evidence": [
+    {
+      "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/13-Contradiction-Register.md",
+      "release": "market-participant",
+      "row": [
+        "Contradiction ID",
+        "Proposition in dispute",
+        "Supporting source A",
+        "Supporting source B",
+        "Likely explanation",
+        "Effect on confidence",
+        "Effect on opportunity interpretation",
+        "Resolution path"
+      ]
+    },
+    {
+      "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/13-Contradiction-Register.md",
+      "release": "market-participant",
+      "row": [
+        "BK-CON-001",
+        "Branches are a cost burden versus branches are trust/member-value infrastructure.",
+        "Lloyds/incumbent branch/access pressure; industry distribution pressure.",
+        "Nationwide branch/member-value evidence.",
+        "Participant type, ownership and value allocation differ.",
+        "High",
+        "Prevents generic branch strategy interpretation; same access change has different implications.",
+        "Participant-specific branch economics and customer outcome evidence."
+      ]
+    },
+    {
+      "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/13-Contradiction-Register.md",
+      "release": "market-participant",
+      "row": [
+        "BK-CON-002",
+        "High digital engagement proves primacy versus high digital engagement does not prove whole-base primacy.",
+        "Challenger active usage and digital engagement evidence.",
+        "Observation that primacy metrics lack salary-flow/direct-debit/all-customer proof.",
+        "Metric definitions and denominator differ.",
+        "High",
+        "Prevents overclaiming challenger displacement of incumbents.",
+        "Customer-flow and cohort-level account usage evidence."
+      ]
+    },
+    {
+      "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/13-Contradiction-Register.md",
+      "release": "market-participant",
+      "row": [
+        "BK-CON-003",
+        "Cloud enables resilience and speed versus cloud creates systemic concentration and exit risk.",
+        "Cloud/core migration and challenger low-legacy evidence.",
+        "Critical third-party and infrastructure dependency evidence.",
+        "Both are true at different control layers.",
+        "High",
+        "Requires opportunity interpretation to include controls, exit and dependency, not just migration acceleration.",
+        "Workload maps, exit plans and resilience tests."
+      ]
+    },
+    {
+      "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/13-Contradiction-Register.md",
+      "release": "market-participant",
+      "row": [
+        "BK-CON-004",
+        "AI productivity claims versus AI assurance/control burden.",
+        "Bank AI and colleague/customer augmentation evidence.",
+        "Observation that independent benefits are weak and review/assurance burden increases.",
+        "Claims often come from enterprise/supplier statements; control burden is regulatory/operational.",
+        "Medium/High",
+        "Prevents treating AI as a simple productivity opportunity.",
+        "Benefit baselines, outcome evidence, model governance evidence."
+      ]
+    },
+    {
+      "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/13-Contradiction-Register.md",
+      "release": "market-participant",
+      "row": [
+        "BK-CON-005",
+        "Santander global platform acceleration versus local UK ring-fenced accountability.",
+        "Santander group platform/ONE/Gravity/AI/TSB ambition evidence.",
+        "Santander UK local regulation, customer, mortgage/deposit and conduct accountability.",
+        "Dual-control model; not a true contradiction but a tension requiring governance separation.",
+        "High",
+        "Commercial route may sit at UK bank, group platform or integration boundary.",
+        "Decision-right and integration governance evidence."
+      ]
+    },
+    {
+      "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/13-Contradiction-Register.md",
+      "release": "market-participant",
+      "row": [
+        "BK-CON-006",
+        "Barclays can be represented by one Enterprise Twin versus Barclays needs additional candidate mechanisms.",
+        "Barclays universal group Twin can represent the whole enterprise.",
+        "Investment Bank dynamics require mechanisms beyond retail/commercial BM set.",
+        "Architecture can hold the enterprise, but mechanism catalogue may need extension.",
+        "High",
+        "Prevents using a retail-banking lens for universal-bank opportunity interpretation.",
+        "Mechanism acceptance and capital-markets deepening."
+      ]
+    },
+    {
+      "source_document": "banking-market-participant-intelligence-release/enterprise-knowledge/banking/market-participant/13-Contradiction-Register.md",
+      "release": "market-participant",
+      "row": [
+        "BK-CON-007",
+        "Bank-owned customer experience versus infrastructure-owned reachability and settlement.",
+        "Bank UX and fraud/account-state control evidence.",
+        "Payments Infrastructure Twin control-boundary evidence.",
+        "Customer sees bank, but many payment behaviours are rail/scheme/settlement dependent.",
+        "High",
+        "Prevents misattributing all payment opportunity or failure to the bank participant.",
+        "Participant-specific payment-incident and infrastructure transition evidence."
+      ]
+    },
+    {
+      "source_document": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/07-Contradiction-Register.md",
+      "release": "offer-supplier-intelligence",
+      "row": [
+        "Contradiction ID",
+        "Proposition in tension",
+        "Commercial consequence",
+        "Supporting / conflicting evidence",
+        "Treatment"
+      ]
+    },
+    {
+      "source_document": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/07-Contradiction-Register.md",
+      "release": "offer-supplier-intelligence",
+      "row": [
+        "BK-OSI-CON-001",
+        "Supplier partnership versus accessible whitespace",
+        "A participant can show strong offer fit while a major incumbent supplier already publicly occupies the same domain.",
+        "Offer fit may be real but commercially inaccessible without a complementary seam.",
+        "NatWest AWS/Accenture; Lloyds Google Cloud; Nationwide Accenture/Form3/Broadcom; Barclays Microsoft.",
+        "Do not convert fit into pursuit; preserve as Shape/Validate evidence need."
+      ]
+    },
+    {
+      "source_document": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/07-Contradiction-Register.md",
+      "release": "offer-supplier-intelligence",
+      "row": [
+        "BK-OSI-CON-002",
+        "Customer-facing AI momentum versus trust/control risk",
+        "Starling and Barclays show visible AI adoption, while Banking mechanisms preserve conduct, trust, operational resilience and fraud-control constraints.",
+        "Supports Secure AI Governance but weakens any generic autonomous-AI positioning.",
+        "WEB-012; WEB-013; BK-SRC-MECH; BK-SRC-OBS.",
+        "Offer must be governed and outcome-evidenced."
+      ]
+    },
+    {
+      "source_document": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/07-Contradiction-Register.md",
+      "release": "offer-supplier-intelligence",
+      "row": [
+        "BK-OSI-CON-003",
+        "Cloud modernisation as opportunity versus cloud concentration as risk",
+        "Cloud is an enabler for AI/data, but CTP designation turns cloud dependency into regulated resilience risk.",
+        "Hybrid Cloud and Cloud Modernisation fit must include resilience and exit optionality.",
+        "WEB-005; BK-SRC-INFRA; WEB-001; WEB-003; WEB-008.",
+        "Treat cloud offers as regulated operating model, not pure migration."
+      ]
+    },
+    {
+      "source_document": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/07-Contradiction-Register.md",
+      "release": "offer-supplier-intelligence",
+      "row": [
+        "BK-OSI-CON-004",
+        "Digital challenger fit versus in-house platform strength",
+        "Monzo and Starling fit data/AI themes, but their commercial position includes strong in-house digital/platform capability.",
+        "Generic transformation offers may be less suitable even when the mechanism is relevant.",
+        "BK-SRC-CP; WEB-009; WEB-011; WEB-012.",
+        "Use industry variant or specialist assurance/additive roles."
+      ]
+    },
+    {
+      "source_document": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/07-Contradiction-Register.md",
+      "release": "offer-supplier-intelligence",
+      "row": [
+        "BK-OSI-CON-005",
+        "Mutual access differentiation versus efficiency pressure",
+        "Nationwide\u2019s member/access posture supports Customer Operations Transformation but may resist branch-reduction framing.",
+        "Offer positioning must avoid incumbent cost-takeout assumptions.",
+        "BK-SRC-CP; BK-SRC-MPI; WEB-006; WEB-008.",
+        "Frame as member-value/service sustainability where evidence supports."
+      ]
+    },
+    {
+      "source_document": "banking-offer-supplier-intelligence-release/enterprise-knowledge/banking/offer-supplier-intelligence/07-Contradiction-Register.md",
+      "release": "offer-supplier-intelligence",
+      "row": [
+        "BK-OSI-CON-006",
+        "Supplier-authored evidence versus independent delivery proof",
+        "Several supplier-footprint sources are supplier-authored and may overstate benefits.",
+        "Confidence in relationship can be high while confidence in realised outcome remains medium or low.",
+        "WEB-004; WEB-007; WEB-008; WEB-011.",
+        "Separate relationship visibility from proof of benefit."
+      ]
+    }
+  ],
+  "broken_references": "Not all inherited IDs resolve inside the three uploaded packages; many intentionally reference pre-existing governed Banking assets."
+}
