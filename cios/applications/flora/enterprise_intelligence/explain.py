@@ -279,13 +279,37 @@ def validate_bounded_explanation(package: ContextPackage, explanation: BoundedEx
     observation_ids = {o.observation_id for o in package.observations}
     failures = []
     if explanation.context_package_hash != package.package_hash: failures.append("package hash mismatch")
-    prohibited = ("recommend pursuit", "with an opportunity score", "target executive", "enterprise-wide strategy")
-    material_text = " ".join([explanation.answer_scope] + [c.what_changed + " " + c.interpretation for c in explanation.changes]).lower()
-    for phrase in prohibited:
-        if phrase in material_text: failures.append(f"prohibited language: {phrase}")
+    prohibited_claim_rules = {
+        "prioritisation advice": ("prioritise ", "make this a priority", "highest priority"),
+        "best route language": ("best route", "best path", "optimal route"),
+        "benefit or opportunity assertion": ("opportunity to", "will benefit", "revenue upside", "margin upside"),
+        "implied sales pursuit": ("pursue ", "sales motion", "go after", "target account"),
+        "unsupported accountable-leader attribution": ("target executive", "accountable leader", "named sponsor", "ceo owns", "cfo owns"),
+        "broad strategic conclusion": ("enterprise-wide strategy", "proves lloyds strategy", "lloyds must"),
+        "confidence beyond evidence": ("certainly", "definitively", "proves causality", "high confidence"),
+        "scoring": ("with an opportunity score", "score of", "ranked #"),
+    }
+    material_text = " ".join(
+        [
+            explanation.answer_scope,
+            *explanation.why_evidence_belongs_together,
+            *explanation.confidence_limits,
+        ]
+        + [c.what_changed + " " + " ".join(c.fact_basis) + " " + c.interpretation + " " + " ".join(c.limits) for c in explanation.changes]
+    ).lower()
+    for rule_name, phrases in prohibited_claim_rules.items():
+        for phrase in phrases:
+            if phrase in material_text:
+                failures.append(f"prohibited language ({rule_name}): {phrase.strip()}")
     for change in explanation.changes:
+        if not change.evidence_ids: failures.append(f"missing evidence support: {change.change_id}")
         if not set(change.evidence_ids) <= evidence_ids: failures.append(f"unknown evidence reference: {change.change_id}")
         if not set(change.observation_ids) <= observation_ids: failures.append(f"unknown observation reference: {change.change_id}")
+        supported_refs = set(change.evidence_ids) | set(change.observation_ids)
+        if not supported_refs:
+            failures.append(f"no package support: {change.change_id}")
+        if change.confidence == "high":
+            failures.append(f"confidence beyond package support: {change.change_id}")
         if not change.limits: failures.append(f"missing limits: {change.change_id}")
     if not explanation.unknowns: failures.append("omitted Unknowns")
     if not explanation.contradictions_and_competing_interpretations: failures.append("omitted competing interpretations")
