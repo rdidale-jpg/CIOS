@@ -1,4 +1,4 @@
-# ADR-0XX — Flora as the Enterprise Intelligence Workspace
+# ADR-025 — Flora as the Enterprise Intelligence Workspace
 
 **Status:** Proposed  
 **Decision owner:** Rob / CIOS  
@@ -527,6 +527,6 @@ Accepted parent ADR
 
 **Accepted by:** Pending  
 **Acceptance date:** Pending  
-**Repository path:** `CIOS/architecture/ADR-0XX-Flora-as-the-Enterprise-Intelligence-Workspace.md`  
+**Repository path:** `CIOS/architecture/decisions/ADR-025-Flora-as-the-Enterprise-Intelligence-Workspace.md`  
 **Implementation status:** Not started  
 **Editorial reconciliation required:** Pending authoritative review  
