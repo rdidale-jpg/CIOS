@@ -1,0 +1,19 @@
+{
+  "identity": {
+    "object_id": "BK-ENT-001",
+    "object_type": "Enterprise Twin",
+    "schema_version": "0.1.0",
+    "source_asset_id": "BK-ENT-001",
+    "source_asset_version": "1.0",
+    "persistence_class": "read_projection",
+    "provenance_reference": "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+    "access_classification": "internal"
+  },
+  "display_name": "Lloyds Enterprise Twin",
+  "object_type": "Enterprise Twin",
+  "authority_status": "validated",
+  "persistence_class": "read_projection",
+  "provenance_summary": "Invalid: identity.authority_status omitted.",
+  "available_perspectives": [],
+  "available_universal_actions": []
+}

@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cios.local/schemas/flora-runtime/v0.1/contradiction-response-v0.1.schema.json",
+  "title": "Contradiction Response V0.1",
+  "identifier": "contradiction-response-v0.1",
+  "version": "0.1.0",
+  "description": "Governed contradictions without resolution or suppression.",
+  "type": "object",
+  "required": [
+    "contradiction_id",
+    "focus_object_id",
+    "conflicting_references",
+    "contradiction_statement",
+    "status",
+    "authority_status",
+    "provenance"
+  ],
+  "properties": {
+    "contradiction_id": {
+      "type": "string"
+    },
+    "focus_object_id": {
+      "type": "string"
+    },
+    "conflicting_references": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "$ref": "common-definitions.schema.json#/$defs/Ref"
+      }
+    },
+    "contradiction_statement": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "materiality": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "authority_status": {
+      "type": "string"
+    },
+    "lifecycle_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence_references": {
+      "type": "array",
+      "items": {
+        "$ref": "common-definitions.schema.json#/$defs/Ref"
+      }
+    },
+    "observation_references": {
+      "type": "array",
+      "items": {
+        "$ref": "common-definitions.schema.json#/$defs/Ref"
+      }
+    },
+    "provenance": {
+      "type": "string"
+    },
+    "human_review_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "resolution_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "contradiction_id": "BK-CON-001",
+      "focus_object_id": "BRH-003",
+      "conflicting_references": [
+        {
+          "id": "BK-OBS-014",
+          "type": "Observation",
+          "source_asset_id": "EK-BANK-RHYP-001"
+        },
+        {
+          "id": "BK-OBS-047",
+          "type": "Observation",
+          "source_asset_id": "EK-BANK-RHYP-001"
+        }
+      ],
+      "contradiction_statement": "Branch networks can be treated as cost pressure and as trust or assisted-access assets depending on participant type and context.",
+      "status": "open",
+      "materiality": "presentation constraint",
+      "authority_status": "candidate",
+      "lifecycle_status": "Open",
+      "evidence_references": [
+        {
+          "id": "SDOC-1AAA2EF8E20A",
+          "type": "Source",
+          "source_asset_id": "EK-BANK-RHYP-001"
+        }
+      ],
+      "observation_references": [
+        {
+          "id": "BK-OBS-014",
+          "type": "Observation",
+          "source_asset_id": "EK-BANK-RHYP-001"
+        },
+        {
+          "id": "BK-OBS-047",
+          "type": "Observation",
+          "source_asset_id": "EK-BANK-RHYP-001"
+        }
+      ],
+      "provenance": "docs/Semantic_Banking_Completion_Report.md",
+      "human_review_status": "not_reviewed_in_increment_1",
+      "resolution_history": []
+    }
+  ]
+}

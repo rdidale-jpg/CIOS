@@ -23,6 +23,9 @@ This index is the authoritative catalogue for controlled CIOS Knowledge Library 
 | Founder Knowledge README | Founder Knowledge | Review | 1.0 | `knowledge/founder/README.md` |
 | FDK-001 | Founder Knowledge Register | Review | 1.0 | `knowledge/founder/FDK-001-Founder-Knowledge-Register.md` |
 | EGM-001 | Enterprise Growth Method | Review | 1.0 Founder Review Draft | `knowledge/founder/recovered-methods/EGM-001-Enterprise-Growth-Method.md` |
+| FLORA-RT-I1-SPEC-001 | Increment 1 Read Interface and Identity Specification | Proposed Specification for Increment 1 | 0.1.0 | `Increment-1-Read-Interface-and-Identity-Specification.md` |
+| FLORA-RT-I1-IDR-001 | Increment 1 Identity Resolution Report | Proposed | 0.1.0 | `Increment-1-Identity-Resolution-Report.md` |
+| FLORA-RT-I1-TRACE-001 | Increment 1 Contract Traceability Matrix | Proposed | 0.1.0 | `Increment-1-Contract-Traceability-Matrix.md` |
 
 | CIOS-CBOK-001 | CBOK Authoring System | Draft | 0.1.0 | `docs/CBOK/README.md` |
 | CIOS-CBOK-GUIDE-001 | CBOK Authoring Guide | Draft | 0.1.0 | `docs/CBOK/AUTHORING_GUIDE.md` |

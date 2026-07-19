@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cios.local/schemas/flora-runtime/v0.1/lineage-response-v0.1.schema.json",
+  "title": "Lineage Response V0.1",
+  "identifier": "lineage-response-v0.1",
+  "version": "0.1.0",
+  "description": "Inspectable lineage back to governed source.",
+  "type": "object",
+  "required": [
+    "requested_object_id",
+    "lineage_nodes",
+    "lineage_edges",
+    "completeness_status"
+  ],
+  "properties": {
+    "requested_object_id": {
+      "type": "string"
+    },
+    "lineage_nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "node_id",
+          "node_type"
+        ],
+        "properties": {
+          "node_id": {
+            "type": "string"
+          },
+          "node_type": {
+            "enum": [
+              "source",
+              "evidence",
+              "observation",
+              "governed_object",
+              "relationship",
+              "projection"
+            ]
+          },
+          "source_asset_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "authority_status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lifecycle_status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valid_from": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valid_to": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "provenance_reference": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "lineage_edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "from",
+          "to",
+          "edge_type"
+        ],
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "edge_type": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "unavailable_segments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "access_redacted_segments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "completeness_status": {
+      "enum": [
+        "complete",
+        "partial",
+        "access_redacted",
+        "safe_unavailable"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "requested_object_id": "BRH-003",
+      "lineage_nodes": [
+        {
+          "node_id": "SRC-zip-market-participant",
+          "node_type": "source",
+          "source_asset_id": "docs/Research/banking-market-participant-intelligence-release.zip",
+          "authority_status": "candidate",
+          "lifecycle_status": "archived",
+          "version": "sha256:849899f9a266e1b7f4dd32a53f40a49ed2739890c03df74fcc79e8f7d5b9143f",
+          "valid_from": null,
+          "valid_to": null,
+          "provenance_reference": "docs/Research/banking-market-participant-intelligence-release.zip"
+        },
+        {
+          "node_id": "EVD-SDOC-1AAA2EF8E20A",
+          "node_type": "evidence",
+          "source_asset_id": "SDOC-1AAA2EF8E20A",
+          "authority_status": "candidate",
+          "lifecycle_status": "lineage_verified",
+          "version": "sha256:4722d93123498f79a8461b426ac614cefa7d6b4d08305f28a0264d021bade71d",
+          "valid_from": null,
+          "valid_to": null,
+          "provenance_reference": "banking-market-participant-intelligence-release/.../09-Opportunity-to-Participant-Analysis.md"
+        },
+        {
+          "node_id": "BK-OBS-014",
+          "node_type": "observation",
+          "source_asset_id": "EK-BANK-RHYP-001",
+          "authority_status": "candidate",
+          "lifecycle_status": "accepted_for_runtime_display",
+          "version": "0.1",
+          "valid_from": null,
+          "valid_to": null,
+          "provenance_reference": "BRH-003 observation set"
+        },
+        {
+          "node_id": "BRH-003",
+          "node_type": "governed_object",
+          "source_asset_id": "EK-BANK-RHYP-001",
+          "authority_status": "candidate",
+          "lifecycle_status": "Candidate",
+          "version": "0.1",
+          "valid_from": null,
+          "valid_to": null,
+          "provenance_reference": "enterprise-knowledge/banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md"
+        },
+        {
+          "node_id": "proj-BRH-003-v0.1",
+          "node_type": "projection",
+          "source_asset_id": "EK-BANK-RHYP-001",
+          "authority_status": "candidate",
+          "lifecycle_status": "read_projection",
+          "version": "0.1.0",
+          "valid_from": null,
+          "valid_to": null,
+          "provenance_reference": "FocusObjectProjectionV0_1"
+        }
+      ],
+      "lineage_edges": [
+        {
+          "from": "SRC-zip-market-participant",
+          "to": "EVD-SDOC-1AAA2EF8E20A",
+          "edge_type": "contains"
+        },
+        {
+          "from": "EVD-SDOC-1AAA2EF8E20A",
+          "to": "BK-OBS-014",
+          "edge_type": "supports_observation"
+        },
+        {
+          "from": "BK-OBS-014",
+          "to": "BRH-003",
+          "edge_type": "informs"
+        },
+        {
+          "from": "BRH-003",
+          "to": "proj-BRH-003-v0.1",
+          "edge_type": "projected_as"
+        }
+      ],
+      "unavailable_segments": [],
+      "access_redacted_segments": [],
+      "completeness_status": "complete"
+    }
+  ]
+}

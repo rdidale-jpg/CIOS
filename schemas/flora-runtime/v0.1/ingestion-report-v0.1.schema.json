@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cios.local/schemas/flora-runtime/v0.1/ingestion-report-v0.1.schema.json",
+  "title": "Ingestion Report V0.1",
+  "identifier": "ingestion-report-v0.1",
+  "version": "0.1.0",
+  "description": "Outcome of reading and projecting governed assets.",
+  "type": "object",
+  "required": [
+    "ingestion_run_id",
+    "source_asset",
+    "source_asset_version",
+    "started_at",
+    "completed_at",
+    "schema_version",
+    "object_count",
+    "relationship_count",
+    "evidence_count",
+    "observation_count",
+    "unknown_count",
+    "contradiction_count",
+    "accepted_count",
+    "rejected_count",
+    "unresolved_identity_count",
+    "collision_count",
+    "warning_count",
+    "resulting_projection_version"
+  ],
+  "properties": {
+    "ingestion_run_id": {
+      "type": "string"
+    },
+    "source_asset": {
+      "type": "string"
+    },
+    "source_asset_version": {
+      "type": "string"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "object_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "relationship_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "evidence_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "observation_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "unknown_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "contradiction_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "accepted_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "rejected_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "unresolved_identity_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "collision_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "warning_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "validation_failures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "safe_unavailable_causes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "resulting_projection_version": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "ingestion_run_id": "ing-synthetic-001",
+      "source_asset": "enterprise-knowledge/banking/MANIFEST.yaml",
+      "source_asset_version": "1.0",
+      "started_at": "2026-07-19T00:00:00Z",
+      "completed_at": "2026-07-19T00:00:02Z",
+      "schema_version": "0.1.0",
+      "object_count": 17,
+      "relationship_count": 9,
+      "evidence_count": 3,
+      "observation_count": 5,
+      "unknown_count": 1,
+      "contradiction_count": 1,
+      "accepted_count": 17,
+      "rejected_count": 0,
+      "unresolved_identity_count": 0,
+      "collision_count": 0,
+      "warning_count": 1,
+      "validation_failures": [],
+      "safe_unavailable_causes": [],
+      "resulting_projection_version": "0.1.0"
+    }
+  ]
+}

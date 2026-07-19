@@ -1,0 +1,71 @@
+{
+  "identity": {
+    "object_id": "BK-ENT-001",
+    "object_type": "Enterprise Twin",
+    "schema_version": "0.1.0",
+    "source_asset_id": "BK-ENT-001",
+    "source_asset_version": "1.0",
+    "canonical_owner": "TBD",
+    "authority_status": "validated",
+    "lifecycle_status": "Validated",
+    "persistence_class": "read_projection",
+    "enterprise_id": "lloyds",
+    "created_at": null,
+    "updated_at": null,
+    "valid_from": null,
+    "valid_to": null,
+    "freshness_status": "unknown",
+    "human_supplied": false,
+    "provenance_reference": "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md",
+    "access_classification": "internal"
+  },
+  "display_name": "Lloyds Enterprise Twin",
+  "object_type": "Enterprise Twin",
+  "short_description": "Governed UK Banking enterprise twin projection for Lloyds.",
+  "enterprise_context": {
+    "domain": "Banking",
+    "country": "UK"
+  },
+  "authority_status": "validated",
+  "lifecycle_status": "Validated",
+  "freshness_status": "unknown",
+  "provenance_summary": "Manifest asset BK-ENT-001 version 1.0; owner is TBD in governed corpus.",
+  "available_perspectives": [
+    "overview",
+    "relationships",
+    "lineage"
+  ],
+  "available_universal_actions": [
+    "inspect_lineage",
+    "view_relationships",
+    "view_evidence_observation_availability",
+    "view_unknowns",
+    "view_contradictions",
+    "open_source_asset"
+  ],
+  "relationship_availability": {
+    "count": 1,
+    "has_unresolved": false
+  },
+  "evidence_availability": {
+    "available": true,
+    "count": 3
+  },
+  "observation_availability": {
+    "available": true,
+    "count": 2
+  },
+  "unknown_availability": {
+    "available": true,
+    "count": 1
+  },
+  "contradiction_availability": {
+    "available": true,
+    "count": 1
+  },
+  "lineage_availability": {
+    "status": "partial"
+  },
+  "safe_unavailable_notices": [],
+  "persistence_class": "read_projection"
+}
