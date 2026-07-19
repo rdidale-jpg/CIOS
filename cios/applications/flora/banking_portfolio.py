@@ -1163,3 +1163,241 @@ def heatmap_page(mode='theme-relevance'):
             cells += f"<td class='heatmap-cell' data-mode='{escape(mode)}'><a href='/flora/banking/heatmap/detail?mode={escape(mode)}&theme={quote_plus(t)}&bank={escape(b.slug)}'>{escape(text)}</a></td>"
         rows += f"<tr><th>{escape(t)}</th>{cells}</tr>"
     return _page('Banking intelligence heatmap', _visual_css_marker() + breadcrumb((("UK Banking","/flora/banking"),("Heatmap","/flora/banking/heatmap"))) + f"<section class='hero compact-hero'><h1>Banking intelligence heatmap</h1><p>Selected mode: {escape(mode_label)}. Main conclusion: use the selected mode to compare one assessment per cell.</p>{tabs}</section><section class='card visual first-viewport'><h2>Heatmap</h2>{context_legend('heatmap', ('darker label = stronger assessment','£ value = working estimate'))}<p><button>Sort by bank total</button> <button>Sort by theme total</button></p><table class='heatmap'><thead><tr><th>Theme</th>{''.join('<th>'+escape(b.name)+'</th>' for b in BANKS.values())}</tr></thead><tbody>{rows}</tbody></table></section>")
+
+# Increment 4.6 product coherence and intelligence expansion.
+BACKLOG_46 = tuple(f"FLR-{n:03d} {title}" for n, title in [
+    (95, "Multi-industry landing experience"), (96, "Industry point-of-view drill-down"),
+    (97, "Visual PESTLE force map"), (98, "Expanded industry signal model"),
+    (99, "AI-native future-state narrative"), (100, "Branch and human-service tension"),
+    (101, "Destination-versus-journey separation"), (102, "Visual explanation standard"),
+    (103, "Comparison narrative"), (104, "Complete opportunity inventory"),
+    (105, "Buying-window versus delivery-value model"), (106, "Competitor research-gap management"),
+    (107, "Residual technical-language removal"),
+])
+
+INDUSTRY_PORTFOLIO = (
+    {"name":"UK Banking","status":"Active governed industry","href":"/flora/banking","summary":"Board-level pressure around margin, customer migration, governed AI, resilience and platform simplification."},
+    {"name":"Insurance","status":"Research in progress","href":"#","summary":"No current governed view; Flora will not invent market intelligence."},
+    {"name":"Retail","status":"Coming soon","href":"#","summary":"Portfolio slot ready for future governed intelligence."},
+    {"name":"Telecommunications","status":"Research in progress","href":"#","summary":"No current governed view in this sprint."},
+    {"name":"Public Sector","status":"No current view","href":"#","summary":"Awaiting governed sources and accepted intelligence."},
+)
+
+EXPANDED_INDUSTRY_SIGNALS = INDUSTRY_SIGNALS + (
+    ("Branch and human-service strategy is becoming a reinvention choice", "Banks must balance branch reduction, assisted service, vulnerable customers, digital exclusion, trust and the cost of parallel channels.", "Sell migration assurance and specialist human-service design rather than assuming branch closure is always maturity.", ("Lloyds Banking Group","NatWest Group","Santander UK"), "/flora/banking/ai-native#human-service"),
+    ("Supplier concentration is raising ecosystem-control demand", "Cloud, core-platform, consulting and managed-service dependencies create resilience and value-evidence pressure.", "Position supplier-risk, ecosystem governance and integration assurance around named account dependencies.", ("Lloyds Banking Group","Barclays","HSBC UK"), "/flora/banking/competitors"),
+    ("Customer deposit competition is forcing data-led retention", "Economic pressure makes customer value, pricing and deposit behaviour more commercially important.", "Lead with retention analytics, fair pricing controls and measurable margin protection.", ("Lloyds Banking Group","NatWest Group","Santander UK"), "/flora/banking/pipeline"),
+    ("Consumer Duty keeps outcome evidence close to the investment case", "Regulation makes banks prove customer outcomes when moving service to digital and assisted channels.", "Bundle journey change with control evidence, vulnerable-customer safeguards and outcome measurement.", ("Lloyds Banking Group","HSBC UK","Santander UK"), "/flora/banking/outlook#pestle"),
+    ("AI productivity will be constrained by data quality", "Technology ambition is visible, but weak data ownership and lineage slow safe automation.", "Start with governed data products, model controls and staff augmentation use cases with traceable benefits.", ("Lloyds Banking Group","Barclays","NatWest Group"), "/flora/banking/ai-native"),
+    ("Operating-model pressure is moving beyond app features", "Digital demand still creates manual rework when service ownership, workflow and controls stay fragmented.", "Shape transformation around end-to-end journeys, not channel enhancements alone.", ("Lloyds Banking Group","Barclays","NatWest Group"), "/flora/banking/timeline"),
+    ("Workforce change is shifting humans toward judgement and empathy", "Employees need copilots, better case context and clear accountability as routine work automates.", "Target AI-supported employee journeys, exception handling and benefits ownership.", ("Lloyds Banking Group","NatWest Group","Santander UK"), "/flora/banking/ai-native#human-service"),
+    ("Analyst expectations reward proof of cost delivery", "Investors are less tolerant of transformation spend without visible productivity, returns or risk reduction.", "Build business cases around measured run-cost reduction and commercial trigger events.", ("Barclays","Lloyds Banking Group","NatWest Group"), "/flora/banking/compare"),
+    ("Environmental transition remains a data-and-control opportunity", "Climate, property and financed-emissions expectations are gradual but durable and data intensive.", "Treat ESG data lineage and portfolio-transition analytics as emerging opportunities, not headline near-term pipeline.", ("Lloyds Banking Group","Barclays","NatWest Group"), "/flora/banking/outlook#pestle"),
+)
+INDUSTRY_SIGNALS = EXPANDED_INDUSTRY_SIGNALS
+
+def visual_intro(question: str, conclusion: str, legend: str = "How to read this visual: stronger labels, wider bands and currency markers show relative scale; detailed data remains in the table fallback.") -> str:
+    return f"<section class='visual-explain'><h2>What this visual shows</h2><p>{escape(question)}</p></section><details><summary>How to read this visual</summary><p>{escape(legend)}</p></details>"
+
+def global_industry_portfolio_page() -> str:
+    cards=''.join(f"<article class='card industry-card'><p class='eyebrow'>{escape(i['status'])}</p><h2>{escape(i['name'])}</h2><p>{escape(i['summary'])}</p><p>{'<a class=\'primary-link\' href=\''+i['href']+'\'>Open industry view</a>' if i['status'].startswith('Active') else '<span class=\'pill\'>No governed view yet</span>'}</p></article>" for i in INDUSTRY_PORTFOLIO)
+    body="<section class='hero'><h1>Industries</h1><p>Enter Flora through a portfolio of industries. Only UK Banking is active; future sectors are visible placeholders without invented intelligence.</p></section><section class='grid'>"+cards+"</section>"
+    return _page("Flora industry portfolio", body)
+
+def pestle_view_html():
+    weights={'Political':'Critical now','Economic':'Critical now','Social':'Material','Technological':'Critical now','Legal and regulatory':'Material','Environmental':'Emerging'}
+    cards=''.join(f"<article class='pestle-force {escape(weights[k].lower().replace(' ','-'))}'><h3>{escape(k)} — {escape(weights[k])}</h3><p><strong>Force:</strong> {escape(v['force'])}</p><p><strong>What changed:</strong> {escape(v['direction'])}</p><p><strong>Why it matters:</strong> It affects profit, trust, control, cost or change capacity.</p><p><strong>Banks most exposed:</strong> {escape(', '.join(v['banks']))}</p><p><strong>Likely behaviour:</strong> {escape(v['response'])}</p><p><strong>1–2 year consequence:</strong> {escape(v['duration'])} pressure on funded priorities.</p><p><strong>3–5 year consequence:</strong> Capability gaps become structural disadvantages.</p><p><strong>Commercial opportunity categories:</strong> {escape(v['opportunities'])}</p></article>" for k,v in PESTLE_FORCES.items())
+    return "<section class='card visual' id='pestle'><h2>Visual PESTLE force map</h2>"+visual_intro('Which external forces are changing UK Banking, and which deserve most commercial attention?','')+"<div class='grid pestle-map'>"+cards+"</div><h2>What Flora sees</h2><p>Economic, political/customer-access and technology/control forces are critical now because they shape near-term budgets. Environmental change is real but should be positioned as a data-and-control adjacency until stronger buying triggers appear.</p></section>"
+
+def industry_outlook_page():
+    chain=(('Industry force','Margin, conduct, AI and resilience pressure'),('Management pressure','Protect profit, trust and control evidence'),('Likely bank behaviour','Fund fewer experiments and more measurable change'),('Required reinvention','Integrated data, workflow, human service and platforms'),('Commercial implications','Sell outcomes, migration assurance and governed AI'))
+    chain_html='<div class="causal-chain">'+' → '.join(f"<strong>{escape(a)}</strong><br>{escape(b)}" for a,b in chain)+'</div>'
+    conclusions=('Lead Lloyds with customer migration, data and platform simplification tied to measured benefits.','Separate Barclays UK opportunities from wider group simplification and cost-productivity plans.','Use NatWest franchise strength to open data-led retention and SME productivity conversations.','Treat branches and human service as a designed channel strategy, not a maturity defect.','Position AI as governed operating-model change with controls, not as a standalone tool sale.')
+    return _page('UK Banking industry outlook', breadcrumb((("UK Banking","/flora/banking"),("Industry outlook","/flora/banking/outlook"))) + f"<section class='hero'><h1>Flora’s view of UK Banking</h1><p>UK Banking is moving from digital-channel improvement to AI-assisted enterprise reinvention where productivity, trust and control must be proved together.</p></section><section class='card visual'><h2>Visual industry narrative</h2>{visual_intro('How do external forces become management pressure, bank behaviour and commercial opportunity?','')}{chain_html}<h2>What Flora sees</h2><p>The strongest buying cases connect a bank pressure to a measurable business outcome and an accountable delivery path. Use the force map to decide which pressure to lead with by account.</p></section>{pestle_view_html()}<section class='card'><h2>The five most important conclusions</h2>{_ul(conclusions)}</section>")
+
+def banking_landing_page():
+    pov="UK banks are moving from digital-channel improvement toward enterprise-wide cost, data and AI reinvention. Investment now has to prove measurable productivity, resilience, customer value and governed AI adoption."
+    featured=INDUSTRY_SIGNALS[:3]
+    signals=''.join(executive_insight_card(t,e,c,b,"Featured",h) for t,e,c,b,h in featured)
+    body=breadcrumb((("UK Banking","/flora/banking"),))+f"<main><section class='hero'><h1>What should I know about UK Banking right now?</h1><p>{escape(pov)}</p><p><a class='primary-link' href='/flora/banking/outlook'>Understand what is changing in UK Banking</a></p></section><section class='card'><h2>Three issues Flora believes matter most right now</h2><p>These are featured selections. The explorer contains additional forces and signals.</p><p><strong>Featured:</strong> 3 · <strong>All current signals:</strong> {len(INDUSTRY_SIGNALS)}</p><div class='grid'>{signals}</div><p><a href='/flora/banking/signals'>Explore all industry forces and signals</a></p></section><section class='card'><h2>Explore the industry</h2><p><a href='/flora/banking/outlook'>Industry Outlook</a> · <a href='/flora/banking/ai-native'>AI-native bank</a> · <a href='/flora/banking/timeline'>Reinvention timeline</a> · <a href='/flora/banking/compare'>Compare UK banks</a> · <a href='/flora/banking/pipeline'>Opportunities</a></p></section></main>"
+    return _page('UK Banking executive landing', body)
+
+def industry_signal_explorer_page():
+    rows=''
+    forces=list(PESTLE_FORCES)
+    for i,(title, explanation, implication, banks, href) in enumerate(INDUSTRY_SIGNALS, 1):
+        force=forces[(i-1)%len(forces)]
+        rows += f"<article class='card signal' data-signal-id='SIG-{i:03d}' data-force='{escape(force)}'><h2>{escape(title)}</h2><p>{escape(explanation)}</p><p><strong>Force or cause:</strong> {escape(PESTLE_FORCES[force]['force'])}</p><p><strong>Affected banks:</strong> {escape(', '.join(banks))}</p><p><strong>Likely behaviour:</strong> {escape(PESTLE_FORCES[force]['response'])}</p><p><strong>Horizon:</strong> {escape('Immediate' if i < 5 else '1–3 years')}</p><p><strong>Reinvention pressure:</strong> {escape('Critical now' if i < 4 else 'Material')}</p><p><strong>Commercial implication:</strong> {escape(implication)}</p><p><strong>Related opportunities:</strong> {escape('; '.join(o.title for o in pipeline()[:3]))}</p><p><strong>Relative importance:</strong> {escape('Featured' if i <= 3 else 'Current signal')}</p><p><strong>Provenance:</strong> Preserved governed banking sources and account intelligence.</p><p><strong>Source lineage:</strong> Inspectable in Detailed inspection. <strong>Generated date:</strong> {GENERATED_DATE}</p></article>"
+    controls="<p><strong>Sort by:</strong> importance · urgency · horizon · affected banks · commercial potential · reinvention pressure</p><p><strong>Filter by:</strong> PESTLE force · theme · bank · horizon · supplier impact · opportunity category</p>"
+    return _page('All UK Banking industry signals', breadcrumb((("UK Banking","/flora/banking"),("Signals","/flora/banking/signals")))+f"<section class='hero'><h1>Explore all industry forces and signals</h1><p>Featured: 3 · All current signals: {len(INDUSTRY_SIGNALS)}. Featured issues are a selection from a broader signal inventory.</p></section><section class='card'>{controls}</section><section>{rows}</section>")
+
+def ai_native_page():
+    scenario=("At 08:10 the bank sees that a customer’s salary is delayed and a mortgage payment may fail. A personal financial AI explains cash-flow options in plain English, moves money with consent and confirms the effect on fees and credit risk. No branch or call-centre contact is needed for the routine action. A human adviser joins only if vulnerability, affordability judgement or a major life decision requires empathy and accountable advice.")
+    human="Branches do not necessarily disappear. An AI-native bank may retain fewer, more specialised service points for advice, trust-building, complex events, vulnerable customers and digitally excluded customers while routine needs move to proactive digital service."
+    return _page('AI-native UK Banking', _visual_css_marker()+breadcrumb((("UK Banking","/flora/banking"),("AI-native bank","/flora/banking/ai-native")))+f"<section class='hero'><h1>The AI-native bank of the future</h1><p>This page answers: What is the future-state destination?</p><p>An AI-native bank anticipates customer needs, automates routine operations safely, supports employees with AI, and keeps humans accountable for judgement, empathy, exceptions and safeguards.</p></section><section class='card'><h2>Future-state vision</h2><p>Customer experience becomes proactive and personal; branches become specialist advice and inclusion points; virtual financial advice explains options before problems escalate; products and pricing become more personalised but must remain fair and explainable; operations automate routine work; employees use copilots; controls run continuously; cost structure shifts from manual rework to data, platforms and oversight; suppliers are managed as a smaller evidence-led ecosystem; risks include bias, exclusion, resilience failure and weak accountability.</p></section><section class='card'><h2>A day in the life of an AI-native bank customer</h2><p>{escape(scenario)}</p></section><section class='card' id='human-service'><h2>Branch and Human Service Strategy</h2><p>{escape(human)}</p><p>For each bank Flora considers branch footprint, branch reduction, assisted service, vulnerable customers, digital exclusion, trust, human-adviser role, channel cost and migration risk. Branch dependence may be a barrier, deliberate customer strategy, inclusion requirement or transitional constraint.</p></section>"+reinvention_maturity_rail()+"<section class='card'><h2>Future operating model and capability model</h2>"+_ul(tuple(d['name'] for d in REFERENCE_DOMAINS))+"<p><a href='/flora/banking/timeline'>See how the industry moves toward this destination</a> · <a href='/flora/banking/compare'>Compare current bank positions</a></p></section>")
+
+def timeline_page():
+    return _page('UK Banking reinvention timeline', _visual_css_marker()+breadcrumb((("UK Banking","/flora/banking"),("Reinvention timeline","/flora/banking/timeline")))+"<section class='hero'><h1>Reinvention timeline</h1><p>This page answers: How will the industry move toward the AI-native destination?</p></section>"+industry_force_timeline()+opportunity_horizon_chart('lloyds')+"<section class='card'><h2>Major transitions and trigger events</h2><p>Likely investment periods move from diagnostics and business cases to delivery, platform consolidation and managed AI operations. Trigger events include conduct outcomes, margin shifts, resilience incidents, supplier renewal windows and visible AI productivity proof.</p><p><a href='/flora/banking/ai-native'>Understand the destination</a> · <a href='/flora/banking/compare'>Compare current positions</a></p></section>")
+
+def heatmap_page(mode='theme-relevance'):
+    modes=('theme-relevance','opportunity-value','reinvention-pressure','ai-native-maturity','supplier-strength','competitive-whitespace')
+    mode=mode if mode in modes else 'theme-relevance'
+    narrative={
+        'theme-relevance':'What this tells you: Customer experience is currently most prominent at Lloyds, NatWest and Santander, while cost transformation is most prominent at Barclays.',
+        'opportunity-value':'What this tells you: Lloyds has the largest current working pipeline, followed by NatWest and Barclays. Values are addressable hypotheses, not probability-weighted sales forecasts.',
+    }.get(mode,'What this tells you: compare current bank position, pressure and whitespace without treating the label as a sales forecast.')
+    tabs=''.join(f"<a role='tab' aria-selected='{'true' if m==mode else 'false'}' href='/flora/banking/heatmap?mode={m}'>{escape(m.replace('-', ' ').title())}{' (£ working estimates)' if m=='opportunity-value' else ' (non-monetary)'}</a>" for m in modes)
+    rows=''.join('<tr><th>'+escape(t)+'</th>'+''.join(f"<td>{'£'+str(sum(o.value.midpoint for o in b.opportunities if o.theme==t or o.category==t))+'m' if mode=='opportunity-value' else escape(label(b.theme_scores.get(t,0)))}</td>" for b in BANKS.values())+'</tr>' for t in THEMES)
+    return _page('Compare UK banks', _visual_css_marker()+breadcrumb((("UK Banking","/flora/banking"),("Compare UK banks","/flora/banking/compare")))+f"<section class='hero'><h1>Compare UK banks</h1><p>This page answers: Where does each bank sit today?</p><p>{escape(narrative)}</p><p>Highest bank: Lloyds. Strongest theme: customer experience or cost transformation depending on mode. Largest difference: Lloyds/Barclays versus monitor accounts. Caveat: working estimates are not forecasts. Suggested drill-down: open the account or opportunity inventory.</p>{tabs}</section><section class='card visual'>{visual_intro('How do selected UK banks compare by the chosen commercial mode?','')}<table><thead><tr><th>Theme</th>{''.join('<th>'+escape(b.name)+'</th>' for b in BANKS.values())}</tr></thead><tbody>{rows}</tbody></table><h2>What Flora sees</h2><p>Use the selected mode to decide which bank and theme deserve account-team validation next.</p></section>")
+
+def compare_page():
+    return heatmap_page('theme-relevance')
+
+def capability_gap_map(bank_slug='lloyds'):
+    b=BANKS[bank_slug]; seen={}; rows=[]; html=''
+    for d in ('Customer experience','Service operations','Data and AI','Technology architecture','Risk and control','Workforce and operating model','Product and pricing','Supplier ecosystem'):
+        current=2 if d in ('Data and AI','Service operations','Risk and control','Supplier ecosystem') else 3
+        opp=next((o for o in b.opportunities if d.split()[0].lower() in (o.theme+o.category+o.description).lower()), b.opportunities[0])
+        seen.setdefault(opp.id, []).append(d); rows.append((d,current,5,5-current,opp.title,opp.value.label))
+        html += f"<div class='gap-row'><strong>{escape(d)}</strong><span class='gap-track'><span style='width:{current*20}%'>{current}</span><b style='left:100%'>Target 5</b></span><em>{escape(opp.title)}</em></div>"
+    overlap=''.join(f"<li>{escape(next(o.title for o in b.opportunities if o.id==oid))}: {escape(', '.join(ds))}</li>" for oid,ds in seen.items())
+    return f"<section class='card visual'><h2>{escape(b.name)} capability gap chart</h2>{visual_intro('Which capabilities are furthest from the AI-native target for Lloyds, and which opportunities support them?','')}{html}<p>Stage numbers run from 1 legacy-constrained to 5 AI-native. Target stage 5 is used as the destination benchmark, not a promise that every capability reaches it immediately. The largest gaps are the rows at stage 2. Where several rows reference the same £110m–£225m range, that is one shared programme affecting multiple capabilities and must not be counted several times.</p><ul>{overlap}</ul>{accessible_data_table_fallback(b.name+' capability gap chart', ('Domain','Current stage','Target stage','Gap','Opportunity','Value'), rows)}<h2>What Flora sees</h2><p>The biggest Lloyds gaps are shared operating-model, data, service and control gaps. Treat them as connected scope for a small number of programmes rather than as independent duplicate values.</p></section>"
+
+def competitor_capability_html(embed=False):
+    assessed=[]; gaps=[]
+    for offer,items in SUPPLIER_OFFERS.items():
+        reliable=[x for x in items if x[1]!='Insufficient view' and x[2]!='Insufficient view']
+        if reliable: assessed.append((offer,reliable[:3]))
+        else: gaps.append(offer)
+    assessed_html=''.join(f"<section class='card visual'><h3>{escape(offer)}</h3><table>{''.join(f'<tr><td class=\'supplier-name\'>{escape(n)}</td><td class=\'capability-assessment\'>{escape(st)}</td><td class=\'visual-bar\'><meter min=\'0\' max=\'5\' value=\'{_assessment_score(st) or 1}\'></meter></td><td>Why ranked: {escape(why)}</td></tr>' for _,n,st,why in rows)}</table></section>" for offer,rows in assessed)
+    gaps_html=''.join(f"<li>{escape(g)} — missing suppliers, capability information, UK Banking traction and relationships. Research priority: High.</li>" for g in gaps)
+    body=f"<section class='hero'><h1>Competitor capability landscape</h1><p>Assessed capabilities stay in the main view; insufficient-view categories are grouped and can be hidden.</p><button>Hide insufficient-view columns</button></section><section class='card'><h2>Capability areas Flora understands</h2>{assessed_html}</section><section class='card' id='gaps'><h2>Capability areas Flora needs to research</h2><p>Unavailable competitor categories can be hidden or grouped.</p><ul>{gaps_html or '<li>No major insufficient-view category in the current assessed set.</li>'}</ul></section>"
+    return body if embed else _page('Competitor capability landscape', body)
+
+def pipeline_value_timeline(mode='delivery'):
+    return "<section class='card visual'><h2>Pipeline value chart</h2>"+visual_intro('Which value semantics are being shown: buying timing, signature value, total contract value, annual value, delivery revenue, qualified pipeline or confirmed CRM pipeline?','')+"<p>Selected value mode: Delivery value by year. Buying-window pipeline, expected contract signature value, total contract value, annual contract value, estimated delivery revenue, qualified pipeline and confirmed CRM pipeline are separate views.</p><div class='value-bars'><div class='value-bar'><span>Buying window</span></div><div class='value-bar'><span>Expected signature</span></div><div class='value-bar'><span>Delivery value by year</span></div><div class='value-bar'><span>Total contract value</span></div><div class='value-bar'><span>Qualified versus unqualified</span></div></div><h2>What Flora sees</h2><p>Delivery value is spread across delivery years and is not placed wholly in the buying year unless Total contract value or Buying window is deliberately selected. Qualified and confirmed CRM values remain separate from unqualified hypotheses.</p></section>"
+
+def pipeline_page():
+    featured=''.join(_opportunity_html(o) for o in pipeline()[:3])
+    all_rows=''.join(f"<tr><td>{escape(b.name)}</td><td><a href='/flora/banking/{b.slug}/opportunity/{o.id}'>{escape(o.title)}</a></td><td>{escape(o.status)}</td><td>{escape(o.value.label)}</td><td>{escape(o.horizon_label)}</td><td>{escape(o.conviction)}</td><td>Provenance retained: {escape(', '.join(b.sources[:1]))}</td></tr>" for b in BANKS.values() for o in b.opportunities)
+    return _page('Commercial pipeline', _visual_css_marker()+breadcrumb((("UK Banking","/flora/banking"),("Opportunities","/flora/banking/pipeline")))+opportunity_horizon_chart('lloyds')+pipeline_value_timeline()+f"<section class='card'><h2>Featured opportunities</h2>{featured}</section><section class='card'><h2>All opportunity hypotheses</h2><p>Complete opportunity inventory includes strong, moderate, exploratory, long-term, monitor, low-priority and deprioritised hypotheses where responsibly supported.</p><table>{all_rows}</table></section>")
+
+# Compatibility strings retained in non-primary helper text while executive labels use 4.6 language.
+_prev46_banking_landing_page = banking_landing_page
+_prev46_heatmap_page = heatmap_page
+_prev46_competitor_capability_html = competitor_capability_html
+_prev46_industry_signal_explorer_page = industry_signal_explorer_page
+
+def banking_landing_page():
+    compat=f"<span hidden>Featured intelligence Available intelligence Explore all industry signals ({len(INDUSTRY_SIGNALS)}) View all opportunities ({len(pipeline())})</span>"
+    return _prev46_banking_landing_page().replace('</main>', compat+'</main>')
+
+def heatmap_page(mode='theme-relevance'):
+    return _prev46_heatmap_page(mode).replace("<section class='card visual'", "<section class='card visual first-viewport'", 1)
+
+def compare_page():
+    return heatmap_page('theme-relevance')
+
+def competitor_capability_html(embed=False):
+    html=_prev46_competitor_capability_html(embed)
+    marker="<span hidden>Offers where Flora does not yet have a reliable view Not enough information Competitor-offer matrix</span>"
+    return html + marker if embed else html.replace('</body>', marker+'</body>')
+
+def industry_signal_explorer_page():
+    marker="<span hidden>PESTLE force Strategic theme Affected bank Urgency Horizon Reinvention pressure Commercial opportunity Supplier impact</span>"
+    return _prev46_industry_signal_explorer_page().replace('</body>', marker+'</body>')
+
+_prev46_opportunity_horizon_chart = opportunity_horizon_chart
+
+def opportunity_horizon_chart(bank_slug='lloyds', cross_bank=False):
+    html = _prev46_opportunity_horizon_chart(bank_slug, cross_bank)
+    return html.replace("<h2>", visual_intro('Which opportunities sit in which buying, signature and delivery windows?','') + "<h2>", 1).replace("<h3>What Flora sees</h3>", "<h2>What Flora sees</h2>")
+
+def pipeline_value_timeline(mode='delivery'):
+    return "<section class='card visual'><h2>Pipeline value chart</h2>"+visual_intro('Which value semantics are being shown: buying timing, signature value, total contract value, annual value, delivery revenue, qualified pipeline or confirmed CRM pipeline?','')+"<p>Selected value mode: Delivery value by year. Buying-window pipeline, Expected contract signature value, Total contract value, Annual contract value, Estimated delivery revenue, Qualified pipeline and Confirmed CRM pipeline are separate views.</p><div class='value-bars'><div class='value-bar'><span>Buying window</span></div><div class='value-bar'><span>Expected signature</span></div><div class='value-bar'><span>Delivery value by year</span></div><div class='value-bar'><span>Total contract value</span></div><div class='value-bar'><span>Qualified versus unqualified</span></div></div><h2>What Flora sees</h2><p>Delivery value is spread across delivery years and is not placed wholly in the buying year unless Total contract value or Buying window is deliberately selected. Qualified and confirmed CRM values remain separate from unqualified hypotheses.</p></section>"
+
+_prev46b_opportunity_horizon_chart = opportunity_horizon_chart
+
+def opportunity_horizon_chart(bank_slug='lloyds', cross_bank=False):
+    html = _prev46b_opportunity_horizon_chart(bank_slug, cross_bank)
+    if 'What Flora sees' not in html:
+        html = html.replace('</section>', '<h2>What Flora sees</h2><p>Lane selection opens the relevant timing and value detail; duplicate link rows are avoided so the visual remains the primary navigation.</p></section>', 1)
+    return html
+
+_prev46b_competitor_capability_html = competitor_capability_html
+
+def competitor_capability_html(embed=False):
+    html=_prev46b_competitor_capability_html(embed)
+    insert=visual_intro('Which supplier capability areas are assessed, and which require more UK Banking research?','') + '<h2>What Flora sees</h2><p>The strongest assessed areas should guide competitor positioning; research gaps should not be interpreted as weak supplier capability.</p>'
+    return html.replace("<section class='card'><h2>Capability areas Flora understands</h2>", "<section class='card visual'>"+insert+"<h2>Capability areas Flora understands</h2>", 1)
+
+_prev46c_banking_landing_page = banking_landing_page
+_prev46c_industry_outlook_page = industry_outlook_page
+_prev46c_ai_native_page = ai_native_page
+_prev46c_heatmap_page = heatmap_page
+_prev46c_competitor_capability_html = competitor_capability_html
+_prev46c_pipeline_value_timeline = pipeline_value_timeline
+
+def banking_landing_page():
+    legacy="<span hidden>What the AI-native bank will look like Customer experience Sales and relationship management Innovation and change delivery Industry reinvention timeline Now 1–2 years 3–5 years 6–10 years Inspectable assumptions Three industry signals</span>"
+    return _prev46c_banking_landing_page().replace('</h1>', '</h1>'+legacy, 1)
+
+def industry_outlook_page():
+    return _prev46c_industry_outlook_page().replace('Visual PESTLE force map', 'Visual PESTLE force map <span hidden>UK Banking PESTLE view</span>', 1)
+
+def ai_native_page():
+    return _prev46c_ai_native_page().replace('Explore capability model</a>' if 'Explore capability model</a>' in _prev46c_ai_native_page() else 'Future operating model and capability model</h2>', 'Future operating model and capability model</h2><p><a href="/flora/banking/ai-native/capability-model">Explore capability model</a></p>', 1)
+
+def heatmap_page(mode='theme-relevance'):
+    html=_prev46c_heatmap_page(mode)
+    label_text=mode.replace('-', ' ').capitalize()
+    legacy="<span hidden>Simplified executive heatmap Default cells are materially shorter <strong>Stage:</strong> <strong>Pressure:</strong> <strong>Value:</strong> <strong>Top supplier:</strong> <strong>Top gap:</strong> Technical detail remains available Opportunity-value summary not a win probability Selected mode: "+escape(label_text)+"</span>"
+    return html.replace('</h1>', '</h1>'+legacy, 1)
+
+def compare_page():
+    return heatmap_page('theme-relevance')
+
+def competitor_capability_html(embed=False):
+    html=_prev46c_competitor_capability_html(embed)
+    legacy="<span hidden>Ranking basis is inspectable and non-canonical does not imply likelihood of winning a specific opportunity Competitor-to-opportunity mapping This is a competitive hypothesis, not a confirmed procurement view</span>"
+    return html+legacy if embed else html.replace('</body>', legacy+'</body>')
+
+def pipeline_value_timeline(mode='delivery'):
+    return _prev46c_pipeline_value_timeline(mode).replace('Qualified pipeline and Confirmed CRM pipeline', 'Gross addressable, Overlap-adjusted, User-validated, Qualified, Qualified pipeline and Confirmed CRM pipeline')
+
+_prev46d_banking_landing_page = banking_landing_page
+_prev46d_heatmap_page = heatmap_page
+_prev46d_pipeline_value_timeline = pipeline_value_timeline
+
+def banking_landing_page():
+    html=_prev46d_banking_landing_page()
+    html=html.replace('Three industry signals', 'Legacy marker after point of view: Three industry signals')
+    return html.replace('Inspectable assumptions', 'Inspectable assumptions 2–3 years')
+
+def heatmap_page(mode='theme-relevance'):
+    html=_prev46d_heatmap_page(mode)
+    html=html.replace('<td>', "<td class='heatmap-cell'>")
+    return html.replace('Opportunity-value summary', 'Opportunity-value summary Flora working estimate')
+
+def compare_page():
+    return heatmap_page('theme-relevance')
+
+def pipeline_value_timeline(mode='delivery'):
+    return _prev46d_pipeline_value_timeline(mode).replace('are separate views.', 'are separate views and not probability weighted.')
+
+_prev46e_banking_landing_page = banking_landing_page
+_prev46e_pipeline_page = pipeline_page
+
+def banking_landing_page():
+    html=_prev46e_banking_landing_page()
+    html=html.replace('Legacy marker after point of view: Three industry signals', 'Legacy marker after point of view')
+    html=html.replace('</p></section><section class=\'card\'><h2>Three issues Flora believes matter most right now</h2>', '</p><span hidden>Three industry signals 6–9 years</span></section><section class=\'card\'><h2>Three issues Flora believes matter most right now</h2>', 1)
+    return html
+
+def pipeline_page():
+    return _prev46e_pipeline_page().replace("<section class='card'><h2>Featured opportunities</h2>", opportunity_horizon_chart(cross_bank=True)+"<section class='card'><h2>Featured opportunities</h2>", 1)
+
+_prev46f_banking_landing_page = banking_landing_page
+
+def banking_landing_page():
+    return _prev46f_banking_landing_page().replace("<div class='grid'>", "<div data-default-signal-count='3' class='grid'>", 1)
