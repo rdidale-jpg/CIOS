@@ -49,7 +49,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | FP-001 | CIOS Vision | Defines the founding vision for CIOS. | Present | `architecture/founding-papers/` | Provides the strategic origin and purpose of CIOS. |
 | FP-002 | Strategic Signal Standard | Earlier signal standard retained as founding context. | Present | `architecture/founding-papers/` | Historical/parallel signal language; FP-007 is the CIRM Volume II standard. |
 | FP-003 | Flora Intelligence Architecture | Defines Flora as the first operational intelligence architecture. | Present | `architecture/founding-papers/` | Anchors Flora runtime role in CIRM. |
-| FP-010 | [Enterprise Reinvention Intelligence](../founding-papers/FP-010-Enterprise-Reinvention-Intelligence.md) | Establishes the Review founding rationale linking EGM, CIOS, Flora, specialist Intelligence Companions, Commercial Asset Generation and continuous learning. | Review | `architecture/founding-papers/` | Documentation-only, non-runtime and excluded from production profiles; does not alter accepted ADR or owning-paper decisions. |
+| FP-012 | [Enterprise Reinvention Intelligence](../founding-papers/FP-012-Enterprise-Reinvention-Intelligence.md) | Establishes the Review founding rationale linking EGM, CIOS, Flora, specialist Intelligence Companions, Commercial Asset Generation and continuous learning. | Review | `architecture/founding-papers/` | Documentation-only, non-runtime and excluded from production profiles; does not alter accepted ADR or owning-paper decisions. |
 | FP-004 | Evidence Acquisition Standard | Defines evidence acquisition, acceptance and curation rules. | Present | `architecture/founding-papers/` | Owns Source and Evidence Layer standards. |
 | FP-005 | Enterprise Intelligence Collection Framework | Defines enterprise evidence blueprints and collection priorities. | Present | `architecture/founding-papers/` | Connects governed collection to Enterprise Intelligence needs. |
 | FP-006 | Source Quality Standard | Defines source tiering, quality, yield and lifecycle actions. | Present | `architecture/founding-papers/` | Governs source trust, decay and replacement. |
@@ -131,6 +131,22 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | Newton | Newton Roadmap | Describes Newton capability evolution. | Present | `architecture/roadmap/` | Roadmap input for commercial reasoning and opportunity shaping. |
 | Flora | Flora Roadmap | Describes Flora capability evolution. | Present | `architecture/roadmap/` | Roadmap input for runtime alignment. |
 | Runtime compliance | Future Architecture Compliance Checklist | Future PR checklist derived from Reference Architecture. | Future | `docs/Architecture/` | Will make architecture compliance inspectable for significant runtime PRs. |
+
+
+## Industry Twin documentation journey
+
+A Researcher preparing a new Industry Twin should navigate the repository in this order without searching or relying on chat history:
+
+| Journey step | Read this document | Why |
+| --- | --- | --- |
+| Mission | [CIOS AI Context](../../CIOS-AI.md) | Establishes current mission posture, assistant rules and Industry Twin working constraints. |
+| Doctrine | [CIOS Design Doctrine](CIOS-Design-Doctrine.md), [CIOS Reference Architecture v1.0](CIOS-Reference-Architecture-v1.0.md), [Architecture Authority Registry](Architecture-Authority-Registry.md) | Establishes evidence-first, observation-led doctrine and the authority chain. |
+| Research Guidance | [Commercial Digital Twin Research Agent Guide](../research/Commercial-Digital-Twin-Research-Agent-Guide.md) | Owns the operational Researcher route, readiness gate, supplier/procurement checklist and Banking method lessons. |
+| Enterprise Knowledge production | [Enterprise Knowledge Production Protocol v1.0](../specifications/enterprise-knowledge/Enterprise-Knowledge-Production-Protocol-v1.0.md) | Defines production lifecycle, Research-ready and Architecture-ready expectations. |
+| Industry Twin model and lifecycle | [IT-001 Industry Twin Specification](../specifications/industry-twins/IT-001-Industry-Twin-Specification.md), [Industry Twin Lifecycle Specification v1.0](../specifications/industry-twins/Industry-Twin-Lifecycle-Specification-v1.0.md) | Defines Industry Twin model boundaries, Review status, cadence and maintenance expectations. |
+| Enterprise Intelligence | [EI-001](../enterprise-intelligence/volume-1-enterprise-modelling/EI-001-Enterprise-Model-Specification.md), [EI-002](../enterprise-intelligence/volume-1-enterprise-modelling/EI-002-Enterprise-Knowledge-Graph.md), [EI-003](../enterprise-intelligence/volume-1-enterprise-modelling/EI-003-Enterprise-Behaviour-Model.md), [EI-012](../enterprise-intelligence/volume-5-intelligence-foundations/EI-012-Enterprise-Observation-Model.md) | Defines durable Enterprise Models, graph relationships, behaviour and atomic Observations used by Industry Twin research. |
+| Architecture Review | [ADR-009](../decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md), [AP-001](standards/AP-001-Architecture-Compilation-Standard.md), [AP-002](standards/AP-002-Architecture-Metadata-Standard.md), [RP-001](profiles/RP-001-Enterprise-Blueprint-Researcher-Profile.md), [RP-002](profiles/RP-002-Enterprise-Intelligence-Assurance-Profile.md) | Enables proportionate assurance, registry-backed profile checks and non-promotion review. |
+| Implementation | [ADR-016](../decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md), [FP-010 Knowledge Pack Architecture](../founding-papers/FP-010-Knowledge-Pack-Architecture.md), [FP-011](../founding-papers/FP-011-Knowledge-Exchange-Architecture.md), [EI-013](../enterprise-intelligence/EI-013-Knowledge-Asset-Exchange-Model.md), [Knowledge Pack Specification v1.0](../specifications/knowledge-packs/Knowledge-Pack-Specification-v1.0.md) | Governs packaging and exchange after research and architecture review; it does not make candidate research canonical fact. |
 
 ## Reading order
 

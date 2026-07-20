@@ -10,7 +10,7 @@
 
 ## Governance and Authority Boundary
 
-EGM-001 owns the strategic methodology. [FP-010](../../../architecture/founding-papers/FP-010-Enterprise-Reinvention-Intelligence.md) explains the relationship between EGM-001, CIOS and Flora. Accepted ADRs and owning architecture papers remain authoritative for detailed architecture and runtime decisions.
+EGM-001 owns the strategic methodology. [FP-012](../../../architecture/founding-papers/FP-012-Enterprise-Reinvention-Intelligence.md) explains the relationship between EGM-001, CIOS and Flora. Accepted ADRs and owning architecture papers remain authoritative for detailed architecture and runtime decisions.
 
 ## Table of Contents
 

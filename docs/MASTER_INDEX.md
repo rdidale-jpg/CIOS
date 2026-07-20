@@ -14,7 +14,7 @@ This index is the authoritative catalogue for controlled CIOS Knowledge Library 
 | CIOS-SCI-HYP-REG | Hypothesis Registry | Proposed | 0.1.0 | `docs/Science/HYPOTHESIS_REGISTRY.md` |
 | CIOS-SCI-EXP-REG | Experiment Registry | Proposed | 0.1.0 | `docs/Science/EXPERIMENT_REGISTRY.md` |
 | CIOS-SCI-EVD-REG | Evidence Registry | Proposed | 0.1.0 | `docs/Science/EVIDENCE_REGISTRY.md` |
-| FP-010 | Enterprise Reinvention Intelligence | Review | 0.1.0 | `architecture/founding-papers/FP-010-Enterprise-Reinvention-Intelligence.md` |
+| FP-012 | Enterprise Reinvention Intelligence | Review | 0.1.0 | `architecture/founding-papers/FP-012-Enterprise-Reinvention-Intelligence.md` |
 | CIOS-ENG-001 | Software Development Kit Specification | Approved for Codex implementation | 1.0.0 | `docs/CIOS_ENG_001_SDK_Specification_v1.0.0.md` |
 | CIOS-ENG-002 | Platform Architecture and Dependency Model | Accepted Architecture Baseline | 1.0.0 | `docs/CIOS_ENG_002_Platform_Architecture_and_Dependency_Model_v1.0.0.md` |
 | CIOS-ENG-003 | Commercial Intelligence Pipeline Specification | Engineering Baseline | 1.0.0 | `docs/CIOS_ENG_003_Commercial_Intelligence_Pipeline_Specification_v1.0.0.md` |

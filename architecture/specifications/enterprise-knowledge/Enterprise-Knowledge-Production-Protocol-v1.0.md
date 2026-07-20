@@ -49,7 +49,7 @@ architecture_metadata:
       - assurance-pack
   lifecycle:
     created: 2026-07-18
-    last_updated: 2026-07-18
+    last_updated: 2026-07-20
     review_due: null
     promotion_state: accepted
     change_control: Accepted governance change recorded in the Authority Registry
@@ -159,6 +159,23 @@ Continuous Maintenance
 ```
 
 Each stage has a distinct owner and a defined completion criterion.
+
+### Industry Twin Research and Architecture readiness
+
+For Industry Twins, the transition from **Research** to **Architectural Review** requires a documented Research-ready state. Research-ready means the Researcher has followed the operating route in the [Commercial Digital Twin Research Agent Guide](../../research/Commercial-Digital-Twin-Research-Agent-Guide.md) and has recorded minimum evidence of:
+
+- research completeness, including scope, exclusions, source cut-off and non-goals;
+- source coverage across official/public-body, regulator, enterprise, procurement/framework, supplier and credible secondary sources, or explicit explanation of absent categories;
+- supplier coverage for incumbents, strategic suppliers, challengers, partners and unknown supplier positions;
+- procurement coverage for frameworks, contracts, awards, renewal windows, routes, major programmes, buying organisations and timing;
+- enterprise coverage sufficient to justify the claimed industry comparison, with omitted enterprises named;
+- Observation completeness, including atomic statements, lineage, truth status, confidence/freshness, Unknowns and Contradictions;
+- hypothesis readiness, with hypotheses labelled and linked to evidence demands rather than presented as findings;
+- human validation of scope, material omissions, interpretation, uncertainty and handover readiness;
+- explicit research gaps with impact and next action.
+
+Architecture-ready means the Chief Architect can review authority, duplication, doctrine preservation, lineage, non-promotion boundaries and release implications without relying on chat history or hidden context. These criteria create minimum expectations only; they do not introduce a scoring system or alter IT-001 model ownership.
+
 
 ------------------------------------------------------------------------
 

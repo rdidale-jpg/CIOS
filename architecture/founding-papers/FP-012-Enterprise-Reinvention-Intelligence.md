@@ -1,4 +1,4 @@
-# FP-010 — Enterprise Reinvention Intelligence
+# FP-012 — Enterprise Reinvention Intelligence
 
 **Document class:** Founding Paper
 **Status:** Review
@@ -50,4 +50,4 @@ Commercial Asset Generation is therefore an output boundary, not an alternative 
 
 This paper remains **Review**, documentation-only and non-runtime. It has no production profile membership and must remain excluded from production Researcher, Assurance and architecture-authority packs. It is non-promotional and subordinate to Accepted ADRs and owning architecture papers where detailed decisions already exist.
 
-**Editorial reconciliation item:** the repository already contains a legacy FP-010 Knowledge Pack Architecture paper used by the accepted ADR-016 authority chain. This Review paper does not alter, supersede or reinterpret that accepted allocation. The identifier collision is an **Unknown** pending editorial reconciliation; until resolved, accepted ADR-016 and its owning architecture documents prevail.
+**FP-010 reconciliation:** the canonical FP-010 owner is [Knowledge Pack Architecture](FP-010-Knowledge-Pack-Architecture.md) under accepted ADR-016. This Review paper has been renumbered FP-012 to remove the identifier collision. FP-012 does not alter, supersede or reinterpret FP-010, ADR-016 or any owning architecture paper.
