@@ -235,3 +235,15 @@ The Architecture v2 document chain is: **Accepted ADR → owning paper → norma
 | Area | Document | Purpose | Status | Location | Notes |
 | --- | --- | --- | --- | --- | --- |
 | Knowledge Pack role profiles | [Researcher and Reviewer Knowledge-Pack Profile Audit](../specifications/knowledge-packs/Researcher-Reviewer-Knowledge-Pack-Profile-Audit.md) | Audits generated role-pack profiles, explains the 93-file Researcher and 68-file Reviewer counts, and records exclusion rules for draft, historical, duplicate, sprint, experiment and generated files. | Governance audit | `architecture/specifications/knowledge-packs/` | Use before approving generated Researcher or Reviewer pack manifests. |
+
+## Governance Audits
+
+| Document | Purpose | Status | Folder | Relationship to Reference Architecture |
+| --- | --- | --- | --- | --- |
+| [Industry Twin Documentation Audit](../../docs/governance/Industry-Twin-Documentation-Audit.md) | Audits whether current repository documentation is sufficient for Industry Twin research, validation, handover and acceptance. | Audit complete | `docs/governance/` | Records evidence-based remediation recommendations without creating new doctrine. |
+| [Industry Twin Documentation Inventory](../../docs/governance/Industry-Twin-Documentation-Inventory.md) | Inventories documents relevant to Industry Twin research and production. | Audit artefact | `docs/governance/` | Supports authority-chain discovery and identifies documents missing from production profiles. |
+| [Industry Twin Lifecycle Documentation Map](../../docs/governance/Industry-Twin-Lifecycle-Documentation-Map.md) | Maps the implied Industry Twin lifecycle to owning and supporting documents. | Audit artefact | `docs/governance/` | Identifies lifecycle stages that require accepted owner clarification. |
+| [Researcher Knowledge Pack Audit](../../docs/governance/Researcher-Knowledge-Pack-Audit.md) | Assesses what the production Researcher currently knows and where guidance depends on non-profile material. | Audit artefact | `docs/governance/` | Supports RP-001 and Authority Registry remediation. |
+| [Industry Twin Documentation Coverage Matrix](../../docs/governance/Industry-Twin-Documentation-Coverage-Matrix.md) | Rates documentation coverage for required Industry Twin capabilities. | Audit artefact | `docs/governance/` | Separates genuine gaps from discoverability and status issues. |
+| [Industry Twin Documentation Gap Analysis](../../docs/governance/Industry-Twin-Documentation-Gap-Analysis.md) | Records genuine gaps, risks, owners, priorities and acceptance criteria. | Audit artefact | `docs/governance/` | Provides scoped input to a later remediation mission. |
+| [Industry Twin Documentation Remediation Plan](../../docs/governance/Industry-Twin-Documentation-Remediation-Plan.md) | Sequences targeted updates before Public Sector research, handover, pilot acceptance and later editorial cleanup. | Audit artefact | `docs/governance/` | Preserves the Reference Architecture by recommending owner-specific updates instead of new doctrine. |
