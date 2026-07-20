@@ -16,3 +16,6 @@ __pycache__/
 
 # Knowledge Pack release artifacts
 dist/
+
+# Binary archives
+*.zip
