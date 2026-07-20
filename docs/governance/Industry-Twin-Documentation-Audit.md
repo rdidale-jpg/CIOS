@@ -33,13 +33,13 @@ The audit inspected the files enumerated in [Industry Twin Documentation Invento
 Two documents currently use the FP-010 identifier:
 
 1. `architecture/founding-papers/FP-010-Knowledge-Pack-Architecture.md` — **FP-010 — Knowledge Pack Architecture**, status **Proposed Foundation**, owner **Rob / CIOS**, owning ADR **ADR-016**.
-2. `architecture/founding-papers/FP-010-Enterprise-Reinvention-Intelligence.md` — **FP-010 — Enterprise Reinvention Intelligence**, status **Review**, owner **Rob / CIOS**, explicitly excluded from all production profiles.
+2. `architecture/founding-papers/FP-012-Enterprise-Reinvention-Intelligence.md` — **FP-012 — Enterprise Reinvention Intelligence**, status **Review**, owner **Rob / CIOS**, explicitly excluded from all production profiles.
 
 ### What FP-010 already governs
 
 The accepted authority chain still treats **FP-010 — Knowledge Pack Architecture** as the conceptual owner for Knowledge Packs under ADR-016. It governs exchange containers, Knowledge Assets, presentation payloads, provenance, validation, Unknowns, Contradictions and recommendations. It deliberately separates package validity from canonical knowledge acceptance.
 
-The newer **FP-010 — Enterprise Reinvention Intelligence** governs no production behaviour. It is a founding rationale explaining the relationship between EGM methodology, CIOS architecture, Flora runtime, specialist companions, Commercial Asset Generation and continuous learning. It says it does not replace EGM-001, Enterprise Intelligence papers, accepted ADRs or the Reference Architecture.
+The newer **FP-012 — Enterprise Reinvention Intelligence** governs no production behaviour. It is a founding rationale explaining the relationship between EGM methodology, CIOS architecture, Flora runtime, specialist companions, Commercial Asset Generation and continuous learning. It says it does not replace EGM-001, Enterprise Intelligence papers, accepted ADRs or the Reference Architecture.
 
 ### What was incorrectly being proposed as new
 
