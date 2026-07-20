@@ -1,0 +1,349 @@
+pack:
+  id: CIOS-Researcher-Knowledge-Pack
+  title: CIOS Researcher Knowledge Pack
+  version: 2.1.0
+  owner: CIOS / Knowledge Pack Owner
+  canonical_location: knowledge-packs/researcher
+  generated_artifacts: dist release artifacts
+documents:
+  - pack_path: README.md
+    source_path: knowledge-packs/researcher/README.md
+    document_id: PACK-README
+    title: Researcher Knowledge Pack README
+    version_or_last_updated: repository-current
+    authority: knowledge-pack-navigation
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: ce264160ee7ac3e2e0125aca9a6d2e507c79b7bd23b873e6a7dc5eb8e173ef15
+    transform: none
+  - pack_path: configuration/Researcher-GPT-Instructions.md
+    source_path: knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md
+    document_id: RKI-001
+    title: Researcher GPT Instructions
+    version_or_last_updated: repository-current
+    authority: researcher-instruction
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: db7cc0b80b8593d783703f65c409e4a5d5d64689a20977c8881afbf9aba3321f
+    transform: none
+  - pack_path: configuration/Researcher-Configuration-Guide.md
+    source_path: knowledge-packs/researcher/configuration/Researcher-Configuration-Guide.md
+    document_id: RKI-002
+    title: Researcher Configuration Guide
+    version_or_last_updated: repository-current
+    authority: configuration-guide
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: ffd36bbb1ba606aff00dc5c43ba64cf7a1e4a880d0078335556265ae08881160
+    transform: none
+  - pack_path: operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md
+    source_path: knowledge-packs/researcher/operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md
+    document_id: RG-001
+    title: Commercial Digital Twin Research Agent Guide
+    version_or_last_updated: repository-current
+    authority: research-operating-guide
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: 922e12e87122410242edcc338d17093f0124288354371947d2baa81753440d00
+    transform: none
+  - pack_path: operating-guidance/Industry-Twin-Readiness-Gate.md
+    source_path: knowledge-packs/researcher/operating-guidance/Industry-Twin-Readiness-Gate.md
+    document_id: RKI-003
+    title: Industry Twin Readiness Gate
+    version_or_last_updated: repository-current
+    authority: readiness-gate
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: 66bf2bef1c0169420049c3a71b97dd3643398212f13b954f54f2339e7541b865
+    transform: none
+  - pack_path: operating-guidance/Supplier-Contract-Procurement-Checklist.md
+    source_path: knowledge-packs/researcher/operating-guidance/Supplier-Contract-Procurement-Checklist.md
+    document_id: RKI-004
+    title: Supplier, Contract and Procurement Checklist
+    version_or_last_updated: repository-current
+    authority: research-checklist
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: cd39de587ea21425c771efecbdcb70d5b171a63646f80ad331de5827eaf0612b
+    transform: none
+  - pack_path: architecture/EI-001-Enterprise-Model-Specification.md
+    source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-001-Enterprise-Model-Specification.md
+    document_id: EI-001
+    title: Enterprise Model Specification
+    version_or_last_updated: repository-current
+    authority: enterprise-intelligence-specification
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: 81a6351f43e0d1444252ab23428caf2a6731ef61f5b1cacccb3e5a0a17cadf1c
+    transform: none
+  - pack_path: architecture/EI-002-Enterprise-Knowledge-Graph.md
+    source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-002-Enterprise-Knowledge-Graph.md
+    document_id: EI-002
+    title: Enterprise Knowledge Graph
+    version_or_last_updated: repository-current
+    authority: enterprise-intelligence-specification
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: 65f5003ff19031ea6fbd18b19ccfbe02b26753e0c37627477c788c77e34d0cbd
+    transform: none
+  - pack_path: architecture/EI-003-Enterprise-Behaviour-Model.md
+    source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-003-Enterprise-Behaviour-Model.md
+    document_id: EI-003
+    title: Enterprise Behaviour Model
+    version_or_last_updated: repository-current
+    authority: enterprise-intelligence-specification
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: 3b6663c61832ce47f164b86dda0dec925f7523831534501cf34d2f8fe461b741
+    transform: none
+  - pack_path: architecture/EI-012-Enterprise-Observation-Model.md
+    source_path: architecture/enterprise-intelligence/volume-5-intelligence-foundations/EI-012-Enterprise-Observation-Model.md
+    document_id: EI-012
+    title: Enterprise Observation Model
+    version_or_last_updated: repository-current
+    authority: enterprise-intelligence-specification
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: 188ae658a4db6715c7e7f0f196dbf56cd341c82c7aab31c455fbb2c6e497a5ad
+    transform: none
+  - pack_path: architecture/FP-009-Hypothesis-Validation-Standard.md
+    source_path: architecture/founding-papers/FP-009-Hypothesis-Validation-Standard.md
+    document_id: FP-009
+    title: Hypothesis Validation Standard
+    version_or_last_updated: repository-current
+    authority: founding-paper
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: 4c8f19ac477a8d3ee4eea165df7ced6730e31aa084b804733188589f0a31aa37
+    transform: none
+  - pack_path: architecture/Enterprise-Knowledge-Production-Protocol-v1.0.md
+    source_path: architecture/specifications/enterprise-knowledge/Enterprise-Knowledge-Production-Protocol-v1.0.md
+    document_id: EKP-001
+    title: Enterprise Knowledge Production Protocol v1.0
+    version_or_last_updated: repository-current
+    authority: enterprise-knowledge-specification
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: d16cfb0f297510e276272a1fd590f608edf3a9df05d81a5b7156d57db59d8df8
+    transform: none
+  - pack_path: architecture/Glossary.md
+    source_path: architecture/reference-architecture/Glossary.md
+    document_id: GLOSSARY
+    title: Glossary
+    version_or_last_updated: repository-current
+    authority: reference-architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: c3fd876e5b983ca3f816d0ac90ab2cbc7cfa71068c8fcf81054979f69ef2377e
+    transform: none
+  - pack_path: context/CIOS-Design-Doctrine.md
+    source_path: architecture/reference-architecture/CIOS-Design-Doctrine.md
+    document_id: DOCTRINE-001
+    title: CIOS Design Doctrine
+    version_or_last_updated: repository-current
+    authority: design-doctrine
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: 41db441553339169eaced5ad25c17ed20029ea516c8a9ab5ca4f221c00f5b1fd
+    transform: none
+  - pack_path: context/Architecture-Principles.md
+    source_path: architecture/reference-architecture/Architecture-Principles.md
+    document_id: PRINCIPLES-001
+    title: Architecture Principles
+    version_or_last_updated: repository-current
+    authority: architecture-principles
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: f3149b45a9d56d96c4952e91469aae05fdb163db97580e44847dd04c838b7310
+    transform: none
+  - pack_path: context/CIOS-Reference-Architecture-v1.0.md
+    source_path: architecture/reference-architecture/CIOS-Reference-Architecture-v1.0.md
+    document_id: CIOS-RA-v1.0
+    title: CIOS Reference Architecture v1.0
+    version_or_last_updated: repository-current
+    authority: reference-architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: 8ea28aa314c23e51775bc623f69836d157e879a6a4b3ed0ad2ff7948927d3dbb
+    transform: none
+  - pack_path: governance/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md
+    source_path: architecture/decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md
+    document_id: ADR-016
+    title: Knowledge Packs as Standard Exchange Mechanism
+    version_or_last_updated: repository-current
+    authority: accepted-adr
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: c75577ed8444f0faca3abf74676bb34e9d8fc7878b20a11042f39aea73c41acd
+    transform: none
+  - pack_path: governance/FP-010-Knowledge-Pack-Architecture.md
+    source_path: architecture/founding-papers/FP-010-Knowledge-Pack-Architecture.md
+    document_id: FP-010
+    title: Knowledge Pack Architecture
+    version_or_last_updated: repository-current
+    authority: founding-paper
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: d0c8c86aade42f72a1db1c1e8a64e589a232d4c4f2e959cefc437664b42814bc
+    transform: none
+  - pack_path: governance/FP-012-Enterprise-Reinvention-Intelligence.md
+    source_path: architecture/founding-papers/FP-012-Enterprise-Reinvention-Intelligence.md
+    document_id: FP-012
+    title: Enterprise Reinvention Intelligence
+    version_or_last_updated: repository-current
+    authority: founding-paper
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: ec12f2fd85357b3da3c52ac2e7c02dd5bec80a0ad11ec7264aa3ff312515da5a
+    transform: none
+  - pack_path: governance/Architecture-Authority-Registry.md
+    source_path: architecture/reference-architecture/Architecture-Authority-Registry.md
+    document_id: AUTH-REG
+    title: Architecture Authority Registry
+    version_or_last_updated: repository-current
+    authority: authority-registry
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: 7a27b2f410419cbbaabb10834c21f7f17e1a260b1535d62e75ca41711466f7f2
+    transform: none
+  - pack_path: governance/Document-Map.md
+    source_path: architecture/reference-architecture/Document-Map.md
+    document_id: DOC-MAP
+    title: Document Map
+    version_or_last_updated: repository-current
+    authority: document-map
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: c1543fa536f3c67273b5342593781a8a25206571eaaa63da646377daf9892cf3
+    transform: none
+  - pack_path: missions/UK-Central-Government-Industry-Twin-Mission.md
+    source_path: knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md
+    document_id: MISSION-UKCG-001
+    title: UK Central Government Industry Twin Mission
+    version_or_last_updated: repository-current
+    authority: mission-brief
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: 6008dc9858d2c9ed0f876072526b68ec0fc5413f123cd285b8946a7fdfdeaf19
+    transform: none
+  - pack_path: templates/Architecture-Handover-Template.md
+    source_path: knowledge-packs/researcher/templates/Architecture-Handover-Template.md
+    document_id: TEMPLATE-Architecture-Handover
+    title: Architecture Handover Template
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: cc87bfb5ea63eb0447a25527255ea01e80c711ee95cd0b5137c763c89b931fc5
+    transform: none
+  - pack_path: templates/Coverage-Matrix-Template.md
+    source_path: knowledge-packs/researcher/templates/Coverage-Matrix-Template.md
+    document_id: TEMPLATE-Coverage-Matrix
+    title: Coverage Matrix Template
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: d709a8bf7d907c077ef6356bddc0bfacfb587fccc442d94d701e8f077af07bc4
+    transform: none
+  - pack_path: templates/Enterprise-Intelligence-Pack-Template.md
+    source_path: knowledge-packs/researcher/templates/Enterprise-Intelligence-Pack-Template.md
+    document_id: TEMPLATE-Enterprise-Intelligence-Pack
+    title: Enterprise Intelligence Pack Template
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: 1c12a9b2c29105a834ada88ccc3410e7caf0df7343e8a8c5ae454bb004290acf
+    transform: none
+  - pack_path: templates/Industry-Research-Pack-Template.md
+    source_path: knowledge-packs/researcher/templates/Industry-Research-Pack-Template.md
+    document_id: TEMPLATE-Industry-Research-Pack
+    title: Industry Research Pack Template
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: debd6c1a28edf313d53defa731a2fbc936da4aae7ce11392f33edcc88b9c3198
+    transform: none
+  - pack_path: templates/Observation-Catalogue-Template.md
+    source_path: knowledge-packs/researcher/templates/Observation-Catalogue-Template.md
+    document_id: TEMPLATE-Observation-Catalogue
+    title: Observation Catalogue Template
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: de72fd771cd11fb589eb247ae3bef0716a8a2fc23848b995f9534c61fea0bd1c
+    transform: none
+  - pack_path: templates/Procurement-Catalogue-Template.md
+    source_path: knowledge-packs/researcher/templates/Procurement-Catalogue-Template.md
+    document_id: TEMPLATE-Procurement-Catalogue
+    title: Procurement Catalogue Template
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: a88ada502cd58f37f78bdbf15c6533491e67cbfdc47393aea7a309571457b43e
+    transform: none
+  - pack_path: templates/Programme-Catalogue-Template.md
+    source_path: knowledge-packs/researcher/templates/Programme-Catalogue-Template.md
+    document_id: TEMPLATE-Programme-Catalogue
+    title: Programme Catalogue Template
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: cc779d7ca4d89e694954505107e253978e85dcfd4390aef827310f774c90fec1
+    transform: none
+  - pack_path: templates/Research-Backlog-Template.md
+    source_path: knowledge-packs/researcher/templates/Research-Backlog-Template.md
+    document_id: TEMPLATE-Research-Backlog
+    title: Research Backlog Template
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: fc6388c3e660088cc9dcc5c9452ee250f60b040e51185106182f50109a308e01
+    transform: none
+  - pack_path: templates/Supplier-Catalogue-Template.md
+    source_path: knowledge-packs/researcher/templates/Supplier-Catalogue-Template.md
+    document_id: TEMPLATE-Supplier-Catalogue
+    title: Supplier Catalogue Template
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
+    checksum: 9090f991c006b5b61b1ed703a7be439f15830fd5cc96b254a6b2f46377b333da
+    transform: none

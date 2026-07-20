@@ -1,0 +1,3 @@
+# Migration to Researcher Knowledge Pack v2.1.0
+
+Replace manually selected files and stale local bundles with the built ZIP. Retain canonical repository source documents in their owning paths. Removed pattern: independently maintained architecture-paper copies inside Researcher configuration. Changed authority: manifest lineage and canonical paths govern packaged files. Configure the Researcher with `Researcher-GPT-Instructions.md`, upload the ZIP, and use the mission brief for UK Central Government scope only. FP-010 now means Knowledge Pack Architecture; FP-012 means Enterprise Reinvention Intelligence.

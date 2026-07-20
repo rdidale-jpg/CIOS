@@ -13,3 +13,6 @@ __pycache__/
 
 # Flora Enterprise Intelligence prototype transient outputs
 .flora_enterprise_intelligence/
+
+# Knowledge Pack release artifacts
+dist/

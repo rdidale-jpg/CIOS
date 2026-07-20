@@ -26,7 +26,7 @@ def test_architecture_authority_profile_includes_only_accepted_authority() -> No
         "AP-001", "AP-002", "RP-001", "RP-002", "DD-001", "RA-001", "EI-001", "EI-012",
         "EI-002", "EI-003", "FP-009", "GL-001", "EKPP-001", "ADR-001", "ADR-002",
         "ADR-003", "ADR-004", "ADR-005", "ADR-009", "ADR-010", "ADR-011",
-        "ADR-012", "ADR-013", "ADR-014", "ADR-016",
+        "ADR-012", "ADR-013", "ADR-014", "ADR-016", "ADR-024",
     }
     assert {"EIF-001", "EOD-001", "EU-001", "OT-001", "EI-014", "EI-015", "EI-017", "FP-010", "OPI-001", "RTP-001", "ADR-023", "VAL-ROADMAP-001"}.issubset(excluded_ids)
     assert compilation.source_registry_path == "architecture/reference-architecture/Architecture-Authority-Registry.md"
@@ -37,7 +37,7 @@ def test_review_context_preserves_review_and_proposed_statuses() -> None:
     compilation = compile_architecture_profile("review-context", ROOT)
 
     status_by_id = {document.document_id: document.status for document in compilation.included_documents}
-    assert status_by_id == {"EIF-001": "Review", "EOD-001": "Review", "EU-001": "Review", "OT-001": "Review", "EI-014": "Review", "EI-015": "Review", "EI-017": "Review", "FP-010": "Review", "IT-001": "Review", "OPI-001": "Review", "RTP-001": "Review", "ADR-023": "Proposed", "VAL-ROADMAP-001": "Review", "IC-001": "Review"}
+    assert status_by_id == {"EIF-001": "Review", "EOD-001": "Review", "EU-001": "Review", "OT-001": "Review", "EI-014": "Review", "EI-015": "Review", "EI-017": "Review", "FP-010": "Review", "IT-001": "Review", "OPI-001": "Review", "RTP-001": "Review", "ADR-023": "Proposed", "VAL-ROADMAP-001": "Review", "IC-001": "Review", "FP-012": "Review", "ADR-025": "Proposed", "FEIR-001": "Proposed", "EIRP-001": "Proposed", "UX-001": "Proposed"}
 
 
 def test_production_agent_profiles_do_not_infer_membership() -> None:
@@ -48,7 +48,7 @@ def test_production_agent_profiles_do_not_infer_membership() -> None:
         "ADR-003", "ADR-004", "ADR-005", "ADR-009", "ADR-010", "ADR-011",
         "ADR-012", "ADR-013", "ADR-014", "ADR-016",
     }
-    assert compile_architecture_profile("reviewer-pack", ROOT).included_documents == ()
+    assert {document.document_id for document in compile_architecture_profile("reviewer-pack", ROOT).included_documents} == {"ADR-024"}
 
 
 def test_fp010_review_material_is_visible_only_in_review_context() -> None:

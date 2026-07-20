@@ -1,0 +1,12 @@
+governance:
+  researcher_mission: [RKI-001, RG-001, MISSION-UKCG-001]
+  industry_twin_lifecycle: [RG-001, EI-001, EI-002, EI-012]
+  evidence: [EI-012, EKP-001]
+  observations: [EI-012]
+  enterprise_model: [EI-001]
+  knowledge_graph: [EI-002]
+  behaviour: [EI-003]
+  hypotheses: [FP-009]
+  readiness: [RKI-003, RG-001]
+  architecture_handover: [RG-001, TEMPLATE-Architecture-Handover]
+  knowledge_pack_configuration: [FP-010, ADR-016, RKI-002]
