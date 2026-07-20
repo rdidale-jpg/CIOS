@@ -69,3 +69,9 @@ This index is the authoritative catalogue for controlled CIOS Knowledge Library 
 - Keep status and version aligned with the document header.
 - Use repository-relative paths so links remain stable across local and remote environments.
 - Retire documents by marking their status as `Retired`; do not delete historical records from this index without an explicit archival decision.
+
+## Researcher Knowledge Pack
+
+- [CIOS Researcher Knowledge Pack](../knowledge-packs/researcher/README.md) — repository-managed Researcher configuration artefact built from canonical sources.
+- [Researcher GPT Instructions](../knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md) → [RG-001 Research Agent Guide](../knowledge-packs/researcher/operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md) → [Industry Twin Readiness Gate](../knowledge-packs/researcher/operating-guidance/Industry-Twin-Readiness-Gate.md) → [Architecture Handover Template](../knowledge-packs/researcher/templates/Architecture-Handover-Template.md).
+- Build with `python3 tools/knowledge-packs/build_researcher_pack.py`; release ZIPs are generated under `dist/`.

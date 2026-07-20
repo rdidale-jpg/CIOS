@@ -263,3 +263,9 @@ The Architecture v2 document chain is: **Accepted ADR → owning paper → norma
 | [Industry Twin Documentation Coverage Matrix](../../docs/governance/Industry-Twin-Documentation-Coverage-Matrix.md) | Rates documentation coverage for required Industry Twin capabilities. | Audit artefact | `docs/governance/` | Separates genuine gaps from discoverability and status issues. |
 | [Industry Twin Documentation Gap Analysis](../../docs/governance/Industry-Twin-Documentation-Gap-Analysis.md) | Records genuine gaps, risks, owners, priorities and acceptance criteria. | Audit artefact | `docs/governance/` | Provides scoped input to a later remediation mission. |
 | [Industry Twin Documentation Remediation Plan](../../docs/governance/Industry-Twin-Documentation-Remediation-Plan.md) | Sequences targeted updates before Public Sector research, handover, pilot acceptance and later editorial cleanup. | Audit artefact | `docs/governance/` | Preserves the Reference Architecture by recommending owner-specific updates instead of new doctrine. |
+
+## Researcher Knowledge Pack route
+
+CIOS mission and doctrine → [Researcher Knowledge Pack](../../knowledge-packs/researcher/README.md) → [Researcher instructions](../../knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md) → [RG-001 Research Agent Guide](../../knowledge-packs/researcher/operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md) → Enterprise Intelligence specifications → [Research-ready gate](../../knowledge-packs/researcher/operating-guidance/Industry-Twin-Readiness-Gate.md) → [Architecture handover template](../../knowledge-packs/researcher/templates/Architecture-Handover-Template.md).
+
+The Knowledge Pack source directory and build instructions are repository navigation assets. Generated pack copies are release artefacts and do not become new authoritative documents.
