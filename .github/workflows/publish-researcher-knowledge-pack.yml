@@ -1,0 +1,74 @@
+name: Publish Researcher Knowledge Pack
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "researcher-knowledge-pack-v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build and test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "pytest>=8.0"
+
+      - name: Run Researcher Knowledge Pack tests
+        run: |
+          pytest tests/knowledge_packs/test_researcher_pack.py
+
+      - name: Build Researcher Knowledge Pack
+        run: |
+          python3 tools/knowledge-packs/build_researcher_pack.py
+
+      - name: Verify output and checksum
+        run: |
+          ZIP="dist/CIOS-Researcher-Knowledge-Pack-v2.1.0.zip"
+          REPORT="dist/CIOS-Researcher-Knowledge-Pack-v2.1.0-build-report.md"
+          CHECKSUM="dist/CIOS-Researcher-Knowledge-Pack-v2.1.0.sha256"
+
+          test -f "$ZIP"
+          test -f "$REPORT"
+          sha256sum "$ZIP" > "$CHECKSUM"
+          sha256sum --check "$CHECKSUM"
+
+      - name: Upload workflow artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: CIOS-Researcher-Knowledge-Pack-v2.1.0
+          path: |
+            dist/CIOS-Researcher-Knowledge-Pack-v2.1.0.zip
+            dist/CIOS-Researcher-Knowledge-Pack-v2.1.0-build-report.md
+            dist/CIOS-Researcher-Knowledge-Pack-v2.1.0.sha256
+
+      - name: Publish GitHub Release
+        if: startsWith(github.ref, 'refs/tags/researcher-knowledge-pack-v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          ZIP="dist/CIOS-Researcher-Knowledge-Pack-v2.1.0.zip"
+          REPORT="dist/CIOS-Researcher-Knowledge-Pack-v2.1.0-build-report.md"
+          CHECKSUM="dist/CIOS-Researcher-Knowledge-Pack-v2.1.0.sha256"
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ZIP" "$REPORT" "$CHECKSUM" --clobber
+          else
+            gh release create "$TAG" "$ZIP" "$REPORT" "$CHECKSUM" \
+              --title "CIOS Researcher Knowledge Pack v2.1.0" \
+              --notes "Canonical CIOS Researcher Knowledge Pack v2.1.0."
+          fi
