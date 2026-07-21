@@ -1,0 +1,9 @@
+source_map:
+  programme_state: [CURRENT-PROGRAMME-STATE]
+  runtime_baseline: [FEIR-001, EIRP-001, ADR-014, ADR-024]
+  knowledge_pack_authority: [FP-010, ADR-016, KPS-001]
+  recommendation_doctrine: [FP-009, FP-012, EI-004, EI-012]
+  core_enterprise_intelligence: [EI-001, EI-002, EI-003, EI-012, EIF-001]
+  operating_guidance: [CA-001, CA-OG-001]
+  templates: [CA-TEMPLATE-001]
+  excluded_freshness_sources: [ROADMAP-001]
