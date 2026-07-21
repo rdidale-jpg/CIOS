@@ -19,7 +19,7 @@ Version 2.2.0 packages the owning sources and output templates required to conne
 
 ## Build
 
-Run `python3 tools/knowledge-packs/build_researcher_pack.py`. Generated ZIP files belong in `dist/` and are release artefacts, not authoritative sources.
+Run `python3 tools/knowledge-packs/build_researcher_pack.py --version 2.2.0 --output-dir dist` with the selected semantic version. Generated ZIP files belong in `dist/` and are release artefacts, not authoritative sources.
 
 ## Authority
 
@@ -27,7 +27,7 @@ Accepted ADRs and owning architecture papers remain authoritative. Review-status
 
 ## Update process
 
-Update canonical sources first, update the manifest when source membership changes, rebuild, run tests, review the build report and release a new semantic version.
+Update canonical sources first, update the manifest when source membership changes, select the next semantic version, rebuild with `--version`, run tests, review the build report and release by pushing the matching annotated tag.
 
 ## Escalation
 

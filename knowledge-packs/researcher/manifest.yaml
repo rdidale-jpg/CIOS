@@ -15,7 +15,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.2 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 69d5309b5671410061007ea7e18632dcdb3d8a0fea4c862d74ab09965027e643
+    checksum: e55acadc6a1466e30890fd782bab1cb7be1d50a4c17140de845e504f4394dfe1
     transform: none
   - pack_path: configuration/Researcher-GPT-Instructions.md
     source_path: knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md
@@ -37,7 +37,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.2 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: ffd36bbb1ba606aff00dc5c43ba64cf7a1e4a880d0078335556265ae08881160
+    checksum: ae7dc51452e74d12072ba663ce6bd91850b1aaeb19169e75d94d4b8054aa68e0
     transform: none
   - pack_path: operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md
     source_path: knowledge-packs/researcher/operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md
@@ -257,7 +257,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.2 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: cc87bfb5ea63eb0447a25527255ea01e80c711ee95cd0b5137c763c89b931fc5
+    checksum: 5490ec75d77d87a7b17f709b46af5facefd2bd300405f83fca283eaa62805771
     transform: none
   - pack_path: templates/Coverage-Matrix-Template.md
     source_path: knowledge-packs/researcher/templates/Coverage-Matrix-Template.md
@@ -268,7 +268,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.2 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: d709a8bf7d907c077ef6356bddc0bfacfb587fccc442d94d701e8f077af07bc4
+    checksum: 832326c667f53534a5fa0a45ca61701c3b588763e58a7e86fe7dba1e4c52426a
     transform: none
   - pack_path: templates/Enterprise-Intelligence-Pack-Template.md
     source_path: knowledge-packs/researcher/templates/Enterprise-Intelligence-Pack-Template.md
@@ -279,7 +279,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.2 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 1c12a9b2c29105a834ada88ccc3410e7caf0df7343e8a8c5ae454bb004290acf
+    checksum: b25631033896e88efc6d67b30b9d41aeb74f68cb9551dacda1650656cc172da3
     transform: none
   - pack_path: templates/Industry-Research-Pack-Template.md
     source_path: knowledge-packs/researcher/templates/Industry-Research-Pack-Template.md
@@ -290,7 +290,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.2 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: debd6c1a28edf313d53defa731a2fbc936da4aae7ce11392f33edcc88b9c3198
+    checksum: ebd7622629ba96b7e11ed1ef6146d9ec9c91c508ccd440c408758865528b16df
     transform: none
   - pack_path: templates/Observation-Catalogue-Template.md
     source_path: knowledge-packs/researcher/templates/Observation-Catalogue-Template.md
@@ -301,7 +301,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.2 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: de72fd771cd11fb589eb247ae3bef0716a8a2fc23848b995f9534c61fea0bd1c
+    checksum: f53611175569c9ee0637bf6890a711a0c4c0414af632fe526fc768a924ae02bd
     transform: none
   - pack_path: templates/Procurement-Catalogue-Template.md
     source_path: knowledge-packs/researcher/templates/Procurement-Catalogue-Template.md
@@ -312,7 +312,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.2 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: a88ada502cd58f37f78bdbf15c6533491e67cbfdc47393aea7a309571457b43e
+    checksum: 98a42052e48a2933b6f003e3275ba9523858ae20a98bf48690ecc6347ca43b7d
     transform: none
   - pack_path: templates/Programme-Catalogue-Template.md
     source_path: knowledge-packs/researcher/templates/Programme-Catalogue-Template.md
@@ -323,7 +323,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.2 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: cc779d7ca4d89e694954505107e253978e85dcfd4390aef827310f774c90fec1
+    checksum: 0738d4ab37edbe49e73ddd5aa3278e64661b1a4bddcb51da4d18bceafa9e901d
     transform: none
   - pack_path: templates/Research-Backlog-Template.md
     source_path: knowledge-packs/researcher/templates/Research-Backlog-Template.md
@@ -334,7 +334,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.2 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: fc6388c3e660088cc9dcc5c9452ee250f60b040e51185106182f50109a308e01
+    checksum: f6d9a6943e0be5988109d8f3f63a2de9283ee2636195d09479e4a5ae34bb0632
     transform: none
   - pack_path: templates/Supplier-Catalogue-Template.md
     source_path: knowledge-packs/researcher/templates/Supplier-Catalogue-Template.md
@@ -345,7 +345,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.2 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 9090f991c006b5b61b1ed703a7be439f15830fd5cc96b254a6b2f46377b333da
+    checksum: 28e69ef14bcf41bdd3b895195848f4e1c0f544f21df992079923d86060b37fe5
     transform: none
   - pack_path: architecture/Market-Participant-Twin-Specification-v1.0.md
     source_path: architecture/specifications/market-participants/Market-Participant-Twin-Specification-v1.0.md
