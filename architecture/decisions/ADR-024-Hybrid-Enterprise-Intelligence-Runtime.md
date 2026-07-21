@@ -1,5 +1,12 @@
 # ADR-024: Hybrid Enterprise Intelligence Runtime
 
+**Identifier:** ADR-024
+**Version:** 0.1
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Draft canonical ADR
+**Status:** Draft
+**Owner:** Rob / CIOS
+**Date:** Unknown from repository evidence
 ## Status
 Accepted
 

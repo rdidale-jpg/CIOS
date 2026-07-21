@@ -1,5 +1,9 @@
 # ADR-002 — Enterprise Model as Durable Memory
 
+**Identifier:** ADR-002
+**Version:** 1.0
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Accepted canonical ADR
 **Status:** Accepted
 **Date:** 2026-07-03
 **Owner:** Rob / CIOS

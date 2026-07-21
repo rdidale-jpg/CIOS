@@ -1,9 +1,13 @@
 # ADR-015: Runtime Mission Context Architecture
 
-**Status:** Accepted  
-**Date:** 2026-07-21  
-**Owner:** Rob / CIOS  
-**Supersedes:** None  
+**Identifier:** ADR-015
+**Version:** 1.0
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Accepted canonical ADR
+**Status:** Accepted
+**Date:** 2026-07-21
+**Owner:** Rob / CIOS
+**Supersedes:** None
 **Superseded by:** None
 
 ## Context

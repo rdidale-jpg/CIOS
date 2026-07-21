@@ -1,5 +1,9 @@
 # ADR-003: Governed UK Banking Theme Taxonomy
 
+**Governance classification:** Product/implementation decision; non-canonical architecture ADR; related canonical authority: ADR-003.
+**Canonical architecture identifier:** None.
+**Related document:** ADR-003
+
 Status: Accepted
 
 Decision: Flora Increment 3 uses one owned, reusable UK Banking theme taxonomy for portfolio, bank focus, briefing, question and peer-comparison projections. Ownership sits with the Enterprise Intelligence architecture, and mappings are human-curated deterministic presentation projections over governed Evidence, Observations, Unknowns and tensions.

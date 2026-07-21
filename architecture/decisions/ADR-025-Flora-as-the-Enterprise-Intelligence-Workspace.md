@@ -1,13 +1,18 @@
 # ADR-025 — Flora as the Enterprise Intelligence Workspace
 
-**Status:** Proposed  
-**Decision owner:** Rob / CIOS  
-**Architecture owner:** CIOS Chief Architect  
-**Date:** 2026-07-19  
-**Decision type:** Product and runtime architecture  
-**Supersedes:** None  
+**Identifier:** ADR-025
+**Version:** 0.1
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Proposed canonical ADR
+**Status:** Proposed
+**Decision owner:** Rob / CIOS
+**Architecture owner:** CIOS Chief Architect
+**Date:** 2026-07-19
+**Decision type:** Product and runtime architecture
+**Supersedes:** None
 **Related documents:**
 
+**Owner:** Rob / CIOS
 - `CIOS/architecture/FP-0XX-Flora-Enterprise-Intelligence-Workspace-Product-Architecture.md`
 - `CIOS/architecture/reference-architectures/FA-001-Flora-Enterprise-Intelligence-Workspace-Reference-Architecture.md`
 - `CIOS/architecture/Flora-Workspace-Architecture-Reconciliation-Report.md`
@@ -55,9 +60,9 @@ Its differentiator is Enterprise Reinvention Intelligence supported by Living Co
 
 The governing doctrine is:
 
-> Evidence proves change.  
-> Observations remember change.  
-> Enterprise Models accumulate change.  
+> Evidence proves change.
+> Observations remember change.
+> Enterprise Models accumulate change.
 > Reports are views.
 
 Previous Flora concepts risked organising the product around application modules, pages or separate “research” and “sales” domains. That approach could create:
@@ -526,8 +531,8 @@ Accepted parent ADR
 
 ## 16. Completion record
 
-**Accepted by:** Pending  
-**Acceptance date:** Pending  
-**Repository path:** `CIOS/architecture/decisions/ADR-025-Flora-as-the-Enterprise-Intelligence-Workspace.md`  
-**Implementation status:** Not started  
-**Editorial reconciliation required:** Pending authoritative review  
+**Accepted by:** Pending
+**Acceptance date:** Pending
+**Repository path:** `CIOS/architecture/decisions/ADR-025-Flora-as-the-Enterprise-Intelligence-Workspace.md`
+**Implementation status:** Not started
+**Editorial reconciliation required:** Pending authoritative review

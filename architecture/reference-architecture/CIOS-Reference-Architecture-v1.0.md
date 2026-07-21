@@ -1,17 +1,21 @@
 # CIOS Reference Architecture v1.0
 
-**Purpose:** Define the single authoritative architecture entry point for CIOS.  
-**Status:** Draft  
-**Owner:** Rob / CIOS  
+**Identifier:** RA-001
+**Version:** 1.0
+**Document Type:** Reference Architecture
+**Authority Classification:** Canonical reference architecture authority
+**Purpose:** Define the single authoritative architecture entry point for CIOS.
+**Status:** Draft
+**Owner:** Rob / CIOS
 **Last updated:** 2026-07-21
 
 ## Executive Summary
 
 CIOS is an Enterprise Intelligence platform that constructs Commercial Digital Twins of organisations, reasons over evidence-backed observations, and recommends commercially valuable actions.
 
-CIOS is not a CRM.  
-CIOS is not a BI dashboard.  
-CIOS is not a scraper.  
+CIOS is not a CRM.
+CIOS is not a BI dashboard.
+CIOS is not a scraper.
 CIOS is not a reporting tool.
 
 CIOS exists to answer:
@@ -26,14 +30,14 @@ The Reference Architecture is the top-level navigation, philosophy, taxonomy and
 
 ## The CIOS Philosophy
 
-CIOS detects change.  
-Evidence proves change.  
-Observations remember change.  
-Enterprise Models accumulate change.  
-Signals explain change.  
-Hypotheses challenge change.  
-Commercial reasoning evaluates change.  
-Recommendations propose action.  
+CIOS detects change.
+Evidence proves change.
+Observations remember change.
+Enterprise Models accumulate change.
+Signals explain change.
+Hypotheses challenge change.
+Commercial reasoning evaluates change.
+Recommendations propose action.
 Learning improves future reasoning.
 
 ## The First Principles of CIOS
@@ -329,8 +333,8 @@ Volume II defines how CIOS interprets evidence-backed change, validates hypothes
 
 Enterprise Intelligence defines what CIOS knows about an enterprise.
 
-CIRM = how CIOS reasons.  
-Enterprise Intelligence = what CIOS knows.  
+CIRM = how CIOS reasons.
+Enterprise Intelligence = what CIOS knows.
 Flora = first runtime implementation.
 
 A Commercial Digital Twin is the evidence-backed, time-aware, confidence-scored, contradiction-aware model of a monitored enterprise.
@@ -372,10 +376,10 @@ A Commercial Digital Twin is the evidence-backed, time-aware, confidence-scored,
 
 EI-012 defines the Enterprise Observation Model: the reusable intelligence atom between evidence acquisition and higher-order reasoning.
 
-Evidence is proof.  
-Observation is memory.  
-Signal is meaning.  
-Hypothesis is interpretation.  
+Evidence is proof.
+Observation is memory.
+Signal is meaning.
+Hypothesis is interpretation.
 Recommendation is action.
 
 CIOS should not reason directly over raw evidence where an Observation can be created. Raw evidence proves that something was observed; an Observation turns that proof into durable, traceable and reusable enterprise memory.

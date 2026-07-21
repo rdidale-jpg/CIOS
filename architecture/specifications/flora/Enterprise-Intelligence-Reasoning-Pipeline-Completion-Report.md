@@ -1,8 +1,12 @@
 # EIRP-001 Completion Report — Enterprise Intelligence Reasoning Pipeline
 
-**Status:** Complete  
-**Owner:** Rob / CIOS  
-**Date:** 2026-07-18  
+**Governance classification:** Completion report; traceability evidence only; not canonical architecture authority.
+**Canonical architecture identifier:** None.
+**Related document:** EIRP-001
+
+**Status:** Complete
+**Owner:** Rob / CIOS
+**Date:** 2026-07-18
 **Commission:** Define the Enterprise Intelligence Reasoning Pipeline
 
 ## 1. Authoritative inputs reviewed
@@ -63,7 +67,7 @@ Unresolved decisions remain for runtime graph persistence, graph technology, eve
 ## 14. Documents created
 
 - `architecture/specifications/flora/EIRP-001-Enterprise-Intelligence-Reasoning-Pipeline-Specification.md`
-- `architecture/specifications/flora/EIRP-001-Completion-Report.md`
+- `architecture/specifications/flora/Enterprise-Intelligence-Reasoning-Pipeline-Completion-Report.md`
 
 ## 15. Documents changed
 

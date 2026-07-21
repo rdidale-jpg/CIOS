@@ -1,5 +1,9 @@
 # ADR-003 — CIRM and EI Separation
 
+**Identifier:** ADR-003
+**Version:** 1.0
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Accepted canonical ADR
 **Status:** Accepted
 **Date:** 2026-07-03
 **Owner:** Rob / CIOS

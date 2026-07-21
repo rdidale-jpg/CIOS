@@ -1,5 +1,9 @@
 # ADR-004: Commercial Intelligence recommendations, ranking and valuation
 
+**Governance classification:** Product decision outside the architecture authority set; non-canonical architecture ADR; related canonical authority: ADR-004.
+**Canonical architecture identifier:** None.
+**Related document:** ADR-004
+
 Status: Accepted
 Date: 2026-07-19
 

@@ -1,9 +1,13 @@
 # ADR-023 — Enterprise Understanding as the Primary Governed Asset
 
-**Status:** Proposed  
-**Date:** 2026-07-11  
-**Owner:** Rob / CIOS  
-**Related review material:** [`EU-001`](../enterprise-intelligence/contracts/EU-001-Enterprise-Understanding-Contract.md)  
+**Identifier:** ADR-023
+**Version:** 0.1
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Proposed canonical ADR
+**Status:** Proposed
+**Date:** 2026-07-11
+**Owner:** Rob / CIOS
+**Related review material:** [`EU-001`](../enterprise-intelligence/contracts/EU-001-Enterprise-Understanding-Contract.md)
 **Production release-profile membership:** None
 
 ## Context

@@ -1,5 +1,12 @@
 # ADR-014: Evidence-Governed Enterprise Intelligence Reasoning Runtime
 
+**Identifier:** ADR-014
+**Version:** 0.1
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Draft canonical ADR
+**Status:** Draft
+**Owner:** Rob / CIOS
+**Date:** Unknown from repository evidence
 ## Status
 Accepted
 

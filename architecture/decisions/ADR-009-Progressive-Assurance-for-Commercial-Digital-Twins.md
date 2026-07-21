@@ -1,11 +1,15 @@
 # ADR-009 — Progressive Assurance for Commercial Digital Twins
 
-**Status:** Accepted  
-**Decision date:** 10 July 2026  
-**Owner:** Rob / CIOS  
-**Decision class:** Reasoning, governance and cross-cutting runtime obligation  
-**Scope:** Flora research, Commercial Digital Twin creation and refresh, Publisher release production  
-**Supersedes:** No existing ADR  
+**Identifier:** ADR-009
+**Version:** 1.0
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Accepted canonical ADR
+**Status:** Accepted
+**Decision date:** 10 July 2026
+**Owner:** Rob / CIOS
+**Decision class:** Reasoning, governance and cross-cutting runtime obligation
+**Scope:** Flora research, Commercial Digital Twin creation and refresh, Publisher release production
+**Supersedes:** No existing ADR
 **Related:** ADR-001, ADR-002, ADR-004, ADR-005, ADR-010; FP-003; EI-001; EI-012
 
 ## Context

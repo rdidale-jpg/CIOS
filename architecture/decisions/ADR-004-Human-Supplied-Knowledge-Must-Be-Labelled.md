@@ -1,5 +1,9 @@
 # ADR-004 — Human-Supplied Knowledge Must Be Labelled
 
+**Identifier:** ADR-004
+**Version:** 1.0
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Accepted canonical ADR
 **Status:** Accepted
 **Date:** 2026-07-03
 **Owner:** Rob / CIOS

@@ -1,7 +1,11 @@
 # CIOS Architecture Principles
 
-**Status:** Draft  
-**Owner:** Rob / CIOS  
+**Identifier:** PR-001
+**Version:** 1.0
+**Document Type:** Architecture Principles
+**Authority Classification:** Canonical architecture principles
+**Status:** Draft
+**Owner:** Rob / CIOS
 **Last updated:** 2026-07-11
 
 ## First Principles of CIOS

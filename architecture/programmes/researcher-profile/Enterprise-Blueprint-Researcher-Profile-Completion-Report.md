@@ -1,8 +1,12 @@
 # RP-001 Completion Report — Enterprise Blueprint Researcher Profile
 
-**Status:** Complete  
-**Owner:** Rob / CIOS  
-**Date:** 2026-07-11  
+**Governance classification:** Completion report; traceability evidence only; not canonical architecture authority.
+**Canonical architecture identifier:** None.
+**Related document:** RP-001
+
+**Status:** Complete
+**Owner:** Rob / CIOS
+**Date:** 2026-07-11
 **Production behaviour:** Documentation and validation only; no runtime behaviour changed.
 
 ## Completed deliverables

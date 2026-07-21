@@ -1,10 +1,14 @@
 # FEIR-001 — Flora Enterprise Intelligence Runtime Architecture v1.0
 
-**Document class:** Owning architecture paper  
-**Status:** Proposed  
-**Owner:** Rob / CIOS  
-**Last updated:** 2026-07-18  
-**Decision record:** [ADR-024](../../decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md)  
+**Identifier:** FEIR-001
+**Version:** 1.0
+**Document Type:** Runtime Architecture Specification
+**Authority Classification:** Proposed canonical runtime architecture specification
+**Document class:** Owning architecture paper
+**Status:** Proposed
+**Owner:** Rob / CIOS
+**Last updated:** 2026-07-18
+**Decision record:** [ADR-024](../../decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md)
 **Authority:** Proposed Flora runtime specification under accepted ADR-024; does not supersede accepted Enterprise Intelligence, Founding Paper or ADR authority.
 
 ## 1. Mission and outcomes

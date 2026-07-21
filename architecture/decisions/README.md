@@ -1,7 +1,7 @@
 # CIOS Architecture Decision Records
 
-**Status:** Living index  
-**Owner:** Rob / CIOS  
+**Status:** Living index
+**Owner:** Rob / CIOS
 **Last updated:** 2026-07-21
 
 Architecture Decision Records preserve enduring decisions affecting doctrine, core objects, reasoning, trust, governance, terminology and cross-cutting runtime obligations. Historical and proposed decisions are listed explicitly and are not authoritative until accepted.
@@ -22,8 +22,8 @@ Architecture Decision Records preserve enduring decisions affecting doctrine, co
 | [ADR-012](ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md) | Governed Blueprint Package Import and Canonical Acceptance Boundary | Accepted | Unknown | Rob / CIOS | None | None | Architecture decision record | Implemented/active doctrine |
 | [ADR-013](ADR-013-Enterprise-Canvas-as-Primary-Living-Twin-Navigation.md) | Enterprise Canvas as the Primary Living Twin Navigation Model | Accepted | Unknown | Rob / CIOS | None | None | Architecture decision record | Implemented/active doctrine |
 | [ADR-014](ADR-014-Evidence-Governed-Enterprise-Intelligence-Reasoning-Runtime.md) | Enterprise Intelligence Reasoning Runtime | Accepted | Unknown; amended 2026-07-11 | Rob / CIOS | None | None | See ADR body | Implemented/active doctrine |
-| [ADR-015](../adr/ADR-015-Runtime-Mission-Context.md) | Runtime Mission Context Architecture | Accepted | 2026-07-21 | Rob / CIOS | None | None | CIOS-AI, Reference Architecture, Glossary, Handbook | Documentation architecture |
-| Historical ADR-015 draft | [Observation Identity and Minimal Model Projection](ADR-015-Observation-Identity-and-Minimal-Model-Projection.md) | Proposed historical draft | 2026-07-04 | Rob / CIOS | None | None | Architecture decision record | Historical/proposed; not authoritative as ADR-015 |
+| [ADR-015](ADR-015-Runtime-Mission-Context.md) | Runtime Mission Context Architecture | Accepted | 2026-07-21 | Rob / CIOS | None | None | CIOS-AI, Reference Architecture, Glossary, Handbook | Documentation architecture |
+| Historical ADR-015 draft | [Observation Identity and Minimal Model Projection](Historical-Observation-Identity-and-Minimal-Model-Projection-Draft.md) | Proposed historical draft | 2026-07-04 | Rob / CIOS | None | None | Architecture decision record | Historical/proposed; not authoritative as ADR-015 |
 | [ADR-016](ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md) | Knowledge Packs as the Standard Exchange Mechanism | Accepted | 2026-07-11 | Rob / CIOS | Earlier unmerged architecture update pack as merge baseline | None | See ADR body | Documentation only |
 | [ADR-023](ADR-023-Enterprise-Understanding-as-the-Primary-Governed-Asset.md) | Enterprise Understanding as the Primary Governed Asset | Proposed | 2026-07-11 | Rob / CIOS | None | None | Architecture decision record | Review material; not authoritative |
 | [ADR-024](ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md) | Hybrid Enterprise Intelligence Runtime | Accepted | 2026-07-18 | Rob / CIOS | None | None | FEIR-001 | Accepted Flora runtime architecture |

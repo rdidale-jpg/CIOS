@@ -1,7 +1,11 @@
 # ADR-010 — Structured-Source-First, AI-Assisted Evidence Acquisition
 
-**Status:** Accepted  
-**Owner:** Rob / CIOS  
+**Identifier:** ADR-010
+**Version:** 1.0
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Accepted canonical ADR
+**Status:** Accepted
+**Owner:** Rob / CIOS
 **Date:** 2026-07-05
 
 ## Context

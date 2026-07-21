@@ -1,14 +1,18 @@
 # EU-001 — Enterprise Understanding Contract
 
-**Document class:** Proposed operational contract / review material  
-**Short name:** Enterprise Understanding Contract  
-**Version:** 0.1 review draft  
-**Status:** Review  
-**Owner:** Rob / CIOS  
-**Canonical review path:** `architecture/enterprise-intelligence/contracts/EU-001-Enterprise-Understanding-Contract.md`  
-**Companion proposal:** [`ADR-023`](../../decisions/ADR-023-Enterprise-Understanding-as-the-Primary-Governed-Asset.md)  
+**Identifier:** EU-001
+**Document Type:** Enterprise Intelligence Contract
+**Authority Classification:** Review canonical contract
+**Document class:** Proposed operational contract / review material
+**Short name:** Enterprise Understanding Contract
+**Version:** 0.1 review draft
+**Status:** Review
+**Owner:** Rob / CIOS
+**Canonical review path:** `architecture/enterprise-intelligence/contracts/EU-001-Enterprise-Understanding-Contract.md`
+**Companion proposal:** [`ADR-023`](../../decisions/ADR-023-Enterprise-Understanding-as-the-Primary-Governed-Asset.md)
 **Production release-profile membership:** None
 
+**Last updated:** 2026-07-21
 ---
 
 ## 1. Purpose

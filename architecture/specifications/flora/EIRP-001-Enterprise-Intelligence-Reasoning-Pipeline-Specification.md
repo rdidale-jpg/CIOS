@@ -1,11 +1,15 @@
 # EIRP-001 — Enterprise Intelligence Reasoning Pipeline Specification
 
-**Document class:** Supporting Flora runtime specification  
-**Status:** Proposed  
-**Owner:** Rob / CIOS  
-**Last updated:** 2026-07-18  
-**Owning decision:** [ADR-024](../../decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md)  
-**Owning architecture:** [FEIR-001](FEIR-001-Flora-Enterprise-Intelligence-Runtime-Architecture-v1.0.md)  
+**Identifier:** EIRP-001
+**Version:** 0.1
+**Document Type:** Runtime Pipeline Specification
+**Authority Classification:** Proposed canonical runtime specification
+**Document class:** Supporting Flora runtime specification
+**Status:** Proposed
+**Owner:** Rob / CIOS
+**Last updated:** 2026-07-18
+**Owning decision:** [ADR-024](../../decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md)
+**Owning architecture:** [FEIR-001](FEIR-001-Flora-Enterprise-Intelligence-Runtime-Architecture-v1.0.md)
 **Authority:** Proposed operational reasoning contract subordinate to ADR-024 and FEIR-001. It does not supersede accepted Enterprise Intelligence, Founding Paper, ADR, Banking or Enterprise Knowledge authority.
 
 ## 1. Mission and doctrine

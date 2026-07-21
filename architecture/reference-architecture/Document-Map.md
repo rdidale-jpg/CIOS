@@ -1,5 +1,9 @@
 # CIOS Architecture Document Map
 
+**Identifier:** DM-001
+**Version:** 1.0
+**Document Type:** Document Map
+**Authority Classification:** Canonical document map
 **Status:** Draft
 **Owner:** Rob / CIOS
 **Last updated:** 2026-07-21
@@ -30,7 +34,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | ADR-004 | [Human-Supplied Knowledge Must Be Labelled](../decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md) | Requires labelled, dated human-supplied knowledge. | Accepted | `architecture/decisions/` | Supports governance and provenance clarity. |
 | ADR-005 | [No Recommendation Without Inspectable Lineage](../decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md) | Requires inspectable lineage for strong recommendations. | Accepted | `architecture/decisions/` | Enforces trust, explainability and evidence lineage. |
 | ADR-010 | [Structured-Source-First, AI-Assisted Evidence Acquisition](../decisions/ADR-010-Structured-Source-First-AI-Assisted-Evidence-Acquisition.md) | Selects the governed acquisition hierarchy and treats provider output as candidate data. | Accepted | `architecture/decisions/` | Governs Financial Intelligence source acquisition and provider boundaries. |
-| ADR-015 | [Runtime Mission Context Architecture](../adr/ADR-015-Runtime-Mission-Context.md) | Establishes Mission, Research Policy, Capability Profile and Runtime Context as independent runtime inputs for AI-agent execution without modifying Evidence, Observation or Enterprise Model doctrine. | Accepted | `architecture/adr/` | Governs runtime configuration above Enterprise Intelligence Runtime; preserves universal Evidence, Observation and Knowledge Graph doctrine. |
+| ADR-015 | [Runtime Mission Context Architecture](../decisions/ADR-015-Runtime-Mission-Context.md) | Establishes Mission, Research Policy, Capability Profile and Runtime Context as independent runtime inputs for AI-agent execution without modifying Evidence, Observation or Enterprise Model doctrine. | Accepted | `architecture/decisions/` | Governs runtime configuration above Enterprise Intelligence Runtime; preserves universal Evidence, Observation and Knowledge Graph doctrine. |
 | ADR-006 | [Signal Architecture](../decisions/ADR-006-Signal-Architecture.md) | Migrated placeholder for future signal architecture review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
 | ADR-007 | [Transformation Thesis](../decisions/ADR-007-Transformation-Thesis.md) | Migrated placeholder for future transformation thesis review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
 | ADR-008 | [Recommendation Engine](../decisions/ADR-008-Recommendation-Engine.md) | Migrated placeholder for future recommendation engine review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |

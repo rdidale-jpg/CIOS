@@ -1,7 +1,11 @@
 # CIOS Reference Architecture Glossary
 
-**Status:** Draft  
-**Owner:** Rob / CIOS  
+**Identifier:** GL-001
+**Version:** 1.0
+**Document Type:** Glossary
+**Authority Classification:** Canonical glossary
+**Status:** Draft
+**Owner:** Rob / CIOS
 **Last updated:** 2026-07-21
 
 Use this glossary as the common vocabulary for CIOS architecture. Primary documents are linked where they currently exist.
@@ -16,10 +20,10 @@ Use this glossary as the common vocabulary for CIOS architecture. Primary docume
 | Enterprise Knowledge Graph | Graph structure connecting enterprise entities, relationships, attributes and evidence-backed edges. | [EI-002](../enterprise-intelligence/volume-1-enterprise-modelling/EI-002-Enterprise-Knowledge-Graph.md) |
 | Evidence | Attributable proof that something was observed from a permissible source. Evidence proves; it does not by itself constitute intelligence. | [FP-004](../founding-papers/FP-004-Evidence-Acquisition-Standard.md) |
 | Observation | Atomic, reusable unit of Enterprise Intelligence created from evidence and stored as durable memory. | [EI-012](../enterprise-intelligence/volume-5-intelligence-foundations/EI-012-Enterprise-Observation-Model.md) |
-| Runtime Context | Transient execution-time configuration assembled from Mission, Research Policy, Capability Profile, repository and authority context, workspace state and explicit human constraints for a specific AI-agent run; it does not modify durable doctrine. | [ADR-015](../adr/ADR-015-Runtime-Mission-Context.md) |
-| Mission | Bounded objective for one runtime execution, including intended outcome, scope, acceptance criteria, deliverables, constraints and completion report expectations. | [ADR-015](../adr/ADR-015-Runtime-Mission-Context.md) |
-| Research Policy | Declared behavioural mode governing research depth, source-seeking posture, assurance burden, stop rule and escalation threshold for a Mission without redefining Evidence. | [ADR-015](../adr/ADR-015-Runtime-Mission-Context.md) |
-| Capability Profile | Declared set of runtime abilities, tools, permissions, model affordances, environment constraints and output channels available to an agent for a Mission. | [ADR-015](../adr/ADR-015-Runtime-Mission-Context.md) |
+| Runtime Context | Transient execution-time configuration assembled from Mission, Research Policy, Capability Profile, repository and authority context, workspace state and explicit human constraints for a specific AI-agent run; it does not modify durable doctrine. | [ADR-015](../decisions/ADR-015-Runtime-Mission-Context.md) |
+| Mission | Bounded objective for one runtime execution, including intended outcome, scope, acceptance criteria, deliverables, constraints and completion report expectations. | [ADR-015](../decisions/ADR-015-Runtime-Mission-Context.md) |
+| Research Policy | Declared behavioural mode governing research depth, source-seeking posture, assurance burden, stop rule and escalation threshold for a Mission without redefining Evidence. | [ADR-015](../decisions/ADR-015-Runtime-Mission-Context.md) |
+| Capability Profile | Declared set of runtime abilities, tools, permissions, model affordances, environment constraints and output channels available to an agent for a Mission. | [ADR-015](../decisions/ADR-015-Runtime-Mission-Context.md) |
 | Strategic Signal | Commercially meaningful interpretation of evidence-backed change, pressure or opportunity. | [FP-007](../founding-papers/FP-007-Strategic-Signal-Standard.md) |
 | Pattern | Recurring relationship across Observations, Signals or enterprise behaviour that may explain change or predict future change. | [EI-003](../enterprise-intelligence/volume-1-enterprise-modelling/EI-003-Enterprise-Behaviour-Model.md) |
 | Hypothesis | Testable proposition used to validate or challenge an interpretation of enterprise change. | [FP-009](../founding-papers/FP-009-Hypothesis-Validation-Standard.md) |

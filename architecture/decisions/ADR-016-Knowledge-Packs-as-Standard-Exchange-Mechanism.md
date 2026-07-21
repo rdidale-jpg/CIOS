@@ -1,5 +1,9 @@
 # ADR-016 — Knowledge Packs as the Standard Exchange Mechanism
 
+**Identifier:** ADR-016
+**Version:** 1.0
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Accepted canonical ADR
 **Status:** Accepted
 **Date:** 2026-07-11
 **Owner:** Rob / CIOS

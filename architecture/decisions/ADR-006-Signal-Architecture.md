@@ -1,8 +1,12 @@
 # ADR-006 — Signal Architecture
 
-**Purpose:** Record the decision basis for CIOS signal architecture.  
-**Status:** Proposed  
-**Owner:** Rob / CIOS  
+**Identifier:** ADR-006
+**Version:** 0.1
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Proposed canonical ADR
+**Purpose:** Record the decision basis for CIOS signal architecture.
+**Status:** Proposed
+**Owner:** Rob / CIOS
 **Last updated:** 2026-07-02
 
 ## Migration note
