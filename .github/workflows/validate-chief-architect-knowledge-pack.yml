@@ -1,0 +1,81 @@
+name: Validate Chief Architect Knowledge Pack
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/validate-chief-architect-knowledge-pack.yml"
+      - "architecture/handbook/CIOS-Chief-Architect-Handbook.md"
+      - "architecture/founding-papers/FP-010-Knowledge-Pack-Architecture.md"
+      - "architecture/founding-papers/FP-012-Enterprise-Reinvention-Intelligence.md"
+      - "architecture/decisions/ADR-016-Knowledge-Pack-Architecture.md"
+      - "architecture/reference-architecture/**"
+      - "architecture/roadmap/**"
+      - "knowledge-packs/chief-architect/**"
+      - "tests/knowledge_packs/test_chief_architect_pack.py"
+      - "tools/knowledge-packs/build_pack.py"
+  push:
+    branches:
+      - main
+      - work
+    paths:
+      - ".github/workflows/validate-chief-architect-knowledge-pack.yml"
+      - "architecture/handbook/CIOS-Chief-Architect-Handbook.md"
+      - "architecture/founding-papers/FP-010-Knowledge-Pack-Architecture.md"
+      - "architecture/founding-papers/FP-012-Enterprise-Reinvention-Intelligence.md"
+      - "architecture/decisions/ADR-016-Knowledge-Pack-Architecture.md"
+      - "architecture/reference-architecture/**"
+      - "architecture/roadmap/**"
+      - "knowledge-packs/chief-architect/**"
+      - "tests/knowledge_packs/test_chief_architect_pack.py"
+      - "tools/knowledge-packs/build_pack.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate Chief Architect Knowledge Pack
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "pytest>=8.0"
+
+      - name: Run Chief Architect Knowledge Pack tests
+        run: |
+          pytest tests/knowledge_packs/test_chief_architect_pack.py
+
+      - name: Build Chief Architect Knowledge Pack
+        run: |
+          python3 tools/knowledge-packs/build_pack.py --profile chief-architect
+
+      - name: Verify output and checksum
+        run: |
+          ZIP="dist/CIOS-Chief-Architect-Knowledge-Pack-v1.0.0.zip"
+          REPORT="dist/CIOS-Chief-Architect-Knowledge-Pack-v1.0.0-build-report.md"
+          CHECKSUM="dist/CIOS-Chief-Architect-Knowledge-Pack-v1.0.0.sha256"
+
+          test -f "$ZIP"
+          test -f "$REPORT"
+          sha256sum "$ZIP" > "$CHECKSUM"
+          sha256sum --check "$CHECKSUM"
+
+      - name: Upload validation artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: CIOS-Chief-Architect-Knowledge-Pack-v1.0.0
+          path: |
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.0.0.zip
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.0.0-build-report.md
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.0.0.sha256
