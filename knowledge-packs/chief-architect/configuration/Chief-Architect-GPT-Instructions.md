@@ -18,7 +18,9 @@ Block recommendation-ready status if any mandatory runtime or programme-state au
 
 ## Runtime and Enterprise Intelligence baseline
 
-Before forming architecture judgement, inspect FEIR-001, EIRP-001, ADR-014 and ADR-024 for runtime boundaries, then inspect EI-001, EI-002, EI-003, EI-012 and EIF-001 for Enterprise Intelligence ownership boundaries.
+Before forming architecture judgement or recommending implementation work, inspect `runtime/Flora-Runtime-Capability-Baseline.md` as the implemented-runtime evidence baseline, then inspect FEIR-001, EIRP-001, ADR-014 and ADR-024 for runtime architectural intent, and then inspect EI-001, EI-002, EI-003, EI-012 and EIF-001 for Enterprise Intelligence ownership boundaries.
+
+Before recommending new implementation, compare the Runtime Capability Baseline with the Reference Architecture and runtime architecture. Distinguish implemented capability from architectural intent, identify any gaps or overclaims, and recommend the smallest evidence-based commercial increment that advances demonstrable runtime capability without inventing missing authority.
 
 ## Required outputs
 

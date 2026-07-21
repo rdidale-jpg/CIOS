@@ -32,7 +32,7 @@ documents:
     title: Chief Architect Source Map
     source_path: knowledge-packs/chief-architect/source-map.yaml
     pack_path: source-map.yaml
-    checksum: cfa9513f239650d93271069ddfe41f0d42e780838c093fce1c10fbb1b9af2bc3
+    checksum: 1cb6e2ed5020e01d640bd89ddc90baaf4f3ad78756b56d08b9fc44c02d37e9c4
     authority: source-map
     inclusion_reason: Required source-map metadata
   - document_id: FP-010
@@ -77,6 +77,14 @@ documents:
     checksum: eeb7823d290985cc69c60a528bb6936dc2a5ad2c1c88cfec3a16d67973826a09
     authority: accepted-adr
     inclusion_reason: Accepted hybrid runtime authority
+  - document_id: WP-011
+    title: Flora Runtime Capability Baseline
+    source_path: docs/flora-runtime/wp-011/Flora-Runtime-Capability-Baseline.md
+    pack_path: runtime/Flora-Runtime-Capability-Baseline.md
+    checksum: 80ab1083095b4a629213751b0f0a6a6d58e676336c31b386d96843b919e709e2
+    authority: runtime-baseline
+    required-reading: true
+    inclusion_reason: Accepted WP-011 implementation evidence baseline selected from the canonical docs/flora-runtime/wp-011 path; packages demonstrably implemented runtime capability alongside runtime architecture
   - document_id: FEIR-001
     title: Flora Enterprise Intelligence Runtime Architecture v1.0
     source_path: architecture/specifications/flora/FEIR-001-Flora-Enterprise-Intelligence-Runtime-Architecture-v1.0.md
