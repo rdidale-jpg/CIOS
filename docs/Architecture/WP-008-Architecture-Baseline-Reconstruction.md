@@ -1,10 +1,10 @@
 # WP-008 — Architecture Baseline Reconstruction
 
-**Status:** Analysis complete  
-**Document type:** Architecture baseline report  
-**Version:** 0.1.0  
-**Date:** 2026-07-21  
-**Owner:** CIOS Architecture Engineer  
+**Status:** Analysis complete
+**Document type:** Architecture baseline report
+**Version:** 0.1.0
+**Date:** 2026-07-21
+**Owner:** CIOS Architecture Engineer
 
 ## Executive Summary
 
@@ -101,7 +101,7 @@ No architectural change is proposed here. All findings are classified only as Pr
 | ADR-001 | Observations as Atomic Intelligence Unit | `architecture/decisions/ADR-001-Observations-as-Atomic-Intelligence-Unit.md` | Accepted | ADR | repository-current | Observation as atomic intelligence unit. |
 | ADR-002 | Enterprise Model as Durable Memory | `architecture/decisions/ADR-002-Enterprise-Model-as-Durable-Memory.md` | Accepted | ADR | repository-current | Enterprise Model durable memory. |
 | ADR-003 | CIRM and EI Separation | `architecture/decisions/ADR-003-CIRM-and-EI-Separation.md` | Accepted | ADR | repository-current | Separates CIRM and EI. |
-| ADR-003 | Governed UK Banking Theme Taxonomy | `architecture/decisions/ADR-003-uk-banking-theme-taxonomy.md` | not explicit | ADR | repository-current | UK banking theme taxonomy; duplicate ADR ID requires review. |
+| ADR-003 | Governed UK Banking Theme Taxonomy | `architecture/decisions/UK-Banking-Theme-Taxonomy-Decision.md` | not explicit | ADR | repository-current | UK banking theme taxonomy; duplicate ADR ID requires review. |
 | ADR-004 | Human-Supplied Knowledge Must Be Labelled | `architecture/decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md` | Accepted | ADR | repository-current | Human-supplied knowledge labelling. |
 | ADR-005 | No Recommendation Without Inspectable Lineage | `architecture/decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md` | Accepted | ADR | repository-current | Recommendation lineage. |
 | ADR-006 | Signal Architecture | `architecture/decisions/ADR-006-Signal-Architecture.md` | Proposed | ADR | repository-current | Signal architecture. |
@@ -113,8 +113,8 @@ No architectural change is proposed here. All findings are classified only as Pr
 | ADR-012 | Governed Blueprint Package Import and Canonical Acceptance Boundary | `architecture/decisions/ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md` | Accepted | ADR | repository-current | Blueprint import acceptance boundary. |
 | ADR-013 | Enterprise Canvas as the Primary Living Twin Navigation Model | `architecture/decisions/ADR-013-Enterprise-Canvas-as-Primary-Living-Twin-Navigation.md` | Accepted | ADR | repository-current | Enterprise Canvas navigation. |
 | ADR-014 | Evidence-Governed Enterprise Intelligence Reasoning Runtime | `architecture/decisions/ADR-014-Evidence-Governed-Enterprise-Intelligence-Reasoning-Runtime.md` | not explicit | ADR | repository-current | Reasoning runtime. |
-| ADR-015 | Observation Identity and Minimal Model Projection | `architecture/decisions/ADR-015-Observation-Identity-and-Minimal-Model-Projection.md` | not explicit | ADR | repository-current | Observation identity. |
-| ADR-015 | Runtime Mission Context Architecture | `architecture/adr/ADR-015-Runtime-Mission-Context.md` | Accepted | ADR | repository-current | Runtime mission context; duplicate ADR ID requires review. |
+| ADR-015 | Observation Identity and Minimal Model Projection | `architecture/decisions/Historical-Observation-Identity-and-Minimal-Model-Projection-Draft.md` | not explicit | ADR | repository-current | Observation identity. |
+| ADR-015 | Runtime Mission Context Architecture | `architecture/decisions/ADR-015-Runtime-Mission-Context.md` | Accepted | ADR | repository-current | Runtime mission context; duplicate ADR ID requires review. |
 | ADR-016 | Knowledge Packs as the Standard Exchange Mechanism | `architecture/decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md` | Accepted | ADR | repository-current | Knowledge Packs as exchange mechanism. |
 | ADR-023 | Enterprise Understanding as the Primary Governed Asset | `architecture/decisions/ADR-023-Enterprise-Understanding-as-the-Primary-Governed-Asset.md` | Proposed | ADR | repository-current | Enterprise understanding. |
 | ADR-024 | Hybrid Enterprise Intelligence Runtime | `architecture/decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md` | not explicit | ADR | repository-current | Hybrid EI runtime. |
@@ -125,7 +125,7 @@ No architectural change is proposed here. All findings are classified only as Pr
 | ID | Title | Path | Status | Type | Version | Purpose |
 | --- | --- | --- | --- | --- | --- | --- |
 | AP-001 | Architecture Compilation Standard | `architecture/reference-architecture/standards/AP-001-Architecture-Compilation-Standard.md` | Accepted | Process standard | repository-current | Registry-backed compilation profiles and non-promotion rules. |
-| AP-001 v1.1 | Architecture Compilation Standard | `architecture/reference-architecture/standards/AP-001-Architecture-Compilation-Standard-v1.1.md` | Accepted | Process standard | v1.1 | Later AP-001 file; relationship to base AP-001 requires review. |
+| AP-001 v1.1 | Architecture Compilation Standard | `architecture/reference-architecture/standards/AP-001-Architecture-Compilation-Standard-v1.1-Historical-Copy.md` | Accepted | Process standard | v1.1 | Later AP-001 file; relationship to base AP-001 requires review. |
 | AP-002 | Architecture Metadata Standard | `architecture/reference-architecture/standards/AP-002-Architecture-Metadata-Standard.md` | Accepted | Metadata standard | repository-current | Canonical architecture metadata semantics. |
 | RP-001 | Enterprise Blueprint Researcher Profile | `architecture/reference-architecture/profiles/RP-001-Enterprise-Blueprint-Researcher-Profile.md` | Accepted | Role profile | repository-current | Researcher role and pack membership. |
 | RP-002 | Enterprise Intelligence Assurance Profile | `architecture/reference-architecture/profiles/RP-002-Enterprise-Intelligence-Assurance-Profile.md` | Accepted | Role profile | repository-current | Assurance role and pack membership. |
@@ -215,7 +215,7 @@ The repository contains GitHub workflow configuration under `.github/workflows/`
 
 ## Mission Architecture
 
-Mission architecture exists in two places: runtime mission context is governed by `architecture/adr/ADR-015-Runtime-Mission-Context.md`, while researcher pack mission execution is governed by `knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md`, `knowledge-packs/researcher/operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md`, and `knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md`. The source map explicitly groups researcher mission governance as RKI-001, RG-001 and MISSION-UKCG-001.
+Mission architecture exists in two places: runtime mission context is governed by `architecture/decisions/ADR-015-Runtime-Mission-Context.md`, while researcher pack mission execution is governed by `knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md`, `knowledge-packs/researcher/operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md`, and `knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md`. The source map explicitly groups researcher mission governance as RKI-001, RG-001 and MISSION-UKCG-001.
 
 ## Twin Architecture
 
@@ -261,8 +261,8 @@ Evidence lineage is owned across FP-004, ADR-010, EI-012, ADR-001, ADR-015 obser
 
 | Finding | Evidence | Classification | Owning documents |
 | --- | --- | --- | --- |
-| Duplicate ADR-003 identifiers | `architecture/decisions/ADR-003-CIRM-and-EI-Separation.md` and `architecture/decisions/ADR-003-uk-banking-theme-taxonomy.md` | Review Required | ADR index / Document Map / Authority Registry |
-| Duplicate ADR-015 identifiers | `architecture/decisions/ADR-015-Observation-Identity-and-Minimal-Model-Projection.md` and `architecture/adr/ADR-015-Runtime-Mission-Context.md` | Review Required | ADR index / Document Map / Authority Registry |
+| Duplicate ADR-003 identifiers | `architecture/decisions/ADR-003-CIRM-and-EI-Separation.md` and `architecture/decisions/UK-Banking-Theme-Taxonomy-Decision.md` | Review Required | ADR index / Document Map / Authority Registry |
+| Duplicate ADR-015 identifiers | `architecture/decisions/Historical-Observation-Identity-and-Minimal-Model-Projection-Draft.md` and `architecture/decisions/ADR-015-Runtime-Mission-Context.md` | Review Required | ADR index / Document Map / Authority Registry |
 | AP-001 exists in base and v1.1 files | Two AP-001 standard files exist, both marked Accepted | Review Required | AP-001 / Authority Registry |
 | FP-002 and FP-007 share the title Strategic Signal Standard | Two Founding Papers use same title | Review Required | Founding Papers / Document Map |
 | Some ADR status metadata absent in extracted headers | ADR-014, ADR-015 observation and ADR-024 did not expose a simple `**Status:**` header in the scanned top matter | Review Required | ADR index / Authority Registry |
@@ -475,7 +475,7 @@ This single report contains the Architecture Baseline Report, Repository Invento
 | Opportunity discovery lifecycle | `architecture/reference-architecture/standards/EOD-001-Enterprise-Opportunity-Discovery-Standard.md` states EOD begins after EIF-001 has produced the initial Enterprise Twin and gives lifecycle steps from Enterprise through Enterprise Twin, discovery, prioritisation, OT-001, Research Sprint, RTP, OPI, Decision Envelope, Provider Fit, Executive Pursuit, Learning and Enterprise Twin evolution. | Explicit Review |
 | Provider-neutral discovery | EOD-001 principles say research the enterprise, not the procurement, and keep Provider Fit separate from public research. | Explicit Review |
 | OPI positioning outputs | `architecture/reference-architecture/standards/OPI-001-Opportunity-Positioning-Intelligence.md` creates candidate positioning objects for an Opportunity Twin, including positioning statement, buyer/stakeholder frame, problem narrative, value hypothesis, differentiated angle, proof points, evidence demands, objections, risks, Unknowns, Contradictions and next learning action. | Explicit Review |
-| Mission/runtime context | `architecture/adr/ADR-015-Runtime-Mission-Context.md` defines Mission, Research Policy and Capability Profile as independent runtime inputs assembled into Runtime Context; Runtime Context is transient configuration and not durable knowledge. | Explicit Accepted ADR |
+| Mission/runtime context | `architecture/decisions/ADR-015-Runtime-Mission-Context.md` defines Mission, Research Policy and Capability Profile as independent runtime inputs assembled into Runtime Context; Runtime Context is transient configuration and not durable knowledge. | Explicit Accepted ADR |
 | Mission boundaries | ADR-015 says runtime context can guide execution but must not silently write doctrine, promote candidate intelligence into canonical fact, or alter Evidence, Observation, Enterprise Model or Knowledge Graph meanings. | Explicit Accepted ADR |
 | Runtime reasoning/lineage | `architecture/specifications/flora/EIRP-001-Enterprise-Intelligence-Reasoning-Pipeline-Specification.md` requires recommendation eligibility to enforce Evidence → Observation → Mechanism/Signal → Enterprise Context → Hypothesis → Commercial Assessment → Recommendation and says canonical semantics remain owned by governing documents. | Explicit Proposed runtime contract |
 | Authority precedence | `architecture/reference-architectures/FA-001-Flora-Enterprise-Intelligence-Workspace-Reference-Architecture.md` says where it conflicts with an Accepted ADR or owning architecture paper, the Accepted ADR or owning paper prevails. | Explicit |

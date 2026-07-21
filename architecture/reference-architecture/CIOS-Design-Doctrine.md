@@ -1,6 +1,10 @@
 # CIOS Design Doctrine
 
-**Status:** Living doctrine
+**Identifier:** DD-001
+**Version:** 1.0
+**Document Type:** Design Doctrine
+**Authority Classification:** Canonical design doctrine
+**Status:** Draft
 **Owner:** Rob / CIOS
 **Last updated:** 2026-07-11
 

@@ -1,7 +1,11 @@
 # FEIR-001 Completion Report — Hybrid Flora Enterprise Intelligence Runtime Architecture
 
+**Governance classification:** Completion report; traceability evidence only; not canonical architecture authority.
+**Canonical architecture identifier:** None.
+**Related document:** FEIR-001
+
 **Status:** Complete — reconciled 2026-07-18
-**Owner:** Rob / CIOS  
+**Owner:** Rob / CIOS
 **Last updated:** 2026-07-18
 
 ## Reconciliation summary
@@ -67,7 +71,7 @@ FEIR-001 remains **Proposed** as the owning specification pending separate speci
 
 - `architecture/decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md`
 - `architecture/specifications/flora/FEIR-001-Flora-Enterprise-Intelligence-Runtime-Architecture-v1.0.md`
-- `architecture/specifications/flora/FEIR-001-Completion-Report.md`
+- `architecture/specifications/flora/Flora-Enterprise-Intelligence-Runtime-Architecture-Completion-Report.md`
 - `architecture/specifications/flora/README.md`
 - `architecture/decisions/README.md`
 - `architecture/reference-architecture/Architecture-Authority-Registry.md`
@@ -78,7 +82,7 @@ FEIR-001 remains **Proposed** as the owning specification pending separate speci
 - `architecture/decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md`
 - `architecture/decisions/README.md`
 - `architecture/specifications/flora/FEIR-001-Flora-Enterprise-Intelligence-Runtime-Architecture-v1.0.md`
-- `architecture/specifications/flora/FEIR-001-Completion-Report.md`
+- `architecture/specifications/flora/Flora-Enterprise-Intelligence-Runtime-Architecture-Completion-Report.md`
 - `architecture/specifications/flora/README.md`
 - `architecture/reference-architecture/Architecture-Authority-Registry.md`
 - `architecture/reference-architecture/Document-Map.md`

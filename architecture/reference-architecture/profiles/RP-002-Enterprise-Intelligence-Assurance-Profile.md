@@ -1,9 +1,13 @@
 # RP-002 — Enterprise Intelligence Assurance Profile
 
-**Document class:** Architecture role profile  
-**Status:** Accepted  
-**Owner:** Rob / CIOS  
-**Last updated:** 2026-07-13  
+**Identifier:** RP-002
+**Version:** 1.0
+**Document Type:** Architecture Role Profile
+**Authority Classification:** Canonical architecture profile
+**Document class:** Architecture role profile
+**Status:** Accepted
+**Owner:** Rob / CIOS
+**Last updated:** 2026-07-13
 **Production behaviour:** Documentation-only role profile; does not change runtime behaviour, existing architecture, document authority, export code or canonical Twin state.
 
 ## Purpose

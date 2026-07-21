@@ -1,8 +1,12 @@
 # ADR-007 — Transformation Thesis
 
-**Purpose:** Record the decision basis for the CIOS transformation thesis.  
-**Status:** Proposed  
-**Owner:** Rob / CIOS  
+**Identifier:** ADR-007
+**Version:** 0.1
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Proposed canonical ADR
+**Purpose:** Record the decision basis for the CIOS transformation thesis.
+**Status:** Proposed
+**Owner:** Rob / CIOS
 **Last updated:** 2026-07-02
 
 ## Migration note

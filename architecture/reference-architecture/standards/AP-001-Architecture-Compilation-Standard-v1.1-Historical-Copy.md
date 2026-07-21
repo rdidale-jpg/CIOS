@@ -1,9 +1,13 @@
 # AP-001 — Architecture Compilation Standard
 
-**Document class:** Architecture process standard  
-**Status:** Accepted  
-**Owner:** Rob / CIOS  
-**Last updated:** 2026-07-11  
+**Governance classification:** Historical copy of AP-001 retained for evidence; canonical AP-001 remains AP-001-Architecture-Compilation-Standard.md.
+**Canonical architecture identifier:** None.
+**Related document:** AP-001
+
+**Document class:** Architecture process standard
+**Status:** Accepted
+**Owner:** Rob / CIOS
+**Last updated:** 2026-07-11
 **Production behaviour:** Documentation-only governance standard; does not change runtime behaviour, export code, production pack membership or canonical Twin state.
 
 ## Purpose

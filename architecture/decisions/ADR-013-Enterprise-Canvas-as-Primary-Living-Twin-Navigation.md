@@ -1,10 +1,14 @@
 # ADR-013 — Enterprise Canvas as the Primary Living Twin Navigation Model
 
-**Status:** Accepted  
-**Decision date:** 2026-07-09  
-**Owner:** Rob / CIOS  
-**Decision class:** Product surface and cross-cutting experience architecture  
-**Supersedes:** None  
+**Identifier:** ADR-013
+**Version:** 1.0
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Accepted canonical ADR
+**Status:** Accepted
+**Decision date:** 2026-07-09
+**Owner:** Rob / CIOS
+**Decision class:** Product surface and cross-cutting experience architecture
+**Supersedes:** None
 **Related decisions:** ADR-002, ADR-004, ADR-005, ADR-012
 
 ## Context

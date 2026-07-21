@@ -1,10 +1,14 @@
 # ADR-012 — Governed Blueprint Package Import and Canonical Acceptance Boundary
 
-**Status:** Accepted  
-**Decision date:** 2026-07-09  
-**Owner:** Rob / CIOS  
-**Decision class:** Governance, durable memory and cross-cutting runtime  
-**Supersedes:** None  
+**Identifier:** ADR-012
+**Version:** 1.0
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Accepted canonical ADR
+**Status:** Accepted
+**Decision date:** 2026-07-09
+**Owner:** Rob / CIOS
+**Decision class:** Governance, durable memory and cross-cutting runtime
+**Supersedes:** None
 **Related decisions:** ADR-001, ADR-002, ADR-003, ADR-004, ADR-005, ADR-010
 
 ## Context

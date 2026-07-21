@@ -1,9 +1,13 @@
 # EU-001 Review and Acceptance Checklist
 
-**Document class:** Review checklist  
-**Status:** Review  
-**Owner:** Rob / CIOS  
-**Applies to:** EU-001 and ADR-023  
+**Governance classification:** Review checklist; traceability evidence only; not canonical architecture authority.
+**Canonical architecture identifier:** None.
+**Related document:** EU-001
+
+**Document class:** Review checklist
+**Status:** Review
+**Owner:** Rob / CIOS
+**Applies to:** EU-001 and ADR-023
 **Production release-profile membership:** None
 
 ## Status guardrails

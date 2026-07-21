@@ -1,8 +1,12 @@
 # CIOS Architecture Authority Registry
 
-**Document class:** Architecture governance registry  
-**Status:** Draft  
-**Owner:** Rob / CIOS  
+**Identifier:** AAR-001
+**Version:** 1.0
+**Document Type:** Authority Registry
+**Authority Classification:** Canonical authority registry
+**Document class:** Architecture governance registry
+**Status:** Draft
+**Owner:** Rob / CIOS
 **Last updated:** 2026-07-19
 
 ## Purpose

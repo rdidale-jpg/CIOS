@@ -1,5 +1,9 @@
 # ADR-015: Observation Identity and Minimal Model Projection
 
+**Governance classification:** Historical proposed ADR draft retained as non-authoritative evidence; canonical ADR-015 is Runtime Mission Context Architecture.
+**Canonical architecture identifier:** None.
+**Related document:** ADR-015
+
 Status: Proposed
 Date: 2026-07-04
 Owner: Rob / CIOS

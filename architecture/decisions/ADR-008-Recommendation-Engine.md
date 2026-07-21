@@ -1,8 +1,12 @@
 # ADR-008 — Recommendation Engine
 
-**Purpose:** Record the decision basis for recommendation engine principles.  
-**Status:** Proposed  
-**Owner:** Rob / CIOS  
+**Identifier:** ADR-008
+**Version:** 0.1
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Proposed canonical ADR
+**Purpose:** Record the decision basis for recommendation engine principles.
+**Status:** Proposed
+**Owner:** Rob / CIOS
 **Last updated:** 2026-07-02
 
 ## Migration note

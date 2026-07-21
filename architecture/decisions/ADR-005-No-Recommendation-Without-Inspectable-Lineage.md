@@ -1,5 +1,9 @@
 # ADR-005 — No Recommendation Without Inspectable Lineage
 
+**Identifier:** ADR-005
+**Version:** 1.0
+**Document Type:** Architecture Decision Record
+**Authority Classification:** Accepted canonical ADR
 **Status:** Accepted
 **Date:** 2026-07-03
 **Owner:** Rob / CIOS

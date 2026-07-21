@@ -1,0 +1,56 @@
+# WP-009A governed architecture scope definition.
+# Governance is determined by canonical path, registered authority, recognised document type,
+# or explicit inclusion. Markdown extension alone never confers architecture authority.
+required_metadata:
+  - Identifier
+  - Title
+  - Status
+  - Version
+  - Owner
+  - Date
+  - Document Type
+  - Authority Classification
+valid_statuses: [Draft, Proposed, Review, Accepted, Superseded, Deprecated]
+canonical_adr_path: architecture/decisions/
+governed_paths:
+  - architecture/decisions/ADR-001-Observations-as-Atomic-Intelligence-Unit.md
+  - architecture/decisions/ADR-002-Enterprise-Model-as-Durable-Memory.md
+  - architecture/decisions/ADR-003-CIRM-and-EI-Separation.md
+  - architecture/decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md
+  - architecture/decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md
+  - architecture/decisions/ADR-006-Signal-Architecture.md
+  - architecture/decisions/ADR-007-Transformation-Thesis.md
+  - architecture/decisions/ADR-008-Recommendation-Engine.md
+  - architecture/decisions/ADR-009-Progressive-Assurance-for-Commercial-Digital-Twins.md
+  - architecture/decisions/ADR-010-Structured-Source-First-AI-Assisted-Evidence-Acquisition.md
+  - architecture/decisions/ADR-011-Dual-Speed-Financial-Intelligence.md
+  - architecture/decisions/ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md
+  - architecture/decisions/ADR-013-Enterprise-Canvas-as-Primary-Living-Twin-Navigation.md
+  - architecture/decisions/ADR-014-Evidence-Governed-Enterprise-Intelligence-Reasoning-Runtime.md
+  - architecture/decisions/ADR-015-Runtime-Mission-Context.md
+  - architecture/decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md
+  - architecture/decisions/ADR-023-Enterprise-Understanding-as-the-Primary-Governed-Asset.md
+  - architecture/decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md
+  - architecture/decisions/ADR-025-Flora-as-the-Enterprise-Intelligence-Workspace.md
+  - architecture/reference-architecture/CIOS-Reference-Architecture-v1.0.md
+  - architecture/reference-architecture/Architecture-Principles.md
+  - architecture/reference-architecture/CIOS-Design-Doctrine.md
+  - architecture/reference-architecture/Architecture-Authority-Registry.md
+  - architecture/reference-architecture/Document-Map.md
+  - architecture/reference-architecture/Glossary.md
+  - architecture/reference-architecture/standards/AP-001-Architecture-Compilation-Standard.md
+  - architecture/reference-architecture/standards/AP-002-Architecture-Metadata-Standard.md
+  - architecture/reference-architecture/profiles/RP-001-Enterprise-Blueprint-Researcher-Profile.md
+  - architecture/reference-architecture/profiles/RP-002-Enterprise-Intelligence-Assurance-Profile.md
+  - architecture/specifications/flora/FEIR-001-Flora-Enterprise-Intelligence-Runtime-Architecture-v1.0.md
+  - architecture/specifications/flora/EIRP-001-Enterprise-Intelligence-Reasoning-Pipeline-Specification.md
+  - architecture/enterprise-intelligence/contracts/EU-001-Enterprise-Understanding-Contract.md
+excluded_classifications:
+  - Completion report
+  - Implementation report
+  - Audit report
+  - Review checklist
+  - Programme note
+  - Operational guide
+  - Historical evidence
+  - Product decision outside architecture authority
