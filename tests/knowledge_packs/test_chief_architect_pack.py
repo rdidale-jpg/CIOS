@@ -14,7 +14,7 @@ def docs():
 
 def test_manifest_completeness_sources_and_shared_authorities():
     ds=docs(); ids={d['document_id'] for d in ds}
-    required={'CA-001','FP-010','FP-012','FP-009','ADR-016','ADR-014','ADR-024','REF-001','PRINCIPLES-001','CURRENT-PROGRAMME-STATE','WP-011','FEIR-001','EIRP-001','EI-001','EI-002','EI-003','EI-012','EIF-001','KPS-001','CA-OG-001','CA-TEMPLATE-001','CA-SOURCE-MAP'}
+    required={'CA-001','FP-010','FP-012','FP-009','ADR-016','ADR-014','ADR-024','REF-001','PRINCIPLES-001','CURRENT-PROGRAMME-STATE','WP-011','FEIR-001','EIRP-001','EI-001','EI-002','EI-003','EI-004','EI-012','EIF-001','KPS-001','CA-OG-001','CA-TEMPLATE-001','CA-SOURCE-MAP'}
     assert required <= ids
     authorities={d['authority'] for d in ds}
     assert {'runtime-baseline','programme-state','operating-guidance','template','source-map','enterprise-intelligence-authority'} <= authorities
@@ -25,14 +25,26 @@ def test_manifest_completeness_sources_and_shared_authorities():
     assert [d for d in ds if d['document_id']=='FP-010'][0]['source_path']=='architecture/founding-papers/FP-010-Knowledge-Pack-Architecture.md'
     assert [d for d in ds if d['document_id']=='FP-012'][0]['source_path']=='architecture/founding-papers/FP-012-Enterprise-Reinvention-Intelligence.md'
 
+def test_source_map_references_resolve_to_exactly_one_manifest_entry():
+    ds=docs()
+    source_map=(ROOT/[d for d in ds if d['document_id']=='CA-SOURCE-MAP'][0]['source_path']).read_text()
+    ids=[]
+    for line in source_map.splitlines():
+        if '[' in line and ']' in line:
+            ids.extend([part.strip() for part in line.split('[',1)[1].split(']',1)[0].split(',') if part.strip()])
+    for document_id in ids:
+        assert sum(1 for d in ds if d['document_id']==document_id)==1, document_id
+
 def test_recommendation_readiness_and_programme_state_freshness_use_current_programme_state():
     ds=docs(); by={d['document_id']:d for d in ds}
     handbook=(ROOT/by['CA-001']['source_path']).read_text()
     programme=(ROOT/by['CURRENT-PROGRAMME-STATE']['source_path']).read_text()
     roadmap=by['ROADMAP-001']
     assert 'No strong Recommendation without inspectable lineage' in handbook
-    assert '**Last updated:** 2026-07-21' in programme
+    assert '**As of:** 2026-07-21' in programme
     assert 'Roadmaps are planning inputs only' in programme
+    for field in ['Architecture baseline','Runtime baseline','Active work package','Current delivery objective','Current product / twin focus','Demonstrable capability','Work in progress','Blockers','Risks','Open decisions','Next decision']:
+        assert f'## {field}' in programme
     assert roadmap['authority']=='proposed-context'
     assert roadmap['inclusion_reason']!='Programme-state freshness source'
 
@@ -55,7 +67,7 @@ def test_deterministic_build_zip_checksum_index_pack_state_and_completeness_matr
     with zipfile.ZipFile(zip_path) as z:
         names=set(z.namelist())
         pack_state=z.read('PACK-STATE.md').decode()
-    for needed in ['DOCUMENT-INDEX.md','PACK-STATE.md','checksums.sha256','handbook/CIOS-Chief-Architect-Handbook.md','architecture/FP-010-Knowledge-Pack-Architecture.md','programme/CURRENT-PROGRAMME-STATE.md','runtime/Flora-Runtime-Capability-Baseline.md','runtime/FEIR-001-Flora-Enterprise-Intelligence-Runtime-Architecture-v1.0.md','runtime/EIRP-001-Enterprise-Intelligence-Reasoning-Pipeline-Specification.md','enterprise-intelligence/EI-001-Enterprise-Model-Specification.md','source-map.yaml','templates/Architecture-Decision-Review-Template.md','operating-guidance/Chief-Architect-Operating-Guidance.md']:
+    for needed in ['DOCUMENT-INDEX.md','PACK-STATE.md','checksums.sha256','handbook/CIOS-Chief-Architect-Handbook.md','architecture/FP-010-Knowledge-Pack-Architecture.md','programme/CURRENT-PROGRAMME-STATE.md','runtime/Flora-Runtime-Capability-Baseline.md','runtime/FEIR-001-Flora-Enterprise-Intelligence-Runtime-Architecture-v1.0.md','runtime/EIRP-001-Enterprise-Intelligence-Reasoning-Pipeline-Specification.md','enterprise-intelligence/EI-001-Enterprise-Model-Specification.md','enterprise-intelligence/EI-004-Commercial-Reasoning-Framework.md','source-map.yaml','templates/Architecture-Decision-Review-Template.md','operating-guidance/Chief-Architect-Operating-Guidance.md']:
         assert needed in names
     assert 'Recommendation readiness: passed' in pack_state
     assert 'runtime_baseline:' in pack_state
