@@ -38,7 +38,7 @@ def test_required_content_and_instruction_ownership():
 def test_deterministic_build_and_zip_contents():
     cmd=['python3','tools/knowledge-packs/build_researcher_pack.py']
     a=subprocess.check_output(cmd,cwd=ROOT,text=True)
-    zip_path=ROOT/'dist/CIOS-Researcher-Knowledge-Pack-v2.1.0.zip'
+    zip_path=ROOT/'dist/CIOS-Researcher-Knowledge-Pack-v2.2.0.zip'
     h1=hashlib.sha256(zip_path.read_bytes()).hexdigest()
     b=subprocess.check_output(cmd,cwd=ROOT,text=True)
     h2=hashlib.sha256(zip_path.read_bytes()).hexdigest()
