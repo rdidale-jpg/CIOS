@@ -5,7 +5,7 @@
 **Version:** 1.0 — Editorial Draft  
 **Status:** Living handbook  
 **Owner:** Rob / CIOS  
-**Last updated:** 2026-07-10
+**Last updated:** 2026-07-21
 **Canonical source:** `architecture/handbook/CIOS-Chief-Architect-Handbook.md`
 
 ---
@@ -36,6 +36,21 @@ Use the following authority order when documents appear to conflict:
 6. Runtime documentation, implementation notes and generated views.
 
 A conflict is not something to conceal. It is an architecture task. Record it, resolve it and update the affected source of truth.
+
+
+## Governance rule: repository artefact authority
+
+No architectural decision becomes authoritative until represented by a reviewed and merged repository artefact. Conversation, runtime prompts, draft outputs and generated views may inform architecture, but they do not become doctrine until the relevant ADR, reference architecture, Founding Paper, Enterprise Intelligence paper, specification or register update is committed, reviewed and merged.
+
+## Architecture Development Lifecycle
+
+CIOS architecture work follows this lifecycle:
+
+1. **Discovery** — understand the problem, existing doctrine, evidence, conflicts and decision pressure.
+2. **Decision** — record the chosen architecture direction, alternatives, consequences and authority impact.
+3. **Implementation** — update the repository artefacts, data contracts, tests or runtime behaviour needed to make the decision inspectable.
+4. **Review** — validate terminology, cross-references, doctrine consistency, lineage and acceptance criteria.
+5. **Release** — merge the reviewed artefact and communicate the authoritative change and any follow-on work.
 
 ## Audience
 
