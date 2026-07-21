@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.2.0
+
+- Released participant-aware intelligence update for connected Industry, Enterprise, Market Participant, Opportunity and Relational Twin research.
+- Packaged canonical Market Participant Twin, Account-Participant Position Assessment, Industry Twin Lifecycle, FP-011, EI-004, EIF-001, EOD-001 and OT-001 sources where present in the repository.
+- Added Market Participant Twin, Account-Participant Position Assessment and Opportunity Hypothesis templates.
+- Integrated supplier, competitor, incumbent, partner, contract, procurement and opportunity context into Researcher instructions, RG-001, the UK Central Government mission and readiness gate.
+- Extended validation to report participant-aware intelligence controls and differentiate hard failures, unresolved-source warnings and optional-document notices.
+
+
 ## 2.1.0
 
 - Introduced repository-managed Researcher Knowledge Pack.

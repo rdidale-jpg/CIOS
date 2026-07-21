@@ -7,6 +7,7 @@ DIST=ROOT/'dist'
 VERSION=(PACK/'VERSION').read_text().strip()
 ZIP=DIST/f'CIOS-Researcher-Knowledge-Pack-v{VERSION}.zip'
 REPORT=DIST/f'CIOS-Researcher-Knowledge-Pack-v{VERSION}-build-report.md'
+RELEASE_SHA=DIST/f'CIOS-Researcher-Knowledge-Pack-v{VERSION}.zip.sha256'
 STAGE=ROOT/'.tmp/researcher-pack-stage'
 
 def parse_manifest(path):
@@ -21,7 +22,7 @@ def parse_manifest(path):
 def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 
 def validate(docs):
-    req={'EI-001','EI-002','EI-003','EI-012','FP-009','FP-010','FP-012','ADR-016','RG-001','RKI-001','MISSION-UKCG-001'}
+    req={'EI-001','EI-002','EI-003','EI-004','EI-012','FP-009','FP-010','FP-011','FP-012','ADR-016','RG-001','RKI-001','MISSION-UKCG-001','MPT-001','APPA-001','ITL-SPEC-001','EIF-001','EOD-001','OT-001','TEMPLATE-Market-Participant-Twin','TEMPLATE-Account-Participant-Position-Assessment','TEMPLATE-Opportunity-Hypothesis'}
     ids={d['document_id'] for d in docs}
     missing=req-ids
     if missing: raise SystemExit(f'Missing required documents: {sorted(missing)}')
@@ -37,9 +38,27 @@ def validate(docs):
     if any(d['document_id']=='FP-012' and 'Enterprise-Reinvention-Intelligence' not in d['source_path'] for d in docs):
         raise SystemExit('FP-012 manifest path is stale')
     content='\n'.join((ROOT/d['source_path']).read_text(errors='ignore') for d in docs)
-    phrases=['Evidence proves change','Observations remember change','Enterprise Models accumulate change','Reports are views','Unknowns and contradictions are first-class','Human-supplied knowledge must be labelled','Recommendations require inspectable lineage','Research-ready gate','supplier, contract and procurement','Architecture Handover','UK Central Government']
+    phrases=['Evidence proves change','Observations remember change','Enterprise Models accumulate change','Reports are views','Unknowns and contradictions are first-class','Human-supplied knowledge must be labelled','Recommendations require inspectable lineage','Research-ready gate','supplier, contract and procurement','Architecture Handover','UK Central Government','Market Participant Twin','Account-Participant Position Assessment','buyer-side evidence','participant-side evidence','participant-supplied assertion']
     for p in phrases:
         if p.lower() not in content.lower(): raise SystemExit(f'Missing doctrine/content phrase: {p}')
+    # Participant-aware intelligence validation controls.
+    hard=[]; warnings=[]; notices=[]
+    if 'Market Participant Twin' in content and 'MPT-001' not in ids: hard.append('Market Participant Twin terminology requires MPT-001 owning specification')
+    if 'Account-Participant Position Assessment' in content and 'APPA-001' not in ids: hard.append('Account-Participant Position Assessment references require APPA-001 owning specification')
+    mission=(ROOT/'knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md').read_text(errors='ignore').lower()
+    for term in ['market participant','contract','procurement','opportunity','incumbent','framework']:
+        if term not in mission: hard.append(f'UK Government mission lacks {term} coverage')
+    for did in ['TEMPLATE-Market-Participant-Twin','TEMPLATE-Account-Participant-Position-Assessment']:
+        if did not in ids: hard.append(f'Pack lacks required template {did}')
+    source_map=(PACK/'source-map.yaml').read_text(errors='ignore')
+    for d in docs:
+        if d.get('required')=='true' and not (ROOT/d['source_path']).exists(): hard.append(f'Required source absent: {d["source_path"]}')
+        if d['document_id'] not in source_map and d['document_id'].startswith(('MPT','APPA','EOD','OT','EIF')): warnings.append(f'Participant-aware source not mapped: {d["document_id"]}')
+    for did in ['EIF-001','EOD-001','OT-001']:
+        if did in ids: notices.append(f'{did} packaged as Review-status source; not accepted production authority')
+    if hard: raise SystemExit('Hard validation failures: '+ '; '.join(hard))
+    validate.participant_results={'hard_failures':hard,'unresolved_source_warnings':warnings,'optional_document_notices':notices}
+
 
 def index(docs):
     order=['Start here','Operating guidance','Enterprise Intelligence','Supporting architecture','Templates','Mission briefs','Governance references']
@@ -80,6 +99,8 @@ def main():
                 info=zipfile.ZipInfo(p.relative_to(STAGE).as_posix(), date_time=(2026,1,1,0,0,0)); info.compress_type=zipfile.ZIP_DEFLATED; info.external_attr=0o644<<16
                 z.writestr(info,p.read_bytes())
     zsha=sha(ZIP)
-    REPORT.write_text(f'# Researcher Knowledge Pack Build Report\n\nVersion: {VERSION}\n\nZIP: `{ZIP.relative_to(ROOT)}`\n\nZIP checksum: `{zsha}`\n\nDocuments packaged: {len(docs)}\n\nValidation: passed\n')
+    RELEASE_SHA.write_text(f'{zsha}  {ZIP.name}\n')
+    results=getattr(validate,'participant_results',{'hard_failures':[],'unresolved_source_warnings':[],'optional_document_notices':[]})
+    REPORT.write_text(f'# Researcher Knowledge Pack Build Report\n\nVersion: {VERSION}\n\nZIP: `{ZIP.relative_to(ROOT)}`\n\nZIP checksum: `{zsha}`\n\nDocuments packaged: {len(docs)}\n\nValidation: passed\n\n## Participant-aware intelligence validation results\n\nHard validation failures: {len(results["hard_failures"])}\n\nUnresolved-source warnings: {len(results["unresolved_source_warnings"])}\n\nOptional-document notices: {len(results["optional_document_notices"])}\n\n' + ''.join(f'- Notice: {n}\n' for n in results['optional_document_notices']))
     print(f'Built {ZIP} sha256={zsha}')
 if __name__=='__main__': main()
