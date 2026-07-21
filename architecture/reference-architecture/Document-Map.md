@@ -2,7 +2,7 @@
 
 **Status:** Draft
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-19
+**Last updated:** 2026-07-21
 
 This map helps readers find the architecture paper that owns a concept. The Reference Architecture is the entry point; the documents below remain the primary homes for detailed standards and models.
 
@@ -30,6 +30,7 @@ This map helps readers find the architecture paper that owns a concept. The Refe
 | ADR-004 | [Human-Supplied Knowledge Must Be Labelled](../decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md) | Requires labelled, dated human-supplied knowledge. | Accepted | `architecture/decisions/` | Supports governance and provenance clarity. |
 | ADR-005 | [No Recommendation Without Inspectable Lineage](../decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md) | Requires inspectable lineage for strong recommendations. | Accepted | `architecture/decisions/` | Enforces trust, explainability and evidence lineage. |
 | ADR-010 | [Structured-Source-First, AI-Assisted Evidence Acquisition](../decisions/ADR-010-Structured-Source-First-AI-Assisted-Evidence-Acquisition.md) | Selects the governed acquisition hierarchy and treats provider output as candidate data. | Accepted | `architecture/decisions/` | Governs Financial Intelligence source acquisition and provider boundaries. |
+| ADR-015 | [Runtime Mission Context Architecture](../adr/ADR-015-Runtime-Mission-Context.md) | Establishes Mission, Research Policy, Capability Profile and Runtime Context as independent runtime inputs for AI-agent execution without modifying Evidence, Observation or Enterprise Model doctrine. | Accepted | `architecture/adr/` | Governs runtime configuration above Enterprise Intelligence Runtime; preserves universal Evidence, Observation and Knowledge Graph doctrine. |
 | ADR-006 | [Signal Architecture](../decisions/ADR-006-Signal-Architecture.md) | Migrated placeholder for future signal architecture review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
 | ADR-007 | [Transformation Thesis](../decisions/ADR-007-Transformation-Thesis.md) | Migrated placeholder for future transformation thesis review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
 | ADR-008 | [Recommendation Engine](../decisions/ADR-008-Recommendation-Engine.md) | Migrated placeholder for future recommendation engine review. | Proposed | `architecture/decisions/` | Not authoritative until accepted. |
@@ -154,7 +155,7 @@ A Researcher preparing a new Industry Twin should navigate the repository in thi
 2. Read [CIOS Reference Architecture v1.0](CIOS-Reference-Architecture-v1.0.md).
 3. Read [CIOS Design Doctrine](CIOS-Design-Doctrine.md).
 4. Read the [CIOS Chief Architect Handbook](../handbook/CIOS-Chief-Architect-Handbook.md) for judgement and working practice.
-5. Use the [Glossary](Glossary.md) for terms.
+5. Use the [Glossary](Glossary.md) for terms, including Runtime Context, Mission, Research Policy and Capability Profile.
 6. Read [Architecture Principles](Architecture-Principles.md).
 7. Read Founding Papers FP-003 to FP-009 to understand CIRM.
 8. Read Enterprise Intelligence papers EI-001 to EI-012 to understand the Commercial Digital Twin; EI-001 owns financial metric data and EI-012 owns Observation lifecycle.

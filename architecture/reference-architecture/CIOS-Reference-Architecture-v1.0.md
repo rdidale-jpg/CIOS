@@ -3,7 +3,7 @@
 **Purpose:** Define the single authoritative architecture entry point for CIOS.  
 **Status:** Draft  
 **Owner:** Rob / CIOS  
-**Last updated:** 2026-07-11
+**Last updated:** 2026-07-21
 
 ## Executive Summary
 
@@ -167,6 +167,36 @@ Flora creates and updates governed Twin state. Publisher renders views and forma
 
 Assurance increases with the strength, audience and consequence of the proposed action. Core Observation, Enterprise Model, lineage, uncertainty and human-knowledge rules apply in both modes.
 
+
+
+## Runtime, Knowledge and Reasoning Layer View
+
+ADR-015 introduces a runtime configuration layer above the Enterprise Intelligence Runtime. This view clarifies execution responsibility while preserving the existing Source, Evidence, Observation, Enterprise Model, Enterprise Knowledge Graph and CIRM architecture.
+
+### Runtime Layer
+
+The **Runtime Layer** assembles Mission, Research Policy, Capability Profile, repository instructions, workspace state and explicit human constraints into a Runtime Context for a specific AI-agent execution. It governs how an agent works during a mission; it does not own durable knowledge semantics.
+
+### Knowledge Layer
+
+The **Knowledge Layer** contains universal CIOS knowledge primitives and durable state: Evidence, Observations, Enterprise Models, Commercial Digital Twins, Enterprise Knowledge Graphs, Knowledge Assets and Knowledge Packs. Evidence remains universal proof. Observation remains universal memory. The Knowledge Graph remains universal structure.
+
+### Reasoning Layer
+
+The **Reasoning Layer** interprets accepted knowledge through CIRM, Signals, Hypotheses, Commercial Conviction, recommendations, Cross-Twin Intelligence and Presentation Intelligence. It must preserve lineage and distinguish fact, inference, hypothesis, interpretation and action.
+
+```text
+Runtime Layer
+  Mission + Research Policy + Capability Profile
+  ↓
+Knowledge Layer
+  Sources → Evidence → Observations → Enterprise Models → Knowledge Graph / Knowledge Packs
+  ↓
+Reasoning Layer
+  Signals → Hypotheses → Conviction → Recommendation → Learning
+```
+
+The Runtime Layer configures execution above the Enterprise Intelligence Runtime. It does not replace the durable Knowledge Layer or the CIRM Reasoning Layer, and it cannot modify doctrine without the reviewed-and-merged repository artefact required by ADR-015.
 
 ## CIOS Architecture Layers
 

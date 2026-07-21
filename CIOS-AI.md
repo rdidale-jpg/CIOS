@@ -2,7 +2,7 @@
 
 **Status:** Living document
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-11
+**Last updated:** 2026-07-21
 
 ## Purpose
 
@@ -18,6 +18,20 @@ The current north-star is: **Move Flora from report generation to living Commerc
 
 Before proposing work, ask whether the change improves durable enterprise memory, evidence-backed Observations, inspectable reasoning lineage and commercially useful action. If it only creates more output text, dashboards or summaries without improving memory or traceability, challenge the assumption.
 
+
+
+## Mandatory Runtime Context inputs
+
+ADR-015 requires every AI mission to declare or inherit a Runtime Context composed of Mission, Research Policy and Capability Profile. Research Policy is mandatory for every AI mission because it governs research depth, source-seeking posture, assurance burden, stop rule and escalation threshold without redefining Evidence.
+
+Canonical Research Policies:
+
+- **Discovery** — rapidly understand the problem, surface candidate concepts, identify uncertainties and avoid premature architectural commitment.
+- **Research** — build a sufficiently evidenced view, create or update Observations where appropriate and preserve Unknowns and Contradictions.
+- **Decision** — support an explicit architectural, commercial or product decision with traceable rationale, alternatives, consequences and boundaries.
+- **Assurance** — validate conformance, conflicts, lineage, terminology, authority and release readiness without weakening existing doctrine.
+
+Research Policy does not change CIOS Evidence doctrine. Evidence remains universal proof, Observation remains universal memory and runtime configuration does not modify durable architecture doctrine.
 
 ## Progressive Assurance operating rule
 
