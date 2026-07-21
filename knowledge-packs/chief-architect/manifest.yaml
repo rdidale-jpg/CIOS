@@ -1,0 +1,400 @@
+pack:
+  id: CIOS-Chief-Architect-Knowledge-Pack
+  title: CIOS Chief Architect Knowledge Pack
+  version: 1.0.0
+  owner: Chief Architect
+  canonical_location: knowledge-packs/chief-architect
+  generated_artifacts: dist release artifacts
+freshness:
+  architecture: event_driven
+  runtime_baseline: refresh_on_material_runtime_change
+  programme_state:
+    maximum_age_days: 14
+  active_work_packages:
+    maximum_age_days: 7
+documents:
+  - pack_path: README.md
+    source_path: knowledge-packs/chief-architect/README.md
+    document_id: PACK-README
+    title: Chief Architect Pack README
+    version_or_last_updated: repository-current
+    authority: operating_guidance
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: ddc89e8d64d74a714654d051253072a4058cb8795f367dfce10864ba59220503
+    transform: none
+  - pack_path: configuration/Chief-Architect-GPT-Instructions.md
+    source_path: knowledge-packs/chief-architect/configuration/Chief-Architect-GPT-Instructions.md
+    document_id: CAI-001
+    title: Chief Architect GPT Instructions
+    version_or_last_updated: repository-current
+    authority: operating_guidance
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 2710e65844292adb2ce1a4f2aee39c6e28485ba326b797b39a1dacf5e3f46ccd
+    transform: none
+  - pack_path: operating-guidance/Chief-Architect-Operating-Guide.md
+    source_path: knowledge-packs/chief-architect/operating-guidance/Chief-Architect-Operating-Guide.md
+    document_id: CAOG-001
+    title: Chief Architect Operating Guide
+    version_or_last_updated: repository-current
+    authority: operating_guidance
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 9e825a68d882e3af1a820c6be29097e166eb9d144a11eed6732119e4aba0135c
+    transform: none
+  - pack_path: profile/RP-003-CIOS-Chief-Architect-Knowledge-Profile.md
+    source_path: architecture/reference-architecture/profiles/RP-003-CIOS-Chief-Architect-Knowledge-Profile.md
+    document_id: RP-003
+    title: CIOS Chief Architect Knowledge Profile
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: d88db838ab9744cfb183fdcde2deabf7445a553937e87311e7fee65abf32a986
+    transform: none
+  - pack_path: context/CIOS-Chief-Architect-Handbook.md
+    source_path: architecture/handbook/CIOS-Chief-Architect-Handbook.md
+    document_id: CA-HANDBOOK
+    title: CIOS Chief Architect Handbook
+    version_or_last_updated: repository-current
+    authority: operating_guidance
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 0832d4a365ae2507bdb0750d65ce7a164384ac3b3283154e68d74384ba81fc57
+    transform: none
+  - pack_path: context/CIOS-Design-Doctrine.md
+    source_path: architecture/reference-architecture/CIOS-Design-Doctrine.md
+    document_id: DOCTRINE-001
+    title: CIOS Design Doctrine
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 44ca2f2c53fa35915c2f8758f7bd7f060475927d768fcec562b6cd16d3ac47ca
+    transform: none
+  - pack_path: context/Architecture-Principles.md
+    source_path: architecture/reference-architecture/Architecture-Principles.md
+    document_id: PRINCIPLES-001
+    title: Architecture Principles
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 2164ee579fcd0c8433cb66753b7d11cbfe3506fb44da1c9d3f9222f2fddceec8
+    transform: none
+  - pack_path: context/CIOS-Reference-Architecture-v1.0.md
+    source_path: architecture/reference-architecture/CIOS-Reference-Architecture-v1.0.md
+    document_id: CIOS-RA-v1.0
+    title: CIOS Reference Architecture
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 80db791b41030da6770cae541965650887a6df79e1da04869e4d57aacbb6c78e
+    transform: none
+  - pack_path: context/Architecture-Authority-Registry.md
+    source_path: architecture/reference-architecture/Architecture-Authority-Registry.md
+    document_id: AUTH-REG
+    title: Architecture Authority Registry
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 117e2ddaf67818fa404b4835a6c3ed7c4958caa1b96320b8143226615e4c3934
+    transform: none
+  - pack_path: context/Document-Map.md
+    source_path: architecture/reference-architecture/Document-Map.md
+    document_id: DOC-MAP
+    title: Document Map
+    version_or_last_updated: repository-current
+    authority: reference
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: a153376827040879e12cfd07551d151b6730755099837c0d4c245966b92e3d25
+    transform: none
+  - pack_path: context/Glossary.md
+    source_path: architecture/reference-architecture/Glossary.md
+    document_id: GLOSSARY
+    title: Glossary
+    version_or_last_updated: repository-current
+    authority: reference
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 19c85cf3f171577eb1634a0e40d0497c03d5e48060c1c7f2bd94c6d0c889a7f3
+    transform: none
+  - pack_path: architecture/EI-001-Enterprise-Model-Specification.md
+    source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-001-Enterprise-Model-Specification.md
+    document_id: EI-001
+    title: Enterprise Model Specification
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 81a6351f43e0d1444252ab23428caf2a6731ef61f5b1cacccb3e5a0a17cadf1c
+    transform: none
+  - pack_path: architecture/EI-002-Enterprise-Knowledge-Graph.md
+    source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-002-Enterprise-Knowledge-Graph.md
+    document_id: EI-002
+    title: Enterprise Knowledge Graph
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 65f5003ff19031ea6fbd18b19ccfbe02b26753e0c37627477c788c77e34d0cbd
+    transform: none
+  - pack_path: architecture/EI-003-Enterprise-Behaviour-Model.md
+    source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-003-Enterprise-Behaviour-Model.md
+    document_id: EI-003
+    title: Enterprise Behaviour Model
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 3b6663c61832ce47f164b86dda0dec925f7523831534501cf34d2f8fe461b741
+    transform: none
+  - pack_path: architecture/EI-012-Enterprise-Observation-Model.md
+    source_path: architecture/enterprise-intelligence/volume-5-intelligence-foundations/EI-012-Enterprise-Observation-Model.md
+    document_id: EI-012
+    title: Enterprise Observation Model
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 188ae658a4db6715c7e7f0f196dbf56cd341c82c7aab31c455fbb2c6e497a5ad
+    transform: none
+  - pack_path: architecture/FP-009-Hypothesis-Validation-Standard.md
+    source_path: architecture/founding-papers/FP-009-Hypothesis-Validation-Standard.md
+    document_id: FP-009
+    title: Hypothesis Validation Standard
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 4c8f19ac477a8d3ee4eea165df7ced6730e31aa084b804733188589f0a31aa37
+    transform: none
+  - pack_path: architecture/FEIR-001-Flora-Enterprise-Intelligence-Runtime-Architecture-v1.0.md
+    source_path: architecture/specifications/flora/FEIR-001-Flora-Enterprise-Intelligence-Runtime-Architecture-v1.0.md
+    document_id: FEIR-001
+    title: Flora Runtime Architecture
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 043dbd2c77966bf3298d51a28e34742f1b32bb0dea19b09e2bb20a322f6e6c59
+    transform: none
+  - pack_path: architecture/EIRP-001-Enterprise-Intelligence-Reasoning-Pipeline-Specification.md
+    source_path: architecture/specifications/flora/EIRP-001-Enterprise-Intelligence-Reasoning-Pipeline-Specification.md
+    document_id: EIRP-001
+    title: Enterprise Intelligence Reasoning Pipeline
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: a9ebee3051bf907eae060be83adbfdc488e8238d764f22c8c0c21d89e997b25d
+    transform: none
+  - pack_path: architecture/FA-001-Flora-Enterprise-Intelligence-Workspace-Reference-Architecture.md
+    source_path: architecture/reference-architectures/FA-001-Flora-Enterprise-Intelligence-Workspace-Reference-Architecture.md
+    document_id: FA-001
+    title: Flora Workspace Reference Architecture
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 4916bb74db62d8cb725153884bae5d44b54236bfe3a809de96594220472f0bd9
+    transform: none
+  - pack_path: architecture/Knowledge-Pack-Specification-v1.0.md
+    source_path: architecture/specifications/knowledge-packs/Knowledge-Pack-Specification-v1.0.md
+    document_id: KP-SPEC-001
+    title: Knowledge Pack Specification
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 0f84b3f501402f7b60870352632c43d543d77a2e82506d8b8c26d5ca9dc9abf9
+    transform: none
+  - pack_path: architecture/OT-001-Opportunity-Twin-Specification.md
+    source_path: architecture/specifications/opportunity-twins/OT-001-Opportunity-Twin-Specification.md
+    document_id: OT-001
+    title: Opportunity Twin Specification
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 15e90d6106918c370103b8f1a7fcb2d533aa3e90c0575106f7f296028f9ec290
+    transform: none
+  - pack_path: architecture/Market-Participant-Twin-Specification-v1.0.md
+    source_path: architecture/specifications/market-participants/Market-Participant-Twin-Specification-v1.0.md
+    document_id: MPT-001
+    title: Market Participant Twin Specification
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 012cb8015b9a98055c5678f4981b013c66f36599d40513fbbb4709aad599297d
+    transform: none
+  - pack_path: architecture/EI-007-Executive-Intelligence-Model.md
+    source_path: architecture/enterprise-intelligence/volume-3-human-intelligence/EI-007-Executive-Intelligence-Model.md
+    document_id: EI-007
+    title: Executive Intelligence Model
+    version_or_last_updated: repository-current
+    authority: canonical_architecture
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: e0173ed635a22d7570e85407ad523356f772f45e27fe9a0e2f08a56abd144706
+    transform: none
+  - pack_path: governance/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md
+    source_path: architecture/decisions/ADR-005-No-Recommendation-Without-Inspectable-Lineage.md
+    document_id: ADR-005
+    title: No Recommendation Without Inspectable Lineage
+    version_or_last_updated: repository-current
+    authority: accepted_decision
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 489cf1e76a6524ab0c575061545d049ab4d0d3d2c44ea1cbf5f7bea9e1df18fa
+    transform: none
+  - pack_path: governance/ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md
+    source_path: architecture/decisions/ADR-012-Governed-Blueprint-Package-Import-and-Canonical-Acceptance-Boundary.md
+    document_id: ADR-012
+    title: Governed Blueprint Import Boundary
+    version_or_last_updated: repository-current
+    authority: accepted_decision
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: e99366be281c6fbb5dc65ed6ecd65111dc58ef3cd9a164b4347a9e841c02fb42
+    transform: none
+  - pack_path: governance/ADR-013-Enterprise-Canvas-as-Primary-Living-Twin-Navigation.md
+    source_path: architecture/decisions/ADR-013-Enterprise-Canvas-as-Primary-Living-Twin-Navigation.md
+    document_id: ADR-013
+    title: Enterprise Canvas Navigation
+    version_or_last_updated: repository-current
+    authority: accepted_decision
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 32f8c40154d2d95123dd5e470036e7b18ed86da96171bc5e8e99edad3c629c5b
+    transform: none
+  - pack_path: governance/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md
+    source_path: architecture/decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md
+    document_id: ADR-016
+    title: Knowledge Packs Exchange Mechanism
+    version_or_last_updated: repository-current
+    authority: accepted_decision
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: d40d4062d3ea62e8a8031e9e1e20296b0686caa9995435c742be1816dce68f5b
+    transform: none
+  - pack_path: programme/CURRENT-PROGRAMME-STATE.md
+    source_path: knowledge-packs/chief-architect/programme/CURRENT-PROGRAMME-STATE.md
+    document_id: PROGRAMME-STATE
+    title: Current Programme State
+    version_or_last_updated: repository-current
+    authority: programme_state
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 1feb7edbcd0b34b935620ff52178032473e4972ef8af41d44be730715f465ec5
+    transform: none
+  - pack_path: programme/Flora-Runtime-Capability-Baseline.md
+    source_path: docs/flora-runtime/wp-011/Flora-Runtime-Capability-Baseline.md
+    document_id: WP-011-RUNTIME-BASELINE
+    title: Flora Runtime Capability Baseline
+    version_or_last_updated: repository-current
+    authority: runtime_baseline
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 80ab1083095b4a629213751b0f0a6a6d58e676336c31b386d96843b919e709e2
+    transform: none
+  - pack_path: programme/Active-Work-Packages.md
+    source_path: knowledge-packs/chief-architect/programme/Active-Work-Packages.md
+    document_id: ACTIVE-WP
+    title: Active Work Packages
+    version_or_last_updated: repository-current
+    authority: programme_state
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 2c308399f6f0cbad7bbac8759d218b09d7ac52fb2497d52db60a5e6b4ac39973
+    transform: none
+  - pack_path: programme/Decision-and-Risk-Register.md
+    source_path: knowledge-packs/chief-architect/programme/Decision-and-Risk-Register.md
+    document_id: DECISION-RISK
+    title: Decision and Risk Register
+    version_or_last_updated: repository-current
+    authority: programme_state
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: bdc220d5416d1935bab50bb96a4a92067570e962fa3c85fa2e1f772a3114cd07
+    transform: none
+  - pack_path: templates/Programme-State-Template.md
+    source_path: knowledge-packs/chief-architect/templates/Programme-State-Template.md
+    document_id: PROGRAMME-STATE-TEMPLATE
+    title: Programme-State-Template
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 6665ebd0452bfbbc8cd465439df250850702be9c4df0ebe18136d8bda97308b8
+    transform: none
+  - pack_path: templates/Architecture-Decision-Template.md
+    source_path: knowledge-packs/chief-architect/templates/Architecture-Decision-Template.md
+    document_id: ARCHITECTURE-DECISION-TEMPLATE
+    title: Architecture-Decision-Template
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 5c2e8d81945faec35140f26c1e3fa8c7d15f73fbdc945980d2c1155ed6614e23
+    transform: none
+  - pack_path: templates/Codex-Work-Package-Template.md
+    source_path: knowledge-packs/chief-architect/templates/Codex-Work-Package-Template.md
+    document_id: CODEX-WORK-PACKAGE-TEMPLATE
+    title: Codex-Work-Package-Template
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 26172291c0f1c30bcec27d768620edc77f79da64298c11405ee3a90c75a63173
+    transform: none
+  - pack_path: templates/Recommendation-Assessment-Template.md
+    source_path: knowledge-packs/chief-architect/templates/Recommendation-Assessment-Template.md
+    document_id: RECOMMENDATION-ASSESSMENT-TEMPLATE
+    title: Recommendation-Assessment-Template
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Required for Chief Architect judgement under RP-003.
+    checksum: 179e0f206eaeb14163685b005c354676fb17f8f383b12ea07a9d5d22feb8c817
+    transform: none

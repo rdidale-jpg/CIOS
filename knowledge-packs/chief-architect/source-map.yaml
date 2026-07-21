@@ -1,0 +1,3 @@
+source_map:
+  purpose: Maps packaged paths to repository canonical sources for the Chief Architect Knowledge Pack.
+  rule: Packaged files do not become canonical owners by inclusion.

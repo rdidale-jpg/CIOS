@@ -1,0 +1,28 @@
+name: Validate Chief Architect Knowledge Pack
+
+on:
+  pull_request:
+    paths:
+      - 'architecture/**'
+      - 'knowledge-packs/chief-architect/**'
+      - 'programme/**'
+      - 'tools/knowledge-packs/**'
+      - 'tests/**'
+  push:
+    paths:
+      - 'architecture/**'
+      - 'knowledge-packs/chief-architect/**'
+      - 'programme/**'
+      - 'tools/knowledge-packs/**'
+      - 'tests/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python3 tools/knowledge-packs/build_pack.py --profile chief-architect
+      - run: python3 -m pytest tests/knowledge_packs/test_chief_architect_pack.py tests/knowledge_packs/test_researcher_pack.py
