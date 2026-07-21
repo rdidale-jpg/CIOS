@@ -11,7 +11,7 @@ documents:
     title: Current Programme State
     source_path: knowledge-packs/chief-architect/CURRENT-PROGRAMME-STATE.md
     pack_path: programme/CURRENT-PROGRAMME-STATE.md
-    checksum: 4f3a521eea43ef59b18afba3ffbea08e036be965d223faefdc221450dd94583c
+    checksum: 789b355511839f05198000dbc17dbbfe75a49d1584461221ad6cdc32ef2d8441
     authority: programme-state
     inclusion_reason: Mandatory programme-state freshness source
   - document_id: CA-OG-001
@@ -127,6 +127,13 @@ documents:
     checksum: 188ae658a4db6715c7e7f0f196dbf56cd341c82c7aab31c455fbb2c6e497a5ad
     authority: enterprise-intelligence-authority
     inclusion_reason: Core Enterprise Intelligence authority
+  - document_id: EI-004
+    title: Commercial Reasoning Framework
+    source_path: architecture/enterprise-intelligence/volume-2-commercial-intelligence/EI-004-Commercial-Reasoning-Framework.md
+    pack_path: enterprise-intelligence/EI-004-Commercial-Reasoning-Framework.md
+    checksum: ce5c48d4fe989209b936cb5555b110b8af83fd41f649fc1697020233f1dfe42e
+    authority: enterprise-intelligence-authority
+    inclusion_reason: Required recommendation-doctrine source referenced by source-map.yaml and WP-011 commercial reasoning runtime evidence; included with documented draft status from the canonical EI source
   - document_id: EIF-001
     title: Enterprise Intelligence Foundation Model
     source_path: architecture/reference-architecture/standards/EIF-001-Enterprise-Intelligence-Foundation-Model.md

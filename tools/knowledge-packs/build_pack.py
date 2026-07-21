@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse, hashlib, shutil, zipfile, re
 ROOT=Path(__file__).resolve().parents[2]
 DIST=ROOT/'dist'
-MANDATORY={'CA-001','FP-010','FP-012','FP-009','ADR-016','ADR-014','ADR-024','REF-001','PRINCIPLES-001','CURRENT-PROGRAMME-STATE','WP-011','FEIR-001','EIRP-001','EI-001','EI-002','EI-003','EI-012','EIF-001','KPS-001','CA-OG-001','CA-TEMPLATE-001','CA-SOURCE-MAP'}
+MANDATORY={'CA-001','FP-010','FP-012','FP-009','ADR-016','ADR-014','ADR-024','REF-001','PRINCIPLES-001','CURRENT-PROGRAMME-STATE','WP-011','FEIR-001','EIRP-001','EI-001','EI-002','EI-003','EI-004','EI-012','EIF-001','KPS-001','CA-OG-001','CA-TEMPLATE-001','CA-SOURCE-MAP'}
 RUNTIME={'WP-011','FEIR-001','EIRP-001','ADR-014','ADR-024'}
 PROGRAMME={'CURRENT-PROGRAMME-STATE'}
 AUTH={'accepted-adr','accepted-reference','founding-paper','enterprise-intelligence-authority','runtime-baseline','programme-state','operating-guidance','template','source-map','knowledge-pack-specification','handbook','proposed-context'}
@@ -24,12 +24,28 @@ def is_placeholder(path):
     txt=path.read_text(errors='ignore')
     return len(txt.strip()) < 400 or bool(PLACEHOLDER.search(txt[:1200]))
 
+def parse_source_map_ids(path):
+    ids=[]
+    for line in path.read_text().splitlines():
+        m=re.search(r':\s*\[(.*?)\]\s*$', line)
+        if m:
+            ids.extend([x.strip() for x in m.group(1).split(',') if x.strip()])
+    return ids
+
 def validate(profile, docs):
     if profile!='chief-architect':
         raise SystemExit(f'Unsupported profile: {profile}')
     ids={d['document_id'] for d in docs}
+    id_counts={document_id: sum(1 for d in docs if d['document_id']==document_id) for document_id in ids}
+    duplicate_ids=sorted([document_id for document_id, count in id_counts.items() if count != 1])
+    if duplicate_ids: raise SystemExit(f'Duplicate manifest document IDs: {duplicate_ids}')
     missing=MANDATORY-ids
     if missing: raise SystemExit(f'Missing required documents: {sorted(missing)}')
+    source_map_doc=[d for d in docs if d['document_id']=='CA-SOURCE-MAP'][0]
+    for source_map_id in parse_source_map_ids(ROOT/source_map_doc['source_path']):
+        matches=[d for d in docs if d['document_id']==source_map_id]
+        if len(matches)!=1:
+            raise SystemExit(f'Source-map identifier {source_map_id} resolves to {len(matches)} manifest entries')
     if any(d['document_id']=='ROADMAP-001' and d['authority']=='canonical' for d in docs):
         raise SystemExit('Flora Roadmap must not be canonical or a programme-state freshness source')
     for d in docs:
@@ -48,11 +64,15 @@ def validate(profile, docs):
     if 'No strong Recommendation without inspectable lineage' not in handbook:
         raise SystemExit('Recommendation readiness doctrine is missing')
     programme=(ROOT/[d for d in docs if d['document_id']=='CURRENT-PROGRAMME-STATE'][0]['source_path']).read_text(errors='ignore')
-    m=re.search(r'Last updated:\*\*\s*(\d{4}-\d{2}-\d{2})', programme)
+    m=re.search(r'As of:\*\*\s*(\d{4}-\d{2}-\d{2})', programme)
     if not m or m.group(1)<'2026-07-21':
         raise SystemExit('Programme-state freshness is stale')
     if 'Roadmaps are planning inputs only' not in programme:
         raise SystemExit('Programme-state source must reject roadmap freshness proxy')
+    required_programme_fields=['Architecture baseline','Runtime baseline','Active work package','Current delivery objective','Current product / twin focus','Demonstrable capability','Work in progress','Blockers','Risks','Open decisions','Next decision']
+    missing_fields=[field for field in required_programme_fields if f'## {field}' not in programme]
+    if missing_fields:
+        raise SystemExit(f'Programme-state freshness missing substantive delivery-state fields: {missing_fields}')
 
 def index(docs):
     lines=['# Document Index','','Recommended reading sequence: Chief Architect Handbook; CURRENT-PROGRAMME-STATE; Operating Guidance; FP-010; ADR-016; implemented runtime baseline; runtime architecture; core EI authorities; templates and source map.','', '| Document ID | Title | Purpose | Authority | Required reading | Canonical source path | Packaged path |','|---|---|---|---|---|---|---|']
@@ -72,7 +92,7 @@ def pack_state(docs):
 ('Source map','CA-SOURCE-MAP','source-map.yaml'),
 ('Core Enterprise Intelligence authorities','EI-001, EI-002, EI-003, EI-012, EIF-001','enterprise-intelligence/'),
 ('Knowledge Pack authority','FP-010, ADR-016, KPS-001','architecture/'),
-('Recommendation doctrine','CA-001, FP-009, FP-012, EI-012','handbook/ and architecture/'),
+('Recommendation doctrine','CA-001, FP-009, FP-012, EI-004, EI-012','handbook/, architecture/ and enterprise-intelligence/'),
 ('Roadmap not canonical freshness','ROADMAP-001','context/Flora-Roadmap.md authority=proposed-context'),
 ('Checksum validation','all manifest documents','checksums.sha256'),
 ('Placeholder rejection','all mandatory documents','build validation'),
@@ -109,6 +129,9 @@ def main():
             if p.is_file():
                 info=zipfile.ZipInfo(p.relative_to(stage).as_posix(), date_time=(2026,1,1,0,0,0)); info.compress_type=zipfile.ZIP_DEFLATED; info.external_attr=0o644<<16; z.writestr(info,p.read_bytes())
     zsha=sha(zpath); report=DIST/f'CIOS-Chief-Architect-Knowledge-Pack-v{version}-build-report.md'
-    report.write_text(f'# Chief Architect Knowledge Pack Build Report\n\nVersion: {version}\n\nZIP: `{zpath.relative_to(ROOT)}`\n\nZIP checksum: `{zsha}`\n\nDocuments packaged: {len(docs)}\n\nRuntime Capability Baseline packaged: WP-011 — Flora Runtime Capability Baseline (`runtime/Flora-Runtime-Capability-Baseline.md`)\n\nSelection rationale: selected canonical source `docs/flora-runtime/wp-011/Flora-Runtime-Capability-Baseline.md` because it is the only repository document found with WP-011 and Flora Runtime Capability Baseline identifiers; no canonical successor or duplicate packaged baseline was found in the Authority Registry/ADR search.\n\nValidation: passed\nRecommendation readiness: passed\nProgramme-state freshness: passed\n')
+    programme_doc=[d for d in docs if d['document_id']=='CURRENT-PROGRAMME-STATE'][0]
+    runtime_docs=[d for d in docs if d['document_id'] in sorted(RUNTIME)]
+    source_map_doc=[d for d in docs if d['document_id']=='CA-SOURCE-MAP'][0]
+    report.write_text(f'# Chief Architect Knowledge Pack Build Report\n\nVersion: {version}\n\nZIP: `{zpath.relative_to(ROOT)}`\n\nZIP checksum: `{zsha}`\n\nDocuments packaged: {len(docs)}\n\nProgramme-state source used: {programme_doc["document_id"]} — {programme_doc["title"]} (`{programme_doc["source_path"]}` -> `{programme_doc["pack_path"]}`)\n\nRuntime-baseline sources used:\n' + ''.join(f'- {d["document_id"]} — {d["title"]} (`{d["source_path"]}` -> `{d["pack_path"]}`)\n' for d in runtime_docs) + f'\nRuntime Capability Baseline packaged: WP-011 — Flora Runtime Capability Baseline (`runtime/Flora-Runtime-Capability-Baseline.md`)\n\nSelection rationale: selected canonical source `docs/flora-runtime/wp-011/Flora-Runtime-Capability-Baseline.md` because it is the only repository document found with WP-011 and Flora Runtime Capability Baseline identifiers; no canonical successor or duplicate packaged baseline was found in the Authority Registry/ADR search.\n\nSource-map resolution: passed for `{source_map_doc["source_path"]}`; every source-map identifier resolves to exactly one manifest entry.\nProgramme-state freshness basis: passed using substantive delivery-state fields and As of date, not file date alone.\n\nValidation: passed\nRecommendation readiness: passed\nProgramme-state freshness: passed\n')
     print(f'Built {zpath} sha256={zsha}')
 if __name__=='__main__': main()
