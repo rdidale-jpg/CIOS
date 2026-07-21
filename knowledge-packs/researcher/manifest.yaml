@@ -147,7 +147,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
-    checksum: c3fd876e5b983ca3f816d0ac90ab2cbc7cfa71068c8fcf81054979f69ef2377e
+    checksum: 19c85cf3f171577eb1634a0e40d0497c03d5e48060c1c7f2bd94c6d0c889a7f3
     transform: none
   - pack_path: context/CIOS-Design-Doctrine.md
     source_path: architecture/reference-architecture/CIOS-Design-Doctrine.md
@@ -158,7 +158,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
-    checksum: 41db441553339169eaced5ad25c17ed20029ea516c8a9ab5ca4f221c00f5b1fd
+    checksum: 44ca2f2c53fa35915c2f8758f7bd7f060475927d768fcec562b6cd16d3ac47ca
     transform: none
   - pack_path: context/Architecture-Principles.md
     source_path: architecture/reference-architecture/Architecture-Principles.md
@@ -169,7 +169,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
-    checksum: f3149b45a9d56d96c4952e91469aae05fdb163db97580e44847dd04c838b7310
+    checksum: 2164ee579fcd0c8433cb66753b7d11cbfe3506fb44da1c9d3f9222f2fddceec8
     transform: none
   - pack_path: context/CIOS-Reference-Architecture-v1.0.md
     source_path: architecture/reference-architecture/CIOS-Reference-Architecture-v1.0.md
@@ -180,7 +180,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
-    checksum: 8ea28aa314c23e51775bc623f69836d157e879a6a4b3ed0ad2ff7948927d3dbb
+    checksum: 80db791b41030da6770cae541965650887a6df79e1da04869e4d57aacbb6c78e
     transform: none
   - pack_path: governance/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md
     source_path: architecture/decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md
@@ -191,7 +191,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
-    checksum: c75577ed8444f0faca3abf74676bb34e9d8fc7878b20a11042f39aea73c41acd
+    checksum: d40d4062d3ea62e8a8031e9e1e20296b0686caa9995435c742be1816dce68f5b
     transform: none
   - pack_path: governance/FP-010-Knowledge-Pack-Architecture.md
     source_path: architecture/founding-papers/FP-010-Knowledge-Pack-Architecture.md
@@ -224,7 +224,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
-    checksum: 7a27b2f410419cbbaabb10834c21f7f17e1a260b1535d62e75ca41711466f7f2
+    checksum: 117e2ddaf67818fa404b4835a6c3ed7c4958caa1b96320b8143226615e4c3934
     transform: none
   - pack_path: governance/Document-Map.md
     source_path: architecture/reference-architecture/Document-Map.md
@@ -235,7 +235,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for Researcher Knowledge Pack v2.1 operation, authority, configuration, or output.
-    checksum: c1543fa536f3c67273b5342593781a8a25206571eaaa63da646377daf9892cf3
+    checksum: a153376827040879e12cfd07551d151b6730755099837c0d4c245966b92e3d25
     transform: none
   - pack_path: missions/UK-Central-Government-Industry-Twin-Mission.md
     source_path: knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md
