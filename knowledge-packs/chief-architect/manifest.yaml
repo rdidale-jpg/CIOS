@@ -1,0 +1,51 @@
+profile: chief-architect
+documents:
+  - document_id: CA-001
+    title: CIOS Chief Architect Handbook
+    source_path: architecture/handbook/CIOS-Chief-Architect-Handbook.md
+    pack_path: handbook/CIOS-Chief-Architect-Handbook.md
+    checksum: 0832d4a365ae2507bdb0750d65ce7a164384ac3b3283154e68d74384ba81fc57
+    authority: canonical
+    inclusion_reason: Chief Architect operating model and judgement standard
+  - document_id: FP-010
+    title: Knowledge Pack Architecture
+    source_path: architecture/founding-papers/FP-010-Knowledge-Pack-Architecture.md
+    pack_path: architecture/FP-010-Knowledge-Pack-Architecture.md
+    checksum: d0c8c86aade42f72a1db1c1e8a64e589a232d4c4f2e959cefc437664b42814bc
+    authority: canonical
+    inclusion_reason: Shared knowledge-pack exchange architecture
+  - document_id: FP-012
+    title: Enterprise Reinvention Intelligence
+    source_path: architecture/founding-papers/FP-012-Enterprise-Reinvention-Intelligence.md
+    pack_path: architecture/FP-012-Enterprise-Reinvention-Intelligence.md
+    checksum: ec12f2fd85357b3da3c52ac2e7c02dd5bec80a0ad11ec7264aa3ff312515da5a
+    authority: canonical
+    inclusion_reason: Enterprise reinvention recommendation doctrine
+  - document_id: ADR-016
+    title: Knowledge Packs as Standard Exchange Mechanism
+    source_path: architecture/decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md
+    pack_path: architecture/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md
+    checksum: d40d4062d3ea62e8a8031e9e1e20296b0686caa9995435c742be1816dce68f5b
+    authority: canonical
+    inclusion_reason: Authoritative decision for pack architecture
+  - document_id: REF-001
+    title: CIOS Reference Architecture v1.0
+    source_path: architecture/reference-architecture/CIOS-Reference-Architecture-v1.0.md
+    pack_path: context/CIOS-Reference-Architecture-v1.0.md
+    checksum: 80db791b41030da6770cae541965650887a6df79e1da04869e4d57aacbb6c78e
+    authority: canonical
+    inclusion_reason: Reference architecture context
+  - document_id: PRINCIPLES-001
+    title: Architecture Principles
+    source_path: architecture/reference-architecture/Architecture-Principles.md
+    pack_path: context/Architecture-Principles.md
+    checksum: 2164ee579fcd0c8433cb66753b7d11cbfe3506fb44da1c9d3f9222f2fddceec8
+    authority: canonical
+    inclusion_reason: Architecture governance principles
+  - document_id: ROADMAP-001
+    title: Flora Roadmap
+    source_path: architecture/roadmap/Flora-Roadmap.md
+    pack_path: context/Flora-Roadmap.md
+    checksum: 2846a9df1c25d1ad6968f97056ad94eada49bfa479216d27f86ce85254b27a0f
+    authority: canonical
+    inclusion_reason: Programme-state freshness source
