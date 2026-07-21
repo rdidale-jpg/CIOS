@@ -3,8 +3,8 @@ from pathlib import Path
 import argparse, hashlib, shutil, zipfile, re
 ROOT=Path(__file__).resolve().parents[2]
 DIST=ROOT/'dist'
-MANDATORY={'CA-001','FP-010','FP-012','FP-009','ADR-016','ADR-014','ADR-024','REF-001','PRINCIPLES-001','CURRENT-PROGRAMME-STATE','FEIR-001','EIRP-001','EI-001','EI-002','EI-003','EI-012','EIF-001','KPS-001','CA-OG-001','CA-TEMPLATE-001','CA-SOURCE-MAP'}
-RUNTIME={'FEIR-001','EIRP-001','ADR-014','ADR-024'}
+MANDATORY={'CA-001','FP-010','FP-012','FP-009','ADR-016','ADR-014','ADR-024','REF-001','PRINCIPLES-001','CURRENT-PROGRAMME-STATE','WP-011','FEIR-001','EIRP-001','EI-001','EI-002','EI-003','EI-012','EIF-001','KPS-001','CA-OG-001','CA-TEMPLATE-001','CA-SOURCE-MAP'}
+RUNTIME={'WP-011','FEIR-001','EIRP-001','ADR-014','ADR-024'}
 PROGRAMME={'CURRENT-PROGRAMME-STATE'}
 AUTH={'accepted-adr','accepted-reference','founding-paper','enterprise-intelligence-authority','runtime-baseline','programme-state','operating-guidance','template','source-map','knowledge-pack-specification','handbook','proposed-context'}
 PLACEHOLDER=re.compile(r'^(#\s*)?(TBD|TODO|placeholder|lorem ipsum)\s*$',re.I|re.M)
@@ -38,6 +38,12 @@ def validate(profile, docs):
         if sha(src)!=d['checksum']: raise SystemExit(f'Checksum mismatch: {d["source_path"]}')
         if d.get('authority') not in AUTH: raise SystemExit(f'Invalid authority for {d["document_id"]}: {d.get("authority")}')
         if d['document_id'] in MANDATORY and is_placeholder(src): raise SystemExit(f'Placeholder or materially empty mandatory source: {d["source_path"]}')
+    runtime_capability_baselines=[d for d in docs if d['document_id']=='WP-011' or d['pack_path']=='runtime/Flora-Runtime-Capability-Baseline.md' or 'Runtime Capability Baseline' in d['title']]
+    if len(runtime_capability_baselines)!=1:
+        raise SystemExit(f'Runtime Capability Baseline must be packaged exactly once; found {len(runtime_capability_baselines)}')
+    baseline=runtime_capability_baselines[0]
+    if baseline['authority']!='runtime-baseline':
+        raise SystemExit('Runtime Capability Baseline must use authority runtime-baseline')
     handbook=(ROOT/[d for d in docs if d['document_id']=='CA-001'][0]['source_path']).read_text(errors='ignore')
     if 'No strong Recommendation without inspectable lineage' not in handbook:
         raise SystemExit('Recommendation readiness doctrine is missing')
@@ -49,7 +55,7 @@ def validate(profile, docs):
         raise SystemExit('Programme-state source must reject roadmap freshness proxy')
 
 def index(docs):
-    lines=['# Document Index','','Recommended reading sequence: Chief Architect Handbook; CURRENT-PROGRAMME-STATE; Operating Guidance; FP-010; ADR-016; runtime baseline; core EI authorities; templates and source map.','', '| Document ID | Title | Purpose | Authority | Required reading | Canonical source path | Packaged path |','|---|---|---|---|---|---|---|']
+    lines=['# Document Index','','Recommended reading sequence: Chief Architect Handbook; CURRENT-PROGRAMME-STATE; Operating Guidance; FP-010; ADR-016; implemented runtime baseline; runtime architecture; core EI authorities; templates and source map.','', '| Document ID | Title | Purpose | Authority | Required reading | Canonical source path | Packaged path |','|---|---|---|---|---|---|---|']
     for d in docs:
         req='required' if d['document_id'] in MANDATORY else 'context'
         lines.append(f"| {d['document_id']} | {d['title']} | {d['inclusion_reason']} | {d['authority']} | {req} | {d['source_path']} | {d['pack_path']} |")
@@ -59,7 +65,8 @@ def pack_state(docs):
     by={d['document_id']:d for d in docs}
     rows=[
 ('Programme-state baseline','CURRENT-PROGRAMME-STATE','programme/CURRENT-PROGRAMME-STATE.md'),
-('Runtime-baseline authority','FEIR-001, EIRP-001, ADR-014, ADR-024','runtime/'),
+('Runtime-baseline authority','WP-011, FEIR-001, EIRP-001, ADR-014, ADR-024','runtime/'),
+('Runtime implementation evidence','WP-011 Flora Runtime Capability Baseline','runtime/Flora-Runtime-Capability-Baseline.md'),
 ('Operating guidance','CA-OG-001','operating-guidance/Chief-Architect-Operating-Guidance.md'),
 ('Templates','CA-TEMPLATE-001','templates/Architecture-Decision-Review-Template.md'),
 ('Source map','CA-SOURCE-MAP','source-map.yaml'),
@@ -70,10 +77,13 @@ def pack_state(docs):
 ('Checksum validation','all manifest documents','checksums.sha256'),
 ('Placeholder rejection','all mandatory documents','build validation'),
 ]
-    lines=['# Pack State','','Validation: passed','Recommendation readiness: passed','Programme-state freshness: passed','','## Validation evidence','','Mandatory runtime validation: passed','Mandatory programme-state validation: passed','Roadmap freshness proxy: rejected','Placeholder mandatory-source validation: passed','','## WP-012 completeness matrix','','| WP-012 deliverable / acceptance criterion | Packaged evidence | Location |','|---|---|---|']
+    lines=['# Pack State','','Validation: passed','Recommendation readiness: passed','Programme-state freshness: passed','','## Validation evidence','','Mandatory runtime validation: passed\nRuntime baseline included: WP-011 — Flora Runtime Capability Baseline — runtime/Flora-Runtime-Capability-Baseline.md\nRuntime architecture and runtime implementation evidence: included','Mandatory programme-state validation: passed','Roadmap freshness proxy: rejected','Placeholder mandatory-source validation: passed','','## WP-012 completeness matrix','','| WP-012 deliverable / acceptance criterion | Packaged evidence | Location |','|---|---|---|']
     for a,b,c in rows: lines.append(f'| {a} | {b} | {c} |')
     lines+=['','## Packaged authorities','']
     for d in docs: lines.append(f"- {d['document_id']} — {d['authority']} — `{d['pack_path']}` — checksum `{d['checksum']}`")
+    wp011=by.get('WP-011')
+    if wp011:
+        lines += ['', '## Runtime baseline', '', f"runtime_baseline:", f"  document: {wp011['title']}", f"  authority: {wp011['authority']}", '  status: included', f"  packaged_path: {wp011['pack_path']}", f"  source_path: {wp011['source_path']}"]
     return '\n'.join(lines)+'\n'
 
 def main():
@@ -99,6 +109,6 @@ def main():
             if p.is_file():
                 info=zipfile.ZipInfo(p.relative_to(stage).as_posix(), date_time=(2026,1,1,0,0,0)); info.compress_type=zipfile.ZIP_DEFLATED; info.external_attr=0o644<<16; z.writestr(info,p.read_bytes())
     zsha=sha(zpath); report=DIST/f'CIOS-Chief-Architect-Knowledge-Pack-v{version}-build-report.md'
-    report.write_text(f'# Chief Architect Knowledge Pack Build Report\n\nVersion: {version}\n\nZIP: `{zpath.relative_to(ROOT)}`\n\nZIP checksum: `{zsha}`\n\nDocuments packaged: {len(docs)}\n\nValidation: passed\nRecommendation readiness: passed\nProgramme-state freshness: passed\n')
+    report.write_text(f'# Chief Architect Knowledge Pack Build Report\n\nVersion: {version}\n\nZIP: `{zpath.relative_to(ROOT)}`\n\nZIP checksum: `{zsha}`\n\nDocuments packaged: {len(docs)}\n\nRuntime Capability Baseline packaged: WP-011 — Flora Runtime Capability Baseline (`runtime/Flora-Runtime-Capability-Baseline.md`)\n\nSelection rationale: selected canonical source `docs/flora-runtime/wp-011/Flora-Runtime-Capability-Baseline.md` because it is the only repository document found with WP-011 and Flora Runtime Capability Baseline identifiers; no canonical successor or duplicate packaged baseline was found in the Authority Registry/ADR search.\n\nValidation: passed\nRecommendation readiness: passed\nProgramme-state freshness: passed\n')
     print(f'Built {zpath} sha256={zsha}')
 if __name__=='__main__': main()
