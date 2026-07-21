@@ -6870,3 +6870,19 @@ Use this checklist when reviewing Architecture v2.0 documentation, runtime propo
 8. **Preserve Market Participant semantics.** Market Participant Twins must distinguish supplier, competitor and partner roles and assess account-relative strengths, weaknesses, fit, access, incumbent position, evidence quality, Unknowns and Contradictions.
 9. **Preserve Industry Twin cadence.** Industry Twin work must recognise continuous monitoring, weekly triage, monthly release, quarterly assurance and event-driven review as the target lifecycle cadence.
 10. **Preserve Flora's target responsibilities.** Flora should govern Knowledge Repository handling, Knowledge Pack validation, Twin Registry resolution, Presentation rendering, lineage, release comparison, Change Queues and Cross-Twin Intelligence without turning accepted interpretation into fact.
+
+## Appendix D — Chief Architect Knowledge Pack WP-012 operation
+
+The Chief Architect Knowledge Pack must be assembled from accepted architecture, declared runtime-baseline sources, operating guidance, templates, source-map metadata and current programme state. It must not rely on draft roadmap content as a proxy for programme freshness.
+
+### D.1 Mandatory authority classifications
+
+Every packaged source must declare one of the following authority classes: `accepted-adr`, `accepted-reference`, `founding-paper`, `enterprise-intelligence-authority`, `runtime-baseline`, `programme-state`, `operating-guidance`, `template`, `source-map`, `knowledge-pack-specification`, `handbook`, or `proposed-context`.
+
+### D.2 Recommendation-readiness gate
+
+No strong Recommendation without inspectable lineage, current programme state, runtime-baseline validation, visible Unknowns and Contradictions, and explicit canonical acceptance boundaries. The recommendation-ready state is blocked if CURRENT-PROGRAMME-STATE.md, FEIR-001, EIRP-001, ADR-014, ADR-024, FP-009, EI-001, EI-002, EI-003 or EI-012 is missing, stale, checksum-invalid or placeholder-like.
+
+### D.3 Programme-state freshness
+
+CURRENT-PROGRAMME-STATE.md is the sole mandatory programme-state freshness source for this pack. Flora-Roadmap.md and other roadmap documents are planning context only and must not cause a programme-state freshness pass.

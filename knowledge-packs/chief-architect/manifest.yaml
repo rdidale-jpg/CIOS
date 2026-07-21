@@ -4,48 +4,153 @@ documents:
     title: CIOS Chief Architect Handbook
     source_path: architecture/handbook/CIOS-Chief-Architect-Handbook.md
     pack_path: handbook/CIOS-Chief-Architect-Handbook.md
-    checksum: 0832d4a365ae2507bdb0750d65ce7a164384ac3b3283154e68d74384ba81fc57
-    authority: canonical
+    checksum: cee0c829cce1f7e1da7cdd6c8c9573e122ae567a0ae6cf759f6ebc1e756354ba
+    authority: handbook
     inclusion_reason: Chief Architect operating model and judgement standard
+  - document_id: CURRENT-PROGRAMME-STATE
+    title: Current Programme State
+    source_path: knowledge-packs/chief-architect/CURRENT-PROGRAMME-STATE.md
+    pack_path: programme/CURRENT-PROGRAMME-STATE.md
+    checksum: 4f3a521eea43ef59b18afba3ffbea08e036be965d223faefdc221450dd94583c
+    authority: programme-state
+    inclusion_reason: Mandatory programme-state freshness source
+  - document_id: CA-OG-001
+    title: Chief Architect Operating Guidance
+    source_path: knowledge-packs/chief-architect/operating-guidance/Chief-Architect-Operating-Guidance.md
+    pack_path: operating-guidance/Chief-Architect-Operating-Guidance.md
+    checksum: 48aa3a67a93a26296bfe5db3d500a99d851d9578f3d1ef046464d2b22e134ae4
+    authority: operating-guidance
+    inclusion_reason: Required Chief Architect operating guidance
+  - document_id: CA-TEMPLATE-001
+    title: Architecture Decision Review Template
+    source_path: knowledge-packs/chief-architect/templates/Architecture-Decision-Review-Template.md
+    pack_path: templates/Architecture-Decision-Review-Template.md
+    checksum: ed80cffdea011684eb64281d81bdf249c63067623f02eeb2632bae9baaebd2b8
+    authority: template
+    inclusion_reason: Required review template
+  - document_id: CA-SOURCE-MAP
+    title: Chief Architect Source Map
+    source_path: knowledge-packs/chief-architect/source-map.yaml
+    pack_path: source-map.yaml
+    checksum: cfa9513f239650d93271069ddfe41f0d42e780838c093fce1c10fbb1b9af2bc3
+    authority: source-map
+    inclusion_reason: Required source-map metadata
   - document_id: FP-010
     title: Knowledge Pack Architecture
     source_path: architecture/founding-papers/FP-010-Knowledge-Pack-Architecture.md
     pack_path: architecture/FP-010-Knowledge-Pack-Architecture.md
     checksum: d0c8c86aade42f72a1db1c1e8a64e589a232d4c4f2e959cefc437664b42814bc
-    authority: canonical
+    authority: founding-paper
     inclusion_reason: Shared knowledge-pack exchange architecture
   - document_id: FP-012
     title: Enterprise Reinvention Intelligence
     source_path: architecture/founding-papers/FP-012-Enterprise-Reinvention-Intelligence.md
     pack_path: architecture/FP-012-Enterprise-Reinvention-Intelligence.md
     checksum: ec12f2fd85357b3da3c52ac2e7c02dd5bec80a0ad11ec7264aa3ff312515da5a
-    authority: canonical
+    authority: founding-paper
     inclusion_reason: Enterprise reinvention recommendation doctrine
+  - document_id: FP-009
+    title: Hypothesis Validation Standard
+    source_path: architecture/founding-papers/FP-009-Hypothesis-Validation-Standard.md
+    pack_path: architecture/FP-009-Hypothesis-Validation-Standard.md
+    checksum: 4c8f19ac477a8d3ee4eea165df7ced6730e31aa084b804733188589f0a31aa37
+    authority: founding-paper
+    inclusion_reason: Recommendation lineage and hypothesis validation authority
   - document_id: ADR-016
     title: Knowledge Packs as Standard Exchange Mechanism
     source_path: architecture/decisions/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md
     pack_path: architecture/ADR-016-Knowledge-Packs-as-Standard-Exchange-Mechanism.md
     checksum: d40d4062d3ea62e8a8031e9e1e20296b0686caa9995435c742be1816dce68f5b
-    authority: canonical
+    authority: accepted-adr
     inclusion_reason: Authoritative decision for pack architecture
+  - document_id: ADR-014
+    title: Evidence-Governed Enterprise Intelligence Reasoning Runtime
+    source_path: architecture/decisions/ADR-014-Evidence-Governed-Enterprise-Intelligence-Reasoning-Runtime.md
+    pack_path: runtime/ADR-014-Evidence-Governed-Enterprise-Intelligence-Reasoning-Runtime.md
+    checksum: 77b60acd612127cb7321ca204db585ec6fc3753984aa9742ef9de6ea3ebb2162
+    authority: accepted-adr
+    inclusion_reason: Accepted runtime reasoning authority
+  - document_id: ADR-024
+    title: Hybrid Enterprise Intelligence Runtime
+    source_path: architecture/decisions/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md
+    pack_path: runtime/ADR-024-Hybrid-Enterprise-Intelligence-Runtime.md
+    checksum: eeb7823d290985cc69c60a528bb6936dc2a5ad2c1c88cfec3a16d67973826a09
+    authority: accepted-adr
+    inclusion_reason: Accepted hybrid runtime authority
+  - document_id: FEIR-001
+    title: Flora Enterprise Intelligence Runtime Architecture v1.0
+    source_path: architecture/specifications/flora/FEIR-001-Flora-Enterprise-Intelligence-Runtime-Architecture-v1.0.md
+    pack_path: runtime/FEIR-001-Flora-Enterprise-Intelligence-Runtime-Architecture-v1.0.md
+    checksum: 043dbd2c77966bf3298d51a28e34742f1b32bb0dea19b09e2bb20a322f6e6c59
+    authority: runtime-baseline
+    inclusion_reason: Mandatory Flora runtime-baseline source
+  - document_id: EIRP-001
+    title: Enterprise Intelligence Reasoning Pipeline Specification
+    source_path: architecture/specifications/flora/EIRP-001-Enterprise-Intelligence-Reasoning-Pipeline-Specification.md
+    pack_path: runtime/EIRP-001-Enterprise-Intelligence-Reasoning-Pipeline-Specification.md
+    checksum: a9ebee3051bf907eae060be83adbfdc488e8238d764f22c8c0c21d89e997b25d
+    authority: runtime-baseline
+    inclusion_reason: Mandatory reasoning pipeline runtime source
+  - document_id: EI-001
+    title: Enterprise Model Specification
+    source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-001-Enterprise-Model-Specification.md
+    pack_path: enterprise-intelligence/EI-001-Enterprise-Model-Specification.md
+    checksum: 81a6351f43e0d1444252ab23428caf2a6731ef61f5b1cacccb3e5a0a17cadf1c
+    authority: enterprise-intelligence-authority
+    inclusion_reason: Core Enterprise Intelligence authority
+  - document_id: EI-002
+    title: Enterprise Knowledge Graph
+    source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-002-Enterprise-Knowledge-Graph.md
+    pack_path: enterprise-intelligence/EI-002-Enterprise-Knowledge-Graph.md
+    checksum: 65f5003ff19031ea6fbd18b19ccfbe02b26753e0c37627477c788c77e34d0cbd
+    authority: enterprise-intelligence-authority
+    inclusion_reason: Core Enterprise Intelligence authority
+  - document_id: EI-003
+    title: Enterprise Behaviour Model
+    source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-003-Enterprise-Behaviour-Model.md
+    pack_path: enterprise-intelligence/EI-003-Enterprise-Behaviour-Model.md
+    checksum: 3b6663c61832ce47f164b86dda0dec925f7523831534501cf34d2f8fe461b741
+    authority: enterprise-intelligence-authority
+    inclusion_reason: Core Enterprise Intelligence authority
+  - document_id: EI-012
+    title: Enterprise Observation Model
+    source_path: architecture/enterprise-intelligence/volume-5-intelligence-foundations/EI-012-Enterprise-Observation-Model.md
+    pack_path: enterprise-intelligence/EI-012-Enterprise-Observation-Model.md
+    checksum: 188ae658a4db6715c7e7f0f196dbf56cd341c82c7aab31c455fbb2c6e497a5ad
+    authority: enterprise-intelligence-authority
+    inclusion_reason: Core Enterprise Intelligence authority
+  - document_id: EIF-001
+    title: Enterprise Intelligence Foundation Model
+    source_path: architecture/reference-architecture/standards/EIF-001-Enterprise-Intelligence-Foundation-Model.md
+    pack_path: enterprise-intelligence/EIF-001-Enterprise-Intelligence-Foundation-Model.md
+    checksum: b1a94f609b8252e9d7968d34968b96cc58eef6cae9c72092c016139c3490bb28
+    authority: enterprise-intelligence-authority
+    inclusion_reason: Core Enterprise Intelligence foundation authority
+  - document_id: KPS-001
+    title: Knowledge Pack Specification v1.0
+    source_path: architecture/specifications/knowledge-packs/Knowledge-Pack-Specification-v1.0.md
+    pack_path: architecture/Knowledge-Pack-Specification-v1.0.md
+    checksum: 0f84b3f501402f7b60870352632c43d543d77a2e82506d8b8c26d5ca9dc9abf9
+    authority: knowledge-pack-specification
+    inclusion_reason: Knowledge Pack validation and manifest authority
   - document_id: REF-001
     title: CIOS Reference Architecture v1.0
     source_path: architecture/reference-architecture/CIOS-Reference-Architecture-v1.0.md
     pack_path: context/CIOS-Reference-Architecture-v1.0.md
     checksum: 80db791b41030da6770cae541965650887a6df79e1da04869e4d57aacbb6c78e
-    authority: canonical
+    authority: accepted-reference
     inclusion_reason: Reference architecture context
   - document_id: PRINCIPLES-001
     title: Architecture Principles
     source_path: architecture/reference-architecture/Architecture-Principles.md
     pack_path: context/Architecture-Principles.md
     checksum: 2164ee579fcd0c8433cb66753b7d11cbfe3506fb44da1c9d3f9222f2fddceec8
-    authority: canonical
+    authority: accepted-reference
     inclusion_reason: Architecture governance principles
   - document_id: ROADMAP-001
     title: Flora Roadmap
     source_path: architecture/roadmap/Flora-Roadmap.md
     pack_path: context/Flora-Roadmap.md
     checksum: 2846a9df1c25d1ad6968f97056ad94eada49bfa479216d27f86ce85254b27a0f
-    authority: canonical
-    inclusion_reason: Programme-state freshness source
+    authority: proposed-context
+    inclusion_reason: Planning context only; excluded from programme freshness
