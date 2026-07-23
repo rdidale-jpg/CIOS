@@ -86,27 +86,106 @@ def sheet_rows(records):
         else: sheets["30_Pain_Portfolio"].append([r["id"],r["statement"],r["status"],r["confidence"],r["provenance"]])
     return sheets
 
+def _cell_ref(column_index: int, row_index: int) -> str:
+    """Return an Excel A1 cell reference for a one-based column and row."""
+    letters = ""
+    while column_index:
+        column_index, remainder = divmod(column_index - 1, 26)
+        letters = chr(65 + remainder) + letters
+    return f"{letters}{row_index}"
+
+
 def write_xlsx(path: Path, sheets: dict[str, list[list[str]]]) -> None:
-    strings=[]; sidx={}
-    def si(v):
-        v=str(v); 
-        if v not in sidx: sidx[v]=len(strings); strings.append(v)
-        return sidx[v]
+    """Write a standards-compliant XLSX workbook for the Twin Spine sheets.
+
+    The previous implementation created the minimum ZIP members consumed by the
+    local staging adapter, but its package-level content types did not identify
+    the workbook, worksheets, styles or shared-string parts.  This writer keeps
+    deterministic XML output while emitting the required Open Packaging
+    Convention and SpreadsheetML parts expected by standard XLSX readers.
+    """
+    strings: list[str] = []
+    sidx: dict[str, int] = {}
+
+    def si(value: str) -> int:
+        value = str(value)
+        if value not in sidx:
+            sidx[value] = len(strings)
+            strings.append(value)
+        return sidx[value]
+
     path.parent.mkdir(parents=True, exist_ok=True)
-    with zipfile.ZipFile(path,"w",zipfile.ZIP_DEFLATED) as z:
-        z.writestr("[Content_Types].xml", '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/></Types>')
-        z.writestr("_rels/.rels", '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>')
-        z.writestr("xl/workbook.xml", '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'+''.join(f'<sheet name="{escape(n)}" sheetId="{i}" r:id="rId{i}"/>' for i,n in enumerate(sheets,1))+'</sheets></workbook>')
-        z.writestr("xl/_rels/workbook.xml.rels", '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+''.join(f'<Relationship Id="rId{i}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet{i}.xml"/>' for i,_ in enumerate(sheets,1))+'</Relationships>')
-        sheet_xml=[]
-        for i,(name, rows) in enumerate(sheets.items(),1):
-            body=[]
-            for r,row in enumerate(rows,1):
-                cells=''.join(f'<c r="{chr(65+c)}{r}" t="s"><v>{si(v)}</v></c>' for c,v in enumerate(row))
+    sheet_overrides = "".join(
+        f'<Override PartName="/xl/worksheets/sheet{i}.xml" '
+        'ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
+        for i in range(1, len(sheets) + 1)
+    )
+    with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
+        z.writestr(
+            "[Content_Types].xml",
+            '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+            '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+            '<Default Extension="xml" ContentType="application/xml"/>'
+            '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
+            f'{sheet_overrides}'
+            '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
+            '<Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>'
+            '</Types>',
+        )
+        z.writestr(
+            "_rels/.rels",
+            '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+            '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>'
+            '</Relationships>',
+        )
+        z.writestr(
+            "xl/workbook.xml",
+            '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" '
+            'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+            '<sheets>'
+            + ''.join(f'<sheet name="{escape(n)}" sheetId="{i}" r:id="rId{i}"/>' for i, n in enumerate(sheets, 1))
+            + '</sheets></workbook>',
+        )
+        z.writestr(
+            "xl/_rels/workbook.xml.rels",
+            '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+            + ''.join(
+                f'<Relationship Id="rId{i}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet{i}.xml"/>'
+                for i, _ in enumerate(sheets, 1)
+            )
+            + f'<Relationship Id="rId{len(sheets) + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>'
+            + f'<Relationship Id="rId{len(sheets) + 2}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" Target="sharedStrings.xml"/>'
+            + '</Relationships>',
+        )
+        sheet_xml = []
+        for i, (_name, rows) in enumerate(sheets.items(), 1):
+            body = []
+            for r, row in enumerate(rows, 1):
+                cells = ''.join(
+                    f'<c r="{_cell_ref(c, r)}" t="s"><v>{si(v)}</v></c>'
+                    for c, v in enumerate(row, 1)
+                )
                 body.append(f'<row r="{r}">{cells}</row>')
-            sheet_xml.append((f"xl/worksheets/sheet{i}.xml", '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>'+''.join(body)+'</sheetData></worksheet>'))
-        z.writestr("xl/sharedStrings.xml", '<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'+''.join(f'<si><t>{escape(s)}</t></si>' for s in strings)+'</sst>')
-        for n,x in sheet_xml: z.writestr(n,x)
+            sheet_xml.append((f"xl/worksheets/sheet{i}.xml", '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>' + ''.join(body) + '</sheetData></worksheet>'))
+        z.writestr(
+            "xl/styles.xml",
+            '<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
+            '<fonts count="1"><font><sz val="11"/><name val="Calibri"/></font></fonts>'
+            '<fills count="1"><fill><patternFill patternType="none"/></fill></fills>'
+            '<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>'
+            '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>'
+            '<cellXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/></cellXfs>'
+            '<cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles>'
+            '</styleSheet>',
+        )
+        z.writestr(
+            "xl/sharedStrings.xml",
+            f'<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="{sum(len(r) for rows in sheets.values() for r in rows)}" uniqueCount="{len(strings)}">'
+            + ''.join(f'<si><t>{escape(s)}</t></si>' for s in strings)
+            + '</sst>',
+        )
+        for name, xml in sheet_xml:
+            z.writestr(name, xml)
 
 def write_docs(out: Path, count: int):
     docs=out/"docs"; meta=out/"metadata"; docs.mkdir(parents=True,exist_ok=True); meta.mkdir(parents=True,exist_ok=True)

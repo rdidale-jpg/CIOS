@@ -3,6 +3,8 @@ from __future__ import annotations
 import json, zipfile
 from pathlib import Path
 
+import pytest
+
 from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, BlueprintPackageValidator
 from tools.blueprints.materialise_ukcg import HANDOVER, materialise
 import importlib.util
@@ -53,3 +55,43 @@ def test_ukcg_source_to_twin_spine_mapping_preserves_governed_controls(monkeypat
     assert {c["candidate_object_class"] for c in quarantined} == {"pain_point"}
     assert all(any(f["code"] == "projection_only" for f in c["validation_findings"]) for c in quarantined)
     assert all(c["canonical_mutation_count"] == 0 for c in candidates)
+
+
+def test_ukcg_twin_spine_is_standards_compliant_xlsx(tmp_path):
+    openpyxl = pytest.importorskip("openpyxl")
+    load_workbook = openpyxl.load_workbook
+
+    expected_sheets = [
+        "04A_Evidence",
+        "05_Observations",
+        "06_Entities_Rels",
+        "13_Causal_Edges",
+        "16_Unknowns",
+        "17_Contradictions",
+        "24_Human_Knowledge",
+        "03_Sources",
+        "30_Pain_Portfolio",
+    ]
+    asset_dir = tmp_path / "assets"
+    materialise(asset_dir)
+    workbook_path = asset_dir / "twin_spine/UKCG-CDT-01-Twin-Spine-v1.0.xlsx"
+
+    workbook = load_workbook(workbook_path, read_only=True, data_only=True)
+    try:
+        assert workbook.sheetnames == expected_sheets
+        record_counts = {name: workbook[name].max_row - 1 for name in expected_sheets}
+        assert sum(record_counts.values()) == 152
+        assert record_counts["30_Pain_Portfolio"] == 36
+        assert record_counts["03_Sources"] == 1
+        assert record_counts["24_Human_Knowledge"] == 6
+        assert record_counts["16_Unknowns"] >= 2
+        assert record_counts["17_Contradictions"] >= 1
+    finally:
+        workbook.close()
+
+    reopened = load_workbook(workbook_path, read_only=True, data_only=True)
+    try:
+        assert reopened.sheetnames == expected_sheets
+        assert sum(reopened[name].max_row - 1 for name in expected_sheets) == 152
+    finally:
+        reopened.close()
