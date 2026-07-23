@@ -833,7 +833,10 @@ def _flora_focus_page(headers=None, query=None) -> str:
         target=o.enterprise_name or o.participant_type; key_unknown=o.unknowns[0].what if o.unknowns else 'No material Unknown recorded'; move=o.movement_criteria[0] if o.movement_criteria else 'Human review required before movement.'
         shape=f"/shape?opportunity={escape(o.opportunity_id)}&horizon={escape(o.horizon)}"
         return f"""<article class='opportunity-card'><h3>{escape(o.title)}</h3><p class='target'>{escape(target)}</p><p><span class='badge'>{_horizon_label(o.horizon)}</span> <span class='confidence'>Readiness: {escape(o.readiness)}</span></p><p><strong>Why now</strong><br>{escape(o.why_now)}</p><p><strong>Executive relevance</strong><br>{escape(', '.join(o.executive_roles))}</p><p><strong>Confidence</strong> {escape(o.confidence)} · <strong>Evidence strength</strong> {escape(o.evidence_strength)}</p><p><strong>What is missing</strong><br>{escape(key_unknown)}</p><p><strong>Next action</strong><br>{escape(o.recommended_next_action)}</p><p><strong>Moves when</strong><br>{escape(move)}</p><p><a class='button-link' href='/focus?opportunity={escape(o.opportunity_id)}'>Inspect</a> <a class='secondary-link' href='{shape}'>Shape brief</a> <a class='secondary-link' href='/focus?executive_role={escape(o.executive_roles[0])}'>Build evidence</a></p></article>"""
-    columns=''.join(f"<section class='horizon-column'><h2>{_horizon_label(h)}</h2><p class='muted'>{len(cards_by[h])} shown</p>{''.join(card(o) for o in cards_by[h]) or '<p class=\'muted\'>No generated opportunities in this group.</p>'}</section>" for h in ['horizon_1','horizon_2','horizon_3','not_actionable'])
+    columns = ''
+    for h in ['horizon_1','horizon_2','horizon_3','not_actionable']:
+        horizon_cards = ''.join(card(o) for o in cards_by[h]) or "<p class='muted'>No generated opportunities in this group.</p>"
+        columns += f"<section class='horizon-column'><h2>{_horizon_label(h)}</h2><p class='muted'>{len(cards_by[h])} shown</p>{horizon_cards}</section>"
     detail=''
     if selected:
         o=selected

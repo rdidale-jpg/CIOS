@@ -17,7 +17,9 @@ def enterprise_memory_panel(enterprise_id: str, models: EnterpriseModelRepositor
     rows = []
     for key, attr in sorted(model.attributes.items()):
         certainty = "Contradicted — do not present as certain" if attr.contradiction_state == "contradicted" else "Maintained model state"
-        rows.append(f"<tr><th>{escape(key)}</th><td>{escape(str(attr.current_value))}</td><td>{attr.confidence}</td><td>{escape(attr.freshness)}</td><td>{escape(attr.last_observed_date)}</td><td>{escape(certainty)}</td><td>{''.join(f"<a href='#obs-{escape(str(oid))}'>{escape(str(oid))}</a> " for oid in attr.observation_ids)}</td><td>{''.join(f"<a href='#evidence-{escape(str(eid))}'>{escape(str(eid))}</a> " for eid in attr.evidence_ids)}</td></tr>")
+        observation_links = "".join(f"<a href='#obs-{escape(str(oid))}'>{escape(str(oid))}</a> " for oid in attr.observation_ids)
+        evidence_links = "".join(f"<a href='#evidence-{escape(str(eid))}'>{escape(str(eid))}</a> " for eid in attr.evidence_ids)
+        rows.append(f"<tr><th>{escape(key)}</th><td>{escape(str(attr.current_value))}</td><td>{attr.confidence}</td><td>{escape(attr.freshness)}</td><td>{escape(attr.last_observed_date)}</td><td>{escape(certainty)}</td><td>{observation_links}</td><td>{evidence_links}</td></tr>")
     unknowns = "".join(f"<li>{escape(u.question)} · {escape(u.status)} · related observations: {escape(', '.join(u.related_observation_ids))}</li>" for u in model.unknowns.values()) or "<li>No persisted Unknowns for this enterprise.</li>"
     lineage = []
     for obs_id in {oid for a in model.attributes.values() for oid in a.observation_ids}:
@@ -30,8 +32,12 @@ def enterprise_memory_panel(enterprise_id: str, models: EnterpriseModelRepositor
 def calibration_inspection_panel(enterprise_id: str, models: EnterpriseModelRepository | None = None, observations: ObservationRepository | None = None) -> str:
     """Render Evidence → Observation → Enterprise Model diagnostic lineage."""
     rows = inspection_rows(enterprise_id, observations, models)
-    html_rows = "".join(f"<tr><td>{escape(str(r['observation_id']))}</td><td>{escape(r['atomic_statement'])}</td><td>{escape(', '.join(r['evidence_ids']))}</td><td>{escape(r['enterprise_id'])}</td><td>{escape(r['affected_model_domain'])}</td><td>{escape(r['affected_attribute'])}</td><td>{escape(r['update_result'])}</td><td>{r['confidence']}</td><td>{escape(r['freshness'])}</td><td>{escape(str(r['rejection_reason'] or ""))}</td></tr>" for r in rows)
-    return f"""<section class='card'><h2>Calibration lineage</h2><p>Evidence → Observation → affected Enterprise Model attribute.</p><table><thead><tr><th>Observation ID</th><th>Atomic statement</th><th>Evidence IDs</th><th>Enterprise ID</th><th>Domain</th><th>Attribute</th><th>Update result</th><th>Confidence</th><th>Freshness</th><th>Rejection reason</th></tr></thead><tbody>{html_rows or '<tr><td colspan="10">No accepted Observations for this enterprise.</td></tr>'}</tbody></table></section>"""
+    html_rows = "".join(
+        f"<tr><td>{escape(str(r['observation_id']))}</td><td>{escape(r['atomic_statement'])}</td><td>{escape(', '.join(r['evidence_ids']))}</td><td>{escape(r['enterprise_id'])}</td><td>{escape(r['affected_model_domain'])}</td><td>{escape(r['affected_attribute'])}</td><td>{escape(r['update_result'])}</td><td>{r['confidence']}</td><td>{escape(r['freshness'])}</td><td>{escape(str(r['rejection_reason'] or ''))}</td></tr>"
+        for r in rows
+    )
+    table_rows = html_rows or '<tr><td colspan="10">No accepted Observations for this enterprise.</td></tr>'
+    return f"""<section class='card'><h2>Calibration lineage</h2><p>Evidence → Observation → affected Enterprise Model attribute.</p><table><thead><tr><th>Observation ID</th><th>Atomic statement</th><th>Evidence IDs</th><th>Enterprise ID</th><th>Domain</th><th>Attribute</th><th>Update result</th><th>Confidence</th><th>Freshness</th><th>Rejection reason</th></tr></thead><tbody>{table_rows}</tbody></table></section>"""
 
 from cios.applications.flora.memory.factual_twin import coverage_for_model, maturity_for_model
 
@@ -57,7 +63,9 @@ def factual_digital_twin_workspace(enterprise_id: str, models: EnterpriseModelRe
             ev=evidence_by_id.get(eid,{})
             page=ev.get('page_number') or ev.get('page_range') or 'unknown page'
             ev_pages.append(f"{escape(eid)} page {escape(str(page))}")
-        attr_rows.append(f"<tr><th>{escape(key)}</th><td>{escape(str(attr.current_value))}</td><td>{escape(attr.freshness)}</td><td>{attr.confidence}</td><td>{escape(attr.last_observed_date)}</td><td>{''.join(f"<a href='#obs-{escape(str(oid))}'>{escape(str(oid))}</a> " for oid in attr.observation_ids)}</td><td>{escape('; '.join(ev_pages) or ', '.join(attr.evidence_ids))}</td><td>{escape(str(attr.prior_values))}</td></tr>")
+        observation_links = "".join(f"<a href='#obs-{escape(str(oid))}'>{escape(str(oid))}</a> " for oid in attr.observation_ids)
+        evidence_pages = escape('; '.join(ev_pages) or ', '.join(attr.evidence_ids))
+        attr_rows.append(f"<tr><th>{escape(key)}</th><td>{escape(str(attr.current_value))}</td><td>{escape(attr.freshness)}</td><td>{attr.confidence}</td><td>{escape(attr.last_observed_date)}</td><td>{observation_links}</td><td>{evidence_pages}</td><td>{escape(str(attr.prior_values))}</td></tr>")
     def _business_financial_row(key: str, attr) -> str:
         parts = key.split('.')
         metric = parts[2].replace('_', ' ').title().replace('Ebitda', 'EBITDA') if len(parts) > 2 else key
@@ -71,7 +79,9 @@ def factual_digital_twin_workspace(enterprise_id: str, models: EnterpriseModelRe
                 if m:
                     display_value = m.group(1).replace(' ', '').replace('billion', 'bn').replace('million', 'm')
                     break
-        return f"<tr><th>{escape(metric)}</th><td>{escape(display_value)}</td><td>{escape(period)}</td><td>{escape(state)}</td><td>{escape(attr.freshness)}</td><td>{attr.confidence}</td><td>{''.join(f"<a href='#obs-{escape(str(oid))}'>{escape(str(oid))}</a> " for oid in attr.observation_ids)}</td><td>{''.join(f"<a href='#evidence-{escape(str(eid))}'>{escape(str(eid))}</a> " for eid in attr.evidence_ids)}</td></tr>"
+        observation_links = "".join(f"<a href='#obs-{escape(str(oid))}'>{escape(str(oid))}</a> " for oid in attr.observation_ids)
+        evidence_links = "".join(f"<a href='#evidence-{escape(str(eid))}'>{escape(str(eid))}</a> " for eid in attr.evidence_ids)
+        return f"<tr><th>{escape(metric)}</th><td>{escape(display_value)}</td><td>{escape(period)}</td><td>{escape(state)}</td><td>{escape(attr.freshness)}</td><td>{attr.confidence}</td><td>{observation_links}</td><td>{evidence_links}</td></tr>"
 
     def domain_panel(title: str, prefix: str) -> str:
         if prefix == 'financial_performance.':

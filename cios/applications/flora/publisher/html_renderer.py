@@ -52,7 +52,14 @@ def render_html(ctx: dict[str, Any]) -> str:
     pages.append(f"<section class='page'><h2>Executive &amp; Market Movements</h2>{moves}{_footer(ctx,6)}</section>")
     comp = ''.join(f"<h3>{_e(k)}</h3><p>{_e(v)}</p>" for k,v in ctx['competitive_intelligence'].items())
     pages.append(f"<section class='page'><h2>Competitive Intelligence</h2>{comp}{_footer(ctx,7)}</section>")
-    acts = ''.join(f"<div class='card'><h3>Priority {a['priority']} · {_e(a['organisation'])}</h3><h4>Why this matters to Rob</h4><p>{_e(a['why_this_matters_to_rob'])}</p><p><b>Target:</b> {_e(a['target_executive_or_function'])}</p><p><b>Proposition:</b> {_e(a['proposition'])}</p><p><b>Action:</b> {_e(a['action'])}</p><p><b>Why now:</b> {_e(a['why_now'])}</p><p><b>Missing evidence:</b> {_e(', '.join(a['missing_evidence']))}</p><p><b>Time required:</b> {_e(a['time_required'])}</p><h4>Evidence Receipt</h4><ul>{''.join(f'<li>{_e(e["signal_ids"])} — {_e(e["summary"])} ({_e(e["source_type"])}, {_e(e["evidence_status"])})</li>' for e in a['evidence_receipt'])}</ul></div>" for a in ctx['recommended_actions'])
+    action_cards = []
+    for a in ctx['recommended_actions']:
+        receipt_items = ''.join(
+            f"<li>{_e(e['signal_ids'])} — {_e(e['summary'])} ({_e(e['source_type'])}, {_e(e['evidence_status'])})</li>"
+            for e in a['evidence_receipt']
+        )
+        action_cards.append(f"<div class='card'><h3>Priority {a['priority']} · {_e(a['organisation'])}</h3><h4>Why this matters to Rob</h4><p>{_e(a['why_this_matters_to_rob'])}</p><p><b>Target:</b> {_e(a['target_executive_or_function'])}</p><p><b>Proposition:</b> {_e(a['proposition'])}</p><p><b>Action:</b> {_e(a['action'])}</p><p><b>Why now:</b> {_e(a['why_now'])}</p><p><b>Missing evidence:</b> {_e(', '.join(a['missing_evidence']))}</p><p><b>Time required:</b> {_e(a['time_required'])}</p><h4>Evidence Receipt</h4><ul>{receipt_items}</ul></div>")
+    acts = ''.join(action_cards)
     pages.append(f"<section class='page'><h2>Recommended Actions</h2>{acts}{_footer(ctx,11)}</section>")
     today = ''.join(f'<li>{_e(x)}</li>' for x in ctx['three_things_today'])
     unknown = ''.join(f'<li>{_e(x)}</li>' for x in ctx['cannot_know'])
