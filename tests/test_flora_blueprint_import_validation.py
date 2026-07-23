@@ -5,7 +5,6 @@ import pytest
 
 from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, BlueprintPackageValidator, BlueprintValidationError
 from cios.applications.flora.blueprint_import.archive import sha256_bytes
-from cios.applications.flora.blueprint_import.models import BlueprintPackageIdentity
 
 
 def pkg(manifest_extra=None, records=None, extra=None, duplicate=False):
@@ -26,6 +25,15 @@ def pkg(manifest_extra=None, records=None, extra=None, duplicate=False):
         if duplicate: z.writestr("records/sources.ndjson", b"{}\n")
     return b.getvalue()
 
+
+
+def _mutate_received_registry_record(record, tmp_path, mutate):
+    """Deliberately corrupt test registry metadata without changing archived bytes."""
+    path = tmp_path / "blueprint_import" / "packages" / f"{record.package_ref}.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    mutate(data)
+    path.write_text(json.dumps(data, indent=2, sort_keys=True), encoding="utf-8")
+    return BlueprintPackageRegistry().get(record.package_ref)
 
 def receive(monkeypatch,tmp_path,content=None):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
@@ -66,16 +74,11 @@ def test_validation_page_shows_safe_deployed_commit(monkeypatch,tmp_path):
 def test_manifest_to_registry_mismatch_is_rejected_inspectably(monkeypatch,tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     content = pkg()
-    r = BlueprintPackageRegistry().receive_for_validation_test(
-        content,
-        "synthetic.zip",
-        "alice",
-        identity_override=BlueprintPackageIdentity(
-            package_id="synthetic-blueprint",
-            package_version="1.0.0",
-            enterprise_id="other-enterprise",
-            profile_version="0.1",
-        ),
+    r = BlueprintPackageRegistry().receive(content, "synthetic.zip", "alice")
+    r = _mutate_received_registry_record(
+        r,
+        tmp_path,
+        lambda data: data["identity"].update({"enterprise_id": "other-enterprise"}),
     )
     result=BlueprintPackageValidator().validate_and_stage(r.package_ref,"alice")
     assert any("enterprise_id" in e for e in result.errors)
@@ -85,11 +88,11 @@ def test_manifest_to_registry_mismatch_is_rejected_inspectably(monkeypatch,tmp_p
 def test_checksum_mismatch_stops_processing(monkeypatch,tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     content = pkg()
-    r = BlueprintPackageRegistry().receive_for_validation_test(
-        content,
-        "synthetic.zip",
-        "alice",
-        package_sha256_override="0" * 64,
+    r = BlueprintPackageRegistry().receive(content, "synthetic.zip", "alice")
+    r = _mutate_received_registry_record(
+        r,
+        tmp_path,
+        lambda data: data.update({"package_sha256": "0" * 64}),
     )
     with pytest.raises(BlueprintValidationError):
         BlueprintPackageValidator().validate_and_stage(r.package_ref,"alice")
