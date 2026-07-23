@@ -1,0 +1,199 @@
+name: Validate UKCG Candidate Blueprint Package
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/validate-ukcg-candidate-blueprint-package.yml"
+      - "docs/industry-twins/uk-central-government/**"
+      - "tools/blueprints/materialise_ukcg.py"
+      - "tools/knowledge-packs/build_uk_government_blueprint_package.py"
+      - "cios/applications/flora/blueprint_import/**"
+      - "tests/blueprints/test_ukcg_materialisation.py"
+      - "tests/test_flora_blueprint_import_validation.py"
+  push:
+    branches:
+      - main
+      - work
+    paths:
+      - ".github/workflows/validate-ukcg-candidate-blueprint-package.yml"
+      - "docs/industry-twins/uk-central-government/**"
+      - "tools/blueprints/materialise_ukcg.py"
+      - "tools/knowledge-packs/build_uk_government_blueprint_package.py"
+      - "cios/applications/flora/blueprint_import/**"
+      - "tests/blueprints/test_ukcg_materialisation.py"
+      - "tests/test_flora_blueprint_import_validation.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Build and validate UKCG Candidate Blueprint Package
+    runs-on: ubuntu-latest
+
+    env:
+      UKCG_PACKAGE_ZIP: dist/UKCG-CDT-Flora-Blueprint-v1.0.zip
+      UKCG_CHECKSUM: dist/UKCG-CDT-Flora-Blueprint-v1.0.sha256
+      UKCG_ASSET_ROOT: dist/uk-government-blueprint-assets
+      UKCG_RELEASE_VALIDATION: dist/uk-government-blueprint-assets/metadata/UKCG-CDT-v1.0-Release-Validation.json
+      UKCG_VALIDATION_REPORT: dist/uk-government-blueprint-assets/docs/UKCG-CDT-04-Research-Completion-and-Validation-Report-v1.0.md
+      UKCG_TWIN_SPINE: dist/uk-government-blueprint-assets/twin_spine/UKCG-CDT-01-Twin-Spine-v1.0.xlsx
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "pytest>=8.0"
+
+      - name: Materialise UKCG Candidate Blueprint assets
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python tools/blueprints/materialise_ukcg.py
+
+      - name: Build UKCG Candidate Blueprint package
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python tools/knowledge-packs/build_uk_government_blueprint_package.py
+
+      - name: Verify package manifest, hashes, status, hold, and Twin Spine
+        run: |
+          set -euo pipefail
+          test -f "$UKCG_PACKAGE_ZIP"
+          test -f "$UKCG_RELEASE_VALIDATION"
+          test -f "$UKCG_VALIDATION_REPORT"
+          test -f "$UKCG_TWIN_SPINE"
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import zipfile
+          from pathlib import Path
+
+          zip_path = Path(os.environ["UKCG_PACKAGE_ZIP"])
+          asset_root = Path(os.environ["UKCG_ASSET_ROOT"])
+          release_validation = Path(os.environ["UKCG_RELEASE_VALIDATION"])
+          validation_report = Path(os.environ["UKCG_VALIDATION_REPORT"])
+          expected_spine = "twin_spine/UKCG-CDT-01-Twin-Spine-v1.0.xlsx"
+
+          def sha256(path: Path) -> str:
+              return hashlib.sha256(path.read_bytes()).hexdigest()
+
+          with zipfile.ZipFile(zip_path) as zf:
+              names = zf.namelist()
+              if "blueprint_manifest.json" not in names:
+                  raise SystemExit("blueprint_manifest.json is missing at the ZIP root")
+              if any(name != "blueprint_manifest.json" and name.endswith("/blueprint_manifest.json") for name in names):
+                  raise SystemExit("Nested blueprint_manifest.json found")
+              manifest = json.loads(zf.read("blueprint_manifest.json"))
+
+          if manifest.get("package_id") != "UKCG-CDT-Blueprint":
+              raise SystemExit(f"Unexpected package_id: {manifest.get('package_id')}")
+          if manifest.get("enterprise_id") != "UK-Central-Government":
+              raise SystemExit(f"Unexpected enterprise_id: {manifest.get('enterprise_id')}")
+          if manifest.get("final_twin_spine_workbook") != expected_spine:
+              raise SystemExit(f"Unexpected Twin Spine selection: {manifest.get('final_twin_spine_workbook')}")
+
+          declared = {entry["path"]: entry["sha256"] for entry in manifest.get("files", [])}
+          if expected_spine not in declared:
+              raise SystemExit("Declared files do not include the intended Twin Spine workbook")
+          for rel, expected_hash in declared.items():
+              actual = asset_root / rel
+              if not actual.is_file():
+                  raise SystemExit(f"Declared asset is missing: {rel}")
+              actual_hash = sha256(actual)
+              if actual_hash != expected_hash:
+                  raise SystemExit(f"Hash mismatch for {rel}: {actual_hash} != {expected_hash}")
+
+          validation = json.loads(release_validation.read_text(encoding="utf-8"))
+          if validation.get("status") != "Candidate":
+              raise SystemExit(f"Package status lost Candidate state: {validation.get('status')}")
+          if validation.get("canonical_mutations") != 0:
+              raise SystemExit(f"canonical_mutations is non-zero: {validation.get('canonical_mutations')}")
+          report = validation_report.read_text(encoding="utf-8")
+          required_markers = [
+              "Canonical mutations: 0",
+              "Quarantine category: QP-UKCG-001..036",
+              "Candidate records: 152",
+          ]
+          for marker in required_markers:
+              if marker not in report:
+                  raise SystemExit(f"Validation report is missing marker: {marker}")
+          governed_doc = (asset_root / "docs/UKCG-CDT-02-Governed-Commercial-Digital-Twin-v1.0.md").read_text(encoding="utf-8")
+          if "Candidate / non-canonical" not in governed_doc:
+              raise SystemExit("Candidate / non-canonical status was not preserved")
+          print("UKCG package manifest, hashes, Candidate status, validation hold, and Twin Spine selection verified")
+          PY
+          (cd dist && sha256sum "$(basename "$UKCG_PACKAGE_ZIP")" > "$(basename "$UKCG_CHECKSUM")")
+          (cd dist && sha256sum --check "$(basename "$UKCG_CHECKSUM")")
+
+      - name: Run UKCG materialisation and Flora import validation tests
+        run: |
+          set -euo pipefail
+          pytest -q tests/blueprints/test_ukcg_materialisation.py tests/test_flora_blueprint_import_validation.py
+
+      - name: Run isolated Flora receipt and staged validation
+        env:
+          FLORA_DATA_DIR: ${{ runner.temp }}/flora-ukcg-blueprint-validation
+        run: |
+          set -euo pipefail
+          rm -rf "$FLORA_DATA_DIR"
+          mkdir -p "$FLORA_DATA_DIR"
+          PYTHONPATH=. python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, BlueprintPackageValidator
+
+          zip_path = Path(os.environ["UKCG_PACKAGE_ZIP"])
+          receipt = BlueprintPackageRegistry().receive(zip_path.read_bytes(), zip_path.name, "github-actions")
+          validator = BlueprintPackageValidator()
+          result = validator.validate_and_stage(receipt.package_ref, "github-actions")
+          summary = validator.staging_summary(receipt.import_run_id)
+          candidates = summary.get("candidates", []) if summary else []
+
+          if result.candidate_records_staged != 152:
+              raise SystemExit(f"Unexpected staged records: {result.candidate_records_staged}")
+          if result.records_rejected != 0:
+              raise SystemExit(f"Staged validation rejected records: {result.records_rejected}")
+          if result.records_accepted_into_staging != 116:
+              raise SystemExit(f"Unexpected accepted staging count: {result.records_accepted_into_staging}")
+          if result.records_quarantined != 36:
+              raise SystemExit(f"Unexpected quarantine count: {result.records_quarantined}")
+          if result.canonical_mutations != 0:
+              raise SystemExit(f"canonical_mutations is non-zero: {result.canonical_mutations}")
+          if any(candidate.get("canonical_mutation_count") != 0 for candidate in candidates):
+              raise SystemExit("A staged candidate recorded a canonical mutation")
+          by_source = {candidate.get("original_source_id"): candidate for candidate in candidates}
+          if by_source.get("NC-UKCG-004", {}).get("payload", {}).get("status") != "explicit_non_claim":
+              raise SystemExit("Non-canonical explicit non-claim was lost")
+          for hold in ("VH-UKCG-254", "VH-UKCG-255"):
+              if by_source.get(hold, {}).get("payload", {}).get("status") != "validation_hold":
+                  raise SystemExit(f"Validation hold was lost: {hold}")
+          Path("dist/UKCG-CDT-v1.0-staged-validation-summary.json").write_text(
+              json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8"
+          )
+          print(json.dumps(result.to_dict(), indent=2, sort_keys=True))
+          PY
+
+      - name: Upload UKCG Candidate Blueprint artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: UKCG-CDT-Candidate-Blueprint-v1.0-validation
+          path: |
+            ${{ env.UKCG_PACKAGE_ZIP }}
+            ${{ env.UKCG_CHECKSUM }}
+            ${{ env.UKCG_RELEASE_VALIDATION }}
+            ${{ env.UKCG_VALIDATION_REPORT }}
+            ${{ env.UKCG_TWIN_SPINE }}
+            dist/UKCG-CDT-v1.0-staged-validation-summary.json
+          if-no-files-found: error
+          retention-days: 30
