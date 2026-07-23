@@ -1047,7 +1047,8 @@ def commercial_pipeline_table(sort_by='earliest-entry'):
     heads=('Bank','Opportunity','Low estimate','Working estimate','High estimate','Earliest entry','Buying window','Programme start','Contract duration','Conviction','Status','Supplier position','Trigger')
     body=''.join(f"<tr data-opportunity-id='{escape(o.id)}'><td class='sticky'>{escape(b.name)}</td><td class='sticky opportunity'><span title='{escape(o.title)}'>{escape(o.title)}</span></td><td data-sort-value='{o.value.low}'>£{o.value.low}m</td><td data-sort-value='{o.value.midpoint}'><strong>£{o.value.midpoint}m</strong></td><td data-sort-value='{o.value.high}'>£{o.value.high}m</td><td>{escape(o.earliest_entry)}</td><td>{escape(o.buying_window)}</td><td>{escape(o.programme_start)}</td><td>{escape(o.contract_duration)}</td><td>{escape(o.conviction)}</td><td>{escape(o.status)}</td><td>{escape(o.supplier_position)}</td><td>{escape(o.accelerate_signal)}</td></tr>" for b,o in rows)
     filters = "<form class='pipeline-filters' aria-label='Pipeline filters'><label>Bank</label><select><option>All banks</option></select><label>Opportunity category</label><select><option>All categories</option></select><label>Horizon</label><select><option>All horizons</option></select><label>Conviction</label><select><option>All convictions</option></select><label>Supplier position</label><select><option>All suppliers</option></select><label>Status</label><select><option>All statuses</option></select></form>"
-    return f"<section class='card structured-analysis' id='pipeline-table'><h2>Detailed commercial pipeline</h2>{filters}<div class='table-scroll'><table class='pipeline-table' data-default-sort='earliest credible commercial action, working estimate descending'><thead><tr>{''.join('<th data-sortable=\'true\'>'+escape(h)+'</th>' for h in heads)}</tr></thead><tbody>{body}</tbody></table></div></section>"
+    header = "".join(f"<th data-sortable='true'>{escape(h)}</th>" for h in heads)
+    return f"<section class='card structured-analysis' id='pipeline-table'><h2>Detailed commercial pipeline</h2>{filters}<div class='table-scroll'><table class='pipeline-table' data-default-sort='earliest credible commercial action, working estimate descending'><thead><tr>{header}</tr></thead><tbody>{body}</tbody></table></div></section>"
 
 
 def pipeline_page():
@@ -1094,7 +1095,12 @@ def competitor_capability_html(embed=False):
         reliable=[x for x in items if x[2] != 'Insufficient view' and x[1] != 'Insufficient view']
         if not reliable:
             unavailable.append(offer); continue
-        rows=''.join(f"<tr class='competitor-row'><td class='supplier-name'>{escape(name)}</td><td class='capability-assessment'>{escape(strength)}</td><td class='visual-bar'>{'<meter min=\'0\' max=\'5\' value=\''+str(_assessment_score(strength))+'\'></meter>' if _assessment_score(strength) else '<span class=\'unavailable\'>Not enough information</span>'}</td><td><details><summary>Inspect ranking</summary><p>{escape(why)} Traction, strengths, weakness, relevant bank relationships, opportunities and information gaps remain inspectable.</p></details></td></tr>" for rank,name,strength,why in reliable)
+        rendered_rows = []
+        for rank, name, strength, why in reliable:
+            score = _assessment_score(strength)
+            visual = f"<meter min='0' max='5' value='{score}'></meter>" if score else "<span class='unavailable'>Not enough information</span>"
+            rendered_rows.append(f"<tr class='competitor-row'><td class='supplier-name'>{escape(name)}</td><td class='capability-assessment'>{escape(strength)}</td><td class='visual-bar'>{visual}</td><td><details><summary>Inspect ranking</summary><p>{escape(why)} Traction, strengths, weakness, relevant bank relationships, opportunities and information gaps remain inspectable.</p></details></td></tr>")
+        rows = ''.join(rendered_rows)
         sections += f"<section class='card visual' id='{escape(offer.replace(' ','-'))}'><h2>{escape(offer)}</h2><table><thead><tr><th>Supplier</th><th>Capability assessment</th><th>Visual bar</th><th>Evidence</th></tr></thead><tbody>{rows}</tbody></table></section>"
     if unavailable:
         sections += "<section class='card unavailable-offers'><h2>Offers where Flora does not yet have a reliable view</h2><p>Not enough information; no scored strength bar is rendered.</p><ul>" + ''.join(f"<li>{escape(u)} — <a href='/flora/banking/competitors#gaps'>inspect what is missing</a></li>" for u in unavailable) + "</ul></section>"
@@ -1200,7 +1206,11 @@ def visual_intro(question: str, conclusion: str, legend: str = "How to read this
     return f"<section class='visual-explain'><h2>What this visual shows</h2><p>{escape(question)}</p></section><details><summary>How to read this visual</summary><p>{escape(legend)}</p></details>"
 
 def global_industry_portfolio_page() -> str:
-    cards=''.join(f"<article class='card industry-card'><p class='eyebrow'>{escape(i['status'])}</p><h2>{escape(i['name'])}</h2><p>{escape(i['summary'])}</p><p>{'<a class=\'primary-link\' href=\''+i['href']+'\'>Open industry view</a>' if i['status'].startswith('Active') else '<span class=\'pill\'>No governed view yet</span>'}</p></article>" for i in INDUSTRY_PORTFOLIO)
+    rendered_cards = []
+    for i in INDUSTRY_PORTFOLIO:
+        link = f"<a class='primary-link' href='{escape(i['href'])}'>Open industry view</a>" if i['status'].startswith('Active') else "<span class='pill'>No governed view yet</span>"
+        rendered_cards.append(f"<article class='card industry-card'><p class='eyebrow'>{escape(i['status'])}</p><h2>{escape(i['name'])}</h2><p>{escape(i['summary'])}</p><p>{link}</p></article>")
+    cards = ''.join(rendered_cards)
     body="<section class='hero'><h1>Industries</h1><p>Enter Flora through a portfolio of industries. Only UK Banking is active; future sectors are visible placeholders without invented intelligence.</p></section><section class='grid'>"+cards+"</section>"
     return _page("Flora industry portfolio", body)
 
@@ -1269,7 +1279,14 @@ def competitor_capability_html(embed=False):
         reliable=[x for x in items if x[1]!='Insufficient view' and x[2]!='Insufficient view']
         if reliable: assessed.append((offer,reliable[:3]))
         else: gaps.append(offer)
-    assessed_html=''.join(f"<section class='card visual'><h3>{escape(offer)}</h3><table>{''.join(f'<tr><td class=\'supplier-name\'>{escape(n)}</td><td class=\'capability-assessment\'>{escape(st)}</td><td class=\'visual-bar\'><meter min=\'0\' max=\'5\' value=\'{_assessment_score(st) or 1}\'></meter></td><td>Why ranked: {escape(why)}</td></tr>' for _,n,st,why in rows)}</table></section>" for offer,rows in assessed)
+    assessed_sections = []
+    for offer, rows in assessed:
+        supplier_rows = ''.join(
+            f"<tr><td class='supplier-name'>{escape(n)}</td><td class='capability-assessment'>{escape(st)}</td><td class='visual-bar'><meter min='0' max='5' value='{_assessment_score(st) or 1}'></meter></td><td>Why ranked: {escape(why)}</td></tr>"
+            for _, n, st, why in rows
+        )
+        assessed_sections.append(f"<section class='card visual'><h3>{escape(offer)}</h3><table>{supplier_rows}</table></section>")
+    assessed_html = ''.join(assessed_sections)
     gaps_html=''.join(f"<li>{escape(g)} — missing suppliers, capability information, UK Banking traction and relationships. Research priority: High.</li>" for g in gaps)
     body=f"<section class='hero'><h1>Competitor capability landscape</h1><p>Assessed capabilities stay in the main view; insufficient-view categories are grouped and can be hidden.</p><button>Hide insufficient-view columns</button></section><section class='card'><h2>Capability areas Flora understands</h2>{assessed_html}</section><section class='card' id='gaps'><h2>Capability areas Flora needs to research</h2><p>Unavailable competitor categories can be hidden or grouped.</p><ul>{gaps_html or '<li>No major insufficient-view category in the current assessed set.</li>'}</ul></section>"
     return body if embed else _page('Competitor capability landscape', body)
@@ -2055,7 +2072,10 @@ def compare_page():
             values.append((b, val))
         leader = values[0][0]
         row="<tr><th>Current view</th>"+"".join(f"<td>{escape(v)}</td>" for _,v in values)+"</tr>"
-        mode_data.append(f"<section class='card compare-mode' data-mode='{escape(mode.lower().replace(' ','-'))}'><h2>{escape(mode)}</h2><h3>What Flora sees</h3><ul><li>Leading bank: <a href='/flora/banking/{leader.slug}'>{escape(leader.name)}</a></li><li>Largest difference: Lloyds and Barclays show the strongest immediate contrast in focus and timing.</li><li>Key commercial implication: {'monetary working estimates should guide prioritisation.' if monetary else 'this is a non-monetary comparison and should guide drill-down, not valuation.'}</li><li>Next drill-down: <a href='/flora/banking/{leader.slug}'>Open {escape(leader.name)}</a></li></ul><table><thead><tr><th>Measure</th>{''.join(f"<th><a href='/flora/banking/{b.slug}'>{escape(b.name)}</a></th>" for b in BANKS.values())}</tr></thead><tbody>{row}</tbody></table></section>")
+        mode_slug = escape(mode.lower().replace(' ', '-'))
+        commercial_implication = 'monetary working estimates should guide prioritisation.' if monetary else 'this is a non-monetary comparison and should guide drill-down, not valuation.'
+        bank_headers = ''.join(f"<th><a href='/flora/banking/{b.slug}'>{escape(b.name)}</a></th>" for b in BANKS.values())
+        mode_data.append(f"<section class='card compare-mode' data-mode='{mode_slug}'><h2>{escape(mode)}</h2><h3>What Flora sees</h3><ul><li>Leading bank: <a href='/flora/banking/{leader.slug}'>{escape(leader.name)}</a></li><li>Largest difference: Lloyds and Barclays show the strongest immediate contrast in focus and timing.</li><li>Key commercial implication: {commercial_implication}</li><li>Next drill-down: <a href='/flora/banking/{leader.slug}'>Open {escape(leader.name)}</a></li></ul><table><thead><tr><th>Measure</th>{bank_headers}</tr></thead><tbody>{row}</tbody></table></section>")
     return _page('Compare UK banks', banking_subnav()+breadcrumb((("UK Banking","/flora/banking"),("Compare UK banks","/flora/banking/compare")))+"<section class='hero'><h1>Compare UK Banks</h1><p>Select across six commercial comparison modes. Opportunity value is monetary; every other mode is non-monetary.</p></section>"+"".join(mode_data))
 
 _prev_final_opportunity_page = opportunity_page

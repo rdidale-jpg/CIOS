@@ -138,14 +138,38 @@ def score_page(slug: str) -> str:
     from cios.applications.flora.score_explainability import score_detail
 
     detail = score_detail(slug)
-    facets = "".join(
-        f"<details class='card'><summary><strong>{escape(f.name)}</strong> — score {f.score}; weighting {escape(f.weighting)}</summary><p>{escape(f.explanation)}</p><p><strong>Source type:</strong> {escape(f.source_type)} · <strong>Evidence count used:</strong> {f.evidence_count_used}</p><p><strong>Top evidence snippets:</strong></p><ul>{''.join(f'<li>{escape(str(e))}</li>' for e in f.evidence_used) or '<li>None yet.</li>'}</ul><p><strong>Condition/capability mappings:</strong> {escape(', '.join(f.mappings or []) or 'None')}</p><p><strong>Missing evidence:</strong> {escape(', '.join(f.missing_evidence) or 'None identified')}</p><p><strong>Source links:</strong> {' '.join(f'<a href="{escape(link["url"])}">{escape(link["name"])}</a>' for link in f.source_links) or 'No direct source links available.'}</p></details>"
-        for f in detail["facets"]
-    )
-    evidence = "".join(
-        f"<tr><td>{escape(r['id'])}</td><td>{escape(r['source_name'])}</td><td>{escape(r['source_type'])}</td><td>{f'<a href="{escape(r["url"])}">source</a>' if r['url'] else 'n/a'}</td><td>{escape(r['snippet'])}</td><td>{escape(r['condition'])}</td><td>{escape(r['capability'])}</td><td>{r['confidence']}</td><td>{escape(str(r['quality']))}</td></tr>"
-        for r in detail["evidence_rows"]
-    )
+    facet_cards = []
+    for f in detail["facets"]:
+        evidence_items = "".join(f"<li>{escape(str(e))}</li>" for e in f.evidence_used) or "<li>None yet.</li>"
+        source_links = (
+            " ".join(
+                f'<a href="{escape(link["url"])}">{escape(link["name"])}</a>'
+                for link in f.source_links
+            )
+            or "No direct source links available."
+        )
+        mappings = escape(", ".join(f.mappings or []) or "None")
+        missing_evidence = escape(", ".join(f.missing_evidence) or "None identified")
+        facet_cards.append(
+            f"<details class='card'><summary><strong>{escape(f.name)}</strong> — score {f.score}; weighting {escape(f.weighting)}</summary>"
+            f"<p>{escape(f.explanation)}</p>"
+            f"<p><strong>Source type:</strong> {escape(f.source_type)} · <strong>Evidence count used:</strong> {f.evidence_count_used}</p>"
+            f"<p><strong>Top evidence snippets:</strong></p><ul>{evidence_items}</ul>"
+            f"<p><strong>Condition/capability mappings:</strong> {mappings}</p>"
+            f"<p><strong>Missing evidence:</strong> {missing_evidence}</p>"
+            f"<p><strong>Source links:</strong> {source_links}</p></details>"
+        )
+    facets = "".join(facet_cards)
+    evidence_rows = []
+    for r in detail["evidence_rows"]:
+        source_url = r["url"]
+        source_link = f'<a href="{escape(source_url)}">source</a>' if source_url else "n/a"
+        evidence_rows.append(
+            f"<tr><td>{escape(r['id'])}</td><td>{escape(r['source_name'])}</td><td>{escape(r['source_type'])}</td>"
+            f"<td>{source_link}</td><td>{escape(r['snippet'])}</td><td>{escape(r['condition'])}</td>"
+            f"<td>{escape(r['capability'])}</td><td>{r['confidence']}</td><td>{escape(str(r['quality']))}</td></tr>"
+        )
+    evidence = "".join(evidence_rows)
     traces = "".join(f"<tr><td>{escape(t.evidence_object)}</td><td>{escape(t.condition_or_capability)}</td><td>{escape(t.facet)}</td><td>{escape(t.score_contribution)}</td><td>{t.final_score}</td></tr>" for t in detail["traces"])
     missing = "".join(f"<li>{escape(item)}</li>" for item in detail["missing_evidence"])
     audit = detail["audit"]

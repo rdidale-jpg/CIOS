@@ -410,7 +410,8 @@ def _candidate_table(title, candidates, effects, page, size):
         e = effects.get(c.get("candidate_record_id"), {})
         reason = e.get("reason") or "; ".join(str(f.get("message", "")) for f in c.get("validation_findings", []))
         rows.append(f"<tr><td>{escape(str(c.get('source_sheet','')))}</td><td>{escape(str(c.get('original_source_id','')))}</td><td>{escape(str(c.get('candidate_object_class','')))}</td><td>{escape(str(c.get('validation_status','')))}</td><td>{escape(str(e.get('effect_type','')))}</td><td>{escape(reason)}</td></tr>")
-    return f"<section class='card'><h2>{escape(title)}</h2><p>Showing {len(page_rows)} of {total}; page size {size}.</p><table><thead><tr><th>Worksheet</th><th>External ID</th><th>Class</th><th>Disposition</th><th>Proposed effect</th><th>Reason</th></tr></thead><tbody>{''.join(rows) or '<tr><td colspan=\"6\">No records.</td></tr>'}</tbody></table></section>"
+    table_body = "".join(rows) or '<tr><td colspan="6">No records.</td></tr>'
+    return f"<section class='card'><h2>{escape(title)}</h2><p>Showing {len(page_rows)} of {total}; page size {size}.</p><table><thead><tr><th>Worksheet</th><th>External ID</th><th>Class</th><th>Disposition</th><th>Proposed effect</th><th>Reason</th></tr></thead><tbody>{table_body}</tbody></table></section>"
 
 
 def _load_review_details(coord, import_run_id):

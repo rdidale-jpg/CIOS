@@ -174,7 +174,8 @@ def bt_twin_page(highlight_run_id: str | None = None) -> str:
     latest_outcome = f"{outcome} {verification} Trusted Twin {twin_change}." if run else outcome
     readiness = {'status': 'passed'} if getattr(coordinate_dual_speed_financial_intelligence_run, "__module__", "").startswith("tests.") else provider_runtime_readiness()
     if readiness['status'] == 'passed':
-        action = f"<form method='post' action='/digital-twins/bt-group-plc/search'><button>Search for new information</button></form>{'' if _manifest_available() else '<p class=\"muted\">Approved source manifest is not currently available.</p>'}"
+        manifest_warning = "" if _manifest_available() else '<p class="muted">Approved source manifest is not currently available.</p>'
+        action = f"<form method='post' action='/digital-twins/bt-group-plc/search'><button>Search for new information</button></form>{manifest_warning}"
     else:
         action = f"<p><strong>AI research is not configured for this deployment.</strong></p><p class='muted'>{escape(str(readiness.get('owner_state')))}</p>"
     body = f"""<section class='hero'><h1>BT Group</h1><p>Commercial Digital Twin</p></section>
