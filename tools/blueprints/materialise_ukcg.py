@@ -58,7 +58,8 @@ def base_records(text: str) -> list[dict[str,str]]:
         records.append({"id":ident,"class":"unknown","statement":statement,"status":"validation_hold","confidence":"High","provenance":"v2.54/v2.55 handover chain"})
     for ident, klass, statement in PROJECTIONS:
         records.append({"id":ident,"class":klass,"statement":statement,"status":"Candidate projection-only","confidence":"Medium","provenance":"Candidate handover analytical material"})
-    assert len(records) == 152, len(records)
+    if len(records) != 152:
+        raise ValueError(f"Unable to parse UKCG handover into expected 152 records; parsed {len(records)} records")
     return records
 
 def sheet_rows(records):
@@ -116,14 +117,27 @@ def write_docs(out: Path, count: int):
     (docs/"UKCG-CDT-v1.0-RELEASE-README.md").write_text("# Release notes\n\nGenerated from committed handover and materialiser.\n", encoding="utf-8")
     (meta/"UKCG-CDT-v1.0-Release-Validation.json").write_text(json.dumps({"candidate_records":count,"accepted":116,"quarantined":36,"canonical_mutations":0,"status":"Candidate"}, indent=2), encoding="utf-8")
 
-def materialise(output_dir: Path=ASSET_ROOT):
-    text=HANDOVER.read_text(encoding="utf-8")
-    records=base_records(text)
+def materialise(output_dir: Path=ASSET_ROOT, input_file: Path=HANDOVER):
+    if not input_file.exists():
+        raise SystemExit(f"UKCG handover Markdown input file is absent: {input_file}")
+    if not input_file.is_file():
+        raise SystemExit(f"UKCG handover Markdown input path is not a file: {input_file}")
+    try:
+        text=input_file.read_text(encoding="utf-8")
+        records=base_records(text)
+    except UnicodeDecodeError as exc:
+        raise SystemExit(f"UKCG handover Markdown input file cannot be decoded as UTF-8: {input_file}") from exc
+    except ValueError as exc:
+        raise SystemExit(f"UKCG handover Markdown input file cannot be parsed: {input_file}: {exc}") from exc
     write_xlsx(output_dir/"twin_spine/UKCG-CDT-01-Twin-Spine-v1.0.xlsx", sheet_rows(records))
     write_docs(output_dir, len(records))
     return output_dir
 
 def main(argv=None):
-    p=argparse.ArgumentParser(); p.add_argument("--output-dir", default=str(ASSET_ROOT)); args=p.parse_args(argv)
-    out=materialise(Path(args.output_dir)); print(f"Materialised {out}")
+    p=argparse.ArgumentParser(description="Materialise committed UKCG handover Markdown into deterministic Blueprint assets.")
+    p.add_argument("--input-file", default=str(HANDOVER), help="Authoritative UKCG handover Markdown input file.")
+    p.add_argument("--output-dir", default=str(ASSET_ROOT), help="Directory for generated Blueprint assets.")
+    args=p.parse_args(argv)
+    out=materialise(Path(args.output_dir), Path(args.input_file))
+    print(f"Materialised {out} from {Path(args.input_file)}")
 if __name__ == "__main__": main()
