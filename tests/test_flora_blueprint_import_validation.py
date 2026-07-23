@@ -5,6 +5,7 @@ import pytest
 
 from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, BlueprintPackageValidator, BlueprintValidationError
 from cios.applications.flora.blueprint_import.archive import sha256_bytes
+from cios.applications.flora.blueprint_import.models import BlueprintPackageIdentity
 
 
 def pkg(manifest_extra=None, records=None, extra=None, duplicate=False):
@@ -63,21 +64,33 @@ def test_validation_page_shows_safe_deployed_commit(monkeypatch,tmp_path):
 
 
 def test_manifest_to_registry_mismatch_is_rejected_inspectably(monkeypatch,tmp_path):
-    r=receive(monkeypatch,tmp_path)
-    p=tmp_path / r.archive_path
-    p.write_bytes(pkg({"enterprise_id":"other-enterprise"}))
-    # keep archive checksum same impossible, so adjust registry file only for this manifest mismatch path
-    import json as js
-    f=tmp_path/'blueprint_import'/'packages'/f'{r.package_ref}.json'
-    d=js.loads(f.read_text()); d['package_sha256']=sha256_bytes(p.read_bytes()); f.write_text(js.dumps(d))
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    content = pkg()
+    r = BlueprintPackageRegistry().receive_for_validation_test(
+        content,
+        "synthetic.zip",
+        "alice",
+        identity_override=BlueprintPackageIdentity(
+            package_id="synthetic-blueprint",
+            package_version="1.0.0",
+            enterprise_id="other-enterprise",
+            profile_version="0.1",
+        ),
+    )
     result=BlueprintPackageValidator().validate_and_stage(r.package_ref,"alice")
     assert any("enterprise_id" in e for e in result.errors)
     assert result.records_rejected == 1
 
 
 def test_checksum_mismatch_stops_processing(monkeypatch,tmp_path):
-    r=receive(monkeypatch,tmp_path)
-    (tmp_path / r.archive_path).write_bytes(b"changed")
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    content = pkg()
+    r = BlueprintPackageRegistry().receive_for_validation_test(
+        content,
+        "synthetic.zip",
+        "alice",
+        package_sha256_override="0" * 64,
+    )
     with pytest.raises(BlueprintValidationError):
         BlueprintPackageValidator().validate_and_stage(r.package_ref,"alice")
 

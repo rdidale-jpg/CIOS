@@ -33,6 +33,44 @@ class BlueprintPackageRegistry:
         return [BlueprintPackageRecord.from_dict(json.loads(path.read_text(encoding="utf-8"))) for path in sorted(root.glob("*.json"))]
 
     def receive(self, content: bytes, original_filename: str, actor: str, workspace_id: str = "") -> BlueprintPackageRecord:
+        return self._receive(content, original_filename, actor, workspace_id)
+
+    def receive_for_validation_test(
+        self,
+        content: bytes,
+        original_filename: str,
+        actor: str,
+        workspace_id: str = "",
+        *,
+        identity_override=None,
+        package_sha256_override: str | None = None,
+    ) -> BlueprintPackageRecord:
+        """Receive immutable test fixture bytes with controlled registry metadata.
+
+        This hook exists for validator negative-path tests that need to model a
+        corrupt registry record without mutating the archived package after
+        receipt. Production callers must use ``receive`` so registry metadata is
+        derived from the received archive.
+        """
+        return self._receive(
+            content,
+            original_filename,
+            actor,
+            workspace_id,
+            identity_override=identity_override,
+            package_sha256_override=package_sha256_override,
+        )
+
+    def _receive(
+        self,
+        content: bytes,
+        original_filename: str,
+        actor: str,
+        workspace_id: str = "",
+        *,
+        identity_override=None,
+        package_sha256_override: str | None = None,
+    ) -> BlueprintPackageRecord:
         if not actor or not str(actor).strip():
             raise PackageReceiptError("Actor is required for governed package receipt")
         if not content:
@@ -45,7 +83,7 @@ class BlueprintPackageRegistry:
             return existing
 
         try:
-            identity = read_identity(content)
+            identity = identity_override or read_identity(content)
             inventory = inspect_zip_inventory(content)
             archived_sha256, byte_count, archive_path = preserve_original_package(content, original_filename)
             if archived_sha256 != package_sha256:
@@ -55,7 +93,7 @@ class BlueprintPackageRegistry:
                 schema_version="1.0",
                 package_ref=package_ref,
                 identity=identity,
-                package_sha256=package_sha256,
+                package_sha256=package_sha256_override or package_sha256,
                 byte_count=byte_count,
                 original_filename=original_filename,
                 archive_path=archive_path,
