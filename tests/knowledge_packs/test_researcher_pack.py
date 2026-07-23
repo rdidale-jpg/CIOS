@@ -134,3 +134,109 @@ def test_workflow_tag_version_validation_patterns():
         assert pattern.fullmatch(tag).group(1) == version
     for tag in ['researcher-knowledge-pack-v2.3','researcher-knowledge-pack-2.3.0','researcher-knowledge-pack-v2.3.0-beta']:
         assert pattern.fullmatch(tag) is None
+
+
+def test_progressive_twin_method_manifest_membership_and_authority_boundaries():
+    ds = docs()
+    ids = {d['document_id'] for d in ds}
+    required = {
+        'RKI-001', 'RG-001', 'MISSION-UKCG-001',
+        'EI-001', 'EI-002', 'EI-003', 'EI-012',
+        'IT-001', 'ITL-SPEC-001', 'MPT-001',
+        'TEMPLATE-Enterprise-Intelligence-Pack',
+        'TEMPLATE-Market-Participant-Twin',
+        'TEMPLATE-Programme-Catalogue',
+        'TEMPLATE-Coverage-Matrix',
+    }
+    assert required <= ids
+    accepted_authorities = {
+        'EI-001': 'enterprise-intelligence-specification',
+        'EI-002': 'enterprise-intelligence-specification',
+        'EI-003': 'enterprise-intelligence-specification',
+        'EI-012': 'enterprise-intelligence-specification',
+        'IT-001': 'industry-twin-specification',
+        'ITL-SPEC-001': 'industry-twin-lifecycle-specification',
+        'MPT-001': 'market-participant-specification',
+    }
+    by_id = {d['document_id']: d for d in ds}
+    for document_id, authority in accepted_authorities.items():
+        assert by_id[document_id]['authority'] == authority
+
+
+def test_progressive_twin_method_required_operating_rules():
+    texts = {
+        path: (ROOT / path).read_text()
+        for path in [
+            'knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md',
+            'knowledge-packs/researcher/operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md',
+            'knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md',
+        ]
+    }
+    combined = '\n'.join(texts.values()).lower()
+    required_phrases = [
+        'progressive twin development method',
+        'load and assess existing governed and candidate twin state',
+        'produce a delta plan',
+        'operate, transform and reinvent',
+        'rank enterprises, market participants and control bodies by structural significance',
+        'tier 1 enterprise twin',
+        '0 = not researched',
+        'finance, operating model and transformation portfolio at least 3',
+        'business or policy goal → pressure or failure mechanism → programme',
+        'structurally significant market participant twin',
+        'must not stop merely because a long report has been written',
+        'a record target has been met',
+        'every named entity has one observation',
+        'the first source list is exhausted',
+        'automatically choose the next highest-impact incomplete area',
+        'genuine external blocker',
+        'missing evidence, materiality, sources attempted, maturity consequence',
+        'do not create a new twin type',
+        'do not redefine enterprise intelligence doctrine',
+    ]
+    for phrase in required_phrases:
+        assert phrase in combined
+
+
+def test_ukcg_mission_baseline_reuse_completion_gates_and_outputs():
+    mission = (ROOT / 'knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md').read_text().lower()
+    for phrase in [
+        'existing research baseline, not a completed industry twin',
+        'reuse prior evidence, observations and candidate twin state',
+        'initial government-wide industry and three-horizon frame',
+        'determine tier 1 and tier 2 organisations from evidence',
+        'build deep enterprise twins for all tier 1 organisations',
+        'material supplier, market participant, regulatory, assurance, policy, funding and control-body',
+        'connected government transformation programme portfolio',
+        'derive industry relevance only after participant-neutral cross-twin synthesis',
+        'completion gates pass only when',
+        'one consolidated handover containing',
+        'incremental change log from the prior baseline',
+    ]:
+        assert phrase in mission
+
+
+def test_no_parallel_twin_type_or_silent_architecture_authority_change():
+    changed_operating = '\n'.join(
+        (ROOT / path).read_text().lower()
+        for path in [
+            'knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md',
+            'knowledge-packs/researcher/operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md',
+            'knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md',
+        ]
+    )
+    assert 'new twin type' in changed_operating
+    assert 'does not create a new twin type' in changed_operating or 'do not create a new twin type' in changed_operating
+    prohibited_new_types = ['control-body twin type', 'control body twin type', 'control twin type']
+    for phrase in prohibited_new_types:
+        assert phrase not in changed_operating
+    architecture_files = [
+        'architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-001-Enterprise-Model-Specification.md',
+        'architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-002-Enterprise-Knowledge-Graph.md',
+        'architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-003-Enterprise-Behaviour-Model.md',
+        'architecture/enterprise-intelligence/volume-5-intelligence-foundations/EI-012-Enterprise-Observation-Model.md',
+        'architecture/specifications/industry-twins/IT-001-Industry-Twin-Specification.md',
+        'architecture/specifications/market-participants/Market-Participant-Twin-Specification-v1.0.md',
+    ]
+    for path in architecture_files:
+        assert (ROOT / path).exists()

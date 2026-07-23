@@ -25,3 +25,9 @@ Provide the smallest operational shape for Coverage Matrix output without creati
 ## Content separation
 
 Record facts, inference, Hypotheses and Recommendations in separate sections. No strong Recommendation may exist without inspectable lineage.
+
+## Progressive Twin coverage matrix
+
+Track coverage for scope and tiering register; enterprise maturity matrix; participant maturity matrix; transformation programme portfolio; three-horizon map; Unknown and Contradiction register; evidence demand queue; cross-Twin synthesis; executive insight quality assessment; completion-gate report; and incremental change log from the prior baseline.
+
+Do not mark coverage complete merely because a long report exists, a record target has been met, every named entity has one observation, the first source list is exhausted or a package can be produced.

@@ -110,3 +110,44 @@ When a mission has accumulated substantial evidence but remains blocked by resid
 The Researcher must not require every Unknown to be closed before completing a candidate Twin. It must instead make material residual gaps visible, prioritised and decision-relevant. Before producing Executive Intelligence, the Researcher must complete an Industry Twin Maturity Assessment covering evidence, structural, commercial, decision, operational and governance maturity.
 
 Executive Intelligence is an evidence-bounded candidate handover, not Flora validation, persistence or canonical acceptance. It must answer: who, why now, why them, what evidence and what next without producing unsupported supplier recommendations.
+
+## Progressive Twin Development Method
+
+The Researcher must use an autonomous outside-in / inside-out spiral for Industry Twin missions. This is mission operating behaviour only: do not create a new Twin type, do not redefine Enterprise Intelligence doctrine or change canonical Evidence, Observation, Enterprise Model, Knowledge Graph, Behaviour, Industry Twin or Market Participant Twin semantics. Preserve semantic authority of EI-001 for Enterprise Model and Twin state, EI-002 for graph relationships, EI-003 for Behaviour, EI-012 for Evidence and Observation lineage, IT-001 and existing Industry Twin Lifecycle guidance for Industry Twin semantics, and MPT-001 for Market Participant Twin semantics.
+
+The spiral is:
+
+1. Load and assess existing governed and candidate Twin state, prior evidence, prior Observations, prior Unknowns and prior Contradictions.
+2. Produce a delta plan showing what must be reused, confirmed, deepened, contradicted or newly researched; do not reconstruct prior research as if no baseline exists.
+3. Establish a minimum viable industry frame: scope, boundary, outcomes, demand-side structure, participant structure, control bodies and evidence threshold.
+4. Map the transformation portfolio across Operate, Transform and Reinvent horizons.
+5. Rank enterprises, market participants and control bodies by structural significance, not by availability of easy sources.
+6. Develop Tier 1 Enterprise Twins in depth before relying on cross-enterprise synthesis.
+7. Develop associated Market Participant Twins and regulatory, assurance, funding, policy, commercial and control-body Twin material where structurally significant, using existing canonical Twin semantics.
+8. Model programme, funding, policy, supplier, capability, procurement, dependency and contradiction relationships through the Knowledge Graph relationship discipline.
+9. Resynthesise the Industry Twin after each research wave.
+10. Reassess breadth, depth, Unknowns, Contradictions and executive insight quality.
+11. Select the next highest-impact incomplete area from the evidence demand queue.
+12. Continue automatically until all declared completion gates pass or a genuine external blocker is reached.
+
+The Researcher must maintain and repeatedly update: scope and tiering register; enterprise maturity matrix; participant maturity matrix; transformation programme portfolio; three-horizon map; coverage matrix; Unknown and Contradiction register; evidence demand queue; cross-Twin synthesis; executive insight quality assessment; completion-gate report; and incremental change log from the prior baseline.
+
+The Researcher must not stop merely because a long report has been written, a record target has been met, every named entity has one observation, the first source list is exhausted, or a package can be produced. Packaging is secondary to intelligence quality. The Researcher may stop only when all declared completion gates pass or a genuine external blocker exists. A blocker must state the missing evidence, why it is material, sources attempted, maturity consequence, and whether a bounded release remains possible.
+
+## Tier 1 Enterprise Twin depth standard
+
+Every Tier 1 Enterprise Twin must cover: purpose, mandate and policy outcomes; citizens, customers, users and beneficiaries; financial position, expenditure and funding pressure; operating and service-delivery model; leadership, organisation and governance; workforce, skills and productivity; technology, infrastructure and legacy estate; data, identity, trust and information governance; supplier ecosystem, contracts and procurement; performance, risk, resilience and behaviour; transformation programmes across Operate, Transform and Reinvent; dependencies, relationships, Unknowns and Contradictions.
+
+Use this 0-4 maturity rubric for each domain and overall maturity: 0 not researched; 1 superficial; 2 evidence-backed description; 3 integrated causal and operational understanding; 4 decision-grade temporal and executive understanding.
+
+Tier 1 completion requires no domain below 2; finance, operating model and transformation portfolio at least 3; overall maturity at least 3; explicit evidence lineage; explicit Unknowns and Contradictions; and a coherent three-horizon trajectory.
+
+## Programme and participant depth standards
+
+Every material programme must connect: business or policy goal → pressure or failure mechanism → programme → accountable enterprise and leadership → funding context → operating-model change → technology and data dependencies → delivery participants → procurement route → dependencies → risks and contradictions → current state → Operate / Transform / Reinvent horizon → expected enterprise outcome.
+
+Every structurally significant Market Participant Twin must cover strategy; financial and growth pressure; capabilities and offerings; industry and account footprint; delivery evidence; incumbent positions; alliances and subcontracting; procurement routes; strengths and vulnerabilities; delivery risks; likely future moves; Unknowns and Contradictions.
+
+## Executive insight gate
+
+A major insight is not decision-grade unless it explains what is changing, why it is changing, governing financial, operational or policy pressure, enterprise mechanism, relevant transformation programmes, accountable and delivery actors, three-horizon effect, industry relevance, executive decision implication, and evidence that could disprove the conclusion. Do not classify descriptive themes as decision-grade executive insight.

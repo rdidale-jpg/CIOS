@@ -86,3 +86,7 @@ Source IDs, Evidence IDs, Observation IDs and relationship IDs.
 ## 20. Human-validation state
 
 Not reviewed, reviewed with conditions, validated, rejected or escalation required.
+
+## 21. Structural-significance depth checklist
+
+For structurally significant participants, confirm coverage of strategy; financial and growth pressure; capabilities and offerings; industry and account footprint; delivery evidence; incumbent positions; alliances and subcontracting; procurement routes; strengths and vulnerabilities; delivery risks; likely future moves; Unknowns and Contradictions. Record a maturity score using 0 = not researched, 1 = superficial, 2 = evidence-backed description, 3 = integrated causal and operational understanding, 4 = decision-grade temporal and executive understanding.
