@@ -9,6 +9,8 @@ on:
       - "tests/test_flora_blueprint_import_validation.py"
       - "tests/test_flora_blueprint_import_registry.py"
       - "tools/blueprints/materialise_ukcg.py"
+      - "docs/industry-twins/uk-central-government/UKCG-CDT-00-Delivery-and-Input-Manifest-v1.0.md"
+      - "docs/industry-twins/uk-central-government/Candidate-UK-Central-Government-Industry-Twin-Handover.md"
       - "tools/knowledge-packs/build_uk_government_blueprint_package.py"
       - "knowledge-packs/uk-government/**"
   push:
@@ -22,6 +24,8 @@ on:
       - "tests/test_flora_blueprint_import_validation.py"
       - "tests/test_flora_blueprint_import_registry.py"
       - "tools/blueprints/materialise_ukcg.py"
+      - "docs/industry-twins/uk-central-government/UKCG-CDT-00-Delivery-and-Input-Manifest-v1.0.md"
+      - "docs/industry-twins/uk-central-government/Candidate-UK-Central-Government-Industry-Twin-Handover.md"
       - "tools/knowledge-packs/build_uk_government_blueprint_package.py"
       - "knowledge-packs/uk-government/**"
   workflow_dispatch:
@@ -61,7 +65,10 @@ jobs:
 
       - name: Materialise UKCG blueprint assets
         run: |
+          rm -rf dist/uk-government-blueprint-assets
+          rm -f dist/UKCG-CDT-Flora-Blueprint-v1.0.zip
           PYTHONPATH=. python tools/blueprints/materialise_ukcg.py \
+            --input-file docs/industry-twins/uk-central-government/Candidate-UK-Central-Government-Industry-Twin-Handover.md \
             --output-dir dist/uk-government-blueprint-assets
 
       - name: Build UK Government blueprint package
@@ -92,3 +99,12 @@ jobs:
               raise SystemExit(f"Unexpected Flora staging counts: {actual!r}")
           print(actual)
           PY
+
+      - name: Upload UKCG Blueprint outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: ukcg-blueprint-assets
+          if-no-files-found: error
+          path: |
+            dist/uk-government-blueprint-assets/**
+            dist/UKCG-CDT-Flora-Blueprint-v1.0.zip
