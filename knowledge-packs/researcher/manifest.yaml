@@ -26,7 +26,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 13ae759f545fe16a7e907229e5960c87ba174309ac7a08afdb4208303de07904
+    checksum: aa692613f83d7865e80dc70038c4a42faf4b159a2d124efe24fbb4b9edf860a9
     transform: none
   - pack_path: configuration/Researcher-Configuration-Guide.md
     source_path: knowledge-packs/researcher/configuration/Researcher-Configuration-Guide.md
@@ -48,7 +48,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: ef35c2f2ffaff42cd4b225849bc3a7beebe605cf95906084833514c76279a137
+    checksum: 3bb4ede4ce1eaf6e84417b31bbb9de3d40f538c0d6aba78993da53c3439426e8
     transform: none
   - pack_path: operating-guidance/Industry-Twin-Readiness-Gate.md
     source_path: knowledge-packs/researcher/operating-guidance/Industry-Twin-Readiness-Gate.md
@@ -268,7 +268,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: d25cd3819ae4e120dd6c77a470dd7283542292fd27440e9b26b3dae9f46bb0d9
+    checksum: fd09a14ecaae191cc778edf6143afea7ecc8178e92644501da519ad456601ac3
     transform: none
   - pack_path: templates/Architecture-Handover-Template.md
     source_path: knowledge-packs/researcher/templates/Architecture-Handover-Template.md
@@ -290,7 +290,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 832326c667f53534a5fa0a45ca61701c3b588763e58a7e86fe7dba1e4c52426a
+    checksum: 4a57c8c6fa25bb8e3d97f71e3ffcd48c4efcdcfb5bdcf565f5f240256adfe2fe
     transform: none
   - pack_path: templates/Enterprise-Intelligence-Pack-Template.md
     source_path: knowledge-packs/researcher/templates/Enterprise-Intelligence-Pack-Template.md
@@ -301,7 +301,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: b25631033896e88efc6d67b30b9d41aeb74f68cb9551dacda1650656cc172da3
+    checksum: 91f0d3bf7e0a4aa38c754b3e91a29aa47f5efc4ed3a439416e91dcb407c58ff1
     transform: none
   - pack_path: templates/Industry-Research-Pack-Template.md
     source_path: knowledge-packs/researcher/templates/Industry-Research-Pack-Template.md
@@ -345,7 +345,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 0738d4ab37edbe49e73ddd5aa3278e64661b1a4bddcb51da4d18bceafa9e901d
+    checksum: d65b6e9fcd98b8ccb8ca3bd1d9746ddf202b19981d563f4a26ca51b313bd3574
     transform: none
   - pack_path: templates/Research-Backlog-Template.md
     source_path: knowledge-packs/researcher/templates/Research-Backlog-Template.md
@@ -390,6 +390,17 @@ documents:
     required: true
     inclusion_reason: Required to assess buyer-participant relevance without absolute participant-strength claims.
     checksum: 1938f83be4aa80936c7309b682f7126e816bfe0e04761f7259ce46b0f362662e
+    transform: none
+  - pack_path: architecture/IT-001-Industry-Twin-Specification.md
+    source_path: architecture/specifications/industry-twins/IT-001-Industry-Twin-Specification.md
+    document_id: IT-001
+    title: Industry Twin Specification
+    version_or_last_updated: repository-current
+    authority: industry-twin-specification
+    status: current
+    required: true
+    inclusion_reason: Required to preserve canonical Industry Twin semantics while operating progressive Industry Twin missions.
+    checksum: 725e87039e1207f13b689b1a94529cce85f560d372011fb7f2ef4a8b5e61725a
     transform: none
   - pack_path: architecture/Industry-Twin-Lifecycle-Specification-v1.0.md
     source_path: architecture/specifications/industry-twins/Industry-Twin-Lifecycle-Specification-v1.0.md
@@ -466,7 +477,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required output template for governed Market Participant Twin material.
-    checksum: fce488877fcd0a2e6a7b159cb4395f50056021724e40c8a73142265ba3310524
+    checksum: 99a6b5edb049326708acd646940e3da3a4a5c2287eb559b4bd2fab154bb3df94
     transform: none
   - pack_path: templates/Account-Participant-Position-Assessment-Template.md
     source_path: knowledge-packs/researcher/templates/Account-Participant-Position-Assessment-Template.md

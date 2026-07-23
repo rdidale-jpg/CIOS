@@ -75,7 +75,7 @@ def validate_source_versions(version, basename, zip_path, report_path):
 
 
 def validate(docs):
-    req={'EI-001','EI-002','EI-003','EI-004','EI-012','FP-009','FP-010','FP-011','FP-012','ADR-016','RG-001','RKI-001','MISSION-UKCG-001','MPT-001','APPA-001','ITL-SPEC-001','EIF-001','EOD-001','OT-001','TEMPLATE-Market-Participant-Twin','TEMPLATE-Account-Participant-Position-Assessment','TEMPLATE-Opportunity-Hypothesis','TEMPLATE-Industry-Twin-Maturity-Assessment','TEMPLATE-Executive-Intelligence-Handover'}
+    req={'EI-001','EI-002','EI-003','EI-004','EI-012','FP-009','FP-010','FP-011','FP-012','ADR-016','RG-001','RKI-001','MISSION-UKCG-001','MPT-001','APPA-001','IT-001','ITL-SPEC-001','EIF-001','EOD-001','OT-001','TEMPLATE-Market-Participant-Twin','TEMPLATE-Account-Participant-Position-Assessment','TEMPLATE-Opportunity-Hypothesis','TEMPLATE-Industry-Twin-Maturity-Assessment','TEMPLATE-Executive-Intelligence-Handover'}
     ids={d['document_id'] for d in docs}
     missing=req-ids
     if missing: fail(f'Missing required documents: {sorted(missing)}')
