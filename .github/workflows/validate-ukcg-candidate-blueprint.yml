@@ -1,0 +1,72 @@
+name: Validate UKCG Candidate Blueprint
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/validate-ukcg-candidate-blueprint.yml"
+      - "cios/**"
+      - "tests/blueprints/test_ukcg_materialisation.py"
+      - "tests/test_flora_blueprint_import_validation.py"
+      - "tests/test_flora_blueprint_import_registry.py"
+      - "tools/blueprints/materialise_ukcg.py"
+      - "tools/knowledge-packs/build_uk_government_blueprint_package.py"
+      - "knowledge-packs/uk-government/**"
+  push:
+    branches:
+      - main
+      - work
+    paths:
+      - ".github/workflows/validate-ukcg-candidate-blueprint.yml"
+      - "cios/**"
+      - "tests/blueprints/test_ukcg_materialisation.py"
+      - "tests/test_flora_blueprint_import_validation.py"
+      - "tests/test_flora_blueprint_import_registry.py"
+      - "tools/blueprints/materialise_ukcg.py"
+      - "tools/knowledge-packs/build_uk_government_blueprint_package.py"
+      - "knowledge-packs/uk-government/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate UKCG Candidate Blueprint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install governed dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          python -m pip install "pytest>=8.0"
+
+      - name: Compile CIOS package
+        run: |
+          python -m compileall -q cios
+
+      - name: Run UKCG and Flora import tests
+        run: |
+          pytest -q \
+            tests/blueprints/test_ukcg_materialisation.py \
+            tests/test_flora_blueprint_import_validation.py \
+            tests/test_flora_blueprint_import_registry.py
+
+      - name: Materialise UKCG blueprint assets
+        run: |
+          PYTHONPATH=. python tools/blueprints/materialise_ukcg.py \
+            --output-dir dist/uk-government-blueprint-assets
+
+      - name: Build UK Government blueprint package
+        run: |
+          PYTHONPATH=. python tools/knowledge-packs/build_uk_government_blueprint_package.py \
+            --input-dir dist/uk-government-blueprint-assets \
+            --output-dir dist
