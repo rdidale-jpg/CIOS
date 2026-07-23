@@ -14,6 +14,8 @@ governance:
   hypotheses: [FP-009]
   readiness: [RKI-003, RG-001]
   architecture_handover: [RG-001, TEMPLATE-Architecture-Handover]
+  maturity_assessment: [RKI-003, MISSION-UKCG-001, TEMPLATE-Industry-Twin-Maturity-Assessment]
+  executive_intelligence_handover: [MISSION-UKCG-001, TEMPLATE-Executive-Intelligence-Handover]
   knowledge_pack_configuration: [FP-010, ADR-016, RKI-002]
 unresolved_sources: []
 optional_notices:

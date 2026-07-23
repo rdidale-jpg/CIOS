@@ -6,7 +6,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / 'knowledge-packs/researcher/manifest.yaml'
-VERSION = '2.2.0'
+VERSION = '2.3.0'
 BASENAME = f'CIOS-Researcher-Knowledge-Pack-v{VERSION}'
 
 
@@ -27,7 +27,7 @@ def build(version=VERSION):
 
 def test_manifest_completeness_and_sources():
     ds=docs(); ids={d['document_id'] for d in ds}
-    required={'RG-001','RKI-001','RKI-003','EI-001','EI-002','EI-003','EI-012','FP-009','FP-010','FP-012','ADR-016','MISSION-UKCG-001'}
+    required={'RG-001','RKI-001','RKI-003','EI-001','EI-002','EI-003','EI-012','FP-009','FP-010','FP-012','ADR-016','MISSION-UKCG-001','TEMPLATE-Industry-Twin-Maturity-Assessment','TEMPLATE-Executive-Intelligence-Handover'}
     assert required <= ids
     for d in ds:
         src=ROOT/d['source_path']
@@ -63,7 +63,7 @@ def test_builder_accepts_valid_semantic_version_and_is_deterministic():
 
 
 def test_builder_rejects_malformed_versions():
-    for version in ['2.2', 'v2.2.0', '2.2.0-beta']:
+    for version in ['2.3', 'v2.3.0', '2.3.0-beta']:
         result = build(version)
         assert result.returncode != 0
         assert 'Invalid Researcher Knowledge Pack version' in result.stderr
@@ -95,7 +95,7 @@ def test_generated_filenames_metadata_report_and_root_use_requested_version():
 def test_source_version_mismatch_fails_with_clear_message():
     result = build('9.9.9')
     assert result.returncode != 0
-    assert 'Version mismatch: requested version 9.9.9; conflicting version 2.2.0' in result.stderr
+    assert 'Version mismatch: requested version 9.9.9; conflicting version 2.3.0' in result.stderr
     assert 'source file: knowledge-packs/researcher/VERSION; field: VERSION' in result.stderr
 
 
@@ -126,11 +126,11 @@ def test_checksum_validation_succeeds_from_dist_directory():
 
 def test_workflow_tag_version_validation_patterns():
     accepted = {
-        'researcher-knowledge-pack-v2.2.0': '2.2.0',
+        'researcher-knowledge-pack-v2.3.0': '2.3.0',
         'researcher-knowledge-pack-v10.4.12': '10.4.12',
     }
     pattern = re.compile(r'^researcher-knowledge-pack-v([0-9]+\.[0-9]+\.[0-9]+)$')
     for tag, version in accepted.items():
         assert pattern.fullmatch(tag).group(1) == version
-    for tag in ['researcher-knowledge-pack-v2.2','researcher-knowledge-pack-2.2.0','researcher-knowledge-pack-v2.2.0-beta']:
+    for tag in ['researcher-knowledge-pack-v2.3','researcher-knowledge-pack-2.3.0','researcher-knowledge-pack-v2.3.0-beta']:
         assert pattern.fullmatch(tag) is None

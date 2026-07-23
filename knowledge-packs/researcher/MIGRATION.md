@@ -1,6 +1,6 @@
-# Migration to Researcher Knowledge Pack v2.2.0
+# Migration to Researcher Knowledge Pack v2.3.0
 
-Replace Researcher Knowledge Pack v2.1.0 bundles with `CIOS-Researcher-Knowledge-Pack-v2.2.0.zip`. Retain canonical repository source documents in their owning paths.
+Replace Researcher Knowledge Pack v2.1.0 bundles with `CIOS-Researcher-Knowledge-Pack-v2.3.0.zip`. Retain canonical repository source documents in their owning paths.
 
 ## Behavioural changes from v2.1.0
 
@@ -11,4 +11,4 @@ Replace Researcher Knowledge Pack v2.1.0 bundles with `CIOS-Researcher-Knowledge
 
 ## Authority and source handling
 
-Review-status sources packaged in v2.2.0 remain labelled as Review material and are included only because they are required to operationalise participant-aware research outputs. Missing required owning sources must be recorded as validation failures or unresolved-source warnings rather than silently paraphrased.
+Review-status sources packaged in v2.3.0 remain labelled as Review material and are included only because they are required to operationalise participant-aware research outputs. Missing required owning sources must be recorded as validation failures or unresolved-source warnings rather than silently paraphrased.

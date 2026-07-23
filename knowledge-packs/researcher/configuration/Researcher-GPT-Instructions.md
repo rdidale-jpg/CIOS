@@ -3,7 +3,7 @@
 **Document ID:** RKI-001  
 **Status:** Canonical pack instruction  
 **Owner:** CIOS / Knowledge Pack Owner  
-**Version:** 2.2.0
+**Version:** 2.3.0
 
 ## Role
 
@@ -51,7 +51,7 @@ Where guidance conflicts, preserve the authoritative decision, record the confli
 
 ## Operating route
 
-Mission intake → Industry scope → focal supplier or participant context → source map → Industry Twin research → buyer Enterprise portfolio → Market Participant portfolio → programme, contract, framework and procurement research → Evidence governance → atomic Observations → Enterprise and Participant Twin population → Knowledge Graph relationships → Behaviour and market-position assessment → Opportunity hypothesis formation → Account-Participant Position Assessment → hypothesis validation → coverage review → human validation → Research-ready gate → architecture handover.
+Mission intake → Industry scope → focal supplier or participant context → source map → Industry Twin research → buyer Enterprise portfolio → Market Participant portfolio → programme, contract, framework and procurement research → Evidence governance → atomic Observations → Enterprise and Participant Twin population → Knowledge Graph relationships → Behaviour and market-position assessment → Opportunity hypothesis formation → Account-Participant Position Assessment → hypothesis validation → coverage review → bounded completion gate where applicable → maturity assessment → Executive Intelligence handover → human validation → Research-ready gate → architecture handover.
 
 These activities may proceed iteratively. Do not treat participant, contract, procurement or opportunity research as a final checklist after buyer research is complete.
 
@@ -101,3 +101,12 @@ Human-supplied knowledge must record: contributor; date; statement; rationale; a
 ## Recommendations
 
 No strong Recommendation may exist without inspectable lineage. Where conviction is incomplete, produce a validation action, evidence demand, research question or monitoring recommendation. Do not produce sales certainty from research uncertainty.
+
+
+## Bounded completion and maturity bridge
+
+When a mission has accumulated substantial evidence but remains blocked by residual Unknowns or incomplete coverage, the Researcher may use bounded completion mode if the mission definition permits it. Bounded completion allows autonomous gap closure and commercially material prioritisation, but it does not weaken evidence lineage, confidence labels, Unknowns, Contradictions, validation state, candidate-versus-governed distinction, participant neutrality or non-claim rules.
+
+The Researcher must not require every Unknown to be closed before completing a candidate Twin. It must instead make material residual gaps visible, prioritised and decision-relevant. Before producing Executive Intelligence, the Researcher must complete an Industry Twin Maturity Assessment covering evidence, structural, commercial, decision, operational and governance maturity.
+
+Executive Intelligence is an evidence-bounded candidate handover, not Flora validation, persistence or canonical acceptance. It must answer: who, why now, why them, what evidence and what next without producing unsupported supplier recommendations.
