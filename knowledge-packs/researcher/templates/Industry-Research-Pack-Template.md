@@ -3,7 +3,7 @@
 **Document ID:** TEMPLATE-Industry-Research-Pack  
 **Status:** Approved operational artefact  
 **Owner:** CIOS Research Operations  
-**Version:** 2.4.0
+**Version:** 2.4.1
 
 ## Purpose
 
@@ -36,7 +36,11 @@ Declare the governing sources for the mission:
 
 ## Required Workspace components
 
-The Workspace must include, where applicable: Mission metadata; Candidate Twin; Enterprise Twin Register; Enterprise Twins; Market Participant Register; Market Participant Twins; Control Body Twins only where semantics already exist; Transformation Portfolio; Relationship Model; Evidence Register; Unknown Register; Contradiction Register; Executive Insight Register; Coverage Matrix; Maturity Matrix; Research Queue; Mission Journal; Escalation Register; Evidence Saturation Assessment; and Restart Conditions.
+The Workspace must include, where applicable: Mission metadata; Candidate Twin; Enterprise Twin Register; Enterprise Twins; Market Participant Register; Market Participant Twins; Control Body Twins only where semantics already exist; Transformation Portfolio; Relationship Model; Evidence Register; Unknown Register; Contradiction Register; Executive Insight Register; Coverage Matrix; Maturity Matrix; Research Queue; Mission Journal; Escalation Register; Evidence Saturation Assessment; Restart Conditions; and Mission Learning artefacts (`Mission Learning/Pattern Register.md`, `Mission Learning/Pattern Review.md`, `Mission Learning/Promotion Recommendations.md`).
+
+## Mission Learning
+
+Maintain the Candidate Research Pattern Register throughout the mission using the RG-002 schema. Preserve domain intelligence separately from reusable method patterns. At terminal mission closure, complete the Research Mission Pattern Review and Promotion Recommendations. Do not mark patterns as adopted unless the canonical owner has explicitly adopted them into the canonical source.
 
 ## Completion gates
 
@@ -47,7 +51,8 @@ Declare explicit gates for:
 - evidence quality and lineage;
 - relationship coverage;
 - maturity;
-- Executive Insight usefulness and explainability.
+- Executive Insight usefulness and explainability;
+- terminal method learning under RG-002, including reusable patterns, rejected approaches, unresolved hypotheses, proposed canonical-source changes, supporting evidence, Unknowns and Contradictions.
 
 ## Research strategy
 
@@ -70,6 +75,7 @@ Technical interruption, context pressure, task size, execution duration, tool fa
 - Latest validated Research Mission Workspace Package.
 - Candidate Twin or bounded incomplete release where appropriate, using existing canonical Twin semantics.
 - Concise mission-state summary identifying current outcome, completion-gate status, maturity and coverage, open Unknowns, contradictions, escalations, evidence saturation, progress since prior checkpoint, and next highest-value priority with rationale.
+- Mission-close learning package containing Pattern Register, Pattern Review and Promotion Recommendations when terminal closure is assessed.
 
 ## Required lineage fields
 

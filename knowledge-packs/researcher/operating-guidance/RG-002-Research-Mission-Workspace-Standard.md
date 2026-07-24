@@ -5,7 +5,7 @@
 **Status:** Approved operating standard  
 **Classification:** Research Guidance / Operating Standard  
 **Canonical Owner:** Chief Architect  
-**Version:** 1.0.0
+**Version:** 1.1.0
 
 ## 1. Executive Summary
 
@@ -223,6 +223,7 @@ Where applicable, it SHALL include:
 - **Escalation Register:** external dependencies and material constraints.
 - **Evidence Saturation Assessment:** progress and remaining productive routes.
 - **Restart Conditions:** events or evidence that should reactivate exhausted research areas or a mission concluded as EVIDENCE EXHAUSTED.
+- **Mission Learning:** mission-specific learning artefacts containing a Candidate Research Pattern Register, Research Mission Pattern Review and Promotion Recommendations. These artefacts SHALL be resumable, evidence-linked and packageable with the rest of the Workspace.
 
 ## 11. Workspace Integrity
 
@@ -338,7 +339,77 @@ An EVIDENCE EXHAUSTED conclusion SHALL record unmet completion gates, maximum ev
 
 It SHALL NOT represent the Twin as complete or mature beyond the evidence.
 
-## 21. Mission Outcomes
+
+## 21. Research Mission Learning
+
+Every completed Research Mission SHALL produce a Research Mission Pattern Review before terminal architectural closure. The review is the governed mission-close learning gate for method learning; it does not replace the domain completion gate, the Evidence Register, the Candidate Twin, the Mission Journal or the architecture handover.
+
+Mission-specific intelligence SHALL remain in the mission Workspace and SHALL NOT become generic doctrine merely because it was observed during one mission. Conversation history, generated reports, handover narratives and executive summaries SHALL NOT be treated as canonical promotion mechanisms. Reports remain views over governed model state, consistent with CIOS architecture principles that durable model state, evidence and lineage govern understanding.
+
+Reusable practices SHALL be recorded as Candidate Research Patterns in the Workspace Candidate Research Pattern Register. A pattern SHALL NOT become canonical because it was observed once. Candidate patterns SHALL be promoted through their identified canonical owner before being embedded in future templates, starter packages, validation rules or Researcher behaviour.
+
+### Research Mission Pattern Review
+
+The Research Mission Pattern Review SHALL assess, where applicable:
+
+- research methodology;
+- Workspace effectiveness;
+- Research Queue behaviour;
+- checkpoint and resume behaviour;
+- maturity assessment;
+- relationship modelling;
+- evidence quality and diversity;
+- Unknown and Contradiction handling;
+- Executive Intelligence quality;
+- Commercial Digital Twin development;
+- predictive or demand-signal capability;
+- operational efficiency;
+- methods that added value;
+- methods that created avoidable overhead.
+
+The review SHALL distinguish demonstrated practices, candidate reusable patterns, unresolved hypotheses, rejected approaches and mission-specific behaviours that must not be generalised. It SHALL cite Workspace evidence where available and SHALL record evidence gaps rather than fabricate references.
+
+### Candidate Research Pattern Register
+
+The Candidate Research Pattern Register SHALL use the governed schema `schemas/Candidate-Research-Pattern-Register.schema.json` and SHALL contain entries with, at minimum: `pattern_id`, `title`, `description`, `category`, `observed_during`, `evidence_references`, `evidence_summary`, `commercial_benefit`, `architectural_benefit`, `generalisability_assessment`, `assumptions`, `uncertainty`, `alternatives_considered`, `proposed_canonical_owner`, `implementation_impact`, `operational_impact`, `confidence`, `status` and `review_history`.
+
+Permitted lifecycle states are:
+
+- `OBSERVED` — observed in mission operation, with evidence context recorded, but not yet assessed as a reusable candidate.
+- `CANDIDATE` — proposed as reusable, including unproven hypotheses with explicit uncertainty and appropriately low confidence.
+- `VALIDATED` — supported by inspectable operational evidence for the stated scope, without implying universal adoption.
+- `ADOPTED` — explicitly adopted into the relevant canonical source by the canonical owner.
+- `REJECTED` — assessed and not accepted for reuse or canonical adoption.
+
+`HYPOTHESIS` SHALL NOT be introduced as a separate lifecycle state. Unproven hypotheses SHALL be represented as `CANDIDATE` with low confidence and explicit uncertainty.
+
+### Promotion governance
+
+Promotion SHALL require inspectable operational evidence; an assessment of generalisability; identification of the canonical owner; architecture or governance review appropriate to that owner; explicit adoption into the canonical source; and update of derived templates, starter packages, instructions and validation rules only after canonical adoption. Existing canonical owners SHALL be used wherever sufficient; RG-002 SHALL NOT be forked into a new research-governance standard solely for mission learning.
+
+### Mission Learning Workspace artefacts
+
+A conformant Workspace SHALL include the repository-native structure below. Existing Workspaces remain valid if the structure is absent before RG-002 v1.1.0, but the next checkpoint SHALL add it as a backward-compatible migration without changing existing evidence, Twin, Unknown or Contradiction identifiers.
+
+```text
+Mission Learning/
+  Pattern Register.md
+  Pattern Review.md
+  Promotion Recommendations.md
+```
+
+These artefacts SHALL be resumable, evidence-linked and packageable with the rest of the Workspace.
+
+### Terminal mission-close learning gate
+
+A Research Mission SHALL NOT be considered architecturally closed until both of the following have been assessed:
+
+1. **Domain completion** — whether the Industry Twin is sufficient for its defined executive, commercial and architectural decisions.
+2. **Method learning** — what the mission taught CIOS about creating and operating future Twins.
+
+The method-learning assessment SHALL produce reusable patterns proposed for validation or adoption; rejected approaches; unresolved hypotheses; proposed canonical-source changes; supporting evidence; and explicit Unknowns and Contradictions. This gate SHALL apply to terminal mission closure only. It SHALL NOT prevent an execution checkpoint, Research Wave or ordinary Run/Increment completion from returning `CONTINUE`.
+
+## 22. Mission Outcomes
 
 The mission outcome SHALL be one of:
 
@@ -352,7 +423,7 @@ Technical interruption is an execution condition recorded as resumable. It is no
 
 No generic BLOCKED mission state shall be introduced.
 
-## 22. Mission Health and Operational Visibility
+## 23. Mission Health and Operational Visibility
 
 Each checkpoint SHALL expose sufficient information for an executive or Chief Architect to determine whether the mission is advancing.
 
@@ -362,7 +433,7 @@ At minimum expose current mission outcome; completion-gate status; Enterprise Tw
 
 The Workspace SHALL answer: “If another productive Research Wave were executed, what should be researched next, why, and what material improvement is expected?”
 
-## 23. Relationship to RG-001
+## 24. Relationship to RG-001
 
 RG-001 governs research methodology and research behaviour.
 
@@ -374,7 +445,7 @@ Move duplicated persistence behaviour from RG-001 only where doing so improves c
 
 Do not rewrite RG-001 unnecessarily.
 
-## 24. Relationship to Knowledge Pack Architecture
+## 25. Relationship to Knowledge Pack Architecture
 
 ADR-016, FP-010 and the Knowledge Pack Specification remain authoritative for packaging and exchange.
 
@@ -384,7 +455,7 @@ The implementation SHALL reuse the governed Knowledge Pack exchange mechanism wh
 
 Where a Workspace-specific manifest field, package classification or validation rule is required, make the smallest compatible extension, preserve backward compatibility where practical, document the extension, and do not create an unrelated packaging system.
 
-## 25. Conformance
+## 26. Conformance
 
 A conformant implementation SHALL demonstrate:
 
@@ -398,6 +469,9 @@ A conformant implementation SHALL demonstrate:
 - checkpoint creation after Research Waves;
 - automatic continuation while productive routes remain;
 - strict evidence-exhaustion assessment;
+- terminal mission-close assessment of domain completion and method learning;
+- Candidate Research Pattern Register using the five-state lifecycle;
+- Mission Learning artefacts in the Workspace;
 - absence of a generic BLOCKED terminal state;
 - resilience to technical interruption;
 - downloadable latest Workspace package;

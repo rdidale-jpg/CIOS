@@ -17,6 +17,7 @@ governance:
   maturity_assessment: [RKI-003, MISSION-UKCG-001, TEMPLATE-Industry-Twin-Maturity-Assessment]
   executive_intelligence_handover: [MISSION-UKCG-001, TEMPLATE-Executive-Intelligence-Handover]
   workspace_operation: [RG-002, ADR-016, FP-010]
+  mission_learning: [RG-002, SCHEMA-Candidate-Research-Pattern-Register, UKCG-001-Pattern-Register]
   knowledge_pack_configuration: [FP-010, ADR-016, RKI-002]
 unresolved_sources: []
 optional_notices:

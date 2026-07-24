@@ -3,7 +3,7 @@
 **Document ID:** MISSION-UKCG-001  
 **Status:** Mission instructions only  
 **Owner:** CIOS Research Operations  
-**Version:** 2.4.0
+**Version:** 2.4.1
 
 Execute the canonical Researcher route for UK Central Government using the Progressive Twin Development Method in RKI-001 and RG-001 and the persistent Research Mission Workspace operation in RG-002. This file contains mission instructions only and no UK Central Government research findings.
 
@@ -11,13 +11,17 @@ Execute the canonical Researcher route for UK Central Government using the Progr
 
 Develop a UK Central Government Industry Twin as a cumulative, evidence-backed, participant-neutral candidate Industry Twin. The current UKCG material must be treated as an existing research baseline, not a completed Industry Twin. The next mission must create a new Workspace if no validated one exists, resume from the latest validated Workspace when one exists, reuse prior evidence, Observations and candidate Twin state, produce a delta plan, deepen the Twin through Enterprise Twins, Market Participant Twins, applicable control bodies, transformation programmes and cross-Twin synthesis, and continue autonomously until RG-002 completion gates pass or strict EVIDENCE EXHAUSTED is demonstrated.
 
+## Reference implementation metadata
+
+UKCG-001 is the first governed reference implementation used to evaluate the Research Mission operating model. It is the first operational mission used to validate RG-001 research methodology and RG-002 persistent Workspace operation. This is programme and governance metadata only; it does not rename the UK Central Government Industry Twin, change its domain identity, create a new Twin class or promote UK Central Government-specific intelligence into generic doctrine. Domain intelligence remains UK Central Government-specific. Reusable methodological findings require promotion through the RG-002 Candidate Research Pattern lifecycle and their proposed canonical owners. Future missions should use resulting starter-package changes only after relevant patterns are adopted in the canonical source.
+
 ## Authority boundaries
 
 This mission does not create a new Twin type and does not redefine Enterprise Intelligence doctrine. Preserve EI-001 for Enterprise Model and Twin state, EI-002 for graph relationships, EI-003 for behaviour, EI-012 for Evidence and Observation lineage, IT-001 and the existing Industry Twin Lifecycle guidance for Industry Twin semantics, MPT-001 for Market Participant Twin semantics, and ADR-016, FP-010 and the Knowledge Pack Specification for Workspace package exchange. Regulatory, assurance, policy, funding and control bodies are modelled using existing Enterprise, Market Participant, Industry Twin and relationship semantics as applicable.
 
 ## Workspace obligations
 
-The Researcher must maintain a Research Mission Workspace independent of chat history. At minimum the Workspace must maintain explicit maturity and coverage state plus an Evidence Register, Unknown Register, Contradiction Register, Research Queue, Mission Journal, Escalation Register, Evidence Saturation Assessment and Restart Conditions. The Researcher must checkpoint after each material Research Wave, after material Twin or maturity changes and before interruption, then emit an updated downloadable Workspace package using the existing governed Knowledge Pack exchange mechanism.
+The Researcher must maintain a Research Mission Workspace independent of chat history. At minimum the Workspace must maintain explicit maturity and coverage state plus an Evidence Register, Unknown Register, Contradiction Register, Research Queue, Mission Journal, Escalation Register, Evidence Saturation Assessment and Restart Conditions and Mission Learning artefacts (Pattern Register, Pattern Review and Promotion Recommendations). The Researcher must checkpoint after each material Research Wave, after material Twin or maturity changes and before interruption, then emit an updated downloadable Workspace package using the existing governed Knowledge Pack exchange mechanism.
 
 Each checkpoint must record current outcome, completion-gate status, Enterprise Twin coverage and maturity, Market Participant coverage and maturity, programme and relationship coverage, open Unknowns, open contradictions, open escalations, evidence saturation, material Executive Insights added or changed, progress since prior checkpoint, and the next highest-value research priority with rationale.
 
@@ -37,7 +41,8 @@ The Researcher must:
 10. Derive industry relevance only after participant-neutral cross-Twin synthesis.
 11. Reassess breadth, depth, Unknowns, Contradictions, maturity, evidence saturation and executive insight quality after each research wave.
 12. Select the next highest-impact eligible Research Queue item and continue without requiring a separate user conversation for each organisation, supplier, programme or evidence gap.
-13. End only as COMPLETE or EVIDENCE EXHAUSTED under RG-002. While productive routes remain, the outcome is CONTINUE.
+13. Maintain the Candidate Research Pattern Register without promoting mission-specific UKCG content into doctrine.
+14. End only as COMPLETE or EVIDENCE EXHAUSTED under RG-002. While productive routes remain, the outcome is CONTINUE.
 
 ## Required coverage
 
@@ -110,11 +115,12 @@ Completion gates pass only when:
 - Unknowns and Contradictions are visible, prioritised and tied to maturity consequences;
 - executive insights pass the executive insight gate;
 - industry relevance is derived from participant-neutral cross-Twin synthesis;
-- completion-gate decision states support COMPLETE, or any unmet gates satisfy strict EVIDENCE EXHAUSTED with restart conditions.
+- completion-gate decision states support COMPLETE, or any unmet gates satisfy strict EVIDENCE EXHAUSTED with restart conditions;
+- terminal mission closure assesses both domain completion and method learning, including reusable patterns proposed for validation or adoption, rejected approaches, unresolved hypotheses, proposed canonical-source changes, supporting evidence, Unknowns and Contradictions.
 
 ## Consolidated outputs
 
-Produce one consolidated handover containing: latest validated Research Mission Workspace Package; updated Candidate Industry Twin or bounded incomplete release where appropriate; detailed Enterprise Twin set; detailed Market Participant and control-body material; relational and dependency model; government transformation portfolio across Operate, Transform and Reinvent; maturity and coverage assessment; executive insight set; industry-relevance assessment; Unknowns and Contradictions; evidence demands; completion-gate decision; next highest-value research priority at every checkpoint; concise mission-state summary; and incremental change log from the prior baseline.
+Produce one consolidated handover containing: latest validated Research Mission Workspace Package; updated Candidate Industry Twin or bounded incomplete release where appropriate; detailed Enterprise Twin set; detailed Market Participant and control-body material; relational and dependency model; government transformation portfolio across Operate, Transform and Reinvent; maturity and coverage assessment; executive insight set; industry-relevance assessment; Unknowns and Contradictions; evidence demands; completion-gate decision; next highest-value research priority at every checkpoint; concise mission-state summary; and incremental change log from the prior baseline; Candidate Research Pattern Register; Research Mission Pattern Review at terminal closure; and Promotion Recommendations for Chief Architect review.
 
 Packaging does not replace intelligence work, but the updated downloadable Workspace package is mandatory at every checkpoint. The maturity assessment is mandatory before Executive Intelligence handover.
 

@@ -13,3 +13,7 @@ Replace Researcher Knowledge Pack v2.1.0 bundles with `CIOS-Researcher-Knowledge
 ## Authority and source handling
 
 Review-status sources packaged in v2.4.0 remain labelled as Review material and are included only because they are required to operationalise participant-aware research outputs. Missing required owning sources must be recorded as validation failures or unresolved-source warnings rather than silently paraphrased.
+
+## Research Mission Learning migration
+
+Existing Research Mission Workspaces remain valid. At the next checkpoint, add `Mission Learning/Pattern Register.md`, `Mission Learning/Pattern Review.md` and `Mission Learning/Promotion Recommendations.md` without changing existing Evidence, Twin, Unknown or Contradiction identifiers. Terminal mission closure after this change must assess both domain completion and method learning under RG-002.
