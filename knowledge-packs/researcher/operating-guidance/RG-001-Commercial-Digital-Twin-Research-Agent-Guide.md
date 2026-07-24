@@ -3,9 +3,9 @@
 **Document ID:** RG-001  
 **Status:** Operational research guide  
 **Owner:** CIOS Research Operations  
-**Version:** 2.2.0
+**Version:** 2.4.0
 
-RG-001 is detailed method. It links to the canonical behavioural kernel in `../configuration/Researcher-GPT-Instructions.md` and does not replace Accepted ADRs or owning architecture papers.
+RG-001 is detailed method and remains the canonical owner of Researcher methodology and research behaviour. Long-running autonomous Research Missions SHALL operate under RG-002 for persistent Workspace state, checkpointing, recovery, Mission Journal, Escalation Register, autonomous-continuation outcome and evidence-exhaustion lifecycle behaviour. RG-001 links to the canonical behavioural kernel in `../configuration/Researcher-GPT-Instructions.md` and does not replace Accepted ADRs or owning architecture papers.
 
 ## Participant-aware Industry Twin operating route
 
@@ -49,7 +49,7 @@ RG-001 implements the Researcher mission architecture and does not supersede EI-
 6. Deepen Tier 1 Enterprise Twins to the maturity standard, then deepen associated Market Participant and control-body material.
 7. Model programme, funding, policy, supplier, capability, procurement and dependency relationships.
 8. Resynthesise the Industry Twin after every wave and update the gap queue.
-9. Continue to the next highest-impact incomplete area until objective completion gates pass or a genuine external blocker is recorded.
+9. Continue to the next highest-impact incomplete area under RG-002 until objective completion gates pass or strict EVIDENCE EXHAUSTED is demonstrated. Local constraints, inaccessible sources or open escalations must be recorded in the Workspace and SHALL NOT halt broader Industry Twin development while productive work remains elsewhere.
 
 ### Registers maintained during every mission
 
@@ -67,9 +67,9 @@ Every material programme must connect business or policy goal, pressure or failu
 
 Structurally significant Market Participant Twins must cover strategy, financial and growth pressure, capabilities and offerings, industry and account footprint, delivery evidence, incumbency, alliances, subcontracting, procurement routes, strengths, vulnerabilities, delivery risks, likely future moves, Unknowns and Contradictions. Control bodies must be modelled through their evidenced mandate, decision rights, funding or assurance influence, policy mechanisms, governed relationships, risks, Unknowns and Contradictions without creating a new Twin type.
 
-### Autonomous continuation and stopping rules
+### Autonomous continuation under RG-002
 
-Do not stop because a long report has been written, a record target has been met, every named entity has one observation, the first source list is exhausted, or packaging is possible. Select the next highest-impact incomplete area and continue automatically. Stop only when all declared completion gates pass or a genuine external blocker exists. A blocker report must include missing evidence, materiality, sources attempted, maturity consequence and whether a bounded release remains possible.
+Do not stop because a long report has been written, a record target has been met, every named entity has one observation, the first source list is exhausted, or packaging is possible. Select the next highest-impact incomplete area and continue automatically. For long-running missions, RG-002 owns persistent Workspace state, checkpointing, recovery, Mission Journal, Escalation Register, mission outcomes and the strict evidence-exhaustion test. Use only CONTINUE, COMPLETE or EVIDENCE EXHAUSTED as mission outcomes. A constrained item or escalation must include missing evidence, materiality, sources attempted, maturity consequence and whether a bounded release remains possible, but it SHALL NOT stop unaffected research while productive evidence routes remain.
 
 ### Executive insight gate
 
