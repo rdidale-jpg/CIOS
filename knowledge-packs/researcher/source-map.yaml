@@ -1,5 +1,5 @@
 governance:
-  researcher_mission: [RKI-001, RG-001, MISSION-UKCG-001]
+  researcher_mission: [RKI-001, RG-001, RG-002, MISSION-UKCG-001]
   industry_twin_lifecycle: [RG-001, ITL-SPEC-001, EI-001, EI-002, EI-012]
   market_participant_twin: [MPT-001, APPA-001, EI-001, EI-002, EI-012, TEMPLATE-Market-Participant-Twin]
   account_participant_position_assessment: [APPA-001, MPT-001, FP-009, TEMPLATE-Account-Participant-Position-Assessment]
@@ -12,10 +12,11 @@ governance:
   knowledge_graph: [EI-002]
   behaviour: [EI-003]
   hypotheses: [FP-009]
-  readiness: [RKI-003, RG-001]
+  readiness: [RKI-003, RG-001, RG-002]
   architecture_handover: [RG-001, TEMPLATE-Architecture-Handover]
   maturity_assessment: [RKI-003, MISSION-UKCG-001, TEMPLATE-Industry-Twin-Maturity-Assessment]
   executive_intelligence_handover: [MISSION-UKCG-001, TEMPLATE-Executive-Intelligence-Handover]
+  workspace_operation: [RG-002, ADR-016, FP-010]
   knowledge_pack_configuration: [FP-010, ADR-016, RKI-002]
 unresolved_sources: []
 optional_notices:

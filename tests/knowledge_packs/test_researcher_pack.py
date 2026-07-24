@@ -6,7 +6,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / 'knowledge-packs/researcher/manifest.yaml'
-VERSION = '2.3.0'
+VERSION = '2.4.0'
 BASENAME = f'CIOS-Researcher-Knowledge-Pack-v{VERSION}'
 
 
@@ -27,7 +27,7 @@ def build(version=VERSION):
 
 def test_manifest_completeness_and_sources():
     ds=docs(); ids={d['document_id'] for d in ds}
-    required={'RG-001','RKI-001','RKI-003','EI-001','EI-002','EI-003','EI-012','FP-009','FP-010','FP-012','ADR-016','MISSION-UKCG-001','TEMPLATE-Industry-Twin-Maturity-Assessment','TEMPLATE-Executive-Intelligence-Handover'}
+    required={'RG-001','RG-002','RKI-001','RKI-003','EI-001','EI-002','EI-003','EI-012','FP-009','FP-010','FP-012','ADR-016','MISSION-UKCG-001','TEMPLATE-Industry-Twin-Maturity-Assessment','TEMPLATE-Executive-Intelligence-Handover'}
     assert required <= ids
     for d in ds:
         src=ROOT/d['source_path']
@@ -95,7 +95,7 @@ def test_generated_filenames_metadata_report_and_root_use_requested_version():
 def test_source_version_mismatch_fails_with_clear_message():
     result = build('9.9.9')
     assert result.returncode != 0
-    assert 'Version mismatch: requested version 9.9.9; conflicting version 2.3.0' in result.stderr
+    assert 'Version mismatch: requested version 9.9.9; conflicting version 2.4.0' in result.stderr
     assert 'source file: knowledge-packs/researcher/VERSION; field: VERSION' in result.stderr
 
 
@@ -140,7 +140,7 @@ def test_progressive_twin_method_manifest_membership_and_authority_boundaries():
     ds = docs()
     ids = {d['document_id'] for d in ds}
     required = {
-        'RKI-001', 'RG-001', 'MISSION-UKCG-001',
+        'RKI-001', 'RG-001', 'RG-002', 'MISSION-UKCG-001',
         'EI-001', 'EI-002', 'EI-003', 'EI-012',
         'IT-001', 'ITL-SPEC-001', 'MPT-001',
         'TEMPLATE-Enterprise-Intelligence-Pack',
@@ -169,6 +169,7 @@ def test_progressive_twin_method_required_operating_rules():
         for path in [
             'knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md',
             'knowledge-packs/researcher/operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md',
+            'knowledge-packs/researcher/operating-guidance/RG-002-Research-Mission-Workspace-Standard.md',
             'knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md',
         ]
     }
@@ -222,6 +223,7 @@ def test_no_parallel_twin_type_or_silent_architecture_authority_change():
         for path in [
             'knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md',
             'knowledge-packs/researcher/operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md',
+            'knowledge-packs/researcher/operating-guidance/RG-002-Research-Mission-Workspace-Standard.md',
             'knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md',
         ]
     )
@@ -240,3 +242,37 @@ def test_no_parallel_twin_type_or_silent_architecture_authority_change():
     ]
     for path in architecture_files:
         assert (ROOT / path).exists()
+
+
+def test_rg002_workspace_conformance_controls():
+    ds = docs(); ids = {d['document_id'] for d in ds}
+    assert 'RG-002' in ids
+    by_id = {d['document_id']: d for d in ds}
+    assert by_id['RG-002']['source_path'] == 'knowledge-packs/researcher/operating-guidance/RG-002-Research-Mission-Workspace-Standard.md'
+    source_map = (ROOT / 'knowledge-packs/researcher/source-map.yaml').read_text()
+    assert 'RG-002' in source_map
+    rg001 = (ROOT / 'knowledge-packs/researcher/operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md').read_text()
+    instructions = (ROOT / 'knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md').read_text()
+    template = (ROOT / 'knowledge-packs/researcher/templates/Industry-Research-Pack-Template.md').read_text()
+    mission = (ROOT / 'knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md').read_text()
+    rg002 = (ROOT / by_id['RG-002']['source_path']).read_text()
+    assert 'RG-002 governs persistent mission operation' in rg002
+    assert 'RG-002' in rg001
+    assert 'create a Research Mission Workspace or load the latest validated Workspace' in instructions
+    assert 'Checkpoint after every Research Wave' in template
+    assert 'RG-002' in mission
+    combined = '\n'.join([rg002, instructions, template, mission])
+    for phrase in [
+        'No generic BLOCKED mission state shall be introduced',
+        'Escalation is non-terminal',
+        'CONTINUE', 'COMPLETE', 'EVIDENCE EXHAUSTED',
+        'Technical interruption is an execution condition recorded as resumable',
+        'EVIDENCE EXHAUSTED MAY be declared only when every condition below is met',
+        'Do not invent a parallel arbitrary archive format',
+        'Mission metadata', 'Candidate Twin', 'Evidence Register', 'Unknown Register',
+        'Contradiction Register', 'Research Queue', 'Mission Journal', 'Escalation Register',
+        'Evidence Saturation Assessment', 'Restart Conditions',
+    ]:
+        assert phrase in combined
+    assert 'generic BLOCKED terminal' in combined
+    assert 'Workspace Package using the existing governed Knowledge Pack exchange mechanism' in combined

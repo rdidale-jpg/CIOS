@@ -1,7 +1,7 @@
 pack:
   id: CIOS-Researcher-Knowledge-Pack
   title: CIOS Researcher Knowledge Pack
-  version: 2.3.0
+  version: 2.4.0
   owner: CIOS / Knowledge Pack Owner
   canonical_location: knowledge-packs/researcher
   generated_artifacts: dist release artifacts
@@ -15,7 +15,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 9c0ec3061f97750cdc5417b7f71aaef535d4726cbc58ff14c9bf5694fc94d3e7
+    checksum: d7539b3040711fb235106a8f9d9c3409463a42216144150c94309de5aa30fc14
     transform: none
   - pack_path: configuration/Researcher-GPT-Instructions.md
     source_path: knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md
@@ -26,7 +26,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: aa692613f83d7865e80dc70038c4a42faf4b159a2d124efe24fbb4b9edf860a9
+    checksum: f5cc2e356008b303c71811cea1babf87a464d22117363755651836d34141b421
     transform: none
   - pack_path: configuration/Researcher-Configuration-Guide.md
     source_path: knowledge-packs/researcher/configuration/Researcher-Configuration-Guide.md
@@ -48,7 +48,18 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 3bb4ede4ce1eaf6e84417b31bbb9de3d40f538c0d6aba78993da53c3439426e8
+    checksum: 9c2811fc0a2360ef851eb64b180259af1fe40207ab5886b0edfa7dda7d66e7d8
+    transform: none
+  - pack_path: operating-guidance/RG-002-Research-Mission-Workspace-Standard.md
+    source_path: knowledge-packs/researcher/operating-guidance/RG-002-Research-Mission-Workspace-Standard.md
+    document_id: RG-002
+    title: Research Mission Workspace Standard
+    version_or_last_updated: repository-current
+    authority: research-operating-standard
+    status: current
+    required: true
+    inclusion_reason: Required for persistent Research Mission Workspace operation, checkpointing, deterministic recovery, non-terminal escalation and strict evidence exhaustion.
+    checksum: bf2a53b41d86bd1985e7894a5262df9b4ed81c5313b4c4df6f2dec7daf33fc9c
     transform: none
   - pack_path: operating-guidance/Industry-Twin-Readiness-Gate.md
     source_path: knowledge-packs/researcher/operating-guidance/Industry-Twin-Readiness-Gate.md
@@ -268,7 +279,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: fd09a14ecaae191cc778edf6143afea7ecc8178e92644501da519ad456601ac3
+    checksum: 00bb8427c5225778316ad385d828bc961ca96c5c68e62cd3e6acd637f37efadb
     transform: none
   - pack_path: templates/Architecture-Handover-Template.md
     source_path: knowledge-packs/researcher/templates/Architecture-Handover-Template.md
@@ -312,7 +323,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: ebd7622629ba96b7e11ed1ef6146d9ec9c91c508ccd440c408758865528b16df
+    checksum: 36f4feb1d241fde101553390628136df55c9aeba8a705e6af18d5091c8bfe4a4
     transform: none
   - pack_path: templates/Observation-Catalogue-Template.md
     source_path: knowledge-packs/researcher/templates/Observation-Catalogue-Template.md

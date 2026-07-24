@@ -1,6 +1,10 @@
 # Changelog
 
-## 2.3.0
+## 2.4.0
+
+- Added RG-002 Research Mission Workspace Standard.
+- Updated Researcher instructions, mission template and UKCG mission for persistent Workspace operation.
+- Added conformance validation for RG-002 mission outcomes, non-terminal escalation and Knowledge Pack exchange reuse.
 
 - Added bounded completion mode for the UK Central Government Industry Twin mission.
 - Added mandatory Industry Twin Maturity Assessment before Executive Intelligence handover.

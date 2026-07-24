@@ -75,7 +75,7 @@ def validate_source_versions(version, basename, zip_path, report_path):
 
 
 def validate(docs):
-    req={'EI-001','EI-002','EI-003','EI-004','EI-012','FP-009','FP-010','FP-011','FP-012','ADR-016','RG-001','RKI-001','MISSION-UKCG-001','MPT-001','APPA-001','IT-001','ITL-SPEC-001','EIF-001','EOD-001','OT-001','TEMPLATE-Market-Participant-Twin','TEMPLATE-Account-Participant-Position-Assessment','TEMPLATE-Opportunity-Hypothesis','TEMPLATE-Industry-Twin-Maturity-Assessment','TEMPLATE-Executive-Intelligence-Handover'}
+    req={'EI-001','EI-002','EI-003','EI-004','EI-012','FP-009','FP-010','FP-011','FP-012','ADR-016','RG-001','RG-002','RKI-001','MISSION-UKCG-001','MPT-001','APPA-001','IT-001','ITL-SPEC-001','EIF-001','EOD-001','OT-001','TEMPLATE-Market-Participant-Twin','TEMPLATE-Account-Participant-Position-Assessment','TEMPLATE-Opportunity-Hypothesis','TEMPLATE-Industry-Twin-Maturity-Assessment','TEMPLATE-Executive-Intelligence-Handover'}
     ids={d['document_id'] for d in docs}
     missing=req-ids
     if missing: fail(f'Missing required documents: {sorted(missing)}')
@@ -89,7 +89,7 @@ def validate(docs):
     if any(d['document_id']=='FP-010' and 'Knowledge-Pack-Architecture' not in d['source_path'] for d in docs): fail('FP-010 manifest path is stale')
     if any(d['document_id']=='FP-012' and 'Enterprise-Reinvention-Intelligence' not in d['source_path'] for d in docs): fail('FP-012 manifest path is stale')
     content='\n'.join((ROOT/d['source_path']).read_text(errors='ignore') for d in docs)
-    phrases=['Evidence proves change','Observations remember change','Enterprise Models accumulate change','Reports are views','Unknowns and contradictions are first-class','Human-supplied knowledge must be labelled','Recommendations require inspectable lineage','Research-ready gate','supplier, contract and procurement','Architecture Handover','UK Central Government','Market Participant Twin','Account-Participant Position Assessment','buyer-side evidence','participant-side evidence','participant-supplied assertion','bounded completion','Industry Twin Maturity Assessment','Executive Intelligence handover']
+    phrases=['Evidence proves change','Observations remember change','Enterprise Models accumulate change','Reports are views','Unknowns and contradictions are first-class','Human-supplied knowledge must be labelled','Recommendations require inspectable lineage','Research-ready gate','supplier, contract and procurement','Architecture Handover','UK Central Government','Market Participant Twin','Account-Participant Position Assessment','buyer-side evidence','participant-side evidence','participant-supplied assertion','bounded completion','Industry Twin Maturity Assessment','Executive Intelligence handover','Research Mission Workspace','CONTINUE','COMPLETE','EVIDENCE EXHAUSTED','Technical interruption is an execution condition recorded as resumable','No generic BLOCKED mission state shall be introduced','Do not invent a parallel arbitrary archive format']
     for p in phrases:
         if p.lower() not in content.lower(): fail(f'Missing doctrine/content phrase: {p}')
     hard=[]; warnings=[]; notices=[]
