@@ -1,0 +1,327 @@
+{
+  "register_id": "REGISTER-UKCG-001",
+  "mission_id": "UKCG-001",
+  "schema_version": "1.0.0",
+  "patterns": [
+    {
+      "pattern_id": "RP-001",
+      "title": "Relationship density as a Twin maturity signal",
+      "description": "Relationship density may act as a Twin maturity signal in the UKCG CP001-CP004 context.",
+      "category": "Research Mission method learning",
+      "observed_during": "UKCG-001 reference implementation",
+      "evidence_references": [
+        "knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md",
+        "docs/industry-twins/uk-central-government/Candidate-UK-Central-Government-Industry-Twin-Handover.md",
+        "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt"
+      ],
+      "evidence_summary": "Mission and candidate handover artefacts are present. Checkpoint artefacts CP001-CP004 are not present in the repository; this register records the evidence gap rather than fabricating checkpoint references. Evidence context asserted for UKCG CP001-CP004 where available outside repository.",
+      "commercial_benefit": "Potentially improves decision-oriented Industry Twin creation and commercial intelligence quality if validated beyond the mission scope.",
+      "architectural_benefit": "Potentially improves governed Research Mission operation without changing Twin semantics if adopted by the canonical owner.",
+      "generalisability_assessment": "Not proven across another industry; requires canonical-owner review and cross-mission evidence before adoption.",
+      "assumptions": [
+        "UKCG-001 operational artefacts reflect the referenced mission execution context."
+      ],
+      "uncertainty": [
+        "Not yet validated across another industry.",
+        "Repository does not contain CP001-CP004 checkpoint artefacts."
+      ],
+      "alternatives_considered": [
+        "Treat as mission-specific only until further evidence exists.",
+        "Reject if cross-mission evidence fails to show reusable value."
+      ],
+      "proposed_canonical_owner": "Industry Twin methodology or current canonical maturity model owner",
+      "implementation_impact": "No runtime capability is implemented by this seed entry; any template or instruction change requires canonical adoption.",
+      "operational_impact": "Researcher should preserve the observation and gather further evidence without treating it as doctrine.",
+      "confidence": "medium",
+      "status": "OBSERVED",
+      "review_history": [
+        {
+          "date": "2026-07-24",
+          "reviewer": "CIOS repository update",
+          "decision": "Seeded without promotion",
+          "notes": "Initial entry created from mission-learning governance request with repository evidence gaps explicit."
+        }
+      ]
+    },
+    {
+      "pattern_id": "RP-002",
+      "title": "Progressive Enterprise Twin deepening",
+      "description": "Cumulative deepening appears to produce stronger intelligence than repeated rediscovery.",
+      "category": "Research Mission method learning",
+      "observed_during": "UKCG-001 reference implementation",
+      "evidence_references": [
+        "knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md",
+        "docs/industry-twins/uk-central-government/Candidate-UK-Central-Government-Industry-Twin-Handover.md",
+        "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt"
+      ],
+      "evidence_summary": "Mission and candidate handover artefacts are present. Checkpoint artefacts CP001-CP004 are not present in the repository; this register records the evidence gap rather than fabricating checkpoint references. Evidence context asserted for UKCG CP001-CP004 where available outside repository.",
+      "commercial_benefit": "Potentially improves decision-oriented Industry Twin creation and commercial intelligence quality if validated beyond the mission scope.",
+      "architectural_benefit": "Potentially improves governed Research Mission operation without changing Twin semantics if adopted by the canonical owner.",
+      "generalisability_assessment": "Not proven across another industry; requires canonical-owner review and cross-mission evidence before adoption.",
+      "assumptions": [
+        "UKCG-001 operational artefacts reflect the referenced mission execution context."
+      ],
+      "uncertainty": [
+        "Requires cross-mission validation.",
+        "Repository does not contain CP001-CP004 checkpoint artefacts."
+      ],
+      "alternatives_considered": [
+        "Treat as mission-specific only until further evidence exists.",
+        "Reject if cross-mission evidence fails to show reusable value."
+      ],
+      "proposed_canonical_owner": "RG-001",
+      "implementation_impact": "No runtime capability is implemented by this seed entry; any template or instruction change requires canonical adoption.",
+      "operational_impact": "Researcher should preserve the observation and gather further evidence without treating it as doctrine.",
+      "confidence": "medium",
+      "status": "OBSERVED",
+      "review_history": [
+        {
+          "date": "2026-07-24",
+          "reviewer": "CIOS repository update",
+          "decision": "Seeded without promotion",
+          "notes": "Initial entry created from mission-learning governance request with repository evidence gaps explicit."
+        }
+      ]
+    },
+    {
+      "pattern_id": "RP-003",
+      "title": "Persistent Research Mission Workspace",
+      "description": "Persistent Workspace state enabled deterministic cumulative research across multiple checkpoints within UKCG-001 operational scope.",
+      "category": "Research Mission method learning",
+      "observed_during": "UKCG-001 reference implementation",
+      "evidence_references": [
+        "knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md",
+        "docs/industry-twins/uk-central-government/Candidate-UK-Central-Government-Industry-Twin-Handover.md",
+        "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt"
+      ],
+      "evidence_summary": "Mission and candidate handover artefacts are present. Checkpoint artefacts CP001-CP004 are not present in the repository; this register records the evidence gap rather than fabricating checkpoint references. Evidence context asserted for UKCG CP001-CP004 where available outside repository.",
+      "commercial_benefit": "Potentially improves decision-oriented Industry Twin creation and commercial intelligence quality if validated beyond the mission scope.",
+      "architectural_benefit": "Potentially improves governed Research Mission operation without changing Twin semantics if adopted by the canonical owner.",
+      "generalisability_assessment": "Not proven across another industry; requires canonical-owner review and cross-mission evidence before adoption.",
+      "assumptions": [
+        "UKCG-001 operational artefacts reflect the referenced mission execution context."
+      ],
+      "uncertainty": [
+        "Validated only within UKCG-001 operational scope; no cross-industry validation is claimed.",
+        "Repository does not contain CP001-CP004 checkpoint artefacts."
+      ],
+      "alternatives_considered": [
+        "Treat as mission-specific only until further evidence exists.",
+        "Reject if cross-mission evidence fails to show reusable value."
+      ],
+      "proposed_canonical_owner": "RG-002",
+      "implementation_impact": "No runtime capability is implemented by this seed entry; any template or instruction change requires canonical adoption.",
+      "operational_impact": "Researcher should preserve the observation and gather further evidence without treating it as doctrine.",
+      "confidence": "high",
+      "status": "VALIDATED",
+      "review_history": [
+        {
+          "date": "2026-07-24",
+          "reviewer": "CIOS repository update",
+          "decision": "Seeded without promotion",
+          "notes": "Initial entry created from mission-learning governance request with repository evidence gaps explicit."
+        }
+      ]
+    },
+    {
+      "pattern_id": "RP-004",
+      "title": "Explicit Research Queue prioritisation",
+      "description": "Explicit next-increment selection improved cumulative mission value.",
+      "category": "Research Mission method learning",
+      "observed_during": "UKCG-001 reference implementation",
+      "evidence_references": [
+        "knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md",
+        "docs/industry-twins/uk-central-government/Candidate-UK-Central-Government-Industry-Twin-Handover.md",
+        "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt"
+      ],
+      "evidence_summary": "Mission and candidate handover artefacts are present. Checkpoint artefacts CP001-CP004 are not present in the repository; this register records the evidence gap rather than fabricating checkpoint references. Evidence context asserted for UKCG CP001-CP004 where available outside repository.",
+      "commercial_benefit": "Potentially improves decision-oriented Industry Twin creation and commercial intelligence quality if validated beyond the mission scope.",
+      "architectural_benefit": "Potentially improves governed Research Mission operation without changing Twin semantics if adopted by the canonical owner.",
+      "generalisability_assessment": "Not proven across another industry; requires canonical-owner review and cross-mission evidence before adoption.",
+      "assumptions": [
+        "UKCG-001 operational artefacts reflect the referenced mission execution context."
+      ],
+      "uncertainty": [
+        "The optimal prioritisation method remains unvalidated.",
+        "Repository does not contain CP001-CP004 checkpoint artefacts."
+      ],
+      "alternatives_considered": [
+        "Treat as mission-specific only until further evidence exists.",
+        "Reject if cross-mission evidence fails to show reusable value."
+      ],
+      "proposed_canonical_owner": "RG-002",
+      "implementation_impact": "No runtime capability is implemented by this seed entry; any template or instruction change requires canonical adoption.",
+      "operational_impact": "Researcher should preserve the observation and gather further evidence without treating it as doctrine.",
+      "confidence": "medium",
+      "status": "OBSERVED",
+      "review_history": [
+        {
+          "date": "2026-07-24",
+          "reviewer": "CIOS repository update",
+          "decision": "Seeded without promotion",
+          "notes": "Initial entry created from mission-learning governance request with repository evidence gaps explicit."
+        }
+      ]
+    },
+    {
+      "pattern_id": "RP-005",
+      "title": "Commercial Digital Twin emergence through relationships",
+      "description": "Commercial understanding appears to emerge more strongly from cross-enterprise, programme, supplier and control-body relationships than from isolated supplier profiles.",
+      "category": "Research Mission method learning",
+      "observed_during": "UKCG-001 reference implementation",
+      "evidence_references": [
+        "knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md",
+        "docs/industry-twins/uk-central-government/Candidate-UK-Central-Government-Industry-Twin-Handover.md",
+        "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt"
+      ],
+      "evidence_summary": "Mission and candidate handover artefacts are present. Checkpoint artefacts CP001-CP004 are not present in the repository; this register records the evidence gap rather than fabricating checkpoint references. Evidence context asserted for UKCG CP001-CP004 where available outside repository.",
+      "commercial_benefit": "Potentially improves decision-oriented Industry Twin creation and commercial intelligence quality if validated beyond the mission scope.",
+      "architectural_benefit": "Potentially improves governed Research Mission operation without changing Twin semantics if adopted by the canonical owner.",
+      "generalisability_assessment": "Not proven across another industry; requires canonical-owner review and cross-mission evidence before adoption.",
+      "assumptions": [
+        "UKCG-001 operational artefacts reflect the referenced mission execution context."
+      ],
+      "uncertainty": [
+        "Candidate pattern; requires evidence beyond UKCG-001.",
+        "Repository does not contain CP001-CP004 checkpoint artefacts."
+      ],
+      "alternatives_considered": [
+        "Treat as mission-specific only until further evidence exists.",
+        "Reject if cross-mission evidence fails to show reusable value."
+      ],
+      "proposed_canonical_owner": "Current Commercial Digital Twin methodology owner",
+      "implementation_impact": "No runtime capability is implemented by this seed entry; any template or instruction change requires canonical adoption.",
+      "operational_impact": "Researcher should preserve the observation and gather further evidence without treating it as doctrine.",
+      "confidence": "medium",
+      "status": "CANDIDATE",
+      "review_history": [
+        {
+          "date": "2026-07-24",
+          "reviewer": "CIOS repository update",
+          "decision": "Seeded without promotion",
+          "notes": "Initial entry created from mission-learning governance request with repository evidence gaps explicit."
+        }
+      ]
+    },
+    {
+      "pattern_id": "RP-006",
+      "title": "Executive Intelligence progression",
+      "description": "Insight became more decision-oriented as Twin maturity increased.",
+      "category": "Research Mission method learning",
+      "observed_during": "UKCG-001 reference implementation",
+      "evidence_references": [
+        "knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md",
+        "docs/industry-twins/uk-central-government/Candidate-UK-Central-Government-Industry-Twin-Handover.md",
+        "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt"
+      ],
+      "evidence_summary": "Mission and candidate handover artefacts are present. Checkpoint artefacts CP001-CP004 are not present in the repository; this register records the evidence gap rather than fabricating checkpoint references. Evidence context asserted for UKCG CP001-CP004 where available outside repository.",
+      "commercial_benefit": "Potentially improves decision-oriented Industry Twin creation and commercial intelligence quality if validated beyond the mission scope.",
+      "architectural_benefit": "Potentially improves governed Research Mission operation without changing Twin semantics if adopted by the canonical owner.",
+      "generalisability_assessment": "Not proven across another industry; requires canonical-owner review and cross-mission evidence before adoption.",
+      "assumptions": [
+        "UKCG-001 operational artefacts reflect the referenced mission execution context."
+      ],
+      "uncertainty": [
+        "Predictive value has not yet been established.",
+        "Repository does not contain CP001-CP004 checkpoint artefacts."
+      ],
+      "alternatives_considered": [
+        "Treat as mission-specific only until further evidence exists.",
+        "Reject if cross-mission evidence fails to show reusable value."
+      ],
+      "proposed_canonical_owner": "RG-001 or existing Executive Intelligence methodology owner",
+      "implementation_impact": "No runtime capability is implemented by this seed entry; any template or instruction change requires canonical adoption.",
+      "operational_impact": "Researcher should preserve the observation and gather further evidence without treating it as doctrine.",
+      "confidence": "medium",
+      "status": "OBSERVED",
+      "review_history": [
+        {
+          "date": "2026-07-24",
+          "reviewer": "CIOS repository update",
+          "decision": "Seeded without promotion",
+          "notes": "Initial entry created from mission-learning governance request with repository evidence gaps explicit."
+        }
+      ]
+    },
+    {
+      "pattern_id": "RP-007",
+      "title": "Expected Intelligence Gain prioritisation",
+      "description": "Queue selection may benefit from an explainable Expected Intelligence Gain heuristic. This is not implemented or validated doctrine.",
+      "category": "Research Mission method learning",
+      "observed_during": "UKCG-001 reference implementation",
+      "evidence_references": [
+        "knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md",
+        "docs/industry-twins/uk-central-government/Candidate-UK-Central-Government-Industry-Twin-Handover.md",
+        "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt"
+      ],
+      "evidence_summary": "Mission and candidate handover artefacts are present. Checkpoint artefacts CP001-CP004 are not present in the repository; this register records the evidence gap rather than fabricating checkpoint references. Evidence context asserted for UKCG CP001-CP004 where available outside repository.",
+      "commercial_benefit": "Potentially improves decision-oriented Industry Twin creation and commercial intelligence quality if validated beyond the mission scope.",
+      "architectural_benefit": "Potentially improves governed Research Mission operation without changing Twin semantics if adopted by the canonical owner.",
+      "generalisability_assessment": "Not proven across another industry; requires canonical-owner review and cross-mission evidence before adoption.",
+      "assumptions": [
+        "UKCG-001 operational artefacts reflect the referenced mission execution context."
+      ],
+      "uncertainty": [
+        "Expected Intelligence Gain is not implemented and the heuristic remains unvalidated.",
+        "Repository does not contain CP001-CP004 checkpoint artefacts."
+      ],
+      "alternatives_considered": [
+        "Treat as mission-specific only until further evidence exists.",
+        "Reject if cross-mission evidence fails to show reusable value."
+      ],
+      "proposed_canonical_owner": "RG-002",
+      "implementation_impact": "No runtime capability is implemented by this seed entry; any template or instruction change requires canonical adoption.",
+      "operational_impact": "Researcher should preserve the observation and gather further evidence without treating it as doctrine.",
+      "confidence": "medium",
+      "status": "CANDIDATE",
+      "review_history": [
+        {
+          "date": "2026-07-24",
+          "reviewer": "CIOS repository update",
+          "decision": "Seeded without promotion",
+          "notes": "Initial entry created from mission-learning governance request with repository evidence gaps explicit."
+        }
+      ]
+    },
+    {
+      "pattern_id": "RP-008",
+      "title": "Cross-Industry Enterprise Intelligence",
+      "description": "Multiple governed Industry Twins may support cross-industry intelligence. This is a future architecture hypothesis and not current runtime capability.",
+      "category": "Research Mission method learning",
+      "observed_during": "UKCG-001 reference implementation",
+      "evidence_references": [
+        "knowledge-packs/researcher/missions/UK-Central-Government-Industry-Twin-Mission.md",
+        "docs/industry-twins/uk-central-government/Candidate-UK-Central-Government-Industry-Twin-Handover.md",
+        "enterprise-knowledge/UKCG_Industry_Twin_Completion_Segment.txt"
+      ],
+      "evidence_summary": "Mission and candidate handover artefacts are present. Checkpoint artefacts CP001-CP004 are not present in the repository; this register records the evidence gap rather than fabricating checkpoint references. Evidence context asserted for UKCG CP001-CP004 where available outside repository.",
+      "commercial_benefit": "Potentially improves decision-oriented Industry Twin creation and commercial intelligence quality if validated beyond the mission scope.",
+      "architectural_benefit": "Potentially improves governed Research Mission operation without changing Twin semantics if adopted by the canonical owner.",
+      "generalisability_assessment": "Not proven across another industry; requires canonical-owner review and cross-mission evidence before adoption.",
+      "assumptions": [
+        "UKCG-001 operational artefacts reflect the referenced mission execution context."
+      ],
+      "uncertainty": [
+        "Future architecture hypothesis; must not be implemented as current runtime capability.",
+        "Repository does not contain CP001-CP004 checkpoint artefacts."
+      ],
+      "alternatives_considered": [
+        "Treat as mission-specific only until further evidence exists.",
+        "Reject if cross-mission evidence fails to show reusable value."
+      ],
+      "proposed_canonical_owner": "Current Enterprise Intelligence architecture owner",
+      "implementation_impact": "No runtime capability is implemented by this seed entry; any template or instruction change requires canonical adoption.",
+      "operational_impact": "Researcher should preserve the observation and gather further evidence without treating it as doctrine.",
+      "confidence": "low",
+      "status": "CANDIDATE",
+      "review_history": [
+        {
+          "date": "2026-07-24",
+          "reviewer": "CIOS repository update",
+          "decision": "Seeded without promotion",
+          "notes": "Initial entry created from mission-learning governance request with repository evidence gaps explicit."
+        }
+      ]
+    }
+  ]
+}

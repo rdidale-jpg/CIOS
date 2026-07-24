@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cios.local/schemas/researcher/candidate-research-pattern-register.schema.json",
+  "title": "Candidate Research Pattern Register",
+  "type": "object",
+  "required": ["register_id", "mission_id", "schema_version", "patterns"],
+  "additionalProperties": false,
+  "properties": {
+    "register_id": {"type": "string"},
+    "mission_id": {"type": "string"},
+    "schema_version": {"const": "1.0.0"},
+    "patterns": {"type": "array", "items": {"$ref": "#/$defs/pattern"}}
+  },
+  "$defs": {
+    "pattern": {
+      "type": "object",
+      "required": ["pattern_id", "title", "description", "category", "observed_during", "evidence_references", "evidence_summary", "commercial_benefit", "architectural_benefit", "generalisability_assessment", "assumptions", "uncertainty", "alternatives_considered", "proposed_canonical_owner", "implementation_impact", "operational_impact", "confidence", "status", "review_history"],
+      "additionalProperties": false,
+      "properties": {
+        "pattern_id": {"type": "string", "pattern": "^RP-[0-9]{3}$"},
+        "title": {"type": "string"},
+        "description": {"type": "string"},
+        "category": {"type": "string"},
+        "observed_during": {"type": "string"},
+        "evidence_references": {"type": "array", "items": {"type": "string"}},
+        "evidence_summary": {"type": "string"},
+        "commercial_benefit": {"type": "string"},
+        "architectural_benefit": {"type": "string"},
+        "generalisability_assessment": {"type": "string"},
+        "assumptions": {"type": "array", "items": {"type": "string"}},
+        "uncertainty": {"type": "array", "items": {"type": "string"}},
+        "alternatives_considered": {"type": "array", "items": {"type": "string"}},
+        "proposed_canonical_owner": {"type": "string"},
+        "implementation_impact": {"type": "string"},
+        "operational_impact": {"type": "string"},
+        "confidence": {"enum": ["low", "medium", "high"]},
+        "status": {"enum": ["OBSERVED", "CANDIDATE", "VALIDATED", "ADOPTED", "REJECTED"]},
+        "review_history": {"type": "array", "items": {"type": "object", "required": ["date", "reviewer", "decision", "notes"], "additionalProperties": false, "properties": {"date": {"type": "string"}, "reviewer": {"type": "string"}, "decision": {"type": "string"}, "notes": {"type": "string"}}}}
+      }
+    }
+  }
+}

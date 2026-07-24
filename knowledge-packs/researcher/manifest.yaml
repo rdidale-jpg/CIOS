@@ -26,7 +26,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: f5cc2e356008b303c71811cea1babf87a464d22117363755651836d34141b421
+    checksum: 88c20bbcfc5752c009f61888eeb446f956a2641044b621ca1e5213a9526169d2
     transform: none
   - pack_path: configuration/Researcher-Configuration-Guide.md
     source_path: knowledge-packs/researcher/configuration/Researcher-Configuration-Guide.md
@@ -59,7 +59,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for persistent Research Mission Workspace operation, checkpointing, deterministic recovery, non-terminal escalation and strict evidence exhaustion.
-    checksum: bf2a53b41d86bd1985e7894a5262df9b4ed81c5313b4c4df6f2dec7daf33fc9c
+    checksum: 466aecf1752a0e8668e21c32aaec3bd729f272c2b93fdfd90337bc65f16fc60a
     transform: none
   - pack_path: operating-guidance/Industry-Twin-Readiness-Gate.md
     source_path: knowledge-packs/researcher/operating-guidance/Industry-Twin-Readiness-Gate.md
@@ -279,7 +279,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 00bb8427c5225778316ad385d828bc961ca96c5c68e62cd3e6acd637f37efadb
+    checksum: a664214307d8763834b589ea8e948207ad96c1e449efc4d44c65f965e499cc79
     transform: none
   - pack_path: templates/Architecture-Handover-Template.md
     source_path: knowledge-packs/researcher/templates/Architecture-Handover-Template.md
@@ -323,7 +323,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 36f4feb1d241fde101553390628136df55c9aeba8a705e6af18d5091c8bfe4a4
+    checksum: 0b8e2c59b28ac71326460387c378bc318029a2fe72753ea628a50150d8cff14c
     transform: none
   - pack_path: templates/Observation-Catalogue-Template.md
     source_path: knowledge-packs/researcher/templates/Observation-Catalogue-Template.md
@@ -511,4 +511,81 @@ documents:
     required: true
     inclusion_reason: Required output template for opportunity hypotheses that preserve buyer and participant evidence, Unknowns and contradictions.
     checksum: b80c713a33136705b757644a4ead093b73f81d20d02240dad213a15ca4b7ea84
+    transform: none
+  - pack_path: schemas/Candidate-Research-Pattern-Register.schema.json
+    source_path: knowledge-packs/researcher/schemas/Candidate-Research-Pattern-Register.schema.json
+    document_id: SCHEMA-Candidate-Research-Pattern-Register
+    title: Candidate Research Pattern Register Schema
+    version_or_last_updated: repository-current
+    authority: schema
+    status: current
+    required: true
+    inclusion_reason: Canonical RG-002 schema for candidate research pattern lifecycle and promotion evidence.
+    checksum: 3249fb42dda366a07447a828890438cc784fff28723f660b11324ac06d345a91
+    transform: none
+  - pack_path: templates/Research-Mission-Workspace-Starter-Package/Mission Learning/Pattern Register.md
+    source_path: knowledge-packs/researcher/templates/Research-Mission-Workspace-Starter-Package/Mission Learning/Pattern Register.md
+    document_id: TEMPLATE-Workspace-Pattern-Register
+    title: Workspace Pattern Register Starter Artefact
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Starter package artefact for mission learning pattern register.
+    checksum: 4ab82b432eefed0d0d96b1953f878c13b2f13a682d9290fd7b4f614c72d47317
+    transform: none
+  - pack_path: templates/Research-Mission-Workspace-Starter-Package/Mission Learning/Pattern Review.md
+    source_path: knowledge-packs/researcher/templates/Research-Mission-Workspace-Starter-Package/Mission Learning/Pattern Review.md
+    document_id: TEMPLATE-Workspace-Pattern-Review
+    title: Workspace Pattern Review Starter Artefact
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Starter package artefact for terminal mission learning review.
+    checksum: 9b8d91968da11d3582114ba76f13a1683f39098342e512e83d371b5e7561f577
+    transform: none
+  - pack_path: templates/Research-Mission-Workspace-Starter-Package/Mission Learning/Promotion Recommendations.md
+    source_path: knowledge-packs/researcher/templates/Research-Mission-Workspace-Starter-Package/Mission Learning/Promotion Recommendations.md
+    document_id: TEMPLATE-Workspace-Promotion-Recommendations
+    title: Workspace Promotion Recommendations Starter Artefact
+    version_or_last_updated: repository-current
+    authority: template
+    status: current
+    required: true
+    inclusion_reason: Starter package artefact for Chief Architect promotion recommendations.
+    checksum: 05c912006034a9d9fae70f8c9458e70a2bb2bb2b5dead2faa579164fe9e8408e
+    transform: none
+  - pack_path: missions/UKCG-001/Mission Learning/Pattern Register.json
+    source_path: knowledge-packs/researcher/missions/UKCG-001/Mission Learning/Pattern Register.json
+    document_id: UKCG-001-Pattern-Register
+    title: UKCG-001 Candidate Research Pattern Register
+    version_or_last_updated: repository-current
+    authority: reference-implementation-metadata
+    status: current
+    required: true
+    inclusion_reason: Seed register for UKCG-001 reference implementation patterns without promotion.
+    checksum: 699d54bd024efb1897b65a4af0f3e0089992e88bcaa09e4b4071c967f8bf9eea
+    transform: none
+  - pack_path: missions/UKCG-001/Mission Learning/Pattern Review.md
+    source_path: knowledge-packs/researcher/missions/UKCG-001/Mission Learning/Pattern Review.md
+    document_id: UKCG-001-Pattern-Review
+    title: UKCG-001 Pattern Review Seed
+    version_or_last_updated: repository-current
+    authority: reference-implementation-metadata
+    status: current
+    required: true
+    inclusion_reason: Seed pattern review for UKCG-001 reference implementation.
+    checksum: 9d4d94189b3820f60d74cead325e643116bff2214178c7372b60a1271b02e508
+    transform: none
+  - pack_path: missions/UKCG-001/Mission Learning/Promotion Recommendations.md
+    source_path: knowledge-packs/researcher/missions/UKCG-001/Mission Learning/Promotion Recommendations.md
+    document_id: UKCG-001-Promotion-Recommendations
+    title: UKCG-001 Promotion Recommendations
+    version_or_last_updated: repository-current
+    authority: reference-implementation-metadata
+    status: current
+    required: true
+    inclusion_reason: Promotion recommendations for UKCG-001 seeded patterns.
+    checksum: eecc741fab06dc5fa593201e5805c9e10896532c3832d9dbed27671b110956c6
     transform: none
