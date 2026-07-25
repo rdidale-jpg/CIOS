@@ -9,7 +9,8 @@ from .archive import inspect_zip_inventory, preserve_original_package, sha256_by
 from .ledger import BlueprintImportLedger, utc_now
 from .manifest import read_identity
 from .package_contracts import PackageContractDetector
-from .models import BlueprintPackageRecord, PackageReceiptError
+from .models import BlueprintPackageIdentity, BlueprintPackageRecord, PackageReceiptError
+from .package_contracts import PackageContract
 from .runs import ImportRunRepository
 
 
@@ -57,7 +58,24 @@ class BlueprintPackageRegistry:
         try:
             inventory = inspect_zip_inventory(content)
             inspection = PackageContractDetector().detect(content, inventory)
-            identity = read_identity(content)
+            if inspection.contract_type is PackageContract.BLUEPRINT:
+                identity = read_identity(content)
+            elif inspection.contract_type is PackageContract.UNKNOWN:
+                if any(error.startswith("Ambiguous package contract") for error in inspection.blocking_errors):
+                    raise PackageReceiptError("; ".join(inspection.blocking_errors))
+                # Preserve the established Blueprint diagnostic for packages with
+                # no recognised alternate contract; detection remains available
+                # through the read-only inspector.
+                identity = read_identity(content)
+            else:
+                metadata = dict(inspection.package_metadata)
+                package_id = inspection.package_identifier or "unidentified-package"
+                identity = BlueprintPackageIdentity(
+                    package_id=package_id,
+                    package_version=inspection.package_version or "unspecified",
+                    enterprise_id=str(metadata.get("enterprise_id") or metadata.get("industry_id") or metadata.get("mission_id") or package_id),
+                    profile_version=str(metadata.get("profile_version") or metadata.get("schema_version") or "industry-twin-v1"),
+                )
             archived_sha256, byte_count, archive_path = preserve_original_package(content, original_filename)
             if archived_sha256 != package_sha256:
                 raise PackageReceiptError("Archived checksum does not match received checksum")

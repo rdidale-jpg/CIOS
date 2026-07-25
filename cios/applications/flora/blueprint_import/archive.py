@@ -14,6 +14,9 @@ from .models import FileInventoryItem, PackageReceiptError
 
 _PACKAGE_EXTENSIONS = {".zip"}
 _SAFE_FILENAME_RE = re.compile(r"^[A-Za-z0-9._ -]+$")
+MAX_ARCHIVE_FILES = 10_000
+MAX_UNCOMPRESSED_BYTES = 250 * 1024 * 1024
+MAX_COMPRESSION_RATIO = 200
 
 
 def sha256_bytes(content: bytes) -> str:
@@ -49,10 +52,20 @@ def inspect_zip_inventory(content: bytes) -> tuple[FileInventoryItem, ...]:
     try:
         with zipfile.ZipFile(BytesIO(content)) as package:
             items: list[FileInventoryItem] = []
+            total = 0
             for info in package.infolist():
                 if info.is_dir():
                     continue
                 path = _validate_zip_member(info.filename)
+                if len(items) >= MAX_ARCHIVE_FILES:
+                    raise PackageReceiptError(f"Package exceeds the {MAX_ARCHIVE_FILES} file safety limit")
+                total += info.file_size
+                if total > MAX_UNCOMPRESSED_BYTES:
+                    raise PackageReceiptError("Package exceeds the uncompressed-size safety limit")
+                if info.file_size and info.compress_size == 0:
+                    raise PackageReceiptError("Package member has an unsafe compression ratio")
+                if info.compress_size and info.file_size / info.compress_size > MAX_COMPRESSION_RATIO:
+                    raise PackageReceiptError("Package member exceeds the compression-ratio safety limit")
                 file_bytes = package.read(info)
                 items.append(
                     FileInventoryItem(
