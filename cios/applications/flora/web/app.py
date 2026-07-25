@@ -30,7 +30,7 @@ from cios.applications.flora.access import can_view_financial_intelligence_run, 
 from cios.applications.flora.pilot_auth import audit as pilot_audit, clear_session_cookie, issue_session_cookie, sign_in_page, validate_secret
 from cios.applications.flora.flora_transparent import start_bt_digital_twin, flora_payload
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
-from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page, restage_confirm_page as blueprint_restage_confirm_page, restage_package as blueprint_restage_package, restage_progress_page as blueprint_restage_progress_page, restage_history_page as blueprint_restage_history_page
+from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page, restage_confirm_page as blueprint_restage_confirm_page, restage_package as blueprint_restage_package, restage_progress_page as blueprint_restage_progress_page, restage_history_page as blueprint_restage_history_page, promotion_confirmation_page as blueprint_promotion_confirmation_page, cancellation_confirmation_page as blueprint_cancellation_confirmation_page, cancel_import as blueprint_cancel_import
 from cios.applications.flora.enterprise_intelligence.views import executive_intelligence_brief_page
 from cios.applications.flora.enterprise_intelligence.pipeline import run_pipeline as run_banking_pipeline
 from cios.applications.flora.enterprise_intelligence.models import ReasoningRequestV1
@@ -206,6 +206,18 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/review"):
                 run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/review")
                 html, status = blueprint_review_page(run_id, self.headers, query=parse_qs(parsed.query))
+                self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/promote"):
+                run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/promote")
+                html, status = blueprint_promotion_confirmation_page(run_id, self.headers)
+                self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/cancel"):
+                run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/cancel")
+                html, status = blueprint_cancellation_confirmation_page(run_id, (parse_qs(parsed.query).get("stage") or ["inspect"])[0], self.headers)
+                self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/inspect"):
+                run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/inspect")
+                html, status = validation_result_page(run_id, self.headers)
                 self._html(html, status=status)
             elif parsed.path.startswith("/blueprint-import/"):
                 run_id = parsed.path.removeprefix("/blueprint-import/")
@@ -389,6 +401,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         elif self.path.startswith("/blueprint-import/") and self.path.endswith("/decline"):
             run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/decline")
             html, status = blueprint_decline_promotion(run_id, self.headers)
+            self._html(html, status=status)
+        elif self.path.startswith("/blueprint-import/") and self.path.endswith("/cancel"):
+            run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/cancel")
+            html, status = blueprint_cancel_import(run_id, form, self.headers)
             self._html(html, status=status)
         elif self.path.startswith("/digital-twins/") and self.path.endswith("/canvas/feedback"):
             html, status, _target = submit_enterprise_canvas_feedback(form, self.headers)

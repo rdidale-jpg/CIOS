@@ -21,6 +21,7 @@ REQUIRED_DIRS = (
     "blueprint_import/audit",
     "blueprint_import/packages",
     "blueprint_import/runs",
+    "blueprint_import/lifecycle",
     "blueprint_import/staging",
     "blueprint_import/reviews",
     "blueprint_import/mappings",

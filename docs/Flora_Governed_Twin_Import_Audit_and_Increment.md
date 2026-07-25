@@ -72,3 +72,32 @@ No schema migration occurs. Guidance adds one JSON document per run below existi
 * Maturity recalculation events and immutable assessment history need an accepted owner before implementation.
 * Market Participant evidence is insufficient for supplier-relative fit or win probability; those claims remain prohibited.
 * Future Central Government and Utilities packages must use the root manifest/ZIP contract, stable safe IDs, supported schema/profile and mapping version, declared/checksummed payloads, explicit Twin types and references, atomic evidence-backed observations, retained Unknowns/Contradictions, and no unresolved critical opportunity buyer/evidence dependencies.
+
+## 2026-07-25 workflow audit and increment
+
+The merged runtime audit found receipt/archive/checksum ownership in `registry.py`
+and `archive.py`; validation and staging in `validator.py` and `candidates.py`;
+review, mapping and dry-run planning in `review.py`, `mapping.py` and
+`planning.py`; and the sole canonical write boundary in `promotion.py`. The
+append-only ledger owns audit history, file-backed repositories own durable
+state, access helpers own IAM, and Enterprise Canvas remains the existing
+post-promotion presentation. Maturity and portfolio read projections exist in
+`maturity.py` and `projections.py`, but were not fully presented.
+
+Lifecycle terminology before this increment was `received` plus validation,
+review-plan and promotion-execution records. No cancellation, abandonment,
+expiry, deletion or resume owner existed. Archive preservation existed but no
+explicit cancelled-archive retention/deletion schedule was found. The safe
+default therefore remains preservation; cancellation does not delete or
+quarantine archives. Cancellation is terminal and restart requires fresh upload.
+
+Product stages map to those durable records: UPLOAD is pre-receipt; INSPECT is
+received/validated/staged; REVIEW is persisted review and dry-run plan; PROMOTE
+is approval confirmation/execution; EXPLORE is successful execution plus the
+existing Canvas. The lifecycle service fills only the demonstrated terminal
+state gap and records actor, time, stage, reason, zero canonical writes and
+retained archive disposition in the existing ledger. IAM and canonical write
+boundaries remain unchanged. Remaining gaps include a governed retention
+schedule, persisted mixed-package scope selection, and dedicated canonical
+constructors for every requested Twin type; reconcile these before claiming the
+entire broad product specification is complete.
