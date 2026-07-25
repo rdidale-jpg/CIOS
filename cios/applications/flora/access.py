@@ -110,6 +110,7 @@ def can_view_financial_intelligence_run(headers: Any, run: dict[str, Any]) -> bo
 
 
 BLUEPRINT_UPLOAD_PERMISSION = "package.upload"
+BLUEPRINT_INSPECT_PERMISSION = "package.inspect"
 BLUEPRINT_REVIEW_PERMISSION = "package.review"
 BLUEPRINT_PROMOTE_PERMISSION = "candidate.promote"
 BLUEPRINT_IMPORT_ADMIN_ROLE = "blueprint_import_admin"
@@ -118,6 +119,7 @@ CANONICAL_OWNER_ROLES = frozenset({CIOS_OWNER_ROLE, "owner", "workspace.owner", 
 
 BLUEPRINT_IMPORT_OWNER_PERMISSIONS = frozenset({
     BLUEPRINT_UPLOAD_PERMISSION,
+    BLUEPRINT_INSPECT_PERMISSION,
     BLUEPRINT_REVIEW_PERMISSION,
     BLUEPRINT_PROMOTE_PERMISSION,
     BLUEPRINT_IMPORT_ADMIN_ROLE,
@@ -170,7 +172,7 @@ def blueprint_upload_authorisation(headers: Any) -> BlueprintAuthorisationDecisi
     active_workspace = active_flora_workspace(headers) if user else ""
     raw_roles = raw_flora_roles(headers) if user and active_workspace else set()
     roles = flora_roles(headers) if user and active_workspace else set()
-    permissions = sorted(roles & (BLUEPRINT_IMPORT_OWNER_PERMISSIONS | {BLUEPRINT_UPLOAD_PERMISSION}))
+    permissions = sorted(roles & BLUEPRINT_IMPORT_OWNER_PERMISSIONS)
     membership_resolved = bool(user and active_workspace and ("*" in workspaces or _contains_id(set(workspaces), active_workspace)))
     owner_recognised = bool(membership_resolved and raw_roles & CANONICAL_OWNER_ROLES)
     allowed = membership_resolved and bool(roles & _BLUEPRINT_IMPORT_ROLES)
