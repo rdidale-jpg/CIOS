@@ -1,0 +1,38 @@
+name: Validate Governed Industry Twin Package
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/validate-governed-industry-twin-package.yml"
+      - "cios/applications/flora/blueprint_import/**"
+      - "tests/test_flora_package_contracts.py"
+      - "tests/test_flora_governed_import_workflow.py"
+  push:
+    branches: [main, work]
+    paths:
+      - ".github/workflows/validate-governed-industry-twin-package.yml"
+      - "cios/applications/flora/blueprint_import/**"
+      - "tests/test_flora_package_contracts.py"
+      - "tests/test_flora_governed_import_workflow.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate governed package contracts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install -r requirements.txt
+      - name: Run generic Blueprint and governed-package regressions
+        run: |
+          PYTHONPATH=. pytest -q \
+            tests/test_flora_package_contracts.py \
+            tests/test_flora_governed_import_workflow.py \
+            tests/test_flora_blueprint_import_validation.py \
+            tests/test_flora_blueprint_import_registry.py

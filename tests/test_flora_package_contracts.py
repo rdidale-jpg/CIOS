@@ -196,3 +196,50 @@ def test_empty_governed_delta_is_an_explicit_blocking_failure(tmp_path, monkeypa
     assert "no staging candidates could be extracted" in result.errors[0]
     assert result.execution_trace[-1]["status"] == "Failed"
     assert result.execution_trace[-1]["delta_location"] == "flora/industry-twin-delta-for-flora.json"
+
+
+def referenced_package(primary, collections=()):
+    return package(
+        ("00_manifest.json", {"package_id": "DIST-001", "version": "1.0"}),
+        ("flora/industry-twin-delta-for-flora.json", {"primary_objects": primary}),
+        *collections,
+    )
+
+
+def test_reference_primary_objects_resolve_from_modular_collections(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    content = referenced_package(
+        {"enterprise_twins": ["ENT-1"], "market_participant_twins": ["MP-1"],
+         "opportunity_twins": ["OPP-1"], "flow_twins": ["FLOW-1"]},
+        (("twins/enterprise-twins.json", [{"stable_id": "ENT-1", "object_type": "enterprise_twin", "name": "Enterprise"}]),
+         ("twins/market-participant-twins.json", [{"stable_id": "MP-1", "object_type": "market_participant_twin"}]),
+         ("twins/opportunity-twins.json", {"opportunity_twins": [{"stable_id": "OPP-1", "object_type": "opportunity_twin"}]}),
+         ("machine-inspectable/flow-twins.json", {"objects": [{"stable_id": "FLOW-1", "object_type": "flow_twin"}]})),
+    )
+    receipt = BlueprintPackageRegistry().receive(content, "DIST-001.zip", "auditor")
+    result = BlueprintPackageValidator().validate_and_stage(receipt.package_ref, "auditor")
+    candidates = BlueprintPackageValidator().staging_summary(receipt.import_run_id)["candidates"]
+    assert receipt.identity.package_id == "DIST-001"
+    assert result.candidate_records_staged == result.records_accepted_into_staging == 4
+    assert not result.errors
+    assert {c["payload"]["governed_object_category"] for c in candidates} == {
+        "enterprise_twins", "market_participant_twins", "opportunity_twins", "flow_twins"}
+    assert result.execution_trace[0]["resolved_object_counts"] == {
+        "enterprise_twins": 1, "market_participant_twins": 1, "opportunity_twins": 1, "flow_twins": 1}
+
+
+@pytest.mark.parametrize(("primary", "collections", "message"), [
+    ({"enterprise_twins": ["MISSING"]}, (("twins/enterprise-twins.json", []),), "unresolved enterprise_twins stable identifier"),
+    ({"enterprise_twins": ["ENT-1"]}, (("twins/enterprise-twins.json", [
+        {"stable_id": "ENT-1", "object_type": "enterprise_twin"},
+        {"stable_id": "ENT-1", "object_type": "enterprise_twin"}]),), "duplicate stable identifier"),
+    ({"enterprise_twins": ["ENT-1"]}, (("twins/enterprise-twins.json", [
+        {"stable_id": "ENT-1", "object_type": "flow_twin"}]),), "object type conflict"),
+    ({"enterprise_twins": ["ENT-1"]}, (), "missing governed object collection"),
+])
+def test_reference_resolution_failures_block_staging(tmp_path, monkeypatch, primary, collections, message):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    receipt = BlueprintPackageRegistry().receive(referenced_package(primary, collections), "DIST-001.zip", "auditor")
+    result = BlueprintPackageValidator().validate_and_stage(receipt.package_ref, "auditor")
+    assert result.candidate_records_staged == 0
+    assert message in result.errors[0]

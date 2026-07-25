@@ -23,10 +23,14 @@ def test_dist_shaped_package_uses_normal_upload_and_enables_review(tmp_path, mon
     headers = HEADERS | {"X-Flora-Enterprises": "DIST-001"}
     content = governed_package(
         ("00_manifest.json", {"package_id": "DIST-001", "version": "1.0", "industry": "Distribution"}),
-        ("flora/industry-twin-delta-for-flora.json", {"changes": {"upserts": [
-            {"object_id": "DIST-TWIN-001", "object_type": "industry_twin", "data": {"name": "Distribution Industry Twin"}},
-            {"object_id": "DIST-OBS-001", "object_type": "observation", "data": {"statement": "Distribution demand is changing."}},
-        ]}}),
+        ("flora/industry-twin-delta-for-flora.json", {"primary_objects": {
+            "enterprise_twins": ["DIST-ENT-001"], "market_participant_twins": ["DIST-MP-001"],
+            "opportunity_twins": ["DIST-OPP-001"], "flow_twins": ["DIST-FLOW-001"],
+        }}),
+        ("twins/enterprise-twins.json", [{"stable_id": "DIST-ENT-001", "object_type": "enterprise_twin"}]),
+        ("twins/market-participant-twins.json", [{"stable_id": "DIST-MP-001", "object_type": "market_participant_twin"}]),
+        ("twins/opportunity-twins.json", [{"stable_id": "DIST-OPP-001", "object_type": "opportunity_twin"}]),
+        ("machine-inspectable/flow-twins.json", [{"stable_id": "DIST-FLOW-001", "object_type": "flow_twin"}]),
     )
 
     html, status, target = upload_and_validate_blueprint(
@@ -42,6 +46,10 @@ def test_dist_shaped_package_uses_normal_upload_and_enables_review(tmp_path, mon
     assert "DIST-001.zip" in html
     assert "Review proposed changes" in html
     assert "No staging candidates" not in html
+    assert "Enterprise Twin: 1" in html and "Market Participant Twin: 1" in html
+    assert "Opportunity Twin: 1" in html and "Flow Twin: 1" in html
+    assert "Governed Industry Twin package diagnostics" in html
+    assert "candidates passed to staging" in html
 
 def test_cancellation_is_durable_audited_and_blocks_review(tmp_path, monkeypatch):
     monkeypatch.setenv("FLORA_DATA_DIR",str(tmp_path)); run=uploaded()

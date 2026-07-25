@@ -143,8 +143,18 @@ class BlueprintPackageValidator:
                         try:
                             delta = json.loads(zf.read(physical).decode("utf-8"))
                             if not isinstance(delta, dict): raise ValueError("Delta must be a JSON object")
-                            extracted = self.delta_adapter.candidates(package, delta, physical)
+                            def read_collection(logical_path: str) -> bytes:
+                                member = next((n for n in names if n == logical_path or n.endswith("/" + logical_path)), "")
+                                if not member:
+                                    raise KeyError(logical_path)
+                                return zf.read(member)
+                            extracted = self.delta_adapter.candidates(package, delta, physical, read_collection)
                             candidates.extend(extracted)
+                            categories = {key: 0 for key in self.delta_adapter.COLLECTIONS}
+                            for candidate in extracted:
+                                category = candidate.payload.get("governed_object_category")
+                                if category in categories:
+                                    categories[category] += 1
                             trace.append({
                                 "timestamp": utc_now(), "step_id": 1, "component": "industry_delta_adapter",
                                 "action": "Extract governed Industry Twin Delta", "safe_input_summary": physical,
@@ -153,6 +163,10 @@ class BlueprintPackageValidator:
                                 "manifest_location": package.package_inspection.get("manifest_location"),
                                 "delta_location": package.package_inspection.get("delta_location"),
                                 "package_checksum": package.package_sha256,
+                                "resolved_object_counts": categories,
+                                "unresolved_reference_count": 0,
+                                "excluded_lineage_only_artefact_count": sum(1 for a in package.package_inspection.get("promotable_artefacts", []) if not a.get("promotable")),
+                                "diagnostic_steps": ["Delta found", "primary_objects parsed", "object collections located", "references resolved", "candidates created", "candidates passed to staging"],
                             })
                         except (KeyError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
                             errors.append(f"Industry Twin Delta is invalid: {exc}")
