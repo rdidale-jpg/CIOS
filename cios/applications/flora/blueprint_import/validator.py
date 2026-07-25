@@ -134,37 +134,62 @@ class BlueprintPackageValidator:
                         errors.append("Duplicate package files: " + ", ".join(sorted(duplicates)))
                 contract = (package.package_inspection or {}).get("contract_type", "Blueprint Package")
                 if contract != "Blueprint Package":
-                    delta_items = [a for a in package.package_inspection.get("promotable_artefacts", []) if a.get("artefact_type") == "Industry Twin Delta"]
+                    inspection = package.package_inspection or {}
+                    delta_items = [a for a in inspection.get("promotable_artefacts", []) if a.get("artefact_type") == "Industry Twin Delta"]
+                    root = str(inspection.get("selected_package_root") or "")
+                    def event(step_id, action, result, status="Passed", reason="", **extra):
+                        trace.append({"timestamp": utc_now(), "step_id": step_id, "component": "industry_delta_adapter",
+                            "action": action, "safe_input_summary": extra.pop("input", ""), "safe_output_summary": result,
+                            "status": status, "failure_reason": reason, "correlation_id": package.import_run_id,
+                            "manifest_location": inspection.get("manifest_location"), "delta_location": inspection.get("delta_location"),
+                            "package_checksum": package.package_sha256, **extra})
+                    event(1, "Package contract detected", contract)
+                    event(2, "Package root selected", root or "archive root")
+                    event(3, "Manifest parsed", str(inspection.get("manifest_location") or "Not supplied"))
+                    if inspection.get("blocking_errors"):
+                        errors.extend(str(value) for value in inspection["blocking_errors"])
+                        event(4, "Delta parsed", "Validation blocked by package inspection", "Failed", "; ".join(errors))
+                        return candidates, warnings, errors, files, unsupported, unresolved, trace
                     if not delta_items:
                         errors.append("Package has no governed Industry Twin Delta and cannot be staged")
+                        event(4, "Delta parsed", "No Delta", "Failed", errors[-1])
                     else:
-                        delta_path = delta_items[0]["path"]
-                        physical = next((n for n in names if n == delta_path or n.endswith("/" + delta_path)), "")
+                        delta_path = str(delta_items[0]["path"])
+                        physical = next((n for n in names if n == root + delta_path or n == delta_path or n.endswith("/" + delta_path)), "")
+                        def read_collection(category, declared_paths):
+                            normalized = category.casefold().replace("_", "").removesuffix("s")
+                            chosen = []
+                            for name in names:
+                                logical_name = name[len(root):] if root and name.startswith(root) else name
+                                stem = PurePosixPath(logical_name).stem.casefold().replace("-", "").replace("_", "")
+                                explicitly_declared = logical_name in declared_paths or name in declared_paths or name in {root + p for p in declared_paths}
+                                convention_match = normalized in stem and logical_name != delta_path
+                                if not (explicitly_declared or convention_match) or PurePosixPath(name).suffix.casefold() not in {".json", ".csv"}:
+                                    continue
+                                raw = zf.read(name)
+                                if name.casefold().endswith(".csv"):
+                                    import csv, io
+                                    document = list(csv.DictReader(io.StringIO(raw.decode("utf-8-sig"))))
+                                else:
+                                    document = json.loads(raw.decode("utf-8"))
+                                chosen.append((logical_name, document))
+                            return tuple(chosen)
                         try:
                             delta = json.loads(zf.read(physical).decode("utf-8"))
                             if not isinstance(delta, dict): raise ValueError("Delta must be a JSON object")
-                            extracted = self.delta_adapter.candidates(package, delta, physical)
+                            event(4, "Delta parsed", delta_path)
+                            event(5, "Metadata extracted", f"{len(inspection.get('metadata_sources', {}))} governed fields")
+                            extracted = self.delta_adapter.candidates(package, delta, delta_path, read_collection=read_collection)
+                            diag = self.delta_adapter.diagnostics
+                            event(6, "Object collections located", f"{len(diag.get('collection_files_selected', []))} collection files", collection_files_selected=diag.get("collection_files_selected", []), primary_object_categories=diag.get("primary_object_categories", []), primary_object_shapes=diag.get("primary_object_shapes", {}), collection_root_shapes=diag.get("collection_root_shapes", {}))
+                            event(7, "References indexed", f"{sum(diag.get('objects_indexed', {}).values())} objects indexed", objects_indexed=diag.get("objects_indexed", {}), identifier_fields_used=diag.get("identifier_fields_used", {}), references_requested=diag.get("references_requested", {}))
+                            event(8, "References resolved", f"{sum(diag.get('references_resolved', {}).values())} references resolved", references_resolved=diag.get("references_resolved", {}), unresolved_identifiers=diag.get("unresolved_identifiers", {}), resolved_counts_by_category=diag.get("resolved_counts_by_category", {}))
                             candidates.extend(extracted)
-                            trace.append({
-                                "timestamp": utc_now(), "step_id": 1, "component": "industry_delta_adapter",
-                                "action": "Extract governed Industry Twin Delta", "safe_input_summary": physical,
-                                "safe_output_summary": f"{len(extracted)} candidates staged", "status": "Passed",
-                                "failure_reason": "", "correlation_id": package.import_run_id,
-                                "manifest_location": package.package_inspection.get("manifest_location"),
-                                "delta_location": package.package_inspection.get("delta_location"),
-                                "package_checksum": package.package_sha256,
-                            })
+                            event(9, "Staging candidates created", f"{len(extracted)} candidates")
+                            event(10, "Staging result", "Candidates entered existing staging engine")
                         except (KeyError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
                             errors.append(f"Industry Twin Delta is invalid: {exc}")
-                            trace.append({
-                                "timestamp": utc_now(), "step_id": 1, "component": "industry_delta_adapter",
-                                "action": "Extract governed Industry Twin Delta", "safe_input_summary": delta_items[0].get("path", ""),
-                                "safe_output_summary": "No staging candidates", "status": "Failed",
-                                "failure_reason": str(exc), "correlation_id": package.import_run_id,
-                                "manifest_location": package.package_inspection.get("manifest_location"),
-                                "delta_location": package.package_inspection.get("delta_location"),
-                                "package_checksum": package.package_sha256,
-                            })
+                            event(10, "Staging result", "No staging candidates", "Failed", str(exc), input=delta_path)
                     warnings.append("Research and workspace execution artefacts are retained as package lineage and excluded from staging")
                     return candidates, warnings, errors, files, unsupported, unresolved, trace
                 try:

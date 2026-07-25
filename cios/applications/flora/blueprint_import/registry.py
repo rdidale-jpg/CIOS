@@ -68,13 +68,13 @@ class BlueprintPackageRegistry:
                 # through the read-only inspector.
                 identity = read_identity(content)
             else:
-                metadata = dict(inspection.package_metadata)
+                metadata = inspection.to_dict()
                 package_id = inspection.package_identifier or "unidentified-package"
                 identity = BlueprintPackageIdentity(
                     package_id=package_id,
                     package_version=inspection.package_version or "unspecified",
                     enterprise_id=str(metadata.get("enterprise_id") or metadata.get("industry_id") or metadata.get("mission_id") or package_id),
-                    profile_version=str(metadata.get("profile_version") or metadata.get("schema_version") or "industry-twin-v1"),
+                    profile_version=str(metadata.get("package_profile") or metadata.get("profile_version") or metadata.get("schema_version") or "industry-twin-v1"),
                 )
             archived_sha256, byte_count, archive_path = preserve_original_package(content, original_filename)
             if archived_sha256 != package_sha256:
