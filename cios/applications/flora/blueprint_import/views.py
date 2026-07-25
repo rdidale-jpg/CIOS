@@ -29,6 +29,8 @@ from .cios_twin_adapter import MAPPING_VERSION
 from .restage import BlueprintRestageService, can_restage_blueprint_package, RESTAGE_STAGES
 from .models import PackageReceiptError
 from .guidance import ImportGuidance, ImportGuidanceRepository, TWIN_TYPES, detect_package_type, expectation_mismatch
+from .lifecycle import ImportLifecycleService
+from .maturity import assess_maturity
 
 MAX_UPLOAD_BYTES = 50 * 1024 * 1024
 ZIP_MIME_TYPES = {"application/zip", "application/x-zip-compressed", "application/octet-stream", ""}
@@ -40,10 +42,10 @@ def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, i
     if decision.decision != "allowed":
         ref, audit_warning = _audit_authorisation("package_upload_authorisation_denied", headers, "Blueprint upload capability resolved", decision)
         return _safe_failure("Blueprint import access denied", "Blueprint upload capability resolved", False, False, _permission_guidance(headers, decision), decision, ref, audit_warning), 403
-    body = f"""<section class='hero'><h1>Import Blueprint</h1><p>Select a Commercial Digital Twin Blueprint ZIP from your computer.</p>{_notice(message)}</section>
-    <section class='card'><h2>Upload package</h2><p><strong>Supported format:</strong> .zip Blueprint package. <strong>Maximum size:</strong> {MAX_UPLOAD_BYTES // (1024*1024)} MB.</p><p class='muted'>Blueprint packages may contain confidential enterprise intelligence. Upload only packages you are authorised to use.</p><p><strong>Uploading does not change the governed Twin. Flora independently detects content before review.</strong></p><form method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><label for='expected_type'>What kind of Twin do you expect?</label><select id='expected_type' name='expected_type' required>{''.join(f"<option value='{t}'>{escape(t.replace('_',' ').title())}</option>" for t in TWIN_TYPES)}</select><p class='muted'>The expectation never overrides manifest identity, detected types, schema validation or evidence.</p><label for='blueprint_zip'>Blueprint ZIP file</label><input id='blueprint_zip' name='blueprint_zip' type='file' accept='.zip,application/zip' required><p><button type='submit'>Upload and validate</button></p></form></section>
+    body = _workflow_progress("upload") + f"""<section class='hero'><h1>Import Commercial Digital Twin</h1><p>Upload a governed Twin Blueprint package for inspection, validation and staged promotion.</p>{_notice(message)}</section>
+    <section class='card'><h2>Upload package</h2><p><strong>Supported format:</strong> .zip Blueprint package. <strong>Maximum size:</strong> {MAX_UPLOAD_BYTES // (1024*1024)} MB.</p><p class='muted'>Blueprint packages may contain confidential enterprise intelligence. Upload only packages you are authorised to use.</p><p><strong>Uploading does not change the governed Twin. Flora independently detects content before review.</strong></p><form method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><label for='expected_type'>What kind of Twin do you expect?</label><select id='expected_type' name='expected_type' required>{''.join(f"<option value='{t}'>{escape(t.replace('_',' ').title())}</option>" for t in TWIN_TYPES)}</select><p class='muted'>The expectation never overrides manifest identity, detected types, schema validation or evidence.</p><label for='blueprint_zip'>Blueprint ZIP file</label><input id='blueprint_zip' name='blueprint_zip' type='file' accept='.zip,application/zip' required><p><button type='submit'>Upload and validate</button></p><p><a href='/digital-twins'>Cancel</a></p></form></section>
     <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous Blueprint imports</a></p></section>"""
-    return _page("Import Blueprint", body), 200
+    return _page("Import Commercial Digital Twin", body), 200
 
 
 def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str], headers: Any) -> tuple[str, int, str]:
@@ -83,6 +85,7 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     if not can_inspect_blueprint_package(headers, ctx["package"]):
         return _safe_failure("Blueprint import record is unavailable or access is denied.", "Package inspection authorised", False, True, "Open an import you are authorised to review."), 403
     package = ctx["package"]; summary = ctx["summary"] or {}; candidates = ctx["candidates"]
+    lifecycle = ImportLifecycleService().get(import_run_id)
     record = EnterpriseCanvasAccessRepository().get_by_import_run(import_run_id)
     enterprise = record.enterprise_id if record else package.identity.enterprise_id
     nav = f"<nav class='card' aria-label='Breadcrumb'><a href='/digital-twins'>Digital Twins</a> &gt; <a href='/digital-twins/{escape(enterprise)}/canvas'>{escape(package.identity.enterprise_id)}</a> &gt; Import record</nav><section class='card'><p><a href='/digital-twins'>Back to Digital Twins</a> · <a href='/digital-twins/{escape(enterprise)}/canvas'>Back to {escape(package.identity.enterprise_id)} Twin</a></p></section>"
@@ -94,8 +97,10 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     review_link = "<section class='card'><p><a href='/blueprint-import/{0}/review'>Review proposed changes</a></p></section>".format(escape(import_run_id)) if not summary.get('errors') and not mismatch else "<section class='card'><p><strong>Validation failed.</strong> Proposed-change review and approval are disabled until validation and expected-type mismatch errors are resolved.</p></section>"
     deployment = _blueprint_deployment_metadata(summary)
     deployment_rows = "".join(f"<tr><th>{escape(key.replace('_', ' ').title())}</th><td><code>{escape(value)}</code></td></tr>" for key, value in deployment.items())
-    body = nav + _package_header(package) + inspection + f"""<section class='card'><h2>Import record</h2><span hidden>Validation result</span><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr><tr><th>Workbook discovered</th><td>{'Yes' if any(str(f).endswith(('.xlsx','.xlsm','.xls')) for f in summary.get('files_inspected', [])) else 'Not declared'}</td></tr><tr><th>Worksheets discovered</th><td>{escape(', '.join(worksheets) or 'None reported')}</td></tr><tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section><details class='card'><summary><strong>Safe deployment diagnostics</strong></summary><table>{deployment_rows}</table></details>""" + _execution_trace_section(package, summary, bool(summary.get("errors"))) + _counts_section(counts) + _available_actions_section(package, summary, counts, headers) + review_link
-    return _page("Blueprint import record", body), 200
+    validation_groups = f"<section class='card'><h2>Validation outcomes</h2><h3>Passed</h3><p>✓ Archive safety, checksum generation and package receipt passed.</p>{_list('Warnings', summary.get('warnings', []))}{_list('Blocking errors', summary.get('errors', []))}</section>"
+    terminal = _cancelled_panel(lifecycle) if lifecycle.state == "cancelled" else _cancel_action(import_run_id, "inspect")
+    body = _workflow_progress("inspect", import_run_id, lifecycle.state) + nav + _package_header(package) + inspection + validation_groups + f"""<section class='card'><h2>Import record</h2><span hidden>Validation result</span><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr><tr><th>Workbook discovered</th><td>{'Yes' if any(str(f).endswith(('.xlsx','.xlsm','.xls')) for f in summary.get('files_inspected', [])) else 'Not declared'}</td></tr><tr><th>Worksheets discovered</th><td>{escape(', '.join(worksheets) or 'None reported')}</td></tr><tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section><details class='card'><summary><strong>Safe deployment diagnostics</strong></summary><table>{deployment_rows}</table></details>""" + _execution_trace_section(package, summary, bool(summary.get("errors"))) + _counts_section(counts) + _available_actions_section(package, summary, counts, headers) + review_link
+    return _page("Inspect Twin package", body + terminal), 200
 
 
 
@@ -162,6 +167,9 @@ def review_page(import_run_id: str, headers: Any, message: str = "", query: dict
         ctx = _context(import_run_id)
         if not ctx or not (can_access_enterprise(headers, ctx["package"].identity.enterprise_id, getattr(ctx["package"], "workspace_id", "")) and can_review_blueprint_candidate(headers, ctx["package"].identity.enterprise_id)):
             return _safe_failure("You are not authorised to review this Blueprint import.", "review", False, True, "Ask for Blueprint review permission."), 403
+        lifecycle = ImportLifecycleService().get(import_run_id)
+        if lifecycle.state == "cancelled":
+            return _page("Cancelled Twin import", _workflow_progress("review", import_run_id, "cancelled") + _cancelled_panel(lifecycle)), 409
         summary = ctx.get("summary") or {}
         guidance=ImportGuidanceRepository().get(import_run_id); detected=detect_package_type(ctx.get("candidates", []))
         if guidance and expectation_mismatch(guidance.expected_type, detected):
@@ -192,6 +200,8 @@ def review_page(import_run_id: str, headers: Any, message: str = "", query: dict
 
 def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers: Any) -> tuple[str, int]:
     ctx = _context(import_run_id)
+    try: ImportLifecycleService().assert_active(import_run_id)
+    except ValueError as exc: return _safe_failure(str(exc), "promotion", False, False, "Upload a fresh package to restart."), 409
     if not ctx or not (can_access_enterprise(headers, ctx["package"].identity.enterprise_id, getattr(ctx["package"], "workspace_id", "")) and can_approve_blueprint_promotion(headers, ctx["package"].identity.enterprise_id) and can_execute_blueprint_promotion(headers, ctx["package"].identity.enterprise_id)):
         return _safe_failure("You are not authorised to approve and execute Blueprint promotion.", "approval", False, True, "Ask for Blueprint promotion permission."), 403
     if (ctx.get("summary") or {}).get("errors"):
@@ -208,6 +218,7 @@ def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers:
         svc = CanonicalPromotionService(); plan_id = (form.get("plan_id") or [""])[0]
         approval = svc.approve_plan(import_run_id, plan_id, authenticated_flora_user(headers), (form.get("rationale") or [""])[0], headers)
         result = svc.execute_approved_plan(import_run_id, approval.approval_id, authenticated_flora_user(headers), headers)
+        ImportLifecycleService().mark_promoted(import_run_id, authenticated_flora_user(headers), len(result.records_created)+len(result.records_updated))
         repair_blueprint_canvas_access(import_run_id, headers)
         return completion_page(import_run_id, result.to_dict(), headers), 200
     except BlueprintPromotionError as exc:
@@ -218,6 +229,34 @@ def decline_promotion(import_run_id: str, headers: Any) -> tuple[str, int]:
     return review_page(import_run_id, headers, "Promotion declined. No canonical changes occurred; the preserved package remains available for later review.")
 
 
+def promotion_confirmation_page(import_run_id: str, headers: Any) -> tuple[str, int]:
+    ctx=_context(import_run_id)
+    if not ctx or not can_access_enterprise(headers,ctx["package"].identity.enterprise_id,getattr(ctx["package"],"workspace_id","")): return _safe_failure("Import unavailable.","promotion",False,True,"Return to import history."),403
+    state=ImportLifecycleService().get(import_run_id)
+    if state.state=="cancelled": return _page("Cancelled Twin import",_cancelled_panel(state)),409
+    job=BlueprintReviewPlanCoordinator().latest_job(import_run_id) or {}; proposed=job.get("proposed") or {}
+    guidance=ImportGuidanceRepository().get(import_run_id); detected=detect_package_type(ctx["candidates"])
+    signals={"unknown_count":sum(c.get("candidate_object_class")=="unknown" for c in ctx["candidates"]),"contradiction_count":sum(c.get("candidate_object_class")=="contradiction" for c in ctx["candidates"])}
+    maturity=assess_maturity(detected if detected in {"industry","enterprise","market_participant","opportunity","control_body"} else "enterprise",signals,package_completeness=100 if not (ctx["summary"] or {}).get("errors") else 0)
+    body=_workflow_progress("promote",import_run_id)+_package_header(ctx["package"])+f"""<section class='card'><h2>Promotion summary</h2><table><tr><th>Import identifier</th><td><code>{escape(import_run_id)}</code></td></tr><tr><th>Checksum</th><td><code>{escape(ctx['package'].package_sha256)}</code></td></tr><tr><th>Expected type</th><td>{escape(guidance.expected_type if guidance else 'Unavailable')}</td></tr><tr><th>Detected type</th><td>{escape(detected)}</td></tr><tr><th>Package completeness</th><td>{maturity['package_completeness']}%</td></tr><tr><th>Candidate Twin maturity</th><td>{maturity['overall_maturity']}%</td></tr><tr><th>Decision completeness</th><td>{maturity['decision_completeness']['score']}%</td></tr><tr><th>Creates</th><td>{int(proposed.get('Creates',0))}</td></tr><tr><th>Updates</th><td>{int(proposed.get('Updates',0))}</td></tr><tr><th>Conflicts</th><td>{int(proposed.get('Conflicts',0))}</td></tr></table><p>Promotion will create or update governed Twin state and preserve the original package, checksum, lineage, review decision and lifecycle audit. It does not resolve outstanding warnings.</p></section><section class='card'><h2>Confirm promotion</h2><form method='post' action='/blueprint-import/{escape(import_run_id)}/approve'><input type='hidden' name='plan_id' value='{escape(str(job.get('plan_id','')))}'><input type='hidden' name='confirm_plan' value='yes'><input type='hidden' name='confirm_mutations' value='yes'><label for='rationale'>Approval rationale</label><textarea id='rationale' name='rationale' required></textarea><p><button type='submit'>Promote Twin</button> <a href='/blueprint-import/{escape(import_run_id)}/review'>Return to Review</a></p></form></section>"""+_cancel_action(import_run_id,"promote")
+    return _page("Promote Twin",body),200
+
+
+def cancellation_confirmation_page(import_run_id: str, stage: str, headers: Any) -> tuple[str,int]:
+    ctx=_context(import_run_id)
+    if not ctx or not can_access_enterprise(headers,ctx["package"].identity.enterprise_id,getattr(ctx["package"],"workspace_id","")): return _safe_failure("Import unavailable.","cancellation",False,False,"Return to history."),403
+    body=_workflow_progress(stage,import_run_id)+f"""<section class='hero'><h1>Cancel import?</h1></section><section class='card' role='alertdialog' aria-labelledby='cancel-title' aria-describedby='cancel-help'><h2 id='cancel-title'>Confirm cancellation</h2><p id='cancel-help'>The import will not be promoted. No governed Twin state will be changed. Staged candidates will no longer be eligible for promotion. The audit record is retained and package retention follows the existing archive policy.</p><form method='post' action='/blueprint-import/{escape(import_run_id)}/cancel'><input type='hidden' name='stage' value='{escape(stage)}'><label for='reason'>Cancellation reason (optional)</label><textarea id='reason' name='reason'></textarea><p><button type='submit'>Cancel import</button> <a href='/blueprint-import/{escape(import_run_id)}/{escape(stage)}'>Continue reviewing</a></p></form></section>"""
+    return _page("Cancel Twin import",body),200
+
+
+def cancel_import(import_run_id: str, form: dict[str,list[str]], headers: Any) -> tuple[str,int]:
+    ctx=_context(import_run_id)
+    if not ctx or not can_access_enterprise(headers,ctx["package"].identity.enterprise_id,getattr(ctx["package"],"workspace_id","")): return _safe_failure("Import unavailable.","cancellation",False,False,"Return to history."),403
+    try: row=ImportLifecycleService().cancel(import_run_id,authenticated_flora_user(headers),(form.get("stage") or ["inspect"])[0],(form.get("reason") or [""])[0])
+    except ValueError as exc: return _safe_failure(str(exc),"cancellation",False,False,"Open the promoted Twin."),409
+    return _page("Import cancelled",_workflow_progress(row.stage,import_run_id,"cancelled")+_cancelled_panel(row)),200
+
+
 def completion_page(import_run_id: str, result: dict[str, Any], headers: Any) -> str:
     record = repair_blueprint_canvas_access(import_run_id, headers)
     ctx = _context(import_run_id); package = ctx["package"] if ctx else None
@@ -225,7 +264,7 @@ def completion_page(import_run_id: str, result: dict[str, Any], headers: Any) ->
         record = EnterpriseCanvasAccessRepository().get_by_import_run(import_run_id)
     enterprise = record.enterprise_id if record else (package.identity.enterprise_id if package else "")
     canvas_href = f"/digital-twins/{escape(enterprise)}/canvas" if enterprise else f"/blueprint-import/{escape(import_run_id)}"
-    body = ( _package_header(package) if package else "") + f"""<section class='card'><h2>Completion</h2><table><tr><th>Promotion status</th><td>{escape(result.get('final_execution_status','unknown'))}</td></tr><tr><th>Records created</th><td>{len(result.get('records_created', []))}</td></tr><tr><th>Records updated</th><td>{len(result.get('records_updated', []))}</td></tr><tr><th>Projections retained</th><td>{_projection_count(import_run_id)}</td></tr><tr><th>Exceptions</th><td>{len(result.get('records_blocked', [])) + len(result.get('records_failed', []))}</td></tr></table><p>The original ZIP was preserved unchanged in governed runtime storage.</p><p><a href='{canvas_href}'>Open Enterprise Canvas</a> · <a href='/blueprint-import/{escape(import_run_id)}'>Open import record</a></p></section>"""
+    body = _workflow_progress("explore", import_run_id, "promoted") + ( _package_header(package) if package else "") + f"""<section class='card'><h2>Explore promoted Twin</h2><table><tr><th>Promotion status</th><td>{escape(result.get('final_execution_status','unknown'))}</td></tr><tr><th>Records created</th><td>{len(result.get('records_created', []))}</td></tr><tr><th>Records updated</th><td>{len(result.get('records_updated', []))}</td></tr><tr><th>Projections retained</th><td>{_projection_count(import_run_id)}</td></tr><tr><th>Exceptions</th><td>{len(result.get('records_blocked', [])) + len(result.get('records_failed', []))}</td></tr></table><p>The original ZIP was preserved unchanged in governed runtime storage.</p><p><a href='{canvas_href}'>Open Enterprise Canvas</a> · <a href='/blueprint-import/{escape(import_run_id)}'>Open import record</a></p></section>"""
     return _page("Blueprint import complete", body)
 
 
@@ -244,6 +283,22 @@ def history_page(headers: Any) -> tuple[str, int]:
     return _page("Blueprint import history", f"<section class='hero'><h1>Blueprint import history</h1><p><a href='/digital-twins'>Back to Digital Twins</a></p></section><section class='card'>{table}</section>"), 200
 
 # helpers
+
+def _workflow_progress(current: str, run_id: str = "", lifecycle: str = "") -> str:
+    stages=("upload","inspect","review","promote","explore"); current_index=stages.index(current) if current in stages else 0
+    items=[]
+    for i,stage in enumerate(stages):
+        status="current" if i==current_index else ("complete" if i<current_index else "unavailable")
+        if lifecycle=="cancelled" and i>=current_index: status="cancelled"
+        label=stage.title(); items.append(f"<li aria-current='step'" if status=="current" else "<li")
+        items[-1]+=f"><span>{label}</span> <small>({status})</small></li>"
+    return "<nav class='card' aria-label='Import progress'><h2>Import workflow</h2><ol>"+"".join(items)+"</ol></nav>"
+
+def _cancel_action(run_id: str, stage: str) -> str:
+    return f"<section class='card'><h2>Stop this intake</h2><p><a href='/blueprint-import/{escape(run_id)}/cancel?stage={escape(stage)}'>Cancel import</a></p></section>"
+
+def _cancelled_panel(row) -> str:
+    return f"<section class='card warning'><h2>Import cancelled</h2><p>This terminal import cannot be promoted. No canonical writes occurred.</p><table><tr><th>Cancelled by</th><td>{escape(row.actor or 'Unavailable')}</td></tr><tr><th>Cancelled time</th><td>{escape(row.updated_at or 'Unavailable')}</td></tr><tr><th>Stage</th><td>{escape(row.stage)}</td></tr><tr><th>Reason</th><td>{escape(row.reason or 'Not supplied')}</td></tr><tr><th>Archive</th><td>Retained under the existing archive policy</td></tr></table><p><a href='/blueprint-import'>Start a fresh upload</a></p></section>"
 
 def _context(import_run_id):
     for p in BlueprintPackageRegistry().list():
@@ -271,7 +326,7 @@ def _stale_review_section(package, job) -> str:
 def _review_progress_page(ctx, job, correlation_id: str, message: str = "") -> str:
     counts = job.get("candidate_summary") or _review_candidate_counts(ctx.get("candidates", []))
     proposed = job.get("proposed") or {}
-    body = _package_header(ctx["package"]) + _notice(message)
+    body = _workflow_progress("review", ctx["package"].import_run_id) + _package_header(ctx["package"]) + _notice(message)
     body += _review_summary_section(ctx, job, counts, proposed)
     body += _review_trace_section(ctx, job, correlation_id)
     body += "<section class='card'><h2>Next action</h2><p>Review exceptions and quarantine reasons after preparation completes.</p><p><strong>Approval controls are disabled</strong> until the review plan is complete and fatal errors are absent.</p><p><a href=''>Refresh review status</a></p></section>"
@@ -282,7 +337,7 @@ def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str
     details = _load_review_details(coord, ctx["package"].import_run_id)
     counts = job.get("candidate_summary") or _review_candidate_counts(details.get("candidates", []))
     proposed = job.get("proposed") or {}
-    body = _package_header(ctx["package"]) + _notice(message)
+    body = _workflow_progress("review", ctx["package"].import_run_id) + _package_header(ctx["package"]) + _notice(message)
     body += _review_summary_section(ctx, job, counts, proposed)
     body += _review_trace_section(ctx, job, correlation_id)
     body += _quarantine_reasons_section(job)
@@ -293,7 +348,8 @@ def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str
     if rec and not rec.get("passes", True):
         body += f"""<section class='card warning'><h2>Approval</h2><p><strong>Approval blocked:</strong> accepted canonical candidates do not reconcile with creates, updates and unchanged.</p><p>Mismatch: {int(rec.get("mismatch", 0))}</p><button type='button' disabled>Approve and update governed Twin</button></section>"""
     else:
-        body += f"""<section class='card'><h2>Approval</h2><p>Promotion remains disabled until the owner has reviewed required exceptions and confirms the expected canonical mutation count.</p><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/approve'><input type='hidden' name='plan_id' value='{plan_id}'><label><input type='checkbox' name='confirm_plan' value='yes' required> I reviewed the plan</label><label><input type='checkbox' name='confirm_mutations' value='yes' required> I understand the expected mutation count is {expected}</label><label>Approval rationale</label><textarea name='rationale' required></textarea><p><button type='submit'>Approve and update governed Twin</button></p></form><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/decline'><p><button type='submit'>Decline promotion</button></p></form></section>"""
+        body += f"""<section class='card'><h2>Approval</h2><p><a href='/blueprint-import/{escape(ctx["package"].import_run_id)}/promote'>Confirm review and continue to promotion</a></p><p>Promotion remains disabled until the owner has reviewed required exceptions and confirms the expected canonical mutation count.</p><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/approve'><input type='hidden' name='plan_id' value='{plan_id}'><label><input type='checkbox' name='confirm_plan' value='yes' required> I reviewed the plan</label><label><input type='checkbox' name='confirm_mutations' value='yes' required> I understand the expected mutation count is {expected}</label><label>Approval rationale</label><textarea name='rationale' required></textarea><p><button type='submit'>Approve and update governed Twin</button></p></form><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/decline'><p><button type='submit'>Decline promotion</button></p></form></section>"""
+    body += _cancel_action(ctx["package"].import_run_id, "review")
     return _page("Review Blueprint proposed changes", body)
 
 
