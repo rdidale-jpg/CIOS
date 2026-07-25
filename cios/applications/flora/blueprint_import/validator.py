@@ -9,7 +9,7 @@ from io import BytesIO
 from pathlib import PurePosixPath
 from typing import Any
 
-from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise, flora_roles
+from cios.applications.flora.access import BLUEPRINT_INSPECT_PERMISSION, authenticated_flora_user, can_access_enterprise, flora_roles
 from cios.applications.flora.storage import data_path
 
 from .archive import _validate_zip_member, sha256_bytes
@@ -30,7 +30,9 @@ def can_inspect_blueprint_package(headers: Any, package: BlueprintPackageRecord)
         return False
     if not can_access_enterprise(headers, package.identity.enterprise_id, getattr(package, "workspace_id", "")):
         return False
-    return bool(flora_roles(headers) & {"package.review", "blueprint_import_admin"})
+    # Review remains a superset for existing roles, while package.inspect gives
+    # inspectors a non-canonical boundary that does not grant review/promotion.
+    return bool(flora_roles(headers) & {BLUEPRINT_INSPECT_PERMISSION, "package.review", "blueprint_import_admin"})
 
 class BlueprintPackageValidator:
     def __init__(self, registry: BlueprintPackageRegistry | None = None, staging: CandidateStagingRepository | None = None, ledger: BlueprintImportLedger | None = None):

@@ -40,8 +40,8 @@ LOGGER = logging.getLogger(__name__)
 def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, int]:
     decision = blueprint_upload_authorisation(headers)
     if decision.decision != "allowed":
-        ref, audit_warning = _audit_authorisation("package_upload_authorisation_denied", headers, "Blueprint upload capability resolved", decision)
-        return _safe_failure("Blueprint import access denied", "Blueprint upload capability resolved", False, False, _permission_guidance(headers, decision), decision, ref, audit_warning), 403
+        ref, audit_warning = _audit_authorisation("package_upload_authorisation_denied", headers, "Package receive permission checked", decision)
+        return _safe_failure("Blueprint import access denied", "Package receive permission checked", False, False, _permission_guidance(headers, decision), decision, ref, audit_warning), 403
     body = _workflow_progress("upload") + f"""<section class='hero'><h1>Import Commercial Digital Twin</h1><p>Upload a governed Twin Blueprint package for inspection, validation and staged promotion.</p>{_notice(message)}</section>
     <section class='card'><h2>Upload package</h2><p><strong>Supported format:</strong> .zip Blueprint package. <strong>Maximum size:</strong> {MAX_UPLOAD_BYTES // (1024*1024)} MB.</p><p class='muted'>Blueprint packages may contain confidential enterprise intelligence. Upload only packages you are authorised to use.</p><p><strong>Uploading does not change the governed Twin. Flora independently detects content before review.</strong></p><form method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><label for='expected_type'>What kind of Twin do you expect?</label><select id='expected_type' name='expected_type' required>{''.join(f"<option value='{t}'>{escape(t.replace('_',' ').title())}</option>" for t in TWIN_TYPES)}</select><p class='muted'>The expectation never overrides manifest identity, detected types, schema validation or evidence.</p><label for='blueprint_zip'>Blueprint ZIP file</label><input id='blueprint_zip' name='blueprint_zip' type='file' accept='.zip,application/zip' required><p><button type='submit'>Upload and validate</button></p><p><a href='/digital-twins'>Cancel</a></p></form></section>
     <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous Blueprint imports</a></p></section>"""
@@ -55,7 +55,7 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
     try:
         decision = blueprint_upload_authorisation(headers)
         if decision.decision != "allowed":
-            ref, audit_warning = _audit_authorisation("package_upload_authorisation_denied", headers, "Blueprint upload capability resolved", decision)
+            ref, audit_warning = _audit_authorisation("package_upload_authorisation_denied", headers, "Package receive permission checked", decision)
             raise PermissionError("You do not have permission to import Blueprints in this workspace.")
         content = files.get("blueprint_zip") or files.get("file") or b""
         if not filename.lower().endswith(".zip") or mime not in ZIP_MIME_TYPES:
@@ -70,9 +70,9 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
         assert before == _canonical_marker(), "Upload and validation must not mutate canonical memory"
         return validation_result_page(record.import_run_id, headers)[0], 200, f"/blueprint-import/{record.import_run_id}"
     except PermissionError as exc:
-        return _safe_failure(str(exc), "Blueprint upload capability resolved", False, False, _permission_guidance(headers, decision), decision, ref, audit_warning), 403, "/blueprint-import"
+        return _safe_failure(str(exc), "Package receive permission checked", False, False, _permission_guidance(headers, decision), decision, ref, audit_warning), 403, "/blueprint-import"
     except Exception as exc:
-        failed_stage = "Package inspection authorised" if isinstance(exc, BlueprintValidationError) else "Package received"
+        failed_stage = "Package inspected" if isinstance(exc, BlueprintValidationError) else "Package received"
         return _safe_failure(str(exc), failed_stage, False, False, "Choose a safe Blueprint ZIP and try again. No governed Twin changes occurred.", decision), 400, "/blueprint-import"
 
 
@@ -93,8 +93,9 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     counts = _candidate_counts(candidates)
     guidance=ImportGuidanceRepository().get(import_run_id); detected=detect_package_type(candidates)
     mismatch=expectation_mismatch(guidance.expected_type if guidance else "", detected)
-    inspection=f"""<section class='card'><h2>Guided package inspection</h2><table><tr><th>Expected Twin type</th><td>{escape((guidance.expected_type if guidance else 'Not supplied').replace('_',' ').title())}</td></tr><tr><th>Detected package type</th><td>{escape(detected.replace('_',' ').title())}</td></tr><tr><th>Manifest/profile version</th><td>{escape(package.identity.profile_version)}</td></tr><tr><th>Package identifier</th><td><code>{escape(package.identity.package_id)}</code></td></tr><tr><th>Package checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Asset counts by type</th><td>{escape(', '.join(f'{k}: {v}' for k,v in sorted(counts.items())) or 'None')}</td></tr><tr><th>Unresolved dependencies</th><td>{escape(', '.join(summary.get('unresolved_references', [])) or 'None')}</td></tr></table>{'<p class="warning"><strong>Type mismatch:</strong> continuation is blocked. Change the expectation; Flora has not relabelled the package.</p>' if mismatch else '<p>Expectation is compatible with detected content.</p>'}</section>"""
-    review_link = "<section class='card'><p><a href='/blueprint-import/{0}/review'>Review proposed changes</a></p></section>".format(escape(import_run_id)) if not summary.get('errors') and not mismatch else "<section class='card'><p><strong>Validation failed.</strong> Proposed-change review and approval are disabled until validation and expected-type mismatch errors are resolved.</p></section>"
+    inspection=f"""<section class='card'><h2>Guided package inspection</h2><p><strong>Inspection does not change the governed Twin.</strong></p><table><tr><th>Expected Twin type</th><td>{escape((guidance.expected_type if guidance else 'Not supplied').replace('_',' ').title())}</td></tr><tr><th>Detected package type</th><td>{escape(detected.replace('_',' ').title())}</td></tr><tr><th>Manifest/profile version</th><td>{escape(package.identity.profile_version)}</td></tr><tr><th>Package identifier</th><td><code>{escape(package.identity.package_id)}</code></td></tr><tr><th>Package checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Asset counts by type</th><td>{escape(', '.join(f'{k}: {v}' for k,v in sorted(counts.items())) or 'None')}</td></tr><tr><th>Unresolved dependencies</th><td>{escape(', '.join(summary.get('unresolved_references', [])) or 'None')}</td></tr></table>{'<p class="warning"><strong>Type mismatch:</strong> continuation is blocked. Change the expectation; Flora has not relabelled the package.</p>' if mismatch else '<p>Expectation is compatible with detected content.</p>'}</section>"""
+    may_review = can_review_blueprint_candidate(headers, package.identity.enterprise_id)
+    review_link = ("<section class='card'><p><a href='/blueprint-import/{0}/review'>Review proposed changes</a></p></section>".format(escape(import_run_id)) if may_review else "<section class='card'><p><strong>Promotion permission required.</strong> You can inspect this package, but you do not have permission to review or promote changes to the governed Twin.</p></section>") if not summary.get('errors') and not mismatch else "<section class='card'><p><strong>Validation failed.</strong> Proposed-change review and approval are disabled until validation and expected-type mismatch errors are resolved.</p></section>"
     deployment = _blueprint_deployment_metadata(summary)
     deployment_rows = "".join(f"<tr><th>{escape(key.replace('_', ' ').title())}</th><td><code>{escape(value)}</code></td></tr>" for key, value in deployment.items())
     validation_groups = f"<section class='card'><h2>Validation outcomes</h2><h3>Passed</h3><p>✓ Archive safety, checksum generation and package receipt passed.</p>{_list('Warnings', summary.get('warnings', []))}{_list('Blocking errors', summary.get('errors', []))}</section>"
@@ -188,10 +189,10 @@ def review_page(import_run_id: str, headers: Any, message: str = "", query: dict
             body = _package_header(ctx["package"]) + _stale_review_section(ctx["package"], job)
             return _page("Review Blueprint proposed changes", body), 200
         if job.get("status") == "Not ready":
-            return _review_ready_page(ctx, job, coord, query, message, correlation_id), 200
+            return _review_ready_page(ctx, job, coord, query, message, correlation_id, headers), 200
         if job.get("status") != "Ready":
             return _review_progress_page(ctx, job, correlation_id, message), 200
-        return _review_ready_page(ctx, job, coord, query, message, correlation_id), 200
+        return _review_ready_page(ctx, job, coord, query, message, correlation_id, headers), 200
     except Exception as exc:
         LOGGER.exception("Blueprint review route failed", extra={"correlation_id": correlation_id, "import_run_id": import_run_id})
         job = {"diagnostic_reference": correlation_id, "stage": "Blueprint review route", "records_processed": 0, "records_total": 0, "error_category": type(exc).__name__, "status": "Failed", "job_id": correlation_id, "plan_persisted": False}
@@ -232,6 +233,8 @@ def decline_promotion(import_run_id: str, headers: Any) -> tuple[str, int]:
 def promotion_confirmation_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     ctx=_context(import_run_id)
     if not ctx or not can_access_enterprise(headers,ctx["package"].identity.enterprise_id,getattr(ctx["package"],"workspace_id","")): return _safe_failure("Import unavailable.","promotion",False,True,"Return to import history."),403
+    if not (can_approve_blueprint_promotion(headers, ctx["package"].identity.enterprise_id) and can_execute_blueprint_promotion(headers, ctx["package"].identity.enterprise_id)):
+        return _safe_failure("You can inspect this package, but you do not have permission to promote changes to the governed Twin.", "Canonical import committed", False, True, "Return to the inspection report or ask for Blueprint promotion permission."), 403
     state=ImportLifecycleService().get(import_run_id)
     if state.state=="cancelled": return _page("Cancelled Twin import",_cancelled_panel(state)),409
     job=BlueprintReviewPlanCoordinator().latest_job(import_run_id) or {}; proposed=job.get("proposed") or {}
@@ -333,7 +336,7 @@ def _review_progress_page(ctx, job, correlation_id: str, message: str = "") -> s
     return _page("Review Blueprint proposed changes", body)
 
 
-def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str) -> str:
+def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str, headers: Any = None) -> str:
     details = _load_review_details(coord, ctx["package"].import_run_id)
     counts = job.get("candidate_summary") or _review_candidate_counts(details.get("candidates", []))
     proposed = job.get("proposed") or {}
@@ -345,8 +348,11 @@ def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str
     plan_id = escape(str(job.get("plan_id", "")))
     expected = int(proposed.get("Expected canonical mutations", int(proposed.get("Creates", 0)) + int(proposed.get("Updates", 0))))
     rec = job.get("reconciliation") or {}
+    can_promote = bool(headers) and can_approve_blueprint_promotion(headers, ctx["package"].identity.enterprise_id) and can_execute_blueprint_promotion(headers, ctx["package"].identity.enterprise_id)
     if rec and not rec.get("passes", True):
         body += f"""<section class='card warning'><h2>Approval</h2><p><strong>Approval blocked:</strong> accepted canonical candidates do not reconcile with creates, updates and unchanged.</p><p>Mismatch: {int(rec.get("mismatch", 0))}</p><button type='button' disabled>Approve and update governed Twin</button></section>"""
+    elif not can_promote:
+        body += "<section class='card'><h2>Promotion permission required</h2><p>You can review this package, but you do not have permission to promote changes to the governed Twin.</p><p><a href='/blueprint-import/{0}'>View inspection</a></p></section>".format(escape(ctx["package"].import_run_id))
     else:
         body += f"""<section class='card'><h2>Approval</h2><p><a href='/blueprint-import/{escape(ctx["package"].import_run_id)}/promote'>Confirm review and continue to promotion</a></p><p>Promotion remains disabled until the owner has reviewed required exceptions and confirms the expected canonical mutation count.</p><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/approve'><input type='hidden' name='plan_id' value='{plan_id}'><label><input type='checkbox' name='confirm_plan' value='yes' required> I reviewed the plan</label><label><input type='checkbox' name='confirm_mutations' value='yes' required> I understand the expected mutation count is {expected}</label><label>Approval rationale</label><textarea name='rationale' required></textarea><p><button type='submit'>Approve and update governed Twin</button></p></form><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/decline'><p><button type='submit'>Decline promotion</button></p></form></section>"""
     body += _cancel_action(ctx["package"].import_run_id, "review")
@@ -616,16 +622,12 @@ _DIAGNOSTIC_STAGES = (
     "Account recognised",
     "Workspace recognised",
     "Membership resolved",
-    "Owner status resolved",
-    "Blueprint upload capability resolved",
+    "Package receive permission checked",
     "Upload request accepted",
     "Package received",
-    "Package identity read",
-    "Package enterprise access resolved",
-    "Package inspection authorised",
-    "Package stored",
+    "Package inspected",
     "Package validated",
-    "Import preview generated",
+    "Review generated",
     "Canonical import committed",
 )
 
@@ -636,40 +638,23 @@ def _stage_statuses(failed_stage: str, decision=None) -> dict[str, str]:
         if not decision.user_id:
             statuses["Account recognised"] = "Failed"
             return statuses
-        statuses["Account recognised"] = "Passed"
+        statuses["Account recognised"] = "Completed"
         if not decision.active_workspace:
             statuses["Workspace recognised"] = "Failed"
             return statuses
-        statuses["Workspace recognised"] = "Passed"
+        statuses["Workspace recognised"] = "Completed"
         if decision.resolved_membership != "resolved":
             statuses["Membership resolved"] = "Failed"
             return statuses
-        statuses["Membership resolved"] = "Passed"
-        if not decision.resolved_role:
-            statuses["Owner status resolved"] = "Failed"
-            return statuses
-        statuses["Owner status resolved"] = "Passed"
-        statuses["Blueprint upload capability resolved"] = "Passed" if decision.decision == "allowed" else "Failed"
+        statuses["Membership resolved"] = "Completed"
+        statuses["Package receive permission checked"] = "Completed" if decision.decision == "allowed" else "Failed"
         if decision.decision != "allowed":
             return statuses
-        passed_after_upload = {
-            "Upload request accepted": ["Upload request accepted", "Package received", "Package identity read", "Package enterprise access resolved", "Package inspection authorised", "Package stored", "Package validated", "Import preview generated", "Canonical import committed"],
-            "Package received": ["Package received", "Package identity read", "Package enterprise access resolved", "Package inspection authorised", "Package stored", "Package validated", "Import preview generated", "Canonical import committed"],
-            "Package identity read": ["Package identity read", "Package enterprise access resolved", "Package inspection authorised", "Package stored", "Package validated", "Import preview generated", "Canonical import committed"],
-            "Package enterprise access resolved": ["Package enterprise access resolved", "Package inspection authorised", "Package stored", "Package validated", "Import preview generated", "Canonical import committed"],
-            "Package inspection authorised": ["Package inspection authorised", "Package stored", "Package validated", "Import preview generated", "Canonical import committed"],
-            "Package stored": ["Package stored", "Package validated", "Import preview generated", "Canonical import committed"],
-            "Package validated": ["Package validated", "Import preview generated", "Canonical import committed"],
-        }
-        for stage in _DIAGNOSTIC_STAGES:
-            if stage in {"Account recognised", "Workspace recognised", "Membership resolved", "Owner status resolved", "Blueprint upload capability resolved"}:
-                continue
-            if failed_stage in passed_after_upload and stage not in passed_after_upload[failed_stage]:
-                statuses[stage] = "Passed"
-        if failed_stage in statuses:
-            statuses[failed_stage] = "Failed"
-        return statuses
     if failed_stage in statuses:
+        failed_index = _DIAGNOSTIC_STAGES.index(failed_stage)
+        for stage in _DIAGNOSTIC_STAGES[:failed_index]:
+            if statuses[stage] == "Not started":
+                statuses[stage] = "Completed"
         statuses[failed_stage] = "Failed"
     return statuses
 
@@ -693,10 +678,14 @@ def _safe_failure(message, stage, changed, retry, next_step, decision=None, diag
     role = decision.resolved_role if decision and decision.resolved_role else ("No effective Blueprint role" if decision else unavailable)
     owner = "yes" if decision and decision.owner_recognised else "no"
     capability = decision.required_permission if decision else "package.upload"
-    rows = "".join(f"<tr><th>{escape(name)}</th><td>{escape(status)}</td></tr>" for name, status in _stage_statuses(stage, decision).items())
+    statuses = _stage_statuses(stage, decision)
+    canonical_failed_stage = next((name for name, status in statuses.items() if status == "Failed"), stage)
+    rows = "".join(f"<tr><th>{escape(name)}</th><td>{escape(status)}</td></tr>" for name, status in statuses.items())
     warning_panel = f"<section class='card warning'><h2>Diagnostics warning</h2><p>{escape(audit_warning)}</p><p>Diagnostic reference: <code>{escape(diagnostic_ref)}</code></p><p>No canonical changes occurred.</p></section>" if audit_warning else ""
     failure_summary = _failure_summary(message)
-    body=f"<section class='hero'><h1>Blueprint import needs attention</h1></section>{warning_panel}<section class='card'><h2>What happened</h2>{failure_summary}<ul><li>Stage failed: {escape(stage)}</li><li>Canonical changes occurred: {'yes' if changed else 'no'}</li><li>Package available for retry: {'yes' if retry else 'no'}</li><li>Diagnostic reference: <code>{escape(diagnostic_ref)}</code></li><li>Next step: {escape(next_step)}</li></ul><p><a href='/blueprint-import'>Return to Blueprint</a></p></section><section class='card'><h2>Authorisation context</h2><table><tr><th>Signed-in account</th><td>{escape(account)}</td></tr><tr><th>Active workspace</th><td>{escape(workspace)}</td></tr><tr><th>Effective role</th><td>{escape(role)}</td></tr><tr><th>Owner recognised</th><td>{owner}</td></tr><tr><th>Required Blueprint capability</th><td><code>{escape(capability)}</code></td></tr></table></section><section class='card'><h2>Live import stages</h2><table>{rows}</table></section>"
+    received = statuses.get("Package received") == "Completed"
+    inspected = statuses.get("Package inspected") == "Completed"
+    body=f"<section class='hero'><h1>Blueprint import needs attention</h1></section>{warning_panel}<section class='card'><h2>What happened</h2>{failure_summary}<ul><li>Stage failed: {escape(canonical_failed_stage)}</li><li>Package received: {'yes' if received else 'no'}</li><li>Package inspected: {'yes' if inspected else 'no'}</li><li>Canonical changes occurred: {'yes' if changed else 'no'}</li><li>Package available for retry: {'yes' if retry else 'no'}</li><li>Diagnostic reference: <code>{escape(diagnostic_ref)}</code></li><li>Next step: {escape(next_step)}</li></ul><p><a href='/blueprint-import'>Return to Blueprint</a></p></section><section class='card'><h2>Authorisation context</h2><table><tr><th>Signed-in account</th><td>{escape(account)}</td></tr><tr><th>Active workspace</th><td>{escape(workspace)}</td></tr><tr><th>Effective role</th><td>{escape(role)}</td></tr><tr><th>Owner recognised</th><td>{owner}</td></tr><tr><th>Required Blueprint capability</th><td><code>{escape(capability)}</code></td></tr></table></section><section class='card'><h2>Live import stages</h2><table>{rows}</table></section>"
     return _page("Blueprint import failure", body)
 def _canonical_marker():
     from cios.applications.flora.storage import data_path
@@ -715,7 +704,7 @@ def _permission_guidance(headers: Any, decision=None) -> str:
             return "Blueprint upload capability is missing from the owner role."
         return "Sign out and sign back in to refresh owner permissions. If it still fails, contact support with the diagnostic reference."
     if not authenticated_flora_user(headers):
-        return "Sign in for pilot access to import Blueprints in this workspace."
+        return "Sign in for pilot access. Sign in and select an authorised workspace before importing a package."
     return "You do not have permission to import Blueprints in this workspace."
 
 

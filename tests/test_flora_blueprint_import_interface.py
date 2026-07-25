@@ -5,6 +5,7 @@ from cios.applications.flora.blueprint_import.views import (
     decline_promotion,
     history_page,
     import_blueprint_entry_page,
+    promotion_confirmation_page,
     review_page,
     upload_and_validate_blueprint,
     validation_result_page,
@@ -118,7 +119,7 @@ def test_denied_upload_screen_shows_live_diagnostics_for_non_owner(monkeypatch,t
     assert "Active workspace" in html and "synthetic-enterprise" in html
     assert "Owner recognised</th><td>no" in html
     assert "Required Blueprint capability" in html and "package.upload" in html
-    assert "Blueprint upload capability resolved</th><td>Failed" in html
+    assert "Package receive permission checked</th><td>Failed" in html
     assert "Canonical import committed</th><td>Not started" in html
     assert "Diagnostic reference" in html and "bpi-diag-" in html
     assert "Ask an administrator" not in html
@@ -207,7 +208,7 @@ def test_unavailable_var_data_style_path_no_longer_crashes_denied_page(monkeypat
     assert status == 403
     assert "Blueprint import needs attention" in html
     assert "Blueprint diagnostics could not be persisted." in html
-    assert "Blueprint upload capability resolved</th><td>Failed" in html
+    assert "Package receive permission checked</th><td>Failed" in html
     assert "Diagnostic reference" in html and "bpi-diag-" in html
     assert not (tmp_path / "memory").exists()
     assert any(record.message.startswith("blueprint_audit_persistence_failed") for record in caplog.records)
@@ -232,7 +233,7 @@ def test_owner_and_non_owner_authorisation_outcomes_unchanged_by_audit_fix(monke
     reader_page, reader_status = import_blueprint_entry_page(READ_ONLY)
 
     assert owner_status == 200 and "Upload and validate" in owner_page
-    assert reader_status == 403 and "Blueprint upload capability resolved</th><td>Failed" in reader_page
+    assert reader_status == 403 and "Package receive permission checked</th><td>Failed" in reader_page
 
 
 def test_anonymous_blueprint_diagnostics_stop_after_account_failure(monkeypatch, tmp_path):
@@ -242,8 +243,8 @@ def test_anonymous_blueprint_diagnostics_stop_after_account_failure(monkeypatch,
     assert "Account recognised</th><td>Failed" in html
     assert "Workspace recognised</th><td>Not started" in html
     assert "Membership resolved</th><td>Not started" in html
-    assert "Owner status resolved</th><td>Not started" in html
-    assert "Blueprint upload capability resolved</th><td>Not started" in html
+    assert "Package receive permission checked</th><td>Not started" in html
+    assert "Package receive permission checked</th><td>Not started" in html
 
 
 def test_blueprint_get_and_post_share_cookie_session_identity(monkeypatch, tmp_path):
@@ -363,3 +364,44 @@ def test_review_plan_failure_renders_normal_page(monkeypatch,tmp_path):
     monkeypatch.setattr(review_plan.DryRunPlanningService, "create_plan", boom)
     html,rs=review_page(run_id, HEADERS)
     assert rs == 200 and "Blueprint review could not be prepared" in html and "Canonical changes made</th><td>No" in html and "RuntimeError" in html
+
+
+def test_inspection_only_user_can_validate_but_cannot_review_or_promote(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    headers = {
+        "X-Flora-User": "inspector",
+        "X-Flora-Enterprises": "synthetic-enterprise",
+        "X-Flora-Active-Workspace": "synthetic-enterprise",
+        "X-Flora-Roles": "package.upload,package.inspect",
+    }
+    html, status, target = upload_and_validate_blueprint(
+        {"blueprint_zip": pkg()},
+        {"blueprint_zip.filename": "synthetic.zip", "blueprint_zip.content_type": "application/zip"},
+        headers,
+    )
+    assert status == 200
+    assert "Inspection does not change the governed Twin" in html
+    assert "Promotion permission required" in html
+    assert "Review proposed changes</a>" not in html
+    run_id = target.rsplit("/", 1)[-1]
+    review_html, review_status = review_page(run_id, headers)
+    assert review_status == 403
+    assert "not authorised to review" in review_html
+    promote_html, promote_status = promotion_confirmation_page(run_id, headers)
+    assert promote_status == 403
+    assert "do not have permission to promote" in promote_html
+    assert "Promote Twin</button>" not in promote_html
+    assert not (tmp_path / "memory").exists()
+
+
+def test_account_failure_summary_and_stage_table_use_same_canonical_stage(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    html, status = import_blueprint_entry_page({})
+    assert status == 403
+    assert "Stage failed: Account recognised" in html
+    assert "Account recognised</th><td>Failed" in html
+    assert "Package receive permission checked</th><td>Not started" in html
+    assert "Package received: no" in html
+    assert "Package inspected: no" in html
+    assert "Sign in and select an authorised workspace before importing a package" in html
+    assert html.count("<td>Failed</td>") == 1
