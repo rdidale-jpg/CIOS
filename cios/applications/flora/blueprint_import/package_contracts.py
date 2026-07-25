@@ -148,7 +148,7 @@ class PackageContractDetector:
             assets.append("Industry Twin Delta")
         if len(matches) > 1:
             errors.append("Ambiguous package contract: " + ", ".join(matches) + ".")
-        details = _inspection_details(content, logical, manifest, deltas, logical_paths)
+        details = _inspection_details(content, logical, manifest, deltas, logical_paths, metadata)
         if contract in {PackageContract.GOVERNED_INDUSTRY_TWIN, PackageContract.RESEARCH_WORKSPACE}:
             for label, value in (("knowledge graph", details["graph_location"]), ("graph validation", details["graph_validation_location"]), ("evidence register", details["evidence_register_location"])):
                 if not value:
@@ -196,19 +196,42 @@ def _single_root_prefix(paths: tuple[str, ...]) -> str:
     return next(iter(first)) + "/" if len(first) == 1 and all("/" in p for p in paths) else ""
 
 
-def _inspection_details(content: bytes, logical: dict[str, str], manifest: str | None, deltas: list[str], paths: tuple[str, ...]) -> dict[str, Any]:
+def _inspection_details(
+    content: bytes,
+    logical: dict[str, str],
+    manifest: str | None,
+    deltas: list[str],
+    paths: tuple[str, ...],
+    metadata: dict[str, Any],
+) -> dict[str, Any]:
     def find(*terms: str) -> str | None:
         return next((p for p in paths if all(term in p.lower() for term in terms)), None)
     graph_validation = find("graph", "validation")
+    unknown_register = find("unknown")
+    contradiction_register = find("contradiction")
     status = None
-    if graph_validation:
-        physical = next(p for p, lp in logical.items() if lp == graph_validation)
+    documents: dict[str, Any] = {}
+    inspect_paths = [p for p in (graph_validation, unknown_register, contradiction_register, deltas[0] if deltas else None) if p]
+    if inspect_paths:
         try:
             with zipfile.ZipFile(BytesIO(content)) as archive:
-                report = json.loads(archive.read(physical))
-            status = report.get("status") or report.get("validation_status") if isinstance(report, dict) else None
+                for inspected_path in inspect_paths:
+                    physical = next(p for p, lp in logical.items() if lp == inspected_path)
+                    try:
+                        documents[inspected_path] = json.loads(archive.read(physical))
+                    except (KeyError, json.JSONDecodeError, UnicodeDecodeError):
+                        documents[inspected_path] = None
         except (KeyError, json.JSONDecodeError, UnicodeDecodeError, zipfile.BadZipFile):
-            status = "unreadable"
+            pass
+    if graph_validation:
+        report = documents.get(graph_validation)
+        status = (report.get("status") or report.get("validation_status")) if isinstance(report, dict) else "unreadable"
+    delta = documents.get(deltas[0]) if deltas else None
+    records = delta.get("records") if isinstance(delta, dict) else None
+    promotable_objects = [
+        str(row.get("external_id")) for row in records or []
+        if isinstance(row, dict) and row.get("external_id")
+    ] if isinstance(records, list) else []
     return {
         "manifest_location": manifest,
         "delta_location": deltas[0] if deltas else None,
@@ -216,11 +239,28 @@ def _inspection_details(content: bytes, logical: dict[str, str], manifest: str |
         "graph_validation_location": graph_validation,
         "graph_validation_status": status,
         "evidence_register_location": find("evidence"),
-        "unknown_register_location": find("unknown"),
-        "contradiction_register_location": find("contradiction"),
+        "unknown_register_location": unknown_register,
+        "contradiction_register_location": contradiction_register,
+        "unknown_count": _register_count(documents.get(unknown_register)) if unknown_register else None,
+        "contradiction_count": _register_count(documents.get(contradiction_register)) if contradiction_register else None,
+        "industry_or_package_title": _metadata_value(metadata, "industry", "industry_title", "package_title", "title"),
+        "research_state": _metadata_value(metadata, "research_state", "mission_state", "state"),
+        "decision_maturity": _metadata_value(metadata, "decision_maturity", "maturity"),
+        "promotable_objects": promotable_objects,
         "package_inventory": list(sorted(logical)),
         "excluded_research_only_objects": [p for p in paths if any(t in p.lower() for t in ("restart", "checkpoint", "research_queue", "mission_state"))],
     }
+
+
+def _register_count(document: Any) -> int | None:
+    """Count common register shapes without inventing producer-specific semantics."""
+    if isinstance(document, list):
+        return len(document)
+    if isinstance(document, dict):
+        for key in ("records", "items", "unknowns", "contradictions", "entries"):
+            if isinstance(document.get(key), list):
+                return len(document[key])
+    return None
 
 
 def _metadata_value(metadata: dict[str, Any], *keys: str) -> str | None:
