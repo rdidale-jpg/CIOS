@@ -141,7 +141,9 @@ Unknown input is inspectable but cannot stage or promote.
 
 The inspection record includes the physical inventory, manifest and Delta
 locations, graph/report locations and supplied graph-validation status, evidence,
-Unknown and Contradiction register locations, and excluded research mechanics.
+Unknown and Contradiction register locations and counts (for recognised list-based
+register shapes), normalised title/research-state/decision-maturity fields,
+promotable Delta identifiers, and excluded research mechanics.
 Optional absence produces warnings. Only `records` inside the located Delta are
 passed to `IndustryTwinDeltaAdapter`; restart, checkpoint, mission and research
 queue files remain solely in the preserved archive lineage. The resulting

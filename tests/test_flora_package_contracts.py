@@ -95,6 +95,27 @@ def test_dist_modular_flora_package_is_detected():
     assert next(a.path for a in result.promotable_artefacts if a.artefact_type == "Industry Twin Delta") == "flora/industry_twin_delta_for_Flora.json"
 
 
+def test_inspection_surfaces_normalised_governance_fields_and_register_counts():
+    result = inspect(package(
+        ("00_manifest.json", {
+            "mission_id": "UKEU-001", "package_title": "Utilities & Energy",
+            "research_state": "complete", "decision_maturity": "governed",
+        }),
+        ("industry-twin-delta-for-flora.json", {"records": [
+            {"external_id": "EV-1", "record_class": "evidence", "payload": {}},
+        ]}),
+        ("registers/unknowns.json", {"unknowns": [{"id": "U-1"}, {"id": "U-2"}]}),
+        ("registers/contradictions.json", [{"id": "C-1"}]),
+    )).to_dict()
+
+    assert result["industry_or_package_title"] == "Utilities & Energy"
+    assert result["research_state"] == "complete"
+    assert result["decision_maturity"] == "governed"
+    assert result["unknown_count"] == 2
+    assert result["contradiction_count"] == 1
+    assert result["promotable_objects"] == ["EV-1"]
+
+
 def test_ambiguous_contract_fails_closed():
     result = inspect(package(
         ("blueprint_manifest.json", {}),
