@@ -147,6 +147,8 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     contract = package.package_inspection.get("contract_type", "Blueprint Package")
     promotable = package.package_inspection.get("promotable_artefacts", [])
     governed = contract == "Governed Industry Twin Package"
+    if governed:
+        detected = str(package.package_inspection.get("twin_type") or "industry").casefold()
     governed_counts = package.package_inspection.get("asset_counts", {})
     def value(key: str) -> str:
         return escape(str(package.package_inspection.get(key) or "Not supplied"))
@@ -603,6 +605,13 @@ def _trace_latest(trace: list[dict[str, Any]], key: str, default: str = "Not rec
 
 def _execution_trace_section(package, summary: dict[str, Any], fatal: bool) -> str:
     trace = list(summary.get("execution_trace") or [])
+    if package.package_inspection.get("contract_type") == "Governed Industry Twin Package":
+        rows = "".join("<tr><td>{}</td><td>{}</td><td><code>{}</code></td><td>{}</td><td>{}</td></tr>".format(
+            escape(str(event.get("step_id", ""))), escape(str(event.get("action", ""))),
+            escape(str(event.get("safe_input_summary", ""))), escape(str(event.get("safe_output_summary", ""))),
+            escape(str(event.get("status", "")))) for event in trace)
+        diagnostic = json.dumps({"package": package.package_inspection, "events": trace}, sort_keys=True)
+        return "<section class='card'><h2>Governed package execution trace</h2><p><strong>Uploaded package:</strong> <code>{}</code></p><p>Flora inspected the governed contract, resolved declared object references, and passed valid candidates to the existing staging engine. No canonical Twin changes were made.</p><table><thead><tr><th>Step</th><th>Action Flora took</th><th>Input</th><th>Result</th><th>Status</th></tr></thead><tbody>{}</tbody></table><p><button type='button' data-diagnostic-trace='{}'>Copy diagnostic trace</button></p></section>".format(escape(package.original_filename), rows or "<tr><td colspan='5'>No execution trace recorded.</td></tr>", escape(diagnostic, quote=True))
     deployment = _blueprint_deployment_metadata(summary)
     rows = []
     for event in trace:

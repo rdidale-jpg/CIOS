@@ -209,7 +209,7 @@ def test_governed_metadata_precedence_and_filename_cannot_override(tmp_path, mon
     result = inspect(content).to_dict()
     receipt = BlueprintPackageRegistry().receive(content, "DIST-001.zip", "auditor")
     assert result["mission_identifier"] == "TMS-001"
-    assert result["metadata_sources"]["mission_identifier"] == "00_manifest.json"
+    assert result["metadata_sources"]["mission_identifier"] == "flora/promotion-manifest.json"
     assert receipt.identity.package_id == "TMS-001"
 
 
@@ -260,3 +260,69 @@ def test_dist_modular_assets_and_governed_paths_are_counted_conservatively():
     assert result["graph_location"] == "machine-inspectable/knowledge-graph.json"
     assert result["restart_state_location"] == "workspace/deterministic_restart_state.json"
     assert result["asset_counts"] == {"Industry Twins": 1, "Evidence records": 1, "graph nodes": 2, "graph edges": 1, "Unknowns": 1, "Contradictions": 1}
+
+
+def test_browser_service_path_resolves_dist_primary_object_references(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    content = package(
+        ("flora/promotion-manifest.json", {"mission_id": "DIST-001", "title": "Distribution Industry Twin", "twin_type": "Industry", "package_version": "3", "package_profile": "governed-industry-twin", "research_state": "Research-ready", "decision_maturity": "Decision-ready"}),
+        ("flora/industry-twin-delta-for-flora.json", {
+            "mission_id": "DIST-001", "title": "Distribution Industry Twin", "research_state": "Research-ready",
+            "decision_maturity": "Decision-ready", "primary_objects": {
+                "enterprise_twins": ["ENT-1"], "market_participant_twins": ["MP-1"],
+                "opportunity_twins": ["OPP-1"], "flow_twins": ["FLOW-1"],
+            },
+        }),
+        ("collections/enterprise-twins.json", {"enterprise_twins": [{"twin_id": "ENT-1", "name": "Enterprise"}]}),
+        ("collections/market-participant-twins.json", [{"stable_id": "MP-1", "name": "Participant"}]),
+        ("collections/opportunity-twins.json", {"items": [{"object_id": "OPP-1", "name": "Opportunity"}]}),
+        ("collections/flow-twins.csv", "id,name\nFLOW-1,Flow\n"),
+        ("machine-inspectable/knowledge-graph.json", {"nodes": [{"id": "N1"}], "edges": [{"from": "N1", "to": "N1"}]}),
+        ("registers/evidence.json", {"records": [{"id": "E1"}]}),
+        ("registers/unknowns.json", {"unknowns": [{"id": "U1"}]}),
+        ("registers/contradictions.json", {"contradictions": [{"id": "C1"}]}),
+    )
+    receipt = BlueprintPackageRegistry().receive(content, "DIST-001.zip", "auditor")
+    result = BlueprintPackageValidator().validate_and_stage(receipt.package_ref, "auditor")
+    candidates = BlueprintPackageValidator().staging_summary(receipt.import_run_id)["candidates"]
+
+    assert receipt.package_inspection["package_contract"] == "Governed Industry Twin Package"
+    assert receipt.package_inspection["mission_identifier"] == "DIST-001"
+    assert receipt.package_inspection["twin_title"] == "Distribution Industry Twin"
+    assert receipt.package_inspection["research_state"] == "Research-ready"
+    assert receipt.package_inspection["decision_maturity"] == "Decision-ready"
+    expected_counts = {"Enterprise Twins": 1, "Market Participant Twins": 1, "Opportunity Twins": 1, "Flow Twins": 1, "graph nodes": 1, "graph edges": 1, "Evidence records": 1, "Unknowns": 1, "Contradictions": 1}
+    assert expected_counts.items() <= receipt.package_inspection["asset_counts"].items()
+    assert result.records_accepted_into_staging == 4
+    assert {row["original_source_id"] for row in candidates} == {"ENT-1", "MP-1", "OPP-1", "FLOW-1"}
+    trace_text = json.dumps(result.execution_trace).casefold()
+    assert "workbook" not in trace_text and "worksheet" not in trace_text
+    assert "collections/flow-twins.csv" in trace_text
+
+
+def test_primary_object_missing_collection_and_identifier_block_staging(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    base = [("flora/promotion-manifest.json", {"mission_id": "DIST-001"}),
+            ("flora/industry-twin-delta-for-flora.json", {"primary_objects": {"enterprise_twins": ["ENT-1"]}})]
+    receipt = BlueprintPackageRegistry().receive(package(*base), "missing.zip", "auditor")
+    result = BlueprintPackageValidator().validate_and_stage(receipt.package_ref, "auditor")
+    assert "missing governed collection" in result.errors[0]
+    assert result.candidate_records_staged == 0
+
+    content = package(*base, ("collections/enterprise-twins.json", [{"name": "No identifier"}]))
+    receipt = BlueprintPackageRegistry().receive(content, "identifier.zip", "auditor")
+    result = BlueprintPackageValidator().validate_and_stage(receipt.package_ref, "auditor")
+    assert "no stable identifier" in result.errors[0]
+    assert result.candidate_records_staged == 0
+
+
+def test_conflicting_governed_metadata_blocks_service_path_before_staging(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    content = package(
+        ("flora/promotion-manifest.json", {"mission_id": "DIST-001"}),
+        ("flora/industry-twin-delta-for-flora.json", {"mission_id": "OTHER-001", "records": [{"id": "X", "record_class": "evidence"}]}),
+    )
+    receipt = BlueprintPackageRegistry().receive(content, "conflict.zip", "auditor")
+    result = BlueprintPackageValidator().validate_and_stage(receipt.package_ref, "auditor")
+    assert "Conflicting mission identifier" in result.errors[0]
+    assert result.candidate_records_staged == 0

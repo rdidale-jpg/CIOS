@@ -9,6 +9,8 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 from enum import Enum
 from io import BytesIO
+from io import StringIO
+import csv
 import json
 from types import MappingProxyType
 from typing import Any, Mapping
@@ -248,7 +250,10 @@ def _inspection_details(
     }
     promotion = next((p for p in governed_manifests if p.lower().endswith("promotion-manifest.json")), None)
     authoritative = [p for p in governed_manifests if p != promotion]
-    ordered = authoritative + ([promotion] if promotion else []) + deltas + ([locations["restart_state_location"]] if locations["restart_state_location"] else [])
+    # Contract precedence: promotion manifest, Delta, restart state.  Other
+    # governed manifests are retained after the promotion manifest for legacy
+    # producers that have no promotion metadata.
+    ordered = ([promotion] if promotion else []) + authoritative + deltas + ([locations["restart_state_location"]] if locations["restart_state_location"] else [])
     documents: dict[str, Any] = {}
     try:
         with zipfile.ZipFile(BytesIO(content)) as archive:
@@ -260,6 +265,21 @@ def _inspection_details(
                     documents[inspected_path] = json.loads(archive.read(physical).decode("utf-8"))
                 except (KeyError, json.JSONDecodeError, UnicodeDecodeError):
                     documents[inspected_path] = None
+            # Counts and collection discovery need all governed JSON documents,
+            # not only identity documents.  Contents are never added to logs.
+            for physical, inspected_path in logical.items():
+                if inspected_path in documents or not inspected_path.casefold().endswith(".json"):
+                    continue
+                try:
+                    documents[inspected_path] = json.loads(archive.read(physical).decode("utf-8"))
+                except (KeyError, json.JSONDecodeError, UnicodeDecodeError):
+                    documents[inspected_path] = None
+            for physical, inspected_path in logical.items():
+                if inspected_path.casefold().endswith(".csv"):
+                    try:
+                        documents[inspected_path] = list(csv.DictReader(StringIO(archive.read(physical).decode("utf-8-sig"))))
+                    except (KeyError, UnicodeDecodeError, csv.Error):
+                        documents[inspected_path] = None
     except zipfile.BadZipFile:
         pass
 
@@ -359,7 +379,7 @@ def _asset_counts(documents: dict[str, Any], paths: tuple[str, ...], locations: 
     counts: dict[str, int] = {}
     seen: set[tuple[str, str]] = set()
     for path, doc in documents.items():
-        rows = doc if isinstance(doc, list) else next((doc.get(k) for k in ("records", "items", "nodes", "entries", "unknowns", "contradictions") if isinstance(doc, dict) and isinstance(doc.get(k), list)), None)
+        rows = doc if isinstance(doc, list) else next((doc.get(k) for k in ("records", "items", "nodes", "entries", "unknowns", "contradictions", "enterprise_twins", "market_participant_twins", "opportunity_twins", "flow_twins") if isinstance(doc, dict) and isinstance(doc.get(k), list)), None)
         if not isinstance(rows, list):
             continue
         for i, row in enumerate(rows):
@@ -371,6 +391,10 @@ def _asset_counts(documents: dict[str, Any], paths: tuple[str, ...], locations: 
                 counts[label] = counts.get(label, 0) + 1
                 seen.add((path, str(row.get("id") or row.get("external_id") or i)))
         name = path.lower()
+        normal_name = name.replace("-", "_")
+        for token, label in (("enterprise_twin", "Enterprise Twins"), ("market_participant_twin", "Market Participant Twins"), ("opportunity_twin", "Opportunity Twins"), ("flow_twin", "Flow Twins")):
+            if token in normal_name:
+                counts[label] = max(counts.get(label, 0), len(rows))
         if "unknown" in name:
             counts["Unknowns"] = len(rows)
         if "contradiction" in name:
