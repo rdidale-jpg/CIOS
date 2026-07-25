@@ -86,7 +86,6 @@ _MISSION = "mission_state.json"
 _RESTART = "deterministic_restart_state.json"
 _DELTA = "industry_twin_delta_for_Flora.json"
 _DELTA_NAMES = {_DELTA.lower(), "industry-twin-delta-for-flora.json"}
-_GOVERNED_MANIFESTS = {"00_manifest.json", "promotion-manifest.json"}
 _WORKSPACE_MARKERS = {"mission_state.json", "deterministic_restart_state.json", "workspace_manifest.json"}
 
 
@@ -98,15 +97,15 @@ class PackageContractDetector:
         if not inventory:
             raise ValueError("A safely inspected archive inventory is required")
         paths = tuple(item.path for item in inventory)
-        prefix = _single_root_prefix(paths)
+        prefix, root_error = _select_package_root(content, paths)
         logical = {path: path[len(prefix):] if prefix and path.startswith(prefix) else path for path in paths}
         logical_paths = tuple(logical.values())
         roots = tuple(sorted(path for path in logical_paths if "/" not in path))
         root_set = set(roots)
 
         blueprint = _BLUEPRINT in root_set
-        governed_manifests = [p for p in logical_paths if p.lower() == "00_manifest.json" or p.lower() == "flora/promotion-manifest.json"]
-        deltas = [p for p in logical_paths if p.rsplit("/", 1)[-1].lower() in _DELTA_NAMES]
+        governed_manifests = [p for p in logical_paths if _is_governed_manifest_path(p)]
+        deltas = [p for p in logical_paths if _is_delta_path(p)]
         workspace = any(p.rsplit("/", 1)[-1].lower() in _WORKSPACE_MARKERS for p in logical_paths)
         governed = bool(governed_manifests)
         # Governed metadata outranks workspace mechanics commonly retained in a
@@ -148,7 +147,11 @@ class PackageContractDetector:
             assets.append("Industry Twin Delta")
         if len(matches) > 1:
             errors.append("Ambiguous package contract: " + ", ".join(matches) + ".")
-        details = _inspection_details(content, logical, manifest, deltas, logical_paths, metadata)
+        details, identity_errors, identity_warnings = _inspection_details(content, logical, governed_manifests, manifest, deltas, logical_paths, metadata)
+        errors.extend(identity_errors)
+        warnings.extend(identity_warnings)
+        if root_error:
+            errors.append(root_error)
         if contract in {PackageContract.GOVERNED_INDUSTRY_TWIN, PackageContract.RESEARCH_WORKSPACE}:
             for label, value in (("knowledge graph", details["graph_location"]), ("graph validation", details["graph_validation_location"]), ("evidence register", details["evidence_register_location"])):
                 if not value:
@@ -160,8 +163,8 @@ class PackageContractDetector:
             warnings.append("Package inspected. No canonical changes performed.")
         return PackageInspection(
             contract, "high" if manifest else "none", manifest,
-            _metadata_value(metadata, "package_id", "workspace_id", "delta_id", "mission_id"),
-            _metadata_value(metadata, "package_version", "workspace_version", "delta_version", "version"),
+            details.get("mission_identifier") or _metadata_value(metadata, "package_id", "workspace_id", "delta_id", "mission_id"),
+            details.get("package_version") or _metadata_value(metadata, "package_version", "workspace_version", "delta_version", "version"),
             _freeze(metadata), tuple(assets), tuple(artefacts), tuple(warnings), tuple(errors),
             ArchiveSummary(len(inventory), sum(item.size_bytes for item in inventory), tuple(sorted(paths))), _freeze(details),
         )
@@ -196,61 +199,190 @@ def _single_root_prefix(paths: tuple[str, ...]) -> str:
     return next(iter(first)) + "/" if len(first) == 1 and all("/" in p for p in paths) else ""
 
 
+def _is_governed_manifest_path(path: str) -> bool:
+    low = path.lower()
+    name = low.rsplit("/", 1)[-1]
+    return name in {"00_manifest.json", "manifest.json", "package_manifest.json", "package-manifest.json"} or (low.startswith("flora/") and name in {"promotion-manifest.json", "promotion_manifest.json"})
+
+
+def _is_delta_path(path: str) -> bool:
+    name = path.rsplit("/", 1)[-1].lower().removesuffix(".json")
+    normalised = name.replace("-", "_")
+    return normalised in {"industry_twin_delta", "industry_twin_delta_for_flora"}
+
+
+def _select_package_root(content: bytes, paths: tuple[str, ...]) -> tuple[str, str | None]:
+    """Select no wrapper or one nested wrapper; reject two plausible packages."""
+    candidates: set[str] = set()
+    for path in paths:
+        parts = path.split("/")
+        if _is_governed_manifest_path(path) or _is_delta_path(path):
+            candidates.add(parts[0] + "/" if len(parts) > 1 and parts[0].lower() not in {"flora", "twins", "machine-inspectable", "registers", "workspace"} else "")
+    if len(candidates) > 1:
+        shown = ", ".join(repr(p or "archive root") for p in sorted(candidates))
+        return "", f"Ambiguous nested package roots: {shown}."
+    return (next(iter(candidates)) if candidates else _single_root_prefix(paths)), None
+
+
 def _inspection_details(
     content: bytes,
     logical: dict[str, str],
+    governed_manifests: list[str],
     manifest: str | None,
     deltas: list[str],
     paths: tuple[str, ...],
     metadata: dict[str, Any],
-) -> dict[str, Any]:
+) -> tuple[dict[str, Any], list[str], list[str]]:
+    """Resolve governed metadata without allowing lower-precedence sources to overwrite it."""
     def find(*terms: str) -> str | None:
         return next((p for p in paths if all(term in p.lower() for term in terms)), None)
+
     graph_validation = find("graph", "validation")
-    unknown_register = find("unknown")
-    contradiction_register = find("contradiction")
-    status = None
-    documents: dict[str, Any] = {}
-    inspect_paths = [p for p in (graph_validation, unknown_register, contradiction_register, deltas[0] if deltas else None) if p]
-    if inspect_paths:
-        try:
-            with zipfile.ZipFile(BytesIO(content)) as archive:
-                for inspected_path in inspect_paths:
-                    physical = next(p for p, lp in logical.items() if lp == inspected_path)
-                    try:
-                        documents[inspected_path] = json.loads(archive.read(physical))
-                    except (KeyError, json.JSONDecodeError, UnicodeDecodeError):
-                        documents[inspected_path] = None
-        except (KeyError, json.JSONDecodeError, UnicodeDecodeError, zipfile.BadZipFile):
-            pass
-    if graph_validation:
-        report = documents.get(graph_validation)
-        status = (report.get("status") or report.get("validation_status")) if isinstance(report, dict) else "unreadable"
-    delta = documents.get(deltas[0]) if deltas else None
-    records = delta.get("records") if isinstance(delta, dict) else None
-    promotable_objects = [
-        str(row.get("external_id")) for row in records or []
-        if isinstance(row, dict) and row.get("external_id")
-    ] if isinstance(records, list) else []
-    return {
-        "manifest_location": manifest,
-        "delta_location": deltas[0] if deltas else None,
+    locations = {
         "graph_location": next((p for p in paths if "graph" in p.lower() and "validation" not in p.lower()), None),
         "graph_validation_location": graph_validation,
-        "graph_validation_status": status,
         "evidence_register_location": find("evidence"),
-        "unknown_register_location": unknown_register,
-        "contradiction_register_location": contradiction_register,
-        "unknown_count": _register_count(documents.get(unknown_register)) if unknown_register else None,
-        "contradiction_count": _register_count(documents.get(contradiction_register)) if contradiction_register else None,
-        "industry_or_package_title": _metadata_value(metadata, "industry", "industry_title", "package_title", "title"),
-        "research_state": _metadata_value(metadata, "research_state", "mission_state", "state"),
-        "decision_maturity": _metadata_value(metadata, "decision_maturity", "maturity"),
-        "promotable_objects": promotable_objects,
-        "package_inventory": list(sorted(logical)),
+        "unknown_register_location": find("unknown"),
+        "contradiction_register_location": find("contradiction"),
+        "restart_state_location": next((p for p in paths if "restart" in p.lower()), None),
+    }
+    promotion = next((p for p in governed_manifests if p.lower().endswith("promotion-manifest.json")), None)
+    authoritative = [p for p in governed_manifests if p != promotion]
+    ordered = authoritative + ([promotion] if promotion else []) + deltas + ([locations["restart_state_location"]] if locations["restart_state_location"] else [])
+    documents: dict[str, Any] = {}
+    try:
+        with zipfile.ZipFile(BytesIO(content)) as archive:
+            for inspected_path in dict.fromkeys([p for p in ordered + list(locations.values()) if p]):
+                physical = next((p for p, lp in logical.items() if lp == inspected_path), None)
+                if not physical:
+                    continue
+                try:
+                    documents[inspected_path] = json.loads(archive.read(physical).decode("utf-8"))
+                except (KeyError, json.JSONDecodeError, UnicodeDecodeError):
+                    documents[inspected_path] = None
+    except zipfile.BadZipFile:
+        pass
+
+    fields = {
+        "package_profile": ("package_profile", "profile", "profile_version", "schema_profile"),
+        "mission_identifier": ("mission_id", "mission_identifier", "missionId", "package_id"),
+        "twin_title": ("industry_twin_title", "twin_title", "industry_title", "package_title", "title", "industry"),
+        "twin_type": ("twin_type", "type"),
+        "package_version": ("package_version", "version", "delta_version"),
+        "research_state": ("research_state", "mission_state", "state"),
+        "decision_maturity": ("decision_maturity", "maturity"),
+    }
+    resolved: dict[str, Any] = {}
+    sources: dict[str, str] = {}
+    conflicts: list[dict[str, Any]] = []
+    errors: list[str] = []
+    warnings: list[str] = []
+    for field, keys in fields.items():
+        found: list[tuple[str, str]] = []
+        for path in ordered:
+            value = _deep_metadata_value(documents.get(path), *keys)
+            if value not in (None, ""):
+                found.append((str(value), path))
+        if found:
+            resolved[field], sources[field] = found[0]
+            distinct = {v.strip().casefold() for v, _ in found}
+            if len(distinct) > 1:
+                item = {"field": field, "values": [{"value": v, "source_path": p} for v, p in found]}
+                conflicts.append(item)
+                errors.append(f"Conflicting {field.replace('_', ' ')}: " + "; ".join(f"{v!r} in {p}" for v, p in found) + ".")
+    for field in fields:
+        resolved.setdefault(field, None)
+    if deltas and len(deltas) > 1:
+        delta_ids = [(_deep_metadata_value(documents.get(p), "mission_id", "mission_identifier", "package_id"), p) for p in deltas]
+        if len({str(v).casefold() for v, _ in delta_ids if v}) > 1:
+            errors.append("Multiple Industry Twin Delta artefacts disagree.")
+    required_refs = _referenced_paths(documents.get(manifest))
+    unresolved = [ref for ref in required_refs if ref not in paths]
+    if unresolved:
+        errors.append("Required referenced files are missing: " + ", ".join(unresolved) + ".")
+    if manifest and not resolved.get("mission_identifier"):
+        warnings.append("Optional mission identifier metadata was not supplied.")
+    profile = resolved.get("package_profile") or ("industry-twin-v1" if manifest and deltas else None)
+    delta = documents.get(deltas[0]) if deltas else None
+    records = delta.get("records") if isinstance(delta, dict) else None
+    promotable_objects = [str(row.get("external_id")) for row in records or [] if isinstance(row, dict) and row.get("external_id")] if isinstance(records, list) else []
+    counts = _asset_counts(documents, paths, locations)
+    status_doc = documents.get(graph_validation)
+    status = (status_doc.get("status") or status_doc.get("validation_status")) if isinstance(status_doc, dict) else ("unreadable" if graph_validation else None)
+    details = {
+        "package_contract": PackageContract.GOVERNED_INDUSTRY_TWIN.value if manifest and deltas else None,
+        "package_profile": profile,
+        **resolved,
+        "industry_or_package_title": resolved.get("twin_title"),
+        "selected_package_root": next((physical[:-len(lp)] for physical, lp in logical.items() if physical != lp), ""),
+        "manifest_location": manifest, "delta_location": deltas[0] if deltas else None,
+        **locations, "graph_validation_status": status,
+        "unknown_count": counts.get("Unknowns"), "contradiction_count": counts.get("Contradictions"),
+        "asset_counts": counts, "metadata_sources": sources, "metadata_conflicts": conflicts,
+        "recognition_evidence": [p for p in (manifest, deltas[0] if deltas else None, locations["graph_location"]) if p],
+        "files_used_for_identity": list(dict.fromkeys(sources.values())), "unresolved_references": unresolved,
+        "promotable_objects": promotable_objects, "package_inventory": list(sorted(logical)),
         "excluded_research_only_objects": [p for p in paths if any(t in p.lower() for t in ("restart", "checkpoint", "research_queue", "mission_state"))],
     }
+    return details, errors, warnings
 
+
+def _deep_metadata_value(document: Any, *keys: str) -> Any:
+    if not isinstance(document, dict):
+        return None
+    for key in keys:
+        if document.get(key) not in (None, ""):
+            return document[key]
+    for container in ("metadata", "package", "identity", "industry_twin", "twin", "mission", "delta"):
+        value = document.get(container)
+        found = _deep_metadata_value(value, *keys)
+        if found not in (None, ""):
+            return found
+    return None
+
+
+def _referenced_paths(document: Any) -> list[str]:
+    if not isinstance(document, dict):
+        return []
+    result: list[str] = []
+    for key, value in document.items():
+        low = str(key).lower()
+        if ("path" in low or low in {"files", "artefacts", "artifacts"}) and isinstance(value, str):
+            result.append(value.lstrip("./"))
+        elif isinstance(value, list) and ("file" in low or "artefact" in low or "artifact" in low):
+            result.extend(str(v).lstrip("./") for v in value if isinstance(v, str))
+    return result
+
+
+def _asset_counts(documents: dict[str, Any], paths: tuple[str, ...], locations: dict[str, str | None]) -> dict[str, int]:
+    aliases = {"industry": "Industry Twins", "enterprise": "Enterprise Twins", "market_participant": "Market Participant Twins", "flow": "Flow Twins", "opportunity": "Opportunity Twins", "control_body": "Control Bodies", "procurement_route": "Procurement Routes", "transformation_programme": "Transformation Programmes", "evidence": "Evidence records", "unknown": "Unknowns", "contradiction": "Contradictions"}
+    counts: dict[str, int] = {}
+    seen: set[tuple[str, str]] = set()
+    for path, doc in documents.items():
+        rows = doc if isinstance(doc, list) else next((doc.get(k) for k in ("records", "items", "nodes", "entries", "unknowns", "contradictions") if isinstance(doc, dict) and isinstance(doc.get(k), list)), None)
+        if not isinstance(rows, list):
+            continue
+        for i, row in enumerate(rows):
+            if not isinstance(row, dict):
+                continue
+            kind = str(row.get("twin_type") or row.get("object_type") or row.get("record_class") or "").lower().replace(" ", "_").replace("-", "_")
+            label = aliases.get(kind)
+            if label and (path, str(row.get("id") or row.get("external_id") or i)) not in seen:
+                counts[label] = counts.get(label, 0) + 1
+                seen.add((path, str(row.get("id") or row.get("external_id") or i)))
+        name = path.lower()
+        if "unknown" in name:
+            counts["Unknowns"] = len(rows)
+        if "contradiction" in name:
+            counts["Contradictions"] = len(rows)
+        if "evidence" in name:
+            counts["Evidence records"] = len(rows)
+        if path == locations.get("graph_location"):
+            if isinstance(doc, dict) and isinstance(doc.get("nodes"), list):
+                counts["graph nodes"] = len(doc["nodes"])
+            if isinstance(doc, dict) and isinstance(doc.get("edges"), list):
+                counts["graph edges"] = len(doc["edges"])
+    return counts
 
 def _register_count(document: Any) -> int | None:
     """Count common register shapes without inventing producer-specific semantics."""
