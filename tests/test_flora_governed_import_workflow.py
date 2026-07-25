@@ -13,7 +13,7 @@ def uploaded():
 def test_upload_and_inspect_workflow(tmp_path, monkeypatch):
     monkeypatch.setenv("FLORA_DATA_DIR",str(tmp_path))
     html,status=import_blueprint_entry_page(HEADERS)
-    assert status==200 and "Import Commercial Digital Twin" in html and "Upload and validate" in html and "aria-label='Import progress'" in html
+    assert status==200 and "Import governed package" in html and "Upload and validate" in html and "aria-label='Import progress'" in html
     run=uploaded(); html,status=validation_result_page(run,HEADERS)
     assert status==200 and "Validation outcomes" in html and "Blocking errors" in html and "Cancel import" in html
 

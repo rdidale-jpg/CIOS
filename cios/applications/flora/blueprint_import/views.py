@@ -24,10 +24,10 @@ from .review_plan import BlueprintReviewPlanCoordinator, PAGE_SIZE_DEFAULT, PAGE
 from .promotion import CanonicalPromotionRepository, CanonicalPromotionService, BlueprintPromotionError, can_approve_blueprint_promotion, can_execute_blueprint_promotion
 from .registry import BlueprintPackageRegistry
 from .review import CandidateReviewRepository, CandidateReviewService, can_review_blueprint_candidate
-from .validator import BlueprintPackageValidator, BlueprintValidationError, can_inspect_blueprint_package
+from .validator import BlueprintPackageValidator, can_inspect_blueprint_package
 from .cios_twin_adapter import MAPPING_VERSION
 from .restage import BlueprintRestageService, can_restage_blueprint_package, RESTAGE_STAGES
-from .models import PackageReceiptError
+from .models import BlueprintPackageRecord, PackageReceiptError
 from .guidance import ImportGuidance, ImportGuidanceRepository, TWIN_TYPES, detect_package_type, expectation_mismatch
 from .lifecycle import ImportLifecycleService
 from .maturity import assess_maturity
@@ -36,24 +36,68 @@ MAX_UPLOAD_BYTES = 50 * 1024 * 1024
 ZIP_MIME_TYPES = {"application/zip", "application/x-zip-compressed", "application/octet-stream", ""}
 LOGGER = logging.getLogger(__name__)
 
+_RECEIVE_RESULT_FIELDS = (
+    "status", "package_ref", "import_run_id", "archive_path",
+    "package_sha256", "original_filename", "received_at",
+    "warnings", "blocking_error",
+)
+
+
+class PackageReceiveContractError(TypeError):
+    """The registry returned something other than its documented result model."""
+
+    def __init__(self, actual: Any):
+        self.actual = actual
+        super().__init__("package receive service returned an invalid response shape")
+
+
+def _shape_of(value: Any) -> str:
+    if isinstance(value, dict):
+        return f"dict keys={sorted(str(key) for key in value)[:30]}"
+    fields = [name for name in _RECEIVE_RESULT_FIELDS if hasattr(value, name)]
+    return f"{type(value).__module__}.{type(value).__name__} fields={fields}"
+
+
+def _receive_failure_diagnostic(exc: Exception) -> str:
+    actual = exc.actual if isinstance(exc, PackageReceiveContractError) else exc
+    reason = f"; reason={str(exc)}" if isinstance(exc, PackageReceiptError) else ""
+    return (
+        "Package receipt failed; stage=Package received; "
+        "service=cios.applications.flora.blueprint_import.registry.BlueprintPackageRegistry.receive; "
+        "expected response=BlueprintPackageRecord fields=" + ",".join(_RECEIVE_RESULT_FIELDS) + "; "
+        f"actual response={_shape_of(actual)}; import identifier=not created; "
+        f"retry availability=no; canonical changes made=no{reason}."
+    )
+
+
+def _post_receipt_failure_diagnostic(exc: Exception, record: BlueprintPackageRecord) -> str:
+    return (
+        "Package inspection failed after safe receipt; stage=Package inspected; "
+        "service=cios.applications.flora.blueprint_import.validator.BlueprintPackageValidator.validate_and_stage; "
+        "expected response=staging summary persisted for BlueprintPackageRecord; "
+        f"actual response=exception {type(exc).__module__}.{type(exc).__name__}; "
+        f"import identifier={record.import_run_id}; retry availability=yes; canonical changes made=no."
+    )
+
 
 def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, int]:
     decision = blueprint_upload_authorisation(headers)
     if decision.decision != "allowed":
         ref, audit_warning = _audit_authorisation("package_upload_authorisation_denied", headers, "Package receive permission checked", decision)
-        return _safe_failure("Blueprint import access denied", "Package receive permission checked", False, False, _permission_guidance(headers, decision), decision, ref, audit_warning), 403
-    body = _workflow_progress("upload") + f"""<section class='hero'><h1>Import Commercial Digital Twin</h1><p>Upload a governed Twin Blueprint package for inspection, validation and staged promotion.</p>{_notice(message)}</section>
-    <section class='card'><h2>Upload package</h2><p><strong>Supported format:</strong> .zip Blueprint package. <strong>Maximum size:</strong> {MAX_UPLOAD_BYTES // (1024*1024)} MB.</p><p class='muted'>Blueprint packages may contain confidential enterprise intelligence. Upload only packages you are authorised to use.</p><p><strong>Uploading does not change the governed Twin. Flora independently detects content before review.</strong></p><form method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><label for='expected_type'>What kind of Twin do you expect?</label><select id='expected_type' name='expected_type' required>{''.join(f"<option value='{t}'>{escape(t.replace('_',' ').title())}</option>" for t in TWIN_TYPES)}</select><p class='muted'>The expectation never overrides manifest identity, detected types, schema validation or evidence.</p><label for='blueprint_zip'>Blueprint ZIP file</label><input id='blueprint_zip' name='blueprint_zip' type='file' accept='.zip,application/zip' required><p><button type='submit'>Upload and validate</button></p><p><a href='/digital-twins'>Cancel</a></p></form></section>
-    <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous Blueprint imports</a></p></section>"""
-    return _page("Import Commercial Digital Twin", body), 200
+        return _safe_failure("Package import access denied", "Package receive permission checked", False, False, _permission_guidance(headers, decision), decision, ref, audit_warning), 403
+    body = _workflow_progress("upload") + f"""<section class='hero'><h1>Import governed package</h1><p>Upload a governed package for contract detection, inspection, validation and staged promotion.</p>{_notice(message)}</section>
+    <section class='card'><h2>Upload package</h2><p><strong>Supported format:</strong> .zip package. <strong>Maximum size:</strong> {MAX_UPLOAD_BYTES // (1024*1024)} MB.</p><p class='muted'>Packages may contain confidential intelligence. Upload only packages you are authorised to use.</p><p><strong>Uploading does not change canonical state. Flora detects the package contract before applying contract-specific wording.</strong></p><form method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><label for='expected_type'>What kind of Twin do you expect?</label><select id='expected_type' name='expected_type' required>{''.join(f"<option value='{t}'>{escape(t.replace('_',' ').title())}</option>" for t in TWIN_TYPES)}</select><p class='muted'>The expectation never overrides manifest identity, detected types, schema validation or evidence.</p><label for='blueprint_zip'>Package ZIP file</label><input id='blueprint_zip' name='blueprint_zip' type='file' accept='.zip,application/zip' required><p><button type='submit'>Upload and validate</button></p><p><a href='/digital-twins'>Cancel</a></p></form></section>
+    <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous package imports</a></p></section>"""
+    return _page("Import governed package", body), 200
 
 
 def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str], headers: Any) -> tuple[str, int, str]:
     actor = authenticated_flora_user(headers)
     filename = fields.get("blueprint_zip.filename") or fields.get("filename") or "blueprint.zip"
     mime = fields.get("blueprint_zip.content_type") or fields.get("content_type") or ""
+    decision = blueprint_upload_authorisation(headers)
+    ref = audit_warning = ""
     try:
-        decision = blueprint_upload_authorisation(headers)
         if decision.decision != "allowed":
             ref, audit_warning = _audit_authorisation("package_upload_authorisation_denied", headers, "Package receive permission checked", decision)
             raise PermissionError("You do not have permission to import Blueprints in this workspace.")
@@ -64,16 +108,23 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
             raise PackageReceiptError(f"The selected file is larger than the {MAX_UPLOAD_BYTES // (1024*1024)} MB upload limit.")
         before = _canonical_marker()
         record = BlueprintPackageRegistry().receive(content, filename, actor, active_flora_workspace(headers))
+        if not isinstance(record, BlueprintPackageRecord):
+            raise PackageReceiveContractError(record)
         ImportGuidanceRepository().save(ImportGuidance(record.import_run_id, str(fields.get("expected_type") or "enterprise")))
         _audit_authorisation("package_upload_authorisation_allowed", headers, "Upload request accepted", decision, record.package_ref, record.import_run_id, record.identity.enterprise_id)
-        result = BlueprintPackageValidator().validate_and_stage(record.package_ref, actor, headers)
-        assert before == _canonical_marker(), "Upload and validation must not mutate canonical memory"
-        return validation_result_page(record.import_run_id, headers)[0], 200, f"/blueprint-import/{record.import_run_id}"
     except PermissionError as exc:
         return _safe_failure(str(exc), "Package receive permission checked", False, False, _permission_guidance(headers, decision), decision, ref, audit_warning), 403, "/blueprint-import"
     except Exception as exc:
-        failed_stage = "Package inspected" if isinstance(exc, BlueprintValidationError) else "Package received"
-        return _safe_failure(str(exc), failed_stage, False, False, "Choose a safe Blueprint ZIP and try again. No governed Twin changes occurred.", decision), 400, "/blueprint-import"
+        message = _receive_failure_diagnostic(exc)
+        return _safe_failure(message, "Package received", False, False, "Return to package import and choose a safe ZIP. No canonical changes were made.", decision), 400, "/blueprint-import"
+
+    try:
+        BlueprintPackageValidator().validate_and_stage(record.package_ref, actor, headers)
+        assert before == _canonical_marker(), "Upload and validation must not mutate canonical memory"
+        return validation_result_page(record.import_run_id, headers)[0], 200, f"/blueprint-import/{record.import_run_id}"
+    except Exception as exc:
+        message = _post_receipt_failure_diagnostic(exc, record)
+        return _safe_failure(message, "Package inspected", False, True, f"Retry inspection for import {record.import_run_id}; the safe original package remains in the registry.", decision, import_run_id=record.import_run_id), 400, f"/blueprint-import/{record.import_run_id}"
 
 
 def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
@@ -108,7 +159,8 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     validation_groups = f"<section class='card'><h2>Validation outcomes</h2><h3>Passed</h3><p>✓ Archive safety, checksum generation and package receipt passed.</p>{_list('Warnings', summary.get('warnings', []))}{_list('Blocking errors', summary.get('errors', []))}</section>"
     terminal = _cancelled_panel(lifecycle) if lifecycle.state == "cancelled" else _cancel_action(import_run_id, "inspect")
     workbook_rows = "" if governed else f"<tr><th>Workbook discovered</th><td>{'Yes' if any(str(f).endswith(('.xlsx','.xlsm','.xls')) for f in summary.get('files_inspected', [])) else 'Not declared'}</td></tr><tr><th>Worksheets discovered</th><td>{escape(', '.join(worksheets) or 'None reported')}</td></tr>"
-    body = _workflow_progress("inspect", import_run_id, lifecycle.state) + nav + _package_header(package) + inspection + validation_groups + f"""<section class='card'><h2>Import record</h2><span hidden>Validation result</span><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr>{workbook_rows}<tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section><details class='card'><summary><strong>Safe deployment diagnostics</strong></summary><table>{deployment_rows}</table></details>""" + _execution_trace_section(package, summary, bool(summary.get("errors"))) + _counts_section(governed_counts if governed else counts) + _available_actions_section(package, summary, counts, headers) + review_link
+    count_panel = _asset_counts_section(governed_counts) if governed else _counts_section(counts)
+    body = _workflow_progress("inspect", import_run_id, lifecycle.state) + nav + _package_header(package) + inspection + validation_groups + f"""<section class='card'><h2>Import record</h2><span hidden>Validation result</span><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr>{workbook_rows}<tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section><details class='card'><summary><strong>Safe deployment diagnostics</strong></summary><table>{deployment_rows}</table></details>""" + _execution_trace_section(package, summary, bool(summary.get("errors"))) + count_panel + _available_actions_section(package, summary, counts, headers) + review_link
     return _page("Inspect Twin package", body + terminal), 200
 
 
@@ -609,6 +661,9 @@ def _execution_trace_section(package, summary: dict[str, Any], fatal: bool) -> s
 
 def _candidate_counts(candidates): return Counter(c.get("validation_status", "unsupported") for c in candidates)
 def _counts_section(c): return f"<section class='card'><h2>Candidate staging summary</h2><p>Accepted {c['accepted']} · Quarantined {c['quarantined']} · Rejected {c['rejected']} · Unsupported {c['unsupported']}</p></section>"
+def _asset_counts_section(counts):
+    rows = "".join(f"<tr><th>{escape(str(kind))}</th><td>{int(total)}</td></tr>" for kind, total in sorted(counts.items()))
+    return f"<section class='card'><h2>Governed package asset summary</h2><table>{rows or '<tr><td>No assets declared</td></tr>'}</table></section>"
 def _package_name(p): return getattr(p.identity, "package_name", "") or p.identity.package_id
 def _twin_version(p): return getattr(p.identity, "twin_version", "") or p.identity.package_version
 def _package_header(p): return f"<section class='hero'><h1>{escape(_package_name(p))}</h1><p>Version {escape(p.identity.package_version)} · Enterprise {escape(p.identity.enterprise_id)}</p></section>"
@@ -679,7 +734,7 @@ def _failure_summary(message: str) -> str:
     details = escape(str(message), quote=True)
     return f"<p>{len(parts)} validation failure details were reported. First affected items:</p><ul>{examples}</ul><h3>Grouped failure reasons</h3><table><tbody>{groups}</tbody></table><details><summary>Expandable failure details</summary><pre>{details}</pre></details><p><a download='blueprint-failure-details.txt' href='data:text/plain,{details}'>Download details</a></p>"
 
-def _safe_failure(message, stage, changed, retry, next_step, decision=None, diagnostic_ref: str = "", audit_warning: str = ""):
+def _safe_failure(message, stage, changed, retry, next_step, decision=None, diagnostic_ref: str = "", audit_warning: str = "", import_run_id: str = ""):
     diagnostic_ref = diagnostic_ref or f"bpi-diag-{uuid4().hex[:12]}"
     unavailable = "Authorisation context unavailable after failure"
     account = decision.user_id if decision and decision.user_id else unavailable
@@ -694,8 +749,9 @@ def _safe_failure(message, stage, changed, retry, next_step, decision=None, diag
     failure_summary = _failure_summary(message)
     received = statuses.get("Package received") == "Completed"
     inspected = statuses.get("Package inspected") == "Completed"
-    body=f"<section class='hero'><h1>Blueprint import needs attention</h1></section>{warning_panel}<section class='card'><h2>What happened</h2>{failure_summary}<ul><li>Stage failed: {escape(canonical_failed_stage)}</li><li>Package received: {'yes' if received else 'no'}</li><li>Package inspected: {'yes' if inspected else 'no'}</li><li>Canonical changes occurred: {'yes' if changed else 'no'}</li><li>Package available for retry: {'yes' if retry else 'no'}</li><li>Diagnostic reference: <code>{escape(diagnostic_ref)}</code></li><li>Next step: {escape(next_step)}</li></ul><p><a href='/blueprint-import'>Return to Blueprint</a></p></section><section class='card'><h2>Authorisation context</h2><table><tr><th>Signed-in account</th><td>{escape(account)}</td></tr><tr><th>Active workspace</th><td>{escape(workspace)}</td></tr><tr><th>Effective role</th><td>{escape(role)}</td></tr><tr><th>Owner recognised</th><td>{owner}</td></tr><tr><th>Required Blueprint capability</th><td><code>{escape(capability)}</code></td></tr></table></section><section class='card'><h2>Live import stages</h2><table>{rows}</table></section>"
-    return _page("Blueprint import failure", body)
+    import_row = f"<li>Import identifier: <code>{escape(import_run_id)}</code></li>" if import_run_id else ""
+    body=f"<section class='hero'><h1>Package import needs attention</h1></section>{warning_panel}<section class='card'><h2>What happened</h2>{failure_summary}<ul><li>Stage failed: {escape(canonical_failed_stage)}</li><li>Package received: {'yes' if received else 'no'}</li><li>Package inspected: {'yes' if inspected else 'no'}</li><li>Canonical changes occurred: {'yes' if changed else 'no'}</li><li>Package available for retry: {'yes' if retry else 'no'}</li>{import_row}<li>Diagnostic reference: <code>{escape(diagnostic_ref)}</code></li><li>Next step: {escape(next_step)}</li></ul><p><a href='/blueprint-import'>Return to package import</a></p></section><section class='card'><h2>Authorisation context</h2><table><tr><th>Signed-in account</th><td>{escape(account)}</td></tr><tr><th>Active workspace</th><td>{escape(workspace)}</td></tr><tr><th>Effective role</th><td>{escape(role)}</td></tr><tr><th>Owner recognised</th><td>{owner}</td></tr><tr><th>Required capability</th><td><code>{escape(capability)}</code></td></tr></table></section><section class='card'><h2>Live import stages</h2><table>{rows}</table></section>"
+    return _page("Package import failure", body)
 def _canonical_marker():
     from cios.applications.flora.storage import data_path
     files=[]
