@@ -8,6 +8,7 @@ from cios.applications.flora.storage import atomic_write_json, data_path, ensure
 from .archive import inspect_zip_inventory, preserve_original_package, sha256_bytes
 from .ledger import BlueprintImportLedger, utc_now
 from .manifest import read_identity
+from .package_contracts import PackageContractDetector
 from .models import BlueprintPackageRecord, PackageReceiptError
 from .runs import ImportRunRepository
 
@@ -54,8 +55,9 @@ class BlueprintPackageRegistry:
             return existing
 
         try:
-            identity = read_identity(content)
             inventory = inspect_zip_inventory(content)
+            inspection = PackageContractDetector().detect(content, inventory)
+            identity = read_identity(content)
             archived_sha256, byte_count, archive_path = preserve_original_package(content, original_filename)
             if archived_sha256 != package_sha256:
                 raise PackageReceiptError("Archived checksum does not match received checksum")
@@ -74,6 +76,7 @@ class BlueprintPackageRegistry:
                 received_by=str(actor).strip(),
                 import_run_id=run.import_run_id,
                 workspace_id=str(workspace_id or "").strip(),
+                package_inspection=inspection.to_dict(),
             )
             ensure_writable_dir(data_path("blueprint_import", "packages"))
             atomic_write_json(self._path_for_ref(package_ref), record.to_dict())
