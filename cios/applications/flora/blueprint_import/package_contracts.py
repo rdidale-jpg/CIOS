@@ -19,6 +19,7 @@ from .models import FileInventoryItem
 
 class PackageContract(str, Enum):
     BLUEPRINT = "Blueprint Package"
+    GOVERNED_INDUSTRY_TWIN = "Governed Industry Twin Package"
     RESEARCH_WORKSPACE = "Research Workspace"
     INDUSTRY_TWIN_DELTA = "Industry Twin Delta"
     UNKNOWN = "Unknown Package"
@@ -52,6 +53,7 @@ class PackageInspection:
     warnings: tuple[str, ...]
     blocking_errors: tuple[str, ...]
     archive_summary: ArchiveSummary
+    inspection_details: Mapping[str, Any] = MappingProxyType({})
 
     @property
     def promotion_eligible(self) -> bool:
@@ -74,6 +76,7 @@ class PackageInspection:
                 "total_uncompressed_bytes": self.archive_summary.total_uncompressed_bytes,
                 "root_members": list(self.archive_summary.root_members),
             },
+            **_thaw(self.inspection_details),
             "promotion_eligible": self.promotion_eligible,
         }
 
@@ -82,6 +85,9 @@ _BLUEPRINT = "blueprint_manifest.json"
 _MISSION = "mission_state.json"
 _RESTART = "deterministic_restart_state.json"
 _DELTA = "industry_twin_delta_for_Flora.json"
+_DELTA_NAMES = {_DELTA.lower(), "industry-twin-delta-for-flora.json"}
+_GOVERNED_MANIFESTS = {"00_manifest.json", "promotion-manifest.json"}
+_WORKSPACE_MARKERS = {"mission_state.json", "deterministic_restart_state.json", "workspace_manifest.json"}
 
 
 class PackageContractDetector:
@@ -92,16 +98,32 @@ class PackageContractDetector:
         if not inventory:
             raise ValueError("A safely inspected archive inventory is required")
         paths = tuple(item.path for item in inventory)
-        roots = tuple(sorted(path for path in paths if "/" not in path))
+        prefix = _single_root_prefix(paths)
+        logical = {path: path[len(prefix):] if prefix and path.startswith(prefix) else path for path in paths}
+        logical_paths = tuple(logical.values())
+        roots = tuple(sorted(path for path in logical_paths if "/" not in path))
         root_set = set(roots)
 
-        if _BLUEPRINT in root_set:
+        blueprint = _BLUEPRINT in root_set
+        governed_manifests = [p for p in logical_paths if p.lower() == "00_manifest.json" or p.lower() == "flora/promotion-manifest.json"]
+        deltas = [p for p in logical_paths if p.rsplit("/", 1)[-1].lower() in _DELTA_NAMES]
+        workspace = any(p.rsplit("/", 1)[-1].lower() in _WORKSPACE_MARKERS for p in logical_paths)
+        governed = bool(governed_manifests)
+        # Governed metadata outranks workspace mechanics commonly retained in a
+        # final package; Blueprint plus governed metadata remains truly ambiguous.
+        matches = [name for name, yes in (("Blueprint Package", blueprint), ("Governed Industry Twin Package", governed), ("Research Workspace", workspace and not governed)) if yes]
+        if len(matches) > 1:
+            contract, manifest = PackageContract.UNKNOWN, None
+        elif blueprint:
             contract, manifest = PackageContract.BLUEPRINT, _BLUEPRINT
-        elif _MISSION in root_set or _RESTART in root_set:
+        elif governed:
+            contract = PackageContract.GOVERNED_INDUSTRY_TWIN
+            manifest = governed_manifests[0]
+        elif workspace:
             contract = PackageContract.RESEARCH_WORKSPACE
-            manifest = _MISSION if _MISSION in root_set else _RESTART
-        elif _DELTA in root_set:
-            contract, manifest = PackageContract.INDUSTRY_TWIN_DELTA, _DELTA
+            manifest = next(p for p in logical_paths if p.rsplit("/", 1)[-1].lower() in _WORKSPACE_MARKERS)
+        elif deltas:
+            contract, manifest = PackageContract.INDUSTRY_TWIN_DELTA, deltas[0]
         else:
             contract, manifest = PackageContract.UNKNOWN, None
 
@@ -111,7 +133,8 @@ class PackageContractDetector:
         if manifest:
             try:
                 with zipfile.ZipFile(BytesIO(content)) as archive:
-                    parsed = json.loads(archive.read(manifest).decode("utf-8"))
+                    physical_manifest = next((p for p, lp in logical.items() if lp == manifest), manifest)
+                    parsed = json.loads(archive.read(physical_manifest).decode("utf-8"))
                 if isinstance(parsed, dict):
                     metadata = parsed
                 else:
@@ -119,7 +142,19 @@ class PackageContractDetector:
             except (KeyError, UnicodeDecodeError, json.JSONDecodeError, zipfile.BadZipFile):
                 errors.append(f"{manifest} is not valid JSON.")
 
-        assets, artefacts = self._assets(root_set, paths)
+        assets, artefacts = self._assets(root_set, logical_paths)
+        if deltas and not any(a.artefact_type == "Industry Twin Delta" for a in artefacts):
+            artefacts.append(PromotableArtefact("Industry Twin Delta", deltas[0], True, "Routes through the existing Blueprint candidate adapter"))
+            assets.append("Industry Twin Delta")
+        if len(matches) > 1:
+            errors.append("Ambiguous package contract: " + ", ".join(matches) + ".")
+        details = _inspection_details(content, logical, manifest, deltas, logical_paths)
+        if contract in {PackageContract.GOVERNED_INDUSTRY_TWIN, PackageContract.RESEARCH_WORKSPACE}:
+            for label, value in (("knowledge graph", details["graph_location"]), ("graph validation", details["graph_validation_location"]), ("evidence register", details["evidence_register_location"])):
+                if not value:
+                    warnings.append(f"Optional {label} artefact was not supplied.")
+        if contract is PackageContract.GOVERNED_INDUSTRY_TWIN and not deltas:
+            errors.append("Governed Industry Twin package is missing an Industry Twin Delta.")
         if contract is PackageContract.UNKNOWN:
             errors.append("Unknown package contract.")
             warnings.append("Package inspected. No canonical changes performed.")
@@ -128,7 +163,7 @@ class PackageContractDetector:
             _metadata_value(metadata, "package_id", "workspace_id", "delta_id", "mission_id"),
             _metadata_value(metadata, "package_version", "workspace_version", "delta_version", "version"),
             _freeze(metadata), tuple(assets), tuple(artefacts), tuple(warnings), tuple(errors),
-            ArchiveSummary(len(inventory), sum(item.size_bytes for item in inventory), roots),
+            ArchiveSummary(len(inventory), sum(item.size_bytes for item in inventory), tuple(sorted(paths))), _freeze(details),
         )
 
     @staticmethod
@@ -153,6 +188,39 @@ class PackageContractDetector:
         if _MISSION in root_set and "Research Workspace" not in assets:
             assets.insert(0, "Research Workspace")
         return assets, artefacts
+
+
+def _single_root_prefix(paths: tuple[str, ...]) -> str:
+    """Return a sole wrapper directory, but never collapse a modular root."""
+    first = {p.split("/", 1)[0] for p in paths}
+    return next(iter(first)) + "/" if len(first) == 1 and all("/" in p for p in paths) else ""
+
+
+def _inspection_details(content: bytes, logical: dict[str, str], manifest: str | None, deltas: list[str], paths: tuple[str, ...]) -> dict[str, Any]:
+    def find(*terms: str) -> str | None:
+        return next((p for p in paths if all(term in p.lower() for term in terms)), None)
+    graph_validation = find("graph", "validation")
+    status = None
+    if graph_validation:
+        physical = next(p for p, lp in logical.items() if lp == graph_validation)
+        try:
+            with zipfile.ZipFile(BytesIO(content)) as archive:
+                report = json.loads(archive.read(physical))
+            status = report.get("status") or report.get("validation_status") if isinstance(report, dict) else None
+        except (KeyError, json.JSONDecodeError, UnicodeDecodeError, zipfile.BadZipFile):
+            status = "unreadable"
+    return {
+        "manifest_location": manifest,
+        "delta_location": deltas[0] if deltas else None,
+        "graph_location": next((p for p in paths if "graph" in p.lower() and "validation" not in p.lower()), None),
+        "graph_validation_location": graph_validation,
+        "graph_validation_status": status,
+        "evidence_register_location": find("evidence"),
+        "unknown_register_location": find("unknown"),
+        "contradiction_register_location": find("contradiction"),
+        "package_inventory": list(sorted(logical)),
+        "excluded_research_only_objects": [p for p in paths if any(t in p.lower() for t in ("restart", "checkpoint", "research_queue", "mission_state"))],
+    }
 
 
 def _metadata_value(metadata: dict[str, Any], *keys: str) -> str | None:

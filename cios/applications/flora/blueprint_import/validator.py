@@ -21,6 +21,7 @@ from .models import BlueprintPackageRecord, PackageReceiptError
 from .registry import BlueprintPackageRegistry
 from .cios_twin_adapter import CiosCommercialTwinAdapter, MAPPING_VERSION
 from .atomicity import validate_atomic_statement, normalise_statement
+from .industry_delta_adapter import IndustryTwinDeltaAdapter
 
 class BlueprintValidationError(PackageReceiptError):
     pass
@@ -40,6 +41,7 @@ class BlueprintPackageValidator:
         self.staging = staging or CandidateStagingRepository()
         self.ledger = ledger or BlueprintImportLedger()
         self.twin_adapter = CiosCommercialTwinAdapter()
+        self.delta_adapter = IndustryTwinDeltaAdapter()
 
     def validate_and_stage(self, package_ref: str, actor: str, headers: Any | None = None) -> ImportRunDryRunResult:
         package = self.registry.get(package_ref)
@@ -130,6 +132,22 @@ class BlueprintPackageValidator:
                         errors.append(DUPLICATE_MANIFEST_MESSAGE)
                     else:
                         errors.append("Duplicate package files: " + ", ".join(sorted(duplicates)))
+                contract = (package.package_inspection or {}).get("contract_type", "Blueprint Package")
+                if contract != "Blueprint Package":
+                    delta_items = [a for a in package.package_inspection.get("promotable_artefacts", []) if a.get("artefact_type") == "Industry Twin Delta"]
+                    if not delta_items:
+                        errors.append("Package has no governed Industry Twin Delta and cannot be staged")
+                    else:
+                        delta_path = delta_items[0]["path"]
+                        physical = next((n for n in names if n == delta_path or n.endswith("/" + delta_path)), "")
+                        try:
+                            delta = json.loads(zf.read(physical).decode("utf-8"))
+                            if not isinstance(delta, dict): raise ValueError("Delta must be a JSON object")
+                            candidates.extend(self.delta_adapter.candidates(package, delta, physical))
+                        except (KeyError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
+                            errors.append(f"Industry Twin Delta is invalid: {exc}")
+                    warnings.append("Research and workspace execution artefacts are retained as package lineage and excluded from staging")
+                    return candidates, warnings, errors, files, unsupported, unresolved, trace
                 try:
                     manifest = read_root_manifest(zf)
                 except PackageReceiptError as exc:

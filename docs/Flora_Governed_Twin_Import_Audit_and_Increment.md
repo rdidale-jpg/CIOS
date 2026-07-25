@@ -101,3 +101,86 @@ boundaries remain unchanged. Remaining gaps include a governed retention
 schedule, persisted mixed-package scope selection, and dedicated canonical
 constructors for every requested Twin type; reconcile these before claiming the
 entire broad product specification is complete.
+
+## WP0 Industry Twin package conformance audit (2026-07-25)
+
+### Audit-before-change result and canonical owners
+
+The pre-change audit traced the authoritative path to `blueprint_import/archive.py`
+and `registry.py` (safe receipt, inventory, immutable original and checksum),
+`manifest.py` and `validator.py` (Blueprint validation), `candidates.py` (the sole
+staging repository), `review.py`/`mapping.py` (review decisions), `planning.py`
+(dry-run), `promotion.py`/`atomicity.py` (the sole canonical write boundary), and
+`ledger.py` (append-only lifecycle and lineage events). `views.py` and its routes
+in `web/app.py` own inspection. No parallel registry, staging engine, promotion
+engine, ledger, or canonical store was introduced.
+
+| Capability | Pre-change classification | Evidence / confirmed gap |
+|---|---|---|
+| Blueprint packages | Implemented | Full receipt through promotion path and regression suite. |
+| Governed Industry Twin packages | Partially implemented | Read-only detector existed, but did not recognise governed manifests, nested roots, hyphenated or modular Delta paths; registry still required a Blueprint manifest. |
+| Research Workspace packages | Partially implemented | Root markers and research/promotable separation existed; registry and validator could not accept them. |
+| Industry Twin Delta extraction | Partially implemented | Adapter existed but was not invoked by the validator. |
+| Nested package roots / modular `flora/` | Missing | Detector considered exact root names only. |
+| Inspection before staging | Implemented | Receipt stores detector output and views surface it. |
+| Checksums | Implemented | Archive and inventory SHA-256; Blueprint declared-member checks remain adapter-specific. |
+| Knowledge-graph validation | Partially implemented | Reports can now be located and their supplied status surfaced; endpoint validation has no accepted canonical validator. |
+| Original-package retention | Implemented | Content-addressed immutable original archive. |
+| Promotion lineage | Implemented | Existing candidates, decisions, plan, approval, execution and ledger retain package SHA/source. |
+| Unknown ZIP handling | Partially implemented | Traversal/corrupt rejection existed; explicit expansion constraints and ambiguity reporting were missing. |
+
+### Smallest implementation increment and contract matrix
+
+Detection now normalises at most one wrapper directory, uses exact contract
+signatures rather than ZIP names, and fails closed when contracts conflict.
+Governed Industry Twin requires both a governed manifest and Delta; a workspace
+requires a workspace/restart/mission marker; a Delta alone remains recognised as
+a compatibility contract. Blueprint still requires root-level
+`blueprint_manifest.json` and follows its unchanged manifest/validator route.
+Unknown input is inspectable but cannot stage or promote.
+
+The inspection record includes the physical inventory, manifest and Delta
+locations, graph/report locations and supplied graph-validation status, evidence,
+Unknown and Contradiction register locations, and excluded research mechanics.
+Optional absence produces warnings. Only `records` inside the located Delta are
+passed to `IndustryTwinDeltaAdapter`; restart, checkpoint, mission and research
+queue files remain solely in the preserved archive lineage. The resulting
+candidates enter the existing staging, review, plan/dry-run and promotion
+services. No automatic promotion occurs.
+
+### Validation and security
+
+Receipt rejects absolute, backslash, dot-segment and traversal paths, corrupt or
+empty ZIPs, more than 10,000 files, more than 250 MiB expanded content, and a
+member compression ratio above 200:1. Detection is sorted/order-independent and
+ambiguous matches block receipt. JSON manifests and Deltas must be objects;
+missing or malformed Deltas block staging. Existing candidate validation handles
+supported classes, stable external IDs, unresolved references and projection-only
+classes. Dedicated checksum-manifest dialect validation, graph endpoint
+resolution, evidence-reference validation across arbitrary producer schemas and
+prohibited-status vocabulary require accepted schemas and remain deferred rather
+than inferred.
+
+### Compatibility, acceptance evidence and limitations
+
+Blueprint receipt diagnostics, validation, staging, review and promotion remain
+unchanged. No data migration is required; old records without inspection details
+continue to deserialize. Committed tests use safe synthetic packages for nested
+TMS, modular DIST, governed UKEU staging, workspace separation, unknown,
+ambiguity, traversal and Blueprint regression.
+
+The three real UKEU-001, TMS-001 and DIST-001 ZIPs were **not present in this
+checkout and were not exercised**. Consequently no claim is made that their
+actual manifests, graph endpoints, checksums, staging, review, dry-run or
+promotion passed. `tests/fixtures/industry_twin_packages/README.md` documents the
+non-production local placement and `tools/inspect_industry_twin_packages.py`
+produces read-only JSON evidence without receiving or promoting content. Real
+package execution remains an acceptance gate.
+
+### Chief Architect recommendation
+
+**Revise.** Merge only after authorised holders run all three real packages,
+review their diagnostics, and either confirm their Delta records conform to the
+existing candidate schema or govern any necessary schema adapter. This increment
+is architecture-conformant and regression-tested, but real-package evidence is
+explicitly outstanding.

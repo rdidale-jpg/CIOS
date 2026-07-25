@@ -19,3 +19,6 @@ dist/
 
 # Binary archives
 *.zip
+
+# Local governed Industry Twin acceptance evidence (not distributable)
+tests/fixtures/industry_twin_packages/*.zip
