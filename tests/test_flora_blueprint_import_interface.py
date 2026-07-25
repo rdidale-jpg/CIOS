@@ -118,7 +118,7 @@ def test_denied_upload_screen_shows_live_diagnostics_for_non_owner(monkeypatch,t
     assert "Signed-in account" in html and "reader" in html
     assert "Active workspace" in html and "synthetic-enterprise" in html
     assert "Owner recognised</th><td>no" in html
-    assert "Required Blueprint capability" in html and "package.upload" in html
+    assert "Required capability" in html and "package.upload" in html
     assert "Package receive permission checked</th><td>Failed" in html
     assert "Canonical import committed</th><td>Not started" in html
     assert "Diagnostic reference" in html and "bpi-diag-" in html
@@ -180,7 +180,7 @@ def test_denied_entry_page_renders_when_audit_persistence_fails(monkeypatch, tmp
     html, status = import_blueprint_entry_page(READ_ONLY)
 
     assert status == 403
-    assert "Blueprint import needs attention" in html
+    assert "Package import needs attention" in html
     assert "You do not have permission to import Blueprints in this workspace." in html
     assert "Canonical changes occurred: no" in html
     assert "Diagnostic reference" in html and "bpi-diag-" in html
@@ -206,7 +206,7 @@ def test_unavailable_var_data_style_path_no_longer_crashes_denied_page(monkeypat
     html, status = import_blueprint_entry_page(READ_ONLY)
 
     assert status == 403
-    assert "Blueprint import needs attention" in html
+    assert "Package import needs attention" in html
     assert "Blueprint diagnostics could not be persisted." in html
     assert "Package receive permission checked</th><td>Failed" in html
     assert "Diagnostic reference" in html and "bpi-diag-" in html

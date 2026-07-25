@@ -40,6 +40,12 @@ class BlueprintPackageIdentity:
 
 @dataclass(frozen=True)
 class BlueprintPackageRecord:
+    """Canonical result of a successful package receipt.
+
+    The registry owns this contract.  In particular, receipt is represented by
+    ``status == "received"``; there is deliberately no historical ``accepted``
+    mapping key for web adapters to interpret.
+    """
     schema_version: str
     package_ref: str
     identity: BlueprintPackageIdentity
@@ -54,6 +60,23 @@ class BlueprintPackageRecord:
     import_run_id: str
     workspace_id: str = ""
     package_inspection: dict[str, Any] = field(default_factory=dict)
+
+    @property
+    def receipt_success(self) -> bool:
+        return self.status == "received"
+
+    @property
+    def registry_reference(self) -> str:
+        return self.package_ref
+
+    @property
+    def warnings(self) -> tuple[str, ...]:
+        return tuple(str(item) for item in self.package_inspection.get("warnings", ()))
+
+    @property
+    def blocking_error(self) -> str:
+        errors = self.package_inspection.get("blocking_errors", ())
+        return "; ".join(str(item) for item in errors)
 
     def to_dict(self) -> dict[str, Any]:
         data = asdict(self)
