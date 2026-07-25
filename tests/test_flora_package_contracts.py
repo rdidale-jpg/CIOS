@@ -196,3 +196,67 @@ def test_empty_governed_delta_is_an_explicit_blocking_failure(tmp_path, monkeypa
     assert "no staging candidates could be extracted" in result.errors[0]
     assert result.execution_trace[-1]["status"] == "Failed"
     assert result.execution_trace[-1]["delta_location"] == "flora/industry-twin-delta-for-flora.json"
+
+
+def test_governed_metadata_precedence_and_filename_cannot_override(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    content = package(
+        ("00_manifest.json", {"mission_id": "TMS-001", "package_title": "Transport Twin", "package_profile": "industry-twin-v1"}),
+        ("flora/promotion-manifest.json", {"mission_id": "TMS-001", "package_title": "Transport Twin"}),
+        ("flora/industry_twin_delta_for_Flora.json", {"metadata": {"mission_id": "TMS-001"}, "records": []}),
+        ("machine-inspectable/knowledge-graph.json", {"nodes": [], "edges": []}),
+    )
+    result = inspect(content).to_dict()
+    receipt = BlueprintPackageRegistry().receive(content, "DIST-001.zip", "auditor")
+    assert result["mission_identifier"] == "TMS-001"
+    assert result["metadata_sources"]["mission_identifier"] == "00_manifest.json"
+    assert receipt.identity.package_id == "TMS-001"
+
+
+def test_conflicting_governed_mission_ids_block_with_values_and_paths():
+    result = inspect(package(
+        ("00_manifest.json", {"mission_id": "UKEU-001"}),
+        ("flora/promotion-manifest.json", {"mission_id": "DIST-001"}),
+        ("flora/industry_twin_delta_for_Flora.json", {"records": []}),
+        ("twins/industry-twin.json", {}),
+    )).to_dict()
+    assert not result["promotion_eligible"]
+    assert result["metadata_conflicts"][0]["field"] == "mission_identifier"
+    assert "00_manifest.json" in result["blocking_errors"][0]
+    assert "flora/promotion-manifest.json" in result["blocking_errors"][0]
+
+
+def test_missing_optional_governed_metadata_is_not_invented():
+    result = inspect(package(
+        ("00_manifest.json", {"mission_id": "DIST-001"}),
+        ("flora/industry_twin_delta_for_Flora.json", {"records": []}),
+        ("twins/industry-twin.json", {}),
+    )).to_dict()
+    assert result["twin_title"] is None
+    assert result["research_state"] is None
+    assert result["decision_maturity"] is None
+
+
+def test_ambiguous_nested_governed_roots_block():
+    result = inspect(package(
+        ("one/00_manifest.json", {"mission_id": "ONE"}),
+        ("one/industry_twin_delta_for_Flora.json", {"records": []}),
+        ("two/00_manifest.json", {"mission_id": "TWO"}),
+        ("two/industry_twin_delta_for_Flora.json", {"records": []}),
+    ))
+    assert any("Ambiguous nested package roots" in error for error in result.blocking_errors)
+    assert not result.promotion_eligible
+
+
+def test_dist_modular_assets_and_governed_paths_are_counted_conservatively():
+    result = inspect(package(
+        ("00_manifest.json", {"mission_id": "DIST-001", "twin_title": "Distribution Industry Twin", "twin_type": "Industry"}),
+        ("flora/industry_twin_delta_for_Flora.json", {"records": [{"external_id": "I-1", "twin_type": "industry"}, {"external_id": "E-1", "record_class": "evidence"}]}),
+        ("machine-inspectable/knowledge-graph.json", {"nodes": [{"id": "1"}, {"id": "2"}], "edges": [{"from": "1", "to": "2"}]}),
+        ("registers/unknowns.json", {"unknowns": [{"id": "U"}]}),
+        ("registers/contradictions.json", {"contradictions": [{"id": "C"}]}),
+        ("workspace/deterministic_restart_state.json", {"mission_id": "DIST-001"}),
+    )).to_dict()
+    assert result["graph_location"] == "machine-inspectable/knowledge-graph.json"
+    assert result["restart_state_location"] == "workspace/deterministic_restart_state.json"
+    assert result["asset_counts"] == {"Industry Twins": 1, "Evidence records": 1, "graph nodes": 2, "graph edges": 1, "Unknowns": 1, "Contradictions": 1}
