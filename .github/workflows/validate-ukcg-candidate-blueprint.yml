@@ -4,10 +4,7 @@ on:
   pull_request:
     paths:
       - ".github/workflows/validate-ukcg-candidate-blueprint.yml"
-      - "cios/**"
       - "tests/blueprints/test_ukcg_materialisation.py"
-      - "tests/test_flora_blueprint_import_validation.py"
-      - "tests/test_flora_blueprint_import_registry.py"
       - "tools/blueprints/materialise_ukcg.py"
       - "docs/industry-twins/uk-central-government/UKCG-CDT-00-Delivery-and-Input-Manifest-v1.0.md"
       - "docs/industry-twins/uk-central-government/Candidate-UK-Central-Government-Industry-Twin-Handover.md"
@@ -19,10 +16,7 @@ on:
       - work
     paths:
       - ".github/workflows/validate-ukcg-candidate-blueprint.yml"
-      - "cios/**"
       - "tests/blueprints/test_ukcg_materialisation.py"
-      - "tests/test_flora_blueprint_import_validation.py"
-      - "tests/test_flora_blueprint_import_registry.py"
       - "tools/blueprints/materialise_ukcg.py"
       - "docs/industry-twins/uk-central-government/UKCG-CDT-00-Delivery-and-Input-Manifest-v1.0.md"
       - "docs/industry-twins/uk-central-government/Candidate-UK-Central-Government-Industry-Twin-Handover.md"

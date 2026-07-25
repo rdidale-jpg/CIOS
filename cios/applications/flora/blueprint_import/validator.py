@@ -143,9 +143,28 @@ class BlueprintPackageValidator:
                         try:
                             delta = json.loads(zf.read(physical).decode("utf-8"))
                             if not isinstance(delta, dict): raise ValueError("Delta must be a JSON object")
-                            candidates.extend(self.delta_adapter.candidates(package, delta, physical))
+                            extracted = self.delta_adapter.candidates(package, delta, physical)
+                            candidates.extend(extracted)
+                            trace.append({
+                                "timestamp": utc_now(), "step_id": 1, "component": "industry_delta_adapter",
+                                "action": "Extract governed Industry Twin Delta", "safe_input_summary": physical,
+                                "safe_output_summary": f"{len(extracted)} candidates staged", "status": "Passed",
+                                "failure_reason": "", "correlation_id": package.import_run_id,
+                                "manifest_location": package.package_inspection.get("manifest_location"),
+                                "delta_location": package.package_inspection.get("delta_location"),
+                                "package_checksum": package.package_sha256,
+                            })
                         except (KeyError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
                             errors.append(f"Industry Twin Delta is invalid: {exc}")
+                            trace.append({
+                                "timestamp": utc_now(), "step_id": 1, "component": "industry_delta_adapter",
+                                "action": "Extract governed Industry Twin Delta", "safe_input_summary": delta_items[0].get("path", ""),
+                                "safe_output_summary": "No staging candidates", "status": "Failed",
+                                "failure_reason": str(exc), "correlation_id": package.import_run_id,
+                                "manifest_location": package.package_inspection.get("manifest_location"),
+                                "delta_location": package.package_inspection.get("delta_location"),
+                                "package_checksum": package.package_sha256,
+                            })
                     warnings.append("Research and workspace execution artefacts are retained as package lineage and excluded from staging")
                     return candidates, warnings, errors, files, unsupported, unresolved, trace
                 try:

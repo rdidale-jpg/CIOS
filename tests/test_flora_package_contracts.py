@@ -156,3 +156,43 @@ def test_governed_delta_uses_existing_registry_and_staging(tmp_path, monkeypatch
     assert [c["original_source_id"] for c in summary["candidates"]] == ["EV-1"]
     assert receipt.package_inspection["contract_type"] == "Governed Industry Twin Package"
     assert receipt.archive_path
+
+
+def test_operation_oriented_governed_delta_preserves_identity_and_stages(tmp_path, monkeypatch):
+    """Regression for producer Deltas that do not use the legacy records array."""
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    content = package(
+        ("00_manifest.json", {"package_id": "DIST-001", "version": "1.0", "industry": "Distribution"}),
+        ("flora/industry-twin-delta-for-flora.json", {"delta": {"creates": [
+            {"id": "DIST-OBS-001", "object_type": "observation", "data": {"statement": "Distribution demand is changing."}},
+        ], "evidence": [
+            {"stable_id": "DIST-EV-001", "statement": "A governed source supports the observation."},
+        ]}}),
+    )
+    receipt = BlueprintPackageRegistry().receive(content, "DIST-001.zip", "auditor")
+    result = BlueprintPackageValidator().validate_and_stage(receipt.package_ref, "auditor")
+    candidates = BlueprintPackageValidator().staging_summary(receipt.import_run_id)["candidates"]
+
+    assert receipt.original_filename == "DIST-001.zip"
+    assert receipt.identity.package_id == "DIST-001"
+    assert receipt.identity.enterprise_id == "DIST-001"
+    assert receipt.package_inspection["contract_type"] == "Governed Industry Twin Package"
+    assert result.candidate_records_staged == 2
+    assert not result.errors
+    assert {row["original_source_id"] for row in candidates} == {"DIST-OBS-001", "DIST-EV-001"}
+    assert {row["payload"]["twin_type"] for row in candidates} == {"industry"}
+
+
+def test_empty_governed_delta_is_an_explicit_blocking_failure(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    content = package(
+        ("00_manifest.json", {"package_id": "DIST-001", "version": "1.0"}),
+        ("flora/industry-twin-delta-for-flora.json", {"delta": {"creates": []}}),
+    )
+    receipt = BlueprintPackageRegistry().receive(content, "DIST-001.zip", "auditor")
+    result = BlueprintPackageValidator().validate_and_stage(receipt.package_ref, "auditor")
+
+    assert result.candidate_records_staged == 0
+    assert "no staging candidates could be extracted" in result.errors[0]
+    assert result.execution_trace[-1]["status"] == "Failed"
+    assert result.execution_trace[-1]["delta_location"] == "flora/industry-twin-delta-for-flora.json"
