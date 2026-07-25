@@ -34,6 +34,16 @@ class BlueprintPackageRegistry:
             return []
         return [BlueprintPackageRecord.from_dict(json.loads(path.read_text(encoding="utf-8"))) for path in sorted(root.glob("*.json"))]
 
+    def update_inspection(self, package_ref: str, values: dict) -> BlueprintPackageRecord:
+        """Persist facts learned during validation on the one inspection record."""
+        record = self.get(package_ref)
+        if record is None:
+            raise PackageReceiptError("Unknown Blueprint package reference")
+        data = record.to_dict()
+        data["package_inspection"] = dict(record.package_inspection) | values
+        atomic_write_json(self._path_for_ref(package_ref), data)
+        return BlueprintPackageRecord.from_dict(data)
+
     def receive(self, content: bytes, original_filename: str, actor: str, workspace_id: str = "") -> BlueprintPackageRecord:
         return self._receive(content, original_filename, actor, workspace_id)
 

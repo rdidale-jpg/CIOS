@@ -316,6 +316,50 @@ def test_primary_object_missing_collection_and_identifier_block_staging(tmp_path
     assert result.candidate_records_staged == 0
 
 
+def test_duplicate_governed_identifier_blocks_and_failure_trace_is_truthful(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    content = package(
+        ("flora/promotion-manifest.json", {"mission_id": "DIST-001"}),
+        ("flora/industry-twin-delta-for-flora.json", {"primary_objects": {"enterprise_twins": ["ENT-1"]}}),
+        ("collections/enterprise-twins.json", [
+            {"twin_id": "ENT-1", "name": "First"},
+            {"twin_id": "ENT-1", "name": "Duplicate"},
+        ]),
+    )
+    receipt = BlueprintPackageRegistry().receive(content, "duplicate-id.zip", "auditor")
+    result = BlueprintPackageValidator().validate_and_stage(receipt.package_ref, "auditor")
+    persisted = BlueprintPackageRegistry().get(receipt.package_ref).package_inspection
+
+    assert result.candidate_records_staged == 0
+    assert "duplicate governed identifier 'ENT-1'" in result.errors[0]
+    assert persisted["resolved_candidate_count"] == 0
+    assert persisted["governed_resolution"]["duplicate_identifier_counts"]["enterprise_twins"] == 1
+    actions = [event["action"] for event in result.execution_trace]
+    assert "References resolved" not in actions
+    assert "Staging candidates created" not in actions
+    assert result.execution_trace[-1]["safe_output_summary"] == "Staging not started; 0 candidates"
+
+
+def test_promotion_manifest_collection_path_has_precedence(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    content = package(
+        ("flora/promotion-manifest.json", {
+            "mission_id": "DIST-001",
+            "collections": {"enterprise_twins": {"path": "governed/enterprises.json"}},
+        }),
+        ("flora/industry-twin-delta-for-flora.json", {"primary_objects": {"enterprise_twins": ["ENT-1"]}}),
+        ("governed/enterprises.json", {"objects": [{"enterprise_twin_id": "ENT-1", "title": "Enterprise"}]}),
+        ("collections/enterprise-twins.json", [{"twin_id": "WRONG", "name": "Convention fallback"}]),
+    )
+    receipt = BlueprintPackageRegistry().receive(content, "manifest-path.zip", "auditor")
+    validator = BlueprintPackageValidator()
+    result = validator.validate_and_stage(receipt.package_ref, "auditor")
+    candidate = validator.staging_summary(receipt.import_run_id)["candidates"][0]
+
+    assert result.records_accepted_into_staging == 1
+    assert candidate["original_source_id"] == "ENT-1"
+    assert candidate["source_file"] == "governed/enterprises.json"
+
 def test_conflicting_governed_metadata_blocks_service_path_before_staging(tmp_path, monkeypatch):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     content = package(
