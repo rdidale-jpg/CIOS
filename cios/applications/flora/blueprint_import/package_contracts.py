@@ -286,11 +286,11 @@ def _inspection_details(
     fields = {
         "package_profile": ("package_profile", "profile", "profile_version", "schema_profile"),
         "mission_identifier": ("mission_id", "mission_identifier", "missionId", "package_id"),
-        "twin_title": ("industry_twin_title", "twin_title", "industry_title", "package_title", "title", "industry"),
+        "twin_title": ("industry_twin_title", "twin_title", "industry_title", "package_title", "title", "industry", "name"),
         "twin_type": ("twin_type", "type"),
         "package_version": ("package_version", "version", "delta_version"),
-        "research_state": ("research_state", "mission_state", "state"),
-        "decision_maturity": ("decision_maturity", "maturity"),
+        "research_state": ("research_state", "research_status", "mission_state", "state"),
+        "decision_maturity": ("decision_maturity", "decision_readiness", "maturity"),
     }
     resolved: dict[str, Any] = {}
     sources: dict[str, str] = {}
@@ -358,6 +358,13 @@ def _deep_metadata_value(document: Any, *keys: str) -> Any:
         found = _deep_metadata_value(value, *keys)
         if found not in (None, ""):
             return found
+    # Governed producers may add a named envelope.  Search remaining mappings
+    # in document order while preserving the source-document precedence above.
+    for value in document.values():
+        if isinstance(value, dict):
+            found = _deep_metadata_value(value, *keys)
+            if found not in (None, ""):
+                return found
     return None
 
 
@@ -378,7 +385,18 @@ def _asset_counts(documents: dict[str, Any], paths: tuple[str, ...], locations: 
     aliases = {"industry": "Industry Twins", "enterprise": "Enterprise Twins", "market_participant": "Market Participant Twins", "flow": "Flow Twins", "opportunity": "Opportunity Twins", "control_body": "Control Bodies", "procurement_route": "Procurement Routes", "transformation_programme": "Transformation Programmes", "evidence": "Evidence records", "unknown": "Unknowns", "contradiction": "Contradictions"}
     counts: dict[str, int] = {}
     seen: set[tuple[str, str]] = set()
+    category_labels = {"industry_twins": "Industry Twins", "enterprise_twins": "Enterprise Twins", "market_participant_twins": "Market Participant Twins", "opportunity_twins": "Opportunity Twins", "flow_twins": "Flow Twins"}
     for path, doc in documents.items():
+        primary = doc.get("primary_objects") if isinstance(doc, dict) else None
+        if not isinstance(primary, dict) and isinstance(doc, dict) and isinstance(doc.get("delta"), dict):
+            primary = doc["delta"].get("primary_objects")
+        if isinstance(primary, dict):
+            for category, declaration in primary.items():
+                values = declaration
+                if isinstance(declaration, dict):
+                    values = next((declaration[key] for key in ("ids", "identifiers", "references", "objects", "items") if key in declaration), [])
+                if isinstance(values, list) and category in category_labels:
+                    counts[category_labels[category]] = max(counts.get(category_labels[category], 0), len(values))
         rows = doc if isinstance(doc, list) else next((doc.get(k) for k in ("records", "items", "nodes", "entries", "unknowns", "contradictions", "enterprise_twins", "market_participant_twins", "opportunity_twins", "flow_twins") if isinstance(doc, dict) and isinstance(doc.get(k), list)), None)
         if not isinstance(rows, list):
             continue

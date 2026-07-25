@@ -26,6 +26,28 @@ from .industry_delta_adapter import IndustryTwinDeltaAdapter
 class BlueprintValidationError(PackageReceiptError):
     pass
 
+
+def _manifest_collection_paths(document: Any) -> dict[str, tuple[str, ...]]:
+    """Read category-to-path declarations without imposing a producer layout."""
+    if not isinstance(document, dict):
+        return {}
+    output: dict[str, tuple[str, ...]] = {}
+    containers = [document.get(key) for key in ("collections", "collection_files", "object_collections", "primary_object_collections")]
+    for container in containers:
+        if not isinstance(container, dict):
+            continue
+        for category, declaration in container.items():
+            paths: list[str] = []
+            if isinstance(declaration, str):
+                paths.append(declaration)
+            elif isinstance(declaration, dict):
+                paths.extend(str(declaration[key]) for key in ("path", "file", "location") if isinstance(declaration.get(key), str))
+            elif isinstance(declaration, list):
+                paths.extend(str(value) for value in declaration if isinstance(value, str))
+            if paths:
+                output[str(category)] = tuple(dict.fromkeys(path.lstrip("./") for path in paths))
+    return output
+
 def can_inspect_blueprint_package(headers: Any, package: BlueprintPackageRecord) -> bool:
     if not authenticated_flora_user(headers):
         return False
@@ -65,6 +87,12 @@ class BlueprintPackageValidator:
         shutil.rmtree(self.staging.root_for(package.import_run_id) / "candidates", ignore_errors=True)
         for candidate in candidates:
             self.staging.save_candidate(candidate)
+        if (package.package_inspection or {}).get("contract_type") == "Governed Industry Twin Package" and candidates and not errors:
+            trace.append({"timestamp": utc_now(), "step_id": 10, "component": "candidate_staging_repository",
+                "action": "Staging completed", "safe_input_summary": f"{len(candidates)} candidates",
+                "safe_output_summary": f"{len(candidates)} candidates persisted; validation passed",
+                "status": "Passed", "failure_reason": "", "correlation_id": package.import_run_id,
+                "package_checksum": package.package_sha256})
         result = ImportRunDryRunResult("1.0", package.import_run_id, package_ref, package.package_sha256, tuple(files),
             sum(1 for c in candidates if c.candidate_object_class in SUPPORTED_RECORD_CLASSES), len(candidates), accepted, quarantined, rejected,
             tuple(sorted(unsupported)), tuple(sorted(unresolved)), tuple(warnings), tuple(errors), 0, tuple(trace))
@@ -175,21 +203,38 @@ class BlueprintPackageValidator:
                                 chosen.append((logical_name, document))
                             return tuple(chosen)
                         try:
+                            self.delta_adapter.diagnostics = {}
                             delta = json.loads(zf.read(physical).decode("utf-8"))
                             if not isinstance(delta, dict): raise ValueError("Delta must be a JSON object")
                             event(4, "Delta parsed", delta_path)
                             event(5, "Metadata extracted", f"{len(inspection.get('metadata_sources', {}))} governed fields")
-                            extracted = self.delta_adapter.candidates(package, delta, delta_path, read_collection=read_collection)
+                            manifest_paths = _manifest_collection_paths(inspection.get("package_metadata"))
+                            extracted = self.delta_adapter.candidates(
+                                package, delta, delta_path, read_collection=read_collection,
+                                manifest_collection_paths=manifest_paths,
+                            )
                             diag = self.delta_adapter.diagnostics
                             event(6, "Object collections located", f"{len(diag.get('collection_files_selected', []))} collection files", collection_files_selected=diag.get("collection_files_selected", []), primary_object_categories=diag.get("primary_object_categories", []), primary_object_shapes=diag.get("primary_object_shapes", {}), collection_root_shapes=diag.get("collection_root_shapes", {}))
                             event(7, "References indexed", f"{sum(diag.get('objects_indexed', {}).values())} objects indexed", objects_indexed=diag.get("objects_indexed", {}), identifier_fields_used=diag.get("identifier_fields_used", {}), references_requested=diag.get("references_requested", {}))
-                            event(8, "References resolved", f"{sum(diag.get('references_resolved', {}).values())} references resolved", references_resolved=diag.get("references_resolved", {}), unresolved_identifiers=diag.get("unresolved_identifiers", {}), resolved_counts_by_category=diag.get("resolved_counts_by_category", {}))
+                            resolved_total = sum(diag.get("references_resolved", {}).values())
+                            requested_total = sum(diag.get("references_requested", {}).values())
+                            event(8, "References resolved" if resolved_total else "Reference resolution not required",
+                                  f"{resolved_total} of {requested_total} declared references resolved",
+                                  references_resolved=diag.get("references_resolved", {}), unresolved_identifiers=diag.get("unresolved_identifiers", {}), resolved_counts_by_category=diag.get("resolved_counts_by_category", {}))
                             candidates.extend(extracted)
-                            event(9, "Staging candidates created", f"{len(extracted)} candidates")
-                            event(10, "Staging result", "Candidates entered existing staging engine")
+                            event(9, "Candidate conversion completed", f"{len(extracted)} candidates ready for staging")
+                            self._persist_governed_resolution(package, diag, len(extracted))
                         except (KeyError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
                             errors.append(f"Industry Twin Delta is invalid: {exc}")
-                            event(10, "Staging result", "No staging candidates", "Failed", str(exc), input=delta_path)
+                            diag = self.delta_adapter.diagnostics
+                            indexed = sum(diag.get("objects_indexed", {}).values())
+                            resolved_count = sum(diag.get("references_resolved", {}).values())
+                            event(6, "Collection lookup attempted", f"{len(diag.get('collection_files_selected', []))} collection files selected", "Failed", str(exc), collection_files_selected=diag.get("collection_files_selected", []), expected_collection_paths=diag.get("expected_collection_paths", {}), primary_object_categories=diag.get("primary_object_categories", []))
+                            event(7, "Reference indexing attempted", f"{indexed} objects indexed", "Failed", str(exc), objects_indexed=diag.get("objects_indexed", {}), duplicate_identifier_counts=diag.get("duplicate_identifier_counts", {}))
+                            event(8, "Reference resolution attempted", f"{resolved_count} references resolved", "Failed", str(exc), references_resolved=diag.get("references_resolved", {}), unresolved_identifiers=diag.get("unresolved_identifiers", {}))
+                            event(9, "Candidate conversion", "0 candidates created", "Failed", str(exc))
+                            event(10, "Staging result", "Staging not started; 0 candidates", "Failed", str(exc), input=delta_path)
+                            self._persist_governed_resolution(package, diag, 0)
                     warnings.append("Research and workspace execution artefacts are retained as package lineage and excluded from staging")
                     return candidates, warnings, errors, files, unsupported, unresolved, trace
                 try:
@@ -217,6 +262,30 @@ class BlueprintPackageValidator:
             # create a rejected package-metadata record so failed runs remain inspectable
             candidates.append(self._candidate(package, "blueprint_manifest.json", "package", "package_metadata", "package_metadata", {}, "rejected", [ValidationFinding("error", "package_invalid", "; ".join(errors))]))
         return candidates, warnings, errors, files, unsupported, unresolved, trace
+
+    def _persist_governed_resolution(self, package, diagnostics: dict[str, Any], candidate_count: int) -> None:
+        labels = {
+            "enterprise_twins": "Enterprise Twins", "market_participant_twins": "Market Participant Twins",
+            "opportunity_twins": "Opportunity Twins", "flow_twins": "Flow Twins",
+            "industry_twins": "Industry Twins",
+        }
+        inspection = package.package_inspection or {}
+        counts = dict(inspection.get("asset_counts") or {})
+        for category, count in diagnostics.get("references_resolved", {}).items():
+            if category in labels:
+                counts[labels[category]] = int(count)
+        declared = sum(diagnostics.get("references_requested", {}).values())
+        resolved = sum(diagnostics.get("references_resolved", {}).values())
+        counts.update({"Declared objects": declared, "Resolved objects": resolved,
+                       "Promotable candidates": candidate_count,
+                       "Unresolved references": max(0, declared - resolved),
+                       "Lineage-only assets": len(inspection.get("excluded_research_only_objects") or [])})
+        self.registry.update_inspection(package.package_ref, {
+            "asset_counts": counts,
+            "governed_resolution": diagnostics,
+            "resolved_candidate_count": candidate_count,
+            "unresolved_references": [identifier for values in diagnostics.get("unresolved_identifiers", {}).values() for identifier in values],
+        })
 
     def _validate_manifest(self, package, manifest, seen, warnings, errors):
         if not isinstance(manifest, dict): errors.append(INVALID_SCHEMA_MESSAGE); return

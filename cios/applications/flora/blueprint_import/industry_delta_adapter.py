@@ -22,13 +22,23 @@ class IndustryTwinDeltaAdapter:
         "opportunity_twins": "twin",
         "flow_twins": "twin",
     }
-    IDENTIFIERS = ("external_id", "stable_id", "object_id", "twin_id", "id")
+    IDENTIFIERS = (
+        "external_id", "stable_id", "object_id", "twin_id", "enterprise_twin_id",
+        "market_participant_twin_id", "opportunity_twin_id", "flow_twin_id", "id",
+    )
+    DEFAULT_COLLECTION_PATHS = {
+        "enterprise_twins": ("collections/enterprise-twins.json", "twins/enterprise-twins.json"),
+        "market_participant_twins": ("collections/market-participant-twins.json", "twins/market-participant-twins.json"),
+        "opportunity_twins": ("collections/opportunity-twins.json", "twins/opportunity-twins.json"),
+        "flow_twins": ("collections/flow-twins.json", "collections/flow-twins.csv", "twins/flow-twins.json"),
+    }
 
     def __init__(self) -> None:
         self.diagnostics: dict[str, Any] = {}
 
     def candidates(self, package: BlueprintPackageRecord, delta: dict[str, Any], source_file: str,
-                   read_collection: CollectionReader | None = None) -> tuple[CandidateImportRecord, ...]:
+                   read_collection: CollectionReader | None = None,
+                   manifest_collection_paths: dict[str, tuple[str, ...]] | None = None) -> tuple[CandidateImportRecord, ...]:
         records = self._records(delta)
         primary = self._primary_objects(delta)
         diag: dict[str, Any] = {
@@ -36,7 +46,12 @@ class IndustryTwinDeltaAdapter:
             "collection_files_selected": [], "collection_root_shapes": {},
             "identifier_fields_used": {}, "objects_indexed": {}, "references_requested": {},
             "references_resolved": {}, "unresolved_identifiers": {}, "resolved_counts_by_category": {},
+            "declared_identifiers": {}, "expected_collection_paths": {}, "actual_collection_paths": {},
+            "duplicate_identifier_counts": {}, "unresolved_counts": {},
         }
+        # Publish diagnostics before I/O so a failure can never inherit the
+        # previous validation run's successful diagnostics.
+        self.diagnostics = diag
         for category, declared in primary.items():
             shape = self._shape(declared)
             diag["primary_object_shapes"][category] = shape
@@ -44,38 +59,52 @@ class IndustryTwinDeltaAdapter:
             if inline:
                 records.extend((row, self.PROMOTABLE.get(category, category.removesuffix("s"))) for row in inline)
             diag["references_requested"][category] = len(references)
+            diag["declared_identifiers"][category] = list(references)
+            diag["unresolved_counts"][category] = len(references)
+            diag["duplicate_identifier_counts"][category] = 0
             if not references:
                 diag["references_resolved"][category] = 0
                 continue
             if read_collection is None:
                 raise ValueError(f"primary_objects category {category} contains references but no governed collection reader was supplied")
             paths = self._declared_paths(delta, category)
+            if manifest_collection_paths and manifest_collection_paths.get(category):
+                paths = manifest_collection_paths[category]
+            if not paths:
+                paths = self.DEFAULT_COLLECTION_PATHS.get(category, ())
+            diag["expected_collection_paths"][category] = list(paths)
             selected = read_collection(category, paths)
             if not selected:
-                raise ValueError(f"missing governed collection for primary_objects category {category}")
+                shown = ", ".join(paths) or "<no contract-defined path>"
+                raise ValueError(f"missing governed collection for primary_objects category {category}; attempted path(s): {shown}")
             index: dict[str, tuple[dict[str, Any], str, str]] = {}
             for path, document in selected:
                 diag["collection_files_selected"].append(path)
+                diag["actual_collection_paths"].setdefault(category, []).append(path)
                 rows, root_shape = self._collection_rows(document, category)
                 diag["collection_root_shapes"][path] = root_shape
-                for row in rows:
+                for row_number, row in enumerate(rows, 1):
                     identifier_field = next((field for field in self.IDENTIFIERS if row.get(field) not in (None, "")), None)
                     if identifier_field is None:
-                        raise ValueError(f"governed collection {path} for {category} contains an object with no stable identifier ({', '.join(self.IDENTIFIERS)})")
+                        raise ValueError(f"governed object {category}[{row_number}] in {path} has no stable identifier; missing required field ({', '.join(self.IDENTIFIERS)})")
                     identifier = str(row[identifier_field])
+                    if identifier in index:
+                        diag["duplicate_identifier_counts"][category] += 1
+                        first_path = index[identifier][1]
+                        raise ValueError(f"duplicate governed identifier {identifier!r} in {category}: {first_path} and {path}")
                     index[identifier] = (row, path, identifier_field)
                     diag["identifier_fields_used"].setdefault(category, identifier_field)
             diag["objects_indexed"][category] = len(index)
             missing = [identifier for identifier in references if identifier not in index]
             diag["unresolved_identifiers"][category] = missing
             diag["references_resolved"][category] = len(references) - len(missing)
+            diag["unresolved_counts"][category] = len(missing)
             if missing:
                 raise ValueError(f"unresolved governed identifiers in {category}: {', '.join(missing)}")
             for identifier in references:
                 row, path, _ = index[identifier]
                 records.append((dict(row) | {"_governed_collection_path": path, "_governed_category": category}, self.PROMOTABLE.get(category, category.removesuffix("s"))))
             diag["resolved_counts_by_category"][category] = len(references)
-        self.diagnostics = diag
         if not records:
             keys = ", ".join(sorted(str(key) for key in delta)) or "<empty document>"
             raise ValueError(f"no staging candidates could be extracted from the governed Delta at {source_file}; inspected top-level fields: {keys}")
@@ -118,11 +147,27 @@ class IndustryTwinDeltaAdapter:
     @staticmethod
     def _declared_objects(value: Any) -> tuple[list[dict[str, Any]], list[str]]:
         if isinstance(value, list):
-            return ([dict(v) for v in value if isinstance(v, dict)], [str(v) for v in value if not isinstance(v, dict)])
+            inline: list[dict[str, Any]] = []
+            references: list[str] = []
+            for item in value:
+                if not isinstance(item, dict):
+                    references.append(str(item))
+                    continue
+                reference = next((item.get(key) for key in ("reference", "ref", "identifier") if item.get(key) not in (None, "")), None)
+                if reference is None and len(item) == 1:
+                    reference = next((item.get(key) for key in IndustryTwinDeltaAdapter.IDENTIFIERS if item.get(key) not in (None, "")), None)
+                if reference is not None:
+                    references.append(str(reference))
+                else:
+                    inline.append(dict(item))
+            return inline, references
         if isinstance(value, dict):
             for key in ("ids", "identifiers", "references", "objects", "items"):
                 if key in value:
                     return IndustryTwinDeltaAdapter._declared_objects(value[key])
+            for key, nested in value.items():
+                if str(key).casefold().endswith(("_ids", "_identifiers", "_references")):
+                    return IndustryTwinDeltaAdapter._declared_objects(nested)
             # An id -> inline object mapping is a governed collection in place.
             if value and all(isinstance(v, dict) for v in value.values()):
                 return ([dict(v) if any(v.get(k) for k in IndustryTwinDeltaAdapter.IDENTIFIERS) else dict(v) | {"id": k} for k, v in value.items()], [])
@@ -147,7 +192,10 @@ class IndustryTwinDeltaAdapter:
         if isinstance(document, list): return [v for v in document if isinstance(v, dict)], "list"
         if isinstance(document, dict):
             for key in (category, "records", "items", "objects", "entries", "data"):
-                if isinstance(document.get(key), list): return [v for v in document[key] if isinstance(v, dict)], f"mapping.{key} list"
+                value = document.get(key)
+                if isinstance(value, list): return [v for v in value if isinstance(v, dict)], f"mapping.{key} list"
+                if isinstance(value, dict) and value and all(isinstance(v, dict) for v in value.values()):
+                    return [dict(v) if any(v.get(k) for k in IndustryTwinDeltaAdapter.IDENTIFIERS) else dict(v) | {"id": k} for k, v in value.items()], f"mapping.{key} identifier mapping"
             if document and all(isinstance(v, dict) for v in document.values()):
                 return [dict(v) if any(v.get(k) for k in IndustryTwinDeltaAdapter.IDENTIFIERS) else dict(v) | {"id": k} for k, v in document.items()], "identifier mapping"
         return [], type(document).__name__
