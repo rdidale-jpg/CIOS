@@ -529,3 +529,7 @@ Twin Presentation Models and Knowledge Packs are governed exchange, rendering an
 ### Incremental Twin release rule
 
 Twin updates should be incremental where possible. A release should identify prior version, changed objects, unchanged areas, retired assumptions, new Unknowns, new Contradictions, cross-Twin impact proposals, source cut-off, effective date and supersession. CIOS must not require full reconstruction when only part of a Twin changed.
+
+## WP1-002 review note — tiered dossier completeness
+
+Without changing this specification's authority or runtime, the IT-001 High-Fidelity Completeness Contract applies decision-relative Enterprise tiers. A material Tier 1 Enterprise requires substantial applicable coverage of corporate structure, leadership/governance, strategy, multi-period financial intelligence, products/services/offers, technology, operating model, customers/markets, suppliers/ecosystem, procurement/buying, transformation, opportunities, event/analyst history, and evidenced uncertainty. Tier 2 is commercially useful but bounded; Tier 3 is an identity/relationship anchor and cannot support a material conclusion. Tier assignment must follow materiality rather than existing research depth. EIF-001 semantics continue to govern; the IT-001 schedule supplies release assessment detail and does not make financial reporting the whole Twin.

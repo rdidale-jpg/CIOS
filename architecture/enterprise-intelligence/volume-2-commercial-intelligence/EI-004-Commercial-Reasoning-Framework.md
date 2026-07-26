@@ -80,3 +80,7 @@ Relationship to CIRM describes the architectural expectations for this part of t
 - What additional evidence types should strengthen this model?
 - Which confidence thresholds should be standardised across EI papers?
 - How should user feedback update this part of the Commercial Digital Twin?
+
+## WP1-002 review note — completeness of reasoning lineage
+
+An Industry Twin recommendation used for promotion must be traversable through the applicable Commercial Thesis, Hypothesis and existing Signal/Insight/Theme and Observation stages to packaged facts and Evidence. Each reasoning transformation retains rationale, assumptions, counterevidence, confidence, actor/time and affected decision. WP1-002 does not silently resolve the existing Signal/Insight/Theme vocabulary or FP-009 status ambiguity. Broken lineage and unsupported material recommendations are promotion-blocking under IT-001.

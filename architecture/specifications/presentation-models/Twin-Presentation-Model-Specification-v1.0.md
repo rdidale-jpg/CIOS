@@ -19,3 +19,7 @@ Specialist GPTs may author account-level Twin Presentation Models. Flora may lat
 Twin Presentation Models for Commercial Digital Twin releases MUST be carried under `payload/presentation-model/` in the Knowledge Pack release structure. A single Twin release MAY contain multiple Presentation Models for different audiences or purposes.
 
 Each Presentation Model MUST declare its audience, purpose, source Twin release, source cut-off, producer, interpretation status, Evidence and Observation lineage references, Unknowns, Contradictions and human-supplied knowledge labels. Presentation Model acceptance is acceptance of a governed interpretation for rendering, review and navigation; it does not promote the interpretation or its claims to canonical fact. Reports generated from Presentation Models remain views.
+
+## WP1-002 review note — projection over packaged intelligence
+
+Flora is a projection and exploration environment over the Twin. Progressive disclosure and summary-first presentation are permitted, but required high-fidelity content must already be packaged and addressable through object, history, reasoning, evidence, Unknown and Contradiction paths without web reconstruction. Assessment distinguishes data not displayed by default (acceptable) from data not addressable or absent (deficiencies). This note specifies no Flora runtime change.

@@ -362,3 +362,7 @@ Avoid:
 -   Knowledge Packs treated as authoritative
 -   Duplicate concepts with different names
 -   Silent removal of unknowns or contradictions
+
+## WP1-002 review note — Researcher completion and evidence exhaustion
+
+For an Industry Twin, the Researcher's mission is construction and progressive improvement of high-fidelity governed objects, not delivery of a report. Completion requires the applicable tier and dimension obligations in the IT-001 High-Fidelity Completeness Contract, or reviewed evidence exhaustion for each remaining gap. Exhaustion must identify object/dimension/question, source families and sources inspected, search/coverage periods, terms/strategy, evidence found/not found, access/licence constraints, likely absence cause, residual deficiency/materiality, conclusion/recommendation effect, escalation and next review. “No further evidence found” is insufficient. Exhaustion records absence; it does not cure a decision-critical deficiency.

@@ -312,3 +312,7 @@ Future Knowledge Pack capabilities may include:
 - Flora integration for validation, rendering, comparison, routing, lineage inspection, archive and regeneration workflows.
 
 Future evolution must preserve the core boundary: Knowledge Packs transport governed knowledge; they do not become authoritative memory.
+
+## WP1-002 review note — Industry Twin intelligence payload
+
+The Industry Twin companion inventory contract defines a logical profile under this specification without prescribing physical layout. A release must package structured governed facts and intelligence objects, inventories, history, evidence/reasoning lineage, uncertainty, deficiencies and exhaustion—not only summaries, links or source documents. Lawfully non-redistributable material is represented by permitted metadata, citation, extracted facts, compliant paraphrase, provenance and access constraints. Envelope validity remains distinct from content completeness and promotion readiness.

@@ -8,6 +8,11 @@
 **Production behaviour:** Documentation-only. This specification introduces no runtime behaviour and does not alter production Researcher or Assurance packs.
 **Release-profile membership:** none — excluded from production Researcher, Assurance and Reviewer profiles
 
+> **WP1-002 review amendment (2026-07-26).** Sections 9–12 and the controlled
+> schedules referenced there define the proposed high-fidelity completeness and
+> release contract. They retain this document's **Review** status: publication of
+> the amendment does not imply architecture acceptance or runtime enforcement.
+
 ## 1. Mission and purpose
 
 IT-001 defines the **Industry Twin** as the durable Enterprise Intelligence object that accumulates cross-enterprise learning about an industry. It explains how enterprises within an industry behave, change, invest, regulate, compete and create commercial opportunity.
@@ -254,3 +259,31 @@ IT-001 must not:
 IT-001 is derived from evidence accumulated through Enterprise Twin validation for VodafoneThree, National Grid and United Utilities. That evidence supports Review of this higher-order model; it does not establish universal industry truth or Accepted architecture.
 
 This specification is documentation-only, remains at **Review** status and has no production profile membership.
+
+## 9. High-Fidelity Twin Principle (WP1-002 proposed governance)
+
+A Commercial Digital Twin shall be a high-fidelity, governed and temporally aware representation of its real-world subject. Its value lies in the depth, breadth, provenance, history and interconnectedness of its intelligence. Executive summaries, dashboards, recommendations and visualisations are projections of the Twin; they are not substitutes for the Twin.
+
+A Twin shall contain sufficient structured and evidenced detail to support normal executive, commercial, analytical and AI-assisted investigation without routine return to external sources. Where evidence is unavailable, incomplete or contradictory, the Twin shall preserve that condition explicitly rather than compensate with unsupported narrative. The package is the governed intelligence asset; an executive briefing is one projection.
+
+Consequently, successful validation, a correct manifest, importability, rendering, polished narrative, isolated evidence links, a maturity threshold, or an unsupported assertion of research completion cannot establish completeness. A syntactically valid but shallow package fails this contract.
+
+## 10. High-fidelity completeness and tier contract
+
+The normative proposal is the [High-Fidelity Twin Completeness Contract](High-Fidelity-Twin-Completeness-Contract.md). Its controlled schedules are:
+
+* [Intelligence Density Matrix](Intelligence-Density-Matrix.md);
+* [Package Content Inventory and Deficiency Contract](../knowledge-packs/Industry-Twin-Package-Content-Inventory-Contract.md); and
+* [RET High-Fidelity Assessment Checklist and calibration proposal](../../reviews/RET-High-Fidelity-Assessment-Checklist.md).
+
+These schedules elaborate IT-001 rather than create an ITS specification family. If a schedule conflicts with an accepted canonical owner, that owner prevails and the conflict is recorded; the schedule must not silently reconcile authority.
+
+## 11. Release obligation
+
+An Industry Twin release shall declare scope, target decisions, research period, effective date, object inventory and tier rationale. It shall assess each of the contract's 22 dimensions independently, preserving blocking deficiencies, warnings, Unknowns, Contradictions and evidence-exhaustion records. No single aggregate percentage may replace those assessments.
+
+Promotion requires more than package validity: applicable Tier 1 fidelity, material-claim evidence, populated or explicitly deficient dimensions, sufficient temporal/news/analyst coverage, detailed material capabilities and offers, inspectable reasoning, coherent graph and temporal state, visible uncertainty, valid exhaustion where needed, packaged Flora-addressability, and independent decision-relative review.
+
+## 12. Compatibility and implementation boundary
+
+The amendment is additive documentation. Existing `industry-twin-v1` identifiers, assets, manifests and import behaviour remain valid at their present assurance level. They do not acquire high-fidelity or promotion status merely through compatibility. Producers may emit the additional declarations without removing v1 fields; consumers that do not understand them may ignore them. Any future mandatory schema, adapter, runtime, Researcher, Flora or RET-content change requires a separately governed implementation mission and compatibility tests.
