@@ -4,7 +4,7 @@
 **Status:** Review
 **Authority:** Proposed Enterprise Intelligence Model
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-16
+**Last updated:** 2026-07-26
 **Production behaviour:** Documentation-only. This specification introduces no runtime behaviour and does not alter production Researcher or Assurance packs.
 **Release-profile membership:** none — excluded from production Researcher, Assurance and Reviewer profiles
 
@@ -84,7 +84,7 @@ An Industry Twin exists to:
 | Technology radar | Explainable |
 | Sales campaign | Durable and falsifiable |
 
-An Industry Twin may contextualise public policy, market participants, technology or procurement signals where evidence warrants it, but it does not become a supplier landscape, market-size assessment, technology radar, sales campaign or procurement pipeline.
+An Industry Twin is not **constituted as** a supplier catalogue, technology radar or sales campaign: those are not its organising purpose, completeness claim or release identity. This exclusion is not permission to omit or shallowly summarise material ecosystem intelligence. The Industry Twin must contain detailed Market Participant, supplier, capability and offer intelligence wherever those objects materially affect industry operation, competition, transformation, procurement, ecosystem dependency, commercial opportunity or executive reasoning. Such intelligence remains evidence-governed, decision-relevant and bounded by its owning semantics; it must not be converted into an ungrounded vendor ranking, sales list or campaign merely because it is contained in the Industry Twin.
 
 ## 4. Required objects
 
@@ -100,7 +100,22 @@ Every Industry Twin must define its industry identity, including:
 
 ### 4.2 Enterprise Population
 
-The Enterprise Population references participating Enterprise Twins and records why each enterprise is in scope, its material differences and the period of participation. It must **not** duplicate Enterprise Twin content. Enterprise Twins remain the authoritative source for enterprise-specific state, evidence, Observations, mechanisms, Unknowns and Contradictions.
+The Enterprise Population identifies participating Enterprise Twins and records why each enterprise is in scope, its material differences and the period of participation. Enterprise Twins remain the authoritative semantic owners of enterprise-specific intelligence, including state, evidence, Observations, mechanisms, Unknowns and Contradictions.
+
+That ownership boundary does not require a thin or link-only Industry Twin release. For release containment, an Industry Twin package may embed a governed Enterprise Twin release, an immutable snapshot of one, or a decision-scoped materialised projection from one. Each embedded form must preserve the source Twin identity, source version, provenance, checksums, effective date and supersession lineage. Embedding is a release and portability operation: it neither transfers semantic ownership nor creates an independently maintained copy or second truth. A correction is made through the authoritative Enterprise Twin and a new governed release or projection, never by maintaining the embedded representation as a separate enterprise record.
+
+Tier 1 content required for normal offline investigation must be resolved and carried in the Industry Twin release; it must not be available only through an unresolved external link. Any external dependency omitted from the release must be explicitly declared as a completeness and portability deficiency, including the affected scope and investigation consequence.
+
+#### 4.2.1 Permitted Enterprise containment modes
+
+| Mode | Permitted use | Ownership and lineage requirement | Promotion implication |
+| --- | --- | --- | --- |
+| **Referenced Enterprise Twin** | A stable reference supplements content that is not required for normal offline investigation. | The authoritative Twin remains external and the dependency and version are declared. | The reference alone cannot satisfy a Tier 1 offline-content requirement. An unresolved or omitted dependency is a declared deficiency and may block promotion when material to the release decision. |
+| **Embedded governed release** | A complete, governed Enterprise Twin release is carried in the Industry Twin package. | Preserve source identity, version, provenance, checksums, effective date and supersession lineage without changing its status. | Package validation or promotion does not promote the embedded Twin or its assertions; their existing governance states are preserved. |
+| **Embedded immutable snapshot** | A time-bounded reproduction of an authoritative Twin is needed for reproducibility or offline review. | Identify the authoritative source and snapshot basis and preserve all required identity, integrity and lineage metadata. | The snapshot may be promoted only as contained release material, never as a new canonical Enterprise Twin; staleness or supersession is assessed against the decision scope. |
+| **Decision-scoped materialised projection** | A governed subset is sufficient for a declared decision or audience while retaining the depth needed for that scope. | Declare selection and transformation provenance and preserve source identity and assertion-level lineage; omitted material remains visible in scope/completeness declarations. | Promotion accepts only the bounded projection for its declared use. It neither widens the projection's scope nor promotes source assertions beyond their existing state. A projection that omits material Tier 1 content cannot pass as portable or complete. |
+
+These modes are semantic rules for existing release artefacts. They introduce no new runtime contract or mandatory schema. In all modes, package acceptance, validation and promotion concern the release boundary only and must not be interpreted as acceptance, mutation or ownership transfer of Enterprise truth.
 
 ### 4.3 Enterprise Mechanism Catalogue
 
@@ -218,6 +233,40 @@ Every Industry Twin must preserve:
 - participating enterprises.
 
 It must also make its industry boundary, comparison method, reuse scope, falsification conditions, Unknowns, review triggers and decision history inspectable. Industry-level claims must trace to contributing Enterprise Twins, their mechanisms or observations, Pattern references where applicable, and the comparison that justifies synthesis.
+
+#### Atomic-fact preservation
+
+Where intelligence is expressed, exchanged or materialised as an atomic fact, the fact must preserve, where applicable:
+
+- assertion ID;
+- subject;
+- predicate;
+- value and unit;
+- fact classification;
+- valid-from and valid-to;
+- observation or publication date, distinguishing them when both exist;
+- source and evidence IDs;
+- extraction and transformation provenance;
+- confidence;
+- freshness and review state;
+- scope and geography; and
+- supersession lineage.
+
+“Where applicable” permits a genuinely inapplicable field; it does not permit the silent loss of available lineage, temporality, classification or scope during packaging or materialisation. A narrative rendering or aggregate may accompany atomic facts but must not destroy their resolution back to the preserved assertions.
+
+#### RET calibration interpretation
+
+Any numeric calibration values defined by a Release Evaluation Test (RET) are **deficiency-detection floors**. They are not target volumes, completion caps, safe-harbour thresholds or sufficient evidence of high fidelity. Passing a count does not override semantic depth, coverage of material domains, a blocking deficiency or independent review. Counts support the detection of obviously thin content; they do not establish that the included facts, participants, offers, relationships or reasoning are material, correct, sufficiently diverse or decision-ready.
+
+This rule interprets RET values without changing RET content. Release assessment must continue beyond numeric passage and must fail or qualify the release where semantic or assurance requirements remain unsatisfied.
+
+### Package Content Inventory Contract governance
+
+The **Package Content Inventory Contract is a controlled schedule to IT-001**. It enumerates the Industry Twin content needed to demonstrate this specification for a declared release and decision scope; it does not create another specification family or acquire the semantics of the objects it inventories.
+
+The [Knowledge Pack Specification v1.0](../knowledge-packs/Knowledge-Pack-Specification-v1.0.md) governs the envelope, packaging and exchange mechanics of a Knowledge Pack. IT-001 and its controlled Package Content Inventory schedule govern Industry Twin composition and Industry-specific containment meaning. Neither authority silently takes ownership of the other's semantics: the Knowledge Pack Specification does not define Enterprise or Industry truth, and the inventory schedule does not redefine pack mechanics or the semantics owned by Enterprise Twins, Market Participant Twins, Evidence, Observations, Opportunities or other governed objects.
+
+Where the two apply to one release, it must satisfy both boundaries at their declared governance status. Package validity does not prove Industry semantic completeness, and Industry content completeness does not prove package validity or promote contained knowledge.
 
 ### Validation rules
 
