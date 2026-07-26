@@ -84,12 +84,12 @@ An Industry Twin exists to:
 | --- | --- |
 | Analyst report | Governed intelligence |
 | Procurement pipeline | Evidence-governed |
-| Supplier landscape | Continuously updated |
+| Supplier catalogue | Continuously updated |
 | Market-size assessment | Comparative |
 | Technology radar | Explainable |
 | Sales campaign | Durable and falsifiable |
 
-An Industry Twin may contextualise public policy, market participants, technology or procurement signals where evidence warrants it, but it does not become a supplier landscape, market-size assessment, technology radar, sales campaign or procurement pipeline.
+An Industry Twin is not constituted as a supplier catalogue, technology radar or sales campaign: those are not its organising purpose, completeness test or decision boundary. That exclusion does **not** permit shallow supplier or offer content. The Twin must contain detailed, evidenced Market Participant, supplier, capability and offer intelligence wherever those objects materially affect industry operation, competition, transformation, procurement, ecosystem dependency, commercial opportunity or executive reasoning. It may also contextualise public policy, market size or procurement signals where evidence warrants it, without becoming a market-size assessment or procurement pipeline.
 
 ## 4. Required objects
 
@@ -105,7 +105,18 @@ Every Industry Twin must define its industry identity, including:
 
 ### 4.2 Enterprise Population
 
-The Enterprise Population references participating Enterprise Twins and records why each enterprise is in scope, its material differences and the period of participation. It must **not** duplicate Enterprise Twin content. Enterprise Twins remain the authoritative source for enterprise-specific state, evidence, Observations, mechanisms, Unknowns and Contradictions.
+The Enterprise Population identifies participating Enterprise Twins and records why each enterprise is in scope, its material differences and the period of participation. Enterprise Twins remain the **canonical semantic owners** and authoritative sources for enterprise-specific state, evidence, Observations, mechanisms, Unknowns and Contradictions. “Must not duplicate” means that an Industry Twin must not create a separately governed or independently maintained second truth; it does not prohibit governed release containment or materialisation.
+
+An Industry Twin release may contain enterprise intelligence in exactly these modes, using compatible existing assets rather than a new runtime schema:
+
+1. **Embedded governed Enterprise Twin release** — a complete, versioned source release is carried in the Industry Twin package.
+2. **Embedded immutable snapshot** — a fixed snapshot of a governed Enterprise Twin release is carried for the Industry Twin's effective date and decision scope.
+3. **Decision-scoped materialised projection** — the enterprise-specific subset needed for declared decisions and offline investigation is materialised from the authoritative Enterprise Twin.
+4. **Declared external dependency** — an Enterprise Twin release remains outside the package and is referenced as a dependency; this mode is not sufficient for Tier 1 content required in normal offline investigation.
+
+Every embedded release, snapshot or projection must preserve source Twin identity and version, provenance, checksums, effective date and supersession lineage. It remains governed by its source Twin: containment transfers neither semantic ownership nor authority, and the embedded material must not be maintained independently. A projection must declare its source and decision scope and be regenerated or superseded from that source rather than edited into divergent truth.
+
+Promotion requires all Tier 1 enterprise content needed for normal offline investigation to be embedded or materially projected, with integrity and lineage verifiable. Any omitted external dependency must be declared as a completeness and portability deficiency and assessed for decision impact; an unresolved external link cannot satisfy the Tier 1 release obligation or be treated as packaged evidence.
 
 ### 4.3 Enterprise Mechanism Catalogue
 
@@ -270,13 +281,13 @@ Consequently, successful validation, a correct manifest, importability, renderin
 
 ## 10. High-fidelity completeness and tier contract
 
-The normative proposal is the [High-Fidelity Twin Completeness Contract](High-Fidelity-Twin-Completeness-Contract.md). Its controlled schedules are:
+The normative proposal is the [High-Fidelity Twin Completeness Contract](High-Fidelity-Twin-Completeness-Contract.md). Its controlled schedules to IT-001 are:
 
 * [Intelligence Density Matrix](Intelligence-Density-Matrix.md);
 * [Package Content Inventory and Deficiency Contract](../knowledge-packs/Industry-Twin-Package-Content-Inventory-Contract.md); and
 * [RET High-Fidelity Assessment Checklist and calibration proposal](../../reviews/RET-High-Fidelity-Assessment-Checklist.md).
 
-These schedules elaborate IT-001 rather than create an ITS specification family. If a schedule conflicts with an accepted canonical owner, that owner prevails and the conflict is recorded; the schedule must not silently reconcile authority.
+These schedules elaborate IT-001 rather than create an ITS specification family. In particular, the Package Content Inventory and Deficiency Contract is a controlled schedule to IT-001; the Knowledge Pack Specification governs envelope, packaging and exchange mechanics. Neither silently acquires ownership of the other's semantics. If a schedule conflicts with an accepted canonical owner, that owner prevails and the conflict is recorded; the schedule must not silently reconcile authority.
 
 ## 11. Release obligation
 
