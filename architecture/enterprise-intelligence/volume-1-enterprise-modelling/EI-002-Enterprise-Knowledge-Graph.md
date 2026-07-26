@@ -352,3 +352,7 @@ Contradictory cross-Twin edges must remain visible. A participant marketing clai
 ### Pack-to-Twin relationship semantics
 
 `Knowledge Pack PRESENTS Twin` means the pack carries a governed view, release or related assets for a Twin. `Knowledge Pack UPDATES Twin` means the pack proposes or supplies accepted update material for the owning Twin process. Neither relationship makes every interpretation canonical without the target Twin owner's validation and acceptance.
+
+## WP1-002 review note — release graph fidelity
+
+High-fidelity Industry Twin release assessment applies existing EI-002 identity and relationship authority to all packaged material objects. Typed/directed endpoints must resolve, identifiers and source lineage must survive exchange, duplicates must be reconciled or deficient, and provenance/effective intervals must be inspectable. Expected material relationship classes must be present or explicitly deficient; a producer must never fabricate an edge to improve coverage. The controlled relationship list and density tests remain in the IT-001 completeness schedule.
