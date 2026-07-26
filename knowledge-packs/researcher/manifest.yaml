@@ -1,7 +1,7 @@
 pack:
   id: CIOS-Researcher-Knowledge-Pack
   title: CIOS Researcher Knowledge Pack
-  version: 2.4.0
+  version: 2.5.0
   owner: CIOS / Knowledge Pack Owner
   canonical_location: knowledge-packs/researcher
   generated_artifacts: dist release artifacts
@@ -15,7 +15,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: d7539b3040711fb235106a8f9d9c3409463a42216144150c94309de5aa30fc14
+    checksum: ead3619894f2600cb943b6705b39a55c9739b12b4b2ff1bede0116b1372c3cf7
     transform: none
   - pack_path: configuration/Researcher-GPT-Instructions.md
     source_path: knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md
@@ -26,7 +26,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 88c20bbcfc5752c009f61888eeb446f956a2641044b621ca1e5213a9526169d2
+    checksum: 7d65309d2a54b5148d4c3e8f7c184993bc5cb5495f75917a1ff521cfba7ae7dc
     transform: none
   - pack_path: configuration/Researcher-Configuration-Guide.md
     source_path: knowledge-packs/researcher/configuration/Researcher-Configuration-Guide.md
@@ -48,7 +48,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 9c2811fc0a2360ef851eb64b180259af1fe40207ab5886b0edfa7dda7d66e7d8
+    checksum: 3b09a22f25ab5a4d2ca288597580fdd95220278b0233ca4bb5ad356dac7faf07
     transform: none
   - pack_path: operating-guidance/RG-002-Research-Mission-Workspace-Standard.md
     source_path: knowledge-packs/researcher/operating-guidance/RG-002-Research-Mission-Workspace-Standard.md
@@ -70,7 +70,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 1c336647733b457c7a4d65bc88841bf50b7a380a187225ae84ee5cbc329ab15a
+    checksum: 827a142308dfeb6d687add499c70d5cec696273bea6d1188e0de685dcbf41527
     transform: none
   - pack_path: operating-guidance/Supplier-Contract-Procurement-Checklist.md
     source_path: knowledge-packs/researcher/operating-guidance/Supplier-Contract-Procurement-Checklist.md
@@ -92,7 +92,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 81a6351f43e0d1444252ab23428caf2a6731ef61f5b1cacccb3e5a0a17cadf1c
+    checksum: fd0ed56b54328ae0bff73fcc8c430a7906860d4abbf6a0522d175d146425be65
     transform: none
   - pack_path: architecture/EI-002-Enterprise-Knowledge-Graph.md
     source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-002-Enterprise-Knowledge-Graph.md
@@ -103,7 +103,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 65f5003ff19031ea6fbd18b19ccfbe02b26753e0c37627477c788c77e34d0cbd
+    checksum: 848cb0078f57379239f02fec7b3b5c583ecce293ebf65f518052f867022d4f61
     transform: none
   - pack_path: architecture/EI-003-Enterprise-Behaviour-Model.md
     source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-003-Enterprise-Behaviour-Model.md
@@ -147,7 +147,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: d16cfb0f297510e276272a1fd590f608edf3a9df05d81a5b7156d57db59d8df8
+    checksum: ae413eff9e665c38dfe0327e74f2751cbda27d9b46133079d12c6c8bc0160297
     transform: none
   - pack_path: architecture/Glossary.md
     source_path: architecture/reference-architecture/Glossary.md
@@ -411,7 +411,40 @@ documents:
     status: current
     required: true
     inclusion_reason: Required to preserve canonical Industry Twin semantics while operating progressive Industry Twin missions.
-    checksum: 725e87039e1207f13b689b1a94529cce85f560d372011fb7f2ef4a8b5e61725a
+    checksum: f98cb307d7a89aefd8d1a4779bf9c579555b63e896650904fbd0211722fd2f10
+    transform: none
+  - pack_path: architecture/High-Fidelity-Twin-Completeness-Contract.md
+    source_path: architecture/specifications/industry-twins/High-Fidelity-Twin-Completeness-Contract.md
+    document_id: HFT-COMP-001
+    title: High-Fidelity Twin Completeness Contract
+    version_or_last_updated: repository-current
+    authority: review-controlled-schedule
+    status: review
+    required: true
+    inclusion_reason: Required to apply IT-001 High-Fidelity completeness, tier, evidence, reasoning, temporal, research-completion and promotion obligations.
+    checksum: 42cf12a2f8bb4b4703c5cf05a5ca73b66cc646c5c7b3d79d0a5a475d88761ad4
+    transform: none
+  - pack_path: architecture/Intelligence-Density-Matrix.md
+    source_path: architecture/specifications/industry-twins/Intelligence-Density-Matrix.md
+    document_id: HFT-IDM-001
+    title: Intelligence Density Matrix
+    version_or_last_updated: repository-current
+    authority: review-controlled-schedule
+    status: review
+    required: true
+    inclusion_reason: Required for canonical per-object breadth, depth, semantic diversity, evidence diversity, temporal coverage and relationship-density assessment.
+    checksum: f7d1dd02be219cb92a841cdc9b36ab349adea1f7bb6234627aec1186f6fc0245
+    transform: none
+  - pack_path: architecture/Industry-Twin-Package-Content-Inventory-Contract.md
+    source_path: architecture/specifications/knowledge-packs/Industry-Twin-Package-Content-Inventory-Contract.md
+    document_id: HFT-PKG-001
+    title: Industry Twin Package Content Inventory and Deficiency Contract
+    version_or_last_updated: repository-current
+    authority: draft-normative-controlled-schedule
+    status: draft-normative
+    required: true
+    inclusion_reason: Required to assess structured package content, deficiencies, offline investigation and Flora addressability without changing exchange mechanics.
+    checksum: 0bf3f1a8addab9376723a9b951027762cfe6962806d8fd1befee18f999daabad
     transform: none
   - pack_path: architecture/Industry-Twin-Lifecycle-Specification-v1.0.md
     source_path: architecture/specifications/industry-twins/Industry-Twin-Lifecycle-Specification-v1.0.md
@@ -422,7 +455,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required to govern Industry Twin lifecycle, cross-twin relationships and participant-aware maintenance context.
-    checksum: efeb358dd9e3c2020916ef179a2e2d00666cbf48fb913e73be6171332a3b09af
+    checksum: e3b9ed6d45a1c7d13de834910b47ea27773fa0d6727b7dbbc86ca2a7e093d9c9
     transform: none
   - pack_path: architecture/FP-011-Knowledge-Exchange-Architecture.md
     source_path: architecture/founding-papers/FP-011-Knowledge-Exchange-Architecture.md
@@ -444,7 +477,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required to preserve commercial reasoning boundaries for opportunity hypotheses and participant relevance.
-    checksum: ce5c48d4fe989209b936cb5555b110b8af83fd41f649fc1697020233f1dfe42e
+    checksum: 03711e7f0fa48b739f95d86e08129e04a9ad64611ff83b73e62c079f7c3b3e10
     transform: none
   - pack_path: architecture/EIF-001-Enterprise-Intelligence-Foundation-Model.md
     source_path: architecture/reference-architecture/standards/EIF-001-Enterprise-Intelligence-Foundation-Model.md

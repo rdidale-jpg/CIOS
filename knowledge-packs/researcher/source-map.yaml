@@ -1,6 +1,8 @@
 governance:
   researcher_mission: [RKI-001, RG-001, RG-002, MISSION-UKCG-001]
-  industry_twin_lifecycle: [RG-001, ITL-SPEC-001, EI-001, EI-002, EI-012]
+  industry_twin_lifecycle: [RG-001, IT-001, ITL-SPEC-001, EI-001, EI-002, EI-012]
+  high_fidelity_completeness: [IT-001, HFT-COMP-001, HFT-IDM-001, HFT-PKG-001, RG-001, RKI-003]
+  package_content_readiness: [HFT-PKG-001, HFT-COMP-001, RKI-003, ADR-016, FP-010]
   market_participant_twin: [MPT-001, APPA-001, EI-001, EI-002, EI-012, TEMPLATE-Market-Participant-Twin]
   account_participant_position_assessment: [APPA-001, MPT-001, FP-009, TEMPLATE-Account-Participant-Position-Assessment]
   opportunity_hypotheses: [EOD-001, OT-001, EI-004, FP-009, TEMPLATE-Opportunity-Hypothesis]
@@ -21,4 +23,4 @@ governance:
   knowledge_pack_configuration: [FP-010, ADR-016, RKI-002]
 unresolved_sources: []
 optional_notices:
-  review_status_sources: [EIF-001, EOD-001, OT-001]
+  review_status_sources: [IT-001, HFT-COMP-001, HFT-IDM-001, HFT-PKG-001, EIF-001, EOD-001, OT-001]

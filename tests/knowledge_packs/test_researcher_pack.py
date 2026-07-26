@@ -6,7 +6,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / 'knowledge-packs/researcher/manifest.yaml'
-VERSION = '2.4.0'
+VERSION = '2.5.0'
 BASENAME = f'CIOS-Researcher-Knowledge-Pack-v{VERSION}'
 
 
@@ -95,7 +95,7 @@ def test_generated_filenames_metadata_report_and_root_use_requested_version():
 def test_source_version_mismatch_fails_with_clear_message():
     result = build('9.9.9')
     assert result.returncode != 0
-    assert 'Version mismatch: requested version 9.9.9; conflicting version 2.4.0' in result.stderr
+    assert 'Version mismatch: requested version 9.9.9; conflicting version 2.5.0' in result.stderr
     assert 'source file: knowledge-packs/researcher/VERSION; field: VERSION' in result.stderr
 
 
@@ -143,6 +143,7 @@ def test_progressive_twin_method_manifest_membership_and_authority_boundaries():
         'RKI-001', 'RG-001', 'RG-002', 'MISSION-UKCG-001',
         'EI-001', 'EI-002', 'EI-003', 'EI-012',
         'IT-001', 'ITL-SPEC-001', 'MPT-001',
+        'HFT-COMP-001', 'HFT-IDM-001', 'HFT-PKG-001',
         'TEMPLATE-Enterprise-Intelligence-Pack',
         'TEMPLATE-Market-Participant-Twin',
         'TEMPLATE-Programme-Catalogue',
@@ -161,6 +162,38 @@ def test_progressive_twin_method_manifest_membership_and_authority_boundaries():
     by_id = {d['document_id']: d for d in ds}
     for document_id, authority in accepted_authorities.items():
         assert by_id[document_id]['authority'] == authority
+
+
+def test_high_fidelity_alignment_controls_and_canonical_schedules():
+    by_id = {d['document_id']: d for d in docs()}
+    expected = {
+        'HFT-COMP-001': 'architecture/specifications/industry-twins/High-Fidelity-Twin-Completeness-Contract.md',
+        'HFT-IDM-001': 'architecture/specifications/industry-twins/Intelligence-Density-Matrix.md',
+        'HFT-PKG-001': 'architecture/specifications/knowledge-packs/Industry-Twin-Package-Content-Inventory-Contract.md',
+    }
+    for document_id, source_path in expected.items():
+        assert by_id[document_id]['source_path'] == source_path
+        assert by_id[document_id]['required'] == 'true'
+        assert by_id[document_id]['transform'] == 'none'
+
+    combined = '\n'.join(
+        (ROOT / path).read_text()
+        for path in [
+            'knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md',
+            'knowledge-packs/researcher/operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md',
+            'knowledge-packs/researcher/operating-guidance/Industry-Twin-Readiness-Gate.md',
+        ]
+    ).lower()
+    for phrase in [
+        'tier 1, tier 2 and tier 3',
+        'promotion or demotion',
+        'breadth, depth, semantic diversity, evidence diversity, temporal coverage and relationship density',
+        'news events and analyst observations',
+        'evidence → observations → hypotheses → commercial thesis → recommendation',
+        'offline investigation',
+        'package validity or narrative quality cannot substitute for content completeness',
+    ]:
+        assert phrase in combined
 
 
 def test_progressive_twin_method_required_operating_rules():
