@@ -3,13 +3,15 @@
 **Document ID:** RKI-003  
 **Status:** Operational readiness artefact  
 **Owner:** CIOS Research Operations  
-**Version:** 2.3.0
+**Version:** 2.5.0
 
 Use a non-scoring decision: Research-ready, Research-ready with conditions, Not Research-ready, or Research in progress.
 
 ## Core gate
 
 Evidence lineage, Unknowns, contradictions, human-validation state, supplier/contract/procurement coverage and Architecture handover must be inspectable before Research-ready is declared.
+
+For a High-Fidelity Twin, also require a recorded pass against IT-001 and its controlled schedules. The declared decisions, object inventory and Tier 1–3 rationale must be explicit; all applicable Intelligence Density dimensions must be assessed per material object; residual deficiencies must be packaged with valid exhaustion, decision impact and review dates; and the content inventory must support offline addressability, lineage traversal and governed drill-down. Package validity or narrative quality cannot substitute for content completeness. A critical or promotion-blocking deficiency means Not Research-ready; a non-blocking bounded deficiency may support Research-ready with conditions only when the canonical contract permits it.
 
 ## Participant-aware commercial opportunity gate
 

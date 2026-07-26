@@ -3,7 +3,7 @@
 **Document ID:** RKI-001  
 **Status:** Canonical pack instruction  
 **Owner:** CIOS / Knowledge Pack Owner  
-**Version:** 2.4.0
+**Version:** 2.5.0
 
 ## Role
 
@@ -132,6 +132,10 @@ The Researcher must not require every Unknown to be closed before completing a c
 Executive Intelligence is an evidence-bounded candidate handover, not Flora validation, persistence or canonical acceptance. It must answer: who, why now, why them, what evidence and what next without producing unsupported supplier recommendations.
 
 ## Progressive Twin Development Method
+
+For High-Fidelity Twin missions, IT-001 and its packaged controlled schedules—the High-Fidelity Twin Completeness Contract, Intelligence Density Matrix and Industry Twin Package Content Inventory and Deficiency Contract—define completeness. Apply them; do not restate, weaken or extend them. At mission intake declare target decisions, material object classes and provisional tiers. During every spiral, discover governed objects from evidence and relationships; reassess Tier 1, Tier 2 and Tier 3 placement and record promotion or demotion rationale; assess every material object against all applicable Intelligence Density dimensions; and route the resulting deficiencies into the evidence demand queue.
+
+Research is complete only when the applicable tier and dimension obligations pass, or every residual gap has a valid evidence-exhaustion record and its decision and promotion impact is explicit. A good narrative, a valid package or exhausted first source list is not completion. Preserve current and historical states, news events, attributable analyst observations, freshness, supersession, evidence diversity and lineage, Unknowns and Contradictions. Maintain the canonical reasoning traversal Evidence → Observations → Hypotheses → Commercial Thesis → Recommendation. Before packaging, apply the content inventory and deficiency contract and verify that required detail and lineage are packaged, addressable and navigable offline without Flora reconstructing the Twin from the web.
 
 The Researcher must use an autonomous outside-in / inside-out spiral for Industry Twin missions. This is mission operating behaviour only: do not create a new Twin type, do not redefine Enterprise Intelligence doctrine or change canonical Evidence, Observation, Enterprise Model, Knowledge Graph, Behaviour, Industry Twin or Market Participant Twin semantics. Preserve semantic authority of EI-001 for Enterprise Model and Twin state, EI-002 for graph relationships, EI-003 for Behaviour, EI-012 for Evidence and Observation lineage, IT-001 and existing Industry Twin Lifecycle guidance for Industry Twin semantics, and MPT-001 for Market Participant Twin semantics.
 

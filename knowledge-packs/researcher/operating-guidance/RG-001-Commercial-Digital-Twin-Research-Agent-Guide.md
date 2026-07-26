@@ -3,7 +3,7 @@
 **Document ID:** RG-001  
 **Status:** Operational research guide  
 **Owner:** CIOS Research Operations  
-**Version:** 2.4.0
+**Version:** 2.5.0
 
 RG-001 is detailed method and remains the canonical owner of Researcher methodology and research behaviour. Long-running autonomous Research Missions SHALL operate under RG-002 for persistent Workspace state, checkpointing, recovery, Mission Journal, Escalation Register, autonomous-continuation outcome and evidence-exhaustion lifecycle behaviour. RG-001 links to the canonical behavioural kernel in `../configuration/Researcher-GPT-Instructions.md` and does not replace Accepted ADRs or owning architecture papers.
 
@@ -38,6 +38,18 @@ Handover must include mission scope, evidence base, Observation catalogue, Enter
 ## Progressive Twin Development operating method
 
 RG-001 implements the Researcher mission architecture and does not supersede EI-001, EI-002, EI-003, EI-012, IT-001, MPT-001 or the existing Industry Twin Lifecycle guidance. The method corrects the operating model by making the Researcher continue the next highest-value increment inside one mission rather than requiring a separate user conversation for each enterprise, supplier, programme or evidence gap.
+
+### High-Fidelity completeness controls
+
+Use IT-001 and its controlled High-Fidelity Twin Completeness, Intelligence Density and Package Content Inventory schedules as the tests; this guide does not redefine them.
+
+1. At intake, declare scope, target decisions, material object classes and provisional Tier 1, Tier 2 and Tier 3 assignments with rationale.
+2. Discover and identity-resolve material Enterprises, Market Participants, suppliers, products, services, capabilities, offers, executives, buying centres, transformations, opportunities, News Events and Analyst Observations from the source-family plan and emerging graph relationships. Absence from an initial list is not evidence of immateriality.
+3. After each wave, reassess tier placement and record evidence-based promotion or demotion; assess applicable Intelligence Density breadth, depth, semantic diversity, evidence diversity, temporal coverage and relationship density for each material object.
+4. Acquire authoritative primary evidence where available, diversify source families, corroborate material or contested claims, record provenance and freshness, and preserve historical state, event and analyst timelines with supersession lineage.
+5. Update the governed deficiency inventory and evidence demand queue. Preserve Unknowns and Contradictions rather than smoothing them into narrative. Keep the traversable reasoning chain Evidence → Observations → Hypotheses → Commercial Thesis → Recommendation.
+6. Continue while a material applicable tier or dimension obligation remains and a productive evidence route exists. Evidence exhaustion is valid only under the complete RG-002 and High-Fidelity contract record, including bounded searches, remaining deficiency, decision and promotion impact, review date and restart conditions.
+7. Before packaging, apply the canonical content inventory. Do not declare package readiness unless required structured facts, objects, relationships, histories, uncertainty, deficiencies and lineage are contained and addressable for offline investigation and governed drill-down. A valid envelope, polished narrative or link-only release is insufficient.
 
 ### Outside-in / inside-out spiral
 

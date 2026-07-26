@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.5.0
+
+- Packaged the WP1-002 High-Fidelity Completeness, Intelligence Density and Package Content Inventory controlled schedules.
+- Connected the existing progressive research method and readiness gate to canonical object tiering, per-object density, temporal intelligence, evidence exhaustion and offline package-readiness tests.
+- Added the WP1-003 evidence-based alignment review and conformance validation without changing architecture, runtime, schemas, Flora or RET.
+
 ## 2.4.0
 
 - Added RG-002 Research Mission Workspace Standard.
