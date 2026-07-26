@@ -103,7 +103,7 @@ EI-004 reasoning is inspectable from Evidence → Observation → applicable Sig
 
 ## 7. The 22 dimension contract
 
-The following table is mandatory; `minimum` means applicable content/evidence/depth/temporal/source expectations from §§4–6 and the Density Matrix. Deficiencies use the package taxonomy. Unknowns are permitted only when explicit; material contradictions require resolution or documented decision treatment. Calibration counts are proposals, not doctrine.
+The following table is mandatory; `minimum` means applicable content/evidence/depth/temporal/source expectations from §§4–6 and the Density Matrix. Deficiencies use the package taxonomy. Unknowns are permitted only when explicit; material contradictions require resolution or documented decision treatment. Numeric RET calibration values are deficiency-detection floors, not target volumes, completion caps, safe-harbour thresholds or sufficient evidence of high fidelity. Passing a count never overrides semantic depth, material-domain coverage, a blocking deficiency or independent review. Calibration counts are proposals, not doctrine.
 
 | Dimension | Purpose / owner | Applies / minimum and evidence | Blocking deficiency and promotion treatment | Calibration / compatibility |
 |---|---|---|---|---|
@@ -134,7 +134,7 @@ Warnings are non-material freshness drift, unavailable non-decision-relevant det
 
 ## 8. Package and release
 
-The `.zip` is self-describing and contains the logical inventories in the Package Content Inventory Contract: release/version/scope/decisions/research period/effective date; object IDs/types/tiers and rationale; facts, sources/evidence, lawful document references, news, analyst observations, capabilities/offers, relationships/reasoning/history, Unknowns/Contradictions/deficiencies/exhaustion; freshness/supersession/validation/completeness/promotion state; provenance/checksums/compatibility. Physical paths remain flexible. Structured facts and intelligence must be packaged, not only summaries or documents.
+The `.zip` is self-describing and contains the logical inventories in the Package Content Inventory Contract: release/version/scope/decisions/research period/effective date; object IDs/types/tiers and rationale; facts, sources/evidence, lawful document references, news, analyst observations, capabilities/offers, relationships/reasoning/history, Unknowns/Contradictions/deficiencies/exhaustion; freshness/supersession/validation/completeness/promotion state; provenance/checksums/compatibility. Physical paths remain flexible. Structured facts and intelligence must be packaged, not only summaries or documents. Enterprise intelligence follows IT-001's permitted containment modes and canonical ownership rule; unresolved external links cannot supply Tier 1 content needed for normal offline investigation, and omitted external dependencies are declared completeness and portability deficiencies.
 
 ## 9. Flora projection and addressability
 
@@ -166,7 +166,7 @@ Waivers name owner, reason, expiry and affected decisions, but cannot waive unsu
 
 ## 12. Authority, compatibility and open issues
 
-Canonical delegation remains: IT-001 composition/release; EI-001/EIF-001 Enterprise depth; EI-002 graph/identity; EI-004 reasoning; EI-006/OT-001 opportunity; EI-012 uncertainty; ADR-009 progressive decision assurance; ADR-010 acquisition; ADR-016/Knowledge Pack exchange; lifecycle refresh/supersession; Production Protocol/Researcher completion; FEIR-001/presentation addressability. This schedule does not promote Review/Draft owners.
+Canonical delegation remains: IT-001 composition/release and the Package Content Inventory Contract as its controlled content schedule; EI-001/EIF-001 Enterprise depth; EI-002 graph/identity; EI-004 reasoning; EI-006/OT-001 opportunity; EI-012 uncertainty; ADR-009 progressive decision assurance; ADR-010 acquisition; ADR-016/Knowledge Pack Specification envelope, packaging and exchange mechanics; lifecycle refresh/supersession; Production Protocol/Researcher completion; FEIR-001/presentation addressability. IT-001 and the Knowledge Pack Specification do not silently take ownership of one another's semantics. This schedule does not promote Review/Draft owners.
 
 Unresolved authority issues from WP1-001 remain explicit: IT-001 is Review; lifecycle, pack and presentation specifications are Draft Normative; Market Participant ownership/status and the canonical Evidence object owner require reconciliation; financial ownership spans documents of unequal authority; EI-004 lineage vocabulary includes Signal/Insight/Theme variants; OT-001 is Review; `industry-twin-v1` is not one unambiguous protected machine contract. The smallest reconciliation here is cross-reference and delegation, not authority clean-up.
 

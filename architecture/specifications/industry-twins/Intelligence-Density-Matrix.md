@@ -1,7 +1,7 @@
 # Intelligence Density Matrix
 
 **Status:** Review — controlled WP1-002 schedule to IT-001  
-**Use:** Object-level assessment; counts below are not accepted doctrine. `T1/T2/T3` are qualitative architectural minima; numeric starting values are in the RET checklist.
+**Use:** Object-level assessment; counts below are not accepted doctrine. `T1/T2/T3` are qualitative architectural minima; numeric starting values are in the RET checklist. Numeric RET calibration values are deficiency-detection floors—not target volumes, completion caps, safe-harbour thresholds or sufficient evidence of high fidelity. Passing a count cannot override semantic depth, material-domain coverage, blocking deficiencies or independent review.
 
 ## Assessment rules
 

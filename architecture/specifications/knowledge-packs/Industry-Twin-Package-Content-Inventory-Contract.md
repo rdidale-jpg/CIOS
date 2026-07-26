@@ -1,6 +1,7 @@
 # Industry Twin Package Content Inventory and Deficiency Contract
 
-**Status:** Draft Normative companion profile under the existing Knowledge Pack Specification; WP1-002 proposal  
+**Status:** Draft Normative controlled schedule to IT-001; WP1-002 proposal
+**Governance role:** IT-001 governs Industry Twin content semantics through this schedule. The Knowledge Pack Specification governs envelope, packaging and exchange mechanics. Neither document silently takes ownership of the other's semantics.
 **Physical-layout rule:** logical content only; no new mandatory directory structure or runtime schema.
 
 ## 1. Self-description and inventories
@@ -10,7 +11,7 @@ An Industry Twin `.zip` declares release ID/version, scope/boundaries, target de
 | Inventory | Required logical content |
 |---|---|
 | Objects | Industry/subsectors, Enterprises, Market Participants/suppliers, executives/buying centres, products/services/capabilities/offers, transformations/opportunities and their tier/state |
-| Facts | atomic governed assertion, subject/predicate/value/unit, fact type (current/historical/forecast/target/expectation/inference/superseded), effective time, confidence and evidence IDs |
+| Facts | atomic governed assertion preserving, where applicable: assertion ID; subject; predicate; value and unit; fact classification (current/historical/forecast/target/expectation/inference/superseded); valid-from and valid-to; observation/publication date; source and evidence IDs; extraction/transformation provenance; confidence; freshness/review state; scope/geography; and supersession lineage |
 | Sources/evidence | source/document identity/type/organisation/authority, citation/locator, source/publication/retrieval/effective dates, lawful extract or governed paraphrase, licence/access, freshness, provenance and integrity metadata |
 | Documents/references | packaged document only when lawful; otherwise metadata/citation/access constraint and linked extracted facts |
 | News | governed event fields from completeness contract, affected objects and observation/contradiction effects |
@@ -24,6 +25,8 @@ An Industry Twin `.zip` declares release ID/version, scope/boundaries, target de
 | Assurance | dimension assessments, deficiencies/warnings, evidence-exhaustion records, independent review and promotion-gate results |
 
 Inventories may be represented in compatible existing assets. A summary, source dump or links-only pack fails even when the envelope validates. Non-redistributable material uses lawful metadata, citation, extracted governed facts, compliant paraphrase, observation/reasoning and access restrictions.
+
+Enterprise content uses the containment modes governed by IT-001: embedded governed release, embedded immutable snapshot, decision-scoped materialised projection, or declared external dependency. Embedded modes preserve source Twin identity/version, provenance, checksums, effective date and supersession lineage and never transfer semantic ownership. Tier 1 content needed for normal offline investigation cannot be links-only; omitted external dependencies are completeness and portability deficiencies with promotion impact.
 
 ## 2. Machine-readable deficiency record
 
