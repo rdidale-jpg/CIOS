@@ -44,9 +44,11 @@ def test_tms_identity_is_explicit_and_business_categories_use_governed_semantics
     assert [_business_category(row) for row in candidates] == ["Enterprises", "Market Participants", "Classification unavailable"]
     assert governed_semantics(candidates[1]) == {"canonical_identity_type": "market_participant", "commercial_roles": ["supplier"], "package_role": None, "projection_role": None}
     summary = _commercial_change_summary(candidates, inspection)
+    assert "Commercial Intelligence" in summary
+    assert "Governance Intelligence" in summary
     assert "13</div><strong>Market Participants" in summary
     assert "9</div><strong>Opportunities" in summary
-    assert "16</div><strong>Capabilities and Offers" in summary
+    assert "16</div><strong>Capabilities &amp; Offers" in summary
 
 
 def test_enterprise_supplier_role_is_not_a_supplier_twin_and_ambiguous_identity_stays_ambiguous():
