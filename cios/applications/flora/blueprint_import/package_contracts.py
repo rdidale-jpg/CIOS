@@ -292,6 +292,7 @@ def _inspection_details(
         "package_version": ("package_version", "version", "delta_version"),
         "research_state": ("research_state", "research_status", "mission_state", "state"),
         "decision_maturity": ("decision_maturity", "decision_readiness", "maturity"),
+        "canonical_owner": ("canonical_owner", "semantic_owner", "owner_twin_id"),
     }
     resolved: dict[str, Any] = {}
     sources: dict[str, str] = {}
@@ -326,6 +327,32 @@ def _inspection_details(
     profile = resolved.get("package_profile") or ("industry-twin-v1" if manifest and deltas else None)
     if manifest and deltas and not resolved.get("twin_type"):
         resolved["twin_type"] = "industry"
+    # IT-001 packages may carry the governed subject as a distinct release
+    # document.  It is package content, but is only authoritative for identity
+    # when it declares a stable id, name and scope and agrees with the mission.
+    subject_documents: list[tuple[str, dict[str, Any]]] = []
+    mission_id = resolved.get("mission_identifier")
+    for path, document in documents.items():
+        if not isinstance(document, dict):
+            continue
+        subject_id = document.get("primary_subject_id") or document.get("industry_id") or document.get("id")
+        subject_name = document.get("primary_subject_name") or document.get("industry_name") or document.get("name")
+        scope = document.get("governed_scope") or document.get("scope")
+        declared_mission = document.get("mission_id") or document.get("package_id")
+        if subject_id and subject_name and scope not in (None, "") and (not mission_id or declared_mission == mission_id):
+            if str(subject_id).startswith("IND-") or document.get("primary_subject_class") == "industry":
+                subject_documents.append((path, document))
+    if len(subject_documents) == 1:
+        subject_path, subject = subject_documents[0]
+        resolved["primary_subject_id"] = subject.get("primary_subject_id") or subject.get("industry_id") or subject.get("id")
+        resolved["primary_subject_name"] = subject.get("primary_subject_name") or subject.get("industry_name") or subject.get("name")
+        resolved["primary_subject_class"] = subject.get("primary_subject_class") or "industry"
+        resolved["governed_scope"] = subject.get("governed_scope") or subject.get("scope")
+        resolved["canonical_owner"] = resolved.get("canonical_owner") or resolved["primary_subject_id"]
+        sources.update({key: subject_path for key in ("primary_subject_id", "primary_subject_name", "primary_subject_class", "governed_scope")})
+    elif manifest and deltas:
+        resolved.update({"primary_subject_id": None, "primary_subject_name": None, "primary_subject_class": None, "governed_scope": None})
+        warnings.append("Primary governed subject is ambiguous or absent; cross-Twin impact decisions are disabled.")
     delta = documents.get(deltas[0]) if deltas else None
     records = delta.get("records") if isinstance(delta, dict) else None
     promotable_objects = [str(row.get("external_id")) for row in records or [] if isinstance(row, dict) and row.get("external_id")] if isinstance(records, list) else []
@@ -407,7 +434,7 @@ def _referenced_paths(document: Any) -> list[str]:
 
 
 def _asset_counts(documents: dict[str, Any], paths: tuple[str, ...], locations: dict[str, str | None]) -> dict[str, int]:
-    aliases = {"industry": "Industry Twins", "enterprise": "Enterprise Twins", "market_participant": "Market Participant Twins", "flow": "Flow Twins", "opportunity": "Opportunity Twins", "control_body": "Control Bodies", "procurement_route": "Procurement Routes", "transformation_programme": "Transformation Programmes", "evidence": "Evidence records", "unknown": "Unknowns", "contradiction": "Contradictions"}
+    aliases = {"industry": "Industry Twins", "enterprise": "Enterprise Twins", "market_participant": "Market Participant Twins", "capability_offer": "Capabilities and Offers", "flow": "Flow Twins", "opportunity": "Opportunity Twins", "control_body": "Control Bodies", "procurement_route": "Procurement Routes", "transformation_programme": "Transformation Programmes", "evidence": "Evidence records", "unknown": "Unknowns", "contradiction": "Contradictions"}
     counts: dict[str, int] = {}
     seen: set[tuple[str, str]] = set()
     category_labels = {"industry_twins": "Industry Twins", "enterprise_twins": "Enterprise Twins", "market_participant_twins": "Market Participant Twins", "opportunity_twins": "Opportunity Twins", "flow_twins": "Flow Twins"}
@@ -422,17 +449,29 @@ def _asset_counts(documents: dict[str, Any], paths: tuple[str, ...], locations: 
                     values = next((declaration[key] for key in ("ids", "identifiers", "references", "objects", "items") if key in declaration), [])
                 if isinstance(values, list) and category in category_labels:
                     counts[category_labels[category]] = max(counts.get(category_labels[category], 0), len(values))
-        rows = doc if isinstance(doc, list) else next((doc.get(k) for k in ("records", "items", "nodes", "entries", "unknowns", "contradictions", "enterprise_twins", "market_participant_twins", "opportunity_twins", "flow_twins") if isinstance(doc, dict) and isinstance(doc.get(k), list)), None)
+        rows = doc if isinstance(doc, list) else next((doc.get(k) for k in ("records", "objects", "items", "nodes", "entries", "unknowns", "contradictions", "enterprise_twins", "market_participant_twins", "opportunity_twins", "flow_twins") if isinstance(doc, dict) and isinstance(doc.get(k), list)), None)
         if not isinstance(rows, list):
             continue
+        # The governed object inventory is the package's semantic category
+        # register.  Its explicit object_type counts override duplicate release
+        # projections carried in presentation/collection documents.
+        if "object_inventory" in path.casefold():
+            inventory_counts: dict[str, int] = {}
+            for row in rows:
+                if isinstance(row, dict):
+                    kind = str(row.get("object_type") or "").casefold().replace(" ", "_").replace("-", "_")
+                    label = aliases.get(kind)
+                    if label: inventory_counts[label] = inventory_counts.get(label, 0) + 1
+            counts.update(inventory_counts)
         for i, row in enumerate(rows):
             if not isinstance(row, dict):
                 continue
             kind = str(row.get("twin_type") or row.get("object_type") or row.get("record_class") or "").lower().replace(" ", "_").replace("-", "_")
             label = aliases.get(kind)
-            if label and (path, str(row.get("id") or row.get("external_id") or i)) not in seen:
+            governed_id = str(row.get("id") or row.get("external_id") or f"{path}:{i}")
+            if label and "object_inventory" not in path.casefold() and (kind, governed_id) not in seen:
                 counts[label] = counts.get(label, 0) + 1
-                seen.add((path, str(row.get("id") or row.get("external_id") or i)))
+                seen.add((kind, governed_id))
         name = path.lower()
         normal_name = name.replace("-", "_")
         for token, label in (("enterprise_twin", "Enterprise Twins"), ("market_participant_twin", "Market Participant Twins"), ("opportunity_twin", "Opportunity Twins"), ("flow_twin", "Flow Twins")):
@@ -449,6 +488,14 @@ def _asset_counts(documents: dict[str, Any], paths: tuple[str, ...], locations: 
                 counts["graph nodes"] = len(doc["nodes"])
             if isinstance(doc, dict) and isinstance(doc.get("edges"), list):
                 counts["graph edges"] = len(doc["edges"])
+    for path, document in documents.items():
+        if "object_inventory" not in path.casefold() or not isinstance(document, dict) or not isinstance(document.get("objects"), list):
+            continue
+        authoritative: dict[str, int] = {}
+        for row in document["objects"]:
+            if isinstance(row, dict) and (label := aliases.get(str(row.get("object_type") or "").casefold().replace(" ", "_").replace("-", "_"))):
+                authoritative[label] = authoritative.get(label, 0) + 1
+        counts.update(authoritative)
     return counts
 
 def _register_count(document: Any) -> int | None:
