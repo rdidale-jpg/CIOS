@@ -41,22 +41,21 @@ def test_repository_tms_package_completes_existing_governed_lifecycle(tmp_path, 
         HEADERS,
     )
     assert status == 200 and "Governed Industry Twin Package" in html
-    assert "Executive import summary" in html
-    assert "Overall recommendation: Ready to Review" in html
-    assert "Review required" in html
-    assert "role='button'" in html and ">Review proposed changes</a>" in html
-    assert "Review</span> <small>(available and recommended)" in html
-    assert "Promotion:</strong> Blocked" in html
-    assert "primary subject, governed scope and canonical owner must be confirmed" in html
-    assert "Technical health:</strong> Passed" in html
-    assert "Commercial review status:</strong> Not yet reviewed" in html
-    assert "315 resolved / 0 unresolved" in html
+    assert "TMS-001 Industry Twin Import" in html
+    assert "Safe to review" in html
+    assert html.count("data-primary-action='true'") == 1
+    assert ">Review proposed changes</a>" in html
+    assert "Review</span> <small>(current and recommended)" in html
+    assert "Blocked until identity and classification tasks are resolved" in html
+    assert "Twin identity and nine Opportunity records require review" in html
+    assert "315 resolved · 0 unresolved" in html
     assert "No live Twin changes have been made" in html
-    assert "Commercial change summary" in html and "Contradictions</th><td>14" in html
-    assert "Opportunities</th><td>9</td><td>0</td><td>0</td><td>0</td><td>9" in html
-    assert "14 Contradictions are structurally incomplete and will not be promoted" in html
-    assert "Expected governance behaviour:</strong> 40" in html
+    assert "Change summary" in html and "14 quarantined and excluded from promotion" in html
+    assert "9 require classification" in html
+    assert "40 research, workspace or presentation artefacts retained as lineage" in html
     assert "Technical diagnostics" in html
+    assert "research_ready_with_conditions" not in html.split("<details class='card' id='technical-diagnostics'>", 1)[0]
+    assert "View current proposed changes" not in html
     run_id = target.rsplit("/", 1)[-1]
     package = next(p for p in BlueprintPackageRegistry().list() if p.import_run_id == run_id)
     archive = tmp_path / package.archive_path

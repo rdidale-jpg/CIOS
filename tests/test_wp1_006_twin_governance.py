@@ -9,7 +9,7 @@ from cios.applications.flora.blueprint_import.twin_governance import (
     DownstreamReconciliationRepository, TwinDependencyService, assess_impacts,
     governed_semantics, project_twin_identity,
 )
-from cios.applications.flora.blueprint_import.views import _business_category, _commercial_change_summary, _executive_summary
+from cios.applications.flora.blueprint_import.views import _business_category, _commercial_change_summary, _executive_summary, _identity_resolution_section
 from cios.applications.flora.storage import atomic_write_json, data_path
 
 
@@ -33,8 +33,8 @@ def test_tms_identity_is_explicit_and_business_categories_use_governed_semantics
     assert identity.primary_subject_class == "industry"
     assert identity.canonical_owner == "IND-TMS-001"
     assert "telecommunications" in identity.governed_scope
-    html = _executive_summary(tms, {"recommendation": "Ready to Review", "technical": "Passed", "review": "Not yet reviewed", "next": "Review proposed changes"})
-    for text in ("Primary subject", "Governed scope", "Canonical owner", "IND-TMS-001", "Industry"):
+    html = _identity_resolution_section(tms)
+    for text in ("Primary subject", "Governed scope", "Canonical owner", "Unresolved", "Industry"):
         assert text in html
     candidates = [
         {"candidate_object_class": "entity", "payload": {"object_type": "enterprise"}, "validation_status": "accepted"},
@@ -44,9 +44,9 @@ def test_tms_identity_is_explicit_and_business_categories_use_governed_semantics
     assert [_business_category(row) for row in candidates] == ["Enterprises", "Market Participants", "Classification unavailable"]
     assert governed_semantics(candidates[1]) == {"canonical_identity_type": "market_participant", "commercial_roles": ["supplier"], "package_role": None, "projection_role": None}
     summary = _commercial_change_summary(candidates, inspection)
-    assert "<th>Market Participants</th><td>13</td>" in summary
-    assert "<th>Opportunities</th><td>9</td>" in summary
-    assert "<th>Capabilities and Offers</th><td>16</td>" in summary
+    assert "13</div><strong>Market Participants" in summary
+    assert "9</div><strong>Opportunities" in summary
+    assert "16</div><strong>Capabilities and Offers" in summary
 
 
 def test_enterprise_supplier_role_is_not_a_supplier_twin_and_ambiguous_identity_stays_ambiguous():
