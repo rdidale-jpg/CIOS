@@ -13,7 +13,7 @@ from typing import Any, Literal
 from cios.applications.flora.storage import atomic_write_json, data_path, ensure_writable_dir
 
 from .candidates import CandidateStagingRepository
-from .ledger import utc_now
+from .ledger import BlueprintImportLedger, utc_now
 from .models import BlueprintPackageRecord
 from .registry import BlueprintPackageRegistry
 
@@ -43,7 +43,11 @@ class TwinIdentityProjection:
 
 def project_twin_identity(package: BlueprintPackageRecord) -> TwinIdentityProjection:
     """Project only explicit governed identity; never derive it from a label."""
-    inspection = package.package_inspection or {}
+    inspection = dict(package.package_inspection or {})
+    # A confirmation is an overlay on preserved package metadata, never a rewrite.
+    confirmation = GovernedIdentityResolutionRepository().get(package.import_run_id)
+    if confirmation:
+        inspection.update(confirmation["resolved_identity"])
     twin_type = str(inspection.get("twin_type") or "").casefold() or None
     subject_id = inspection.get("primary_subject_id")
     subject_name = inspection.get("primary_subject_name")
@@ -73,6 +77,44 @@ def project_twin_identity(package: BlueprintPackageRecord) -> TwinIdentityProjec
         status="recognised" if complete else "ambiguous",
         ambiguity_reason=None if complete else "Explicit primary-subject, scope or canonical-owner metadata is incomplete.",
     )
+
+
+class GovernedIdentityResolutionRepository:
+    """Audit explicit linkage to an already governed Twin identity."""
+
+    def path(self, import_run_id: str):
+        return data_path("blueprint_import", "identity_resolution", f"{import_run_id}.json")
+
+    def get(self, import_run_id: str) -> dict[str, Any] | None:
+        path = self.path(import_run_id)
+        return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
+
+    def confirm_existing(self, package: BlueprintPackageRecord, existing_package_ref: str,
+                         actor: str, rationale: str) -> dict[str, Any]:
+        """Confirm only an identity backed by an existing governed registry record."""
+        if not actor.strip() or not rationale.strip():
+            raise ValueError("Identity confirmation requires an actor and rationale.")
+        existing = BlueprintPackageRegistry().get(existing_package_ref)
+        if existing is None or existing.package_ref == package.package_ref:
+            raise ValueError("Select an existing governed Twin identity; free-text identity creation is not permitted.")
+        identity = project_twin_identity(existing)
+        if identity.status != "recognised":
+            raise ValueError("The selected existing Twin does not have a complete governed identity.")
+        source = dict(package.package_inspection or {})
+        resolved = {
+            "twin_id": identity.twin_id, "twin_type": identity.twin_type,
+            "primary_subject_id": identity.primary_subject_id,
+            "primary_subject_name": identity.primary_subject_name,
+            "primary_subject_class": identity.primary_subject_class,
+            "governed_scope": identity.governed_scope, "canonical_owner": identity.canonical_owner,
+        }
+        row = {"import_run_id": package.import_run_id, "actor": actor.strip(), "confirmed_at": utc_now(),
+               "rationale": rationale.strip(), "source_package": package.identity.package_id,
+               "source_package_checksum": package.package_sha256, "matched_package_ref": existing_package_ref,
+               "original_package_metadata": source, "resolved_identity": resolved}
+        atomic_write_json(self.path(package.import_run_id), row)
+        BlueprintImportLedger().append("twin_identity_confirmed", row)
+        return row
 
 
 def governed_semantics(candidate: dict[str, Any]) -> dict[str, Any]:
