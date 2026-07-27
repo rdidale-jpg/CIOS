@@ -45,16 +45,24 @@ def test_repository_tms_package_completes_existing_governed_lifecycle(tmp_path, 
     assert "Safe to review" in html
     assert html.count("data-primary-action='true'") == 1
     assert ">Review proposed changes</a>" in html
-    assert "Review</span> <small>(current and recommended)" in html
+    assert "<span>Review Next</span>" in html
     assert "Blocked until identity and classification tasks are resolved" in html
-    assert "Twin identity and nine Opportunity records require review" in html
+    assert "Twin identity and nine candidate Opportunity records require review" in html
     assert "315 resolved · 0 unresolved" in html
     assert "No live Twin changes have been made" in html
-    assert "Change summary" in html and "14 quarantined and excluded from promotion" in html
-    assert "9 require classification" in html
+    assert "Commercial Intelligence" in html and "Governance Intelligence" in html
+    assert "14 quarantined and excluded from promotion" in html
+    assert "Nine candidate Opportunity records have been identified." in html
+    assert "Commercial opportunity assessment will become available once classification is complete." in html
+    assert html.index("TMS-001 Industry Twin Import") < html.index("Import workflow") < html.index("Safe to review") < html.index("Commercial Intelligence") < html.index("Governance Intelligence") < html.index("Technical diagnostics")
+    assert html.count(">Confirm Twin identity</a>") == 1
+    assert "Affected Twins will be assessed after Twin identity is confirmed." in html
+    assert "<strong>Next action</strong><br>Confirm Twin identity during Review." in html
+    assert "aria-label='Import progress'" in html and "aria-current='page'" in html
+    assert "title='Governed ID:" in html
     assert "40 research, workspace or presentation artefacts retained as lineage" in html
     assert "Technical diagnostics" in html
-    assert "research_ready_with_conditions" not in html.split("<details class='card' id='technical-diagnostics'>", 1)[0]
+    assert "research_ready_with_conditions" not in html.split("id='technical-diagnostics'", 1)[0]
     assert "View current proposed changes" not in html
     run_id = target.rsplit("/", 1)[-1]
     package = next(p for p in BlueprintPackageRegistry().list() if p.import_run_id == run_id)

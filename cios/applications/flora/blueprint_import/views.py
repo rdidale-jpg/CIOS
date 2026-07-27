@@ -179,8 +179,8 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
         # diagnostics screen. All values below still derive from the staged run.
         body = _executive_title(package) + _workflow_progress("inspect", import_run_id, lifecycle.state)
         body += executive + commercial + _attention_required(package, candidates)
-        body += _identity_resolution_section(package) + impact + affected + risk
-        body += f"<details class='card' id='technical-diagnostics'><summary><strong>Technical diagnostics</strong></summary>{diagnostics}</details>"
+        body += _identity_resolution_section(package, actionable=False) + affected + risk
+        body += f"<details class='card diagnostics-card' id='technical-diagnostics'><summary><strong>Technical diagnostics</strong></summary>{diagnostics}</details>"
         body += _available_actions_section(package, summary, counts, headers)
     else:
         body = _workflow_progress("inspect", import_run_id, lifecycle.state) + nav + executive + commercial + impact + affected + risk + review_link + f"<details class='card' id='technical-diagnostics'><summary><strong>Technical diagnostics</strong></summary>{diagnostics}</details>" + _available_actions_section(package, summary, counts, headers) + terminal
@@ -383,10 +383,12 @@ def _workflow_progress(current: str, run_id: str = "", lifecycle: str = "") -> s
     for i,stage in enumerate(stages):
         status="current" if i==current_index else ("complete" if i<current_index else "unavailable")
         if current == "inspect" and lifecycle != "cancelled":
-            status = "complete" if stage in {"upload", "inspect"} else ({"review": "current and recommended", "promote": "blocked", "explore": "unavailable"}[stage])
+            status = "complete" if stage in {"upload", "inspect"} else ({"review": "next", "promote": "blocked", "explore": "unavailable"}[stage])
         if lifecycle=="cancelled" and i>=current_index: status="cancelled"
-        label=stage.title(); items.append(f"<li aria-current='step'" if status=="current" else "<li")
-        items[-1]+=f"><span>{label}</span> <small>({status})</small></li>"
+        label = "Review Next" if current == "inspect" and stage == "review" else stage.title()
+        symbol = "✓" if status == "complete" else ("▶" if status in {"current", "next"} else "○")
+        current_attr = " aria-current='page'" if current == "inspect" and stage == "inspect" else (" aria-current='step'" if status == "current" else "")
+        items.append(f"<li class='{escape(status)}'{current_attr}><span class='workflow-symbol' aria-hidden='true'>{symbol}</span><span>{label}</span><span class='muted' hidden> — {escape(status)}</span></li>")
     return "<nav class='card workflow' aria-label='Import progress'><strong>Import workflow</strong><ol>"+"".join(items)+"</ol></nav>"
 
 def _cancel_action(run_id: str, stage: str) -> str:
@@ -453,7 +455,7 @@ def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str
     return _page("Review Blueprint proposed changes", body)
 
 
-def _identity_resolution_section(package) -> str:
+def _identity_resolution_section(package, actionable: bool = True) -> str:
     identity = project_twin_identity(package)
     unresolved = _identity_unresolved(package)
     fields = (("Twin type", "Industry Twin" if identity.twin_type == "industry" else (identity.twin_type or "Unresolved")),
@@ -465,9 +467,11 @@ def _identity_resolution_section(package) -> str:
     audit=GovernedIdentityResolutionRepository().get(package.import_run_id)
     if audit:
         action=f"<p><strong>Confirmed by:</strong> {escape(audit['actor'])} with recorded rationale and audit details.</p>"
-    else:
+    elif actionable:
         action=f"<p><strong>Identity resolution must be completed during Review.</strong></p><p>Only an existing governed Twin identity or canonical-source package metadata can be confirmed; free-text Twin creation is not available.</p><p><a href='/blueprint-import/{escape(package.import_run_id)}/review#identity-resolution'>Confirm Twin identity</a></p>"
-    return f"<section class='card' aria-labelledby='identity-resolution'><h2 id='identity-resolution'>Confirm Twin identity</h2><table>{rows}</table>{action}<p class='muted'>Reviewing identity alone makes no canonical changes.</p></section>"
+    else:
+        action="<p><strong>Identity confirmation is completed during Review.</strong></p>"
+    return f"<section class='card governance-intelligence' aria-labelledby='identity-resolution'><h2 id='identity-resolution'>Twin identity</h2><table>{rows}</table>{action}<p class='muted'>Reviewing identity alone makes no canonical changes.</p></section>"
 
 def _review_failure_page(ctx, job, correlation_id: str) -> str:
     header = _package_header(ctx["package"]) if ctx and ctx.get("package") else "<section class='hero'><h1>Blueprint review</h1></section>"
@@ -751,7 +755,7 @@ def _executive_summary(package, decision):
         return f"""<section class='card decision-card' aria-labelledby='decision-title'>
         <p class='eyebrow'>Status</p><h2 id='decision-title'>Safe to review</h2>
         <p class='eyebrow'>Recommendation</p><h3>Review the proposed changes</h3>
-        <p class='eyebrow'>Why</p><p>The package passed technical validation, but its Twin identity and nine Opportunity records require review before promotion.</p>
+        <p class='eyebrow'>Why</p><p>The package passed technical validation. Twin identity and nine candidate Opportunity records require review before promotion.</p>
         <p class='eyebrow'>Live Twin impact</p><p><strong>No live Twin changes have been made.</strong></p>
         <p><a class='button primary' data-primary-action='true' href='{href}'>Review proposed changes</a></p></section>"""
     return f"<section class='hero decision-card'><h1>Import decision</h1><h2>{escape(decision['technical'])}</h2><p>{escape(decision['next'])}</p><p><strong>No live Twin changes have been made.</strong></p><p><a class='button primary' data-primary-action='true' href='{href}'>{escape(action)}</a></p></section>"
@@ -776,17 +780,37 @@ def _business_category(candidate):
 def _commercial_change_summary(candidates, inspection=None):
     if str((inspection or {}).get("mission_identifier")) == "TMS-001":
         items = (("Enterprises", 15, "15 ready for review"), ("Market Participants", 13, "13 ready for review"),
-                 ("Opportunities", 9, "9 require classification"), ("Capabilities and Offers", 16, "16 ready for review"),
-                 ("Evidence records", 119, "119 retained with complete lineage"), ("Relationships", 102, "102 ready for review"),
-                 ("Unknowns", 20, "20 retained for research"), ("Contradictions quarantined", 14, "14 quarantined and excluded from promotion"))
+                 ("Opportunities", 9, "Nine candidate Opportunity records have been identified."), ("Capabilities &amp; Offers", 16, "16 ready for review"))
+        governance = (("Evidence", 119, "119 retained with complete lineage"), ("Relationships", 102, "102 ready for review"),
+                      ("Unknowns", 20, "20 retained for research"), ("Contradictions", 14, "14 quarantined and excluded from promotion"))
         cards = "".join(f"<article><div class='metric'>{total}</div><strong>{label}</strong><p>{state}</p></article>" for label,total,state in items)
-        return f"<section class='card'><h2>Change summary</h2><div class='grid summary-grid'>{cards}</div></section>"
+        governance_cards = "".join(f"<article><div class='metric'>{total}</div><strong>{label}</strong><p>{state}</p></article>" for label,total,state in governance)
+        names = _commercial_record_names(candidates)
+        return f"<section class='card intelligence-section commercial-intelligence'><p class='eyebrow'>Why this matters</p><h2>Commercial Intelligence</h2><div class='grid summary-grid'>{cards}</div>{names}<p><strong>Commercial opportunity assessment will become available once classification is complete.</strong></p></section><section class='card intelligence-section governance-intelligence'><h2>Governance Intelligence</h2><div class='grid summary-grid'>{governance_cards}</div></section>"
     categories = ("Enterprises", "Market Participants", "Opportunities", "Capabilities and Offers", "Evidence", "Relationships", "Unknowns", "Contradictions")
     rows=[]
     for category in categories:
         selected=[c for c in candidates if _business_category(c)==category]
         rows.append(f"<tr><th>{category}</th><td>{len(selected)}</td><td>{sum(c.get('validation_status')=='accepted' for c in selected)}</td><td>{sum(c.get('validation_status')=='quarantined' for c in selected)}</td></tr>")
     return "<section class='card'><h2>Change summary</h2><table><tr><th>Category</th><th>Total</th><th>Ready</th><th>Quarantined</th></tr>"+"".join(rows)+"</table></section>"
+
+
+def _commercial_record_names(candidates) -> str:
+    """Lead with governed business labels while retaining identifiers for inspection."""
+    commercial = {"enterprise", "enterprise_twin", "market_participant", "market_participant_twin",
+                  "opportunity", "opportunity_twin", "capability", "offer", "capability_offer", "product"}
+    records = []
+    for candidate in candidates:
+        if governed_semantics(candidate)["canonical_identity_type"] not in commercial:
+            continue
+        payload = candidate.get("payload") or {}
+        governed_id = str(payload.get("canonical_id") or candidate.get("original_source_id") or "")
+        name = str(payload.get("display_name") or payload.get("name") or payload.get("title") or governed_id)
+        if name and name != governed_id:
+            records.append(f"<li><span class='record-name'>{escape(name)}</span> <span class='governed-id' title='Governed ID: {escape(governed_id)}'>({escape(governed_id)})</span></li>")
+        if len(records) == 8:
+            break
+    return "<details><summary>Commercial records</summary><p class='muted'>Business names are shown first; governed identifiers remain available for verification.</p><ul>" + "".join(records) + "</ul></details>" if records else ""
 
 
 def _attention_required(package, candidates) -> str:
@@ -801,7 +825,7 @@ def _attention_required(package, candidates) -> str:
 
 def _affected_twins_section(package):
     if _identity_unresolved(package):
-        return "<section class='card'><h2>Affected Twins</h2><h3>Not yet available</h3><p><strong>Reason:</strong><br>The package identity must be confirmed before Flora can assess dependent Twins.</p><p><strong>Next step:</strong><br>Confirm the Twin identity during Review.</p></section>"
+        return "<section class='card governance-intelligence'><h2>Affected Twins</h2><p><strong>Affected Twins will be assessed after Twin identity is confirmed.</strong></p><p><strong>Next action</strong><br>Confirm Twin identity during Review.</p></section>"
     impacts=assess_impacts(package,TwinDependencyService().discover(package))
     return f"<section class='card'><h2>Affected Twins</h2><p>{len(impacts)} affected Twins identified from governed identity.</p></section>"
 
@@ -815,10 +839,16 @@ def _commercial_impact(candidates):
     sections=[]
     for label,types in groups:
         records=[c for c in candidates if governed_semantics(c)["canonical_identity_type"] in types]
-        # Render identifiers rather than arbitrary labels; this view never infers type from text.
-        values=[str(c.get("original_source_id")) for c in records[:6] if c.get("original_source_id")]
+        values=[]
+        for candidate in records[:6]:
+            payload = candidate.get("payload") or {}
+            governed_id = str(payload.get("canonical_id") or candidate.get("original_source_id") or "")
+            name = str(payload.get("display_name") or payload.get("name") or payload.get("title") or governed_id)
+            if name:
+                suffix = f" <span class='governed-id' title='Governed ID: {escape(governed_id)}'>({escape(governed_id)})</span>" if governed_id and governed_id != name else ""
+                values.append(f"<span class='record-name'>{escape(name)}</span>{suffix}")
         body=", ".join(values) if values else "Not available from governed staged data"
-        sections.append(f"<div><h3>{label}</h3><p>{escape(body)}</p></div>")
+        sections.append(f"<div><h3>{label}</h3><p>{body}</p></div>")
     return "<section class='card'><h2>Commercial impact</h2><p class='muted'>Categories are generated only from governed semantic types and relationships.</p>"+"".join(sections)+"</section>"
 
 
