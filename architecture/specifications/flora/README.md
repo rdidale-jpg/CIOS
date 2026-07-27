@@ -2,7 +2,7 @@
 
 **Status:** Proposed
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-18
+**Last updated:** 2026-07-27
 
 This folder contains governed Flora runtime architecture specifications that sit beneath accepted CIOS architecture, Enterprise Intelligence models, Founding Papers, Reference Architectures and ADRs. For workspace composition and experience context, start with [FA-001 — Flora Enterprise Intelligence Workspace Reference Architecture](../../reference-architectures/FA-001-Flora-Enterprise-Intelligence-Workspace-Reference-Architecture.md).
 
@@ -15,3 +15,4 @@ This folder contains governed Flora runtime architecture specifications that sit
 | FLORA-V2-UX | [Flora v2 Product Experience Specification](Flora-v2-Product-Experience-Specification.md) | Proposed | Defines the question-first Enterprise Intelligence UX, IA, journeys, wireframes, design system, responsive guidance and explainability experiences subordinate to ADR-024, FEIR-001 and EIRP-001. |
 | FLORA-V2-UX-CR | [Flora v2 Product Experience Completion Report](Flora-v2-Product-Experience-Completion-Report.md) | Complete | Records delivery, validation, major UX changes, accessibility guidance, prototype status and architectural observations for the Flora v2 experience commission. |
 | UX-001 | [Flora UK Banking → Lloyds Reference Journey](../../UX-001-Flora-UK-Banking-Lloyds-Reference-Journey.md) | Proposed | Defines the first numbered Flora UX journey specification proving an end-to-end path from UK Banking change through Lloyds opportunity validation while preserving lineage, Unknowns, Contradictions and separated commercial judgement dimensions. |
+| WP2-001A | [Executive Intelligence Workspace UX Blueprint](WP2-001A-Executive-Intelligence-Workspace-UX-Blueprint.md) | Proposed | Canonical experience blueprint applying FP-013 through trust-through-inspection, progressive disclosure and conclusion-centred Evidence access over the existing Twin Inspection Shell. |
