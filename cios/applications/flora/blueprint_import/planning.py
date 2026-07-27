@@ -10,7 +10,7 @@ from cios.applications.flora.storage import atomic_write_json, data_path
 from .archive import sha256_bytes
 from .candidates import PROJECTION_ONLY_CLASSES, CandidateStagingRepository
 
-PERSISTABLE_CANONICAL_CLASSES = {"evidence", "observation", "contradiction", "unknown", "entity", "relationship", "human_knowledge"}
+PERSISTABLE_CANONICAL_CLASSES = {"evidence", "observation", "contradiction", "unknown", "entity", "relationship", "human_knowledge", "fact", "reasoning_lineage"}
 SUPPORT_RECORD_CLASSES = {"source", "enterprise_model_candidate"}
 from .ledger import BlueprintImportLedger, utc_now
 from .mapping import ImportMappingRepository

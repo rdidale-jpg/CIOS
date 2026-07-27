@@ -20,6 +20,7 @@ SUPPORTED_CANONICAL_CLASSES = {
     "enterprise", "twin", "source", "evidence", "observation", "entity", "relationship",
     "enterprise_model_candidate", "unknown", "contradiction", "human_knowledge",
     "refresh_trigger", "publication_reference",
+    "fact", "reasoning_lineage",
 }
 PROJECTION_ONLY_CLASSES = {
     "pain_point", "current_response", "response_effectiveness", "residual_pain",

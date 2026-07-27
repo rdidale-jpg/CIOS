@@ -32,6 +32,15 @@ class IndustryTwinDeltaAdapter:
         "opportunity_twins": ("collections/opportunity-twins.json", "twins/opportunity-twins.json"),
         "flow_twins": ("collections/flow-twins.json", "collections/flow-twins.csv", "twins/flow-twins.json"),
     }
+    TMS_INVENTORIES = {
+        "objects": ("HFT_Upgrade/Inventories/object_inventory.json", "objects", "entity"),
+        "facts": ("HFT_Upgrade/Inventories/fact_inventory.json", "facts", "fact"),
+        "evidence": ("HFT_Upgrade/Evidence/source_evidence_register.json", "sources", "evidence"),
+        "relationships": ("HFT_Upgrade/Inventories/relationship_graph.json", "relationships", "relationship"),
+        "unknowns": ("HFT_Upgrade/Inventories/uncertainty_inventory.json", "unknowns", "unknown"),
+        "contradictions": ("HFT_Upgrade/Inventories/uncertainty_inventory.json", "contradictions", "contradiction"),
+        "reasoning_lineage": ("HFT_Upgrade/Lineage/reasoning_lineage.json", "", "reasoning_lineage"),
+    }
 
     def __init__(self) -> None:
         self.diagnostics: dict[str, Any] = {}
@@ -52,6 +61,10 @@ class IndustryTwinDeltaAdapter:
         # Publish diagnostics before I/O so a failure can never inherit the
         # previous validation run's successful diagnostics.
         self.diagnostics = diag
+        if self._is_tms_inventory_delta(delta):
+            if read_collection is None:
+                raise ValueError("TMS inventory projection requires the governed collection reader")
+            records.extend(self._tms_inventory_records(read_collection, diag))
         for category, declared in primary.items():
             shape = self._shape(declared)
             diag["primary_object_shapes"][category] = shape
@@ -112,16 +125,60 @@ class IndustryTwinDeltaAdapter:
         self.diagnostics["staging_candidates_created"] = len(output)
         return tuple(output)
 
+    @staticmethod
+    def _is_tms_inventory_delta(delta: dict[str, Any]) -> bool:
+        return str(delta.get("mission_id") or "") == "TMS-001" and any(
+            isinstance(delta.get(key), list) for key in ("new_twins", "new_relationships", "new_unknowns")
+        )
+
+    def _tms_inventory_records(self, read_collection: CollectionReader, diag: dict[str, Any]) -> list[tuple[dict[str, Any], str]]:
+        """Project canonical inventories; never infer candidates from executive/workspace products."""
+        output: list[tuple[dict[str, Any], str]] = []
+        object_ids: set[str] = set()
+        relationships: list[dict[str, Any]] = []
+        for category, (path, key, record_class) in self.TMS_INVENTORIES.items():
+            selected = read_collection(category, (path,))
+            if not selected:
+                raise ValueError(f"missing declared TMS canonical inventory: {path}")
+            actual_path, document = next(((p, d) for p, d in selected if p == path), selected[0])
+            diag["collection_files_selected"].append(actual_path)
+            if key:
+                rows = document.get(key) if isinstance(document, dict) else None
+                if not isinstance(rows, list):
+                    raise ValueError(f"TMS canonical inventory {path} does not contain list {key!r}")
+            else:
+                rows = [document] if isinstance(document, dict) else []
+            if category == "objects":
+                object_ids = {str(row.get("id")) for row in rows if isinstance(row, dict) and row.get("id")}
+            if category == "relationships":
+                relationships = [row for row in rows if isinstance(row, dict)]
+            diag["objects_indexed"][category] = len(rows)
+            diag["references_requested"][category] = len(rows)
+            diag["references_resolved"][category] = len(rows)
+            diag["resolved_counts_by_category"][category] = len(rows)
+            for row in rows:
+                if isinstance(row, dict):
+                    output.append((dict(row) | {"_governed_collection_path": actual_path, "_governed_category": category}, record_class))
+        missing = sorted({str(endpoint) for row in relationships for endpoint in
+                          (row.get("source_object_id"), row.get("target_object_id"))
+                          if endpoint and str(endpoint) not in object_ids})
+        diag["relationship_endpoint_count"] = len(relationships) * 2
+        diag["relationship_endpoints_resolved"] = len(relationships) * 2 - len(missing)
+        diag["unresolved_relationship_endpoints"] = missing
+        if missing:
+            raise ValueError("unresolved TMS relationship endpoints: " + ", ".join(missing))
+        return output
+
     def _candidate(self, package, row, collection_class, source_file, index):
         external_id = str(next((row.get(k) for k in self.IDENTIFIERS if row.get(k) not in (None, "")), f"delta-{index}"))
-        object_class = self._object_class(row, collection_class)
+        object_class = collection_class if row.get("_governed_category") == "objects" else self._object_class(row, collection_class)
         findings: tuple[ValidationFinding, ...] = ()
         status = "accepted"
         if not object_class:
             status = "quarantined"
             findings = (ValidationFinding("error", "missing_record_class", "Delta record does not declare record_class", f"{source_file}#L{index}"),)
         payload_value = row.get("payload") if isinstance(row.get("payload"), dict) else row.get("data")
-        payload = dict(payload_value) if isinstance(payload_value, dict) else {k: v for k, v in row.items() if k not in {*self.IDENTIFIERS, "record_class", "object_class", "object_type", "type", "truth_class", "_governed_collection_path", "_governed_category"}}
+        payload = dict(payload_value) if isinstance(payload_value, dict) else {k: v for k, v in row.items() if k not in {*self.IDENTIFIERS, "record_class", "object_class", "type", "truth_class", "_governed_collection_path", "_governed_category"}}
         payload.setdefault("twin_type", "industry")
         if row.get("_governed_category"):
             payload.setdefault("governed_object_category", row["_governed_category"])
