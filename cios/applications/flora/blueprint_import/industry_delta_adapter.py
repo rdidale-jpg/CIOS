@@ -177,6 +177,18 @@ class IndustryTwinDeltaAdapter:
         if not object_class:
             status = "quarantined"
             findings = (ValidationFinding("error", "missing_record_class", "Delta record does not declare record_class", f"{source_file}#L{index}"),)
+        elif row.get("_governed_category") == "contradictions" and not any(
+            row.get(field) for field in ("statement_b", "position_b", "claim_b", "competing_claims", "evidence_pair")
+        ):
+            # EI-012 owns Contradiction semantics and requires contradictory
+            # Observations to coexist.  A one-statement package record is useful
+            # lineage, but is not enough to construct that canonical object.
+            status = "quarantined"
+            findings = (ValidationFinding(
+                "warning", "structurally_incomplete_contradiction",
+                "Single-statement contradiction retained with affected objects, evidence, status and decision impact; canonical promotion requires competing positions or an owner-approved representation",
+                f"{source_file}#L{index}",
+            ),)
         payload_value = row.get("payload") if isinstance(row.get("payload"), dict) else row.get("data")
         payload = dict(payload_value) if isinstance(payload_value, dict) else {k: v for k, v in row.items() if k not in {*self.IDENTIFIERS, "record_class", "object_class", "type", "truth_class", "_governed_collection_path", "_governed_category"}}
         payload.setdefault("twin_type", "industry")

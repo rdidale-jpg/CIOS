@@ -52,11 +52,23 @@ def test_repository_tms_package_completes_existing_governed_lifecycle(tmp_path, 
     summary = CandidateStagingRepository().load_summary(run_id)
     candidates = CandidateStagingRepository().list_candidates(run_id)
     classes = Counter(c["candidate_object_class"] for c in candidates)
-    assert summary["records_accepted_into_staging"] == summary["candidate_records_staged"] == 315
-    assert summary["records_quarantined"] == summary["records_rejected"] == 0
+    assert summary["candidate_records_staged"] == 315
+    assert summary["records_accepted_into_staging"] == 301
+    assert summary["records_quarantined"] == 14
+    assert summary["records_rejected"] == 0
     assert classes == {"entity": 59, "fact": 63, "evidence": 56, "relationship": 102,
                        "unknown": 20, "contradiction": 14, "reasoning_lineage": 1}
     assert _canonical_files(tmp_path) == {}
+
+    contradictions = [c for c in candidates if c["candidate_object_class"] == "contradiction"]
+    assert all(c["validation_status"] == "quarantined" for c in contradictions)
+    assert all(c["validation_findings"][0]["code"] == "structurally_incomplete_contradiction" for c in contradictions)
+    fibre = next(c for c in contradictions if c["original_source_id"] == "CON-TEL-FIBRE")
+    assert fibre["payload"]["statement"]
+    assert fibre["payload"]["evidence_refs"] == ["E-FINAL-002", "E-FINAL-006"]
+    assert fibre["payload"]["affected_objects"] == ["OPP-002"]
+    assert fibre["payload"]["status"] == "open"
+    assert fibre["payload"]["confidence"] == "High"
 
     entity_ids = {c["original_source_id"] for c in candidates if c["candidate_object_class"] == "entity"}
     for relationship in (c for c in candidates if c["candidate_object_class"] == "relationship"):
@@ -65,12 +77,13 @@ def test_repository_tms_package_completes_existing_governed_lifecycle(tmp_path, 
 
     for candidate in candidates:
         CandidateReviewService().record_decision(
-            candidate["candidate_record_id"], "approve", "alice", "Reviewed canonical TMS inventory candidate", HEADERS
+            candidate["candidate_record_id"], "approve" if candidate["validation_status"] == "accepted" else "unsupported",
+            "alice", "Reviewed canonical TMS inventory candidate", HEADERS
         )
     plan = DryRunPlanningService().create_plan(run_id, "alice", HEADERS)
     assert len(plan.effects) == len(candidates)
-    assert all(effect.effect_type == "create" for effect in plan.effects)
-    assert plan.expected_canonical_mutation_count == 315
+    assert Counter(effect.effect_type for effect in plan.effects) == {"create": 301, "quarantine": 14}
+    assert plan.expected_canonical_mutation_count == 301
     assert _canonical_files(tmp_path) == {}
 
     service = CanonicalPromotionService()
@@ -80,25 +93,34 @@ def test_repository_tms_package_completes_existing_governed_lifecycle(tmp_path, 
         service.approve_plan(run_id, plan.plan_id, "alice", "", HEADERS)
     approval = service.approve_plan(run_id, plan.plan_id, "alice", "Authorised promotion after inventory reconciliation", HEADERS)
     result = service.execute_approved_plan(run_id, approval.approval_id, "alice", HEADERS)
-    assert result.actual_mutation_count == result.expected_mutation_count == 315
-    assert len(result.records_created) == 315
+    assert result.actual_mutation_count == result.expected_mutation_count == 301
+    assert len(result.records_created) == 301
 
     canonical = _canonical_files(tmp_path)
-    for filename in ("entity.jsonl", "fact.jsonl", "evidence.jsonl", "relationship.jsonl", "unknown.jsonl", "contradictions.jsonl", "reasoning_lineage.jsonl"):
+    for filename in ("entity.jsonl", "fact.jsonl", "evidence.jsonl", "relationship.jsonl", "unknown.jsonl", "reasoning_lineage.jsonl"):
         assert filename in canonical
     assert any(row["canonical_id"] == "IND-TMS-001" for row in map(json.loads, canonical["entity.jsonl"].splitlines()))
     assert any(row["evidence_id"] == "E-FINAL-001" for row in map(json.loads, canonical["evidence.jsonl"].splitlines()))
     assert any(row["canonical_id"] == "UNK-TEL-001" for row in map(json.loads, canonical["unknown.jsonl"].splitlines()))
-    assert any(row["contradiction_id"] == "CON-TEL-FIBRE" for row in map(json.loads, canonical["contradictions.jsonl"].splitlines()))
-    assert "Source → Evidence → Observation" in canonical["reasoning_lineage.jsonl"].decode()
+    assert "contradictions.jsonl" not in canonical
+    lineage = next(map(json.loads, canonical["reasoning_lineage.jsonl"].splitlines()))
+    assert lineage["reasoning_lineage_id"] == "LINEAGE-TMS-001-HFT"
+    assert lineage["chain_model"] == "Source → Evidence → Observation → Strategic Signal → Hypothesis → Commercial Thesis → Recommendation"
+    for stage in ("sources", "observations", "strategic_signals", "hypotheses", "commercial_theses", "recommendations"):
+        assert lineage[stage]
+    assert lineage["strategic_signals"][0]["observation_ids"]
+    assert lineage["hypotheses"][0]["strategic_signal_ids"]
+    assert lineage["commercial_theses"][0]["hypothesis_ids"]
+    assert lineage["recommendations"][0]["commercial_thesis_ids"]
     explore = completion_page(run_id, result.to_dict(), HEADERS)
-    assert "Explore promoted Twin" in explore and "Records created</th><td>315" in explore
+    assert "Explore promoted Twin" in explore and "Records created</th><td>301" in explore
 
     classifications = package.package_inspection["artefact_classification"]
     excluded = [row for row in classifications if row["classification"] in {
         "mission or workspace state", "derived decision or presentation output", "release assurance or validation evidence", "unsupported or ambiguous"
     }]
-    assert excluded and all("exclude" in row["import_treatment"] or "retain" in row["import_treatment"] for row in excluded)
+    assert len(excluded) == 40
+    assert all("exclude" in row["import_treatment"] or "retain" in row["import_treatment"] for row in excluded)
     assert any("Executive_Intelligence_Brief.md" in row["path"] for row in excluded)
     assert any("Research_Workspace" in row["path"] for row in excluded)
 
