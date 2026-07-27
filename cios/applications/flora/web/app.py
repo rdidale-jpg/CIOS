@@ -186,6 +186,17 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(evidence_page())
             elif parsed.path == "/digital-twins":
                 self._html(digital_twins_landing_page(self.headers))
+            elif parsed.path in {"/industries/uk-banking", "/flora/banking/inspect"}:
+                html, status = twin_inspection_page("uk-banking", self.headers, "industry")
+                self._html(html, status=status)
+            elif parsed.path.startswith("/market-participants/"):
+                participant_id = parsed.path.removeprefix("/market-participants/").removesuffix("/inspect")
+                html, status = twin_inspection_page(participant_id, self.headers, "market-participant")
+                self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/intelligence"):
+                run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/intelligence")
+                html, status = twin_inspection_page(run_id, self.headers, "candidate")
+                self._html(html, status=status)
             elif parsed.path == "/blueprint-import":
                 html, status = import_blueprint_entry_page(self.headers)
                 self._html(html, status=status)

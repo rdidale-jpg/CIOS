@@ -4,7 +4,7 @@ from html import escape
 from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRepository
 from cios.applications.flora.enterprise_canvas.service import EnterpriseCanvasService
 from cios.applications.flora.enterprise_canvas.views import _executive_canvas, _has_successful_reasoning
-from .contracts import InspectionAdapter, InspectionProfile, InspectionSection
+from .contracts import InspectionAdapter, InspectionProfile, InspectionSection, MaterialConclusion
 
 UNAVAILABLE = "Unavailable"
 
@@ -46,7 +46,31 @@ def enterprise_inspection_adapter(enterprise_id: str, headers) -> InspectionAdap
         InspectionSection("contradictions", "Contradictions", 50, lambda: "", "governed contradiction", bool(contradiction_count), True, "#unknowns-and-contradictions", *metadata),
         InspectionSection("research-lineage", "Research Lineage", 60, lambda: _lineage(package_refs, import_runs), "governed provenance", bool(package_refs or import_runs), True, "#research-lineage", *metadata),
     )
-    return InspectionAdapter("enterprise-canvas", profile, sections)
+    conclusions = tuple(_conclusion(canvas.enterprise_id, tile) for tile in canvas.tiles
+                        if _known(tile.principal_pain_or_pressure) != UNAVAILABLE)[:3]
+    return InspectionAdapter("enterprise-canvas", profile, sections, conclusions)
+
+def _conclusion(enterprise_id: str, tile) -> MaterialConclusion:
+    projection = next(iter(tile.analytical_projections), None)
+    support_count = sum(len(ref.evidence_ids) for ref in tile.lineage_references)
+    challenges = []
+    if tile.contradiction_indicator:
+        challenges.append("A governed Contradiction is linked")
+    if tile.unknown_indicator:
+        challenges.append(_known(tile.what_remains_unresolved))
+    if tile.stale_evidence_indicator:
+        challenges.append("Supporting Evidence is flagged stale")
+    target = f"/digital-twins/{escape(enterprise_id)}/canvas/tiles/{escape(tile.tile_view_id)}/lineage"
+    return MaterialConclusion(
+        tile.tile_view_id, _known(tile.principal_pain_or_pressure),
+        "governed analytical projection" if projection else "governed Canvas statement",
+        _known(tile.plain_english_role),
+        f"{support_count} governed Evidence link(s) support this area." if support_count else "No governed Evidence link is supplied for this statement.",
+        "; ".join(challenges) or "No challenge is supplied by the Canvas owner; this is not proof of corroboration.",
+        target, target,
+        _known(projection.confidence_or_qualification) if projection else UNAVAILABLE,
+        _known(tile.last_refreshed_date),
+    )
 
 def _lineage(package_refs: tuple[str, ...], import_runs: tuple[str, ...]) -> str:
     packages = "".join(f"<li><code>{escape(v)}</code></li>" for v in package_refs) or "<li>Unavailable</li>"
