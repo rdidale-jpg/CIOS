@@ -12,6 +12,7 @@ from io import BytesIO
 from io import StringIO
 import csv
 import json
+import re
 from types import MappingProxyType
 from typing import Any, Mapping
 import zipfile
@@ -209,7 +210,7 @@ def _is_governed_manifest_path(path: str) -> bool:
 
 def _is_delta_path(path: str) -> bool:
     name = path.rsplit("/", 1)[-1].lower().removesuffix(".json")
-    normalised = name.replace("-", "_")
+    normalised = re.sub(r"^\d+_", "", name.replace("-", "_"))
     return normalised in {"industry_twin_delta", "industry_twin_delta_for_flora"}
 
 
@@ -323,6 +324,8 @@ def _inspection_details(
     if manifest and not resolved.get("mission_identifier"):
         warnings.append("Optional mission identifier metadata was not supplied.")
     profile = resolved.get("package_profile") or ("industry-twin-v1" if manifest and deltas else None)
+    if manifest and deltas and not resolved.get("twin_type"):
+        resolved["twin_type"] = "industry"
     delta = documents.get(deltas[0]) if deltas else None
     records = delta.get("records") if isinstance(delta, dict) else None
     promotable_objects = [str(row.get("external_id")) for row in records or [] if isinstance(row, dict) and row.get("external_id")] if isinstance(records, list) else []
@@ -343,8 +346,30 @@ def _inspection_details(
         "files_used_for_identity": list(dict.fromkeys(sources.values())), "unresolved_references": unresolved,
         "promotable_objects": promotable_objects, "package_inventory": list(sorted(logical)),
         "excluded_research_only_objects": [p for p in paths if any(t in p.lower() for t in ("restart", "checkpoint", "research_queue", "mission_state"))],
+        "artefact_classification": [_classify_artefact(p) for p in sorted(paths)],
     }
     return details, errors, warnings
+
+
+def _classify_artefact(path: str) -> dict[str, str]:
+    """Classify retained content without conferring canonical status on the ZIP."""
+    low = path.casefold()
+    name = low.rsplit("/", 1)[-1]
+    if any(token in low for token in ("research_workspace", "workspace.json", "restart_state", "checkpoint", "research_queue")):
+        cls, treatment = "mission or workspace state", "retain as package lineage; exclude from staging"
+    elif any(token in low for token in ("validation", "assurance", "assessment_summary", "deficiency")):
+        cls, treatment = "release assurance or validation evidence", "retain as release lineage; exclude from canonical staging"
+    elif any(token in low for token in ("executive", "mission_summary", "ranked_commercial", "maturity_assessment", "decision_completeness", "navigation_index", "readme")) or name.endswith(".md"):
+        cls, treatment = "derived decision or presentation output", "retain as package lineage; exclude to prevent duplicate canonical objects"
+    elif any(token in low for token in ("source_evidence_register", "evidence_register")):
+        cls, treatment = "supporting evidence or lineage", "stage evidence records through governed review"
+    elif any(token in low for token in ("object_inventory", "fact_inventory", "relationship_graph", "uncertainty_inventory", "reasoning_lineage", "industry_twin_delta")):
+        cls, treatment = "promotable canonical candidate", "project supported records through the existing adapter and review lifecycle"
+    elif "manifest" in name:
+        cls, treatment = "release assurance or validation evidence", "validate identity, declarations and checksums; retain as package lineage"
+    else:
+        cls, treatment = "unsupported or ambiguous", "retain unchanged as package lineage; do not stage"
+    return {"path": path, "classification": cls, "import_treatment": treatment}
 
 
 def _deep_metadata_value(document: Any, *keys: str) -> Any:

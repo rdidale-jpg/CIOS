@@ -22,7 +22,7 @@ from .registry import BlueprintPackageRegistry
 from .review import CandidateReviewRepository
 
 PromotionStatus = Literal["succeeded", "repeat_no_change", "failed"]
-SUPPORTED_PROMOTION_CLASSES = {"evidence", "observation", "contradiction", "unknown", "entity", "relationship", "human_knowledge"}
+SUPPORTED_PROMOTION_CLASSES = {"evidence", "observation", "contradiction", "unknown", "entity", "relationship", "human_knowledge", "fact", "reasoning_lineage"}
 SUPPORT_RECORD_CLASSES = {"source", "enterprise_model_candidate"}
 NON_MUTATING_EFFECTS = {"mapped", "unchanged", "duplicate", "reject", "defer", "quarantine", "unsupported", "unresolved", "projection", "conflict"}
 
@@ -179,10 +179,11 @@ def _approval_id(plan_id: str, approver: str) -> str: return "bpi-approval-"+sha
 
 class CanonicalPromotionService:
     def __init__(self, registry=None, staging=None, reviews=None, mappings=None, plans=None, repo=None, ledger=None, evidence_repo=None, observation_repo=None):
-        self.registry=registry or BlueprintPackageRegistry(); self.staging=staging or CandidateStagingRepository(); self.reviews=reviews or CandidateReviewRepository(); self.mappings=mappings or ImportMappingRepository(); self.plans=plans or DryRunPlanRepository(); self.repo=repo or CanonicalPromotionRepository(); self.ledger=ledger or BlueprintImportLedger(); self.evidence_repo=evidence_repo or EvidenceRepository(); self.observation_repo=observation_repo or ObservationRepository(); self.contradiction_repo=ContradictionRepository(); self.generic_repos={rc: CanonicalJsonlRepository(rc) for rc in ("unknown", "entity", "relationship", "human_knowledge")}
+        self.registry=registry or BlueprintPackageRegistry(); self.staging=staging or CandidateStagingRepository(); self.reviews=reviews or CandidateReviewRepository(); self.mappings=mappings or ImportMappingRepository(); self.plans=plans or DryRunPlanRepository(); self.repo=repo or CanonicalPromotionRepository(); self.ledger=ledger or BlueprintImportLedger(); self.evidence_repo=evidence_repo or EvidenceRepository(); self.observation_repo=observation_repo or ObservationRepository(); self.contradiction_repo=ContradictionRepository(); self.generic_repos={rc: CanonicalJsonlRepository(rc) for rc in ("unknown", "entity", "relationship", "human_knowledge", "fact", "reasoning_lineage")}
     def approve_plan(self, import_run_id: str, plan_id: str, approver: str, rationale: str, headers: Any, unresolved_warnings_accepted: tuple[str,...]=(), expiry_or_invalidation_condition: str="invalid if plan, package, review decisions or mappings change"):
         plan=self._load_plan(import_run_id, plan_id); package=self.registry.get(plan["package_ref"])
         if not package or not can_approve_blueprint_promotion(headers, package.identity.enterprise_id): raise BlueprintPromotionError("Actor is not authorised to approve Blueprint canonical promotion")
+        if not str(rationale or "").strip(): raise BlueprintPromotionError("Promotion approval requires a rationale")
         if any(e["effect_type"]=="conflict" for e in plan["effects"]): raise BlueprintPromotionError("Unresolved blocking conflicts remain")
         if not _plan_reconciles(plan): raise BlueprintPromotionError("Accepted canonical candidates do not reconcile with create, update and unchanged effects")
         self._assert_constructor_valid(import_run_id, plan)
@@ -233,8 +234,7 @@ class CanonicalPromotionService:
                 payload=dict(c.get("payload") or {})
                 if e.record_class == "observation": self._observation_from_payload(e, c, payload, self._lineage(e,c,d,m,dummy,"prevalidation"), dummy)
                 elif e.record_class == "contradiction":
-                    if not (payload.get("statement_a") or payload.get("position_a") or payload.get("claim_a")): raise BlueprintPromotionError("statement_a missing")
-                    if not (payload.get("statement_b") or payload.get("position_b") or payload.get("claim_b")): raise BlueprintPromotionError("statement_b missing")
+                    if not (payload.get("statement") or payload.get("statement_a") or payload.get("position_a") or payload.get("claim_a")): raise BlueprintPromotionError("contradiction statement missing")
                 elif e.record_class == "evidence": pass
                 elif e.record_class in self.generic_repos: self._generic_row(e, c, payload, self._lineage(e,c,d,m,dummy,"prevalidation"), {})
             except Exception as exc: failures.append(f"{e.candidate_id} ({c.get('original_source_id')}): {exc}")
@@ -251,7 +251,7 @@ class CanonicalPromotionService:
     def _promote(self,e,c,d,m,a,actor):
         lineage=self._lineage(e,c,d,m,a,actor); payload=dict(c.get("payload") or {})
         if e.record_class=="evidence":
-            eid=e.canonical_id or m.get("canonical_id") or m.get("proposed_canonical_id") or payload.get("evidence_id") or "EVID-"+sha256_bytes(e.effect_id.encode())[:16].upper(); prior=self.evidence_repo.get(eid)
+            eid=e.canonical_id or m.get("canonical_id") or m.get("proposed_canonical_id") or payload.get("evidence_id") or c.get("original_source_id") or "EVID-"+sha256_bytes(e.effect_id.encode())[:16].upper(); prior=self.evidence_repo.get(eid)
             row={**payload, "evidence_id": eid, "blueprint_import_lineage": {**lineage, "canonical_id": eid, "prior_canonical_version": prior}}
             return self.evidence_repo.save(row)["evidence_id"]
         if e.record_class=="observation":
@@ -260,7 +260,7 @@ class CanonicalPromotionService:
         if e.record_class=="contradiction":
             cid=e.canonical_id or m.get("canonical_id") or m.get("proposed_canonical_id") or payload.get("contradiction_id") or c["original_source_id"] or "CON-"+sha256_bytes(e.effect_id.encode())[:16].upper()
             prior=self.contradiction_repo.get(cid)
-            row={**payload, "contradiction_id": cid, "statement_a": payload.get("statement_a") or payload.get("position_a") or payload.get("claim_a") or "", "statement_b": payload.get("statement_b") or payload.get("position_b") or payload.get("claim_b") or "", "contradiction_class": payload.get("contradiction_class") or payload.get("class") or "", "judgement": payload.get("current_judgement") or payload.get("judgement") or "", "evidence_need": payload.get("evidence_needed") or payload.get("evidence_need") or "", "affected_outputs": payload.get("affected_outputs") or "", "status": payload.get("status") or "open", "blueprint_import_lineage": {**lineage, "canonical_id": cid, "prior_canonical_version": prior}}
+            row={**payload, "contradiction_id": cid, "statement_a": payload.get("statement_a") or payload.get("position_a") or payload.get("claim_a") or payload.get("statement") or "", "statement_b": payload.get("statement_b") or payload.get("position_b") or payload.get("claim_b") or "", "contradiction_class": payload.get("contradiction_class") or payload.get("class") or "summary_assertion", "judgement": payload.get("current_judgement") or payload.get("judgement") or "", "evidence_need": payload.get("evidence_needed") or payload.get("evidence_need") or "", "affected_outputs": payload.get("affected_outputs") or payload.get("affected_objects") or "", "status": payload.get("status") or "open", "blueprint_import_lineage": {**lineage, "canonical_id": cid, "prior_canonical_version": prior}}
             return self.contradiction_repo.save(row)["contradiction_id"]
         if e.record_class in self.generic_repos:
             row = self._generic_row(e, c, payload, lineage, m)
@@ -268,7 +268,7 @@ class CanonicalPromotionService:
         raise BlueprintPromotionError("Unsupported canonical class")
 
     def _generic_row(self, e, c, payload, lineage, m):
-        ids = {"unknown":"unknown_id", "entity":"entity_id", "relationship":"relationship_id", "human_knowledge":"human_knowledge_id"}
+        ids = {"unknown":"unknown_id", "entity":"entity_id", "relationship":"relationship_id", "human_knowledge":"human_knowledge_id", "fact":"fact_id", "reasoning_lineage":"reasoning_lineage_id"}
         key = ids[e.record_class]
         cid = e.canonical_id or m.get("canonical_id") or m.get("proposed_canonical_id") or payload.get(key) or c.get("original_source_id") or f"{e.record_class.upper()}-" + sha256_bytes(e.effect_id.encode())[:16].upper()
         return {**payload, key: cid, "canonical_id": cid, "record_class": e.record_class, "blueprint_import_lineage": {**lineage, "canonical_id": cid, "prior_canonical_version": self.generic_repos[e.record_class].get(cid)}}

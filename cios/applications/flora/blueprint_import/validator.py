@@ -174,6 +174,8 @@ class BlueprintPackageValidator:
                     event(1, "Package contract detected", contract)
                     event(2, "Package root selected", root or "archive root")
                     event(3, "Manifest parsed", str(inspection.get("manifest_location") or "Not supplied"))
+                    if contract == "Governed Industry Twin Package":
+                        self._validate_governed_manifest(zf, names, inspection, warnings, errors)
                     if inspection.get("blocking_errors"):
                         errors.extend(str(value) for value in inspection["blocking_errors"])
                         event(4, "Delta parsed", "Validation blocked by package inspection", "Failed", "; ".join(errors))
@@ -262,6 +264,48 @@ class BlueprintPackageValidator:
             # create a rejected package-metadata record so failed runs remain inspectable
             candidates.append(self._candidate(package, "blueprint_manifest.json", "package", "package_metadata", "package_metadata", {}, "rejected", [ValidationFinding("error", "package_invalid", "; ".join(errors))]))
         return candidates, warnings, errors, files, unsupported, unresolved, trace
+
+    @staticmethod
+    def _validate_governed_manifest(zf, names, inspection, warnings, errors) -> None:
+        """Validate the producer's declared inventory at the selected logical root."""
+        root = str(inspection.get("selected_package_root") or "")
+        manifest_path = str(inspection.get("manifest_location") or "")
+        physical_manifest = root + manifest_path if root + manifest_path in names else manifest_path
+        try:
+            manifest = json.loads(zf.read(physical_manifest).decode("utf-8"))
+        except (KeyError, UnicodeDecodeError, json.JSONDecodeError):
+            errors.append("Governed package manifest cannot be read for file validation")
+            return
+        declarations = manifest.get("files") if isinstance(manifest, dict) else None
+        if declarations is None:
+            warnings.append("Governed package manifest does not declare files; archive inventory remains retained")
+            return
+        if not isinstance(declarations, list) or not declarations:
+            errors.append("Governed package manifest has an invalid empty file declaration")
+            return
+        declared: set[str] = set()
+        for item in declarations:
+            if not isinstance(item, dict):
+                errors.append("Governed package manifest contains an invalid file declaration")
+                continue
+            logical = str(item.get("filename") or item.get("path") or "").lstrip("./")
+            physical = root + logical
+            declared.add(logical)
+            if not logical or physical not in names:
+                errors.append(f"Missing declared governed file: {logical or '<empty path>'}")
+                continue
+            content = zf.read(physical)
+            if item.get("bytes") is not None and int(item["bytes"]) != len(content):
+                errors.append(f"Declared byte count does not match for {logical}")
+            checksum = str(item.get("sha256") or "")
+            if not checksum:
+                errors.append(f"Missing declared checksum for {logical}")
+            elif checksum.casefold() != sha256_bytes(content):
+                errors.append(f"Declared checksum does not match for {logical}")
+        actual = {name[len(root):] for name in names if name.startswith(root)} - {manifest_path}
+        undeclared = sorted(actual - declared)
+        if undeclared:
+            warnings.append("Retained undeclared governed files: " + ", ".join(undeclared))
 
     def _persist_governed_resolution(self, package, diagnostics: dict[str, Any], candidate_count: int) -> None:
         labels = {
