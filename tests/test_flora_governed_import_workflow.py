@@ -16,6 +16,25 @@ def test_upload_and_inspect_workflow(tmp_path, monkeypatch):
     assert status==200 and "Import governed package" in html and "Upload and validate" in html and "aria-label='Import progress'" in html
     run=uploaded(); html,status=validation_result_page(run,HEADERS)
     assert status==200 and "Validation outcomes" in html and "Blocking errors" in html and "Cancel import" in html
+    assert "Executive import summary" in html and "Overall recommendation: Ready to Review" in html
+    assert "Commercial change summary" in html and "Risk and uncertainty" in html
+    assert "Technical diagnostics" in html and "No live Twin changes have been made" in html
+
+
+def test_business_review_and_promotion_summary_preserve_rationale_gate(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    run = uploaded()
+    review, status = review_page(run, HEADERS)
+    assert status == 200
+    assert "Enterprises" in review and "Opportunities" in review
+    assert "Unknowns" in review and "Contradictions" in review
+    assert "Duplicate or no change" in review and "Technical payload" in review
+    promote, status = promotion_confirmation_page(run, HEADERS)
+    assert status == 200
+    assert "No canonical changes will occur until promotion is approved" in promote
+    assert "Expected canonical mutation count" in promote
+    assert "Unresolved Unknowns" in promote and "Unresolved Contradictions" in promote
+    assert "Required; must be explicit and non-empty" in promote
 
 
 def test_dist_shaped_package_uses_normal_upload_and_enables_review(tmp_path, monkeypatch):
