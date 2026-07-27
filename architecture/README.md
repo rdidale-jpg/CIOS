@@ -145,6 +145,13 @@ These papers define how Flora converts evidence into strategic commercial judgem
 - FP-008 — Commercial Conviction Model: defines how Flora assesses whether evidence is sufficient to justify executive engagement without confusing conviction with opportunity.
 - FP-009 — Hypothesis Validation Standard: defines how Flora creates, tests, strengthens, weakens, rejects and retires commercial hypotheses.
 
+## Knowledge exchange and product experience
+
+- FP-010 — Knowledge Pack Architecture: defines the conceptual architecture for portable governed knowledge.
+- FP-011 — Knowledge Exchange Architecture: defines governed exchange responsibilities and boundaries.
+- FP-012 — Enterprise Reinvention Intelligence: Review founding rationale connecting methodology, architecture, runtime and learning.
+- [FP-013 — Executive Intelligence Workspace](founding-papers/FP-013-Executive-Intelligence-Workspace.md): Proposed founding product-experience intent for executive-first, progressively disclosed inspection of governed Enterprise Intelligence.
+
 ## Developer instruction note
 
 Before major implementation work, review:
