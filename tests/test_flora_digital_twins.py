@@ -140,6 +140,6 @@ def test_governed_twin_card_primary_and_secondary_actions():
     assert 'MOD' in html
     assert 'v1.3' in html
     assert 'Progressive Assurance accepted' in html
-    assert "href='/digital-twins/MOD/canvas'>Open Twin" in html
+    assert "href='/digital-twins/MOD'>Open Twin" in html
     assert "href='/blueprint-import/run-mod'>View import history" in html
     assert 'Details' not in html

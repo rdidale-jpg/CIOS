@@ -327,7 +327,7 @@ def test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs(tmp_pa
     assert registry[0].enterprise_id == "MOD"
     assert registry[0].canvas_id == "canvas-mod"
     assert "MOD" in home and "BT Group" not in home
-    assert "/digital-twins/MOD/canvas" in home
+    assert "href='/digital-twins/MOD'>Open Twin" in home
     assert f"/blueprint-import/{run_id}" in home
     assert "<table" not in home and "Details" not in home
     assert "Open Twin" in home and "View validation" in home and "View import record" in home
@@ -352,11 +352,11 @@ def test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs(tmp_pa
     assert len([t for t in governed_twin_list(owner) if t.enterprise_id == "MOD"]) == 1
 
 
-def test_legacy_twin_routes_redirect_to_primary_canvas_or_audit():
+def test_twin_detail_route_is_reserved_for_shell_while_audit_redirect_is_preserved():
     from cios.applications.flora.web.app import _is_legacy_twin_detail_path, _legacy_twin_redirect_target
 
     assert _is_legacy_twin_detail_path("/digital-twins/MOD")
-    assert _legacy_twin_redirect_target("/digital-twins/MOD", {}) == "/digital-twins/MOD/canvas"
+    assert _legacy_twin_redirect_target("/digital-twins/MOD", {}) == ""
     assert _legacy_twin_redirect_target("/digital-twins/MOD", {"audit":["true"], "import_run_id":["bpi-run-1"]}) == "/blueprint-import/bpi-run-1"
 
 
