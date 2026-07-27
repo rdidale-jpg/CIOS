@@ -145,6 +145,10 @@ These papers define how Flora converts evidence into strategic commercial judgem
 - FP-008 — Commercial Conviction Model: defines how Flora assesses whether evidence is sufficient to justify executive engagement without confusing conviction with opportunity.
 - FP-009 — Hypothesis Validation Standard: defines how Flora creates, tests, strengthens, weakens, rejects and retires commercial hypotheses.
 
+## Proposed product experience
+
+- [FP-013 — Executive Intelligence Workspace](founding-papers/FP-013-Executive-Intelligence-Workspace.md): proposes the executive-first inspection experience over governed Enterprise Intelligence. It is discoverable for review only and is not accepted architecture or production-profile material.
+
 ## Developer instruction note
 
 Before major implementation work, review:

@@ -35,11 +35,10 @@ def test_proposed_navigation_does_not_enter_pack_source_validation():
         "tools/knowledge-packs/build_pack.py",
     }
 
-    # FP-013 remains free to be registered and linked by these review/navigation
-    # documents without either document (or the Proposed paper) becoming a pack
-    # checksum source.
+    # FP-013 is registered and linked by review/navigation documents without
+    # those documents (or the Proposed paper) becoming a pack checksum source.
     assert "architecture/founding-papers/FP-013-*.md" not in paths
+    assert "architecture/founding-papers/FP-013-Executive-Intelligence-Workspace.md" not in _manifest_sources()
     assert "architecture/reference-architecture/**" not in paths
     assert "architecture/reference-architecture/Document-Map.md" not in paths
     assert "architecture/reference-architecture/Architecture-Authority-Registry.md" not in paths
-
