@@ -163,7 +163,7 @@ def _governed_twin_card(t: GovernedTwinListItem) -> str:
     return f"""<article class='card twin-tile'>
     <h3>{escape(name)}</h3><p class='muted'>Governed Enterprise Canvas</p>
     <dl><dt>Enterprise name</dt><dd>{escape(name)}</dd><dt>Twin version</dt><dd>{escape(t.twin_version)}</dd><dt>Progressive Assurance</dt><dd>{escape(t.maturity_or_acceptance)}</dd><dt>Latest refresh</dt><dd>{escape(latest)}</dd><dt>Source cut-off</dt><dd>{escape(source)}</dd><dt>Status summary</dt><dd>{escape(status)}</dd></dl>
-    <p><a class='button' href='/digital-twins/{escape(t.enterprise_id)}'>Open Twin</a></p><p class='muted'>{import_link}</p>
+    <p><a class='button' href='/digital-twins/{escape(t.enterprise_id)}'>Open Twin</a> <span class='muted'>in the inspection workspace</span></p><p class='muted'>{import_link}</p>
     </article>"""
 
 
