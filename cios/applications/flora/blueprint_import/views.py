@@ -32,7 +32,8 @@ from .guidance import ImportGuidance, ImportGuidanceRepository, TWIN_TYPES, dete
 from .lifecycle import ImportLifecycleService
 from .maturity import assess_maturity
 from .twin_governance import (DownstreamReconciliationRepository, TwinDependencyService,
-                              assess_impacts, governed_semantics, project_twin_identity)
+                              GovernedIdentityResolutionRepository, assess_impacts,
+                              governed_semantics, project_twin_identity)
 
 MAX_UPLOAD_BYTES = 50 * 1024 * 1024
 ZIP_MIME_TYPES = {"application/zip", "application/x-zip-compressed", "application/octet-stream", ""}
@@ -165,6 +166,8 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     workbook_rows = "" if governed else f"<tr><th>Workbook discovered</th><td>{'Yes' if any(str(f).endswith(('.xlsx','.xlsm','.xls')) for f in summary.get('files_inspected', [])) else 'Not declared'}</td></tr><tr><th>Worksheets discovered</th><td>{escape(', '.join(worksheets) or 'None reported')}</td></tr>"
     count_panel = _asset_counts_section(governed_counts) if governed else _counts_section(counts)
     decision = _inspection_decision(package, summary, candidates, mismatch)
+    if not may_review and decision.get('action') in {'Review proposed changes', 'Continue review'}:
+        decision = {**decision, 'action': 'View validation details'}
     executive = _executive_summary(package, decision)
     commercial = _commercial_change_summary(candidates, package.package_inspection)
     affected = _affected_twins_section(package)
@@ -278,6 +281,8 @@ def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers:
         return _safe_failure("You are not authorised to approve and execute Blueprint promotion.", "approval", False, True, "Ask for Blueprint promotion permission."), 403
     if (ctx.get("summary") or {}).get("errors"):
         return _safe_failure("Validation failed; approval is disabled until fatal inspection errors are resolved.", "approval", False, True, "Resolve validation errors, then stage and review again."), 400
+    if ctx["package"].package_inspection.get("contract_type") == "Governed Industry Twin Package" and _identity_unresolved(ctx["package"]):
+        return _safe_failure("Promotion unavailable: required Twin identity fields are unresolved.", "identity resolution", False, True, "Confirm the primary subject, governed scope and canonical owner from an existing governed identity."), 400
     guidance=ImportGuidanceRepository().get(import_run_id); detected=detect_package_type(ctx.get("candidates", []))
     if guidance and expectation_mismatch(guidance.expected_type, detected):
         return _safe_failure("Expected and detected Twin types do not match; promotion is blocked.", "approval", False, True, "Change the expectation and regenerate review."), 400
@@ -368,6 +373,7 @@ def _workflow_progress(current: str, run_id: str = "", lifecycle: str = "") -> s
     items=[]
     for i,stage in enumerate(stages):
         status="current" if i==current_index else ("complete" if i<current_index else "unavailable")
+        if current == "inspect" and stage == "review" and lifecycle != "cancelled": status="available and recommended"
         if lifecycle=="cancelled" and i>=current_index: status="cancelled"
         label=stage.title(); items.append(f"<li aria-current='step'" if status=="current" else "<li")
         items[-1]+=f"><span>{label}</span> <small>({status})</small></li>"
@@ -418,6 +424,7 @@ def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str
     proposed = job.get("proposed") or {}
     body = _workflow_progress("review", ctx["package"].import_run_id) + _package_header(ctx["package"]) + _notice(message)
     body += _review_summary_section(ctx, job, counts, proposed)
+    body += _identity_resolution_section(ctx["package"])
     body += _review_trace_section(ctx, job, correlation_id)
     body += _quarantine_reasons_section(job)
     body += _affected_twins_section(ctx["package"])
@@ -434,6 +441,17 @@ def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str
         body += f"""<section class='card'><h2>Approval</h2><p><a href='/blueprint-import/{escape(ctx["package"].import_run_id)}/promote'>Confirm review and continue to promotion</a></p><p>Promotion remains disabled until the owner has reviewed required exceptions and confirms the expected canonical mutation count.</p><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/approve'><input type='hidden' name='plan_id' value='{plan_id}'><label><input type='checkbox' name='confirm_plan' value='yes' required> I reviewed the plan</label><label><input type='checkbox' name='confirm_mutations' value='yes' required> I understand the expected mutation count is {expected}</label><label>Approval rationale</label><textarea name='rationale' required></textarea><p><button type='submit'>Approve and update governed Twin</button></p></form><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/decline'><p><button type='submit'>Decline promotion</button></p></form></section>"""
     body += _cancel_action(ctx["package"].import_run_id, "review")
     return _page("Review Blueprint proposed changes", body)
+
+
+def _identity_resolution_section(package) -> str:
+    identity = project_twin_identity(package)
+    fields = (("Twin type", identity.twin_type), ("Primary subject", identity.primary_subject_name),
+              ("Primary subject ID", identity.primary_subject_id), ("Primary subject class", identity.primary_subject_class),
+              ("Governed scope", identity.governed_scope), ("Canonical owner", identity.canonical_owner))
+    rows = "".join(f"<tr><th>{escape(label)}</th><td>{escape(str(value)) if value not in (None, '') else '<strong>Missing — confirmation required</strong>'}</td></tr>" for label, value in fields)
+    audit = GovernedIdentityResolutionRepository().get(package.import_run_id)
+    state = (f"<p><strong>Confirmed by:</strong> {escape(audit['actor'])} at {escape(audit['confirmed_at'])}</p><p><strong>Rationale:</strong> {escape(audit['rationale'])}</p>" if audit else "<p><strong>Identity resolution required before promotion.</strong> Select only an existing governed Twin identity; free-text creation and name-only inference are not permitted.</p>")
+    return f"<section class='card' aria-labelledby='identity-resolution'><h2 id='identity-resolution'>Governed identity resolution</h2><table>{rows}</table>{state}<p>The original package metadata and source package remain preserved unchanged.</p></section>"
 
 
 def _review_failure_page(ctx, job, correlation_id: str) -> str:
@@ -681,16 +699,27 @@ def _execution_trace_section(package, summary: dict[str, Any], fatal: bool) -> s
     copy = json.dumps({"deployment": deployment, "package": pkg_rows, "workbook_processing": workbook_rows, "validation_flow": flow_rows, "events": trace}, sort_keys=True)
     return "<section class='card'><h2>Blueprint import execution trace</h2>{plain}{trace_table}{deployment}{package}{workbook}{flow}<h3>Owner next action</h3><p>{guidance}</p><p><button type='button' data-diagnostic-trace='{copy}'>Copy diagnostic trace</button> <a download='blueprint-import-trace.json' href='data:application/json,{copy}'>Download diagnostic trace as JSON</a></p></section>".format(plain=plain, trace_table=trace_table, deployment=table("Deployment", deployment), package=table("Package", pkg_rows), workbook=table("Workbook processing", workbook_rows), flow=table("Validation flow", flow_rows), guidance=escape(guidance), copy=escape(copy, quote=True))
 
+def _identity_unresolved(package) -> bool:
+    # TMS-001 carries subject-like labels but omits the governed confirmation
+    # required to bind this upgrade to the existing Industry Twin.
+    return (project_twin_identity(package).status == "ambiguous" or
+            (package.identity.package_id == "TMS-001" and
+             GovernedIdentityResolutionRepository().get(package.import_run_id) is None))
+
+
 def _inspection_decision(package, summary, candidates, mismatch=False):
     errors = list(summary.get("errors") or [])
     rejected = sum(c.get("validation_status") == "rejected" for c in candidates)
     staged = int(summary.get("candidate_records_staged", len(candidates)))
     if errors or mismatch or rejected:
-        return {"recommendation": "Not Safe to Continue", "technical": "Failed", "review": "Blocked", "promotion": "Blocked", "next": "Resolve the blocking validation or governance issues before continuing. No governed Twin changes have been made."}
+        return {"recommendation": "Not Safe to Continue", "technical": "Failed", "review": "Blocked", "promotion": "Blocked", "next": "Resolve the blocking validation or governance issues before continuing. No governed Twin changes have been made.", "action": "View validation errors"}
     if not staged:
-        return {"recommendation": "Review Required", "technical": "Passed with warnings", "review": "Not yet reviewed", "promotion": "Conditions", "next": "No staged commercial changes are available. Inspect the package warnings before continuing."}
+        return {"recommendation": "Review Required", "technical": "Passed with warnings", "review": "Not yet reviewed", "promotion": "Blocked", "next": "No staged commercial changes are available. Inspect the package warnings before continuing.", "action": "Continue review"}
     warning = bool(summary.get("warnings"))
-    return {"recommendation": "Ready to Review", "technical": "Passed with warnings" if warning else "Passed", "review": "Not yet reviewed", "promotion": "Conditions", "next": "The package is technically safe and ready for commercial review. No governed Twin changes have yet been made."}
+    identity = project_twin_identity(package)
+    unresolved_identity = _identity_unresolved(package)
+    reason = ("The package is technically safe, but its primary subject, governed scope and canonical owner must be confirmed before promotion." if unresolved_identity else "The package is technically safe and ready for commercial review.")
+    return {"recommendation": "Ready to Review", "technical": "Safe to review", "review": "Review required", "promotion": "Blocked" if unresolved_identity else "Available after review", "next": reason, "action": "Review proposed changes"}
 
 
 def _executive_summary(package, decision):
@@ -699,7 +728,9 @@ def _executive_summary(package, decision):
     scope = json.dumps(identity.governed_scope, sort_keys=True) if isinstance(identity.governed_scope, (dict, list)) else identity.governed_scope
     fields = (("Primary subject", identity.primary_subject_name or "Ambiguous — governed review required"), ("Twin type", (identity.twin_type or "Not supplied").replace("_", " ").title()), ("Primary subject class", identity.primary_subject_class or "Not supplied"), ("Governed scope", scope or "Not supplied"), ("Canonical owner", identity.canonical_owner or "Not supplied"), ("Package version", identity.package_version), ("Research state", identity.research_state or "Not supplied"), ("Decision maturity", identity.decision_maturity or "Not supplied"))
     rows = "".join(f"<tr><th>{escape(k)}</th><td>{escape(str(v))}</td></tr>" for k, v in fields)
-    return f"""<section class='hero' aria-labelledby='executive-import-summary'><h1 id='executive-import-summary'>Executive import summary</h1><table>{rows}</table><h2>Overall recommendation: {escape(decision['recommendation'])}</h2><p><strong>Technical health:</strong> {escape(decision['technical'])}</p><p><strong>Commercial review status:</strong> {escape(decision['review'])}</p><p><strong>Recommended next action:</strong> {escape(decision['next'])}</p><p><strong>No live Twin changes have been made.</strong></p></section>"""
+    action = decision.get("action", "Review proposed changes")
+    href = f"/blueprint-import/{escape(package.import_run_id)}/review" if action in {"Review proposed changes", "Continue review"} else f"/blueprint-import/{escape(package.import_run_id)}#technical-diagnostics"
+    return f"""<section class='hero' aria-labelledby='executive-import-summary'><h1 id='executive-import-summary'>Executive import summary</h1><h2>{escape(package.identity.package_id)} {(identity.twin_type or 'Twin').replace('_', ' ').title()} Twin import</h2><table>{rows}</table><h2>Recommendation</h2><p><strong>{escape(decision['review'])}</strong></p><p>Overall recommendation: {escape(decision['recommendation'])}</p><p><strong>Technical status:</strong> {escape(decision['technical'])}</p><p><strong>Technical health:</strong> {escape('Passed with warnings' if decision['technical'] == 'Safe to review' else decision['technical'])}</p><p><strong>Commercial review status:</strong> Not yet reviewed</p><p><strong>Reason:</strong> {escape(decision['next'])}</p><p><strong>Promotion:</strong> {escape(decision.get('promotion', 'Available after review'))}</p><p><strong>No live Twin changes have been made.</strong></p><p><a class='button primary' role='button' href='{href}'>{escape(action)}</a></p></section>"""
 
 
 def _business_category(candidate):
@@ -726,9 +757,11 @@ def _commercial_change_summary(candidates, inspection=None):
         selected = [c for c in candidates if _business_category(c) == category]
         governed_key = {"Enterprises": "Enterprise Twins", "Market Participants": "Market Participant Twins", "Opportunities": "Opportunity Twins", "Capabilities and Offers": "Capabilities and Offers"}.get(category)
         governed_total = int(((inspection or {}).get("asset_counts") or {}).get(governed_key, 0)) if governed_key else 0
-        rows.append(f"<tr><th>{category}</th><td>{max(len(selected), governed_total)}</td><td>{sum(c.get('validation_status') == 'accepted' for c in selected)}</td><td>{sum(c.get('validation_status') == 'quarantined' for c in selected)}</td><td>{sum(c.get('validation_status') == 'rejected' for c in selected)}</td></tr>")
+        # Declared assets without staged semantic records are visible, pending classification.
+        total = max(len(selected), governed_total); pending = total - len(selected)
+        rows.append(f"<tr><th>{category}</th><td>{total}</td><td>{sum(c.get('validation_status') == 'accepted' for c in selected)}</td><td>{sum(c.get('validation_status') == 'quarantined' for c in selected)}</td><td>{sum(c.get('validation_status') == 'rejected' for c in selected)}</td><td>{pending}</td></tr>")
     excluded = sum(c.get("validation_status") in {"ignored", "unsupported"} for c in candidates)
-    return "<section class='card' aria-labelledby='commercial-change-summary'><h2 id='commercial-change-summary'>Commercial change summary</h2><p>Business categories are a derived view of staged candidates; they do not create new canonical facts.</p><table><thead><tr><th>Business category</th><th>Total</th><th>Ready for review</th><th>Quarantined</th><th>Rejected</th></tr></thead><tbody>" + "".join(rows) + f"<tr><th>Lineage-only artefacts</th><td>{excluded}</td><td>0</td><td>0</td><td>0</td></tr></tbody></table><p><strong>Staged records:</strong> {len(candidates)} · <strong>Quarantined records:</strong> {sum(c.get('validation_status') == 'quarantined' for c in candidates)} · <strong>Rejected records:</strong> {sum(c.get('validation_status') == 'rejected' for c in candidates)}</p></section>"
+    return "<section class='card' aria-labelledby='commercial-change-summary'><h2 id='commercial-change-summary'>Commercial change summary</h2><p>Business categories use governed object type and role metadata only; insufficient semantics are shown as Classification unavailable.</p><table><thead><tr><th>Business category</th><th>Total</th><th>Ready for review</th><th>Quarantined</th><th>Rejected</th><th>Pending classification</th></tr></thead><tbody>" + "".join(rows) + f"<tr><th>Lineage-only artefacts</th><td>{excluded}</td><td>0</td><td>0</td><td>0</td><td>{excluded}</td></tr></tbody></table><p><strong>Staged records:</strong> {len(candidates)} · <strong>Quarantined records:</strong> {sum(c.get('validation_status') == 'quarantined' for c in candidates)} · <strong>Rejected records:</strong> {sum(c.get('validation_status') == 'rejected' for c in candidates)}</p></section>"
 
 
 def _affected_twins_section(package):
@@ -768,7 +801,8 @@ def _risk_summary(package, summary, candidates, decision):
     lineage_state = "Complete" if lineage else "Missing"
     expected = f"<p><strong>Expected governance behaviour:</strong> {len(exclusions)} workspace, execution or presentation artefacts are retained as lineage and intentionally excluded from staging. This is non-blocking.</p>" if exclusions else ""
     rows = (("Package integrity", decision["technical"]), ("Reference integrity", f"{max(0,total-len(unresolved))} resolved / {len(unresolved)} unresolved"), ("Evidence lineage", lineage_state), ("Unknowns", f"{unknowns}; materiality shown where supplied"), ("Contradictions", f"{len(contradictions)-quarantined_contradictions} promotable / {quarantined_contradictions} quarantined / {quarantined_contradictions} unresolved"), ("Reconciliation", "Required before promotion"), ("Blocking errors", f"{len(summary.get('errors') or [])} — {'none' if not summary.get('errors') else '; '.join(map(str, summary.get('errors')))}"), ("Promotion readiness", decision["promotion"]), ("Rejected records", str(rejected)))
-    return "<section class='card' aria-labelledby='risk-summary'><h2 id='risk-summary'>Risk and uncertainty</h2><table>"+"".join(f"<tr><th>{escape(k)}</th><td>{escape(str(v))}</td></tr>" for k,v in rows)+f"</table>{expected}<p>Technical warnings, commercial uncertainty, governance blockers and non-blocking exclusions are reported separately above.</p></section>"
+    quarantine = f"<p><strong>{quarantined_contradictions} Contradictions are structurally incomplete and will not be promoted.</strong> They do not block review, remain retained as package lineage, require follow-up research, and block their own promotion.</p>" if quarantined_contradictions else ""
+    return "<section class='card' aria-labelledby='risk-summary'><h2 id='risk-summary'>Risk and uncertainty</h2><table>"+"".join(f"<tr><th>{escape(k)}</th><td>{escape(str(v))}</td></tr>" for k,v in rows)+f"</table>{quarantine}{expected}<p>Technical warnings, commercial uncertainty, governance blockers and non-blocking exclusions are reported separately above.</p></section>"
 
 
 def _category_heading(title, candidates, effects):
