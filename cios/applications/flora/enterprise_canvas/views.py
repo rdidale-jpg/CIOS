@@ -42,7 +42,7 @@ def _nav(enterprise_id: str) -> str:
     return f"<nav class='exec-nav' aria-label='Twin view navigation'>{links}</nav>"
 
 
-def _executive_canvas(canvas, headers) -> str:
+def _executive_canvas(canvas, headers, include_reasoning: bool = True, force_overview: bool = False) -> str:
     h = canvas.header
     pressures = _pressure_cards(canvas)
     unknowns = _unknown_and_contradiction_items(canvas)
@@ -51,9 +51,10 @@ def _executive_canvas(canvas, headers) -> str:
     changes = _change_portfolio(canvas)
     recs = _recommendations(canvas)
     explorer = _model_explorer(canvas)
-    if canvas.enterprise_id.upper() == 'MOD' and not _has_successful_reasoning(canvas):
+    if canvas.enterprise_id.upper() == 'MOD' and not _has_successful_reasoning(canvas) and not force_overview:
         return _reasoning_panel(canvas) + f"""<section class='card model-explorer' id='model-explorer'><h2>Model Explorer</h2><p class='muted'>Legacy diagnostic view only; not the Executive Intelligence Brief.</p><div class='card-grid'>{explorer}</div></section><section class='card' id='evidence-and-lineage'><h2>Evidence &amp; Lineage</h2><p>Executive statements can be inspected for Evidence, Observations, Unknowns, Contradictions, confidence, freshness and source lineage. Select any Model Explorer area to inspect detailed lineage.</p></section>"""
-    return _reasoning_panel(canvas) + f"""
+    reasoning = _reasoning_panel(canvas) if include_reasoning else ""
+    return reasoning + f"""
     <section class='hero' id='overview'><p><a href='/digital-twins'>Digital Twins</a></p><p class='pill'>Executive Commercial Canvas · governed read model · Overview default</p><h1>{escape(h.enterprise_name)} executive situation briefing</h1><p>{escape(_summary(h, canvas))}</p><dl><div><dt>Twin version</dt><dd>{escape(h.twin_version)}</dd></div><div><dt>Source cut-off</dt><dd>{escape(h.source_cut_off)}</dd></div><div><dt>Progressive Assurance status</dt><dd>{escape(h.maturity_or_acceptance_state)}</dd></div></dl><div class='brief-grid'>
     {_brief('Enterprise summary', h.enterprise_purpose if h.enterprise_purpose != 'Unknown' else 'Evidence incomplete')}
     {_brief('Current strategic context', h.governing_thesis if h.governing_thesis != 'Unknown' else 'Evidence-backed interpretation: MOD is being read through accepted Twin pressures and changes; strategic context needs stronger evidence.')}

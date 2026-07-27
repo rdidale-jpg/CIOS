@@ -30,6 +30,7 @@ from cios.applications.flora.access import can_view_financial_intelligence_run, 
 from cios.applications.flora.pilot_auth import audit as pilot_audit, clear_session_cookie, issue_session_cookie, sign_in_page, validate_secret
 from cios.applications.flora.flora_transparent import start_bt_digital_twin, flora_payload
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
+from cios.applications.flora.twin_inspection import twin_inspection_page
 from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page, restage_confirm_page as blueprint_restage_confirm_page, restage_package as blueprint_restage_package, restage_progress_page as blueprint_restage_progress_page, restage_history_page as blueprint_restage_history_page, promotion_confirmation_page as blueprint_promotion_confirmation_page, cancellation_confirmation_page as blueprint_cancellation_confirmation_page, cancel_import as blueprint_cancel_import
 from cios.applications.flora.enterprise_intelligence.views import executive_intelligence_brief_page
 from cios.applications.flora.enterprise_intelligence.pipeline import run_pipeline as run_banking_pipeline
@@ -231,7 +232,13 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 html, status = _enterprise_canvas_response(parsed.path, self.headers)
                 self._html(html, status=status)
             elif _is_legacy_twin_detail_path(parsed.path):
-                self._redirect(_legacy_twin_redirect_target(parsed.path, parse_qs(parsed.query)))
+                target = _legacy_twin_redirect_target(parsed.path, parse_qs(parsed.query))
+                if target:
+                    self._redirect(target)
+                else:
+                    enterprise_id = [part for part in parsed.path.split('/') if part][1]
+                    html, status = twin_inspection_page(enterprise_id, self.headers)
+                    self._html(html, status=status)
             elif parsed.path in {"/digital-twins/registry", "/digital-twins/list", "/digital-twins/twins", "/digital-twins/table"}:
                 self._redirect("/digital-twins")
             elif parsed.path == "/digital-twins/bt-group-plc":
@@ -983,7 +990,7 @@ def _legacy_twin_redirect_target(path: str, query: dict[str, list[str]]) -> str:
     enterprise_id = [part for part in path.split("/") if part][1]
     if (query.get("audit") or [""])[0] in {"1", "true", "yes"} and (query.get("import_run_id") or [""])[0]:
         return f"/blueprint-import/{(query.get('import_run_id') or [''])[0]}"
-    return f"/digital-twins/{enterprise_id}/canvas"
+    return ""
 
 
 def _is_support_report_path(path: str) -> bool:
