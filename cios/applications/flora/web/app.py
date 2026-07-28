@@ -692,7 +692,7 @@ def _flora_home_page(headers=None, question_error: str = "") -> str:
           </form>
         </section>
         <section class='card' aria-labelledby='banking-title'><h2 id='banking-title'>UK Banking</h2><p>Open the governed UK Banking portfolio for Lloyds, Barclays, NatWest, HSBC UK and Santander UK.</p><p><a class='primary-link' href='/flora/banking'>Open UK Banking portfolio</a></p></section>
-        <section class='card' aria-labelledby='workspace-title'><h2 id='workspace-title'>Workspace tools</h2><p><a href='/digital-twins'>Enterprise Canvas</a> · <a href='/blueprint-import'>Import Blueprint</a> · <a href='/blueprint-import/history'>Import History</a>{" · <a href='/settings'>Settings</a>" if decision.owner_recognised else ""}</p></section>
+        <section class='card' aria-labelledby='workspace-title'><h2 id='workspace-title'>Workspace tools</h2><p><a href='/digital-twins'>Enterprise Canvas</a> · <a href='/blueprint-import'>Import Twin</a> · <a href='/blueprint-import/history'>Import History</a>{" · <a href='/settings'>Settings</a>" if decision.owner_recognised else ""}</p></section>
         <section class='mode-grid' aria-labelledby='modes-title'>
           <h2 id='modes-title' class='visually-hidden'>Primary product areas</h2>
           {_mode_card('/explore', 'Explore', 'Understand industries and change', 'Industry understanding, observations, mechanisms, hypotheses and why now.')}
@@ -943,7 +943,7 @@ def _flora_governance_page(headers=None) -> str:
     settings = "<li><a href='/settings'>Settings</a></li>" if decision.owner_recognised else "<li><span class='muted'>Settings require owner access.</span></li>"
     body = f"""
     <section class='hero'><p class='eyebrow'>Governance</p><h1>Manage knowledge, validation and product administration.</h1><p class='lead'>Operational functions remain available here while the product home stays question-first.</p></section>
-    <section class='card'><h2>Operational functions</h2><ul class='link-list'><li><a href='/blueprint-import'>Import Blueprint</a> <span class='pill'>package.upload {upload}</span></li><li><a href='/blueprint-import/history'>Import History</a></li><li><a href='/digital-twins'>Enterprise Canvas</a> <span class='muted'>Temporarily listed here; this will ultimately sit beneath Focus.</span></li>{settings}<li><a href='/deployment'>Runtime deployment information</a></li></ul></section>
+    <section class='card'><h2>Operational functions</h2><ul class='link-list'><li><a href='/blueprint-import'>Import Twin</a> <span class='pill'>package.upload {upload}</span></li><li><a href='/blueprint-import/history'>Import History</a></li><li><a href='/digital-twins'>Enterprise Canvas</a> <span class='muted'>Temporarily listed here; this will ultimately sit beneath Focus.</span></li>{settings}<li><a href='/deployment'>Runtime deployment information</a></li></ul></section>
     <section class='card'><h2>Account and workspace</h2><p>Signed in as <strong>{escape(decision.user_id or 'Not signed in')}</strong>. Active workspace: <strong>{escape(decision.active_workspace or 'No active workspace')}</strong>. Owner recognised: <strong>{'yes' if decision.owner_recognised else 'no'}</strong>.</p></section>
     <p><a href='/'>Back to Home</a></p>
     """

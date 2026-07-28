@@ -89,10 +89,10 @@ def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, i
     if decision.decision != "allowed":
         ref, audit_warning = _audit_authorisation("package_upload_authorisation_denied", headers, "Package receive permission checked", decision)
         return _safe_failure("Package import access denied", "Package receive permission checked", False, False, _permission_guidance(headers, decision), decision, ref, audit_warning), 403
-    body = _workflow_progress("upload") + f"""<section class='hero'><h1>Import governed package</h1><p>Upload a governed package for contract detection, inspection, validation and staged promotion.</p>{_notice(message)}</section>
+    body = _workflow_progress("upload") + f"""<section class='hero'><h1>Import Twin</h1><p>Upload a governed Twin package for contract detection, inspection, validation and candidate creation. A Commercial Mission or an existing Twin selection is not required.</p>{_notice(message)}</section>
     <section class='card'><h2>Upload package</h2><p><strong>Supported format:</strong> .zip package. <strong>Maximum size:</strong> {MAX_UPLOAD_BYTES // (1024*1024)} MB.</p><p class='muted'>Packages may contain confidential intelligence. Upload only packages you are authorised to use.</p><p><strong>Uploading does not change canonical state. Flora detects the package contract before applying contract-specific wording.</strong></p><form method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><label for='expected_type'>What kind of Twin do you expect?</label><select id='expected_type' name='expected_type' required>{''.join(f"<option value='{t}'>{escape(t.replace('_',' ').title())}</option>" for t in TWIN_TYPES)}</select><p class='muted'>The expectation never overrides manifest identity, detected types, schema validation or evidence.</p><label for='blueprint_zip'>Package ZIP file</label><input id='blueprint_zip' name='blueprint_zip' type='file' accept='.zip,application/zip' required><p><button type='submit'>Upload and validate</button></p><p><a href='/digital-twins'>Cancel</a></p></form></section>
     <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous package imports</a></p></section>"""
-    return _page("Import governed package", body), 200
+    return _page("Import Twin", body), 200
 
 
 def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str], headers: Any) -> tuple[str, int, str]:

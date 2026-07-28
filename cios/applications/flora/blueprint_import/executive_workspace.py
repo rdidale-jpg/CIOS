@@ -236,7 +236,7 @@ def _dossier(ent, twin, run_id, mission):
 
 def _navigation(run_id):
     r = escape(run_id)
-    return f"<section class='card'><h2>Continue investigation</h2><a class='button primary' href='/blueprint-import/{r}/explore'>Explore Twin intelligence</a> · <a href='/blueprint-import/{r}/inspect#technical-diagnostics'>View evidence</a></section><section class='card' id='candidate-governance'><h2>Candidate governance</h2><p><a href='/blueprint-import/{r}/review'>Review candidate governance</a> · <a href='/blueprint-import/{r}/review#identity-resolution'>Resolve Twin scope</a> · <a href='/blueprint-import/{r}/inspect'>Inspect import decisions</a></p></section>"
+    return f"<section class='card'><h2>Continue investigation</h2><a class='button primary' href='/blueprint-import/{r}/explore'>Explore Twin intelligence</a> · <a href='/blueprint-import/{r}/inspect#technical-diagnostics'>View evidence</a></section><section class='card' id='candidate-governance'><h2>Candidate governance</h2><p><a href='/blueprint-import/{r}/review'>Review candidate governance</a> · <a href='/blueprint-import/{r}/review#identity-resolution'>Resolve Twin scope</a> · <a href='/blueprint-import/{r}/inspect'>Inspect import decisions</a> · <a href='/blueprint-import/{r}/inspect'>View package validation</a></p></section>"
 
 
 def _styles():

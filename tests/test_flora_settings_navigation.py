@@ -14,7 +14,7 @@ NON_OWNER = {"X-Flora-User":"alice","X-Flora-Active-Workspace":"CIOS","X-Flora-E
 def test_opening_screen_shows_owner_settings_access_and_tiles_remain():
     html = _flora_home_page(OWNER)
     assert "href='/settings'" in html
-    assert "Import Blueprint" in html
+    assert "Import Twin" in html
     assert "Enterprise Canvas" in html
     assert "Import History" in html
 
