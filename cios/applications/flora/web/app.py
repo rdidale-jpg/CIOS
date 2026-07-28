@@ -401,9 +401,14 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         if self.path == "/pilot-sign-in":
             secret = _one(form, "pilot_secret")
             if validate_secret(secret):
-                decision = blueprint_upload_authorisation({"Cookie": issue_session_cookie(secure=False).split(";",1)[0]})
+                # Issue exactly one session.  The value verified for the audit
+                # context must be the value returned to the browser; issuing a
+                # second token can cross an issuance timestamp boundary and
+                # make the recorded context differ from the live session.
+                session_cookie = issue_session_cookie()
+                decision = blueprint_upload_authorisation({"Cookie": session_cookie.split(";", 1)[0]})
                 pilot_audit("sign_in_success", correlation_id=self.headers.get("X-Request-Id", ""), workspace=decision.active_workspace, role=decision.resolved_role, authorisation=decision.decision)
-                self._redirect("/flora", set_cookie=issue_session_cookie())
+                self._redirect("/flora", set_cookie=session_cookie)
             else:
                 pilot_audit("sign_in_failure", correlation_id=self.headers.get("X-Request-Id", ""))
                 self._html(sign_in_page("Invalid pilot access secret."), status=403)

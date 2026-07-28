@@ -113,6 +113,76 @@ def test_pilot_sign_in_route_accepts_secret_only_by_post_and_sets_cookie(monkeyp
     finally:
         server.shutdown(); server.server_close(); thread.join(timeout=2)
 
+
+def test_sign_in_issues_one_cookie_and_browser_reuses_it_for_import_get_and_post(monkeypatch, tmp_path):
+    import threading
+    from http.client import HTTPConnection
+    from http.server import ThreadingHTTPServer
+    import cios.applications.flora.web.app as web_app
+
+    enable(monkeypatch)
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    issued = []
+    real_issue = web_app.issue_session_cookie
+
+    def counted_issue(*args, **kwargs):
+        value = real_issue(*args, **kwargs)
+        issued.append(value)
+        return value
+
+    monkeypatch.setattr(web_app, "issue_session_cookie", counted_issue)
+    server = ThreadingHTTPServer(("127.0.0.1", 0), web_app.FloraWebHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        conn = HTTPConnection("127.0.0.1", server.server_port)
+        conn.request("POST", "/pilot-sign-in", "pilot_secret=test-secret", {"Content-Type": "application/x-www-form-urlencoded"})
+        response = conn.getresponse(); response.read()
+        cookie = dict(response.getheaders())["Set-Cookie"]
+        conn.close()
+        assert response.status == 303
+        assert issued == [cookie]
+
+        browser_cookie = cookie.split(";", 1)[0]
+        conn = HTTPConnection("127.0.0.1", server.server_port)
+        conn.request("GET", "/blueprint-import", headers={"Cookie": browser_cookie})
+        response = conn.getresponse(); page = response.read().decode(); conn.close()
+        assert response.status == 200
+        assert "owner-1" in page and "CIOS" in page and "package.upload" in page
+
+        boundary = "----flora-test-boundary"
+        package = pkg({"enterprise_id": "CIOS"})
+        body = (f"--{boundary}\r\nContent-Disposition: form-data; name=\"expected_type\"\r\n\r\nenterprise\r\n"
+                f"--{boundary}\r\nContent-Disposition: form-data; name=\"blueprint_zip\"; filename=\"synthetic.zip\"\r\n"
+                "Content-Type: application/zip\r\n\r\n").encode() + package + f"\r\n--{boundary}--\r\n".encode()
+        conn = HTTPConnection("127.0.0.1", server.server_port)
+        conn.request("POST", "/blueprint-import/upload", body, {
+            "Content-Type": f"multipart/form-data; boundary={boundary}", "Cookie": browser_cookie,
+        })
+        response = conn.getresponse(); response.read(); location = response.getheader("Location"); conn.close()
+        assert response.status == 303
+        assert location.startswith("/blueprint-import/bpi-run-")
+    finally:
+        server.shutdown(); server.server_close(); thread.join(timeout=2)
+
+
+def test_unexpected_diagnostic_storage_failure_preserves_denied_context(monkeypatch):
+    from cios.applications.flora.blueprint_import import views
+
+    enable(monkeypatch)
+    monkeypatch.setenv("FLORA_PILOT_ROLE", "reader")
+    cookie_headers = headers(issue_session_cookie(secure=False))
+
+    def unavailable(*args, **kwargs):
+        raise OSError("storage unavailable")
+
+    monkeypatch.setattr(views.BlueprintImportLedger, "append", unavailable)
+    html, status = import_blueprint_entry_page(cookie_headers)
+    assert status == 403
+    assert "owner-1" in html and "CIOS" in html and "reader" in html
+    assert "Blueprint diagnostics could not be persisted" in html
+    assert "missing package.upload" in html
+
 def test_persistent_cookie_has_30_day_expiry_survives_restart_and_rejects_expired(monkeypatch):
     import time
     from cios.applications.flora.pilot_auth import resolve_pilot_session, session_ttl_seconds
