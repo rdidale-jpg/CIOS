@@ -39,6 +39,8 @@ def test_proposed_navigation_does_not_enter_pack_source_validation():
     # those documents (or the Proposed paper) becoming a pack checksum source.
     assert "architecture/founding-papers/FP-013-*.md" not in paths
     assert "architecture/founding-papers/FP-013-Executive-Intelligence-Workspace.md" not in _manifest_sources()
+    assert "architecture/founding-papers/FP-014-*.md" not in paths
+    assert "architecture/founding-papers/FP-014-Mission-Aware-Executive-Intelligence-Composition.md" not in _manifest_sources()
     assert "architecture/reference-architecture/**" not in paths
     assert "architecture/reference-architecture/Document-Map.md" not in paths
     assert "architecture/reference-architecture/Architecture-Authority-Registry.md" not in paths

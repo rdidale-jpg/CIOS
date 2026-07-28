@@ -17,6 +17,8 @@ Flora is evolving from a workflow-centred governance application into an operati
 
 This paper owns the **executive-first product-experience doctrine** for inspecting governed intelligence. It does not own the underlying intelligence, presentation payload, runtime or governance semantics.
 
+[FP-014 — Mission-Aware Executive Intelligence Composition](FP-014-Mission-Aware-Executive-Intelligence-Composition.md) extends this doctrine with the proposed composition that occurs before and around inspection; it does not replace FP-013 or change FP-013's authority over the common inspection experience and trust through inspection.
+
 ## 2. The CIOS Five Questions for Twin inspection
 
 Every inspectable Twin should help its user answer:
