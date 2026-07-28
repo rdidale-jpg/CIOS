@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import urlparse
 
-from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise
+from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise, blueprint_upload_authorisation
 from cios.applications.flora.blueprint_import.registry import BlueprintPackageRegistry
 from cios.applications.flora.blueprint_import.validator import BlueprintPackageValidator
 from cios.applications.flora.document_review import _run_dir, _read_json, coordinate_dual_speed_financial_intelligence_run, create_financial_intelligence_progress_run
@@ -146,10 +146,13 @@ def _research_outcome(run: dict | None, candidates: list[dict]) -> tuple[str, st
     return 'No trustworthy information found.', 'No findings to verify.', 'Unchanged'
 
 def digital_twins_landing_page(headers=None) -> str:
-    twins = governed_twin_list(headers or {})
+    headers = headers or {}
+    twins = governed_twin_list(headers)
     cards = ''.join(_governed_twin_card(t) for t in twins)
     empty = "<p>No governed Digital Twins are available to this signed-in account.</p>" if not cards else ""
-    body = f"""<section class='hero'><h1>Digital Twins</h1><p class='muted'>Governed Commercial Digital Twins available to your signed-in account.</p><p><a href='/blueprint-import'>Import Blueprint</a></p></section>
+    import_action = ("<p><a class='button primary' href='/blueprint-import'>Import Twin</a></p>"
+                     if blueprint_upload_authorisation(headers).decision == "allowed" else "")
+    body = f"""<section class='hero'><h1>Digital Twins</h1><p class='muted'>Governed Commercial Digital Twins available to your signed-in account.</p>{import_action}</section>
     <section class='card'><h2>Available Twins</h2><p class='muted'>Select a governed Twin to open its Canvas.</p>{empty}<div class='grid'>{cards}</div></section>"""
     return _page('Digital Twins', body)
 
