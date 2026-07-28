@@ -1,4 +1,9 @@
 """Regression contract for the established governed Twin importer entry point."""
+import threading
+from http.client import HTTPConnection
+from http.server import ThreadingHTTPServer
+
+import cios.applications.flora.web.app as web_app
 from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page
 from cios.applications.flora.blueprint_import.views import (
     import_blueprint_entry_page,
@@ -6,6 +11,23 @@ from cios.applications.flora.blueprint_import.views import (
 )
 from cios.applications.flora.digital_twins import digital_twins_landing_page
 from tests.test_flora_blueprint_import_interface import BAD, HEADERS, pkg
+
+
+def _get(path, headers=None):
+    """Exercise the production HTTP handler rather than a test-only view seam."""
+    server = ThreadingHTTPServer(("127.0.0.1", 0), web_app.FloraWebHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    connection = HTTPConnection("127.0.0.1", server.server_port)
+    try:
+        connection.request("GET", path, headers=headers or {})
+        response = connection.getresponse()
+        return response.status, response.read().decode("utf-8")
+    finally:
+        connection.close()
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=2)
 
 
 def _upload(monkeypatch, tmp_path, records=None):
@@ -29,6 +51,34 @@ def test_authorised_digital_twins_navigation_exposes_import_twin(monkeypatch, tm
     assert "class='button primary' href='/blueprint-import'" in html
     assert "No governed Digital Twins" in html  # no existing Twin selection is required
     assert "Import a Twin package to create a candidate for review" in html
+
+
+def test_production_routes_render_zero_twin_import_action(monkeypatch, tmp_path):
+    """Prove GET /digital-twins calls this renderer and its target route loads."""
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
+    rendered = []
+    canonical_renderer = digital_twins_landing_page
+
+    def observed_renderer(headers):
+        html = canonical_renderer(headers)
+        rendered.append(html)
+        return html
+
+    monkeypatch.setattr(web_app, "digital_twins_landing_page", observed_renderer)
+
+    status, html = _get("/digital-twins", HEADERS)
+
+    assert status == 200
+    assert rendered == [html]
+    assert "No governed Digital Twins are available" in html
+    assert "<a class='button primary' href='/blueprint-import'>Import Twin</a>" in html
+    assert "hidden" not in html[html.index("href='/blueprint-import'") - 80:html.index("href='/blueprint-import'")]
+
+    import_status, import_html = _get("/blueprint-import", HEADERS)
+    assert import_status == 200
+    assert "<h1>Import Twin</h1>" in import_html
+    assert "action='/blueprint-import/upload'" in import_html
 
 
 def test_import_visibility_depends_only_on_authenticated_upload_authority(monkeypatch, tmp_path):
