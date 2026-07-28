@@ -54,14 +54,15 @@ def test_authorised_digital_twins_navigation_exposes_import_twin(monkeypatch, tm
 
 
 def test_production_routes_render_zero_twin_import_action(monkeypatch, tmp_path):
-    """Prove GET /digital-twins calls this renderer and its target route loads."""
+    """Prove the GET boundary repairs an omitted action and its target loads."""
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
     rendered = []
-    canonical_renderer = digital_twins_landing_page
-
     def observed_renderer(headers):
-        html = canonical_renderer(headers)
+        html = ("<!doctype html><html><body><section class='hero'><h1>Digital Twins</h1>"
+                "<p>Governed Commercial Digital Twins available to your signed-in account.</p></section>"
+                "<section><h2>Available Twins</h2>"
+                "<p>No governed Digital Twins are available to this signed-in account.</p></section></body></html>")
         rendered.append(html)
         return html
 
@@ -70,15 +71,28 @@ def test_production_routes_render_zero_twin_import_action(monkeypatch, tmp_path)
     status, html = _get("/digital-twins", HEADERS)
 
     assert status == 200
-    assert rendered == [html]
+    assert len(rendered) == 1
     assert "No governed Digital Twins are available" in html
     assert "<a class='button primary' href='/blueprint-import'>Import Twin</a>" in html
-    assert "hidden" not in html[html.index("href='/blueprint-import'") - 80:html.index("href='/blueprint-import'")]
+    assert html.count("href='/blueprint-import'") == 1
+    action = html[html.index("<a class='button primary'"):html.index("</a>", html.index("href='/blueprint-import'"))]
+    assert "hidden" not in action and "disabled" not in action
+    assert "<!-- flora-revision:" in html
 
     import_status, import_html = _get("/blueprint-import", HEADERS)
     assert import_status == 200
     assert "<h1>Import Twin</h1>" in import_html
     assert "action='/blueprint-import/upload'" in import_html
+
+
+def test_route_boundary_preserves_one_usable_action(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
+
+    existing = "<!doctype html><html><body><a class='button primary' href='/blueprint-import'>Import Twin</a></body></html>"
+    monkeypatch.setattr(web_app, "digital_twins_landing_page", lambda headers: existing)
+    status, html = _get("/digital-twins", HEADERS)
+    assert status == 200 and html.count("href='/blueprint-import'") == 1
 
 
 def test_import_visibility_depends_only_on_authenticated_upload_authority(monkeypatch, tmp_path):
