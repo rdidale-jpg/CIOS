@@ -10,6 +10,9 @@
     "partners": [],
     "geography": ["United Kingdom"],
     "inspection_depth": "executive-to-evidence",
+    "interests": ["industry change", "enterprise change", "named-account intelligence", "client problems", "Opportunity Hypotheses", "Reinvention Timing", "partner and competitor context", "evidence and currency"],
+    "named_accounts": [],
+    "campaigns": [],
     "authority_status": "human-supplied operational context",
     "supplied_by": "CIOS pilot user profile"
   },
@@ -24,6 +27,9 @@
     "partners": [],
     "geography": ["United Kingdom"],
     "inspection_depth": "executive-to-evidence",
+    "interests": ["industry change", "enterprise change", "named-account intelligence", "client problems", "Opportunity Hypotheses", "Reinvention Timing", "partner and competitor context", "evidence and currency"],
+    "named_accounts": [],
+    "campaigns": [],
     "authority_status": "human-supplied operational context",
     "supplied_by": "CIOS pilot user profile"
   }
