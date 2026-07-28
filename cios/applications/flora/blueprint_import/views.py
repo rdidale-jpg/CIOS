@@ -434,13 +434,17 @@ def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str
     details = _load_review_details(coord, ctx["package"].import_run_id)
     counts = job.get("candidate_summary") or _review_candidate_counts(details.get("candidates", []))
     proposed = job.get("proposed") or {}
-    body = _workflow_progress("review", ctx["package"].import_run_id) + _package_header(ctx["package"]) + _notice(message)
+    # Review is a composition over the existing candidate/read owners.  The dry-run
+    # report remains intact below, but is deliberately not the landing experience.
+    body = _executive_review(ctx, job, details, counts, proposed, query, message)
+    body += "<details class='card analyst-depth'><summary><strong>Analyst inspection — intelligence by business domain</strong></summary>"
+    body += _review_sections(ctx["package"].import_run_id, details, query, technical=False) + "</details>"
+    body += "<details class='card architect-depth'><summary><strong>Architect disclosure — governance and promotion semantics</strong></summary>"
     body += _review_summary_section(ctx, job, counts, proposed)
-    body += _identity_resolution_section(ctx["package"])
+    body += _identity_resolution_section(ctx["package"]) + _quarantine_reasons_section(job) + _affected_twins_section(ctx["package"])
+    body += "</details><details class='card technical-depth'><summary><strong>Technical disclosure — diagnostics, filters and raw records</strong></summary>"
     body += _review_trace_section(ctx, job, correlation_id)
-    body += _quarantine_reasons_section(job)
-    body += _affected_twins_section(ctx["package"])
-    body += _review_sections(ctx["package"].import_run_id, details, query)
+    body += _review_sections(ctx["package"].import_run_id, details, query, technical=True) + "</details>"
     plan_id = escape(str(job.get("plan_id", "")))
     expected = int(proposed.get("Expected canonical mutations", int(proposed.get("Creates", 0)) + int(proposed.get("Updates", 0))))
     rec = job.get("reconciliation") or {}
@@ -453,6 +457,86 @@ def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str
         body += f"""<section class='card'><h2>Approval</h2><p><a href='/blueprint-import/{escape(ctx["package"].import_run_id)}/promote'>Confirm review and continue to promotion</a></p><p>Promotion remains disabled until the owner has reviewed required exceptions and confirms the expected canonical mutation count.</p><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/approve'><input type='hidden' name='plan_id' value='{plan_id}'><label><input type='checkbox' name='confirm_plan' value='yes' required> I reviewed the plan</label><label><input type='checkbox' name='confirm_mutations' value='yes' required> I understand the expected mutation count is {expected}</label><label>Approval rationale</label><textarea name='rationale' required></textarea><p><button type='submit'>Approve and update governed Twin</button></p></form><form method='post' action='/blueprint-import/{escape(ctx["package"].import_run_id)}/decline'><p><button type='submit'>Decline promotion</button></p></form></section>"""
     body += _cancel_action(ctx["package"].import_run_id, "review")
     return _page("Review Blueprint proposed changes", body)
+
+
+def _executive_review(ctx, job, details, counts, proposed, query, message="") -> str:
+    """Executive-first projection; all values come from package, staging or review owners."""
+    package = ctx["package"]; inspection = package.package_inspection or {}
+    identity = project_twin_identity(package); unresolved = _identity_unresolved(package)
+    candidates = details.get("candidates", []) or ctx.get("candidates", [])
+    unknowns = [c for c in candidates if _business_category(c) == "Unknowns"]
+    contradictions = [c for c in candidates if _business_category(c) == "Contradictions"]
+    quarantined = sum(c.get("validation_status") == "quarantined" for c in candidates)
+    unsupported = sum(c.get("validation_status") == "unsupported" for c in candidates)
+    rec = job.get("reconciliation") or {}
+    blocker = ("Confirm the proposed Twin identity, primary subject, governed scope and canonical owner." if unresolved else
+               "Resolve reconciliation mismatch before promotion." if not rec.get("passes", True) else
+               "Review quarantined intelligence before promotion." if quarantined else
+               "No blocking issue is reported by the current Review read model.")
+    eligible = not unresolved and rec.get("passes", True) and not (ctx.get("summary") or {}).get("errors")
+    name = str(inspection.get("twin_title") or _package_name(package))
+    twin_type = str(inspection.get("twin_type") or identity.twin_type or "Twin").replace("_", " ").title()
+    subject = "Unresolved" if unresolved else identity.primary_subject_name
+    scope = "Unresolved" if unresolved else identity.governed_scope
+    owner = "Unresolved" if unresolved else identity.canonical_owner
+    summary = (inspection.get("executive_summary") or inspection.get("summary") or
+               "No owner-backed executive summary was supplied. Review the available candidate intelligence by business domain.")
+    why = inspection.get("commercial_significance") or inspection.get("commercial_consequence") or "Commercial consequence was not supplied by the package owner."
+    recommendation = "Resolve required decisions before promotion" if not eligible else "Ready for governed promotion review"
+    identity_html = f"""<section class='hero candidate-review-identity' aria-labelledby='candidate-review-title'><p class='pill'>Candidate intelligence · not governed</p><h1 id='candidate-review-title'>{escape(name)}</h1><p><strong>Proposed {escape(twin_type)}</strong> · subject: {escape(str(subject))} · scope: {escape(str(scope))}</p><p><strong>Canonical owner:</strong> {escape(str(owner))}</p><p><strong>Candidate status:</strong> pre-acceptance · <strong>Review status:</strong> {escape(str(job.get('status','Preparing')))} · <strong>Promotion eligibility:</strong> {'Eligible for confirmation' if eligible else 'Blocked'}</p><p class='warning'><strong>No canonical change has yet occurred.</strong> This candidate remains distinct from accepted governed intelligence.</p><p><strong>Review recommendation:</strong> {escape(recommendation)}</p><p><strong>Highest-priority blocker:</strong> {escape(blocker)}</p><p><a href='/blueprint-import/{escape(package.import_run_id)}/intelligence'>Return to Inspect with this candidate context</a></p></section>"""
+    executive = f"""<section class='card executive-summary' aria-labelledby='executive-summary-title'><h2 id='executive-summary-title'>Executive intelligence summary</h2><p>{escape(str(summary))}</p><p><strong>Why it matters commercially:</strong> {escape(str(why))}</p><p><strong>Most material uncertainty:</strong> {escape(_challenge_preview(unknowns, 'No material Unknown was supplied.'))}</p><p><strong>Most material contradiction:</strong> {escape(_challenge_preview(contradictions, 'No material Contradiction was supplied.'))}</p><p><strong>Freshness and Evidence basis:</strong> {escape(str(inspection.get('evidence_cut_off') or 'Not supplied'))}; Evidence remains candidate Evidence until promotion.</p></section>"""
+    conclusions = _material_conclusions(candidates, package.import_run_id)
+    impact = _promotion_impact(proposed, counts, quarantined, unsupported)
+    decisions = _decision_area(package, unresolved, unknowns, contradictions, quarantined, unsupported, rec)
+    return identity_html + _notice(message) + executive + conclusions + impact + decisions
+
+
+def _payload_label(candidate):
+    payload = candidate.get("payload") or {}
+    for key in ("conclusion", "statement", "description", "display_name", "name", "title", "label"):
+        if payload.get(key): return str(payload[key])
+    return str(candidate.get("original_source_id") or "Candidate item")
+
+
+def _challenge_preview(items, absent):
+    return _payload_label(items[0]) if items else absent
+
+
+def _material_conclusions(candidates, run_id):
+    owned = []
+    for c in candidates:
+        p = c.get("payload") or {}
+        if p.get("conclusion") or p.get("statement"):
+            owned.append(c)
+    if not owned:
+        return "<section class='card material-conclusions'><h2>Material proposed conclusions</h2><p><strong>No owner-backed material conclusions were supplied.</strong> No conclusion or commercial consequence has been invented; inspect the available intelligence by business domain below.</p></section>"
+    cards = []
+    for c in owned[:5]:
+        p=c.get("payload") or {}; label=_payload_label(c)
+        consequence=p.get("commercial_consequence") or p.get("commercial_significance") or "Not supplied"
+        support=p.get("evidence_basis") or p.get("support_summary") or "No support summary supplied; inspect candidate Evidence and lineage."
+        challenge=p.get("challenge") or p.get("uncertainty") or "No owner-supplied challenge preview."
+        cards.append(f"<article class='conclusion'><p class='pill'>{escape(str(p.get('truth_class') or c.get('validation_status') or 'candidate'))}</p><h3>{escape(label)}</h3><p><strong>Commercial consequence:</strong> {escape(str(consequence))}</p><p><strong>Freshness:</strong> {escape(str(p.get('freshness') or 'Not supplied'))} · <strong>Confidence or qualification:</strong> {escape(str(p.get('confidence') or p.get('qualification') or 'Not supplied'))}</p><p><strong>Challenge preview:</strong> {escape(str(challenge))}</p><details class='trust-panel'><summary><strong>Why should I believe this?</strong></summary><h4>What supports it?</h4><p>{escape(str(support))}</p><p><a href='/blueprint-import/{escape(run_id)}/inspect#evidence'>Inspect supporting Evidence</a></p><h4>What could make this wrong, incomplete or unsafe to rely upon?</h4><p>{escape(str(challenge))}</p><p>Observations, source provenance, contradictory Evidence, assumptions, Unknowns and reasoning or research lineage are shown only where supplied by their current owners.</p></details></article>")
+    return "<section class='card material-conclusions'><h2>Material proposed conclusions</h2>"+"".join(cards)+"</section>"
+
+
+def _promotion_impact(proposed, counts, quarantined, unsupported):
+    groups=(("New intelligence", proposed.get("Creates",0)),("Confirmed intelligence",proposed.get("Unchanged",0)),("Proposed amendments",proposed.get("Updates",0)),("New or changed relationships",proposed.get("Relationships",0)),("Conflicts requiring review",proposed.get("Conflicts",0)),("Quarantined or excluded intelligence",quarantined+int(proposed.get("Projection-only",0))), ("Unsupported content",unsupported),("Items requiring human judgement",proposed.get("Unresolved references",0)),("Items that will not be promoted",int(counts.get("Rejected",0))+int(proposed.get("Ignored",0))))
+    items="".join(f"<li><strong>{escape(label)}:</strong> {int(value)} item(s) according to the existing mutation and validation plan.</li>" for label,value in groups if int(value))
+    return "<section class='card promotion-impact'><h2>What acceptance would change</h2><p>Promotion would apply only the governed effects below; it would not automatically resolve excluded or unresolved intelligence.</p><ul>"+(items or "<li>No promotable effect is currently reported.</li>")+"</ul></section>"
+
+
+def _decision_area(package, unresolved, unknowns, contradictions, quarantined, unsupported, rec):
+    decisions=[]
+    if unresolved: decisions.append((1,"Confirm Twin identity, primary subject, governed scope and canonical owner","Identity determines which existing governed Twin may receive these candidates.","Confirm through the existing identity-resolution workflow.",True,"Promotion remains blocked."))
+    if quarantined or contradictions: decisions.append((2,"Review quarantined Contradictions","Challenging intelligence may qualify or invalidate proposed conclusions.","Inspect the existing quarantine and Contradiction records and disposition them in their owning workflow.",bool(quarantined),"Quarantined items will not be promoted."))
+    if unknowns: decisions.append((3,"Inspect material Unknowns","Known gaps affect whether the candidate is safe to rely upon.","Inspect Unknowns and decide whether the residual gap is acceptable.",False,"Unknowns remain explicit and unresolved."))
+    if unsupported: decisions.append((4,"Resolve unsupported items","Unsupported content has no promotable mapping.","Use the existing review disposition workflow.",True,"Unsupported items will not be promoted."))
+    if rec and not rec.get("passes",True): decisions.append((0,"Resolve promotion reconciliation blocker","Accepted candidates must reconcile with proposed mutations.","Regenerate or correct the existing review plan.",True,"Promotion remains disabled."))
+    decisions.sort(key=lambda d:d[0])
+    if not decisions: return "<section class='card decisions-required'><h2>Decisions required before promotion</h2><p>No unresolved decision is reported. The owner must still confirm the review plan and promotion rationale in the existing Approval workflow.</p></section>"
+    rendered="".join(f"<li><h3>{escape(title)}</h3><p><strong>Why it matters:</strong> {escape(why)}</p><p><strong>Reviewer decision:</strong> {escape(action)}</p><p><strong>Blocks review:</strong> No · <strong>Blocks promotion:</strong> {'Yes' if blocks else 'No'}</p><p><strong>If unresolved:</strong> {escape(outcome)}</p></li>" for _,title,why,action,blocks,outcome in decisions)
+    return "<section class='card decisions-required'><h2>Decisions required before promotion</h2><ol>"+rendered+"</ol></section>"
 
 
 def _identity_resolution_section(package, actionable: bool = True) -> str:
@@ -552,7 +636,7 @@ def _quarantine_reasons_section(job) -> str:
     return "<section class='card'><h2>Quarantine reasons</h2><table><thead><tr><th>Reason</th><th>Count</th></tr></thead><tbody>" + rows + "</tbody></table></section>"
 
 
-def _review_sections(import_run_id: str, details: dict[str, Any], query: dict[str, list[str]]) -> str:
+def _review_sections(import_run_id: str, details: dict[str, Any], query: dict[str, list[str]], technical: bool = False) -> str:
     size = min(PAGE_SIZE_MAX, max(1, int((query.get("page_size") or [PAGE_SIZE_DEFAULT])[0] or PAGE_SIZE_DEFAULT)))
     page = max(1, int((query.get("page") or [1])[0] or 1))
     candidates = _filter_candidates(details.get("candidates", []), query)
@@ -563,10 +647,12 @@ def _review_sections(import_run_id: str, details: dict[str, Any], query: dict[st
         ("Quarantined Records", lambda c: c.get("validation_status") == "quarantined"),
         ("Rejected Records", lambda c: c.get("validation_status") == "rejected"),
     ]
-    out = _filter_form(import_run_id, query)
+    out = _filter_form(import_run_id, query) if technical else ""
     for title, pred in sections:
         selected = [c for c in candidates if pred(c)]
-        out += _category_heading(title, selected, effects) + _candidate_table(f"{title} detail", selected, effects, page, size)
+        if not selected:
+            continue
+        out += _category_heading(title, selected, effects) + _candidate_table(f"{title} detail", selected, effects, page, size, technical)
     return out
 
 
@@ -588,16 +674,24 @@ def _filter_candidates(candidates, query):
     return out
 
 
-def _candidate_table(title, candidates, effects, page, size):
+def _candidate_table(title, candidates, effects, page, size, technical=False):
     total = len(candidates); start = (page - 1) * size; page_rows = candidates[start:start + size]
     rows = []
     for c in page_rows:
         e = effects.get(c.get("candidate_record_id"), {})
         reason = e.get("reason") or "; ".join(str(f.get("message", "")) for f in c.get("validation_findings", []))
-        payload = escape(json.dumps(c.get("payload") or {}, sort_keys=True, default=str))
-        rows.append(f"<tr><td>{escape(str(c.get('source_sheet','')))}</td><td><strong>{escape(str(c.get('original_source_id','')))}</strong><details><summary>Technical payload</summary><pre>{payload}</pre></details></td><td>{escape(str(c.get('candidate_object_class','')))}</td><td>{escape(str(c.get('validation_status','')))}</td><td>{escape(str(e.get('effect_type','')))}</td><td>{escape(reason)}</td></tr>")
+        payload_obj=c.get("payload") or {}; payload = escape(json.dumps(payload_obj, sort_keys=True, default=str))
+        if technical:
+            rows.append(f"<tr><td>{escape(str(c.get('source_sheet','')))}</td><td><strong>{escape(str(c.get('original_source_id','')))}</strong><details><summary>Raw technical payload</summary><pre>{payload}</pre></details></td><td>{escape(str(c.get('candidate_object_class','')))}</td><td>{escape(str(c.get('validation_status','')))}</td><td>{escape(str(e.get('effect_type','')))}</td><td>{escape(reason)}</td></tr>")
+        else:
+            role=payload_obj.get("role") or payload_obj.get("participant_role") or payload_obj.get("relationship_meaning") or payload_obj.get("description") or "Not supplied"
+            significance=payload_obj.get("commercial_significance") or payload_obj.get("commercial_consequence") or "Not supplied"
+            evidence=payload_obj.get("evidence_status") or payload_obj.get("evidence_basis") or "Inspect candidate Evidence"
+            challenge=payload_obj.get("uncertainty") or payload_obj.get("contradiction") or (reason if reason else "No material challenge supplied")
+            rows.append(f"<tr><td><strong>{escape(_payload_label(c))}</strong></td><td>{escape(str(role))}</td><td>{escape(str(e.get('effect_type') or 'No effect supplied'))}</td><td>{escape(str(significance))}</td><td>{escape(str(evidence))}</td><td>{escape(str(challenge))}<details class='trust-panel'><summary>Why should I believe this?</summary><p>{escape(str(evidence))}</p><p><a href='#evidence'>Inspect Evidence, Unknowns and Contradictions</a></p></details></td></tr>")
     table_body = "".join(rows) or '<tr><td colspan="6">No records.</td></tr>'
-    return f"<section class='card'><h2>{escape(title)}</h2><p>Showing {len(page_rows)} of {total}; page size {size}.</p><table><thead><tr><th>Worksheet</th><th>External ID</th><th>Class</th><th>Disposition</th><th>Proposed effect</th><th>Reason</th></tr></thead><tbody>{table_body}</tbody></table></section>"
+    headings = "<th>Worksheet</th><th>External ID</th><th>Canonical class</th><th>Disposition</th><th>Proposed effect</th><th>Reason</th>" if technical else "<th>Business-readable name</th><th>Role, relationship or description</th><th>Proposed effect</th><th>Commercial significance</th><th>Evidence basis</th><th>Material Unknown or Contradiction</th>"
+    return f"<section class='card'><h2>{escape(title)}</h2><p>Showing {len(page_rows)} of {total}; page size {size}.</p><table><thead><tr>{headings}</tr></thead><tbody>{table_body}</tbody></table></section>"
 
 
 def _load_review_details(coord, import_run_id):
