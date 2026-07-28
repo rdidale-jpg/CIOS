@@ -198,6 +198,15 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/intelligence")
                 html, status = executive_workspace_page(run_id, self.headers)
                 self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/explore"):
+                run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/explore")
+                html, status = executive_workspace_page(run_id, self.headers, view="explore")
+                self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/") and "/enterprises/" in parsed.path:
+                remainder = parsed.path.removeprefix("/blueprint-import/")
+                run_id, enterprise_id = remainder.split("/enterprises/", 1)
+                html, status = executive_workspace_page(run_id, self.headers, view="enterprise", enterprise_id=enterprise_id)
+                self._html(html, status=status)
             elif parsed.path == "/blueprint-import":
                 html, status = import_blueprint_entry_page(self.headers)
                 self._html(html, status=status)

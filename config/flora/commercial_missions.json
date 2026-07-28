@@ -1,0 +1,30 @@
+{
+  "alice": {
+    "executive_role": "Sales Director",
+    "employer": "Sopra Steria",
+    "commercial_objective": "Identify evidenced client problems and transformation needs that may align with Sopra Steria corporate offers.",
+    "industries": ["Telecommunications", "Media", "Sport"],
+    "enterprises": [],
+    "offer_portfolio": [],
+    "competitors": [],
+    "partners": [],
+    "geography": ["United Kingdom"],
+    "inspection_depth": "executive-to-evidence",
+    "authority_status": "human-supplied operational context",
+    "supplied_by": "CIOS pilot user profile"
+  },
+  "owner-1": {
+    "executive_role": "Sales Director",
+    "employer": "Sopra Steria",
+    "commercial_objective": "Identify evidenced client problems and transformation needs that may align with Sopra Steria corporate offers.",
+    "industries": ["Telecommunications", "Media", "Sport"],
+    "enterprises": [],
+    "offer_portfolio": [],
+    "competitors": [],
+    "partners": [],
+    "geography": ["United Kingdom"],
+    "inspection_depth": "executive-to-evidence",
+    "authority_status": "human-supplied operational context",
+    "supplied_by": "CIOS pilot user profile"
+  }
+}

@@ -26,7 +26,7 @@ def test_post_import_target_defaults_to_executive_workspace(monkeypatch, tmp_pat
     assert html.index("Executive understanding") < html.index("Candidate governance")
 
 
-def test_provisional_composition_missing_mission_and_scope(monkeypatch, tmp_path):
+def test_provisional_composition_resolves_human_supplied_mission_and_scope(monkeypatch, tmp_path):
     run_id, _ = _import(monkeypatch, tmp_path, [{
         "external_id": "FACT-COST", "record_class": "fact", "truth_class": "evidence_backed",
         "payload": {"statement": "Financial cost pressure is material"},
@@ -34,9 +34,10 @@ def test_provisional_composition_missing_mission_and_scope(monkeypatch, tmp_path
     html, status = executive_workspace_page(run_id, HEADERS)
     assert status == 200
     assert "Executive understanding is provisional because the Twin identity and governed scope have not yet been confirmed." in html
-    assert "Personal commercial prioritisation is not yet applied" in html
-    assert "Unsupported candidate conclusion" in html
-    assert "0 newly governed records" in html
+    assert "Composed for: Sales Director · Sopra Steria" in html
+    assert "human-supplied operational context" in html
+    assert "Offer alignment is incomplete" in html
+    assert "No explicit Evidence reference" in html
 
 
 def test_governance_remains_accessible_without_promoting_candidates(monkeypatch, tmp_path):
@@ -49,4 +50,33 @@ def test_governance_remains_accessible_without_promoting_candidates(monkeypatch,
     assert "Review candidate governance" in html and "Resolve Twin scope" in html
     review, status = review_page(run_id, HEADERS)
     assert status == 200 and "Review" in review
-    assert "Candidate only; not promoted to governed intelligence" in html
+    assert "Candidate intelligence" in html
+
+
+def test_semantic_filter_explorer_and_enterprise_dossier(monkeypatch, tmp_path):
+    run_id, _ = _import(monkeypatch, tmp_path, [
+        {"external_id": "ORG-1", "record_class": "entity", "truth_class": "candidate",
+         "payload": {"name": "Example Telecom", "enterprise_id": "example-telecom"}},
+        {"external_id": "RAW-1", "record_class": "fact", "truth_class": "candidate",
+         "payload": {"value": 30.9, "subject": "Example Telecom"}},
+        {"external_id": "OBS-1", "record_class": "observation", "truth_class": "evidence_backed",
+         "payload": {"statement": "Network modernisation is increasing operating-model pressure",
+                     "subject": "Example Telecom", "evidence_refs": ["EV-1"],
+                     "observation_date": "2026-06-30", "confidence": "medium"}},
+        {"external_id": "UNK-1", "record_class": "unknown", "truth_class": "unknown",
+         "payload": {"statement": "Programme ownership remains unknown", "subject": "Example Telecom"}},
+    ])
+    html, status = executive_workspace_page(run_id, HEADERS)
+    assert status == 200
+    assert "Network modernisation is increasing operating-model pressure" in html
+    assert "<h4>30.9</h4>" not in html
+    assert "Metric meaning, unit, period, subject, source or significance is incomplete" in html
+    assert "Open Enterprise Intelligence dossier" in html
+    explorer, status = executive_workspace_page(run_id, HEADERS, view="explore")
+    assert status == 200 and "Aspect coverage" in explorer and "Example Telecom" in explorer
+    dossier, status = executive_workspace_page(run_id, HEADERS, view="enterprise", enterprise_id="example-telecom")
+    assert status == 200
+    assert "Enterprise Intelligence dossier" in dossier
+    assert "EV-1" in dossier and "2026-06-30" in dossier
+    assert "Programme ownership remains unknown" in dossier
+    assert "Review candidate governance" in dossier
