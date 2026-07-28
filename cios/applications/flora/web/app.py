@@ -32,7 +32,7 @@ from cios.applications.flora.flora_transparent import start_bt_digital_twin, flo
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
 from cios.applications.flora.twin_inspection import twin_inspection_page
 from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page, restage_confirm_page as blueprint_restage_confirm_page, restage_package as blueprint_restage_package, restage_progress_page as blueprint_restage_progress_page, restage_history_page as blueprint_restage_history_page, promotion_confirmation_page as blueprint_promotion_confirmation_page, cancellation_confirmation_page as blueprint_cancellation_confirmation_page, cancel_import as blueprint_cancel_import
-from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page
+from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page, update_commercial_mission
 from cios.applications.flora.enterprise_intelligence.views import executive_intelligence_brief_page
 from cios.applications.flora.enterprise_intelligence.pipeline import run_pipeline as run_banking_pipeline
 from cios.applications.flora.enterprise_intelligence.models import ReasoningRequestV1
@@ -201,6 +201,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/explore"):
                 run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/explore")
                 html, status = executive_workspace_page(run_id, self.headers, view="explore")
+                self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/mission"):
+                run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/mission")
+                html, status = executive_workspace_page(run_id, self.headers, view="mission")
                 self._html(html, status=status)
             elif parsed.path.startswith("/blueprint-import/") and "/enterprises/" in parsed.path:
                 remainder = parsed.path.removeprefix("/blueprint-import/")
@@ -424,6 +428,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         elif self.path.startswith("/blueprint-import/") and self.path.endswith("/restage"):
             run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/restage")
             html, status = blueprint_restage_package(run_id, form, self.headers)
+            self._html(html, status=status)
+        elif self.path.startswith("/blueprint-import/") and self.path.endswith("/mission"):
+            run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/mission")
+            html, status = update_commercial_mission(run_id, self.headers, form)
             self._html(html, status=status)
         elif self.path.startswith("/blueprint-import/") and self.path.endswith("/approve"):
             run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/approve")

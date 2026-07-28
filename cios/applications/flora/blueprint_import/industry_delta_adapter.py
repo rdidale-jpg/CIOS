@@ -41,6 +41,30 @@ class IndustryTwinDeltaAdapter:
         "contradictions": ("HFT_Upgrade/Inventories/uncertainty_inventory.json", "contradictions", "contradiction"),
         "reasoning_lineage": ("HFT_Upgrade/Lineage/reasoning_lineage.json", "", "reasoning_lineage"),
     }
+    # Root artefacts are the package's semantic contract.  The HFT inventories
+    # are useful enrichment, but their broad ``object`` category is not an
+    # authority to re-type capabilities, products or infrastructure as firms.
+    TMS_CANONICAL = {
+        "industry_twins": ("01_final_industry_twin.json", "", "industry_twin"),
+        "enterprise_twins": ("02_priority_enterprise_twins.json", "items", "enterprise_twin"),
+        "market_participants": ("03_priority_market_participant_twins.json", "items", "market_participant_twin"),
+        "opportunities": ("04_priority_opportunity_twins.json", "items", "opportunity_hypothesis"),
+        "control_bodies": ("05_control_body_model.json", "items", "control_body"),
+        "value_chains": ("06_value_chain_model.json", "chains", "value_chain"),
+        "economics": ("07_economics_investment_model.json", "pools", "economic_pool"),
+        "procurement_routes": ("08_procurement_commercial_route_model.json", "procurement_routes", "procurement_route"),
+        "buying_centres": ("08_procurement_commercial_route_model.json", "buying_centres", "buying_centre"),
+        "supplier_relationships": ("08_procurement_commercial_route_model.json", "supplier_relationships", "supplier_relationship"),
+        "transformations": ("09_transformation_programme_model.json", "items", "transformation_programme"),
+        "dependencies": ("10_cross_domain_dependency_model.json", "items", "cross_domain_dependency"),
+        "executive_intelligence": ("11_executive_intelligence.json", "", "executive_intelligence"),
+        "ranked_opportunities": ("12_ranked_commercial_opportunities.json", "items", "ranked_opportunity"),
+        "ai_assessments": ("13_ai_reinvention_assessment.json", "", "ai_reinvention_assessment"),
+        "maturity": ("14_maturity_assessment.json", "", "maturity_assessment"),
+        "unknowns_canonical": ("16_unresolved_unknowns.json", "items", "unknown"),
+        "contradictions_canonical": ("17_unresolved_contradictions.json", "items", "contradiction"),
+        "evidence_canonical": ("18_final_evidence_register.json", "items", "evidence"),
+    }
 
     def __init__(self) -> None:
         self.diagnostics: dict[str, Any] = {}
@@ -125,6 +149,53 @@ class IndustryTwinDeltaAdapter:
         self.diagnostics["staging_candidates_created"] = len(output)
         return tuple(output)
 
+    def _tms_canonical_records(self, read_collection: CollectionReader, diag: dict[str, Any]) -> list[tuple[dict[str, Any], str]]:
+        """Load explicitly typed root collections before lower-level enrichment."""
+        output: list[tuple[dict[str, Any], str]] = []
+        canonical_ids: dict[str, str] = {}
+        for category, (path, key, record_class) in self.TMS_CANONICAL.items():
+            selected = read_collection(category, (path,))
+            if not selected:
+                raise ValueError(f"missing declared TMS canonical artefact: {path}")
+            actual_path, document = next(((p, d) for p, d in selected if p == path), selected[0])
+            rows = document.get(key) if key and isinstance(document, dict) else ([document] if isinstance(document, dict) else None)
+            if not isinstance(rows, list):
+                raise ValueError(f"TMS canonical artefact {path} does not contain list {key!r}")
+            diag["collection_files_selected"].append(actual_path)
+            diag["objects_indexed"][f"canonical_{category}"] = len(rows)
+            for row in rows:
+                if not isinstance(row, dict):
+                    continue
+                if record_class == "executive_intelligence":
+                    shared = {k: row.get(k) for k in ("id", "status", "evidence_refs", "confidence", "freshness", "checkpoint_lineage")}
+                    for section in ("what_is_changing", "why_it_matters", "why_now", "why_them", "what_should_happen_next"):
+                        for position, statement in enumerate(row.get(section) or (), 1):
+                            output.append((shared | {
+                                "id": f"{row.get('id')}-{section}-{position}", "statement": statement,
+                                "executive_section": section, "candidate_status": row.get("status"),
+                                "unknowns": row.get("what_remains_uncertain") or (),
+                                "_governed_collection_path": actual_path,
+                                "_governed_category": category,
+                                "_canonical_object_type": record_class,
+                            }, record_class))
+                    continue
+                identifier = next((str(row[k]) for k in self.IDENTIFIERS if row.get(k) not in (None, "")), "")
+                if identifier:
+                    previous = canonical_ids.get(identifier)
+                    if previous and previous != record_class:
+                        raise ValueError(f"canonical identifier {identifier!r} has conflicting types: {previous} and {record_class}")
+                    canonical_ids[identifier] = record_class
+                output.append((dict(row) | {
+                    "_governed_collection_path": actual_path,
+                    "_governed_category": category,
+                    "_canonical_object_type": record_class,
+                }, record_class))
+        diag["canonical_object_counts"] = {
+            category: diag["objects_indexed"][f"canonical_{category}"] for category in self.TMS_CANONICAL
+        }
+        diag["canonical_priority_enterprises"] = diag["canonical_object_counts"]["enterprise_twins"]
+        return output
+
     @staticmethod
     def _is_tms_inventory_delta(delta: dict[str, Any]) -> bool:
         return str(delta.get("mission_id") or "") == "TMS-001" and any(
@@ -171,7 +242,8 @@ class IndustryTwinDeltaAdapter:
 
     def _candidate(self, package, row, collection_class, source_file, index):
         external_id = str(next((row.get(k) for k in self.IDENTIFIERS if row.get(k) not in (None, "")), f"delta-{index}"))
-        object_class = collection_class if row.get("_governed_category") == "objects" else self._object_class(row, collection_class)
+        object_class = str(row.get("_canonical_object_type") or
+                           (collection_class if row.get("_governed_category") == "objects" else self._object_class(row, collection_class)))
         findings: tuple[ValidationFinding, ...] = ()
         status = "accepted"
         if not object_class:
