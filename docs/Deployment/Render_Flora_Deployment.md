@@ -125,14 +125,17 @@ To correlate a user report with Render logs, copy the `bpi-diag-...` reference s
 
 ## Pilot-only Flora owner authentication
 
-Flora now includes a **pilot-only authentication mechanism** so the configured CIOS owner can use protected functions such as Blueprint import before the enterprise identity architecture exists. This mechanism is intentionally small: the application validates a deployment-owned secret on `POST /pilot-sign-in`, issues one signed `flora_pilot_session` cookie, and derives the owner identifier, workspace and role from server-side environment variables.
+Flora includes a reversible **pilot-only authentication mechanism** so the configured CIOS owner can use protected functions such as Blueprint import before the enterprise identity architecture exists. Secret sign-in remains available by default. An explicit auto-sign-in mode can instead issue the same signed `flora_pilot_session` cookie and derive the owner identifier, workspace and role from the same server-side environment configuration. It does not bypass downstream authorisation.
 
 Required Render environment variables:
 
 | Key | Value | Notes |
 | --- | --- | --- |
 | `FLORA_PILOT_AUTH_ENABLED` | `1` | Enables the pilot sign-in route and signed pilot session resolver. |
-| `FLORA_PILOT_ACCESS_SECRET` | Create in Render dashboard | Deployment-owned secret. Do not commit it and do not place it in URLs. |
+| `FLORA_ENVIRONMENT` | `pilot` | Required explicit non-production environment guard for auto-sign-in. Never use `production`. |
+| `FLORA_PILOT_AUTO_SIGN_IN` | `false` (default) | Set to `true` only for the controlled single-user pilot. Invalid, absent and false values do not activate it. |
+| `FLORA_PILOT_SESSION_SIGNING_KEY` | Create in Render dashboard | Required independent signing key for auto-sign-in. Do not commit or log it. |
+| `FLORA_PILOT_ACCESS_SECRET` | Create in Render dashboard, or leave absent in auto mode | Retained for secret sign-in when auto-sign-in is disabled. Never place it in URLs. |
 | `FLORA_PILOT_OWNER_ID` | Non-sensitive owner identifier | Example: an email-style or stable internal owner ID. |
 | `FLORA_PILOT_WORKSPACE` | `CIOS` | Workspace resolved from the signed pilot session. |
 | `FLORA_PILOT_ROLE` | `cios_owner` | Owner role; existing Flora policy expands this to Blueprint capabilities including `package.upload`. |
@@ -140,8 +143,12 @@ Required Render environment variables:
 
 Cookie security: the pilot session cookie is HttpOnly, SameSite=Lax, Path=/, bounded by Max-Age, tamper-evident with HMAC, and marked Secure in Render/HTTPS deployments. Sign-out uses `POST /pilot-sign-out` and clears the same cookie.
 
+Auto-sign-in fails closed unless pilot authentication and the explicit auto flag are enabled, `FLORA_ENVIRONMENT` identifies a non-production pilot-like environment, the canonical owner and workspace are non-empty, an effective membership role is configured, and the independent signing key exists. The issued cookie is immediately resolved through the normal session and workspace policy before it is returned. A configuration failure produces a diagnostic page and audit/log event without credentials. In auto mode the former access secret is not read for authentication or signing and may be absent.
+
+**Exposure warning:** Pilot auto-sign-in grants the configured pilot identity to anyone able to reach this service. Flora reports whether trusted proxy headers are enabled, but this repository does not configure a service-level allow-list or trusted network boundary. Restrict the Render service externally where appropriate. The compact in-product banner remains visible while this mode is active.
+
 Header-trust boundary: keep `FLORA_TRUST_PROXY_HEADERS=0` unless a real upstream identity proxy exists. If a future deployment sets it to `1`, the edge must strip all public client-supplied `X-Flora-*` headers before injecting trusted identity, workspace and role values.
 
-Blueprint import: anonymous users and synthetic browser-supplied `X-Flora-*` headers remain denied. The denied Blueprint page offers a pilot sign-in action. Signed-in pilot owners resolve as the configured owner in the configured CIOS workspace with `cios_owner`, and Blueprint GET/POST use the same signed session and existing role/capability policy.
+Blueprint import: anonymous users and synthetic browser-supplied `X-Flora-*` headers remain denied. When auto-sign-in is off, the denied Blueprint page offers the existing pilot sign-in action. Signed-in pilot owners resolve as the configured owner in the configured CIOS workspace with `cios_owner`, and Blueprint GET/POST use the same signed session and existing role/capability policy, including `package.upload`, inspection, governance, promotion and administration checks.
 
 Future migration path: replace this pilot-only mechanism with enterprise SSO, identity-provider integration, database-backed memberships, durable workspace ownership, and centrally managed roles/capabilities. The pilot cookie should then be removed rather than expanded into an enterprise identity platform.

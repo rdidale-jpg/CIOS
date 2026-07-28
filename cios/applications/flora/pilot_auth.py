@@ -16,6 +16,9 @@ from typing import Any
 from cios.applications.flora.workspace.views import _page
 
 COOKIE_NAME = "flora_pilot_session"
+AUTO_SIGN_IN_ENV = "FLORA_PILOT_AUTO_SIGN_IN"
+APPLICATION_ENV_ENV = "FLORA_ENVIRONMENT"
+SESSION_SIGNING_KEY_ENV = "FLORA_PILOT_SESSION_SIGNING_KEY"
 DEFAULT_SESSION_DAYS = 30
 SESSION_DAYS_ENV = "FLORA_PILOT_SESSION_DAYS"
 LOGGER = logging.getLogger(__name__)
@@ -23,6 +26,11 @@ LOGGER = logging.getLogger(__name__)
 
 def _enabled() -> bool:
     return os.getenv("FLORA_PILOT_AUTH_ENABLED", "0").strip().lower() in {"1", "true", "yes", "on"}
+
+
+def pilot_auto_sign_in_requested() -> bool:
+    """Return true only for an explicit, valid auto-sign-in value."""
+    return os.getenv(AUTO_SIGN_IN_ENV, "false").strip().lower() in {"1", "true", "yes", "on"}
 
 
 def _secret() -> str:
@@ -34,7 +42,7 @@ def _owner_id() -> str:
 
 
 def _workspace() -> str:
-    return os.getenv("FLORA_PILOT_WORKSPACE", "CIOS")
+    return os.getenv("FLORA_PILOT_WORKSPACE", "")
 
 
 def _role() -> str:
@@ -42,8 +50,8 @@ def _role() -> str:
 
 
 def _signing_key() -> bytes:
-    secret = _secret()
-    return hashlib.sha256(("flora-pilot-session:" + secret).encode()).digest()
+    key_material = os.getenv(SESSION_SIGNING_KEY_ENV, "") or _secret()
+    return hashlib.sha256(("flora-pilot-session:" + key_material).encode()).digest()
 
 
 def _b64(data: bytes) -> str:
@@ -60,6 +68,34 @@ class PilotSession:
     workspace: str
     role: str
     expires_at: int
+
+
+@dataclass(frozen=True)
+class PilotAutoSignInStatus:
+    requested: bool
+    active: bool
+    environment: str
+    failed_condition: str = ""
+
+
+def pilot_auto_sign_in_status() -> PilotAutoSignInStatus:
+    """Validate the explicit, fail-closed operational pilot configuration."""
+    requested = pilot_auto_sign_in_requested()
+    environment = os.getenv(APPLICATION_ENV_ENV, "").strip().lower()
+    if not requested:
+        return PilotAutoSignInStatus(False, False, environment)
+    checks = (
+        (environment in {"pilot", "preview", "development", "test"}, "environment is not an explicit pilot or non-production environment"),
+        (bool(_enabled()), "pilot authentication is not enabled"),
+        (bool(_owner_id().strip()), "canonical pilot owner is not configured"),
+        (bool(_workspace().strip()), "pilot workspace is not configured"),
+        (bool(_role().strip()), "pilot owner membership or effective role is not configured"),
+        (bool(os.getenv(SESSION_SIGNING_KEY_ENV, "").strip()), "pilot session signing key is not configured"),
+    )
+    for valid, failure in checks:
+        if not valid:
+            return PilotAutoSignInStatus(True, False, environment, failure)
+    return PilotAutoSignInStatus(True, True, environment)
 
 
 def session_ttl_seconds() -> int:
@@ -113,7 +149,8 @@ def parse_cookie_header(header: str, name: str = COOKIE_NAME) -> str:
 
 
 def resolve_pilot_session(headers: Any) -> PilotSession | None:
-    if not _enabled() or not _secret() or not _owner_id():
+    signing_material = os.getenv(SESSION_SIGNING_KEY_ENV, "") or _secret()
+    if not _enabled() or not signing_material or not _owner_id():
         return None
     raw = parse_cookie_header(headers.get("Cookie", ""))
     try:
@@ -136,8 +173,20 @@ def validate_secret(candidate: str) -> bool:
 
 
 def sign_in_page(error: str = "") -> str:
+    status = pilot_auto_sign_in_status()
+    if status.requested:
+        detail = status.failed_condition or "auto-sign-in could not establish the canonical pilot session"
+        return configuration_error_page(detail)
     notice = f"<p class='warn'>{escape(error)}</p>" if error else ""
     return _page("Pilot sign in", f"""<section class='hero'><h1>Flora pilot access</h1><p>This is a pilot-only authentication mechanism for the configured CIOS owner. It is not enterprise SSO.</p>{notice}</section><section class='card'><form method='post' action='/pilot-sign-in'><label for='pilot_secret'>Pilot access secret</label><input id='pilot_secret' name='pilot_secret' type='password' autocomplete='current-password' required><p><button type='submit'>Sign in for pilot access</button></p></form></section>""")
+
+
+def configuration_error_page(failed_condition: str) -> str:
+    return _page("Pilot configuration error", f"""<section class='hero'><h1>Pilot auto-sign-in configuration error</h1><p class='warn'>Flora did not create a privileged session because {escape(failed_condition)}.</p></section><section class='card'><h2>Security warning</h2><p>Pilot auto-sign-in grants the configured pilot identity to anyone able to reach this service.</p><p>No secret, credential, or session value has been displayed.</p></section>""")
+
+
+def pilot_banner_html() -> str:
+    return "<aside class='pilot-auto-banner' role='status' style='position:sticky;bottom:0;z-index:20;display:flex;justify-content:center;align-items:center;gap:.6rem;flex-wrap:wrap;padding:.45rem .8rem;background:#fff4c2;border-top:1px solid #b99319;color:#392f0b;font-size:.88rem'><strong>Pilot auto-sign-in active</strong> · Acting as configured pilot owner <form method='post' action='/pilot-sign-out' style='display:inline;margin:0'><button type='submit' style='padding:.3rem .65rem'>Sign out</button></form></aside>"
 
 
 def audit(event: str, **payload: Any) -> None:
