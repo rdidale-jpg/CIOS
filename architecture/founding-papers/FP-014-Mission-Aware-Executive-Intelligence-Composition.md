@@ -38,13 +38,30 @@ Flora helps every executive answer:
 3. **Why now?**
 4. **Why should I believe it?**
 
-## 5. Relationship to FP-013
+## 5. Executive Intelligence Workspace
+
+**Purpose:** Define the Executive Intelligence Workspace as Flora's primary interaction model.
+
+Every supported Industry Twin, Enterprise Twin and Market Participant Twin is first experienced through an **Executive Intelligence Workspace** composed from the user's Commercial Mission. This workspace is Flora's primary product experience: it foregrounds executive meaning before exposing detailed inspection, without changing the governed Enterprise Intelligence beneath it.
+
+The Executive Intelligence Workspace first answers the four executive questions in section 4. Through those answers, executives understand:
+
+- what intelligence exists;
+- what is commercially significant;
+- where transformation pressure is emerging;
+- which organisations deserve investigation;
+- why those conclusions are relevant; and
+- why they should be believed.
+
+Governance, diagnostics and detailed inspection remain progressively discoverable through FP-013. The Executive Intelligence Workspace composes the route into that authority; it does not create a separate inspection architecture or intelligence owner.
+
+## 6. Relationship to FP-013
 
 [FP-013](FP-013-Executive-Intelligence-Workspace.md) remains authoritative for executive-first inspection, progressive disclosure, trust through inspection, evidence visibility, the common inspection experience and **“Why should I believe this?”** FP-014 extends FP-013; it neither replaces nor weakens it.
 
 FP-014 owns the proposed mission-aware composition that occurs before and around detailed inspection. FP-013 owns the shared inspection experience into which that composition leads. The Twin Inspection Shell and Common Executive Inspection Contract remain presentation and orchestration boundaries, not new intelligence owners. All detailed evidence inspection continues through FP-013 and the applicable canonical owner.
 
-## 6. Architectural principles
+## 7. Architectural principles
 
 1. **Commercial Mission determines relevance. Enterprise Intelligence determines truth.**
 2. **Executives arrive to understand opportunity. They remain to inspect evidence.**
@@ -52,10 +69,11 @@ FP-014 owns the proposed mission-aware composition that occurs before and around
 4. **Mission-aware composition, not opaque personalisation.** Declared inputs and deterministic rules replace hidden behavioural inference.
 5. **Commercial opportunity is a function of relevance, timing and evidence.** None may be silently substituted for another.
 6. **Reinvention Timing is evidence-led.** Urgency must be explained through observed maturity, not manufactured.
-7. **Commercial Mission may influence foregrounding, grouping and navigation, but must never alter governed intelligence.**
-8. **Unknowns, Contradictions and missing Evidence remain visible.** Commercial inconvenience is never a reason for suppression.
+7. **Urgency emerges from evidence, not prediction.** Urgency is the observed maturity of transformation pressure. It must never be inferred from AI confidence, supplier preference, opportunity scoring, procurement prediction or behavioural profiling, and it must always remain inspectable.
+8. **Commercial Mission may influence foregrounding, grouping and navigation, but must never alter governed intelligence.**
+9. **Unknowns, Contradictions and missing Evidence remain visible.** Commercial inconvenience is never a reason for suppression.
 
-## 7. Commercial Mission
+## 8. Commercial Mission
 
 **Commercial Mission** is a declared, visible and inspectable composition input describing the executive's bounded commercial purpose. It is distinct from the transient AI-agent **Mission** and Runtime Context owned by [ADR-015](../decisions/ADR-015-Runtime-Mission-Context.md). A future runtime may carry a Commercial Mission within runtime context, but that does not make it durable Enterprise Intelligence.
 
@@ -85,7 +103,7 @@ Commercial Mission:
 
 Missing mission fields narrow what Flora can explain. They do not authorise behavioural inference. For example, absent employer or offer context means offer alignment is **unresolved**, not that every offer is relevant.
 
-## 8. Commercial landscape context
+## 9. Commercial landscape context
 
 Where configured, Flora should understand the user's principal competitors, strategic partners, likely incumbents and ecosystem participants. Supplier, competitor and partner are contextual roles of governed Enterprise or Market Participant identities; FP-014 creates no separate supplier or competitor model. Participant claims remain subject to the Market Participant Twin and Knowledge Graph authorities, including their account-relative and evidence-lineage constraints.
 
@@ -93,7 +111,7 @@ Commercial landscape context exists to improve interpretation: it can reveal a d
 
 Human-supplied competitor, partner or incumbent context must remain labelled with contributor, date and rationale under [ADR-004](../decisions/ADR-004-Human-Supplied-Knowledge-Must-Be-Labelled.md); it cannot be rendered as independently established fact.
 
-## 9. Mission-aware composition pipeline
+## 10. Mission-aware composition pipeline
 
 The architectural flow is:
 
@@ -120,90 +138,98 @@ Mission-aware composition may change only:
 
 It must never change Evidence, provenance, freshness, lineage, Contradictions, Unknowns, assumptions or canonical intelligence. It must not copy canonical records into a new mission-specific store. The workspace is a read composition over owner-provided projections; canonical workflows remain the destinations for governance and inspection.
 
-## 10. Executive questions
+## 11. Executive questions
 
 Every Executive Intelligence Workspace must answer all four questions:
 
-### 10.1 What is happening?
+### 11.1 What is happening?
 
 Describe the current state, challenges, changes and pressures affecting the inspected Industry, Enterprise or Market Participant. Distinguish observed fact, governed interpretation, hypothesis and missing Evidence.
 
-### 10.2 Why does it matter to my Commercial Mission?
+### 11.2 Why does it matter to my Commercial Mission?
 
 Explain relevance to the user's employer, offers, competitors, partners, markets and commercial objectives. Name the mission inputs used; do not imply alignment where those inputs or governed links are missing.
 
-### 10.3 Why now?
+### 11.3 Why now?
 
 Explain the evidence-backed maturity and urgency of reinvention pressures, including principal drivers, affected functions, freshness, contradictions and changes over time where history exists. Urgency is not confidence, access, value or procurement probability.
 
-### 10.4 Why should I believe it?
+### 11.4 Why should I believe it?
 
 Expose Evidence, provenance, freshness, Contradictions, Unknowns, assumptions and lineage through FP-013's progressive inspection experience. A concise executive explanation must link to, not replace, owned inspection.
 
-## 11. Strategic Sales Director composition
+## 12. Strategic Sales Director composition
 
 For a **Strategic Sales Director** Commercial Mission, an Industry Twin workspace must foreground the following composition. “Must foreground” governs navigation and presentation when the owning intelligence exists; it does not require Flora to fabricate a complete section.
 
-### 11.1 Intelligence Coverage
+### 12.1 Intelligence Coverage
 
 Counted tiles with drill-down should show what intelligence exists in the Twin: Evidence sources, Observations, industry pressures, transformation signals, enterprises, Market Participants, opportunity hypotheses, Unknowns, Contradictions and stale intelligence. Counts retain owner scope and must not imply quality or completeness by volume alone.
 
-### 11.2 Industry Outlook
+### 12.2 Industry Outlook
 
 Compose commercially understandable insight into financial condition, structural challenges, regulatory pressures, technology shifts, operating-model pressure, workforce pressure, investment climate and transformation themes. Preserve the distinction between cross-industry synthesis and enterprise-specific claims.
 
-### 11.3 Financial Assessment
+### 12.3 Financial Assessment
 
 Where Evidence exists, compose revenue and demand pressure; profitability and margin; cost pressure; capital allocation; investment commitments; savings and productivity targets; financial resilience; and differences between participant types. Label disclosed facts, estimates, interpretation and missing Evidence separately. The dual-speed and source-first financial intelligence boundaries remain owned by accepted ADR-011 and ADR-010.
 
-### 11.4 Priority Prospects
+### 12.4 Priority Prospects
 
-Present prospect enterprises grouped by the user's governed offer or capability portfolio. Each prospect should explain:
+Present prospect enterprises grouped by the user's governed offer or capability portfolio. Every Priority Prospect follows a standard composition contract and, where Evidence exists, exposes:
 
-- why the organisation is exposed;
-- why timing matters;
-- relevant transformation themes and offers;
-- known incumbent, competitor or partner context;
-- supporting Evidence, Contradictions and Unknowns; and
-- a proportionate recommended investigation.
+- organisation;
+- industry;
+- commercial relevance;
+- why now;
+- Reinvention Timing;
+- affected business functions;
+- transformation themes;
+- relevant offer portfolio;
+- competitor landscape;
+- partner landscape;
+- supporting Evidence;
+- Contradictions;
+- Unknowns; and
+- recommended investigation.
 
-No opaque lead score is permitted. Offer grouping is unresolved when governed offer linkage is absent.
+Priority Prospects are evidence-backed investigation priorities, not lead scores or sales predictions. Offer grouping is unresolved when governed offer linkage is absent, and no opaque lead score is permitted.
 
-### 11.5 Opportunity Hypotheses
+### 12.5 Opportunity Hypotheses
 
 Present evidence-backed opportunities to investigate before procurement formalises. Each must expose the target enterprise or participant type, relevant industry pressure, triggering Observations, transformation hypothesis, relevant supplier offer or capability, timing indicators, likely executive concern, competitor/incumbent/partner context, Contradictions, missing Evidence and a proportionate next action.
 
 An Opportunity Hypothesis is not confirmed procurement. Its lifecycle and validation remain governed by FP-009 and applicable Opportunity Twin doctrine, and recommendations require inspectable lineage under ADR-005.
 
-### 11.6 Reinvention Timing
+### 12.6 Reinvention Timing
 
-Show the evidence-backed proximity and affected functions described in section 12, without predicting purchasing events or presenting an unexplained score.
+Show the evidence-backed proximity and affected functions described in section 13, without predicting purchasing events or presenting an unexplained score.
 
-### 11.7 Reinvention Domains
+### 12.7 Reinvention Domains
 
-Where Evidence permits, show domain-specific assessments from section 13. Omit or mark unresolved any domain with insufficient Evidence; never populate a complete heatmap for visual symmetry.
+Where Evidence permits, show domain-specific assessments from section 14. Omit or mark unresolved any domain with insufficient Evidence; never populate a complete heatmap for visual symmetry.
 
-### 11.8 Reinvention Drivers
+### 12.8 Reinvention Drivers
 
 Expose supported drivers and their observations, affected domains, freshness, counter-evidence and mission relevance rather than listing generic reasons for change.
 
-### 11.9 Competitor Activity
+### 12.9 Competitor Activity
 
 Present only evidence-supported competitor presence, partnerships, account activity, platform or capability positions, market announcements and likely areas of competitive overlap. “Likely” is an inference and must display its reasoning and limits.
 
-### 11.10 Partner Activity
+### 12.10 Partner Activity
 
 Present evidence-supported strategic alliance activity, partner relationships, ecosystem opportunities, channel or delivery routes and partner-led Opportunity Hypotheses. Do not turn an alliance announcement into proof of account access or delivery.
 
-### 11.11 Commercial Watchlist
+### 12.11 Commercial Watchlist
 
 Present signals that may materially change opportunity timing: leadership changes, strategy announcements, financial deterioration, regulatory deadlines, procurement precursors, contract events, competitor or partner movements, major programme announcements and Evidence requiring refresh. Watchlist inclusion is a monitoring decision, not proof of an opportunity.
 
-### 11.12 Coverage and Limitations
+### 12.12 Coverage and Limitations
 
 Expose enterprises with strong or partial coverage, missing priority enterprises, stale Evidence, material Contradictions, unresolved assumptions, unsupported financial conclusions and missing Commercial Mission context. Coverage labels must state their basis and scope and must not become a universal trust score.
 
-## 12. Reinvention Timing
+## 13. Reinvention Timing
 
 **Reinvention Timing** is **“The evidence-backed proximity of an industry or enterprise to material transformation across one or more business functions.”** Its purpose is to answer: **“Why is this becoming commercially important now?”**
 
@@ -232,7 +258,7 @@ These stages are ordinal descriptions, not numbers. A stage must not be inferred
 
 If history is absent, Flora states **“No governed historical comparison is available”** rather than manufacturing a trend. If the Evidence cannot support a stage, the assessment is **unresolved**.
 
-## 13. Reinvention domains and drivers
+## 14. Reinvention domains and drivers
 
 Where Evidence permits, Reinvention Timing may be assessed across: Executive Leadership; Strategy; Finance; Customer; Sales and Commercial; Operations; Technology; Data and AI; Cyber and Risk; Workforce; Supply Chain; Products and Services; and Sustainability.
 
@@ -240,13 +266,13 @@ The domain list is a composition lens, not a new canonical taxonomy. Domains may
 
 Evidence-supported drivers may include cost pressure, productivity pressure, financial deterioration, AI adoption, technology debt, customer expectations, regulation, workforce constraints, competitive pressure, operational resilience, leadership change, strategy change, contract or platform lifecycle and ecosystem change. A driver is not sufficient on its own: the assessment explains its observed effect, affected domain, recency, counter-evidence and remaining gap.
 
-## 14. Competitor and partner intelligence
+## 15. Competitor and partner intelligence
 
 Competitor and partner intelligence remains governed, inspectable and account-relative. Every material participant claim must identify the governed participant, its contextual role, relationship or activity claimed, Evidence and Observation lineage, freshness, affected account/industry/opportunity, confidence basis, Contradictions and Unknowns.
 
 Composition may compare evidenced positions or identify possible overlap. It cannot create a relationship, declare absolute participant strength, infer employer advantage, or convert marketing claims into delivery proof. Competitor presence must not suppress a prospect; it becomes context for investigation. Partner presence must not imply access, consent, capacity or a viable route without supporting Evidence.
 
-## 15. Progressive disclosure
+## 16. Progressive disclosure
 
 FP-013's Executive, Analyst, Architect and Technical levels remain the common pattern:
 
@@ -257,7 +283,7 @@ FP-013's Executive, Analyst, Architect and Technical levels remain the common pa
 
 Commercial Mission must be inspectable from the workspace at every level appropriate to its sensitivity. Progressive disclosure may defer detail; it must never hide the basis of relevance or prevent evidence inspection.
 
-## 16. Explainability
+## 17. Explainability
 
 Every material conclusion must answer:
 
@@ -271,19 +297,19 @@ The relevance explanation exposes role, employer, offer alignment, competitor or
 
 Explanations must make the composition path reproducible: governed conclusion → mission field(s) → composition rule → workspace placement → owning Evidence inspection. Generated narrative is a presentation output and must not introduce a claim absent from that path.
 
-## 17. Runtime capability assessment
+## 18. Runtime capability assessment
 
-### 17.1 Architectural intent
+### 18.1 Architectural intent
 
 This paper proposes mission-aware Executive Intelligence composition, Commercial Mission, competitor- and partner-aware composition, Reinvention Timing and the Strategic Sales Director workspace. These are target architecture only.
 
-### 17.2 Implemented runtime capability
+### 18.2 Implemented runtime capability
 
 Repository evidence demonstrates a Twin Inspection Shell and common inspection composition for the UK Banking Industry, Enterprise Canvas and candidate import surfaces; governed Evidence links, Unknowns, Contradictions and progressive inspection are available in those bounded paths. WP-011 also records an operational evidence-bounded Enterprise Intelligence brief pipeline with validation, audit and deterministic fallback, plus separate observatory and opportunity-assistant demonstrations. These capabilities do not demonstrate FP-014 end-to-end.
 
 The repository does **not** establish a general, durable or accepted implementation of Commercial Mission or Reinvention Timing. No runtime capability is claimed merely because this paper names it.
 
-### 17.3 Unconfirmed or incomplete capability
+### 18.3 Unconfirmed or incomplete capability
 
 The following remain explicitly unconfirmed, incomplete or planned:
 
@@ -296,13 +322,13 @@ The following remain explicitly unconfirmed, incomplete or planned:
 - historical trend comparison; and
 - function-level reinvention assessment.
 
-### 17.4 Programme-state reconciliation
+### 18.4 Programme-state reconciliation
 
 The packaged canonical baseline, `CURRENT-PROGRAMME-STATE` dated 2026-07-21, identifies WP-012 Chief Architect Knowledge Pack as the active work package and WP-011 as the runtime baseline. Newer WP2-001 and WP2-003 documents dated 2026-07-27 provide operational context for the Twin Inspection Shell and deterministic relevance projection, including bounded UK Banking and Enterprise support and an explicit Market Participant gap. They do not silently supersede the packaged programme-state authority.
 
 Recommended reconciliation is for the programme-state owner to assess and, through its governed refresh process, incorporate accepted WP2 outcomes while retaining WP-011 or naming an accepted successor as the runtime baseline. Until then FP-014 treats the packaged baseline as canonical and the newer WP2 material as newer operational evidence, not a replacement authority.
 
-## 18. Governance boundaries
+## 19. Governance boundaries
 
 - Canonical owners retain Evidence, Observation, identity, relationship, Twin, hypothesis, recommendation, lifecycle and promotion semantics.
 - Commercial Mission is a composition input, never canonical truth about the inspected subject.
@@ -313,7 +339,7 @@ Recommended reconciliation is for the programme-state owner to assess and, throu
 - Security and access policy may restrict data visibility, but commercial preference may not hide inconvenient intelligence.
 - FP-014 introduces no canonical model, persistence service, scoring engine, relationship store or duplicated runtime.
 
-## 19. Prohibited behaviour
+## 20. Prohibited behaviour
 
 FP-014 prohibits:
 
@@ -330,7 +356,28 @@ FP-014 prohibits:
 - duplicating canonical models or persistence; and
 - claiming runtime capability that is not implemented and evidenced.
 
-## 20. Commercial outcome
+## 21. Executive Outcome
+
+**Purpose:** Define the purpose of Executive Intelligence from the executive's perspective.
+
+Flora does not exist to predict procurements or recommend purchases. Its purpose is to help executives:
+
+- recognise commercially significant change;
+- understand why it matters;
+- understand why now;
+- identify evidence-backed opportunities worthy of investigation;
+- understand competitive and ecosystem context; and
+- investigate with confidence.
+
+Successful use means:
+
+- earlier recognition of transformation;
+- improved commercial prioritisation;
+- better informed executive judgement;
+- proportionate evidence-led investigation; and
+- greater confidence in commercial decisions.
+
+## 22. Commercial Outcome
 
 FP-014 moves the executive experience from:
 
@@ -340,9 +387,19 @@ to:
 
 > “Where should my organisation investigate transformation demand next, why is it becoming urgent, who else is involved, and what evidence supports that conclusion?”
 
-**Executive Intelligence exists to help leaders recognise the right opportunity at the right time. Mission-aware composition ensures relevance. Reinvention Timing explains urgency. Enterprise Intelligence provides the evidence that makes both trustworthy.**
+Flora does not tell executives what to do.
 
-## 21. Acceptance criteria
+It helps them recognise what deserves their attention, understand why it matters now, and inspect the evidence before they act.
+
+Executive Intelligence exists to help leaders recognise the right opportunity at the right time.
+
+Mission-aware composition ensures relevance.
+
+Reinvention Timing explains urgency.
+
+Enterprise Intelligence provides the evidence that makes both trustworthy.
+
+## 23. Acceptance criteria
 
 FP-014 is complete when it demonstrates that:
 
