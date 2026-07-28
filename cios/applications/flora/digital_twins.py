@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import urlparse
 
+from cios.applications.flora.pilot_import import pilot_import_bypass_enabled
 from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise, blueprint_upload_authorisation
 from cios.applications.flora.blueprint_import.registry import BlueprintPackageRegistry
 from cios.applications.flora.blueprint_import.validator import BlueprintPackageValidator
@@ -154,7 +155,7 @@ def digital_twins_landing_page(headers=None) -> str:
              "<p class='muted'>Import a Twin package to create a candidate for review.</p>"
              if not cards and decision.decision == "allowed"
              else ("<p>No governed Digital Twins are available to this signed-in account.</p>" if not cards else ""))
-    if decision.decision == "allowed":
+    if decision.decision == "allowed" or pilot_import_bypass_enabled():
         import_access = "<p><a class='button primary' href='/blueprint-import'>Import Twin</a></p>"
     elif authenticated_flora_user(headers):
         import_access = ("<p class='muted' role='note'><strong>Twin import is unavailable:</strong> "
