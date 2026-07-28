@@ -149,10 +149,19 @@ def digital_twins_landing_page(headers=None) -> str:
     headers = headers or {}
     twins = governed_twin_list(headers)
     cards = ''.join(_governed_twin_card(t) for t in twins)
-    empty = "<p>No governed Digital Twins are available to this signed-in account.</p>" if not cards else ""
-    import_action = ("<p><a class='button primary' href='/blueprint-import'>Import Twin</a></p>"
-                     if blueprint_upload_authorisation(headers).decision == "allowed" else "")
-    body = f"""<section class='hero'><h1>Digital Twins</h1><p class='muted'>Governed Commercial Digital Twins available to your signed-in account.</p>{import_action}</section>
+    decision = blueprint_upload_authorisation(headers)
+    empty = ("<p>No governed Digital Twins are available to this signed-in account.</p>"
+             "<p class='muted'>Import a Twin package to create a candidate for review.</p>"
+             if not cards and decision.decision == "allowed"
+             else ("<p>No governed Digital Twins are available to this signed-in account.</p>" if not cards else ""))
+    if decision.decision == "allowed":
+        import_access = "<p><a class='button primary' href='/blueprint-import'>Import Twin</a></p>"
+    elif authenticated_flora_user(headers):
+        import_access = ("<p class='muted' role='note'><strong>Twin import is unavailable:</strong> "
+                         "your account requires the package.upload capability in the active workspace.</p>")
+    else:
+        import_access = ""
+    body = f"""<section class='hero'><h1>Digital Twins</h1><p class='muted'>Governed Commercial Digital Twins available to your signed-in account.</p>{import_access}</section>
     <section class='card'><h2>Available Twins</h2><p class='muted'>Select a governed Twin to open its Canvas.</p>{empty}<div class='grid'>{cards}</div></section>"""
     return _page('Digital Twins', body)
 

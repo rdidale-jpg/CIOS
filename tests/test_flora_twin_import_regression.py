@@ -28,7 +28,23 @@ def test_authorised_digital_twins_navigation_exposes_import_twin(monkeypatch, tm
     assert "Import Twin" in html
     assert "class='button primary' href='/blueprint-import'" in html
     assert "No governed Digital Twins" in html  # no existing Twin selection is required
-    assert "Import Twin" not in digital_twins_landing_page(BAD)
+    assert "Import a Twin package to create a candidate for review" in html
+
+
+def test_import_visibility_depends_only_on_authenticated_upload_authority(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_COMMERCIAL_MISSIONS_FILE", str(tmp_path / "missing-missions.json"))
+
+    authorised = digital_twins_landing_page(HEADERS)
+    unauthorised = digital_twins_landing_page(BAD)
+    anonymous = digital_twins_landing_page({})
+
+    assert "href='/blueprint-import'>Import Twin</a>" in authorised
+    assert "No governed Digital Twins" in authorised
+    assert "requires the package.upload capability" in unauthorised
+    assert "href='/blueprint-import'>Import Twin</a>" not in unauthorised
+    assert "package.upload capability" not in anonymous
+    assert "href='/blueprint-import'>Import Twin</a>" not in anonymous
 
 
 def test_import_route_loads_and_supported_upload_can_be_initiated(monkeypatch, tmp_path):
