@@ -37,7 +37,7 @@ def test_review_context_preserves_review_and_proposed_statuses() -> None:
     compilation = compile_architecture_profile("review-context", ROOT)
 
     status_by_id = {document.document_id: document.status for document in compilation.included_documents}
-    assert status_by_id == {"FP-013": "Proposed", "EIF-001": "Review", "EOD-001": "Review", "EU-001": "Review", "OT-001": "Review", "EI-014": "Review", "EI-015": "Review", "EI-017": "Review", "FP-010": "Review", "IT-001": "Review", "OPI-001": "Review", "RTP-001": "Review", "ADR-023": "Proposed", "VAL-ROADMAP-001": "Review", "IC-001": "Review", "FP-012": "Review", "ADR-025": "Proposed", "FEIR-001": "Proposed", "EIRP-001": "Proposed", "UX-001": "Proposed"}
+    assert status_by_id == {"FP-013": "Proposed", "FP-014": "Proposed", "EIF-001": "Review", "EOD-001": "Review", "EU-001": "Review", "OT-001": "Review", "EI-014": "Review", "EI-015": "Review", "EI-017": "Review", "FP-010": "Review", "IT-001": "Review", "OPI-001": "Review", "RTP-001": "Review", "ADR-023": "Proposed", "VAL-ROADMAP-001": "Review", "IC-001": "Review", "FP-012": "Review", "ADR-025": "Proposed", "FEIR-001": "Proposed", "EIRP-001": "Proposed", "UX-001": "Proposed"}
 
 
 def test_production_agent_profiles_do_not_infer_membership() -> None:
@@ -66,6 +66,9 @@ def test_fp013_is_discoverable_for_review_and_excluded_from_production() -> None
 
     assert document.status == "Proposed"
     assert document.path == "architecture/founding-papers/FP-013-Executive-Intelligence-Workspace.md"
+    fp014 = next(document for document in review.included_documents if document.document_id == "FP-014")
+    assert fp014.status == "Proposed"
+    assert fp014.path == "architecture/founding-papers/FP-014-Mission-Aware-Executive-Intelligence-Composition.md"
 
     for profile in ("architecture-authority", "researcher-pack", "assurance-pack", "reviewer-pack"):
         production_ids = {
@@ -73,6 +76,7 @@ def test_fp013_is_discoverable_for_review_and_excluded_from_production() -> None
             for document in compile_architecture_profile(profile, ROOT).included_documents
         }
         assert "FP-013" not in production_ids
+        assert "FP-014" not in production_ids
 
 
 def test_compilation_record_contains_required_metadata() -> None:

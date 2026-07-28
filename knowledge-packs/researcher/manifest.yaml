@@ -235,7 +235,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 117e2ddaf67818fa404b4835a6c3ed7c4958caa1b96320b8143226615e4c3934
+    checksum: 88de0e0df9a8a78ab0a8263c562ff1c3cd02fb8492afa3cf7c99a32a462ec5d7
     transform: none
   - pack_path: governance/Document-Map.md
     source_path: architecture/reference-architecture/Document-Map.md
@@ -246,7 +246,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: a153376827040879e12cfd07551d151b6730755099837c0d4c245966b92e3d25
+    checksum: 84342ed44d3b04cbc5d06484f4b6bf244754c7dccdc20e6d1891a6e09e61edaf
     transform: none
   - pack_path: templates/Industry-Twin-Maturity-Assessment-Template.md
     source_path: knowledge-packs/researcher/templates/Industry-Twin-Maturity-Assessment-Template.md

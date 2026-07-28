@@ -148,6 +148,7 @@ These papers define how Flora converts evidence into strategic commercial judgem
 ## Proposed product experience
 
 - [FP-013 — Executive Intelligence Workspace](founding-papers/FP-013-Executive-Intelligence-Workspace.md): proposes the executive-first inspection experience over governed Enterprise Intelligence. It is discoverable for review only and is not accepted architecture or production-profile material.
+- [FP-014 — Mission-Aware Executive Intelligence Composition](founding-papers/FP-014-Mission-Aware-Executive-Intelligence-Composition.md): extends FP-013 with proposed, deterministic Commercial Mission composition and evidence-led Reinvention Timing. It is discoverable for review only and is not accepted architecture, implementation evidence or production-profile material.
 
 ## Developer instruction note
 
