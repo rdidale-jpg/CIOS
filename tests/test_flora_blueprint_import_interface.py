@@ -38,9 +38,10 @@ def test_authorised_upload_validation_history_and_no_git_write(monkeypatch,tmp_p
 def test_upload_security_rejections_and_accessible_entry(monkeypatch,tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     page,status=import_blueprint_entry_page(HEADERS)
-    assert status == 200 and "Upload and validate" in page and "type='file'" in page
+    assert status == 200 and "Upload Twin" in page and "type='file'" in page
     denied,ds=import_blueprint_entry_page(BAD)
-    assert ds == 403 and "access denied" in denied.lower()
+    assert ds == 200 and "Upload Twin" in denied
+    assert "Package import needs attention" not in denied
     html,status,_=upload_and_validate_blueprint({"blueprint_zip":b"not zip"}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, HEADERS)
     assert status == 400 and "Canonical changes occurred: no" in html
     html,status,_=upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.exe","blueprint_zip.content_type":"application/octet-stream"}, HEADERS)
@@ -98,8 +99,9 @@ def test_owner_can_upload_review_and_import_without_explicit_blueprint_roles(mon
 def test_denied_uploads_have_role_aware_message_audit_and_no_state(monkeypatch,tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     page,status=import_blueprint_entry_page(READ_ONLY)
-    assert status == 403
+    assert status == 200
     assert "You do not have permission to import Blueprints in this workspace." in page
+    assert "Package import needs attention" not in page
     assert "Ask an administrator" not in page
     html,status,_=upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, READ_ONLY)
     assert status == 403
@@ -177,7 +179,7 @@ def test_denied_entry_page_renders_when_audit_persistence_fails(monkeypatch, tmp
     monkeypatch.setattr(ledger.BlueprintImportLedger, "append", fail_append)
     caplog.set_level("WARNING")
 
-    html, status = import_blueprint_entry_page(READ_ONLY)
+    html, status, _ = upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, READ_ONLY)
 
     assert status == 403
     assert "Package import needs attention" in html
@@ -203,7 +205,7 @@ def test_unavailable_var_data_style_path_no_longer_crashes_denied_page(monkeypat
     monkeypatch.setenv("FLORA_DATA_DIR", str(blocked_root))
     caplog.set_level("WARNING")
 
-    html, status = import_blueprint_entry_page(READ_ONLY)
+    html, status, _ = upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, READ_ONLY)
 
     assert status == 403
     assert "Package import needs attention" in html
@@ -217,7 +219,7 @@ def test_unavailable_var_data_style_path_no_longer_crashes_denied_page(monkeypat
 def test_writable_configured_directory_records_authorisation_audit(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path / "flora-data"))
 
-    html, status = import_blueprint_entry_page(READ_ONLY)
+    html, status, _ = upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, READ_ONLY)
 
     assert status == 403
     assert "Blueprint diagnostics could not be persisted" not in html
@@ -232,13 +234,14 @@ def test_owner_and_non_owner_authorisation_outcomes_unchanged_by_audit_fix(monke
     owner_page, owner_status = import_blueprint_entry_page(OWNER)
     reader_page, reader_status = import_blueprint_entry_page(READ_ONLY)
 
-    assert owner_status == 200 and "Upload and validate" in owner_page
-    assert reader_status == 403 and "Package receive permission checked</th><td>Failed" in reader_page
+    assert owner_status == 200 and "Upload Twin" in owner_page
+    assert reader_status == 200 and "Upload Twin" in reader_page
+    assert "Package import needs attention" not in reader_page
 
 
 def test_anonymous_blueprint_diagnostics_stop_after_account_failure(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
-    html, status = import_blueprint_entry_page({})
+    html, status, _ = upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, {})
     assert status == 403
     assert "Account recognised</th><td>Failed" in html
     assert "Workspace recognised</th><td>Not started" in html
@@ -252,7 +255,7 @@ def test_blueprint_get_and_post_share_cookie_session_identity(monkeypatch, tmp_p
     cookie_headers = {"Cookie": "flora_user=rob; flora_enterprises=synthetic-enterprise; flora_active_workspace=synthetic-enterprise; flora_roles=owner%2Ccanvas.view"}
     html, status = import_blueprint_entry_page(cookie_headers)
     assert status == 200
-    assert "Upload and validate" in html
+    assert "Upload Twin" in html
     result_html, post_status, _ = upload_and_validate_blueprint({"blueprint_zip": pkg()}, {"blueprint_zip.filename": "synthetic.zip", "blueprint_zip.content_type": "application/zip"}, cookie_headers)
     assert post_status == 200
     assert "Validation result" in result_html
@@ -396,7 +399,7 @@ def test_inspection_only_user_can_validate_but_cannot_review_or_promote(monkeypa
 
 def test_account_failure_summary_and_stage_table_use_same_canonical_stage(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
-    html, status = import_blueprint_entry_page({})
+    html, status, _ = upload_and_validate_blueprint({"blueprint_zip":pkg()}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, {})
     assert status == 403
     assert "Stage failed: Account recognised" in html
     assert "Account recognised</th><td>Failed" in html

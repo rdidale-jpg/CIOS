@@ -67,11 +67,12 @@ def test_blueprint_get_and_post_use_same_signed_session_and_anonymous_denied(mon
     enable(monkeypatch)
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     anon_page, anon_status = import_blueprint_entry_page({})
-    assert anon_status == 403
+    assert anon_status == 200
     assert "Sign in for pilot access" in anon_page
+    assert "Package import needs attention" not in anon_page
     cookie_headers = headers(issue_session_cookie(secure=False))
     page, status = import_blueprint_entry_page(cookie_headers)
-    assert status == 200 and "Upload and validate" in page
+    assert status == 200 and "Upload Twin" in page
     html, post_status, target = upload_and_validate_blueprint({"blueprint_zip": pkg({"enterprise_id":"CIOS"})}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, cookie_headers)
     assert post_status == 200
     assert "Validation result" in html
@@ -177,7 +178,7 @@ def test_unexpected_diagnostic_storage_failure_preserves_denied_context(monkeypa
         raise OSError("storage unavailable")
 
     monkeypatch.setattr(views.BlueprintImportLedger, "append", unavailable)
-    html, status = import_blueprint_entry_page(cookie_headers)
+    html, status, _ = upload_and_validate_blueprint({"blueprint_zip": pkg({"enterprise_id":"CIOS"})}, {"blueprint_zip.filename":"synthetic.zip","blueprint_zip.content_type":"application/zip"}, cookie_headers)
     assert status == 403
     assert "owner-1" in html and "CIOS" in html and "reader" in html
     assert "Blueprint diagnostics could not be persisted" in html

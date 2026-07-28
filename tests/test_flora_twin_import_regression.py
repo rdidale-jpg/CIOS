@@ -122,6 +122,42 @@ def test_import_route_loads_and_supported_upload_can_be_initiated(monkeypatch, t
     assert "Commercial Mission or an existing Twin selection is not required" in html
 
 
+def test_import_get_is_entry_only_even_without_workspace_or_upload_capability(monkeypatch, tmp_path):
+    """Navigation must never masquerade as a failed package submission."""
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+
+    html, status = import_blueprint_entry_page({})
+
+    assert status == 200
+    assert "name='expected_type'" in html
+    assert "name='blueprint_zip' type='file'" in html
+    assert "<button type='submit'>Upload Twin</button>" in html
+    assert "method='post' action='/blueprint-import/upload' enctype='multipart/form-data'" in html
+    assert "Workspace and upload access required" in html
+    assert "no package upload has been attempted" in html
+    assert "Package import needs attention" not in html
+    assert "Package import access denied" not in html
+    assert not (tmp_path / "blueprint_import").exists()
+
+
+def test_incomplete_form_submission_returns_entry_validation_not_diagnostics(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+
+    no_file, file_status, _ = upload_and_validate_blueprint(
+        {}, {"_form_submission": "true", "expected_type": "industry"}, HEADERS,
+    )
+    no_type, type_status, _ = upload_and_validate_blueprint(
+        {"blueprint_zip": pkg()},
+        {"_form_submission": "true", "blueprint_zip.filename": "twin.zip", "blueprint_zip.content_type": "application/zip"},
+        HEADERS,
+    )
+
+    assert file_status == 400 and "Choose a Twin package ZIP file." in no_file
+    assert type_status == 400 and "Select a supported Twin type." in no_type
+    assert "Package import needs attention" not in no_file + no_type
+    assert not (tmp_path / "blueprint_import" / "packages").exists()
+
+
 def test_valid_incomplete_candidate_redirects_to_executive_workspace_without_mission(monkeypatch, tmp_path):
     missing_missions = tmp_path / "no-commercial-missions.json"
     monkeypatch.setenv("FLORA_COMMERCIAL_MISSIONS_FILE", str(missing_missions))

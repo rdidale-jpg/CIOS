@@ -522,6 +522,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             self._redirect(f"/ask?question={quote_plus(question)}")
         elif self.path == "/blueprint-import/upload":
             fields, files = _parse_multipart(self.headers, raw_body)
+            fields["_form_submission"] = "true"
             html, status, target = upload_and_validate_blueprint(files, fields, self.headers)
             if status == 200:
                 self._redirect(target)
