@@ -32,6 +32,7 @@ from cios.applications.flora.flora_transparent import start_bt_digital_twin, flo
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
 from cios.applications.flora.twin_inspection import twin_inspection_page
 from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page, restage_confirm_page as blueprint_restage_confirm_page, restage_package as blueprint_restage_package, restage_progress_page as blueprint_restage_progress_page, restage_history_page as blueprint_restage_history_page, promotion_confirmation_page as blueprint_promotion_confirmation_page, cancellation_confirmation_page as blueprint_cancellation_confirmation_page, cancel_import as blueprint_cancel_import
+from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page
 from cios.applications.flora.enterprise_intelligence.views import executive_intelligence_brief_page
 from cios.applications.flora.enterprise_intelligence.pipeline import run_pipeline as run_banking_pipeline
 from cios.applications.flora.enterprise_intelligence.models import ReasoningRequestV1
@@ -195,7 +196,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(html, status=status)
             elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/intelligence"):
                 run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/intelligence")
-                html, status = twin_inspection_page(run_id, self.headers, "candidate")
+                html, status = executive_workspace_page(run_id, self.headers)
                 self._html(html, status=status)
             elif parsed.path == "/blueprint-import":
                 html, status = import_blueprint_entry_page(self.headers)
@@ -233,7 +234,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(html, status=status)
             elif parsed.path.startswith("/blueprint-import/"):
                 run_id = parsed.path.removeprefix("/blueprint-import/")
-                html, status = validation_result_page(run_id, self.headers)
+                html, status = executive_workspace_page(run_id, self.headers)
                 self._html(html, status=status)
             elif _is_enterprise_intelligence_path(parsed.path):
                 enterprise_id = [part for part in parsed.path.split('/') if part][1]
@@ -406,8 +407,11 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             self._redirect(f"/ask?question={quote_plus(question)}")
         elif self.path == "/blueprint-import/upload":
             fields, files = _parse_multipart(self.headers, raw_body)
-            html, status, _target = upload_and_validate_blueprint(files, fields, self.headers)
-            self._html(html, status=status)
+            html, status, target = upload_and_validate_blueprint(files, fields, self.headers)
+            if status == 200:
+                self._redirect(target)
+            else:
+                self._html(html, status=status)
         elif self.path.startswith("/blueprint-import/") and self.path.endswith("/restage"):
             run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/restage")
             html, status = blueprint_restage_package(run_id, form, self.headers)
