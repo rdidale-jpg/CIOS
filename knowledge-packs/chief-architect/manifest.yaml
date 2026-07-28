@@ -103,14 +103,14 @@ documents:
     title: Enterprise Model Specification
     source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-001-Enterprise-Model-Specification.md
     pack_path: enterprise-intelligence/EI-001-Enterprise-Model-Specification.md
-    checksum: 81a6351f43e0d1444252ab23428caf2a6731ef61f5b1cacccb3e5a0a17cadf1c
+    checksum: fd0ed56b54328ae0bff73fcc8c430a7906860d4abbf6a0522d175d146425be65
     authority: enterprise-intelligence-authority
     inclusion_reason: Core Enterprise Intelligence authority
   - document_id: EI-002
     title: Enterprise Knowledge Graph
     source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-002-Enterprise-Knowledge-Graph.md
     pack_path: enterprise-intelligence/EI-002-Enterprise-Knowledge-Graph.md
-    checksum: 65f5003ff19031ea6fbd18b19ccfbe02b26753e0c37627477c788c77e34d0cbd
+    checksum: 848cb0078f57379239f02fec7b3b5c583ecce293ebf65f518052f867022d4f61
     authority: enterprise-intelligence-authority
     inclusion_reason: Core Enterprise Intelligence authority
   - document_id: EI-003
@@ -131,7 +131,7 @@ documents:
     title: Commercial Reasoning Framework
     source_path: architecture/enterprise-intelligence/volume-2-commercial-intelligence/EI-004-Commercial-Reasoning-Framework.md
     pack_path: enterprise-intelligence/EI-004-Commercial-Reasoning-Framework.md
-    checksum: ce5c48d4fe989209b936cb5555b110b8af83fd41f649fc1697020233f1dfe42e
+    checksum: 03711e7f0fa48b739f95d86e08129e04a9ad64611ff83b73e62c079f7c3b3e10
     authority: enterprise-intelligence-authority
     inclusion_reason: Required recommendation-doctrine source referenced by source-map.yaml and WP-011 commercial reasoning runtime evidence; included with documented draft status from the canonical EI source
   - document_id: EIF-001
@@ -145,7 +145,7 @@ documents:
     title: Knowledge Pack Specification v1.0
     source_path: architecture/specifications/knowledge-packs/Knowledge-Pack-Specification-v1.0.md
     pack_path: architecture/Knowledge-Pack-Specification-v1.0.md
-    checksum: 0f84b3f501402f7b60870352632c43d543d77a2e82506d8b8c26d5ca9dc9abf9
+    checksum: 35a87d917a0229fd6e69c2045f2831980a4792f12e23521c642b321e82738622
     authority: knowledge-pack-specification
     inclusion_reason: Knowledge Pack validation and manifest authority
   - document_id: REF-001
