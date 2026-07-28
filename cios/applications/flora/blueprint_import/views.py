@@ -34,6 +34,7 @@ from .maturity import assess_maturity
 from .twin_governance import (DownstreamReconciliationRepository, TwinDependencyService,
                               GovernedIdentityResolutionRepository, assess_impacts,
                               governed_semantics, project_twin_identity)
+from .relevance import project_candidate_relevance, relevance_counts
 
 MAX_UPLOAD_BYTES = 50 * 1024 * 1024
 ZIP_MIME_TYPES = {"application/zip", "application/x-zip-compressed", "application/octet-stream", ""}
@@ -464,6 +465,7 @@ def _executive_review(ctx, job, details, counts, proposed, query, message="") ->
     package = ctx["package"]; inspection = package.package_inspection or {}
     identity = project_twin_identity(package); unresolved = _identity_unresolved(package)
     candidates = details.get("candidates", []) or ctx.get("candidates", [])
+    relevance = [(c, project_candidate_relevance(c, package, identity)) for c in candidates]
     unknowns = [c for c in candidates if _business_category(c) == "Unknowns"]
     contradictions = [c for c in candidates if _business_category(c) == "Contradictions"]
     quarantined = sum(c.get("validation_status") == "quarantined" for c in candidates)
@@ -483,10 +485,17 @@ def _executive_review(ctx, job, details, counts, proposed, query, message="") ->
                "No owner-backed executive summary was supplied. Review the available candidate intelligence by business domain.")
     why = inspection.get("commercial_significance") or inspection.get("commercial_consequence") or "Commercial consequence was not supplied by the package owner."
     recommendation = "Resolve required decisions before promotion" if not eligible else "Ready for governed promotion review"
-    identity_html = f"""<section class='hero candidate-review-identity' aria-labelledby='candidate-review-title'><p class='pill'>Candidate intelligence · not governed</p><h1 id='candidate-review-title'>{escape(name)}</h1><p><strong>Proposed {escape(twin_type)}</strong> · subject: {escape(str(subject))} · scope: {escape(str(scope))}</p><p><strong>Canonical owner:</strong> {escape(str(owner))}</p><p><strong>Candidate status:</strong> pre-acceptance · <strong>Review status:</strong> {escape(str(job.get('status','Preparing')))} · <strong>Promotion eligibility:</strong> {'Eligible for confirmation' if eligible else 'Blocked'}</p><p class='warning'><strong>No canonical change has yet occurred.</strong> This candidate remains distinct from accepted governed intelligence.</p><p><strong>Review recommendation:</strong> {escape(recommendation)}</p><p><strong>Highest-priority blocker:</strong> {escape(blocker)}</p><p><a href='/blueprint-import/{escape(package.import_run_id)}/intelligence'>Return to Inspect with this candidate context</a></p></section>"""
+    geography = inspection.get("geography") or inspection.get("geographic_scope") or "Not supplied"
+    horizon = inspection.get("time_horizon") or inspection.get("temporal_scope") or "Not supplied"
+    subsectors = inspection.get("included_sub_sectors") or inspection.get("sub_sectors") or "Not supplied"
+    if isinstance(subsectors, (list, tuple)):
+        subsectors = ", ".join(str(value) for value in subsectors)
+    identity_html = f"""<section class='hero candidate-review-identity' aria-labelledby='candidate-review-title'><p class='pill'>Candidate intelligence · not governed</p><h1 id='candidate-review-title'>{escape(name)}</h1><h2>Twin context and governed scope</h2><p><strong>Proposed {escape(twin_type)}</strong> · primary subject: {escape(str(subject))} · governed scope: {escape(str(scope))}</p><p><strong>Geography:</strong> {escape(str(geography))} · <strong>Time horizon:</strong> {escape(str(horizon))}</p><p><strong>Included sub-sectors:</strong> {escape(str(subsectors))} · <strong>Canonical owner:</strong> {escape(str(owner))}</p><p><strong>Unresolved scope fields:</strong> {escape('Primary subject, governed scope or canonical owner' if unresolved else 'None reported')}</p><p><strong>Candidate status:</strong> pre-acceptance · <strong>Review status:</strong> {escape(str(job.get('status','Preparing')))} · <strong>Promotion eligibility:</strong> {'Eligible for confirmation' if eligible else 'Blocked'}</p><p class='warning'><strong>No canonical change has yet occurred.</strong> This candidate remains distinct from accepted governed intelligence.</p><p><strong>Review recommendation:</strong> {escape(recommendation)}</p><p><strong>Highest-priority blocker:</strong> {escape(blocker)}</p><p><a href='/blueprint-import/{escape(package.import_run_id)}/review#identity-resolution'>Resolve identity and scope in the existing workflow</a> · <a href='/blueprint-import/{escape(package.import_run_id)}/intelligence'>Return to Inspect with this candidate context</a></p></section>"""
     executive = f"""<section class='card executive-summary' aria-labelledby='executive-summary-title'><h2 id='executive-summary-title'>Executive intelligence summary</h2><p>{escape(str(summary))}</p><p><strong>Why it matters commercially:</strong> {escape(str(why))}</p><p><strong>Most material uncertainty:</strong> {escape(_challenge_preview(unknowns, 'No material Unknown was supplied.'))}</p><p><strong>Most material contradiction:</strong> {escape(_challenge_preview(contradictions, 'No material Contradiction was supplied.'))}</p><p><strong>Freshness and Evidence basis:</strong> {escape(str(inspection.get('evidence_cut_off') or 'Not supplied'))}; Evidence remains candidate Evidence until promotion.</p></section>"""
-    conclusions = _material_conclusions(candidates, package.import_run_id)
-    impact = _promotion_impact(proposed, counts, quarantined, unsupported)
+    if unresolved:
+        executive = "<section class='card executive-summary warning'><h2>Executive intelligence summary</h2><h3>Executive prioritisation is provisional until scope is confirmed</h3><p>The package does not establish enough owner-backed Twin identity and governed scope to compose a coherent executive summary. Candidate statements are preserved and grouped below; scope and classification resolution is the principal blocker.</p></section>"
+    conclusions = _material_conclusions(relevance, package.import_run_id, unresolved)
+    impact = _promotion_impact(proposed, counts, quarantined, unsupported, [r for _, r in relevance])
     decisions = _decision_area(package, unresolved, unknowns, contradictions, quarantined, unsupported, rec)
     return identity_html + _notice(message) + executive + conclusions + impact + decisions
 
@@ -502,27 +511,37 @@ def _challenge_preview(items, absent):
     return _payload_label(items[0]) if items else absent
 
 
-def _material_conclusions(candidates, run_id):
+def _material_conclusions(relevance, run_id, scope_unresolved=False):
     owned = []
-    for c in candidates:
+    for c, r in relevance:
         p = c.get("payload") or {}
         if p.get("conclusion") or p.get("statement"):
-            owned.append(c)
+            owned.append((c, r))
     if not owned:
         return "<section class='card material-conclusions'><h2>Material proposed conclusions</h2><p><strong>No owner-backed material conclusions were supplied.</strong> No conclusion or commercial consequence has been invented; inspect the available intelligence by business domain below.</p></section>"
-    cards = []
-    for c in owned[:5]:
-        p=c.get("payload") or {}; label=_payload_label(c)
-        consequence=p.get("commercial_consequence") or p.get("commercial_significance") or "Not supplied"
-        support=p.get("evidence_basis") or p.get("support_summary") or "No support summary supplied; inspect candidate Evidence and lineage."
-        challenge=p.get("challenge") or p.get("uncertainty") or "No owner-supplied challenge preview."
-        cards.append(f"<article class='conclusion'><p class='pill'>{escape(str(p.get('truth_class') or c.get('validation_status') or 'candidate'))}</p><h3>{escape(label)}</h3><p><strong>Commercial consequence:</strong> {escape(str(consequence))}</p><p><strong>Freshness:</strong> {escape(str(p.get('freshness') or 'Not supplied'))} · <strong>Confidence or qualification:</strong> {escape(str(p.get('confidence') or p.get('qualification') or 'Not supplied'))}</p><p><strong>Challenge preview:</strong> {escape(str(challenge))}</p><details class='trust-panel'><summary><strong>Why should I believe this?</strong></summary><h4>What supports it?</h4><p>{escape(str(support))}</p><p><a href='/blueprint-import/{escape(run_id)}/inspect#evidence'>Inspect supporting Evidence</a></p><h4>What could make this wrong, incomplete or unsafe to rely upon?</h4><p>{escape(str(challenge))}</p><p>Observations, source provenance, contradictory Evidence, assumptions, Unknowns and reasoning or research lineage are shown only where supplied by their current owners.</p></details></article>")
-    return "<section class='card material-conclusions'><h2>Material proposed conclusions</h2>"+"".join(cards)+"</section>"
+    groups = (("core", "Core to this Industry Twin"), ("relevant sub-sector", "Relevant sub-sector intelligence"), ("adjacent", "Adjacent or cross-industry intelligence"), ("unresolved", "Relevance unresolved"), ("out of scope", "Out of scope"))
+    sections = []
+    for status, heading in groups:
+        cards = []
+        for c, r in [item for item in owned if item[1].status == status]:
+            p = c.get("payload") or {}; label = _payload_label(c)
+            consequence = r.commercial_consequence or "Not supplied"
+            support = p.get("evidence_basis") or p.get("support_summary") or "No support summary supplied; inspect candidate Evidence and lineage."
+            challenge = p.get("challenge") or p.get("uncertainty") or "No owner-supplied challenge preview."
+            eligibility = "Primary executive conclusion" if (r.primary_eligible and not scope_unresolved and c.get("validation_status") != "quarantined" and c.get("candidate_object_class") != "contradiction") else "Provisional — not a primary executive conclusion"
+            relevant_to = " · ".join(v for v in (r.governed_subject, r.industry, r.sub_sector_or_domain) if v) or "Not established"
+            cards.append(f"<article class='conclusion'><p class='pill'>{escape(eligibility)} · {escape(str(r.truth_class or 'Truth class not supplied'))}</p><h3>{escape(label)}</h3><p><strong>Relevant to:</strong> {escape(relevant_to)}</p><p><strong>Why it belongs here:</strong> {escape(str(r.relevance_basis or 'Not supplied'))}</p><p><strong>Why it matters to this Twin:</strong> {escape(str(r.decision_relevance or 'Decision relevance not supplied'))}</p><p><strong>Commercial consequence:</strong> {escape(str(consequence))}</p><p><strong>Scope and geography:</strong> {escape(str(r.sub_sector_or_domain or 'Not supplied'))}; {escape(str(r.geography or 'Not supplied'))} · <strong>Period:</strong> {escape(str(r.temporal_scope or 'Not supplied'))}</p><p><strong>Freshness:</strong> {escape(str(r.freshness or 'Not supplied'))} · <strong>Evidence basis:</strong> {escape(str(r.evidence_state or support))}</p><p><strong>Challenge preview:</strong> {escape(str(challenge))}</p><details class='trust-panel relevance-panel'><summary><strong>Why is this relevant here?</strong></summary><p><strong>Proposed Twin or domain:</strong> {escape(relevant_to)}</p><p><strong>Source relationship:</strong> {escape(str(r.supporting_relationship or 'Not supplied'))}</p><p><strong>Classification basis:</strong> {escape(str(r.relevance_basis or 'Not supplied'))}</p><p><strong>Package metadata / owner:</strong> {escape(str(r.owner or 'Not supplied'))}</p><p><strong>Relevant geography and period:</strong> {escape(str(r.geography or 'Not supplied'))}; {escape(str(r.temporal_scope or 'Not supplied'))}</p><p><strong>Relevance status:</strong> {escape(r.status)}</p><p><strong>Unresolved assumptions:</strong> {escape(str(r.unresolved_scope_reason or 'None supplied'))}</p></details><details class='trust-panel'><summary><strong>Why should I believe this?</strong></summary><h4>What supports it?</h4><p>{escape(str(support))}</p><p><a href='/blueprint-import/{escape(run_id)}/inspect#evidence'>Inspect supporting Evidence</a></p><h4>What could make this wrong, incomplete or unsafe to rely upon?</h4><p>{escape(str(challenge))}</p></details></article>")
+        if cards:
+            sections.append(f"<section class='relevance-group'><h3>{escape(heading)}</h3>{''.join(cards)}</section>")
+    return "<section class='card material-conclusions'><h2>Material proposed conclusions</h2>"+("".join(sections) or "<p>No statements have an explicit owner-backed relevance status. Resolve scope and classification before executive prioritisation.</p>")+"</section>"
 
 
-def _promotion_impact(proposed, counts, quarantined, unsupported):
+def _promotion_impact(proposed, counts, quarantined, unsupported, relevance=None):
+    rc = relevance_counts(relevance or [])
+    relevance_groups=(("In-scope intelligence proposed for promotion", rc.get("core",0)+rc.get("relevant sub-sector",0)), ("Adjacent intelligence retained but not promoted",rc.get("adjacent",0)), ("Unresolved intelligence requiring review",rc.get("unresolved",0)), ("Out-of-scope intelligence excluded",rc.get("out of scope",0)), ("Quarantined intelligence",quarantined))
     groups=(("New intelligence", proposed.get("Creates",0)),("Confirmed intelligence",proposed.get("Unchanged",0)),("Proposed amendments",proposed.get("Updates",0)),("New or changed relationships",proposed.get("Relationships",0)),("Conflicts requiring review",proposed.get("Conflicts",0)),("Quarantined or excluded intelligence",quarantined+int(proposed.get("Projection-only",0))), ("Unsupported content",unsupported),("Items requiring human judgement",proposed.get("Unresolved references",0)),("Items that will not be promoted",int(counts.get("Rejected",0))+int(proposed.get("Ignored",0))))
-    items="".join(f"<li><strong>{escape(label)}:</strong> {int(value)} item(s) according to the existing mutation and validation plan.</li>" for label,value in groups if int(value))
+    groups=relevance_groups+groups
+    items="".join(f"<li><strong>{escape(label)}:</strong> {int(value)} item(s) according to the existing mutation, validation or presentation relevance projection.</li>" for label,value in groups if int(value))
     return "<section class='card promotion-impact'><h2>What acceptance would change</h2><p>Promotion would apply only the governed effects below; it would not automatically resolve excluded or unresolved intelligence.</p><ul>"+(items or "<li>No promotable effect is currently reported.</li>")+"</ul></section>"
 
 
