@@ -12,7 +12,7 @@ from uuid import uuid4
 from cios.applications.flora.access import authenticated_flora_user, active_flora_workspace, blueprint_upload_authorisation, can_access_enterprise, flora_roles, is_cios_owner, user_enterprise_access
 from cios.applications.flora.workspace.views import _page
 from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRepository, repair_blueprint_canvas_access
-from cios.applications.flora.storage import PersistenceError, storage_mode
+from cios.applications.flora.storage import storage_mode
 from cios.applications.flora.live.runtime import deployment_metadata
 
 from .archive import sha256_bytes
@@ -89,7 +89,7 @@ def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, i
     if decision.decision != "allowed":
         ref, audit_warning = _audit_authorisation("package_upload_authorisation_denied", headers, "Package receive permission checked", decision)
         return _safe_failure("Package import access denied", "Package receive permission checked", False, False, _permission_guidance(headers, decision), decision, ref, audit_warning), 403
-    body = _workflow_progress("upload") + f"""<section class='hero'><h1>Import Twin</h1><p>Upload a governed Twin package for contract detection, inspection, validation and candidate creation. A Commercial Mission or an existing Twin selection is not required.</p>{_notice(message)}</section>
+    body = _workflow_progress("upload") + _authorisation_context(decision) + f"""<section class='hero'><h1>Import Twin</h1><p>Upload a governed Twin package for contract detection, inspection, validation and candidate creation. A Commercial Mission or an existing Twin selection is not required.</p>{_notice(message)}</section>
     <section class='card'><h2>Upload package</h2><p><strong>Supported format:</strong> .zip package. <strong>Maximum size:</strong> {MAX_UPLOAD_BYTES // (1024*1024)} MB.</p><p class='muted'>Packages may contain confidential intelligence. Upload only packages you are authorised to use.</p><p><strong>Uploading does not change canonical state. Flora detects the package contract before applying contract-specific wording.</strong></p><form method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><label for='expected_type'>What kind of Twin do you expect?</label><select id='expected_type' name='expected_type' required>{''.join(f"<option value='{t}'>{escape(t.replace('_',' ').title())}</option>" for t in TWIN_TYPES)}</select><p class='muted'>The expectation never overrides manifest identity, detected types, schema validation or evidence.</p><label for='blueprint_zip'>Package ZIP file</label><input id='blueprint_zip' name='blueprint_zip' type='file' accept='.zip,application/zip' required><p><button type='submit'>Upload and validate</button></p><p><a href='/digital-twins'>Cancel</a></p></form></section>
     <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous package imports</a></p></section>"""
     return _page("Import Twin", body), 200
@@ -1057,6 +1057,18 @@ def _failure_summary(message: str) -> str:
     details = escape(str(message), quote=True)
     return f"<p>{len(parts)} validation failure details were reported. First affected items:</p><ul>{examples}</ul><h3>Grouped failure reasons</h3><table><tbody>{groups}</tbody></table><details><summary>Expandable failure details</summary><pre>{details}</pre></details><p><a download='blueprint-failure-details.txt' href='data:text/plain,{details}'>Download details</a></p>"
 
+
+def _authorisation_context(decision) -> str:
+    """Render the already-resolved, non-secret upload authority context."""
+    capability = "granted" if decision.required_permission in decision.effective_permissions else "denied"
+    return f"""<section class='card'><h2>Import authorisation</h2><table>
+    <tr><th>Signed-in account</th><td>{escape(decision.user_id)}</td></tr>
+    <tr><th>Active workspace</th><td>{escape(decision.active_workspace)}</td></tr>
+    <tr><th>Workspace membership</th><td>{escape(decision.resolved_membership)}</td></tr>
+    <tr><th>Effective Blueprint role</th><td>{escape(decision.resolved_role)}</td></tr>
+    <tr><th>Required capability</th><td><code>{escape(decision.required_permission)}</code></td></tr>
+    <tr><th>Capability decision</th><td>{capability}</td></tr></table></section>"""
+
 def _safe_failure(message, stage, changed, retry, next_step, decision=None, diagnostic_ref: str = "", audit_warning: str = "", import_run_id: str = ""):
     diagnostic_ref = diagnostic_ref or f"bpi-diag-{uuid4().hex[:12]}"
     unavailable = "Authorisation context unavailable after failure"
@@ -1093,6 +1105,9 @@ def _permission_guidance(headers: Any, decision=None) -> str:
         return "Sign out and sign back in to refresh owner permissions. If it still fails, contact support with the diagnostic reference."
     if not authenticated_flora_user(headers):
         return "Sign in for pilot access. Sign in and select an authorised workspace before importing a package."
+    if decision.denial_reason:
+        return ("You do not have permission to import Blueprints in this workspace. "
+                f"Access was denied: {decision.denial_reason}. Contact a workspace owner if this access is required.")
     return "You do not have permission to import Blueprints in this workspace."
 
 
@@ -1136,7 +1151,11 @@ def _audit_authorisation(event_type: str, headers: Any, stage: str, decision, pa
     }
     try:
         BlueprintImportLedger().append(event_type, payload)
-    except PersistenceError as exc:
+    except Exception as exc:
+        # Diagnostics are best-effort.  Storage adapters can fail with an
+        # OSError (or another implementation-specific exception) before they
+        # have an opportunity to wrap it as PersistenceError; none of those
+        # failures may replace the original access decision.
         path = str(BlueprintImportLedger().path.parent)
         warning = {
             "message": "Blueprint diagnostics could not be persisted.",
