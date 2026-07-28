@@ -9,6 +9,7 @@ import json
 import os
 import re
 import tempfile
+import uuid
 from html import escape
 from html.parser import HTMLParser
 from pathlib import Path
@@ -30,7 +31,17 @@ from cios.applications.flora.storage import startup_storage_status
 from cios.applications.flora.live.runtime import application_revision, deployment_metadata
 from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, financial_intelligence_safe_support_report_payload, load_run, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id, blueprint_upload_authorisation
-from cios.applications.flora.pilot_auth import audit as pilot_audit, clear_session_cookie, issue_session_cookie, sign_in_page, validate_secret
+from cios.applications.flora.pilot_auth import (
+    audit as pilot_audit,
+    clear_session_cookie,
+    configuration_error_page,
+    issue_session_cookie,
+    pilot_auto_sign_in_status,
+    pilot_banner_html,
+    resolve_pilot_session,
+    sign_in_page,
+    validate_secret,
+)
 from cios.applications.flora.flora_transparent import start_bt_digital_twin, flora_payload
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
 from cios.applications.flora.twin_inspection import twin_inspection_page
@@ -54,7 +65,18 @@ FLORA_PORT_ENV = "FLORA_PORT"
 HEALTH_PAYLOAD = {"status": "healthy", "service": "flora"}
 
 def deployment_payload() -> dict[str, str]:
-    return {"service": "flora", **deployment_metadata()}
+    auto_status = pilot_auto_sign_in_status()
+    payload = {"service": "flora", **deployment_metadata()}
+    if auto_status.requested:
+        payload.update({
+            "pilot_auto_sign_in": "active" if auto_status.active else "refused",
+            "pilot_environment": auto_status.environment or "unconfigured",
+            "pilot_security_warning": "Pilot auto-sign-in grants the configured pilot identity to anyone able to reach this service.",
+            "service_access_restriction": "trusted-proxy-headers-enabled" if os.getenv("FLORA_TRUST_PROXY_HEADERS", "0").lower() in {"1", "true", "yes", "on"} else "not-configured-by-Flora",
+        })
+        if auto_status.failed_condition:
+            payload["pilot_failed_condition"] = auto_status.failed_condition
+    return payload
 CASE_SLUGS = {"ThamesWater", "NationalGrid", "BT", "Vodafone"}
 
 
@@ -170,6 +192,47 @@ class FloraWebHandler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:  # noqa: N802 - stdlib callback name
         parsed = urlparse(self.path)
         try:
+            auto_status = pilot_auto_sign_in_status()
+            if auto_status.requested and parsed.path not in {"/health", "/deployment"} and not resolve_pilot_session(self.headers):
+                correlation_id = self.headers.get("X-Request-Id", "") or str(uuid.uuid4())
+                if not auto_status.active:
+                    pilot_audit(
+                        "auto_sign_in_configuration_failure",
+                        authentication_mode="pilot_auto_sign_in",
+                        deployment_environment=auto_status.environment,
+                        correlation_id=correlation_id,
+                        failed_condition=auto_status.failed_condition,
+                    )
+                    self._html(configuration_error_page(auto_status.failed_condition), status=503)
+                    return
+                # This is the same canonical signed-cookie issuance and session
+                # resolver used by successful secret authentication.
+                session_cookie = issue_session_cookie()
+                cookie_headers = {"Cookie": session_cookie.split(";", 1)[0]}
+                decision = blueprint_upload_authorisation(cookie_headers)
+                if decision.resolved_membership != "resolved" or not decision.resolved_role:
+                    failed = "pilot owner membership or effective role could not be resolved"
+                    pilot_audit(
+                        "auto_sign_in_configuration_failure",
+                        authentication_mode="pilot_auto_sign_in",
+                        deployment_environment=auto_status.environment,
+                        correlation_id=correlation_id,
+                        failed_condition=failed,
+                    )
+                    self._html(configuration_error_page(failed), status=503)
+                    return
+                pilot_audit(
+                    "auto_sign_in_success",
+                    user_id=decision.user_id,
+                    workspace=decision.active_workspace,
+                    role=decision.resolved_role,
+                    authentication_mode="pilot_auto_sign_in",
+                    deployment_environment=auto_status.environment,
+                    correlation_id=correlation_id,
+                )
+                destination = "/flora" if parsed.path == "/pilot-sign-in" else self.path
+                self._redirect(destination, set_cookie=session_cookie)
+                return
             if parsed.path == "/health":
                 self._json(HEALTH_PAYLOAD)
             elif parsed.path == "/deployment":
@@ -634,6 +697,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             self.send_error(404, "Flora web route not found")
 
     def _html(self, html: str, status: int = 200, set_cookie: str = "") -> None:
+        auto_status = pilot_auto_sign_in_status()
+        if auto_status.active and resolve_pilot_session(self.headers) and "</body" in html.lower():
+            html = re.sub(r"</body\s*>", pilot_banner_html() + "</body>", html, count=1, flags=re.IGNORECASE)
         self._body(html.encode("utf-8"), "text/html; charset=utf-8", status, set_cookie=set_cookie)
 
     def _json(self, payload: dict, status: int = 200) -> None:
@@ -1261,6 +1327,17 @@ def run(host: str | None = None, port: int | None = None) -> None:
         flush=True,
     )
     print(f"Flora storage {storage['status']}: {storage['data_root']}", flush=True)
+    auto_status = pilot_auto_sign_in_status()
+    if auto_status.requested:
+        print("WARNING: Pilot auto-sign-in grants the configured pilot identity to anyone able to reach this service.", flush=True)
+        print(
+            "Flora pilot auto-sign-in "
+            f"status={'active' if auto_status.active else 'refused'} "
+            f"environment={auto_status.environment or 'unconfigured'} "
+            f"service_access_restriction={'trusted-proxy-headers-enabled' if os.getenv('FLORA_TRUST_PROXY_HEADERS', '0').lower() in {'1', 'true', 'yes', 'on'} else 'not-configured-by-Flora'}"
+            + (f" failed_condition={auto_status.failed_condition}" if auto_status.failed_condition else ""),
+            flush=True,
+        )
     if not storage.get("ready"):
         print({"event": "flora_storage_unavailable", "data_root": storage.get("data_root"), "storage_mode": storage.get("storage_mode"), "error": storage.get("error")}, flush=True)
     server = ThreadingHTTPServer((bind_host, bind_port), FloraWebHandler)

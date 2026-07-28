@@ -9,7 +9,7 @@ from cios.applications.flora.access import (
     user_enterprise_access,
 )
 from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint
-from cios.applications.flora.pilot_auth import clear_session_cookie, issue_session_cookie
+from cios.applications.flora.pilot_auth import clear_session_cookie, issue_session_cookie, pilot_auto_sign_in_status
 from tests.test_flora_blueprint_import_validation import pkg
 
 
@@ -24,6 +24,110 @@ def enable(monkeypatch):
 
 def headers(cookie: str):
     return {"Cookie": cookie.split(";", 1)[0]}
+
+
+def enable_auto(monkeypatch):
+    enable(monkeypatch)
+    monkeypatch.setenv("FLORA_ENVIRONMENT", "pilot")
+    monkeypatch.setenv("FLORA_PILOT_AUTO_SIGN_IN", "true")
+    monkeypatch.setenv("FLORA_PILOT_SESSION_SIGNING_KEY", "independent-test-signing-key")
+
+
+def test_pilot_auto_sign_in_defaults_false_and_refuses_non_pilot(monkeypatch):
+    enable(monkeypatch)
+    monkeypatch.delenv("FLORA_PILOT_AUTO_SIGN_IN", raising=False)
+    assert pilot_auto_sign_in_status().requested is False
+    monkeypatch.setenv("FLORA_PILOT_AUTO_SIGN_IN", "true")
+    monkeypatch.setenv("FLORA_PILOT_SESSION_SIGNING_KEY", "key")
+    monkeypatch.setenv("FLORA_ENVIRONMENT", "production")
+    status = pilot_auto_sign_in_status()
+    assert status.requested is True and status.active is False
+    assert "environment" in status.failed_condition
+
+
+@pytest.mark.parametrize(
+    ("missing", "expected"),
+    (("FLORA_PILOT_OWNER_ID", "owner"), ("FLORA_PILOT_WORKSPACE", "workspace"), ("FLORA_PILOT_ROLE", "membership")),
+)
+def test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely(monkeypatch, missing, expected):
+    enable_auto(monkeypatch)
+    monkeypatch.setenv(missing, "")
+    status = pilot_auto_sign_in_status()
+    assert status.active is False
+    assert expected in status.failed_condition
+
+
+def test_auto_sign_in_restores_route_reuses_canonical_session_and_shows_banner(monkeypatch):
+    import threading
+    from http.client import HTTPConnection
+    from http.server import ThreadingHTTPServer
+    import cios.applications.flora.web.app as web_app
+
+    enable_auto(monkeypatch)
+    monkeypatch.delenv("FLORA_PILOT_ACCESS_SECRET", raising=False)
+    issued = []
+    audited = []
+    real_issue = web_app.issue_session_cookie
+    monkeypatch.setattr(web_app, "issue_session_cookie", lambda *a, **k: issued.append(real_issue(*a, **k)) or issued[-1])
+    monkeypatch.setattr(web_app, "pilot_audit", lambda event, **payload: audited.append((event, payload)))
+    server = ThreadingHTTPServer(("127.0.0.1", 0), web_app.FloraWebHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True); thread.start()
+    try:
+        conn = HTTPConnection("127.0.0.1", server.server_port)
+        conn.request("GET", "/governance?view=pilot", headers={"X-Request-Id": "corr-1"})
+        response = conn.getresponse(); response.read(); response_headers = dict(response.getheaders()); conn.close()
+        assert response.status == 303 and response_headers["Location"] == "/governance?view=pilot"
+        assert len(issued) == 1
+        cookie = response_headers["Set-Cookie"]
+        assert cookie == issued[0]
+        assert blueprint_upload_authorisation(headers(cookie)).decision == "allowed"
+        event, context = audited[-1]
+        assert event == "auto_sign_in_success"
+        assert context == {
+            "user_id": "owner-1", "workspace": "CIOS", "role": "cios_owner",
+            "authentication_mode": "pilot_auto_sign_in", "deployment_environment": "pilot",
+            "correlation_id": "corr-1",
+        }
+
+        conn = HTTPConnection("127.0.0.1", server.server_port)
+        conn.request("GET", "/governance?view=pilot", headers={"Cookie": cookie.split(";", 1)[0]})
+        response = conn.getresponse(); page = response.read().decode(); conn.close()
+        assert response.status == 200
+        assert "Pilot auto-sign-in active" in page and "Acting as configured pilot owner" in page
+        assert "Sign out" in page and "Pilot access secret" not in page
+
+        conn = HTTPConnection("127.0.0.1", server.server_port)
+        conn.request("POST", "/pilot-sign-out", headers={"Cookie": cookie.split(";", 1)[0]})
+        response = conn.getresponse(); response.read(); signed_out_headers = dict(response.getheaders()); conn.close()
+        assert response.status == 303
+        assert "flora_pilot_session=" in signed_out_headers["Set-Cookie"]
+        assert "Max-Age=0" in signed_out_headers["Set-Cookie"]
+    finally:
+        server.shutdown(); server.server_close(); thread.join(timeout=2)
+
+
+def test_auto_sign_in_refuses_unresolved_membership_without_returning_cookie(monkeypatch):
+    import threading
+    from dataclasses import replace
+    from http.client import HTTPConnection
+    from http.server import ThreadingHTTPServer
+    import cios.applications.flora.web.app as web_app
+
+    enable_auto(monkeypatch)
+    real_authorisation = web_app.blueprint_upload_authorisation
+    monkeypatch.setattr(web_app, "blueprint_upload_authorisation", lambda h: replace(real_authorisation(h), resolved_membership="unresolved"))
+    server = ThreadingHTTPServer(("127.0.0.1", 0), web_app.FloraWebHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True); thread.start()
+    try:
+        conn = HTTPConnection("127.0.0.1", server.server_port)
+        conn.request("GET", "/flora")
+        response = conn.getresponse(); page = response.read().decode(); response_headers = dict(response.getheaders()); conn.close()
+        assert response.status == 503
+        assert "membership or effective role could not be resolved" in page
+        assert "Pilot access secret" not in page
+        assert "Set-Cookie" not in response_headers
+    finally:
+        server.shutdown(); server.server_close(); thread.join(timeout=2)
 
 
 def test_valid_pilot_session_cookie_resolves_owner_workspace_role_and_policy(monkeypatch):
