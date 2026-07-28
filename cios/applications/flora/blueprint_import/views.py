@@ -125,6 +125,9 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
     try:
         BlueprintPackageValidator().validate_and_stage(record.package_ref, actor, headers)
         assert before == _canonical_marker(), "Upload and validation must not mutate canonical memory"
+        # Keep the established service contract (including its inspection
+        # response) for non-HTTP callers.  The web adapter follows the returned
+        # target, whose default GET experience is the Executive Workspace.
         return validation_result_page(record.import_run_id, headers)[0], 200, f"/blueprint-import/{record.import_run_id}"
     except Exception as exc:
         message = _post_receipt_failure_diagnostic(exc, record)
