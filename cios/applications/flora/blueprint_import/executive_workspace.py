@@ -9,6 +9,7 @@ from pathlib import Path
 from zipfile import ZipFile
 
 from cios.applications.flora.access import can_access_enterprise
+from cios.applications.flora.pilot_import import pilot_import_bypass_enabled, pilot_import_warning
 from cios.applications.flora.commercial_mission import CommercialMission, resolve_commercial_mission, save_commercial_mission
 from cios.applications.flora.workspace.views import _page
 from .registry import BlueprintPackageRegistry
@@ -30,8 +31,10 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     package = next((p for p in BlueprintPackageRegistry().list() if p.import_run_id == import_run_id), None)
     if package is None:
         return _page("Executive Intelligence Workspace unavailable", "<section class='hero'><h1>Executive Intelligence Workspace unavailable</h1><p>The import record could not be found.</p></section>"), 404
-    if not can_access_enterprise(headers, package.identity.enterprise_id, package.workspace_id) or not can_inspect_blueprint_package(headers, package):
+    bypass_candidate_read = pilot_import_bypass_enabled() and view in {"workspace", "explore", "enterprise"}
+    if not bypass_candidate_read and (not can_access_enterprise(headers, package.identity.enterprise_id, package.workspace_id) or not can_inspect_blueprint_package(headers, package)):
         return _page("Access denied", "<section class='hero'><h1>Access denied</h1></section>"), 403
+    warning = pilot_import_warning()
     summary = BlueprintPackageValidator().staging_summary(import_run_id) or {}
     candidates = _semantic_candidates(package, list(summary.get("candidates") or ()))
     twin = assemble_semantic_twin(candidates)
@@ -40,16 +43,16 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     identity = project_twin_identity(package)
     title = str(inspection.get("twin_title") or inspection.get("package_title") or identity.primary_subject_name or package.identity.package_id)
     if view == "explore":
-        return _page(f"Explore Twin — {title}", _styles() + _explorer(twin, import_run_id, mission)), 200
+        return _page(f"Explore Twin — {title}", warning + _styles() + _explorer(twin, import_run_id, mission)), 200
     if view == "enterprise":
         ent = next((e for e in twin.enterprises if e.identity_key == enterprise_id), None)
         if ent is None:
             return _page("Enterprise dossier unavailable", "<section class='hero'><h1>Enterprise dossier unavailable</h1></section>"), 404
-        return _page(f"Enterprise Intelligence — {ent.name}", _styles() + _dossier(ent, twin, import_run_id, mission)), 200
+        return _page(f"Enterprise Intelligence — {ent.name}", warning + _styles() + _dossier(ent, twin, import_run_id, mission)), 200
     if view == "mission":
         return _page("Edit Commercial Mission", _styles() + _mission_editor(mission, import_run_id)), 200
     unresolved = identity.status == "ambiguous" or not (identity.primary_subject_id and identity.governed_scope and identity.canonical_owner)
-    body = _styles() + _hero(title, inspection, unresolved, len(candidates), mission)
+    body = warning + _styles() + _hero(title, inspection, unresolved, len(candidates), mission)
     body += _narrative(twin, mission) + _themes(twin, import_run_id) + _enterprise_index(twin, import_run_id)
     body += _reasoning_trace(twin, mission) + _attention(twin, import_run_id) + _validation_report(twin) + _limitations(twin, summary, mission, unresolved)
     body += _navigation(import_run_id)

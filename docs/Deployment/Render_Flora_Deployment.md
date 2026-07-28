@@ -152,3 +152,20 @@ Header-trust boundary: keep `FLORA_TRUST_PROXY_HEADERS=0` unless a real upstream
 Blueprint import: anonymous users and synthetic browser-supplied `X-Flora-*` headers remain denied. When auto-sign-in is off, the denied Blueprint page offers the existing pilot sign-in action. Signed-in pilot owners resolve as the configured owner in the configured CIOS workspace with `cios_owner`, and Blueprint GET/POST use the same signed session and existing role/capability policy, including `package.upload`, inspection, governance, promotion and administration checks.
 
 Future migration path: replace this pilot-only mechanism with enterprise SSO, identity-provider integration, database-backed memberships, durable workspace ownership, and centrally managed roles/capabilities. The pilot cookie should then be removed rather than expanded into an enterprise identity platform.
+
+## Temporary pilot-only Twin import bypass
+
+The package-import bypass is disabled by default and activates only for the
+case-insensitive explicit value `true`. In the Render service, add this
+environment variable:
+
+```text
+FLORA_PILOT_IMPORT_BYPASS=true
+```
+
+Then trigger a new deployment. No former pilot access-secret variable is
+required for `GET /blueprint-import` or `POST /blueprint-import/upload` while
+the flag is active. Remove the variable (or set it to `false`) and redeploy to
+restore the normal account, workspace, membership, role and capability policy.
+The bypass remains scoped to package import and does not confer review,
+promotion, canonical mutation, administration or workspace-management access.

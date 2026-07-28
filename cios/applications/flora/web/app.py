@@ -31,6 +31,7 @@ from cios.applications.flora.storage import startup_storage_status
 from cios.applications.flora.live.runtime import application_revision, deployment_metadata
 from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, financial_intelligence_safe_support_report_payload, load_run, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id, blueprint_upload_authorisation
+from cios.applications.flora.pilot_import import pilot_import_bypass_enabled
 from cios.applications.flora.pilot_auth import (
     audit as pilot_audit,
     clear_session_cookie,
@@ -193,7 +194,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         try:
             auto_status = pilot_auto_sign_in_status()
-            if auto_status.requested and parsed.path not in {"/health", "/deployment"} and not resolve_pilot_session(self.headers):
+            import_bypass_route = pilot_import_bypass_enabled() and parsed.path.startswith("/blueprint-import")
+            if auto_status.requested and not import_bypass_route and parsed.path not in {"/health", "/deployment"} and not resolve_pilot_session(self.headers):
                 correlation_id = self.headers.get("X-Request-Id", "") or str(uuid.uuid4())
                 if not auto_status.active:
                     pilot_audit(

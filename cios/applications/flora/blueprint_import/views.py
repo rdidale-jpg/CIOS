@@ -14,6 +14,7 @@ from cios.applications.flora.workspace.views import _page
 from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRepository, repair_blueprint_canvas_access
 from cios.applications.flora.storage import storage_mode
 from cios.applications.flora.live.runtime import deployment_metadata
+from cios.applications.flora.pilot_import import (PILOT_IMPORT_ACTOR, PILOT_IMPORT_AUTH_MODE, PILOT_IMPORT_WORKSPACE, pilot_import_bypass_enabled, pilot_import_warning)
 
 from .archive import sha256_bytes
 from .ledger import BlueprintImportLedger
@@ -87,12 +88,14 @@ def _post_receipt_failure_diagnostic(exc: Exception, record: BlueprintPackageRec
 def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, int]:
     decision = blueprint_upload_authorisation(headers)
     access_notice = ""
-    if decision.decision != "allowed":
+    bypass = pilot_import_bypass_enabled()
+    if decision.decision != "allowed" and not bypass:
         access_notice = ("<section class='card warning' role='note'><h2>Workspace and upload access required</h2>"
                          f"<p>{escape(_permission_guidance(headers, decision))}</p>"
                          "<p>This is import setup information; no package upload has been attempted.</p>"
                          "<p><a href='/pilot-sign-in'>Sign in or select a workspace</a></p></section>")
-    body = _workflow_progress("upload") + _authorisation_context(decision) + access_notice + f"""<section class='hero'><h1>Import Twin</h1><p>Upload a governed Twin package for contract detection, inspection, validation and candidate creation. A Commercial Mission or an existing Twin selection is not required.</p>{_notice(message)}</section>
+    authorisation = pilot_import_warning() if bypass else _authorisation_context(decision)
+    body = _workflow_progress("upload") + authorisation + access_notice + f"""<section class='hero'><h1>Import Twin</h1><p>Upload a governed Twin package for contract detection, inspection, validation and candidate creation. A Commercial Mission or an existing Twin selection is not required.</p>{_notice(message)}</section>
     <section class='card'><h2>Upload package</h2><p><strong>Supported format:</strong> .zip package. <strong>Maximum size:</strong> {MAX_UPLOAD_BYTES // (1024*1024)} MB.</p><p class='muted'>Packages may contain confidential intelligence. Upload only packages you are authorised to use.</p><p><strong>Uploading does not change canonical state. Flora detects the package contract before applying contract-specific wording.</strong></p><form method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><label for='expected_type'>What kind of Twin do you expect?</label><select id='expected_type' name='expected_type' required>{''.join(f"<option value='{t}'>{escape(t.replace('_',' ').title())}</option>" for t in TWIN_TYPES)}</select><p class='muted'>The expectation never overrides manifest identity, detected types, schema validation or evidence.</p><label for='blueprint_zip'>Package ZIP file</label><input id='blueprint_zip' name='blueprint_zip' type='file' accept='.zip,application/zip' required><p><button type='submit'>Upload Twin</button></p><p><a href='/digital-twins'>Cancel</a></p></form></section>
     <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous package imports</a></p></section>"""
     return _page("Import Twin", body), 200
@@ -110,13 +113,14 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
     if validation_errors:
         return import_blueprint_entry_page(headers, " ".join(validation_errors))[0], 400, "/blueprint-import"
 
-    actor = authenticated_flora_user(headers)
+    bypass = pilot_import_bypass_enabled()
+    actor = PILOT_IMPORT_ACTOR if bypass else authenticated_flora_user(headers)
     filename = fields.get("blueprint_zip.filename") or fields.get("filename") or "blueprint.zip"
     mime = fields.get("blueprint_zip.content_type") or fields.get("content_type") or ""
     decision = blueprint_upload_authorisation(headers)
     ref = audit_warning = ""
     try:
-        if decision.decision != "allowed":
+        if decision.decision != "allowed" and not bypass:
             ref, audit_warning = _audit_authorisation("package_upload_authorisation_denied", headers, "Package receive permission checked", decision)
             raise PermissionError("You do not have permission to import Blueprints in this workspace.")
         if not filename.lower().endswith(".zip") or mime not in ZIP_MIME_TYPES:
@@ -124,11 +128,20 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
         if len(content) > MAX_UPLOAD_BYTES:
             raise PackageReceiptError(f"The selected file is larger than the {MAX_UPLOAD_BYTES // (1024*1024)} MB upload limit.")
         before = _canonical_marker()
-        record = BlueprintPackageRegistry().receive(content, filename, actor, active_flora_workspace(headers))
+        record = BlueprintPackageRegistry().receive(content, filename, actor, PILOT_IMPORT_WORKSPACE if bypass else active_flora_workspace(headers))
         if not isinstance(record, BlueprintPackageRecord):
             raise PackageReceiveContractError(record)
         ImportGuidanceRepository().save(ImportGuidance(record.import_run_id, expected_type))
-        _audit_authorisation("package_upload_authorisation_allowed", headers, "Upload request accepted", decision, record.package_ref, record.import_run_id, record.identity.enterprise_id)
+        if bypass:
+            record = BlueprintPackageRegistry().update_inspection(record.package_ref, {
+                "actor_type": "pilot_operator", "actor_id": PILOT_IMPORT_ACTOR,
+                "workspace_type": "pilot_workspace", "workspace_id": PILOT_IMPORT_WORKSPACE,
+                "authentication_mode": PILOT_IMPORT_AUTH_MODE,
+                "authorisation_checks": {"account": "bypassed for pilot", "workspace": "bypassed for pilot", "membership": "bypassed for pilot", "package.receive permission": "bypassed for pilot"},
+            })
+            _audit_pilot_bypass(record)
+        else:
+            _audit_authorisation("package_upload_authorisation_allowed", headers, "Upload request accepted", decision, record.package_ref, record.import_run_id, record.identity.enterprise_id)
     except PermissionError as exc:
         return _safe_failure(str(exc), "Package receive permission checked", False, False, _permission_guidance(headers, decision), decision, ref, audit_warning), 403, "/blueprint-import"
     except Exception as exc:
@@ -136,7 +149,9 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
         return _safe_failure(message, "Package received", False, False, "Return to package import and choose a safe ZIP. No canonical changes were made.", decision), 400, "/blueprint-import"
 
     try:
-        BlueprintPackageValidator().validate_and_stage(record.package_ref, actor, headers)
+        validation_result = BlueprintPackageValidator().validate_and_stage(record.package_ref, actor, None if bypass else headers)
+        if bypass:
+            _audit_pilot_result(record, validation_result)
         assert before == _canonical_marker(), "Upload and validation must not mutate canonical memory"
         # Keep the established service contract (including its inspection
         # response) for non-HTTP callers.  The web adapter follows the returned
@@ -151,9 +166,10 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     ctx = _context(import_run_id)
     if not ctx:
         return _safe_failure("Blueprint import record is unavailable or access is denied.", "Package identity read", False, True, "Open an import you are authorised to review."), 403
-    if not can_access_enterprise(headers, ctx["package"].identity.enterprise_id, getattr(ctx["package"], "workspace_id", "")):
+    bypass = pilot_import_bypass_enabled()
+    if not bypass and not can_access_enterprise(headers, ctx["package"].identity.enterprise_id, getattr(ctx["package"], "workspace_id", "")):
         return _safe_failure("Blueprint import record is unavailable or access is denied.", "Package enterprise access resolved", False, True, "Open an import you are authorised to review."), 403
-    if not can_inspect_blueprint_package(headers, ctx["package"]):
+    if not bypass and not can_inspect_blueprint_package(headers, ctx["package"]):
         return _safe_failure("Blueprint import record is unavailable or access is denied.", "Package inspection authorised", False, True, "Open an import you are authorised to review."), 403
     package = ctx["package"]; summary = ctx["summary"] or {}; candidates = ctx["candidates"]
     lifecycle = ImportLifecycleService().get(import_run_id)
@@ -190,7 +206,7 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     affected = _affected_twins_section(package)
     impact = _commercial_impact(candidates)
     risk = _risk_summary(package, summary, candidates, decision)
-    diagnostics = inspection + validation_groups + f"""<section class='card'><h2>Import record</h2><span hidden>Validation result</span><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr>{workbook_rows}<tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section><details class='card'><summary><strong>Safe deployment diagnostics</strong></summary><table>{deployment_rows}</table></details>""" + _execution_trace_section(package, summary, bool(summary.get("errors"))) + count_panel
+    diagnostics = inspection + validation_groups + f"""<section class='card'><h2>Import record</h2><span hidden>Package Inspection</span><span hidden>Validation result</span><table><tr><th>Checksum</th><td><code>{escape(package.package_sha256)}</code></td></tr><tr><th>Files inspected</th><td>{len(summary.get('files_inspected', []))}</td></tr>{workbook_rows}<tr><th>Validation status</th><td>{escape(status)}</td></tr></table>{_list('Warnings', summary.get('warnings', []))}{_list('Errors', summary.get('errors', []))}</section><details class='card'><summary><strong>Safe deployment diagnostics</strong></summary><table>{deployment_rows}</table></details>""" + _execution_trace_section(package, summary, bool(summary.get("errors"))) + count_panel
     if governed and package.identity.package_id == "TMS-001":
         # The inspected package is an executive decision, not a navigation or
         # diagnostics screen. All values below still derive from the staged run.
@@ -201,7 +217,7 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
         body += _available_actions_section(package, summary, counts, headers)
     else:
         body = _workflow_progress("inspect", import_run_id, lifecycle.state) + nav + executive + commercial + impact + affected + risk + review_link + f"<details class='card' id='technical-diagnostics'><summary><strong>Technical diagnostics</strong></summary>{diagnostics}</details>" + _available_actions_section(package, summary, counts, headers) + terminal
-    return _page("Inspect Twin package", body), 200
+    return _page("Inspect Twin package", pilot_import_warning() + _pilot_diagnostics(package, summary) + body), 200
 
 
 
@@ -1034,6 +1050,15 @@ _DIAGNOSTIC_STAGES = (
 
 def _stage_statuses(failed_stage: str, decision=None) -> dict[str, str]:
     statuses = {stage: "Not started" for stage in _DIAGNOSTIC_STAGES}
+    if pilot_import_bypass_enabled():
+        for stage in _DIAGNOSTIC_STAGES[:4]:
+            statuses[stage] = "Bypassed for pilot"
+        if failed_stage in statuses:
+            failed_index = _DIAGNOSTIC_STAGES.index(failed_stage)
+            for stage in _DIAGNOSTIC_STAGES[4:failed_index]:
+                statuses[stage] = "Completed"
+            statuses[failed_stage] = "Failed"
+        return statuses
     if decision:
         if not decision.user_id:
             statuses["Account recognised"] = "Failed"
@@ -1082,12 +1107,32 @@ def _authorisation_context(decision) -> str:
     <tr><th>Required capability</th><td><code>{escape(decision.required_permission)}</code></td></tr>
     <tr><th>Capability decision</th><td>{capability}</td></tr></table></section>"""
 
+
+def _pilot_diagnostics(package=None, summary: dict[str, Any] | None = None) -> str:
+    if not pilot_import_bypass_enabled():
+        return ""
+    summary = summary or {}
+    received = "yes" if package is not None else "no"
+    inspected = "yes" if summary else "no"
+    validation = "failed" if summary.get("errors") else ("passed" if summary else "not reached")
+    candidate = (f"{int(summary.get('candidate_records_staged', 0))} candidate(s) created"
+                 if summary else "not reached")
+    correlation = getattr(package, "import_run_id", "") or f"bpi-diag-{uuid4().hex[:12]}"
+    return f"""<section class='card diagnostics-card'><h2>Pilot import diagnostics</h2><table>
+    <tr><th>Authentication mode</th><td>{PILOT_IMPORT_AUTH_MODE}</td></tr>
+    <tr><th>Account check</th><td>Bypassed for pilot</td></tr><tr><th>Workspace check</th><td>Bypassed for pilot</td></tr>
+    <tr><th>Membership check</th><td>Bypassed for pilot</td></tr><tr><th>package.receive permission</th><td>Bypassed for pilot</td></tr>
+    <tr><th>Package received</th><td>{received}</td></tr><tr><th>Package inspected</th><td>{inspected}</td></tr>
+    <tr><th>Validation result</th><td>{validation}</td></tr><tr><th>Candidate result</th><td>{escape(candidate)}</td></tr>
+    <tr><th>Correlation ID</th><td><code>{escape(correlation)}</code></td></tr></table></section>"""
+
 def _safe_failure(message, stage, changed, retry, next_step, decision=None, diagnostic_ref: str = "", audit_warning: str = "", import_run_id: str = ""):
     diagnostic_ref = diagnostic_ref or f"bpi-diag-{uuid4().hex[:12]}"
     unavailable = "Authorisation context unavailable after failure"
-    account = decision.user_id if decision and decision.user_id else unavailable
-    workspace = decision.active_workspace if decision and decision.active_workspace else ("No active workspace" if decision else unavailable)
-    role = decision.resolved_role if decision and decision.resolved_role else ("No effective Blueprint role" if decision else unavailable)
+    bypass = pilot_import_bypass_enabled()
+    account = "Bypassed for pilot (pilot_operator: flora-pilot)" if bypass else (decision.user_id if decision and decision.user_id else unavailable)
+    workspace = "Bypassed for pilot (pilot_workspace: flora-pilot-workspace)" if bypass else (decision.active_workspace if decision and decision.active_workspace else ("No active workspace" if decision else unavailable))
+    role = "Bypassed for pilot" if bypass else (decision.resolved_role if decision and decision.resolved_role else ("No effective Blueprint role" if decision else unavailable))
     owner = "yes" if decision and decision.owner_recognised else "no"
     capability = decision.required_permission if decision else "package.upload"
     statuses = _stage_statuses(stage, decision)
@@ -1098,7 +1143,7 @@ def _safe_failure(message, stage, changed, retry, next_step, decision=None, diag
     received = statuses.get("Package received") == "Completed"
     inspected = statuses.get("Package inspected") == "Completed"
     import_row = f"<li>Import identifier: <code>{escape(import_run_id)}</code></li>" if import_run_id else ""
-    body=f"<section class='hero'><h1>Package import needs attention</h1></section>{warning_panel}<section class='card'><h2>What happened</h2>{failure_summary}<ul><li>Stage failed: {escape(canonical_failed_stage)}</li><li>Package received: {'yes' if received else 'no'}</li><li>Package inspected: {'yes' if inspected else 'no'}</li><li>Canonical changes occurred: {'yes' if changed else 'no'}</li><li>Package available for retry: {'yes' if retry else 'no'}</li>{import_row}<li>Diagnostic reference: <code>{escape(diagnostic_ref)}</code></li><li>Next step: {escape(next_step)}</li></ul><p><a href='/blueprint-import'>Return to package import</a></p></section><section class='card'><h2>Authorisation context</h2><table><tr><th>Signed-in account</th><td>{escape(account)}</td></tr><tr><th>Active workspace</th><td>{escape(workspace)}</td></tr><tr><th>Effective role</th><td>{escape(role)}</td></tr><tr><th>Owner recognised</th><td>{owner}</td></tr><tr><th>Required capability</th><td><code>{escape(capability)}</code></td></tr></table></section><section class='card'><h2>Live import stages</h2><table>{rows}</table></section>"
+    body=pilot_import_warning()+_pilot_diagnostics()+f"<section class='hero'><h1>Package import needs attention</h1></section>{warning_panel}<section class='card'><h2>What happened</h2>{failure_summary}<ul><li>Stage failed: {escape(canonical_failed_stage)}</li><li>Package received: {'yes' if received else 'no'}</li><li>Package inspected: {'yes' if inspected else 'no'}</li><li>Canonical changes occurred: {'yes' if changed else 'no'}</li><li>Package available for retry: {'yes' if retry else 'no'}</li>{import_row}<li>Diagnostic reference: <code>{escape(diagnostic_ref)}</code></li><li>Next step: {escape(next_step)}</li></ul><p><a href='/blueprint-import'>Return to package import</a></p></section><section class='card'><h2>Authorisation context</h2><table><tr><th>Signed-in account</th><td>{escape(account)}</td></tr><tr><th>Active workspace</th><td>{escape(workspace)}</td></tr><tr><th>Effective role</th><td>{escape(role)}</td></tr><tr><th>Owner recognised</th><td>{owner}</td></tr><tr><th>Required capability</th><td><code>{escape(capability)}</code></td></tr></table></section><section class='card'><h2>Live import stages</h2><table>{rows}</table></section>"
     return _page("Package import failure", body)
 def _canonical_marker():
     from cios.applications.flora.storage import data_path
@@ -1122,6 +1167,37 @@ def _permission_guidance(headers: Any, decision=None) -> str:
         return ("You do not have permission to import Blueprints in this workspace. "
                 f"Access was denied: {decision.denial_reason}. Contact a workspace owner if this access is required.")
     return "You do not have permission to import Blueprints in this workspace."
+
+
+def _audit_pilot_bypass(record: BlueprintPackageRecord) -> None:
+    """Record bypassed access checks distinctly from successful authorisation."""
+    correlation_id = f"bpi-diag-{uuid4().hex[:12]}"
+    BlueprintImportLedger().append("pilot_import_bypass_used", {
+        "correlation_id": correlation_id, "request_correlation_id": correlation_id,
+        "authentication_mode": PILOT_IMPORT_AUTH_MODE, "actor_type": "pilot_operator",
+        "actor_id": PILOT_IMPORT_ACTOR, "workspace_type": "pilot_workspace",
+        "workspace_id": PILOT_IMPORT_WORKSPACE, "account_check": "bypassed for pilot",
+        "workspace_check": "bypassed for pilot", "membership_check": "bypassed for pilot",
+        "package.receive permission": "bypassed for pilot", "package_received": "yes",
+        "package_inspected": "no", "validation_result": "pending", "candidate_result": "pending",
+        "package_ref": record.package_ref, "import_run_id": record.import_run_id,
+    })
+
+
+def _audit_pilot_result(record: BlueprintPackageRecord, result) -> None:
+    correlation_id = record.import_run_id
+    errors = tuple(getattr(result, "errors", ()) or ())
+    candidates = int(getattr(result, "candidate_records_staged", 0))
+    BlueprintImportLedger().append("pilot_import_bypass_result", {
+        "correlation_id": correlation_id, "authentication_mode": PILOT_IMPORT_AUTH_MODE,
+        "account_check": "bypassed for pilot", "workspace_check": "bypassed for pilot",
+        "membership_check": "bypassed for pilot", "package.receive permission": "bypassed for pilot",
+        "package_received": "yes", "package_inspected": "yes",
+        "validation_result": "failed" if errors else "passed",
+        "candidate_result": f"{candidates} candidate(s) created",
+        "package_ref": record.package_ref, "import_run_id": record.import_run_id,
+        "canonical_changes": "no",
+    })
 
 
 def _audit_authorisation(event_type: str, headers: Any, stage: str, decision, package_ref: str = "", import_run_id: str = "", enterprise_id: str = "") -> tuple[str, str]:
