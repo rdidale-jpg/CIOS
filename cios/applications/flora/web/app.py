@@ -7,7 +7,10 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import tempfile
+from html import escape
+from html.parser import HTMLParser
 from pathlib import Path
 from email.parser import BytesParser
 from email.policy import default as email_policy
@@ -53,6 +56,98 @@ HEALTH_PAYLOAD = {"status": "healthy", "service": "flora"}
 def deployment_payload() -> dict[str, str]:
     return {"service": "flora", **deployment_metadata()}
 CASE_SLUGS = {"ThamesWater", "NationalGrid", "BT", "Vodafone"}
+
+
+class _ImportTwinLinkDetector(HTMLParser):
+    """Detect a visible, enabled Import Twin anchor without rewriting HTML."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self._hidden: list[tuple[str, bool]] = []
+        self._anchor: dict[str, object] | None = None
+        self.found = False
+
+    @staticmethod
+    def _is_hidden(attrs: dict[str, str | None]) -> bool:
+        style = re.sub(r"\s+", "", (attrs.get("style") or "").casefold())
+        classes = set((attrs.get("class") or "").casefold().split())
+        return (
+            "hidden" in attrs
+            or (attrs.get("aria-hidden") or "").casefold() == "true"
+            or "hidden" in classes
+            or "visually-hidden" in classes
+            or "display:none" in style
+            or "visibility:hidden" in style
+        )
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        values = dict(attrs)
+        hidden = (self._hidden[-1][1] if self._hidden else False) or self._is_hidden(values)
+        if tag.casefold() not in {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}:
+            self._hidden.append((tag.casefold(), hidden))
+        if tag.casefold() == "a" and self._anchor is None:
+            href = values.get("href") or ""
+            self._anchor = {
+                "candidate": urlparse(href).path == "/blueprint-import",
+                "hidden": hidden,
+                "disabled": "disabled" in values or (values.get("aria-disabled") or "").casefold() == "true",
+                "text": [],
+            }
+
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        # A self-closing element cannot be the required text link.
+        return
+
+    def handle_data(self, data: str) -> None:
+        if self._anchor is not None:
+            self._anchor["text"].append(data)  # type: ignore[union-attr]
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.casefold() == "a" and self._anchor is not None:
+            text = " ".join("".join(self._anchor["text"]).split())  # type: ignore[arg-type]
+            self.found = bool(
+                self._anchor["candidate"]
+                and not self._anchor["hidden"]
+                and not self._anchor["disabled"]
+                and text == "Import Twin"
+            )
+            self._anchor = None
+        lowered = tag.casefold()
+        for index in range(len(self._hidden) - 1, -1, -1):
+            if self._hidden[index][0] == lowered:
+                del self._hidden[index:]
+                break
+
+
+def ensure_import_twin_action(html: str) -> str:
+    """Guarantee the canonical visible import action in a Digital Twins page."""
+    detector = _ImportTwinLinkDetector()
+    detector.feed(html)
+    detector.close()
+    if detector.found:
+        return html
+
+    action = "<p class='digital-twins-import-action'><a class='button primary' href='/blueprint-import'>Import Twin</a></p>"
+    hero = re.search(
+        r"(<section\b[^>]*class=(['\"])[^'\"]*\bhero\b[^'\"]*\2[^>]*>)(?P<body>.*?<h1\b[^>]*>\s*Digital Twins\s*</h1>.*?)(?P<close></section\s*>)",
+        html,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if hero:
+        return html[: hero.start("close")] + action + html[hero.start("close") :]
+    body = re.search(r"<body\b[^>]*>", html, flags=re.IGNORECASE)
+    if body:
+        return html[: body.end()] + action + html[body.end() :]
+    return action + html
+
+
+def _with_revision_fingerprint(html: str) -> str:
+    revision = escape(application_revision(), quote=True).replace("--", "- -")
+    comment = f"<!-- flora-revision: {revision} -->"
+    body_end = re.search(r"</body\s*>", html, flags=re.IGNORECASE)
+    if body_end:
+        return html[: body_end.start()] + comment + html[body_end.start() :]
+    return html + comment
 
 
 
@@ -186,7 +281,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path == "/live/evidence":
                 self._html(evidence_page())
             elif parsed.path == "/digital-twins":
-                self._html(digital_twins_landing_page(self.headers))
+                html = digital_twins_landing_page(self.headers)
+                html = ensure_import_twin_action(html)
+                self._html(_with_revision_fingerprint(html))
             elif parsed.path in {"/industries/uk-banking", "/flora/banking/inspect"}:
                 html, status = twin_inspection_page("uk-banking", self.headers, "industry")
                 self._html(html, status=status)
@@ -1156,6 +1253,10 @@ def run(host: str | None = None, port: int | None = None) -> None:
         f"commit_sha={deployment['commit_sha']} "
         f"branch={deployment['branch']} "
         f"build_timestamp={deployment['build_timestamp']}",
+        flush=True,
+    )
+    print(
+        f"Flora application entry module={__name__} resolved_file={Path(__file__).resolve()}",
         flush=True,
     )
     print(f"Flora storage {storage['status']}: {storage['data_root']}", flush=True)
