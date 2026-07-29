@@ -254,7 +254,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/explore"):
                 run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/explore")
                 collection = (parse_qs(parsed.query).get("collection") or [""])[0]
-                html, status = executive_workspace_page(run_id, self.headers, view="explore", collection=collection)
+                domain = (parse_qs(parsed.query).get("domain") or ["all"])[0]
+                html, status = executive_workspace_page(run_id, self.headers, view="explore", collection=collection, domain=domain)
+                self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/health"):
+                run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/health")
+                html, status = executive_workspace_page(run_id, self.headers, view="health")
                 self._html(html, status=status)
             elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/mission"):
                 run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/mission")
@@ -301,7 +306,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(html, status=status)
             elif parsed.path.startswith("/blueprint-import/"):
                 run_id = parsed.path.removeprefix("/blueprint-import/")
-                html, status = executive_workspace_page(run_id, self.headers)
+                domain = (parse_qs(parsed.query).get("domain") or ["all"])[0]
+                html, status = executive_workspace_page(run_id, self.headers, domain=domain)
                 self._html(html, status=status)
             elif _is_enterprise_intelligence_path(parsed.path):
                 enterprise_id = [part for part in parsed.path.split('/') if part][1]
