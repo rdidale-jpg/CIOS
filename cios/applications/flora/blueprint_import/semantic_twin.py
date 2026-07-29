@@ -26,6 +26,7 @@ class SemanticObject:
     consequence: str = ""
     domains: tuple[str, ...] = ()
     affected_organisations: tuple[str, ...] = ()
+    attributes: Mapping[str, Any] | None = None
 
 
 @dataclass(frozen=True)
@@ -97,6 +98,15 @@ def business_collections(twin: SemanticTwin, *, include_empty: bool = False,
             selected = tuple(o for o in selected if o.kind == canonical_owner[key])
         if key == "insights":
             selected = tuple(o for o in selected if executive_insight_eligible(o))
+        if key == "enterprises":
+            # Enterprise collection membership is owned by the assembled
+            # canonical identities, not by a query limit or by duplicate
+            # wrapper records.  A domain lens follows the dossier's supported
+            # records even when the identity wrapper itself has no domain.
+            members = tuple(e for e in twin.enterprises if domain in {"", "all"} or
+                            any(_in_domain(o, domain) for o in e.records))
+            selected = tuple(next((o for o in e.records if o.kind == canonical_owner[key]), e.records[0])
+                             for e in members if e.records)
         result.append(TwinCollection(key, label, description, selected))
     other = tuple(o for o in objects if o.kind not in mapped)
     if other:
@@ -153,13 +163,16 @@ def assemble_semantic_twin(candidates: list[dict[str, Any]]) -> SemanticTwin:
     for key, seed in sorted(groups.items(), key=lambda item: names[item[0]].casefold()):
         # Subject-labelled observations are attached only after an explicit
         # enterprise identity has established the dossier owner.
-        contextual = [o for o in objects if o not in seed and o.subject.casefold() == names[key].casefold()]
+        contextual = [o for o in objects if o not in seed and
+                      (o.subject.casefold() == names[key].casefold() or
+                       names[key].casefold() in {name.casefold() for name in o.affected_organisations})]
         refs = {ref for o in seed + contextual for ref in o.references}
         resolved = [by_id[ref] for ref in refs if ref in by_id]
         missing = sorted(ref for ref in refs if ref not in by_id)
         unresolved_all.update(missing)
+        associated = list({o.record_id: o for o in seed + contextual + resolved}.values())
         enterprises.append(SemanticEnterprise(key, names[key], tuple(sorted({names[key]})),
-                            tuple(dict.fromkeys(seed + contextual + resolved)), key in ambiguous, tuple(missing)))
+                            tuple(associated), key in ambiguous, tuple(missing)))
     return SemanticTwin(objects, tuple(enterprises), tuple(sorted(unresolved_all)))
 
 
@@ -222,4 +235,4 @@ def _object(candidate: dict[str, Any]) -> SemanticObject:
         "governed" if candidate.get("governance_status") in {"governed", "accepted"} else "candidate",
         str(candidate.get("source_file") or "Imported package"), str(candidate.get("source_location") or "not supplied"),
         eligible, reason, original_id, tuple(dict.fromkeys(refs)), sufficiency, permitted,
-        consequence, tuple(dict.fromkeys(domains)), tuple(map(str, affected)))
+        consequence, tuple(dict.fromkeys(domains)), tuple(map(str, affected)), dict(p))
