@@ -14,7 +14,7 @@ from cios.applications.flora.commercial_mission import CommercialMission, resolv
 from cios.applications.flora.workspace.views import _page
 from .registry import BlueprintPackageRegistry
 from .industry_delta_adapter import IndustryTwinDeltaAdapter
-from .semantic_twin import SemanticEnterprise, SemanticObject, SemanticTwin, assemble_semantic_twin
+from .semantic_twin import SemanticEnterprise, SemanticObject, SemanticTwin, assemble_semantic_twin, business_collections
 from .twin_governance import project_twin_identity
 from .validator import BlueprintPackageValidator, can_inspect_blueprint_package
 
@@ -27,7 +27,7 @@ THEMES = (("market-condition", "Industry outlook", ("market", "industry", "secto
 
 
 def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "workspace",
-                             enterprise_id: str = "") -> tuple[str, int]:
+                             enterprise_id: str = "", collection: str = "") -> tuple[str, int]:
     package = next((p for p in BlueprintPackageRegistry().list() if p.import_run_id == import_run_id), None)
     if package is None:
         return _page("Executive Intelligence Workspace unavailable", "<section class='hero'><h1>Executive Intelligence Workspace unavailable</h1><p>The import record could not be found.</p></section>"), 404
@@ -43,7 +43,7 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     identity = project_twin_identity(package)
     title = str(inspection.get("twin_title") or inspection.get("package_title") or identity.primary_subject_name or package.identity.package_id)
     if view == "explore":
-        return _page(f"Explore Twin — {title}", warning + _styles() + _explorer(twin, import_run_id, mission)), 200
+        return _page(f"Explore Twin — {title}", warning + _styles() + _explorer(twin, import_run_id, mission, collection)), 200
     if view == "enterprise":
         ent = next((e for e in twin.enterprises if e.identity_key == enterprise_id), None)
         if ent is None:
@@ -53,7 +53,7 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
         return _page("Edit Commercial Mission", _styles() + _mission_editor(mission, import_run_id)), 200
     unresolved = identity.status == "ambiguous" or not (identity.primary_subject_id and identity.governed_scope and identity.canonical_owner)
     body = warning + _styles() + _hero(title, inspection, unresolved, len(candidates), mission)
-    body += _narrative(twin, mission) + _themes(twin, import_run_id) + _enterprise_index(twin, import_run_id)
+    body += _narrative(twin, mission) + _composition(twin, import_run_id) + _themes(twin, import_run_id) + _enterprise_index(twin, import_run_id)
     body += _reasoning_trace(twin, mission) + _attention(twin, import_run_id) + _validation_report(twin) + _limitations(twin, summary, mission, unresolved)
     body += _navigation(import_run_id)
     return _page(f"Executive Intelligence — {title}", body), 200
@@ -98,7 +98,8 @@ def _semantic_candidates(package, staged: list[dict[str, Any]]) -> list[dict[str
 def _hero(title, inspection, unresolved, count, mission):
     caveat = "the Twin identity and governed scope have not yet been confirmed" if unresolved else "imported intelligence remains a candidate"
     composed = (f"<p class='mission'><strong>Composed for: {escape(mission.executive_role)} · {escape(mission.employer)}</strong> · <a href='#active-mission'>Inspect mission</a></p>" if mission else "")
-    return f"""<nav class='executive-path'><strong>Executive understanding</strong><span>Commercial relevance</span><span>Why now</span><span>Why believe it</span><a href='#candidate-governance'>Candidate governance</a></nav><header class='hero'><p class='eyebrow'>Executive Intelligence Workspace</p><h1>{escape(title)}</h1><p>{count} staged intelligence records</p>{composed}<p class='workspace-caveat'><strong>Executive understanding is provisional because {caveat}.</strong></p><div class='status-key'><span><b>Candidate intelligence</b> — imported, not governed</span><span><b>Provisional interpretation</b> — not persisted</span></div></header>"""
+    description = inspection.get("twin_description") or inspection.get("description") or "Explore the organisations, change, opportunities and supporting intelligence represented in this Twin."
+    return f"""<nav class='executive-path'><strong>Overview</strong><a href='#composition'>Twin composition</a><a href='#material-insights'>Material insights</a><a href='#candidate-governance'>Governance</a></nav><header class='hero'><p class='eyebrow'>Executive Intelligence Workspace</p><p>Imported Twin · Candidate</p><h1>{escape(title)}</h1><p>{escape(str(description))}</p>{composed}<p class='workspace-caveat'>This understanding is provisional because {escape(caveat)}.</p></header>"""
 
 
 def _mission(m: CommercialMission | None) -> str:
@@ -111,9 +112,14 @@ def _mission(m: CommercialMission | None) -> str:
 def _narrative(twin: SemanticTwin, mission: CommercialMission | None) -> str:
     eligible = [o for o in twin.objects if o.eligible_conclusion]
     timing = next((o.statement for o in eligible if "-why_now-" in o.original_id or "timing" in o.statement.casefold() or "urgency" in o.statement.casefold()), "No supported timing conclusion; investigate observation dates and material events.")
-    mission_text = (f"Composition foregrounds the declared objective: {mission.commercial_objective}" if mission else "Personal commercial prioritisation is not yet applied because no Commercial Mission is available.")
+    mission_text = (f"Composition foregrounds the declared objective: {mission.commercial_objective}" if mission else "Neutral Twin intelligence is shown because no Commercial Mission is available; optionally establish one to tailor relevance.")
     offer = ("Offer alignment remains incomplete and no fit is inferred." if mission and not mission.offer_portfolio else "Potential offer alignment is a hypothesis requiring evidence validation.")
-    return f"""<section class='card'><h2>Executive understanding</h2><p>The runtime semantically assembled <strong>{len(twin.objects)} objects</strong>; {len(eligible)} contain an evidence-bounded interpretation eligible for executive prominence. Labels and context-free metrics remain inspectable but are excluded here.</p><div class='grid executive-summary-grid'><article><h3>Industry and enterprise change</h3><p>{len(twin.enterprises)} enterprise identities and {len(eligible)} interpretable observations or claims warrant investigation.</p></article><article><h3>Commercial relevance</h3><p>{escape(mission_text)}</p><p>{escape(offer)}</p></article><article><h3>Why now?</h3><p>{escape(timing)}</p></article><article><h3>Recommended investigation</h3><p>Validate subject, consequence, owner, currency, evidence and any offer linkage before commercial action. This is not lead scoring or procurement prediction.</p></article></div></section>""" + _mission(mission)
+    return f"""<section class='card'><h2>Executive understanding</h2><p>This Twin brings together represented organisations and material change to support informed exploration.</p><div class='grid executive-summary-grid'><article><h3>Industry and enterprise change</h3><p>{len(twin.enterprises)} organisations and {len(eligible)} material insights warrant attention.</p></article><article><h3>Commercial relevance</h3><p>{escape(mission_text)}</p><p>{escape(offer)}</p></article><article><h3>Why now?</h3><p>{escape(timing)}</p></article></div></section>""" + _mission(mission)
+
+
+def _composition(twin: SemanticTwin, run_id: str) -> str:
+    tiles = "".join(f"<a class='composition-tile' href='/blueprint-import/{escape(run_id)}/explore?collection={escape(c.key)}'><strong>{escape(c.label)}</strong><b>{len(c.objects)}</b><span>{escape(c.description)}</span></a>" for c in business_collections(twin) if c.key != "other")
+    return f"<section class='card' id='composition'><h2>Twin composition</h2><div class='composition-grid'>{tiles}</div><p><a href='/blueprint-import/{escape(run_id)}/explore'>Explore all Twin content</a></p></section>"
 
 
 def _themes(twin: SemanticTwin, run_id: str) -> str:
@@ -126,12 +132,12 @@ def _themes(twin: SemanticTwin, run_id: str) -> str:
     other = [o for o in eligible if o.record_id not in used][:5]
     if other: sections.append("<section class='theme-group'><h3>Other supported observations</h3>" + "".join(_conclusion(o, run_id) for o in other) + "</section>")
     if not sections: sections = ["<p>No semantically complete conclusion is available. Inspect typed coverage and gather evidence rather than treating raw records as meaning.</p>"]
-    return "<section class='card'><h2>Material candidate intelligence</h2>" + "".join(sections) + "</section>"
+    return "<section class='card' id='material-insights'><h2>Material insights</h2>" + "".join(sections) + "</section>"
 
 
 def _conclusion(o: SemanticObject, run_id: str) -> str:
     support = ", ".join(o.evidence_refs) or "No explicit Evidence reference; treat as unsupported"
-    return f"""<article class='executive-conclusion'><p class='pill'>{escape(o.governance.title())} · {escape(o.kind)} · {escape(o.sufficiency)}</p><h4>{escape(o.statement)}</h4><p><strong>Subject:</strong> {escape(o.subject)} · <strong>Confidence:</strong> {escape(o.confidence)} · <strong>Freshness:</strong> {escape(o.freshness)}</p><details><summary>Evidence sufficiency, currency and permitted use</summary><p><strong>Evidence:</strong> {escape(support)}</p><p><strong>Source quality:</strong> inspect each source record · <strong>Period:</strong> {escape(o.freshness)} · <strong>Permitted use:</strong> {escape(o.permitted_use)}</p><p><strong>Contrary evidence:</strong> inspect linked Contradictions; none is inferred from absence. <strong>Missing evidence:</strong> {'none identified by reference validation' if o.evidence_refs else 'explicit supporting Evidence'}</p><p><strong>Lineage:</strong> {escape(o.source_file)} · {escape(o.source_location)} · <code>{escape(o.original_id or o.record_id)}</code></p><a href='/blueprint-import/{escape(run_id)}/inspect#technical-diagnostics'>View source and lineage</a></details></article>"""
+    return f"""<article class='executive-conclusion'><h4>{escape(o.statement)}</h4>{f'<p>{escape(o.subject)}</p>' if o.subject not in ('', 'Twin scope') else ''}<details><summary>Explain this insight</summary><p><strong>Evidence:</strong> {escape(support)}</p><p><strong>Confidence:</strong> {escape(o.confidence)} · <strong>Freshness:</strong> {escape(o.freshness)}</p><p><strong>Contradiction status:</strong> inspect linked contradictions; absence is not inferred.</p><p><strong>Permitted use:</strong> {escape(o.permitted_use)} · <strong>State:</strong> {escape(o.governance)}</p><p><strong>Lineage:</strong> {escape(o.source_file)} · {escape(o.source_location)} · <code>{escape(o.original_id or o.record_id)}</code></p><a href='/blueprint-import/{escape(run_id)}/inspect#technical-diagnostics'>View source and lineage</a></details></article>"""
 
 
 def _enterprise_index(twin, run_id):
@@ -144,7 +150,7 @@ def _enterprise_card(e, run_id):
     latest = next((o.statement for o in e.records if o.eligible_conclusion and o.kind not in {'evidence','unknown','contradiction'}), "No interpreted material change")
     latest_date = max((o.freshness for o in e.records if o.freshness != 'unknown'), default="unknown")
     state = "ambiguous identity — not merged" if e.ambiguous else ("governed" if any(o.governance == 'governed' for o in e.records) else "candidate")
-    return f"""<article class='enterprise-card'><h3>{escape(e.name)}</h3><p>{escape(latest)}</p><p>Role: canonical priority enterprise · Coverage: {len(e.records)} objects · Evidence: {ev} · Unknowns: {unk} · Contradictions: {con} · Opportunity Hypotheses: {opp} · Latest evidence/freshness: {escape(latest_date)} · State: {escape(state)}</p>{('<p><strong>Broken relationships:</strong> '+escape(', '.join(e.unresolved_refs))+'</p>') if e.unresolved_refs else ''}<p><a href='/blueprint-import/{escape(run_id)}/enterprises/{escape(e.identity_key)}'>Open Enterprise Intelligence dossier</a></p></article>"""
+    return f"""<article class='enterprise-card'><h3>{escape(e.name)}</h3><p>{escape(latest)}</p><p>Priority organisation represented in this Twin · {opp} opportunities · {unk} unknowns · {con} contradictions</p><p><a href='/blueprint-import/{escape(run_id)}/enterprises/{escape(e.identity_key)}'>Explore {escape(e.name)}</a></p></article>"""
 
 
 def _validation_report(twin: SemanticTwin) -> str:
@@ -222,19 +228,31 @@ def _limitations(twin, summary, mission, unresolved):
     return f"<section class='card'><h2>Coverage and Limitations</h2><p>{len(twin.objects)} objects · {len(twin.of_kind('unknown'))} Unknowns · {len(twin.of_kind('contradiction'))} Contradictions · {len(excluded)} excluded from executive conclusions.</p><ul>{''.join('<li>'+escape(x)+'</li>' for x in items)}</ul></section>"
 
 
-def _explorer(twin, run_id, mission):
+def _explorer(twin, run_id, mission, selected=""):
     counts = Counter(o.kind for o in twin.objects); governed = sum(o.governance == 'governed' for o in twin.objects)
     aspects = "".join(f"<tr><td>{escape(k)}</td><td>{v}</td><td>{sum(o.governance=='candidate' for o in twin.objects if o.kind==k)} candidate / {sum(o.governance=='governed' for o in twin.objects if o.kind==k)} governed</td><td>{sum(bool(o.evidence_refs) for o in twin.objects if o.kind==k)} evidenced</td><td>{sum(not o.eligible_conclusion for o in twin.objects if o.kind==k)} unresolved</td></tr>" for k,v in sorted(counts.items()))
     enterprises = "".join(_enterprise_card(e, run_id) for e in twin.enterprises)
-    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Executive Workspace</a><strong>Twin Explorer</strong><a href='/blueprint-import/{escape(run_id)}/review'>Candidate governance</a></nav><header class='hero'><h1>Explore Twin intelligence</h1><p>{len(twin.objects)} objects · {governed} governed · {len(twin.objects)-governed} candidate</p></header>{_mission(mission)}<section class='card'><h2>Aspect coverage</h2><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></section><section class='card'><h2>Enterprise index ({len(twin.enterprises)})</h2>{enterprises or '<p>No enterprise identities supplied.</p>'}</section>"
+    collections = business_collections(twin)
+    active = next((c for c in collections if c.key == selected), None)
+    links = "".join(f"<a class='collection-chip' href='?collection={escape(c.key)}'>{escape(c.label)} <b>{len(c.objects)}</b></a>" for c in collections)
+    if active and active.key == "enterprises": content = enterprises or "<p>No enterprise identities supplied.</p>"
+    elif active: content = "".join(_conclusion(o, run_id) if o.statement else f"<article class='enterprise-card'><h3>{escape(o.original_id or 'Twin record')}</h3><p>Available for advanced inspection.</p><a href='/blueprint-import/{escape(run_id)}/inspect#technical-diagnostics'>Inspect record</a></article>" for o in active.objects)
+    else: content = "<p>Select a business collection to explore its contents.</p>"
+    title = active.label if active else "Explore Twin intelligence"
+    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Twin overview</a><strong>Twin Explorer</strong><a href='/blueprint-import/{escape(run_id)}/review'>Governance</a></nav><header class='hero'><h1>{escape(title)}</h1><p>{escape(active.description) if active else 'Explore the Twin through business-facing collections.'}</p></header><section class='card'><h2>Twin collections</h2><div class='collection-links'>{links}</div></section><section class='card'><h2>{escape(title)}</h2>{content}</section><details class='card'><summary>Advanced aspect coverage</summary><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></details>"
 
 
 def _dossier(ent, twin, run_id, mission):
     relevant = list(ent.records)
-    relevant += [o for o in twin.objects if o not in relevant and o.kind in {"unknown", "contradiction"} and o.subject in {"", "Twin scope", ent.name}]
-    domains = Counter(o.kind for o in relevant); records = "".join(_conclusion(o, run_id) if o.eligible_conclusion else f"<article class='executive-conclusion'><h4>Retained inspection-only record</h4><p>{escape(o.exclusion_reason)}</p><p><code>{escape(o.record_id)}</code> · {escape(o.governance)} · Freshness: {escape(o.freshness)}</p></article>" for o in relevant)
+    domains = Counter(o.kind for o in relevant)
+    sections = (("Overview", ("enterprise", "enterprise_twin", "entity", "observation", "fact", "executive_intelligence")), ("Financials", ("financial_observation", "financial_fact", "economic_pool")), ("Transformation", ("transformation_programme",)), ("Technology and capabilities", ("capability_offer",)), ("Relationships", ("relationship", "supplier_relationship")), ("Opportunities", ("opportunity_hypothesis", "ranked_opportunity")), ("Unknowns and contradictions", ("unknown", "contradiction")), ("Evidence", ("evidence",)))
+    rendered = []
+    for label, kinds in sections:
+        rows = [o for o in relevant if o.kind in kinds and (o.eligible_conclusion or o.kind in {"evidence", "enterprise", "enterprise_twin", "entity"})]
+        if rows: rendered.append(f"<section class='card'><h2>{label}</h2>{''.join(_conclusion(o, run_id) if o.statement else '<p>Identity represented in this Twin.</p>' for o in rows)}</section>")
     gaps = [d for d in ("strategy", "financial", "leadership", "customer", "operating_model", "technology", "programme", "supplier", "procurement", "opportunity_hypothesis") if not any(d in k.casefold() for k in domains)]
-    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Executive Workspace</a><a href='/blueprint-import/{escape(run_id)}/explore'>Twin Explorer</a><strong>Enterprise dossier</strong></nav><header class='hero'><h1>{escape(ent.name)}</h1><p>Enterprise Intelligence dossier · {'ambiguous identity, not silently merged' if ent.ambiguous else 'resolved runtime identity'} · {len(ent.records)} objects</p></header>{_mission(mission)}<section class='card'><h2>Available intelligence</h2>{records}</section><section class='card'><h2>Coverage gaps</h2><p>{escape(', '.join(gaps) or 'No standard domain gap detected; completeness is not implied.')}</p></section><section class='card'><h2>Governance</h2><a href='/blueprint-import/{escape(run_id)}/review'>Review candidate governance</a> · <a href='/blueprint-import/{escape(run_id)}/inspect'>View evidence and provenance</a></section>"
+    signal = next((o.statement for o in relevant if o.eligible_conclusion), "Explore the intelligence explicitly associated with this organisation.")
+    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Twin overview</a><a href='/blueprint-import/{escape(run_id)}/explore?collection=enterprises'>Enterprises</a><strong>Enterprise dossier</strong></nav><header class='hero'><h1>{escape(ent.name)}</h1><p>Priority organisation represented in this Twin.</p><p>{escape(signal)}</p></header>{''.join(rendered)}<details class='card'><summary>Advanced inspection and governance</summary><p>Canonical identifiers and excluded records remain available in package inspection.</p><a href='/blueprint-import/{escape(run_id)}/inspect'>View evidence and provenance</a> · <a href='/blueprint-import/{escape(run_id)}/review'>Review candidate governance</a></details>"
 
 
 def _navigation(run_id):
@@ -243,4 +261,4 @@ def _navigation(run_id):
 
 
 def _styles():
-    return """<style>.executive-path{display:flex;gap:.65rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem}.executive-path span,.executive-path a,.executive-path strong,.pill{padding:.45rem .7rem;border-radius:1rem;background:#eef5f2}.workspace-caveat{border-left:4px solid #b46b00;padding:.75rem;background:#fff8e8}.status-key{display:flex;gap:1rem;flex-wrap:wrap}.executive-summary-grid article{border-top:3px solid #185c4d}.theme-group{margin:1.5rem 0}.executive-conclusion,.enterprise-card{border-left:4px solid #c98b2e;padding:1rem;margin:.75rem 0;background:#fffdf8}.mission{padding:.7rem;background:#edf7f3}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:.6rem;border-bottom:1px solid #ddd}</style>"""
+    return """<style>.executive-path{display:flex;gap:.65rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem}.executive-path span,.executive-path a,.executive-path strong,.pill,.collection-chip{padding:.45rem .7rem;border-radius:1rem;background:#eef5f2}.workspace-caveat{border-left:4px solid #b46b00;padding:.75rem;background:#fff8e8}.executive-summary-grid article{border-top:3px solid #185c4d}.theme-group{margin:1.5rem 0}.executive-conclusion,.enterprise-card{border-left:4px solid #c98b2e;padding:1rem;margin:.75rem 0;background:#fffdf8}.mission{padding:.7rem;background:#edf7f3}.composition-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}.composition-tile{display:flex;min-height:9rem;flex-direction:column;gap:.5rem;padding:1rem;border:1px solid #cad8d3;border-radius:.7rem;text-decoration:none;color:inherit}.composition-tile:focus,.composition-tile:hover{outline:3px solid #185c4d}.composition-tile b{font-size:2rem}.collection-links{display:flex;gap:.6rem;flex-wrap:wrap}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:.6rem;border-bottom:1px solid #ddd}@media(max-width:600px){.composition-grid{grid-template-columns:1fr}}</style>"""
