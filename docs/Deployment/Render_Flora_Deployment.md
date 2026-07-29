@@ -154,5 +154,8 @@ workspace membership, and `package.upload` capability.
 
 After deployment, verify the log reports
 `cios.applications.flora.web.app` and its repository-resolved file. Confirm
-`/deployment` reports the merged `RENDER_GIT_COMMIT`, then exercise a real ZIP
+`/deployment` reports the merged `RENDER_GIT_COMMIT`, application module,
+`pilot_import_mode=active`, the canonical import route owner, and
+`pilot-candidate-import-v1`. The Digital Twins and import-form HTML carry the
+same values in a `flora-import-deployment` comment. Then exercise a real ZIP
 through the browser. A form screenshot is not deployment proof.

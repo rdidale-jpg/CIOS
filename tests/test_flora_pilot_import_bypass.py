@@ -62,9 +62,17 @@ def test_deployed_equivalent_pilot_route_imports_candidate_to_executive_workspac
     try:
         status, _, landing = request(server, "GET", "/digital-twins")
         assert status == 200 and "href='/blueprint-import'>Import Twin" in landing
+        assert landing.count("href='/blueprint-import'") == 1
+        assert "Import a Twin package to create a candidate for review" in landing
+        assert "application_module=cios.applications.flora.web.app" in landing
+        assert "pilot_import_mode=active" in landing
+        assert "import_route_owner=cios.applications.flora.digital_twins.digital_twins_landing_page" in landing
+        assert "import_route_implementation=pilot-candidate-import-v1" in landing
         status, _, form = request(server, "GET", "/blueprint-import")
         assert status == 200 and 'name="expected_type"' not in form  # templates use canonical single quotes
         assert "name='expected_type'" in form and "Industry" in form and "name='blueprint_zip'" in form
+        assert "method='post' action='/blueprint-import/upload' enctype='multipart/form-data'" in form
+        assert "flora-import-deployment:" in form
         body, boundary = multipart(pkg())
         status, headers, _ = request(server, "POST", "/blueprint-import/upload", body, {
             "Content-Type": f"multipart/form-data; boundary={boundary}", "Content-Length": str(len(body))})
@@ -86,6 +94,27 @@ def test_deployed_equivalent_pilot_route_imports_candidate_to_executive_workspac
     assert not (tmp_path / "memory" / "observations.jsonl").exists()
     events = (tmp_path / "blueprint_import" / "audit" / "events.jsonl").read_text()
     assert "package_received" in events and "pilot_import_bypass_result" in events
+
+
+def test_deployment_endpoint_identifies_canonical_import_runtime(monkeypatch, tmp_path):
+    import cios.applications.flora.web.app as web_app
+    pilot(monkeypatch, tmp_path)
+    monkeypatch.setenv("RENDER_GIT_COMMIT", "abc123deployed")
+    web_app.application_revision.cache_clear()
+    server = ThreadingHTTPServer(("127.0.0.1", 0), web_app.FloraWebHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True); thread.start()
+    try:
+        status, _, body = request(server, "GET", "/deployment")
+        payload = json.loads(body)
+        assert status == 200
+        assert payload["commit_sha"] == "abc123deployed"
+        assert payload["application_module"] == "cios.applications.flora.web.app"
+        assert payload["pilot_import_mode"] == "active"
+        assert payload["import_route_owner"] == "cios.applications.flora.digital_twins.digital_twins_landing_page"
+        assert payload["import_route_implementation"] == "pilot-candidate-import-v1"
+    finally:
+        server.shutdown(); server.server_close(); thread.join()
+        web_app.application_revision.cache_clear()
 
 
 def test_validation_and_archive_safety_precede_identity(monkeypatch, tmp_path):

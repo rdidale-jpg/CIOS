@@ -151,11 +151,12 @@ def digital_twins_landing_page(headers=None) -> str:
     twins = governed_twin_list(headers)
     cards = ''.join(_governed_twin_card(t) for t in twins)
     decision = blueprint_upload_authorisation(headers)
+    import_enabled = decision.decision == "allowed" or pilot_import_bypass_enabled()
     empty = ("<p>No governed Digital Twins are available to this signed-in account.</p>"
              "<p class='muted'>Import a Twin package to create a candidate for review.</p>"
-             if not cards and decision.decision == "allowed"
+             if not cards and import_enabled
              else ("<p>No governed Digital Twins are available to this signed-in account.</p>" if not cards else ""))
-    if decision.decision == "allowed" or pilot_import_bypass_enabled():
+    if import_enabled:
         import_access = "<p><a class='button primary' href='/blueprint-import'>Import Twin</a></p>"
     elif authenticated_flora_user(headers):
         import_access = ("<p class='muted' role='note'><strong>Twin import is unavailable:</strong> "
