@@ -74,7 +74,8 @@ def test_production_route_does_not_inject_an_import_action(monkeypatch, tmp_path
     assert len(rendered) == 1
     assert "No governed Digital Twins are available" in html
     assert "href='/blueprint-import'" not in html
-    assert "<!-- flora-revision:" in html
+    assert "<!-- flora-import-deployment:" in html
+    assert "import_route_owner=cios.applications.flora.digital_twins.digital_twins_landing_page" in html
 
     import_status, import_html = _get("/blueprint-import", HEADERS)
     assert import_status == 200

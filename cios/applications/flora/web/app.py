@@ -62,10 +62,25 @@ PORT_ENV = "PORT"
 FLORA_HOST_ENV = "FLORA_HOST"
 FLORA_PORT_ENV = "FLORA_PORT"
 HEALTH_PAYLOAD = {"status": "healthy", "service": "flora"}
+APPLICATION_MODULE = "cios.applications.flora.web.app"
+IMPORT_ROUTE_OWNER = "cios.applications.flora.digital_twins.digital_twins_landing_page"
+IMPORT_ROUTE_IMPLEMENTATION = "pilot-candidate-import-v1"
+
+
+def import_deployment_fingerprint() -> dict[str, str]:
+    """Return non-secret facts that identify the deployed import implementation."""
+    mode = pilot_import_mode()
+    return {
+        "commit_sha": application_revision(),
+        "application_module": APPLICATION_MODULE,
+        "pilot_import_mode": "conflict" if mode.conflict else ("active" if mode.enabled else "inactive"),
+        "import_route_owner": IMPORT_ROUTE_OWNER,
+        "import_route_implementation": IMPORT_ROUTE_IMPLEMENTATION,
+    }
 
 def deployment_payload() -> dict[str, str]:
     auto_status = pilot_auto_sign_in_status()
-    payload = {"service": "flora", **deployment_metadata()}
+    payload = {"service": "flora", **deployment_metadata(), **import_deployment_fingerprint()}
     if auto_status.requested:
         payload.update({
             "pilot_auto_sign_in": "active" if auto_status.active else "refused",
@@ -79,9 +94,10 @@ def deployment_payload() -> dict[str, str]:
 CASE_SLUGS = {"ThamesWater", "NationalGrid", "BT", "Vodafone"}
 
 
-def _with_revision_fingerprint(html: str) -> str:
-    revision = escape(application_revision(), quote=True).replace("--", "- -")
-    comment = f"<!-- flora-revision: {revision} -->"
+def _with_import_deployment_fingerprint(html: str) -> str:
+    fields = " | ".join(f"{key}={value}" for key, value in import_deployment_fingerprint().items())
+    safe_fields = escape(fields, quote=True).replace("--", "- -")
+    comment = f"<!-- flora-import-deployment: {safe_fields} -->"
     body_end = re.search(r"</body\s*>", html, flags=re.IGNORECASE)
     if body_end:
         return html[: body_end.start()] + comment + html[body_end.start() :]
@@ -223,7 +239,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path == "/live/evidence":
                 self._html(evidence_page())
             elif parsed.path == "/digital-twins":
-                self._html(_with_revision_fingerprint(digital_twins_landing_page(self.headers)))
+                self._html(_with_import_deployment_fingerprint(digital_twins_landing_page(self.headers)))
             elif parsed.path in {"/industries/uk-banking", "/flora/banking/inspect"}:
                 html, status = twin_inspection_page("uk-banking", self.headers, "industry")
                 self._html(html, status=status)
@@ -250,7 +266,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(html, status=status)
             elif parsed.path == "/blueprint-import":
                 html, status = import_blueprint_entry_page(self.headers)
-                self._html(html, status=status)
+                self._html(_with_import_deployment_fingerprint(html), status=status)
             elif parsed.path == "/blueprint-import/history":
                 html, status = blueprint_history_page(self.headers)
                 self._html(html, status=status)
