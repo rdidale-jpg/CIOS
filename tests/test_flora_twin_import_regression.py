@@ -53,8 +53,8 @@ def test_authorised_digital_twins_navigation_exposes_import_twin(monkeypatch, tm
     assert "Import a Twin package to create a candidate for review" in html
 
 
-def test_production_routes_render_zero_twin_import_action(monkeypatch, tmp_path):
-    """Prove the GET boundary repairs an omitted action and its target loads."""
+def test_production_route_does_not_inject_an_import_action(monkeypatch, tmp_path):
+    """The Digital Twins presenter, not the HTTP route, owns its action."""
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
     rendered = []
@@ -73,10 +73,7 @@ def test_production_routes_render_zero_twin_import_action(monkeypatch, tmp_path)
     assert status == 200
     assert len(rendered) == 1
     assert "No governed Digital Twins are available" in html
-    assert "<a class='button primary' href='/blueprint-import'>Import Twin</a>" in html
-    assert html.count("href='/blueprint-import'") == 1
-    action = html[html.index("<a class='button primary'"):html.index("</a>", html.index("href='/blueprint-import'"))]
-    assert "hidden" not in action and "disabled" not in action
+    assert "href='/blueprint-import'" not in html
     assert "<!-- flora-revision:" in html
 
     import_status, import_html = _get("/blueprint-import", HEADERS)

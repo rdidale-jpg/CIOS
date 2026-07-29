@@ -137,7 +137,7 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
                 "actor_type": "pilot_operator", "actor_id": PILOT_IMPORT_ACTOR,
                 "workspace_type": "pilot_workspace", "workspace_id": PILOT_IMPORT_WORKSPACE,
                 "authentication_mode": PILOT_IMPORT_AUTH_MODE,
-                "authorisation_checks": {"account": "bypassed for pilot", "workspace": "bypassed for pilot", "membership": "bypassed for pilot", "package.receive permission": "bypassed for pilot"},
+                "authorisation_checks": {"account": "not applicable in pilot import mode", "workspace": "not applicable in pilot import mode", "membership": "not applicable in pilot import mode", "package.upload": "not applicable in pilot import mode"},
             })
             _audit_pilot_bypass(record)
         else:
@@ -1052,7 +1052,7 @@ def _stage_statuses(failed_stage: str, decision=None) -> dict[str, str]:
     statuses = {stage: "Not started" for stage in _DIAGNOSTIC_STAGES}
     if pilot_import_bypass_enabled():
         for stage in _DIAGNOSTIC_STAGES[:4]:
-            statuses[stage] = "Bypassed for pilot"
+            statuses[stage] = "Not applicable in pilot import mode"
         if failed_stage in statuses:
             failed_index = _DIAGNOSTIC_STAGES.index(failed_stage)
             for stage in _DIAGNOSTIC_STAGES[4:failed_index]:
@@ -1120,19 +1120,21 @@ def _pilot_diagnostics(package=None, summary: dict[str, Any] | None = None) -> s
     correlation = getattr(package, "import_run_id", "") or f"bpi-diag-{uuid4().hex[:12]}"
     return f"""<section class='card diagnostics-card'><h2>Pilot import diagnostics</h2><table>
     <tr><th>Authentication mode</th><td>{PILOT_IMPORT_AUTH_MODE}</td></tr>
-    <tr><th>Account check</th><td>Bypassed for pilot</td></tr><tr><th>Workspace check</th><td>Bypassed for pilot</td></tr>
-    <tr><th>Membership check</th><td>Bypassed for pilot</td></tr><tr><th>package.receive permission</th><td>Bypassed for pilot</td></tr>
+    <tr><th>Pilot actor established</th><td>yes — {PILOT_IMPORT_ACTOR}</td></tr>
+    <tr><th>Account check</th><td>not applicable in pilot import mode</td></tr><tr><th>Workspace check</th><td>not applicable in pilot import mode</td></tr>
+    <tr><th>Membership check</th><td>not applicable in pilot import mode</td></tr><tr><th>package.upload</th><td>not applicable in pilot import mode</td></tr>
     <tr><th>Package received</th><td>{received}</td></tr><tr><th>Package inspected</th><td>{inspected}</td></tr>
     <tr><th>Validation result</th><td>{validation}</td></tr><tr><th>Candidate result</th><td>{escape(candidate)}</td></tr>
+    <tr><th>Promotion status</th><td>not promoted — separate authorisation required</td></tr>
     <tr><th>Correlation ID</th><td><code>{escape(correlation)}</code></td></tr></table></section>"""
 
 def _safe_failure(message, stage, changed, retry, next_step, decision=None, diagnostic_ref: str = "", audit_warning: str = "", import_run_id: str = ""):
     diagnostic_ref = diagnostic_ref or f"bpi-diag-{uuid4().hex[:12]}"
     unavailable = "Authorisation context unavailable after failure"
     bypass = pilot_import_bypass_enabled()
-    account = "Bypassed for pilot (pilot_operator: flora-pilot)" if bypass else (decision.user_id if decision and decision.user_id else unavailable)
-    workspace = "Bypassed for pilot (pilot_workspace: flora-pilot-workspace)" if bypass else (decision.active_workspace if decision and decision.active_workspace else ("No active workspace" if decision else unavailable))
-    role = "Bypassed for pilot" if bypass else (decision.resolved_role if decision and decision.resolved_role else ("No effective Blueprint role" if decision else unavailable))
+    account = f"Pilot actor established ({PILOT_IMPORT_ACTOR})" if bypass else (decision.user_id if decision and decision.user_id else unavailable)
+    workspace = "Not applicable in pilot import mode" if bypass else (decision.active_workspace if decision and decision.active_workspace else ("No active workspace" if decision else unavailable))
+    role = "Not applicable in pilot import mode" if bypass else (decision.resolved_role if decision and decision.resolved_role else ("No effective Blueprint role" if decision else unavailable))
     owner = "yes" if decision and decision.owner_recognised else "no"
     capability = decision.required_permission if decision else "package.upload"
     statuses = _stage_statuses(stage, decision)
@@ -1176,9 +1178,9 @@ def _audit_pilot_bypass(record: BlueprintPackageRecord) -> None:
         "correlation_id": correlation_id, "request_correlation_id": correlation_id,
         "authentication_mode": PILOT_IMPORT_AUTH_MODE, "actor_type": "pilot_operator",
         "actor_id": PILOT_IMPORT_ACTOR, "workspace_type": "pilot_workspace",
-        "workspace_id": PILOT_IMPORT_WORKSPACE, "account_check": "bypassed for pilot",
-        "workspace_check": "bypassed for pilot", "membership_check": "bypassed for pilot",
-        "package.receive permission": "bypassed for pilot", "package_received": "yes",
+        "workspace_id": PILOT_IMPORT_WORKSPACE, "account_check": "not applicable in pilot import mode",
+        "workspace_check": "not applicable in pilot import mode", "membership_check": "not applicable in pilot import mode",
+        "package.upload": "not applicable in pilot import mode", "package_received": "yes",
         "package_inspected": "no", "validation_result": "pending", "candidate_result": "pending",
         "package_ref": record.package_ref, "import_run_id": record.import_run_id,
     })
@@ -1190,8 +1192,8 @@ def _audit_pilot_result(record: BlueprintPackageRecord, result) -> None:
     candidates = int(getattr(result, "candidate_records_staged", 0))
     BlueprintImportLedger().append("pilot_import_bypass_result", {
         "correlation_id": correlation_id, "authentication_mode": PILOT_IMPORT_AUTH_MODE,
-        "account_check": "bypassed for pilot", "workspace_check": "bypassed for pilot",
-        "membership_check": "bypassed for pilot", "package.receive permission": "bypassed for pilot",
+        "account_check": "not applicable in pilot import mode", "workspace_check": "not applicable in pilot import mode",
+        "membership_check": "not applicable in pilot import mode", "package.upload": "not applicable in pilot import mode",
         "package_received": "yes", "package_inspected": "yes",
         "validation_result": "failed" if errors else "passed",
         "candidate_result": f"{candidates} candidate(s) created",
