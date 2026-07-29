@@ -23,6 +23,9 @@ class SemanticObject:
     references: tuple[str, ...] = ()
     sufficiency: str = "unsupported claim"
     permitted_use: str = "not eligible for prominence"
+    consequence: str = ""
+    domains: tuple[str, ...] = ()
+    affected_organisations: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -71,15 +74,52 @@ BUSINESS_COLLECTIONS: Mapping[str, tuple[str, str, tuple[str, ...]]] = {
 }
 
 
-def business_collections(twin: SemanticTwin, *, include_empty: bool = False) -> tuple[TwinCollection, ...]:
-    """Translate without mutation or double counting; unknown types remain inspectable."""
+def business_collections(twin: SemanticTwin, *, include_empty: bool = False,
+                         domain: str = "all") -> tuple[TwinCollection, ...]:
+    """Translate semantic records into distinct business concepts.
+
+    Canonical wrapper collections own business navigation when present.  Their
+    underlying semantic records remain in ``twin.objects`` for inspection; we
+    never merge records by a mutable display label.
+    """
+    objects = tuple(o for o in twin.objects if _in_domain(o, domain))
+    canonical_owner = {
+        "enterprises": ("enterprise_twin" if any(o.kind == "enterprise_twin" for o in objects)
+                        else "enterprise" if any(o.kind == "enterprise" for o in objects) else "entity"),
+        "market-participants": "market_participant_twin" if any(o.kind == "market_participant_twin" for o in objects) else "market_participant",
+        "opportunities": "opportunity_hypothesis" if any(o.kind == "opportunity_hypothesis" for o in objects) else "ranked_opportunity",
+    }
     mapped = {kind for _label, _description, kinds in BUSINESS_COLLECTIONS.values() for kind in kinds}
-    result = [TwinCollection(key, label, description, tuple(o for o in twin.objects if o.kind in kinds))
-              for key, (label, description, kinds) in BUSINESS_COLLECTIONS.items()]
-    other = tuple(o for o in twin.objects if o.kind not in mapped)
+    result = []
+    for key, (label, description, kinds) in BUSINESS_COLLECTIONS.items():
+        selected = tuple(o for o in objects if o.kind in kinds)
+        if key in canonical_owner:
+            selected = tuple(o for o in selected if o.kind == canonical_owner[key])
+        if key == "insights":
+            selected = tuple(o for o in selected if executive_insight_eligible(o))
+        result.append(TwinCollection(key, label, description, selected))
+    other = tuple(o for o in objects if o.kind not in mapped)
     if other:
         result.append(TwinCollection("other", "Other Twin content", "Additional typed content available for advanced inspection.", other))
     return tuple(collection for collection in result if include_empty or collection.objects)
+
+
+def executive_insight_eligible(obj: SemanticObject) -> bool:
+    """The canonical, deliberately strict executive-insight contract."""
+    excluded = {"evidence", "entity", "enterprise", "enterprise_twin", "market_participant",
+                "market_participant_twin", "capability_offer", "unknown", "contradiction"}
+    return bool(obj.eligible_conclusion and obj.kind not in excluded and obj.subject not in {"", "Twin scope"}
+                and obj.statement and obj.consequence and obj.domains and obj.evidence_refs
+                and obj.confidence and obj.freshness)
+
+
+def _in_domain(obj: SemanticObject, domain: str) -> bool:
+    lens = domain.casefold().replace("-", " ")
+    if lens in {"", "all", "all twin"}:
+        return True
+    if lens == "cross domain":
+        return len(obj.domains) >= 2
+    return lens in obj.domains
 
 
 def assemble_semantic_twin(candidates: list[dict[str, Any]]) -> SemanticTwin:
@@ -151,6 +191,22 @@ def _object(candidate: dict[str, Any]) -> SemanticObject:
         refs.extend([value] if isinstance(value, str) else [str(v) for v in value if not isinstance(v, dict)])
     truth = str(candidate.get("truth_class") or "").casefold()
     kind = declared_kind
+    consequence = next((str(p[k]).strip() for k in ("business_consequence", "industry_consequence", "why_it_matters", "consequence", "business_significance") if p.get(k)), "")
+    raw_domains = p.get("domains") or p.get("subsectors") or p.get("domain") or p.get("subsector") or ()
+    if not raw_domains:
+        source_domains, target_domains = p.get("source_domains") or (), p.get("target_domains") or ()
+        if isinstance(source_domains, str): source_domains = (source_domains,)
+        if isinstance(target_domains, str): target_domains = (target_domains,)
+        raw_domains = tuple(source_domains) + tuple(target_domains)
+    if isinstance(raw_domains, str): raw_domains = (raw_domains,)
+    domains = []
+    for value in raw_domains:
+        normal = str(value).casefold()
+        if "telecom" in normal: domains.append("telecoms")
+        elif "media" in normal: domains.append("media")
+        elif "sport" in normal: domains.append("sport")
+    affected = p.get("affected_enterprises") or p.get("affected_organisations") or p.get("affected_market_participants") or ()
+    if isinstance(affected, str): affected = (affected,)
     if kind == "unknown": sufficiency, permitted = "unknown", "investigation"
     elif kind == "contradiction": sufficiency, permitted = "unresolved contradiction", "investigation"
     elif "opportun" in kind: sufficiency, permitted = "Opportunity Hypothesis", "commercial hypothesis"
@@ -165,4 +221,5 @@ def _object(candidate: dict[str, Any]) -> SemanticObject:
         str(p.get("confidence") or "bounded/unspecified"),
         "governed" if candidate.get("governance_status") in {"governed", "accepted"} else "candidate",
         str(candidate.get("source_file") or "Imported package"), str(candidate.get("source_location") or "not supplied"),
-        eligible, reason, original_id, tuple(dict.fromkeys(refs)), sufficiency, permitted)
+        eligible, reason, original_id, tuple(dict.fromkeys(refs)), sufficiency, permitted,
+        consequence, tuple(dict.fromkeys(domains)), tuple(map(str, affected)))

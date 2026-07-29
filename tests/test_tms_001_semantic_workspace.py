@@ -12,15 +12,15 @@ def test_tms_canonical_semantics_relationships_and_executive_intelligence(monkey
     run_id = target.rsplit("/", 1)[-1]
     html, status = executive_workspace_page(run_id, HEADERS)
     assert status == 200
-    assert "Canonical priority enterprises: 14" in html
-    assert "Composed for: Sales Director · Sopra Steria" in html
-    assert "2026 telecom regulation/security/infrastructure data is active." in html
-    assert "No supported timing conclusion" not in html
-    assert html.count("Imported Twin · Candidate") == 1
-    assert "Twin composition" in html and "Enterprises" in html and "Opportunities" in html
-    assert "Capabilities/offers: 16" in html
-    assert "5G SA network slicing" in html
-    assert "AI fan companion and fan data product" in html
+    assert "PILOT" in html and "Telecommunications, Media and Sport Industry Twin" in html
+    assert "Twin Composition" in html and "Enterprises</strong><b>14" in html
+    assert "Market Participants</strong><b>10" in html
+    assert "Opportunities</strong><b>9" in html
     assert "Evidence Sources" in html
-    assert "Explain this insight" in html
-    assert "Offer alignment is incomplete" in html
+    assert all(lens in html for lens in ("All Twin", "Telecoms", "Media", "Sport", "Cross-domain"))
+    assert "Explain this insight" not in html
+    assert "Deterministic package validation" not in html
+    health, status = executive_workspace_page(run_id, HEADERS, view="health")
+    assert status == 200 and "Canonical priority enterprises: 14" in health
+    assert "Deterministic package validation" in health and "Evidence-governed reasoning audit" in health
+    assert "Researcher Feedback Report" in health and "Protected governance actions" in health
