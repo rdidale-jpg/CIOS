@@ -1,7 +1,7 @@
 """Typed, read-only semantic projection over staged import candidates."""
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Mapping
 import re
 
 
@@ -43,6 +43,43 @@ class SemanticTwin:
 
     def of_kind(self, kind: str) -> tuple[SemanticObject, ...]:
         return tuple(o for o in self.objects if o.kind == kind)
+
+
+@dataclass(frozen=True)
+class TwinCollection:
+    """A navigation projection; its members remain immutable semantic objects."""
+    key: str
+    label: str
+    description: str
+    objects: tuple[SemanticObject, ...]
+
+
+# This is the single business-vocabulary mapping for imported Twin presentation.
+# It deliberately lives beside semantic assembly, rather than in a web view.
+BUSINESS_COLLECTIONS: Mapping[str, tuple[str, str, tuple[str, ...]]] = {
+    "enterprises": ("Enterprises", "Priority organisations represented in this Twin.", ("enterprise", "enterprise_twin", "entity")),
+    "market-participants": ("Market Participants", "Other organisations shaping the market.", ("market_participant", "market_participant_twin")),
+    "opportunities": ("Opportunities", "Evidence-bounded commercial hypotheses.", ("opportunity_hypothesis", "ranked_opportunity", "opportunity_twin")),
+    "insights": ("Insights", "Material observations and interpretations.", ("executive_intelligence", "fact", "observation", "supported_interpreted_observation")),
+    "financial-intelligence": ("Financial Intelligence", "Financial measures and their business interpretation.", ("financial_observation", "financial_fact", "economic_pool")),
+    "transformation-programmes": ("Transformation Programmes", "Material programmes changing represented organisations.", ("transformation_programme",)),
+    "capabilities-and-offers": ("Capabilities and Offers", "Capabilities and offers represented in the Twin.", ("capability_offer",)),
+    "relationships": ("Relationships", "Connections represented across the market.", ("relationship", "supplier_relationship")),
+    "evidence-sources": ("Evidence Sources", "Sources supporting the Twin.", ("evidence",)),
+    "unknowns": ("Unknowns", "Important gaps retained for investigation.", ("unknown",)),
+    "contradictions": ("Contradictions", "Conflicting claims requiring interpretation.", ("contradiction",)),
+}
+
+
+def business_collections(twin: SemanticTwin, *, include_empty: bool = False) -> tuple[TwinCollection, ...]:
+    """Translate without mutation or double counting; unknown types remain inspectable."""
+    mapped = {kind for _label, _description, kinds in BUSINESS_COLLECTIONS.values() for kind in kinds}
+    result = [TwinCollection(key, label, description, tuple(o for o in twin.objects if o.kind in kinds))
+              for key, (label, description, kinds) in BUSINESS_COLLECTIONS.items()]
+    other = tuple(o for o in twin.objects if o.kind not in mapped)
+    if other:
+        result.append(TwinCollection("other", "Other Twin content", "Additional typed content available for advanced inspection.", other))
+    return tuple(collection for collection in result if include_empty or collection.objects)
 
 
 def assemble_semantic_twin(candidates: list[dict[str, Any]]) -> SemanticTwin:

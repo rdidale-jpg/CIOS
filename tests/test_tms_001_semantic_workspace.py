@@ -16,10 +16,11 @@ def test_tms_canonical_semantics_relationships_and_executive_intelligence(monkey
     assert "Composed for: Sales Director · Sopra Steria" in html
     assert "2026 telecom regulation/security/infrastructure data is active." in html
     assert "No supported timing conclusion" not in html
-    assert "Candidate · executive_intelligence" in html
+    assert html.count("Imported Twin · Candidate") == 1
+    assert "Twin composition" in html and "Enterprises" in html and "Opportunities" in html
     assert "Capabilities/offers: 16" in html
     assert "5G SA network slicing" in html
     assert "AI fan companion and fan data product" in html
-    assert "Evidence: 4" in html
-    assert "Evidence sufficiency, currency and permitted use" in html
+    assert "Evidence Sources" in html
+    assert "Explain this insight" in html
     assert "Offer alignment is incomplete" in html
