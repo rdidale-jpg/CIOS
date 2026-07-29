@@ -11,7 +11,6 @@ import re
 import tempfile
 import uuid
 from html import escape
-from html.parser import HTMLParser
 from pathlib import Path
 from email.parser import BytesParser
 from email.policy import default as email_policy
@@ -31,11 +30,10 @@ from cios.applications.flora.storage import startup_storage_status
 from cios.applications.flora.live.runtime import application_revision, deployment_metadata
 from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, financial_intelligence_safe_support_report_payload, load_run, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id, blueprint_upload_authorisation
-from cios.applications.flora.pilot_import import pilot_import_bypass_enabled
+from cios.applications.flora.pilot_import import pilot_import_configuration_error, pilot_import_mode
 from cios.applications.flora.pilot_auth import (
     audit as pilot_audit,
     clear_session_cookie,
-    configuration_error_page,
     issue_session_cookie,
     pilot_auto_sign_in_status,
     pilot_banner_html,
@@ -81,89 +79,6 @@ def deployment_payload() -> dict[str, str]:
 CASE_SLUGS = {"ThamesWater", "NationalGrid", "BT", "Vodafone"}
 
 
-class _ImportTwinLinkDetector(HTMLParser):
-    """Detect a visible, enabled Import Twin anchor without rewriting HTML."""
-
-    def __init__(self) -> None:
-        super().__init__(convert_charrefs=True)
-        self._hidden: list[tuple[str, bool]] = []
-        self._anchor: dict[str, object] | None = None
-        self.found = False
-
-    @staticmethod
-    def _is_hidden(attrs: dict[str, str | None]) -> bool:
-        style = re.sub(r"\s+", "", (attrs.get("style") or "").casefold())
-        classes = set((attrs.get("class") or "").casefold().split())
-        return (
-            "hidden" in attrs
-            or (attrs.get("aria-hidden") or "").casefold() == "true"
-            or "hidden" in classes
-            or "visually-hidden" in classes
-            or "display:none" in style
-            or "visibility:hidden" in style
-        )
-
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        values = dict(attrs)
-        hidden = (self._hidden[-1][1] if self._hidden else False) or self._is_hidden(values)
-        if tag.casefold() not in {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}:
-            self._hidden.append((tag.casefold(), hidden))
-        if tag.casefold() == "a" and self._anchor is None:
-            href = values.get("href") or ""
-            self._anchor = {
-                "candidate": urlparse(href).path == "/blueprint-import",
-                "hidden": hidden,
-                "disabled": "disabled" in values or (values.get("aria-disabled") or "").casefold() == "true",
-                "text": [],
-            }
-
-    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        # A self-closing element cannot be the required text link.
-        return
-
-    def handle_data(self, data: str) -> None:
-        if self._anchor is not None:
-            self._anchor["text"].append(data)  # type: ignore[union-attr]
-
-    def handle_endtag(self, tag: str) -> None:
-        if tag.casefold() == "a" and self._anchor is not None:
-            text = " ".join("".join(self._anchor["text"]).split())  # type: ignore[arg-type]
-            self.found = bool(
-                self._anchor["candidate"]
-                and not self._anchor["hidden"]
-                and not self._anchor["disabled"]
-                and text == "Import Twin"
-            )
-            self._anchor = None
-        lowered = tag.casefold()
-        for index in range(len(self._hidden) - 1, -1, -1):
-            if self._hidden[index][0] == lowered:
-                del self._hidden[index:]
-                break
-
-
-def ensure_import_twin_action(html: str) -> str:
-    """Guarantee the canonical visible import action in a Digital Twins page."""
-    detector = _ImportTwinLinkDetector()
-    detector.feed(html)
-    detector.close()
-    if detector.found:
-        return html
-
-    action = "<p class='digital-twins-import-action'><a class='button primary' href='/blueprint-import'>Import Twin</a></p>"
-    hero = re.search(
-        r"(<section\b[^>]*class=(['\"])[^'\"]*\bhero\b[^'\"]*\2[^>]*>)(?P<body>.*?<h1\b[^>]*>\s*Digital Twins\s*</h1>.*?)(?P<close></section\s*>)",
-        html,
-        flags=re.IGNORECASE | re.DOTALL,
-    )
-    if hero:
-        return html[: hero.start("close")] + action + html[hero.start("close") :]
-    body = re.search(r"<body\b[^>]*>", html, flags=re.IGNORECASE)
-    if body:
-        return html[: body.end()] + action + html[body.end() :]
-    return action + html
-
-
 def _with_revision_fingerprint(html: str) -> str:
     revision = escape(application_revision(), quote=True).replace("--", "- -")
     comment = f"<!-- flora-revision: {revision} -->"
@@ -193,47 +108,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:  # noqa: N802 - stdlib callback name
         parsed = urlparse(self.path)
         try:
-            auto_status = pilot_auto_sign_in_status()
-            import_bypass_route = pilot_import_bypass_enabled() and parsed.path.startswith("/blueprint-import")
-            if auto_status.requested and not import_bypass_route and parsed.path not in {"/health", "/deployment"} and not resolve_pilot_session(self.headers):
-                correlation_id = self.headers.get("X-Request-Id", "") or str(uuid.uuid4())
-                if not auto_status.active:
-                    pilot_audit(
-                        "auto_sign_in_configuration_failure",
-                        authentication_mode="pilot_auto_sign_in",
-                        deployment_environment=auto_status.environment,
-                        correlation_id=correlation_id,
-                        failed_condition=auto_status.failed_condition,
-                    )
-                    self._html(configuration_error_page(auto_status.failed_condition), status=503)
-                    return
-                # This is the same canonical signed-cookie issuance and session
-                # resolver used by successful secret authentication.
-                session_cookie = issue_session_cookie()
-                cookie_headers = {"Cookie": session_cookie.split(";", 1)[0]}
-                decision = blueprint_upload_authorisation(cookie_headers)
-                if decision.resolved_membership != "resolved" or not decision.resolved_role:
-                    failed = "pilot owner membership or effective role could not be resolved"
-                    pilot_audit(
-                        "auto_sign_in_configuration_failure",
-                        authentication_mode="pilot_auto_sign_in",
-                        deployment_environment=auto_status.environment,
-                        correlation_id=correlation_id,
-                        failed_condition=failed,
-                    )
-                    self._html(configuration_error_page(failed), status=503)
-                    return
-                pilot_audit(
-                    "auto_sign_in_success",
-                    user_id=decision.user_id,
-                    workspace=decision.active_workspace,
-                    role=decision.resolved_role,
-                    authentication_mode="pilot_auto_sign_in",
-                    deployment_environment=auto_status.environment,
-                    correlation_id=correlation_id,
-                )
-                destination = "/flora" if parsed.path == "/pilot-sign-in" else self.path
-                self._redirect(destination, set_cookie=session_cookie)
+            pilot_mode = pilot_import_mode()
+            if pilot_mode.conflict and parsed.path not in {"/health", "/deployment"}:
+                self._html(pilot_import_configuration_error(pilot_mode.conflict), status=503)
                 return
             if parsed.path == "/health":
                 self._json(HEALTH_PAYLOAD)
@@ -346,9 +223,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path == "/live/evidence":
                 self._html(evidence_page())
             elif parsed.path == "/digital-twins":
-                html = digital_twins_landing_page(self.headers)
-                html = ensure_import_twin_action(html)
-                self._html(_with_revision_fingerprint(html))
+                self._html(_with_revision_fingerprint(digital_twins_landing_page(self.headers)))
             elif parsed.path in {"/industries/uk-banking", "/flora/banking/inspect"}:
                 html, status = twin_inspection_page("uk-banking", self.headers, "industry")
                 self._html(html, status=status)
@@ -557,6 +432,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             raise
 
     def do_POST(self) -> None:  # noqa: N802 - stdlib callback name
+        pilot_mode = pilot_import_mode()
+        if pilot_mode.conflict:
+            self._html(pilot_import_configuration_error(pilot_mode.conflict), status=503)
+            return
         length = int(self.headers.get("Content-Length", "0"))
         raw_body = self.rfile.read(length)
         form = {} if "multipart/form-data" in self.headers.get("Content-Type", "") else parse_qs(raw_body.decode("utf-8"), keep_blank_values=True)

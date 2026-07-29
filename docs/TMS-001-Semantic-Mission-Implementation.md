@@ -25,3 +25,37 @@ Canonical root records form a read-only semantic projection alongside the preser
 ## Remaining gaps
 
 There is no governed Sopra Steria offer portfolio in the fixture or current stores. Offer alignment therefore remains incomplete until a human supplies operational offer context or the existing import/review workflow accepts governed corporate knowledge. Source-quality detail is inspected through linked evidence records rather than collapsed into a new score. Some upgrade-only references intentionally remain unresolved when their endpoint is not present in a canonical root collection; these are reported rather than inferred.
+
+## Twin import recovery programme note (2026-07-28)
+
+### Regression timeline and runtime authority
+
+Diff inspection, rather than commit subjects alone, established this timeline:
+
+- `ba98847` is the last known-good pilot import baseline before identity cut-over: the existing browser session propagated through package receipt and inspection, while import still staged candidates without canonical mutation.
+- `e5f3f0f` is the first regressing change. Its diff changed trusted proxy identity from enabled-by-default to opt-in and made upload authority depend on a newly signed pilot session, configured owner, workspace, and role. A deployed browser without that complete state therefore reached the form but failed before `BlueprintPackageRegistry.receive`.
+- `569c6d4`, `6a03f82`, `fb54dae`, `d766bd7`, `5be3060`, `f0cf19e`, `f833e4c`, and `2cf9cb5` successively patched session propagation, diagnostics, visibility, route HTML, form rendering, and auto-sign-in symptoms. `65dcf40` finally added a second route-scoped bypass flag. None removed the competing access modes, so configuration could still select the broken path.
+- The deployed entry point declared by `render.yaml` is `python -m cios.applications.flora.web.app`. That module directly imports `digital_twins_landing_page`, `import_blueprint_entry_page`, and `upload_and_validate_blueprint` from repository modules. `GET /digital-twins` now renders the action owned by `digital_twins.py` without route HTML injection; `GET /blueprint-import` calls the view; multipart `POST /blueprint-import/upload` calls the same upload service; successful POST redirects to `/blueprint-import/<run>`, whose GET calls `executive_workspace_page`. Candidate creation remains owned by `BlueprintPackageValidator.validate_and_stage` and its current semantic adapters. Python resolution checks in the regression suite verify these repository paths rather than an installed shadow copy.
+
+### Recovery decision and lesson
+
+The original receive/inspect slice was retained and adapted to the newer typed
+semantic candidate projection. The root cause was not ZIP ingestion: account,
+workspace, and role prerequisites intercepted the request before receipt. Local
+service tests called handlers with synthetic authorised headers, while UI tests
+proved only that controls rendered; neither exercised an anonymous multipart
+request through the production HTTP handler. Repeated link, session, and bypass
+patches treated those symptoms and multiplied configuration states.
+
+`FLORA_ENVIRONMENT=pilot` is now the sole import pilot mode. It records an
+explicit pilot operator and import scope, marks identity/workspace capability
+checks as not applicable (never passed), and preserves receipt, ZIP traversal,
+decompression, contract, schema, evidence, duplicate, validation, diagnostic,
+and candidate controls. The deployed-equivalent HTTP test follows the visible
+link, submits multipart bytes through the production handler, proves inspection
+and candidate persistence, opens the current Executive Intelligence Workspace,
+and proves promotion is still denied. Full human identity, durable workspace
+membership, and enterprise role resolution remain deferred. They may be
+reintroduced only as the normal secure mode after a real identity provider and
+workspace membership authority exist and the same end-to-end route test passes
+without synthetic browser headers or route-specific fallbacks.

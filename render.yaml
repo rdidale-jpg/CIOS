@@ -8,26 +8,10 @@ services:
     envVars:
       - key: FLORA_HOST
         value: 0.0.0.0
-      - key: FLORA_PILOT_AUTH_ENABLED
-        value: "1"
       - key: FLORA_ENVIRONMENT
         value: pilot
-      - key: FLORA_PILOT_AUTO_SIGN_IN
-        value: "false"
       - key: FLORA_TRUST_PROXY_HEADERS
         value: "0"
-      - key: FLORA_PILOT_SESSION_DAYS
-        value: "30"
-      - key: FLORA_PILOT_ACCESS_SECRET
-        sync: false
-      - key: FLORA_PILOT_SESSION_SIGNING_KEY
-        sync: false
-      - key: FLORA_PILOT_OWNER_ID
-        sync: false
-      - key: FLORA_PILOT_WORKSPACE
-        value: CIOS
-      - key: FLORA_PILOT_ROLE
-        value: cios_owner
       - key: FLORA_DATA_DIR
         value: /var/data/flora
       - key: FLORA_RAPID_AI_TWIN_ENABLED
