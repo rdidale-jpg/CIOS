@@ -33,6 +33,21 @@ class CommercialMission:
     interests: tuple[str, ...] = ()
     named_accounts: tuple[str, ...] = ()
     campaigns: tuple[str, ...] = ()
+    mission_name: str = ""
+    target_customers: tuple[str, ...] = ()
+    priority_accounts: tuple[str, ...] = ()
+    excluded_accounts: tuple[str, ...] = ()
+    relevant_business_units: tuple[str, ...] = ()
+    account_focus: str = ""
+    commercial_horizon: str = ""
+    objectives: tuple[str, ...] = ()
+    strategic_propositions: tuple[str, ...] = ()
+    delivery_constraints: tuple[str, ...] = ()
+    opportunity_horizon: str = ""
+    required_opportunity_maturity: str = ""
+    minimum_evidence_state: str = ""
+    speculative_treatment: str = ""
+    show_unvalued_opportunities: bool = False
     inspection_depth: str = "executive-to-evidence"
     authority_status: str = "human-supplied operational context"
     supplied_by: str = "configured user profile"
@@ -42,8 +57,13 @@ class CommercialMission:
         scalar = {k: str(value.get(k) or "") for k in ("executive_role", "employer", "commercial_objective")}
         lists = {k: tuple(str(v) for v in value.get(k, ()) if str(v).strip()) for k in
                  ("industries", "enterprises", "offer_portfolio", "competitors", "partners", "geography",
-                  "interests", "named_accounts", "campaigns")}
+                  "interests", "named_accounts", "campaigns", "target_customers", "priority_accounts",
+                  "excluded_accounts", "relevant_business_units", "objectives", "strategic_propositions",
+                  "delivery_constraints")}
         return cls(user_id=user_id, **scalar, **lists,
+                   **{k: str(value.get(k) or "") for k in ("mission_name", "account_focus", "commercial_horizon",
+                      "opportunity_horizon", "required_opportunity_maturity", "minimum_evidence_state", "speculative_treatment")},
+                   show_unvalued_opportunities=bool(value.get("show_unvalued_opportunities", False)),
                    inspection_depth=str(value.get("inspection_depth") or "executive-to-evidence"),
                    authority_status=str(value.get("authority_status") or "human-supplied operational context"),
                    supplied_by=str(value.get("supplied_by") or "configured user profile"))
@@ -80,9 +100,12 @@ def save_commercial_mission(headers: Any, value: dict[str, Any]) -> CommercialMi
         raise ValueError("Role, employer and objective are required")
     profiles[user_id] = {name: list(getattr(mission, name)) for name in (
         "industries", "enterprises", "offer_portfolio", "competitors", "partners", "geography",
-        "interests", "named_accounts", "campaigns")}
+        "interests", "named_accounts", "campaigns", "target_customers", "priority_accounts",
+        "excluded_accounts", "relevant_business_units", "objectives", "strategic_propositions", "delivery_constraints")}
     profiles[user_id].update({name: getattr(mission, name) for name in (
-        "executive_role", "employer", "commercial_objective", "inspection_depth", "authority_status", "supplied_by")})
+        "executive_role", "employer", "commercial_objective", "mission_name", "account_focus", "commercial_horizon",
+        "opportunity_horizon", "required_opportunity_maturity", "minimum_evidence_state", "speculative_treatment",
+        "show_unvalued_opportunities", "inspection_depth", "authority_status", "supplied_by")})
     path.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as handle:
         json.dump(profiles, handle, indent=2, sort_keys=True)
