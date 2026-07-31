@@ -44,3 +44,17 @@ Commercial Mission is supplied separately and changes prominence/relevance only.
 8. Competitors, partners and target accounts are only configured when explicitly present in the selected user mission.
 9. Existing semantic completeness, validator diagnostics and evidence-demand surfaces existed and remain the canonical basis.
 10. Those import diagnostics can, and now do, feed a single aspect-readiness projection and its researcher actions without becoming another reasoning or promotion engine.
+
+## Executive Twin Map owner evolution
+
+| Capability | Canonical owner | Current behaviour | Required evolution |
+|---|---|---|---|
+| Executive Intelligence Workspace | `blueprint_import.executive_workspace.executive_workspace_page` | Composed a long executive report | Compose the concise six-aspect Twin Map and preserve candidate context. |
+| Twin Readiness and rules | `executive_workspace.twin_readiness` | Readiness dimensions over structured presence | Apply six explicit business-usefulness contracts and never advance from volume alone. |
+| Twin Composition | `semantic_twin.business_collections` consumed by `executive_workspace` | Separate collection-count grid | Feed counts into the relevant Twin Map tiles; retain the full inventory only in Browse Full Twin. |
+| Twin Health and Research Gaps | `executive_workspace._health`, validation and researcher-feedback helpers | Mixed executive gaps with technical diagnostics | Present six concise Research Gaps summaries and retain the same technical content under Advanced diagnostics. |
+| Twin Explorer and collection routing | `executive_workspace._explorer` and `flora.web.app` | Primary tiles opened generic collections | Keep the explorer as Browse Full Twin and route primary tiles to contextual aspect pages. |
+| Business display names | `SemanticEnterprise.name` and executive presentation helpers | Enterprise dossiers resolved names, while diagnostics exposed source IDs | Use supported names or explicit incomplete-record labels in business views; reserve canonical codes for advanced inspection. |
+| Canonical identifier resolution | `semantic_twin.assemble_semantic_twin` | Reconciles canonical enterprise identity and attached records | Reuse resolved identity for direct dossiers and distinct affected-record counts. |
+| Domain filtering | `_domain_lenses`, semantic object domains and `business_collections` | Filtered composition/explorer views | Carry the selected domain into every aspect route without changing canonical scope. |
+| Governance | Existing inspect/review routes and access services | Sometimes appeared as peer navigation | Keep authorised governance in advanced inspection rather than business-primary navigation. |
