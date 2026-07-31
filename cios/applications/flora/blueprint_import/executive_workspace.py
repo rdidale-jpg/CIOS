@@ -80,59 +80,45 @@ def _mission_relevance(o: SemanticObject, mission: CommercialMission) -> tuple[b
 
 
 def twin_readiness(twin: SemanticTwin, mission: CommercialMission | None = None) -> tuple[ReadinessAspect, ...]:
-    """Apply explicit field contracts; volume never advances a state."""
+    """Existing readiness owner projected through six business-usefulness contracts."""
     objects = twin.objects
-    def simple(key, name, rows, useful, complete, missing, next_req, action):
-        state = "Absent" if not rows else "Executive-ready" if complete else "Usable" if useful else "Insufficient"
-        return ReadinessAspect(key, name, state, (f"{len(rows)} relevant structured record(s)",) if rows else (),
-                               () if complete else (missing,), tuple((o.original_id or o.record_id) for o in rows[:20]), next_req, action)
-    opportunities = [o for o in objects if "opportun" in o.kind]
-    minimum = [o for o in opportunities if _opportunity_contract(o)[0]]
-    usable = [o for o in opportunities if _opportunity_contract(o, mission)[1]]
-    complete = [o for o in usable if _field(o, "business_unit") and
-                (_field(o, "value", "value_range") or _field(o, "value_unavailable")) and
-                _field(o, "trigger") and _field(o, "buyer", "buying_centre") and _field(o, "unknowns")]
-    if not opportunities: opp_state = "Absent"
-    elif complete: opp_state = "Executive-ready"
-    elif usable: opp_state = "Usable"
-    elif minimum: opp_state = "Partial"
-    else: opp_state = "Insufficient"
-    miss_counts = Counter(m for o in opportunities for m in _opportunity_contract(o, mission)[2])
-    opp_missing = tuple(f"{count} lack {field}" for field, count in miss_counts.items())
-    opp = ReadinessAspect("commercial-opportunities", "Commercial opportunities", opp_state,
-        (f"{len(opportunities)} opportunity hypothesis record(s)",) if opportunities else (), opp_missing,
-        tuple(o.original_id or o.record_id for o in opportunities),
-        "At least one opportunity with customer, client problem, evidence and procurement timing or explicit timing unknown.",
-        "Research the named customer, client problem, linked evidence and procurement timing for one hypothesis.")
-    enterprises = [o for o in objects if o.kind in {"enterprise", "enterprise_twin", "market_participant_twin"}]
+    def ids(rows):
+        return tuple(dict.fromkeys(o.original_id or o.record_id for o in rows))
+    def aspect(key, name, rows, required, explanation, action):
+        useful = [o for o in rows if required(o)]
+        if not rows: state = "Absent"
+        elif useful and len(useful) == len(rows): state = "Executive-ready"
+        elif useful: state = "Usable"
+        else: state = "Partial"
+        missing = () if state == "Executive-ready" else (f"{len(rows)-len(useful)} distinct record(s) lack mandatory business context",)
+        next_req = "" if state == "Executive-ready" else action
+        present = ((f"{len(ids(rows))} distinct record(s); {len(useful)} satisfy the business-usefulness contract", explanation) if rows else ())
+        return ReadinessAspect(key, name, state, present, missing, ids(rows), next_req, action, "executive-readiness-v2")
+    insights = [o for o in objects if executive_insight_eligible(o) or o.kind in {"industry", "subsector", "material_issue"}]
+    enterprise_rows = [o for o in objects if o.kind in {"enterprise", "enterprise_twin", "market_participant_twin"}]
+    participants = [o for o in objects if o.kind in {"market_participant", "market_participant_twin", "enterprise"} and _field(o, "role", "participant_role", "market_role")]
     programmes = [o for o in objects if o.kind == "transformation_programme"]
-    procurements = [o for o in objects if o.kind in {"procurement", "procurement_route", "buying_centre"}]
-    financial = [o for o in objects if o.kind in {"financial_fact", "financial_observation", "economic_pool"}]
-    evidence = [o for o in objects if o.kind == "evidence"]
-    relationships = [o for o in objects if "relationship" in o.kind]
+    opportunities = [o for o in objects if "opportun" in o.kind]
+    ready_opps = [o for o in opportunities if _opportunity_contract(o, mission)[1]]
     timing = [o for o in objects if _field(o, "expected_horizon", "tipping_point", "reinvention_timing")]
-    aspects = [
-      simple("enterprises", "Enterprises", enterprises, bool(twin.enterprises), bool(twin.enterprises and all(e.name for e in twin.enterprises)), "Resolved enterprise identity is missing", "Resolve at least one named enterprise and its identity.", "Research and reconcile canonical enterprise identity."),
-      simple("market-structure", "Market structure", relationships, False, bool(relationships and all(o.evidence_refs for o in relationships)), "Roles, associations or evidence are missing", "Link explicit participant roles and evidence.", "Research customer, competitor, partner, supplier, platform and regulator roles."),
-      simple("transformation", "Transformation", programmes, any(o.statement and o.evidence_refs for o in programmes), bool(programmes and all(o.statement and _field(o, "owner") and _field(o, "phase") and o.evidence_refs for o in programmes)), "Programme description, owner, phase or evidence is missing", "Resolve a programme description and evidence.", "Research programme owner, phase, description and evidence."),
+    enterprises = aspect("enterprises", "Enterprises", enterprise_rows,
+        lambda o: bool((o.statement or _field(o,"description","overview")) and o.domains and o.evidence_refs and (_field(o,"material_change","financial_context","operating_context") or any(x.kind in {"transformation_programme","opportunity"} and (o.subject in x.affected_organisations or o.subject == x.subject) for x in objects))),
+        "Enterprise identities are resolved, but identity alone does not establish executive intelligence depth.",
+        "Research meaningful overview, material change, operating or financial context, programmes, opportunities, dated evidence and uncertainty.")
+    opp_state = "Absent" if not opportunities else "Executive-ready" if ready_opps and len(ready_opps)==len(opportunities) else "Usable" if ready_opps else "Partial"
+    opp = ReadinessAspect("opportunities", "Opportunities", opp_state,
+        (f"{len(opportunities)} hypotheses; {len(ready_opps)} sales-ready",),
+        () if opp_state=="Executive-ready" else (f"{len(opportunities)-len(ready_opps)} hypotheses require research",), ids(opportunities),
+        "" if opp_state=="Executive-ready" else "Complete the governed opportunity contract.",
+        "Research buyer, client problem, value, procurement status, timing, evidence and mission relevance.", "executive-readiness-v2")
+    return (
+      aspect("industry-overview", "Industry Overview", insights, lambda o: bool(o.statement and o.consequence and o.evidence_refs), "Qualified insights and supported industry context form the overview.", "Research industry scale, material issues, sector differences, dates and supporting evidence."),
+      enterprises,
+      aspect("market-participants", "Market Participants", participants, lambda o: bool(_field(o,"role","participant_role","market_role") and o.domains and o.evidence_refs), "Only explicitly supported participant roles contribute to readiness.", "Research each participant's supported role, domain, participation rationale and evidence."),
+      aspect("major-programmes", "Major Programmes", programmes, lambda o: bool(o.statement and _field(o,"owner") and _field(o,"phase","stage") and _field(o,"timing","expected_horizon") and o.evidence_refs), "Programme readiness requires business ownership, objective, stage, timing and evidence.", "Research programme name, owner, objective, stage, timing, evidence and unknowns."),
       opp,
-      simple("procurement", "Procurement intelligence", procurements, any(_field(o, "procurement_status") for o in procurements), bool(procurements and all(_field(o, "procurement_status") and (_field(o, "procurement_start") or _field(o, "timing_unknown")) for o in procurements)), "Procurement status and timing are missing", "Resolve status and procurement timing or declare timing unknown.", "Research procurement route, status, start and buying centre."),
-      simple("reinvention-timing", "Reinvention timing", timing, any(o.evidence_refs for o in timing), bool(timing and all(_field(o, "expected_horizon") and _field(o, "tipping_point") and o.evidence_refs for o in timing)), "Horizon, tipping mechanism or evidence is missing", "Resolve a supported horizon and tipping-point mechanism.", "Research AI-native maturity, threat mechanism, horizon, exposure and likely response."),
-      simple("financial", "Financial intelligence", financial, any(_field(o, "metric") and _field(o, "value") for o in financial), bool(financial and all(_field(o, "metric") and _field(o, "value") and _field(o, "period") and _field(o, "source") for o in financial)), "Metric, value, period or source is missing", "Resolve one contextual financial measure.", "Research metric, value, currency, period and source."),
-      simple("evidence-dates", "Evidence and dates", evidence, any(o.freshness != "unknown" for o in evidence), bool(evidence and all(o.freshness != "unknown" for o in evidence)), "Evidence links or dates are missing", "Date and link the evidence used by executive conclusions.", "Research missing publication dates and link evidence to claims."),
-    ]
-    if not mission:
-        aspects.append(ReadinessAspect("mission-alignment", "Mission alignment", "Not applicable", (), ("Commercial Mission not configured",), (), "Configure a mission when tailored relevance is required.", "Ask the authorised user to configure business mission context."))
-    else:
-        configured = bool(mission.mission_name and mission.executive_role and mission.employer)
-        alignment = [o for o in opportunities if _mission_relevance(o, mission)[0]]
-        state = "Executive-ready" if configured and mission.offer_portfolio and alignment else "Partial" if configured and alignment else "Insufficient"
-        aspects.append(ReadinessAspect("mission-alignment", "Mission alignment", state,
-            (f"{len(alignment)} opportunity record(s) overlap declared mission",),
-            (() if mission.offer_portfolio else ("Supplier capability and offer catalogue is not configured",)),
-            tuple(o.original_id or o.record_id for o in alignment), "Configure target overlap and supplier-offer alignment.",
-            "Confirm target accounts, supplier offers, competitors, partners, geography and horizon."))
-    return tuple(aspects)
+      aspect("reinvention-timing", "Reinvention Timing", timing, lambda o: bool(_field(o,"expected_horizon") and _field(o,"tipping_point") and o.evidence_refs), "Generic reinvention prose is excluded; only supported timing assessments count.", "Research AI-native tipping evidence, adoption, horizon, confidence and evidence gaps."),
+    )
 
 
 def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "workspace",
@@ -140,7 +126,7 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     package = next((p for p in BlueprintPackageRegistry().list() if p.import_run_id == import_run_id), None)
     if package is None:
         return _page("Executive Intelligence Workspace unavailable", "<section class='hero'><h1>Executive Intelligence Workspace unavailable</h1><p>The import record could not be found.</p></section>"), 404
-    bypass_candidate_read = pilot_import_bypass_enabled() and view in {"workspace", "explore", "enterprise", "health"}
+    bypass_candidate_read = pilot_import_bypass_enabled() and view in {"workspace", "explore", "enterprise", "health", "aspect", "diagnostics"}
     if not bypass_candidate_read and (not can_access_enterprise(headers, package.identity.enterprise_id, package.workspace_id) or not can_inspect_blueprint_package(headers, package)):
         return _page("Access denied", "<section class='hero'><h1>Access denied</h1></section>"), 403
     summary = BlueprintPackageValidator().staging_summary(import_run_id) or {}
@@ -153,7 +139,11 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     if view == "explore":
         return _page(f"Explore Twin — {title}", _styles() + _explorer(twin, import_run_id, mission, collection, domain)), 200
     if view == "health":
-        return _page(f"Twin Health — {title}", _styles() + _health(twin, import_run_id, summary, mission)), 200
+        return _page(f"Research Gaps — {title}", _styles() + _research_gaps(twin, import_run_id, mission)), 200
+    if view == "diagnostics":
+        return _page(f"Advanced diagnostics — {title}", _styles() + _advanced_diagnostics(twin, import_run_id, summary, mission)), 200
+    if view == "aspect":
+        return _page(f"{collection.replace('-', ' ').title()} — {title}", _styles() + _aspect_page(twin, import_run_id, title, collection, domain, mission)), 200
     if view == "enterprise":
         ent = next((e for e in twin.enterprises if e.identity_key == enterprise_id), None)
         if ent is None:
@@ -161,11 +151,8 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
         return _page(f"Enterprise Intelligence — {ent.name}", _styles() + _dossier(ent, twin, import_run_id, mission)), 200
     if view == "mission":
         return _page("Edit Commercial Mission", _styles() + _mission_editor(mission, import_run_id)), 200
-    body = _styles() + _hero(title) + _mission_indicator(mission, import_run_id) + _readiness_review(twin, import_run_id, mission)
-    body += (_domain_lenses(import_run_id, domain) + _composition(twin, import_run_id, domain)
-             + _opportunities(twin, import_run_id, mission, domain)
-             + _pressure(twin, import_run_id, domain) + _reinvention_themes(twin, import_run_id, domain)
-             + _themes(twin, import_run_id, domain) + _enterprise_index(twin, import_run_id, domain))
+    body = _styles() + _hero(title) + _primary_nav(import_run_id, "map") + _mission_indicator(mission, import_run_id)
+    body += _domain_lenses(import_run_id, domain) + _twin_map(twin, import_run_id, mission, domain)
     body += _navigation(import_run_id)
     return _page(f"Executive Intelligence — {title}", body), 200
 
@@ -559,7 +546,70 @@ def _source_item(o: SemanticObject) -> str:
 
 def _navigation(run_id):
     r = escape(run_id)
-    return f"<section class='secondary-actions'><a class='button primary' href='/blueprint-import/{r}/explore'>Browse full Twin</a><a href='/blueprint-import/{r}/health'>Twin Health</a></section>"
+    return f"<section class='secondary-actions'><a class='button' href='/blueprint-import/{r}/explore'>Browse Full Twin</a></section>"
+
+
+ASPECT_LABELS = {"industry-overview": "Industry Overview", "enterprises": "Enterprises",
+                 "market-participants": "Market Participants", "major-programmes": "Major Programmes",
+                 "opportunities": "Opportunities", "reinvention-timing": "Reinvention Timing"}
+
+def _filter_domain(objects, domain):
+    if domain == "all": return list(objects)
+    return [o for o in objects if domain.casefold() in {d.casefold() for d in o.domains}]
+
+def _primary_nav(run_id: str, active: str) -> str:
+    r = escape(run_id)
+    links = (("map", f"/blueprint-import/{r}", "Twin Map"), ("gaps", f"/blueprint-import/{r}/health", "Research Gaps"),
+             ("browse", f"/blueprint-import/{r}/explore", "Browse Full Twin"))
+    return "<nav class='executive-path' aria-label='Twin navigation'>" + "".join(
+        f"<strong aria-current='page'>{label}</strong>" if key == active else f"<a href='{href}'>{label}</a>" for key, href, label in links) + "</nav>"
+
+def _twin_map(twin: SemanticTwin, run_id: str, mission: CommercialMission | None, domain: str) -> str:
+    tiles=[]
+    for a in twin_readiness(twin, mission):
+        count = a.present[0] if a.present else "No supported information"
+        explanation = a.present[-1] if len(a.present)>1 else (a.missing[0] if a.missing else "Business-usefulness requirements are satisfied.")
+        bars = "".join(f"<i class='{'filled' if n <= (a.bars or 0) else ''}' aria-hidden='true'></i>" for n in range(1,5))
+        href=f"/blueprint-import/{escape(run_id)}/aspects/{a.key}?domain={escape(domain)}"
+        tiles.append(f"<a class='twin-map-tile' href='{href}'><h3>{escape(a.name)}</h3><p class='coverage'>{escape(count)}</p><span class='readiness' aria-label='{escape(a.state)}, {a.bars or 0} of 4 bars'>{bars}<strong>{escape(a.state)}</strong></span><p>{escape(explanation)}</p></a>")
+    return f"<section class='card twin-map' id='twin-map'><h2>Twin Map</h2><div class='twin-map-grid'>{''.join(tiles)}</div><p><a class='button primary' href='/blueprint-import/{escape(run_id)}/aspects/industry-overview#key-insights'>Key Insights</a> <a class='button' href='/blueprint-import/{escape(run_id)}/health'>Research Gaps</a></p></section>"
+
+def _aspect_page(twin, run_id, title, key, domain, mission):
+    if key not in ASPECT_LABELS: return "<section class='card'><h1>Aspect unavailable</h1></section>"
+    a=next(x for x in twin_readiness(twin, mission) if x.key==key)
+    objects=_filter_domain(twin.objects, domain)
+    if key=="enterprises":
+        cards="".join(_enterprise_card(e, run_id) for e in twin.enterprises)
+        content=f"<p><strong>{len(twin.enterprises)} distinct enterprises</strong></p><div class='enterprise-grid'>{cards or '<p>No enterprise identities supplied.</p>'}</div>"
+    elif key=="industry-overview":
+        rows=[o for o in objects if executive_insight_eligible(o)]
+        content="<section id='key-insights'><h2>Key Insights</h2>"+("".join(_conclusion(o,run_id) for o in rows) if rows else f"<p><strong>{escape(a.state)}</strong> — No qualified insight currently satisfies the evidence contract.</p>")+"</section>"
+    elif key=="market-participants":
+        rows=[o for o in objects if _field(o,'role','participant_role','market_role')]
+        content="".join(f"<article class='enterprise-card'><h3>{escape(o.subject if o.subject not in {'','Twin scope'} else o.statement or 'Unnamed participant')}</h3><p><strong>Role:</strong> {escape(_field(o,'role','participant_role','market_role'))}</p><p><strong>Domain:</strong> {escape(', '.join(o.domains) or 'Not established')}</p><p>{escape(o.consequence or 'Participation rationale requires research.')}</p></article>" for o in rows) or "<p>No evidence-supported participant roles are available. Relationships remain supporting records, not inferred roles.</p>"
+    elif key=="major-programmes":
+        rows=[o for o in objects if o.kind=='transformation_programme']
+        content="".join(f"<article class='enterprise-card'><h3>{escape(o.statement or 'Unnamed programme')}</h3><p><strong>Owning enterprise:</strong> {escape(_field(o,'owner') or o.subject or 'Not established')}</p><p><strong>Business objective:</strong> {escape(o.consequence or 'Requires research')}</p><p><strong>Stage:</strong> {escape(_field(o,'stage','phase') or 'Not established')} · <strong>Timing:</strong> {escape(_field(o,'timing','expected_horizon') or 'Not established')}</p><p><strong>Evidence:</strong> {escape(', '.join(o.evidence_refs) or 'Not linked')} · <strong>Completeness:</strong> {'Usable' if o.statement and o.evidence_refs else 'Research needed'}</p></article>" for o in rows) or "<p>No named major programmes are supported.</p>"
+    elif key=="opportunities":
+        rows=[o for o in objects if 'opportun' in o.kind]; ready=[o for o in rows if _opportunity_contract(o,mission)[1]]
+        content=f"<h2>Sales-ready opportunities</h2>{''.join(_opportunity_card(o,run_id) for o in ready) or '<p>0 sales-ready opportunities.</p>'}<h2>Research needed</h2>{''.join(_opportunity_card(o,run_id) for o in rows if o not in ready) or '<p>No incomplete hypotheses.</p>'}"
+    else:
+        rows=[o for o in objects if _field(o,'expected_horizon','tipping_point','reinvention_timing')]
+        content=f"<h2>What is currently known</h2>{''.join(_conclusion(o,run_id) for o in rows) or '<p>No supported timing assessment is available.</p>'}<h2>What Flora can support</h2><p>{escape(a.state)} based only on explicit timing and tipping-point evidence.</p><h2>Research required</h2><p>{escape(a.researcher_action)}</p>"
+    gaps="; ".join(a.missing) or "No mandatory presentation gap under this rule."
+    return _primary_nav(run_id,"aspect")+f"<p><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a></p><header class='hero'><p>{escape(title)} · {escape(domain.title())}</p><h1>{escape(ASPECT_LABELS[key])}</h1><p><strong>{escape(a.state)}</strong> · {escape(a.present[-1] if a.present else gaps)}</p></header><section class='card'>{content}</section><section class='card'><h2>Research gaps for this aspect</h2><p>{escape(gaps)}</p><p><strong>Researcher action:</strong> {escape(a.researcher_action)}</p></section>"+_navigation(run_id)
+
+def _research_gaps(twin, run_id, mission):
+    cards=[]
+    for a in twin_readiness(twin,mission):
+        exists=a.present[0] if a.present else "No supported content"
+        missing="; ".join(a.missing) or "No mandatory presentation gap"
+        affected=len(set(a.affected))
+        cards.append(f"<article class='research-gap'><h2>{escape(a.name)}</h2><p><strong>{escape(a.state)}</strong></p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><p><strong>Why it matters:</strong> Missing mandatory context prevents a stronger executive interpretation.</p><p><strong>Researcher action:</strong> {escape(a.researcher_action)}</p><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Affected records ({affected})</a></article>")
+    return _primary_nav(run_id,"gaps")+"<header class='hero'><h1>Research Gaps</h1></header><section class='research-gap-grid'>"+"".join(cards)+f"</section><p><a href='/blueprint-import/{escape(run_id)}/diagnostics'>Advanced diagnostics</a></p>"
+
+def _advanced_diagnostics(twin,run_id,summary,mission):
+    return _primary_nav(run_id,"diagnostics")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced diagnostics</h1></header>"+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
 
 
 def _enterprise_completeness(ent: SemanticEnterprise, mission: CommercialMission | None) -> tuple[CompletenessAspect, ...]:
@@ -658,4 +708,4 @@ def _health(twin: SemanticTwin, run_id: str, summary: dict, mission: CommercialM
 
 
 def _styles():
-    return """<style>.compact-twin-header h1{font-size:clamp(1.35rem,3vw,2rem);display:flex;align-items:center;gap:.35rem;flex-wrap:wrap}.pilot-badge{font-size:.65em;letter-spacing:.08em;background:#f3c969;color:#302400;padding:.25rem .45rem;border-radius:.25rem}.mission-indicator{padding:.65rem;margin:.75rem 0;background:#eef5f2;border-left:4px solid #185c4d}.executive-path,.domain-lenses,.secondary-actions{display:flex;gap:.65rem;flex-wrap:wrap;align-items:center;margin:1rem 0}.executive-path span,.executive-path a,.executive-path strong,.pill,.collection-chip,.domain-lens{padding:.45rem .7rem;border-radius:1rem;background:#eef5f2}.domain-lens.active{background:#185c4d;color:white}.composition-grid,.theme-grid,.enterprise-grid,.readiness-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}.readiness-grid article{padding:.7rem;border:1px solid #cad8d3;border-radius:.5rem}.readiness-grid h3{margin:.1rem 0 .5rem}.readiness{display:flex;gap:.25rem;align-items:center}.readiness i{display:block;width:.45rem;height:1.15rem;border:1px solid #185c4d;border-radius:2px}.readiness i.filled{background:#185c4d}.readiness span{margin-left:.35rem}.composition-tile,.theme-tile,.executive-conclusion,.enterprise-card{display:flex;flex-direction:column;gap:.5rem;padding:1rem;border:1px solid #cad8d3;border-radius:.7rem;text-decoration:none;color:inherit;background:#fffdf8}.composition-tile{min-height:9rem}.procurement-active{background:#dff4e8;font-weight:bold}.composition-tile:focus,.composition-tile:hover,.theme-tile:focus,.theme-tile:hover,.executive-conclusion:focus,.executive-conclusion:hover,.enterprise-card:focus,.enterprise-card:hover{outline:3px solid #185c4d}.composition-tile b,.theme-tile b{font-size:2rem}.insight-explanation{border-left:4px solid #185c4d;padding:1rem;margin:1rem 0}.collection-links{display:flex;gap:.6rem;flex-wrap:wrap}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:.6rem;border-bottom:1px solid #ddd}@media(max-width:600px){.composition-grid,.theme-grid,.enterprise-grid,.readiness-grid{grid-template-columns:1fr}.compact-twin-header h1{align-items:flex-start}.opportunity-table{display:block;overflow-x:auto}}</style>"""
+    return """<style>.twin-map-grid,.research-gap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}.twin-map-tile,.research-gap{display:flex;flex-direction:column;padding:1rem;border:1px solid #cad8d3;border-radius:.7rem;background:#fffdf8;color:inherit;text-decoration:none}.twin-map-tile:hover,.twin-map-tile:focus{outline:3px solid #185c4d}.twin-map-tile h3{margin:.1rem 0}.twin-map-tile .coverage{font-weight:700}.research-gap{display:block}@media(max-width:600px){.twin-map-grid,.research-gap-grid{grid-template-columns:1fr}}.compact-twin-header h1{font-size:clamp(1.35rem,3vw,2rem);display:flex;align-items:center;gap:.35rem;flex-wrap:wrap}.pilot-badge{font-size:.65em;letter-spacing:.08em;background:#f3c969;color:#302400;padding:.25rem .45rem;border-radius:.25rem}.mission-indicator{padding:.65rem;margin:.75rem 0;background:#eef5f2;border-left:4px solid #185c4d}.executive-path,.domain-lenses,.secondary-actions{display:flex;gap:.65rem;flex-wrap:wrap;align-items:center;margin:1rem 0}.executive-path span,.executive-path a,.executive-path strong,.pill,.collection-chip,.domain-lens{padding:.45rem .7rem;border-radius:1rem;background:#eef5f2}.domain-lens.active{background:#185c4d;color:white}.composition-grid,.theme-grid,.enterprise-grid,.readiness-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}.readiness-grid article{padding:.7rem;border:1px solid #cad8d3;border-radius:.5rem}.readiness-grid h3{margin:.1rem 0 .5rem}.readiness{display:flex;gap:.25rem;align-items:center}.readiness i{display:block;width:.45rem;height:1.15rem;border:1px solid #185c4d;border-radius:2px}.readiness i.filled{background:#185c4d}.readiness span{margin-left:.35rem}.composition-tile,.theme-tile,.executive-conclusion,.enterprise-card{display:flex;flex-direction:column;gap:.5rem;padding:1rem;border:1px solid #cad8d3;border-radius:.7rem;text-decoration:none;color:inherit;background:#fffdf8}.composition-tile{min-height:9rem}.procurement-active{background:#dff4e8;font-weight:bold}.composition-tile:focus,.composition-tile:hover,.theme-tile:focus,.theme-tile:hover,.executive-conclusion:focus,.executive-conclusion:hover,.enterprise-card:focus,.enterprise-card:hover{outline:3px solid #185c4d}.composition-tile b,.theme-tile b{font-size:2rem}.insight-explanation{border-left:4px solid #185c4d;padding:1rem;margin:1rem 0}.collection-links{display:flex;gap:.6rem;flex-wrap:wrap}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:.6rem;border-bottom:1px solid #ddd}@media(max-width:600px){.composition-grid,.theme-grid,.enterprise-grid,.readiness-grid{grid-template-columns:1fr}.compact-twin-header h1{align-items:flex-start}.opportunity-table{display:block;overflow-x:auto}}</style>"""

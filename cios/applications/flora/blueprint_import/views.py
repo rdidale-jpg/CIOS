@@ -96,7 +96,7 @@ def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, i
                          "<p><a href='/pilot-sign-in'>Sign in or select a workspace</a></p></section>")
     authorisation = "<p><span class='pill'>PILOT</span></p>" if bypass else _authorisation_context(decision)
     body = _workflow_progress("upload") + authorisation + access_notice + f"""{_notice(message)}
-    <section class='card'><p class='muted'>Packages may contain confidential candidate intelligence. Upload only packages you are authorised to use; import does not promote or change canonical state.</p><form method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><label for='expected_type'>Twin type</label><select id='expected_type' name='expected_type' required>{''.join(f"<option value='{t}'>{escape(t.replace('_',' ').title())}</option>" for t in TWIN_TYPES)}</select><label for='blueprint_zip'>Twin package</label><input id='blueprint_zip' name='blueprint_zip' type='file' accept='.zip,application/zip' required><p><button type='submit'>Upload Twin</button></p><p><a href='/digital-twins'>Cancel</a></p></form></section>
+    <section class='card'><p><strong>Please choose the import type and file.</strong></p><form method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><label for='expected_type'>Twin type</label><select id='expected_type' name='expected_type' required>{''.join(f"<option value='{t}'>{escape(t.replace('_',' ').title())}</option>" for t in TWIN_TYPES)}</select><label for='blueprint_zip'>Twin package</label><input id='blueprint_zip' name='blueprint_zip' type='file' accept='.zip,application/zip' required><p><button type='submit'>Upload Twin</button></p><p class='muted'>Packages may contain confidential candidate intelligence. Upload only packages you are authorised to use. Imported records remain candidates and are never promoted automatically.</p><p><a href='/digital-twins'>Cancel</a></p></form></section>
     <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous package imports</a></p></section>"""
     return _page("Import Twin", body), 200
 
@@ -419,7 +419,7 @@ def _workflow_progress(current: str, run_id: str = "", lifecycle: str = "") -> s
             status = "complete" if stage in {"upload", "inspect"} else ({"review": "next", "promote": "blocked", "explore": "unavailable"}[stage])
         if lifecycle=="cancelled" and i>=current_index: status="cancelled"
         label = "Review Next" if current == "inspect" and stage == "review" else stage.title()
-        symbol = "✓" if status == "complete" else ("▶" if status in {"current", "next"} else "○")
+        symbol = "✓" if status == "complete" else ("●" if status in {"current", "next"} else "○")
         current_attr = " aria-current='page'" if current == "inspect" and stage == "inspect" else (" aria-current='step'" if status == "current" else "")
         items.append(f"<li class='{escape(status)}'{current_attr}><span class='workflow-symbol' aria-hidden='true'>{symbol}</span><span>{label}</span><span class='muted' hidden> — {escape(status)}</span></li>")
     return "<nav class='card workflow' aria-label='Import progress'><strong>Import workflow</strong><ol>"+"".join(items)+"</ol></nav>"
