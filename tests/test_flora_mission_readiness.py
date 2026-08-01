@@ -13,17 +13,17 @@ def incomplete(n=9):
 
 
 def test_volume_cannot_advance_opportunity_readiness():
-    one = next(a for a in twin_readiness(incomplete(1)) if a.key == "commercial-opportunities")
-    nine = next(a for a in twin_readiness(incomplete(9)) if a.key == "commercial-opportunities")
+    one = next(a for a in twin_readiness(incomplete(1)) if a.key == "opportunities")
+    nine = next(a for a in twin_readiness(incomplete(9)) if a.key == "opportunities")
     assert one.state == nine.state == "Insufficient"
     assert one.bars == nine.bars == 1
     assert "%" not in str(nine)
 
 
-def test_not_applicable_is_distinct_and_research_action_is_shared():
-    aspect = next(a for a in twin_readiness(incomplete()) if a.key == "mission-alignment")
-    assert aspect.state == "Not applicable" and aspect.bars is None
-    assert aspect.researcher_action and aspect.next_requirement
+def test_primary_readiness_is_frozen_to_six_business_aspects():
+    aspects = twin_readiness(incomplete())
+    assert [a.key for a in aspects] == ["industry-overview", "enterprises", "market-participants", "major-programmes", "opportunities", "reinvention-timing"]
+    assert all(a.researcher_action for a in aspects)
 
 
 def test_only_contract_ready_opportunity_enters_table():

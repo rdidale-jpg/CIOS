@@ -21,6 +21,8 @@ def test_tms_canonical_semantics_relationships_and_executive_intelligence(monkey
     assert "Explain this insight" not in html
     assert "Deterministic package validation" not in html
     health, status = executive_workspace_page(run_id, HEADERS, view="health")
-    assert status == 200 and "Canonical priority enterprises: 14" in health
-    assert "Deterministic package validation" in health and "Evidence-governed reasoning audit" in health
-    assert "Researcher Feedback Report" in health and "Protected governance actions" in health
+    assert status == 200 and "Research Gaps" in health
+    assert "Deterministic package validation" not in health
+    advanced, status = executive_workspace_page(run_id, HEADERS, view="diagnostics")
+    assert status == 200 and "Canonical priority enterprises: 14" in advanced
+    assert "Deterministic package validation" in advanced and "Researcher Feedback Report" in advanced
