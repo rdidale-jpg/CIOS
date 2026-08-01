@@ -80,44 +80,49 @@ def _mission_relevance(o: SemanticObject, mission: CommercialMission) -> tuple[b
 
 
 def twin_readiness(twin: SemanticTwin, mission: CommercialMission | None = None) -> tuple[ReadinessAspect, ...]:
-    """Existing readiness owner projected through six business-usefulness contracts."""
+    """Canonical six-aspect readiness result used by every presentation."""
     objects = twin.objects
-    def ids(rows):
-        return tuple(dict.fromkeys(o.original_id or o.record_id for o in rows))
-    def aspect(key, name, rows, required, explanation, action):
-        useful = [o for o in rows if required(o)]
-        if not rows: state = "Absent"
-        elif useful and len(useful) == len(rows): state = "Executive-ready"
-        elif useful: state = "Usable"
-        else: state = "Partial"
-        missing = () if state == "Executive-ready" else (f"{len(rows)-len(useful)} distinct record(s) lack mandatory business context",)
-        next_req = "" if state == "Executive-ready" else action
-        present = ((f"{len(ids(rows))} distinct record(s); {len(useful)} satisfy the business-usefulness contract", explanation) if rows else ())
-        return ReadinessAspect(key, name, state, present, missing, ids(rows), next_req, action, "executive-readiness-v2")
-    insights = [o for o in objects if executive_insight_eligible(o) or o.kind in {"industry", "subsector", "material_issue"}]
-    enterprise_rows = [o for o in objects if o.kind in {"enterprise", "enterprise_twin", "market_participant_twin"}]
-    participants = [o for o in objects if o.kind in {"market_participant", "market_participant_twin", "enterprise"} and _field(o, "role", "participant_role", "market_role")]
-    programmes = [o for o in objects if o.kind == "transformation_programme"]
-    opportunities = [o for o in objects if "opportun" in o.kind]
+    collections = {c.key: list(c.objects) for c in business_collections(twin, include_empty=True)}
+    def ids(rows): return tuple(dict.fromkeys(o.original_id or o.record_id for o in rows))
+    def result(key, name, rows, useful, state, count, explanation, missing, action):
+        return ReadinessAspect(key, name, state, (count, explanation), tuple(missing), ids(rows),
+                               "" if state == "Executive-ready" else action, action, "executive-readiness-v3")
+    insights = collections.get("insights", [])
+    enterprise_rows = collections.get("enterprises", [])
+    participants = collections.get("market-participants", [])
+    programmes = collections.get("transformation-programmes", [])
+    opportunities = collections.get("opportunities", [])
     ready_opps = [o for o in opportunities if _opportunity_contract(o, mission)[1]]
-    timing = [o for o in objects if _field(o, "expected_horizon", "tipping_point", "reinvention_timing")]
-    enterprises = aspect("enterprises", "Enterprises", enterprise_rows,
-        lambda o: bool((o.statement or _field(o,"description","overview")) and o.domains and o.evidence_refs and (_field(o,"material_change","financial_context","operating_context") or any(x.kind in {"transformation_programme","opportunity"} and (o.subject in x.affected_organisations or o.subject == x.subject) for x in objects))),
-        "Enterprise identities are resolved, but identity alone does not establish executive intelligence depth.",
-        "Research meaningful overview, material change, operating or financial context, programmes, opportunities, dated evidence and uncertainty.")
-    opp_state = "Absent" if not opportunities else "Executive-ready" if ready_opps and len(ready_opps)==len(opportunities) else "Usable" if ready_opps else "Partial"
-    opp = ReadinessAspect("opportunities", "Opportunities", opp_state,
-        (f"{len(opportunities)} hypotheses; {len(ready_opps)} sales-ready",),
-        () if opp_state=="Executive-ready" else (f"{len(opportunities)-len(ready_opps)} hypotheses require research",), ids(opportunities),
-        "" if opp_state=="Executive-ready" else "Complete the governed opportunity contract.",
-        "Research buyer, client problem, value, procurement status, timing, evidence and mission relevance.", "executive-readiness-v2")
+    ready_enterprises = [o for o in enterprise_rows if _field(o, "description", "overview", "organisation_description") and o.domains and (_field(o, "current_position", "strategic_ambition", "market_position"))]
+    classified = [o for o in participants if _field(o, "role", "participant_role", "market_role") and o.domains and o.evidence_refs and (o.consequence or _field(o, "why_it_matters"))]
+    ready_programmes = [o for o in programmes if o.statement and (_field(o,"owner") or o.subject != "Twin scope") and o.consequence and _field(o,"phase","stage") and _field(o,"timing","expected_horizon") and o.evidence_refs]
+    timing = [o for o in objects if _field(o, "reinvention_timing") or (_field(o, "expected_horizon") and _field(o, "tipping_point") and _field(o, "adoption_indicators") and o.evidence_refs)]
+    overview_state = "Usable" if insights else "Absent"
     return (
-      aspect("industry-overview", "Industry Overview", insights, lambda o: bool(o.statement and o.consequence and o.evidence_refs), "Qualified insights and supported industry context form the overview.", "Research industry scale, material issues, sector differences, dates and supporting evidence."),
-      enterprises,
-      aspect("market-participants", "Market Participants", participants, lambda o: bool(_field(o,"role","participant_role","market_role") and o.domains and o.evidence_refs), "Only explicitly supported participant roles contribute to readiness.", "Research each participant's supported role, domain, participation rationale and evidence."),
-      aspect("major-programmes", "Major Programmes", programmes, lambda o: bool(o.statement and _field(o,"owner") and _field(o,"phase","stage") and _field(o,"timing","expected_horizon") and o.evidence_refs), "Programme readiness requires business ownership, objective, stage, timing and evidence.", "Research programme name, owner, objective, stage, timing, evidence and unknowns."),
-      opp,
-      aspect("reinvention-timing", "Reinvention Timing", timing, lambda o: bool(_field(o,"expected_horizon") and _field(o,"tipping_point") and o.evidence_refs), "Generic reinvention prose is excluded; only supported timing assessments count.", "Research AI-native tipping evidence, adoption, horizon, confidence and evidence gaps."),
+      result("industry-overview", "Industry Overview", insights, insights, overview_state,
+             f"{len(insights)} qualified insights", "Flora can partly explain evidenced change, but industry definition, composition, size, economics and a complete PESTLE outlook remain incomplete.",
+             () if overview_state == "Executive-ready" else ("Industry definition and scope", "Composition and sub-sectors", "Industry size and economics", "Complete political, economic, social, technological, legal and environmental analysis"),
+             "Research industry scope, sub-sector composition, size, economics, competitive structure and dated PESTLE evidence."),
+      result("enterprises", "Enterprises", enterprise_rows, ready_enterprises, "Executive-ready" if enterprise_rows and len(ready_enterprises)==len(enterprise_rows) else "Insufficient" if enterprise_rows else "Absent",
+             f"{len(enterprise_rows)} canonical enterprises · {len(ready_enterprises)} executive-ready enterprises", "Flora can identify the enterprises, but most profiles do not yet explain strategic position, material pressure and transformation posture.",
+             () if enterprise_rows and len(ready_enterprises)==len(enterprise_rows) else ("Plain-language description, strategic position, material pressure and transformation posture",),
+             "Research each enterprise's description, organisational form, activities, market role, strategic ambition, material pressure and transformation posture."),
+      result("market-participants", "Market Participants", participants, classified, "Executive-ready" if participants and len(classified)==len(participants) else "Insufficient" if participants else "Absent",
+             f"{len(participants)} participants identified · {len(classified)} sufficiently classified", "Flora can identify market participants, but supported roles and why each participant matters are incomplete.",
+             () if participants and len(classified)==len(participants) else ("Supported role, domain and market significance for each participant",),
+             "Research each participant's legitimate name, evidenced role, domain and reason it matters to the market."),
+      result("major-programmes", "Major Programmes", programmes, ready_programmes, "Executive-ready" if programmes and len(ready_programmes)==len(programmes) else "Insufficient" if programmes else "Absent",
+             f"{len(programmes)} programme hypotheses identified · {len(ready_programmes)} executive-ready programmes", "Flora can identify programme hypotheses, but ownership, objective, phase, timing or evidence is incomplete.",
+             () if programmes and len(ready_programmes)==len(programmes) else ("Programme title, owner, business objective, phase, timing and evidence",),
+             "Research each programme's meaningful title, owner, business objective, current phase, timing and supporting evidence."),
+      result("opportunities", "Opportunities", opportunities, ready_opps, "Executive-ready" if opportunities and len(ready_opps)==len(opportunities) else "Insufficient" if opportunities else "Absent",
+             f"{len(opportunities)} canonical opportunity hypotheses · {len(ready_opps)} sales-ready opportunities", "Flora can identify opportunity hypotheses, but they cannot support sales action until customer, problem, buyer, value, timing, status and evidence are resolved.",
+             () if opportunities and len(ready_opps)==len(opportunities) else ("Customer, client problem, business unit, buyer, value, timing, status and evidence",),
+             "Research customer, client problem, business unit, buyer, value, timing, status and supporting evidence."),
+      result("reinvention-timing", "Reinvention Timing", timing, timing, "Executive-ready" if timing else "Absent",
+             f"{len(timing)} supported assessments", "This Twin contains no structured assessment of AI-native disruption, exposure, adoption indicators, expected horizon or response timing." if not timing else "Flora can explain supported disruption exposure and response timing.",
+             () if timing else ("AI-native disruption mechanism", "Enterprise or business-unit exposure", "Adoption indicators", "Expected horizon", "Response timing"),
+             "Research the disruption mechanism, affected enterprise or business unit, adoption indicators, expected horizon, response timing and supporting evidence."),
     )
 
 
@@ -152,7 +157,7 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     if view == "mission":
         return _page("Edit Commercial Mission", _styles() + _mission_editor(mission, import_run_id)), 200
     body = _styles() + _hero(title) + _primary_nav(import_run_id, "map") + _mission_indicator(mission, import_run_id)
-    body += _domain_lenses(import_run_id, domain) + _twin_map(twin, import_run_id, mission, domain)
+    body += _domain_lenses(import_run_id, domain) + _twin_map(twin, import_run_id, mission, domain) + _composition(twin, import_run_id, domain)
     body += _navigation(import_run_id)
     return _page(f"Executive Intelligence — {title}", body), 200
 
@@ -284,9 +289,9 @@ def _opportunities(twin: SemanticTwin, run_id: str, mission: CommercialMission |
     ready = [o for o in rows if _opportunity_contract(o, mission)[1]]
     label = "Opportunities for you" if mission else "Commercial Opportunities"
     if not ready:
-        known_problems = "; ".join(filter(None, (_field(o, "client_problem", "customer_problem", "problem") for o in rows[:4])))
-        inspection_note = f"<p><strong>Present in incomplete records:</strong> {escape(known_problems)}</p>" if known_problems else ""
-        return f"<section class='card' id='opportunities'><h2>{label}</h2><p><strong>{'Absent' if not rows else 'Insufficient'}</strong></p><p>No sales-ready opportunities are currently supported by this Twin.</p>{inspection_note}<a href='/blueprint-import/{escape(run_id)}/explore?collection=opportunities&amp;domain={escape(domain)}'>Review {len(rows)} incomplete opportunity hypotheses</a></section>"
+        problems = sorted({_field(o, "client_problem", "customer_problem", "problem") for o in rows} - {""})
+        known = f"<p><strong>Known client-problem context:</strong> {escape('; '.join(problems))}</p>" if problems else ""
+        return f"<section class='card' id='opportunities'><h2>{label}</h2><p><strong>{len(rows)} canonical opportunity hypotheses · 0 sales-ready opportunities</strong></p><p><strong>{'Absent' if not rows else 'Insufficient'}.</strong> No sales-ready opportunity is currently supported.</p>{known}<h3>Developing hypotheses</h3><p>{len(rows)} hypotheses require further research.</p><p><strong>Research required:</strong> customer, client problem, business unit, buyer, value, timing, status and evidence.</p><a href='/blueprint-import/{escape(run_id)}/explore?collection=opportunities&amp;domain={escape(domain)}'>Inspect incomplete records in Advanced Inspection</a></section>"
     def cell(o):
         customer = ", ".join(o.affected_organisations) or o.subject
         unit = _field(o, "business_unit")
@@ -297,7 +302,8 @@ def _opportunities(twin: SemanticTwin, run_id: str, mission: CommercialMission |
         rationale = _mission_relevance(o, mission)[1] if mission else "Neutral presentation; Commercial Mission not configured."
         return f"<tr><td>{escape(customer)}{('<br><small>'+escape(unit)+'</small>') if unit else ''}</td><td>{escape(o.statement)}</td><td>{escape(value)}</td><td>{escape(timing)}</td><td{cls}>{escape(status)}<details><summary>Why relevant?</summary>{escape(rationale)}</details></td></tr>"
     if mission: ready.sort(key=lambda o: (not _mission_relevance(o, mission)[0], o.statement.casefold()))
-    return f"<section class='card' id='opportunities'><h2>{label}</h2><table class='opportunity-table'><thead><tr><th>Customer</th><th>Opportunity</th><th>Value</th><th>Timing</th><th>Status</th></tr></thead><tbody>{''.join(cell(o) for o in ready)}</tbody></table><a href='/blueprint-import/{escape(run_id)}/explore?collection=opportunities&amp;domain={escape(domain)}'>Browse all hypotheses</a></section>"
+    incomplete = len(rows) - len(ready)
+    return f"<section class='card' id='opportunities'><h2>{label}</h2><p><strong>{len(rows)} canonical opportunity hypotheses · {len(ready)} sales-ready opportunities</strong></p><table class='opportunity-table'><thead><tr><th>Customer</th><th>Opportunity</th><th>Value</th><th>Timing</th><th>Status</th></tr></thead><tbody>{''.join(cell(o) for o in ready)}</tbody></table><h3>Developing hypotheses</h3><p>{incomplete} hypotheses require further research.</p><a href='/blueprint-import/{escape(run_id)}/explore?collection=opportunities&amp;domain={escape(domain)}'>Inspect canonical records in Advanced Inspection</a></section>"
 
 
 def _reinvention_kind(o: SemanticObject) -> str:
@@ -385,13 +391,18 @@ def _enterprise_index(twin, run_id, domain="all"):
 
 
 def _enterprise_card(e, run_id):
-    unk = sum(o.kind == 'unknown' for o in e.records); con = sum(o.kind == 'contradiction' for o in e.records); opp = sum('opportun' in o.kind for o in e.records)
+    identity = next((o for o in e.records if o.kind in {"enterprise", "enterprise_twin", "entity"}), None)
     domains = sorted({d.title() for o in e.records for d in o.domains})
-    facts = ["Priority organisation represented in this Twin", *domains]
-    if opp: facts.append("1 opportunity" if opp == 1 else f"{opp} opportunities")
-    if unk: facts.append(f"{unk} uncertaint{'ies' if unk != 1 else 'y'}")
-    if con: facts.append(f"{con} contradiction{'s' if con != 1 else ''}")
-    return f"<a class='enterprise-card' href='/blueprint-import/{escape(run_id)}/enterprises/{escape(e.identity_key)}'><h3>{escape(e.name)}</h3><p>{escape(' · '.join(facts))}</p></a>"
+    description = _field(identity, "organisation_description", "description", "overview", "summary") if identity else ""
+    position = _field(identity, "strategic_ambition", "market_position", "current_position") if identity else ""
+    pressure = next((o.consequence for o in e.records if o.consequence and o.evidence_refs), "")
+    posture = _field(identity, "transformation_posture") if identity else ""
+    complete = bool(description and position and pressure and posture)
+    body = (f"<p>{escape(description)}</p><p><strong>Industry/domain:</strong> {escape(', '.join(domains) or 'Not established')}</p>"
+            f"<p><strong>Strategic position:</strong> {escape(position)}</p><p><strong>Material pressure:</strong> {escape(pressure)}</p>"
+            f"<p><strong>Transformation posture:</strong> {escape(posture)}</p>" if complete else
+            f"<p><strong>Enterprise profile incomplete</strong></p><p>{escape(description or 'A plain-language organisation description is not supplied.')} Strategic position, material pressure or transformation posture requires supported research.</p><p><strong>Industry/domain:</strong> {escape(', '.join(domains) or 'Not established')}</p>")
+    return f"<a class='enterprise-card' href='/blueprint-import/{escape(run_id)}/enterprises/{escape(e.identity_key)}'><h3>{escape(e.name)}</h3>{body}<p class='pill'>Enterprise intelligence readiness: {'Executive-ready' if complete else 'Insufficient'}</p></a>"
 
 
 def _validation_report(twin: SemanticTwin) -> str:
@@ -488,50 +499,50 @@ def _explorer(twin, run_id, mission, selected="", domain="all"):
     elif active and active.key == "opportunities": content = "".join(_opportunity_card(o, run_id) for o in active.objects)
     elif active: content = "".join(_conclusion(o, run_id) if executive_insight_eligible(o) else f"<article class='enterprise-card'><h3>{escape(o.statement or o.original_id or 'Twin record')}</h3><p>Supporting context; not presented as an executive insight.</p><a href='/blueprint-import/{escape(run_id)}/inspect#technical-diagnostics'>Inspect record</a></article>" for o in active.objects)
     else: content = "<p>Select a business collection to explore its contents.</p>"
-    title = active.label if active else "Explore Twin intelligence"
+    title = active.label if active else "Advanced Inspection"
     total = len(active.objects) if active else 0
-    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Twin overview</a><strong>Twin Explorer</strong><a href='/blueprint-import/{escape(run_id)}/review'>Governance</a></nav><header class='hero'><h1>{escape(title)}</h1><p>{escape(active.description) if active else 'Explore the Twin through business-facing collections.'}</p></header><section class='card'><h2>Twin collections</h2><div class='collection-links'>{links}</div></section><section class='card'><h2>{escape(title)}{f' — {total} total' if active else ''}</h2><p>{f'Showing {total} distinct identities' if active and active.key == 'enterprises' else f'Showing {total} of {total} total records' if active else ''}</p>{content}</section><details class='card'><summary>Advanced aspect coverage</summary><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></details>"
+    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Twin overview</a><strong>Advanced Inspection</strong></nav><header class='hero'><h1>{escape(title)}</h1><p>{escape(active.description) if active else 'Inspect canonical records, evidence, relationships, unknowns, contradictions and technical diagnostics.'}</p></header><section class='card'><h2>Twin collections</h2><div class='collection-links'>{links}</div></section><section class='card'><h2>{escape(title)}{f' — {total} total' if active else ''}</h2><p>{f'Showing {total} distinct identities' if active and active.key == 'enterprises' else f'Showing {total} of {total} total records' if active else ''}</p>{content}</section><details class='card'><summary>Advanced aspect coverage</summary><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></details>"
 
 
 def _dossier(ent, twin, run_id, mission):
     relevant = list(ent.records)
-    kinds = Counter(o.kind for o in relevant)
-    identities = [o for o in relevant if o.kind in {"enterprise", "enterprise_twin", "entity"}]
-    description = next((_field(o, "organisation_description", "overview", "description", "summary") for o in identities if _field(o, "organisation_description", "overview", "description", "summary")), "")
-    if not description:
-        description = f"{ent.name} is an organisation represented in this Twin for executive interpretation; its detailed business description remains a research gap."
-    domain_names = sorted({d.title() for o in relevant for d in o.domains})
-    material = next((o for o in relevant if executive_insight_eligible(o)), None)
-    statuses = _enterprise_completeness(ent, mission)
-    complete = sum(s.state == "Complete enough for executive use" for s in statuses)
-    overview = f"<section class='card' id='enterprise-overview'><h2>Overview</h2><p>{escape(description)}</p><p><strong>Role in the Twin:</strong> Priority enterprise associated through canonical identity and relationships.</p><p><strong>Relevant domains:</strong> {escape(', '.join(domain_names) or 'Domain association not established')}</p><p><strong>Current position:</strong> {escape(_field(identities[0], 'current_position') if identities else '') or 'Current position requires further structured research.'}</p><p><strong>Most material supported change:</strong> {escape(material.statement if material else 'No complete executive insight is available for this enterprise.')}</p><p><strong>Completeness:</strong> {complete} of {len(statuses)} aspects are complete enough; inspect aspect states below.</p></section>"
-    rendered = [overview]
-    financials = [o for o in relevant if o.kind in {"financial_observation", "financial_fact", "economic_pool"} and _field(o, "metric", "measure") and _field(o, "value") and _field(o, "period") and _field(o, "source")]
-    if financials:
-        body = "".join(f"<article><h3>{escape(_field(o, 'metric', 'measure'))}</h3><p><strong>Value:</strong> {escape(_field(o, 'value'))} {escape(_field(o, 'currency', 'unit'))} · <strong>Period:</strong> {escape(_field(o, 'period'))}</p><p><strong>Source:</strong> {escape(_field(o, 'source'))}</p>{f'<p><strong>Interpretation:</strong> {escape(o.consequence)}</p>' if o.consequence else ''}</article>" for o in financials)
-        rendered.append(f"<section class='card'><h2>Key financials</h2>{body}</section>")
-    changes = [o for o in relevant if executive_insight_eligible(o)]
-    if changes: rendered.append("<section class='card'><h2>Material changes</h2>" + "".join(_conclusion(o, run_id) for o in changes) + "</section>")
-    themes = sorted({_reinvention_kind(o) for o in relevant if _reinvention_kind(o) and (o.evidence_refs or o.kind == 'transformation_programme')})
-    if themes: rendered.append("<section class='card'><h2>Reinvention themes</h2><ul>" + "".join(f"<li>{escape(t)}</li>" for t in themes) + "</ul></section>")
-    pressure = _pressure_items(twin, run_id, enterprise=ent.name)
-    if pressure: rendered.append("<section class='card'><h2>Pressure and urgency</h2>" + "".join(pressure) + "</section>")
-    programmes = [o for o in relevant if o.kind == "transformation_programme"]
-    if programmes: rendered.append("<section class='card'><h2>Transformation programmes</h2>" + "".join(f"<article><h3>{escape(o.statement)}</h3><p>{escape(o.consequence or 'Business consequence not structured')}</p></article>" for o in programmes) + "</section>")
-    procurements = [o for o in relevant if o.kind in {"procurement", "procurement_route", "buying_centre"} or _field(o, "procurement_route", "procuring_organisation")]
-    if procurements:
-        rendered.append("<section class='card'><h2>Known procurements</h2>" + "".join(_procurement_item(o, ent.name) for o in procurements) + "</section>")
-    opportunities = [o for o in relevant if "opportun" in o.kind]
-    if opportunities: rendered.append("<section class='card'><h2>Opportunities</h2>" + "".join(_opportunity_card(o, run_id) for o in opportunities) + "</section>")
-    relationships = [o for o in relevant if o.kind in {"relationship", "supplier_relationship"}]
-    if relationships: rendered.append("<section class='card'><h2>Relationships</h2>" + "".join(f"<p>{escape(o.statement)}</p>" for o in relationships if o.statement) + "</section>")
-    sources = [o for o in relevant if o.kind == "evidence"]
-    if sources: rendered.append("<section class='card'><h2>Key Sources</h2>" + "".join(_source_item(o) for o in sources) + "</section>")
-    uncertainties = [o for o in relevant if o.kind in {"unknown", "contradiction"}]
-    if uncertainties: rendered.append("<section class='card'><h2>Important unknowns and contradictions</h2>" + "".join(f"<article><h3>{escape(o.statement)}</h3><p><strong>Why it matters:</strong> {escape(o.consequence or 'Research gap: consequence and affected decision are not established.')}</p><p><strong>Evidence needed:</strong> {escape(_field(o, 'evidence_needed', 'resolution') or 'Resolving evidence not specified.')}</p></article>" for o in uncertainties) + "</section>")
-    completeness = _completeness_html(ent, statuses)
-    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Twin overview</a><a href='/blueprint-import/{escape(run_id)}/explore?collection=enterprises'>Enterprises</a><strong>Enterprise dossier</strong></nav><header class='hero'><h1>{escape(ent.name)}</h1><p>{escape(description)}</p></header>{''.join(rendered)}{completeness}<details class='card'><summary>Advanced inspection and governance</summary><p>Canonical identifiers and excluded records remain available in package inspection.</p><a href='/blueprint-import/{escape(run_id)}/inspect'>View evidence and provenance</a> · <a href='/blueprint-import/{escape(run_id)}/review'>Review candidate governance</a></details>"
-
+    identity = next((o for o in relevant if o.kind in {"enterprise", "enterprise_twin", "entity"}), None)
+    description = _field(identity, "organisation_description", "overview", "description", "summary") if identity else ""
+    domains = sorted({d.title() for o in relevant for d in o.domains})
+    missing_overview = [label for label, value in (("plain-language description", description),
+        ("ownership or organisational form", _field(identity, "ownership", "organisational_form") if identity else ""),
+        ("principal activities", _field(identity, "principal_activities", "activities") if identity else ""),
+        ("industry role", _field(identity, "industry_role", "role") if identity else ""),
+        ("material current position", _field(identity, "current_position") if identity else "")) if not value]
+    if missing_overview:
+        overview = f"<p><strong>Organisation overview incomplete</strong></p><p>Research required: {escape(', '.join(missing_overview))}.</p>"
+        hero = "Organisation overview incomplete"
+    else:
+        overview = f"<p>{escape(description)}</p><p><strong>Organisational form:</strong> {escape(_field(identity, 'ownership', 'organisational_form'))}</p><p><strong>Principal activities:</strong> {escape(_field(identity, 'principal_activities', 'activities'))}</p><p><strong>Role in industry:</strong> {escape(_field(identity, 'industry_role', 'role'))}</p><p><strong>Current position:</strong> {escape(_field(identity, 'current_position'))}</p>"
+        hero = description
+    overview += f"<p><strong>Domain:</strong> {escape(', '.join(domains) or 'Not established')}</p><p><strong>Completeness:</strong> {len(missing_overview)} organisation overview requirement(s) unresolved.</p>"
+    def gap(title, exists, fields, why):
+        return f"<section class='card'><h2>{title}</h2><p><strong>Insufficient</strong></p><p>{exists}</p><p>{why}</p><p><strong>Research required:</strong> {', '.join(fields)}.</p></section>"
+    sections = [f"<section class='card' id='enterprise-overview'><h2>Organisation Overview</h2>{overview}</section>"]
+    position = _field(identity, "strategic_ambition", "market_position", "current_position") if identity else ""
+    sections.append(f"<section class='card'><h2>Strategic Position and Ambition</h2><p>{escape(position)}</p></section>" if position else gap("Strategic Position and Ambition", "No supported strategic position is supplied.", ("strategic ambition", "market position", "supporting evidence"), "Without it Flora cannot explain the organisation's direction."))
+    financials=[o for o in relevant if o.kind in {"financial_observation","financial_fact","economic_pool"} and all((_field(o,'metric','measure'),_field(o,'value'),_field(o,'period'),_field(o,'source')))]
+    sections.append("<section class='card'><h2>Financial Position</h2>"+"".join(f"<p><strong>{escape(_field(o,'metric','measure'))}:</strong> {escape(_field(o,'value'))} · {escape(_field(o,'period'))} · {escape(_field(o,'source'))}</p>" for o in financials)+"</section>" if financials else gap("Financial Position", "No complete financial measure is supplied.", ("measure", "value and currency", "period", "source", "business interpretation"), "Financial position cannot be assessed from an evidence record alone."))
+    pressures=_pressure_items(twin,run_id,enterprise=ent.name)
+    sections.append("<section class='card'><h2>Material Pressures</h2>"+"".join(pressures)+"</section>" if pressures else gap("Material Pressures", "No evidenced pressure with a business consequence is supplied.", ("pressure", "business consequence", "timing", "evidence"), "The most material challenge cannot be explained."))
+    programmes=[o for o in relevant if o.kind=='transformation_programme']; ready_programmes=[o for o in programmes if o.statement and o.consequence and _field(o,'stage','phase') and _field(o,'timing','expected_horizon') and o.evidence_refs]
+    sections.append("<section class='card'><h2>Major Programmes</h2>"+"".join(f"<h3>{escape(o.statement)}</h3><p>{escape(o.consequence)}</p>" for o in ready_programmes)+"</section>" if ready_programmes else gap("Major Programmes", f"{len(programmes)} candidate record(s) are associated, but none is executive-ready.", ("meaningful title", "objective", "phase", "timing", "evidence"), "Incomplete programme hypotheses cannot support executive decisions."))
+    procurements=[o for o in relevant if o.kind in {"procurement","procurement_route","buying_centre"} or _field(o,'procurement_route','procuring_organisation')]
+    ready_proc=[o for o in procurements if (o.statement or _field(o,'requirement')) and _field(o,'stage','status') and _field(o,'timing','procurement_date') and _field(o,'buyer') and _field(o,'value') and _field(o,'award_status','supplier_outcome')]
+    sections.append("<section class='card'><h2>Known Procurements</h2>"+"".join(_procurement_item(o,ent.name) for o in ready_proc)+"</section>" if ready_proc else gap("Known Procurements", f"{len(procurements)} candidate record(s) are associated with {escape(ent.name)}, but none identifies every mandatory procurement fact.", ("procurement description", "stage", "planned or actual start", "buyer", "value", "award or supplier outcome"), "The records cannot establish a live buying event."))
+    sections.append(gap("Reinvention Timing", "No supported enterprise timing assessment is supplied.", ("AI-native disruption mechanism", "exposure", "adoption indicators", "horizon", "response timing"), "Response urgency cannot be assessed."))
+    opportunities=[o for o in relevant if 'opportun' in o.kind]; ready_opps=[o for o in opportunities if _opportunity_contract(o,mission)[1]]
+    sections.append("<section class='card'><h2>Opportunities</h2>"+"".join(_opportunity_card(o,run_id) for o in ready_opps)+"</section>" if ready_opps else gap("Opportunities", f"{len(opportunities)} hypothesis record(s) are associated with {escape(ent.name)}, but none is sales-ready.", ("customer", "client problem", "business unit", "buyer", "value", "timing", "status", "evidence"), "Incomplete hypotheses cannot support sales action."))
+    sources=[o for o in relevant if o.kind=='evidence']
+    sections.append("<section class='card'><h2>Key Sources</h2>"+("".join(_source_item(o) for o in sources) if sources else "<p><strong>Insufficient.</strong> No directly linked sources are supplied.</p>")+"</section>")
+    sections.append(f"<section class='card'><h2>Research Gaps</h2><p>The same completeness requirements shown above define the researcher brief.</p><a href='/blueprint-import/{escape(run_id)}/health'>Open Research Gaps</a></section>")
+    sections.append(f"<section class='card'><h2>Advanced Inspection</h2><p>Incomplete records, evidence, lineage and candidate governance remain inspectable.</p><a href='/blueprint-import/{escape(run_id)}/explore'>Open Advanced Inspection</a></section>")
+    return _primary_nav(run_id, "")+f"<header class='hero'><h1>{escape(ent.name)}</h1><p>{escape(hero)}</p></header>"+"".join(sections)
 
 def _procurement_item(o: SemanticObject, enterprise: str) -> str:
     return f"<article><h3>{escape(o.statement or _field(o, 'requirement', 'programme'))}</h3><p><strong>Procuring organisation:</strong> {escape(_field(o, 'procuring_organisation') or enterprise)}</p><p><strong>Stage/status:</strong> {escape(_field(o, 'stage', 'status') or 'Not established')} · <strong>Timing:</strong> {escape(_field(o, 'timing', 'deadline') or 'Timing not established')}</p><p><strong>Route:</strong> {escape(_field(o, 'route', 'procurement_route') or 'Not established')} · <strong>Buyer/buying centre:</strong> {escape(_field(o, 'buyer', 'buying_centre') or 'Not established')}</p><p><strong>Source:</strong> {escape(', '.join(o.evidence_refs) or 'Evidence not linked')} · <strong>Uncertainty:</strong> {escape(_field(o, 'uncertainty') or 'No explicit uncertainty supplied')}</p></article>"
@@ -541,12 +552,12 @@ def _source_item(o: SemanticObject) -> str:
     url = _field(o, "url", "source_url", "link")
     title = _field(o, "title") or o.statement or o.original_id
     linked = f"<a href='{escape(url)}' rel='noopener'>{escape(title)}</a>" if url else escape(title)
-    return f"<article><h3>{linked}</h3><p><strong>Publisher/origin:</strong> {escape(_field(o, 'publisher', 'origin') or o.source_file)}</p><p><strong>Publication date:</strong> {escape(_field(o, 'publication_date', 'date') or 'Date not established')}</p><p><strong>What it supports:</strong> {escape(_field(o, 'supports', 'what_it_supports') or 'Claim linkage requires review')}</p><details><summary>Advanced evidence metadata</summary><code>{escape(o.original_id or o.record_id)}</code> · {escape(o.governance)}</details></article>"
+    link_gap = "" if url else "<p><strong>Direct source link not supplied</strong></p>"
+    return f"<article><h3>{linked}</h3><p><strong>Publisher/origin:</strong> {escape(_field(o, 'publisher', 'origin') or o.source_file)}</p><p><strong>Publication date:</strong> {escape(_field(o, 'publication_date', 'date') or 'Date not established')}</p>{link_gap}<p><strong>What it supports:</strong> {escape(_field(o, 'supports', 'what_it_supports') or 'Claim support not mapped')}</p><details><summary>Advanced evidence metadata</summary><code>{escape(o.original_id or o.record_id)}</code> · {escape(o.governance)}</details></article>"
 
 
 def _navigation(run_id):
-    r = escape(run_id)
-    return f"<section class='secondary-actions'><a class='button' href='/blueprint-import/{r}/explore'>Browse Full Twin</a></section>"
+    return _primary_nav(run_id, "")
 
 
 ASPECT_LABELS = {"industry-overview": "Industry Overview", "enterprises": "Enterprises",
@@ -560,7 +571,7 @@ def _filter_domain(objects, domain):
 def _primary_nav(run_id: str, active: str) -> str:
     r = escape(run_id)
     links = (("map", f"/blueprint-import/{r}", "Twin Map"), ("gaps", f"/blueprint-import/{r}/health", "Research Gaps"),
-             ("browse", f"/blueprint-import/{r}/explore", "Browse Full Twin"))
+             ("inspection", f"/blueprint-import/{r}/explore", "Advanced Inspection"))
     return "<nav class='executive-path' aria-label='Twin navigation'>" + "".join(
         f"<strong aria-current='page'>{label}</strong>" if key == active else f"<a href='{href}'>{label}</a>" for key, href, label in links) + "</nav>"
 
@@ -572,7 +583,7 @@ def _twin_map(twin: SemanticTwin, run_id: str, mission: CommercialMission | None
         bars = "".join(f"<i class='{'filled' if n <= (a.bars or 0) else ''}' aria-hidden='true'></i>" for n in range(1,5))
         href=f"/blueprint-import/{escape(run_id)}/aspects/{a.key}?domain={escape(domain)}"
         tiles.append(f"<a class='twin-map-tile' href='{href}'><h3>{escape(a.name)}</h3><p class='coverage'>{escape(count)}</p><span class='readiness' aria-label='{escape(a.state)}, {a.bars or 0} of 4 bars'>{bars}<strong>{escape(a.state)}</strong></span><p>{escape(explanation)}</p></a>")
-    return f"<section class='card twin-map' id='twin-map'><h2>Twin Map</h2><div class='twin-map-grid'>{''.join(tiles)}</div><p><a class='button primary' href='/blueprint-import/{escape(run_id)}/aspects/industry-overview#key-insights'>Key Insights</a> <a class='button' href='/blueprint-import/{escape(run_id)}/health'>Research Gaps</a></p></section>"
+    return f"<section class='card twin-map' id='twin-map'><h2>Twin Map</h2><div class='twin-map-grid'>{''.join(tiles)}</div></section>"
 
 def _aspect_page(twin, run_id, title, key, domain, mission):
     if key not in ASPECT_LABELS: return "<section class='card'><h1>Aspect unavailable</h1></section>"
@@ -580,23 +591,35 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
     objects=_filter_domain(twin.objects, domain)
     if key=="enterprises":
         cards="".join(_enterprise_card(e, run_id) for e in twin.enterprises)
-        content=f"<p><strong>{len(twin.enterprises)} distinct enterprises</strong></p><div class='enterprise-grid'>{cards or '<p>No enterprise identities supplied.</p>'}</div>"
+        ready=sum("Enterprise intelligence readiness: Executive-ready" in _enterprise_card(e, run_id) for e in twin.enterprises)
+        content=f"<p><strong>{len(twin.enterprises)} canonical enterprises · {ready} executive-ready enterprises</strong></p><div class='enterprise-grid'>{cards or '<p>No enterprise identities supplied.</p>'}</div>"
     elif key=="industry-overview":
         rows=[o for o in objects if executive_insight_eligible(o)]
-        content="<section id='key-insights'><h2>Key Insights</h2>"+("".join(_conclusion(o,run_id) for o in rows) if rows else f"<p><strong>{escape(a.state)}</strong> — No qualified insight currently satisfies the evidence contract.</p>")+"</section>"
+        identity=[o for o in objects if o.kind in {"industry", "subsector"}]
+        def section(name, body=""):
+            return f"<section><h2>{name}</h2>{body or '<p><strong>Research gap.</strong> No supported structured content is supplied for this section.</p>'}</section>"
+        content = section("Industry definition and scope", "".join(f"<p>{escape(o.statement)}</p>" for o in identity if o.kind=="industry"))
+        content += section("Composition and sub-sectors", "".join(f"<p>{escape(o.statement)}</p>" for o in identity if o.kind=="subsector"))
+        for name in ("Size and economics", "Leading enterprises", "Market participants and competitive structure", "Political and regulatory pressures", "Economic pressures", "Social and customer change", "Technology change", "Legal and environmental factors where applicable", "Major transformation themes"):
+            content += section(name)
+        content += section("Qualified insights", "".join(_conclusion(o,run_id) for o in rows))
+        content += f"<section><h2>Research Gaps</h2><p>{escape('; '.join(a.missing))}</p></section><section><h2>Advanced Inspection</h2><p><a href='/blueprint-import/{escape(run_id)}/explore'>Inspect canonical records, evidence and lineage</a></p></section>"
     elif key=="market-participants":
-        rows=[o for o in objects if _field(o,'role','participant_role','market_role')]
-        content="".join(f"<article class='enterprise-card'><h3>{escape(o.subject if o.subject not in {'','Twin scope'} else o.statement or 'Unnamed participant')}</h3><p><strong>Role:</strong> {escape(_field(o,'role','participant_role','market_role'))}</p><p><strong>Domain:</strong> {escape(', '.join(o.domains) or 'Not established')}</p><p>{escape(o.consequence or 'Participation rationale requires research.')}</p></article>" for o in rows) or "<p>No evidence-supported participant roles are available. Relationships remain supporting records, not inferred roles.</p>"
+        identified=list(next((c.objects for c in business_collections(twin, include_empty=True, domain=domain) if c.key=='market-participants'), ()))
+        rows=[o for o in identified if _field(o,'role','participant_role','market_role') and o.domains and o.evidence_refs and o.consequence]
+        content=f"<p><strong>{len(identified)} participants identified</strong><br><strong>{len(rows)} sufficiently classified</strong></p>"+("".join(f"<article class='enterprise-card'><h3>{escape(o.subject if o.subject not in {'','Twin scope'} else o.statement)}</h3><p><strong>Role:</strong> {escape(_field(o,'role','participant_role','market_role'))}</p><p><strong>Domain:</strong> {escape(', '.join(o.domains))}</p><p>{escape(o.consequence)}</p></article>" for o in rows) if rows else "<p><strong>Insufficient</strong> — supported role, domain and market significance require research.</p>")
     elif key=="major-programmes":
         rows=[o for o in objects if o.kind=='transformation_programme']
-        content="".join(f"<article class='enterprise-card'><h3>{escape(o.statement or 'Unnamed programme')}</h3><p><strong>Owning enterprise:</strong> {escape(_field(o,'owner') or o.subject or 'Not established')}</p><p><strong>Business objective:</strong> {escape(o.consequence or 'Requires research')}</p><p><strong>Stage:</strong> {escape(_field(o,'stage','phase') or 'Not established')} · <strong>Timing:</strong> {escape(_field(o,'timing','expected_horizon') or 'Not established')}</p><p><strong>Evidence:</strong> {escape(', '.join(o.evidence_refs) or 'Not linked')} · <strong>Completeness:</strong> {'Usable' if o.statement and o.evidence_refs else 'Research needed'}</p></article>" for o in rows) or "<p>No named major programmes are supported.</p>"
+        ready=[o for o in rows if o.statement and (_field(o,'owner') or o.subject!='Twin scope') and o.consequence and _field(o,'stage','phase') and _field(o,'timing','expected_horizon') and o.evidence_refs]
+        content=f"<p><strong>{len(rows)} programme hypotheses identified</strong><br><strong>{len(ready)} executive-ready programmes</strong></p>"+("".join(f"<article class='enterprise-card'><h3>{escape(o.statement)}</h3><p><strong>Owning enterprise:</strong> {escape(_field(o,'owner') or o.subject)}</p><p><strong>Business objective:</strong> {escape(o.consequence)}</p></article>" for o in ready) if ready else "<p><strong>Insufficient.</strong> Programme owner, objective, phase, timing and evidence must be resolved before hypotheses appear here.</p>")
     elif key=="opportunities":
         rows=[o for o in objects if 'opportun' in o.kind]; ready=[o for o in rows if _opportunity_contract(o,mission)[1]]
-        content=f"<h2>Sales-ready opportunities</h2>{''.join(_opportunity_card(o,run_id) for o in ready) or '<p>0 sales-ready opportunities.</p>'}<h2>Research needed</h2>{''.join(_opportunity_card(o,run_id) for o in rows if o not in ready) or '<p>No incomplete hypotheses.</p>'}"
+        table=("<table class='opportunity-table'><thead><tr><th>Customer</th><th>Opportunity</th><th>Value</th><th>Timing</th><th>Status</th></tr></thead><tbody>"+"".join(f"<tr><td>{escape(', '.join(o.affected_organisations) or o.subject)}</td><td>{escape(o.statement)}</td><td>{escape(_field(o,'value','value_range') or 'Not established')}</td><td>{escape(_field(o,'timing','procurement_start') or 'Timing unknown')}</td><td>{escape(_field(o,'status','procurement_status') or 'Status unknown')}</td></tr>" for o in ready)+"</tbody></table>") if ready else "<p>0 sales-ready opportunities.</p>"
+        content=f"<h2>Sales-ready opportunities</h2>{table}<h2>Developing hypotheses</h2><p><strong>{len(rows)-len(ready)} hypotheses require further research.</strong></p><h2>Research required</h2><ul><li>customer</li><li>client problem</li><li>business unit</li><li>timing</li><li>status</li><li>value</li><li>buyer</li><li>evidence</li></ul>"
     else:
         rows=[o for o in objects if _field(o,'expected_horizon','tipping_point','reinvention_timing')]
-        content=f"<h2>What is currently known</h2>{''.join(_conclusion(o,run_id) for o in rows) or '<p>No supported timing assessment is available.</p>'}<h2>What Flora can support</h2><p>{escape(a.state)} based only on explicit timing and tipping-point evidence.</p><h2>Research required</h2><p>{escape(a.researcher_action)}</p>"
-    gaps="; ".join(a.missing) or "No mandatory presentation gap under this rule."
+        content=("<p><strong>Absent</strong></p><p>This Twin contains no structured assessment of:</p><ul><li>AI-native disruption mechanism</li><li>enterprise or business-unit exposure</li><li>adoption indicators</li><li>expected horizon</li><li>response timing</li></ul><h2>Research required</h2><p>Research the disruption mechanism, exposure, adoption indicators, horizon, response timing and evidence.</p>" if not rows else "".join(_conclusion(o,run_id) for o in rows))
+    gaps="; ".join(a.missing) or "No unresolved mandatory fields."
     return _primary_nav(run_id,"aspect")+f"<p><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a></p><header class='hero'><p>{escape(title)} · {escape(domain.title())}</p><h1>{escape(ASPECT_LABELS[key])}</h1><p><strong>{escape(a.state)}</strong> · {escape(a.present[-1] if a.present else gaps)}</p></header><section class='card'>{content}</section><section class='card'><h2>Research gaps for this aspect</h2><p>{escape(gaps)}</p><p><strong>Researcher action:</strong> {escape(a.researcher_action)}</p></section>"+_navigation(run_id)
 
 def _research_gaps(twin, run_id, mission):
@@ -609,7 +632,7 @@ def _research_gaps(twin, run_id, mission):
     return _primary_nav(run_id,"gaps")+"<header class='hero'><h1>Research Gaps</h1></header><section class='research-gap-grid'>"+"".join(cards)+f"</section><p><a href='/blueprint-import/{escape(run_id)}/diagnostics'>Advanced diagnostics</a></p>"
 
 def _advanced_diagnostics(twin,run_id,summary,mission):
-    return _primary_nav(run_id,"diagnostics")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced diagnostics</h1></header>"+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
+    return _primary_nav(run_id,"inspection")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
 
 
 def _enterprise_completeness(ent: SemanticEnterprise, mission: CommercialMission | None) -> tuple[CompletenessAspect, ...]:
