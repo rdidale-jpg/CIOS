@@ -45,7 +45,7 @@ from cios.applications.flora.flora_transparent import start_bt_digital_twin, flo
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
 from cios.applications.flora.twin_inspection import twin_inspection_page
 from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page, restage_confirm_page as blueprint_restage_confirm_page, restage_package as blueprint_restage_package, restage_progress_page as blueprint_restage_progress_page, restage_history_page as blueprint_restage_history_page, promotion_confirmation_page as blueprint_promotion_confirmation_page, cancellation_confirmation_page as blueprint_cancellation_confirmation_page, cancel_import as blueprint_cancel_import
-from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page, update_commercial_mission
+from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page, update_commercial_mission, export_research_gap_brief
 from cios.applications.flora.enterprise_intelligence.views import executive_intelligence_brief_page
 from cios.applications.flora.enterprise_intelligence.pipeline import run_pipeline as run_banking_pipeline
 from cios.applications.flora.enterprise_intelligence.models import ReasoningRequestV1
@@ -261,6 +261,17 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/health")
                 html, status = executive_workspace_page(run_id, self.headers, view="health")
                 self._html(html, status=status)
+            elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/research-brief"):
+                run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/research-brief")
+                domain = (parse_qs(parsed.query).get("domain") or ["all"])[0]
+                brief, filename, status = export_research_gap_brief(run_id, self.headers, domain)
+                body = brief.encode("utf-8")
+                self.send_response(status)
+                self.send_header("Content-Type", "text/markdown; charset=utf-8")
+                self.send_header("Content-Disposition", f'attachment; filename="{filename}"')
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
             elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/diagnostics"):
                 run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/diagnostics")
                 html, status = executive_workspace_page(run_id, self.headers, view="diagnostics")

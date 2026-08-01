@@ -52,6 +52,18 @@ class CommercialMission:
     authority_status: str = "human-supplied operational context"
     supplied_by: str = "configured user profile"
 
+    def employer_context(self) -> "EmployerContext":
+        """Project employer data as a separate authority (never Twin intelligence)."""
+        return EmployerContext(
+            organisation=self.employer,
+            offer_portfolio=self.offer_portfolio,
+            capabilities=(),
+            propositions=self.strategic_propositions,
+            partners=self.partners,
+            competitors=self.competitors,
+            constraints=self.delivery_constraints,
+        )
+
     @classmethod
     def from_dict(cls, user_id: str, value: dict[str, Any]) -> "CommercialMission":
         scalar = {k: str(value.get(k) or "") for k in ("executive_role", "employer", "commercial_objective")}
@@ -113,3 +125,21 @@ def save_commercial_mission(headers: Any, value: dict[str, Any]) -> CommercialMi
         temporary = Path(handle.name)
     temporary.replace(path)
     return mission
+
+
+@dataclass(frozen=True)
+class EmployerContext:
+    """Declared supplier-side context, deliberately separate from the mission and Twin."""
+    organisation: str = ""
+    offer_portfolio: tuple[str, ...] = ()
+    capabilities: tuple[str, ...] = ()
+    propositions: tuple[str, ...] = ()
+    partners: tuple[str, ...] = ()
+    competitors: tuple[str, ...] = ()
+    credentials: tuple[str, ...] = ()
+    constraints: tuple[str, ...] = ()
+    authority_status: str = "human-supplied"
+
+    @property
+    def complete(self) -> bool:
+        return bool(self.organisation and self.offer_portfolio and self.propositions)
