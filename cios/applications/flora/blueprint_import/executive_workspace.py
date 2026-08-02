@@ -11,7 +11,8 @@ from zipfile import ZipFile
 
 from cios.applications.flora.access import can_access_enterprise
 from cios.applications.flora.pilot_import import pilot_import_bypass_enabled
-from cios.applications.flora.commercial_mission import CommercialMission, resolve_commercial_mission, save_commercial_mission
+from cios.applications.flora.commercial_mission import (CommercialMission, EmployerContext,
+    resolve_commercial_mission, resolve_employer_context, save_commercial_mission, save_employer_context)
 from cios.applications.flora.workspace.views import _page
 from .registry import BlueprintPackageRegistry
 from .industry_delta_adapter import IndustryTwinDeltaAdapter
@@ -71,12 +72,29 @@ def _mission_relevance(o: SemanticObject, mission: CommercialMission) -> tuple[b
                                      *mission.named_accounts, *mission.enterprises)}
     subjects = {o.subject.casefold(), *(x.casefold() for x in o.affected_organisations)}
     excluded = {x.casefold() for x in mission.excluded_accounts}
-    if subjects & excluded: return False, "The customer is explicitly excluded by the selected mission."
-    if targets: return bool(subjects & targets), ("Customer matches a declared target account." if subjects & targets else "Customer does not match a declared target account.")
+    if subjects & excluded: return False, "Excluded account: the customer is explicitly excluded by the selected mission."
+    reasons = []
+    matched = False
+    if subjects & targets:
+        matched = True; reasons.append("target account")
     domains = {d.casefold() for d in o.domains}
     industries = {x.casefold() for x in mission.industries}
-    if industries: return bool(domains & industries), ("Domain matches a target industry." if domains & industries else "Domain does not match a target industry.")
-    return True, "No account or industry restriction is configured; neutral ordering applies."
+    if domains & industries:
+        matched = True; reasons.append("selected industry")
+    text = " ".join((o.statement, o.consequence, o.kind, *o.domains)).casefold()
+    focus_matches = [area for area in mission.interests if area.casefold() in text]
+    if focus_matches:
+        matched = True; reasons.append("selected focus area: " + ", ".join(focus_matches))
+    horizon = mission.opportunity_horizon or mission.commercial_horizon
+    timing = _field(o, "procurement_start", "expected_procurement_start", "procurement_timing", "timing", "expected_horizon")
+    if horizon and timing and horizon.casefold() in timing.casefold():
+        matched = True; reasons.append("commercial horizon")
+    restricted = bool(targets or industries or mission.interests or horizon)
+    if reasons:
+        return True, "Relevant because: " + "; ".join(reasons) + "."
+    if restricted:
+        return False, "No configured target account, industry, focus area or commercial-horizon match."
+    return True, "Neutral ordering: no account, industry, focus-area or horizon restriction is configured."
 
 
 def twin_readiness(twin: SemanticTwin, mission: CommercialMission | None = None) -> tuple[ReadinessAspect, ...]:
@@ -138,6 +156,7 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     candidates = _semantic_candidates(package, list(summary.get("candidates") or ()))
     twin = assemble_semantic_twin(candidates)
     mission = resolve_commercial_mission(headers)
+    employer_context = resolve_employer_context(headers)
     inspection = package.package_inspection or {}
     identity = project_twin_identity(package)
     title = str(inspection.get("twin_title") or inspection.get("package_title") or identity.primary_subject_name or package.identity.package_id)
@@ -155,8 +174,8 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
             return _page("Enterprise dossier unavailable", "<section class='hero'><h1>Enterprise dossier unavailable</h1></section>"), 404
         return _page(f"Enterprise Intelligence — {ent.name}", _styles() + _dossier(ent, twin, import_run_id, mission)), 200
     if view == "mission":
-        return _page("Edit Commercial Mission", _styles() + _mission_editor(mission, import_run_id)), 200
-    body = _styles() + _hero(title) + _primary_nav(import_run_id, "map") + _mission_indicator(mission, import_run_id)
+        return _page("Configure Commercial Mission", _styles() + _mission_editor(mission, employer_context, import_run_id)), 200
+    body = _styles() + _hero(title) + _primary_nav(import_run_id, "map") + _mission_indicator(mission, employer_context, import_run_id)
     if not twin.enterprises:
         body += f"<aside class='mission-indicator' role='status'>Twin identity and governed scope have not yet been confirmed. Resolve Twin scope through <a href='/blueprint-import/{escape(import_run_id)}/review'>Review candidate governance</a>. <a href='/blueprint-import/{escape(import_run_id)}/inspect'>Inspect import decisions</a>. <a href='/blueprint-import/{escape(import_run_id)}/validation'>View package validation</a>.</aside>"
     body += _domain_lenses(import_run_id, domain) + _twin_map(twin, import_run_id, mission, domain) + _composition(twin, import_run_id, domain)
@@ -210,12 +229,14 @@ def _hero(title):
     return f"<header class='compact-twin-header'><p>Executive Intelligence Workspace</p><h1><span class='pilot-badge'>PILOT</span><span aria-hidden='true'> · </span>{escape(title)}</h1></header>"
 
 
-def _mission_indicator(mission: CommercialMission | None, run_id: str) -> str:
+def _mission_indicator(mission: CommercialMission | None, employer: EmployerContext | None, run_id: str) -> str:
     if not mission:
-        return f"<aside class='mission-indicator' role='status'><strong>PILOT · Commercial Mission not configured</strong> — no Commercial Mission is available · <a href='/blueprint-import/{escape(run_id)}/mission'>Configure</a></aside>"
-    status = "Configured" if mission.mission_name and mission.offer_portfolio and (mission.priority_accounts or mission.target_customers) else "Partially configured"
+        employer_state = "Configured" if employer and employer.complete else "Partially configured" if employer else "Not configured"
+        return f"<aside class='mission-indicator' role='status'><strong>PILOT · Commercial Mission not configured</strong> — no Commercial Mission is available · Employer Context: {employer_state} · neutral industry composition applies · <a href='/blueprint-import/{escape(run_id)}/mission'>Configure</a></aside>"
+    status = "Configured" if mission.mission_name and mission.executive_role and mission.commercial_objective and mission.industries and (mission.priority_accounts or mission.target_customers) else "Partially configured"
     name = mission.mission_name or "Unnamed mission"
-    return f"<aside class='mission-indicator' role='status'><strong>PILOT · Commercial Mission: {escape(name)}</strong> · {status} · <a href='/blueprint-import/{escape(run_id)}/mission'>Select or edit</a></aside>"
+    employer_state = "Configured" if employer and employer.complete else "Partially configured" if employer else "Not configured"
+    return f"<aside class='mission-indicator' role='status'><strong>PILOT · Commercial Mission: {escape(name)}</strong> · {status} · Employer Context: {employer_state} · <a href='/blueprint-import/{escape(run_id)}/mission'>Select or edit</a></aside>"
 
 
 def _bars(a: ReadinessAspect, run_id: str) -> str:
@@ -417,36 +438,55 @@ def _validation_report(twin: SemanticTwin) -> str:
     return f"""<section class='card' id='package-validation'><h2>Deterministic package validation</h2><p><strong>Canonical priority enterprises: {len(twin.enterprises)}</strong> · Market Participants: {counts['market_participant_twin']} · Capabilities/offers: {counts['capability_offer']} · Opportunities: {counts['opportunity_hypothesis']} · Evidence: {counts['evidence']} · Unknowns: {counts['unknown']} · Contradictions: {counts['contradiction']}</p><p><strong>Capabilities and offers (not enterprises):</strong> {escape(capabilities)}</p><p>Evidence-reference coverage: {evidenced}/{len(twin.objects)} objects · Claims without evidence: {sum(not o.evidence_refs for o in claims)} · Evidence without claims: {unused_evidence} · Missing dates: {sum(o.freshness == 'unknown' for o in twin.objects)} · Unresolved references: {len(twin.unresolved_references)}</p><details><summary>Counts by canonical/runtime type and unresolved IDs</summary><table><tbody>{rows}</tbody></table><p>{escape(', '.join(twin.unresolved_references) or 'No unresolved canonical references')}</p></details></section>"""
 
 
-def _mission_editor(m: CommercialMission | None, run_id: str) -> str:
-    def value(name): return escape(", ".join(getattr(m, name)) if m and isinstance(getattr(m, name), tuple) else (getattr(m, name) if m else ""))
+def _mission_editor(m: CommercialMission | None, employer: EmployerContext | None, run_id: str) -> str:
+    def value(name):
+        raw = getattr(m, name) if m else ""
+        return escape(", ".join(raw) if isinstance(raw, tuple) else raw)
     def fields(spec):
         return "".join(f"<label>{label} <span class='pill'>{'human-supplied' if value(name) else 'unresolved'}</span><input name='{name}' value='{value(name)}'></label>" for name, label in spec)
-    mission_fields = fields((("mission_name", "Mission name"), ("executive_role", "User role"), ("commercial_objective", "Primary objective"),
+    mission_fields = fields((("mission_name", "Mission name"), ("executive_role", "Executive role"), ("commercial_objective", "Primary objective"),
         ("industries", "Target industries"), ("geography", "Geography"), ("interests", "Focus areas"),
-        ("target_customers", "Target customers"), ("priority_accounts", "Priority accounts"), ("excluded_accounts", "Excluded accounts"),
+        ("target_customers", "Target accounts"), ("priority_accounts", "Priority accounts"), ("excluded_accounts", "Excluded accounts"),
         ("relevant_business_units", "Relevant business units"), ("account_focus", "Existing-account or new-logo focus"),
         ("commercial_horizon", "Commercial horizon"), ("objectives", "Commercial objectives")))
-    employer_fields = fields((("employer", "Employer organisation"), ("offer_portfolio", "Offer portfolio"),
-        ("strategic_propositions", "Propositions"), ("partners", "Partners"), ("competitors", "Competitors"),
-        ("delivery_constraints", "Delivery or eligibility constraints"), ("opportunity_horizon", "Opportunity horizon"),
-        ("required_opportunity_maturity", "Required opportunity maturity"), ("minimum_evidence_state", "Minimum evidence state"),
-        ("speculative_treatment", "Treatment of speculative hypotheses")))
-    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Executive Workspace</a><strong>Commercial Settings</strong></nav><section class='card'><h1>Commercial Settings</h1><p>Fields are labelled human-supplied or unresolved. Governed organisation intelligence remains in the imported Twin and is never inferred from an organisation name.</p><form method='post' action='/blueprint-import/{escape(run_id)}/mission'><fieldset><legend>Commercial Mission</legend>{mission_fields}</fieldset><fieldset><legend>Employer Context</legend>{employer_fields}</fieldset><button class='button primary'>Save settings</button></form></section>"
+    employer_specs = (("organisation", "Employer organisation"), ("description", "Employer description"),
+        ("offer_portfolio", "Offers"), ("capabilities", "Capabilities"), ("propositions", "Propositions"),
+        ("competitors", "Competitors"), ("partners", "Strategic partners"), ("target_sectors", "Target sectors"),
+        ("credentials", "Reference credentials"), ("constraints", "Delivery constraints"),
+        ("excluded_offerings", "Excluded or unsupported offerings"))
+    employer_fields = []
+    for name, label in employer_specs:
+        raw = getattr(employer, name) if employer else ""
+        shown = ", ".join(raw) if isinstance(raw, tuple) else raw
+        status = employer.field_statuses.get(name, "unresolved") if employer else "unresolved"
+        employer_fields.append(f"<label>{label} <span class='pill'>{escape(status)}</span><input name='employer_{name}' value='{escape(shown)}'></label>")
+    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a><strong>Configure Commercial Mission</strong></nav><section class='card'><h1>Configure Commercial Mission</h1><p>Commercial Mission and Employer Context are independent user-scoped operational profiles. They never alter the imported Twin. Supplied employer fields are labelled as human-supplied, not market evidence.</p><form method='post' action='/blueprint-import/{escape(run_id)}/mission'><fieldset><legend>Commercial Mission</legend>{mission_fields}<button class='button' name='save_scope' value='mission'>Save Commercial Mission</button></fieldset><fieldset><legend>Employer Context</legend>{''.join(employer_fields)}<button class='button' name='save_scope' value='employer'>Save Employer Context</button></fieldset><button class='button primary' name='save_scope' value='both'>Save both and return to Twin Map</button></form></section>"
 
 
 def update_commercial_mission(import_run_id: str, headers: Any, form: dict[str, list[str]]) -> tuple[str, int]:
     values = {key: (items[0] if items else "") for key, items in form.items()}
-    for key in ("industries", "geography", "offer_portfolio", "named_accounts", "campaigns", "interests",
-                "target_customers", "priority_accounts", "excluded_accounts", "relevant_business_units", "objectives",
-                "strategic_propositions", "partners", "competitors", "delivery_constraints"):
+    for key in ("industries", "geography", "named_accounts", "campaigns", "interests", "target_customers",
+                "priority_accounts", "excluded_accounts", "relevant_business_units", "objectives"):
         values[key] = [item.strip() for item in str(values.get(key, "")).split(",") if item.strip()]
     values.update(authority_status="human-supplied operational context", supplied_by="authenticated user profile edit")
+    scope = values.get("save_scope") or "both"
     try:
-        save_commercial_mission(headers, values)
+        if scope in {"mission", "both"}:
+            save_commercial_mission(headers, values)
+        if scope in {"employer", "both"}:
+            employer_values = {key.removeprefix("employer_"): value for key, value in values.items() if key.startswith("employer_")}
+            for key in ("offer_portfolio", "capabilities", "propositions", "competitors", "partners", "target_sectors",
+                        "credentials", "constraints", "excluded_offerings"):
+                employer_values[key] = [item.strip() for item in str(employer_values.get(key, "")).split(",") if item.strip()]
+            employer_values["authority_status"] = "human-supplied"
+            save_employer_context(headers, employer_values)
     except PermissionError:
         return _page("Access denied", "<h1>Access denied</h1>"), 403
     except ValueError as exc:
-        return _page("Mission not saved", f"<h1>Mission not saved</h1><p>{escape(str(exc))}</p>"), 400
+        current_mission = resolve_commercial_mission(headers)
+        current_employer = resolve_employer_context(headers)
+        form_html = _mission_editor(current_mission, current_employer, import_run_id)
+        return _page("Settings not saved", _styles() + f"<aside class='mission-indicator' role='alert'><strong>Settings not saved:</strong> {escape(str(exc))}</aside>" + form_html), 400
     return executive_workspace_page(import_run_id, headers)
 
 
@@ -505,7 +545,7 @@ def _explorer(twin, run_id, mission, selected="", domain="all"):
     else: content = "<p>Select a business collection to explore its contents.</p>"
     title = active.label if active else "Advanced Inspection"
     total = len(active.objects) if active else 0
-    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Twin overview</a><strong>Advanced Inspection</strong></nav><header class='hero'><h1>{escape(title)}</h1><p>{escape(active.description) if active else 'Inspect canonical records, evidence, relationships, unknowns, contradictions and technical diagnostics.'}</p></header><section class='card'><h2>Twin collections</h2><div class='collection-links'>{links}</div></section><section class='card'><h2>{escape(title)}{f' — {total} total' if active else ''}</h2><p>{f'Showing {total} distinct identities' if active and active.key == 'enterprises' else f'Showing {total} of {total} total records' if active else ''}</p>{content}</section><details class='card'><summary>Advanced aspect coverage</summary><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></details>"
+    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a><strong>Advanced Inspection</strong></nav><header class='hero'><h1>Advanced Inspection</h1><p>{escape(active.description) if active else 'Inspect canonical records, evidence, relationships, unknowns, contradictions and technical diagnostics.'}</p></header><section class='card'><h2>Technical collections</h2><div class='collection-links'>{links}</div></section><section class='card'><h2>{escape(title)}{f' — {total} total' if active else ''}</h2><p>{f'Showing {total} distinct identities' if active and active.key == 'enterprises' else f'Showing {total} of {total} total records' if active else ''}</p>{content}</section><details class='card'><summary>Advanced aspect coverage</summary><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></details>"
 
 
 def _dossier(ent, twin, run_id, mission):
@@ -643,10 +683,10 @@ def _display(o: SemanticObject, fallback: str) -> str:
 
 
 def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMission | None,
-                       domain: str = "all") -> str:
+                       domain: str = "all", employer_context: EmployerContext | None = None) -> str:
     """Render a commissioning paper from canonical readiness and completeness rules."""
     aspects = twin_readiness(twin, mission)
-    context = mission.employer_context() if mission else None
+    context = employer_context
     selected = [o for o in twin.objects if domain == "all" or domain.casefold() in {d.casefold() for d in o.domains}]
     evidence = [o for o in selected if o.kind == "evidence"]
     programmes = [o for o in selected if o.kind == "transformation_programme"]
@@ -655,7 +695,8 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
              "Commission the evidence needed to make this imported Industry Twin usable for the six executive experiences, without treating hypotheses as findings.",
              "", "### Commercial Mission"]
     if mission:
-        lines += [f"- Role: {mission.executive_role or 'unresolved'}", f"- Objective: {mission.commercial_objective or 'unresolved'}",
+        lines += [f"- Mission: {mission.mission_name or 'unnamed'}", f"- Role: {mission.executive_role or 'unresolved'}", f"- Objective: {mission.commercial_objective or 'unresolved'}",
+                  f"- Objectives: {', '.join(mission.objectives) or 'unresolved'}",
                   f"- Target industries: {', '.join(mission.industries) or 'unresolved'}", f"- Target accounts: {', '.join((*mission.target_customers, *mission.priority_accounts, *mission.named_accounts)) or 'unresolved'}",
                   f"- Geography: {', '.join(mission.geography) or 'unresolved'}", f"- Commercial horizon: {mission.commercial_horizon or 'unresolved'}",
                   f"- Focus areas: {', '.join(mission.interests) or 'unresolved'}"]
@@ -664,13 +705,20 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
     lines += ["", "### Employer Context"]
     if context:
         state = lambda values: "configured" if values else "not configured"
-        lines += [f"- Organisation: {context.organisation or 'unresolved'} (human-supplied)", f"- Offer portfolio: {state(context.offer_portfolio)}",
+        lines += [f"- Status: {'Configured' if context.complete else 'Partially configured'}", f"- Organisation: {context.organisation or 'unresolved'} ({context.field_statuses.get('organisation', context.authority_status)})", f"- Offer portfolio: {state(context.offer_portfolio)}",
                   f"- Capabilities: {state(context.capabilities)}", f"- Propositions: {state(context.propositions)}",
                   f"- Competitors: {state(context.competitors)}", f"- Partners: {state(context.partners)}"]
     else:
-        lines += ["- Organisation: unresolved", "- Offer portfolio: not configured", "- Competitors: not configured", "- Partners: not configured"]
+        lines += ["- Status: Not configured", "- Organisation: unresolved", "- Offer portfolio: not configured", "- Competitors: not configured", "- Partners: not configured"]
     if not context or not context.complete:
         lines += ["", "Employer-specific opportunity alignment cannot yet be fully assessed."]
+    lines += ["", "### Mission Readiness",
+              f"- Target-account analysis: {'available' if mission and (mission.target_customers or mission.priority_accounts or mission.named_accounts) else 'configuration required'}",
+              f"- Focus-area alignment: {'available' if mission and mission.interests else 'configuration required'}",
+              f"- Employer-offer alignment: {'available from configured offers' if context and context.offer_portfolio else 'configuration required; no offer is inferred'}",
+              f"- Competitor context: {'available from configured competitors' if context and context.competitors else 'configuration required'}",
+              f"- Partner context: {'available from configured partners' if context and context.partners else 'configuration required'}",
+              f"- Opportunity-horizon assessment: {'available' if mission and (mission.commercial_horizon or mission.opportunity_horizon) else 'configuration required'}"]
     counts = Counter(o.kind for o in selected)
     domains = sorted({d for o in selected for d in o.domains})
     lines += ["", "## 2. Current Twin Summary", f"- Twin: {twin_name}", f"- Domain lens: {domain}",
@@ -683,7 +731,14 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
                   f"- What is usable: {a.present[-1] if a.present else 'Nothing is yet usable'}", f"- What is missing: {'; '.join(a.missing) or 'No mandatory readiness field'}",
                   f"- Why the gap matters: the experience cannot advance beyond {a.state} under Flora's {a.rule_version} rule until these fields and relationships are supported."]
     priority = ("Opportunities", "Reinvention Timing", "Major Programmes", "Enterprise Intelligence", "Industry Overview", "Market Participants")
-    lines += ["", "## 4. Priority Research Work"] + [f"{i}. {name}" for i, name in enumerate(priority, 1)]
+    lines += ["", "## 4. Researcher Actions", "The following work requires external, attributable evidence. Configuration omissions are not Industry Twin truth gaps."] + [f"{i}. {name}" for i, name in enumerate(priority, 1)]
+    configuration_actions = []
+    if not mission: configuration_actions.append("Configure the user's Commercial Mission, role, objectives and focus.")
+    if not context: configuration_actions.append("Configure the employer organisation and explicitly supplied portfolio context.")
+    elif not context.offer_portfolio: configuration_actions.append("Configure relevant employer offers; do not ask a researcher to infer the internal portfolio.")
+    if not context or not context.competitors: configuration_actions.append("Configure preferred competitors or leave competitor context unavailable.")
+    if not context or not context.partners: configuration_actions.append("Configure preferred partners or leave partner context unavailable.")
+    lines += ["", "## 4A. User Configuration Actions"] + (configuration_actions or ["No mandatory user or employer configuration action remains."])
     lines += ["", "## 5. Industry-Level Research Gaps"]
     industry_fields = "market size; economics; structure; competitive landscape; regulatory pressures; technology shifts; PESTLE coverage; transformation themes; qualified insights"
     for group in ("Telecoms", "Media", "Sport", "Cross-domain"):
@@ -752,7 +807,7 @@ def export_research_gap_brief(import_run_id: str, headers: Any, domain: str = "a
     identity = project_twin_identity(package)
     title = str(inspection.get("twin_title") or inspection.get("package_title") or identity.primary_subject_name or package.identity.package_id)
     safe = "".join(c if c.isalnum() or c in "-_" else "-" for c in (package.identity.package_id or title)).strip("-") or "Twin"
-    return research_gap_brief(twin, title, resolve_commercial_mission(headers), domain), f"{safe}-Research-Gap-and-Enrichment-Brief.md", 200
+    return research_gap_brief(twin, title, resolve_commercial_mission(headers), domain, resolve_employer_context(headers)), f"{safe}-Research-Gap-and-Enrichment-Brief.md", 200
 
 def _advanced_diagnostics(twin,run_id,summary,mission):
     return _primary_nav(run_id,"inspection")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
@@ -846,7 +901,7 @@ def _readiness_inspection(twin: SemanticTwin, run_id: str, mission: CommercialMi
 
 def _health(twin: SemanticTwin, run_id: str, summary: dict, mission: CommercialMission | None = None) -> str:
     r = escape(run_id)
-    return (f"<nav class='executive-path'><a href='/blueprint-import/{r}'>Twin overview</a><strong>Twin Health</strong></nav>"
+    return (f"<nav class='executive-path'><a href='/blueprint-import/{r}'>Back to Twin Map</a><strong>Twin Health</strong></nav>"
             "<header class='hero'><h1>Twin Health</h1><p>Evidence, quality and governance are available here when deliberately requested.</p></header>"
             + _validation_report(twin) + _limitations(twin, summary, None, bool(twin.unresolved_references))
             + _readiness_inspection(twin, run_id, mission) + _attention(twin, run_id) + _reasoning_trace(twin, mission) + _researcher_feedback(twin)

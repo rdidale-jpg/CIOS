@@ -16,6 +16,7 @@ from typing import Any
 from cios.applications.flora.access import authenticated_flora_user
 
 DEFAULT_CONFIG = Path(__file__).resolve().parents[3] / "config" / "flora" / "commercial_missions.json"
+DEFAULT_EMPLOYER_CONFIG = Path(__file__).resolve().parents[3] / "config" / "flora" / "employer_contexts.json"
 
 
 @dataclass(frozen=True)
@@ -108,14 +109,14 @@ def save_commercial_mission(headers: Any, value: dict[str, Any]) -> CommercialMi
     if not isinstance(profiles, dict):
         raise ValueError("Commercial Mission profile store must be an object")
     mission = CommercialMission.from_dict(user_id, value)
-    if not all((mission.executive_role, mission.employer, mission.commercial_objective)):
-        raise ValueError("Role, employer and objective are required")
+    if not all((mission.executive_role, mission.commercial_objective)):
+        raise ValueError("Role and objective are required")
     profiles[user_id] = {name: list(getattr(mission, name)) for name in (
-        "industries", "enterprises", "offer_portfolio", "competitors", "partners", "geography",
+        "industries", "enterprises", "geography",
         "interests", "named_accounts", "campaigns", "target_customers", "priority_accounts",
-        "excluded_accounts", "relevant_business_units", "objectives", "strategic_propositions", "delivery_constraints")}
+        "excluded_accounts", "relevant_business_units", "objectives")}
     profiles[user_id].update({name: getattr(mission, name) for name in (
-        "executive_role", "employer", "commercial_objective", "mission_name", "account_focus", "commercial_horizon",
+        "executive_role", "commercial_objective", "mission_name", "account_focus", "commercial_horizon",
         "opportunity_horizon", "required_opportunity_maturity", "minimum_evidence_state", "speculative_treatment",
         "show_unvalued_opportunities", "inspection_depth", "authority_status", "supplied_by")})
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -131,6 +132,7 @@ def save_commercial_mission(headers: Any, value: dict[str, Any]) -> CommercialMi
 class EmployerContext:
     """Declared supplier-side context, deliberately separate from the mission and Twin."""
     organisation: str = ""
+    description: str = ""
     offer_portfolio: tuple[str, ...] = ()
     capabilities: tuple[str, ...] = ()
     propositions: tuple[str, ...] = ()
@@ -138,8 +140,66 @@ class EmployerContext:
     competitors: tuple[str, ...] = ()
     credentials: tuple[str, ...] = ()
     constraints: tuple[str, ...] = ()
+    target_sectors: tuple[str, ...] = ()
+    excluded_offerings: tuple[str, ...] = ()
     authority_status: str = "human-supplied"
+    field_statuses: dict[str, str] = field(default_factory=dict)
 
     @property
     def complete(self) -> bool:
         return bool(self.organisation and self.offer_portfolio and self.propositions)
+
+    @classmethod
+    def from_dict(cls, value: dict[str, Any]) -> "EmployerContext":
+        list_fields = ("offer_portfolio", "capabilities", "propositions", "partners", "competitors",
+                       "credentials", "constraints", "target_sectors", "excluded_offerings")
+        data = {name: tuple(str(item) for item in value.get(name, ()) if str(item).strip()) for name in list_fields}
+        data.update(organisation=str(value.get("organisation") or ""), description=str(value.get("description") or ""),
+                    authority_status=str(value.get("authority_status") or "human-supplied"))
+        statuses = value.get("field_statuses") if isinstance(value.get("field_statuses"), dict) else {}
+        data["field_statuses"] = {name: str(statuses.get(name) or ("human-supplied" if data.get(name) else "unresolved"))
+                                  for name in ("organisation", "description", *list_fields)}
+        return cls(**data)
+
+
+def resolve_employer_context(headers: Any) -> EmployerContext | None:
+    """Resolve supplier-side configuration independently of mission and Twin stores."""
+    user_id = authenticated_flora_user(headers)
+    if not user_id:
+        return None
+    path = Path(os.getenv("FLORA_EMPLOYER_CONTEXTS_FILE", str(DEFAULT_EMPLOYER_CONFIG)))
+    try:
+        profiles = json.loads(path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return None
+    value = profiles.get(user_id)
+    return EmployerContext.from_dict(value) if isinstance(value, dict) else None
+
+
+def save_employer_context(headers: Any, value: dict[str, Any]) -> EmployerContext:
+    """Atomically save explicitly supplied employer context in its own profile store."""
+    user_id = authenticated_flora_user(headers)
+    if not user_id:
+        raise PermissionError("An authenticated Flora user is required")
+    context = EmployerContext.from_dict(value)
+    if not context.organisation:
+        raise ValueError("Employer organisation is required")
+    path = Path(os.getenv("FLORA_EMPLOYER_CONTEXTS_FILE", str(DEFAULT_EMPLOYER_CONFIG)))
+    try:
+        profiles = json.loads(path.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        profiles = {}
+    if not isinstance(profiles, dict):
+        raise ValueError("Employer Context profile store must be an object")
+    profiles[user_id] = {name: list(getattr(context, name)) for name in (
+        "offer_portfolio", "capabilities", "propositions", "partners", "competitors", "credentials",
+        "constraints", "target_sectors", "excluded_offerings")}
+    profiles[user_id].update(organisation=context.organisation, description=context.description,
+                             authority_status=context.authority_status, field_statuses=context.field_statuses)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as handle:
+        json.dump(profiles, handle, indent=2, sort_keys=True)
+        handle.write("\n")
+        temporary = Path(handle.name)
+    temporary.replace(path)
+    return context

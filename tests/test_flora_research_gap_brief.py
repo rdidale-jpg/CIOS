@@ -37,3 +37,18 @@ def test_brief_is_actionable_human_readable_and_keeps_ids_in_appendix():
     assert "### PRG-1" not in primary and "### OPP-1" not in primary
     assert "PRG-1" in appendix and "OPP-1" in appendix
     assert "executive-readiness-v3" in brief
+
+from cios.applications.flora.commercial_mission import EmployerContext
+
+
+def test_brief_separates_external_research_from_user_configuration():
+    employer = EmployerContext.from_dict({"organisation": "Example Supplier", "offer_portfolio": ["Cloud"],
+                                          "competitors": ["Explicit Rival"], "partners": ["Explicit Partner"],
+                                          "propositions": ["Modernisation"]})
+    brief = research_gap_brief(_twin(), "TMS 001", _mission(), employer_context=employer)
+    assert "## 4. Researcher Actions" in brief
+    assert "## 4A. User Configuration Actions" in brief
+    assert "Employer-offer alignment: available from configured offers" in brief
+    assert "Competitor context: available from configured competitors" in brief
+    assert "Organisation: Example Supplier (human-supplied)" in brief
+    assert "No mandatory user or employer configuration action remains." in brief
