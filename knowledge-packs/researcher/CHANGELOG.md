@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.6.0
+
+- Activated the canonical IT-001 controlled schedule with eight deterministic Twin Object Profiles and Executive Workspace bindings.
+- Replaced free-form research deliverables with profile-conformant governed Twin Objects, explicit Unknown/Not Applicable handling and validation.
+- Packaged the v2 composite Industry Twin release manifest schema without changing v1 releases or canonical subject ownership.
+
 ## 2.5.0
 
 - Packaged the WP1-002 High-Fidelity Completeness, Intelligence Density and Package Content Inventory controlled schedules.

@@ -1,7 +1,7 @@
 pack:
   id: CIOS-Researcher-Knowledge-Pack
   title: CIOS Researcher Knowledge Pack
-  version: 2.5.0
+  version: 2.6.0
   owner: CIOS / Knowledge Pack Owner
   canonical_location: knowledge-packs/researcher
   generated_artifacts: dist release artifacts
@@ -15,7 +15,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: ead3619894f2600cb943b6705b39a55c9739b12b4b2ff1bede0116b1372c3cf7
+    checksum: c7186a6986c0bb28aab15c4d2d8ed149b0199c990c524762564f060c7fa1c85d
     transform: none
   - pack_path: configuration/Researcher-GPT-Instructions.md
     source_path: knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md
@@ -26,7 +26,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 7d65309d2a54b5148d4c3e8f7c184993bc5cb5495f75917a1ff521cfba7ae7dc
+    checksum: 4edeeafd0bc136de8157471eee77cb623429c7c0a32d2057cbe008112465ab7a
     transform: none
   - pack_path: configuration/Researcher-Configuration-Guide.md
     source_path: knowledge-packs/researcher/configuration/Researcher-Configuration-Guide.md
@@ -444,7 +444,18 @@ documents:
     status: draft-normative
     required: true
     inclusion_reason: Required to assess structured package content, deficiencies, offline investigation and Flora addressability without changing exchange mechanics.
-    checksum: 0bf3f1a8addab9376723a9b951027762cfe6962806d8fd1befee18f999daabad
+    checksum: 514be3b9f660c0a9692d41aaf5c5ae70eb896ad64b9fd68ab19bc815841f1868
+    transform: none
+  - pack_path: architecture/twin-release-manifest-v2.schema.json
+    source_path: architecture/specifications/knowledge-packs/twin-release-manifest-v2.schema.json
+    document_id: SCHEMA-Twin-Release-Manifest-v2
+    title: Composite Industry Twin Release Manifest Schema v2
+    version_or_last_updated: 2.0
+    authority: knowledge-pack-exchange-schema
+    status: current
+    required: true
+    inclusion_reason: Required to pin deterministic profile-conformant objects, memberships, relationships and uncertainty snapshots in a reproducible Industry Twin release.
+    checksum: 24e7d0f843dfc2b4cd600d82cfd2ab4b2be0124c4487d91f040fa3109d0c2af7
     transform: none
   - pack_path: architecture/Industry-Twin-Lifecycle-Specification-v1.0.md
     source_path: architecture/specifications/industry-twins/Industry-Twin-Lifecycle-Specification-v1.0.md

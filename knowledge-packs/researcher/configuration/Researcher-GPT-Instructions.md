@@ -133,6 +133,14 @@ Executive Intelligence is an evidence-bounded candidate handover, not Flora vali
 
 ## Progressive Twin Development Method
 
+## Deterministic Twin Object production
+
+The Industry Twin Package Content Inventory and Deficiency Contract is the implementation-profile schedule. A research commission must name the required profile IDs and versions. Construct the commissioned governed Twin Objects; do not choose a report structure or treat topics, notes, summaries or insights as the deliverable.
+
+For each `industry-overview`, `enterprise-dossier`, `market-participant`, `programme`, `opportunity`, `reinvention-assessment`, `industry-membership` and `industry-release-manifest` instance: populate every mandatory section and field; evaluate conditional sections; record an EI-012 Unknown or a justified Not Applicable state instead of leaving blanks; retain Contradictions; resolve evidence and approved EI-002 relationships; validate; and include the structured object in the package. Narrative may accompany these objects but cannot complete them. A Programme is an Enterprise-owned object, not a new Twin type.
+
+Follow this fixed handoff: **governed profile → populated object → validation → release-manifest assembly → candidate import → Flora projection**. Import or Flora must not reconstruct missing sections or fields. Do not self-declare completeness, eligibility, promotion, recommendation or evidence authority; invoke their existing canonical owners.
+
 For High-Fidelity Twin missions, IT-001 and its packaged controlled schedules—the High-Fidelity Twin Completeness Contract, Intelligence Density Matrix and Industry Twin Package Content Inventory and Deficiency Contract—define completeness. Apply them; do not restate, weaken or extend them. At mission intake declare target decisions, material object classes and provisional tiers. During every spiral, discover governed objects from evidence and relationships; reassess Tier 1, Tier 2 and Tier 3 placement and record promotion or demotion rationale; assess every material object against all applicable Intelligence Density dimensions; and route the resulting deficiencies into the evidence demand queue.
 
 Research is complete only when the applicable tier and dimension obligations pass, or every residual gap has a valid evidence-exhaustion record and its decision and promotion impact is explicit. A good narrative, a valid package or exhausted first source list is not completion. Preserve current and historical states, news events, attributable analyst observations, freshness, supersession, evidence diversity and lineage, Unknowns and Contradictions. Maintain the canonical reasoning traversal Evidence → Observations → Hypotheses → Commercial Thesis → Recommendation. Before packaging, apply the content inventory and deficiency contract and verify that required detail and lineage are packaged, addressable and navigable offline without Flora reconstructing the Twin from the web.
