@@ -13,7 +13,7 @@ from cios.applications.flora.blueprint_import.views import MAX_UPLOAD_BYTES, app
 from cios.applications.flora.pilot_import import PILOT_IMPORT_ACTOR, PILOT_IMPORT_WORKSPACE, pilot_import_bypass_enabled, pilot_import_mode
 from cios.applications.flora.access import (
     COMMERCIAL_CONTEXT_EDIT, COMMERCIAL_CONTEXT_VIEW, BLUEPRINT_PROMOTE_PERMISSION,
-    commercial_context_authorisation, flora_roles,
+    PILOT_COMMERCIAL_CONTEXT_CAPABILITIES, commercial_context_authorisation, flora_roles,
 )
 from tests.test_flora_blueprint_import_validation import pkg
 
@@ -171,6 +171,9 @@ def test_pilot_configure_save_and_recompose_uses_narrow_actor_scope(monkeypatch,
     edit = commercial_context_authorisation({}, COMMERCIAL_CONTEXT_EDIT, PILOT_IMPORT_WORKSPACE)
     isolated = commercial_context_authorisation({}, COMMERCIAL_CONTEXT_EDIT, "another-workspace")
     assert view.decision == edit.decision == "allowed"
+    assert set(view.effective_capabilities) == set(PILOT_COMMERCIAL_CONTEXT_CAPABILITIES)
+    assert set(edit.effective_capabilities) == set(PILOT_COMMERCIAL_CONTEXT_CAPABILITIES)
+    assert BLUEPRINT_PROMOTE_PERMISSION not in view.effective_capabilities
     assert isolated.decision == "denied" and isolated.failed_stage == "scope isolation"
     assert BLUEPRINT_PROMOTE_PERMISSION not in flora_roles({})
 
@@ -182,6 +185,34 @@ def test_secure_mode_commercial_context_remains_denied_with_diagnostic(monkeypat
     assert decision.decision == "denied"
     assert decision.failed_stage == "actor resolution"
     assert decision.required_capability == COMMERCIAL_CONTEXT_VIEW
+    assert decision.effective_capabilities == ()
+
+
+def test_secure_mode_settings_route_reports_root_authorisation_decision(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_ENVIRONMENT", "production")
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    # Trusted test headers create the candidate under the pilot workspace; the
+    # subsequent anonymous request must still fail at actor resolution.
+    monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
+    owner = {
+        "X-Flora-User": "owner-1",
+        "X-Flora-Active-Workspace": PILOT_IMPORT_WORKSPACE,
+        "X-Flora-Enterprises": PILOT_IMPORT_WORKSPACE,
+        "X-Flora-Roles": "workspace_owner",
+    }
+    _, status, target = upload_and_validate_blueprint({"blueprint_zip": pkg()}, FIELDS, owner)
+    assert status == 200
+    run_id = target.rsplit("/", 1)[-1]
+
+    from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page
+    html, status = executive_workspace_page(run_id, {}, view="mission")
+
+    assert status == 403
+    assert "Required capability: <code>commercial_context.view</code>" in html
+    assert "Decision: denied" in html
+    assert "Failed stage: actor resolution" in html
+    assert "Denial reason: missing authenticated Flora user" in html
+    assert "Correlation ID: flora-" in html
 
 
 def test_validation_and_archive_safety_precede_identity(monkeypatch, tmp_path):

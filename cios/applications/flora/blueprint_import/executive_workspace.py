@@ -7,6 +7,7 @@ from typing import Any
 import json
 import os
 from pathlib import Path
+from uuid import uuid4
 from zipfile import ZipFile
 
 from cios.applications.flora.access import (COMMERCIAL_CONTEXT_EDIT, COMMERCIAL_CONTEXT_VIEW,
@@ -507,11 +508,12 @@ def update_commercial_mission(import_run_id: str, headers: Any, form: dict[str, 
 
 
 def _commercial_access_denied(decision, headers: Any) -> str:
-    correlation = str(headers.get("X-Request-Id") or "not-supplied")
+    correlation = str(headers.get("X-Request-Id") or f"flora-{uuid4().hex}")
     body = ("<section class='hero'><h1>Access denied</h1><p>Commercial context configuration is unavailable.</p></section>"
             f"<section class='card'><h2>Access diagnostic</h2><ul><li>Resolved actor: {escape(decision.actor_id or 'unresolved')}</li>"
             f"<li>Context scope: {escape(decision.context_scope or 'unresolved')}</li><li>Required capability: <code>{escape(decision.required_capability)}</code></li>"
             f"<li>Decision: {escape(decision.decision)}</li><li>Failed stage: {escape(decision.failed_stage)}</li>"
+            f"<li>Denial reason: {escape(decision.denial_reason)}</li>"
             f"<li>Correlation ID: {escape(correlation)}</li></ul></section>")
     return _page("Access denied", body)
 

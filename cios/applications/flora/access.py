@@ -131,6 +131,10 @@ _BLUEPRINT_IMPORT_ROLES = {BLUEPRINT_IMPORT_ADMIN_ROLE, BLUEPRINT_UPLOAD_PERMISS
 
 COMMERCIAL_CONTEXT_VIEW = "commercial_context.view"
 COMMERCIAL_CONTEXT_EDIT = "commercial_context.edit"
+PILOT_COMMERCIAL_CONTEXT_CAPABILITIES = frozenset({
+    COMMERCIAL_CONTEXT_VIEW,
+    COMMERCIAL_CONTEXT_EDIT,
+})
 
 
 @dataclass(frozen=True)
@@ -141,6 +145,7 @@ class CommercialContextAuthorisationDecision:
     decision: str
     failed_stage: str = ""
     denial_reason: str = ""
+    effective_capabilities: tuple[str, ...] = ()
 
 
 def commercial_context_actor(headers: Any) -> str:
@@ -158,9 +163,12 @@ def commercial_context_authorisation(
     actor = commercial_context_actor(headers)
     scope = PILOT_IMPORT_WORKSPACE if pilot else active_flora_workspace(headers)
     roles = raw_flora_roles(headers) if actor and not pilot else set()
-    allowed_capability = required_capability in {COMMERCIAL_CONTEXT_VIEW, COMMERCIAL_CONTEXT_EDIT}
+    allowed_capability = required_capability in PILOT_COMMERCIAL_CONTEXT_CAPABILITIES
     owns_scope = bool(scope and context_scope and canonical_enterprise_id(scope) == canonical_enterprise_id(context_scope))
-    has_capability = pilot or bool(roles & CANONICAL_OWNER_ROLES) or required_capability in roles
+    capabilities = (set(PILOT_COMMERCIAL_CONTEXT_CAPABILITIES) if pilot else
+                    set(PILOT_COMMERCIAL_CONTEXT_CAPABILITIES) if roles & CANONICAL_OWNER_ROLES else
+                    roles & set(PILOT_COMMERCIAL_CONTEXT_CAPABILITIES))
+    has_capability = required_capability in capabilities
     if not actor:
         stage, reason = "actor resolution", "missing authenticated Flora user"
     elif not scope or not context_scope:
@@ -173,6 +181,7 @@ def commercial_context_authorisation(
         stage = reason = ""
     return CommercialContextAuthorisationDecision(
         actor, scope, required_capability, "allowed" if not stage else "denied", stage, reason,
+        tuple(sorted(capabilities)),
     )
 
 
