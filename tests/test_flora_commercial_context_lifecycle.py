@@ -84,3 +84,47 @@ def test_shared_context_drives_export_but_never_completeness(monkeypatch, tmp_pa
     assert "Mission settings remove nothing from this commission" in brief
     assert "Unknowns" in brief and "Contradictions" in brief
     assert "### BBC" in brief
+
+
+def test_optional_examples_are_guidance_not_configuration_or_export(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
+    html = _mission_editor(None, None, "run")
+
+    # Optional controls are blank and their examples are separate explanatory text.
+    assert "name='priority_accounts' value=''" in html
+    assert "name='industries' value=''" in html
+    assert "name='employer_capabilities' value=''" in html
+    assert "Example: BT Group, BBC, ITV" in html
+    assert "placeholder='BT Group, BBC, ITV'" not in html
+    assert "Optional · <span class='field-status' data-status-for='priority_accounts'>Not configured" in html
+
+    mission, employer = save_commercial_context(_headers(), {
+        "executive_role": "Sales Director", "commercial_objective": "Active procurements",
+        "geography": ["United Kingdom"], "commercial_horizon": "12–24 months",
+    }, {"organisation": "Sopra Steria"})
+    restored = resolve_commercial_mission(_headers())
+    assert restored == mission
+    assert restored.industries == restored.priority_accounts == ()
+    assert employer.capabilities == ()
+
+    brief = research_gap_brief(_twin(), "Media", restored, employer_context=employer)
+    assert "- Industries: Not supplied" in brief
+    assert "- Priority customers: Not supplied" in brief
+    assert "- Capabilities: Not supplied" in brief
+    assert "- target industries" in brief and "- priority customers" in brief and "- capabilities" in brief
+    assert "BT Group, BBC, ITV" not in brief
+    assert "Digital transformation, cloud, data, AI, managed services" not in brief
+
+
+def test_saved_optional_values_reload_as_configured_and_export_verbatim(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
+    mission, employer = save_commercial_context(_headers(), *_values())
+    html = _mission_editor(resolve_commercial_mission(_headers()), resolve_employer_context(_headers()), "run")
+    assert "name='priority_accounts' value='BBC'" in html
+    assert "data-status-for='priority_accounts'>Configured" in html
+    brief = research_gap_brief(_twin(), "Media", mission, employer_context=employer)
+    assert "- Industries: Media" in brief
+    assert "- Priority customers: BBC" in brief
+    assert "- Capabilities: AI" in brief
