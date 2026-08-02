@@ -104,6 +104,9 @@ def _subjects(key: str, twin: SemanticTwin, objects: tuple[SemanticObject, ...])
         return tuple((e.name, e.records) for e in twin.enterprises)
     if key == "industry-overview":
         return (("the represented industry", objects or twin.objects),)
+    if key == "major-programmes":
+        programmes = tuple(o for o in twin.objects if o.kind == "transformation_programme")
+        return tuple((_label(o, key), (o,)) for o in programmes) or (("the missing major programmes collection", ()),)
     if key == "reinvention-timing" and not objects:
         return (("the represented industry and affected enterprises", ()),)
     return tuple((_label(o, key), (o,)) for o in objects) or ((f"the missing {key.replace('-', ' ')} collection", ()),)

@@ -9,14 +9,21 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import json
 import os
-import tempfile
 from pathlib import Path
 from typing import Any
 
 from cios.applications.flora.access import commercial_context_actor
+from cios.applications.flora.storage import atomic_write_json, data_path
 
-DEFAULT_CONFIG = Path(__file__).resolve().parents[3] / "config" / "flora" / "commercial_missions.json"
-DEFAULT_EMPLOYER_CONFIG = Path(__file__).resolve().parents[3] / "config" / "flora" / "employer_contexts.json"
+def _mission_path() -> Path:
+    """Return the canonical profile path on Flora's configured persistent disk."""
+    override = os.getenv("FLORA_COMMERCIAL_MISSIONS_FILE")
+    return Path(override) if override else data_path("commercial_context", "commercial_missions.json")
+
+
+def _employer_path() -> Path:
+    override = os.getenv("FLORA_EMPLOYER_CONTEXTS_FILE")
+    return Path(override) if override else data_path("commercial_context", "employer_contexts.json")
 
 
 @dataclass(frozen=True)
@@ -52,6 +59,8 @@ class CommercialMission:
     inspection_depth: str = "executive-to-evidence"
     authority_status: str = "human-supplied operational context"
     supplied_by: str = "configured user profile"
+    context_id: str = ""
+    version: int = 1
 
     def employer_context(self) -> "EmployerContext":
         """Project employer data as a separate authority (never Twin intelligence)."""
@@ -79,7 +88,9 @@ class CommercialMission:
                    show_unvalued_opportunities=bool(value.get("show_unvalued_opportunities", False)),
                    inspection_depth=str(value.get("inspection_depth") or "executive-to-evidence"),
                    authority_status=str(value.get("authority_status") or "human-supplied operational context"),
-                   supplied_by=str(value.get("supplied_by") or "configured user profile"))
+                   supplied_by=str(value.get("supplied_by") or "configured user profile"),
+                   context_id=str(value.get("context_id") or f"commercial-mission:{user_id}"),
+                   version=int(value.get("version") or 1))
 
 
 def resolve_commercial_mission(headers: Any) -> CommercialMission | None:
@@ -87,7 +98,7 @@ def resolve_commercial_mission(headers: Any) -> CommercialMission | None:
     user_id = commercial_context_actor(headers)
     if not user_id:
         return None
-    path = Path(os.getenv("FLORA_COMMERCIAL_MISSIONS_FILE", str(DEFAULT_CONFIG)))
+    path = _mission_path()
     try:
         profiles = json.loads(path.read_text(encoding="utf-8"))
     except (FileNotFoundError, json.JSONDecodeError, OSError):
@@ -101,7 +112,7 @@ def save_commercial_mission(headers: Any, value: dict[str, Any]) -> CommercialMi
     user_id = commercial_context_actor(headers)
     if not user_id:
         raise PermissionError("An authenticated Flora user is required")
-    path = Path(os.getenv("FLORA_COMMERCIAL_MISSIONS_FILE", str(DEFAULT_CONFIG)))
+    path = _mission_path()
     try:
         profiles = json.loads(path.read_text(encoding="utf-8"))
     except FileNotFoundError:
@@ -118,13 +129,9 @@ def save_commercial_mission(headers: Any, value: dict[str, Any]) -> CommercialMi
     profiles[user_id].update({name: getattr(mission, name) for name in (
         "executive_role", "commercial_objective", "mission_name", "account_focus", "commercial_horizon",
         "opportunity_horizon", "required_opportunity_maturity", "minimum_evidence_state", "speculative_treatment",
-        "show_unvalued_opportunities", "inspection_depth", "authority_status", "supplied_by")})
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as handle:
-        json.dump(profiles, handle, indent=2, sort_keys=True)
-        handle.write("\n")
-        temporary = Path(handle.name)
-    temporary.replace(path)
+        "show_unvalued_opportunities", "inspection_depth", "authority_status", "supplied_by",
+        "context_id", "version")})
+    atomic_write_json(path, profiles)
     return mission
 
 
@@ -144,6 +151,8 @@ class EmployerContext:
     excluded_offerings: tuple[str, ...] = ()
     authority_status: str = "human-supplied"
     field_statuses: dict[str, str] = field(default_factory=dict)
+    context_id: str = ""
+    version: int = 1
 
     @property
     def complete(self) -> bool:
@@ -159,6 +168,8 @@ class EmployerContext:
         statuses = value.get("field_statuses") if isinstance(value.get("field_statuses"), dict) else {}
         data["field_statuses"] = {name: str(statuses.get(name) or ("human-supplied" if data.get(name) else "unresolved"))
                                   for name in ("organisation", "description", *list_fields)}
+        data["context_id"] = str(value.get("context_id") or "")
+        data["version"] = int(value.get("version") or 1)
         return cls(**data)
 
 
@@ -167,13 +178,15 @@ def resolve_employer_context(headers: Any) -> EmployerContext | None:
     user_id = commercial_context_actor(headers)
     if not user_id:
         return None
-    path = Path(os.getenv("FLORA_EMPLOYER_CONTEXTS_FILE", str(DEFAULT_EMPLOYER_CONFIG)))
+    path = _employer_path()
     try:
         profiles = json.loads(path.read_text(encoding="utf-8"))
     except (FileNotFoundError, json.JSONDecodeError, OSError):
         return None
     value = profiles.get(user_id)
-    return EmployerContext.from_dict(value) if isinstance(value, dict) else None
+    if not isinstance(value, dict):
+        return None
+    return EmployerContext.from_dict({"context_id": f"employer-context:{user_id}", **value})
 
 
 def save_employer_context(headers: Any, value: dict[str, Any]) -> EmployerContext:
@@ -184,7 +197,7 @@ def save_employer_context(headers: Any, value: dict[str, Any]) -> EmployerContex
     context = EmployerContext.from_dict(value)
     if not context.organisation:
         raise ValueError("Employer organisation is required")
-    path = Path(os.getenv("FLORA_EMPLOYER_CONTEXTS_FILE", str(DEFAULT_EMPLOYER_CONFIG)))
+    path = _employer_path()
     try:
         profiles = json.loads(path.read_text(encoding="utf-8"))
     except FileNotFoundError:
@@ -195,11 +208,44 @@ def save_employer_context(headers: Any, value: dict[str, Any]) -> EmployerContex
         "offer_portfolio", "capabilities", "propositions", "partners", "competitors", "credentials",
         "constraints", "target_sectors", "excluded_offerings")}
     profiles[user_id].update(organisation=context.organisation, description=context.description,
-                             authority_status=context.authority_status, field_statuses=context.field_statuses)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as handle:
-        json.dump(profiles, handle, indent=2, sort_keys=True)
-        handle.write("\n")
-        temporary = Path(handle.name)
-    temporary.replace(path)
-    return context
+                             authority_status=context.authority_status, field_statuses=context.field_statuses,
+                             context_id=context.context_id or f"employer-context:{user_id}", version=context.version)
+    atomic_write_json(path, profiles)
+    return EmployerContext.from_dict(profiles[user_id])
+
+
+def save_commercial_context(headers: Any, mission_value: dict[str, Any],
+                            employer_value: dict[str, Any]) -> tuple[CommercialMission, EmployerContext]:
+    """Commit both independently owned profiles as one user save journey.
+
+    The stores remain separate authorities. If the second durable write fails,
+    the first is restored and the caller receives the failing section rather
+    than a false success.
+    """
+    user_id = commercial_context_actor(headers)
+    if not user_id:
+        raise PermissionError("An authenticated Flora user is required")
+    old_mission = resolve_commercial_mission(headers)
+    old_employer = resolve_employer_context(headers)
+    version = max(old_mission.version if old_mission else 0,
+                  old_employer.version if old_employer else 0) + 1
+    mission_payload = {**mission_value, "context_id": f"commercial-mission:{user_id}", "version": version}
+    employer_payload = {**employer_value, "context_id": f"employer-context:{user_id}", "version": version}
+    mission_path = _mission_path()
+    before = mission_path.read_bytes() if mission_path.exists() else None
+    try:
+        mission = save_commercial_mission(headers, mission_payload)
+    except (ValueError, OSError) as exc:
+        raise ValueError(f"Commercial Mission failed: {exc}") from exc
+    try:
+        employer = save_employer_context(headers, employer_payload)
+    except (ValueError, OSError) as exc:
+        try:
+            if before is None:
+                mission_path.unlink(missing_ok=True)
+            else:
+                mission_path.write_bytes(before)
+        except OSError as rollback_exc:
+            raise ValueError(f"Employer Context failed: {exc}; Commercial Mission rollback failed: {rollback_exc}") from exc
+        raise ValueError(f"Employer Context failed: {exc}; Commercial Mission was not committed") from exc
+    return mission, employer

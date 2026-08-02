@@ -14,7 +14,7 @@ from cios.applications.flora.access import (COMMERCIAL_CONTEXT_EDIT, COMMERCIAL_
     can_access_enterprise, commercial_context_authorisation, commercial_context_owner)
 from cios.applications.flora.pilot_import import PILOT_IMPORT_WORKSPACE, pilot_import_bypass_enabled
 from cios.applications.flora.commercial_mission import (CommercialMission, EmployerContext,
-    resolve_commercial_mission, resolve_employer_context, save_commercial_mission, save_employer_context)
+    resolve_commercial_mission, resolve_employer_context, save_commercial_context)
 from cios.applications.flora.workspace.views import _page
 from .registry import BlueprintPackageRegistry
 from .industry_delta_adapter import IndustryTwinDeltaAdapter
@@ -72,7 +72,6 @@ def _opportunity_contract(o: SemanticObject, mission: CommercialMission | None =
     minimum = {"named customer": customer, "opportunity statement": bool(o.statement), "client problem": problem,
                "evidence": bool(o.evidence_refs), "procurement timing or explicit timing unknown": timing}
     usable = {**minimum, "confidence": o.confidence.casefold() not in {"", "unknown"}, "procurement status": status}
-    if mission: usable["mission relevance"] = bool(_mission_relevance(o, mission)[0])
     return all(minimum.values()), all(usable.values()), [k for k, value in usable.items() if not value]
 
 
@@ -148,7 +147,7 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     if view == "explore":
         return _page(f"Explore Twin — {title}", _styles() + _explorer(twin, import_run_id, mission, collection, domain)), 200
     if view == "health":
-        return _page(f"Research Gaps — {title}", _styles() + _research_gaps(twin, import_run_id, mission)), 200
+        return _page(f"Research Gaps — {title}", _styles() + _mission_indicator(mission, employer_context, import_run_id, domain) + _research_gaps(twin, import_run_id, mission)), 200
     if view == "diagnostics":
         return _page(f"Advanced diagnostics — {title}", _styles() + _advanced_diagnostics(twin, import_run_id, summary, mission)), 200
     if view == "aspect":
@@ -498,22 +497,25 @@ def update_commercial_mission(import_run_id: str, headers: Any, form: dict[str, 
         values[key] = [item.strip() for item in source if item.strip()]
     values.update(authority_status="human-supplied operational context", supplied_by="authenticated user profile edit")
     scope = values.get("save_scope") or "both"
+    employer_values = {key.removeprefix("employer_"): value for key, value in values.items() if key.startswith("employer_")}
+    for key in ("offer_portfolio", "capabilities", "propositions", "competitors", "partners", "target_sectors",
+                "credentials", "constraints", "excluded_offerings"):
+        raw = employer_values.get(key, "")
+        source = raw if isinstance(raw, list) else str(raw).split(",")
+        employer_values[key] = [item.strip() for item in source if item.strip()]
+    employer_values["authority_status"] = "human-supplied"
     try:
-        if scope in {"mission", "both"}:
-            save_commercial_mission(headers, values)
-        if scope in {"employer", "both"}:
-            employer_values = {key.removeprefix("employer_"): value for key, value in values.items() if key.startswith("employer_")}
-            for key in ("offer_portfolio", "capabilities", "propositions", "competitors", "partners", "target_sectors",
-                        "credentials", "constraints", "excluded_offerings"):
-                employer_values[key] = [item.strip() for item in str(employer_values.get(key, "")).split(",") if item.strip()]
-            employer_values["authority_status"] = "human-supplied"
-            save_employer_context(headers, employer_values)
+        if scope != "both":
+            raise ValueError("Commercial Mission and Employer Context must be saved together")
+        save_commercial_context(headers, values, employer_values)
     except PermissionError:
         return _page("Access denied", "<h1>Access denied</h1>"), 403
     except ValueError as exc:
-        current_mission = resolve_commercial_mission(headers)
-        current_employer = resolve_employer_context(headers)
-        form_html = _mission_editor(current_mission, current_employer, import_run_id, str(values.get("return_domain") or "all"))
+        # Re-render the submitted values, not defaults or the previous profile.
+        actor = commercial_context_owner(headers)
+        submitted_mission = CommercialMission.from_dict(actor, values)
+        submitted_employer = EmployerContext.from_dict(employer_values)
+        form_html = _mission_editor(submitted_mission, submitted_employer, import_run_id, str(values.get("return_domain") or "all"))
         return _page("Settings not saved", _styles() + f"<aside class='mission-indicator' role='alert'><strong>Settings not saved:</strong> {escape(str(exc))}</aside>" + form_html), 400
     domain = str(values.get("return_domain") or "all")
     return f"/blueprint-import/{import_run_id}?domain={domain}", 303
@@ -750,10 +752,10 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
     lines = [f"# {twin_name} — Research Gap and Enrichment Brief", "",
         "## 1. Purpose and intended executive decisions",
         "Commission attributable facts and structured intelligence for executive understanding and commercial decisions. The import and owner-validation pipeline—not the researcher—will determine governed completeness and eligibility.",
-        "", "## 2. Active Commercial Mission"]
+        "", "## 2. Active Commercial Mission", "### Commercial Mission"]
     if mission:
         account_values = (*mission.target_customers, *mission.priority_accounts, *mission.named_accounts, *mission.enterprises)
-        lines += [f"- Mission identifier: {mission.mission_name or mission.user_id}", f"- Configuration owner/scope: authenticated user `{mission.user_id}`",
+        lines += [f"- Mission: {mission.mission_name or 'Unnamed mission'}", f"- Mission identifier: {mission.context_id}", f"- Context version: {mission.version}", f"- Configuration owner/scope: authenticated user `{mission.user_id}`",
             f"- Role: {mission.executive_role or 'Not supplied'}", f"- Employer named in mission: {mission.employer or 'Held separately in Employer Context'}",
             f"- Geography: {', '.join(mission.geography) or 'Not supplied'}", f"- Industries: {', '.join(mission.industries) or 'Not supplied'}",
             f"- Objectives: {', '.join(mission.objectives) or mission.commercial_objective or 'Not supplied'}",
@@ -763,22 +765,43 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
             "Mission settings order relevant work only; they do not change Twin truth, missing information, owner assessment, or eligibility."]
     else:
         lines += ["- No active mission was resolved for the authenticated user. Configure it before commissioning mission-prioritised work."]
-    lines += ["", "## 3. Employer Context"]
+    lines += ["", "## 3. Employer Context", "### Employer Context"]
     if employer_context:
         lines += [f"- Status: {'Configured' if employer_context.complete else 'Partially configured'}",
-            f"- Employer: {employer_context.organisation or 'Not supplied'}", f"- Description: {employer_context.description or 'Not supplied'}",
+            f"- Employer Context identifier: {employer_context.context_id}", f"- Context version: {employer_context.version}",
+            f"- Organisation: {employer_context.organisation or 'Not supplied'}", f"- Description: {employer_context.description or 'Not supplied'}",
             f"- Capabilities: {', '.join(employer_context.capabilities) or 'Not supplied'}", f"- Offers: {', '.join(employer_context.offer_portfolio) or 'Not supplied'}",
             f"- Propositions: {', '.join(employer_context.propositions) or 'Not supplied'}", f"- Competitors: {', '.join(employer_context.competitors) or 'Not supplied'}",
             f"- Partners: {', '.join(employer_context.partners) or 'Not supplied'}"]
     else:
         lines += ["- Status: Not configured separately for the authenticated user."]
+    lines += ["", "### Governed research commission"]
+    for projection in projections:
+        related = [r for r in requirements if r.aspect == projection.key]
+        missing = tuple(dict.fromkeys(field for r in related for field in r.missing_fields))
+        subjects = ", ".join(r.subject for r in related) or f"the missing {projection.label.lower()} collection"
+        lines += _gap_block(projection.label, projection.inventory_summary,
+            ", ".join(missing) or "Owner-identified deficiencies remain to be resolved.",
+            f"Complete research is required for {subjects}; mission relevance does not remove any subject.",
+            f"Research {subjects} using the business fields and suitable sources detailed below.",
+            projection.acceptance_criteria)
+    lines += ["", "## 4. Researcher Actions",
+        "Research every represented and applicable Industry Twin subject. The sections below translate existing governed deficiencies into business-information requests.",
+        "", "## 4A. User Configuration Actions"]
+    if employer_context:
+        lines += [f"- Organisation: {employer_context.organisation} ({employer_context.authority_status})",
+            f"- Employer-offer alignment: {'available from configured offers' if employer_context.offer_portfolio else 'optional offers not supplied'}.",
+            f"- Competitor context: {'available from configured competitors' if employer_context.competitors else 'optional competitors not supplied'}.",
+            "- No mandatory user or employer configuration action remains."]
+    else:
+        lines += ["- Employer-specific opportunity alignment cannot yet be fully assessed. Optional Employer Context may be configured without narrowing research."]
     lines += ["", "## 4. Current Twin coverage",
         f"- Enterprises: {len(twin.enterprises)} canonical business concepts; {assessed(twin.enterprises)} owner-assessed.",
         f"- Market Participants: {len(participants)} canonical participants; {assessed(participants)} owner-assessed participants; {eligible(participants)} presentation-eligible participants; {sum(o.kind in {'market_participant', 'market_participant_twin'} for o in selected)} underlying records.",
         f"- Opportunities: {len(opportunities)} canonical opportunity hypotheses; {assessed(opportunities)} owner-assessed hypotheses; {eligible(opportunities)} recommendation-eligible opportunities; {sum('opportun' in o.kind for o in selected)} underlying/derived records.",
         f"- Major Programmes: {len(programmes)} canonical programme hypotheses; {assessed(programmes)} owner-assessed programmes; {eligible(programmes)} presentation-eligible programmes.",
         "", "## 5. Priority research outcomes", "### Priority for this Commercial Mission"]
-    priority = _mission_prioritised(requirements, mission)
+    priority = _mission_prioritised(requirements, mission, employer_context)
     lines += [f"{i}. **{r.subject} ({r.aspect.replace('-', ' ').title()})** — research {', '.join(r.missing_fields)} using {', '.join(r.source_categories)}." for i, r in enumerate(priority, 1)] or ["No active mission priority is configured; use the neutral industry backlog below."]
     lines += ["", "### Broader Industry Twin gaps", "These neutral gaps remain in scope even when they do not match the active Commercial Mission."]
     lines += [f"- **{r.subject}:** {', '.join(r.missing_fields)}." for r in requirements]
@@ -803,7 +826,8 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
     lines += ["- Re-import remains fail-closed: only the existing owner assessment and eligibility pipeline may change promotion or presentation state.",
         "", "## 15. Remaining known uncertainty",
         "Fields not established by attributable evidence must remain explicit Unknowns. Conflicting sourced claims must remain Contradictions; neither is silently resolved by this brief.",
-        "", "## Appendix — governed traceability", "Architecture metadata is retained here for validation and inspection, not as the researcher's primary instruction."]
+        "", "## Appendix — governed traceability", "## 13. Appendix — governed traceability", "Architecture metadata is retained here for validation and inspection, not as the researcher's primary instruction.",
+        "- Read-only translation adapter: owner-projection-v1."]
     for r in requirements:
         lines += [f"### {r.subject}", f"- Canonical owner: {r.canonical_owner}", f"- Completeness authority / owner schedule: {r.rule_version}",
             f"- Dimension: {r.dimension}", f"- Rule/version: {r.rule_version}", f"- Affected canonical IDs: {', '.join(r.canonical_ids) or 'collection absent'}",
@@ -813,11 +837,14 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
     return "\n".join(lines) + "\n"
 
 
-def _mission_prioritised(requirements, mission):
+def _mission_prioritised(requirements, mission, employer_context=None):
     if not mission:
         return ()
+    employer_terms = ((*employer_context.capabilities, *employer_context.offer_portfolio,
+                       *employer_context.propositions, *employer_context.competitors,
+                       *employer_context.partners) if employer_context else ())
     terms = tuple(x.casefold() for x in (*mission.target_customers, *mission.priority_accounts, *mission.named_accounts,
-        *mission.industries, *mission.interests, *mission.offer_portfolio, *mission.competitors, *mission.partners) if x)
+        *mission.industries, *mission.interests, *employer_terms) if x)
     def rank(requirement):
         text = f"{requirement.subject} {requirement.aspect} {' '.join(requirement.missing_fields)}".casefold()
         match = sum(term in text for term in terms)
