@@ -88,6 +88,10 @@ _ENTERPRISE_FIELDS = {
     "league": ("governance role", "members", "rights and revenue model", "regulation", "competitions", "commercial partners", "data and technology", "programmes", "procurements", "strategic pressures", "evidence"),
     "broadcaster": ("ownership", "remit", "audience", "revenue or funding model", "content model", "distribution", "advertising or subscription economics", "technology", "programmes", "procurement", "regulation", "evidence"),
     "commercial company": ("ownership", "corporate purpose", "strategy", "operating segments", "revenue", "profitability", "investment capacity", "operating model", "technology", "suppliers", "customers", "programmes", "procurements", "risks", "AI adoption", "evidence"),
+    "public corporation": ("statutory remit", "public ownership", "audience or beneficiaries", "funding and revenue model", "strategy", "operating structure", "technology", "programmes", "procurement", "regulation", "public outcomes", "evidence"),
+    "infrastructure operator": ("ownership", "licensed or regulated remit", "network footprint", "customers", "revenue", "investment capacity", "operating model", "assets and technology", "suppliers", "programmes", "procurements", "resilience", "regulation", "evidence"),
+    "association": ("mandate", "members", "governance", "funding model", "services", "industry role", "policy priorities", "technology", "programmes", "procurement", "evidence"),
+    "composite group": ("group boundary", "member organisations", "ownership", "distinct remits", "business units", "consolidated and member economics", "operating relationships", "technology", "programmes", "procurement", "evidence"),
 }
 
 def participant_classification(obj: SemanticObject) -> str:
@@ -109,10 +113,28 @@ def enterprise_subject_type(objects: tuple[SemanticObject, ...]) -> str:
         attrs = obj.attributes or {}
         raw = str(next((attrs.get(k) for k in ("subject_type", "organisational_form", "organization_type", "enterprise_type") if attrs.get(k)), "")).strip().casefold()
         aliases = {"company": "commercial company", "corporation": "commercial company", "regulatory body": "regulator",
-                   "public corporation": "public body", "funding body": "public body", "media organisation": "broadcaster"}
+                   "funding body": "public body", "media organisation": "broadcaster"}
         value = aliases.get(raw, raw)
         if value in _ENTERPRISE_FIELDS:
             return value
+        # ``role`` is canonical supplied evidence, unlike a display-name guess.
+        # Use it only where the record states an unambiguous organisational form.
+        role = str(attrs.get("role") or "").casefold()
+        role_markers = (
+            ("regulator", ("regulator", "regulatory body")),
+            ("public corporation", ("public corporation",)),
+            ("public body", ("public body", "funding body", "funding/outcomes body", "funding and performance-system body")),
+            ("broadcaster", ("broadcaster", "broadcasting organisation", " psb", "psb ")),
+            ("infrastructure operator", ("infrastructure operator", "infrastructure provider")),
+            ("league", ("sports league", "football league", "professional league body", "top-tier english football competition")),
+            ("governing body", ("governing body",)),
+            ("association", ("association",)),
+            ("composite group", ("composite group", "group of organisations")),
+            ("commercial company", ("commercial company", "commercial broadcaster", "commercial operator")),
+        )
+        for subject_type, markers in role_markers:
+            if any(marker in role for marker in markers):
+                return subject_type
     return "unresolved"
 
 

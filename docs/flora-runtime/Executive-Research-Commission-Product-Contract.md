@@ -2,36 +2,32 @@
 
 ## Acceptance basis
 
-This matrix records product acceptance against complete responses generated on 2 August 2026 by the configured `python -m cios.applications.flora.web.app` runtime path. The repository TMS-001 package was submitted through the configured import handler, the unique acceptance context was submitted through the Commercial Mission save handler, and all outputs were then requested afresh from the active route owners. Evidence is retained in `executive-research-commission-product-acceptance/`.
+This matrix records product acceptance against complete responses generated on 2 August 2026 by the configured `python -m cios.applications.flora.web.app` runtime path. The repository TMS-001 package was submitted through the configured import handler, the unique acceptance context was submitted through the Commercial Mission save handler, and all outputs were then requested afresh from the active route owners. Evidence is retained in `executive-research-commission-final-acceptance/`.
 
 ## Product Contract Matrix
 
-| ID | Product contract | Current observed output | Required output | Active runtime owner | Verification method | Pre-change status | Post-change status |
+Every “Observed after” value below was asserted against the complete configured HTTP response or downloaded file retained in `executive-research-commission-final-acceptance/`; none is a code-inspection result.
+
+| Contract row | Expected | Observed before | Root cause | Correction | Observed after | Evidence | PASS/FAIL |
 |---|---|---|---|---|---|---|---|
-| A | Commercial Mission industries export | `Industries: Media; Telecommunications` | Every saved industry | context resolver → commission renderer | Save, fresh export, full-text assertion | FAIL: previously `Not supplied` | PASS |
-| B | Priority customers export | `BT Group; BBC; ITV` | Every saved priority customer | same | Save/reload/export assertion | FAIL: previously lost | PASS |
-| C | Employer capabilities/services export | Five submitted capabilities shown | Preserve “Relevant capabilities or services” as `EmployerContext.capabilities` | employer store → resolver → renderer | form, store, reopened form, export | FAIL: previously `Not supplied` | PASS |
-| D | Competitors export | Accenture, Cap Gemini and IBM shown | Every configured competitor | employer store → renderer | fresh export assertion | FAIL: previously lost | PASS |
-| E | Mission operational status | `Configured`; optional name remains absent; generated label shown | Optional name must not lower status | `CommercialMission.operational_status/display_name` | reopened form and export | FAIL: ambiguous optional-name status | PASS |
-| F | Mission Emphasis reasons | Exact named-account/domain reasons only; limitations stated | Deterministic inspectable explicit matches | `_mission_reasons` | full emphasis section inspection/tests | FAIL: mapping could prioritise all/none | PASS |
-| G | Complete research scope preserved | 1 / 14 / 10 / 9 / 9 plus timing, evidence, Unknowns and Contradictions | Mission removes no canonical subject | `research_gap_brief` | summary/register and route tests | FAIL: not proven | PASS |
-| H | Enterprise canonical count | `14 enterprise profiles require enrichment` | 14 canonical enterprises | semantic Twin enterprises | Twin Map, gaps, export | FAIL: export said 93 | PASS |
-| I | Market Participant canonical count | 10 participant concepts | 10 canonical concepts, classification-qualified | business collections | gaps/export/register | FAIL: unit ambiguous | PASS |
-| J | Major Programme canonical count | 9 programme hypotheses | 9 | canonical object kind | routes/export | FAIL: not acceptance-proven | PASS |
-| K | Opportunity canonical count | 9 opportunity hypotheses | 9 | business collections | routes/export | FAIL: not acceptance-proven | PASS |
-| L | Reinvention assessment-record count | Existing records labelled separately | Explicit assessment-record unit | semantic objects | export summary | FAIL: “1” ambiguous | PASS |
-| M | Reinvention affected-subject count | Applicable affected subjects labelled separately from owner projections | Explicit affected/assessed/unassessed units | owner projection + semantic Twin | gaps/export | FAIL: 1/8 ambiguous | PASS |
-| N | Market Participant classification | Every concept reports supplied canonical type or `unresolved identity`; source remains inspectable | No category/capability/relationship commissioned as organisation | `participant_classification` | appendix and classification tests | FAIL: organisation assumption | PASS |
-| O | Collection-level wording | Collection prose contains no arbitrary member name | Collection-wide rationale | `_COLLECTION_LANGUAGE` | complete Research Gaps response/test | FAIL: arbitrary member prose observed | PASS |
-| P | Subject-type-aware Enterprise requirements | Regulator/public body/governing body/broadcaster/company schedules differ; unresolved requests classification | Subject-appropriate language, N/A compatible | `enterprise_subject_type` + translator | translator tests/export | FAIL: uniform checklist | PASS |
-| Q | Primary researcher acceptance tests | Practical sourced coverage/Unknown outcomes | Research outcomes, not implementation owners | `_BUSINESS_ACCEPTANCE` | primary narrative inspection | FAIL: owner-only wording | PASS |
-| R | Architectural traceability appendix | Owner/rule/eligibility content appears only in Appendix A | Traceability outside primary narrative | commission renderer | complete document split assertion | FAIL: not acceptance-proven | PASS |
-| S | Markdown structural validity | Exactly one H1, 16 sections, A–D, complete newline | No malformed/duplicate/truncated structure | `validate_research_commission_markdown` | fail-closed validator + full file | FAIL: trailing `##` | PASS |
-| T | Twin Map regression | Complete 200 response contains canonical 14-enterprise composition and saved context | Existing Twin Map works | `executive_workspace_page` | actual complete route response | PASS observed | PASS |
-| U | Research Gaps regression | Complete 200 response has all collection cards/counts | Existing gaps works | `_research_gaps` | actual complete route response | PASS observed | PASS |
-| V | Import regression | Repository package accepted through upload handler | Import and picker contract retained | `upload_and_validate_blueprint` | configured-path import tests | PASS observed | PASS |
-| W | Commercial Mission persistence regression | Save, reload and fresh requests retain all values | Persistence/restart-safe | `save_commercial_context` | filesystem store + fresh handler calls/tests | FAIL: field loss previously | PASS |
-| X | Promotion fail-closed regression | Candidate state unchanged; no promotion invoked; governance suite passes | No automatic promotion | existing promotion owners | regression tests and response inspection | PASS observed | PASS |
+| Industries export | Media; Telecommunications | Not supplied | Active export read legacy aliases instead of resolved tuple | Render resolved `CommercialMission.industries` | Media; Telecommunications | 03 form + 04 full export | PASS |
+| Priority-customer export | BT Group; BBC; ITV | Not supplied | Priority field was lost before active resolver | Persist/reload `priority_accounts`; exact export binding | BT Group; BBC; ITV | 03 + 04 | PASS |
+| Capabilities/services export | Five submitted values | Not supplied | Employer form name did not reach canonical capabilities | Map `employer_capabilities` through employer store/resolver | Digital transformation; Cloud; Data; AI; Managed services | 03 + 04 | PASS |
+| Competitor export | Accenture; Cap Gemini; IBM | Populated inconsistently | Parallel context paths | One resolved Employer Context binding | Accenture; Cap Gemini; IBM | 03 + 04 | PASS |
+| Enterprise count | 14 profiles | 93 profiles | Export counted all canonical IDs attached to 14 dossiers (underlying records), not dossier subjects | Typed collection count uses canonical enterprise identities | 14 everywhere; 93 is never labelled profiles | 01, 02, 04, 07 | PASS |
+| Reinvention count semantics | Separate records, domains, enterprises/units, assessed, unassessed, projections | 1 and 8 reused under ambiguous labels | Change objects, assessment records and projections were conflated | Emit every typed unit independently | 1 record; 3 domains; 0 explicitly linked enterprises/units; 0 owner-assessed; 0 unassessed; 1 projection | 02 + 04 | PASS |
+| Participant classification | Seven allowed classifications; non-organisations get adapted research | All concepts treated as organisations | Generic participant template ignored supplied type | Resolve supplied type fail-closed; category/capability/relationship contracts | Hyperscalers category; EE/BT unresolved identity, neither organisation | 08 + 04 Appendix C | PASS |
+| Subject-type enterprise requirements | Requirements adapt to supported type | One generic list for 14 | Generic collection schedule used for every dossier | Bind supplied form/role evidence to existing owner schedules | BBC, CityFibre, IFR, Premier League and Sport England differ | 04 + 07 | PASS |
+| Researcher-facing language | Business questions/actions in primary content | Architecture-heavy assessment prose | Traceability prose occupied primary contract | Business translation primary; architecture in details/Appendix A | Primary sections state research, sources, value and acceptance | 02 + 04 | PASS |
+| Readiness-authority cleanup | One owner-backed status | Owner absence plus local “Insufficient” | Legacy heuristic rendered beside projection | Remove heuristic from primary; retain diagnostics as non-authoritative | “Not yet assessed against the governed standard” only | 02, 06–08; 05 diagnostics | PASS |
+| Markdown H1 | Exact single H1 | H1 missing | Old builder/renderer output | Fixed first line plus fail-closed validation | Exact H1, count 1 | 04 + 09 | PASS |
+| Markdown section 14 | Complete heading | Truncated “eliverables” | Malformed generated heading | Fixed required heading validation | `14. Required Structured Deliverables` complete | 04 + 09 | PASS |
+| Complete Markdown validity | 16 sections, A–D, valid EOF | Orphan/truncated structure | No complete-document structural gate | Validate complete file before response | 1,034-line file accepted | 04 + 09 | PASS |
+| Complete research scope | No mission filtering | Scope not proven | Emphasis and commission ordering were coupled | Separate full commission from matched emphasis | 1/14/10/9/9 plus timing and gaps retained | 01, 02, 04 | PASS |
+| Mission emphasis | Only explicit, inspectable matches | Arbitrary broad matching | Text matching leaked member facts to collection reasons | Exact identity/domain/relationship/timing gates | BT Group, BBC, ITV alone receive named-priority reason | 04 §5 + Appendix D | PASS |
+| Import regression | Configured upload works | Previously working | Risk from correction | Exercise native multipart handler | HTTP 303 and complete imported workspace | 01 + runtime run ID | PASS |
+| Mission persistence regression | Save/reload/restart retains fields | Three field groups lost | Split alias and persistence paths | Atomic canonical stores and resolved reload | Restarted runtime returned all values | 03 + 04 | PASS |
+| Promotion fail-closed regression | No automatic promotion | Previously fail-closed | Regression risk | No governance-owner changes | Candidate inspection remains separate; governance tests pass | 05 + automated suite | PASS |
 
 ## Configured runtime and route ownership
 
@@ -107,12 +103,12 @@ All controls are parsed by `update_commercial_mission`, normalised by the canoni
 
 ## Evidence register
 
-- Twin Map: `executive-research-commission-product-acceptance/01-twin-map.html`
-- Research Gaps: `02-research-gaps.html`
-- Advanced Inspection: `03-advanced-inspection.html`
-- reopened Commercial Mission: `04-commercial-mission.html`
-- complete canonical deliverable: `05-executive-research-commission.md`
-- validator results: `06-validation.txt`
+- Twin Map: `executive-research-commission-final-acceptance/01-twin-map.html`
+- Research Gaps: `executive-research-commission-final-acceptance/02-research-gaps.html`
+- Advanced Inspection: `executive-research-commission-final-acceptance/05-advanced-inspection.html`
+- reopened Commercial Mission: `executive-research-commission-final-acceptance/03-commercial-mission.html`
+- complete canonical deliverable: `executive-research-commission-final-acceptance/04-research-commission.md`
+- validator results: `executive-research-commission-final-acceptance/09-validation.txt`
 
 The export proves complete scope and deterministic mission emphasis. BT Group, BBC and ITV receive exact named-priority-customer reasons; no other enterprise receives that reason. Capability and timing reasons require explicit Twin relations. The canonical register preserves all subjects regardless of emphasis.
 
