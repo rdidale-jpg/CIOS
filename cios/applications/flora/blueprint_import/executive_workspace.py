@@ -9,8 +9,9 @@ import os
 from pathlib import Path
 from zipfile import ZipFile
 
-from cios.applications.flora.access import can_access_enterprise
-from cios.applications.flora.pilot_import import pilot_import_bypass_enabled
+from cios.applications.flora.access import (COMMERCIAL_CONTEXT_EDIT, COMMERCIAL_CONTEXT_VIEW,
+    can_access_enterprise, commercial_context_authorisation)
+from cios.applications.flora.pilot_import import PILOT_IMPORT_WORKSPACE, pilot_import_bypass_enabled
 from cios.applications.flora.commercial_mission import (CommercialMission, EmployerContext,
     resolve_commercial_mission, resolve_employer_context, save_commercial_mission, save_employer_context)
 from cios.applications.flora.workspace.views import _page
@@ -149,7 +150,12 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     package = next((p for p in BlueprintPackageRegistry().list() if p.import_run_id == import_run_id), None)
     if package is None:
         return _page("Executive Intelligence Workspace unavailable", "<section class='hero'><h1>Executive Intelligence Workspace unavailable</h1><p>The import record could not be found.</p></section>"), 404
-    bypass_candidate_read = pilot_import_bypass_enabled() and view in {"workspace", "explore", "enterprise", "health", "aspect", "diagnostics"}
+    if view == "mission":
+        context_scope = package.workspace_id or (PILOT_IMPORT_WORKSPACE if pilot_import_bypass_enabled() else "")
+        decision = commercial_context_authorisation(headers, COMMERCIAL_CONTEXT_VIEW, context_scope)
+        if decision.decision != "allowed":
+            return _commercial_access_denied(decision, headers), 403
+    bypass_candidate_read = pilot_import_bypass_enabled() and view in {"workspace", "explore", "enterprise", "health", "aspect", "diagnostics", "mission"}
     if not bypass_candidate_read and (not can_access_enterprise(headers, package.identity.enterprise_id, package.workspace_id) or not can_inspect_blueprint_package(headers, package)):
         return _page("Access denied", "<section class='hero'><h1>Access denied</h1></section>"), 403
     summary = BlueprintPackageValidator().staging_summary(import_run_id) or {}
@@ -174,8 +180,8 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
             return _page("Enterprise dossier unavailable", "<section class='hero'><h1>Enterprise dossier unavailable</h1></section>"), 404
         return _page(f"Enterprise Intelligence — {ent.name}", _styles() + _dossier(ent, twin, import_run_id, mission)), 200
     if view == "mission":
-        return _page("Configure Commercial Mission", _styles() + _mission_editor(mission, employer_context, import_run_id)), 200
-    body = _styles() + _hero(title) + _primary_nav(import_run_id, "map") + _mission_indicator(mission, employer_context, import_run_id)
+        return _page("Configure Commercial Mission", _styles() + _mission_editor(mission, employer_context, import_run_id, domain)), 200
+    body = _styles() + _hero(title) + _primary_nav(import_run_id, "map") + _mission_indicator(mission, employer_context, import_run_id, domain)
     if not twin.enterprises:
         body += f"<aside class='mission-indicator' role='status'>Twin identity and governed scope have not yet been confirmed. Resolve Twin scope through <a href='/blueprint-import/{escape(import_run_id)}/review'>Review candidate governance</a>. <a href='/blueprint-import/{escape(import_run_id)}/inspect'>Inspect import decisions</a>. <a href='/blueprint-import/{escape(import_run_id)}/validation'>View package validation</a>.</aside>"
     body += _domain_lenses(import_run_id, domain) + _twin_map(twin, import_run_id, mission, domain) + _composition(twin, import_run_id, domain)
@@ -229,14 +235,15 @@ def _hero(title):
     return f"<header class='compact-twin-header'><p>Executive Intelligence Workspace</p><h1><span class='pilot-badge'>PILOT</span><span aria-hidden='true'> · </span>{escape(title)}</h1></header>"
 
 
-def _mission_indicator(mission: CommercialMission | None, employer: EmployerContext | None, run_id: str) -> str:
+def _mission_indicator(mission: CommercialMission | None, employer: EmployerContext | None, run_id: str, domain: str = "all") -> str:
+    target = f"/blueprint-import/{escape(run_id)}/mission?domain={escape(domain)}"
     if not mission:
         employer_state = "Configured" if employer and employer.complete else "Partially configured" if employer else "Not configured"
-        return f"<aside class='mission-indicator' role='status'><strong>PILOT · Commercial Mission not configured</strong> — no Commercial Mission is available · Employer Context: {employer_state} · neutral industry composition applies · <a href='/blueprint-import/{escape(run_id)}/mission'>Configure</a></aside>"
+        return f"<aside class='mission-indicator' role='status'><strong>PILOT · Commercial Mission not configured</strong> — no Commercial Mission is available · Employer Context: {employer_state} · neutral industry composition applies · <a href='{target}'>Configure</a></aside>"
     status = "Configured" if mission.mission_name and mission.executive_role and mission.commercial_objective and mission.industries and (mission.priority_accounts or mission.target_customers) else "Partially configured"
     name = mission.mission_name or "Unnamed mission"
     employer_state = "Configured" if employer and employer.complete else "Partially configured" if employer else "Not configured"
-    return f"<aside class='mission-indicator' role='status'><strong>PILOT · Commercial Mission: {escape(name)}</strong> · {status} · Employer Context: {employer_state} · <a href='/blueprint-import/{escape(run_id)}/mission'>Select or edit</a></aside>"
+    return f"<aside class='mission-indicator' role='status'><strong>PILOT · Commercial Mission: {escape(name)}</strong> · {status} · Employer Context: {employer_state} · <a href='{target}'>Select or edit</a></aside>"
 
 
 def _bars(a: ReadinessAspect, run_id: str) -> str:
@@ -438,7 +445,7 @@ def _validation_report(twin: SemanticTwin) -> str:
     return f"""<section class='card' id='package-validation'><h2>Deterministic package validation</h2><p><strong>Canonical priority enterprises: {len(twin.enterprises)}</strong> · Market Participants: {counts['market_participant_twin']} · Capabilities/offers: {counts['capability_offer']} · Opportunities: {counts['opportunity_hypothesis']} · Evidence: {counts['evidence']} · Unknowns: {counts['unknown']} · Contradictions: {counts['contradiction']}</p><p><strong>Capabilities and offers (not enterprises):</strong> {escape(capabilities)}</p><p>Evidence-reference coverage: {evidenced}/{len(twin.objects)} objects · Claims without evidence: {sum(not o.evidence_refs for o in claims)} · Evidence without claims: {unused_evidence} · Missing dates: {sum(o.freshness == 'unknown' for o in twin.objects)} · Unresolved references: {len(twin.unresolved_references)}</p><details><summary>Counts by canonical/runtime type and unresolved IDs</summary><table><tbody>{rows}</tbody></table><p>{escape(', '.join(twin.unresolved_references) or 'No unresolved canonical references')}</p></details></section>"""
 
 
-def _mission_editor(m: CommercialMission | None, employer: EmployerContext | None, run_id: str) -> str:
+def _mission_editor(m: CommercialMission | None, employer: EmployerContext | None, run_id: str, domain: str = "all") -> str:
     def value(name):
         raw = getattr(m, name) if m else ""
         return escape(", ".join(raw) if isinstance(raw, tuple) else raw)
@@ -460,10 +467,18 @@ def _mission_editor(m: CommercialMission | None, employer: EmployerContext | Non
         shown = ", ".join(raw) if isinstance(raw, tuple) else raw
         status = employer.field_statuses.get(name, "unresolved") if employer else "unresolved"
         employer_fields.append(f"<label>{label} <span class='pill'>{escape(status)}</span><input name='employer_{name}' value='{escape(shown)}'></label>")
-    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a><strong>Configure Commercial Mission</strong></nav><section class='card'><h1>Configure Commercial Mission</h1><p>Commercial Mission and Employer Context are independent user-scoped operational profiles. They never alter the imported Twin. Supplied employer fields are labelled as human-supplied, not market evidence.</p><form method='post' action='/blueprint-import/{escape(run_id)}/mission'><fieldset><legend>Commercial Mission</legend>{mission_fields}<button class='button' name='save_scope' value='mission'>Save Commercial Mission</button></fieldset><fieldset><legend>Employer Context</legend>{''.join(employer_fields)}<button class='button' name='save_scope' value='employer'>Save Employer Context</button></fieldset><button class='button primary' name='save_scope' value='both'>Save both and return to Twin Map</button></form></section>"
+    back = f"/blueprint-import/{escape(run_id)}?domain={escape(domain)}"
+    return f"<nav class='executive-path'><a href='{back}'>Back to Twin Map</a><strong>Commercial Mission</strong><strong>Employer Context</strong></nav><section class='card'><h1>Configure Commercial Mission</h1><p>Commercial Mission and Employer Context are independent user-scoped operational profiles. They never alter the imported Twin. Supplied employer fields are labelled as human-supplied, not market evidence.</p><form method='post' action='/blueprint-import/{escape(run_id)}/mission'><input type='hidden' name='return_domain' value='{escape(domain)}'><fieldset><legend>Commercial Mission</legend>{mission_fields}<button class='button' name='save_scope' value='mission'>Save Commercial Mission</button></fieldset><fieldset><legend>Employer Context</legend>{''.join(employer_fields)}<button class='button' name='save_scope' value='employer'>Save Employer Context</button></fieldset><button class='button primary' name='save_scope' value='both'>Save</button> <a class='button' href='{back}'>Cancel</a></form></section>"
 
 
 def update_commercial_mission(import_run_id: str, headers: Any, form: dict[str, list[str]]) -> tuple[str, int]:
+    package = next((p for p in BlueprintPackageRegistry().list() if p.import_run_id == import_run_id), None)
+    if package is None:
+        return _page("Commercial context unavailable", "<h1>Commercial context unavailable</h1>"), 404
+    context_scope = package.workspace_id or (PILOT_IMPORT_WORKSPACE if pilot_import_bypass_enabled() else "")
+    decision = commercial_context_authorisation(headers, COMMERCIAL_CONTEXT_EDIT, context_scope)
+    if decision.decision != "allowed":
+        return _commercial_access_denied(decision, headers), 403
     values = {key: (items[0] if items else "") for key, items in form.items()}
     for key in ("industries", "geography", "named_accounts", "campaigns", "interests", "target_customers",
                 "priority_accounts", "excluded_accounts", "relevant_business_units", "objectives"):
@@ -485,9 +500,20 @@ def update_commercial_mission(import_run_id: str, headers: Any, form: dict[str, 
     except ValueError as exc:
         current_mission = resolve_commercial_mission(headers)
         current_employer = resolve_employer_context(headers)
-        form_html = _mission_editor(current_mission, current_employer, import_run_id)
+        form_html = _mission_editor(current_mission, current_employer, import_run_id, str(values.get("return_domain") or "all"))
         return _page("Settings not saved", _styles() + f"<aside class='mission-indicator' role='alert'><strong>Settings not saved:</strong> {escape(str(exc))}</aside>" + form_html), 400
-    return executive_workspace_page(import_run_id, headers)
+    domain = str(values.get("return_domain") or "all")
+    return f"/blueprint-import/{import_run_id}?domain={domain}", 303
+
+
+def _commercial_access_denied(decision, headers: Any) -> str:
+    correlation = str(headers.get("X-Request-Id") or "not-supplied")
+    body = ("<section class='hero'><h1>Access denied</h1><p>Commercial context configuration is unavailable.</p></section>"
+            f"<section class='card'><h2>Access diagnostic</h2><ul><li>Resolved actor: {escape(decision.actor_id or 'unresolved')}</li>"
+            f"<li>Context scope: {escape(decision.context_scope or 'unresolved')}</li><li>Required capability: <code>{escape(decision.required_capability)}</code></li>"
+            f"<li>Decision: {escape(decision.decision)}</li><li>Failed stage: {escape(decision.failed_stage)}</li>"
+            f"<li>Correlation ID: {escape(correlation)}</li></ul></section>")
+    return _page("Access denied", body)
 
 
 def _attention(twin, run_id):

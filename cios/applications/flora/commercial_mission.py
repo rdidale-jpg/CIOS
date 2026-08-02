@@ -13,7 +13,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from cios.applications.flora.access import authenticated_flora_user
+from cios.applications.flora.access import commercial_context_actor
 
 DEFAULT_CONFIG = Path(__file__).resolve().parents[3] / "config" / "flora" / "commercial_missions.json"
 DEFAULT_EMPLOYER_CONFIG = Path(__file__).resolve().parents[3] / "config" / "flora" / "employer_contexts.json"
@@ -84,7 +84,7 @@ class CommercialMission:
 
 def resolve_commercial_mission(headers: Any) -> CommercialMission | None:
     """Resolve declared context for the authenticated principal; never infer it."""
-    user_id = authenticated_flora_user(headers)
+    user_id = commercial_context_actor(headers)
     if not user_id:
         return None
     path = Path(os.getenv("FLORA_COMMERCIAL_MISSIONS_FILE", str(DEFAULT_CONFIG)))
@@ -98,7 +98,7 @@ def resolve_commercial_mission(headers: Any) -> CommercialMission | None:
 
 def save_commercial_mission(headers: Any, value: dict[str, Any]) -> CommercialMission:
     """Atomically persist declared mission context against the existing user ID."""
-    user_id = authenticated_flora_user(headers)
+    user_id = commercial_context_actor(headers)
     if not user_id:
         raise PermissionError("An authenticated Flora user is required")
     path = Path(os.getenv("FLORA_COMMERCIAL_MISSIONS_FILE", str(DEFAULT_CONFIG)))
@@ -164,7 +164,7 @@ class EmployerContext:
 
 def resolve_employer_context(headers: Any) -> EmployerContext | None:
     """Resolve supplier-side configuration independently of mission and Twin stores."""
-    user_id = authenticated_flora_user(headers)
+    user_id = commercial_context_actor(headers)
     if not user_id:
         return None
     path = Path(os.getenv("FLORA_EMPLOYER_CONTEXTS_FILE", str(DEFAULT_EMPLOYER_CONFIG)))
@@ -178,7 +178,7 @@ def resolve_employer_context(headers: Any) -> EmployerContext | None:
 
 def save_employer_context(headers: Any, value: dict[str, Any]) -> EmployerContext:
     """Atomically save explicitly supplied employer context in its own profile store."""
-    user_id = authenticated_flora_user(headers)
+    user_id = commercial_context_actor(headers)
     if not user_id:
         raise PermissionError("An authenticated Flora user is required")
     context = EmployerContext.from_dict(value)

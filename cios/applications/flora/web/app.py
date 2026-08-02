@@ -284,7 +284,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(html, status=status)
             elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/mission"):
                 run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/mission")
-                html, status = executive_workspace_page(run_id, self.headers, view="mission")
+                domain = (parse_qs(parsed.query).get("domain") or ["all"])[0]
+                html, status = executive_workspace_page(run_id, self.headers, view="mission", domain=domain)
                 self._html(html, status=status)
             elif parsed.path.startswith("/blueprint-import/") and "/enterprises/" in parsed.path:
                 remainder = parsed.path.removeprefix("/blueprint-import/")
@@ -523,7 +524,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         elif self.path.startswith("/blueprint-import/") and self.path.endswith("/mission"):
             run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/mission")
             html, status = update_commercial_mission(run_id, self.headers, form)
-            self._html(html, status=status)
+            if status == 303:
+                self._redirect(html)
+            else:
+                self._html(html, status=status)
         elif self.path.startswith("/blueprint-import/") and self.path.endswith("/approve"):
             run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/approve")
             html, status = blueprint_approve_and_promote(run_id, form, self.headers)

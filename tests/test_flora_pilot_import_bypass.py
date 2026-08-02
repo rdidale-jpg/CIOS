@@ -11,6 +11,10 @@ from pathlib import Path
 from cios.applications.flora.blueprint_import.registry import BlueprintPackageRegistry
 from cios.applications.flora.blueprint_import.views import MAX_UPLOAD_BYTES, approve_and_promote, upload_and_validate_blueprint
 from cios.applications.flora.pilot_import import PILOT_IMPORT_ACTOR, PILOT_IMPORT_WORKSPACE, pilot_import_bypass_enabled, pilot_import_mode
+from cios.applications.flora.access import (
+    COMMERCIAL_CONTEXT_EDIT, COMMERCIAL_CONTEXT_VIEW, BLUEPRINT_PROMOTE_PERMISSION,
+    commercial_context_authorisation, flora_roles,
+)
 from tests.test_flora_blueprint_import_validation import pkg
 
 FIELDS = {"expected_type": "industry", "blueprint_zip.filename": "pilot.zip", "blueprint_zip.content_type": "application/zip", "_form_submission": "true"}
@@ -115,6 +119,69 @@ def test_deployment_endpoint_identifies_canonical_import_runtime(monkeypatch, tm
     finally:
         server.shutdown(); server.server_close(); thread.join()
         web_app.application_revision.cache_clear()
+
+
+def test_pilot_configure_save_and_recompose_uses_narrow_actor_scope(monkeypatch, tmp_path):
+    """Exercise the configured HTTP entry point, not a view-only test double."""
+    import cios.applications.flora.web.app as web_app
+    pilot(monkeypatch, tmp_path)
+    mission_file = tmp_path / "commercial-missions.json"
+    employer_file = tmp_path / "employer-contexts.json"
+    monkeypatch.setenv("FLORA_COMMERCIAL_MISSIONS_FILE", str(mission_file))
+    monkeypatch.setenv("FLORA_EMPLOYER_CONTEXTS_FILE", str(employer_file))
+    _, status, target = upload_and_validate_blueprint({"blueprint_zip": pkg()}, FIELDS, {})
+    assert status == 200
+    run_id = target.rsplit("/", 1)[-1]
+    server = ThreadingHTTPServer(("127.0.0.1", 0), web_app.FloraWebHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True); thread.start()
+    try:
+        status, _, workspace = request(server, "GET", f"{target}?domain=technology")
+        assert status == 200 and "Commercial Mission not configured" in workspace
+        assert f"/blueprint-import/{run_id}/mission?domain=technology" in workspace
+        status, _, settings = request(server, "GET", f"/blueprint-import/{run_id}/mission?domain=technology")
+        assert status == 200 and "Access denied" not in settings
+        assert "Commercial Mission" in settings and "Employer Context" in settings
+        assert "Back to Twin Map" in settings and "Cancel" in settings
+        form = ("mission_name=UK+growth&executive_role=Director&commercial_objective=Find+evidenced+demand"
+                "&industries=Telecoms&interests=technology&target_customers=Example+Account"
+                "&employer_organisation=Example+Supplier&employer_capabilities=Advisory"
+                "&employer_competitors=&employer_partners=&save_scope=both&return_domain=technology")
+        status, response_headers, _ = request(server, "POST", f"/blueprint-import/{run_id}/mission", form, {
+            "Content-Type": "application/x-www-form-urlencoded", "Content-Length": str(len(form))})
+        assert status == 303
+        assert response_headers["Location"] == f"/blueprint-import/{run_id}?domain=technology"
+        status, _, recomposed = request(server, "GET", response_headers["Location"])
+        assert status == 200 and "Commercial Mission: UK growth" in recomposed
+        assert "Commercial Mission not configured" not in recomposed
+        status, _, brief = request(server, "GET", f"/blueprint-import/{run_id}/research-brief")
+        assert status == 200 and "UK growth" in brief and "Example Supplier" in brief
+    finally:
+        server.shutdown(); server.server_close(); thread.join()
+
+    mission_data = json.loads(mission_file.read_text())
+    employer_data = json.loads(employer_file.read_text())
+    assert list(mission_data) == [PILOT_IMPORT_ACTOR]
+    assert list(employer_data) == [PILOT_IMPORT_ACTOR]
+    assert "organisation" not in mission_data[PILOT_IMPORT_ACTOR]
+    assert "mission_name" not in employer_data[PILOT_IMPORT_ACTOR]
+    twin_files = list((tmp_path / "blueprint_import").rglob("*.json"))
+    assert all("UK growth" not in path.read_text() for path in twin_files)
+
+    view = commercial_context_authorisation({}, COMMERCIAL_CONTEXT_VIEW, PILOT_IMPORT_WORKSPACE)
+    edit = commercial_context_authorisation({}, COMMERCIAL_CONTEXT_EDIT, PILOT_IMPORT_WORKSPACE)
+    isolated = commercial_context_authorisation({}, COMMERCIAL_CONTEXT_EDIT, "another-workspace")
+    assert view.decision == edit.decision == "allowed"
+    assert isolated.decision == "denied" and isolated.failed_stage == "scope isolation"
+    assert BLUEPRINT_PROMOTE_PERMISSION not in flora_roles({})
+
+
+def test_secure_mode_commercial_context_remains_denied_with_diagnostic(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_ENVIRONMENT", "production")
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    decision = commercial_context_authorisation({}, COMMERCIAL_CONTEXT_VIEW, PILOT_IMPORT_WORKSPACE)
+    assert decision.decision == "denied"
+    assert decision.failed_stage == "actor resolution"
+    assert decision.required_capability == COMMERCIAL_CONTEXT_VIEW
 
 
 def test_validation_and_archive_safety_precede_identity(monkeypatch, tmp_path):
