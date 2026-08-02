@@ -7,6 +7,9 @@ from cios.applications.flora.pilot_auth import resolve_pilot_session
 from dataclasses import dataclass
 from typing import Any
 from urllib.parse import unquote_plus
+from cios.applications.flora.pilot_import import (
+    PILOT_IMPORT_ACTOR, PILOT_IMPORT_WORKSPACE, pilot_import_bypass_enabled,
+)
 
 _RUN_ID_RE = re.compile(r"^fi-[A-Za-z0-9_-]+$")
 
@@ -125,6 +128,52 @@ BLUEPRINT_IMPORT_OWNER_PERMISSIONS = frozenset({
     BLUEPRINT_IMPORT_ADMIN_ROLE,
 })
 _BLUEPRINT_IMPORT_ROLES = {BLUEPRINT_IMPORT_ADMIN_ROLE, BLUEPRINT_UPLOAD_PERMISSION}
+
+COMMERCIAL_CONTEXT_VIEW = "commercial_context.view"
+COMMERCIAL_CONTEXT_EDIT = "commercial_context.edit"
+
+
+@dataclass(frozen=True)
+class CommercialContextAuthorisationDecision:
+    actor_id: str
+    context_scope: str
+    required_capability: str
+    decision: str
+    failed_stage: str = ""
+    denial_reason: str = ""
+
+
+def commercial_context_actor(headers: Any) -> str:
+    """Resolve the canonical owner of commercial context, including explicit pilot mode."""
+    if pilot_import_bypass_enabled():
+        return PILOT_IMPORT_ACTOR
+    return authenticated_flora_user(headers)
+
+
+def commercial_context_authorisation(
+    headers: Any, required_capability: str, context_scope: str,
+) -> CommercialContextAuthorisationDecision:
+    """Authorise only view/edit of the actor's commercial profile scope."""
+    pilot = pilot_import_bypass_enabled()
+    actor = commercial_context_actor(headers)
+    scope = PILOT_IMPORT_WORKSPACE if pilot else active_flora_workspace(headers)
+    roles = raw_flora_roles(headers) if actor and not pilot else set()
+    allowed_capability = required_capability in {COMMERCIAL_CONTEXT_VIEW, COMMERCIAL_CONTEXT_EDIT}
+    owns_scope = bool(scope and context_scope and canonical_enterprise_id(scope) == canonical_enterprise_id(context_scope))
+    has_capability = pilot or bool(roles & CANONICAL_OWNER_ROLES) or required_capability in roles
+    if not actor:
+        stage, reason = "actor resolution", "missing authenticated Flora user"
+    elif not scope or not context_scope:
+        stage, reason = "scope resolution", "commercial-context scope is unavailable"
+    elif not owns_scope:
+        stage, reason = "scope isolation", "actor does not own the requested commercial-context scope"
+    elif not allowed_capability or not has_capability:
+        stage, reason = "capability check", f"missing {required_capability}"
+    else:
+        stage = reason = ""
+    return CommercialContextAuthorisationDecision(
+        actor, scope, required_capability, "allowed" if not stage else "denied", stage, reason,
+    )
 
 
 @dataclass(frozen=True)
