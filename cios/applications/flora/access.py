@@ -135,6 +135,8 @@ PILOT_COMMERCIAL_CONTEXT_CAPABILITIES = frozenset({
     COMMERCIAL_CONTEXT_VIEW,
     COMMERCIAL_CONTEXT_EDIT,
 })
+PILOT_COMMERCIAL_CONTEXT_OWNER = PILOT_IMPORT_ACTOR
+COMMERCIAL_CONTEXT_SCOPE_CLASS = "commercial-context"
 
 
 @dataclass(frozen=True)
@@ -146,6 +148,15 @@ class CommercialContextAuthorisationDecision:
     failed_stage: str = ""
     denial_reason: str = ""
     effective_capabilities: tuple[str, ...] = ()
+    scope_class: str = COMMERCIAL_CONTEXT_SCOPE_CLASS
+    expected_scope_class: str = COMMERCIAL_CONTEXT_SCOPE_CLASS
+
+
+def commercial_context_owner(headers: Any) -> str:
+    """Resolve the single server-owned resource used by both context routes."""
+    if pilot_import_bypass_enabled():
+        return PILOT_COMMERCIAL_CONTEXT_OWNER
+    return active_flora_workspace(headers)
 
 
 def commercial_context_actor(headers: Any) -> str:
@@ -161,7 +172,7 @@ def commercial_context_authorisation(
     """Authorise only view/edit of the actor's commercial profile scope."""
     pilot = pilot_import_bypass_enabled()
     actor = commercial_context_actor(headers)
-    scope = PILOT_IMPORT_WORKSPACE if pilot else active_flora_workspace(headers)
+    scope = commercial_context_owner(headers)
     roles = raw_flora_roles(headers) if actor and not pilot else set()
     allowed_capability = required_capability in PILOT_COMMERCIAL_CONTEXT_CAPABILITIES
     owns_scope = bool(scope and context_scope and canonical_enterprise_id(scope) == canonical_enterprise_id(context_scope))

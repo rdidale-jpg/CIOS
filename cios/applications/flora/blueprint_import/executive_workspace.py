@@ -11,7 +11,7 @@ from uuid import uuid4
 from zipfile import ZipFile
 
 from cios.applications.flora.access import (COMMERCIAL_CONTEXT_EDIT, COMMERCIAL_CONTEXT_VIEW,
-    can_access_enterprise, commercial_context_authorisation)
+    can_access_enterprise, commercial_context_authorisation, commercial_context_owner)
 from cios.applications.flora.pilot_import import PILOT_IMPORT_WORKSPACE, pilot_import_bypass_enabled
 from cios.applications.flora.commercial_mission import (CommercialMission, EmployerContext,
     resolve_commercial_mission, resolve_employer_context, save_commercial_mission, save_employer_context)
@@ -152,7 +152,7 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     if package is None:
         return _page("Executive Intelligence Workspace unavailable", "<section class='hero'><h1>Executive Intelligence Workspace unavailable</h1><p>The import record could not be found.</p></section>"), 404
     if view == "mission":
-        context_scope = package.workspace_id or (PILOT_IMPORT_WORKSPACE if pilot_import_bypass_enabled() else "")
+        context_scope = commercial_context_owner(headers)
         decision = commercial_context_authorisation(headers, COMMERCIAL_CONTEXT_VIEW, context_scope)
         if decision.decision != "allowed":
             return _commercial_access_denied(decision, headers), 403
@@ -185,9 +185,12 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     body = _styles() + _hero(title) + _primary_nav(import_run_id, "map") + _mission_indicator(mission, employer_context, import_run_id, domain)
     if not twin.enterprises:
         body += f"<aside class='mission-indicator' role='status'>Twin identity and governed scope have not yet been confirmed. Resolve Twin scope through <a href='/blueprint-import/{escape(import_run_id)}/review'>Review candidate governance</a>. <a href='/blueprint-import/{escape(import_run_id)}/inspect'>Inspect import decisions</a>. <a href='/blueprint-import/{escape(import_run_id)}/validation'>View package validation</a>.</aside>"
-    body += _domain_lenses(import_run_id, domain) + _twin_map(twin, import_run_id, mission, domain) + _composition(twin, import_run_id, domain)
+    body += _domain_lenses(import_run_id, domain) + _twin_map(twin, import_run_id, mission, domain)
     body += _navigation(import_run_id)
-    return _page(f"Executive Intelligence — {title}", body), 200
+    html = _page(f"Executive Intelligence — {title}", body)
+    product_nav = "<nav class='nav'><a href='/'>Executive Brief</a><a href='/observatory'>Observatory</a><a href='/radar'>Portfolio</a><a href='/live'>Evidence</a><a href='/digital-twins'>Digital Twins</a><a href='/financial-intelligence'>Financial Intelligence</a><a href='/observatory/critique'>Research</a><a href='/settings'>Settings</a><a href='/logbook' hidden>Learning / Logbook</a><a href='/financial-reports' hidden>Collect Financial Report</a></nav>"
+    html = html.replace(product_nav, "<header class='product-header'><a href='/digital-twins'>Flora</a></header>", 1)
+    return html, 200
 
 
 def _semantic_candidates(package, staged: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -476,7 +479,7 @@ def update_commercial_mission(import_run_id: str, headers: Any, form: dict[str, 
     package = next((p for p in BlueprintPackageRegistry().list() if p.import_run_id == import_run_id), None)
     if package is None:
         return _page("Commercial context unavailable", "<h1>Commercial context unavailable</h1>"), 404
-    context_scope = package.workspace_id or (PILOT_IMPORT_WORKSPACE if pilot_import_bypass_enabled() else "")
+    context_scope = commercial_context_owner(headers)
     decision = commercial_context_authorisation(headers, COMMERCIAL_CONTEXT_EDIT, context_scope)
     if decision.decision != "allowed":
         return _commercial_access_denied(decision, headers), 403
@@ -512,6 +515,7 @@ def _commercial_access_denied(decision, headers: Any) -> str:
     body = ("<section class='hero'><h1>Access denied</h1><p>Commercial context configuration is unavailable.</p></section>"
             f"<section class='card'><h2>Access diagnostic</h2><ul><li>Resolved actor: {escape(decision.actor_id or 'unresolved')}</li>"
             f"<li>Context scope: {escape(decision.context_scope or 'unresolved')}</li><li>Required capability: <code>{escape(decision.required_capability)}</code></li>"
+            f"<li>Scope class: {escape(decision.scope_class)}</li><li>Expected scope class: {escape(decision.expected_scope_class)}</li>"
             f"<li>Decision: {escape(decision.decision)}</li><li>Failed stage: {escape(decision.failed_stage)}</li>"
             f"<li>Denial reason: {escape(decision.denial_reason)}</li>"
             f"<li>Correlation ID: {escape(correlation)}</li></ul></section>")

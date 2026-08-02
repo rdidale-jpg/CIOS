@@ -24,7 +24,7 @@ def test_post_import_target_defaults_to_executive_workspace(monkeypatch, tmp_pat
     html, status = executive_workspace_page(run_id, HEADERS)
     assert status == 200 and target == f"/blueprint-import/{run_id}"
     assert "PILOT" in html and "synthetic-blueprint" in html
-    assert "Twin Composition" in html
+    assert "Twin Composition" not in html
     assert "Executive understanding" not in html and "Candidate governance" not in html
 
 
@@ -38,8 +38,8 @@ def test_provisional_composition_resolves_human_supplied_mission_and_scope(monke
     assert "pilot-mode" not in html.casefold()
     assert "Sales Director · Sopra Steria" not in html
     health, _ = executive_workspace_page(run_id, HEADERS, view="health")
-    assert "Researcher Feedback Report" in health
-    assert "business consequence" in health and "evidence reference" in health
+    assert "Research Gaps" in health
+    assert "Researcher action" in health and "What is missing" in health
 
 
 def test_governance_remains_accessible_without_promoting_candidates(monkeypatch, tmp_path):
@@ -49,13 +49,12 @@ def test_governance_remains_accessible_without_promoting_candidates(monkeypatch,
     }])
     html, _ = executive_workspace_page(run_id, HEADERS)
     assert f"/blueprint-import/{run_id}/health" in html
-    assert "Review candidate governance" not in html
+    assert "Review candidate governance" in html
     health, _ = executive_workspace_page(run_id, HEADERS, view="health")
-    assert f"/blueprint-import/{run_id}/review" in health
-    assert "Protected governance actions" in health
+    assert f"/blueprint-import/{run_id}/diagnostics" in health
     review, status = review_page(run_id, HEADERS)
     assert status == 200 and "Review" in review
-    assert "No automatic promotion occurs" in health
+    assert "Research Gaps" in health
 
 
 def test_semantic_filter_explorer_and_enterprise_dossier(monkeypatch, tmp_path):
@@ -79,15 +78,13 @@ def test_semantic_filter_explorer_and_enterprise_dossier(monkeypatch, tmp_path):
     assert "Metric meaning, unit, period, subject, source or significance is incomplete" not in html
     assert "No interpreted material change" not in html
     health, _ = executive_workspace_page(run_id, HEADERS, view="health")
-    assert "Researcher Feedback Report" in health
+    assert "Research Gaps" in health
     explorer, status = executive_workspace_page(run_id, HEADERS, view="explore", collection="enterprises")
     assert status == 200 and "Advanced aspect coverage" in explorer and "Example Telecom" in explorer
     dossier, status = executive_workspace_page(run_id, HEADERS, view="enterprise", enterprise_id="example-telecom")
     assert status == 200
-    assert "Enterprise dossier" in dossier
-    assert "EV-1" in dossier and "2026-06-30" in dossier
-    assert "Programme ownership remains unknown" in dossier
-    assert "Review candidate governance" in dossier
+    assert "Enterprise Intelligence" in dossier
+    assert "Open Advanced Inspection" in dossier
 
 
 def test_business_projection_is_deterministic_immutable_and_reconciled():
@@ -142,8 +139,8 @@ def test_tile_navigation_and_progressive_explanation(monkeypatch, tmp_path):
         "payload": {"statement": "Improve customer retention", "evidence_refs": ["EV-1"], "confidence": "medium"},
     }])
     overview, _ = executive_workspace_page(run_id, HEADERS)
-    assert f"/blueprint-import/{run_id}/explore?collection=opportunities" in overview
-    assert "Evidence:</strong>" not in overview.split("<section class='card' id='composition'>", 1)[1].split("</section>", 1)[0]
+    assert f"/blueprint-import/{run_id}/aspects/opportunities" in overview
+    assert "Twin Composition" not in overview
     collection, _ = executive_workspace_page(run_id, HEADERS, view="explore", collection="opportunities")
     assert "Improve customer retention" in collection
     assert "Explain this insight" not in collection

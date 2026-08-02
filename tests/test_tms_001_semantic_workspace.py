@@ -13,10 +13,10 @@ def test_tms_canonical_semantics_relationships_and_executive_intelligence(monkey
     html, status = executive_workspace_page(run_id, HEADERS)
     assert status == 200
     assert "PILOT" in html and "Telecommunications, Media and Sport Industry Twin" in html
-    assert "Twin Composition" in html and "Enterprises</strong><b>14" in html
-    assert "Market Participants</strong><b>10" in html
-    assert "Opportunities</strong><b>9" in html
-    assert "Evidence Sources" in html
+    assert "Twin Composition" not in html
+    assert "<h3>Market Participants</h3>" in html
+    assert "<h3>Opportunities</h3>" in html
+    assert "Evidence Sources" not in html
     assert all(lens in html for lens in ("All Twin", "Telecoms", "Media", "Sport", "Cross-domain"))
     assert "Explain this insight" not in html
     assert "Deterministic package validation" not in html

@@ -2,7 +2,13 @@ from __future__ import annotations
 
 import io
 import json
+import os
+import re
+import socket
+import subprocess
+import sys
 import threading
+import time
 import zipfile
 from http.client import HTTPConnection
 from http.server import ThreadingHTTPServer
@@ -13,7 +19,8 @@ from cios.applications.flora.blueprint_import.views import MAX_UPLOAD_BYTES, app
 from cios.applications.flora.pilot_import import PILOT_IMPORT_ACTOR, PILOT_IMPORT_WORKSPACE, pilot_import_bypass_enabled, pilot_import_mode
 from cios.applications.flora.access import (
     COMMERCIAL_CONTEXT_EDIT, COMMERCIAL_CONTEXT_VIEW, BLUEPRINT_PROMOTE_PERMISSION,
-    PILOT_COMMERCIAL_CONTEXT_CAPABILITIES, commercial_context_authorisation, flora_roles,
+    PILOT_COMMERCIAL_CONTEXT_CAPABILITIES, PILOT_COMMERCIAL_CONTEXT_OWNER,
+    commercial_context_authorisation, flora_roles,
 )
 from tests.test_flora_blueprint_import_validation import pkg
 
@@ -42,6 +49,71 @@ def request(server, method, path, body=None, headers=None):
     result = response.status, dict(response.getheaders()), payload
     conn.close()
     return result
+
+
+def test_configured_module_complete_http_commercial_context_and_twin_map(tmp_path):
+    """Acceptance path: launch the Render command and inspect complete responses."""
+    with socket.socket() as probe:
+        probe.bind(("127.0.0.1", 0))
+        port = probe.getsockname()[1]
+    mission_file = tmp_path / "commercial-missions.json"
+    employer_file = tmp_path / "employer-contexts.json"
+    env = {**os.environ, "FLORA_ENVIRONMENT": "pilot", "FLORA_DATA_DIR": str(tmp_path),
+           "FLORA_COMMERCIAL_MISSIONS_FILE": str(mission_file),
+           "FLORA_EMPLOYER_CONTEXTS_FILE": str(employer_file), "FLORA_PORT": str(port),
+           "FLORA_HOST": "127.0.0.1", "PYTHONUNBUFFERED": "1"}
+    env.pop("FLORA_PILOT_IMPORT_BYPASS", None)
+    env.pop("FLORA_PILOT_AUTO_SIGN_IN", None)
+    process = subprocess.Popen(
+        [sys.executable, "-m", "cios.applications.flora.web.app"], cwd=Path(__file__).parents[1],
+        env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+    )
+    endpoint = type("Endpoint", (), {"server_port": port})()
+    try:
+        for _ in range(100):
+            try:
+                if request(endpoint, "GET", "/health")[0] == 200:
+                    break
+            except OSError:
+                time.sleep(.05)
+        else:
+            raise AssertionError("configured Flora module did not start")
+        body, boundary = multipart(pkg())
+        status, headers, _ = request(endpoint, "POST", "/blueprint-import/upload", body, {
+            "Content-Type": f"multipart/form-data; boundary={boundary}", "Content-Length": str(len(body))})
+        assert status == 303
+        twin_url = headers["Location"]
+        status, _, twin_html = request(endpoint, "GET", twin_url)
+        assert status == 200
+        configure_href = re.search(r"href='([^']+/mission\?domain=[^']+)'", twin_html).group(1)
+        status, _, settings_html = request(endpoint, "GET", configure_href)
+        assert status == 200 and "Configure Commercial Mission" in settings_html and "Access denied" not in settings_html
+        form = ("mission_name=UK+growth&executive_role=Director&commercial_objective=Find+evidenced+demand"
+                "&industries=Telecoms&target_customers=Example+Account&employer_organisation=Example+Supplier"
+                "&employer_offer_portfolio=Advisory&employer_propositions=Transformation&save_scope=both&return_domain=all")
+        status, response_headers, _ = request(endpoint, "POST", configure_href.split("?", 1)[0], form, {
+            "Content-Type": "application/x-www-form-urlencoded", "Content-Length": str(len(form))})
+        assert status == 303 and response_headers["Location"] == twin_url + "?domain=all"
+        status, _, final_html = request(endpoint, "GET", response_headers["Location"])
+        assert status == 200 and "Commercial Mission: UK growth" in final_html
+        assert "Commercial Mission not configured" not in final_html
+        for heading in ("Industry Overview", "Enterprises", "Market Participants", "Major Programmes", "Opportunities", "Reinvention Timing"):
+            assert final_html.count(f"<h3>{heading}</h3>") == 1
+        for legacy in ("Twin Composition", "Financial Intelligence", "Transformation Programmes", "Capabilities and Offers",
+                       "Relationships", "Evidence Sources", "Unknowns", "Contradictions", "Material Insights",
+                       "Priority Enterprises", "Commercial Opportunities", "Pressure and Urgency"):
+            assert legacy not in final_html
+        run_id = twin_url.rsplit("/", 1)[-1]
+        status, _, brief = request(endpoint, "GET", f"/blueprint-import/{run_id}/research-brief")
+        assert status == 200 and "- Mission: UK growth" in brief and "- Organisation: Example Supplier" in brief
+        status, _, inspection = request(endpoint, "GET", f"/blueprint-import/{run_id}/explore")
+        assert status == 200 and "Advanced Inspection" in inspection and "Technical collections" in inspection
+        assert "Back to Twin Map" in inspection and "Twin Composition" not in inspection
+        persisted = "\n".join(path.read_text(errors="replace") for path in tmp_path.rglob("*.json"))
+        assert PILOT_IMPORT_WORKSPACE in persisted
+    finally:
+        process.terminate()
+        process.wait(timeout=10)
 
 
 def test_one_canonical_mode_and_conflicting_legacy_modes_fail(monkeypatch):
@@ -85,7 +157,7 @@ def test_deployed_equivalent_pilot_route_imports_candidate_to_executive_workspac
         assert target.startswith("/blueprint-import/bpi-run-")
         status, _, workspace = request(server, "GET", target)
         assert status == 200 and "Executive Intelligence" in workspace
-        assert "Candidate governance" in workspace and "/review" in workspace
+        assert "Twin Map" in workspace and "/review" in workspace
     finally:
         server.shutdown(); server.server_close(); thread.join()
 
@@ -140,6 +212,12 @@ def test_pilot_configure_save_and_recompose_uses_narrow_actor_scope(monkeypatch,
         assert f"/blueprint-import/{run_id}/mission?domain=technology" in workspace
         status, _, settings = request(server, "GET", f"/blueprint-import/{run_id}/mission?domain=technology")
         assert status == 200 and "Access denied" not in settings
+        decision = commercial_context_authorisation({}, COMMERCIAL_CONTEXT_VIEW, PILOT_COMMERCIAL_CONTEXT_OWNER)
+        assert decision.actor_id == PILOT_IMPORT_ACTOR
+        assert decision.context_scope == PILOT_COMMERCIAL_CONTEXT_OWNER
+        assert decision.context_scope != PILOT_IMPORT_WORKSPACE
+        assert decision.scope_class == decision.expected_scope_class == "commercial-context"
+        assert decision.decision == "allowed" and not decision.denial_reason
         assert "Commercial Mission" in settings and "Employer Context" in settings
         assert "Back to Twin Map" in settings and "Cancel" in settings
         form = ("mission_name=UK+growth&executive_role=Director&commercial_objective=Find+evidenced+demand"
@@ -167,12 +245,13 @@ def test_pilot_configure_save_and_recompose_uses_narrow_actor_scope(monkeypatch,
     twin_files = list((tmp_path / "blueprint_import").rglob("*.json"))
     assert all("UK growth" not in path.read_text() for path in twin_files)
 
-    view = commercial_context_authorisation({}, COMMERCIAL_CONTEXT_VIEW, PILOT_IMPORT_WORKSPACE)
-    edit = commercial_context_authorisation({}, COMMERCIAL_CONTEXT_EDIT, PILOT_IMPORT_WORKSPACE)
+    view = commercial_context_authorisation({}, COMMERCIAL_CONTEXT_VIEW, PILOT_COMMERCIAL_CONTEXT_OWNER)
+    edit = commercial_context_authorisation({}, COMMERCIAL_CONTEXT_EDIT, PILOT_COMMERCIAL_CONTEXT_OWNER)
     isolated = commercial_context_authorisation({}, COMMERCIAL_CONTEXT_EDIT, "another-workspace")
     assert view.decision == edit.decision == "allowed"
     assert set(view.effective_capabilities) == set(PILOT_COMMERCIAL_CONTEXT_CAPABILITIES)
     assert set(edit.effective_capabilities) == set(PILOT_COMMERCIAL_CONTEXT_CAPABILITIES)
+    assert view.context_scope != PILOT_IMPORT_WORKSPACE
     assert BLUEPRINT_PROMOTE_PERMISSION not in view.effective_capabilities
     assert isolated.decision == "denied" and isolated.failed_stage == "scope isolation"
     assert BLUEPRINT_PROMOTE_PERMISSION not in flora_roles({})
