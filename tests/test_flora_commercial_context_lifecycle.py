@@ -78,10 +78,9 @@ def test_shared_context_drives_export_but_never_completeness(monkeypatch, tmp_pa
     assert [(a.state, a.missing) for a in focused] == [(a.state, a.missing) for a in neutral]
 
     requirements = research_requirements(twin, executive_assessments(twin))
-    assert set(_mission_prioritised(requirements, mission, employer)) == set(requirements)
+    assert set(_mission_prioritised(requirements, mission, employer)) < set(requirements)
     brief = research_gap_brief(twin, "Media", mission, employer_context=employer)
-    assert mission.context_id in brief and employer.context_id in brief
-    assert brief.count(f"Context version: {mission.version}") == 2
-    assert "These neutral gaps remain in scope" in brief
+    assert "## Appendix A — Architectural Traceability" in brief
+    assert "Mission settings remove nothing from this commission" in brief
     assert "Unknowns" in brief and "Contradictions" in brief
-    assert "Research BBC" in brief
+    assert "### BBC" in brief

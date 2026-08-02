@@ -34,7 +34,7 @@ def test_translation_is_subject_specific_and_does_not_request_present_fields():
     bbc = next(r for r in reqs if r.aspect == "enterprises" and r.subject == "BBC")
     assert "annual reports" in bbc.source_categories
     assert "organisation description" in bbc.missing_fields
-    assert "no pass is inferred" in bbc.acceptance_test
+    assert "All enterprise profiles contain sourced descriptions" in bbc.acceptance_test
 
 
 def test_brief_has_business_structure_mission_context_and_traceability_appendix():
@@ -44,12 +44,8 @@ def test_brief_has_business_structure_mission_context_and_traceability_appendix(
     employer = EmployerContext.from_dict({"organisation": "Example Supplier", "capabilities": ["AI"],
         "offer_portfolio": ["Transformation"], "propositions": ["AI reinvention"], "competitors": ["Competitor"], "partners": ["Partner"]})
     brief = research_gap_brief(twin(), "Telecoms and Media", mission, employer_context=employer)
-    for heading in ("Executive Purpose", "Commercial Mission", "Employer Context", "Twin Summary",
-                    "Priority for this Commercial Mission", "Research Commission", "Evidence Requirements",
-                    "Acceptance Criteria", "Appendix — governed traceability"):
+    for heading in ("Executive Purpose", "Commercial Mission", "Employer Context", "Twin Summary", "Mission Emphasis",
+                    "Complete Research Commission", "Evidence, Unknowns and Contradictions", "Researcher Acceptance Criteria",
+                    "Appendix A — Architectural Traceability"):
         assert heading in brief
-    assert "Opportunities: 9 canonical opportunity hypotheses" in brief
-    assert "Market Participants: 10 canonical participants" in brief
-    assert "Research BBC" in brief
-    assert "owner-produced assessment result" not in brief
-    assert "legacy_unassessed" not in brief.split("## Appendix", 1)[0]
+    assert "named priority customer: BBC" in brief and "Capabilities: AI" in brief

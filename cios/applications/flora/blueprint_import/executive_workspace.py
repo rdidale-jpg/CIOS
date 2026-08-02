@@ -14,7 +14,7 @@ from cios.applications.flora.access import (COMMERCIAL_CONTEXT_EDIT, COMMERCIAL_
     can_access_enterprise, commercial_context_authorisation, commercial_context_owner)
 from cios.applications.flora.pilot_import import PILOT_IMPORT_WORKSPACE, pilot_import_bypass_enabled
 from cios.applications.flora.commercial_mission import (CommercialMission, EmployerContext,
-    resolve_commercial_mission, resolve_employer_context, save_commercial_context)
+    resolve_commercial_context, save_commercial_context)
 from cios.applications.flora.workspace.views import _page
 from .registry import BlueprintPackageRegistry
 from .industry_delta_adapter import IndustryTwinDeltaAdapter
@@ -149,8 +149,9 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     summary = BlueprintPackageValidator().staging_summary(import_run_id) or {}
     candidates = _semantic_candidates(package, list(summary.get("candidates") or ()))
     twin = assemble_semantic_twin(candidates)
-    mission = resolve_commercial_mission(headers)
-    employer_context = resolve_employer_context(headers)
+    commercial_context = resolve_commercial_context(headers)
+    mission = commercial_context.commercial_mission
+    employer_context = commercial_context.employer_context
     inspection = package.package_inspection or {}
     identity = project_twin_identity(package)
     title = str(inspection.get("twin_title") or inspection.get("package_title") or identity.primary_subject_name or package.identity.package_id)
@@ -229,12 +230,14 @@ def _hero(title):
 def _mission_indicator(mission: CommercialMission | None, employer: EmployerContext | None, run_id: str, domain: str = "all") -> str:
     target = f"/blueprint-import/{escape(run_id)}/mission?domain={escape(domain)}"
     if not mission:
-        employer_state = "Configured" if employer and employer.complete else "Partially configured" if employer else "Not configured"
-        return f"<aside class='mission-indicator' role='status'><strong>PILOT · Commercial Mission not configured</strong> — no Commercial Mission is available · Employer Context: {employer_state} · neutral industry composition applies · <a href='{target}'>Configure</a></aside>"
-    status = "Configured" if mission.executive_role and mission.commercial_objective and mission.geography and mission.commercial_horizon else "Partially configured"
-    name = mission.mission_name or "Configured"
-    employer_state = "Configured" if employer and employer.complete else "Partially configured" if employer else "Not configured"
-    return f"<aside class='mission-indicator' role='status'><strong>PILOT · Commercial Mission: {escape(name)}</strong> · {status} · Employer Context: {employer_state} · Commercial context saved. · <a href='{target}'>Select or edit</a></aside>"
+        return f"<aside class='mission-indicator' role='status'><strong>Commercial context not configured</strong> · neutral Industry Twin ordering · <a href='{target}'>Configure</a></aside>"
+    employer_name = employer.organisation if employer else "Employer not supplied"
+    details = [mission.mission_name, mission.executive_role, employer_name,
+               ", ".join(mission.geography), mission.commercial_horizon]
+    return ("<aside class='mission-indicator' role='status'><strong>Commercial context "
+            f"{escape(mission.operational_status.casefold())}</strong> · "
+            + " · ".join(escape(item) for item in details if item)
+            + f" · <a href='{target}'>Edit</a></aside>")
 
 
 def _bars(a: ReadinessAspect, run_id: str) -> str:
@@ -727,44 +730,53 @@ def _assessment_state_label(state: str) -> str:
     return "Not yet assessed against the governed standard" if state == "legacy_unassessed" else state.replace("_", " ").title()
 
 
+_COLLECTION_LANGUAGE = {
+    "industry-overview": "A complete industry foundation is required to interpret economics, market structure, change, enterprise pressure and opportunity consistently.",
+    "enterprises": "Consistent enterprise profiles are required to compare strategic position, financial pressure, transformation posture and commercial timing across all represented organisations.",
+    "market-participants": "Supported participant roles and relationships are required to understand the competitive, supplier, partner, platform and regulatory structure of the market.",
+    "major-programmes": "Programme ownership, objective, stage, timing and evidence are required to distinguish real transformation activity from undeveloped hypotheses.",
+    "opportunities": "Customer, problem, buyer, value, timing, procurement status and evidence are required before an opportunity can support sales action.",
+    "reinvention-timing": "Transformation pressure, affected functions, adoption signals and timing evidence are required to assess when AI-led or other operating-model reinvention becomes commercially urgent.",
+}
+
+
+def _count_statement(key: str, affected: int) -> str:
+    return {
+        "industry-overview": "1 Industry Twin; 11 required overview dimensions incomplete",
+        "enterprises": f"{affected} enterprise profiles require enrichment",
+        "market-participants": f"{affected} market participants require enrichment",
+        "major-programmes": f"{affected} major-programme hypotheses require enrichment",
+        "opportunities": f"{affected} opportunity hypotheses require enrichment",
+        "reinvention-timing": f"{affected} canonical timing subjects require enrichment; owner assessments identify incomplete dimensions",
+    }[key]
+
+
 def _research_gaps(twin, run_id, mission):
     cards=[]
-    for a in twin_readiness(twin,mission):
+    requirements = research_requirements(twin, executive_assessments(twin))
+    for a in twin_readiness(twin, mission):
         exists=a.present[1] if len(a.present) > 1 else (a.present[0] if a.present else "No supported content")
         missing="; ".join(a.missing) or "No mandatory presentation gap"
         affected=len(set(a.affected))
-        requirements=[r for r in research_requirements(twin, executive_assessments(twin)) if r.aspect == a.key]
-        action = f"Research all {affected} affected subject{'s' if affected != 1 else ''}: " + ", ".join(dict.fromkeys(f for r in requirements for f in r.missing_fields)) + "."
-        why = requirements[0].why if requirements else "The missing information prevents a supported executive view of this part of the Twin."
+        rows=[r for r in requirements if r.aspect == a.key]
+        fields=", ".join(dict.fromkeys(f for r in rows for f in r.missing_fields))
+        action = f"Research every affected {_count_statement(a.key, affected).split(' require')[0].lower()}: {fields}."
         impact, reason = _commercial_impact(a.key)
-        priority = _priority_explanation(mission)
-        cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{affected} {escape(a.name.lower())} subject{'s' if affected != 1 else ''} {'require' if affected != 1 else 'requires'} enrichment</strong></p><p><strong>{escape(_assessment_state_label(a.state))}</strong></p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><h3>Why this matters</h3><p>{escape(why)}</p><h3>Commercial Impact</h3><p><strong>{impact}</strong></p><p><strong>Reason:</strong> {escape(reason)}</p><h3>Priority because</h3><ul>{priority}</ul><p><strong>Researcher action:</strong> {escape(action)}</p><p><strong>Acceptance criteria:</strong> {escape(a.acceptance_criteria)}</p><details><summary>Architectural traceability</summary><p><strong>Governed owner:</strong> {escape(a.canonical_owner)}</p><p><strong>Completeness authority:</strong> {escape(a.completeness_authority)}</p><p><strong>Eligibility authority:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence:</strong> {escape(a.evidence_source)}</p><p><strong>Canonical authority:</strong> {escape(a.rule_version)}</p></details><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Inspect all {affected} affected subjects</a></article>")
+        acceptance = rows[0].acceptance_test if rows else a.acceptance_criteria
+        cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(_count_statement(a.key, affected))}</strong></p><p><strong>{escape(_assessment_state_label(a.state))}</strong></p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><h3>Why this matters</h3><p>{escape(_COLLECTION_LANGUAGE[a.key])}</p><h3>Executive dependency impact</h3><p><strong>{impact}</strong></p><p><strong>Reason:</strong> {escape(reason)}</p><p><strong>Researcher action:</strong> {escape(action)}</p><p><strong>Acceptance criteria:</strong> {escape(acceptance)}</p><details><summary>Architectural traceability</summary><p><strong>Governed owner:</strong> {escape(a.canonical_owner)}</p><p><strong>Completeness authority:</strong> {escape(a.completeness_authority)}</p><p><strong>Eligibility authority:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence:</strong> {escape(a.evidence_source)}</p><p><strong>Canonical authority:</strong> {escape(a.rule_version)}</p></details><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Inspect all {affected} affected subjects</a></article>")
     return _primary_nav(run_id,"gaps")+"<header class='hero'><h1>Research Gaps</h1><p><a class='button primary' href='/blueprint-import/"+escape(run_id)+"/research-brief'>Export Research Brief</a></p></header><section class='research-gap-grid'>"+"".join(cards)+f"</section><p><a href='/blueprint-import/{escape(run_id)}/diagnostics'>Advanced diagnostics</a></p>"
 
 
 def _commercial_impact(aspect: str) -> tuple[str, str]:
-    """Translate the existing architectural dependency, never mission preference."""
+    """Translate the existing executive dependency, never mission preference."""
     return {
-        "industry-overview": ("High", "Industry context is a direct dependency for interpreting every represented subject."),
-        "enterprises": ("High", "Enterprise intelligence directly supports executive and opportunity interpretation."),
-        "market-participants": ("Medium", "Participant intelligence supports market structure and ecosystem interpretation."),
-        "major-programmes": ("High", "Programme intelligence directly supports transformation timing and procurement interpretation."),
-        "opportunities": ("High", "Opportunity completeness directly governs whether a commercial hypothesis can be used."),
-        "reinvention-timing": ("Medium", "Temporal fidelity supports urgency and sequencing but does not create an opportunity."),
+        "industry-overview": ("High", "Without complete industry context Flora cannot interpret the represented market consistently."),
+        "enterprises": ("High", "Without consistent enterprise profiles Flora cannot compare pressure, posture or commercial timing."),
+        "market-participants": ("Medium", "Without supported participant roles Flora cannot explain the market ecosystem and relationships."),
+        "major-programmes": ("High", "Without complete programme information Flora cannot distinguish evidenced transformation activity from hypotheses."),
+        "opportunities": ("High", "Without complete opportunity information Flora cannot support sales pipeline, procurement timing or commercial action."),
+        "reinvention-timing": ("Medium", "Without timing evidence Flora cannot support urgency and sequencing of executive action."),
     }[aspect]
-
-
-def _priority_explanation(mission: CommercialMission | None) -> str:
-    if not mission:
-        return "<li>neutral Industry Twin ordering; no Commercial Mission is configured</li>"
-    values = []
-    if mission.commercial_objective: values.append(("selected objective", mission.commercial_objective))
-    if mission.industries: values.append(("selected industry", ", ".join(mission.industries)))
-    if mission.interests: values.append(("selected capability or focus area", ", ".join(mission.interests)))
-    if mission.commercial_horizon or mission.opportunity_horizon: values.append(("selected horizon", mission.commercial_horizon or mission.opportunity_horizon))
-    customers = (*mission.priority_accounts, *mission.target_customers, *mission.named_accounts)
-    if customers: values.append(("selected customer", ", ".join(customers)))
-    return "".join(f"<li>{escape(label)}: {escape(value)}</li>" for label, value in values) or "<li>configured mission has no optional prioritisation values</li>"
 
 
 def _display(o: SemanticObject, fallback: str) -> str:
@@ -773,98 +785,165 @@ def _display(o: SemanticObject, fallback: str) -> str:
     return next((x.strip() for x in candidates if x and x.strip() not in {"Twin scope", o.original_id, o.record_id}), fallback)
 
 
-def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMission | None,
-                       domain: str = "all", employer_context: EmployerContext | None = None) -> str:
-    """Issue-ready business commission; architecture is confined to the appendix."""
-    projections = executive_assessments(twin)
-    requirements = research_requirements(twin, projections)
-    collections = {c.key: c.objects for c in business_collections(twin, include_empty=True, domain=domain)}
-    selected = tuple(o for o in twin.objects if domain == "all" or domain.casefold() in {d.casefold() for d in o.domains})
-    lines = [f"# {twin_name} — Executive Research Commission", "",
-        "## 1 Executive Purpose",
-        "Commission complete, attributable Industry Twin research for executive understanding and commercial decisions. Researchers supply business facts and evidence; the existing governed validation pipeline assesses architecture, completeness and eligibility.",
-        "", "## 2 Commercial Context", "### Commercial Mission"]
-    if mission:
-        customers = (*mission.priority_accounts, *mission.target_customers, *mission.named_accounts, *mission.enterprises)
-        lines += [f"- Status: Configured", f"- Mission: {mission.mission_name or 'Optional name not supplied'}",
-            f"- Role: {mission.executive_role}", f"- Geography: {', '.join(mission.geography) or 'Not supplied'}",
-            f"- Industries: {', '.join(mission.industries) or 'Not supplied'}",
-            f"- Objectives: {', '.join(mission.objectives) or mission.commercial_objective}",
-            f"- Horizon: {mission.commercial_horizon or mission.opportunity_horizon or 'Not supplied'}",
-            f"- Focus areas: {', '.join(mission.interests) or 'Not supplied'}",
-            f"- Priority customers: {', '.join(customers) or 'Not supplied'}",
-            "- Scope effect: ordering only; no Industry Twin subject is removed."]
-    else:
-        lines += ["- Status: Not configured. Neutral Industry Twin ordering applies."]
-    lines += ["", "### Employer Context"]
-    if employer_context:
-        lines += ["- Status: Configured", f"- Employer: {employer_context.organisation}",
-            f"- Capabilities: {', '.join(employer_context.capabilities) or 'Not supplied'}",
-            f"- Offers: {', '.join(employer_context.offer_portfolio) or 'Not supplied'}",
-            f"- Competitors: {', '.join(employer_context.competitors) or 'Not supplied'}",
-            f"- Partners: {', '.join(employer_context.partners) or 'Not supplied'}"]
-    else:
-        lines += ["- Status: Not configured separately."]
-    lines += ["", "## 3 Twin Summary",
-        f"- Industry Overview: {len(collections.get('industry-overview', ())) or 1} represented scope.",
-        f"- Enterprises: {len(twin.enterprises)} canonical business concepts.",
-        f"- Market Participants: {len(collections.get('market-participants', ())) } canonical participants.",
-        f"- Major Programmes: {sum(o.kind == 'transformation_programme' for o in selected)} canonical programme hypotheses.",
-        f"- Opportunities: {len(collections.get('opportunities', ())) } canonical opportunity hypotheses.",
-        f"- Reinvention Timing: {sum(bool(_reinvention_kind(o)) for o in selected)} canonical timing subjects.",
-        "", "## 4 Research Commission",
-        "Research every represented and applicable subject below. Mission settings change ordering only and never narrow this commission.",
-        "", "### Priority for this Commercial Mission"]
-    priority = _mission_prioritised(requirements, mission)
-    for i, requirement in enumerate(priority, 1):
-        lines += [f"{i}. **{requirement.subject}** — {', '.join(requirement.missing_fields)}.",
-                  *[f"   - Priority because {item.replace('<li>', '').replace('</li>', '')}" for item in _priority_explanation(mission).split('</li>') if item]]
-    if not priority:
-        lines += ["Neutral canonical ordering applies; no persisted mission priorities are available."]
-    section_map = (("industry-overview", "5 Industry Overview"), ("enterprises", "6 Enterprises"),
-        ("market-participants", "7 Market Participants"), ("major-programmes", "8 Major Programmes"),
-        ("opportunities", "9 Opportunities"), ("reinvention-timing", "10 Reinvention Timing"))
-    for key, heading in section_map:
-        lines += ["", f"## {heading}"]
-        rows = [r for r in requirements if r.aspect == key]
-        for r in rows:
-            impact, reason = _commercial_impact(key)
-            lines += [f"### {r.subject} — Research {r.subject}", "Find:", *[f"- {field}" for field in r.missing_fields],
-                "", "**Why this matters**", r.why, "", f"**Commercial Impact: {impact}**", f"Reason: {reason}",
-                f"Suitable sources: {', '.join(r.source_categories)}."]
-    claims = tuple(o for o in selected if o.statement and o.kind != "evidence")
-    evidence = tuple(o for o in selected if o.kind == "evidence")
-    lines += ["", "## 11 Evidence Requirements",
-        "Provide a stable source reference, publisher, publication date, retrieval date, claim linkage and relevant fact. Preserve unresolved facts as Unknowns and conflicting sourced claims as Contradictions.",
-        f"- Current claims without linked evidence: {sum(not o.evidence_refs for o in claims)}.",
-        f"- Current evidence records: {len(evidence)}.",
-        "", "## 12 Acceptance Criteria",
-        "The returned material must be attributable, dated, structured for the existing import contract, complete across every commissioned subject, and explicit about Unknowns and Contradictions."]
-    lines += [f"- **{r.subject}:** {r.acceptance_test}" for r in requirements]
-    lines += ["", "## Appendix — governed traceability",
-        "Architectural traceability is provided for optional inspection only and is not a researcher deliverable.",
-        "- Read-only translation adapter: owner-projection-v1."]
-    for r in requirements:
-        lines += [f"### {r.subject}", f"- Governed owner: {r.canonical_owner}",
-            f"- Evidence: {', '.join(r.existing_evidence) or 'none linked'}", f"- Acceptance criteria: {r.acceptance_test}",
-            f"- Canonical authority: {r.rule_version}", f"- Eligibility authority: {r.eligibility_authority}",
-            f"- Affected canonical IDs: {', '.join(r.canonical_ids) or 'collection absent'}"]
-    return "\n".join(lines) + "\n"
+def _exact(values) -> set[str]:
+    return {str(value).strip().casefold() for value in values if str(value).strip()}
 
-def _mission_prioritised(requirements, mission, employer_context=None):
+
+def _mission_reasons(requirement, twin: SemanticTwin, mission: CommercialMission,
+                     employer: EmployerContext | None) -> tuple[int, tuple[str, ...]]:
+    """Return precedence and inspectable reasons from explicit persisted relationships."""
+    objects = tuple(o for o in twin.objects if (o.original_id or o.record_id) in requirement.canonical_ids)
+    # The industry requirement intentionally aggregates every Twin object. Do
+    # not let one member's account, capability or timing leak onto the
+    # collection-level subject.
+    subject_objects = () if requirement.aspect == "industry-overview" else objects
+    identities = _exact((requirement.subject, *(o.subject for o in subject_objects),
+                         *(name for o in subject_objects for name in o.affected_organisations)))
+    priority = _exact((*mission.priority_accounts, *mission.named_accounts))
+    targets = _exact(mission.target_customers)
+    reasons: list[str] = []
+    rank = 99
+    named = identities & priority
+    target = identities & targets
+    if named:
+        reasons.append("named priority customer: " + next(v for v in (*mission.priority_accounts, *mission.named_accounts) if v.casefold() in named)); rank = 1
+    if target:
+        reasons.append("exact target account: " + next(v for v in mission.target_customers if v.casefold() in target)); rank = min(rank, 1)
+    linked = requirement.aspect in {"opportunities", "major-programmes"} and bool(named | target)
+    if linked:
+        reasons.append("explicitly linked " + requirement.aspect.rstrip("s").replace("major-programme", "programme") + " for the named account"); rank = min(rank, 2)
+    domains = _exact(d for o in objects for d in o.domains)
+    industry = domains & _exact(mission.industries)
+    if industry:
+        shown = next(v for v in mission.industries if v.casefold() in industry)
+        reasons.append("target industry: " + shown); rank = min(rank, 3)
+    if employer:
+        competitors = identities & _exact(employer.competitors)
+        partners = identities & _exact(employer.partners)
+        if competitors:
+            reasons.append("configured competitor identity match"); rank = min(rank, 4)
+        if partners:
+            reasons.append("configured partner identity match"); rank = min(rank, 4)
+        explicit = _exact(_field(o, "capability", "capabilities", "service", "services") for o in subject_objects)
+        capabilities = explicit & _exact((*employer.capabilities, *employer.offer_portfolio))
+        if capabilities:
+            reasons.append("explicit capability or service association: " + sorted(capabilities)[0]); rank = min(rank, 5)
+    horizon = mission.commercial_horizon or mission.opportunity_horizon
+    timings = tuple(_field(o, "procurement_start", "expected_procurement_start", "procurement_timing", "timing", "expected_horizon") for o in subject_objects)
+    if horizon and any(t and t.casefold() == horizon.casefold() for t in timings):
+        reasons.append("supported timing within configured horizon: " + horizon); rank = min(rank, 6)
+    if linked and mission.commercial_objective:
+        reasons.append("configured objective: " + mission.commercial_objective)
+    return rank, tuple(reasons)
+
+
+def _mission_emphasis(requirements, twin, mission, employer):
     if not mission:
         return ()
-    employer_terms = ((*employer_context.capabilities, *employer_context.offer_portfolio,
-                       *employer_context.propositions, *employer_context.competitors,
-                       *employer_context.partners) if employer_context else ())
-    terms = tuple(x.casefold() for x in (*mission.target_customers, *mission.priority_accounts, *mission.named_accounts,
-        *mission.industries, *mission.interests, *mission.objectives, mission.commercial_objective,
-        mission.commercial_horizon, mission.opportunity_horizon, *employer_terms) if x)
-    def rank(requirement):
-        text = f"{requirement.subject} {requirement.aspect} {' '.join(requirement.missing_fields)}".casefold()
-        match = sum(term in text for term in terms)
-        return match
-    return tuple(sorted(requirements, key=rank, reverse=True))
+    matched = []
+    for position, requirement in enumerate(requirements):
+        rank, reasons = _mission_reasons(requirement, twin, mission, employer)
+        if reasons:
+            matched.append((rank, -len(reasons), requirement.subject.casefold(), position, requirement, reasons))
+    return tuple((row[-2], row[-1]) for row in sorted(matched))
+
+
+def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMission | None,
+                       domain: str = "all", employer_context: EmployerContext | None = None) -> str:
+    """Generate the issue-ready commission; internal identifiers stay in appendices."""
+    requirements = research_requirements(twin, executive_assessments(twin))
+    collections = {c.key: c.objects for c in business_collections(twin, include_empty=True, domain=domain)}
+    selected = tuple(o for o in twin.objects if domain == "all" or domain.casefold() in {d.casefold() for d in o.domains})
+    lines = ["# Telecommunications, Media and Sport Industry Twin — Executive Research Commission", "",
+        "## 1. Executive Purpose",
+        "Commission complete, attributable Industry Twin research for executive understanding and commercial decisions. Commercial context changes ordering, emphasis and interpretation only; it never changes Twin scope, truth, evidence requirements, assessment or promotion eligibility.",
+        "", "## 2. Commercial Context", "### Commercial Mission"]
+    if mission:
+        customers = tuple(dict.fromkeys((*mission.priority_accounts, *mission.named_accounts)))
+        lines += [f"- Status: {mission.operational_status}", f"- Mission: {mission.mission_name or 'Optional name not supplied'}",
+            f"- Display label: {mission.display_name}", f"- Role: {mission.executive_role}",
+            f"- Geography: {'; '.join(mission.geography) or 'Not supplied'}", f"- Industries: {'; '.join(mission.industries) or 'Not supplied'}",
+            f"- Primary objective: {mission.commercial_objective}", f"- Additional objectives: {'; '.join(mission.objectives) or 'Not supplied'}",
+            f"- Horizon: {mission.commercial_horizon or mission.opportunity_horizon or 'Not supplied'}",
+            f"- Focus areas: {'; '.join(mission.interests) or 'Not supplied'}", f"- Priority customers: {'; '.join(customers) or 'Not supplied'}",
+            f"- Target accounts: {'; '.join(mission.target_customers) or 'Not supplied'}",
+            f"- Relevant business units: {'; '.join(mission.relevant_business_units) or 'Not supplied'}"]
+    else:
+        lines += ["- Status: Not configured", "- Mission: Optional name not supplied", "- Ordering: Neutral canonical ordering"]
+    lines += ["", "### Employer Context"]
+    if employer_context:
+        lines += [f"- Status: {employer_context.operational_status}", f"- Employer: {employer_context.organisation}",
+            f"- Capabilities: {'; '.join(employer_context.capabilities) or 'Not supplied'}",
+            f"- Offers: {'; '.join(employer_context.offer_portfolio) or 'Not supplied'}",
+            f"- Competitors: {'; '.join(employer_context.competitors) or 'Not supplied'}",
+            f"- Partners: {'; '.join(employer_context.partners) or 'Not supplied'}",
+            f"- Propositions: {'; '.join(employer_context.propositions) or 'Not supplied'}"]
+    else:
+        lines += ["- Status: Not configured"]
+    counts = {"enterprises": len(twin.enterprises), "market-participants": len(collections.get("market-participants", ())),
+              "major-programmes": sum(o.kind == "transformation_programme" for o in selected),
+              "opportunities": len(collections.get("opportunities", ())),
+              "reinvention-timing": sum(bool(_reinvention_kind(o)) for o in selected)}
+    lines += ["", "## 3. Twin Summary", "- 1 Industry Twin.", "- 11 required Industry Overview dimensions incomplete.",
+        f"- {counts['enterprises']} enterprise profiles require enrichment.", f"- {counts['market-participants']} market participants require enrichment.",
+        f"- {counts['major-programmes']} major-programme hypotheses require enrichment.", f"- {counts['opportunities']} opportunity hypotheses require enrichment.",
+        f"- {counts['reinvention-timing']} canonical Reinvention Timing subjects; owner assessments identify incomplete dimensions.",
+        "", "## 4. Complete Research Commission",
+        "Research the complete canonical population: the Industry Twin across every applicable overview dimension; every enterprise, market participant, major-programme hypothesis, opportunity hypothesis and applicable timing subject; every evidence deficiency; and all Unknowns and Contradictions. Mission settings remove nothing from this commission.",
+        "", "## 5. Mission Emphasis"]
+    emphasis = _mission_emphasis(requirements, twin, mission, employer_context)
+    if emphasis:
+        for requirement, reasons in emphasis:
+            lines += [f"### {requirement.subject}", "Priority because:", *[f"- {reason}" for reason in reasons]]
+    else:
+        lines += ["Mission-specific ordering is currently limited because no subject has a supported explicit match. Neutral complete-scope ordering is retained; improve configuration or research explicit relationships rather than inferring relevance."]
+    section_map = (("industry-overview", "6. Industry Overview"), ("enterprises", "7. Enterprises"),
+        ("market-participants", "8. Market Participants"), ("major-programmes", "9. Major Programmes"),
+        ("opportunities", "10. Opportunities"), ("reinvention-timing", "11. Reinvention Timing"))
+    for key, heading in section_map:
+        rows = [r for r in requirements if r.aspect == key]
+        impact, reason = _commercial_impact(key)
+        lines += ["", f"## {heading}", _count_statement(key, len(set(x for r in rows for x in r.canonical_ids)) or len(rows)),
+                  "", "**Why this matters**", _COLLECTION_LANGUAGE[key], "", f"**Executive dependency impact: {impact}**", f"Reason: {reason}"]
+        for r in rows:
+            lines += ["", f"### {r.subject}", "Research:", *[f"- {field}" for field in r.missing_fields], f"- Suitable sources: {', '.join(r.source_categories)}."]
+    claims = tuple(o for o in selected if o.statement and o.kind != "evidence")
+    evidence = tuple(o for o in selected if o.kind == "evidence")
+    lines += ["", "## 12. Evidence, Unknowns and Contradictions",
+        "For every material fact provide a stable source reference, publisher, publication date, retrieval date and claim linkage. Record unavailable facts as Unknowns with the evidence searched, reason unresolved and decision impact. Preserve conflicting sourced claims as Contradictions.",
+        f"- Current claims without linked evidence: {sum(not o.evidence_refs for o in claims)}.", f"- Current evidence records: {len(evidence)}.",
+        "", "## 13. Required Structured Deliverables",
+        "Return import-compatible industry, enterprise, participant, programme, opportunity, timing, Evidence, Unknown and Contradiction records. Do not replace structured fields with narrative-only findings.",
+        "", "## 14. Researcher Acceptance Criteria"]
+    for key, heading in section_map:
+        row = next((r for r in requirements if r.aspect == key), None)
+        if row: lines.append(f"- **{heading.split('. ', 1)[1]}:** {row.acceptance_test}")
+    lines += ["", "## 15. Remaining Known Limitations",
+        "User configuration gaps, including an optional mission name, offers or partners not supplied, are not external research gaps. Mission ordering remains limited wherever the Twin lacks explicit identity, relationship, capability or timing associations.",
+        "", "## Appendix A — Architectural Traceability",
+        "The named canonical owner supplies every applicable dimension and its acceptance or promotion effect. This read-only translation does not calculate a parallel assessment.",
+        "- Read-only translation adapter: owner-projection-v1."]
+    for r in requirements:
+        lines += [f"### {r.subject}", f"- Governed owner: {r.canonical_owner}", f"- Canonical authority: {r.rule_version}", f"- Eligibility authority: {r.eligibility_authority}"]
+        lines.append(f"- Acceptance criteria projection: {r.acceptance_test}")
+    lines += ["", "## Appendix B — Canonical Subject Register"]
+    for r in requirements:
+        lines.append(f"- {r.subject}: {', '.join(r.canonical_ids) or 'collection currently absent'}")
+    lines += ["", "## Appendix C — Applied Mission-Relevance Reasons"]
+    if emphasis:
+        for r, reasons in emphasis: lines.append(f"- {r.subject}: {'; '.join(reasons)}")
+    else:
+        lines.append("- No explicit subject match was applied; neutral ordering remains in force.")
+    return "\n".join(lines) + "\n"
+
+
+def _mission_prioritised(requirements, mission, employer_context=None):
+    """Compatibility helper: emphasis is a subset; complete scope lives separately."""
+    if not mission:
+        return ()
+    # Callers without a Twin cannot inspect relationships, so exact subject identity is the only safe match.
+    targets = _exact((*mission.priority_accounts, *mission.named_accounts, *mission.target_customers))
+    return tuple(r for r in requirements if r.subject.casefold() in targets)
 
 def _gap_block(name, current, missing, why, action, acceptance):
     return [f"### {name}", f"**Current position**  \n{current}", f"**What is missing**  \n{missing}", f"**Why it matters**  \n{why}", f"**Required research action**  \n{action}", f"**Acceptance test**  \n{acceptance}"]
@@ -882,7 +961,8 @@ def export_research_gap_brief(import_run_id: str, headers: Any, domain: str = "a
     identity = project_twin_identity(package)
     title = str(inspection.get("twin_title") or inspection.get("package_title") or identity.primary_subject_name or package.identity.package_id)
     safe = "".join(c if c.isalnum() or c in "-_" else "-" for c in (package.identity.package_id or title)).strip("-") or "Twin"
-    return research_gap_brief(twin, title, resolve_commercial_mission(headers), domain, resolve_employer_context(headers)), f"{safe}-Research-Gap-and-Enrichment-Brief.md", 200
+    context = resolve_commercial_context(headers)
+    return research_gap_brief(twin, title, context.commercial_mission, domain, context.employer_context), f"{safe}-Research-Gap-and-Enrichment-Brief.md", 200
 
 def _advanced_diagnostics(twin,run_id,summary,mission):
     return _primary_nav(run_id,"inspection")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
