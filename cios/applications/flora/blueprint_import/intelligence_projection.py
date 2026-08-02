@@ -9,7 +9,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Mapping
 
-from .semantic_twin import SemanticTwin
+from .semantic_twin import SemanticTwin, business_collections, executive_insight_eligible
 
 
 @dataclass(frozen=True)
@@ -70,12 +70,20 @@ def executive_assessments(twin: SemanticTwin) -> tuple[ExecutiveAssessmentProjec
 
 
 def _inventory(twin: SemanticTwin) -> dict[str, str]:
+    """Label canonical concepts separately from records and eligibility."""
+    collections = {c.key: c.objects for c in business_collections(twin, include_empty=True)}
     count = lambda *kinds: sum(o.kind in kinds for o in twin.objects)
+    owner = next((o for o in twin.objects if o.kind == "high_fidelity_completeness_assessment"), None)
+    assessed = (lambda rows: len(rows) if owner else 0)
+    participants = collections.get("market-participants", ())
+    opportunities = collections.get("opportunities", ())
+    programmes = tuple(o for o in twin.objects if o.kind == "transformation_programme")
+    eligible = lambda rows: sum(executive_insight_eligible(o) for o in rows)
     return {
-        "industry-overview": f"{count('industry_twin')} Industry Twin record(s) · {count('executive_intelligence', 'fact', 'observation', 'supported_interpreted_observation')} insight record(s)",
-        "enterprises": f"{len(twin.enterprises)} represented enterprise(s)",
-        "market-participants": f"{count('market_participant', 'market_participant_twin')} represented participant(s)",
-        "major-programmes": f"{count('transformation_programme')} programme hypothesis record(s)",
-        "opportunities": f"{count('opportunity_hypothesis', 'ranked_opportunity', 'opportunity_twin')} opportunity hypothesis record(s)",
-        "reinvention-timing": f"{count('ai_reinvention_assessment')} reinvention assessment record(s)",
+        "industry-overview": f"{count('industry_twin')} canonical Industry Twin concept(s) · {count('executive_intelligence', 'fact', 'observation', 'supported_interpreted_observation')} insight record(s) (underlying records)",
+        "enterprises": f"{len(twin.enterprises)} canonical enterprise(s) · {assessed(twin.enterprises)} owner-assessed enterprise(s)",
+        "market-participants": f"{len(participants)} canonical participant(s) · {assessed(participants)} owner-assessed participant(s) · {eligible(participants) if owner else 0} presentation-eligible participant(s)",
+        "major-programmes": f"{len(programmes)} canonical programme hypothesis/hypotheses · {assessed(programmes)} owner-assessed programme(s) · {eligible(programmes) if owner else 0} presentation-eligible programme(s)",
+        "opportunities": f"{len(opportunities)} canonical opportunity hypothesis/hypotheses · {assessed(opportunities)} owner-assessed hypothesis/hypotheses · {eligible(opportunities) if owner else 0} recommendation-eligible opportunity/opportunities",
+        "reinvention-timing": f"{count('ai_reinvention_assessment')} canonical reinvention assessment record(s)",
     }
