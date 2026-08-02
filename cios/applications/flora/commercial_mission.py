@@ -15,6 +15,20 @@ from typing import Any
 from cios.applications.flora.access import commercial_context_actor
 from cios.applications.flora.storage import atomic_write_json, data_path
 
+
+def _normalised_list(value: Any) -> tuple[str, ...]:
+    """Normalise form and stored lists without changing their display spelling."""
+    source = value if isinstance(value, (list, tuple, set)) else str(value or "").split(",")
+    result: list[str] = []
+    seen: set[str] = set()
+    for raw in source:
+        item = str(raw).strip()
+        key = item.casefold()
+        if item and key not in seen:
+            result.append(item)
+            seen.add(key)
+    return tuple(result)
+
 def _mission_path() -> Path:
     """Return the canonical profile path on Flora's configured persistent disk."""
     override = os.getenv("FLORA_COMMERCIAL_MISSIONS_FILE")
@@ -62,6 +76,16 @@ class CommercialMission:
     context_id: str = ""
     version: int = 1
 
+    @property
+    def operational_status(self) -> str:
+        required = (self.executive_role, self.commercial_objective, self.geography, self.commercial_horizon)
+        return "Configured" if all(required) else "Partially configured" if any(required) else "Not configured"
+
+    @property
+    def display_name(self) -> str:
+        return self.mission_name or " · ".join(x for x in (
+            self.executive_role, ", ".join(self.geography), self.commercial_horizon) if x)
+
     def employer_context(self) -> "EmployerContext":
         """Project employer data as a separate authority (never Twin intelligence)."""
         return EmployerContext(
@@ -77,7 +101,7 @@ class CommercialMission:
     @classmethod
     def from_dict(cls, user_id: str, value: dict[str, Any]) -> "CommercialMission":
         scalar = {k: str(value.get(k) or "") for k in ("executive_role", "employer", "commercial_objective")}
-        lists = {k: tuple(str(v) for v in value.get(k, ()) if str(v).strip()) for k in
+        lists = {k: _normalised_list(value.get(k, ())) for k in
                  ("industries", "enterprises", "offer_portfolio", "competitors", "partners", "geography",
                   "interests", "named_accounts", "campaigns", "target_customers", "priority_accounts",
                   "excluded_accounts", "relevant_business_units", "objectives", "strategic_propositions",
@@ -160,11 +184,17 @@ class EmployerContext:
         # guided save journey; capabilities, offers and relationships are optional.
         return bool(self.organisation)
 
+    @property
+    def operational_status(self) -> str:
+        return "Configured" if self.organisation else "Partially configured" if any((
+            self.description, self.offer_portfolio, self.capabilities, self.propositions,
+            self.partners, self.competitors)) else "Not configured"
+
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "EmployerContext":
         list_fields = ("offer_portfolio", "capabilities", "propositions", "partners", "competitors",
                        "credentials", "constraints", "target_sectors", "excluded_offerings")
-        data = {name: tuple(str(item) for item in value.get(name, ()) if str(item).strip()) for name in list_fields}
+        data = {name: _normalised_list(value.get(name, ())) for name in list_fields}
         data.update(organisation=str(value.get("organisation") or ""), description=str(value.get("description") or ""),
                     authority_status=str(value.get("authority_status") or "human-supplied"))
         statuses = value.get("field_statuses") if isinstance(value.get("field_statuses"), dict) else {}
@@ -214,6 +244,18 @@ def save_employer_context(headers: Any, value: dict[str, Any]) -> EmployerContex
                              context_id=context.context_id or f"employer-context:{user_id}", version=context.version)
     atomic_write_json(path, profiles)
     return EmployerContext.from_dict(profiles[user_id])
+
+
+@dataclass(frozen=True)
+class ResolvedCommercialContext:
+    """The single read contract consumed by all commercial-context projections."""
+    commercial_mission: CommercialMission | None
+    employer_context: EmployerContext | None
+
+
+def resolve_commercial_context(headers: Any) -> ResolvedCommercialContext:
+    """Resolve both existing authorities without creating another persisted model."""
+    return ResolvedCommercialContext(resolve_commercial_mission(headers), resolve_employer_context(headers))
 
 
 def save_commercial_context(headers: Any, mission_value: dict[str, Any],

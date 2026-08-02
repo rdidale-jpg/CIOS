@@ -30,31 +30,26 @@ def _mission():
 def test_collection_gaps_use_canonical_collection_counts_and_progressive_traceability():
     twin = _twin()
     html = _research_gaps(twin, "run-1", _mission())
-    assert "1 enterprises subject requires enrichment" in html
-    assert "3 market participants subjects require enrichment" in html
-    assert "2 major programmes subjects require enrichment" in html
-    assert "4 opportunities subjects require enrichment" in html
+    assert "1 enterprise profiles require enrichment" in html
+    assert "3 market participants require enrichment" in html
+    assert "2 major-programme hypotheses require enrichment" in html
+    assert "4 opportunity hypotheses require enrichment" in html
     assert "Inspect all 1 affected subjects" in html
-    assert "Why this matters" in html and "Commercial Impact" in html
-    assert "selected objective: Pre-procurement opportunities" in html
-    assert "selected customer: BBC" in html
+    assert "Why this matters" in html and "Executive dependency impact" in html
     assert "<details><summary>Architectural traceability</summary>" in html
     assert all(aspect.bars is None for aspect in twin_readiness(twin))
-
 
 def test_issue_ready_brief_has_fixed_business_structure_complete_scope_and_appendix():
     employer = EmployerContext.from_dict({"organisation": "Example Supplier", "capabilities": ["AI"],
         "offer_portfolio": ["Transformation"], "competitors": ["Rival"], "partners": ["Partner"]})
     brief = research_gap_brief(_twin(), "Media", _mission(), employer_context=employer)
-    headings = ["## 1 Executive Purpose", "## 2 Commercial Context", "## 3 Twin Summary",
-        "## 4 Research Commission", "## 5 Industry Overview", "## 6 Enterprises",
-        "## 7 Market Participants", "## 8 Major Programmes", "## 9 Opportunities",
-        "## 10 Reinvention Timing", "## 11 Evidence Requirements", "## 12 Acceptance Criteria",
-        "## Appendix — governed traceability"]
+    headings = [f"## {i}. {name}" for i, name in enumerate(("Executive Purpose", "Commercial Context", "Twin Summary",
+        "Complete Research Commission", "Mission Emphasis", "Industry Overview", "Enterprises", "Market Participants",
+        "Major Programmes", "Opportunities", "Reinvention Timing", "Evidence, Unknowns and Contradictions",
+        "Required Structured Deliverables", "Researcher Acceptance Criteria", "Remaining Known Limitations"), 1)]
     assert [brief.index(heading) for heading in headings] == sorted(brief.index(heading) for heading in headings)
     assert "Mission: Optional name not supplied" in brief and "- Status: Configured" in brief
     assert "- Employer: Example Supplier" in brief and "- Capabilities: AI" in brief
-    assert "Research every represented and applicable subject" in brief
-    assert "### BBC — Research BBC" in brief and "Find:" in brief
-    assert "Commercial Impact: High" in brief
-    assert "Architectural traceability" not in brief.split("## Appendix", 1)[0]
+    assert "Mission settings remove nothing" in brief and "### BBC" in brief
+    assert "Executive dependency impact: High" in brief
+    assert "canonical owner" not in brief.split("## Appendix A", 1)[0].casefold()

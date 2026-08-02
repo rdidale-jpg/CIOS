@@ -72,6 +72,15 @@ _ALIASES = {
     "timing horizon": ("expected_horizon", "timing", "horizon"), "observed adoption signal": ("adoption_signal", "adoption_indicators"),
 }
 
+_BUSINESS_ACCEPTANCE = {
+    "industry-overview": "The Industry Twin contains sourced coverage of scope, subsectors, value chain, market structure, size, economics, major enterprises and participants, PESTLE pressures and transformation mechanisms, with explicit Unknowns where evidence remains unavailable.",
+    "enterprises": "All enterprise profiles contain sourced descriptions, purpose and strategy, business units, operating model, financial context, technology, ecosystem, risks, pressures and change portfolio—or explicit Unknowns recording evidence searched, reason unresolved and decision impact.",
+    "market-participants": "All participants have supported identity, role, domain, relevant relationships, market significance, capabilities, constraints and evidence—or explicit Unknowns.",
+    "major-programmes": "All programme hypotheses identify owner, business unit, objective, phase, timing, milestones, dependencies, procurement relevance and evidence—or explicit Unknowns.",
+    "opportunities": "All opportunity hypotheses identify customer, business unit, problem, buyer, value or explicit value unknown, timing, procurement stage, trigger, competition, partner context and evidence—or explicit Unknowns.",
+    "reinvention-timing": "Every applicable domain and material enterprise has evidence-backed transformation pressure, affected functions, adoption signals, timing horizon, response mechanism and uncertainty.",
+}
+
 
 def research_requirements(twin: SemanticTwin, projections: tuple[ExecutiveAssessmentProjection, ...]) -> tuple[ResearchRequirement, ...]:
     """Translate owner deficiencies and current content; never assess a pass."""
@@ -94,7 +103,7 @@ def research_requirements(twin: SemanticTwin, projections: tuple[ExecutiveAssess
                 key, subject, ids, requested,
                 f"These facts are needed to understand and safely use {subject} in {projection.label.lower()} decisions.",
                 sources, f"Return import-compatible {projection.label.lower()} and evidence records with explicit Unknowns and Contradictions.",
-                f"On re-import, {version} evaluates the returned structured fields and linked dated evidence; no pass is inferred by this adapter.",
+                _BUSINESS_ACCEPTANCE[key],
                 projection.canonical_owner, dimension, version, evidence, projection.eligibility_authority))
     return tuple(requirements)
 
