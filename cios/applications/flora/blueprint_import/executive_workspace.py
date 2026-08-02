@@ -247,7 +247,7 @@ def _mission_indicator(mission: CommercialMission | None, employer: EmployerCont
     status = "Configured" if mission.mission_name and mission.executive_role and mission.commercial_objective and mission.industries and (mission.priority_accounts or mission.target_customers) else "Partially configured"
     name = mission.mission_name or "Unnamed mission"
     employer_state = "Configured" if employer and employer.complete else "Partially configured" if employer else "Not configured"
-    return f"<aside class='mission-indicator' role='status'><strong>PILOT · Commercial Mission: {escape(name)}</strong> · {status} · Employer Context: {employer_state} · <a href='{target}'>Select or edit</a></aside>"
+    return f"<aside class='mission-indicator' role='status'><strong>PILOT · Commercial Mission: {escape(name)}</strong> · {status} · Employer Context: {employer_state} · Commercial context saved. · <a href='{target}'>Select or edit</a></aside>"
 
 
 def _bars(a: ReadinessAspect, run_id: str) -> str:
@@ -453,26 +453,53 @@ def _mission_editor(m: CommercialMission | None, employer: EmployerContext | Non
     def value(name):
         raw = getattr(m, name) if m else ""
         return escape(", ".join(raw) if isinstance(raw, tuple) else raw)
-    def fields(spec):
-        return "".join(f"<label>{label} <span class='pill'>{'human-supplied' if value(name) else 'unresolved'}</span><input name='{name}' value='{value(name)}'></label>" for name, label in spec)
-    mission_fields = fields((("mission_name", "Mission name"), ("executive_role", "Executive role"), ("commercial_objective", "Primary objective"),
-        ("industries", "Target industries"), ("geography", "Geography"), ("interests", "Focus areas"),
-        ("target_customers", "Target accounts"), ("priority_accounts", "Priority accounts"), ("excluded_accounts", "Excluded accounts"),
-        ("relevant_business_units", "Relevant business units"), ("account_focus", "Existing-account or new-logo focus"),
-        ("commercial_horizon", "Commercial horizon"), ("objectives", "Commercial objectives")))
-    employer_specs = (("organisation", "Employer organisation"), ("description", "Employer description"),
-        ("offer_portfolio", "Offers"), ("capabilities", "Capabilities"), ("propositions", "Propositions"),
-        ("competitors", "Competitors"), ("partners", "Strategic partners"), ("target_sectors", "Target sectors"),
-        ("credentials", "Reference credentials"), ("constraints", "Delivery constraints"),
-        ("excluded_offerings", "Excluded or unsupported offerings"))
-    employer_fields = []
-    for name, label in employer_specs:
+    def employer_value(name):
         raw = getattr(employer, name) if employer else ""
-        shown = ", ".join(raw) if isinstance(raw, tuple) else raw
-        status = employer.field_statuses.get(name, "unresolved") if employer else "unresolved"
-        employer_fields.append(f"<label>{label} <span class='pill'>{escape(status)}</span><input name='employer_{name}' value='{escape(shown)}'></label>")
+        return escape(", ".join(raw) if isinstance(raw, tuple) else raw)
+    def choices(name, legend, options, selected):
+        selected_folded = {item.casefold() for item in selected}
+        controls = "".join(
+            f"<label class='choice'><input type='checkbox' name='{name}' value='{escape(option)}'"
+            f"{' checked' if option.casefold() in selected_folded else ''}> <span>{escape(option)}</span></label>"
+            for option in options)
+        # Previously saved free-form values remain editable and are never discarded.
+        extras = [item for item in selected if item.casefold() not in {option.casefold() for option in options}]
+        controls += "".join(f"<label class='choice'><input type='checkbox' name='{name}' value='{escape(item)}' checked> <span>{escape(item)}</span></label>" for item in extras)
+        return f"<fieldset class='choice-group'><legend>{legend}</legend><div class='choice-grid'>{controls}</div></fieldset>"
+
+    objectives = ("Client transformation problems", "Pre-procurement opportunities", "Active procurements",
+                  "AI-led reinvention", "Major transformation programmes", "Competitor activity", "Partner opportunities")
+    focus_areas = ("Consulting", "Digital transformation", "Outsourcing", "AI", "Cloud", "Data", "Managed services")
+    selected_objectives = tuple(m.objectives) if m else ()
+    selected_focus = tuple(m.interests) if m else ()
+    primary = m.commercial_objective if m else ""
+    objective_options = "<option value=''>Select what matters most</option>" + "".join(
+        f"<option value='{escape(option)}'{' selected' if option == primary else ''}>{escape(option)}</option>" for option in objectives)
+    if primary and primary not in objectives:
+        objective_options += f"<option value='{escape(primary)}' selected>{escape(primary)}</option>"
+
+    advanced_names = ("description", "propositions", "target_sectors", "credentials", "constraints", "excluded_offerings")
+    advanced_open = bool(employer and any(getattr(employer, name) for name in advanced_names))
+    advanced = "".join(
+        f"<label>{label}<span class='optional'>Optional</span><input name='employer_{name}' value='{employer_value(name)}'></label>"
+        for name, label in (("description", "Employer description"), ("propositions", "Propositions"),
+            ("target_sectors", "Target sectors"), ("credentials", "Reference credentials"),
+            ("constraints", "Delivery constraints"), ("excluded_offerings", "Excluded or unsupported offerings")))
+
+    any_context = bool(m or employer)
+    mission_ready = bool(m and m.executive_role and m.commercial_objective and m.geography and m.commercial_horizon)
+    status = "Configured" if mission_ready and employer and employer.complete else "Partially configured" if any_context else "Not configured"
     back = f"/blueprint-import/{escape(run_id)}?domain={escape(domain)}"
-    return f"<nav class='executive-path'><a href='{back}'>Back to Twin Map</a><strong>Commercial Mission</strong><strong>Employer Context</strong></nav><section class='card'><h1>Configure Commercial Mission</h1><p>Commercial Mission and Employer Context are independent user-scoped operational profiles. They never alter the imported Twin. Supplied employer fields are labelled as human-supplied, not market evidence.</p><form method='post' action='/blueprint-import/{escape(run_id)}/mission'><input type='hidden' name='return_domain' value='{escape(domain)}'><fieldset><legend>Commercial Mission</legend>{mission_fields}<button class='button' name='save_scope' value='mission'>Save Commercial Mission</button></fieldset><fieldset><legend>Employer Context</legend>{''.join(employer_fields)}<button class='button' name='save_scope' value='employer'>Save Employer Context</button></fieldset><button class='button primary' name='save_scope' value='both'>Save</button> <a class='button' href='{back}'>Cancel</a></form></section>"
+    return f"""<style>
+.guided-setup{{max-width:900px;margin-inline:auto}}.setup-status{{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:1rem;border-left:4px solid #185c4d;background:#eef5f2}}.setup-section{{margin:1rem 0;padding:1.25rem;border:1px solid #cad8d3;border-radius:.7rem}}.setup-section>h2{{margin-top:0}}.setup-section label:not(.choice){{display:block;font-weight:700;margin:.9rem 0}}.setup-section input[type=text],.setup-section input:not([type]),.setup-section select{{box-sizing:border-box;display:block;width:100%;margin-top:.35rem;padding:.7rem;border:1px solid #718078;border-radius:.35rem;background:white}}.field-help{{display:block;font-weight:400;color:#46534d;margin-top:.25rem}}.optional{{font-size:.8rem;font-weight:400;margin-left:.45rem}}.choice-group{{border:0;padding:0;margin:1rem 0}}.choice-group legend{{font-weight:700;margin-bottom:.5rem}}.choice-grid{{display:flex;flex-wrap:wrap;gap:.55rem}}.choice{{display:flex;align-items:center;gap:.35rem;padding:.55rem .7rem;border:1px solid #879a91;border-radius:1.25rem;background:#fff}}.flora-use{{padding:1rem;border-radius:.7rem;background:#f3f7f5}}.form-actions{{display:flex;gap:.7rem;align-items:center;margin-top:1.2rem}}details.setup-section summary{{cursor:pointer;font-weight:700}}@media(max-width:600px){{.guided-setup{{padding:0 .25rem}}.setup-status{{align-items:flex-start;flex-direction:column}}.form-actions{{align-items:stretch;flex-direction:column}}.form-actions .button{{text-align:center}}}}
+</style><nav class='executive-path'><a href='{back}'>Back to Twin Map</a><strong>Commercial context</strong></nav><main class='guided-setup'><header><h1>Set up my commercial context</h1><p>Tell Flora what matters to you. Required fields are marked; everything else can be added later. Your Commercial Mission and Employer Context remain separate settings.</p></header><aside class='setup-status' role='status' aria-label='Commercial context status'><strong>Commercial context</strong><span>{status}</span></aside>
+<section class='flora-use' aria-labelledby='flora-use-title'><h2 id='flora-use-title'>How Flora will use this</h2><p>Flora will use these settings to prioritise relevant enterprises, opportunities, programmes, competitors, partners and research gaps.</p><p>These settings influence relevance and ordering. They do not change the Twin, its evidence or its confidence.</p></section>
+<form method='post' action='/blueprint-import/{escape(run_id)}/mission'><input type='hidden' name='return_domain' value='{escape(domain)}'><input type='hidden' name='save_scope' value='both'><input type='hidden' name='target_customers' value='{value('target_customers')}'><input type='hidden' name='excluded_accounts' value='{value('excluded_accounts')}'><input type='hidden' name='relevant_business_units' value='{value('relevant_business_units')}'><input type='hidden' name='account_focus' value='{value('account_focus')}'>
+<section class='setup-section' aria-labelledby='about-me'><h2 id='about-me'>1. About me</h2><p>This gives Flora the essentials it needs to tailor your experience.</p><label>My role <span aria-label='required'>*</span><input name='executive_role' value='{value('executive_role')}' placeholder='Sales Director' required><small class='field-help'>Example: Sales Director</small></label><label>I work for <span aria-label='required'>*</span><input name='employer_organisation' value='{employer_value('organisation')}' placeholder='Your organisation' required><small class='field-help'>Enter your employer; Flora will not infer services or relationships from its name.</small></label><label>My geography <span aria-label='required'>*</span><input name='geography' value='{value('geography')}' placeholder='United Kingdom' required><small class='field-help'>The markets or regions you cover.</small></label><label>My commercial horizon <span aria-label='required'>*</span><select name='commercial_horizon' required><option value=''>Not selected</option>{''.join(f"<option value='{escape(option)}'{' selected' if option == (m.commercial_horizon if m else '') else ''}>{escape(option)}</option>" for option in ('Next 12 months', '12–24 months', 'Strategic'))}{f"<option value='{value('commercial_horizon')}' selected>{value('commercial_horizon')}</option>" if m and m.commercial_horizon and m.commercial_horizon not in ('Next 12 months', '12–24 months', 'Strategic') else ''}</select><small class='field-help'>Example: Next 12 months, 12–24 months, strategic</small></label></section>
+<section class='setup-section' aria-labelledby='help-find'><h2 id='help-find'>2. What I want Flora to help me find</h2><label>My main objective <span aria-label='required'>*</span><select name='commercial_objective' required>{objective_options}</select><small class='field-help'>Choose the outcome Flora should prioritise first.</small></label>{choices('objectives', 'Other commercial objectives (optional)', objectives, selected_objectives)}{choices('interests', 'Focus areas (optional)', focus_areas, selected_focus)}</section>
+<section class='setup-section' aria-labelledby='my-context'><h2 id='my-context'>3. My commercial context</h2><p>Optional details make matching more precise; blank fields will not block saving.</p><label>Mission name <span class='optional'>Optional</span><input name='mission_name' value='{value('mission_name')}' placeholder='A short name for this context'></label><label>Industries <span class='optional'>Optional</span><input name='industries' value='{value('industries')}' placeholder='Media, telecommunications'><small class='field-help'>Add the industries you want Flora to prioritise.</small></label><label>Priority customers <span class='optional'>Optional</span><input name='priority_accounts' value='{value('priority_accounts')}' placeholder='BT Group, BBC, ITV'><small class='field-help'>Optional — add named accounts where useful. Example: BT Group, BBC, ITV</small></label><label>Relevant capabilities or services <span class='optional'>Optional</span><input name='employer_capabilities' value='{employer_value('capabilities')}' placeholder='Digital transformation, cloud, data, AI, managed services'><small class='field-help'>Optional — add the services or capability areas you want Flora to match.</small></label><label>Competitors <span class='optional'>Optional</span><input name='employer_competitors' value='{employer_value('competitors')}' placeholder='Accenture, Capgemini, IBM'><small class='field-help'>Optional — add organisations you want Flora to monitor.</small></label><label>Partners <span class='optional'>Optional</span><input name='employer_partners' value='{employer_value('partners')}' placeholder='Named strategic partners'><small class='field-help'>Optional — add organisations you work with.</small></label><input type='hidden' name='employer_offer_portfolio' value='{employer_value('offer_portfolio')}'></section>
+<details class='setup-section'{' open' if advanced_open else ''}><summary>More employer settings</summary><p>Optional information for more precise employer alignment. It remains separate from Twin evidence.</p>{advanced}</details>
+<div class='form-actions'><button class='button primary' type='submit'>Save and return to Twin Map</button><a class='button' href='{back}'>Cancel</a></div></form></main>"""
 
 
 def update_commercial_mission(import_run_id: str, headers: Any, form: dict[str, list[str]]) -> tuple[str, int]:
@@ -483,10 +510,14 @@ def update_commercial_mission(import_run_id: str, headers: Any, form: dict[str, 
     decision = commercial_context_authorisation(headers, COMMERCIAL_CONTEXT_EDIT, context_scope)
     if decision.decision != "allowed":
         return _commercial_access_denied(decision, headers), 403
-    values = {key: (items[0] if items else "") for key, items in form.items()}
+    # Checkbox groups submit repeated keys; retain every selection while keeping
+    # the established comma-separated contract compatible with older clients.
+    values = {key: (items if len(items) > 1 else (items[0] if items else "")) for key, items in form.items()}
     for key in ("industries", "geography", "named_accounts", "campaigns", "interests", "target_customers",
                 "priority_accounts", "excluded_accounts", "relevant_business_units", "objectives"):
-        values[key] = [item.strip() for item in str(values.get(key, "")).split(",") if item.strip()]
+        raw_items = values.get(key, "")
+        source = raw_items if isinstance(raw_items, list) else str(raw_items).split(",")
+        values[key] = [item.strip() for item in source if item.strip()]
     values.update(authority_status="human-supplied operational context", supplied_by="authenticated user profile edit")
     scope = values.get("save_scope") or "both"
     try:
