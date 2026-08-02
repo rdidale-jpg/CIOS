@@ -36,7 +36,8 @@ def test_brief_is_actionable_human_readable_and_keeps_ids_in_appendix():
     assert "**What is missing**" in primary and "**Required research action**" in primary and "**Acceptance test**" in primary
     assert "### PRG-1" not in primary and "### OPP-1" not in primary
     assert "PRG-1" in appendix and "OPP-1" in appendix
-    assert "executive-readiness-v3" in brief
+    assert "owner-projection-v1" in brief
+    assert "Canonical owner" in brief and "Acceptance criteria" in brief
 
 from cios.applications.flora.commercial_mission import EmployerContext
 

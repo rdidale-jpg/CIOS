@@ -20,11 +20,11 @@ def _twin():
 
 def test_canonical_counts_are_not_inflated_and_readiness_is_honest():
     aspects = {a.key: a for a in twin_readiness(_twin())}
-    assert aspects["opportunities"].present[0] == "9 canonical opportunity hypotheses · 0 sales-ready opportunities"
-    assert aspects["market-participants"].present[0] == "10 participants identified · 0 sufficiently classified"
-    assert aspects["market-participants"].state == "Insufficient"
-    assert aspects["major-programmes"].present[0] == "9 programme hypotheses identified · 0 executive-ready programmes"
-    assert aspects["reinvention-timing"].state == "Absent"
+    assert aspects["opportunities"].present[0] == "9 opportunity hypothesis record(s)"
+    assert aspects["market-participants"].present[0] == "10 represented participant(s)"
+    assert aspects["market-participants"].state == "legacy_unassessed"
+    assert aspects["major-programmes"].present[0] == "9 programme hypothesis record(s)"
+    assert aspects["reinvention-timing"].state == "legacy_unassessed"
     assert aspects["reinvention-timing"].missing
 
 

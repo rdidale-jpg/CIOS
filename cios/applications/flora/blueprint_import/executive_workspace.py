@@ -18,6 +18,7 @@ from cios.applications.flora.commercial_mission import (CommercialMission, Emplo
 from cios.applications.flora.workspace.views import _page
 from .registry import BlueprintPackageRegistry
 from .industry_delta_adapter import IndustryTwinDeltaAdapter
+from .intelligence_projection import executive_assessments
 from .semantic_twin import (SemanticEnterprise, SemanticObject, SemanticTwin, assemble_semantic_twin,
                             business_collections, executive_insight_eligible)
 from .twin_governance import project_twin_identity
@@ -49,7 +50,12 @@ class ReadinessAspect:
     affected: tuple[str, ...]
     next_requirement: str
     researcher_action: str
-    rule_version: str = "executive-readiness-v1"
+    rule_version: str = "owner-projection-v1"
+    canonical_owner: str = ""
+    evidence_source: str = ""
+    completeness_authority: str = ""
+    eligibility_authority: str = ""
+    acceptance_criteria: str = ""
 
     @property
     def bars(self) -> int | None:
@@ -100,50 +106,13 @@ def _mission_relevance(o: SemanticObject, mission: CommercialMission) -> tuple[b
 
 
 def twin_readiness(twin: SemanticTwin, mission: CommercialMission | None = None) -> tuple[ReadinessAspect, ...]:
-    """Canonical six-aspect readiness result used by every presentation."""
-    objects = twin.objects
-    collections = {c.key: list(c.objects) for c in business_collections(twin, include_empty=True)}
-    def ids(rows): return tuple(dict.fromkeys(o.original_id or o.record_id for o in rows))
-    def result(key, name, rows, useful, state, count, explanation, missing, action):
-        return ReadinessAspect(key, name, state, (count, explanation), tuple(missing), ids(rows),
-                               "" if state == "Executive-ready" else action, action, "executive-readiness-v3")
-    insights = collections.get("insights", [])
-    enterprise_rows = collections.get("enterprises", [])
-    participants = collections.get("market-participants", [])
-    programmes = collections.get("transformation-programmes", [])
-    opportunities = collections.get("opportunities", [])
-    ready_opps = [o for o in opportunities if _opportunity_contract(o, mission)[1]]
-    ready_enterprises = [o for o in enterprise_rows if _field(o, "description", "overview", "organisation_description") and o.domains and (_field(o, "current_position", "strategic_ambition", "market_position"))]
-    classified = [o for o in participants if _field(o, "role", "participant_role", "market_role") and o.domains and o.evidence_refs and (o.consequence or _field(o, "why_it_matters"))]
-    ready_programmes = [o for o in programmes if o.statement and (_field(o,"owner") or o.subject != "Twin scope") and o.consequence and _field(o,"phase","stage") and _field(o,"timing","expected_horizon") and o.evidence_refs]
-    timing = [o for o in objects if _field(o, "reinvention_timing") or (_field(o, "expected_horizon") and _field(o, "tipping_point") and _field(o, "adoption_indicators") and o.evidence_refs)]
-    overview_state = "Usable" if insights else "Absent"
-    return (
-      result("industry-overview", "Industry Overview", insights, insights, overview_state,
-             f"{len(insights)} qualified insights", "Flora can partly explain evidenced change, but industry definition, composition, size, economics and a complete PESTLE outlook remain incomplete.",
-             () if overview_state == "Executive-ready" else ("Industry definition and scope", "Composition and sub-sectors", "Industry size and economics", "Complete political, economic, social, technological, legal and environmental analysis"),
-             "Research industry scope, sub-sector composition, size, economics, competitive structure and dated PESTLE evidence."),
-      result("enterprises", "Enterprises", enterprise_rows, ready_enterprises, "Executive-ready" if enterprise_rows and len(ready_enterprises)==len(enterprise_rows) else "Insufficient" if enterprise_rows else "Absent",
-             f"{len(enterprise_rows)} canonical enterprises · {len(ready_enterprises)} executive-ready enterprises", "Flora can identify the enterprises, but most profiles do not yet explain strategic position, material pressure and transformation posture.",
-             () if enterprise_rows and len(ready_enterprises)==len(enterprise_rows) else ("Plain-language description, strategic position, material pressure and transformation posture",),
-             "Research each enterprise's description, organisational form, activities, market role, strategic ambition, material pressure and transformation posture."),
-      result("market-participants", "Market Participants", participants, classified, "Executive-ready" if participants and len(classified)==len(participants) else "Insufficient" if participants else "Absent",
-             f"{len(participants)} participants identified · {len(classified)} sufficiently classified", "Flora can identify market participants, but supported roles and why each participant matters are incomplete.",
-             () if participants and len(classified)==len(participants) else ("Supported role, domain and market significance for each participant",),
-             "Research each participant's legitimate name, evidenced role, domain and reason it matters to the market."),
-      result("major-programmes", "Major Programmes", programmes, ready_programmes, "Executive-ready" if programmes and len(ready_programmes)==len(programmes) else "Insufficient" if programmes else "Absent",
-             f"{len(programmes)} programme hypotheses identified · {len(ready_programmes)} executive-ready programmes", "Flora can identify programme hypotheses, but ownership, objective, phase, timing or evidence is incomplete.",
-             () if programmes and len(ready_programmes)==len(programmes) else ("Programme title, owner, business objective, phase, timing and evidence",),
-             "Research each programme's meaningful title, owner, business objective, current phase, timing and supporting evidence."),
-      result("opportunities", "Opportunities", opportunities, ready_opps, "Executive-ready" if opportunities and len(ready_opps)==len(opportunities) else "Insufficient" if opportunities else "Absent",
-             f"{len(opportunities)} canonical opportunity hypotheses · {len(ready_opps)} sales-ready opportunities", "Flora can identify opportunity hypotheses, but they cannot support sales action until customer, problem, buyer, value, timing, status and evidence are resolved.",
-             () if opportunities and len(ready_opps)==len(opportunities) else ("Customer, client problem, business unit, buyer, value, timing, status and evidence",),
-             "Research customer, client problem, business unit, buyer, value, timing, status and supporting evidence."),
-      result("reinvention-timing", "Reinvention Timing", timing, timing, "Executive-ready" if timing else "Absent",
-             f"{len(timing)} supported assessments", "This Twin contains no structured assessment of AI-native disruption, exposure, adoption indicators, expected horizon or response timing." if not timing else "Flora can explain supported disruption exposure and response timing.",
-             () if timing else ("AI-native disruption mechanism", "Enterprise or business-unit exposure", "Adoption indicators", "Expected horizon", "Response timing"),
-             "Research the disruption mechanism, affected enterprise or business unit, adoption indicators, expected horizon, response timing and supporting evidence."),
-    )
+    """Compatibility facade over owner-supplied assessments (mission never alters completeness)."""
+    return tuple(ReadinessAspect(
+        a.key, a.label, a.state, (a.inventory_summary, f"Completeness is owned by {a.completeness_authority}."),
+        a.deficiencies, (), a.acceptance_criteria, a.required_evidence, "owner-projection-v1",
+        a.canonical_owner, a.evidence_source, a.completeness_authority, a.eligibility_authority,
+        a.acceptance_criteria,
+    ) for a in executive_assessments(twin))
 
 
 def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "workspace",
@@ -252,14 +221,14 @@ def _mission_indicator(mission: CommercialMission | None, employer: EmployerCont
 
 def _bars(a: ReadinessAspect, run_id: str) -> str:
     if a.bars is None:
-        return f"<span class='readiness-label'>Not applicable</span>"
+        return f"<a class='readiness' href='/blueprint-import/{escape(run_id)}/health#{escape(a.key)}'><span>{escape(a.state)}</span></a>"
     bars = "".join(f"<i class='{'filled' if i <= a.bars else ''}' aria-hidden='true'></i>" for i in range(1, 5))
     return f"<a class='readiness' href='/blueprint-import/{escape(run_id)}/health#{escape(a.key)}' aria-label='{escape(a.name)}: {escape(a.state)}, {a.bars} of 4 bars'>{bars}<span>{escape(a.state)}</span></a>"
 
 
 def _readiness_review(twin: SemanticTwin, run_id: str, mission: CommercialMission | None) -> str:
     rows = "".join(f"<article><h3>{escape(a.name)}</h3>{_bars(a, run_id)}</article>" for a in twin_readiness(twin, mission))
-    return f"<section class='card' id='twin-readiness'><h2>Twin Readiness</h2><p>Deterministic fitness for executive interpretation; not a truth or quality score.</p><div class='readiness-grid'>{rows}</div><p><a class='button primary' href='#opportunities'>Open Executive Experience</a> <a class='button' href='/blueprint-import/{escape(run_id)}/health#researcher-feedback'>Review Research Gaps</a></p></section>"
+    return f"<section class='card' id='twin-readiness'><h2>Twin Readiness</h2><p>Read-only projection of owner-supplied completeness and eligibility outputs; Flora does not calculate a parallel score.</p><div class='readiness-grid'>{rows}</div><p><a class='button primary' href='#opportunities'>Open Executive Experience</a> <a class='button' href='/blueprint-import/{escape(run_id)}/health#researcher-feedback'>Review Research Gaps</a></p></section>"
 
 
 def _domain_lenses(run_id: str, active: str) -> str:
@@ -735,7 +704,7 @@ def _research_gaps(twin, run_id, mission):
         exists=a.present[0] if a.present else "No supported content"
         missing="; ".join(a.missing) or "No mandatory presentation gap"
         affected=len(set(a.affected))
-        cards.append(f"<article class='research-gap'><h2>{escape(a.name)}</h2><p><strong>{escape(a.state)}</strong></p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><p><strong>Why it matters:</strong> Missing mandatory context prevents a stronger executive interpretation.</p><p><strong>Researcher action:</strong> {escape(a.researcher_action)}</p><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Affected records ({affected})</a></article>")
+        cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(a.state)}</strong></p><p><strong>Canonical owner:</strong> {escape(a.canonical_owner)}</p><p><strong>Completeness authority:</strong> {escape(a.completeness_authority)}</p><p><strong>Eligibility authority:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence source:</strong> {escape(a.evidence_source)}</p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><p><strong>Why it prevents executive understanding:</strong> The presentation cannot infer completeness or eligibility when the named owner has not supplied its result.</p><p><strong>Required evidence / Researcher action:</strong> {escape(a.researcher_action)}</p><p><strong>Acceptance criteria:</strong> {escape(a.acceptance_criteria)}</p><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Affected records ({affected})</a></article>")
     return _primary_nav(run_id,"gaps")+"<header class='hero'><h1>Research Gaps</h1><p><a class='button primary' href='/blueprint-import/"+escape(run_id)+"/research-brief'>Export Research Brief</a></p></header><section class='research-gap-grid'>"+"".join(cards)+f"</section><p><a href='/blueprint-import/{escape(run_id)}/diagnostics'>Advanced diagnostics</a></p>"
 
 
@@ -792,7 +761,10 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
     for a in aspects:
         lines += [f"### {a.name}", f"- Readiness state: {a.state}", f"- What exists: {a.present[0] if a.present else 'No supported content'}",
                   f"- What is usable: {a.present[-1] if a.present else 'Nothing is yet usable'}", f"- What is missing: {'; '.join(a.missing) or 'No mandatory readiness field'}",
-                  f"- Why the gap matters: the experience cannot advance beyond {a.state} under Flora's {a.rule_version} rule until these fields and relationships are supported."]
+                  f"- Canonical owner: {a.canonical_owner}", f"- Completeness authority: {a.completeness_authority}",
+                  f"- Eligibility authority: {a.eligibility_authority}", f"- Evidence source: {a.evidence_source}",
+                  f"- Why the gap matters: Flora cannot infer completeness or eligibility in place of the named architectural owner.",
+                  f"- Acceptance criteria: {a.acceptance_criteria}"]
     priority = ("Opportunities", "Reinvention Timing", "Major Programmes", "Enterprise Intelligence", "Industry Overview", "Market Participants")
     lines += ["", "## 4. Researcher Actions", "The following work requires external, attributable evidence. Configuration omissions are not Industry Twin truth gaps."] + [f"{i}. {name}" for i, name in enumerate(priority, 1)]
     configuration_actions = []
@@ -803,30 +775,29 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
     if not context or not context.partners: configuration_actions.append("Configure preferred partners or leave partner context unavailable.")
     lines += ["", "## 4A. User Configuration Actions"] + (configuration_actions or ["No mandatory user or employer configuration action remains."])
     lines += ["", "## 5. Industry-Level Research Gaps"]
-    industry_fields = "market size; economics; structure; competitive landscape; regulatory pressures; technology shifts; PESTLE coverage; transformation themes; qualified insights"
     for group in ("Telecoms", "Media", "Sport", "Cross-domain"):
-        lines += [f"### {group}", f"- What is missing: validate and complete {industry_fields}.", "- Required research action: return dated, attributable evidence for every populated claim; leave unsupported fields unresolved."]
+        lines += [f"### {group}", "- What is missing: an owner-produced IT-001 Industry Fidelity assessment for this scope.", "- Required research action: supply the governed dimension result and its linked deficiencies, evidence, Unknowns, Contradictions, exhaustion and review references."]
     lines += ["", "## 6. Enterprise Research Gaps"]
+    enterprise_projection = next(a for a in aspects if a.key == "enterprises")
     for ent in twin.enterprises:
-        gaps = [a for a in _enterprise_completeness(ent, mission) if a.state != "Complete enough for executive use"]
-        missing = "; ".join(dict.fromkeys(m for a in gaps for m in a.missing)) or "No deterministic completeness gap"
-        lines += _gap_block(ent.name, f"{sum(a.state == 'Complete enough for executive use' for a in _enterprise_completeness(ent, mission))}/{len(_enterprise_completeness(ent, mission))} completeness aspects usable", missing,
-                            "Incomplete enterprise context prevents supported account, programme and opportunity interpretation.",
-                            "Research overview, strategy, financials, material pressures, programmes, procurements, AI adoption, opportunities and key sources.",
-                            "All applicable enterprise completeness checks shown in section 12 pass.")
+        lines += _gap_block(ent.name, "Enterprise identity represented", "; ".join(enterprise_projection.missing),
+                            "EI-001/EIF-001 completeness has not been supplied, so Flora cannot upgrade the dossier.",
+                            enterprise_projection.researcher_action, enterprise_projection.acceptance_criteria)
     lines += ["", "## 7. Major Programme Research Gaps"]
+    programme_projection = next(a for a in aspects if a.key == "major-programmes")
     for o in programmes:
-        lines += _record_gap(o, "programme", ("programme_name", "owner", "business_unit", "objective", "stage", "timing", "investment", "procurement", "buyer", "suppliers", "partners", "evidence"))
+        lines += _gap_block(_display(o, "Unnamed programme hypothesis"), "Programme hypothesis represented", "; ".join(programme_projection.missing), "Owner completeness is required before executive use.", programme_projection.researcher_action, programme_projection.acceptance_criteria)
     if not programmes: lines += ["No named programme hypothesis is present; researchers must not invent one."]
     lines += ["", "## 8. Opportunity Research Gaps"]
+    opportunity_projection = next(a for a in aspects if a.key == "opportunities")
     for o in opportunities:
-        lines += _record_gap(o, "opportunity", ("customer", "business_unit", "client_problem", "opportunity", "value", "timing", "procurement_status", "buyer", "trigger", "programme", "evidence", "confidence"))
+        lines += _gap_block(_display(o, "Unnamed opportunity hypothesis"), "Opportunity hypothesis represented", "; ".join(opportunity_projection.missing), "IT-001 Opportunity Completeness and EIRP eligibility are required before action.", opportunity_projection.researcher_action, opportunity_projection.acceptance_criteria)
     if not opportunities: lines += ["No named opportunity hypothesis is present; researchers must not invent one."]
     lines += ["", "## 9. Reinvention Timing Research Gaps"]
     timing = next(a for a in aspects if a.key == "reinvention-timing")
     lines += _gap_block("Reinvention Timing", timing.present[0], "; ".join(timing.missing) or "No mandatory readiness field",
                         "Without supported timing Flora cannot distinguish an emerging disruption from a current commercial trigger.",
-                        "Research AI-native disruption mechanism, tipping-point hypothesis, timing range, exposed enterprises, first-adopting units, adoption indicators, blockers, evidence and uncertainty.", timing.researcher_action)
+                        timing.researcher_action, timing.acceptance_criteria)
     claims = [o for o in selected if o.statement and o.kind != "evidence"]
     lines += ["", "## 10. Evidence and Source Gaps", f"- Claims without evidence: {sum(not o.evidence_refs for o in claims)}",
               f"- Evidence without claim linkage: {sum(not any(o.original_id in c.evidence_refs for c in claims) for o in evidence)}",
@@ -835,27 +806,17 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
               "", "## 11. Required Deliverables", "Return import-compatible structured enterprise, programme, opportunity, reinvention-timing and evidence records, with legitimate names, explicit unknowns, source links and claim-to-evidence relationships.",
               "", "## 12. Acceptance Criteria"]
     for a in aspects:
-        lines += [f"- **{a.name}:** {a.researcher_action} Runtime rule: `{a.rule_version}`; target state: Executive-ready."]
+        lines += [f"- **{a.name}:** {a.acceptance_criteria} Composition contract: `{a.rule_version}`; owner: {a.canonical_owner}."]
     lines += ["", "## 13. Appendix — Canonical Traceability", "Technical identifiers appear only in this appendix."]
     for a in aspects:
         lines += [f"### {a.name}", f"- Readiness rule: {a.rule_version}", f"- Twin aspect: {a.key}", f"- Affected canonical record IDs: {', '.join(a.affected) or 'none'}", f"- Missing fields or relationships: {'; '.join(a.missing) or 'none'}"]
-    lines += ["", "### Later Re-import Comparison", "Capture readiness before/after, gaps closed/retained, enterprises/programmes enriched, opportunities made sales-ready, evidence and source links added, and Reinvention Timing added. This does not block this export."]
+    lines += ["", "### Represented record inventory", "- Canonical record IDs: " + (", ".join(o.original_id or o.record_id for o in selected) or "none")]
+    lines += ["", "### Later Re-import Comparison", "Capture owner-assessment state before/after, governed deficiencies closed/retained, represented records enriched, evidence and source links added, and owner outputs supplied. This does not block this export."]
     return "\n".join(lines) + "\n"
 
 
 def _gap_block(name, current, missing, why, action, acceptance):
     return [f"### {name}", f"**Current position**  \n{current}", f"**What is missing**  \n{missing}", f"**Why it matters**  \n{why}", f"**Required research action**  \n{action}", f"**Acceptance test**  \n{acceptance}"]
-
-
-def _record_gap(o, record_type, fields):
-    present = {f for f in fields if (o.evidence_refs if f == "evidence" else _field(o, f))}
-    if record_type == "opportunity" and (o.affected_organisations or o.subject not in {"", "Twin scope"}): present.add("customer")
-    missing = [f.replace("_", " ") for f in fields if f not in present]
-    return _gap_block(_display(o, f"Unnamed {record_type} hypothesis"), f"A {record_type} hypothesis exists; {len(present)} required attributes are structured.",
-                      ", ".join(missing) or "No mandatory field under this contract",
-                      f"Flora cannot determine whether this {record_type} supports an executive or commercial decision until the missing facts are evidenced.",
-                      f"Investigate named owners and public evidence to resolve: {', '.join(missing) or 'source corroboration'}.",
-                      f"The record resolves {', '.join(f.replace('_',' ') for f in fields)} with linked evidence, or explicitly records a governed unknown.")
 
 
 def export_research_gap_brief(import_run_id: str, headers: Any, domain: str = "all") -> tuple[str, str, int]:
@@ -958,7 +919,7 @@ def _readiness_inspection(twin: SemanticTwin, run_id: str, mission: CommercialMi
         present = "".join(f"<li>{escape(x)}</li>" for x in a.present) or "<li>No relevant structured content</li>"
         missing = "".join(f"<li>{escape(x)}</li>" for x in a.missing) or "<li>No gap under this rule</li>"
         affected = "".join(f"<li><a href='/blueprint-import/{escape(run_id)}/explore#{escape(x)}'>{escape(x)}</a></li>" for x in a.affected) or "<li>No affected records</li>"
-        sections.append(f"<article class='card readiness-detail' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(a.state)}{' — '+str(a.bars)+' of 4 bars' if a.bars is not None else ''}</strong></p><p>Rule applied: <code>{escape(a.rule_version)}</code></p><h3>Present</h3><ul>{present}</ul><h3>Missing</h3><ul>{missing}</ul><h3>Affected records</h3><ul>{affected}</ul><h3>Next state requires</h3><p>{escape(a.next_requirement)}</p><h3>Required researcher action</h3><p>{escape(a.researcher_action)}</p></article>")
+        sections.append(f"<article class='card readiness-detail' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(a.state)}{' — '+str(a.bars)+' of 4 bars' if a.bars is not None else ''}</strong></p><p>Composition applied: <code>{escape(a.rule_version)}</code></p><p><strong>Canonical owner:</strong> {escape(a.canonical_owner)} · <strong>Completeness:</strong> {escape(a.completeness_authority)} · <strong>Eligibility:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence source:</strong> {escape(a.evidence_source)}</p><h3>Present inventory</h3><ul>{present}</ul><h3>Missing owner output</h3><ul>{missing}</ul><h3>Affected records</h3><ul>{affected}</ul><h3>Acceptance criteria</h3><p>{escape(a.acceptance_criteria)}</p><h3>Required evidence</h3><p>{escape(a.researcher_action)}</p></article>")
     return "<section id='readiness-inspection'><h1>Readiness inspection</h1><p>These explanations are generated by the same versioned rules as the import review and Research Gaps report.</p>" + "".join(sections) + "</section>"
 
 
