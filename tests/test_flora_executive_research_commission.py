@@ -1,5 +1,6 @@
 from cios.applications.flora.blueprint_import.executive_workspace import (
     _research_gaps,
+    research_count_contracts,
     research_gap_brief,
     twin_readiness,
     validate_research_commission_markdown,
@@ -89,3 +90,30 @@ def test_markdown_validation_fails_closed_on_truncation_and_empty_heading():
     import pytest
     with pytest.raises(ValueError, match="empty heading"):
         validate_research_commission_markdown(brief + "##\n")
+
+
+def test_enterprise_subject_count_never_reuses_underlying_record_count():
+    rows = [_row(f"enterprise-{i}", "enterprise_twin", name=f"Enterprise {i}", enterprise_id=f"e-{i}") for i in range(14)]
+    rows += [_row(f"fact-{i}", "fact", subject=f"Enterprise {i % 14}", statement=f"Fact {i}") for i in range(93)]
+    twin = assemble_semantic_twin(rows)
+    contract = research_count_contracts(twin)["enterprises"]
+    assert contract.canonical_subject_count == 14
+    assert contract.underlying_record_count >= 93
+    brief = research_gap_brief(twin, "TMS", None)
+    enterprise_section = brief.split("## 7. Enterprises", 1)[1].split("## 8.", 1)[0]
+    assert "14 enterprise profiles require enrichment" in enterprise_section
+    assert "93 enterprise profiles" not in brief
+
+
+def test_timing_summary_uses_separate_semantic_units():
+    twin = assemble_semantic_twin([
+        _row("assessment", "ai_reinvention_assessment", name="AI assessment"),
+        _row("change", "transformation_programme", name="Network change", domain="Telecommunications",
+             affected_enterprises=["BT Group"], business_unit="Openreach", statement="Network migration"),
+    ])
+    brief = research_gap_brief(twin, "TMS", None)
+    assert "1 canonical Reinvention Timing assessment records" in brief
+    assert "1 applicable affected domains" in brief
+    assert "2 applicable affected enterprises or business units" in brief
+    assert "0 owner-assessed enterprises or business units" in brief
+    assert "2 unassessed enterprises or business units" in brief

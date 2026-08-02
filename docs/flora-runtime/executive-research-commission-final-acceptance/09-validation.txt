@@ -1,0 +1,8 @@
+PASS: complete configured-route Markdown accepted
+PASS: exactly one required H1
+PASS: unique numbered sections 1–16
+PASS: Appendices A–D
+PASS: no empty, orphan, malformed or truncated heading
+PASS: no malformed list, malformed table or renderer text
+PASS: complete EOF and final newline
+PASS: complete file inspected (58548 characters, 1039 lines)

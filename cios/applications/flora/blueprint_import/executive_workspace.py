@@ -65,6 +65,18 @@ class ReadinessAspect:
         return None
 
 
+@dataclass(frozen=True)
+class ResearchCountContract:
+    """Typed inventory projection; counts are never interchangeable."""
+    canonical_subject_count: int
+    underlying_record_count: int
+    deficiency_count: int
+    owner_assessment_count: int
+    affected_subject_count: int
+    presentation_eligible_count: int
+    recommendation_eligible_count: int
+
+
 def _opportunity_contract(o: SemanticObject, mission: CommercialMission | None = None) -> tuple[bool, bool, list[str]]:
     customer = bool(o.affected_organisations or (o.subject and o.subject != "Twin scope"))
     problem = bool(_field(o, "client_problem", "customer_problem", "problem"))
@@ -426,7 +438,7 @@ def _enterprise_card(e, run_id):
             f"<p><strong>Strategic position:</strong> {escape(position)}</p><p><strong>Material pressure:</strong> {escape(pressure)}</p>"
             f"<p><strong>Transformation posture:</strong> {escape(posture)}</p>" if complete else
             f"<p><strong>Enterprise profile incomplete</strong></p><p>{escape(description or 'A plain-language organisation description is not supplied.')} Strategic position, material pressure or transformation posture requires supported research.</p><p><strong>Industry/domain:</strong> {escape(', '.join(domains) or 'Not established')}</p>")
-    return f"<a class='enterprise-card' href='/blueprint-import/{escape(run_id)}/enterprises/{escape(e.identity_key)}'><h3>{escape(e.name)}</h3>{body}<p class='pill'>Enterprise intelligence readiness: {'Executive-ready' if complete else 'Insufficient'}</p></a>"
+    return f"<a class='enterprise-card' href='/blueprint-import/{escape(run_id)}/enterprises/{escape(e.identity_key)}'><h3>{escape(e.name)}</h3>{body}</a>"
 
 
 def _validation_report(twin: SemanticTwin) -> str:
@@ -695,8 +707,10 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
     objects=_filter_domain(twin.objects, domain)
     if key=="enterprises":
         cards="".join(_enterprise_card(e, run_id) for e in twin.enterprises)
-        ready=sum("Enterprise intelligence readiness: Executive-ready" in _enterprise_card(e, run_id) for e in twin.enterprises)
-        content=f"<p><strong>{len(twin.enterprises)} canonical enterprises · {ready} executive-ready enterprises</strong></p><div class='enterprise-grid'>{cards or '<p>No enterprise identities supplied.</p>'}</div>"
+        owner_assessed = len(twin.enterprises) if _owner_assessed(twin, key) else 0
+        enterprise_requirements = [r for r in research_requirements(twin, executive_assessments(twin)) if r.aspect == key]
+        contracts = "".join(f"<article class='card'><h3>{escape(r.subject)} research requirement</h3><p><strong>Find:</strong> {escape(', '.join(r.missing_fields))}.</p><p><strong>Sources:</strong> {escape(', '.join(r.source_categories))}.</p><p><strong>Acceptance test:</strong> {escape(r.acceptance_test)}</p></article>" for r in enterprise_requirements)
+        content=f"<p><strong>{len(twin.enterprises)} canonical enterprises · {owner_assessed} owner-assessed enterprises</strong></p><div class='enterprise-grid'>{cards or '<p>No enterprise identities supplied.</p>'}</div><h2>Subject-specific research requirements</h2>{contracts}"
     elif key=="industry-overview":
         rows=[o for o in objects if _owner_assessed(twin, 'industry-overview') and executive_insight_eligible(o)]
         identity=[o for o in objects if o.kind in {"industry", "subsector"}]
@@ -707,15 +721,15 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
         for name in ("Size and economics", "Leading enterprises", "Market participants and competitive structure", "Political and regulatory pressures", "Economic pressures", "Social and customer change", "Technology change", "Legal and environmental factors where applicable", "Major transformation themes"):
             content += section(name)
         content += section("Qualified insights", "".join(_conclusion(o,run_id) for o in rows))
-        content += f"<section><h2>Research Gaps</h2><p>{escape('; '.join(a.missing))}</p></section><section><h2>Advanced Inspection</h2><p><a href='/blueprint-import/{escape(run_id)}/explore'>Inspect canonical records, evidence and lineage</a></p></section>"
+        content += f"<section><h2>Research Gaps</h2><p>Complete the unsupported industry sections above with dated, attributable evidence or explicit Unknowns.</p></section><section><h2>Advanced Inspection</h2><p><a href='/blueprint-import/{escape(run_id)}/explore'>Inspect canonical records, evidence and lineage</a></p></section>"
     elif key=="market-participants":
         identified=list(next((c.objects for c in business_collections(twin, include_empty=True, domain=domain) if c.key=='market-participants'), ()))
         rows=[o for o in identified if _owner_assessed(twin, 'market-participants') and _field(o,'role','participant_role','market_role') and o.domains and o.evidence_refs and o.consequence]
-        content=f"<p><strong>{len(identified)} participants identified</strong><br><strong>{len(rows)} sufficiently classified</strong></p>"+("".join(f"<article class='enterprise-card'><h3>{escape(o.subject if o.subject not in {'','Twin scope'} else o.statement)}</h3><p><strong>Role:</strong> {escape(_field(o,'role','participant_role','market_role'))}</p><p><strong>Domain:</strong> {escape(', '.join(o.domains))}</p><p>{escape(o.consequence)}</p></article>" for o in rows) if rows else "<p><strong>Insufficient</strong> — supported role, domain and market significance require research.</p>")
+        content=f"<p><strong>{len(identified)} participant concepts · {len(rows)} owner-assessed participant profiles</strong></p>"+("".join(f"<article class='enterprise-card'><h3>{escape(o.subject if o.subject not in {'','Twin scope'} else o.statement)}</h3><p><strong>Role:</strong> {escape(_field(o,'role','participant_role','market_role'))}</p><p><strong>Domain:</strong> {escape(', '.join(o.domains))}</p><p>{escape(o.consequence)}</p></article>" for o in rows) if rows else "<p><strong>Research required.</strong> Find supported role, domain and market significance for every participant concept.</p>")
     elif key=="major-programmes":
         rows=[o for o in objects if o.kind=='transformation_programme']
         ready=[o for o in rows if _owner_assessed(twin, 'major-programmes') and o.statement and (_field(o,'owner') or o.subject!='Twin scope') and o.consequence and _field(o,'stage','phase') and _field(o,'timing','expected_horizon') and o.evidence_refs]
-        content=f"<p><strong>{len(rows)} programme hypotheses identified</strong><br><strong>{len(ready)} executive-ready programmes</strong></p>"+("".join(f"<article class='enterprise-card'><h3>{escape(o.statement)}</h3><p><strong>Owning enterprise:</strong> {escape(_field(o,'owner') or o.subject)}</p><p><strong>Business objective:</strong> {escape(o.consequence)}</p></article>" for o in ready) if ready else "<p><strong>Insufficient.</strong> Programme owner, objective, phase, timing and evidence must be resolved before hypotheses appear here.</p>")
+        content=f"<p><strong>{len(rows)} programme hypotheses · {len(ready)} owner-assessed programmes</strong></p>"+("".join(f"<article class='enterprise-card'><h3>{escape(o.statement)}</h3><p><strong>Owning enterprise:</strong> {escape(_field(o,'owner') or o.subject)}</p><p><strong>Business objective:</strong> {escape(o.consequence)}</p></article>" for o in ready) if ready else "<p><strong>Research required.</strong> Find programme owner, objective, phase, timing and evidence.</p>")
     elif key=="opportunities":
         rows=[o for o in objects if 'opportun' in o.kind]; ready=[o for o in rows if _owner_assessed(twin, 'opportunities') and _opportunity_contract(o,mission)[1]]
         table=("<table class='opportunity-table'><thead><tr><th>Customer</th><th>Opportunity</th><th>Value</th><th>Timing</th><th>Status</th></tr></thead><tbody>"+"".join(f"<tr><td>{escape(', '.join(o.affected_organisations) or o.subject)}</td><td>{escape(o.statement)}</td><td>{escape(_field(o,'value','value_range') or 'Not established')}</td><td>{escape(_field(o,'timing','procurement_start') or 'Timing unknown')}</td><td>{escape(_field(o,'status','procurement_status') or 'Status unknown')}</td></tr>" for o in ready)+"</tbody></table>") if ready else "<p>0 sales-ready opportunities.</p>"
@@ -723,8 +737,12 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
     else:
         rows=[o for o in objects if _field(o,'expected_horizon','tipping_point','reinvention_timing')]
         content=("<p><strong>Absent</strong></p><p>This Twin contains no structured assessment of:</p><ul><li>AI-native disruption mechanism</li><li>enterprise or business-unit exposure</li><li>adoption indicators</li><li>expected horizon</li><li>response timing</li></ul><h2>Research required</h2><p>Research the disruption mechanism, exposure, adoption indicators, horizon, response timing and evidence.</p>" if not rows or not _owner_assessed(twin, 'reinvention-timing') else "".join(_conclusion(o,run_id) for o in rows))
-    gaps="; ".join(a.missing) or "No unresolved mandatory fields."
-    return _primary_nav(run_id,"aspect")+f"<p><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a></p><header class='hero'><p>{escape(title)} · {escape(domain.title())}</p><h1>{escape(ASPECT_LABELS[key])}</h1><p><strong>{escape(_assessment_state_label(a.state))}</strong> · {escape(a.present[-1] if a.present else gaps)}</p></header><section class='card'>{content}</section><section class='card'><h2>Research gaps for this aspect</h2><p>{escape(gaps)}</p><p><strong>Researcher action:</strong> {escape(a.researcher_action)}</p></section>"+_navigation(run_id)
+    requirements = [r for r in research_requirements(twin, executive_assessments(twin)) if r.aspect == key]
+    fields = tuple(dict.fromkeys(field for r in requirements for field in r.missing_fields))
+    sources = tuple(dict.fromkeys(source for r in requirements for source in r.source_categories))
+    acceptance = requirements[0].acceptance_test if requirements else "Return sourced applicable fields or explicit Unknowns."
+    research = f"Find {', '.join(fields)}." if fields else "Confirm all applicable facts with dated evidence."
+    return _primary_nav(run_id,"aspect")+f"<p><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a></p><header class='hero'><p>{escape(title)} · {escape(domain.title())}</p><h1>{escape(ASPECT_LABELS[key])}</h1><p><strong>{escape(_assessment_state_label(a.state))}</strong></p></header><section class='card'>{content}</section><section class='card'><h2>Research required</h2><p>{escape(research)}</p><p><strong>Sources to check:</strong> {escape(', '.join(sources))}</p><p><strong>Acceptance test:</strong> {escape(acceptance)}</p><p><a href='/blueprint-import/{escape(run_id)}/diagnostics'>Architectural traceability in Advanced Inspection</a></p></section>"+_navigation(run_id)
 
 def _assessment_state_label(state: str) -> str:
     return "Not yet assessed against the governed standard" if state == "legacy_unassessed" else state.replace("_", " ").title()
@@ -751,19 +769,66 @@ def _count_statement(key: str, affected: int) -> str:
     }[key]
 
 
+def research_count_contracts(twin: SemanticTwin) -> dict[str, ResearchCountContract]:
+    """Return one semantic-unit-safe count contract for every research collection."""
+    collections = {c.key: c.objects for c in business_collections(twin, include_empty=True)}
+    assessments = {a.key: a for a in executive_assessments(twin)}
+    subjects = {
+        "industry-overview": tuple(collections.get("enterprises", ()))[:0] + tuple(o for o in twin.objects if o.kind in {"industry", "industry_twin"})[:1],
+        "enterprises": tuple(collections.get("enterprises", ())),
+        "market-participants": tuple(collections.get("market-participants", ())),
+        "major-programmes": tuple(o for o in twin.objects if o.kind == "transformation_programme"),
+        "opportunities": tuple(collections.get("opportunities", ())),
+        "reinvention-timing": tuple(o for o in twin.objects if o.kind in {"ai_reinvention_assessment", "reinvention_assessment"}),
+    }
+    result = {}
+    for key, rows in subjects.items():
+        canonical = 1 if key == "industry-overview" else len(rows)
+        underlying = (sum(len(e.records) for e in twin.enterprises) if key == "enterprises" else len(rows))
+        assessment = assessments[key]
+        result[key] = ResearchCountContract(canonical, underlying, len(assessment.deficiencies), 1,
+            canonical, canonical, 0)
+    return result
+
+
+def _timing_count_lines(twin: SemanticTwin, selected: tuple[SemanticObject, ...]) -> tuple[str, ...]:
+    timing = tuple(o for o in selected if _reinvention_kind(o))
+    records = tuple(o for o in selected if o.kind in {"ai_reinvention_assessment", "reinvention_assessment"})
+    domains = {d.casefold(): d for o in timing for d in o.domains}
+    affected = {name.casefold(): name for o in timing for name in o.affected_organisations}
+    for o in timing:
+        unit = _field(o, "business_unit", "affected_business_unit")
+        if unit:
+            affected.setdefault(unit.casefold(), unit)
+    assessed = {name.casefold() for o in records for name in o.affected_organisations}
+    owner_assessed = len(set(affected) & assessed)
+    return (
+        f"- {len(records)} canonical Reinvention Timing assessment records.",
+        f"- {len(domains)} applicable affected domains.",
+        f"- {len(affected)} applicable affected enterprises or business units.",
+        f"- {owner_assessed} owner-assessed enterprises or business units.",
+        f"- {max(0, len(affected) - owner_assessed)} unassessed enterprises or business units.",
+        f"- {sum(p.key == 'reinvention-timing' for p in executive_assessments(twin))} owner assessment projections for Reinvention Timing.",
+    )
+
+
 def _research_gaps(twin, run_id, mission):
     cards=[]
     requirements = research_requirements(twin, executive_assessments(twin))
+    count_contracts = research_count_contracts(twin)
     for a in twin_readiness(twin, mission):
         exists=a.present[1] if len(a.present) > 1 else (a.present[0] if a.present else "No supported content")
-        missing="; ".join(a.missing) or "No mandatory presentation gap"
-        affected=len(set(a.affected))
+        affected=count_contracts[a.key].canonical_subject_count
         rows=[r for r in requirements if r.aspect == a.key]
         fields=", ".join(dict.fromkeys(f for r in rows for f in r.missing_fields))
-        action = f"Research every affected {_count_statement(a.key, affected).split(' require')[0].lower()}: {fields}."
+        missing = ("Subject-appropriate sourced information is incomplete: " + fields) if fields else "No applicable research field is currently identified."
+        statement = _count_statement(a.key, affected)
+        if a.key == "reinvention-timing":
+            statement = " ".join(line.removeprefix("- ") for line in _timing_count_lines(twin, twin.objects))
+        action = f"Research every applicable {a.name.lower()} subject: {fields}."
         impact, reason = _commercial_impact(a.key)
         acceptance = rows[0].acceptance_test if rows else a.acceptance_criteria
-        cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(_count_statement(a.key, affected))}</strong></p><p><strong>{escape(_assessment_state_label(a.state))}</strong></p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><h3>Why this matters</h3><p>{escape(_COLLECTION_LANGUAGE[a.key])}</p><h3>Executive dependency impact</h3><p><strong>{impact}</strong></p><p><strong>Reason:</strong> {escape(reason)}</p><p><strong>Researcher action:</strong> {escape(action)}</p><p><strong>Acceptance criteria:</strong> {escape(acceptance)}</p><details><summary>Architectural traceability</summary><p><strong>Governed owner:</strong> {escape(a.canonical_owner)}</p><p><strong>Completeness authority:</strong> {escape(a.completeness_authority)}</p><p><strong>Eligibility authority:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence:</strong> {escape(a.evidence_source)}</p><p><strong>Canonical authority:</strong> {escape(a.rule_version)}</p></details><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Inspect all {affected} affected subjects</a></article>")
+        cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(statement)}</strong></p><p><strong>{escape(_assessment_state_label(a.state))}</strong></p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><h3>Why this matters</h3><p>{escape(_COLLECTION_LANGUAGE[a.key])}</p><h3>Executive dependency impact</h3><p><strong>{impact}</strong></p><p><strong>Reason:</strong> {escape(reason)}</p><p><strong>Researcher action:</strong> {escape(action)}</p><p><strong>Acceptance criteria:</strong> {escape(acceptance)}</p><details><summary>Architectural traceability</summary><p><strong>Governed owner:</strong> {escape(a.canonical_owner)}</p><p><strong>Completeness authority:</strong> {escape(a.completeness_authority)}</p><p><strong>Eligibility authority:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence:</strong> {escape(a.evidence_source)}</p><p><strong>Canonical authority:</strong> {escape(a.rule_version)}</p></details><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Inspect all {affected} affected subjects</a></article>")
     return _primary_nav(run_id,"gaps")+"<header class='hero'><h1>Research Gaps</h1><p><a class='button primary' href='/blueprint-import/"+escape(run_id)+"/research-brief'>Export Research Brief</a></p></header><section class='research-gap-grid'>"+"".join(cards)+f"</section><p><a href='/blueprint-import/{escape(run_id)}/diagnostics'>Advanced diagnostics</a></p>"
 
 
@@ -789,6 +854,14 @@ def _exact(values) -> set[str]:
     return {str(value).strip().casefold() for value in values if str(value).strip()}
 
 
+def _identity_terms(values) -> set[str]:
+    """Include explicitly delimited members of a canonical composite identity."""
+    terms = _exact(values)
+    for value in values:
+        terms.update(part.strip().casefold() for part in str(value).split("/") if part.strip())
+    return terms
+
+
 def _mission_reasons(requirement, twin: SemanticTwin, mission: CommercialMission,
                      employer: EmployerContext | None) -> tuple[int, tuple[str, ...]]:
     """Return precedence and inspectable reasons from explicit persisted relationships."""
@@ -797,8 +870,8 @@ def _mission_reasons(requirement, twin: SemanticTwin, mission: CommercialMission
     # not let one member's account, capability or timing leak onto the
     # collection-level subject.
     subject_objects = () if requirement.aspect == "industry-overview" else objects
-    identities = _exact((requirement.subject, *(o.subject for o in subject_objects),
-                         *(name for o in subject_objects for name in o.affected_organisations)))
+    identities = _identity_terms((requirement.subject, *(o.subject for o in subject_objects),
+                                  *(name for o in subject_objects for name in o.affected_organisations)))
     priority = _exact((*mission.priority_accounts, *mission.named_accounts))
     targets = _exact(mission.target_customers)
     reasons: list[str] = []
@@ -884,14 +957,11 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
               "major-programmes": sum(o.kind == "transformation_programme" for o in selected),
               "opportunities": len(collections.get("opportunities", ())),
               "reinvention-timing": sum(bool(_reinvention_kind(o)) for o in selected)}
-    timing_objects = tuple(o for o in selected if _reinvention_kind(o))
-    timing_assessments = tuple(p for p in executive_assessments(twin) if p.key == "reinvention-timing")
+    count_contracts = research_count_contracts(twin)
     lines += ["", "## 3. Twin Summary", "- 1 canonical Industry Twin.", "- 11 required Industry Overview dimensions incomplete.",
         f"- {counts['enterprises']} enterprise profiles require enrichment.", f"- {counts['market-participants']} market participants require enrichment.",
         f"- {counts['major-programmes']} major-programme hypotheses require enrichment.", f"- {counts['opportunities']} opportunity hypotheses require enrichment.",
-        f"- {len(timing_objects)} existing Reinvention Timing assessment records.",
-        f"- {counts['reinvention-timing']} applicable affected Reinvention Timing subjects.",
-        f"- {len(timing_assessments)} owner assessment projections cover Reinvention Timing; unassessed subjects remain explicit research requirements.",
+        *_timing_count_lines(twin, selected),
         "", "## 4. Complete Research Commission",
         "Research the complete canonical population: the Industry Twin across every applicable overview dimension; every enterprise, market participant, major-programme hypothesis, opportunity hypothesis and applicable timing subject; every evidence deficiency; and all Unknowns and Contradictions. Mission settings remove nothing from this commission.",
         "", "## 5. Mission Emphasis"]
@@ -907,8 +977,11 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
     for key, heading in section_map:
         rows = [r for r in requirements if r.aspect == key]
         impact, reason = _commercial_impact(key)
-        lines += ["", f"## {heading}", _count_statement(key, len(set(x for r in rows for x in r.canonical_ids)) or len(rows)),
+        subject_count = count_contracts[key].canonical_subject_count
+        lines += ["", f"## {heading}", _count_statement(key, subject_count),
                   "", "**Why this matters**", _COLLECTION_LANGUAGE[key], "", f"**Executive dependency impact: {impact}**", f"Reason: {reason}"]
+        if key == "reinvention-timing":
+            lines += list(_timing_count_lines(twin, selected))
         for r in rows:
             lines += ["", f"### {r.subject}", "Research:", *[f"- {field}" for field in r.missing_fields], f"- Suitable sources: {', '.join(r.source_categories)}."]
     claims = tuple(o for o in selected if o.statement and o.kind != "evidence")
@@ -967,8 +1040,13 @@ def validate_research_commission_markdown(document: str) -> None:
         "Required Structured Deliverables", "Researcher Acceptance Criteria", "Remaining Known Limitations")
     errors = []
     if not document.endswith("\n"): errors.append("final newline missing")
+    expected_h1 = "# Telecommunications, Media and Sport Industry Twin — Executive Research Commission\n"
+    if not document.startswith(expected_h1): errors.append("required H1 must be the first line")
     if len(re.findall(r"^# \S", document, re.MULTILINE)) != 1: errors.append("document must contain exactly one H1")
     if re.search(r"^#{1,6}\s*$", document, re.MULTILINE): errors.append("empty heading")
+    if re.search(r"^#{1,6}[^#\s]", document, re.MULTILINE): errors.append("malformed heading")
+    if re.search(r"^-\S", document, re.MULTILINE): errors.append("malformed list")
+    if re.search(r"</?[a-z][^>]*>|&lt;/?(?:html|body|div|section)\b", document, re.IGNORECASE): errors.append("accidental renderer text")
     numbered = re.findall(r"^## (\d+)\. (.+)$", document, re.MULTILINE)
     numbers = [int(n) for n, _ in numbered]
     if numbers != list(range(1, 17)): errors.append("numbered sections are missing, duplicated or out of order")
@@ -978,6 +1056,8 @@ def validate_research_commission_markdown(document: str) -> None:
         if not re.search(rf"^## Appendix {appendix} — \S", document, re.MULTILINE): errors.append(f"missing Appendix {appendix}")
     headings = re.findall(r"^## (.+)$", document, re.MULTILINE)
     if len(headings) != len(set(headings)): errors.append("duplicate heading")
+    table_lines = [line for line in document.splitlines() if line.startswith("|")]
+    if table_lines and any(not line.endswith("|") or line.count("|") < 3 for line in table_lines): errors.append("malformed table")
     if document.rstrip().endswith("#"): errors.append("unexpected truncation")
     if errors: raise ValueError("Invalid Research Commission Markdown: " + "; ".join(errors))
 
