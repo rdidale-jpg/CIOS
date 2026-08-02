@@ -156,7 +156,9 @@ class EmployerContext:
 
     @property
     def complete(self) -> bool:
-        return bool(self.organisation and self.offer_portfolio and self.propositions)
+        # Organisation is the only operationally required employer field in the
+        # guided save journey; capabilities, offers and relationships are optional.
+        return bool(self.organisation)
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "EmployerContext":

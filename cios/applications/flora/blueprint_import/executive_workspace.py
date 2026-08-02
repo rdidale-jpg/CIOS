@@ -60,8 +60,9 @@ class ReadinessAspect:
 
     @property
     def bars(self) -> int | None:
-        return {"Absent": 0, "Insufficient": 1, "Partial": 2, "Usable": 3,
-                "Executive-ready": 4}.get(self.state)
+        # Owner states are displayed verbatim; Flora does not convert them into
+        # a weighted or pseudo-quantitative readiness scale.
+        return None
 
 
 def _opportunity_contract(o: SemanticObject, mission: CommercialMission | None = None) -> tuple[bool, bool, list[str]]:
@@ -115,9 +116,18 @@ def twin_readiness(twin: SemanticTwin, mission: CommercialMission | None = None)
         "opportunities": lambda a: f"{len(next(c for c in business_collections(twin, include_empty=True) if c.key == 'opportunities').objects)} opportunity hypothesis record(s)",
         "reinvention-timing": lambda a: a.inventory_summary,
     }
+    collections = {c.key: c.objects for c in business_collections(twin, include_empty=True)}
+    affected = {
+        "industry-overview": tuple(o.original_id or o.record_id for o in twin.objects if o.kind in {"industry", "industry_twin", "subsector", "value_chain", "economic_pool"}),
+        "enterprises": tuple(e.identity_key for e in twin.enterprises),
+        "market-participants": tuple(o.original_id or o.record_id for o in collections["market-participants"]),
+        "major-programmes": tuple(o.original_id or o.record_id for o in twin.objects if o.kind == "transformation_programme"),
+        "opportunities": tuple(o.original_id or o.record_id for o in collections["opportunities"]),
+        "reinvention-timing": tuple(o.original_id or o.record_id for o in twin.objects if _reinvention_kind(o)),
+    }
     return tuple(ReadinessAspect(
         a.key, a.label, a.state, (legacy_inventory[a.key](a), a.inventory_summary, f"Completeness is owned by {a.completeness_authority}."),
-        a.deficiencies, (), a.acceptance_criteria, a.required_evidence, "owner-projection-v1",
+        a.deficiencies, affected[a.key], a.acceptance_criteria, a.required_evidence, "owner-projection-v1",
         a.canonical_owner, a.evidence_source, a.completeness_authority, a.eligibility_authority,
         a.acceptance_criteria,
     ) for a in executive_assessments(twin))
@@ -221,8 +231,8 @@ def _mission_indicator(mission: CommercialMission | None, employer: EmployerCont
     if not mission:
         employer_state = "Configured" if employer and employer.complete else "Partially configured" if employer else "Not configured"
         return f"<aside class='mission-indicator' role='status'><strong>PILOT · Commercial Mission not configured</strong> — no Commercial Mission is available · Employer Context: {employer_state} · neutral industry composition applies · <a href='{target}'>Configure</a></aside>"
-    status = "Configured" if mission.mission_name and mission.executive_role and mission.commercial_objective and mission.industries and (mission.priority_accounts or mission.target_customers) else "Partially configured"
-    name = mission.mission_name or "Unnamed mission"
+    status = "Configured" if mission.executive_role and mission.commercial_objective and mission.geography and mission.commercial_horizon else "Partially configured"
+    name = mission.mission_name or "Configured"
     employer_state = "Configured" if employer and employer.complete else "Partially configured" if employer else "Not configured"
     return f"<aside class='mission-indicator' role='status'><strong>PILOT · Commercial Mission: {escape(name)}</strong> · {status} · Employer Context: {employer_state} · Commercial context saved. · <a href='{target}'>Select or edit</a></aside>"
 
@@ -719,15 +729,42 @@ def _assessment_state_label(state: str) -> str:
 
 def _research_gaps(twin, run_id, mission):
     cards=[]
-    translated = {r.aspect: r for r in research_requirements(twin, executive_assessments(twin))}
     for a in twin_readiness(twin,mission):
         exists=a.present[1] if len(a.present) > 1 else (a.present[0] if a.present else "No supported content")
         missing="; ".join(a.missing) or "No mandatory presentation gap"
         affected=len(set(a.affected))
-        requirement=translated.get(a.key)
-        action = (f"Research {requirement.subject}: {', '.join(requirement.missing_fields)} using {', '.join(requirement.source_categories)}." if requirement else a.researcher_action)
-        cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(_assessment_state_label(a.state))}</strong></p><p><strong>Canonical owner:</strong> {escape(a.canonical_owner)}</p><p><strong>Completeness authority:</strong> {escape(a.completeness_authority)}</p><p><strong>Eligibility authority:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence source:</strong> {escape(a.evidence_source)}</p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><p><strong>Why it prevents executive understanding:</strong> The presentation cannot infer completeness or eligibility when the named owner has not supplied its result.</p><p><strong>Required evidence / Researcher action:</strong> {escape(action)}</p><p><strong>Acceptance criteria:</strong> {escape(a.acceptance_criteria)}</p><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Affected records ({affected})</a></article>")
+        requirements=[r for r in research_requirements(twin, executive_assessments(twin)) if r.aspect == a.key]
+        action = f"Research all {affected} affected subject{'s' if affected != 1 else ''}: " + ", ".join(dict.fromkeys(f for r in requirements for f in r.missing_fields)) + "."
+        why = requirements[0].why if requirements else "The missing information prevents a supported executive view of this part of the Twin."
+        impact, reason = _commercial_impact(a.key)
+        priority = _priority_explanation(mission)
+        cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{affected} {escape(a.name.lower())} subject{'s' if affected != 1 else ''} {'require' if affected != 1 else 'requires'} enrichment</strong></p><p><strong>{escape(_assessment_state_label(a.state))}</strong></p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><h3>Why this matters</h3><p>{escape(why)}</p><h3>Commercial Impact</h3><p><strong>{impact}</strong></p><p><strong>Reason:</strong> {escape(reason)}</p><h3>Priority because</h3><ul>{priority}</ul><p><strong>Researcher action:</strong> {escape(action)}</p><p><strong>Acceptance criteria:</strong> {escape(a.acceptance_criteria)}</p><details><summary>Architectural traceability</summary><p><strong>Governed owner:</strong> {escape(a.canonical_owner)}</p><p><strong>Completeness authority:</strong> {escape(a.completeness_authority)}</p><p><strong>Eligibility authority:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence:</strong> {escape(a.evidence_source)}</p><p><strong>Canonical authority:</strong> {escape(a.rule_version)}</p></details><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Inspect all {affected} affected subjects</a></article>")
     return _primary_nav(run_id,"gaps")+"<header class='hero'><h1>Research Gaps</h1><p><a class='button primary' href='/blueprint-import/"+escape(run_id)+"/research-brief'>Export Research Brief</a></p></header><section class='research-gap-grid'>"+"".join(cards)+f"</section><p><a href='/blueprint-import/{escape(run_id)}/diagnostics'>Advanced diagnostics</a></p>"
+
+
+def _commercial_impact(aspect: str) -> tuple[str, str]:
+    """Translate the existing architectural dependency, never mission preference."""
+    return {
+        "industry-overview": ("High", "Industry context is a direct dependency for interpreting every represented subject."),
+        "enterprises": ("High", "Enterprise intelligence directly supports executive and opportunity interpretation."),
+        "market-participants": ("Medium", "Participant intelligence supports market structure and ecosystem interpretation."),
+        "major-programmes": ("High", "Programme intelligence directly supports transformation timing and procurement interpretation."),
+        "opportunities": ("High", "Opportunity completeness directly governs whether a commercial hypothesis can be used."),
+        "reinvention-timing": ("Medium", "Temporal fidelity supports urgency and sequencing but does not create an opportunity."),
+    }[aspect]
+
+
+def _priority_explanation(mission: CommercialMission | None) -> str:
+    if not mission:
+        return "<li>neutral Industry Twin ordering; no Commercial Mission is configured</li>"
+    values = []
+    if mission.commercial_objective: values.append(("selected objective", mission.commercial_objective))
+    if mission.industries: values.append(("selected industry", ", ".join(mission.industries)))
+    if mission.interests: values.append(("selected capability or focus area", ", ".join(mission.interests)))
+    if mission.commercial_horizon or mission.opportunity_horizon: values.append(("selected horizon", mission.commercial_horizon or mission.opportunity_horizon))
+    customers = (*mission.priority_accounts, *mission.target_customers, *mission.named_accounts)
+    if customers: values.append(("selected customer", ", ".join(customers)))
+    return "".join(f"<li>{escape(label)}: {escape(value)}</li>" for label, value in values) or "<li>configured mission has no optional prioritisation values</li>"
 
 
 def _display(o: SemanticObject, fallback: str) -> str:
@@ -738,104 +775,81 @@ def _display(o: SemanticObject, fallback: str) -> str:
 
 def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMission | None,
                        domain: str = "all", employer_context: EmployerContext | None = None) -> str:
-    """Render the human commissioning brief from the shared owner projection."""
+    """Issue-ready business commission; architecture is confined to the appendix."""
     projections = executive_assessments(twin)
     requirements = research_requirements(twin, projections)
-    selected = tuple(o for o in twin.objects if domain == "all" or domain.casefold() in {d.casefold() for d in o.domains})
     collections = {c.key: c.objects for c in business_collections(twin, include_empty=True, domain=domain)}
-    participants = collections.get("market-participants", ())
-    opportunities = collections.get("opportunities", ())
-    programmes = tuple(o for o in selected if o.kind == "transformation_programme")
-    owner_assessment = next((o for o in twin.objects if o.kind == "high_fidelity_completeness_assessment"), None)
-    assessed = lambda rows: len(rows) if owner_assessment else 0
-    eligible = lambda rows: sum(executive_insight_eligible(o) for o in rows) if owner_assessment else 0
-    lines = [f"# {twin_name} — Research Gap and Enrichment Brief", "",
-        "## 1. Purpose and intended executive decisions",
-        "Commission attributable facts and structured intelligence for executive understanding and commercial decisions. The import and owner-validation pipeline—not the researcher—will determine governed completeness and eligibility.",
-        "", "## 2. Active Commercial Mission", "### Commercial Mission"]
+    selected = tuple(o for o in twin.objects if domain == "all" or domain.casefold() in {d.casefold() for d in o.domains})
+    lines = [f"# {twin_name} — Executive Research Commission", "",
+        "## 1 Executive Purpose",
+        "Commission complete, attributable Industry Twin research for executive understanding and commercial decisions. Researchers supply business facts and evidence; the existing governed validation pipeline assesses architecture, completeness and eligibility.",
+        "", "## 2 Commercial Context", "### Commercial Mission"]
     if mission:
-        account_values = (*mission.target_customers, *mission.priority_accounts, *mission.named_accounts, *mission.enterprises)
-        lines += [f"- Mission: {mission.mission_name or 'Unnamed mission'}", f"- Mission identifier: {mission.context_id}", f"- Context version: {mission.version}", f"- Configuration owner/scope: authenticated user `{mission.user_id}`",
-            f"- Role: {mission.executive_role or 'Not supplied'}", f"- Employer named in mission: {mission.employer or 'Held separately in Employer Context'}",
-            f"- Geography: {', '.join(mission.geography) or 'Not supplied'}", f"- Industries: {', '.join(mission.industries) or 'Not supplied'}",
-            f"- Objectives: {', '.join(mission.objectives) or mission.commercial_objective or 'Not supplied'}",
-            f"- Focus areas: {', '.join(mission.interests) or 'Not supplied'}", f"- Commercial horizon: {mission.commercial_horizon or mission.opportunity_horizon or 'Not supplied'}",
-            f"- Priority customers: {', '.join(account_values) or 'Not supplied'}", f"- Capabilities/offers: {', '.join(mission.offer_portfolio) or 'See Employer Context'}",
-            f"- Competitors: {', '.join(mission.competitors) or 'See Employer Context'}", f"- Partners: {', '.join(mission.partners) or 'See Employer Context'}",
-            "Mission settings order relevant work only; they do not change Twin truth, missing information, owner assessment, or eligibility."]
+        customers = (*mission.priority_accounts, *mission.target_customers, *mission.named_accounts, *mission.enterprises)
+        lines += [f"- Status: Configured", f"- Mission: {mission.mission_name or 'Optional name not supplied'}",
+            f"- Role: {mission.executive_role}", f"- Geography: {', '.join(mission.geography) or 'Not supplied'}",
+            f"- Industries: {', '.join(mission.industries) or 'Not supplied'}",
+            f"- Objectives: {', '.join(mission.objectives) or mission.commercial_objective}",
+            f"- Horizon: {mission.commercial_horizon or mission.opportunity_horizon or 'Not supplied'}",
+            f"- Focus areas: {', '.join(mission.interests) or 'Not supplied'}",
+            f"- Priority customers: {', '.join(customers) or 'Not supplied'}",
+            "- Scope effect: ordering only; no Industry Twin subject is removed."]
     else:
-        lines += ["- No active mission was resolved for the authenticated user. Configure it before commissioning mission-prioritised work."]
-    lines += ["", "## 3. Employer Context", "### Employer Context"]
+        lines += ["- Status: Not configured. Neutral Industry Twin ordering applies."]
+    lines += ["", "### Employer Context"]
     if employer_context:
-        lines += [f"- Status: {'Configured' if employer_context.complete else 'Partially configured'}",
-            f"- Employer Context identifier: {employer_context.context_id}", f"- Context version: {employer_context.version}",
-            f"- Organisation: {employer_context.organisation or 'Not supplied'}", f"- Description: {employer_context.description or 'Not supplied'}",
-            f"- Capabilities: {', '.join(employer_context.capabilities) or 'Not supplied'}", f"- Offers: {', '.join(employer_context.offer_portfolio) or 'Not supplied'}",
-            f"- Propositions: {', '.join(employer_context.propositions) or 'Not supplied'}", f"- Competitors: {', '.join(employer_context.competitors) or 'Not supplied'}",
+        lines += ["- Status: Configured", f"- Employer: {employer_context.organisation}",
+            f"- Capabilities: {', '.join(employer_context.capabilities) or 'Not supplied'}",
+            f"- Offers: {', '.join(employer_context.offer_portfolio) or 'Not supplied'}",
+            f"- Competitors: {', '.join(employer_context.competitors) or 'Not supplied'}",
             f"- Partners: {', '.join(employer_context.partners) or 'Not supplied'}"]
     else:
-        lines += ["- Status: Not configured separately for the authenticated user."]
-    lines += ["", "### Governed research commission"]
-    for projection in projections:
-        related = [r for r in requirements if r.aspect == projection.key]
-        missing = tuple(dict.fromkeys(field for r in related for field in r.missing_fields))
-        subjects = ", ".join(r.subject for r in related) or f"the missing {projection.label.lower()} collection"
-        lines += _gap_block(projection.label, projection.inventory_summary,
-            ", ".join(missing) or "Owner-identified deficiencies remain to be resolved.",
-            f"Complete research is required for {subjects}; mission relevance does not remove any subject.",
-            f"Research {subjects} using the business fields and suitable sources detailed below.",
-            projection.acceptance_criteria)
-    lines += ["", "## 4. Researcher Actions",
-        "Research every represented and applicable Industry Twin subject. The sections below translate existing governed deficiencies into business-information requests.",
-        "", "## 4A. User Configuration Actions"]
-    if employer_context:
-        lines += [f"- Organisation: {employer_context.organisation} ({employer_context.authority_status})",
-            f"- Employer-offer alignment: {'available from configured offers' if employer_context.offer_portfolio else 'optional offers not supplied'}.",
-            f"- Competitor context: {'available from configured competitors' if employer_context.competitors else 'optional competitors not supplied'}.",
-            "- No mandatory user or employer configuration action remains."]
-    else:
-        lines += ["- Employer-specific opportunity alignment cannot yet be fully assessed. Optional Employer Context may be configured without narrowing research."]
-    lines += ["", "## 4. Current Twin coverage",
-        f"- Enterprises: {len(twin.enterprises)} canonical business concepts; {assessed(twin.enterprises)} owner-assessed.",
-        f"- Market Participants: {len(participants)} canonical participants; {assessed(participants)} owner-assessed participants; {eligible(participants)} presentation-eligible participants; {sum(o.kind in {'market_participant', 'market_participant_twin'} for o in selected)} underlying records.",
-        f"- Opportunities: {len(opportunities)} canonical opportunity hypotheses; {assessed(opportunities)} owner-assessed hypotheses; {eligible(opportunities)} recommendation-eligible opportunities; {sum('opportun' in o.kind for o in selected)} underlying/derived records.",
-        f"- Major Programmes: {len(programmes)} canonical programme hypotheses; {assessed(programmes)} owner-assessed programmes; {eligible(programmes)} presentation-eligible programmes.",
-        "", "## 5. Priority research outcomes", "### Priority for this Commercial Mission"]
-    priority = _mission_prioritised(requirements, mission, employer_context)
-    lines += [f"{i}. **{r.subject} ({r.aspect.replace('-', ' ').title()})** — research {', '.join(r.missing_fields)} using {', '.join(r.source_categories)}." for i, r in enumerate(priority, 1)] or ["No active mission priority is configured; use the neutral industry backlog below."]
-    lines += ["", "### Broader Industry Twin gaps", "These neutral gaps remain in scope even when they do not match the active Commercial Mission."]
-    lines += [f"- **{r.subject}:** {', '.join(r.missing_fields)}." for r in requirements]
-    section_map = (("industry-overview", "6. Industry Overview research requirements"), ("enterprises", "7. Enterprise research requirements"),
-        ("market-participants", "8. Market Participant research requirements"), ("major-programmes", "9. Major Programme research requirements"),
-        ("opportunities", "10. Opportunity research requirements"), ("reinvention-timing", "11. Reinvention Timing research requirements"))
+        lines += ["- Status: Not configured separately."]
+    lines += ["", "## 3 Twin Summary",
+        f"- Industry Overview: {len(collections.get('industry-overview', ())) or 1} represented scope.",
+        f"- Enterprises: {len(twin.enterprises)} canonical business concepts.",
+        f"- Market Participants: {len(collections.get('market-participants', ())) } canonical participants.",
+        f"- Major Programmes: {sum(o.kind == 'transformation_programme' for o in selected)} canonical programme hypotheses.",
+        f"- Opportunities: {len(collections.get('opportunities', ())) } canonical opportunity hypotheses.",
+        f"- Reinvention Timing: {sum(bool(_reinvention_kind(o)) for o in selected)} canonical timing subjects.",
+        "", "## 4 Research Commission",
+        "Research every represented and applicable subject below. Mission settings change ordering only and never narrow this commission.",
+        "", "### Priority for this Commercial Mission"]
+    priority = _mission_prioritised(requirements, mission)
+    for i, requirement in enumerate(priority, 1):
+        lines += [f"{i}. **{requirement.subject}** — {', '.join(requirement.missing_fields)}.",
+                  *[f"   - Priority because {item.replace('<li>', '').replace('</li>', '')}" for item in _priority_explanation(mission).split('</li>') if item]]
+    if not priority:
+        lines += ["Neutral canonical ordering applies; no persisted mission priorities are available."]
+    section_map = (("industry-overview", "5 Industry Overview"), ("enterprises", "6 Enterprises"),
+        ("market-participants", "7 Market Participants"), ("major-programmes", "8 Major Programmes"),
+        ("opportunities", "9 Opportunities"), ("reinvention-timing", "10 Reinvention Timing"))
     for key, heading in section_map:
         lines += ["", f"## {heading}"]
         rows = [r for r in requirements if r.aspect == key]
         for r in rows:
-            lines += [f"### {r.subject}", f"- Research {r.subject}: {', '.join(r.missing_fields)}.", f"- Why it matters: {r.why}",
-                f"- Suitable source categories: {', '.join(r.source_categories)}.", f"- Structured output: {r.structured_output}", f"- Acceptance test: {r.acceptance_test}"]
-    evidence = tuple(o for o in selected if o.kind == "evidence")
+            impact, reason = _commercial_impact(key)
+            lines += [f"### {r.subject} — Research {r.subject}", "Find:", *[f"- {field}" for field in r.missing_fields],
+                "", "**Why this matters**", r.why, "", f"**Commercial Impact: {impact}**", f"Reason: {reason}",
+                f"Suitable sources: {', '.join(r.source_categories)}."]
     claims = tuple(o for o in selected if o.statement and o.kind != "evidence")
-    lines += ["", "## 12. Evidence and source requirements",
-        "Supply source URL or stable reference, publisher, publication date, retrieval date, claim linkage, and the relevant excerpt or structured fact. Distinguish reported fact, interpretation, Unknown, and Contradiction.",
-        f"- Current claims without linked evidence: {sum(not o.evidence_refs for o in claims)}.", f"- Current evidence records: {len(evidence)}.",
-        "", "## 13. Required structured deliverables",
-        "Return import-compatible industry, enterprise, participant, programme, opportunity, reinvention-timing, evidence, Unknown and Contradiction records. Do not return unsupported pass/fail or architectural-conformance declarations.",
-        "", "## 14. Acceptance criteria"]
+    evidence = tuple(o for o in selected if o.kind == "evidence")
+    lines += ["", "## 11 Evidence Requirements",
+        "Provide a stable source reference, publisher, publication date, retrieval date, claim linkage and relevant fact. Preserve unresolved facts as Unknowns and conflicting sourced claims as Contradictions.",
+        f"- Current claims without linked evidence: {sum(not o.evidence_refs for o in claims)}.",
+        f"- Current evidence records: {len(evidence)}.",
+        "", "## 12 Acceptance Criteria",
+        "The returned material must be attributable, dated, structured for the existing import contract, complete across every commissioned subject, and explicit about Unknowns and Contradictions."]
     lines += [f"- **{r.subject}:** {r.acceptance_test}" for r in requirements]
-    lines += ["- Re-import remains fail-closed: only the existing owner assessment and eligibility pipeline may change promotion or presentation state.",
-        "", "## 15. Remaining known uncertainty",
-        "Fields not established by attributable evidence must remain explicit Unknowns. Conflicting sourced claims must remain Contradictions; neither is silently resolved by this brief.",
-        "", "## Appendix — governed traceability", "## 13. Appendix — governed traceability", "Architecture metadata is retained here for validation and inspection, not as the researcher's primary instruction.",
+    lines += ["", "## Appendix — governed traceability",
+        "Architectural traceability is provided for optional inspection only and is not a researcher deliverable.",
         "- Read-only translation adapter: owner-projection-v1."]
     for r in requirements:
-        lines += [f"### {r.subject}", f"- Canonical owner: {r.canonical_owner}", f"- Completeness authority / owner schedule: {r.rule_version}",
-            f"- Dimension: {r.dimension}", f"- Rule/version: {r.rule_version}", f"- Affected canonical IDs: {', '.join(r.canonical_ids) or 'collection absent'}",
-            f"- Existing evidence references: {', '.join(r.existing_evidence) or 'none linked'}", f"- Eligibility authority: {r.eligibility_authority}",
-            "- Promotion effect: unchanged until the existing owner validation/import pipeline supplies an eligible result."]
-    lines += ["", "### Diagnostic machine state", *[f"- {p.key}: `{p.state}`; owner result `{p.owner_result_id or 'absent'}`." for p in projections]]
+        lines += [f"### {r.subject}", f"- Governed owner: {r.canonical_owner}",
+            f"- Evidence: {', '.join(r.existing_evidence) or 'none linked'}", f"- Acceptance criteria: {r.acceptance_test}",
+            f"- Canonical authority: {r.rule_version}", f"- Eligibility authority: {r.eligibility_authority}",
+            f"- Affected canonical IDs: {', '.join(r.canonical_ids) or 'collection absent'}"]
     return "\n".join(lines) + "\n"
-
 
 def _mission_prioritised(requirements, mission, employer_context=None):
     if not mission:
@@ -844,12 +858,12 @@ def _mission_prioritised(requirements, mission, employer_context=None):
                        *employer_context.propositions, *employer_context.competitors,
                        *employer_context.partners) if employer_context else ())
     terms = tuple(x.casefold() for x in (*mission.target_customers, *mission.priority_accounts, *mission.named_accounts,
-        *mission.industries, *mission.interests, *employer_terms) if x)
+        *mission.industries, *mission.interests, *mission.objectives, mission.commercial_objective,
+        mission.commercial_horizon, mission.opportunity_horizon, *employer_terms) if x)
     def rank(requirement):
         text = f"{requirement.subject} {requirement.aspect} {' '.join(requirement.missing_fields)}".casefold()
         match = sum(term in text for term in terms)
-        commercial = {"opportunities": 5, "major-programmes": 4, "reinvention-timing": 3, "enterprises": 2}.get(requirement.aspect, 0)
-        return (match, commercial)
+        return match
     return tuple(sorted(requirements, key=rank, reverse=True))
 
 def _gap_block(name, current, missing, why, action, acceptance):
