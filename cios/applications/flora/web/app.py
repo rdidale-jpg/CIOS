@@ -65,6 +65,9 @@ HEALTH_PAYLOAD = {"status": "healthy", "service": "flora"}
 APPLICATION_MODULE = "cios.applications.flora.web.app"
 IMPORT_ROUTE_OWNER = "cios.applications.flora.digital_twins.digital_twins_landing_page"
 IMPORT_ROUTE_IMPLEMENTATION = "pilot-candidate-import-v1"
+EXECUTIVE_TWIN_ROUTE_OWNER = "cios.applications.flora.blueprint_import.executive_workspace.executive_workspace_page"
+COMMERCIAL_CONTEXT_ROUTE_OWNER = EXECUTIVE_TWIN_ROUTE_OWNER
+EXECUTIVE_TWIN_IMPLEMENTATION = "executive-twin-map-v4"
 
 
 def import_deployment_fingerprint() -> dict[str, str]:
@@ -76,6 +79,9 @@ def import_deployment_fingerprint() -> dict[str, str]:
         "pilot_import_mode": "conflict" if mode.conflict else ("active" if mode.enabled else "inactive"),
         "import_route_owner": IMPORT_ROUTE_OWNER,
         "import_route_implementation": IMPORT_ROUTE_IMPLEMENTATION,
+        "twin_map_route_owner": EXECUTIVE_TWIN_ROUTE_OWNER,
+        "commercial_context_route_owner": COMMERCIAL_CONTEXT_ROUTE_OWNER,
+        "executive_twin_implementation": EXECUTIVE_TWIN_IMPLEMENTATION,
     }
 
 def deployment_payload() -> dict[str, str]:
@@ -250,7 +256,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/intelligence"):
                 run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/intelligence")
                 html, status = executive_workspace_page(run_id, self.headers)
-                self._html(html, status=status)
+                self._html(_with_import_deployment_fingerprint(html), status=status)
             elif parsed.path.startswith("/blueprint-import/") and parsed.path.endswith("/explore"):
                 run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/explore")
                 collection = (parse_qs(parsed.query).get("collection") or [""])[0]
@@ -286,7 +292,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 run_id = parsed.path.removeprefix("/blueprint-import/").removesuffix("/mission")
                 domain = (parse_qs(parsed.query).get("domain") or ["all"])[0]
                 html, status = executive_workspace_page(run_id, self.headers, view="mission", domain=domain)
-                self._html(html, status=status)
+                self._html(_with_import_deployment_fingerprint(html), status=status)
             elif parsed.path.startswith("/blueprint-import/") and "/enterprises/" in parsed.path:
                 remainder = parsed.path.removeprefix("/blueprint-import/")
                 run_id, enterprise_id = remainder.split("/enterprises/", 1)
@@ -330,7 +336,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 run_id = parsed.path.removeprefix("/blueprint-import/")
                 domain = (parse_qs(parsed.query).get("domain") or ["all"])[0]
                 html, status = executive_workspace_page(run_id, self.headers, domain=domain)
-                self._html(html, status=status)
+                self._html(_with_import_deployment_fingerprint(html), status=status)
             elif _is_enterprise_intelligence_path(parsed.path):
                 enterprise_id = [part for part in parsed.path.split('/') if part][1]
                 html, status = executive_intelligence_brief_page(enterprise_id, self.headers)
