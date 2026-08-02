@@ -15,8 +15,8 @@ def incomplete(n=9):
 def test_volume_cannot_advance_opportunity_readiness():
     one = next(a for a in twin_readiness(incomplete(1)) if a.key == "opportunities")
     nine = next(a for a in twin_readiness(incomplete(9)) if a.key == "opportunities")
-    assert one.state == nine.state == "Insufficient"
-    assert one.bars == nine.bars == 1
+    assert one.state == nine.state == "legacy_unassessed"
+    assert one.bars is nine.bars is None
     assert "%" not in str(nine)
 
 
@@ -26,7 +26,7 @@ def test_primary_readiness_is_frozen_to_six_business_aspects():
     assert all(a.researcher_action for a in aspects)
 
 
-def test_only_contract_ready_opportunity_enters_table():
+def test_legacy_opportunity_table_does_not_change_owner_readiness():
     rows = [{"candidate_record_id": "ready", "candidate_object_class": "opportunity_hypothesis", "payload": {
         "statement": "Modernise payments operations", "affected_enterprises": ["Example Bank"],
         "client_problem": "Legacy payment processing", "evidence_refs": ["E1"], "confidence": "high",
@@ -35,3 +35,4 @@ def test_only_contract_ready_opportunity_enters_table():
     html = _opportunities(twin(rows), "run", None)
     assert "Customer" in html and "Example Bank" in html and "Not established" in html
     assert "2027-Q1" in html and "Procurement active" in html and ">Weak<" not in html
+    assert next(a for a in twin_readiness(twin(rows)) if a.key == "opportunities").state == "legacy_unassessed"

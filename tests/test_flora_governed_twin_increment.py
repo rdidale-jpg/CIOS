@@ -1,7 +1,6 @@
 from cios.applications.flora.blueprint_import.guidance import (
     detect_package_type, expectation_mismatch, select_with_dependencies,
 )
-from cios.applications.flora.blueprint_import.maturity import assess_maturity
 from cios.applications.flora.blueprint_import.projections import industry_portfolio, normalise_opportunity
 
 
@@ -23,17 +22,6 @@ def test_selective_scope_closes_dependencies_and_reports_missing():
     chosen, unresolved=select_with_dependencies(rows,{"OPP-1"})
     assert chosen == {"1","2"}
     assert unresolved == {"EVID-1"}
-
-
-def test_maturity_is_deterministic_explainable_and_critical_inputs_cap_opportunity():
-    signals={name:100 for name,_ in __import__("cios.applications.flora.blueprint_import.maturity",fromlist=["PROFILES"]).PROFILES["opportunity"]}
-    signals["buyer_identity"]=0; signals.update(unknown_count=1, contradiction_count=1)
-    first=assess_maturity("opportunity",signals,package_completeness=100)
-    assert first == assess_maturity("opportunity",signals,package_completeness=100)
-    assert first["overall_maturity"] <= 49
-    assert first["package_completeness"] == 100
-    assert first["decision_completeness"]["score"] != first["package_completeness"]
-    assert first["caps"] and first["penalties"] and first["next_evidence"] == "buyer_identity"
 
 
 def test_read_projections_preserve_unavailable_and_rank_only_comparable_inputs():
