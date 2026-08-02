@@ -87,7 +87,7 @@ def test_collection_language_counts_banner_and_markdown_contract():
     assert len(re.findall(r"^# ", brief, re.MULTILINE)) == 1
     headings = re.findall(r"^## (.+)$", brief, re.MULTILINE)
     assert len(headings) == len(set(headings))
-    assert headings[:15] == [f"{i}. {name}" for i, name in enumerate(("Executive Purpose", "Commercial Context", "Twin Summary", "Complete Research Commission", "Mission Emphasis", "Industry Overview", "Enterprises", "Market Participants", "Major Programmes", "Opportunities", "Reinvention Timing", "Evidence, Unknowns and Contradictions", "Required Structured Deliverables", "Researcher Acceptance Criteria", "Remaining Known Limitations"), 1)]
+    assert headings[:16] == [f"{i}. {name}" for i, name in enumerate(("Executive Purpose", "Commercial Context", "Twin Summary", "Complete Research Commission", "Mission Emphasis", "Industry Overview", "Enterprises", "Market Participants", "Major Programmes", "Opportunities", "Reinvention Timing", "Evidence Requirements", "Unknowns and Contradictions", "Required Structured Deliverables", "Researcher Acceptance Criteria", "Remaining Known Limitations"), 1)]
     primary, appendix = brief.split("## Appendix A", 1)
     assert "canonical owner" not in primary.casefold() and "promotion effect" not in primary.casefold()
     assert "canonical owner" in appendix.casefold() and "## Appendix B" in brief and "## Appendix C" in brief

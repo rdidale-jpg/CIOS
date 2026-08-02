@@ -230,7 +230,7 @@ def _hero(title):
 def _mission_indicator(mission: CommercialMission | None, employer: EmployerContext | None, run_id: str, domain: str = "all") -> str:
     target = f"/blueprint-import/{escape(run_id)}/mission?domain={escape(domain)}"
     if not mission:
-        return f"<aside class='mission-indicator' role='status'><strong>Commercial context not configured</strong> · neutral Industry Twin ordering · <a href='{target}'>Configure</a></aside>"
+        return f"<aside class='mission-indicator' role='status'><strong>Commercial context not configured</strong> · neutral Industry Twin ordering because no Commercial Mission is available · <a href='{target}'>Configure</a></aside>"
     employer_name = employer.organisation if employer else "Employer not supplied"
     details = [mission.mission_name, mission.executive_role, employer_name,
                ", ".join(mission.geography), mission.commercial_horizon]
@@ -744,10 +744,10 @@ def _count_statement(key: str, affected: int) -> str:
     return {
         "industry-overview": "1 Industry Twin; 11 required overview dimensions incomplete",
         "enterprises": f"{affected} enterprise profiles require enrichment",
-        "market-participants": f"{affected} market participants require enrichment",
+        "market-participants": f"{affected} market participant concepts require enrichment or classification",
         "major-programmes": f"{affected} major-programme hypotheses require enrichment",
         "opportunities": f"{affected} opportunity hypotheses require enrichment",
-        "reinvention-timing": f"{affected} canonical timing subjects require enrichment; owner assessments identify incomplete dimensions",
+        "reinvention-timing": f"{affected} applicable affected subjects require Reinvention Timing enrichment; assessment-record and owner-assessment counts are reported separately",
     }[key]
 
 
@@ -884,10 +884,14 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
               "major-programmes": sum(o.kind == "transformation_programme" for o in selected),
               "opportunities": len(collections.get("opportunities", ())),
               "reinvention-timing": sum(bool(_reinvention_kind(o)) for o in selected)}
-    lines += ["", "## 3. Twin Summary", "- 1 Industry Twin.", "- 11 required Industry Overview dimensions incomplete.",
+    timing_objects = tuple(o for o in selected if _reinvention_kind(o))
+    timing_assessments = tuple(p for p in executive_assessments(twin) if p.key == "reinvention-timing")
+    lines += ["", "## 3. Twin Summary", "- 1 canonical Industry Twin.", "- 11 required Industry Overview dimensions incomplete.",
         f"- {counts['enterprises']} enterprise profiles require enrichment.", f"- {counts['market-participants']} market participants require enrichment.",
         f"- {counts['major-programmes']} major-programme hypotheses require enrichment.", f"- {counts['opportunities']} opportunity hypotheses require enrichment.",
-        f"- {counts['reinvention-timing']} canonical Reinvention Timing subjects; owner assessments identify incomplete dimensions.",
+        f"- {len(timing_objects)} existing Reinvention Timing assessment records.",
+        f"- {counts['reinvention-timing']} applicable affected Reinvention Timing subjects.",
+        f"- {len(timing_assessments)} owner assessment projections cover Reinvention Timing; unassessed subjects remain explicit research requirements.",
         "", "## 4. Complete Research Commission",
         "Research the complete canonical population: the Industry Twin across every applicable overview dimension; every enterprise, market participant, major-programme hypothesis, opportunity hypothesis and applicable timing subject; every evidence deficiency; and all Unknowns and Contradictions. Mission settings remove nothing from this commission.",
         "", "## 5. Mission Emphasis"]
@@ -909,16 +913,20 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
             lines += ["", f"### {r.subject}", "Research:", *[f"- {field}" for field in r.missing_fields], f"- Suitable sources: {', '.join(r.source_categories)}."]
     claims = tuple(o for o in selected if o.statement and o.kind != "evidence")
     evidence = tuple(o for o in selected if o.kind == "evidence")
-    lines += ["", "## 12. Evidence, Unknowns and Contradictions",
+    lines += ["", "## 12. Evidence Requirements",
         "For every material fact provide a stable source reference, publisher, publication date, retrieval date and claim linkage. Record unavailable facts as Unknowns with the evidence searched, reason unresolved and decision impact. Preserve conflicting sourced claims as Contradictions.",
         f"- Current claims without linked evidence: {sum(not o.evidence_refs for o in claims)}.", f"- Current evidence records: {len(evidence)}.",
-        "", "## 13. Required Structured Deliverables",
+        "", "## 13. Unknowns and Contradictions",
+        "Unknowns are valid complete outcomes only when they record the question, evidence searched, why it remains unresolved and the decision impact. Preserve each contradictory sourced claim and its lineage until resolved.",
+        f"- Current Unknown records: {len(tuple(o for o in selected if o.kind == 'unknown'))}.",
+        f"- Current Contradiction records: {len(tuple(o for o in selected if o.kind == 'contradiction'))}.",
+        "", "## 14. Required Structured Deliverables",
         "Return import-compatible industry, enterprise, participant, programme, opportunity, timing, Evidence, Unknown and Contradiction records. Do not replace structured fields with narrative-only findings.",
-        "", "## 14. Researcher Acceptance Criteria"]
+        "", "## 15. Researcher Acceptance Criteria"]
     for key, heading in section_map:
         row = next((r for r in requirements if r.aspect == key), None)
         if row: lines.append(f"- **{heading.split('. ', 1)[1]}:** {row.acceptance_test}")
-    lines += ["", "## 15. Remaining Known Limitations",
+    lines += ["", "## 16. Remaining Known Limitations",
         "User configuration gaps, including an optional mission name, offers or partners not supplied, are not external research gaps. Mission ordering remains limited wherever the Twin lacks explicit identity, relationship, capability or timing associations.",
         "", "## Appendix A — Architectural Traceability",
         "The named canonical owner supplies every applicable dimension and its acceptance or promotion effect. This read-only translation does not calculate a parallel assessment.",
@@ -929,12 +937,49 @@ def research_gap_brief(twin: SemanticTwin, twin_name: str, mission: CommercialMi
     lines += ["", "## Appendix B — Canonical Subject Register"]
     for r in requirements:
         lines.append(f"- {r.subject}: {', '.join(r.canonical_ids) or 'collection currently absent'}")
-    lines += ["", "## Appendix C — Applied Mission-Relevance Reasons"]
+    from .research_requirements import participant_classification, enterprise_subject_type
+    lines += ["", "## Appendix C — Classification and Identity Gaps"]
+    for o in collections.get("market-participants", ()):
+        classification = participant_classification(o)
+        lines.append(f"- {_display(o, 'Unnamed participant concept')}: {classification}; source record `{o.original_id or o.record_id}` remains inspectable.")
+    for enterprise in twin.enterprises:
+        subject_type = enterprise_subject_type(enterprise.records)
+        if subject_type == "unresolved":
+            lines.append(f"- {enterprise.name}: enterprise subject type unresolved; classification research is required.")
+    if not collections.get("market-participants", ()) and not twin.enterprises:
+        lines.append("- No supplied subjects require classification.")
+    lines += ["", "## Appendix D — Applied Mission-Relevance Reasons"]
     if emphasis:
         for r, reasons in emphasis: lines.append(f"- {r.subject}: {'; '.join(reasons)}")
     else:
         lines.append("- No explicit subject match was applied; neutral ordering remains in force.")
-    return "\n".join(lines) + "\n"
+    document = "\n".join(lines) + "\n"
+    validate_research_commission_markdown(document)
+    return document
+
+
+def validate_research_commission_markdown(document: str) -> None:
+    """Fail closed before a malformed researcher deliverable can be exported."""
+    import re
+    required = ("Executive Purpose", "Commercial Context", "Twin Summary", "Complete Research Commission",
+        "Mission Emphasis", "Industry Overview", "Enterprises", "Market Participants", "Major Programmes",
+        "Opportunities", "Reinvention Timing", "Evidence Requirements", "Unknowns and Contradictions",
+        "Required Structured Deliverables", "Researcher Acceptance Criteria", "Remaining Known Limitations")
+    errors = []
+    if not document.endswith("\n"): errors.append("final newline missing")
+    if len(re.findall(r"^# \S", document, re.MULTILINE)) != 1: errors.append("document must contain exactly one H1")
+    if re.search(r"^#{1,6}\s*$", document, re.MULTILINE): errors.append("empty heading")
+    numbered = re.findall(r"^## (\d+)\. (.+)$", document, re.MULTILINE)
+    numbers = [int(n) for n, _ in numbered]
+    if numbers != list(range(1, 17)): errors.append("numbered sections are missing, duplicated or out of order")
+    for number, name in enumerate(required, 1):
+        if f"## {number}. {name}\n" not in document: errors.append(f"missing required section {number}. {name}")
+    for appendix in "ABCD":
+        if not re.search(rf"^## Appendix {appendix} — \S", document, re.MULTILINE): errors.append(f"missing Appendix {appendix}")
+    headings = re.findall(r"^## (.+)$", document, re.MULTILINE)
+    if len(headings) != len(set(headings)): errors.append("duplicate heading")
+    if document.rstrip().endswith("#"): errors.append("unexpected truncation")
+    if errors: raise ValueError("Invalid Research Commission Markdown: " + "; ".join(errors))
 
 
 def _mission_prioritised(requirements, mission, employer_context=None):
