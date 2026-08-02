@@ -6,7 +6,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / 'knowledge-packs/researcher/manifest.yaml'
-VERSION = '2.5.0'
+VERSION = '2.6.0'
 BASENAME = f'CIOS-Researcher-Knowledge-Pack-v{VERSION}'
 
 
@@ -27,7 +27,7 @@ def build(version=VERSION):
 
 def test_manifest_completeness_and_sources():
     ds=docs(); ids={d['document_id'] for d in ds}
-    required={'RG-001','RG-002','RKI-001','RKI-003','EI-001','EI-002','EI-003','EI-012','FP-009','FP-010','FP-012','ADR-016','MISSION-UKCG-001','TEMPLATE-Industry-Twin-Maturity-Assessment','TEMPLATE-Executive-Intelligence-Handover'}
+    required={'RG-001','RG-002','RKI-001','RKI-003','EI-001','EI-002','EI-003','EI-012','FP-009','FP-010','FP-012','ADR-016','MISSION-UKCG-001','SCHEMA-Twin-Release-Manifest-v2','TEMPLATE-Industry-Twin-Maturity-Assessment','TEMPLATE-Executive-Intelligence-Handover'}
     assert required <= ids
     for d in ds:
         src=ROOT/d['source_path']
@@ -95,7 +95,7 @@ def test_generated_filenames_metadata_report_and_root_use_requested_version():
 def test_source_version_mismatch_fails_with_clear_message():
     result = build('9.9.9')
     assert result.returncode != 0
-    assert 'Version mismatch: requested version 9.9.9; conflicting version 2.5.0' in result.stderr
+    assert 'Version mismatch: requested version 9.9.9; conflicting version 2.6.0' in result.stderr
     assert 'source file: knowledge-packs/researcher/VERSION; field: VERSION' in result.stderr
 
 
