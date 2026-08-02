@@ -15,6 +15,7 @@ REQUIRED_DIRS = (
     "documents",
     "live_evidence",
     "collection_manifests",
+    "commercial_context",
     "memory",
     "memory/enterprise_models",
     "blueprint_import/archives",
