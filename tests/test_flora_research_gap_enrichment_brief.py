@@ -44,9 +44,9 @@ def test_brief_has_business_structure_mission_context_and_traceability_appendix(
     employer = EmployerContext.from_dict({"organisation": "Example Supplier", "capabilities": ["AI"],
         "offer_portfolio": ["Transformation"], "propositions": ["AI reinvention"], "competitors": ["Competitor"], "partners": ["Partner"]})
     brief = research_gap_brief(twin(), "Telecoms and Media", mission, employer_context=employer)
-    for heading in ("Purpose and intended executive decisions", "Active Commercial Mission", "Employer Context",
-                    "Current Twin coverage", "Priority for this Commercial Mission", "Broader Industry Twin gaps",
-                    "Required structured deliverables", "Remaining known uncertainty", "Appendix — governed traceability"):
+    for heading in ("Executive Purpose", "Commercial Mission", "Employer Context", "Twin Summary",
+                    "Priority for this Commercial Mission", "Research Commission", "Evidence Requirements",
+                    "Acceptance Criteria", "Appendix — governed traceability"):
         assert heading in brief
     assert "Opportunities: 9 canonical opportunity hypotheses" in brief
     assert "Market Participants: 10 canonical participants" in brief

@@ -94,4 +94,4 @@ def test_guided_editor_preserves_saved_choices_and_opens_populated_employer_sett
     assert "value='Partner opportunities' checked" in html
     assert "value='Specialist service' checked" in html
     assert "<details class='setup-section' open>" in html
-    assert ">Partially configured<" in html
+    assert ">Configured<" in html
