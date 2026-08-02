@@ -37,8 +37,9 @@ def test_mission_edit_persists_against_authenticated_profile(monkeypatch, tmp_pa
 
 from dataclasses import asdict
 from cios.applications.flora.commercial_mission import (
-    resolve_employer_context, save_employer_context,
+    CommercialMission, EmployerContext, resolve_employer_context, save_employer_context,
 )
+from cios.applications.flora.blueprint_import.executive_workspace import _mission_editor
 
 
 def test_employer_context_persists_in_an_independent_profile_store(monkeypatch, tmp_path):
@@ -68,3 +69,29 @@ def test_saving_mission_does_not_change_employer_context(monkeypatch, tmp_path):
     before = save_employer_context(headers, {"organisation": "Supplier", "offer_portfolio": ["Data"]})
     save_commercial_mission(headers, {"executive_role": "Lead", "commercial_objective": "Grow accounts"})
     assert resolve_employer_context(headers) == before
+
+
+def test_guided_commercial_context_editor_has_one_save_journey_and_collapsed_advanced_settings():
+    html = _mission_editor(None, None, "run-1", "media")
+    assert all(heading in html for heading in (
+        "1. About me", "2. What I want Flora to help me find", "3. My commercial context"))
+    assert "How Flora will use this" in html
+    assert "Save and return to Twin Map" in html
+    assert "Save Commercial Mission" not in html and "Save Employer Context" not in html
+    assert "<details class='setup-section'>" in html
+    assert "<details class='setup-section' open>" not in html
+    assert "value='unresolved'" not in html and 'value="unresolved"' not in html
+    assert "return_domain' value='media'" in html
+
+
+def test_guided_editor_preserves_saved_choices_and_opens_populated_employer_settings():
+    mission = CommercialMission.from_dict("alex", {
+        "executive_role": "Director", "commercial_objective": "Active procurements",
+        "geography": ["Europe"], "commercial_horizon": "12–24 months",
+        "objectives": ["Partner opportunities"], "interests": ["Cloud", "Specialist service"]})
+    employer = EmployerContext.from_dict({"organisation": "Example Ltd", "description": "Declared context"})
+    html = _mission_editor(mission, employer, "run-2")
+    assert "value='Partner opportunities' checked" in html
+    assert "value='Specialist service' checked" in html
+    assert "<details class='setup-section' open>" in html
+    assert ">Partially configured<" in html
