@@ -1,0 +1,12 @@
+PASS: 14 enterprises
+PASS: 10 participants
+PASS: 9 programmes
+PASS: 9 opportunities
+PASS: industries
+PASS: priority customers
+PASS: capabilities
+PASS: competitors
+PASS: category classification
+PASS: composite unresolved
+PASS: configured application handlers returned complete responses
+PASS: structural validator accepted exactly one H1, sections 1–16, appendices A–D, complete EOF and final newline

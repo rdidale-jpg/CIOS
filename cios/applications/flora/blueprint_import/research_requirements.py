@@ -81,6 +81,40 @@ _BUSINESS_ACCEPTANCE = {
     "reinvention-timing": "Every applicable domain and material enterprise has evidence-backed transformation pressure, affected functions, adoption signals, timing horizon, response mechanism and uncertainty.",
 }
 
+_ENTERPRISE_FIELDS = {
+    "regulator": ("statutory mandate", "jurisdiction", "powers", "leadership", "implementation timetable", "regulatory priorities", "enforcement mechanisms", "regulated entities", "funding", "technology and data capability", "procurements", "evidence"),
+    "public body": ("mandate", "funding model", "beneficiaries", "strategy", "programmes", "grants or procurement", "public outcomes", "transformation priorities", "evidence"),
+    "governing body": ("governance role", "members", "rights and revenue model", "regulation", "competitions", "commercial partners", "data and technology", "programmes", "procurements", "strategic pressures", "evidence"),
+    "league": ("governance role", "members", "rights and revenue model", "regulation", "competitions", "commercial partners", "data and technology", "programmes", "procurements", "strategic pressures", "evidence"),
+    "broadcaster": ("ownership", "remit", "audience", "revenue or funding model", "content model", "distribution", "advertising or subscription economics", "technology", "programmes", "procurement", "regulation", "evidence"),
+    "commercial company": ("ownership", "corporate purpose", "strategy", "operating segments", "revenue", "profitability", "investment capacity", "operating model", "technology", "suppliers", "customers", "programmes", "procurements", "risks", "AI adoption", "evidence"),
+}
+
+def participant_classification(obj: SemanticObject) -> str:
+    """Project an explicitly supplied canonical type; never infer one from its label."""
+    attrs = obj.attributes or {}
+    raw = str(next((attrs.get(k) for k in ("canonical_type", "participant_type", "entity_type", "identity_type", "record_type", "type") if attrs.get(k)), "")).strip().casefold()
+    aliases = {"company": "organisation", "organization": "organisation", "organisation": "organisation",
+               "organisation_group": "organisation group", "category": "participant category",
+               "participant_category": "participant category", "participant class": "participant category", "regulatory_body": "regulator",
+               "unresolved": "unresolved identity"}
+    value = aliases.get(raw, raw.replace("_", " "))
+    allowed = {"organisation", "organisation group", "participant category", "capability", "relationship",
+               "programme", "opportunity", "regulator", "unresolved identity"}
+    return value if value in allowed else "unresolved identity"
+
+def enterprise_subject_type(objects: tuple[SemanticObject, ...]) -> str:
+    """Use the owner's supplied organisational form, otherwise preserve the gap."""
+    for obj in objects:
+        attrs = obj.attributes or {}
+        raw = str(next((attrs.get(k) for k in ("subject_type", "organisational_form", "organization_type", "enterprise_type") if attrs.get(k)), "")).strip().casefold()
+        aliases = {"company": "commercial company", "corporation": "commercial company", "regulatory body": "regulator",
+                   "public corporation": "public body", "funding body": "public body", "media organisation": "broadcaster"}
+        value = aliases.get(raw, raw)
+        if value in _ENTERPRISE_FIELDS:
+            return value
+    return "unresolved"
+
 
 def research_requirements(twin: SemanticTwin, projections: tuple[ExecutiveAssessmentProjection, ...]) -> tuple[ResearchRequirement, ...]:
     """Translate owner deficiencies and current content; never assess a pass."""
@@ -91,14 +125,29 @@ def research_requirements(twin: SemanticTwin, projections: tuple[ExecutiveAssess
         projection = by_key[key]
         subjects = _subjects(key, twin, collections.get(key, ()))
         for subject, objects in subjects:
-            missing = tuple(field for field in fields if not _present(field, objects))
+            requested_fields = fields
+            if key == "enterprises":
+                requested_fields = _ENTERPRISE_FIELDS.get(enterprise_subject_type(objects),
+                    ("subject classification", "identity", "purpose", "strategy", "operating structure", "financial or funding context", "technology", "ecosystem", "pressures", "programmes", "change", "evidence"))
+            elif key == "market-participants" and objects:
+                classification = participant_classification(objects[0])
+                requested_fields = {
+                    "organisation": fields,
+                    "organisation group": ("group definition", "legitimate member identities", "role", "relationships", "market significance", "evidence"),
+                    "participant category": ("category definition", "inclusion criteria", "representative members", "role", "relationships", "market significance", "evidence"),
+                    "capability": ("capability definition", "providers", "users", "business application", "relationships", "evidence"),
+                    "relationship": ("source", "target", "relationship type", "business significance", "timing", "evidence"),
+                    "regulator": ("legitimate identity", "mandate", "jurisdiction", "regulated entities", "market role", "relationships", "evidence"),
+                    "unresolved identity": ("identity resolution", "candidate type", "source record interpretation", "role", "relationships", "evidence"),
+                }.get(classification, ("identity resolution", "candidate type", "evidence"))
+            missing = tuple(field for field in requested_fields if not _present(field, objects))
             # An absent owner dimension remains researchable even where package
             # content happens to carry a field; only genuinely absent facts are requested.
             if not missing and not projection.deficiencies:
                 continue
             ids = tuple(dict.fromkeys(o.original_id or o.record_id for o in objects))
             evidence = tuple(dict.fromkeys(ref for o in objects for ref in o.evidence_refs))
-            requested = missing or fields
+            requested = missing or requested_fields
             requirements.append(ResearchRequirement(
                 key, subject, ids, requested,
                 f"These facts are needed to understand and safely use {subject} in {projection.label.lower()} decisions.",
