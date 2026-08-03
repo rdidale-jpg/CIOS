@@ -1,7 +1,7 @@
 pack:
   id: CIOS-Researcher-Knowledge-Pack
   title: CIOS Researcher Knowledge Pack
-  version: 2.7.0
+  version: 2.8.0
   owner: CIOS / Knowledge Pack Owner
   canonical_location: knowledge-packs/researcher
   generated_artifacts: dist release artifacts
@@ -15,7 +15,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: a923778dda0025c4106d59fd6bb5dc6a623df260f35db6f0ab9dbedf6ac76f40
+    checksum: 3805bfcc5d41d1f97dbadbdf22444fbda3349a7e14d12f8600ddf642b1882219
     transform: none
   - pack_path: configuration/Researcher-GPT-Instructions.md
     source_path: knowledge-packs/researcher/configuration/Researcher-GPT-Instructions.md
@@ -26,7 +26,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: 4edeeafd0bc136de8157471eee77cb623429c7c0a32d2057cbe008112465ab7a
+    checksum: 232914318cc0a7f2f5ca82bcc5ceddd54056e198d91826483e9f056cc5d117e3
     transform: none
   - pack_path: configuration/Researcher-Configuration-Guide.md
     source_path: knowledge-packs/researcher/configuration/Researcher-Configuration-Guide.md

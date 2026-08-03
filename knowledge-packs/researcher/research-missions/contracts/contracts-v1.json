@@ -1,14 +1,807 @@
 {
-  "version":"1.0.0",
+  "schema_id": "CIOS-Research-Contract-Registry",
+  "registry_version": "1.0.0",
+  "canonical_owner": "Researcher Knowledge Pack",
   "modules": {
-    "evidence-closure":"Close a gap only with attributable evidence linked to the affected claim. Record sources searched and stop only at COMPLETE or EVIDENCE EXHAUSTED.",
-    "analyst-estimates":"Use only manifest-permitted estimate types. Label method, inputs, assumptions, range, confidence and analyst authorship; never present an estimate as observed fact.",
-    "opportunity-timing":"State timing as an evidenced window, dependencies and earliest decision trigger; never infer a date from general market momentum.",
-    "opportunity-value":"Separate evidenced value, bounded estimate and scenario. Record currency, period, basis, range and uncertainty.",
-    "horizons":"Classify Horizon 1 as current/committed, Horizon 2 as emerging/scaling, and Horizon 3 as exploratory/structural; cite evidence and triggers for every classification.",
-    "monitoring-triggers":"For unresolved or time-dependent claims specify the observable event, source, review cadence and state transition it would trigger.",
-    "unknown-handling":"Represent an Unknown explicitly with question, searches performed, reason unresolved, decision impact and next trigger. Do not fill gaps with plausible prose.",
-    "contradiction-handling":"Preserve each conflicting sourced claim and lineage. Do not silently select or average; record the resolution owner and required evidence.",
-    "pre-delivery-validation":"Validate profile IDs and versions, structured outputs, evidence lineage, Unknowns, Contradictions, estimates, horizon rules and mandatory outputs before delivery. Narrative is not a substitute for governed records."
+    "twin-object-construction": {
+      "id": "twin-object-construction",
+      "title": "Twin Object Construction Contract",
+      "purpose": "Construct deterministic profile-conformant records",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-twin-object-construction@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Construct deterministic profile-conformant records; IT-001 owns fields and semantics."
+    },
+    "evidence-collection": {
+      "id": "evidence-collection",
+      "title": "Evidence Collection Contract",
+      "purpose": "Collect attributable evidence with claim, source, access date, subject and lineage.",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-evidence-collection@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Collect attributable evidence with claim, source, access date, subject and lineage."
+    },
+    "evidence-closure": {
+      "id": "evidence-closure",
+      "title": "Evidence Closure Contract",
+      "purpose": "Classify each named closure target from attributable evidence without changing governed truth.",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-evidence-closure@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Classify each named closure target from attributable evidence without changing governed truth."
+    },
+    "evidence-exhaustion": {
+      "id": "evidence-exhaustion",
+      "title": "Evidence Exhaustion Contract",
+      "purpose": "Exhaustion is question-specific, field-specific, time-bounded and source-documented",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-evidence-exhaustion@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Exhaustion is question-specific, field-specific, time-bounded and source-documented; never mark a whole Twin exhausted."
+    },
+    "analyst-estimate": {
+      "id": "analyst-estimate",
+      "title": "Analyst Estimate Contract",
+      "purpose": "For every estimate record field, evidence, searches, method, comparables, assumptions, exclusions, bounds, confidence, linked Unknown, Contradictions, falsification, triggers and review date",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-analyst-estimate@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "For every estimate record field, evidence, searches, method, comparables, assumptions, exclusions, bounds, confidence, linked Unknown, Contradictions, falsification, triggers and review date; retain the Unknown."
+    },
+    "opportunity-qualification": {
+      "id": "opportunity-qualification",
+      "title": "Opportunity Qualification Contract",
+      "purpose": "Keep Open opportunity, Shaping opportunity, Strategic hypothesis, Active procurement, Existing award, Framework market, Closed and Unclassified distinct.",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-opportunity-qualification@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Keep Open opportunity, Shaping opportunity, Strategic hypothesis, Active procurement, Existing award, Framework market, Closed and Unclassified distinct."
+    },
+    "procurement-maturity": {
+      "id": "procurement-maturity",
+      "title": "Procurement Maturity Contract",
+      "purpose": "Record configured procurement maturity from observed procurement evidence and preserve uncertainty.",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-procurement-maturity@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Record configured procurement maturity from observed procurement evidence and preserve uncertainty."
+    },
+    "opportunity-value-taxonomy": {
+      "id": "opportunity-value-taxonomy",
+      "title": "Opportunity Value Taxonomy",
+      "purpose": "Distinguish observed programme investment, observed contract value, framework ceiling, estimated externally addressable scope, estimated contract-value range, potential supplier share and Unknown",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-opportunity-value-taxonomy@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Distinguish observed programme investment, observed contract value, framework ceiling, estimated externally addressable scope, estimated contract-value range, potential supplier share and Unknown; never aggregate them as equivalents."
+    },
+    "opportunity-timing": {
+      "id": "opportunity-timing",
+      "title": "Opportunity Timing Estimation Contract",
+      "purpose": "Record evidenced timing windows, dependencies, bounds, confidence, triggers and review date.",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-opportunity-timing@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Record evidenced timing windows, dependencies, bounds, confidence, triggers and review date."
+    },
+    "horizon-1-2-3": {
+      "id": "horizon-1-2-3",
+      "title": "Horizon 1–2–3 Contract",
+      "purpose": "Classify against manifest-configured H1, H2 and H3 boundaries",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-horizon-1-2-3@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Classify against manifest-configured H1, H2 and H3 boundaries; defaults are examples only."
+    },
+    "buyer-qualification": {
+      "id": "buyer-qualification",
+      "title": "Buyer Qualification Contract",
+      "purpose": "Identify customer problem, buying entity, buyer roles, authority and confidence independently.",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-buyer-qualification@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Identify customer problem, buying entity, buyer roles, authority and confidence independently."
+    },
+    "existing-award-residual": {
+      "id": "existing-award-residual",
+      "title": "Existing Award and Residual Opportunity Contract",
+      "purpose": "Separate awarded value and incumbent scope from evidenced residual or adjacent opportunity.",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-existing-award-residual@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Separate awarded value and incumbent scope from evidenced residual or adjacent opportunity."
+    },
+    "framework-market": {
+      "id": "framework-market",
+      "title": "Framework Market Contract",
+      "purpose": "Treat a framework ceiling as market access capacity, not expected spend, contract value or supplier share.",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-framework-market@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Treat a framework ceiling as market access capacity, not expected spend, contract value or supplier share."
+    },
+    "opportunity-overlap": {
+      "id": "opportunity-overlap",
+      "title": "Opportunity Overlap and Double-Count Contract",
+      "purpose": "Declare overlaps, parent programmes, awards and mutually exclusive value bases before aggregation.",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-opportunity-overlap@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Declare overlaps, parent programmes, awards and mutually exclusive value bases before aggregation."
+    },
+    "monitoring-trigger": {
+      "id": "monitoring-trigger",
+      "title": "Monitoring Trigger Contract",
+      "purpose": "Record observable event, authoritative source, cadence, owner and state transition for each trigger.",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-monitoring-trigger@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Record observable event, authoritative source, cadence, owner and state transition for each trigger."
+    },
+    "falsification": {
+      "id": "falsification",
+      "title": "Falsification Contract",
+      "purpose": "State evidence that would disprove or materially revise each estimate or hypothesis.",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-falsification@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "State evidence that would disprove or materially revise each estimate or hypothesis."
+    },
+    "unknown": {
+      "id": "unknown",
+      "title": "Unknown Contract",
+      "purpose": "Retain explicit Unknown question, searches, impact and next trigger beneath any evidence-bounded estimate.",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-unknown@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Retain explicit Unknown question, searches, impact and next trigger beneath any evidence-bounded estimate."
+    },
+    "contradiction": {
+      "id": "contradiction",
+      "title": "Contradiction Contract",
+      "purpose": "Preserve conflicting sourced claims, lineage, impact and resolution requirement",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-contradiction@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Preserve conflicting sourced claims, lineage, impact and resolution requirement; never average silently."
+    },
+    "pre-delivery-validation": {
+      "id": "pre-delivery-validation",
+      "title": "Pre-delivery Validation Contract",
+      "purpose": "Validate pinned profiles, lineage, outputs, estimates, Unknowns, Contradictions and receipts before delivery.",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-pre-delivery-validation@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Validate pinned profiles, lineage, outputs, estimates, Unknowns, Contradictions and receipts before delivery."
+    },
+    "mission-outcome": {
+      "id": "mission-outcome",
+      "title": "Mission Outcome Contract",
+      "purpose": "Use only CONTINUE, EVIDENCE_EXHAUSTED or COMPLETE",
+      "applicability": "Research missions referencing this module",
+      "canonical_owner": "CIOS-RMC-mission-outcome@1.0.0",
+      "required_inputs": [
+        "mission manifest",
+        "pinned governed profiles",
+        "current evidence or gaps"
+      ],
+      "required_outputs": [
+        "profile-conformant records",
+        "traceability entries"
+      ],
+      "controlled_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation_rules": [
+        "inputs and outputs are attributable",
+        "version pins and lineage are present"
+      ],
+      "prohibited_behaviour": [
+        "redefine IT-001 profile fields",
+        "promote or accept derived output"
+      ],
+      "traceability_requirements": [
+        "mission ID",
+        "source or gap ID",
+        "profile and module version"
+      ],
+      "version": "1.0.0",
+      "compatibility": {
+        "manifest": ">=1.1.0 <2.0.0",
+        "profiles": "1.x"
+      },
+      "instruction": "Use only CONTINUE, EVIDENCE_EXHAUSTED or COMPLETE; these do not confer acceptance, readiness, import or promotion."
+    }
   }
 }

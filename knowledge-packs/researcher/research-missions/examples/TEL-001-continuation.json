@@ -1,11 +1,35 @@
 {
-  "manifest_version": "1.0.0",
+  "schema_id": "CIOS-Research-Mission-Manifest",
+  "schema_version": "1.1.0",
+  "mission_name": "TEL-001 continuation",
+  "mission_type": "industry-twin-continuation",
+  "mission_template_id": "industry-twin-continuation",
+  "mission_template_version": "1.0.0",
   "parent_twin_id": "TEL-001",
-  "industry": "Telecommunications, Media and Sport",
-  "geography": [
-    "United Kingdom"
-  ],
-  "profile_versions": {
+  "baseline_release": "TEL-001-release-3",
+  "predecessor_mission_id": "TEL-001-initial-construction",
+  "created_date": "2026-08-03",
+  "generated_date": "2026-08-03T00:00:00Z",
+  "owner": "CIOS Chief Architect",
+  "governance_state": "ISSUED",
+  "scope": {
+    "industry": "Telecommunications, Media and Sport",
+    "geography": [
+      "United Kingdom"
+    ],
+    "included_domains": [
+      "telecommunications",
+      "media",
+      "sport"
+    ],
+    "excluded_domains": [],
+    "material_subject_criteria": "Material UK operators, buyers, programmes and market participants",
+    "research_period": "current baseline through evidence cut-off",
+    "evidence_cut_off": "2026-08-03",
+    "current_checkpoint": "TEL-001 release 3",
+    "complete_scope_rule": "All named subjects and governed gaps are accounted for."
+  },
+  "profile_pins": {
     "industry-overview": "1.0.0",
     "enterprise-dossier": "1.0.0",
     "market-participant": "1.0.0",
@@ -15,45 +39,89 @@
     "industry-membership": "1.0.0",
     "industry-release-manifest": "1.0.0"
   },
-  "required_outputs": [
-    "governed-records",
-    "evidence-register",
-    "unknown-register",
-    "contradiction-register",
-    "validation-report"
-  ],
-  "evidence_closure_policy": "Search authoritative and independent sources; close only with linked evidence or record evidence exhaustion.",
-  "permitted_estimate_types": [
-    "bounded-range",
-    "derived"
-  ],
-  "outcome_states": [
-    "COMPLETE",
-    "CONTINUE",
-    "EVIDENCE EXHAUSTED"
-  ],
-  "generated_date": "2026-08-03T00:00:00Z",
-  "pack_version": "2.7.0",
-  "mission_id": "TEL-001-continuation",
-  "mission_type": "industry-twin-continuation",
-  "baseline_release": "TEL-001-release-1",
-  "scope": {
-    "domains": [
-      "telecommunications",
-      "media",
-      "sport"
-    ],
-    "mode": "delta continuation"
+  "relationship_profile_versions": {
+    "industry-membership": "1.0.0"
   },
-  "research_priorities": [
-    "Close baseline gaps",
-    "Enrich enterprises, participants, programmes and opportunities"
+  "evidence_uncertainty_profile_versions": {
+    "evidence": "EI-012",
+    "unknown": "IT-001",
+    "contradiction": "IT-001"
+  },
+  "release_manifest_version": "2.0.0",
+  "research_priorities": {
+    "priority_outcomes": [
+      "Produce profile-conformant evidence-backed records"
+    ],
+    "current_governed_gaps": [
+      "Private commercial fields"
+    ],
+    "named_closure_targets": [
+      "Named gaps in the baseline release"
+    ],
+    "monitoring_targets": [
+      "Material state changes"
+    ],
+    "current_object_counts": {
+      "baseline": "supplied by TEL-001 release"
+    },
+    "current_unknowns": [
+      "Unpublished commercial detail"
+    ],
+    "current_contradictions": [
+      "Conflicting public timing statements"
+    ]
+  },
+  "evidence_policy": {
+    "preferred_source_types": [
+      "primary",
+      "regulatory",
+      "procurement",
+      "company filing"
+    ],
+    "primary_source_expectation": "Primary evidence wherever available",
+    "evidence_exhaustion_policy": "Question-specific, field-specific, time-bounded and source-documented.",
+    "closure_classifications": [
+      "CLOSED",
+      "PARTIAL",
+      "EVIDENCE_EXHAUSTED",
+      "OPEN"
+    ],
+    "freshness_rules": "Use evidence current at cut-off and label older evidence.",
+    "review_period": "90 days"
+  },
+  "estimation_policy": {
+    "permitted_estimate_types": [
+      "bounded-range",
+      "derived",
+      "analyst-scenario"
+    ],
+    "retain_underlying_unknown": true
+  },
+  "outputs": {
+    "required_object_classes": [
+      "governed-records"
+    ],
+    "required_registers": [
+      "evidence-register",
+      "unknown-register",
+      "contradiction-register",
+      "validation-report"
+    ],
+    "required_reports": [
+      "change-log",
+      "executive-checkpoint"
+    ],
+    "required_package_name": "TEL-001-research-candidate",
+    "release_manifest_requirement": true,
+    "checksums": true,
+    "change_log": true,
+    "executive_checkpoint": true
+  },
+  "outcome_states": [
+    "CONTINUE",
+    "EVIDENCE_EXHAUSTED",
+    "COMPLETE"
   ],
-  "current_gaps": [
-    "Claims without linked evidence",
-    "Incomplete dates and subject classifications"
-  ],
-  "subject_ids": [
-    "IND-TMS-001"
-  ]
+  "pack_version": "2.8.0",
+  "mission_id": "TEL-001-continuation"
 }

@@ -1,13 +1,13 @@
 {
   "schema_id": "CIOS-Research-Mission-Manifest",
   "schema_version": "1.1.0",
-  "mission_name": "TEL-001 initial construction",
-  "mission_type": "industry-twin-construction",
-  "mission_template_id": "industry-twin-construction",
+  "mission_name": "TEL-001 Wave 5 commercial pipeline qualification",
+  "mission_type": "commercial-pipeline-qualification",
+  "mission_template_id": "commercial-pipeline-qualification",
   "mission_template_version": "1.0.0",
   "parent_twin_id": "TEL-001",
-  "baseline_release": "TEL-001-pre-construction-baseline",
-  "predecessor_mission_id": null,
+  "baseline_release": "TEL-001-release-3",
+  "predecessor_mission_id": "TEL-001-targeted-evidence-closure",
   "created_date": "2026-08-03",
   "generated_date": "2026-08-03T00:00:00Z",
   "owner": "CIOS Chief Architect",
@@ -50,7 +50,8 @@
   "release_manifest_version": "2.0.0",
   "research_priorities": {
     "priority_outcomes": [
-      "Produce profile-conformant evidence-backed records"
+      "Qualify VodafoneThree, Network Services 4 and Project Gigabit without conflating pipeline states or value types",
+      "Assess Openreach, BT, VMO2, TalkTalk/PXC and nexfibre/Substantial using Ofcom and other attributable sources"
     ],
     "current_governed_gaps": [
       "Private commercial fields"
@@ -123,5 +124,67 @@
     "COMPLETE"
   ],
   "pack_version": "2.8.0",
-  "mission_id": "TEL-001-initial-construction"
+  "mission_id": "TEL-001-wave-5-pipeline-qualification",
+  "commercial_pipeline_configuration": {
+    "horizon_boundaries": {
+      "H1": "0–12 months",
+      "H2": "12–24 months",
+      "H3": "beyond 24 months"
+    },
+    "permitted_commercial_types": [
+      "Open opportunity",
+      "Shaping opportunity",
+      "Strategic hypothesis",
+      "Active procurement",
+      "Existing award",
+      "Framework market",
+      "Closed",
+      "Unclassified"
+    ],
+    "permitted_value_types": [
+      "observed programme investment",
+      "observed contract value",
+      "framework ceiling",
+      "estimated externally addressable scope",
+      "estimated contract-value range",
+      "potential supplier share",
+      "Unknown"
+    ],
+    "permitted_estimate_types": [
+      "bounded-range",
+      "derived",
+      "analyst-scenario"
+    ],
+    "required_confidence_dimensions": [
+      "customer/problem",
+      "programme linkage",
+      "buyer",
+      "procurement status",
+      "timing",
+      "value",
+      "competition",
+      "partner context"
+    ],
+    "procurement_maturity_states": [
+      "none observed",
+      "market engagement",
+      "planned",
+      "active procurement",
+      "awarded",
+      "closed",
+      "Unknown"
+    ],
+    "pipeline_views": [
+      "named open opportunity pipeline",
+      "active procurement",
+      "shaping opportunities",
+      "strategic hypotheses",
+      "existing awards and residual scope",
+      "framework markets",
+      "unclassified items"
+    ],
+    "aggregation_rules": "Never aggregate unlike value types; resolve overlaps and report pipeline views separately.",
+    "currency": "GBP",
+    "value_year_handling": "Record price year and conversion basis."
+  }
 }

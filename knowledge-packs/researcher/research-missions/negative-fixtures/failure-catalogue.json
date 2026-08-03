@@ -1,11 +1,81 @@
-[
-  {"id":"missing-profile","failure":"a template references a profile absent from profile-versions.json"},
-  {"id":"missing-profile-version","failure":"a required template profile has no manifest version"},
-  {"id":"invalid-manifest","failure":"a schema-required field is absent"},
-  {"id":"unresolved-variable","failure":"rendered contract text contains {{UNRESOLVED}}"},
-  {"id":"missing-output","failure":"required_outputs omits validation-report"},
-  {"id":"opportunity-without-horizons","failure":"an opportunity-pipeline-enrichment manifest omits horizon_definitions"},
-  {"id":"closure-without-exhaustion","failure":"a targeted-evidence-closure manifest omits EVIDENCE EXHAUSTED"},
-  {"id":"stale-generated-file","failure":"checked-in generated Markdown differs from deterministic rendering"},
-  {"id":"pack-without-active-template","failure":"the pack template set omits one required active template"}
-]
+{
+  "version": "1.1.0",
+  "purpose": "Named negative cases implemented by tests/knowledge_packs/test_research_missions.py and pack tests.",
+  "cases": [
+    {
+      "id": 1,
+      "name": "Unknown profile ID",
+      "expected": "REJECT"
+    },
+    {
+      "id": 2,
+      "name": "Unknown contract-module ID",
+      "expected": "REJECT"
+    },
+    {
+      "id": 3,
+      "name": "Missing mission-template version",
+      "expected": "REJECT"
+    },
+    {
+      "id": 4,
+      "name": "Missing baseline release",
+      "expected": "REJECT"
+    },
+    {
+      "id": 5,
+      "name": "Opportunity mission without Horizon configuration",
+      "expected": "REJECT"
+    },
+    {
+      "id": 6,
+      "name": "Evidence-closure mission without exhaustion policy",
+      "expected": "REJECT"
+    },
+    {
+      "id": 7,
+      "name": "Analyst-estimate mission without Unknown retention",
+      "expected": "REJECT"
+    },
+    {
+      "id": 8,
+      "name": "Invalid outcome state",
+      "expected": "REJECT"
+    },
+    {
+      "id": 9,
+      "name": "Unresolved template variable",
+      "expected": "REJECT"
+    },
+    {
+      "id": 10,
+      "name": "Telecoms-specific organisation embedded in a generic template",
+      "expected": "REJECT"
+    },
+    {
+      "id": 11,
+      "name": "Duplicate canonical research rule",
+      "expected": "REJECT"
+    },
+    {
+      "id": 12,
+      "name": "Stale generated commission",
+      "expected": "REJECT"
+    },
+    {
+      "id": 13,
+      "name": "Incompatible profile and template versions",
+      "expected": "REJECT"
+    },
+    {
+      "id": 14,
+      "name": "Generated brief missing required output",
+      "expected": "REJECT"
+    },
+    {
+      "id": 15,
+      "name": "Missing pack asset",
+      "expected": "REJECT"
+    }
+  ]
+}

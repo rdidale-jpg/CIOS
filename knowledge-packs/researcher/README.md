@@ -1,7 +1,7 @@
 # CIOS Researcher Knowledge Pack
 
 **Pack ID:** CIOS-Researcher-Knowledge-Pack  
-**Version:** 2.7.0
+**Version:** 2.8.0
 **Owner:** CIOS / Knowledge Pack Owner
 
 This repository-managed pack configures a Researcher to execute participant-aware Industry Twin and Commercial Digital Twin research from canonical CIOS sources. The repository remains the source of truth; the ZIP is a deterministic distribution artefact.
@@ -15,11 +15,11 @@ This repository-managed pack configures a Researcher to execute participant-awar
 
 ## Participant-aware intelligence
 
-Version 2.7.0 adds reusable, versioned Research Mission templates, manifests, composed contracts and generated TEL-001 fixtures while retaining the existing Twin Object Profile and Knowledge Pack owners. It also packages the WP1-002 High-Fidelity controlled schedules alongside RG-002.
+Version 2.8.0 composes ten reusable mission templates, twenty single-owner research contracts and manifest schema 1.1 into deterministic commissions. TEL-001 is included only as a labelled worked example; IT-001 profiles and existing architecture remain canonical. It also packages the WP1-002 High-Fidelity controlled schedules alongside RG-002.
 
 ## Build
 
-Run `python3 tools/knowledge-packs/build_researcher_pack.py --version 2.7.0 --output-dir dist` with the selected semantic version. Generated ZIP files belong in `dist/` and are release artefacts, not authoritative sources.
+Run `python3 tools/knowledge-packs/build_researcher_pack.py --version 2.8.0 --output-dir dist` with the selected semantic version. Generated ZIP files belong in `dist/` and are release artefacts, not authoritative sources.
 
 ## Authority
 
