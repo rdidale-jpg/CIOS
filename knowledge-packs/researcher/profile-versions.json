@@ -1,0 +1,10 @@
+{
+  "registry_version": "1.0.0",
+  "canonical_owner": "architecture/specifications/knowledge-packs/Industry-Twin-Package-Content-Inventory-Contract.md",
+  "profiles": {
+    "industry-overview": "1.0.0", "enterprise-dossier": "1.0.0",
+    "market-participant": "1.0.0", "programme": "1.0.0",
+    "opportunity": "1.0.0", "reinvention-assessment": "1.0.0",
+    "industry-membership": "1.0.0", "industry-release-manifest": "1.0.0"
+  }
+}

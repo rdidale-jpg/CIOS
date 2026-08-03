@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.0
+
+- Added governed Research Mission configuration, reusable contract composition, TEL-001 fixtures and deterministic validation/build integration.
+
 ## 2.6.0
 
 - Activated the canonical IT-001 controlled schedule with eight deterministic Twin Object Profiles and Executive Workspace bindings.

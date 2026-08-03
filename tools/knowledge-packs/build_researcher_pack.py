@@ -9,6 +9,7 @@ import re
 import shutil
 import sys
 import zipfile
+import json
 
 ROOT = Path(__file__).resolve().parents[2]
 PACK = ROOT / 'knowledge-packs/researcher'
@@ -110,6 +111,22 @@ def validate(docs):
     validate.participant_results={'hard_failures':hard,'unresolved_source_warnings':warnings,'optional_document_notices':notices}
 
 
+def validate_research_missions():
+    """Keep mission configuration reproducible without creating a new owner."""
+    sys.path.insert(0, str(ROOT / 'tools/knowledge-packs'))
+    from research_missions import load, render
+    mission_root = PACK / 'research-missions'
+    templates = load(mission_root / 'templates/templates-v1.json')['templates']
+    expected = {'industry-twin-construction','industry-twin-continuation','targeted-evidence-closure','opportunity-pipeline-enrichment','periodic-twin-refresh'}
+    active = {t['id'] for t in templates}
+    if active != expected: fail(f'Pack omits active templates: {sorted(expected-active)}')
+    for manifest_path in sorted((mission_root / 'examples').glob('*.json')):
+        rendered = render(load(manifest_path))
+        checked = mission_root / 'generated' / (manifest_path.stem + '.md')
+        if not checked.exists() or checked.read_text() != rendered:
+            fail(f'Generated research commission is stale: {checked.relative_to(ROOT)}')
+
+
 def index(docs):
     order=['Start here','Operating guidance','Enterprise Intelligence','Supporting architecture','Templates','Mission briefs','Governance references']
     def group(d):
@@ -150,12 +167,14 @@ def main(argv=None):
     zip_path = dist / f'{basename}.zip'
     report_path = dist / f'{basename}-build-report.md'
     validate_source_versions(version, basename, zip_path, report_path)
-    docs=parse_manifest(PACK/'manifest.yaml'); validate(docs)
+    docs=parse_manifest(PACK/'manifest.yaml'); validate(docs); validate_research_missions()
     if STAGE.exists(): shutil.rmtree(STAGE)
     root_stage = STAGE / basename
     root_stage.mkdir(parents=True)
     for extra in ['VERSION','manifest.yaml','source-map.yaml','CHANGELOG.md','MIGRATION.md']:
         shutil.copy2(PACK/extra, root_stage/extra)
+    shutil.copy2(PACK/'profile-versions.json', root_stage/'profile-versions.json')
+    shutil.copytree(PACK/'research-missions', root_stage/'research-missions')
     (root_stage/'pack-state.yaml').write_text(f'pack_id: {PACK_ID}\nversion: {version}\nroot_directory: {basename}\nrelease_zip: {zip_path.name}\nbuild_report: {report_path.name}\n')
     for d in docs:
         dest=root_stage/d['pack_path']; dest.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(ROOT/d['source_path'],dest)

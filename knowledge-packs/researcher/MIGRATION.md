@@ -1,4 +1,4 @@
-# Migration to Researcher Knowledge Pack v2.6.0
+# Migration to Researcher Knowledge Pack v2.7.0
 
 Replace Researcher Knowledge Pack v2.5.0 bundles with `CIOS-Researcher-Knowledge-Pack-v2.6.0.zip`. Retain canonical repository source documents in their owning paths.
 
