@@ -778,52 +778,82 @@ def _flora_increment2_lineage_page(change_id: str, headers=None) -> str:
 
 def _flora_home_page(headers=None, question_error: str = "") -> str:
     from html import escape
+    from cios.applications.flora.commercial_mission import resolve_commercial_context
 
     decision = blueprint_upload_authorisation(headers or {})
     auth = _account_context_html(decision)
+    context = resolve_commercial_context(headers or {})
+    mission, employer_context = context.commercial_mission, context.employer_context
     pipeline = _opportunity_pipeline()
     opportunities = [o for o in pipeline.opportunities if o.horizon != "not_actionable"]
     horizon_counts = {h: sum(o.horizon == h for o in opportunities) for h in ("horizon_1", "horizon_2", "horizon_3")}
-    participants = {o.participant_type for o in pipeline.opportunities if o.participant_type}
-    evidence = {asset for o in pipeline.opportunities for asset in o.supporting_asset_ids}
-    unknown_count = sum(len(o.unknowns) for o in pipeline.opportunities)
-    contradiction_count = sum(len(o.contradictions) for o in pipeline.opportunities)
+    participants = {o.participant_type for o in opportunities if o.participant_type}
+    unknown_count = sum(len(o.unknowns) for o in opportunities)
 
-    def domain(href: str, title: str, metric: str, meaning: str, next_step: str) -> str:
-        return (f"<a class='estate-tile' href='{href}'><span class='eyebrow'>{title}</span>"
-                f"<strong>{metric}</strong><span>{meaning}</span><em>{next_step}</em></a>")
+    def mission_reason(o) -> str:
+        if mission is None:
+            return ""
+        customer = (o.enterprise_name or "").casefold()
+        text = " ".join((o.title, o.commercial_problem, o.participant_type, o.enterprise_name)).casefold()
+        named = (*mission.named_accounts, *mission.priority_accounts, *mission.target_customers, *mission.enterprises)
+        if customer and any(v.casefold() in customer or customer in v.casefold() for v in named):
+            return "Named priority customer in your Commercial Context."
+        if any(v.casefold() in text for v in mission.industries):
+            return "Selected industry in your Commercial Context."
+        if any(v and v.casefold() in text for v in (*mission.objectives, mission.commercial_objective)):
+            return "Selected commercial objective in your Commercial Context."
+        if any(v.casefold() in text for v in (*mission.offer_portfolio, *mission.strategic_propositions)):
+            return "Explicit capability relationship in your Commercial Context."
+        if any(v.casefold() in text for v in mission.competitors):
+            return "Configured competitor in your Commercial Context."
+        return ""
 
-    priority_cards = "".join(
-        f"<article class='priority-card'><p class='eyebrow'>{escape(_horizon_label(o.horizon))}</p>"
-        f"<h3>{escape(o.enterprise_name or o.participant_type)}</h3>"
-        f"<p><strong>Problem</strong> {escape(o.commercial_problem)}</p>"
-        f"<dl><div><dt>Estimated timing</dt><dd>Not yet assessed</dd></div><div><dt>Estimated value</dt><dd>Not yet assessed</dd></div>"
-        f"<div><dt>Evidence confidence</dt><dd>{escape(o.evidence_strength)}</dd></div></dl>"
-        f"<p><strong>Reason shown</strong> {escape(o.horizon_rationale.rationale)}</p>"
-        f"<a href='/opportunities?opportunity={escape(o.opportunity_id)}'>Inspect opportunity</a></article>"
-        for o in opportunities[:4]
-    )
-    return _flora_v2_page(
-        "Enterprise Intelligence Workspace",
-        "home",
-        f"""
-        <section class='workspace-heading'><p class='eyebrow'>Flora Map</p><h1>Enterprise Intelligence Workspace</h1><p class='lead'>See the intelligence estate, decide what matters and move directly to the evidence.</p></section>
-        <section class='context-banner' aria-labelledby='context-title'><div><p class='eyebrow'>Commercial Context</p><h2 id='context-title'>No configured mission</h2></div><dl><div><dt>Industry focus</dt><dd>Not yet assessed</dd></div><div><dt>Time horizon</dt><dd>Not yet assessed</dd></div><div><dt>Last updated</dt><dd>Not yet assessed</dd></div></dl><a class='button-link' href='/blueprint-import'>Configure Mission</a></section>
-        <section aria-labelledby='map-title'><div class='section-heading'><div><p class='eyebrow'>Flora Map</p><h2 id='map-title'>Enterprise Intelligence Map</h2></div><p>Choose a domain to inspect its current intelligence and next decision.</p></div><div class='estate-grid'>
-          {domain('/intelligence?tab=industries','Industries','1 governed industry','UK Banking has governed runtime intelligence.','Open the Industry Twin Map')}
-          {domain('/intelligence?tab=enterprises','Enterprises','Not yet assessed','Enterprise coverage is available within the governed Banking workspace.','Inspect enterprise dossiers')}
-          {domain('/opportunities','Opportunities',f"{len(opportunities)} active candidates",f"{horizon_counts['horizon_1']} Horizon 1 · {horizon_counts['horizon_2']} Horizon 2 · {horizon_counts['horizon_3']} Horizon 3",'Review the commercial pipeline')}
-          {domain('/intelligence?tab=programmes','Major Programmes','Not yet assessed','Programme coverage is not summarised by the current runtime.','Inspect programme intelligence')}
-          {domain('/intelligence?tab=participants','Market Participants',f"{len(participants)} represented",'Runtime opportunities cover these participant types.','Compare market participants')}
-          {domain('/research','Research & Readiness',f"{unknown_count} evidence gaps",f"{len(evidence)} evidence assets support current opportunities.",'Close the highest-value gap')}
-        </div></section>
-        <section aria-labelledby='priorities-title'><div class='section-heading'><div><p class='eyebrow'>Commercial focus</p><h2 id='priorities-title'>Mission Priorities</h2></div><p>Configure your Commercial Context to personalise opportunity prioritisation. All intelligence remains visible.</p></div><div class='priority-grid'>{priority_cards}</div></section>
-        <section class='card inbox' aria-labelledby='attention-title'><p class='eyebrow'>Intelligence inbox</p><h2 id='attention-title'>Intelligence Requiring Attention</h2><div class='attention-grid'><p><strong>New evidence</strong><span>Not yet assessed</span></p><p><strong>Changed opportunities</strong><span>Not yet assessed</span></p><p><strong>New programmes</strong><span>Not yet assessed</span></p><p><strong>Research gaps</strong><span>{unknown_count} recorded across runtime opportunities</span></p><p><strong>Evidence becoming stale</strong><span>Not yet assessed</span></p><p><strong>Resolved contradictions</strong><span>Not yet assessed</span></p><p><strong>Upcoming monitoring triggers</strong><span>{contradiction_count} current contradictions require monitoring</span></p></div></section>
-        <section aria-labelledby='portfolio-title'><div class='section-heading'><div><p class='eyebrow'>Industry estate</p><h2 id='portfolio-title'>Industry Portfolio</h2></div><p>Only industries with a real runtime state are shown.</p></div><a class='industry-card' href='/flora/banking'><strong>UK Banking</strong><span class='status governed'>Governed</span><em>Inspect the current Industry Twin Map</em></a></section>
-        """,
-        auth,
-    )
+    ranked = sorted(opportunities, key=lambda o: (not bool(mission_reason(o)), not bool(o.enterprise_name), o.opportunity_id))
+    mission_ordered = bool(mission and any(mission_reason(o) for o in opportunities))
 
+    if mission is None:
+        context_banner = """<section class='context-banner' aria-labelledby='context-title'><div><p class='eyebrow'>Commercial Context</p><h2 id='context-title'>Commercial context not configured</h2><p>Configure your Commercial Context to personalise ordering and relevance.</p></div><a class='button-link' href='/blueprint-import'>Configure Commercial Context</a></section>"""
+    else:
+        employer = (employer_context.organisation if employer_context else "") or mission.employer or "Employer not supplied"
+        geography = ", ".join(mission.geography) or "Geography incomplete"
+        horizon = mission.commercial_horizon or "Horizon incomplete"
+        context_banner = f"""<section class='context-banner' aria-labelledby='context-title'><div><p class='eyebrow'>Commercial Context</p><h2 id='context-title'>Commercial context {escape(mission.operational_status.casefold())}</h2><p>{escape(mission.executive_role or 'Role incomplete')} · {escape(employer)} · {escape(geography)} · {escape(horizon)}</p></div><p>Settings personalise ordering, emphasis and relevance explanations; they do not change Twin truth, completeness, evidence, confidence or research scope.</p><a class='button-link' href='/blueprint-import'>Edit</a></section>"""
+
+    def domain(href, title, metric, meaning, action):
+        return f"<a class='estate-tile' href='{href}'><span class='eyebrow'>{title}</span><strong>{metric}</strong><span>{meaning}</span><em>{action}</em></a>"
+
+    def opportunity_card(o):
+        named = bool(o.enterprise_name)
+        hypothesis = "" if named else "<p class='eyebrow'>Strategic opportunity hypothesis</p>"
+        customer = escape(o.enterprise_name) if named else "Customer unresolved"
+        reason = mission_reason(o)
+        relevance = f"<p class='mission-reason'><strong>Mission relevance</strong> {escape(reason)}</p>" if mission_ordered and reason else ""
+        return (f"<article class='priority-card'>{hypothesis}<h3>{customer}</h3><h4>{escape(o.title)}</h4>"
+                f"<p><strong>Opportunity hypothesis · {_horizon_label(o.horizon)}</strong></p><dl>"
+                "<div><dt>Timing</dt><dd>Not yet assessed</dd></div><div><dt>Value</dt><dd>Not yet assessed</dd></div>"
+                f"<div><dt>Evidence confidence</dt><dd>{escape(o.evidence_strength)}</dd></div></dl>"
+                f"<p class='why'><strong>Why it matters</strong><br>{escape(o.summary)}</p>{relevance}"
+                f"<a href='/opportunities?opportunity={escape(o.opportunity_id)}'>Inspect opportunity</a></article>")
+
+    cards = "".join(opportunity_card(o) for o in ranked[:4])
+    section_title = "Priorities for my mission" if mission_ordered else "Commercial opportunities"
+    section_subtitle = ("Ordered by explicit matches in your persisted Commercial Context." if mission_ordered else
+                        "Highest-priority opportunities currently represented across the intelligence estate.")
+    return _flora_v2_page("Enterprise Intelligence Workspace", "home", f"""
+      <section class='workspace-heading'><p class='eyebrow'>Flora Map</p><h1>Enterprise Intelligence Workspace</h1><p class='lead'>See the intelligence estate, decide what matters and move directly to the evidence.</p></section>
+      {context_banner}
+      <section aria-labelledby='map-title'><div class='section-heading'><div><p class='eyebrow'>Flora Map</p><h2 id='map-title'>Enterprise Intelligence Map</h2></div><p>Choose a domain to inspect its current intelligence and next decision.</p></div><div class='estate-grid'>
+        {domain('/intelligence?tab=industries','Industries','1 governed · 0 candidates','Governed and candidate industry states are counted separately.','Open industries')}
+        {domain('/intelligence?tab=enterprises','Enterprises','6 represented · 0 owner-assessed','Owner assessment is separate from representation.','Open enterprise intelligence')}
+        {domain('/opportunities','Opportunities',f"{len(opportunities)} opportunity hypotheses",f"{horizon_counts['horizon_1']} H1 · {horizon_counts['horizon_2']} H2 · {horizon_counts['horizon_3']} H3",'Open opportunity pipeline')}
+        {domain('/intelligence?tab=programmes','Major Programmes','Not currently summarised','Assessment not yet available.','Open programmes')}
+        {domain('/intelligence?tab=participants','Market Participants',f"{len(participants)} represented · 0 owner-assessed",f"{len(participants)} competitor, partner, supplier or other participant classifications are represented.",'Open participant intelligence')}
+        {domain('/research','Research & Readiness','Research missions not currently summarised',f"{unknown_count} material gaps across represented opportunities.",'Open research and readiness')}
+      </div></section>
+      <section aria-labelledby='priorities-title'><div class='section-heading'><div><p class='eyebrow'>Commercial focus</p><h2 id='priorities-title'>{section_title}</h2></div><p>{section_subtitle}</p></div><div class='priority-grid'>{cards}</div></section>
+      <section class='card inbox' aria-labelledby='attention-title'><p class='eyebrow'>Intelligence inbox</p><h2 id='attention-title'>Intelligence Requiring Attention</h2><div class='attention-grid'><a href='/research?filter=new-evidence'><strong>New evidence</strong><span>Not currently available</span></a><a href='/opportunities?filter=changed'><strong>Changed opportunities</strong><span>Not currently available</span></a><a href='/intelligence?tab=programmes&amp;filter=new'><strong>New programmes</strong><span>Not currently available</span></a><a href='/research?filter=gaps'><strong>Research gaps</strong><span>{unknown_count} material gaps</span></a><a href='/research?filter=stale-evidence'><strong>Evidence becoming stale</strong><span>Not currently available</span></a><a href='/governance?filter=resolved-contradictions'><strong>Resolved contradictions</strong><span>Not currently available</span></a><a href='/research?filter=monitoring-triggers'><strong>Upcoming monitoring triggers</strong><span>Not currently available</span></a></div></section>
+      <section aria-labelledby='portfolio-title'><div class='section-heading'><div><p class='eyebrow'>Industry estate</p><h2 id='portfolio-title'>Industry Portfolio</h2></div><p>One governed industry is currently available.</p></div><a class='industry-card' href='/flora/banking'><strong>UK Banking</strong><span class='status governed'>Governed</span><span>6 enterprises · {len(opportunities)} opportunity hypotheses · {unknown_count} material gaps</span><em>Open Industry Twin</em></a></section>
+    """, auth)
 
 def _opportunity_pipeline():
     from cios.applications.flora.enterprise_intelligence.opportunity_pipeline import generate_banking_opportunity_pipeline
@@ -1141,7 +1171,7 @@ def _account_context_html(decision) -> str:
     if decision.user_id:
         controls = "<a href='/digital-twins'>Enterprise Canvas</a><a href='/blueprint-import'>Import Twin</a><a href='/blueprint-import/history'>Import History</a><a href='/settings' aria-label='Profile and settings'>Controls</a>" if decision.owner_recognised else ""
         return f"<div class='account' aria-label='Account context'><span>{escape(decision.user_id)}</span><span>{escape(decision.active_workspace or 'No workspace')}</span>{controls}<form method='post' action='/pilot-sign-out'><button type='submit'>Sign out</button></form></div>"
-    return "<div class='account' aria-label='Account context'><span>Not signed in</span><a href='/pilot-sign-in'>Pilot access</a></div>"
+    return "<div class='account' aria-label='Account context'><span class='pill'>Pilot</span><a href='/pilot-sign-in' aria-label='Profile and settings'>Controls</a></div>"
 
 
 def _flora_v2_page(title: str, active: str, body: str, account_html: str, footer: str = "") -> str:
@@ -1150,8 +1180,8 @@ def _flora_v2_page(title: str, active: str, body: str, account_html: str, footer
     links = ''.join(f"<a href='{href}' aria-current='page'>{label}</a>" if key == active else f"<a href='{href}'>{label}</a>" for key, href, label in nav)
     return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>{escape(title)}</title><style>
     :root{{--bg:#f5f1ea;--ink:#13211c;--muted:#5f6f68;--line:#ded6c8;--card:#fffdf9;--brand:#174d3f;--brand2:#e7f1ec;--focus:#9b5cff}}*{{box-sizing:border-box}}body{{font-family:Inter,Arial,sans-serif;margin:0;background:linear-gradient(180deg,#fbf8f2,#f3eee5);color:var(--ink);line-height:1.55}}a{{color:var(--brand);font-weight:700;text-underline-offset:3px}}a:focus-visible,button:focus-visible,input:focus-visible{{outline:3px solid var(--focus);outline-offset:3px}}.shell{{max-width:1120px;margin:auto;padding:24px}}.topbar{{display:flex;gap:20px;align-items:center;justify-content:space-between;margin-bottom:44px}}.brand strong{{display:block;font-size:1.3rem}}.brand span,.muted{{color:var(--muted)}}.primary-nav{{display:flex;gap:6px;flex-wrap:wrap}}.primary-nav a{{padding:10px 12px;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:650}}.primary-nav a[aria-current='page']{{background:var(--brand);color:white}}.account{{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.92rem}}button,.button-link{{background:var(--brand);color:#fff;border:0;border-radius:999px;padding:13px 18px;text-decoration:none;display:inline-block;cursor:pointer;font-weight:800}}button:hover,.button-link:hover{{background:#0f392f}}.secondary-link{{display:inline-block;padding:10px 0}}.hero,.card,.mode-card a{{background:rgba(255,253,249,.95);border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 50px #1b13060a}}.hero{{padding:42px;margin:18px 0}}.question-hero{{padding:56px}}.eyebrow{{text-transform:uppercase;letter-spacing:.12em;color:var(--brand);font-weight:800;margin:0 0 8px}}h1{{font-size:clamp(2.15rem,5vw,4.5rem);line-height:1.02;margin:.1em 0 .25em}}.lead{{font-size:clamp(1.08rem,2vw,1.35rem);max-width:780px;color:#31413a}}.question-form label{{display:block;font-size:clamp(1.25rem,3vw,2rem);font-weight:850;margin:28px 0 12px}}.question-row{{display:flex;gap:12px}}input{{min-height:56px;border:1px solid #c9beaf;border-radius:999px;padding:0 18px;font:inherit;font-size:1.05rem;background:white}}.question-row input{{flex:1;min-width:0}}.error{{color:#8a1f11;background:#fff0ec;border-left:4px solid #8a1f11;padding:10px 12px;border-radius:10px}}.mode-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}}.mode-card a{{display:block;min-height:190px;padding:24px;text-decoration:none;color:var(--ink)}}.mode-card span{{display:block;color:var(--brand);font-weight:900;font-size:1.5rem}}.mode-card strong{{display:block;font-size:1.15rem;margin:8px 0}}.mode-card em{{font-style:normal;color:var(--muted)}}.card{{padding:24px;margin:16px 0}}.pill,.badge,.confidence,.chip{{display:inline-block;border-radius:999px;padding:4px 10px;background:var(--brand2);margin:3px 4px 3px 0}}.badge{{background:#174d3f;color:white}}.confidence{{background:#efe8ff;color:#3d246b}}.chip{{background:#e7f1ec;text-decoration:none}}.mini-card{{border:1px solid var(--line);border-radius:18px;padding:16px;margin:10px 0;background:#fff}}.unknown{{border-left:5px solid #b27700}}.contradiction{{border-left:5px solid #9b2c2c}}.pipeline-stage{{border-top:1px solid var(--line);padding:14px 0}}.link-list li{{margin:10px 0}}.visually-hidden{{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}}footer{{color:var(--muted);font-size:.9rem;padding:24px 0}}@media(max-width:780px){{.topbar{{align-items:flex-start;flex-direction:column;margin-bottom:20px}}.mode-grid{{grid-template-columns:1fr}}.question-row{{flex-direction:column}}.hero,.question-hero{{padding:28px}}.shell{{padding:16px}}.primary-nav a{{padding:10px 9px}}}}@media(prefers-reduced-motion:reduce){{*{{scroll-behavior:auto!important}}}}
-    .workspace-heading{{margin:24px 0 36px;max-width:880px}}.workspace-heading h1{{font-size:clamp(2.5rem,6vw,5rem)}}.context-banner{{display:grid;grid-template-columns:1.3fr 2fr auto;gap:24px;align-items:center;background:#173f35;color:white;padding:24px 28px;border-radius:20px}}.context-banner .eyebrow,.context-banner a{{color:#bce5d5}}dl{{margin:0}}.context-banner dl,.priority-card dl{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}}dt{{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}}.context-banner dt{{color:#b8ccc4}}dd{{margin:3px 0;font-weight:800}}.section-heading{{display:flex;justify-content:space-between;gap:24px;align-items:end;margin:48px 0 16px}}.section-heading h2{{margin:0;font-size:2rem}}.section-heading p{{max-width:500px}}.estate-grid,.priority-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}}.estate-tile,.industry-card{{display:flex;flex-direction:column;min-height:210px;padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--line);text-decoration:none;color:var(--ink)}}.estate-tile strong{{font-size:1.55rem;margin:10px 0}}.estate-tile em,.industry-card em{{font-style:normal;color:var(--brand);font-weight:800;margin-top:auto;padding-top:20px}}.priority-card{{padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--line)}}.priority-card h3{{font-size:1.35rem}}.priority-card dl{{grid-template-columns:1fr 1fr}}.attention-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}}.attention-grid p{{display:flex;flex-direction:column;background:#f4f0e8;padding:14px;border-radius:12px;margin:0}}.attention-grid span{{color:var(--muted)}}.industry-card{{max-width:360px;min-height:150px}}.status{{width:max-content;border-radius:99px;padding:5px 10px;margin-top:10px}}.governed{{background:#d9eee5;color:#174d3f}}.workspace-tabs{{display:flex;gap:8px;overflow:auto;padding:4px 0 18px}}.workspace-tabs a{{white-space:nowrap;padding:9px 14px;border:1px solid var(--line);border-radius:99px;text-decoration:none}}.workspace-tabs a[aria-current='page']{{background:var(--brand);color:white}}@media(max-width:900px){{.context-banner{{grid-template-columns:1fr}}.estate-grid,.priority-grid{{grid-template-columns:1fr 1fr}}}}@media(max-width:620px){{.estate-grid,.priority-grid,.attention-grid{{grid-template-columns:1fr}}.section-heading{{display:block}}.context-banner dl{{grid-template-columns:1fr}}}}
-    </style></head><body><div class='shell'><header class='topbar'><a class='brand' href='/'><strong>Flora</strong><span>Enterprise Intelligence</span></a><nav class='primary-nav' aria-label='Primary product navigation'>{links}</nav><div class='profile-control'>{account_html}</div></header><main>{body}</main><footer>{escape(footer)}</footer></div></body></html>"""
+    .workspace-heading{{margin:24px 0 36px;max-width:880px}}.workspace-heading h1{{font-size:clamp(2.5rem,6vw,5rem)}}.context-banner{{display:grid;grid-template-columns:1.3fr 2fr auto;gap:24px;align-items:center;background:#173f35;color:white;padding:24px 28px;border-radius:20px}}.context-banner .eyebrow,.context-banner a{{color:#bce5d5}}dl{{margin:0}}.context-banner dl,.priority-card dl{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}}dt{{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}}.context-banner dt{{color:#b8ccc4}}dd{{margin:3px 0;font-weight:800}}.section-heading{{display:flex;justify-content:space-between;gap:24px;align-items:end;margin:48px 0 16px}}.section-heading h2{{margin:0;font-size:2rem}}.section-heading p{{max-width:500px}}.estate-grid,.priority-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}}.estate-tile,.industry-card{{display:flex;flex-direction:column;min-height:210px;padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--line);text-decoration:none;color:var(--ink)}}.estate-tile strong{{font-size:1.55rem;margin:10px 0}}.estate-tile em,.industry-card em{{font-style:normal;color:var(--brand);font-weight:800;margin-top:auto;padding-top:20px}}.priority-card{{padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--line)}}.priority-card h3{{font-size:1.35rem;margin-bottom:4px}}.priority-card h4{{font-size:1.05rem;margin:0 0 12px}}.priority-card .why{{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}}.priority-card dl{{grid-template-columns:1fr 1fr}}.attention-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}}.attention-grid p,.attention-grid a{{display:flex;flex-direction:column;background:#f4f0e8;padding:14px;border-radius:12px;margin:0;text-decoration:none;color:var(--ink)}}.attention-grid span{{color:var(--muted)}}.industry-card{{max-width:360px;min-height:150px}}.status{{width:max-content;border-radius:99px;padding:5px 10px;margin-top:10px}}.governed{{background:#d9eee5;color:#174d3f}}.workspace-tabs{{display:flex;gap:8px;overflow:auto;padding:4px 0 18px}}.workspace-tabs a{{white-space:nowrap;padding:9px 14px;border:1px solid var(--line);border-radius:99px;text-decoration:none}}.workspace-tabs a[aria-current='page']{{background:var(--brand);color:white}}@media(max-width:900px){{.context-banner{{grid-template-columns:1fr}}.estate-grid,.priority-grid{{grid-template-columns:1fr 1fr}}}}@media(max-width:620px){{.estate-grid,.priority-grid,.attention-grid{{grid-template-columns:1fr}}.section-heading{{display:block}}.context-banner dl{{grid-template-columns:1fr}}}}
+    </style></head><body><div class='shell'><header class='topbar'><a class='brand' href='/'><strong>Flora</strong></a><nav class='primary-nav' aria-label='Primary product navigation'>{links}</nav><div class='profile-control'>{account_html}</div></header><main>{body}</main><footer>{escape(footer)}</footer></div></body></html>"""
 
 def _is_enterprise_intelligence_path(path: str) -> bool:
     parts = [part for part in path.split('/') if part]
