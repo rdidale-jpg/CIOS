@@ -1,13 +1,13 @@
 {
   "schema_id": "CIOS-Research-Mission-Manifest",
   "schema_version": "1.1.0",
-  "mission_name": "TEL-001 initial construction",
-  "mission_type": "industry-twin-construction",
-  "mission_template_id": "industry-twin-construction",
+  "mission_name": "TEL-001 targeted evidence closure",
+  "mission_type": "targeted-evidence-closure",
+  "mission_template_id": "targeted-evidence-closure",
   "mission_template_version": "1.0.0",
   "parent_twin_id": "TEL-001",
-  "baseline_release": "TEL-001-pre-construction-baseline",
-  "predecessor_mission_id": null,
+  "baseline_release": "TEL-001-release-3",
+  "predecessor_mission_id": "TEL-001-continuation",
   "created_date": "2026-08-03",
   "generated_date": "2026-08-03T00:00:00Z",
   "owner": "CIOS Chief Architect",
@@ -123,5 +123,5 @@
     "COMPLETE"
   ],
   "pack_version": "2.8.0",
-  "mission_id": "TEL-001-initial-construction"
+  "mission_id": "TEL-001-targeted-evidence-closure"
 }

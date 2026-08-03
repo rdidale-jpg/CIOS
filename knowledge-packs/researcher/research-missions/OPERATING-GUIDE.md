@@ -1,13 +1,26 @@
-# Creating a future Industry Twin research mission
+# Creating and Running a CIOS Research Mission
 
-This is an operating convention within the existing Researcher Knowledge Pack, not a new architectural standard. Twin Object Profile ownership remains with the canonical Industry Twin package inventory contract; Flora may populate gaps and subject IDs but does not own research behaviour.
+The Researcher Knowledge Pack owns the reusable method; IT-001 and its profiles own Twin structure; a mission manifest supplies operational scope. A generated commission is a derived, reproducible work order and never confers acceptance, readiness, import or promotion.
 
-1. Choose an active template in `templates/templates-v1.json`.
-2. Copy and complete a versioned Research Mission Manifest validated by the schema.
-3. Provide the industry scope, geography, current gaps and baseline release in the manifest.
-4. Generate the commission with `python3 tools/knowledge-packs/research_missions.py MANIFEST --output BRIEF`.
-5. Build the Researcher Knowledge Pack with its existing builder.
-6. Issue the generated brief, manifest and pack to the researcher.
-7. Validate returned structured outputs against the named Twin Object Profiles and the pre-delivery contract.
+## Mission lifecycle
 
-Migration: replace manually rewritten briefs with a manifest; keep industry facts only in that manifest. Select the matching template, pin all required registered profile versions, transfer current gaps/subjects, and check in the deterministic generated brief.
+1. Select an active template from the catalogue.
+2. Create a manifest and identify the mission, template and predecessor.
+3. Define industry, geography, included/excluded domains and material-subject rule.
+4. Pin every profile and release-manifest version.
+5. Supply the baseline release, governed gaps, subjects, Unknowns and Contradictions.
+6. For commercial missions configure H1/H2/H3, estimation, value, confidence, procurement and aggregation policy.
+7. Generate the commission and retain its version and generation receipts.
+8. Build and validate the Researcher Knowledge Pack.
+9. Issue the generated work order and pack; do not edit the commission manually.
+10. Validate returned governed records, registers, checksums and release manifest.
+11. Record CONTINUE, EVIDENCE_EXHAUSTED or COMPLETE without implying governance acceptance.
+12. Create a continuation or monitoring mission from the new governed checkpoint.
+
+## Chief Architect workflow (no repository command line required)
+
+Give Codex the mission configuration and ask it to generate and validate the commission and pack. Review the scope, pins, outputs and outcome controls; merge the reviewed change; provide the built pack to the researcher; receive the executive checkpoint and candidate package; then invoke the separately governed candidate import process when appropriate. Flora may export current state into the manifest interface, but does not own or render the methodology.
+
+## Maintainer validation
+
+Run `python3 tools/knowledge-packs/research_missions.py MANIFEST --output COMMISSION --check`, then build the pack. Any changed input or version requires regeneration. A stale commission fails the pack build.

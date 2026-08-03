@@ -1,10 +1,644 @@
 {
-  "template_set_version":"1.0.0",
+  "schema_id": "CIOS-Research-Mission-Template-Catalogue",
+  "template_set_version": "1.1.0",
+  "canonical_owner": "Researcher Knowledge Pack",
   "templates": [
-    {"id":"industry-twin-construction","version":"1.0.0","profiles":["industry-overview","enterprise-dossier","market-participant","programme","opportunity","reinvention-assessment","industry-membership","industry-release-manifest"],"modules":["evidence-closure","analyst-estimates","opportunity-timing","opportunity-value","horizons","monitoring-triggers","unknown-handling","contradiction-handling","pre-delivery-validation"]},
-    {"id":"industry-twin-continuation","version":"1.0.0","profiles":["industry-overview","enterprise-dossier","market-participant","programme","opportunity","reinvention-assessment","industry-membership","industry-release-manifest"],"modules":["evidence-closure","analyst-estimates","opportunity-timing","opportunity-value","horizons","monitoring-triggers","unknown-handling","contradiction-handling","pre-delivery-validation"]},
-    {"id":"targeted-evidence-closure","version":"1.0.0","profiles":["industry-overview","enterprise-dossier","market-participant","programme","opportunity"],"modules":["evidence-closure","analyst-estimates","monitoring-triggers","unknown-handling","contradiction-handling","pre-delivery-validation"]},
-    {"id":"opportunity-pipeline-enrichment","version":"1.0.0","profiles":["opportunity","programme","enterprise-dossier","market-participant"],"modules":["evidence-closure","analyst-estimates","opportunity-timing","opportunity-value","horizons","monitoring-triggers","unknown-handling","contradiction-handling","pre-delivery-validation"]},
-    {"id":"periodic-twin-refresh","version":"1.0.0","profiles":["industry-overview","enterprise-dossier","market-participant","programme","opportunity","reinvention-assessment","industry-membership","industry-release-manifest"],"modules":["evidence-closure","analyst-estimates","opportunity-timing","opportunity-value","horizons","monitoring-triggers","unknown-handling","contradiction-handling","pre-delivery-validation"]}
+    {
+      "id": "industry-twin-construction",
+      "version": "1.0.0",
+      "purpose": "Construct an initial governed Industry Twin package.",
+      "profiles": [
+        "industry-overview",
+        "enterprise-dossier",
+        "market-participant",
+        "programme",
+        "opportunity",
+        "reinvention-assessment",
+        "industry-membership",
+        "industry-release-manifest"
+      ],
+      "modules": [
+        "twin-object-construction",
+        "evidence-collection",
+        "evidence-closure",
+        "evidence-exhaustion",
+        "unknown",
+        "contradiction",
+        "monitoring-trigger",
+        "falsification",
+        "pre-delivery-validation",
+        "mission-outcome"
+      ],
+      "required_manifest_fields": [
+        "baseline_release",
+        "scope.industry",
+        "scope.geography",
+        "evidence_policy.evidence_exhaustion_policy",
+        "outputs.required_package_name"
+      ],
+      "required_outputs": [
+        "contradiction-register",
+        "evidence-register",
+        "governed-records",
+        "unknown-register",
+        "validation-report"
+      ],
+      "outcome_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation": [
+        "validate manifest and all version pins",
+        "validate governed records against pinned profiles",
+        "validate receipts and no unresolved variables"
+      ],
+      "exclusions": [
+        "no industry-specific subjects",
+        "no Twin truth, completeness, import or promotion decision"
+      ],
+      "compatibility": {
+        "manifest_versions": [
+          "1.1.0"
+        ],
+        "profile_versions": "1.x",
+        "pack_versions": ">=2.8.0 <3.0.0"
+      },
+      "supersession": "active",
+      "migration": "Regenerate when any pinned version changes; never alter this version in place."
+    },
+    {
+      "id": "industry-twin-continuation",
+      "version": "1.0.0",
+      "purpose": "Continue governed construction from a pinned baseline and gaps.",
+      "profiles": [
+        "industry-overview",
+        "enterprise-dossier",
+        "market-participant",
+        "programme",
+        "opportunity",
+        "reinvention-assessment",
+        "industry-membership",
+        "industry-release-manifest"
+      ],
+      "modules": [
+        "twin-object-construction",
+        "evidence-collection",
+        "evidence-closure",
+        "evidence-exhaustion",
+        "unknown",
+        "contradiction",
+        "monitoring-trigger",
+        "falsification",
+        "pre-delivery-validation",
+        "mission-outcome",
+        "analyst-estimate"
+      ],
+      "required_manifest_fields": [
+        "baseline_release",
+        "scope.industry",
+        "scope.geography",
+        "evidence_policy.evidence_exhaustion_policy",
+        "outputs.required_package_name"
+      ],
+      "required_outputs": [
+        "contradiction-register",
+        "evidence-register",
+        "governed-records",
+        "unknown-register",
+        "validation-report"
+      ],
+      "outcome_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation": [
+        "validate manifest and all version pins",
+        "validate governed records against pinned profiles",
+        "validate receipts and no unresolved variables"
+      ],
+      "exclusions": [
+        "no industry-specific subjects",
+        "no Twin truth, completeness, import or promotion decision"
+      ],
+      "compatibility": {
+        "manifest_versions": [
+          "1.1.0"
+        ],
+        "profile_versions": "1.x",
+        "pack_versions": ">=2.8.0 <3.0.0"
+      },
+      "supersession": "active",
+      "migration": "Regenerate when any pinned version changes; never alter this version in place."
+    },
+    {
+      "id": "targeted-evidence-closure",
+      "version": "1.0.0",
+      "purpose": "Close named governed gaps without suppressing unresolved uncertainty.",
+      "profiles": [
+        "industry-overview",
+        "enterprise-dossier",
+        "market-participant",
+        "programme",
+        "opportunity"
+      ],
+      "modules": [
+        "twin-object-construction",
+        "evidence-collection",
+        "evidence-closure",
+        "evidence-exhaustion",
+        "unknown",
+        "contradiction",
+        "monitoring-trigger",
+        "falsification",
+        "pre-delivery-validation",
+        "mission-outcome",
+        "analyst-estimate"
+      ],
+      "required_manifest_fields": [
+        "baseline_release",
+        "scope.industry",
+        "scope.geography",
+        "evidence_policy.evidence_exhaustion_policy",
+        "outputs.required_package_name",
+        "research_priorities.named_closure_targets"
+      ],
+      "required_outputs": [
+        "contradiction-register",
+        "evidence-register",
+        "governed-records",
+        "unknown-register",
+        "validation-report"
+      ],
+      "outcome_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation": [
+        "validate manifest and all version pins",
+        "validate governed records against pinned profiles",
+        "validate receipts and no unresolved variables"
+      ],
+      "exclusions": [
+        "no industry-specific subjects",
+        "no Twin truth, completeness, import or promotion decision"
+      ],
+      "compatibility": {
+        "manifest_versions": [
+          "1.1.0"
+        ],
+        "profile_versions": "1.x",
+        "pack_versions": ">=2.8.0 <3.0.0"
+      },
+      "supersession": "active",
+      "migration": "Regenerate when any pinned version changes; never alter this version in place."
+    },
+    {
+      "id": "commercial-pipeline-qualification",
+      "version": "1.0.0",
+      "purpose": "Qualify commercial pipeline views using separately governed types and estimates.",
+      "profiles": [
+        "enterprise-dossier",
+        "market-participant",
+        "programme",
+        "opportunity"
+      ],
+      "modules": [
+        "twin-object-construction",
+        "evidence-collection",
+        "evidence-closure",
+        "evidence-exhaustion",
+        "unknown",
+        "contradiction",
+        "monitoring-trigger",
+        "falsification",
+        "pre-delivery-validation",
+        "mission-outcome",
+        "analyst-estimate",
+        "opportunity-qualification",
+        "procurement-maturity",
+        "opportunity-value-taxonomy",
+        "opportunity-timing",
+        "horizon-1-2-3",
+        "buyer-qualification",
+        "existing-award-residual",
+        "framework-market",
+        "opportunity-overlap"
+      ],
+      "required_manifest_fields": [
+        "baseline_release",
+        "scope.industry",
+        "scope.geography",
+        "evidence_policy.evidence_exhaustion_policy",
+        "outputs.required_package_name",
+        "commercial_pipeline_configuration.horizon_boundaries"
+      ],
+      "required_outputs": [
+        "contradiction-register",
+        "evidence-register",
+        "governed-records",
+        "unknown-register",
+        "validation-report"
+      ],
+      "outcome_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation": [
+        "validate manifest and all version pins",
+        "validate governed records against pinned profiles",
+        "validate receipts and no unresolved variables"
+      ],
+      "exclusions": [
+        "no industry-specific subjects",
+        "no Twin truth, completeness, import or promotion decision"
+      ],
+      "compatibility": {
+        "manifest_versions": [
+          "1.1.0"
+        ],
+        "profile_versions": "1.x",
+        "pack_versions": ">=2.8.0 <3.0.0"
+      },
+      "supersession": "active",
+      "migration": "Regenerate when any pinned version changes; never alter this version in place."
+    },
+    {
+      "id": "opportunity-pipeline-enrichment",
+      "version": "1.0.0",
+      "purpose": "Enrich governed opportunity records and pipeline views.",
+      "profiles": [
+        "enterprise-dossier",
+        "market-participant",
+        "programme",
+        "opportunity"
+      ],
+      "modules": [
+        "twin-object-construction",
+        "evidence-collection",
+        "evidence-closure",
+        "evidence-exhaustion",
+        "unknown",
+        "contradiction",
+        "monitoring-trigger",
+        "falsification",
+        "pre-delivery-validation",
+        "mission-outcome",
+        "analyst-estimate",
+        "opportunity-qualification",
+        "procurement-maturity",
+        "opportunity-value-taxonomy",
+        "opportunity-timing",
+        "horizon-1-2-3",
+        "buyer-qualification",
+        "existing-award-residual",
+        "framework-market",
+        "opportunity-overlap"
+      ],
+      "required_manifest_fields": [
+        "baseline_release",
+        "scope.industry",
+        "scope.geography",
+        "evidence_policy.evidence_exhaustion_policy",
+        "outputs.required_package_name",
+        "commercial_pipeline_configuration.horizon_boundaries"
+      ],
+      "required_outputs": [
+        "contradiction-register",
+        "evidence-register",
+        "governed-records",
+        "unknown-register",
+        "validation-report"
+      ],
+      "outcome_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation": [
+        "validate manifest and all version pins",
+        "validate governed records against pinned profiles",
+        "validate receipts and no unresolved variables"
+      ],
+      "exclusions": [
+        "no industry-specific subjects",
+        "no Twin truth, completeness, import or promotion decision"
+      ],
+      "compatibility": {
+        "manifest_versions": [
+          "1.1.0"
+        ],
+        "profile_versions": "1.x",
+        "pack_versions": ">=2.8.0 <3.0.0"
+      },
+      "supersession": "active",
+      "migration": "Regenerate when any pinned version changes; never alter this version in place."
+    },
+    {
+      "id": "enterprise-dossier-enrichment",
+      "version": "1.0.0",
+      "purpose": "Enrich selected Enterprise Dossiers.",
+      "profiles": [
+        "enterprise-dossier",
+        "programme",
+        "opportunity"
+      ],
+      "modules": [
+        "twin-object-construction",
+        "evidence-collection",
+        "evidence-closure",
+        "evidence-exhaustion",
+        "unknown",
+        "contradiction",
+        "monitoring-trigger",
+        "falsification",
+        "pre-delivery-validation",
+        "mission-outcome"
+      ],
+      "required_manifest_fields": [
+        "baseline_release",
+        "scope.industry",
+        "scope.geography",
+        "evidence_policy.evidence_exhaustion_policy",
+        "outputs.required_package_name"
+      ],
+      "required_outputs": [
+        "contradiction-register",
+        "evidence-register",
+        "governed-records",
+        "unknown-register",
+        "validation-report"
+      ],
+      "outcome_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation": [
+        "validate manifest and all version pins",
+        "validate governed records against pinned profiles",
+        "validate receipts and no unresolved variables"
+      ],
+      "exclusions": [
+        "no industry-specific subjects",
+        "no Twin truth, completeness, import or promotion decision"
+      ],
+      "compatibility": {
+        "manifest_versions": [
+          "1.1.0"
+        ],
+        "profile_versions": "1.x",
+        "pack_versions": ">=2.8.0 <3.0.0"
+      },
+      "supersession": "active",
+      "migration": "Regenerate when any pinned version changes; never alter this version in place."
+    },
+    {
+      "id": "market-participant-enrichment",
+      "version": "1.0.0",
+      "purpose": "Enrich selected Market Participant records.",
+      "profiles": [
+        "market-participant",
+        "enterprise-dossier",
+        "opportunity"
+      ],
+      "modules": [
+        "twin-object-construction",
+        "evidence-collection",
+        "evidence-closure",
+        "evidence-exhaustion",
+        "unknown",
+        "contradiction",
+        "monitoring-trigger",
+        "falsification",
+        "pre-delivery-validation",
+        "mission-outcome"
+      ],
+      "required_manifest_fields": [
+        "baseline_release",
+        "scope.industry",
+        "scope.geography",
+        "evidence_policy.evidence_exhaustion_policy",
+        "outputs.required_package_name"
+      ],
+      "required_outputs": [
+        "contradiction-register",
+        "evidence-register",
+        "governed-records",
+        "unknown-register",
+        "validation-report"
+      ],
+      "outcome_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation": [
+        "validate manifest and all version pins",
+        "validate governed records against pinned profiles",
+        "validate receipts and no unresolved variables"
+      ],
+      "exclusions": [
+        "no industry-specific subjects",
+        "no Twin truth, completeness, import or promotion decision"
+      ],
+      "compatibility": {
+        "manifest_versions": [
+          "1.1.0"
+        ],
+        "profile_versions": "1.x",
+        "pack_versions": ">=2.8.0 <3.0.0"
+      },
+      "supersession": "active",
+      "migration": "Regenerate when any pinned version changes; never alter this version in place."
+    },
+    {
+      "id": "reinvention-assessment-enrichment",
+      "version": "1.0.0",
+      "purpose": "Enrich reinvention assessments from governed evidence.",
+      "profiles": [
+        "reinvention-assessment",
+        "enterprise-dossier",
+        "programme"
+      ],
+      "modules": [
+        "twin-object-construction",
+        "evidence-collection",
+        "evidence-closure",
+        "evidence-exhaustion",
+        "unknown",
+        "contradiction",
+        "monitoring-trigger",
+        "falsification",
+        "pre-delivery-validation",
+        "mission-outcome",
+        "analyst-estimate"
+      ],
+      "required_manifest_fields": [
+        "baseline_release",
+        "scope.industry",
+        "scope.geography",
+        "evidence_policy.evidence_exhaustion_policy",
+        "outputs.required_package_name"
+      ],
+      "required_outputs": [
+        "contradiction-register",
+        "evidence-register",
+        "governed-records",
+        "unknown-register",
+        "validation-report"
+      ],
+      "outcome_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation": [
+        "validate manifest and all version pins",
+        "validate governed records against pinned profiles",
+        "validate receipts and no unresolved variables"
+      ],
+      "exclusions": [
+        "no industry-specific subjects",
+        "no Twin truth, completeness, import or promotion decision"
+      ],
+      "compatibility": {
+        "manifest_versions": [
+          "1.1.0"
+        ],
+        "profile_versions": "1.x",
+        "pack_versions": ">=2.8.0 <3.0.0"
+      },
+      "supersession": "active",
+      "migration": "Regenerate when any pinned version changes; never alter this version in place."
+    },
+    {
+      "id": "periodic-twin-refresh",
+      "version": "1.0.0",
+      "purpose": "Refresh time-sensitive objects against a pinned release.",
+      "profiles": [
+        "industry-overview",
+        "enterprise-dossier",
+        "market-participant",
+        "programme",
+        "opportunity",
+        "reinvention-assessment",
+        "industry-membership",
+        "industry-release-manifest"
+      ],
+      "modules": [
+        "twin-object-construction",
+        "evidence-collection",
+        "evidence-closure",
+        "evidence-exhaustion",
+        "unknown",
+        "contradiction",
+        "monitoring-trigger",
+        "falsification",
+        "pre-delivery-validation",
+        "mission-outcome"
+      ],
+      "required_manifest_fields": [
+        "baseline_release",
+        "scope.industry",
+        "scope.geography",
+        "evidence_policy.evidence_exhaustion_policy",
+        "outputs.required_package_name"
+      ],
+      "required_outputs": [
+        "contradiction-register",
+        "evidence-register",
+        "governed-records",
+        "unknown-register",
+        "validation-report"
+      ],
+      "outcome_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation": [
+        "validate manifest and all version pins",
+        "validate governed records against pinned profiles",
+        "validate receipts and no unresolved variables"
+      ],
+      "exclusions": [
+        "no industry-specific subjects",
+        "no Twin truth, completeness, import or promotion decision"
+      ],
+      "compatibility": {
+        "manifest_versions": [
+          "1.1.0"
+        ],
+        "profile_versions": "1.x",
+        "pack_versions": ">=2.8.0 <3.0.0"
+      },
+      "supersession": "active",
+      "migration": "Regenerate when any pinned version changes; never alter this version in place."
+    },
+    {
+      "id": "monitoring-trigger-update",
+      "version": "1.0.0",
+      "purpose": "Resolve or renew active monitoring triggers.",
+      "profiles": [
+        "industry-overview",
+        "enterprise-dossier",
+        "market-participant",
+        "programme",
+        "opportunity"
+      ],
+      "modules": [
+        "twin-object-construction",
+        "evidence-collection",
+        "evidence-closure",
+        "evidence-exhaustion",
+        "unknown",
+        "contradiction",
+        "monitoring-trigger",
+        "falsification",
+        "pre-delivery-validation",
+        "mission-outcome"
+      ],
+      "required_manifest_fields": [
+        "baseline_release",
+        "scope.industry",
+        "scope.geography",
+        "evidence_policy.evidence_exhaustion_policy",
+        "outputs.required_package_name"
+      ],
+      "required_outputs": [
+        "contradiction-register",
+        "evidence-register",
+        "governed-records",
+        "unknown-register",
+        "validation-report"
+      ],
+      "outcome_states": [
+        "CONTINUE",
+        "EVIDENCE_EXHAUSTED",
+        "COMPLETE"
+      ],
+      "validation": [
+        "validate manifest and all version pins",
+        "validate governed records against pinned profiles",
+        "validate receipts and no unresolved variables"
+      ],
+      "exclusions": [
+        "no industry-specific subjects",
+        "no Twin truth, completeness, import or promotion decision"
+      ],
+      "compatibility": {
+        "manifest_versions": [
+          "1.1.0"
+        ],
+        "profile_versions": "1.x",
+        "pack_versions": ">=2.8.0 <3.0.0"
+      },
+      "supersession": "active",
+      "migration": "Regenerate when any pinned version changes; never alter this version in place."
+    }
   ]
 }

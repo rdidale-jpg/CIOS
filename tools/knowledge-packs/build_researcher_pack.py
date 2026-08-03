@@ -117,7 +117,13 @@ def validate_research_missions():
     from research_missions import load, render
     mission_root = PACK / 'research-missions'
     templates = load(mission_root / 'templates/templates-v1.json')['templates']
-    expected = {'industry-twin-construction','industry-twin-continuation','targeted-evidence-closure','opportunity-pipeline-enrichment','periodic-twin-refresh'}
+    expected = {
+        'industry-twin-construction', 'industry-twin-continuation',
+        'targeted-evidence-closure', 'commercial-pipeline-qualification',
+        'opportunity-pipeline-enrichment', 'enterprise-dossier-enrichment',
+        'market-participant-enrichment', 'reinvention-assessment-enrichment',
+        'periodic-twin-refresh', 'monitoring-trigger-update',
+    }
     active = {t['id'] for t in templates}
     if active != expected: fail(f'Pack omits active templates: {sorted(expected-active)}')
     for manifest_path in sorted((mission_root / 'examples').glob('*.json')):

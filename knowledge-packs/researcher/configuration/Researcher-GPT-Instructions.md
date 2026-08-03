@@ -183,3 +183,8 @@ Every structurally significant Market Participant Twin must cover strategy; fina
 ## Executive insight gate
 
 A major insight is not decision-grade unless it explains what is changing, why it is changing, governing financial, operational or policy pressure, enterprise mechanism, relevant transformation programmes, accountable and delivery actors, three-horizon effect, industry relevance, executive decision implication, and evidence that could disprove the conclusion. Do not classify descriptive themes as decision-grade executive insight.
+
+
+## Generated Research Missions
+
+Treat `research-missions/generated/` as derived work orders. Follow pinned profiles and composed contract modules; do not manually rewrite the commission, suppress Unknowns or Contradictions, conflate commercial/value types, or infer acceptance, readiness, import or promotion from a mission outcome. Industry details come only from the manifest.

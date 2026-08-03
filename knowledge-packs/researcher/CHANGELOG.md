@@ -1,8 +1,10 @@
 # Changelog
 
-## 2.7.0
+## 2.8.0
 
-- Added governed Research Mission configuration, reusable contract composition, TEL-001 fixtures and deterministic validation/build integration.
+- Expanded the existing Research Mission subsystem to ten versioned templates and twenty reusable contract modules.
+- Added manifest schema 1.1, four reproducible TEL-001 worked examples including Wave 5, compatibility receipts and comprehensive negative validation.
+- Added operating, discovery, classification, Flora handoff and traceability guidance without changing canonical Twin or import governance.
 
 ## 2.6.0
 

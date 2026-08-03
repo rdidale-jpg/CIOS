@@ -1,21 +1,21 @@
-# TEL-001-initial-construction — Researcher Commission
+# TEL-001-targeted-evidence-closure — Researcher Commission
 
 > Derived work order. Do not edit as a canonical source.
 
 ## Version receipt
-- Mission ID: TEL-001-initial-construction
-- Mission type: industry-twin-construction
+- Mission ID: TEL-001-targeted-evidence-closure
+- Mission type: targeted-evidence-closure
 - Mission-template version: 1.0.0
 - Mission-manifest version: 1.1.0
 - Researcher Knowledge Pack version: 2.8.0
-- Twin Object Profile versions: industry-overview 1.0.0; enterprise-dossier 1.0.0; market-participant 1.0.0; programme 1.0.0; opportunity 1.0.0; reinvention-assessment 1.0.0; industry-membership 1.0.0; industry-release-manifest 1.0.0
-- Contract-module versions: twin-object-construction 1.0.0; evidence-collection 1.0.0; evidence-closure 1.0.0; evidence-exhaustion 1.0.0; unknown 1.0.0; contradiction 1.0.0; monitoring-trigger 1.0.0; falsification 1.0.0; pre-delivery-validation 1.0.0; mission-outcome 1.0.0
-- Baseline Twin release: TEL-001-pre-construction-baseline
+- Twin Object Profile versions: industry-overview 1.0.0; enterprise-dossier 1.0.0; market-participant 1.0.0; programme 1.0.0; opportunity 1.0.0
+- Contract-module versions: twin-object-construction 1.0.0; evidence-collection 1.0.0; evidence-closure 1.0.0; evidence-exhaustion 1.0.0; unknown 1.0.0; contradiction 1.0.0; monitoring-trigger 1.0.0; falsification 1.0.0; pre-delivery-validation 1.0.0; mission-outcome 1.0.0; analyst-estimate 1.0.0
+- Baseline Twin release: TEL-001-release-3
 - Generation date: 2026-08-03T00:00:00Z
-- Version receipt SHA-256: 34e0de369780920ec2cf7e4c3da831d5908edac6144f9d2285433f8ccb5f4efe
+- Version receipt SHA-256: d2a63030523b7d78369a2a438d9b8c89ea9cac3a23fe672cb68fd7b9fa27bbf3
 
 ## Mission scope
-- Name: TEL-001 initial construction
+- Name: TEL-001 targeted evidence closure
 - Parent Twin: TEL-001
 - Industry: Telecommunications, Media and Sport
 - Geography: United Kingdom
@@ -89,6 +89,10 @@ Validate pinned profiles, lineage, outputs, estimates, Unknowns, Contradictions 
 Use only CONTINUE, EVIDENCE_EXHAUSTED or COMPLETE; these do not confer acceptance, readiness, import or promotion.
 - Validation: inputs and outputs are attributable; version pins and lineage are present
 - Prohibited: redefine IT-001 profile fields; promote or accept derived output
+### Analyst Estimate Contract (analyst-estimate@1.0.0)
+For every estimate record field, evidence, searches, method, comparables, assumptions, exclusions, bounds, confidence, linked Unknown, Contradictions, falsification, triggers and review date; retain the Unknown.
+- Validation: inputs and outputs are attributable; version pins and lineage are present
+- Prohibited: redefine IT-001 profile fields; promote or accept derived output
 
 ## Pre-delivery validation
 - validate manifest and all version pins
@@ -101,6 +105,6 @@ Use only CONTINUE, EVIDENCE_EXHAUSTED or COMPLETE; these do not confer acceptanc
 - COMPLETE
 
 ## Generation receipt
-- Manifest SHA-256: 15575e4b9a65371c5744c61dc0e3ca72523e4d2917f73e6cf2e4d4849697625a
+- Manifest SHA-256: 4b8e7c0a582c216f5129b1bd8e9bbb9fe096dc59e69918024c68a75dbf3b0a2f
 - Generator: tools/knowledge-packs/research_missions.py
 - Derived output: TEL-001-research-candidate
