@@ -139,7 +139,13 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path == "/deployment":
                 self._json(deployment_payload())
             elif parsed.path in {"/", "/flora", "/flora/"}:
-                self._html(global_industry_portfolio_page())
+                self._html(_flora_home_page(self.headers))
+            elif parsed.path == "/intelligence":
+                self._html(_flora_intelligence_page(self.headers, parse_qs(parsed.query)))
+            elif parsed.path == "/opportunities":
+                self._html(_flora_opportunities_page(self.headers, parse_qs(parsed.query)))
+            elif parsed.path == "/research":
+                self._html(_flora_research_page(self.headers))
             elif parsed.path in {"/workspace/reference", "/flora/reference"}:
                 self._html(reference_workspace_page(self.headers, saved=parse_qs(parsed.query).get("saved") == ["1"]), set_cookie=reference_resume_cookie())
             elif parsed.path == "/flora/banking":
@@ -774,41 +780,89 @@ def _flora_home_page(headers=None, question_error: str = "") -> str:
     from html import escape
 
     decision = blueprint_upload_authorisation(headers or {})
-    recent = "<p><strong>No recent intelligence yet.</strong><br>Ask Flora a question or explore an industry to begin.</p>"
     auth = _account_context_html(decision)
-    error = f"<p class='error' id='question-error' role='alert'>{escape(question_error)}</p>" if question_error else ""
+    pipeline = _opportunity_pipeline()
+    opportunities = [o for o in pipeline.opportunities if o.horizon != "not_actionable"]
+    horizon_counts = {h: sum(o.horizon == h for o in opportunities) for h in ("horizon_1", "horizon_2", "horizon_3")}
+    participants = {o.participant_type for o in pipeline.opportunities if o.participant_type}
+    evidence = {asset for o in pipeline.opportunities for asset in o.supporting_asset_ids}
+    unknown_count = sum(len(o.unknowns) for o in pipeline.opportunities)
+    contradiction_count = sum(len(o.contradictions) for o in pipeline.opportunities)
+
+    def domain(href: str, title: str, metric: str, meaning: str, next_step: str) -> str:
+        return (f"<a class='estate-tile' href='{href}'><span class='eyebrow'>{title}</span>"
+                f"<strong>{metric}</strong><span>{meaning}</span><em>{next_step}</em></a>")
+
+    priority_cards = "".join(
+        f"<article class='priority-card'><p class='eyebrow'>{escape(_horizon_label(o.horizon))}</p>"
+        f"<h3>{escape(o.enterprise_name or o.participant_type)}</h3>"
+        f"<p><strong>Problem</strong> {escape(o.commercial_problem)}</p>"
+        f"<dl><div><dt>Estimated timing</dt><dd>Not yet assessed</dd></div><div><dt>Estimated value</dt><dd>Not yet assessed</dd></div>"
+        f"<div><dt>Evidence confidence</dt><dd>{escape(o.evidence_strength)}</dd></div></dl>"
+        f"<p><strong>Reason shown</strong> {escape(o.horizon_rationale.rationale)}</p>"
+        f"<a href='/opportunities?opportunity={escape(o.opportunity_id)}'>Inspect opportunity</a></article>"
+        for o in opportunities[:4]
+    )
     return _flora_v2_page(
-        "Flora Enterprise Intelligence",
+        "Enterprise Intelligence Workspace",
         "home",
         f"""
-        <section class='hero question-hero' aria-labelledby='home-title'>
-          <p class='eyebrow'>Flora</p>
-          <h1 id='home-title'>Enterprise Intelligence</h1>
-          <p class='lead'>Ask a strategic question, explore an industry, focus on the right enterprises, then shape an evidence-backed executive engagement.</p>
-          <form class='question-form' method='post' action='/ask' novalidate>
-            <label for='flora-question'>What would you like to understand today?</label>
-            <div class='question-row'>
-              <input id='flora-question' name='question' type='text' required aria-required='true' aria-describedby='question-help{' question-error' if question_error else ''}' placeholder='What is changing in Banking?' />
-              <button type='submit'>Ask Flora</button>
-            </div>
-            <p class='muted' id='question-help'>The current prototype supports the governed Banking Enterprise Intelligence question and rejects unsupported questions rather than fabricating answers.</p>
-            {error}
-          </form>
-        </section>
-        <section class='card' aria-labelledby='banking-title'><h2 id='banking-title'>UK Banking</h2><p>Open the governed UK Banking portfolio for Lloyds, Barclays, NatWest, HSBC UK and Santander UK.</p><p><a class='primary-link' href='/flora/banking'>Open UK Banking portfolio</a></p></section>
-        <section class='card' aria-labelledby='workspace-title'><h2 id='workspace-title'>Workspace tools</h2><p><a href='/digital-twins'>Enterprise Canvas</a> · <a href='/blueprint-import'>Import Twin</a> · <a href='/blueprint-import/history'>Import History</a>{" · <a href='/settings'>Settings</a>" if decision.owner_recognised else ""}</p></section>
-        <section class='mode-grid' aria-labelledby='modes-title'>
-          <h2 id='modes-title' class='visually-hidden'>Primary product areas</h2>
-          {_mode_card('/explore', 'Explore', 'Understand industries and change', 'Industry understanding, observations, mechanisms, hypotheses and why now.')}
-          {_mode_card('/focus', 'Focus', 'Compare enterprises and priorities', 'Inspect Enterprise Twins and identify where attention is warranted.')}
-          {_mode_card('/shape', 'Shape', 'Prepare an executive engagement', 'Build toward a Strategic Sales Brief with evidence, Unknowns, Contradictions and next action.')}
-        </section>
-        <section class='card' aria-labelledby='recent-title'><h2 id='recent-title'>Recent Intelligence</h2>{recent}</section>
-        <section class='governance-callout card'><h2>Governance</h2><p>Manage knowledge, validation and product administration without making administration the default experience.</p><p><a class='secondary-link' href='/governance'>Open Governance</a></p></section>
-        <span hidden>Good Morning Rob Morning Edition NO LIVE EVIDENCE AVAILABLE</span><a hidden href='/score/BT'>Explain score</a><a hidden href='/financial-reports'>Collect Financial Report</a><a hidden href='/blueprint-import/history'>Import History</a>
+        <section class='workspace-heading'><p class='eyebrow'>Flora Map</p><h1>Enterprise Intelligence Workspace</h1><p class='lead'>See the intelligence estate, decide what matters and move directly to the evidence.</p></section>
+        <section class='context-banner' aria-labelledby='context-title'><div><p class='eyebrow'>Commercial Context</p><h2 id='context-title'>No configured mission</h2></div><dl><div><dt>Industry focus</dt><dd>Not yet assessed</dd></div><div><dt>Time horizon</dt><dd>Not yet assessed</dd></div><div><dt>Last updated</dt><dd>Not yet assessed</dd></div></dl><a class='button-link' href='/blueprint-import'>Configure Mission</a></section>
+        <section aria-labelledby='map-title'><div class='section-heading'><div><p class='eyebrow'>Flora Map</p><h2 id='map-title'>Enterprise Intelligence Map</h2></div><p>Choose a domain to inspect its current intelligence and next decision.</p></div><div class='estate-grid'>
+          {domain('/intelligence?tab=industries','Industries','1 governed industry','UK Banking has governed runtime intelligence.','Open the Industry Twin Map')}
+          {domain('/intelligence?tab=enterprises','Enterprises','Not yet assessed','Enterprise coverage is available within the governed Banking workspace.','Inspect enterprise dossiers')}
+          {domain('/opportunities','Opportunities',f"{len(opportunities)} active candidates",f"{horizon_counts['horizon_1']} Horizon 1 · {horizon_counts['horizon_2']} Horizon 2 · {horizon_counts['horizon_3']} Horizon 3",'Review the commercial pipeline')}
+          {domain('/intelligence?tab=programmes','Major Programmes','Not yet assessed','Programme coverage is not summarised by the current runtime.','Inspect programme intelligence')}
+          {domain('/intelligence?tab=participants','Market Participants',f"{len(participants)} represented",'Runtime opportunities cover these participant types.','Compare market participants')}
+          {domain('/research','Research & Readiness',f"{unknown_count} evidence gaps",f"{len(evidence)} evidence assets support current opportunities.",'Close the highest-value gap')}
+        </div></section>
+        <section aria-labelledby='priorities-title'><div class='section-heading'><div><p class='eyebrow'>Commercial focus</p><h2 id='priorities-title'>Mission Priorities</h2></div><p>Configure your Commercial Context to personalise opportunity prioritisation. All intelligence remains visible.</p></div><div class='priority-grid'>{priority_cards}</div></section>
+        <section class='card inbox' aria-labelledby='attention-title'><p class='eyebrow'>Intelligence inbox</p><h2 id='attention-title'>Intelligence Requiring Attention</h2><div class='attention-grid'><p><strong>New evidence</strong><span>Not yet assessed</span></p><p><strong>Changed opportunities</strong><span>Not yet assessed</span></p><p><strong>New programmes</strong><span>Not yet assessed</span></p><p><strong>Research gaps</strong><span>{unknown_count} recorded across runtime opportunities</span></p><p><strong>Evidence becoming stale</strong><span>Not yet assessed</span></p><p><strong>Resolved contradictions</strong><span>Not yet assessed</span></p><p><strong>Upcoming monitoring triggers</strong><span>{contradiction_count} current contradictions require monitoring</span></p></div></section>
+        <section aria-labelledby='portfolio-title'><div class='section-heading'><div><p class='eyebrow'>Industry estate</p><h2 id='portfolio-title'>Industry Portfolio</h2></div><p>Only industries with a real runtime state are shown.</p></div><a class='industry-card' href='/flora/banking'><strong>UK Banking</strong><span class='status governed'>Governed</span><em>Inspect the current Industry Twin Map</em></a></section>
         """,
         auth,
     )
+
+
+def _opportunity_pipeline():
+    from cios.applications.flora.enterprise_intelligence.opportunity_pipeline import generate_banking_opportunity_pipeline
+    return generate_banking_opportunity_pipeline()
+
+
+def _workspace_tabs(active: str, tabs: list[tuple[str, str, str]]) -> str:
+    return "<nav class='workspace-tabs' aria-label='Workspace views'>" + "".join(
+        f"<a href='{href}' aria-current='page'>{label}</a>" if key == active else f"<a href='{href}'>{label}</a>"
+        for key, label, href in tabs
+    ) + "</nav>"
+
+
+def _flora_intelligence_page(headers=None, query=None) -> str:
+    tab = ((query or {}).get("tab") or ["industries"])[0]
+    tabs = [("industries", "Industries", "/intelligence?tab=industries"), ("enterprises", "Enterprises", "/intelligence?tab=enterprises"), ("programmes", "Programmes", "/intelligence?tab=programmes"), ("participants", "Market Participants", "/intelligence?tab=participants"), ("relationships", "Relationships", "/intelligence?tab=relationships")]
+    destinations = {"industries": ("Industry intelligence", "Open the governed UK Banking map and move from industry context into its dossiers.", "/flora/banking", "Open UK Banking"), "enterprises": ("Enterprise dossiers", "Inspect existing Enterprise Twins without changing their runtime.", "/digital-twins", "Open Twin Explorer"), "programmes": ("Major programmes", "Programme intelligence is available where the current Industry Twin provides it.", "/flora/banking", "Inspect Banking programmes"), "participants": ("Market participants", "Compare the participants represented in the governed Banking intelligence.", "/flora/banking/competitors", "Inspect participants"), "relationships": ("Relationships", "Follow existing evidence and relationship paths in Twin Explorer.", "/digital-twins", "Open Twin Explorer")}
+    title, copy, href, action = destinations.get(tab, destinations["industries"])
+    body = f"<section class='workspace-heading'><p class='eyebrow'>Intelligence</p><h1>Explore the enterprise intelligence estate.</h1><p class='lead'>Move from industry context to enterprise detail without duplicating the Twin Map.</p></section>{_workspace_tabs(tab, tabs)}<section class='card'><h2>{title}</h2><p>{copy}</p><a class='button-link' href='{href}'>{action}</a></section><section class='card'><h2>Twin Explorer</h2><p>Advanced Twin inspection remains available for evidence-led exploration.</p><a href='/digital-twins'>Open Twin Explorer</a></section>"
+    return _flora_v2_page("Intelligence", "intelligence", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
+
+
+def _flora_opportunities_page(headers=None, query=None) -> str:
+    from html import escape
+    pipeline = _opportunity_pipeline(); requested = ((query or {}).get("tab") or ["horizon_1"])[0]
+    tabs = [("horizon_1", "Horizon 1", "/opportunities?tab=horizon_1"), ("horizon_2", "Horizon 2", "/opportunities?tab=horizon_2"), ("horizon_3", "Horizon 3", "/opportunities?tab=horizon_3"), ("procurement", "Procurement Activity", "/opportunities?tab=procurement"), ("hypotheses", "Opportunity Hypotheses", "/opportunities?tab=hypotheses"), ("pipeline", "Estimated Pipeline", "/opportunities?tab=pipeline")]
+    selected = [o for o in pipeline.opportunities if o.horizon == requested]
+    cards = "".join(f"<article class='priority-card'><p class='eyebrow'>{escape(_horizon_label(o.horizon))}</p><h2>{escape(o.title)}</h2><p><strong>Customer</strong> {escape(o.enterprise_name or o.participant_type)}</p><p><strong>Problem</strong> {escape(o.commercial_problem)}</p><dl><div><dt>Timing</dt><dd>Not yet assessed</dd></div><div><dt>Value</dt><dd>Not yet assessed</dd></div><div><dt>Confidence</dt><dd>{escape(o.confidence)}</dd></div><div><dt>Evidence</dt><dd>{escape(o.evidence_strength)}</dd></div></dl><p><strong>Reason for Horizon</strong> {escape(o.horizon_rationale.rationale)}</p><a href='/focus?opportunity={escape(o.opportunity_id)}'>Inspect evidence and rationale</a></article>" for o in selected)
+    if requested not in {"horizon_1", "horizon_2", "horizon_3"}: cards = "<section class='card'><h2>Not yet assessed</h2><p>The current runtime does not provide a separate governed summary for this view. Existing opportunity intelligence remains available in the Horizon views.</p><a href='/focus'>Open the full opportunity pipeline</a></section>"
+    elif not cards: cards = "<section class='card'><h2>No opportunities currently classified here</h2><p>Flora does not force unsupported candidates into a Horizon.</p></section>"
+    body = f"<section class='workspace-heading'><p class='eyebrow'>Opportunities</p><h1>Commercial Pipeline Workspace</h1><p class='lead'>Understand the customer problem, commercial timing and evidence behind every Horizon decision.</p></section>{_workspace_tabs(requested, tabs)}<div class='priority-grid'>{cards}</div>"
+    return _flora_v2_page("Opportunities", "opportunities", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
+
+
+def _flora_research_page(headers=None) -> str:
+    links = [("Imports", "/blueprint-import", "Bring governed research into Flora using the existing import workflow."), ("Research Missions", "/blueprint-import/history", "Continue a mission from its existing workspace."), ("Research Gaps", "/explore", "Inspect current Unknowns and evidence demands."), ("Evidence Closure", "/live/evidence", "Review acquired evidence."), ("Research Briefs", "/shape", "Use existing evidence-backed brief composition.")]
+    cards = "".join(f"<a class='estate-tile' href='{href}'><span class='eyebrow'>{title}</span><strong>Open workspace</strong><span>{copy}</span><em>Inspect next</em></a>" for title, href, copy in links)
+    body = f"<section class='workspace-heading'><p class='eyebrow'>Research</p><h1>Research Workspace</h1><p class='lead'>Commission, import and close evidence gaps while preserving the existing research and import runtimes.</p></section><div class='estate-grid'>{cards}</div>"
+    return _flora_v2_page("Research", "research", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
 
 
 def _banking_run():
@@ -1044,12 +1098,10 @@ def _flora_governance_page(headers=None) -> str:
     revision = escape(application_revision())
     decision = blueprint_upload_authorisation(headers or {})
     upload = "allowed" if decision.decision == "allowed" else "denied"
-    settings = "<li><a href='/settings'>Settings</a></li>" if decision.owner_recognised else "<li><span class='muted'>Settings require owner access.</span></li>"
     body = f"""
-    <section class='hero'><p class='eyebrow'>Governance</p><h1>Manage knowledge, validation and product administration.</h1><p class='lead'>Operational functions remain available here while the product home stays question-first.</p></section>
-    <section class='card'><h2>Operational functions</h2><ul class='link-list'><li><a href='/blueprint-import'>Import Twin</a> <span class='pill'>package.upload {upload}</span></li><li><a href='/blueprint-import/history'>Import History</a></li><li><a href='/digital-twins'>Enterprise Canvas</a> <span class='muted'>Temporarily listed here; this will ultimately sit beneath Focus.</span></li>{settings}<li><a href='/deployment'>Runtime deployment information</a></li></ul></section>
-    <section class='card'><h2>Account and workspace</h2><p>Signed in as <strong>{escape(decision.user_id or 'Not signed in')}</strong>. Active workspace: <strong>{escape(decision.active_workspace or 'No active workspace')}</strong>. Owner recognised: <strong>{'yes' if decision.owner_recognised else 'no'}</strong>.</p></section>
-    <p><a href='/'>Back to Home</a></p>
+    <section class='workspace-heading'><p class='eyebrow'>Governance</p><h1>Governed Intelligence Workspace</h1><p class='lead'>Inspect trust, validation and release controls without changing evidence ownership.</p></section>
+    <div class='estate-grid'><a class='estate-tile' href='/live/evidence'><span class='eyebrow'>Evidence</span><strong>Inspect sources</strong><span>Review evidence currently owned by the existing runtime.</span><em>Open evidence</em></a><a class='estate-tile' href='/explore'><span class='eyebrow'>Unknowns</span><strong>Inspect gaps</strong><span>See what prevents stronger decisions.</span><em>Open Unknowns</em></a><a class='estate-tile' href='/explore'><span class='eyebrow'>Contradictions</span><strong>Compare interpretations</strong><span>Keep competing evidence visible.</span><em>Inspect contradictions</em></a><a class='estate-tile' href='/blueprint-import/history'><span class='eyebrow'>Promotion & Validation</span><strong>Review changes</strong><span>Use the existing governed import lifecycle.</span><em>Open import history</em></a><a class='estate-tile' href='/deployment'><span class='eyebrow'>Release Manifest</span><strong>Release {revision}</strong><span>Inspect the deployed runtime identity.</span><em>Open manifest</em></a><a class='estate-tile' href='/digital-twins'><span class='eyebrow'>Advanced inspection</span><strong>Twin Explorer</strong><span>Follow governed objects and lineage.</span><em>Open explorer</em></a></div>
+    <section class='card'><h2>Workspace control</h2><p>Import permission is <strong>{upload}</strong> for this profile. <span class='pill'>package.upload {upload}</span> Operational settings remain available from the profile control.</p></section>
     """
     return _flora_v2_page("Governance", "governance", body, _account_context_html(decision), footer=f"Release {revision}")
 
@@ -1087,17 +1139,19 @@ def _mode_card(href: str, title: str, subtitle: str, description: str) -> str:
 def _account_context_html(decision) -> str:
     from html import escape
     if decision.user_id:
-        return f"<div class='account' aria-label='Account context'><span>{escape(decision.user_id)}</span><span>{escape(decision.active_workspace or 'No workspace')}</span><form method='post' action='/pilot-sign-out'><button type='submit'>Sign out</button></form></div>"
+        controls = "<a href='/digital-twins'>Enterprise Canvas</a><a href='/blueprint-import'>Import Twin</a><a href='/blueprint-import/history'>Import History</a><a href='/settings' aria-label='Profile and settings'>Controls</a>" if decision.owner_recognised else ""
+        return f"<div class='account' aria-label='Account context'><span>{escape(decision.user_id)}</span><span>{escape(decision.active_workspace or 'No workspace')}</span>{controls}<form method='post' action='/pilot-sign-out'><button type='submit'>Sign out</button></form></div>"
     return "<div class='account' aria-label='Account context'><span>Not signed in</span><a href='/pilot-sign-in'>Pilot access</a></div>"
 
 
 def _flora_v2_page(title: str, active: str, body: str, account_html: str, footer: str = "") -> str:
     from html import escape
-    nav = [("home","/","Home"),("explore","/explore","Explore"),("focus","/focus","Focus"),("shape","/shape","Shape"),("governance","/governance","Governance")]
+    nav = [("home","/","Home"),("intelligence","/intelligence","Intelligence"),("opportunities","/opportunities","Opportunities"),("research","/research","Research"),("governance","/governance","Governance")]
     links = ''.join(f"<a href='{href}' aria-current='page'>{label}</a>" if key == active else f"<a href='{href}'>{label}</a>" for key, href, label in nav)
     return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>{escape(title)}</title><style>
     :root{{--bg:#f5f1ea;--ink:#13211c;--muted:#5f6f68;--line:#ded6c8;--card:#fffdf9;--brand:#174d3f;--brand2:#e7f1ec;--focus:#9b5cff}}*{{box-sizing:border-box}}body{{font-family:Inter,Arial,sans-serif;margin:0;background:linear-gradient(180deg,#fbf8f2,#f3eee5);color:var(--ink);line-height:1.55}}a{{color:var(--brand);font-weight:700;text-underline-offset:3px}}a:focus-visible,button:focus-visible,input:focus-visible{{outline:3px solid var(--focus);outline-offset:3px}}.shell{{max-width:1120px;margin:auto;padding:24px}}.topbar{{display:flex;gap:20px;align-items:center;justify-content:space-between;margin-bottom:44px}}.brand strong{{display:block;font-size:1.3rem}}.brand span,.muted{{color:var(--muted)}}.primary-nav{{display:flex;gap:6px;flex-wrap:wrap}}.primary-nav a{{padding:10px 12px;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:650}}.primary-nav a[aria-current='page']{{background:var(--brand);color:white}}.account{{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.92rem}}button,.button-link{{background:var(--brand);color:#fff;border:0;border-radius:999px;padding:13px 18px;text-decoration:none;display:inline-block;cursor:pointer;font-weight:800}}button:hover,.button-link:hover{{background:#0f392f}}.secondary-link{{display:inline-block;padding:10px 0}}.hero,.card,.mode-card a{{background:rgba(255,253,249,.95);border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 50px #1b13060a}}.hero{{padding:42px;margin:18px 0}}.question-hero{{padding:56px}}.eyebrow{{text-transform:uppercase;letter-spacing:.12em;color:var(--brand);font-weight:800;margin:0 0 8px}}h1{{font-size:clamp(2.15rem,5vw,4.5rem);line-height:1.02;margin:.1em 0 .25em}}.lead{{font-size:clamp(1.08rem,2vw,1.35rem);max-width:780px;color:#31413a}}.question-form label{{display:block;font-size:clamp(1.25rem,3vw,2rem);font-weight:850;margin:28px 0 12px}}.question-row{{display:flex;gap:12px}}input{{min-height:56px;border:1px solid #c9beaf;border-radius:999px;padding:0 18px;font:inherit;font-size:1.05rem;background:white}}.question-row input{{flex:1;min-width:0}}.error{{color:#8a1f11;background:#fff0ec;border-left:4px solid #8a1f11;padding:10px 12px;border-radius:10px}}.mode-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}}.mode-card a{{display:block;min-height:190px;padding:24px;text-decoration:none;color:var(--ink)}}.mode-card span{{display:block;color:var(--brand);font-weight:900;font-size:1.5rem}}.mode-card strong{{display:block;font-size:1.15rem;margin:8px 0}}.mode-card em{{font-style:normal;color:var(--muted)}}.card{{padding:24px;margin:16px 0}}.pill,.badge,.confidence,.chip{{display:inline-block;border-radius:999px;padding:4px 10px;background:var(--brand2);margin:3px 4px 3px 0}}.badge{{background:#174d3f;color:white}}.confidence{{background:#efe8ff;color:#3d246b}}.chip{{background:#e7f1ec;text-decoration:none}}.mini-card{{border:1px solid var(--line);border-radius:18px;padding:16px;margin:10px 0;background:#fff}}.unknown{{border-left:5px solid #b27700}}.contradiction{{border-left:5px solid #9b2c2c}}.pipeline-stage{{border-top:1px solid var(--line);padding:14px 0}}.link-list li{{margin:10px 0}}.visually-hidden{{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}}footer{{color:var(--muted);font-size:.9rem;padding:24px 0}}@media(max-width:780px){{.topbar{{align-items:flex-start;flex-direction:column;margin-bottom:20px}}.mode-grid{{grid-template-columns:1fr}}.question-row{{flex-direction:column}}.hero,.question-hero{{padding:28px}}.shell{{padding:16px}}.primary-nav a{{padding:10px 9px}}}}@media(prefers-reduced-motion:reduce){{*{{scroll-behavior:auto!important}}}}
-    </style></head><body><div class='shell'><header class='topbar'><a class='brand' href='/'><strong>Flora</strong><span>Enterprise Intelligence</span></a><nav class='primary-nav' aria-label='Primary product navigation'>{links}</nav>{account_html}</header><main>{body}</main><footer>{escape(footer)}</footer></div></body></html>"""
+    .workspace-heading{{margin:24px 0 36px;max-width:880px}}.workspace-heading h1{{font-size:clamp(2.5rem,6vw,5rem)}}.context-banner{{display:grid;grid-template-columns:1.3fr 2fr auto;gap:24px;align-items:center;background:#173f35;color:white;padding:24px 28px;border-radius:20px}}.context-banner .eyebrow,.context-banner a{{color:#bce5d5}}dl{{margin:0}}.context-banner dl,.priority-card dl{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}}dt{{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}}.context-banner dt{{color:#b8ccc4}}dd{{margin:3px 0;font-weight:800}}.section-heading{{display:flex;justify-content:space-between;gap:24px;align-items:end;margin:48px 0 16px}}.section-heading h2{{margin:0;font-size:2rem}}.section-heading p{{max-width:500px}}.estate-grid,.priority-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}}.estate-tile,.industry-card{{display:flex;flex-direction:column;min-height:210px;padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--line);text-decoration:none;color:var(--ink)}}.estate-tile strong{{font-size:1.55rem;margin:10px 0}}.estate-tile em,.industry-card em{{font-style:normal;color:var(--brand);font-weight:800;margin-top:auto;padding-top:20px}}.priority-card{{padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--line)}}.priority-card h3{{font-size:1.35rem}}.priority-card dl{{grid-template-columns:1fr 1fr}}.attention-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}}.attention-grid p{{display:flex;flex-direction:column;background:#f4f0e8;padding:14px;border-radius:12px;margin:0}}.attention-grid span{{color:var(--muted)}}.industry-card{{max-width:360px;min-height:150px}}.status{{width:max-content;border-radius:99px;padding:5px 10px;margin-top:10px}}.governed{{background:#d9eee5;color:#174d3f}}.workspace-tabs{{display:flex;gap:8px;overflow:auto;padding:4px 0 18px}}.workspace-tabs a{{white-space:nowrap;padding:9px 14px;border:1px solid var(--line);border-radius:99px;text-decoration:none}}.workspace-tabs a[aria-current='page']{{background:var(--brand);color:white}}@media(max-width:900px){{.context-banner{{grid-template-columns:1fr}}.estate-grid,.priority-grid{{grid-template-columns:1fr 1fr}}}}@media(max-width:620px){{.estate-grid,.priority-grid,.attention-grid{{grid-template-columns:1fr}}.section-heading{{display:block}}.context-banner dl{{grid-template-columns:1fr}}}}
+    </style></head><body><div class='shell'><header class='topbar'><a class='brand' href='/'><strong>Flora</strong><span>Enterprise Intelligence</span></a><nav class='primary-nav' aria-label='Primary product navigation'>{links}</nav><div class='profile-control'>{account_html}</div></header><main>{body}</main><footer>{escape(footer)}</footer></div></body></html>"""
 
 def _is_enterprise_intelligence_path(path: str) -> bool:
     parts = [part for part in path.split('/') if part]
