@@ -17,11 +17,14 @@ def test_home_is_enterprise_intelligence_workspace_and_flora_map():
     assert "Enterprise Intelligence Workspace" in page
     assert "Enterprise Intelligence Map" in page
     assert "Commercial Context" in page
-    assert "Mission Priorities" in page
+    assert "Commercial opportunities" in page
     assert "Intelligence Requiring Attention" in page
     assert "Industry Portfolio" in page
     assert "UK Banking" in page
     assert "Governed" in page
+    assert "active candidates" not in page
+    assert "Upcoming monitoring triggers</strong><span>Not currently available" in page
+    assert "current contradictions require monitoring" not in page
 
 
 def test_primary_navigation_uses_five_executive_destinations():
@@ -64,3 +67,42 @@ def test_primary_workspace_routes_are_served_without_replacing_deep_links():
     finally:
         server.shutdown()
         server.server_close()
+
+
+def test_home_resolves_canonical_commercial_context_and_only_claims_mission_ordering_on_match(monkeypatch):
+    from cios.applications.flora.commercial_mission import CommercialMission, EmployerContext, ResolvedCommercialContext
+    import cios.applications.flora.commercial_mission as context_module
+
+    mission = CommercialMission(
+        user_id="owner", executive_role="Client Partner", employer="Acme",
+        commercial_objective="Grow trusted transformation", industries=("UK Banking",),
+        geography=("United Kingdom",), commercial_horizon="2026–2028",
+        named_accounts=("Nationwide",),
+    )
+    monkeypatch.setattr(context_module, "resolve_commercial_context", lambda headers: ResolvedCommercialContext(
+        mission, EmployerContext(organisation="Acme")))
+
+    page = _flora_home_page({"X-Flora-User": "owner"})
+
+    assert "Commercial context configured" in page
+    assert "Client Partner · Acme · United Kingdom · 2026–2028" in page
+    assert "Priorities for my mission" in page
+    assert "Named priority customer in your Commercial Context" in page
+    assert page.index("Nationwide / Virgin Money") < page.index("Customer unresolved")
+
+
+def test_home_neutral_and_unresolved_customer_contract(monkeypatch):
+    from cios.applications.flora.commercial_mission import ResolvedCommercialContext
+    import cios.applications.flora.commercial_mission as context_module
+    monkeypatch.setattr(context_module, "resolve_commercial_context", lambda headers: ResolvedCommercialContext(None, None))
+
+    page = _flora_home_page({})
+
+    assert "Commercial context not configured" in page
+    assert "Commercial opportunities" in page
+    assert "Priorities for my mission" not in page
+    assert "Strategic opportunity hypothesis" in page
+    assert "Customer unresolved" in page
+    assert "Reason shown" not in page
+    for forbidden in ("runtime opportunities", "runtime intelligence", "evidence assets", "Not signed in", "active candidates"):
+        assert forbidden not in page

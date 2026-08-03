@@ -94,3 +94,80 @@ All other route branches in `FloraWebHandler` remain intact, including Blueprint
 ## Future extensibility
 
 Future industries and estate metrics can be added to the Flora Map when existing runtimes expose governed state. New summary tiles must link to an owning workspace rather than reproduce its runtime. Additional tabs may compose existing capability routes, but must not create new architectural owners, Twin concepts, evidence contracts, or parallel import/research paths. Mission configuration may affect ordering only; it must never hide otherwise available intelligence.
+
+## Home runtime correction — route and owner proof
+
+The configured application entry point is `cios.applications.flora.web.app:app` (the
+`FloraWebHandler`). The correction reuses the active runtime paths and does not add a
+Home data authority.
+
+| Experience | Route | Handler | Service | Resolver | Renderer | Canonical data owner |
+|---|---|---|---|---|---|---|
+| Home | `/`, `/flora`, `/flora/` | `FloraWebHandler.do_GET` | existing Home composition | `resolve_commercial_context` plus the existing banking opportunity pipeline | `_flora_home_page` / `_flora_v2_page` | Commercial Mission and Employer Context stores; existing Enterprise Intelligence pipeline |
+| Twin Map | `/blueprint-import/{run_id}/workspace` | `FloraWebHandler.do_GET` | `executive_workspace_page` | `resolve_commercial_context` | Executive workspace map | promoted/staged Twin records and their existing repositories |
+| Research gaps | `/blueprint-import/{run_id}/health` | `FloraWebHandler.do_GET` | `executive_workspace_page` | `resolve_commercial_context` | `_research_gaps` | governed deficiencies on the assembled semantic Twin |
+| Research Commission export | `/blueprint-import/{run_id}/research-gap-brief` | `FloraWebHandler.do_GET` | `export_research_gap_brief` | `resolve_commercial_context` | `research_gap_brief` | governed deficiencies plus the same declared context |
+| Opportunity workspace/detail | `/opportunities`, `/opportunities?opportunity={id}` | `FloraWebHandler.do_GET` | existing banking opportunity pipeline | existing deterministic Horizon projection | `_flora_opportunities_page` | Enterprise Intelligence opportunity pipeline |
+| Industry portfolio | Home and `/flora/banking` | `FloraWebHandler.do_GET` | existing banking portfolio | existing governed banking state | `_flora_home_page` / `banking_landing_page` | governed UK Banking Twin |
+
+The primary navigation is rendered only by `_flora_v2_page` for this experience. Its
+five items remain Home, Intelligence, Opportunities, Research and Governance. Legacy
+routes and Twin import routing remain registered unchanged in `FloraWebHandler`.
+
+## Final Home composition and semantics
+
+Home retains, in order: the Commercial Context banner, Enterprise Intelligence Map,
+mission-aware or neutral opportunities, Intelligence Requiring Attention, and the
+compact Industry Portfolio.
+
+* **Commercial Context:** Home consumes the same `resolve_commercial_context` read
+  contract as Twin Map, Research Gaps and the export. A complete persisted mission is
+  labelled configured; genuinely incomplete operational fields produce a partial
+  state; absence produces a constructive configuration prompt. Context changes only
+  ordering, emphasis and relevance explanation—not Twin truth, completeness,
+  evidence, confidence or research scope.
+* **Opportunity state:** `Priorities for my mission` is used only when an explicit
+  declared subject match changes ordering. Otherwise `Commercial opportunities` is
+  used. Named customers sort ahead of unresolved hypotheses; unresolved items say
+  `Strategic opportunity hypothesis` and `Customer unresolved`.
+* **Tile counts:** each tile pairs a business population with a separate governed or
+  assessment state. `0` means an aggregation ran and found no records. `Not currently
+  summarised` means no supported aggregation exists. `Not yet assessed` means the
+  represented population exists but its assessment has not been made. No neighbouring
+  record count substitutes for an unavailable measure.
+* **Industry states:** governed industries link to their Twin; candidates link to
+  review; research-in-progress entries link to their research mission; not-started
+  entries link to construction. An external mission such as TEL-001 is not a live
+  Industry Twin until imported, so it is not presented as one.
+
+## Attention ownership
+
+| Attention category | Existing owner and rule | Destination |
+|---|---|---|
+| New evidence | Evidence Records added since a supported checkpoint | Research, filtered to new evidence |
+| Changed opportunities | real comparison/change event for status, Horizon, value, timing or confidence | Opportunities, filtered to changed |
+| New programmes | newly represented Programme Objects | Intelligence / Programmes, filtered to new |
+| Research gaps | unresolved governed deficiencies | Research, filtered to gaps |
+| Evidence becoming stale | Evidence Record freshness/temporal status | Research, filtered to stale evidence |
+| Resolved contradictions | Contradiction Records whose resolution status changed | Governance, filtered to resolved contradictions |
+| Upcoming monitoring triggers | Monitoring Trigger Records with due/upcoming review dates | Research, filtered to monitoring triggers |
+
+Where the current runtime has no supported checkpoint, comparison, freshness summary
+or Monitoring Trigger aggregation, Home says `Not currently available`. In particular,
+Contradiction Records are never counted as monitoring triggers.
+
+## Empty states, terminology and route preservation
+
+Home distinguishes `0 represented`, `Not currently summarised`, `Not yet assessed`
+and `Not currently available`. Empty populations use constructive guidance to import
+or enrich a Twin. Primary-page terms use *available intelligence*, *represented
+opportunities*, *supporting evidence* and *governed intelligence*. The ambiguous terms
+*active candidates* and *active opportunity* are not used without procurement or
+sales-pursuit evidence.
+
+All map destinations reuse existing routes: Industries, Enterprises, Programmes and
+Market Participants use filtered `/intelligence` views; Opportunities uses
+`/opportunities`; Research & Readiness uses `/research`. Opportunity cards retain the
+existing opportunity query destination, and UK Banking retains `/flora/banking`.
+Legacy `/explore`, `/focus`, `/shape`, digital-Twin, import, Governance and Advanced
+Inspection routes remain callable; this correction introduces no duplicate route.
