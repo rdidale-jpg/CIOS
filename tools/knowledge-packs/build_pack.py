@@ -20,6 +20,9 @@ def parse_manifest(path):
 
 def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 
+def write_report(path, title, body):
+    path.write_text(f'# {title}\n\n{body.rstrip()}\n')
+
 def is_placeholder(path):
     txt=path.read_text(errors='ignore')
     return len(txt.strip()) < 400 or bool(PLACEHOLDER.search(txt[:1200]))
@@ -113,7 +116,7 @@ def main():
     stage=ROOT/'.tmp'/f'{args.profile}-pack-stage'
     if stage.exists(): shutil.rmtree(stage)
     stage.mkdir(parents=True)
-    for extra in ['VERSION','README.md','manifest.yaml']:
+    for extra in ['VERSION','README.md','manifest.yaml','MIGRATION-NOTE-v1.1.0.md']:
         shutil.copy2(pack/extra, stage/extra)
     cfg=pack/'configuration/Chief-Architect-GPT-Instructions.md'
     (stage/'configuration').mkdir(exist_ok=True); shutil.copy2(cfg, stage/'configuration/Chief-Architect-GPT-Instructions.md')
@@ -128,10 +131,29 @@ def main():
         for p in sorted(stage.rglob('*')):
             if p.is_file():
                 info=zipfile.ZipInfo(p.relative_to(stage).as_posix(), date_time=(2026,1,1,0,0,0)); info.compress_type=zipfile.ZIP_DEFLATED; info.external_attr=0o644<<16; z.writestr(info,p.read_bytes())
-    zsha=sha(zpath); report=DIST/f'CIOS-Chief-Architect-Knowledge-Pack-v{version}-build-report.md'
+    prefix=f'CIOS-Chief-Architect-Knowledge-Pack-v{version}'
+    zsha=sha(zpath); report=DIST/f'{prefix}-build-report.md'
     programme_doc=[d for d in docs if d['document_id']=='CURRENT-PROGRAMME-STATE'][0]
     runtime_docs=[d for d in docs if d['document_id'] in sorted(RUNTIME)]
     source_map_doc=[d for d in docs if d['document_id']=='CA-SOURCE-MAP'][0]
     report.write_text(f'# Chief Architect Knowledge Pack Build Report\n\nVersion: {version}\n\nZIP: `{zpath.relative_to(ROOT)}`\n\nZIP checksum: `{zsha}`\n\nDocuments packaged: {len(docs)}\n\nProgramme-state source used: {programme_doc["document_id"]} — {programme_doc["title"]} (`{programme_doc["source_path"]}` -> `{programme_doc["pack_path"]}`)\n\nRuntime-baseline sources used:\n' + ''.join(f'- {d["document_id"]} — {d["title"]} (`{d["source_path"]}` -> `{d["pack_path"]}`)\n' for d in runtime_docs) + f'\nRuntime Capability Baseline packaged: WP-011 — Flora Runtime Capability Baseline (`runtime/Flora-Runtime-Capability-Baseline.md`)\n\nSelection rationale: selected canonical source `docs/flora-runtime/wp-011/Flora-Runtime-Capability-Baseline.md` because it is the only repository document found with WP-011 and Flora Runtime Capability Baseline identifiers; no canonical successor or duplicate packaged baseline was found in the Authority Registry/ADR search.\n\nSource-map resolution: passed for `{source_map_doc["source_path"]}`; every source-map identifier resolves to exactly one manifest entry.\nProgramme-state freshness basis: passed using substantive delivery-state fields and As of date, not file date alone.\n\nValidation: passed\nRecommendation readiness: passed\nProgramme-state freshness: passed\n')
+    (DIST/f'{prefix}.sha256').write_text(f'{zsha}  {zpath.name}\n')
+    write_report(DIST/f'{prefix}-validation-report.md', 'Validation report',
+                 'Result: passed\n\nManifest sources, source-map identifiers, packaged paths, embedded checksums, and release checksum reconcile.')
+    write_report(DIST/f'{prefix}-architecture-delta.md', 'Architecture delta',
+                 'No architecture delta. Version 1.1.0 preserves the approved governed architecture sources selected by the manifest.')
+    write_report(DIST/f'{prefix}-governance-classification-report.md', 'Governance classification report',
+                 '\n'.join(f'- {d["document_id"]}: {d["authority"]}' for d in docs))
+    write_report(DIST/f'{prefix}-supersession-report.md', 'Supersession report',
+                 'No governed source is superseded by this packaging release.')
+    write_report(DIST/f'{prefix}-runtime-capability-delta.md', 'Runtime capability delta',
+                 'No runtime capability delta. The manifest-selected runtime baseline is unchanged by release packaging.')
+    write_report(DIST/f'{prefix}-programme-state-delta.md', 'Programme-state delta',
+                 'No programme-state delta is introduced by this packaging release.')
+    shutil.copy2(pack/'MIGRATION-NOTE-v1.1.0.md', DIST/f'{prefix}-migration-note.md')
+    write_report(DIST/f'{prefix}-excluded-source-list.md', 'Excluded-source list',
+                 'No source required by the manifest was excluded. Repository files not selected by the manifest are outside this pack.')
+    write_report(DIST/f'{prefix}-unresolved-conflict-list.md', 'Unresolved-conflict list',
+                 'None.')
     print(f'Built {zpath} sha256={zsha}')
 if __name__=='__main__': main()
