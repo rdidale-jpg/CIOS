@@ -1,0 +1,10 @@
+{
+  "template_set_version":"1.0.0",
+  "templates": [
+    {"id":"industry-twin-construction","version":"1.0.0","profiles":["industry-overview","enterprise-dossier","market-participant","programme","opportunity","reinvention-assessment","industry-membership","industry-release-manifest"],"modules":["evidence-closure","analyst-estimates","opportunity-timing","opportunity-value","horizons","monitoring-triggers","unknown-handling","contradiction-handling","pre-delivery-validation"]},
+    {"id":"industry-twin-continuation","version":"1.0.0","profiles":["industry-overview","enterprise-dossier","market-participant","programme","opportunity","reinvention-assessment","industry-membership","industry-release-manifest"],"modules":["evidence-closure","analyst-estimates","opportunity-timing","opportunity-value","horizons","monitoring-triggers","unknown-handling","contradiction-handling","pre-delivery-validation"]},
+    {"id":"targeted-evidence-closure","version":"1.0.0","profiles":["industry-overview","enterprise-dossier","market-participant","programme","opportunity"],"modules":["evidence-closure","analyst-estimates","monitoring-triggers","unknown-handling","contradiction-handling","pre-delivery-validation"]},
+    {"id":"opportunity-pipeline-enrichment","version":"1.0.0","profiles":["opportunity","programme","enterprise-dossier","market-participant"],"modules":["evidence-closure","analyst-estimates","opportunity-timing","opportunity-value","horizons","monitoring-triggers","unknown-handling","contradiction-handling","pre-delivery-validation"]},
+    {"id":"periodic-twin-refresh","version":"1.0.0","profiles":["industry-overview","enterprise-dossier","market-participant","programme","opportunity","reinvention-assessment","industry-membership","industry-release-manifest"],"modules":["evidence-closure","analyst-estimates","opportunity-timing","opportunity-value","horizons","monitoring-triggers","unknown-handling","contradiction-handling","pre-delivery-validation"]}
+  ]
+}

@@ -1,0 +1,11 @@
+[
+  {"id":"missing-profile","failure":"a template references a profile absent from profile-versions.json"},
+  {"id":"missing-profile-version","failure":"a required template profile has no manifest version"},
+  {"id":"invalid-manifest","failure":"a schema-required field is absent"},
+  {"id":"unresolved-variable","failure":"rendered contract text contains {{UNRESOLVED}}"},
+  {"id":"missing-output","failure":"required_outputs omits validation-report"},
+  {"id":"opportunity-without-horizons","failure":"an opportunity-pipeline-enrichment manifest omits horizon_definitions"},
+  {"id":"closure-without-exhaustion","failure":"a targeted-evidence-closure manifest omits EVIDENCE EXHAUSTED"},
+  {"id":"stale-generated-file","failure":"checked-in generated Markdown differs from deterministic rendering"},
+  {"id":"pack-without-active-template","failure":"the pack template set omits one required active template"}
+]

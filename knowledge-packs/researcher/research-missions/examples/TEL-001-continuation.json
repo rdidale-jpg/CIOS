@@ -1,0 +1,59 @@
+{
+  "manifest_version": "1.0.0",
+  "parent_twin_id": "TEL-001",
+  "industry": "Telecommunications, Media and Sport",
+  "geography": [
+    "United Kingdom"
+  ],
+  "profile_versions": {
+    "industry-overview": "1.0.0",
+    "enterprise-dossier": "1.0.0",
+    "market-participant": "1.0.0",
+    "programme": "1.0.0",
+    "opportunity": "1.0.0",
+    "reinvention-assessment": "1.0.0",
+    "industry-membership": "1.0.0",
+    "industry-release-manifest": "1.0.0"
+  },
+  "required_outputs": [
+    "governed-records",
+    "evidence-register",
+    "unknown-register",
+    "contradiction-register",
+    "validation-report"
+  ],
+  "evidence_closure_policy": "Search authoritative and independent sources; close only with linked evidence or record evidence exhaustion.",
+  "permitted_estimate_types": [
+    "bounded-range",
+    "derived"
+  ],
+  "outcome_states": [
+    "COMPLETE",
+    "CONTINUE",
+    "EVIDENCE EXHAUSTED"
+  ],
+  "generated_date": "2026-08-03T00:00:00Z",
+  "pack_version": "2.7.0",
+  "mission_id": "TEL-001-continuation",
+  "mission_type": "industry-twin-continuation",
+  "baseline_release": "TEL-001-release-1",
+  "scope": {
+    "domains": [
+      "telecommunications",
+      "media",
+      "sport"
+    ],
+    "mode": "delta continuation"
+  },
+  "research_priorities": [
+    "Close baseline gaps",
+    "Enrich enterprises, participants, programmes and opportunities"
+  ],
+  "current_gaps": [
+    "Claims without linked evidence",
+    "Incomplete dates and subject classifications"
+  ],
+  "subject_ids": [
+    "IND-TMS-001"
+  ]
+}

@@ -6,7 +6,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / 'knowledge-packs/researcher/manifest.yaml'
-VERSION = '2.6.0'
+VERSION = '2.7.0'
 BASENAME = f'CIOS-Researcher-Knowledge-Pack-v{VERSION}'
 
 
@@ -95,7 +95,7 @@ def test_generated_filenames_metadata_report_and_root_use_requested_version():
 def test_source_version_mismatch_fails_with_clear_message():
     result = build('9.9.9')
     assert result.returncode != 0
-    assert 'Version mismatch: requested version 9.9.9; conflicting version 2.6.0' in result.stderr
+    assert 'Version mismatch: requested version 9.9.9; conflicting version 2.7.0' in result.stderr
     assert 'source file: knowledge-packs/researcher/VERSION; field: VERSION' in result.stderr
 
 
