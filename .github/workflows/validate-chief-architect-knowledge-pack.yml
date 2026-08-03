@@ -96,20 +96,29 @@ jobs:
 
       - name: Verify output and checksum
         run: |
-          ZIP="dist/CIOS-Chief-Architect-Knowledge-Pack-v1.0.0.zip"
-          REPORT="dist/CIOS-Chief-Architect-Knowledge-Pack-v1.0.0-build-report.md"
-          CHECKSUM="dist/CIOS-Chief-Architect-Knowledge-Pack-v1.0.0.sha256"
+          ZIP="dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0.zip"
+          REPORT="dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-build-report.md"
+          CHECKSUM="dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0.sha256"
 
           test -f "$ZIP"
           test -f "$REPORT"
-          sha256sum "$ZIP" > "$CHECKSUM"
-          sha256sum --check "$CHECKSUM"
+          (cd dist && sha256sum --check "$(basename "$CHECKSUM")")
 
       - name: Upload validation artefacts
         uses: actions/upload-artifact@v4
         with:
-          name: CIOS-Chief-Architect-Knowledge-Pack-v1.0.0
+          name: CIOS-Chief-Architect-Knowledge-Pack-v1.1.0
           path: |
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.0.0.zip
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.0.0-build-report.md
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.0.0.sha256
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0.zip
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0.sha256
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-build-report.md
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-validation-report.md
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-architecture-delta.md
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-governance-classification-report.md
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-supersession-report.md
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-runtime-capability-delta.md
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-programme-state-delta.md
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-migration-note.md
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-excluded-source-list.md
+            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-unresolved-conflict-list.md
+          if-no-files-found: error

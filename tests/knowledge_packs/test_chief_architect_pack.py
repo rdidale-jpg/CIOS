@@ -59,7 +59,7 @@ def test_runtime_programme_sources_are_not_absent_or_placeholder_like():
 def test_deterministic_build_zip_checksum_index_pack_state_and_completeness_matrix():
     cmd=['python3','tools/knowledge-packs/build_pack.py','--profile','chief-architect']
     subprocess.check_output(cmd,cwd=ROOT,text=True)
-    zip_path=ROOT/'dist/CIOS-Chief-Architect-Knowledge-Pack-v1.0.0.zip'
+    zip_path=ROOT/'dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0.zip'
     h1=hashlib.sha256(zip_path.read_bytes()).hexdigest()
     subprocess.check_output(cmd,cwd=ROOT,text=True)
     h2=hashlib.sha256(zip_path.read_bytes()).hexdigest()
@@ -67,6 +67,16 @@ def test_deterministic_build_zip_checksum_index_pack_state_and_completeness_matr
     with zipfile.ZipFile(zip_path) as z:
         names=set(z.namelist())
         pack_state=z.read('PACK-STATE.md').decode()
+        embedded_checksums=z.read('checksums.sha256').decode().splitlines()
+        for receipt in embedded_checksums:
+            expected, name=receipt.split('  ', 1)
+            assert hashlib.sha256(z.read(name)).hexdigest()==expected
+    expected_names={d['pack_path'] for d in docs()} | {
+        'VERSION','README.md','manifest.yaml','MIGRATION-NOTE-v1.1.0.md',
+        'configuration/Chief-Architect-GPT-Instructions.md','DOCUMENT-INDEX.md',
+        'PACK-STATE.md','checksums.sha256',
+    }
+    assert names==expected_names
     for needed in ['DOCUMENT-INDEX.md','PACK-STATE.md','checksums.sha256','handbook/CIOS-Chief-Architect-Handbook.md','architecture/FP-010-Knowledge-Pack-Architecture.md','programme/CURRENT-PROGRAMME-STATE.md','runtime/Flora-Runtime-Capability-Baseline.md','runtime/FEIR-001-Flora-Enterprise-Intelligence-Runtime-Architecture-v1.0.md','runtime/EIRP-001-Enterprise-Intelligence-Reasoning-Pipeline-Specification.md','enterprise-intelligence/EI-001-Enterprise-Model-Specification.md','enterprise-intelligence/EI-004-Commercial-Reasoning-Framework.md','source-map.yaml','templates/Architecture-Decision-Review-Template.md','operating-guidance/Chief-Architect-Operating-Guidance.md']:
         assert needed in names
     assert 'Recommendation readiness: passed' in pack_state
@@ -78,3 +88,16 @@ def test_deterministic_build_zip_checksum_index_pack_state_and_completeness_matr
     assert '## WP-012 completeness matrix' in pack_state
     for criterion in ['Programme-state baseline','Runtime-baseline authority','Runtime implementation evidence','Operating guidance','Templates','Source map','Core Enterprise Intelligence authorities','Placeholder rejection']:
         assert criterion in pack_state
+
+    receipt=ROOT/'dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0.sha256'
+    expected, filename=receipt.read_text().strip().split('  ', 1)
+    assert filename==zip_path.name
+    assert expected==hashlib.sha256(zip_path.read_bytes()).hexdigest()
+
+def test_generated_pack_archives_are_not_tracked_and_workflow_publishes_release_evidence():
+    tracked=subprocess.check_output(['git','ls-files'],cwd=ROOT,text=True).splitlines()
+    assert not [p for p in tracked if p.startswith(('dist/','.tmp/','knowledge-packs/')) and p.endswith('.zip')]
+    workflow=(ROOT/'.github/workflows/validate-chief-architect-knowledge-pack.yml').read_text()
+    prefix='dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0'
+    for suffix in ['.zip','.sha256','-build-report.md','-validation-report.md','-architecture-delta.md','-governance-classification-report.md','-supersession-report.md','-runtime-capability-delta.md','-programme-state-delta.md','-migration-note.md','-excluded-source-list.md','-unresolved-conflict-list.md']:
+        assert prefix+suffix in workflow
