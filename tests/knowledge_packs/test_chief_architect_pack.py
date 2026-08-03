@@ -98,6 +98,10 @@ def test_generated_pack_archives_are_not_tracked_and_workflow_publishes_release_
     tracked=subprocess.check_output(['git','ls-files'],cwd=ROOT,text=True).splitlines()
     assert not [p for p in tracked if p.startswith(('dist/','.tmp/','knowledge-packs/')) and p.endswith('.zip')]
     workflow=(ROOT/'.github/workflows/validate-chief-architect-knowledge-pack.yml').read_text()
-    prefix='dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0'
+    assert 'PACK_VERSION="$(tr -d \'[:space:]\' < knowledge-packs/chief-architect/VERSION)"' in workflow
+    assert '^[0-9]+\\.[0-9]+\\.[0-9]+$' in workflow
+    assert 'name: ${{ env.PACK_BASENAME }}' in workflow
+    assert 'if-no-files-found: error' in workflow
+    prefix='dist/${{ env.PACK_BASENAME }}'
     for suffix in ['.zip','.sha256','-build-report.md','-validation-report.md','-architecture-delta.md','-governance-classification-report.md','-supersession-report.md','-runtime-capability-delta.md','-programme-state-delta.md','-migration-note.md','-excluded-source-list.md','-unresolved-conflict-list.md']:
         assert prefix+suffix in workflow
