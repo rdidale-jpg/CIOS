@@ -33,6 +33,7 @@ def test_proposed_navigation_does_not_enter_pack_source_validation():
         "knowledge-packs/chief-architect/**",
         "tests/knowledge_packs/test_chief_architect_pack.py",
         "tools/knowledge-packs/build_pack.py",
+        ".github/workflows/validate-chief-architect-knowledge-pack.yml",
     }
 
     # FP-013 is registered and linked by review/navigation documents without

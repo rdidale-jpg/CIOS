@@ -30,6 +30,7 @@ on:
       - "knowledge-packs/chief-architect/**"
       - "tests/knowledge_packs/test_chief_architect_pack.py"
       - "tools/knowledge-packs/build_pack.py"
+      - ".github/workflows/validate-chief-architect-knowledge-pack.yml"
   push:
     branches:
       - main
@@ -62,6 +63,7 @@ on:
       - "knowledge-packs/chief-architect/**"
       - "tests/knowledge_packs/test_chief_architect_pack.py"
       - "tools/knowledge-packs/build_pack.py"
+      - ".github/workflows/validate-chief-architect-knowledge-pack.yml"
   workflow_dispatch:
 
 permissions:
@@ -86,6 +88,16 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install "pytest>=8.0"
 
+      - name: Resolve Knowledge Pack version
+        run: |
+          PACK_VERSION="$(tr -d '[:space:]' < knowledge-packs/chief-architect/VERSION)"
+          if [[ ! "$PACK_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Invalid Chief Architect Knowledge Pack semantic version: $PACK_VERSION" >&2
+            exit 1
+          fi
+          echo "PACK_VERSION=$PACK_VERSION" >> "$GITHUB_ENV"
+          echo "PACK_BASENAME=CIOS-Chief-Architect-Knowledge-Pack-v$PACK_VERSION" >> "$GITHUB_ENV"
+
       - name: Run Chief Architect Knowledge Pack tests
         run: |
           pytest tests/knowledge_packs/test_chief_architect_pack.py
@@ -96,9 +108,9 @@ jobs:
 
       - name: Verify output and checksum
         run: |
-          ZIP="dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0.zip"
-          REPORT="dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-build-report.md"
-          CHECKSUM="dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0.sha256"
+          ZIP="dist/${PACK_BASENAME}.zip"
+          REPORT="dist/${PACK_BASENAME}-build-report.md"
+          CHECKSUM="dist/${PACK_BASENAME}.sha256"
 
           test -f "$ZIP"
           test -f "$REPORT"
@@ -107,18 +119,18 @@ jobs:
       - name: Upload validation artefacts
         uses: actions/upload-artifact@v4
         with:
-          name: CIOS-Chief-Architect-Knowledge-Pack-v1.1.0
+          name: ${{ env.PACK_BASENAME }}
           path: |
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0.zip
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0.sha256
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-build-report.md
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-validation-report.md
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-architecture-delta.md
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-governance-classification-report.md
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-supersession-report.md
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-runtime-capability-delta.md
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-programme-state-delta.md
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-migration-note.md
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-excluded-source-list.md
-            dist/CIOS-Chief-Architect-Knowledge-Pack-v1.1.0-unresolved-conflict-list.md
+            dist/${{ env.PACK_BASENAME }}.zip
+            dist/${{ env.PACK_BASENAME }}.sha256
+            dist/${{ env.PACK_BASENAME }}-build-report.md
+            dist/${{ env.PACK_BASENAME }}-validation-report.md
+            dist/${{ env.PACK_BASENAME }}-architecture-delta.md
+            dist/${{ env.PACK_BASENAME }}-governance-classification-report.md
+            dist/${{ env.PACK_BASENAME }}-supersession-report.md
+            dist/${{ env.PACK_BASENAME }}-runtime-capability-delta.md
+            dist/${{ env.PACK_BASENAME }}-programme-state-delta.md
+            dist/${{ env.PACK_BASENAME }}-migration-note.md
+            dist/${{ env.PACK_BASENAME }}-excluded-source-list.md
+            dist/${{ env.PACK_BASENAME }}-unresolved-conflict-list.md
           if-no-files-found: error
