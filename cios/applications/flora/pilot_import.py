@@ -18,6 +18,14 @@ PILOT_AUTO_SIGN_IN_ENV = "FLORA_PILOT_AUTO_SIGN_IN"  # deprecated for imports
 PILOT_IMPORT_ACTOR = "flora-pilot-operator"
 PILOT_IMPORT_WORKSPACE = "flora-pilot-import"
 PILOT_IMPORT_AUTH_MODE = "pilot"
+# Canonical capabilities of the repository-defined pilot operator.  Keep this
+# grant deliberately narrower than owner authority: candidate review records are
+# non-canonical, while candidate.promote remains absent and separately guarded.
+PILOT_BLUEPRINT_CAPABILITIES = frozenset({
+    "package.upload",
+    "package.inspect",
+    "package.review",
+})
 
 
 def _truthy(name: str) -> bool:

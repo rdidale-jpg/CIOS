@@ -8,7 +8,8 @@ from dataclasses import dataclass
 from typing import Any
 from urllib.parse import unquote_plus
 from cios.applications.flora.pilot_import import (
-    PILOT_IMPORT_ACTOR, PILOT_IMPORT_WORKSPACE, pilot_import_bypass_enabled,
+    PILOT_BLUEPRINT_CAPABILITIES, PILOT_IMPORT_ACTOR, PILOT_IMPORT_WORKSPACE,
+    pilot_import_bypass_enabled,
 )
 
 _RUN_ID_RE = re.compile(r"^fi-[A-Za-z0-9_-]+$")
@@ -49,12 +50,16 @@ def authenticated_flora_user(headers: Any) -> str:
     session = resolve_pilot_session(headers)
     if session:
         return session.user_id
+    if pilot_import_bypass_enabled():
+        return PILOT_IMPORT_ACTOR
     return str(_trusted_header(headers, "X-Flora-User") or cookie_value(headers, "flora_user") or "").strip()
 
 
 def flora_authentication_source(headers: Any) -> str:
     if resolve_pilot_session(headers):
         return "pilot_session_cookie"
+    if pilot_import_bypass_enabled():
+        return "pilot"
     if _trusted_header(headers, "X-Flora-User"):
         return "trusted_proxy_header"
     if cookie_value(headers, "flora_user"):
@@ -83,6 +88,8 @@ def user_enterprise_access(headers: Any) -> set[str]:
         # managed-enterprise authority is resolved by server policy below, not
         # by browser-supplied enterprise claims.
         return {session.workspace}
+    if pilot_import_bypass_enabled():
+        return {PILOT_IMPORT_WORKSPACE}
     allowed = _trusted_header(headers, "X-Flora-Enterprises") or cookie_value(headers, "flora_enterprises")
     return {item.strip() for item in str(allowed or "").replace("|", ",").split(",") if item.strip()}
 
@@ -92,6 +99,8 @@ def active_flora_workspace(headers: Any) -> str:
     session = resolve_pilot_session(headers)
     if session:
         return session.workspace
+    if pilot_import_bypass_enabled():
+        return PILOT_IMPORT_WORKSPACE
     selected = _trusted_header(headers, "X-Flora-Active-Workspace") or cookie_value(headers, "flora_active_workspace")
     allowed = user_enterprise_access(headers)
     if selected and ("*" in allowed or _contains_id(allowed, selected)):
@@ -219,6 +228,8 @@ def raw_flora_roles(headers: Any) -> set[str]:
     session = resolve_pilot_session(headers)
     if session:
         return {session.role}
+    if pilot_import_bypass_enabled():
+        return set(PILOT_BLUEPRINT_CAPABILITIES)
     raw_roles = _trusted_header(headers, "X-Flora-Roles") or cookie_value(headers, "flora_roles")
     return {item.strip() for item in str(raw_roles or "").replace("|", ",").split(",") if item.strip()}
 
@@ -285,6 +296,10 @@ def can_access_enterprise(headers: Any, enterprise_id: str, workspace_id: str = 
     if not authenticated_flora_user(headers):
         return False
     allowed = user_enterprise_access(headers)
+    # Pilot authority is scoped to packages received into the server-owned
+    # pilot workspace.  It does not make the operator an enterprise owner.
+    if pilot_import_bypass_enabled():
+        return canonical_enterprise_id(workspace_id) == canonical_enterprise_id(PILOT_IMPORT_WORKSPACE)
     if "*" in allowed or _contains_id(allowed, enterprise_id):
         return True
     if not is_cios_owner(headers):

@@ -77,7 +77,7 @@ class DryRunPlanningService:
         candidates = self.staging.list_candidates(import_run_id)
         if not candidates: raise BlueprintReviewError("No staged candidates for import run")
         package = self.registry.get(str(candidates[0]["source_package_ref"]))
-        if not package or not can_review_blueprint_candidate(headers, package.identity.enterprise_id):
+        if not package or not can_review_blueprint_candidate(headers, package.identity.enterprise_id, package.workspace_id):
             raise BlueprintReviewError("Actor is not authorised to run Blueprint dry-run planning")
         decisions = self.reviews.latest_by_candidate(import_run_id)
         mappings = {m["candidate_id"]: m for m in self.mappings.list(import_run_id)}

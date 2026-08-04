@@ -24,10 +24,10 @@ class BlueprintReviewError(PermissionError):
     """Raised when a review decision cannot be recorded."""
 
 
-def can_review_blueprint_candidate(headers: Any, enterprise_id: str) -> bool:
+def can_review_blueprint_candidate(headers: Any, enterprise_id: str, workspace_id: str = "") -> bool:
     if not authenticated_flora_user(headers):
         return False
-    if not can_access_enterprise(headers, enterprise_id):
+    if not can_access_enterprise(headers, enterprise_id, workspace_id):
         return False
     return bool(flora_roles(headers) & {"package.review", "blueprint_import_admin"})
 
@@ -89,7 +89,7 @@ class CandidateReviewService:
     def record_decision(self, candidate_id: str, decision: ReviewDecisionValue, reviewer: str, rationale: str, headers: Any, mapped_canonical_target_id: str = "", unresolved_issues: tuple[str, ...] = ()) -> CandidateReviewDecision:
         candidate = self._candidate(candidate_id)
         package = self.registry.get(str(candidate["source_package_ref"]))
-        if not package or not can_review_blueprint_candidate(headers, package.identity.enterprise_id):
+        if not package or not can_review_blueprint_candidate(headers, package.identity.enterprise_id, package.workspace_id):
             raise BlueprintReviewError("Actor is not authorised to record Blueprint review decisions")
         if decision not in {"approve", "reject", "defer", "quarantine", "unsupported"}:
             raise BlueprintReviewError("Unsupported review decision")
