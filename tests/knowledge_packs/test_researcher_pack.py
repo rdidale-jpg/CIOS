@@ -3,10 +3,11 @@ import hashlib
 import re
 import subprocess
 import zipfile
+import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / 'knowledge-packs/researcher/manifest.yaml'
-VERSION = '2.8.0'
+VERSION = (ROOT / 'knowledge-packs/researcher/VERSION').read_text().strip()
 BASENAME = f'CIOS-Researcher-Knowledge-Pack-v{VERSION}'
 
 
@@ -20,8 +21,8 @@ def docs():
     return out
 
 
-def build(version=VERSION):
-    cmd=['python3','tools/knowledge-packs/build_researcher_pack.py','--version',version,'--output-dir','dist']
+def build():
+    cmd=['python3','tools/knowledge-packs/build_researcher_pack.py','--output-dir','dist']
     return subprocess.run(cmd,cwd=ROOT,text=True,capture_output=True)
 
 
@@ -51,7 +52,7 @@ def test_required_content_and_instruction_ownership():
         assert phrase in rg
 
 
-def test_builder_accepts_valid_semantic_version_and_is_deterministic():
+def test_builder_derives_canonical_semantic_version_and_is_deterministic():
     first = build()
     assert first.returncode == 0, first.stderr
     zip_path=ROOT/f'dist/{BASENAME}.zip'
@@ -63,10 +64,16 @@ def test_builder_accepts_valid_semantic_version_and_is_deterministic():
 
 
 def test_builder_rejects_malformed_versions():
-    for version in ['2.3', 'v2.3.0', '2.3.0-beta']:
-        result = build(version)
-        assert result.returncode != 0
-        assert 'Invalid Researcher Knowledge Pack version' in result.stderr
+    source = ROOT / 'knowledge-packs/researcher/VERSION'
+    original = source.read_text()
+    try:
+        for version in ['2.3', 'v2.3.0', '2.3.0-beta']:
+            source.write_text(version + '\n')
+            result = build()
+            assert result.returncode != 0
+            assert 'Invalid Researcher Knowledge Pack version' in result.stderr
+    finally:
+        source.write_text(original)
 
 
 def test_generated_filenames_metadata_report_and_root_use_requested_version():
@@ -93,10 +100,15 @@ def test_generated_filenames_metadata_report_and_root_use_requested_version():
 
 
 def test_source_version_mismatch_fails_with_clear_message():
-    result = build('9.9.9')
-    assert result.returncode != 0
-    assert 'Version mismatch: requested version 9.9.9; conflicting version 2.8.0' in result.stderr
-    assert 'source file: knowledge-packs/researcher/VERSION; field: VERSION' in result.stderr
+    manifest = MANIFEST.read_text()
+    try:
+        MANIFEST.write_text(manifest.replace(f'  version: {VERSION}', '  version: 9.9.9'))
+        result = build()
+        assert result.returncode != 0
+        assert f'Version mismatch: requested version {VERSION}; conflicting version 9.9.9' in result.stderr
+        assert 'source file: knowledge-packs/researcher/manifest.yaml; field: pack.version' in result.stderr
+    finally:
+        MANIFEST.write_text(manifest)
 
 
 def test_no_generated_operational_output_contains_previous_hard_coded_release():
@@ -122,6 +134,31 @@ def test_checksum_validation_succeeds_from_dist_directory():
     checksum_path.write_text(f'{hashlib.sha256(zip_path.read_bytes()).hexdigest()}  {zip_path.name}\n')
     check = subprocess.run(['sha256sum', '--check', checksum_path.name], cwd=ROOT/'dist', text=True, capture_output=True)
     assert check.returncode == 0, check.stderr
+
+
+def test_schema_export_does_not_import_flora_application_runtime():
+    script = """
+import importlib.util, sys
+spec = importlib.util.spec_from_file_location('builder', 'tools/knowledge-packs/build_researcher_pack.py')
+module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+module.export_blueprint_contract()
+assert 'cios.applications.flora' not in sys.modules
+assert 'cios.applications.flora.pipeline' not in sys.modules
+"""
+    result = subprocess.run([sys.executable, '-c', script], cwd=ROOT, text=True, capture_output=True)
+    assert result.returncode == 0, result.stderr
+
+
+def test_blueprint_contract_drift_fails_build_clearly():
+    schema = ROOT / 'knowledge-packs/researcher/package-contracts/flora-blueprint-import/blueprint_manifest.schema.json'
+    original = schema.read_text()
+    try:
+        schema.write_text('{}\n')
+        result = build()
+        assert result.returncode != 0
+        assert 'Flora Blueprint schema drift' in result.stderr
+    finally:
+        schema.write_text(original)
 
 
 def test_workflow_tag_version_validation_patterns():

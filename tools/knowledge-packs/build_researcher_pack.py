@@ -22,11 +22,15 @@ CONTRACT_DIR = PACK / 'package-contracts/flora-blueprint-import'
 
 
 def export_blueprint_contract():
-    """Publish the producer contract from Flora's one canonical model owner."""
-    from cios.applications.flora.blueprint_import.contract import BlueprintManifest
-    CONTRACT_DIR.mkdir(parents=True, exist_ok=True)
+    """Verify the governed export against Flora's canonical model owner."""
+    from cios.contracts.flora_blueprint import BlueprintManifest
     path = CONTRACT_DIR / 'blueprint_manifest.schema.json'
-    path.write_text(json.dumps(BlueprintManifest.model_json_schema(), indent=2, sort_keys=True) + '\n')
+    expected = json.dumps(BlueprintManifest.model_json_schema(), indent=2, sort_keys=True) + '\n'
+    if not path.exists() or path.read_text() != expected:
+        fail(
+            'Flora Blueprint schema drift: governed schema differs from the canonical '
+            'cios.contracts.flora_blueprint.BlueprintManifest export'
+        )
     return path
 
 
@@ -173,10 +177,9 @@ def build_report(version, zip_path, zsha, docs, results):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description='Build the CIOS Researcher Knowledge Pack release artefacts.')
-    parser.add_argument('--version', required=True, help='Bare semantic version, for example 2.2.0')
     parser.add_argument('--output-dir', default=str(DIST), help='Directory for release artefacts')
     args = parser.parse_args(argv)
-    version = args.version.strip()
+    version = (PACK / 'VERSION').read_text().strip()
     if not SEMVER_RE.fullmatch(version):
         fail(f'Invalid Researcher Knowledge Pack version: {version}. Expected MAJOR.MINOR.PATCH.')
     dist = Path(args.output_dir)
@@ -213,6 +216,8 @@ def main(argv=None):
     zsha=sha(zip_path)
     results=getattr(validate,'participant_results',{'hard_failures':[],'unresolved_source_warnings':[],'optional_document_notices':[]})
     report_path.write_text(build_report(version, zip_path, zsha, docs, results))
+    checksum_path = dist / f'{basename}.sha256'
+    checksum_path.write_text(f'{zsha}  {zip_path.name}\n')
     print(f'Built {zip_path} sha256={zsha}')
 
 if __name__=='__main__': main()

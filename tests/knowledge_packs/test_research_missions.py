@@ -67,5 +67,5 @@ def test_input_change_changes_output_and_cli_detects_stale_commission(tmp_path):
     assert result.returncode and 'stale generated commission' in result.stderr
 
 def test_pack_builder_includes_and_validates_active_mission_assets():
-    result=subprocess.run(['python3','tools/knowledge-packs/build_researcher_pack.py','--version','2.8.0','--output-dir','dist'],cwd=ROOT,text=True,capture_output=True)
+    result=subprocess.run(['python3','tools/knowledge-packs/build_researcher_pack.py','--output-dir','dist'],cwd=ROOT,text=True,capture_output=True)
     assert result.returncode==0,result.stderr
