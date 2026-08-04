@@ -174,8 +174,89 @@ def test_exact_tel001_pilot_import_reaches_candidate_governance_review(monkeypat
     # Final staging quarantine is seven explicit records, not the 1,060 items
     # provisionally withheld from promotion while identity remains unresolved.
     assert "<tr><th>Quarantined (final staging disposition)</th><td>7</td></tr>" in review
-    assert "Quarantined by staging validation</td><td>7</td>" in review
-    assert "<tr><th>Accepted canonical candidates</th><td>640</td></tr>" in review
+    assert "<tr><th>Accepted canonical candidates</th><td>641</td></tr>" in review
     assert "Promotion permission required" in review
     assert not can_approve_blueprint_promotion({}, "TEL-001")
+    assert not (tmp_path / "memory").exists()
+
+
+def test_duplicate_tel001_upload_restages_persisted_candidates_for_deployed_ui(monkeypatch, tmp_path):
+    """A checksum-deduplicated upload must not reuse a pre-semantic staging run."""
+    from cios.applications.flora.blueprint_import.candidates import CandidateImportRecord, CandidateStagingRepository
+    from cios.applications.flora.blueprint_import.ledger import utc_now
+    from cios.applications.flora.blueprint_import.views import upload_and_validate_blueprint
+    from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page
+    from cios.applications.flora.storage import atomic_write_json
+
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_ENVIRONMENT", "pilot")
+    package = BlueprintPackageRegistry().receive(EVIDENCE.read_bytes(), EVIDENCE.name, "regression-auditor")
+    staging = CandidateStagingRepository()
+    # Reproduce the representation left by the deployed pre-fix import.  The
+    # registry deliberately returns this same run for an identical checksum.
+    for index in range(1060):
+        staging.save_candidate(CandidateImportRecord(
+            "1.0", f"legacy-{index:04d}", package.package_ref, package.package_sha256,
+            "record_sets/legacy.ndjson", "", {"line": index + 1}, f"legacy-{index}",
+            "unclassified", "unknown", {"id": f"legacy-{index}"}, "accepted", (),
+            f"legacy-fingerprint-{index}", utc_now(), package.import_run_id,
+        ))
+    atomic_write_json(staging.root_for(package.import_run_id) / "summary.json", {
+        "mapping_version": "mod-cdt-twin-spine-mapping-v1.3.3",
+        "candidate_records_staged": 1060,
+        "execution_trace": [{"status": "Passed"}],
+    })
+
+    _, status, target = upload_and_validate_blueprint(
+        {"blueprint_zip": EVIDENCE.read_bytes()},
+        {"blueprint_zip.filename": EVIDENCE.name, "blueprint_zip.content_type": "application/zip",
+         "expected_type": "mixed"}, {},
+    )
+    assert status == 200
+    assert target == f"/blueprint-import/{package.import_run_id}"
+
+    persisted = staging.list_candidates(package.import_run_id)
+    assert len(persisted) == 1060
+    assert not any(candidate["candidate_record_id"].startswith("legacy-") for candidate in persisted)
+    assert Counter(candidate["candidate_object_class"] for candidate in persisted) >= Counter({
+        "industry_twin": 1, "enterprise_twin": 6, "market_participant_twin": 17,
+        "transformation_programme": 13, "opportunity_hypothesis": 17,
+        "evidence": 92, "unknown": 30, "contradiction": 11,
+    })
+    assert all("candidate_object_class" in candidate for candidate in persisted)
+    assert all("record_class" not in candidate.get("payload", {}) for candidate in persisted
+               if candidate["candidate_object_class"] in {"industry_twin", "enterprise_twin", "evidence"})
+
+    collection_counts = {
+        "industry-overview": 1, "enterprises": 6, "market-participants": 17,
+        "transformation-programmes": 13, "opportunities": 17,
+        "evidence-sources": 92, "unknowns": 30, "contradictions": 11,
+    }
+    for key, count in collection_counts.items():
+        page, page_status = executive_workspace_page(package.import_run_id, {}, view="explore", collection=key)
+        assert page_status == 200
+        assert f"{count} total" in page
+    other, other_status = executive_workspace_page(package.import_run_id, {}, view="explore", collection="other")
+    assert other_status == 200
+    assert "Other Twin content — 514 total" in other
+    assert "Residual reason:" in other
+    assert "no canonical semantic role" in other
+    gaps, gaps_status = executive_workspace_page(package.import_run_id, {}, view="health")
+    assert gaps_status == 200
+    assert "92 Evidence · 30 Unknowns · 11 Contradictions" in gaps
+
+    # 641 projected + 7 quarantined + 412 lineage-only = all 1,060; only the
+    # accepted projection is visible, and validation never promotes it.
+    summary = BlueprintPackageValidator().staging_summary(package.import_run_id)
+    assert Counter(c["validation_status"] for c in summary["candidates"]) == {
+        "accepted": 641, "ignored": 412, "quarantined": 7,
+    }
+    accepted_twin = assemble_semantic_twin([c for c in summary["candidates"] if c["validation_status"] == "accepted"])
+    accepted_collections = business_collections(accepted_twin)
+    assert sum(len(collection.objects) for collection in accepted_collections) == 641
+    assert sum(collection.key == "other" and len(collection.objects) or 0
+               for collection in accepted_collections) == 95
+    runtime_twin = assemble_semantic_twin(summary["candidates"])
+    assert sum(len(collection.objects) for collection in business_collections(runtime_twin)) == 1060
+    assert summary["canonical_mutations"] == 0
     assert not (tmp_path / "memory").exists()

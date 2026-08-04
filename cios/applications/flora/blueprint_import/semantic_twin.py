@@ -27,6 +27,8 @@ class SemanticObject:
     domains: tuple[str, ...] = ()
     affected_organisations: tuple[str, ...] = ()
     attributes: Mapping[str, Any] | None = None
+    validation_status: str = "accepted"
+    residual_reason: str = ""
 
 
 @dataclass(frozen=True)
@@ -239,4 +241,8 @@ def _object(candidate: dict[str, Any]) -> SemanticObject:
         "governed" if candidate.get("governance_status") in {"governed", "accepted"} else "candidate",
         str(candidate.get("source_file") or "Imported package"), str(candidate.get("source_location") or "not supplied"),
         eligible, reason, original_id, tuple(dict.fromkeys(refs)), sufficiency, permitted,
-        consequence, tuple(dict.fromkeys(domains)), tuple(map(str, affected)), dict(p))
+        consequence, tuple(dict.fromkeys(domains)), tuple(map(str, affected)), dict(p),
+        str(candidate.get("validation_status") or "accepted"),
+        "; ".join(str(finding.get("message") or finding.get("code") or "")
+                  for finding in candidate.get("validation_findings") or () if isinstance(finding, dict)),
+    )
