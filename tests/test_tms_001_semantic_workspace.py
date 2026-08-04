@@ -26,3 +26,10 @@ def test_tms_canonical_semantics_relationships_and_executive_intelligence(monkey
     advanced, status = executive_workspace_page(run_id, HEADERS, view="diagnostics")
     assert status == 200 and "Canonical priority enterprises: 14" in advanced
     assert "Deterministic package validation" in advanced and "Researcher Feedback Report" in advanced
+    assert "Observation Pipeline Diagnostics" in advanced
+    for label in ("Source object", "Candidate object", "Semantic object", "Observation generation",
+                  "Owner assessment", "Executive projection", "Rendered page", "Exact rejection reason"):
+        assert label in advanced
+    for object_type in ("Industry", "Enterprise", "Programme", "Opportunity", "Market Participant"):
+        assert f"data-object-family='{object_type}'" in advanced
+    assert "Diagnostic banner" in advanced
