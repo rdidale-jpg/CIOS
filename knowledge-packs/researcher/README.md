@@ -20,7 +20,7 @@ Version 2.8.0 composes ten reusable mission templates, twenty single-owner resea
 
 ## Build
 
-Run `python3 tools/knowledge-packs/build_researcher_pack.py --version 2.8.0 --output-dir dist` with the selected semantic version. Generated ZIP files belong in `dist/` and are release artefacts, not authoritative sources.
+Run `python3 tools/knowledge-packs/build_researcher_pack.py`. The builder derives the release version from the pack's canonical `VERSION` file. Generated ZIP files belong in `dist/` and are release artefacts, not authoritative sources.
 
 ## Authority
 

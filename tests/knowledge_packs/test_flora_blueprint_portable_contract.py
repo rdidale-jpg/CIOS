@@ -32,7 +32,7 @@ def test_published_schema_is_exact_canonical_export_and_example_validates():
 
 def test_knowledge_pack_build_regenerates_contract(tmp_path):
     before = SCHEMA.read_text()
-    subprocess.run([sys.executable, "tools/knowledge-packs/build_researcher_pack.py", "--version", "2.8.0", "--output-dir", str(tmp_path)], cwd=ROOT, check=True)
+    subprocess.run([sys.executable, "tools/knowledge-packs/build_researcher_pack.py", "--output-dir", str(tmp_path)], cwd=ROOT, check=True)
     assert SCHEMA.read_text() == before
     with zipfile.ZipFile(tmp_path / "CIOS-Researcher-Knowledge-Pack-v2.8.0.zip") as archive:
         names = archive.namelist()
