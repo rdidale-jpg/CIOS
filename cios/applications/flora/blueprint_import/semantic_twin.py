@@ -302,6 +302,17 @@ def _object(candidate: dict[str, Any]) -> SemanticObject:
     subject = p.get("subject") or p.get("enterprise_name") or p.get("organisation_name")
     if not subject and declared_kind in {"opportunity", "opportunity_hypothesis", "ranked_opportunity", "opportunity_twin"}:
         subject = p.get("title") or p.get("opportunity_name") or p.get("opportunity_title")
+    if not subject and declared_kind in {"industry", "industry_twin", "industry_overview"}:
+        subject = p.get("industry_name") or p.get("name") or p.get("title") or p.get("id")
+    if not subject and declared_kind in {"market_participant", "market_participant_twin"}:
+        subject = p.get("participant_name") or p.get("organisation_name") or p.get("name") or p.get("title") or p.get("id")
+    if not subject and declared_kind == "ai_reinvention_assessment":
+        subject = p.get("enterprise_name") or p.get("organisation_name") or p.get("target") or p.get("id")
+    if not subject and declared_kind == "transformation_programme":
+        affected_for_subject = p.get("affected_enterprises") or p.get("affected_organisations") or ()
+        if isinstance(affected_for_subject, str):
+            affected_for_subject = (affected_for_subject,)
+        subject = p.get("owner") or (affected_for_subject[0] if affected_for_subject else None) or p.get("business_unit") or p.get("title") or p.get("id")
     return SemanticObject(
         str(candidate.get("candidate_record_id") or candidate.get("original_source_id") or "candidate"),
         str(candidate.get("candidate_object_class") or "unclassified"), statement,

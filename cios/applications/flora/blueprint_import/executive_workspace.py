@@ -29,6 +29,7 @@ from .pilot_diagnostics import (
     runtime_comparison as _pilot_runtime_comparison,
 )
 from .research_requirements import research_requirements
+from .observation_runtime import build_candidate_observation, OBSERVATION_BUILDER_NAME, OBSERVATION_PROFILE_VERSION, observation_family
 from .semantic_twin import (SemanticEnterprise, SemanticObject, SemanticTwin, assemble_semantic_twin,
                             business_collections, executive_insight_eligible,
                             executive_record_view_model)
@@ -1254,20 +1255,25 @@ def _observation_pipeline_object_trace(family: str, obj: SemanticObject, run_id:
     view = executive_record_view_model(obj)
     rendered_fields = "; ".join(f"{label}: {_diagnostic_preview(value)}" for label, value in view.fields)
     rendered = rendered_fields or view.title or obj.statement
-    exact_reason = _observation_pipeline_reason(obj, bool(view.fields or obj.statement))
+    generated, exact_reason, detail = build_candidate_observation(obj)
     source_identifier = obj.original_id or obj.source_location or obj.record_id
     evidence = ", ".join(obj.evidence_refs) or "No linked evidence"
+    generation = (f"generated observation <code>{escape(generated.observation_id)}</code> · builder <code>{escape(generated.builder)}</code> · "
+                  f"source fields {escape(', '.join(generated.originating_fields))} · generated statement {escape(_diagnostic_preview(generated.statement))} · "
+                  f"evidence count {len(generated.evidence_refs)} · persistence {escape(generated.persistence_state)}") if generated else (
+                  f"skipped · runtime component <code>{escape(OBSERVATION_BUILDER_NAME)}</code> · missing prerequisite {escape(detail)}")
     return (f"<details class='pipeline-trace' id='pipeline-{escape(obj.record_id)}' data-object-family='{escape(family)}'>"
             f"<summary>{escape(family)} — {escape(source_identifier)} — <code>{escape(exact_reason)}</code></summary>"
             "<table><tbody>"
             f"<tr><th>Source object</th><td>{escape(obj.source_file or 'unknown source file')} · {escape(obj.source_location or 'unknown source location')} · source id <code>{escape(obj.original_id or 'not supplied')}</code></td></tr>"
             f"<tr><th>Candidate object</th><td>candidate id <code>{escape(obj.record_id)}</code> · class <code>{escape(obj.kind)}</code> · validation <code>{escape(obj.validation_status or 'candidate')}</code></td></tr>"
-            f"<tr><th>Semantic object</th><td>subject {escape(obj.subject or 'not supplied')} · domains {escape(', '.join(obj.domains) or 'not supplied')} · confidence {escape(obj.confidence or 'not supplied')} · freshness {escape(obj.freshness or 'unknown')}</td></tr>"
-            f"<tr><th>Observation generation</th><td>{escape('generated from inspectable candidate statement' if obj.statement else 'skipped because no statement is available')} · evidence {escape(evidence)}</td></tr>"
-            f"<tr><th>Owner assessment</th><td>candidate remains read-only; owner assessment displayed as {escape(_assessment_state_label(obj.sufficiency or 'pending'))}.</td></tr>"
-            f"<tr><th>Executive projection</th><td>view model <code>executive_record_view_model</code> · fields projected {len(view.fields)} · title {escape(view.title)}</td></tr>"
+            f"<tr><th>Semantic object</th><td>family {escape(observation_family(obj.kind))} · subject {escape(obj.subject or 'not supplied')} · domains {escape(', '.join(obj.domains) or 'not supplied')} · confidence {escape(obj.confidence or 'not supplied')} · freshness {escape(obj.freshness or 'unknown')}</td></tr>"
+            f"<tr><th>Observation generation</th><td>profile <code>{escape(OBSERVATION_PROFILE_VERSION)}</code> · {generation} · evidence {escape(evidence)}</td></tr>"
+            f"<tr><th>Observation persistence</th><td>{escape(generated.persistence_state if generated else 'not persisted')}</td></tr>"
+            f"<tr><th>Owner assessment</th><td>candidate remains read-only; owner assessment state {escape(generated.owner_assessment_state if generated else 'not_invoked')} · display assessment {escape(_assessment_state_label(obj.sufficiency or 'pending'))}.</td></tr>"
+            f"<tr><th>Executive projection</th><td>view model <code>executive_record_view_model</code> · fields projected {len(view.fields)} · title {escape(view.title)} · projection result {escape('projected' if view.fields or obj.statement else 'omitted')}</td></tr>"
             f"<tr><th>Rendered page</th><td>{escape(_diagnostic_preview(rendered) or 'No rendered page field')}</td></tr>"
-            f"<tr><th>Exact rejection reason</th><td><code>{escape(exact_reason)}</code>{(' · ' + escape(obj.exclusion_reason or obj.residual_reason)) if obj.exclusion_reason or obj.residual_reason else ''}</td></tr>"
+            f"<tr><th>Exact rejection reason</th><td><code>{escape(exact_reason)}</code> · runtime component <code>{escape(OBSERVATION_BUILDER_NAME)}</code> · missing prerequisite {escape('none' if generated else detail)}</td></tr>"
             "</tbody></table></details>")
 
 

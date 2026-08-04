@@ -418,3 +418,40 @@ def test_tel001_deployed_aspect_and_dossier_routes_render_pending_candidate_fiel
     assert gaps_status == 200
     assert "source_field_present_unassessed" in gaps
     assert "Find organisation description" not in gaps
+
+
+def test_tel001_imported_twin_observation_builder_generalises_supported_families(monkeypatch, tmp_path):
+    """Industry, enterprise and programme records use the same candidate Observation runtime."""
+    from cios.applications.flora.blueprint_import.observation_runtime import build_candidate_observation, OBSERVATION_BUILDER_NAME
+    from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page
+
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_ENVIRONMENT", "pilot")
+    monkeypatch.setenv("FLORA_PILOT_IMPORT_BYPASS", "1")
+    package = BlueprintPackageRegistry().receive(EVIDENCE.read_bytes(), EVIDENCE.name, "regression-auditor")
+    BlueprintPackageValidator().validate_and_stage(package.package_ref, "regression-auditor")
+    summary = BlueprintPackageValidator().staging_summary(package.import_run_id)
+    twin = assemble_semantic_twin([candidate for candidate in summary["candidates"] if candidate["validation_status"] == "accepted"])
+
+    industry = next(obj for obj in twin.objects if obj.original_id == "IND-UK-TELECOMS")
+    bt = next(obj for obj in twin.objects if obj.original_id == "ENT-BT")
+    programme = next(obj for obj in twin.objects if obj.kind == "transformation_programme" and obj.evidence_refs)
+
+    built = [build_candidate_observation(obj) for obj in (industry, bt, programme)]
+    assert [reason for _observation, reason, _detail in built] == ["observation_generated"] * 3
+    observations = [observation for observation, _reason, _detail in built]
+    assert all(observation and observation.builder == OBSERVATION_BUILDER_NAME for observation in observations)
+    assert observations[0].originating_object == "IND-UK-TELECOMS"
+    assert observations[0].originating_fields == ("Industry profile",)
+    assert "£34.7bn" in observations[0].statement
+    assert observations[1].originating_object == "ENT-BT"
+    assert observations[1].originating_fields == ("statement",)
+    assert "BT Group is a UK-headquartered telecommunications group" in observations[1].statement
+    assert observations[2].originating_fields == ("statement",)
+    assert observations[2].evidence_refs
+
+    advanced, status = executive_workspace_page(package.import_run_id, {"X-Flora-User": "regression-auditor", "X-Flora-Enterprises": "TEL-001", "X-Flora-Active-Workspace": "TEL-001", "X-Flora-Roles": "blueprint_import_admin,package.review"}, view="diagnostics")
+    assert status == 200
+    for expected in ("ImportedTwinSemanticObservationBuilder", "generated statement", "evidence count", "Observation persistence"):
+        assert expected in advanced
+    assert "IND-UK-TELECOMS" in advanced and "ENT-BT" in advanced and "observation_generated" in advanced
