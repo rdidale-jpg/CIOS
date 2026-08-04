@@ -12,11 +12,22 @@ import zipfile
 import json
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
 PACK = ROOT / 'knowledge-packs/researcher'
 DIST = ROOT / 'dist'
 STAGE = ROOT / '.tmp/researcher-pack-stage'
 SEMVER_RE = re.compile(r'^[0-9]+\.[0-9]+\.[0-9]+$')
 PACK_ID = 'CIOS-Researcher-Knowledge-Pack'
+CONTRACT_DIR = PACK / 'package-contracts/flora-blueprint-import'
+
+
+def export_blueprint_contract():
+    """Publish the producer contract from Flora's one canonical model owner."""
+    from cios.applications.flora.blueprint_import.contract import BlueprintManifest
+    CONTRACT_DIR.mkdir(parents=True, exist_ok=True)
+    path = CONTRACT_DIR / 'blueprint_manifest.schema.json'
+    path.write_text(json.dumps(BlueprintManifest.model_json_schema(), indent=2, sort_keys=True) + '\n')
+    return path
 
 
 def fail(message):
@@ -155,7 +166,9 @@ def index(docs):
 
 def build_report(version, zip_path, zsha, docs, results):
     timestamp = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace('+00:00', 'Z')
-    return f'''# Researcher Knowledge Pack Build Report\n\nRequested pack version: {version}\n\nVersion: {version}\n\nZIP: `{zip_path.relative_to(ROOT)}`\n\nZIP checksum: `{zsha}`\n\nDocuments packaged: {len(docs)}\n\nValidation: passed\n\n## Build provenance\n\n- Git commit SHA: {os.environ.get('GITHUB_SHA', 'local-unset')}\n- Git ref: {os.environ.get('GITHUB_REF', os.environ.get('GITHUB_REF_NAME', 'local-unset'))}\n- Workflow run ID: {os.environ.get('GITHUB_RUN_ID', 'local-unset')}\n- Build timestamp UTC: {timestamp}\n- Python version: {platform.python_version()}\n- Builder script path: {Path(__file__).relative_to(ROOT)}\n- Requested pack version: {version}\n\n## Participant-aware intelligence validation results\n\nHard validation failures: {len(results["hard_failures"])}\n\nUnresolved-source warnings: {len(results["unresolved_source_warnings"])}\n\nOptional-document notices: {len(results["optional_document_notices"])}\n\n''' + ''.join(f'- Notice: {n}\n' for n in results['optional_document_notices'])
+    try: displayed_zip = zip_path.relative_to(ROOT)
+    except ValueError: displayed_zip = zip_path
+    return f'''# Researcher Knowledge Pack Build Report\n\nRequested pack version: {version}\n\nVersion: {version}\n\nZIP: `{displayed_zip}`\n\nZIP checksum: `{zsha}`\n\nDocuments packaged: {len(docs)}\n\nValidation: passed\n\n## Build provenance\n\n- Git commit SHA: {os.environ.get('GITHUB_SHA', 'local-unset')}\n- Git ref: {os.environ.get('GITHUB_REF', os.environ.get('GITHUB_REF_NAME', 'local-unset'))}\n- Workflow run ID: {os.environ.get('GITHUB_RUN_ID', 'local-unset')}\n- Build timestamp UTC: {timestamp}\n- Python version: {platform.python_version()}\n- Builder script path: {Path(__file__).relative_to(ROOT)}\n- Requested pack version: {version}\n\n## Participant-aware intelligence validation results\n\nHard validation failures: {len(results["hard_failures"])}\n\nUnresolved-source warnings: {len(results["unresolved_source_warnings"])}\n\nOptional-document notices: {len(results["optional_document_notices"])}\n\n''' + ''.join(f'- Notice: {n}\n' for n in results['optional_document_notices'])
 
 
 def main(argv=None):
@@ -173,6 +186,7 @@ def main(argv=None):
     zip_path = dist / f'{basename}.zip'
     report_path = dist / f'{basename}-build-report.md'
     validate_source_versions(version, basename, zip_path, report_path)
+    export_blueprint_contract()
     docs=parse_manifest(PACK/'manifest.yaml'); validate(docs); validate_research_missions()
     if STAGE.exists(): shutil.rmtree(STAGE)
     root_stage = STAGE / basename
@@ -181,6 +195,7 @@ def main(argv=None):
         shutil.copy2(PACK/extra, root_stage/extra)
     shutil.copy2(PACK/'profile-versions.json', root_stage/'profile-versions.json')
     shutil.copytree(PACK/'research-missions', root_stage/'research-missions')
+    shutil.copytree(CONTRACT_DIR, root_stage/'package-contracts/flora-blueprint-import')
     (root_stage/'pack-state.yaml').write_text(f'pack_id: {PACK_ID}\nversion: {version}\nroot_directory: {basename}\nrelease_zip: {zip_path.name}\nbuild_report: {report_path.name}\n')
     for d in docs:
         dest=root_stage/d['pack_path']; dest.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(ROOT/d['source_path'],dest)

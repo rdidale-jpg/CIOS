@@ -12,6 +12,7 @@ This repository-managed pack configures a Researcher to execute participant-awar
 2. `missions/UK-Central-Government-Industry-Twin-Mission.md`
 3. `operating-guidance/RG-001-Commercial-Digital-Twin-Research-Agent-Guide.md`
 4. `DOCUMENT-INDEX.md`
+5. `package-contracts/flora-blueprint-import/README.md` when producing a separate manual Import Twin ZIP
 
 ## Participant-aware intelligence
 

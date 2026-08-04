@@ -13,7 +13,7 @@ The Researcher Knowledge Pack owns the reusable method; IT-001 and its profiles 
 7. Generate the commission and retain its version and generation receipts.
 8. Build and validate the Researcher Knowledge Pack.
 9. Issue the generated work order and pack; do not edit the commission manually.
-10. Validate returned governed records, registers, checksums and release manifest.
+10. Validate returned governed records, registers, checksums and Twin release manifest. For an Import-ready mission, retain the governed research/checkpoint package where required and separately build the Flora Import ZIP using `package-contracts/flora-blueprint-import/`; never treat its `blueprint_manifest.json` as the Twin release manifest.
 11. Record CONTINUE, EVIDENCE_EXHAUSTED or COMPLETE without implying governance acceptance.
 12. Create a continuation or monitoring mission from the new governed checkpoint.
 

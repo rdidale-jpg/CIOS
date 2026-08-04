@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "package_id": "example-twin",
+  "package_version": "1.0.0",
+  "enterprise_id": "example-enterprise",
+  "profile_version": "1.0",
+  "files": [],
+  "record_sets": []
+}
