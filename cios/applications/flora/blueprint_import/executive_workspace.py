@@ -1205,7 +1205,88 @@ def export_research_gap_brief(import_run_id: str, headers: Any, domain: str = "a
     return research_gap_brief(twin, title, context.commercial_mission, domain, context.employer_context), f"{safe}-Research-Gap-and-Enrichment-Brief.md", 200
 
 def _advanced_diagnostics(twin,run_id,summary,mission):
-    return _primary_nav(run_id,"inspection")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+_pilot_runtime_comparison(twin)+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
+    return _primary_nav(run_id,"inspection")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+_observation_pipeline_diagnostics(twin,run_id)+_pilot_runtime_comparison(twin)+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
+
+
+def _observation_pipeline_diagnostics(twin: SemanticTwin, run_id: str) -> str:
+    """Render a UI-only diagnostic trace for the deployed Advanced Diagnostics page."""
+    families = (
+        ("Industry", {"industry", "industry_twin", "industry_overview", "subsector", "value_chain", "economic_pool"}),
+        ("Enterprise", {"enterprise", "enterprise_twin", "enterprise_dossier", "entity"}),
+        ("Programme", {"transformation_programme"}),
+        ("Opportunity", {"opportunity", "opportunity_hypothesis", "ranked_opportunity", "opportunity_twin"}),
+        ("Market Participant", {"market_participant", "market_participant_twin"}),
+    )
+    articles = []
+    for family, kinds in families:
+        objects = [o for o in twin.objects if o.kind in kinds]
+        if family == "Enterprise":
+            objects = [next((o for o in e.records if o.kind in kinds), e.records[0]) for e in twin.enterprises if e.records]
+        if not objects:
+            articles.append(_observation_pipeline_empty_family(family))
+            continue
+        for obj in objects[:30]:
+            articles.append(_observation_pipeline_object_trace(family, obj, run_id))
+    return ("<section class='card' id='observation-pipeline-diagnostics'>"
+            "<h2>Observation Pipeline Diagnostics</h2>"
+            "<p class='warning'><strong>Diagnostic banner:</strong> UI-only trace for candidate visibility. "
+            "This section does not modify import, mappings, promotion, canonical semantics or runtime decisions.</p>"
+            "<p>Select any object below to inspect the field and runtime pipeline trace from source object to rendered page.</p>"
+            + "".join(articles) + "</section>")
+
+
+def _observation_pipeline_empty_family(family: str) -> str:
+    return (f"<details class='pipeline-trace' data-object-family='{escape(family)}'>"
+            f"<summary>{escape(family)} — no candidate object available</summary>"
+            "<table><tbody>"
+            f"<tr><th>Source object</th><td>{escape(family)} source record absent from this staged candidate set.</td></tr>"
+            f"<tr><th>Candidate object</th><td>No persisted candidate object for {escape(family)}.</td></tr>"
+            "<tr><th>Semantic object</th><td>No semantic object assembled.</td></tr>"
+            "<tr><th>Observation generation</th><td>Skipped.</td></tr>"
+            "<tr><th>Owner assessment</th><td>Not invoked; no object exists for assessment.</td></tr>"
+            "<tr><th>Executive projection</th><td>Not projected.</td></tr>"
+            "<tr><th>Rendered page</th><td>No rendered object card.</td></tr>"
+            "<tr><th>Exact rejection reason</th><td><code>source_field_absent</code></td></tr>"
+            "</tbody></table></details>")
+
+
+def _observation_pipeline_object_trace(family: str, obj: SemanticObject, run_id: str) -> str:
+    view = executive_record_view_model(obj)
+    rendered_fields = "; ".join(f"{label}: {_diagnostic_preview(value)}" for label, value in view.fields)
+    rendered = rendered_fields or view.title or obj.statement
+    exact_reason = _observation_pipeline_reason(obj, bool(view.fields or obj.statement))
+    source_identifier = obj.original_id or obj.source_location or obj.record_id
+    evidence = ", ".join(obj.evidence_refs) or "No linked evidence"
+    return (f"<details class='pipeline-trace' id='pipeline-{escape(obj.record_id)}' data-object-family='{escape(family)}'>"
+            f"<summary>{escape(family)} — {escape(source_identifier)} — <code>{escape(exact_reason)}</code></summary>"
+            "<table><tbody>"
+            f"<tr><th>Source object</th><td>{escape(obj.source_file or 'unknown source file')} · {escape(obj.source_location or 'unknown source location')} · source id <code>{escape(obj.original_id or 'not supplied')}</code></td></tr>"
+            f"<tr><th>Candidate object</th><td>candidate id <code>{escape(obj.record_id)}</code> · class <code>{escape(obj.kind)}</code> · validation <code>{escape(obj.validation_status or 'candidate')}</code></td></tr>"
+            f"<tr><th>Semantic object</th><td>subject {escape(obj.subject or 'not supplied')} · domains {escape(', '.join(obj.domains) or 'not supplied')} · confidence {escape(obj.confidence or 'not supplied')} · freshness {escape(obj.freshness or 'unknown')}</td></tr>"
+            f"<tr><th>Observation generation</th><td>{escape('generated from inspectable candidate statement' if obj.statement else 'skipped because no statement is available')} · evidence {escape(evidence)}</td></tr>"
+            f"<tr><th>Owner assessment</th><td>candidate remains read-only; owner assessment displayed as {escape(_assessment_state_label(obj.sufficiency or 'pending'))}.</td></tr>"
+            f"<tr><th>Executive projection</th><td>view model <code>executive_record_view_model</code> · fields projected {len(view.fields)} · title {escape(view.title)}</td></tr>"
+            f"<tr><th>Rendered page</th><td>{escape(_diagnostic_preview(rendered) or 'No rendered page field')}</td></tr>"
+            f"<tr><th>Exact rejection reason</th><td><code>{escape(exact_reason)}</code>{(' · ' + escape(obj.exclusion_reason or obj.residual_reason)) if obj.exclusion_reason or obj.residual_reason else ''}</td></tr>"
+            "</tbody></table></details>")
+
+
+def _diagnostic_preview(value: Any, limit: int = 180) -> str:
+    text = json.dumps(value, sort_keys=True) if isinstance(value, (dict, list, tuple)) else str(value or "")
+    return text if len(text) <= limit else text[:limit - 1] + "…"
+
+def _observation_pipeline_reason(obj: SemanticObject, rendered: bool) -> str:
+    if obj.validation_status and obj.validation_status not in {"accepted", ""}:
+        return obj.residual_reason or "candidate_state_suppressed"
+    if obj.exclusion_reason:
+        return obj.exclusion_reason
+    if rendered:
+        return "observation_generated"
+    if not obj.evidence_refs:
+        return "missing_evidence"
+    if not obj.subject or obj.subject == "Twin scope":
+        return "missing_subject"
+    return obj.residual_reason or "projection_filtered"
 
 
 def _enterprise_completeness(ent: SemanticEnterprise, mission: CommercialMission | None) -> tuple[CompletenessAspect, ...]:
