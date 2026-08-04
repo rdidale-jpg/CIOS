@@ -70,6 +70,7 @@ BUSINESS_COLLECTIONS: Mapping[str, tuple[str, str, tuple[str, ...]]] = {
     "insights": ("Insights", "Material observations and interpretations.", ("executive_intelligence", "fact", "observation", "supported_interpreted_observation")),
     "financial-intelligence": ("Financial Intelligence", "Financial measures and their business interpretation.", ("financial_observation", "financial_fact", "economic_pool")),
     "transformation-programmes": ("Transformation Programmes", "Material programmes changing represented organisations.", ("transformation_programme",)),
+    "reinvention-assessments": ("Reinvention Assessments", "Owner-supplied AI reinvention assessments.", ("ai_reinvention_assessment",)),
     "capabilities-and-offers": ("Capabilities and Offers", "Capabilities and offers represented in the Twin.", ("capability_offer",)),
     "relationships": ("Relationships", "Connections represented across the market.", ("relationship", "supplier_relationship")),
     "memberships": ("Memberships", "Governed collection memberships represented in the Twin.", ("membership",)),
@@ -193,7 +194,7 @@ def _object(candidate: dict[str, Any]) -> SemanticObject:
         ("metric", "unit", "period", "subject", "source")) and bool(p.get("business_significance") or statement)
     isolated = (not statement and raw_value is not None) or bool(statement and re.fullmatch(r"[\d.,%]+", statement))
     label_only = not statement and bool(p.get("name") or p.get("display_name"))
-    evidence = p.get("evidence_refs") or p.get("source_refs") or p.get("sources") or ()
+    evidence = p.get("evidence_refs") or p.get("evidence") or p.get("source_refs") or p.get("sources") or ()
     if isinstance(evidence, str): evidence = (evidence,)
     eligible = bool(statement) and not isolated and not label_only and (raw_value is None or metric_complete)
     reason = ""
@@ -201,7 +202,7 @@ def _object(candidate: dict[str, Any]) -> SemanticObject:
     elif label_only: reason = "Identity or label is not an executive conclusion"
     elif not statement: reason = "No interpretable observation or claim was supplied"
     original_id = str(candidate.get("original_source_id") or p.get("id") or "")
-    reference_fields = ("evidence_refs", "unknowns", "contradictions", "transformations", "opportunities",
+    reference_fields = ("evidence_refs", "unknown_refs", "contradiction_refs", "unknowns", "contradictions", "transformations", "opportunities", "references",
                         "procurement_routes", "buying_centres", "supplier_relationships", "buyer_ids",
                         "affected_objects", "owners", "relationships", "capabilities")
     refs: list[str] = []
