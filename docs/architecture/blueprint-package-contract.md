@@ -32,6 +32,17 @@ optional `required`. Optional `final_twin_spine_workbook` must name an entry in
 backslashes, `..`, empty paths, and duplicates within either declaration list
 are rejected. A supplied checksum is checked against Flora's archive inventory.
 
+`enterprise_id` owns package access and must not be treated as proof of governed
+Twin ownership. A producer may additionally declare a governed package-to-Twin
+association using the complete set `twin_id`, `twin_type`,
+`primary_subject_id`, `primary_subject_name`, `primary_subject_class`,
+`governed_scope`, and `canonical_owner`. Partial declarations fail closed. The
+optional `geography`, `time_horizon`, and `included_sub_sectors` fields enrich
+the scope display but do not replace governed scope. When the complete set is
+absent, Review can only resolve identity by an audited link to an already
+recognised package in the governed Blueprint registry; candidate labels and
+filenames are never identity authority.
+
 ## Receipt and validation path
 
 The upload view authorizes the request before `BlueprintPackageRegistry.receive`.

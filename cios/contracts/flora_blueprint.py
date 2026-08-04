@@ -57,16 +57,42 @@ class BlueprintManifest(BaseModel):
     package_version: str
     enterprise_id: str
     profile_version: str
+    # Optional governed linkage.  ``enterprise_id`` is the access boundary for
+    # the package; it is not, by itself, proof of the Twin that owns its
+    # contents.  Producers that want identity to resolve without a registry
+    # confirmation must therefore supply this complete, explicit set.
+    twin_id: str | None = None
+    twin_type: Literal["industry", "enterprise", "market_participant", "opportunity"] | None = None
+    primary_subject_id: str | None = None
+    primary_subject_name: str | None = None
+    primary_subject_class: Literal["industry", "enterprise", "market_participant", "opportunity"] | None = None
+    governed_scope: str | None = None
+    canonical_owner: str | None = None
+    geography: str | None = None
+    time_horizon: str | None = None
+    included_sub_sectors: list[str] | None = None
     final_twin_spine_workbook: str | None = None
     files: list[BlueprintFile] = Field(default_factory=list)
     record_sets: list[BlueprintRecordSet] = Field(default_factory=list)
 
-    @field_validator("package_id", "package_version", "enterprise_id", "profile_version")
+    @field_validator("package_id", "package_version", "enterprise_id", "profile_version", "twin_id", "primary_subject_id", "canonical_owner")
     @classmethod
-    def safe_identifier(cls, value: str) -> str:
+    def safe_identifier(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
         if value != value.strip() or not _ID_RE.fullmatch(value):
             raise ValueError("must be a safe 2-128 character identifier")
         return value
+
+    @model_validator(mode="after")
+    def complete_governed_identity(self):
+        governed = (self.twin_id, self.twin_type, self.primary_subject_id,
+                    self.primary_subject_name, self.primary_subject_class,
+                    self.governed_scope, self.canonical_owner)
+        if any(value not in (None, "") for value in governed) and not all(
+                value not in (None, "") for value in governed):
+            raise ValueError("governed Twin identity must supply twin_id, twin_type, primary subject, governed_scope and canonical_owner together")
+        return self
 
     @field_validator("final_twin_spine_workbook")
     @classmethod

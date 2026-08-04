@@ -29,6 +29,30 @@ def test_blueprint_contract_is_exact_and_does_not_change_validation_boundary():
     assert result.promotion_eligible is False
 
 
+def test_blueprint_governed_identity_fields_reach_the_shared_inspection_adapter():
+    manifest = {
+        "schema_version": "1.0", "package_id": "generic-industry", "package_version": "1.0",
+        "enterprise_id": "ACCESS-001", "profile_version": "1.0.0",
+        "twin_id": "IND-GENERIC-001", "twin_type": "industry",
+        "primary_subject_id": "IND-GENERIC-001", "primary_subject_name": "Generic Industry",
+        "primary_subject_class": "industry", "governed_scope": "A governed generic scope",
+        "canonical_owner": "IND-GENERIC-001", "geography": "UK", "time_horizon": "2026-2030",
+        "included_sub_sectors": ["one", "two"],
+    }
+    result = inspect(package(("blueprint_manifest.json", manifest)))
+
+    projected = result.to_dict()
+    assert {key: projected[key] for key in (
+        "twin_id", "twin_type", "primary_subject_id", "primary_subject_name",
+        "primary_subject_class", "governed_scope", "canonical_owner",
+    )} == {key: manifest[key] for key in (
+        "twin_id", "twin_type", "primary_subject_id", "primary_subject_name",
+        "primary_subject_class", "governed_scope", "canonical_owner",
+    )}
+    assert projected["geography"] == "UK"
+    assert projected["included_sub_sectors"] == ["one", "two"]
+
+
 def test_research_workspace_inventory_separates_promotable_assets_from_lineage():
     result = inspect(package(
         ("mission_state.json", {"workspace_id": "research-1", "workspace_version": "2"}),

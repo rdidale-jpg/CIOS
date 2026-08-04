@@ -6,7 +6,7 @@ from cios.applications.flora.blueprint_import.archive import inspect_zip_invento
 from cios.applications.flora.blueprint_import.models import BlueprintPackageIdentity, BlueprintPackageRecord
 from cios.applications.flora.blueprint_import.package_contracts import PackageContractDetector
 from cios.applications.flora.blueprint_import.twin_governance import (
-    DownstreamReconciliationRepository, TwinDependencyService, assess_impacts,
+    DownstreamReconciliationRepository, GovernedIdentityResolutionRepository, TwinDependencyService, assess_impacts,
     governed_semantics, project_twin_identity,
 )
 from cios.applications.flora.blueprint_import.views import _business_category, _commercial_change_summary, _executive_summary, _identity_resolution_section
@@ -62,6 +62,32 @@ def test_enterprise_supplier_role_is_not_a_supplier_twin_and_ambiguous_identity_
     assert semantics["commercial_roles"] == ["supplier", "partner"]
     ambiguous = package("UNKNOWN", "run-unknown", {"contract_type": "Blueprint Package"})
     assert project_twin_identity(ambiguous).status == "ambiguous"
+
+
+def test_governed_identity_confirmation_persists_and_review_projection_reuses_it(tmp_path, monkeypatch):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    candidate = package("candidate", "run-candidate", {"contract_type": "Blueprint Package"})
+    governed = package("governed", "run-governed", {
+        "contract_type": "Blueprint Package", "twin_id": "IND-GENERIC-001", "twin_type": "industry",
+        "primary_subject_id": "IND-GENERIC-001", "primary_subject_name": "Generic Industry",
+        "primary_subject_class": "industry", "governed_scope": "generic governed scope",
+        "canonical_owner": "IND-GENERIC-001",
+    }, "b" * 64)
+    monkeypatch.setattr("cios.applications.flora.blueprint_import.twin_governance.BlueprintPackageRegistry.get",
+                        lambda self, ref: governed if ref == governed.package_ref else None)
+
+    GovernedIdentityResolutionRepository().confirm_existing(
+        candidate, governed.package_ref, "governance-owner", "Matches the existing governed registry identity",
+    )
+
+    # A later request creates a fresh projection/repository instance and reads
+    # the durable audit overlay rather than relying on request-local state.
+    resolved = project_twin_identity(candidate)
+    assert resolved.status == "recognised"
+    assert resolved.primary_subject_id == resolved.canonical_owner == "IND-GENERIC-001"
+    rendered = _identity_resolution_section(candidate)
+    assert "Generic Industry" in rendered
+    assert "Confirmed by:</strong> governance-owner" in rendered
 
 
 def test_stable_id_dependency_creates_idempotent_review_without_dependent_mutation(tmp_path, monkeypatch):
