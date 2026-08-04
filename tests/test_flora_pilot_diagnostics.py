@@ -32,6 +32,9 @@ def test_pilot_diagnostics_market_participant_success_and_disabled(monkeypatch, 
     assert "payload.role" in html or "payload.capabilities" in html
     assert "MP-VERIZON" in html
     assert "Page-level diagnostic summary" in html
+    assert "loaded profile version" in html
+    assert "loaded profile checksum" in html
+    assert "selector used from researcher_v1.json" in html
 
     monkeypatch.delenv("FLORA_PILOT_DIAGNOSTICS", raising=False)
     html, status = executive_workspace_page(run_id, {}, view="aspect", collection="market-participants")
@@ -50,6 +53,8 @@ def test_pilot_diagnostics_industry_enterprise_research_and_stale(monkeypatch, t
         assert section in industry
     assert any(code in industry for code in ("source_field_absent", "source_field_unmapped", "mapped_value_not_persisted", "projection_field_missing", "projection_filtered_assessment_pending"))
     assert "stale_candidate_representation" in industry
+    assert "Pilot Diagnostic Mode flag" in industry
+    assert "FLORA_PILOT_DIAGNOSTICS=1" in industry
 
     bt, status = executive_workspace_page(run_id, {}, view="enterprise", enterprise_id="ent-bt")
     assert status == 200

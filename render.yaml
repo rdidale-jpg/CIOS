@@ -16,6 +16,8 @@ services:
         value: /var/data/flora
       - key: FLORA_RAPID_AI_TWIN_ENABLED
         value: "true"
+      - key: FLORA_PILOT_DIAGNOSTICS
+        value: "1"
       - key: OPENAI_API_KEY
         sync: false
     disk:

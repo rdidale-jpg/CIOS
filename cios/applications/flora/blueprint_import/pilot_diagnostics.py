@@ -11,6 +11,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from html import escape
 import hashlib
+import json
 import os
 import subprocess
 from pathlib import Path
@@ -18,6 +19,7 @@ from typing import Any, Iterable
 
 from cios.applications.flora.pilot_import import pilot_import_bypass_enabled
 from .cios_twin_adapter import MAPPING_VERSION
+from .researcher_profile_adapter import CONTRACT as RESEARCHER_CONTRACT, contract_checksum as researcher_contract_checksum
 from .intelligence_projection import ExecutiveAssessmentProjection
 from .semantic_twin import SemanticObject, SemanticTwin, business_collections, executive_record_view_model
 
@@ -98,6 +100,11 @@ def context_header(package: Any, summary: dict[str, Any]) -> str:
         "import timestamp": str(getattr(package, "received_at", "unknown")),
         "candidate/staging version": str(summary.get("staging_version") or summary.get("validation_version") or "staging-summary-v1"),
         "semantic mapping version": MAPPING_VERSION,
+        "loaded profile contract": RESEARCHER_CONTRACT.get("document_id", "unknown"),
+        "loaded profile version": RESEARCHER_CONTRACT.get("profile_version", "unknown"),
+        "loaded profile checksum": researcher_contract_checksum(),
+        "Pilot Diagnostic Mode flag": "FLORA_PILOT_DIAGNOSTICS=1",
+        "Pilot Diagnostic Mode active": "yes",
         "review-plan version": REVIEW_PLAN_VERSION,
         "candidate/promoted state": "candidate",
         "candidate staged relative to deployed commit": "before deployed commit" if stale else "after or same as deployed commit / unknown",
@@ -135,6 +142,7 @@ def field_panel(obj: SemanticObject|None, label: str, expected_paths: Iterable[s
     paths = tuple(expected_paths)
     present = [(p, _path_value(obj.attributes if obj else {}, p.removeprefix("payload."))) for p in paths]
     selected = next(((p,v) for p,v in present if _present(v)), (paths[0] if paths else target, None))
+    contract_selector = _contract_selector(obj, target, page_field, paths)
     explicit_unknown = obj and obj.kind == "unknown" or str(selected[1]).casefold() == "unknown"
     if _present(rendered): reason="source_field_present_rendered"
     elif explicit_unknown: reason="explicit_unknown"
@@ -145,7 +153,7 @@ def field_panel(obj: SemanticObject|None, label: str, expected_paths: Iterable[s
     return f"""<details class='pilot-diagnostics field-diagnostic'><summary>{escape(label)} diagnostic — <code>{reason}</code></summary>
     <h4>Object identity</h4><p>source collection: {escape(obj.kind if obj else 'unavailable')} · declared record class: {escape(obj.kind if obj else 'unavailable')} · source file: {escape(obj.source_file if obj else 'unavailable')} · source row/location: {escape(obj.source_location if obj else 'unavailable')} · source identifier: <code>{escape(obj_id)}</code> · candidate identifier: <code>{escape(obj.record_id if obj else 'unavailable')}</code> · canonical object family: {escape(obj.kind if obj else 'unavailable')} · canonical owner: semantic_twin.{escape(obj.kind if obj else 'unavailable')}</p>
     <h4>Source state</h4><table>{path_rows}</table><p>Evidence: {escape(', '.join(obj.evidence_refs) if obj else '')} · Unknowns: {escape(', '.join(_refs(obj,'UNK')))} · Contradictions: {escape(', '.join(_refs(obj,'CON')))}</p>
-    <h4>Adaptation state</h4><p>adapter invoked: yes · adapter version: {ADAPTER_VERSION} · source field selected: <code>{escape(str(selected[0]))}</code> · mapped target field: <code>{escape(target or page_field)}</code> · transformation applied: canonical read projection · mapping diagnostic: {reason} · unmapped fields relevant to this UI section: inspect Advanced Inspection residuals</p>
+    <h4>Adaptation state</h4><p>adapter invoked: yes · adapter version: {ADAPTER_VERSION} · source field selected: <code>{escape(str(selected[0]))}</code> · selector used from researcher_v1.json: <code>{escape(contract_selector)}</code> · mapped target field: <code>{escape(target or page_field)}</code> · transformation applied: canonical read projection · mapping diagnostic: {reason} · unmapped fields relevant to this UI section: inspect Advanced Inspection residuals</p>
     <h4>Persistence state</h4><p>persisted candidate field path: <code>{escape(target or selected[0])}</code> · persisted value: {'present' if _present(selected[1]) else 'absent'} · candidate classification: {escape(obj.governance if obj else 'candidate')} · validation disposition: {escape(obj.validation_status if obj else 'unknown')} · quarantine/ignored/lineage-only reason: {escape(obj.residual_reason if obj else '')}</p>
     <h4>Canonical-owner state</h4><p>canonical constructor/model selected: assemble_semantic_twin · canonical owner input field: <code>{escape(target or selected[0])}</code> · constructor acceptance/rejection: {'accepted' if obj else 'rejected'} · persisted semantic Twin field: <code>{escape(page_field or target)}</code> · owner-assessment lifecycle state: assessment_pending_governance · assessment required for judgement/eligibility/completeness; factual display remains inspectable.</p>
     <h4>Projection state</h4><p>projection service/version: {PROJECTION_VERSION} · page view-model field: <code>{escape(page_field or label)}</code> · value returned to page: {escape(_preview(rendered))} · filter/suppression: {'none' if rendered else 'template fallback/empty'} · rendered template field: {escape(label)} · final reason code: <code>{reason}</code></p></details>"""
@@ -166,6 +174,22 @@ def enterprise_diagnostics(ent: Any) -> str:
 def research_gap_trace(subject: str, field: str, reason: str="owner-assessed deficiency") -> str:
     if not pilot_diagnostics_enabled(): return ""
     return f"<details class='pilot-diagnostics'><summary>Research Gap diagnostic — {escape(subject)}</summary><p>canonical subject: {escape(subject)} · requested field/dimension: {escape(field)} · source candidate field inspected: {escape(field)} · source presence state: source_field_absent unless shown in source dispositions · mapping state: governed requirement projection · assessment state: assessment_pending_governance · exact reason emitted: {escape(reason)}</p></details>"
+
+
+def _contract_selector(obj: SemanticObject|None, target: str, page_field: str, paths: tuple[str, ...]) -> str:
+    field = (target or page_field or "").removeprefix("payload.").replace("/", "_").replace(" ", "_").casefold()
+    kind = (obj.kind if obj else "")
+    profiles = RESEARCHER_CONTRACT.get("profiles", {})
+    profile = profiles.get(kind, {})
+    selectors = profile.get("fields", {}).get(field) or RESEARCHER_CONTRACT.get("common_fields", {}).get(field)
+    if selectors:
+        return json.dumps(selectors, sort_keys=True)
+    source_payload = (obj.attributes or {}).get("source_payload") if obj else None
+    if isinstance(source_payload, dict):
+        matched = [p.removeprefix("payload.") for p in paths if _path_value(source_payload, p.removeprefix("payload.")) not in (None, "", [], {}, ())]
+        if matched:
+            return json.dumps(matched, sort_keys=True) + " (matched in preserved source_payload)"
+    return "no selector matched for displayed field"
 
 
 def _present(value: Any) -> bool:
