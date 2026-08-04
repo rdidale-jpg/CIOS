@@ -6,6 +6,17 @@ pack:
   canonical_location: knowledge-packs/researcher
   generated_artifacts: dist release artifacts
 documents:
+  - pack_path: contracts/researcher_v1.json
+    source_path: cios/contracts/twin_object_profiles/researcher_v1.json
+    document_id: TOP-RESEARCHER-PORTABLE-OBJECTS-v1
+    title: Shared Researcher Portable Twin Object Profile
+    version_or_last_updated: 1.0.0
+    authority: twin-object-profile-governance
+    status: current
+    required: true
+    inclusion_reason: Required so external Researcher package validation and Flora import execute the same governed selector contract.
+    checksum: 7acc2f8e33b6ee68fb08dd64cf2ed6c66dda460a2801dfbe40798ec91458dceb
+    transform: copied-from-canonical-contract
   - pack_path: README.md
     source_path: knowledge-packs/researcher/README.md
     document_id: PACK-README
