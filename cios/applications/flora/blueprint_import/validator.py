@@ -22,6 +22,7 @@ from .registry import BlueprintPackageRegistry
 from .cios_twin_adapter import CiosCommercialTwinAdapter, MAPPING_VERSION
 from .atomicity import validate_atomic_statement, normalise_statement
 from .industry_delta_adapter import IndustryTwinDeltaAdapter
+from .researcher_profile_adapter import adapt_researcher_payload
 
 # Blueprint record-set declarations are the collection envelope when their
 # NDJSON rows are bare governed objects.  These vocabulary aliases are about
@@ -39,7 +40,7 @@ DECLARED_RECORD_SET_CLASSES: dict[str, str] = {
     "relationship_register": "relationship",
     "membership_register": "membership",
     "monitoring_trigger_register": "refresh_trigger",
-    "reinvention_assessments": "transformation_pressure_view",
+    "reinvention_assessments": "ai_reinvention_assessment",
     "release_manifest_wave5_draft": "release_manifest",
 }
 
@@ -391,6 +392,8 @@ class BlueprintPackageValidator:
             bare_declared_row = bool(not embedded_class and declared_class)
             payload = (dict(row) if bare_declared_row else
                        row.get("payload", {}) if isinstance(row.get("payload", {}), dict) else {})
+            if bare_declared_row and declared_class in DECLARED_RECORD_SET_CLASSES:
+                rc, payload = adapt_researcher_payload(rc, payload)
             if not ext: status="quarantined"; findings.append(ValidationFinding("error","missing_external_id","Record does not declare external_id",f"{path}#L{index}"))
             if bare_declared_row and declared_class not in DECLARED_RECORD_SET_CLASSES:
                 status="ignored"

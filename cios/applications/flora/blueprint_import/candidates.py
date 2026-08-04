@@ -26,6 +26,7 @@ SUPPORTED_CANONICAL_CLASSES = {
     # are recognisable candidates, but remain outside automatic promotion.
     "industry_twin", "enterprise_twin", "market_participant_twin",
     "opportunity_hypothesis", "transformation_programme",
+    "ai_reinvention_assessment",
 }
 PROJECTION_ONLY_CLASSES = {
     "pain_point", "current_response", "response_effectiveness", "residual_pain",

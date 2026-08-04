@@ -62,10 +62,10 @@ def test_unchanged_tel001_package_reaches_semantic_staging_without_promotion(mon
     assert hashlib.sha256(EVIDENCE.read_bytes()).hexdigest() == before
     assert package.package_inspection["contract_type"] == "Blueprint Package"
     assert (result.candidate_records_staged, result.records_accepted_into_staging,
-            result.records_quarantined, result.records_rejected) == (1060, 641, 7, 0)
+            result.records_quarantined, result.records_rejected) == (1060, 648, 0, 0)
     assert result.canonical_mutations == 0
     assert Counter(candidate["validation_status"] for candidate in candidates) == {
-        "accepted": 641, "ignored": 412, "quarantined": 7,
+        "accepted": 648, "ignored": 412,
     }
     assert Counter(candidate["candidate_object_class"] for candidate in candidates
                    if candidate["validation_status"] == "accepted") == {
@@ -81,14 +81,12 @@ def test_unchanged_tel001_package_reaches_semantic_staging_without_promotion(mon
         "membership": 50,
         "refresh_trigger": 95,
         "release_manifest": 1,
+        "ai_reinvention_assessment": 7,
     }
-    assert Counter(candidate["candidate_object_class"] for candidate in candidates
-                   if candidate["validation_status"] == "quarantined") == {
-        "transformation_pressure_view": 7,
-    }
+    assert not [candidate for candidate in candidates if candidate["validation_status"] == "quarantined"]
     twin = assemble_semantic_twin([candidate for candidate in candidates
                                    if candidate["validation_status"] == "accepted"])
-    assert len(twin.objects) == 641
+    assert len(twin.objects) == 648
     assert len(twin.enterprises) == 6
     collections = {collection.key: len(collection.objects) for collection in business_collections(twin, include_empty=True)}
     expected_collections = {
@@ -118,7 +116,7 @@ def test_tel001_candidates_are_shared_by_governance_twin_map_and_research_gaps(m
     governed = CandidateStagingRepository().list_candidates(package.import_run_id)
     accepted = [candidate for candidate in governed if candidate["validation_status"] == "accepted"]
     assert len(governed) == 1060
-    assert len(accepted) == 641
+    assert len(accepted) == 648
     assert len({candidate["candidate_record_id"] for candidate in governed}) == 1060
 
     twin_map, status = executive_workspace_page(package.import_run_id, {}, view="workspace")
@@ -173,8 +171,8 @@ def test_exact_tel001_pilot_import_reaches_candidate_governance_review(monkeypat
     assert "Confirm the proposed Twin identity, primary subject, governed scope and canonical owner" in review
     # Final staging quarantine is seven explicit records, not the 1,060 items
     # provisionally withheld from promotion while identity remains unresolved.
-    assert "<tr><th>Quarantined (final staging disposition)</th><td>7</td></tr>" in review
-    assert "<tr><th>Accepted canonical candidates</th><td>641</td></tr>" in review
+    assert "<tr><th>Quarantined (final staging disposition)</th><td>0</td></tr>" in review
+    assert "<tr><th>Accepted canonical candidates</th><td>648</td></tr>" in review
     assert "Promotion permission required" in review
     assert not can_approve_blueprint_promotion({}, "TEL-001")
     assert not (tmp_path / "memory").exists()
@@ -238,24 +236,70 @@ def test_duplicate_tel001_upload_restages_persisted_candidates_for_deployed_ui(m
         assert f"{count} total" in page
     other, other_status = executive_workspace_page(package.import_run_id, {}, view="explore", collection="other")
     assert other_status == 200
-    assert "Other Twin content — 514 total" in other
+    assert "Other Twin content — 507 total" in other
     assert "Residual reason:" in other
     assert "no canonical semantic role" in other
     gaps, gaps_status = executive_workspace_page(package.import_run_id, {}, view="health")
     assert gaps_status == 200
     assert "92 Evidence · 30 Unknowns · 11 Contradictions" in gaps
 
-    # 641 projected + 7 quarantined + 412 lineage-only = all 1,060; only the
+    # 648 projected + 412 lineage-only = all 1,060; only the
     # accepted projection is visible, and validation never promotes it.
     summary = BlueprintPackageValidator().staging_summary(package.import_run_id)
     assert Counter(c["validation_status"] for c in summary["candidates"]) == {
-        "accepted": 641, "ignored": 412, "quarantined": 7,
+        "accepted": 648, "ignored": 412,
     }
     accepted_twin = assemble_semantic_twin([c for c in summary["candidates"] if c["validation_status"] == "accepted"])
     accepted_collections = business_collections(accepted_twin)
-    assert sum(len(collection.objects) for collection in accepted_collections) == 641
+    assert sum(len(collection.objects) for collection in accepted_collections) == 648
     assert sum(collection.key == "other" and len(collection.objects) or 0
                for collection in accepted_collections) == 95
+
+
+def test_tel001_researcher_fields_reach_canonical_owner_shapes_losslessly(monkeypatch, tmp_path):
+    """The profile adapter maps semantics, retains lineage, and never promotes."""
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    package = BlueprintPackageRegistry().receive(EVIDENCE.read_bytes(), EVIDENCE.name, "regression-auditor")
+    result = BlueprintPackageValidator().validate_and_stage(package.package_ref, "regression-auditor")
+    summary = BlueprintPackageValidator().staging_summary(package.import_run_id)
+    rows = summary["candidates"]
+    accepted = [row for row in rows if row["validation_status"] == "accepted"]
+    by_kind = {kind: [row for row in accepted if row["candidate_object_class"] == kind] for kind in {
+        "industry_twin", "enterprise_twin", "market_participant_twin", "transformation_programme",
+        "opportunity_hypothesis", "ai_reinvention_assessment", "evidence", "unknown", "contradiction",
+        "relationship", "membership"}}
+
+    assert result.canonical_mutations == 0
+    assert len(by_kind["ai_reinvention_assessment"]) == 7
+    industry = by_kind["industry_twin"][0]["payload"]
+    assert industry["description"] and industry["industry_profile"]["economics"]
+    enterprise = by_kind["enterprise_twin"][0]["payload"]
+    assert all(enterprise[field] for field in ("description", "strategy", "operating_structure", "financial_context", "technology", "transformation_posture"))
+    participant = by_kind["market_participant_twin"][0]["payload"]
+    assert participant["role"] and participant["domain"] and participant["significance"] and participant["evidence_refs"]
+    programme = by_kind["transformation_programme"][0]["payload"]
+    assert all(programme[field] for field in ("title", "owner", "business_unit", "objective", "phase", "timing", "evidence_refs"))
+    opportunity = by_kind["opportunity_hypothesis"][0]["payload"]
+    assert all(opportunity[field] for field in ("title", "client_problem", "business_unit", "procurement_status", "procurement_timing", "value_range", "commercial_type", "value_type", "evidence_refs"))
+    assert len(by_kind["opportunity_hypothesis"]) == 17
+
+    # Every transformed record carries the untouched source and an explicit
+    # reconciliation, including fields not consumed by the stable vocabulary.
+    for family in by_kind.values():
+        for row in family:
+            payload = row["payload"]
+            assert payload["source_payload"]
+            assert set(payload["mapping_diagnostics"]) == {"source_fields", "mapped_fields", "unmapped_fields"}
+            assert set(payload["mapping_diagnostics"]["source_fields"]) == set(payload["source_payload"])
+
+    twin = assemble_semantic_twin(accepted)
+    objects = {obj.original_id: obj for obj in twin.objects}
+    for kind in ("enterprise_twin", "market_participant_twin", "transformation_programme", "opportunity_hypothesis", "ai_reinvention_assessment"):
+        for obj in twin.of_kind(kind):
+            assert obj.evidence_refs
+            assert all(ref in objects for ref in obj.evidence_refs)
+    for obj in twin.of_kind("relationship") + twin.of_kind("membership"):
+        assert len(obj.references) >= 2
     runtime_twin = assemble_semantic_twin(summary["candidates"])
     assert sum(len(collection.objects) for collection in business_collections(runtime_twin)) == 1060
     assert summary["canonical_mutations"] == 0
