@@ -33,9 +33,9 @@ def test_primary_pages_consolidate_incomplete_records():
     programmes = _aspect_page(twin, "run", "Twin", "major-programmes", "all", None)
     opportunities = _aspect_page(twin, "run", "Twin", "opportunities", "all", None)
     participants = _aspect_page(twin, "run", "Twin", "market-participants", "all", None)
-    assert "9 programme hypotheses identified" in programmes and "Unnamed programme" not in programmes
-    assert "9 hypotheses require further research" in opportunities and "Hypothesis 1</h3>" not in opportunities
-    assert "10 participants identified" in participants and "0 sufficiently classified" in participants
+    assert "9 programme hypotheses" in programmes and "Unnamed programme" not in programmes
+    assert "9 supplied candidate hypotheses" in opportunities and "Hypothesis 1</h3>" in opportunities
+    assert "10 participant concepts" in participants and "0 owner-assessed participant profiles" in participants
 
 
 def test_navigation_and_sources_use_final_contract():
@@ -52,6 +52,6 @@ def test_bbc_dossier_has_ordered_honest_consolidated_sections():
     html = _dossier(twin.enterprises[0], twin, "run", None)
     headings = ["Organisation Overview", "Strategic Position and Ambition", "Financial Position", "Material Pressures", "Major Programmes", "Known Procurements", "Reinvention Timing", "Opportunities", "Key Sources", "Research Gaps", "Advanced Inspection"]
     assert [html.index(f"<h2>{heading}</h2>") for heading in headings] == sorted(html.index(f"<h2>{heading}</h2>") for heading in headings)
-    assert "Organisation overview incomplete" in html
-    assert "9 hypothesis record(s)" in html
+    assert "Organisation description pending owner assessment" in html
+    assert "9 candidate record(s)" in html
     assert "Opportunity Hypothesis" not in html

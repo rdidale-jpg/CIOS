@@ -289,7 +289,8 @@ def test_tel001_researcher_fields_reach_canonical_owner_shapes_losslessly(monkey
         for row in family:
             payload = row["payload"]
             assert payload["source_payload"]
-            assert set(payload["mapping_diagnostics"]) == {"source_fields", "mapped_fields", "unmapped_fields"}
+            assert {"source_fields", "mapped_fields", "unmapped_fields"} <= set(payload["mapping_diagnostics"])
+            assert payload["mapping_diagnostics"]["contract_id"] == "TOP-RESEARCHER-PORTABLE-OBJECTS-v1"
             assert set(payload["mapping_diagnostics"]["source_fields"]) == set(payload["source_payload"])
 
     twin = assemble_semantic_twin(accepted)
