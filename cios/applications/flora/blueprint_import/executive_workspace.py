@@ -19,6 +19,14 @@ from cios.applications.flora.workspace.views import _page
 from .registry import BlueprintPackageRegistry
 from .industry_delta_adapter import IndustryTwinDeltaAdapter
 from .intelligence_projection import executive_assessments
+from .pilot_diagnostics import (
+    context_header as _pilot_diag_context_header,
+    enterprise_diagnostics as _pilot_enterprise_diagnostics,
+    field_panel as _pilot_field_panel,
+    industry_section_diagnostics as _pilot_industry_section_diagnostics,
+    page_reconciliation as _pilot_page_reconciliation,
+    research_gap_trace as _pilot_research_gap_trace,
+)
 from .research_requirements import research_requirements
 from .semantic_twin import (SemanticEnterprise, SemanticObject, SemanticTwin, assemble_semantic_twin,
                             business_collections, executive_insight_eligible,
@@ -169,25 +177,25 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     identity = project_twin_identity(package)
     title = str(inspection.get("twin_title") or inspection.get("package_title") or identity.primary_subject_name or package.identity.package_id)
     if view == "explore":
-        return _page(f"Explore Twin — {title}", _styles() + _explorer(twin, import_run_id, mission, collection, domain)), 200
+        return _page(f"Explore Twin — {title}", _styles() + _pilot_diag_context_header(package, summary) + _explorer(twin, import_run_id, mission, collection, domain) + _pilot_page_reconciliation(twin, "Evidence")), 200
     if view == "health":
-        return _page(f"Research Gaps — {title}", _styles() + _mission_indicator(mission, employer_context, import_run_id, domain) + _research_gaps(twin, import_run_id, mission)), 200
+        return _page(f"Research Gaps — {title}", _styles() + _pilot_diag_context_header(package, summary) + _mission_indicator(mission, employer_context, import_run_id, domain) + _research_gaps(twin, import_run_id, mission) + _pilot_page_reconciliation(twin, "Research Gaps")), 200
     if view == "diagnostics":
         return _page(f"Advanced diagnostics — {title}", _styles() + _advanced_diagnostics(twin, import_run_id, summary, mission)), 200
     if view == "aspect":
-        return _page(f"{collection.replace('-', ' ').title()} — {title}", _styles() + _aspect_page(twin, import_run_id, title, collection, domain, mission)), 200
+        return _page(f"{collection.replace('-', ' ').title()} — {title}", _styles() + _pilot_diag_context_header(package, summary) + _aspect_page(twin, import_run_id, title, collection, domain, mission) + _pilot_page_reconciliation(twin, collection)), 200
     if view == "enterprise":
         ent = next((e for e in twin.enterprises if e.identity_key == enterprise_id), None)
         if ent is None:
             return _page("Enterprise dossier unavailable", "<section class='hero'><h1>Enterprise dossier unavailable</h1></section>"), 404
-        return _page(f"Enterprise Intelligence — {ent.name}", _styles() + _dossier(ent, twin, import_run_id, mission)), 200
+        return _page(f"Enterprise Intelligence — {ent.name}", _styles() + _pilot_diag_context_header(package, summary) + _dossier(ent, twin, import_run_id, mission) + _pilot_page_reconciliation(twin, "Enterprises")), 200
     if view == "mission":
         return _page("Configure Commercial Mission", _styles() + _mission_editor(mission, employer_context, import_run_id, domain)), 200
-    body = _styles() + _hero(title) + _primary_nav(import_run_id, "map") + _mission_indicator(mission, employer_context, import_run_id, domain)
+    body = _styles() + _pilot_diag_context_header(package, summary) + _hero(title) + _primary_nav(import_run_id, "map") + _mission_indicator(mission, employer_context, import_run_id, domain)
     if not twin.enterprises:
         body += f"<aside class='mission-indicator' role='status'>Twin identity and governed scope have not yet been confirmed. Resolve Twin scope through <a href='/blueprint-import/{escape(import_run_id)}/review'>Review candidate governance</a>. <a href='/blueprint-import/{escape(import_run_id)}/inspect'>Inspect import decisions</a>. <a href='/blueprint-import/{escape(import_run_id)}/validation'>View package validation</a>.</aside>"
     body += _domain_lenses(import_run_id, domain) + _twin_map(twin, import_run_id, mission, domain)
-    body += _navigation(import_run_id)
+    body += _navigation(import_run_id) + _pilot_page_reconciliation(twin, "Executive Intelligence")
     html = _page(f"Executive Intelligence — {title}", body)
     product_nav = "<nav class='nav'><a href='/'>Executive Brief</a><a href='/observatory'>Observatory</a><a href='/radar'>Portfolio</a><a href='/live'>Evidence</a><a href='/digital-twins'>Digital Twins</a><a href='/financial-intelligence'>Financial Intelligence</a><a href='/observatory/critique'>Research</a><a href='/settings'>Settings</a><a href='/logbook' hidden>Learning / Logbook</a><a href='/financial-reports' hidden>Collect Financial Report</a></nav>"
     html = html.replace(product_nav, "<header class='product-header'><a href='/digital-twins'>Flora</a></header>", 1)
@@ -316,8 +324,18 @@ def _executive_record_card(o: SemanticObject) -> str:
                      for label, value in model.fields)
     evidence = (f"<p><strong>Evidence:</strong> {escape(', '.join(model.evidence_refs))}</p>"
                 if model.evidence_refs else "")
+    diagnostic_panels = []
+    for label, value in model.fields:
+        target = f"payload.{label.casefold().replace(' ', '_')}"
+        diagnostic_panels.append(_pilot_field_panel(o, label, (target,), rendered=value, target=target, page_field=label))
+    diagnostics = "".join(diagnostic_panels)
+    if not model.fields:
+        diagnostics = _pilot_field_panel(
+            o, "template fallback", ("payload.description", "payload.summary", "payload.statement"),
+            rendered="", target="payload.description", page_field="template fallback",
+        )
     return (f"<article class='enterprise-card' id='{escape(model.record_id)}'>"
-            f"<h3>{escape(model.title)}</h3>{fields}{evidence}"
+            f"<h3>{escape(model.title)}</h3>{fields}{evidence}{diagnostics}"
             "<span class='pill'>Canonical candidate read model</span></article>")
 
 
@@ -703,7 +721,7 @@ def _dossier(ent, twin, run_id, mission):
             for label, value in executive_record_view_model(identity).fields
             if label != "Overview"
         )
-    sections = [f"<section class='card' id='enterprise-overview'><h2>Organisation Overview</h2>{overview}{canonical_detail}<p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p></section>"]
+    sections = [f"<section class='card' id='enterprise-overview'><h2>Organisation Overview</h2>{overview}{canonical_detail}{_pilot_enterprise_diagnostics(ent)}<p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p></section>"]
     position = _field(identity, "strategic_ambition", "market_position", "current_position") if identity else ""
     sections.append(f"<section class='card'><h2>Strategic Position and Ambition</h2><p>{escape(position)}</p></section>" if position else gap("Strategic Position and Ambition", "No supported strategic position is supplied.", ("strategic ambition", "market position", "supporting evidence"), "Without it Flora cannot explain the organisation's direction."))
     financials=[o for o in relevant if o.kind in {"financial_observation","financial_fact","economic_pool"} and all((_field(o,'metric','measure'),_field(o,'value'),_field(o,'period'),_field(o,'source')))]
@@ -791,6 +809,7 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
         content = section("Industry definition and scope", "".join(f"<p>{escape(o.statement)}</p>" for o in rows))
         content += section("Supported populated candidate sections", profile or industry_cards)
         content += "<p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p>"
+        content += _pilot_industry_section_diagnostics(twin)
         content += f"<section><h2>Research Gaps</h2><p>Complete the unsupported industry sections above with dated, attributable evidence or explicit Unknowns.</p></section><section><h2>Advanced Inspection</h2><p><a href='/blueprint-import/{escape(run_id)}/explore'>Inspect canonical records, evidence and lineage</a></p></section>"
     elif key=="market-participants":
         identified=list(next((c.objects for c in business_collections(twin, include_empty=True, domain=domain) if c.key=='market-participants'), ()))
@@ -908,7 +927,7 @@ def _research_gaps(twin, run_id, mission):
         acceptance = rows[0].acceptance_test if rows else a.acceptance_criteria
         dispositions = tuple(dict.fromkeys(disposition for r in rows for _field_name, disposition in r.source_dispositions))
         disposition_html = (f"<p><strong>Source dispositions:</strong> {escape(', '.join(dispositions))}</p>" if dispositions else "<p><strong>Source dispositions:</strong> source_field_present_unassessed where supplied candidate fields await owner assessment; no source research is commissioned for those fields.</p>")
-        cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(statement)}</strong></p><p><strong>{escape(_assessment_state_label(a.state))}</strong></p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><h3>Why this matters</h3><p>{escape(_COLLECTION_LANGUAGE[a.key])}</p><h3>Executive dependency impact</h3><p><strong>{impact}</strong></p><p><strong>Reason:</strong> {escape(reason)}</p><p><strong>Researcher action:</strong> {escape(action)}</p><p><strong>Acceptance criteria:</strong> {escape(acceptance)}</p><details><summary>Architectural traceability</summary><p><strong>Governed owner:</strong> {escape(a.canonical_owner)}</p><p><strong>Completeness authority:</strong> {escape(a.completeness_authority)}</p><p><strong>Eligibility authority:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence:</strong> {escape(a.evidence_source)}</p><p><strong>Canonical authority:</strong> {escape(a.rule_version)}</p>{disposition_html}</details><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Inspect all {affected} affected subjects</a></article>")
+        cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(statement)}</strong></p><p><strong>{escape(_assessment_state_label(a.state))}</strong></p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><h3>Why this matters</h3><p>{escape(_COLLECTION_LANGUAGE[a.key])}</p><h3>Executive dependency impact</h3><p><strong>{impact}</strong></p><p><strong>Reason:</strong> {escape(reason)}</p><p><strong>Researcher action:</strong> {escape(action)}</p><p><strong>Acceptance criteria:</strong> {escape(acceptance)}</p><details><summary>Architectural traceability</summary><p><strong>Governed owner:</strong> {escape(a.canonical_owner)}</p><p><strong>Completeness authority:</strong> {escape(a.completeness_authority)}</p><p><strong>Eligibility authority:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence:</strong> {escape(a.evidence_source)}</p><p><strong>Canonical authority:</strong> {escape(a.rule_version)}</p>{disposition_html}{_pilot_research_gap_trace(a.name, fields or a.name, reason)}</details><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Inspect all {affected} affected subjects</a></article>")
     challenge_inventory = (f"{len(twin.of_kind('evidence'))} Evidence · "
                            f"{len(twin.of_kind('unknown'))} Unknowns · "
                            f"{len(twin.of_kind('contradiction'))} Contradictions")
