@@ -6,13 +6,23 @@ second prose-only semantic contract for Researcher packages.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from importlib.resources import files
 from typing import Any
 
 
+def _contract_resource():
+    return files("cios.contracts.twin_object_profiles").joinpath("researcher_v1.json")
+
+
 def _contract() -> dict[str, Any]:
-    return json.loads(files("cios.contracts.twin_object_profiles").joinpath("researcher_v1.json").read_text())
+    return json.loads(_contract_resource().read_text())
+
+
+def contract_checksum() -> str:
+    """Return the SHA-256 checksum for the loaded Researcher Twin Object Profile."""
+    return hashlib.sha256(_contract_resource().read_bytes()).hexdigest()
 
 
 CONTRACT = _contract()
@@ -42,6 +52,8 @@ def adapt_researcher_payload(record_class: str, source: dict[str, Any]) -> tuple
     p["mapping_diagnostics"] = {
         "contract_id": CONTRACT["document_id"],
         "contract_status": CONTRACT["status"],
+        "contract_version": CONTRACT.get("profile_version", ""),
+        "contract_checksum": contract_checksum(),
         "source_fields": sorted(source),
         "mapped_fields": sorted(aliases),
         "unmapped_fields": sorted(set(source) - {field.split('.', 1)[0] for field in consumed if field != "$self"}),
