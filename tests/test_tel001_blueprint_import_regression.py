@@ -89,3 +89,42 @@ def test_unchanged_tel001_package_reaches_semantic_staging_without_promotion(mon
     assert len(twin.objects) == 640
     assert len(twin.enterprises) == 6
     assert not (tmp_path / "memory").exists()
+
+
+def test_tel001_candidates_are_shared_by_governance_twin_map_and_research_gaps(monkeypatch, tmp_path):
+    """Runtime boundary regression: staging is the shared candidate read owner."""
+    from cios.applications.flora.blueprint_import.candidates import CandidateStagingRepository
+    from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page
+
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_ENVIRONMENT", "pilot")
+    monkeypatch.delenv("FLORA_PILOT_IMPORT_BYPASS", raising=False)
+    monkeypatch.delenv("FLORA_PILOT_AUTO_SIGN_IN", raising=False)
+
+    package = BlueprintPackageRegistry().receive(EVIDENCE.read_bytes(), EVIDENCE.name, "regression-auditor")
+    BlueprintPackageValidator().validate_and_stage(package.package_ref, "regression-auditor")
+
+    # Governance and projection must enumerate the same persisted candidate identities.
+    governed = CandidateStagingRepository().list_candidates(package.import_run_id)
+    accepted = [candidate for candidate in governed if candidate["validation_status"] == "accepted"]
+    assert len(governed) == 1060
+    assert len(accepted) == 640
+    assert len({candidate["candidate_record_id"] for candidate in governed}) == 1060
+
+    twin_map, status = executive_workspace_page(package.import_run_id, {}, view="workspace")
+    assert status == 200
+    for inventory in (
+        "1 canonical Industry Twin concept(s)",
+        "6 canonical enterprise(s)",
+        "17 canonical participant(s)",
+        "13 canonical programme hypothesis/hypotheses",
+        "17 canonical opportunity hypothesis/hypotheses",
+    ):
+        assert inventory in twin_map
+
+    gaps, status = executive_workspace_page(package.import_run_id, {}, view="health")
+    assert status == 200
+    assert "6 enterprise profiles require enrichment" in gaps
+    assert "17 market participant concepts require enrichment or classification" in gaps
+    assert "13 major-programme hypotheses require enrichment" in gaps
+    assert "17 opportunity hypotheses require enrichment" in gaps
