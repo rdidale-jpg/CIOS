@@ -60,6 +60,68 @@ class TwinCollection:
     objects: tuple[SemanticObject, ...]
 
 
+@dataclass(frozen=True)
+class ExecutiveRecordViewModel:
+    """Canonical semantic-owner output consumed by imported Twin pages.
+
+    This is deliberately a projection of ``SemanticObject.attributes`` rather
+    than the Researcher ``source_payload``.  The import adapter owns vocabulary
+    translation; this contract only selects already-canonical fields for a
+    business object and gives them stable presentation labels.
+    """
+    record_id: str
+    kind: str
+    title: str
+    fields: tuple[tuple[str, Any], ...]
+    evidence_refs: tuple[str, ...]
+
+
+EXECUTIVE_FIELDS: Mapping[str, tuple[tuple[str, str], ...]] = {
+    "industry_twin": (
+        ("Industry profile", "industry_profile"),
+    ),
+    "enterprise_twin": (
+        ("Overview", "description"), ("Strategy", "strategy"),
+        ("Operating structure", "operating_structure"),
+        ("Financial context", "financial_context"), ("Technology", "technology"),
+        ("Ecosystem", "ecosystem"), ("Pressures", "pressures"),
+        ("Programmes", "programmes"), ("Transformation posture", "transformation_posture"),
+    ),
+    "market_participant_twin": (
+        ("Role", "role"), ("Domain", "domain"), ("Capabilities", "capabilities"),
+        ("Relationships", "relationships"), ("Current activity", "current_activity"),
+        ("Market significance", "significance"),
+    ),
+    "transformation_programme": (
+        ("Owner", "owner"), ("Business unit", "business_unit"),
+        ("Objective", "objective"), ("Stage", "phase"), ("Timing", "timing"),
+        ("Investment", "investment"),
+    ),
+    "opportunity_hypothesis": (
+        ("Customer", "affected_enterprises"), ("Client problem", "client_problem"),
+        ("Business unit", "business_unit"), ("Buyer", "buyer"),
+        ("Timing", "procurement_timing"), ("Procurement status", "procurement_status"),
+        ("Commercial type", "commercial_type"), ("Value type", "value_type"),
+        ("Value", "value_range"),
+    ),
+    "ai_reinvention_assessment": (
+        ("Current operating model", "summary"), ("Affected functions", "affected_functions"),
+        ("AI disruption mechanism", "ai_disruption_mechanism"), ("Timing", "timing"),
+        ("Expected tipping point", "expected_tipping_point"), ("Executive implications", "consequence"),
+    ),
+}
+
+
+def executive_record_view_model(obj: SemanticObject) -> ExecutiveRecordViewModel:
+    """Return the deployed-page model from canonical semantic owner output."""
+    attributes = obj.attributes or {}
+    fields = tuple((label, attributes[name]) for label, name in EXECUTIVE_FIELDS.get(obj.kind, ())
+                   if attributes.get(name) not in (None, "", [], {}, ()))
+    return ExecutiveRecordViewModel(obj.record_id, obj.kind,
+                                    str(attributes.get("title") or obj.statement or obj.original_id or "Twin record"),
+                                    fields, obj.evidence_refs)
+
+
 # This is the single business-vocabulary mapping for imported Twin presentation.
 # It deliberately lives beside semantic assembly, rather than in a web view.
 BUSINESS_COLLECTIONS: Mapping[str, tuple[str, str, tuple[str, ...]]] = {

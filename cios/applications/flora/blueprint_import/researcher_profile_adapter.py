@@ -49,17 +49,20 @@ def adapt_researcher_payload(record_class: str, source: dict[str, Any]) -> tuple
                        programmes=source.get("transformation_portfolio"), transformation_posture=source.get("reinvention_assessment"))
     elif canonical_class == "market_participant_twin":
         aliases.update(organisation_name=source.get("name"), domain=source.get("classification"),
-                       significance=source.get("commercial_significance") or source.get("market_significance"))
+                       significance=source.get("commercial_significance") or source.get("market_significance"),
+                       role=source.get("role"), capabilities=source.get("capabilities"),
+                       relationships=source.get("relationships"), current_activity=source.get("current_activity"))
     elif canonical_class == "transformation_programme":
         aliases.update(title=source.get("programme_name"), owner=source.get("owning_enterprise"),
                        business_unit=source.get("owning_business_unit"), objective=source.get("strategic_objective"),
-                       timing=source.get("timeline"), investment=source.get("budget"))
+                       phase=source.get("phase"), timing=source.get("timeline"), investment=source.get("budget"))
     elif canonical_class == "opportunity_hypothesis":
         problem = source.get("client_problem")
         aliases.update(title=source.get("opportunity_title"),
                        client_problem=(problem.get("customer_problem") if isinstance(problem, dict) else problem),
                        affected_enterprises=[source.get("canonical_customer_twin_id") or source.get("customer_enterprise_twin_id") or source.get("named_customer")],
                        procurement_status=source.get("procurement_status_control") or source.get("procurement_stage"),
+                       business_unit=source.get("business_unit"), buyer=source.get("buyer"),
                        commercial_type=source.get("commercial_type_wave5"), value_type=(source.get("wave5_pipeline_qualification") or {}).get("value_type_wave5"))
         timing = source.get("timing")
         if isinstance(timing, dict): aliases["procurement_timing"] = timing.get("estimated_procurement_window") or timing.get("estimated_contract_start")
@@ -68,7 +71,9 @@ def adapt_researcher_payload(record_class: str, source: dict[str, Any]) -> tuple
     elif canonical_class == "ai_reinvention_assessment":
         aliases.update(title=source.get("scope"), summary=source.get("current_operating_model"),
                        affected_functions=source.get("business_functions_affected"), timing=source.get("timing"),
-                       consequence=source.get("executive_implications"))
+                       consequence=source.get("executive_implications"),
+                       ai_disruption_mechanism=source.get("ai_disruption_mechanism"),
+                       expected_tipping_point=source.get("expected_tipping_point"))
     elif canonical_class == "evidence":
         aliases.update(statement=source.get("supported_claim"), subject=source.get("supported_object"),
                        freshness=source.get("publication_date") or source.get("collection_date"))
@@ -92,9 +97,9 @@ def _consumed_source_fields(kind: str) -> set[str]:
     common = {"evidence", "sources", "sources_searched", "unknowns", "contradictions"}
     specific = {
         "industry_twin": {"executive_summary", "definition"}, "enterprise_twin": {"id", "name", "executive_overview", "corporate_strategy", "operating_model", "financial_intelligence", "technology_landscape", "partners", "suppliers", "competitors", "transformation_portfolio", "reinvention_assessment"},
-        "market_participant_twin": {"name", "classification", "commercial_significance", "market_significance"}, "transformation_programme": {"programme_name", "owning_enterprise", "owning_business_unit", "strategic_objective", "timeline", "budget"},
-        "opportunity_hypothesis": {"opportunity_title", "client_problem", "canonical_customer_twin_id", "customer_enterprise_twin_id", "named_customer", "procurement_status_control", "procurement_stage", "commercial_type_wave5", "wave5_pipeline_qualification", "timing", "value"},
-        "ai_reinvention_assessment": {"scope", "current_operating_model", "business_functions_affected", "timing", "executive_implications"},
+        "market_participant_twin": {"name", "classification", "commercial_significance", "market_significance", "role", "capabilities", "relationships", "current_activity"}, "transformation_programme": {"programme_name", "owning_enterprise", "owning_business_unit", "strategic_objective", "phase", "timeline", "budget"},
+        "opportunity_hypothesis": {"opportunity_title", "client_problem", "canonical_customer_twin_id", "customer_enterprise_twin_id", "named_customer", "procurement_status_control", "procurement_stage", "business_unit", "buyer", "commercial_type_wave5", "wave5_pipeline_qualification", "timing", "value"},
+        "ai_reinvention_assessment": {"scope", "current_operating_model", "business_functions_affected", "timing", "executive_implications", "ai_disruption_mechanism", "expected_tipping_point"},
         "evidence": {"supported_claim", "supported_object", "publication_date", "collection_date"}, "unknown": {"question", "object", "commercial_impact"}, "contradiction": {"issue", "commercial_impact"},
         "relationship": {"rationale", "relationship_type", "source", "target"}, "membership": {"inclusion_rationale", "membership_role", "parent_industry_twin", "child_identity"},
     }
