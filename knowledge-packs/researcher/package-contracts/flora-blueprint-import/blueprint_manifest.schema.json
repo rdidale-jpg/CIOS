@@ -1,0 +1,137 @@
+{
+  "$defs": {
+    "BlueprintFile": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "required": {
+          "default": false,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "role": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "title": "BlueprintFile",
+      "type": "object"
+    },
+    "BlueprintRecordSet": {
+      "additionalProperties": false,
+      "properties": {
+        "count": {
+          "minimum": 0,
+          "title": "Count",
+          "type": "integer"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "record_class": {
+          "title": "Record Class",
+          "type": "string"
+        },
+        "required": {
+          "default": false,
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "record_class",
+        "path",
+        "count"
+      ],
+      "title": "BlueprintRecordSet",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Implemented Blueprint manifest profile; unknown fields fail closed.",
+  "properties": {
+    "enterprise_id": {
+      "title": "Enterprise Id",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/BlueprintFile"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "final_twin_spine_workbook": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Final Twin Spine Workbook"
+    },
+    "package_id": {
+      "title": "Package Id",
+      "type": "string"
+    },
+    "package_version": {
+      "title": "Package Version",
+      "type": "string"
+    },
+    "profile_version": {
+      "title": "Profile Version",
+      "type": "string"
+    },
+    "record_sets": {
+      "items": {
+        "$ref": "#/$defs/BlueprintRecordSet"
+      },
+      "title": "Record Sets",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "package_id",
+    "package_version",
+    "enterprise_id",
+    "profile_version"
+  ],
+  "title": "BlueprintManifest",
+  "type": "object"
+}
