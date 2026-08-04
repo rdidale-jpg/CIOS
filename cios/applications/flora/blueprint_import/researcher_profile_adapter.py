@@ -60,7 +60,9 @@ def adapt_researcher_payload(record_class: str, source: dict[str, Any]) -> tuple
         problem = source.get("client_problem")
         aliases.update(title=source.get("opportunity_title"),
                        client_problem=(problem.get("customer_problem") if isinstance(problem, dict) else problem),
-                       affected_enterprises=[source.get("canonical_customer_twin_id") or source.get("customer_enterprise_twin_id") or source.get("named_customer")],
+                       affected_enterprises=list(dict.fromkeys(x for x in
+                           (source.get("named_customer"), source.get("canonical_customer_twin_id"),
+                            source.get("customer_enterprise_twin_id")) if x)),
                        procurement_status=source.get("procurement_status_control") or source.get("procurement_stage"),
                        business_unit=source.get("business_unit"), buyer=source.get("buyer"),
                        commercial_type=source.get("commercial_type_wave5"), value_type=(source.get("wave5_pipeline_qualification") or {}).get("value_type_wave5"))

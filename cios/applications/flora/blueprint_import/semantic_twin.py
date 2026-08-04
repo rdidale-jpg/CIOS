@@ -295,10 +295,17 @@ def _object(candidate: dict[str, Any]) -> SemanticObject:
     elif evidence and truth in {"evidence_backed", "fact", "verified"}: sufficiency, permitted = "supported fact", "executive understanding"
     elif evidence: sufficiency, permitted = "supported interpretation", "executive understanding"
     else: sufficiency, permitted = "unsupported claim", "not eligible for prominence"
+    # Owner-specific identity fields take precedence over the generic scope
+    # fallback.  In particular, an Opportunity's title is its canonical
+    # display identity; the absence of a generic ``subject`` must not turn a
+    # supplied opportunity into the synthetic label "Twin scope".
+    subject = p.get("subject") or p.get("enterprise_name") or p.get("organisation_name")
+    if not subject and declared_kind in {"opportunity", "opportunity_hypothesis", "ranked_opportunity", "opportunity_twin"}:
+        subject = p.get("title") or p.get("opportunity_name") or p.get("opportunity_title")
     return SemanticObject(
         str(candidate.get("candidate_record_id") or candidate.get("original_source_id") or "candidate"),
         str(candidate.get("candidate_object_class") or "unclassified"), statement,
-        str(p.get("subject") or p.get("enterprise_name") or p.get("organisation_name") or "Twin scope"),
+        str(subject or "Twin scope"),
         tuple(map(str, evidence)), str(p.get("freshness") or p.get("observation_date") or "unknown"),
         str(p.get("confidence") or "bounded/unspecified"),
         "governed" if candidate.get("governance_status") in {"governed", "accepted"} else "candidate",
