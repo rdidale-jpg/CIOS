@@ -2,14 +2,13 @@
 from __future__ import annotations
 
 import json
-import re
 import zipfile
 from io import BytesIO
 from typing import Any
 
+from pydantic import ValidationError
+from .contract import BlueprintManifest
 from .models import BlueprintPackageIdentity, PackageReceiptError
-
-_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:-]{1,127}$")
 
 ROOT_MANIFEST = "blueprint_manifest.json"
 
@@ -51,22 +50,23 @@ def read_root_manifest(package: zipfile.ZipFile) -> dict[str, Any]:
     return manifest
 
 
-def _require_safe_id(data: dict[str, Any], key: str) -> str:
-    value = str(data.get(key) or "").strip()
-    if not _ID_RE.fullmatch(value):
-        raise PackageReceiptError(INVALID_SCHEMA_MESSAGE)
-    return value
+def parse_manifest(data: dict[str, Any]) -> BlueprintManifest:
+    """Parse with the canonical contract while keeping Flora's safe diagnostic."""
+    try:
+        return BlueprintManifest.model_validate(data)
+    except ValidationError as exc:
+        raise PackageReceiptError(INVALID_SCHEMA_MESSAGE) from exc
 
 
 def read_identity(content: bytes) -> BlueprintPackageIdentity:
     try:
         with zipfile.ZipFile(BytesIO(content)) as package:
-            manifest = read_root_manifest(package)
+            manifest = parse_manifest(read_root_manifest(package))
     except zipfile.BadZipFile as exc:
         raise PackageReceiptError("Blueprint package must be a valid ZIP archive") from exc
     return BlueprintPackageIdentity(
-        package_id=_require_safe_id(manifest, "package_id"),
-        package_version=_require_safe_id(manifest, "package_version"),
-        enterprise_id=_require_safe_id(manifest, "enterprise_id"),
-        profile_version=_require_safe_id(manifest, "profile_version"),
+        package_id=manifest.package_id,
+        package_version=manifest.package_version,
+        enterprise_id=manifest.enterprise_id,
+        profile_version=manifest.profile_version,
     )
