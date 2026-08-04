@@ -35,6 +35,15 @@ def test_pilot_diagnostics_market_participant_success_and_disabled(monkeypatch, 
     assert "loaded profile version" in html
     assert "loaded profile checksum" in html
     assert "selector used from researcher_v1.json" in html
+    for stage in (
+        "Stage 1 — Candidate",
+        "Stage 2 — Source and semantic field availability",
+        "Stage 3 — Observation generation",
+        "Stage 4 — Canonical owner assessment",
+        "Stage 5 — Executive projection",
+        "Stage 6 — Rendered page",
+    ):
+        assert stage in html
 
     monkeypatch.delenv("FLORA_PILOT_DIAGNOSTICS", raising=False)
     html, status = executive_workspace_page(run_id, {}, view="aspect", collection="market-participants")
@@ -55,6 +64,12 @@ def test_pilot_diagnostics_industry_enterprise_research_and_stale(monkeypatch, t
     assert "stale_candidate_representation" in industry
     assert "Pilot Diagnostic Mode flag" in industry
     assert "FLORA_PILOT_DIAGNOSTICS=1" in industry
+    advanced, status = executive_workspace_page(run_id, {}, view="diagnostics")
+    assert status == 200
+    assert "Observation Pipeline runtime comparison" in advanced
+    assert "Industry Overview failure" in advanced
+    assert "BT Group failure" in advanced
+    assert "Market Participant success" in advanced
 
     bt, status = executive_workspace_page(run_id, {}, view="enterprise", enterprise_id="ent-bt")
     assert status == 200

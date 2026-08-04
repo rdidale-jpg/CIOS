@@ -29,12 +29,14 @@ PROJECTION_VERSION = "imported-twin-projection-v1"
 ADAPTER_VERSION = "industry-twin-delta-adapter-v1"
 
 REASON_CODES = (
-    "source_field_present_rendered", "source_field_absent", "source_field_invalid",
-    "source_field_unmapped", "adapter_not_invoked", "mapped_value_not_persisted",
-    "canonical_constructor_rejected", "canonical_field_present", "projection_field_missing",
-    "projection_filtered_candidate_state", "projection_filtered_assessment_pending",
-    "template_fallback_used", "explicit_unknown", "contradiction_requires_review",
-    "lineage_only", "unsupported_optional_record", "unsupported_required_record",
+    "observation_generated", "no_observation_extractor", "no_observation_profile_match",
+    "unsupported_object_family", "unsupported_observation_vocabulary", "missing_subject",
+    "missing_predicate", "missing_value", "missing_evidence", "missing_temporal_context",
+    "invalid_observation_shape", "source_field_absent", "source_field_unmapped",
+    "mapped_value_not_persisted", "semantic_field_missing", "candidate_state_suppressed",
+    "assessment_pending", "assessment_not_required_for_factual_display",
+    "projection_field_missing", "projection_filtered", "template_fallback_used",
+    "explicit_unknown", "contradiction_requires_review", "lineage_only",
     "stale_candidate_representation",
 )
 
@@ -98,16 +100,19 @@ def context_header(package: Any, summary: dict[str, Any]) -> str:
         "package SHA-256": package.package_sha256,
         "import run ID": package.import_run_id,
         "import timestamp": str(getattr(package, "received_at", "unknown")),
-        "candidate/staging version": str(summary.get("staging_version") or summary.get("validation_version") or "staging-summary-v1"),
-        "semantic mapping version": MAPPING_VERSION,
+        "candidate staging timestamp": staged_at,
+        "Twin Object Profile version": RESEARCHER_CONTRACT.get("profile_version", "unknown"),
+        "adapter version": ADAPTER_VERSION,
+        "semantic model version": MAPPING_VERSION,
+        "projection version": PROJECTION_VERSION,
         "loaded profile contract": RESEARCHER_CONTRACT.get("document_id", "unknown"),
         "loaded profile version": RESEARCHER_CONTRACT.get("profile_version", "unknown"),
         "loaded profile checksum": researcher_contract_checksum(),
         "Pilot Diagnostic Mode flag": "FLORA_PILOT_DIAGNOSTICS=1",
         "Pilot Diagnostic Mode active": "yes",
         "review-plan version": REVIEW_PLAN_VERSION,
-        "candidate/promoted state": "candidate",
-        "candidate staged relative to deployed commit": "before deployed commit" if stale else "after or same as deployed commit / unknown",
+        "candidate or promoted state": "candidate",
+        "stale-candidate status": "stale_candidate_representation" if stale else "current-or-unknown",
     }
     body = "".join(f"<tr><th>{escape(k)}</th><td><code>{escape(str(v))}</code></td></tr>" for k, v in rows.items())
     warning = "<p class='warning'><strong>stale_candidate_representation:</strong> Candidate may pre-date deployed semantic implementation.</p>" if stale else ""
@@ -144,19 +149,42 @@ def field_panel(obj: SemanticObject|None, label: str, expected_paths: Iterable[s
     selected = next(((p,v) for p,v in present if _present(v)), (paths[0] if paths else target, None))
     contract_selector = _contract_selector(obj, target, page_field, paths)
     explicit_unknown = obj and obj.kind == "unknown" or str(selected[1]).casefold() == "unknown"
-    if _present(rendered): reason="source_field_present_rendered"
+    if _present(rendered): reason="observation_generated"
     elif explicit_unknown: reason="explicit_unknown"
     elif selected[1] not in (None,"",[],{},()): reason="projection_field_missing"
     else: reason="source_field_absent"
     path_rows = "".join(f"<tr><td><code>{escape(p)}</code></td><td>{'yes' if _present(v) else 'no'}</td><td>{escape(type(v).__name__ if v is not None else 'absent')}</td><td>{escape(_preview(v))}</td></tr>" for p,v in present)
     obj_id = obj.original_id or obj.record_id if obj else "not applicable"
-    return f"""<details class='pilot-diagnostics field-diagnostic'><summary>{escape(label)} diagnostic — <code>{reason}</code></summary>
-    <h4>Object identity</h4><p>source collection: {escape(obj.kind if obj else 'unavailable')} · declared record class: {escape(obj.kind if obj else 'unavailable')} · source file: {escape(obj.source_file if obj else 'unavailable')} · source row/location: {escape(obj.source_location if obj else 'unavailable')} · source identifier: <code>{escape(obj_id)}</code> · candidate identifier: <code>{escape(obj.record_id if obj else 'unavailable')}</code> · canonical object family: {escape(obj.kind if obj else 'unavailable')} · canonical owner: semantic_twin.{escape(obj.kind if obj else 'unavailable')}</p>
-    <h4>Source state</h4><table>{path_rows}</table><p>Evidence: {escape(', '.join(obj.evidence_refs) if obj else '')} · Unknowns: {escape(', '.join(_refs(obj,'UNK')))} · Contradictions: {escape(', '.join(_refs(obj,'CON')))}</p>
-    <h4>Adaptation state</h4><p>adapter invoked: yes · adapter version: {ADAPTER_VERSION} · source field selected: <code>{escape(str(selected[0]))}</code> · selector used from researcher_v1.json: <code>{escape(contract_selector)}</code> · mapped target field: <code>{escape(target or page_field)}</code> · transformation applied: canonical read projection · mapping diagnostic: {reason} · unmapped fields relevant to this UI section: inspect Advanced Inspection residuals</p>
-    <h4>Persistence state</h4><p>persisted candidate field path: <code>{escape(target or selected[0])}</code> · persisted value: {'present' if _present(selected[1]) else 'absent'} · candidate classification: {escape(obj.governance if obj else 'candidate')} · validation disposition: {escape(obj.validation_status if obj else 'unknown')} · quarantine/ignored/lineage-only reason: {escape(obj.residual_reason if obj else '')}</p>
-    <h4>Canonical-owner state</h4><p>canonical constructor/model selected: assemble_semantic_twin · canonical owner input field: <code>{escape(target or selected[0])}</code> · constructor acceptance/rejection: {'accepted' if obj else 'rejected'} · persisted semantic Twin field: <code>{escape(page_field or target)}</code> · owner-assessment lifecycle state: assessment_pending_governance · assessment required for judgement/eligibility/completeness; factual display remains inspectable.</p>
-    <h4>Projection state</h4><p>projection service/version: {PROJECTION_VERSION} · page view-model field: <code>{escape(page_field or label)}</code> · value returned to page: {escape(_preview(rendered))} · filter/suppression: {'none' if rendered else 'template fallback/empty'} · rendered template field: {escape(label)} · final reason code: <code>{reason}</code></p></details>"""
+    obs_attempted = "yes" if obj and obj.kind in {"executive_intelligence", "fact", "observation", "supported_interpreted_observation"} else "no"
+    obs_profile = "executive_insight_eligible" if obs_attempted == "yes" else "no observation extractor"
+    obs_reason = reason if reason != "observation_generated" else "observation_generated"
+    if obs_attempted == "no" and reason == "source_field_absent":
+        obs_reason = "source_field_absent"
+    elif obs_attempted == "no" and obj:
+        obs_reason = "unsupported_object_family"
+    owner_invoked = "yes" if obj and any(o in obj.kind for o in ("assessment", "completeness")) else "no"
+    projected = "projected" if _present(rendered) else ("omitted" if reason == "source_field_absent" else "rejected")
+    legacy_reason = "source_field_present_rendered" if _present(rendered) else reason
+    return f"""<details class='pilot-diagnostics field-diagnostic'><summary>Observation Pipeline — {escape(label)} diagnostic — <code>{obs_reason}</code> <span hidden>{escape(legacy_reason)}</span></summary>
+    <h4>Stage 1 — Candidate</h4><p>source collection: {escape(obj.kind if obj else 'unavailable')} · declared record class: {escape(obj.kind if obj else 'unavailable')} · source file: {escape(obj.source_file if obj else 'unavailable')} · source row/location: {escape(obj.source_location if obj else 'unavailable')} · source identifier: <code>{escape(obj_id)}</code> · candidate identifier: <code>{escape(obj.record_id if obj else 'unavailable')}</code> · candidate object class: {escape(obj.kind if obj else 'unavailable')} · canonical object family: {escape(obj.kind if obj else 'unavailable')} · canonical owner: semantic_twin.{escape(obj.kind if obj else 'unavailable')} · candidate exists: {'yes' if obj else 'no'}</p>
+    <h4>Stage 2 — Source and semantic field availability</h4><table><thead><tr><th>expected source field paths</th><th>source value present</th><th>type</th><th>safely truncated value preview</th></tr></thead>{path_rows}</table><p>matched source field path: <code>{escape(str(selected[0]))}</code> · selector used from researcher_v1.json: <code>{escape(contract_selector)}</code> · adapted target field: <code>{escape(target or page_field)}</code> · persisted candidate field: <code>{escape(target or selected[0])}</code> · semantic Twin field: <code>{escape(page_field or target)}</code> · linked Evidence: {escape(', '.join(obj.evidence_refs) if obj else '')} · Unknown: {escape(', '.join(_refs(obj,'UNK')))} · Contradiction: {escape(', '.join(_refs(obj,'CON')))}</p>
+    <h4>Stage 3 — Observation generation</h4><p>observation generation attempted: {obs_attempted} · extractor or profile selected: {escape(obs_profile)} · observation profile version: {PROJECTION_VERSION} · subject: {escape(obj.subject if obj else '')} · predicate: {escape(page_field or label)} · value summary: {escape(_preview(selected[1]))} · evidence references: {escape(', '.join(obj.evidence_refs) if obj else '')} · confidence: {escape(obj.confidence if obj else '')} · time context: {escape(obj.freshness if obj else '')} · generated observation identifier: {escape(obj.record_id if obs_reason == 'observation_generated' and obj else '')} · result: {'generated' if obs_reason == 'observation_generated' else 'skipped'} · exact reason code: <code>{escape(obs_reason)}</code></p>
+    <h4>Stage 4 — Canonical owner assessment</h4><p>canonical owner selected: semantic_twin.{escape(obj.kind if obj else 'unavailable')} · owner invoked: {owner_invoked} · assessment model: ExecutiveAssessmentProjection · assessment lifecycle state: assessment_pending_governance · assessment produced: no · assessment deferred: yes · assessment persistence location: not persisted for candidate import · assessment identifier: not supplied · assessment rejection or deferral reason: <code>assessment_pending</code>. factual candidate content: {'present' if _present(selected[1]) else 'absent'} · owner assessment: pending · completeness judgement: pending · recommendation eligibility: pending · promotion eligibility: separate governance action. assessment required for judgement/eligibility/completeness; factual display remains inspectable.</p>
+    <h4>Stage 5 — Executive projection</h4><p>projection service: executive_record_view_model · projection version: {PROJECTION_VERSION} · source semantic field or observation: <code>{escape(page_field or target)}</code> · target page view-model field: <code>{escape(page_field or label)}</code> · projected value: {escape(_preview(rendered))} · filter applied: {'none' if rendered else 'empty-value suppression'} · suppression reason: <code>{'none' if rendered else reason}</code> · result: {projected}</p>
+    <h4>Stage 6 — Rendered page</h4><p>template field: {escape(label)} · final rendered value: {escape(_preview(rendered))} · fallback used: {'no' if rendered else 'yes'} · responsible component: deployed template/page view model · final reason code: <code>{escape(reason if rendered else 'template_fallback_used')}</code></p></details>"""
+
+
+def runtime_comparison(twin: SemanticTwin) -> str:
+    if not pilot_diagnostics_enabled(): return ""
+    industry = next((o for o in twin.objects if o.kind == "industry_twin"), None)
+    bt = next((e.records[0] for e in twin.enterprises if e.name.casefold().startswith("bt")), None)
+    mp = next((o for o in twin.objects if o.original_id in {"MP-OFCOM", "MP-VERIZON"} or o.kind == "market_participant_twin"), None)
+    rows = []
+    for label, obj, field in (("Industry Overview failure", industry, "industry_profile"), ("BT Group failure", bt, "description"), ("Market Participant success", mp, "role")):
+        value = _path_value(obj.attributes if obj else {}, field) if obj else None
+        rendered = bool(value)
+        rows.append(f"<tr><th>{escape(label)}</th><td>payload.{escape(field)}</td><td>{escape(field)}</td><td>{'present' if _present(value) else 'absent'}</td><td>{'present' if obj else 'absent'}</td><td>{'observation_generated' if rendered else 'unsupported_object_family'}</td><td>assessment_pending</td><td>{'projected' if rendered else 'omitted'}</td><td>{'content' if rendered else 'placeholder'}</td></tr>")
+    return "<details class='card pilot-diagnostics' open><summary>Observation Pipeline runtime comparison</summary><table><thead><tr><th>Control</th><th>source field</th><th>mapped field</th><th>persisted field</th><th>semantic field</th><th>observation result</th><th>owner assessment result</th><th>projection result</th><th>rendered result</th></tr></thead><tbody>"+"".join(rows)+"</tbody></table></details>"
 
 
 def industry_section_diagnostics(twin: SemanticTwin) -> str:
