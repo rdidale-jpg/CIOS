@@ -128,3 +128,33 @@ def test_tel001_candidates_are_shared_by_governance_twin_map_and_research_gaps(m
     assert "17 market participant concepts require enrichment or classification" in gaps
     assert "13 major-programme hypotheses require enrichment" in gaps
     assert "17 opportunity hypotheses require enrichment" in gaps
+
+
+def test_exact_tel001_pilot_import_reaches_candidate_governance_review(monkeypatch, tmp_path):
+    """The immutable reported package opens review without adding promotion authority."""
+    from cios.applications.flora.blueprint_import import review_plan
+    from cios.applications.flora.blueprint_import.promotion import can_approve_blueprint_promotion
+    from cios.applications.flora.blueprint_import.views import review_page, upload_and_validate_blueprint
+
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_ENVIRONMENT", "pilot")
+    monkeypatch.delenv("FLORA_PILOT_IMPORT_BYPASS", raising=False)
+    monkeypatch.delenv("FLORA_PILOT_AUTO_SIGN_IN", raising=False)
+    monkeypatch.setattr(review_plan, "ASYNC_THRESHOLD", 2000)
+
+    _, status, target = upload_and_validate_blueprint(
+        {"blueprint_zip": EVIDENCE.read_bytes()},
+        {"blueprint_zip.filename": EVIDENCE.name, "blueprint_zip.content_type": "application/zip", "expected_type": "mixed"},
+        {},
+    )
+    assert status == 200
+    review, review_status = review_page(target.rsplit("/", 1)[-1], {})
+
+    assert review_status == 200
+    assert "You are not authorised to review" not in review
+    assert "Review Blueprint proposed changes" in review
+    assert "industry_twin" in review
+    assert "Accepted" in review and "Quarantined" in review
+    assert "Promotion permission required" in review
+    assert not can_approve_blueprint_promotion({}, "TEL-001")
+    assert not (tmp_path / "memory").exists()

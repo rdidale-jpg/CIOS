@@ -58,7 +58,7 @@ class ImportMappingService:
         self.registry = registry or BlueprintPackageRegistry(); self.repository = repository or ImportMappingRepository(); self.ledger = ledger or BlueprintImportLedger()
     def record_mapping(self, candidate: dict[str, Any], disposition: MappingDisposition, actor: str, headers: Any, canonical_type: str = "", canonical_id: str = "", rationale: str = "") -> ImportMappingRecord:
         package = self.registry.get(str(candidate["source_package_ref"]))
-        if not package or not can_review_blueprint_candidate(headers, package.identity.enterprise_id):
+        if not package or not can_review_blueprint_candidate(headers, package.identity.enterprise_id, package.workspace_id):
             raise BlueprintReviewError("Actor is not authorised to create Blueprint mappings")
         if disposition not in MappingDisposition.__args__:
             raise BlueprintReviewError("Unsupported mapping disposition")
