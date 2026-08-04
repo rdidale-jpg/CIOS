@@ -26,6 +26,7 @@ from .pilot_diagnostics import (
     industry_section_diagnostics as _pilot_industry_section_diagnostics,
     page_reconciliation as _pilot_page_reconciliation,
     research_gap_trace as _pilot_research_gap_trace,
+    runtime_comparison as _pilot_runtime_comparison,
 )
 from .research_requirements import research_requirements
 from .semantic_twin import (SemanticEnterprise, SemanticObject, SemanticTwin, assemble_semantic_twin,
@@ -1204,7 +1205,7 @@ def export_research_gap_brief(import_run_id: str, headers: Any, domain: str = "a
     return research_gap_brief(twin, title, context.commercial_mission, domain, context.employer_context), f"{safe}-Research-Gap-and-Enrichment-Brief.md", 200
 
 def _advanced_diagnostics(twin,run_id,summary,mission):
-    return _primary_nav(run_id,"inspection")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
+    return _primary_nav(run_id,"inspection")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+_pilot_runtime_comparison(twin)+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
 
 
 def _enterprise_completeness(ent: SemanticEnterprise, mission: CommercialMission | None) -> tuple[CompletenessAspect, ...]:
