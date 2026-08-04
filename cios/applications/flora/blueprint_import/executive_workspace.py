@@ -455,11 +455,16 @@ def _enterprise_card(e, run_id):
     position = _field(identity, "strategic_ambition", "market_position", "current_position") if identity else ""
     pressure = next((o.consequence for o in e.records if o.consequence and o.evidence_refs), "")
     posture = _field(identity, "transformation_posture") if identity else ""
-    complete = bool(description and position and pressure and posture)
-    body = (f"<p>{escape(description)}</p><p><strong>Industry/domain:</strong> {escape(', '.join(domains) or 'Not established')}</p>"
-            f"<p><strong>Strategic position:</strong> {escape(position)}</p><p><strong>Material pressure:</strong> {escape(pressure)}</p>"
-            f"<p><strong>Transformation posture:</strong> {escape(posture)}</p>" if complete else
-            f"<p><strong>Enterprise profile incomplete</strong></p><p>{escape(description or 'A plain-language organisation description is not supplied.')} Strategic position, material pressure or transformation posture requires supported research.</p><p><strong>Industry/domain:</strong> {escape(', '.join(domains) or 'Not established')}</p>")
+    body = (f"<p>{escape(description)}</p>" if description else
+            "<p><strong>Organisation description pending owner assessment.</strong></p>")
+    body += f"<p><strong>Industry/domain:</strong> {escape(', '.join(domains) or 'Not established')}</p>"
+    if position:
+        body += f"<p><strong>Strategic position:</strong> {escape(position)}</p>"
+    if pressure:
+        body += f"<p><strong>Material pressure:</strong> {escape(pressure)}</p>"
+    if posture:
+        body += f"<p><strong>Transformation posture:</strong> {escape(posture)}</p>"
+    body += "<p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p>"
     canonical_fields = ""
     if identity:
         canonical_fields = "".join(
@@ -682,15 +687,23 @@ def _dossier(ent, twin, run_id, mission):
         ("industry role", _field(identity, "industry_role", "role") if identity else ""),
         ("material current position", _field(identity, "current_position") if identity else "")) if not value]
     if missing_overview:
-        overview = f"<p><strong>Organisation overview incomplete</strong></p><p>Research required: {escape(', '.join(missing_overview))}.</p>"
-        hero = "Organisation overview incomplete"
+        overview = (f"<p>{escape(description or 'Organisation description pending owner assessment.')}</p>"
+                    f"<p><strong>Supplied candidate fields remain inspectable; unresolved owner requirements:</strong> {escape(', '.join(missing_overview))}.</p>")
+        hero = description or "Candidate enterprise intelligence supplied; owner assessment pending governance"
     else:
         overview = f"<p>{escape(description)}</p><p><strong>Organisational form:</strong> {escape(_field(identity, 'ownership', 'organisational_form'))}</p><p><strong>Principal activities:</strong> {escape(_field(identity, 'principal_activities', 'activities'))}</p><p><strong>Role in industry:</strong> {escape(_field(identity, 'industry_role', 'role'))}</p><p><strong>Current position:</strong> {escape(_field(identity, 'current_position'))}</p>"
         hero = description
     overview += f"<p><strong>Domain:</strong> {escape(', '.join(domains) or 'Not established')}</p><p><strong>Completeness:</strong> {len(missing_overview)} organisation overview requirement(s) unresolved.</p>"
     def gap(title, exists, fields, why):
         return f"<section class='card'><h2>{title}</h2><p><strong>Insufficient</strong></p><p>{exists}</p><p>{why}</p><p><strong>Research required:</strong> {', '.join(fields)}.</p></section>"
-    sections = [f"<section class='card' id='enterprise-overview'><h2>Organisation Overview</h2>{overview}</section>"]
+    canonical_detail = ""
+    if identity:
+        canonical_detail = "".join(
+            f"<p><strong>{escape(label)}:</strong> {escape(_present_value(value))}</p>"
+            for label, value in executive_record_view_model(identity).fields
+            if label != "Overview"
+        )
+    sections = [f"<section class='card' id='enterprise-overview'><h2>Organisation Overview</h2>{overview}{canonical_detail}<p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p></section>"]
     position = _field(identity, "strategic_ambition", "market_position", "current_position") if identity else ""
     sections.append(f"<section class='card'><h2>Strategic Position and Ambition</h2><p>{escape(position)}</p></section>" if position else gap("Strategic Position and Ambition", "No supported strategic position is supplied.", ("strategic ambition", "market position", "supporting evidence"), "Without it Flora cannot explain the organisation's direction."))
     financials=[o for o in relevant if o.kind in {"financial_observation","financial_fact","economic_pool"} and all((_field(o,'metric','measure'),_field(o,'value'),_field(o,'period'),_field(o,'source')))]
@@ -769,31 +782,34 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
         contracts = "".join(f"<article class='card'><h3>{escape(r.subject)} research requirement</h3><p><strong>Find:</strong> {escape(', '.join(r.missing_fields))}.</p><p><strong>Sources:</strong> {escape(', '.join(r.source_categories))}.</p><p><strong>Acceptance test:</strong> {escape(r.acceptance_test)}</p></article>" for r in enterprise_requirements)
         content=f"<p><strong>{len(twin.enterprises)} canonical enterprises · {owner_assessed} owner-assessed enterprises</strong></p><div class='enterprise-grid'>{cards or '<p>No enterprise identities supplied.</p>'}</div><h2>Subject-specific research requirements</h2>{contracts}"
     elif key=="industry-overview":
-        rows=[o for o in objects if _owner_assessed(twin, 'industry-overview') and executive_insight_eligible(o)]
-        identity=[o for o in objects if o.kind in {"industry", "subsector"}]
+        rows=[o for o in objects if o.kind == 'industry_twin']
         def section(name, body=""):
-            return f"<section><h2>{name}</h2>{body or '<p><strong>Research gap.</strong> No supported structured content is supplied for this section.</p>'}</section>"
-        content = section("Industry definition and scope", "".join(f"<p>{escape(o.statement)}</p>" for o in identity if o.kind=="industry"))
-        content += section("Composition and sub-sectors", "".join(f"<p>{escape(o.statement)}</p>" for o in identity if o.kind=="subsector"))
-        for name in ("Size and economics", "Leading enterprises", "Market participants and competitive structure", "Political and regulatory pressures", "Economic pressures", "Social and customer change", "Technology change", "Legal and environmental factors where applicable", "Major transformation themes"):
-            content += section(name)
-        content += section("Qualified insights", "".join(_conclusion(o,run_id) for o in rows))
+            return f"<section><h2>{name}</h2>{body or '<p><strong>Unknown.</strong> No supplied candidate value is mapped for this section.</p>'}</section>"
+        industry_cards = "".join(_executive_record_card(o) for o in rows)
+        profile = "".join(f"<p><strong>{escape(label)}:</strong> {escape(_present_value(value))}</p>"
+                          for o in rows for label, value in executive_record_view_model(o).fields)
+        content = section("Industry definition and scope", "".join(f"<p>{escape(o.statement)}</p>" for o in rows))
+        content += section("Supported populated candidate sections", profile or industry_cards)
+        content += "<p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p>"
         content += f"<section><h2>Research Gaps</h2><p>Complete the unsupported industry sections above with dated, attributable evidence or explicit Unknowns.</p></section><section><h2>Advanced Inspection</h2><p><a href='/blueprint-import/{escape(run_id)}/explore'>Inspect canonical records, evidence and lineage</a></p></section>"
     elif key=="market-participants":
         identified=list(next((c.objects for c in business_collections(twin, include_empty=True, domain=domain) if c.key=='market-participants'), ()))
-        rows=[o for o in identified if _owner_assessed(twin, 'market-participants') and _field(o,'role','participant_role','market_role') and o.domains and o.evidence_refs and o.consequence]
-        content=f"<p><strong>{len(identified)} participant concepts · {len(rows)} owner-assessed participant profiles</strong></p>"+("".join(f"<article class='enterprise-card'><h3>{escape(o.subject if o.subject not in {'','Twin scope'} else o.statement)}</h3><p><strong>Role:</strong> {escape(_field(o,'role','participant_role','market_role'))}</p><p><strong>Domain:</strong> {escape(', '.join(o.domains))}</p><p>{escape(o.consequence)}</p></article>" for o in rows) if rows else "<p><strong>Research required.</strong> Find supported role, domain and market significance for every participant concept.</p>")
+        cards = "".join(_executive_record_card(o) for o in identified if executive_record_view_model(o).fields)
+        content=f"<p><strong>{len(identified)} participant concepts · 0 owner-assessed participant profiles</strong></p><p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p>"+(cards or "<p><strong>Research required.</strong> Find supported role, domain and market significance for every participant concept.</p>")
     elif key=="major-programmes":
         rows=[o for o in objects if o.kind=='transformation_programme']
-        ready=[o for o in rows if _owner_assessed(twin, 'major-programmes') and o.statement and (_field(o,'owner') or o.subject!='Twin scope') and o.consequence and _field(o,'stage','phase') and _field(o,'timing','expected_horizon') and o.evidence_refs]
-        content=f"<p><strong>{len(rows)} programme hypotheses · {len(ready)} owner-assessed programmes</strong></p>"+("".join(f"<article class='enterprise-card'><h3>{escape(o.statement)}</h3><p><strong>Owning enterprise:</strong> {escape(_field(o,'owner') or o.subject)}</p><p><strong>Business objective:</strong> {escape(o.consequence)}</p></article>" for o in ready) if ready else "<p><strong>Research required.</strong> Find programme owner, objective, phase, timing and evidence.</p>")
+        cards = "".join(_executive_record_card(o) for o in rows if executive_record_view_model(o).fields)
+        content=f"<p><strong>{len(rows)} programme hypotheses · 0 owner-assessed programmes</strong></p><p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p>"+(cards or "<p><strong>Research required.</strong> Find programme owner, objective, phase, timing and evidence.</p>")
     elif key=="opportunities":
-        rows=[o for o in objects if 'opportun' in o.kind]; ready=[o for o in rows if _owner_assessed(twin, 'opportunities') and _opportunity_contract(o,mission)[1]]
-        table=("<table class='opportunity-table'><thead><tr><th>Customer</th><th>Opportunity</th><th>Value</th><th>Timing</th><th>Status</th></tr></thead><tbody>"+"".join(f"<tr><td>{escape(', '.join(o.affected_organisations) or o.subject)}</td><td>{escape(o.statement)}</td><td>{escape(_field(o,'value','value_range') or 'Not established')}</td><td>{escape(_field(o,'timing','procurement_start') or 'Timing unknown')}</td><td>{escape(_field(o,'status','procurement_status') or 'Status unknown')}</td></tr>" for o in ready)+"</tbody></table>") if ready else "<p>0 sales-ready opportunities.</p>"
-        content=f"<h2>Sales-ready opportunities</h2>{table}<h2>Developing hypotheses</h2><p><strong>{len(rows)-len(ready)} hypotheses require further research.</strong></p><h2>Research required</h2><ul><li>customer</li><li>client problem</li><li>business unit</li><li>timing</li><li>status</li><li>value</li><li>buyer</li><li>evidence</li></ul>"
+        rows=[o for o in objects if 'opportun' in o.kind]
+        ready=[o for o in rows if _owner_assessed(twin, 'opportunities') and _opportunity_contract(o,mission)[1]]
+        inspectable=[o for o in rows if executive_record_view_model(o).fields]
+        table=("<table class='opportunity-table'><thead><tr><th>Customer</th><th>Opportunity</th><th>Value</th><th>Timing</th><th>Status</th></tr></thead><tbody>"+"".join(f"<tr><td>{escape(', '.join(o.affected_organisations) or o.subject)}</td><td>{escape(o.statement)}</td><td>{escape(_field(o,'value','value_range') or 'Not established')}</td><td>{escape(_field(o,'timing','procurement_start','procurement_timing') or 'Timing unknown')}</td><td>{escape(_field(o,'status','procurement_status') or 'Status unknown')}</td></tr>" for o in ready)+"</tbody></table>") if ready else "<p>0 sales-ready opportunities.</p>"
+        content=f"<h2>Sales-ready opportunities</h2>{table}<h2>Inspectable candidate hypotheses</h2><p><strong>{len(inspectable)} supplied candidate hypotheses · owner assessment pending governance.</strong></p>" + "".join(_executive_record_card(o) for o in inspectable)
     else:
-        rows=[o for o in objects if _field(o,'expected_horizon','tipping_point','reinvention_timing')]
-        content=("<p><strong>Absent</strong></p><p>This Twin contains no structured assessment of:</p><ul><li>AI-native disruption mechanism</li><li>enterprise or business-unit exposure</li><li>adoption indicators</li><li>expected horizon</li><li>response timing</li></ul><h2>Research required</h2><p>Research the disruption mechanism, exposure, adoption indicators, horizon, response timing and evidence.</p>" if not rows or not _owner_assessed(twin, 'reinvention-timing') else "".join(_conclusion(o,run_id) for o in rows))
+        rows=[o for o in objects if o.kind in {'ai_reinvention_assessment', 'reinvention_assessment'}]
+        cards = "".join(_executive_record_card(o) for o in rows if executive_record_view_model(o).fields)
+        content=(f"<p><strong>{len(rows)} candidate reinvention assessment record(s)</strong></p><p><span class='pill'>Owner assessment supplied as candidate · pending governance</span></p>" + cards if rows else "<p><strong>Absent</strong></p><p>This Twin contains no structured assessment of AI-native disruption mechanism, exposure, adoption indicators, expected horizon or response timing.</p>")
     requirements = [r for r in research_requirements(twin, executive_assessments(twin)) if r.aspect == key]
     fields = tuple(dict.fromkeys(field for r in requirements for field in r.missing_fields))
     sources = tuple(dict.fromkeys(source for r in requirements for source in r.source_categories))
@@ -890,7 +906,9 @@ def _research_gaps(twin, run_id, mission):
                   "No source research is commissioned solely because owner assessment is pending governance.")
         impact, reason = _commercial_impact(a.key)
         acceptance = rows[0].acceptance_test if rows else a.acceptance_criteria
-        cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(statement)}</strong></p><p><strong>{escape(_assessment_state_label(a.state))}</strong></p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><h3>Why this matters</h3><p>{escape(_COLLECTION_LANGUAGE[a.key])}</p><h3>Executive dependency impact</h3><p><strong>{impact}</strong></p><p><strong>Reason:</strong> {escape(reason)}</p><p><strong>Researcher action:</strong> {escape(action)}</p><p><strong>Acceptance criteria:</strong> {escape(acceptance)}</p><details><summary>Architectural traceability</summary><p><strong>Governed owner:</strong> {escape(a.canonical_owner)}</p><p><strong>Completeness authority:</strong> {escape(a.completeness_authority)}</p><p><strong>Eligibility authority:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence:</strong> {escape(a.evidence_source)}</p><p><strong>Canonical authority:</strong> {escape(a.rule_version)}</p></details><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Inspect all {affected} affected subjects</a></article>")
+        dispositions = tuple(dict.fromkeys(disposition for r in rows for _field_name, disposition in r.source_dispositions))
+        disposition_html = (f"<p><strong>Source dispositions:</strong> {escape(', '.join(dispositions))}</p>" if dispositions else "<p><strong>Source dispositions:</strong> source_field_present_unassessed where supplied candidate fields await owner assessment; no source research is commissioned for those fields.</p>")
+        cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(statement)}</strong></p><p><strong>{escape(_assessment_state_label(a.state))}</strong></p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><h3>Why this matters</h3><p>{escape(_COLLECTION_LANGUAGE[a.key])}</p><h3>Executive dependency impact</h3><p><strong>{impact}</strong></p><p><strong>Reason:</strong> {escape(reason)}</p><p><strong>Researcher action:</strong> {escape(action)}</p><p><strong>Acceptance criteria:</strong> {escape(acceptance)}</p><details><summary>Architectural traceability</summary><p><strong>Governed owner:</strong> {escape(a.canonical_owner)}</p><p><strong>Completeness authority:</strong> {escape(a.completeness_authority)}</p><p><strong>Eligibility authority:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence:</strong> {escape(a.evidence_source)}</p><p><strong>Canonical authority:</strong> {escape(a.rule_version)}</p>{disposition_html}</details><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Inspect all {affected} affected subjects</a></article>")
     challenge_inventory = (f"{len(twin.of_kind('evidence'))} Evidence · "
                            f"{len(twin.of_kind('unknown'))} Unknowns · "
                            f"{len(twin.of_kind('contradiction'))} Contradictions")

@@ -362,3 +362,58 @@ def test_tel001_full_ui_service_path_projects_substantive_canonical_fields(monke
             counts["contradiction"], counts["ai_reinvention_assessment"]) == (17, 92, 30, 11, 7)
     assert summary["canonical_mutations"] == 0
     assert not (tmp_path / "memory").exists()
+
+
+def test_tel001_deployed_aspect_and_dossier_routes_render_pending_candidate_fields(monkeypatch, tmp_path):
+    """Actual HTTP page projections must not hide supplied candidate fields while owner assessment is pending."""
+    from cios.applications.flora.blueprint_import.views import upload_and_validate_blueprint
+    from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page
+
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_ENVIRONMENT", "pilot")
+    monkeypatch.delenv("FLORA_PILOT_IMPORT_BYPASS", raising=False)
+    monkeypatch.delenv("FLORA_PILOT_AUTO_SIGN_IN", raising=False)
+
+    _, status, target = upload_and_validate_blueprint(
+        {"blueprint_zip": EVIDENCE.read_bytes()},
+        {"blueprint_zip.filename": EVIDENCE.name,
+         "blueprint_zip.content_type": "application/zip", "expected_type": "mixed"}, {},
+    )
+    assert status == 200
+    run_id = target.rsplit("/", 1)[-1]
+
+    expected = {
+        "industry-overview": ("£34.7bn, down £0.3bn / 0.8% year-on-year", "Commercial Implications"),
+        "market-participants": ("Telecoms access, spectrum, complaints and infrastructure reporting", "Regulator"),
+        "major-programmes": ("BT FY30 cost and operating-model transformation", "FY26-FY30"),
+        "opportunities": ("Virgin Media O2", "Shaping opportunity"),
+        "reinvention-timing": ("Capital-intensive, regulated network operators", "2026-2028"),
+    }
+    for collection, values in expected.items():
+        page, page_status = executive_workspace_page(run_id, {}, view="aspect", collection=collection)
+        assert page_status == 200
+        assert "owner assessment pending governance" in page or "pending governance" in page
+        assert all(value in page for value in values), (collection, [value for value in values if value not in page])
+
+    enterprise_index, index_status = executive_workspace_page(run_id, {}, view="aspect", collection="enterprises")
+    assert index_status == 200
+    assert enterprise_index.count("class='enterprise-card'") == 6
+    assert "BT Group is a UK-headquartered telecommunications group" in enterprise_index
+    assert "FTTP build and take-up" in enterprise_index
+    assert "not supplied" not in enterprise_index.casefold()
+
+    bt_page, bt_status = executive_workspace_page(run_id, {}, view="enterprise", enterprise_id="ent-bt")
+    assert bt_status == 200
+    for value in (
+        "BT Group is a UK-headquartered telecommunications group",
+        "FTTP build and take-up",
+        "Openreach FTTP",
+        "EV-BT-FY26",
+    ):
+        assert value in bt_page
+    assert "not supplied" not in bt_page.casefold()
+
+    gaps, gaps_status = executive_workspace_page(run_id, {}, view="health")
+    assert gaps_status == 200
+    assert "source_field_present_unassessed" in gaps
+    assert "Find organisation description" not in gaps
