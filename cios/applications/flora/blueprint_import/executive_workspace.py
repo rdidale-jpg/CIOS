@@ -21,7 +21,8 @@ from .industry_delta_adapter import IndustryTwinDeltaAdapter
 from .intelligence_projection import executive_assessments
 from .research_requirements import research_requirements
 from .semantic_twin import (SemanticEnterprise, SemanticObject, SemanticTwin, assemble_semantic_twin,
-                            business_collections, executive_insight_eligible)
+                            business_collections, executive_insight_eligible,
+                            executive_record_view_model)
 from .twin_governance import project_twin_identity
 from .validator import BlueprintPackageValidator, can_inspect_blueprint_package
 
@@ -299,6 +300,27 @@ def _field(o: SemanticObject, *names: str) -> str:
     return ""
 
 
+def _present_value(value: Any) -> str:
+    """Render structured canonical values without consulting source lineage."""
+    if isinstance(value, dict):
+        return " · ".join(f"{str(key).replace('_', ' ').title()}: {_present_value(item)}"
+                          for key, item in value.items() if item not in (None, "", [], {}))
+    if isinstance(value, (list, tuple)):
+        return "; ".join(_present_value(item) for item in value)
+    return str(value)
+
+
+def _executive_record_card(o: SemanticObject) -> str:
+    model = executive_record_view_model(o)
+    fields = "".join(f"<p><strong>{escape(label)}:</strong> {escape(_present_value(value))}</p>"
+                     for label, value in model.fields)
+    evidence = (f"<p><strong>Evidence:</strong> {escape(', '.join(model.evidence_refs))}</p>"
+                if model.evidence_refs else "")
+    return (f"<article class='enterprise-card' id='{escape(model.record_id)}'>"
+            f"<h3>{escape(model.title)}</h3>{fields}{evidence}"
+            "<span class='pill'>Canonical candidate read model</span></article>")
+
+
 def _opportunity_card(o: SemanticObject, run_id: str) -> str:
     problem = _field(o, "client_problem", "customer_problem", "problem") or "Client problem not established"
     timing = _field(o, "why_now", "timing", "target_date", "deadline") or "Timing not established"
@@ -438,7 +460,14 @@ def _enterprise_card(e, run_id):
             f"<p><strong>Strategic position:</strong> {escape(position)}</p><p><strong>Material pressure:</strong> {escape(pressure)}</p>"
             f"<p><strong>Transformation posture:</strong> {escape(posture)}</p>" if complete else
             f"<p><strong>Enterprise profile incomplete</strong></p><p>{escape(description or 'A plain-language organisation description is not supplied.')} Strategic position, material pressure or transformation posture requires supported research.</p><p><strong>Industry/domain:</strong> {escape(', '.join(domains) or 'Not established')}</p>")
-    return f"<a class='enterprise-card' href='/blueprint-import/{escape(run_id)}/enterprises/{escape(e.identity_key)}'><h3>{escape(e.name)}</h3>{body}</a>"
+    canonical_fields = ""
+    if identity:
+        canonical_fields = "".join(
+            f"<p><strong>{escape(label)}:</strong> {escape(_present_value(value))}</p>"
+            for label, value in executive_record_view_model(identity).fields
+            if label != "Overview"
+        )
+    return f"<a class='enterprise-card' href='/blueprint-import/{escape(run_id)}/enterprises/{escape(e.identity_key)}'><h3>{escape(e.name)}</h3>{body}{canonical_fields}</a>"
 
 
 def _validation_report(twin: SemanticTwin) -> str:
@@ -630,8 +659,12 @@ def _explorer(twin, run_id, mission, selected="", domain="all"):
     active = next((c for c in collections if c.key == selected), None)
     links = "".join(f"<a class='collection-chip' href='?collection={escape(c.key)}&amp;domain={escape(domain)}'>{escape(c.label)} <b>{len(c.objects)}</b></a>" for c in collections)
     if active and active.key == "enterprises": content = enterprises or "<p>No enterprise identities supplied.</p>"
-    elif active and active.key == "opportunities": content = "".join(_opportunity_card(o, run_id) for o in active.objects)
-    elif active: content = "".join(_conclusion(o, run_id) if _owner_assessed(twin, 'industry-overview') and executive_insight_eligible(o) else f"<article class='enterprise-card'><h3>{escape(o.statement or o.original_id or 'Twin record')}</h3><p>Supporting context; not presented as an executive insight.</p>{f'<p><strong>Residual reason:</strong> {escape(o.residual_reason or o.validation_status)}</p>' if active.key == 'other' else ''}<a href='/blueprint-import/{escape(run_id)}/inspect#technical-diagnostics'>Inspect record</a></article>" for o in active.objects)
+    elif active and active.key == "opportunities": content = "".join(_executive_record_card(o) for o in active.objects)
+    elif active: content = "".join(
+        _conclusion(o, run_id) if _owner_assessed(twin, 'industry-overview') and executive_insight_eligible(o)
+        else (_executive_record_card(o) if executive_record_view_model(o).fields
+              else f"<article class='enterprise-card'><h3>{escape(o.statement or o.original_id or 'Twin record')}</h3><p>Supporting context; not presented as an executive insight.</p>{f'<p><strong>Residual reason:</strong> {escape(o.residual_reason or o.validation_status)}</p>' if active.key == 'other' else ''}<a href='/blueprint-import/{escape(run_id)}/inspect#technical-diagnostics'>Inspect record</a></article>")
+        for o in active.objects)
     else: content = "<p>Select a business collection to explore its contents.</p>"
     title = active.label if active else "Advanced Inspection"
     total = len(active.objects) if active else 0

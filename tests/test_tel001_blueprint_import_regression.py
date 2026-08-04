@@ -304,3 +304,61 @@ def test_tel001_researcher_fields_reach_canonical_owner_shapes_losslessly(monkey
     assert sum(len(collection.objects) for collection in business_collections(runtime_twin)) == 1060
     assert summary["canonical_mutations"] == 0
     assert not (tmp_path / "memory").exists()
+
+
+def test_tel001_full_ui_service_path_projects_substantive_canonical_fields(monkeypatch, tmp_path):
+    """The immutable ZIP must reach the actual deployed explorer page models."""
+    from cios.applications.flora.blueprint_import.views import upload_and_validate_blueprint
+    from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page
+    from cios.applications.flora.blueprint_import.semantic_twin import executive_record_view_model
+
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_ENVIRONMENT", "pilot")
+    monkeypatch.delenv("FLORA_PILOT_IMPORT_BYPASS", raising=False)
+    monkeypatch.delenv("FLORA_PILOT_AUTO_SIGN_IN", raising=False)
+
+    _, status, target = upload_and_validate_blueprint(
+        {"blueprint_zip": EVIDENCE.read_bytes()},
+        {"blueprint_zip.filename": EVIDENCE.name,
+         "blueprint_zip.content_type": "application/zip", "expected_type": "mixed"}, {},
+    )
+    assert status == 200
+    run_id = target.rsplit("/", 1)[-1]
+    summary = BlueprintPackageValidator().staging_summary(run_id)
+    accepted = [row for row in summary["candidates"] if row["validation_status"] == "accepted"]
+    twin = assemble_semantic_twin(accepted)
+
+    # This is the view-model constructor used by the deployed explorer, not a
+    # synthetic canonical object assembled by the test.
+    models = [executive_record_view_model(obj) for obj in twin.objects]
+    assert Counter(model.kind for model in models) >= Counter({
+        "industry_twin": 1, "enterprise_twin": 6, "market_participant_twin": 17,
+        "transformation_programme": 13, "opportunity_hypothesis": 17,
+        "ai_reinvention_assessment": 7,
+    })
+    for kind in ("industry_twin", "enterprise_twin", "market_participant_twin",
+                 "transformation_programme", "opportunity_hypothesis", "ai_reinvention_assessment"):
+        assert all(model.fields for model in models if model.kind == kind)
+
+    expected = {
+        "industry-overview": ("£34.7bn, down £0.3bn / 0.8% year-on-year", "Commercial Implications"),
+        "enterprises": ("BT Group is a UK-headquartered telecommunications group", "FTTP build and take-up"),
+        "market-participants": ("Telecoms access, spectrum, complaints and infrastructure reporting", "Regulator"),
+        "transformation-programmes": ("BT FY30 cost and operating-model transformation", "FY26-FY30"),
+        "opportunities": ("Virgin Media O2", "Shaping opportunity"),
+        "reinvention-assessments": ("Capital-intensive, regulated network operators", "2026-2028"),
+    }
+    rendered = {}
+    for collection, values in expected.items():
+        page, page_status = executive_workspace_page(run_id, {}, view="explore", collection=collection)
+        assert page_status == 200
+        assert all(value in page for value in values), (collection, [value for value in values if value not in page])
+        rendered[collection] = page
+    assert "Client problem not established" not in rendered["opportunities"]
+    assert "Supporting context; not presented as an executive insight" not in rendered["industry-overview"]
+
+    counts = Counter(obj.kind for obj in twin.objects)
+    assert (counts["opportunity_hypothesis"], counts["evidence"], counts["unknown"],
+            counts["contradiction"], counts["ai_reinvention_assessment"]) == (17, 92, 30, 11, 7)
+    assert summary["canonical_mutations"] == 0
+    assert not (tmp_path / "memory").exists()
