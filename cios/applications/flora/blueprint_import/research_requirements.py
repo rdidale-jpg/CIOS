@@ -27,6 +27,7 @@ class ResearchRequirement:
     rule_version: str
     existing_evidence: tuple[str, ...]
     eligibility_authority: str
+    source_dispositions: tuple[tuple[str, str], ...] = ()
 
 
 # Versioned owner-schedule bindings only. Their named authorities retain rules.
@@ -162,21 +163,46 @@ def research_requirements(twin: SemanticTwin, projections: tuple[ExecutiveAssess
                     "regulator": ("legitimate identity", "mandate", "jurisdiction", "regulated entities", "market role", "relationships", "evidence"),
                     "unresolved identity": ("identity resolution", "candidate type", "source record interpretation", "role", "relationships", "evidence"),
                 }.get(classification, ("identity resolution", "candidate type", "evidence"))
-            missing = tuple(field for field in requested_fields if not _present(field, objects))
-            # An absent owner dimension remains researchable even where package
-            # content happens to carry a field; only genuinely absent facts are requested.
-            if not missing and not projection.deficiencies:
+            dispositions = tuple((field, assessment_field_disposition(field, objects, projection))
+                                 for field in requested_fields)
+            missing = tuple(field for field, disposition in dispositions
+                            if disposition in {"source_field_absent", "source_field_invalid", "genuine_unknown"})
+            # Owner execution and source research are separate concerns.  A
+            # candidate with all scheduled source fields present is awaiting
+            # governance, not missing research; never re-commission every field
+            # merely because the owner result is deferred.
+            if not missing:
                 continue
             ids = tuple(dict.fromkeys(o.original_id or o.record_id for o in objects))
             evidence = tuple(dict.fromkeys(ref for o in objects for ref in o.evidence_refs))
-            requested = missing or requested_fields
+            requested = missing
             requirements.append(ResearchRequirement(
                 key, subject, ids, requested,
                 f"These facts are needed to understand and safely use {subject} in {projection.label.lower()} decisions.",
                 sources, f"Return import-compatible {projection.label.lower()} and evidence records with explicit Unknowns and Contradictions.",
                 _BUSINESS_ACCEPTANCE[key],
-                projection.canonical_owner, dimension, version, evidence, projection.eligibility_authority))
+                projection.canonical_owner, dimension, version, evidence, projection.eligibility_authority,
+                dispositions))
     return tuple(requirements)
+
+
+def assessment_field_disposition(field: str, objects: tuple[SemanticObject, ...],
+                                 projection: ExecutiveAssessmentProjection) -> str:
+    """Classify research and assessment state without calculating completeness."""
+    aliases = _ALIASES.get(field, (field.replace(" ", "_"),))
+    if any(o.validation_status not in {"accepted", "ignored"} and
+           any(alias in (o.attributes or {}) for alias in aliases) for o in objects):
+        return "source_field_invalid"
+    if any((o.attributes or {}).get("unknown_refs") or (o.attributes or {}).get("unknowns") for o in objects):
+        if not _present(field, objects):
+            return "genuine_unknown"
+    if _present(field, objects):
+        if projection.state == "assessment_pending_governance":
+            return "source_field_present_unassessed"
+        if any(field.casefold() in deficiency.casefold() for deficiency in projection.deficiencies):
+            return "owner_assessed_deficiency"
+        return "source_field_present"
+    return "source_field_absent"
 
 
 def _subjects(key: str, twin: SemanticTwin, objects: tuple[SemanticObject, ...]):

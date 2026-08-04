@@ -54,12 +54,12 @@ def executive_assessments(twin: SemanticTwin) -> tuple[ExecutiveAssessmentProjec
         missing = tuple(name for name in dimensions if name not in by_name)
         # State is copied only from a complete owner output. No scores, weights,
         # thresholds, caps, or field-presence rules live in this adapter.
-        state = str(data.get("state") or "") if declared and not missing else "legacy_unassessed"
+        state = str(data.get("state") or "") if declared and not missing else _unassessed_state(twin, key)
         deficiencies = tuple(str(x) for d in supplied for x in (d.get("deficiencies") or ()))
         if missing:
             deficiencies = ("Missing owner-produced assessment dimensions: " + ", ".join(missing),) + deficiencies
         projections.append(ExecutiveAssessmentProjection(
-            key, label, owner, declared.source_file if declared else "No owner-produced assessment supplied",
+            key, label, owner, _assessment_source(twin, key, declared),
             completeness, eligibility, "IT-001 §10; EI-001 / EIF-001 governed information requirements",
             dimensions, state or "legacy_unassessed", declared.original_id if declared else "",
             deficiencies, "A governed assessment result with linked evidence, deficiencies, Unknowns, Contradictions, exhaustion and review references.",
@@ -67,6 +67,32 @@ def executive_assessments(twin: SemanticTwin) -> tuple[ExecutiveAssessmentProjec
             inventory[key],
         ))
     return tuple(projections)
+
+
+def _unassessed_state(twin: SemanticTwin, key: str) -> str:
+    """Describe lifecycle truth without pretending candidate data was assessed.
+
+    Canonical owners assess governed intelligence.  Import staging is a review
+    boundary and deliberately performs no promotion or owner execution.  A
+    supplied Reinvention Assessment is itself an owner output, however, so it
+    can be projected while remaining a candidate.
+    """
+    if key == "reinvention-timing" and twin.of_kind("ai_reinvention_assessment"):
+        return "owner_assessment_supplied_candidate"
+    if any(o.governance == "candidate" and o.source_file != "Imported package" for o in twin.objects):
+        return "assessment_pending_governance"
+    return "legacy_unassessed"
+
+
+def _assessment_source(twin: SemanticTwin, key: str, declared) -> str:
+    if declared:
+        return declared.source_file
+    if key == "reinvention-timing" and twin.of_kind("ai_reinvention_assessment"):
+        sources = tuple(dict.fromkeys(o.source_file for o in twin.of_kind("ai_reinvention_assessment")))
+        return ", ".join(sources)
+    if any(o.governance == "candidate" and o.source_file != "Imported package" for o in twin.objects):
+        return "Candidate intelligence supplied; canonical owner execution is deferred until governance"
+    return "No owner-produced assessment supplied"
 
 
 def _inventory(twin: SemanticTwin) -> dict[str, str]:

@@ -753,7 +753,9 @@ def _twin_map(twin: SemanticTwin, run_id: str, mission: CommercialMission | None
     return f"<section class='card twin-map' id='twin-map'><h2>Twin Map</h2><div class='twin-map-grid'>{''.join(tiles)}</div></section>"
 
 def _owner_assessed(twin: SemanticTwin, key: str) -> bool:
-    return next(a for a in executive_assessments(twin) if a.key == key).state != "legacy_unassessed"
+    return next(a for a in executive_assessments(twin) if a.key == key).state not in {
+        "legacy_unassessed", "assessment_pending_governance"
+    }
 
 
 def _aspect_page(twin, run_id, title, key, domain, mission):
@@ -800,6 +802,10 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
     return _primary_nav(run_id,"aspect")+f"<p><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a></p><header class='hero'><p>{escape(title)} · {escape(domain.title())}</p><h1>{escape(ASPECT_LABELS[key])}</h1><p><strong>{escape(_assessment_state_label(a.state))}</strong></p></header><section class='card'>{content}</section><section class='card'><h2>Research required</h2><p>{escape(research)}</p><p><strong>Sources to check:</strong> {escape(', '.join(sources))}</p><p><strong>Acceptance test:</strong> {escape(acceptance)}</p><p><a href='/blueprint-import/{escape(run_id)}/diagnostics'>Architectural traceability in Advanced Inspection</a></p></section>"+_navigation(run_id)
 
 def _assessment_state_label(state: str) -> str:
+    if state == "assessment_pending_governance":
+        return "Intelligence supplied; owner assessment pending governance"
+    if state == "owner_assessment_supplied_candidate":
+        return "Owner assessment supplied; pending governance"
     return "Not yet assessed against the governed standard" if state == "legacy_unassessed" else state.replace("_", " ").title()
 
 
@@ -880,7 +886,8 @@ def _research_gaps(twin, run_id, mission):
         statement = _count_statement(a.key, affected)
         if a.key == "reinvention-timing":
             statement = " ".join(line.removeprefix("- ") for line in _timing_count_lines(twin, twin.objects))
-        action = f"Research every applicable {a.name.lower()} subject: {fields}."
+        action = (f"Research every applicable {a.name.lower()} subject: {fields}." if fields else
+                  "No source research is commissioned solely because owner assessment is pending governance.")
         impact, reason = _commercial_impact(a.key)
         acceptance = rows[0].acceptance_test if rows else a.acceptance_criteria
         cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(statement)}</strong></p><p><strong>{escape(_assessment_state_label(a.state))}</strong></p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><h3>Why this matters</h3><p>{escape(_COLLECTION_LANGUAGE[a.key])}</p><h3>Executive dependency impact</h3><p><strong>{impact}</strong></p><p><strong>Reason:</strong> {escape(reason)}</p><p><strong>Researcher action:</strong> {escape(action)}</p><p><strong>Acceptance criteria:</strong> {escape(acceptance)}</p><details><summary>Architectural traceability</summary><p><strong>Governed owner:</strong> {escape(a.canonical_owner)}</p><p><strong>Completeness authority:</strong> {escape(a.completeness_authority)}</p><p><strong>Eligibility authority:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence:</strong> {escape(a.evidence_source)}</p><p><strong>Canonical authority:</strong> {escape(a.rule_version)}</p></details><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Inspect all {affected} affected subjects</a></article>")
