@@ -20,6 +20,7 @@ SUPPORTED_CANONICAL_CLASSES = {
     "enterprise", "twin", "source", "evidence", "observation", "entity", "relationship",
     "enterprise_model_candidate", "unknown", "contradiction", "human_knowledge",
     "refresh_trigger", "publication_reference",
+    "membership", "release_manifest",
     "fact", "reasoning_lineage",
     # Canonical business wrappers used by the semantic Twin read model.  They
     # are recognisable candidates, but remain outside automatic promotion.

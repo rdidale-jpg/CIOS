@@ -37,9 +37,10 @@ DECLARED_RECORD_SET_CLASSES: dict[str, str] = {
     "unknown_register": "unknown",
     "contradiction_register": "contradiction",
     "relationship_register": "relationship",
-    "membership_register": "relationship",
+    "membership_register": "membership",
     "monitoring_trigger_register": "refresh_trigger",
     "reinvention_assessments": "transformation_pressure_view",
+    "release_manifest_wave5_draft": "release_manifest",
 }
 
 DECLARED_RECORD_IDENTIFIERS = (

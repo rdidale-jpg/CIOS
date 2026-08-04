@@ -2,7 +2,7 @@
 
 ## Finding and classification
 
-**First failing boundary (before the manifest record-set correction): candidate creation.** Receipt and validation completed, but the generic Blueprint path did not recognise the manifest-declared record-set collections as semantic classes. Those rows were retained as ignored lineage, so no typed candidates existed for downstream readers. The reusable correction is the declaration-to-class vocabulary in `validator.DECLARED_RECORD_SET_CLASSES`; it is package-neutral and does not alter the ZIP, governance, promotion, or Researcher output. With that correction, the unchanged regression archive creates 640 accepted and 7 quarantined semantic candidates (plus 413 deliberately ignored lineage candidates).
+**First failing boundary (before the manifest record-set correction): candidate creation.** Receipt and validation completed, but the generic Blueprint path did not recognise the manifest-declared record-set collections as semantic classes. Those rows were retained as ignored lineage, so no typed candidates existed for downstream readers. A second projection gap then omitted Industry Overview from the business vocabulary and collapsed governed membership records into relationships. The reusable correction is the declaration-to-class vocabulary in `validator.DECLARED_RECORD_SET_CLASSES` plus the single `semantic_twin.BUSINESS_COLLECTIONS` taxonomy; both are package-neutral and do not alter the ZIP, governance, promotion, or Researcher output. With the correction, the unchanged regression archive creates 641 accepted and 7 quarantined semantic candidates (plus 412 deliberately ignored lineage candidates).
 
 This is not a persistence, repository lookup, governance, presentation, or Research Gap failure. The current implemented runtime persists and reads the same candidate identities. Promotion remains a separate, explicitly authorised operation and canonical mutations remain zero after validation.
 
@@ -43,15 +43,19 @@ Candidate persistence, candidate lookup, governance enumeration, Twin Map, and R
 
 ## Candidate inventory
 
-The machine-readable inventory is [`TEL-001-runtime-candidate-inventory.json`](TEL-001-runtime-candidate-inventory.json). It enumerates all **647 semantic candidates** individually with candidate identifier, canonical class, owner, persistence location, governance state, visibility state, projection eligibility, source file, and original identifier.
+The machine-readable inventory is [`TEL-001-runtime-candidate-inventory.json`](TEL-001-runtime-candidate-inventory.json). It enumerates all **648 semantic candidates** individually with candidate identifier, canonical class, owner, persistence location, governance state, visibility state, projection eligibility, source file, and original identifier.
 
 | Validation / visibility state | Count | Governance | Projection |
 |---|---:|---|---|
-| accepted candidate | 640 | awaiting explicit candidate review | read-only semantic projection eligible |
+| accepted candidate | 641 | awaiting explicit candidate review | read-only semantic projection eligible |
 | quarantined candidate | 7 | quarantined by validation | advanced inspection only |
-| ignored lineage | 413 | not a semantic governance candidate | ineligible |
+| ignored lineage | 412 | not a semantic governance candidate | ineligible |
 
-Accepted class inventory: 1 Industry Twin, 6 Enterprise Twins, 17 Market Participant Twins, 17 Opportunity Hypotheses, 13 Transformation Programmes, 92 Evidence, 30 Unknowns, 11 Contradictions, 358 Relationships, and 95 Refresh Triggers. The seven quarantined records are Transformation Pressure Views.
+Accepted class inventory: 1 Industry Twin, 6 Enterprise Twins, 17 Market Participant Twins, 17 Opportunity Hypotheses, 13 Transformation Programmes, 92 Evidence, 30 Unknowns, 11 Contradictions, 308 Relationships, 50 Memberships, 1 Release Manifest, and 95 Refresh Triggers. The seven quarantined records are Transformation Pressure Views.
+
+The imported classes that remain lineage-only are: `analyst_estimate_register`, `buyer_intelligence_register`, `change_log_wave4_to`, `composite_industry_twin`, `corrected_horizon_pipeline`, `corrected_opportunity_ids`, `existing_award_register`, `framework_market_register`, `horizon_reclassification_report`, `identity_resolution_table`, `named_open_opportunity_pipeline`, `opportunity_overlap_register`, `opportunity_qualification_scorecard`, `pipeline_totals`, `procurement_register`, `qualified_opportunity_register`, `residual_opportunity_register`, `shaping_opportunity_register`, `strategic_hypothesis_register`, `unclassified_register`, `unresolved_business_units`, and `unresolved_customer_identities`. They fail deliberately because the package declares register/report classes for which the runtime has no canonical semantic adapter. Their rows retain source class and payload as lineage rather than being guessed from filenames.
+
+Wrapper types and `record_class` values are not discarded: `_records` preserves the manifest declaration as `candidate_object_class`, and semantic assembly preserves it as `SemanticObject.kind`. The evidenced causes were an incomplete declaration adapter (formerly all bare rows) and an incomplete business projection vocabulary (Industry Overview, Membership, and Release Manifest). Implementation profiles are validated but do not supply an alternative type adapter; legacy-only projection was not the cause.
 
 ## Projection inventory and trace
 
@@ -66,11 +70,11 @@ All counts below are for the unchanged archive after validation and before promo
 | Opportunities | `_aspect_page` / `business_collections` | canonical owner kind `opportunity_hypothesis` | 17 | 17 / 17 hypotheses | Recommendation eligibility additionally requires the opportunity contract and owner assessment |
 | Reinvention Timing | `_aspect_page` / `twin.objects` | reinvention assessment kinds | 0 accepted; 7 quarantined pressure views | 0 / 0 assessment records | Seven pressure views are quarantined; pressure views are not silently reclassified as canonical Reinvention Timing assessments |
 
-Evidence (92), Unknowns (30), Contradictions (11), Relationships (358), and Refresh Triggers (95) remain available to advanced semantic inspection. The principal map intentionally shows six governed completeness aspects rather than every technical collection.
+Evidence (92), Unknowns (30), Contradictions (11), Relationships (308), Memberships (50), one Release Manifest, and Refresh Triggers (95) remain available to advanced semantic inspection. The principal map intentionally shows six governed completeness aspects rather than every technical collection.
 
 ## Governance trace
 
-“Review candidate governance” is linked when Twin identity/scope has not yet been confirmed. Identity recognition comes from package inspection and is independent of review decisions; therefore recognising an Industry Twin and asking for governance is consistent. Candidates are expected under `blueprint_import/staging/<run>/candidates`. The review workflow loads the same staging summary/candidates and joins append-only decisions from `CandidateReviewRepository`. It can now enumerate 1,060 persisted records, including all 640 accepted semantic candidates. An empty governance page in the failing runtime was a consequence of semantic candidate creation never occurring, not evidence that governance had removed candidates.
+“Review candidate governance” is linked when Twin identity/scope has not yet been confirmed. Identity recognition comes from package inspection and is independent of review decisions; therefore recognising an Industry Twin and asking for governance is consistent. Candidates are expected under `blueprint_import/staging/<run>/candidates`. The review workflow loads the same staging summary/candidates and joins append-only decisions from `CandidateReviewRepository`. It can now enumerate 1,060 persisted records, including all 641 accepted semantic candidates. An empty governance page in the failing runtime was a consequence of semantic candidate creation never occurring, not evidence that governance had removed candidates.
 
 ## Research Gap trace
 

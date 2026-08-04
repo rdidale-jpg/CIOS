@@ -8,7 +8,7 @@ from pathlib import Path
 import zipfile
 
 from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, BlueprintPackageValidator
-from cios.applications.flora.blueprint_import.semantic_twin import assemble_semantic_twin
+from cios.applications.flora.blueprint_import.semantic_twin import assemble_semantic_twin, business_collections
 
 
 EVIDENCE = Path("docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip")
@@ -62,10 +62,10 @@ def test_unchanged_tel001_package_reaches_semantic_staging_without_promotion(mon
     assert hashlib.sha256(EVIDENCE.read_bytes()).hexdigest() == before
     assert package.package_inspection["contract_type"] == "Blueprint Package"
     assert (result.candidate_records_staged, result.records_accepted_into_staging,
-            result.records_quarantined, result.records_rejected) == (1060, 640, 7, 0)
+            result.records_quarantined, result.records_rejected) == (1060, 641, 7, 0)
     assert result.canonical_mutations == 0
     assert Counter(candidate["validation_status"] for candidate in candidates) == {
-        "accepted": 640, "ignored": 413, "quarantined": 7,
+        "accepted": 641, "ignored": 412, "quarantined": 7,
     }
     assert Counter(candidate["candidate_object_class"] for candidate in candidates
                    if candidate["validation_status"] == "accepted") == {
@@ -77,8 +77,10 @@ def test_unchanged_tel001_package_reaches_semantic_staging_without_promotion(mon
         "evidence": 92,
         "unknown": 30,
         "contradiction": 11,
-        "relationship": 358,
+        "relationship": 308,
+        "membership": 50,
         "refresh_trigger": 95,
+        "release_manifest": 1,
     }
     assert Counter(candidate["candidate_object_class"] for candidate in candidates
                    if candidate["validation_status"] == "quarantined") == {
@@ -86,8 +88,16 @@ def test_unchanged_tel001_package_reaches_semantic_staging_without_promotion(mon
     }
     twin = assemble_semantic_twin([candidate for candidate in candidates
                                    if candidate["validation_status"] == "accepted"])
-    assert len(twin.objects) == 640
+    assert len(twin.objects) == 641
     assert len(twin.enterprises) == 6
+    collections = {collection.key: len(collection.objects) for collection in business_collections(twin, include_empty=True)}
+    expected_collections = {
+        "industry-overview": 1, "enterprises": 6, "opportunities": 17,
+        "evidence-sources": 92, "unknowns": 30, "contradictions": 11,
+        "memberships": 50, "release-manifests": 1,
+    }
+    assert {key: collections[key] for key in expected_collections} == expected_collections
+    assert collections["other"] == 95  # monitoring triggers are genuinely residual
     assert not (tmp_path / "memory").exists()
 
 
@@ -108,7 +118,7 @@ def test_tel001_candidates_are_shared_by_governance_twin_map_and_research_gaps(m
     governed = CandidateStagingRepository().list_candidates(package.import_run_id)
     accepted = [candidate for candidate in governed if candidate["validation_status"] == "accepted"]
     assert len(governed) == 1060
-    assert len(accepted) == 640
+    assert len(accepted) == 641
     assert len({candidate["candidate_record_id"] for candidate in governed}) == 1060
 
     twin_map, status = executive_workspace_page(package.import_run_id, {}, view="workspace")
