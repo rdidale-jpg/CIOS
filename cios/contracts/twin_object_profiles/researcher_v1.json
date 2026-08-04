@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "document_id": "TOP-RESEARCHER-PORTABLE-OBJECTS-v1",
+  "status": "implementation-owned consolidation",
+  "canonical_owner": "Twin Object Profile contract generated from IT-001, MPT-001, OT-001, EI-012, EOD-001 and Researcher Implementation Profiles",
+  "source_authorities": [
+    "knowledge-packs/researcher/research-missions/templates/templates-v1.json",
+    "knowledge-packs/researcher/research-missions/contracts/contracts-v1.json",
+    "architecture/specifications/presentation-models/Twin-Presentation-Model-Specification-v1.0.md",
+    "architecture/specifications/industry-twins/Industry-Twin-Lifecycle-Specification-v1.0.md",
+    "architecture/specifications/market-participants/Market-Participant-Twin-Specification-v1.0.md",
+    "architecture/specifications/opportunity-twins/OT-001-Opportunity-Twin-Specification.md",
+    "architecture/specifications/knowledge-packs/twin-release-manifest-v2.schema.json"
+  ],
+  "profiles": {
+    "transformation_pressure_view": {"canonical_class": "ai_reinvention_assessment"},
+    "industry_twin": {"fields": {"description": ["executive_summary", "definition"], "industry_profile": ["$self"], "title": ["name"], "consequence": ["executive_summary"], "domains": ["domains", "subsectors"]}},
+    "enterprise_twin": {"fields": {"enterprise_id": ["id"], "enterprise_name": ["name"], "description": ["executive_overview.what", "executive_overview"], "strategy": ["corporate_strategy"], "operating_structure": ["operating_model"], "financial_context": ["financial_intelligence"], "technology": ["technology_landscape"], "ecosystem": [{"partners": "partners", "suppliers": "suppliers", "competitors": "competitors"}], "pressures": ["executive_overview.pressures"], "programmes": ["transformation_portfolio"], "transformation_posture": ["reinvention_assessment"]}},
+    "market_participant_twin": {"fields": {"organisation_name": ["name"], "domain": ["classification"], "significance": ["commercial_significance", "market_significance"], "role": ["role"], "capabilities": ["capabilities"], "relationships": ["relationships"], "current_activity": ["current_activity"]}},
+    "transformation_programme": {"fields": {"title": ["programme_name", "summary"], "owner": ["owning_enterprise"], "business_unit": ["owning_business_unit"], "objective": ["strategic_objective", "summary"], "phase": ["phase"], "timing": ["timeline"], "investment": ["budget"]}},
+    "opportunity_hypothesis": {"fields": {"title": ["opportunity_title"], "client_problem": ["client_problem.customer_problem", "customer_problem"], "affected_enterprises": [["named_customer", "canonical_customer_twin_id", "customer_enterprise_twin_id"]], "procurement_status": ["procurement_status_control", "procurement_stage"], "business_unit": ["business_unit"], "buyer": ["buyer"], "commercial_type": ["commercial_type_wave5", "classification"], "value_type": ["wave5_pipeline_qualification.value_type_wave5"], "procurement_timing": ["timing.estimated_procurement_window", "timing.estimated_contract_start", "expected_procurement_timing"], "value_range": ["value.estimated_contract_value_range", "estimated_value"]}},
+    "ai_reinvention_assessment": {"fields": {"title": ["scope"], "summary": ["current_operating_model"], "affected_functions": ["business_functions_affected"], "timing": ["timing"], "consequence": ["executive_implications", "conclusion"], "ai_disruption_mechanism": ["ai_disruption_mechanism"], "expected_tipping_point": ["expected_tipping_point"]}},
+    "evidence": {"fields": {"statement": ["supported_claim", "claim", "title"], "subject": ["supported_object", "object"], "freshness": ["publication_date", "collection_date"]}},
+    "unknown": {"fields": {"statement": ["question"], "subject": ["object"], "consequence": ["commercial_impact"]}},
+    "contradiction": {"fields": {"statement": ["issue"], "evidence_refs": ["sources"], "consequence": ["commercial_impact"]}},
+    "relationship": {"fields": {"statement": ["rationale", "relationship_type"], "references": [["source", "target"]], "relationship_source": ["source"], "relationship_target": ["target"]}},
+    "membership": {"fields": {"statement": ["inclusion_rationale", "membership_role"], "references": [["parent_industry_twin", "child_identity"]], "membership_parent": ["parent_industry_twin"], "membership_child": ["child_identity"]}}
+  },
+  "common_fields": {"evidence_refs": ["evidence", "sources", "sources_searched"], "unknown_refs": ["unknowns"], "contradiction_refs": ["contradictions"]}
+}
