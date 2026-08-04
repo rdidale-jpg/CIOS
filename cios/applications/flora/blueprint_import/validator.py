@@ -16,7 +16,7 @@ from .archive import _validate_zip_member, sha256_bytes
 from .candidates import (CandidateImportRecord, CandidateStagingRepository, ImportRunDryRunResult,
     PROJECTION_ONLY_CLASSES, SUPPORTED_RECORD_CLASSES, ValidationFinding, candidate_id)
 from .ledger import BlueprintImportLedger, utc_now
-from .manifest import DUPLICATE_MANIFEST_MESSAGE, INVALID_SCHEMA_MESSAGE, ROOT_MANIFEST, read_root_manifest
+from .manifest import DUPLICATE_MANIFEST_MESSAGE, INVALID_SCHEMA_MESSAGE, ROOT_MANIFEST, parse_manifest, read_root_manifest
 from .models import BlueprintPackageRecord, PackageReceiptError
 from .registry import BlueprintPackageRegistry
 from .cios_twin_adapter import CiosCommercialTwinAdapter, MAPPING_VERSION
@@ -240,7 +240,7 @@ class BlueprintPackageValidator:
                     warnings.append("Research and workspace execution artefacts are retained as package lineage and excluded from staging")
                     return candidates, warnings, errors, files, unsupported, unresolved, trace
                 try:
-                    manifest = read_root_manifest(zf)
+                    manifest = parse_manifest(read_root_manifest(zf)).model_dump(mode="json", exclude_none=True)
                 except PackageReceiptError as exc:
                     errors.append(str(exc))
                     manifest = {}
@@ -342,6 +342,10 @@ class BlueprintPackageValidator:
             if not isinstance(f, dict): continue
             path = str(f.get("path") or "")
             if f.get("required") and path not in seen: errors.append(f"Missing required file: {path}")
+            checksum = str(f.get("sha256") or "")
+            if path in seen and checksum:
+                actual = next((item.sha256 for item in package.inventory if item.path == path), "")
+                if actual != checksum: errors.append(f"Declared checksum does not match for {path}")
         unexpected = set(seen) - declared - {"blueprint_manifest.json"}
         if declared and unexpected: warnings.append("Unexpected package files: " + ", ".join(sorted(unexpected)))
 

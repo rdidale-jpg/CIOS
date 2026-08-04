@@ -12,8 +12,11 @@ import hashlib
 import json
 from pathlib import Path, PurePosixPath
 import zipfile
+import sys
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+from cios.applications.flora.blueprint_import.contract import build_manifest
 DEFAULT_PACKAGE_ID = "UKCG-CDT-Blueprint"
 DEFAULT_ENTERPRISE_ID = "UK-Central-Government"
 DEFAULT_VERSION = "v1.0"
@@ -61,7 +64,7 @@ def build(input_dir: Path, output_dir: Path, package_version: str = DEFAULT_VERS
         raise SystemExit("Missing required UK Government Blueprint assets: " + ", ".join(missing))
 
     twin_spine = REQUIRED_ASSETS[0][0]
-    manifest = {
+    manifest = build_manifest(**{
         "package_id": DEFAULT_PACKAGE_ID,
         "package_version": package_version,
         "enterprise_id": DEFAULT_ENTERPRISE_ID,
@@ -69,7 +72,7 @@ def build(input_dir: Path, output_dir: Path, package_version: str = DEFAULT_VERS
         "final_twin_spine_workbook": twin_spine,
         "files": files,
         "record_sets": [],
-    }
+    })
     output_dir.mkdir(parents=True, exist_ok=True)
     zip_path = output_dir / f"UKCG-CDT-Flora-Blueprint-{package_version}.zip"
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:

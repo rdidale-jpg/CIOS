@@ -3,6 +3,7 @@
 from .registry import BlueprintPackageRegistry, receive_blueprint_package
 from .models import BlueprintPackageRecord, ImportRunRecord, PackageReceiptError
 from .validator import BlueprintPackageValidator, BlueprintValidationError
+from .contract import BlueprintManifest, BlueprintFile, BlueprintRecordSet, build_manifest
 from .candidates import CandidateImportRecord, ImportRunDryRunResult
 from .review import CandidateReviewDecision, CandidateReviewService, BlueprintReviewError
 from .mapping import ImportMappingRecord, ImportMappingService
@@ -17,6 +18,10 @@ __all__ = [
     "receive_blueprint_package",
     "BlueprintPackageValidator",
     "BlueprintValidationError",
+    "BlueprintManifest",
+    "BlueprintFile",
+    "BlueprintRecordSet",
+    "build_manifest",
     "CandidateImportRecord",
     "ImportRunDryRunResult",
     "CandidateReviewDecision",
