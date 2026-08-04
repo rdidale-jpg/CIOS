@@ -631,7 +631,7 @@ def _explorer(twin, run_id, mission, selected="", domain="all"):
     links = "".join(f"<a class='collection-chip' href='?collection={escape(c.key)}&amp;domain={escape(domain)}'>{escape(c.label)} <b>{len(c.objects)}</b></a>" for c in collections)
     if active and active.key == "enterprises": content = enterprises or "<p>No enterprise identities supplied.</p>"
     elif active and active.key == "opportunities": content = "".join(_opportunity_card(o, run_id) for o in active.objects)
-    elif active: content = "".join(_conclusion(o, run_id) if _owner_assessed(twin, 'industry-overview') and executive_insight_eligible(o) else f"<article class='enterprise-card'><h3>{escape(o.statement or o.original_id or 'Twin record')}</h3><p>Supporting context; not presented as an executive insight.</p><a href='/blueprint-import/{escape(run_id)}/inspect#technical-diagnostics'>Inspect record</a></article>" for o in active.objects)
+    elif active: content = "".join(_conclusion(o, run_id) if _owner_assessed(twin, 'industry-overview') and executive_insight_eligible(o) else f"<article class='enterprise-card'><h3>{escape(o.statement or o.original_id or 'Twin record')}</h3><p>Supporting context; not presented as an executive insight.</p>{f'<p><strong>Residual reason:</strong> {escape(o.residual_reason or o.validation_status)}</p>' if active.key == 'other' else ''}<a href='/blueprint-import/{escape(run_id)}/inspect#technical-diagnostics'>Inspect record</a></article>" for o in active.objects)
     else: content = "<p>Select a business collection to explore its contents.</p>"
     title = active.label if active else "Advanced Inspection"
     total = len(active.objects) if active else 0
@@ -851,7 +851,10 @@ def _research_gaps(twin, run_id, mission):
         impact, reason = _commercial_impact(a.key)
         acceptance = rows[0].acceptance_test if rows else a.acceptance_criteria
         cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(statement)}</strong></p><p><strong>{escape(_assessment_state_label(a.state))}</strong></p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><h3>Why this matters</h3><p>{escape(_COLLECTION_LANGUAGE[a.key])}</p><h3>Executive dependency impact</h3><p><strong>{impact}</strong></p><p><strong>Reason:</strong> {escape(reason)}</p><p><strong>Researcher action:</strong> {escape(action)}</p><p><strong>Acceptance criteria:</strong> {escape(acceptance)}</p><details><summary>Architectural traceability</summary><p><strong>Governed owner:</strong> {escape(a.canonical_owner)}</p><p><strong>Completeness authority:</strong> {escape(a.completeness_authority)}</p><p><strong>Eligibility authority:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence:</strong> {escape(a.evidence_source)}</p><p><strong>Canonical authority:</strong> {escape(a.rule_version)}</p></details><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Inspect all {affected} affected subjects</a></article>")
-    return _primary_nav(run_id,"gaps")+"<header class='hero'><h1>Research Gaps</h1><p><a class='button primary' href='/blueprint-import/"+escape(run_id)+"/research-brief'>Export Research Brief</a></p></header><section class='research-gap-grid'>"+"".join(cards)+f"</section><p><a href='/blueprint-import/{escape(run_id)}/diagnostics'>Advanced diagnostics</a></p>"
+    challenge_inventory = (f"{len(twin.of_kind('evidence'))} Evidence · "
+                           f"{len(twin.of_kind('unknown'))} Unknowns · "
+                           f"{len(twin.of_kind('contradiction'))} Contradictions")
+    return _primary_nav(run_id,"gaps")+"<header class='hero'><h1>Research Gaps</h1><p><strong>"+escape(challenge_inventory)+"</strong></p><p><a class='button primary' href='/blueprint-import/"+escape(run_id)+"/research-brief'>Export Research Brief</a></p></header><section class='research-gap-grid'>"+"".join(cards)+f"</section><p><a href='/blueprint-import/{escape(run_id)}/diagnostics'>Advanced diagnostics</a></p>"
 
 
 def _commercial_impact(aspect: str) -> tuple[str, str]:

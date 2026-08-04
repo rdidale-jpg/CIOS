@@ -2,9 +2,9 @@
 
 ## Finding and classification
 
-**First failing boundary (before the manifest record-set correction): candidate creation.** Receipt and validation completed, but the generic Blueprint path did not recognise the manifest-declared record-set collections as semantic classes. Those rows were retained as ignored lineage, so no typed candidates existed for downstream readers. A second projection gap then omitted Industry Overview from the business vocabulary and collapsed governed membership records into relationships. The reusable correction is the declaration-to-class vocabulary in `validator.DECLARED_RECORD_SET_CLASSES` plus the single `semantic_twin.BUSINESS_COLLECTIONS` taxonomy; both are package-neutral and do not alter the ZIP, governance, promotion, or Researcher output. With the correction, the unchanged regression archive creates 641 accepted and 7 quarantined semantic candidates (plus 412 deliberately ignored lineage candidates).
+**First deployed failing boundary: validation-cache invalidation after checksum deduplication.** Receipt deliberately identifies an unchanged package by checksum and returns its existing import run. The semantic classifier had changed, but its mapping version had not. `validate_and_stage` therefore treated the old summary as current and returned before candidate creation, leaving the 1,060 persisted pre-semantic wrappers for Explore Twin. Validator-only tests passed because each used an empty temporary data directory and could not exercise the duplicate-package branch. The reusable correction advances the shared mapping version, forcing the existing governed validation service to restage an unchanged package without changing its identity or granting promotion authority.
 
-This is not a persistence, repository lookup, governance, presentation, or Research Gap failure. The current implemented runtime persists and reads the same candidate identities. Promotion remains a separate, explicitly authorised operation and canonical mutations remain zero after validation.
+The historical classifier and presentation vocabulary remain reusable: `validator.DECLARED_RECORD_SET_CLASSES` maps manifest declarations, and `semantic_twin.BUSINESS_COLLECTIONS` maps the persisted candidate class. The deployed divergence occurred before those corrected candidates reached persistence. After restaging, the runtime reads `candidate_object_class` (not a filename, wrapper type, implementation profile, or `payload.record_class`) and promotion remains a separate, explicitly authorised operation with zero canonical mutations during validation.
 
 ## Runtime flow and first boundary
 
@@ -15,7 +15,7 @@ Receipt: archive + BlueprintPackageRecord
   ↓ BlueprintPackageValidator.validate_and_stage
 Validation / generic Blueprint inspection
   ↓ manifest record-set declaration → reusable semantic class mapping
-Semantic candidate creation  ← FIRST HISTORICAL FAILURE (now corrected)
+Semantic candidate creation
   ↓ CandidateStagingRepository.save_candidate
 blueprint_import/staging/<run>/candidates/<candidate-id>.json
   ↓ CandidateStagingRepository.list_candidates
@@ -40,6 +40,8 @@ The regression execution trace is: `receive` reads and immutably archives the by
 | `assemble_semantic_twin` | in-memory read-only semantic objects over staging | Twin Map, Executive Intelligence, Research Gaps |
 
 Candidate persistence, candidate lookup, governance enumeration, Twin Map, and Research Gaps share `CandidateStagingRepository` for an unpromoted imported Twin. Governance decisions have a separate append-only repository, but that repository does not own candidate discovery. No projection reads the promotion repository for the pre-promotion candidate view.
+
+The previous regression path always created a new registry under `tmp_path`; the deployed upload path first calls `BlueprintPackageRegistry.receive`, which returns the existing package/run for an identical SHA-256. Before this revision, the unchanged mapping-version marker made `validate_and_stage` return that run's old summary and candidates. This exact duplicate-upload branch is now covered through `upload_and_validate_blueprint`, persisted repository reads, `executive_workspace_page` Explore collections, and the Research Gap projection.
 
 ## Candidate inventory
 
