@@ -23,6 +23,31 @@ from .cios_twin_adapter import CiosCommercialTwinAdapter, MAPPING_VERSION
 from .atomicity import validate_atomic_statement, normalise_statement
 from .industry_delta_adapter import IndustryTwinDeltaAdapter
 
+# Blueprint record-set declarations are the collection envelope when their
+# NDJSON rows are bare governed objects.  These vocabulary aliases are about
+# reusable semantic roles, never a package or enterprise identifier.  Sets not
+# listed here are retained as lineage rather than guessed into canonical types.
+DECLARED_RECORD_SET_CLASSES: dict[str, str] = {
+    "industry_overview": "industry_twin",
+    "enterprise_dossiers": "enterprise_twin",
+    "market_participant_profiles": "market_participant_twin",
+    "opportunity_objects": "opportunity_hypothesis",
+    "programme_objects": "transformation_programme",
+    "evidence_register": "evidence",
+    "unknown_register": "unknown",
+    "contradiction_register": "contradiction",
+    "relationship_register": "relationship",
+    "membership_register": "relationship",
+    "monitoring_trigger_register": "refresh_trigger",
+    "reinvention_assessments": "transformation_pressure_view",
+}
+
+DECLARED_RECORD_IDENTIFIERS = (
+    "external_id", "stable_id", "object_id", "id", "twin_id", "enterprise_twin_id",
+    "trigger_id", "programme_id", "opportunity_id", "estimate_id", "manifest_id",
+    "overlap_id", "change_id",
+)
+
 class BlueprintValidationError(PackageReceiptError):
     pass
 
@@ -257,7 +282,7 @@ class BlueprintPackageValidator:
                     for record_set in record_sets:
                         path = str(record_set.get("path") or "") if isinstance(record_set, dict) else ""
                         if not path or path not in seen or not path.endswith(".ndjson"): continue
-                        candidates.extend(self._records(package, zf, path, unsupported, unresolved))
+                        candidates.extend(self._records(package, zf, path, unsupported, unresolved, record_set))
         except (zipfile.BadZipFile, json.JSONDecodeError, UnicodeDecodeError) as exc:
             errors.append(str(exc))
         if errors:
@@ -349,24 +374,35 @@ class BlueprintPackageValidator:
         unexpected = set(seen) - declared - {"blueprint_manifest.json"}
         if declared and unexpected: warnings.append("Unexpected package files: " + ", ".join(sorted(unexpected)))
 
-    def _records(self, package, zf, path, unsupported, unresolved):
+    def _records(self, package, zf, path, unsupported, unresolved, declaration=None):
         out=[]
-        for index, line in enumerate(zf.read(path).decode("utf-8").splitlines(), start=1):
+        lines = [line for line in zf.read(path).decode("utf-8").splitlines() if line.strip()]
+        declared_class = str(declaration.get("record_class") or "") if isinstance(declaration, dict) else ""
+        for index, line in enumerate(lines, start=1):
             if not line.strip(): continue
             findings=[]; status="accepted"
             try: row=json.loads(line)
             except json.JSONDecodeError:
                 row={}; status="rejected"; findings.append(ValidationFinding("error","invalid_json","Record line is not valid JSON",f"{path}#L{index}"))
-            rc=str(row.get("record_class") or ""); ext=str(row.get("external_id") or "")
+            embedded_class = str(row.get("record_class") or "")
+            rc = embedded_class or DECLARED_RECORD_SET_CLASSES.get(declared_class, declared_class)
+            ext = str(next((row.get(key) for key in DECLARED_RECORD_IDENTIFIERS if row.get(key) not in (None, "")), ""))
+            bare_declared_row = bool(not embedded_class and declared_class)
+            payload = (dict(row) if bare_declared_row else
+                       row.get("payload", {}) if isinstance(row.get("payload", {}), dict) else {})
             if not ext: status="quarantined"; findings.append(ValidationFinding("error","missing_external_id","Record does not declare external_id",f"{path}#L{index}"))
-            if rc not in SUPPORTED_RECORD_CLASSES:
+            if bare_declared_row and declared_class not in DECLARED_RECORD_SET_CLASSES:
+                status="ignored"
+                findings.append(ValidationFinding("warning", "lineage_only_record_set",
+                    f"Declared record set {declared_class} has no canonical semantic role and is retained as package lineage", f"{path}#L{index}"))
+            elif rc not in SUPPORTED_RECORD_CLASSES:
                 status="quarantined"; unsupported.add(rc or "<missing>"); findings.append(ValidationFinding("warning","unsupported_record_class",f"Unsupported record class: {rc}",f"{path}#L{index}"))
             elif rc in PROJECTION_ONLY_CLASSES:
                 status="quarantined"; findings.append(ValidationFinding("warning","projection_only","Projection-only class retained outside canonical intelligence",f"{path}#L{index}"))
             for ref in row.get("references", []) if isinstance(row.get("references", []), list) else []:
                 if str(ref).startswith("missing:"):
                     status="quarantined"; unresolved.add(str(ref)); findings.append(ValidationFinding("error","unresolved_reference",str(ref),f"{path}#L{index}"))
-            out.append(self._candidate(package,path,ext or f"line-{index}",rc,row.get("truth_class","unknown"),row.get("payload",{}) if isinstance(row.get("payload",{}),dict) else {},status,findings,row.get("source_location",{"line":index})))
+            out.append(self._candidate(package,path,ext or f"line-{index}",rc,row.get("truth_class","unknown"),payload,status,findings,row.get("source_location",{"line":index})))
         return out
 
     def _candidate(self, package, path, ext, rc, truth, payload, status, findings, loc=None):

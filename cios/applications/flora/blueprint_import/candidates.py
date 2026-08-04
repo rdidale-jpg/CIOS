@@ -21,6 +21,10 @@ SUPPORTED_CANONICAL_CLASSES = {
     "enterprise_model_candidate", "unknown", "contradiction", "human_knowledge",
     "refresh_trigger", "publication_reference",
     "fact", "reasoning_lineage",
+    # Canonical business wrappers used by the semantic Twin read model.  They
+    # are recognisable candidates, but remain outside automatic promotion.
+    "industry_twin", "enterprise_twin", "market_participant_twin",
+    "opportunity_hypothesis", "transformation_programme",
 }
 PROJECTION_ONLY_CLASSES = {
     "pain_point", "current_response", "response_effectiveness", "residual_pain",
