@@ -61,17 +61,20 @@ class TwinCollection:
 # This is the single business-vocabulary mapping for imported Twin presentation.
 # It deliberately lives beside semantic assembly, rather than in a web view.
 BUSINESS_COLLECTIONS: Mapping[str, tuple[str, str, tuple[str, ...]]] = {
-    "enterprises": ("Enterprises", "Priority organisations represented in this Twin.", ("enterprise", "enterprise_twin", "entity")),
+    "industry-overview": ("Industry Overview", "The governed industry context represented in this Twin.", ("industry", "industry_twin", "industry_overview")),
+    "enterprises": ("Enterprise Dossiers", "Priority organisations represented in this Twin.", ("enterprise", "enterprise_twin", "enterprise_dossier", "entity")),
     "market-participants": ("Market Participants", "Other organisations shaping the market.", ("market_participant", "market_participant_twin")),
-    "opportunities": ("Opportunities", "Evidence-bounded commercial hypotheses.", ("opportunity_hypothesis", "ranked_opportunity", "opportunity_twin")),
+    "opportunities": ("Opportunities", "Evidence-bounded commercial hypotheses.", ("opportunity", "opportunity_hypothesis", "ranked_opportunity", "opportunity_twin")),
     "insights": ("Insights", "Material observations and interpretations.", ("executive_intelligence", "fact", "observation", "supported_interpreted_observation")),
     "financial-intelligence": ("Financial Intelligence", "Financial measures and their business interpretation.", ("financial_observation", "financial_fact", "economic_pool")),
     "transformation-programmes": ("Transformation Programmes", "Material programmes changing represented organisations.", ("transformation_programme",)),
     "capabilities-and-offers": ("Capabilities and Offers", "Capabilities and offers represented in the Twin.", ("capability_offer",)),
     "relationships": ("Relationships", "Connections represented across the market.", ("relationship", "supplier_relationship")),
+    "memberships": ("Memberships", "Governed collection memberships represented in the Twin.", ("membership",)),
     "evidence-sources": ("Evidence Sources", "Sources supporting the Twin.", ("evidence",)),
     "unknowns": ("Unknowns", "Important gaps retained for investigation.", ("unknown",)),
     "contradictions": ("Contradictions", "Conflicting claims requiring interpretation.", ("contradiction",)),
+    "release-manifests": ("Release Manifests", "Governed release declarations for the Twin.", ("release_manifest",)),
 }
 
 
@@ -88,7 +91,8 @@ def business_collections(twin: SemanticTwin, *, include_empty: bool = False,
         "enterprises": ("enterprise_twin" if any(o.kind == "enterprise_twin" for o in objects)
                         else "enterprise" if any(o.kind == "enterprise" for o in objects) else "entity"),
         "market-participants": "market_participant_twin" if any(o.kind == "market_participant_twin" for o in objects) else "market_participant",
-        "opportunities": "opportunity_hypothesis" if any(o.kind == "opportunity_hypothesis" for o in objects) else "ranked_opportunity",
+        "opportunities": ("opportunity_hypothesis" if any(o.kind == "opportunity_hypothesis" for o in objects)
+                          else "ranked_opportunity" if any(o.kind == "ranked_opportunity" for o in objects) else "opportunity"),
     }
     mapped = {kind for _label, _description, kinds in BUSINESS_COLLECTIONS.values() for kind in kinds}
     result = []
