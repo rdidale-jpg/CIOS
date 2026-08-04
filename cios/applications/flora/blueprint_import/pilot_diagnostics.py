@@ -22,6 +22,7 @@ from .cios_twin_adapter import MAPPING_VERSION
 from .researcher_profile_adapter import CONTRACT as RESEARCHER_CONTRACT, contract_checksum as researcher_contract_checksum
 from .intelligence_projection import ExecutiveAssessmentProjection
 from .semantic_twin import SemanticObject, SemanticTwin, business_collections, executive_record_view_model
+from .observation_runtime import build_candidate_observation, OBSERVATION_BUILDER_NAME, OBSERVATION_PROFILE_VERSION
 
 DIAGNOSTIC_LABEL = "PILOT DIAGNOSTICS — NOT EXECUTIVE OUTPUT"
 REVIEW_PLAN_VERSION = "review-plan-v1"
@@ -31,7 +32,7 @@ ADAPTER_VERSION = "industry-twin-delta-adapter-v1"
 REASON_CODES = (
     "observation_generated", "no_observation_extractor", "no_observation_profile_match",
     "unsupported_object_family", "unsupported_observation_vocabulary", "missing_subject",
-    "missing_predicate", "missing_value", "missing_evidence", "missing_temporal_context",
+    "missing_predicate", "missing_value", "missing_evidence", "missing_statement", "missing_temporal_context",
     "invalid_observation_shape", "source_field_absent", "source_field_unmapped",
     "mapped_value_not_persisted", "semantic_field_missing", "candidate_state_suppressed",
     "assessment_pending", "assessment_not_required_for_factual_display",
@@ -155,20 +156,17 @@ def field_panel(obj: SemanticObject|None, label: str, expected_paths: Iterable[s
     else: reason="source_field_absent"
     path_rows = "".join(f"<tr><td><code>{escape(p)}</code></td><td>{'yes' if _present(v) else 'no'}</td><td>{escape(type(v).__name__ if v is not None else 'absent')}</td><td>{escape(_preview(v))}</td></tr>" for p,v in present)
     obj_id = obj.original_id or obj.record_id if obj else "not applicable"
-    obs_attempted = "yes" if obj and obj.kind in {"executive_intelligence", "fact", "observation", "supported_interpreted_observation"} else "no"
-    obs_profile = "executive_insight_eligible" if obs_attempted == "yes" else "no observation extractor"
-    obs_reason = reason if reason != "observation_generated" else "observation_generated"
-    if obs_attempted == "no" and reason == "source_field_absent":
-        obs_reason = "source_field_absent"
-    elif obs_attempted == "no" and obj:
-        obs_reason = "unsupported_object_family"
+    generated, builder_reason, builder_detail = build_candidate_observation(obj) if obj else (None, "source_field_absent", "No semantic object available.")
+    obs_attempted = "yes" if obj else "no"
+    obs_profile = OBSERVATION_PROFILE_VERSION if obj else "no observation extractor"
+    obs_reason = builder_reason if obj else reason
     owner_invoked = "yes" if obj and any(o in obj.kind for o in ("assessment", "completeness")) else "no"
     projected = "projected" if _present(rendered) else ("omitted" if reason == "source_field_absent" else "rejected")
     legacy_reason = "source_field_present_rendered" if _present(rendered) else reason
     return f"""<details class='pilot-diagnostics field-diagnostic'><summary>Observation Pipeline — {escape(label)} diagnostic — <code>{obs_reason}</code> <span hidden>{escape(legacy_reason)}</span></summary>
     <h4>Stage 1 — Candidate</h4><p>source collection: {escape(obj.kind if obj else 'unavailable')} · declared record class: {escape(obj.kind if obj else 'unavailable')} · source file: {escape(obj.source_file if obj else 'unavailable')} · source row/location: {escape(obj.source_location if obj else 'unavailable')} · source identifier: <code>{escape(obj_id)}</code> · candidate identifier: <code>{escape(obj.record_id if obj else 'unavailable')}</code> · candidate object class: {escape(obj.kind if obj else 'unavailable')} · canonical object family: {escape(obj.kind if obj else 'unavailable')} · canonical owner: semantic_twin.{escape(obj.kind if obj else 'unavailable')} · candidate exists: {'yes' if obj else 'no'}</p>
     <h4>Stage 2 — Source and semantic field availability</h4><table><thead><tr><th>expected source field paths</th><th>source value present</th><th>type</th><th>safely truncated value preview</th></tr></thead>{path_rows}</table><p>matched source field path: <code>{escape(str(selected[0]))}</code> · selector used from researcher_v1.json: <code>{escape(contract_selector)}</code> · adapted target field: <code>{escape(target or page_field)}</code> · persisted candidate field: <code>{escape(target or selected[0])}</code> · semantic Twin field: <code>{escape(page_field or target)}</code> · linked Evidence: {escape(', '.join(obj.evidence_refs) if obj else '')} · Unknown: {escape(', '.join(_refs(obj,'UNK')))} · Contradiction: {escape(', '.join(_refs(obj,'CON')))}</p>
-    <h4>Stage 3 — Observation generation</h4><p>observation generation attempted: {obs_attempted} · extractor or profile selected: {escape(obs_profile)} · observation profile version: {PROJECTION_VERSION} · subject: {escape(obj.subject if obj else '')} · predicate: {escape(page_field or label)} · value summary: {escape(_preview(selected[1]))} · evidence references: {escape(', '.join(obj.evidence_refs) if obj else '')} · confidence: {escape(obj.confidence if obj else '')} · time context: {escape(obj.freshness if obj else '')} · generated observation identifier: {escape(obj.record_id if obs_reason == 'observation_generated' and obj else '')} · result: {'generated' if obs_reason == 'observation_generated' else 'skipped'} · exact reason code: <code>{escape(obs_reason)}</code></p>
+    <h4>Stage 3 — Observation generation</h4><p>runtime component: {escape(OBSERVATION_BUILDER_NAME)} · observation generation attempted: {obs_attempted} · extractor or profile selected: {escape(obs_profile)} · observation profile version: {OBSERVATION_PROFILE_VERSION} · subject: {escape(obj.subject if obj else '')} · predicate: {escape(page_field or label)} · value summary: {escape(_preview(selected[1]))} · evidence references: {escape(', '.join(obj.evidence_refs) if obj else '')} · confidence: {escape(obj.confidence if obj else '')} · time context: {escape(obj.freshness if obj else '')} · generated observation identifier: {escape(generated.observation_id if generated else '')} · generated statement: {escape(_preview(generated.statement if generated else ''))} · source fields: {escape(', '.join(generated.originating_fields) if generated else '')} · evidence count: {len(generated.evidence_refs) if generated else 0} · result: {'generated' if generated else 'skipped'} · exact reason code: <code>{escape(obs_reason)}</code> · missing prerequisite: {escape('none' if generated else builder_detail)}</p>
     <h4>Stage 4 — Canonical owner assessment</h4><p>canonical owner selected: semantic_twin.{escape(obj.kind if obj else 'unavailable')} · owner invoked: {owner_invoked} · assessment model: ExecutiveAssessmentProjection · assessment lifecycle state: assessment_pending_governance · assessment produced: no · assessment deferred: yes · assessment persistence location: not persisted for candidate import · assessment identifier: not supplied · assessment rejection or deferral reason: <code>assessment_pending</code>. factual candidate content: {'present' if _present(selected[1]) else 'absent'} · owner assessment: pending · completeness judgement: pending · recommendation eligibility: pending · promotion eligibility: separate governance action. assessment required for judgement/eligibility/completeness; factual display remains inspectable.</p>
     <h4>Stage 5 — Executive projection</h4><p>projection service: executive_record_view_model · projection version: {PROJECTION_VERSION} · source semantic field or observation: <code>{escape(page_field or target)}</code> · target page view-model field: <code>{escape(page_field or label)}</code> · projected value: {escape(_preview(rendered))} · filter applied: {'none' if rendered else 'empty-value suppression'} · suppression reason: <code>{'none' if rendered else reason}</code> · result: {projected}</p>
     <h4>Stage 6 — Rendered page</h4><p>template field: {escape(label)} · final rendered value: {escape(_preview(rendered))} · fallback used: {'no' if rendered else 'yes'} · responsible component: deployed template/page view model · final reason code: <code>{escape(reason if rendered else 'template_fallback_used')}</code></p></details>"""
