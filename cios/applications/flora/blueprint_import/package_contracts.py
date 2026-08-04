@@ -255,6 +255,13 @@ def _inspection_details(
     # governed manifests are retained after the promotion manifest for legacy
     # producers that have no promotion metadata.
     ordered = ([promotion] if promotion else []) + authoritative + deltas + ([locations["restart_state_location"]] if locations["restart_state_location"] else [])
+    # The Blueprint manifest is the canonical producer contract.  Earlier
+    # inspection retained it as package metadata but excluded it from governed
+    # identity projection, so newly declared identity fields could never reach
+    # Review.  It has lowest precedence behind governed promotion/release
+    # documents, while remaining authoritative for a Blueprint package.
+    if manifest and manifest not in ordered:
+        ordered.append(manifest)
     documents: dict[str, Any] = {}
     try:
         with zipfile.ZipFile(BytesIO(content)) as archive:
@@ -293,6 +300,14 @@ def _inspection_details(
         "research_state": ("research_state", "research_status", "mission_state", "state"),
         "decision_maturity": ("decision_maturity", "decision_readiness", "maturity"),
         "canonical_owner": ("canonical_owner", "semantic_owner", "owner_twin_id"),
+        "twin_id": ("twin_id",),
+        "primary_subject_id": ("primary_subject_id",),
+        "primary_subject_name": ("primary_subject_name",),
+        "primary_subject_class": ("primary_subject_class",),
+        "governed_scope": ("governed_scope",),
+        "geography": ("geography", "geographic_scope"),
+        "time_horizon": ("time_horizon", "temporal_scope"),
+        "included_sub_sectors": ("included_sub_sectors", "sub_sectors"),
     }
     resolved: dict[str, Any] = {}
     sources: dict[str, str] = {}
@@ -300,14 +315,14 @@ def _inspection_details(
     errors: list[str] = []
     warnings: list[str] = []
     for field, keys in fields.items():
-        found: list[tuple[str, str]] = []
+        found: list[tuple[Any, str]] = []
         for path in ordered:
             value = _deep_metadata_value(documents.get(path), *keys)
             if value not in (None, ""):
-                found.append((str(value), path))
+                found.append((value, path))
         if found:
             resolved[field], sources[field] = found[0]
-            distinct = {v.strip().casefold() for v, _ in found}
+            distinct = {json.dumps(v, sort_keys=True, default=str).casefold() for v, _ in found}
             if len(distinct) > 1:
                 item = {"field": field, "values": [{"value": v, "source_path": p} for v, p in found]}
                 conflicts.append(item)

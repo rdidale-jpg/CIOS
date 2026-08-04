@@ -77,6 +77,18 @@
   "additionalProperties": false,
   "description": "Implemented Blueprint manifest profile; unknown fields fail closed.",
   "properties": {
+    "canonical_owner": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Canonical Owner"
+    },
     "enterprise_id": {
       "title": "Enterprise Id",
       "type": "string"
@@ -100,6 +112,45 @@
       "default": null,
       "title": "Final Twin Spine Workbook"
     },
+    "geography": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Geography"
+    },
+    "governed_scope": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Governed Scope"
+    },
+    "included_sub_sectors": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Included Sub Sectors"
+    },
     "package_id": {
       "title": "Package Id",
       "type": "string"
@@ -107,6 +158,48 @@
     "package_version": {
       "title": "Package Version",
       "type": "string"
+    },
+    "primary_subject_class": {
+      "anyOf": [
+        {
+          "enum": [
+            "industry",
+            "enterprise",
+            "market_participant",
+            "opportunity"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Primary Subject Class"
+    },
+    "primary_subject_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Primary Subject Id"
+    },
+    "primary_subject_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Primary Subject Name"
     },
     "profile_version": {
       "title": "Profile Version",
@@ -124,6 +217,48 @@
       "default": "1.0",
       "title": "Schema Version",
       "type": "string"
+    },
+    "time_horizon": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Time Horizon"
+    },
+    "twin_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Twin Id"
+    },
+    "twin_type": {
+      "anyOf": [
+        {
+          "enum": [
+            "industry",
+            "enterprise",
+            "market_participant",
+            "opportunity"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Twin Type"
     }
   },
   "required": [

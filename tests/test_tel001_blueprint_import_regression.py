@@ -155,6 +155,17 @@ def test_exact_tel001_pilot_import_reaches_candidate_governance_review(monkeypat
     assert "Review Blueprint proposed changes" in review
     assert "industry_twin" in review
     assert "Accepted" in review and "Quarantined" in review
+    # Identity is genuinely absent from the producer contract: record content
+    # may describe telecoms, but must not silently become governance authority.
+    assert "Primary subject</th><td>Unresolved" in review
+    assert "Governed scope</th><td>Unresolved" in review
+    assert "Canonical owner</th><td>Unresolved" in review
+    assert "Confirm the proposed Twin identity, primary subject, governed scope and canonical owner" in review
+    # Final staging quarantine is seven explicit records, not the 1,060 items
+    # provisionally withheld from promotion while identity remains unresolved.
+    assert "<tr><th>Quarantined (final staging disposition)</th><td>7</td></tr>" in review
+    assert "Quarantined by staging validation</td><td>7</td>" in review
+    assert "<tr><th>Accepted canonical candidates</th><td>640</td></tr>" in review
     assert "Promotion permission required" in review
     assert not can_approve_blueprint_promotion({}, "TEL-001")
     assert not (tmp_path / "memory").exists()

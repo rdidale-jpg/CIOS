@@ -633,7 +633,7 @@ def _review_summary_section(ctx, job, counts, proposed) -> str:
         return f"<h3>{escape(title)}</h3><table><tbody>{body}</tbody></table>"
     completeness = "".join(f"<tr><td>{escape(str(k))}</td><td>{'Yes' if v else 'No'}</td></tr>" for k, v in (mq.get("twin_completeness_indicators") or {}).items())
     top = rows("Accepted by class", mq.get("accepted_by_class")) + rows("Projection-only by class", mq.get("projection_only_by_class")) + rows("Ignored by reason", job.get("ignored_reasons")) + rows("Quarantined by reason", job.get("quarantine_reasons")) + f"<h3>Derived IDs</h3><table><tr><th>Source-supplied IDs</th><td>{int(mq.get('source_supplied_id_count',0))}</td></tr><tr><th>Derived IDs</th><td>{int(mq.get('derived_id_count',0))}</td></tr><tr><th>Derived-ID collisions</th><td>{int(mq.get('derived_id_collisions',0))}</td></tr><tr><th>Derived-ID failures</th><td>{int(mq.get('derived_id_failures',0))}</td></tr></table><h3>Twin completeness indicators</h3><table>{completeness}</table>"
-    return f"""<section class='card'><h2>Review proposed changes</h2>{top}<h3>Summary</h3><table>
+    return f"""<section class='card'><h2>Review proposed changes</h2><p><strong>Disposition basis:</strong> accepted, quarantined, rejected, unsupported and projection-only totals below are final staging/review dispositions. A package-wide identity hold is provisional and is not counted as quarantine.</p>{top}<h3>Summary</h3><table>
     <tr><th>Blueprint</th><td>{escape(_package_name(package))} {escape(package.identity.package_version)}</td></tr>
     <tr><th>Review status</th><td>{escape(str(job.get('status', 'Preparing')))}</td></tr>
     <tr><th>Staging version</th><td><code>{escape(str((ctx.get('summary') or {}).get('staging_version', 'staging-v1')))}</code></td></tr>
@@ -644,7 +644,7 @@ def _review_summary_section(ctx, job, counts, proposed) -> str:
     <tr><th>Accepted but non-persistable</th><td>{int(counts.get('Accepted but non-persistable', proposed.get('Accepted but non-persistable', 0)))}</td></tr>
     <tr><th>Collapsed/deduplicated candidates</th><td>{val('Collapsed/deduplicated candidates')}</td></tr>
     <tr><th>Expected canonical mutations</th><td>{val('Expected canonical mutations')}</td></tr>
-    <tr><th>Quarantined</th><td>{int(counts.get('Quarantined', 0))}</td></tr>
+    <tr><th>Quarantined (final staging disposition)</th><td>{int(counts.get('Quarantined', 0))}</td></tr>
     <tr><th>Rejected</th><td>{int(counts.get('Rejected', 0))}</td></tr>
     <tr><th>Unsupported</th><td>{int(counts.get('Unsupported', 0))}</td></tr>
     <tr><th>Creates</th><td>{val('Creates')}</td></tr>
@@ -683,7 +683,8 @@ def _review_trace_section(ctx, job, correlation_id: str) -> str:
 def _quarantine_reasons_section(job) -> str:
     reasons = job.get("quarantine_reasons") or {}
     rows = "".join(f"<tr><td>{escape(str(k))}</td><td>{int(v)}</td></tr>" for k, v in sorted(reasons.items(), key=lambda kv: str(kv[0]))) or "<tr><td colspan='2'>No quarantined records.</td></tr>"
-    return "<section class='card'><h2>Quarantine reasons</h2><table><thead><tr><th>Reason</th><th>Count</th></tr></thead><tbody>" + rows + "</tbody></table></section>"
+    total = sum(int(value) for value in reasons.values())
+    return f"<section class='card'><h2>Final staging quarantine reasons</h2><p>Every final quarantine is counted by an explicit staging reason; provisional package-wide identity holds are excluded. <strong>Total: {total}</strong></p><table><thead><tr><th>Reason</th><th>Count</th></tr></thead><tbody>" + rows + "</tbody></table></section>"
 
 
 def _review_sections(import_run_id: str, details: dict[str, Any], query: dict[str, list[str]], technical: bool = False) -> str:
