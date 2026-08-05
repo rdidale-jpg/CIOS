@@ -395,6 +395,7 @@ def test_tel001_deployed_aspect_and_dossier_routes_render_pending_candidate_fiel
         assert page_status == 200
         assert "owner assessment pending governance" in page or "pending governance" in page
         assert all(value in page for value in values), (collection, [value for value in values if value not in page])
+        assert "{'" not in page and "[{'" not in page
 
     enterprise_index, index_status = executive_workspace_page(run_id, {}, view="aspect", collection="enterprises")
     assert index_status == 200
@@ -454,4 +455,6 @@ def test_tel001_imported_twin_observation_builder_generalises_supported_families
     assert status == 200
     for expected in ("ImportedTwinSemanticObservationBuilder", "generated statement", "evidence count", "Observation persistence"):
         assert expected in advanced
+    assert "Canonical Factual Projection" in advanced and "sections projected" in advanced
+    assert "fields projected 0" not in advanced and "projection result omitted" not in advanced
     assert "IND-UK-TELECOMS" in advanced and "ENT-BT" in advanced and "observation_generated" in advanced

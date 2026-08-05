@@ -40,13 +40,32 @@ class CanonicalFactualProjection:
         return any(section.present for section in self.sections)
 
 
-def _text(value: Any) -> tuple[str, ...]:
+def executive_value_lines(value: Any) -> tuple[str, ...]:
+    """Return deterministic executive-safe text lines for canonical values.
+
+    This is the single presentation formatter for imported Twin factual fields:
+    pages and diagnostics consume these lines rather than exposing Python/JSON
+    containers from source payloads.
+    """
     if value in (None, "", [], {}, ()): return ()
     if isinstance(value, dict):
-        return tuple(f"{k}: {v}" for k, v in value.items() if v not in (None, "", [], {}, ()))
+        lines = []
+        for key, item in value.items():
+            if item in (None, "", [], {}, ()): continue
+            label = str(key).replace("_", " ").strip().title()
+            rendered = "; ".join(executive_value_lines(item))
+            if rendered: lines.append(f"{label}: {rendered}")
+        return tuple(lines)
     if isinstance(value, (list, tuple, set)):
-        return tuple(str(v) for v in value if str(v).strip())
+        lines = []
+        for item in value:
+            lines.extend(executive_value_lines(item))
+        return tuple(line for line in lines if line.strip())
     return (str(value),)
+
+
+def _text(value: Any) -> tuple[str, ...]:
+    return executive_value_lines(value)
 
 
 def _attrs(obj: SemanticObject) -> dict[str, Any]:
