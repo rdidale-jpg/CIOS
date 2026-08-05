@@ -74,10 +74,10 @@
   ],
   "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
   "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
-  "fresh_import_policy": "Compare deployed commit SHA, deployment timestamp, latest TEL-001 import timestamp, candidate runtime fingerprint and current runtime fingerprint. Fresh import is required when metadata is complete and the latest import predates deployment or candidate/current runtime fingerprints differ. Fresh import is not required only when metadata is complete, latest import is after deployment, and fingerprints match. Otherwise report cannot determine.",
+  "fresh_import_policy": "Fresh import is required only when the approved change is live and material runtime components that affect candidate representation changed before the candidate was imported. UI-only, presentation-only and diagnostics-only panel changes do not require reimport. If timestamps or component classification are unavailable, Flora reports Cannot determine rather than forcing a reimport.",
   "known_limitations": [
     "Operator validation cannot be inferred from repository tests and remains NOT TESTED until a human records PASS, PARTIAL or FAIL outside this repository-owned metadata.",
-    "Fresh-import guidance is Cannot determine when deployment timestamp, latest TEL-001 import timestamp, candidate runtime fingerprint or current runtime fingerprint is unavailable.",
+    "Deployment telemetry can remain incomplete when Render does not expose build timestamp, service, repository or release marker environment variables to the running application; the panel then degrades to Metadata incomplete rather than reporting a wrong commit.",
     "Rendered-route tests prove the acceptance panel content is visible; they do not prove a live Render deployment has been manually inspected.",
     "Owner assessment and promotion remain governed external authorities; this change preserves candidate factual display but does not auto-authorise recommendations."
   ],
@@ -85,14 +85,33 @@
     "tel001_fixture_checksum": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
     "expected_checksum": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
     "checksum_status": "PASS",
-    "end_to_end_test_status": "PASS — tests/test_tel001_blueprint_import_regression.py",
-    "rendered_route_test_status": "PASS — tests/test_flora_blueprint_import_interface.py::test_upload_page_shows_current_deployed_change_acceptance_panel",
-    "diagnostics_reconciliation_status": "PASS — repository TEL-001 diagnostics assertions passed in this Codex run",
-    "research_gap_reconciliation_status": "PASS — repository TEL-001 Research Gap assertions passed in this Codex run",
+    "end_to_end_test_status": "PASS \u2014 tests/test_tel001_blueprint_import_regression.py",
+    "rendered_route_test_status": "PASS \u2014 tests/test_flora_blueprint_import_interface.py::test_upload_page_shows_current_deployed_change_acceptance_panel",
+    "diagnostics_reconciliation_status": "PASS \u2014 repository TEL-001 diagnostics assertions passed in this Codex run",
+    "research_gap_reconciliation_status": "PASS \u2014 repository TEL-001 Research Gap assertions passed in this Codex run",
     "known_failing_tests": "None in required acceptance subset run for this panel change.",
     "last_validation_timestamp": "2026-08-05T00:00:00Z"
   },
   "merge_gate": "SAFE TO MERGE",
   "operator_validation_status": "NOT TESTED",
-  "diagnostics_href": "/deployment"
+  "diagnostics_href": "/deployment",
+  "source_commit_sha": "88f053e6cee6fe2fef7feba1e7f4553194b7a040",
+  "merged_commit_sha": "unknown",
+  "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
+  "target_branch": "main",
+  "deployment_service": "flora",
+  "deployed_change_marker": "TEL-001-CFP-SHARED-READ-CONTRACT-2026-08-05",
+  "deployment_started_at": "Unavailable",
+  "deployment_completed_at": "Unavailable",
+  "expected_deployment_window_minutes": 30,
+  "material_runtime_components_changed": [
+    "diagnostics-only",
+    "UI-only"
+  ],
+  "reimport_required_if_older_than_change": "Unavailable",
+  "repository": "unknown",
+  "build_command": "unknown",
+  "start_command": "unknown",
+  "auto_deploy": "unknown",
+  "latest_deployment_status": "unknown"
 }

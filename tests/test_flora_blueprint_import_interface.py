@@ -412,7 +412,7 @@ def test_account_failure_summary_and_stage_table_use_same_canonical_stage(monkey
 def test_upload_page_shows_current_deployed_change_acceptance_panel(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     monkeypatch.setenv("RENDER_GIT_COMMIT", "88f053e6cee6fe2fef7feba1e7f4553194b7a040")
-    monkeypatch.setenv("RENDER_GIT_BRANCH", "work")
+    monkeypatch.setenv("RENDER_GIT_BRANCH", "main")
     monkeypatch.setenv("FLORA_BUILD_TIMESTAMP", "2026-08-05T12:00:00+00:00")
     from cios.applications.flora.live import runtime
     runtime.application_revision.cache_clear()
@@ -427,23 +427,24 @@ def test_upload_page_shows_current_deployed_change_acceptance_panel(monkeypatch,
     assert "Researcher-to-Flora Translation Audit" not in page
     assert "Canonical Factual Projection shared read-contract consolidation" in page
     assert "88f053e6cee6fe2fef7feba1e7f4553194b7a040" in page
-    assert "Deployed SHA contains expected implementation commit</th><td>YES" in page
+    assert "Status" in page and "Should I test now?" in page and "Next action" in page
+    assert "Technical deployment evidence" in page
+    assert "<details><summary>Technical deployment evidence</summary>" in page
     assert "Make executive pages, diagnostics, Research Gaps and owner-assessment inputs consume one governed Canonical Factual Projection or explicitly governed derivative." in page
     assert "Industry Overview" in page and "raw dictionaries and Python-style lists should not appear" in page
     assert "BT Group Enterprise Dossier" in page and "fact present but assessment pending" in page
     assert "exactly 17 opportunities should remain visible" in page
     assert "all seven source records must have an explicit visible disposition" in page
     assert "Confirm this panel shows the currently deployed SHA." in page
-    assert "Fresh import/restage decision" in page
-    assert "Cannot determine — deployment metadata missing" in page
+    assert "Fresh import required:</strong> No" in page
     assert "Tel001 Fixture Checksum" in page and "Checksum Status" in page
     assert "Known limitations" in page
     assert "href='/blueprint-import/history#industry-overview'" in page
     assert "href='/deployment'" in page
-    assert "NOT TESTED" in page
+    assert "Ready for testing" in page
 
 
-def test_upload_page_flags_wrong_deployed_commit(monkeypatch, tmp_path):
+def test_upload_page_flags_deployment_problem_for_wrong_branch(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     monkeypatch.setenv("RENDER_GIT_COMMIT", "abc123pilotsha")
     monkeypatch.setenv("RENDER_GIT_BRANCH", "wrong-branch")
@@ -454,5 +455,71 @@ def test_upload_page_flags_wrong_deployed_commit(monkeypatch, tmp_path):
     page, status = import_blueprint_entry_page(HEADERS)
 
     assert status == 200
-    assert "WRONG DEPLOYED COMMIT" in page
-    assert "Deployed SHA contains expected implementation commit</th><td>NO" in page
+    assert "Deployment problem" in page
+    assert "WRONG DEPLOYED COMMIT" not in page
+
+from cios.applications.flora.blueprint_import.deployment_status import decide_deployment_status
+
+
+def _change(**overrides):
+    base = {
+        "change_id": "CHANGE-1",
+        "source_commit_sha": "88f053e6cee6fe2fef7feba1e7f4553194b7a040",
+        "commit_sha": "88f053e6cee6fe2fef7feba1e7f4553194b7a040",
+        "deployed_change_marker": "CHANGE-1",
+        "branch": "main",
+        "target_branch": "main",
+        "deployment_timestamp": "2026-08-05T12:00:00+00:00",
+        "deployment_started_at": "2026-08-05T11:50:00+00:00",
+        "expected_deployment_window_minutes": 30,
+        "deployment_version": "runtime-1",
+        "material_runtime_components_changed": ["UI-only"],
+    }
+    base.update(overrides)
+    return base
+
+
+def test_deployment_status_merge_commit_scenario(monkeypatch):
+    monkeypatch.setattr("cios.applications.flora.blueprint_import.deployment_status._git_contains", lambda deployed, source: "contains expected source commit")
+    decision = decide_deployment_status(_change(commit_sha="mergecommit", deployed_change_marker="Unavailable"), "2026-08-05T12:05:00+00:00")
+    assert decision.status_code == "READY FOR TESTING"
+
+
+def test_deployment_status_squash_merge_scenario(monkeypatch):
+    monkeypatch.setattr("cios.applications.flora.blueprint_import.deployment_status._git_contains", lambda deployed, source: "does not contain expected source commit")
+    decision = decide_deployment_status(_change(commit_sha="squashcommit", deployed_change_marker="CHANGE-1"), "2026-08-05T12:05:00+00:00")
+    assert decision.status_code == "READY FOR TESTING"
+
+
+def test_deployment_status_later_main_commit_scenario(monkeypatch):
+    monkeypatch.setattr("cios.applications.flora.blueprint_import.deployment_status._git_contains", lambda deployed, source: "contains expected source commit")
+    decision = decide_deployment_status(_change(commit_sha="latermain", deployed_change_marker="Unavailable"), "2026-08-05T12:05:00+00:00")
+    assert decision.status_code == "READY FOR TESTING"
+
+
+def test_deployment_status_pending_scenario(monkeypatch):
+    monkeypatch.setattr("cios.applications.flora.blueprint_import.deployment_status._git_contains", lambda deployed, source: "does not contain expected source commit")
+    decision = decide_deployment_status(_change(commit_sha="older", deployed_change_marker="Unavailable", deployment_started_at="2026-08-05T23:59:00+00:00"), "2026-08-05T12:05:00+00:00")
+    assert decision.status_code == "WAITING FOR DEPLOYMENT"
+
+
+def test_deployment_status_wrong_branch_service_scenario():
+    decision = decide_deployment_status(_change(branch="preview"), "2026-08-05T12:05:00+00:00")
+    assert decision.status_code == "DEPLOYMENT PROBLEM"
+
+
+def test_deployment_status_missing_metadata_scenario(monkeypatch):
+    monkeypatch.setattr("cios.applications.flora.blueprint_import.deployment_status._git_contains", lambda deployed, source: "unknown — repository history unavailable")
+    decision = decide_deployment_status(_change(commit_sha="older", deployed_change_marker="Unavailable", deployment_timestamp="Unavailable", deployment_started_at="Unavailable"), "2026-08-05T12:05:00+00:00")
+    assert decision.status_code == "METADATA INCOMPLETE"
+
+
+def test_deployment_status_ui_only_change_does_not_reimport():
+    decision = decide_deployment_status(_change(material_runtime_components_changed=["UI-only"]), "2026-08-05T11:00:00+00:00")
+    assert decision.status_code == "READY FOR TESTING"
+    assert decision.fresh_import_required == "No"
+
+
+def test_deployment_status_material_semantic_change_requires_reimport():
+    decision = decide_deployment_status(_change(material_runtime_components_changed=["semantic construction"], reimport_required_if_older_than_change="2026-08-05T12:00:00+00:00"), "2026-08-05T11:00:00+00:00")
+    assert decision.status_code == "REIMPORT REQUIRED"
