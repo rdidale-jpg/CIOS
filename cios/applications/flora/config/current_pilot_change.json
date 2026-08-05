@@ -1,8 +1,8 @@
 {
   "schema_version": "pilot-change-metadata-v2",
   "change_id": "TEL-001-CFP-SHARED-READ-CONTRACT-2026-08-05",
-  "title": "Canonical Factual Projection shared read-contract consolidation",
-  "objective": "Make executive pages, diagnostics, Research Gaps and owner-assessment inputs consume one governed Canonical Factual Projection or explicitly governed derivative.",
+  "title": "Owner-assessment and Research Gap factual-state reconciliation",
+  "objective": "Make owner assessments, Research Gaps, Enterprise subject resolution and Executive Intelligence counts consume the same factual truth already exposed by Canonical Factual Projection v2.",
   "expected_implementation_sha": "88f053e6cee6fe2fef7feba1e7f4553194b7a040",
   "implementation_summary": [
     "cios/applications/flora/blueprint_import/canonical_factual_projection.py now defines the shared Canonical Factual Projection read model, executive-safe value formatting, projection versions and runtime fingerprint used by consumers.",
@@ -10,36 +10,13 @@
     "cios/applications/flora/blueprint_import/views.py exposes deployment metadata and import/runtime fingerprints so operators can detect stale candidates before judging the visible result.",
     "Repository tests around TEL-001 rendered pages, diagnostics reconciliation and Research Gap wording were added or updated to protect the shared-read-contract behaviour without changing TEL-001 package contents."
   ],
-  "expected_visible_outcomes": {
-    "Industry Overview": [
-      "supplied industry facts should render in executive-friendly sections",
-      "raw dictionaries and Python-style lists should not appear",
-      "diagnostics should report the same Evidence, Unknowns and Contradictions as the page"
-    ],
-    "BT Group Enterprise Dossier": [
-      "supplied operating model, suppliers, Evidence, Unknowns and Contradictions should remain visible",
-      "owner-assessment sections must distinguish fact present but assessment pending from fact absent",
-      "Research Gaps must not request the entire dossier where facts already exist"
-    ],
-    "Market Participants": [
-      "existing role, capability, relationship, activity and Evidence output should remain unchanged"
-    ],
-    "Major Programmes": [
-      "all 13 programmes should remain visible",
-      "summary, stage and Evidence should remain visible"
-    ],
-    "Opportunities": [
-      "exactly 17 opportunities should remain visible",
-      "supplied customer, problem, timing and commercial fields should render where present"
-    ],
-    "Reinvention": [
-      "all seven source records must have an explicit visible disposition"
-    ],
-    "Research Gaps": [
-      "supplied facts must not be described as wholly absent",
-      "assessment pending must not be presented as missing research"
-    ]
-  },
+  "expected_visible_outcomes": [
+    "Industry Overview: Research Gaps no longer describe supplied industry facts as wholly absent; Twin Map reports factual Industry content separately from owner assessment.",
+    "BT Group: owner-assessment sections recognise supplied operating model, suppliers, Evidence, Unknowns and Contradictions; strategic/financial/pressure sections state residual gaps rather than total absence; linked programmes and opportunities resolve where relationships exist; Key Sources no longer says none when Evidence is linked.",
+    "Enterprise subject: ENT-BT resolves to BT Group, not Twin scope.",
+    "Research Gaps: only residual deficiencies are commissioned.",
+    "Reinvention: all seven source records have explicit dispositions."
+  ],
   "affected_pages": [
     "Industry Overview",
     "BT Group Enterprise Dossier",
@@ -113,5 +90,6 @@
   "build_command": "unknown",
   "start_command": "unknown",
   "auto_deploy": "unknown",
-  "latest_deployment_status": "unknown"
+  "latest_deployment_status": "unknown",
+  "fresh_import_required": "No \u2014 this change updates downstream read logic, diagnostics and acceptance copy only; it does not modify persisted candidate or semantic state."
 }

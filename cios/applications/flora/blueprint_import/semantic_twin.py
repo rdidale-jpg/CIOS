@@ -299,7 +299,10 @@ def _object(candidate: dict[str, Any]) -> SemanticObject:
     # fallback.  In particular, an Opportunity's title is its canonical
     # display identity; the absence of a generic ``subject`` must not turn a
     # supplied opportunity into the synthetic label "Twin scope".
-    subject = p.get("subject") or p.get("enterprise_name") or p.get("organisation_name")
+    subject = p.get("subject")
+    if str(subject or "").strip() == "Twin scope":
+        subject = None
+    subject = subject or p.get("enterprise_name") or p.get("organisation_name")
     if not subject and declared_kind in {"opportunity", "opportunity_hypothesis", "ranked_opportunity", "opportunity_twin"}:
         subject = p.get("title") or p.get("opportunity_name") or p.get("opportunity_title")
     if not subject and declared_kind in {"industry", "industry_twin", "industry_overview"}:

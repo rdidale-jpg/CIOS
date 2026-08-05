@@ -9,6 +9,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Mapping
 
+from .canonical_factual_projection import factual_projection_for_object
 from .semantic_twin import SemanticTwin, business_collections, executive_insight_eligible
 
 
@@ -105,11 +106,14 @@ def _inventory(twin: SemanticTwin) -> dict[str, str]:
     opportunities = collections.get("opportunities", ())
     programmes = tuple(o for o in twin.objects if o.kind == "transformation_programme")
     eligible = lambda rows: sum(executive_insight_eligible(o) for o in rows)
+    factual = lambda rows: sum(1 for o in rows if factual_projection_for_object(o).has_facts)
+    unknowns = count("unknown"); contradictions = count("contradiction")
+    industry_rows = collections.get("industry-overview", ())
     return {
-        "industry-overview": f"{count('industry_twin')} canonical Industry Twin concept(s) · {count('executive_intelligence', 'fact', 'observation', 'supported_interpreted_observation')} insight record(s) (underlying records)",
-        "enterprises": f"{len(twin.enterprises)} canonical enterprise(s) · {assessed(twin.enterprises)} owner-assessed enterprise(s)",
-        "market-participants": f"{len(participants)} canonical participant(s) · {assessed(participants)} owner-assessed participant(s) · {eligible(participants) if owner else 0} presentation-eligible participant(s)",
-        "major-programmes": f"{len(programmes)} canonical programme hypothesis/hypotheses · {assessed(programmes)} owner-assessed programme(s) · {eligible(programmes) if owner else 0} presentation-eligible programme(s)",
-        "opportunities": f"{len(opportunities)} canonical opportunity hypothesis/hypotheses · {assessed(opportunities)} owner-assessed hypothesis/hypotheses · {eligible(opportunities) if owner else 0} recommendation-eligible opportunity/opportunities",
+        "industry-overview": f"{count('industry_twin')} canonical Industry Twin concept(s) · {max(1 if factual(industry_rows) else 0, count('industry_twin'))} factual Industry profile(s) · {assessed(industry_rows)} owner-assessed Industry profile(s) · {factual(industry_rows)} candidate factual profile(s) visible · {unknowns} explicit Unknown(s) · {contradictions} Contradiction(s) requiring review",
+        "enterprises": f"{len(twin.enterprises)} canonical enterprise(s) · {len(twin.enterprises)} factual enterprise record(s) present · {assessed(twin.enterprises)} owner-assessed enterprise(s) · {unknowns} explicit Unknown(s) · {contradictions} Contradiction(s) requiring review",
+        "market-participants": f"{len(participants)} canonical participant(s) · {len(participants)} factual participant record(s) present · {assessed(participants)} owner-assessed participant(s) · {eligible(participants) if owner else 0} presentation-eligible participant(s)",
+        "major-programmes": f"{len(programmes)} canonical programme hypothesis/hypotheses · {len(programmes)} factual programme record(s) present · {assessed(programmes)} owner-assessed programme(s) · {eligible(programmes) if owner else 0} presentation-eligible programme(s)",
+        "opportunities": f"{len(opportunities)} canonical opportunity hypothesis/hypotheses · {len(opportunities)} factual opportunity record(s) present · {assessed(opportunities)} owner-assessed hypothesis/hypotheses · {eligible(opportunities) if owner else 0} recommendation-eligible opportunity/opportunities",
         "reinvention-timing": f"{count('ai_reinvention_assessment')} canonical reinvention assessment record(s)",
     }

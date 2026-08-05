@@ -9,6 +9,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from .intelligence_projection import ExecutiveAssessmentProjection
+from .canonical_factual_projection import factual_projection_for_object
 from .semantic_twin import SemanticObject, SemanticTwin, business_collections
 
 
@@ -67,9 +68,16 @@ _ALIASES = {
     "procurement status": ("procurement_status", "status"), "timing": ("timing", "procurement_start", "expected_procurement_start"),
     "confidence": ("confidence",), "evidence": ("evidence_refs", "sources"), "dated evidence": ("evidence_refs", "sources"),
     "supporting sources": ("evidence_refs", "sources"), "evidence and freshness": ("evidence_refs", "freshness"),
-    "organisation description": ("description", "summary"), "domain": ("domain", "domains", "subsector"),
+    "organisation description": ("description", "summary", "overview", "organisation_summary", "organisation_description", "operating_model", "suppliers", "supplier_relationships"), "domain": ("domain", "domains", "subsector"),
     "owner": ("owner", "programme_owner"), "objective": ("objective", "business_objective"), "phase": ("phase",),
-    "pressure or disruption mechanism": ("pressure", "disruption_mechanism", "mechanism"),
+    "purpose and strategy": ("purpose", "strategy", "strategic_ambition", "market_position", "transformation", "transformation_posture"),
+    "operating model": ("operating_model", "operating_structure", "delivery_model"),
+    "financial context": ("financial_context", "financials", "metric", "value"),
+    "technology": ("technology", "technology_stack"), "ecosystem": ("ecosystem", "suppliers", "supplier_relationships", "relationships"),
+    "risks and pressures": ("risks", "pressures", "constraints", "material_pressures", "contradiction_refs", "contradictions"),
+    "change portfolio": ("change_portfolio", "programmes", "transformation_programmes", "transformations"),
+    "opportunities": ("opportunities", "opportunity_refs"),
+    "pressure or disruption mechanism": ("pressure", "disruption_mechanism", "mechanism", "ai_disruption_mechanism"),
     "timing horizon": ("expected_horizon", "timing", "horizon"), "observed adoption signal": ("adoption_signal", "adoption_indicators"),
 }
 
@@ -166,7 +174,7 @@ def research_requirements(twin: SemanticTwin, projections: tuple[ExecutiveAssess
             dispositions = tuple((field, assessment_field_disposition(field, objects, projection))
                                  for field in requested_fields)
             missing = tuple(field for field, disposition in dispositions
-                            if disposition in {"source_field_absent", "source_field_invalid", "genuine_unknown"})
+                            if disposition in {"source_field_absent", "source_field_invalid"})
             # Owner execution and source research are separate concerns.  A
             # candidate with all scheduled source fields present is awaiting
             # governance, not missing research; never re-commission every field
@@ -188,7 +196,14 @@ def research_requirements(twin: SemanticTwin, projections: tuple[ExecutiveAssess
 
 def assessment_field_disposition(field: str, objects: tuple[SemanticObject, ...],
                                  projection: ExecutiveAssessmentProjection) -> str:
-    """Classify research and assessment state without calculating completeness."""
+    """Classify source research state from Canonical Factual Projection v2."""
+    canonical = _canonical_field_presence(field, objects)
+    if canonical in {"explicit_unknown", "present_but_contradictory", "fact_supplied"}:
+        if canonical == "explicit_unknown":
+            return "explicit_unknown"
+        if canonical == "present_but_contradictory":
+            return "contradiction_requires_review"
+        return "source_field_present_unassessed" if projection.state == "assessment_pending_governance" else "source_field_present"
     aliases = _ALIASES.get(field, (field.replace(" ", "_"),))
     if any(o.validation_status not in {"accepted", "ignored"} and
            any(alias in (o.attributes or {}) for alias in aliases) for o in objects):
@@ -209,7 +224,7 @@ def _subjects(key: str, twin: SemanticTwin, objects: tuple[SemanticObject, ...])
     if key == "enterprises":
         return tuple((e.name, e.records) for e in twin.enterprises)
     if key == "industry-overview":
-        return (("the represented industry", objects or twin.objects),)
+        return (("the represented industry", twin.objects),)
     if key == "major-programmes":
         programmes = tuple(o for o in twin.objects if o.kind == "transformation_programme")
         return tuple((_label(o, key), (o,)) for o in programmes) or (("the missing major programmes collection", ()),)
@@ -235,3 +250,40 @@ def _present(field: str, objects: tuple[SemanticObject, ...]) -> bool:
         if field == "confidence" and obj.confidence not in {"", "unknown", "bounded/unspecified"}:
             return True
     return False
+
+
+def _canonical_field_presence(field: str, objects: tuple[SemanticObject, ...]) -> str:
+    """Read factual presence from CFP v2; never from raw source payload alone."""
+    if not objects:
+        return "absent"
+    sections = []
+    evidence = unknowns = contradictions = 0
+    for obj in objects:
+        fp = factual_projection_for_object(obj)
+        sections.extend(fp.sections)
+        evidence += len(fp.evidence_refs); unknowns += len(fp.unknown_refs); contradictions += len(fp.contradiction_refs)
+    f = field.casefold()
+    aliases = {
+        "industry boundary and definition": ("industry definition", "scope"),
+        "value chain and market structure": ("value chain", "market structure"),
+        "size and economics": ("economics", "financial context"),
+        "organisation description": ("organisation summary", "operating model", "suppliers", "ecosystem"),
+        "purpose and strategy": ("strategy", "transformation"),
+        "operating model": ("operating model",),
+        "financial context": ("financial context",),
+        "ecosystem": ("ecosystem", "suppliers"),
+        "risks and pressures": ("constraints", "pressures", "qualified insights"),
+        "change portfolio": ("programmes", "transformation"),
+        "evidence and freshness": ("evidence",),
+        "dated evidence": ("evidence",),
+        "evidence": ("evidence",),
+        "supporting sources": ("evidence",),
+    }.get(f, (f,))
+    if any(a == "evidence" for a in aliases) and evidence:
+        return "fact_supplied"
+    labels = tuple(section.label.casefold() for section in sections if section.present)
+    if any(any(a in label or label in a for label in labels) for a in aliases):
+        return "present_but_contradictory" if contradictions else "fact_supplied"
+    if unknowns:
+        return "explicit_unknown"
+    return "absent"
