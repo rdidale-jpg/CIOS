@@ -24,7 +24,8 @@ from .planning import DryRunPlanRepository, DryRunPlanningService
 from .review_plan import BlueprintReviewPlanCoordinator, PAGE_SIZE_DEFAULT, PAGE_SIZE_MAX
 from .promotion import CanonicalPromotionRepository, CanonicalPromotionService, BlueprintPromotionError, can_approve_blueprint_promotion, can_execute_blueprint_promotion
 from .registry import BlueprintPackageRegistry
-from .pilot_change import current_pilot_change, import_predates_deployment, latest_import_record
+from .pilot_change import current_pilot_change, latest_import_record
+from .deployment_status import decide_deployment_status
 from .review import CandidateReviewRepository, CandidateReviewService, can_review_blueprint_candidate
 from .validator import BlueprintPackageValidator, can_inspect_blueprint_package
 from .cios_twin_adapter import MAPPING_VERSION
@@ -112,20 +113,8 @@ def _candidate_runtime_fingerprint(record: Any | None) -> str:
     return str(inspection.get("deployment_commit_sha") or "Unavailable")
 
 
-def _fresh_import_decision(deployed_sha: str, deployment_timestamp: str, latest_import_timestamp: str, candidate_fingerprint: str, current_fingerprint: str) -> str:
-    missing = (not deployed_sha or "Unavailable" in deployed_sha or not deployment_timestamp or "Unavailable" in deployment_timestamp or not latest_import_timestamp or "No Twin import" in latest_import_timestamp or "Unavailable" in candidate_fingerprint or "Unavailable" in current_fingerprint)
-    if missing:
-        return "Cannot determine — deployment metadata missing"
-    predates = import_predates_deployment(latest_import_timestamp, deployment_timestamp)
-    if predates is None:
-        return "Cannot determine — deployment metadata missing"
-    if predates or candidate_fingerprint != current_fingerprint:
-        return "Fresh import required"
-    return "Fresh import not required"
-
-
 def _status_badge(status: str) -> str:
-    css = "wrong" if status == "WRONG DEPLOYED COMMIT" else ("stale" if status in {"STALE CANDIDATE", "NOT TESTED"} else "ok")
+    css = "stale" if status in {"WAITING FOR DEPLOYMENT", "REIMPORT REQUIRED", "METADATA INCOMPLETE"} else ("wrong" if status == "DEPLOYMENT PROBLEM" else "ok")
     return f"<strong class='acceptance-status {css}'>{escape(status)}</strong>"
 
 
@@ -134,13 +123,10 @@ def _pilot_change_record_section(headers: Any) -> str:
     records = BlueprintPackageRegistry().list()
     latest = _latest_tel001_record(records)
     imported_at = getattr(latest, "received_at", "") if latest else "No Twin import recorded"
-    deployed_sha = str(change.get("commit_sha") or "Unavailable")
-    expected_sha = str(change.get("expected_implementation_sha") or "Unavailable")
-    contains_expected = (deployed_sha == expected_sha or deployed_sha.startswith(expected_sha[:12]) or expected_sha.startswith(deployed_sha[:12])) if "Unavailable" not in deployed_sha + expected_sha else False
     current_fingerprint = __import__('cios.applications.flora.blueprint_import.canonical_factual_projection', fromlist=['runtime_fingerprint']).runtime_fingerprint()
     candidate_fingerprint = _candidate_runtime_fingerprint(latest)
-    fresh_decision = _fresh_import_decision(deployed_sha, str(change.get("deployment_timestamp", "Unavailable")), str(imported_at), candidate_fingerprint, current_fingerprint)
-    operator_status = "WRONG DEPLOYED COMMIT" if not contains_expected else ("STALE CANDIDATE" if fresh_decision == "Fresh import required" else str(change.get("operator_validation_status") or "NOT TESTED"))
+    change["candidate_runtime_fingerprint"] = candidate_fingerprint
+    decision = decide_deployment_status(change, imported_at)
     auto = change.get("automated_validation") or {}
     links = {
         "Industry Overview": "/blueprint-import/history#industry-overview",
@@ -167,19 +153,16 @@ def _pilot_change_record_section(headers: Any) -> str:
             "Advanced Diagnostics": f"/blueprint-import/{run_id}/diagnostics",
         })
     link_html = "<ul class='acceptance-links'>" + "".join(f"<li><a href='{escape(href)}'>{escape(label)}</a></li>" for label, href in links.items()) + "</ul>"
-    controls = "<p><strong>Record operator result:</strong> use the deployment acceptance workflow to record one of NOT TESTED, PASS, PARTIAL or FAIL against this change ID; this panel shows the current repository-owned status until that supported record is updated.</p>"
+    unresolved = decision.unresolved_metadata or ["None"]
     return f"""<section class='card operational-acceptance-panel' id='current-deployed-change' aria-labelledby='current-deployed-change-title'>
-    <style>.operational-acceptance-panel{{border:4px solid #a14100;background:#fff8ed;margin:1rem 0 1.5rem;padding:1rem}}.operational-acceptance-panel h2{{font-size:1.65rem;margin-top:0}}.acceptance-status{{display:inline-block;padding:.4rem .65rem;border-radius:.35rem;background:#222;color:#fff}}.acceptance-status.wrong{{background:#8b0000}}.acceptance-status.stale{{background:#8a5a00}}.acceptance-status.ok{{background:#0f6b45}}.acceptance-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem}}.acceptance-links{{columns:2}}</style>
+    <style>.operational-acceptance-panel{{border:4px solid #a14100;background:#fff8ed;margin:1rem 0 1.5rem;padding:1rem}}.operational-acceptance-panel h2{{font-size:1.65rem;margin-top:0}}.acceptance-status{{display:inline-block;padding:.4rem .65rem;border-radius:.35rem;background:#222;color:#fff}}.acceptance-status.wrong{{background:#8b0000}}.acceptance-status.stale{{background:#8a5a00}}.acceptance-status.ok{{background:#0f6b45}}.acceptance-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem}}.acceptance-links{{columns:2}}.primary-status{{font-size:1.05rem;background:#fff;border:2px solid #185c4d;padding:1rem;margin:.75rem 0}}</style>
     <p><span class='pill'>OPERATIONAL ACCEPTANCE CONTROL</span></p><h2 id='current-deployed-change-title'>CURRENT DEPLOYED CHANGE — TEST THIS NOW</h2>
-    <p>{_status_badge(operator_status)}</p>
-    <div class='acceptance-grid'><section><h3>1. Deployed change</h3><table>
-    <tr><th>Change ID</th><td><code>{escape(str(change.get('change_id','')))}</code></td></tr><tr><th>Change title</th><td>{escape(str(change.get('title','')))}</td></tr><tr><th>Deployed commit SHA</th><td><code>{escape(deployed_sha)}</code></td></tr><tr><th>Expected implementation SHA</th><td><code>{escape(expected_sha)}</code></td></tr><tr><th>Deployed branch</th><td><code>{escape(str(change.get('branch') or 'Unavailable'))}</code></td></tr><tr><th>Deployment/build timestamp</th><td>{escape(str(change.get('deployment_timestamp') or 'Unavailable'))}</td></tr><tr><th>Runtime version</th><td><code>{escape(str(change.get('deployment_version') or deployed_sha))}</code></td></tr><tr><th>Deployed SHA contains expected implementation commit</th><td>{'YES' if contains_expected else 'NO'}</td></tr></table></section>
-    <section><h3>2. Purpose</h3><p>{escape(str(change.get('objective','')))}</p><h3>6. Fresh import/restage decision</h3><p><strong>{escape(fresh_decision)}</strong></p><table><tr><th>Latest TEL-001 import timestamp</th><td>{escape(str(imported_at))}</td></tr><tr><th>Candidate runtime fingerprint</th><td><code>{escape(candidate_fingerprint)}</code></td></tr><tr><th>Current runtime fingerprint</th><td><code>{escape(current_fingerprint)}</code></td></tr></table></section></div>
-    <section><h3>3. What Codex claims changed</h3>{_acceptance_list(change.get('implementation_summary'))}</section>
-    <section><h3>4. What should now look different</h3>{_acceptance_list(change.get('expected_visible_outcomes'))}</section>
-    <section><h3>5. Exact operator test</h3><ol>{''.join(f'<li>{escape(str(step))}</li>' for step in (change.get('required_test_steps') or []))}</ol></section>
-    <div class='acceptance-grid'><section><h3>7. Automated validation result</h3><table>{''.join(f'<tr><th>{escape(str(k).replace("_"," ").title())}</th><td>{escape(str(v))}</td></tr>' for k,v in auto.items())}</table></section><section><h3>8. Operator validation status</h3><p>{_status_badge(operator_status)}</p>{controls}<h3>9. Known limitations</h3>{_acceptance_list(change.get('known_limitations'))}</section></div>
-    <section><h3>10. Links</h3>{link_html}</section></section>"""
+    <section class='primary-status'><h3>Status</h3><p>{_status_badge(decision.status_label)}</p><h3>Should I test now?</h3><p><strong>{escape(decision.should_test_now)}</strong></p><h3>Next action</h3><p>{escape(decision.next_action)}</p></section>
+    <div class='acceptance-grid'><section><h3>Current change title</h3><p>{escape(str(change.get('title','')))}</p><p><strong>Fresh import required:</strong> {escape(decision.fresh_import_required)}</p><h3>What should look different</h3>{_acceptance_list(change.get('expected_visible_outcomes'))}</section><section><h3>Operator test checklist</h3><ol>{''.join(f'<li>{escape(str(step))}</li>' for step in (change.get('required_test_steps') or []))}</ol><h3>Known limitations</h3>{_acceptance_list(change.get('known_limitations'))}</section></div>
+    <details><summary>Technical deployment evidence</summary><table>
+    <tr><th>Deployed SHA</th><td><code>{escape(str(change.get('commit_sha') or 'Unavailable'))}</code></td></tr><tr><th>Expected change identity</th><td><code>{escape(str(change.get('change_id','')))}</code></td></tr><tr><th>Expected source SHA</th><td><code>{escape(str(change.get('source_commit_sha') or change.get('expected_implementation_sha') or 'Unavailable'))}</code></td></tr><tr><th>Merge mode</th><td>{escape(decision.merge_mode)}</td></tr><tr><th>Ancestry/containment result</th><td>{escape(decision.containment_result)}</td></tr><tr><th>Deployed branch</th><td><code>{escape(str(change.get('branch') or 'Unavailable'))}</code></td></tr><tr><th>Render service</th><td>{escape(str(change.get('deployment_service') or 'Unavailable'))}</td></tr><tr><th>Deployment timestamp</th><td>{escape(str(change.get('deployment_timestamp') or 'Unavailable'))}</td></tr><tr><th>Build timestamp</th><td>{escape(str(change.get('deployment_timestamp') or 'Unavailable'))}</td></tr><tr><th>Candidate timestamp</th><td>{escape(str(imported_at))}</td></tr><tr><th>Runtime fingerprint</th><td><code>{escape(current_fingerprint)}</code></td></tr><tr><th>Candidate fingerprint</th><td><code>{escape(candidate_fingerprint)}</code></td></tr><tr><th>Evidence quality</th><td>{escape(decision.evidence_quality)}</td></tr><tr><th>Unresolved metadata</th><td>{escape('; '.join(unresolved))}</td></tr><tr><th>Build command</th><td>{escape(str(change.get('build_command') or 'Unavailable'))}</td></tr><tr><th>Start command</th><td>{escape(str(change.get('start_command') or 'Unavailable'))}</td></tr><tr><th>Auto deploy</th><td>{escape(str(change.get('auto_deploy') or 'Unavailable'))}</td></tr><tr><th>Latest deployment status</th><td>{escape(str(change.get('latest_deployment_status') or 'Unavailable'))}</td></tr></table></details>
+    <section><h3>Purpose</h3><p>{escape(str(change.get('objective','')))}</p><h3>Codex implementation summary</h3>{_acceptance_list(change.get('implementation_summary'))}</section>
+    <section><h3>Links</h3>{link_html}</section><section><h3>Automated validation result</h3><table>{''.join(f'<tr><th>{escape(str(k).replace("_"," ").title())}</th><td>{escape(str(v))}</td></tr>' for k,v in auto.items())}</table></section></section>"""
 
 def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, int]:
     decision = blueprint_upload_authorisation(headers)

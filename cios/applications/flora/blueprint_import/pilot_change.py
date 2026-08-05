@@ -18,6 +18,13 @@ def current_pilot_change() -> dict[str, Any]:
     payload["branch"] = deployed.get("branch") or "Unavailable"
     payload["deployment_timestamp"] = deployed.get("build_timestamp") or "Unavailable"
     payload["deployment_version"] = deployed.get("deployment_version") or payload["commit_sha"]
+    payload["deployed_change_marker"] = deployed.get("deployed_change_marker") or payload.get("deployed_change_marker") or "Unavailable"
+    payload["deployment_service"] = deployed.get("render_service") or payload.get("deployment_service") or "Unavailable"
+    payload["repository"] = deployed.get("repository") or payload.get("repository") or "Unavailable"
+    payload["build_command"] = deployed.get("build_command") or payload.get("build_command") or "Unavailable"
+    payload["start_command"] = deployed.get("start_command") or payload.get("start_command") or "Unavailable"
+    payload["auto_deploy"] = deployed.get("auto_deploy") or payload.get("auto_deploy") or "Unavailable"
+    payload["latest_deployment_status"] = deployed.get("latest_deployment_status") or payload.get("latest_deployment_status") or "Unavailable"
     return payload
 
 

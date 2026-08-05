@@ -10,6 +10,13 @@ REVISION_ENV_NAMES = ("RENDER_GIT_COMMIT", "APPLICATION_REVISION", "APP_REVISION
 BRANCH_ENV_NAMES = ("RENDER_GIT_BRANCH", "APPLICATION_BRANCH", "APP_BRANCH", "GIT_BRANCH", "SOURCE_BRANCH")
 BUILD_TIMESTAMP_ENV_NAMES = ("RENDER_BUILD_TIMESTAMP", "FLORA_BUILD_TIMESTAMP", "BUILD_TIMESTAMP", "SOURCE_DATE_EPOCH")
 VERSION_ENV_NAMES = ("FLORA_DEPLOYMENT_VERSION", "RENDER_SERVICE_NAME", "APPLICATION_VERSION", "APP_VERSION")
+CHANGE_MARKER_ENV_NAMES = ("FLORA_DEPLOYED_CHANGE_MARKER", "FLORA_CHANGE_ID", "DEPLOYED_CHANGE_MARKER")
+SERVICE_ENV_NAMES = ("RENDER_SERVICE_NAME", "FLORA_RENDER_SERVICE", "APPLICATION_SERVICE")
+REPOSITORY_ENV_NAMES = ("RENDER_GIT_REPO_SLUG", "RENDER_REPOSITORY", "GITHUB_REPOSITORY")
+BUILD_COMMAND_ENV_NAMES = ("RENDER_BUILD_COMMAND", "FLORA_BUILD_COMMAND")
+START_COMMAND_ENV_NAMES = ("RENDER_START_COMMAND", "FLORA_START_COMMAND")
+AUTO_DEPLOY_ENV_NAMES = ("RENDER_AUTO_DEPLOY", "FLORA_AUTO_DEPLOY")
+DEPLOYMENT_STATUS_ENV_NAMES = ("RENDER_DEPLOY_STATUS", "FLORA_DEPLOYMENT_STATUS")
 
 @lru_cache(maxsize=1)
 def application_revision() -> str:
@@ -66,4 +73,11 @@ def deployment_metadata() -> dict[str, str]:
         "commit_sha": application_revision(),
         "branch": application_branch(),
         "build_timestamp": build_timestamp(),
+        "deployed_change_marker": _first_env(CHANGE_MARKER_ENV_NAMES) or "Unavailable — deployment metadata not configured",
+        "render_service": _first_env(SERVICE_ENV_NAMES) or "Unavailable — deployment metadata not configured",
+        "repository": _first_env(REPOSITORY_ENV_NAMES) or "Unavailable — deployment metadata not configured",
+        "build_command": _first_env(BUILD_COMMAND_ENV_NAMES) or "Unavailable — deployment metadata not configured",
+        "start_command": _first_env(START_COMMAND_ENV_NAMES) or "Unavailable — deployment metadata not configured",
+        "auto_deploy": _first_env(AUTO_DEPLOY_ENV_NAMES) or "Unavailable — deployment metadata not configured",
+        "latest_deployment_status": _first_env(DEPLOYMENT_STATUS_ENV_NAMES) or "Unavailable — deployment metadata not configured",
     }
