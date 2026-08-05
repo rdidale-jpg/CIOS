@@ -1,0 +1,62 @@
+# Executive Presentation Runtime Audit
+
+## Evidence basis
+
+This audit inspected the unchanged fixture directly: `docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip` (541,823 bytes; SHA-256 `bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07`). The ZIP declares `enterprise_id` `TEL-001`, package id `TEL-001_UK-Telecoms-Twin_Wave5-Corrected`, package version `5.0-corrected.import.2`, schema/manifest version `1.0`, profile version `1.0.0`, Flora contract `package-contracts/flora-blueprint-import`, Knowledge Pack `CIOS-Researcher-Knowledge-Pack-v2.8.0.zip`, generated at `2026-08-04T10:06:42Z`, and a draft release manifest `TEL-001-REL-W5-DRAFT-CORRECTED` dated `2026-08-03`. Do not infer absent metadata: deployed commit, deployment timestamp, import timestamp, staging timestamp, runtime/profile checksums and adapter/projection versions are absent from the ZIP and must be supplied by runtime fingerprinting in future.
+
+Primary repository evidence reviewed: `docs/audits/TEL-001-Researcher-to-Flora-Translation-Audit.md`, `cios/applications/flora/blueprint_import/canonical_factual_projection.py`, `cios/applications/flora/blueprint_import/cios_twin_adapter.py`, `cios/applications/flora/blueprint_import/researcher_profile_adapter.py`, `cios/applications/flora/blueprint_import/semantic_twin.py`, `cios/applications/flora/blueprint_import/twin_governance.py`, `cios/applications/flora/blueprint_import/intelligence_projection.py`, `cios/applications/flora/blueprint_import/observation_runtime.py`, `cios/applications/flora/blueprint_import/executive_workspace.py`, `cios/applications/flora/blueprint_import/views.py`, `knowledge-packs/researcher/package-contracts/flora-blueprint-import/blueprint_manifest.schema.json`, `cios/contracts/twin_object_profiles/researcher_v1.json`, accepted architecture including EI-012, ADR-024, FEIR-001 and EIRP-001.
+
+## TEL-001 fixture inventory
+
+| Family / set | Source file | Count | Real identifiers / values | Declared version or status | Runtime note |
+|---|---:|---:|---|---|---|
+| Manifest | `blueprint_manifest.json` | 1 | `TEL-001`; 109 file entries with SHA-256 values | schema version `1.0` from import metadata | Package envelope accepted by Flora Blueprint import. |
+| Import metadata | `content/package/import_metadata.json` | 1 | `package_id=TEL-001_UK-Telecoms-Twin_Wave5-Corrected`; `package_version=5.0-corrected.import.2` | `profile_version=1.0.0` | Does not name TOP identifier explicitly; Flora relies on contract/profile aliases. |
+| Release manifest | `content/source/release_manifest_wave5_draft.json`; `record_sets/release_manifest_wave5_draft.ndjson` | 1 | `TEL-001-REL-W5-DRAFT-CORRECTED`; mission `CONTINUE` | draft governed checkpoint; not final import-ready | Lineage and object versions evidence only; not promotion. |
+| Industry Overview | `record_sets/industry_overview_wave5.ndjson` | 1 | `IND-UK-TELECOMS`; UK fixed broadband, fibre, wholesale access, mobile/5G, enterprise connectivity, telecoms cloud, OSS/BSS, AI/automation, cyber, data, edge, satellite | `v5.0` | Factual projection can show scope/economics; owner completeness can still expect EI-012 statement dimensions. |
+| Enterprise Dossiers | `record_sets/enterprise_dossiers_wave5.ndjson` | 6 | `ENT-BT`, `ENT-OPENREACH`, `ENT-VMO2`, `ENT-VODAFONETHREE`, `ENT-CITYFIBRE`, `ENT-TALKTALK-PXC` | `v5.0` | BT includes Consumer, Business and Openreach business units; page can show facts while owner assessment says pending. |
+| Market Participants | `record_sets/market_participant_profiles_wave5.ndjson` | 17 | `MP-OFCOM`, `MP-DSIT-BDUK`, `MP-CMA`, `MP-ERICSSON`, `MP-NOKIA`... | v4 carried forward with Wave 5 support | MP-OFCOM role/current activity: telecoms access, spectrum, complaints and infrastructure reporting. |
+| Programmes | `record_sets/programme_objects_wave5.ndjson` | 13 | `PROG-BT-TRANSFORMATION`, `PROG-OPENREACH-FTTP`, `PROG-COPPER-PSTN-MIGRATION`... | `v5.0` | Control case `PROG-BT-TRANSFORMATION`: Active, FY26-FY30, owner ENT-BT, opportunities `OPP-BT-AI-ENGINEERING`, `OPP-BT-AIOPS`. |
+| Opportunities | `record_sets/opportunity_objects_wave5.ndjson` | 17 | `OPP-VMO2-AI-CX`, `OPP-BT-AI-ENGINEERING`, `OPP-BT-AIOPS`... | `v5.0-corrected` | Control case `OPP-VMO2-AI-CX`: customer VMO2, unit Customer operations / Consumer, buyer Unknown, actionability Shape. |
+| Reinvention | `record_sets/reinvention_assessments_wave5.ndjson` | 7 | `RA-IND-UK-TELECOMS`, `RA-ENT-BT`, `RA-ENT-OPENREACH`, `RA-ENT-VMO2`, `RA-ENT-VODAFONETHREE`, `RA-ENT-CITYFIBRE`, `RA-ENT-TALKTALK-PXC` | `v4.0.0` inside records | Seven records supplied; first failing boundary is not package presence but owner-assessment/projection alignment. |
+| Evidence | `record_sets/evidence_register_wave5.ndjson` | 92 | `EV-TEL-001`, `EV-OF-CMR26`, `EV-OF-TMD26`, `EV-OF-CNS26`... | `v5.0` | Evidence is lineage/support; not automatically executive Observation unless EI-012 statement contract is satisfied. |
+| Unknowns | `record_sets/unknown_register_wave5.ndjson` | 30 | `UN-001`..`UN-030` | `v5.0` | Must remain Unknown, not be collapsed into runtime incompleteness. |
+| Contradictions | `record_sets/contradiction_register_wave5.ndjson` | 11 | `CR-001`..`CR-011` | `v5.0` | Must remain Contradiction, not be collapsed into missing data. |
+| Relationships | `record_sets/relationship_register_wave5.ndjson` | 308 | `REL-W2-001`... | `v5.0` | Large lineage/graph set; first divergence when pages do not consume same relationship projection. |
+| Membership | `record_sets/membership_register_wave5.ndjson` | 50 | `MEM-ENT-BT`, `MEM-ENT-OPENREACH`, `MEM-ENT-VMO2`... | carried forward | Supports industry membership and subject association. |
+| Residual / lineage-only sets | 22 remaining ndjson sets | 492 total rows | procurement, buyer intelligence, monitoring triggers, scorecards, pipeline totals, unclassified | mixed Wave 5 | Unsupported or lineage-only unless adapter selectors promote to candidate families. |
+
+## Core finding
+
+TEL-001 implements the Researcher portable object package contract (`TOP-RESEARCHER-PORTABLE-OBJECTS-v1` by repository doctrine, Blueprint package envelope by ZIP metadata). Flora consumes that package through Blueprint manifest validation plus adapter/profile selectors, then constructs `CandidateRecord`, `SemanticTwin`, Canonical Factual Projection, page read models, owner-assessment projections, diagnostics and Research Gaps. The first consistent failing boundary is **not import**: import and staging preserve substantive families. The failing boundary is **projection ownership**: executive pages, Advanced Diagnostics, Research Gaps and owner assessments are not forced to consume one governed Canonical Factual Projection or one explicitly governed derivative.
+
+Earlier Banking and BT experiences rendered because they used Flora-native/demonstrator structures and hand-shaped projections. They proved UI concepts, not unchanged portable Researcher package consumption.
+
+## Required runtime trace
+
+| Stage | Owner/path/function | Input → output | TEL-001 evidence consumed | Duplicate responsibility / first failure | Tests today |
+|---|---|---|---|---|---|
+| Package detection | `archive.py`, `manifest.py`, `package_contracts.py`, `validator.py` | ZIP/files → package summary | `blueprint_manifest.json`, checksums | Blueprint schema + portable profile split | integrity/validator partial |
+| Adapter/profile selection | `cios_twin_adapter.py`, `researcher_profile_adapter.py`, `researcher_v1.json` | source JSON/NDJSON → family payload | `industry_overview_wave5`, dossiers, participants, programmes, opportunities, reinvention | aliases compensate contract drift | adapter/staging partial |
+| Candidate staging | `candidates.py`, `validator.py`, `review.py` | payload → `CandidateRecord` | typed candidate object families | candidate class mapping duplicated with semantic constructors | staging counts partial |
+| Semantic construction | `semantic_twin.py`, `twin_governance.py` | candidate records → `SemanticTwin` | object ids above | semantic classes are implementation-owned, not declared by fixture | partial |
+| Canonical Factual Projection | `canonical_factual_projection.py` | `SemanticTwin` → factual cards/lines | real source fields | should be canonical read object for facts; not universal consumer | partial |
+| Executive pages | `executive_workspace.py` | semantic/factual/readiness → HTML | scope, BT dossier, MP-OFCOM, programme/opportunity examples | page-specific formatting sometimes exposes dict/list structures | route snippets partial |
+| Observation generation | `observation_runtime.py` | semantic object → candidate Observation | programmes more successful; evidence refs | EI-012 owner separate; not all facts are Observations | partial |
+| Owner assessment | `intelligence_projection.py`, `executive_workspace.py` | owner supplied assessment state → readiness | no complete owner output supplied for many families | completeness conflict with visible facts | partial |
+| Advanced Diagnostics | `executive_workspace.py`, `pilot_diagnostics.py` | semantic/readiness/raw diagnostics → HTML | source counts and runtime objects | can disagree with visible page model | partial |
+| Research Gaps | `executive_workspace.py`, `research_requirements.py` | readiness/assessment → actions | Unknowns, contradictions, visible facts | source absence, unmapped field and pending owner assessment not always separated | partial |
+| Recommendation eligibility | `intelligence_projection.py`, `relevance.py` | owner completeness + mission relevance | opportunities `Shape`, buyer unknown | must not infer sales readiness from candidate facts alone | partial |
+
+## Comparison cases and visible outcomes
+
+- Industry Overview: ZIP has definition scope, exclusions, economics (`£34.7bn` sector, fixed `£14.9bn`, mobile `£14.5bn`), regulation and commercial implications. Candidate staging and SemanticTwin preserve it; Canonical Factual Projection can display it. Divergence appears when owner completeness asks for supported EI-012 statements and diagnostics/gaps report missing statements despite visible factual dimensions.
+- BT Group: dossier `ENT-BT` contains Consumer, Business and Openreach units, transformation activity, pressures, strategy/financial context and linked opportunities. Factual page content can appear; Organisation Overview, Strategic Position, Financial Position, Material Pressures, Major Programmes, Opportunities and Key Sources may remain insufficient because owner assessment expects canonical subject, measures, observations and evidence-link dimensions, not just candidate text.
+- Programme: `PROG-BT-TRANSFORMATION` is Active, FY26-FY30, owned by ENT-BT, with evidence `EV-BT-AR26`, `EV-BT-TRANS26`, `EV-BT-AI26` and unknown `UN-002`. It is the control showing candidate → semantic → Observation generation can work; Research Gap state must say owner assessment pending where facts exist.
+- Market participant: `MP-OFCOM` is a Regulator with high market significance and role/current activity around access, spectrum, complaints and infrastructure reporting. It should render as factual participant intelligence; diagnostics/owner assessment must not state absent role if the role exists in factual projection.
+- Opportunity: `OPP-VMO2-AI-CX` has customer `Virgin Media O2`, unit `Customer operations / Consumer`, business outcome, likely buyer roles, timing/value estimates and Unknown buyer. Presentation may show candidate hypothesis; recommendation eligibility must remain blocked where buyer/value/timing owner contract is incomplete.
+- Reinvention: all seven records are present. Their first failing boundary is usually semantic/readiness/page projection alignment rather than source absence: assessment records are candidate owner outputs, but affected subject/function/timing may not drive all pages, diagnostics and gaps consistently.
+
+## Root-cause categories
+
+Findings span duplicated contract, adapter drift, semantic construction defect, canonical subject defect, duplicated projection, divergent read model, page-specific presentation, completeness ownership conflict, Research Gap state misclassification, diagnostics drift, stale candidate risk, presentation formatting defect, Observation lifecycle defect, owner-assessment lifecycle defect, test coverage defect, governance ambiguity and unimplemented canonical owner. No producer content mutation is warranted.
