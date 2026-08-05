@@ -442,12 +442,12 @@ def test_tel001_imported_twin_observation_builder_generalises_supported_families
     observations = [observation for observation, _reason, _detail in built]
     assert all(observation and observation.builder == OBSERVATION_BUILDER_NAME for observation in observations)
     assert observations[0].originating_object == "IND-UK-TELECOMS"
-    assert observations[0].originating_fields == ("Industry profile",)
+    assert observations[0].originating_fields == ("industry_profile",)
     assert "£34.7bn" in observations[0].statement
     assert observations[1].originating_object == "ENT-BT"
-    assert observations[1].originating_fields == ("statement",)
+    assert observations[1].originating_fields == ("description",)
     assert "BT Group is a UK-headquartered telecommunications group" in observations[1].statement
-    assert observations[2].originating_fields == ("statement",)
+    assert observations[2].originating_fields == ("objective",)
     assert observations[2].evidence_refs
 
     advanced, status = executive_workspace_page(package.import_run_id, {"X-Flora-User": "regression-auditor", "X-Flora-Enterprises": "TEL-001", "X-Flora-Active-Workspace": "TEL-001", "X-Flora-Roles": "blueprint_import_admin,package.review"}, view="diagnostics")
