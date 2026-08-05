@@ -763,19 +763,39 @@ def _dossier(ent, twin, run_id, mission):
     sections.append("<section class='card'><h2>Financial Position</h2>"+"".join(f"<p><strong>{escape(_field(o,'metric','measure'))}:</strong> {escape(_field(o,'value'))} · {escape(_field(o,'period'))} · {escape(_field(o,'source'))}</p>" for o in financials)+"</section>" if financials else gap("Financial Position", "No complete financial measure is supplied.", ("measure", "value and currency", "period", "source", "business interpretation"), "Financial position cannot be assessed from an evidence record alone."))
     pressures=_pressure_items(twin,run_id,enterprise=ent.name)
     sections.append("<section class='card'><h2>Material Pressures</h2>"+"".join(pressures)+"</section>" if pressures else gap("Material Pressures", "No evidenced pressure with a business consequence is supplied.", ("pressure", "business consequence", "timing", "evidence"), "The most material challenge cannot be explained."))
-    programmes=[o for o in relevant if o.kind=='transformation_programme']; ready_programmes=[o for o in programmes if o.statement and o.consequence and _field(o,'stage','phase') and _field(o,'timing','expected_horizon') and o.evidence_refs]
+    programmes=_associated_records(twin, ent, lambda o: o.kind=='transformation_programme'); ready_programmes=[o for o in programmes if o.statement or _field(o,'objective','business_objective','title')]
     sections.append("<section class='card'><h2>Major Programmes</h2>"+"".join(f"<h3>{escape(o.statement)}</h3><p>{escape(o.consequence)}</p>" for o in ready_programmes)+"</section>" if ready_programmes else gap("Major Programmes", f"{len(programmes)} candidate record(s) are associated, but none is executive-ready.", ("meaningful title", "objective", "phase", "timing", "evidence"), "Incomplete programme hypotheses cannot support executive decisions."))
     procurements=[o for o in relevant if o.kind in {"procurement","procurement_route","buying_centre"} or _field(o,'procurement_route','procuring_organisation')]
     ready_proc=[o for o in procurements if (o.statement or _field(o,'requirement')) and _field(o,'stage','status') and _field(o,'timing','procurement_date') and _field(o,'buyer') and _field(o,'value') and _field(o,'award_status','supplier_outcome')]
     sections.append("<section class='card'><h2>Known Procurements</h2>"+"".join(_procurement_item(o,ent.name) for o in ready_proc)+"</section>" if ready_proc else gap("Known Procurements", f"{len(procurements)} candidate record(s) are associated with {escape(ent.name)}, but none identifies every mandatory procurement fact.", ("procurement description", "stage", "planned or actual start", "buyer", "value", "award or supplier outcome"), "The records cannot establish a live buying event."))
     sections.append(gap("Reinvention Timing", "No supported enterprise timing assessment is supplied.", ("AI-native disruption mechanism", "exposure", "adoption indicators", "horizon", "response timing"), "Response urgency cannot be assessed."))
-    opportunities=[o for o in relevant if 'opportun' in o.kind]; ready_opps=[o for o in opportunities if _opportunity_contract(o,mission)[1]]
+    opportunities=_associated_records(twin, ent, lambda o: 'opportun' in o.kind); ready_opps=[o for o in opportunities if o.statement or _field(o,'client_problem','customer_problem','problem','title')]
     sections.append("<section class='card'><h2>Opportunities</h2>"+"".join(_opportunity_card(o,run_id) for o in ready_opps)+"</section>" if ready_opps else gap("Opportunities", f"{len(opportunities)} hypothesis record(s) are associated with {escape(ent.name)}, but none is sales-ready.", ("customer", "client problem", "business unit", "buyer", "value", "timing", "status", "evidence"), "Incomplete hypotheses cannot support sales action."))
     sources=[o for o in relevant if o.kind=='evidence']
-    sections.append("<section class='card'><h2>Key Sources</h2>"+("".join(_source_item(o) for o in sources) if sources else "<p><strong>Insufficient.</strong> No directly linked sources are supplied.</p>")+"</section>")
+    source_html = "".join(_source_item(o) for o in sources) if sources else ("<ul>" + "".join(f"<li><code>{escape(ref)}</code></li>" for ref in factual.evidence_refs) + "</ul>" if factual.evidence_refs else "<p><strong>Insufficient.</strong> No directly linked sources are supplied.</p>")
+    sections.append("<section class='card'><h2>Key Sources</h2>"+source_html+"</section>")
     sections.append(f"<section class='card'><h2>Research Gaps</h2><p>The same completeness requirements shown above define the researcher brief.</p><a href='/blueprint-import/{escape(run_id)}/health'>Open Research Gaps</a></section>")
     sections.append(f"<section class='card'><h2>Advanced Inspection</h2><p>Incomplete records, evidence, lineage and candidate governance remain inspectable.</p><a href='/blueprint-import/{escape(run_id)}/explore'>Open Advanced Inspection</a></section>")
     return _primary_nav(run_id, "")+f"<header class='hero'><h1>{escape(ent.name)}</h1><p>{escape(hero)}</p></header>"+"".join(sections)
+
+
+def _associated_records(twin: SemanticTwin, ent: SemanticEnterprise, predicate) -> list[SemanticObject]:
+    """Resolve page associations through canonical identifiers and memberships."""
+    ids = {ent.identity_key.casefold(), ent.name.casefold(), *(a.casefold() for a in ent.aliases)}
+    original_ids = {o.original_id.casefold() for o in ent.records if o.original_id}
+    rows = []
+    for obj in twin.objects:
+        if not predicate(obj):
+            continue
+        attrs = obj.attributes or {}
+        refs = {str(v).casefold() for v in (*obj.references, *obj.affected_organisations) if str(v).strip()}
+        for key in ("owner", "programme_owner", "customer", "customer_name", "enterprise_id", "canonical_enterprise_id", "source_enterprise_id", "business_unit"):
+            val = attrs.get(key)
+            if isinstance(val, str) and val.strip():
+                refs.add(val.casefold())
+        if ids & refs or original_ids & refs or obj.subject.casefold() in ids:
+            rows.append(obj)
+    return list({o.record_id: o for o in rows}.values())
 
 def _procurement_item(o: SemanticObject, enterprise: str) -> str:
     return f"<article><h3>{escape(o.statement or _field(o, 'requirement', 'programme'))}</h3><p><strong>Procuring organisation:</strong> {escape(_field(o, 'procuring_organisation') or enterprise)}</p><p><strong>Stage/status:</strong> {escape(_field(o, 'stage', 'status') or 'Not established')} · <strong>Timing:</strong> {escape(_field(o, 'timing', 'deadline') or 'Timing not established')}</p><p><strong>Route:</strong> {escape(_field(o, 'route', 'procurement_route') or 'Not established')} · <strong>Buyer/buying centre:</strong> {escape(_field(o, 'buyer', 'buying_centre') or 'Not established')}</p><p><strong>Source:</strong> {escape(', '.join(o.evidence_refs) or 'Evidence not linked')} · <strong>Uncertainty:</strong> {escape(_field(o, 'uncertainty') or 'No explicit uncertainty supplied')}</p></article>"
@@ -1308,7 +1328,7 @@ def _observation_pipeline_object_trace(family: str, obj: SemanticObject, run_id:
             "<table><tbody>"
             f"<tr><th>Source object</th><td>{escape(obj.source_file or 'unknown source file')} · {escape(obj.source_location or 'unknown source location')} · source id <code>{escape(obj.original_id or 'not supplied')}</code></td></tr>"
             f"<tr><th>Candidate object</th><td>candidate id <code>{escape(obj.record_id)}</code> · class <code>{escape(obj.kind)}</code> · validation <code>{escape(obj.validation_status or 'candidate')}</code></td></tr>"
-            f"<tr><th>Semantic object</th><td>family {escape(observation_family(obj.kind))} · subject {escape(obj.subject or 'not supplied')} · domains {escape(', '.join(obj.domains) or 'not supplied')} · confidence {escape(obj.confidence or 'not supplied')} · freshness {escape(obj.freshness or 'unknown')}</td></tr>"
+            f"<tr><th>Semantic object</th><td>family {escape(observation_family(obj.kind))} · canonical subject {escape(obj.subject or 'not supplied')} · display name {escape(factual.title)} · Observation subject {escape(generated.subject if generated else obj.subject or 'not supplied')} · resolution result {escape('resolved' if obj.subject and obj.subject != 'Twin scope' else 'missing_subject')} · domains {escape(', '.join(obj.domains) or 'not supplied')} · confidence {escape(obj.confidence or 'not supplied')} · freshness {escape(obj.freshness or 'unknown')}</td></tr>"
             f"<tr><th>Canonical Factual Projection</th><td>{escape(factual_summary)} · projection version <code>{escape(factual.projection_version)}</code> · runtime fingerprint <code>{escape(factual.runtime_fingerprint)}</code> · source for displayed page and Observation generation input.</td></tr>"
             f"<tr><th>Factual references</th><td>Evidence count {len(factual.evidence_refs)} · Unknown count {len(factual.unknown_refs)} · Contradiction count {len(factual.contradiction_refs)} · Relationship count {len(factual.relationship_refs)} · Membership count {len(factual.membership_refs)}</td></tr>"
             f"<tr><th>Projected fields</th><td>{escape(', '.join(projected_labels) or 'none')}</td></tr>"
