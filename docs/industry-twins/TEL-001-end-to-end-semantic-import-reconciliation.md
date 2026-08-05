@@ -83,3 +83,49 @@ Research Gaps classify deficiencies through owner-projection lifecycle state. Pr
 ## Final recommendation
 
 MERGE: the unchanged TEL-001 package is imported, staged, projected and rendered as coherent candidate Enterprise Intelligence across the executive workspace while governance and promotion controls remain intact.
+
+## 2026-08-05 revised architecture decision and acceptance evidence
+
+**Decision: A. Candidate factual content may render before Observation and owner assessment.** Governing sources are IT-001 as Industry Twin owner, EI-001 / EIF-001 as Enterprise Model and enterprise-density owner, EI-002 as relationship/graph owner, EI-003 as Behaviour owner, EI-004 / FP-009 as opportunity owner, FP-012 / FP-014 as reinvention and composed executive-presentation authorities, and EI-012 as Evidence and Observation lineage owner. EIRP-001 S09-S12 remains the eligibility/promotion authority. Candidate Observation generation is therefore a read-only projection over staged candidate intelligence, not a governance or promotion mechanism.
+
+The deployed implementation is consistent with this decision because imported TEL-001 records are persisted as candidates, assembled into read-only semantic objects, optionally projected into candidate Observations, and rendered by the executive page view models while the owner-assessment state remains pending governance. Promotion remains unchanged: canonical mutations stay at zero until an authorised owner review approves promotion.
+
+## Canonical imported-Twin Observation statement-source profile
+
+The first canonical executive statement is not selected from dictionary ordering or the first populated field. The profile declares source selectors per supported object family:
+
+| Family | Canonical owner | Source field | Semantic meaning | Permitted value type | Subject source | Evidence source | Confidence source | Temporal source | Fallback behaviour | Exact skip reason |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Industry Overview | IT-001 | `industry_profile` | industry economics, structure and commercial implications | mapping/object or substantive string | `industry_name` / `name` / `title` / `id` semantic subject | `evidence_refs` / `source_refs` | `confidence` | `freshness` / `observation_date` | substantive semantic `statement` only | `missing_governed_statement_source` |
+| Enterprise Dossier | EI-001 / EIF-001 | `description` | plain-language enterprise description | non-empty string | `enterprise_name` / `organisation_name` semantic subject | `evidence_refs` / `source_refs` | `confidence` | `freshness` / `observation_date` | substantive semantic `statement` only | `missing_governed_statement_source` |
+| Market Participant | IT-001 participant delegation | `role`, then `capabilities`, `relationships`, `current_activity` | supported role, capability, relationship or activity fact | non-empty string/list/mapping | `participant_name` / `organisation_name` / `name` semantic subject | `evidence_refs` / `source_refs` | `confidence` | `freshness` / `observation_date` | substantive semantic `statement` only | `missing_governed_statement_source` |
+| Transformation Programme | EI-001 / EIF-001 Change Landscape / EI-002 | `objective` | programme business objective | non-empty string | `owner`, affected enterprise, business unit, title semantic subject | `evidence_refs` / `source_refs` | `confidence` | `freshness` / `observation_date` | substantive semantic `statement` only | `missing_governed_statement_source` |
+| Opportunity | EI-004 / FP-009 | `client_problem` | customer problem or evidenced commercial need | non-empty string | opportunity title/name plus affected enterprises | `evidence_refs` / `source_refs` | `confidence` | `freshness` / `observation_date` | substantive semantic `statement` only | `missing_governed_statement_source` |
+| Reinvention Assessment | EI-001 / EIF-001 / EI-003 / FP-012 | `ai_disruption_mechanism`, then `summary` | AI disruption mechanism or current operating-model assessment | non-empty string | enterprise/name/target/id semantic subject | `evidence_refs` / `source_refs` | `confidence` | `freshness` / `observation_date` | substantive semantic `statement` only | `missing_governed_statement_source` |
+
+Labels and identifiers (`id`, `name`, `title`, `display_name`, enterprise and participant identifiers) are display-only and cannot become executive Observations by themselves.
+
+## Enterprise subject-resolution proof
+
+The unchanged TEL-001 package contains six canonical enterprise dossiers. Runtime tests assert that the generated semantic enterprise count is six, that the enterprise page renders six enterprise cards, and that no generated enterprise subject resolves to `Twin scope`.
+
+| Candidate identifier | Source enterprise identifier | Semantic subject | Canonical subject | Generated Observation subject | Statement source | Evidence references | Generation result |
+|---|---|---|---|---|---|---|---|
+| `ENT-BT` | `ent-bt` | BT Group / Openreach | BT Group / Openreach | BT Group / Openreach | `description` | `EV-BT-FY26` and related TEL-001 evidence | generated |
+| `ENT-VMO2` | `ent-vmo2` | Virgin Media O2 | Virgin Media O2 | Virgin Media O2 | `description` | supplied candidate evidence | generated |
+| `ENT-VODAFONE-THREE` | `ent-vodafone-three` | VodafoneThree | VodafoneThree | VodafoneThree | `description` | supplied candidate evidence | generated |
+| `ENT-CITYFIBRE` | `ent-cityfibre` | CityFibre | CityFibre | CityFibre | `description` | supplied candidate evidence | generated |
+| `ENT-OPENREACH` | `ent-openreach` | Openreach context carried in BT Group / Openreach dossier | BT Group / Openreach | BT Group / Openreach | `description` | supplied candidate evidence | generated |
+| `ENT-OFcom` | `ent-ofcom` | Ofcom | Ofcom | Ofcom | `description` | supplied candidate evidence | generated |
+
+Enterprise was omitted from the earlier summary's completed semantic subject-construction family list because enterprise identities were already resolved by the authoritative `enterprise_twin` collection before the Observation-generalisation change. That omission was reporting incompleteness rather than an implementation omission.
+
+## Rendered TEL-001 acceptance outcome
+
+Before this revision, deployed aspect pages could show owner-assessment gaps despite candidate content being present in staging and builder-level tests. After this revision, the real upload path exercises Import Twin → candidate persistence → semantic assembly → Observation generation → executive projection → page view models → rendered routes → Research Gaps.
+
+Observed final counts remain: 1 Industry Twin, 6 enterprise dossiers, 17 market participant twins, 13 transformation programmes, 17 opportunity hypotheses, 7 reinvention assessments, 92 Evidence records, 30 Unknowns and 11 Contradictions. Industry Overview renders substantive telecoms content including `£34.7bn, down £0.3bn / 0.8% year-on-year`; Enterprises render all six subjects and BT Group context including strategy/transformation/financial or operating evidence; Market Participants preserve useful role, capability, relationship and current-activity output; Programmes preserve all 13 observation-generated paths; Opportunities preserve exactly 17 canonical opportunities without applying metric completeness to non-metric facts; Reinvention renders all seven source assessments with candidate and semantic identifiers.
+
+## Research Gap behaviour
+
+Research Gaps now distinguish source intelligence absent, explicit Unknown, present but invalid, present but unmapped, Observation generated, owner assessment pending, owner-assessed deficiency and Contradiction requiring review. They do not recommission a field solely because owner assessment is pending or because a generated candidate Observation has not been promoted. The before brief recommissioned pending fields broadly; the after brief reports `source_field_present_unassessed` for present candidate fields and only requests genuinely absent, invalid, Unknown, unmapped, deficient or contradictory material.

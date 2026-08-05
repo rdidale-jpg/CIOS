@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 from typing import Any
 import hashlib
 
-from .semantic_twin import SemanticObject, executive_record_view_model
+from .semantic_twin import SemanticObject
 
 OBSERVATION_PROFILE_VERSION = "imported-twin-observation-profile-v1"
 OBSERVATION_BUILDER_NAME = "ImportedTwinSemanticObservationBuilder"
@@ -27,6 +27,38 @@ SUPPORTED_OBJECT_FAMILIES: dict[str, tuple[str, ...]] = {
 }
 
 _KIND_TO_FAMILY = {kind: family for family, kinds in SUPPORTED_OBJECT_FAMILIES.items() for kind in kinds}
+
+@dataclass(frozen=True)
+class StatementSourceSelector:
+    """Governed statement source for candidate Observation construction."""
+    canonical_owner: str
+    source_field: str
+    semantic_meaning: str
+    permitted_value_type: str
+    subject_source: str
+    evidence_source: str
+    confidence_source: str
+    temporal_source: str
+    fallback_behaviour: str
+    skip_reason: str
+
+
+STATEMENT_SOURCE_SELECTORS: dict[str, tuple[StatementSourceSelector, ...]] = {
+    "Industry Overview": (StatementSourceSelector("IT-001", "industry_profile", "industry economics, structure and commercial implications", "mapping/object or substantive string", "industry_name/name/title/id semantic subject", "evidence_refs/source_refs", "confidence", "freshness/observation_date", "fall back only to a substantive semantic statement", "missing_governed_statement_source"),),
+    "Enterprise Dossier": (StatementSourceSelector("EI-001 / EIF-001", "description", "plain-language enterprise description", "non-empty string", "enterprise_name/organisation_name semantic subject", "evidence_refs/source_refs", "confidence", "freshness/observation_date", "fall back only to a substantive semantic statement", "missing_governed_statement_source"),),
+    "Market Participant": (
+        StatementSourceSelector("IT-001 participant delegation", "role", "supported participant market role", "non-empty string", "participant_name/organisation_name/name semantic subject", "evidence_refs/source_refs", "confidence", "freshness/observation_date", "try capabilities, relationships, then current_activity; otherwise fall back only to a substantive semantic statement", "missing_governed_statement_source"),
+        StatementSourceSelector("IT-001 participant delegation", "capabilities", "supported participant capabilities", "non-empty string/list/mapping", "participant_name/organisation_name/name semantic subject", "evidence_refs/source_refs", "confidence", "freshness/observation_date", "try relationships, then current_activity; otherwise substantive statement only", "missing_governed_statement_source"),
+        StatementSourceSelector("IT-001 participant delegation", "relationships", "supported participant relationships", "non-empty string/list/mapping", "participant_name/organisation_name/name semantic subject", "evidence_refs/source_refs", "confidence", "freshness/observation_date", "try current_activity; otherwise substantive statement only", "missing_governed_statement_source"),
+        StatementSourceSelector("IT-001 participant delegation", "current_activity", "current participant activity", "non-empty string/list/mapping", "participant_name/organisation_name/name semantic subject", "evidence_refs/source_refs", "confidence", "freshness/observation_date", "fall back only to a substantive semantic statement", "missing_governed_statement_source")),
+    "Transformation Programme": (StatementSourceSelector("EI-001 / EIF-001 Change Landscape / EI-002", "objective", "programme business objective", "non-empty string", "owner/affected_enterprises/business_unit/title semantic subject", "evidence_refs/source_refs", "confidence", "freshness/observation_date", "fall back only to a substantive semantic statement", "missing_governed_statement_source"),),
+    "Opportunity": (StatementSourceSelector("EI-004 / FP-009", "client_problem", "customer problem or evidenced commercial need", "non-empty string", "title/opportunity_name semantic subject plus affected enterprises", "evidence_refs/source_refs", "confidence", "freshness/observation_date", "fall back only to a substantive semantic statement", "missing_governed_statement_source"),),
+    "Reinvention Assessment": (
+        StatementSourceSelector("EI-001 / EIF-001 / EI-003 / FP-012", "ai_disruption_mechanism", "AI disruption mechanism or reinvention pressure", "non-empty string", "enterprise_name/organisation_name/target/id semantic subject", "evidence_refs/source_refs", "confidence", "freshness/observation_date", "try summary; otherwise fall back only to a substantive semantic statement", "missing_governed_statement_source"),
+        StatementSourceSelector("EI-001 / EIF-001 / EI-003 / FP-012", "summary", "current operating-model assessment", "non-empty string", "enterprise_name/organisation_name/target/id semantic subject", "evidence_refs/source_refs", "confidence", "freshness/observation_date", "fall back only to a substantive semantic statement", "missing_governed_statement_source")),
+}
+
+_DISPLAY_ONLY_FIELDS = {"id", "name", "title", "display_name", "enterprise_id", "canonical_id", "participant_name", "enterprise_name", "organisation_name"}
 
 @dataclass(frozen=True)
 class CandidateObservation:
@@ -65,7 +97,7 @@ def build_candidate_observation(obj: SemanticObject, *, observed_at: str | None 
         return None, "missing_subject", "Observation requires a canonical subject."
     statement, fields = _statement_and_fields(obj)
     if not statement:
-        return None, "missing_statement", "No statement available from semantic statement or registered factual fields."
+        return None, "missing_governed_statement_source", "No substantive value is present in the family statement-source selectors; labels and identifiers are skipped."
     now = observed_at or datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     oid = _observation_id(obj, statement, fields)
     return CandidateObservation(oid, OBSERVATION_BUILDER_NAME, OBSERVATION_PROFILE_VERSION,
@@ -74,13 +106,27 @@ def build_candidate_observation(obj: SemanticObject, *, observed_at: str | None 
 
 
 def _statement_and_fields(obj: SemanticObject) -> tuple[str, tuple[str, ...]]:
-    if obj.statement and not obj.statement.lstrip().startswith("{"):
+    attrs = obj.attributes or {}
+    family = observation_family(obj.kind)
+    for selector in STATEMENT_SOURCE_SELECTORS.get(family, ()):
+        value = attrs.get(selector.source_field)
+        if _substantive_value(value):
+            return f"{obj.subject} — {selector.semantic_meaning}: {_render_value(value)}", (selector.source_field,)
+    display_values = {str(attrs.get(k) or "").strip() for k in _DISPLAY_ONLY_FIELDS}
+    if obj.statement and not obj.statement.lstrip().startswith("{") and obj.statement.strip() not in display_values:
         return obj.statement, ("statement",)
-    view = executive_record_view_model(obj)
-    if not view.fields:
-        return (obj.statement if obj.statement and obj.statement.lstrip().startswith("{") is False else ""), ("statement",) if obj.statement else ()
-    label, value = view.fields[0]
-    return f"{obj.subject} — {label}: {_render_value(value)}", (label,)
+    return "", ()
+
+
+def _substantive_value(value: Any) -> bool:
+    if value in (None, "", [], {}, ()): return False
+    if isinstance(value, str):
+        return bool(value.strip())
+    if isinstance(value, dict):
+        return any(_substantive_value(v) for v in value.values())
+    if isinstance(value, (list, tuple)):
+        return any(_substantive_value(v) for v in value)
+    return True
 
 
 def _render_value(value: Any) -> str:
