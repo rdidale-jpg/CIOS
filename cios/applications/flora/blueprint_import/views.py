@@ -24,6 +24,7 @@ from .planning import DryRunPlanRepository, DryRunPlanningService
 from .review_plan import BlueprintReviewPlanCoordinator, PAGE_SIZE_DEFAULT, PAGE_SIZE_MAX
 from .promotion import CanonicalPromotionRepository, CanonicalPromotionService, BlueprintPromotionError, can_approve_blueprint_promotion, can_execute_blueprint_promotion
 from .registry import BlueprintPackageRegistry
+from .pilot_change import current_pilot_change, import_predates_deployment, latest_import_record
 from .review import CandidateReviewRepository, CandidateReviewService, can_review_blueprint_candidate
 from .validator import BlueprintPackageValidator, can_inspect_blueprint_package
 from .cios_twin_adapter import MAPPING_VERSION
@@ -84,6 +85,55 @@ def _post_receipt_failure_diagnostic(exc: Exception, record: BlueprintPackageRec
     )
 
 
+
+def _pilot_change_record_section(headers: Any) -> str:
+    change = current_pilot_change()
+    records = BlueprintPackageRegistry().list()
+    latest = latest_import_record(records)
+    imported_at = getattr(latest, "received_at", "") if latest else "No Twin import recorded"
+    predates = import_predates_deployment(imported_at if latest else "", str(change.get("deployment_timestamp", "")))
+    if predates is True:
+        stale_status = "Stale candidate"
+        stale_warning = "The latest imported candidate predates this deployment; use a fresh import or restage before judging semantic runtime behaviour."
+        fresh_required = "Requires fresh import"
+    elif predates is False:
+        stale_status = "Current candidate imported after deployment"
+        stale_warning = "The latest imported candidate does not predate the deployment timestamp."
+        fresh_required = "Restage only if operator testing needs current validation outputs."
+    else:
+        stale_status = "Not yet tested"
+        stale_warning = "Flora cannot prove candidate freshness because deployment timestamp or import timestamp evidence is unavailable."
+        fresh_required = "Requires fresh import" if change.get("import_restaging_required") else "Not required"
+    def items(values: Any) -> str:
+        if isinstance(values, list):
+            return "<ul>" + "".join(f"<li>{escape(str(v))}</li>" for v in values) + "</ul>"
+        return f"<p>{escape(str(values or 'Unavailable'))}</p>"
+    diagnostics = escape(str(change.get("diagnostics_href") or "/deployment"))
+    return f"""<section class='card pilot-change-record' id='current-pilot-change' aria-labelledby='current-pilot-change-title'>
+    <p><span class='pill'>PILOT ONLY</span></p><h2 id='current-pilot-change-title'>CURRENT PILOT CHANGE</h2>
+    <div class='change-columns'><section><h3>Codex claim</h3><table>
+    <tr><th>Change ID</th><td><code>{escape(str(change.get('change_id','')))}</code></td></tr>
+    <tr><th>Sprint/change title</th><td>{escape(str(change.get('title','')))}</td></tr>
+    <tr><th>Sprint objective</th><td>{escape(str(change.get('objective','')))}</td></tr>
+    <tr><th>Claimed implementation output</th><td>{items(change.get('implementation_summary'))}</td></tr>
+    <tr><th>Expected visible change</th><td>{items(change.get('expected_visible_outcomes'))}</td></tr>
+    <tr><th>Unchanged areas</th><td>{items(change.get('unchanged_behaviour'))}</td></tr>
+    </table></section><section><h3>Deployed runtime evidence</h3><table>
+    <tr><th>Deployed commit SHA</th><td><code>{escape(str(change.get('commit_sha','Unavailable')))}</code></td></tr>
+    <tr><th>Branch/release identifier</th><td><code>{escape(str(change.get('branch') or change.get('deployment_version') or 'Unavailable'))}</code></td></tr>
+    <tr><th>Deployment timestamp</th><td>{escape(str(change.get('deployment_timestamp','Unavailable')))}</td></tr>
+    <tr><th>Affected runtime areas</th><td>{items(change.get('affected_pages'))}</td></tr>
+    <tr><th>Relevant diagnostics</th><td><a href='{diagnostics}'>Open deployment diagnostics</a></td></tr>
+    <tr><th>Latest imported Twin timestamp</th><td>{escape(str(imported_at))}</td></tr>
+    <tr><th>Currently selected/imported Twin predates deployment</th><td>{escape(stale_status)}</td></tr>
+    <tr><th>Stale-candidate warning</th><td>{escape(stale_warning)}</td></tr>
+    <tr><th>Fresh import/restage required</th><td>{escape(fresh_required)}</td></tr>
+    </table></section><section><h3>Operator validation result</h3><table>
+    <tr><th>Latest known validation status</th><td><strong>{escape(str(change.get('validation_status','Not yet tested')))}</strong></td></tr>
+    <tr><th>Required operator test</th><td>{items(change.get('required_test_steps'))}</td></tr>
+    <tr><th>Known limitations</th><td>{items(change.get('known_limitations'))}</td></tr>
+    </table><p class='muted'>Repository tests do not mark this sprint successful; a human operator must confirm the visible deployed outcome.</p></section></div></section>"""
+
 def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, int]:
     decision = blueprint_upload_authorisation(headers)
     access_notice = ""
@@ -97,6 +147,7 @@ def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, i
     body = _workflow_progress("upload") + authorisation + access_notice + f"""{_notice(message)}
     <style>.twin-import-form{{display:flex;max-width:34rem;flex-direction:column;align-items:stretch;gap:1rem}}.twin-import-field{{display:flex;flex-direction:column;gap:.4rem}}.twin-import-field label{{font-weight:700}}.twin-import-field input[type='file'],.twin-import-field select{{box-sizing:border-box;width:100%;position:static;pointer-events:auto;opacity:1}}.twin-import-field input[type='file']:focus-visible,.twin-import-field select:focus-visible{{outline:3px solid #185c4d;outline-offset:2px}}.twin-import-actions{{margin:0}}</style>
     <header class='hero'><h1>Import Twin</h1></header><section class='card'><p><strong>Please choose the import type and file.</strong> Commercial Mission or an existing Twin selection is not required.</p><form class='twin-import-form' method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><div class='twin-import-field'><label for='expected_type'>Twin type</label><select id='expected_type' name='expected_type' required>{''.join(f"<option value='{t}'>{escape(t.replace('_',' ').title())}</option>" for t in TWIN_TYPES)}</select></div><div class='twin-import-field'><label for='twin-package'>Twin package</label><input id='twin-package' name='blueprint_zip' type='file' accept='.zip,application/zip' required></div><p class='twin-import-actions'><button type='submit'>Upload Twin</button></p><p class='muted'>Packages may contain confidential candidate intelligence. Upload only packages you are authorised to use. Imported records remain candidates and are never promoted automatically.</p><p><a href='/digital-twins'>Cancel</a></p></form></section>
+    {_pilot_change_record_section(headers)}
     <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous package imports</a></p></section>"""
     return _page("Import Twin", body), 200
 

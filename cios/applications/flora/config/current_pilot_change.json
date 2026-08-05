@@ -1,0 +1,42 @@
+{
+  "schema_version": "pilot-change-metadata-v1",
+  "change_id": "TEL-001-TRANSLATION-AUDIT-2026-08-05",
+  "title": "Researcher-to-Flora portable Twin translation audit and upload-screen change record",
+  "objective": "Expose the current Codex sprint purpose and test status on the main Twin upload screen while documenting the Researcher-to-Flora translation boundary without changing semantic translation behaviour.",
+  "commit_sha": "runtime:deployment_metadata.commit_sha",
+  "implementation_summary": [
+    "Added a pilot-only CURRENT PILOT CHANGE panel to the existing Flora Twin upload page.",
+    "Added governed source documentation auditing the TEL-001 Researcher-to-Flora translation path.",
+    "Did not modify TEL-001, validation, governance, promotion, adapters, semantic construction or Observation logic."
+  ],
+  "expected_visible_outcomes": [
+    "The /blueprint-import page shows sprint purpose, claimed output, deployed commit, branch, timestamp, diagnostics link and operator test steps.",
+    "The panel separates Codex claim, deployed runtime evidence and operator validation result.",
+    "The panel warns when the latest imported candidate appears older than the deployment or when timestamp evidence is unavailable."
+  ],
+  "unchanged_behaviour": [
+    "Blueprint package acceptance and validation remain unchanged.",
+    "Candidate staging, semantic assembly, Observation generation, owner assessment, Research Gaps, promotion and governance remain unchanged.",
+    "TEL-001 package contents remain unchanged."
+  ],
+  "required_test_steps": [
+    "Open /blueprint-import in the deployed Flora runtime.",
+    "Confirm the CURRENT PILOT CHANGE panel is visible before upload.",
+    "Confirm deployed SHA, branch/release, timestamp, claimed output, expected visible change and diagnostics link are readable.",
+    "Import or select a Twin and confirm whether stale-candidate and fresh-import/restage guidance is shown accurately.",
+    "Record the operator validation result as Not yet tested, Visible change confirmed, No visible change, Partially successful, Failed, Stale candidate or Requires fresh import."
+  ],
+  "affected_pages": [
+    "/blueprint-import",
+    "/blueprint-import/history",
+    "/deployment"
+  ],
+  "import_restaging_required": true,
+  "known_limitations": [
+    "Operator validation cannot be inferred from repository tests and defaults to Not yet tested.",
+    "Fresh-import guidance depends on deployment timestamp and import timestamps being available in runtime metadata.",
+    "This sprint documents remediation only; it intentionally does not fix semantic translation gaps."
+  ],
+  "validation_status": "Not yet tested",
+  "diagnostics_href": "/deployment"
+}
