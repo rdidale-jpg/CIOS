@@ -409,10 +409,10 @@ def test_account_failure_summary_and_stage_table_use_same_canonical_stage(monkey
     assert "Sign in and select an authorised workspace before importing a package" in html
     assert html.count("<td>Failed</td>") == 1
 
-def test_upload_page_shows_current_pilot_change_record(monkeypatch, tmp_path):
+def test_upload_page_shows_current_deployed_change_acceptance_panel(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
-    monkeypatch.setenv("RENDER_GIT_COMMIT", "abc123pilotsha")
-    monkeypatch.setenv("RENDER_GIT_BRANCH", "codex/audit-translation-path")
+    monkeypatch.setenv("RENDER_GIT_COMMIT", "88f053e6cee6fe2fef7feba1e7f4553194b7a040")
+    monkeypatch.setenv("RENDER_GIT_BRANCH", "work")
     monkeypatch.setenv("FLORA_BUILD_TIMESTAMP", "2026-08-05T12:00:00+00:00")
     from cios.applications.flora.live import runtime
     runtime.application_revision.cache_clear()
@@ -420,13 +420,39 @@ def test_upload_page_shows_current_pilot_change_record(monkeypatch, tmp_path):
     page, status = import_blueprint_entry_page(HEADERS)
 
     assert status == 200
-    assert "CURRENT PILOT CHANGE" in page
+    panel = page.index("CURRENT DEPLOYED CHANGE — TEST THIS NOW")
+    upload = page.index("<button type='submit'>Upload Twin</button>")
+    assert panel < upload
+    assert "CURRENT PILOT CHANGE" not in page
+    assert "Researcher-to-Flora Translation Audit" not in page
     assert "Canonical Factual Projection shared read-contract consolidation" in page
-    assert "abc123pilotsha" in page
-    assert "codex/audit-translation-path" in page
-    assert "Open deployment diagnostics" in page
+    assert "88f053e6cee6fe2fef7feba1e7f4553194b7a040" in page
+    assert "Deployed SHA contains expected implementation commit</th><td>YES" in page
+    assert "Make executive pages, diagnostics, Research Gaps and owner-assessment inputs consume one governed Canonical Factual Projection or explicitly governed derivative." in page
+    assert "Industry Overview" in page and "raw dictionaries and Python-style lists should not appear" in page
+    assert "BT Group Enterprise Dossier" in page and "fact present but assessment pending" in page
+    assert "exactly 17 opportunities should remain visible" in page
+    assert "all seven source records must have an explicit visible disposition" in page
+    assert "Confirm this panel shows the currently deployed SHA." in page
+    assert "Fresh import/restage decision" in page
+    assert "Cannot determine — deployment metadata missing" in page
+    assert "Tel001 Fixture Checksum" in page and "Checksum Status" in page
+    assert "Known limitations" in page
+    assert "href='/blueprint-import/history#industry-overview'" in page
     assert "href='/deployment'" in page
-    assert "Operator validation result" in page
-    assert "Not yet tested" in page
-    assert "Requires fresh import" in page
-    assert "Repository tests do not mark this sprint successful" in page
+    assert "NOT TESTED" in page
+
+
+def test_upload_page_flags_wrong_deployed_commit(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("RENDER_GIT_COMMIT", "abc123pilotsha")
+    monkeypatch.setenv("RENDER_GIT_BRANCH", "wrong-branch")
+    monkeypatch.setenv("FLORA_BUILD_TIMESTAMP", "2026-08-05T12:00:00+00:00")
+    from cios.applications.flora.live import runtime
+    runtime.application_revision.cache_clear()
+
+    page, status = import_blueprint_entry_page(HEADERS)
+
+    assert status == 200
+    assert "WRONG DEPLOYED COMMIT" in page
+    assert "Deployed SHA contains expected implementation commit</th><td>NO" in page

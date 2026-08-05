@@ -1,58 +1,98 @@
 {
-  "schema_version": "pilot-change-metadata-v1",
+  "schema_version": "pilot-change-metadata-v2",
   "change_id": "TEL-001-CFP-SHARED-READ-CONTRACT-2026-08-05",
   "title": "Canonical Factual Projection shared read-contract consolidation",
   "objective": "Make executive pages, diagnostics, Research Gaps and owner-assessment inputs consume one governed Canonical Factual Projection or explicitly governed derivative.",
-  "accepted_audit_option": "Option A — Canonical Factual Projection first",
-  "commit_sha": "runtime:deployment_metadata.commit_sha",
+  "expected_implementation_sha": "88f053e6cee6fe2fef7feba1e7f4553194b7a040",
   "implementation_summary": [
-    "Canonical Factual Projection is the shared factual read contract for executive presentation, diagnostics, Research Gaps, owner-assessment input state and Observation input where applicable.",
-    "Executive pages render canonical factual sections as labelled executive facts with Evidence, Unknown, Contradiction, relationship, membership, lineage, candidate state, projection version and runtime fingerprint context.",
-    "Advanced Diagnostics reports the same Canonical Factual Projection inventory, rendered fields, omitted fields, omission reason, consumer version and runtime fingerprint used by visible pages.",
-    "Research Gaps and owner-assessment wording distinguish supplied candidate facts from pending governance and genuine deficiencies without changing promotion authority."
+    "cios/applications/flora/blueprint_import/canonical_factual_projection.py now defines the shared Canonical Factual Projection read model, executive-safe value formatting, projection versions and runtime fingerprint used by consumers.",
+    "cios/applications/flora/blueprint_import/executive_workspace.py changed executive page families so Industry Overview, Enterprise Dossiers including BT Group, Market Participants, Major Programmes, Opportunities, Reinvention, Research Gaps and Advanced Diagnostics read factual sections, Evidence, Unknowns and Contradictions from the shared projection or explicit governed derivatives.",
+    "cios/applications/flora/blueprint_import/views.py exposes deployment metadata and import/runtime fingerprints so operators can detect stale candidates before judging the visible result.",
+    "Repository tests around TEL-001 rendered pages, diagnostics reconciliation and Research Gap wording were added or updated to protect the shared-read-contract behaviour without changing TEL-001 package contents."
   ],
-  "expected_visible_outcomes": [
-    "Industry Overview rendered as executive-friendly factual sections;",
-    "BT Group and other Enterprise Dossiers showing supplied facts;",
-    "Advanced Diagnostics agreeing with page content;",
-    "Research Gaps distinguishing supplied facts from genuine deficiencies;",
-    "existing Participant and Programme behaviour preserved;",
-    "stale-candidate state clearly shown."
+  "expected_visible_outcomes": {
+    "Industry Overview": [
+      "supplied industry facts should render in executive-friendly sections",
+      "raw dictionaries and Python-style lists should not appear",
+      "diagnostics should report the same Evidence, Unknowns and Contradictions as the page"
+    ],
+    "BT Group Enterprise Dossier": [
+      "supplied operating model, suppliers, Evidence, Unknowns and Contradictions should remain visible",
+      "owner-assessment sections must distinguish fact present but assessment pending from fact absent",
+      "Research Gaps must not request the entire dossier where facts already exist"
+    ],
+    "Market Participants": [
+      "existing role, capability, relationship, activity and Evidence output should remain unchanged"
+    ],
+    "Major Programmes": [
+      "all 13 programmes should remain visible",
+      "summary, stage and Evidence should remain visible"
+    ],
+    "Opportunities": [
+      "exactly 17 opportunities should remain visible",
+      "supplied customer, problem, timing and commercial fields should render where present"
+    ],
+    "Reinvention": [
+      "all seven source records must have an explicit visible disposition"
+    ],
+    "Research Gaps": [
+      "supplied facts must not be described as wholly absent",
+      "assessment pending must not be presented as missing research"
+    ]
+  },
+  "affected_pages": [
+    "Industry Overview",
+    "BT Group Enterprise Dossier",
+    "Market Participants",
+    "Major Programmes",
+    "Opportunities",
+    "Reinvention",
+    "Research Gaps",
+    "Advanced Diagnostics",
+    "Import Twin",
+    "Import history",
+    "Deployment diagnostics"
   ],
-  "unchanged_behaviour": [
+  "unchanged_areas": [
+    "Importer, validator, adapter, semantic construction, Canonical Factual Projection semantics, Observation runtime, owner assessment, Research Gaps logic, executive page semantics, TEL-001 fixture, governance and promotion remain unchanged by this operational acceptance panel.",
     "TEL-001 package contents and checksum remain unchanged.",
-    "Blueprint validation, staging, review, governance, promotion and owner authority remain unchanged.",
-    "Observation generation remains additive and is not required for factual display.",
-    "No automatic acceptance, promotion, recommendations or TEL-001-specific production logic are introduced."
+    "No automatic acceptance, promotion, recommendations or TEL-001-specific production logic is introduced."
   ],
   "required_test_steps": [
-    "Open /blueprint-import and confirm the CURRENT PILOT CHANGE panel is visible before upload.",
-    "Import or restage the unchanged TEL-001 ZIP and confirm checksum bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07.",
-    "Open Industry Overview, BT Group Enterprise Dossier, Market Participants, Major Programmes, Opportunities and Reinvention Timing and confirm supplied TEL-001 facts render without raw dictionary/list syntax.",
-    "Open Advanced Diagnostics and confirm factual counts, rendered fields, omitted fields and runtime fingerprint match the visible pages.",
-    "Open Research Gaps and confirm supplied facts are not classified as wholly absent and owner-assessment pending is not presented as source absence."
+    "Confirm this panel shows the currently deployed SHA.",
+    "Confirm whether Flora says a fresh import is required.",
+    "Import the unchanged TEL-001 ZIP if required.",
+    "Open Industry Overview.",
+    "Open BT Group.",
+    "Open Market Participants.",
+    "Open Major Programmes.",
+    "Open Opportunities.",
+    "Open Reinvention.",
+    "Open Research Gaps.",
+    "Open Advanced Diagnostics.",
+    "Compare the visible results against the checklist above."
   ],
-  "affected_pages": [
-    "/blueprint-import",
-    "/blueprint-import/{run_id}",
-    "/blueprint-import/{run_id}/aspects/industry-overview",
-    "/blueprint-import/{run_id}/enterprises/{enterprise_id}",
-    "/blueprint-import/{run_id}/aspects/market-participants",
-    "/blueprint-import/{run_id}/aspects/major-programmes",
-    "/blueprint-import/{run_id}/aspects/opportunities",
-    "/blueprint-import/{run_id}/aspects/reinvention-timing",
-    "/blueprint-import/{run_id}/health",
-    "/blueprint-import/{run_id}/diagnostics"
-  ],
-  "import_restaging_required": true,
+  "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
+  "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
+  "fresh_import_policy": "Compare deployed commit SHA, deployment timestamp, latest TEL-001 import timestamp, candidate runtime fingerprint and current runtime fingerprint. Fresh import is required when metadata is complete and the latest import predates deployment or candidate/current runtime fingerprints differ. Fresh import is not required only when metadata is complete, latest import is after deployment, and fingerprints match. Otherwise report cannot determine.",
   "known_limitations": [
-    "Operator validation cannot be inferred from repository tests and defaults to Not yet tested until a human records deployed validation.",
-    "Fresh-import guidance depends on deployment timestamp and import timestamps being available in runtime metadata.",
-    "Owner assessment and promotion remain governed external authorities; this sprint preserves candidate factual display but does not auto-authorise recommendations."
+    "Operator validation cannot be inferred from repository tests and remains NOT TESTED until a human records PASS, PARTIAL or FAIL outside this repository-owned metadata.",
+    "Fresh-import guidance is Cannot determine when deployment timestamp, latest TEL-001 import timestamp, candidate runtime fingerprint or current runtime fingerprint is unavailable.",
+    "Rendered-route tests prove the acceptance panel content is visible; they do not prove a live Render deployment has been manually inspected.",
+    "Owner assessment and promotion remain governed external authorities; this change preserves candidate factual display but does not auto-authorise recommendations."
   ],
-  "validation_status": "Automated TEL-001 regression pending in deployed runtime; repository regression suite is the Codex merge gate.",
-  "automated_validation_result": "Run tests/test_tel001_blueprint_import_regression.py against the unchanged TEL-001 package after this deployment.",
-  "codex_merge_gate": "MERGE WITH KNOWN LIMITATIONS",
-  "operator_validation_status": "Not yet tested",
+  "automated_validation": {
+    "tel001_fixture_checksum": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
+    "expected_checksum": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
+    "checksum_status": "PASS",
+    "end_to_end_test_status": "PASS — tests/test_tel001_blueprint_import_regression.py",
+    "rendered_route_test_status": "PASS — tests/test_flora_blueprint_import_interface.py::test_upload_page_shows_current_deployed_change_acceptance_panel",
+    "diagnostics_reconciliation_status": "PASS — repository TEL-001 diagnostics assertions passed in this Codex run",
+    "research_gap_reconciliation_status": "PASS — repository TEL-001 Research Gap assertions passed in this Codex run",
+    "known_failing_tests": "None in required acceptance subset run for this panel change.",
+    "last_validation_timestamp": "2026-08-05T00:00:00Z"
+  },
+  "merge_gate": "SAFE TO MERGE",
+  "operator_validation_status": "NOT TESTED",
   "diagnostics_href": "/deployment"
 }
