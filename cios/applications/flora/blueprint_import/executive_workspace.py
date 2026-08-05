@@ -18,6 +18,9 @@ from cios.applications.flora.commercial_mission import (CommercialMission, Emplo
 from cios.applications.flora.workspace.views import _page
 from .registry import BlueprintPackageRegistry
 from .industry_delta_adapter import IndustryTwinDeltaAdapter
+from .canonical_factual_projection import (
+    CanonicalFactualProjection, factual_projection_for_enterprise, factual_projection_for_object,
+)
 from .intelligence_projection import executive_assessments
 from .pilot_diagnostics import (
     context_header as _pilot_diag_context_header,
@@ -86,6 +89,30 @@ class ResearchCountContract:
     affected_subject_count: int
     presentation_eligible_count: int
     recommendation_eligible_count: int
+
+
+def _canonical_factual_html(projection: CanonicalFactualProjection, *, include_state: bool = True) -> str:
+    rows = []
+    for section in projection.sections:
+        values = "".join(f"<li>{escape(value)}</li>" for value in section.values)
+        rows.append(f"<article><h3>{escape(section.label)}</h3><ul>{values}</ul></article>")
+    facts = "".join(rows) or "<p><strong>Facts:</strong> No factual fields are mapped in the canonical factual projection.</p>"
+    state = ("<aside class='mission-indicator' role='status'><strong>Candidate Intelligence</strong> · "
+             "<strong>Pending governance</strong> · Facts are displayed separately from Observations, Assessments and Recommendations.</aside>") if include_state else ""
+    evidence = _linked_list("Evidence", projection.evidence_refs, "No linked Evidence supplied.")
+    unknowns = _linked_list("Unknowns", projection.unknown_refs, "No explicit Unknowns supplied.")
+    contradictions = _linked_list("Contradictions", projection.contradiction_refs, "No explicit Contradictions supplied.")
+    observations = _linked_list("Observations", projection.observation_refs, "Observation generation is additive; no Observation is required for these Facts to display.")
+    return (f"{state}<section class='card canonical-factual-projection' id='canonical-factual-projection'>"
+            f"<p class='pill'>Canonical Factual Projection</p><h2>{escape(projection.family)} Facts</h2>"
+            f"<p><strong>{escape(projection.governance_label)}</strong></p>{facts}"
+            f"<h3>Facts / Observations / Assessments / Recommendations</h3><p>Facts are Layer 1 factual intelligence. Observations, owner Assessments and Recommendations remain governed additive layers.</p>"
+            f"{evidence}{unknowns}{contradictions}{observations}</section>")
+
+
+def _linked_list(title: str, values: tuple[str, ...], empty: str) -> str:
+    items = "".join(f"<li><code>{escape(value)}</code></li>" for value in values) or f"<li>{escape(empty)}</li>"
+    return f"<section><h3>{escape(title)}</h3><ul>{items}</ul></section>"
 
 
 def _opportunity_contract(o: SemanticObject, mission: CommercialMission | None = None) -> tuple[bool, bool, list[str]]:
@@ -697,6 +724,8 @@ def _explorer(twin, run_id, mission, selected="", domain="all"):
 
 
 def _dossier(ent, twin, run_id, mission):
+    factual = factual_projection_for_enterprise(ent)
+    factual_html = _canonical_factual_html(factual)
     relevant = list(ent.records)
     identity = next((o for o in relevant if o.kind in {"enterprise", "enterprise_twin", "entity"}), None)
     description = _field(identity, "organisation_description", "overview", "description", "summary") if identity else ""
@@ -723,7 +752,7 @@ def _dossier(ent, twin, run_id, mission):
             for label, value in executive_record_view_model(identity).fields
             if label != "Overview"
         )
-    sections = [f"<section class='card' id='enterprise-overview'><h2>Organisation Overview</h2>{overview}{canonical_detail}{_pilot_enterprise_diagnostics(ent)}<p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p></section>"]
+    sections = [factual_html, f"<section class='card' id='enterprise-overview'><h2>Organisation Overview</h2>{overview}{canonical_detail}{_pilot_enterprise_diagnostics(ent)}<p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p></section>"]
     position = _field(identity, "strategic_ambition", "market_position", "current_position") if identity else ""
     sections.append(f"<section class='card'><h2>Strategic Position and Ambition</h2><p>{escape(position)}</p></section>" if position else gap("Strategic Position and Ambition", "No supported strategic position is supplied.", ("strategic ambition", "market position", "supporting evidence"), "Without it Flora cannot explain the organisation's direction."))
     financials=[o for o in relevant if o.kind in {"financial_observation","financial_fact","economic_pool"} and all((_field(o,'metric','measure'),_field(o,'value'),_field(o,'period'),_field(o,'source')))]
@@ -808,9 +837,10 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
         industry_cards = "".join(_executive_record_card(o) for o in rows)
         profile = "".join(f"<p><strong>{escape(label)}:</strong> {escape(_present_value(value))}</p>"
                           for o in rows for label, value in executive_record_view_model(o).fields)
-        content = section("Industry definition and scope", "".join(f"<p>{escape(o.statement)}</p>" for o in rows))
+        factual_cards = "".join(_canonical_factual_html(factual_projection_for_object(o, "Industry Overview")) for o in rows)
+        content = factual_cards or section("Industry definition and scope", "".join(f"<p>{escape(o.statement)}</p>" for o in rows))
         content += section("Supported populated candidate sections", profile or industry_cards)
-        content += "<p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p>"
+        content += "<p><span class='pill'>Candidate Intelligence · Pending governance</span></p>"
         content += _pilot_industry_section_diagnostics(twin)
         content += f"<section><h2>Research Gaps</h2><p>Complete the unsupported industry sections above with dated, attributable evidence or explicit Unknowns.</p></section><section><h2>Advanced Inspection</h2><p><a href='/blueprint-import/{escape(run_id)}/explore'>Inspect canonical records, evidence and lineage</a></p></section>"
     elif key=="market-participants":
@@ -819,17 +849,18 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
         content=f"<p><strong>{len(identified)} participant concepts · 0 owner-assessed participant profiles</strong></p><p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p>"+(cards or "<p><strong>Research required.</strong> Find supported role, domain and market significance for every participant concept.</p>")
     elif key=="major-programmes":
         rows=[o for o in objects if o.kind=='transformation_programme']
-        cards = "".join(_executive_record_card(o) for o in rows if executive_record_view_model(o).fields)
+        cards = "".join(_canonical_factual_html(factual_projection_for_object(o, "Programme")) for o in rows)
         content=f"<p><strong>{len(rows)} programme hypotheses · 0 owner-assessed programmes</strong></p><p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p>"+(cards or "<p><strong>Research required.</strong> Find programme owner, objective, phase, timing and evidence.</p>")
     elif key=="opportunities":
         rows=[o for o in objects if 'opportun' in o.kind]
         ready=[o for o in rows if _owner_assessed(twin, 'opportunities') and _opportunity_contract(o,mission)[1]]
         inspectable=[o for o in rows if executive_record_view_model(o).fields]
         table=("<table class='opportunity-table'><thead><tr><th>Customer</th><th>Opportunity</th><th>Value</th><th>Timing</th><th>Status</th></tr></thead><tbody>"+"".join(f"<tr><td>{escape(', '.join(o.affected_organisations) or o.subject)}</td><td>{escape(o.statement)}</td><td>{escape(_field(o,'value','value_range') or 'Not established')}</td><td>{escape(_field(o,'timing','procurement_start','procurement_timing') or 'Timing unknown')}</td><td>{escape(_field(o,'status','procurement_status') or 'Status unknown')}</td></tr>" for o in ready)+"</tbody></table>") if ready else "<p>0 sales-ready opportunities.</p>"
-        content=f"<h2>Sales-ready opportunities</h2>{table}<h2>Inspectable candidate hypotheses</h2><p><strong>{len(inspectable)} supplied candidate hypotheses · owner assessment pending governance.</strong></p>" + "".join(_executive_record_card(o) for o in inspectable)
+        factual_cards = "".join(_canonical_factual_html(factual_projection_for_object(o, "Opportunity")) for o in rows)
+        content=f"<h2>Sales-ready opportunities</h2>{table}<h2>Inspectable candidate hypotheses</h2><p><strong>{len(rows)} supplied candidate hypotheses · owner assessment pending governance.</strong></p>" + factual_cards
     else:
         rows=[o for o in objects if o.kind in {'ai_reinvention_assessment', 'reinvention_assessment'}]
-        cards = "".join(_executive_record_card(o) for o in rows if executive_record_view_model(o).fields)
+        cards = "".join(_canonical_factual_html(factual_projection_for_object(o, "Reinvention Assessment")) for o in rows)
         content=(f"<p><strong>{len(rows)} candidate reinvention assessment record(s)</strong></p><p><span class='pill'>Owner assessment supplied as candidate · pending governance</span></p>" + cards if rows else "<p><strong>Absent</strong></p><p>This Twin contains no structured assessment of AI-native disruption mechanism, exposure, adoption indicators, expected horizon or response timing.</p>")
     requirements = [r for r in research_requirements(twin, executive_assessments(twin)) if r.aspect == key]
     fields = tuple(dict.fromkeys(field for r in requirements for field in r.missing_fields))
@@ -1256,6 +1287,8 @@ def _observation_pipeline_object_trace(family: str, obj: SemanticObject, run_id:
     rendered_fields = "; ".join(f"{label}: {_diagnostic_preview(value)}" for label, value in view.fields)
     rendered = rendered_fields or view.title or obj.statement
     generated, exact_reason, detail = build_candidate_observation(obj)
+    factual = factual_projection_for_object(obj, family)
+    factual_summary = f"{factual.family} · {len(factual.sections)} factual section(s) · {len(factual.evidence_refs)} Evidence · {len(factual.unknown_refs)} Unknowns · {len(factual.contradiction_refs)} Contradictions"
     source_identifier = obj.original_id or obj.source_location or obj.record_id
     evidence = ", ".join(obj.evidence_refs) or "No linked evidence"
     generation = (f"generated observation <code>{escape(generated.observation_id)}</code> · builder <code>{escape(generated.builder)}</code> · "
@@ -1268,11 +1301,13 @@ def _observation_pipeline_object_trace(family: str, obj: SemanticObject, run_id:
             f"<tr><th>Source object</th><td>{escape(obj.source_file or 'unknown source file')} · {escape(obj.source_location or 'unknown source location')} · source id <code>{escape(obj.original_id or 'not supplied')}</code></td></tr>"
             f"<tr><th>Candidate object</th><td>candidate id <code>{escape(obj.record_id)}</code> · class <code>{escape(obj.kind)}</code> · validation <code>{escape(obj.validation_status or 'candidate')}</code></td></tr>"
             f"<tr><th>Semantic object</th><td>family {escape(observation_family(obj.kind))} · subject {escape(obj.subject or 'not supplied')} · domains {escape(', '.join(obj.domains) or 'not supplied')} · confidence {escape(obj.confidence or 'not supplied')} · freshness {escape(obj.freshness or 'unknown')}</td></tr>"
-            f"<tr><th>Observation generation</th><td>profile <code>{escape(OBSERVATION_PROFILE_VERSION)}</code> · {generation} · evidence {escape(evidence)}</td></tr>"
+            f"<tr><th>Canonical Factual Projection</th><td>{escape(factual_summary)} · source for displayed page and Observation generation input.</td></tr>"
+            f"<tr><th>Displayed page</th><td>{escape(_diagnostic_preview(rendered) or 'No rendered page field')}</td></tr>"
+            f"<tr><th>Observation generation</th><td>profile <code>{escape(OBSERVATION_PROFILE_VERSION)}</code> · consumes Canonical Factual Projection · {generation} · evidence {escape(evidence)}</td></tr>"
             f"<tr><th>Observation persistence</th><td>{escape(generated.persistence_state if generated else 'not persisted')}</td></tr>"
             f"<tr><th>Owner assessment</th><td>candidate remains read-only; owner assessment state {escape(generated.owner_assessment_state if generated else 'not_invoked')} · display assessment {escape(_assessment_state_label(obj.sufficiency or 'pending'))}.</td></tr>"
             f"<tr><th>Executive projection</th><td>view model <code>executive_record_view_model</code> · fields projected {len(view.fields)} · title {escape(view.title)} · projection result {escape('projected' if view.fields or obj.statement else 'omitted')}</td></tr>"
-            f"<tr><th>Rendered page</th><td>{escape(_diagnostic_preview(rendered) or 'No rendered page field')}</td></tr>"
+            f"<tr><th>Recommendation</th><td>Governed Recommendation layer remains separate; no recommendation is created by factual projection.</td></tr>"
             f"<tr><th>Exact rejection reason</th><td><code>{escape(exact_reason)}</code> · runtime component <code>{escape(OBSERVATION_BUILDER_NAME)}</code> · missing prerequisite {escape('none' if generated else detail)}</td></tr>"
             "</tbody></table></details>")
 
