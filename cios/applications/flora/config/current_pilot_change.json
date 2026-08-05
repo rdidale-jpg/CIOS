@@ -1,42 +1,58 @@
 {
   "schema_version": "pilot-change-metadata-v1",
-  "change_id": "TEL-001-TRANSLATION-AUDIT-2026-08-05",
-  "title": "Researcher-to-Flora portable Twin translation audit and upload-screen change record",
-  "objective": "Expose the current Codex sprint purpose and test status on the main Twin upload screen while documenting the Researcher-to-Flora translation boundary without changing semantic translation behaviour.",
+  "change_id": "TEL-001-CFP-SHARED-READ-CONTRACT-2026-08-05",
+  "title": "Canonical Factual Projection shared read-contract consolidation",
+  "objective": "Make executive pages, diagnostics, Research Gaps and owner-assessment inputs consume one governed Canonical Factual Projection or explicitly governed derivative.",
+  "accepted_audit_option": "Option A — Canonical Factual Projection first",
   "commit_sha": "runtime:deployment_metadata.commit_sha",
   "implementation_summary": [
-    "Added a pilot-only CURRENT PILOT CHANGE panel to the existing Flora Twin upload page.",
-    "Added governed source documentation auditing the TEL-001 Researcher-to-Flora translation path.",
-    "Did not modify TEL-001, validation, governance, promotion, adapters, semantic construction or Observation logic."
+    "Canonical Factual Projection is the shared factual read contract for executive presentation, diagnostics, Research Gaps, owner-assessment input state and Observation input where applicable.",
+    "Executive pages render canonical factual sections as labelled executive facts with Evidence, Unknown, Contradiction, relationship, membership, lineage, candidate state, projection version and runtime fingerprint context.",
+    "Advanced Diagnostics reports the same Canonical Factual Projection inventory, rendered fields, omitted fields, omission reason, consumer version and runtime fingerprint used by visible pages.",
+    "Research Gaps and owner-assessment wording distinguish supplied candidate facts from pending governance and genuine deficiencies without changing promotion authority."
   ],
   "expected_visible_outcomes": [
-    "The /blueprint-import page shows sprint purpose, claimed output, deployed commit, branch, timestamp, diagnostics link and operator test steps.",
-    "The panel separates Codex claim, deployed runtime evidence and operator validation result.",
-    "The panel warns when the latest imported candidate appears older than the deployment or when timestamp evidence is unavailable."
+    "Industry Overview rendered as executive-friendly factual sections;",
+    "BT Group and other Enterprise Dossiers showing supplied facts;",
+    "Advanced Diagnostics agreeing with page content;",
+    "Research Gaps distinguishing supplied facts from genuine deficiencies;",
+    "existing Participant and Programme behaviour preserved;",
+    "stale-candidate state clearly shown."
   ],
   "unchanged_behaviour": [
-    "Blueprint package acceptance and validation remain unchanged.",
-    "Candidate staging, semantic assembly, Observation generation, owner assessment, Research Gaps, promotion and governance remain unchanged.",
-    "TEL-001 package contents remain unchanged."
+    "TEL-001 package contents and checksum remain unchanged.",
+    "Blueprint validation, staging, review, governance, promotion and owner authority remain unchanged.",
+    "Observation generation remains additive and is not required for factual display.",
+    "No automatic acceptance, promotion, recommendations or TEL-001-specific production logic are introduced."
   ],
   "required_test_steps": [
-    "Open /blueprint-import in the deployed Flora runtime.",
-    "Confirm the CURRENT PILOT CHANGE panel is visible before upload.",
-    "Confirm deployed SHA, branch/release, timestamp, claimed output, expected visible change and diagnostics link are readable.",
-    "Import or select a Twin and confirm whether stale-candidate and fresh-import/restage guidance is shown accurately.",
-    "Record the operator validation result as Not yet tested, Visible change confirmed, No visible change, Partially successful, Failed, Stale candidate or Requires fresh import."
+    "Open /blueprint-import and confirm the CURRENT PILOT CHANGE panel is visible before upload.",
+    "Import or restage the unchanged TEL-001 ZIP and confirm checksum bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07.",
+    "Open Industry Overview, BT Group Enterprise Dossier, Market Participants, Major Programmes, Opportunities and Reinvention Timing and confirm supplied TEL-001 facts render without raw dictionary/list syntax.",
+    "Open Advanced Diagnostics and confirm factual counts, rendered fields, omitted fields and runtime fingerprint match the visible pages.",
+    "Open Research Gaps and confirm supplied facts are not classified as wholly absent and owner-assessment pending is not presented as source absence."
   ],
   "affected_pages": [
     "/blueprint-import",
-    "/blueprint-import/history",
-    "/deployment"
+    "/blueprint-import/{run_id}",
+    "/blueprint-import/{run_id}/aspects/industry-overview",
+    "/blueprint-import/{run_id}/enterprises/{enterprise_id}",
+    "/blueprint-import/{run_id}/aspects/market-participants",
+    "/blueprint-import/{run_id}/aspects/major-programmes",
+    "/blueprint-import/{run_id}/aspects/opportunities",
+    "/blueprint-import/{run_id}/aspects/reinvention-timing",
+    "/blueprint-import/{run_id}/health",
+    "/blueprint-import/{run_id}/diagnostics"
   ],
   "import_restaging_required": true,
   "known_limitations": [
-    "Operator validation cannot be inferred from repository tests and defaults to Not yet tested.",
+    "Operator validation cannot be inferred from repository tests and defaults to Not yet tested until a human records deployed validation.",
     "Fresh-import guidance depends on deployment timestamp and import timestamps being available in runtime metadata.",
-    "This sprint documents remediation only; it intentionally does not fix semantic translation gaps."
+    "Owner assessment and promotion remain governed external authorities; this sprint preserves candidate factual display but does not auto-authorise recommendations."
   ],
-  "validation_status": "Not yet tested",
+  "validation_status": "Automated TEL-001 regression pending in deployed runtime; repository regression suite is the Codex merge gate.",
+  "automated_validation_result": "Run tests/test_tel001_blueprint_import_regression.py against the unchanged TEL-001 package after this deployment.",
+  "codex_merge_gate": "MERGE WITH KNOWN LIMITATIONS",
+  "operator_validation_status": "Not yet tested",
   "diagnostics_href": "/deployment"
 }

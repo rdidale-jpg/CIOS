@@ -456,5 +456,30 @@ def test_tel001_imported_twin_observation_builder_generalises_supported_families
     for expected in ("ImportedTwinSemanticObservationBuilder", "generated statement", "evidence count", "Observation persistence"):
         assert expected in advanced
     assert "Canonical Factual Projection" in advanced and "sections projected" in advanced
+    assert "runtime fingerprint" in advanced and "Projected fields" in advanced and "Rendered fields" in advanced
+    assert "Omitted fields" in advanced and "exact omission reason" in advanced
     assert "fields projected 0" not in advanced and "projection result omitted" not in advanced
     assert "IND-UK-TELECOMS" in advanced and "ENT-BT" in advanced and "observation_generated" in advanced
+
+
+def test_tel001_canonical_factual_projection_exposes_shared_contract_metadata(monkeypatch, tmp_path):
+    from cios.applications.flora.blueprint_import.canonical_factual_projection import factual_projection_for_object
+
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    package = BlueprintPackageRegistry().receive(EVIDENCE.read_bytes(), EVIDENCE.name, "regression-auditor")
+    BlueprintPackageValidator().validate_and_stage(package.package_ref, "regression-auditor")
+    summary = BlueprintPackageValidator().staging_summary(package.import_run_id)
+    twin = assemble_semantic_twin([candidate for candidate in summary["candidates"] if candidate["validation_status"] == "accepted"])
+    bt = next(obj for obj in twin.objects if obj.original_id == "ENT-BT")
+    projection = factual_projection_for_object(bt, "Enterprise Dossier")
+
+    assert projection.object_id
+    assert projection.family == "Enterprise Dossier"
+    assert projection.evidence_refs
+    assert projection.source_lineage
+    assert projection.candidate_state == "candidate"
+    assert projection.completeness_state == "owner_assessment_pending"
+    assert projection.projection_version == "canonical-factual-projection-v2"
+    assert "cfp=canonical-factual-projection-v2" in projection.runtime_fingerprint
+    assert "adapter=mod-cdt-twin-spine-mapping-v1.3.4" in projection.runtime_fingerprint
+    assert any("BT Group is a UK-headquartered telecommunications group" in value for section in projection.sections for value in section.values)
