@@ -421,7 +421,7 @@ def test_upload_page_shows_current_pilot_change_record(monkeypatch, tmp_path):
 
     assert status == 200
     assert "CURRENT PILOT CHANGE" in page
-    assert "Researcher-to-Flora portable Twin translation audit" in page
+    assert "Canonical Factual Projection shared read-contract consolidation" in page
     assert "abc123pilotsha" in page
     assert "codex/audit-translation-path" in page
     assert "Open deployment diagnostics" in page

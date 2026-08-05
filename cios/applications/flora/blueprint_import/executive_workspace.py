@@ -103,11 +103,20 @@ def _canonical_factual_html(projection: CanonicalFactualProjection, *, include_s
     unknowns = _linked_list("Unknowns", projection.unknown_refs, "No explicit Unknowns supplied.")
     contradictions = _linked_list("Contradictions", projection.contradiction_refs, "No explicit Contradictions supplied.")
     observations = _linked_list("Observations", projection.observation_refs, "Observation generation is additive; no Observation is required for these Facts to display.")
+    state_rows = (
+        f"<p><strong>Projection version:</strong> <code>{escape(projection.projection_version)}</code></p>"
+        f"<p><strong>Runtime fingerprint:</strong> <code>{escape(projection.runtime_fingerprint)}</code></p>"
+        f"<p><strong>Candidate/promoted state:</strong> {escape(projection.candidate_state)} · "
+        f"<strong>Factual completeness state:</strong> {escape(projection.completeness_state)}</p>"
+    )
+    relationships = _linked_list("Relationships", projection.relationship_refs, "No relationship references supplied.")
+    memberships = _linked_list("Memberships", projection.membership_refs, "No membership references supplied.")
+    lineage = _linked_list("Source lineage", projection.source_lineage, "No source lineage supplied.")
     return (f"{state}<section class='card canonical-factual-projection' id='canonical-factual-projection'>"
             f"<p class='pill'>Canonical Factual Projection</p><h2>{escape(projection.family)} Facts</h2>"
-            f"<p><strong>{escape(projection.governance_label)}</strong></p>{facts}"
+            f"<p><strong>{escape(projection.governance_label)}</strong></p>{state_rows}{facts}"
             f"<h3>Facts / Observations / Assessments / Recommendations</h3><p>Facts are Layer 1 factual intelligence. Observations, owner Assessments and Recommendations remain governed additive layers.</p>"
-            f"{evidence}{unknowns}{contradictions}{observations}</section>")
+            f"{evidence}{unknowns}{contradictions}{relationships}{memberships}{lineage}{observations}</section>")
 
 
 def _linked_list(title: str, values: tuple[str, ...], empty: str) -> str:
@@ -1283,6 +1292,10 @@ def _observation_pipeline_object_trace(family: str, obj: SemanticObject, run_id:
     factual = factual_projection_for_object(obj, family)
     rendered_fields = "; ".join(f"{section.label}: {'; '.join(section.values)}" for section in factual.sections)
     rendered = rendered_fields or factual.title or obj.statement
+    projected_labels = tuple(section.label for section in factual.sections)
+    rendered_labels = projected_labels if rendered_fields else ()
+    omitted_labels = tuple(label for label in projected_labels if label not in rendered_labels)
+    omission_reason = "none" if not omitted_labels else "empty-value suppression or consumer-specific page section not rendered"
     factual_summary = f"{factual.family} · {len(factual.sections)} factual section(s) · {len(factual.evidence_refs)} Evidence · {len(factual.unknown_refs)} Unknowns · {len(factual.contradiction_refs)} Contradictions"
     source_identifier = obj.original_id or obj.source_location or obj.record_id
     evidence = ", ".join(obj.evidence_refs) or "No linked evidence"
@@ -1296,7 +1309,11 @@ def _observation_pipeline_object_trace(family: str, obj: SemanticObject, run_id:
             f"<tr><th>Source object</th><td>{escape(obj.source_file or 'unknown source file')} · {escape(obj.source_location or 'unknown source location')} · source id <code>{escape(obj.original_id or 'not supplied')}</code></td></tr>"
             f"<tr><th>Candidate object</th><td>candidate id <code>{escape(obj.record_id)}</code> · class <code>{escape(obj.kind)}</code> · validation <code>{escape(obj.validation_status or 'candidate')}</code></td></tr>"
             f"<tr><th>Semantic object</th><td>family {escape(observation_family(obj.kind))} · subject {escape(obj.subject or 'not supplied')} · domains {escape(', '.join(obj.domains) or 'not supplied')} · confidence {escape(obj.confidence or 'not supplied')} · freshness {escape(obj.freshness or 'unknown')}</td></tr>"
-            f"<tr><th>Canonical Factual Projection</th><td>{escape(factual_summary)} · source for displayed page and Observation generation input.</td></tr>"
+            f"<tr><th>Canonical Factual Projection</th><td>{escape(factual_summary)} · projection version <code>{escape(factual.projection_version)}</code> · runtime fingerprint <code>{escape(factual.runtime_fingerprint)}</code> · source for displayed page and Observation generation input.</td></tr>"
+            f"<tr><th>Factual references</th><td>Evidence count {len(factual.evidence_refs)} · Unknown count {len(factual.unknown_refs)} · Contradiction count {len(factual.contradiction_refs)} · Relationship count {len(factual.relationship_refs)} · Membership count {len(factual.membership_refs)}</td></tr>"
+            f"<tr><th>Projected fields</th><td>{escape(', '.join(projected_labels) or 'none')}</td></tr>"
+            f"<tr><th>Rendered fields</th><td>{escape(', '.join(rendered_labels) or 'none')}</td></tr>"
+            f"<tr><th>Omitted fields</th><td>{escape(', '.join(omitted_labels) or 'none')} · exact omission reason <code>{escape(omission_reason)}</code> · consumer version <code>executive-factual-presentation-v2</code></td></tr>"
             f"<tr><th>Displayed page</th><td>{escape(_diagnostic_preview(rendered) or 'No rendered page field')}</td></tr>"
             f"<tr><th>Observation generation</th><td>profile <code>{escape(OBSERVATION_PROFILE_VERSION)}</code> · consumes Canonical Factual Projection · {generation} · evidence {escape(evidence)}</td></tr>"
             f"<tr><th>Observation persistence</th><td>{escape(generated.persistence_state if generated else 'not persisted')}</td></tr>"

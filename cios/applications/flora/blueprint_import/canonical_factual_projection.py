@@ -9,7 +9,29 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Iterable
 
+from cios.applications.flora.live.runtime import deployment_metadata
+
+from .cios_twin_adapter import MAPPING_VERSION
 from .semantic_twin import SemanticEnterprise, SemanticObject, executive_record_view_model
+
+CANONICAL_FACTUAL_PROJECTION_VERSION = "canonical-factual-projection-v2"
+EXECUTIVE_PROJECTION_VERSION = "executive-factual-presentation-v2"
+OWNER_ASSESSMENT_INPUT_VERSION = "owner-assessment-factual-input-v1"
+
+
+def runtime_fingerprint() -> str:
+    """Return the material factual-runtime fingerprint exposed to consumers."""
+    deployed = deployment_metadata()
+    parts = (
+        f"commit={deployed.get('commit_sha') or 'Unavailable'}",
+        f"adapter={MAPPING_VERSION}",
+        "semantic=semantic-twin-constructor-v1",
+        f"cfp={CANONICAL_FACTUAL_PROJECTION_VERSION}",
+        "observation=imported-twin-observation-profile-v1",
+        f"owner={OWNER_ASSESSMENT_INPUT_VERSION}",
+        f"executive={EXECUTIVE_PROJECTION_VERSION}",
+    )
+    return " | ".join(parts)
 
 
 @dataclass(frozen=True)
@@ -33,6 +55,13 @@ class CanonicalFactualProjection:
     unknown_refs: tuple[str, ...]
     contradiction_refs: tuple[str, ...]
     observation_refs: tuple[str, ...]
+    relationship_refs: tuple[str, ...] = ()
+    membership_refs: tuple[str, ...] = ()
+    source_lineage: tuple[str, ...] = ()
+    candidate_state: str = "candidate"
+    completeness_state: str = "owner_assessment_pending"
+    projection_version: str = CANONICAL_FACTUAL_PROJECTION_VERSION
+    runtime_fingerprint: str = ""
     assessment_state: str = "Pending governance"
 
     @property
@@ -131,11 +160,17 @@ def factual_projection_for_object(obj: SemanticObject, family: str | None = None
         for label, value in view.fields: sections.append(FactualSection(label, _text(value)))
         if obj.statement: sections.insert(0, FactualSection("Summary", (obj.statement,)))
         if obj.consequence: sections.append(FactualSection("Qualified insights", (obj.consequence,)))
+    candidate_state = obj.governance or "candidate"
+    completeness_state = "owner_assessment_pending" if candidate_state == "candidate" else "owner_governed"
     return CanonicalFactualProjection(
         obj.record_id, inferred, title, "Candidate Intelligence — Pending governance" if obj.governance == "candidate" else "Governed factual intelligence",
         tuple(s for s in sections if s.present), tuple(dict.fromkeys(obj.evidence_refs)),
         _refs(obj, "unknown_refs", "unknowns"), _refs(obj, "contradiction_refs", "contradictions"),
-        _refs(obj, "observation_refs", "observations"), "Pending governance" if obj.governance == "candidate" else "Owner governed",
+        _refs(obj, "observation_refs", "observations"),
+        _refs(obj, "relationship_refs", "relationships", "related_records"), _refs(obj, "membership_refs", "memberships"),
+        tuple(x for x in (obj.source_file, obj.source_location, obj.original_id) if x),
+        candidate_state, completeness_state, CANONICAL_FACTUAL_PROJECTION_VERSION, runtime_fingerprint(),
+        "Pending governance" if obj.governance == "candidate" else "Owner governed",
     )
 
 
@@ -145,7 +180,10 @@ def factual_projection_for_enterprise(ent: SemanticEnterprise) -> CanonicalFactu
     evidence = tuple(dict.fromkeys(x for o in ent.records for x in o.evidence_refs))
     unknowns = tuple(dict.fromkeys(x for o in ent.records for x in _refs(o, "unknown_refs", "unknowns")))
     contradictions = tuple(dict.fromkeys(x for o in ent.records for x in _refs(o, "contradiction_refs", "contradictions")))
-    return CanonicalFactualProjection(ent.identity_key, "Enterprise Dossier", ent.name, base.governance_label, base.sections, evidence, unknowns, contradictions, base.observation_refs, base.assessment_state)
+    relationships = tuple(dict.fromkeys(x for o in ent.records for x in _refs(o, "relationship_refs", "relationships", "related_records")))
+    memberships = tuple(dict.fromkeys(x for o in ent.records for x in _refs(o, "membership_refs", "memberships")))
+    lineage = tuple(dict.fromkeys(x for o in ent.records for x in (o.source_file, o.source_location, o.original_id) if x))
+    return CanonicalFactualProjection(ent.identity_key, "Enterprise Dossier", ent.name, base.governance_label, base.sections, evidence, unknowns, contradictions, base.observation_refs, relationships, memberships, lineage, base.candidate_state, base.completeness_state, base.projection_version, base.runtime_fingerprint, base.assessment_state)
 
 
 def _family(kind: str) -> str:

@@ -115,6 +115,7 @@ def _pilot_change_record_section(headers: Any) -> str:
     <tr><th>Change ID</th><td><code>{escape(str(change.get('change_id','')))}</code></td></tr>
     <tr><th>Sprint/change title</th><td>{escape(str(change.get('title','')))}</td></tr>
     <tr><th>Sprint objective</th><td>{escape(str(change.get('objective','')))}</td></tr>
+    <tr><th>Accepted audit option implemented</th><td>{escape(str(change.get('accepted_audit_option','Option A — Canonical Factual Projection first')))}</td></tr>
     <tr><th>Claimed implementation output</th><td>{items(change.get('implementation_summary'))}</td></tr>
     <tr><th>Expected visible change</th><td>{items(change.get('expected_visible_outcomes'))}</td></tr>
     <tr><th>Unchanged areas</th><td>{items(change.get('unchanged_behaviour'))}</td></tr>
@@ -130,6 +131,9 @@ def _pilot_change_record_section(headers: Any) -> str:
     <tr><th>Fresh import/restage required</th><td>{escape(fresh_required)}</td></tr>
     </table></section><section><h3>Operator validation result</h3><table>
     <tr><th>Latest known validation status</th><td><strong>{escape(str(change.get('validation_status','Not yet tested')))}</strong></td></tr>
+    <tr><th>Automated validation result</th><td>{escape(str(change.get('automated_validation_result','Unavailable')))}</td></tr>
+    <tr><th>Codex merge gate</th><td>{escape(str(change.get('codex_merge_gate','Unavailable')))}</td></tr>
+    <tr><th>Operator validation status</th><td>{escape(str(change.get('operator_validation_status','Not yet tested')))}</td></tr>
     <tr><th>Required operator test</th><td>{items(change.get('required_test_steps'))}</td></tr>
     <tr><th>Known limitations</th><td>{items(change.get('known_limitations'))}</td></tr>
     </table><p class='muted'>Repository tests do not mark this sprint successful; a human operator must confirm the visible deployed outcome.</p></section></div></section>"""
