@@ -19,7 +19,7 @@ from cios.applications.flora.workspace.views import _page
 from .registry import BlueprintPackageRegistry
 from .industry_delta_adapter import IndustryTwinDeltaAdapter
 from .canonical_factual_projection import (
-    CanonicalFactualProjection, factual_projection_for_enterprise, factual_projection_for_object,
+    CanonicalFactualProjection, executive_value_lines, factual_projection_for_enterprise, factual_projection_for_object,
 )
 from .intelligence_projection import executive_assessments
 from .pilot_diagnostics import (
@@ -338,13 +338,8 @@ def _field(o: SemanticObject, *names: str) -> str:
 
 
 def _present_value(value: Any) -> str:
-    """Render structured canonical values without consulting source lineage."""
-    if isinstance(value, dict):
-        return " · ".join(f"{str(key).replace('_', ' ').title()}: {_present_value(item)}"
-                          for key, item in value.items() if item not in (None, "", [], {}))
-    if isinstance(value, (list, tuple)):
-        return "; ".join(_present_value(item) for item in value)
-    return str(value)
+    """Render structured canonical values through the shared presentation formatter."""
+    return "; ".join(executive_value_lines(value))
 
 
 def _executive_record_card(o: SemanticObject) -> str:
@@ -1284,10 +1279,10 @@ def _observation_pipeline_empty_family(family: str) -> str:
 
 def _observation_pipeline_object_trace(family: str, obj: SemanticObject, run_id: str) -> str:
     view = executive_record_view_model(obj)
-    rendered_fields = "; ".join(f"{label}: {_diagnostic_preview(value)}" for label, value in view.fields)
-    rendered = rendered_fields or view.title or obj.statement
     generated, exact_reason, detail = build_candidate_observation(obj)
     factual = factual_projection_for_object(obj, family)
+    rendered_fields = "; ".join(f"{section.label}: {'; '.join(section.values)}" for section in factual.sections)
+    rendered = rendered_fields or factual.title or obj.statement
     factual_summary = f"{factual.family} · {len(factual.sections)} factual section(s) · {len(factual.evidence_refs)} Evidence · {len(factual.unknown_refs)} Unknowns · {len(factual.contradiction_refs)} Contradictions"
     source_identifier = obj.original_id or obj.source_location or obj.record_id
     evidence = ", ".join(obj.evidence_refs) or "No linked evidence"
@@ -1306,7 +1301,7 @@ def _observation_pipeline_object_trace(family: str, obj: SemanticObject, run_id:
             f"<tr><th>Observation generation</th><td>profile <code>{escape(OBSERVATION_PROFILE_VERSION)}</code> · consumes Canonical Factual Projection · {generation} · evidence {escape(evidence)}</td></tr>"
             f"<tr><th>Observation persistence</th><td>{escape(generated.persistence_state if generated else 'not persisted')}</td></tr>"
             f"<tr><th>Owner assessment</th><td>candidate remains read-only; owner assessment state {escape(generated.owner_assessment_state if generated else 'not_invoked')} · display assessment {escape(_assessment_state_label(obj.sufficiency or 'pending'))}.</td></tr>"
-            f"<tr><th>Executive projection</th><td>view model <code>executive_record_view_model</code> · fields projected {len(view.fields)} · title {escape(view.title)} · projection result {escape('projected' if view.fields or obj.statement else 'omitted')}</td></tr>"
+            f"<tr><th>Executive projection</th><td>Canonical Factual Projection <code>canonical_factual_projection</code> · sections projected {len(factual.sections)} · title {escape(factual.title)} · projection result {escape('projected' if factual.has_facts or obj.statement else 'omitted')}</td></tr>"
             f"<tr><th>Recommendation</th><td>Governed Recommendation layer remains separate; no recommendation is created by factual projection.</td></tr>"
             f"<tr><th>Exact rejection reason</th><td><code>{escape(exact_reason)}</code> · runtime component <code>{escape(OBSERVATION_BUILDER_NAME)}</code> · missing prerequisite {escape('none' if generated else detail)}</td></tr>"
             "</tbody></table></details>")
