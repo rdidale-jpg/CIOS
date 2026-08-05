@@ -86,57 +86,100 @@ def _post_receipt_failure_diagnostic(exc: Exception, record: BlueprintPackageRec
 
 
 
+def _acceptance_list(values: Any) -> str:
+    if isinstance(values, dict):
+        return "".join(
+            f"<h4>{escape(str(label))}</h4><ul>" + "".join(f"<li>{escape(str(item))}</li>" for item in items) + "</ul>"
+            for label, items in values.items()
+        )
+    if isinstance(values, list):
+        return "<ul>" + "".join(f"<li>{escape(str(v))}</li>" for v in values) + "</ul>"
+    return f"<p>{escape(str(values or 'Unavailable'))}</p>"
+
+
+def _latest_tel001_record(records: list[Any]) -> Any | None:
+    tel001 = [record for record in records if getattr(getattr(record, "identity", None), "enterprise_id", "") == "TEL-001"]
+    return latest_import_record(tel001 or records)
+
+
+def _candidate_runtime_fingerprint(record: Any | None) -> str:
+    if not record:
+        return "Unavailable"
+    inspection = getattr(record, "package_inspection", {}) or {}
+    for key in ("runtime_fingerprint", "candidate_runtime_fingerprint", "deployment_fingerprint"):
+        if inspection.get(key):
+            return str(inspection[key])
+    return str(inspection.get("deployment_commit_sha") or "Unavailable")
+
+
+def _fresh_import_decision(deployed_sha: str, deployment_timestamp: str, latest_import_timestamp: str, candidate_fingerprint: str, current_fingerprint: str) -> str:
+    missing = (not deployed_sha or "Unavailable" in deployed_sha or not deployment_timestamp or "Unavailable" in deployment_timestamp or not latest_import_timestamp or "No Twin import" in latest_import_timestamp or "Unavailable" in candidate_fingerprint or "Unavailable" in current_fingerprint)
+    if missing:
+        return "Cannot determine — deployment metadata missing"
+    predates = import_predates_deployment(latest_import_timestamp, deployment_timestamp)
+    if predates is None:
+        return "Cannot determine — deployment metadata missing"
+    if predates or candidate_fingerprint != current_fingerprint:
+        return "Fresh import required"
+    return "Fresh import not required"
+
+
+def _status_badge(status: str) -> str:
+    css = "wrong" if status == "WRONG DEPLOYED COMMIT" else ("stale" if status in {"STALE CANDIDATE", "NOT TESTED"} else "ok")
+    return f"<strong class='acceptance-status {css}'>{escape(status)}</strong>"
+
+
 def _pilot_change_record_section(headers: Any) -> str:
     change = current_pilot_change()
     records = BlueprintPackageRegistry().list()
-    latest = latest_import_record(records)
+    latest = _latest_tel001_record(records)
     imported_at = getattr(latest, "received_at", "") if latest else "No Twin import recorded"
-    predates = import_predates_deployment(imported_at if latest else "", str(change.get("deployment_timestamp", "")))
-    if predates is True:
-        stale_status = "Stale candidate"
-        stale_warning = "The latest imported candidate predates this deployment; use a fresh import or restage before judging semantic runtime behaviour."
-        fresh_required = "Requires fresh import"
-    elif predates is False:
-        stale_status = "Current candidate imported after deployment"
-        stale_warning = "The latest imported candidate does not predate the deployment timestamp."
-        fresh_required = "Restage only if operator testing needs current validation outputs."
-    else:
-        stale_status = "Not yet tested"
-        stale_warning = "Flora cannot prove candidate freshness because deployment timestamp or import timestamp evidence is unavailable."
-        fresh_required = "Requires fresh import" if change.get("import_restaging_required") else "Not required"
-    def items(values: Any) -> str:
-        if isinstance(values, list):
-            return "<ul>" + "".join(f"<li>{escape(str(v))}</li>" for v in values) + "</ul>"
-        return f"<p>{escape(str(values or 'Unavailable'))}</p>"
-    diagnostics = escape(str(change.get("diagnostics_href") or "/deployment"))
-    return f"""<section class='card pilot-change-record' id='current-pilot-change' aria-labelledby='current-pilot-change-title'>
-    <p><span class='pill'>PILOT ONLY</span></p><h2 id='current-pilot-change-title'>CURRENT PILOT CHANGE</h2>
-    <div class='change-columns'><section><h3>Codex claim</h3><table>
-    <tr><th>Change ID</th><td><code>{escape(str(change.get('change_id','')))}</code></td></tr>
-    <tr><th>Sprint/change title</th><td>{escape(str(change.get('title','')))}</td></tr>
-    <tr><th>Sprint objective</th><td>{escape(str(change.get('objective','')))}</td></tr>
-    <tr><th>Accepted audit option implemented</th><td>{escape(str(change.get('accepted_audit_option','Option A — Canonical Factual Projection first')))}</td></tr>
-    <tr><th>Claimed implementation output</th><td>{items(change.get('implementation_summary'))}</td></tr>
-    <tr><th>Expected visible change</th><td>{items(change.get('expected_visible_outcomes'))}</td></tr>
-    <tr><th>Unchanged areas</th><td>{items(change.get('unchanged_behaviour'))}</td></tr>
-    </table></section><section><h3>Deployed runtime evidence</h3><table>
-    <tr><th>Deployed commit SHA</th><td><code>{escape(str(change.get('commit_sha','Unavailable')))}</code></td></tr>
-    <tr><th>Branch/release identifier</th><td><code>{escape(str(change.get('branch') or change.get('deployment_version') or 'Unavailable'))}</code></td></tr>
-    <tr><th>Deployment timestamp</th><td>{escape(str(change.get('deployment_timestamp','Unavailable')))}</td></tr>
-    <tr><th>Affected runtime areas</th><td>{items(change.get('affected_pages'))}</td></tr>
-    <tr><th>Relevant diagnostics</th><td><a href='{diagnostics}'>Open deployment diagnostics</a></td></tr>
-    <tr><th>Latest imported Twin timestamp</th><td>{escape(str(imported_at))}</td></tr>
-    <tr><th>Currently selected/imported Twin predates deployment</th><td>{escape(stale_status)}</td></tr>
-    <tr><th>Stale-candidate warning</th><td>{escape(stale_warning)}</td></tr>
-    <tr><th>Fresh import/restage required</th><td>{escape(fresh_required)}</td></tr>
-    </table></section><section><h3>Operator validation result</h3><table>
-    <tr><th>Latest known validation status</th><td><strong>{escape(str(change.get('validation_status','Not yet tested')))}</strong></td></tr>
-    <tr><th>Automated validation result</th><td>{escape(str(change.get('automated_validation_result','Unavailable')))}</td></tr>
-    <tr><th>Codex merge gate</th><td>{escape(str(change.get('codex_merge_gate','Unavailable')))}</td></tr>
-    <tr><th>Operator validation status</th><td>{escape(str(change.get('operator_validation_status','Not yet tested')))}</td></tr>
-    <tr><th>Required operator test</th><td>{items(change.get('required_test_steps'))}</td></tr>
-    <tr><th>Known limitations</th><td>{items(change.get('known_limitations'))}</td></tr>
-    </table><p class='muted'>Repository tests do not mark this sprint successful; a human operator must confirm the visible deployed outcome.</p></section></div></section>"""
+    deployed_sha = str(change.get("commit_sha") or "Unavailable")
+    expected_sha = str(change.get("expected_implementation_sha") or "Unavailable")
+    contains_expected = (deployed_sha == expected_sha or deployed_sha.startswith(expected_sha[:12]) or expected_sha.startswith(deployed_sha[:12])) if "Unavailable" not in deployed_sha + expected_sha else False
+    current_fingerprint = __import__('cios.applications.flora.blueprint_import.canonical_factual_projection', fromlist=['runtime_fingerprint']).runtime_fingerprint()
+    candidate_fingerprint = _candidate_runtime_fingerprint(latest)
+    fresh_decision = _fresh_import_decision(deployed_sha, str(change.get("deployment_timestamp", "Unavailable")), str(imported_at), candidate_fingerprint, current_fingerprint)
+    operator_status = "WRONG DEPLOYED COMMIT" if not contains_expected else ("STALE CANDIDATE" if fresh_decision == "Fresh import required" else str(change.get("operator_validation_status") or "NOT TESTED"))
+    auto = change.get("automated_validation") or {}
+    links = {
+        "Industry Overview": "/blueprint-import/history#industry-overview",
+        "BT Group": "/blueprint-import/history#bt-group",
+        "Market Participants": "/blueprint-import/history#market-participants",
+        "Major Programmes": "/blueprint-import/history#major-programmes",
+        "Opportunities": "/blueprint-import/history#opportunities",
+        "Reinvention": "/blueprint-import/history#reinvention",
+        "Research Gaps": "/blueprint-import/history#research-gaps",
+        "Advanced Diagnostics": "/blueprint-import/history#advanced-diagnostics",
+        "Import history": "/blueprint-import/history",
+        "Deployment diagnostics": str(change.get("diagnostics_href") or "/deployment"),
+    }
+    if latest:
+        run_id = escape(str(getattr(latest, "import_run_id", "")))
+        links.update({
+            "Industry Overview": f"/blueprint-import/{run_id}/aspects/industry-overview",
+            "BT Group": f"/blueprint-import/{run_id}/enterprises/BT%20Group",
+            "Market Participants": f"/blueprint-import/{run_id}/aspects/market-participants",
+            "Major Programmes": f"/blueprint-import/{run_id}/aspects/major-programmes",
+            "Opportunities": f"/blueprint-import/{run_id}/aspects/opportunities",
+            "Reinvention": f"/blueprint-import/{run_id}/aspects/reinvention-timing",
+            "Research Gaps": f"/blueprint-import/{run_id}/research-gaps",
+            "Advanced Diagnostics": f"/blueprint-import/{run_id}/diagnostics",
+        })
+    link_html = "<ul class='acceptance-links'>" + "".join(f"<li><a href='{escape(href)}'>{escape(label)}</a></li>" for label, href in links.items()) + "</ul>"
+    controls = "<p><strong>Record operator result:</strong> use the deployment acceptance workflow to record one of NOT TESTED, PASS, PARTIAL or FAIL against this change ID; this panel shows the current repository-owned status until that supported record is updated.</p>"
+    return f"""<section class='card operational-acceptance-panel' id='current-deployed-change' aria-labelledby='current-deployed-change-title'>
+    <style>.operational-acceptance-panel{{border:4px solid #a14100;background:#fff8ed;margin:1rem 0 1.5rem;padding:1rem}}.operational-acceptance-panel h2{{font-size:1.65rem;margin-top:0}}.acceptance-status{{display:inline-block;padding:.4rem .65rem;border-radius:.35rem;background:#222;color:#fff}}.acceptance-status.wrong{{background:#8b0000}}.acceptance-status.stale{{background:#8a5a00}}.acceptance-status.ok{{background:#0f6b45}}.acceptance-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem}}.acceptance-links{{columns:2}}</style>
+    <p><span class='pill'>OPERATIONAL ACCEPTANCE CONTROL</span></p><h2 id='current-deployed-change-title'>CURRENT DEPLOYED CHANGE — TEST THIS NOW</h2>
+    <p>{_status_badge(operator_status)}</p>
+    <div class='acceptance-grid'><section><h3>1. Deployed change</h3><table>
+    <tr><th>Change ID</th><td><code>{escape(str(change.get('change_id','')))}</code></td></tr><tr><th>Change title</th><td>{escape(str(change.get('title','')))}</td></tr><tr><th>Deployed commit SHA</th><td><code>{escape(deployed_sha)}</code></td></tr><tr><th>Expected implementation SHA</th><td><code>{escape(expected_sha)}</code></td></tr><tr><th>Deployed branch</th><td><code>{escape(str(change.get('branch') or 'Unavailable'))}</code></td></tr><tr><th>Deployment/build timestamp</th><td>{escape(str(change.get('deployment_timestamp') or 'Unavailable'))}</td></tr><tr><th>Runtime version</th><td><code>{escape(str(change.get('deployment_version') or deployed_sha))}</code></td></tr><tr><th>Deployed SHA contains expected implementation commit</th><td>{'YES' if contains_expected else 'NO'}</td></tr></table></section>
+    <section><h3>2. Purpose</h3><p>{escape(str(change.get('objective','')))}</p><h3>6. Fresh import/restage decision</h3><p><strong>{escape(fresh_decision)}</strong></p><table><tr><th>Latest TEL-001 import timestamp</th><td>{escape(str(imported_at))}</td></tr><tr><th>Candidate runtime fingerprint</th><td><code>{escape(candidate_fingerprint)}</code></td></tr><tr><th>Current runtime fingerprint</th><td><code>{escape(current_fingerprint)}</code></td></tr></table></section></div>
+    <section><h3>3. What Codex claims changed</h3>{_acceptance_list(change.get('implementation_summary'))}</section>
+    <section><h3>4. What should now look different</h3>{_acceptance_list(change.get('expected_visible_outcomes'))}</section>
+    <section><h3>5. Exact operator test</h3><ol>{''.join(f'<li>{escape(str(step))}</li>' for step in (change.get('required_test_steps') or []))}</ol></section>
+    <div class='acceptance-grid'><section><h3>7. Automated validation result</h3><table>{''.join(f'<tr><th>{escape(str(k).replace("_"," ").title())}</th><td>{escape(str(v))}</td></tr>' for k,v in auto.items())}</table></section><section><h3>8. Operator validation status</h3><p>{_status_badge(operator_status)}</p>{controls}<h3>9. Known limitations</h3>{_acceptance_list(change.get('known_limitations'))}</section></div>
+    <section><h3>10. Links</h3>{link_html}</section></section>"""
 
 def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, int]:
     decision = blueprint_upload_authorisation(headers)
@@ -149,9 +192,9 @@ def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, i
                          "<p><a href='/pilot-sign-in'>Sign in or select a workspace</a></p></section>")
     authorisation = "<p><span class='pill'>PILOT</span></p>" if bypass else _authorisation_context(decision)
     body = _workflow_progress("upload") + authorisation + access_notice + f"""{_notice(message)}
+    {_pilot_change_record_section(headers)}
     <style>.twin-import-form{{display:flex;max-width:34rem;flex-direction:column;align-items:stretch;gap:1rem}}.twin-import-field{{display:flex;flex-direction:column;gap:.4rem}}.twin-import-field label{{font-weight:700}}.twin-import-field input[type='file'],.twin-import-field select{{box-sizing:border-box;width:100%;position:static;pointer-events:auto;opacity:1}}.twin-import-field input[type='file']:focus-visible,.twin-import-field select:focus-visible{{outline:3px solid #185c4d;outline-offset:2px}}.twin-import-actions{{margin:0}}</style>
     <header class='hero'><h1>Import Twin</h1></header><section class='card'><p><strong>Please choose the import type and file.</strong> Commercial Mission or an existing Twin selection is not required.</p><form class='twin-import-form' method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><div class='twin-import-field'><label for='expected_type'>Twin type</label><select id='expected_type' name='expected_type' required>{''.join(f"<option value='{t}'>{escape(t.replace('_',' ').title())}</option>" for t in TWIN_TYPES)}</select></div><div class='twin-import-field'><label for='twin-package'>Twin package</label><input id='twin-package' name='blueprint_zip' type='file' accept='.zip,application/zip' required></div><p class='twin-import-actions'><button type='submit'>Upload Twin</button></p><p class='muted'>Packages may contain confidential candidate intelligence. Upload only packages you are authorised to use. Imported records remain candidates and are never promoted automatically.</p><p><a href='/digital-twins'>Cancel</a></p></form></section>
-    {_pilot_change_record_section(headers)}
     <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous package imports</a></p></section>"""
     return _page("Import Twin", body), 200
 
