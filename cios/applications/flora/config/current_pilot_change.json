@@ -1,34 +1,38 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "TEL-001-CFP-SHARED-READ-CONTRACT-2026-08-05",
-  "title": "Owner-assessment and Research Gap factual-state reconciliation",
-  "objective": "Make owner assessments, Research Gaps, Enterprise subject resolution and Executive Intelligence counts consume the same factual truth already exposed by Canonical Factual Projection v2.",
+  "change_id": "EXECUTIVE-PRESENTATION-EXPERIENCE-CORRECTION-2026-08-06",
+  "title": "Executive Presentation and Experience Correction",
+  "objective": "Make the complete imported Twin experience executive-readable, semantically consistent and free from technical presentation artefacts.",
   "expected_implementation_sha": "88f053e6cee6fe2fef7feba1e7f4553194b7a040",
   "implementation_summary": [
-    "cios/applications/flora/blueprint_import/canonical_factual_projection.py now defines the shared Canonical Factual Projection read model, executive-safe value formatting, projection versions and runtime fingerprint used by consumers.",
-    "cios/applications/flora/blueprint_import/executive_workspace.py changed executive page families so Industry Overview, Enterprise Dossiers including BT Group, Market Participants, Major Programmes, Opportunities, Reinvention, Research Gaps and Advanced Diagnostics read factual sections, Evidence, Unknowns and Contradictions from the shared projection or explicit governed derivatives.",
-    "cios/applications/flora/blueprint_import/views.py exposes deployment metadata and import/runtime fingerprints so operators can detect stale candidates before judging the visible result.",
-    "Repository tests around TEL-001 rendered pages, diagnostics reconciliation and Research Gap wording were added or updated to protect the shared-read-contract behaviour without changing TEL-001 package contents."
+    "A shared structured executive formatter now presents nested canonical values as labelled facts, lists and cards.",
+    "Executive routes now separate factual inventory, uncertainty, assessment readiness and technical diagnostics.",
+    "Canonical association fields exclusively control Enterprise programme and Opportunity relevance.",
+    "Advanced Inspection retains full technical lineage behind summaries, filters and collapsed traces."
   ],
   "expected_visible_outcomes": [
-    "Industry Overview: Research Gaps no longer describe supplied industry facts as wholly absent; Twin Map reports factual Industry content separately from owner assessment.",
-    "BT Group: owner-assessment sections recognise supplied operating model, suppliers, Evidence, Unknowns and Contradictions; strategic/financial/pressure sections state residual gaps rather than total absence; linked programmes and opportunities resolve where relationships exist; Key Sources no longer says none when Evidence is linked.",
-    "Enterprise subject: ENT-BT resolves to BT Group, not Twin scope.",
-    "Research Gaps: only residual deficiencies are commissioned.",
-    "Reinvention: all seven source records have explicit dispositions."
+    "No raw dictionaries or snake case fields on executive pages.",
+    "No runtime fingerprints on executive pages.",
+    "Correct programme and opportunity associations.",
+    "Clear Industry economics and commercial implications.",
+    "Clear Enterprise facts and residual gaps.",
+    "Corrected Twin Map wording and glyphs.",
+    "Precise Research Gaps.",
+    "Explicit Reinvention dispositions.",
+    "Improved Advanced Inspection and Explore Twin hierarchy."
   ],
   "affected_pages": [
+    "Import Twin",
+    "Executive Twin Map",
     "Industry Overview",
-    "BT Group Enterprise Dossier",
+    "Enterprise Dossiers",
     "Market Participants",
     "Major Programmes",
     "Opportunities",
     "Reinvention",
     "Research Gaps",
-    "Advanced Diagnostics",
-    "Import Twin",
-    "Import history",
-    "Deployment diagnostics"
+    "Advanced Inspection",
+    "Explore Twin"
   ],
   "unchanged_areas": [
     "Importer, validator, adapter, semantic construction, Canonical Factual Projection semantics, Observation runtime, owner assessment, Research Gaps logic, executive page semantics, TEL-001 fixture, governance and promotion remain unchanged by this operational acceptance panel.",
@@ -36,18 +40,11 @@
     "No automatic acceptance, promotion, recommendations or TEL-001-specific production logic is introduced."
   ],
   "required_test_steps": [
-    "Confirm this panel shows the currently deployed SHA.",
-    "Confirm whether Flora says a fresh import is required.",
-    "Import the unchanged TEL-001 ZIP if required.",
-    "Open Industry Overview.",
-    "Open BT Group.",
-    "Open Market Participants.",
-    "Open Major Programmes.",
-    "Open Opportunities.",
-    "Open Reinvention.",
-    "Open Research Gaps.",
-    "Open Advanced Diagnostics.",
-    "Compare the visible results against the checklist above."
+    "Open each direct test link.",
+    "Confirm executive pages contain no raw mappings, snake case labels or runtime fingerprints.",
+    "Confirm BT Group shows only canonically related programmes and opportunities.",
+    "Confirm Industry values, Research Gaps, Reinvention dispositions and diagnostics reconcile.",
+    "Use browser print preview for the six primary print routes."
   ],
   "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
   "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
@@ -56,20 +53,22 @@
     "Operator validation cannot be inferred from repository tests and remains NOT TESTED until a human records PASS, PARTIAL or FAIL outside this repository-owned metadata.",
     "Deployment telemetry can remain incomplete when Render does not expose build timestamp, service, repository or release marker environment variables to the running application; the panel then degrades to Metadata incomplete rather than reporting a wrong commit.",
     "Rendered-route tests prove the acceptance panel content is visible; they do not prove a live Render deployment has been manually inspected.",
-    "Owner assessment and promotion remain governed external authorities; this change preserves candidate factual display but does not auto-authorise recommendations."
+    "Owner assessment and promotion remain governed external authorities; this change preserves candidate factual display but does not auto-authorise recommendations.",
+    "Rendered browser screenshots and PDF artefacts were not produced in this environment.",
+    "The unchanged legacy regression contains assertions for technical count copy that the current presentation specification explicitly prohibits; replacement acceptance snapshots remain follow-up work."
   ],
   "automated_validation": {
     "tel001_fixture_checksum": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
     "expected_checksum": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
     "checksum_status": "PASS",
-    "end_to_end_test_status": "PASS \u2014 tests/test_tel001_blueprint_import_regression.py",
-    "rendered_route_test_status": "PASS \u2014 tests/test_flora_blueprint_import_interface.py::test_upload_page_shows_current_deployed_change_acceptance_panel",
-    "diagnostics_reconciliation_status": "PASS \u2014 repository TEL-001 diagnostics assertions passed in this Codex run",
-    "research_gap_reconciliation_status": "PASS \u2014 repository TEL-001 Research Gap assertions passed in this Codex run",
-    "known_failing_tests": "None in required acceptance subset run for this panel change.",
-    "last_validation_timestamp": "2026-08-05T00:00:00Z"
+    "end_to_end_test_status": "PARTIAL — fixture ingestion and focused contracts exercised; legacy wording assertions require specification-aligned updates",
+    "rendered_route_test_status": "PARTIAL — Import panel rendered; legacy title assertion reflects the preceding sprint",
+    "diagnostics_reconciliation_status": "NOT COMPLETED — full TEL-001 route run exceeded the execution window",
+    "research_gap_reconciliation_status": "NOT COMPLETED — full TEL-001 route run exceeded the execution window",
+    "known_failing_tests": "Three legacy assertions require technical/awkward copy prohibited by this sprint; full suite was interrupted after six minutes.",
+    "last_validation_timestamp": "2026-08-06T00:00:00Z"
   },
-  "merge_gate": "SAFE TO MERGE",
+  "merge_gate": "MERGE WITH KNOWN LIMITATIONS",
   "operator_validation_status": "NOT TESTED",
   "diagnostics_href": "/deployment",
   "source_commit_sha": "88f053e6cee6fe2fef7feba1e7f4553194b7a040",
@@ -77,12 +76,11 @@
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "TEL-001-CFP-SHARED-READ-CONTRACT-2026-08-05",
+  "deployed_change_marker": "EXECUTIVE-PRESENTATION-EXPERIENCE-CORRECTION-2026-08-06",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
   "material_runtime_components_changed": [
-    "diagnostics-only",
     "UI-only"
   ],
   "reimport_required_if_older_than_change": "Unavailable",
@@ -91,5 +89,5 @@
   "start_command": "unknown",
   "auto_deploy": "unknown",
   "latest_deployment_status": "unknown",
-  "fresh_import_required": "No \u2014 this change updates downstream read logic, diagnostics and acceptance copy only; it does not modify persisted candidate or semantic state."
+  "fresh_import_required": "No — presentation-only change; persisted candidate and semantic state are unchanged."
 }
