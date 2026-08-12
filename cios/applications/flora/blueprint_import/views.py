@@ -26,7 +26,9 @@ from .promotion import CanonicalPromotionRepository, CanonicalPromotionService, 
 from .registry import BlueprintPackageRegistry
 from .pilot_change import current_pilot_change, latest_import_record
 from .deployment_status import decide_deployment_status
-from .review import CandidateReviewRepository, CandidateReviewService, can_review_blueprint_candidate
+from .review import (CandidateReviewRepository, CandidateReviewService,
+                     ImportHumanReviewRepository, can_review_blueprint_candidate,
+                     mark_import_reviewed)
 from .validator import BlueprintPackageValidator, can_inspect_blueprint_package
 from .cios_twin_adapter import MAPPING_VERSION
 from .restage import BlueprintRestageService, can_restage_blueprint_package, RESTAGE_STAGES
@@ -396,6 +398,15 @@ def review_page(import_run_id: str, headers: Any, message: str = "", query: dict
         ctx = locals().get("ctx") or {}
         return _review_failure_page(ctx, job, correlation_id), 200
 
+
+def record_import_human_review(import_run_id: str, headers: Any) -> tuple[str, int]:
+    """Review-stage governance action, deliberately separate from promotion."""
+    try:
+        mark_import_reviewed(import_run_id, headers, deployment_metadata().get("commit_sha") or "Unavailable")
+        return review_page(import_run_id, headers, "Import review recorded. Facts, Unknowns, Contradictions and promotion state are unchanged.")
+    except (PermissionError, ValueError) as exc:
+        return _safe_failure(str(exc), "human review", False, True, "Return to Review with Chief Architect permission."), 403
+
 def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers: Any) -> tuple[str, int]:
     ctx = _context(import_run_id)
     try: ImportLifecycleService().assert_active(import_run_id)
@@ -575,6 +586,7 @@ def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str
 def _executive_review(ctx, job, details, counts, proposed, query, message="") -> str:
     """Executive-first projection; all values come from package, staging or review owners."""
     package = ctx["package"]; inspection = package.package_inspection or {}
+    human_review = ImportHumanReviewRepository().get(package.import_run_id)
     identity = project_twin_identity(package); unresolved = _identity_unresolved(package)
     candidates = details.get("candidates", []) or ctx.get("candidates", [])
     relevance = [(c, project_candidate_relevance(c, package, identity)) for c in candidates]
@@ -602,7 +614,12 @@ def _executive_review(ctx, job, details, counts, proposed, query, message="") ->
     subsectors = inspection.get("included_sub_sectors") or inspection.get("sub_sectors") or "Not supplied"
     if isinstance(subsectors, (list, tuple)):
         subsectors = ", ".join(str(value) for value in subsectors)
-    identity_html = f"""<section class='hero candidate-review-identity' aria-labelledby='candidate-review-title'><p class='pill'>Candidate intelligence · not governed</p><h1 id='candidate-review-title'>{escape(name)}</h1><h2>Twin context and governed scope</h2><p><strong>Proposed {escape(twin_type)}</strong> · primary subject: {escape(str(subject))} · governed scope: {escape(str(scope))}</p><p><strong>Geography:</strong> {escape(str(geography))} · <strong>Time horizon:</strong> {escape(str(horizon))}</p><p><strong>Included sub-sectors:</strong> {escape(str(subsectors))} · <strong>Canonical owner:</strong> {escape(str(owner))}</p><p><strong>Unresolved scope fields:</strong> {escape('Primary subject, governed scope or canonical owner' if unresolved else 'None reported')}</p><p><strong>Candidate status:</strong> pre-acceptance · <strong>Review status:</strong> {escape(str(job.get('status','Preparing')))} · <strong>Promotion eligibility:</strong> {'Eligible for confirmation' if eligible else 'Blocked'}</p><p class='warning'><strong>No canonical change has yet occurred.</strong> This candidate remains distinct from accepted governed intelligence.</p><p><strong>Review recommendation:</strong> {escape(recommendation)}</p><p><strong>Highest-priority blocker:</strong> {escape(blocker)}</p><p><a href='/blueprint-import/{escape(package.import_run_id)}/review#identity-resolution'>Resolve identity and scope in the existing workflow</a> · <a href='/blueprint-import/{escape(package.import_run_id)}/intelligence'>Return to Inspect with this candidate context</a></p></section>"""
+    lifecycle = ImportLifecycleService().get(package.import_run_id)
+    review_state = "Reviewed by Chief Architect" if human_review else "Imported candidate — not yet reviewed"
+    promotion_state = "Promoted" if lifecycle.state == "promoted" else "Not promoted"
+    identity_html = f"""<section class='hero candidate-review-identity' aria-labelledby='candidate-review-title'><p class='pill'>{escape(review_state)}</p><h1 id='candidate-review-title'>{escape(name)}</h1><h2>Import acceptance summary</h2><p><strong>Package:</strong> {escape(package.original_filename)} · <strong>Checksum:</strong> {escape(package.package_sha256)}</p><p><strong>Proposed {escape(twin_type)}</strong> · primary subject: {escape(str(subject))} · governed scope: {escape(str(scope))}</p><p><strong>Geography:</strong> {escape(str(geography))} · <strong>Time horizon:</strong> {escape(str(horizon))}</p><p><strong>Records accepted:</strong> {int(counts.get('Accepted', 0))} · <strong>Rejected:</strong> {int(counts.get('Rejected', 0))} · <strong>Quarantined:</strong> {quarantined}</p><p><strong>Unresolved Unknowns:</strong> {len(unknowns)} · <strong>Contradictions:</strong> {len(contradictions)} · <strong>Association anomalies:</strong> 0 · <strong>Missing canonical subjects:</strong> {1 if unresolved else 0}</p><p><strong>Review status:</strong> {escape(review_state)} · <strong>Promotion status:</strong> {escape(promotion_state)} · <strong>Assessment status:</strong> Assessment not yet performed · <strong>Recommendation status:</strong> Not eligible</p><p class='warning'><strong>Human review makes no canonical change.</strong> Promotion remains a separate decision.</p><p><a href='/blueprint-import/{escape(package.import_run_id)}/health'>Inspect residual Research Gaps</a> · <a href='/blueprint-import/{escape(package.import_run_id)}/intelligence'>Return to Inspect</a></p></section>"""
+    if not human_review:
+        identity_html += f"<section class='card human-review-action'><h2>Chief Architect review</h2><p>Record that you have inspected the import acceptance summary, factual intelligence, Unknowns, Contradictions and relationships.</p><form method='post' action='/blueprint-import/{escape(package.import_run_id)}/mark-reviewed'><button type='submit'>MARK IMPORT REVIEWED</button></form><p>This does not promote, assess, recommend, or alter any imported value.</p></section>"
     executive = f"""<section class='card executive-summary' aria-labelledby='executive-summary-title'><h2 id='executive-summary-title'>Executive intelligence summary</h2><p>{escape(str(summary))}</p><p><strong>Why it matters commercially:</strong> {escape(str(why))}</p><p><strong>Most material uncertainty:</strong> {escape(_challenge_preview(unknowns, 'No material Unknown was supplied.'))}</p><p><strong>Most material contradiction:</strong> {escape(_challenge_preview(contradictions, 'No material Contradiction was supplied.'))}</p><p><strong>Freshness and Evidence basis:</strong> {escape(str(inspection.get('evidence_cut_off') or 'Not supplied'))}; Evidence remains candidate Evidence until promotion.</p></section>"""
     if unresolved:
         executive = "<section class='card executive-summary warning'><h2>Executive intelligence summary</h2><h3>Executive prioritisation is provisional until scope is confirmed</h3><p>The package does not establish enough owner-backed Twin identity and governed scope to compose a coherent executive summary. Candidate statements are preserved and grouped below; scope and classification resolution is the principal blocker.</p></section>"

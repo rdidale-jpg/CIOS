@@ -62,7 +62,7 @@ class CanonicalFactualProjection:
     completeness_state: str = "owner_assessment_pending"
     projection_version: str = CANONICAL_FACTUAL_PROJECTION_VERSION
     runtime_fingerprint: str = ""
-    assessment_state: str = "Pending governance"
+    assessment_state: str = "Assessment not yet performed"
 
     @property
     def has_facts(self) -> bool:
@@ -163,14 +163,14 @@ def factual_projection_for_object(obj: SemanticObject, family: str | None = None
     candidate_state = obj.governance or "candidate"
     completeness_state = "owner_assessment_pending" if candidate_state == "candidate" else "owner_governed"
     return CanonicalFactualProjection(
-        obj.record_id, inferred, title, "Candidate Intelligence — Pending governance" if obj.governance == "candidate" else "Governed factual intelligence",
+        obj.record_id, inferred, title, "Imported candidate — not yet reviewed" if obj.governance == "candidate" else "Governed factual intelligence",
         tuple(s for s in sections if s.present), tuple(dict.fromkeys(obj.evidence_refs)),
         _refs(obj, "unknown_refs", "unknowns"), _refs(obj, "contradiction_refs", "contradictions"),
         _refs(obj, "observation_refs", "observations"),
         _refs(obj, "relationship_refs", "relationships", "related_records"), _refs(obj, "membership_refs", "memberships"),
         tuple(x for x in (obj.source_file, obj.source_location, obj.original_id) if x),
         candidate_state, completeness_state, CANONICAL_FACTUAL_PROJECTION_VERSION, runtime_fingerprint(),
-        "Pending governance" if obj.governance == "candidate" else "Owner governed",
+        "Assessment not yet performed" if obj.governance == "candidate" else "Owner governed",
     )
 
 
