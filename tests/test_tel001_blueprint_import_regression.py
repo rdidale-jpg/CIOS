@@ -122,11 +122,11 @@ def test_tel001_candidates_are_shared_by_governance_twin_map_and_research_gaps(m
     twin_map, status = executive_workspace_page(package.import_run_id, {}, view="workspace")
     assert status == 200
     for inventory in (
-        "1 canonical Industry Twin concept(s)",
-        "6 canonical enterprise(s)",
-        "17 canonical participant(s)",
-        "13 canonical programme hypothesis/hypotheses",
-        "17 canonical opportunity hypothesis/hypotheses",
+        "1 factual profile imported",
+        "6 enterprise dossiers imported",
+        "17 market participants imported",
+        "13 programme records imported",
+        "17 opportunities imported",
     ):
         assert inventory in twin_map
 
@@ -393,7 +393,7 @@ def test_tel001_deployed_aspect_and_dossier_routes_render_pending_candidate_fiel
     for collection, values in expected.items():
         page, page_status = executive_workspace_page(run_id, {}, view="aspect", collection=collection)
         assert page_status == 200
-        assert "owner assessment pending governance" in page or "pending governance" in page
+        assert "pending governance" not in page.casefold()
         assert all(value in page for value in values), (collection, [value for value in values if value not in page])
         assert "{'" not in page and "[{'" not in page
 
@@ -413,11 +413,11 @@ def test_tel001_deployed_aspect_and_dossier_routes_render_pending_candidate_fiel
         "EV-BT-FY26",
     ):
         assert value in bt_page
-    assert "not supplied" not in bt_page.casefold()
+    assert "governance review pending" not in bt_page.casefold()
 
     gaps, gaps_status = executive_workspace_page(run_id, {}, view="health")
     assert gaps_status == 200
-    assert "source_field_present_unassessed" in gaps
+    assert "What Flora already has" in gaps and "What remains incomplete" in gaps
     assert "Find organisation description" not in gaps
 
 

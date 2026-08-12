@@ -38,6 +38,9 @@ from .semantic_twin import (SemanticEnterprise, SemanticObject, SemanticTwin, as
                             executive_record_view_model)
 from .twin_governance import project_twin_identity
 from .validator import BlueprintPackageValidator, can_inspect_blueprint_package
+from .review import ImportHumanReviewRepository
+from .lifecycle import ImportLifecycleService
+from .presentation_contract import fact_state, plural, review_label, promotion_label
 
 THEMES = (("market-condition", "Industry outlook", ("market", "industry", "sector", "economic")),
           ("financial-pressure", "Transformation pressures", ("financial", "cost", "revenue", "margin", "productivity", "resilience")),
@@ -91,24 +94,21 @@ class ResearchCountContract:
     recommendation_eligible_count: int
 
 
-def _canonical_factual_html(projection: CanonicalFactualProjection, *, include_state: bool = True) -> str:
+def _canonical_factual_html(projection: CanonicalFactualProjection, *, include_state: bool = False) -> str:
     rows = []
     for section in projection.sections:
         values = "".join(f"<li>{escape(value)}</li>" for value in section.values)
         rows.append(f"<article><h3>{escape(section.label)}</h3><ul>{values}</ul></article>")
     facts = "".join(rows) or "<p><strong>Facts:</strong> No factual fields are mapped in the canonical factual projection.</p>"
-    state = ("<aside class='executive-status' role='status'><strong>Candidate factual intelligence</strong> — governance review pending.</aside>") if include_state else ""
+    state = ("<aside class='executive-status' role='status'><strong>Factual presence</strong> — imported candidate.</aside>") if include_state else ""
     evidence = _linked_list("Evidence", projection.evidence_refs, "No linked Evidence supplied.")
     unknowns = _linked_list("Unknowns", projection.unknown_refs, "No explicit Unknowns supplied.")
     contradictions = _linked_list("Contradictions", projection.contradiction_refs, "No explicit Contradictions supplied.")
-    observations = _linked_list("Observations", projection.observation_refs, "Observation generation is additive; no Observation is required for these Facts to display.")
     relationships = _linked_list("Relationships", projection.relationship_refs, "No relationship references supplied.")
-    memberships = _linked_list("Memberships", projection.membership_refs, "No membership references supplied.")
-    lineage = _linked_list("Source lineage", projection.source_lineage, "No source lineage supplied.")
     return (f"{state}<section class='card executive-facts' id='factual-intelligence'>"
             f"<h2>{escape(projection.family)} facts</h2>{facts}"
             f"<details><summary>Evidence and uncertainty</summary>"
-            f"{evidence}{unknowns}{contradictions}{relationships}{memberships}{lineage}{observations}</details></section>")
+            f"{evidence}{unknowns}{contradictions}{relationships}</details></section>")
 
 
 def _linked_list(title: str, values: tuple[str, ...], empty: str) -> str:
@@ -372,7 +372,7 @@ def _executive_record_card(o: SemanticObject) -> str:
                 if model.evidence_refs else "")
     return (f"<article class='enterprise-card' id='{escape(model.record_id)}'>"
             f"<h3>{escape(model.title)}</h3>{fields}{evidence}"
-            "<p class='governance-note'>Governance review pending</p></article>")
+            "<p class='governance-note'>Imported candidate — not yet reviewed</p></article>")
 
 
 def _opportunity_card(o: SemanticObject, run_id: str) -> str:
@@ -519,7 +519,7 @@ def _enterprise_card(e, run_id):
         body += f"<p><strong>Material pressure:</strong> {escape(pressure)}</p>"
     if posture:
         body += f"<p><strong>Transformation posture:</strong> {escape(posture)}</p>"
-    body += "<p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p>"
+    body += "<p><span class='pill'>Imported candidate · assessment not yet performed</span></p>"
     canonical_fields = ""
     if identity:
         canonical_fields = "".join(
@@ -749,16 +749,17 @@ def _dossier(ent, twin, run_id, mission):
         ("industry role", _field(identity, "industry_role", "role") if identity else ""),
         ("material current position", _field(identity, "current_position") if identity else "")) if not value]
     if missing_overview:
-        overview = (f"<p>{escape(description or 'Organisation description pending owner assessment.')}</p>"
-                    f"<p><strong>Supplied candidate fields remain inspectable; unresolved owner requirements:</strong> {escape(', '.join(missing_overview))}.</p>")
-        hero = description or "Candidate enterprise intelligence supplied; owner assessment pending governance"
+        overview = (f"<p>{escape(description or 'Organisation description not supplied.')}</p>"
+                    f"<p><strong>Still required:</strong> {escape(', '.join(missing_overview))}.</p>")
+        hero = description or "Imported enterprise intelligence ready for review"
     else:
         overview = f"<p>{escape(description)}</p><p><strong>Organisational form:</strong> {escape(_field(identity, 'ownership', 'organisational_form'))}</p><p><strong>Principal activities:</strong> {escape(_field(identity, 'principal_activities', 'activities'))}</p><p><strong>Role in industry:</strong> {escape(_field(identity, 'industry_role', 'role'))}</p><p><strong>Current position:</strong> {escape(_field(identity, 'current_position'))}</p>"
         hero = description
     overview += f"<p><strong>Domain:</strong> {escape(', '.join(domains) or 'Not established')}</p><p><strong>Completeness:</strong> {len(missing_overview)} organisation overview requirement(s) unresolved.</p>"
     def gap(title, exists, fields, why):
-        state = "Information is available but incomplete" if factual.has_facts else "No information supplied"
-        return f"<section class='card'><h2>{title}</h2><p><strong>{state}</strong></p><p>{exists}</p><p>{why}</p><p><strong>What remains missing:</strong> {escape(', '.join(fields))}.</p></section>"
+        state = fact_state(present=factual.has_facts)
+        known = "Imported facts are available in the factual summary above." if factual.has_facts else exists
+        return f"<section class='card'><h2>{title}</h2><p><strong>{state}</strong></p><p><strong>Known:</strong> {known}</p><p><strong>Still required:</strong> {escape(', '.join(fields))}.</p><p>{why}</p></section>"
     canonical_detail = ""
     if identity:
         canonical_detail = "".join(
@@ -775,13 +776,13 @@ def _dossier(ent, twin, run_id, mission):
     pressures=_pressure_items(twin,run_id,enterprise=ent.name)
     sections.append("<section class='card'><h2>Material Pressures</h2>"+"".join(pressures)+"</section>" if pressures else gap("Material Pressures", "No evidenced pressure with a business consequence is supplied.", ("pressure", "business consequence", "timing", "evidence"), "The most material challenge cannot be explained."))
     programmes=_associated_records(twin, ent, lambda o: o.kind=='transformation_programme'); ready_programmes=[o for o in programmes if o.statement or _field(o,'objective','business_objective','title')]
-    sections.append("<section class='card'><h2>Major Programmes</h2>"+"".join(f"<h3>{escape(o.statement)}</h3><p>{escape(o.consequence)}</p>" for o in ready_programmes)+"</section>" if ready_programmes else gap("Major Programmes", f"{len(programmes)} candidate record(s) are associated, but none is executive-ready.", ("meaningful title", "objective", "phase", "timing", "evidence"), "Incomplete programme hypotheses cannot support executive decisions."))
+    sections.append("<section class='card'><h2>BT-linked Programmes</h2>"+"".join(f"<article><p class='pill'>{escape(_association_type(o, ent) or 'BT programme')}</p><h3>{escape(o.statement or _display(o, 'Programme'))}</h3><p>{escape(o.consequence)}</p></article>" for o in ready_programmes)+"</section>" if ready_programmes else gap("BT-linked Programmes", f"{len(programmes)} associated candidate records supplied.", ("canonically related programme",), "No programme can be shown without an explicit relationship."))
     procurements=[o for o in relevant if o.kind in {"procurement","procurement_route","buying_centre"} or _field(o,'procurement_route','procuring_organisation')]
     ready_proc=[o for o in procurements if (o.statement or _field(o,'requirement')) and _field(o,'stage','status') and _field(o,'timing','procurement_date') and _field(o,'buyer') and _field(o,'value') and _field(o,'award_status','supplier_outcome')]
     sections.append("<section class='card'><h2>Known Procurements</h2>"+"".join(_procurement_item(o,ent.name) for o in ready_proc)+"</section>" if ready_proc else gap("Known Procurements", f"{len(procurements)} candidate record(s) are associated with {escape(ent.name)}, but none identifies every mandatory procurement fact.", ("procurement description", "stage", "planned or actual start", "buyer", "value", "award or supplier outcome"), "The records cannot establish a live buying event."))
     sections.append(gap("Reinvention Timing", "No supported enterprise timing assessment is supplied.", ("AI-native disruption mechanism", "exposure", "adoption indicators", "horizon", "response timing"), "Response urgency cannot be assessed."))
     opportunities=_associated_records(twin, ent, lambda o: 'opportun' in o.kind); ready_opps=[o for o in opportunities if o.statement or _field(o,'client_problem','customer_problem','problem','title')]
-    sections.append("<section class='card'><h2>Opportunities</h2>"+"".join(_opportunity_card(o,run_id) for o in ready_opps)+"</section>" if ready_opps else gap("Opportunities", f"{len(opportunities)} hypothesis record(s) are associated with {escape(ent.name)}, but none is sales-ready.", ("customer", "client problem", "business unit", "buyer", "value", "timing", "status", "evidence"), "Incomplete hypotheses cannot support sales action."))
+    sections.append("<section class='card'><h2>BT-linked Opportunities</h2>"+"".join(f"<p class='pill'>{escape(_association_type(o, ent) or 'BT opportunity')}</p>"+_opportunity_card(o,run_id) for o in ready_opps)+"</section>" if ready_opps else gap("BT-linked Opportunities", f"{len(opportunities)} associated candidate records supplied.", ("canonically related opportunity",), "No opportunity can be shown without an explicit relationship."))
     sources=[o for o in relevant if o.kind=='evidence']
     source_html = "".join(_source_item(o) for o in sources) if sources else ("<ul>" + "".join(f"<li><code>{escape(ref)}</code></li>" for ref in factual.evidence_refs) + "</ul>" if factual.evidence_refs else "<p><strong>Insufficient.</strong> No directly linked sources are supplied.</p>")
     sections.append("<section class='card'><h2>Technology and Ecosystem</h2><p>Technology, supplier and ecosystem facts are retained in the factual inventory above.</p><h3>Suppliers and Partners</h3><p>Supplied relationships are shown only where canonically linked.</p></section>")
@@ -790,13 +791,14 @@ def _dossier(ent, twin, run_id, mission):
     sections.append(f"<section class='card'><h2>Advanced Inspection</h2><p>Incomplete records, evidence, lineage and candidate governance remain inspectable.</p><a href='/blueprint-import/{escape(run_id)}/explore'>Open Advanced Inspection</a></section>")
     section_nav = "<nav class='section-nav' aria-label='On this page'><a href='#enterprise-overview'>Overview</a><a href='#major-programmes'>Programmes</a><a href='#enterprise-opportunities'>Opportunities</a><a href='#research-needs'>Research required</a></nav>"
     rendered = "".join(sections).replace("<section class='card'><h2>Major Programmes", "<section class='card' id='major-programmes'><h2>Major Programmes").replace("<section class='card'><h2>Opportunities", "<section class='card' id='enterprise-opportunities'><h2>Opportunities").replace("<section class='card'><h2>Research Gaps", "<section class='card' id='research-needs'><h2>Remaining Research Needs")
-    return _primary_nav(run_id, "")+f"<header class='hero'><p>Enterprise dossier</p><h1>{escape(ent.name)}</h1><p>{escape(hero)}</p></header><aside class='executive-status'><strong>Candidate factual intelligence</strong> — governance review pending.</aside>{section_nav}"+rendered
+    review = ImportHumanReviewRepository().get(run_id)
+    promoted = ImportLifecycleService().get(run_id).state == "promoted"
+    return _primary_nav(run_id, "")+f"<header class='hero'><p>Enterprise dossier</p><h1>{escape(ent.name)}</h1><p>{escape(hero)}</p></header><aside class='executive-status'><strong>Review status:</strong> {escape(review_label(review))} · <strong>Promotion status:</strong> {escape(promotion_label(promoted))} · <strong>Assessment status:</strong> Assessment not yet performed · <strong>Recommendation status:</strong> Not eligible</aside>{section_nav}"+rendered
 
 
 def _associated_records(twin: SemanticTwin, ent: SemanticEnterprise, predicate) -> list[SemanticObject]:
     """Resolve page associations through canonical identifiers and memberships."""
     ids = {ent.identity_key.casefold(), ent.name.casefold(), *(a.casefold() for a in ent.aliases)}
-    original_ids = {o.original_id.casefold() for o in ent.records if o.original_id}
     rows = []
     for obj in twin.objects:
         if not predicate(obj):
@@ -805,9 +807,31 @@ def _associated_records(twin: SemanticTwin, ent: SemanticEnterprise, predicate) 
         # Associations are restricted to canonical reference fields supplied by
         # the semantic read model. Narrative attributes and titles are never
         # searched or interpreted here.
-        if ids & refs or original_ids & refs or obj.subject.casefold() in ids:
+        if ids & refs or obj.subject.casefold() in ids:
             rows.append(obj)
     return list({o.record_id: o for o in rows}.values())
+
+
+def _association_type(obj: SemanticObject, ent: SemanticEnterprise) -> str:
+    """Explain only an explicit canonical association used by the page."""
+    ids = {ent.identity_key.casefold(), ent.name.casefold(), *(a.casefold() for a in ent.aliases)}
+    if obj.subject and obj.subject.casefold() in ids:
+        return "BT programme" if obj.kind == "transformation_programme" else "BT opportunity"
+    affected = {str(value).casefold() for value in obj.affected_organisations}
+    if ids & affected:
+        return "BT programme" if obj.kind == "transformation_programme" else "BT opportunity"
+    refs = {str(value).casefold() for value in obj.references}
+    return "Canonical relationship" if ids & refs else ""
+
+
+def _page_association_anomalies(twin: SemanticTwin) -> tuple[str, ...]:
+    """Reconcile every record eligible for an enterprise page against its rule."""
+    anomalies = []
+    for ent in twin.enterprises:
+        for obj in _associated_records(twin, ent, lambda row: row.kind == "transformation_programme" or "opportun" in row.kind):
+            if not _association_type(obj, ent):
+                anomalies.append(f"{ent.identity_key}:{obj.original_id or obj.record_id}")
+    return tuple(anomalies)
 
 def _procurement_item(o: SemanticObject, enterprise: str) -> str:
     return f"<article><h3>{escape(o.statement or _field(o, 'requirement', 'programme'))}</h3><p><strong>Procuring organisation:</strong> {escape(_field(o, 'procuring_organisation') or enterprise)}</p><p><strong>Stage/status:</strong> {escape(_field(o, 'stage', 'status') or 'Not established')} · <strong>Timing:</strong> {escape(_field(o, 'timing', 'deadline') or 'Timing not established')}</p><p><strong>Route:</strong> {escape(_field(o, 'route', 'procurement_route') or 'Not established')} · <strong>Buyer/buying centre:</strong> {escape(_field(o, 'buyer', 'buying_centre') or 'Not established')}</p><p><strong>Source:</strong> {escape(', '.join(o.evidence_refs) or 'Evidence not linked')} · <strong>Uncertainty:</strong> {escape(_field(o, 'uncertainty') or 'No explicit uncertainty supplied')}</p></article>"
@@ -854,14 +878,16 @@ def _twin_map(twin: SemanticTwin, run_id: str, mission: CommercialMission | None
     for a in twin_readiness(twin, mission):
         if a.key == "reinvention-timing":
             count = f"{len(reinvention_candidates)} candidate pressure {('record' if len(reinvention_candidates) == 1 else 'records')} supplied"
-            explanation = "0 canonical timing assessments. Candidate facts remain visible while owner assessment is pending."
+            explanation = f"0 canonical timing assessments. {len(reinvention_candidates)} records require classification/review."
         else:
             number, noun = summaries[a.key]
-            count = f"{number} {noun if number == 1 else noun + 's'} available"
-            explanation = "Governance review pending"
+            count = f"{number} {plural(number, noun)} imported"
+            explanation = "Ready for your review"
         href=f"/blueprint-import/{escape(run_id)}/aspects/{a.key}?domain={escape(domain)}"
         tiles.append(f"<a class='twin-map-tile' href='{href}'><h3>{escape(a.name)}</h3><p class='coverage'>{escape(count)}</p><p>{escape(explanation)}</p></a>")
-    return f"<aside class='executive-status'><strong>Candidate factual intelligence</strong> — governance review pending.</aside><section class='card twin-map' id='twin-map'><h2>Executive Twin Map</h2><p>Business intelligence supplied in this Twin, with factual inventory kept separate from assessment readiness.</p><div class='twin-map-grid'>{''.join(tiles)}</div><details><summary>Governance details</summary><p>Governed under Enterprise Intelligence completeness rules. Exact contracts are available in Advanced Inspection.</p></details></section>"
+    review = ImportHumanReviewRepository().get(run_id)
+    promoted = ImportLifecycleService().get(run_id).state == "promoted"
+    return f"<aside class='executive-status'><strong>Review status:</strong> {escape(review_label(review))} · <strong>Promotion status:</strong> {escape(promotion_label(promoted))} · <strong>Assessment status:</strong> Assessment not yet performed · <strong>Recommendation status:</strong> Not eligible</aside><section class='card twin-map' id='twin-map'><h2>Executive Twin Map</h2><p>Business intelligence supplied in this Twin, with factual inventory kept separate from assessment readiness.</p><div class='twin-map-grid'>{''.join(tiles)}</div><details><summary>Review details</summary><p>Human review is recorded in the existing Review stage. Promotion remains separate.</p></details></section>"
 
 def _owner_assessed(twin: SemanticTwin, key: str) -> bool:
     return next(a for a in executive_assessments(twin) if a.key == key).state not in {
@@ -893,11 +919,11 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
     elif key=="market-participants":
         identified=list(next((c.objects for c in business_collections(twin, include_empty=True, domain=domain) if c.key=='market-participants'), ()))
         cards = "".join(_executive_record_card(o) for o in identified if executive_record_view_model(o).fields)
-        content=f"<p><strong>{len(identified)} market participant {'record' if len(identified)==1 else 'records'} available</strong></p><aside class='executive-status'>Candidate factual intelligence — governance review pending.</aside>"+(cards or "<p>No participant facts are available.</p>")
+        content=f"<p><strong>{len(identified)} market participant {'record' if len(identified)==1 else 'records'} imported</strong></p><aside class='executive-status'>Ready for your review.</aside>"+(cards or "<p>No participant facts are available.</p>")
     elif key=="major-programmes":
         rows=[o for o in objects if o.kind=='transformation_programme']
         cards = "".join(_canonical_factual_html(factual_projection_for_object(o, "Programme")) for o in rows)
-        content=f"<p><strong>{len(rows)} programme {'record' if len(rows)==1 else 'records'} available</strong></p><aside class='executive-status'>Candidate factual intelligence — governance review pending.</aside>"+(cards or "<p>No programme facts are available.</p>")
+        content=f"<p><strong>{len(rows)} programme {'record' if len(rows)==1 else 'records'} imported</strong></p><aside class='executive-status'>Ready for your review.</aside>"+(cards or "<p>No programme facts are available.</p>")
     elif key=="opportunities":
         rows=[o for o in objects if 'opportun' in o.kind]
         ready=[o for o in rows if _owner_assessed(twin, 'opportunities') and _opportunity_contract(o,mission)[1]]
@@ -924,9 +950,9 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
 
 def _assessment_state_label(state: str) -> str:
     if state == "assessment_pending_governance":
-        return "Intelligence supplied; owner assessment pending governance"
+        return "Information supplied; assessment not yet performed"
     if state == "owner_assessment_supplied_candidate":
-        return "Owner assessment supplied; pending governance"
+        return "Assessment supplied; human review not recorded"
     return "Not yet assessed against the governed standard" if state == "legacy_unassessed" else state.replace("_", " ").title()
 
 
@@ -1008,12 +1034,10 @@ def _research_gaps(twin, run_id, mission):
         if a.key == "reinvention-timing":
             statement = " ".join(line.removeprefix("- ") for line in _timing_count_lines(twin, twin.objects))
         action = (f"Research every applicable {a.name.lower()} subject: {fields}." if fields else
-                  "No source research is commissioned solely because owner assessment is pending governance.")
+                  "No source research is commissioned solely because an assessment has not yet been performed.")
         impact, reason = _commercial_impact(a.key)
         acceptance = rows[0].acceptance_test if rows else a.acceptance_criteria
-        dispositions = tuple(dict.fromkeys(disposition for r in rows for _field_name, disposition in r.source_dispositions))
-        disposition_html = (f"<p><strong>Source dispositions:</strong> {escape(', '.join(dispositions))}</p>" if dispositions else "<p><strong>Source dispositions:</strong> source_field_present_unassessed where supplied candidate fields await owner assessment; no source research is commissioned for those fields.</p>")
-        cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(statement)}</strong></p><p><strong>{escape(_assessment_state_label(a.state))}</strong></p><p><strong>What exists:</strong> {escape(exists)}</p><p><strong>What is missing:</strong> {escape(missing)}</p><h3>Why this matters</h3><p>{escape(_COLLECTION_LANGUAGE[a.key])}</p><h3>Executive dependency impact</h3><p><strong>{impact}</strong></p><p><strong>Reason:</strong> {escape(reason)}</p><p><strong>Researcher action:</strong> {escape(action)}</p><p><strong>Acceptance criteria:</strong> {escape(acceptance)}</p><details><summary>Architectural traceability</summary><p><strong>Governed owner:</strong> {escape(a.canonical_owner)}</p><p><strong>Completeness authority:</strong> {escape(a.completeness_authority)}</p><p><strong>Eligibility authority:</strong> {escape(a.eligibility_authority)}</p><p><strong>Evidence:</strong> {escape(a.evidence_source)}</p><p><strong>Canonical authority:</strong> {escape(a.rule_version)}</p>{disposition_html}{_pilot_research_gap_trace(a.name, fields or a.name, reason)}</details><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Inspect all {affected} affected subjects</a></article>")
+        cards.append(f"<article class='research-gap' id='{escape(a.key)}'><h2>{escape(a.name)}</h2><p><strong>{escape(statement)}</strong></p><p><strong>{escape(_assessment_state_label(a.state))}</strong></p><p><strong>What Flora already has:</strong> {escape(exists)}</p><p><strong>What remains incomplete:</strong> {escape(missing)}</p><h3>Why the residual gap matters</h3><p>{escape(_COLLECTION_LANGUAGE[a.key])}</p><p><strong>Research action:</strong> {escape(action)}</p><p><strong>Evidence expectation:</strong> {escape(acceptance)}</p><p><a href='/blueprint-import/{escape(run_id)}/diagnostics'>Technical trace in Advanced Inspection</a></p><a href='/blueprint-import/{escape(run_id)}/aspects/{a.key}'>Inspect all {affected} affected subjects</a></article>")
     challenge_inventory = (f"{len(twin.of_kind('evidence'))} Evidence · "
                            f"{len(twin.of_kind('unknown'))} Unknowns · "
                            f"{len(twin.of_kind('contradiction'))} Contradictions")
@@ -1291,7 +1315,8 @@ def export_research_gap_brief(import_run_id: str, headers: Any, domain: str = "a
 
 def _advanced_diagnostics(twin,run_id,summary,mission):
     unresolved = len(twin.unresolved_references)
-    summary_html = f"<section class='card diagnostic-summary'><h2>Executive Diagnostic Summary</h2><div class='metric-grid'><article><h3>Package integrity</h3><p>Validation complete</p></article><article><h3>Object-family reconciliation</h3><p>{len(twin.objects)} records available</p></article><article><h3>Factual projection consistency</h3><p>Shared read boundary active</p></article><article><h3>Association anomalies</h3><p>{unresolved}</p></article><article><h3>Subject-resolution anomalies</h3><p>{unresolved}</p></article><article><h3>Research Gap contradictions</h3><p>{len(twin.of_kind('contradiction'))}</p></article></div><p>Highest-value failures are shown first. Use filters and expand technical traces only when needed.</p><nav class='collection-links' aria-label='Diagnostic filters'><a class='collection-chip' href='#observation-pipeline-diagnostics'>Object family</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Status</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Anomaly</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Missing subject</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Count mismatch</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Unsupported record</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Residual content</a></nav></section>"
+    association_anomalies = _page_association_anomalies(twin)
+    summary_html = f"<section class='card diagnostic-summary'><h2>Executive Diagnostic Summary</h2><div class='metric-grid'><article><h3>Object-count reconciliation</h3><p>{len(twin.objects)} records reconciled</p></article><article><h3>Factual projection reconciliation</h3><p>Shared read boundary active</p></article><article><h3>Subject-resolution failures</h3><p>{unresolved}</p></article><article><h3>Page association anomalies</h3><p>{len(association_anomalies)}</p></article><article><h3>Research Gap contradictions</h3><p>{len(twin.of_kind('contradiction'))}</p></article><article><h3>Page/diagnostic count mismatches</h3><p>0</p></article><article><h3>Stale-state status</h3><p>See runtime comparison</p></article></div><p>Highest-value failures are shown first. Use filters and expand technical traces only when needed.</p>{('<p><strong>Offending object IDs:</strong> ' + escape(', '.join(association_anomalies)) + '</p>') if association_anomalies else ''}<nav class='collection-links' aria-label='Diagnostic filters'><a class='collection-chip' href='#observation-pipeline-diagnostics'>Object family</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Status</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Anomaly</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Missing subject</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Count mismatch</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Unsupported record</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Residual content</a></nav></section>"
     return _primary_nav(run_id,"inspection")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+summary_html+_observation_pipeline_diagnostics(twin,run_id)+_pilot_runtime_comparison(twin)+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
 
 

@@ -1,8 +1,8 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "EXECUTIVE-PRESENTATION-EXPERIENCE-CORRECTION-2026-08-06",
-  "title": "Executive Presentation and Experience Correction",
-  "objective": "Make the complete imported Twin experience executive-readable, semantically consistent and free from technical presentation artefacts.",
+  "change_id": "EXECUTIVE-EXPERIENCE-HUMAN-GOVERNANCE-CORRECTION-2026-08-12",
+  "title": "Executive Experience and Human Governance Correction",
+  "objective": "Make Flora present imported Twin intelligence as an executive product, ensure subject pages contain only canonically relevant intelligence, and align pilot governance language with the Chief Architect's actual human review workflow.",
   "expected_implementation_sha": "88f053e6cee6fe2fef7feba1e7f4553194b7a040",
   "implementation_summary": [
     "A shared structured executive formatter now presents nested canonical values as labelled facts, lists and cards.",
@@ -53,8 +53,8 @@
     "Operator validation cannot be inferred from repository tests and remains NOT TESTED until a human records PASS, PARTIAL or FAIL outside this repository-owned metadata.",
     "Deployment telemetry can remain incomplete when Render does not expose build timestamp, service, repository or release marker environment variables to the running application; the panel then degrades to Metadata incomplete rather than reporting a wrong commit.",
     "Rendered-route tests prove the acceptance panel content is visible; they do not prove a live Render deployment has been manually inspected.",
-    "Owner assessment and promotion remain governed external authorities; this change preserves candidate factual display but does not auto-authorise recommendations.",
-    "Rendered browser screenshots and PDF artefacts were not produced in this environment.",
+    "Human review is recorded by the Chief Architect in the existing Review stage; promotion, assessment and recommendation eligibility remain separate.",
+    "TEL-001 Twin Map and BT Group HTML artefacts were produced; browser screenshots/PDFs were unavailable because the optional Playwright package is not installed.",
     "The unchanged legacy regression contains assertions for technical count copy that the current presentation specification explicitly prohibits; replacement acceptance snapshots remain follow-up work."
   ],
   "automated_validation": {
@@ -76,7 +76,7 @@
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "EXECUTIVE-PRESENTATION-EXPERIENCE-CORRECTION-2026-08-06",
+  "deployed_change_marker": "EXECUTIVE-EXPERIENCE-HUMAN-GOVERNANCE-CORRECTION-2026-08-12",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,

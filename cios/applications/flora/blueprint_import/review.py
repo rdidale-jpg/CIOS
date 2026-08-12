@@ -24,6 +24,47 @@ class BlueprintReviewError(PermissionError):
     """Raised when a review decision cannot be recorded."""
 
 
+@dataclass(frozen=True)
+class ImportHumanReview:
+    """Package-level human governance acknowledgement; never a promotion."""
+    schema_version: str
+    import_run_id: str
+    package_ref: str
+    reviewer_identity: str
+    reviewer_role: str
+    reviewed_at: str
+    runtime_fingerprint: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+class ImportHumanReviewRepository:
+    def _path(self, import_run_id: str):
+        return data_path("blueprint_import", "human_reviews", f"{import_run_id}.json")
+
+    def get(self, import_run_id: str) -> dict[str, Any] | None:
+        path = self._path(import_run_id)
+        return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
+
+    def save(self, review: ImportHumanReview) -> ImportHumanReview:
+        atomic_write_json(self._path(review.import_run_id), review.to_dict())
+        return review
+
+
+def mark_import_reviewed(import_run_id: str, headers: Any, runtime_fingerprint: str) -> ImportHumanReview:
+    """Record the Chief Architect's Review-stage action without mutating truth."""
+    package = next((p for p in BlueprintPackageRegistry().list() if p.import_run_id == import_run_id), None)
+    if not package or not can_review_blueprint_candidate(headers, package.identity.enterprise_id, package.workspace_id):
+        raise BlueprintReviewError("Actor is not authorised to record import review")
+    reviewer = authenticated_flora_user(headers)
+    review = ImportHumanReview("1.0", import_run_id, package.package_ref, reviewer,
+                               "Chief Architect", utc_now(), runtime_fingerprint)
+    ImportHumanReviewRepository().save(review)
+    BlueprintImportLedger().append("import_human_review_recorded", review.to_dict())
+    return review
+
+
 def can_review_blueprint_candidate(headers: Any, enterprise_id: str, workspace_id: str = "") -> bool:
     if not authenticated_flora_user(headers):
         return False
