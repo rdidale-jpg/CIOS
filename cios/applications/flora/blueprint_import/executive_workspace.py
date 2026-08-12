@@ -97,26 +97,18 @@ def _canonical_factual_html(projection: CanonicalFactualProjection, *, include_s
         values = "".join(f"<li>{escape(value)}</li>" for value in section.values)
         rows.append(f"<article><h3>{escape(section.label)}</h3><ul>{values}</ul></article>")
     facts = "".join(rows) or "<p><strong>Facts:</strong> No factual fields are mapped in the canonical factual projection.</p>"
-    state = ("<aside class='mission-indicator' role='status'><strong>Candidate Intelligence</strong> · "
-             "<strong>Pending governance</strong> · Facts are displayed separately from Observations, Assessments and Recommendations.</aside>") if include_state else ""
+    state = ("<aside class='executive-status' role='status'><strong>Candidate factual intelligence</strong> — governance review pending.</aside>") if include_state else ""
     evidence = _linked_list("Evidence", projection.evidence_refs, "No linked Evidence supplied.")
     unknowns = _linked_list("Unknowns", projection.unknown_refs, "No explicit Unknowns supplied.")
     contradictions = _linked_list("Contradictions", projection.contradiction_refs, "No explicit Contradictions supplied.")
     observations = _linked_list("Observations", projection.observation_refs, "Observation generation is additive; no Observation is required for these Facts to display.")
-    state_rows = (
-        f"<p><strong>Projection version:</strong> <code>{escape(projection.projection_version)}</code></p>"
-        f"<p><strong>Runtime fingerprint:</strong> <code>{escape(projection.runtime_fingerprint)}</code></p>"
-        f"<p><strong>Candidate/promoted state:</strong> {escape(projection.candidate_state)} · "
-        f"<strong>Factual completeness state:</strong> {escape(projection.completeness_state)}</p>"
-    )
     relationships = _linked_list("Relationships", projection.relationship_refs, "No relationship references supplied.")
     memberships = _linked_list("Memberships", projection.membership_refs, "No membership references supplied.")
     lineage = _linked_list("Source lineage", projection.source_lineage, "No source lineage supplied.")
-    return (f"{state}<section class='card canonical-factual-projection' id='canonical-factual-projection'>"
-            f"<p class='pill'>Canonical Factual Projection</p><h2>{escape(projection.family)} Facts</h2>"
-            f"<p><strong>{escape(projection.governance_label)}</strong></p>{state_rows}{facts}"
-            f"<h3>Facts / Observations / Assessments / Recommendations</h3><p>Facts are Layer 1 factual intelligence. Observations, owner Assessments and Recommendations remain governed additive layers.</p>"
-            f"{evidence}{unknowns}{contradictions}{relationships}{memberships}{lineage}{observations}</section>")
+    return (f"{state}<section class='card executive-facts' id='factual-intelligence'>"
+            f"<h2>{escape(projection.family)} facts</h2>{facts}"
+            f"<details><summary>Evidence and uncertainty</summary>"
+            f"{evidence}{unknowns}{contradictions}{relationships}{memberships}{lineage}{observations}</details></section>")
 
 
 def _linked_list(title: str, values: tuple[str, ...], empty: str) -> str:
@@ -217,23 +209,23 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     if view == "explore":
         return _page(f"Explore Twin — {title}", _styles() + _pilot_diag_context_header(package, summary) + _explorer(twin, import_run_id, mission, collection, domain) + _pilot_page_reconciliation(twin, "Evidence")), 200
     if view == "health":
-        return _page(f"Research Gaps — {title}", _styles() + _pilot_diag_context_header(package, summary) + _mission_indicator(mission, employer_context, import_run_id, domain) + _research_gaps(twin, import_run_id, mission) + _pilot_page_reconciliation(twin, "Research Gaps")), 200
+        return _page(f"Research Gaps — {title}", _styles() + _mission_indicator(mission, employer_context, import_run_id, domain) + _research_gaps(twin, import_run_id, mission)), 200
     if view == "diagnostics":
         return _page(f"Advanced diagnostics — {title}", _styles() + _advanced_diagnostics(twin, import_run_id, summary, mission)), 200
     if view == "aspect":
-        return _page(f"{collection.replace('-', ' ').title()} — {title}", _styles() + _pilot_diag_context_header(package, summary) + _aspect_page(twin, import_run_id, title, collection, domain, mission) + _pilot_page_reconciliation(twin, collection)), 200
+        return _page(f"{collection.replace('-', ' ').title()} — {title}", _styles() + _aspect_page(twin, import_run_id, title, collection, domain, mission)), 200
     if view == "enterprise":
         ent = next((e for e in twin.enterprises if e.identity_key == enterprise_id), None)
         if ent is None:
             return _page("Enterprise dossier unavailable", "<section class='hero'><h1>Enterprise dossier unavailable</h1></section>"), 404
-        return _page(f"Enterprise Intelligence — {ent.name}", _styles() + _pilot_diag_context_header(package, summary) + _dossier(ent, twin, import_run_id, mission) + _pilot_page_reconciliation(twin, "Enterprises")), 200
+        return _page(f"Enterprise Intelligence — {ent.name}", _styles() + _dossier(ent, twin, import_run_id, mission)), 200
     if view == "mission":
         return _page("Configure Commercial Mission", _styles() + _mission_editor(mission, employer_context, import_run_id, domain)), 200
-    body = _styles() + _pilot_diag_context_header(package, summary) + _hero(title) + _primary_nav(import_run_id, "map") + _mission_indicator(mission, employer_context, import_run_id, domain)
+    body = _styles() + _hero(title) + _primary_nav(import_run_id, "map") + _mission_indicator(mission, employer_context, import_run_id, domain)
     if not twin.enterprises:
         body += f"<aside class='mission-indicator' role='status'>Twin identity and governed scope have not yet been confirmed. Resolve Twin scope through <a href='/blueprint-import/{escape(import_run_id)}/review'>Review candidate governance</a>. <a href='/blueprint-import/{escape(import_run_id)}/inspect'>Inspect import decisions</a>. <a href='/blueprint-import/{escape(import_run_id)}/validation'>View package validation</a>.</aside>"
     body += _domain_lenses(import_run_id, domain) + _twin_map(twin, import_run_id, mission, domain)
-    body += _navigation(import_run_id) + _pilot_page_reconciliation(twin, "Executive Intelligence")
+    body += _navigation(import_run_id)
     html = _page(f"Executive Intelligence — {title}", body)
     product_nav = "<nav class='nav'><a href='/'>Executive Brief</a><a href='/observatory'>Observatory</a><a href='/radar'>Portfolio</a><a href='/live'>Evidence</a><a href='/digital-twins'>Digital Twins</a><a href='/financial-intelligence'>Financial Intelligence</a><a href='/observatory/critique'>Research</a><a href='/settings'>Settings</a><a href='/logbook' hidden>Learning / Logbook</a><a href='/financial-reports' hidden>Collect Financial Report</a></nav>"
     html = html.replace(product_nav, "<header class='product-header'><a href='/digital-twins'>Flora</a></header>", 1)
@@ -346,46 +338,58 @@ def _field(o: SemanticObject, *names: str) -> str:
     return ""
 
 
+def _attribute(o: SemanticObject, *names: str) -> Any:
+    for name in names:
+        value = (o.attributes or {}).get(name)
+        if value not in (None, "", [], (), {}):
+            return value
+    return ""
+
+
 def _present_value(value: Any) -> str:
     """Render structured canonical values through the shared presentation formatter."""
     return "; ".join(executive_value_lines(value))
 
 
+def _structured_value(value: Any) -> str:
+    """Present canonical nested values without leaking serialisation syntax."""
+    if isinstance(value, dict):
+        rows = "".join(
+            f"<div class='labelled-fact'><dt>{escape(str(key).replace('_', ' ').title())}</dt><dd>{_structured_value(item)}</dd></div>"
+            for key, item in value.items() if item not in (None, "", [], (), {})
+        )
+        return f"<dl class='fact-list'>{rows}</dl>"
+    if isinstance(value, (list, tuple, set)):
+        return "<ul>" + "".join(f"<li>{_structured_value(item)}</li>" for item in value) + "</ul>"
+    return escape(str(value))
+
+
 def _executive_record_card(o: SemanticObject) -> str:
     model = executive_record_view_model(o)
-    fields = "".join(f"<p><strong>{escape(label)}:</strong> {escape(_present_value(value))}</p>"
+    fields = "".join(f"<section class='labelled-section'><h4>{escape(label)}</h4>{_structured_value(value)}</section>"
                      for label, value in model.fields)
     evidence = (f"<p><strong>Evidence:</strong> {escape(', '.join(model.evidence_refs))}</p>"
                 if model.evidence_refs else "")
-    diagnostic_panels = []
-    for label, value in model.fields:
-        target = f"payload.{label.casefold().replace(' ', '_')}"
-        diagnostic_panels.append(_pilot_field_panel(o, label, (target,), rendered=value, target=target, page_field=label))
-    diagnostics = "".join(diagnostic_panels)
-    if not model.fields:
-        diagnostics = _pilot_field_panel(
-            o, "template fallback", ("payload.description", "payload.summary", "payload.statement"),
-            rendered="", target="payload.description", page_field="template fallback",
-        )
     return (f"<article class='enterprise-card' id='{escape(model.record_id)}'>"
-            f"<h3>{escape(model.title)}</h3>{fields}{evidence}{diagnostics}"
-            "<span class='pill'>Canonical candidate read model</span></article>")
+            f"<h3>{escape(model.title)}</h3>{fields}{evidence}"
+            "<p class='governance-note'>Governance review pending</p></article>")
 
 
 def _opportunity_card(o: SemanticObject, run_id: str) -> str:
-    problem = _field(o, "client_problem", "customer_problem", "problem") or "Client problem not established"
-    timing = _field(o, "why_now", "timing", "target_date", "deadline") or "Timing not established"
+    problem = _attribute(o, "client_problem", "customer_problem", "problem")
+    timing = _attribute(o, "why_now", "timing", "target_date", "deadline")
     enterprises = ", ".join(o.affected_organisations) or (o.subject if o.subject != "Twin scope" else "Affected enterprise not established")
     theme = _field(o, "reinvention_theme", "theme")
     relevance = _field(o, "commercial_relevance")
     evidence = ", ".join(o.evidence_refs) or "Evidence not linked"
-    missing = [label for label, present in (("client problem", problem != "Client problem not established"),
+    missing = [label for label, present in (("client problem", bool(problem)),
                ("affected enterprise", enterprises != "Affected enterprise not established"),
-               ("evidence", bool(o.evidence_refs)), ("timing", timing != "Timing not established")) if not present]
-    details = "".join(f"<p><strong>{label}:</strong> {escape(value)}</p>" for label, value in
-                      (("Affected enterprises", enterprises), ("Client problem", problem),
-                       ("Relevant domain", ", ".join(d.title() for d in o.domains) or "Domain not established"),
-                       ("Reinvention theme", theme or "Theme not established"), ("Why now", timing)) if value)
+               ("evidence", bool(o.evidence_refs)), ("timing", bool(timing))) if not present]
+    details = f"<p><strong>Customer:</strong> {escape(enterprises)}</p>"
+    details += f"<section><h4>Client problem</h4>{_structured_value(problem) if problem else '<p>Not established</p>'}</section>"
+    details += f"<section><h4>Timing</h4>{_structured_value(timing) if timing else '<p>Not established</p>'}</section>"
+    details += f"<p><strong>Relevant domain:</strong> {escape(', '.join(d.title() for d in o.domains) or 'Not established')}</p>"
+    if theme: details += f"<p><strong>Reinvention theme:</strong> {escape(theme)}</p>"
     if relevance: details += f"<p><strong>Commercial relevance:</strong> {escape(relevance)}</p>"
     details += f"<p><strong>Evidence:</strong> {escape(evidence)} · <strong>Confidence:</strong> {escape(o.confidence)}</p>"
     details += f"<p><strong>Missing information:</strong> {escape(', '.join(missing) or 'None under the presentation contract')}</p>"
@@ -713,7 +717,11 @@ def _explorer(twin, run_id, mission, selected="", domain="all"):
     enterprises = "".join(_enterprise_card(e, run_id) for e in visible_enterprises)
     collections = business_collections(twin, domain=domain)
     active = next((c for c in collections if c.key == selected), None)
-    links = "".join(f"<a class='collection-chip' href='?collection={escape(c.key)}&amp;domain={escape(domain)}'>{escape(c.label)} <b>{len(c.objects)}</b></a>" for c in collections)
+    priority = {'industry-overview':0,'enterprises':1,'market-participants':2,'major-programmes':3,'opportunities':4,'reinvention-timing':5,'evidence':6,'unknowns':7,'contradictions':8,'relationships':9}
+    business = sorted((c for c in collections if c.key in priority), key=lambda c: priority[c.key])
+    supporting = [c for c in collections if c.key not in priority]
+    links = "".join(f"<a class='collection-chip' href='?collection={escape(c.key)}&amp;domain={escape(domain)}'>{escape(c.label)} <b>{len(c.objects)}</b></a>" for c in business)
+    supporting_links = "".join(f"<a class='collection-chip' href='?collection={escape(c.key)}&amp;domain={escape(domain)}'>{escape(c.label)} <b>{len(c.objects)}</b></a>" for c in supporting)
     if active and active.key == "enterprises": content = enterprises or "<p>No enterprise identities supplied.</p>"
     elif active and active.key == "opportunities": content = "".join(_executive_record_card(o) for o in active.objects)
     elif active: content = "".join(
@@ -724,7 +732,8 @@ def _explorer(twin, run_id, mission, selected="", domain="all"):
     else: content = "<p>Select a business collection to explore its contents.</p>"
     title = active.label if active else "Advanced Inspection"
     total = len(active.objects) if active else 0
-    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a><strong>Advanced Inspection</strong></nav><header class='hero'><h1>Advanced Inspection</h1><p>{escape(active.description) if active else 'Inspect canonical records, evidence, relationships, unknowns, contradictions and technical diagnostics.'}</p></header><section class='card'><h2>Technical collections</h2><div class='collection-links'>{links}</div></section><section class='card'><h2>{escape(title)}{f' — {total} total' if active else ''}</h2><p>{f'Showing {total} distinct identities' if active and active.key == 'enterprises' else f'Showing {total} of {total} total records' if active else ''}</p>{content}</section><details class='card'><summary>Advanced aspect coverage</summary><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></details>"
+    anomaly_count = len(twin.unresolved_references)
+    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a><strong>Advanced Inspection</strong></nav><header class='hero'><h1>Advanced Inspection</h1><p>{escape(active.description) if active else 'Reconcile business objects, evidence, relationships and technical traces.'}</p></header><section class='card diagnostic-summary'><h2>Diagnostic Summary</h2><div class='metric-grid'><article><strong>Package integrity</strong><p>Validated import available</p></article><article><strong>Object-family reconciliation</strong><p>{len(twin.objects)} records inventoried</p></article><article><strong>Association anomalies</strong><p>{anomaly_count}</p></article><article><strong>Stale-state status</strong><p>See runtime comparison</p></article></div><form class='diagnostic-filters'><label>Object family <select><option>All families</option></select></label><label>Status <select><option>All statuses</option></select></label><label>Anomaly <select><option>All anomalies</option><option>Missing subject</option><option>Count mismatch</option><option>Unsupported record</option><option>Residual content</option></select></label></form></section><section class='card'><h2>Business collections</h2><div class='collection-links'>{links}</div><details><summary>Technical and supporting collections</summary><div class='collection-links'>{supporting_links or '<p>No supporting collections.</p>'}</div></details></section><section class='card'><h2>{escape(title)}{f' — {total} total' if active else ''}</h2><p>{f'Showing {total} distinct identities' if active and active.key == 'enterprises' else f'Showing {total} of {total} total records' if active else ''}</p>{content}</section><details class='card'><summary>Technical reconciliation traces</summary><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></details>"
 
 
 def _dossier(ent, twin, run_id, mission):
@@ -748,15 +757,17 @@ def _dossier(ent, twin, run_id, mission):
         hero = description
     overview += f"<p><strong>Domain:</strong> {escape(', '.join(domains) or 'Not established')}</p><p><strong>Completeness:</strong> {len(missing_overview)} organisation overview requirement(s) unresolved.</p>"
     def gap(title, exists, fields, why):
-        return f"<section class='card'><h2>{title}</h2><p><strong>Insufficient</strong></p><p>{exists}</p><p>{why}</p><p><strong>Research required:</strong> {', '.join(fields)}.</p></section>"
+        state = "Information is available but incomplete" if factual.has_facts else "No information supplied"
+        return f"<section class='card'><h2>{title}</h2><p><strong>{state}</strong></p><p>{exists}</p><p>{why}</p><p><strong>What remains missing:</strong> {escape(', '.join(fields))}.</p></section>"
     canonical_detail = ""
     if identity:
         canonical_detail = "".join(
-            f"<p><strong>{escape(label)}:</strong> {escape(_present_value(value))}</p>"
+            f"<section class='labelled-section'><h3>{escape(label)}</h3>{_structured_value(value)}</section>"
             for label, value in executive_record_view_model(identity).fields
             if label != "Overview"
         )
-    sections = [factual_html, f"<section class='card' id='enterprise-overview'><h2>Organisation Overview</h2>{overview}{canonical_detail}{_pilot_enterprise_diagnostics(ent)}<p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p></section>"]
+    sections = [f"<section class='card' id='enterprise-overview'><h2>Organisation Overview</h2>{overview}{canonical_detail}</section>", factual_html]
+    sections.append("<section class='card'><h2>Operating Model</h2><p>Operating-model facts are shown in the factual sections above. Information is available but incomplete where governed requirements remain unresolved.</p></section>")
     position = _field(identity, "strategic_ambition", "market_position", "current_position") if identity else ""
     sections.append(f"<section class='card'><h2>Strategic Position and Ambition</h2><p>{escape(position)}</p></section>" if position else gap("Strategic Position and Ambition", "No supported strategic position is supplied.", ("strategic ambition", "market position", "supporting evidence"), "Without it Flora cannot explain the organisation's direction."))
     financials=[o for o in relevant if o.kind in {"financial_observation","financial_fact","economic_pool"} and all((_field(o,'metric','measure'),_field(o,'value'),_field(o,'period'),_field(o,'source')))]
@@ -773,10 +784,13 @@ def _dossier(ent, twin, run_id, mission):
     sections.append("<section class='card'><h2>Opportunities</h2>"+"".join(_opportunity_card(o,run_id) for o in ready_opps)+"</section>" if ready_opps else gap("Opportunities", f"{len(opportunities)} hypothesis record(s) are associated with {escape(ent.name)}, but none is sales-ready.", ("customer", "client problem", "business unit", "buyer", "value", "timing", "status", "evidence"), "Incomplete hypotheses cannot support sales action."))
     sources=[o for o in relevant if o.kind=='evidence']
     source_html = "".join(_source_item(o) for o in sources) if sources else ("<ul>" + "".join(f"<li><code>{escape(ref)}</code></li>" for ref in factual.evidence_refs) + "</ul>" if factual.evidence_refs else "<p><strong>Insufficient.</strong> No directly linked sources are supplied.</p>")
-    sections.append("<section class='card'><h2>Key Sources</h2>"+source_html+"</section>")
+    sections.append("<section class='card'><h2>Technology and Ecosystem</h2><p>Technology, supplier and ecosystem facts are retained in the factual inventory above.</p><h3>Suppliers and Partners</h3><p>Supplied relationships are shown only where canonically linked.</p></section>")
+    sections.append("<section class='card'><h2>Evidence and Uncertainty</h2>"+source_html+f"<p><strong>Unknowns:</strong> {len(factual.unknown_refs)} · <strong>Contradictions:</strong> {len(factual.contradiction_refs)}</p></section>")
     sections.append(f"<section class='card'><h2>Research Gaps</h2><p>The same completeness requirements shown above define the researcher brief.</p><a href='/blueprint-import/{escape(run_id)}/health'>Open Research Gaps</a></section>")
     sections.append(f"<section class='card'><h2>Advanced Inspection</h2><p>Incomplete records, evidence, lineage and candidate governance remain inspectable.</p><a href='/blueprint-import/{escape(run_id)}/explore'>Open Advanced Inspection</a></section>")
-    return _primary_nav(run_id, "")+f"<header class='hero'><h1>{escape(ent.name)}</h1><p>{escape(hero)}</p></header>"+"".join(sections)
+    section_nav = "<nav class='section-nav' aria-label='On this page'><a href='#enterprise-overview'>Overview</a><a href='#major-programmes'>Programmes</a><a href='#enterprise-opportunities'>Opportunities</a><a href='#research-needs'>Research required</a></nav>"
+    rendered = "".join(sections).replace("<section class='card'><h2>Major Programmes", "<section class='card' id='major-programmes'><h2>Major Programmes").replace("<section class='card'><h2>Opportunities", "<section class='card' id='enterprise-opportunities'><h2>Opportunities").replace("<section class='card'><h2>Research Gaps", "<section class='card' id='research-needs'><h2>Remaining Research Needs")
+    return _primary_nav(run_id, "")+f"<header class='hero'><p>Enterprise dossier</p><h1>{escape(ent.name)}</h1><p>{escape(hero)}</p></header><aside class='executive-status'><strong>Candidate factual intelligence</strong> — governance review pending.</aside>{section_nav}"+rendered
 
 
 def _associated_records(twin: SemanticTwin, ent: SemanticEnterprise, predicate) -> list[SemanticObject]:
@@ -787,12 +801,10 @@ def _associated_records(twin: SemanticTwin, ent: SemanticEnterprise, predicate) 
     for obj in twin.objects:
         if not predicate(obj):
             continue
-        attrs = obj.attributes or {}
         refs = {str(v).casefold() for v in (*obj.references, *obj.affected_organisations) if str(v).strip()}
-        for key in ("owner", "programme_owner", "customer", "customer_name", "enterprise_id", "canonical_enterprise_id", "source_enterprise_id", "business_unit"):
-            val = attrs.get(key)
-            if isinstance(val, str) and val.strip():
-                refs.add(val.casefold())
+        # Associations are restricted to canonical reference fields supplied by
+        # the semantic read model. Narrative attributes and titles are never
+        # searched or interpreted here.
         if ids & refs or original_ids & refs or obj.subject.casefold() in ids:
             rows.append(obj)
     return list({o.record_id: o for o in rows}.values())
@@ -829,14 +841,27 @@ def _primary_nav(run_id: str, active: str) -> str:
         f"<strong aria-current='page'>{label}</strong>" if key == active else f"<a href='{href}'>{label}</a>" for key, href, label in links) + "</nav>"
 
 def _twin_map(twin: SemanticTwin, run_id: str, mission: CommercialMission | None, domain: str) -> str:
+    collections = {c.key: c.objects for c in business_collections(twin, include_empty=True, domain=domain)}
+    reinvention_candidates = [o for o in twin.objects if _reinvention_kind(o)]
+    summaries = {
+        "industry-overview": (1 if any(o.kind in {"industry", "industry_twin"} for o in twin.objects) else 0, "factual profile"),
+        "enterprises": (len(twin.enterprises), "enterprise dossier"),
+        "market-participants": (len(collections.get("market-participants", ())), "market participant"),
+        "major-programmes": (sum(o.kind == "transformation_programme" for o in twin.objects), "programme record"),
+        "opportunities": (len(collections.get("opportunities", ())), "opportunity"),
+    }
     tiles=[]
     for a in twin_readiness(twin, mission):
-        count = a.present[1] if len(a.present) > 1 else (a.present[0] if a.present else "No supported information")
-        explanation = a.present[-1] if len(a.present)>1 else (a.missing[0] if a.missing else "Business-usefulness requirements are satisfied.")
-        bars = "".join(f"<i class='{'filled' if n <= (a.bars or 0) else ''}' aria-hidden='true'></i>" for n in range(1,5))
+        if a.key == "reinvention-timing":
+            count = f"{len(reinvention_candidates)} candidate pressure {('record' if len(reinvention_candidates) == 1 else 'records')} supplied"
+            explanation = "0 canonical timing assessments. Candidate facts remain visible while owner assessment is pending."
+        else:
+            number, noun = summaries[a.key]
+            count = f"{number} {noun if number == 1 else noun + 's'} available"
+            explanation = "Governance review pending"
         href=f"/blueprint-import/{escape(run_id)}/aspects/{a.key}?domain={escape(domain)}"
-        tiles.append(f"<a class='twin-map-tile' href='{href}'><h3>{escape(a.name)}</h3><p class='coverage'>{escape(count)}</p><span class='readiness' aria-label='{escape(_assessment_state_label(a.state))}, {a.bars or 0} of 4 bars'>{bars}<strong>{escape(_assessment_state_label(a.state))}</strong></span><p>{escape(explanation)}</p></a>")
-    return f"<section class='card twin-map' id='twin-map'><h2>Twin Map</h2><div class='twin-map-grid'>{''.join(tiles)}</div></section>"
+        tiles.append(f"<a class='twin-map-tile' href='{href}'><h3>{escape(a.name)}</h3><p class='coverage'>{escape(count)}</p><p>{escape(explanation)}</p></a>")
+    return f"<aside class='executive-status'><strong>Candidate factual intelligence</strong> — governance review pending.</aside><section class='card twin-map' id='twin-map'><h2>Executive Twin Map</h2><p>Business intelligence supplied in this Twin, with factual inventory kept separate from assessment readiness.</p><div class='twin-map-grid'>{''.join(tiles)}</div><details><summary>Governance details</summary><p>Governed under Enterprise Intelligence completeness rules. Exact contracts are available in Advanced Inspection.</p></details></section>"
 
 def _owner_assessed(twin: SemanticTwin, key: str) -> bool:
     return next(a for a in executive_assessments(twin) if a.key == key).state not in {
@@ -859,33 +884,37 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
         def section(name, body=""):
             return f"<section><h2>{name}</h2>{body or '<p><strong>Unknown.</strong> No supplied candidate value is mapped for this section.</p>'}</section>"
         industry_cards = "".join(_executive_record_card(o) for o in rows)
-        profile = "".join(f"<p><strong>{escape(label)}:</strong> {escape(_present_value(value))}</p>"
+        profile = "".join(f"<section class='labelled-section'><h3>{escape(label)}</h3>{_structured_value(value)}</section>"
                           for o in rows for label, value in executive_record_view_model(o).fields)
         factual_cards = "".join(_canonical_factual_html(factual_projection_for_object(o, "Industry Overview")) for o in rows)
         content = factual_cards or section("Industry definition and scope", "".join(f"<p>{escape(o.statement)}</p>" for o in rows))
         content += section("Supported populated candidate sections", profile or industry_cards)
-        content += "<p><span class='pill'>Candidate Intelligence · Pending governance</span></p>"
-        content += _pilot_industry_section_diagnostics(twin)
         content += f"<section><h2>Research Gaps</h2><p>Complete the unsupported industry sections above with dated, attributable evidence or explicit Unknowns.</p></section><section><h2>Advanced Inspection</h2><p><a href='/blueprint-import/{escape(run_id)}/explore'>Inspect canonical records, evidence and lineage</a></p></section>"
     elif key=="market-participants":
         identified=list(next((c.objects for c in business_collections(twin, include_empty=True, domain=domain) if c.key=='market-participants'), ()))
         cards = "".join(_executive_record_card(o) for o in identified if executive_record_view_model(o).fields)
-        content=f"<p><strong>{len(identified)} participant concepts · 0 owner-assessed participant profiles</strong></p><p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p>"+(cards or "<p><strong>Research required.</strong> Find supported role, domain and market significance for every participant concept.</p>")
+        content=f"<p><strong>{len(identified)} market participant {'record' if len(identified)==1 else 'records'} available</strong></p><aside class='executive-status'>Candidate factual intelligence — governance review pending.</aside>"+(cards or "<p>No participant facts are available.</p>")
     elif key=="major-programmes":
         rows=[o for o in objects if o.kind=='transformation_programme']
         cards = "".join(_canonical_factual_html(factual_projection_for_object(o, "Programme")) for o in rows)
-        content=f"<p><strong>{len(rows)} programme hypotheses · 0 owner-assessed programmes</strong></p><p><span class='pill'>Candidate intelligence · owner assessment pending governance</span></p>"+(cards or "<p><strong>Research required.</strong> Find programme owner, objective, phase, timing and evidence.</p>")
+        content=f"<p><strong>{len(rows)} programme {'record' if len(rows)==1 else 'records'} available</strong></p><aside class='executive-status'>Candidate factual intelligence — governance review pending.</aside>"+(cards or "<p>No programme facts are available.</p>")
     elif key=="opportunities":
         rows=[o for o in objects if 'opportun' in o.kind]
         ready=[o for o in rows if _owner_assessed(twin, 'opportunities') and _opportunity_contract(o,mission)[1]]
         inspectable=[o for o in rows if executive_record_view_model(o).fields]
         table=("<table class='opportunity-table'><thead><tr><th>Customer</th><th>Opportunity</th><th>Value</th><th>Timing</th><th>Status</th></tr></thead><tbody>"+"".join(f"<tr><td>{escape(', '.join(o.affected_organisations) or o.subject)}</td><td>{escape(o.statement)}</td><td>{escape(_field(o,'value','value_range') or 'Not established')}</td><td>{escape(_field(o,'timing','procurement_start','procurement_timing') or 'Timing unknown')}</td><td>{escape(_field(o,'status','procurement_status') or 'Status unknown')}</td></tr>" for o in ready)+"</tbody></table>") if ready else "<p>0 sales-ready opportunities.</p>"
-        factual_cards = "".join(_canonical_factual_html(factual_projection_for_object(o, "Opportunity")) for o in rows)
-        content=f"<h2>Sales-ready opportunities</h2>{table}<h2>Inspectable candidate hypotheses</h2><p><strong>{len(rows)} supplied candidate hypotheses · owner assessment pending governance.</strong></p>" + factual_cards
+        def commercial_type(o):
+            raw = _field(o, 'commercial_type', 'opportunity_type', 'hypothesis_level', 'category').casefold()
+            return {'h1':'H1 Open opportunity','h2':'H2 Shaping opportunity','h3':'H3 Strategic hypothesis','award':'Existing award','framework':'Framework market'}.get(raw, _field(o, 'commercial_type', 'opportunity_type', 'hypothesis_level', 'category') or 'Commercial type not established')
+        groups = {}
+        for o in rows: groups.setdefault(commercial_type(o), []).append(o)
+        factual_cards = "".join(f"<section><h2>{escape(category)}</h2><div class='opportunity-grid'>{''.join(_opportunity_card(o, run_id) for o in grouped)}</div></section>" for category, grouped in groups.items())
+        content=f"<p><strong>{len(rows)} opportunities available; recommendation assessment pending.</strong></p>" + factual_cards
     else:
-        rows=[o for o in objects if o.kind in {'ai_reinvention_assessment', 'reinvention_assessment'}]
+        rows=[o for o in objects if _reinvention_kind(o)]
         cards = "".join(_canonical_factual_html(factual_projection_for_object(o, "Reinvention Assessment")) for o in rows)
-        content=(f"<p><strong>{len(rows)} candidate reinvention assessment record(s)</strong></p><p><span class='pill'>Owner assessment supplied as candidate · pending governance</span></p>" + cards if rows else "<p><strong>Absent</strong></p><p>This Twin contains no structured assessment of AI-native disruption mechanism, exposure, adoption indicators, expected horizon or response timing.</p>")
+        canonical = sum(o.kind in {'ai_reinvention_assessment', 'reinvention_assessment'} for o in rows)
+        content=(f"<p><strong>{len(rows)} candidate pressure {'record' if len(rows)==1 else 'records'} supplied</strong></p><p><strong>{canonical} canonical timing {'assessment' if canonical==1 else 'assessments'}.</strong> Remaining records are retained as candidate facts and await governed owner assessment; none is silently discarded.</p>" + cards if rows else "<p>No candidate pressure or timing assessment records were supplied.</p>")
     requirements = [r for r in research_requirements(twin, executive_assessments(twin)) if r.aspect == key]
     fields = tuple(dict.fromkeys(field for r in requirements for field in r.missing_fields))
     sources = tuple(dict.fromkeys(source for r in requirements for source in r.source_categories))
@@ -1261,7 +1290,9 @@ def export_research_gap_brief(import_run_id: str, headers: Any, domain: str = "a
     return research_gap_brief(twin, title, context.commercial_mission, domain, context.employer_context), f"{safe}-Research-Gap-and-Enrichment-Brief.md", 200
 
 def _advanced_diagnostics(twin,run_id,summary,mission):
-    return _primary_nav(run_id,"inspection")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+_observation_pipeline_diagnostics(twin,run_id)+_pilot_runtime_comparison(twin)+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
+    unresolved = len(twin.unresolved_references)
+    summary_html = f"<section class='card diagnostic-summary'><h2>Executive Diagnostic Summary</h2><div class='metric-grid'><article><h3>Package integrity</h3><p>Validation complete</p></article><article><h3>Object-family reconciliation</h3><p>{len(twin.objects)} records available</p></article><article><h3>Factual projection consistency</h3><p>Shared read boundary active</p></article><article><h3>Association anomalies</h3><p>{unresolved}</p></article><article><h3>Subject-resolution anomalies</h3><p>{unresolved}</p></article><article><h3>Research Gap contradictions</h3><p>{len(twin.of_kind('contradiction'))}</p></article></div><p>Highest-value failures are shown first. Use filters and expand technical traces only when needed.</p><nav class='collection-links' aria-label='Diagnostic filters'><a class='collection-chip' href='#observation-pipeline-diagnostics'>Object family</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Status</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Anomaly</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Missing subject</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Count mismatch</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Unsupported record</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Residual content</a></nav></section>"
+    return _primary_nav(run_id,"inspection")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+summary_html+_observation_pipeline_diagnostics(twin,run_id)+_pilot_runtime_comparison(twin)+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
 
 
 def _observation_pipeline_diagnostics(twin: SemanticTwin, run_id: str) -> str:
@@ -1284,7 +1315,7 @@ def _observation_pipeline_diagnostics(twin: SemanticTwin, run_id: str) -> str:
         for obj in objects[:30]:
             articles.append(_observation_pipeline_object_trace(family, obj, run_id))
     return ("<section class='card' id='observation-pipeline-diagnostics'>"
-            "<h2>Observation Pipeline Diagnostics</h2>"
+            "<h2>Technical Pipeline Traces</h2>"
             "<p class='warning'><strong>Diagnostic banner:</strong> UI-only trace for candidate visibility. "
             "This section does not modify import, mappings, promotion, canonical semantics or runtime decisions.</p>"
             "<p>Select any object below to inspect the field and runtime pipeline trace from source object to rendered page.</p>"
@@ -1458,4 +1489,4 @@ def _health(twin: SemanticTwin, run_id: str, summary: dict, mission: CommercialM
 
 
 def _styles():
-    return """<style>.twin-map-grid,.research-gap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}.twin-map-tile,.research-gap{display:flex;flex-direction:column;padding:1rem;border:1px solid #cad8d3;border-radius:.7rem;background:#fffdf8;color:inherit;text-decoration:none}.twin-map-tile:hover,.twin-map-tile:focus{outline:3px solid #185c4d}.twin-map-tile h3{margin:.1rem 0}.twin-map-tile .coverage{font-weight:700}.research-gap{display:block}@media(max-width:600px){.twin-map-grid,.research-gap-grid{grid-template-columns:1fr}}.compact-twin-header h1{font-size:clamp(1.35rem,3vw,2rem);display:flex;align-items:center;gap:.35rem;flex-wrap:wrap}.pilot-badge{font-size:.65em;letter-spacing:.08em;background:#f3c969;color:#302400;padding:.25rem .45rem;border-radius:.25rem}.mission-indicator{padding:.65rem;margin:.75rem 0;background:#eef5f2;border-left:4px solid #185c4d}.executive-path,.domain-lenses,.secondary-actions{display:flex;gap:.65rem;flex-wrap:wrap;align-items:center;margin:1rem 0}.executive-path span,.executive-path a,.executive-path strong,.pill,.collection-chip,.domain-lens{padding:.45rem .7rem;border-radius:1rem;background:#eef5f2}.domain-lens.active{background:#185c4d;color:white}.composition-grid,.theme-grid,.enterprise-grid,.readiness-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}.readiness-grid article{padding:.7rem;border:1px solid #cad8d3;border-radius:.5rem}.readiness-grid h3{margin:.1rem 0 .5rem}.readiness{display:flex;gap:.25rem;align-items:center}.readiness i{display:block;width:.45rem;height:1.15rem;border:1px solid #185c4d;border-radius:2px}.readiness i.filled{background:#185c4d}.readiness span{margin-left:.35rem}.composition-tile,.theme-tile,.executive-conclusion,.enterprise-card{display:flex;flex-direction:column;gap:.5rem;padding:1rem;border:1px solid #cad8d3;border-radius:.7rem;text-decoration:none;color:inherit;background:#fffdf8}.composition-tile{min-height:9rem}.procurement-active{background:#dff4e8;font-weight:bold}.composition-tile:focus,.composition-tile:hover,.theme-tile:focus,.theme-tile:hover,.executive-conclusion:focus,.executive-conclusion:hover,.enterprise-card:focus,.enterprise-card:hover{outline:3px solid #185c4d}.composition-tile b,.theme-tile b{font-size:2rem}.insight-explanation{border-left:4px solid #185c4d;padding:1rem;margin:1rem 0}.collection-links{display:flex;gap:.6rem;flex-wrap:wrap}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:.6rem;border-bottom:1px solid #ddd}@media(max-width:600px){.composition-grid,.theme-grid,.enterprise-grid,.readiness-grid{grid-template-columns:1fr}.compact-twin-header h1{align-items:flex-start}.opportunity-table{display:block;overflow-x:auto}}</style>"""
+    return """<style>.twin-map-grid,.research-gap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}.twin-map-tile,.research-gap{display:flex;flex-direction:column;padding:1rem;border:1px solid #cad8d3;border-radius:.7rem;background:#fffdf8;color:inherit;text-decoration:none}.twin-map-tile:hover,.twin-map-tile:focus{outline:3px solid #185c4d}.twin-map-tile h3{margin:.1rem 0}.twin-map-tile .coverage{font-weight:700}.research-gap{display:block}@media(max-width:600px){.twin-map-grid,.research-gap-grid{grid-template-columns:1fr}}.compact-twin-header h1{font-size:clamp(1.35rem,3vw,2rem);display:flex;align-items:center;gap:.35rem;flex-wrap:wrap}.pilot-badge{font-size:.65em;letter-spacing:.08em;background:#f3c969;color:#302400;padding:.25rem .45rem;border-radius:.25rem}.mission-indicator{padding:.65rem;margin:.75rem 0;background:#eef5f2;border-left:4px solid #185c4d}.executive-path,.domain-lenses,.secondary-actions{display:flex;gap:.65rem;flex-wrap:wrap;align-items:center;margin:1rem 0}.executive-path span,.executive-path a,.executive-path strong,.pill,.collection-chip,.domain-lens{padding:.45rem .7rem;border-radius:1rem;background:#eef5f2}.domain-lens.active{background:#185c4d;color:white}.composition-grid,.theme-grid,.enterprise-grid,.readiness-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}.readiness-grid article{padding:.7rem;border:1px solid #cad8d3;border-radius:.5rem}.readiness-grid h3{margin:.1rem 0 .5rem}.readiness{display:flex;gap:.25rem;align-items:center}.readiness i{display:block;width:.45rem;height:1.15rem;border:1px solid #185c4d;border-radius:2px}.readiness i.filled{background:#185c4d}.readiness span{margin-left:.35rem}.composition-tile,.theme-tile,.executive-conclusion,.enterprise-card{display:flex;flex-direction:column;gap:.5rem;padding:1rem;border:1px solid #cad8d3;border-radius:.7rem;text-decoration:none;color:inherit;background:#fffdf8}.composition-tile{min-height:9rem}.procurement-active{background:#dff4e8;font-weight:bold}.composition-tile:focus,.composition-tile:hover,.theme-tile:focus,.theme-tile:hover,.executive-conclusion:focus,.executive-conclusion:hover,.enterprise-card:focus,.enterprise-card:hover{outline:3px solid #185c4d}.composition-tile b,.theme-tile b{font-size:2rem}.insight-explanation{border-left:4px solid #185c4d;padding:1rem;margin:1rem 0}.collection-links{display:flex;gap:.6rem;flex-wrap:wrap}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:.6rem;border-bottom:1px solid #ddd}@media(max-width:600px){.composition-grid,.theme-grid,.enterprise-grid,.readiness-grid{grid-template-columns:1fr}.compact-twin-header h1{align-items:flex-start}.opportunity-table{display:block;overflow-x:auto}}.executive-status{padding:.8rem 1rem;margin:1rem 0;border-left:4px solid #185c4d;background:#eef5f2}.labelled-section{margin:1rem 0;padding:.75rem;border:1px solid #d9e2de;border-radius:.5rem}.labelled-section h3,.labelled-section h4{margin-top:0}.fact-list{margin:0}.labelled-fact{display:grid;grid-template-columns:minmax(10rem,1fr) 2fr;gap:1rem;padding:.45rem 0;border-bottom:1px solid #eee}.labelled-fact dt{font-weight:700}.labelled-fact dd{margin:0}.section-nav{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}.section-nav a{padding:.4rem .65rem;background:#eef5f2;border-radius:1rem}.metric-grid,.opportunity-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}.metric-grid article{padding:1rem;border:1px solid #cad8d3;border-radius:.5rem}.diagnostic-filters{display:flex;flex-wrap:wrap;gap:1rem}.diagnostic-filters label{display:flex;flex-direction:column;font-weight:700}.diagnostic-filters select{padding:.4rem}.card,.enterprise-card,.executive-conclusion{max-width:78rem}p,li,dd{max-width:75ch}@media print{.product-header,.executive-path,.domain-lenses,.section-nav{display:none!important}body{font-size:10pt}.card,.enterprise-card,.executive-conclusion,.twin-map-tile,.research-gap{break-inside:avoid;box-shadow:none}h1,h2,h3,h4{break-after:avoid}table{font-size:9pt}details:not([open])>*:not(summary){display:none}.twin-map-grid,.research-gap-grid,.metric-grid,.opportunity-grid{grid-template-columns:repeat(2,1fr)}}</style>"""

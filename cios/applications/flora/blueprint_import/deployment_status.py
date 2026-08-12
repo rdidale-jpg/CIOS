@@ -103,10 +103,10 @@ def decide_deployment_status(change: dict[str, Any], imported_at: Any = "") -> D
         return DeploymentDecision("DEPLOYMENT PROBLEM", "Deployment problem", "No", "Flora could not verify the latest approved change. This requires a Codex/Render deployment correction. No action is required from the Chief Architect.", fresh, included, containment, merge_mode, "authoritative deployment problem", unresolved)
     if included and fresh == "Yes":
         return DeploymentDecision("REIMPORT REQUIRED", "Reimport required", "Yes — after reimport", "The latest approved change is live. Import the unchanged TEL-001 package again, then follow the test checklist.", fresh, True, containment, merge_mode, "authoritative inclusion", unresolved)
-    if included and fresh == "No":
+    if included and fresh == "No" and not unresolved:
         return DeploymentDecision("READY FOR TESTING", "Ready for testing", "Yes", "The latest approved change is live. Test the pages below.", fresh, True, containment, merge_mode, "authoritative inclusion", unresolved)
     if included:
-        return DeploymentDecision("METADATA INCOMPLETE", "Metadata incomplete", "No", "Flora cannot yet verify the deployed change because deployment metadata is incomplete. No technical action is required from the Chief Architect.", fresh, True, containment, merge_mode, "inclusion proven; freshness metadata incomplete", unresolved)
+        return DeploymentDecision("READY TO TEST — DEPLOYMENT NOT FULLY VERIFIED", "Ready to test — deployment not fully verified", "Yes — test now; deployment verification is incomplete.", "Proceed with testing. Optional deployment telemetry remains incomplete.", fresh, True, containment, merge_mode, "inclusion proven; freshness metadata incomplete", unresolved)
     deadline = (started or completed) + timedelta(minutes=window) if (started or completed) else None
     if deadline and now <= deadline:
         return DeploymentDecision("WAITING FOR DEPLOYMENT", "Waiting for deployment", "No", "No action required. Flora is waiting for Render to publish the latest approved change. Refresh this page shortly.", fresh, False, containment, merge_mode, "deployment window open", unresolved)
