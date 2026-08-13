@@ -1,0 +1,28 @@
+{
+  "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
+  "accepted_object_counts": {
+    "industry_twin": 1,
+    "enterprise_twin": 6,
+    "market_participant_twin": 17,
+    "transformation_programme": 13,
+    "opportunity_hypothesis": 17,
+    "evidence": 92,
+    "unknown": 30,
+    "contradiction": 11,
+    "relationship": 308,
+    "membership": 50,
+    "refresh_trigger": 95,
+    "release_manifest": 1,
+    "ai_reinvention_assessment": 7
+  },
+  "industry_source_id": "IND-UK-TELECOMS",
+  "enterprise_count": 6,
+  "programme_count": 13,
+  "opportunity_count": 17,
+  "market_participant_count": 17,
+  "evidence_count": 92,
+  "unknown_count": 30,
+  "contradiction_count": 11,
+  "reinvention_source_records": 7,
+  "note": "This test-only oracle is derived from the immutable package. Production code must not import it. Object-level identity and relationship assertions are derived directly from staged package rows in the TEL-001 rendered acceptance test."
+}

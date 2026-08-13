@@ -391,7 +391,8 @@ def _opportunity_card(o: SemanticObject, run_id: str) -> str:
     details += f"<p><strong>Relevant domain:</strong> {escape(', '.join(d.title() for d in o.domains) or 'Not established')}</p>"
     if theme: details += f"<p><strong>Reinvention theme:</strong> {escape(theme)}</p>"
     if relevance: details += f"<p><strong>Commercial relevance:</strong> {escape(relevance)}</p>"
-    details += f"<p><strong>Evidence:</strong> {escape(evidence)} · <strong>Confidence:</strong> {escape(o.confidence)}</p>"
+    confidence = "Supplied; assessment not yet performed" if "confidence_model" in o.confidence.casefold() else o.confidence
+    details += f"<p><strong>Evidence:</strong> {escape(evidence)} · <strong>Confidence:</strong> {escape(confidence)}</p>"
     details += f"<p><strong>Missing information:</strong> {escape(', '.join(missing) or 'None under the presentation contract')}</p>"
     return f"<article class='executive-conclusion opportunity-card'><h3>{escape(o.statement)}</h3>{details}<a href='/blueprint-import/{escape(run_id)}/explore?collection=opportunities#{escape(o.record_id)}'>Open opportunity</a></article>"
 
@@ -755,10 +756,14 @@ def _dossier(ent, twin, run_id, mission):
     else:
         overview = f"<p>{escape(description)}</p><p><strong>Organisational form:</strong> {escape(_field(identity, 'ownership', 'organisational_form'))}</p><p><strong>Principal activities:</strong> {escape(_field(identity, 'principal_activities', 'activities'))}</p><p><strong>Role in industry:</strong> {escape(_field(identity, 'industry_role', 'role'))}</p><p><strong>Current position:</strong> {escape(_field(identity, 'current_position'))}</p>"
         hero = description
-    overview += f"<p><strong>Domain:</strong> {escape(', '.join(domains) or 'Not established')}</p><p><strong>Completeness:</strong> {len(missing_overview)} organisation overview requirement(s) unresolved.</p>"
+    overview += f"<p><strong>Domain:</strong> {escape(', '.join(domains) or 'Not established')}</p><p><strong>Completeness:</strong> {len(missing_overview)} {plural(len(missing_overview), 'organisation overview requirement')} unresolved.</p>"
     def gap(title, exists, fields, why):
         state = fact_state(present=factual.has_facts)
-        known = "Imported facts are available in the factual summary above." if factual.has_facts else exists
+        # Repeat a concise, governed fact in the section that is being assessed.
+        # Executives should not have to reverse-navigate to understand why a
+        # dimension is incomplete, and this remains a view over the same CFP.
+        known_values = tuple(value for section in factual.sections for value in section.values)
+        known = "; ".join(known_values[:3]) if known_values else exists
         return f"<section class='card'><h2>{title}</h2><p><strong>{state}</strong></p><p><strong>Known:</strong> {known}</p><p><strong>Still required:</strong> {escape(', '.join(fields))}.</p><p>{why}</p></section>"
     canonical_detail = ""
     if identity:
@@ -768,7 +773,8 @@ def _dossier(ent, twin, run_id, mission):
             if label != "Overview"
         )
     sections = [f"<section class='card' id='enterprise-overview'><h2>Organisation Overview</h2>{overview}{canonical_detail}</section>", factual_html]
-    sections.append("<section class='card'><h2>Operating Model</h2><p>Operating-model facts are shown in the factual sections above. Information is available but incomplete where governed requirements remain unresolved.</p></section>")
+    operating = _field(identity, "operating_model", "organisation", "business_units") if identity else ""
+    sections.append(f"<section class='card'><h2>Operating Model</h2><p><strong>{fact_state(present=bool(operating))}</strong></p><p><strong>Known:</strong> {escape(operating or 'No operating-model fact is supplied.')}</p><p><strong>Still required:</strong> operating model, business units and supporting evidence.</p></section>")
     position = _field(identity, "strategic_ambition", "market_position", "current_position") if identity else ""
     sections.append(f"<section class='card'><h2>Strategic Position and Ambition</h2><p>{escape(position)}</p></section>" if position else gap("Strategic Position and Ambition", "No supported strategic position is supplied.", ("strategic ambition", "market position", "supporting evidence"), "Without it Flora cannot explain the organisation's direction."))
     financials=[o for o in relevant if o.kind in {"financial_observation","financial_fact","economic_pool"} and all((_field(o,'metric','measure'),_field(o,'value'),_field(o,'period'),_field(o,'source')))]
@@ -776,13 +782,13 @@ def _dossier(ent, twin, run_id, mission):
     pressures=_pressure_items(twin,run_id,enterprise=ent.name)
     sections.append("<section class='card'><h2>Material Pressures</h2>"+"".join(pressures)+"</section>" if pressures else gap("Material Pressures", "No evidenced pressure with a business consequence is supplied.", ("pressure", "business consequence", "timing", "evidence"), "The most material challenge cannot be explained."))
     programmes=_associated_records(twin, ent, lambda o: o.kind=='transformation_programme'); ready_programmes=[o for o in programmes if o.statement or _field(o,'objective','business_objective','title')]
-    sections.append("<section class='card'><h2>BT-linked Programmes</h2>"+"".join(f"<article><p class='pill'>{escape(_association_type(o, ent) or 'BT programme')}</p><h3>{escape(o.statement or _display(o, 'Programme'))}</h3><p>{escape(o.consequence)}</p></article>" for o in ready_programmes)+"</section>" if ready_programmes else gap("BT-linked Programmes", f"{len(programmes)} associated candidate records supplied.", ("canonically related programme",), "No programme can be shown without an explicit relationship."))
+    sections.append("<section class='card'><h2>Major Programmes</h2>"+"".join(f"<article><p class='pill'>{escape(_association_type(o, ent) or 'Enterprise programme')}</p><h3>{escape(o.statement or _display(o, 'Programme'))}</h3><p>{escape(o.consequence)}</p></article>" for o in ready_programmes)+"</section>" if ready_programmes else gap("Major Programmes", f"{len(programmes)} associated candidate records supplied.", ("canonically related programme",), "No programme can be shown without an explicit relationship."))
     procurements=[o for o in relevant if o.kind in {"procurement","procurement_route","buying_centre"} or _field(o,'procurement_route','procuring_organisation')]
     ready_proc=[o for o in procurements if (o.statement or _field(o,'requirement')) and _field(o,'stage','status') and _field(o,'timing','procurement_date') and _field(o,'buyer') and _field(o,'value') and _field(o,'award_status','supplier_outcome')]
-    sections.append("<section class='card'><h2>Known Procurements</h2>"+"".join(_procurement_item(o,ent.name) for o in ready_proc)+"</section>" if ready_proc else gap("Known Procurements", f"{len(procurements)} candidate record(s) are associated with {escape(ent.name)}, but none identifies every mandatory procurement fact.", ("procurement description", "stage", "planned or actual start", "buyer", "value", "award or supplier outcome"), "The records cannot establish a live buying event."))
+    sections.append("<section class='card'><h2>Known Procurements</h2>"+"".join(_procurement_item(o,ent.name) for o in ready_proc)+"</section>" if ready_proc else gap("Known Procurements", f"{len(procurements)} {plural(len(procurements), 'candidate record')} are associated with {escape(ent.name)}, but none identifies every mandatory procurement fact.", ("procurement description", "stage", "planned or actual start", "buyer", "value", "award or supplier outcome"), "The records cannot establish a live buying event."))
     sections.append(gap("Reinvention Timing", "No supported enterprise timing assessment is supplied.", ("AI-native disruption mechanism", "exposure", "adoption indicators", "horizon", "response timing"), "Response urgency cannot be assessed."))
     opportunities=_associated_records(twin, ent, lambda o: 'opportun' in o.kind); ready_opps=[o for o in opportunities if o.statement or _field(o,'client_problem','customer_problem','problem','title')]
-    sections.append("<section class='card'><h2>BT-linked Opportunities</h2>"+"".join(f"<p class='pill'>{escape(_association_type(o, ent) or 'BT opportunity')}</p>"+_opportunity_card(o,run_id) for o in ready_opps)+"</section>" if ready_opps else gap("BT-linked Opportunities", f"{len(opportunities)} associated candidate records supplied.", ("canonically related opportunity",), "No opportunity can be shown without an explicit relationship."))
+    sections.append("<section class='card'><h2>Commercial Opportunities</h2>"+"".join(f"<p class='pill'>{escape(_association_type(o, ent) or 'Enterprise opportunity')}</p>"+_opportunity_card(o,run_id) for o in ready_opps)+"</section>" if ready_opps else gap("Commercial Opportunities", f"{len(opportunities)} associated candidate records supplied.", ("canonically related opportunity",), "No opportunity can be shown without an explicit relationship."))
     sources=[o for o in relevant if o.kind=='evidence']
     source_html = "".join(_source_item(o) for o in sources) if sources else ("<ul>" + "".join(f"<li><code>{escape(ref)}</code></li>" for ref in factual.evidence_refs) + "</ul>" if factual.evidence_refs else "<p><strong>Insufficient.</strong> No directly linked sources are supplied.</p>")
     sections.append("<section class='card'><h2>Technology and Ecosystem</h2><p>Technology, supplier and ecosystem facts are retained in the factual inventory above.</p><h3>Suppliers and Partners</h3><p>Supplied relationships are shown only where canonically linked.</p></section>")
@@ -816,10 +822,10 @@ def _association_type(obj: SemanticObject, ent: SemanticEnterprise) -> str:
     """Explain only an explicit canonical association used by the page."""
     ids = {ent.identity_key.casefold(), ent.name.casefold(), *(a.casefold() for a in ent.aliases)}
     if obj.subject and obj.subject.casefold() in ids:
-        return "BT programme" if obj.kind == "transformation_programme" else "BT opportunity"
+        return "Owned programme" if obj.kind == "transformation_programme" else "Owned opportunity"
     affected = {str(value).casefold() for value in obj.affected_organisations}
     if ids & affected:
-        return "BT programme" if obj.kind == "transformation_programme" else "BT opportunity"
+        return "Explicit enterprise relationship"
     refs = {str(value).casefold() for value in obj.references}
     return "Canonical relationship" if ids & refs else ""
 
@@ -881,7 +887,7 @@ def _twin_map(twin: SemanticTwin, run_id: str, mission: CommercialMission | None
             explanation = f"0 canonical timing assessments. {len(reinvention_candidates)} records require classification/review."
         else:
             number, noun = summaries[a.key]
-            count = f"{number} {plural(number, noun)} imported"
+            count = f"{number} {plural(number, noun, 'opportunities' if noun == 'opportunity' else None)} imported"
             explanation = "Ready for your review"
         href=f"/blueprint-import/{escape(run_id)}/aspects/{a.key}?domain={escape(domain)}"
         tiles.append(f"<a class='twin-map-tile' href='{href}'><h3>{escape(a.name)}</h3><p class='coverage'>{escape(count)}</p><p>{escape(explanation)}</p></a>")
@@ -913,9 +919,15 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
         profile = "".join(f"<section class='labelled-section'><h3>{escape(label)}</h3>{_structured_value(value)}</section>"
                           for o in rows for label, value in executive_record_view_model(o).fields)
         factual_cards = "".join(_canonical_factual_html(factual_projection_for_object(o, "Industry Overview")) for o in rows)
-        content = factual_cards or section("Industry definition and scope", "".join(f"<p>{escape(o.statement)}</p>" for o in rows))
-        content += section("Supported populated candidate sections", profile or industry_cards)
-        content += f"<section><h2>Research Gaps</h2><p>Complete the unsupported industry sections above with dated, attributable evidence or explicit Unknowns.</p></section><section><h2>Advanced Inspection</h2><p><a href='/blueprint-import/{escape(run_id)}/explore'>Inspect canonical records, evidence and lineage</a></p></section>"
+        content = section("Executive overview", "".join(f"<p>{escape(o.statement)}</p>" for o in rows) or "<p>No executive summary was supplied.</p>")
+        content += section("Market at a glance", factual_cards)
+        content += section("Industry structure", profile or industry_cards)
+        content += section("Economics", "<p>Supplied economic measures are presented as labelled facts above; missing measures are not inferred.</p>")
+        content += section("Operator landscape", "".join(_enterprise_card(e, run_id) for e in twin.enterprises))
+        content += section("Transformation themes", "<p>Supplied transformation themes are retained in the structured industry facts above.</p>")
+        content += section("Commercial implications", "<p>Each supplied implication is retained as an individual structured item above.</p>")
+        content += section("Evidence and uncertainty", f"<p><strong>{len(twin.of_kind('evidence'))} Evidence · {len(twin.of_kind('unknown'))} Unknowns · {len(twin.of_kind('contradiction'))} Contradictions</strong></p>")
+        content += f"<section><h2>Residual research</h2><p>Complete only the unsupported industry dimensions with dated, attributable evidence or explicit Unknowns.</p></section><section><h2>Advanced Inspection</h2><p><a href='/blueprint-import/{escape(run_id)}/explore'>Inspect canonical records, evidence and lineage</a></p></section>"
     elif key=="market-participants":
         identified=list(next((c.objects for c in business_collections(twin, include_empty=True, domain=domain) if c.key=='market-participants'), ()))
         cards = "".join(_executive_record_card(o) for o in identified if executive_record_view_model(o).fields)
@@ -1026,6 +1038,9 @@ def _research_gaps(twin, run_id, mission):
     count_contracts = research_count_contracts(twin)
     for a in twin_readiness(twin, mission):
         exists=a.present[1] if len(a.present) > 1 else (a.present[0] if a.present else "No supported content")
+        # Owner inventory strings may retain machine-oriented compatibility
+        # grammar. Normal routes translate it without changing the counts.
+        exists = exists.replace("hypothesis/hypotheses", "hypotheses").replace("(s)", "s")
         affected=count_contracts[a.key].canonical_subject_count
         rows=[r for r in requirements if r.aspect == a.key]
         fields=", ".join(dict.fromkeys(f for r in rows for f in r.missing_fields))
@@ -1372,7 +1387,7 @@ def _observation_pipeline_object_trace(family: str, obj: SemanticObject, run_id:
     rendered_labels = projected_labels if rendered_fields else ()
     omitted_labels = tuple(label for label in projected_labels if label not in rendered_labels)
     omission_reason = "none" if not omitted_labels else "empty-value suppression or consumer-specific page section not rendered"
-    factual_summary = f"{factual.family} · {len(factual.sections)} factual section(s) · {len(factual.evidence_refs)} Evidence · {len(factual.unknown_refs)} Unknowns · {len(factual.contradiction_refs)} Contradictions"
+    factual_summary = f"{factual.family} · {len(factual.sections)} {plural(len(factual.sections), 'factual section')} · {len(factual.evidence_refs)} Evidence · {len(factual.unknown_refs)} Unknowns · {len(factual.contradiction_refs)} Contradictions"
     source_identifier = obj.original_id or obj.source_location or obj.record_id
     evidence = ", ".join(obj.evidence_refs) or "No linked evidence"
     generation = (f"generated observation <code>{escape(generated.observation_id)}</code> · builder <code>{escape(generated.builder)}</code> · "
