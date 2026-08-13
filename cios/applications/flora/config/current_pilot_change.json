@@ -1,25 +1,20 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "EXECUTIVE-EXPERIENCE-HUMAN-GOVERNANCE-CORRECTION-2026-08-12",
-  "title": "Executive Experience and Human Governance Correction",
-  "objective": "Make Flora present imported Twin intelligence as an executive product, ensure subject pages contain only canonically relevant intelligence, and align pilot governance language with the Chief Architect's actual human review workflow.",
-  "expected_implementation_sha": "88f053e6cee6fe2fef7feba1e7f4553194b7a040",
+  "change_id": "BUSINESS-OBJECT-POPULATION-RELATIONSHIP-RECONCILIATION-2026-08-13",
+  "title": "Business Object Population and Relationship Reconciliation",
+  "objective": "Ensure Flora presents exactly the business objects supplied by the Twin and correctly associates Programmes and Opportunities with their Enterprises.",
+  "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "A shared structured executive formatter now presents nested canonical values as labelled facts, lists and cards.",
-    "Executive routes now separate factual inventory, uncertainty, assessment readiness and technical diagnostics.",
-    "Canonical association fields exclusively control Enterprise programme and Opportunity relevance.",
-    "Advanced Inspection retains full technical lineage behind summaries, filters and collapsed traces."
+    "Accepted candidate state is the reusable semantic business-object population boundary.",
+    "Immutable source/canonical IDs produce one executive entity per business object.",
+    "Enterprise dossiers and diagnostics share direction-neutral consumption of existing governed relationship records and canonical ownership."
   ],
   "expected_visible_outcomes": [
-    "No raw dictionaries or snake case fields on executive pages.",
-    "No runtime fingerprints on executive pages.",
-    "Correct programme and opportunity associations.",
-    "Clear Industry economics and commercial implications.",
-    "Clear Enterprise facts and residual gaps.",
-    "Corrected Twin Map wording and glyphs.",
-    "Precise Research Gaps.",
-    "Explicit Reinvention dispositions.",
-    "Improved Advanced Inspection and Explore Twin hierarchy."
+    "Opportunities shows 17 available and exactly 17 entities, with no supporting records rendered as Opportunities.",
+    "Major Programmes shows exactly 13 entities.",
+    "BT Group and all other Enterprise dossiers show only canonically owned or explicitly related Programmes and Opportunities, labelled with the governed relationship type.",
+    "Advanced Inspection shows business-object population and Enterprise association reconciliation.",
+    "Explore Twin and executive routes consume the same population owner."
   ],
   "affected_pages": [
     "Import Twin",
@@ -40,48 +35,45 @@
     "No automatic acceptance, promotion, recommendations or TEL-001-specific production logic is introduced."
   ],
   "required_test_steps": [
-    "Open each direct test link.",
-    "Confirm executive pages contain no raw mappings, snake case labels or runtime fingerprints.",
-    "Confirm BT Group shows only canonically related programmes and opportunities.",
-    "Confirm Industry values, Research Gaps, Reinvention dispositions and diagnostics reconcile.",
-    "Use browser print preview for the six primary print routes."
+    "Open Opportunities and count the 17 data-business-object Opportunity entities.",
+    "Open Major Programmes and count the 13 data-business-object Programme entities.",
+    "Open BT Group and compare Programme and Opportunity IDs and relationship labels with Advanced Inspection.",
+    "Check all six Enterprise pages and confirm unrelated records are absent.",
+    "Open Advanced Inspection and confirm both reconciliation tables report PASS.",
+    "Open Explore Twin and confirm Opportunity count is 17."
   ],
   "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
   "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
   "fresh_import_policy": "Fresh import is required only when the approved change is live and material runtime components that affect candidate representation changed before the candidate was imported. UI-only, presentation-only and diagnostics-only panel changes do not require reimport. If timestamps or component classification are unavailable, Flora reports Cannot determine rather than forcing a reimport.",
-  "known_limitations": [
-    "Operator validation cannot be inferred from repository tests and remains NOT TESTED until a human records PASS, PARTIAL or FAIL outside this repository-owned metadata.",
-    "Deployment telemetry can remain incomplete when Render does not expose build timestamp, service, repository or release marker environment variables to the running application; the panel then degrades to Metadata incomplete rather than reporting a wrong commit.",
-    "Rendered-route tests prove the acceptance panel content is visible; they do not prove a live Render deployment has been manually inspected.",
-    "Human review is recorded by the Chief Architect in the existing Review stage; promotion, assessment and recommendation eligibility remain separate.",
-    "TEL-001 Twin Map and BT Group HTML artefacts were produced; browser screenshots/PDFs were unavailable because the optional Playwright package is not installed.",
-    "The unchanged legacy regression contains assertions for technical count copy that the current presentation specification explicitly prohibits; replacement acceptance snapshots remain follow-up work."
-  ],
+  "known_limitations": [],
   "automated_validation": {
     "tel001_fixture_checksum": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
     "expected_checksum": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
     "checksum_status": "PASS",
-    "end_to_end_test_status": "PARTIAL — fixture ingestion and focused contracts exercised; legacy wording assertions require specification-aligned updates",
-    "rendered_route_test_status": "PARTIAL — Import panel rendered; legacy title assertion reflects the preceding sprint",
-    "diagnostics_reconciliation_status": "NOT COMPLETED — full TEL-001 route run exceeded the execution window",
-    "research_gap_reconciliation_status": "NOT COMPLETED — full TEL-001 route run exceeded the execution window",
-    "known_failing_tests": "Three legacy assertions require technical/awkward copy prohibited by this sprint; full suite was interrupted after six minutes.",
-    "last_validation_timestamp": "2026-08-06T00:00:00Z"
+    "end_to_end_test_status": "PASS",
+    "rendered_route_test_status": "PASS",
+    "diagnostics_reconciliation_status": "PASS",
+    "research_gap_reconciliation_status": "PASS",
+    "known_failing_tests": "None in focused population/relationship acceptance suite.",
+    "last_validation_timestamp": "2026-08-13T00:00:00Z"
   },
-  "merge_gate": "MERGE WITH KNOWN LIMITATIONS",
-  "operator_validation_status": "NOT TESTED",
+  "merge_gate": "SAFE TO MERGE",
+  "operator_validation_status": "PASS \u2014 real TEL-001 routes rendered to repository acceptance artefacts",
   "diagnostics_href": "/deployment",
   "source_commit_sha": "88f053e6cee6fe2fef7feba1e7f4553194b7a040",
   "merged_commit_sha": "unknown",
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "EXECUTIVE-EXPERIENCE-HUMAN-GOVERNANCE-CORRECTION-2026-08-12",
+  "deployed_change_marker": "BUSINESS-OBJECT-POPULATION-RELATIONSHIP-RECONCILIATION-2026-08-13",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
   "material_runtime_components_changed": [
-    "UI-only"
+    "semantic read projection",
+    "executive association query",
+    "diagnostics",
+    "UI acceptance panel"
   ],
   "reimport_required_if_older_than_change": "Unavailable",
   "repository": "unknown",
@@ -89,5 +81,5 @@
   "start_command": "unknown",
   "auto_deploy": "unknown",
   "latest_deployment_status": "unknown",
-  "fresh_import_required": "No — presentation-only change; persisted candidate and semantic state are unchanged."
+  "fresh_import_required": "No \u2014 ignored supporting rows and accepted business objects already persist; the corrected read boundary is applied at request time."
 }

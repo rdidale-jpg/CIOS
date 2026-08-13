@@ -176,11 +176,58 @@ def business_collections(twin: SemanticTwin, *, include_empty: bool = False,
                             any(_in_domain(o, domain) for o in e.records))
             selected = tuple(next((o for o in e.records if o.kind == canonical_owner[key]), e.records[0])
                              for e in members if e.records)
+        selected = tuple({business_object_id(o): o for o in selected}.values())
         result.append(TwinCollection(key, label, description, selected))
     other = tuple(o for o in objects if o.kind not in mapped)
     if other:
         result.append(TwinCollection("other", "Other Twin content", "Additional typed content available for advanced inspection.", other))
     return tuple(collection for collection in result if include_empty or collection.objects)
+
+
+def business_object_id(obj: SemanticObject) -> str:
+    """Return the immutable source/canonical identity owned by staging."""
+    return obj.original_id or obj.record_id
+
+
+def relationship_endpoints(obj: SemanticObject) -> tuple[str, str, str]:
+    """Read the existing governed relationship vocabulary."""
+    if obj.kind not in {"relationship", "supplier_relationship"}:
+        return "", "", ""
+    attributes = obj.attributes or {}
+    return (str(attributes.get("source") or attributes.get("source_id") or ""),
+            str(attributes.get("target") or attributes.get("target_id") or ""),
+            str(attributes.get("relationship_type") or attributes.get("type") or "Relationship"))
+
+
+def enterprise_associations(twin: SemanticTwin, enterprise: SemanticEnterprise,
+                            kinds: set[str]) -> tuple[tuple[SemanticObject, str, str], ...]:
+    """Resolve canonical ownership and explicit relationships in either direction."""
+    ids = {enterprise.identity_key.casefold(), enterprise.name.casefold(),
+           *(alias.casefold() for alias in enterprise.aliases)}
+    objects = {business_object_id(obj).casefold(): obj for obj in twin.objects if obj.kind in kinds}
+    found: dict[str, tuple[SemanticObject, str, str]] = {}
+
+    def matches(endpoint: str) -> bool:
+        value = endpoint.casefold()
+        return value in ids or value.split(":", 1)[0] in ids
+
+    for obj in objects.values():
+        attributes = obj.attributes or {}
+        owners = (obj.subject, *obj.affected_organisations,
+                  str(attributes.get("owner") or attributes.get("owning_enterprise") or ""))
+        if any(matches(owner) for owner in owners if owner):
+            label = "Owned programme" if obj.kind == "transformation_programme" else "Explicit enterprise relationship"
+            found[business_object_id(obj)] = (obj, label, "canonical ownership")
+    for relationship in twin.objects:
+        source, target, relationship_type = relationship_endpoints(relationship)
+        if not source or not target:
+            continue
+        other = target if matches(source) else source if matches(target) else ""
+        related = objects.get(other.casefold())
+        if related:
+            found[business_object_id(related)] = (
+                related, relationship_type, business_object_id(relationship))
+    return tuple(found[key] for key in sorted(found))
 
 
 def executive_insight_eligible(obj: SemanticObject) -> bool:
