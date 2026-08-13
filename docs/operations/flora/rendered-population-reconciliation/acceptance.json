@@ -1,0 +1,216 @@
+{
+  "run_id": "bpi-run-bd3924d85125e308",
+  "enterprises": {
+    "ent-bt": {
+      "name": "BT Group",
+      "programmes": [
+        {
+          "id": "PROG-BT-TRANSFORMATION",
+          "title": "Multi-year cost, simplification, AI/data and cash-generation programme.",
+          "relationship_type": "Enterprise owns Programme",
+          "relationship_id": "REL-W2-001"
+        },
+        {
+          "id": "PROG-BT-VERIZON-JV",
+          "title": "BT and Verizon signed a 50:50 JV agreement combining international enterprise connectivity operations serving over 3,000 customers in more than 180 countries with approximately $4bn combined annual revenue. The programme is expected to complete in 2027 and creates integration, platform, security, customer migration, service management and operating-model opportunities.",
+          "relationship_type": "Owned programme",
+          "relationship_id": "canonical ownership"
+        }
+      ],
+      "opportunities": [
+        {
+          "id": "OPP-BT-AI-ENGINEERING",
+          "title": "BT AI-enabled engineering and field operations optimisation",
+          "relationship_type": "Opportunity targets Enterprise",
+          "relationship_id": "REL-W2-014"
+        },
+        {
+          "id": "OPP-BT-AIOPS",
+          "title": "BT AIOps and observability expansion",
+          "relationship_type": "Opportunity targets Enterprise",
+          "relationship_id": "REL-W2-017"
+        },
+        {
+          "id": "OPP-BT-VERIZON-JV-INTEGRATION",
+          "title": "BT-Verizon international enterprise JV integration and AI-ready platform assurance",
+          "relationship_type": "Opportunity targets Enterprise",
+          "relationship_id": "REL-W4-183"
+        }
+      ]
+    },
+    "ent-cityfibre": {
+      "name": "CityFibre",
+      "programmes": [
+        {
+          "id": "PROG-CITYFIBRE-WHOLESALE",
+          "title": "Wholesale network monetisation and partner activation programme.",
+          "relationship_type": "Enterprise owns Programme",
+          "relationship_id": "REL-W2-008"
+        }
+      ],
+      "opportunities": [
+        {
+          "id": "OPP-CITYFIBRE-PROJECT-GIGABIT",
+          "title": "CityFibre Project Gigabit delivery assurance and subsidy reporting",
+          "relationship_type": "Opportunity targets Enterprise",
+          "relationship_id": "REL-W2-032"
+        },
+        {
+          "id": "OPP-CITYFIBRE-WHOLESALE",
+          "title": "CityFibre wholesale platform scaling and partner assurance",
+          "relationship_type": "Opportunity targets Enterprise",
+          "relationship_id": "REL-W2-035"
+        }
+      ]
+    },
+    "ent-openreach": {
+      "name": "Openreach",
+      "programmes": [
+        {
+          "id": "PROG-OPENREACH-FTTP",
+          "title": "FTTP build to 25m premises by Dec 2026 plus migration/monetisation challenge.",
+          "relationship_type": "Enterprise owns Programme",
+          "relationship_id": "REL-W2-002"
+        }
+      ],
+      "opportunities": [
+        {
+          "id": "OPP-OPENREACH-BDUK-DELIVERY-ASSURANCE",
+          "title": "Openreach Project Gigabit delivery assurance and reporting",
+          "relationship_type": "Opportunity targets Enterprise",
+          "relationship_id": "REL-W4-128"
+        },
+        {
+          "id": "OPP-OPENREACH-CP-ENABLEMENT",
+          "title": "Openreach CP fibre activation and copper migration enablement",
+          "relationship_type": "Opportunity targets Business Unit",
+          "relationship_id": "REL-W2-024"
+        },
+        {
+          "id": "OPP-OPENREACH-FIBRE-AUTOMATION",
+          "title": "Openreach fibre planning and field automation",
+          "relationship_type": "Opportunity targets Business Unit",
+          "relationship_id": "REL-W2-021"
+        }
+      ]
+    },
+    "ent-talktalk": {
+      "name": "TalkTalk",
+      "programmes": [
+        {
+          "id": "PROG-TALKTALK-PXC-DEMERGER",
+          "title": "Consumer/PXC separation and debt refinancing execution.",
+          "relationship_type": "Enterprise owns Programme",
+          "relationship_id": "REL-W2-009"
+        }
+      ],
+      "opportunities": [
+        {
+          "id": "OPP-PXC-PLATFORM-EFFICIENCY",
+          "title": "PXC wholesale/B2B platform efficiency",
+          "relationship_type": "Opportunity targets Business Unit",
+          "relationship_id": "REL-W2-042"
+        },
+        {
+          "id": "OPP-TALKTALK-COST",
+          "title": "TalkTalk cost transformation and consumer retention",
+          "relationship_type": "Opportunity targets Business Unit",
+          "relationship_id": "REL-W2-039"
+        }
+      ]
+    },
+    "ent-vmo2": {
+      "name": "Virgin Media O2",
+      "programmes": [
+        {
+          "id": "PROG-VMO2-LUMI-AI",
+          "title": "VMO2 is deploying Lumi AI, AWS AI contact-centre routing, auto-call summarisation and vulnerable-customer analytics to improve customer support, complaints and agent productivity.",
+          "relationship_type": "Enterprise owns Programme",
+          "relationship_id": "REL-W2-004"
+        },
+        {
+          "id": "PROG-VMO2-MOBILE-TRANSFORMATION",
+          "title": "VMO2 is upgrading its mobile network through multi-year Ericsson and Nokia agreements, thousands of RAN site upgrades, AI-assisted real-time network optimisation and energy-efficient equipment.",
+          "relationship_type": "Enterprise owns Programme",
+          "relationship_id": "REL-W3-001"
+        }
+      ],
+      "opportunities": [
+        {
+          "id": "OPP-VMO2-AI-CX",
+          "title": "VMO2 customer operations AI expansion, governance and assurance",
+          "relationship_type": "Opportunity targets Enterprise",
+          "relationship_id": "REL-W2-011"
+        },
+        {
+          "id": "OPP-VMO2-MOBILE-RAN-AI-ASSURANCE",
+          "title": "VMO2 mobile RAN AI assurance and energy optimisation",
+          "relationship_type": "Opportunity targets Enterprise",
+          "relationship_id": "REL-W4-140"
+        },
+        {
+          "id": "OPP-VMO2-NEXFIBRE-MIGRATION",
+          "title": "VMO2/nexfibre/Netomnia fibre migration and wholesale integration",
+          "relationship_type": "Opportunity targets Enterprise",
+          "relationship_id": "REL-W4-151"
+        }
+      ]
+    },
+    "ent-vodafonethree": {
+      "name": "VodafoneThree",
+      "programmes": [
+        {
+          "id": "PROG-VT-5G-SA",
+          "title": "VodafoneThree's network programme supports the merger remedy/investment case, 5G SA deployment and wholesale/enterprise propositions under Vodafone's now 100% ownership.",
+          "relationship_type": "Enterprise owns Programme",
+          "relationship_id": "REL-W3-013"
+        },
+        {
+          "id": "PROG-VT-INTEGRATION",
+          "title": "Integration of Vodafone UK and Three UK is the execution layer behind VodafoneThree's investment case, synergies and service/network quality improvements.",
+          "relationship_type": "Enterprise owns Programme",
+          "relationship_id": "REL-W2-006"
+        }
+      ],
+      "opportunities": [
+        {
+          "id": "OPP-VT-ENTERPRISE-5G",
+          "title": "VodafoneThree enterprise/private 5G monetisation platform",
+          "relationship_type": "Opportunity targets Enterprise",
+          "relationship_id": "REL-W2-029"
+        },
+        {
+          "id": "OPP-VT-NETWORK-AI-OPS",
+          "title": "VodafoneThree network integration assurance and AI operations",
+          "relationship_type": "Opportunity targets Business Unit",
+          "relationship_id": "REL-W2-027"
+        },
+        {
+          "id": "OPP-VT-WHOLESALE-REMEDY-ASSURANCE",
+          "title": "VodafoneThree wholesale-reference-offer compliance and assurance",
+          "relationship_type": "Opportunity targets Enterprise",
+          "relationship_id": "REL-W4-162"
+        }
+      ]
+    }
+  },
+  "relationship_matrix": {
+    "Enterprise -> Programme": 11,
+    "Market Participant -> Enterprise": 24,
+    "Market Participant -> Market Participant": 1,
+    "Market Participant -> Opportunity": 1,
+    "Market Participant -> Programme": 2,
+    "Opportunity -> Enterprise": 27,
+    "Opportunity -> Market Participant": 1,
+    "Opportunity -> unresolved": 22,
+    "Programme -> Opportunity": 21,
+    "analyst_estimate_register -> unknown": 76,
+    "evidence -> Opportunity": 48,
+    "evidence -> unresolved": 2,
+    "refresh_trigger -> Opportunity": 51,
+    "unresolved -> Opportunity": 1,
+    "unresolved -> Programme": 3,
+    "unresolved -> unresolved": 17
+  },
+  "relationship_total": 308
+}
