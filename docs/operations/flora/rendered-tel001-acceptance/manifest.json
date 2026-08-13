@@ -1,0 +1,43 @@
+{
+  "import_run_id": "bpi-run-bd3924d85125e308",
+  "routes": [
+    "import-twin",
+    "review",
+    "twin-map",
+    "industry",
+    "bt-group",
+    "other-enterprise",
+    "market-participants",
+    "major-programmes",
+    "opportunities",
+    "reinvention",
+    "research-gaps",
+    "explore",
+    "advanced-inspection"
+  ],
+  "accepted_counts": {
+    "relationship": 308,
+    "refresh_trigger": 95,
+    "evidence": 92,
+    "unknown": 30,
+    "transformation_programme": 13,
+    "membership": 50,
+    "contradiction": 11,
+    "enterprise_twin": 6,
+    "market_participant_twin": 17,
+    "opportunity_hypothesis": 17,
+    "ai_reinvention_assessment": 7,
+    "industry_twin": 1,
+    "release_manifest": 1
+  },
+  "enterprises": [
+    "BT Group",
+    "CityFibre",
+    "Openreach",
+    "TalkTalk",
+    "Virgin Media O2",
+    "VodafoneThree"
+  ],
+  "review_capture_status": 403,
+  "review_capture_note": "Capture proves access control in the unauthenticated renderer; authorised Review lifecycle behaviour is covered by the route test."
+}
