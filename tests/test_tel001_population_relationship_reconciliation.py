@@ -90,6 +90,34 @@ def test_relationship_resolution_retains_unresolved_endpoint_truth():
     rows = resolve_relationships(twin)
     assert [(r.relationship.original_id, r.resolved) for r in rows] == [("REL-OK", True), ("REL-BAD", False)]
     assert rows[1].source is None and rows[1].target is not None
+    assert rows[0].status == "candidate relationship resolved"
+    assert rows[0].reason == "candidate endpoints resolved in import scope"
+    assert rows[1].status == "candidate relationship unresolved"
+    assert rows[1].reason == "endpoint missing"
+
+
+def test_candidate_resolution_is_read_only_and_import_scoped():
+    def row(identifier, kind, **payload):
+        return {"candidate_record_id": identifier, "original_source_id": identifier,
+                "candidate_object_class": kind, "validation_status": "accepted",
+                "governance_state": "candidate", "payload": payload}
+
+    first = assemble_semantic_twin([
+        row("ENT-A", "enterprise_twin", enterprise_id="ENT-A", name="A"),
+        row("PROG-P", "transformation_programme", title="P"),
+        row("REL-R", "relationship", source="PROG-P", target="ENT-A",
+            relationship_type="Enterprise owns Programme"),
+    ])
+    second = assemble_semantic_twin([
+        row("ENT-A", "enterprise_twin", enterprise_id="ENT-A", name="Other A"),
+        row("PROG-OTHER", "transformation_programme", title="Other"),
+    ])
+    assert resolve_relationships(first)[0].resolved
+    assert [business_object_id(item[0]) for item in enterprise_associations(
+        first, first.enterprises[0], {"transformation_programme"})] == ["PROG-P"]
+    assert not resolve_relationships(second)
+    assert all(obj.governance == "candidate" for obj in first.objects)
+    assert all(obj.validation_status == "accepted" for obj in first.objects)
 
 
 def test_dimension_missing_does_not_repeat_operating_model():
@@ -113,3 +141,5 @@ def test_diagnostics_use_same_population_and_association_owner(monkeypatch, tmp_
     assert "Enterprise Association Reconciliation" in html
     assert "Relationship Resolution Reconciliation" in html
     assert "Executive Dimension Reconciliation" in html
+    assert "Candidate-resolved Relationships" in html
+    assert re.search(r"<td>308</td><td>308</td><td>252</td><td>56</td><td>0</td><td>56</td><td>0</td><td>0</td><td>0</td><td>0</td>", html)
