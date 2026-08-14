@@ -425,19 +425,19 @@ def test_upload_page_shows_current_deployed_change_acceptance_panel(monkeypatch,
     assert panel < upload
     assert "CURRENT PILOT CHANGE" not in page
     assert "Researcher-to-Flora Translation Audit" not in page
-    assert "Enterprise Relationship and Factual Dimension Reconciliation" in page
+    assert "Candidate Relationship Resolution" in page
     assert "88f053e6cee6fe2fef7feba1e7f4553194b7a040" in page
     assert "Status" in page and "Should I test now?" in page and "Next action" in page
     assert "Technical deployment evidence" in page
     assert "<details><summary>Technical deployment evidence</summary>" in page
-    assert "canonically related Programmes and Opportunities" in page
-    assert "Relationship Resolution, Enterprise Association and Executive Dimension reconciliation" in page
+    assert "Candidate Relationship objects resolve through exact endpoint identities" in page
+    assert "candidate-resolved relationships, promoted relationships and unresolved reasons" in page
     assert "Fresh import required:</strong> No" in page
     assert "Tel001 Fixture Checksum" in page and "Checksum Status" in page
     assert "Known limitations" in page
     assert "href='/blueprint-import/history#industry-overview'" in page
     assert "href='/deployment'" in page
-    assert "Ready to test" in page
+    assert "Ready for functional test" in page
 
 
 def test_upload_page_flags_deployment_problem_for_wrong_branch(monkeypatch, tmp_path):
@@ -470,6 +470,11 @@ def _change(**overrides):
         "expected_deployment_window_minutes": 30,
         "deployment_version": "runtime-1",
         "material_runtime_components_changed": ["UI-only"],
+        "automated_validation": {
+            "checksum_status": "PASS", "end_to_end_test_status": "PASS",
+            "rendered_route_test_status": "PASS",
+            "diagnostics_reconciliation_status": "PASS",
+        },
     }
     base.update(overrides)
     return base
@@ -478,8 +483,8 @@ def _change(**overrides):
 def test_deployment_status_merge_commit_scenario(monkeypatch):
     monkeypatch.setattr("cios.applications.flora.blueprint_import.deployment_status._git_contains", lambda deployed, source: "contains expected source commit")
     decision = decide_deployment_status(_change(commit_sha="mergecommit", deployed_change_marker="Unavailable"), "2026-08-05T12:05:00+00:00")
-    assert decision.status_code == "READY TO TEST — DEPLOYMENT NOT FULLY VERIFIED"
-    assert decision.should_test_now.startswith("Yes")
+    assert decision.status_code == "READY FOR FUNCTIONAL TEST — DEPLOYMENT METADATA INCOMPLETE"
+    assert decision.should_test_now == "YES"
 
 
 def test_deployment_status_squash_merge_scenario(monkeypatch):
@@ -491,8 +496,8 @@ def test_deployment_status_squash_merge_scenario(monkeypatch):
 def test_deployment_status_later_main_commit_scenario(monkeypatch):
     monkeypatch.setattr("cios.applications.flora.blueprint_import.deployment_status._git_contains", lambda deployed, source: "contains expected source commit")
     decision = decide_deployment_status(_change(commit_sha="latermain", deployed_change_marker="Unavailable"), "2026-08-05T12:05:00+00:00")
-    assert decision.status_code == "READY TO TEST — DEPLOYMENT NOT FULLY VERIFIED"
-    assert decision.should_test_now.startswith("Yes")
+    assert decision.status_code == "READY FOR FUNCTIONAL TEST — DEPLOYMENT METADATA INCOMPLETE"
+    assert decision.should_test_now == "YES"
 
 
 def test_deployment_status_pending_scenario(monkeypatch):
@@ -521,3 +526,13 @@ def test_deployment_status_ui_only_change_does_not_reimport():
 def test_deployment_status_material_semantic_change_requires_reimport():
     decision = decide_deployment_status(_change(material_runtime_components_changed=["semantic construction"], reimport_required_if_older_than_change="2026-08-05T12:00:00+00:00"), "2026-08-05T11:00:00+00:00")
     assert decision.status_code == "REIMPORT REQUIRED"
+
+
+def test_functional_acceptance_failure_blocks_test_with_exact_reason():
+    change = _change(automated_validation={
+        "checksum_status": "PASS", "end_to_end_test_status": "FAIL",
+        "rendered_route_test_status": "PASS", "diagnostics_reconciliation_status": "PASS",
+    })
+    decision = decide_deployment_status(change, "2026-08-05T12:05:00+00:00")
+    assert decision.should_test_now == "No"
+    assert decision.next_action == "Functional acceptance failed: end_to_end_test_status"

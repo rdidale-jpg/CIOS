@@ -1,20 +1,19 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "ENTERPRISE-RELATIONSHIP-FACTUAL-DIMENSION-RECONCILIATION-2026-08-14",
-  "title": "Enterprise Relationship and Factual Dimension Reconciliation",
-  "objective": "Connect imported Enterprise intelligence through governed Relationships and ensure each executive dimension uses only qualifying factual content.",
+  "change_id": "CANDIDATE-RELATIONSHIP-RESOLUTION-2026-08-14",
+  "title": "Candidate Relationship Resolution",
+  "objective": "Allow Flora to resolve and inspect governed relationships between imported candidate Twin objects before promotion without changing their candidate governance state.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Standalone Relationship objects are resolved once through immutable business-object identity and consumed by dossiers and diagnostics.",
-    "Executive dimensions select only their governed semantic fields or resolved Programme/Opportunity relationships.",
-    "Optional deployment metadata does not block functional acceptance when the current marker and passing acceptance status are present."
+    "Candidate Relationship objects resolve through exact endpoint identities inside their own import-run Semantic Twin read context.",
+    "Resolution diagnostics distinguish candidate-resolved, candidate-unresolved and promoted relationships with explicit reason categories.",
+    "Functional acceptance readiness is independent of optional deployment telemetry completeness."
   ],
   "expected_visible_outcomes": [
-    "BT Group shows canonically related Programmes and Opportunities with governed relationship types.",
-    "All Enterprise Programme and Opportunity associations reflect governed standalone Relationship objects.",
-    "Unrelated facts are not repeated into unrelated dimensions; missing dimensions remain explicit.",
-    "Advanced Inspection shows Relationship Resolution, Enterprise Association and Executive Dimension reconciliation.",
-    "Opportunities remains exactly 17 and Major Programmes remains exactly 13."
+    "Advanced Inspection visibly distinguishes candidate-resolved relationships, promoted relationships and unresolved reasons.",
+    "BT Group and every Enterprise dossier use the shared relationship resolver and show only explicit typed associations.",
+    "Opportunities remains exactly 17 and Major Programmes remains exactly 13.",
+    "Missing factual dimensions remain missing and no candidate is reviewed, assessed or promoted automatically."
   ],
   "affected_pages": [
     "Import Twin",
@@ -63,14 +62,13 @@
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "ENTERPRISE-RELATIONSHIP-FACTUAL-DIMENSION-RECONCILIATION-2026-08-14",
+  "deployed_change_marker": "CANDIDATE-RELATIONSHIP-RESOLUTION-2026-08-14",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
   "material_runtime_components_changed": [
     "semantic read projection",
     "executive association query",
-    "executive factual dimension selection",
     "diagnostics",
     "UI acceptance panel"
   ],
@@ -80,5 +78,5 @@
   "start_command": "unknown",
   "auto_deploy": "unknown",
   "latest_deployment_status": "unknown",
-  "fresh_import_required": "No \u2014 standalone Relationship objects and factual fields already persist; corrected canonical query/projection logic is applied at request time."
+  "fresh_import_required": "No \u2014 resolution is a read-only query over candidate state already staged within the import run."
 }

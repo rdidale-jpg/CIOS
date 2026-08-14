@@ -85,10 +85,12 @@ class ResolvedRelationship:
     relationship_type: str
     source: SemanticObject | None
     target: SemanticObject | None
+    status: str = "candidate relationship unresolved"
+    reason: str = "endpoint missing"
 
     @property
     def resolved(self) -> bool:
-        return self.source is not None and self.target is not None
+        return self.status.endswith("relationship resolved")
 
 
 EXECUTIVE_FIELDS: Mapping[str, tuple[tuple[str, str], ...]] = {
@@ -221,16 +223,35 @@ def resolve_relationships(twin: SemanticTwin) -> tuple[ResolvedRelationship, ...
     are not association evidence.  The returned unresolved rows are retained so
     diagnostics and every relationship consumer report the same truth.
     """
-    identities = {business_object_id(obj).casefold(): obj for obj in twin.objects
-                  if obj.kind not in {"relationship", "supplier_relationship"}}
+    # ``twin`` is assembled from one import run.  Keeping the registry local to
+    # that read model is the import-scope boundary: an equal external ID in a
+    # different run is never visible here.
+    identity_rows: dict[str, list[SemanticObject]] = {}
+    for obj in twin.objects:
+        if obj.kind not in {"relationship", "supplier_relationship"}:
+            identity_rows.setdefault(business_object_id(obj).casefold(), []).append(obj)
     rows = []
     for relationship in twin.objects:
         source_id, target_id, relationship_type = relationship_endpoints(relationship)
-        if not source_id and not target_id:
-            continue
-        rows.append(ResolvedRelationship(
-            relationship, source_id, target_id, relationship_type,
-            identities.get(source_id.casefold()), identities.get(target_id.casefold())))
+        source_matches = identity_rows.get(source_id.casefold(), [])
+        target_matches = identity_rows.get(target_id.casefold(), [])
+        source = source_matches[0] if len(source_matches) == 1 else None
+        target = target_matches[0] if len(target_matches) == 1 else None
+        if not source_id or not target_id:
+            status, reason = "invalid relationship", "relationship endpoint ID absent"
+        elif len(source_matches) > 1 or len(target_matches) > 1:
+            status, reason = "candidate relationship unresolved", "endpoint ambiguous"
+        elif not source or not target:
+            status, reason = "candidate relationship unresolved", "endpoint missing"
+        elif relationship_type in {"", "Relationship"}:
+            status, reason = "candidate relationship unresolved", "relationship type unsupported"
+        elif relationship.governance == "governed" and source.governance == "governed" and target.governance == "governed":
+            status, reason = "promoted relationship resolved", "promoted endpoints resolved"
+        else:
+            status, reason = "candidate relationship resolved", "candidate endpoints resolved in import scope"
+        rows.append(ResolvedRelationship(relationship, source_id, target_id,
+                                         relationship_type, source, target,
+                                         status, reason))
     return tuple(rows)
 
 

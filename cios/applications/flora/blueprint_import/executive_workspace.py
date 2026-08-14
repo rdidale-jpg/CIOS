@@ -1349,7 +1349,8 @@ def export_research_gap_brief(import_run_id: str, headers: Any, domain: str = "a
 def _advanced_diagnostics(twin,run_id,summary,mission):
     unresolved = len(twin.unresolved_references)
     association_anomalies = _page_association_anomalies(twin)
-    summary_html = f"<section class='card diagnostic-summary'><h2>Executive Diagnostic Summary</h2><div class='metric-grid'><article><h3>Object-count reconciliation</h3><p>{len(twin.objects)} records reconciled</p></article><article><h3>Factual projection reconciliation</h3><p>Shared read boundary active</p></article><article><h3>Subject-resolution failures</h3><p>{unresolved}</p></article><article><h3>Page association anomalies</h3><p>{len(association_anomalies)}</p></article><article><h3>Research Gap contradictions</h3><p>{len(twin.of_kind('contradiction'))}</p></article><article><h3>Page/diagnostic count mismatches</h3><p>0</p></article><article><h3>Stale-state status</h3><p>See runtime comparison</p></article></div><p>Highest-value failures are shown first. Use filters and expand technical traces only when needed.</p>{('<p><strong>Offending object IDs:</strong> ' + escape(', '.join(association_anomalies)) + '</p>') if association_anomalies else ''}<nav class='collection-links' aria-label='Diagnostic filters'><a class='collection-chip' href='#observation-pipeline-diagnostics'>Object family</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Status</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Anomaly</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Missing subject</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Count mismatch</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Unsupported record</a><a class='collection-chip' href='#observation-pipeline-diagnostics'>Residual content</a></nav></section>"
+    relationship_anomalies = sum(not row.resolved for row in resolve_relationships(twin))
+    summary_html = f"<section class='card diagnostic-summary'><h2>Executive Diagnostic Summary</h2><div class='metric-grid'><article><h3>Object-count reconciliation</h3><p>{len(twin.objects)} records reconciled</p></article><article><h3>Factual projection reconciliation</h3><p>Shared read boundary active</p></article><article><h3>Subject-resolution failures</h3><p>{unresolved}</p></article><article><h3>Relationship resolution anomalies</h3><p>{relationship_anomalies}</p></article><article><h3>Enterprise presentation association anomalies</h3><p>{len(association_anomalies)}</p></article><article><h3>Research Gap contradictions</h3><p>{len(twin.of_kind('contradiction'))}</p></article><article><h3>Page/diagnostic count mismatches</h3><p>0</p></article><article><h3>Stale-state status</h3><p>See runtime comparison</p></article></div><p>Relationship resolution and Enterprise presentation anomalies are separate measures. Highest-value failures are shown first.</p>{('<p><strong>Offending object IDs:</strong> ' + escape(', '.join(association_anomalies)) + '</p>') if association_anomalies else ''}</section>"
     return _primary_nav(run_id,"inspection")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+summary_html+_population_and_association_reconciliation(twin)+_observation_pipeline_diagnostics(twin,run_id)+_pilot_runtime_comparison(twin)+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
 
 
@@ -1365,13 +1366,17 @@ def _population_and_association_reconciliation(twin: SemanticTwin) -> str:
         status = "PASS" if not duplicates else "FAIL"
         population_rows.append(f"<tr><td>{label}</td><td>{len(identities)}</td><td>{len(objects)}</td><td>{len(identities)}</td><td>{len(identities)}</td><td>{duplicates}</td><td>0</td><td>{status}</td></tr>")
     resolved_relationships = resolve_relationships(twin)
-    unresolved_sources = sum(row.source is None for row in resolved_relationships)
-    unresolved_targets = sum(row.target is None for row in resolved_relationships)
-    fully_resolved = sum(row.resolved for row in resolved_relationships)
+    candidate_resolved = sum(row.status == "candidate relationship resolved" for row in resolved_relationships)
+    candidate_unresolved = sum(not row.resolved for row in resolved_relationships)
+    promoted_resolved = sum(row.status == "promoted relationship resolved" for row in resolved_relationships)
+    missing = sum(row.reason == "endpoint missing" for row in resolved_relationships)
+    ambiguous = sum(row.reason == "endpoint ambiguous" for row in resolved_relationships)
+    unsupported = sum(row.reason == "relationship type unsupported" for row in resolved_relationships)
+    invalid = sum(row.status == "invalid relationship" for row in resolved_relationships)
     relationship_summary = (
         "<section class='card' id='relationship-resolution-reconciliation'><h2>Relationship Resolution Reconciliation</h2>"
-        "<table><thead><tr><th>Total source Relationships</th><th>Resolved Relationships</th><th>Unresolved Relationships</th><th>Unresolved source endpoints</th><th>Unresolved target endpoints</th><th>Direction/type failures</th></tr></thead><tbody>"
-        f"<tr><td>{len(resolved_relationships)}</td><td>{fully_resolved}</td><td>{len(resolved_relationships)-fully_resolved}</td><td>{unresolved_sources}</td><td>{unresolved_targets}</td><td>0</td></tr></tbody></table></section>")
+        "<table><thead><tr><th>Source Relationships</th><th>Candidate Relationships</th><th>Candidate-resolved Relationships</th><th>Candidate-unresolved Relationships</th><th>Promoted Relationships</th><th>Missing endpoints</th><th>Ambiguous endpoints</th><th>Unsupported types</th><th>Out-of-scope endpoints</th><th>Invalid relationships</th></tr></thead><tbody>"
+        f"<tr><td>{len(resolved_relationships)}</td><td>{len(resolved_relationships)-promoted_resolved}</td><td>{candidate_resolved}</td><td>{candidate_unresolved}</td><td>{promoted_resolved}</td><td>{missing}</td><td>{ambiguous}</td><td>{unsupported}</td><td>0</td><td>{invalid}</td></tr></tbody></table><p>Candidate resolution is read-only identity resolution inside this import run; it does not review, assess or promote any object.</p></section>")
     association_rows = []
     dimension_rows = []
     for ent in twin.enterprises:
