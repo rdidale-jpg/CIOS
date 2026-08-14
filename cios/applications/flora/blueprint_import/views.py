@@ -141,6 +141,7 @@ def _pilot_change_record_section(headers: Any) -> str:
         "Advanced Diagnostics": "/blueprint-import/history#advanced-diagnostics",
         "Import history": "/blueprint-import/history",
         "Deployment diagnostics": str(change.get("diagnostics_href") or "/deployment"),
+        "TEL-001 Relationship Truth Executive Summary": str(change.get("audit_result_href") or "/docs/operations/flora/TEL-001-Relationship-Truth-Executive-Summary.md"),
     }
     if latest:
         run_id = escape(str(getattr(latest, "import_run_id", "")))

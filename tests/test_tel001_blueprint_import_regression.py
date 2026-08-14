@@ -483,3 +483,34 @@ def test_tel001_canonical_factual_projection_exposes_shared_contract_metadata(mo
     assert "cfp=canonical-factual-projection-v2" in projection.runtime_fingerprint
     assert "adapter=mod-cdt-twin-spine-mapping-v1.3.4" in projection.runtime_fingerprint
     assert any("BT Group is a UK-headquartered telecommunications group" in value for section in projection.sections for value in section.values)
+
+
+def test_tel001_relationship_truth_audit_is_visible_on_import_screen():
+    """The audit result is an operational presentation link, not a semantic change."""
+    from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page
+
+    html, status = import_blueprint_entry_page({})
+
+    assert status == 200
+    assert "TEL-001 Relationship Truth Audit" in html
+    assert "Determine whether Enterprise Programme and Opportunity relationships" in html
+    assert "TEL-001 Relationship Truth Executive Summary" in html
+    assert "href='/docs/operations/flora/TEL-001-Relationship-Truth-Executive-Summary.md'" in html
+
+
+def test_tel001_relationship_truth_report_reconciles_governed_source_records():
+    report = Path("docs/operations/flora/TEL-001-Relationship-Truth-Report.md").read_text()
+    executive = Path("docs/operations/flora/TEL-001-Relationship-Truth-Executive-Summary.md").read_text()
+
+    complete_register = report.split("## Complete Relationship register (308 records)", 1)[1]
+    relationship_rows = [line for line in complete_register.splitlines() if line.startswith("| `REL-")]
+    membership_section = report.split("## Membership audit (50 records)", 1)[1].split("## Runtime comparison", 1)[0]
+    membership_rows = [line for line in membership_section.splitlines() if line.startswith("| `MEM-")]
+
+    assert len(relationship_rows) == 308
+    assert len(membership_rows) == 50
+    assert "**Reconciled total: 308 Relationship records.**" in report
+    for enterprise in ("BT Group", "CityFibre", "Openreach", "TalkTalk", "Virgin Media O2", "VodafoneThree"):
+        assert f"**{enterprise}: FLORA DEFECT**" in executive
+    assert "**Both**" in executive
+    assert "no Relationship record has it as source or target" in executive
