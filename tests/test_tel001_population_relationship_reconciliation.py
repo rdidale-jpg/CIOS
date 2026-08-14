@@ -10,6 +10,14 @@ from cios.applications.flora.blueprint_import.semantic_twin import assemble_sema
 
 FIXTURE = Path("docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip")
 ORACLE = json.loads(Path("tests/fixtures/tel001_expected_truth.json").read_text())
+EXPECTED_ASSOCIATIONS = {
+    "ENT-BT": ({"PROG-BT-TRANSFORMATION"}, {"OPP-BT-AI-ENGINEERING", "OPP-BT-AIOPS", "OPP-BT-VERIZON-JV-INTEGRATION"}),
+    "ENT-OPENREACH": ({"PROG-OPENREACH-FTTP"}, {"OPP-OPENREACH-FIBRE-AUTOMATION", "OPP-OPENREACH-CP-ENABLEMENT", "OPP-OPENREACH-BDUK-DELIVERY-ASSURANCE"}),
+    "ENT-VMO2": ({"PROG-VMO2-LUMI-AI", "PROG-VMO2-MOBILE-TRANSFORMATION"}, {"OPP-VMO2-AI-CX", "OPP-VMO2-MOBILE-RAN-AI-ASSURANCE", "OPP-VMO2-NEXFIBRE-MIGRATION"}),
+    "ENT-VODAFONETHREE": ({"PROG-VT-5G-SA", "PROG-VT-INTEGRATION"}, {"OPP-VT-NETWORK-AI-OPS", "OPP-VT-ENTERPRISE-5G", "OPP-VT-WHOLESALE-REMEDY-ASSURANCE"}),
+    "ENT-CITYFIBRE": ({"PROG-CITYFIBRE-WHOLESALE"}, {"OPP-CITYFIBRE-PROJECT-GIGABIT", "OPP-CITYFIBRE-WHOLESALE"}),
+    "ENT-TALKTALK": ({"PROG-TALKTALK-PXC-DEMERGER"}, {"OPP-TALKTALK-COST", "OPP-PXC-PLATFORM-EFFICIENCY"}),
+}
 
 
 def _runtime(monkeypatch, tmp_path):
@@ -54,13 +62,16 @@ def test_all_enterprise_rendered_associations_equal_canonical_relationship_sets(
         actual_opportunities = set(re.findall(r"<div data-business-object-id='([^']+)'", html))
         assert actual_programmes == expected_programmes
         assert actual_opportunities == expected_opportunities
+        assert (expected_programmes, expected_opportunities) == EXPECTED_ASSOCIATIONS[enterprise.identity_key.upper()]
     bt = next(e for e in twin.enterprises if e.identity_key.casefold() == "ent-bt")
     programmes = enterprise_associations(twin, bt, {"transformation_programme"})
     opportunities = enterprise_associations(twin, bt, {"opportunity_hypothesis"})
-    verizon = next(row for row in programmes if business_object_id(row[0]) == "PROG-BT-VERIZON-JV")
-    assert verizon[1:] == ("Owned programme", "canonical ownership")
-    # The fixture supplies governed owning_enterprise, not a fabricated edge.
+    assert not any(business_object_id(row[0]) == "PROG-BT-VERIZON-JV" for row in programmes)
     assert not any("PROG-BT-VERIZON-JV" in {r.source_id, r.target_id} for r in resolve_relationships(twin))
+    bt_programme = next(row for row in programmes if business_object_id(row[0]) == "PROG-BT-TRANSFORMATION")
+    assert bt_programme[1:] == ("Enterprise owns Programme", "REL-W2-001")
+    bt_ai = next(row for row in opportunities if business_object_id(row[0]) == "OPP-BT-AI-ENGINEERING")
+    assert bt_ai[1:] == ("Opportunity targets Enterprise", "REL-W2-014")
     bt_opportunity = next(row for row in opportunities if business_object_id(row[0]) == "OPP-BT-VERIZON-JV-INTEGRATION")
     assert bt_opportunity[1:] == ("Opportunity targets Enterprise", "REL-W4-183")
 
@@ -105,7 +116,7 @@ def test_candidate_resolution_is_read_only_and_import_scoped():
     first = assemble_semantic_twin([
         row("ENT-A", "enterprise_twin", enterprise_id="ENT-A", name="A"),
         row("PROG-P", "transformation_programme", title="P"),
-        row("REL-R", "relationship", source="PROG-P", target="ENT-A",
+        row("REL-R", "relationship", source="ENT-A", target="PROG-P",
             relationship_type="Enterprise owns Programme"),
     ])
     second = assemble_semantic_twin([
@@ -139,6 +150,10 @@ def test_diagnostics_use_same_population_and_association_owner(monkeypatch, tmp_
     assert re.search(r"<td>Opportunities</td><td>17</td><td>17</td><td>17</td><td>17</td><td>0</td><td>0</td><td>PASS</td>", html)
     assert re.search(r"<td>Programmes</td><td>13</td><td>13</td><td>13</td><td>13</td><td>0</td><td>0</td><td>PASS</td>", html)
     assert "Enterprise Association Reconciliation" in html
+    for enterprise_id, (programmes, opportunities) in EXPECTED_ASSOCIATIONS.items():
+        assert enterprise_id in html
+        assert all(identifier in html for identifier in programmes | opportunities)
+    assert "Duplicate Relationship rows collapsed" in html
     assert "Relationship Resolution Reconciliation" in html
     assert "Executive Dimension Reconciliation" in html
     assert "Candidate-resolved Relationships" in html

@@ -485,17 +485,28 @@ def test_tel001_canonical_factual_projection_exposes_shared_contract_metadata(mo
     assert any("BT Group is a UK-headquartered telecommunications group" in value for section in projection.sections for value in section.values)
 
 
-def test_tel001_relationship_truth_audit_is_visible_on_import_screen():
-    """The audit result is an operational presentation link, not a semantic change."""
+def test_tel001_enterprise_association_correction_is_visible_on_import_screen(monkeypatch):
+    """The consumer correction and functional-test decision are operationally visible."""
     from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page
+    from cios.applications.flora.blueprint_import import pilot_change
+
+    change_id = "TEL-001-ENTERPRISE-ASSOCIATION-CONSUMER-CORRECTION-2026-08-14"
+    monkeypatch.setattr(pilot_change, "deployment_metadata", lambda: {
+        "deployed_change_marker": change_id,
+        "branch": "Unavailable — deployment metadata not configured",
+        "build_timestamp": "Unavailable — deployment metadata not configured",
+    })
 
     html, status = import_blueprint_entry_page({})
 
     assert status == 200
-    assert "TEL-001 Relationship Truth Audit" in html
-    assert "Determine whether Enterprise Programme and Opportunity relationships" in html
-    assert "TEL-001 Relationship Truth Executive Summary" in html
-    assert "href='/docs/operations/flora/TEL-001-Relationship-Truth-Executive-Summary.md'" in html
+    assert "Enterprise Association Consumer Correction" in html
+    assert "Make Enterprise dossiers consume the candidate Programme and Opportunity relationships" in html
+    assert "PROG-BT-VERIZON-JV remains absent" in html
+    assert "OPP-BT-VERIZON-JV-INTEGRATION appears" in html
+    assert "Ready for functional test — deployment metadata incomplete" in html
+    assert "Should I test now?" in html and ">YES<" in html
+    assert "Known limitation: Deployment metadata incomplete" in html
 
 
 def test_tel001_relationship_truth_report_reconciles_governed_source_records():

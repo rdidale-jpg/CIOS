@@ -1,36 +1,46 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "TEL-001-RELATIONSHIP-TRUTH-AUDIT-2026-08-14",
-  "title": "TEL-001 Relationship Truth Audit",
-  "objective": "Determine whether Enterprise Programme and Opportunity relationships are present in the governed TEL-001 package or are being lost by Flora.",
+  "change_id": "TEL-001-ENTERPRISE-ASSOCIATION-CONSUMER-CORRECTION-2026-08-14",
+  "title": "Enterprise Association Consumer Correction",
+  "objective": "Make Enterprise dossiers consume the candidate Programme and Opportunity relationships already present and resolved in the imported Twin.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Audited all 308 governed Relationship records and all 50 Membership records directly from the checksum-verified repository fixture.",
-    "Compared explicit source associations for all six Enterprises with the current Flora zero-Programme/zero-Opportunity page evidence.",
-    "Published a human-readable Executive Summary and complete record-level truth report without changing semantic runtime behaviour."
+    "Reused import-scoped candidate relationship resolution as the sole Enterprise association truth owner.",
+    "Corrected the shared Enterprise consumer to apply governed relationship type and direction semantics and deduplicate by business-object identity.",
+    "Added exact-ID reconciliation to Enterprise dossiers and Advanced Inspection without changing candidate governance."
   ],
   "expected_visible_outcomes": [
-    "Source relationship truth by Enterprise is visible through the linked Executive Summary and complete audit report.",
-    "Source-versus-Flora comparison gives an explicit conclusion for each of the six Enterprises.",
-    "The audit distinguishes Flora runtime loss from Researcher/package-contract gaps, including the unlinked BT/Verizon Programme.",
-    "No importer, validator, resolver, semantic, governance, promotion, Programme, or Opportunity behaviour changes."
+    "BT Group: 1 explicitly related Programme and 3 explicitly related Opportunities; PROG-BT-VERIZON-JV remains absent while OPP-BT-VERIZON-JV-INTEGRATION appears.",
+    "Openreach: 1 Programme and 3 Opportunities.",
+    "Virgin Media O2: 2 unique Programmes and 3 Opportunities.",
+    "VodafoneThree: 2 unique Programmes and 3 Opportunities.",
+    "CityFibre: 1 Programme and 2 Opportunities.",
+    "TalkTalk: 1 Programme and 2 Opportunities.",
+    "Advanced Inspection visibly reconciles resolved and rendered exact ID sets and reports truthful association anomalies.",
+    "Protected populations remain 17 Opportunities and 13 Programmes; factual dimensions remain isolated; no candidate is automatically promoted."
   ],
   "affected_pages": [
-    "Import Twin"
+    "Import Twin",
+    "Enterprise dossiers",
+    "Explore Twin",
+    "Advanced Inspection",
+    "Major Programmes",
+    "Opportunities"
   ],
   "unchanged_areas": [
-    "Importer, validator, relationship resolver, semantic construction, Canonical Factual Projection, Enterprise association logic, Opportunity logic, Programme logic, governance, promotion, the TEL-001 fixture, and Researcher package contents remain unchanged."
+    "Archive and manifest ingestion, validation, candidate creation, relationship resolver, TEL-001 fixture, Canonical Factual Projection, promotion, review, assessment, recommendation, and Observation architecture remain unchanged."
   ],
   "required_test_steps": [
-    "Open the TEL-001 Relationship Truth Executive Summary from this panel.",
-    "Confirm all six Enterprise conclusions and the BT/Verizon Programme and Opportunity traces.",
-    "Confirm the complete report reconciles 308 Relationships and classifies 50 Memberships."
+    "Open each of the six TEL-001 Enterprise dossiers and reconcile the displayed IDs.",
+    "Confirm BT excludes PROG-BT-VERIZON-JV and includes OPP-BT-VERIZON-JV-INTEGRATION.",
+    "Open Advanced Inspection and confirm every Enterprise association row is PASS.",
+    "Confirm Major Programmes has 13 and Opportunities has 17 distinct rendered business-object containers."
   ],
   "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
   "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
-  "fresh_import_policy": "Fresh import is required only when the approved change is live and material runtime components that affect candidate representation changed before the candidate was imported. UI-only, presentation-only and diagnostics-only panel changes do not require reimport. If timestamps or component classification are unavailable, Flora reports Cannot determine rather than forcing a reimport.",
+  "fresh_import_policy": "No fresh import is required because this consumer-only correction reads existing resolved candidates in their original import scope.",
   "known_limitations": [
-    "The panel links to the repository Markdown artefact; deployments that do not serve repository documentation may require opening the same path in the source repository."
+    "Deployment metadata may be incomplete; functional acceptance remains testable when all automated functional checks pass."
   ],
   "automated_validation": {
     "tel001_fixture_checksum": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
@@ -44,7 +54,7 @@
     "last_validation_timestamp": "2026-08-14T00:00:00Z"
   },
   "merge_gate": "SAFE TO MERGE",
-  "operator_validation_status": "PASS \u2014 immutable fixture reconciled; documentation and presentation only",
+  "operator_validation_status": "PASS \u2014 exact association sets and rendered routes reconciled",
   "diagnostics_href": "/deployment",
   "source_commit_sha": "88f053e6cee6fe2fef7feba1e7f4553194b7a040",
   "merged_commit_sha": "unknown",
@@ -56,7 +66,9 @@
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
   "material_runtime_components_changed": [
-    "UI acceptance panel metadata/presentation"
+    "Enterprise association consumer",
+    "Advanced Inspection presentation",
+    "Import Twin operational panel"
   ],
   "reimport_required_if_older_than_change": "Unavailable",
   "repository": "unknown",
@@ -64,6 +76,6 @@
   "start_command": "unknown",
   "auto_deploy": "unknown",
   "latest_deployment_status": "unknown",
-  "fresh_import_required": "No \u2014 this audit does not change candidate representation or semantic runtime behaviour.",
-  "audit_result_href": "/docs/operations/flora/TEL-001-Relationship-Truth-Executive-Summary.md"
+  "fresh_import_required": "No \u2014 the correction reads already-resolved candidate relationships and does not rebuild persisted candidate state.",
+  "audit_result_href": "/docs/operations/flora/TEL-001-Enterprise-Association-Consumer-Correction.md"
 }

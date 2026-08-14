@@ -425,13 +425,13 @@ def test_upload_page_shows_current_deployed_change_acceptance_panel(monkeypatch,
     assert panel < upload
     assert "CURRENT PILOT CHANGE" not in page
     assert "Researcher-to-Flora Translation Audit" not in page
-    assert "Candidate Relationship Resolution" in page
+    assert "Enterprise Association Consumer Correction" in page
     assert "88f053e6cee6fe2fef7feba1e7f4553194b7a040" in page
     assert "Status" in page and "Should I test now?" in page and "Next action" in page
     assert "Technical deployment evidence" in page
     assert "<details><summary>Technical deployment evidence</summary>" in page
-    assert "Candidate Relationship objects resolve through exact endpoint identities" in page
-    assert "candidate-resolved relationships, promoted relationships and unresolved reasons" in page
+    assert "import-scoped candidate relationship resolution as the sole Enterprise association truth owner" in page
+    assert "governed relationship type and direction semantics" in page
     assert "Fresh import required:</strong> No" in page
     assert "Tel001 Fixture Checksum" in page and "Checksum Status" in page
     assert "Known limitations" in page
