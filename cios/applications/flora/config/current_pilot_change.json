@@ -1,20 +1,20 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "BUSINESS-OBJECT-POPULATION-RELATIONSHIP-RECONCILIATION-2026-08-13",
-  "title": "Business Object Population and Relationship Reconciliation",
-  "objective": "Ensure Flora presents exactly the business objects supplied by the Twin and correctly associates Programmes and Opportunities with their Enterprises.",
+  "change_id": "ENTERPRISE-RELATIONSHIP-FACTUAL-DIMENSION-RECONCILIATION-2026-08-14",
+  "title": "Enterprise Relationship and Factual Dimension Reconciliation",
+  "objective": "Connect imported Enterprise intelligence through governed Relationships and ensure each executive dimension uses only qualifying factual content.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Accepted candidate state is the reusable semantic business-object population boundary.",
-    "Immutable source/canonical IDs produce one executive entity per business object.",
-    "Enterprise dossiers and diagnostics share direction-neutral consumption of existing governed relationship records and canonical ownership."
+    "Standalone Relationship objects are resolved once through immutable business-object identity and consumed by dossiers and diagnostics.",
+    "Executive dimensions select only their governed semantic fields or resolved Programme/Opportunity relationships.",
+    "Optional deployment metadata does not block functional acceptance when the current marker and passing acceptance status are present."
   ],
   "expected_visible_outcomes": [
-    "Opportunities shows 17 available and exactly 17 entities, with no supporting records rendered as Opportunities.",
-    "Major Programmes shows exactly 13 entities.",
-    "BT Group and all other Enterprise dossiers show only canonically owned or explicitly related Programmes and Opportunities, labelled with the governed relationship type.",
-    "Advanced Inspection shows business-object population and Enterprise association reconciliation.",
-    "Explore Twin and executive routes consume the same population owner."
+    "BT Group shows canonically related Programmes and Opportunities with governed relationship types.",
+    "All Enterprise Programme and Opportunity associations reflect governed standalone Relationship objects.",
+    "Unrelated facts are not repeated into unrelated dimensions; missing dimensions remain explicit.",
+    "Advanced Inspection shows Relationship Resolution, Enterprise Association and Executive Dimension reconciliation.",
+    "Opportunities remains exactly 17 and Major Programmes remains exactly 13."
   ],
   "affected_pages": [
     "Import Twin",
@@ -35,12 +35,10 @@
     "No automatic acceptance, promotion, recommendations or TEL-001-specific production logic is introduced."
   ],
   "required_test_steps": [
-    "Open Opportunities and count the 17 data-business-object Opportunity entities.",
-    "Open Major Programmes and count the 13 data-business-object Programme entities.",
-    "Open BT Group and compare Programme and Opportunity IDs and relationship labels with Advanced Inspection.",
-    "Check all six Enterprise pages and confirm unrelated records are absent.",
-    "Open Advanced Inspection and confirm both reconciliation tables report PASS.",
-    "Open Explore Twin and confirm Opportunity count is 17."
+    "Open BT Group and inspect Programme and Opportunity IDs and governed relationship labels.",
+    "Check all six Enterprise dossiers for exact relationship-derived association sets and isolated factual dimensions.",
+    "Open Advanced Inspection and inspect all three reconciliation tables.",
+    "Count 17 rendered Opportunity containers and 13 rendered Programme containers."
   ],
   "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
   "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
@@ -55,7 +53,7 @@
     "diagnostics_reconciliation_status": "PASS",
     "research_gap_reconciliation_status": "PASS",
     "known_failing_tests": "None in focused population/relationship acceptance suite.",
-    "last_validation_timestamp": "2026-08-13T00:00:00Z"
+    "last_validation_timestamp": "2026-08-14T00:00:00Z"
   },
   "merge_gate": "SAFE TO MERGE",
   "operator_validation_status": "PASS \u2014 real TEL-001 routes rendered to repository acceptance artefacts",
@@ -65,13 +63,14 @@
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "BUSINESS-OBJECT-POPULATION-RELATIONSHIP-RECONCILIATION-2026-08-13",
+  "deployed_change_marker": "ENTERPRISE-RELATIONSHIP-FACTUAL-DIMENSION-RECONCILIATION-2026-08-14",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
   "material_runtime_components_changed": [
     "semantic read projection",
     "executive association query",
+    "executive factual dimension selection",
     "diagnostics",
     "UI acceptance panel"
   ],
@@ -81,5 +80,5 @@
   "start_command": "unknown",
   "auto_deploy": "unknown",
   "latest_deployment_status": "unknown",
-  "fresh_import_required": "No \u2014 ignored supporting rows and accepted business objects already persist; the corrected read boundary is applied at request time."
+  "fresh_import_required": "No \u2014 standalone Relationship objects and factual fields already persist; corrected canonical query/projection logic is applied at request time."
 }

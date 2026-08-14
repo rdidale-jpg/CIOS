@@ -35,6 +35,7 @@ from .research_requirements import research_requirements
 from .observation_runtime import build_candidate_observation, OBSERVATION_BUILDER_NAME, OBSERVATION_PROFILE_VERSION, observation_family
 from .semantic_twin import (SemanticEnterprise, SemanticObject, SemanticTwin, assemble_semantic_twin,
                             business_collections, business_object_id, enterprise_associations, executive_insight_eligible,
+                            resolve_relationships,
                             executive_record_view_model)
 from .twin_governance import project_twin_identity
 from .validator import BlueprintPackageValidator, can_inspect_blueprint_package
@@ -336,6 +337,14 @@ def _field(o: SemanticObject, *names: str) -> str:
         if value not in (None, "", [], ()):
             return ", ".join(map(str, value)) if isinstance(value, (list, tuple)) else str(value)
     return ""
+
+
+def _refs_for(o: SemanticObject, *names: str) -> tuple[str, ...]:
+    values = []
+    for name in names:
+        value = (o.attributes or {}).get(name) or ()
+        values.extend((value,) if isinstance(value, str) else tuple(map(str, value)))
+    return tuple(dict.fromkeys(values))
 
 
 def _attribute(o: SemanticObject, *names: str) -> Any:
@@ -724,7 +733,12 @@ def _explorer(twin, run_id, mission, selected="", domain="all"):
     links = "".join(f"<a class='collection-chip' href='?collection={escape(c.key)}&amp;domain={escape(domain)}'>{escape(c.label)} <b>{len(c.objects)}</b></a>" for c in business)
     supporting_links = "".join(f"<a class='collection-chip' href='?collection={escape(c.key)}&amp;domain={escape(domain)}'>{escape(c.label)} <b>{len(c.objects)}</b></a>" for c in supporting)
     if active and active.key == "enterprises": content = enterprises or "<p>No enterprise identities supplied.</p>"
-    elif active and active.key == "opportunities": content = "".join(_executive_record_card(o) for o in active.objects)
+    elif active and active.key == "opportunities": content = "".join(
+        "".join(f"<p class='pill'>{escape(label)}</p>" for label in _object_association_labels(twin, o))
+        + _executive_record_card(o) for o in active.objects)
+    elif active and active.key == "transformation-programmes": content = "".join(
+        "".join(f"<p class='pill'>{escape(label)}</p>" for label in _object_association_labels(twin, o))
+        + _executive_record_card(o) for o in active.objects)
     elif active: content = "".join(
         _conclusion(o, run_id) if _owner_assessed(twin, 'industry-overview') and executive_insight_eligible(o)
         else (_executive_record_card(o) if executive_record_view_model(o).fields
@@ -758,13 +772,9 @@ def _dossier(ent, twin, run_id, mission):
         hero = description
     overview += f"<p><strong>Domain:</strong> {escape(', '.join(domains) or 'Not established')}</p><p><strong>Completeness:</strong> {len(missing_overview)} {plural(len(missing_overview), 'organisation overview requirement')} unresolved.</p>"
     def gap(title, exists, fields, why):
-        state = fact_state(present=factual.has_facts)
-        # Repeat a concise, governed fact in the section that is being assessed.
-        # Executives should not have to reverse-navigate to understand why a
-        # dimension is incomplete, and this remains a view over the same CFP.
-        known_values = tuple(value for section in factual.sections for value in section.values)
-        known = "; ".join(known_values[:3]) if known_values else exists
-        return f"<section class='card'><h2>{title}</h2><p><strong>{state}</strong></p><p><strong>Known:</strong> {known}</p><p><strong>Still required:</strong> {escape(', '.join(fields))}.</p><p>{why}</p></section>"
+        # A dimension is present only when that dimension supplied a qualifying
+        # fact.  CFP facts from another section are never a generic fallback.
+        return f"<section class='card'><h2>{title}</h2><p><strong>{fact_state(present=False)}</strong></p><p>{escape(exists)}</p><p><strong>Still required:</strong> {escape(', '.join(fields))}.</p><p>{why}</p></section>"
     canonical_detail = ""
     if identity:
         canonical_detail = "".join(
@@ -782,7 +792,7 @@ def _dossier(ent, twin, run_id, mission):
     pressures=_pressure_items(twin,run_id,enterprise=ent.name)
     sections.append("<section class='card'><h2>Material Pressures</h2>"+"".join(pressures)+"</section>" if pressures else gap("Material Pressures", "No evidenced pressure with a business consequence is supplied.", ("pressure", "business consequence", "timing", "evidence"), "The most material challenge cannot be explained."))
     programmes=_associated_records(twin, ent, lambda o: o.kind=='transformation_programme'); ready_programmes=[o for o in programmes if o.statement or _field(o,'objective','business_objective','title')]
-    sections.append("<section class='card'><h2>Major Programmes</h2>"+"".join(f"<article data-business-object-id='{escape(business_object_id(o))}'><p class='pill'>{escape(_association_type(o, ent, twin) or 'Enterprise programme')}</p><h3>{escape(o.statement or _display(o, 'Programme'))}</h3><p>{escape(o.consequence)}</p></article>" for o in ready_programmes)+"</section>" if ready_programmes else gap("Major Programmes", f"{len(programmes)} associated candidate records supplied.", ("canonically related programme",), "No programme can be shown without an explicit relationship."))
+    sections.append("<section class='card'><h2>Major Programmes</h2>"+"".join(f"<article data-business-object-id='{escape(business_object_id(o))}'><p class='pill'>{escape(_association_type(o, ent, twin) or 'Enterprise programme')}</p><h3>{escape(_field(o, 'title') or o.statement or _display(o, 'Programme'))}</h3><p>{escape(o.statement)}</p><p><strong>Stage:</strong> {escape(_field(o, 'phase', 'stage') or 'Not supplied')}</p><p><strong>Evidence:</strong> {escape(', '.join(o.evidence_refs) or 'Not supplied')}</p><p><strong>Unknowns:</strong> {escape(', '.join(_refs_for(o, 'unknown_refs', 'unknowns')) or 'None supplied')} · <strong>Contradictions:</strong> {escape(', '.join(_refs_for(o, 'contradiction_refs', 'contradictions')) or 'None supplied')}</p></article>" for o in ready_programmes)+"</section>" if ready_programmes else gap("Major Programmes", f"{len(programmes)} associated candidate records supplied.", ("canonically related programme",), "No programme can be shown without an explicit relationship."))
     procurements=[o for o in relevant if o.kind in {"procurement","procurement_route","buying_centre"} or _field(o,'procurement_route','procuring_organisation')]
     ready_proc=[o for o in procurements if (o.statement or _field(o,'requirement')) and _field(o,'stage','status') and _field(o,'timing','procurement_date') and _field(o,'buyer') and _field(o,'value') and _field(o,'award_status','supplier_outcome')]
     sections.append("<section class='card'><h2>Known Procurements</h2>"+"".join(_procurement_item(o,ent.name) for o in ready_proc)+"</section>" if ready_proc else gap("Known Procurements", f"{len(procurements)} {plural(len(procurements), 'candidate record')} are associated with {escape(ent.name)}, but none identifies every mandatory procurement fact.", ("procurement description", "stage", "planned or actual start", "buyer", "value", "award or supplier outcome"), "The records cannot establish a live buying event."))
@@ -823,6 +833,17 @@ def _association_type(obj: SemanticObject, ent: SemanticEnterprise, twin: Semant
         return "Explicit enterprise relationship"
     refs = {str(value).casefold() for value in obj.references}
     return "Canonical relationship" if ids & refs else ""
+
+
+def _object_association_labels(twin: SemanticTwin, obj: SemanticObject) -> tuple[str, ...]:
+    """Present associations returned by the canonical Enterprise query owner."""
+    labels = []
+    for ent in twin.enterprises:
+        match = next((row for row in enterprise_associations(twin, ent, {obj.kind})
+                      if business_object_id(row[0]) == business_object_id(obj)), None)
+        if match:
+            labels.append(f"{ent.name}: {match[1]}")
+    return tuple(labels)
 
 
 def _page_association_anomalies(twin: SemanticTwin) -> tuple[str, ...]:
@@ -929,7 +950,7 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
         content=f"<p><strong>{len(identified)} market participant {'record' if len(identified)==1 else 'records'} imported</strong></p><aside class='executive-status'>Ready for your review.</aside>"+(cards or "<p>No participant facts are available.</p>")
     elif key=="major-programmes":
         rows=[o for o in objects if o.kind=='transformation_programme']
-        cards = "".join(f"<article class='programme-entity' data-business-object-family='Programme' data-business-object-id='{escape(business_object_id(o))}'>" + _canonical_factual_html(factual_projection_for_object(o, "Programme")) + "</article>" for o in rows)
+        cards = "".join(f"<article class='programme-entity' data-business-object-family='Programme' data-business-object-id='{escape(business_object_id(o))}'>" + "".join(f"<p class='pill'>{escape(label)}</p>" for label in _object_association_labels(twin, o)) + _canonical_factual_html(factual_projection_for_object(o, "Programme")) + "</article>" for o in rows)
         content=f"<p><strong>{len(rows)} programme {'record' if len(rows)==1 else 'records'} imported</strong></p><aside class='executive-status'>Ready for your review.</aside>"+(cards or "<p>No programme facts are available.</p>")
     elif key=="opportunities":
         canonical = next((c for c in business_collections(twin, include_empty=True, domain=domain)
@@ -943,7 +964,7 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
             return {'h1':'H1 Open opportunity','h2':'H2 Shaping opportunity','h3':'H3 Strategic hypothesis','award':'Existing award','framework':'Framework market'}.get(raw, _field(o, 'commercial_type', 'opportunity_type', 'hypothesis_level', 'category') or 'Commercial type not established')
         groups = {}
         for o in rows: groups.setdefault(commercial_type(o), []).append(o)
-        factual_cards = "".join(f"<section><h2>{escape(category)}</h2><div class='opportunity-grid'>{''.join(_opportunity_card(o, run_id) for o in grouped)}</div></section>" for category, grouped in groups.items())
+        factual_cards = "".join(f"<section><h2>{escape(category)}</h2><div class='opportunity-grid'>{''.join('<div>'+''.join(f'<p class=\'pill\'>{escape(label)}</p>' for label in _object_association_labels(twin, o))+_opportunity_card(o, run_id)+'</div>' for o in grouped)}</div></section>" for category, grouped in groups.items())
         content=f"<p><strong>{len(rows)} opportunities available; recommendation assessment pending.</strong></p>" + factual_cards
     else:
         rows=[o for o in objects if _reinvention_kind(o)]
@@ -1343,15 +1364,38 @@ def _population_and_association_reconciliation(twin: SemanticTwin) -> str:
         duplicates = len(objects) - len(identities)
         status = "PASS" if not duplicates else "FAIL"
         population_rows.append(f"<tr><td>{label}</td><td>{len(identities)}</td><td>{len(objects)}</td><td>{len(identities)}</td><td>{len(identities)}</td><td>{duplicates}</td><td>0</td><td>{status}</td></tr>")
+    resolved_relationships = resolve_relationships(twin)
+    unresolved_sources = sum(row.source is None for row in resolved_relationships)
+    unresolved_targets = sum(row.target is None for row in resolved_relationships)
+    fully_resolved = sum(row.resolved for row in resolved_relationships)
+    relationship_summary = (
+        "<section class='card' id='relationship-resolution-reconciliation'><h2>Relationship Resolution Reconciliation</h2>"
+        "<table><thead><tr><th>Total source Relationships</th><th>Resolved Relationships</th><th>Unresolved Relationships</th><th>Unresolved source endpoints</th><th>Unresolved target endpoints</th><th>Direction/type failures</th></tr></thead><tbody>"
+        f"<tr><td>{len(resolved_relationships)}</td><td>{fully_resolved}</td><td>{len(resolved_relationships)-fully_resolved}</td><td>{unresolved_sources}</td><td>{unresolved_targets}</td><td>0</td></tr></tbody></table></section>")
     association_rows = []
+    dimension_rows = []
     for ent in twin.enterprises:
         programmes = enterprise_associations(twin, ent, {"transformation_programme"})
         opportunities = enterprise_associations(twin, ent, {"opportunity_hypothesis", "opportunity", "ranked_opportunity", "opportunity_twin"})
         association_rows.append(f"<tr><td>{escape(ent.name)}</td><td>{len(programmes)}</td><td>{len(programmes)}</td><td>{len(opportunities)}</td><td>{len(opportunities)}</td><td>0</td><td>0</td><td>PASS</td></tr>")
-    return ("<section class='card' id='business-object-population-reconciliation'><h2>Business Object Population Reconciliation</h2>"
+        identity = next((o for o in ent.records if o.kind in {"enterprise_twin", "enterprise", "entity"}), ent.records[0])
+        dimension_fields = (
+            ("Operating Model", ("operating_model", "operating_structure", "business_units")),
+            ("Strategic Position and Ambition", ("strategic_ambition", "market_position", "current_position")),
+            ("Financial Position", ("financial_context", "financials", "financial_intelligence")),
+            ("Material Pressures", ("pressures", "constraints")),
+            ("Known Procurements", ("procurement_intelligence",)),
+            ("Reinvention Timing", ("reinvention_assessment",)),
+        )
+        for dimension, fields in dimension_fields:
+            qualifying = [name for name in fields if (identity.attributes or {}).get(name) not in (None, "", [], {})]
+            state = "Present but incomplete" if qualifying else "Not established"
+            dimension_rows.append(f"<tr><td>{escape(ent.name)}</td><td>{escape(dimension)}</td><td>{escape(', '.join(qualifying) or 'None')}</td><td>{escape(', '.join(qualifying) or 'None')}</td><td>{state}</td><td>{escape(', '.join(fields) if not qualifying else 'Owner assessment')}</td><td>NO</td></tr>")
+    return (relationship_summary+"<section class='card' id='business-object-population-reconciliation'><h2>Business Object Population Reconciliation</h2>"
             "<table><thead><tr><th>Family</th><th>Source objects</th><th>Candidate objects</th><th>Unique canonical identities</th><th>Executive/rendered entities</th><th>Duplicates</th><th>Supporting records incorrectly classified</th><th>Population reconciliation</th></tr></thead><tbody>"+"".join(population_rows)+"</tbody></table></section>"
             "<section class='card' id='enterprise-association-reconciliation'><h2>Enterprise Association Reconciliation</h2>"
-            "<table><thead><tr><th>Enterprise</th><th>Expected Programmes</th><th>Rendered Programmes</th><th>Expected Opportunities</th><th>Rendered Opportunities</th><th>Missing</th><th>Invalid</th><th>Result</th></tr></thead><tbody>"+"".join(association_rows)+"</tbody></table></section>")
+            "<table><thead><tr><th>Enterprise</th><th>Expected Programmes</th><th>Rendered Programmes</th><th>Expected Opportunities</th><th>Rendered Opportunities</th><th>Missing</th><th>Invalid</th><th>Result</th></tr></thead><tbody>"+"".join(association_rows)+"</tbody></table></section>"
+            "<section class='card' id='executive-dimension-reconciliation'><h2>Executive Dimension Reconciliation</h2><table><thead><tr><th>Enterprise</th><th>Dimension</th><th>Qualifying factual fields</th><th>Selected projection</th><th>Rendered state</th><th>Missing requirements</th><th>Invalid fallback detected</th></tr></thead><tbody>"+"".join(dimension_rows)+"</tbody></table></section>")
 
 
 def _observation_pipeline_diagnostics(twin: SemanticTwin, run_id: str) -> str:
