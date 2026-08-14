@@ -232,6 +232,8 @@ def resolve_relationships(twin: SemanticTwin) -> tuple[ResolvedRelationship, ...
             identity_rows.setdefault(business_object_id(obj).casefold(), []).append(obj)
     rows = []
     for relationship in twin.objects:
+        if relationship.kind not in {"relationship", "supplier_relationship"}:
+            continue
         source_id, target_id, relationship_type = relationship_endpoints(relationship)
         source_matches = identity_rows.get(source_id.casefold(), [])
         target_matches = identity_rows.get(target_id.casefold(), [])
@@ -257,7 +259,13 @@ def resolve_relationships(twin: SemanticTwin) -> tuple[ResolvedRelationship, ...
 
 def enterprise_associations(twin: SemanticTwin, enterprise: SemanticEnterprise,
                             kinds: set[str]) -> tuple[tuple[SemanticObject, str, str], ...]:
-    """Resolve canonical ownership and explicit relationships in either direction."""
+    """Consume resolved, typed relationships for one import-scoped Enterprise.
+
+    Direction is part of the governed relationship meaning.  In particular an
+    Enterprise owns Programme edge runs Enterprise -> Programme, while an
+    Opportunity targets Enterprise edge runs Opportunity -> Enterprise.  The
+    consumer intentionally does not treat object prose/owner fields as edges.
+    """
     ids = {enterprise.identity_key.casefold(), enterprise.name.casefold(),
            *(alias.casefold() for alias in enterprise.aliases)}
     objects = {business_object_id(obj).casefold(): obj for obj in twin.objects if obj.kind in kinds}
@@ -267,23 +275,29 @@ def enterprise_associations(twin: SemanticTwin, enterprise: SemanticEnterprise,
         value = endpoint.casefold()
         return value in ids or value.split(":", 1)[0] in ids
 
-    for obj in objects.values():
-        attributes = obj.attributes or {}
-        owners = (obj.subject, *obj.affected_organisations,
-                  str(attributes.get("owner") or attributes.get("owning_enterprise") or ""))
-        if any(matches(owner) for owner in owners if owner):
-            label = "Owned programme" if obj.kind == "transformation_programme" else "Explicit enterprise relationship"
-            found[business_object_id(obj)] = (obj, label, "canonical ownership")
     for resolved in resolve_relationships(twin):
-        source, target, relationship_type = (resolved.source_id, resolved.target_id,
-                                             resolved.relationship_type)
         if not resolved.resolved:
             continue
-        other = target if matches(source) else source if matches(target) else ""
+        source, target, relationship_type = (resolved.source_id, resolved.target_id,
+                                             resolved.relationship_type)
+        if (relationship_type == "Enterprise owns Programme"
+                and matches(source) and resolved.target
+                and resolved.target.kind == "transformation_programme"):
+            other = target
+        elif (relationship_type == "Opportunity targets Enterprise"
+              and matches(target) and resolved.source
+              and resolved.source.kind in {"opportunity_hypothesis", "opportunity",
+                                           "ranked_opportunity", "opportunity_twin"}):
+            other = source
+        else:
+            continue
         related = objects.get(other.casefold())
         if related:
-            found[business_object_id(related)] = (
-                related, relationship_type, business_object_id(resolved.relationship))
+            identity = business_object_id(related)
+            # Executive presentation is by business-object identity.  Retain a
+            # stable relationship row for its type/ID explainability.
+            found.setdefault(identity, (related, relationship_type,
+                                         business_object_id(resolved.relationship)))
     return tuple(found[key] for key in sorted(found))
 
 

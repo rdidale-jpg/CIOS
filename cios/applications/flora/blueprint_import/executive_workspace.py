@@ -747,8 +747,9 @@ def _explorer(twin, run_id, mission, selected="", domain="all"):
     else: content = "<p>Select a business collection to explore its contents.</p>"
     title = active.label if active else "Advanced Inspection"
     total = len(active.objects) if active else 0
-    anomaly_count = len(twin.unresolved_references)
-    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a><strong>Advanced Inspection</strong></nav><header class='hero'><h1>Advanced Inspection</h1><p>{escape(active.description) if active else 'Reconcile business objects, evidence, relationships and technical traces.'}</p></header><section class='card diagnostic-summary'><h2>Diagnostic Summary</h2><div class='metric-grid'><article><strong>Package integrity</strong><p>Validated import available</p></article><article><strong>Object-family reconciliation</strong><p>{len(twin.objects)} records inventoried</p></article><article><strong>Association anomalies</strong><p>{anomaly_count}</p></article><article><strong>Stale-state status</strong><p>See runtime comparison</p></article></div><form class='diagnostic-filters'><label>Object family <select><option>All families</option></select></label><label>Status <select><option>All statuses</option></select></label><label>Anomaly <select><option>All anomalies</option><option>Missing subject</option><option>Count mismatch</option><option>Unsupported record</option><option>Residual content</option></select></label></form></section><section class='card'><h2>Business collections</h2><div class='collection-links'>{links}</div><details><summary>Technical and supporting collections</summary><div class='collection-links'>{supporting_links or '<p>No supporting collections.</p>'}</div></details></section><section class='card'><h2>{escape(title)}{f' — {total} total' if active else ''}</h2><p>{f'Showing {total} distinct identities' if active and active.key == 'enterprises' else f'Showing {total} of {total} total records' if active else ''}</p>{content}</section><details class='card'><summary>Technical reconciliation traces</summary><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></details>"
+    anomaly_count = len(_page_association_anomalies(twin))
+    reconciliation = _population_and_association_reconciliation(twin)
+    return f"<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a><strong>Advanced Inspection</strong></nav><header class='hero'><h1>Advanced Inspection</h1><p>{escape(active.description) if active else 'Reconcile business objects, evidence, relationships and technical traces.'}</p></header><section class='card diagnostic-summary'><h2>Diagnostic Summary</h2><div class='metric-grid'><article><strong>Package integrity</strong><p>Validated import available</p></article><article><strong>Object-family reconciliation</strong><p>{len(twin.objects)} records inventoried</p></article><article><strong>Association anomalies</strong><p>{anomaly_count}</p></article><article><strong>Stale-state status</strong><p>See runtime comparison</p></article></div><form class='diagnostic-filters'><label>Object family <select><option>All families</option></select></label><label>Status <select><option>All statuses</option></select></label><label>Anomaly <select><option>All anomalies</option><option>Missing subject</option><option>Count mismatch</option><option>Unsupported record</option><option>Residual content</option></select></label></form></section>{reconciliation}<section class='card'><h2>Business collections</h2><div class='collection-links'>{links}</div><details><summary>Technical and supporting collections</summary><div class='collection-links'>{supporting_links or '<p>No supporting collections.</p>'}</div></details></section><section class='card'><h2>{escape(title)}{f' — {total} total' if active else ''}</h2><p>{f'Showing {total} distinct identities' if active and active.key == 'enterprises' else f'Showing {total} of {total} total records' if active else ''}</p>{content}</section><details class='card'><summary>Technical reconciliation traces</summary><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></details>"
 
 
 def _dossier(ent, twin, run_id, mission):
@@ -847,12 +848,19 @@ def _object_association_labels(twin: SemanticTwin, obj: SemanticObject) -> tuple
 
 
 def _page_association_anomalies(twin: SemanticTwin) -> tuple[str, ...]:
-    """Reconcile every record eligible for an enterprise page against its rule."""
+    """Compare resolver-owned association sets with actual dossier selection."""
     anomalies = []
     for ent in twin.enterprises:
-        for obj in _associated_records(twin, ent, lambda row: row.kind == "transformation_programme" or "opportun" in row.kind):
-            if not _association_type(obj, ent):
-                anomalies.append(f"{ent.identity_key}:{obj.original_id or obj.record_id}")
+        for label, predicate, kinds in (
+            ("programme", lambda row: row.kind == "transformation_programme", {"transformation_programme"}),
+            ("opportunity", lambda row: "opportun" in row.kind,
+             {"opportunity_hypothesis", "opportunity", "ranked_opportunity", "opportunity_twin"}),
+        ):
+            resolved = {business_object_id(row[0]) for row in enterprise_associations(twin, ent, kinds)}
+            rendered = {business_object_id(row) for row in _associated_records(twin, ent, predicate)
+                        if row.statement or _field(row, "client_problem", "customer_problem", "problem", "title")}
+            if resolved != rendered:
+                anomalies.append(f"{ent.identity_key}:{label}")
     return tuple(anomalies)
 
 def _procurement_item(o: SemanticObject, enterprise: str) -> str:
@@ -1382,7 +1390,19 @@ def _population_and_association_reconciliation(twin: SemanticTwin) -> str:
     for ent in twin.enterprises:
         programmes = enterprise_associations(twin, ent, {"transformation_programme"})
         opportunities = enterprise_associations(twin, ent, {"opportunity_hypothesis", "opportunity", "ranked_opportunity", "opportunity_twin"})
-        association_rows.append(f"<tr><td>{escape(ent.name)}</td><td>{len(programmes)}</td><td>{len(programmes)}</td><td>{len(opportunities)}</td><td>{len(opportunities)}</td><td>0</td><td>0</td><td>PASS</td></tr>")
+        programme_ids = tuple(business_object_id(row[0]) for row in programmes)
+        opportunity_ids = tuple(business_object_id(row[0]) for row in opportunities)
+        rendered_programmes = tuple(business_object_id(o) for o in _associated_records(twin, ent, lambda o: o.kind == "transformation_programme") if o.statement or _field(o, "title"))
+        rendered_opportunities = tuple(business_object_id(o) for o in _associated_records(twin, ent, lambda o: "opportun" in o.kind) if o.statement or _field(o, "client_problem", "customer_problem", "problem", "title"))
+        missing = sorted((set(programme_ids) - set(rendered_programmes)) | (set(opportunity_ids) - set(rendered_opportunities)))
+        unexpected = sorted((set(rendered_programmes) - set(programme_ids)) | (set(rendered_opportunities) - set(opportunity_ids)))
+        qualifying_rows = [row for row in resolved_relationships if row.resolved and (
+            (row.relationship_type == "Enterprise owns Programme" and row.source_id.casefold() == ent.identity_key.casefold()) or
+            (row.relationship_type == "Opportunity targets Enterprise" and row.target_id.casefold() == ent.identity_key.casefold()))]
+        duplicate_rows = len(qualifying_rows) - len(programme_ids) - len(opportunity_ids)
+        result = "PASS" if not missing and not unexpected else "FAIL"
+        ids = lambda values: ", ".join(escape(value) for value in values) or "None"
+        association_rows.append(f"<tr><td>{escape(ent.name)}<br><code>{escape(ent.identity_key)}</code></td><td>{ids(programme_ids)}</td><td>{ids(rendered_programmes)}</td><td>{ids(opportunity_ids)}</td><td>{ids(rendered_opportunities)}</td><td>{ids(missing)}</td><td>{ids(unexpected)}</td><td>{duplicate_rows}</td><td>{result}</td></tr>")
         identity = next((o for o in ent.records if o.kind in {"enterprise_twin", "enterprise", "entity"}), ent.records[0])
         dimension_fields = (
             ("Operating Model", ("operating_model", "operating_structure", "business_units")),
@@ -1399,7 +1419,7 @@ def _population_and_association_reconciliation(twin: SemanticTwin) -> str:
     return (relationship_summary+"<section class='card' id='business-object-population-reconciliation'><h2>Business Object Population Reconciliation</h2>"
             "<table><thead><tr><th>Family</th><th>Source objects</th><th>Candidate objects</th><th>Unique canonical identities</th><th>Executive/rendered entities</th><th>Duplicates</th><th>Supporting records incorrectly classified</th><th>Population reconciliation</th></tr></thead><tbody>"+"".join(population_rows)+"</tbody></table></section>"
             "<section class='card' id='enterprise-association-reconciliation'><h2>Enterprise Association Reconciliation</h2>"
-            "<table><thead><tr><th>Enterprise</th><th>Expected Programmes</th><th>Rendered Programmes</th><th>Expected Opportunities</th><th>Rendered Opportunities</th><th>Missing</th><th>Invalid</th><th>Result</th></tr></thead><tbody>"+"".join(association_rows)+"</tbody></table></section>"
+            "<table><thead><tr><th>Enterprise</th><th>Resolved candidate Programme IDs</th><th>Rendered Programme IDs</th><th>Resolved candidate Opportunity IDs</th><th>Rendered Opportunity IDs</th><th>Missing associations</th><th>Unexpected associations</th><th>Duplicate Relationship rows collapsed</th><th>Status</th></tr></thead><tbody>"+"".join(association_rows)+"</tbody></table></section>"
             "<section class='card' id='executive-dimension-reconciliation'><h2>Executive Dimension Reconciliation</h2><table><thead><tr><th>Enterprise</th><th>Dimension</th><th>Qualifying factual fields</th><th>Selected projection</th><th>Rendered state</th><th>Missing requirements</th><th>Invalid fallback detected</th></tr></thead><tbody>"+"".join(dimension_rows)+"</tbody></table></section>")
 
 
