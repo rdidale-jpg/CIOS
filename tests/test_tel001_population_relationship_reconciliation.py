@@ -6,7 +6,7 @@ from pathlib import Path
 
 from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, BlueprintPackageValidator
 from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page, _semantic_candidates, _dossier
-from cios.applications.flora.blueprint_import.semantic_twin import assemble_semantic_twin, business_collections, business_object_id, enterprise_associations
+from cios.applications.flora.blueprint_import.semantic_twin import assemble_semantic_twin, business_collections, business_object_id, enterprise_associations, resolve_relationships
 
 FIXTURE = Path("docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip")
 ORACLE = json.loads(Path("tests/fixtures/tel001_expected_truth.json").read_text())
@@ -55,8 +55,14 @@ def test_all_enterprise_rendered_associations_equal_canonical_relationship_sets(
         assert actual_programmes == expected_programmes
         assert actual_opportunities == expected_opportunities
     bt = next(e for e in twin.enterprises if e.identity_key.casefold() == "ent-bt")
-    assert enterprise_associations(twin, bt, {"transformation_programme"})
-    assert enterprise_associations(twin, bt, {"opportunity_hypothesis"})
+    programmes = enterprise_associations(twin, bt, {"transformation_programme"})
+    opportunities = enterprise_associations(twin, bt, {"opportunity_hypothesis"})
+    verizon = next(row for row in programmes if business_object_id(row[0]) == "PROG-BT-VERIZON-JV")
+    assert verizon[1:] == ("Owned programme", "canonical ownership")
+    # The fixture supplies governed owning_enterprise, not a fabricated edge.
+    assert not any("PROG-BT-VERIZON-JV" in {r.source_id, r.target_id} for r in resolve_relationships(twin))
+    bt_opportunity = next(row for row in opportunities if business_object_id(row[0]) == "OPP-BT-VERIZON-JV-INTEGRATION")
+    assert bt_opportunity[1:] == ("Opportunity targets Enterprise", "REL-W4-183")
 
 
 def test_unrelated_and_reverse_relationship_contract():
@@ -72,6 +78,31 @@ def test_unrelated_and_reverse_relationship_contract():
     assert "OPP-Y" not in _dossier(enterprise, twin, "run", None)
 
 
+def test_relationship_resolution_retains_unresolved_endpoint_truth():
+    def row(identifier, kind, **payload):
+        return {"candidate_record_id": identifier, "original_source_id": identifier, "candidate_object_class": kind, "validation_status": "accepted", "payload": payload}
+    twin = assemble_semantic_twin([
+        row("ENT-A", "enterprise_twin", enterprise_id="ENT-A", name="A"),
+        row("OPP-X", "opportunity_hypothesis", title="X"),
+        row("REL-OK", "relationship", source="OPP-X", target="ENT-A", relationship_type="Opportunity targets Enterprise"),
+        row("REL-BAD", "relationship", source="OPP-MISSING", target="ENT-A", relationship_type="Opportunity targets Enterprise"),
+    ])
+    rows = resolve_relationships(twin)
+    assert [(r.relationship.original_id, r.resolved) for r in rows] == [("REL-OK", True), ("REL-BAD", False)]
+    assert rows[1].source is None and rows[1].target is not None
+
+
+def test_dimension_missing_does_not_repeat_operating_model():
+    def row(identifier, kind, **payload):
+        return {"candidate_record_id": identifier, "original_source_id": identifier, "candidate_object_class": kind, "validation_status": "accepted", "payload": payload}
+    twin = assemble_semantic_twin([row("ENT-A", "enterprise_twin", enterprise_id="ENT-A", name="A", operating_model="Federated operating model")])
+    html = _dossier(twin.enterprises[0], twin, "run", None)
+    financial = html.split("<h2>Financial Position</h2>", 1)[1].split("</section>", 1)[0]
+    assert "Federated operating model" not in financial
+    assert "No complete financial measure is supplied" in financial
+    assert "Not supplied" in financial
+
+
 def test_diagnostics_use_same_population_and_association_owner(monkeypatch, tmp_path):
     package, _summary, _twin = _runtime(monkeypatch, tmp_path)
     html, status = executive_workspace_page(package.import_run_id, {}, view="diagnostics")
@@ -80,3 +111,5 @@ def test_diagnostics_use_same_population_and_association_owner(monkeypatch, tmp_
     assert re.search(r"<td>Opportunities</td><td>17</td><td>17</td><td>17</td><td>17</td><td>0</td><td>0</td><td>PASS</td>", html)
     assert re.search(r"<td>Programmes</td><td>13</td><td>13</td><td>13</td><td>13</td><td>0</td><td>0</td><td>PASS</td>", html)
     assert "Enterprise Association Reconciliation" in html
+    assert "Relationship Resolution Reconciliation" in html
+    assert "Executive Dimension Reconciliation" in html

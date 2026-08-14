@@ -76,6 +76,21 @@ class ExecutiveRecordViewModel:
     evidence_refs: tuple[str, ...]
 
 
+@dataclass(frozen=True)
+class ResolvedRelationship:
+    """Resolution result for a governed standalone Relationship object."""
+    relationship: SemanticObject
+    source_id: str
+    target_id: str
+    relationship_type: str
+    source: SemanticObject | None
+    target: SemanticObject | None
+
+    @property
+    def resolved(self) -> bool:
+        return self.source is not None and self.target is not None
+
+
 EXECUTIVE_FIELDS: Mapping[str, tuple[tuple[str, str], ...]] = {
     "industry_twin": (
         ("Industry profile", "industry_profile"),
@@ -199,6 +214,26 @@ def relationship_endpoints(obj: SemanticObject) -> tuple[str, str, str]:
             str(attributes.get("relationship_type") or attributes.get("type") or "Relationship"))
 
 
+def resolve_relationships(twin: SemanticTwin) -> tuple[ResolvedRelationship, ...]:
+    """Resolve every standalone Relationship through canonical object identity.
+
+    Endpoint lookup is deliberately exact (apart from case): aliases and prose
+    are not association evidence.  The returned unresolved rows are retained so
+    diagnostics and every relationship consumer report the same truth.
+    """
+    identities = {business_object_id(obj).casefold(): obj for obj in twin.objects
+                  if obj.kind not in {"relationship", "supplier_relationship"}}
+    rows = []
+    for relationship in twin.objects:
+        source_id, target_id, relationship_type = relationship_endpoints(relationship)
+        if not source_id and not target_id:
+            continue
+        rows.append(ResolvedRelationship(
+            relationship, source_id, target_id, relationship_type,
+            identities.get(source_id.casefold()), identities.get(target_id.casefold())))
+    return tuple(rows)
+
+
 def enterprise_associations(twin: SemanticTwin, enterprise: SemanticEnterprise,
                             kinds: set[str]) -> tuple[tuple[SemanticObject, str, str], ...]:
     """Resolve canonical ownership and explicit relationships in either direction."""
@@ -218,15 +253,16 @@ def enterprise_associations(twin: SemanticTwin, enterprise: SemanticEnterprise,
         if any(matches(owner) for owner in owners if owner):
             label = "Owned programme" if obj.kind == "transformation_programme" else "Explicit enterprise relationship"
             found[business_object_id(obj)] = (obj, label, "canonical ownership")
-    for relationship in twin.objects:
-        source, target, relationship_type = relationship_endpoints(relationship)
-        if not source or not target:
+    for resolved in resolve_relationships(twin):
+        source, target, relationship_type = (resolved.source_id, resolved.target_id,
+                                             resolved.relationship_type)
+        if not resolved.resolved:
             continue
         other = target if matches(source) else source if matches(target) else ""
         related = objects.get(other.casefold())
         if related:
             found[business_object_id(related)] = (
-                related, relationship_type, business_object_id(relationship))
+                related, relationship_type, business_object_id(resolved.relationship))
     return tuple(found[key] for key in sorted(found))
 
 

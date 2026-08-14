@@ -425,15 +425,13 @@ def test_upload_page_shows_current_deployed_change_acceptance_panel(monkeypatch,
     assert panel < upload
     assert "CURRENT PILOT CHANGE" not in page
     assert "Researcher-to-Flora Translation Audit" not in page
-    assert "Executive Experience and Human Governance Correction" in page
+    assert "Enterprise Relationship and Factual Dimension Reconciliation" in page
     assert "88f053e6cee6fe2fef7feba1e7f4553194b7a040" in page
     assert "Status" in page and "Should I test now?" in page and "Next action" in page
     assert "Technical deployment evidence" in page
     assert "<details><summary>Technical deployment evidence</summary>" in page
-    assert "align pilot governance language with the Chief Architect" in page
-    assert "Industry Overview" in page and "No raw dictionaries" in page
-    assert "correct programme and opportunity associations" in page.casefold()
-    assert "Explicit Reinvention dispositions" in page
+    assert "canonically related Programmes and Opportunities" in page
+    assert "Relationship Resolution, Enterprise Association and Executive Dimension reconciliation" in page
     assert "Fresh import required:</strong> No" in page
     assert "Tel001 Fixture Checksum" in page and "Checksum Status" in page
     assert "Known limitations" in page
@@ -480,7 +478,8 @@ def _change(**overrides):
 def test_deployment_status_merge_commit_scenario(monkeypatch):
     monkeypatch.setattr("cios.applications.flora.blueprint_import.deployment_status._git_contains", lambda deployed, source: "contains expected source commit")
     decision = decide_deployment_status(_change(commit_sha="mergecommit", deployed_change_marker="Unavailable"), "2026-08-05T12:05:00+00:00")
-    assert decision.status_code == "READY FOR TESTING"
+    assert decision.status_code == "READY TO TEST — DEPLOYMENT NOT FULLY VERIFIED"
+    assert decision.should_test_now.startswith("Yes")
 
 
 def test_deployment_status_squash_merge_scenario(monkeypatch):
@@ -492,12 +491,13 @@ def test_deployment_status_squash_merge_scenario(monkeypatch):
 def test_deployment_status_later_main_commit_scenario(monkeypatch):
     monkeypatch.setattr("cios.applications.flora.blueprint_import.deployment_status._git_contains", lambda deployed, source: "contains expected source commit")
     decision = decide_deployment_status(_change(commit_sha="latermain", deployed_change_marker="Unavailable"), "2026-08-05T12:05:00+00:00")
-    assert decision.status_code == "READY FOR TESTING"
+    assert decision.status_code == "READY TO TEST — DEPLOYMENT NOT FULLY VERIFIED"
+    assert decision.should_test_now.startswith("Yes")
 
 
 def test_deployment_status_pending_scenario(monkeypatch):
     monkeypatch.setattr("cios.applications.flora.blueprint_import.deployment_status._git_contains", lambda deployed, source: "does not contain expected source commit")
-    decision = decide_deployment_status(_change(commit_sha="older", deployed_change_marker="Unavailable", deployment_started_at="2026-08-05T23:59:00+00:00"), "2026-08-05T12:05:00+00:00")
+    decision = decide_deployment_status(_change(commit_sha="older", deployed_change_marker="Unavailable", deployment_started_at="2099-08-05T23:59:00+00:00"), "2026-08-05T12:05:00+00:00")
     assert decision.status_code == "WAITING FOR DEPLOYMENT"
 
 
