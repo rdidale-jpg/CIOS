@@ -1,19 +1,18 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "TEL-001-ENTERPRISE-CANONICAL-IDENTITY-HANDOFF-2026-08-15",
-  "title": "Enterprise Canonical Identity Handoff Correction",
-  "objective": "Ensure Flora uses the imported Enterprise's canonical Twin object identity, rather than its route/display identity, when querying candidate relationships.",
+  "change_id": "TEL-001-ENTERPRISE-IDENTITY-PROPAGATION-CORRECTION-2026-08-15",
+  "title": "Enterprise Canonical Identity Propagation Correction",
+  "objective": "Preserve the governed identity lineage from imported Enterprise objects into Flora's executive read model so candidate Relationships can be queried correctly.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Separated import-scoped Enterprise presentation identity from the canonical candidate identity already owned by the assembled semantic Twin.",
-    "Resolved Enterprise routes to their candidate view models before invoking the single canonical Relationship association query.",
-    "Made presentation and canonical identities visible beside independent source/query/render exact-set reconciliation."
+    "Made the semantic Twin constructor preserve staging's original external stable ID when the source does not redundantly provide enterprise_id.",
+    "Exposed source, staged-candidate, executive presentation, and relationship-subject identities as separate governed read-model values.",
+    "Reconciled independent source Relationship endpoints with query and rendered exact business-object ID sets."
   ],
   "expected_visible_outcomes": [
-    "Advanced Inspection shows presentation identity → canonical candidate identity → source expected associations → queried associations → rendered associations.",
-    "BT Group shows bt-group → ENT-BT, 1 Programme, and 3 Opportunities.",
-    "All six TEL-001 Enterprise source/query/render exact ID sets match.",
-    "Protected populations remain 17 Opportunities and 13 Programmes; candidate governance and factual isolation are unchanged."
+    "Advanced Inspection shows source identity \u2192 candidate identity \u2192 executive identity \u2192 relationship subject identity \u2192 source/query/rendered association sets.",
+    "BT Group shows source ENT-BT, presentation bt-group, 1 Programme, and 3 Opportunities.",
+    "All six Enterprises reconcile while 17 Opportunities, 13 Programmes, factual isolation, and candidate governance remain protected."
   ],
   "affected_pages": [
     "Import Twin",
@@ -34,7 +33,7 @@
   ],
   "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
   "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
-  "fresh_import_policy": "No fresh import is required because this is an import-scoped read/query identity handoff and persisted candidate state is unchanged.",
+  "fresh_import_policy": "No fresh import is required: staging already persists original_source_id; the correction exposes that retained lineage in the read-model constructor.",
   "known_limitations": [
     "Operating Model raw dictionary rendering remains out of scope.",
     "Financial Position diagnostic/presentation disagreement remains out of scope."
@@ -51,7 +50,7 @@
     "last_validation_timestamp": "2026-08-14T00:00:00Z"
   },
   "merge_gate": "SAFE TO MERGE",
-  "operator_validation_status": "PASS — exact association sets and rendered routes reconciled",
+  "operator_validation_status": "PASS \u2014 exact association sets and rendered routes reconciled",
   "diagnostics_href": "/deployment",
   "source_commit_sha": "88f053e6cee6fe2fef7feba1e7f4553194b7a040",
   "merged_commit_sha": "unknown",
@@ -63,7 +62,7 @@
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
   "material_runtime_components_changed": [
-    "Enterprise route-to-view-model identity handoff",
+    "Semantic Enterprise canonical lineage construction",
     "Advanced Inspection identity reconciliation",
     "Import Twin operational panel"
   ],
@@ -73,6 +72,6 @@
   "start_command": "unknown",
   "auto_deploy": "unknown",
   "latest_deployment_status": "unknown",
-  "fresh_import_required": "No — persisted candidate identities and relationships are unchanged.",
-  "audit_result_href": "/docs/operations/flora/TEL-001-Enterprise-Canonical-Identity-Handoff.md"
+  "fresh_import_required": "No \u2014 original_source_id is already persisted on every staged candidate.",
+  "audit_result_href": "/docs/operations/flora/TEL-001-Enterprise-Identity-Propagation-Root-Cause.md"
 }

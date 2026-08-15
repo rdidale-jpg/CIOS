@@ -490,7 +490,7 @@ def test_tel001_enterprise_association_correction_is_visible_on_import_screen(mo
     from cios.applications.flora.blueprint_import.views import import_blueprint_entry_page
     from cios.applications.flora.blueprint_import import pilot_change
 
-    change_id = "TEL-001-ENTERPRISE-ASSOCIATION-CONSUMER-CORRECTION-2026-08-14"
+    change_id = "TEL-001-ENTERPRISE-IDENTITY-PROPAGATION-CORRECTION-2026-08-15"
     monkeypatch.setattr(pilot_change, "deployment_metadata", lambda: {
         "deployed_change_marker": change_id,
         "branch": "Unavailable — deployment metadata not configured",
@@ -500,9 +500,9 @@ def test_tel001_enterprise_association_correction_is_visible_on_import_screen(mo
     html, status = import_blueprint_entry_page({})
 
     assert status == 200
-    assert "Enterprise Canonical Identity Handoff Correction" in html
-    assert "canonical Twin object identity" in html
-    assert "bt-group → ENT-BT" in html
+    assert "Enterprise Canonical Identity Propagation Correction" in html
+    assert "governed identity lineage" in html
+    assert "source ENT-BT, presentation bt-group" in html
     assert "Ready for functional test — deployment metadata incomplete" in html
     assert "Should I test now?" in html and ">YES<" in html
     assert "Known limitation: Deployment metadata incomplete" in html
