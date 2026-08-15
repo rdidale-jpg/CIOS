@@ -1,18 +1,18 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "TEL-001-ENTERPRISE-IDENTITY-PROPAGATION-CORRECTION-2026-08-15",
-  "title": "Enterprise Canonical Identity Propagation Correction",
-  "objective": "Preserve the governed identity lineage from imported Enterprise objects into Flora's executive read model so candidate Relationships can be queried correctly.",
+  "change_id": "TEL-001-ENTERPRISE-FACTUAL-PRESENTATION-RECONCILIATION-2026-08-15",
+  "title": "Enterprise Factual Presentation Reconciliation",
+  "objective": "Ensure factual intelligence supplied by an imported Twin survives the governed factual pipeline and is represented accurately in Enterprise executive views without being confused with assessment or recommendation.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Made the semantic Twin constructor preserve staging's original external stable ID when the source does not redundantly provide enterprise_id.",
-    "Exposed source, staged-candidate, executive presentation, and relationship-subject identities as separate governed read-model values.",
-    "Reconciled independent source Relationship endpoints with query and rendered exact business-object ID sets."
+    "Extended the existing Canonical Factual Projection with a governed Enterprise dimension read contract.",
+    "Made Enterprise list, dossier and Advanced Inspection consume the same factual presence decisions.",
+    "Rendered structured candidate facts as human-readable values while preserving evidence, Unknowns, Contradictions and candidate governance."
   ],
   "expected_visible_outcomes": [
-    "Advanced Inspection shows source identity \u2192 candidate identity \u2192 executive identity \u2192 relationship subject identity \u2192 source/query/rendered association sets.",
-    "BT Group shows source ENT-BT, presentation bt-group, 1 Programme, and 3 Opportunities.",
-    "All six Enterprises reconcile while 17 Opportunities, 13 Programmes, factual isolation, and candidate governance remain protected."
+    "Supplied Enterprise facts are visible and are not hidden behind pending assessment.",
+    "Structured facts render human-readably; genuinely missing facts remain visibly missing.",
+    "Diagnostics and executive pages agree; Programme and Opportunity associations remain working."
   ],
   "affected_pages": [
     "Import Twin",
@@ -23,20 +23,20 @@
     "Opportunities"
   ],
   "unchanged_areas": [
-    "Archive and manifest ingestion, validation, candidate creation, relationship resolver, TEL-001 fixture, Canonical Factual Projection, promotion, review, assessment, recommendation, and Observation architecture remain unchanged."
+    "Protected: 308 Relationship candidates; working Enterprise identity lineage and associations; 13 Programmes; 17 Opportunities; factual dimension isolation; candidate governance."
   ],
   "required_test_steps": [
-    "Open Import Twin and Advanced Inspection.",
-    "Open all six TEL-001 Enterprise presentation routes and reconcile canonical identities and exact association IDs.",
-    "Confirm BT excludes PROG-BT-VERIZON-JV and includes OPP-BT-VERIZON-JV-INTEGRATION.",
-    "Confirm Programme and Opportunity populations remain 13 and 17."
+    "Open Import Twin, Explore Twin and Advanced Inspection.",
+    "Open all six TEL-001 Enterprise dossiers and inspect every factual dimension.",
+    "Confirm factual content remains visible with assessment not yet performed and no raw dictionaries render.",
+    "Confirm 308 Relationships, 13 Programmes, 17 Opportunities and exact Enterprise associations remain reconciled."
   ],
   "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
   "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
-  "fresh_import_policy": "No fresh import is required: staging already persists original_source_id; the correction exposes that retained lineage in the read-model constructor.",
+  "fresh_import_policy": "No fresh import is required: source and candidate factual objects are already retained; only the shared read/projection and presentation owners changed.",
   "known_limitations": [
-    "Operating Model raw dictionary rendering remains out of scope.",
-    "Financial Position diagnostic/presentation disagreement remains out of scope."
+    "Enterprise Economics and Leadership / Governance are architectural intent not implemented as independent TEL-001 runtime dimensions.",
+    "Industry/domain remains Not established because TEL-001 Enterprise candidates carry no explicit semantic domain and Twin membership is not treated as proof."
   ],
   "automated_validation": {
     "tel001_fixture_checksum": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
@@ -50,7 +50,7 @@
     "last_validation_timestamp": "2026-08-14T00:00:00Z"
   },
   "merge_gate": "SAFE TO MERGE",
-  "operator_validation_status": "PASS \u2014 exact association sets and rendered routes reconciled",
+  "operator_validation_status": "PASS — exact association sets and rendered routes reconciled",
   "diagnostics_href": "/deployment",
   "source_commit_sha": "88f053e6cee6fe2fef7feba1e7f4553194b7a040",
   "merged_commit_sha": "unknown",
@@ -62,9 +62,10 @@
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
   "material_runtime_components_changed": [
-    "Semantic Enterprise canonical lineage construction",
-    "Advanced Inspection identity reconciliation",
-    "Import Twin operational panel"
+    "Canonical Factual Projection",
+    "Executive factual presentation",
+    "Advanced Inspection",
+    "Research Gap logic"
   ],
   "reimport_required_if_older_than_change": "Unavailable",
   "repository": "unknown",
@@ -72,6 +73,6 @@
   "start_command": "unknown",
   "auto_deploy": "unknown",
   "latest_deployment_status": "unknown",
-  "fresh_import_required": "No \u2014 original_source_id is already persisted on every staged candidate.",
-  "audit_result_href": "/docs/operations/flora/TEL-001-Enterprise-Identity-Propagation-Root-Cause.md"
+  "fresh_import_required": "No — retained candidate/source data is sufficient.",
+  "audit_result_href": "/docs/operations/flora/TEL-001-Enterprise-Factual-Presentation-Correction.md"
 }
