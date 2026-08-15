@@ -1,8 +1,8 @@
 {
   "schema_version": "pilot-change-metadata-v2",
   "change_id": "TEL-001-ENTERPRISE-ASSOCIATION-CONSUMER-CORRECTION-2026-08-14",
-  "title": "Enterprise Association Consumer Correction",
-  "objective": "Make Enterprise dossiers consume the candidate Programme and Opportunity relationships already present and resolved in the imported Twin.",
+  "title": "Candidate Relationship Association Query Correction",
+  "objective": "Make Flora query the candidate relationships it already resolves so Enterprise Programmes and Opportunities reach the Enterprise dossier.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
     "Reused import-scoped candidate relationship resolution as the sole Enterprise association truth owner.",
@@ -16,7 +16,7 @@
     "VodafoneThree: 2 unique Programmes and 3 Opportunities.",
     "CityFibre: 1 Programme and 2 Opportunities.",
     "TalkTalk: 1 Programme and 2 Opportunities.",
-    "Advanced Inspection visibly reconciles resolved and rendered exact ID sets and reports truthful association anomalies.",
+    "Advanced Inspection visibly reconciles source expected, query-resolved, and rendered exact ID sets and reports truthful association anomalies.",
     "Protected populations remain 17 Opportunities and 13 Programmes; factual dimensions remain isolated; no candidate is automatically promoted."
   ],
   "affected_pages": [

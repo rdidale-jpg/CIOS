@@ -500,8 +500,8 @@ def test_tel001_enterprise_association_correction_is_visible_on_import_screen(mo
     html, status = import_blueprint_entry_page({})
 
     assert status == 200
-    assert "Enterprise Association Consumer Correction" in html
-    assert "Make Enterprise dossiers consume the candidate Programme and Opportunity relationships" in html
+    assert "Candidate Relationship Association Query Correction" in html
+    assert "Make Flora query the candidate relationships it already resolves" in html
     assert "PROG-BT-VERIZON-JV remains absent" in html
     assert "OPP-BT-VERIZON-JV-INTEGRATION appears" in html
     assert "Ready for functional test — deployment metadata incomplete" in html

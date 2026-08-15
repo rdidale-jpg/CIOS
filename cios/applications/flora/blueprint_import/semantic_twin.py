@@ -93,6 +93,28 @@ class ResolvedRelationship:
         return self.status.endswith("relationship resolved")
 
 
+@dataclass(frozen=True)
+class SubjectAssociation:
+    """One resolved relationship returned by the import-scoped read boundary."""
+    relationship_id: str
+    relationship_type: str
+    direction: str
+    subject_endpoint: str
+    related_endpoint: str
+    related_business_object_id: str
+    related_business_object_family: str
+    resolution_state: str
+    related_object: SemanticObject
+
+
+# These rules describe which endpoint is the Enterprise association subject;
+# locating a subject at either endpoint does not make arbitrary edges symmetric.
+ASSOCIATION_DIRECTIONS: Mapping[str, tuple[str, str]] = {
+    "Enterprise owns Programme": ("source", "transformation_programme"),
+    "Opportunity targets Enterprise": ("target", "opportunity"),
+}
+
+
 EXECUTIVE_FIELDS: Mapping[str, tuple[tuple[str, str], ...]] = {
     "industry_twin": (
         ("Industry profile", "industry_profile"),
@@ -257,6 +279,39 @@ def resolve_relationships(twin: SemanticTwin) -> tuple[ResolvedRelationship, ...
     return tuple(rows)
 
 
+def query_subject_associations(twin: SemanticTwin, subject_id: str,
+                               related_kinds: set[str] | None = None) -> tuple[SubjectAssociation, ...]:
+    """Return candidate-resolved association evidence for a subject in ``twin``.
+
+    ``twin`` is the candidate import scope.  Results retain every Relationship
+    row; deduplication belongs to consumers that present business objects.
+    Relationship-type rules determine the valid subject endpoint and therefore
+    preserve direction rather than treating the graph as generally undirected.
+    """
+    subject = subject_id.casefold()
+    results = []
+    for row in resolve_relationships(twin):
+        rule = ASSOCIATION_DIRECTIONS.get(row.relationship_type)
+        if not row.resolved or not rule:
+            continue
+        endpoint, family = rule
+        actual_subject = row.source_id if endpoint == "source" else row.target_id
+        related_endpoint = row.target_id if endpoint == "source" else row.source_id
+        related = row.target if endpoint == "source" else row.source
+        if actual_subject.casefold() != subject or related is None:
+            continue
+        if related_kinds is not None and related.kind not in related_kinds:
+            continue
+        results.append(SubjectAssociation(
+            business_object_id(row.relationship), row.relationship_type,
+            "outgoing" if endpoint == "source" else "incoming",
+            actual_subject, related_endpoint, business_object_id(related),
+            family, row.status, related,
+        ))
+    return tuple(sorted(results, key=lambda result: (result.related_business_object_id,
+                                                      result.relationship_id)))
+
+
 def enterprise_associations(twin: SemanticTwin, enterprise: SemanticEnterprise,
                             kinds: set[str]) -> tuple[tuple[SemanticObject, str, str], ...]:
     """Consume resolved, typed relationships for one import-scoped Enterprise.
@@ -266,38 +321,17 @@ def enterprise_associations(twin: SemanticTwin, enterprise: SemanticEnterprise,
     Opportunity targets Enterprise edge runs Opportunity -> Enterprise.  The
     consumer intentionally does not treat object prose/owner fields as edges.
     """
-    ids = {enterprise.identity_key.casefold(), enterprise.name.casefold(),
-           *(alias.casefold() for alias in enterprise.aliases)}
     objects = {business_object_id(obj).casefold(): obj for obj in twin.objects if obj.kind in kinds}
     found: dict[str, tuple[SemanticObject, str, str]] = {}
 
-    def matches(endpoint: str) -> bool:
-        value = endpoint.casefold()
-        return value in ids or value.split(":", 1)[0] in ids
-
-    for resolved in resolve_relationships(twin):
-        if not resolved.resolved:
-            continue
-        source, target, relationship_type = (resolved.source_id, resolved.target_id,
-                                             resolved.relationship_type)
-        if (relationship_type == "Enterprise owns Programme"
-                and matches(source) and resolved.target
-                and resolved.target.kind == "transformation_programme"):
-            other = target
-        elif (relationship_type == "Opportunity targets Enterprise"
-              and matches(target) and resolved.source
-              and resolved.source.kind in {"opportunity_hypothesis", "opportunity",
-                                           "ranked_opportunity", "opportunity_twin"}):
-            other = source
-        else:
-            continue
-        related = objects.get(other.casefold())
+    for association in query_subject_associations(twin, enterprise.identity_key, kinds):
+        related = objects.get(association.related_business_object_id.casefold())
         if related:
             identity = business_object_id(related)
             # Executive presentation is by business-object identity.  Retain a
             # stable relationship row for its type/ID explainability.
-            found.setdefault(identity, (related, relationship_type,
-                                         business_object_id(resolved.relationship)))
+            found.setdefault(identity, (related, association.relationship_type,
+                                         association.relationship_id))
     return tuple(found[key] for key in sorted(found))
 
 
