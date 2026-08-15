@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from collections import Counter
+from dataclasses import replace
 import json
 import logging
 import os
@@ -26,6 +27,7 @@ from .promotion import CanonicalPromotionRepository, CanonicalPromotionService, 
 from .registry import BlueprintPackageRegistry
 from .pilot_change import current_pilot_change, latest_import_record
 from .deployment_status import decide_deployment_status
+from .runtime_proof import proof_html, runtime_proof
 from .review import (CandidateReviewRepository, CandidateReviewService,
                      ImportHumanReviewRepository, can_review_blueprint_candidate,
                      mark_import_reviewed)
@@ -129,6 +131,9 @@ def _pilot_change_record_section(headers: Any) -> str:
     candidate_fingerprint = _candidate_runtime_fingerprint(latest)
     change["candidate_runtime_fingerprint"] = candidate_fingerprint
     decision = decide_deployment_status(change, imported_at)
+    route_proof = runtime_proof()
+    if route_proof.commit_match == "NO" or not route_proof.bt_route_connected or not route_proof.advanced_inspection_connected:
+        decision = replace(decision, should_test_now="NO", next_action=route_proof.reason)
     auto = change.get("automated_validation") or {}
     links = {
         "Industry Overview": "/blueprint-import/history#industry-overview",
@@ -179,6 +184,7 @@ def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, i
     authorisation = "<p><span class='pill'>PILOT</span></p>" if bypass else _authorisation_context(decision)
     body = _workflow_progress("upload") + authorisation + access_notice + f"""{_notice(message)}
     {_pilot_change_record_section(headers)}
+    {proof_html()}
     <style>.twin-import-form{{display:flex;max-width:34rem;flex-direction:column;align-items:stretch;gap:1rem}}.twin-import-field{{display:flex;flex-direction:column;gap:.4rem}}.twin-import-field label{{font-weight:700}}.twin-import-field input[type='file'],.twin-import-field select{{box-sizing:border-box;width:100%;position:static;pointer-events:auto;opacity:1}}.twin-import-field input[type='file']:focus-visible,.twin-import-field select:focus-visible{{outline:3px solid #185c4d;outline-offset:2px}}.twin-import-actions{{margin:0}}</style>
     <header class='hero'><h1>Import Twin</h1></header><section class='card'><p><strong>Please choose the import type and file.</strong> Commercial Mission or an existing Twin selection is not required.</p><form class='twin-import-form' method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><div class='twin-import-field'><label for='expected_type'>Twin type</label><select id='expected_type' name='expected_type' required>{''.join(f"<option value='{t}'>{escape(t.replace('_',' ').title())}</option>" for t in TWIN_TYPES)}</select></div><div class='twin-import-field'><label for='twin-package'>Twin package</label><input id='twin-package' name='blueprint_zip' type='file' accept='.zip,application/zip' required></div><p class='twin-import-actions'><button type='submit'>Upload Twin</button></p><p class='muted'>Packages may contain confidential candidate intelligence. Upload only packages you are authorised to use. Imported records remain candidates and are never promoted automatically.</p><p><a href='/digital-twins'>Cancel</a></p></form></section>
     <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous package imports</a></p></section>"""
