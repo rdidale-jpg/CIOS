@@ -19,7 +19,7 @@ from cios.applications.flora.workspace.views import _page
 from .registry import BlueprintPackageRegistry
 from .industry_delta_adapter import IndustryTwinDeltaAdapter
 from .canonical_factual_projection import (
-    CanonicalFactualProjection, EnterpriseFactualDimension, enterprise_factual_dimensions,
+    CanonicalFactualProjection, EnterpriseFactualDimension, enterprise_factual_dimensions, enterprise_factual_synthesis,
     executive_value_lines, factual_projection_for_enterprise, factual_projection_for_object,
 )
 from .intelligence_projection import executive_assessments
@@ -106,7 +106,7 @@ def _canonical_factual_html(projection: CanonicalFactualProjection, *, include_s
     evidence = _linked_list("Evidence", projection.evidence_refs, "No linked Evidence supplied.")
     unknowns = _linked_list("Unknowns", projection.unknown_refs, "No explicit Unknowns supplied.")
     contradictions = _linked_list("Contradictions", projection.contradiction_refs, "No explicit Contradictions supplied.")
-    relationships = _linked_list("Relationships", projection.relationship_refs, "No relationship references supplied.")
+    relationships = _linked_list("Relationships", projection.relationship_refs, "No relationship references embedded in this factual record.")
     return (f"{state}<section class='card executive-facts' id='factual-intelligence'>"
             f"<h2>{escape(projection.family)} facts</h2>{facts}"
             f"<details><summary>Evidence and uncertainty</summary>"
@@ -769,7 +769,8 @@ def _dossier(ent, twin, run_id, mission):
     factual_html = _canonical_factual_html(factual)
     relevant = list(ent.records)
     identity = next((o for o in relevant if o.kind in {"enterprise", "enterprise_twin", "entity"}), None)
-    description = _field(identity, "organisation_description", "overview", "description", "summary") if identity else ""
+    synthesis = enterprise_factual_synthesis(ent)
+    description = synthesis.statement if synthesis.status == "GENERATED" else ""
     domains = sorted({d.title() for o in relevant for d in o.domains})
     missing_overview = [label for label, value in (("plain-language description", description),
         ("ownership or organisational form", _field(identity, "ownership", "organisational_form") if identity else ""),
@@ -1453,7 +1454,7 @@ def _population_and_association_reconciliation(twin: SemanticTwin) -> str:
             "<table><thead><tr><th>Family</th><th>Source objects</th><th>Candidate objects</th><th>Unique canonical identities</th><th>Executive/rendered entities</th><th>Duplicates</th><th>Supporting records incorrectly classified</th><th>Population reconciliation</th></tr></thead><tbody>"+"".join(population_rows)+"</tbody></table></section>"
             "<section class='card' id='enterprise-association-reconciliation'><h2>Enterprise Identity and Association Reconciliation</h2>"
             "<table><thead><tr><th>Enterprise</th><th>Source identity</th><th>Candidate identity</th><th>Executive/presentation identity</th><th>Relationship subject identity</th><th>Source Programme IDs</th><th>Query Programme IDs</th><th>Rendered Programme IDs</th><th>Source Opportunity IDs</th><th>Query Opportunity IDs</th><th>Rendered Opportunity IDs</th><th>Missing at query</th><th>Missing at render</th><th>Unexpected</th><th>Duplicates collapsed</th><th>Status</th></tr></thead><tbody>"+"".join(association_rows)+"</tbody></table></section>"
-            "<section class='card' id='enterprise-factual-presentation-reconciliation'><h2>ENTERPRISE FACTUAL PRESENTATION RECONCILIATION</h2><table><thead><tr><th>Enterprise</th><th>Dimension</th><th>Source</th><th>Candidate</th><th>Canonical factual state</th><th>Executive factual state</th><th>Rendered state</th><th>Evidence count</th><th>Unknown count</th><th>Contradiction count</th><th>Assessment state</th><th>Status</th><th>First divergence</th></tr></thead><tbody>"+"".join(dimension_rows)+"</tbody></table></section>")
+            "<section class='card' id='enterprise-factual-presentation-reconciliation'><h2>ENTERPRISE FACTUAL PRESENTATION RECONCILIATION</h2><table><thead><tr><th>Enterprise</th><th>Dimension</th><th>Source</th><th>Candidate</th><th>Canonical factual state</th><th>Executive factual state</th><th>Rendered state</th><th>Evidence count</th><th>Unknown count</th><th>Contradiction count</th><th>Assessment state</th><th>Status</th><th>First divergence</th></tr></thead><tbody>"+"".join(dimension_rows)+"</tbody></table></section>"+_enterprise_factual_synthesis_diagnostics(twin))
 
 
 def _observation_pipeline_diagnostics(twin: SemanticTwin, run_id: str) -> str:
@@ -1481,6 +1482,29 @@ def _observation_pipeline_diagnostics(twin: SemanticTwin, run_id: str) -> str:
             "This section does not modify import, mappings, promotion, canonical semantics or runtime decisions.</p>"
             "<p>Select any object below to inspect the field and runtime pipeline trace from source object to rendered page.</p>"
             + "".join(articles) + "</section>")
+
+
+def _enterprise_factual_synthesis_diagnostics(twin: SemanticTwin) -> str:
+    """Expose CFP synthesis lineage without adding implementation detail to dossiers."""
+    rows = []
+    for ent in twin.enterprises:
+        trace = enterprise_factual_synthesis(ent)
+        values = lambda items: ", ".join(items) or "None"
+        rows.append(
+            f"<tr><td>{escape(ent.name)}</td><td>{escape(trace.status)}</td>"
+            f"<td>{escape(trace.statement or 'Truthful absence')}</td>"
+            f"<td>{escape(values(trace.input_dimensions))}</td>"
+            f"<td>{escape(values(trace.input_fact_ids))}</td>"
+            f"<td>{escape(values(trace.evidence_refs))}</td><td>{escape(trace.confidence)}</td>"
+            f"<td>{escape(values(trace.unknown_refs))}</td>"
+            f"<td>{escape(values(trace.contradiction_refs))}</td><td>NO</td></tr>"
+        )
+    return ("<section class='card' id='enterprise-factual-synthesis-trace'>"
+            "<h2>ENTERPRISE FACTUAL SYNTHESIS TRACE</h2>"
+            "<table><thead><tr><th>Enterprise</th><th>Synthesis status</th><th>Synthesized statement</th>"
+            "<th>Input factual dimensions</th><th>Input fact IDs</th><th>Evidence refs</th>"
+            "<th>Confidence</th><th>Unknowns preserved</th><th>Contradictions preserved</th>"
+            "<th>Assessment required</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table></section>")
 
 
 def _observation_pipeline_empty_family(family: str) -> str:

@@ -14,8 +14,8 @@ from cios.applications.flora.live.runtime import deployment_metadata
 from .cios_twin_adapter import MAPPING_VERSION
 from .semantic_twin import SemanticEnterprise, SemanticObject, executive_record_view_model
 
-CANONICAL_FACTUAL_PROJECTION_VERSION = "canonical-factual-projection-v3"
-EXECUTIVE_PROJECTION_VERSION = "executive-factual-presentation-v3"
+CANONICAL_FACTUAL_PROJECTION_VERSION = "canonical-factual-projection-v4"
+EXECUTIVE_PROJECTION_VERSION = "executive-factual-presentation-v4"
 OWNER_ASSESSMENT_INPUT_VERSION = "owner-assessment-factual-input-v1"
 
 
@@ -90,6 +90,22 @@ class EnterpriseFactualDimension:
         if not self.supported:
             return "UNSUPPORTED"
         return "PASS" if self.present else "EXPECTED ABSENCE"
+
+
+@dataclass(frozen=True)
+class EnterpriseFactualSynthesis:
+    """Explainable composition of qualifying facts already held by the CFP."""
+    status: str
+    statement: str
+    input_dimensions: tuple[str, ...]
+    input_fact_ids: tuple[str, ...]
+    evidence_refs: tuple[str, ...]
+    confidence: str
+    unknown_refs: tuple[str, ...]
+    contradiction_refs: tuple[str, ...]
+    source_object: str
+    candidate_object: str
+    assessment_required: bool = False
 
 
 def executive_value_lines(value: Any) -> tuple[str, ...]:
@@ -251,6 +267,22 @@ def enterprise_factual_dimensions(ent: SemanticEnterprise) -> tuple[EnterpriseFa
             unknowns, contradictions, supported,
         ))
     return tuple(result)
+
+
+def enterprise_factual_synthesis(ent: SemanticEnterprise) -> EnterpriseFactualSynthesis:
+    """Compose qualifying CFP facts without inference, assessment or persistence."""
+    identity = next((o for o in ent.records if o.kind in {"enterprise", "enterprise_twin", "entity"}), ent.records[0])
+    dimensions = {d.key: d for d in enterprise_factual_dimensions(ent)}
+    qualifying = [dimensions[key] for key in ("profile", "operating-model", "strategy") if dimensions[key].present]
+    source = identity.original_id or identity.record_id
+    unknowns = tuple(dict.fromkeys(x for d in qualifying for x in d.unknown_refs))
+    contradictions = tuple(dict.fromkeys(x for d in qualifying for x in d.contradiction_refs))
+    evidence = tuple(dict.fromkeys(x for d in qualifying for x in d.evidence_refs))
+    if not dimensions["profile"].present or len(qualifying) < 2:
+        return EnterpriseFactualSynthesis("INSUFFICIENT EVIDENCE", "", tuple(d.key for d in qualifying), (), evidence, identity.confidence or "Not supplied", unknowns, contradictions, source, identity.record_id)
+    selected = [(d, d.values[0].strip()) for d in qualifying if d.values[0].strip()]
+    statement = " ".join(value if value.endswith((".", "!", "?")) else value + "." for _, value in selected)
+    return EnterpriseFactualSynthesis("GENERATED", statement, tuple(d.key for d, _ in selected), tuple(f"FACT-{source}-{d.key.upper()}" for d, _ in selected), evidence, identity.confidence or "Not supplied", unknowns, contradictions, source, identity.record_id)
 
 
 def _family(kind: str) -> str:
