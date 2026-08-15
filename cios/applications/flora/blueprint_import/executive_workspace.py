@@ -19,7 +19,8 @@ from cios.applications.flora.workspace.views import _page
 from .registry import BlueprintPackageRegistry
 from .industry_delta_adapter import IndustryTwinDeltaAdapter
 from .canonical_factual_projection import (
-    CanonicalFactualProjection, executive_value_lines, factual_projection_for_enterprise, factual_projection_for_object,
+    CanonicalFactualProjection, EnterpriseFactualDimension, enterprise_factual_dimensions,
+    executive_value_lines, factual_projection_for_enterprise, factual_projection_for_object,
 )
 from .intelligence_projection import executive_assessments
 from .pilot_diagnostics import (
@@ -115,6 +116,21 @@ def _canonical_factual_html(projection: CanonicalFactualProjection, *, include_s
 def _linked_list(title: str, values: tuple[str, ...], empty: str) -> str:
     items = "".join(f"<li><code>{escape(value)}</code></li>" for value in values) or f"<li>{escape(empty)}</li>"
     return f"<section><h3>{escape(title)}</h3><ul>{items}</ul></section>"
+
+
+def _enterprise_dimension_html(dimension: EnterpriseFactualDimension) -> str:
+    """Render the shared factual contract; never infer assessment from presence."""
+    if not dimension.supported:
+        body = "<p><strong>Architectural intent — not implemented.</strong></p>"
+    elif not dimension.present:
+        body = "<p><strong>Not supplied.</strong> No qualifying source-backed fact is present.</p>"
+    else:
+        body = "<ul>" + "".join(f"<li>{escape(value)}</li>" for value in dimension.values) + "</ul>"
+    uncertainty = (f"<details><summary>Evidence and uncertainty</summary><p><strong>Evidence:</strong> "
+                   f"{escape(', '.join(dimension.evidence_refs) or 'No linked evidence supplied')}</p>"
+                   f"<p><strong>Unknowns:</strong> {escape(', '.join(dimension.unknown_refs) or 'None supplied')}</p>"
+                   f"<p><strong>Contradictions:</strong> {escape(', '.join(dimension.contradiction_refs) or 'None supplied')}</p></details>")
+    return f"<section class='card factual-dimension' data-factual-dimension='{escape(dimension.key)}'><h2>{escape(dimension.label)}</h2>{body}{uncertainty}</section>"
 
 
 def _opportunity_contract(o: SemanticObject, mission: CommercialMission | None = None) -> tuple[bool, bool, list[str]]:
@@ -519,19 +535,12 @@ def _enterprise_index(twin, run_id, domain="all"):
 def _enterprise_card(e, run_id):
     identity = next((o for o in e.records if o.kind in {"enterprise", "enterprise_twin", "entity"}), None)
     domains = sorted({d.title() for o in e.records for d in o.domains})
-    description = _field(identity, "organisation_description", "description", "overview", "summary") if identity else ""
-    position = _field(identity, "strategic_ambition", "market_position", "current_position") if identity else ""
-    pressure = next((o.consequence for o in e.records if o.consequence and o.evidence_refs), "")
-    posture = _field(identity, "transformation_posture") if identity else ""
-    body = (f"<p>{escape(description)}</p>" if description else
-            "<p><strong>Organisation description pending owner assessment.</strong></p>")
-    body += f"<p><strong>Industry/domain:</strong> {escape(', '.join(domains) or 'Not established')}</p>"
-    if position:
-        body += f"<p><strong>Strategic position:</strong> {escape(position)}</p>"
-    if pressure:
-        body += f"<p><strong>Material pressure:</strong> {escape(pressure)}</p>"
-    if posture:
-        body += f"<p><strong>Transformation posture:</strong> {escape(posture)}</p>"
+    dimensions = {d.key: d for d in enterprise_factual_dimensions(e)}
+    profile = dimensions["profile"]
+    industry = dimensions["industry"]
+    body = (f"<p>{escape(profile.values[0])}</p>" if profile.present else
+            "<p><strong>Organisation description not supplied.</strong></p>")
+    body += f"<p><strong>Industry/domain:</strong> {escape(', '.join(industry.values) or 'Not established')}</p>"
     body += "<p><span class='pill'>Imported candidate · assessment not yet performed</span></p>"
     canonical_fields = ""
     if identity:
@@ -786,26 +795,20 @@ def _dossier(ent, twin, run_id, mission):
             for label, value in executive_record_view_model(identity).fields
             if label != "Overview"
         )
+    dimensions = {d.key: d for d in enterprise_factual_dimensions(ent)}
     sections = [f"<section class='card' id='enterprise-overview'><h2>Organisation Overview</h2>{overview}{canonical_detail}</section>", factual_html]
-    operating = _field(identity, "operating_model", "organisation", "business_units") if identity else ""
-    sections.append(f"<section class='card'><h2>Operating Model</h2><p><strong>{fact_state(present=bool(operating))}</strong></p><p><strong>Known:</strong> {escape(operating or 'No operating-model fact is supplied.')}</p><p><strong>Still required:</strong> operating model, business units and supporting evidence.</p></section>")
-    position = _field(identity, "strategic_ambition", "market_position", "current_position") if identity else ""
-    sections.append(f"<section class='card'><h2>Strategic Position and Ambition</h2><p>{escape(position)}</p></section>" if position else gap("Strategic Position and Ambition", "No supported strategic position is supplied.", ("strategic ambition", "market position", "supporting evidence"), "Without it Flora cannot explain the organisation's direction."))
-    financials=[o for o in relevant if o.kind in {"financial_observation","financial_fact","economic_pool"} and all((_field(o,'metric','measure'),_field(o,'value'),_field(o,'period'),_field(o,'source')))]
-    sections.append("<section class='card'><h2>Financial Position</h2>"+"".join(f"<p><strong>{escape(_field(o,'metric','measure'))}:</strong> {escape(_field(o,'value'))} · {escape(_field(o,'period'))} · {escape(_field(o,'source'))}</p>" for o in financials)+"</section>" if financials else gap("Financial Position", "No complete financial measure is supplied.", ("measure", "value and currency", "period", "source", "business interpretation"), "Financial position cannot be assessed from an evidence record alone."))
-    pressures=_pressure_items(twin,run_id,enterprise=ent.name)
-    sections.append("<section class='card'><h2>Material Pressures</h2>"+"".join(pressures)+"</section>" if pressures else gap("Material Pressures", "No evidenced pressure with a business consequence is supplied.", ("pressure", "business consequence", "timing", "evidence"), "The most material challenge cannot be explained."))
+    sections.extend(_enterprise_dimension_html(dimensions[key]) for key in (
+        "strategy", "operating-model", "financial", "economics", "pressures",
+        "leadership-governance", "technology", "supplier-ecosystem",
+    ))
     programmes=_associated_records(twin, ent, lambda o: o.kind=='transformation_programme'); ready_programmes=[o for o in programmes if o.statement or _field(o,'objective','business_objective','title')]
-    sections.append("<section class='card'><h2>Major Programmes</h2>"+"".join(f"<article data-business-object-id='{escape(business_object_id(o))}'><p class='pill'>{escape(_association_type(o, ent, twin) or 'Enterprise programme')}</p><h3>{escape(_field(o, 'title') or o.statement or _display(o, 'Programme'))}</h3><p>{escape(o.statement)}</p><p><strong>Stage:</strong> {escape(_field(o, 'phase', 'stage') or 'Not supplied')}</p><p><strong>Evidence:</strong> {escape(', '.join(o.evidence_refs) or 'Not supplied')}</p><p><strong>Unknowns:</strong> {escape(', '.join(_refs_for(o, 'unknown_refs', 'unknowns')) or 'None supplied')} · <strong>Contradictions:</strong> {escape(', '.join(_refs_for(o, 'contradiction_refs', 'contradictions')) or 'None supplied')}</p></article>" for o in ready_programmes)+"</section>" if ready_programmes else gap("Major Programmes", f"{len(programmes)} associated candidate records supplied.", ("canonically related programme",), "No programme can be shown without an explicit relationship."))
-    procurements=[o for o in relevant if o.kind in {"procurement","procurement_route","buying_centre"} or _field(o,'procurement_route','procuring_organisation')]
-    ready_proc=[o for o in procurements if (o.statement or _field(o,'requirement')) and _field(o,'stage','status') and _field(o,'timing','procurement_date') and _field(o,'buyer') and _field(o,'value') and _field(o,'award_status','supplier_outcome')]
-    sections.append("<section class='card'><h2>Known Procurements</h2>"+"".join(_procurement_item(o,ent.name) for o in ready_proc)+"</section>" if ready_proc else gap("Known Procurements", f"{len(procurements)} {plural(len(procurements), 'candidate record')} are associated with {escape(ent.name)}, but none identifies every mandatory procurement fact.", ("procurement description", "stage", "planned or actual start", "buyer", "value", "award or supplier outcome"), "The records cannot establish a live buying event."))
-    sections.append(gap("Reinvention Timing", "No supported enterprise timing assessment is supplied.", ("AI-native disruption mechanism", "exposure", "adoption indicators", "horizon", "response timing"), "Response urgency cannot be assessed."))
+    sections.append("<section class='card'><h2>Major Programmes</h2><p>Explicit enterprise relationship.</p>"+"".join(f"<article data-business-object-id='{escape(business_object_id(o))}'><p class='pill'>{escape(_association_type(o, ent, twin) or 'Enterprise programme')}</p><h3>{escape(_field(o, 'title') or o.statement or _display(o, 'Programme'))}</h3><p>{escape(o.statement)}</p><p><strong>Stage:</strong> {escape(_field(o, 'phase', 'stage') or 'Not supplied')}</p><p><strong>Evidence:</strong> {escape(', '.join(o.evidence_refs) or 'Not supplied')}</p><p><strong>Unknowns:</strong> {escape(', '.join(_refs_for(o, 'unknown_refs', 'unknowns')) or 'None supplied')} · <strong>Contradictions:</strong> {escape(', '.join(_refs_for(o, 'contradiction_refs', 'contradictions')) or 'None supplied')}</p></article>" for o in ready_programmes)+"</section>" if ready_programmes else gap("Major Programmes", f"{len(programmes)} associated candidate records supplied.", ("canonically related programme",), "No programme can be shown without an explicit relationship."))
+    sections.append(_enterprise_dimension_html(dimensions["procurements"]))
+    sections.append(_enterprise_dimension_html(dimensions["transformation"]))
     opportunities=_associated_records(twin, ent, lambda o: 'opportun' in o.kind); ready_opps=[o for o in opportunities if o.statement or _field(o,'client_problem','customer_problem','problem','title')]
     sections.append("<section class='card'><h2>Commercial Opportunities</h2>"+"".join(f"<div data-business-object-id='{escape(business_object_id(o))}'><p class='pill'>{escape(_association_type(o, ent, twin) or 'Enterprise opportunity')}</p>"+_opportunity_card(o,run_id)+"</div>" for o in ready_opps)+"</section>" if ready_opps else gap("Commercial Opportunities", f"{len(opportunities)} associated candidate records supplied.", ("canonically related opportunity",), "No opportunity can be shown without an explicit relationship."))
     sources=[o for o in relevant if o.kind=='evidence']
     source_html = "".join(_source_item(o) for o in sources) if sources else ("<ul>" + "".join(f"<li><code>{escape(ref)}</code></li>" for ref in factual.evidence_refs) + "</ul>" if factual.evidence_refs else "<p><strong>Insufficient.</strong> No directly linked sources are supplied.</p>")
-    sections.append("<section class='card'><h2>Technology and Ecosystem</h2><p>Technology, supplier and ecosystem facts are retained in the factual inventory above.</p><h3>Suppliers and Partners</h3><p>Supplied relationships are shown only where canonically linked.</p></section>")
     sections.append("<section class='card'><h2>Evidence and Uncertainty</h2>"+source_html+f"<p><strong>Unknowns:</strong> {len(factual.unknown_refs)} · <strong>Contradictions:</strong> {len(factual.contradiction_refs)}</p></section>")
     sections.append(f"<section class='card'><h2>Research Gaps</h2><p>The same completeness requirements shown above define the researcher brief.</p><a href='/blueprint-import/{escape(run_id)}/health'>Open Research Gaps</a></section>")
     sections.append(f"<section class='card'><h2>Advanced Inspection</h2><p>Incomplete records, evidence, lineage and candidate governance remain inspectable.</p><a href='/blueprint-import/{escape(run_id)}/explore'>Open Advanced Inspection</a></section>")
@@ -1432,23 +1435,25 @@ def _population_and_association_reconciliation(twin: SemanticTwin) -> str:
         ids = lambda values: ", ".join(escape(value) for value in values) or "None"
         association_rows.append(f"<tr><td>{escape(ent.name)}</td><td><code>{escape(ent.source_identity or 'Unknown')}</code></td><td><code>{escape(ent.candidate_identity or 'Unknown')}</code></td><td><code>{escape(ent.presentation_key)}</code></td><td><code>{escape(relationship_subject or 'Unknown')}</code></td><td>{ids(source_programmes)}</td><td>{ids(programme_ids)}</td><td>{ids(rendered_programmes)}</td><td>{ids(source_opportunities)}</td><td>{ids(opportunity_ids)}</td><td>{ids(rendered_opportunities)}</td><td>{ids(missing_query)}</td><td>{ids(missing_render)}</td><td>{ids(unexpected)}</td><td>{duplicate_rows}</td><td>{result}</td></tr>")
         identity = next((o for o in ent.records if o.kind in {"enterprise_twin", "enterprise", "entity"}), ent.records[0])
-        dimension_fields = (
-            ("Operating Model", ("operating_model", "operating_structure", "business_units")),
-            ("Strategic Position and Ambition", ("strategic_ambition", "market_position", "current_position")),
-            ("Financial Position", ("financial_context", "financials", "financial_intelligence")),
-            ("Material Pressures", ("pressures", "constraints")),
-            ("Known Procurements", ("procurement_intelligence",)),
-            ("Reinvention Timing", ("reinvention_assessment",)),
-        )
-        for dimension, fields in dimension_fields:
-            qualifying = [name for name in fields if (identity.attributes or {}).get(name) not in (None, "", [], {})]
-            state = "Present but incomplete" if qualifying else "Not established"
-            dimension_rows.append(f"<tr><td>{escape(ent.name)}</td><td>{escape(dimension)}</td><td>{escape(', '.join(qualifying) or 'None')}</td><td>{escape(', '.join(qualifying) or 'None')}</td><td>{state}</td><td>{escape(', '.join(fields) if not qualifying else 'Owner assessment')}</td><td>NO</td></tr>")
+        for dimension in enterprise_factual_dimensions(ent):
+            rendered = dimension.status
+            first_divergence = ("None" if rendered in {"PASS", "EXPECTED ABSENCE"}
+                                else "Architecture/runtime capability boundary")
+            dimension_rows.append(
+                f"<tr><td>{escape(ent.name)}</td><td>{escape(dimension.label)}</td>"
+                f"<td>{'Present' if dimension.present else 'Absent'}</td>"
+                f"<td>{'Present' if dimension.present else 'Absent'}</td>"
+                f"<td>{'Present' if dimension.present else 'Absent'}</td>"
+                f"<td>{'Present' if dimension.present else 'Absent'}</td>"
+                f"<td>{'Human-readable' if dimension.present else 'Truthful absence'}</td>"
+                f"<td>{len(dimension.evidence_refs)}</td><td>{len(dimension.unknown_refs)}</td>"
+                f"<td>{len(dimension.contradiction_refs)}</td><td>Assessment not yet performed</td>"
+                f"<td>{escape(rendered)}</td><td>{escape(first_divergence)}</td></tr>")
     return (relationship_summary+"<section class='card' id='business-object-population-reconciliation'><h2>Business Object Population Reconciliation</h2>"
             "<table><thead><tr><th>Family</th><th>Source objects</th><th>Candidate objects</th><th>Unique canonical identities</th><th>Executive/rendered entities</th><th>Duplicates</th><th>Supporting records incorrectly classified</th><th>Population reconciliation</th></tr></thead><tbody>"+"".join(population_rows)+"</tbody></table></section>"
             "<section class='card' id='enterprise-association-reconciliation'><h2>Enterprise Identity and Association Reconciliation</h2>"
             "<table><thead><tr><th>Enterprise</th><th>Source identity</th><th>Candidate identity</th><th>Executive/presentation identity</th><th>Relationship subject identity</th><th>Source Programme IDs</th><th>Query Programme IDs</th><th>Rendered Programme IDs</th><th>Source Opportunity IDs</th><th>Query Opportunity IDs</th><th>Rendered Opportunity IDs</th><th>Missing at query</th><th>Missing at render</th><th>Unexpected</th><th>Duplicates collapsed</th><th>Status</th></tr></thead><tbody>"+"".join(association_rows)+"</tbody></table></section>"
-            "<section class='card' id='executive-dimension-reconciliation'><h2>Executive Dimension Reconciliation</h2><table><thead><tr><th>Enterprise</th><th>Dimension</th><th>Qualifying factual fields</th><th>Selected projection</th><th>Rendered state</th><th>Missing requirements</th><th>Invalid fallback detected</th></tr></thead><tbody>"+"".join(dimension_rows)+"</tbody></table></section>")
+            "<section class='card' id='enterprise-factual-presentation-reconciliation'><h2>ENTERPRISE FACTUAL PRESENTATION RECONCILIATION</h2><table><thead><tr><th>Enterprise</th><th>Dimension</th><th>Source</th><th>Candidate</th><th>Canonical factual state</th><th>Executive factual state</th><th>Rendered state</th><th>Evidence count</th><th>Unknown count</th><th>Contradiction count</th><th>Assessment state</th><th>Status</th><th>First divergence</th></tr></thead><tbody>"+"".join(dimension_rows)+"</tbody></table></section>")
 
 
 def _observation_pipeline_diagnostics(twin: SemanticTwin, run_id: str) -> str:
@@ -1554,15 +1559,16 @@ def _enterprise_completeness(ent: SemanticEnterprise, mission: CommercialMission
     records = ent.records
     kinds = {o.kind for o in records}
     identity = next((o for o in records if o.kind in {"enterprise", "enterprise_twin", "entity"}), None)
-    overview = bool(identity and _field(identity, "description", "summary", "overview", "organisation_description"))
-    domains = any(o.domains for o in records)
+    factual = {d.key: d for d in enterprise_factual_dimensions(ent)}
+    overview = factual["profile"].present
+    domains = factual["industry"].present
     financial = [o for o in records if o.kind in {"financial_observation", "financial_fact", "economic_pool"}]
-    full_financial = any(all(_field(o, x) for x in ("metric", "value", "period", "source")) for o in financial)
+    full_financial = factual["financial"].present
     changes = [o for o in records if executive_insight_eligible(o)]
     programmes = [o for o in records if o.kind == "transformation_programme"]
-    themes = [o for o in records if _reinvention_kind(o) and (o.evidence_refs or o.kind == "transformation_programme")]
-    pressure = [o for o in themes if o.consequence and o.evidence_refs]
-    procurements = [o for o in records if o.kind in {"procurement", "procurement_route", "buying_centre"} or _field(o, "procurement_route", "procuring_organisation")]
+    themes = [identity] if identity and factual["transformation"].present else []
+    pressure = [identity] if identity and factual["pressures"].present else []
+    procurements = [identity] if identity and factual["procurements"].present else []
     opportunities = [o for o in records if "opportun" in o.kind]
     full_opportunity = any(o.statement and o.affected_organisations and _field(o, "client_problem", "customer_problem", "problem") and o.evidence_refs and (_field(o, "timing", "why_now", "deadline") or o.freshness == "unknown") for o in opportunities)
     relationships = [o for o in records if o.kind in {"relationship", "supplier_relationship"}]

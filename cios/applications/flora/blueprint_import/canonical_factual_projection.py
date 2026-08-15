@@ -14,8 +14,8 @@ from cios.applications.flora.live.runtime import deployment_metadata
 from .cios_twin_adapter import MAPPING_VERSION
 from .semantic_twin import SemanticEnterprise, SemanticObject, executive_record_view_model
 
-CANONICAL_FACTUAL_PROJECTION_VERSION = "canonical-factual-projection-v2"
-EXECUTIVE_PROJECTION_VERSION = "executive-factual-presentation-v2"
+CANONICAL_FACTUAL_PROJECTION_VERSION = "canonical-factual-projection-v3"
+EXECUTIVE_PROJECTION_VERSION = "executive-factual-presentation-v3"
 OWNER_ASSESSMENT_INPUT_VERSION = "owner-assessment-factual-input-v1"
 
 
@@ -67,6 +67,29 @@ class CanonicalFactualProjection:
     @property
     def has_facts(self) -> bool:
         return any(section.present for section in self.sections)
+
+
+@dataclass(frozen=True)
+class EnterpriseFactualDimension:
+    """One governed Enterprise factual read contract shared by every surface."""
+    key: str
+    label: str
+    values: tuple[str, ...]
+    source_fields: tuple[str, ...]
+    evidence_refs: tuple[str, ...]
+    unknown_refs: tuple[str, ...]
+    contradiction_refs: tuple[str, ...]
+    supported: bool = True
+
+    @property
+    def present(self) -> bool:
+        return bool(self.values)
+
+    @property
+    def status(self) -> str:
+        if not self.supported:
+            return "UNSUPPORTED"
+        return "PASS" if self.present else "EXPECTED ABSENCE"
 
 
 def executive_value_lines(value: Any) -> tuple[str, ...]:
@@ -184,6 +207,50 @@ def factual_projection_for_enterprise(ent: SemanticEnterprise) -> CanonicalFactu
     memberships = tuple(dict.fromkeys(x for o in ent.records for x in _refs(o, "membership_refs", "memberships")))
     lineage = tuple(dict.fromkeys(x for o in ent.records for x in (o.source_file, o.source_location, o.original_id) if x))
     return CanonicalFactualProjection(ent.identity_key, "Enterprise Dossier", ent.name, base.governance_label, base.sections, evidence, unknowns, contradictions, base.observation_refs, relationships, memberships, lineage, base.candidate_state, base.completeness_state, base.projection_version, base.runtime_fingerprint, base.assessment_state)
+
+
+ENTERPRISE_FACTUAL_DIMENSIONS = (
+    ("profile", "Organisation / Enterprise Profile", ("description", "organisation_description", "overview", "summary"), True),
+    ("industry", "Industry / Domain", ("domains",), True),
+    ("strategy", "Strategic Position and Ambition", ("strategy", "corporate_strategy", "strategic_ambition", "market_position", "current_position"), True),
+    ("operating-model", "Operating Model", ("operating_model", "operating_structure", "business_units"), True),
+    ("financial", "Financial Position", ("financial_context", "financial_intelligence", "financials"), True),
+    ("economics", "Enterprise Economics", (), False),
+    ("pressures", "Material Pressures", ("pressures",), True),
+    ("leadership-governance", "Leadership / Governance", (), False),
+    ("technology", "Technology / Platform Context", ("technology", "technology_landscape"), True),
+    ("supplier-ecosystem", "Supplier / Ecosystem Context", ("ecosystem", "suppliers", "partners"), True),
+    ("procurements", "Known Procurements", ("procurement_intelligence",), True),
+    ("transformation", "Reinvention Timing", ("transformation_posture", "reinvention_assessment", "transformation_portfolio"), True),
+)
+
+
+def enterprise_factual_dimensions(ent: SemanticEnterprise) -> tuple[EnterpriseFactualDimension, ...]:
+    """Project qualifying identity facts without invoking assessment or promotion."""
+    identity = next((o for o in ent.records if o.kind in {"enterprise", "enterprise_twin", "entity"}), ent.records[0])
+    attrs = _attrs(identity)
+    evidence = tuple(dict.fromkeys(identity.evidence_refs))
+    unknowns = _refs(identity, "unknown_refs", "unknowns")
+    contradictions = _refs(identity, "contradiction_refs", "contradictions")
+    result = []
+    for key, label, fields, supported in ENTERPRISE_FACTUAL_DIMENSIONS:
+        selected: list[str] = []
+        source_fields: list[str] = []
+        if key == "industry":
+            selected.extend(d.title() for d in identity.domains if d)
+            if selected: source_fields.append("semantic domains")
+        else:
+            for field in fields:
+                values = executive_value_lines(attrs.get(field))
+                if values:
+                    source_fields.append(field)
+                    selected.extend(values)
+                    break  # aliases represent one canonical dimension, not additive facts
+        result.append(EnterpriseFactualDimension(
+            key, label, tuple(dict.fromkeys(selected)), tuple(source_fields), evidence,
+            unknowns, contradictions, supported,
+        ))
+    return tuple(result)
 
 
 def _family(kind: str) -> str:

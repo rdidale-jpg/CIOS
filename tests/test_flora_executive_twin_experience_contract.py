@@ -59,7 +59,9 @@ def test_bbc_dossier_has_ordered_honest_consolidated_sections():
     headings = ["Organisation Overview", "Strategic Position and Ambition", "Financial Position", "Material Pressures", "Major Programmes", "Known Procurements", "Reinvention Timing", "Commercial Opportunities", "Evidence and Uncertainty", "Remaining Research Needs", "Advanced Inspection"]
     assert [html.index(f"<h2>{heading}</h2>") for heading in headings] == sorted(html.index(f"<h2>{heading}</h2>") for heading in headings)
     assert "Organisation description not supplied" in html
-    assert html.count("Owned programme") == 9
+    # Narrative subject text is not explicit Enterprise relationship truth.
+    assert html.count("Owned programme") == 0
+    assert "No programme can be shown without an explicit relationship" in html
     assert "Opportunity Hypothesis" not in html
     assert "governance review pending" not in html.casefold()
 
@@ -71,7 +73,7 @@ def test_subject_association_requires_explicit_canonical_field():
     combined = assemble_semantic_twin([*_rows(), unrelated])
     html = _dossier(next(e for e in combined.enterprises if e.name == enterprise.name), combined, "run", None)
     assert "Unrelated" not in html
-    assert "Explicit enterprise relationship" in html
+    assert "Explicit enterprise relationship" not in html
 
 
 def test_human_review_is_persisted_without_promotion_or_truth_changes(monkeypatch, tmp_path):
