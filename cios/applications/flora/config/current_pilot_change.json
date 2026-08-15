@@ -1,18 +1,19 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "FLORA-DEPLOYMENT-TO-RUNTIME-PROOF-AUDIT-2026-08-15",
-  "title": "Deployment-to-Runtime Proof Audit",
-  "objective": "Prove that Flora is running the repository implementation expected by the Chief Architect and expose any mismatch between declared change, deployed source, loaded runtime and active route behaviour.",
+  "change_id": "FLORA-FACTUAL-SYNTHESIS-HUMAN-IMPORT-CLOSURE-2026-08-15",
+  "title": "Factual Synthesis Qualification & Human Import Governance Closure",
+  "objective": "Allow Flora to represent supported Enterprise facts in Organisation Overview without requiring unrelated unknowns or contradictions to be resolved, while preserving evidence, uncertainty and human import governance.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Made Canonical Factual Projection carry its deterministic Enterprise synthesis as the governed derivative consumed by the executive route.",
-    "Made Organisation Overview and Advanced Inspection consume that same canonical synthesis rather than independently rebuilding or merely describing it.",
-    "Preserved source Profile absence, factual gaps, candidate governance, and the existing operational acceptance decision."
+    "Qualified evidence-backed Enterprise propositions independently in the Canonical Factual Projection.",
+    "Preserved unrelated Unknowns and Contradictions without treating them as absence of all factual knowledge.",
+    "Aligned dossiers and diagnostics to the existing human review and promotion lifecycle."
   ],
   "expected_visible_outcomes": [
-    "The Import screen visibly answers AM I TESTING THE EXPECTED CODE?",
-    "The expected factual-synthesis implementation is shown as present, loaded, connected and exercised where determinable.",
-    "Advanced Inspection provides the detailed deployment-to-runtime trace."
+    "BT Organisation Overview contains only evidence-backed qualifying factual propositions.",
+    "Advanced Inspection explains qualifying and rejected facts and proposition-level blockers.",
+    "Undefined assessment/governance-review wording is replaced by the real human import state.",
+    "No unsupported factual content appears."
   ],
   "affected_pages": [
     "Import Twin",
@@ -33,7 +34,7 @@
   ],
   "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
   "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
-  "fresh_import_policy": "No fresh import is required: this change adds read-only diagnostics and provenance only.",
+  "fresh_import_policy": "No fresh import is required: candidate persistence is unchanged and corrected projection operates over existing candidates.",
   "known_limitations": [
     "Enterprise Economics and Leadership / Governance are architectural intent not implemented as independent TEL-001 runtime dimensions.",
     "Industry/domain remains Not established because TEL-001 Enterprise candidates carry no explicit semantic domain and Twin membership is not treated as proof."
@@ -74,7 +75,7 @@
   "start_command": "unknown",
   "auto_deploy": "unknown",
   "latest_deployment_status": "unknown",
-  "fresh_import_required": "No — diagnostics/provenance only.",
+  "fresh_import_required": "No — read-only qualification/projection correction over existing candidates.",
   "audit_result_href": "/docs/operations/flora/Deployment-to-Runtime-Proof-Audit.md",
   "candidate_state_impact": "read-only"
 }

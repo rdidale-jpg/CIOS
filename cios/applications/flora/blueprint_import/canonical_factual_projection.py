@@ -14,8 +14,8 @@ from cios.applications.flora.live.runtime import deployment_metadata
 from .cios_twin_adapter import MAPPING_VERSION
 from .semantic_twin import SemanticEnterprise, SemanticObject, executive_record_view_model
 
-CANONICAL_FACTUAL_PROJECTION_VERSION = "canonical-factual-projection-v4"
-EXECUTIVE_PROJECTION_VERSION = "executive-factual-presentation-v4"
+CANONICAL_FACTUAL_PROJECTION_VERSION = "canonical-factual-projection-v5"
+EXECUTIVE_PROJECTION_VERSION = "executive-factual-presentation-v5"
 OWNER_ASSESSMENT_INPUT_VERSION = "owner-assessment-factual-input-v1"
 
 
@@ -62,7 +62,7 @@ class CanonicalFactualProjection:
     completeness_state: str = "owner_assessment_pending"
     projection_version: str = CANONICAL_FACTUAL_PROJECTION_VERSION
     runtime_fingerprint: str = ""
-    assessment_state: str = "Assessment not yet performed"
+    assessment_state: str = "Candidate — awaiting human import decision"
     enterprise_synthesis: EnterpriseFactualSynthesis | None = None
 
     @property
@@ -107,6 +107,25 @@ class EnterpriseFactualSynthesis:
     source_object: str
     candidate_object: str
     assessment_required: bool = False
+    propositions: tuple[EnterpriseFactualProposition, ...] = ()
+    rejected_dimensions: tuple[str, ...] = ()
+    rejection_reasons: tuple[str, ...] = ()
+    blocking_unknown_refs: tuple[str, ...] = ()
+    blocking_contradiction_refs: tuple[str, ...] = ()
+    first_divergence: str = "None"
+
+
+@dataclass(frozen=True)
+class EnterpriseFactualProposition:
+    """One verbatim, evidence-linked proposition in an Enterprise synthesis."""
+    fact_id: str
+    dimension: str
+    statement: str
+    source_fields: tuple[str, ...]
+    evidence_refs: tuple[str, ...]
+    confidence: str
+    relevant_unknown_refs: tuple[str, ...] = ()
+    relevant_contradiction_refs: tuple[str, ...] = ()
 
 
 def executive_value_lines(value: Any) -> tuple[str, ...]:
@@ -210,7 +229,7 @@ def factual_projection_for_object(obj: SemanticObject, family: str | None = None
         _refs(obj, "relationship_refs", "relationships", "related_records"), _refs(obj, "membership_refs", "memberships"),
         tuple(x for x in (obj.source_file, obj.source_location, obj.original_id) if x),
         candidate_state, completeness_state, CANONICAL_FACTUAL_PROJECTION_VERSION, runtime_fingerprint(),
-        "Assessment not yet performed" if obj.governance == "candidate" else "Owner governed",
+        "Candidate — awaiting human import decision" if obj.governance == "candidate" else "Human import decision accepted — promoted",
     )
 
 
@@ -278,19 +297,61 @@ def enterprise_factual_dimensions(ent: SemanticEnterprise) -> tuple[EnterpriseFa
 
 
 def enterprise_factual_synthesis(ent: SemanticEnterprise) -> EnterpriseFactualSynthesis:
-    """Compose qualifying CFP facts without inference, assessment or persistence."""
+    """Compose evidence-backed propositions without inference, assessment or persistence.
+
+    Unknowns and contradictions are preserved globally.  They block a
+    proposition only where the source explicitly maps them to that factual
+    dimension; unscoped references are not silently treated as universal.
+    """
     identity = next((o for o in ent.records if o.kind in {"enterprise", "enterprise_twin", "entity"}), ent.records[0])
     dimensions = {d.key: d for d in enterprise_factual_dimensions(ent)}
-    qualifying = [dimensions[key] for key in ("profile", "operating-model", "strategy") if dimensions[key].present]
+    relevant_keys = ("profile", "operating-model", "strategy")
+    candidates = [dimensions[key] for key in relevant_keys if dimensions[key].present]
     source = identity.original_id or identity.record_id
-    unknowns = tuple(dict.fromkeys(x for d in qualifying for x in d.unknown_refs))
-    contradictions = tuple(dict.fromkeys(x for d in qualifying for x in d.contradiction_refs))
-    evidence = tuple(dict.fromkeys(x for d in qualifying for x in d.evidence_refs))
-    if not dimensions["profile"].present or len(qualifying) < 2:
-        return EnterpriseFactualSynthesis("INSUFFICIENT EVIDENCE", "", tuple(d.key for d in qualifying), (), evidence, identity.confidence or "Not supplied", unknowns, contradictions, source, identity.record_id)
-    selected = [(d, d.values[0].strip()) for d in qualifying if d.values[0].strip()]
-    statement = " ".join(value if value.endswith((".", "!", "?")) else value + "." for _, value in selected)
-    return EnterpriseFactualSynthesis("GENERATED", statement, tuple(d.key for d, _ in selected), tuple(f"FACT-{source}-{d.key.upper()}" for d, _ in selected), evidence, identity.confidence or "Not supplied", unknowns, contradictions, source, identity.record_id)
+    unknowns = tuple(dict.fromkeys(_refs(identity, "unknown_refs", "unknowns")))
+    contradictions = tuple(dict.fromkeys(_refs(identity, "contradiction_refs", "contradictions")))
+    evidence = tuple(dict.fromkeys(identity.evidence_refs))
+    attrs = _attrs(identity)
+    unknown_map = attrs.get("unknown_dimensions") if isinstance(attrs.get("unknown_dimensions"), dict) else {}
+    contradiction_map = attrs.get("contradiction_dimensions") if isinstance(attrs.get("contradiction_dimensions"), dict) else {}
+    blocked_unknowns = tuple(dict.fromkeys(str(ref) for key in relevant_keys for ref in _text(unknown_map.get(key))))
+    blocked_contradictions = tuple(dict.fromkeys(str(ref) for key in relevant_keys for ref in _text(contradiction_map.get(key))))
+    rejected, reasons, propositions = [], [], []
+    for dimension in candidates:
+        dim_unknowns = tuple(str(x) for x in _text(unknown_map.get(dimension.key)))
+        dim_contradictions = tuple(str(x) for x in _text(contradiction_map.get(dimension.key)))
+        if not evidence:
+            rejected.append(dimension.key); reasons.append(f"{dimension.key}: no linked evidence")
+            continue
+        if dim_contradictions:
+            rejected.append(dimension.key); reasons.append(f"{dimension.key}: materially contradicted ({', '.join(dim_contradictions)})")
+            continue
+        if dim_unknowns:
+            rejected.append(dimension.key); reasons.append(f"{dimension.key}: required fact remains unknown ({', '.join(dim_unknowns)})")
+            continue
+        value = dimension.values[0].strip()
+        if not value:
+            continue
+        propositions.append(EnterpriseFactualProposition(
+            f"FACT-{source}-{dimension.key.upper()}", dimension.key, value,
+            dimension.source_fields, evidence, identity.confidence or "Not supplied",
+            dim_unknowns, dim_contradictions,
+        ))
+    if not candidates:
+        status, divergence = "TRUTHFUL ABSENCE", "No relevant Profile, Operating Model or Strategy fact supplied"
+    elif not propositions:
+        status = "CONTRADICTED" if blocked_contradictions else "INSUFFICIENT EVIDENCE"
+        divergence = reasons[0] if reasons else "Relevant facts did not qualify"
+    else:
+        status, divergence = "SUPPORTED", "None"
+    statement = " ".join(p.statement if p.statement.endswith((".", "!", "?")) else p.statement + "." for p in propositions)
+    return EnterpriseFactualSynthesis(
+        status, statement, tuple(p.dimension for p in propositions), tuple(p.fact_id for p in propositions),
+        tuple(dict.fromkeys(x for p in propositions for x in p.evidence_refs)),
+        identity.confidence or "Not supplied", unknowns, contradictions, source, identity.record_id,
+        False, tuple(propositions), tuple(rejected), tuple(reasons), blocked_unknowns,
+        blocked_contradictions, divergence,
+    )
 
 
 def _family(kind: str) -> str:
