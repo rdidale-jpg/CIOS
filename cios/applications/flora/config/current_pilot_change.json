@@ -1,18 +1,18 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "TEL-001-ENTERPRISE-FACTUAL-SYNTHESIS-OPERATIONAL-ACCEPTANCE-2026-08-15",
-  "title": "Enterprise Factual Synthesis & Operational Acceptance Correction",
-  "objective": "Allow Flora to form traceable factual Enterprise descriptions from governed evidence it already possesses, without confusing factual synthesis with assessment, and make human test readiness reflect functional state rather than optional deployment metadata.",
+  "change_id": "TEL-001-BT-FACTUAL-SYNTHESIS-RUNTIME-CLOSURE-2026-08-15",
+  "title": "BT Factual Synthesis Runtime Closure",
+  "objective": "Close the runtime gap preventing governed factual Enterprise synthesis from reaching the actual Organisation Overview and Advanced Inspection.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Evolved the Canonical Factual Projection with deterministic, explainable Enterprise factual synthesis using qualifying factual dimensions.",
-    "Made Organisation Overview consume the shared synthesis and added its full lineage trace to Advanced Inspection.",
-    "Separated functional human-test readiness, optional deployment metadata, and persisted-candidate regeneration impact in the operational decision owner."
+    "Made Canonical Factual Projection carry its deterministic Enterprise synthesis as the governed derivative consumed by the executive route.",
+    "Made Organisation Overview and Advanced Inspection consume that same canonical synthesis rather than independently rebuilding or merely describing it.",
+    "Preserved source Profile absence, factual gaps, candidate governance, and the existing operational acceptance decision."
   ],
   "expected_visible_outcomes": [
-    "BT Group Organisation Overview answers what the Enterprise is from qualifying candidate facts with traceable evidence.",
-    "Industry/domain remains Not established unless independently supported; Unknowns, Contradictions and candidate governance remain unchanged.",
-    "Functional acceptance pass permits human testing despite incomplete optional deployment metadata; this read-only change requires no fresh import."
+    "BT Group Organisation Overview answers ‘What is BT Group?’ using traceable candidate factual evidence already retained by Flora.",
+    "Advanced Inspection distinguishes source profile field, qualifying factual inputs, governed synthesis, executive consumption and rendering.",
+    "Assessment remains independent; Industry/domain and genuine missing attributes remain unestablished where unsupported."
   ],
   "affected_pages": [
     "Import Twin",
@@ -27,7 +27,7 @@
   ],
   "required_test_steps": [
     "Open Import Twin and confirm functional readiness is independent of optional deployment metadata.",
-    "Open Advanced Inspection and inspect ENTERPRISE FACTUAL SYNTHESIS TRACE.",
+    "Open Advanced Inspection and confirm the source, synthesis, executive-consumption and rendered states in ENTERPRISE FACTUAL SYNTHESIS TRACE.",
     "Open the Enterprise list and all six TEL-001 Enterprise dossiers.",
     "Confirm 308 Relationships, 13 Programmes, 17 Opportunities and exact Enterprise associations remain reconciled."
   ],
@@ -75,6 +75,6 @@
   "auto_deploy": "unknown",
   "latest_deployment_status": "unknown",
   "fresh_import_required": "No \u2014 retained candidate/source data is sufficient.",
-  "audit_result_href": "/docs/operations/flora/TEL-001-Enterprise-Factual-Synthesis-Correction.md",
+  "audit_result_href": "/docs/operations/flora/TEL-001-BT-Factual-Synthesis-Runtime-Closure.md",
   "candidate_state_impact": "read-only"
 }

@@ -425,13 +425,13 @@ def test_upload_page_shows_current_deployed_change_acceptance_panel(monkeypatch,
     assert panel < upload
     assert "CURRENT PILOT CHANGE" not in page
     assert "Researcher-to-Flora Translation Audit" not in page
-    assert "Enterprise Factual Synthesis &amp; Operational Acceptance Correction" in page
+    assert "BT Factual Synthesis Runtime Closure" in page
     assert "88f053e6cee6fe2fef7feba1e7f4553194b7a040" in page
     assert "Status" in page and "Should I test now?" in page and "Next action" in page
     assert "Technical deployment evidence" in page
     assert "<details><summary>Technical deployment evidence</summary>" in page
-    assert "traceable factual Enterprise descriptions" in page
-    assert "functional human-test readiness" in page
+    assert "Close the runtime gap preventing governed factual Enterprise synthesis" in page
+    assert "source profile field, qualifying factual inputs, governed synthesis" in page
     assert "Fresh import required:</strong> No" in page
     assert "Tel001 Fixture Checksum" in page and "Checksum Status" in page
     assert "Known limitations" in page
