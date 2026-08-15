@@ -848,18 +848,25 @@ def _object_association_labels(twin: SemanticTwin, obj: SemanticObject) -> tuple
 
 
 def _page_association_anomalies(twin: SemanticTwin) -> tuple[str, ...]:
-    """Compare resolver-owned association sets with actual dossier selection."""
+    """Compare source endpoints, subject query and actual dossier selection."""
     anomalies = []
+    relationships = resolve_relationships(twin)
     for ent in twin.enterprises:
-        for label, predicate, kinds in (
-            ("programme", lambda row: row.kind == "transformation_programme", {"transformation_programme"}),
+        for label, predicate, kinds, relationship_type, endpoint in (
+            ("programme", lambda row: row.kind == "transformation_programme", {"transformation_programme"},
+             "Enterprise owns Programme", "source"),
             ("opportunity", lambda row: "opportun" in row.kind,
-             {"opportunity_hypothesis", "opportunity", "ranked_opportunity", "opportunity_twin"}),
+             {"opportunity_hypothesis", "opportunity", "ranked_opportunity", "opportunity_twin"},
+             "Opportunity targets Enterprise", "target"),
         ):
+            source = {(row.target_id if endpoint == "source" else row.source_id)
+                      for row in relationships if row.relationship_type == relationship_type
+                      and (row.source_id if endpoint == "source" else row.target_id).casefold()
+                      == ent.identity_key.casefold()}
             resolved = {business_object_id(row[0]) for row in enterprise_associations(twin, ent, kinds)}
             rendered = {business_object_id(row) for row in _associated_records(twin, ent, predicate)
                         if row.statement or _field(row, "client_problem", "customer_problem", "problem", "title")}
-            if resolved != rendered:
+            if source != resolved or resolved != rendered:
                 anomalies.append(f"{ent.identity_key}:{label}")
     return tuple(anomalies)
 
@@ -1392,17 +1399,32 @@ def _population_and_association_reconciliation(twin: SemanticTwin) -> str:
         opportunities = enterprise_associations(twin, ent, {"opportunity_hypothesis", "opportunity", "ranked_opportunity", "opportunity_twin"})
         programme_ids = tuple(business_object_id(row[0]) for row in programmes)
         opportunity_ids = tuple(business_object_id(row[0]) for row in opportunities)
+        # The source column is intentionally derived from standalone source
+        # Relationship endpoints, not from the subject query it is validating.
+        source_programmes = tuple(sorted({row.target_id for row in resolved_relationships
+            if row.relationship_type == "Enterprise owns Programme"
+            and row.source_id.casefold() == ent.identity_key.casefold()}))
+        source_opportunities = tuple(sorted({row.source_id for row in resolved_relationships
+            if row.relationship_type == "Opportunity targets Enterprise"
+            and row.target_id.casefold() == ent.identity_key.casefold()}))
         rendered_programmes = tuple(business_object_id(o) for o in _associated_records(twin, ent, lambda o: o.kind == "transformation_programme") if o.statement or _field(o, "title"))
         rendered_opportunities = tuple(business_object_id(o) for o in _associated_records(twin, ent, lambda o: "opportun" in o.kind) if o.statement or _field(o, "client_problem", "customer_problem", "problem", "title"))
-        missing = sorted((set(programme_ids) - set(rendered_programmes)) | (set(opportunity_ids) - set(rendered_opportunities)))
-        unexpected = sorted((set(rendered_programmes) - set(programme_ids)) | (set(rendered_opportunities) - set(opportunity_ids)))
+        missing_query = sorted((set(source_programmes) - set(programme_ids)) |
+                               (set(source_opportunities) - set(opportunity_ids)))
+        missing_render = sorted((set(programme_ids) - set(rendered_programmes)) |
+                                (set(opportunity_ids) - set(rendered_opportunities)))
+        unexpected = sorted((set(programme_ids) - set(source_programmes)) |
+                            (set(opportunity_ids) - set(source_opportunities)) |
+                            (set(rendered_programmes) - set(programme_ids)) |
+                            (set(rendered_opportunities) - set(opportunity_ids)))
         qualifying_rows = [row for row in resolved_relationships if row.resolved and (
             (row.relationship_type == "Enterprise owns Programme" and row.source_id.casefold() == ent.identity_key.casefold()) or
             (row.relationship_type == "Opportunity targets Enterprise" and row.target_id.casefold() == ent.identity_key.casefold()))]
         duplicate_rows = len(qualifying_rows) - len(programme_ids) - len(opportunity_ids)
-        result = "PASS" if not missing and not unexpected else "FAIL"
+        result = "PASS" if (set(source_programmes) == set(programme_ids) == set(rendered_programmes)
+                            and set(source_opportunities) == set(opportunity_ids) == set(rendered_opportunities)) else "FAIL"
         ids = lambda values: ", ".join(escape(value) for value in values) or "None"
-        association_rows.append(f"<tr><td>{escape(ent.name)}<br><code>{escape(ent.identity_key)}</code></td><td>{ids(programme_ids)}</td><td>{ids(rendered_programmes)}</td><td>{ids(opportunity_ids)}</td><td>{ids(rendered_opportunities)}</td><td>{ids(missing)}</td><td>{ids(unexpected)}</td><td>{duplicate_rows}</td><td>{result}</td></tr>")
+        association_rows.append(f"<tr><td>{escape(ent.name)}<br><code>{escape(ent.identity_key)}</code></td><td>{ids(source_programmes)}</td><td>{ids(programme_ids)}</td><td>{ids(rendered_programmes)}</td><td>{ids(source_opportunities)}</td><td>{ids(opportunity_ids)}</td><td>{ids(rendered_opportunities)}</td><td>{ids(missing_query)}</td><td>{ids(missing_render)}</td><td>{ids(unexpected)}</td><td>{duplicate_rows}</td><td>{result}</td></tr>")
         identity = next((o for o in ent.records if o.kind in {"enterprise_twin", "enterprise", "entity"}), ent.records[0])
         dimension_fields = (
             ("Operating Model", ("operating_model", "operating_structure", "business_units")),
@@ -1419,7 +1441,7 @@ def _population_and_association_reconciliation(twin: SemanticTwin) -> str:
     return (relationship_summary+"<section class='card' id='business-object-population-reconciliation'><h2>Business Object Population Reconciliation</h2>"
             "<table><thead><tr><th>Family</th><th>Source objects</th><th>Candidate objects</th><th>Unique canonical identities</th><th>Executive/rendered entities</th><th>Duplicates</th><th>Supporting records incorrectly classified</th><th>Population reconciliation</th></tr></thead><tbody>"+"".join(population_rows)+"</tbody></table></section>"
             "<section class='card' id='enterprise-association-reconciliation'><h2>Enterprise Association Reconciliation</h2>"
-            "<table><thead><tr><th>Enterprise</th><th>Resolved candidate Programme IDs</th><th>Rendered Programme IDs</th><th>Resolved candidate Opportunity IDs</th><th>Rendered Opportunity IDs</th><th>Missing associations</th><th>Unexpected associations</th><th>Duplicate Relationship rows collapsed</th><th>Status</th></tr></thead><tbody>"+"".join(association_rows)+"</tbody></table></section>"
+            "<table><thead><tr><th>Enterprise</th><th>Source expected Programmes</th><th>Query-resolved Programmes</th><th>Rendered Programmes</th><th>Source expected Opportunities</th><th>Query-resolved Opportunities</th><th>Rendered Opportunities</th><th>Missing at query</th><th>Missing at render</th><th>Unexpected</th><th>Duplicates collapsed</th><th>Status</th></tr></thead><tbody>"+"".join(association_rows)+"</tbody></table></section>"
             "<section class='card' id='executive-dimension-reconciliation'><h2>Executive Dimension Reconciliation</h2><table><thead><tr><th>Enterprise</th><th>Dimension</th><th>Qualifying factual fields</th><th>Selected projection</th><th>Rendered state</th><th>Missing requirements</th><th>Invalid fallback detected</th></tr></thead><tbody>"+"".join(dimension_rows)+"</tbody></table></section>")
 
 
