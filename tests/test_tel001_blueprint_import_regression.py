@@ -500,10 +500,9 @@ def test_tel001_enterprise_association_correction_is_visible_on_import_screen(mo
     html, status = import_blueprint_entry_page({})
 
     assert status == 200
-    assert "Candidate Relationship Association Query Correction" in html
-    assert "Make Flora query the candidate relationships it already resolves" in html
-    assert "PROG-BT-VERIZON-JV remains absent" in html
-    assert "OPP-BT-VERIZON-JV-INTEGRATION appears" in html
+    assert "Enterprise Canonical Identity Handoff Correction" in html
+    assert "canonical Twin object identity" in html
+    assert "bt-group → ENT-BT" in html
     assert "Ready for functional test — deployment metadata incomplete" in html
     assert "Should I test now?" in html and ">YES<" in html
     assert "Known limitation: Deployment metadata incomplete" in html
