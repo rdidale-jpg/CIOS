@@ -6,7 +6,7 @@ from pathlib import Path
 
 from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, BlueprintPackageValidator
 from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page, _semantic_candidates, _dossier
-from cios.applications.flora.blueprint_import.semantic_twin import assemble_semantic_twin, business_collections, business_object_id, enterprise_associations, query_subject_associations, resolve_relationships
+from cios.applications.flora.blueprint_import.semantic_twin import SemanticEnterprise, SemanticTwin, assemble_semantic_twin, business_collections, business_object_id, enterprise_associations, query_subject_associations, resolve_relationships
 
 FIXTURE = Path("docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip")
 ORACLE = json.loads(Path("tests/fixtures/tel001_expected_truth.json").read_text())
@@ -82,17 +82,31 @@ def test_presentation_routes_handoff_imported_candidate_identity(monkeypatch, tm
     assert {enterprise.name: (enterprise.presentation_key, enterprise.identity_key.upper())
             for enterprise in twin.enterprises} == EXPECTED_IDENTITIES
     for enterprise in twin.enterprises:
+        expected_source = EXPECTED_IDENTITIES[enterprise.name][1]
+        assert enterprise.source_identity == expected_source
+        assert enterprise.relationship_subject_identity == expected_source
+        assert enterprise.candidate_identity
         html, status = executive_workspace_page(
             package.import_run_id, {}, view="enterprise", enterprise_id=enterprise.presentation_key)
         assert status == 200
         assert query_subject_associations(twin, enterprise.identity_key)
         assert f"/enterprises/{enterprise.presentation_key}" in executive_workspace_page(
-            package.import_run_id, {}, view="workspace")[0]
+            package.import_run_id, {}, view="aspect", collection="enterprises")[0]
         # The canonical ID is not accepted as a route identity: the handoff
         # cannot be bypassed or mocked by navigating directly to an endpoint.
         _missing, missing_status = executive_workspace_page(
             package.import_run_id, {}, view="enterprise", enterprise_id=enterprise.identity_key)
         assert missing_status == 404
+
+
+def test_enterprise_lineage_is_import_scoped_not_display_identity_scoped(monkeypatch, tmp_path):
+    _package, _summary, twin = _runtime(monkeypatch, tmp_path)
+    bt = next(e for e in twin.enterprises if e.presentation_key == "bt-group")
+    foreign = SemanticTwin(twin.objects, (SemanticEnterprise(
+        bt.identity_key, bt.presentation_key, bt.name, bt.aliases, bt.records,
+        "ENT-OTHER-TWIN", "candidate-other", "ENT-OTHER-TWIN"),))
+
+    assert enterprise_associations(foreign, foreign.enterprises[0], {"transformation_programme"}) == ()
     bt = next(e for e in twin.enterprises if e.identity_key.casefold() == "ent-bt")
     programmes = enterprise_associations(twin, bt, {"transformation_programme"})
     opportunities = enterprise_associations(twin, bt, {"opportunity_hypothesis"})
@@ -231,13 +245,13 @@ def test_diagnostics_use_same_population_and_association_owner(monkeypatch, tmp_
     assert "Business Object Population Reconciliation" in html
     assert re.search(r"<td>Opportunities</td><td>17</td><td>17</td><td>17</td><td>17</td><td>0</td><td>0</td><td>PASS</td>", html)
     assert re.search(r"<td>Programmes</td><td>13</td><td>13</td><td>13</td><td>13</td><td>0</td><td>0</td><td>PASS</td>", html)
-    assert "Enterprise Association Reconciliation" in html
+    assert "Enterprise Identity and Association Reconciliation" in html
     for enterprise_id, (programmes, opportunities) in EXPECTED_ASSOCIATIONS.items():
         assert enterprise_id in html
         assert all(identifier in html for identifier in programmes | opportunities)
     assert "Duplicates collapsed" in html
-    assert "Source expected Programmes" in html and "Query-resolved Programmes" in html
-    assert "Source expected Opportunities" in html and "Query-resolved Opportunities" in html
+    assert "Source Programme IDs" in html and "Query Programme IDs" in html
+    assert "Source Opportunity IDs" in html and "Query Opportunity IDs" in html
     assert "Missing at query" in html and "Missing at render" in html
     assert "Relationship Resolution Reconciliation" in html
     assert "Executive Dimension Reconciliation" in html

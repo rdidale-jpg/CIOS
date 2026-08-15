@@ -40,6 +40,12 @@ class SemanticEnterprise:
     name: str
     aliases: tuple[str, ...]
     records: tuple[SemanticObject, ...]
+    # Governed import lineage.  These are deliberately distinct from the
+    # presentation key: a candidate record ID identifies the staged row while
+    # the original/source ID is the endpoint vocabulary used by Relationships.
+    source_identity: str = ""
+    candidate_identity: str = ""
+    relationship_subject_identity: str = ""
     ambiguous: bool = False
     unresolved_refs: tuple[str, ...] = ()
 
@@ -327,7 +333,8 @@ def enterprise_associations(twin: SemanticTwin, enterprise: SemanticEnterprise,
     objects = {business_object_id(obj).casefold(): obj for obj in twin.objects if obj.kind in kinds}
     found: dict[str, tuple[SemanticObject, str, str]] = {}
 
-    for association in query_subject_associations(twin, enterprise.identity_key, kinds):
+    for association in query_subject_associations(
+            twin, enterprise.relationship_subject_identity or enterprise.identity_key, kinds):
         related = objects.get(association.related_business_object_id.casefold())
         if related:
             identity = business_object_id(related)
@@ -376,7 +383,12 @@ def assemble_semantic_twin(candidates: list[dict[str, Any]]) -> SemanticTwin:
         if not name:
             continue
         supplied_id = str(payload.get("enterprise_id") or payload.get("canonical_id") or "").strip()
-        key = supplied_id.casefold() or re.sub(r"[^a-z0-9]+", "-", name.casefold()).strip("-")
+        # ADR-012 makes the staged candidate's original external stable ID the
+        # governed lineage owner.  TEL-001 supplies it as ``id`` and staging
+        # preserves it as ``original_source_id``; it must not be discarded just
+        # because the source payload has no redundant ``enterprise_id`` field.
+        source_id = obj.original_id.strip()
+        key = (supplied_id or source_id).casefold() or re.sub(r"[^a-z0-9]+", "-", name.casefold()).strip("-")
         if payload.get("identity_status") in {"ambiguous", "unresolved"}:
             key = f"{key}:{obj.record_id}"
             ambiguous.add(key)
@@ -396,8 +408,12 @@ def assemble_semantic_twin(candidates: list[dict[str, Any]]) -> SemanticTwin:
         unresolved_all.update(missing)
         associated = list({o.record_id: o for o in seed + contextual + resolved}.values())
         presentation_key = re.sub(r"[^a-z0-9]+", "-", names[key].casefold()).strip("-")
-        enterprises.append(SemanticEnterprise(key, presentation_key, names[key], tuple(sorted({names[key]})),
-                            tuple(associated), key in ambiguous, tuple(missing)))
+        identity_owner = seed[0]
+        source_identity = identity_owner.original_id
+        enterprises.append(SemanticEnterprise(
+            key, presentation_key, names[key], tuple(sorted({names[key]})),
+            tuple(associated), source_identity, identity_owner.record_id,
+            source_identity or key, key in ambiguous, tuple(missing)))
     return SemanticTwin(objects, tuple(enterprises), tuple(sorted(unresolved_all)))
 
 
