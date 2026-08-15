@@ -769,8 +769,10 @@ def _dossier(ent, twin, run_id, mission):
     factual_html = _canonical_factual_html(factual)
     relevant = list(ent.records)
     identity = next((o for o in relevant if o.kind in {"enterprise", "enterprise_twin", "entity"}), None)
-    synthesis = enterprise_factual_synthesis(ent)
-    description = synthesis.statement if synthesis.status == "GENERATED" else ""
+    # The dossier consumes the governed derivative carried by its canonical
+    # factual view model.  It must not regenerate a parallel presentation value.
+    synthesis = factual.enterprise_synthesis
+    description = synthesis.statement if synthesis and synthesis.status == "GENERATED" else ""
     domains = sorted({d.title() for o in relevant for d in o.domains})
     missing_overview = [label for label, value in (("plain-language description", description),
         ("ownership or organisational form", _field(identity, "ownership", "organisational_form") if identity else ""),
@@ -1485,25 +1487,36 @@ def _observation_pipeline_diagnostics(twin: SemanticTwin, run_id: str) -> str:
 
 
 def _enterprise_factual_synthesis_diagnostics(twin: SemanticTwin) -> str:
-    """Expose CFP synthesis lineage without adding implementation detail to dossiers."""
+    """Reconcile source, CFP synthesis, executive consumption and rendering."""
     rows = []
     for ent in twin.enterprises:
-        trace = enterprise_factual_synthesis(ent)
+        factual = factual_projection_for_enterprise(ent)
+        trace = factual.enterprise_synthesis
+        identity = next((o for o in ent.records if o.kind in {"enterprise", "enterprise_twin", "entity"}), ent.records[0])
+        dimensions = {d.key: d for d in enterprise_factual_dimensions(ent)}
+        source_profile = bool(_field(identity, "organisation_description"))
+        qualifying = tuple(key for key in ("profile", "operating-model", "strategy") if dimensions[key].present)
+        generated = bool(trace and trace.status == "GENERATED")
         values = lambda items: ", ".join(items) or "None"
         rows.append(
-            f"<tr><td>{escape(ent.name)}</td><td>{escape(trace.status)}</td>"
-            f"<td>{escape(trace.statement or 'Truthful absence')}</td>"
+            f"<tr><td>{escape(ent.name)}</td><td>{'Present' if source_profile else 'Absent'}</td>"
+            f"<td>{escape(values(qualifying))}</td><td>{escape(trace.status if trace else 'INSUFFICIENT EVIDENCE')}</td>"
+            f"<td>{escape(trace.statement if trace and trace.statement else 'Truthful absence')}</td>"
             f"<td>{escape(values(trace.input_dimensions))}</td>"
             f"<td>{escape(values(trace.input_fact_ids))}</td>"
             f"<td>{escape(values(trace.evidence_refs))}</td><td>{escape(trace.confidence)}</td>"
             f"<td>{escape(values(trace.unknown_refs))}</td>"
-            f"<td>{escape(values(trace.contradiction_refs))}</td><td>NO</td></tr>"
+            f"<td>{escape(values(trace.contradiction_refs))}</td>"
+            f"<td>{'Present' if generated else 'Absent'}</td>"
+            f"<td>{'Present' if generated else 'Absent'}</td>"
+            f"<td>{'PASS' if generated else 'INSUFFICIENT EVIDENCE'}</td><td>NO</td></tr>"
         )
     return ("<section class='card' id='enterprise-factual-synthesis-trace'>"
             "<h2>ENTERPRISE FACTUAL SYNTHESIS TRACE</h2>"
-            "<table><thead><tr><th>Enterprise</th><th>Synthesis status</th><th>Synthesized statement</th>"
+            "<table><thead><tr><th>Enterprise</th><th>Source profile field</th><th>Qualifying factual inputs</th><th>Governed synthesis</th><th>Synthesized statement</th>"
             "<th>Input factual dimensions</th><th>Input fact IDs</th><th>Evidence refs</th>"
             "<th>Confidence</th><th>Unknowns preserved</th><th>Contradictions preserved</th>"
+            "<th>Executive consumption</th><th>Rendered</th><th>Status</th>"
             "<th>Assessment required</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table></section>")
 
 

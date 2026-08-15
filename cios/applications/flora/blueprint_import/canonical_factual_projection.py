@@ -63,6 +63,7 @@ class CanonicalFactualProjection:
     projection_version: str = CANONICAL_FACTUAL_PROJECTION_VERSION
     runtime_fingerprint: str = ""
     assessment_state: str = "Assessment not yet performed"
+    enterprise_synthesis: EnterpriseFactualSynthesis | None = None
 
     @property
     def has_facts(self) -> bool:
@@ -222,7 +223,14 @@ def factual_projection_for_enterprise(ent: SemanticEnterprise) -> CanonicalFactu
     relationships = tuple(dict.fromkeys(x for o in ent.records for x in _refs(o, "relationship_refs", "relationships", "related_records")))
     memberships = tuple(dict.fromkeys(x for o in ent.records for x in _refs(o, "membership_refs", "memberships")))
     lineage = tuple(dict.fromkeys(x for o in ent.records for x in (o.source_file, o.source_location, o.original_id) if x))
-    return CanonicalFactualProjection(ent.identity_key, "Enterprise Dossier", ent.name, base.governance_label, base.sections, evidence, unknowns, contradictions, base.observation_refs, relationships, memberships, lineage, base.candidate_state, base.completeness_state, base.projection_version, base.runtime_fingerprint, base.assessment_state)
+    return CanonicalFactualProjection(
+        ent.identity_key, "Enterprise Dossier", ent.name, base.governance_label,
+        base.sections, evidence, unknowns, contradictions, base.observation_refs,
+        relationships, memberships, lineage, base.candidate_state,
+        base.completeness_state, base.projection_version,
+        base.runtime_fingerprint, base.assessment_state,
+        enterprise_factual_synthesis(ent),
+    )
 
 
 ENTERPRISE_FACTUAL_DIMENSIONS = (

@@ -7,7 +7,7 @@ from html import escape
 from pathlib import Path
 
 from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, BlueprintPackageValidator
-from cios.applications.flora.blueprint_import.canonical_factual_projection import enterprise_factual_dimensions, enterprise_factual_synthesis
+from cios.applications.flora.blueprint_import.canonical_factual_projection import enterprise_factual_dimensions, enterprise_factual_synthesis, factual_projection_for_enterprise
 from cios.applications.flora.blueprint_import.executive_workspace import _dossier, executive_workspace_page
 from cios.applications.flora.blueprint_import.semantic_twin import assemble_semantic_twin
 from cios.applications.flora.blueprint_import.semantic_twin import SemanticEnterprise, SemanticObject
@@ -59,15 +59,19 @@ def test_tel001_facts_survive_without_assessment_and_render_on_actual_routes(mon
         identity = next(o for o in enterprise.records if o.kind == "enterprise_twin")
         before = (identity.governance, identity.sufficiency)
         synthesis = enterprise_factual_synthesis(enterprise)
+        canonical = factual_projection_for_enterprise(enterprise)
         assert synthesis.status == "GENERATED"
         assert synthesis.input_dimensions == ("profile", "operating-model", "strategy")
         assert len(synthesis.input_fact_ids) == 3 and synthesis.evidence_refs
         assert synthesis.assessment_required is False
         assert synthesis.unknown_refs == dimensions["profile"].unknown_refs
         assert synthesis.contradiction_refs == dimensions["profile"].contradiction_refs
+        assert canonical.enterprise_synthesis == synthesis
+        assert identity.attributes.get("organisation_description") in (None, "")
 
         html = _dossier(enterprise, twin, package.import_run_id, None)
-        assert escape(dimensions["profile"].values[0]) in html
+        assert escape(synthesis.statement) in html
+        assert "Organisation description not supplied" not in html
         assert "Assessment status:</strong> Assessment not yet performed" in html
         assert "{'" not in html and "\": {" not in html
         assert (identity.governance, identity.sufficiency) == before
@@ -78,5 +82,9 @@ def test_tel001_facts_survive_without_assessment_and_render_on_actual_routes(mon
     diagnostics, _ = executive_workspace_page(package.import_run_id, {}, view="explore")
     assert "ENTERPRISE FACTUAL PRESENTATION RECONCILIATION" in diagnostics
     assert "ENTERPRISE FACTUAL SYNTHESIS TRACE" in diagnostics
+    assert all(label in diagnostics for label in (
+        "Source profile field", "Qualifying factual inputs", "Governed synthesis",
+        "Executive consumption", "Rendered", "PASS",
+    ))
     assert "EXPECTED ABSENCE" in diagnostics and "UNSUPPORTED" in diagnostics
     assert "Present but incomplete" not in diagnostics
