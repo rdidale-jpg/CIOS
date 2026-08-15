@@ -216,7 +216,10 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     if view == "aspect":
         return _page(f"{collection.replace('-', ' ').title()} — {title}", _styles() + _aspect_page(twin, import_run_id, title, collection, domain, mission)), 200
     if view == "enterprise":
-        ent = next((e for e in twin.enterprises if e.identity_key == enterprise_id), None)
+        # Resolve navigation inside this assembled import.  Association reads
+        # below consume ``ent.identity_key`` (the candidate object identity),
+        # not this route/presentation identity.
+        ent = next((e for e in twin.enterprises if e.presentation_key == enterprise_id), None)
         if ent is None:
             return _page("Enterprise dossier unavailable", "<section class='hero'><h1>Enterprise dossier unavailable</h1></section>"), 404
         return _page(f"Enterprise Intelligence — {ent.name}", _styles() + _dossier(ent, twin, import_run_id, mission)), 200
@@ -537,7 +540,7 @@ def _enterprise_card(e, run_id):
             for label, value in executive_record_view_model(identity).fields
             if label != "Overview"
         )
-    return f"<a class='enterprise-card' href='/blueprint-import/{escape(run_id)}/enterprises/{escape(e.identity_key)}'><h3>{escape(e.name)}</h3>{body}{canonical_fields}</a>"
+    return f"<a class='enterprise-card' href='/blueprint-import/{escape(run_id)}/enterprises/{escape(e.presentation_key)}'><h3>{escape(e.name)}</h3>{body}{canonical_fields}</a>"
 
 
 def _validation_report(twin: SemanticTwin) -> str:
@@ -1423,8 +1426,10 @@ def _population_and_association_reconciliation(twin: SemanticTwin) -> str:
         duplicate_rows = len(qualifying_rows) - len(programme_ids) - len(opportunity_ids)
         result = "PASS" if (set(source_programmes) == set(programme_ids) == set(rendered_programmes)
                             and set(source_opportunities) == set(opportunity_ids) == set(rendered_opportunities)) else "FAIL"
+        if result == "FAIL" and (source_programmes or source_opportunities) and not (programme_ids or opportunity_ids):
+            result = "FAIL — Source relationship truth contains associations but runtime association query returned none."
         ids = lambda values: ", ".join(escape(value) for value in values) or "None"
-        association_rows.append(f"<tr><td>{escape(ent.name)}<br><code>{escape(ent.identity_key)}</code></td><td>{ids(source_programmes)}</td><td>{ids(programme_ids)}</td><td>{ids(rendered_programmes)}</td><td>{ids(source_opportunities)}</td><td>{ids(opportunity_ids)}</td><td>{ids(rendered_opportunities)}</td><td>{ids(missing_query)}</td><td>{ids(missing_render)}</td><td>{ids(unexpected)}</td><td>{duplicate_rows}</td><td>{result}</td></tr>")
+        association_rows.append(f"<tr><td>{escape(ent.name)}</td><td><code>{escape(ent.presentation_key)}</code></td><td><code>{escape(ent.identity_key)}</code></td><td>{ids(source_programmes)}</td><td>{ids(programme_ids)}</td><td>{ids(rendered_programmes)}</td><td>{ids(source_opportunities)}</td><td>{ids(opportunity_ids)}</td><td>{ids(rendered_opportunities)}</td><td>{ids(missing_query)}</td><td>{ids(missing_render)}</td><td>{ids(unexpected)}</td><td>{duplicate_rows}</td><td>{result}</td></tr>")
         identity = next((o for o in ent.records if o.kind in {"enterprise_twin", "enterprise", "entity"}), ent.records[0])
         dimension_fields = (
             ("Operating Model", ("operating_model", "operating_structure", "business_units")),
@@ -1441,7 +1446,7 @@ def _population_and_association_reconciliation(twin: SemanticTwin) -> str:
     return (relationship_summary+"<section class='card' id='business-object-population-reconciliation'><h2>Business Object Population Reconciliation</h2>"
             "<table><thead><tr><th>Family</th><th>Source objects</th><th>Candidate objects</th><th>Unique canonical identities</th><th>Executive/rendered entities</th><th>Duplicates</th><th>Supporting records incorrectly classified</th><th>Population reconciliation</th></tr></thead><tbody>"+"".join(population_rows)+"</tbody></table></section>"
             "<section class='card' id='enterprise-association-reconciliation'><h2>Enterprise Association Reconciliation</h2>"
-            "<table><thead><tr><th>Enterprise</th><th>Source expected Programmes</th><th>Query-resolved Programmes</th><th>Rendered Programmes</th><th>Source expected Opportunities</th><th>Query-resolved Opportunities</th><th>Rendered Opportunities</th><th>Missing at query</th><th>Missing at render</th><th>Unexpected</th><th>Duplicates collapsed</th><th>Status</th></tr></thead><tbody>"+"".join(association_rows)+"</tbody></table></section>"
+            "<table><thead><tr><th>Enterprise</th><th>Presentation identity</th><th>Canonical candidate identity</th><th>Source expected Programmes</th><th>Query-resolved Programmes</th><th>Rendered Programmes</th><th>Source expected Opportunities</th><th>Query-resolved Opportunities</th><th>Rendered Opportunities</th><th>Missing at query</th><th>Missing at render</th><th>Unexpected</th><th>Duplicates collapsed</th><th>Status</th></tr></thead><tbody>"+"".join(association_rows)+"</tbody></table></section>"
             "<section class='card' id='executive-dimension-reconciliation'><h2>Executive Dimension Reconciliation</h2><table><thead><tr><th>Enterprise</th><th>Dimension</th><th>Qualifying factual fields</th><th>Selected projection</th><th>Rendered state</th><th>Missing requirements</th><th>Invalid fallback detected</th></tr></thead><tbody>"+"".join(dimension_rows)+"</tbody></table></section>")
 
 

@@ -33,7 +33,10 @@ class SemanticObject:
 
 @dataclass(frozen=True)
 class SemanticEnterprise:
+    # The imported business-object identity used by relationship endpoints.
     identity_key: str
+    # A navigation identity only; never relationship evidence.
+    presentation_key: str
     name: str
     aliases: tuple[str, ...]
     records: tuple[SemanticObject, ...]
@@ -392,7 +395,8 @@ def assemble_semantic_twin(candidates: list[dict[str, Any]]) -> SemanticTwin:
         missing = sorted(ref for ref in refs if ref not in by_id)
         unresolved_all.update(missing)
         associated = list({o.record_id: o for o in seed + contextual + resolved}.values())
-        enterprises.append(SemanticEnterprise(key, names[key], tuple(sorted({names[key]})),
+        presentation_key = re.sub(r"[^a-z0-9]+", "-", names[key].casefold()).strip("-")
+        enterprises.append(SemanticEnterprise(key, presentation_key, names[key], tuple(sorted({names[key]})),
                             tuple(associated), key in ambiguous, tuple(missing)))
     return SemanticTwin(objects, tuple(enterprises), tuple(sorted(unresolved_all)))
 

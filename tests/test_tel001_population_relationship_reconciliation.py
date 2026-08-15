@@ -18,6 +18,14 @@ EXPECTED_ASSOCIATIONS = {
     "ENT-CITYFIBRE": ({"PROG-CITYFIBRE-WHOLESALE"}, {"OPP-CITYFIBRE-PROJECT-GIGABIT", "OPP-CITYFIBRE-WHOLESALE"}),
     "ENT-TALKTALK": ({"PROG-TALKTALK-PXC-DEMERGER"}, {"OPP-TALKTALK-COST", "OPP-PXC-PLATFORM-EFFICIENCY"}),
 }
+EXPECTED_IDENTITIES = {
+    "BT Group": ("bt-group", "ENT-BT"),
+    "CityFibre": ("cityfibre", "ENT-CITYFIBRE"),
+    "Openreach": ("openreach", "ENT-OPENREACH"),
+    "TalkTalk": ("talktalk", "ENT-TALKTALK"),
+    "Virgin Media O2": ("virgin-media-o2", "ENT-VMO2"),
+    "VodafoneThree": ("vodafonethree", "ENT-VODAFONETHREE"),
+}
 
 
 def _runtime(monkeypatch, tmp_path):
@@ -60,13 +68,31 @@ def test_all_enterprise_rendered_associations_equal_canonical_relationship_sets(
         expected_programmes = {row.related_business_object_id for row in programme_evidence}
         expected_opportunities = {row.related_business_object_id for row in opportunity_evidence}
         html, route_status = executive_workspace_page(
-            package.import_run_id, {}, view="enterprise", enterprise_id=enterprise.identity_key)
+            package.import_run_id, {}, view="enterprise", enterprise_id=enterprise.presentation_key)
         assert route_status == 200
         actual_programmes = set(re.findall(r"<article data-business-object-id='([^']+)'", html))
         actual_opportunities = set(re.findall(r"<div data-business-object-id='([^']+)'", html))
         assert actual_programmes == expected_programmes
         assert actual_opportunities == expected_opportunities
         assert (expected_programmes, expected_opportunities) == EXPECTED_ASSOCIATIONS[enterprise.identity_key.upper()]
+
+
+def test_presentation_routes_handoff_imported_candidate_identity(monkeypatch, tmp_path):
+    package, _summary, twin = _runtime(monkeypatch, tmp_path)
+    assert {enterprise.name: (enterprise.presentation_key, enterprise.identity_key.upper())
+            for enterprise in twin.enterprises} == EXPECTED_IDENTITIES
+    for enterprise in twin.enterprises:
+        html, status = executive_workspace_page(
+            package.import_run_id, {}, view="enterprise", enterprise_id=enterprise.presentation_key)
+        assert status == 200
+        assert query_subject_associations(twin, enterprise.identity_key)
+        assert f"/enterprises/{enterprise.presentation_key}" in executive_workspace_page(
+            package.import_run_id, {}, view="workspace")[0]
+        # The canonical ID is not accepted as a route identity: the handoff
+        # cannot be bypassed or mocked by navigating directly to an endpoint.
+        _missing, missing_status = executive_workspace_page(
+            package.import_run_id, {}, view="enterprise", enterprise_id=enterprise.identity_key)
+        assert missing_status == 404
     bt = next(e for e in twin.enterprises if e.identity_key.casefold() == "ent-bt")
     programmes = enterprise_associations(twin, bt, {"transformation_programme"})
     opportunities = enterprise_associations(twin, bt, {"opportunity_hypothesis"})
