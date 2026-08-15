@@ -425,13 +425,13 @@ def test_upload_page_shows_current_deployed_change_acceptance_panel(monkeypatch,
     assert panel < upload
     assert "CURRENT PILOT CHANGE" not in page
     assert "Researcher-to-Flora Translation Audit" not in page
-    assert "Enterprise Association Consumer Correction" in page
+    assert "Enterprise Factual Synthesis &amp; Operational Acceptance Correction" in page
     assert "88f053e6cee6fe2fef7feba1e7f4553194b7a040" in page
     assert "Status" in page and "Should I test now?" in page and "Next action" in page
     assert "Technical deployment evidence" in page
     assert "<details><summary>Technical deployment evidence</summary>" in page
-    assert "import-scoped candidate relationship resolution as the sole Enterprise association truth owner" in page
-    assert "governed relationship type and direction semantics" in page
+    assert "traceable factual Enterprise descriptions" in page
+    assert "functional human-test readiness" in page
     assert "Fresh import required:</strong> No" in page
     assert "Tel001 Fixture Checksum" in page and "Checksum Status" in page
     assert "Known limitations" in page
@@ -514,7 +514,8 @@ def test_deployment_status_wrong_branch_service_scenario():
 def test_deployment_status_missing_metadata_scenario(monkeypatch):
     monkeypatch.setattr("cios.applications.flora.blueprint_import.deployment_status._git_contains", lambda deployed, source: "unknown — repository history unavailable")
     decision = decide_deployment_status(_change(commit_sha="older", deployed_change_marker="Unavailable", deployment_timestamp="Unavailable", deployment_started_at="Unavailable"), "2026-08-05T12:05:00+00:00")
-    assert decision.status_code == "METADATA INCOMPLETE"
+    assert decision.status_code == "READY FOR FUNCTIONAL TEST — DEPLOYMENT METADATA INCOMPLETE"
+    assert decision.should_test_now == "YES"
 
 
 def test_deployment_status_ui_only_change_does_not_reimport():
@@ -534,5 +535,22 @@ def test_functional_acceptance_failure_blocks_test_with_exact_reason():
         "rendered_route_test_status": "PASS", "diagnostics_reconciliation_status": "PASS",
     })
     decision = decide_deployment_status(change, "2026-08-05T12:05:00+00:00")
-    assert decision.should_test_now == "No"
+    assert decision.should_test_now == "NO"
     assert decision.next_action == "Functional acceptance failed: end_to_end_test_status"
+
+
+def test_functional_pass_with_incomplete_metadata_is_ready_for_human_test(monkeypatch):
+    monkeypatch.setattr("cios.applications.flora.blueprint_import.deployment_status._git_contains", lambda *_: "unknown — repository history unavailable")
+    change = _change(commit_sha="Unavailable", deployed_change_marker="Unavailable", deployment_timestamp="Unavailable", deployment_started_at="Unavailable")
+    decision = decide_deployment_status(change, "2026-08-05T12:05:00+00:00")
+    assert decision.status_code == "READY FOR FUNCTIONAL TEST — DEPLOYMENT METADATA INCOMPLETE"
+    assert decision.should_test_now == "YES"
+
+
+def test_read_only_canonical_projection_change_never_requires_reimport():
+    decision = decide_deployment_status(_change(
+        candidate_state_impact="read-only",
+        material_runtime_components_changed=["Canonical Factual Projection"],
+        reimport_required_if_older_than_change="Unavailable",
+    ), "Unavailable")
+    assert decision.fresh_import_required == "No"

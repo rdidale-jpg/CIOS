@@ -56,6 +56,15 @@ def _git_contains(deployed_sha: str, source_sha: str) -> str:
 
 
 def classify_candidate_freshness(change: dict[str, Any], imported_at: Any) -> tuple[str, list[str]]:
+    impact = str(change.get("candidate_state_impact") or "").strip().lower()
+    if impact in {"read-only", "read_only", "projection-only", "none"}:
+        return "No", []
+    if impact in {"regenerate", "persisted-state-change"}:
+        cutoff = _parse_time(change.get("reimport_required_if_older_than_change"))
+        imported = _parse_time(imported_at)
+        if not cutoff or not imported:
+            return "Cannot determine", ["candidate timestamp or regeneration cutoff unavailable"]
+        return ("Yes" if imported < cutoff else "No"), []
     components = set(change.get("material_runtime_components_changed") or [])
     if not components:
         return "No", []
@@ -105,12 +114,12 @@ def decide_deployment_status(change: dict[str, Any], imported_at: Any = "") -> D
 
     if wrong_branch or failed:
         return DeploymentDecision("DEPLOYMENT PROBLEM", "Deployment problem", "No", "Flora could not verify the latest approved change. This requires a Codex/Render deployment correction. No action is required from the Chief Architect.", fresh, included, containment, merge_mode, "authoritative deployment problem", unresolved)
-    if included and not functional_pass:
+    if not functional_pass:
         failed_checks = [key for key in ("checksum_status", "end_to_end_test_status",
                          "rendered_route_test_status", "diagnostics_reconciliation_status")
                          if str(acceptance.get(key) or "missing").upper() != "PASS"]
         reason = "Functional acceptance failed: " + ", ".join(failed_checks)
-        return DeploymentDecision("FUNCTIONAL ACCEPTANCE FAILED", "Functional acceptance failed", "No", reason, fresh, True, containment, merge_mode, "functional acceptance failure", unresolved)
+        return DeploymentDecision("FUNCTIONAL ACCEPTANCE FAILED", "Functional acceptance failed", "NO", reason, fresh, included, containment, merge_mode, "functional acceptance failure", unresolved)
     if included and fresh == "Yes":
         return DeploymentDecision("REIMPORT REQUIRED", "Reimport required", "Yes — after reimport", "The latest approved change is live. Import the unchanged TEL-001 package again, then follow the test checklist.", fresh, True, containment, merge_mode, "authoritative inclusion", unresolved)
     if included and fresh == "No" and not unresolved:
@@ -122,4 +131,7 @@ def decide_deployment_status(change: dict[str, Any], imported_at: Any = "") -> D
         return DeploymentDecision("WAITING FOR DEPLOYMENT", "Waiting for deployment", "No", "No action required. Flora is waiting for Render to publish the latest approved change. Refresh this page shortly.", fresh, False, containment, merge_mode, "deployment window open", unresolved)
     if deadline and now > deadline and not unresolved:
         return DeploymentDecision("DEPLOYMENT PROBLEM", "Deployment problem", "No", "Flora could not verify the latest approved change. This requires a Codex/Render deployment correction. No action is required from the Chief Architect.", fresh, False, containment, merge_mode, "deployment window elapsed", unresolved)
+    if functional_pass:
+        limitation = "; ".join(unresolved) or "deployment identity metadata incomplete"
+        return DeploymentDecision("READY FOR FUNCTIONAL TEST — DEPLOYMENT METADATA INCOMPLETE", "Ready for functional test — deployment metadata incomplete", "YES", f"Proceed with functional testing. Known limitation: {limitation}", fresh, False, containment, merge_mode, "functional acceptance passed; optional deployment metadata incomplete", unresolved)
     return DeploymentDecision("METADATA INCOMPLETE", "Metadata incomplete", "No", "Flora cannot yet verify the deployed change because deployment metadata is incomplete. No technical action is required from the Chief Architect.", fresh, False, containment, merge_mode, "insufficient metadata", unresolved)
