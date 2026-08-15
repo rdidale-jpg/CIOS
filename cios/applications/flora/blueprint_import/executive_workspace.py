@@ -42,7 +42,7 @@ from .twin_governance import project_twin_identity
 from .validator import BlueprintPackageValidator, can_inspect_blueprint_package
 from .review import ImportHumanReviewRepository
 from .lifecycle import ImportLifecycleService
-from .presentation_contract import fact_state, plural, review_label, promotion_label
+from .presentation_contract import fact_state, human_import_state, plural, review_label, promotion_label
 
 THEMES = (("market-condition", "Industry outlook", ("market", "industry", "sector", "economic")),
           ("financial-pressure", "Transformation pressures", ("financial", "cost", "revenue", "margin", "productivity", "resilience")),
@@ -761,7 +761,7 @@ def _explorer(twin, run_id, mission, selected="", domain="all"):
     title = active.label if active else "Advanced Inspection"
     total = len(active.objects) if active else 0
     anomaly_count = len(_page_association_anomalies(twin))
-    reconciliation = _population_and_association_reconciliation(twin)
+    reconciliation = _population_and_association_reconciliation(twin, run_id)
     return f"{proof_html(detailed=True)}<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a><strong>Advanced Inspection</strong></nav><header class='hero'><h1>Advanced Inspection</h1><p>{escape(active.description) if active else 'Reconcile business objects, evidence, relationships and technical traces.'}</p></header><section class='card diagnostic-summary'><h2>Diagnostic Summary</h2><div class='metric-grid'><article><strong>Package integrity</strong><p>Validated import available</p></article><article><strong>Object-family reconciliation</strong><p>{len(twin.objects)} records inventoried</p></article><article><strong>Association anomalies</strong><p>{anomaly_count}</p></article><article><strong>Stale-state status</strong><p>See runtime comparison</p></article></div><form class='diagnostic-filters'><label>Object family <select><option>All families</option></select></label><label>Status <select><option>All statuses</option></select></label><label>Anomaly <select><option>All anomalies</option><option>Missing subject</option><option>Count mismatch</option><option>Unsupported record</option><option>Residual content</option></select></label></form></section>{reconciliation}<section class='card'><h2>Business collections</h2><div class='collection-links'>{links}</div><details><summary>Technical and supporting collections</summary><div class='collection-links'>{supporting_links or '<p>No supporting collections.</p>'}</div></details></section><section class='card'><h2>{escape(title)}{f' — {total} total' if active else ''}</h2><p>{f'Showing {total} distinct identities' if active and active.key == 'enterprises' else f'Showing {total} of {total} total records' if active else ''}</p>{content}</section><details class='card'><summary>Technical reconciliation traces</summary><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></details>"
 
 
@@ -773,7 +773,7 @@ def _dossier(ent, twin, run_id, mission):
     # The dossier consumes the governed derivative carried by its canonical
     # factual view model.  It must not regenerate a parallel presentation value.
     synthesis = factual.enterprise_synthesis
-    description = synthesis.statement if synthesis and synthesis.status == "GENERATED" else ""
+    description = synthesis.statement if synthesis and synthesis.status == "SUPPORTED" else ""
     domains = sorted({d.title() for o in relevant for d in o.domains})
     missing_overview = [label for label, value in (("plain-language description", description),
         ("ownership or organisational form", _field(identity, "ownership", "organisational_form") if identity else ""),
@@ -820,7 +820,8 @@ def _dossier(ent, twin, run_id, mission):
     rendered = "".join(sections).replace("<section class='card'><h2>Major Programmes", "<section class='card' id='major-programmes'><h2>Major Programmes").replace("<section class='card'><h2>Opportunities", "<section class='card' id='enterprise-opportunities'><h2>Opportunities").replace("<section class='card'><h2>Research Gaps", "<section class='card' id='research-needs'><h2>Remaining Research Needs")
     review = ImportHumanReviewRepository().get(run_id)
     promoted = ImportLifecycleService().get(run_id).state == "promoted"
-    return _primary_nav(run_id, "")+f"<header class='hero'><p>Enterprise dossier</p><h1>{escape(ent.name)}</h1><p>{escape(hero)}</p></header><aside class='executive-status'><strong>Review status:</strong> {escape(review_label(review))} · <strong>Promotion status:</strong> {escape(promotion_label(promoted))} · <strong>Assessment status:</strong> Assessment not yet performed · <strong>Recommendation status:</strong> Not eligible</aside>{section_nav}"+rendered
+    import_state = human_import_state(review, promoted)
+    return _primary_nav(run_id, "")+f"<header class='hero'><p>Enterprise dossier</p><h1>{escape(ent.name)}</h1><p>{escape(hero)}</p></header><aside class='executive-status'><strong>Review status:</strong> {escape(review_label(review))} · <strong>Promotion status:</strong> {escape(promotion_label(promoted))} · <strong>Human import state:</strong> {escape(import_state)} · <strong>Recommendation status:</strong> Not eligible</aside>{section_nav}"+rendered
 
 
 def _associated_records(twin: SemanticTwin, ent: SemanticEnterprise, predicate) -> list[SemanticObject]:
@@ -934,7 +935,7 @@ def _twin_map(twin: SemanticTwin, run_id: str, mission: CommercialMission | None
         tiles.append(f"<a class='twin-map-tile' href='{href}'><h3>{escape(a.name)}</h3><p class='coverage'>{escape(count)}</p><p>{escape(explanation)}</p></a>")
     review = ImportHumanReviewRepository().get(run_id)
     promoted = ImportLifecycleService().get(run_id).state == "promoted"
-    return f"<aside class='executive-status'><strong>Review status:</strong> {escape(review_label(review))} · <strong>Promotion status:</strong> {escape(promotion_label(promoted))} · <strong>Assessment status:</strong> Assessment not yet performed · <strong>Recommendation status:</strong> Not eligible</aside><section class='card twin-map' id='twin-map'><h2>Executive Twin Map</h2><p>Business intelligence supplied in this Twin, with factual inventory kept separate from assessment readiness.</p><div class='twin-map-grid'>{''.join(tiles)}</div><details><summary>Review details</summary><p>Human review is recorded in the existing Review stage. Promotion remains separate.</p></details></section>"
+    return f"<aside class='executive-status'><strong>Review status:</strong> {escape(review_label(review))} · <strong>Promotion status:</strong> {escape(promotion_label(promoted))} · <strong>Human import state:</strong> {escape(human_import_state(review, promoted))} · <strong>Recommendation status:</strong> Not eligible</aside><section class='card twin-map' id='twin-map'><h2>Executive Twin Map</h2><p>Business intelligence supplied in this Twin, with factual inventory kept separate from the human import decision.</p><div class='twin-map-grid'>{''.join(tiles)}</div><details><summary>Review details</summary><p>Human review is recorded in the existing Review stage. Promotion remains separate.</p></details></section>"
 
 def _owner_assessed(twin: SemanticTwin, key: str) -> bool:
     return next(a for a in executive_assessments(twin) if a.key == key).state not in {
@@ -1376,10 +1377,10 @@ def _advanced_diagnostics(twin,run_id,summary,mission):
     association_anomalies = _page_association_anomalies(twin)
     relationship_anomalies = sum(not row.resolved for row in resolve_relationships(twin))
     summary_html = f"<section class='card diagnostic-summary'><h2>Executive Diagnostic Summary</h2><div class='metric-grid'><article><h3>Object-count reconciliation</h3><p>{len(twin.objects)} records reconciled</p></article><article><h3>Factual projection reconciliation</h3><p>Shared read boundary active</p></article><article><h3>Subject-resolution failures</h3><p>{unresolved}</p></article><article><h3>Relationship resolution anomalies</h3><p>{relationship_anomalies}</p></article><article><h3>Enterprise presentation association anomalies</h3><p>{len(association_anomalies)}</p></article><article><h3>Research Gap contradictions</h3><p>{len(twin.of_kind('contradiction'))}</p></article><article><h3>Page/diagnostic count mismatches</h3><p>0</p></article><article><h3>Stale-state status</h3><p>See runtime comparison</p></article></div><p>Relationship resolution and Enterprise presentation anomalies are separate measures. Highest-value failures are shown first.</p>{('<p><strong>Offending object IDs:</strong> ' + escape(', '.join(association_anomalies)) + '</p>') if association_anomalies else ''}</section>"
-    return _primary_nav(run_id,"inspection")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+summary_html+_population_and_association_reconciliation(twin)+_observation_pipeline_diagnostics(twin,run_id)+_pilot_runtime_comparison(twin)+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
+    return _primary_nav(run_id,"inspection")+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+summary_html+_population_and_association_reconciliation(twin, run_id)+_observation_pipeline_diagnostics(twin,run_id)+_pilot_runtime_comparison(twin)+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
 
 
-def _population_and_association_reconciliation(twin: SemanticTwin) -> str:
+def _population_and_association_reconciliation(twin: SemanticTwin, run_id: str = "") -> str:
     """Diagnostic projection over the same identity and association functions as pages."""
     families = (("Programmes", {"transformation_programme"}),
                 ("Opportunities", {"opportunity_hypothesis", "opportunity", "ranked_opportunity", "opportunity_twin"}))
@@ -1404,6 +1405,9 @@ def _population_and_association_reconciliation(twin: SemanticTwin) -> str:
         f"<tr><td>{len(resolved_relationships)}</td><td>{len(resolved_relationships)-promoted_resolved}</td><td>{candidate_resolved}</td><td>{candidate_unresolved}</td><td>{promoted_resolved}</td><td>{missing}</td><td>{ambiguous}</td><td>{unsupported}</td><td>0</td><td>{invalid}</td></tr></tbody></table><p>Candidate resolution is read-only identity resolution inside this import run; it does not review, assess or promote any object.</p></section>")
     association_rows = []
     dimension_rows = []
+    review = ImportHumanReviewRepository().get(run_id) if run_id else None
+    promoted = bool(run_id and ImportLifecycleService().get(run_id).state == "promoted")
+    import_state = human_import_state(review, promoted)
     for ent in twin.enterprises:
         relationship_subject = ent.relationship_subject_identity or ent.identity_key
         programmes = enterprise_associations(twin, ent, {"transformation_programme"})
@@ -1451,13 +1455,13 @@ def _population_and_association_reconciliation(twin: SemanticTwin) -> str:
                 f"<td>{'Present' if dimension.present else 'Absent'}</td>"
                 f"<td>{'Human-readable' if dimension.present else 'Truthful absence'}</td>"
                 f"<td>{len(dimension.evidence_refs)}</td><td>{len(dimension.unknown_refs)}</td>"
-                f"<td>{len(dimension.contradiction_refs)}</td><td>Assessment not yet performed</td>"
+                f"<td>{len(dimension.contradiction_refs)}</td><td>{escape(import_state)}</td>"
                 f"<td>{escape(rendered)}</td><td>{escape(first_divergence)}</td></tr>")
     return (relationship_summary+"<section class='card' id='business-object-population-reconciliation'><h2>Business Object Population Reconciliation</h2>"
             "<table><thead><tr><th>Family</th><th>Source objects</th><th>Candidate objects</th><th>Unique canonical identities</th><th>Executive/rendered entities</th><th>Duplicates</th><th>Supporting records incorrectly classified</th><th>Population reconciliation</th></tr></thead><tbody>"+"".join(population_rows)+"</tbody></table></section>"
             "<section class='card' id='enterprise-association-reconciliation'><h2>Enterprise Identity and Association Reconciliation</h2>"
             "<table><thead><tr><th>Enterprise</th><th>Source identity</th><th>Candidate identity</th><th>Executive/presentation identity</th><th>Relationship subject identity</th><th>Source Programme IDs</th><th>Query Programme IDs</th><th>Rendered Programme IDs</th><th>Source Opportunity IDs</th><th>Query Opportunity IDs</th><th>Rendered Opportunity IDs</th><th>Missing at query</th><th>Missing at render</th><th>Unexpected</th><th>Duplicates collapsed</th><th>Status</th></tr></thead><tbody>"+"".join(association_rows)+"</tbody></table></section>"
-            "<section class='card' id='enterprise-factual-presentation-reconciliation'><h2>ENTERPRISE FACTUAL PRESENTATION RECONCILIATION</h2><table><thead><tr><th>Enterprise</th><th>Dimension</th><th>Source</th><th>Candidate</th><th>Canonical factual state</th><th>Executive factual state</th><th>Rendered state</th><th>Evidence count</th><th>Unknown count</th><th>Contradiction count</th><th>Assessment state</th><th>Status</th><th>First divergence</th></tr></thead><tbody>"+"".join(dimension_rows)+"</tbody></table></section>"+_enterprise_factual_synthesis_diagnostics(twin))
+            "<section class='card' id='enterprise-factual-presentation-reconciliation'><h2>ENTERPRISE FACTUAL PRESENTATION RECONCILIATION</h2><table><thead><tr><th>Enterprise</th><th>Dimension</th><th>Source</th><th>Candidate</th><th>Canonical factual state</th><th>Executive factual state</th><th>Rendered state</th><th>Evidence count</th><th>Unknown count</th><th>Contradiction count</th><th>Human import state</th><th>Status</th><th>First divergence</th></tr></thead><tbody>"+"".join(dimension_rows)+"</tbody></table></section>"+_enterprise_factual_synthesis_diagnostics(twin, import_state))
 
 
 def _observation_pipeline_diagnostics(twin: SemanticTwin, run_id: str) -> str:
@@ -1487,7 +1491,7 @@ def _observation_pipeline_diagnostics(twin: SemanticTwin, run_id: str) -> str:
             + "".join(articles) + "</section>")
 
 
-def _enterprise_factual_synthesis_diagnostics(twin: SemanticTwin) -> str:
+def _enterprise_factual_synthesis_diagnostics(twin: SemanticTwin, import_state: str = "Candidate — awaiting human import decision") -> str:
     """Reconcile source, CFP synthesis, executive consumption and rendering."""
     rows = []
     for ent in twin.enterprises:
@@ -1496,29 +1500,33 @@ def _enterprise_factual_synthesis_diagnostics(twin: SemanticTwin) -> str:
         identity = next((o for o in ent.records if o.kind in {"enterprise", "enterprise_twin", "entity"}), ent.records[0])
         dimensions = {d.key: d for d in enterprise_factual_dimensions(ent)}
         source_profile = bool(_field(identity, "organisation_description"))
-        qualifying = tuple(key for key in ("profile", "operating-model", "strategy") if dimensions[key].present)
-        generated = bool(trace and trace.status == "GENERATED")
+        candidates = tuple(key for key in ("profile", "operating-model", "strategy") if dimensions[key].present)
+        generated = bool(trace and trace.status == "SUPPORTED")
         values = lambda items: ", ".join(items) or "None"
         rows.append(
             f"<tr><td>{escape(ent.name)}</td><td>{'Present' if source_profile else 'Absent'}</td>"
-            f"<td>{escape(values(qualifying))}</td><td>{escape(trace.status if trace else 'INSUFFICIENT EVIDENCE')}</td>"
+            f"<td>{len(candidates)}</td><td>{len(trace.input_dimensions)}</td><td>{len(trace.rejected_dimensions)}</td>"
+            f"<td>{escape(trace.status if trace else 'INSUFFICIENT EVIDENCE')}</td>"
             f"<td>{escape(trace.statement if trace and trace.statement else 'Truthful absence')}</td>"
+            f"<td>{len(trace.propositions)}</td>"
             f"<td>{escape(values(trace.input_dimensions))}</td>"
             f"<td>{escape(values(trace.input_fact_ids))}</td>"
+            f"<td>{escape(values(trace.rejected_dimensions))}: {escape(values(trace.rejection_reasons))}</td>"
             f"<td>{escape(values(trace.evidence_refs))}</td><td>{escape(trace.confidence)}</td>"
             f"<td>{escape(values(trace.unknown_refs))}</td>"
             f"<td>{escape(values(trace.contradiction_refs))}</td>"
+            f"<td>{escape(values(trace.blocking_unknown_refs))}</td>"
+            f"<td>{escape(values(trace.blocking_contradiction_refs))}</td>"
             f"<td>{'Present' if generated else 'Absent'}</td>"
             f"<td>{'Present' if generated else 'Absent'}</td>"
-            f"<td>{'PASS' if generated else 'INSUFFICIENT EVIDENCE'}</td><td>NO</td></tr>"
+            f"<td>{escape(import_state)}</td><td>{escape(trace.first_divergence)}</td></tr>"
         )
     return ("<section class='card' id='enterprise-factual-synthesis-trace'>"
             "<h2>ENTERPRISE FACTUAL SYNTHESIS TRACE</h2>"
-            "<table><thead><tr><th>Enterprise</th><th>Source profile field</th><th>Qualifying factual inputs</th><th>Governed synthesis</th><th>Synthesized statement</th>"
-            "<th>Input factual dimensions</th><th>Input fact IDs</th><th>Evidence refs</th>"
-            "<th>Confidence</th><th>Unknowns preserved</th><th>Contradictions preserved</th>"
-            "<th>Executive consumption</th><th>Rendered</th><th>Status</th>"
-            "<th>Assessment required</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table></section>")
+            "<table><thead><tr><th>Enterprise</th><th>Source profile</th><th>Candidate factual inputs</th><th>Qualifying factual inputs</th><th>Rejected factual inputs</th><th>Qualification result</th><th>Synthesized statement</th>"
+            "<th>Synthesized factual propositions</th><th>Source factual dimensions</th><th>Source fact IDs</th><th>Rejected facts / reasons</th><th>Evidence refs</th>"
+            "<th>Confidence</th><th>Unknowns preserved</th><th>Contradictions preserved</th><th>Unknowns blocking synthesis</th><th>Contradictions blocking synthesis</th>"
+            "<th>Executive consumption</th><th>Rendered</th><th>Human import state</th><th>First divergence</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table></section>")
 
 
 def _observation_pipeline_empty_family(family: str) -> str:

@@ -16,13 +16,13 @@ PROHIBITED_TECHNICAL_TERMS = (
 FACT_STATES = (
     "Present and sufficient", "Present but incomplete", "Present but unsupported",
     "Known Unknown — further evidence required", "Contradicted", "Not supplied",
-    "Assessment not yet performed", "Not applicable",
+    "Candidate — awaiting human import decision", "Not applicable",
 )
 EMPTY_STATES = {
     "facts": "Not supplied",
     "unknown": "No explicit Unknown supplied",
     "contradiction": "No explicit Contradiction supplied",
-    "assessment": "Assessment not yet performed",
+    "assessment": "Candidate — awaiting human import decision",
 }
 
 
@@ -38,6 +38,15 @@ def promotion_label(promoted: bool) -> str:
     return "Promoted" if promoted else "Not promoted"
 
 
+def human_import_state(review: dict | None, promoted: bool) -> str:
+    """Describe the implemented review/promotion lifecycle without inventing a second review."""
+    if promoted:
+        return "Human import decision accepted — promoted"
+    if review:
+        return "Human import decision recorded — not promoted"
+    return "Candidate — awaiting human import decision"
+
+
 def fact_state(*, present: bool, complete: bool = False, supported: bool = True,
                unknown: bool = False, contradicted: bool = False) -> str:
     if contradicted:
@@ -49,4 +58,3 @@ def fact_state(*, present: bool, complete: bool = False, supported: bool = True,
     if not supported:
         return "Present but unsupported"
     return "Present and sufficient" if complete else "Present but incomplete"
-

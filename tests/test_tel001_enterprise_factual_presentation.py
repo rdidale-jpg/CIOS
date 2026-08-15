@@ -17,22 +17,45 @@ PACKAGE = Path("docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flo
 SHA256 = "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07"
 
 
-def _controlled_enterprise(attributes):
-    obj = SemanticObject("candidate-1", "enterprise_twin", "", "Control", ("EV-CONTROL",), "current", "Medium", "candidate", "control.json", "$.enterprise", False, original_id="ENT-CONTROL", attributes=attributes)
+def _controlled_enterprise(attributes, evidence=("EV-CONTROL",)):
+    obj = SemanticObject("candidate-1", "enterprise_twin", "", "Control", evidence, "current", "Medium", "candidate", "control.json", "$.enterprise", False, original_id="ENT-CONTROL", attributes=attributes)
     return SemanticEnterprise("ENT-CONTROL", "control", "Control", (), (obj,))
 
 
 def test_synthesis_refuses_insufficient_evidence_and_preserves_contradictions():
-    insufficient = enterprise_factual_synthesis(_controlled_enterprise({"description": "Control is an enterprise."}))
+    insufficient = enterprise_factual_synthesis(_controlled_enterprise({"description": "Control is an enterprise."}, ()))
     assert insufficient.status == "INSUFFICIENT EVIDENCE" and insufficient.statement == ""
     contradictory = enterprise_factual_synthesis(_controlled_enterprise({
         "description": "Control is an enterprise.",
         "operating_model": "Business Model: supplied factual model",
         "contradictions": ["CR-CONTROL"],
+        "contradiction_dimensions": {"profile": ["CR-CONTROL"]},
     }))
-    assert contradictory.status == "GENERATED"
+    assert contradictory.status == "SUPPORTED"
     assert contradictory.contradiction_refs == ("CR-CONTROL",)
+    assert contradictory.blocking_contradiction_refs == ("CR-CONTROL",)
+    assert contradictory.input_dimensions == ("operating-model",)
     assert "CR-CONTROL" not in contradictory.statement
+
+
+def test_truthful_absence_and_unrelated_unknown_do_not_invent_or_block():
+    absent = enterprise_factual_synthesis(_controlled_enterprise({}))
+    assert absent.status == "TRUTHFUL ABSENCE" and not absent.statement
+    supported = enterprise_factual_synthesis(_controlled_enterprise({
+        "operating_model": "Control operates a supplied service model",
+        "unknowns": ["UN-LEADERSHIP"],
+    }))
+    assert supported.status == "SUPPORTED"
+    assert supported.unknown_refs == ("UN-LEADERSHIP",)
+    assert supported.blocking_unknown_refs == ()
+    assert supported.propositions[0].evidence_refs == ("EV-CONTROL",)
+    blocked = enterprise_factual_synthesis(_controlled_enterprise({
+        "operating_model": "Control operating model is not established",
+        "unknowns": ["UN-OPERATING-MODEL"],
+        "unknown_dimensions": {"operating-model": ["UN-OPERATING-MODEL"]},
+    }))
+    assert blocked.status == "INSUFFICIENT EVIDENCE" and not blocked.statement
+    assert blocked.blocking_unknown_refs == ("UN-OPERATING-MODEL",)
 
 
 def test_tel001_facts_survive_without_assessment_and_render_on_actual_routes(monkeypatch, tmp_path):
@@ -60,7 +83,7 @@ def test_tel001_facts_survive_without_assessment_and_render_on_actual_routes(mon
         before = (identity.governance, identity.sufficiency)
         synthesis = enterprise_factual_synthesis(enterprise)
         canonical = factual_projection_for_enterprise(enterprise)
-        assert synthesis.status == "GENERATED"
+        assert synthesis.status == "SUPPORTED"
         assert synthesis.input_dimensions == ("profile", "operating-model", "strategy")
         assert len(synthesis.input_fact_ids) == 3 and synthesis.evidence_refs
         assert synthesis.assessment_required is False
@@ -72,7 +95,7 @@ def test_tel001_facts_survive_without_assessment_and_render_on_actual_routes(mon
         html = _dossier(enterprise, twin, package.import_run_id, None)
         assert escape(synthesis.statement) in html
         assert "Organisation description not supplied" not in html
-        assert "Assessment status:</strong> Assessment not yet performed" in html
+        assert "Human import state:</strong> Candidate — awaiting human import decision" in html
         assert "{'" not in html and "\": {" not in html
         assert (identity.governance, identity.sufficiency) == before
         del html
@@ -83,8 +106,8 @@ def test_tel001_facts_survive_without_assessment_and_render_on_actual_routes(mon
     assert "ENTERPRISE FACTUAL PRESENTATION RECONCILIATION" in diagnostics
     assert "ENTERPRISE FACTUAL SYNTHESIS TRACE" in diagnostics
     assert all(label in diagnostics for label in (
-        "Source profile field", "Qualifying factual inputs", "Governed synthesis",
-        "Executive consumption", "Rendered", "PASS",
+        "Source profile", "Qualifying factual inputs", "Qualification result",
+        "Executive consumption", "Rendered", "SUPPORTED",
     ))
     assert "EXPECTED ABSENCE" in diagnostics and "UNSUPPORTED" in diagnostics
     assert "Present but incomplete" not in diagnostics
