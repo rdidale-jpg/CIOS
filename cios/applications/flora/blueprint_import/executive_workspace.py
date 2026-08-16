@@ -24,6 +24,7 @@ from .canonical_factual_projection import (
 )
 from .intelligence_projection import executive_assessments
 from .executive_enterprise_intelligence import executive_enterprise_intelligence
+from .key_reports import KeyReport, key_reports_for_enterprise
 from .pilot_diagnostics import (
     context_header as _pilot_diag_context_header,
     enterprise_diagnostics as _pilot_enterprise_diagnostics,
@@ -163,6 +164,30 @@ def _executive_enterprise_intelligence_html(ent: SemanticEnterprise, twin: Seman
             f"<article><h3>Commercial opportunities</h3><div class='executive-opportunities'>{opportunities}</div></article>"
             f"<article><h3>Watchpoints</h3><ul>{watchpoints}</ul></article>"
             f"<article><h3>Evidence position</h3><p>{escape(intelligence.evidence_statement)}</p></article></div>{trace}</section>")
+
+
+def _key_reports_html(ent: SemanticEnterprise, run_id: str) -> str:
+    reports = key_reports_for_enterprise(ent)
+    def card(report: KeyReport | None, label: str) -> str:
+        if report is None:
+            return (f"<article><h3>{label}</h3><p><strong>NO QUALIFYING REPORT SUPPLIED</strong></p>"
+                    "<p>No governed report of this type is present for this Enterprise.</p></article>")
+        findings = ("<ul>" + "".join(f"<li>{escape(item)}</li>" for item in report.findings) + "</ul>"
+                    if report.findings else "<p>No governed extract or summary is supplied.</p>")
+        source = (f"<a href='{escape(report.source_url)}' rel='noopener'>View report</a>" if report.source_url
+                  else "<span>Original report is not directly available from the supplied evidence.</span>")
+        evidence = (f"<a href='/blueprint-import/{escape(run_id)}/explore?collection=evidence-sources#{escape(report.source.record_id)}'>Open evidence</a>")
+        period = " · ".join(filter(None, (report.reporting_period, report.publication_date))) or "Date not supplied"
+        return (f"<article data-evidence-id='{escape(business_object_id(report.source))}'><h3>{label}</h3>"
+                f"<p class='pill'>{escape(report.provenance)}</p><h4>{escape(report.title)}</h4>"
+                f"<p><strong>Reporting period / publication date:</strong> {escape(period)}</p>"
+                f"<p><strong>Source / publisher:</strong> {escape(report.publisher)}</p>"
+                f"<p><strong>Availability:</strong> {escape(report.availability)}</p>"
+                f"<h5>Key findings</h5>{findings}<p>{source} · {evidence}</p></article>")
+    return ("<section class='card key-reports' id='key-reports'><h2>Key reports</h2>"
+            "<p>Latest qualifying reports selected from governed Enterprise Evidence.</p>"
+            + card(reports.company_report, "Latest company financial reporting")
+            + card(reports.external_report, "Latest external analyst / market research") + "</section>")
 
 
 def _opportunity_contract(o: SemanticObject, mission: CommercialMission | None = None) -> tuple[bool, bool, list[str]]:
@@ -818,6 +843,9 @@ def _dossier(ent, twin, run_id, mission):
     if missing_overview:
         overview = (f"<p>{escape(description or 'Organisation description not supplied.')}</p>"
                     f"<p><strong>Still required:</strong> {escape(', '.join(missing_overview))}.</p>")
+        if factual.evidence_refs:
+            overview += ("<p><strong>Evidence available — further extraction possible.</strong> "
+                         "These requirements remain unresolved until the existing canonical extraction and governance process establishes the facts.</p>")
         hero = description or "Imported enterprise intelligence ready for review"
     else:
         overview = f"<p>{escape(description)}</p><p><strong>Organisational form:</strong> {escape(_field(identity, 'ownership', 'organisational_form'))}</p><p><strong>Principal activities:</strong> {escape(_field(identity, 'principal_activities', 'activities'))}</p><p><strong>Role in industry:</strong> {escape(_field(identity, 'industry_role', 'role'))}</p><p><strong>Current position:</strong> {escape(_field(identity, 'current_position'))}</p>"
@@ -840,6 +868,7 @@ def _dossier(ent, twin, run_id, mission):
         "strategy", "operating-model", "financial", "economics", "pressures",
         "leadership-governance", "technology", "supplier-ecosystem",
     ))
+    sections.insert(4, _key_reports_html(ent, run_id))
     programmes=_associated_records(twin, ent, lambda o: o.kind=='transformation_programme'); ready_programmes=[o for o in programmes if o.statement or _field(o,'objective','business_objective','title')]
     sections.append("<section class='card'><h2>Major Programmes</h2><p>Explicit enterprise relationship.</p>"+"".join(f"<article data-business-object-id='{escape(business_object_id(o))}'><p class='pill'>{escape(_association_type(o, ent, twin) or 'Enterprise programme')}</p><h3>{escape(_field(o, 'title') or o.statement or _display(o, 'Programme'))}</h3><p>{escape(o.statement)}</p><p><strong>Stage:</strong> {escape(_field(o, 'phase', 'stage') or 'Not supplied')}</p><p><strong>Evidence:</strong> {escape(', '.join(o.evidence_refs) or 'Not supplied')}</p><p><strong>Unknowns:</strong> {escape(', '.join(_refs_for(o, 'unknown_refs', 'unknowns')) or 'None supplied')} · <strong>Contradictions:</strong> {escape(', '.join(_refs_for(o, 'contradiction_refs', 'contradictions')) or 'None supplied')}</p></article>" for o in ready_programmes)+"</section>" if ready_programmes else gap("Major Programmes", f"{len(programmes)} associated candidate records supplied.", ("canonically related programme",), "No programme can be shown without an explicit relationship."))
     sections.append(_enterprise_dimension_html(dimensions["procurements"]))

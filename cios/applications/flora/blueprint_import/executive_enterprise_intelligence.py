@@ -57,6 +57,13 @@ def _field(obj: SemanticObject, *names: str) -> str:
     return ""
 
 
+def _nested_field(obj: SemanticObject, container: str, name: str) -> str:
+    value = (obj.attributes or {}).get(container)
+    if isinstance(value, dict) and value.get(name) not in (None, "", [], {}):
+        return str(value[name])
+    return ""
+
+
 def executive_enterprise_intelligence(ent: SemanticEnterprise, twin: SemanticTwin) -> ExecutiveEnterpriseIntelligence:
     """Select an executive derivative without changing any source runtime object."""
     factual = factual_projection_for_enterprise(ent)
@@ -73,18 +80,26 @@ def executive_enterprise_intelligence(ent: SemanticEnterprise, twin: SemanticTwi
         twin, ent, {"opportunity_hypothesis", "opportunity", "ranked_opportunity", "opportunity_twin"}))
 
     signals: list[ExecutiveSignal] = []
+    seen_signal_ids: set[str] = set()
     for programme in programmes:
+        canonical_id = business_object_id(programme)
+        if canonical_id in seen_signal_ids:
+            continue
+        seen_signal_ids.add(canonical_id)
         title = _field(programme, "title", "objective", "business_objective") or programme.statement
         if title:
             explanation = _field(programme, "objective", "strategic_objective", "summary") or programme.statement
-            signals.append(ExecutiveSignal(title, explanation, "Programme", business_object_id(programme), tuple(programme.evidence_refs)))
+            signals.append(ExecutiveSignal(title, explanation, "Programme", canonical_id, tuple(programme.evidence_refs)))
     executive_labels = {"transformation": "Business transformation", "technology": "Technology modernisation",
                         "financial": "Financial pressure", "strategy": "Strategic change",
                         "pressures": "Operational pressure", "procurements": "Procurement activity"}
     for key in executive_labels:
         dimension = dimensions[key]
         if dimension.present:
-            signals.append(ExecutiveSignal(executive_labels[key], dimension.values[0], dimension.label, f"DIM-{key.upper()}", dimension.evidence_refs))
+            explanation = dimension.values[0]
+            if key == "transformation" and explanation.casefold().startswith("ai pressure:"):
+                explanation = "AI-enabled change is evidenced by function; investment budget remains unknown."
+            signals.append(ExecutiveSignal(executive_labels[key], explanation, dimension.label, f"DIM-{key.upper()}", dimension.evidence_refs))
     signals = signals[:5]
 
     relevance = [(_field(item, "commercial_relevance") or _field(item, "client_problem", "customer_problem", "problem"))
@@ -112,7 +127,9 @@ def executive_enterprise_intelligence(ent: SemanticEnterprise, twin: SemanticTwi
         for label, fields in (("Next monitoring date", ("next_monitoring_date",)),
                               ("Expected decision point", ("expected_decision_point",)),
                               ("Procurement window", ("estimated_procurement_window", "procurement_timing", "expected_procurement_start"))):
-            value = _field(opportunity, *fields)
+            value = _field(opportunity, *fields) or next(
+                (_nested_field(opportunity, "timing", field) for field in fields
+                 if _nested_field(opportunity, "timing", field)), "")
             if value:
                 values.append(f"{label}: {value}")
         if values:

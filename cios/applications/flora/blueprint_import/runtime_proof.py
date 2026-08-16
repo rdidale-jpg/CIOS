@@ -11,9 +11,9 @@ from cios.applications.flora.live.runtime import deployment_metadata
 
 from .pilot_change import current_pilot_change
 
-FEATURE = "executive_enterprise_intelligence_presentation"
-IMPLEMENTATION_OWNER = "cios.applications.flora.blueprint_import.executive_workspace._executive_enterprise_intelligence_html"
-IMPLEMENTATION_REVISION = "2"
+FEATURE = "evidence_utilisation_key_reports"
+IMPLEMENTATION_OWNER = "cios.applications.flora.blueprint_import.key_reports.key_reports_for_enterprise"
+IMPLEMENTATION_REVISION = "3"
 ENTRYPOINT = "python -m cios.applications.flora.web.app"
 
 
@@ -48,7 +48,8 @@ def runtime_proof(*, functional_acceptance: str = "PASS") -> RuntimeProof:
     match = "UNKNOWN" if "unavailable" in {deployed, repository} else ("YES" if deployed == repository else "NO")
     try:
         from . import executive_workspace as implementation
-        present = callable(getattr(implementation, "_executive_enterprise_intelligence_html", None))
+        present = (callable(getattr(implementation, "_executive_enterprise_intelligence_html", None))
+                   and callable(getattr(implementation, "_key_reports_html", None)))
         loaded = present
     except ImportError:
         implementation = None
