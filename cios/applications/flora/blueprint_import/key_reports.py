@@ -33,6 +33,34 @@ class KeyReport:
 class EnterpriseKeyReports:
     company_report: KeyReport | None
     external_report: KeyReport | None
+    trace: KeyReportsTrace | None = None
+
+
+@dataclass(frozen=True)
+class EvidenceQualification:
+    """The decisions made for one actual object during report selection."""
+    source: SemanticObject
+    financial_related: bool
+    company_candidate: bool
+    report_identity: bool
+    source_document: bool
+    source_url: bool
+    supplied_report: bool
+    financial_reporting_evidence: bool
+    eligible: bool
+    rejection_stage: str
+    rejection_reason: str
+
+
+@dataclass(frozen=True)
+class KeyReportsTrace:
+    enterprise_identity: str
+    evidence: tuple[SemanticObject, ...]
+    qualifications: tuple[EvidenceQualification, ...]
+    financial_candidates: int
+    financial_reporting_evidence: int
+    supplied_reports: int
+    external_candidates: int
 
 
 def _value(obj: SemanticObject, name: str) -> str:
@@ -99,6 +127,24 @@ def _project(obj: SemanticObject, provenance: str, *, report_established: bool =
 def key_reports_for_enterprise(ent: SemanticEnterprise) -> EnterpriseKeyReports:
     """Select latest qualifying reports deterministically from owned Evidence."""
     evidence = tuple(obj for obj in ent.records if obj.kind == "evidence")
+    qualifications = []
+    for obj in evidence:
+        semantics = classify_evidence(obj)
+        identity = bool(_value(obj, "title"))
+        url = bool(_valid_governed_url(_value(obj, "url")))
+        # The canonical Evidence object can establish a report document only
+        # through an explicitly governed source location/document field.
+        document = url or bool(_value(obj, "source_document") or _value(obj, "document_reference"))
+        supplied = semantics.is_company_financial_reporting and document
+        eligible = semantics.is_financial_reporting_evidence
+        if eligible:
+            stage, reason = ("None", "Eligible financial-reporting Evidence.")
+        else:
+            stage, reason = ("FINANCIAL SEMANTICS", semantics.rationale)
+        qualifications.append(EvidenceQualification(
+            obj, semantics.is_financial_reporting_evidence,
+            semantics.is_company_financial_reporting, identity, document, url,
+            supplied, semantics.is_financial_reporting_evidence, eligible, stage, reason))
     def latest(kind: str) -> KeyReport | None:
         rows = [obj for obj in evidence if _report_kind(obj) == kind]
         if not rows:
@@ -119,4 +165,27 @@ def key_reports_for_enterprise(ent: SemanticEnterprise) -> EnterpriseKeyReports:
                 _date_key(_value(obj, "publication_date") or obj.freshness),
                 bool(_value(obj, "relevant_period")), len(_findings(obj)), business_object_id(obj)))
             company = _project(selected, "Financial reporting evidence", report_established=False)
-    return EnterpriseKeyReports(company, latest("external"))
+    external = latest("external")
+    trace = KeyReportsTrace(
+        ent.identity_key, evidence, tuple(qualifications),
+        sum(row.company_candidate for row in qualifications),
+        sum(row.financial_reporting_evidence for row in qualifications),
+        sum(row.supplied_report for row in qualifications),
+        sum(classify_evidence(obj).is_external_research for obj in evidence),
+    )
+    return EnterpriseKeyReports(company, external, trace)
+
+
+def functional_acceptance_for_financial_position(
+    reports: EnterpriseKeyReports, financial_position_evidence_ids: tuple[str, ...]
+) -> str:
+    """Reject the demonstrated semantic contradiction, not merely unloaded code."""
+    trace = reports.trace
+    if trace is None:
+        return "FAIL"
+    recognised = {
+        business_object_id(row.source) for row in trace.qualifications
+        if row.financial_reporting_evidence
+    }
+    consumed = recognised.intersection(financial_position_evidence_ids)
+    return "FAIL" if consumed and reports.company_report is None else "PASS"

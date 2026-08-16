@@ -7,8 +7,11 @@ from pathlib import Path
 
 from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, BlueprintPackageValidator
 from cios.applications.flora.blueprint_import.executive_enterprise_intelligence import executive_enterprise_intelligence
-from cios.applications.flora.blueprint_import.executive_workspace import _dossier, _semantic_candidates
-from cios.applications.flora.blueprint_import.key_reports import key_reports_for_enterprise
+from cios.applications.flora.blueprint_import.executive_workspace import (_dossier,
+    _key_reports_live_trace, _semantic_candidates)
+from cios.applications.flora.blueprint_import.key_reports import (
+    EnterpriseKeyReports, functional_acceptance_for_financial_position,
+    key_reports_for_enterprise)
 from cios.applications.flora.blueprint_import.evidence_semantics import classify_evidence
 from cios.applications.flora.blueprint_import.semantic_twin import (SemanticEnterprise, SemanticObject,
     assemble_semantic_twin, business_object_id, enterprise_associations, resolve_relationships)
@@ -228,3 +231,27 @@ def test_six_enterprise_rendered_semantic_regression(monkeypatch, tmp_path):
             assert html.count(f"data-business-object-id='{programme_id}'") == 1
     counts = Counter(row["candidate_object_class"] for row in summary["candidates"] if row["validation_status"] == "accepted")
     assert (counts["relationship"], counts["transformation_programme"], counts["opportunity_hypothesis"]) == (308, 13, 17)
+
+
+def test_live_trace_reuses_dossier_function_result_and_reconciles_financial_position(monkeypatch, tmp_path):
+    _package, _summary, twin = _runtime(monkeypatch, tmp_path)
+    bt = next(ent for ent in twin.enterprises if ent.name == "BT Group")
+    html, acceptance = _key_reports_live_trace(bt)
+    assert "KEY REPORTS LIVE QUALIFICATION TRACE" in html
+    assert "cios.applications.flora.blueprint_import.key_reports.key_reports_for_enterprise" in html
+    for identifier in ("EV-BT-FY26", "EV-BT-Q1FY27", "EV-BT-AR26"):
+        assert identifier in html
+    assert "FINANCIAL POSITION LIVE EVIDENCE TRACE" in html
+    assert "Present in Key Reports input</th><th>Recognised by Key Reports" in html
+    assert "Selected Evidence ID(s):</strong> EV-BT-Q1FY27-W4" in html
+    assert acceptance == "PASS"
+
+
+def test_functional_acceptance_cannot_false_pass_the_demonstrated_contradiction(monkeypatch, tmp_path):
+    _package, _summary, twin = _runtime(monkeypatch, tmp_path)
+    bt = next(ent for ent in twin.enterprises if ent.name == "BT Group")
+    live = key_reports_for_enterprise(bt)
+    contradictory = EnterpriseKeyReports(None, live.external_report, live.trace)
+    financial_position = ("EV-BT-FY26", "EV-BT-Q1FY27", "EV-BT-AR26")
+    assert functional_acceptance_for_financial_position(contradictory, financial_position) == "FAIL"
+    assert functional_acceptance_for_financial_position(live, financial_position) == "PASS"

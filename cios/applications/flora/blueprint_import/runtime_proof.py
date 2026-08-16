@@ -39,7 +39,7 @@ def _repository_commit() -> str:
         return "unavailable"
 
 
-def runtime_proof(*, functional_acceptance: str = "PASS") -> RuntimeProof:
+def runtime_proof(*, functional_acceptance: str = "NOT EVALUATED") -> RuntimeProof:
     """Inspect loaded code and authoritative platform metadata without mutation."""
     repository = _repository_commit()
     # A checkout SHA is repository evidence only. Render's documented commit
@@ -76,8 +76,9 @@ def runtime_proof(*, functional_acceptance: str = "PASS") -> RuntimeProof:
                         functional_acceptance, verdict, answer, reason)
 
 
-def proof_html(*, detailed: bool = False) -> str:
-    proof = runtime_proof()
+def proof_html(*, detailed: bool = False, functional_acceptance: str = "NOT EVALUATED") -> str:
+    """Render deployment proof separately from a caller's live semantic check."""
+    proof = runtime_proof(functional_acceptance=functional_acceptance)
     metadata = deployment_metadata()
     change = current_pilot_change()
     yesno = lambda value: "YES" if value else "NO"
