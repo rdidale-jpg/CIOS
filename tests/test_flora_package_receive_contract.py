@@ -67,6 +67,43 @@ def test_registry_persists_repository_package_and_preserves_failed_create_cause(
     assert after == before == ()
 
 
+@pytest.mark.parametrize("concrete_error", [
+    TypeError("cannot encode secret-token=do-not-display"),
+    OSError(28, "disk full at /sensitive/runtime/path"),
+])
+def test_receive_failure_exposes_safe_root_cause_without_canonical_changes(
+    monkeypatch, tmp_path, caplog, concrete_error
+):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    canonical = tmp_path / "memory"
+
+    def fail_record_create(path, data):
+        if path.parent.name == "packages":
+            raise concrete_error
+        from cios.applications.flora.storage import atomic_write_json
+        return atomic_write_json(path, data)
+
+    monkeypatch.setattr("cios.applications.flora.blueprint_import.registry.atomic_write_json", fail_record_create)
+    caplog.set_level("ERROR")
+
+    html, status, target = upload_and_validate_blueprint(
+        {"blueprint_zip": pkg()}, FIELDS, HEADERS
+    )
+
+    assert status == 400 and target == "/blueprint-import"
+    assert f"Underlying exception class: builtins.{type(concrete_error).__name__}" in html
+    assert "Underlying safe message:" in html
+    assert "Persistence operation: create" in html
+    assert "Record/model: BlueprintPackageRecord" in html
+    assert "Storage connection: PASS" in html
+    assert "Minimal BlueprintPackageRecord persistence path: FAIL" in html
+    assert "secret-token" not in html and "/sensitive/runtime/path" not in html
+    assert not canonical.exists()
+    logged = next(record for record in caplog.records if record.message.startswith("blueprint_package_receive_persistence_failed"))
+    assert logged.flora_event["diagnostic_reference"].startswith("bpi-diag-")
+    assert logged.exc_info[1].__cause__ is concrete_error
+
+
 def test_browser_adapter_rejects_stale_mapping_shape_without_rendering_keyerror(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     monkeypatch.setattr(BlueprintPackageRegistry, "receive", lambda *args, **kwargs: {"accepted": True})

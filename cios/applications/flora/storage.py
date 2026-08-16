@@ -35,6 +35,32 @@ class PersistenceError(OSError):
     """Raised when Flora runtime state cannot be persisted safely."""
 
 
+def root_exception(exc: BaseException) -> BaseException:
+    """Return the deepest explicitly chained exception without exposing it."""
+    current = exc
+    seen: set[int] = set()
+    while current.__cause__ is not None and id(current) not in seen:
+        seen.add(id(current))
+        current = current.__cause__
+    return current
+
+
+def safe_exception_summary(exc: BaseException) -> str:
+    """Describe a storage failure without copying exception text or parameters."""
+    name = type(exc).__name__.lower()
+    if "integrity" in name:
+        return "Storage rejected the record because an integrity constraint was not satisfied."
+    if "operational" in name or isinstance(exc, (ConnectionError, TimeoutError)):
+        return "The storage backend was unavailable during the operation."
+    if "programming" in name:
+        return "The storage backend rejected the operation because its schema or statement was incompatible."
+    if "serial" in name or isinstance(exc, (TypeError, ValueError)):
+        return "The record could not be serialized for storage."
+    if isinstance(exc, OSError):
+        return "The filesystem storage operation failed."
+    return "The storage operation failed; consult the correlated server log for details."
+
+
 def data_root() -> Path:
     raw = os.getenv(FLORA_DATA_DIR_ENV) or os.getenv(LEGACY_FLORA_PILOT_DIR_ENV) or str(DEFAULT_DATA_DIR)
     return Path(raw).expanduser()
