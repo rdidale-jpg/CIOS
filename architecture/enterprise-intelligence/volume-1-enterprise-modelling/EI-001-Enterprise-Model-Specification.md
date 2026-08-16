@@ -287,6 +287,135 @@ The twin should support five questions:
 
 **Example signals generated from change:** audit failure plus public scrutiny may raise compliance pressure; margin decline plus savings target may raise cost pressure; incident resolution may lower immediate pressure.
 
+### Material Pressure qualification contract
+
+**Canonical owner:** EI-001 Enterprise Model Specification.  In this contract,
+**Material Pressure** is the qualified, durable Enterprise Model representation of
+the existing Transformation Pressure concept.  It is not a parallel subsystem or
+a synonym for every use of the word “pressure”.  This contract is proposed for
+acceptance with EI-001; it does not authorise runtime promotion while EI-001 remains
+Draft.
+
+A Material Pressure is an evidence-grounded condition, change or accumulating force
+applicable to one identified enterprise that constrains, impairs or makes a material
+response necessary, and for which at least one material enterprise consequence is
+supported.  It is an interpretation over governed Observations or accepted factual
+objects and is retained in the durable Enterprise Model with its qualification
+lineage.  It is not itself an Observation, isolated Fact, Risk, generic Challenge,
+Programme, Strategic Priority, Financial Metric, Opportunity, Procurement or
+Watchpoint.  Any of those objects may provide evidence, consequence or response
+context without changing its own canonical class.
+
+#### Deterministic acceptance rule
+
+A candidate qualifies only when **all** of the following gates pass.  A gate may not
+be satisfied by wording similarity, a keyword, an unlabelled model prior or by
+copying dossier prose.
+
+1. **Eligible governed input.** At least one governed, non-rejected Observation or
+   accepted factual object describes a condition, change, trend, event or constraint
+   and links to attributable Evidence. Human-supplied input is eligible only with
+   its required label, contributor and date. A candidate Observation remains a
+   candidate and cannot create an accepted Material Pressure.
+2. **Enterprise applicability.** The input and asserted pressure resolve to the same
+   canonical Enterprise ID and scope (group, subsidiary or business unit), or a
+   governed relationship explicitly establishes how an industry/competitor condition
+   applies to that Enterprise. Industry membership or competitor proximity alone is
+   insufficient. Unresolved enterprise or scope identity blocks qualification.
+3. **Pressure semantics.** The evidence supports a force or condition that constrains
+   performance, resources, obligations or choices; impairs an enterprise outcome; or
+   makes a response necessary. A metric, event, priority or programme without this
+   supported directional constraint or necessity remains a Fact, Observation,
+   priority or response object.
+4. **Evidence-grounded materiality.** The evidence establishes at least one non-trivial
+   consequence to enterprise strategy, finance, operations, regulation/obligation,
+   programme/change delivery or investment/capital allocation. Materiality is a
+   qualitative, evidenced judgement; no invented numerical score or seller relevance
+   may substitute for the consequence. The minimum acceptance rule is one supported
+   consequence in one of these domains, with scope and direction stated. Mere
+   possibility, generic sector importance or adjective (“major”, “material”) is not
+   enough.
+5. **Enterprise consequence.** The pressure states what enterprise outcome, obligation,
+   resource, operating condition or committed change is affected and whether the
+   effect increases, decreases or remains directionally Unknown. The existence and
+   materiality gates require a supported consequence; its exact severity, timing,
+   owner and response may remain Unknown. Seller-specific consequence and unsupported
+   extrapolation are prohibited.
+6. **Lineage and qualification.** The object retains its stable pressure ID; canonical
+   Enterprise and scope IDs; pressure proposition; supporting and contradicting
+   Evidence IDs; governing Observation/factual-object IDs and owner; applicability
+   relationship/path; consequence statement and domain; truth/confidence/freshness;
+   Unknown and Contradiction references; and a qualification decision containing
+   contract version, gate results, decision authority, timestamp and rationale.
+
+Failure of any required gate rejects the candidate or leaves it explicitly
+`unresolved`; it never silently creates a Material Pressure. Rejection reasons include
+insufficient or ineligible Evidence, wrong or unresolved Enterprise, keyword-only
+matching, generic market assumption without an applicability path, a Fact without
+pressure semantics, no supported material consequence, unsupported inference, a
+material Contradiction that prevents an existence or materiality finding, and an
+Observation already represented by the same pressure. A duplicate strengthens or
+contradicts lineage on the existing object; it is not a second pressure.
+
+#### Identity and singularity
+
+Pressure identity is determined from the combination of canonical Enterprise and
+scope, the affected enterprise outcome/obligation/resource, the constraining
+mechanism or condition, and the materially continuous time interval. Source wording
+and Evidence identity are not identity keys.
+
+- Matching enterprise/scope, affected outcome, mechanism and continuous interval is
+  the same underlying pressure; attach new supporting or contradicting Evidence.
+- A different affected outcome or mechanism is a different pressure even when the
+  topic words overlap. A new interval after evidenced resolution may be a new pressure
+  linked to the former one.
+- If mechanism, scope, affected outcome or temporal continuity cannot be resolved,
+  preserve `identity_status=unresolved`, link possible matches, raise an Evidence
+  Demand and do not merge or create a qualified duplicate.
+
+#### Unknown, Contradiction and lifecycle
+
+Unknown is field-specific. Pressure existence or materiality being Unknown blocks
+qualification. Once both are supported, severity, timing, consequence direction,
+ownership and response may independently be Unknown and must remain visible; an
+unknown consequence domain or absence of any supported consequence still blocks.
+
+Contradictory Evidence is retained on the candidate or qualified object. Conflict
+about existence or materiality produces `unresolved` and blocks initial qualification
+unless scoped evidence establishes why both claims can coexist. Conflict about
+direction that prevents pressure semantics also blocks. Conflict limited to severity,
+timing, consequence detail, ownership or response does not erase an otherwise
+qualified pressure: those fields become Contradiction/Unknown, confidence is bounded,
+and an Evidence Demand is raised. Recency alone does not silently resolve conflict;
+resolution follows governed invalidation, supersession, scope separation or reviewed
+judgement with audit lineage.
+
+No mandatory `emerging/active/reducing/resolved/superseded` enumeration is introduced.
+Current condition, direction and persistence are derived from dated Evidence and
+freshness. Evidence may strengthen, weaken, contradict, retire or supersede the
+pressure. A pressure no longer current remains historical and explainable rather than
+being deleted. An explicit lifecycle vocabulary may be proposed later only if a
+consumer demonstrates that evidence-derived state is insufficient.
+
+#### Commercial and monitoring boundaries
+
+The durable Material Pressure contains only enterprise truth: proposition, scope,
+mechanism/condition, evidenced material enterprise consequence, state of knowledge
+and lineage. Commercial Significance, seller relevance, provider fit, accessibility,
+commercial timing, pursuit conviction and recommended action are derived Commercial
+Reasoning interpretations over the pressure and other governed context.
+
+**Material Pressure is not Opportunity and is not Procurement.** It may support a
+Strategic Signal, Hypothesis, Commercial Assessment or Opportunity thesis, but cannot
+automatically create or qualify an Opportunity. Procurement remains separately
+evidenced commercial activity and may be evidence of response or timing; pressure
+qualification cannot create Procurement.
+
+A Material Pressure may justify monitoring. A Watchpoint remains a separate monitoring
+instruction/trigger that states what evidence change to watch, why, and what review it
+should cause. A pressure does not become a Watchpoint merely because it is monitored;
+the Watchpoint references the pressure and uses the existing monitoring semantics.
+
 ## Transformation inevitability
 
 **Captures:** the reason transformation may become unavoidable and when.

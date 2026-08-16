@@ -103,7 +103,7 @@ documents:
     title: Enterprise Model Specification
     source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-001-Enterprise-Model-Specification.md
     pack_path: enterprise-intelligence/EI-001-Enterprise-Model-Specification.md
-    checksum: fd0ed56b54328ae0bff73fcc8c430a7906860d4abbf6a0522d175d146425be65
+    checksum: 76cbf56847c1d8a3c1e7a4fe792bee7866588d9f06b2c993bc2d94d2ee22d4e9
     authority: enterprise-intelligence-authority
     inclusion_reason: Core Enterprise Intelligence authority
   - document_id: EI-002
