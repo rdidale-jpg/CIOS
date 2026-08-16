@@ -181,16 +181,19 @@ def _key_reports_html(ent: SemanticEnterprise, run_id: str) -> str:
                        else "<p>No qualifying company financial report is supplied.</p>") + "</article>")
         findings = ("<ul>" + "".join(f"<li>{escape(item)}</li>" for item in report.findings) + "</ul>"
                     if report.findings else "<p>No governed extract or summary is supplied.</p>")
-        source = (f"<a href='{escape(report.source_url)}' rel='noopener'>View source report</a>" if report.source_url
-                  else "<span>Direct source link not supplied.</span>")
+        source = (f"<a href='{escape(report.source_url)}' rel='noopener'>"
+                  f"{'View source report' if report.source_document_supplied else 'View governed source'}</a>"
+                  if report.source_url else "<span>Direct source link not supplied.</span>")
         evidence = (f"<a href='/blueprint-import/{escape(run_id)}/explore?collection=evidence-sources#{escape(report.source.record_id)}'>Open evidence</a>")
+        document_state = ("" if report.source_document_supplied else
+                          "<p>Source report/document not supplied in this Twin.</p>")
         period = " · ".join(filter(None, (report.reporting_period, report.publication_date))) or "Date not supplied"
         return (f"<article data-evidence-id='{escape(business_object_id(report.source))}'><h3>{label}</h3>"
                 f"<p class='pill'>{escape(report.provenance)}</p><h4>{escape(report.title)}</h4>"
                 f"<p><strong>Reporting period / publication date:</strong> {escape(period)}</p>"
                 f"<p><strong>Source / publisher:</strong> {escape(report.publisher)}</p>"
                 f"<p><strong>Availability:</strong> {escape(report.availability)}</p>"
-                f"<h5>Key findings</h5>{findings}<p>{source} · {evidence}</p></article>")
+                f"<h5>Key findings</h5>{findings}<p>{source} · {evidence}</p>{document_state}</article>")
     return ("<section class='card key-reports' id='key-reports'><h2>Key reports</h2>"
             "<p>Latest qualifying reports selected from governed Enterprise Evidence.</p>"
             + card(reports.company_report, "Latest company financial reporting")
