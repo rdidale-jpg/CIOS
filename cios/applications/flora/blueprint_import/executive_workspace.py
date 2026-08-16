@@ -195,9 +195,13 @@ def _executive_intelligence_quality_html(twin: SemanticTwin) -> str:
             f"<p><strong>Contradiction:</strong> {escape(', '.join(a.candidate.contradiction_refs) or 'None')} · "
             f"<strong>Identity:</strong> {a.identity} · <strong>Qualification:</strong> {a.qualification} · "
             f"<strong>Reason:</strong> {escape(a.reason)}</p></article>" for a in qualification.assessments)
-        pressure_summary = (f"<section><h4>MATERIAL PRESSURE QUALIFICATION</h4>{pressure_rows or '<p>No governed candidate.</p>'}"
-                            f"<p>Qualified Material Pressures: {len(qualification.qualified)} · Rejected candidates: {len(qualification.rejected)} · "
-                            f"Unresolved candidates: {len(qualification.unresolved)} · Projection state: {qualification.projection_state}</p></section>")
+        empty = ("<p>No eligible governed input.</p>" if qualification.discovery_state == "NO_ELIGIBLE_INPUT" else
+                 "<p>Candidate discovery pipeline failed; this is not a truthful empty projection.</p>" if qualification.discovery_state == "PIPELINE_FAILURE" else "")
+        pressure_summary = (f"<section><h4>MATERIAL PRESSURE QUALIFICATION</h4>{pressure_rows or empty}"
+                            f"<p>Eligible governed inputs: {qualification.eligible_input_count} · Candidates assessed: {qualification.candidates_assessed} · "
+                            f"Qualified: {len(qualification.qualified)} · Rejected: {len(qualification.rejected)} · "
+                            f"Unresolved: {len(qualification.unresolved)} · Projection: {qualification.projection_state}</p>"
+                            f"<p>Candidate discovery state: <strong>{qualification.discovery_state}</strong></p></section>")
         cards.append(f"<article><h3>{escape(ent.name)}</h3><table><tbody>{rows}</tbody></table>{pressure_summary}</article>")
     return ("<section class='card' id='executive-intelligence-quality'><h2>EXECUTIVE INTELLIGENCE QUALITY</h2>"
             "<p>Deterministic section sufficiency and integrity checks; this is not a score.</p>" + "".join(cards) + "</section>")

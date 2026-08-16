@@ -134,6 +134,12 @@ def _pilot_change_record_section(headers: Any) -> str:
     route_proof = runtime_proof()
     if route_proof.commit_match == "NO" or not route_proof.bt_route_connected or not route_proof.advanced_inspection_connected:
         decision = replace(decision, should_test_now="NO", next_action=route_proof.reason)
+    elif route_proof.runtime_verdict == "PROVEN CURRENT" and decision.status_code == "READY FOR FUNCTIONAL TEST — DEPLOYMENT METADATA INCOMPLETE":
+        # Runtime proof is the canonical deployment identity.  Do not let
+        # optional duplicated panel metadata contradict a proven-current SHA.
+        decision = replace(decision, status_code="READY FOR TESTING", status_label="Ready for testing",
+                           should_test_now="YES", next_action="The deployed commit and runtime implementation are proven current. Test the pages below.",
+                           evidence_quality="authoritative runtime proof")
     auto = change.get("automated_validation") or {}
     links = {
         "Industry Overview": "/blueprint-import/history#industry-overview",

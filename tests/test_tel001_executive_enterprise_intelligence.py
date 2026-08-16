@@ -8,11 +8,33 @@ from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, B
 from cios.applications.flora.blueprint_import.executive_enterprise_intelligence import (
     executive_enterprise_intelligence, executive_intelligence_quality)
 from cios.applications.flora.blueprint_import.executive_workspace import _dossier, _semantic_candidates
+from cios.applications.flora.blueprint_import.material_pressure import material_pressure_qualification
 from cios.applications.flora.blueprint_import.semantic_twin import assemble_semantic_twin, business_object_id, enterprise_associations, resolve_relationships
 
 
 FIXTURE = Path("docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip")
 ENTERPRISES = {"BT Group", "CityFibre", "Openreach", "TalkTalk", "Virgin Media O2", "VodafoneThree"}
+
+
+def test_tel001_canonical_enterprise_conditions_traverse_adr026(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("FLORA_ENVIRONMENT", "pilot")
+    package = BlueprintPackageRegistry().receive(FIXTURE.read_bytes(), FIXTURE.name, "pressure-auditor")
+    BlueprintPackageValidator().validate_and_stage(package.package_ref, "pressure-auditor")
+    summary = BlueprintPackageValidator().staging_summary(package.import_run_id)
+    twin = assemble_semantic_twin(_semantic_candidates(package, summary["candidates"]))
+    before = tuple((item.record_id, item.governance, dict(item.attributes)) for item in twin.objects)
+    for enterprise in twin.enterprises:
+        result = material_pressure_qualification(enterprise)
+        assert result.eligible_input_count == result.candidates_assessed == 1
+        assert result.discovery_state == "ASSESSED_WITH_RESULTS"
+        assessment = result.assessments[0]
+        assert assessment.candidate.canonical_input_type == "canonical_factual_object"
+        assert all(gate == "PASS" for gate in (
+            assessment.applicability, assessment.pressure_semantics, assessment.materiality,
+            assessment.enterprise_consequence, assessment.lineage))
+        assert assessment.candidate.evidence_refs
+    assert before == tuple((item.record_id, item.governance, dict(item.attributes)) for item in twin.objects)
 
 
 def test_executive_intelligence_is_governed_rendered_derivative(monkeypatch, tmp_path):
