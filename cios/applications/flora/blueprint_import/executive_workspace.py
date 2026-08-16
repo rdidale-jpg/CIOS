@@ -24,6 +24,7 @@ from .canonical_factual_projection import (
 )
 from .intelligence_projection import executive_assessments
 from .executive_enterprise_intelligence import executive_enterprise_intelligence, executive_intelligence_quality
+from .material_pressure import material_pressure_qualification
 from .key_reports import (KeyReport, functional_acceptance_for_financial_position,
                           key_reports_for_enterprise)
 from .evidence_semantics import classify_evidence
@@ -184,7 +185,20 @@ def _executive_intelligence_quality_html(twin: SemanticTwin) -> str:
         rows += (f"<tr><th>Unknown integrity</th><td>{quality.unknown_integrity}</td><td></td></tr>"
                  f"<tr><th>Contradiction integrity</th><td>{quality.contradiction_integrity}</td><td></td></tr>"
                  f"<tr><th>Overall</th><td>{quality.overall}</td><td></td></tr>")
-        cards.append(f"<article><h3>{escape(ent.name)}</h3><table><tbody>{rows}</tbody></table></article>")
+        qualification = material_pressure_qualification(ent)
+        pressure_rows = "".join(
+            f"<article><p><strong>Candidate:</strong> {escape(a.candidate.condition)}</p>"
+            f"<p><strong>Canonical input:</strong> {escape(a.candidate.canonical_input_type)} · {escape(a.candidate.canonical_input_id)}</p>"
+            f"<p><strong>Evidence:</strong> {escape(', '.join(a.candidate.evidence_refs) or 'None')}</p>"
+            f"<p>Enterprise applicability: {a.applicability} · Pressure semantics: {a.pressure_semantics} · "
+            f"Materiality: {a.materiality} · Enterprise consequence: {a.enterprise_consequence} · Lineage: {a.lineage}</p>"
+            f"<p><strong>Contradiction:</strong> {escape(', '.join(a.candidate.contradiction_refs) or 'None')} · "
+            f"<strong>Identity:</strong> {a.identity} · <strong>Qualification:</strong> {a.qualification} · "
+            f"<strong>Reason:</strong> {escape(a.reason)}</p></article>" for a in qualification.assessments)
+        pressure_summary = (f"<section><h4>MATERIAL PRESSURE QUALIFICATION</h4>{pressure_rows or '<p>No governed candidate.</p>'}"
+                            f"<p>Qualified Material Pressures: {len(qualification.qualified)} · Rejected candidates: {len(qualification.rejected)} · "
+                            f"Unresolved candidates: {len(qualification.unresolved)} · Projection state: {qualification.projection_state}</p></section>")
+        cards.append(f"<article><h3>{escape(ent.name)}</h3><table><tbody>{rows}</tbody></table>{pressure_summary}</article>")
     return ("<section class='card' id='executive-intelligence-quality'><h2>EXECUTIVE INTELLIGENCE QUALITY</h2>"
             "<p>Deterministic section sufficiency and integrity checks; this is not a score.</p>" + "".join(cards) + "</section>")
 
@@ -1051,9 +1065,18 @@ def _dossier(ent, twin, run_id, mission):
     dimensions = {d.key: d for d in enterprise_factual_dimensions(ent)}
     sections = [f"<section class='card' id='enterprise-overview'><h2>Organisation Overview</h2>{overview}{canonical_detail}</section>", factual_html]
     sections.extend(_enterprise_dimension_html(dimensions[key]) for key in (
-        "strategy", "operating-model", "financial", "economics", "pressures",
+        "strategy", "operating-model", "financial", "economics",
         "leadership-governance", "technology", "supplier-ecosystem",
     ))
+    pressure_qualification = material_pressure_qualification(ent)
+    pressure_cards = "".join(
+        f"<article><h3>{escape(a.candidate.condition)}</h3><p><strong>Enterprise consequence:</strong> {escape(a.candidate.consequence)}</p>"
+        f"<p><strong>Evidence:</strong> {escape(', '.join(a.candidate.evidence_refs))}</p></article>"
+        for a in pressure_qualification.qualified)
+    sections.insert(5, ("<section class='card'><h2>Material Pressures</h2>" + pressure_cards + "</section>")
+                    if pressure_cards else gap("Material Pressures", "No candidate qualifies under ADR-026.",
+                                               ("qualified evidence-grounded pressure",),
+                                               "The empty state is governed by qualification, not projection presence."))
     sections.insert(4, _key_reports_html(ent, twin, run_id))
     programmes=_associated_records(twin, ent, lambda o: o.kind=='transformation_programme'); ready_programmes=[o for o in programmes if o.statement or _field(o,'objective','business_objective','title')]
     sections.append("<section class='card'><h2>Major Programmes</h2><p>Explicit enterprise relationship.</p>"+"".join(_major_programme_html(o, ent, twin) for o in ready_programmes)+"</section>" if ready_programmes else gap("Major Programmes", f"{len(programmes)} associated candidate records supplied.", ("canonically related programme",), "No programme can be shown without an explicit relationship."))

@@ -11,6 +11,7 @@ from dataclasses import dataclass
 from .canonical_factual_projection import factual_projection_for_enterprise, enterprise_factual_dimensions
 from .semantic_twin import SemanticEnterprise, SemanticObject, SemanticTwin, business_object_id, enterprise_associations
 from .presentation_semantics import executive_fact_parts
+from .material_pressure import material_pressure_qualification
 
 
 @dataclass(frozen=True)
@@ -184,7 +185,10 @@ def executive_intelligence_quality(ent: SemanticEnterprise, twin: SemanticTwin) 
         dimension("Technology / Platform", "technology"), dimension("Change / Investment", "transformation"),
         dimension("Financial Position", "financial"),
         ("Key Reports", "ACCEPTABLE", "Four-state truth is assessed by the canonical Key Reports selector."),
-        dimension("Material Pressures", "pressures"),
+        ("Material Pressures",
+         ("STRONG" if material_pressure_qualification(ent).qualified else "EMPTY"),
+         ("" if material_pressure_qualification(ent).qualified else
+          "No candidate qualifies under ADR-026; truthful absence is acceptable.")),
         ("Programmes", "STRONG" if programmes else "EMPTY", "" if programmes else "No canonically associated Programme is supplied."),
         ("Opportunities", "STRONG" if opportunities else "EMPTY", "" if opportunities else "No canonically associated Opportunity is supplied."),
         ("Watchpoints", "STRONG" if result.watchpoints else "EMPTY", "" if result.watchpoints else "No governed monitoring event or timing is supplied."),
