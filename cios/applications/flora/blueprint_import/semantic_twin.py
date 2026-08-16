@@ -124,6 +124,33 @@ class EvidenceApplicability:
     path: str
 
 
+def evidence_subject(evidence: SemanticObject) -> str:
+    """Return the stable primary subject supplied by the Evidence owner.
+
+    Evidence registers use ``supported_object`` for the object the source is
+    about.  Its first value is the primary subject; subsequent values retain
+    additional content scope and can establish applicability, but do not
+    change whose company disclosure the Evidence is.
+    """
+    if evidence.kind != "evidence":
+        return ""
+    supplied = str((evidence.attributes or {}).get("supported_object") or evidence.subject or "").strip()
+    return next((part.strip() for part in re.split(r"[;/]", supplied) if part.strip()), "")
+
+
+def evidence_publisher(evidence: SemanticObject) -> str:
+    """Return the supplied publisher without treating it as Evidence subject."""
+    return str((evidence.attributes or {}).get("publisher") or "").strip() if evidence.kind == "evidence" else ""
+
+
+def evidence_subject_matches_enterprise(evidence: SemanticObject, ent: SemanticEnterprise) -> bool:
+    """Whether the Evidence's *primary* subject is the dossier Enterprise."""
+    identities = {ent.name.casefold(), ent.identity_key.casefold(), ent.source_identity.casefold(),
+                  ent.relationship_subject_identity.casefold(), *(alias.casefold() for alias in ent.aliases)}
+    identities.discard("")
+    return evidence_subject(evidence).casefold() in identities
+
+
 # These rules describe which endpoint is the Enterprise association subject;
 # locating a subject at either endpoint does not make arbitrary edges symmetric.
 ASSOCIATION_DIRECTIONS: Mapping[str, tuple[str, str]] = {
@@ -267,9 +294,10 @@ def evidence_applicability(twin: SemanticTwin, ent: SemanticEnterprise) -> tuple
         if obj.kind != "evidence":
             continue
         identity = business_object_id(obj)
-        subjects = {part.strip().casefold() for part in re.split(r"[;/]", obj.subject) if part.strip()}
+        supported = str((obj.attributes or {}).get("supported_object") or obj.subject)
+        subjects = {part.strip().casefold() for part in re.split(r"[;/]", supported) if part.strip()}
         subjects.update(a.casefold() for a in obj.affected_organisations)
-        direct = bool(names.intersection(subjects)) or obj in ent.records
+        direct = bool(names.intersection(subjects))
         referrer = refs.get(identity.casefold())
         attrs = obj.attributes or {}
         shared = any(term in (" ".join((obj.subject, str(attrs.get("publisher", "")),
@@ -277,7 +305,11 @@ def evidence_applicability(twin: SemanticTwin, ent: SemanticEnterprise) -> tuple
                                         str(attrs.get("supported_object", ""))))).casefold()
                      for term in ("ofcom", "regulator", "industry", "market", "infrastructure", "project gigabit", "public-sector"))
         if direct:
-            rows.append(EvidenceApplicability(obj, "DIRECT", "canonical Evidence subject/organisation matches Enterprise identity"))
+            primary = evidence_subject(obj)
+            reason = ("canonical Evidence primary subject matches Enterprise identity" if
+                      evidence_subject_matches_enterprise(obj, ent) else
+                      f"Evidence content scope includes Enterprise; primary subject remains {primary or 'not supplied'}")
+            rows.append(EvidenceApplicability(obj, "DIRECT", reason))
         elif referrer and shared:
             rows.append(EvidenceApplicability(obj, "SHARED-APPLICABLE", f"shared market/regulatory Evidence referenced by {referrer}"))
         elif referrer:
@@ -535,6 +567,11 @@ def _object(candidate: dict[str, Any]) -> SemanticObject:
     subject = p.get("subject")
     if str(subject or "").strip() == "Twin scope":
         subject = None
+    # The TEL-001 Evidence register already supplies its subject as
+    # ``supported_object``.  Preserve that governed meaning instead of letting
+    # dossier assembly/query context stand in for provenance.
+    if not subject and declared_kind == "evidence":
+        subject = p.get("supported_object")
     subject = subject or p.get("enterprise_name") or p.get("organisation_name")
     if not subject and declared_kind in {"opportunity", "opportunity_hypothesis", "ranked_opportunity", "opportunity_twin"}:
         subject = p.get("title") or p.get("opportunity_name") or p.get("opportunity_title")

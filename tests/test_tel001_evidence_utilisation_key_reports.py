@@ -15,7 +15,7 @@ from cios.applications.flora.blueprint_import.key_reports import (
 from cios.applications.flora.blueprint_import.evidence_semantics import classify_evidence
 from cios.applications.flora.blueprint_import.semantic_twin import (SemanticEnterprise, SemanticObject,
     assemble_semantic_twin, business_object_id, enterprise_associations, evidence_applicability,
-    resolve_relationships)
+    evidence_subject_matches_enterprise, resolve_relationships)
 
 
 FIXTURE = Path("docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip")
@@ -110,14 +110,12 @@ def test_financial_evidence_remains_visible_without_becoming_a_report():
     assert semantics.is_financial_reporting_evidence
     assert not semantics.is_company_financial_reporting
 
-    report = key_reports_for_enterprise(
+    reports = key_reports_for_enterprise(
         SemanticEnterprise("ENT-X", "x", "Example", (), (evidence,))
-    ).company_report
-    assert report is not None
-    assert report.provenance == "Financial reporting evidence"
-    assert report.availability == "FINANCIAL REPORTING EVIDENCE AVAILABLE"
-    assert not report.source_document_supplied
-    assert report.source_url == ""
+    )
+    assert reports.company_report is None
+    assert reports.trace is not None
+    assert reports.trace.financial_reporting_evidence == 1
 
 
 def test_bt_executive_corrections_consume_canonical_identity_and_timing(monkeypatch, tmp_path):
@@ -235,9 +233,15 @@ def test_six_enterprise_rendered_semantic_regression(monkeypatch, tmp_path):
     assert {ent.name for ent in enterprises} == names
     for ent in enterprises:
         reports = key_reports_for_enterprise(ent)
-        classified = [obj for obj in ent.records if classify_evidence(obj).is_financial_reporting_evidence]
+        classified = [obj for obj in ent.records if classify_evidence(obj).is_company_financial_reporting
+                      and evidence_subject_matches_enterprise(obj, ent)]
         assert bool(reports.company_report) == bool(classified)
-        assert reports.external_report is None
+        if ent.name == "TalkTalk":
+            assert reports.company_report is None
+            assert reports.external_report is not None
+            assert reports.external_report.source.original_id == "EV-SPGLOBAL-TALKTALK25-W4"
+        else:
+            assert reports.external_report is None
         html = _dossier(ent, twin, package.import_run_id, None)
         executive = html.split("<section class='card executive-intelligence'", 1)[1].split("</section>", 1)[0]
         reinvention = html.split("<h2>Reinvention Timing</h2>", 1)[1].split("</section>", 1)[0]

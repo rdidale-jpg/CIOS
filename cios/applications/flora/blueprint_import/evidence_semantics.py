@@ -32,7 +32,8 @@ def classify_evidence(obj: SemanticObject) -> EvidenceSemantics:
     source = _text(obj, "title", "evidence_type", "category", "source_type",
                    "evidence_quality", "publisher")
     external_terms = ("analyst report", "analyst research", "broker research",
-                      "equity research", "market research", "market analysis")
+                      "equity research", "market research", "market analysis",
+                      "ratings report", "rating agency report")
     if any(term in source for term in external_terms):
         return EvidenceSemantics("external_research", False, False, True,
                                  "Supplied Evidence metadata identifies external research.")
