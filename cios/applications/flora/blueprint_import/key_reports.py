@@ -26,6 +26,7 @@ class KeyReport:
     findings: tuple[str, ...]
     source_url: str
     availability: str
+    source_document_supplied: bool
 
 
 @dataclass(frozen=True)
@@ -65,6 +66,11 @@ def _report_kind(obj: SemanticObject) -> str:
     return "company" if semantics.is_company_financial_reporting else ""
 
 
+def _financial_evidence(obj: SemanticObject) -> bool:
+    semantics = classify_evidence(obj)
+    return semantics.is_financial_reporting_evidence and not semantics.is_company_financial_reporting
+
+
 def _findings(obj: SemanticObject) -> tuple[str, ...]:
     # These are governed extracts/summaries, not newly inferred report facts.
     supplied = [_value(obj, "supported_claim") or obj.statement,
@@ -72,19 +78,22 @@ def _findings(obj: SemanticObject) -> tuple[str, ...]:
     return tuple(dict.fromkeys(item for item in supplied if item))[:5]
 
 
-def _project(obj: SemanticObject, provenance: str) -> KeyReport:
+def _project(obj: SemanticObject, provenance: str, *, report_established: bool = True) -> KeyReport:
     source_url = _valid_governed_url(_value(obj, "url"))
     findings = _findings(obj)
-    if source_url:
+    if not report_established:
+        availability = "FINANCIAL REPORTING EVIDENCE AVAILABLE"
+    elif source_url:
         availability = "REPORT AVAILABLE — DIRECT SOURCE LINK AVAILABLE"
-    elif findings:
+    elif provenance != "Company disclosure" and findings:
         availability = "REPORT AVAILABLE — EVIDENCE/EXTRACT AVAILABLE"
     else:
         availability = "REPORT REFERENCED — SOURCE DOCUMENT NOT SUPPLIED"
     return KeyReport(obj, provenance, _value(obj, "title") or business_object_id(obj),
                      _value(obj, "publisher") or "Publisher not supplied",
                      _value(obj, "publication_date") or obj.freshness,
-                     _value(obj, "relevant_period"), findings, source_url, availability)
+                     _value(obj, "relevant_period"), findings, source_url, availability,
+                     report_established and bool(source_url))
 
 
 def key_reports_for_enterprise(ent: SemanticEnterprise) -> EnterpriseKeyReports:
@@ -100,4 +109,14 @@ def key_reports_for_enterprise(ent: SemanticEnterprise) -> EnterpriseKeyReports:
             _date_key(_value(obj, "publication_date") or obj.freshness),
             bool(_value(obj, "relevant_period")), len(_findings(obj)), business_object_id(obj)))
         return _project(selected, "Company disclosure" if kind == "company" else "External analyst view")
-    return EnterpriseKeyReports(latest("company"), latest("external"))
+    company = latest("company")
+    if company is None:
+        # Financial intelligence is not the same thing as a supplied report.
+        # Preserve the governed evidence path without promoting it to a report.
+        rows = [obj for obj in evidence if _financial_evidence(obj)]
+        if rows:
+            selected = max(rows, key=lambda obj: (
+                _date_key(_value(obj, "publication_date") or obj.freshness),
+                bool(_value(obj, "relevant_period")), len(_findings(obj)), business_object_id(obj)))
+            company = _project(selected, "Financial reporting evidence", report_established=False)
+    return EnterpriseKeyReports(company, latest("external"))

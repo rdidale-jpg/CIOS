@@ -75,6 +75,29 @@ def test_report_states_external_label_and_no_fabricated_url():
     assert report.findings == () and report.source_url == ""
 
 
+def test_financial_evidence_remains_visible_without_becoming_a_report():
+    evidence = SemanticObject(
+        "ev-financial", "evidence", "Adjusted revenue was lower in the governed period.",
+        "Example", (), "2026-01-01", "High", "candidate", "evidence.ndjson", {"line": 2},
+        False, original_id="EV-FINANCIAL", attributes={
+            "evidence_type": "Governed financial evidence",
+            "supported_claim": "Adjusted revenue was lower in the governed period.",
+        },
+    )
+    semantics = classify_evidence(evidence)
+    assert semantics.is_financial_reporting_evidence
+    assert not semantics.is_company_financial_reporting
+
+    report = key_reports_for_enterprise(
+        SemanticEnterprise("ENT-X", "x", "Example", (), (evidence,))
+    ).company_report
+    assert report is not None
+    assert report.provenance == "Financial reporting evidence"
+    assert report.availability == "FINANCIAL REPORTING EVIDENCE AVAILABLE"
+    assert not report.source_document_supplied
+    assert report.source_url == ""
+
+
 def test_bt_executive_corrections_consume_canonical_identity_and_timing(monkeypatch, tmp_path):
     _package, _summary, twin = _runtime(monkeypatch, tmp_path)
     bt = next(ent for ent in twin.enterprises if ent.name == "BT Group")
@@ -190,7 +213,7 @@ def test_six_enterprise_rendered_semantic_regression(monkeypatch, tmp_path):
     assert {ent.name for ent in enterprises} == names
     for ent in enterprises:
         reports = key_reports_for_enterprise(ent)
-        classified = [obj for obj in ent.records if classify_evidence(obj).is_company_financial_reporting]
+        classified = [obj for obj in ent.records if classify_evidence(obj).is_financial_reporting_evidence]
         assert bool(reports.company_report) == bool(classified)
         assert reports.external_report is None
         html = _dossier(ent, twin, package.import_run_id, None)
