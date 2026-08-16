@@ -1,18 +1,18 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "FLORA-EXECUTIVE-ENTERPRISE-INTELLIGENCE-2026-08-16",
-  "title": "Executive Enterprise Intelligence — Commercial Decision Layer",
-  "objective": "Give senior commercial users a concise, evidence-backed reading of existing governed Enterprise intelligence without changing canonical facts or recommendation governance.",
+  "change_id": "FLORA-EXECUTIVE-PRESENTATION-CONTRACT-2026-08-16",
+  "title": "Executive Intelligence — Executive Presentation Contract Correction",
+  "objective": "Present existing governed Enterprise intelligence as a concise commercial briefing without changing canonical intelligence or recommendation governance.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Enterprise dossiers now provide an evidence-backed executive commercial reading of existing governed intelligence.",
-    "Situation, commercial significance, signals, associated Opportunities, watchpoints and evidence position are selected from existing runtime objects.",
-    "Explainability retains source dimensions, object IDs, Evidence, Unknowns and Contradictions."
+    "Executive Intelligence consumes existing governed state without displaying raw runtime objects.",
+    "The default panel is bounded to five signals, three Opportunity summaries and three meaningful watchpoints.",
+    "Opportunity detail and technical traceability remain available through existing links and collapsed explainability."
   ],
   "expected_visible_outcomes": [
-    "Enterprise dossiers now provide an evidence-backed executive commercial reading of existing governed intelligence.",
-    "Existing opportunities and strongest change signals are visible near the top of each dossier.",
-    "Evidence limitations remain visible without displacing detailed dossier content."
+    "No dictionaries, JSON, internal field names or object dumps in Executive Intelligence.",
+    "Human-readable Opportunity names, commercial relevance, timing and maturity appear in compact cards.",
+    "Commercial significance and watchpoints communicate commercial meaning rather than implementation mechanics."
   ],
   "affected_pages": [
     "Import Twin",
@@ -27,16 +27,16 @@
   ],
   "required_test_steps": [
     "Open BT Group.",
-    "Read only the first screen.",
-    "Confirm you can understand what is happening at BT and why it matters commercially.",
-    "Confirm existing opportunities and strongest change signals are visible.",
-    "Confirm evidence limitations are visible without dominating the page.",
-    "Confirm detailed dossier content remains available underneath.",
-    "Spot-check another Enterprise to ensure the panel adapts to its evidence."
+    "Read Executive Intelligence only.",
+    "Confirm there are no raw dictionaries, JSON or internal field names.",
+    "Confirm what is happening and why it matters commercially are clear.",
+    "Confirm three BT opportunities appear as concise summaries with understandable timing and maturity.",
+    "Confirm Watchpoints explain what matters, while detail remains available through links and below.",
+    "Spot-check one other Enterprise."
   ],
   "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
   "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
-  "fresh_import_policy": "No fresh import is required: the executive layer is a read-only derivative of existing candidate runtime objects.",
+  "fresh_import_policy": "NO — the correction is a read-only presentation derivative of existing candidate runtime objects.",
   "known_limitations": [
     "Enterprise Economics and Leadership / Governance remain architectural intent, not independently implemented TEL-001 runtime dimensions.",
     "Industry/domain remains Not established where no explicit semantic domain is supplied.",
@@ -61,12 +61,12 @@
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "EXECUTIVE-ENTERPRISE-INTELLIGENCE-COMMERCIAL-DECISION-LAYER-2026-08-16",
+  "deployed_change_marker": "EXECUTIVE-INTELLIGENCE-PRESENTATION-CONTRACT-CORRECTION-2026-08-16",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
   "material_runtime_components_changed": [
-    "Executive factual presentation"
+    "Executive Intelligence presentation"
   ],
   "reimport_required_if_older_than_change": "Unavailable",
   "repository": "unknown",

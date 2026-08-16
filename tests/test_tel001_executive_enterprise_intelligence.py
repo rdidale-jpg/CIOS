@@ -33,16 +33,33 @@ def test_executive_intelligence_is_governed_rendered_derivative(monkeypatch, tmp
         result = executive_enterprise_intelligence(enterprise, twin)
         canonical_opportunities = tuple(row[0] for row in enterprise_associations(twin, enterprise, {"opportunity_hypothesis"}))
         assert result.situation and result.source_fact_ids and result.evidence_refs
-        assert result.opportunities == canonical_opportunities
+        assert tuple(card.source for card in result.opportunities) == canonical_opportunities[:3]
         assert result.unknown_refs
-        assert "does not by itself establish an active procurement" in result.commercial_significance
+        assert "do not by themselves establish an active procurement" in result.commercial_significance
         assert all(signal.source_id and signal.evidence_refs for signal in result.signals)
-        assert result.watchpoints and all(watch.source_id for watch in result.watchpoints)
+        assert len(result.signals) <= 5
+        assert len(result.opportunities) <= 3
+        assert len(result.watchpoints) <= 3
+        assert all(watch.source_id and not watch.title.startswith(("UN-", "CR-")) for watch in result.watchpoints)
 
         html = _dossier(enterprise, twin, package.import_run_id, None)
         assert html.index("Human import state:</strong> Candidate — awaiting human import decision") < html.index("Executive Intelligence") < html.index("Organisation Overview")
         assert all(label in html for label in ("Situation", "Commercial significance", "Change &amp; investment signals", "Commercial opportunities", "Watchpoints", "Evidence position", "Why am I seeing this?"))
-        assert all(f"data-business-object-id='{business_object_id(item)}'" in html for item in result.opportunities)
+        executive = html.split("<section class='card executive-intelligence'", 1)[1].split("<nav class='section-nav'", 1)[0]
+        assert executive.count("class='executive-opportunity-card'") <= 3
+        assert executive.count(">View opportunity</a>") == len(result.opportunities)
+        for card in result.opportunities:
+            assert card.name in executive and card.why_it_matters in executive
+            assert card.timing in executive and card.maturity in executive
+            assert card.source.record_id not in card.name
+        default_panel = executive.split("<details class='executive-explain'", 1)[0]
+        prohibited = ("{'", '"opportunity_id"', "affected_business_unit", "customer_consequence",
+                      "customer_problem", "financial_consequence", "operational_consequence",
+                      "regulatory_consequence", "strategic_consequence", "why_problem_exists")
+        assert not any(token in default_panel for token in prohibited)
+        assert "Source factual dimensions:" in executive and "Evidence references:" in executive
+        assert "Existing evidence shows change or pressure across" not in executive
+        assert "do not by themselves establish an active procurement" in executive
         assert "Domain:</strong> Not established" in html
         assert "Enterprise Economics</h2><p><strong>Architectural intent — not implemented." in html
         assert "Leadership / Governance</h2><p><strong>Architectural intent — not implemented." in html

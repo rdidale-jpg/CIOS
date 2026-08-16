@@ -15,9 +15,20 @@ from .semantic_twin import SemanticEnterprise, SemanticObject, SemanticTwin, bus
 @dataclass(frozen=True)
 class ExecutiveSignal:
     title: str
+    explanation: str
     source_type: str
     source_id: str
     evidence_refs: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class ExecutiveOpportunity:
+    """Small presentation projection over (and linked back to) one Opportunity."""
+    source: SemanticObject
+    name: str
+    why_it_matters: str
+    timing: str
+    maturity: str
 
 
 @dataclass(frozen=True)
@@ -25,7 +36,7 @@ class ExecutiveEnterpriseIntelligence:
     situation: str
     commercial_significance: str
     signals: tuple[ExecutiveSignal, ...]
-    opportunities: tuple[SemanticObject, ...]
+    opportunities: tuple[ExecutiveOpportunity, ...]
     watchpoints: tuple[ExecutiveSignal, ...]
     evidence_statement: str
     source_dimensions: tuple[str, ...]
@@ -52,6 +63,10 @@ def executive_enterprise_intelligence(ent: SemanticEnterprise, twin: SemanticTwi
     synthesis = factual.enterprise_synthesis
     dimensions = {dimension.key: dimension for dimension in enterprise_factual_dimensions(ent)}
     situation = synthesis.statement if synthesis and synthesis.status == "SUPPORTED" else ""
+    # The governed synthesis remains verbatim below in the dossier.  Here only
+    # presentation labels are joined into prose; no proposition is added.
+    situation = situation.replace("Business Model:", "It operates as").replace(
+        "Current Challenges:", "Current pressures include")
 
     programmes = tuple(row[0] for row in enterprise_associations(twin, ent, {"transformation_programme"}))
     opportunities = tuple(row[0] for row in enterprise_associations(
@@ -61,23 +76,35 @@ def executive_enterprise_intelligence(ent: SemanticEnterprise, twin: SemanticTwi
     for programme in programmes:
         title = _field(programme, "title", "objective", "business_objective") or programme.statement
         if title:
-            signals.append(ExecutiveSignal(title, "Programme", business_object_id(programme), tuple(programme.evidence_refs)))
-    for key in ("transformation", "technology", "financial", "strategy", "pressures", "procurements"):
+            explanation = _field(programme, "objective", "strategic_objective", "summary") or programme.statement
+            signals.append(ExecutiveSignal(title, explanation, "Programme", business_object_id(programme), tuple(programme.evidence_refs)))
+    executive_labels = {"transformation": "Business transformation", "technology": "Technology modernisation",
+                        "financial": "Financial pressure", "strategy": "Strategic change",
+                        "pressures": "Operational pressure", "procurements": "Procurement activity"}
+    for key in executive_labels:
         dimension = dimensions[key]
         if dimension.present:
-            signals.append(ExecutiveSignal(dimension.values[0], dimension.label, f"DIM-{key.upper()}", dimension.evidence_refs))
+            signals.append(ExecutiveSignal(executive_labels[key], dimension.values[0], dimension.label, f"DIM-{key.upper()}", dimension.evidence_refs))
     signals = signals[:5]
 
     relevance = [(_field(item, "commercial_relevance") or _field(item, "client_problem", "customer_problem", "problem"))
                  for item in opportunities]
     relevance = [item for item in relevance if item]
     if signals:
-        commercial = "Existing evidence shows change or pressure across " + ", ".join(signal.source_type for signal in signals[:3]) + "."
-        if relevance:
-            commercial += " Canonically associated Opportunity records describe commercial relevance to these conditions."
-        commercial += " Observed change does not by itself establish an active procurement."
+        themes = [signal.title.rstrip(".") for signal in signals[:3]]
+        commercial = f"{ent.name} is pursuing " + ", ".join(themes) + ". "
+        commercial += ("These changes create commercially relevant transformation demand, "
+                       "but do not by themselves establish an active procurement.")
     else:
         commercial = "Commercial significance is not established from the currently supported Enterprise facts."
+
+    executive_opportunities = tuple(ExecutiveOpportunity(
+        item,
+        _field(item, "opportunity_title", "title") or item.statement or "Unnamed opportunity",
+        _field(item, "commercial_relevance") or _field(item, "client_problem", "customer_problem", "problem") or "Commercial relevance is not yet established.",
+        _field(item, "procurement_timing", "expected_procurement_timing", "estimated_procurement_window", "expected_procurement_start", "timing") or "Timing not established",
+        " — ".join(filter(None, (_field(item, "commercial_type", "commercial_type_wave5"), _field(item, "procurement_status", "procurement_stage", "status")))) or "Commercial maturity not established",
+    ) for item in opportunities[:3])
 
     watchpoints: list[ExecutiveSignal] = []
     for opportunity in opportunities:
@@ -89,19 +116,16 @@ def executive_enterprise_intelligence(ent: SemanticEnterprise, twin: SemanticTwi
             if value:
                 values.append(f"{label}: {value}")
         if values:
-            watchpoints.append(ExecutiveSignal(" · ".join(values), "Opportunity timing", business_object_id(opportunity), tuple(opportunity.evidence_refs)))
-    if factual.unknown_refs:
-        watchpoints.append(ExecutiveSignal(f"{len(factual.unknown_refs)} explicit Unknown{'s' if len(factual.unknown_refs) != 1 else ''} remain unresolved.", "Unknown", factual.object_id, factual.evidence_refs))
-    if factual.contradiction_refs:
-        watchpoints.append(ExecutiveSignal(f"{len(factual.contradiction_refs)} explicit Contradiction{'s are' if len(factual.contradiction_refs) != 1 else ' is'} retained.", "Contradiction", factual.object_id, factual.evidence_refs))
+            name = _field(opportunity, "opportunity_title", "title") or opportunity.statement
+            watchpoints.append(ExecutiveSignal(name, " · ".join(values), "Opportunity timing", business_object_id(opportunity), tuple(opportunity.evidence_refs)))
 
     evidence_statement = (
-        f"Supported by {len(factual.evidence_refs)} linked evidence reference{'s' if len(factual.evidence_refs) != 1 else ''}. "
-        f"{len(factual.unknown_refs)} Unknown{'s' if len(factual.unknown_refs) != 1 else ''} and "
-        f"{len(factual.contradiction_refs)} Contradiction{'s' if len(factual.contradiction_refs) != 1 else ''} remain retained."
+        f"Supported by {len(factual.evidence_refs)} linked evidence source{'s' if len(factual.evidence_refs) != 1 else ''}. "
+        f"Material uncertainty remains in {len(factual.unknown_refs)} area{'s' if len(factual.unknown_refs) != 1 else ''}, with "
+        f"{len(factual.contradiction_refs)} source contradiction{'s' if len(factual.contradiction_refs) != 1 else ''} preserved for review."
     ) if factual.evidence_refs else "No linked evidence supports an executive synthesis; unresolved items remain retained."
     return ExecutiveEnterpriseIntelligence(
-        situation, commercial, tuple(signals), opportunities, tuple(watchpoints[:5]), evidence_statement,
+        situation, commercial, tuple(signals), executive_opportunities, tuple(watchpoints[:3]), evidence_statement,
         synthesis.input_dimensions if synthesis else (), factual.evidence_refs, factual.unknown_refs,
         factual.contradiction_refs, synthesis.input_fact_ids if synthesis else (),
         "synthesized from governed facts" if situation else "truthful absence",

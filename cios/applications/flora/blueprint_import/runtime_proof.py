@@ -11,9 +11,9 @@ from cios.applications.flora.live.runtime import deployment_metadata
 
 from .pilot_change import current_pilot_change
 
-FEATURE = "enterprise_factual_synthesis"
-IMPLEMENTATION_OWNER = "cios.applications.flora.blueprint_import.canonical_factual_projection.enterprise_factual_synthesis"
-IMPLEMENTATION_REVISION = "1"
+FEATURE = "executive_enterprise_intelligence_presentation"
+IMPLEMENTATION_OWNER = "cios.applications.flora.blueprint_import.executive_workspace._executive_enterprise_intelligence_html"
+IMPLEMENTATION_REVISION = "2"
 ENTRYPOINT = "python -m cios.applications.flora.web.app"
 
 
@@ -47,8 +47,8 @@ def runtime_proof(*, functional_acceptance: str = "PASS") -> RuntimeProof:
     deployed = os.getenv("RENDER_GIT_COMMIT", "").strip() or "unavailable"
     match = "UNKNOWN" if "unavailable" in {deployed, repository} else ("YES" if deployed == repository else "NO")
     try:
-        from . import canonical_factual_projection as implementation
-        present = callable(getattr(implementation, "enterprise_factual_synthesis", None))
+        from . import executive_workspace as implementation
+        present = callable(getattr(implementation, "_executive_enterprise_intelligence_html", None))
         loaded = present
     except ImportError:
         implementation = None
