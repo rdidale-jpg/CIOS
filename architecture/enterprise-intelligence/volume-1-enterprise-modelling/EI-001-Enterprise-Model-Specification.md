@@ -3,7 +3,9 @@
 **Purpose:** Define the canonical enterprise object that CIOS builds and maintains for each monitored organisation.
 **Status:** Draft
 **Owner:** Rob / CIOS
-**Last updated:** 2026-07-03
+**Last updated:** 2026-08-16
+
+**Material Pressure authority:** [ADR-026](../../decisions/ADR-026-Material-Pressure-Qualification-and-Ownership.md) establishes this Draft specification as the durable-model owner for Material Pressure and is the Accepted authority for qualification. This reconciliation does not promote EI-001 beyond Draft.
 
 ## Architectural position
 

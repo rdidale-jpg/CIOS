@@ -1,164 +1,76 @@
 # TEL-001 Material Pressure Governance Assessment
 
-**Assessment date:** 2026-08-16  
-**Decision:** ARCHITECTURAL GOVERNANCE INSUFFICIENT  
-**Runtime change authorised:** No
-
-**Qualification contract status:** PROPOSED — awaiting governance
+**Assessment date:** 2026-08-16
+**Decision:** GOVERNANCE GAP RESOLVED BY ADR-026
+**Runtime change authorised in this sprint:** No
+**Subsequent runtime implementation authorised:** Yes
+**Qualification contract status:** ACCEPTED — [ADR-026](../../../architecture/decisions/ADR-026-Material-Pressure-Qualification-and-Ownership.md)
 
 ## Authority reviewed
 
-The Chief Architect pack identifies `CURRENT-PROGRAMME-STATE` (2026-07-21) as
-the programme-state baseline and WP-011 as the runtime baseline. ADR-014 and
-ADR-024 contain accepted decisions for evidence-bounded interpretation and the
-hybrid reasoning runtime. EIF-001 is Review; EI-001, EI-002, EI-003, EI-004
-and EI-012 are Draft; and FEIR-001 and EIRP-001 are Proposed runtime
-specifications. Those non-accepted documents inform this assessment but cannot
-silently create runtime doctrine.
+| Authority | Recorded status | Role in this assessment |
+|---|---|---|
+| ADR-014 | ACCEPTED | Evidence-bounded interpretation, lineage, Unknown/Contradiction and safe-failure constraint. |
+| ADR-024 | ACCEPTED | Hybrid governed runtime and candidate-validation boundary. |
+| ADR-026 | ACCEPTED | Sole Material Pressure qualification authority. |
+| EI-001 | DRAFT | Canonical durable-model owner named by ADR-026; not independently accepted. |
+| EI-003 | DRAFT | Informative behaviour model, not qualification authority. |
+| EI-004 | DRAFT | Intended Commercial Reasoning owner, constrained by ADR-026's durable/derived boundary. |
+| EI-012 | DRAFT | Informative Observation model and candidate-input pattern. |
+| EIF-001 | REVIEW | Informative Enterprise foundation context. |
+| EIRP-001 | PROPOSED | Proposed runtime pipeline subordinate to accepted ADRs. |
+| FEIR-001 | PROPOSED | Proposed runtime architecture subordinate to ADR-024. |
+| CURRENT-PROGRAMME-STATE | OTHER — programme-state baseline | Current Chief Architect programme baseline, not domain authority. |
+| Flora Runtime Capability Baseline (WP-011) | OTHER — runtime baseline | Implementation evidence, not domain authority. |
 
-The governed Knowledge Pack copy of EI-001 also declares its status as
-**Draft**. Inclusion in the pack makes the document available for architectural
-assessment; it does not promote it to Accepted authority. References elsewhere
-to EI-001 as a canonical model owner describe the intended ownership boundary,
-not an accepted qualification contract.
+The Chief Architect Knowledge Pack version is 1.1.0. Inclusion in that pack does not promote Review, Draft or Proposed documents. Before ADR-026, ADR-002 established the durable-memory boundary and ADR-014/ADR-024 constrained reasoning, but **no Accepted authority qualified Material Pressure**.
 
-The accepted ADRs require bounded Enterprise evidence, applicability, lineage,
-validation, Unknown and Contradiction preservation, and safe failure. They
-permit pressure *assessment* as a transient interpretation. They do not define
-the acceptance contract by which an imported financial, strategy, challenge,
-risk, programme or market fact becomes a qualified **Material Pressure**.
+## Resolved architectural gap
 
-## Proven root cause
+ADR-026 **amends and accepts** the earlier proposed six-gate contract. It:
 
-The TEL-001 canonical factual projection reads Material Pressures only from the
-explicit Enterprise identity field `pressures`. Pressure-like text held in
-Financial Position, Strategy, Transformation, Programme and Opportunity fields
-is therefore visible elsewhere but is not a Material Pressure. The executive
-quality diagnostic tests only whether the projected `pressures` dimension is
-present, so an empty projection is described as truthful absence without first
-testing whether governed candidate signals were under-used.
+- establishes EI-001 as the single durable-model owner while EI-001 remains Draft;
+- makes ADR-026 the accepted qualification authority;
+- requires governed input, Enterprise applicability, pressure semantics, semantic identity/singularity, explainable materiality, supported Enterprise consequence and complete assurance lineage;
+- permits Unknown only in non-core detail;
+- makes core contradiction `UNRESOLVED` and permits qualification-with-contradiction only when the core gates remain supported;
+- uses governed timing/resolution/supersession rather than a new fixed lifecycle enumeration;
+- deterministically rejects keyword, generic, cross-Enterprise, metric-only, Programme-only, Opportunity-only, Procurement-only, priority-only, unsupported, immaterial, duplicate and core-contradictory candidates; and
+- keeps durable Enterprise understanding separate from seller-specific Commercial Reasoning.
 
-This is a **reasoning gap**, **runtime gap**, **presentation gap**, and
-**architectural gap**. It is not established as a source gap: the package
-contains candidate pressure-like intelligence. Nor is it safely classifiable as
-only an extraction gap, because promoting those other facts requires the missing
-qualification semantics.
+The former annex in this document is superseded by ADR-026 and is not repeated. In particular, its combined “consequence and commercial significance” gate was unsafe: ADR-026 removes commercial significance from durable qualification.
 
-The canonical owners of the currently displayed pressure-like intelligence are
-their existing factual dimensions and business objects: Financial Position,
-Strategy, Transformation, Programme, Opportunity, and their linked Evidence.
-They are not implicitly owned by Material Pressures.
+## Runtime boundary and readiness
 
-## Stop condition
+The TEL-001 factual projection currently reads only the explicit Enterprise `pressures` field. ADR-026 does not change that projection, runtime reasoning, dossier behaviour, Opportunities, Procurements, Watchpoints or Evidence. No source fact is promoted by this assessment.
 
-No keyword, alias, regex, telecom-domain inference, or dossier-copying rule may
-bridge this discontinuity. Implementing one would allow plausible language to
-become a new governed conclusion without accepted identity, materiality,
-applicability, consequence, singularity, or lifecycle rules.
-
-The precise unresolved architectural question is:
-
-> Which accepted owner and deterministic acceptance contract authorises Flora
-> to transform an Enterprise-applicable governed Observation (or other
-> canonical factual object) into a distinct Material Pressure, and what are the
-> mandatory identity/singularity, materiality, consequence, commercial
-> significance, uncertainty, contradiction, lifecycle, and evidence-lineage
-> fields and rejection rules for that transformation?
-
-## Authority reconciliation and required governance action
-
-The authority hierarchy produces the following unambiguous result:
+Architecture is now sufficiently precise for a subsequent runtime sprint. That sprint may implement gate outcomes, semantic singularity, lineage, Unknown and Contradiction handling under ADR-024 without making a new architectural decision. It must demonstrate conformance before production use; authorisation is not implementation.
 
 | Question | Finding |
 |---|---|
-| Proposed architecture | The six-gate contract in the annex below is a candidate architecture only. |
-| Accepted architectural authority | ADR-002 accepts the Enterprise Model as durable memory; ADR-014 and ADR-024 constrain evidence-bounded interpretation and hybrid reasoning. None accepts a Material Pressure identity or qualification contract. |
-| Runtime implementation readiness | Not ready. No runtime implementation, projection change or TEL-001 change is authorised by this assessment. |
+| Governance gap | Resolved by Accepted ADR-026. |
+| Contract decision | AMENDED and ACCEPTED. |
+| Durable-model owner | EI-001, under ADR-026; EI-001 status remains Draft. |
+| Qualification authority | ADR-026. |
+| Commercial reasoning | Derived, under existing commercial-reasoning governance; never durable Pressure truth by implication. |
+| Runtime implementation in this PR | Not authorised and not performed. |
+| Subsequent implementation readiness | Ready and authorised, subject to ADR-026 conformance tests. |
+| Fresh import | Not required. |
 
-There is therefore no existing Accepted owner that can genuinely be clarified
-without enlarging its decision. ADR-002 establishes *where* durable Enterprise
-Model state belongs, but does not decide *what qualifies* as a Material
-Pressure. ADR-014 and ADR-024 provide reasoning constraints, not the missing
-domain-object acceptance semantics. Treating an amendment to any of them as a
-mere clarification would conceal a new architectural decision.
+## Conceptual and falsification result
 
-The smallest honest governance action is **B: a narrowly scoped ADR** that
-accepts (or rejects/amends) the Material Pressure qualification contract,
-establishes Material Pressure as durable Enterprise Model state, and names
-EI-001 as the intended durable-model owner once EI-001 is reconciled with that
-Accepted decision. Until that ADR is accepted, ADR-002 remains the Accepted
-authority only for the general durable-memory boundary; **there is no Accepted
-authority for Material Pressure qualification**, and EI-001 is only the
-candidate durable-model owner.
-
-This assessment and its annex do not themselves perform that governance action.
-They may be merged as a record of a proposed architecture and stop condition,
-but may not be cited as normative runtime doctrine.
-
-## Proposed Material Pressure qualification contract (non-normative annex)
-
-**Classification:** PROPOSED architecture awaiting governance. This annex is
-not Accepted, does not normatively authorise qualification, and is not runtime
-implementation authority.
-
-A candidate may become a qualified Material Pressure only when it passes all
-six gates. Failure or unresolved evidence at any gate rejects qualification;
-the source object remains in its existing canonical factual dimension and the
-unresolved issue may be preserved as an Unknown or Contradiction.
-
-1. **Governed candidate and lineage.** The candidate is a governed Observation
-   or canonical factual object with inspectable Evidence lineage, source type,
-   observation time, confidence and freshness. Narrative resemblance alone is
-   not a candidate.
-2. **Enterprise applicability.** The candidate identifies the affected
-   Enterprise and monitored scope. Industry or market context without evidenced
-   Enterprise applicability does not pass.
-3. **Pressure identity and singularity.** The candidate expresses one distinct
-   constraint, demand or forcing condition with a stable identity. Duplicate,
-   compound or merely restated facts are reconciled or rejected rather than
-   emitted as additional pressures.
-4. **Materiality.** Evidence supports a material effect on an enterprise
-   objective, outcome, economics, operation, obligation, risk or change agenda.
-   Importance inferred only from keywords or domain familiarity does not pass.
-5. **Consequence and commercial significance.** The pressure has an explicit,
-   evidence-bounded consequence and explains why it matters commercially to
-   the Enterprise. This gate does not manufacture an Opportunity, procurement
-   claim or provider fit.
-6. **Assurance and lifecycle.** Confidence, uncertainty, Contradictions,
-   effective/observed dates, freshness/decay and lifecycle state are explicit;
-   supporting and counter-evidence are preserved. The pressure can be updated,
-   weakened, contradicted, retired or re-qualified without erasing history.
-
-The prospective ADR must define the required fields and deterministic rejection
-rules for these gates before implementation. Acceptance of that ADR would make
-the contract architectural authority; a subsequent implementation change would
-still need to demonstrate conformance and runtime tests. Architecture
-acceptance and runtime implementation readiness are separate gates.
+ADR-026 records the full unchanged-TEL-001 matrix for BT Group, CityFibre, Openreach, TalkTalk, Virgin Media O2 and VodafoneThree. It deliberately produces `YES`, `NO` and `UNRESOLVED` outcomes. Its BT examples distinguish raw revenue, cost-base and legacy-estate labels from qualified debt/capex and regulated-pricing conditions. Its falsification matrix safely rejects metrics, generic industry assumptions, competitor conditions, Programmes, Opportunities, Procurements, weak unsupported observations, unsupported consequences and duplicates, and holds core contradictions unresolved.
 
 ## Merge decision record
 
-- **EI-001 status:** Draft.
-- **Accepted authority for Material Pressure qualification:** None. ADR-002,
-  ADR-014 and ADR-024 are Accepted constraints/precedent, not the qualification
-  owner.
-- **Governance action:** B — narrowly scoped ADR.
-- **Canonical durable-model owner:** ADR-002 owns the Accepted general durable
-  Enterprise Model boundary; EI-001 is the proposed future detailed owner once
-  reconciled by the Accepted ADR.
-- **Qualification contract status:** PROPOSED.
-- **Runtime authorised after this PR:** NO.
-- **Architecture ready for subsequent runtime implementation:** NO; first
-  accept the narrowly scoped ADR, then reconcile EI-001.
-- **Decision:** SAFE TO MERGE, because this document records a proposal and a
-  stop condition and does not rely on Draft EI-001 to create normative doctrine.
-
-Until that question is resolved by accepted architecture, the correct action is
-to preserve the existing empty projection, report the under-utilisation risk as
-a governance failure rather than truthful absence, and make no runtime or
-TEL-001 fixture change. The requested six-enterprise pressure qualification and
-functional acceptance therefore cannot truthfully pass.
+- **Authority hierarchy respected:** Yes.
+- **Exactly one qualification authority:** ADR-026.
+- **Exactly one durable-model owner:** EI-001, established by ADR-026.
+- **EI-001 status represented truthfully:** Draft; unchanged.
+- **Production semantics changed:** No.
+- **Runtime implementation authorised after this PR:** Yes.
+- **Decision:** SAFE TO MERGE, subject to repository validation and unchanged TEL-001 checksum.
 
 ## Fixture integrity
 
-The TEL-001 ZIP was not modified. Its SHA-256 at assessment time was
-`bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07`.
+The TEL-001 ZIP was not modified. Its expected SHA-256 remains `bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07`.
