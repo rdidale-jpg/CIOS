@@ -12,7 +12,8 @@ from datetime import date
 from urllib.parse import urlparse
 
 from .semantic_twin import (SemanticEnterprise, SemanticObject, SemanticTwin,
-                            business_object_id, evidence_applicability, evidence_for_enterprise)
+                            business_object_id, evidence_applicability,
+                            evidence_subject_matches_enterprise)
 from .evidence_semantics import classify_evidence
 
 
@@ -51,6 +52,10 @@ class EvidenceQualification:
     eligible: bool
     rejection_stage: str
     rejection_reason: str
+    applicable: bool = True
+    applicability_reason: str = "Direct Enterprise Evidence."
+    subject_match: bool = False
+    company_report_eligible: bool = False
 
 
 @dataclass(frozen=True)
@@ -132,8 +137,7 @@ def key_reports_for_enterprise(ent: SemanticEnterprise, twin: SemanticTwin | Non
     applicability = evidence_applicability(twin, ent) if twin is not None else ()
     evidence = (tuple(row.evidence for row in applicability) if twin is not None else
                 tuple(obj for obj in ent.records if obj.kind == "evidence"))
-    direct_ids = ({business_object_id(row.evidence) for row in applicability if row.verdict == "DIRECT"}
-                  if twin is not None else {business_object_id(obj) for obj in evidence})
+    applicability_by_id = {business_object_id(row.evidence): row for row in applicability}
     qualifications = []
     for obj in evidence:
         semantics = classify_evidence(obj)
@@ -143,18 +147,25 @@ def key_reports_for_enterprise(ent: SemanticEnterprise, twin: SemanticTwin | Non
         # through an explicitly governed source location/document field.
         document = url or bool(_value(obj, "source_document") or _value(obj, "document_reference"))
         supplied = semantics.is_company_financial_reporting and document
-        eligible = semantics.is_financial_reporting_evidence
-        if eligible:
+        subject_match = evidence_subject_matches_enterprise(obj, ent)
+        eligible = semantics.is_financial_reporting_evidence and (
+            not semantics.is_company_financial_reporting or subject_match)
+        if semantics.is_company_financial_reporting and not subject_match:
+            stage, reason = ("ENTERPRISE SUBJECT", "Evidence is not company financial reporting for the dossier Enterprise.")
+        elif eligible:
             stage, reason = ("None", "Eligible financial-reporting Evidence.")
         else:
             stage, reason = ("FINANCIAL SEMANTICS", semantics.rationale)
         qualifications.append(EvidenceQualification(
             obj, semantics.is_financial_reporting_evidence,
             semantics.is_company_financial_reporting, identity, document, url,
-            supplied, semantics.is_financial_reporting_evidence, eligible, stage, reason))
+            supplied, semantics.is_financial_reporting_evidence, eligible, stage, reason,
+            True, applicability_by_id.get(business_object_id(obj)).path if twin is not None else
+            "Standalone Enterprise Evidence input.", subject_match,
+            semantics.is_company_financial_reporting and subject_match))
     def latest(kind: str) -> KeyReport | None:
         rows = [obj for obj in evidence if _report_kind(obj) == kind and
-                (kind != "company" or business_object_id(obj) in direct_ids)]
+                (kind != "company" or evidence_subject_matches_enterprise(obj, ent))]
         if not rows:
             return None
         # Richer extracts win duplicate same-date report references, then the
@@ -164,15 +175,9 @@ def key_reports_for_enterprise(ent: SemanticEnterprise, twin: SemanticTwin | Non
             bool(_value(obj, "relevant_period")), len(_findings(obj)), business_object_id(obj)))
         return _project(selected, "Company disclosure" if kind == "company" else "External analyst view")
     company = latest("company")
-    if company is None:
-        # Financial intelligence is not the same thing as a supplied report.
-        # Preserve the governed evidence path without promoting it to a report.
-        rows = [obj for obj in evidence if _financial_evidence(obj)]
-        if rows:
-            selected = max(rows, key=lambda obj: (
-                _date_key(_value(obj, "publication_date") or obj.freshness),
-                bool(_value(obj, "relevant_period")), len(_findings(obj)), business_object_id(obj)))
-            company = _project(selected, "Financial reporting evidence", report_established=False)
+    # Financial content remains in the applicability/qualification trace, but
+    # it cannot fill the company-report slot unless the governed metadata
+    # establishes an actual company report for this Enterprise.
     external = latest("external")
     trace = KeyReportsTrace(
         ent.identity_key, evidence, tuple(qualifications),

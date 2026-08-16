@@ -11,9 +11,9 @@ from cios.applications.flora.live.runtime import deployment_metadata
 
 from .pilot_change import current_pilot_change
 
-FEATURE = "evidence_utilisation_key_reports"
+FEATURE = "evidence_provenance_applicability_separation"
 IMPLEMENTATION_OWNER = "cios.applications.flora.blueprint_import.key_reports.key_reports_for_enterprise"
-IMPLEMENTATION_REVISION = "3"
+IMPLEMENTATION_REVISION = "4"
 ENTRYPOINT = "python -m cios.applications.flora.web.app"
 
 

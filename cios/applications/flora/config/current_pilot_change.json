@@ -1,14 +1,15 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "FLORA-ENTERPRISE-EVIDENCE-ASSOCIATION-INTEGRITY-2026-08-16",
-  "title": "Enterprise Evidence Association Integrity",
-  "objective": "Resolve imported Evidence references through the canonical Semantic Twin owner and expose one truthful runtime acceptance result.",
+  "change_id": "FLORA-EVIDENCE-PROVENANCE-APPLICABILITY-SEPARATION-2026-08-16",
+  "title": "Evidence Provenance vs Enterprise Applicability Separation",
+  "objective": "Keep canonical Evidence subject and publisher stable while resolving Enterprise applicability separately.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Flora now reconciles imported Evidence references with canonical Evidence objects so Key Reports consumes the governed Evidence supporting Enterprise intelligence; functional acceptance reflects the same runtime result."
+    "Flora now distinguishes what an Evidence object is about from the Enterprises to which that Evidence is relevant. Shared, regulatory and competitive Evidence remains available where applicable, but another company's Evidence can no longer become the dossier Enterprise's own company financial reporting."
   ],
   "expected_visible_outcomes": [
-    "Company financial reporting no longer appears absent when governed financial-reporting Evidence is available.",
+    "EV-CF-2025 retains CityFibre as its subject in BT and CityFibre contexts and is ineligible as BT company reporting.",
+    "EV-BT-Q1FY27 remains BT-subject Evidence eligible for BT company reporting.",
     "Key Reports exposes the best governed report, evidence extract or evidence link without inventing a report or URL.",
     "External analyst / market research remains truthfully absent where no qualifying report is supplied."
   ],
@@ -22,7 +23,8 @@
   "required_test_steps": [
     "Open BT Group.",
     "Go to Key Reports.",
-    "Confirm company financial reporting no longer incorrectly appears absent when governed financial-reporting Evidence is available.",
+    "Inspect EV-CF-2025 and confirm subject CityFibre, separately explained BT applicability, and no BT company-report eligibility.",
+    "Inspect EV-BT-Q1FY27 and confirm subject BT Group and BT company-report eligibility.",
     "Confirm the best available governed report, evidence extract or evidence link is shown.",
     "Confirm no report or URL has been invented.",
     "Confirm external analyst / market research remains truthfully absent."
@@ -54,7 +56,7 @@
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "FLORA-ENTERPRISE-EVIDENCE-ASSOCIATION-INTEGRITY-2026-08-16",
+  "deployed_change_marker": "FLORA-EVIDENCE-PROVENANCE-APPLICABILITY-SEPARATION-2026-08-16",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,

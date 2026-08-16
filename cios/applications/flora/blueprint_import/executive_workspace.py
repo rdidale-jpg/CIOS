@@ -40,7 +40,7 @@ from .research_requirements import research_requirements
 from .observation_runtime import build_candidate_observation, OBSERVATION_BUILDER_NAME, OBSERVATION_PROFILE_VERSION, observation_family
 from .semantic_twin import (SemanticEnterprise, SemanticObject, SemanticTwin, assemble_semantic_twin,
                             business_collections, business_object_id, enterprise_associations, executive_insight_eligible,
-                            resolve_relationships,
+                            evidence_subject, evidence_publisher, resolve_relationships,
                             executive_record_view_model)
 from .twin_governance import project_twin_identity
 from .validator import BlueprintPackageValidator, can_inspect_blueprint_package
@@ -228,11 +228,13 @@ def _key_reports_live_trace(ent: SemanticEnterprise, twin: SemanticTwin | None =
         objects.append(f"<article class='qualification-trace'><h4>{escape(business_object_id(obj))}</h4><dl>"
           f"<dt>Runtime object/class</dt><dd>{escape(type(obj).__module__+'.'+type(obj).__qualname__)}</dd>"
           f"<dt>Canonical/source object ID</dt><dd>{escape(obj.record_id)} / {escape(obj.original_id or 'Not supplied')}</dd>"
-          f"<dt>Associated Enterprise</dt><dd>{escape(ent.name)} ({escape(ent.identity_key)})</dd>"
+          f"<dt>Evidence subject</dt><dd>{escape(evidence_subject(obj) or 'Not supplied')}</dd>"
+          f"<dt>Publisher/source</dt><dd>{escape(evidence_publisher(obj) or 'Not supplied')}</dd>"
+          f"<dt>Applicable to Enterprise</dt><dd>{escape(ent.name)} ({escape(ent.identity_key)})</dd>"
+          f"<dt>Applicability reason</dt><dd>{escape(row.applicability_reason)}</dd>"
           f"<dt>Evidence type/category</dt><dd>{escape(supplied(obj,'evidence_type','category','source_type','evidence_quality'))}</dd>"
           f"<dt>Title</dt><dd>{escape(supplied(obj,'title'))}</dd><dt>Description</dt><dd>{escape(supplied(obj,'description'))}</dd>"
           f"<dt>Summary/extract</dt><dd>{escape(supplied(obj,'supported_claim','extracted_fact_or_summary'))}</dd>"
-          f"<dt>Publisher/source</dt><dd>{escape(supplied(obj,'publisher','source'))}</dd>"
           f"<dt>Publication date</dt><dd>{escape(supplied(obj,'publication_date'))}</dd>"
           f"<dt>Reporting period</dt><dd>{escape(supplied(obj,'relevant_period','reporting_period'))}</dd>"
           f"<dt>Source URL</dt><dd>{escape(supplied(obj,'url'))}</dd>"
@@ -246,7 +248,9 @@ def _key_reports_live_trace(ent: SemanticEnterprise, twin: SemanticTwin | None =
           f"<dt>Source URL established</dt><dd>{yesno(row.source_url)}</dd>"
           f"<dt>Qualifies as supplied company financial report</dt><dd>{yesno(row.supplied_report)}</dd>"
           f"<dt>Qualifies as financial-reporting Evidence</dt><dd>{yesno(row.financial_reporting_evidence)}</dd>"
+          f"<dt>Dossier Enterprise subject match</dt><dd>{yesno(row.subject_match)}</dd>"
           f"<dt>Eligible for Key Reports presentation</dt><dd>{yesno(row.eligible)}</dd>"
+          f"<dt>Company-report eligibility</dt><dd>{yesno(row.company_report_eligible)}</dd>"
           f"<dt>Rejection stage</dt><dd>{escape(row.rejection_stage)}</dd>"
           f"<dt>Exact rejection reason</dt><dd>{escape(row.rejection_reason)}</dd></dl></article>")
     comparison = "".join(f"<tr><td>{escape(ref)}</td><td>{yesno(ref in by_id)}</td>"

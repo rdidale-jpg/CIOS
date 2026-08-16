@@ -24,3 +24,55 @@ The supplied records do not contain an author/analyst, source filename for an em
 Latest selection orders supplied publication metadata, then prefers the richer governed duplicate-date record and finally uses immutable Evidence identity as a deterministic tie-break. Only explicit HTTP(S) URLs from Evidence are rendered. Company reporting and external views are independently classified from existing Evidence type/quality/title semantics; neither can become the other. A missing report, an extract-only report, a referenced report without source/extract, and a directly linked report render as different states.
 
 An unresolved Organisation Overview requirement remains unresolved. Where linked governed Evidence exists, the dossier now says that further canonical extraction is possible rather than treating an empty presentation field as proof that Evidence is absent. It does not mine or promote the report at runtime.
+
+## Provenance and applicability separation
+
+**ARCHITECTURAL INTENT.** ADR-012 makes the staged import candidate the
+canonical acceptance boundary, ADR-014 requires inspectable Evidence lineage,
+and ADR-024 leaves canonical knowledge ownership outside presentation. The
+import-scoped `SemanticObject` therefore owns Evidence provenance. The
+`SemanticTwin` association resolver owns the read-only Enterprise applicability
+path. Key Reports owns neither.
+
+**IMPLEMENTED RUNTIME.** TEL-001's `supported_object` is retained as Evidence
+subject. Its first supplied object is the primary/reporting subject; further
+objects remain content scope that can establish relevance. `publisher` remains
+an independent source property. Applicability is resolved from subject scope or
+an explicit Evidence reference and carries an explanatory path. It never
+rewrites the primary subject.
+
+**CURRENT FAILURE (pre-change).** Enterprise assembly put referenced Evidence
+in `SemanticEnterprise.records`. Applicability then treated membership in that
+presentation projection as direct ownership. Key Reports limited company
+reports to that “direct” set, so a newer competitor disclosure could outrank the
+dossier Enterprise's disclosure. The last correct boundary was the unchanged
+Evidence row. The first conflated boundary was `evidence_applicability`'s
+`obj in ent.records` shortcut. The canonical owner remains `SemanticObject`; no
+new ontology or fresh import is required.
+
+### TEL-001 traces
+
+| Evidence | Source subject (`supported_object`) | Primary subject | Publisher / provenance | Applicability |
+|---|---|---|---|---|
+| `EV-CF-2025` | CityFibre | CityFibre | CityFibre / primary company publication | CityFibre directly; BT only through a BT-associated object's explicit Evidence reference |
+| `EV-BT-Q1FY27` | BT Group; Openreach | BT Group | BT Group / primary company publication | BT directly; Openreach as additional content scope, without converting it into an Openreach standalone report |
+| `EV-OF-TAR26` | Regulation | Regulation | Ofcom / primary regulator | Shared where an Enterprise-associated object explicitly references it |
+| `EV-OR-FTTP26` | Openreach FTTP | Openreach FTTP | Openreach / primary company source | Relationship/reference-derived where BT intelligence explicitly cites it |
+| `EV-VMO2-RAN-2026` | VMO2; Mobile Transformation Programme | VMO2 | Virgin Media O2 / primary source | VMO2 directly and other dossiers only through explicit references |
+
+For `EV-CF-2025`: ABOUT CityFibre **YES**; PUBLISHED BY CityFibre
+**YES**; APPLICABLE TO CityFibre **YES**; APPLICABLE TO BT **YES** through
+the governed reference path; BT company financial reporting **NO**; CityFibre
+company financial reporting **YES**.
+
+For `EV-BT-Q1FY27`: ABOUT BT **YES**; PUBLISHED BY BT **YES**; APPLICABLE TO
+BT **YES**; BT company financial reporting **YES**. Openreach relevance remains
+available, but BT is the primary subject, so the record is not automatically an
+Openreach standalone company financial report.
+
+Company-report selection now requires both existing financial-report
+classification and a primary Evidence-subject match to the dossier Enterprise.
+Publisher supports provenance classification but is not used as the complete
+ownership rule. Competitive, regulatory, parent/subsidiary and market Evidence
+continues through explicit applicability paths and remains visible to its
+legitimate consumers.
