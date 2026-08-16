@@ -419,7 +419,10 @@ def _opportunity_card(o: SemanticObject, run_id: str) -> str:
     details += f"<p><strong>Relevant domain:</strong> {escape(', '.join(d.title() for d in o.domains) or 'Not established')}</p>"
     if theme: details += f"<p><strong>Reinvention theme:</strong> {escape(theme)}</p>"
     if relevance: details += f"<p><strong>Commercial relevance:</strong> {escape(relevance)}</p>"
-    confidence = "Supplied; assessment not yet performed" if "confidence_model" in o.confidence.casefold() else o.confidence
+    # ``confidence_model`` is source provenance, not evidence of a second
+    # assessment workflow.  Keep the supplied-confidence fact and leave the
+    # candidate lifecycle to the shared Human import state presentation.
+    confidence = "Supplied" if "confidence_model" in o.confidence.casefold() else o.confidence
     details += f"<p><strong>Evidence:</strong> {escape(evidence)} · <strong>Confidence:</strong> {escape(confidence)}</p>"
     details += f"<p><strong>Missing information:</strong> {escape(', '.join(missing) or 'None under the presentation contract')}</p>"
     return f"<article class='executive-conclusion opportunity-card' data-business-object-family='Opportunity' data-business-object-id='{escape(business_object_id(o))}'><h3>{escape(o.statement)}</h3>{details}<a href='/blueprint-import/{escape(run_id)}/explore?collection=opportunities#{escape(o.record_id)}'>Open opportunity</a></article>"
@@ -541,7 +544,7 @@ def _enterprise_card(e, run_id):
     body = (f"<p>{escape(profile.values[0])}</p>" if profile.present else
             "<p><strong>Organisation description not supplied.</strong></p>")
     body += f"<p><strong>Industry/domain:</strong> {escape(', '.join(industry.values) or 'Not established')}</p>"
-    body += "<p><span class='pill'>Imported candidate · assessment not yet performed</span></p>"
+    body += "<p><span class='pill'>Candidate — awaiting human import decision</span></p>"
     canonical_fields = ""
     if identity:
         canonical_fields = "".join(
@@ -996,7 +999,7 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
         rows=[o for o in objects if _reinvention_kind(o)]
         cards = "".join(_canonical_factual_html(factual_projection_for_object(o, "Reinvention Assessment")) for o in rows)
         canonical = sum(o.kind in {'ai_reinvention_assessment', 'reinvention_assessment'} for o in rows)
-        content=(f"<p><strong>{len(rows)} candidate pressure {'record' if len(rows)==1 else 'records'} supplied</strong></p><p><strong>{canonical} canonical timing {'assessment' if canonical==1 else 'assessments'}.</strong> Remaining records are retained as candidate facts and await governed owner assessment; none is silently discarded.</p>" + cards if rows else "<p>No candidate pressure or timing assessment records were supplied.</p>")
+        content=(f"<p><strong>{len(rows)} candidate pressure {'record' if len(rows)==1 else 'records'} supplied</strong></p><p><strong>{canonical} canonical timing {'assessment' if canonical==1 else 'assessments'}.</strong> Remaining records are retained as candidate facts; no owner assessment is supplied and none is silently discarded.</p>" + cards if rows else "<p>No candidate pressure or timing assessment records were supplied.</p>")
     requirements = [r for r in research_requirements(twin, executive_assessments(twin)) if r.aspect == key]
     fields = tuple(dict.fromkeys(field for r in requirements for field in r.missing_fields))
     sources = tuple(dict.fromkeys(source for r in requirements for source in r.source_categories))
@@ -1006,10 +1009,10 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
 
 def _assessment_state_label(state: str) -> str:
     if state == "assessment_pending_governance":
-        return "Information supplied; assessment not yet performed"
+        return "Information supplied; no owner assessment supplied"
     if state == "owner_assessment_supplied_candidate":
         return "Assessment supplied; human review not recorded"
-    return "Not yet assessed against the governed standard" if state == "legacy_unassessed" else state.replace("_", " ").title()
+    return "No owner assessment supplied" if state == "legacy_unassessed" else state.replace("_", " ").title()
 
 
 _COLLECTION_LANGUAGE = {
@@ -1443,25 +1446,35 @@ def _population_and_association_reconciliation(twin: SemanticTwin, run_id: str =
         ids = lambda values: ", ".join(escape(value) for value in values) or "None"
         association_rows.append(f"<tr><td>{escape(ent.name)}</td><td><code>{escape(ent.source_identity or 'Unknown')}</code></td><td><code>{escape(ent.candidate_identity or 'Unknown')}</code></td><td><code>{escape(ent.presentation_key)}</code></td><td><code>{escape(relationship_subject or 'Unknown')}</code></td><td>{ids(source_programmes)}</td><td>{ids(programme_ids)}</td><td>{ids(rendered_programmes)}</td><td>{ids(source_opportunities)}</td><td>{ids(opportunity_ids)}</td><td>{ids(rendered_opportunities)}</td><td>{ids(missing_query)}</td><td>{ids(missing_render)}</td><td>{ids(unexpected)}</td><td>{duplicate_rows}</td><td>{result}</td></tr>")
         identity = next((o for o in ent.records if o.kind in {"enterprise_twin", "enterprise", "entity"}), ent.records[0])
+        factual = factual_projection_for_enterprise(ent)
+        synthesis = factual.enterprise_synthesis
+        explicit_source_profile = bool(_field(identity, "organisation_description"))
         for dimension in enterprise_factual_dimensions(ent):
-            rendered = dimension.status
+            is_profile = dimension.key == "profile"
+            governed_present = bool(is_profile and synthesis and synthesis.status == "SUPPORTED")
+            final_present = governed_present if is_profile else dimension.present
+            source_present = explicit_source_profile if is_profile else dimension.present
+            candidate_present = explicit_source_profile if is_profile else dimension.present
+            rendered = ("PASS" if final_present else
+                        "EXPECTED ABSENCE" if dimension.supported else "UNSUPPORTED")
             first_divergence = ("None" if rendered in {"PASS", "EXPECTED ABSENCE"}
                                 else "Architecture/runtime capability boundary")
             dimension_rows.append(
                 f"<tr><td>{escape(ent.name)}</td><td>{escape(dimension.label)}</td>"
-                f"<td>{'Present' if dimension.present else 'Absent'}</td>"
-                f"<td>{'Present' if dimension.present else 'Absent'}</td>"
-                f"<td>{'Present' if dimension.present else 'Absent'}</td>"
-                f"<td>{'Present' if dimension.present else 'Absent'}</td>"
-                f"<td>{'Human-readable' if dimension.present else 'Truthful absence'}</td>"
-                f"<td>{len(dimension.evidence_refs)}</td><td>{len(dimension.unknown_refs)}</td>"
-                f"<td>{len(dimension.contradiction_refs)}</td><td>{escape(import_state)}</td>"
+                f"<td>{'Present' if source_present else 'Absent'}</td>"
+                f"<td>{'Present' if candidate_present else 'Absent'}</td>"
+                f"<td>{'Present' if final_present else 'Absent'}</td>"
+                f"<td>{'Present' if final_present else 'Absent'}</td>"
+                f"<td>{'Present' if final_present else 'Absent'}</td>"
+                f"<td>{len(synthesis.evidence_refs) if is_profile and synthesis else len(dimension.evidence_refs)}</td>"
+                f"<td>{len(synthesis.unknown_refs) if is_profile and synthesis else len(dimension.unknown_refs)}</td>"
+                f"<td>{len(synthesis.contradiction_refs) if is_profile and synthesis else len(dimension.contradiction_refs)}</td><td>{escape(import_state)}</td>"
                 f"<td>{escape(rendered)}</td><td>{escape(first_divergence)}</td></tr>")
     return (relationship_summary+"<section class='card' id='business-object-population-reconciliation'><h2>Business Object Population Reconciliation</h2>"
             "<table><thead><tr><th>Family</th><th>Source objects</th><th>Candidate objects</th><th>Unique canonical identities</th><th>Executive/rendered entities</th><th>Duplicates</th><th>Supporting records incorrectly classified</th><th>Population reconciliation</th></tr></thead><tbody>"+"".join(population_rows)+"</tbody></table></section>"
             "<section class='card' id='enterprise-association-reconciliation'><h2>Enterprise Identity and Association Reconciliation</h2>"
             "<table><thead><tr><th>Enterprise</th><th>Source identity</th><th>Candidate identity</th><th>Executive/presentation identity</th><th>Relationship subject identity</th><th>Source Programme IDs</th><th>Query Programme IDs</th><th>Rendered Programme IDs</th><th>Source Opportunity IDs</th><th>Query Opportunity IDs</th><th>Rendered Opportunity IDs</th><th>Missing at query</th><th>Missing at render</th><th>Unexpected</th><th>Duplicates collapsed</th><th>Status</th></tr></thead><tbody>"+"".join(association_rows)+"</tbody></table></section>"
-            "<section class='card' id='enterprise-factual-presentation-reconciliation'><h2>ENTERPRISE FACTUAL PRESENTATION RECONCILIATION</h2><table><thead><tr><th>Enterprise</th><th>Dimension</th><th>Source</th><th>Candidate</th><th>Canonical factual state</th><th>Executive factual state</th><th>Rendered state</th><th>Evidence count</th><th>Unknown count</th><th>Contradiction count</th><th>Human import state</th><th>Status</th><th>First divergence</th></tr></thead><tbody>"+"".join(dimension_rows)+"</tbody></table></section>"+_enterprise_factual_synthesis_diagnostics(twin, import_state))
+            "<section class='card' id='enterprise-factual-presentation-reconciliation'><h2>ENTERPRISE FACTUAL PRESENTATION RECONCILIATION</h2><table><thead><tr><th>Enterprise</th><th>Dimension</th><th>Explicit source state</th><th>Candidate explicit state</th><th>Canonical/governed factual result</th><th>Executive consumption</th><th>Rendered state</th><th>Evidence count</th><th>Unknown count</th><th>Contradiction count</th><th>Human import state</th><th>Status</th><th>First divergence</th></tr></thead><tbody>"+"".join(dimension_rows)+"</tbody></table></section>"+_enterprise_factual_synthesis_diagnostics(twin, import_state))
 
 
 def _observation_pipeline_diagnostics(twin: SemanticTwin, run_id: str) -> str:

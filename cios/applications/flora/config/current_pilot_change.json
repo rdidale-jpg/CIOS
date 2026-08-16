@@ -1,19 +1,18 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "FLORA-FACTUAL-SYNTHESIS-HUMAN-IMPORT-CLOSURE-2026-08-15",
-  "title": "Factual Synthesis Qualification & Human Import Governance Closure",
-  "objective": "Allow Flora to represent supported Enterprise facts in Organisation Overview without requiring unrelated unknowns or contradictions to be resolved, while preserving evidence, uncertainty and human import governance.",
+  "change_id": "FLORA-SINGLE-FACTUAL-TRUTH-ASSESSMENT-LANGUAGE-CLOSURE-2026-08-15",
+  "title": "Single Factual Truth & Assessment-Language Closure",
+  "objective": "Make Advanced Inspection report the same final governed factual state as Enterprise dossiers, remove misleading assessment language, and make deployment proof identify this current change.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Qualified evidence-backed Enterprise propositions independently in the Canonical Factual Projection.",
-    "Preserved unrelated Unknowns and Contradictions without treating them as absence of all factual knowledge.",
-    "Aligned dossiers and diagnostics to the existing human review and promotion lifecycle."
+    "Aligned Advanced Inspection with the existing governed Enterprise synthesis consumed by dossiers.",
+    "Removed misleading assessment and governance-review wording while preserving confidence provenance.",
+    "Made Deployment & Runtime Proof consume this Current Change declaration."
   ],
   "expected_visible_outcomes": [
-    "BT Organisation Overview contains only evidence-backed qualifying factual propositions.",
-    "Advanced Inspection explains qualifying and rejected facts and proposition-level blockers.",
-    "Undefined assessment/governance-review wording is replaced by the real human import state.",
-    "No unsupported factual content appears."
+    "Advanced Inspection reports the same final factual state shown in the Enterprise dossier.",
+    "Remaining fictional assessment/governance-review wording is removed.",
+    "Deployment proof identifies the actual current deployed change."
   ],
   "affected_pages": [
     "Import Twin",
@@ -27,10 +26,10 @@
     "Protected: 308 Relationship candidates; working Enterprise identity lineage and associations; 13 Programmes; 17 Opportunities; factual dimension isolation; candidate governance."
   ],
   "required_test_steps": [
-    "Open Import Twin and confirm functional readiness is independent of optional deployment metadata.",
-    "Open Advanced Inspection and confirm the source, synthesis, executive-consumption and rendered states in ENTERPRISE FACTUAL SYNTHESIS TRACE.",
-    "Open the Enterprise list and all six TEL-001 Enterprise dossiers.",
-    "Confirm 308 Relationships, 13 Programmes, 17 Opportunities and exact Enterprise associations remain reconciled."
+    "Open BT Group and confirm Organisation Overview still contains supported factual content.",
+    "Open Advanced Inspection and confirm BT Organisation / Enterprise Profile is governed synthesis PRESENT/SUPPORTED and rendered PRESENT.",
+    "Confirm no assessment-not-performed or undefined governance-review language remains.",
+    "Confirm Deployment & Runtime Proof names this current change."
   ],
   "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
   "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
@@ -48,17 +47,17 @@
     "diagnostics_reconciliation_status": "PASS",
     "research_gap_reconciliation_status": "PASS",
     "known_failing_tests": "None in focused population/relationship acceptance suite.",
-    "last_validation_timestamp": "2026-08-14T00:00:00Z"
+    "last_validation_timestamp": "2026-08-15T00:00:00Z"
   },
   "merge_gate": "SAFE TO MERGE",
   "operator_validation_status": "PASS — exact association sets and rendered routes reconciled",
   "diagnostics_href": "/deployment",
-  "source_commit_sha": "88f053e6cee6fe2fef7feba1e7f4553194b7a040",
+  "source_commit_sha": "current-change-marker",
   "merged_commit_sha": "unknown",
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "CANDIDATE-RELATIONSHIP-RESOLUTION-2026-08-14",
+  "deployed_change_marker": "SINGLE-FACTUAL-TRUTH-ASSESSMENT-LANGUAGE-CLOSURE-2026-08-15",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
