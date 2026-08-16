@@ -12,7 +12,7 @@ from datetime import date
 from urllib.parse import urlparse
 
 from .semantic_twin import (SemanticEnterprise, SemanticObject, SemanticTwin,
-                            business_object_id, evidence_for_enterprise)
+                            business_object_id, evidence_applicability, evidence_for_enterprise)
 from .evidence_semantics import classify_evidence
 
 
@@ -129,8 +129,11 @@ def key_reports_for_enterprise(ent: SemanticEnterprise, twin: SemanticTwin | Non
     """Select latest qualifying reports deterministically from owned Evidence."""
     # SemanticTwin is the canonical import-scoped Evidence owner.  The fallback
     # retains compatibility for callers constructing a standalone Enterprise.
-    evidence = (evidence_for_enterprise(twin, ent) if twin is not None else
+    applicability = evidence_applicability(twin, ent) if twin is not None else ()
+    evidence = (tuple(row.evidence for row in applicability) if twin is not None else
                 tuple(obj for obj in ent.records if obj.kind == "evidence"))
+    direct_ids = ({business_object_id(row.evidence) for row in applicability if row.verdict == "DIRECT"}
+                  if twin is not None else {business_object_id(obj) for obj in evidence})
     qualifications = []
     for obj in evidence:
         semantics = classify_evidence(obj)
@@ -150,7 +153,8 @@ def key_reports_for_enterprise(ent: SemanticEnterprise, twin: SemanticTwin | Non
             semantics.is_company_financial_reporting, identity, document, url,
             supplied, semantics.is_financial_reporting_evidence, eligible, stage, reason))
     def latest(kind: str) -> KeyReport | None:
-        rows = [obj for obj in evidence if _report_kind(obj) == kind]
+        rows = [obj for obj in evidence if _report_kind(obj) == kind and
+                (kind != "company" or business_object_id(obj) in direct_ids)]
         if not rows:
             return None
         # Richer extracts win duplicate same-date report references, then the
