@@ -11,9 +11,9 @@ from cios.applications.flora.live.runtime import deployment_metadata
 
 from .pilot_change import current_pilot_change
 
-FEATURE = "evidence_provenance_applicability_separation"
-IMPLEMENTATION_OWNER = "cios.applications.flora.blueprint_import.key_reports.key_reports_for_enterprise"
-IMPLEMENTATION_REVISION = "4"
+FEATURE = "evidence_governed_material_pressure_runtime"
+IMPLEMENTATION_OWNER = "cios.applications.flora.blueprint_import.material_pressure.material_pressure_qualification"
+IMPLEMENTATION_REVISION = "1"
 ENTRYPOINT = "python -m cios.applications.flora.web.app"
 
 
@@ -57,8 +57,8 @@ def runtime_proof(*, functional_acceptance: str | None = None) -> RuntimeProof:
     match = "UNKNOWN" if "unavailable" in {deployed, repository} else ("YES" if deployed == repository else "NO")
     try:
         from . import executive_workspace as implementation
-        present = (callable(getattr(implementation, "_executive_enterprise_intelligence_html", None))
-                   and callable(getattr(implementation, "_key_reports_html", None)))
+        present = (callable(getattr(implementation, "material_pressure_qualification", None))
+                   and callable(getattr(implementation, "_dossier", None)))
         loaded = present
     except ImportError:
         implementation = None
@@ -66,7 +66,7 @@ def runtime_proof(*, functional_acceptance: str | None = None) -> RuntimeProof:
     try:
         routes = importlib.import_module("cios.applications.flora.blueprint_import.executive_workspace")
         bt_connected = loaded and callable(getattr(routes, "_dossier", None))
-        inspection_connected = loaded and callable(getattr(routes, "_enterprise_factual_synthesis_diagnostics", None))
+        inspection_connected = loaded and callable(getattr(routes, "_executive_intelligence_quality_html", None))
     except ImportError:
         bt_connected = inspection_connected = False
     if match == "NO":

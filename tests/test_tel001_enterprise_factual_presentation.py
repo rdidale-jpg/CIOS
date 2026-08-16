@@ -160,6 +160,6 @@ def test_tel001_facts_survive_without_assessment_and_render_on_actual_routes(mon
     assert "Candidate — awaiting human import decision" in diagnostics
     assert human_import_state(None, False) == "Candidate — awaiting human import decision"
 
-    assert ("Expected change</th><td><code>Imported-Twin Evidence Path Reconciliation &amp; "
-            "Functional Acceptance Truth</code>" in proof_html())
+    assert ("Expected change</th><td><code>Evidence-Governed Material Pressure Runtime</code>"
+            in proof_html())
     assert "Functional acceptance</th><td><code>PASS</code>" in proof_html()
