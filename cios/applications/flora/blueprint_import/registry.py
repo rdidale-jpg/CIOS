@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 
-from cios.applications.flora.storage import atomic_write_json, data_path, ensure_writable_dir
+from cios.applications.flora.storage import PersistenceError, atomic_write_json, data_path, ensure_writable_dir
 
 from .archive import inspect_zip_inventory, preserve_original_package, sha256_bytes
 from .ledger import BlueprintImportLedger, utc_now
@@ -106,13 +106,27 @@ class BlueprintPackageRegistry:
                 workspace_id=str(workspace_id or "").strip(),
                 package_inspection=inspection.to_dict(),
             )
-            ensure_writable_dir(data_path("blueprint_import", "packages"))
-            atomic_write_json(self._path_for_ref(package_ref), record.to_dict())
+            package_path = self._path_for_ref(package_ref)
+            try:
+                ensure_writable_dir(package_path.parent)
+                atomic_write_json(package_path, record.to_dict())
+            except OSError as exc:
+                raise PersistenceError(
+                    "Blueprint package receipt persistence failed; "
+                    "operation=create; model=BlueprintPackageRecord; "
+                    "field_or_constraint=package registry JSON record; "
+                    f"underlying_exception={type(exc).__module__}.{type(exc).__qualname__}: {exc}"
+                ) from exc
             self.ledger.append("package_received", {"package_ref": package_ref, "package_sha256": package_sha256, "import_run_id": run.import_run_id, "actor": actor})
             return record
         except Exception as exc:
             # Failed receipts intentionally leave no registry/run acceptance record.
-            self.ledger.append("package_receipt_failed", {"package_ref": package_ref, "package_sha256": package_sha256, "actor": actor, "error": str(exc)})
+            try:
+                self.ledger.append("package_receipt_failed", {"package_ref": package_ref, "package_sha256": package_sha256, "actor": actor, "error": str(exc)})
+            except Exception:
+                # A best-effort diagnostic must never replace the persistence
+                # exception (and its cause) that actually failed receipt.
+                pass
             if isinstance(exc, PackageReceiptError):
                 raise
             raise
