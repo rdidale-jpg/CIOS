@@ -13,7 +13,7 @@ from uuid import uuid4
 from cios.applications.flora.access import authenticated_flora_user, active_flora_workspace, blueprint_upload_authorisation, can_access_enterprise, flora_roles, is_cios_owner, user_enterprise_access
 from cios.applications.flora.workspace.views import _page
 from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRepository, repair_blueprint_canvas_access
-from cios.applications.flora.storage import storage_mode
+from cios.applications.flora.storage import PersistenceError, storage_mode
 from cios.applications.flora.live.runtime import deployment_metadata
 from cios.applications.flora.pilot_import import (PILOT_IMPORT_ACTOR, PILOT_IMPORT_AUTH_MODE, PILOT_IMPORT_WORKSPACE, pilot_import_bypass_enabled, pilot_import_warning)
 
@@ -81,12 +81,16 @@ def _receive_failure_diagnostic(exc: Exception) -> str:
 
 
 def _post_receipt_failure_diagnostic(exc: Exception, record: BlueprintPackageRecord) -> str:
+    # Staging persistence errors contain only deliberately safe operational
+    # context.  Preserve that context for the retained-package retry instead
+    # of reducing every failure to the wrapper class alone.
+    detail = f"; diagnostic={str(exc)}" if isinstance(exc, PersistenceError) else ""
     return (
         "Package inspection failed after safe receipt; stage=Package inspected; "
         "service=cios.applications.flora.blueprint_import.validator.BlueprintPackageValidator.validate_and_stage; "
         "expected response=staging summary persisted for BlueprintPackageRecord; "
         f"actual response=exception {type(exc).__module__}.{type(exc).__name__}; "
-        f"import identifier={record.import_run_id}; retry availability=yes; canonical changes made=no."
+        f"import identifier={record.import_run_id}; retry availability=yes; canonical changes made=no{detail}."
     )
 
 

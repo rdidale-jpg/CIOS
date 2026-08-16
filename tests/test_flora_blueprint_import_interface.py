@@ -198,6 +198,38 @@ def test_denied_entry_page_renders_when_audit_persistence_fails(monkeypatch, tmp
     assert "blueprint_import/audit" in warning["storage_path"]
 
 
+def test_inspection_failure_exposes_safe_staging_persistence_diagnostic(monkeypatch, tmp_path):
+    from cios.applications.flora.blueprint_import.candidates import CandidateStagingRepository
+    from cios.applications.flora.storage import PersistenceError
+
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+
+    def fail_summary(self, import_run_id, summary):
+        raise PersistenceError(
+            "Blueprint staging persistence failed; stage=Package inspected; "
+            "operation=save_staging_summary; record_type=ImportRunDryRunResult; "
+            "field_or_constraint=JSON-compatible staging summary and writable staging directory; "
+            "underlying_exception=builtins.OSError; "
+            "safe_diagnostic=storage operation failed with OS error 28; "
+            f"import_identifier={import_run_id}"
+        )
+
+    monkeypatch.setattr(CandidateStagingRepository, "save_summary", fail_summary)
+    html, status, target = upload_and_validate_blueprint(
+        {"blueprint_zip": pkg()},
+        {"blueprint_zip.filename": "synthetic.zip", "blueprint_zip.content_type": "application/zip"},
+        OWNER,
+    )
+
+    assert status == 400
+    assert target.startswith("/blueprint-import/bpi-run-")
+    assert "operation=save_staging_summary" in html
+    assert "underlying_exception=builtins.OSError" in html
+    assert "safe_diagnostic=storage operation failed with OS error 28" in html
+    assert str(tmp_path) not in html
+    assert "Canonical changes occurred: no" in html
+
+
 def test_unavailable_var_data_style_path_no_longer_crashes_denied_page(monkeypatch, tmp_path, caplog):
     blocked_root = tmp_path / "var" / "data" / "flora"
     blocked_root.parent.mkdir(parents=True)

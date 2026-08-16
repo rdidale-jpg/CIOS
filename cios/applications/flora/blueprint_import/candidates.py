@@ -9,7 +9,7 @@ import json
 from dataclasses import asdict, dataclass, field
 from typing import Any, Literal
 
-from cios.applications.flora.storage import atomic_write_json, data_path, ensure_writable_dir
+from cios.applications.flora.storage import PersistenceError, atomic_write_json, data_path, ensure_writable_dir
 
 from .archive import sha256_bytes
 from .ledger import utc_now
@@ -100,12 +100,50 @@ class CandidateStagingRepository:
         return data_path("blueprint_import", "staging", import_run_id)
 
     def save_candidate(self, candidate: CandidateImportRecord) -> None:
-        atomic_write_json(self.root_for(candidate.import_run_id) / "candidates" / f"{candidate.candidate_record_id}.json", candidate.to_dict())
+        self._persist(
+            self.root_for(candidate.import_run_id) / "candidates" / f"{candidate.candidate_record_id}.json",
+            candidate.to_dict(), candidate.import_run_id, "save_candidate",
+            "CandidateImportRecord", "JSON-compatible candidate record and writable staging directory",
+        )
 
     def save_result(self, result: ImportRunDryRunResult) -> None:
-        root = self.root_for(result.import_run_id)
-        ensure_writable_dir(root)
-        atomic_write_json(root / "summary.json", result.to_dict())
+        self.save_summary(result.import_run_id, result.to_dict())
+
+    def save_summary(self, import_run_id: str, summary: dict[str, Any]) -> None:
+        """Persist the inspection summary through the canonical staging owner."""
+        self._persist(
+            self.root_for(import_run_id) / "summary.json", summary, import_run_id,
+            "save_staging_summary", "ImportRunDryRunResult",
+            "JSON-compatible staging summary and writable staging directory",
+        )
+
+    @staticmethod
+    def _safe_underlying(exc: Exception) -> tuple[str, str]:
+        underlying = exc
+        while underlying.__cause__ is not None:
+            underlying = underlying.__cause__
+        exception_class = f"{type(underlying).__module__}.{type(underlying).__name__}"
+        errno = getattr(underlying, "errno", None)
+        if errno is not None:
+            return exception_class, f"storage operation failed with OS error {errno}"
+        if isinstance(underlying, (TypeError, ValueError)):
+            return exception_class, "staging record is not JSON-compatible"
+        return exception_class, "storage operation failed; consult server logs for protected details"
+
+    def _persist(self, path, data: dict[str, Any], import_run_id: str, operation: str,
+                 record_type: str, field_or_constraint: str) -> None:
+        try:
+            ensure_writable_dir(path.parent)
+            atomic_write_json(path, data)
+        except Exception as exc:
+            exception_class, diagnostic = self._safe_underlying(exc)
+            raise PersistenceError(
+                "Blueprint staging persistence failed; stage=Package inspected; "
+                f"operation={operation}; record_type={record_type}; "
+                f"field_or_constraint={field_or_constraint}; "
+                f"underlying_exception={exception_class}; safe_diagnostic={diagnostic}; "
+                f"import_identifier={import_run_id}"
+            ) from exc
 
     def load_summary(self, import_run_id: str) -> dict[str, Any] | None:
         path = self.root_for(import_run_id) / "summary.json"
