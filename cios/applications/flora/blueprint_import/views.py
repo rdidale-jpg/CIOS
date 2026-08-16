@@ -246,7 +246,17 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
         return _safe_failure(str(exc), "Package receive permission checked", False, False, _permission_guidance(headers, decision), decision, ref, audit_warning), 403, "/blueprint-import"
     except Exception as exc:
         message = _receive_failure_diagnostic(exc)
-        return _safe_failure(message, "Package received", False, False, "Return to package import and choose a safe ZIP. No canonical changes were made.", decision), 400, "/blueprint-import"
+        diagnostic_ref = f"bpi-diag-{uuid4().hex[:12]}"
+        if isinstance(exc, PersistenceError):
+            health = BlueprintPackageRegistry().storage_health()
+            message += "\n" + BlueprintPackageRegistry.persistence_diagnostic(exc, health)
+            LOGGER.exception(
+                "blueprint_package_receive_persistence_failed diagnostic=%s service=%s operation=create record_type=BlueprintPackageRecord",
+                diagnostic_ref,
+                "cios.applications.flora.blueprint_import.registry.BlueprintPackageRegistry.receive",
+                extra={"flora_event": {"diagnostic_reference": diagnostic_ref, "operation": "create", "record_type": "BlueprintPackageRecord"}},
+            )
+        return _safe_failure(message, "Package received", False, False, "Return to package import and choose a safe ZIP. No canonical changes were made.", decision, diagnostic_ref=diagnostic_ref), 400, "/blueprint-import"
 
     try:
         validation_result = BlueprintPackageValidator().validate_and_stage(record.package_ref, actor, None if bypass else headers)

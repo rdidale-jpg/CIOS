@@ -2,8 +2,13 @@
 from __future__ import annotations
 
 import json
+from uuid import uuid4
 
-from cios.applications.flora.storage import PersistenceError, atomic_write_json, data_path, ensure_writable_dir
+from cios.applications.flora.storage import (PersistenceError, atomic_write_json,
+                                             data_path, ensure_writable_dir,
+                                             root_exception,
+                                             safe_exception_summary,
+                                             storage_mode)
 
 from .archive import inspect_zip_inventory, preserve_original_package, sha256_bytes
 from .ledger import BlueprintImportLedger, utc_now
@@ -43,6 +48,59 @@ class BlueprintPackageRegistry:
         data["package_inspection"] = dict(record.package_inspection) | values
         atomic_write_json(self._path_for_ref(package_ref), data)
         return BlueprintPackageRecord.from_dict(data)
+
+    def storage_health(self) -> dict[str, str]:
+        """Exercise the receipt-record path with a disposable, non-canonical probe."""
+        root = data_path("blueprint_import", "packages")
+        probe = root / f".blueprint-package-health-{uuid4().hex}.json"
+        result = {
+            "storage_connection": "FAIL",
+            "schema_reachable": "FAIL",
+            "minimal_persistence": "FAIL",
+            "schema_alignment": "UNKNOWN",
+        }
+        try:
+            ensure_writable_dir(root)
+            result["storage_connection"] = "PASS"
+            # This deliberately uses the same JSON adapter and receipt-record
+            # directory, but never a registry filename or canonical memory.
+            atomic_write_json(probe, {"record_type": "BlueprintPackageRecord", "health_probe": True})
+            result["schema_reachable"] = "PASS"
+            if json.loads(probe.read_text(encoding="utf-8")).get("record_type") == "BlueprintPackageRecord":
+                result["minimal_persistence"] = "PASS"
+                result["schema_alignment"] = "PASS"
+        except Exception:
+            pass
+        finally:
+            probe.unlink(missing_ok=True)
+        return result
+
+    @staticmethod
+    def persistence_diagnostic(exc: PersistenceError, health: dict[str, str]) -> str:
+        root = root_exception(exc)
+        name = f"{type(root).__module__}.{type(root).__qualname__}"
+        lowered = type(root).__name__.lower()
+        connection = "YES" if ("operational" in lowered or isinstance(root, (ConnectionError, TimeoutError))) else "NO"
+        serialization = "YES" if ("serial" in lowered or isinstance(root, (TypeError, ValueError))) else "NO"
+        schema = "YES" if "programming" in lowered else ("NO" if "integrity" in lowered else "UNKNOWN")
+        constraint = "integrity constraint (details in server log)" if "integrity" in lowered else "not safely available"
+        return "\n".join((
+            f"Underlying exception class: {name}",
+            f"Underlying safe message: {safe_exception_summary(root)}",
+            "Persistence operation: create",
+            "Record/model: BlueprintPackageRecord",
+            f"Storage backend: {storage_mode()['mode']} (filesystem JSON)",
+            f"Constraint/table/column where safely available: {constraint}",
+            "Transaction state: no database transaction; receipt not committed",
+            f"Schema/migration mismatch detected: {schema}",
+            f"Connection failure detected: {connection}",
+            f"Serialization failure detected: {serialization}",
+            "",
+            f"Storage connection: {health['storage_connection']}",
+            f"BlueprintPackageRecord schema reachable: {health['schema_reachable']}",
+            f"Minimal BlueprintPackageRecord persistence path: {health['minimal_persistence']}",
+            f"Schema alignment: {health['schema_alignment']}",
+        ))
 
     def receive(self, content: bytes, original_filename: str, actor: str, workspace_id: str = "") -> BlueprintPackageRecord:
         return self._receive(content, original_filename, actor, workspace_id)
@@ -110,13 +168,13 @@ class BlueprintPackageRegistry:
             try:
                 ensure_writable_dir(package_path.parent)
                 atomic_write_json(package_path, record.to_dict())
-            except OSError as exc:
+            except Exception as exc:
+                underlying = root_exception(exc)
                 raise PersistenceError(
                     "Blueprint package receipt persistence failed; "
                     "operation=create; model=BlueprintPackageRecord; "
-                    "field_or_constraint=package registry JSON record; "
-                    f"underlying_exception={type(exc).__module__}.{type(exc).__qualname__}: {exc}"
-                ) from exc
+                    "field_or_constraint=package registry JSON record"
+                ) from underlying
             self.ledger.append("package_received", {"package_ref": package_ref, "package_sha256": package_sha256, "import_run_id": run.import_run_id, "actor": actor})
             return record
         except Exception as exc:
