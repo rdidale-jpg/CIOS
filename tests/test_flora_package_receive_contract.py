@@ -1,9 +1,14 @@
 from __future__ import annotations
 
+from pathlib import Path
+
+import pytest
+
 from cios.applications.flora.blueprint_import.models import BlueprintPackageRecord
 from cios.applications.flora.blueprint_import.registry import BlueprintPackageRegistry
 from cios.applications.flora.blueprint_import.validator import BlueprintPackageValidator
 from cios.applications.flora.blueprint_import.views import upload_and_validate_blueprint
+from cios.applications.flora.storage import PersistenceError
 from tests.test_flora_blueprint_import_validation import pkg
 
 HEADERS = {
@@ -30,6 +35,36 @@ def test_registry_canonical_receive_result_has_stable_receipt_contract(monkeypat
     assert result.archive_path and result.package_sha256 and result.original_filename == "synthetic.zip"
     assert result.received_at and isinstance(result.warnings, tuple) and result.blocking_error == ""
     assert "accepted" not in result.to_dict()
+
+
+def test_registry_persists_repository_package_and_preserves_failed_create_cause(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    fixture = Path("MOD-CDT-v1.3-Flora-Blueprint 2.zip")
+    registry = BlueprintPackageRegistry()
+
+    result = registry.receive(fixture.read_bytes(), fixture.name, "alice", "synthetic-enterprise")
+
+    assert result.import_run_id.startswith("bpi-run-")
+    assert registry.get(result.package_ref) == result
+
+    failed_root = tmp_path / "failed-receive"
+    monkeypatch.setenv("FLORA_DATA_DIR", str(failed_root))
+    before = tuple((failed_root / "memory").rglob("*")) if (failed_root / "memory").exists() else ()
+
+    def fail_record_create(path, data):
+        if path.parent.name == "packages":
+            raise PermissionError(13, "Permission denied", str(path))
+        from cios.applications.flora.storage import atomic_write_json
+        return atomic_write_json(path, data)
+
+    monkeypatch.setattr("cios.applications.flora.blueprint_import.registry.atomic_write_json", fail_record_create)
+    with pytest.raises(PersistenceError) as raised:
+        BlueprintPackageRegistry().receive(pkg(), "synthetic.zip", "alice")
+
+    assert isinstance(raised.value.__cause__, PermissionError)
+    assert "operation=create; model=BlueprintPackageRecord" in str(raised.value)
+    after = tuple((failed_root / "memory").rglob("*")) if (failed_root / "memory").exists() else ()
+    assert after == before == ()
 
 
 def test_browser_adapter_rejects_stale_mapping_shape_without_rendering_keyerror(monkeypatch, tmp_path):
