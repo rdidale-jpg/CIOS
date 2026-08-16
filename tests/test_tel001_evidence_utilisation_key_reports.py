@@ -135,6 +135,7 @@ def test_bt_executive_corrections_consume_canonical_identity_and_timing(monkeypa
     assert "Ai Pressure:" not in panel
     assert "evidenced or hypothesised by function" not in panel
     assert "associated investment level is not established" in panel
+    assert "AI-enabled change" in panel
 
 
 def test_financial_report_semantics_are_canonical_and_cannot_silently_empty(monkeypatch, tmp_path):
