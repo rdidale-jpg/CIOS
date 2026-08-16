@@ -20,6 +20,9 @@ def test_startup_validation_is_idempotent_and_reports_durability(monkeypatch, tm
     assert first['ready'] and second['ready']
     assert first['status'] == 'configured pilot storage'
     assert Path(first['data_root']).exists()
+    assert first['blueprint_package_registry']['registry_storage'] == 'HEALTHY'
+    assert first['blueprint_package_registry']['record_persistence'] == 'PASS'
+    assert first['blueprint_package_registry']['schema_alignment'] == 'PASS'
 
 
 def test_default_storage_uses_render_persistent_pilot_disk(monkeypatch):

@@ -425,19 +425,19 @@ def test_upload_page_shows_current_deployed_change_acceptance_panel(monkeypatch,
     assert panel < upload
     assert "CURRENT PILOT CHANGE" not in page
     assert "Researcher-to-Flora Translation Audit" not in page
-    assert "BT Factual Synthesis Runtime Closure" in page
+    assert "Blueprint Package Receive Persistence Recovery" in page
     assert "88f053e6cee6fe2fef7feba1e7f4553194b7a040" in page
     assert "Status" in page and "Should I test now?" in page and "Next action" in page
     assert "Technical deployment evidence" in page
     assert "<details><summary>Technical deployment evidence</summary>" in page
-    assert "Close the runtime gap preventing governed factual Enterprise synthesis" in page
-    assert "source profile field, qualifying factual inputs, governed synthesis" in page
-    assert "Fresh import required:</strong> No" in page
-    assert "Tel001 Fixture Checksum" in page and "Checksum Status" in page
+    assert "Restore reliable BlueprintPackageRecord receipt persistence" in page
+    assert "BlueprintPackageRecord during package receipt" in page
+    assert "Fresh import required:</strong>" in page
+    assert "Record Persistence Status" in page and "Storage Diagnostics Status" in page
     assert "Known limitations" in page
     assert "href='/blueprint-import/history#industry-overview'" in page
     assert "href='/deployment'" in page
-    assert "Ready for functional test" in page
+    assert "Upload the original previously successful TEL-001 package" in page
 
 
 def test_upload_page_flags_deployment_problem_for_wrong_branch(monkeypatch, tmp_path):

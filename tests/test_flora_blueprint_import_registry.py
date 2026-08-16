@@ -11,6 +11,7 @@ import pytest
 from cios.applications.flora.access import can_receive_blueprint_package
 from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, PackageReceiptError
 from cios.applications.flora.blueprint_import.archive import sha256_bytes
+from cios.applications.flora.storage import PersistenceError
 
 
 def package_bytes(files: dict[str, bytes] | None = None, manifest: dict | None = None) -> bytes:
@@ -45,6 +46,45 @@ def test_successful_package_receipt_checksum_inventory_import_run_and_audit(monk
     assert (tmp_path / "blueprint_import" / "runs" / f"{record.import_run_id}.json").exists()
     events = (tmp_path / "blueprint_import" / "audit" / "events.jsonl").read_text(encoding="utf-8")
     assert "package_received" in events
+
+
+def test_durable_record_is_not_reported_failed_when_audit_store_is_unavailable(monkeypatch, tmp_path):
+    """The audit append is outside the registry receipt transaction."""
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+
+    def unavailable(*args, **kwargs):
+        raise PersistenceError("audit full", operation="append", record_type="audit")
+
+    registry = BlueprintPackageRegistry()
+    monkeypatch.setattr(registry.ledger, "append", unavailable)
+    record = registry.receive(package_bytes(), "synthetic.zip", "alice")
+
+    assert registry.get(record.package_ref) == record
+    assert registry.runs.path_for(record.import_run_id).exists()
+    assert record.import_run_id.startswith("bpi-run-")
+
+
+def test_record_persistence_failure_rolls_back_import_identifier_and_surfaces_cause(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    from cios.applications.flora.blueprint_import import registry as registry_module
+
+    real_write = registry_module.atomic_write_json
+
+    def fail_record(path, data):
+        if path.parent.name == "packages":
+            cause = OSError(28, "No space left on device")
+            raise PersistenceError("package record failed", operation="atomic file replace", record_type="JSON record", cause=cause) from cause
+        real_write(path, data)
+
+    monkeypatch.setattr(registry_module, "atomic_write_json", fail_record)
+    with pytest.raises(PersistenceError) as caught:
+        BlueprintPackageRegistry().receive(package_bytes(), "synthetic.zip", "alice")
+
+    assert caught.value.diagnostic["exception_class"] == "OSError"
+    assert caught.value.diagnostic["category"] == "capacity/quota"
+    assert not list((tmp_path / "blueprint_import" / "packages").glob("*.json"))
+    assert not list((tmp_path / "blueprint_import" / "runs").glob("*.json"))
+    assert not (tmp_path / "memory").exists()
 
 
 def test_duplicate_receipt_returns_existing_record_and_logs_duplicate(monkeypatch, tmp_path):

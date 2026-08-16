@@ -13,7 +13,7 @@ from uuid import uuid4
 from cios.applications.flora.access import authenticated_flora_user, active_flora_workspace, blueprint_upload_authorisation, can_access_enterprise, flora_roles, is_cios_owner, user_enterprise_access
 from cios.applications.flora.workspace.views import _page
 from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRepository, repair_blueprint_canvas_access
-from cios.applications.flora.storage import storage_mode
+from cios.applications.flora.storage import PersistenceError, storage_mode
 from cios.applications.flora.live.runtime import deployment_metadata
 from cios.applications.flora.pilot_import import (PILOT_IMPORT_ACTOR, PILOT_IMPORT_AUTH_MODE, PILOT_IMPORT_WORKSPACE, pilot_import_bypass_enabled, pilot_import_warning)
 
@@ -71,12 +71,23 @@ def _shape_of(value: Any) -> str:
 def _receive_failure_diagnostic(exc: Exception) -> str:
     actual = exc.actual if isinstance(exc, PackageReceiveContractError) else exc
     reason = f"; reason={str(exc)}" if isinstance(exc, PackageReceiptError) else ""
+    storage = getattr(exc, "diagnostic", {}) or {}
+    cause = exc.__cause__ or exc
+    safe_storage = (
+        f"; underlying exception={escape(str(storage.get('exception_class') or type(cause).__name__))}"
+        f"; storage category={escape(str(storage.get('category') or 'unknown'))}"
+        f"; operation={escape(str(storage.get('operation') or 'receive'))}"
+        f"; record type={escape(str(storage.get('record_type') or 'BlueprintPackageRecord'))}"
+        f"; transaction state={escape(str(storage.get('transaction_state') or 'not committed'))}"
+        f"; connection available={str(storage.get('connection_available', True)).lower()}"
+        f"; schema alignment={escape(str(storage.get('schema_alignment') or 'unknown'))}"
+    ) if isinstance(exc, PersistenceError) else ""
     return (
         "Package receipt failed; stage=Package received; "
         "service=cios.applications.flora.blueprint_import.registry.BlueprintPackageRegistry.receive; "
         "expected response=BlueprintPackageRecord fields=" + ",".join(_RECEIVE_RESULT_FIELDS) + "; "
         f"actual response={_shape_of(actual)}; import identifier=not created; "
-        f"retry availability=no; canonical changes made=no{reason}."
+        f"retry availability=no; canonical changes made=no{reason}{safe_storage}."
     )
 
 

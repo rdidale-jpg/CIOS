@@ -32,7 +32,34 @@ REQUIRED_DIRS = (
 )
 
 class PersistenceError(OSError):
-    """Raised when Flora runtime state cannot be persisted safely."""
+    """Raised when Flora runtime state cannot be persisted safely.
+
+    ``diagnostic`` is deliberately limited to operational metadata.  It gives
+    the web/runtime diagnostics the original OS error without leaking data or
+    configuration values.
+    """
+
+    def __init__(self, message: str, *, operation: str = "unknown", record_type: str = "unknown", cause: BaseException | None = None):
+        super().__init__(message)
+        self.diagnostic = {
+            "exception_class": type(cause).__name__ if cause else type(self).__name__,
+            "category": _error_category(cause),
+            "operation": operation,
+            "record_type": record_type,
+            "transaction_state": "rolled back" if operation == "registry transaction" else "not committed",
+            "connection_available": True,  # the canonical adapter is filesystem-backed
+            "schema_alignment": "unknown",
+            "safe_error": str(cause or message),
+        }
+
+
+def _error_category(exc: BaseException | None) -> str:
+    if isinstance(exc, OSError):
+        return {
+            2: "missing path", 13: "permission/constraint", 17: "path conflict",
+            28: "capacity/quota", 30: "read-only storage",
+        }.get(exc.errno, "filesystem I/O")
+    return "storage"
 
 
 def data_root() -> Path:
@@ -60,7 +87,7 @@ def ensure_writable_dir(path: Path) -> Path:
             os.fsync(handle.fileno())
         probe.unlink(missing_ok=True)
     except OSError as exc:
-        raise PersistenceError(f"Flora storage directory is not writable: {path}: {exc}") from exc
+        raise PersistenceError(f"Flora storage directory is not writable: {path}: {exc}", operation="write probe", record_type="directory", cause=exc) from exc
     return path
 
 
@@ -85,7 +112,7 @@ def atomic_write_text(path: Path, text: str) -> None:
         except OSError:
             pass
     except OSError as exc:
-        raise PersistenceError(f"Failed to persist Flora data at {path}: {exc}") from exc
+        raise PersistenceError(f"Failed to persist Flora data at {path}: {exc}", operation="atomic file replace", record_type="JSON record", cause=exc) from exc
 
 
 def atomic_write_json(path: Path, data: dict[str, Any]) -> None:
@@ -119,5 +146,11 @@ def startup_storage_status() -> dict[str, Any]:
     except PersistenceError as exc:
         status = "storage unavailable"
         ready = False
-        return {"ready": ready, "status": status, "data_root": mode["data_root"], "durable": durable, "ephemeral": mode["ephemeral"], "storage_mode": mode["mode"], "error": str(exc)}
-    return {"ready": ready, "status": status, "data_root": mode["data_root"], "durable": durable, "ephemeral": mode["ephemeral"], "storage_mode": mode["mode"]}
+        from cios.applications.flora.blueprint_import.registry import blueprint_registry_storage_status
+        return {"ready": ready, "status": status, "data_root": mode["data_root"], "durable": durable, "ephemeral": mode["ephemeral"], "storage_mode": mode["mode"], "error": str(exc), "blueprint_package_registry": blueprint_registry_storage_status()}
+    result = {"ready": ready, "status": status, "data_root": mode["data_root"], "durable": durable, "ephemeral": mode["ephemeral"], "storage_mode": mode["mode"]}
+    # Extend the established startup diagnostic rather than introducing a
+    # second operator-facing health system.
+    from cios.applications.flora.blueprint_import.registry import blueprint_registry_storage_status
+    result["blueprint_package_registry"] = blueprint_registry_storage_status()
+    return result

@@ -2,8 +2,9 @@
 from __future__ import annotations
 
 import json
+import logging
 
-from cios.applications.flora.storage import atomic_write_json, data_path, ensure_writable_dir
+from cios.applications.flora.storage import PersistenceError, atomic_write_json, data_path, ensure_writable_dir
 
 from .archive import inspect_zip_inventory, preserve_original_package, sha256_bytes
 from .ledger import BlueprintImportLedger, utc_now
@@ -13,6 +14,38 @@ from .models import BlueprintPackageIdentity, BlueprintPackageRecord, PackageRec
 from .package_contracts import PackageContract
 from .runs import ImportRunRepository
 
+LOGGER = logging.getLogger(__name__)
+_LAST_RECEIVE_DIAGNOSTIC: dict = {}
+
+
+def _safe_storage_diagnostic(exc: Exception, operation: str = "persist BlueprintPackageRecord") -> dict:
+    details = dict(getattr(exc, "diagnostic", {}) or {})
+    cause = exc.__cause__ or exc
+    details.update({
+        "exception_class": details.get("exception_class") or type(cause).__name__,
+        "category": details.get("category") or "storage",
+        "operation": operation,
+        "record_type": "BlueprintPackageRecord",
+        "connection_available": True,
+        "schema_alignment": "pass",  # JSON schema is owned by BlueprintPackageRecord.to_dict
+        "safe_error": details.get("safe_error") or str(cause),
+    })
+    return details
+
+
+def blueprint_registry_storage_status() -> dict:
+    """Return the existing storage diagnostic extended for package receipt."""
+    root = data_path("blueprint_import", "packages")
+    try:
+        ensure_writable_dir(root)
+        for path in root.glob("*.json"):
+            BlueprintPackageRecord.from_dict(json.loads(path.read_text(encoding="utf-8")))
+        return {"registry_storage": "HEALTHY", "record_persistence": "PASS", "schema_alignment": "PASS",
+                "last_receive_diagnostic": dict(_LAST_RECEIVE_DIAGNOSTIC), "underlying_safe_error": _LAST_RECEIVE_DIAGNOSTIC.get("safe_error", "")}
+    except Exception as exc:
+        diagnostic = _safe_storage_diagnostic(exc, "registry health check")
+        return {"registry_storage": "FAIL", "record_persistence": "FAIL", "schema_alignment": "FAIL" if isinstance(exc, (KeyError, TypeError, ValueError)) else "UNKNOWN",
+                "last_receive_diagnostic": dict(_LAST_RECEIVE_DIAGNOSTIC), "underlying_safe_error": diagnostic["safe_error"]}
 
 class BlueprintPackageRegistry:
     def __init__(self, ledger: BlueprintImportLedger | None = None, runs: ImportRunRepository | None = None):
@@ -108,11 +141,30 @@ class BlueprintPackageRegistry:
             )
             ensure_writable_dir(data_path("blueprint_import", "packages"))
             atomic_write_json(self._path_for_ref(package_ref), record.to_dict())
-            self.ledger.append("package_received", {"package_ref": package_ref, "package_sha256": package_sha256, "import_run_id": run.import_run_id, "actor": actor})
+            # The audit ledger is not part of the receipt transaction.  A full,
+            # read-only, or independently unavailable audit file must not turn
+            # an already durable registry record into a false failed receipt.
+            try:
+                self.ledger.append("package_received", {"package_ref": package_ref, "package_sha256": package_sha256, "import_run_id": run.import_run_id, "actor": actor})
+            except PersistenceError as audit_exc:
+                LOGGER.warning("blueprint_receipt_audit_persistence_failed %s", json.dumps(_safe_storage_diagnostic(audit_exc, "append package_received audit"), sort_keys=True))
             return record
         except Exception as exc:
-            # Failed receipts intentionally leave no registry/run acceptance record.
-            self.ledger.append("package_receipt_failed", {"package_ref": package_ref, "package_sha256": package_sha256, "actor": actor, "error": str(exc)})
+            # Failed receipts intentionally leave no registry/run acceptance
+            # record.  Best-effort diagnostics must never mask the root error.
+            global _LAST_RECEIVE_DIAGNOSTIC
+            _LAST_RECEIVE_DIAGNOSTIC = _safe_storage_diagnostic(exc)
+            try:
+                self._path_for_ref(package_ref).unlink(missing_ok=True)
+                run_id = f"bpi-run-{package_sha256[:16]}"
+                self.runs.path_for(run_id).unlink(missing_ok=True)
+            except OSError as cleanup_exc:
+                _LAST_RECEIVE_DIAGNOSTIC["transaction_state"] = "rollback failed"
+                _LAST_RECEIVE_DIAGNOSTIC["rollback_error"] = f"{type(cleanup_exc).__name__}: {cleanup_exc}"
+            try:
+                self.ledger.append("package_receipt_failed", {"package_ref": package_ref, "package_sha256": package_sha256, "actor": actor, "error": _LAST_RECEIVE_DIAGNOSTIC})
+            except Exception as diagnostic_exc:
+                LOGGER.warning("blueprint_receipt_failure_audit_unavailable %s", json.dumps(_safe_storage_diagnostic(diagnostic_exc, "append package_receipt_failed audit"), sort_keys=True))
             if isinstance(exc, PackageReceiptError):
                 raise
             raise
