@@ -32,7 +32,7 @@ documents:
     title: Chief Architect Source Map
     source_path: knowledge-packs/chief-architect/source-map.yaml
     pack_path: source-map.yaml
-    checksum: 1cb6e2ed5020e01d640bd89ddc90baaf4f3ad78756b56d08b9fc44c02d37e9c4
+    checksum: bc226f9e4ee17d5498c1309f4a8f6c701ce702f49824b5af360f32f158f34530
     authority: source-map
     inclusion_reason: Required source-map metadata
   - document_id: FP-010
@@ -77,6 +77,13 @@ documents:
     checksum: eeb7823d290985cc69c60a528bb6936dc2a5ad2c1c88cfec3a16d67973826a09
     authority: accepted-adr
     inclusion_reason: Accepted hybrid runtime authority
+  - document_id: ADR-026
+    title: Material Pressure Qualification and Ownership
+    source_path: architecture/decisions/ADR-026-Material-Pressure-Qualification-and-Ownership.md
+    pack_path: architecture/ADR-026-Material-Pressure-Qualification-and-Ownership.md
+    checksum: 3cc8fd7922eb52f315f4d222acb03315da7919174bc892e3719fa249803ffbd1
+    authority: accepted-adr
+    inclusion_reason: Accepted Material Pressure qualification authority and EI-001 ownership decision
   - document_id: WP-011
     title: Flora Runtime Capability Baseline
     source_path: docs/flora-runtime/wp-011/Flora-Runtime-Capability-Baseline.md
@@ -103,7 +110,7 @@ documents:
     title: Enterprise Model Specification
     source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-001-Enterprise-Model-Specification.md
     pack_path: enterprise-intelligence/EI-001-Enterprise-Model-Specification.md
-    checksum: fd0ed56b54328ae0bff73fcc8c430a7906860d4abbf6a0522d175d146425be65
+    checksum: 11aa8af089b54da0958c7ff96c123fb536b2d88805546e8645335107f588c5ad
     authority: enterprise-intelligence-authority
     inclusion_reason: Core Enterprise Intelligence authority
   - document_id: EI-002
