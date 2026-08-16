@@ -23,7 +23,7 @@ from .canonical_factual_projection import (
     executive_value_lines, factual_projection_for_enterprise, factual_projection_for_object,
 )
 from .intelligence_projection import executive_assessments
-from .executive_enterprise_intelligence import executive_enterprise_intelligence
+from .executive_enterprise_intelligence import executive_enterprise_intelligence, executive_intelligence_quality
 from .key_reports import (KeyReport, functional_acceptance_for_financial_position,
                           key_reports_for_enterprise)
 from .evidence_semantics import classify_evidence
@@ -171,6 +171,22 @@ def _executive_enterprise_intelligence_html(ent: SemanticEnterprise, twin: Seman
             f"<article><h3>Commercial opportunities</h3><div class='executive-opportunities'>{opportunities}</div></article>"
             f"<article><h3>Watchpoints</h3><ul>{watchpoints}</ul></article>"
             f"<article><h3>Evidence position</h3><p>{escape(intelligence.evidence_statement)}</p></article></div>{trace}</section>")
+
+
+def _executive_intelligence_quality_html(twin: SemanticTwin) -> str:
+    """Render deterministic acceptance rules in Advanced Inspection only."""
+    names = {"BT Group", "CityFibre", "Openreach", "TalkTalk", "Virgin Media O2", "VodafoneThree"}
+    cards = []
+    for ent in (item for item in twin.enterprises if item.name in names):
+        quality = executive_intelligence_quality(ent, twin)
+        rows = "".join(f"<tr><th>{escape(label)}</th><td>{escape(state)}</td><td>{escape(reason)}</td></tr>"
+                       for label, state, reason in quality.sections)
+        rows += (f"<tr><th>Unknown integrity</th><td>{quality.unknown_integrity}</td><td></td></tr>"
+                 f"<tr><th>Contradiction integrity</th><td>{quality.contradiction_integrity}</td><td></td></tr>"
+                 f"<tr><th>Overall</th><td>{quality.overall}</td><td></td></tr>")
+        cards.append(f"<article><h3>{escape(ent.name)}</h3><table><tbody>{rows}</tbody></table></article>")
+    return ("<section class='card' id='executive-intelligence-quality'><h2>EXECUTIVE INTELLIGENCE QUALITY</h2>"
+            "<p>Deterministic section sufficiency and integrity checks; this is not a score.</p>" + "".join(cards) + "</section>")
 
 
 def _key_reports_html(ent: SemanticEnterprise, twin: SemanticTwin, run_id: str) -> str:
@@ -992,7 +1008,7 @@ def _explorer(twin, run_id, mission, selected="", domain="all"):
     total = len(active.objects) if active else 0
     anomaly_count = len(_page_association_anomalies(twin))
     reconciliation = _population_and_association_reconciliation(twin, run_id)
-    return f"{proof_html(detailed=True, functional_acceptance=functional_acceptance)}{financial_diagnostic}{live_trace}<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a><strong>Advanced Inspection</strong></nav><header class='hero'><h1>Advanced Inspection</h1><p>{escape(active.description) if active else 'Reconcile business objects, evidence, relationships and technical traces.'}</p></header>{_evidence_association_integrity(twin)}<section class='card diagnostic-summary'><h2>Diagnostic Summary</h2><div class='metric-grid'><article><strong>Package integrity</strong><p>Validated import available</p></article><article><strong>Object-family reconciliation</strong><p>{len(twin.objects)} records inventoried</p></article><article><strong>Association anomalies</strong><p>{anomaly_count}</p></article><article><strong>Stale-state status</strong><p>See runtime comparison</p></article></div><form class='diagnostic-filters'><label>Object family <select><option>All families</option></select></label><label>Status <select><option>All statuses</option></select></label><label>Anomaly <select><option>All anomalies</option><option>Missing subject</option><option>Count mismatch</option><option>Unsupported record</option><option>Residual content</option></select></label></form></section>{reconciliation}<section class='card'><h2>Business collections</h2><div class='collection-links'>{links}</div><details><summary>Technical and supporting collections</summary><div class='collection-links'>{supporting_links or '<p>No supporting collections.</p>'}</div></details></section><section class='card'><h2>{escape(title)}{f' — {total} total' if active else ''}</h2><p>{f'Showing {total} distinct identities' if active and active.key == 'enterprises' else f'Showing {total} of {total} total records' if active else ''}</p>{content}</section><details class='card'><summary>Technical reconciliation traces</summary><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></details>"
+    return f"{proof_html(detailed=True, functional_acceptance=functional_acceptance)}{_executive_intelligence_quality_html(twin)}{financial_diagnostic}{live_trace}<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a><strong>Advanced Inspection</strong></nav><header class='hero'><h1>Advanced Inspection</h1><p>{escape(active.description) if active else 'Reconcile business objects, evidence, relationships and technical traces.'}</p></header>{_evidence_association_integrity(twin)}<section class='card diagnostic-summary'><h2>Diagnostic Summary</h2><div class='metric-grid'><article><strong>Package integrity</strong><p>Validated import available</p></article><article><strong>Object-family reconciliation</strong><p>{len(twin.objects)} records inventoried</p></article><article><strong>Association anomalies</strong><p>{anomaly_count}</p></article><article><strong>Stale-state status</strong><p>See runtime comparison</p></article></div><form class='diagnostic-filters'><label>Object family <select><option>All families</option></select></label><label>Status <select><option>All statuses</option></select></label><label>Anomaly <select><option>All anomalies</option><option>Missing subject</option><option>Count mismatch</option><option>Unsupported record</option><option>Residual content</option></select></label></form></section>{reconciliation}<section class='card'><h2>Business collections</h2><div class='collection-links'>{links}</div><details><summary>Technical and supporting collections</summary><div class='collection-links'>{supporting_links or '<p>No supporting collections.</p>'}</div></details></section><section class='card'><h2>{escape(title)}{f' — {total} total' if active else ''}</h2><p>{f'Showing {total} distinct identities' if active and active.key == 'enterprises' else f'Showing {total} of {total} total records' if active else ''}</p>{content}</section><details class='card'><summary>Technical reconciliation traces</summary><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></details>"
 
 
 def _dossier(ent, twin, run_id, mission):
@@ -1615,7 +1631,7 @@ def _advanced_diagnostics(twin,run_id,summary,mission):
     association_anomalies = _page_association_anomalies(twin)
     relationship_anomalies = sum(not row.resolved for row in resolve_relationships(twin))
     summary_html = f"<section class='card diagnostic-summary'><h2>Executive Diagnostic Summary</h2><div class='metric-grid'><article><h3>Object-count reconciliation</h3><p>{len(twin.objects)} records reconciled</p></article><article><h3>Factual projection reconciliation</h3><p>Shared read boundary active</p></article><article><h3>Subject-resolution failures</h3><p>{unresolved}</p></article><article><h3>Relationship resolution anomalies</h3><p>{relationship_anomalies}</p></article><article><h3>Enterprise presentation association anomalies</h3><p>{len(association_anomalies)}</p></article><article><h3>Research Gap contradictions</h3><p>{len(twin.of_kind('contradiction'))}</p></article><article><h3>Page/diagnostic count mismatches</h3><p>0</p></article><article><h3>Stale-state status</h3><p>See runtime comparison</p></article></div><p>Relationship resolution and Enterprise presentation anomalies are separate measures. Highest-value failures are shown first.</p>{('<p><strong>Offending object IDs:</strong> ' + escape(', '.join(association_anomalies)) + '</p>') if association_anomalies else ''}</section>"
-    return _primary_nav(run_id,"inspection")+financial_diagnostic+live_trace+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+summary_html+_evidence_association_integrity(twin)+_population_and_association_reconciliation(twin, run_id)+_observation_pipeline_diagnostics(twin,run_id)+_pilot_runtime_comparison(twin)+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
+    return _primary_nav(run_id,"inspection")+_executive_intelligence_quality_html(twin)+financial_diagnostic+live_trace+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+summary_html+_evidence_association_integrity(twin)+_population_and_association_reconciliation(twin, run_id)+_observation_pipeline_diagnostics(twin,run_id)+_pilot_runtime_comparison(twin)+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
 
 
 def _evidence_association_integrity(twin: SemanticTwin) -> str:

@@ -1,17 +1,17 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "FLORA-FINANCIAL-EVIDENCE-FALLBACK-2026-08-16",
-  "title": "Financial Evidence Fallback Across Enterprises",
-  "objective": "Distinguish supplied company reports, governed report references, financial-reporting Evidence and genuine absence across all six TEL-001 Enterprises.",
+  "change_id": "FLORA-SIX-ENTERPRISE-EXECUTIVE-QUALITY-2026-08-16",
+  "title": "Six-Enterprise Executive Intelligence Quality Pass",
+  "objective": "Present governed TEL-001 intelligence with Enterprise-specific executive language while preserving evidence truth, uncertainty, contradictions, provenance and Key Reports semantics.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Flora now distinguishes between a supplied company financial report, a governed report reference, governed financial-reporting Evidence, and genuine absence. Executives can therefore reach useful financial Evidence even when the underlying source report itself is not supplied, without weakening Evidence provenance or inventing reports."
+    "Flora now presents the governed intelligence already available in the Commercial Digital Twin with stronger Enterprise specificity, clearer executive language and more commercially useful interpretation, while preserving Evidence truth, Unknowns, contradictions and provenance."
   ],
   "expected_visible_outcomes": [
-    "BT Group retains its Q1 FY27 supplied company report.",
-    "CityFibre and TalkTalk expose governed company-subject financial-reporting Evidence without presenting it as a supplied report.",
-    "Openreach and VodafoneThree retain truthful empty states; Virgin Media O2 retains its supplied report.",
-    "Advanced Inspection reconciles Financial Position and Key Reports for all six Enterprises from the canonical selector."
+    "No normal Enterprise dossier exposes raw AI or OSS/BSS semantic-field labels.",
+    "Executive signals use the governed fact itself rather than generic transformation boilerplate.",
+    "Advanced Inspection shows deterministic Executive Intelligence Quality diagnostics for all six Enterprises.",
+    "The Key Reports four-state model, Programme singularity and Opportunity/procurement distinction remain unchanged."
   ],
   "affected_pages": [
     "Enterprise dossiers",
@@ -19,18 +19,18 @@
     "Advanced Inspection"
   ],
   "unchanged_areas": [
-    "Protected: 308 Relationship candidates; working Enterprise identity lineage and associations; 13 Programmes; 17 Opportunities; factual dimension isolation; candidate governance."
+    "Protected: Evidence provenance and applicability; 308 Relationships; 13 Programmes; 17 Opportunities; Key Reports four-state semantics; candidate governance; TEL-001 fixture."
   ],
   "required_test_steps": [
-    "Open Advanced Inspection and review Financial Reporting State and Financial Position → Key Reports Reconciliation for all six Enterprises.",
-    "Confirm BT Group retains its Q1 FY27 report.",
-    "Inspect Key Reports for CityFibre, Openreach, TalkTalk, Virgin Media O2 and VodafoneThree.",
-    "Confirm fallback Evidence opens through Open evidence and no unsupplied report or URL is fabricated.",
-    "Confirm no Enterprise uses another company’s financial Evidence as its own."
+    "Open all six Enterprise dossiers and compare them side by side.",
+    "Confirm no raw Ai: or AI: field labels appear in normal dossier presentation.",
+    "Confirm Organisation, Strategy, Operating Model, Technology and Change sections use Enterprise-specific governed intelligence where supplied.",
+    "Confirm Financial Position and Key Reports retain their existing four-state outcomes.",
+    "Confirm Programmes remain singular, Opportunities do not become procurements, and Unknowns and Contradictions remain visible."
   ],
   "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
   "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
-  "fresh_import_policy": "NO — this is a read-only presentation and selection projection over unchanged canonical Evidence.",
+  "fresh_import_policy": "NO \u2014 this is a read-only executive presentation over unchanged canonical intelligence.",
   "known_limitations": [
     "TEL-001 supplies no qualifying BT external analyst, broker, equity-research or market-research report; the runtime therefore shows a truthful empty state.",
     "Evidence availability does not promote unextracted report content into canonical Enterprise facts.",
@@ -48,21 +48,21 @@
     "last_validation_timestamp": "2026-08-16T00:00:00Z"
   },
   "merge_gate": "SAFE TO MERGE",
-  "operator_validation_status": "PASS — all six Enterprise dossier routes rendered from the unchanged TEL-001 fixture and canonical selector",
+  "operator_validation_status": "PASS \u2014 all six Enterprise dossier routes rendered from the unchanged TEL-001 fixture and canonical selector",
   "diagnostics_href": "/deployment",
   "source_commit_sha": "current-change-marker",
   "merged_commit_sha": "unknown",
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "FLORA-FINANCIAL-EVIDENCE-FALLBACK-2026-08-16",
+  "deployed_change_marker": "FLORA-SIX-ENTERPRISE-EXECUTIVE-QUALITY-2026-08-16",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
   "material_runtime_components_changed": [
-    "Enterprise dossier Key Reports four-state projection",
-    "Advanced Inspection financial-reporting reconciliation",
-    "Canonical functional acceptance projection"
+    "Executive Enterprise Intelligence presentation",
+    "Canonical factual label presentation",
+    "Advanced Inspection Executive Intelligence Quality diagnostic"
   ],
   "reimport_required_if_older_than_change": "Unavailable",
   "repository": "unknown",
