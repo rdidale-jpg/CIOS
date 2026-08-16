@@ -10,6 +10,7 @@ from dataclasses import dataclass
 
 from .canonical_factual_projection import factual_projection_for_enterprise, enterprise_factual_dimensions
 from .semantic_twin import SemanticEnterprise, SemanticObject, SemanticTwin, business_object_id, enterprise_associations
+from .presentation_semantics import human_readable_fact
 
 
 @dataclass(frozen=True)
@@ -96,9 +97,7 @@ def executive_enterprise_intelligence(ent: SemanticEnterprise, twin: SemanticTwi
     for key in executive_labels:
         dimension = dimensions[key]
         if dimension.present:
-            explanation = dimension.values[0]
-            if key == "transformation" and explanation.casefold().startswith("ai pressure:"):
-                explanation = "AI-enabled change is evidenced by function; investment budget remains unknown."
+            explanation = human_readable_fact(dimension.values[0])
             signals.append(ExecutiveSignal(executive_labels[key], explanation, dimension.label, f"DIM-{key.upper()}", dimension.evidence_refs))
     signals = signals[:5]
 
