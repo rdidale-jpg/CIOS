@@ -1,13 +1,13 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "FLORA-EVIDENCE-UTILISATION-KEY-REPORTS-2026-08-16",
-  "title": "Evidence Utilisation & Key Reports",
-  "objective": "Use existing governed evidence before declaring information missing and expose important supplied company and external reports without weakening evidence governance.",
+  "change_id": "FLORA-EVIDENCE-SEMANTIC-RECONCILIATION-CANONICAL-DEDUPLICATION-2026-08-16",
+  "title": "Evidence Semantic Reconciliation & Canonical Deduplication",
+  "objective": "Reconcile canonical Evidence meaning across Financial Position and Key Reports, preserve Programme identity while rendering each associated Programme once, and translate remaining schema language.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Flora distinguishes evidence absence from governed evidence that remains available for canonical extraction.",
-    "Enterprise dossiers expose the latest qualifying company financial report and external analyst or market report supplied by existing Evidence.",
-    "Executive Intelligence deduplicates canonical signals, translates source-language AI pressure, and derives dated watchpoints from canonical Opportunity timing."
+    "Flora uses one canonical interpretation of supplied Evidence metadata across Financial Position and Key Reports.",
+    "Canonical Programme association identity removes repeated traversal output without changing relationships, evidence, lineage, or source counts.",
+    "The shared presentation translator removes remaining AI Pressure schema labels while retaining Unknown investment semantics."
   ],
   "expected_visible_outcomes": [
     "Key reports clearly separates company disclosure from external analyst views and never fabricates a report or URL.",
@@ -60,7 +60,7 @@
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "FLORA-EVIDENCE-UTILISATION-KEY-REPORTS-2026-08-16",
+  "deployed_change_marker": "FLORA-EVIDENCE-SEMANTIC-RECONCILIATION-CANONICAL-DEDUPLICATION-2026-08-16",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,

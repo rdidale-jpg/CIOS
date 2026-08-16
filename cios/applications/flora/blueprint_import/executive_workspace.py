@@ -127,7 +127,8 @@ def _enterprise_dimension_html(dimension: EnterpriseFactualDimension) -> str:
     elif not dimension.present:
         body = "<p><strong>Not supplied.</strong> No qualifying source-backed fact is present.</p>"
     else:
-        body = "<ul>" + "".join(f"<li>{escape(value)}</li>" for value in dimension.values) + "</ul>"
+        from .presentation_semantics import human_readable_fact
+        body = "<ul>" + "".join(f"<li>{escape(human_readable_fact(value))}</li>" for value in dimension.values) + "</ul>"
     uncertainty = (f"<details><summary>Evidence and uncertainty</summary><p><strong>Evidence:</strong> "
                    f"{escape(', '.join(dimension.evidence_refs) or 'No linked evidence supplied')}</p>"
                    f"<p><strong>Unknowns:</strong> {escape(', '.join(dimension.unknown_refs) or 'None supplied')}</p>"

@@ -9,7 +9,9 @@ from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, B
 from cios.applications.flora.blueprint_import.executive_enterprise_intelligence import executive_enterprise_intelligence
 from cios.applications.flora.blueprint_import.executive_workspace import _dossier, _semantic_candidates
 from cios.applications.flora.blueprint_import.key_reports import key_reports_for_enterprise
-from cios.applications.flora.blueprint_import.semantic_twin import SemanticEnterprise, SemanticObject, assemble_semantic_twin, resolve_relationships
+from cios.applications.flora.blueprint_import.evidence_semantics import classify_evidence
+from cios.applications.flora.blueprint_import.semantic_twin import (SemanticEnterprise, SemanticObject,
+    assemble_semantic_twin, business_object_id, enterprise_associations, resolve_relationships)
 
 
 FIXTURE = Path("docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip")
@@ -85,3 +87,64 @@ def test_bt_executive_corrections_consume_canonical_identity_and_timing(monkeypa
     panel = " ".join((signal.title + " " + signal.explanation) for signal in result.signals)
     assert "Ai Pressure:" not in panel
     assert "investment budget remains unknown" in panel
+
+
+def test_financial_report_semantics_are_canonical_and_cannot_silently_empty(monkeypatch, tmp_path):
+    package, _summary, twin = _runtime(monkeypatch, tmp_path)
+    bt = next(ent for ent in twin.enterprises if ent.name == "BT Group")
+    financial_refs = {"EV-BT-FY26", "EV-BT-Q1FY27", "EV-BT-AR26"}
+    governed = [obj for obj in bt.records if obj.original_id in financial_refs]
+    assert {obj.original_id for obj in governed} == financial_refs
+    assert all(classify_evidence(obj).is_company_financial_reporting for obj in governed)
+    # Semantic acceptance: an authoritative upstream classification and an
+    # empty Key Reports derivative may never both pass.
+    reports = key_reports_for_enterprise(bt)
+    assert not (governed and reports.company_report is None)
+    assert classify_evidence(reports.company_report.source).is_company_financial_reporting
+
+    html = _dossier(bt, twin, package.import_run_id, None)
+    major = html.split("<h2>Major Programmes</h2>", 1)[1].split("</section>", 1)[0]
+    executive = html.split("<h3>Change &amp; investment signals</h3>", 1)[1].split("</article>", 1)[0]
+    title = "Multi-year cost, simplification, AI/data and cash-generation programme."
+    assert major.count(title) == 1
+    assert executive.count(title) == 1
+    reinvention = html.split("<h2>Reinvention Timing</h2>", 1)[1].split("</section>", 1)[0]
+    assert "Ai Pressure:" not in reinvention
+    assert "investment budget remains unknown" in reinvention
+
+
+def test_classification_is_identity_agnostic_and_distinct_programmes_remain_distinct():
+    evidence = SemanticObject("candidate-x", "evidence", "", "Example", (), "2027-01-01", "High",
+        "candidate", "evidence.json", {"row": 1}, False, original_id="UNRELATED-ID",
+        attributes={"title": "Example plc annual results", "publisher": "Example plc",
+                    "evidence_quality": "Primary company filing", "publication_date": "2027-01-01"})
+    assert classify_evidence(evidence).is_company_financial_reporting
+    assert key_reports_for_enterprise(SemanticEnterprise("ENT-X", "x", "Example", (), (evidence,))).company_report
+
+    first = SemanticObject("one", "transformation_programme", "Same label", "Example", (), "", "", "candidate", "", {}, False, original_id="PROG-1")
+    second = replace(first, record_id="two", original_id="PROG-2")
+    assert first.original_id != second.original_id and first.statement == second.statement
+
+
+def test_six_enterprise_rendered_semantic_regression(monkeypatch, tmp_path):
+    package, summary, twin = _runtime(monkeypatch, tmp_path)
+    names = {"BT Group", "CityFibre", "Openreach", "TalkTalk", "Virgin Media O2", "VodafoneThree"}
+    enterprises = [ent for ent in twin.enterprises if ent.name in names]
+    assert {ent.name for ent in enterprises} == names
+    for ent in enterprises:
+        reports = key_reports_for_enterprise(ent)
+        classified = [obj for obj in ent.records if classify_evidence(obj).is_company_financial_reporting]
+        assert bool(reports.company_report) == bool(classified)
+        assert reports.external_report is None
+        html = _dossier(ent, twin, package.import_run_id, None)
+        executive = html.split("<section class='card executive-intelligence'", 1)[1].split("</section>", 1)[0]
+        reinvention = html.split("<h2>Reinvention Timing</h2>", 1)[1].split("</section>", 1)[0]
+        assert "Ai Pressure:" not in executive
+        assert "Ai Pressure:" not in reinvention
+        programme_ids = [business_object_id(obj) for obj, _, _ in enterprise_associations(
+            twin, ent, {"transformation_programme"})]
+        assert len(programme_ids) == len(set(programme_ids))
+        for programme_id in programme_ids:
+            assert html.count(f"data-business-object-id='{programme_id}'") == 1
+    counts = Counter(row["candidate_object_class"] for row in summary["candidates"] if row["validation_status"] == "accepted")
+    assert (counts["relationship"], counts["transformation_programme"], counts["opportunity_hypothesis"]) == (308, 13, 17)

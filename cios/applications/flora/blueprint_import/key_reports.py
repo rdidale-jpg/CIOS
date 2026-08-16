@@ -12,6 +12,7 @@ from datetime import date
 from urllib.parse import urlparse
 
 from .semantic_twin import SemanticEnterprise, SemanticObject, business_object_id
+from .evidence_semantics import classify_evidence
 
 
 @dataclass(frozen=True)
@@ -58,18 +59,10 @@ def _date_key(value: str) -> tuple[int, int, int]:
 
 
 def _report_kind(obj: SemanticObject) -> str:
-    title = _value(obj, "title").casefold()
-    publisher = _value(obj, "publisher").casefold()
-    quality = _value(obj, "evidence_quality").casefold()
-    source_type = _value(obj, "source_type").casefold()
-    combined = " ".join((title, publisher, quality, source_type))
-    external = ("analyst", "broker", "equity research", "market research", "market analysis")
-    if any(term in combined for term in external):
+    semantics = classify_evidence(obj)
+    if semantics.is_external_research:
         return "external"
-    financial = ("annual report", "results", "earnings", "trading update", "financial report",
-                 "investor results", "record performance")
-    primary = any(term in quality for term in ("primary", "company", "filing"))
-    return "company" if primary and any(term in combined for term in financial) else ""
+    return "company" if semantics.is_company_financial_reporting else ""
 
 
 def _findings(obj: SemanticObject) -> tuple[str, ...]:
