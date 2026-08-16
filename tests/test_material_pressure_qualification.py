@@ -1,6 +1,6 @@
 """Semantic acceptance tests for ADR-026 Material Pressure qualification."""
 from cios.applications.flora.blueprint_import.material_pressure import (
-    PressureCandidate, qualify_candidates,
+    MaterialPressureQualification, PressureCandidate, qualify_candidates,
 )
 
 
@@ -53,4 +53,15 @@ def test_non_core_unknown_and_contradiction_are_preserved_but_core_conflict_is_u
 def test_true_empty_state_and_no_domain_object_creation():
     result = qualify_candidates(())
     assert result.projection_state == "EMPTY"
+    assert result.discovery_state == "NO_ELIGIBLE_INPUT"
     assert result.qualified == result.rejected == result.unresolved == ()
+
+
+def test_candidate_discovery_states_distinguish_false_empty_and_failure():
+    rejected = qualify_candidates((candidate(materiality_established=False),))
+    assert rejected.discovery_state == "ASSESSED_NONE_QUALIFIED"
+    assert rejected.eligible_input_count == rejected.candidates_assessed == 1
+    assert qualify_candidates((candidate(),)).discovery_state == "ASSESSED_WITH_RESULTS"
+    failed = MaterialPressureQualification((), pipeline_error="discovery unavailable")
+    assert failed.discovery_state == "PIPELINE_FAILURE"
+    assert failed.projection_state == "FAILURE"

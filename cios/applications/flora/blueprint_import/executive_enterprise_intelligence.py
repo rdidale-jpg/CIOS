@@ -178,6 +178,15 @@ def executive_intelligence_quality(ent: SemanticEnterprise, twin: SemanticTwin) 
             return name, "WEAK", "A presented fact has no linked Evidence."
         return name, ("STRONG" if len(item.values) > 1 else "ACCEPTABLE"), ""
 
+    pressure = material_pressure_qualification(ent)
+    if pressure.discovery_state == "PIPELINE_FAILURE":
+        pressure_row = ("Material Pressures", "WEAK", "Candidate discovery pipeline failed; truthful absence cannot be established.")
+    elif pressure.qualified:
+        pressure_row = ("Material Pressures", "STRONG", "ADR-026 exercised over canonical governed input.")
+    elif pressure.discovery_state == "NO_ELIGIBLE_INPUT":
+        pressure_row = ("Material Pressures", "EMPTY", "No eligible governed candidate input exists.")
+    else:
+        pressure_row = ("Material Pressures", "EMPTY", "Eligible candidates were assessed under ADR-026 and none qualified.")
     rows = [
         ("Overview", "STRONG" if result.situation and len(result.source_dimensions) > 1 else "ACCEPTABLE" if result.situation else "EMPTY",
          "" if result.situation else "No supported organisation synthesis is available."),
@@ -185,10 +194,7 @@ def executive_intelligence_quality(ent: SemanticEnterprise, twin: SemanticTwin) 
         dimension("Technology / Platform", "technology"), dimension("Change / Investment", "transformation"),
         dimension("Financial Position", "financial"),
         ("Key Reports", "ACCEPTABLE", "Four-state truth is assessed by the canonical Key Reports selector."),
-        ("Material Pressures",
-         ("STRONG" if material_pressure_qualification(ent).qualified else "EMPTY"),
-         ("" if material_pressure_qualification(ent).qualified else
-          "No candidate qualifies under ADR-026; truthful absence is acceptable.")),
+        pressure_row,
         ("Programmes", "STRONG" if programmes else "EMPTY", "" if programmes else "No canonically associated Programme is supplied."),
         ("Opportunities", "STRONG" if opportunities else "EMPTY", "" if opportunities else "No canonically associated Opportunity is supplied."),
         ("Watchpoints", "STRONG" if result.watchpoints else "EMPTY", "" if result.watchpoints else "No governed monitoring event or timing is supplied."),

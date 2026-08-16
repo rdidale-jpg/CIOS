@@ -1,9 +1,9 @@
 """ADR-026 Material Pressure qualification over canonical Enterprise facts.
 
 The qualifier is deliberately read-only.  It neither persists a second model nor
-creates Opportunities, Procurements, or Watchpoints.  Candidate discovery accepts
-only the explicitly typed ``pressures`` Enterprise dimension; prose and rendered
-output are never searched.
+creates Opportunities, Procurements, or Watchpoints.  Candidate discovery consumes
+the structured financial-condition fact already held by the canonical Enterprise
+object; prose, presentation labels and rendered output are never searched.
 """
 from __future__ import annotations
 
@@ -55,6 +55,8 @@ class PressureAssessment:
 @dataclass(frozen=True)
 class MaterialPressureQualification:
     assessments: tuple[PressureAssessment, ...]
+    eligible_input_count: int = 0
+    pipeline_error: str = ""
 
     @property
     def qualified(self) -> tuple[PressureAssessment, ...]:
@@ -70,9 +72,25 @@ class MaterialPressureQualification:
 
     @property
     def projection_state(self) -> str:
+        if self.pipeline_error:
+            return "FAILURE"
         if self.qualified:
             return "STRONG" if all(len(a.candidate.evidence_refs) > 1 for a in self.qualified) else "ACCEPTABLE"
         return "EMPTY" if not self.unresolved else "ACCEPTABLE"
+
+    @property
+    def candidates_assessed(self) -> int:
+        return len(self.assessments)
+
+    @property
+    def discovery_state(self) -> str:
+        if self.pipeline_error or (self.eligible_input_count and not self.assessments):
+            return "PIPELINE_FAILURE"
+        if not self.eligible_input_count:
+            return "NO_ELIGIBLE_INPUT"
+        if not self.qualified:
+            return "ASSESSED_NONE_QUALIFIED"
+        return "ASSESSED_WITH_RESULTS"
 
 
 def semantic_identity(candidate: PressureCandidate) -> str:
@@ -111,32 +129,49 @@ def qualify_candidates(candidates: tuple[PressureCandidate, ...]) -> MaterialPre
             "PASS" if gates[2] else "FAIL", "PASS" if gates[3] else "FAIL",
             "PASS" if gates[4] else "FAIL", "PASS" if gates[5] else "FAIL",
             qualification, reason))
-    return MaterialPressureQualification(tuple(assessments))
+    eligible = sum(bool(c.canonical_input_id) and c.canonical_input_type in eligible_types for c in candidates)
+    return MaterialPressureQualification(tuple(assessments), eligible)
 
 
 def material_pressure_qualification(ent: SemanticEnterprise) -> MaterialPressureQualification:
     """Discover candidates from typed, governed TEL Enterprise intelligence."""
-    identity = next((o for o in ent.records if o.kind in {"enterprise", "enterprise_twin", "entity"}), None)
-    if not identity:
-        return MaterialPressureQualification(())
-    dimensions = {d.key: d for d in enterprise_factual_dimensions(ent)}
-    pressure = dimensions["pressures"]
-    financial = (identity.attributes or {}).get("financial_context")
-    financial = financial if isinstance(financial, dict) else {}
-    consequence = str(financial.get("financial_outlook") or "").strip()
-    evidence = tuple(dict.fromkeys((*pressure.evidence_refs,
-                                    *(financial.get("evidence") or ()))))
-    if not pressure.present:
-        return MaterialPressureQualification(())
-    # One typed Enterprise condition is one candidate.  Its component labels
-    # are not independently promoted, preventing list-item duplication.
-    candidate = PressureCandidate(
-        identity.original_id or identity.record_id, "enterprise_pressure_dimension",
-        ent.identity_key, "; ".join(pressure.values), "financial/economic",
-        consequence, "financial/economic" if consequence else "", evidence,
-        applicable=True, pressure_semantics=True,
-        materiality_established=bool(consequence), consequence_established=bool(consequence),
-        lineage_established=bool(evidence), unknown_refs=pressure.unknown_refs,
-        contradiction_refs=pressure.contradiction_refs,
-    )
-    return qualify_candidates((candidate,))
+    try:
+        identity = next((o for o in ent.records if o.kind == "enterprise_twin"), None)
+        identity = identity or next((o for o in ent.records if o.kind in {"enterprise", "entity"}), None)
+        if not identity:
+            return MaterialPressureQualification(())
+        # The lists named ``pressures`` and ``current_challenges`` are not
+        # admitted merely because of their presentation labels.  The canonical
+        # financial object co-locates a condition, consequence and Evidence.
+        attrs = identity.attributes or {}
+        financial = attrs.get("financial_intelligence") or attrs.get("financial_context")
+        if not isinstance(financial, dict):
+            return MaterialPressureQualification(())
+        conditions = financial.get("major_financial_pressures")
+        conditions = (conditions,) if isinstance(conditions, str) else tuple(conditions or ())
+        if not conditions:
+            # Some governed dossiers express the condition as typed executive
+            # risk assertions rather than duplicating it into the financial
+            # object.  Risks are claims; the similarly named overview pressure
+            # list remains presentation-only and is deliberately not used.
+            risks = attrs.get("executive_risks") or ()
+            conditions = (risks,) if isinstance(risks, str) else tuple(risks)
+        consequence = str(financial.get("financial_outlook") or "").strip()
+        overview = attrs.get("executive_overview") if isinstance(attrs.get("executive_overview"), dict) else {}
+        evidence = financial.get("evidence") or overview.get("evidence") or ()
+        evidence = (evidence,) if isinstance(evidence, str) else tuple(evidence)
+        if not conditions:
+            return MaterialPressureQualification(())
+        financial_dimension = {d.key: d for d in enterprise_factual_dimensions(ent)}["financial"]
+        candidate = PressureCandidate(
+            identity.original_id or identity.record_id, "canonical_factual_object",
+            ent.identity_key, "; ".join(str(value) for value in conditions), "financial/economic",
+            consequence, "financial/economic" if consequence else "", tuple(dict.fromkeys(evidence)),
+            applicable=True, pressure_semantics=True,
+            materiality_established=bool(consequence), consequence_established=bool(consequence),
+            lineage_established=bool(evidence), unknown_refs=financial_dimension.unknown_refs,
+            contradiction_refs=financial_dimension.contradiction_refs,
+        )
+        return qualify_candidates((candidate,))
+    except (AttributeError, TypeError, ValueError) as exc:
+        return MaterialPressureQualification((), 0, f"candidate discovery failed: {type(exc).__name__}")

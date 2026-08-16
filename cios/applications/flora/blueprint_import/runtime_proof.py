@@ -43,7 +43,7 @@ def declared_functional_acceptance() -> str:
     """Return the governed current-change acceptance derivative used by surfaces."""
     validation = current_pilot_change().get("automated_validation") or {}
     required = ("end_to_end_test_status", "rendered_route_test_status",
-                "diagnostics_reconciliation_status")
+                "diagnostics_reconciliation_status", "material_pressure_qualification_status")
     return "PASS" if all(validation.get(key) == "PASS" for key in required) else "FAIL"
 
 

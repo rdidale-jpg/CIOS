@@ -43,6 +43,7 @@
     "end_to_end_test_status": "PASS",
     "rendered_route_test_status": "PASS",
     "diagnostics_reconciliation_status": "PASS",
+    "material_pressure_qualification_status": "PASS",
     "research_gap_reconciliation_status": "PASS",
     "known_failing_tests": "None in the focused evidence-utilisation, Executive Enterprise Intelligence and TEL-001 regression suites.",
     "last_validation_timestamp": "2026-08-16T00:00:00Z"
