@@ -27,7 +27,7 @@ def test_candidate_owner_boundary_and_reinvention_output_are_distinct():
     assert assessments["opportunities"].state == "assessment_pending_governance"
     assert assessments["reinvention-timing"].state == "owner_assessment_supplied_candidate"
     assert _assessment_state_label(assessments["opportunities"].state) == \
-        "Intelligence supplied; owner assessment pending governance"
+        "Information supplied; no owner assessment supplied"
     assert "No owner-produced assessment supplied" not in assessments["opportunities"].evidence_source
 
 
@@ -42,7 +42,8 @@ def test_present_unassessed_field_is_not_recommissioned_but_absent_field_is():
     assert "client problem" not in requirement.missing_fields
     assert "competition" in requirement.missing_fields
     html = _research_gaps(twin, "run", None)
-    assert "Intelligence supplied; owner assessment pending governance" in html
+    assert "Information supplied; no owner assessment supplied" in html
+    assert "pending governance" not in html.casefold()
 
 
 def test_opportunity_uses_canonical_title_and_reinvention_collection_is_populated():

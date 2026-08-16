@@ -9,6 +9,8 @@ import importlib
 
 from cios.applications.flora.live.runtime import deployment_metadata
 
+from .pilot_change import current_pilot_change
+
 FEATURE = "enterprise_factual_synthesis"
 IMPLEMENTATION_OWNER = "cios.applications.flora.blueprint_import.canonical_factual_projection.enterprise_factual_synthesis"
 IMPLEMENTATION_REVISION = "1"
@@ -76,8 +78,9 @@ def runtime_proof(*, functional_acceptance: str = "PASS") -> RuntimeProof:
 def proof_html(*, detailed: bool = False) -> str:
     proof = runtime_proof()
     metadata = deployment_metadata()
+    change = current_pilot_change()
     yesno = lambda value: "YES" if value else "NO"
-    rows = {"Expected change": "Deployment-to-Runtime Proof Audit",
+    rows = {"Expected change": str(change.get("title") or "Unavailable"),
             "Repository commit": proof.repository_commit[:12], "Deployed commit": proof.deployed_commit[:12],
             "Commit match": proof.commit_match, "Application version/build": metadata["deployment_version"],
             "Current Change declaration loaded": "YES", "Expected feature implementation": FEATURE,
