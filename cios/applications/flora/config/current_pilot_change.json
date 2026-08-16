@@ -1,69 +1,62 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "FLORA-EVIDENCE-GOVERNED-MATERIAL-PRESSURE-2026-08-16",
-  "title": "Evidence-Governed Material Pressure Runtime",
-  "objective": "Apply ADR-026 qualification to governed Enterprise intelligence while preserving uncertainty, contradictions, lineage and commercial-governance boundaries.",
+  "change_id": "BLUEPRINT-PACKAGE-INSPECTION-PERSISTENCE-DIAGNOSTICS-2026-08-16",
+  "title": "Blueprint Package Inspection Persistence Diagnostics / Correction",
+  "objective": "Expose safe, actionable staging-summary persistence diagnostics for retained Blueprint package inspection retries without changing validation or canonical Twin content.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Flora now applies the accepted ADR-026 qualification contract to governed Enterprise intelligence, allowing evidence-grounded Material Pressures to become part of durable Enterprise understanding while preserving uncertainty, contradictions, lineage and commercial-governance boundaries."
+    "Blueprint staging persistence now reports the failing operation, record type, compatibility constraint, underlying exception class, safe diagnostic, import identifier and inspection stage.",
+    "All candidate and summary writes remain owned by CandidateStagingRepository, including the mapping-version summary update.",
+    "Failed staging remains non-canonical and a retry rebuilds deterministic staging records from the retained immutable package."
   ],
   "expected_visible_outcomes": [
-    "No normal Enterprise dossier exposes raw AI or OSS/BSS semantic-field labels.",
-    "Executive signals use the governed fact itself rather than generic transformation boilerplate.",
-    "Advanced Inspection shows deterministic Executive Intelligence Quality diagnostics for all six Enterprises.",
-    "The Key Reports four-state model, Programme singularity and Opportunity/procurement distinction remain unchanged."
+    "On Retry inspection, a successful retained package proceeds to Package inspected: Completed and reaches Package validated.",
+    "If staging persistence fails again, the inspection failure displays a precise safe persistence diagnostic rather than only PersistenceError.",
+    "No package content, secrets, credentials, database connection details or canonical Twin changes are exposed or introduced."
   ],
   "affected_pages": [
-    "Enterprise dossiers",
-    "Key Reports",
-    "Advanced Inspection"
+    "Blueprint Package Import failure result",
+    "Blueprint Package Import retained-package retry"
   ],
   "unchanged_areas": [
-    "Protected: Evidence provenance and applicability; 308 Relationships; 13 Programmes; 17 Opportunities; Key Reports four-state semantics; candidate governance; TEL-001 fixture."
+    "TEL-001 Twin content, relationships and Researcher output",
+    "Blueprint package validation rules",
+    "Candidate review, promotion and canonical persistence"
   ],
   "required_test_steps": [
-    "Open all six Enterprise dossiers and compare them side by side.",
-    "Confirm no raw Ai: or AI: field labels appear in normal dossier presentation.",
-    "Confirm Organisation, Strategy, Operating Model, Technology and Change sections use Enterprise-specific governed intelligence where supplied.",
-    "Confirm Financial Position and Key Reports retain their existing four-state outcomes.",
-    "Confirm Programmes remain singular, Opportunities do not become procurements, and Unknowns and Contradictions remain visible."
+    "Confirm this change is deployed.",
+    "Open import bpi-run-bb0def9e29bcf261.",
+    "Select Retry inspection once.",
+    "Confirm Package inspected is Completed and Package validated is reached; if inspection fails, capture the precise diagnostic and do not repeatedly retry the same deterministic failure."
   ],
-  "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
-  "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
-  "fresh_import_policy": "NO — ADR-026 reasoning operates over already-imported canonical TEL-001 intelligence.",
+  "fixture_path": "tests/test_flora_blueprint_import_validation.py synthetic repository fixture (not Wave 6)",
+  "fixture_sha256": "not applicable \u2014 generated test fixture",
+  "fresh_import_policy": "NO \u2014 use Retry inspection on retained import bpi-run-bb0def9e29bcf261.",
   "known_limitations": [
-    "TEL-001 supplies no qualifying BT external analyst, broker, equity-research or market-research report; the runtime therefore shows a truthful empty state.",
-    "Evidence availability does not promote unextracted report content into canonical Enterprise facts.",
-    "Enterprise Economics and Leadership / Governance remain architectural intent, not independently implemented TEL-001 runtime dimensions."
+    "The actual enriched TEL-001 Wave 6 package is unavailable in this repository execution environment; Wave 6 runtime acceptance requires the retained-package retry after deployment."
   ],
   "automated_validation": {
-    "tel001_fixture_checksum": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
-    "expected_checksum": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
-    "checksum_status": "PASS",
-    "end_to_end_test_status": "PASS",
-    "rendered_route_test_status": "PASS",
-    "diagnostics_reconciliation_status": "PASS",
-    "material_pressure_qualification_status": "PASS",
-    "research_gap_reconciliation_status": "PASS",
-    "known_failing_tests": "None in the focused evidence-utilisation, Executive Enterprise Intelligence and TEL-001 regression suites.",
-    "last_validation_timestamp": "2026-08-16T00:00:00Z"
+    "wave_6_package_available": "NO",
+    "repository_blueprint_import_tests": "PASS",
+    "persistence_diagnostics_tests": "PASS",
+    "validation_rules_changed": "NO",
+    "canonical_twin_modified": "NO"
   },
   "merge_gate": "SAFE TO MERGE",
-  "operator_validation_status": "PASS — all six Enterprise dossier routes rendered from the unchanged TEL-001 fixture and canonical selector",
+  "operator_validation_status": "PENDING \u2014 retained Wave 6 package retry required after deployment",
   "diagnostics_href": "/deployment",
   "source_commit_sha": "current-change-marker",
   "merged_commit_sha": "unknown",
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "FLORA-EVIDENCE-GOVERNED-MATERIAL-PRESSURE-2026-08-16",
+  "deployed_change_marker": "BLUEPRINT-PACKAGE-INSPECTION-PERSISTENCE-DIAGNOSTICS-2026-08-16",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
   "material_runtime_components_changed": [
-    "Canonical Material Pressure qualification",
-    "Material Pressures projection",
-    "Advanced Inspection Material Pressure Qualification diagnostic"
+    "Blueprint candidate staging persistence diagnostics",
+    "Blueprint inspection failure presentation"
   ],
   "reimport_required_if_older_than_change": "Unavailable",
   "repository": "unknown",
@@ -73,5 +66,5 @@
   "latest_deployment_status": "unknown",
   "fresh_import_required": "NO",
   "audit_result_href": "/docs/operations/flora/Deployment-to-Runtime-Proof-Audit.md",
-  "candidate_state_impact": "read-only"
+  "candidate_state_impact": "staging retry only; canonical state remains read-only"
 }

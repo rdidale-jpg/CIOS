@@ -127,8 +127,7 @@ class BlueprintPackageValidator:
         # Persist mapping_version alongside the dataclass result without changing older constructor callers.
         summary = self.staging.load_summary(package.import_run_id) or result.to_dict()
         summary["mapping_version"] = MAPPING_VERSION
-        from cios.applications.flora.storage import atomic_write_json
-        atomic_write_json(self.staging.root_for(package.import_run_id) / "summary.json", summary)
+        self.staging.save_summary(package.import_run_id, summary)
         self.ledger.append("package_validation_staged", summary | {"actor": actor})
         return result
 

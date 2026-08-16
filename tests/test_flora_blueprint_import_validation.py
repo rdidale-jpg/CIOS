@@ -54,6 +54,42 @@ def test_valid_package_validation_and_supported_record_staging(monkeypatch,tmp_p
     assert any(c["source_sheet"] == "Sources" for c in summary["candidates"])
 
 
+def test_staging_summary_failure_is_safe_diagnosable_and_retryable(monkeypatch, tmp_path):
+    from cios.applications.flora.blueprint_import import candidates
+    from cios.applications.flora.storage import PersistenceError
+
+    r = receive(monkeypatch, tmp_path)
+    real_write = candidates.atomic_write_json
+    failed_once = False
+
+    def fail_first_summary(path, data):
+        nonlocal failed_once
+        if path.name == "summary.json" and not failed_once:
+            failed_once = True
+            raise OSError(28, "No space left on device", str(path))
+        return real_write(path, data)
+
+    monkeypatch.setattr(candidates, "atomic_write_json", fail_first_summary)
+    with pytest.raises(PersistenceError) as raised:
+        BlueprintPackageValidator().validate_and_stage(r.package_ref, "alice")
+
+    diagnostic = str(raised.value)
+    assert "operation=save_staging_summary" in diagnostic
+    assert "record_type=ImportRunDryRunResult" in diagnostic
+    assert "field_or_constraint=JSON-compatible staging summary" in diagnostic
+    assert "underlying_exception=builtins.OSError" in diagnostic
+    assert "safe_diagnostic=storage operation failed with OS error 28" in diagnostic
+    assert f"import_identifier={r.import_run_id}" in diagnostic
+    assert str(tmp_path) not in diagnostic
+    assert not (tmp_path / "memory").exists()
+
+    retried = BlueprintPackageValidator().validate_and_stage(r.package_ref, "alice")
+    summary = BlueprintPackageValidator().staging_summary(r.import_run_id)
+    assert retried.canonical_mutations == 0
+    assert summary["candidate_records_staged"] == 2
+    assert len(summary["candidates"]) == 2
+
+
 def test_validation_page_shows_safe_deployed_commit(monkeypatch,tmp_path):
     from cios.applications.flora.live import runtime
     runtime.application_revision.cache_clear()
