@@ -1,18 +1,18 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "FLORA-SINGLE-FACTUAL-TRUTH-ASSESSMENT-LANGUAGE-CLOSURE-2026-08-15",
-  "title": "Single Factual Truth & Assessment-Language Closure",
-  "objective": "Make Advanced Inspection report the same final governed factual state as Enterprise dossiers, remove misleading assessment language, and make deployment proof identify this current change.",
+  "change_id": "FLORA-EXECUTIVE-ENTERPRISE-INTELLIGENCE-2026-08-16",
+  "title": "Executive Enterprise Intelligence — Commercial Decision Layer",
+  "objective": "Give senior commercial users a concise, evidence-backed reading of existing governed Enterprise intelligence without changing canonical facts or recommendation governance.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Aligned Advanced Inspection with the existing governed Enterprise synthesis consumed by dossiers.",
-    "Removed misleading assessment and governance-review wording while preserving confidence provenance.",
-    "Made Deployment & Runtime Proof consume this Current Change declaration."
+    "Enterprise dossiers now provide an evidence-backed executive commercial reading of existing governed intelligence.",
+    "Situation, commercial significance, signals, associated Opportunities, watchpoints and evidence position are selected from existing runtime objects.",
+    "Explainability retains source dimensions, object IDs, Evidence, Unknowns and Contradictions."
   ],
   "expected_visible_outcomes": [
-    "Advanced Inspection reports the same final factual state shown in the Enterprise dossier.",
-    "Remaining fictional assessment/governance-review wording is removed.",
-    "Deployment proof identifies the actual current deployed change."
+    "Enterprise dossiers now provide an evidence-backed executive commercial reading of existing governed intelligence.",
+    "Existing opportunities and strongest change signals are visible near the top of each dossier.",
+    "Evidence limitations remain visible without displacing detailed dossier content."
   ],
   "affected_pages": [
     "Import Twin",
@@ -26,17 +26,21 @@
     "Protected: 308 Relationship candidates; working Enterprise identity lineage and associations; 13 Programmes; 17 Opportunities; factual dimension isolation; candidate governance."
   ],
   "required_test_steps": [
-    "Open BT Group and confirm Organisation Overview still contains supported factual content.",
-    "Open Advanced Inspection and confirm BT Organisation / Enterprise Profile is governed synthesis PRESENT/SUPPORTED and rendered PRESENT.",
-    "Confirm no assessment-not-performed or undefined governance-review language remains.",
-    "Confirm Deployment & Runtime Proof names this current change."
+    "Open BT Group.",
+    "Read only the first screen.",
+    "Confirm you can understand what is happening at BT and why it matters commercially.",
+    "Confirm existing opportunities and strongest change signals are visible.",
+    "Confirm evidence limitations are visible without dominating the page.",
+    "Confirm detailed dossier content remains available underneath.",
+    "Spot-check another Enterprise to ensure the panel adapts to its evidence."
   ],
   "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
   "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
-  "fresh_import_policy": "No fresh import is required: candidate persistence is unchanged and corrected projection operates over existing candidates.",
+  "fresh_import_policy": "No fresh import is required: the executive layer is a read-only derivative of existing candidate runtime objects.",
   "known_limitations": [
-    "Enterprise Economics and Leadership / Governance are architectural intent not implemented as independent TEL-001 runtime dimensions.",
-    "Industry/domain remains Not established because TEL-001 Enterprise candidates carry no explicit semantic domain and Twin membership is not treated as proof."
+    "Enterprise Economics and Leadership / Governance remain architectural intent, not independently implemented TEL-001 runtime dimensions.",
+    "Industry/domain remains Not established where no explicit semantic domain is supplied.",
+    "Material Pressures can remain absent even when pressure language exists in other dimensions; this is a potential canonical semantic coverage issue and is not repaired by this presentation derivative."
   ],
   "automated_validation": {
     "tel001_fixture_checksum": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
@@ -46,27 +50,23 @@
     "rendered_route_test_status": "PASS",
     "diagnostics_reconciliation_status": "PASS",
     "research_gap_reconciliation_status": "PASS",
-    "known_failing_tests": "None in focused population/relationship acceptance suite.",
-    "last_validation_timestamp": "2026-08-15T00:00:00Z"
+    "known_failing_tests": "None in the focused Executive Enterprise Intelligence and TEL-001 regression suites.",
+    "last_validation_timestamp": "2026-08-16T00:00:00Z"
   },
   "merge_gate": "SAFE TO MERGE",
-  "operator_validation_status": "PASS — exact association sets and rendered routes reconciled",
+  "operator_validation_status": "PASS — six Enterprise dossier routes rendered from canonical facts and associations",
   "diagnostics_href": "/deployment",
   "source_commit_sha": "current-change-marker",
   "merged_commit_sha": "unknown",
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "SINGLE-FACTUAL-TRUTH-ASSESSMENT-LANGUAGE-CLOSURE-2026-08-15",
+  "deployed_change_marker": "EXECUTIVE-ENTERPRISE-INTELLIGENCE-COMMERCIAL-DECISION-LAYER-2026-08-16",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
   "material_runtime_components_changed": [
-    "Canonical Factual Projection",
-    "Observation runtime",
-    "Executive factual presentation",
-    "Advanced Inspection",
-    "Operational acceptance decision"
+    "Executive factual presentation"
   ],
   "reimport_required_if_older_than_change": "Unavailable",
   "repository": "unknown",
@@ -74,7 +74,7 @@
   "start_command": "unknown",
   "auto_deploy": "unknown",
   "latest_deployment_status": "unknown",
-  "fresh_import_required": "No — read-only qualification/projection correction over existing candidates.",
+  "fresh_import_required": "NO",
   "audit_result_href": "/docs/operations/flora/Deployment-to-Runtime-Proof-Audit.md",
   "candidate_state_impact": "read-only"
 }
