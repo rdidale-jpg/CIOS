@@ -1,7 +1,7 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "FLORA-IMPORTED-TWIN-EVIDENCE-PATH-RECONCILIATION-2026-08-16",
-  "title": "Imported-Twin Evidence Path Reconciliation & Functional Acceptance Truth",
+  "change_id": "FLORA-ENTERPRISE-EVIDENCE-ASSOCIATION-INTEGRITY-2026-08-16",
+  "title": "Enterprise Evidence Association Integrity",
   "objective": "Resolve imported Evidence references through the canonical Semantic Twin owner and expose one truthful runtime acceptance result.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
@@ -29,7 +29,7 @@
   ],
   "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
   "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
-  "fresh_import_policy": "NO \u2014 this is a read-only presentation correction over unchanged canonical imported objects.",
+  "fresh_import_policy": "NO \u2014 runtime association and selection use unchanged canonical imported objects.",
   "known_limitations": [
     "TEL-001 supplies no qualifying BT external analyst, broker, equity-research or market-research report; the runtime therefore shows a truthful empty state.",
     "Evidence availability does not promote unextracted report content into canonical Enterprise facts.",
@@ -54,7 +54,7 @@
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "FLORA-IMPORTED-TWIN-EVIDENCE-PATH-RECONCILIATION-2026-08-16",
+  "deployed_change_marker": "FLORA-ENTERPRISE-EVIDENCE-ASSOCIATION-INTEGRITY-2026-08-16",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,

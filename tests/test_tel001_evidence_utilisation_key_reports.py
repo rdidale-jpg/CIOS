@@ -14,7 +14,8 @@ from cios.applications.flora.blueprint_import.key_reports import (
     key_reports_for_enterprise)
 from cios.applications.flora.blueprint_import.evidence_semantics import classify_evidence
 from cios.applications.flora.blueprint_import.semantic_twin import (SemanticEnterprise, SemanticObject,
-    assemble_semantic_twin, business_object_id, enterprise_associations, resolve_relationships)
+    assemble_semantic_twin, business_object_id, enterprise_associations, evidence_applicability,
+    resolve_relationships)
 
 
 FIXTURE = Path("docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip")
@@ -56,6 +57,24 @@ def test_bt_key_report_is_latest_governed_company_evidence(monkeypatch, tmp_path
     counts = Counter(row["candidate_object_class"] for row in summary["candidates"] if row["validation_status"] == "accepted")
     assert (counts["relationship"], counts["transformation_programme"], counts["opportunity_hypothesis"]) == (308, 13, 17)
     assert len(resolve_relationships(twin)) == 308
+
+
+def test_six_enterprise_evidence_integrity_and_shared_applicability(monkeypatch, tmp_path):
+    _package, _summary, twin = _runtime(monkeypatch, tmp_path)
+    names = {"BT Group", "CityFibre", "Openreach", "TalkTalk", "Virgin Media O2", "VodafoneThree"}
+    for ent in (e for e in twin.enterprises if e.name in names):
+        paths = evidence_applicability(twin, ent)
+        assert paths and all(p.verdict in {"DIRECT", "SHARED-APPLICABLE", "CROSS-ENTERPRISE-EXPLAINED"} for p in paths)
+        direct = {business_object_id(p.evidence) for p in paths if p.verdict == "DIRECT"}
+        report = key_reports_for_enterprise(ent, twin).company_report
+        if report and report.provenance == "Company disclosure":
+            assert business_object_id(report.source) in direct
+    bt = next(e for e in twin.enterprises if e.name == "BT Group")
+    paths = {business_object_id(p.evidence): p for p in evidence_applicability(twin, bt)}
+    assert paths["EV-CF-2025"].verdict == "CROSS-ENTERPRISE-EXPLAINED"
+    assert "references this Evidence" in paths["EV-CF-2025"].path
+    assert any(p.verdict == "SHARED-APPLICABLE" and p.evidence.attributes.get("publisher") == "Ofcom" for p in paths.values())
+    assert key_reports_for_enterprise(bt, twin).company_report.source.original_id == "EV-BT-Q1FY27-W4"
 
 
 def test_report_states_external_label_and_no_fabricated_url():

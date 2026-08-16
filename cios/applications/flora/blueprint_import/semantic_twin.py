@@ -116,6 +116,14 @@ class SubjectAssociation:
     related_object: SemanticObject
 
 
+@dataclass(frozen=True)
+class EvidenceApplicability:
+    """Explain one canonical Evidence-to-Enterprise applicability path."""
+    evidence: SemanticObject
+    verdict: str
+    path: str
+
+
 # These rules describe which endpoint is the Enterprise association subject;
 # locating a subject at either endpoint does not make arbitrary edges symmetric.
 ASSOCIATION_DIRECTIONS: Mapping[str, tuple[str, str]] = {
@@ -237,6 +245,46 @@ def business_object_id(obj: SemanticObject) -> str:
     return obj.original_id or obj.record_id
 
 
+def evidence_applicability(twin: SemanticTwin, ent: SemanticEnterprise) -> tuple[EvidenceApplicability, ...]:
+    """Return only Evidence with an explicit path, retaining why it applies.
+
+    Direct ownership comes from canonical subject/organisation identity.  A
+    reference from an Enterprise-associated canonical object is an explicit
+    relationship-derived path.  Regulator/market material is shared only when
+    that same reference establishes applicability; global presence is never
+    sufficient.
+    """
+    names = {ent.name.casefold(), *(a.casefold() for a in ent.aliases),
+             ent.identity_key.casefold(), ent.source_identity.casefold(),
+             ent.relationship_subject_identity.casefold()}
+    names.discard("")
+    refs: dict[str, str] = {}
+    for record in ent.records:
+        for ref in record.evidence_refs:
+            refs.setdefault(ref.casefold(), business_object_id(record))
+    rows = []
+    for obj in twin.objects:
+        if obj.kind != "evidence":
+            continue
+        identity = business_object_id(obj)
+        subjects = {part.strip().casefold() for part in re.split(r"[;/]", obj.subject) if part.strip()}
+        subjects.update(a.casefold() for a in obj.affected_organisations)
+        direct = bool(names.intersection(subjects)) or obj in ent.records
+        referrer = refs.get(identity.casefold())
+        attrs = obj.attributes or {}
+        shared = any(term in (" ".join((obj.subject, str(attrs.get("publisher", "")),
+                                        str(attrs.get("source_type", "")),
+                                        str(attrs.get("supported_object", ""))))).casefold()
+                     for term in ("ofcom", "regulator", "industry", "market", "infrastructure", "project gigabit", "public-sector"))
+        if direct:
+            rows.append(EvidenceApplicability(obj, "DIRECT", "canonical Evidence subject/organisation matches Enterprise identity"))
+        elif referrer and shared:
+            rows.append(EvidenceApplicability(obj, "SHARED-APPLICABLE", f"shared market/regulatory Evidence referenced by {referrer}"))
+        elif referrer:
+            rows.append(EvidenceApplicability(obj, "CROSS-ENTERPRISE-EXPLAINED", f"canonical Enterprise-associated object {referrer} references this Evidence"))
+    return tuple(sorted(rows, key=lambda row: business_object_id(row.evidence)))
+
+
 def evidence_for_enterprise(twin: SemanticTwin, ent: SemanticEnterprise) -> tuple[SemanticObject, ...]:
     """Resolve an Enterprise's Evidence from the import-scoped canonical owner.
 
@@ -247,18 +295,7 @@ def evidence_for_enterprise(twin: SemanticTwin, ent: SemanticEnterprise) -> tupl
     persisted Enterprise projections usable without copying Evidence into a
     Key-Reports-specific store.
     """
-    names = {ent.name.casefold(), *(alias.casefold() for alias in ent.aliases)}
-    referenced = {ref.casefold() for record in ent.records for ref in record.evidence_refs}
-    selected: dict[str, SemanticObject] = {}
-    for obj in twin.objects:
-        if obj.kind != "evidence":
-            continue
-        identity = business_object_id(obj)
-        associated = (obj.subject.casefold() in names or
-                      bool(names.intersection(name.casefold() for name in obj.affected_organisations)))
-        if associated or identity.casefold() in referenced or obj in ent.records:
-            selected[identity] = obj
-    return tuple(selected[key] for key in sorted(selected))
+    return tuple(row.evidence for row in evidence_applicability(twin, ent))
 
 
 def relationship_endpoints(obj: SemanticObject) -> tuple[str, str, str]:
