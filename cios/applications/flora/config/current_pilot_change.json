@@ -1,16 +1,16 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "FLORA-EXECUTIVE-PRESENTATION-ACCEPTANCE-CLOSURE-2026-08-16",
-  "title": "Executive Presentation Acceptance Closure",
-  "objective": "Close the demonstrated executive presentation failures without changing canonical Programme identity, TEL-001, or governed source meaning.",
+  "change_id": "FLORA-BT-EXECUTIVE-DOSSIER-FINAL-CORRECTNESS-CLOSURE-2026-08-16",
+  "title": "BT Executive Dossier Final Correctness Closure",
+  "objective": "Render each canonical Programme coherently once and reconcile Key Reports with the governed financial-reporting Evidence powering Financial Position, without changing TEL-001 or governed source meaning.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Flora renders each canonical executive change signal once, including when one Programme repeats its governed statement across presentation fields.",
+    "Flora renders each canonical Programme coherently once, including when its canonical title and description contain the same value.",
     "The shared presentation translator expresses evidenced and hypothesised AI activity in executive language while preserving Unknown investment.",
     "Key Reports visibly presents the latest qualifying supplied company financial reporting with its governed extract and best supplied source path."
   ],
   "expected_visible_outcomes": [
-    "The BT cost, simplification and AI/data programme appears once in Change & Investment Signals, while distinct signals remain.",
+    "The BT cost, simplification and AI/data programme appears once in Change & Investment Signals and once as one coherent Major Programme, while distinct Programmes remain.",
     "BT AI/change wording is executive-readable and states naturally that the associated investment level is not established.",
     "Key Reports presents supplied company financial reporting and truthfully states that no qualifying external analyst or market-research report is supplied.",
     "Organisation Overview explains unresolved facts directly to the operator without implying a fictional governance process."
@@ -28,7 +28,7 @@
   ],
   "required_test_steps": [
     "Open BT Group.",
-    "Confirm the multi-year cost/simplification/AI programme appears once under Change & Investment Signals.",
+    "Confirm the multi-year cost/simplification/AI programme appears once under Change & Investment Signals and once under Major Programmes, with stage, evidence, unknowns and contradictions retained.",
     "Confirm AI/change wording reads naturally, retains investment uncertainty, and the three Watchpoints remain.",
     "Confirm Key Reports shows the latest qualifying supplied BT company financial reporting and its governed source or extract.",
     "Confirm no external analyst report is invented.",
@@ -61,7 +61,7 @@
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "FLORA-EXECUTIVE-PRESENTATION-ACCEPTANCE-CLOSURE-2026-08-16",
+  "deployed_change_marker": "FLORA-BT-EXECUTIVE-DOSSIER-FINAL-CORRECTNESS-CLOSURE-2026-08-16",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,

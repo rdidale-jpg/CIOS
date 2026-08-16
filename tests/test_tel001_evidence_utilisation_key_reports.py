@@ -140,6 +140,35 @@ def test_one_canonical_programme_does_not_repeat_its_statement_across_presentati
     assert signal.title == "One governed concept."
     assert signal.explanation == ""
 
+    # The dossier presentation makes the same field-level decision without
+    # deduplicating Programme identities or discarding governed metadata.
+    from cios.applications.flora.blueprint_import import executive_workspace
+    monkeypatch.setattr(executive_workspace, "_association_type", lambda *_args: "Owned programme")
+    html = executive_workspace._major_programme_html(programme, enterprise, twin)
+    assert html.count("One governed concept.") == 1
+    assert "data-business-object-id='PROG-ONE'" in html
+    assert "<strong>Stage:</strong> Not supplied" in html
+    assert "<strong>Evidence:</strong> Not supplied" in html
+    assert "<strong>Unknowns:</strong> None supplied" in html
+    assert "<strong>Contradictions:</strong> None supplied" in html
+
+
+def test_major_programme_preserves_distinct_title_and_description(monkeypatch):
+    programme = SemanticObject(
+        "programme", "transformation_programme", "A distinct governed description.", "Example", ("EV-1",),
+        "", "High", "candidate", "programmes.json", {}, False, original_id="PROG-DISTINCT",
+        attributes={"title": "A canonical programme title", "phase": "Active",
+                    "unknown_refs": ["UN-1"], "contradictions": ["CR-1"]},
+    )
+    enterprise = SemanticEnterprise("ENT-X", "x", "Example", (), (programme,))
+    from cios.applications.flora.blueprint_import import executive_workspace
+    from cios.applications.flora.blueprint_import.semantic_twin import SemanticTwin
+    monkeypatch.setattr(executive_workspace, "_association_type", lambda *_args: "Owned programme")
+    html = executive_workspace._major_programme_html(programme, enterprise, SemanticTwin((programme,), (enterprise,)))
+    for value in ("A canonical programme title", "A distinct governed description.", "Active",
+                  "EV-1", "UN-1", "CR-1"):
+        assert value in html
+
 
 def test_classification_is_identity_agnostic_and_distinct_programmes_remain_distinct():
     evidence = SemanticObject("candidate-x", "evidence", "", "Example", (), "2027-01-01", "High",
