@@ -103,7 +103,7 @@ documents:
     status: current
     required: true
     inclusion_reason: Required for participant-aware Researcher Knowledge Pack v2.3 operation, authority, configuration, governed twin production, relationships, opportunity hypotheses or handover.
-    checksum: fd0ed56b54328ae0bff73fcc8c430a7906860d4abbf6a0522d175d146425be65
+    checksum: 11aa8af089b54da0958c7ff96c123fb536b2d88805546e8645335107f588c5ad
     transform: none
   - pack_path: architecture/EI-002-Enterprise-Knowledge-Graph.md
     source_path: architecture/enterprise-intelligence/volume-1-enterprise-modelling/EI-002-Enterprise-Knowledge-Graph.md
