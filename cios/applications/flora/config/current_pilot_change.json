@@ -1,11 +1,11 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "FLORA-KEY-REPORTS-FINANCIAL-EVIDENCE-FINAL-CLOSURE-2026-08-16",
-  "title": "Key Reports Financial Evidence Final Closure",
-  "objective": "Reconcile Key Reports with governed financial-reporting Evidence without changing TEL-001 or governed source meaning.",
+  "change_id": "FLORA-IMPORTED-TWIN-EVIDENCE-PATH-RECONCILIATION-2026-08-16",
+  "title": "Imported-Twin Evidence Path Reconciliation & Functional Acceptance Truth",
+  "objective": "Resolve imported Evidence references through the canonical Semantic Twin owner and expose one truthful runtime acceptance result.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Flora now distinguishes company financial reports from governed financial-reporting Evidence and exposes the best available evidence/source supporting the financial intelligence presented in the Enterprise dossier."
+    "Flora now reconciles imported Evidence references with canonical Evidence objects so Key Reports consumes the governed Evidence supporting Enterprise intelligence; functional acceptance reflects the same runtime result."
   ],
   "expected_visible_outcomes": [
     "Company financial reporting no longer appears absent when governed financial-reporting Evidence is available.",
@@ -54,7 +54,7 @@
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "FLORA-KEY-REPORTS-FINANCIAL-EVIDENCE-FINAL-CLOSURE-2026-08-16",
+  "deployed_change_marker": "FLORA-IMPORTED-TWIN-EVIDENCE-PATH-RECONCILIATION-2026-08-16",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,

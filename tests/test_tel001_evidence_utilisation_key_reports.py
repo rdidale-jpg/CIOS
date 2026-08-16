@@ -241,7 +241,8 @@ def test_live_trace_reuses_dossier_function_result_and_reconciles_financial_posi
     assert "cios.applications.flora.blueprint_import.key_reports.key_reports_for_enterprise" in html
     for identifier in ("EV-BT-FY26", "EV-BT-Q1FY27", "EV-BT-AR26"):
         assert identifier in html
-    assert "FINANCIAL POSITION LIVE EVIDENCE TRACE" in html
+    assert "FINANCIAL POSITION TRUE EVIDENCE TRACE" in html
+    assert "KEY REPORTS TRUE EVIDENCE TRACE" in html
     assert "Present in Key Reports input</th><th>Recognised by Key Reports" in html
     assert "Selected Evidence ID(s):</strong> EV-BT-Q1FY27-W4" in html
     assert acceptance == "PASS"
@@ -255,3 +256,22 @@ def test_functional_acceptance_cannot_false_pass_the_demonstrated_contradiction(
     financial_position = ("EV-BT-FY26", "EV-BT-Q1FY27", "EV-BT-AR26")
     assert functional_acceptance_for_financial_position(contradictory, financial_position) == "FAIL"
     assert functional_acceptance_for_financial_position(live, financial_position) == "PASS"
+    empty = key_reports_for_enterprise(replace(bt, records=()))
+    assert functional_acceptance_for_financial_position(empty, financial_position) == "FAIL"
+
+
+def test_canonical_twin_owner_recovers_evidence_from_stale_enterprise_projection(monkeypatch, tmp_path):
+    """Runtime resolution does not depend on Evidence copied into ent.records."""
+    _package, _summary, twin = _runtime(monkeypatch, tmp_path)
+    bt = next(ent for ent in twin.enterprises if ent.name == "BT Group")
+    stale = replace(bt, records=tuple(obj for obj in bt.records if obj.kind != "evidence"))
+
+    without_owner = key_reports_for_enterprise(stale)
+    reconciled = key_reports_for_enterprise(stale, twin)
+
+    assert without_owner.trace is not None and without_owner.trace.evidence == ()
+    assert reconciled.trace is not None
+    supplied = {business_object_id(obj) for obj in reconciled.trace.evidence}
+    assert {"EV-BT-FY26", "EV-BT-Q1FY27", "EV-BT-AR26"}.issubset(supplied)
+    assert reconciled.company_report is not None
+    assert reconciled.company_report.source in twin.objects
