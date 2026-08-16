@@ -99,9 +99,11 @@ class ResearchCountContract:
 
 
 def _canonical_factual_html(projection: CanonicalFactualProjection, *, include_state: bool = False) -> str:
+    from .presentation_semantics import human_readable_fact
+
     rows = []
     for section in projection.sections:
-        values = "".join(f"<li>{escape(value)}</li>" for value in section.values)
+        values = "".join(f"<li>{escape(human_readable_fact(value))}</li>" for value in section.values)
         rows.append(f"<article><h3>{escape(section.label)}</h3><ul>{values}</ul></article>")
     facts = "".join(rows) or "<p><strong>Facts:</strong> No factual fields are mapped in the canonical factual projection.</p>"
     state = ("<aside class='executive-status' role='status'><strong>Factual presence</strong> — imported candidate.</aside>") if include_state else ""
@@ -140,7 +142,9 @@ def _executive_enterprise_intelligence_html(ent: SemanticEnterprise, twin: Seman
     intelligence = executive_enterprise_intelligence(ent, twin)
     situation = escape(intelligence.situation or "No supported executive situation can be stated from the available facts.")
     signals = "".join(
-        f"<li><strong>{escape(item.title)}</strong><span>{escape(item.explanation)}</span></li>"
+        f"<li data-signal-source-id='{escape(item.source_id)}' data-signal-source-type='{escape(item.source_type)}'>"
+        f"<strong>{escape(item.title)}</strong>" +
+        (f"<span>{escape(item.explanation)}</span>" if item.explanation else "") + "</li>"
         for item in intelligence.signals) or "<li>No qualifying change or investment signal is supplied.</li>"
     opportunities = "".join(
         f"<article class='executive-opportunity-card'><h4>{escape(item.name)}</h4>"
@@ -172,11 +176,13 @@ def _key_reports_html(ent: SemanticEnterprise, run_id: str) -> str:
     def card(report: KeyReport | None, label: str) -> str:
         if report is None:
             return (f"<article><h3>{label}</h3><p><strong>NO QUALIFYING REPORT SUPPLIED</strong></p>"
-                    "<p>No governed report of this type is present for this Enterprise.</p></article>")
+                    + ("<p>No qualifying external analyst or market-research report is supplied in this Twin.</p>"
+                       if "external" in label.casefold()
+                       else "<p>No qualifying company financial report is supplied.</p>") + "</article>")
         findings = ("<ul>" + "".join(f"<li>{escape(item)}</li>" for item in report.findings) + "</ul>"
                     if report.findings else "<p>No governed extract or summary is supplied.</p>")
-        source = (f"<a href='{escape(report.source_url)}' rel='noopener'>View report</a>" if report.source_url
-                  else "<span>Original report is not directly available from the supplied evidence.</span>")
+        source = (f"<a href='{escape(report.source_url)}' rel='noopener'>View source report</a>" if report.source_url
+                  else "<span>Direct source link not supplied.</span>")
         evidence = (f"<a href='/blueprint-import/{escape(run_id)}/explore?collection=evidence-sources#{escape(report.source.record_id)}'>Open evidence</a>")
         period = " · ".join(filter(None, (report.reporting_period, report.publication_date))) or "Date not supplied"
         return (f"<article data-evidence-id='{escape(business_object_id(report.source))}'><h3>{label}</h3>"
@@ -447,7 +453,8 @@ def _structured_value(value: Any) -> str:
         return f"<dl class='fact-list'>{rows}</dl>"
     if isinstance(value, (list, tuple, set)):
         return "<ul>" + "".join(f"<li>{_structured_value(item)}</li>" for item in value) + "</ul>"
-    return escape(str(value))
+    from .presentation_semantics import human_readable_fact
+    return escape(human_readable_fact(str(value)))
 
 
 def _executive_record_card(o: SemanticObject) -> str:
@@ -602,7 +609,7 @@ def _enterprise_card(e, run_id):
     body = (f"<p>{escape(profile.values[0])}</p>" if profile.present else
             "<p><strong>Organisation description not supplied.</strong></p>")
     body += f"<p><strong>Industry/domain:</strong> {escape(', '.join(industry.values) or 'Not established')}</p>"
-    body += "<p><span class='pill'>Candidate — awaiting human import decision</span></p>"
+    body += "<p><span class='pill'>Awaiting your import decision</span></p>"
     canonical_fields = ""
     if identity:
         canonical_fields = "".join(
@@ -846,7 +853,7 @@ def _dossier(ent, twin, run_id, mission):
                     f"<p><strong>Still required:</strong> {escape(', '.join(missing_overview))}.</p>")
         if factual.evidence_refs:
             overview += ("<p><strong>Evidence available — further extraction possible.</strong> "
-                         "These requirements remain unresolved until the existing canonical extraction and governance process establishes the facts.</p>")
+                         "Relevant evidence exists, but these facts have not yet been established from it.</p>")
         hero = description or "Imported enterprise intelligence ready for review"
     else:
         overview = f"<p>{escape(description)}</p><p><strong>Organisational form:</strong> {escape(_field(identity, 'ownership', 'organisational_form'))}</p><p><strong>Principal activities:</strong> {escape(_field(identity, 'principal_activities', 'activities'))}</p><p><strong>Role in industry:</strong> {escape(_field(identity, 'industry_role', 'role'))}</p><p><strong>Current position:</strong> {escape(_field(identity, 'current_position'))}</p>"

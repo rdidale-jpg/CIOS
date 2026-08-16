@@ -47,6 +47,7 @@ def test_bt_key_report_is_latest_governed_company_evidence(monkeypatch, tmp_path
     assert "REPORT AVAILABLE — DIRECT SOURCE LINK AVAILABLE" in html
     assert "Latest external analyst / market research" in html
     assert "NO QUALIFYING REPORT SUPPLIED" in html
+    assert "No qualifying external analyst or market-research report is supplied in this Twin." in html
     assert "External analyst view" not in html
     assert before == tuple((obj.record_id, obj.attributes) for obj in twin.objects)
     counts = Counter(row["candidate_object_class"] for row in summary["candidates"] if row["validation_status"] == "accepted")
@@ -86,7 +87,8 @@ def test_bt_executive_corrections_consume_canonical_identity_and_timing(monkeypa
     assert all(watch.source_id.startswith("OPP-BT-") for watch in result.watchpoints)
     panel = " ".join((signal.title + " " + signal.explanation) for signal in result.signals)
     assert "Ai Pressure:" not in panel
-    assert "investment budget remains unknown" in panel
+    assert "evidenced or hypothesised by function" not in panel
+    assert "associated investment level is not established" in panel
 
 
 def test_financial_report_semantics_are_canonical_and_cannot_silently_empty(monkeypatch, tmp_path):
@@ -108,9 +110,35 @@ def test_financial_report_semantics_are_canonical_and_cannot_silently_empty(monk
     title = "Multi-year cost, simplification, AI/data and cash-generation programme."
     assert major.count(title) == 1
     assert executive.count(title) == 1
+    assert executive.count("data-signal-source-id='PROG-BT-TRANSFORMATION'") == 1
     reinvention = html.split("<h2>Reinvention Timing</h2>", 1)[1].split("</section>", 1)[0]
     assert "Ai Pressure:" not in reinvention
-    assert "investment budget remains unknown" in reinvention
+    assert "evidenced or hypothesised by function" not in reinvention
+    assert "associated investment level is not established" in reinvention
+    assert "Relevant evidence exists, but these facts have not yet been established from it." in html
+    for forbidden in ("ai pressure:", "evidenced or hypothesised by function",
+                      "pending governance review", "awaiting governance team"):
+        assert forbidden not in html.casefold()
+
+
+def test_one_canonical_programme_does_not_repeat_its_statement_across_presentation_fields(monkeypatch):
+    """Duplicate fields on one source concept are not separate executive signals."""
+    programme = SemanticObject(
+        "programme", "transformation_programme", "One governed concept.", "Example", (), "", "High",
+        "candidate", "programmes.json", {}, False, original_id="PROG-ONE",
+        attributes={"title": "One governed concept."},
+    )
+    enterprise = SemanticEnterprise("ENT-X", "x", "Example", (), (programme,))
+    from cios.applications.flora.blueprint_import import executive_enterprise_intelligence as module
+    from cios.applications.flora.blueprint_import.semantic_twin import SemanticTwin
+    twin = SemanticTwin((programme,), (enterprise,))
+    monkeypatch.setattr(module, "enterprise_associations",
+                        lambda _twin, _ent, kinds: ((programme, None, None),)
+                        if "transformation_programme" in kinds else ())
+    result = executive_enterprise_intelligence(enterprise, twin)
+    signal = next(item for item in result.signals if item.source_id == "PROG-ONE")
+    assert signal.title == "One governed concept."
+    assert signal.explanation == ""
 
 
 def test_classification_is_identity_agnostic_and_distinct_programmes_remain_distinct():

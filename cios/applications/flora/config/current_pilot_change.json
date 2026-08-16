@@ -1,18 +1,19 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "FLORA-EVIDENCE-SEMANTIC-RECONCILIATION-CANONICAL-DEDUPLICATION-2026-08-16",
-  "title": "Evidence Semantic Reconciliation & Canonical Deduplication",
-  "objective": "Reconcile canonical Evidence meaning across Financial Position and Key Reports, preserve Programme identity while rendering each associated Programme once, and translate remaining schema language.",
+  "change_id": "FLORA-EXECUTIVE-PRESENTATION-ACCEPTANCE-CLOSURE-2026-08-16",
+  "title": "Executive Presentation Acceptance Closure",
+  "objective": "Close the demonstrated executive presentation failures without changing canonical Programme identity, TEL-001, or governed source meaning.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Flora uses one canonical interpretation of supplied Evidence metadata across Financial Position and Key Reports.",
-    "Canonical Programme association identity removes repeated traversal output without changing relationships, evidence, lineage, or source counts.",
-    "The shared presentation translator removes remaining AI Pressure schema labels while retaining Unknown investment semantics."
+    "Flora renders each canonical executive change signal once, including when one Programme repeats its governed statement across presentation fields.",
+    "The shared presentation translator expresses evidenced and hypothesised AI activity in executive language while preserving Unknown investment.",
+    "Key Reports visibly presents the latest qualifying supplied company financial reporting with its governed extract and best supplied source path."
   ],
   "expected_visible_outcomes": [
-    "Key reports clearly separates company disclosure from external analyst views and never fabricates a report or URL.",
-    "Organisation Overview distinguishes unresolved facts from available evidence awaiting governed extraction.",
-    "BT shows no duplicate programme or Ai Pressure source wording and shows up to three supplied Opportunity watchpoints."
+    "The BT cost, simplification and AI/data programme appears once in Change & Investment Signals, while distinct signals remain.",
+    "BT AI/change wording is executive-readable and states naturally that the associated investment level is not established.",
+    "Key Reports presents supplied company financial reporting and truthfully states that no qualifying external analyst or market-research report is supplied.",
+    "Organisation Overview explains unresolved facts directly to the operator without implying a fictional governance process."
   ],
   "affected_pages": [
     "Enterprise dossiers",
@@ -27,15 +28,15 @@
   ],
   "required_test_steps": [
     "Open BT Group.",
-    "Check Executive Intelligence: no duplicate cost programme; no Ai Pressure schema wording; meaningful dated Watchpoints.",
-    "Open Financial Position / Key Reports and confirm the latest supplied BT financial reporting is visible.",
-    "Confirm source/evidence opens where supplied.",
-    "Confirm no external analyst report is invented when none is supplied.",
-    "Confirm Organisation Overview distinguishes unresolved facts from evidence available for further extraction."
+    "Confirm the multi-year cost/simplification/AI programme appears once under Change & Investment Signals.",
+    "Confirm AI/change wording reads naturally, retains investment uncertainty, and the three Watchpoints remain.",
+    "Confirm Key Reports shows the latest qualifying supplied BT company financial reporting and its governed source or extract.",
+    "Confirm no external analyst report is invented.",
+    "Confirm Organisation Overview says relevant evidence exists without referring to a fictional governance process."
   ],
   "fixture_path": "docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flora_Import 3.zip",
   "fixture_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
-  "fresh_import_policy": "NO \u2014 the implementation is a read-only projection of existing candidate Evidence, facts and Opportunity timing.",
+  "fresh_import_policy": "NO — this is a read-only presentation correction over unchanged canonical imported objects.",
   "known_limitations": [
     "TEL-001 supplies no qualifying BT external analyst, broker, equity-research or market-research report; the runtime therefore shows a truthful empty state.",
     "Evidence availability does not promote unextracted report content into canonical Enterprise facts.",
@@ -53,20 +54,20 @@
     "last_validation_timestamp": "2026-08-16T00:00:00Z"
   },
   "merge_gate": "SAFE TO MERGE",
-  "operator_validation_status": "PASS \u2014 six Enterprise dossier routes rendered from canonical facts and associations",
+  "operator_validation_status": "PASS — six Enterprise dossier routes rendered from canonical facts and associations",
   "diagnostics_href": "/deployment",
   "source_commit_sha": "current-change-marker",
   "merged_commit_sha": "unknown",
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "FLORA-EVIDENCE-SEMANTIC-RECONCILIATION-CANONICAL-DEDUPLICATION-2026-08-16",
+  "deployed_change_marker": "FLORA-EXECUTIVE-PRESENTATION-ACCEPTANCE-CLOSURE-2026-08-16",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
   "material_runtime_components_changed": [
     "Executive Intelligence presentation",
-    "Enterprise dossier evidence presentation"
+    "Enterprise dossier evidence and operator-language presentation"
   ],
   "reimport_required_if_older_than_change": "Unavailable",
   "repository": "unknown",
