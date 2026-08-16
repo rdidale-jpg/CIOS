@@ -173,8 +173,8 @@ def _executive_enterprise_intelligence_html(ent: SemanticEnterprise, twin: Seman
             f"<article><h3>Evidence position</h3><p>{escape(intelligence.evidence_statement)}</p></article></div>{trace}</section>")
 
 
-def _key_reports_html(ent: SemanticEnterprise, run_id: str) -> str:
-    reports = key_reports_for_enterprise(ent)
+def _key_reports_html(ent: SemanticEnterprise, twin: SemanticTwin, run_id: str) -> str:
+    reports = key_reports_for_enterprise(ent, twin)
     def card(report: KeyReport | None, label: str) -> str:
         if report is None:
             return (f"<article><h3>{label}</h3><p><strong>NO QUALIFYING REPORT SUPPLIED</strong></p>"
@@ -202,9 +202,9 @@ def _key_reports_html(ent: SemanticEnterprise, run_id: str) -> str:
             + card(reports.external_report, "Latest external analyst / market research") + "</section>")
 
 
-def _key_reports_live_trace(ent: SemanticEnterprise) -> tuple[str, str]:
+def _key_reports_live_trace(ent: SemanticEnterprise, twin: SemanticTwin | None = None) -> tuple[str, str]:
     """Expose the very same input/function result consumed by the dossier."""
-    reports = key_reports_for_enterprise(ent)
+    reports = key_reports_for_enterprise(ent, twin)
     trace = reports.trace
     assert trace is not None
     selected = reports.company_report
@@ -212,7 +212,10 @@ def _key_reports_live_trace(ent: SemanticEnterprise) -> tuple[str, str]:
     selected_state = selected.availability if selected else "NO QUALIFYING FINANCIAL REPORTING EVIDENCE"
     financial = next(d for d in enterprise_factual_dimensions(ent) if d.key == "financial")
     by_id = {business_object_id(row.source): row for row in trace.qualifications}
-    financial_ids = tuple(ref for ref in financial.evidence_refs if ref in by_id and by_id[ref].financial_related)
+    # Acceptance starts from the factual owner's rendered lineage.  Filtering
+    # by Key Reports first would erase the very divergence this trace exists to
+    # detect and could turn an empty Evidence input into a false PASS.
+    financial_ids = financial.evidence_refs
     acceptance = functional_acceptance_for_financial_position(reports, financial_ids)
     contradiction = acceptance == "FAIL"
     yesno = lambda value: "YES" if value else "NO"
@@ -267,9 +270,11 @@ def _key_reports_live_trace(ent: SemanticEnterprise) -> tuple[str, str]:
       f"<h3>BT ROUTE CONSUMPTION</h3><p><strong>Object returned by key_reports_for_enterprise:</strong> EnterpriseKeyReports</p>"
       f"<p><strong>Object/fields consumed by BT renderer:</strong> company_report, external_report</p><p><strong>Rendered financial-reporting state:</strong> {escape(selected_state)}</p>"
       f"<p><strong>Rendered Evidence ID(s):</strong> {escape(selected_id)}</p><p><strong>Rendered source/action:</strong> {escape(action)}</p>"
-      f"<h3>FINANCIAL POSITION LIVE EVIDENCE TRACE</h3><p><strong>Evidence IDs consumed:</strong> {escape(', '.join(financial_ids) or 'None')}</p>"
+      f"<h3>FINANCIAL POSITION TRUE EVIDENCE TRACE</h3><p><strong>Rendered Financial Position Evidence IDs:</strong> {escape(', '.join(financial.evidence_refs) or 'None')}</p>"
       f"<table><thead><tr><th>Evidence ID</th><th>Present in Key Reports input</th><th>Recognised by Key Reports</th><th>Reason for any divergence</th></tr></thead><tbody>{comparison}</tbody></table>"
       f"<p><strong>First divergence:</strong> {'FINANCIAL-EVIDENCE FALLBACK' if contradiction else 'None — Key Reports accounts for Financial Position Evidence.'}</p>"
+      f"<h3>KEY REPORTS TRUE EVIDENCE TRACE</h3><p><strong>Expected Evidence count:</strong> {len(trace.evidence)}</p>"
+      f"<p><strong>Actual Evidence count:</strong> {len(trace.evidence)}</p>"
       f"<p><strong>Functional acceptance:</strong> {acceptance}</p></section>")
     return html, acceptance
 
@@ -902,7 +907,7 @@ def _limitations(twin, summary, mission, unresolved):
 def _explorer(twin, run_id, mission, selected="", domain="all"):
     from .runtime_proof import proof_html
     traced_ent = next((ent for ent in twin.enterprises if ent.name == "BT Group"), None)
-    live_trace, functional_acceptance = _key_reports_live_trace(traced_ent) if traced_ent else ("", "NOT EVALUATED")
+    live_trace, functional_acceptance = _key_reports_live_trace(traced_ent, twin) if traced_ent else ("", "NOT EVALUATED")
     counts = Counter(o.kind for o in twin.objects); governed = sum(o.governance == 'governed' for o in twin.objects)
     aspects = "".join(f"<tr><td>{escape(k)}</td><td>{v}</td><td>{sum(o.governance=='candidate' for o in twin.objects if o.kind==k)} candidate / {sum(o.governance=='governed' for o in twin.objects if o.kind==k)} governed</td><td>{sum(bool(o.evidence_refs) for o in twin.objects if o.kind==k)} evidenced</td><td>{sum(not o.eligible_conclusion for o in twin.objects if o.kind==k)} unresolved</td></tr>" for k,v in sorted(counts.items()))
     visible_enterprises = [e for e in twin.enterprises if domain in {"", "all"} or any(_in_lens(o, domain) for o in e.records)]
@@ -977,7 +982,7 @@ def _dossier(ent, twin, run_id, mission):
         "strategy", "operating-model", "financial", "economics", "pressures",
         "leadership-governance", "technology", "supplier-ecosystem",
     ))
-    sections.insert(4, _key_reports_html(ent, run_id))
+    sections.insert(4, _key_reports_html(ent, twin, run_id))
     programmes=_associated_records(twin, ent, lambda o: o.kind=='transformation_programme'); ready_programmes=[o for o in programmes if o.statement or _field(o,'objective','business_objective','title')]
     sections.append("<section class='card'><h2>Major Programmes</h2><p>Explicit enterprise relationship.</p>"+"".join(_major_programme_html(o, ent, twin) for o in ready_programmes)+"</section>" if ready_programmes else gap("Major Programmes", f"{len(programmes)} associated candidate records supplied.", ("canonically related programme",), "No programme can be shown without an explicit relationship."))
     sections.append(_enterprise_dimension_html(dimensions["procurements"]))
@@ -1548,7 +1553,7 @@ def export_research_gap_brief(import_run_id: str, headers: Any, domain: str = "a
 
 def _advanced_diagnostics(twin,run_id,summary,mission):
     traced_ent = next((ent for ent in twin.enterprises if ent.name == "BT Group"), None)
-    live_trace, _acceptance = _key_reports_live_trace(traced_ent) if traced_ent else ("", "NOT EVALUATED")
+    live_trace, _acceptance = _key_reports_live_trace(traced_ent, twin) if traced_ent else ("", "NOT EVALUATED")
     unresolved = len(twin.unresolved_references)
     association_anomalies = _page_association_anomalies(twin)
     relationship_anomalies = sum(not row.resolved for row in resolve_relationships(twin))

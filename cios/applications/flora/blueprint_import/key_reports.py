@@ -11,7 +11,8 @@ from dataclasses import dataclass
 from datetime import date
 from urllib.parse import urlparse
 
-from .semantic_twin import SemanticEnterprise, SemanticObject, business_object_id
+from .semantic_twin import (SemanticEnterprise, SemanticObject, SemanticTwin,
+                            business_object_id, evidence_for_enterprise)
 from .evidence_semantics import classify_evidence
 
 
@@ -124,9 +125,12 @@ def _project(obj: SemanticObject, provenance: str, *, report_established: bool =
                      report_established and bool(source_url))
 
 
-def key_reports_for_enterprise(ent: SemanticEnterprise) -> EnterpriseKeyReports:
+def key_reports_for_enterprise(ent: SemanticEnterprise, twin: SemanticTwin | None = None) -> EnterpriseKeyReports:
     """Select latest qualifying reports deterministically from owned Evidence."""
-    evidence = tuple(obj for obj in ent.records if obj.kind == "evidence")
+    # SemanticTwin is the canonical import-scoped Evidence owner.  The fallback
+    # retains compatibility for callers constructing a standalone Enterprise.
+    evidence = (evidence_for_enterprise(twin, ent) if twin is not None else
+                tuple(obj for obj in ent.records if obj.kind == "evidence"))
     qualifications = []
     for obj in evidence:
         semantics = classify_evidence(obj)
@@ -187,5 +191,7 @@ def functional_acceptance_for_financial_position(
         business_object_id(row.source) for row in trace.qualifications
         if row.financial_reporting_evidence
     }
-    consumed = recognised.intersection(financial_position_evidence_ids)
-    return "FAIL" if consumed and reports.company_report is None else "PASS"
+    expected = set(financial_position_evidence_ids)
+    if expected and not expected.issubset(recognised):
+        return "FAIL"
+    return "FAIL" if expected and reports.company_report is None else "PASS"

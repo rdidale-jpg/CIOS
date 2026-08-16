@@ -175,6 +175,16 @@ def _refs(obj: SemanticObject, *names: str) -> tuple[str, ...]:
     return tuple(dict.fromkeys(values))
 
 
+def _embedded_evidence_refs(value: Any) -> tuple[str, ...]:
+    """Read governed lineage colocated with one factual dimension value."""
+    if not isinstance(value, dict):
+        return ()
+    supplied = value.get("evidence") or value.get("evidence_refs") or ()
+    if isinstance(supplied, str):
+        supplied = (supplied,)
+    return tuple(dict.fromkeys(str(item) for item in supplied if item))
+
+
 def factual_projection_for_object(obj: SemanticObject, family: str | None = None) -> CanonicalFactualProjection:
     """Project one semantic object into the canonical factual contract."""
     attrs = _attrs(obj); view = executive_record_view_model(obj)
@@ -279,18 +289,22 @@ def enterprise_factual_dimensions(ent: SemanticEnterprise) -> tuple[EnterpriseFa
     for key, label, fields, supported in ENTERPRISE_FACTUAL_DIMENSIONS:
         selected: list[str] = []
         source_fields: list[str] = []
+        dimension_evidence: list[str] = []
         if key == "industry":
             selected.extend(d.title() for d in identity.domains if d)
             if selected: source_fields.append("semantic domains")
         else:
             for field in fields:
-                values = executive_value_lines(attrs.get(field))
+                value = attrs.get(field)
+                values = executive_value_lines(value)
                 if values:
                     source_fields.append(field)
                     selected.extend(values)
+                    dimension_evidence.extend(_embedded_evidence_refs(value))
                     break  # aliases represent one canonical dimension, not additive facts
         result.append(EnterpriseFactualDimension(
-            key, label, tuple(dict.fromkeys(selected)), tuple(source_fields), evidence,
+            key, label, tuple(dict.fromkeys(selected)), tuple(source_fields),
+            tuple(dict.fromkeys(dimension_evidence)) or evidence,
             unknowns, contradictions, supported,
         ))
     return tuple(result)

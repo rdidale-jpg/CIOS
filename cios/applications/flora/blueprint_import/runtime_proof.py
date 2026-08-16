@@ -39,9 +39,18 @@ def _repository_commit() -> str:
         return "unavailable"
 
 
-def runtime_proof(*, functional_acceptance: str = "NOT EVALUATED") -> RuntimeProof:
+def declared_functional_acceptance() -> str:
+    """Return the governed current-change acceptance derivative used by surfaces."""
+    validation = current_pilot_change().get("automated_validation") or {}
+    required = ("end_to_end_test_status", "rendered_route_test_status",
+                "diagnostics_reconciliation_status")
+    return "PASS" if all(validation.get(key) == "PASS" for key in required) else "FAIL"
+
+
+def runtime_proof(*, functional_acceptance: str | None = None) -> RuntimeProof:
     """Inspect loaded code and authoritative platform metadata without mutation."""
     repository = _repository_commit()
+    functional_acceptance = functional_acceptance or declared_functional_acceptance()
     # A checkout SHA is repository evidence only. Render's documented commit
     # variable is the authoritative deployment identity when it is available.
     deployed = os.getenv("RENDER_GIT_COMMIT", "").strip() or "unavailable"
@@ -76,7 +85,7 @@ def runtime_proof(*, functional_acceptance: str = "NOT EVALUATED") -> RuntimePro
                         functional_acceptance, verdict, answer, reason)
 
 
-def proof_html(*, detailed: bool = False, functional_acceptance: str = "NOT EVALUATED") -> str:
+def proof_html(*, detailed: bool = False, functional_acceptance: str | None = None) -> str:
     """Render deployment proof separately from a caller's live semantic check."""
     proof = runtime_proof(functional_acceptance=functional_acceptance)
     metadata = deployment_metadata()

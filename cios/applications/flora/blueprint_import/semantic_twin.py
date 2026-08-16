@@ -237,6 +237,30 @@ def business_object_id(obj: SemanticObject) -> str:
     return obj.original_id or obj.record_id
 
 
+def evidence_for_enterprise(twin: SemanticTwin, ent: SemanticEnterprise) -> tuple[SemanticObject, ...]:
+    """Resolve an Enterprise's Evidence from the import-scoped canonical owner.
+
+    ``ent.records`` is a convenient assembled projection, not the Evidence
+    owner.  Evidence remains owned by ``twin.objects`` and is resolved using
+    the same governed subject/affected-organisation association and factual
+    reference identities used during semantic assembly.  This also makes old
+    persisted Enterprise projections usable without copying Evidence into a
+    Key-Reports-specific store.
+    """
+    names = {ent.name.casefold(), *(alias.casefold() for alias in ent.aliases)}
+    referenced = {ref.casefold() for record in ent.records for ref in record.evidence_refs}
+    selected: dict[str, SemanticObject] = {}
+    for obj in twin.objects:
+        if obj.kind != "evidence":
+            continue
+        identity = business_object_id(obj)
+        associated = (obj.subject.casefold() in names or
+                      bool(names.intersection(name.casefold() for name in obj.affected_organisations)))
+        if associated or identity.casefold() in referenced or obj in ent.records:
+            selected[identity] = obj
+    return tuple(selected[key] for key in sorted(selected))
+
+
 def relationship_endpoints(obj: SemanticObject) -> tuple[str, str, str]:
     """Read the existing governed relationship vocabulary."""
     if obj.kind not in {"relationship", "supplier_relationship"}:
