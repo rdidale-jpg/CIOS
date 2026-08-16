@@ -90,6 +90,12 @@ def executive_enterprise_intelligence(ent: SemanticEnterprise, twin: SemanticTwi
         title = _field(programme, "title", "objective", "business_objective") or programme.statement
         if title:
             explanation = _field(programme, "objective", "strategic_objective", "summary") or programme.statement
+            # A title and explanation are two presentation fields on one
+            # canonical Programme, not independent executive signals.  Older
+            # candidates can carry the same governed statement in both fields;
+            # render that concept once while retaining its canonical lineage.
+            if explanation == title:
+                explanation = ""
             signals.append(ExecutiveSignal(title, explanation, "Programme", canonical_id, tuple(programme.evidence_refs)))
     executive_labels = {"transformation": "Business transformation", "technology": "Technology modernisation",
                         "financial": "Financial pressure", "strategy": "Strategic change",
