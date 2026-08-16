@@ -76,3 +76,42 @@ Publisher supports provenance classification but is not used as the complete
 ownership rule. Competitive, regulatory, parent/subsidiary and market Evidence
 continues through explicit applicability paths and remains visible to its
 legitimate consumers.
+
+## Financial Evidence fallback across Enterprises
+
+Key Reports continues to be a read-only projection over the canonical
+import-scoped Evidence owner and the existing shared Evidence classifier.  It
+now makes the previously implicit availability boundary explicit with four
+presentation states: a subject-matching company report with a supplied governed
+document (`STATE 1`), subject-matching financial-reporting Evidence without a
+report (`STATE 2`), a subject-matching governed company-report reference without
+its document (`STATE 3`), and genuine absence (`STATE 4`).  This is not a new
+Evidence or report taxonomy; it is an availability/selection result over the
+existing report-family semantics.
+
+Selection preserves the existing governed publication-date, reporting-period,
+extract-richness and canonical-identity ordering.  The order is supplied report,
+report reference, financial-reporting Evidence, then empty state.  Every company
+and fallback candidate must pass the same primary Evidence-subject match.
+Applicability alone is insufficient, so competitor, regulatory and parent
+Evidence remains usable elsewhere without filling the dossier Enterprise's
+financial-reporting slot.
+
+The unchanged TEL-001 pre-change inventory produced the following truthful
+outcomes: BT Group had three subject-matching supplied report candidates and
+selected `EV-BT-Q1FY27-W4` (`STATE 1`); CityFibre had no supplied report or
+report reference and two direct-subject financial-reporting Evidence candidates,
+selecting the more recent `EV-CF-2025` (`STATE 2`); Openreach had neither a
+standalone report nor subject-matching financial-reporting fallback (`STATE 4`);
+TalkTalk had no company report/reference and one subject-matching financial
+results Evidence object, `EV-TALKTALK-FT-RESULTS25-W4` (`STATE 2`); Virgin Media
+O2 had a subject-matching supplied report, `EV-VMO2-Q2FY26-W4` (`STATE 1`); and
+VodafoneThree's governed ownership and investment statements did not constitute
+financial reporting (`STATE 4`).  Financial Position references remain visible
+in reconciliation even where they are legitimately outside that subset.
+
+`EV-BT-Q1FY27` and `EV-BT-Q1FY27-W4` are separate imported Evidence rows for the
+same disclosure and URL.  The latter supplies a reporting period and richer
+extract and therefore wins the existing deterministic tie-break.  This harmless
+source/extract variant does not affect the four-state result and is left intact;
+general Evidence deduplication remains outside this change.

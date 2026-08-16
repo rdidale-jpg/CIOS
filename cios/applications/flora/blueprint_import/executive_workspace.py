@@ -175,17 +175,18 @@ def _executive_enterprise_intelligence_html(ent: SemanticEnterprise, twin: Seman
 
 def _key_reports_html(ent: SemanticEnterprise, twin: SemanticTwin, run_id: str) -> str:
     reports = key_reports_for_enterprise(ent, twin)
-    def card(report: KeyReport | None, label: str) -> str:
+    def card(report: KeyReport | None, label: str, state: str = "") -> str:
         if report is None:
-            return (f"<article><h3>{label}</h3><p><strong>NO QUALIFYING REPORT SUPPLIED</strong></p>"
+            empty = ("NO QUALIFYING FINANCIAL REPORTING EVIDENCE" if state == "STATE 4"
+                     else "NO QUALIFYING REPORT SUPPLIED")
+            return (f"<article><h3>{label}</h3><p><strong>{empty}</strong></p>"
                     + ("<p>No qualifying external analyst or market-research report is supplied in this Twin.</p>"
                        if "external" in label.casefold()
                        else "<p>No qualifying company financial report is supplied.</p>") + "</article>")
         findings = ("<ul>" + "".join(f"<li>{escape(item)}</li>" for item in report.findings) + "</ul>"
                     if report.findings else "<p>No governed extract or summary is supplied.</p>")
-        source = (f"<a href='{escape(report.source_url)}' rel='noopener'>"
-                  f"{'View source report' if report.source_document_supplied else 'View governed source'}</a>"
-                  if report.source_url else "<span>Direct source link not supplied.</span>")
+        source = (f"<a href='{escape(report.source_url)}' rel='noopener'>View source report</a>"
+                  if report.source_document_supplied else "")
         evidence = (f"<a href='/blueprint-import/{escape(run_id)}/explore?collection=evidence-sources#{escape(report.source.record_id)}'>Open evidence</a>")
         document_state = ("" if report.source_document_supplied else
                           "<p>Source report/document not supplied in this Twin.</p>")
@@ -194,11 +195,12 @@ def _key_reports_html(ent: SemanticEnterprise, twin: SemanticTwin, run_id: str) 
                 f"<p class='pill'>{escape(report.provenance)}</p><h4>{escape(report.title)}</h4>"
                 f"<p><strong>Reporting period / publication date:</strong> {escape(period)}</p>"
                 f"<p><strong>Source / publisher:</strong> {escape(report.publisher)}</p>"
+                f"<p><strong>Financial reporting state:</strong> {escape(state)}</p>"
                 f"<p><strong>Availability:</strong> {escape(report.availability)}</p>"
-                f"<h5>Key findings</h5>{findings}<p>{source} · {evidence}</p>{document_state}</article>")
+                f"<h5>Key findings</h5>{findings}<p>{source + (' · ' if source else '')}{evidence}</p>{document_state}</article>")
     return ("<section class='card key-reports' id='key-reports'><h2>Key reports</h2>"
-            "<p>Latest qualifying reports selected from governed Enterprise Evidence.</p>"
-            + card(reports.company_report, "Latest company financial reporting")
+            "<p>Best qualifying financial-reporting result selected from governed Enterprise Evidence.</p>"
+            + card(reports.financial_selection, "Company financial reporting", reports.financial_state)
             + card(reports.external_report, "Latest external analyst / market research") + "</section>")
 
 
@@ -207,9 +209,9 @@ def _key_reports_live_trace(ent: SemanticEnterprise, twin: SemanticTwin | None =
     reports = key_reports_for_enterprise(ent, twin)
     trace = reports.trace
     assert trace is not None
-    selected = reports.company_report
+    selected = reports.financial_selection
     selected_id = business_object_id(selected.source) if selected else "None"
-    selected_state = selected.availability if selected else "NO QUALIFYING FINANCIAL REPORTING EVIDENCE"
+    selected_state = reports.financial_state
     financial = next(d for d in enterprise_factual_dimensions(ent) if d.key == "financial")
     by_id = {business_object_id(row.source): row for row in trace.qualifications}
     # Acceptance starts from the factual owner's rendered lineage.  Filtering
@@ -266,7 +268,7 @@ def _key_reports_live_trace(ent: SemanticEnterprise, twin: SemanticTwin | None =
       f"<p><strong>Evidence IDs supplied:</strong> {escape(', '.join(business_object_id(o) for o in trace.evidence) or 'None')}</p>{''.join(objects)}"
       f"<h3>KEY REPORTS FUNCTION RESULT</h3><p><strong>Function:</strong> cios.applications.flora.blueprint_import.key_reports.key_reports_for_enterprise</p>"
       f"<p><strong>Enterprise:</strong> {escape(trace.enterprise_identity)}</p><p><strong>Financial candidates found:</strong> {trace.financial_candidates}</p>"
-      f"<p><strong>Financial-reporting Evidence found:</strong> {trace.financial_reporting_evidence}</p><p><strong>Qualifying supplied reports found:</strong> {trace.supplied_reports}</p>"
+      f"<p><strong>Financial-reporting Evidence found:</strong> {trace.fallback_candidates}</p><p><strong>Report references found:</strong> {trace.report_references}</p><p><strong>Qualifying supplied reports found:</strong> {trace.supplied_reports}</p>"
       f"<p><strong>Selected financial state:</strong> {escape(selected_state)}</p><p><strong>Selected Evidence ID(s):</strong> {escape(selected_id)}</p>"
       f"<p><strong>Selected report identity:</strong> {escape(selected.title if selected else 'None')}</p><p><strong>Selected source URL:</strong> {escape(selected.source_url if selected else 'None')}</p>"
       f"<p><strong>Selected extract:</strong> {escape('; '.join(selected.findings) if selected else 'None')}</p>"
@@ -281,6 +283,55 @@ def _key_reports_live_trace(ent: SemanticEnterprise, twin: SemanticTwin | None =
       f"<p><strong>Actual Evidence count:</strong> {len(trace.evidence)}</p>"
       f"<p><strong>Functional acceptance:</strong> {acceptance}</p></section>")
     return html, acceptance
+
+
+def _six_enterprise_financial_reporting_diagnostic(twin: SemanticTwin) -> tuple[str, str]:
+    """Render the canonical four-state result and reconciliation for TEL-001."""
+    names = {"BT Group", "CityFibre", "Openreach", "TalkTalk", "Virgin Media O2", "VodafoneThree"}
+    state_rows, reconciliation_rows, statuses = [], [], []
+    for ent in (item for item in twin.enterprises if item.name in names):
+        reports = key_reports_for_enterprise(ent, twin)
+        trace = reports.trace
+        assert trace is not None
+        selected = reports.financial_selection
+        financial = next(d for d in enterprise_factual_dimensions(ent) if d.key == "financial")
+        financial_ids = set(financial.evidence_refs)
+        relevant = [row for row in trace.qualifications if business_object_id(row.source) in financial_ids]
+        reporting = [row for row in relevant if row.financial_reporting_evidence]
+        subject = [row for row in reporting if row.subject_match]
+        report_qualified = [row for row in subject if row.supplied_report]
+        fallback = [row for row in subject if not row.company_candidate]
+        status = functional_acceptance_for_financial_position(reports, tuple(financial.evidence_refs))
+        statuses.append(status)
+        yesno = lambda value: "YES" if value else "NO"
+        selected_q = next((row for row in trace.qualifications if selected and row.source is selected.source), None)
+        state_rows.append(
+            f"<tr><td>{escape(ent.name)}</td><td>{trace.supplied_reports}</td><td>{trace.report_references}</td>"
+            f"<td>{trace.fallback_candidates}</td><td>{escape(reports.financial_state)}</td>"
+            f"<td>{escape(business_object_id(selected.source) if selected else 'None')}</td>"
+            f"<td>{escape(evidence_subject(selected.source) if selected else 'None')}</td>"
+            f"<td>{yesno(bool(selected_q and selected_q.subject_match))}</td>"
+            f"<td>{yesno(bool(selected and selected.source_document_supplied))}</td>"
+            f"<td>{yesno(bool(reports.report_reference))}</td><td>{yesno(bool(selected))}</td>"
+            f"<td>{yesno(bool(selected and selected.source_url))}</td>"
+            f"<td>{escape(selected_q.rejection_reason if selected_q else 'No qualifying financial-reporting Evidence.')}</td></tr>")
+        ids = lambda rows: ", ".join(business_object_id(row.source) for row in rows) or "None"
+        reconciliation_rows.append(
+            f"<tr><td>{escape(ent.name)}</td><td>{escape(', '.join(financial.evidence_refs) or 'None')}</td>"
+            f"<td>{escape(ids(reporting))}</td><td>{escape(ids(subject))}</td>"
+            f"<td>{escape(ids(report_qualified))}</td><td>{escape(ids(fallback))}</td>"
+            f"<td>{escape(reports.financial_state)}</td><td>{status}</td></tr>")
+    html = ("<section class='card' id='financial-reporting-state'><h2>FINANCIAL REPORTING STATE</h2>"
+            "<table><thead><tr><th>Enterprise</th><th>Qualifying company reports</th><th>Report references</th>"
+            "<th>Financial-reporting Evidence</th><th>Selected state</th><th>Selected Evidence</th>"
+            "<th>Evidence subject</th><th>Subject match</th><th>Report supplied</th><th>Report reference</th>"
+            "<th>Open evidence</th><th>Source URL</th><th>Reason</th></tr></thead><tbody>" + "".join(state_rows) +
+            "</tbody></table></section><section class='card' id='financial-position-key-reports-reconciliation'>"
+            "<h2>FINANCIAL POSITION → KEY REPORTS RECONCILIATION</h2><table><thead><tr><th>Enterprise</th>"
+            "<th>Financial Position Evidence</th><th>Financial-reporting subset</th><th>Subject-matching subset</th>"
+            "<th>Report-qualified subset</th><th>Fallback-qualified subset</th><th>Selected Key Reports state</th>"
+            "<th>Status</th></tr></thead><tbody>" + "".join(reconciliation_rows) + "</tbody></table></section>")
+    return html, "PASS" if statuses and all(item == "PASS" for item in statuses) else "FAIL"
 
 
 def _major_programme_html(programme: SemanticObject, ent: SemanticEnterprise, twin: SemanticTwin) -> str:
@@ -911,7 +962,8 @@ def _limitations(twin, summary, mission, unresolved):
 def _explorer(twin, run_id, mission, selected="", domain="all"):
     from .runtime_proof import proof_html
     traced_ent = next((ent for ent in twin.enterprises if ent.name == "BT Group"), None)
-    live_trace, functional_acceptance = _key_reports_live_trace(traced_ent, twin) if traced_ent else ("", "NOT EVALUATED")
+    live_trace, _bt_acceptance = _key_reports_live_trace(traced_ent, twin) if traced_ent else ("", "NOT EVALUATED")
+    financial_diagnostic, functional_acceptance = _six_enterprise_financial_reporting_diagnostic(twin)
     counts = Counter(o.kind for o in twin.objects); governed = sum(o.governance == 'governed' for o in twin.objects)
     aspects = "".join(f"<tr><td>{escape(k)}</td><td>{v}</td><td>{sum(o.governance=='candidate' for o in twin.objects if o.kind==k)} candidate / {sum(o.governance=='governed' for o in twin.objects if o.kind==k)} governed</td><td>{sum(bool(o.evidence_refs) for o in twin.objects if o.kind==k)} evidenced</td><td>{sum(not o.eligible_conclusion for o in twin.objects if o.kind==k)} unresolved</td></tr>" for k,v in sorted(counts.items()))
     visible_enterprises = [e for e in twin.enterprises if domain in {"", "all"} or any(_in_lens(o, domain) for o in e.records)]
@@ -940,7 +992,7 @@ def _explorer(twin, run_id, mission, selected="", domain="all"):
     total = len(active.objects) if active else 0
     anomaly_count = len(_page_association_anomalies(twin))
     reconciliation = _population_and_association_reconciliation(twin, run_id)
-    return f"{proof_html(detailed=True, functional_acceptance=functional_acceptance)}{live_trace}<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a><strong>Advanced Inspection</strong></nav><header class='hero'><h1>Advanced Inspection</h1><p>{escape(active.description) if active else 'Reconcile business objects, evidence, relationships and technical traces.'}</p></header>{_evidence_association_integrity(twin)}<section class='card diagnostic-summary'><h2>Diagnostic Summary</h2><div class='metric-grid'><article><strong>Package integrity</strong><p>Validated import available</p></article><article><strong>Object-family reconciliation</strong><p>{len(twin.objects)} records inventoried</p></article><article><strong>Association anomalies</strong><p>{anomaly_count}</p></article><article><strong>Stale-state status</strong><p>See runtime comparison</p></article></div><form class='diagnostic-filters'><label>Object family <select><option>All families</option></select></label><label>Status <select><option>All statuses</option></select></label><label>Anomaly <select><option>All anomalies</option><option>Missing subject</option><option>Count mismatch</option><option>Unsupported record</option><option>Residual content</option></select></label></form></section>{reconciliation}<section class='card'><h2>Business collections</h2><div class='collection-links'>{links}</div><details><summary>Technical and supporting collections</summary><div class='collection-links'>{supporting_links or '<p>No supporting collections.</p>'}</div></details></section><section class='card'><h2>{escape(title)}{f' — {total} total' if active else ''}</h2><p>{f'Showing {total} distinct identities' if active and active.key == 'enterprises' else f'Showing {total} of {total} total records' if active else ''}</p>{content}</section><details class='card'><summary>Technical reconciliation traces</summary><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></details>"
+    return f"{proof_html(detailed=True, functional_acceptance=functional_acceptance)}{financial_diagnostic}{live_trace}<nav class='executive-path'><a href='/blueprint-import/{escape(run_id)}'>Back to Twin Map</a><strong>Advanced Inspection</strong></nav><header class='hero'><h1>Advanced Inspection</h1><p>{escape(active.description) if active else 'Reconcile business objects, evidence, relationships and technical traces.'}</p></header>{_evidence_association_integrity(twin)}<section class='card diagnostic-summary'><h2>Diagnostic Summary</h2><div class='metric-grid'><article><strong>Package integrity</strong><p>Validated import available</p></article><article><strong>Object-family reconciliation</strong><p>{len(twin.objects)} records inventoried</p></article><article><strong>Association anomalies</strong><p>{anomaly_count}</p></article><article><strong>Stale-state status</strong><p>See runtime comparison</p></article></div><form class='diagnostic-filters'><label>Object family <select><option>All families</option></select></label><label>Status <select><option>All statuses</option></select></label><label>Anomaly <select><option>All anomalies</option><option>Missing subject</option><option>Count mismatch</option><option>Unsupported record</option><option>Residual content</option></select></label></form></section>{reconciliation}<section class='card'><h2>Business collections</h2><div class='collection-links'>{links}</div><details><summary>Technical and supporting collections</summary><div class='collection-links'>{supporting_links or '<p>No supporting collections.</p>'}</div></details></section><section class='card'><h2>{escape(title)}{f' — {total} total' if active else ''}</h2><p>{f'Showing {total} distinct identities' if active and active.key == 'enterprises' else f'Showing {total} of {total} total records' if active else ''}</p>{content}</section><details class='card'><summary>Technical reconciliation traces</summary><table><thead><tr><th>Aspect</th><th>Objects</th><th>Governance</th><th>Evidence coverage</th><th>Unresolved</th></tr></thead><tbody>{aspects}</tbody></table></details>"
 
 
 def _dossier(ent, twin, run_id, mission):
@@ -1557,12 +1609,13 @@ def export_research_gap_brief(import_run_id: str, headers: Any, domain: str = "a
 
 def _advanced_diagnostics(twin,run_id,summary,mission):
     traced_ent = next((ent for ent in twin.enterprises if ent.name == "BT Group"), None)
-    live_trace, _acceptance = _key_reports_live_trace(traced_ent, twin) if traced_ent else ("", "NOT EVALUATED")
+    live_trace, _bt_acceptance = _key_reports_live_trace(traced_ent, twin) if traced_ent else ("", "NOT EVALUATED")
+    financial_diagnostic, _acceptance = _six_enterprise_financial_reporting_diagnostic(twin)
     unresolved = len(twin.unresolved_references)
     association_anomalies = _page_association_anomalies(twin)
     relationship_anomalies = sum(not row.resolved for row in resolve_relationships(twin))
     summary_html = f"<section class='card diagnostic-summary'><h2>Executive Diagnostic Summary</h2><div class='metric-grid'><article><h3>Object-count reconciliation</h3><p>{len(twin.objects)} records reconciled</p></article><article><h3>Factual projection reconciliation</h3><p>Shared read boundary active</p></article><article><h3>Subject-resolution failures</h3><p>{unresolved}</p></article><article><h3>Relationship resolution anomalies</h3><p>{relationship_anomalies}</p></article><article><h3>Enterprise presentation association anomalies</h3><p>{len(association_anomalies)}</p></article><article><h3>Research Gap contradictions</h3><p>{len(twin.of_kind('contradiction'))}</p></article><article><h3>Page/diagnostic count mismatches</h3><p>0</p></article><article><h3>Stale-state status</h3><p>See runtime comparison</p></article></div><p>Relationship resolution and Enterprise presentation anomalies are separate measures. Highest-value failures are shown first.</p>{('<p><strong>Offending object IDs:</strong> ' + escape(', '.join(association_anomalies)) + '</p>') if association_anomalies else ''}</section>"
-    return _primary_nav(run_id,"inspection")+live_trace+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+summary_html+_evidence_association_integrity(twin)+_population_and_association_reconciliation(twin, run_id)+_observation_pipeline_diagnostics(twin,run_id)+_pilot_runtime_comparison(twin)+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
+    return _primary_nav(run_id,"inspection")+financial_diagnostic+live_trace+f"<p><a href='/blueprint-import/{escape(run_id)}/health'>Back to Research Gaps</a></p><header class='hero'><h1>Advanced Inspection</h1></header>"+summary_html+_evidence_association_integrity(twin)+_population_and_association_reconciliation(twin, run_id)+_observation_pipeline_diagnostics(twin,run_id)+_pilot_runtime_comparison(twin)+_validation_report(twin)+_limitations(twin,summary,None,bool(twin.unresolved_references))+_readiness_inspection(twin,run_id,mission)+_researcher_feedback(twin)
 
 
 def _evidence_association_integrity(twin: SemanticTwin) -> str:

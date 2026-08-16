@@ -36,6 +36,10 @@ class EnterpriseKeyReports:
     company_report: KeyReport | None
     external_report: KeyReport | None
     trace: KeyReportsTrace | None = None
+    financial_state: str = "STATE 4"
+    financial_selection: KeyReport | None = None
+    report_reference: KeyReport | None = None
+    financial_evidence: KeyReport | None = None
 
 
 @dataclass(frozen=True)
@@ -67,6 +71,8 @@ class KeyReportsTrace:
     financial_reporting_evidence: int
     supplied_reports: int
     external_candidates: int
+    report_references: int = 0
+    fallback_candidates: int = 0
 
 
 def _value(obj: SemanticObject, name: str) -> str:
@@ -130,6 +136,16 @@ def _project(obj: SemanticObject, provenance: str, *, report_established: bool =
                      report_established and bool(source_url))
 
 
+def _latest(rows: list[SemanticObject]) -> SemanticObject | None:
+    """Apply the existing governed chronology/richness ordering."""
+    if not rows:
+        return None
+    return max(rows, key=lambda obj: (
+        _date_key(_value(obj, "publication_date") or obj.freshness),
+        bool(_value(obj, "relevant_period") or _value(obj, "reporting_period")),
+        len(_findings(obj)), business_object_id(obj)))
+
+
 def key_reports_for_enterprise(ent: SemanticEnterprise, twin: SemanticTwin | None = None) -> EnterpriseKeyReports:
     """Select latest qualifying reports deterministically from owned Evidence."""
     # SemanticTwin is the canonical import-scoped Evidence owner.  The fallback
@@ -146,10 +162,9 @@ def key_reports_for_enterprise(ent: SemanticEnterprise, twin: SemanticTwin | Non
         # The canonical Evidence object can establish a report document only
         # through an explicitly governed source location/document field.
         document = url or bool(_value(obj, "source_document") or _value(obj, "document_reference"))
-        supplied = semantics.is_company_financial_reporting and document
         subject_match = evidence_subject_matches_enterprise(obj, ent)
-        eligible = semantics.is_financial_reporting_evidence and (
-            not semantics.is_company_financial_reporting or subject_match)
+        supplied = semantics.is_company_financial_reporting and document and subject_match
+        eligible = semantics.is_financial_reporting_evidence and subject_match
         if semantics.is_company_financial_reporting and not subject_match:
             stage, reason = ("ENTERPRISE SUBJECT", "Evidence is not company financial reporting for the dossier Enterprise.")
         elif eligible:
@@ -170,14 +185,30 @@ def key_reports_for_enterprise(ent: SemanticEnterprise, twin: SemanticTwin | Non
             return None
         # Richer extracts win duplicate same-date report references, then the
         # governed immutable identity supplies a stable final tie-break.
-        selected = max(rows, key=lambda obj: (
-            _date_key(_value(obj, "publication_date") or obj.freshness),
-            bool(_value(obj, "relevant_period")), len(_findings(obj)), business_object_id(obj)))
+        selected = _latest(rows)
+        assert selected is not None
         return _project(selected, "Company disclosure" if kind == "company" else "External analyst view")
-    company = latest("company")
-    # Financial content remains in the applicability/qualification trace, but
-    # it cannot fill the company-report slot unless the governed metadata
-    # establishes an actual company report for this Enterprise.
+    company_rows = [row.source for row in qualifications if row.supplied_report]
+    reference_rows = [row.source for row in qualifications if row.company_report_eligible
+                      and row.report_identity and not row.source_document]
+    fallback_rows = [row.source for row in qualifications if row.financial_reporting_evidence
+                     and not row.company_candidate and row.subject_match]
+    company_source = _latest(company_rows)
+    reference_source = _latest(reference_rows)
+    fallback_source = _latest(fallback_rows)
+    company = _project(company_source, "Company disclosure") if company_source else None
+    reference = (_project(reference_source, "Governed report reference")
+                 if reference_source else None)
+    fallback = (_project(fallback_source, "Governed financial-reporting Evidence",
+                         report_established=False) if fallback_source else None)
+    if company:
+        financial_state, financial_selection = "STATE 1", company
+    elif reference:
+        financial_state, financial_selection = "STATE 3", reference
+    elif fallback:
+        financial_state, financial_selection = "STATE 2", fallback
+    else:
+        financial_state, financial_selection = "STATE 4", None
     external = latest("external")
     trace = KeyReportsTrace(
         ent.identity_key, evidence, tuple(qualifications),
@@ -185,8 +216,12 @@ def key_reports_for_enterprise(ent: SemanticEnterprise, twin: SemanticTwin | Non
         sum(row.financial_reporting_evidence for row in qualifications),
         sum(row.supplied_report for row in qualifications),
         sum(classify_evidence(obj).is_external_research for obj in evidence),
+        len(reference_rows), len(fallback_rows),
     )
-    return EnterpriseKeyReports(company, external, trace)
+    return EnterpriseKeyReports(company_report=company, external_report=external, trace=trace,
+                                financial_state=financial_state,
+                                financial_selection=financial_selection,
+                                report_reference=reference, financial_evidence=fallback)
 
 
 def functional_acceptance_for_financial_position(
@@ -196,11 +231,11 @@ def functional_acceptance_for_financial_position(
     trace = reports.trace
     if trace is None:
         return "FAIL"
-    recognised = {
-        business_object_id(row.source) for row in trace.qualifications
-        if row.financial_reporting_evidence
-    }
-    expected = set(financial_position_evidence_ids)
-    if expected and not expected.issubset(recognised):
+    if financial_position_evidence_ids and not trace.evidence:
         return "FAIL"
-    return "FAIL" if expected and reports.company_report is None else "PASS"
+    expected_state = ("STATE 1" if any(row.supplied_report for row in trace.qualifications)
+                      else "STATE 3" if trace.report_references
+                      else "STATE 2" if trace.fallback_candidates else "STATE 4")
+    selection_required = expected_state != "STATE 4"
+    return "PASS" if (reports.financial_state == expected_state and
+                      bool(reports.financial_selection) == selection_required) else "FAIL"
