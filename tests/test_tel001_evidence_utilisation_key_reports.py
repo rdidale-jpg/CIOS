@@ -46,7 +46,7 @@ def test_bt_key_report_is_latest_governed_company_evidence(monkeypatch, tmp_path
     assert reports.external_report is None
 
     html = _dossier(bt, twin, package.import_run_id, None)
-    assert "Key reports" in html and "Latest company financial reporting" in html
+    assert "Key reports" in html and "Company financial reporting" in html
     assert "Company disclosure" in html and "EV-BT-Q1FY27-W4" in html
     assert "REPORT AVAILABLE — DIRECT SOURCE LINK AVAILABLE" in html
     assert "Latest external analyst / market research" in html
@@ -114,6 +114,9 @@ def test_financial_evidence_remains_visible_without_becoming_a_report():
         SemanticEnterprise("ENT-X", "x", "Example", (), (evidence,))
     )
     assert reports.company_report is None
+    assert reports.financial_state == "STATE 2"
+    assert reports.financial_selection is not None
+    assert reports.financial_selection.source.original_id == "EV-FINANCIAL"
     assert reports.trace is not None
     assert reports.trace.financial_reporting_evidence == 1
 
@@ -219,7 +222,9 @@ def test_classification_is_identity_agnostic_and_distinct_programmes_remain_dist
         attributes={"title": "Example plc annual results", "publisher": "Example plc",
                     "evidence_quality": "Primary company filing", "publication_date": "2027-01-01"})
     assert classify_evidence(evidence).is_company_financial_reporting
-    assert key_reports_for_enterprise(SemanticEnterprise("ENT-X", "x", "Example", (), (evidence,))).company_report
+    reports = key_reports_for_enterprise(SemanticEnterprise("ENT-X", "x", "Example", (), (evidence,)))
+    assert reports.financial_state == "STATE 3"
+    assert reports.report_reference
 
     first = SemanticObject("one", "transformation_programme", "Same label", "Example", (), "", "", "candidate", "", {}, False, original_id="PROG-1")
     second = replace(first, record_id="two", original_id="PROG-2")
@@ -252,6 +257,11 @@ def test_six_enterprise_rendered_semantic_regression(monkeypatch, tmp_path):
         assert len(programme_ids) == len(set(programme_ids))
         for programme_id in programme_ids:
             assert html.count(f"data-business-object-id='{programme_id}'") == 1
+    expected_states = {"BT Group": "STATE 1", "CityFibre": "STATE 2",
+                       "Openreach": "STATE 4", "TalkTalk": "STATE 2",
+                       "Virgin Media O2": "STATE 1", "VodafoneThree": "STATE 4"}
+    assert {ent.name: key_reports_for_enterprise(ent, twin).financial_state
+            for ent in enterprises} == expected_states
     counts = Counter(row["candidate_object_class"] for row in summary["candidates"] if row["validation_status"] == "accepted")
     assert (counts["relationship"], counts["transformation_programme"], counts["opportunity_hypothesis"]) == (308, 13, 17)
 
@@ -269,6 +279,39 @@ def test_live_trace_reuses_dossier_function_result_and_reconciles_financial_posi
     assert "Present in Key Reports input</th><th>Recognised by Key Reports" in html
     assert "Selected Evidence ID(s):</strong> EV-BT-Q1FY27-W4" in html
     assert acceptance == "PASS"
+
+
+def test_four_financial_states_and_competitor_exclusion():
+    def evidence(identifier, subject, attributes, statement=""):
+        return SemanticObject(identifier.casefold(), "evidence", statement, subject, (),
+                              attributes.get("publication_date", "2026-01-01"), "High", "candidate",
+                              "evidence.json", {}, False, original_id=identifier, attributes=attributes)
+    supplied = evidence("EV-REPORT", "Example", {"title": "Example annual report",
+        "publisher": "Example primary company filing", "url": "https://example.test/report.pdf"})
+    fallback = evidence("EV-FALLBACK", "Example", {"title": "Performance update",
+        "supported_claim": "Revenue increased in the governed period."})
+    report_wins = key_reports_for_enterprise(SemanticEnterprise("ENT-X", "x", "Example", (),
+                                                                (fallback, supplied)))
+    assert report_wins.financial_state == "STATE 1"
+    assert report_wins.financial_selection.source is supplied
+
+    fallback_only = key_reports_for_enterprise(SemanticEnterprise("ENT-X", "x", "Example", (),
+                                                                   (fallback,)))
+    assert fallback_only.financial_state == "STATE 2"
+    assert fallback_only.company_report is None
+
+    reference = evidence("EV-REFERENCE", "Example", {"title": "Example annual report",
+        "publisher": "Example primary company filing"})
+    reference_only = key_reports_for_enterprise(SemanticEnterprise("ENT-X", "x", "Example", (),
+                                                                    (reference,)))
+    assert reference_only.financial_state == "STATE 3"
+    assert reference_only.report_reference is not None
+    assert reference_only.company_report is None
+
+    competitor = replace(fallback, record_id="competitor", original_id="EV-COMPETITOR", subject="Competitor")
+    empty = key_reports_for_enterprise(SemanticEnterprise("ENT-X", "x", "Example", (), (competitor,)))
+    assert empty.financial_state == "STATE 4"
+    assert empty.financial_selection is None
 
 
 def test_functional_acceptance_cannot_false_pass_the_demonstrated_contradiction(monkeypatch, tmp_path):
