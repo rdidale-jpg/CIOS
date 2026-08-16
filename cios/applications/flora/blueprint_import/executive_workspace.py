@@ -197,6 +197,28 @@ def _key_reports_html(ent: SemanticEnterprise, run_id: str) -> str:
             + card(reports.external_report, "Latest external analyst / market research") + "</section>")
 
 
+def _major_programme_html(programme: SemanticObject, ent: SemanticEnterprise, twin: SemanticTwin) -> str:
+    """Render one canonical Programme without repeating an identical description.
+
+    Programme identity and population reconciliation are upstream concerns.  This
+    presentation boundary only decides whether the canonical title and statement
+    carry distinct display information; it never compares separate Programmes.
+    """
+    title = _field(programme, "title") or programme.statement or _display(programme, "Programme")
+    description = programme.statement if programme.statement != title else ""
+    return (
+        f"<article data-business-object-id='{escape(business_object_id(programme))}'>"
+        f"<p class='pill'>{escape(_association_type(programme, ent, twin) or 'Enterprise programme')}</p>"
+        f"<h3>{escape(title)}</h3>"
+        + (f"<p>{escape(description)}</p>" if description else "")
+        + f"<p><strong>Stage:</strong> {escape(_field(programme, 'phase', 'stage') or 'Not supplied')}</p>"
+        f"<p><strong>Evidence:</strong> {escape(', '.join(programme.evidence_refs) or 'Not supplied')}</p>"
+        f"<p><strong>Unknowns:</strong> {escape(', '.join(_refs_for(programme, 'unknown_refs', 'unknowns')) or 'None supplied')}"
+        f" · <strong>Contradictions:</strong> {escape(', '.join(_refs_for(programme, 'contradiction_refs', 'contradictions')) or 'None supplied')}</p>"
+        "</article>"
+    )
+
+
 def _opportunity_contract(o: SemanticObject, mission: CommercialMission | None = None) -> tuple[bool, bool, list[str]]:
     customer = bool(o.affected_organisations or (o.subject and o.subject != "Twin scope"))
     problem = bool(_field(o, "client_problem", "customer_problem", "problem"))
@@ -878,7 +900,7 @@ def _dossier(ent, twin, run_id, mission):
     ))
     sections.insert(4, _key_reports_html(ent, run_id))
     programmes=_associated_records(twin, ent, lambda o: o.kind=='transformation_programme'); ready_programmes=[o for o in programmes if o.statement or _field(o,'objective','business_objective','title')]
-    sections.append("<section class='card'><h2>Major Programmes</h2><p>Explicit enterprise relationship.</p>"+"".join(f"<article data-business-object-id='{escape(business_object_id(o))}'><p class='pill'>{escape(_association_type(o, ent, twin) or 'Enterprise programme')}</p><h3>{escape(_field(o, 'title') or o.statement or _display(o, 'Programme'))}</h3><p>{escape(o.statement)}</p><p><strong>Stage:</strong> {escape(_field(o, 'phase', 'stage') or 'Not supplied')}</p><p><strong>Evidence:</strong> {escape(', '.join(o.evidence_refs) or 'Not supplied')}</p><p><strong>Unknowns:</strong> {escape(', '.join(_refs_for(o, 'unknown_refs', 'unknowns')) or 'None supplied')} · <strong>Contradictions:</strong> {escape(', '.join(_refs_for(o, 'contradiction_refs', 'contradictions')) or 'None supplied')}</p></article>" for o in ready_programmes)+"</section>" if ready_programmes else gap("Major Programmes", f"{len(programmes)} associated candidate records supplied.", ("canonically related programme",), "No programme can be shown without an explicit relationship."))
+    sections.append("<section class='card'><h2>Major Programmes</h2><p>Explicit enterprise relationship.</p>"+"".join(_major_programme_html(o, ent, twin) for o in ready_programmes)+"</section>" if ready_programmes else gap("Major Programmes", f"{len(programmes)} associated candidate records supplied.", ("canonically related programme",), "No programme can be shown without an explicit relationship."))
     sections.append(_enterprise_dimension_html(dimensions["procurements"]))
     sections.append(_enterprise_dimension_html(dimensions["transformation"]))
     opportunities=_associated_records(twin, ent, lambda o: 'opportun' in o.kind); ready_opps=[o for o in opportunities if o.statement or _field(o,'client_problem','customer_problem','problem','title')]
