@@ -1,62 +1,63 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "BLUEPRINT-PACKAGE-INSPECTION-PERSISTENCE-DIAGNOSTICS-2026-08-16",
-  "title": "Blueprint Package Inspection Persistence Diagnostics / Correction",
-  "objective": "Expose safe, actionable staging-summary persistence diagnostics for retained Blueprint package inspection retries without changing validation or canonical Twin content.",
+  "change_id": "PERSISTENT-PILOT-STORAGE-SAFE-INODE-RECOVERY-2026-08-17",
+  "title": "Persistent Pilot Storage Safe Inode Recovery",
+  "objective": "Expose an owner-confirmed, path-locked recovery action for superseded Blueprint restaging snapshots, with inode inventory and canonical persistence health proof.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "Blueprint staging persistence now reports the failing operation, record type, compatibility constraint, underlying exception class, safe diagnostic, import identifier and inspection stage.",
-    "All candidate and summary writes remain owned by CandidateStagingRepository, including the mapping-version summary update.",
-    "Failed staging remains non-canonical and a retry rebuilds deterministic staging records from the retained immutable package."
+    "An authorised owner can inventory persistent filesystem entry counts and governed storage classes without exposing file contents.",
+    "Recovery is limited to superseded Blueprint staging-history versions outside a two-version rollback window and requires exact human confirmation.",
+    "Flora can start in recovery-only mode after inode preflight failure and reports inode, write and minimal BlueprintPackageRecord persistence probes after cleanup."
   ],
   "expected_visible_outcomes": [
-    "On Retry inspection, a successful retained package proceeds to Package inspected: Completed and reaches Package validated.",
-    "If staging persistence fails again, the inspection failure displays a precise safe persistence diagnostic rather than only PersistenceError.",
-    "No package content, secrets, credentials, database connection details or canonical Twin changes are exposed or introduced."
+    "The storage recovery diagnostic identifies the deployed primary inode-consuming family by entry count.",
+    "The preview reports eligible files and estimated recoverable inodes with canonical data affected = NO.",
+    "Normal routes remain unavailable until the existing inode threshold and both persistence probes pass."
   ],
   "affected_pages": [
-    "Blueprint Package Import failure result",
-    "Blueprint Package Import retained-package retry"
+    "Flora storage recovery diagnostic",
+    "Flora storage-unavailable response",
+    "Flora health endpoint"
   ],
   "unchanged_areas": [
-    "TEL-001 Twin content, relationships and Researcher output",
-    "Blueprint package validation rules",
-    "Candidate review, promotion and canonical persistence"
+    "Twin packages and Twin content",
+    "Blueprint validation and import semantics",
+    "Evidence and Enterprise Intelligence semantics"
   ],
   "required_test_steps": [
-    "Confirm this change is deployed.",
-    "Open import bpi-run-bb0def9e29bcf261.",
-    "Select Retry inspection once.",
-    "Confirm Package inspected is Completed and Package validated is reached; if inspection fails, capture the precise diagnostic and do not repeatedly retry the same deterministic failure."
+    "Open /operations/storage-recovery as an authorised owner.",
+    "Confirm the primary deployed inode consumer and that only superseded staging history is eligible.",
+    "Type the exact confirmation and execute only when marked safe.",
+    "Confirm inode preflight, write probe and BlueprintPackageRecord persistence all PASS.",
+    "Upload the original successful TEL-001 package; only then test corrected Wave 6."
   ],
   "fixture_path": "tests/test_flora_blueprint_import_validation.py synthetic repository fixture (not Wave 6)",
   "fixture_sha256": "not applicable \u2014 generated test fixture",
-  "fresh_import_policy": "NO \u2014 use Retry inspection on retained import bpi-run-bb0def9e29bcf261.",
+  "fresh_import_policy": "YES \u2014 test the original successful TEL-001 only after storage health passes.",
   "known_limitations": [
-    "The actual enriched TEL-001 Wave 6 package is unavailable in this repository execution environment; Wave 6 runtime acceptance requires the retained-package retry after deployment."
+    "Production inode counts and post-recovery results are available only from the deployed persistent volume inventory."
   ],
   "automated_validation": {
-    "wave_6_package_available": "NO",
-    "repository_blueprint_import_tests": "PASS",
-    "persistence_diagnostics_tests": "PASS",
-    "validation_rules_changed": "NO",
+    "storage_recovery_tests": "PASS",
+    "blueprint_semantics_changed": "NO",
     "canonical_twin_modified": "NO"
   },
   "merge_gate": "SAFE TO MERGE",
-  "operator_validation_status": "PENDING \u2014 retained Wave 6 package retry required after deployment",
-  "diagnostics_href": "/deployment",
+  "operator_validation_status": "PENDING \u2014 deployed inventory and confirmed recovery required",
+  "diagnostics_href": "/operations/storage-recovery",
   "source_commit_sha": "current-change-marker",
   "merged_commit_sha": "unknown",
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "BLUEPRINT-PACKAGE-INSPECTION-PERSISTENCE-DIAGNOSTICS-2026-08-16",
+  "deployed_change_marker": "PERSISTENT-PILOT-STORAGE-SAFE-INODE-RECOVERY-2026-08-17",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
   "material_runtime_components_changed": [
-    "Blueprint candidate staging persistence diagnostics",
-    "Blueprint inspection failure presentation"
+    "Persistent storage inventory and governed recovery",
+    "Storage-unavailable startup mode",
+    "Restaging-history bounded retention"
   ],
   "reimport_required_if_older_than_change": "Unavailable",
   "repository": "unknown",
@@ -64,7 +65,7 @@
   "start_command": "unknown",
   "auto_deploy": "unknown",
   "latest_deployment_status": "unknown",
-  "fresh_import_required": "NO",
+  "fresh_import_required": "YES \u2014 original TEL-001 after health passes",
   "audit_result_href": "/docs/operations/flora/Deployment-to-Runtime-Proof-Audit.md",
-  "candidate_state_impact": "staging retry only; canonical state remains read-only"
+  "candidate_state_impact": "Only superseded non-canonical staging-history snapshots outside the retained rollback window are eligible."
 }

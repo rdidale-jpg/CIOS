@@ -38,35 +38,23 @@ archives, audit, reviews or promoted intelligence. Diagnostics and temporary fil
 are counted but deliberately not deleted without a separately proven age/ownership
 policy.
 
-## Read-only production inspection
+## Read-only production inspection and operator recovery
 
-Run inside the deployed Flora container with the production volume mounted:
+Open `/operations/storage-recovery` as an authorised Flora owner. When inode
+preflight fails, Flora starts in a recovery-only mode so this page and sign-in
+remain available while all normal storage-backed routes return 503. The page reads
+directory entries and metadata only, never contents. It reports total entries,
+top-level and determinable record-family counts, the 20 largest file-count
+directories, governed class counts and timestamps, and filesystem inode facts.
 
-```bash
-python -m cios.applications.flora.storage_maintenance > /tmp/flora-storage-inventory.json
-```
+The preview selects only `blueprint_import/staging_history` versions older than the
+newest two versions for each import. Cleanup requires both a canonical-data
+acknowledgement and the exact displayed confirmation phrase. There is no startup
+deletion and the human operator needs no filesystem shell access.
 
-The report reads directory entries and metadata only, never contents. It includes
-total files, top-level and determinable record-family counts, the 20 largest
-file-count directories, temporary/diagnostic/candidate-history counts, timestamps,
-and byte/inode filesystem facts. `/tmp` must not resolve onto the exhausted Flora
-volume; print directly to the operator console if it does.
-
-Preview the exact governed cleanup scope:
-
-```bash
-python -m cios.applications.flora.storage_maintenance \
-  --cleanup-superseded-staging --keep-versions 2
-```
-
-If `blueprint_import/staging_history` is a material consumer, apply only that cleanup:
-
-```bash
-python -m cios.applications.flora.storage_maintenance \
-  --cleanup-superseded-staging --keep-versions 2 --apply
-```
-
-Then rerun the inventory and `/health`. Do not retry an import until health reports
+After confirmed cleanup, the same page reports files removed, inodes before and
+after, available inode percentage, inode preflight, write probe and the minimal
+`BlueprintPackageRecord` persistence probe. Do not retry an import until health reports
 ready and available inodes meet `FLORA_MIN_AVAILABLE_INODES` (default 128). If the
 inventory does not find enough removable staging history, do not delete arbitrary
 files: increase the persistent volume's inode capacity or migrate it to a filesystem

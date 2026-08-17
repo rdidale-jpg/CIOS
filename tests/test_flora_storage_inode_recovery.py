@@ -5,7 +5,10 @@ from pathlib import Path
 import pytest
 
 from cios.applications.flora import storage
-from cios.applications.flora.storage_maintenance import cleanup_superseded_staging_history, storage_inventory
+from cios.applications.flora.storage_maintenance import (
+    RECOVERY_CONFIRMATION, cleanup_superseded_staging_history,
+    execute_storage_recovery, storage_inventory,
+)
 
 
 def test_inode_threshold_fails_before_write(monkeypatch, tmp_path):
@@ -31,6 +34,8 @@ def test_inventory_counts_without_reading_contents(tmp_path):
     assert report["temporary_file_count"] == 1
     assert report["diagnostic_file_count"] == 2
     assert report["import_candidate_history_file_count"] == 1
+    assert report["total_filesystem_entries"] > report["total_file_count"]
+    assert report["contents_inspected"] is False
     assert report["contents_inspected"] is False
 
 
@@ -47,3 +52,35 @@ def test_cleanup_cannot_touch_active_or_canonical_state(tmp_path):
     assert not (tmp_path / "blueprint_import" / "staging_history" / "run" / "v1").exists()
     assert (active / "live.json").read_text() == "live"
     assert (evidence / "evidence.jsonl").read_text() == "canonical"
+    assert result["canonical_data_affected"] == "NO"
+    assert result["estimated_inodes_recoverable"] >= result["files_selected"]
+
+
+def test_execute_requires_exact_human_confirmation(tmp_path):
+    with pytest.raises(ValueError, match="Explicit"):
+        execute_storage_recovery("yes", tmp_path)
+
+
+def test_execute_reports_canonical_health_probes(monkeypatch, tmp_path):
+    monkeypatch.setattr("cios.applications.flora.storage_maintenance.startup_storage_status", lambda: {
+        "ready": True,
+        "diagnostics": {"total_inodes": 65536, "available_inodes": 1024, "write_probe_succeeded": True},
+    })
+    result = execute_storage_recovery(RECOVERY_CONFIRMATION, tmp_path)
+    assert result["inode_preflight"] == "PASS"
+    assert result["write_probe"] == "PASS"
+    assert result["blueprint_package_record_persistence"] == "PASS"
+    assert result["available_inode_percentage"] == pytest.approx(1.5625)
+
+
+def test_operator_page_exposes_preview_without_file_contents(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    secret = tmp_path / "blueprint_import" / "staging_history" / "run" / "v1"
+    secret.mkdir(parents=True)
+    (secret / "candidate.json").write_text("CONTENT-MUST-NOT-APPEAR")
+    from cios.applications.flora.web.app import _storage_recovery_page
+    html = _storage_recovery_page()
+    assert "Persistent Pilot Storage Safe Inode Recovery" in html
+    assert "Canonical Data Affected</th><td>NO" in html
+    assert RECOVERY_CONFIRMATION in html
+    assert "CONTENT-MUST-NOT-APPEAR" not in html
