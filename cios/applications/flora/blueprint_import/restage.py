@@ -13,6 +13,7 @@ from .ledger import BlueprintImportLedger, utc_now
 from .registry import BlueprintPackageRegistry
 from .review_plan import BlueprintReviewPlanCoordinator
 from .validator import BlueprintPackageValidator, can_inspect_blueprint_package
+from cios.applications.flora.storage_maintenance import cleanup_superseded_staging_history
 
 RESTAGE_STAGES = [
     "package located", "immutable archive verified", "mapping version selected", "workbook loaded",
@@ -86,6 +87,11 @@ class BlueprintRestageService:
             atomic_write_json(summary_path, new_summary)
             atomic_write_json(self.active_path(package.import_run_id), meta)
             self._snapshot_active(package.import_run_id, new_version)
+            # Restage snapshots are non-canonical working history. Retain a
+            # bounded rollback window rather than duplicating every candidate
+            # forever; packages, audit, active staging and promotions are never
+            # in this cleanup scope.
+            cleanup_superseded_staging_history(keep_versions=2, dry_run=False)
             stale = self._invalidate_plans(package.import_run_id, old_version, new_version)
             self._stage(job, 6, result.candidate_records_staged)
             def defaults():

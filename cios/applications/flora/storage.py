@@ -10,6 +10,8 @@ from uuid import uuid4
 FLORA_DATA_DIR_ENV = "FLORA_DATA_DIR"
 LEGACY_FLORA_PILOT_DIR_ENV = "FLORA_PILOT_DIR"
 DEFAULT_DATA_DIR = Path("/var/data/flora")
+MIN_AVAILABLE_INODES_ENV = "FLORA_MIN_AVAILABLE_INODES"
+DEFAULT_MIN_AVAILABLE_INODES = 128
 REQUIRED_DIRS = (
     "ai_financial_reports/uploads",
     "ai_financial_reports/runs",
@@ -129,10 +131,38 @@ def ensure_writable_dir(path: Path) -> Path:
             handle.flush()
             os.fsync(handle.fileno())
         probe.unlink(missing_ok=True)
+    except PersistenceError:
+        raise
     except OSError as exc:
         raise PersistenceError(f"Flora storage directory is not writable: {path}: {exc}",
                                operation="write_probe", path=path, cause=exc) from exc
     return path
+
+
+def inode_capacity(path: Path | None = None) -> dict[str, Any]:
+    """Report the inode admission boundary without creating a probe file."""
+    facts = filesystem_context(path or data_root(), operation="inode_capacity")
+    minimum = max(1, int(os.getenv(MIN_AVAILABLE_INODES_ENV, str(DEFAULT_MIN_AVAILABLE_INODES))))
+    total = int(facts.get("total_inodes") or 0)
+    available = int(facts.get("available_inodes") or 0)
+    # Some virtual filesystems report no inode accounting.  Do not manufacture
+    # a failure there; a real, finite filesystem (the pilot volume) must have
+    # enough headroom for an atomic write and its directory probes.
+    healthy = total == 0 or available >= minimum
+    return {"healthy": healthy, "minimum_available_inodes": minimum,
+            "total_inodes": total, "available_inodes": available,
+            "free_inodes": int(facts.get("free_inodes") or 0)}
+
+
+def require_inode_capacity(path: Path | None = None) -> dict[str, Any]:
+    capacity = inode_capacity(path)
+    if not capacity["healthy"]:
+        raise PersistenceError(
+            "Flora storage inode capacity is below the safe operational threshold",
+            operation="inode_preflight", path=path or data_root(),
+            cause=OSError(28, "inode capacity exhausted"),
+        )
+    return capacity
 
 
 def ensure_parent_writable(path: Path) -> Path:
@@ -143,6 +173,7 @@ def ensure_parent_writable(path: Path) -> Path:
 def atomic_write_text(path: Path, text: str) -> None:
     tmp: Path | None = None
     try:
+        require_inode_capacity(path.parent)
         ensure_parent_writable(path)
         # A process id is not unique between concurrent requests in the same
         # web process.  A per-write name prevents one request's os.replace()
@@ -159,6 +190,8 @@ def atomic_write_text(path: Path, text: str) -> None:
             finally: os.close(dir_fd)
         except OSError:
             pass
+    except PersistenceError:
+        raise
     except OSError as exc:
         raise PersistenceError(f"Failed to persist Flora data at {path}: {exc}", operation="atomic_write",
                                path=path, cause=exc, temp_path=tmp) from exc
@@ -178,6 +211,7 @@ def atomic_write_bytes(path: Path, content: bytes, *, mode: int | None = None) -
     """Atomically write bytes using a unique temporary file on the target filesystem."""
     tmp: Path | None = None
     try:
+        require_inode_capacity(path.parent)
         ensure_parent_writable(path)
         tmp = path.with_name(f".{path.name}.{os.getpid()}.{uuid4().hex}.tmp")
         with tmp.open("wb") as handle:
@@ -187,6 +221,8 @@ def atomic_write_bytes(path: Path, content: bytes, *, mode: int | None = None) -
         os.replace(tmp, path)
         if mode is not None:
             os.chmod(path, mode)
+    except PersistenceError:
+        raise
     except OSError as exc:
         raise PersistenceError(f"Failed to persist Flora binary data at {path}: {exc}",
                                operation="atomic_write_bytes", path=path, cause=exc,
@@ -222,6 +258,7 @@ def startup_storage_status() -> dict[str, Any]:
     diagnostics["resolved_data_root"] = str(root.resolve(strict=False))
     diagnostics["write_probe_succeeded"] = False
     try:
+        diagnostics["inode_capacity"] = require_inode_capacity(root)
         ensure_writable_dir(root)
         diagnostics = filesystem_context(root, operation="startup_probe") | {
             "configured_data_root": str(root), "resolved_data_root": str(root.resolve(strict=False)),
