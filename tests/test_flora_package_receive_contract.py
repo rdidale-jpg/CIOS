@@ -104,6 +104,48 @@ def test_receive_failure_exposes_safe_root_cause_without_canonical_changes(
     assert logged.exc_info[1].__cause__ is concrete_error
 
 
+def test_health_probe_failure_does_not_replace_chained_receive_error(monkeypatch, tmp_path, caplog):
+    """The diagnostic probe must not discard the receipt failure it is inspecting."""
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
+    concrete_error = OSError(28, "No space left on device", "private-run-path")
+
+    from cios.applications.flora.blueprint_import import registry as registry_module
+    from cios.applications.flora import storage
+
+    real_replace = storage.os.replace
+
+    def fail_run_write(source, destination):
+        if Path(destination).parent.name == "runs":
+            raise concrete_error
+        return real_replace(source, destination)
+
+    real_data_path = registry_module.data_path
+
+    def fail_diagnostic_path(*parts):
+        if parts == ("blueprint_import", "packages"):
+            raise PersistenceError("diagnostic path unavailable")
+        return real_data_path(*parts)
+
+    monkeypatch.setattr(storage.os, "replace", fail_run_write)
+    monkeypatch.setattr(registry_module, "data_path", fail_diagnostic_path)
+    caplog.set_level("ERROR")
+
+    html, status, target = upload_and_validate_blueprint(
+        {"blueprint_zip": pkg()}, FIELDS, HEADERS
+    )
+
+    assert status == 400 and target == "/blueprint-import"
+    assert "Underlying exception class: builtins.OSError" in html
+    assert "Underlying safe message: The filesystem storage operation failed." in html
+    assert "Persistence operation: create" in html
+    assert "Record/model: BlueprintPackageRecord" in html
+    logged = next(record for record in caplog.records if record.message.startswith("blueprint_package_receive_persistence_failed"))
+    received_error = logged.exc_info[1]
+    assert isinstance(received_error, PersistenceError)
+    assert received_error.__cause__ is concrete_error
+    assert "Failed to persist Flora data" in str(received_error)
+
+
 def test_browser_adapter_rejects_stale_mapping_shape_without_rendering_keyerror(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     monkeypatch.setattr(BlueprintPackageRegistry, "receive", lambda *args, **kwargs: {"accepted": True})
