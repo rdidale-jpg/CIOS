@@ -1,8 +1,10 @@
 import importlib
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from cios.applications.flora.memory.service import ObservationMemoryService
+import pytest
 
+from cios.applications.flora.memory.service import ObservationMemoryService
 
 def evidence():
     return {
@@ -33,6 +35,42 @@ def test_default_storage_uses_render_persistent_pilot_disk(monkeypatch):
     assert status['status'] == 'persistent pilot storage'
     assert status['data_root'] == '/var/data/flora'
     assert status['durable'] is True
+
+
+def test_atomic_json_writes_use_request_unique_temporary_paths(monkeypatch, tmp_path):
+    from cios.applications.flora import storage
+
+    destination = tmp_path / "blueprint_import" / "packages" / "receipt.json"
+    temporary_paths = []
+    real_replace = storage.os.replace
+
+    def record_replace(source, target):
+        temporary_paths.append(Path(source))
+        return real_replace(source, target)
+
+    monkeypatch.setattr(storage.os, "replace", record_replace)
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        list(pool.map(lambda value: storage.atomic_write_json(destination, {"value": value}), range(32)))
+
+    assert len(temporary_paths) == len(set(temporary_paths)) == 32
+    assert destination.exists()
+    assert not list(destination.parent.glob(".*.tmp"))
+
+
+def test_web_process_fails_before_listening_when_storage_probe_fails(monkeypatch):
+    from cios.applications.flora.web import app
+
+    monkeypatch.setattr(app, "startup_storage_status", lambda: {
+        "ready": False,
+        "status": "storage unavailable",
+        "data_root": "/var/data/flora",
+        "storage_mode": "persistent pilot storage",
+        "error": "safe storage failure",
+    })
+    monkeypatch.setattr(app, "ThreadingHTTPServer", lambda *args: pytest.fail("server must not listen"))
+
+    with pytest.raises(SystemExit, match="persistent storage is unavailable"):
+        app.run()
 
 
 def test_accepted_facts_observations_and_model_persist_under_flora_data_dir(monkeypatch, tmp_path):
