@@ -27,6 +27,10 @@ from cios.applications.flora.workspace.reference_slice import VALIDATION_PATH, r
 from cios.applications.flora.digital_twins import digital_twins_landing_page, bt_twin_page, search_bt_twin, bt_search_progress_page, rapid_snapshot_csv
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
+from cios.applications.flora.storage_maintenance import (
+    RECOVERY_CONFIRMATION, cleanup_superseded_staging_history,
+    execute_storage_recovery, storage_inventory,
+)
 from cios.applications.flora.live.runtime import application_revision, deployment_metadata
 from cios.applications.flora.document_review import apply_accepted, configure_financial_intelligence_logging, create_upload_run, financial_intelligence_admin_health_page, financial_intelligence_page, financial_intelligence_progress_page, financial_intelligence_progress_status, financial_intelligence_run_response, financial_intelligence_support_diagnostic_page, financial_intelligence_support_diagnostic_payload, financial_intelligence_safe_support_report_payload, load_run, create_financial_intelligence_progress_run, refresh_financial_intelligence, review_home_page, run_page, update_reviews
 from cios.applications.flora.access import can_view_financial_intelligence_run, cookie_value, valid_financial_intelligence_run_id, blueprint_upload_authorisation
@@ -114,6 +118,8 @@ def _with_import_deployment_fingerprint(html: str) -> str:
 class FloraWebHandler(BaseHTTPRequestHandler):
     """Production-safe HTTP routes for the Flora Render web service."""
 
+    storage_status: dict = {"ready": True}
+
     def do_HEAD(self) -> None:  # noqa: N802 - stdlib callback name
         parsed = urlparse(self.path)
         try:
@@ -131,13 +137,27 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         try:
             pilot_mode = pilot_import_mode()
-            if pilot_mode.conflict and parsed.path not in {"/health", "/deployment"}:
+            recovery_routes = {"/operations/storage-recovery", "/pilot-sign-in"}
+            if not self.storage_status.get("ready") and parsed.path not in recovery_routes | {"/health", "/deployment"}:
+                self._html(_storage_unavailable_page(), status=503)
+                return
+            if pilot_mode.conflict and parsed.path not in {"/health", "/deployment", "/operations/storage-recovery"}:
                 self._html(pilot_import_configuration_error(pilot_mode.conflict), status=503)
                 return
             if parsed.path == "/health":
-                self._json(HEALTH_PAYLOAD)
+                if self.storage_status.get("ready"):
+                    self._json(HEALTH_PAYLOAD)
+                else:
+                    self._json({"status": "unhealthy", "service": "flora", "storage": "unavailable",
+                                "recovery_action": "/operations/storage-recovery"}, status=503)
             elif parsed.path == "/deployment":
                 self._json(deployment_payload())
+            elif parsed.path == "/operations/storage-recovery":
+                decision = blueprint_upload_authorisation(self.headers)
+                if decision.decision != "allowed":
+                    self.send_error(403, "Storage recovery requires an authorised Flora owner")
+                    return
+                self._html(_storage_recovery_page())
             elif parsed.path in {"/", "/flora", "/flora/"}:
                 self._html(_flora_home_page(self.headers))
             elif parsed.path == "/intelligence":
@@ -490,7 +510,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:  # noqa: N802 - stdlib callback name
         pilot_mode = pilot_import_mode()
-        if pilot_mode.conflict:
+        if not self.storage_status.get("ready") and self.path not in {"/operations/storage-recovery", "/pilot-sign-in", "/pilot-sign-out"}:
+            self._html(_storage_unavailable_page(), status=503)
+            return
+        if pilot_mode.conflict and self.path != "/operations/storage-recovery":
             self._html(pilot_import_configuration_error(pilot_mode.conflict), status=503)
             return
         length = int(self.headers.get("Content-Length", "0"))
@@ -510,6 +533,19 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             else:
                 pilot_audit("sign_in_failure", correlation_id=self.headers.get("X-Request-Id", ""))
                 self._html(sign_in_page("Invalid pilot access secret."), status=403)
+        elif self.path == "/operations/storage-recovery":
+            decision = blueprint_upload_authorisation(self.headers)
+            if decision.decision != "allowed":
+                self.send_error(403, "Storage recovery requires an authorised Flora owner")
+                return
+            confirmation = _one(form, "confirmation")
+            if confirmation != RECOVERY_CONFIRMATION or _one(form, "canonical_acknowledgement") != "no-canonical-data":
+                self._html(_storage_recovery_page(error="Explicit confirmation is required; no cleanup was performed."), status=400)
+                return
+            result = execute_storage_recovery(confirmation)
+            self.storage_status = result["health"]
+            self.__class__.storage_status = result["health"]
+            self._html(_storage_recovery_page(result=result))
         elif self.path == "/pilot-sign-out":
             pilot_audit("sign_out", correlation_id=self.headers.get("X-Request-Id", ""))
             self._redirect("/flora", set_cookie=clear_session_cookie())
@@ -1258,7 +1294,7 @@ app = FloraWebHandler
 def _content_type_for_path(path: str) -> str | None:
     if path in {"/health", "/flora/events", "/live/status", "/live/collect/status"}:
         return "application/json"
-    if path in {"/", "/flora", "/flora/", "/pilot-sign-in", "/workspace/reference", "/flora/reference", "/flora/object/BK-ENT-001", "/flora/object/BK-ENT-001/explain", "/flora/object/BK-ENT-001/context-package", "/workspace/enterprise/BK-ENT-001", "/flora/lloyds", "/explore", "/focus", "/shape", "/shape/banking", "/shape/strategic-sales-brief", "/shape/banking/strategic-sales-brief", "/governance", "/ask"} or path.startswith("/flora/object/") or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export") or path == "/settings/general" or path.startswith("/evidence/"):
+    if path in {"/", "/flora", "/flora/", "/pilot-sign-in", "/operations/storage-recovery", "/workspace/reference", "/flora/reference", "/flora/object/BK-ENT-001", "/flora/object/BK-ENT-001/explain", "/flora/object/BK-ENT-001/context-package", "/workspace/enterprise/BK-ENT-001", "/flora/lloyds", "/explore", "/focus", "/shape", "/shape/banking", "/shape/strategic-sales-brief", "/shape/banking/strategic-sales-brief", "/governance", "/ask"} or path.startswith("/flora/object/") or path.startswith("/blueprint-import") or path.startswith("/digital-twins") or path.startswith("/ai-financial-report") or path.startswith("/financial-intelligence") or path == "/financial-reports" or path.startswith("/settings/architecture-export") or path == "/settings/general" or path.startswith("/evidence/"):
         return "text/html; charset=utf-8"
     if path in {"/", "/morning-edition", "/evidence", "/portfolio", "/reasoning-model", "/observatory", "/observatory/critique", "/radar", "/scoring", "/settings", "/logbook", "/live", "/live/collect", "/live/collect/start", "/live/collect/progress", "/live/evidence", "/live/sources", "/live/source-effectiveness", "/live/acquisition-plans", "/live/feedback/diagnostics"}:
         return "text/html; charset=utf-8"
@@ -1284,6 +1320,68 @@ def _critique_page() -> str:
 
 def _one(form: dict[str, list[str]], key: str) -> str:
     return form.get(key, [""])[0]
+
+
+def _storage_unavailable_page() -> str:
+    return """<!doctype html><html><head><title>Flora storage unavailable</title></head><body>
+    <main><h1>Persistent storage unavailable</h1><p>Flora has stopped normal storage-backed operations safely.</p>
+    <p>An authorised owner can <a href='/operations/storage-recovery'>open the storage recovery diagnostic</a>.</p>
+    <p>No cleanup is automatic.</p></main></body></html>"""
+
+
+def _storage_recovery_page(*, result: dict | None = None, error: str = "") -> str:
+    """Render name/count-only inventory and the confirmed recovery boundary."""
+    inventory = storage_inventory()
+    preview = cleanup_superseded_staging_history()
+    facts = inventory["storage"]
+
+    def rows(values: dict) -> str:
+        return "".join(f"<tr><th>{escape(str(key).replace('_', ' ').title())}</th><td>{escape(str(value))}</td></tr>"
+                       for key, value in values.items())
+
+    largest = "".join(f"<tr><td><code>{escape(item['directory'])}</code></td><td>{item['file_count']}</td></tr>"
+                      for item in inventory["largest_file_count_directories"])
+    timestamps = "".join(
+        f"<tr><td>{escape(name)}</td><td>{escape(str(value['oldest']))}</td><td>{escape(str(value['newest']))}</td></tr>"
+        for name, value in inventory["timestamps_by_class"].items()
+    )
+    outcome = ""
+    if result is not None:
+        outcome = f"""<section><h2>Post-recovery health</h2><table>{rows({
+            'Files removed': result['files_removed'], 'Inodes before': result['inodes_before'],
+            'Inodes after': result['inodes_after'],
+            'Available inode percentage': result['available_inode_percentage'],
+            'Inode preflight': result['inode_preflight'], 'Storage write probe': result['write_probe'],
+            'BlueprintPackageRecord minimal persistence': result['blueprint_package_record_persistence'],
+            'Canonical data affected': result['canonical_data_affected'],
+        })}</table></section>"""
+    message = f"<p role='alert'><strong>{escape(error)}</strong></p>" if error else ""
+    disabled = " disabled" if preview["estimated_inodes_recoverable"] == 0 else ""
+    return f"""<!doctype html><html><head><title>Flora storage recovery</title>
+    <style>body{{font:16px system-ui;max-width:1100px;margin:auto;padding:2rem}}table{{border-collapse:collapse;width:100%;margin:1rem 0}}th,td{{border:1px solid #bbb;padding:.5rem;text-align:left}}section{{margin:2rem 0}}code{{word-break:break-all}}.safe{{border:2px solid #176b36;padding:1rem}}</style></head><body><main>
+    <h1>Persistent Pilot Storage Safe Inode Recovery</h1><p>This diagnostic reads names and timestamps only. File contents are not exposed.</p>{message}{outcome}
+    <section><h2>Filesystem inventory</h2><table>{rows({
+        'Total filesystem entries': inventory['total_filesystem_entries'],
+        'Files': inventory['total_file_count'], 'Directories': inventory['total_directory_count'],
+        'Total inodes': facts.get('total_inodes'), 'Free inodes': facts.get('free_inodes'),
+        'Available inodes': facts.get('available_inodes'),
+        'Primary inode consumer': inventory['primary_inode_consumer'],
+        'Primary consumer entry count': inventory['primary_inode_consumer_entry_count'],
+    })}</table><h3>By top-level storage area</h3><table>{rows(inventory['entry_count_by_top_level_area'])}</table>
+    <h3>By determinable record family</h3><table>{rows(inventory['entry_count_by_record_family'])}</table></section>
+    <section><h2>Governance classification</h2><table>{rows(inventory['entry_count_by_class'])}</table>
+    <p>Temporary/atomic remnants: {inventory['temporary_file_count']} · Diagnostics/operational: {inventory['diagnostic_file_count']} · Import/staging: {inventory['import_staging_entry_count']} · Candidate history: {inventory['candidate_history_entry_count']} · Canonical/persistent: {inventory['canonical_persistent_entry_count']}</p>
+    <h3>Oldest/newest timestamps by class</h3><table><tr><th>Class</th><th>Oldest</th><th>Newest</th></tr>{timestamps}</table></section>
+    <section><h2>Largest directories by file count</h2><table><tr><th>Directory</th><th>Files</th></tr>{largest}</table></section>
+    <section class='safe'><h2>Safe recovery preview</h2><table>{rows({
+        'Files eligible for removal': preview['files_selected'],
+        'Estimated inodes recoverable': preview['estimated_inodes_recoverable'],
+        'Classes': preview['eligible_class'], 'Versions selected': preview['versions_selected'],
+        'Versions retained per import': preview['kept_versions_per_import'],
+        'Canonical data affected': preview['canonical_data_affected'],
+    })}</table><p>Only superseded non-canonical restaging snapshots outside the two-version rollback window are eligible. Active candidates, packages, audit, Evidence and Twin state are outside the cleanup path.</p>
+    <form method='post' action='/operations/storage-recovery'><label><input type='checkbox' name='canonical_acknowledgement' value='no-canonical-data' required> I confirm the preview says canonical data affected = NO.</label><p><label>Type <strong>{RECOVERY_CONFIRMATION}</strong><br><input name='confirmation' required autocomplete='off' size='48'></label></p><button type='submit'{disabled}>Execute governed cleanup</button></form></section>
+    </main></body></html>"""
 
 
 def env_host() -> str:
@@ -1363,9 +1461,10 @@ def run(host: str | None = None, port: int | None = None) -> None:
             + (f" failed_condition={auto_status.failed_condition}" if auto_status.failed_condition else ""),
             flush=True,
         )
+    FloraWebHandler.storage_status = storage
     if not storage.get("ready"):
         print({"event": "flora_storage_unavailable", "data_root": storage.get("data_root"), "storage_mode": storage.get("storage_mode"), "error": storage.get("error"), "diagnostics": storage.get("diagnostics", {})}, flush=True)
-        raise SystemExit("Flora persistent storage is unavailable")
+        print("Flora is starting in storage-recovery-only mode; no cleanup is automatic.", flush=True)
     server = ThreadingHTTPServer((bind_host, bind_port), FloraWebHandler)
     print(f"Flora web service listening on {bind_host}:{bind_port}", flush=True)
     try:

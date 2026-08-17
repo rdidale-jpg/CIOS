@@ -81,7 +81,7 @@ def test_persistence_error_preserves_enospc_filesystem_context(monkeypatch, tmp_
     assert context["filesystem_device_id"] == tmp_path.stat().st_dev
 
 
-def test_web_process_fails_before_listening_when_storage_probe_fails(monkeypatch):
+def test_web_process_starts_recovery_only_listener_when_storage_probe_fails(monkeypatch):
     from cios.applications.flora.web import app
 
     monkeypatch.setattr(app, "startup_storage_status", lambda: {
@@ -91,10 +91,16 @@ def test_web_process_fails_before_listening_when_storage_probe_fails(monkeypatch
         "storage_mode": "persistent pilot storage",
         "error": "safe storage failure",
     })
-    monkeypatch.setattr(app, "ThreadingHTTPServer", lambda *args: pytest.fail("server must not listen"))
+    class RecoveryServer:
+        def __init__(self, *args): pass
+        def serve_forever(self): raise KeyboardInterrupt
+        def server_close(self): pass
+    monkeypatch.setattr(app, "ThreadingHTTPServer", RecoveryServer)
 
-    with pytest.raises(SystemExit, match="persistent storage is unavailable"):
-        app.run()
+    # The listener is needed for the owner-facing recovery action, while the
+    # handler gates every normal storage-backed route with a 503.
+    app.run()
+    assert app.FloraWebHandler.storage_status["ready"] is False
 
 
 def test_accepted_facts_observations_and_model_persist_under_flora_data_dir(monkeypatch, tmp_path):
