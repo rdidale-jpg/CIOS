@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 from typing import Any
+from uuid import uuid4
 
 FLORA_DATA_DIR_ENV = "FLORA_DATA_DIR"
 LEGACY_FLORA_PILOT_DIR_ENV = "FLORA_PILOT_DIR"
@@ -96,9 +97,13 @@ def ensure_parent_writable(path: Path) -> Path:
 
 
 def atomic_write_text(path: Path, text: str) -> None:
+    tmp: Path | None = None
     try:
         ensure_parent_writable(path)
-        tmp = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+        # A process id is not unique between concurrent requests in the same
+        # web process.  A per-write name prevents one request's os.replace()
+        # from consuming another request's temporary receipt file.
+        tmp = path.with_name(f".{path.name}.{os.getpid()}.{uuid4().hex}.tmp")
         with tmp.open("w", encoding="utf-8") as handle:
             handle.write(text)
             handle.flush()
@@ -112,6 +117,12 @@ def atomic_write_text(path: Path, text: str) -> None:
             pass
     except OSError as exc:
         raise PersistenceError(f"Failed to persist Flora data at {path}: {exc}") from exc
+    finally:
+        if tmp is not None:
+            try:
+                tmp.unlink(missing_ok=True)
+            except OSError:
+                pass
 
 
 def atomic_write_json(path: Path, data: dict[str, Any]) -> None:
@@ -140,6 +151,18 @@ def startup_storage_status() -> dict[str, Any]:
         ensure_writable_dir(root)
         for rel in REQUIRED_DIRS:
             ensure_writable_dir(root / rel)
+        # Exercise the same JSON write/read/replace boundary used by
+        # BlueprintPackageRecord before accepting uploads.
+        receipt_root = root / "blueprint_import" / "packages"
+        probe = receipt_root / f".blueprint-package-startup-{uuid4().hex}.json"
+        try:
+            atomic_write_json(probe, {"record_type": "BlueprintPackageRecord", "startup_probe": True})
+            if json.loads(probe.read_text(encoding="utf-8")) != {
+                "record_type": "BlueprintPackageRecord", "startup_probe": True
+            }:
+                raise PersistenceError("Flora Blueprint package storage probe could not be read back")
+        finally:
+            probe.unlink(missing_ok=True)
         status = mode["mode"]
         ready = True
     except PersistenceError as exc:

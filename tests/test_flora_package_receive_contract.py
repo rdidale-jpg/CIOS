@@ -39,6 +39,20 @@ def test_registry_canonical_receive_result_has_stable_receipt_contract(monkeypat
     assert "accepted" not in result.to_dict()
 
 
+def test_startup_probe_and_receive_reach_blueprint_inspection(monkeypatch, tmp_path):
+    monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path / "flora"))
+    from cios.applications.flora.storage import startup_storage_status
+
+    assert startup_storage_status()["ready"] is True
+    registry = BlueprintPackageRegistry()
+    result = registry.receive(pkg(), "synthetic.zip", "alice", "synthetic-enterprise")
+
+    assert result.import_run_id.startswith("bpi-run-")
+    assert result.package_inspection
+    assert registry.get(result.package_ref) == result
+    assert (tmp_path / "flora" / "blueprint_import" / "packages").is_dir()
+
+
 def test_registry_persists_repository_package_and_preserves_failed_create_cause(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     fixture = Path("MOD-CDT-v1.3-Flora-Blueprint 2.zip")

@@ -1363,6 +1363,7 @@ def run(host: str | None = None, port: int | None = None) -> None:
         )
     if not storage.get("ready"):
         print({"event": "flora_storage_unavailable", "data_root": storage.get("data_root"), "storage_mode": storage.get("storage_mode"), "error": storage.get("error")}, flush=True)
+        raise SystemExit("Flora persistent storage is unavailable")
     server = ThreadingHTTPServer((bind_host, bind_port), FloraWebHandler)
     print(f"Flora web service listening on {bind_host}:{bind_port}", flush=True)
     try:
