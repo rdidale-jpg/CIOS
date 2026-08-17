@@ -42,7 +42,7 @@ from .observation_runtime import build_candidate_observation, OBSERVATION_BUILDE
 from .semantic_twin import (SemanticEnterprise, SemanticObject, SemanticTwin, assemble_semantic_twin,
                             business_collections, business_object_id, enterprise_associations, executive_insight_eligible,
                             evidence_subject, evidence_publisher, resolve_relationships,
-                            executive_record_view_model)
+                            executive_record_view_model, opportunity_enterprise_names)
 from .twin_governance import project_twin_identity
 from .validator import BlueprintPackageValidator, can_inspect_blueprint_package
 from .review import ImportHumanReviewRepository
@@ -661,10 +661,11 @@ def _executive_record_card(o: SemanticObject) -> str:
             "<p class='governance-note'>Imported candidate — not yet reviewed</p></article>")
 
 
-def _opportunity_card(o: SemanticObject, run_id: str) -> str:
+def _opportunity_card(o: SemanticObject, run_id: str, twin: SemanticTwin) -> str:
     problem = _attribute(o, "client_problem", "customer_problem", "problem")
     timing = _attribute(o, "why_now", "timing", "target_date", "deadline")
-    enterprises = ", ".join(o.affected_organisations) or (o.subject if o.subject != "Twin scope" else "Affected enterprise not established")
+    related_enterprises = opportunity_enterprise_names(twin, o)
+    enterprises = ", ".join(related_enterprises) or "Affected enterprise not established"
     theme = _field(o, "reinvention_theme", "theme")
     relevance = _field(o, "commercial_relevance")
     evidence = ", ".join(o.evidence_refs) or "Evidence not linked"
@@ -1087,7 +1088,7 @@ def _dossier(ent, twin, run_id, mission):
     sections.append(_enterprise_dimension_html(dimensions["procurements"]))
     sections.append(_enterprise_dimension_html(dimensions["transformation"]))
     opportunities=_associated_records(twin, ent, lambda o: 'opportun' in o.kind); ready_opps=[o for o in opportunities if o.statement or _field(o,'client_problem','customer_problem','problem','title')]
-    sections.append("<section class='card'><h2>Commercial Opportunities</h2>"+"".join(f"<div data-business-object-id='{escape(business_object_id(o))}'><p class='pill'>{escape(_association_type(o, ent, twin) or 'Enterprise opportunity')}</p>"+_opportunity_card(o,run_id)+"</div>" for o in ready_opps)+"</section>" if ready_opps else gap("Commercial Opportunities", f"{len(opportunities)} associated candidate records supplied.", ("canonically related opportunity",), "No opportunity can be shown without an explicit relationship."))
+    sections.append("<section class='card'><h2>Commercial Opportunities</h2>"+"".join(f"<div data-business-object-id='{escape(business_object_id(o))}'><p class='pill'>{escape(_association_type(o, ent, twin) or 'Enterprise opportunity')}</p>"+_opportunity_card(o,run_id,twin)+"</div>" for o in ready_opps)+"</section>" if ready_opps else gap("Commercial Opportunities", f"{len(opportunities)} associated candidate records supplied.", ("canonically related opportunity",), "No opportunity can be shown without an explicit relationship."))
     sources=[o for o in relevant if o.kind=='evidence']
     source_html = "".join(_source_item(o) for o in sources) if sources else ("<ul>" + "".join(f"<li><code>{escape(ref)}</code></li>" for ref in factual.evidence_refs) + "</ul>" if factual.evidence_refs else "<p><strong>Insufficient.</strong> No directly linked sources are supplied.</p>")
     sections.append("<section class='card'><h2>Evidence and Uncertainty</h2>"+source_html+f"<p><strong>Unknowns:</strong> {len(factual.unknown_refs)} · <strong>Contradictions:</strong> {len(factual.contradiction_refs)}</p></section>")
@@ -1268,7 +1269,7 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
             return {'h1':'H1 Open opportunity','h2':'H2 Shaping opportunity','h3':'H3 Strategic hypothesis','award':'Existing award','framework':'Framework market'}.get(raw, _field(o, 'commercial_type', 'opportunity_type', 'hypothesis_level', 'category') or 'Commercial type not established')
         groups = {}
         for o in rows: groups.setdefault(commercial_type(o), []).append(o)
-        factual_cards = "".join(f"<section><h2>{escape(category)}</h2><div class='opportunity-grid'>{''.join('<div>'+''.join(f'<p class=\'pill\'>{escape(label)}</p>' for label in _object_association_labels(twin, o))+_opportunity_card(o, run_id)+'</div>' for o in grouped)}</div></section>" for category, grouped in groups.items())
+        factual_cards = "".join(f"<section><h2>{escape(category)}</h2><div class='opportunity-grid'>{''.join('<div>'+''.join(f'<p class=\'pill\'>{escape(label)}</p>' for label in _object_association_labels(twin, o))+_opportunity_card(o, run_id, twin)+'</div>' for o in grouped)}</div></section>" for category, grouped in groups.items())
         content=f"<p><strong>{len(rows)} opportunities available; recommendation assessment pending.</strong></p>" + factual_cards
     else:
         rows=[o for o in objects if _reinvention_kind(o)]
