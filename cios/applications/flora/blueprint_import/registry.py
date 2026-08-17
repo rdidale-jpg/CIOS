@@ -14,7 +14,8 @@ from .archive import inspect_zip_inventory, preserve_original_package, sha256_by
 from .ledger import BlueprintImportLedger, utc_now
 from .manifest import read_identity
 from .package_contracts import PackageContractDetector
-from .models import BlueprintPackageIdentity, BlueprintPackageRecord, PackageReceiptError
+from .models import (BlueprintPackageIdentity, BlueprintPackageRecord,
+                     PackageImportOperationalDiagnostic, PackageReceiptError)
 from .package_contracts import PackageContract
 from .runs import ImportRunRepository
 
@@ -85,7 +86,7 @@ class BlueprintPackageRegistry:
         return result
 
     @staticmethod
-    def persistence_diagnostic(exc: PersistenceError, health: dict[str, str]) -> str:
+    def persistence_diagnostic(exc: PersistenceError, health: dict[str, str]) -> PackageImportOperationalDiagnostic:
         root = root_exception(exc)
         name = f"{type(root).__module__}.{type(root).__qualname__}"
         lowered = type(root).__name__.lower()
@@ -93,23 +94,22 @@ class BlueprintPackageRegistry:
         serialization = "YES" if ("serial" in lowered or isinstance(root, (TypeError, ValueError))) else "NO"
         schema = "YES" if "programming" in lowered else ("NO" if "integrity" in lowered else "UNKNOWN")
         constraint = "integrity constraint (details in server log)" if "integrity" in lowered else "not safely available"
-        return "\n".join((
-            f"Underlying exception class: {name}",
-            f"Underlying safe message: {safe_exception_summary(root)}",
-            "Persistence operation: create",
-            "Record/model: BlueprintPackageRecord",
-            f"Storage backend: {storage_mode()['mode']} (filesystem JSON)",
-            f"Constraint/table/column where safely available: {constraint}",
-            "Transaction state: no database transaction; receipt not committed",
-            f"Schema/migration mismatch detected: {schema}",
-            f"Connection failure detected: {connection}",
-            f"Serialization failure detected: {serialization}",
-            "",
-            f"Storage connection: {health['storage_connection']}",
-            f"BlueprintPackageRecord schema reachable: {health['schema_reachable']}",
-            f"Minimal BlueprintPackageRecord persistence path: {health['minimal_persistence']}",
-            f"Schema alignment: {health['schema_alignment']}",
-        ))
+        return PackageImportOperationalDiagnostic(
+            underlying_exception_class=name,
+            underlying_safe_message=safe_exception_summary(root),
+            persistence_operation="create",
+            record_model="BlueprintPackageRecord",
+            storage_backend=f"{storage_mode().get('mode') or 'UNKNOWN'} (filesystem JSON)",
+            constraint_location=constraint,
+            transaction_state="no database transaction; receipt not committed",
+            schema_mismatch_detected=schema,
+            connection_failure_detected=connection,
+            serialization_failure_detected=serialization,
+            storage_connection=health.get("storage_connection") or "UNKNOWN",
+            schema_reachable=health.get("schema_reachable") or "UNKNOWN",
+            minimal_persistence=health.get("minimal_persistence") or "UNKNOWN",
+            schema_alignment=health.get("schema_alignment") or "UNKNOWN",
+        )
 
     def receive(self, content: bytes, original_filename: str, actor: str, workspace_id: str = "") -> BlueprintPackageRecord:
         return self._receive(content, original_filename, actor, workspace_id)
