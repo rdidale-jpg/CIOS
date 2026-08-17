@@ -51,15 +51,20 @@ class BlueprintPackageRegistry:
 
     def storage_health(self) -> dict[str, str]:
         """Exercise the receipt-record path with a disposable, non-canonical probe."""
-        root = data_path("blueprint_import", "packages")
-        probe = root / f".blueprint-package-health-{uuid4().hex}.json"
         result = {
             "storage_connection": "FAIL",
             "schema_reachable": "FAIL",
             "minimal_persistence": "FAIL",
             "schema_alignment": "UNKNOWN",
         }
+        probe = None
         try:
+            # Health reporting runs while handling a persistence exception.  Path
+            # resolution is itself storage work and therefore belongs inside this
+            # best-effort boundary; it must not replace the exception being
+            # diagnosed.
+            root = data_path("blueprint_import", "packages")
+            probe = root / f".blueprint-package-health-{uuid4().hex}.json"
             ensure_writable_dir(root)
             result["storage_connection"] = "PASS"
             # This deliberately uses the same JSON adapter and receipt-record
@@ -72,7 +77,11 @@ class BlueprintPackageRegistry:
         except Exception:
             pass
         finally:
-            probe.unlink(missing_ok=True)
+            if probe is not None:
+                try:
+                    probe.unlink(missing_ok=True)
+                except OSError:
+                    pass
         return result
 
     @staticmethod
