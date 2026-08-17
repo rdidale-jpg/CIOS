@@ -256,7 +256,10 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
                 "blueprint_package_receive_persistence_failed diagnostic=%s service=%s operation=create record_type=BlueprintPackageRecord",
                 diagnostic_ref,
                 "cios.applications.flora.blueprint_import.registry.BlueprintPackageRegistry.receive",
-                extra={"flora_event": {"diagnostic_reference": diagnostic_ref, "operation": "create", "record_type": "BlueprintPackageRecord"}},
+                extra={"flora_event": {"diagnostic_reference": diagnostic_ref,
+                                       "operation": exc.context.get("operation", "create"),
+                                       "record_type": "BlueprintPackageRecord",
+                                       "filesystem": exc.context}},
             )
         return _safe_failure(message, "Package received", False, False, "Return to package import and choose a safe ZIP. No canonical changes were made.", decision, diagnostic_ref=diagnostic_ref, operational_diagnostic=operational_diagnostic), 400, "/blueprint-import"
 

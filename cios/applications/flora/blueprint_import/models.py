@@ -35,6 +35,7 @@ class PackageImportOperationalDiagnostic:
     schema_reachable: str = "UNKNOWN"
     minimal_persistence: str = "UNKNOWN"
     schema_alignment: str = "UNKNOWN"
+    filesystem_context: dict[str, Any] = field(default_factory=dict)
 
     def rows(self) -> tuple[tuple[str, str], ...]:
         values = (
@@ -52,6 +53,15 @@ class PackageImportOperationalDiagnostic:
             ("BlueprintPackageRecord schema reachable", self.schema_reachable),
             ("Minimal BlueprintPackageRecord persistence path", self.minimal_persistence),
             ("Schema alignment", self.schema_alignment),
+            ("Filesystem operation", self.filesystem_context.get("operation", "UNKNOWN")),
+            ("Failing path", self.filesystem_context.get("path", "UNKNOWN")),
+            ("Errno", self.filesystem_context.get("errno", "UNKNOWN")),
+            ("Available bytes", self.filesystem_context.get("available_bytes", "UNKNOWN")),
+            ("Available inodes", self.filesystem_context.get("available_inodes", "UNKNOWN")),
+            ("Filesystem device id", self.filesystem_context.get("filesystem_device_id", "UNKNOWN")),
+            ("Target is mount", self.filesystem_context.get("is_mount", "UNKNOWN")),
+            ("Parent writable", self.filesystem_context.get("parent_writable", "UNKNOWN")),
+            ("Temporary path", self.filesystem_context.get("temp_path", "UNKNOWN")),
         )
         return tuple((label, str(value).strip() or "UNKNOWN") for label, value in values)
 

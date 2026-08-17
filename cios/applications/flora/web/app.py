@@ -1349,7 +1349,9 @@ def run(host: str | None = None, port: int | None = None) -> None:
         f"Flora application entry module={__name__} resolved_file={Path(__file__).resolve()}",
         flush=True,
     )
-    print(f"Flora storage {storage['status']}: {storage['data_root']}", flush=True)
+    print({"event": "flora_storage_probe", "status": storage["status"],
+           "data_root": storage["data_root"], "storage_mode": storage.get("storage_mode"),
+           "diagnostics": storage.get("diagnostics", {})}, flush=True)
     auto_status = pilot_auto_sign_in_status()
     if auto_status.requested:
         print("WARNING: Pilot auto-sign-in grants the configured pilot identity to anyone able to reach this service.", flush=True)
@@ -1362,7 +1364,7 @@ def run(host: str | None = None, port: int | None = None) -> None:
             flush=True,
         )
     if not storage.get("ready"):
-        print({"event": "flora_storage_unavailable", "data_root": storage.get("data_root"), "storage_mode": storage.get("storage_mode"), "error": storage.get("error")}, flush=True)
+        print({"event": "flora_storage_unavailable", "data_root": storage.get("data_root"), "storage_mode": storage.get("storage_mode"), "error": storage.get("error"), "diagnostics": storage.get("diagnostics", {})}, flush=True)
         raise SystemExit("Flora persistent storage is unavailable")
     server = ThreadingHTTPServer((bind_host, bind_port), FloraWebHandler)
     print(f"Flora web service listening on {bind_host}:{bind_port}", flush=True)

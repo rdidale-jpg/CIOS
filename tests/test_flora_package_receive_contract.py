@@ -79,6 +79,9 @@ def test_registry_persists_repository_package_and_preserves_failed_create_cause(
 
     assert isinstance(raised.value.__cause__, PermissionError)
     assert "operation=create; model=BlueprintPackageRecord" in str(raised.value)
+    assert raised.value.context["operation"] == "package_record_write"
+    assert not list((failed_root / "blueprint_import" / "runs").glob("*.json"))
+    assert not list((failed_root / "blueprint_import" / "archives").rglob("*.zip"))
     after = tuple((failed_root / "memory").rglob("*")) if (failed_root / "memory").exists() else ()
     assert after == before == ()
 
