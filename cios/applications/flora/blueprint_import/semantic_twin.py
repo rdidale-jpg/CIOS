@@ -414,6 +414,28 @@ def query_subject_associations(twin: SemanticTwin, subject_id: str,
                                                       result.relationship_id)))
 
 
+def opportunity_enterprise_names(twin: SemanticTwin, opportunity: SemanticObject) -> tuple[str, ...]:
+    """Project Enterprise names from governed Opportunity-target relationships.
+
+    The relationship is the association owner. Direct fields remain package facts,
+    but cannot manufacture an association when the graph has none.
+    """
+    opportunity_id = business_object_id(opportunity).casefold()
+    names: list[str] = []
+    for row in resolve_relationships(twin):
+        if (not row.resolved or row.relationship_type != "Opportunity targets Enterprise"
+                or row.source is None or row.target is None
+                or business_object_id(row.source).casefold() != opportunity_id
+                or row.target.kind not in {"enterprise", "enterprise_twin", "entity"}):
+            continue
+        name = str((row.target.attributes or {}).get("enterprise_name")
+                   or (row.target.attributes or {}).get("organisation_name")
+                   or (row.target.attributes or {}).get("name") or row.target.statement).strip()
+        if name and name not in names:
+            names.append(name)
+    return tuple(names)
+
+
 def enterprise_associations(twin: SemanticTwin, enterprise: SemanticEnterprise,
                             kinds: set[str]) -> tuple[tuple[SemanticObject, str, str], ...]:
     """Consume resolved, typed relationships for one import-scoped Enterprise.
@@ -512,7 +534,9 @@ def assemble_semantic_twin(candidates: list[dict[str, Any]]) -> SemanticTwin:
 
 def _object(candidate: dict[str, Any]) -> SemanticObject:
     p = candidate.get("payload") or {}
-    statement = next((str(p[k]).strip() for k in ("statement", "summary", "description", "title") if p.get(k)), "")
+    statement = next((str(p[k]).strip() for k in
+                      ("statement", "summary", "description", "title", "opportunity_title")
+                      if p.get(k)), "")
     declared_kind = str(candidate.get("candidate_object_class") or "unclassified")
     if declared_kind == "capability_offer" and p.get("name"):
         statement = f"{p['name']} — {statement}" if statement else str(p["name"])
@@ -552,6 +576,7 @@ def _object(candidate: dict[str, Any]) -> SemanticObject:
         if "telecom" in normal: domains.append("telecoms")
         elif "media" in normal: domains.append("media")
         elif "sport" in normal: domains.append("sport")
+        elif normal.strip(): domains.append(normal.strip())
     affected = p.get("affected_enterprises") or p.get("affected_organisations") or p.get("affected_market_participants") or ()
     if isinstance(affected, str): affected = (affected,)
     if kind == "unknown": sufficiency, permitted = "unknown", "investigation"
