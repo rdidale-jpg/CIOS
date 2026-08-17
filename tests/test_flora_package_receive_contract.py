@@ -7,7 +7,9 @@ import pytest
 from cios.applications.flora.blueprint_import.models import BlueprintPackageRecord
 from cios.applications.flora.blueprint_import.registry import BlueprintPackageRegistry
 from cios.applications.flora.blueprint_import.validator import BlueprintPackageValidator
-from cios.applications.flora.blueprint_import.views import upload_and_validate_blueprint
+from cios.applications.flora.blueprint_import.views import (
+    _failure_details_view_model, _failure_summary, upload_and_validate_blueprint,
+)
 from cios.applications.flora.storage import PersistenceError
 from tests.test_flora_blueprint_import_validation import pkg
 
@@ -91,17 +93,58 @@ def test_receive_failure_exposes_safe_root_cause_without_canonical_changes(
     )
 
     assert status == 400 and target == "/blueprint-import"
-    assert f"Underlying exception class: builtins.{type(concrete_error).__name__}" in html
-    assert "Underlying safe message:" in html
-    assert "Persistence operation: create" in html
-    assert "Record/model: BlueprintPackageRecord" in html
-    assert "Storage connection: PASS" in html
-    assert "Minimal BlueprintPackageRecord persistence path: FAIL" in html
+    assert f"<th>Underlying exception class</th><td>builtins.{type(concrete_error).__name__}</td>" in html
+    assert "<th>Underlying safe message</th><td>" in html
+    assert "<th>Persistence operation</th><td>create</td>" in html
+    assert "<th>Record/model</th><td>BlueprintPackageRecord</td>" in html
+    assert "<th>Storage connection</th><td>PASS</td>" in html
+    assert "<th>Minimal BlueprintPackageRecord persistence path</th><td>FAIL</td>" in html
+    assert "Grouped failure reasons" not in html
     assert "secret-token" not in html and "/sensitive/runtime/path" not in html
     assert not canonical.exists()
     logged = next(record for record in caplog.records if record.message.startswith("blueprint_package_receive_persistence_failed"))
     assert logged.flora_event["diagnostic_reference"].startswith("bpi-diag-")
     assert logged.exc_info[1].__cause__ is concrete_error
+
+
+def test_persistence_diagnostic_reaches_failure_view_model_as_values_not_reasons():
+    concrete_error = TypeError("private payload must not be projected")
+    try:
+        raise PersistenceError("receipt persistence failed") from concrete_error
+    except PersistenceError as exc:
+        diagnostic = BlueprintPackageRegistry.persistence_diagnostic(exc, {
+            "storage_connection": "PASS",
+            "schema_reachable": "PASS",
+            "minimal_persistence": "FAIL",
+            "schema_alignment": "UNKNOWN",
+        })
+
+    model = _failure_details_view_model("Package receipt failed; stage=Package received", diagnostic)
+    values = dict(model.operational_diagnostic.rows())
+
+    assert values["Underlying exception class"] == "builtins.TypeError"
+    assert values["Underlying safe message"] == "The record could not be serialized for storage."
+    assert values["Persistence operation"] == "create"
+    assert values["Record/model"] == "BlueprintPackageRecord"
+    assert values["Storage backend"] or values["Storage backend"] == "UNKNOWN"
+    assert model.validation_failure_reasons == ()
+
+    html = _failure_summary("Package receipt failed; stage=Package received", diagnostic)
+    assert "<th>Underlying exception class</th><td>builtins.TypeError</td>" in html
+    assert "Grouped failure reasons" not in html
+    assert "validation failure details were reported" not in html
+
+
+def test_normal_validation_failure_reasons_still_group_without_operational_diagnostic():
+    reasons = "; ".join(["Missing required file: manifest.json"] * 4)
+
+    model = _failure_details_view_model(reasons)
+    html = _failure_summary(reasons)
+
+    assert model.validation_failure_reasons == ("Missing required file: manifest.json",) * 4
+    assert "4 validation failure details were reported" in html
+    assert "Grouped failure reasons" in html
+    assert "<td>Missing required file</td><td>4</td>" in html
 
 
 def test_health_probe_failure_does_not_replace_chained_receive_error(monkeypatch, tmp_path, caplog):
@@ -135,10 +178,10 @@ def test_health_probe_failure_does_not_replace_chained_receive_error(monkeypatch
     )
 
     assert status == 400 and target == "/blueprint-import"
-    assert "Underlying exception class: builtins.OSError" in html
-    assert "Underlying safe message: The filesystem storage operation failed." in html
-    assert "Persistence operation: create" in html
-    assert "Record/model: BlueprintPackageRecord" in html
+    assert "<th>Underlying exception class</th><td>builtins.OSError</td>" in html
+    assert "<th>Underlying safe message</th><td>The filesystem storage operation failed.</td>" in html
+    assert "<th>Persistence operation</th><td>create</td>" in html
+    assert "<th>Record/model</th><td>BlueprintPackageRecord</td>" in html
     logged = next(record for record in caplog.records if record.message.startswith("blueprint_package_receive_persistence_failed"))
     received_error = logged.exc_info[1]
     assert isinstance(received_error, PersistenceError)

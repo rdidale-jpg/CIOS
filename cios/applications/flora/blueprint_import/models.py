@@ -18,6 +18,53 @@ class PackageReceiptError(ValueError):
 
 
 @dataclass(frozen=True)
+class PackageImportOperationalDiagnostic:
+    """Safe, structured facts about a package-import operational failure."""
+
+    underlying_exception_class: str
+    underlying_safe_message: str
+    persistence_operation: str
+    record_model: str
+    storage_backend: str
+    constraint_location: str = "UNKNOWN"
+    transaction_state: str = "UNKNOWN"
+    schema_mismatch_detected: str = "UNKNOWN"
+    connection_failure_detected: str = "UNKNOWN"
+    serialization_failure_detected: str = "UNKNOWN"
+    storage_connection: str = "UNKNOWN"
+    schema_reachable: str = "UNKNOWN"
+    minimal_persistence: str = "UNKNOWN"
+    schema_alignment: str = "UNKNOWN"
+
+    def rows(self) -> tuple[tuple[str, str], ...]:
+        values = (
+            ("Underlying exception class", self.underlying_exception_class),
+            ("Underlying safe message", self.underlying_safe_message),
+            ("Persistence operation", self.persistence_operation),
+            ("Record/model", self.record_model),
+            ("Storage backend", self.storage_backend),
+            ("Constraint/table/column where safely available", self.constraint_location),
+            ("Transaction state", self.transaction_state),
+            ("Schema/migration mismatch detected", self.schema_mismatch_detected),
+            ("Connection failure detected", self.connection_failure_detected),
+            ("Serialization failure detected", self.serialization_failure_detected),
+            ("Storage connection", self.storage_connection),
+            ("BlueprintPackageRecord schema reachable", self.schema_reachable),
+            ("Minimal BlueprintPackageRecord persistence path", self.minimal_persistence),
+            ("Schema alignment", self.schema_alignment),
+        )
+        return tuple((label, str(value).strip() or "UNKNOWN") for label, value in values)
+
+
+@dataclass(frozen=True)
+class PackageFailureDetailsViewModel:
+    """Failure-page data, keeping validation reasons separate from operations."""
+
+    validation_failure_reasons: tuple[str, ...] = ()
+    operational_diagnostic: PackageImportOperationalDiagnostic | None = None
+
+
+@dataclass(frozen=True)
 class FileInventoryItem:
     path: str
     size_bytes: int

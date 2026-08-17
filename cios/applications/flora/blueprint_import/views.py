@@ -34,7 +34,8 @@ from .review import (CandidateReviewRepository, CandidateReviewService,
 from .validator import BlueprintPackageValidator, can_inspect_blueprint_package
 from .cios_twin_adapter import MAPPING_VERSION
 from .restage import BlueprintRestageService, can_restage_blueprint_package, RESTAGE_STAGES
-from .models import BlueprintPackageRecord, PackageReceiptError
+from .models import (BlueprintPackageRecord, PackageFailureDetailsViewModel,
+                     PackageImportOperationalDiagnostic, PackageReceiptError)
 from .guidance import ImportGuidance, ImportGuidanceRepository, TWIN_TYPES, detect_package_type, expectation_mismatch
 from .lifecycle import ImportLifecycleService
 from .twin_governance import (DownstreamReconciliationRepository, TwinDependencyService,
@@ -247,16 +248,17 @@ def upload_and_validate_blueprint(files: dict[str, bytes], fields: dict[str, str
     except Exception as exc:
         message = _receive_failure_diagnostic(exc)
         diagnostic_ref = f"bpi-diag-{uuid4().hex[:12]}"
+        operational_diagnostic = None
         if isinstance(exc, PersistenceError):
             health = BlueprintPackageRegistry().storage_health()
-            message += "\n" + BlueprintPackageRegistry.persistence_diagnostic(exc, health)
+            operational_diagnostic = BlueprintPackageRegistry.persistence_diagnostic(exc, health)
             LOGGER.exception(
                 "blueprint_package_receive_persistence_failed diagnostic=%s service=%s operation=create record_type=BlueprintPackageRecord",
                 diagnostic_ref,
                 "cios.applications.flora.blueprint_import.registry.BlueprintPackageRegistry.receive",
                 extra={"flora_event": {"diagnostic_reference": diagnostic_ref, "operation": "create", "record_type": "BlueprintPackageRecord"}},
             )
-        return _safe_failure(message, "Package received", False, False, "Return to package import and choose a safe ZIP. No canonical changes were made.", decision, diagnostic_ref=diagnostic_ref), 400, "/blueprint-import"
+        return _safe_failure(message, "Package received", False, False, "Return to package import and choose a safe ZIP. No canonical changes were made.", decision, diagnostic_ref=diagnostic_ref, operational_diagnostic=operational_diagnostic), 400, "/blueprint-import"
 
     try:
         validation_result = BlueprintPackageValidator().validate_and_stage(record.package_ref, actor, None if bypass else headers)
@@ -1210,16 +1212,32 @@ def _stage_statuses(failed_stage: str, decision=None) -> dict[str, str]:
     return statuses
 
 
-def _failure_summary(message: str) -> str:
+def _failure_details_view_model(message: str, operational_diagnostic: PackageImportOperationalDiagnostic | None = None) -> PackageFailureDetailsViewModel:
     import re
     parts = [p.strip() for p in re.split(r"[;\n]+", str(message or "")) if p.strip()]
+    # Receipt service context is operational metadata, not package validation.
+    if operational_diagnostic is not None:
+        parts = ()
+    return PackageFailureDetailsViewModel(tuple(parts), operational_diagnostic)
+
+
+def _failure_summary(message: str, operational_diagnostic: PackageImportOperationalDiagnostic | None = None) -> str:
+    details_model = _failure_details_view_model(message, operational_diagnostic)
+    parts = details_model.validation_failure_reasons
+    operational = details_model.operational_diagnostic
+    operational_html = ""
+    if operational is not None:
+        rows = "".join(f"<tr><th>{escape(label)}</th><td>{escape(value)}</td></tr>" for label, value in operational.rows())
+        operational_html = f"<h3>Operational diagnostic</h3><table><tbody>{rows}</tbody></table>"
+    if not parts:
+        return f"<p>Package receipt failed.</p>{operational_html}"
     if len(parts) <= 3 and len(str(message)) <= 500:
-        return f"<p>{escape(str(message))}</p>"
+        return f"<p>{escape(str(message))}</p>{operational_html}"
     grouped = Counter(p.split(":", 1)[0].strip() for p in parts)
     examples = "".join(f"<li>{escape(p)}</li>" for p in parts[:5])
     groups = "".join(f"<tr><td>{escape(k)}</td><td>{v}</td></tr>" for k, v in grouped.most_common())
     details = escape(str(message), quote=True)
-    return f"<p>{len(parts)} validation failure details were reported. First affected items:</p><ul>{examples}</ul><h3>Grouped failure reasons</h3><table><tbody>{groups}</tbody></table><details><summary>Expandable failure details</summary><pre>{details}</pre></details><p><a download='blueprint-failure-details.txt' href='data:text/plain,{details}'>Download details</a></p>"
+    return f"<p>{len(parts)} validation failure details were reported. First affected items:</p><ul>{examples}</ul><h3>Grouped failure reasons</h3><table><tbody>{groups}</tbody></table><details><summary>Expandable failure details</summary><pre>{details}</pre></details><p><a download='blueprint-failure-details.txt' href='data:text/plain,{details}'>Download details</a></p>{operational_html}"
 
 
 def _authorisation_context(decision) -> str:
@@ -1254,7 +1272,7 @@ def _pilot_diagnostics(package=None, summary: dict[str, Any] | None = None) -> s
     <tr><th>Promotion status</th><td>not promoted — separate authorisation required</td></tr>
     <tr><th>Correlation ID</th><td><code>{escape(correlation)}</code></td></tr></table></section>"""
 
-def _safe_failure(message, stage, changed, retry, next_step, decision=None, diagnostic_ref: str = "", audit_warning: str = "", import_run_id: str = ""):
+def _safe_failure(message, stage, changed, retry, next_step, decision=None, diagnostic_ref: str = "", audit_warning: str = "", import_run_id: str = "", operational_diagnostic: PackageImportOperationalDiagnostic | None = None):
     diagnostic_ref = diagnostic_ref or f"bpi-diag-{uuid4().hex[:12]}"
     unavailable = "Authorisation context unavailable after failure"
     bypass = pilot_import_bypass_enabled()
@@ -1267,7 +1285,7 @@ def _safe_failure(message, stage, changed, retry, next_step, decision=None, diag
     canonical_failed_stage = next((name for name, status in statuses.items() if status == "Failed"), stage)
     rows = "".join(f"<tr><th>{escape(name)}</th><td>{escape(status)}</td></tr>" for name, status in statuses.items())
     warning_panel = f"<section class='card warning'><h2>Diagnostics warning</h2><p>{escape(audit_warning)}</p><p>Diagnostic reference: <code>{escape(diagnostic_ref)}</code></p><p>No canonical changes occurred.</p></section>" if audit_warning else ""
-    failure_summary = _failure_summary(message)
+    failure_summary = _failure_summary(message, operational_diagnostic)
     received = statuses.get("Package received") == "Completed"
     inspected = statuses.get("Package inspected") == "Completed"
     import_row = f"<li>Import identifier: <code>{escape(import_run_id)}</code></li>" if import_run_id else ""
