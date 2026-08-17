@@ -6,6 +6,7 @@ from dataclasses import replace
 import json
 import logging
 import os
+from pathlib import Path
 from html import escape
 from typing import Any
 from uuid import uuid4
@@ -13,7 +14,7 @@ from uuid import uuid4
 from cios.applications.flora.access import authenticated_flora_user, active_flora_workspace, blueprint_upload_authorisation, can_access_enterprise, flora_roles, is_cios_owner, user_enterprise_access
 from cios.applications.flora.workspace.views import _page
 from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRepository, repair_blueprint_canvas_access
-from cios.applications.flora.storage import PersistenceError, storage_mode
+from cios.applications.flora.storage import PersistenceError, storage_mode, data_path
 from cios.applications.flora.live.runtime import deployment_metadata
 from cios.applications.flora.pilot_import import (PILOT_IMPORT_ACTOR, PILOT_IMPORT_AUTH_MODE, PILOT_IMPORT_WORKSPACE, pilot_import_bypass_enabled, pilot_import_warning)
 
@@ -37,7 +38,7 @@ from .restage import BlueprintRestageService, can_restage_blueprint_package, RES
 from .models import (BlueprintPackageRecord, PackageFailureDetailsViewModel,
                      PackageImportOperationalDiagnostic, PackageReceiptError)
 from .guidance import ImportGuidance, ImportGuidanceRepository, TWIN_TYPES, detect_package_type, expectation_mismatch
-from .lifecycle import ImportLifecycleService
+from .lifecycle import ImportLifecycleService, TwinImportLifecycleService
 from .twin_governance import (DownstreamReconciliationRepository, TwinDependencyService,
                               GovernedIdentityResolutionRepository, assess_impacts,
                               governed_semantics, project_twin_identity)
@@ -462,6 +463,7 @@ def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers:
         approval = svc.approve_plan(import_run_id, plan_id, authenticated_flora_user(headers), (form.get("rationale") or [""])[0], headers)
         result = svc.execute_approved_plan(import_run_id, approval.approval_id, authenticated_flora_user(headers), headers)
         ImportLifecycleService().mark_promoted(import_run_id, authenticated_flora_user(headers), len(result.records_created)+len(result.records_updated))
+        TwinImportLifecycleService().supersede_previous_after_promotion(ctx["package"], authenticated_flora_user(headers))
         impacts = assess_impacts(ctx["package"], TwinDependencyService().discover(ctx["package"]))
         DownstreamReconciliationRepository().create_pending(ctx["package"], ctx["package"].identity.package_version, impacts, authenticated_flora_user(headers))
         repair_blueprint_canvas_access(import_run_id, headers)
@@ -486,8 +488,27 @@ def promotion_confirmation_page(import_run_id: str, headers: Any) -> tuple[str, 
     signals={"unknown_count":sum(c.get("candidate_object_class")=="unknown" for c in ctx["candidates"]),"contradiction_count":sum(c.get("candidate_object_class")=="contradiction" for c in ctx["candidates"])}
     quarantined=sum(c.get('validation_status')=='quarantined' for c in ctx['candidates']); rejected=sum(c.get('validation_status')=='rejected' for c in ctx['candidates'])
     excluded=int(proposed.get('Projection-only',0))+int(proposed.get('Ignored',0))+int(proposed.get('Unchanged',0))
-    body=_workflow_progress("promote",import_run_id)+_package_header(ctx["package"])+_affected_twins_section(ctx["package"])+f"""<section class='card'><h2>Promotion summary</h2><p><strong>No canonical changes will occur until promotion is approved.</strong></p><table><tr><th>Affected Twin</th><td>{escape(_package_name(ctx['package']))}</td></tr><tr><th>Records to create</th><td>{int(proposed.get('Creates',0))}</td></tr><tr><th>Records to update</th><td>{int(proposed.get('Updates',0))}</td></tr><tr><th>Records excluded</th><td>{excluded}</td></tr><tr><th>Quarantined records</th><td>{quarantined}</td></tr><tr><th>Rejected records</th><td>{rejected}</td></tr><tr><th>Unresolved Unknowns</th><td>{signals['unknown_count']}</td></tr><tr><th>Unresolved Contradictions</th><td>{signals['contradiction_count']}</td></tr><tr><th>Expected canonical mutation count</th><td>{int(proposed.get('Expected canonical mutations', int(proposed.get('Creates',0))+int(proposed.get('Updates',0))))}</td></tr><tr><th>Promotion rationale</th><td>Required; must be explicit and non-empty</td></tr></table><details><summary>Technical promotion details</summary><table><tr><th>Import identifier</th><td><code>{escape(import_run_id)}</code></td></tr><tr><th>Checksum</th><td><code>{escape(ctx['package'].package_sha256)}</code></td></tr><tr><th>Expected type</th><td>{escape(guidance.expected_type if guidance else 'Unavailable')}</td></tr><tr><th>Detected type</th><td>{escape(detected)}</td></tr><tr><th>Information completeness</th><td>Not assessed — no owner-produced IT-001 result is consumed by this governance view.</td></tr><tr><th>Decision maturity</th><td>Not assessed — no ADR-009 owner result is supplied.</td></tr><tr><th>Promotion readiness</th><td>Not inferred; approval remains a protected governance action.</td></tr></table></details><p>Promotion will create or update governed Twin state and preserve the original package, checksum, lineage, review decision and lifecycle audit. It does not resolve outstanding warnings.</p></section><section class='card'><h2>Confirm promotion</h2><form method='post' action='/blueprint-import/{escape(import_run_id)}/approve'><input type='hidden' name='plan_id' value='{escape(str(job.get('plan_id','')))}'><input type='hidden' name='confirm_plan' value='yes'><input type='hidden' name='confirm_mutations' value='yes'><label for='rationale'>Approval rationale</label><textarea id='rationale' name='rationale' required></textarea><p><button type='submit'>Promote Twin</button> <a href='/blueprint-import/{escape(import_run_id)}/review'>Return to Review</a></p></form></section>"""+_cancel_action(import_run_id,"promote")
+    update = _update_difference_section(ctx["package"])
+    body=_workflow_progress("promote",import_run_id)+_package_header(ctx["package"])+_affected_twins_section(ctx["package"])+update+f"""<section class='card'><h2>Promotion summary</h2><p><strong>No canonical changes will occur until promotion is approved.</strong></p><table><tr><th>Affected Twin</th><td>{escape(_package_name(ctx['package']))}</td></tr><tr><th>Records to create</th><td>{int(proposed.get('Creates',0))}</td></tr><tr><th>Records to update</th><td>{int(proposed.get('Updates',0))}</td></tr><tr><th>Records excluded</th><td>{excluded}</td></tr><tr><th>Quarantined records</th><td>{quarantined}</td></tr><tr><th>Rejected records</th><td>{rejected}</td></tr><tr><th>Unresolved Unknowns</th><td>{signals['unknown_count']}</td></tr><tr><th>Unresolved Contradictions</th><td>{signals['contradiction_count']}</td></tr><tr><th>Expected canonical mutation count</th><td>{int(proposed.get('Expected canonical mutations', int(proposed.get('Creates',0))+int(proposed.get('Updates',0))))}</td></tr><tr><th>Promotion rationale</th><td>Required; must be explicit and non-empty</td></tr></table><details><summary>Technical promotion details</summary><table><tr><th>Import identifier</th><td><code>{escape(import_run_id)}</code></td></tr><tr><th>Checksum</th><td><code>{escape(ctx['package'].package_sha256)}</code></td></tr><tr><th>Expected type</th><td>{escape(guidance.expected_type if guidance else 'Unavailable')}</td></tr><tr><th>Detected type</th><td>{escape(detected)}</td></tr><tr><th>Information completeness</th><td>Not assessed — no owner-produced IT-001 result is consumed by this governance view.</td></tr><tr><th>Decision maturity</th><td>Not assessed — no ADR-009 owner result is supplied.</td></tr><tr><th>Promotion readiness</th><td>Not inferred; approval remains a protected governance action.</td></tr></table></details><p>Promotion will create or update governed Twin state and preserve the original package, checksum, lineage, review decision and lifecycle audit. It does not resolve outstanding warnings.</p></section><section class='card'><h2>Confirm promotion</h2><form method='post' action='/blueprint-import/{escape(import_run_id)}/approve'><input type='hidden' name='plan_id' value='{escape(str(job.get('plan_id','')))}'><input type='hidden' name='confirm_plan' value='yes'><input type='hidden' name='confirm_mutations' value='yes'><label for='rationale'>Approval rationale</label><textarea id='rationale' name='rationale' required></textarea><p><button type='submit'>Promote Twin</button> <a href='/blueprint-import/{escape(import_run_id)}/review'>Return to Review</a></p></form></section>"""+_cancel_action(import_run_id,"promote")
     return _page("Promote Twin",body),200
+
+
+def _update_difference_section(package) -> str:
+    service=TwinImportLifecycleService(); previous=service.current_release(package)
+    if not previous: return ""
+    old=CandidateStagingRepository().list_candidates(previous.import_run_id); new=CandidateStagingRepository().list_candidates(package.import_run_id)
+    aliases=(("Enterprises",{"enterprise"}),("Evidence",{"evidence"}),("Programmes",{"programme","program"}),
+             ("Material Pressures",{"material_pressure"}),("Opportunities",{"opportunity"}),
+             ("Unknowns",{"unknown"}),("Contradictions",{"contradiction"}),("Relationships",{"relationship"}))
+    def keyed(rows, classes): return {str(r.get('candidate_record_id')):r for r in rows if str(r.get('candidate_object_class','')).casefold() in classes}
+    deltas=[]
+    for label,classes in aliases:
+        a,b=keyed(old,classes),keyed(new,classes); common=a.keys() & b.keys()
+        changed=sum(a[k].get('payload') != b[k].get('payload') for k in common)
+        deltas.append((label,len(b.keys()-a.keys()),len(a.keys()-b.keys()),changed))
+    rows=''.join(f"<tr><th>{escape(label)}</th><td>{added} added / {removed} removed / {changed} changed</td></tr>" for label,added,removed,changed in deltas)
+    old_id=project_twin_identity(previous); new_id=project_twin_identity(package)
+    return f"<section class='card'><h2>Twin update</h2><table><tr><th>Existing current release</th><td>{escape(old_id.package_version)}</td></tr><tr><th>Candidate replacement release</th><td>{escape(new_id.package_version)}</td></tr><tr><th>Twin identity match</th><td><strong>YES</strong> — {escape(new_id.twin_id or '')}</td></tr>{rows}<tr><th>Canonical impact</th><td>Previous release becomes superseded only after explicit human approval and successful promotion.</td></tr></table></section>"
 
 
 def cancellation_confirmation_page(import_run_id: str, stage: str, headers: Any) -> tuple[str,int]:
@@ -527,9 +548,57 @@ def history_page(headers: Any) -> tuple[str, int]:
         plans = DryRunPlanRepository().list(p.import_run_id)
         promo = _latest_promotion_status(p.import_run_id)
         inspection = p.package_inspection or {}
-        rows.append(f"<tr><td>{escape(_package_name(p))}</td><td>{escape(str(inspection.get('contract_type', 'Blueprint Package')))}</td><td>{'eligible' if inspection.get('promotion_eligible') or summary else 'not eligible'}</td><td>{escape(p.identity.enterprise_id)}</td><td>{escape(p.identity.package_version)}</td><td>{escape(p.received_by)}</td><td>{escape(p.received_at)}</td><td>{'complete' if summary else p.status}</td><td>{'planned' if plans else 'not reviewed'}</td><td>{escape(promo)}</td><td>{escape(_twin_version(p))}</td><td><a href='/blueprint-import/{escape(p.import_run_id)}'>View import record</a></td></tr>")
-    table = "<table><thead><tr><th>Package name</th><th>Contract</th><th>Promotion eligibility</th><th>Enterprise</th><th>Package version</th><th>Uploaded by</th><th>Uploaded date</th><th>Validation status</th><th>Review status</th><th>Promotion status</th><th>Resulting Twin version</th><th>Actions</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table>"
+        identity=project_twin_identity(p); lifecycle=ImportLifecycleService().get(p.import_run_id)
+        promoted=lifecycle.state in {'promoted','superseded','archived'}
+        canonical = 'current' if lifecycle.state=='promoted' and lifecycle.current else ('superseded' if lifecycle.state=='superseded' else 'candidate')
+        actions=f"<a href='/blueprint-import/{escape(p.import_run_id)}'>View</a>"
+        if not promoted:
+            actions += f" · <a href='/blueprint-import/{escape(p.import_run_id)}/delete'>Delete candidate import</a>"
+        elif canonical == 'current':
+            actions += f" · <a href='/blueprint-import?update_twin={escape(identity.twin_id or '')}'>Import newer release</a> · <a href='/blueprint-import/{escape(p.import_run_id)}/archive'>Archive/Supersede</a>"
+        else: actions = f"<a href='/blueprint-import/{escape(p.import_run_id)}/staging-history'>View history</a> · Archive state"
+        rows.append(f"<tr><td>{escape(identity.twin_id or p.identity.enterprise_id)}</td><td>{escape(identity.primary_subject_name or _package_name(p))}</td><td>{escape(p.identity.package_id)}</td><td>{escape(identity.package_version)}</td><td>{escape(p.received_at)}</td><td>{escape(lifecycle.state)}</td><td>{'promoted' if promoted else 'candidate'}</td><td>{escape(canonical)}</td><td>{'complete' if summary else p.status}</td><td>{escape(promo)}</td><td>{actions}</td></tr>")
+    # The pre-importer Banking Twin is an existing canonical Enterprise
+    # Knowledge release, not a candidate package.  Surface that actual owner
+    # state rather than inventing an import record or offering hard deletion.
+    banking_source = Path(__file__).resolve().parents[4] / 'enterprise-knowledge' / 'banking' / 'industry' / 'Banking-Industry-Twin.md'
+    if banking_source.exists() and not any('BK-IND-002' in row for row in rows):
+        rows.append("<tr><td>BK-IND-002</td><td>Banking Industry Twin</td><td>Enterprise Knowledge legacy release</td><td>1.0</td><td>18 July 2026</td><td>promoted</td><td>promoted</td><td>current</td><td>Validated</td><td>canonical</td><td><a href='/blueprint-import?update_twin=BNK-001'>Import newer release</a> · Archive/Supersede</td></tr>")
+    tombroot = data_path('blueprint_import','tombstones')
+    if tombroot.exists():
+        for path in sorted(tombroot.glob('*.json')):
+            t=json.loads(path.read_text()); rows.append(f"<tr><td>{escape(str(t.get('twin_id','')))}</td><td>Deleted candidate</td><td>{escape(str(t.get('package_id','')))}</td><td>{escape(str(t.get('release','')))}</td><td>{escape(str(t.get('deleted_at','')))}</td><td>deleted</td><td>candidate</td><td>not canonical</td><td>audit retained</td><td>none</td><td>View history</td></tr>")
+    table = "<table><thead><tr><th>Twin ID</th><th>Industry / name</th><th>Package ID</th><th>Release/version</th><th>Imported at</th><th>Lifecycle state</th><th>Candidate / promoted</th><th>Current / superseded</th><th>Validation state</th><th>Canonical state</th><th>Available actions</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table>"
     return _page("Blueprint import history", f"<section class='hero'><h1>Blueprint import history</h1><p><a href='/digital-twins'>Back to Digital Twins</a></p></section><section class='card'>{table}</section>"), 200
+
+
+def delete_candidate_preview_page(import_run_id: str, headers: Any) -> tuple[str,int]:
+    service=TwinImportLifecycleService(); package=service.package_for_run(import_run_id)
+    if not package or not can_access_enterprise(headers,package.identity.enterprise_id,getattr(package,'workspace_id','')): return _safe_failure("Import unavailable.","delete",False,False,"Return to history."),403
+    preview=service.delete_preview(import_run_id)
+    if not preview['permitted']:
+        return _page("Hard delete unavailable",f"<section class='card warning'><h1>Hard delete unavailable</h1><p>This release is promoted/canonical. Canonical history is retained.</p><p><a href='/blueprint-import/{escape(import_run_id)}/archive'>Archive / Supersede</a></p></section>"),409
+    rows=[('Twin',preview['twin_id']),('Release',preview['release']),('Lifecycle',preview['lifecycle']),('Canonical/promoted','NO'),('Candidate records affected',preview['candidate_records']),('Staging artefacts affected',preview['staging_artifacts']),('Package artefacts affected',preview['package_artifacts']),('Audit records retained',preview['audit_records_retained']),('Canonical intelligence affected','NO')]
+    table=''.join(f"<tr><th>{escape(str(k))}</th><td>{escape(str(v))}</td></tr>" for k,v in rows)
+    body=f"<section class='card'><h1>Delete candidate import</h1><table>{table}</table><form method='post' action='/blueprint-import/{escape(import_run_id)}/delete'><label for='confirmation'>Type DELETE CANDIDATE IMPORT</label><input id='confirmation' name='confirmation' required><label for='reason'>Reason</label><input id='reason' name='reason'><button type='submit'>Delete candidate import</button></form></section>"
+    return _page("Delete candidate import",body),200
+
+
+def delete_candidate_import(import_run_id: str, form: dict[str,list[str]], headers: Any) -> tuple[str,int]:
+    service=TwinImportLifecycleService(); package=service.package_for_run(import_run_id)
+    if not package or not can_access_enterprise(headers,package.identity.enterprise_id,getattr(package,'workspace_id','')): return _safe_failure("Import unavailable.","delete",False,False,"Return to history."),403
+    try: result=service.delete_candidate(import_run_id,authenticated_flora_user(headers),(form.get('confirmation') or [''])[0],(form.get('reason') or ['Operator deleted obsolete candidate import'])[0])
+    except ValueError as exc: return _safe_failure(str(exc),"delete",False,False,"Return to delete preview."),409
+    return _page("Candidate import deleted",f"<section class='card'><h1>Candidate import deleted</h1><p>Canonical intelligence affected: <strong>NO</strong></p><p>Recovered files/inodes: {result['recovered_files']}; bytes: {result['recovered_bytes']}.</p><p>Import history and audit tombstone retained.</p><a href='/blueprint-import/history'>Return to history</a></section>"),200
+
+
+def archive_release_page(import_run_id: str, headers: Any) -> tuple[str,int]:
+    service=TwinImportLifecycleService(); package=service.package_for_run(import_run_id)
+    if not package or not can_access_enterprise(headers,package.identity.enterprise_id,getattr(package,'workspace_id','')): return _safe_failure("Import unavailable.","archive",False,False,"Return to history."),403
+    state=ImportLifecycleService().get(import_run_id)
+    if state.state not in {'promoted','superseded','archived'}: return _safe_failure("Candidate releases use governed candidate deletion.","archive",False,False,"Return to history."),409
+    identity=project_twin_identity(package)
+    return _page("Archive / Supersede Twin release",f"<section class='card'><h1>Archive / Supersede</h1><p>Twin {escape(identity.twin_id or package.identity.enterprise_id)}, release {escape(identity.package_version)} is canonical and cannot be hard-deleted.</p><p>Import and review a newer release with the same governed Twin identity. It will supersede this release only after explicit promotion.</p><a href='/blueprint-import?update_twin={escape(identity.twin_id or '')}'>Import newer release</a></section>"),200
 
 # helpers
 
