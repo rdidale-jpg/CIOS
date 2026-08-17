@@ -57,6 +57,30 @@ def test_atomic_json_writes_use_request_unique_temporary_paths(monkeypatch, tmp_
     assert not list(destination.parent.glob(".*.tmp"))
 
 
+def test_persistence_error_preserves_enospc_filesystem_context(monkeypatch, tmp_path):
+    from cios.applications.flora import storage
+
+    destination = tmp_path / "packages" / "receipt.json"
+    real_open = Path.open
+
+    def no_space(path, *args, **kwargs):
+        if Path(path).name.startswith(".receipt.json"):
+            raise OSError(28, "No space left on device", str(path))
+        return real_open(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "open", no_space)
+    with pytest.raises(storage.PersistenceError) as raised:
+        storage.atomic_write_json(destination, {"status": "received"})
+
+    context = raised.value.context
+    assert context["errno"] == 28
+    assert context["operation"] == "atomic_write"
+    assert context["path"] == str(destination.resolve())
+    assert context["available_bytes"] >= 0
+    assert context["available_inodes"] >= 0
+    assert context["filesystem_device_id"] == tmp_path.stat().st_dev
+
+
 def test_web_process_fails_before_listening_when_storage_probe_fails(monkeypatch):
     from cios.applications.flora.web import app
 

@@ -8,7 +8,7 @@ import re
 import zipfile
 from pathlib import PurePosixPath
 
-from cios.applications.flora.storage import data_path, ensure_writable_dir
+from cios.applications.flora.storage import atomic_write_bytes, data_path, ensure_writable_dir
 
 from .models import FileInventoryItem, PackageReceiptError
 
@@ -27,7 +27,7 @@ def archive_root():
     return data_path("blueprint_import", "archives")
 
 
-def _safe_original_filename(filename: str) -> str:
+def safe_original_filename(filename: str) -> str:
     raw = str(filename or "").strip()
     name = os.path.basename(raw)
     if raw != name:
@@ -82,7 +82,7 @@ def inspect_zip_inventory(content: bytes) -> tuple[FileInventoryItem, ...]:
 
 
 def preserve_original_package(content: bytes, original_filename: str) -> tuple[str, int, str]:
-    safe_name = _safe_original_filename(original_filename)
+    safe_name = safe_original_filename(original_filename)
     checksum = sha256_bytes(content)
     root = ensure_writable_dir(archive_root() / checksum)
     destination = root / safe_name
@@ -91,11 +91,5 @@ def preserve_original_package(content: bytes, original_filename: str) -> tuple[s
         if sha256_bytes(existing) != checksum:
             raise PackageReceiptError("Existing archive path contains different bytes")
     else:
-        tmp = root / f".{safe_name}.{os.getpid()}.tmp"
-        with tmp.open("wb") as handle:
-            handle.write(content)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(tmp, destination)
-        os.chmod(destination, 0o444)
+        atomic_write_bytes(destination, content, mode=0o444)
     return checksum, len(content), str(destination.relative_to(data_path()))

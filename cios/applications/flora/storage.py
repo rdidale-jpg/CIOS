@@ -33,7 +33,50 @@ REQUIRED_DIRS = (
 )
 
 class PersistenceError(OSError):
-    """Raised when Flora runtime state cannot be persisted safely."""
+    """Raised when Flora runtime state cannot be persisted safely.
+
+    ``context`` is deliberately made of operational filesystem facts.  It is
+    safe to log and prevents an OSError's useful errno/path from being lost
+    when storage adapters add application-level context.
+    """
+
+    def __init__(self, message: str, *, operation: str = "unknown", path: Path | str | None = None,
+                 cause: BaseException | None = None, temp_path: Path | str | None = None):
+        super().__init__(message)
+        self.context = filesystem_context(path or data_root(), operation=operation, error=cause, temp_path=temp_path)
+
+
+def filesystem_context(path: Path | str, *, operation: str = "inspect",
+                       error: BaseException | None = None,
+                       temp_path: Path | str | None = None) -> dict[str, Any]:
+    """Return mount, capacity, inode and ownership facts for a target path."""
+    target = Path(path).expanduser().resolve(strict=False)
+    existing = target
+    while not existing.exists() and existing != existing.parent:
+        existing = existing.parent
+    result: dict[str, Any] = {
+        "operation": operation, "path": str(target), "parent_path": str(target.parent),
+        "storage_root": str(data_root().expanduser().resolve(strict=False)),
+        "is_mount": os.path.ismount(target), "existing_filesystem_path": str(existing),
+        "existing_path_is_mount": os.path.ismount(existing), "uid": os.geteuid(), "gid": os.getegid(),
+        "parent_writable": os.access(existing, os.W_OK),
+        "temp_path": str(temp_path) if temp_path is not None else None,
+    }
+    try:
+        stat = existing.stat()
+        result.update(filesystem_device_id=stat.st_dev, directory_uid=stat.st_uid,
+                      directory_gid=stat.st_gid, directory_mode=oct(stat.st_mode & 0o7777))
+        fs = os.statvfs(existing)
+        result.update(total_bytes=fs.f_blocks * fs.f_frsize, free_bytes=fs.f_bfree * fs.f_frsize,
+                      available_bytes=fs.f_bavail * fs.f_frsize, total_inodes=fs.f_files,
+                      free_inodes=fs.f_ffree, available_inodes=getattr(fs, "f_favail", fs.f_ffree))
+    except OSError as stat_error:
+        result["stat_error"] = {"type": type(stat_error).__name__, "errno": stat_error.errno,
+                                "path": stat_error.filename}
+    root = root_exception(error) if error is not None else None
+    result.update(error_type=type(root).__name__ if root is not None else None,
+                  errno=getattr(root, "errno", None), error_path=getattr(root, "filename", None))
+    return result
 
 
 def root_exception(exc: BaseException) -> BaseException:
@@ -87,7 +130,8 @@ def ensure_writable_dir(path: Path) -> Path:
             os.fsync(handle.fileno())
         probe.unlink(missing_ok=True)
     except OSError as exc:
-        raise PersistenceError(f"Flora storage directory is not writable: {path}: {exc}") from exc
+        raise PersistenceError(f"Flora storage directory is not writable: {path}: {exc}",
+                               operation="write_probe", path=path, cause=exc) from exc
     return path
 
 
@@ -116,7 +160,8 @@ def atomic_write_text(path: Path, text: str) -> None:
         except OSError:
             pass
     except OSError as exc:
-        raise PersistenceError(f"Failed to persist Flora data at {path}: {exc}") from exc
+        raise PersistenceError(f"Failed to persist Flora data at {path}: {exc}", operation="atomic_write",
+                               path=path, cause=exc, temp_path=tmp) from exc
     finally:
         if tmp is not None:
             try:
@@ -127,6 +172,31 @@ def atomic_write_text(path: Path, text: str) -> None:
 
 def atomic_write_json(path: Path, data: dict[str, Any]) -> None:
     atomic_write_text(path, json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+
+
+def atomic_write_bytes(path: Path, content: bytes, *, mode: int | None = None) -> None:
+    """Atomically write bytes using a unique temporary file on the target filesystem."""
+    tmp: Path | None = None
+    try:
+        ensure_parent_writable(path)
+        tmp = path.with_name(f".{path.name}.{os.getpid()}.{uuid4().hex}.tmp")
+        with tmp.open("wb") as handle:
+            handle.write(content)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp, path)
+        if mode is not None:
+            os.chmod(path, mode)
+    except OSError as exc:
+        raise PersistenceError(f"Failed to persist Flora binary data at {path}: {exc}",
+                               operation="atomic_write_bytes", path=path, cause=exc,
+                               temp_path=tmp) from exc
+    finally:
+        if tmp is not None:
+            try:
+                tmp.unlink(missing_ok=True)
+            except OSError:
+                pass
 
 
 def storage_mode() -> dict[str, Any]:
@@ -147,8 +217,16 @@ def startup_storage_status() -> dict[str, Any]:
     root = data_root()
     mode = storage_mode()
     durable = bool(mode["durable"])
+    diagnostics = filesystem_context(root, operation="startup_probe")
+    diagnostics["configured_data_root"] = str(root)
+    diagnostics["resolved_data_root"] = str(root.resolve(strict=False))
+    diagnostics["write_probe_succeeded"] = False
     try:
         ensure_writable_dir(root)
+        diagnostics = filesystem_context(root, operation="startup_probe") | {
+            "configured_data_root": str(root), "resolved_data_root": str(root.resolve(strict=False)),
+            "write_probe_succeeded": True,
+        }
         for rel in REQUIRED_DIRS:
             ensure_writable_dir(root / rel)
         # Exercise the same JSON write/read/replace boundary used by
@@ -168,5 +246,7 @@ def startup_storage_status() -> dict[str, Any]:
     except PersistenceError as exc:
         status = "storage unavailable"
         ready = False
-        return {"ready": ready, "status": status, "data_root": mode["data_root"], "durable": durable, "ephemeral": mode["ephemeral"], "storage_mode": mode["mode"], "error": str(exc)}
-    return {"ready": ready, "status": status, "data_root": mode["data_root"], "durable": durable, "ephemeral": mode["ephemeral"], "storage_mode": mode["mode"]}
+        diagnostics.update(exc.context)
+        diagnostics["write_probe_succeeded"] = False
+        return {"ready": ready, "status": status, "data_root": mode["data_root"], "durable": durable, "ephemeral": mode["ephemeral"], "storage_mode": mode["mode"], "error": str(exc), "diagnostics": diagnostics}
+    return {"ready": ready, "status": status, "data_root": mode["data_root"], "durable": durable, "ephemeral": mode["ephemeral"], "storage_mode": mode["mode"], "diagnostics": diagnostics}

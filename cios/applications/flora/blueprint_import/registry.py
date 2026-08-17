@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from uuid import uuid4
 
 from cios.applications.flora.storage import (PersistenceError, atomic_write_json,
@@ -10,7 +11,8 @@ from cios.applications.flora.storage import (PersistenceError, atomic_write_json
                                              safe_exception_summary,
                                              storage_mode)
 
-from .archive import inspect_zip_inventory, preserve_original_package, sha256_bytes
+from .archive import (inspect_zip_inventory, preserve_original_package,
+                      safe_original_filename, sha256_bytes)
 from .ledger import BlueprintImportLedger, utc_now
 from .manifest import read_identity
 from .package_contracts import PackageContractDetector
@@ -18,6 +20,8 @@ from .models import (BlueprintPackageIdentity, BlueprintPackageRecord,
                      PackageImportOperationalDiagnostic, PackageReceiptError)
 from .package_contracts import PackageContract
 from .runs import ImportRunRepository
+
+logger = logging.getLogger(__name__)
 
 
 class BlueprintPackageRegistry:
@@ -109,6 +113,7 @@ class BlueprintPackageRegistry:
             schema_reachable=health.get("schema_reachable") or "UNKNOWN",
             minimal_persistence=health.get("minimal_persistence") or "UNKNOWN",
             schema_alignment=health.get("schema_alignment") or "UNKNOWN",
+            filesystem_context=exc.context,
         )
 
     def receive(self, content: bytes, original_filename: str, actor: str, workspace_id: str = "") -> BlueprintPackageRecord:
@@ -127,13 +132,22 @@ class BlueprintPackageRegistry:
             raise PackageReceiptError("Blueprint package content is required")
         package_sha256 = sha256_bytes(content)
         package_ref = f"bpi-pkg-{package_sha256[:16]}"
+        package_path = self._path_for_ref(package_ref)
+        run_path = self.runs.path_for(f"bpi-run-{package_sha256[:16]}")
+        safe_filename = safe_original_filename(original_filename)
+        archive_destination = data_path("blueprint_import", "archives", package_sha256, safe_filename)
+        run_existed = run_path.exists()
+        archive_existed = archive_destination.exists()
         existing = self.get(package_ref)
         if existing:
             self.ledger.append("package_duplicate_detected", {"package_ref": package_ref, "package_sha256": package_sha256, "actor": actor})
             return existing
 
+        step = "inspect_archive"
         try:
+            logger.info("blueprint_package_receive_step", extra={"flora_event": {"step": step, "package_ref": package_ref}})
             inventory = inspect_zip_inventory(content)
+            step = "detect_contract"
             inspection = PackageContractDetector().detect(content, inventory)
             if inspection.contract_type is PackageContract.BLUEPRINT:
                 identity = read_identity(content)
@@ -153,9 +167,13 @@ class BlueprintPackageRegistry:
                     enterprise_id=str(metadata.get("enterprise_id") or metadata.get("industry_id") or metadata.get("mission_id") or package_id),
                     profile_version=str(metadata.get("package_profile") or metadata.get("profile_version") or metadata.get("schema_version") or "industry-twin-v1"),
                 )
+            step = "archive_write"
+            logger.info("blueprint_package_receive_step", extra={"flora_event": {"step": step, "package_ref": package_ref}})
             archived_sha256, byte_count, archive_path = preserve_original_package(content, original_filename)
             if archived_sha256 != package_sha256:
                 raise PackageReceiptError("Archived checksum does not match received checksum")
+            step = "import_run_write"
+            logger.info("blueprint_package_receive_step", extra={"flora_event": {"step": step, "package_ref": package_ref}})
             run = self.runs.create_received(package_ref, package_sha256, actor)
             record = BlueprintPackageRecord(
                 schema_version="1.0",
@@ -173,7 +191,8 @@ class BlueprintPackageRegistry:
                 workspace_id=str(workspace_id or "").strip(),
                 package_inspection=inspection.to_dict(),
             )
-            package_path = self._path_for_ref(package_ref)
+            step = "package_record_write"
+            logger.info("blueprint_package_receive_step", extra={"flora_event": {"step": step, "package_ref": package_ref}})
             try:
                 ensure_writable_dir(package_path.parent)
                 atomic_write_json(package_path, record.to_dict())
@@ -182,12 +201,25 @@ class BlueprintPackageRegistry:
                 raise PersistenceError(
                     "Blueprint package receipt persistence failed; "
                     "operation=create; model=BlueprintPackageRecord; "
-                    "field_or_constraint=package registry JSON record"
+                    "field_or_constraint=package registry JSON record",
+                    operation=step, path=package_path, cause=underlying,
                 ) from underlying
+            step = "audit_ledger_append"
             self.ledger.append("package_received", {"package_ref": package_ref, "package_sha256": package_sha256, "import_run_id": run.import_run_id, "actor": actor})
             return record
         except Exception as exc:
             # Failed receipts intentionally leave no registry/run acceptance record.
+            if not package_path.exists():
+                # Only paths deterministically owned by this failed receipt are
+                # eligible. Never remove pre-existing archives/runs or canonical data.
+                for artifact, existed in ((run_path, run_existed), (archive_destination, archive_existed)):
+                    if not existed:
+                        try:
+                            artifact.unlink(missing_ok=True)
+                        except OSError:
+                            logger.warning("blueprint_package_receive_cleanup_failed", extra={
+                                "flora_event": {"step": "failed_receive_cleanup", "path": str(artifact),
+                                                "package_ref": package_ref}}, exc_info=True)
             try:
                 self.ledger.append("package_receipt_failed", {"package_ref": package_ref, "package_sha256": package_sha256, "actor": actor, "error": str(exc)})
             except Exception:
@@ -196,6 +228,11 @@ class BlueprintPackageRegistry:
                 pass
             if isinstance(exc, PackageReceiptError):
                 raise
+            if isinstance(exc, OSError) and not isinstance(exc, PersistenceError):
+                raise PersistenceError(
+                    f"Blueprint package receipt persistence failed; operation={step}; model=BlueprintPackageRecord",
+                    operation=step, path=data_path("blueprint_import"), cause=exc,
+                ) from exc
             raise
 
 
