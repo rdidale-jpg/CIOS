@@ -1,23 +1,23 @@
 {
   "schema_version": "pilot-change-metadata-v2",
-  "change_id": "PERSISTENT-PILOT-STORAGE-SAFE-INODE-RECOVERY-2026-08-17",
-  "title": "Persistent Pilot Storage Safe Inode Recovery",
-  "objective": "Expose an owner-confirmed, path-locked recovery action for superseded Blueprint restaging snapshots, with inode inventory and canonical persistence health proof.",
+  "change_id": "TWIN-IMPORT-LIFECYCLE-MANAGEMENT-2026-08-17",
+  "title": "Twin Import Lifecycle Management",
+  "objective": "Safely delete unpromoted candidate imports and govern same-Twin release supersession without bypassing review or canonical history.",
   "expected_implementation_sha": "current-change-marker",
   "implementation_summary": [
-    "An authorised owner can inventory persistent filesystem entry counts and governed storage classes without exposing file contents.",
-    "Recovery is limited to superseded Blueprint staging-history versions outside a two-version rollback window and requires exact human confirmation.",
-    "Flora can start in recovery-only mode after inode preflight failure and reports inode, write and minimal BlueprintPackageRecord persistence probes after cleanup."
+    "Candidate deletion requires a canonical-impact preview and exact operator confirmation while retaining an audit tombstone.",
+    "Governed Twin identity distinguishes a newer same-Twin release from a different Twin and promotion supersedes the prior current release.",
+    "Promoted releases cannot be hard-deleted and instead expose the governed import-newer-release path."
   ],
   "expected_visible_outcomes": [
-    "The storage recovery diagnostic identifies the deployed primary inode-consuming family by entry count.",
-    "The preview reports eligible files and estimated recoverable inodes with canonical data affected = NO.",
-    "Normal routes remain unavailable until the existing inode threshold and both persistence probes pass."
+    "Import History shows Twin identity, release lifecycle, canonical state and deterministic actions.",
+    "Candidate deletion previews canonical intelligence affected = NO and reports recovered files and bytes.",
+    "A validated same-Twin replacement shows a category delta and supersedes its predecessor only after human promotion."
   ],
   "affected_pages": [
-    "Flora storage recovery diagnostic",
-    "Flora storage-unavailable response",
-    "Flora health endpoint"
+    "Blueprint Import History",
+    "Candidate delete preview",
+    "Twin update promotion review"
   ],
   "unchanged_areas": [
     "Twin packages and Twin content",
@@ -25,39 +25,39 @@
     "Evidence and Enterprise Intelligence semantics"
   ],
   "required_test_steps": [
-    "Open /operations/storage-recovery as an authorised owner.",
-    "Confirm the primary deployed inode consumer and that only superseded staging history is eligible.",
-    "Type the exact confirmation and execute only when marked safe.",
-    "Confirm inode preflight, write probe and BlueprintPackageRecord persistence all PASS.",
-    "Upload the original successful TEL-001 package; only then test corrected Wave 6."
+    "Open Blueprint Import History and inspect the Banking release lifecycle state.",
+    "For an unpromoted release, open Delete candidate import, verify canonical intelligence affected is NO, type DELETE CANDIDATE IMPORT, and confirm the audit entry remains.",
+    "For a promoted release, confirm hard delete is unavailable and use Import newer release.",
+    "Import a newer BNK-001 package, complete validation and review, then explicitly promote it.",
+    "Confirm the prior BNK-001 release is retained as superseded."
   ],
   "fixture_path": "tests/test_flora_blueprint_import_validation.py synthetic repository fixture (not Wave 6)",
   "fixture_sha256": "not applicable \u2014 generated test fixture",
-  "fresh_import_policy": "YES \u2014 test the original successful TEL-001 only after storage health passes.",
+  "fresh_import_policy": "YES \u2014 import the latest governed BNK-001 through the normal receive, inspect, validate, stage and review flow.",
   "known_limitations": [
-    "Production inode counts and post-recovery results are available only from the deployed persistent volume inventory."
+    "The repository runtime volume contains no Blueprint import records; the deployed persistent runtime must classify the legacy Banking release from its lifecycle metadata."
   ],
   "automated_validation": {
-    "storage_recovery_tests": "PASS",
+    "twin_lifecycle_tests": "PASS",
     "blueprint_semantics_changed": "NO",
-    "canonical_twin_modified": "NO"
+    "canonical_candidate_delete": "NO"
   },
   "merge_gate": "SAFE TO MERGE",
-  "operator_validation_status": "PENDING \u2014 deployed inventory and confirmed recovery required",
-  "diagnostics_href": "/operations/storage-recovery",
+  "operator_validation_status": "PENDING \u2014 validate legacy Banking classification and the next BNK-001 import in the deployed runtime",
+  "diagnostics_href": "/blueprint-import/history",
   "source_commit_sha": "current-change-marker",
   "merged_commit_sha": "unknown",
   "merge_mode": "unverified until GitHub merge metadata or deployed change marker is available",
   "target_branch": "main",
   "deployment_service": "flora",
-  "deployed_change_marker": "PERSISTENT-PILOT-STORAGE-SAFE-INODE-RECOVERY-2026-08-17",
+  "deployed_change_marker": "TWIN-IMPORT-LIFECYCLE-MANAGEMENT-2026-08-17",
   "deployment_started_at": "Unavailable",
   "deployment_completed_at": "Unavailable",
   "expected_deployment_window_minutes": 30,
   "material_runtime_components_changed": [
-    "Persistent storage inventory and governed recovery",
-    "Storage-unavailable startup mode",
-    "Restaging-history bounded retention"
+    "Blueprint import lifecycle state",
+    "Import History operator actions",
+    "Candidate artefact cleanup and audit tombstones"
   ],
   "reimport_required_if_older_than_change": "Unavailable",
   "repository": "unknown",
@@ -65,7 +65,7 @@
   "start_command": "unknown",
   "auto_deploy": "unknown",
   "latest_deployment_status": "unknown",
-  "fresh_import_required": "YES \u2014 original TEL-001 after health passes",
+  "fresh_import_required": "YES \u2014 import the latest governed BNK-001 release through the normal workflow",
   "audit_result_href": "/docs/operations/flora/Deployment-to-Runtime-Proof-Audit.md",
-  "candidate_state_impact": "Only superseded non-canonical staging-history snapshots outside the retained rollback window are eligible."
+  "candidate_state_impact": "Unpromoted candidate-owned artefacts may be removed after confirmation; audit history and all canonical/shared data are retained."
 }
