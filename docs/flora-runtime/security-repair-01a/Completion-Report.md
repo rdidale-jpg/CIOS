@@ -136,3 +136,55 @@ committed repair diff and documentation. Public comparison artifacts preserve
 case IDs, statuses, counts, failure categories and diagnostic SHA-256 digests;
 verbose request/trace excerpts are omitted. The application implementation and
 recorded test outcomes are unchanged by this publication-only redaction.
+
+## PR 539 targeted architectural review closure
+
+Baseline reverified: main `dc9203e6880f8722e821d39cf53b689732edb0e7`;
+existing draft PR head `4c029a244cc3212fb9ec56bc762dee420e96c0a4`.
+This amendment preserves the approved Bootstrap Contract and fail-closed resolver.
+
+- [Public Route Classification Matrix](Public-Route-Classification-Matrix.md):
+  all 127 exact public paths, handlers, data sources and query boundaries. Broad
+  Banking/Evidence/lineage prefixes are retired. Raw-target and query validation
+  reject ambiguous paths before dispatch. Public fingerprint/governance output
+  no longer exposes environment-derived deployment values.
+- [Verified Context Contract for 01B](Verified-Context-Contract-01B.md): read-only
+  principal, selected workspace, membership, capabilities, Enterprise scope and
+  session projections, resource intersections and attribution obligations.
+  Upload authorization no longer infers membership from Enterprise wildcard
+  grants; capability evaluation also requires the effective-capability snapshot.
+  These changes install no authentication producer or persistence.
+- [Legacy Test Retirement Matrix](Legacy-Test-Retirement-Matrix.md) and its JSON
+  companion: all nineteen intentional legacy failures mapped to exact passing
+  negative replacements and future positive obligations; five pre-existing
+  failures accounted separately. Historical test sources remain unchanged.
+- [Exact comparison](Review-Closure-Regression-Comparison.json): identical test
+  overlays on the previous PR head and this amendment, including each failing
+  and skipped ID. Raw private diagnostics are omitted from public artifacts.
+
+| Case set | Previous PR head | Review closure |
+| --- | --- | --- |
+| 104 security/service cases | 67 passed, 37 failed | 104 passed |
+| 436 domain/governance cases | 404 passed, 22 failed, 10 skipped | 404 passed, 22 failed, 10 skipped |
+| 27 unchanged historical authentication cases | 3 passed, 24 failed | 3 passed, 24 failed |
+
+No new failures; 37 newly added acceptance cases expose gaps in the previous PR
+head and now pass. Twenty-two domain failure IDs remain inherited. Historical
+24 failures remain the same nineteen retired contracts plus five pre-existing
+failures; failure causes can change behind fail-closed setup and are not claimed
+identical. Ten retained-input skips remain explicit: unavailable BNK W1/TEL W6,
+with no substitute archives. Factory and Experience outcomes remain as recorded
+above. The new real-boundary suite exercises every public route with private-read
+sentinels and synthetic store hashes, plus malformed paths/queries, HEAD and
+arbitrary context claims. Two additional service cases bound workspace membership
+and effective capabilities using explicit test-only context projections.
+
+Architectural limitations remain: no real authorised principal or session exists
+in 01A; positive sign-in/membership/revocation/ACL journeys require separately
+approved 01B. Domain service fixtures do not prove that future integration.
+Public handlers still perform existing derived-source computation and some
+noncanonical runtime audit writes; this review is not an availability/load audit.
+Source catalogue changes require renewed classification. The inherited domain
+failures and unavailable retained inputs prevent a fully green repository claim.
+No live production data/configuration change, deployment, provisioning, merge or
+01B implementation is included. The PR remains draft for architectural review.

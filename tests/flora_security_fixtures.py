@@ -16,7 +16,24 @@ def fixture_context(spec):
     if not selected and len(concrete)==1:selected=concrete[0]
     if selected and '*' not in enterprises and selected.casefold() not in {e.casefold() for e in enterprises}:selected=''
     roles={s.strip() for s in str(spec.get('X-Flora-Roles') or '').replace('|',',').split(',') if s.strip()}
-    return SimpleNamespace(user_id=user,workspace=selected,enterprise_ids=enterprises,roles=roles)
+    # Explicit test-only membership/session projections for the 01B interface.
+    # No cookie/token is issued, and production never imports this provider.
+    from datetime import datetime,timedelta,timezone
+    from cios.applications.flora.access import BLUEPRINT_IMPORT_OWNER_PERMISSIONS,CANONICAL_OWNER_ROLES
+    now=datetime.now(timezone.utc)
+    capabilities=roles-set(CANONICAL_OWNER_ROLES)
+    if roles & CANONICAL_OWNER_ROLES and selected:
+        capabilities |= set(BLUEPRINT_IMPORT_OWNER_PERMISSIONS)|{'commercial_context.view','commercial_context.edit'}
+    if 'blueprint_import_admin' in roles:capabilities |= set(BLUEPRINT_IMPORT_OWNER_PERMISSIONS)
+    membership=SimpleNamespace(membership_id='synthetic-membership',user_id=user,workspace_id=selected,
+        roles=frozenset(roles),active=bool(selected),version=1,checked_at=now) if selected else None
+    session=SimpleNamespace(session_ref='synthetic-session-reference',authenticated_at=now,
+        expires_at=now+timedelta(hours=8),idle_expires_at=now+timedelta(minutes=30),
+        reauthenticated_at=now,revoked=False,revocation_version=1,checked_at=now)
+    return SimpleNamespace(user_id=user,workspace=selected,enterprise_ids=frozenset(enterprises),
+        workspace_ids=frozenset({selected}) if selected else frozenset(),membership=membership,
+        roles=frozenset(roles),effective_capabilities=frozenset(capabilities),session=session,
+        verified_human=True,authentication_source='synthetic-service-fixture')
 
 def prepare_review(*args,**kwargs):
     """Explicit mutation setup; same helper runs on pinned main and repaired code."""

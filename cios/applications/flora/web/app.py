@@ -5,7 +5,7 @@ can be deployed without adding framework, LLM, crawler, or database dependencies
 """
 from __future__ import annotations
 
-from cios.applications.flora.security import ACCESS_UNAVAILABLE, public_read_path
+from cios.applications.flora.security import ACCESS_UNAVAILABLE, public_request_target
 
 import json
 import os
@@ -80,7 +80,7 @@ def import_deployment_fingerprint() -> dict[str, str]:
     """Return non-secret facts that identify the deployed import implementation."""
     mode = pilot_import_mode()
     return {
-        "commit_sha": application_revision(),
+        "commit_sha": _public_code_revision(),
         "application_module": APPLICATION_MODULE,
         "pilot_import_mode": "conflict" if mode.conflict else "disabled-security-repair-01a",
         "import_route_owner": IMPORT_ROUTE_OWNER,
@@ -90,19 +90,19 @@ def import_deployment_fingerprint() -> dict[str, str]:
         "executive_twin_implementation": EXECUTIVE_TWIN_IMPLEMENTATION,
     }
 
+def _public_code_revision() -> str:
+    # Reuse repository runtime proof, not arbitrary environment-derived labels,
+    # commands or an unchecked value claiming to be a deployment SHA.
+    from cios.applications.flora.blueprint_import.runtime_proof import _repository_commit
+    revision = _repository_commit()
+    return revision if re.fullmatch(r"[0-9a-fA-F]{40,64}", revision) else "Unavailable"
+
+
 def deployment_payload() -> dict[str, str]:
-    auto_status = pilot_auto_sign_in_status()
-    payload = {"service": "flora", **deployment_metadata(), **import_deployment_fingerprint()}
-    if auto_status.requested:
-        payload.update({
-            "pilot_auto_sign_in": "active" if auto_status.active else "refused",
-            "pilot_environment": auto_status.environment or "unconfigured",
-            "pilot_security_warning": "Legacy pilot auto-sign-in is disabled and cannot grant authority.",
-            "service_access_restriction": "privileged-operations-disabled-security-repair-01a",
-        })
-        if auto_status.failed_condition:
-            payload["pilot_failed_condition"] = auto_status.failed_condition
-    return payload
+    """Public code fingerprint only; no account/service/configuration metadata."""
+    return {"service": "flora", **import_deployment_fingerprint(),
+            "privileged_access": "disabled-security-repair-01a"}
+
 CASE_SLUGS = {"ThamesWater", "NationalGrid", "BT", "Vodafone"}
 
 
@@ -122,9 +122,15 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 
     storage_status: dict = {"ready": True}
 
+    def _public_read_request(self) -> bool:
+        # Validate the original request target as well as the stdlib-parsed
+        # path. Reject parser-normalised forms (including a leading //).
+        words = self.requestline.split()
+        return len(words) == 3 and words[1] == self.path and public_request_target(self.path)
+
     def do_HEAD(self) -> None:  # noqa: N802 - stdlib callback name
         parsed = urlparse(self.path)
-        if not public_read_path(parsed.path):
+        if not self._public_read_request():
             self.send_error(403, ACCESS_UNAVAILABLE)
             return
         try:
@@ -140,7 +146,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:  # noqa: N802 - stdlib callback name
         parsed = urlparse(self.path)
-        if not public_read_path(parsed.path):
+        if not self._public_read_request():
             self.send_error(403, ACCESS_UNAVAILABLE)
             return
         try:
@@ -176,7 +182,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_flora_research_page(self.headers))
             elif parsed.path in {"/workspace/reference", "/flora/reference"}:
                 self._html(reference_workspace_page(self.headers, saved=parse_qs(parsed.query).get("saved") == ["1"]), set_cookie=reference_resume_cookie())
-            elif parsed.path == "/flora/banking":
+            elif parsed.path in {"/flora/banking", "/flora/banking/"}:
                 self._html(banking_landing_page())
             elif parsed.path == "/flora/banking/portfolio":
                 self._html(banking_portfolio_page())
@@ -1248,7 +1254,7 @@ def _flora_shape_page(headers=None, query=None) -> str:
 
 def _flora_governance_page(headers=None) -> str:
     from html import escape
-    revision = escape(application_revision())
+    revision = escape(_public_code_revision())
     decision = blueprint_upload_authorisation(headers or {})
     upload = "allowed" if decision.decision == "allowed" else "denied"
     body = f"""

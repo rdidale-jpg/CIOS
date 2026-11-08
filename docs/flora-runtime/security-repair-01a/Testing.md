@@ -68,3 +68,31 @@ Full regression logs, JUnit XML and temporary stores for this execution are unde
 `/workspace/work/security-repair-01a/` in the execution workspace. Only compact
 exact-case comparison data and reproduction code are committed; no archives,
 credentials or owner stores are added to the PR.
+
+## PR 539 targeted review closure reproduction
+
+Use initial PR head `4c029a244cc3212fb9ec56bc762dee420e96c0a4` as the before
+checkout; main was independently reverified at the original pinned SHA. Copy the
+identical amended `tests/flora_security_fixtures.py`,
+`tests/test_flora_security_service_contracts.py` and new
+`tests/test_flora_security_review_closure.py` into that checkout. Keep production
+modules at their respective revisions. Do not install test fixtures into real
+security-boundary suites. Use isolated temporary data roots and derived output.
+
+Run on both checkouts, retaining separate JUnit files:
+
+```sh
+python -m pytest -q tests/test_flora_security_repair_01a.py tests/test_flora_security_service_contracts.py tests/test_flora_security_review_closure.py --junitxml=checks.xml
+python docs/flora-runtime/experience-repair-02/run_regressions.py --output domain-results
+python -m pytest -q tests/test_flora_pilot_auth.py tests/test_flora_pilot_import_bypass.py tests/test_flora_pilot_blueprint_review.py --junitxml=legacy.xml
+```
+
+The last command intentionally exits nonzero: retain all 27 results, including
+nineteen retired-contract and five pre-existing failures. The domain runner retains
+all 436 IDs, including 22 inherited failures and ten unavailable-input skips.
+`compare_results.py` provides sanitized `read`/`group` helpers; the review-closure
+JSON compares exact equal ID sets with fixed/new/inherited/skip lists separately.
+Original main-to-01A comparison artifacts remain unchanged. The new security set
+has 104 cases, including five explicit service-context cases; the remaining 99
+use the real fail-closed production boundary. All 127 public routes execute within
+one exhaustive handler/sentinel case, in addition to individual attack cases.

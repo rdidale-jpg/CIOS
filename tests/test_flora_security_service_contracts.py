@@ -49,3 +49,24 @@ def test_verified_fixture_wildcard_cannot_cross_resource_workspace(candidate):
     assert not can_access_enterprise(wrong,candidate.identity.enterprise_id,candidate.workspace_id)
     html,status=history_page(wrong)
     assert status==200 and candidate.import_run_id not in html
+
+
+def test_membership_is_not_inferred_from_enterprise_wildcard(monkeypatch):
+    from tests.flora_security_fixtures import fixture_context
+    from cios.applications.flora import access
+    context=fixture_context(H)
+    context.membership=None
+    context.workspace_ids=frozenset()
+    monkeypatch.setattr(access,'verified_context',lambda *_:context)
+    assert access.blueprint_upload_authorisation(H).resolved_membership=='unresolved'
+    assert access.blueprint_upload_authorisation(H).decision=='denied'
+
+
+def test_effective_capability_snapshot_bounds_existing_policy(monkeypatch):
+    from tests.flora_security_fixtures import fixture_context
+    from cios.applications.flora import access,security
+    context=fixture_context(H)
+    context.effective_capabilities=frozenset()
+    monkeypatch.setattr(access,'verified_context',lambda *_:context)
+    monkeypatch.setattr(security,'verified_context',lambda *_:context)
+    with pytest.raises(PermissionError):access.require_capability(H,'package.review')

@@ -187,15 +187,28 @@ def is_cios_owner(headers: Any) -> bool:
     return bool(authenticated_flora_user(headers) and active_flora_workspace(headers) and raw_flora_roles(headers) & CANONICAL_OWNER_ROLES)
 
 
+def active_workspace_membership(headers: Any):
+    """Consume a server-verified membership projection, never enterprise grants."""
+    context = verified_context(headers)
+    membership = getattr(context, "membership", None)
+    if context is None or membership is None or not membership.active:
+        return None
+    if (membership.user_id != context.user_id or membership.workspace_id != context.workspace
+            or context.workspace not in context.workspace_ids):
+        return None
+    return membership
+
+
 def blueprint_upload_authorisation(headers: Any) -> BlueprintAuthorisationDecision:
     user = authenticated_flora_user(headers)
     auth_source = flora_authentication_source(headers)
-    workspaces = tuple(sorted(user_enterprise_access(headers))) if user else ()
+    context = verified_context(headers)
+    workspaces = tuple(sorted(context.workspace_ids)) if context and user else ()
     active_workspace = active_flora_workspace(headers) if user else ""
     raw_roles = raw_flora_roles(headers) if user and active_workspace else set()
     roles = flora_roles(headers) if user and active_workspace else set()
     permissions = sorted(roles & BLUEPRINT_IMPORT_OWNER_PERMISSIONS)
-    membership_resolved = bool(user and active_workspace and ("*" in workspaces or _contains_id(set(workspaces), active_workspace)))
+    membership_resolved = bool(user and active_workspace and active_workspace_membership(headers))
     owner_recognised = bool(membership_resolved and raw_roles & CANONICAL_OWNER_ROLES)
     allowed = membership_resolved and bool(roles & _BLUEPRINT_IMPORT_ROLES)
     if allowed:
@@ -258,7 +271,8 @@ def require_capability(headers: Any, capability: str, enterprise_id: str = "", w
     """Service-entry guard using the existing capability and resource policy."""
     context = require_verified_human(headers)
     roles = flora_roles(headers)
-    if capability not in roles and not (capability == "package.review" and "blueprint_import_admin" in roles):
+    if (capability not in context.effective_capabilities
+            or (capability not in roles and not (capability == "package.review" and "blueprint_import_admin" in roles))):
         raise PermissionError("Required capability is unavailable")
     if enterprise_id and not can_access_enterprise(headers, enterprise_id, workspace_id):
         raise PermissionError("Resource unavailable")
