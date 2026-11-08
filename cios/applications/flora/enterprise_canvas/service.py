@@ -50,7 +50,9 @@ class EnterpriseCanvasService:
         if not can_view_enterprise_canvas(headers, enterprise_id):
             raise EnterpriseCanvasAccessError("Actor is not authorised to view this Enterprise Canvas")
         model = self.models.get(enterprise_id)
-        attributes = dict(sorted(model.attributes.items()))
+        attributes = {key:attr for key,attr in sorted(model.attributes.items())
+                      if attr.trust_state.casefold() not in {'retired','superseded','expired'}
+                      and not any(word in attr.freshness.casefold() for word in ('retired','superseded','expired'))}
         unknowns = tuple(model.unknowns.values())
         accepted_candidates = self._accepted_candidates(enterprise_id)
         projections = self._accepted_projections(enterprise_id, accepted_candidates)

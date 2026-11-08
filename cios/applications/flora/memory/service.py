@@ -334,6 +334,25 @@ class ObservationMemoryService:
     def apply_observation(self, observation: Observation) -> ModelUpdateResult:
         oid = observation.observation_id or ''
         key = observation.affected_attribute
+        inactive=(observation.lifecycle_state.casefold() in {'retired','superseded'}
+                  or bool(observation.retired_at) or 'expired' in observation.freshness.casefold())
+        if inactive:
+            model=self.models.get(observation.enterprise_id)
+            current=model.attributes.get(key)
+            state='superseded' if observation.lifecycle_state.casefold()=='superseded' else 'retired'
+            old_value=_financial_model_value(observation.atomic_statement) if observation.observation_type=='financial_metric_reported' else observation.atomic_statement
+            if (current and oid in current.observation_ids
+                    and str(current.current_value)==str(old_value)
+                    and current.last_observed_date in {observation.observation_date,observation.last_confirmed_date}):
+                if current.trust_state==state: return ModelUpdateResult(observation.enterprise_id,oid,key,'unchanged')
+                # Preserve the value and all its lineage/history, but remove
+                # its authority as current support. Do not invent a replacement.
+                current.trust_state=state
+                current.freshness=observation.freshness if 'expired' in observation.freshness.casefold() else state
+                current.updated_at=model.updated_at=now_iso()
+                self.models.save(model)
+                return ModelUpdateResult(observation.enterprise_id,oid,key,state)
+            return ModelUpdateResult(observation.enterprise_id,oid,key,'ignored')
         if observation.lifecycle_state not in {"accepted", "Validated"}:
             return ModelUpdateResult(observation.enterprise_id, oid, key, "ignored")
         model = self.models.get(observation.enterprise_id)

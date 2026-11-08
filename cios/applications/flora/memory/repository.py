@@ -12,6 +12,7 @@ from cios.applications.flora.storage import atomic_write_text, data_path, ensure
 import json
 import os
 import re
+from dataclasses import replace
 from pathlib import Path
 from typing import Iterable
 
@@ -90,6 +91,24 @@ class ObservationRepository:
                 changed = True
         if changed:
             self._rewrite(rows)
+
+    def update_lifecycle(self, observation_id: str, updates: dict, *, import_lineage=None) -> Observation:
+        """Persist an explicitly approved lifecycle correction in the same ledger."""
+        allowed={'lifecycle_state','freshness','retired_at','supersedes_observation_id','contradiction_state','contradicted_by_observation_ids'}
+        if set(updates)-allowed:
+            raise ValueError('Unsupported Observation lifecycle update')
+        rows=self.list()
+        existing=next((row for row in rows if row.observation_id==observation_id),None)
+        if existing is None: raise ValueError('Canonical Observation is unavailable')
+        if all(getattr(existing,key)==value for key,value in updates.items()): return existing
+        provenance=dict(existing.human_provenance)
+        provenance['lifecycle_history']=[*provenance.get('lifecycle_history',[]),
+            {'prior_state':{key:getattr(existing,key) for key in updates},'superseded_at':now_iso(),
+             'import_lineage':provenance.get('lifecycle_import_lineage') or provenance.get('blueprint_import_lineage')}]
+        if import_lineage: provenance['lifecycle_import_lineage']=dict(import_lineage)
+        updated=replace(existing,**updates,human_provenance=provenance,updated_at=now_iso())
+        self._rewrite(updated if row.observation_id==observation_id else row for row in rows)
+        return updated
 
     def _append_record(self, row: dict) -> None:
         ensure_parent_writable(self.path)

@@ -533,8 +533,10 @@ def completion_page(import_run_id: str, result: dict[str, Any], headers: Any) ->
         record = EnterpriseCanvasAccessRepository().get_by_import_run(import_run_id)
     enterprise = record.enterprise_id if record else (package.identity.enterprise_id if package else "")
     canvas_href = f"/digital-twins/{escape(enterprise)}/canvas" if enterprise else f"/blueprint-import/{escape(import_run_id)}"
+    projection_rows=''.join(f"<li>{escape(str(row.get('observation_id','')))}: {escape(str(row.get('status','')))} — {escape(str(row.get('reason') or row.get('action') or ''))}</li>" for row in result.get('model_projection_results',[]))
+    projection_summary=f"<section class='card'><h2>Enterprise Model reconciliation</h2><p>Status: <strong>{escape(str(result.get('model_projection_status','not_assessed')))}</strong></p><p>Canonical promotion and model projection are distinct outcomes. Unsupported mappings remain inspectable without invented model state.</p><ul>{projection_rows}</ul></section>"
     body = _workflow_progress("explore", import_run_id, "promoted") + ( _package_header(package) if package else "") + f"""<section class='card'><h2>Explore promoted Twin</h2><table><tr><th>Promotion status</th><td>{escape(result.get('final_execution_status','unknown'))}</td></tr><tr><th>Records created</th><td>{len(result.get('records_created', []))}</td></tr><tr><th>Records updated</th><td>{len(result.get('records_updated', []))}</td></tr><tr><th>Projections retained</th><td>{_projection_count(import_run_id)}</td></tr><tr><th>Exceptions</th><td>{len(result.get('records_blocked', [])) + len(result.get('records_failed', []))}</td></tr></table><p>The original ZIP was preserved unchanged in governed runtime storage.</p><p><a href='{canvas_href}'>Open Enterprise Canvas</a> · <a href='/blueprint-import/{escape(import_run_id)}'>Open import record</a></p></section>"""
-    return _page("Blueprint import complete", body)
+    return _page("Blueprint import complete", body+projection_summary)
 
 
 def history_page(headers: Any) -> tuple[str, int]:
