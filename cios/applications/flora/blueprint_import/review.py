@@ -114,8 +114,8 @@ class CandidateReviewRepository:
         if not root.exists():
             return {}
         out: dict[str, dict[str, Any]] = {}
-        for path in sorted(root.glob("*.json")):
-            data = json.loads(path.read_text(encoding="utf-8"))
+        decisions=[json.loads(path.read_text(encoding="utf-8")) for path in root.glob("*.json")]
+        for data in sorted(decisions,key=lambda row:(row["timestamp"],row["review_decision_id"])):
             out[str(data["candidate_id"])] = data
         return out
 

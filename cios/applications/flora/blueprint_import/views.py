@@ -440,6 +440,40 @@ def record_import_human_review(import_run_id: str, headers: Any) -> tuple[str, i
     except (PermissionError, ValueError) as exc:
         return _safe_failure(str(exc), "human review", False, True, "Return to Review with Chief Architect permission."), 403
 
+def confirm_import_identity(import_run_id, form, headers):
+    ctx=_context(import_run_id)
+    if not ctx or not can_access_enterprise(headers,ctx['package'].identity.enterprise_id,ctx['package'].workspace_id):
+        return _safe_failure('Import unavailable.','identity',False,True,'Return to import history.'),403
+    try:
+        if form.get('confirm_identity')!=['yes']: raise ValueError('Explicit identity confirmation is required')
+        keys=('twin_id','twin_type','primary_subject_id','primary_subject_name','primary_subject_class','governed_scope','canonical_owner')
+        GovernedIdentityResolutionRepository().confirm_explicit(ctx['package'],{key:(form.get(key) or [''])[0] for key in keys},authenticated_flora_user(headers),(form.get('rationale') or [''])[0],headers)
+        return review_page(import_run_id,headers,'Governed identity decision recorded. Review the regenerated Evidence mappings before promotion.')
+    except (PermissionError,ValueError) as exc:
+        return _safe_failure(str(exc),'identity',False,True,'Return to Review with owner approval permission.'),400
+
+
+def record_evidence_mapping(import_run_id, form, headers):
+    ctx=_context(import_run_id)
+    if not ctx or not can_review_blueprint_candidate(headers,ctx['package'].identity.enterprise_id,ctx['package'].workspace_id):
+        return _safe_failure('Import unavailable.','Evidence mapping',False,True,'Return to import history.'),403
+    try:
+        if ImportLifecycleService().get(import_run_id).state in {'promoted','superseded','archived','cancelled','deleted'}:
+            raise ValueError('Accepted or terminal release mappings cannot be rewritten')
+        if form.get('confirm_mapping')!=['yes']: raise ValueError('Explicit mapping confirmation is required')
+        cid=(form.get('candidate_id') or [''])[0]
+        candidate=next((c for c in ctx['candidates'] if c['candidate_record_id']==cid and c['candidate_object_class']=='evidence' and c['validation_status']=='accepted'),None)
+        if not candidate: raise ValueError('Select accepted staged Evidence from this import')
+        disposition=(form.get('disposition') or [''])[0]
+        target=(form.get('canonical_id') or [''])[0].strip();rationale=(form.get('rationale') or [''])[0].strip()
+        if disposition not in {'map_existing','propose_create','propose_update'} or not target or not rationale:
+            raise ValueError('Choose a canonical target, mapping disposition and rationale')
+        ImportMappingService().record_mapping(candidate,disposition,authenticated_flora_user(headers),headers,'Evidence',target,rationale)
+        return review_page(import_run_id,headers,'Evidence mapping recorded. Review the regenerated plan before promotion.')
+    except (ValueError,PermissionError) as exc:
+        return _safe_failure(str(exc),'Evidence mapping',False,True,'Resolve the mapping in Review.'),400
+
+
 def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers: Any) -> tuple[str, int]:
     ctx = _context(import_run_id)
     try: ImportLifecycleService().assert_active(import_run_id)
@@ -448,7 +482,7 @@ def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers:
         return _safe_failure("You are not authorised to approve and execute Blueprint promotion.", "approval", False, True, "Ask for Blueprint promotion permission."), 403
     if (ctx.get("summary") or {}).get("errors"):
         return _safe_failure("Validation failed; approval is disabled until fatal inspection errors are resolved.", "approval", False, True, "Resolve validation errors, then stage and review again."), 400
-    if ctx["package"].package_inspection.get("contract_type") == "Governed Industry Twin Package" and _identity_unresolved(ctx["package"]):
+    if industry_package(ctx["package"]) and _identity_unresolved(ctx["package"]):
         return _safe_failure("Promotion unavailable: required Twin identity fields are unresolved.", "identity resolution", False, True, "Confirm the primary subject, governed scope and canonical owner from an existing governed identity."), 400
     guidance=ImportGuidanceRepository().get(import_run_id); detected=detect_package_type(ctx.get("candidates", []))
     if guidance and expectation_mismatch(guidance.expected_type, detected):
@@ -462,8 +496,6 @@ def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers:
         svc = CanonicalPromotionService(); plan_id = (form.get("plan_id") or [""])[0]
         approval = svc.approve_plan(import_run_id, plan_id, authenticated_flora_user(headers), (form.get("rationale") or [""])[0], headers)
         result = svc.execute_approved_plan(import_run_id, approval.approval_id, authenticated_flora_user(headers), headers)
-        ImportLifecycleService().mark_promoted(import_run_id, authenticated_flora_user(headers), len(result.records_created)+len(result.records_updated))
-        TwinImportLifecycleService().supersede_previous_after_promotion(ctx["package"], authenticated_flora_user(headers))
         impacts = assess_impacts(ctx["package"], TwinDependencyService().discover(ctx["package"]))
         DownstreamReconciliationRepository().create_pending(ctx["package"], ctx["package"].identity.package_version, impacts, authenticated_flora_user(headers))
         repair_blueprint_canvas_access(import_run_id, headers)
@@ -536,7 +568,7 @@ def completion_page(import_run_id: str, result: dict[str, Any], headers: Any) ->
     projection_rows=''.join(f"<li>{escape(str(row.get('observation_id','')))}: {escape(str(row.get('status','')))} — {escape(str(row.get('reason') or row.get('action') or ''))}</li>" for row in result.get('model_projection_results',[]))
     projection_summary=f"<section class='card'><h2>Enterprise Model reconciliation</h2><p>Status: <strong>{escape(str(result.get('model_projection_status','not_assessed')))}</strong></p><p>Canonical promotion and model projection are distinct outcomes. Unsupported mappings remain inspectable without invented model state.</p><ul>{projection_rows}</ul></section>"
     body = _workflow_progress("explore", import_run_id, "promoted") + ( _package_header(package) if package else "") + f"""<section class='card'><h2>Explore promoted Twin</h2><table><tr><th>Promotion status</th><td>{escape(result.get('final_execution_status','unknown'))}</td></tr><tr><th>Records created</th><td>{len(result.get('records_created', []))}</td></tr><tr><th>Records updated</th><td>{len(result.get('records_updated', []))}</td></tr><tr><th>Projections retained</th><td>{_projection_count(import_run_id)}</td></tr><tr><th>Exceptions</th><td>{len(result.get('records_blocked', [])) + len(result.get('records_failed', []))}</td></tr></table><p>The original ZIP was preserved unchanged in governed runtime storage.</p><p><a href='{canvas_href}'>Open Enterprise Canvas</a> · <a href='/blueprint-import/{escape(import_run_id)}'>Open import record</a></p></section>"""
-    return _page("Blueprint import complete", body+projection_summary)
+    return _page("Blueprint import complete", body+projection_summary+(_evidence_mapping_section(package) if package else ""))
 
 
 def history_page(headers: Any) -> tuple[str, int]:
@@ -631,15 +663,20 @@ def _context(import_run_id):
             return {"package": p, "summary": s, "candidates": (s or {}).get("candidates", [])}
     return None
 
+from .mapping import industry_package, ImportMappingRepository
+
 def _ensure_reviews_and_mappings(ctx, headers):
     reviewer = authenticated_flora_user(headers); reviews = CandidateReviewRepository().latest_by_candidate(ctx["package"].import_run_id); mapper = ImportMappingService(); reviewer_svc = CandidateReviewService()
+    existing={m["candidate_id"]:m for m in ImportMappingRepository().list(ctx["package"].import_run_id)}
     for c in ctx["candidates"]:
         cid = c["candidate_record_id"]
         if cid not in reviews and c.get("validation_status") == "accepted":
             decision = "approve" if c.get("validation_status") == "accepted" else ("unsupported" if c.get("validation_status") == "quarantined" else "reject")
             reviewer_svc.record_decision(cid, decision, reviewer, "UI default review summary for staged package", headers)
         if c.get("validation_status") == "accepted" and c.get("candidate_object_class") in {"evidence", "observation"} and not c.get("payload", {}).get("proposed_effect"):
-            mapper.record_mapping(c, "propose_create", reviewer, headers, c.get("candidate_object_class", "").title())
+            prior=existing.get(cid)
+            if not prior or (prior.get("decision_origin")=="automatic" and prior.get("reconciliation_kind")=="unresolved identity"):
+                mapper.record_mapping(c, "propose_create", reviewer, headers, c.get("candidate_object_class", "").title(), automatic=True)
 
 
 def _stale_review_section(package, job) -> str:
@@ -668,7 +705,7 @@ def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str
     body += _review_sections(ctx["package"].import_run_id, details, query, technical=False) + "</details>"
     body += "<details class='card architect-depth'><summary><strong>Architect disclosure — governance and promotion semantics</strong></summary>"
     body += _review_summary_section(ctx, job, counts, proposed)
-    body += _identity_resolution_section(ctx["package"]) + _quarantine_reasons_section(job) + _affected_twins_section(ctx["package"])
+    body += _evidence_mapping_section(ctx["package"]) + _identity_resolution_section(ctx["package"]) + _quarantine_reasons_section(job) + _affected_twins_section(ctx["package"])
     body += "</details><details class='card technical-depth'><summary><strong>Technical disclosure — diagnostics, filters and raw records</strong></summary>"
     body += _review_trace_section(ctx, job, correlation_id)
     body += _review_sections(ctx["package"].import_run_id, details, query, technical=True) + "</details>"
@@ -791,6 +828,17 @@ def _decision_area(package, unresolved, unknowns, contradictions, quarantined, u
     return "<section class='card decisions-required'><h2>Decisions required before promotion</h2><ol>"+rendered+"</ol></section>"
 
 
+def _evidence_mapping_section(package):
+    latest={m['candidate_id']:m for m in ImportMappingRepository().list(package.import_run_id) if m['record_class']=='evidence'}
+    rows=''.join('<tr>'+''.join(f'<td>{escape(str(value))}</td>' for value in (m['external_id'],m.get('canonical_id',''),m.get('reconciliation_kind',''),m['disposition'],m.get('rationale','')))+'</tr>' for m in latest.values())
+    state=ImportLifecycleService().get(package.import_run_id)
+    action=''
+    if state.state not in {'promoted','superseded','archived','cancelled','deleted'}:
+        options=''.join(f"<option value='{escape(m['candidate_id'])}'>{escape(m['external_id'])}</option>" for m in latest.values())
+        action=f"<details><summary>Record an explicit Evidence mapping</summary><form method='post' action='/blueprint-import/{escape(package.import_run_id)}/evidence-mapping'><label>Source Evidence<select name='candidate_id'>{options}</select></label><label>Disposition<select name='disposition'><option value='map_existing'>Reuse existing target</option><option value='propose_create'>Create distinct canonical target</option><option value='propose_update'>Update reviewed existing target</option></select></label><label>Canonical ID<input name='canonical_id' required></label><label>Rationale<textarea name='rationale' required></textarea></label><label><input type='checkbox' name='confirm_mapping' value='yes' required>I confirm this mapping for owner review.</label><button type='submit'>Record mapping</button></form></details>"
+    return f"<section class='card'><h2>Canonical Evidence reconciliation</h2><p>Release {escape(package.identity.package_version)} · {escape(state.state)} · current: {state.current} · superseded by: {escape(state.superseded_by)}</p><p>Technical package validation and Evidence reconciliation do not establish complete Industry Twin acceptance. Domain wrappers retain their existing staging-only boundaries.</p><details><summary>Source-to-canonical Evidence mappings ({len(latest)})</summary><table><tr><th>Source ID</th><th>Canonical target</th><th>Reconciliation</th><th>Disposition</th><th>Reason</th></tr>{rows}</table></details>{action}</section>"
+
+
 def _identity_resolution_section(package, actionable: bool = True) -> str:
     identity = project_twin_identity(package)
     unresolved = _identity_unresolved(package)
@@ -804,7 +852,8 @@ def _identity_resolution_section(package, actionable: bool = True) -> str:
     if audit:
         action=f"<p><strong>Confirmed by:</strong> {escape(audit['actor'])} with recorded rationale and audit details.</p>"
     elif actionable:
-        action=f"<p><strong>Identity resolution must be completed during Review.</strong></p><p>Only an existing governed Twin identity or canonical-source package metadata can be confirmed; free-text Twin creation is not available.</p><p><a href='/blueprint-import/{escape(package.import_run_id)}/review#identity-resolution'>Confirm Twin identity</a></p>"
+        inputs="".join(f"<label>{escape(key.replace('_',' ').title())}<input name='{key}' required></label>" for key in ('twin_id','twin_type','primary_subject_id','primary_subject_name','primary_subject_class','governed_scope','canonical_owner'))
+        action=f"<p>Promotion requires an explicit owner-approved identity decision. Enter the governed identity; package filenames are not identity evidence. Twin type and primary subject class must be industry for Industry imports.</p><form method='post' action='/blueprint-import/{escape(package.import_run_id)}/identity'>{inputs}<label>Decision rationale<textarea name='rationale' required></textarea></label><label><input type='checkbox' name='confirm_identity' value='yes' required>I confirm this governed identity and canonical owner.</label><button type='submit'>Confirm governed identity</button></form>"
     else:
         action="<p><strong>Identity confirmation is completed during Review.</strong></p>"
     return f"<section class='card governance-intelligence' aria-labelledby='identity-resolution'><h2 id='identity-resolution'>Twin identity</h2><table>{rows}</table>{action}<p class='muted'>Reviewing identity alone makes no canonical changes.</p></section>"

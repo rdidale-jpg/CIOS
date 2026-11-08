@@ -87,6 +87,8 @@ class DryRunPlanningService:
         staging_version = str(summary.get("staging_version") or "staging-v1")
         dfp = sha256_bytes(json.dumps(decisions, sort_keys=True).encode())
         mfp = sha256_bytes(json.dumps(mappings | {"__staging_version__": staging_version}, sort_keys=True).encode())
+        from .twin_governance import project_twin_identity
+        mfp=sha256_bytes((mfp+json.dumps(project_twin_identity(package).to_dict(),sort_keys=True)).encode())
         plan = DryRunCanonicalEffectPlan("1.0", plan_id(import_run_id, dfp, mfp), package.package_ref, import_run_id, utc_now(), effects, expected, 0)
         saved = self.repository.save(plan)
         self.ledger.append("dry_run_canonical_effect_plan_recorded", saved.to_dict() | {"actor": actor})
