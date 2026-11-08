@@ -291,7 +291,9 @@ def validation_result_page(import_run_id: str, headers: Any) -> tuple[str, int]:
     lifecycle = ImportLifecycleService().get(import_run_id)
     record = EnterpriseCanvasAccessRepository().get_by_import_run(import_run_id)
     enterprise = record.enterprise_id if record else package.identity.enterprise_id
-    nav = f"<nav class='card' aria-label='Breadcrumb'><a href='/digital-twins'>Digital Twins</a> &gt; <a href='/digital-twins/{escape(enterprise)}/canvas'>{escape(package.identity.enterprise_id)}</a> &gt; Import record</nav><section class='card'><p><a href='/digital-twins'>Back to Digital Twins</a> · <a href='/digital-twins/{escape(enterprise)}/canvas'>Back to {escape(package.identity.enterprise_id)} Twin</a> · <a href='/blueprint-import/{escape(import_run_id)}/intelligence'>Inspect candidate intelligence</a></p></section>"
+    destination = f"/blueprint-import/{escape(import_run_id)}/intelligence" if industry_package(package) else f"/digital-twins/{escape(enterprise)}/canvas"
+    destination_name = "Industry workspace" if industry_package(package) else f"{escape(package.identity.enterprise_id)} Twin"
+    nav = f"<nav class='card' aria-label='Breadcrumb'><a href='/intelligence'>Intelligence discovery</a> &gt; <a href='{destination}'>{destination_name}</a> &gt; Import record</nav><section class='card'><p><a href='/digital-twins'>Back to Digital Twins</a> · <a href='{destination}'>Back to {destination_name}</a> · <a href='/blueprint-import/{escape(import_run_id)}/intelligence'>Inspect candidate intelligence</a></p></section>"
     worksheets = _worksheets(summary.get("warnings", [])); status = "Passed with warnings" if summary.get("warnings") and not summary.get("errors") else ("Failed" if summary.get("errors") else "Passed")
     counts = _candidate_counts(candidates)
     guidance=ImportGuidanceRepository().get(import_run_id); detected=detect_package_type(candidates)

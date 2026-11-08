@@ -1,0 +1,898 @@
+{
+  "observations": [
+    {
+      "version": "before",
+      "viewport": "desktop",
+      "audience": "owner",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "actual BNK partial workspace": false,
+        "model-backed existing Canvas": false,
+        "identity ambiguity visible": false,
+        "private model absent": true
+      },
+      "passed": false,
+      "seconds": 0.379
+    },
+    {
+      "version": "before",
+      "viewport": "desktop",
+      "audience": "owner",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "actual BNK partial workspace": false,
+        "model-backed existing Canvas": false,
+        "identity ambiguity visible": false,
+        "private model absent": true
+      },
+      "passed": false,
+      "seconds": 0.135
+    },
+    {
+      "version": "before",
+      "viewport": "desktop",
+      "audience": "owner",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "actual BNK partial workspace": false,
+        "model-backed existing Canvas": false,
+        "identity ambiguity visible": false,
+        "private model absent": true
+      },
+      "passed": false,
+      "seconds": 0.155
+    },
+    {
+      "version": "before",
+      "viewport": "desktop",
+      "audience": "wrong-workspace",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": false,
+      "seconds": 0.301
+    },
+    {
+      "version": "before",
+      "viewport": "desktop",
+      "audience": "wrong-workspace",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": false,
+      "seconds": 0.108
+    },
+    {
+      "version": "before",
+      "viewport": "desktop",
+      "audience": "wrong-workspace",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": false
+      },
+      "passed": false,
+      "seconds": 0.099
+    },
+    {
+      "version": "before",
+      "viewport": "desktop",
+      "audience": "anonymous",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": false,
+      "seconds": 0.292
+    },
+    {
+      "version": "before",
+      "viewport": "desktop",
+      "audience": "anonymous",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": false,
+      "seconds": 0.107
+    },
+    {
+      "version": "before",
+      "viewport": "desktop",
+      "audience": "anonymous",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": false,
+      "seconds": 0.069
+    },
+    {
+      "version": "before",
+      "viewport": "desktop",
+      "audience": "owner",
+      "path": "inspection aliases",
+      "checks": {
+        "both aliases 200": false,
+        "same visible source view": false
+      },
+      "passed": false
+    },
+    {
+      "version": "before",
+      "viewport": "ipad",
+      "audience": "owner",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "actual BNK partial workspace": false,
+        "model-backed existing Canvas": false,
+        "identity ambiguity visible": false,
+        "private model absent": true
+      },
+      "passed": false,
+      "seconds": 0.323
+    },
+    {
+      "version": "before",
+      "viewport": "ipad",
+      "audience": "owner",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "actual BNK partial workspace": false,
+        "model-backed existing Canvas": false,
+        "identity ambiguity visible": false,
+        "private model absent": true
+      },
+      "passed": false,
+      "seconds": 0.14
+    },
+    {
+      "version": "before",
+      "viewport": "ipad",
+      "audience": "owner",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "actual BNK partial workspace": false,
+        "model-backed existing Canvas": false,
+        "identity ambiguity visible": false,
+        "private model absent": true
+      },
+      "passed": false,
+      "seconds": 0.109
+    },
+    {
+      "version": "before",
+      "viewport": "ipad",
+      "audience": "wrong-workspace",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": false,
+      "seconds": 0.303
+    },
+    {
+      "version": "before",
+      "viewport": "ipad",
+      "audience": "wrong-workspace",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": false,
+      "seconds": 0.087
+    },
+    {
+      "version": "before",
+      "viewport": "ipad",
+      "audience": "wrong-workspace",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": false
+      },
+      "passed": false,
+      "seconds": 0.073
+    },
+    {
+      "version": "before",
+      "viewport": "ipad",
+      "audience": "anonymous",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": false,
+      "seconds": 0.234
+    },
+    {
+      "version": "before",
+      "viewport": "ipad",
+      "audience": "anonymous",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": false,
+      "seconds": 0.071
+    },
+    {
+      "version": "before",
+      "viewport": "ipad",
+      "audience": "anonymous",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": false,
+        "curated source remains visible": false,
+        "no false governed count": true,
+        "typed entries without duplicates": false,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": false,
+      "seconds": 0.071
+    },
+    {
+      "version": "before",
+      "viewport": "ipad",
+      "audience": "owner",
+      "path": "inspection aliases",
+      "checks": {
+        "both aliases 200": false,
+        "same visible source view": false
+      },
+      "passed": false
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "owner",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "actual BNK partial workspace": true,
+        "model-backed existing Canvas": true,
+        "identity ambiguity visible": true,
+        "private model absent": true
+      },
+      "passed": true,
+      "seconds": 0.434
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "owner",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "actual BNK partial workspace": true,
+        "model-backed existing Canvas": true,
+        "identity ambiguity visible": true,
+        "private model absent": true
+      },
+      "passed": true,
+      "seconds": 0.207
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "owner",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "actual BNK partial workspace": true,
+        "model-backed existing Canvas": true,
+        "identity ambiguity visible": true,
+        "private model absent": true
+      },
+      "passed": true,
+      "seconds": 0.229
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "wrong-workspace",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": true,
+      "seconds": 0.281
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "wrong-workspace",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": true,
+      "seconds": 0.096
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "wrong-workspace",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": true,
+      "seconds": 0.095
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "anonymous",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": true,
+      "seconds": 0.308
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "anonymous",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": true,
+      "seconds": 0.084
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "anonymous",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": true,
+      "seconds": 0.069
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "owner",
+      "path": "inspection aliases",
+      "checks": {
+        "both aliases 200": true,
+        "same visible source view": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "owner",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "actual BNK partial workspace": true,
+        "model-backed existing Canvas": true,
+        "identity ambiguity visible": true,
+        "private model absent": true
+      },
+      "passed": true,
+      "seconds": 0.465
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "owner",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "actual BNK partial workspace": true,
+        "model-backed existing Canvas": true,
+        "identity ambiguity visible": true,
+        "private model absent": true
+      },
+      "passed": true,
+      "seconds": 0.229
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "owner",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "actual BNK partial workspace": true,
+        "model-backed existing Canvas": true,
+        "identity ambiguity visible": true,
+        "private model absent": true
+      },
+      "passed": true,
+      "seconds": 0.201
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "wrong-workspace",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": true,
+      "seconds": 0.393
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "wrong-workspace",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": true,
+      "seconds": 0.177
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "wrong-workspace",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": true,
+      "seconds": 0.138
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "anonymous",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": true,
+      "seconds": 0.452
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "anonymous",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": true,
+      "seconds": 0.185
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "anonymous",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "shared visible discovery": true,
+        "curated source remains visible": true,
+        "no false governed count": true,
+        "typed entries without duplicates": true,
+        "no horizontal overflow": true,
+        "no protected names IDs destinations": true
+      },
+      "passed": true,
+      "seconds": 0.141
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "owner",
+      "path": "inspection aliases",
+      "checks": {
+        "both aliases 200": true,
+        "same visible source view": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "owner",
+      "path": "Home -> Intelligence -> Industry -> enterprise dossier -> Evidence",
+      "checks": {
+        "existing click journey": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "owner",
+      "path": "Discovery -> existing authorised Canvas",
+      "checks": {
+        "model destination available": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "history",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "visible owner status": true,
+        "no horizontal overflow": true,
+        "historical is not current": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "history",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "visible owner status": true,
+        "no horizontal overflow": true,
+        "historical is not current": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "history",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "visible owner status": true,
+        "no horizontal overflow": true,
+        "historical is not current": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "empty",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "visible owner status": true,
+        "no horizontal overflow": true,
+        "no fake model/import": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "empty",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "visible owner status": true,
+        "no horizontal overflow": true,
+        "no fake model/import": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "desktop",
+      "audience": "empty",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "visible owner status": true,
+        "no horizontal overflow": true,
+        "no fake model/import": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "owner",
+      "path": "Home -> Intelligence -> Industry -> enterprise dossier -> Evidence",
+      "checks": {
+        "existing click journey": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "owner",
+      "path": "Discovery -> existing authorised Canvas",
+      "checks": {
+        "model destination available": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "history",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "visible owner status": true,
+        "no horizontal overflow": true,
+        "historical is not current": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "history",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "visible owner status": true,
+        "no horizontal overflow": true,
+        "historical is not current": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "history",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "visible owner status": true,
+        "no horizontal overflow": true,
+        "historical is not current": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "empty",
+      "path": "/",
+      "checks": {
+        "HTTP 200": true,
+        "visible owner status": true,
+        "no horizontal overflow": true,
+        "no fake model/import": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "empty",
+      "path": "/intelligence?tab=industries",
+      "checks": {
+        "HTTP 200": true,
+        "visible owner status": true,
+        "no horizontal overflow": true,
+        "no fake model/import": true
+      },
+      "passed": true
+    },
+    {
+      "version": "after",
+      "viewport": "ipad",
+      "audience": "empty",
+      "path": "/digital-twins",
+      "checks": {
+        "HTTP 200": true,
+        "visible owner status": true,
+        "no horizontal overflow": true,
+        "no fake model/import": true
+      },
+      "passed": true
+    }
+  ],
+  "owner_store_bytes_unchanged": {
+    "before-current": true,
+    "current": true,
+    "history": true,
+    "empty": true
+  }
+}

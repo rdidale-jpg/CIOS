@@ -80,6 +80,220 @@ def governed_twin_list(headers) -> list[GovernedTwinListItem]:
     return sorted(items, key=lambda x: (x.enterprise_name.casefold(), x.twin_version.casefold()))
 
 
+@dataclass(frozen=True)
+class IntelligenceDiscoveryItem:
+    """Ephemeral presentation only; never a canonical identity or lifecycle."""
+    key: str
+    population: str
+    name: str
+    intelligence_type: str
+    source_boundary: str
+    status: str
+    owner_state: str
+    current: bool | None
+    workspace_id: str
+    identities: tuple[tuple[str, str], ...]
+    destination: str
+    availability: str
+    identity_status: str = 'recognised'
+    release_version: str = 'Unknown'
+    meaningful_update: str = 'Unknown'
+    event_kind: str = ''
+    event_date: str = 'Unknown'
+    unknowns: tuple[str, ...] = ()
+
+
+@dataclass(frozen=True)
+class IntelligenceDiscovery:
+    items: tuple[IntelligenceDiscoveryItem, ...]
+    unavailable_sources: tuple[str, ...] = ()
+    access_message: str = ''
+
+
+def _discovery_workspace_visible(headers, workspace_id):
+    from cios.applications.flora.access import active_flora_workspace
+    from cios.applications.flora.live.source_registry import canonical_enterprise_id
+    # A broad enterprise grant does not select another workspace for discovery.
+    # Unscoped legacy records still require the owner's normal access checks.
+    return not workspace_id or canonical_enterprise_id(workspace_id) == canonical_enterprise_id(active_flora_workspace(headers))
+
+
+def _known_discovery_date(value):
+    """A past/current explicit date, not a generated, inferred or future update."""
+    from datetime import timezone
+    try:
+        parsed = datetime.fromisoformat(str(value).replace('Z', '+00:00'))
+        return str(value) if parsed.date() <= datetime.now(timezone.utc).date() else 'Unknown'
+    except (TypeError, ValueError):
+        return 'Unknown'
+
+
+def intelligence_discovery(headers=None) -> IntelligenceDiscovery:
+    """Read existing source, import and Canvas owners without repair/write paths."""
+    from urllib.parse import quote
+    from cios.applications.flora import access
+    from cios.applications.flora.banking_portfolio import GENERATED_DATE
+    from cios.applications.flora.blueprint_import.mapping import industry_package
+    from cios.applications.flora.blueprint_import.validator import can_inspect_blueprint_package
+    from cios.applications.flora.blueprint_import.candidates import CandidateStagingRepository
+    from cios.applications.flora.blueprint_import.lifecycle import ImportLifecycleService
+    from cios.applications.flora.blueprint_import.review import ImportHumanReviewRepository
+    from cios.applications.flora.blueprint_import.twin_governance import project_twin_identity
+    from cios.applications.flora.live.source_registry import canonical_enterprise_id
+
+    headers = headers or {}
+    items = [IntelligenceDiscoveryItem(
+        'curated:uk-banking', 'curated', 'UK Banking', 'Curated Industry context',
+        'Curated repository Banking pilot; presentation over source knowledge',
+        'Source-curated', 'repository context', None, '',
+        (('Source route identity', 'uk-banking'),), '/flora/banking',
+        'Existing public pilot available; not accepted canonical intelligence',
+        event_kind='Pilot snapshot (not an intelligence effective date)', event_date=GENERATED_DATE,
+        unknowns=('Claim-level runtime Evidence and complete Industry Twin acceptance are not established by this pilot.',))]
+    if not access.authenticated_flora_user(headers):
+        return IntelligenceDiscovery(tuple(items), access_message='Sign in to discover account-visible imports and Enterprise Canvas views. No protected records are counted.')
+    unavailable = []
+    visible_packages = {}
+    industry_ids = set()
+    industry_envelopes = {}
+    try:
+        packages = BlueprintPackageRegistry().list()
+    except (OSError, ValueError, TypeError, KeyError):
+        packages = []
+        unavailable.append('Industry imports')
+    for package in packages:
+        if (not _discovery_workspace_visible(headers, package.workspace_id)
+                or not access.can_access_enterprise(headers, package.identity.enterprise_id, package.workspace_id)
+                or not can_inspect_blueprint_package(headers, package)):
+            continue
+        visible_packages[package.import_run_id] = package
+        try:
+            if not industry_package(package):
+                continue
+            identity = project_twin_identity(package)
+            state = ImportLifecycleService().get(package.import_run_id)
+            if state.state in {'deleted', 'cancelled'}:
+                continue
+            summary = CandidateStagingRepository().load_summary(package.import_run_id)
+            review = ImportHumanReviewRepository().get(package.import_run_id)
+            industry_envelopes[package.import_run_id] = canonical_enterprise_id(package.identity.enterprise_id)
+            for explicit_id in (identity.twin_id, identity.primary_subject_id):
+                if explicit_id:
+                    industry_ids.add(canonical_enterprise_id(explicit_id))
+            status = {'promoted': 'Partially promoted', 'superseded': 'Superseded',
+                      'archived': 'Archived', 'received': 'Under review' if review else 'Candidate'}.get(state.state, 'Unknown')
+            unknowns = ['Partial canonical promotion is not complete Industry Twin acceptance. Source dossiers are not durable Enterprise Models.',
+                        'Evidence lineage, source Unknowns and Contradictions remain inspectable in the existing import workspace.']
+            if identity.status == 'ambiguous':
+                unknowns.append('Identity unresolved: explicit governed metadata is incomplete; no identity is guessed or merged.')
+            destination = f'/blueprint-import/{quote(package.import_run_id, safe="")}' + ('/intelligence' if summary is not None else '/inspect')
+            availability = ('Source/candidate workspace available; review is not promoted acceptance' if review and state.state == 'received' else
+                            'Source/candidate workspace available' if summary is not None else
+                            'Staging unavailable; existing intake inspection available')
+            ids = tuple((label, str(value or 'Unknown')) for label, value in (
+                ('Source package', identity.source_package_identity), ('Package receipt identity', package.package_ref),
+                ('Import run', package.import_run_id), ('Governed Twin', identity.twin_id),
+                ('Primary subject', identity.primary_subject_id), ('Presentation context', package.import_run_id)))
+            items.append(IntelligenceDiscoveryItem(
+                'import:' + package.import_run_id, 'industry_import',
+                str(identity.primary_subject_name or identity.source_package_identity), 'Imported Industry Twin workspace',
+                'Blueprint registry / governed identity / staging / existing release lifecycle', status,
+                state.state, bool(state.state == 'promoted' and state.current), package.workspace_id, ids,
+                destination, availability, identity.status, identity.package_version,
+                event_kind='Release lifecycle event' if state.updated_at else 'Review acknowledgement' if review else '',
+                event_date=str(state.updated_at or (review or {}).get('reviewed_at') or 'Unknown'), unknowns=tuple(unknowns)))
+        except (OSError, ValueError, TypeError, KeyError):
+            if 'Industry imports' not in unavailable:
+                unavailable.append('Industry imports')
+    repo = EnterpriseCanvasAccessRepository()
+    try:
+        records = repo.list()
+    except (OSError, ValueError, TypeError, KeyError):
+        records = []
+        unavailable.append('Enterprise Canvas')
+    models = EnterpriseModelRepository()
+    seen = set()
+    for record in records:
+        try:
+            if (not _discovery_workspace_visible(headers, record.workspace_id)
+                    or not can_access_canvas_record(headers, record.enterprise_id, record.workspace_id)):
+                continue
+            # Resolve through the existing access owner, not an alternate ACL or
+            # a second list entry sharing an alias with different access metadata.
+            if repo.get(record.enterprise_id) != record:
+                continue
+            enterprise = canonical_enterprise_id(record.enterprise_id)
+            if enterprise in industry_ids:
+                continue
+            model = models.get(enterprise) if models.path_for(enterprise).exists() else None
+            if not model and record.import_run_ids and all(
+                    industry_envelopes.get(run) == enterprise for run in record.import_run_ids):
+                continue  # legacy Industry-only Canvas artifact, not an Enterprise
+            key = f'canvas:{record.workspace_id}:{record.canvas_id}:{enterprise}'
+            if key in seen:
+                continue
+            seen.add(key)
+            identity_ok = model is None or canonical_enterprise_id(model.enterprise_id) == enterprise
+            if not identity_ok:
+                # Do not send a caller to a Canvas whose persisted payload has
+                # a different identity. No other model's ID/name is disclosed.
+                if 'Enterprise Canvas' not in unavailable:
+                    unavailable.append('Enterprise Canvas')
+                continue
+            active = [a for a in model.attributes.values() if a.trust_state.casefold() not in {'retired', 'expired', 'superseded'}
+                      and not any(w in a.freshness.casefold() for w in ('retired', 'expired', 'superseded'))
+                      and (not a.last_observed_date or a.last_observed_date.casefold() in {'unknown', 'undated'}
+                           or _known_discovery_date(a.last_observed_date) != 'Unknown')] if model and identity_ok else []
+            material_date = next((_known_discovery_date(a.current_value) for a in active if a.attribute == 'latest_material_change' and a.current_value), 'Unknown')
+            observed = sorted(_known_discovery_date(a.last_observed_date) for a in active if _known_discovery_date(a.last_observed_date) != 'Unknown')
+            ids = [('Canonical Enterprise', enterprise), ('Canvas identity', record.canvas_id)]
+            ids.extend(('Accessible import reference', run) for run in record.import_run_ids if run in visible_packages)
+            status = 'Model-backed' if model and identity_ok else 'Unavailable'
+            availability = ('Persisted Enterprise Model and existing authorised Canvas available' if status == 'Model-backed' else
+                            'Existing authorised Canvas view; durable model unavailable or identity unresolved')
+            uncertainty = ['Model presence is not complete Commercial Digital Twin assurance; source, confidence and Unknowns retain their existing owners.']
+            if model:
+                uncertainty.extend(f'Open model Unknown {u.unknown_id}: {u.question}' for u in model.unknowns.values() if u.status == 'open')
+            items.append(IntelligenceDiscoveryItem(
+                key, 'enterprise_canvas', record.enterprise_id, 'Enterprise Canvas / Commercial Digital Twin view',
+                'EnterpriseModelRepository / existing Canvas access owner', status, 'existing Canvas access', None,
+                record.workspace_id, tuple(ids), f'/digital-twins/{quote(enterprise, safe="")}/canvas', availability,
+                identity_status='recognised' if identity_ok else 'ambiguous', meaningful_update=material_date,
+                event_kind='Latest model observation' if observed else '', event_date=observed[-1] if observed else 'Unknown',
+                unknowns=tuple(uncertainty)))
+        except (OSError, ValueError, TypeError, KeyError):
+            if 'Enterprise Canvas' not in unavailable:
+                unavailable.append('Enterprise Canvas')
+    return IntelligenceDiscovery(tuple(items), tuple(unavailable),
+        'Only authorised items in the active workspace are shown. An empty result does not distinguish absent from inaccessible records; no protected totals are disclosed.')
+
+
+def render_intelligence_discovery(snapshot: IntelligenceDiscovery) -> str:
+    """Shared existing-card presentation; no persistent discovery registry."""
+    cards = []
+    for item in snapshot.items:
+        ids = ''.join(f'<dt>{escape(k)}</dt><dd>{escape(v)}</dd>' for k, v in item.identities)
+        unknowns = ''.join(f'<li>{escape(u)}</li>' for u in item.unknowns)
+        current = 'Not applicable / Unknown' if item.current is None else 'Yes' if item.current else 'No'
+        event = f'<dt>{escape(item.event_kind)}</dt><dd>{escape(item.event_date)}</dd>' if item.event_kind else ''
+        cards.append(f"<article class='card discovery-item' data-population='{escape(item.population)}'>"
+            f"<h3>{escape(item.name)}</h3><p><strong>{escape(item.intelligence_type)}</strong></p>"
+            f"<p><strong>Status: {escape(item.status)}</strong> · Current release: {current}</p>"
+            f"<p>{escape(item.source_boundary)}</p><p>{escape(item.availability)}</p>"
+            f"<dl><dt>Workspace visibility</dt><dd>{escape(item.workspace_id or 'Public source context' if item.population == 'curated' else item.workspace_id or 'Legacy unscoped record; owner access required')}</dd>"
+            f"<dt>Release</dt><dd>{escape(item.release_version)}</dd><dt>Identity status</dt><dd>{escape(item.identity_status)}</dd>"
+            f"<dt>Last meaningful intelligence update</dt><dd>{escape(item.meaningful_update)}</dd>{event}{ids}</dl>"
+            f"<ul>{unknowns}</ul><a href='{escape(item.destination)}'>Open {escape(item.intelligence_type)}</a></article>")
+    unavailable = ''.join(f'<p role="status">{escape(source)} discovery details unavailable. No owner acceptance or protected records are inferred.</p>' for source in snapshot.unavailable_sources)
+    no_private = '<p>No authorised imported or model-backed items are shown for this context.</p>' if not any(i.population != 'curated' for i in snapshot.items) else ''
+    no_models = ('<p>No governed Digital Twins are available from the model-backed Canvas population in this account/workspace context. '
+                 'This does not describe the separate curated and imported Industry contexts below.</p>'
+                 if 'Enterprise Canvas' not in snapshot.unavailable_sources and not any(i.population == 'enterprise_canvas' and i.status == 'Model-backed' for i in snapshot.items) else '')
+    return ("<style>.discovery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}.discovery-item{min-width:0;overflow-wrap:anywhere}.discovery-item dd{margin-left:0}</style>"
+            "<section class='card' id='intelligence-discovery'><h2>Intelligence discovery</h2>"
+            f"<p>{escape(snapshot.access_message)}</p>{unavailable}{no_private}{no_models}<div class='discovery-grid'>{''.join(cards)}</div></section>")
+
+
 def _human_date(value) -> str:
     if not value:
         return 'Not yet available.'
@@ -148,23 +362,16 @@ def _research_outcome(run: dict | None, candidates: list[dict]) -> tuple[str, st
 
 def digital_twins_landing_page(headers=None) -> str:
     headers = headers or {}
-    twins = governed_twin_list(headers)
-    cards = ''.join(_governed_twin_card(t) for t in twins)
+    snapshot = intelligence_discovery(headers)
     decision = blueprint_upload_authorisation(headers)
     import_enabled = decision.decision == "allowed" or pilot_import_bypass_enabled()
-    empty = ("<p>No governed Digital Twins are available to this signed-in account.</p>"
-             "<p class='muted'>Import a Twin package to create a candidate for review.</p>"
-             if not cards and import_enabled
-             else ("<p>No governed Digital Twins are available to this signed-in account.</p>" if not cards else ""))
-    if import_enabled:
-        import_access = "<p><a class='button primary' href='/blueprint-import'>Import Twin</a></p>"
-    elif authenticated_flora_user(headers):
-        import_access = ("<p class='muted' role='note'><strong>Twin import is unavailable:</strong> "
-                         "your account requires the package.upload capability in the active workspace.</p>")
-    else:
-        import_access = ""
-    body = f"""<section class='hero'><h1>Digital Twins</h1><p class='muted'>Governed Commercial Digital Twins available to your signed-in account.</p>{import_access}</section>
-    <section class='card'><h2>Available Twins</h2><p class='muted'>Select a governed Twin to open its Canvas.</p>{empty}<div class='grid'>{cards}</div></section>"""
+    import_access = ("<p><a class='button primary' href='/blueprint-import'>Import Twin</a></p>" if import_enabled else
+                     "<p>Twin import is unavailable: package.upload in the active workspace is required.</p>" if authenticated_flora_user(headers) else "")
+    body = ("<section class='hero'><h1>Digital Twins</h1><p>Discover curated Industry context, imported Industry workspaces "
+            "and existing Enterprise Canvas views. Each retains its own identity, source and acceptance boundary. "
+            "Model presence alone does not establish complete Commercial Digital Twin assurance.</p>"
+            f"{import_access}<p><a href='/'>Home</a> · <a href='/intelligence'>Intelligence</a></p></section>"
+            + render_intelligence_discovery(snapshot))
     return _page('Digital Twins', body)
 
 
