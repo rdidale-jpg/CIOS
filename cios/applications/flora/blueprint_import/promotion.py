@@ -2,16 +2,19 @@
 from __future__ import annotations
 
 import json, os, shutil
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
+from datetime import datetime, timezone
+from threading import Lock
 from typing import Any, Literal
 
 from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise, flora_roles
 from cios.applications.flora.memory.models import Observation
 from cios.applications.flora.blueprint_import.atomicity import validate_atomic_statement, normalise_statement
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
-from cios.applications.flora.memory.repository import EvidenceRepository, ObservationRepository, ContradictionRepository
-from cios.applications.flora.storage import atomic_write_json, data_path, ensure_writable_dir
+from cios.applications.flora.memory.repository import EvidenceRepository, ObservationRepository, ContradictionRepository, EnterpriseModelRepository
+from cios.applications.flora.storage import atomic_write_json, atomic_write_bytes, data_path, ensure_writable_dir
+from cios.applications.flora.memory.service import ObservationMemoryService, CLAIM_VOCABULARY
 
 from .archive import sha256_bytes
 from .candidates import CandidateStagingRepository
@@ -21,7 +24,9 @@ from .planning import DryRunPlanRepository, ProposedCanonicalEffect
 from .registry import BlueprintPackageRegistry
 from .review import CandidateReviewRepository
 
-PromotionStatus = Literal["succeeded", "repeat_no_change", "failed"]
+_PROMOTION_LOCK = Lock()
+
+PromotionStatus = Literal["running", "succeeded", "repeat_no_change", "failed"]
 SUPPORTED_PROMOTION_CLASSES = {"evidence", "observation", "contradiction", "unknown", "entity", "relationship", "human_knowledge", "fact", "reasoning_lineage"}
 SUPPORT_RECORD_CLASSES = {"source", "enterprise_model_candidate"}
 NON_MUTATING_EFFECTS = {"mapped", "unchanged", "duplicate", "reject", "defer", "quarantine", "unsupported", "unresolved", "projection", "conflict"}
@@ -55,6 +60,11 @@ def _first_present(payload: dict[str, Any], keys: tuple[str, ...]) -> tuple[str,
         if value:
             return value, key
     return "", ""
+
+def _record_enterprise(payload, package):
+    declared=[canonical_enterprise_id(str(payload[key])) for key in ('enterprise_id','canonical_enterprise_id') if payload.get(key)]
+    if len(set(declared))>1: raise BlueprintPromotionError("Conflicting canonical Enterprise identifiers")
+    return declared[0] if declared else canonical_enterprise_id(package.identity.enterprise_id)
 
 class BlueprintPromotionError(PermissionError):
     """Raised when approved canonical promotion cannot proceed."""
@@ -112,8 +122,11 @@ class CanonicalPromotionResult:
     rollback_or_compensation_result: str = "not_required"
     final_execution_status: PromotionStatus = "succeeded"
     error: str = ""
+    model_projection_status: str = "not_assessed"
+    model_projection_results: tuple[dict[str, Any], ...] = ()
     def to_dict(self):
         d=asdict(self)
+        d["model_projection_results"]=list(self.model_projection_results)
         for k in ("records_created","records_updated","records_mapped","records_unchanged","records_skipped","records_blocked","records_failed"):
             d[k]=list(getattr(self,k))
         return d
@@ -178,8 +191,10 @@ def _execution_id(plan_id: str, approval_id: str) -> str: return "bpi-promote-"+
 def _approval_id(plan_id: str, approver: str) -> str: return "bpi-approval-"+sha256_bytes(f"{plan_id}\n{approver}".encode())[:24]
 
 class CanonicalPromotionService:
-    def __init__(self, registry=None, staging=None, reviews=None, mappings=None, plans=None, repo=None, ledger=None, evidence_repo=None, observation_repo=None):
+    def __init__(self, registry=None, staging=None, reviews=None, mappings=None, plans=None, repo=None, ledger=None, evidence_repo=None, observation_repo=None, model_repo=None):
         self.registry=registry or BlueprintPackageRegistry(); self.staging=staging or CandidateStagingRepository(); self.reviews=reviews or CandidateReviewRepository(); self.mappings=mappings or ImportMappingRepository(); self.plans=plans or DryRunPlanRepository(); self.repo=repo or CanonicalPromotionRepository(); self.ledger=ledger or BlueprintImportLedger(); self.evidence_repo=evidence_repo or EvidenceRepository(); self.observation_repo=observation_repo or ObservationRepository(); self.contradiction_repo=ContradictionRepository(); self.generic_repos={rc: CanonicalJsonlRepository(rc) for rc in ("unknown", "entity", "relationship", "human_knowledge", "fact", "reasoning_lineage")}
+        self.models=model_repo or EnterpriseModelRepository()
+        self.memory=ObservationMemoryService(self.observation_repo,self.models)
     def approve_plan(self, import_run_id: str, plan_id: str, approver: str, rationale: str, headers: Any, unresolved_warnings_accepted: tuple[str,...]=(), expiry_or_invalidation_condition: str="invalid if plan, package, review decisions or mappings change"):
         plan=self._load_plan(import_run_id, plan_id); package=self.registry.get(plan["package_ref"])
         if not package or not can_approve_blueprint_promotion(headers, package.identity.enterprise_id): raise BlueprintPromotionError("Actor is not authorised to approve Blueprint canonical promotion")
@@ -187,35 +202,164 @@ class CanonicalPromotionService:
         if any(e["effect_type"]=="conflict" for e in plan["effects"]): raise BlueprintPromotionError("Unresolved blocking conflicts remain")
         if not _plan_reconciles(plan): raise BlueprintPromotionError("Accepted canonical candidates do not reconcile with create, update and unchanged effects")
         self._assert_constructor_valid(import_run_id, plan)
+        self._assert_target_ownership(import_run_id, plan, headers)
         a=CanonicalPromotionApproval("1.0", _approval_id(plan_id, approver), plan_id, import_run_id, plan["package_ref"], package.package_sha256, approver, utc_now(), rationale, tuple(plan["effects"]), int(plan["expected_canonical_mutation_count"]), unresolved_warnings_accepted, expiry_or_invalidation_condition, _fp(plan), self._reviews_fingerprint(import_run_id), _fp(self.mappings.list(import_run_id)))
         self.repo.save_approval(a); self.ledger.append("canonical_promotion_approved", a.to_dict()); return a
     def execute_approved_plan(self, import_run_id: str, approval_id: str, actor: str, headers: Any) -> CanonicalPromotionResult:
+        # Serializes importer threads only; file compensation is not a database
+        # transaction and requires the existing single-writer operating model.
+        if not _PROMOTION_LOCK.acquire(blocking=False):
+            raise BlueprintPromotionError("Another canonical promotion is running; retry after it completes")
+        try:
+            return self._execute_approved_plan(import_run_id, approval_id, actor, headers)
+        except BlueprintPromotionError:
+            raise
+        except Exception as exc:
+            raise BlueprintPromotionError("Promotion stopped before completion; inspect execution receipts and recovery backups before retry: "+type(exc).__name__) from exc
+        finally:
+            _PROMOTION_LOCK.release()
+
+    def _execute_approved_plan(self, import_run_id, approval_id, actor, headers):
         a=self.repo.load_approval(import_run_id, approval_id)
         if not a: raise BlueprintPromotionError("Unknown promotion approval")
         plan=self._load_plan(import_run_id, a.approved_plan_id); package=self.registry.get(a.package_ref)
-        if not package or not can_execute_blueprint_promotion(headers, package.identity.enterprise_id): raise BlueprintPromotionError("Actor is not authorised to execute Blueprint canonical promotion")
+        if not package or not can_execute_blueprint_promotion(headers, package.identity.enterprise_id):
+            raise BlueprintPromotionError("Actor is not authorised to execute Blueprint canonical promotion")
         self._assert_still_valid(a, plan, package.package_sha256)
-        prior=self.repo.successful_for(import_run_id, a.approved_plan_id, a.approval_id)
+        self._assert_target_ownership(import_run_id, plan, headers)
+        candidates={c["candidate_record_id"]:c for c in self.staging.list_candidates(import_run_id)}
+        targets={_record_enterprise(candidates[e["candidate_id"]].get("payload") or {},package)
+                 for e in plan["effects"] if e["record_class"]=="observation" and e["effect_type"] in {"create","update"}}
+        paths=self._canonical_paths()+[self.models.path_for(target) for target in targets]+[self.ledger.path]
+        if any(Path(str(path)+".bpi_backup").exists() for path in paths):
+            raise BlueprintPromotionError("Unrecovered promotion backup exists; single-writer recovery review is required before retry")
+        eid=_execution_id(a.approved_plan_id,a.approval_id)
+        execution_path=self.repo._execution_dir(import_run_id)/f"{eid}.json"
+        if execution_path.exists():
+            previous=json.loads(execution_path.read_text())
+            if previous.get("final_execution_status")=="running" or previous.get("rollback_or_compensation_result")=="recovery_required":
+                raise BlueprintPromotionError("Interrupted promotion requires recovery review before retry")
+        prior=self.repo.successful_for(import_run_id,a.approved_plan_id,a.approval_id)
         if prior: return CanonicalPromotionResult(**{**prior.to_dict(),"final_execution_status":"repeat_no_change"})
-        started=utc_now(); eid=_execution_id(a.approved_plan_id, a.approval_id); backups=self._backup_paths(); created=[]; updated=[]; mapped=[]; unchanged=[]; skipped=[]; blocked=[]; failed=[]
+        started=utc_now(); backups=self._backup_paths(paths)
+        created=[]; updated=[]; mapped=[]; unchanged=[]; skipped=[]; blocked=[]; observations=[]; projections=[]
+        self.repo.save_result(import_run_id,CanonicalPromotionResult("1.0",eid,a.approved_plan_id,a.approval_id,actor,started,"",final_execution_status="running"))
         try:
-            candidates={c["candidate_record_id"]: c for c in self.staging.list_candidates(import_run_id)}; reviews=self.reviews.latest_by_candidate(import_run_id); maps={m["candidate_id"]:m for m in self.mappings.list(import_run_id)}
+            reviews=self.reviews.latest_by_candidate(import_run_id); maps={m["candidate_id"]:m for m in self.mappings.list(import_run_id)}
             for e in (ProposedCanonicalEffect(**x) for x in plan["effects"]):
                 c=candidates.get(e.candidate_id); d=reviews.get(e.candidate_id); m=maps.get(e.candidate_id)
                 if not c or not d or d.get("decision")!="approve": blocked.append(e.candidate_id); continue
-                if e.effect_type in NON_MUTATING_EFFECTS: (mapped if e.effect_type=="mapped" else unchanged if e.effect_type in {"unchanged","duplicate"} else skipped).append(e.candidate_id); continue
+                if e.effect_type in NON_MUTATING_EFFECTS:
+                    (mapped if e.effect_type=="mapped" else unchanged if e.effect_type in {"unchanged","duplicate"} else skipped).append(e.candidate_id)
+                    continue
                 if e.effect_type not in {"create","update"} or e.record_class not in SUPPORTED_PROMOTION_CLASSES:
                     skipped.append(f"{e.record_class}:{e.candidate_id}"); continue
-                cid=self._promote(e, c, d, m or {}, a, actor)
+                cid=self._promote(e,c,d,m or {},a,actor)
                 (created if e.effect_type=="create" else updated).append(cid)
+                if e.record_class=="observation": observations.append(cid)
             actual=len(created)+len(updated)
-            if actual != a.approved_expected_mutation_count: raise BlueprintPromotionError(f"Actual mutation count {actual} did not match approved expected count {a.approved_expected_mutation_count}")
-            result=CanonicalPromotionResult("1.0", eid, a.approved_plan_id, a.approval_id, actor, started, utc_now(), tuple(created), tuple(updated), tuple(mapped), tuple(unchanged), tuple(skipped), tuple(blocked), tuple(failed), a.approved_expected_mutation_count, actual, "not_required", "succeeded")
+            if actual!=a.approved_expected_mutation_count:
+                raise BlueprintPromotionError(f"Actual mutation count {actual} did not match approved expected count {a.approved_expected_mutation_count}")
+            # All canonical writes precede projection, so package ordering does
+            # not determine whether supporting Evidence can be resolved.
+            projections=[self._project_observation(cid) for cid in dict.fromkeys(observations)]
+            projection_status='partial' if any(p['status']=='not_projected' for p in projections) else ('complete' if projections else 'not_applicable')
+            result=CanonicalPromotionResult("1.0",eid,a.approved_plan_id,a.approval_id,actor,started,utc_now(),
+                tuple(created),tuple(updated),tuple(mapped),tuple(unchanged),tuple(skipped),tuple(blocked),(),
+                a.approved_expected_mutation_count,actual,"not_required","succeeded",model_projection_status=projection_status,model_projection_results=tuple(projections))
+            # Receipt and audit errors are promotion errors, not successful
+            # reconciliation. Keep these inside the compensated operation.
+            self.repo.save_result(import_run_id,result)
+            self.ledger.append("canonical_promotion_execution_recorded",result.to_dict())
         except Exception as exc:
-            self._restore_paths(backups); failed=failed or ["promotion"]
-            result=CanonicalPromotionResult("1.0", eid, a.approved_plan_id, a.approval_id, actor, started, utc_now(), tuple(created), tuple(updated), tuple(mapped), tuple(unchanged), tuple(skipped), tuple(blocked), tuple(failed), a.approved_expected_mutation_count, len(created)+len(updated), "restored_canonical_file_backups", "failed", str(exc))
-            self.repo.save_result(import_run_id,result); self.ledger.append("canonical_promotion_execution_recorded", result.to_dict()); raise BlueprintPromotionError(str(exc)) from exc
-        self.repo.save_result(import_run_id,result); self.ledger.append("canonical_promotion_execution_recorded", result.to_dict()); return result
+            recovery='restored_canonical_and_model_file_backups'
+            try: self._restore_paths(backups)
+            except OSError: recovery='recovery_required'
+            failed=CanonicalPromotionResult("1.0",eid,a.approved_plan_id,a.approval_id,actor,started,utc_now(),
+                records_failed=("promotion_or_projection",),expected_mutation_count=a.approved_expected_mutation_count,
+                rollback_or_compensation_result=recovery,final_execution_status="failed",error=str(exc),model_projection_status="failed")
+            try:
+                self.repo.save_result(import_run_id,failed)
+                self.ledger.append("canonical_promotion_execution_recorded",failed.to_dict())
+            except Exception as receipt_error:
+                raise BlueprintPromotionError("Promotion failed; audit persistence failed and recovery review is required") from receipt_error
+            if recovery!='recovery_required': self._discard_backups(backups)
+            raise BlueprintPromotionError(str(exc)+("; recovery review is required" if recovery=='recovery_required' else "")) from exc
+        self._discard_backups(backups)
+        return result
+
+    def _project_observation(self, canonical_id):
+        observation=self.observation_repo.get(canonical_id)
+        if observation is None: raise BlueprintPromotionError("Promoted Observation is unavailable for projection")
+        result={"observation_id":canonical_id,"enterprise_id":observation.enterprise_id,"affected_attribute":observation.affected_attribute}
+        contract=CLAIM_VOCABULARY.get(observation.observation_type)
+        if not contract or not observation.affected_attribute.startswith(contract['attribute_prefix']):
+            return result|{"status":"not_projected","reason":"Unsupported Observation type or Enterprise Model attribute mapping"}
+        for successor in self.observation_repo.list():
+            if (successor.supersedes_observation_id==canonical_id and successor.enterprise_id==observation.enterprise_id
+                    and successor.affected_attribute==observation.affected_attribute
+                    and successor.lifecycle_state in {'accepted','Validated'} and not successor.retired_at
+                    and not any(word in successor.freshness.casefold() for word in ('retired','expired','superseded'))):
+                try: effective=datetime.fromisoformat(successor.observation_date.replace('Z','+00:00')).date()
+                except ValueError: continue
+                if effective<=datetime.now(timezone.utc).date():
+                    action=self.memory.apply_observation(replace(observation,lifecycle_state='superseded'))
+                    return result|{"status":"historical","action":action.action,"reason":"Explicit canonical supersession retained; no old truth reintroduced"}
+        if observation.lifecycle_state in {'retired','superseded'} or observation.retired_at or 'expired' in observation.freshness.casefold():
+            action=self.memory.apply_observation(observation)
+            return result|{"status":"historical","action":action.action,"reason":"Inactive canonical Observation retained for history"}
+        if observation.lifecycle_state not in {'accepted','Validated'}:
+            return result|{"status":"historical","reason":"Observation is not accepted current support"}
+        if not observation.supporting_evidence_ids:
+            return result|{"status":"not_projected","reason":"Factual model projection requires supporting Evidence"}
+        try: observed=datetime.fromisoformat(observation.observation_date.replace('Z','+00:00')).date()
+        except ValueError: return result|{"status":"not_projected","reason":"Observation has no safely mapped observed date"}
+        if observed>datetime.now(timezone.utc).date():
+            return result|{"status":"historical","reason":"Future Observation is not current model support"}
+        for ref in observation.supporting_evidence_ids:
+            evidence=self.evidence_repo.get(ref)
+            if not evidence:
+                return result|{"status":"not_projected","reason":f"Supporting Evidence {ref} is unavailable"}
+            owner=canonical_enterprise_id(str(evidence.get('enterprise_id') or evidence.get('canonical_enterprise_id') or evidence.get('organisation') or ''))
+            if owner!=observation.enterprise_id:
+                return result|{"status":"not_projected","reason":f"Supporting Evidence {ref} has unresolved or different Enterprise ownership"}
+            status=str(evidence.get('lifecycle_state') or evidence.get('truth_status') or '').casefold()
+            freshness=str(evidence.get('freshness') or evidence.get('evidence_freshness') or '').casefold()
+            if status in {'retired','superseded','expired','rejected'} or any(word in freshness for word in ('retired','superseded','expired')):
+                return result|{"status":"not_projected","reason":f"Supporting Evidence {ref} is not current accepted support"}
+        action=self.memory.apply_observation(observation)
+        return result|{"status":"applied","action":action.action}
+
+    def _assert_target_ownership(self, import_run_id, plan, headers):
+        package=self.registry.get(plan['package_ref'])
+        candidates={c['candidate_record_id']:c for c in self.staging.list_candidates(import_run_id)}
+        for raw in plan['effects']:
+            e=ProposedCanonicalEffect(**raw)
+            if e.effect_type not in {'create','update'} or e.record_class not in SUPPORTED_PROMOTION_CLASSES: continue
+            c=candidates[e.candidate_id]; payload=c.get('payload') or {}
+            target=_record_enterprise(payload,package)
+            if not _has(headers,target,{'candidate.promote','blueprint_import_admin'}):
+                raise BlueprintPromotionError("Actor is not authorised for the canonical record's Enterprise")
+            if e.record_class=='observation':
+                identifier=_clean(payload.get('observation_id')) or e.canonical_id
+                prior=self.observation_repo.get(identifier) if identifier else None
+            elif e.record_class=='evidence':
+                identifier=e.canonical_id or _clean(payload.get('evidence_id')) or c.get('original_source_id')
+                prior=self.evidence_repo.get(identifier)
+            else:
+                key={'unknown':'unknown_id','entity':'entity_id','relationship':'relationship_id','human_knowledge':'human_knowledge_id',
+                     'fact':'fact_id','reasoning_lineage':'reasoning_lineage_id','contradiction':'contradiction_id'}[e.record_class]
+                identifier=e.canonical_id or payload.get(key) or c.get('original_source_id')
+                prior=self.generic_repos[e.record_class].get(identifier) if e.record_class in self.generic_repos else self.contradiction_repo.get(identifier)
+            if prior:
+                owner=prior.enterprise_id if isinstance(prior,Observation) else prior.get('enterprise_id') or prior.get('canonical_enterprise_id') or prior.get('organisation')
+                if not owner and isinstance(prior,dict):
+                    lineage=prior.get('blueprint_import_lineage') or {}
+                    prior_package=self.registry.get(lineage.get('package_id',''))
+                    owner=prior_package.identity.enterprise_id if prior_package else ''
+                if canonical_enterprise_id(str(owner or ''))!=target:
+                    raise BlueprintPromotionError("Canonical identifier belongs to a different or unresolved Enterprise owner")
+
     def _reviews_fingerprint(self, import_run_id: str) -> str:
         root=data_path("blueprint_import", "reviews", import_run_id)
         rows=[]
@@ -252,11 +396,18 @@ class CanonicalPromotionService:
         lineage=self._lineage(e,c,d,m,a,actor); payload=dict(c.get("payload") or {})
         if e.record_class=="evidence":
             eid=e.canonical_id or m.get("canonical_id") or m.get("proposed_canonical_id") or payload.get("evidence_id") or c.get("original_source_id") or "EVID-"+sha256_bytes(e.effect_id.encode())[:16].upper(); prior=self.evidence_repo.get(eid)
-            row={**payload, "evidence_id": eid, "blueprint_import_lineage": {**lineage, "canonical_id": eid, "prior_canonical_version": prior}}
+            row={**payload, "enterprise_id": _record_enterprise(payload,self.registry.get(a.package_ref)), "evidence_id": eid, "blueprint_import_lineage": {**lineage, "canonical_id": eid, "prior_canonical_version": prior}}
             return self.evidence_repo.save(row)["evidence_id"]
         if e.record_class=="observation":
             obs = self._observation_from_payload(e, c, payload, lineage, a)
-            return self.observation_repo.save(obs).observation_id or ""
+            prior=self.observation_repo.get(obs.observation_id or '')
+            if prior and prior.observation_fingerprint!=obs.observation_fingerprint:
+                raise BlueprintPromotionError("Observation ID already identifies a different canonical assertion; use a new Observation ID")
+            saved=self.observation_repo.save(obs)
+            if e.effect_type=='update':
+                updates={key:getattr(obs,key) for key in ('lifecycle_state','freshness','retired_at','supersedes_observation_id','contradiction_state','contradicted_by_observation_ids') if key in payload}
+                if updates: saved=self.observation_repo.update_lifecycle(saved.observation_id,updates,import_lineage=lineage)
+            return saved.observation_id or ""
         if e.record_class=="contradiction":
             cid=e.canonical_id or m.get("canonical_id") or m.get("proposed_canonical_id") or payload.get("contradiction_id") or c["original_source_id"] or "CON-"+sha256_bytes(e.effect_id.encode())[:16].upper()
             prior=self.contradiction_repo.get(cid)
@@ -275,10 +426,9 @@ class CanonicalPromotionService:
 
     def _observation_from_payload(self, e: ProposedCanonicalEffect, c: dict[str, Any], payload: dict[str, Any], lineage: dict[str, Any], a: CanonicalPromotionApproval) -> Observation:
         package = self.registry.get(a.package_ref)
-        enterprise_id = _clean(payload.get("enterprise_id")) or _clean(getattr(package.identity, "enterprise_id", "") if package else "")
-        enterprise_id = canonical_enterprise_id(enterprise_id) or enterprise_id
+        enterprise_id = _record_enterprise(payload,package)
         observation_type = _clean(payload.get("observation_type") or payload.get("type") or payload.get("record_type") or payload.get("truth_class") or c.get("truth_class"))
-        observation_date, observation_date_source = _first_present(payload, ("event_date", "evidence_date", "collection_date", "last_confirmed", "last_confirmed_date", "observation_date", "observed_at"))
+        observation_date, observation_date_source = _first_present(payload, ("event_date", "observation_date", "observed_at", "evidence_date", "collection_date", "last_confirmed", "last_confirmed_date"))
         if not observation_date:
             observation_date = "undated"
             observation_date_source = "canonical-undated"
@@ -307,7 +457,9 @@ class CanonicalPromotionService:
         hp["source_row"] = payload.get("source_row") or (c.get("source_location") or {}).get("row")
         hp["observation_payload_lineage"] = {k: payload.get(k) for k in ("prior_state", "current_state", "linked_unknowns", "lineage_resolution", "candidate_downstream_signals") if k in payload}
         hp["observation_date_source"] = observation_date_source
-        return Observation(
+        hp.update({key:payload[key] for key in ('effective_date','effective_period','source_date','scope') if payload.get(key)})
+        if payload.get('period'): hp['effective_period']=payload['period']
+        observation=Observation(
             enterprise_id=enterprise_id,
             observation_type=observation_type,
             atomic_statement=atomic_statement,
@@ -329,16 +481,33 @@ class CanonicalPromotionService:
             retired_at=_clean(payload.get("retired_at")) or None,
             human_provenance=hp,
             observation_id=_clean(payload.get("observation_id")) or e.canonical_id or None,
-            observation_fingerprint=_clean(payload.get("observation_fingerprint")) or None,
+            observation_fingerprint=None,
         )
-    def _backup_paths(self):
-        paths=[self.evidence_repo.path, self.observation_repo.path, self.contradiction_repo.path] + [r.path for r in self.generic_repos.values()]; b=[]
-        for p in paths:
-            bp=Path(str(p)+".bpi_backup")
-            if p.exists(): ensure_writable_dir(bp.parent); shutil.copy2(p,bp); b.append((p,bp,True))
-            else: b.append((p,bp,False))
-        return b
+        if payload.get('observation_fingerprint') and payload['observation_fingerprint']!=observation.observation_fingerprint:
+            raise BlueprintPromotionError("Supplied fingerprint does not match the owned canonical Observation identity")
+        prior=self.observation_repo.get(observation.observation_id or '')
+        if prior and prior.observation_fingerprint!=observation.observation_fingerprint:
+            raise BlueprintPromotionError("Observation ID already identifies a different canonical assertion; use a new Observation ID")
+        return observation
+
+    def _canonical_paths(self):
+        return [self.evidence_repo.path,self.observation_repo.path,self.contradiction_repo.path]+[r.path for r in self.generic_repos.values()]
+
+    def _backup_paths(self, paths):
+        backups=[]
+        for path in dict.fromkeys(paths):
+            backup=Path(str(path)+'.bpi_backup')
+            if path.exists():
+                ensure_writable_dir(backup.parent); shutil.copy2(path,backup)
+            backups.append((path,backup,path.exists()))
+        return backups
+
     def _restore_paths(self, backups):
-        for p,bp,existed in backups:
-            if existed and bp.exists(): shutil.copy2(bp,p); bp.unlink(missing_ok=True)
-            elif not existed and p.exists(): p.unlink()
+        for path,backup,existed in backups:
+            if existed:
+                if not backup.exists(): raise OSError("Promotion recovery backup is unavailable")
+                atomic_write_bytes(path,backup.read_bytes())
+            elif path.exists(): path.unlink()
+
+    def _discard_backups(self, backups):
+        for _,backup,_ in backups: backup.unlink(missing_ok=True)
