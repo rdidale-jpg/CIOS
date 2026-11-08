@@ -1,0 +1,80 @@
+{
+  "TEL-W5": {
+    "wrappers": 6,
+    "candidate_assertions": 28,
+    "supported_atomic_candidates": 4,
+    "deferred_assertions": 24,
+    "package_sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
+    "approved_observations": 1,
+    "model_attributes": 1,
+    "evidence_refs_resolved": 1,
+    "canonical_relationships": 0,
+    "source_relationships": 308,
+    "unresolved_source_edges": 308,
+    "unresolved_endpoint_diagnostics": [
+      "Canonical graph endpoints unresolved: TRG-W4-OPP-VMO2-NEXFIBRE-MIGRATION-03:refresh_trigger, OPP-VMO2-NEXFIBRE-MIGRATION:opportunity_hypothesis",
+      "Canonical graph endpoints unresolved: TRG-W4-OPP-BT-AI-ENGINEERING-02:refresh_trigger, OPP-BT-AI-ENGINEERING:opportunity_hypothesis",
+      "Canonical graph endpoints unresolved: EST-W4-OPP-VT-NETWORK-AI-OPS-VALUE:analyst_estimate_register, UN-002:unknown",
+      "Canonical graph endpoints unresolved: PROG-BT-TRANSFORMATION:transformation_programme, OPP-BT-AI-ENGINEERING:opportunity_hypothesis",
+      "Canonical graph endpoints unresolved: OPP-BT-AI-ENGINEERING:opportunity_hypothesis, ENT-BT:BT Digital / Technology:unowned",
+      "Canonical graph endpoints unresolved: EST-W4-OPP-VT-ENTERPRISE-5G-TIMING:analyst_estimate_register, UN-002:unknown",
+      "Canonical graph endpoints unresolved: EST-W4-OPP-BT-AI-ENGINEERING-TIMING:analyst_estimate_register, UN-004:unknown",
+      "Canonical graph endpoints unresolved: MP-OFCOM:market_participant_twin, ENT-TALKTALK:enterprise_twin"
+    ],
+    "retrieval_observations": 1,
+    "retrieval_evidence": 1,
+    "view_visible_facts": 1
+  },
+  "TEL-W6": {
+    "wrappers": 6,
+    "candidate_assertions": 40,
+    "supported_atomic_candidates": 4,
+    "deferred_assertions": 36,
+    "package_sha256": "c24cbf67c687883947fc4020b098c81c84b343e618980989b0af9665e2210ffb",
+    "approved_observations": 1,
+    "model_attributes": 1,
+    "evidence_refs_resolved": 1,
+    "canonical_relationships": 0,
+    "source_relationships": 327,
+    "unresolved_source_edges": 327,
+    "unresolved_endpoint_diagnostics": [
+      "Canonical graph endpoints unresolved: TRG-W4-OPP-VT-NETWORK-AI-OPS-02:refresh_trigger, OPP-VT-NETWORK-AI-OPS:opportunity_hypothesis",
+      "Canonical graph endpoints unresolved: EST-W4-OPP-PXC-PLATFORM-EFFICIENCY-VALUE:analyst_estimate_register, UN-W4-TALKTALK-ACCOUNTS-EXTRACT:unknown",
+      "Canonical graph endpoints unresolved: OPP-BT-AIOPS:opportunity_hypothesis",
+      "Canonical graph endpoints unresolved: TRG-W4-OPP-VMO2-NEXFIBRE-MIGRATION-03:refresh_trigger, OPP-VMO2-NEXFIBRE-MIGRATION:opportunity_hypothesis",
+      "Canonical graph endpoints unresolved: MP-HIYA:market_participant_twin, ENT-VMO2:enterprise_twin",
+      "Canonical graph endpoints unresolved: OPP-CITYFIBRE-WHOLESALE:opportunity_hypothesis, ENT-CITYFIBRE:enterprise_twin",
+      "Canonical graph endpoints unresolved: PROG-VMO2-LUMI-AI:transformation_programme, OPP-VMO2-AI-CX:opportunity_hypothesis",
+      "Canonical graph endpoints unresolved: OPP-OPENREACH-FIBRE-AUTOMATION:opportunity_hypothesis, Network build, planning and field operations:unowned"
+    ],
+    "retrieval_observations": 1,
+    "retrieval_evidence": 1,
+    "view_visible_facts": 1
+  },
+  "BNK-W1": {
+    "wrappers": 11,
+    "candidate_assertions": 50,
+    "supported_atomic_candidates": 12,
+    "deferred_assertions": 38,
+    "package_sha256": "1c2d18ebf0d48a32f4093c9ff7ce16a2e1203fedd2cc8ef3760367b033a56313",
+    "approved_observations": 1,
+    "model_attributes": 1,
+    "evidence_refs_resolved": 1,
+    "canonical_relationships": 0,
+    "source_relationships": 430,
+    "unresolved_source_edges": 430,
+    "unresolved_endpoint_diagnostics": [
+      "Canonical graph endpoints unresolved: ENT-VIRGIN-MONEY:enterprise_twin, UN-VIRGIN-MONEY-BRAND-PLATFORM-ROADMAP:unknown",
+      "Canonical graph endpoints unresolved: ENT-LLOYDS:enterprise_twin",
+      "Canonical graph endpoints unresolved: OPP-PAYMENTS-IIR-READINESS:opportunity_hypothesis",
+      "Canonical graph endpoints unresolved: BNK-001:industry_twin, MPRESS-BANKING-FRAUD-APP:material_pressure_register",
+      "Canonical graph endpoints unresolved: UN-HSBC-GOOGLE-CONTRACT:unknown",
+      "Canonical graph endpoints unresolved: ENT-NATWEST:enterprise_twin",
+      "Canonical graph endpoints unresolved: CR-REVOLUT-LICENCE-STATUS:contradiction",
+      "Canonical graph endpoints unresolved: UN-BARCLAYS-TECH-SPEND:unknown"
+    ],
+    "retrieval_observations": 1,
+    "retrieval_evidence": 1,
+    "view_visible_facts": 1
+  }
+}

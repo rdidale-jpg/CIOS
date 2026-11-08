@@ -288,7 +288,7 @@ def test_blueprint_persistence_contract_accounts_all_mod_classes(monkeypatch,tmp
         {"external_id":"UNK-1","record_class":"unknown","truth_class":"unknown","payload":{"question":"What remains unknown?"}},
         {"external_id":"CON-1","record_class":"contradiction","truth_class":"contradiction","payload":{"statement_a":"A","statement_b":"B"}},
         {"external_id":"ENT-1","record_class":"entity","truth_class":"entity","payload":{"name":"Entity"}},
-        {"external_id":"REL-1","record_class":"relationship","truth_class":"relationship","payload":{"from":"A","to":"B"}},
+        {"external_id":"REL-1","record_class":"relationship","truth_class":"relationship","payload":{"source":"EVD-1","target":"EVD-1"}},
         {"external_id":"HK-1","record_class":"human_knowledge","truth_class":"human_supplied","payload":{"statement":"Human supplied fact"}},
         {"external_id":"EMC-1","record_class":"enterprise_model_candidate","truth_class":"candidate","payload":{}},
     ]

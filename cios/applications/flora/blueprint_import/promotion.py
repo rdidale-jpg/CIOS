@@ -99,6 +99,7 @@ class CanonicalPromotionApproval:
     mapping_fingerprint: str
     superseded: bool = False
     twin_identity_fingerprint: str = ''
+    candidate_fingerprint: str = ''
     def to_dict(self):
         d=asdict(self); d["approved_expected_effects"]=list(self.approved_expected_effects); d["unresolved_warnings_accepted"]=list(self.unresolved_warnings_accepted); return d
 
@@ -213,7 +214,7 @@ class CanonicalPromotionService:
         a=CanonicalPromotionApproval("1.0", _approval_id(plan_id, approver), plan_id, import_run_id, plan["package_ref"], package.package_sha256, approver, utc_now(), rationale, tuple(plan["effects"]), int(plan["expected_canonical_mutation_count"]), unresolved_warnings_accepted, expiry_or_invalidation_condition, _fp(plan), self._reviews_fingerprint(import_run_id), _fp(self.mappings.list(import_run_id)))
         from dataclasses import replace
         from .twin_governance import project_twin_identity
-        a=replace(a,twin_identity_fingerprint=_fp(project_twin_identity(package).to_dict()))
+        a=replace(a,twin_identity_fingerprint=_fp(project_twin_identity(package).to_dict()),candidate_fingerprint=_fp(self.staging.list_candidates(import_run_id)))
         self.repo.save_approval(a); self.ledger.append("canonical_promotion_approved", a.to_dict()); return a
     def execute_approved_plan(self, import_run_id: str, approval_id: str, actor: str, headers: Any) -> CanonicalPromotionResult:
         # Serializes importer threads only; file compensation is not a database
@@ -275,6 +276,12 @@ class CanonicalPromotionService:
                 if e.effect_type not in {"create","update"} or e.record_class not in SUPPORTED_PROMOTION_CLASSES:
                     skipped.append(f"{e.record_class}:{e.candidate_id}"); continue
                 c,bound=self._bind_candidate_evidence(c,package,bindings)
+                if e.record_class=='relationship':
+                    from .semantic_twin import canonical_relationship_endpoints
+                    endpoints=canonical_relationship_endpoints(c,package,list(candidates.values()),list(maps.values()),reviews,headers)
+                    if endpoints['unresolved']: raise BlueprintPromotionError('Canonical graph endpoints became unresolved')
+                    c=dict(c,payload=dict(c['payload'],source=endpoints['source'],target=endpoints['target'],
+                                         relationship_source=endpoints['source'],relationship_target=endpoints['target']))
                 cid=self._promote(e,c,d,m or {},a,actor)
                 (created if e.effect_type=="create" else updated).append(cid)
                 if e.record_class=="observation": observations.append(cid)
@@ -320,6 +327,13 @@ class CanonicalPromotionService:
         from .mapping import (industry_package,governed_source_scope,record_owner,
                               target_fingerprint,content_fingerprint,evidence_is_current)
         candidates={c['candidate_record_id']:c for c in self.staging.list_candidates(import_run_id)}
+        from .researcher_profile_adapter import validate_handoff
+        handoff_mappings=self.mappings.list(import_run_id)
+        handoff_effects={e['candidate_id'] for e in plan['effects'] if e['record_class']=='observation' and e['effect_type'] in {'create','update'}}
+        for c in candidates.values():
+            if c['candidate_record_id'] not in handoff_effects or not c.get('payload',{}).get('researcher_handoff'): continue
+            try: validate_handoff(c,list(candidates.values()),handoff_mappings)
+            except ValueError as exc: raise BlueprintPromotionError(str(exc)) from exc
         maps={m['candidate_id']:m for m in self.mappings.list(import_run_id)}
         reviews=self.reviews.latest_by_candidate(import_run_id)
         industrial=industry_package(package)
@@ -522,6 +536,8 @@ class CanonicalPromotionService:
             if p.get("plan_id")==plan_id: return p
         raise BlueprintPromotionError("Unknown dry-run plan")
     def _assert_still_valid(self,a,plan,sha):
+        if a.candidate_fingerprint and a.candidate_fingerprint!=_fp(self.staging.list_candidates(a.import_run_id)):
+            raise BlueprintPromotionError('Staged candidates changed after approval')
         if a.superseded or a.package_sha256 != sha or a.plan_fingerprint != _fp(plan) or a.review_fingerprint != self._reviews_fingerprint(a.import_run_id) or a.mapping_fingerprint != _fp(self.mappings.list(a.import_run_id)):
             raise BlueprintPromotionError("Approved plan is no longer valid")
     def _lineage(self,e,c,d,m,a,actor):

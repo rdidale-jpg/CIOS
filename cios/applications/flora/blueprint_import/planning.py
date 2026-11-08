@@ -82,6 +82,18 @@ class DryRunPlanningService:
         decisions = self.reviews.latest_by_candidate(import_run_id)
         mappings = {m["candidate_id"]: m for m in self.mappings.list(import_run_id)}
         effects = tuple(self._effect(c, decisions.get(c["candidate_record_id"]), mappings.get(c["candidate_record_id"])) for c in candidates)
+        from dataclasses import replace
+        from .semantic_twin import canonical_relationship_endpoints
+        checked=[]
+        by_id={c['candidate_record_id']:c for c in candidates}
+        for effect in effects:
+            if effect.record_class=='relationship' and effect.effect_type in {'create','update'}:
+                endpoints=canonical_relationship_endpoints(by_id[effect.candidate_id],package,candidates,list(mappings.values()),decisions,headers)
+                if endpoints['unresolved']:
+                    effect=replace(effect,effect_type='defer',expected_mutation_count=0,
+                                   reason='Canonical graph endpoints unresolved: '+', '.join(endpoints['unresolved']))
+            checked.append(effect)
+        effects=tuple(checked)
         expected = sum(e.expected_mutation_count for e in effects)
         summary = self.staging.load_summary(import_run_id) or {}
         staging_version = str(summary.get("staging_version") or "staging-v1")
