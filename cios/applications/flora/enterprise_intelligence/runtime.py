@@ -1,12 +1,13 @@
 from __future__ import annotations
 import json, time, uuid
+from copy import deepcopy
 from typing import Any
 from cios.applications.flora.storage import atomic_write_text, data_path
 from .models import ReasoningRequestV1, now_iso, stable_hash, SCHEMA_VERSION, PROFILE_ID
 from .profile import PROFILE
 from .provider import provider_from_env, LLMProviderError, provider_diagnostics
 from .retrieval import BoundedTwinRetrievalService
-from .validator import ClaimValidator
+from .validator import ClaimValidator, VALID_STATUSES
 
 SECTIONS=['Executive Summary','What Has Changed','Material Pressures','How MOD Works','Change Portfolio','Decision and Stakeholder Landscape','Commercial Relevance','Unknowns and Contradictions','Recommended Next Moves','Evidence and Lineage']
 
@@ -43,19 +44,38 @@ class EnterpriseIntelligenceRuntime:
     def generate(self, request):
         start=time.time(); package=self.retrieval.retrieve(request); audit={'request_id':request.request_id,'enterprise_id':package.enterprise_id,'twin_version':request.twin_version,'evidence_package_hash':stable_hash(package.to_dict()),'retrieved_object_ids':[i.stable_id for i in package.all_items()],'prompt_version':request.prompt_version_ref,'reasoning_profile':request.reasoning_profile}
         prompt=json.dumps({'profile':PROFILE,'request':request.to_dict(),'evidence_package':package.to_dict()}, ensure_ascii=False)
-        diag=provider_diagnostics(); status='Running'; failure=''; brief=None
+        diag=provider_diagnostics(); status='Running'; provider_status='Failed'; failure=''; brief=None; rejected_output=None
         try:
             timeout=int(diag.get('timeout_seconds') or 30); max_in=int(diag.get('max_input_tokens') or request.maximum_evidence_volume)
             result=self.provider.generate_structured(prompt=prompt, schema=output_schema(), timeout_s=timeout, token_budget=max_in)
+            provider_status='Succeeded'
+            rejected_output=deepcopy(result.payload)
             brief=result.payload
+            if not isinstance(brief,dict): raise LLMProviderError('Structured output must be an object')
             missing=[k for k in output_schema().get('required', []) if k not in brief]
             if missing: raise LLMProviderError('Structured output missing required fields: '+', '.join(missing))
             brief.setdefault('model_metadata',{}).update({'provider':result.provider,'model':result.model,'token_usage':result.token_usage,'duration_ms':result.duration_ms,'prompt_version':request.prompt_version_ref})
             status='Succeeded'
+            rejected_output=None
         except Exception as exc:
-            failure=type(exc).__name__+': '+str(exc); status='Failed'; result=None
+            failure=type(exc).__name__+': '+str(exc); status='Rejected' if provider_status=='Succeeded' else 'Failed'; result=None
             brief={'brief_id':'','enterprise_id':package.enterprise_id,'twin_version':request.twin_version,'reasoning_profile':request.reasoning_profile,'generated_at':now_iso(),'evidence_cut_off':request.evidence_cut_off,'executive_summary':{},'material_pressures':[],'unknowns':[],'contradictions':[],'recommended_next_moves':[],'lineage_manifest':{'evidence_package_id':package.package_id,'evidence_package_hash':stable_hash(package.to_dict()),'retrieved_object_ids':[i.stable_id for i in package.all_items()]},'model_metadata':{'provider':diag.get('provider'),'model':diag.get('model'),'prompt_version':request.prompt_version_ref},'validation_status':{'status':'not_run','rejected_claims':[]},'unavailable_reason':failure}
-        if status=='Succeeded': brief=self.validator.validate(brief, package)
+        if status=='Rejected':
+            brief['validation_status']={'status':'invalid','rejected_claims':[{'path':'brief','reason':failure}]}
+        if status=='Succeeded':
+            original_output=deepcopy(brief)
+            try:
+                brief=self.validator.validate(brief, package)
+            except Exception as exc:
+                brief=deepcopy(original_output)
+                brief['validation_status']={'status':'invalid','rejected_claims':[{'path':'brief','reason':'validator failed: '+type(exc).__name__}]}
+            if brief.get('validation_status',{}).get('status') not in VALID_STATUSES or brief.get('validation_status',{}).get('rejected_claims'):
+                status='Rejected'
+                failure='Intelligence validation rejected the generated brief.'
+                rejected_output=original_output
+        audit.update({'provider_status':provider_status,'intelligence_status':'Succeeded' if status=='Succeeded' else ('Rejected' if status=='Rejected' else 'Unavailable')})
+        if rejected_output is not None:
+            audit['rejected_output']=rejected_output
         audit.update({'status':status,'failure':failure,'fallback_active':status!='Succeeded','model_provider':brief.get('model_metadata',{}).get('provider'),'model_name':brief.get('model_metadata',{}).get('model'),'token_usage':brief.get('model_metadata',{}).get('token_usage',{}),'execution_duration_ms':int((time.time()-start)*1000),'validation_outcome':brief.get('validation_status',{}).get('status'),'rejected_claims':brief.get('validation_status',{}).get('rejected_claims',[]),'generated_brief_id':brief.get('brief_id'),'evidence_object_count':len(package.all_items())})
         atomic_write_text(data_path('enterprise_intelligence','audit',request.request_id+'.json'), json.dumps(audit, indent=2, sort_keys=True))
         if status=='Succeeded': atomic_write_text(data_path('enterprise_intelligence','briefs',package.enterprise_id+'.json'), json.dumps({'request':request.to_dict(),'evidence_package':package.to_dict(),'brief':brief,'audit':audit}, indent=2, sort_keys=True))
@@ -66,10 +86,18 @@ def safe_fallback(reason, last_successful_brief=None, evidence_cut_off='', enter
     return {'title':'Executive Intelligence Brief unavailable','reason':reason,'last_successful_brief':last_successful_brief,'evidence_cut_off':evidence_cut_off,'retry_action':'Retry generation when the reasoning provider is available or use deterministic bounded fallback explicitly.','model_explorer_url':f'/digital-twins/{enterprise_id}/canvas'}
 
 
+def is_valid_result(result):
+    """Provider execution alone never authorises a governed success view."""
+    audit=(result or {}).get('audit') or {}
+    validation=((result or {}).get('brief') or {}).get('validation_status') or {}
+    return (audit.get('status')=='Succeeded' and audit.get('validation_outcome') in VALID_STATUSES
+            and validation.get('status') in VALID_STATUSES
+            and not validation.get('rejected_claims') and not audit.get('rejected_claims'))
+
+
 def latest_result(enterprise_id: str):
     enterprise_id = enterprise_id.lower() if enterprise_id.upper() == 'MOD' else enterprise_id
-    for folder in ('briefs','last_failure'):
-        path=data_path('enterprise_intelligence',folder,enterprise_id+'.json')
-        try: return json.loads(path.read_text())
-        except FileNotFoundError: continue
-    return None
+    paths=[data_path('enterprise_intelligence',folder,enterprise_id+'.json') for folder in ('briefs','last_failure')]
+    existing=[p for p in paths if p.exists()]
+    # Rejections remain visible; the prior validated artifact is not deleted.
+    return json.loads(max(existing,key=lambda p:p.stat().st_mtime_ns).read_text()) if existing else None

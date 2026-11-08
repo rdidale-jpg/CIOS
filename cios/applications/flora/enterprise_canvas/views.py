@@ -5,7 +5,7 @@ from html import escape
 
 from cios.applications.flora.enterprise_canvas.service import EnterpriseCanvasAccessError, EnterpriseCanvasNotFoundError, EnterpriseCanvasService
 from cios.applications.flora.enterprise_canvas.feedback import ACTIONS, EnterpriseCanvasFeedbackService, FeedbackAccessError
-from cios.applications.flora.enterprise_intelligence.runtime import latest_result
+from cios.applications.flora.enterprise_intelligence.runtime import latest_result, is_valid_result
 from cios.applications.flora.enterprise_intelligence.provider import provider_diagnostics
 from cios.applications.flora.workspace.views import _page
 
@@ -79,14 +79,17 @@ def _executive_canvas(canvas, headers, include_reasoning: bool = True, force_ove
 
 def _has_successful_reasoning(canvas):
     result=latest_result(canvas.enterprise_id)
-    return ((result or {}).get('audit') or {}).get('status') == 'Succeeded'
+    return is_valid_result(result)
 
 def _reasoning_panel(canvas):
     if canvas.enterprise_id.upper() != 'MOD': return ''
     result=latest_result(canvas.enterprise_id)
     audit=(result or {}).get('audit') or {}; brief=(result or {}).get('brief') or {}; lineage=brief.get('lineage_manifest') or {}; cfg=provider_diagnostics()
     status=audit.get('status') or ('Ready' if cfg.get('configured') else 'Not configured'); reason=audit.get('failure') or brief.get('unavailable_reason') or ('No successful Executive Intelligence Brief has been generated.' if not result else '')
-    if status != 'Succeeded':
+    if not is_valid_result(result):
+        if status == 'Succeeded':
+            status='Rejected'
+            reason='Intelligence validation does not authorise this brief.'
         unavailable=f"""<section class='card warning' id='executive-intelligence-brief'><h2>Executive Intelligence Brief unavailable</h2><p><strong>Reason:</strong> {escape(reason or status)}</p><h3>Actions</h3><form method='post' action='/digital-twins/{escape(canvas.enterprise_id)}/executive-intelligence-brief/generate'><button type='submit'>Generate Executive Intelligence Brief</button></form><form method='post' action='/digital-twins/{escape(canvas.enterprise_id)}/executive-intelligence-brief/generate'><button type='submit'>Retry generation</button></form><p><a href='#model-explorer'>Open Model Explorer</a> · <a href='#evidence-and-lineage'>Open Evidence &amp; Lineage</a> · <a href='#reasoning-diagnostics'>View reasoning diagnostics</a></p></section>"""
     else:
         summary=brief.get('executive_summary') or {}

@@ -44,6 +44,36 @@ def _domain_for(condition: str) -> str:
     return DOMAIN_MAP.get(condition or "", "enterprise_identity")
 
 
+def _effective_period(observation: Observation) -> str:
+    """Use supplied period/scope metadata, never collection time, for conflicts."""
+    supplied = observation.human_provenance.get('effective_period') or observation.human_provenance.get('effective_date')
+    periods = re.findall(r'\b(?:FY\d{2,4}|Q[1-4](?:\s+20\d{2})?)\b', observation.atomic_statement, re.I)
+    period = str(supplied).casefold() if supplied else '|'.join(p.casefold() for p in periods)
+    if re.fullmatch(r'q[1-4]', period):
+        period += '|' + observation.observation_date[:4]
+    return period or observation.observation_date
+
+
+def _assertions_conflict(left: Observation, right: Observation) -> bool:
+    """Recognise explicit opposing assertions, not general semantic disagreement."""
+    a, b = left.atomic_statement.casefold(), right.atomic_statement.casefold()
+    if a == b:
+        return False
+    negative = lambda text: any(re.search(r'\b' + re.escape(t) + r'\b', text) for t in CONFLICT_TERMS)
+    if negative(a) != negative(b):
+        return True
+    movement = r'\b(increased?|increasing|rose|risen|up|grew|decreased?|decreasing|fell|fallen|down|declined?)\b\s*(?:by\s+)?([+-]?\d+(?:\.\d+)?)\s*(%|percent|per cent)'
+    ma, mb = re.search(movement, a), re.search(movement, b)
+    if ma and mb:
+        direction = lambda word: -1 if word.startswith(('decreas', 'declin', 'fell', 'fallen', 'down')) else 1
+        return direction(ma[1]) * Decimal(ma[2]) != direction(mb[1]) * Decimal(mb[2])
+    # Same assertion with different reported numbers (including financial facts).
+    # Keep the surrounding words/units to avoid comparing unrelated quantities.
+    number = r'[+-]?\d+(?:[.,]\d+)*'
+    shape = lambda text: re.sub(number, '#', text.replace(' percent', '%').replace(' per cent', '%'))
+    return shape(a) == shape(b) and re.findall(number, a) != re.findall(number, b)
+
+
 def _evidence_id(item: dict[str, Any]) -> str:
     return str(item.get("evidence_id") or item.get("id") or item.get("evidence_fingerprint") or hashlib.sha256(str(item).encode()).hexdigest()[:16])
 
@@ -187,6 +217,13 @@ class ObservationMemoryService:
         publication = item.get("publication_date") or item.get("evidence_publication_date")
         enterprise = canonical_enterprise_id(str(item.get("enterprise_id") or item.get("canonical_enterprise_id") or item.get("organisation") or "Unknown enterprise")) or "unknown"
         obs = Observation(enterprise, condition, statement, observed, collected, str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"), int(item.get("confidence") or item.get("overall_evidence_quality") or 50), tuple(item.get("supporting_evidence_ids") or (_evidence_id(item),)), evidence_publication_date=str(publication) if publication else None, provenance_type=str(item.get("provenance") or item.get("source_provenance") or "evidence-backed"), freshness=str(item.get("evidence_freshness") or "current"), lifecycle_state=("Validated" if condition == "financial_metric_reported" else "accepted"), importance=int(item["importance"]) if item.get("importance") is not None else None, commercial_value=int(item["commercial_value"]) if item.get("commercial_value") is not None else None)
+        obs.human_provenance.update({k: item[k] for k in ('effective_date', 'effective_period', 'source_date', 'scope') if item.get(k)})
+        if item.get('period'):
+            obs.human_provenance['effective_period'] = item['period']
+        obs.supersedes_observation_id = item.get('supersedes_observation_id')
+        obs.retired_at = item.get('retired_at')
+        obs.lifecycle_state = str(item.get('lifecycle_state') or obs.lifecycle_state)
+        obs.last_confirmed_date = str(item.get('last_confirmed_date') or obs.last_confirmed_date)
         if item.get("normalised_amount") is not None:
             obs.normalised_amount = item.get("normalised_amount")
         elif condition == "financial_metric_reported" and item.get("value") is not None and not isinstance(item.get("value"), str):
@@ -295,22 +332,77 @@ class ObservationMemoryService:
         return report
 
     def apply_observation(self, observation: Observation) -> ModelUpdateResult:
-        if observation.lifecycle_state not in {"accepted", "Validated"}: return ModelUpdateResult(observation.enterprise_id, observation.observation_id or "", observation.affected_attribute, "ignored")
-        model = self.models.get(observation.enterprise_id); key = observation.affected_attribute; domain = key.split(".", 1)[0]; lower = observation.atomic_statement.casefold()
+        oid = observation.observation_id or ''
+        key = observation.affected_attribute
+        if observation.lifecycle_state not in {"accepted", "Validated"}:
+            return ModelUpdateResult(observation.enterprise_id, oid, key, "ignored")
+        model = self.models.get(observation.enterprise_id)
+        domain = key.split(".", 1)[0]
+        lower = observation.atomic_statement.casefold()
         if any(marker in lower for marker in UNKNOWN_MARKERS):
-            unknown_id = f"UNK-{hashlib.sha256((observation.enterprise_id + key).encode()).hexdigest()[:12].upper()}"; existing = model.unknowns.get(unknown_id); related = tuple(dict.fromkeys([*(existing.related_observation_ids if existing else ()), observation.observation_id or ""]))
+            unknown_id = f"UNK-{hashlib.sha256((observation.enterprise_id + key).encode()).hexdigest()[:12].upper()}"; existing = model.unknowns.get(unknown_id); related = tuple(dict.fromkeys([*(existing.related_observation_ids if existing else ()), oid]))
+            if existing and related == existing.related_observation_ids:
+                return ModelUpdateResult(observation.enterprise_id, oid, key, 'unchanged')
             model.unknowns[unknown_id] = EnterpriseUnknown(unknown_id, observation.enterprise_id, f"Unknown model state for {key}", domain, "medium", ("accepted corroborating evidence",), "open", related, review_at=observation.last_confirmed_date); model.updated_at = now_iso(); self.models.save(model)
-            return ModelUpdateResult(observation.enterprise_id, observation.observation_id or "", key, "unknown_created", unknown_created=True)
-        existing = model.attributes.get(key); contradiction = bool(existing and existing.current_value and existing.current_value != observation.atomic_statement and any(t in lower or t in str(existing.current_value).casefold() for t in CONFLICT_TERMS))
+            return ModelUpdateResult(observation.enterprise_id, oid, key, "unknown_created", unknown_created=True)
+        existing = model.attributes.get(key)
+        if existing and oid in existing.observation_ids:
+            # Replays and corroboration may extend lineage, never restore an old
+            # value or append the same confidence assessment again.
+            evidence = tuple(dict.fromkeys((*existing.evidence_ids, *observation.supporting_evidence_ids)))
+            confidence = max(existing.confidence, observation.confidence)
+            if evidence == existing.evidence_ids and confidence == existing.confidence:
+                return ModelUpdateResult(observation.enterprise_id, oid, key, 'unchanged', contradiction=existing.contradiction_state != 'none')
+            existing.evidence_ids = evidence
+            if confidence != existing.confidence:
+                existing.confidence = confidence
+                existing.confidence_history = (*existing.confidence_history, {'observation_id': oid, 'confidence': observation.confidence, 'recorded_at': now_iso()})
+            existing.updated_at = model.updated_at = now_iso()
+            self.models.save(model)
+            return ModelUpdateResult(observation.enterprise_id, oid, key, 'updated', contradiction=existing.contradiction_state != 'none')
+
+        rows = self.observations.list()
+        superseded = {o.supersedes_observation_id for o in rows if o.supersedes_observation_id
+                      and o.lifecycle_state in {'accepted', 'Validated'}
+                      and o.enterprise_id == observation.enterprise_id and o.affected_attribute == key}
+        conflicts = [o for o in rows if o.observation_id != oid
+                     and o.observation_id not in superseded
+                     and o.lifecycle_state in {'accepted', 'Validated'}
+                     and o.enterprise_id == observation.enterprise_id and o.affected_attribute == key
+                     and o.human_provenance.get('scope') == observation.human_provenance.get('scope')
+                     and _effective_period(o) == _effective_period(observation)
+                     and _assertions_conflict(o, observation)]
+        if conflicts:
+            self.observations.record_conflict([oid, *(o.observation_id for o in conflicts)])
+        contradiction = bool(conflicts)
+        recorded_at = now_iso()
+        is_older = bool(existing and observation.observation_date < existing.last_observed_date)
+        value = getattr(observation, 'normalised_amount', None)
+        if value is None:
+            value = _financial_model_value(observation.atomic_statement) if observation.observation_type == 'financial_metric_reported' else observation.atomic_statement
         if existing:
             prior = tuple(existing.prior_values)
-            if existing.current_value != observation.atomic_statement and not contradiction: prior = (*prior, {"value": existing.current_value, "confidence": existing.confidence, "superseded_at": now_iso(), "observation_ids": existing.observation_ids})
-            observation_ids = tuple(dict.fromkeys([*existing.observation_ids, observation.observation_id or ""])); evidence_ids = tuple(dict.fromkeys([*existing.evidence_ids, *observation.supporting_evidence_ids])); domain_value = getattr(observation, "normalised_amount", None) or (existing.current_value if existing and observation.observation_type == 'financial_metric_reported' else (_financial_model_value(observation.atomic_statement) if observation.observation_type == 'financial_metric_reported' else observation.atomic_statement)); value = existing.current_value if contradiction else domain_value; conflicts = tuple(dict.fromkeys([*existing.conflicting_observation_ids, observation.observation_id or ""])) if contradiction else existing.conflicting_observation_ids; state = "contradicted" if contradiction else observation.contradiction_state
+            if existing.current_value != value and not contradiction:
+                prior = (*prior, {'value': value if is_older else existing.current_value,
+                                 'confidence': observation.confidence if is_older else existing.confidence,
+                                 'effective_date': observation.observation_date if is_older else existing.last_observed_date,
+                                 'superseded_at': recorded_at, 'observation_ids': (oid,) if is_older else existing.observation_ids})
+            observation_ids = tuple(dict.fromkeys((*existing.observation_ids, oid)))
+            evidence_ids = tuple(dict.fromkeys((*existing.evidence_ids, *observation.supporting_evidence_ids)))
+            if contradiction or is_older:
+                value = existing.current_value
+            conflict_ids = tuple(dict.fromkeys((*existing.conflicting_observation_ids, *(o.observation_id for o in conflicts), oid))) if contradiction else (() if not is_older else existing.conflicting_observation_ids)
+            state = 'contradicted' if contradiction else (existing.contradiction_state if is_older else observation.contradiction_state)
         else:
-            prior = (); observation_ids = (observation.observation_id or "",); evidence_ids = observation.supporting_evidence_ids; value = getattr(observation, "normalised_amount", None) or (_financial_model_value(observation.atomic_statement) if observation.observation_type == 'financial_metric_reported' else observation.atomic_statement); conflicts = (); state = observation.contradiction_state
-        confidence = max(observation.confidence, existing.confidence if existing else 0); confidence_history = (*(existing.confidence_history if existing else ()), {"observation_id": observation.observation_id or "", "confidence": observation.confidence, "recorded_at": now_iso()})
-        model.attributes[key] = EnterpriseModelAttribute(domain, key, value, confidence, observation.last_confirmed_date or observation.observation_date, observation.freshness, observation_ids, evidence_ids, observation.provenance_type, "trusted", state, conflicts, prior, confidence_history); model.updated_at = now_iso(); self.models.save(model)
-        return ModelUpdateResult(observation.enterprise_id, observation.observation_id or "", key, "contradiction_recorded" if contradiction else ("updated" if existing else "created"), contradiction=contradiction)
+            prior = (); observation_ids = (oid,); evidence_ids = observation.supporting_evidence_ids
+            conflict_ids = (); state = observation.contradiction_state
+        confidence = max(observation.confidence, existing.confidence if existing else 0)
+        history = (*(existing.confidence_history if existing else ()), {'observation_id': oid, 'confidence': observation.confidence, 'recorded_at': recorded_at})
+        last_date = existing.last_observed_date if is_older else observation.last_confirmed_date or observation.observation_date
+        model.attributes[key] = EnterpriseModelAttribute(domain, key, value, confidence, last_date, existing.freshness if is_older else observation.freshness, observation_ids, evidence_ids, observation.provenance_type, 'trusted', state, conflict_ids, prior, history)
+        model.updated_at = recorded_at
+        self.models.save(model)
+        return ModelUpdateResult(observation.enterprise_id, oid, key, 'contradiction_recorded' if contradiction else ('updated' if existing else 'created'), contradiction=contradiction)
 
     def rebuild_from_ledger(self) -> list[ModelUpdateResult]:
         return [self.apply_observation(obs) for obs in self.observations.list()]
