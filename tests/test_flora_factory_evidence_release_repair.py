@@ -324,7 +324,9 @@ def test_operator_can_record_explicit_mapping_without_ui_defaults_overwriting_it
 
 
 def test_relationship_endpoints_and_citations_bind_without_rewriting_source_payload():
-    r=receive([evidence(),dict(external_id='REL-1',record_class='relationship',truth_class='evidence_backed',payload={'relationship_source':'EV-1','source':'EV-1','references':['EV-1','ENT-1'],'evidence_refs':['EV-1'],'source_payload':{'evidence':['EV-1']}})])
+    from cios.applications.flora.blueprint_import.promotion import CanonicalJsonlRepository
+    CanonicalJsonlRepository('entity').save({'canonical_id':'ENT-1','enterprise_id':'synthetic-enterprise'})
+    r=receive([evidence(),dict(external_id='REL-1',record_class='relationship',truth_class='evidence_backed',payload={'relationship_source':'EV-1','source':'EV-1','target':'ENT-1','references':['EV-1','ENT-1'],'evidence_refs':['EV-1'],'source_payload':{'evidence':['EV-1']}})])
     prepare(r);c=next(c for c in candidates(r) if c['candidate_object_class']=='evidence')
     ImportMappingService().record_mapping(c,'propose_create','alice',HEADERS,'Evidence','BOUND-EV','explicit target')
     svc,a,result=promote(r);row=svc.generic_repos['relationship'].list()[0]

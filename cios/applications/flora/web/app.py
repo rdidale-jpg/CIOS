@@ -48,7 +48,7 @@ from cios.applications.flora.pilot_auth import (
 from cios.applications.flora.flora_transparent import start_bt_digital_twin, flora_payload
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_lineage_page, enterprise_canvas_page, submit_enterprise_canvas_feedback
 from cios.applications.flora.twin_inspection import twin_inspection_page
-from cios.applications.flora.blueprint_import.views import record_evidence_mapping, confirm_import_identity, import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, record_import_human_review, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page, restage_confirm_page as blueprint_restage_confirm_page, restage_package as blueprint_restage_package, restage_progress_page as blueprint_restage_progress_page, restage_history_page as blueprint_restage_history_page, promotion_confirmation_page as blueprint_promotion_confirmation_page, cancellation_confirmation_page as blueprint_cancellation_confirmation_page, cancel_import as blueprint_cancel_import, delete_candidate_preview_page as blueprint_delete_candidate_preview_page, delete_candidate_import as blueprint_delete_candidate_import, archive_release_page as blueprint_archive_release_page
+from cios.applications.flora.blueprint_import.views import stage_researcher_observation, review_researcher_observation, record_evidence_mapping, confirm_import_identity, import_blueprint_entry_page, upload_and_validate_blueprint, validation_result_page, review_page as blueprint_review_page, record_import_human_review, approve_and_promote as blueprint_approve_and_promote, decline_promotion as blueprint_decline_promotion, history_page as blueprint_history_page, restage_confirm_page as blueprint_restage_confirm_page, restage_package as blueprint_restage_package, restage_progress_page as blueprint_restage_progress_page, restage_history_page as blueprint_restage_history_page, promotion_confirmation_page as blueprint_promotion_confirmation_page, cancellation_confirmation_page as blueprint_cancellation_confirmation_page, cancel_import as blueprint_cancel_import, delete_candidate_preview_page as blueprint_delete_candidate_preview_page, delete_candidate_import as blueprint_delete_candidate_import, archive_release_page as blueprint_archive_release_page
 from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page, update_commercial_mission, export_research_gap_brief
 from cios.applications.flora.enterprise_intelligence.views import executive_intelligence_brief_page
 from cios.applications.flora.enterprise_intelligence.pipeline import run_pipeline as run_banking_pipeline
@@ -576,6 +576,14 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         elif self.path.startswith("/blueprint-import/") and self.path.endswith("/restage"):
             run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/restage")
             html, status = blueprint_restage_package(run_id, form, self.headers)
+            self._html(html, status=status)
+        elif self.path.startswith("/blueprint-import/") and self.path.endswith("/observation-handoff"):
+            run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/observation-handoff")
+            html, status = stage_researcher_observation(run_id, form, self.headers)
+            self._html(html, status=status)
+        elif self.path.startswith("/blueprint-import/") and self.path.endswith("/observation-review"):
+            run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/observation-review")
+            html, status = review_researcher_observation(run_id, form, self.headers)
             self._html(html, status=status)
         elif self.path.startswith("/blueprint-import/") and self.path.endswith("/evidence-mapping"):
             run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/evidence-mapping")

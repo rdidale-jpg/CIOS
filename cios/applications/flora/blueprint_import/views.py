@@ -453,6 +453,54 @@ def confirm_import_identity(import_run_id, form, headers):
         return _safe_failure(str(exc),'identity',False,True,'Return to Review with owner approval permission.'),400
 
 
+def stage_researcher_observation(import_run_id, form, headers):
+    from .researcher_profile_adapter import stage_observation_handoff
+    try:
+        if form.get('confirm_handoff')!=['yes'] or form.get('confirm_subset')!=['yes']:
+            raise ValueError('Confirm enterprise ownership, exact source claim and selected-subset deferral')
+        keys=('wrapper_id','evidence_source_id','enterprise_id','observation_type','attribute','rationale')
+        args={key:(form.get(key) or [''])[0] for key in keys}
+        stage_observation_handoff(import_run_id,args.pop('wrapper_id'),args.pop('evidence_source_id'),
+            args.pop('enterprise_id'),args.pop('observation_type'),args.pop('attribute'),
+            authenticated_flora_user(headers),args.pop('rationale'),headers,selected_subset=True)
+        return review_page(import_run_id,headers,'Observation staged for separate review; no canonical memory changed.')
+    except (ValueError,PermissionError) as exc:
+        return _safe_failure(str(exc),'Observation handoff',False,True,'Return to Review.'),400
+
+
+def review_researcher_observation(import_run_id, form, headers):
+    ctx=_context(import_run_id)
+    if not ctx or not can_review_blueprint_candidate(headers,ctx['package'].identity.enterprise_id,ctx['package'].workspace_id):
+        return _safe_failure('Import unavailable.','Observation review',False,True,'Return to import history.'),403
+    try:
+        ImportLifecycleService().assert_active(import_run_id)
+        cid=(form.get('candidate_id') or [''])[0];decision=(form.get('decision') or [''])[0]
+        candidate=next((c for c in ctx['candidates'] if c['candidate_record_id']==cid and c['payload'].get('researcher_handoff')),None)
+        rationale=(form.get('rationale') or [''])[0].strip()
+        if not candidate or not rationale or decision not in {'approve','defer','reject'}:
+            raise ValueError('Select a staged Observation, decision and rationale')
+        CandidateReviewService().record_decision(cid,decision,authenticated_flora_user(headers),rationale,headers)
+        return review_page(import_run_id,headers,'Observation review recorded; canonical promotion remains a separate decision.')
+    except (ValueError,PermissionError) as exc:
+        return _safe_failure(str(exc),'Observation review',False,True,'Return to Review.'),400
+
+
+def _researcher_handoff_section(ctx):
+    from .researcher_profile_adapter import handoff_offers, HANDOFF_TYPES
+    package=ctx['package'];rows=ctx.get('candidates',[]);offers=handoff_offers(rows)
+    if not offers:return ''
+    run=escape(package.import_run_id)
+    offered=''.join(f"<tr><td>{escape(o['enterprise_source_id'])}</td><td>{escape(o['evidence_source_id'])}</td><td>{escape(o['statement'])}</td><td>{escape(o['reason'] or 'Owner review required')}</td></tr>" for o in offers)
+    staged=''
+    for c in rows:
+        if c['payload'].get('researcher_handoff'):
+            staged+=f"<p>{escape(c['payload']['atomic_statement'])}</p><form method='post' action='/blueprint-import/{run}/observation-review'><input type='hidden' name='candidate_id' value='{escape(c['candidate_record_id'])}'><select name='decision'><option value='defer'>Defer</option><option value='approve'>Approve</option><option value='reject'>Reject</option></select><input name='rationale' required placeholder='Review rationale'><button>Record Observation review</button></form>"
+    wrapper_options=''.join(f"<option value='{escape(c['candidate_record_id'])}'>{escape(c['original_source_id'])}</option>" for c in rows if c['candidate_object_class']=='enterprise_twin')
+    types=''.join(f"<option>{kind}</option>" for kind in HANDOFF_TYPES)
+    form=f"<form method='post' action='/blueprint-import/{run}/observation-handoff'><label>Dossier<select name='wrapper_id'>{wrapper_options}</select></label><label>Evidence source ID<input name='evidence_source_id' required></label><label>Canonical Enterprise ID<input name='enterprise_id' required></label><label>Observation type<select name='observation_type'>{types}</select></label><label>Existing model attribute<input name='attribute' required></label><label>Owner rationale<textarea name='rationale' required></textarea></label><label><input type='checkbox' name='confirm_handoff' value='yes' required>I confirm the target enterprise and that the exact source claim is supported for this enterprise.</label><label><input type='checkbox' name='confirm_subset' value='yes' required>Stage this selected subset and defer all other candidates; this is partial package acceptance.</label><button>Stage Observation for review</button></form>"
+    return f"<section class='card'><h2>Researcher-to-Model handoff</h2><p>Candidate dossier content remains research context. Only explicit source claims can be offered; no factual memory changes until separate review and authorised promotion. Already accepted Evidence cannot be reassigned here.</p><details><summary>Supported claims and deferred diagnostics ({len(offers)})</summary><table>{offered}</table></details>{form}{staged}</section>"
+
+
 def record_evidence_mapping(import_run_id, form, headers):
     ctx=_context(import_run_id)
     if not ctx or not can_review_blueprint_candidate(headers,ctx['package'].identity.enterprise_id,ctx['package'].workspace_id):
@@ -568,6 +616,8 @@ def completion_page(import_run_id: str, result: dict[str, Any], headers: Any) ->
     projection_rows=''.join(f"<li>{escape(str(row.get('observation_id','')))}: {escape(str(row.get('status','')))} — {escape(str(row.get('reason') or row.get('action') or ''))}</li>" for row in result.get('model_projection_results',[]))
     projection_summary=f"<section class='card'><h2>Enterprise Model reconciliation</h2><p>Status: <strong>{escape(str(result.get('model_projection_status','not_assessed')))}</strong></p><p>Canonical promotion and model projection are distinct outcomes. Unsupported mappings remain inspectable without invented model state.</p><ul>{projection_rows}</ul></section>"
     body = _workflow_progress("explore", import_run_id, "promoted") + ( _package_header(package) if package else "") + f"""<section class='card'><h2>Explore promoted Twin</h2><table><tr><th>Promotion status</th><td>{escape(result.get('final_execution_status','unknown'))}</td></tr><tr><th>Records created</th><td>{len(result.get('records_created', []))}</td></tr><tr><th>Records updated</th><td>{len(result.get('records_updated', []))}</td></tr><tr><th>Projections retained</th><td>{_projection_count(import_run_id)}</td></tr><tr><th>Exceptions</th><td>{len(result.get('records_blocked', [])) + len(result.get('records_failed', []))}</td></tr></table><p>The original ZIP was preserved unchanged in governed runtime storage.</p><p><a href='{canvas_href}'>Open Enterprise Canvas</a> · <a href='/blueprint-import/{escape(import_run_id)}'>Open import record</a></p></section>"""
+    accepted_links=''.join(f"<li><a href='/digital-twins/{escape(row['enterprise_id'])}/canvas'>Inspect accepted Enterprise Model: {escape(row['enterprise_id'])}</a></li>" for row in result.get('model_projection_results',[]) if row.get('status')=='applied' and row.get('enterprise_id'))
+    if accepted_links: projection_summary+=f"<section class='card'><h2>Accepted model views</h2><p>These existing model-backed views are separate from candidate Industry dossier context.</p><ul>{accepted_links}</ul></section>"
     return _page("Blueprint import complete", body+projection_summary+(_evidence_mapping_section(package) if package else ""))
 
 
@@ -671,12 +721,12 @@ def _ensure_reviews_and_mappings(ctx, headers):
     for c in ctx["candidates"]:
         cid = c["candidate_record_id"]
         if cid not in reviews and c.get("validation_status") == "accepted":
-            decision = "approve" if c.get("validation_status") == "accepted" else ("unsupported" if c.get("validation_status") == "quarantined" else "reject")
+            decision = "defer" if c.get("payload",{}).get("researcher_handoff") else ("approve" if c.get("validation_status") == "accepted" else ("unsupported" if c.get("validation_status") == "quarantined" else "reject"))
             reviewer_svc.record_decision(cid, decision, reviewer, "UI default review summary for staged package", headers)
         if c.get("validation_status") == "accepted" and c.get("candidate_object_class") in {"evidence", "observation"} and not c.get("payload", {}).get("proposed_effect"):
             prior=existing.get(cid)
             if not prior or (prior.get("decision_origin")=="automatic" and prior.get("reconciliation_kind")=="unresolved identity"):
-                mapper.record_mapping(c, "propose_create", reviewer, headers, c.get("candidate_object_class", "").title(), automatic=True)
+                mapper.record_mapping(c, "propose_create", reviewer, headers, c.get("candidate_object_class", "").title(), canonical_id=(c.get("payload",{}).get("observation_id") or "") if c.get("payload",{}).get("researcher_handoff") else "", automatic=True)
 
 
 def _stale_review_section(package, job) -> str:
@@ -705,7 +755,7 @@ def _review_ready_page(ctx, job, coord, query, message: str, correlation_id: str
     body += _review_sections(ctx["package"].import_run_id, details, query, technical=False) + "</details>"
     body += "<details class='card architect-depth'><summary><strong>Architect disclosure — governance and promotion semantics</strong></summary>"
     body += _review_summary_section(ctx, job, counts, proposed)
-    body += _evidence_mapping_section(ctx["package"]) + _identity_resolution_section(ctx["package"]) + _quarantine_reasons_section(job) + _affected_twins_section(ctx["package"])
+    body += _researcher_handoff_section(ctx) + _evidence_mapping_section(ctx["package"]) + _identity_resolution_section(ctx["package"]) + _quarantine_reasons_section(job) + _affected_twins_section(ctx["package"])
     body += "</details><details class='card technical-depth'><summary><strong>Technical disclosure — diagnostics, filters and raw records</strong></summary>"
     body += _review_trace_section(ctx, job, correlation_id)
     body += _review_sections(ctx["package"].import_run_id, details, query, technical=True) + "</details>"
@@ -836,7 +886,7 @@ def _evidence_mapping_section(package):
     if state.state not in {'promoted','superseded','archived','cancelled','deleted'}:
         options=''.join(f"<option value='{escape(m['candidate_id'])}'>{escape(m['external_id'])}</option>" for m in latest.values())
         action=f"<details><summary>Record an explicit Evidence mapping</summary><form method='post' action='/blueprint-import/{escape(package.import_run_id)}/evidence-mapping'><label>Source Evidence<select name='candidate_id'>{options}</select></label><label>Disposition<select name='disposition'><option value='map_existing'>Reuse existing target</option><option value='propose_create'>Create distinct canonical target</option><option value='propose_update'>Update reviewed existing target</option></select></label><label>Canonical ID<input name='canonical_id' required></label><label>Rationale<textarea name='rationale' required></textarea></label><label><input type='checkbox' name='confirm_mapping' value='yes' required>I confirm this mapping for owner review.</label><button type='submit'>Record mapping</button></form></details>"
-    return f"<section class='card'><h2>Canonical Evidence reconciliation</h2><p>Release {escape(package.identity.package_version)} · {escape(state.state)} · current: {state.current} · superseded by: {escape(state.superseded_by)}</p><p>Technical package validation and Evidence reconciliation do not establish complete Industry Twin acceptance. Domain wrappers retain their existing staging-only boundaries.</p><details><summary>Source-to-canonical Evidence mappings ({len(latest)})</summary><table><tr><th>Source ID</th><th>Canonical target</th><th>Reconciliation</th><th>Disposition</th><th>Reason</th></tr>{rows}</table></details>{action}</section>"
+    return f"<section class='card'><h2>Canonical Evidence reconciliation</h2><p>Release {escape(package.identity.package_version)} · {escape(state.state)} · current: {state.current} · superseded by: {escape(state.superseded_by)}</p><p>Partial package promotion: technical package validation and Evidence reconciliation do not establish complete Industry Twin acceptance. Domain wrappers retain their existing staging-only boundaries.</p><details><summary>Source-to-canonical Evidence mappings ({len(latest)})</summary><table><tr><th>Source ID</th><th>Canonical target</th><th>Reconciliation</th><th>Disposition</th><th>Reason</th></tr>{rows}</table></details>{action}</section>"
 
 
 def _identity_resolution_section(package, actionable: bool = True) -> str:
@@ -892,6 +942,7 @@ def _review_summary_section(ctx, job, counts, proposed) -> str:
     <tr><th>Review generated from</th><td><code>{escape(str((ctx.get('summary') or {}).get('staging_version', 'staging-v1')))}</code></td></tr>
     <tr><th>Accepted canonical candidates</th><td>{int(counts.get('Accepted canonical candidates', counts.get('Accepted', 0)))}</td></tr>
     <tr><th>Accepted support records</th><td>{val('Accepted support records')}</td></tr>
+    <tr><th>Deferred for review</th><td>{val('Deferred for review')}</td></tr>
     <tr><th>Accepted but non-persistable</th><td>{int(counts.get('Accepted but non-persistable', proposed.get('Accepted but non-persistable', 0)))}</td></tr>
     <tr><th>Collapsed/deduplicated candidates</th><td>{val('Collapsed/deduplicated candidates')}</td></tr>
     <tr><th>Expected canonical mutations</th><td>{val('Expected canonical mutations')}</td></tr>

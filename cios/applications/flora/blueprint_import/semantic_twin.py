@@ -625,3 +625,51 @@ def _object(candidate: dict[str, Any]) -> SemanticObject:
         "; ".join(str(finding.get("message") or finding.get("code") or "")
                   for finding in candidate.get("validation_findings") or () if isinstance(finding, dict)),
     )
+
+
+def canonical_relationship_endpoints(candidate, package, candidates, mappings, reviews, headers=None):
+    """Resolve canonical graph endpoints separately from the candidate graph.
+
+    A readable wrapper/alias is never proof that a canonical object exists.
+    Return unresolved endpoints without materialising their domain wrappers.
+    """
+    from cios.applications.flora.memory.repository import EvidenceRepository, ObservationRepository, EnterpriseModelRepository
+    from .promotion import CanonicalJsonlRepository
+    from cios.applications.flora.access import can_access_enterprise
+    p = candidate.get('payload') or {}
+    source = p.get('relationship_source') or p.get('source') or p.get('source_id')
+    target = p.get('relationship_target') or p.get('target') or p.get('target_id')
+    by_external = {c['original_source_id']: c for c in candidates}
+    latest = {m['candidate_id']: m for m in mappings}
+    models = EnterpriseModelRepository()
+    planned_enterprises = {c['payload'].get('enterprise_id') or c['payload'].get('canonical_enterprise_id')
+        for c in candidates if c['candidate_object_class'] == 'observation' and c['validation_status'] == 'accepted'
+        and (reviews.get(c['candidate_record_id']) or {}).get('decision') == 'approve'}
+    unresolved = []
+    def resolve(ref):
+        if not isinstance(ref, str) or not ref:
+            unresolved.append(str(ref or 'missing')); return None
+        c = by_external.get(ref)
+        if not c:
+            canonical_map=next((m for m in latest.values() if (m.get('canonical_id') or m.get('proposed_canonical_id'))==ref),None)
+            if canonical_map: c=next((c for c in candidates if c['candidate_record_id']==canonical_map['candidate_id']),None)
+        m = latest.get((c or {}).get('candidate_record_id')) or {}
+        resolved = m.get('canonical_id') or m.get('proposed_canonical_id') or ref
+        # Canonical Enterprise owners are model identities, not dossier payloads.
+        if m.get('canonical_type') == 'Enterprise' and can_access_enterprise(headers,resolved) and (resolved in planned_enterprises or models.path_for(resolved).exists()):
+            return resolved
+        existing=CanonicalJsonlRepository('entity').get(resolved) or EvidenceRepository().get(resolved) or ObservationRepository().get(resolved)
+        if existing:
+            owner=existing.get('enterprise_id') or existing.get('canonical_enterprise_id') if isinstance(existing,dict) else existing.enterprise_id
+            if not owner and isinstance(existing,dict):
+                from .registry import BlueprintPackageRegistry
+                origin=BlueprintPackageRegistry().get((existing.get('blueprint_import_lineage') or {}).get('package_id',''))
+                owner=origin.identity.enterprise_id if origin else None
+            if owner and can_access_enterprise(headers,owner): return resolved
+            unresolved.append(ref+':unowned-or-inaccessible'); return None
+        if c and c['candidate_object_class'] in {'entity', 'evidence', 'observation'} and c['validation_status'] == 'accepted' and (reviews.get(c['candidate_record_id']) or {}).get('decision') == 'approve' and m.get('disposition','propose_create') in {'propose_create', 'propose_update', 'map_existing'} and (c.get('payload',{}).get('proposed_effect') or 'create') in {'create','update'}:
+            return resolved
+        unresolved.append(ref + ':' + ((c or {}).get('candidate_object_class') or 'unowned'))
+        return None
+    left, right = resolve(source), resolve(target)
+    return {'source': left, 'target': right, 'unresolved': unresolved}
