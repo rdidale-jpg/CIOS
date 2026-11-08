@@ -186,7 +186,8 @@ def executive_intelligence_quality(ent: SemanticEnterprise, twin: SemanticTwin) 
     elif pressure.discovery_state == "NO_ELIGIBLE_INPUT":
         pressure_row = ("Material Pressures", "EMPTY", "No eligible governed candidate input exists.")
     else:
-        pressure_row = ("Material Pressures", "EMPTY", "Eligible candidates were assessed under ADR-026 and none qualified.")
+        reasons='; '.join(dict.fromkeys(a.reason for a in pressure.assessments))
+        pressure_row = ("Material Pressures", "ACCEPTABLE" if pressure.unresolved else "EMPTY", "No qualified Pressure truth; assessment diagnostics: "+reasons)
     rows = [
         ("Overview", "STRONG" if result.situation and len(result.source_dimensions) > 1 else "ACCEPTABLE" if result.situation else "EMPTY",
          "" if result.situation else "No supported organisation synthesis is available."),

@@ -1,4 +1,5 @@
 """Semantic acceptance tests for ADR-026 Material Pressure qualification."""
+import pytest
 from cios.applications.flora.blueprint_import.material_pressure import (
     MaterialPressureQualification, PressureCandidate, qualify_candidates,
 )
@@ -9,9 +10,30 @@ def candidate(**changes):
                   enterprise_id="ENT-1", condition="A binding condition acts on operations",
                   affected_domain="operational", consequence="Delivery capacity is constrained",
                   consequence_domain="operational", evidence_refs=("EV-1",),
-                  unknown_refs=("UN-SEVERITY",))
+                  unknown_refs=("UN-SEVERITY",), time_context="2026-Q4")
     values.update(changes)
     return PressureCandidate(**values)
+
+
+@pytest.fixture(autouse=True)
+def governed_inputs(tmp_path,monkeypatch):
+    """Positive gates need actual owned inputs, not previously trusted ID strings."""
+    from cios.applications.flora.memory.models import Observation
+    from cios.applications.flora.memory.repository import ObservationRepository,EvidenceRepository,ContradictionRepository
+    from cios.applications.flora.blueprint_import.promotion import CanonicalJsonlRepository
+    monkeypatch.setenv('FLORA_DATA_DIR',str(tmp_path))
+    data=dict(condition='A binding condition acts on operations',condition_concept='delivery-capacity-constraint',
+        affected_domain='operational',scope='delivery operations',time_context='2026-Q4',
+        condition_basis='A binding condition acts on operations.',mechanism='The condition constrains delivery.',
+        consequence='Delivery capacity is constrained',consequence_domain='operational',
+        materiality_rationale='The constraint limits service delivery.',identity_rationale='The condition constrains delivery.')
+    summary='A binding condition acts on operations. The condition constrains delivery. Delivery capacity is constrained. The constraint limits service delivery.'
+    for i in (1,2):
+        EvidenceRepository().save(dict(evidence_id=f'EV-{i}',enterprise_id='ent-1',summary=summary,confidence=80))
+        ObservationRepository().save(Observation('ent-1','fact',f'The binding delivery condition is recorded in position {i}.',
+            '2026-11-01','2026-11-02','events.delivery',80,(f'EV-{i}',),observation_id=f'OBS-{i}',human_provenance={'material_pressure':data}))
+    CanonicalJsonlRepository('unknown').save(dict(canonical_id='UN-SEVERITY',enterprise_id='ent-1',affected_field='severity'))
+    ContradictionRepository().save(dict(contradiction_id='CR-SEVERITY',enterprise_id='ent-1',affected_field='severity',status='open',counter_evidence_ids=['EV-2']))
 
 
 def test_all_six_mandatory_gates_are_required_and_rejections_are_explainable():

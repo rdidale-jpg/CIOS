@@ -2,12 +2,14 @@
 from __future__ import annotations
 
 import hashlib
+import json
+from dataclasses import asdict
 import re
 from decimal import Decimal
 from dataclasses import dataclass
 from typing import Any
 
-from cios.applications.flora.memory.models import EnterpriseModelAttribute, EnterpriseUnknown, ModelUpdateResult, Observation, now_iso
+from cios.applications.flora.memory.models import EnterpriseModelAttribute, EnterpriseUnknown, ModelUpdateResult, Observation, MaterialPressure, now_iso
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
 from cios.applications.flora.memory.repository import EnterpriseModelRepository, ObservationRepository, EvidenceRepository
 
@@ -217,6 +219,7 @@ class ObservationMemoryService:
         publication = item.get("publication_date") or item.get("evidence_publication_date")
         enterprise = canonical_enterprise_id(str(item.get("enterprise_id") or item.get("canonical_enterprise_id") or item.get("organisation") or "Unknown enterprise")) or "unknown"
         obs = Observation(enterprise, condition, statement, observed, collected, str(item.get("affected_attribute") or f"{_domain_for(condition)}.{condition}"), int(item.get("confidence") or item.get("overall_evidence_quality") or 50), tuple(item.get("supporting_evidence_ids") or (_evidence_id(item),)), evidence_publication_date=str(publication) if publication else None, provenance_type=str(item.get("provenance") or item.get("source_provenance") or "evidence-backed"), freshness=str(item.get("evidence_freshness") or "current"), lifecycle_state=("Validated" if condition == "financial_metric_reported" else "accepted"), importance=int(item["importance"]) if item.get("importance") is not None else None, commercial_value=int(item["commercial_value"]) if item.get("commercial_value") is not None else None)
+        obs.human_provenance.update(dict(item.get('human_provenance') or {}))
         obs.human_provenance.update({k: item[k] for k in ('effective_date', 'effective_period', 'source_date', 'scope') if item.get(k)})
         if item.get('period'):
             obs.human_provenance['effective_period'] = item['period']
@@ -332,6 +335,92 @@ class ObservationMemoryService:
         return report
 
     def apply_observation(self, observation: Observation) -> ModelUpdateResult:
+        result=self._apply_observation(observation)
+        # No descriptor means no new pressure. Only previously maintained,
+        # dependent pressures are reassessed after a supporting fact changes.
+        if observation.human_provenance.get('material_pressure'):
+            self.assess_material_pressure(observation.observation_id)
+        model=self.models.get(observation.enterprise_id)
+        for pressure in tuple(model.material_pressures.values()):
+            if pressure.source_input_id==observation.observation_id: continue
+            supports=[self.observations.get(ref) for ref in pressure.observation_refs]
+            if any(obs and obs.affected_attribute==observation.affected_attribute for obs in supports):
+                self.assess_material_pressure(pressure.source_input_id,pressure.source_input_type)
+        return result
+
+    def assess_material_pressure(self, canonical_input_id: str, source_type: str='observation'):
+        """Maintain ADR-026 state inside the existing Enterprise Model owner."""
+        from cios.applications.flora.blueprint_import.material_pressure import candidate_from_source,qualify_candidates,MaterialPressureQualification
+        from cios.applications.flora.blueprint_import.promotion import CanonicalJsonlRepository
+        source=self.observations.get(canonical_input_id) if source_type=='observation' else CanonicalJsonlRepository('fact').get(canonical_input_id)
+        if source is None: raise ValueError('Canonical pressure source is unavailable')
+        provenance=(source.human_provenance if isinstance(source,Observation) else source)
+        if not provenance.get('material_pressure'): return MaterialPressureQualification(())
+        candidate=candidate_from_source(source,source_type)
+        model=self.models.get(candidate.enterprise_id)
+        result=qualify_candidates((candidate,),observations=self.observations,evidence=self.evidence,model=model)
+        changed=False
+        normalise=lambda value:json.loads(json.dumps(value,sort_keys=True))
+        for assessment in result.assessments:
+            c=assessment.candidate
+            key=source_type+':'+canonical_input_id
+            diagnostic=normalise(asdict(assessment))
+            if model.pressure_assessments.get(key)!=diagnostic:
+                model.pressure_assessments[key]=diagnostic; changed=True
+            previous=model.material_pressures.get(assessment.identity)
+            if previous is None:
+                previous=next((p for p in model.material_pressures.values() if p.source_input_id==canonical_input_id and p.source_input_type==source_type),None)
+            if not assessment.qualified and previous is None: continue
+            if previous and (previous.superseded_by or (previous.resolved_at and not c.resolved_at and not assessment.qualified)):
+                # A replaced object's history cannot silently become current
+                # merely because its old source is replayed or reassessed.
+                continue
+            if previous is not None:
+                known_inputs={previous.source_input_id,*(row.get('source_input_id') for row in previous.history)}
+                if canonical_input_id in known_inputs and canonical_input_id!=previous.source_input_id:
+                    # An old source replay may corroborate history, never undo a
+                    # more recent accepted assessment or resolution.
+                    refs=tuple(dict.fromkeys((*previous.evidence_refs,*c.evidence_refs)))
+                    if refs!=previous.evidence_refs:
+                        previous.evidence_refs=refs; previous.updated_at=now_iso();changed=True
+                    continue
+            qualification=assessment.qualification if assessment.qualification!='REJECTED' else 'NOT_QUALIFIED'
+            values=dict(pressure_id=previous.pressure_id if previous else assessment.identity,
+                enterprise_id=c.enterprise_id,condition_concept=previous.condition_concept if previous and not assessment.qualified else c.condition_concept,
+                condition=c.condition or (previous.condition if previous else ''),affected_domain=previous.affected_domain if previous and not assessment.qualified else c.affected_domain,
+                scope=previous.scope if previous and not assessment.qualified else c.scope,time_context=previous.time_context if previous and not assessment.qualified else c.time_context,
+                mechanism=c.mechanism,consequence=c.consequence,consequence_domain=c.consequence_domain,
+                qualification=qualification,source_input_id=canonical_input_id,source_input_type=source_type,
+                observation_refs=tuple(dict.fromkeys((*(previous.observation_refs if previous else ()),*c.observation_refs))),
+                evidence_refs=tuple(dict.fromkeys((*(previous.evidence_refs if previous else ()),*c.evidence_refs))),
+                current_evidence_refs=c.evidence_refs,counter_evidence_refs=tuple(dict.fromkeys((*(previous.counter_evidence_refs if previous else ()),*assessment.counter_evidence_refs))),
+                unknown_refs=tuple(dict.fromkeys((*(previous.unknown_refs if previous else ()),*c.unknown_refs))),contradiction_refs=tuple(dict.fromkeys((*(previous.contradiction_refs if previous else ()),*c.contradiction_refs))),
+                confidence=c.confidence,observed_at=c.observed_at,effective_at=c.effective_at,
+                resolved_at=c.resolved_at,resolution_evidence_refs=tuple(dict.fromkeys((*(previous.resolution_evidence_refs if previous else ()),*c.resolution_evidence_refs))),
+                supersedes_pressure_id=c.supersedes_pressure_id,superseded_at='',identity_rationale=c.identity_rationale,assessment_reason=assessment.reason)
+            before=asdict(previous) if previous else {}
+            comparison={k:v for k,v in before.items() if k not in {'updated_at','last_change','history','superseded_by'}}
+            if previous and normalise(comparison)==normalise(values): continue
+            change='qualified' if previous is None else ('resolved' if c.resolved_at else
+                'weakened' if isinstance(c.confidence,(int,float)) and isinstance(previous.confidence,(int,float)) and c.confidence<previous.confidence else
+                'strengthened' if isinstance(c.confidence,(int,float)) and isinstance(previous.confidence,(int,float)) and c.confidence>previous.confidence else
+                'qualification changed' if previous.qualification!=qualification else 'lineage or condition updated')
+            snapshot={k:v for k,v in before.items() if k!='history'}
+            history=(*previous.history,normalise(snapshot)) if previous else ()
+            pressure=MaterialPressure(**values,history=history,last_change=change)
+            model.material_pressures[pressure.pressure_id]=pressure;changed=True
+            if assessment.qualified and c.supersedes_pressure_id:
+                old=model.material_pressures[c.supersedes_pressure_id]
+                if old.superseded_by==pressure.pressure_id: continue
+                old.history=(*old.history,normalise({k:v for k,v in asdict(old).items() if k!='history'}))
+                old.qualification='NOT_QUALIFIED';old.superseded_by=pressure.pressure_id
+                old.superseded_at=c.effective_at or c.observed_at
+                old.last_change='superseded through governed Evidence';old.updated_at=now_iso()
+        if changed:
+            model.updated_at=now_iso();self.models.save(model)
+        return result
+
+    def _apply_observation(self, observation: Observation) -> ModelUpdateResult:
         oid = observation.observation_id or ''
         key = observation.affected_attribute
         inactive=(observation.lifecycle_state.casefold() in {'retired','superseded'}
