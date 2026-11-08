@@ -118,6 +118,9 @@ class BoundedTwinRetrievalService:
         context={'enterprise_id':enterprise, 'observation_dates':{i.stable_id:dates[i.stable_id] for i in selected if i.stable_id in dates},
                  'model_attribute_dates':{i.stable_id:attribute_dates[i.stable_id] for i in selected if i.stable_id in attribute_dates}}
         if pressure_assessments: context['material_pressure_assessments']=pressure_assessments[:20]
+        from .change_interpretation import ExternalChangeInterpretationService
+        changes=ExternalChangeInterpretationService(observations=self.observations,evidence=self.evidence,models=self.models).for_enterprise(enterprise,cutoff=cutoff)
+        if changes: context['external_change_assessments']=changes
         package_dict={'enterprise':enterprise,'cutoff':cutoff,'context':context,'items':[i.to_dict() for i in (*selected,*evidence_items)]}
         return EvidencePackageV1('ep-'+stable_hash(package_dict)[:16],enterprise,context,request.twin_version,request.evidence_cut_off,
             'Progressive Assurance accepted',tuple(obs_items+evidence_items),tuple(entities),tuple(programmes),tuple(unknowns),tuple(contradictions),tuple(human),tuple(),tuple(lineage),

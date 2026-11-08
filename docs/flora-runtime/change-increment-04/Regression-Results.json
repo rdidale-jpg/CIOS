@@ -1,0 +1,265 @@
+{
+  "baseline_sha": "ec0bd875ab2a780ff1551dcb2a239aa8a76eb402",
+  "new_regressions": {
+    "baseline": "42 failed",
+    "increment_04": "42 passed",
+    "focused_including_material_pressure_applicability_import": "132 passed"
+  },
+  "existing_before": [
+    {
+      "file": "test_flora_material_pressure_lifecycle.py",
+      "exit_code": 0,
+      "summary": "51 passed in 1.58s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_observatory.py",
+      "exit_code": 0,
+      "summary": "10 passed in 0.64s",
+      "failures": []
+    },
+    {
+      "file": "test_tel001_population_relationship_reconciliation.py",
+      "exit_code": 1,
+      "summary": "2 failed, 10 passed in 295.17s (0:04:55)",
+      "failures": [
+        "FAILED tests/test_tel001_population_relationship_reconciliation.py::test_dimension_missing_does_not_repeat_operating_model",
+        "FAILED tests/test_tel001_population_relationship_reconciliation.py::test_diagnostics_use_same_population_and_association_owner"
+      ]
+    },
+    {
+      "file": "test_flora_banking_industry_reinvention_increment42.py",
+      "exit_code": 1,
+      "summary": "6 failed, 4 passed in 0.33s",
+      "failures": [
+        "FAILED tests/test_flora_banking_industry_reinvention_increment42.py::test_financial_behaviour_narrative_has_required_causal_sections",
+        "FAILED tests/test_flora_banking_industry_reinvention_increment42.py::test_pestle_forces_map_to_specific_banks_themes_and_non_generic_outputs",
+        "FAILED tests/test_flora_banking_industry_reinvention_increment42.py::test_supplier_names_render_and_unnamed_labels_are_suppressed_when_names_exist",
+        "FAILED tests/test_flora_banking_industry_reinvention_increment42.py::test_heatmap_cells_show_pressure_barrier_supplier_and_whitespace",
+        "FAILED tests/test_flora_banking_industry_reinvention_increment42.py::test_industry_opportunity_totals_reconcile_to_account_opportunities",
+        "FAILED tests/test_flora_banking_industry_reinvention_increment42.py::test_rendered_acceptance_artefacts_exist"
+      ]
+    },
+    {
+      "file": "test_material_pressure_qualification.py",
+      "exit_code": 0,
+      "summary": "6 passed in 0.34s",
+      "failures": []
+    },
+    {
+      "file": "test_evidence_provenance_applicability.py",
+      "exit_code": 0,
+      "summary": "4 passed in 0.24s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_enterprise_memory.py",
+      "exit_code": 0,
+      "summary": "16 passed in 0.51s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_intelligence_integrity.py",
+      "exit_code": 0,
+      "summary": "44 passed in 0.64s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_import_model_reconciliation.py",
+      "exit_code": 0,
+      "summary": "35 passed in 1.26s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_blueprint_import_promotion.py",
+      "exit_code": 0,
+      "summary": "21 passed in 0.62s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_blueprint_import_review_planning.py",
+      "exit_code": 0,
+      "summary": "4 passed in 0.27s",
+      "failures": []
+    },
+    {
+      "file": "test_enterprise_intelligence_reasoning.py",
+      "exit_code": 0,
+      "summary": "7 passed in 0.43s",
+      "failures": []
+    },
+    {
+      "file": "test_tel001_executive_enterprise_intelligence.py",
+      "exit_code": 0,
+      "summary": "3 passed in 2.31s",
+      "failures": []
+    },
+    {
+      "file": "test_tel001_enterprise_factual_presentation.py",
+      "exit_code": 1,
+      "summary": "1 failed, 2 passed in 1.43s",
+      "failures": [
+        "FAILED tests/test_tel001_enterprise_factual_presentation.py::test_tel001_facts_survive_without_assessment_and_render_on_actual_routes"
+      ]
+    },
+    {
+      "file": "test_flora_enterprise_canvas.py",
+      "exit_code": 1,
+      "summary": "3 failed, 12 passed in 1.07s",
+      "failures": [
+        "FAILED tests/test_flora_enterprise_canvas.py::test_home_page_does_not_expose_synthetic_canvas_route",
+        "FAILED tests/test_flora_enterprise_canvas.py::test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+        "FAILED tests/test_flora_enterprise_canvas.py::test_mod_executive_commercial_canvas_read_model"
+      ]
+    },
+    {
+      "file": "test_flora_enterprise_canvas_feedback.py",
+      "exit_code": 0,
+      "summary": "13 passed in 0.29s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_intelligence_projection.py",
+      "exit_code": 1,
+      "summary": "1 failed, 1 passed in 0.28s",
+      "failures": [
+        "FAILED tests/test_flora_intelligence_projection.py::test_legacy_records_cannot_infer_readiness_from_volume_or_weighted_maturity"
+      ]
+    },
+    {
+      "file": "test_industry_twin_semantic_reconciliation.py",
+      "exit_code": 0,
+      "summary": "2 passed in 0.26s",
+      "failures": []
+    }
+  ],
+  "existing_after": [
+    {
+      "file": "test_flora_material_pressure_lifecycle.py",
+      "exit_code": 0,
+      "summary": "51 passed in 1.01s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_observatory.py",
+      "exit_code": 0,
+      "summary": "10 passed in 0.61s",
+      "failures": []
+    },
+    {
+      "file": "test_tel001_population_relationship_reconciliation.py",
+      "exit_code": 1,
+      "summary": "2 failed, 10 passed in 292.17s (0:04:52)",
+      "failures": [
+        "FAILED tests/test_tel001_population_relationship_reconciliation.py::test_dimension_missing_does_not_repeat_operating_model",
+        "FAILED tests/test_tel001_population_relationship_reconciliation.py::test_diagnostics_use_same_population_and_association_owner"
+      ]
+    },
+    {
+      "file": "test_flora_banking_industry_reinvention_increment42.py",
+      "exit_code": 1,
+      "summary": "6 failed, 4 passed in 0.24s",
+      "failures": [
+        "FAILED tests/test_flora_banking_industry_reinvention_increment42.py::test_financial_behaviour_narrative_has_required_causal_sections",
+        "FAILED tests/test_flora_banking_industry_reinvention_increment42.py::test_pestle_forces_map_to_specific_banks_themes_and_non_generic_outputs",
+        "FAILED tests/test_flora_banking_industry_reinvention_increment42.py::test_supplier_names_render_and_unnamed_labels_are_suppressed_when_names_exist",
+        "FAILED tests/test_flora_banking_industry_reinvention_increment42.py::test_heatmap_cells_show_pressure_barrier_supplier_and_whitespace",
+        "FAILED tests/test_flora_banking_industry_reinvention_increment42.py::test_industry_opportunity_totals_reconcile_to_account_opportunities",
+        "FAILED tests/test_flora_banking_industry_reinvention_increment42.py::test_rendered_acceptance_artefacts_exist"
+      ]
+    },
+    {
+      "file": "test_material_pressure_qualification.py",
+      "exit_code": 0,
+      "summary": "6 passed in 0.30s",
+      "failures": []
+    },
+    {
+      "file": "test_evidence_provenance_applicability.py",
+      "exit_code": 0,
+      "summary": "4 passed in 0.23s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_enterprise_memory.py",
+      "exit_code": 0,
+      "summary": "16 passed in 0.39s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_intelligence_integrity.py",
+      "exit_code": 0,
+      "summary": "44 passed in 0.56s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_import_model_reconciliation.py",
+      "exit_code": 0,
+      "summary": "35 passed in 1.13s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_blueprint_import_promotion.py",
+      "exit_code": 0,
+      "summary": "21 passed in 0.50s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_blueprint_import_review_planning.py",
+      "exit_code": 0,
+      "summary": "4 passed in 0.25s",
+      "failures": []
+    },
+    {
+      "file": "test_enterprise_intelligence_reasoning.py",
+      "exit_code": 0,
+      "summary": "7 passed in 0.33s",
+      "failures": []
+    },
+    {
+      "file": "test_tel001_executive_enterprise_intelligence.py",
+      "exit_code": 0,
+      "summary": "3 passed in 2.49s",
+      "failures": []
+    },
+    {
+      "file": "test_tel001_enterprise_factual_presentation.py",
+      "exit_code": 1,
+      "summary": "1 failed, 2 passed in 1.29s",
+      "failures": [
+        "FAILED tests/test_tel001_enterprise_factual_presentation.py::test_tel001_facts_survive_without_assessment_and_render_on_actual_routes"
+      ]
+    },
+    {
+      "file": "test_flora_enterprise_canvas.py",
+      "exit_code": 1,
+      "summary": "3 failed, 12 passed in 0.67s",
+      "failures": [
+        "FAILED tests/test_flora_enterprise_canvas.py::test_home_page_does_not_expose_synthetic_canvas_route",
+        "FAILED tests/test_flora_enterprise_canvas.py::test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+        "FAILED tests/test_flora_enterprise_canvas.py::test_mod_executive_commercial_canvas_read_model"
+      ]
+    },
+    {
+      "file": "test_flora_enterprise_canvas_feedback.py",
+      "exit_code": 0,
+      "summary": "13 passed in 0.26s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_intelligence_projection.py",
+      "exit_code": 1,
+      "summary": "1 failed, 1 passed in 0.23s",
+      "failures": [
+        "FAILED tests/test_flora_intelligence_projection.py::test_legacy_records_cannot_infer_readiness_from_volume_or_weighted_maturity"
+      ]
+    },
+    {
+      "file": "test_industry_twin_semantic_reconciliation.py",
+      "exit_code": 0,
+      "summary": "2 passed in 0.24s",
+      "failures": []
+    }
+  ],
+  "new_existing_regressions": []
+}
