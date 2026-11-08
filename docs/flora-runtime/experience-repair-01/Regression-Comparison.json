@@ -1,0 +1,163 @@
+{
+  "baseline_sha": "7f40bf2242f3b49da2eaac6c05a6db9450f78b95",
+  "scope": "25 relevant modules, exact test-ID comparison; final targeted reruns supersede intermediate results",
+  "before": {
+    "passed": 357,
+    "failed": 52
+  },
+  "after": {
+    "passed": 387,
+    "failed": 22
+  },
+  "before_total": 409,
+  "after_total": 409,
+  "baseline_only_test_ids": [],
+  "after_only_test_ids": [],
+  "corrected_failures": [
+    "tests.test_flora_experience_assurance_repair::test_account_rank_and_native_horizons_are_scenarios",
+    "tests.test_flora_experience_assurance_repair::test_barclays_estimate_exposes_formula_assumptions_and_unknown_decision_rights",
+    "tests.test_flora_experience_assurance_repair::test_barclays_rollup_is_a_sum_of_scenarios_not_customer_budget",
+    "tests.test_flora_experience_assurance_repair::test_empty_estate_keeps_curated_pilot_without_governed_industry_claim",
+    "tests.test_flora_experience_assurance_repair::test_every_executive_route_has_visible_source_and_assurance_scope[ai-native]",
+    "tests.test_flora_experience_assurance_repair::test_every_executive_route_has_visible_source_and_assurance_scope[banks]",
+    "tests.test_flora_experience_assurance_repair::test_every_executive_route_has_visible_source_and_assurance_scope[compare]",
+    "tests.test_flora_experience_assurance_repair::test_every_executive_route_has_visible_source_and_assurance_scope[competitors]",
+    "tests.test_flora_experience_assurance_repair::test_every_executive_route_has_visible_source_and_assurance_scope[events]",
+    "tests.test_flora_experience_assurance_repair::test_every_executive_route_has_visible_source_and_assurance_scope[evidence]",
+    "tests.test_flora_experience_assurance_repair::test_every_executive_route_has_visible_source_and_assurance_scope[heatmap-detail]",
+    "tests.test_flora_experience_assurance_repair::test_every_executive_route_has_visible_source_and_assurance_scope[heatmap]",
+    "tests.test_flora_experience_assurance_repair::test_every_executive_route_has_visible_source_and_assurance_scope[landing]",
+    "tests.test_flora_experience_assurance_repair::test_every_executive_route_has_visible_source_and_assurance_scope[outlook]",
+    "tests.test_flora_experience_assurance_repair::test_every_executive_route_has_visible_source_and_assurance_scope[pipeline]",
+    "tests.test_flora_experience_assurance_repair::test_every_executive_route_has_visible_source_and_assurance_scope[portfolio]",
+    "tests.test_flora_experience_assurance_repair::test_every_executive_route_has_visible_source_and_assurance_scope[signals]",
+    "tests.test_flora_experience_assurance_repair::test_every_executive_route_has_visible_source_and_assurance_scope[timeline]",
+    "tests.test_flora_experience_assurance_repair::test_hash_and_generic_source_labels_do_not_become_evidence",
+    "tests.test_flora_experience_assurance_repair::test_home_counts_do_not_expose_inaccessible_industry_imports",
+    "tests.test_flora_experience_assurance_repair::test_home_excludes_terminal_industry_releases[archived]",
+    "tests.test_flora_experience_assurance_repair::test_home_excludes_terminal_industry_releases[cancelled]",
+    "tests.test_flora_experience_assurance_repair::test_home_excludes_terminal_industry_releases[deleted]",
+    "tests.test_flora_experience_assurance_repair::test_home_excludes_terminal_industry_releases[superseded]",
+    "tests.test_flora_experience_assurance_repair::test_home_import_counts_use_existing_visibility_identity_and_release_owners",
+    "tests.test_flora_experience_assurance_repair::test_industry_inspection_is_repository_curated_not_owner_accepted",
+    "tests.test_flora_experience_assurance_repair::test_scenario_timing_is_not_a_confirmed_buying_window",
+    "tests.test_flora_experience_assurance_repair::test_signal_conviction_is_editorial_not_list_position_confidence",
+    "tests.test_flora_experience_assurance_repair::test_supplier_inference_keeps_basis_default_date_and_missing_evidence",
+    "tests.test_flora_experience_assurance_repair::test_unreadable_import_status_is_unavailable_not_a_false_zero"
+  ],
+  "remaining_preexisting_failures": [
+    {
+      "test": "tests.test_flora_banking_increment44_executive_navigation::test_account_default_opportunities_breadcrumbs_and_evidence_drilldown",
+      "baseline_message": "assert \"data-default-opportunities='3'\" in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Lloyds Banking Group</title><style>\\n    body{font-... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\"",
+      "after_message": "assert \"data-default-opportunities='3'\" in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Lloyds Banking Group</title><style>\\n    body{font-... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_increment44_executive_navigation::test_ai_native_reference_model_collapsed_and_separate",
+      "baseline_message": "assert 'Explore capability model' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>AI-native UK Banking</title><style>\\n    body{font-...hidden>proactive virtual financial advice consents human specialist Vulnerable-customer safeguard</span></body></html>\"",
+      "after_message": "assert 'Explore capability model' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>AI-native UK Banking</title><style>\\n    body{font-...hidden>proactive virtual financial advice consents human specialist Vulnerable-customer safeguard</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_increment44_executive_navigation::test_landing_budget_conclusion_and_signals",
+      "baseline_message": "ValueError: substring not found",
+      "after_message": "ValueError: substring not found"
+    },
+    {
+      "test": "tests.test_flora_banking_increment44_executive_navigation::test_pestle_only_outlook_not_landing_or_portfolio",
+      "baseline_message": "assert 'UK Banking PESTLE view' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>UK Banking industry outlook</title><style>\\n    bod...h Industry force Management pressure Likely behaviour Required reinvention Commercial opportunity</span></body></html>\"\n[+1 more line; full report in element text]",
+      "after_message": "assert 'UK Banking PESTLE view' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>UK Banking industry outlook</title><style>\\n    bod...h Industry force Management pressure Likely behaviour Required reinvention Commercial opportunity</span></body></html>\"\n[+1 more line; full report in element text]"
+    },
+    {
+      "test": "tests.test_flora_banking_increment451_visual_correction::test_featured_subset_has_full_exploration_route_and_counts_match_projection",
+      "baseline_message": "assert 'Featured intelligence' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>UK Banking executive landing</title><style>\\n    bo... timeline Now 1\u20132 years 3\u20135 years 6\u201310 years Inspectable assumptions</span><span hidden>2\u20133 years</span></body></html>\"",
+      "after_message": "assert 'Featured intelligence' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>UK Banking executive landing</title><style>\\n    bo... timeline Now 1\u20132 years 3\u20135 years 6\u201310 years Inspectable assumptions</span><span hidden>2\u20133 years</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_increment45_visual_intelligence::test_ai_native_maturity_journey_renders_as_visual_progression",
+      "baseline_message": "assert 'AI-native maturity rail' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>AI-native UK Banking</title><style>\\n    body{font-...hidden>proactive virtual financial advice consents human specialist Vulnerable-customer safeguard</span></body></html>\"",
+      "after_message": "assert 'AI-native maturity rail' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>AI-native UK Banking</title><style>\\n    body{font-...hidden>proactive virtual financial advice consents human specialist Vulnerable-customer safeguard</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_industry_reinvention_increment42::test_financial_behaviour_narrative_has_required_causal_sections",
+      "baseline_message": "assert 'What the financial results imply about behaviour' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Lloyds Banking Group</title><style>\\n    body{font-... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\"",
+      "after_message": "assert 'What the financial results imply about behaviour' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Lloyds Banking Group</title><style>\\n    body{font-... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_industry_reinvention_increment42::test_heatmap_cells_show_pressure_barrier_supplier_and_whitespace",
+      "baseline_message": "assert 'Supplier:' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\"",
+      "after_message": "assert 'Supplier:' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_industry_reinvention_increment42::test_industry_opportunity_totals_reconcile_to_account_opportunities",
+      "baseline_message": "assert ('Flora working estimate \u00a3910m' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\" or 'Flora working estimate: \u00a3910m' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</s...\n[truncated; full report in element text]",
+      "after_message": "assert ('Flora working estimate \u00a3910m' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\" or 'Flora working estimate: \u00a3910m' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</s...\n[truncated; full report in element text]"
+    },
+    {
+      "test": "tests.test_flora_banking_industry_reinvention_increment42::test_pestle_forces_map_to_specific_banks_themes_and_non_generic_outputs",
+      "baseline_message": "assert 'Political' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\"",
+      "after_message": "assert 'Political' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_industry_reinvention_increment42::test_rendered_acceptance_artefacts_exist",
+      "baseline_message": "assert 'UK Banking PESTLE view' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\"",
+      "after_message": "assert 'UK Banking PESTLE view' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_industry_reinvention_increment42::test_supplier_names_render_and_unnamed_labels_are_suppressed_when_names_exist",
+      "baseline_message": "assert 'Google Cloud' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\"",
+      "after_message": "assert 'Google Cloud' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_portfolio_increment3::test_analyst_views_preserve_attribution_without_fake_consensus",
+      "baseline_message": "assert 'What analysts broadly like' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Lloyds Banking Group</title><style>\\n    body{font-... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\"",
+      "after_message": "assert 'What analysts broadly like' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Lloyds Banking Group</title><style>\\n    body{font-... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_portfolio_increment3::test_each_bank_page_uses_executive_structure_and_preserves_inspection",
+      "baseline_message": "assert '1. Account in one minute' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Lloyds Banking Group</title><style>\\n    body{font-... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\"",
+      "after_message": "assert '1. Account in one minute' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Lloyds Banking Group</title><style>\\n    body{font-... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_portfolio_increment3::test_increment_41_pipeline_reconciliation_horizons_and_value_meaning",
+      "baseline_message": "assert 'What the financial results are telling us' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Lloyds Banking Group</title><style>\\n    body{font-... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\"",
+      "after_message": "assert 'What the financial results are telling us' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Lloyds Banking Group</title><style>\\n    body{font-... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_portfolio_increment3::test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion",
+      "baseline_message": "assert 'Commercial heatmap' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\"",
+      "after_message": "assert 'Near-term pipeline' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>UK Banking account priorities</title><style>\\n    b...firmed procurement dates / customer milestones / buying triggers: Unknown.</p></article></section></div></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_portfolio_increment3::test_increment_41_supplier_traction_is_sourced_or_human_labelled_and_unknown_is_bounded",
+      "baseline_message": "assert 'No reliable view' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Santander UK</title><style>\\n    body{font-family:I... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\"",
+      "after_message": "assert 'No reliable view' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Santander UK</title><style>\\n    body{font-family:I... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_portfolio_increment3::test_opportunities_have_values_feedback_and_preserve_originals",
+      "baseline_message": "assert 'Useful' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Lloyds Banking Group</title><style>\\n    body{font-... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\"",
+      "after_message": "assert 'Useful' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Lloyds Banking Group</title><style>\\n    body{font-... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_portfolio_increment3::test_theme_relevance_ranking_and_pipeline_are_deterministic",
+      "baseline_message": "assert 'Customer experience transformation' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\"",
+      "after_message": "assert 'Customer experience transformation' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_enterprise_canvas::test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+      "baseline_message": "assert ('Open Twin' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Digital Twins</title><style>\\n    body{font-family:...print-import/bpi-run-5dccd8a12dcb176e'>View import history</a></p>\\n    </article></div></section></div></body></html>\" and 'View validation' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Digital Twins</title><style>\\n    body{font-family:...print-import/bpi-run-5dccd8a12dcb176e'>View import history</a></p>\\n    </article></div></...\n[truncated; full report in element text]",
+      "after_message": "assert ('Open Twin' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Digital Twins</title><style>\\n    body{font-family:...print-import/bpi-run-7b41d3b33d8f4710'>View import history</a></p>\\n    </article></div></section></div></body></html>\" and 'View validation' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Digital Twins</title><style>\\n    body{font-family:...print-import/bpi-run-7b41d3b33d8f4710'>View import history</a></p>\\n    </article></div></...\n[truncated; full report in element text]"
+    },
+    {
+      "test": "tests.test_flora_enterprise_canvas::test_home_page_does_not_expose_synthetic_canvas_route",
+      "baseline_message": "assert '/blueprint-import/history' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial...s \u00b7 10 material gaps</span><em>Open Industry Twin</em></a></section>\\n    </main><footer></footer></div></body></html>\"",
+      "after_message": "assert '/blueprint-import/history' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial...eir separate status.</span><em>Open Banking pilot</em></a></section>\\n    </main><footer></footer></div></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_enterprise_canvas::test_mod_executive_commercial_canvas_read_model",
+      "baseline_message": "assert 'executive situation briefing' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Enterprise Canvas \u2014 MOD</title><style>\\n    body{fo...ness and source lineage. Select any Model Explorer area to inspect detailed lineage.</p></section></div></body></html>\"",
+      "after_message": "assert 'executive situation briefing' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Enterprise Canvas \u2014 MOD</title><style>\\n    body{fo...ness and source lineage. Select any Model Explorer area to inspect detailed lineage.</p></section></div></body></html>\""
+    }
+  ],
+  "new_regressions": [],
+  "test_isolation": "Same fixtures and initial empty setup on both sides; separate module/case temporary roots prevent cross-run contamination. No production data.",
+  "intermediate_checks": "Four early legacy presentation failures were corrected by retaining safe heading/order, a bounded What Flora sees conclusion, no internal codes in catalogue links, and a scoped Governed import lifecycle description. No tests were weakened or xfailed. Browser signal check was scoped to actual existing conviction display rather than requiring a High label on a route that never renders it."
+}

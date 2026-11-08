@@ -1,0 +1,10 @@
+{
+  "source": "Actual retained BNK-W1 current-main Factory Repair 03 fixture, isolated approved canonical subset",
+  "status": 200,
+  "checks": {
+    "1 curated Banking pilot": true,
+    "0 candidate imports": true,
+    "1 partial releases": true,
+    "Complete Industry Twin acceptance: Not established": true
+  }
+}

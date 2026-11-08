@@ -13,7 +13,77 @@ import json
 from typing import Literal
 
 from cios.applications.flora.enterprise_intelligence.models import stable_hash
-from cios.applications.flora.workspace.views import _page
+from cios.applications.flora.workspace.views import _page as _workspace_page
+
+
+def _pilot_assurance_html():
+    """Scope this existing source-only experience; never infer acceptance."""
+    return ("<aside class='card banking-assurance' data-banking-assurance='pilot'>"
+            "<strong>Curated repository Banking pilot — not accepted canonical intelligence.</strong>"
+            f"<p>Pilot snapshot date: {GENERATED_DATE}; underlying source dates vary or are unavailable. "
+            "Account rankings and AI-native horizons are strategic working scenarios. "
+            "Scenario timing is not confirmed procurement, customer milestones or buying intent.</p>"
+            "<p>Constructed values are illustrative, unverified external-services sizing, not enterprise economic value, "
+            "customer-confirmed budget or qualified commercial pipeline. Supplier positions are unverified inferences; "
+            "general market presence does not establish incumbency, renewal or displacement.</p>"
+            "<p>Conviction and account scores are editorial working assessments, not calibrated Evidence confidence. "
+            "Industry relevance is not an enterprise-specific qualified Material Pressure. "
+            "Investigate supporting Evidence, enterprise applicability, buyer, sponsor, funding and scope before commercial action.</p>"
+            "<p>Claim-level accepted Evidence: Not supplied by this pilot. Generic source labels and view hashes "
+            "do not establish canonical Evidence or accepted Observations. Existing imported and model-backed views "
+            "retain their own acceptance and permission boundaries.</p></aside>")
+
+
+def _page(title, body):
+    # All Banking renderers, including legacy wrappers, share this presentation
+    # boundary. The underlying scenario objects and estimator remain unchanged.
+    for old, new in (("Estimated contract value", "Illustrative external-services sizing"),
+                     ("Current working pipeline", "Current working pipeline scenario"),
+                     ("Total estimated pipeline", "Total illustrative scenario sizing"),
+                     ("Total current working pipeline estimate", "Total illustrative scenario sizing"),
+                     ("Near-term pipeline", "Near-term scenario sizing"),
+                     ("Medium-term pipeline", "Medium-term scenario sizing")):
+        body = body.replace(old, new)
+    notice = "" if "data-banking-assurance='pilot'" in body else _pilot_assurance_html()
+    return _workspace_page(title, notice + body)
+
+
+def _scenario_sizing_html(opportunity):
+    value = opportunity.value
+    return (f"<div class='scenario-assurance'><p><strong>Illustrative, unverified commercial scenario</strong> — "
+            f"external-services sizing: {escape(value.label)}; midpoint £{value.midpoint}m.</p>"
+            f"<p><strong>Formula:</strong> {escape(value.calculation)} "
+            "Low/high = midpoint × 0.7 / 1.4, rounded to the nearest £5m.</p>"
+            f"<p><strong>Assumptions:</strong> {escape('; '.join(value.assumptions))}</p>"
+            f"<p>Assumed scope: {escape(opportunity.scope)}; sizing duration assumption: {escape(value.duration)}. "
+            f"Annualised comparator: {escape(value.annualised)} — scenario assumption only.</p>"
+            "<p>Enterprise economic value: Not calculated. Customer-confirmed budget: Unknown. "
+            "Qualified commercial pipeline: Not established. Sponsor / buyer / funding / procurement / scope: Unknown.</p>"
+            f"<p><strong>Scenario snapshot:</strong> {GENERATED_DATE}; claim-level source/effective/customer-confirmation dates: Unknown; "
+            "no claim-level accepted Evidence or customer confirmation mapped. "
+            f"<strong>Value conviction:</strong> {escape(value.confidence)} — estimator-assigned, not Evidence confidence.</p></div>")
+
+
+def _scenario_timing_text(opportunity):
+    return (f"Scenario timing assumption: {opportunity.timing}; constructed window: {opportunity.buying_window}; "
+            f"assumed start: {opportunity.programme_start}. Confirmed procurement dates / customer milestones / buying triggers: Unknown.")
+
+
+def _scenario_rollup_html(bank):
+    values = ' + '.join(str(o.value.midpoint) for o in bank.opportunities)
+    total = sum(o.value.midpoint for o in bank.opportunities)
+    return (f"<p class='scenario-rollup'><strong>Illustrative, unverified commercial scenario sum: £{total}m.</strong> "
+            f"Formula: {values} = {total} (£m, sum of constructed midpoints); "
+            "not customer-confirmed budget or qualified commercial pipeline. Scenarios may overlap; "
+            "their sum does not establish additive funded demand.</p>")
+
+
+def _scenario_catalogue_html(banks):
+    rows = ''.join(f"<article><h3>{escape(bank.name)} — {escape(o.title)}</h3>"
+                   f"{_scenario_sizing_html(o)}<p>{escape(_scenario_timing_text(o))}</p>"
+                   f"<a href='/flora/banking/{bank.slug}'>Open bank scenario overview</a></article>"
+                   for bank in banks for o in bank.opportunities)
+    return "<section class='card'><h2>Scenario sizing assumptions and limits</h2>" + rows + "</section>"
 
 GENERATED_DATE = "2026-07-19"
 THEMES = (
@@ -301,7 +371,13 @@ PESTLE_FORCES = {
 
 def _supplier_cell(o):
     if o.supplier_entries:
-        names='; '.join(e.supplier_name + ' — ' + e.traction_label for e in o.supplier_entries[:2])
+        names='; '.join(
+            f"{e.supplier_name} — Inferred supplier position: {e.traction_label}. "
+            f"Basis ({e.insight_basis}): {e.supporting_rationale} "
+            f"Source date: {e.source_date} (supplied pilot date; may be default, not a verified contract date). "
+            f"Editorial confidence: {e.confidence}. Contract-specific accepted Evidence: Not supplied. "
+            "Verify the account relationship; do not infer renewal or displacement."
+            for e in o.supplier_entries[:2])
         return names + '; Whitespace: ' + o.whitespace
     return 'No reliable view; Whitespace: ' + o.whitespace
 
@@ -568,7 +644,7 @@ def section_nav(items):
 
 
 def executive_insight_card(title, explanation, implication, banks, confidence, href):
-    return f"<article class='card executive-insight-card'><h3>{escape(title)}</h3><p>{escape(explanation)}</p><p><strong>Commercial implication:</strong> {escape(implication)}</p><p><strong>Affected banks:</strong> {escape(', '.join(banks))}</p><p><strong>Conviction:</strong> {escape(confidence)}</p><p><a class='primary-link' href='{escape(href)}'>Explore</a></p></article>"
+    return f"<article class='card executive-insight-card'><h3>{escape(title)}</h3><p>{escape(explanation)}</p><p><strong>Commercial implication:</strong> {escape(implication)}</p><p><strong>Candidate applicability — investigate:</strong> {escape(', '.join(banks))}</p><p><strong>Editorial conviction: {escape(confidence)}</strong> — assigned by list position in this pilot, not calibrated Evidence confidence. This is not an enterprise-specific qualified Material Pressure.</p><p>Repository snapshot: {GENERATED_DATE}. Claim-level accepted Evidence and enterprise applicability require investigation.</p><p><a class='primary-link' href='{escape(href)}'>Explore</a></p></article>"
 
 
 INDUSTRY_SIGNALS = (
@@ -660,7 +736,7 @@ def heatmap_detail_page(mode, theme, bank_slug):
     b=BANKS.get(bank_slug) or next(iter(BANKS.values()))
     o=next((x for x in b.opportunities if x.theme==theme or x.category==theme), b.opportunities[0])
     body=breadcrumb((("UK Banking","/flora/banking"),("Heatmap","/flora/banking/heatmap"),(b.name,f"/flora/banking/{b.slug}")))+f"<section class='card'><h1>{escape(b.name)} — {escape(theme)}</h1><p><strong>What the assessment means:</strong> This cell summarises {escape(mode)} for one bank and one theme.</p><p><strong>Why Flora reached it:</strong> {escape(b.why_now)}</p><p><strong>Opportunity value:</strong> {o.value.label}</p><p><strong>Named suppliers:</strong> {escape(_supplier_cell(o))}</p><p><strong>Barrier:</strong> {escape(o.barrier)}</p><p><strong>Gap:</strong> {escape(b.main_whitespace)}</p><p><strong>Next action:</strong> {escape(o.next_action)}</p></section>"
-    return _page('Heatmap detail', body),200
+    return _page('Heatmap detail', body + _scenario_sizing_html(o) + f"<p>{escape(_scenario_timing_text(o))}</p>"),200
 
 
 def bank_page(slug, briefing=False):
@@ -729,7 +805,12 @@ def evidence_page(slug):
         b=BANKS.get(slug)
         rows="".join(f"<tr><td>{escape(src)}</td><td>Source document</td><td>Underlying signal</td><td>{_lineage(b)}</td></tr>" for src in (b.analyst_sources or b.sources))
         html=_page(f"Detailed inspection — {b.name}", f"<section class='hero'><h1>Level 3 governance inspection</h1><p>{escape(b.name)}</p></section><section class='card'><h2>Evidence, sources, lineage and internal identities</h2><table>{rows}</table><p>Lineage key {_lineage(b)}. Commercial Recommendations and estimates are derived views, not Evidence, Observation or Enterprise Model facts.</p></section>"); status=200
-    return html.replace('Commercial Recommendations', 'Lineage key available. Commercial Recommendations'), status
+    disclosure = ("<section class='card'><h2>Claim-level provenance limits</h2>"
+                  "<p>Generic source labels above are not accepted claim citations. "
+                  "canonical Evidence IDs / accepted Observation mappings / source locators: Not supplied. "
+                  "The lineage key is view identity only; it does not prove claim-level provenance.</p></section>")
+    html = html.replace('Source document', 'Generic source label — not verified here').replace('Underlying signal', 'Claim mapping not supplied')
+    return html.replace('</body>', disclosure + '</body>'), status
 
 # Prior-increment compatibility markers are hidden so executive progressive disclosure stays intact.
 _prev_portfolio_page = portfolio_page
@@ -924,7 +1005,7 @@ def pipeline_page():
 
 
 def portfolio_page():
-    return _page('UK Banking account priorities', _visual_css_marker() + breadcrumb((("UK Banking","/flora/banking"),("Account priorities","/flora/banking/portfolio"))) + "<section class='hero'><h1>Which banks should I focus on?</h1><p>Focus first on accounts where pressure, capacity and visible change combine into actionable executive conversations.</p></section>" + portfolio_priority_map() + _prev45_portfolio_page())
+    return _page('UK Banking account priorities', _visual_css_marker() + breadcrumb((("UK Banking","/flora/banking"),("Account priorities","/flora/banking/portfolio"))) + "<section class='hero'><h1>Which banks should I focus on?</h1><p>Focus first on accounts where pressure, capacity and visible change combine into actionable executive conversations.</p></section>" + portfolio_priority_map() + _prev45_portfolio_page() + _scenario_catalogue_html(BANKS.values()))
 
 
 def bank_page(slug, briefing=False):
@@ -1394,7 +1475,7 @@ def banking_landing_page():
 def heatmap_page(mode='theme-relevance'):
     html=_prev46d_heatmap_page(mode)
     html=html.replace('<td>', "<td class='heatmap-cell'>")
-    return html.replace('Opportunity-value summary', 'Opportunity-value summary Flora working estimate')
+    return html.replace('Opportunity-value summary', 'Opportunity-value summary — illustrative scenario sizing').replace('</body>', _scenario_catalogue_html(BANKS.values()) + '</body>')
 
 def compare_page():
     return heatmap_page('theme-relevance')
@@ -1546,9 +1627,9 @@ def analyst_history_page(slug):
 
 def enterprise_event_timeline_page(slug):
     b=BANKS[slug]
-    events=[('2024-12-31','financial results','FY2024 metrics captured from governed fixture','cost and customer transformation pressure','COH history link'),('2025-01-01','analyst view changes','Public analyst and financial press commentary fixture','expectations demand benefit proof','supplier position remains inferred where not sourced')]
-    rows=''.join(f"<tr><td>{d}</td><td>{escape(t)}</td><td>{escape(desc)}</td><td>{escape(beh)}</td><td>{escape(opp)}</td><td>Source/date lineage retained</td></tr>" for d,t,desc,beh,opp in events)
-    return _page(f'{b.name} enterprise event timeline', f"<section class='hero'><h1>{escape(b.name)} enterprise event timeline</h1>{enterprise_tabs(slug)}</section><section class='card'><table><tbody>{rows}</tbody></table></section>")
+    events=[('2024-12-31','financial results','Illustrative FY2024 snapshot anchor; not a verified event','cost and customer transformation pressure','COH history link'),('2025-01-01','analyst view changes','Illustrative commentary anchor; source event not verified','expectations demand benefit proof','supplier position remains inferred where not sourced')]
+    rows=''.join(f"<tr><td>{d}</td><td>{escape(t)}</td><td>{escape(desc)}</td><td>{escape(beh)}</td><td>{escape(opp)}</td><td>Source locator / accepted Evidence: Not supplied</td></tr>" for d,t,desc,beh,opp in events)
+    return _page(f'{b.name} enterprise event timeline', f"<section class='hero'><h1>{escape(b.name)} enterprise event timeline</h1><p>Illustrative event anchors and scenario timing; not confirmed procurement dates or programme milestones.</p>{enterprise_tabs(slug)}</section><section class='card'><table><tbody>{rows}</tbody></table></section>")
 
 def research_backlog_page(slug='lloyds'):
     b=BANKS[slug]
@@ -1680,7 +1761,7 @@ def banking_subnav():
 
 def _bank_card(b, action="Open bank"):
     top=b.opportunities[0]; lo,hi,mid=bank_totals(b)
-    return f"<article class='card bank-card' data-bank='{escape(b.slug)}'><h3><a href='/flora/banking/{b.slug}'>{escape(b.name)}</a></h3><p><strong>Account priority:</strong> {escape(b.priority)}</p><p><strong>Reinvention pressure:</strong> {escape(b.reinvention_pressure)}</p><p><strong>AI-native horizon:</strong> {escape(_bank_horizon(b))}</p><p><strong>Financial direction:</strong> {escape(b.financial_interpretation)}</p><p><strong>Current working pipeline:</strong> £{mid}m ({escape(top.value.label)} top range)</p><p><strong>Top opportunity:</strong> <a href='/flora/banking/{b.slug}/opportunity/{escape(top.id)}'>{escape(top.title)}</a></p><p><a class='primary-link' href='/flora/banking/{b.slug}'>{escape(action)}</a></p></article>"
+    return f"<article class='card bank-card' data-bank='{escape(b.slug)}'><h3><a href='/flora/banking/{b.slug}'>{escape(b.name)}</a></h3><p><strong>Working account priority:</strong> {escape(b.priority)}</p><p><strong>Reinvention pressure:</strong> {escape(b.reinvention_pressure)}</p><p><strong>AI-native strategic scenario horizon:</strong> {escape(_bank_horizon(b))}</p><p><strong>Financial direction:</strong> {escape(b.financial_interpretation)}</p><p><strong>Illustrative scenario sizing:</strong> £{mid}m ({escape(top.value.label)} top range)</p>{_scenario_rollup_html(b)}{_scenario_sizing_html(top)}<p><strong>Top opportunity:</strong> <a href='/flora/banking/{b.slug}/opportunity/{escape(top.id)}'>{escape(top.title)}</a></p><p><a class='primary-link' href='/flora/banking/{b.slug}'>{escape(action)}</a></p></article>"
 
 def banks_page():
     cards=''.join(_bank_card(b) for b in sorted(BANKS.values(), key=lambda x:x.priority_rank)[:5])
@@ -1768,7 +1849,7 @@ def pipeline_page():
     html=_prev471_pipeline().replace("<nav class='breadcrumbs'", banking_subnav()+"<nav class='breadcrumbs'",1)
     for b in BANKS.values():
         html=html.replace(f"<td>{escape(b.name)}</td>", f"<td><a href='/flora/banking/{b.slug}'>{escape(b.name)}</a></td>")
-    return html
+    return html.replace("</body>", _scenario_catalogue_html(BANKS.values()) + "</body>")
 
 # Increment 4.7.1 final repair overrides
 
@@ -2028,9 +2109,9 @@ def bank_page(slug, briefing=False):
     lo, hi, mid = bank_totals(b)
     summary = (("Revenue / income trend", b.metrics.get("Total income", b.metrics.get("Revenue / income", "Not disclosed comparably")), f"/flora/banking/{slug}/financial-performance"), ("Profit direction", b.metrics.get("Profit before tax", b.metrics.get("Operating profit", "Not disclosed comparably")), f"/flora/banking/{slug}/financial-performance"), ("Cost direction", b.metrics.get("Operating costs", b.metrics.get("Operating expenses", "Not disclosed comparably")), f"/flora/banking/{slug}/financial-performance"), ("Cost:income direction", b.metrics.get("Cost:income ratio", "Not disclosed comparably"), f"/flora/banking/{slug}/financial-performance"), ("Capital capacity", b.metrics.get("CET1 ratio", "Not disclosed comparably"), f"/flora/banking/{slug}/financial-performance"), ("Market sentiment", "Research gap: dated events required", f"/flora/banking/{slug}/market-reaction"), ("Analyst sentiment", "; ".join(b.analyst_like[:2]), f"/flora/banking/{slug}/analyst-history"))
     rows="".join(f"<li><a href='{href}'><strong>{escape(k)}:</strong> {escape(v)}</a></li>" for k,v,href in summary)
-    opps="".join(f"<li><a href='/flora/banking/{slug}/opportunity/{escape(o.id)}'>{escape(o.title)}</a> — {escape(o.value.label)} · {escape(o.buying_window)}</li>" for o in b.opportunities[:3])
+    opps="".join(f"<li><a href='/flora/banking/{slug}/opportunity/{escape(o.id)}'>{escape(o.title)}</a> — {escape(o.value.label)} · {escape(_scenario_timing_text(o))}{_scenario_sizing_html(o)}</li>" for o in b.opportunities[:3])
     body=banking_subnav()+breadcrumb((("UK Banking","/flora/banking"),(b.name,f"/flora/banking/{slug}")))+f"<section class='hero'><h1>Flora’s view of {escape(b.name)}</h1>{enterprise_tabs(slug)}<p>{escape(b.why_now)}</p></section>"
-    body+=f"<section class='card'><h2>What the financial results imply</h2><ul>{rows}</ul></section><section class='card'><h2>Current reinvention pressure</h2><p>{escape(b.reinvention_pressure)}: {escape(b.visible_response)} {escape(b.unresolved_pressure)}</p></section><section class='card'><h2>Where {escape(b.name)} sits versus peers</h2><p>{escape(b.name)} is priority {escape(str(b.priority_rank))}; compare the bank against peers by theme, pressure, value, maturity, supplier strength and whitespace.</p><p><a href='/flora/banking/compare'>Compare UK banks</a></p></section><section class='card'><h2>Top opportunities</h2><ol>{opps}</ol><p>Total current working pipeline estimate: £{mid}m.</p></section><section class='card'><h2>Opportunity timing</h2><p><a href='/flora/banking/{slug}/event-timeline'>Open opportunity timing</a></p></section><section class='card'><h2>Supplier and competitor position</h2><p>{escape(b.buying_posture_detail)} Current supplier evidence remains account-specific where sourced.</p><p><a href='/flora/banking/competitors'>Open competitor view</a></p></section><section class='card'><h2>What should be investigated next</h2><p>{escape(b.most_important_trigger)}</p></section>"
+    body+=f"<section class='card'><h2>What the financial results imply</h2><ul>{rows}</ul></section><section class='card'><h2>Working reinvention-pressure interpretation</h2><p>{escape(b.reinvention_pressure)}: {escape(b.visible_response)} {escape(b.unresolved_pressure)}</p></section><section class='card'><h2>Where {escape(b.name)} sits versus peers</h2><p>{escape(b.name)} has Working account priority {escape(str(b.priority_rank))} in this strategic working scenario; compare the bank against peers by theme, pressure, value, maturity, supplier strength and whitespace.</p><p><a href='/flora/banking/compare'>Compare UK banks</a></p></section><section class='card'><h2>Top opportunities</h2><ol>{opps}</ol>{_scenario_rollup_html(b)}</section><section class='card'><h2>Opportunity timing</h2><p><a href='/flora/banking/{slug}/event-timeline'>Open opportunity timing</a></p></section><section class='card'><h2>Supplier and competitor position</h2><p>{escape(b.buying_posture_detail)} Current supplier evidence remains account-specific where sourced.</p><p><a href='/flora/banking/competitors'>Open competitor view</a></p></section><section class='card'><h2>What should be investigated next</h2><p>{escape(b.most_important_trigger)}</p></section>"
     return _page(b.name, body), 200
 
 LLOYDS_FINANCIAL_HISTORY = (
@@ -2071,30 +2152,32 @@ def compare_page():
             val = f"£{mid}m" if monetary else (b.reinvention_pressure if mode=="Reinvention pressure" else label(max(b.theme_scores.values()) if b.theme_scores else 0))
             values.append((b, val))
         leader = values[0][0]
-        row="<tr><th>Current view</th>"+"".join(f"<td>{escape(v)}</td>" for _,v in values)+"</tr>"
+        row="<tr><th>Current view</th>"+"".join(f"<td>{escape(v)}{_scenario_rollup_html(bank) if monetary else 'Editorial working comparison, not Evidence confidence.'}</td>" for bank,v in values)+"</tr>"
         mode_slug = escape(mode.lower().replace(' ', '-'))
-        commercial_implication = 'monetary working estimates should guide prioritisation.' if monetary else 'this is a non-monetary comparison and should guide drill-down, not valuation.'
+        commercial_implication = 'illustrative external-services scenarios support discovery only, not qualified pipeline.' if monetary else 'this is a non-monetary comparison and should guide drill-down, not valuation.'
         bank_headers = ''.join(f"<th><a href='/flora/banking/{b.slug}'>{escape(b.name)}</a></th>" for b in BANKS.values())
         mode_data.append(f"<section class='card compare-mode' data-mode='{mode_slug}'><h2>{escape(mode)}</h2><h3>What Flora sees</h3><ul><li>Leading bank: <a href='/flora/banking/{leader.slug}'>{escape(leader.name)}</a></li><li>Largest difference: Lloyds and Barclays show the strongest immediate contrast in focus and timing.</li><li>Key commercial implication: {commercial_implication}</li><li>Next drill-down: <a href='/flora/banking/{leader.slug}'>Open {escape(leader.name)}</a></li></ul><table><thead><tr><th>Measure</th>{bank_headers}</tr></thead><tbody>{row}</tbody></table></section>")
-    return _page('Compare UK banks', banking_subnav()+breadcrumb((("UK Banking","/flora/banking"),("Compare UK banks","/flora/banking/compare")))+"<section class='hero'><h1>Compare UK Banks</h1><p>Select across six commercial comparison modes. Opportunity value is monetary; every other mode is non-monetary.</p></section>"+"".join(mode_data))
+    return _page('Compare UK banks', banking_subnav()+breadcrumb((("UK Banking","/flora/banking"),("Compare UK banks","/flora/banking/compare")))+"<section class='hero'><h1>Compare UK Banks</h1><p>Select across six commercial comparison modes. Opportunity value is monetary; every other mode is non-monetary.</p></section>"+"".join(mode_data) + _scenario_catalogue_html(BANKS.values()))
 
 _prev_final_opportunity_page = opportunity_page
 
 def opportunity_page(slug, opp_id):
     html, status = _prev_final_opportunity_page(slug, opp_id)
-    replacements = {
-        "lane selection opens": "commercial drill-down clarifies",
-        "duplicate link rows are avoided": "links are focused on the most useful account routes",
-        "table fallback remains": "deeper evidence remains available",
-        "selected value semantics are being shown": "the current commercial value interpretation is shown",
-    }
-    for old, new in replacements.items():
-        html = html.replace(old, new)
-    if "What Flora sees" not in html and status == 200 and slug in BANKS:
-        b = BANKS[slug]
-        visible = f"<section class='card'><h2>What Flora sees</h2><p>{escape(b.name)} has material opportunity hypotheses entering buying activity across near-term and medium-term windows. Customer experience transformation is the largest where value and pressure align; deposits, data and cloud opportunities may provide earlier entry points.</p></section>"
-        html = html.replace("</main>", visible+"</main>") if "</main>" in html else html.replace("</body>", visible+"</body>")
-    return html, status
+    bank = BANKS.get(slug)
+    opportunity = next((o for o in bank.opportunities if o.id == opp_id), None) if bank else None
+    if status != 200 or opportunity is None:
+        return html, status
+    html = html.replace(f"<h2>Estimated value</h2><p>{escape(opportunity.value.label)}</p>",
+                        "<h2>Estimated value</h2>" + _scenario_sizing_html(opportunity))
+    html = html.replace(f"<h2>Likely timing</h2><p>{escape(opportunity.timing)}</p>",
+                        f"<h2>Likely timing</h2><p>{escape(_scenario_timing_text(opportunity))}</p>")
+    html = html.replace(escape(opportunity.horizon_rationale),
+                        "Editorial scenario bucket derived from the literal timing assumption, not an evidence-backed buying trigger.")
+    # The inherited next action remains a discovery scenario, never proposal or
+    # procurement eligibility. Do not append generic current buying activity.
+    return html.replace('</body>', "<section class='card'><h2>What Flora sees</h2>"
+                        "<p>This is an unverified commercial scenario for discovery. Customer scope, buyer, sponsor, "
+                        "funding and procurement remain unknown; no current buying activity is established.</p></section></body>"), status
 
 # Compatibility text required by accepted earlier banking increments, kept non-primary.
 TIMELINE_TRACKS = {
