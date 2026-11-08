@@ -4,7 +4,7 @@ from html import escape
 
 from cios.applications.flora.banking_portfolio import (
     BANKS, GENERATED_DATE, INDUSTRY_SIGNALS, PESTLE_FORCES,
-    industry_outlook_html, pestle_view_html,
+    industry_outlook_html, pestle_view_html, _pilot_assurance_html,
 )
 from .contracts import InspectionAdapter, InspectionProfile, InspectionSection, MaterialConclusion
 
@@ -15,31 +15,31 @@ def industry_inspection_adapter(industry_id: str, headers) -> InspectionAdapter:
         raise LookupError(industry_id)
     conclusions = tuple(
         MaterialConclusion(
-            f"industry-signal-{index}", title, "governed industry interpretation",
+            f"industry-signal-{index}", title, "curated repository interpretation",
             implication, explanation,
             "Open Unknowns include the timing, affected-enterprise response and whether the pressure becomes funded demand.",
             f"/flora/banking/signals#signal-{index}", "/flora/banking/outlook#pestle",
-            "High" if index == 1 else "Moderate", GENERATED_DATE,
+            ("Editorial conviction: High" if index == 1 else "Editorial conviction: Moderate") + " — list-position assignment, not calibrated Evidence confidence", GENERATED_DATE,
         )
         for index, (title, explanation, implication, _banks, _href) in enumerate(INDUSTRY_SIGNALS[:3], 1)
     )
     profile = InspectionProfile(
-        "UK Banking", "Industry", "Flora Banking governed runtime", "Governed",
+        "UK Banking", "Industry", "Repository Banking presentation; not a canonical Industry owner", "Curated repository Banking pilot",
         "Current Banking presentation", GENERATED_DATE, GENERATED_DATE,
-        "Owner-backed runtime available", "Executive inspection available",
-        "Governed Banking sources and enterprise evidence routes", GENERATED_DATE,
-        "Owner-scoped qualifications shown per conclusion", "Material gaps retained per conclusion",
+        "Source context; canonical acceptance not established", "Illustrative commercial scenarios only",
+        "Claim-level accepted Evidence: Not supplied by this pilot", GENERATED_DATE,
+        "Editorial conviction, not calibrated Evidence confidence", "Material gaps retained per conclusion",
         "Competing pressures retained", "Banking runtime provenance",
     )
     sections = (
-        InspectionSection("executive-intelligence", "Executive", 10, industry_outlook_html,
-                          "governed industry presentation", True, True, "#material-conclusions", GENERATED_DATE, GENERATED_DATE),
+        InspectionSection("executive-intelligence", "Executive", 10, lambda: _pilot_assurance_html() + industry_outlook_html(),
+                          "curated repository presentation", True, True, "#material-conclusions", GENERATED_DATE, GENERATED_DATE),
         InspectionSection("market-dynamics", "Market dynamics", 20, pestle_view_html,
-                          "governed industry presentation", bool(PESTLE_FORCES), True, "#pestle", GENERATED_DATE, GENERATED_DATE),
+                          "curated repository presentation", bool(PESTLE_FORCES), True, "#pestle", GENERATED_DATE, GENERATED_DATE),
         InspectionSection("related-twins", "Related Twins", 40, _related_enterprises,
-                          "governed Banking relationship presentation", bool(BANKS), True, "#related-twins", GENERATED_DATE, GENERATED_DATE),
+                          "repository relationship scenarios", bool(BANKS), True, "#related-twins", GENERATED_DATE, GENERATED_DATE),
         InspectionSection("supporting-research", "Supporting research", 50, _research,
-                          "governed presentation provenance", True, True, "/flora/banking/signals", GENERATED_DATE, GENERATED_DATE),
+                          "generic source context; no accepted claim mappings", True, True, "/flora/banking/signals", GENERATED_DATE, GENERATED_DATE),
     )
     return InspectionAdapter("industry-banking", profile, sections, conclusions)
 

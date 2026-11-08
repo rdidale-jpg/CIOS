@@ -1,0 +1,1014 @@
+[
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "H/I scoped estate": false,
+      "No governed count": false
+    },
+    "passed": false,
+    "seconds": 0.246,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/flora/banking",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false,
+      "F editorial conviction": false
+    },
+    "passed": false,
+    "seconds": 0.068,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/flora/banking/barclays",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false,
+      "B/C explicit sizing and timing": false,
+      "A scenario sum": false
+    },
+    "passed": false,
+    "seconds": 0.06,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/flora/banking/barclays/opportunity/COH-BAR-001",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": false,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false,
+      "B/C explicit sizing and timing": false,
+      "D supplier inference": false,
+      "E no current demand": false
+    },
+    "passed": false,
+    "seconds": 0.085,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/flora/banking/barclays/evidence",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false,
+      "J honest provenance": false
+    },
+    "passed": false,
+    "seconds": 0.058,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/flora/banking/signals",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false,
+      "F editorial conviction": false
+    },
+    "passed": false,
+    "seconds": 0.064,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/flora/banking/timeline",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.058,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/flora/banking/ai-native",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.066,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/flora/banking/portfolio",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.059,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/flora/banking/pipeline",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.101,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/flora/banking/heatmap?mode=opportunity-value",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.076,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/flora/banking/heatmap/detail?mode=opportunity-value&theme=Cost%20transformation&bank=barclays",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false,
+      "B/C explicit sizing and timing": false,
+      "D supplier inference": false
+    },
+    "passed": false,
+    "seconds": 0.047,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/flora/banking/compare",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.052,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/flora/banking/competitors",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.067,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/flora/banking/barclays/event-timeline",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.057,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/industries/uk-banking",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.059,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "route": "/intelligence?tab=industries",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I curated route": false
+    },
+    "passed": false,
+    "seconds": 0.059,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "desktop",
+    "click_journey": "Home -> Banking -> Barclays -> scenario detail",
+    "passed": true
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "H/I scoped estate": false,
+      "No governed count": false
+    },
+    "passed": false,
+    "seconds": 0.201,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/flora/banking",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false,
+      "F editorial conviction": false
+    },
+    "passed": false,
+    "seconds": 0.069,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/flora/banking/barclays",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false,
+      "B/C explicit sizing and timing": false,
+      "A scenario sum": false
+    },
+    "passed": false,
+    "seconds": 0.061,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/flora/banking/barclays/opportunity/COH-BAR-001",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": false,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false,
+      "B/C explicit sizing and timing": false,
+      "D supplier inference": false,
+      "E no current demand": false
+    },
+    "passed": false,
+    "seconds": 0.061,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/flora/banking/barclays/evidence",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false,
+      "J honest provenance": false
+    },
+    "passed": false,
+    "seconds": 0.047,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/flora/banking/signals",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false,
+      "F editorial conviction": false
+    },
+    "passed": false,
+    "seconds": 0.051,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/flora/banking/timeline",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.045,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/flora/banking/ai-native",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.044,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/flora/banking/portfolio",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.05,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/flora/banking/pipeline",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.064,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/flora/banking/heatmap?mode=opportunity-value",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.049,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/flora/banking/heatmap/detail?mode=opportunity-value&theme=Cost%20transformation&bank=barclays",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false,
+      "B/C explicit sizing and timing": false,
+      "D supplier inference": false
+    },
+    "passed": false,
+    "seconds": 0.042,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/flora/banking/compare",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.046,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/flora/banking/competitors",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.047,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/flora/banking/barclays/event-timeline",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.046,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/industries/uk-banking",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": false,
+      "G working rankings and horizons": false
+    },
+    "passed": false,
+    "seconds": 0.048,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "route": "/intelligence?tab=industries",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I curated route": false
+    },
+    "passed": false,
+    "seconds": 0.059,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "before",
+    "viewport": "ipad",
+    "click_journey": "Home -> Banking -> Barclays -> scenario detail",
+    "passed": true
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "H/I scoped estate": true,
+      "No governed count": true
+    },
+    "passed": true,
+    "seconds": 0.298,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/flora/banking",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true,
+      "F editorial conviction": true
+    },
+    "passed": true,
+    "seconds": 0.08,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/flora/banking/barclays",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true,
+      "B/C explicit sizing and timing": true,
+      "A scenario sum": true
+    },
+    "passed": true,
+    "seconds": 0.092,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/flora/banking/barclays/opportunity/COH-BAR-001",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true,
+      "B/C explicit sizing and timing": true,
+      "D supplier inference": true,
+      "E no current demand": true
+    },
+    "passed": true,
+    "seconds": 0.091,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/flora/banking/barclays/evidence",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true,
+      "J honest provenance": true
+    },
+    "passed": true,
+    "seconds": 0.076,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/flora/banking/signals",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true,
+      "F editorial conviction": true
+    },
+    "passed": true,
+    "seconds": 0.066,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/flora/banking/timeline",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.052,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/flora/banking/ai-native",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.064,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/flora/banking/portfolio",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.071,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/flora/banking/pipeline",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.094,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/flora/banking/heatmap?mode=opportunity-value",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.056,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/flora/banking/heatmap/detail?mode=opportunity-value&theme=Cost%20transformation&bank=barclays",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true,
+      "B/C explicit sizing and timing": true,
+      "D supplier inference": true
+    },
+    "passed": true,
+    "seconds": 0.075,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/flora/banking/compare",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.053,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/flora/banking/competitors",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.07,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/flora/banking/barclays/event-timeline",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.049,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/industries/uk-banking",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.054,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "route": "/intelligence?tab=industries",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I curated route": true
+    },
+    "passed": true,
+    "seconds": 0.081,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "desktop",
+    "click_journey": "Home -> Banking -> Barclays -> scenario detail",
+    "passed": true
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "H/I scoped estate": true,
+      "No governed count": true
+    },
+    "passed": true,
+    "seconds": 0.202,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/flora/banking",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true,
+      "F editorial conviction": true
+    },
+    "passed": true,
+    "seconds": 0.078,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/flora/banking/barclays",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true,
+      "B/C explicit sizing and timing": true,
+      "A scenario sum": true
+    },
+    "passed": true,
+    "seconds": 0.082,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/flora/banking/barclays/opportunity/COH-BAR-001",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true,
+      "B/C explicit sizing and timing": true,
+      "D supplier inference": true,
+      "E no current demand": true
+    },
+    "passed": true,
+    "seconds": 0.082,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/flora/banking/barclays/evidence",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true,
+      "J honest provenance": true
+    },
+    "passed": true,
+    "seconds": 0.058,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/flora/banking/signals",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true,
+      "F editorial conviction": true
+    },
+    "passed": true,
+    "seconds": 0.06,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/flora/banking/timeline",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.057,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/flora/banking/ai-native",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.052,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/flora/banking/portfolio",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.069,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/flora/banking/pipeline",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.094,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/flora/banking/heatmap?mode=opportunity-value",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.06,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/flora/banking/heatmap/detail?mode=opportunity-value&theme=Cost%20transformation&bank=barclays",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true,
+      "B/C explicit sizing and timing": true,
+      "D supplier inference": true
+    },
+    "passed": true,
+    "seconds": 0.081,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/flora/banking/compare",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.06,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/flora/banking/competitors",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.054,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/flora/banking/barclays/event-timeline",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.054,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/industries/uk-banking",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I/M visible source scope": true,
+      "G working rankings and horizons": true
+    },
+    "passed": true,
+    "seconds": 0.059,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "route": "/intelligence?tab=industries",
+    "checks": {
+      "HTTP 200": true,
+      "No unsupported buying assertion": true,
+      "I curated route": true
+    },
+    "passed": true,
+    "seconds": 0.066,
+    "horizontal_overflow_px": 0
+  },
+  {
+    "version": "after",
+    "viewport": "ipad",
+    "click_journey": "Home -> Banking -> Barclays -> scenario detail",
+    "passed": true
+  }
+]

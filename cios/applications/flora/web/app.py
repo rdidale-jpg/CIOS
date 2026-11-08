@@ -844,6 +844,34 @@ def _flora_increment2_lineage_page(change_id: str, headers=None) -> str:
     body = f"<section class='hero'><h1>Claim-level lineage</h1><p><strong>Claim:</strong> {escape(change.change_id)}</p><p>{escape(change.what_changed)}</p></section><section class='card'><h2>Runtime lineage</h2><ol>{rows}</ol><p>Rendered lineage matches package lineage and remains non-canonical.</p></section>"
     return _flora_v2_page("Claim lineage", "focus", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
 
+def _industry_import_counts(headers):
+    """Read existing account-visible Industry lifecycle states, not acceptance.
+
+    A current promoted subset is never counted as a complete accepted Twin.
+    No access record, identity, model or lifecycle state is created here.
+    """
+    from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise
+    from cios.applications.flora.blueprint_import import BlueprintPackageRegistry
+    from cios.applications.flora.blueprint_import.mapping import industry_package
+    from cios.applications.flora.blueprint_import.validator import can_inspect_blueprint_package
+    from cios.applications.flora.blueprint_import.lifecycle import ImportLifecycleService
+    if not authenticated_flora_user(headers):
+        return 0, 0
+    candidate, partial = 0, 0
+    try:
+        for package in BlueprintPackageRegistry().list():
+            if not industry_package(package) or not can_access_enterprise(headers, package.identity.enterprise_id, package.workspace_id) or not can_inspect_blueprint_package(headers, package):
+                continue
+            state = ImportLifecycleService().get(package.import_run_id)
+            if state.state == 'promoted' and state.current:
+                partial += 1
+            elif state.state == 'received':
+                candidate += 1
+    except (OSError, ValueError):
+        return None
+    return candidate, partial
+
+
 def _flora_home_page(headers=None, question_error: str = "") -> str:
     from html import escape
     from cios.applications.flora.commercial_mission import resolve_commercial_context
@@ -857,6 +885,9 @@ def _flora_home_page(headers=None, question_error: str = "") -> str:
     horizon_counts = {h: sum(o.horizon == h for o in opportunities) for h in ("horizon_1", "horizon_2", "horizon_3")}
     participants = {o.participant_type for o in opportunities if o.participant_type}
     unknown_count = sum(len(o.unknowns) for o in opportunities)
+    import_counts = _industry_import_counts(headers or {})
+    industry_metric = (f"1 curated Banking pilot · {import_counts[0]} candidate imports · {import_counts[1]} partial releases"
+                       if import_counts is not None else "1 curated Banking pilot · Industry import status unavailable")
 
     def mission_reason(o) -> str:
         if mission is None:
@@ -911,16 +942,16 @@ def _flora_home_page(headers=None, question_error: str = "") -> str:
       <section class='workspace-heading'><p class='eyebrow'>Flora Map</p><h1>Enterprise Intelligence Workspace</h1><p class='lead'>See the intelligence estate, decide what matters and move directly to the evidence.</p></section>
       {context_banner}
       <section aria-labelledby='map-title'><div class='section-heading'><div><p class='eyebrow'>Flora Map</p><h2 id='map-title'>Enterprise Intelligence Map</h2></div><p>Choose a domain to inspect its current intelligence and next decision.</p></div><div class='estate-grid'>
-        {domain('/intelligence?tab=industries','Industries','1 governed · 0 candidates','Governed and candidate industry states are counted separately.','Open industries')}
-        {domain('/intelligence?tab=enterprises','Enterprises','6 represented · 0 owner-assessed','Owner assessment is separate from representation.','Open enterprise intelligence')}
+        {domain('/intelligence?tab=industries','Industries',industry_metric,'Governed import lifecycle with existing account visibility; partial release is not complete acceptance.','Open industries')}
+        {domain('/intelligence?tab=enterprises','Enterprises','Source context and existing Twin views','No estate-wide owner-accepted Enterprise Model count is assessed here.','Open enterprise intelligence')}
         {domain('/opportunities','Opportunities',f"{len(opportunities)} opportunity hypotheses",f"{horizon_counts['horizon_1']} H1 · {horizon_counts['horizon_2']} H2 · {horizon_counts['horizon_3']} H3",'Open opportunity pipeline')}
         {domain('/intelligence?tab=programmes','Major Programmes','Not currently summarised','Programme summary not available.','Open programmes')}
-        {domain('/intelligence?tab=participants','Market Participants',f"{len(participants)} represented · 0 owner-assessed",f"{len(participants)} competitor, partner, supplier or other participant classifications are represented.",'Open participant intelligence')}
-        {domain('/research','Research & Readiness','Research missions not currently summarised',f"{unknown_count} material gaps across represented opportunities.",'Open research and readiness')}
+        {domain('/intelligence?tab=participants','Market Participants',f"{len(participants)} participant types in derived context",'Participant-type context is separate from accepted Market Participant intelligence.','Open participant intelligence')}
+        {domain('/research','Research & Readiness','Research missions not currently summarised',f"{unknown_count} validation gaps across derived hypotheses; not a count of distinct canonical Unknowns.",'Open research and readiness')}
       </div></section>
       <section aria-labelledby='priorities-title'><div class='section-heading'><div><p class='eyebrow'>Commercial focus</p><h2 id='priorities-title'>{section_title}</h2></div><p>{section_subtitle}</p></div><div class='priority-grid'>{cards}</div></section>
       <section class='card inbox' aria-labelledby='attention-title'><p class='eyebrow'>Intelligence inbox</p><h2 id='attention-title'>Intelligence Requiring Attention</h2><div class='attention-grid'><a href='/research?filter=new-evidence'><strong>New evidence</strong><span>Not currently available</span></a><a href='/opportunities?filter=changed'><strong>Changed opportunities</strong><span>Not currently available</span></a><a href='/intelligence?tab=programmes&amp;filter=new'><strong>New programmes</strong><span>Not currently available</span></a><a href='/research?filter=gaps'><strong>Research gaps</strong><span>{unknown_count} material gaps</span></a><a href='/research?filter=stale-evidence'><strong>Evidence becoming stale</strong><span>Not currently available</span></a><a href='/governance?filter=resolved-contradictions'><strong>Resolved contradictions</strong><span>Not currently available</span></a><a href='/research?filter=monitoring-triggers'><strong>Upcoming monitoring triggers</strong><span>Not currently available</span></a></div></section>
-      <section aria-labelledby='portfolio-title'><div class='section-heading'><div><p class='eyebrow'>Industry estate</p><h2 id='portfolio-title'>Industry Portfolio</h2></div><p>One governed industry is currently available.</p></div><a class='industry-card' href='/flora/banking'><strong>UK Banking</strong><span class='status governed'>Governed</span><span>6 enterprises · {len(opportunities)} opportunity hypotheses · {unknown_count} material gaps</span><em>Open Industry Twin</em></a></section>
+      <section aria-labelledby='portfolio-title'><div class='section-heading'><div><p class='eyebrow'>Industry context</p><h2 id='portfolio-title'>Industry Portfolio</h2></div><p>Complete Industry Twin acceptance: Not established by this workspace. Model-backed visibility remains in the existing Digital Twins view.</p></div><a class='industry-card' href='/flora/banking'><strong>UK Banking</strong><span class='status'>Curated repository Banking pilot</span><span>Source and scenario context; not owner-accepted canonical intelligence. Imported candidate dossiers and partial canonical releases retain their separate status.</span><em>Open Banking pilot</em></a></section>
     """, auth)
 
 def _opportunity_pipeline():
@@ -938,7 +969,7 @@ def _workspace_tabs(active: str, tabs: list[tuple[str, str, str]]) -> str:
 def _flora_intelligence_page(headers=None, query=None) -> str:
     tab = ((query or {}).get("tab") or ["industries"])[0]
     tabs = [("industries", "Industries", "/intelligence?tab=industries"), ("enterprises", "Enterprises", "/intelligence?tab=enterprises"), ("programmes", "Programmes", "/intelligence?tab=programmes"), ("participants", "Market Participants", "/intelligence?tab=participants"), ("relationships", "Relationships", "/intelligence?tab=relationships")]
-    destinations = {"industries": ("Industry intelligence", "Open the governed UK Banking map and move from industry context into its dossiers.", "/flora/banking", "Open UK Banking"), "enterprises": ("Enterprise dossiers", "Inspect existing Enterprise Twins without changing their runtime.", "/digital-twins", "Open Twin Explorer"), "programmes": ("Major programmes", "Programme intelligence is available where the current Industry Twin provides it.", "/flora/banking", "Inspect Banking programmes"), "participants": ("Market participants", "Compare the participants represented in the governed Banking intelligence.", "/flora/banking/competitors", "Inspect participants"), "relationships": ("Relationships", "Follow existing evidence and relationship paths in Twin Explorer.", "/digital-twins", "Open Twin Explorer")}
+    destinations = {"industries": ("Industry intelligence", "Curated repository Banking pilot: source and scenario context, not accepted canonical Industry intelligence.", "/flora/banking", "Open UK Banking"), "enterprises": ("Enterprise dossiers", "Inspect existing account-visible Twin views; their owner acceptance remains separate from repository context.", "/digital-twins", "Open Twin Explorer"), "programmes": ("Major programmes", "The Banking pilot contains programme scenarios; management programmes require their own source and acceptance evidence.", "/flora/banking", "Inspect Banking programmes"), "participants": ("Market participants", "Compare editorial supplier scenarios in the curated Banking pilot; this is not verified account incumbency.", "/flora/banking/competitors", "Inspect participants"), "relationships": ("Relationships", "Follow existing evidence and relationship paths in Twin Explorer.", "/digital-twins", "Open Twin Explorer")}
     title, copy, href, action = destinations.get(tab, destinations["industries"])
     body = f"<section class='workspace-heading'><p class='eyebrow'>Intelligence</p><h1>Explore the enterprise intelligence estate.</h1><p class='lead'>Move from industry context to enterprise detail without duplicating the Twin Map.</p></section>{_workspace_tabs(tab, tabs)}<section class='card'><h2>{title}</h2><p>{copy}</p><a class='button-link' href='{href}'>{action}</a></section><section class='card'><h2>Twin Explorer</h2><p>Advanced Twin inspection remains available for evidence-led exploration.</p><a href='/digital-twins'>Open Twin Explorer</a></section>"
     return _flora_v2_page("Intelligence", "intelligence", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
