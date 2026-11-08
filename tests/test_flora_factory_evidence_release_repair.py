@@ -15,7 +15,7 @@ from cios.applications.flora.blueprint_import.promotion import CanonicalPromotio
 from cios.applications.flora.blueprint_import.review_plan import BlueprintReviewPlanCoordinator
 from cios.applications.flora.blueprint_import.twin_governance import GovernedIdentityResolutionRepository, project_twin_identity
 from cios.applications.flora.blueprint_import.lifecycle import ImportLifecycleService, TwinImportLifecycleService
-from cios.applications.flora.blueprint_import.views import review_page, approve_and_promote
+from cios.applications.flora.blueprint_import.views import approve_and_promote
 from cios.applications.flora.memory.repository import EvidenceRepository
 
 HEADERS={'X-Flora-User':'alice','X-Flora-Enterprises':'*','X-Flora-Roles':'blueprint_import_admin'}
@@ -49,7 +49,7 @@ def candidates(r):
 
 
 def prepare(r):
-    html,status=review_page(r.import_run_id,HEADERS)
+    html,status=prepare_review(r.import_run_id,HEADERS)
     assert status==200
     job=BlueprintReviewPlanCoordinator().latest_job(r.import_run_id)
     assert job['status'] in {'Ready','Not ready'},job
@@ -161,7 +161,7 @@ def test_corroborating_and_contradictory_are_distinct():
     assert mappings(second)['EV-1']['reconciliation_kind']=='corroborating'
     promote(second)
     third=receive([evidence('Opposing',contradicts_evidence_id='EV-1')],version='3',identity=IDENTITY)
-    review_page(third.import_run_id,HEADERS)
+    prepare_review(third.import_run_id,HEADERS)
     assert mappings(third)['EV-1']['reconciliation_kind']=='contradictory'
     plan=DryRunPlanningService().create_plan(third.import_run_id,'alice',HEADERS)
     with pytest.raises(BlueprintPromotionError): CanonicalPromotionService().approve_plan(third.import_run_id,plan.plan_id,'alice','test',HEADERS)
@@ -183,7 +183,7 @@ def test_similar_url_or_wording_does_not_merge_different_source_ids():
 
 def test_identity_decision_is_explicit_audited_and_not_a_legacy_rewrite():
     r=receive([dict(external_id='IND-1',record_class='industry_twin',truth_class='package_metadata',payload={}),evidence()])
-    html,status=review_page(r.import_run_id,HEADERS)
+    html,status=prepare_review(r.import_run_id,HEADERS)
     assert status==200 and '/identity' in html
     assert mappings(r)['EV-1']['disposition']=='unresolved'
     with pytest.raises(BlueprintPromotionError): promote(r)
@@ -449,3 +449,8 @@ def test_source_status_alone_cannot_promote_expired_support_as_current():
     r=receive([evidence(status='expired')])
     with pytest.raises(BlueprintPromotionError,match='inactive'):promote(r)
     assert not EvidenceRepository().list()
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")
+
+from tests.flora_security_fixtures import prepare_review

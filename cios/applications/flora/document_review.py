@@ -1485,8 +1485,11 @@ def load_run(run_id: str) -> dict[str, Any]: return _read_json(_run_path(run_id)
 
 def run_exists(run_id: str) -> bool: return _run_path(run_id).is_file()
 
-def update_reviews(run_id: str, form: dict[str, list[str]]) -> dict[str, Any]:
+def update_reviews(run_id: str, form: dict[str, list[str]], *, headers=None) -> dict[str, Any]:
+    from cios.applications.flora.access import require_capability, financial_run_enterprise_id
+    require_capability(headers, "package.review")
     run = load_run(run_id)
+    require_capability(headers, "package.review", financial_run_enterprise_id(run))
     for claim in run['claims']:
         cid = claim['claim_id']; action = (form.get(f'action_{cid}', ['pending'])[0] or 'pending')
         claim['review_state'] = action
@@ -1496,8 +1499,12 @@ def update_reviews(run_id: str, form: dict[str, list[str]]) -> dict[str, Any]:
     _write_json(_run_path(run_id), run)
     return run
 
-def apply_accepted(run_id: str) -> dict[str, Any]:
-    run = load_run(run_id); svc = ObservationMemoryService(); results=[]; rejected=[]
+def apply_accepted(run_id: str, *, headers=None) -> dict[str, Any]:
+    from cios.applications.flora.access import require_capability, financial_run_enterprise_id
+    require_capability(headers, "candidate.promote")
+    run = load_run(run_id)
+    require_capability(headers, "candidate.promote", financial_run_enterprise_id(run))
+    svc = ObservationMemoryService(); results=[]; rejected=[]
     for claim in run['claims']:
         if claim.get('review_state') not in {'accept', 'amend'}: continue
         report = svc.process_evidence(claim_to_evidence(run, claim))

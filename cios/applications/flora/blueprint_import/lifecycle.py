@@ -133,7 +133,15 @@ class TwinImportLifecycleService:
                 "audit_records_retained": "import receipt and deletion tombstone",
                 "canonical_intelligence_affected": False if not promoted else True}
 
-    def delete_candidate(self, run_id, actor, confirmation, reason="Operator deleted obsolete candidate import"):
+    def delete_candidate(self, run_id, actor, confirmation, reason="Operator deleted obsolete candidate import", *, headers=None):
+        from cios.applications.flora.access import require_capability
+        context = require_capability(headers, "blueprint_import_admin")
+        package = self.package_for_run(run_id)
+        if not package:
+            raise PermissionError("Import unavailable")
+        require_capability(headers, "blueprint_import_admin", package.identity.enterprise_id, package.workspace_id)
+        if actor != context.user_id:
+            raise PermissionError("Deletion actor does not match verified authority")
         preview = self.delete_preview(run_id)
         if not preview["permitted"] or preview["canonical_intelligence_affected"]:
             raise ValueError("Promoted/canonical releases cannot be hard-deleted; import a newer release to supersede them.")

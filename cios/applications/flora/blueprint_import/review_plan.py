@@ -75,6 +75,10 @@ class BlueprintReviewPlanCoordinator:
             return None
         return data if data.get("staging_fingerprint") == fp and data.get("status") == "Ready" else None
     def ensure_job(self, import_run_id: str, actor: str, headers: Any, ensure_defaults) -> dict[str, Any]:
+        from cios.applications.flora.access import require_capability
+        context = require_capability(headers, "package.review")
+        if actor != context.user_id:
+            raise PermissionError("Review preparation actor does not match verified authority")
         candidates = self.staging.list_candidates(import_run_id); fp = self.fingerprint(import_run_id, candidates)
         package = self.registry.get(str(candidates[0]["source_package_ref"])) if candidates else None
         ready = self.completed_summary(import_run_id, fp)

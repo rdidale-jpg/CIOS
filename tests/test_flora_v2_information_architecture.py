@@ -106,3 +106,8 @@ def test_home_neutral_and_unresolved_customer_contract(monkeypatch):
     assert "Reason shown" not in page
     for forbidden in ("runtime opportunities", "runtime intelligence", "evidence assets", "Not signed in", "active candidates"):
         assert forbidden not in page
+
+import pytest
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

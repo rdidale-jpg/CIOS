@@ -82,3 +82,8 @@ def test_industry_signal_explorer_reaches_every_underlying_signal():
         assert signal[0] in html
     for label in ["PESTLE force", "Strategic theme", "Affected bank", "Urgency", "Horizon", "Reinvention pressure", "Commercial opportunity", "Supplier impact"]:
         assert label in html
+
+import pytest
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

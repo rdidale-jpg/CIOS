@@ -1,9 +1,8 @@
 """Shared Flora product access checks."""
 from __future__ import annotations
 
-import os
 import re
-from cios.applications.flora.pilot_auth import resolve_pilot_session
+from cios.applications.flora.security import verified_context, require_verified_human
 from dataclasses import dataclass
 from typing import Any
 from urllib.parse import unquote_plus
@@ -30,41 +29,13 @@ def cookie_value(headers: Any, name: str) -> str:
     return ""
 
 
-def _trusted_proxy_headers_enabled() -> bool:
-    return os.environ.get("FLORA_TRUST_PROXY_HEADERS", "0").strip().lower() in {"1", "true", "yes", "on"}
-
-
-def _trusted_header(headers: Any, name: str) -> str:
-    if not _trusted_proxy_headers_enabled():
-        return ""
-    return str(headers.get(name) or "").strip()
-
-
 def authenticated_flora_user(headers: Any) -> str:
-    """Resolve the canonical Flora principal from the product session.
-
-    Live browser requests are cookie/session based.  Trusted proxy headers remain
-    available for the existing in-process tests and for deployments that
-    explicitly choose to map an upstream identity provider into Flora headers.
-    """
-    session = resolve_pilot_session(headers)
-    if session:
-        return session.user_id
-    if pilot_import_bypass_enabled():
-        return PILOT_IMPORT_ACTOR
-    return str(_trusted_header(headers, "X-Flora-User") or cookie_value(headers, "flora_user") or "").strip()
+    context = verified_context(headers)
+    return context.user_id if context else ""
 
 
 def flora_authentication_source(headers: Any) -> str:
-    if resolve_pilot_session(headers):
-        return "pilot_session_cookie"
-    if pilot_import_bypass_enabled():
-        return "pilot"
-    if _trusted_header(headers, "X-Flora-User"):
-        return "trusted_proxy_header"
-    if cookie_value(headers, "flora_user"):
-        return "flora_session_cookie"
-    return "none"
+    return "verified_server_context" if verified_context(headers) else "none"
 
 
 def financial_run_enterprise_id(run: dict[str, Any]) -> str:
@@ -82,31 +53,13 @@ def _contains_id(values: set[str], candidate: str) -> bool:
 
 
 def user_enterprise_access(headers: Any) -> set[str]:
-    session = resolve_pilot_session(headers)
-    if session:
-        # Pilot owner sessions deliberately expose the active workspace only;
-        # managed-enterprise authority is resolved by server policy below, not
-        # by browser-supplied enterprise claims.
-        return {session.workspace}
-    if pilot_import_bypass_enabled():
-        return {PILOT_IMPORT_WORKSPACE}
-    allowed = _trusted_header(headers, "X-Flora-Enterprises") or cookie_value(headers, "flora_enterprises")
-    return {item.strip() for item in str(allowed or "").replace("|", ",").split(",") if item.strip()}
+    context = verified_context(headers)
+    return set(context.enterprise_ids) if context else set()
 
 
 def active_flora_workspace(headers: Any) -> str:
-    """Resolve Flora's active workspace from the canonical session state."""
-    session = resolve_pilot_session(headers)
-    if session:
-        return session.workspace
-    if pilot_import_bypass_enabled():
-        return PILOT_IMPORT_WORKSPACE
-    selected = _trusted_header(headers, "X-Flora-Active-Workspace") or cookie_value(headers, "flora_active_workspace")
-    allowed = user_enterprise_access(headers)
-    if selected and ("*" in allowed or _contains_id(allowed, selected)):
-        return selected
-    concrete = sorted(w for w in allowed if w != "*")
-    return concrete[0] if len(concrete) == 1 else ""
+    context = verified_context(headers)
+    return context.workspace if context else ""
 
 
 def can_view_financial_intelligence_run(headers: Any, run: dict[str, Any]) -> bool:
@@ -162,16 +115,10 @@ class CommercialContextAuthorisationDecision:
 
 
 def commercial_context_owner(headers: Any) -> str:
-    """Resolve the single server-owned resource used by both context routes."""
-    if pilot_import_bypass_enabled():
-        return PILOT_COMMERCIAL_CONTEXT_OWNER
     return active_flora_workspace(headers)
 
 
 def commercial_context_actor(headers: Any) -> str:
-    """Resolve the canonical owner of commercial context, including explicit pilot mode."""
-    if pilot_import_bypass_enabled():
-        return PILOT_IMPORT_ACTOR
     return authenticated_flora_user(headers)
 
 
@@ -225,13 +172,8 @@ class BlueprintAuthorisationDecision:
 
 
 def raw_flora_roles(headers: Any) -> set[str]:
-    session = resolve_pilot_session(headers)
-    if session:
-        return {session.role}
-    if pilot_import_bypass_enabled():
-        return set(PILOT_BLUEPRINT_CAPABILITIES)
-    raw_roles = _trusted_header(headers, "X-Flora-Roles") or cookie_value(headers, "flora_roles")
-    return {item.strip() for item in str(raw_roles or "").replace("|", ",").split(",") if item.strip()}
+    context = verified_context(headers)
+    return set(context.roles) if context else set()
 
 
 def flora_roles(headers: Any) -> set[str]:
@@ -296,10 +238,10 @@ def can_access_enterprise(headers: Any, enterprise_id: str, workspace_id: str = 
     if not authenticated_flora_user(headers):
         return False
     allowed = user_enterprise_access(headers)
-    # Pilot authority is scoped to packages received into the server-owned
-    # pilot workspace.  It does not make the operator an enterprise owner.
-    if pilot_import_bypass_enabled():
-        return canonical_enterprise_id(workspace_id) == canonical_enterprise_id(PILOT_IMPORT_WORKSPACE)
+    # A resource's explicit workspace boundary is checked before broad enterprise
+    # grants. A wildcard does not select or authorise another workspace.
+    if workspace_id and canonical_enterprise_id(workspace_id) != canonical_enterprise_id(active_flora_workspace(headers)):
+        return False
     if "*" in allowed or _contains_id(allowed, enterprise_id):
         return True
     if not is_cios_owner(headers):
@@ -310,3 +252,14 @@ def can_access_enterprise(headers: Any, enterprise_id: str, workspace_id: str = 
     if workspace_id and canonical_enterprise_id(workspace_id) != canonical_enterprise_id(active_workspace):
         return False
     return _contains_id(allowed, active_workspace)
+
+
+def require_capability(headers: Any, capability: str, enterprise_id: str = "", workspace_id: str = ""):
+    """Service-entry guard using the existing capability and resource policy."""
+    context = require_verified_human(headers)
+    roles = flora_roles(headers)
+    if capability not in roles and not (capability == "package.review" and "blueprint_import_admin" in roles):
+        raise PermissionError("Required capability is unavailable")
+    if enterprise_id and not can_access_enterprise(headers, enterprise_id, workspace_id):
+        raise PermissionError("Resource unavailable")
+    return context

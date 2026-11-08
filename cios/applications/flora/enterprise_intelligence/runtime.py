@@ -41,7 +41,11 @@ def deterministic_brief(request, package, reason='deterministic evidence-bounded
 
 class EnterpriseIntelligenceRuntime:
     def __init__(self, retrieval=None, provider=None, validator=None): self.retrieval=retrieval or BoundedTwinRetrievalService(); self.provider=provider or provider_from_env(); self.validator=validator or ClaimValidator()
-    def generate(self, request):
+    def generate(self, request, *, headers=None):
+        from cios.applications.flora.access import require_capability
+        context = require_capability(headers, "package.review", request.enterprise_id, request.workspace_id)
+        if request.requested_by != context.user_id or request.workspace_id != context.workspace:
+            raise PermissionError("Reasoning attribution does not match verified authority")
         start=time.time(); package=self.retrieval.retrieve(request); audit={'request_id':request.request_id,'enterprise_id':package.enterprise_id,'twin_version':request.twin_version,'evidence_package_hash':stable_hash(package.to_dict()),'retrieved_object_ids':[i.stable_id for i in package.all_items()],'prompt_version':request.prompt_version_ref,'reasoning_profile':request.reasoning_profile}
         prompt=json.dumps({'profile':PROFILE,'request':request.to_dict(),'evidence_package':package.to_dict()}, ensure_ascii=False)
         diag=provider_diagnostics(); status='Running'; provider_status='Failed'; failure=''; brief=None; rejected_output=None

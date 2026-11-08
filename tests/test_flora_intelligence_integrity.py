@@ -107,13 +107,13 @@ def test_negated_source_does_not_support_positive_procurement(memory):
 def test_invalid_provider_output_is_audited_without_replacing_valid_brief(memory, tmp_path):
     req, pkg, payload = brief(memory)
     runtime = EnterpriseIntelligenceRuntime(provider=StaticJSONProvider(copy.deepcopy(payload)))
-    good = runtime.generate(req)
+    good = generate_brief(runtime,req)
     assert good['audit']['status'] == 'Succeeded'
     saved = tmp_path / 'enterprise_intelligence' / 'briefs' / (ENTERPRISE + '.json')
     prior_bytes = saved.read_bytes()
     payload['material_pressures'][0]['supporting_observation_ids'] = ['MISSING']
     bad_req = req.model_copy(update={'request_id': req.request_id + '-rejected'})
-    bad = EnterpriseIntelligenceRuntime(provider=StaticJSONProvider(payload)).generate(bad_req)
+    bad = generate_brief(EnterpriseIntelligenceRuntime(provider=StaticJSONProvider(payload)),bad_req)
     assert bad['audit']['status'] != 'Succeeded'
     assert bad['audit']['provider_status'] == 'Succeeded'
     assert bad['audit']['validation_outcome'] == 'invalid'
@@ -284,7 +284,7 @@ def test_raw_missing_schema_is_provider_success_but_intelligence_rejection(memor
     class MissingSchema:
         def generate_structured(self, **kwargs):
             return LLMResult({'enterprise_id': ENTERPRISE, 'unvalidated': 'raw output'}, 'test', 'test', {}, 0)
-    result = EnterpriseIntelligenceRuntime(provider=MissingSchema()).generate(req)
+    result = generate_brief(EnterpriseIntelligenceRuntime(provider=MissingSchema()),req)
     assert result['audit']['provider_status'] == 'Succeeded'
     assert result['audit']['status'] == 'Rejected'
     assert result['audit']['rejected_output']['unvalidated'] == 'raw output'
@@ -295,7 +295,7 @@ def test_validator_exception_is_fail_closed_and_retains_raw_output(memory):
     class BrokenValidator:
         def validate(self, *args):
             raise ValueError('Synthetic validation failure')
-    result = EnterpriseIntelligenceRuntime(provider=StaticJSONProvider(payload), validator=BrokenValidator()).generate(req)
+    result = generate_brief(EnterpriseIntelligenceRuntime(provider=StaticJSONProvider(payload), validator=BrokenValidator()),req)
     assert result['audit']['status'] == 'Rejected'
     assert result['audit']['provider_status'] == 'Succeeded'
     assert result['audit']['rejected_output']['brief_id'] == payload['brief_id']
@@ -360,3 +360,8 @@ def test_counter_evidence_remains_visible_as_conflicted_support(memory):
     source_items = {i.stable_id: i for i in pkg.selected_observations if i.object_class == 'evidence'}
     assert {'EV-FUEL', 'EV-COUNTER'} <= source_items.keys()
     assert all(i.truth_status == 'contradiction' for i in source_items.values())
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")
+
+from tests.flora_security_fixtures import generate_brief

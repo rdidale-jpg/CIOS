@@ -13,7 +13,7 @@ from html import escape
 from pathlib import Path
 from typing import Any
 
-from cios.applications.flora.access import is_cios_owner
+from cios.applications.flora.access import is_cios_owner, authenticated_flora_user
 from cios.applications.flora.storage import data_path
 from cios.applications.flora.workspace.views import _page
 
@@ -146,7 +146,7 @@ def record_download(headers: Any) -> dict[str, Any]:
     metadata = validated_export_metadata()
     if not metadata:
         raise RuntimeError("No published architecture baseline was found.")
-    entry = {"downloaded_at": _now(), "user": headers.get("X-Flora-User", "unknown") if hasattr(headers, "get") else "unknown", "package_name": metadata["package_name"], "commit_sha": metadata["commit_sha"], "asset_url": metadata["asset_url"]}
+    entry = {"downloaded_at": _now(), "user": authenticated_flora_user(headers), "package_name": metadata["package_name"], "commit_sha": metadata["commit_sha"], "asset_url": metadata["asset_url"]}
     with _download_log_path().open("a", encoding="utf-8") as fh:
         fh.write(json.dumps(entry, sort_keys=True) + "\n")
     return metadata

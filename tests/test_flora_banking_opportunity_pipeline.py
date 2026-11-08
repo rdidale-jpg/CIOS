@@ -61,3 +61,8 @@ def test_explore_links_to_pipeline_and_shape_preserves_context():
     assert 'Selected opportunity context preserved' in shape
     assert 'BK-OPP-001' in shape
     assert 'Unsupported proposal action' in shape
+
+import pytest
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

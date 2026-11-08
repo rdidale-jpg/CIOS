@@ -139,3 +139,8 @@ def test_observatory_snapshot_delta_explains_evidence_score_reasoning_and_hypoth
     assert delta["hypotheses_changed"]
     assert delta["nothing_changed"] is False
     assert delta["evidence_provenance"][0]["caused_changes"]
+
+import pytest
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

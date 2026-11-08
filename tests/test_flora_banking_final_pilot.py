@@ -107,3 +107,6 @@ def test_all_five_banks_reachable_from_relevant_journeys():
         route = f"/flora/banking/{b.slug}"
         for html in journeys:
             assert route in html
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

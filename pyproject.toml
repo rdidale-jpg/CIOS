@@ -10,3 +10,4 @@ dependencies = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = ["real_security_boundary: exercise production authentication without a fixture provider"]

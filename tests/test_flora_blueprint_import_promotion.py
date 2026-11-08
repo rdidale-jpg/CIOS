@@ -324,3 +324,6 @@ def test_review_candidate_reconciliation_distinct_from_mutation_count(monkeypatc
     assert job["proposed"]["Expected canonical mutations"] == 1
     assert job["reconciliation"]["passes"] is True
     assert job["reconciliation"]["expected_mutations"] == 1
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

@@ -163,13 +163,14 @@ def test_reference_workspace_completes_required_journey() -> None:
     assert "Architecture-safe placeholder" in html
 
 
-def test_reference_workspace_validation_action_preserves_resume_state() -> None:
+def test_reference_workspace_validation_action_preserves_resume_state(monkeypatch) -> None:
+    monkeypatch.setenv("FLORA_PUBLIC_ORIGIN", "https://flora.example.test")
     server = __import__("http.server").server.ThreadingHTTPServer(("127.0.0.1", 0), FloraWebHandler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start(); conn = HTTPConnection("127.0.0.1", server.server_port)
     try:
         body = "action=validate&journey=uk-banking-app-fraud-lloyds"
-        conn.request("POST", "/workspace/reference/validation-action", body=body, headers={"Content-Type": "application/x-www-form-urlencoded"})
+        conn.request("POST", "/workspace/reference/validation-action", body=body, headers={"Content-Type": "application/x-www-form-urlencoded", "Origin":"https://flora.example.test"})
         response = conn.getresponse()
         response.read()
         assert response.status == 303
@@ -254,3 +255,8 @@ def test_increment43_simplified_heatmap_keeps_expandable_detail_and_pipeline_val
     ]:
         assert text in html
     assert "Flora working estimate" in html
+
+import pytest
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

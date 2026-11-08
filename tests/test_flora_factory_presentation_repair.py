@@ -14,7 +14,7 @@ from cios.applications.flora.blueprint_import.semantic_twin import assemble_sema
 from cios.applications.flora.blueprint_import.key_reports import key_reports_for_enterprise
 from cios.applications.flora.blueprint_import.canonical_factual_projection import enterprise_factual_dimensions
 from cios.applications.flora.blueprint_import import BlueprintPackageRegistry,BlueprintPackageValidator
-from cios.applications.flora.blueprint_import.views import completion_page,review_page,approve_and_promote
+from cios.applications.flora.blueprint_import.views import completion_page,approve_and_promote
 from cios.applications.flora.blueprint_import import review_plan
 from cios.applications.flora.blueprint_import.executive_workspace import executive_workspace_page,_semantic_candidates
 from cios.applications.flora.blueprint_import.twin_governance import GovernedIdentityResolutionRepository
@@ -23,7 +23,7 @@ from cios.applications.flora.enterprise_canvas.service import EnterpriseCanvasSe
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
 from cios.applications.flora.memory.repository import EnterpriseModelRepository
 
-HEADERS={'X-Flora-User':'alice','X-Flora-Enterprises':'*','X-Flora-Roles':'blueprint_import_admin'}
+HEADERS={'X-Flora-User':'alice','X-Flora-Enterprises':'*','X-Flora-Roles':'blueprint_import_admin','X-Flora-Active-Workspace':'workspace-a'}
 IDENTITY=dict(twin_id='IND-TEST',twin_type='industry',primary_subject_id='IND-TEST',primary_subject_name='Isolated industry',primary_subject_class='industry',governed_scope='UK',canonical_owner='IND-TEST')
 
 @pytest.fixture(autouse=True)
@@ -197,7 +197,7 @@ def test_actual_retained_user_journey_and_honest_promotion(name):
     programmes=render('programmes-opportunities',view='aspect',collection='major-programmes')
     assert 'Major Programmes' in programmes and 'Aspect unavailable' not in programmes
     render('evidence-provenance',view='explore',collection='evidence-sources')
-    html,status=review_page(r.import_run_id,HEADERS);assert status==200
+    html,status=prepare_review(r.import_run_id,HEADERS);assert status==200
     job=review_plan.BlueprintReviewPlanCoordinator().latest_job(r.import_run_id)
     assert job['status']=='Ready' and job['reconciliation']['counts_reconcile']
     assert job['proposed']['Accepted but non-persistable']>0
@@ -233,3 +233,8 @@ def test_shared_report_remains_parent_company_disclosure_only():
     parent=next(e for e in twin.enterprises if e.name=='Barclays PLC');child=next(e for e in twin.enterprises if e.name=='Other Bank')
     assert key_reports_for_enterprise(parent,twin).company_report
     assert not key_reports_for_enterprise(child,twin).company_report
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")
+
+from tests.flora_security_fixtures import prepare_review

@@ -236,7 +236,7 @@ def test_enterprise_canvas_lineage_blocks_unauthorised_and_distinguishes_missing
 def test_blueprint_owner_canvas_access_repair_preserves_workspace_enterprise_acl_and_link(tmp_path, monkeypatch):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
-    from cios.applications.flora.blueprint_import.views import approve_and_promote, review_page, upload_and_validate_blueprint
+    from cios.applications.flora.blueprint_import.views import approve_and_promote, upload_and_validate_blueprint
     from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRepository, repair_blueprint_canvas_access
     from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
     import re
@@ -246,7 +246,7 @@ def test_blueprint_owner_canvas_access_repair_preserves_workspace_enterprise_acl
     _, status, target = upload_and_validate_blueprint({"blueprint_zip":pkg(manifest_extra={"enterprise_id":"MOD", "package_id":"MOD-CDT-Blueprint", "package_version":"1.3"}, records=records)}, {"blueprint_zip.filename":"MOD-CDT-v1.3-Flora-Blueprint.zip","blueprint_zip.content_type":"application/zip"}, owner)
     assert status == 200
     run_id = target.rsplit("/", 1)[-1]
-    review, review_status = review_page(run_id, owner)
+    review, review_status = prepare_review(run_id, owner)
     assert review_status == 200
     plan_id = re.search(r"name='plan_id' value='([^']+)'", review).group(1)
     done, done_status = approve_and_promote(run_id, {"plan_id":[plan_id],"confirm_plan":["yes"],"confirm_mutations":["yes"],"rationale":["owner approved"]}, owner)
@@ -299,7 +299,7 @@ def test_existing_blueprint_canvas_is_repaired_not_duplicated_and_no_reimport_re
 def test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs(tmp_path, monkeypatch):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
-    from cios.applications.flora.blueprint_import.views import approve_and_promote, history_page, review_page, upload_and_validate_blueprint, validation_result_page
+    from cios.applications.flora.blueprint_import.views import approve_and_promote, history_page, upload_and_validate_blueprint, validation_result_page
     from cios.applications.flora.digital_twins import digital_twins_landing_page, governed_twin_list
     from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRepository
     from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
@@ -313,7 +313,7 @@ def test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs(tmp_pa
     _, status, target = upload_and_validate_blueprint({"blueprint_zip":pkg(manifest_extra={"enterprise_id":"MOD", "package_id":"MOD-CDT-Blueprint", "package_version":"1.3"}, records=records)}, {"blueprint_zip.filename":"MOD-CDT-v1.3-Flora-Blueprint.zip","blueprint_zip.content_type":"application/zip"}, owner)
     assert status == 200
     run_id = target.rsplit("/", 1)[-1]
-    review, review_status = review_page(run_id, owner)
+    review, review_status = prepare_review(run_id, owner)
     assert review_status == 200
     plan_id = re.search(r"name='plan_id' value='([^']+)'", review).group(1)
     done, done_status = approve_and_promote(run_id, {"plan_id":[plan_id],"confirm_plan":["yes"],"confirm_mutations":["yes"],"rationale":["owner approved"]}, owner)
@@ -375,7 +375,7 @@ def test_unauthorised_and_empty_governed_twin_registry(tmp_path, monkeypatch):
 def test_mod_executive_commercial_canvas_read_model(tmp_path, monkeypatch):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     monkeypatch.setenv("FLORA_TRUST_PROXY_HEADERS", "1")
-    from cios.applications.flora.blueprint_import.views import approve_and_promote, review_page, upload_and_validate_blueprint
+    from cios.applications.flora.blueprint_import.views import approve_and_promote, upload_and_validate_blueprint
     from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
     from cios.applications.flora.memory.repository import EnterpriseModelRepository
     import re
@@ -393,7 +393,7 @@ def test_mod_executive_commercial_canvas_read_model(tmp_path, monkeypatch):
     _, status, target = upload_and_validate_blueprint({"blueprint_zip":pkg(manifest_extra={"enterprise_id":"MOD", "package_id":"MOD-CDT-Blueprint", "package_version":"1.3"}, records=records)}, {"blueprint_zip.filename":"MOD-CDT-v1.3-Flora-Blueprint.zip","blueprint_zip.content_type":"application/zip"}, owner)
     assert status == 200
     run_id = target.rsplit("/", 1)[-1]
-    review, review_status = review_page(run_id, owner)
+    review, review_status = prepare_review(run_id, owner)
     assert review_status == 200
     plan_id = re.search(r"name='plan_id' value='([^']+)'", review).group(1)
     done, done_status = approve_and_promote(run_id, {"plan_id":[plan_id],"confirm_plan":["yes"],"confirm_mutations":["yes"],"rationale":["owner approved"]}, owner)
@@ -424,3 +424,8 @@ def test_mod_executive_commercial_canvas_read_model(tmp_path, monkeypatch):
     assert "strategic sales director" not in html.lower() or "commercial" in html.lower()
     after = EnterpriseModelRepository().get("MOD").to_dict()
     assert before == after
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")
+
+from tests.flora_security_fixtures import prepare_review

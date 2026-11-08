@@ -83,3 +83,8 @@ def test_fitness_controls(tmp_path):
     assert run.stages['learning_capture']['repository_mutation_allowed'] is False
     assert 'provider' not in ''.join(run.stages.keys()).lower()
     assert len(run.audit_events)==13
+
+import pytest
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

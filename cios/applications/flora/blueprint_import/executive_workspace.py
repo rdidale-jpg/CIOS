@@ -11,7 +11,7 @@ from uuid import uuid4
 from zipfile import ZipFile
 
 from cios.applications.flora.access import (COMMERCIAL_CONTEXT_EDIT, COMMERCIAL_CONTEXT_VIEW,
-    can_access_enterprise, commercial_context_authorisation, commercial_context_owner)
+    authenticated_flora_user, can_access_enterprise, commercial_context_authorisation, commercial_context_owner)
 from cios.applications.flora.pilot_import import PILOT_IMPORT_WORKSPACE, pilot_import_bypass_enabled
 from cios.applications.flora.commercial_mission import (CommercialMission, EmployerContext,
     resolve_commercial_context, save_commercial_context)
@@ -465,6 +465,8 @@ def twin_readiness(twin: SemanticTwin, mission: CommercialMission | None = None)
 
 def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "workspace",
                              enterprise_id: str = "", collection: str = "", domain: str = "all") -> tuple[str, int]:
+    if not authenticated_flora_user(headers):
+        return _page("Access denied", "<p>Verified workspace access is required.</p>"), 403
     package = next((p for p in BlueprintPackageRegistry().list() if p.import_run_id == import_run_id), None)
     if package is None:
         return _page("Executive Intelligence Workspace unavailable", "<section class='hero'><h1>Executive Intelligence Workspace unavailable</h1><p>The import record could not be found.</p></section>"), 404
@@ -905,6 +907,8 @@ def _mission_editor(m: CommercialMission | None, employer: EmployerContext | Non
 
 
 def update_commercial_mission(import_run_id: str, headers: Any, form: dict[str, list[str]]) -> tuple[str, int]:
+    if not authenticated_flora_user(headers):
+        return _page("Access denied", "<p>Verified workspace access is required.</p>"), 403
     package = next((p for p in BlueprintPackageRegistry().list() if p.import_run_id == import_run_id), None)
     if package is None:
         return _page("Commercial context unavailable", "<h1>Commercial context unavailable</h1>"), 404
@@ -1653,6 +1657,8 @@ def _gap_block(name, current, missing, why, action, acceptance):
 
 def export_research_gap_brief(import_run_id: str, headers: Any, domain: str = "all") -> tuple[str, str, int]:
     """Authorise and generate the Markdown derivative without mutating import state."""
+    if not authenticated_flora_user(headers):
+        return _page("Access denied", "<p>Verified workspace access is required.</p>"), 403
     package = next((p for p in BlueprintPackageRegistry().list() if p.import_run_id == import_run_id), None)
     if package is None: return "Import record not found\n", "Research-Gap-and-Enrichment-Brief.md", 404
     if not (pilot_import_bypass_enabled() or (can_access_enterprise(headers, package.identity.enterprise_id, package.workspace_id) and can_inspect_blueprint_package(headers, package))):
