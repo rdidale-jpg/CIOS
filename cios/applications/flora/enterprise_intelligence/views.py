@@ -4,7 +4,7 @@ from cios.applications.flora.access import authenticated_flora_user, can_access_
 from cios.applications.flora.workspace.views import _page
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
 from .models import ReasoningRequestV1
-from .runtime import EnterpriseIntelligenceRuntime, safe_fallback
+from .runtime import EnterpriseIntelligenceRuntime, safe_fallback, is_valid_result
 
 def _li(items): return ''.join(f'<li>{escape(str(x))}</li>' for x in items)
 def _evidence_button(ids):
@@ -19,6 +19,9 @@ def executive_intelligence_brief_page(enterprise_id: str, headers) -> tuple[str,
     except Exception as exc:
         fb=safe_fallback(type(exc).__name__, evidence_cut_off=req.evidence_cut_off, enterprise_id=enterprise_id)
         return _page('Executive Intelligence Brief unavailable', f"<section class='hero'><h1>{escape(fb['title'])}</h1><p>Reason: {escape(fb['reason'])}</p><p>Evidence cut-off: {escape(fb['evidence_cut_off'])}</p><p>{escape(fb['retry_action'])}</p><p><a href='{escape(fb['model_explorer_url'])}'>Model Explorer</a></p></section>"), 200
+    if not is_valid_result(result):
+        reason=(result.get('audit') or {}).get('failure') or 'Intelligence validation does not authorise this brief.'
+        return _page('Executive Intelligence Brief unavailable', f"<section class='hero'><h1>Executive Intelligence Brief unavailable</h1><p>{escape(reason)}</p><p>Rejected output and validation diagnostics are retained in the reasoning audit.</p><p><a href='/digital-twins/{escape(enterprise_id)}/canvas'>Model Explorer</a></p></section>"), 200
     b=result['brief']; summary=b.get('executive_summary') or {}; lineage=b.get('lineage_manifest') or {}
     body=f"<section class='hero'><h1>Executive Intelligence Brief</h1><p>Strategic-sales interpretation from the governed Twin only. Generated interpretations are transient unless approved.</p><p><a href='/digital-twins/{escape(enterprise_id)}/canvas'>Model Explorer</a></p></section>"
     body += "<section class='card'><h2>Executive Summary</h2>"+''.join(f"<p><strong>{escape(k.replace('_',' ').title())}:</strong> {escape(str(v))}</p>" for k,v in summary.items())+"</section>"

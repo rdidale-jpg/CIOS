@@ -15,7 +15,7 @@ import re
 from pathlib import Path
 from typing import Iterable
 
-from cios.applications.flora.memory.models import EnterpriseModel, Observation
+from cios.applications.flora.memory.models import EnterpriseModel, Observation, now_iso
 from cios.applications.flora.live.source_registry import canonical_enterprise_id
 
 OBSERVATION_LEDGER_PATH = data_path('memory','observations.jsonl')
@@ -63,7 +63,7 @@ class ObservationRepository:
         existing = self.get_by_fingerprint(observation.observation_fingerprint or "")
         if existing:
             evidence = tuple(dict.fromkeys([*existing.supporting_evidence_ids, *observation.supporting_evidence_ids]))
-            history_changed = evidence != existing.supporting_evidence_ids or observation.confidence != existing.confidence
+            history_changed = evidence != existing.supporting_evidence_ids or observation.confidence > existing.confidence
             if history_changed:
                 existing.supporting_evidence_ids = evidence
                 existing.confidence = max(existing.confidence, observation.confidence)
@@ -72,6 +72,24 @@ class ObservationRepository:
             return existing
         self._append_record(observation.to_dict())
         return observation
+
+    def record_conflict(self, observation_ids: Iterable[str]) -> None:
+        """Link both positions in the existing ledger without replacing either claim."""
+        ids = set(observation_ids)
+        rows = self.list()
+        changed = False
+        for row in rows:
+            if row.observation_id not in ids:
+                continue
+            peers = tuple(sorted(ids - {row.observation_id}))
+            refs = tuple(dict.fromkeys((*row.contradicted_by_observation_ids, *peers)))
+            if row.contradiction_state != 'unresolved' or refs != row.contradicted_by_observation_ids:
+                row.contradiction_state = 'unresolved'
+                row.contradicted_by_observation_ids = refs
+                row.updated_at = now_iso()
+                changed = True
+        if changed:
+            self._rewrite(rows)
 
     def _append_record(self, row: dict) -> None:
         ensure_parent_writable(self.path)
