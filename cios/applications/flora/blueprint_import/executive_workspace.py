@@ -107,7 +107,8 @@ def _canonical_factual_html(projection: CanonicalFactualProjection, *, include_s
     rows = []
     for section in projection.sections:
         values = "".join(f"<li>{escape(human_readable_fact(value))}</li>" for value in section.values)
-        rows.append(f"<article><h3>{escape(section.label)}</h3><ul>{values}</ul></article>")
+        label="<p>Source-supplied financial narrative / candidate interpretation — not verified canonical financial facts.</p>" if section.label=='Financial context' and projection.family=='Enterprise Dossier' else ''
+        rows.append(f"<article><h3>{escape(section.label)}</h3>{label}<ul>{values}</ul></article>")
     facts = "".join(rows) or "<p><strong>Facts:</strong> No factual fields are mapped in the canonical factual projection.</p>"
     state = ("<aside class='executive-status' role='status'><strong>Factual presence</strong> — imported candidate.</aside>") if include_state else ""
     evidence = _linked_list("Evidence", projection.evidence_refs, "No linked Evidence supplied.")
@@ -134,6 +135,8 @@ def _enterprise_dimension_html(dimension: EnterpriseFactualDimension) -> str:
     else:
         from .presentation_semantics import human_readable_fact
         body = "<ul>" + "".join(f"<li>{escape(human_readable_fact(value))}</li>" for value in dimension.values) + "</ul>"
+    if dimension.key=="financial" and dimension.present:
+        body="<p class='pill'>Source-supplied financial narrative / candidate interpretation — not verified canonical financial facts.</p>"+body
     uncertainty = (f"<details><summary>Evidence and uncertainty</summary><p><strong>Evidence:</strong> "
                    f"{escape(', '.join(dimension.evidence_refs) or 'No linked evidence supplied')}</p>"
                    f"<p><strong>Unknowns:</strong> {escape(', '.join(dimension.unknown_refs) or 'None supplied')}</p>"
@@ -170,7 +173,7 @@ def _executive_enterprise_intelligence_html(ent: SemanticEnterprise, twin: Seman
             f"<article><h3>Commercial significance</h3><p>{escape(intelligence.commercial_significance)}</p></article>"
             f"<article><h3>Change &amp; investment signals</h3><ul>{signals}</ul></article>"
             f"<article><h3>Commercial opportunities</h3><div class='executive-opportunities'>{opportunities}</div></article>"
-            f"<article><h3>Watchpoints</h3><ul>{watchpoints}</ul></article>"
+            f"<article><h3>Watchpoints</h3><p>Source-supplied opportunity timing only; no Watchpoint object is created.</p><ul>{watchpoints}</ul></article>"
             f"<article><h3>Evidence position</h3><p>{escape(intelligence.evidence_statement)}</p></article></div>{trace}</section>")
 
 
@@ -209,6 +212,8 @@ def _executive_intelligence_quality_html(twin: SemanticTwin) -> str:
 
 def _key_reports_html(ent: SemanticEnterprise, twin: SemanticTwin, run_id: str) -> str:
     reports = key_reports_for_enterprise(ent, twin)
+    unresolved=[row for row in (reports.trace.qualifications if reports.trace else ()) if row.company_candidate and not row.subject_match]
+    identity_notice=("<p class='warning'>Report identity unresolved for company selection: "+escape(', '.join(business_object_id(row.source) for row in unresolved))+". Supplied report Evidence is retained; publisher and title cannot establish the primary subject.</p>") if unresolved else ''
     def card(report: KeyReport | None, label: str, state: str = "") -> str:
         if report is None:
             empty = ("NO QUALIFYING FINANCIAL REPORTING EVIDENCE" if state == "STATE 4"
@@ -232,7 +237,7 @@ def _key_reports_html(ent: SemanticEnterprise, twin: SemanticTwin, run_id: str) 
                 f"<p><strong>Financial reporting state:</strong> {escape(state)}</p>"
                 f"<p><strong>Availability:</strong> {escape(report.availability)}</p>"
                 f"<h5>Key findings</h5>{findings}<p>{source + (' · ' if source else '')}{evidence}</p>{document_state}</article>")
-    return ("<section class='card key-reports' id='key-reports'><h2>Key reports</h2>"
+    return ("<section class='card key-reports' id='key-reports'><h2>Key reports</h2>"+identity_notice+
             "<p>Best qualifying financial-reporting result selected from governed Enterprise Evidence.</p>"
             + card(reports.financial_selection, "Company financial reporting", reports.financial_state)
             + card(reports.external_report, "Latest external analyst / market research") + "</section>")
@@ -378,7 +383,7 @@ def _major_programme_html(programme: SemanticObject, ent: SemanticEnterprise, tw
     title = _field(programme, "title") or programme.statement or _display(programme, "Programme")
     description = programme.statement if programme.statement != title else ""
     return (
-        f"<article data-business-object-id='{escape(business_object_id(programme))}'>"
+        f"<article data-business-object-id='{escape(business_object_id(programme))}'>{_candidate_association_lineage(programme,ent,twin)}"
         f"<p class='pill'>{escape(_association_type(programme, ent, twin) or 'Enterprise programme')}</p>"
         f"<h3>{escape(title)}</h3>"
         + (f"<p>{escape(description)}</p>" if description else "")
@@ -481,13 +486,13 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
     identity = project_twin_identity(package)
     title = str(inspection.get("twin_title") or inspection.get("package_title") or identity.primary_subject_name or package.identity.package_id)
     if view == "explore":
-        return _page(f"Explore Twin — {title}", _styles() + _pilot_diag_context_header(package, summary) + _explorer(twin, import_run_id, mission, collection, domain) + _pilot_page_reconciliation(twin, "Evidence")), 200
+        return _page(f"Explore Twin — {title}", _styles() + "<aside class='executive-status'>Source research / staged candidate view. Partial canonical promotion does not establish complete Industry Twin acceptance. Candidate dossiers are separate from durable Enterprise Model truth.</aside>" + _pilot_diag_context_header(package, summary) + _explorer(twin, import_run_id, mission, collection, domain) + _pilot_page_reconciliation(twin, "Evidence")), 200
     if view == "health":
-        return _page(f"Research Gaps — {title}", _styles() + _mission_indicator(mission, employer_context, import_run_id, domain) + _research_gaps(twin, import_run_id, mission)), 200
+        return _page(f"Research Gaps — {title}", _styles() + "<aside class='executive-status'>Source research / staged candidate view. Partial canonical promotion does not establish complete Industry Twin acceptance. Candidate dossiers are separate from durable Enterprise Model truth.</aside>" + _mission_indicator(mission, employer_context, import_run_id, domain) + _research_gaps(twin, import_run_id, mission)), 200
     if view == "diagnostics":
-        return _page(f"Advanced diagnostics — {title}", _styles() + _advanced_diagnostics(twin, import_run_id, summary, mission)), 200
+        return _page(f"Advanced diagnostics — {title}", _styles() + "<aside class='executive-status'>Source research / staged candidate view. Partial canonical promotion does not establish complete Industry Twin acceptance. Candidate dossiers are separate from durable Enterprise Model truth.</aside>" + _advanced_diagnostics(twin, import_run_id, summary, mission)), 200
     if view == "aspect":
-        return _page(f"{collection.replace('-', ' ').title()} — {title}", _styles() + _aspect_page(twin, import_run_id, title, collection, domain, mission)), 200
+        return _page(f"{collection.replace('-', ' ').title()} — {title}", _styles() + "<aside class='executive-status'>Source research / staged candidate view. Partial canonical promotion does not establish complete Industry Twin acceptance. Candidate dossiers are separate from durable Enterprise Model truth.</aside>" + _aspect_page(twin, import_run_id, title, collection, domain, mission)), 200
     if view == "enterprise":
         # Resolve navigation inside this assembled import.  Association reads
         # below consume ``ent.identity_key`` (the candidate object identity),
@@ -495,10 +500,10 @@ def executive_workspace_page(import_run_id: str, headers: Any, *, view: str = "w
         ent = next((e for e in twin.enterprises if e.presentation_key == enterprise_id), None)
         if ent is None:
             return _page("Enterprise dossier unavailable", "<section class='hero'><h1>Enterprise dossier unavailable</h1></section>"), 404
-        return _page(f"Enterprise Intelligence — {ent.name}", _styles() + _dossier(ent, twin, import_run_id, mission)), 200
+        return _page(f"Enterprise Intelligence — {ent.name}", _styles() + "<aside class='executive-status'>Source research / staged candidate view. Partial canonical promotion does not establish complete Industry Twin acceptance. Candidate dossiers are separate from durable Enterprise Model truth.</aside>" + _dossier(ent, twin, import_run_id, mission)), 200
     if view == "mission":
-        return _page("Configure Commercial Mission", _styles() + _mission_editor(mission, employer_context, import_run_id, domain)), 200
-    body = _styles() + _hero(title) + _primary_nav(import_run_id, "map") + _mission_indicator(mission, employer_context, import_run_id, domain)
+        return _page("Configure Commercial Mission", _styles() + "<aside class='executive-status'>Source research / staged candidate view. Partial canonical promotion does not establish complete Industry Twin acceptance. Candidate dossiers are separate from durable Enterprise Model truth.</aside>" + _mission_editor(mission, employer_context, import_run_id, domain)), 200
+    body = _styles() + "<aside class='executive-status'>Source research / staged candidate view. Partial canonical promotion does not establish complete Industry Twin acceptance. Candidate dossiers are separate from durable Enterprise Model truth.</aside>" + _hero(title) + _primary_nav(import_run_id, "map") + _mission_indicator(mission, employer_context, import_run_id, domain)
     if not twin.enterprises:
         body += f"<aside class='mission-indicator' role='status'>Twin identity and governed scope have not yet been confirmed. Resolve Twin scope through <a href='/blueprint-import/{escape(import_run_id)}/review'>Review candidate governance</a>. <a href='/blueprint-import/{escape(import_run_id)}/inspect'>Inspect import decisions</a>. <a href='/blueprint-import/{escape(import_run_id)}/validation'>View package validation</a>.</aside>"
     body += _domain_lenses(import_run_id, domain) + _twin_map(twin, import_run_id, mission, domain)
@@ -936,7 +941,7 @@ def update_commercial_mission(import_run_id: str, headers: Any, form: dict[str, 
         submitted_mission = CommercialMission.from_dict(actor, values)
         submitted_employer = EmployerContext.from_dict(employer_values)
         form_html = _mission_editor(submitted_mission, submitted_employer, import_run_id, str(values.get("return_domain") or "all"))
-        return _page("Settings not saved", _styles() + f"<aside class='mission-indicator' role='alert'><strong>Settings not saved:</strong> {escape(str(exc))}</aside>" + form_html), 400
+        return _page("Settings not saved", _styles() + "<aside class='executive-status'>Source research / staged candidate view. Partial canonical promotion does not establish complete Industry Twin acceptance. Candidate dossiers are separate from durable Enterprise Model truth.</aside>" + f"<aside class='mission-indicator' role='alert'><strong>Settings not saved:</strong> {escape(str(exc))}</aside>" + form_html), 400
     domain = str(values.get("return_domain") or "all")
     return f"/blueprint-import/{import_run_id}?domain={domain}", 303
 
@@ -1088,14 +1093,14 @@ def _dossier(ent, twin, run_id, mission):
     sections.append(_enterprise_dimension_html(dimensions["procurements"]))
     sections.append(_enterprise_dimension_html(dimensions["transformation"]))
     opportunities=_associated_records(twin, ent, lambda o: 'opportun' in o.kind); ready_opps=[o for o in opportunities if o.statement or _field(o,'client_problem','customer_problem','problem','title')]
-    sections.append("<section class='card'><h2>Commercial Opportunities</h2>"+"".join(f"<div data-business-object-id='{escape(business_object_id(o))}'><p class='pill'>{escape(_association_type(o, ent, twin) or 'Enterprise opportunity')}</p>"+_opportunity_card(o,run_id,twin)+"</div>" for o in ready_opps)+"</section>" if ready_opps else gap("Commercial Opportunities", f"{len(opportunities)} associated candidate records supplied.", ("canonically related opportunity",), "No opportunity can be shown without an explicit relationship."))
+    sections.append("<section class='card'><h2>Commercial Opportunities</h2>"+"".join(f"<div data-business-object-id='{escape(business_object_id(o))}'>{_candidate_association_lineage(o,ent,twin)}<p class='pill'>{escape(_association_type(o, ent, twin) or 'Enterprise opportunity')}</p>"+_opportunity_card(o,run_id,twin)+"</div>" for o in ready_opps)+"</section>" if ready_opps else gap("Commercial Opportunities", f"{len(opportunities)} associated candidate records supplied.", ("canonically related opportunity",), "No opportunity can be shown without an explicit relationship."))
     sources=[o for o in relevant if o.kind=='evidence']
     source_html = "".join(_source_item(o) for o in sources) if sources else ("<ul>" + "".join(f"<li><code>{escape(ref)}</code></li>" for ref in factual.evidence_refs) + "</ul>" if factual.evidence_refs else "<p><strong>Insufficient.</strong> No directly linked sources are supplied.</p>")
     sections.append("<section class='card'><h2>Evidence and Uncertainty</h2>"+source_html+f"<p><strong>Unknowns:</strong> {len(factual.unknown_refs)} · <strong>Contradictions:</strong> {len(factual.contradiction_refs)}</p></section>")
     sections.append(f"<section class='card'><h2>Research Gaps</h2><p>The same completeness requirements shown above define the researcher brief.</p><a href='/blueprint-import/{escape(run_id)}/health'>Open Research Gaps</a></section>")
     sections.append(f"<section class='card'><h2>Advanced Inspection</h2><p>Incomplete records, evidence, lineage and candidate governance remain inspectable.</p><a href='/blueprint-import/{escape(run_id)}/explore'>Open Advanced Inspection</a></section>")
     section_nav = "<nav class='section-nav' aria-label='On this page'><a href='#enterprise-overview'>Overview</a><a href='#major-programmes'>Programmes</a><a href='#enterprise-opportunities'>Opportunities</a><a href='#research-needs'>Research required</a></nav>"
-    rendered = "".join(sections).replace("<section class='card'><h2>Major Programmes", "<section class='card' id='major-programmes'><h2>Major Programmes").replace("<section class='card'><h2>Opportunities", "<section class='card' id='enterprise-opportunities'><h2>Opportunities").replace("<section class='card'><h2>Research Gaps", "<section class='card' id='research-needs'><h2>Remaining Research Needs")
+    rendered = "".join(sections).replace("<section class='card'><h2>Major Programmes", "<section class='card' id='major-programmes'><h2>Major Programmes").replace("<section class='card'><h2>Commercial Opportunities", "<section class='card' id='enterprise-opportunities'><h2>Commercial Opportunities").replace("<section class='card'><h2>Research Gaps", "<section class='card' id='research-needs'><h2>Remaining Research Needs")
     review = ImportHumanReviewRepository().get(run_id)
     promoted = ImportLifecycleService().get(run_id).state == "promoted"
     import_state = human_import_state(review, promoted)
@@ -1107,6 +1112,16 @@ def _associated_records(twin: SemanticTwin, ent: SemanticEnterprise, predicate) 
     kinds = {obj.kind for obj in twin.objects if predicate(obj)}
     return [obj for obj, _relationship_type, _relationship_id
             in enterprise_associations(twin, ent, kinds)]
+
+
+def _candidate_association_lineage(obj,ent,twin):
+    associations=[row for row in enterprise_associations(twin,ent,{obj.kind}) if business_object_id(row[0])==business_object_id(obj)]
+    edges={business_object_id(row.relationship):row for row in resolve_relationships(twin)}
+    links=[]
+    for _,kind,identifier in associations:
+        edge=edges.get(identifier)
+        if edge: links.append(f"{identifier}: {edge.source_id} → {edge.target_id} ({kind}; {edge.status})")
+    return f"<p class='pill'>Source-backed candidate research — not a canonical Programme or Opportunity</p><p><strong>Association lineage:</strong> {escape('; '.join(links) or 'Unresolved')}<br><strong>Source record:</strong> {escape(business_object_id(obj))} · {escape(str(obj.source_file))} · {escape(str(obj.source_location))}</p>"
 
 
 def _association_type(obj: SemanticObject, ent: SemanticEnterprise, twin: SemanticTwin | None = None) -> str:
@@ -1226,12 +1241,13 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
     if key not in ASPECT_LABELS: return "<section class='card'><h1>Aspect unavailable</h1></section>"
     a=next(x for x in twin_readiness(twin, mission) if x.key==key)
     objects=_filter_domain(twin.objects, domain)
+    requirements=list(research_requirements(twin,executive_assessments(twin),aspect=key))
     if key=="enterprises":
         cards="".join(_enterprise_card(e, run_id) for e in twin.enterprises)
         owner_assessed = len(twin.enterprises) if _owner_assessed(twin, key) else 0
-        enterprise_requirements = [r for r in research_requirements(twin, executive_assessments(twin)) if r.aspect == key]
+        enterprise_requirements = requirements
         contracts = "".join(f"<article class='card'><h3>{escape(r.subject)} research requirement</h3><p><strong>Find:</strong> {escape(', '.join(r.missing_fields))}.</p><p><strong>Sources:</strong> {escape(', '.join(r.source_categories))}.</p><p><strong>Acceptance test:</strong> {escape(r.acceptance_test)}</p></article>" for r in enterprise_requirements)
-        content=f"<p><strong>{len(twin.enterprises)} canonical enterprises · {owner_assessed} owner-assessed enterprises</strong></p><div class='enterprise-grid'>{cards or '<p>No enterprise identities supplied.</p>'}</div><h2>Subject-specific research requirements</h2>{contracts}"
+        content=f"<p><strong>{len(twin.enterprises)} supplied enterprise dossiers · {owner_assessed} owner-assessed dossiers</strong></p><div class='enterprise-grid'>{cards or '<p>No enterprise identities supplied.</p>'}</div><h2>Subject-specific research requirements</h2>{contracts}"
     elif key=="industry-overview":
         rows=[o for o in objects if o.kind == 'industry_twin']
         def section(name, body=""):
@@ -1248,7 +1264,7 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
         content += section("Transformation themes", "<p>Supplied transformation themes are retained in the structured industry facts above.</p>")
         content += section("Commercial implications", "<p>Each supplied implication is retained as an individual structured item above.</p>")
         content += section("Evidence and uncertainty", f"<p><strong>{len(twin.of_kind('evidence'))} Evidence · {len(twin.of_kind('unknown'))} Unknowns · {len(twin.of_kind('contradiction'))} Contradictions</strong></p>")
-        content += f"<section><h2>Residual research</h2><p>Complete only the unsupported industry dimensions with dated, attributable evidence or explicit Unknowns.</p></section><section><h2>Advanced Inspection</h2><p><a href='/blueprint-import/{escape(run_id)}/explore'>Inspect canonical records, evidence and lineage</a></p></section>"
+        content += f"<section><h2>Residual research</h2><p>Complete only the unsupported industry dimensions with dated, attributable evidence or explicit Unknowns.</p></section><section><h2>Advanced Inspection</h2><p><a href='/blueprint-import/{escape(run_id)}/explore'>Inspect source records, Evidence and lineage</a></p></section>"
     elif key=="market-participants":
         identified=list(next((c.objects for c in business_collections(twin, include_empty=True, domain=domain) if c.key=='market-participants'), ()))
         cards = "".join(_executive_record_card(o) for o in identified if executive_record_view_model(o).fields)
@@ -1276,7 +1292,6 @@ def _aspect_page(twin, run_id, title, key, domain, mission):
         cards = "".join(_canonical_factual_html(factual_projection_for_object(o, "Reinvention Assessment")) for o in rows)
         canonical = sum(o.kind in {'ai_reinvention_assessment', 'reinvention_assessment'} for o in rows)
         content=(f"<p><strong>{len(rows)} candidate pressure {'record' if len(rows)==1 else 'records'} supplied</strong></p><p><strong>{canonical} canonical timing {'assessment' if canonical==1 else 'assessments'}.</strong> Remaining records are retained as candidate facts; no owner assessment is supplied and none is silently discarded.</p>" + cards if rows else "<p>No candidate pressure or timing assessment records were supplied.</p>")
-    requirements = [r for r in research_requirements(twin, executive_assessments(twin)) if r.aspect == key]
     fields = tuple(dict.fromkeys(field for r in requirements for field in r.missing_fields))
     sources = tuple(dict.fromkeys(source for r in requirements for source in r.source_categories))
     acceptance = requirements[0].acceptance_test if requirements else "Return sourced applicable fields or explicit Unknowns."

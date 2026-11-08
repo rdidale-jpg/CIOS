@@ -317,7 +317,9 @@ def test_review_candidate_reconciliation_distinct_from_mutation_count(monkeypatc
     r, _, p=_plan_with(monkeypatch,tmp_path,records)
     from cios.applications.flora.blueprint_import.review_plan import BlueprintReviewPlanCoordinator
     job=BlueprintReviewPlanCoordinator().ensure_job(r.import_run_id,"alice",PROMOTE_HEADERS, lambda: None)
-    assert job["accepted_canonical"] == 3
+    assert job["candidate_summary"]["Accepted"] == 3
+    assert job["accepted_canonical"] == 1
+    assert job["reconciliation"]["accepted_staged"] == 3
     assert job["proposed"]["Accepted support records"] == 2
     assert job["proposed"]["Expected canonical mutations"] == 1
     assert job["reconciliation"]["passes"] is True

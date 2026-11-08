@@ -1,0 +1,143 @@
+{
+  "baseline_sha": "cf7942fabb5f456f827c08f88e0d189a46ebc69f",
+  "scope": "35 runner modules plus shared profile contract; final focused and contract reruns override intermediate outcomes by exact test ID",
+  "before": {
+    "passed": 484,
+    "failed": 37
+  },
+  "after": {
+    "passed": 500,
+    "failed": 21
+  },
+  "before_total": 521,
+  "after_total": 521,
+  "baseline_only_test_ids": [],
+  "after_only_test_ids": [],
+  "corrected_failures": [
+    "tests.test_flora_blueprint_import_promotion::test_review_candidate_reconciliation_distinct_from_mutation_count",
+    "tests.test_flora_factory_presentation_repair::test_actual_retained_user_journey_and_honest_promotion[BNK-W1]",
+    "tests.test_flora_factory_presentation_repair::test_actual_retained_user_journey_and_honest_promotion[TEL-W5]",
+    "tests.test_flora_factory_presentation_repair::test_actual_retained_user_journey_and_honest_promotion[TEL-W6]",
+    "tests.test_flora_factory_presentation_repair::test_aspect_research_requirements_preserve_existing_filtered_output",
+    "tests.test_flora_factory_presentation_repair::test_banking_associations_are_typed_directional_and_shared_by_customer_view",
+    "tests.test_flora_factory_presentation_repair::test_barclays_report_uses_explicit_governed_alias_not_publisher",
+    "tests.test_flora_factory_presentation_repair::test_failed_completion_does_not_claim_successful_partial_promotion_or_model_acceptance",
+    "tests.test_flora_factory_presentation_repair::test_financial_position_uses_existing_dimension_and_retains_source_evidence",
+    "tests.test_flora_factory_presentation_repair::test_generic_canvas_has_no_mod_strategy_or_receipt_material_change",
+    "tests.test_flora_factory_presentation_repair::test_industry_completion_opens_existing_workspace_and_does_not_create_enterprise_canvas_access",
+    "tests.test_flora_factory_presentation_repair::test_mod_specific_read_model_is_retained_without_claiming_receipt_is_material_change",
+    "tests.test_flora_factory_presentation_repair::test_producer_supplied_alias_is_resolved_without_legal_suffix_guessing",
+    "tests.test_flora_factory_presentation_repair::test_review_counts_partition_staged_support_nonpersistable_and_canonical_effects",
+    "tests.test_flora_factory_presentation_repair::test_review_status_counts_do_not_hide_blocking_canonical_mappings",
+    "tests.test_flora_factory_presentation_repair::test_shared_report_remains_parent_company_disclosure_only"
+  ],
+  "remaining_preexisting_failures": [
+    {
+      "test": "tests.test_flora_banking_industry_reinvention_increment42::test_financial_behaviour_narrative_has_required_causal_sections",
+      "baseline_reason": "assert 'What the financial results imply about behaviour' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Lloyds Banking Group</title><style>\\n    body{font-... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\"",
+      "after_reason": "assert 'What the financial results imply about behaviour' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Lloyds Banking Group</title><style>\\n    body{font-... commercial scope \u2192 opportunity title</span><span hidden>Independently derived title?</strong> No</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_industry_reinvention_increment42::test_heatmap_cells_show_pressure_barrier_supplier_and_whitespace",
+      "baseline_reason": "assert 'Supplier:' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\"",
+      "after_reason": "assert 'Supplier:' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_industry_reinvention_increment42::test_industry_opportunity_totals_reconcile_to_account_opportunities",
+      "baseline_reason": "assert ('Flora working estimate \u00a3910m' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\" or 'Flora working estimate: \u00a3910m' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</s...\n[truncated; full report in element text]",
+      "after_reason": "assert ('Flora working estimate \u00a3910m' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\" or 'Flora working estimate: \u00a3910m' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</s...\n[truncated; full report in element text]"
+    },
+    {
+      "test": "tests.test_flora_banking_industry_reinvention_increment42::test_pestle_forces_map_to_specific_banks_themes_and_non_generic_outputs",
+      "baseline_reason": "assert 'Political' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\"",
+      "after_reason": "assert 'Political' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_industry_reinvention_increment42::test_rendered_acceptance_artefacts_exist",
+      "baseline_reason": "assert 'UK Banking PESTLE view' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\"",
+      "after_reason": "assert 'UK Banking PESTLE view' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_banking_industry_reinvention_increment42::test_supplier_names_render_and_unnamed_labels_are_suppressed_when_names_exist",
+      "baseline_reason": "assert 'Google Cloud' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\"",
+      "after_reason": "assert 'Google Cloud' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Compare UK banks</title><style>\\n    body{font-fami...ailable Opportunity-value summary not a win probability</span><span hidden>Flora working estimate</span></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_blueprint_import_executive_review::test_review_is_executive_first_and_technical_content_is_collapsed",
+      "baseline_reason": "assert 'No canonical change has yet occurred' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Review Blueprint proposed changes</title><style>\\n ...f='/blueprint-import/bpi-run-25e56af7536702ec/cancel?stage=review'>Cancel import</a></p></section></div></body></html>\"",
+      "after_reason": "assert 'No canonical change has yet occurred' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Review Blueprint proposed changes</title><style>\\n ...f='/blueprint-import/bpi-run-ea33be297aae4dfa/cancel?stage=review'>Cancel import</a></p></section></div></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_blueprint_import_executive_review::test_review_preserves_trust_and_business_domain_paths",
+      "baseline_reason": "assert 'Return to Inspect with this candidate context' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Review Blueprint proposed changes</title><style>\\n ...f='/blueprint-import/bpi-run-25e56af7536702ec/cancel?stage=review'>Cancel import</a></p></section></div></body></html>\"",
+      "after_reason": "assert 'Return to Inspect with this candidate context' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Review Blueprint proposed changes</title><style>\\n ...f='/blueprint-import/bpi-run-ea33be297aae4dfa/cancel?stage=review'>Cancel import</a></p></section></div></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_blueprint_import_interface::test_large_review_is_non_blocking_paginated_reusable_and_safe",
+      "baseline_reason": "assert ('Quarantined</th><td>' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Review Blueprint proposed changes</title><style>\\n ...f='/blueprint-import/bpi-run-9c27d23282333f5e/cancel?stage=review'>Cancel import</a></p></section></div></body></html>\")",
+      "after_reason": "assert ('Quarantined</th><td>' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Review Blueprint proposed changes</title><style>\\n ...f='/blueprint-import/bpi-run-149f6b42aa2bc13b/cancel?stage=review'>Cancel import</a></p></section></div></body></html>\")"
+    },
+    {
+      "test": "tests.test_flora_blueprint_import_interface::test_upload_page_shows_current_deployed_change_acceptance_panel",
+      "baseline_reason": "assert 'BT Factual Synthesis Runtime Closure' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Import Twin</title><style>\\n    body{font-family:In...history</h2><p><a href='/blueprint-import/history'>View previous package imports</a></p></section></div></body></html>\"",
+      "after_reason": "assert 'BT Factual Synthesis Runtime Closure' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Import Twin</title><style>\\n    body{font-family:In...history</h2><p><a href='/blueprint-import/history'>View previous package imports</a></p></section></div></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_blueprint_import_restage::test_regenerate_current_validation_quarantines_non_atomic_and_blocks_stale_approval",
+      "baseline_reason": "assert (200 == 200 and 'Regenerate review with current validation' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Inspect Twin package</title><style>\\n    body{font-...='/blueprint-import/bpi-run-769ac5740e667799/cancel?stage=inspect'>Cancel import</a></p></section></div></body></html>\")",
+      "after_reason": "assert (200 == 200 and 'Regenerate review with current validation' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Inspect Twin package</title><style>\\n    body{font-...='/blueprint-import/bpi-run-1571b6e776508e67/cancel?stage=inspect'>Cancel import</a></p></section></div></body></html>\")"
+    },
+    {
+      "test": "tests.test_flora_blueprint_import_restage::test_restage_action_visible_to_owner_and_hidden_for_unauthorised",
+      "baseline_reason": "assert (200 == 200 and 'Available actions' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Inspect Twin package</title><style>\\n    body{font-...='/blueprint-import/bpi-run-2f2cc490db64926f/cancel?stage=inspect'>Cancel import</a></p></section></div></body></html>\")",
+      "after_reason": "assert (200 == 200 and 'Available actions' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Inspect Twin package</title><style>\\n    body{font-...='/blueprint-import/bpi-run-c3c1805d946e9616/cancel?stage=inspect'>Cancel import</a></p></section></div></body></html>\")"
+    },
+    {
+      "test": "tests.test_flora_enterprise_canvas::test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+      "baseline_reason": "assert ('Open Twin' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Digital Twins</title><style>\\n    body{font-family:...print-import/bpi-run-7ec4829ce2d56e87'>View import history</a></p>\\n    </article></div></section></div></body></html>\" and 'View validation' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Digital Twins</title><style>\\n    body{font-family:...print-import/bpi-run-7ec4829ce2d56e87'>View import history</a></p>\\n    </article></div></...\n[truncated; full report in element text]",
+      "after_reason": "assert ('Open Twin' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Digital Twins</title><style>\\n    body{font-family:...print-import/bpi-run-f7af536030263e95'>View import history</a></p>\\n    </article></div></section></div></body></html>\" and 'View validation' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Digital Twins</title><style>\\n    body{font-family:...print-import/bpi-run-f7af536030263e95'>View import history</a></p>\\n    </article></div></...\n[truncated; full report in element text]"
+    },
+    {
+      "test": "tests.test_flora_enterprise_canvas::test_home_page_does_not_expose_synthetic_canvas_route",
+      "baseline_reason": "assert '/blueprint-import/history' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial...s \u00b7 10 material gaps</span><em>Open Industry Twin</em></a></section>\\n    </main><footer></footer></div></body></html>\"",
+      "after_reason": "assert '/blueprint-import/history' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial...s \u00b7 10 material gaps</span><em>Open Industry Twin</em></a></section>\\n    </main><footer></footer></div></body></html>\""
+    },
+    {
+      "test": "tests.test_flora_enterprise_canvas::test_mod_executive_commercial_canvas_read_model",
+      "baseline_reason": "assert 'executive situation briefing' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Enterprise Canvas \u2014 MOD</title><style>\\n    body{fo...ness and source lineage. Select any Model Explorer area to inspect detailed lineage.</p></section></div></body></html>\"",
+      "after_reason": "assert 'executive situation briefing' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Enterprise Canvas \u2014 MOD</title><style>\\n    body{fo...ness and source lineage. Select any Model Explorer area to inspect detailed lineage.</p></section></div></body></html>\""
+    },
+    {
+      "test": "tests.test_tel001_blueprint_import_regression::test_exact_tel001_pilot_import_reaches_candidate_governance_review",
+      "baseline_reason": "assert 'Confirm the proposed Twin identity, primary subject, governed scope and canonical owner' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Review Blueprint proposed changes</title><style>\\n ...f='/blueprint-import/bpi-run-bd3924d85125e308/cancel?stage=review'>Cancel import</a></p></section></div></body></html>\"",
+      "after_reason": "assert 'Confirm the proposed Twin identity, primary subject, governed scope and canonical owner' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Review Blueprint proposed changes</title><style>\\n ...f='/blueprint-import/bpi-run-bd3924d85125e308/cancel?stage=review'>Cancel import</a></p></section></div></body></html>\""
+    },
+    {
+      "test": "tests.test_tel001_blueprint_import_regression::test_tel001_canonical_factual_projection_exposes_shared_contract_metadata",
+      "baseline_reason": "AssertionError: assert 'canonical-fa...projection-v5' == 'canonical-fa...projection-v2'\n  \n  - canonical-factual-projection-v2\n  ?                               ^\n  + canonical-factual-projection-v5\n  ?                               ^",
+      "after_reason": "AssertionError: assert 'canonical-fa...projection-v6' == 'canonical-fa...projection-v2'\n  \n  - canonical-factual-projection-v2\n  ?                               ^\n  + canonical-factual-projection-v6\n  ?                               ^"
+    },
+    {
+      "test": "tests.test_tel001_blueprint_import_regression::test_tel001_deployed_aspect_and_dossier_routes_render_pending_candidate_fields",
+      "baseline_reason": "AssertionError: ('reinvention-timing', ['Capital-intensive, regulated network operators', '2026-2028'])\nassert False\n +  where False = all(<generator object test_tel001_deployed_aspect_and_dossier_routes_render_pending_candidate_fields.<locals>.<genexpr> at 0x7fd4d2548520>)",
+      "after_reason": "AssertionError: ('reinvention-timing', ['Capital-intensive, regulated network operators', '2026-2028'])\nassert False\n +  where False = all(<generator object test_tel001_deployed_aspect_and_dossier_routes_render_pending_candidate_fields.<locals>.<genexpr> at 0x7f508dea8860>)"
+    },
+    {
+      "test": "tests.test_tel001_blueprint_import_regression::test_tel001_enterprise_association_correction_is_visible_on_import_screen",
+      "baseline_reason": "assert 'Enterprise Canonical Identity Propagation Correction' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Import Twin</title><style>\\n    body{font-family:In...history</h2><p><a href='/blueprint-import/history'>View previous package imports</a></p></section></div></body></html>\"",
+      "after_reason": "assert 'Enterprise Canonical Identity Propagation Correction' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Import Twin</title><style>\\n    body{font-family:In...history</h2><p><a href='/blueprint-import/history'>View previous package imports</a></p></section></div></body></html>\""
+    },
+    {
+      "test": "tests.test_tel001_enterprise_factual_presentation::test_tel001_facts_survive_without_assessment_and_render_on_actual_routes",
+      "baseline_reason": "assert 'Expected change</th><td><code>Evidence-Governed Material Pressure Runtime</code>' in \"<section class='card runtime-proof'><h2>DEPLOYMENT &amp; RUNTIME PROOF</h2><table><tr><th>Expected change</th><td><co...does not expose a trustworthy deployed commit identifier; feature route evidence is available.</p></section></section>\"\n[+1 more line; full report in element text]",
+      "after_reason": "assert 'Expected change</th><td><code>Evidence-Governed Material Pressure Runtime</code>' in \"<section class='card runtime-proof'><h2>DEPLOYMENT &amp; RUNTIME PROOF</h2><table><tr><th>Expected change</th><td><co...does not expose a trustworthy deployed commit identifier; feature route evidence is available.</p></section></section>\"\n[+1 more line; full report in element text]"
+    },
+    {
+      "test": "tests.test_tms_001_semantic_workspace::test_tms_canonical_semantics_relationships_and_executive_intelligence",
+      "baseline_reason": "assert 'Observation Pipeline Diagnostics' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Advanced diagnostics \u2014 Telecommunications, Media an...de>: subject, business consequence, domain, date, evidence reference</li></ul></section></section></div></body></html>\"",
+      "after_reason": "assert 'Observation Pipeline Diagnostics' in \"<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Advanced diagnostics \u2014 Telecommunications, Media an...de>: subject, business consequence, domain, date, evidence reference</li></ul></section></section></div></body></html>\""
+    }
+  ],
+  "new_regressions": [],
+  "intermediate_resolved_checks": "A temporary shared-profile selector/version edit broke knowledge-pack checks; removed in favor of read-model fallback. Final unchanged-profile/portable checks: 17 passed. Browser initially reproduced missing Commercial Opportunities anchor; corrected and covered by final retained tests."
+}

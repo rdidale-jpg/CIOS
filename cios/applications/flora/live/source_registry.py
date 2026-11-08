@@ -214,6 +214,8 @@ def organisations_without_enabled_sources() -> list[str]:
 PROFILE_DIR = Path(__file__).resolve().parents[4] / "config/flora/collection_profiles"
 COLLECTION_MODES = {"live_authoritative", "live_plus_seeded", "test_fixture"}
 _DEFAULT_ENTERPRISE_ALIASES = {
+    "barclays": "barclays-plc",
+    "barclays plc": "barclays-plc",
     "bt": "bt-group-plc",
     "bt group": "bt-group-plc",
     "bt group plc": "bt-group-plc",

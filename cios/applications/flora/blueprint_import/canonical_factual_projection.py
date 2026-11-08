@@ -14,8 +14,8 @@ from cios.applications.flora.live.runtime import deployment_metadata
 from .cios_twin_adapter import MAPPING_VERSION
 from .semantic_twin import SemanticEnterprise, SemanticObject, executive_record_view_model
 
-CANONICAL_FACTUAL_PROJECTION_VERSION = "canonical-factual-projection-v5"
-EXECUTIVE_PROJECTION_VERSION = "executive-factual-presentation-v5"
+CANONICAL_FACTUAL_PROJECTION_VERSION = "canonical-factual-projection-v6"
+EXECUTIVE_PROJECTION_VERSION = "executive-factual-presentation-v6"
 OWNER_ASSESSMENT_INPUT_VERSION = "owner-assessment-factual-input-v1"
 
 
@@ -179,7 +179,7 @@ def _embedded_evidence_refs(value: Any) -> tuple[str, ...]:
     """Read governed lineage colocated with one factual dimension value."""
     if not isinstance(value, dict):
         return ()
-    supplied = value.get("evidence") or value.get("evidence_refs") or ()
+    supplied = value.get("evidence") or value.get("evidence_refs") or value.get("latest_reporting") or ()
     if isinstance(supplied, str):
         supplied = (supplied,)
     return tuple(dict.fromkeys(str(item) for item in supplied if item))
@@ -210,7 +210,7 @@ def factual_projection_for_object(obj: SemanticObject, family: str | None = None
         add("Organisation summary", "organisation_summary", "description", "summary", "overview", fallback=(obj.statement,))
         add("Strategy", "strategy", "strategic_ambition", "market_position")
         add("Operating model", "operating_model", "operating_structure")
-        add("Financial context", "financial_context", "financials")
+        add("Financial context", "financial_context", "financial_intelligence", "financials", "financial_position")
         add("Technology", "technology")
         add("Ecosystem", "ecosystem")
         add("Programmes", "programmes", "transformation_programmes")
@@ -267,7 +267,7 @@ ENTERPRISE_FACTUAL_DIMENSIONS = (
     ("industry", "Industry / Domain", ("domains",), True),
     ("strategy", "Strategic Position and Ambition", ("strategy", "corporate_strategy", "strategic_ambition", "market_position", "current_position"), True),
     ("operating-model", "Operating Model", ("operating_model", "operating_structure", "business_units"), True),
-    ("financial", "Financial Position", ("financial_context", "financial_intelligence", "financials"), True),
+    ("financial", "Financial Position", ("financial_context", "financial_intelligence", "financials", "financial_position"), True),
     ("economics", "Enterprise Economics", (), False),
     ("pressures", "Material Pressures", ("pressures",), True),
     ("leadership-governance", "Leadership / Governance", (), False),

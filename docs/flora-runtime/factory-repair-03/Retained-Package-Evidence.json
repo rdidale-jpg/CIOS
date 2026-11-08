@@ -1,0 +1,653 @@
+[
+  {
+    "sha256": "1c2d18ebf0d48a32f4093c9ff7ce16a2e1203fedd2cc8ef3760367b033a56313",
+    "import_run_id": "bpi-run-1c2d18ebf0d48a32",
+    "enterprise": "Barclays PLC",
+    "associations": [
+      {
+        "id": "OPP-BARCLAYS-AI-CYBER-CONTROLS",
+        "type": "Enterprise has Opportunity Hypothesis",
+        "relationship_id": "REL-BNK-211"
+      },
+      {
+        "id": "PROG-BARCLAYS-M365-COPILOT",
+        "type": "Owner owns Programme",
+        "relationship_id": "REL-BNK-106"
+      },
+      {
+        "id": "PROG-BARCLAYS-MICROSOFT-SECURITY",
+        "type": "Owner owns Programme",
+        "relationship_id": "REL-BNK-111"
+      }
+    ],
+    "latency_seconds": {
+      "industry-overview": 0.088,
+      "enterprise-dossier": 0.17,
+      "enterprise-directory": 2.978,
+      "financial-context": 0.088,
+      "programmes-opportunities": 0.772,
+      "evidence-provenance": 0.593
+    },
+    "proposed": {
+      "Accepted but non-persistable": 54,
+      "Accepted canonical candidates": 530,
+      "Accepted support records": 0,
+      "Collapsed/deduplicated candidates": 0,
+      "Conflicts": 0,
+      "Creates": 100,
+      "Deferred for review": 430,
+      "Deferred or excluded canonical candidates": 430,
+      "Expected canonical mutations": 100,
+      "Ignored": 229,
+      "Projection-only": 0,
+      "Unchanged": 0,
+      "Unresolved references": 0,
+      "Updates": 0
+    },
+    "reconciliation": {
+      "accepted_but_non_persistable": 54,
+      "accepted_canonical": 530,
+      "accepted_staged": 584,
+      "accepted_support_records": 0,
+      "accounted_staged": 584,
+      "blocking_canonical_candidates": [],
+      "collapsed_deduplicated_candidates": 0,
+      "counts_reconcile": true,
+      "creates": 100,
+      "deferred_or_excluded_canonical_candidates": 430,
+      "expected_mutations": 100,
+      "mismatch": 0,
+      "passes": true,
+      "unchanged": 0,
+      "updates": 0
+    },
+    "class_persistence_readiness": [
+      {
+        "accepted": 4,
+        "class": "contradiction",
+        "disposition": "persistable",
+        "expected_mutations": 4,
+        "persistable": true,
+        "planned_effects": {
+          "create": 4,
+          "expected_mutations": 4
+        }
+      },
+      {
+        "accepted": 11,
+        "class": "enterprise_twin",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 11,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 65,
+        "class": "evidence",
+        "disposition": "persistable",
+        "expected_mutations": 65,
+        "persistable": true,
+        "planned_effects": {
+          "create": 65,
+          "expected_mutations": 65
+        }
+      },
+      {
+        "accepted": 1,
+        "class": "industry_twin",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 1,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 13,
+        "class": "market_participant_twin",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 13,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 11,
+        "class": "opportunity_hypothesis",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 11,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 430,
+        "class": "relationship",
+        "disposition": "persistable",
+        "expected_mutations": 0,
+        "persistable": true,
+        "planned_effects": {
+          "defer": 430,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 18,
+        "class": "transformation_programme",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 18,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 31,
+        "class": "unknown",
+        "disposition": "persistable",
+        "expected_mutations": 31,
+        "persistable": true,
+        "planned_effects": {
+          "create": 31,
+          "expected_mutations": 31
+        }
+      }
+    ],
+    "package": "BNK-W1",
+    "source_bytes_preserved": true,
+    "environment": "Isolated pytest temporary root; explicit test owner identity and approval",
+    "canonical_execution": {
+      "final_execution_status": "succeeded",
+      "actual_mutation_count": 100,
+      "model_projection_status": "not_applicable",
+      "receipt_counts": {
+        "records_created": 100,
+        "records_updated": 0,
+        "records_skipped": 484,
+        "records_blocked": 229,
+        "records_failed": 0,
+        "model_projection_results": 0
+      }
+    },
+    "complete_industry_acceptance": "NOT ESTABLISHED"
+  },
+  {
+    "sha256": "bd3924d85125e308e36cc3f0b02af38e3eca7d163640d0d2c95aa7a861441d07",
+    "import_run_id": "bpi-run-bd3924d85125e308",
+    "enterprise": "VodafoneThree",
+    "associations": [
+      {
+        "id": "OPP-VT-ENTERPRISE-5G",
+        "type": "Opportunity targets Enterprise",
+        "relationship_id": "REL-W2-029"
+      },
+      {
+        "id": "OPP-VT-NETWORK-AI-OPS",
+        "type": "Opportunity targets Enterprise",
+        "relationship_id": "REL-W2-026"
+      },
+      {
+        "id": "OPP-VT-WHOLESALE-REMEDY-ASSURANCE",
+        "type": "Opportunity targets Enterprise",
+        "relationship_id": "REL-W4-162"
+      },
+      {
+        "id": "PROG-VT-5G-SA",
+        "type": "Enterprise owns Programme",
+        "relationship_id": "REL-W2-005"
+      },
+      {
+        "id": "PROG-VT-INTEGRATION",
+        "type": "Enterprise owns Programme",
+        "relationship_id": "REL-W2-006"
+      }
+    ],
+    "latency_seconds": {
+      "industry-overview": 0.09,
+      "enterprise-dossier": 0.146,
+      "enterprise-directory": 4.796,
+      "financial-context": 0.151,
+      "programmes-opportunities": 0.626,
+      "evidence-provenance": 1.306
+    },
+    "proposed": {
+      "Accepted but non-persistable": 207,
+      "Accepted canonical candidates": 441,
+      "Accepted support records": 0,
+      "Collapsed/deduplicated candidates": 0,
+      "Conflicts": 0,
+      "Creates": 133,
+      "Deferred for review": 308,
+      "Deferred or excluded canonical candidates": 308,
+      "Expected canonical mutations": 133,
+      "Ignored": 412,
+      "Projection-only": 0,
+      "Unchanged": 0,
+      "Unresolved references": 0,
+      "Updates": 0
+    },
+    "reconciliation": {
+      "accepted_but_non_persistable": 207,
+      "accepted_canonical": 441,
+      "accepted_staged": 648,
+      "accepted_support_records": 0,
+      "accounted_staged": 648,
+      "blocking_canonical_candidates": [],
+      "collapsed_deduplicated_candidates": 0,
+      "counts_reconcile": true,
+      "creates": 133,
+      "deferred_or_excluded_canonical_candidates": 308,
+      "expected_mutations": 133,
+      "mismatch": 0,
+      "passes": true,
+      "unchanged": 0,
+      "updates": 0
+    },
+    "class_persistence_readiness": [
+      {
+        "accepted": 7,
+        "class": "ai_reinvention_assessment",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 7,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 11,
+        "class": "contradiction",
+        "disposition": "persistable",
+        "expected_mutations": 11,
+        "persistable": true,
+        "planned_effects": {
+          "create": 11,
+          "expected_mutations": 11
+        }
+      },
+      {
+        "accepted": 6,
+        "class": "enterprise_twin",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 6,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 92,
+        "class": "evidence",
+        "disposition": "persistable",
+        "expected_mutations": 92,
+        "persistable": true,
+        "planned_effects": {
+          "create": 92,
+          "expected_mutations": 92
+        }
+      },
+      {
+        "accepted": 1,
+        "class": "industry_twin",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 1,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 17,
+        "class": "market_participant_twin",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 17,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 50,
+        "class": "membership",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 50,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 17,
+        "class": "opportunity_hypothesis",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 17,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 95,
+        "class": "refresh_trigger",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 95,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 308,
+        "class": "relationship",
+        "disposition": "persistable",
+        "expected_mutations": 0,
+        "persistable": true,
+        "planned_effects": {
+          "defer": 308,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 1,
+        "class": "release_manifest",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 1,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 13,
+        "class": "transformation_programme",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 13,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 30,
+        "class": "unknown",
+        "disposition": "persistable",
+        "expected_mutations": 30,
+        "persistable": true,
+        "planned_effects": {
+          "create": 30,
+          "expected_mutations": 30
+        }
+      }
+    ],
+    "package": "TEL-W5",
+    "source_bytes_preserved": true,
+    "environment": "Isolated pytest temporary root; explicit test owner identity and approval",
+    "canonical_execution": {
+      "final_execution_status": "succeeded",
+      "actual_mutation_count": 133,
+      "model_projection_status": "not_applicable",
+      "receipt_counts": {
+        "records_created": 133,
+        "records_updated": 0,
+        "records_skipped": 515,
+        "records_blocked": 412,
+        "records_failed": 0,
+        "model_projection_results": 0
+      }
+    },
+    "complete_industry_acceptance": "NOT ESTABLISHED"
+  },
+  {
+    "sha256": "c24cbf67c687883947fc4020b098c81c84b343e618980989b0af9665e2210ffb",
+    "import_run_id": "bpi-run-c24cbf67c6878839",
+    "enterprise": "VodafoneThree",
+    "associations": [
+      {
+        "id": "OPP-VT-ENTERPRISE-5G",
+        "type": "Opportunity targets Enterprise",
+        "relationship_id": "REL-W2-029"
+      },
+      {
+        "id": "OPP-VT-NETWORK-AI-OPS",
+        "type": "Opportunity targets Enterprise",
+        "relationship_id": "REL-W2-026"
+      },
+      {
+        "id": "OPP-VT-WHOLESALE-REMEDY-ASSURANCE",
+        "type": "Opportunity targets Enterprise",
+        "relationship_id": "REL-W4-162"
+      },
+      {
+        "id": "PROG-VT-5G-SA",
+        "type": "Enterprise owns Programme",
+        "relationship_id": "REL-W2-005"
+      },
+      {
+        "id": "PROG-VT-INTEGRATION",
+        "type": "Enterprise owns Programme",
+        "relationship_id": "REL-W2-006"
+      }
+    ],
+    "latency_seconds": {
+      "industry-overview": 0.198,
+      "enterprise-dossier": 0.339,
+      "enterprise-directory": 4.822,
+      "financial-context": 0.408,
+      "programmes-opportunities": 0.801,
+      "evidence-provenance": 2.545
+    },
+    "proposed": {
+      "Accepted but non-persistable": 208,
+      "Accepted canonical candidates": 470,
+      "Accepted support records": 0,
+      "Collapsed/deduplicated candidates": 0,
+      "Conflicts": 0,
+      "Creates": 143,
+      "Deferred for review": 327,
+      "Deferred or excluded canonical candidates": 327,
+      "Expected canonical mutations": 143,
+      "Ignored": 412,
+      "Projection-only": 0,
+      "Unchanged": 0,
+      "Unresolved references": 0,
+      "Updates": 0
+    },
+    "reconciliation": {
+      "accepted_but_non_persistable": 208,
+      "accepted_canonical": 470,
+      "accepted_staged": 678,
+      "accepted_support_records": 0,
+      "accounted_staged": 678,
+      "blocking_canonical_candidates": [],
+      "collapsed_deduplicated_candidates": 0,
+      "counts_reconcile": true,
+      "creates": 143,
+      "deferred_or_excluded_canonical_candidates": 327,
+      "expected_mutations": 143,
+      "mismatch": 0,
+      "passes": true,
+      "unchanged": 0,
+      "updates": 0
+    },
+    "class_persistence_readiness": [
+      {
+        "accepted": 7,
+        "class": "ai_reinvention_assessment",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 7,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 11,
+        "class": "contradiction",
+        "disposition": "persistable",
+        "expected_mutations": 11,
+        "persistable": true,
+        "planned_effects": {
+          "create": 11,
+          "expected_mutations": 11
+        }
+      },
+      {
+        "accepted": 6,
+        "class": "enterprise_twin",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 6,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 102,
+        "class": "evidence",
+        "disposition": "persistable",
+        "expected_mutations": 102,
+        "persistable": true,
+        "planned_effects": {
+          "create": 102,
+          "expected_mutations": 102
+        }
+      },
+      {
+        "accepted": 1,
+        "class": "industry_twin",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 1,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 17,
+        "class": "market_participant_twin",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 17,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 50,
+        "class": "membership",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 50,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 17,
+        "class": "opportunity_hypothesis",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 17,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 95,
+        "class": "refresh_trigger",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 95,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 327,
+        "class": "relationship",
+        "disposition": "persistable",
+        "expected_mutations": 0,
+        "persistable": true,
+        "planned_effects": {
+          "defer": 327,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 1,
+        "class": "release_manifest",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 1,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 14,
+        "class": "transformation_programme",
+        "disposition": "non_persistable",
+        "expected_mutations": 0,
+        "persistable": false,
+        "planned_effects": {
+          "create": 14,
+          "expected_mutations": 0
+        }
+      },
+      {
+        "accepted": 30,
+        "class": "unknown",
+        "disposition": "persistable",
+        "expected_mutations": 30,
+        "persistable": true,
+        "planned_effects": {
+          "create": 30,
+          "expected_mutations": 30
+        }
+      }
+    ],
+    "package": "TEL-W6",
+    "source_bytes_preserved": true,
+    "environment": "Isolated pytest temporary root; explicit test owner identity and approval",
+    "canonical_execution": {
+      "final_execution_status": "succeeded",
+      "actual_mutation_count": 143,
+      "model_projection_status": "not_applicable",
+      "receipt_counts": {
+        "records_created": 143,
+        "records_updated": 0,
+        "records_skipped": 535,
+        "records_blocked": 412,
+        "records_failed": 0,
+        "model_projection_results": 0
+      }
+    },
+    "complete_industry_acceptance": "NOT ESTABLISHED"
+  }
+]

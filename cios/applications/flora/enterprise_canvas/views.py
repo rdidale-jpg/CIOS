@@ -57,7 +57,7 @@ def _executive_canvas(canvas, headers, include_reasoning: bool = True, force_ove
     return reasoning + f"""
     <section class='hero' id='overview'><p><a href='/digital-twins'>Digital Twins</a></p><p class='pill'>Executive Commercial Canvas · governed read model · Overview default</p><h1>{escape(h.enterprise_name)} executive situation briefing</h1><p>{escape(_summary(h, canvas))}</p><dl><div><dt>Twin version</dt><dd>{escape(h.twin_version)}</dd></div><div><dt>Source cut-off</dt><dd>{escape(h.source_cut_off)}</dd></div><div><dt>Progressive Assurance status</dt><dd>{escape(h.maturity_or_acceptance_state)}</dd></div></dl><div class='brief-grid'>
     {_brief('Enterprise summary', h.enterprise_purpose if h.enterprise_purpose != 'Unknown' else 'Evidence incomplete')}
-    {_brief('Current strategic context', h.governing_thesis if h.governing_thesis != 'Unknown' else 'Evidence-backed interpretation: MOD is being read through accepted Twin pressures and changes; strategic context needs stronger evidence.')}
+    {_brief('Current strategic context', h.governing_thesis if h.governing_thesis != 'Unknown' else ('MOD strategic context is unavailable until supported by accepted intelligence.' if canvas.enterprise_id.upper()=='MOD' else 'Strategic context unavailable — no governed executive interpretation is supplied.'))}
     {_brief('Major transformation agenda', _join_pressures(h.current_material_pressures) or 'Evidence incomplete')}
     {_brief('Latest material changes', h.latest_material_change or 'Evidence incomplete')}
     {_brief('Dominant pressures', _join_pressures(h.current_material_pressures) or 'Evidence incomplete')}

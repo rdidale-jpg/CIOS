@@ -147,12 +147,13 @@ def enterprise_subject_type(objects: tuple[SemanticObject, ...]) -> str:
     return "unresolved"
 
 
-def research_requirements(twin: SemanticTwin, projections: tuple[ExecutiveAssessmentProjection, ...]) -> tuple[ResearchRequirement, ...]:
+def research_requirements(twin: SemanticTwin, projections: tuple[ExecutiveAssessmentProjection, ...], *, aspect: str | None = None) -> tuple[ResearchRequirement, ...]:
     """Translate owner deficiencies and current content; never assess a pass."""
     collections = {c.key: c.objects for c in business_collections(twin, include_empty=True)}
     by_key = {p.key: p for p in projections}
     requirements = []
     for key, (dimension, version, fields, sources) in _CONTRACTS.items():
+        if aspect is not None and key != aspect: continue
         projection = by_key[key]
         subjects = _subjects(key, twin, collections.get(key, ()))
         for subject, objects in subjects:
