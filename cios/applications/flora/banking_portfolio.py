@@ -31,7 +31,8 @@ def _pilot_assurance_html():
             "Investigate supporting Evidence, enterprise applicability, buyer, sponsor, funding and scope before commercial action.</p>"
             "<p>Claim-level accepted Evidence: Not supplied by this pilot. Generic source labels and view hashes "
             "do not establish canonical Evidence or accepted Observations. Existing imported and model-backed views "
-            "retain their own acceptance and permission boundaries.</p></aside>")
+            "retain their own acceptance and permission boundaries.</p>"
+            "<p><a href='/intelligence'>Intelligence discovery</a></p></aside>")
 
 
 def _page(title, body):

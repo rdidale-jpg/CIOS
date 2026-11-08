@@ -24,7 +24,7 @@ from cios.applications.flora.workspace.feedback import create_feedback_record, c
 from cios.applications.flora.rob_score import create_rob_score_record
 from cios.applications.flora.workspace.views import case_page, landing_page, logbook_page, radar_page, rob_score_page, scoring_page, score_page, settings_page, general_settings_page
 from cios.applications.flora.workspace.reference_slice import VALIDATION_PATH, reference_resume_cookie, reference_workspace_page
-from cios.applications.flora.digital_twins import digital_twins_landing_page, bt_twin_page, search_bt_twin, bt_search_progress_page, rapid_snapshot_csv
+from cios.applications.flora.digital_twins import intelligence_discovery, render_intelligence_discovery, digital_twins_landing_page, bt_twin_page, search_bt_twin, bt_search_progress_page, rapid_snapshot_csv
 from cios.applications.flora.observatory.views import observatory_page, organisation_observatory_page
 from cios.applications.flora.storage import startup_storage_status
 from cios.applications.flora.storage_maintenance import (
@@ -213,6 +213,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(research_backlog_page(parsed.path.removeprefix("/flora/banking/").removesuffix("/research-backlog")))
             elif "/opportunity/" in parsed.path and parsed.path.startswith("/flora/banking/"):
                 rest=parsed.path.removeprefix("/flora/banking/"); slug, opp_id = rest.split("/opportunity/", 1); self._html(*banking_opportunity_page(slug, opp_id))
+            elif parsed.path == "/flora/banking/inspect":
+                html, status = twin_inspection_page("uk-banking", self.headers, "industry")
+                self._html(html, status=status)
             elif parsed.path.startswith("/flora/banking/"):
                 self._html(*banking_bank_page(parsed.path.removeprefix("/flora/banking/")))
             elif parsed.path == "/flora/object/BK-ENT-001/explain":
@@ -844,32 +847,14 @@ def _flora_increment2_lineage_page(change_id: str, headers=None) -> str:
     body = f"<section class='hero'><h1>Claim-level lineage</h1><p><strong>Claim:</strong> {escape(change.change_id)}</p><p>{escape(change.what_changed)}</p></section><section class='card'><h2>Runtime lineage</h2><ol>{rows}</ol><p>Rendered lineage matches package lineage and remains non-canonical.</p></section>"
     return _flora_v2_page("Claim lineage", "focus", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
 
-def _industry_import_counts(headers):
-    """Read existing account-visible Industry lifecycle states, not acceptance.
-
-    A current promoted subset is never counted as a complete accepted Twin.
-    No access record, identity, model or lifecycle state is created here.
-    """
-    from cios.applications.flora.access import authenticated_flora_user, can_access_enterprise
-    from cios.applications.flora.blueprint_import import BlueprintPackageRegistry
-    from cios.applications.flora.blueprint_import.mapping import industry_package
-    from cios.applications.flora.blueprint_import.validator import can_inspect_blueprint_package
-    from cios.applications.flora.blueprint_import.lifecycle import ImportLifecycleService
-    if not authenticated_flora_user(headers):
-        return 0, 0
-    candidate, partial = 0, 0
-    try:
-        for package in BlueprintPackageRegistry().list():
-            if not industry_package(package) or not can_access_enterprise(headers, package.identity.enterprise_id, package.workspace_id) or not can_inspect_blueprint_package(headers, package):
-                continue
-            state = ImportLifecycleService().get(package.import_run_id)
-            if state.state == 'promoted' and state.current:
-                partial += 1
-            elif state.state == 'received':
-                candidate += 1
-    except (OSError, ValueError):
+def _industry_import_counts(headers, discovery=None):
+    """Compatibility count over the shared, non-persistent discovery projection."""
+    snapshot = discovery if discovery is not None else intelligence_discovery(headers)
+    if 'Industry imports' in snapshot.unavailable_sources:
         return None
-    return candidate, partial
+    candidates = sum(i.population == 'industry_import' and i.owner_state == 'received' for i in snapshot.items)
+    partial = sum(i.population == 'industry_import' and i.owner_state == 'promoted' and i.current for i in snapshot.items)
+    return candidates, partial
 
 
 def _flora_home_page(headers=None, question_error: str = "") -> str:
@@ -885,7 +870,8 @@ def _flora_home_page(headers=None, question_error: str = "") -> str:
     horizon_counts = {h: sum(o.horizon == h for o in opportunities) for h in ("horizon_1", "horizon_2", "horizon_3")}
     participants = {o.participant_type for o in opportunities if o.participant_type}
     unknown_count = sum(len(o.unknowns) for o in opportunities)
-    import_counts = _industry_import_counts(headers or {})
+    discovery = intelligence_discovery(headers or {})
+    import_counts = _industry_import_counts(headers or {}, discovery)
     industry_metric = (f"1 curated Banking pilot · {import_counts[0]} candidate imports · {import_counts[1]} partial releases"
                        if import_counts is not None else "1 curated Banking pilot · Industry import status unavailable")
 
@@ -951,7 +937,7 @@ def _flora_home_page(headers=None, question_error: str = "") -> str:
       </div></section>
       <section aria-labelledby='priorities-title'><div class='section-heading'><div><p class='eyebrow'>Commercial focus</p><h2 id='priorities-title'>{section_title}</h2></div><p>{section_subtitle}</p></div><div class='priority-grid'>{cards}</div></section>
       <section class='card inbox' aria-labelledby='attention-title'><p class='eyebrow'>Intelligence inbox</p><h2 id='attention-title'>Intelligence Requiring Attention</h2><div class='attention-grid'><a href='/research?filter=new-evidence'><strong>New evidence</strong><span>Not currently available</span></a><a href='/opportunities?filter=changed'><strong>Changed opportunities</strong><span>Not currently available</span></a><a href='/intelligence?tab=programmes&amp;filter=new'><strong>New programmes</strong><span>Not currently available</span></a><a href='/research?filter=gaps'><strong>Research gaps</strong><span>{unknown_count} material gaps</span></a><a href='/research?filter=stale-evidence'><strong>Evidence becoming stale</strong><span>Not currently available</span></a><a href='/governance?filter=resolved-contradictions'><strong>Resolved contradictions</strong><span>Not currently available</span></a><a href='/research?filter=monitoring-triggers'><strong>Upcoming monitoring triggers</strong><span>Not currently available</span></a></div></section>
-      <section aria-labelledby='portfolio-title'><div class='section-heading'><div><p class='eyebrow'>Industry context</p><h2 id='portfolio-title'>Industry Portfolio</h2></div><p>Complete Industry Twin acceptance: Not established by this workspace. Model-backed visibility remains in the existing Digital Twins view.</p></div><a class='industry-card' href='/flora/banking'><strong>UK Banking</strong><span class='status'>Curated repository Banking pilot</span><span>Source and scenario context; not owner-accepted canonical intelligence. Imported candidate dossiers and partial canonical releases retain their separate status.</span><em>Open Banking pilot</em></a></section>
+      <section aria-labelledby='portfolio-title'><div class='section-heading'><div><p class='eyebrow'>Industry context</p><h2 id='portfolio-title'>Industry Portfolio</h2></div><p>Complete Industry Twin acceptance: Not established by this workspace. Model-backed visibility remains in the existing Digital Twins view.</p></div>{render_intelligence_discovery(discovery)}</section>
     """, auth)
 
 def _opportunity_pipeline():
@@ -968,10 +954,12 @@ def _workspace_tabs(active: str, tabs: list[tuple[str, str, str]]) -> str:
 
 def _flora_intelligence_page(headers=None, query=None) -> str:
     tab = ((query or {}).get("tab") or ["industries"])[0]
+    discovery = intelligence_discovery(headers or {})
     tabs = [("industries", "Industries", "/intelligence?tab=industries"), ("enterprises", "Enterprises", "/intelligence?tab=enterprises"), ("programmes", "Programmes", "/intelligence?tab=programmes"), ("participants", "Market Participants", "/intelligence?tab=participants"), ("relationships", "Relationships", "/intelligence?tab=relationships")]
     destinations = {"industries": ("Industry intelligence", "Curated repository Banking pilot: source and scenario context, not accepted canonical Industry intelligence.", "/flora/banking", "Open UK Banking"), "enterprises": ("Enterprise dossiers", "Inspect existing account-visible Twin views; their owner acceptance remains separate from repository context.", "/digital-twins", "Open Twin Explorer"), "programmes": ("Major programmes", "The Banking pilot contains programme scenarios; management programmes require their own source and acceptance evidence.", "/flora/banking", "Inspect Banking programmes"), "participants": ("Market participants", "Compare editorial supplier scenarios in the curated Banking pilot; this is not verified account incumbency.", "/flora/banking/competitors", "Inspect participants"), "relationships": ("Relationships", "Follow existing evidence and relationship paths in Twin Explorer.", "/digital-twins", "Open Twin Explorer")}
     title, copy, href, action = destinations.get(tab, destinations["industries"])
     body = f"<section class='workspace-heading'><p class='eyebrow'>Intelligence</p><h1>Explore the enterprise intelligence estate.</h1><p class='lead'>Move from industry context to enterprise detail without duplicating the Twin Map.</p></section>{_workspace_tabs(tab, tabs)}<section class='card'><h2>{title}</h2><p>{copy}</p><a class='button-link' href='{href}'>{action}</a></section><section class='card'><h2>Twin Explorer</h2><p>Advanced Twin inspection remains available for evidence-led exploration.</p><a href='/digital-twins'>Open Twin Explorer</a></section>"
+    body += render_intelligence_discovery(discovery)
     return _flora_v2_page("Intelligence", "intelligence", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
 
 

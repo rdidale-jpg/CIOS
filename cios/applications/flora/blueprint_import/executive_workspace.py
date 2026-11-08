@@ -1203,7 +1203,7 @@ def _primary_nav(run_id: str, active: str) -> str:
     r = escape(run_id)
     links = (("map", f"/blueprint-import/{r}", "Twin Map"), ("gaps", f"/blueprint-import/{r}/health", "Research Gaps"),
              ("inspection", f"/blueprint-import/{r}/explore", "Advanced Inspection"))
-    return "<nav class='executive-path' aria-label='Twin navigation'>" + "".join(
+    return "<nav class='executive-path' aria-label='Twin navigation'><a href='/intelligence'>Intelligence discovery</a>" + "".join(
         f"<strong aria-current='page'>{label}</strong>" if key == active else f"<a href='{href}'>{label}</a>" for key, href, label in links) + "</nav>"
 
 def _twin_map(twin: SemanticTwin, run_id: str, mission: CommercialMission | None, domain: str) -> str:

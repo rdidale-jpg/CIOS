@@ -1,0 +1,155 @@
+[
+  {
+    "fixture": "BNK-W1",
+    "item": {
+      "key": "import:bpi-run-1c2d18ebf0d48a32",
+      "population": "industry_import",
+      "name": "UK Banking and Financial Services (isolated test)",
+      "intelligence_type": "Imported Industry Twin workspace",
+      "source_boundary": "Blueprint registry / governed identity / staging / existing release lifecycle",
+      "status": "Partially promoted",
+      "owner_state": "promoted",
+      "current": true,
+      "workspace_id": "workspace-a",
+      "identities": [
+        [
+          "Source package",
+          "BNK-001_UK-Banking-Financial-Services-Twin_Wave1-Manifest-Compatible"
+        ],
+        [
+          "Package receipt identity",
+          "bpi-pkg-1c2d18ebf0d48a32"
+        ],
+        [
+          "Import run",
+          "bpi-run-1c2d18ebf0d48a32"
+        ],
+        [
+          "Governed Twin",
+          "IND-BNK-001"
+        ],
+        [
+          "Primary subject",
+          "BNK-001"
+        ],
+        [
+          "Presentation context",
+          "bpi-run-1c2d18ebf0d48a32"
+        ]
+      ],
+      "destination": "/blueprint-import/bpi-run-1c2d18ebf0d48a32/intelligence",
+      "availability": "Source/candidate workspace available",
+      "identity_status": "recognised",
+      "release_version": "1.0-research-ready.import.2",
+      "meaningful_update": "Unknown",
+      "event_kind": "Release lifecycle event",
+      "event_date": "2026-11-08T17:59:09.266570+00:00",
+      "unknowns": [
+        "Partial canonical promotion is not complete Industry Twin acceptance. Source dossiers are not durable Enterprise Models.",
+        "Evidence lineage, source Unknowns and Contradictions remain inspectable in the existing import workspace."
+      ]
+    }
+  },
+  {
+    "fixture": "TEL-W5",
+    "item": {
+      "key": "import:bpi-run-bd3924d85125e308",
+      "population": "industry_import",
+      "name": "UK Telecommunications (isolated test)",
+      "intelligence_type": "Imported Industry Twin workspace",
+      "source_boundary": "Blueprint registry / governed identity / staging / existing release lifecycle",
+      "status": "Partially promoted",
+      "owner_state": "promoted",
+      "current": true,
+      "workspace_id": "workspace-a",
+      "identities": [
+        [
+          "Source package",
+          "TEL-001_UK-Telecoms-Twin_Wave5-Corrected"
+        ],
+        [
+          "Package receipt identity",
+          "bpi-pkg-bd3924d85125e308"
+        ],
+        [
+          "Import run",
+          "bpi-run-bd3924d85125e308"
+        ],
+        [
+          "Governed Twin",
+          "IND-TEL-001"
+        ],
+        [
+          "Primary subject",
+          "TEL-001"
+        ],
+        [
+          "Presentation context",
+          "bpi-run-bd3924d85125e308"
+        ]
+      ],
+      "destination": "/blueprint-import/bpi-run-bd3924d85125e308/intelligence",
+      "availability": "Source/candidate workspace available",
+      "identity_status": "recognised",
+      "release_version": "5.0-corrected.import.2",
+      "meaningful_update": "Unknown",
+      "event_kind": "Release lifecycle event",
+      "event_date": "2026-11-08T17:58:20.032696+00:00",
+      "unknowns": [
+        "Partial canonical promotion is not complete Industry Twin acceptance. Source dossiers are not durable Enterprise Models.",
+        "Evidence lineage, source Unknowns and Contradictions remain inspectable in the existing import workspace."
+      ]
+    }
+  },
+  {
+    "fixture": "TEL-W6",
+    "item": {
+      "key": "import:bpi-run-c24cbf67c6878839",
+      "population": "industry_import",
+      "name": "UK Telecommunications (isolated test)",
+      "intelligence_type": "Imported Industry Twin workspace",
+      "source_boundary": "Blueprint registry / governed identity / staging / existing release lifecycle",
+      "status": "Partially promoted",
+      "owner_state": "promoted",
+      "current": true,
+      "workspace_id": "workspace-a",
+      "identities": [
+        [
+          "Source package",
+          "TEL-001_UK-Telecoms-Twin_Wave6-Targeted-Enrichment-Corrected"
+        ],
+        [
+          "Package receipt identity",
+          "bpi-pkg-c24cbf67c6878839"
+        ],
+        [
+          "Import run",
+          "bpi-run-c24cbf67c6878839"
+        ],
+        [
+          "Governed Twin",
+          "IND-TEL-001"
+        ],
+        [
+          "Primary subject",
+          "TEL-001"
+        ],
+        [
+          "Presentation context",
+          "bpi-run-c24cbf67c6878839"
+        ]
+      ],
+      "destination": "/blueprint-import/bpi-run-c24cbf67c6878839/intelligence",
+      "availability": "Source/candidate workspace available",
+      "identity_status": "recognised",
+      "release_version": "6.0-targeted-enrichment.import.2",
+      "meaningful_update": "Unknown",
+      "event_kind": "Release lifecycle event",
+      "event_date": "2026-11-08T17:58:50.662221+00:00",
+      "unknowns": [
+        "Partial canonical promotion is not complete Industry Twin acceptance. Source dossiers are not durable Enterprise Models.",
+        "Evidence lineage, source Unknowns and Contradictions remain inspectable in the existing import workspace."
+      ]
+    }
+  }
+]
