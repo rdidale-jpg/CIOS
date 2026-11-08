@@ -1,0 +1,134 @@
+[
+  {
+    "package": "BNK-W1",
+    "view": "industry-overview",
+    "url_path": "/blueprint-import/bpi-run-1c2d18ebf0d48a32/intelligence",
+    "http_status": 200,
+    "text_checks": "No unrelated MOD strategy; source/candidate status inspected",
+    "screenshot": "BNK-W1-industry-overview.png",
+    "horizontal_overflow_px": 0
+  },
+  {
+    "package": "BNK-W1",
+    "navigation": "overview -> enterprise directory",
+    "elapsed_seconds": 3.917
+  },
+  {
+    "package": "BNK-W1",
+    "navigation": "directory -> dossier",
+    "elapsed_seconds": 0.314
+  },
+  {
+    "package": "BNK-W1",
+    "view": "enterprise-dossier",
+    "url_path": "/blueprint-import/bpi-run-1c2d18ebf0d48a32/enterprises/barclays-plc",
+    "http_status": 200,
+    "text_checks": "No unrelated MOD strategy; source/candidate status inspected",
+    "screenshot": "BNK-W1-enterprise-dossier.png",
+    "horizontal_overflow_px": 0
+  },
+  {
+    "package": "BNK-W1",
+    "view": "financial-context",
+    "url_path": "/blueprint-import/bpi-run-1c2d18ebf0d48a32/enterprises/barclays-plc",
+    "http_status": 200,
+    "text_checks": "No unrelated MOD strategy; source/candidate status inspected",
+    "screenshot": "BNK-W1-financial-context.png",
+    "horizontal_overflow_px": 0
+  },
+  {
+    "package": "BNK-W1",
+    "view": "programmes-opportunities",
+    "url_path": "/blueprint-import/bpi-run-1c2d18ebf0d48a32/enterprises/barclays-plc",
+    "http_status": 200,
+    "text_checks": "No unrelated MOD strategy; source/candidate status inspected",
+    "screenshot": "BNK-W1-programmes-opportunities.png",
+    "horizontal_overflow_px": 0
+  },
+  {
+    "package": "BNK-W1",
+    "view": "opportunity-hypotheses",
+    "url_path": "/blueprint-import/bpi-run-1c2d18ebf0d48a32/enterprises/barclays-plc",
+    "http_status": 200,
+    "text_checks": "No unrelated MOD strategy; source/candidate status inspected",
+    "screenshot": "BNK-W1-opportunity-hypotheses.png",
+    "horizontal_overflow_px": 0
+  },
+  {
+    "package": "BNK-W1",
+    "view": "evidence-provenance",
+    "url_path": "/blueprint-import/bpi-run-1c2d18ebf0d48a32/enterprises/barclays-plc",
+    "http_status": 200,
+    "text_checks": "No unrelated MOD strategy; source/candidate status inspected",
+    "screenshot": "BNK-W1-evidence-provenance.png",
+    "horizontal_overflow_px": 0
+  },
+  {
+    "package": "BNK-W1",
+    "view": "promotion-completion",
+    "url_path": null,
+    "http_status": null,
+    "text_checks": "No unrelated MOD strategy; source/candidate status inspected",
+    "screenshot": "BNK-W1-promotion-completion.png",
+    "horizontal_overflow_px": 0,
+    "response_origin": "Actual saved approve_and_promote POST response rendered with Playwright set_content; not a GET endpoint"
+  },
+  {
+    "package": "BNK-W1",
+    "navigation": "saved promotion POST response -> existing Industry workspace",
+    "http_status": 200,
+    "method": "completion HTML is actual saved handler response, then follow its destination on local server"
+  },
+  {
+    "package": "BNK-W1",
+    "browser_page_errors": []
+  },
+  {
+    "package": "TEL-W6",
+    "view": "industry-overview",
+    "url_path": "/blueprint-import/bpi-run-c24cbf67c6878839/intelligence",
+    "http_status": 200,
+    "text_checks": "No unrelated MOD strategy; source/candidate status inspected",
+    "screenshot": "TEL-W6-industry-overview.png",
+    "horizontal_overflow_px": 0
+  },
+  {
+    "package": "TEL-W6",
+    "navigation": "overview -> enterprise directory",
+    "elapsed_seconds": 4.392
+  },
+  {
+    "package": "TEL-W6",
+    "navigation": "directory -> dossier",
+    "elapsed_seconds": 0.451
+  },
+  {
+    "package": "TEL-W6",
+    "view": "enterprise-dossier",
+    "url_path": "/blueprint-import/bpi-run-c24cbf67c6878839/enterprises/vodafonethree",
+    "http_status": 200,
+    "text_checks": "No unrelated MOD strategy; source/candidate status inspected",
+    "screenshot": "TEL-W6-enterprise-dossier.png",
+    "horizontal_overflow_px": 0
+  },
+  {
+    "package": "TEL-W6",
+    "view": "promotion-completion",
+    "url_path": null,
+    "http_status": null,
+    "text_checks": "No unrelated MOD strategy; source/candidate status inspected",
+    "screenshot": "TEL-W6-promotion-completion.png",
+    "horizontal_overflow_px": 0,
+    "response_origin": "Actual saved approve_and_promote POST response rendered with Playwright set_content; not a GET endpoint"
+  },
+  {
+    "package": "TEL-W6",
+    "navigation": "saved promotion POST response -> existing Industry workspace",
+    "http_status": 200,
+    "method": "completion HTML is actual saved handler response, then follow its destination on local server"
+  },
+  {
+    "package": "TEL-W6",
+    "browser_page_errors": []
+  }
+]

@@ -143,18 +143,33 @@ def evidence_publisher(evidence: SemanticObject) -> str:
     return str((evidence.attributes or {}).get("publisher") or "").strip() if evidence.kind == "evidence" else ""
 
 
-def evidence_subject_matches_enterprise(evidence: SemanticObject, ent: SemanticEnterprise) -> bool:
-    """Whether the Evidence's *primary* subject is the dossier Enterprise."""
-    identities = {ent.name.casefold(), ent.identity_key.casefold(), ent.source_identity.casefold(),
-                  ent.relationship_subject_identity.casefold(), *(alias.casefold() for alias in ent.aliases)}
-    identities.discard("")
-    return evidence_subject(evidence).casefold() in identities
+def evidence_subject_matches_enterprise(evidence: SemanticObject, ent: SemanticEnterprise,
+                                        twin: SemanticTwin | None = None) -> bool:
+    """Resolve explicit primary subject through owned aliases, never publisher/title.
+
+    A report shared with another dossier does not change its primary subject.
+    Multiple dossier matches are unresolved rather than first-match wins.
+    """
+    from cios.applications.flora.live.source_registry import canonical_enterprise_id
+    subject=evidence_subject(evidence)
+    if not subject or ent.ambiguous: return False
+    primary=canonical_enterprise_id(subject)
+    def matches(owner):
+        ids=(owner.name,owner.identity_key,owner.source_identity,owner.relationship_subject_identity,*owner.aliases)
+        return primary in {canonical_enterprise_id(value) for value in ids if value}
+    if not matches(ent): return False
+    if twin is not None:
+        owners=[owner for owner in twin.enterprises if matches(owner)]
+        return len(owners)==1 and owners[0].identity_key==ent.identity_key and owners[0].source_identity==ent.source_identity and not owners[0].ambiguous
+    return True
 
 
 # These rules describe which endpoint is the Enterprise association subject;
 # locating a subject at either endpoint does not make arbitrary edges symmetric.
 ASSOCIATION_DIRECTIONS: Mapping[str, tuple[str, str]] = {
     "Enterprise owns Programme": ("source", "transformation_programme"),
+    "Owner owns Programme": ("source", "transformation_programme"),
+    "Enterprise has Opportunity Hypothesis": ("source", "opportunity"),
     "Opportunity targets Enterprise": ("target", "opportunity"),
 }
 
@@ -402,6 +417,10 @@ def query_subject_associations(twin: SemanticTwin, subject_id: str,
         related = row.target if endpoint == "source" else row.source
         if actual_subject.casefold() != subject or related is None:
             continue
+        allowed={'transformation_programme'} if family=='transformation_programme' else {'opportunity','opportunity_hypothesis','ranked_opportunity','opportunity_twin'}
+        if related.kind not in allowed: continue
+        subject_object=row.source if endpoint=='source' else row.target
+        if not subject_object or subject_object.kind not in {'enterprise','enterprise_twin','entity'}: continue
         if related_kinds is not None and related.kind not in related_kinds:
             continue
         results.append(SubjectAssociation(
@@ -420,19 +439,16 @@ def opportunity_enterprise_names(twin: SemanticTwin, opportunity: SemanticObject
     The relationship is the association owner. Direct fields remain package facts,
     but cannot manufacture an association when the graph has none.
     """
-    opportunity_id = business_object_id(opportunity).casefold()
-    names: list[str] = []
+    names=[]
     for row in resolve_relationships(twin):
-        if (not row.resolved or row.relationship_type != "Opportunity targets Enterprise"
-                or row.source is None or row.target is None
-                or business_object_id(row.source).casefold() != opportunity_id
-                or row.target.kind not in {"enterprise", "enterprise_twin", "entity"}):
-            continue
-        name = str((row.target.attributes or {}).get("enterprise_name")
-                   or (row.target.attributes or {}).get("organisation_name")
-                   or (row.target.attributes or {}).get("name") or row.target.statement).strip()
-        if name and name not in names:
-            names.append(name)
+        rule=ASSOCIATION_DIRECTIONS.get(row.relationship_type)
+        if not row.resolved or not rule or rule[1]!='opportunity': continue
+        owner=row.source if rule[0]=='source' else row.target
+        related=row.target if rule[0]=='source' else row.source
+        if not owner or owner.kind not in {'enterprise','enterprise_twin','entity'} or not related: continue
+        if business_object_id(related)!=business_object_id(opportunity): continue
+        ent=next((ent for ent in twin.enterprises if (ent.relationship_subject_identity or ent.identity_key).casefold()==business_object_id(owner).casefold() and not ent.ambiguous),None)
+        if ent and ent.name not in names: names.append(ent.name)
     return tuple(names)
 
 
@@ -526,7 +542,7 @@ def assemble_semantic_twin(candidates: list[dict[str, Any]]) -> SemanticTwin:
         identity_owner = seed[0]
         source_identity = identity_owner.original_id
         enterprises.append(SemanticEnterprise(
-            key, presentation_key, names[key], tuple(sorted({names[key]})),
+            key, presentation_key, names[key], tuple(sorted({names[key],*(str(alias) for obj in seed for alias in ((obj.attributes or {}).get('aliases') if isinstance((obj.attributes or {}).get('aliases'),(list,tuple)) else [(obj.attributes or {}).get('aliases')] if isinstance((obj.attributes or {}).get('aliases'),str) else []) if isinstance(alias,str))})),
             tuple(associated), source_identity, identity_owner.record_id,
             source_identity or key, key in ambiguous, tuple(missing)))
     return SemanticTwin(objects, tuple(enterprises), tuple(sorted(unresolved_all)))

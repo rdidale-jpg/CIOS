@@ -546,7 +546,7 @@ def approve_and_promote(import_run_id: str, form: dict[str, list[str]], headers:
         result = svc.execute_approved_plan(import_run_id, approval.approval_id, authenticated_flora_user(headers), headers)
         impacts = assess_impacts(ctx["package"], TwinDependencyService().discover(ctx["package"]))
         DownstreamReconciliationRepository().create_pending(ctx["package"], ctx["package"].identity.package_version, impacts, authenticated_flora_user(headers))
-        repair_blueprint_canvas_access(import_run_id, headers)
+        if not industry_package(ctx["package"]): repair_blueprint_canvas_access(import_run_id, headers)
         return completion_page(import_run_id, result.to_dict(), headers), 200
     except BlueprintPromotionError as exc:
         return _safe_failure(str(exc), "promotion", False, True, "The package remains available. Review the plan and retry after resolving the issue."), 400
@@ -607,18 +607,53 @@ def cancel_import(import_run_id: str, form: dict[str,list[str]], headers: Any) -
 
 
 def completion_page(import_run_id: str, result: dict[str, Any], headers: Any) -> str:
-    record = repair_blueprint_canvas_access(import_run_id, headers)
     ctx = _context(import_run_id); package = ctx["package"] if ctx else None
-    if record is None:
+    industrial=bool(package and industry_package(package))
+    execution_success=result.get("final_execution_status") in {"succeeded","repeat_no_change"}
+    record = None if industrial else repair_blueprint_canvas_access(import_run_id, headers)
+    if record is None and not industrial:
         record = EnterpriseCanvasAccessRepository().get_by_import_run(import_run_id)
     enterprise = record.enterprise_id if record else (package.identity.enterprise_id if package else "")
-    canvas_href = f"/digital-twins/{escape(enterprise)}/canvas" if enterprise else f"/blueprint-import/{escape(import_run_id)}"
+    canvas_href = f"/blueprint-import/{escape(import_run_id)}/intelligence" if industrial else (f"/digital-twins/{escape(enterprise)}/canvas" if enterprise else f"/blueprint-import/{escape(import_run_id)}")
+    destination_label="Open Industry Twin workspace" if industrial else "Open Enterprise Canvas"
     projection_rows=''.join(f"<li>{escape(str(row.get('observation_id','')))}: {escape(str(row.get('status','')))} — {escape(str(row.get('reason') or row.get('action') or ''))}</li>" for row in result.get('model_projection_results',[]))
     projection_summary=f"<section class='card'><h2>Enterprise Model reconciliation</h2><p>Status: <strong>{escape(str(result.get('model_projection_status','not_assessed')))}</strong></p><p>Canonical promotion and model projection are distinct outcomes. Unsupported mappings remain inspectable without invented model state.</p><ul>{projection_rows}</ul></section>"
-    body = _workflow_progress("explore", import_run_id, "promoted") + ( _package_header(package) if package else "") + f"""<section class='card'><h2>Explore promoted Twin</h2><table><tr><th>Promotion status</th><td>{escape(result.get('final_execution_status','unknown'))}</td></tr><tr><th>Records created</th><td>{len(result.get('records_created', []))}</td></tr><tr><th>Records updated</th><td>{len(result.get('records_updated', []))}</td></tr><tr><th>Projections retained</th><td>{_projection_count(import_run_id)}</td></tr><tr><th>Exceptions</th><td>{len(result.get('records_blocked', [])) + len(result.get('records_failed', []))}</td></tr></table><p>The original ZIP was preserved unchanged in governed runtime storage.</p><p><a href='{canvas_href}'>Open Enterprise Canvas</a> · <a href='/blueprint-import/{escape(import_run_id)}'>Open import record</a></p></section>"""
-    accepted_links=''.join(f"<li><a href='/digital-twins/{escape(row['enterprise_id'])}/canvas'>Inspect accepted Enterprise Model: {escape(row['enterprise_id'])}</a></li>" for row in result.get('model_projection_results',[]) if row.get('status')=='applied' and row.get('enterprise_id'))
+    heading="Explore promoted canonical subset" if execution_success else "Promotion did not complete"
+    body = _workflow_progress("explore" if execution_success else "review", import_run_id, "promoted" if execution_success else "received") + ( _package_header(package) if package else "") + f"""<section class='card'><h2>{heading}</h2><table><tr><th>Promotion status</th><td>{escape(result.get('final_execution_status','unknown'))}</td></tr><tr><th>Records created</th><td>{len(result.get('records_created', []))}</td></tr><tr><th>Records updated</th><td>{len(result.get('records_updated', []))}</td></tr><tr><th>Projections retained</th><td>{_projection_count(import_run_id)}</td></tr><tr><th>Receipt records blocked or failed</th><td>{len(result.get('records_blocked', [])) + len(result.get('records_failed', []))}</td></tr></table><p>The original ZIP was preserved unchanged in governed runtime storage.</p><p><a href='{canvas_href}'>{destination_label}</a> · <a href='/blueprint-import/{escape(import_run_id)}'>Open import record</a></p></section>"""
+    accepted_links=''.join(f"<li><a href='/digital-twins/{escape(row['enterprise_id'])}/canvas'>Inspect accepted Enterprise Model: {escape(row['enterprise_id'])}</a></li>" for row in result.get('model_projection_results',[]) if execution_success and row.get('status')=='applied' and row.get('enterprise_id'))
     if accepted_links: projection_summary+=f"<section class='card'><h2>Accepted model views</h2><p>These existing model-backed views are separate from candidate Industry dossier context.</p><ul>{accepted_links}</ul></section>"
-    return _page("Blueprint import complete", body+projection_summary+(_evidence_mapping_section(package) if package else ""))
+    return _page("Blueprint import complete" if execution_success else "Blueprint promotion not complete", body+_promotion_outcomes(ctx,result)+projection_summary+(_evidence_mapping_section(package) if package else ""))
+
+
+def _promotion_outcomes(ctx,result):
+    from .review_plan import review_effect_counts,_class_persistence_readiness
+    from .promotion import CanonicalPromotionRepository
+    if not ctx:return "<section class='card'><h2>Acceptance scope</h2><p>Import outcome details unavailable. Complete Industry Twin acceptance: not established.</p></section>"
+    run=ctx['package'].import_run_id
+    plan=next((p for p in DryRunPlanRepository().list(run) if p['plan_id']==result.get('approved_plan_id')),None)
+    effects=(plan or {}).get('effects',[])
+    proposed,rec=review_effect_counts(ctx.get('candidates',[]),effects)
+    readiness=_class_persistence_readiness(ctx.get('candidates',[]),effects)
+    approval=CanonicalPromotionRepository().load_approval(run,result['approval_id']) if result.get('approval_id') else None
+    approval_recorded=bool(approval and approval.approved_plan_id==result.get('approved_plan_id') and approval.package_ref==ctx['package'].package_ref)
+    rows=[('Technical package validation','Failed' if (ctx.get('summary') or {}).get('errors') else 'Passed' if ctx.get('summary') else 'Not assessed'),
+          ('Candidate staging acceptance',sum(c.get('validation_status')=='accepted' for c in ctx.get('candidates',[]))),
+          ('Ignored / quarantined / rejected source rows',' / '.join(str(sum(c.get('validation_status')==state for c in ctx.get('candidates',[]))) for state in ('ignored','quarantined','rejected'))),
+          ('Persistable staged candidates',proposed.get('Accepted canonical candidates',0)),
+          ('Owner approval','Recorded for this plan' if approval_recorded else 'Not verified from an approval record'),
+          ('Canonical execution',str(result.get('final_execution_status','Unknown'))+' — execution status is not full Twin acceptance'),
+          ('Actual / approved canonical mutations',str(result.get('actual_mutation_count','Unknown'))+' / '+str(approval.approved_expected_mutation_count if approval else 'Not verified')),
+          ('Support metadata retained',proposed.get('Accepted support records',0)),
+          ('Accepted but non-persistable',proposed.get('Accepted but non-persistable',0)),
+          ('Deferred or excluded canonical candidates',proposed.get('Deferred or excluded canonical candidates',0)),
+          ('Execution records skipped',len(result.get('records_skipped',[]))),
+          ('Durable model reconciliation',result.get('model_projection_status','Not assessed')),
+          ('Complete Industry Twin acceptance','Not established — no complete-acceptance owner result is supplied')]
+    table=''.join(f'<tr><th>{escape(str(label))}</th><td>{escape(str(value))}</td></tr>' for label,value in rows)
+    classes=''.join(f"<tr><td>{escape(row['class'])}</td><td>{row['accepted']}</td><td>{escape(row['disposition'])}</td><td>{row['expected_mutations']}</td></tr>" for row in readiness)
+    balance='Balanced' if plan and rec['counts_reconcile'] else 'Unresolved — no matching plan or count mismatch'
+    scope_label="Partial canonical promotion." if result.get("final_execution_status") in {"succeeded","repeat_no_change"} else "Canonical promotion not successful."
+    return f"<section class='card'><h2>Acceptance scope and reconciliation</h2><p><strong>{scope_label}</strong> Source business objects and skipped classes remain candidate intelligence. Staging partitions: {balance}.</p><table>{table}</table><details><summary>Class persistence and exclusions</summary><table><tr><th>Source class</th><th>Staged accepted</th><th>Existing persistence boundary</th><th>Planned mutations</th></tr>{classes}</table></details></section>"
 
 
 def history_page(headers: Any) -> tuple[str, int]:

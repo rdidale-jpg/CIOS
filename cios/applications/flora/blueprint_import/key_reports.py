@@ -162,11 +162,11 @@ def key_reports_for_enterprise(ent: SemanticEnterprise, twin: SemanticTwin | Non
         # The canonical Evidence object can establish a report document only
         # through an explicitly governed source location/document field.
         document = url or bool(_value(obj, "source_document") or _value(obj, "document_reference"))
-        subject_match = evidence_subject_matches_enterprise(obj, ent)
+        subject_match = evidence_subject_matches_enterprise(obj, ent, twin)
         supplied = semantics.is_company_financial_reporting and document and subject_match
         eligible = semantics.is_financial_reporting_evidence and subject_match
         if semantics.is_company_financial_reporting and not subject_match:
-            stage, reason = ("ENTERPRISE SUBJECT", "Evidence is not company financial reporting for the dossier Enterprise.")
+            stage, reason = ("ENTERPRISE SUBJECT", "Primary report subject is missing, ambiguous or not governed for this dossier Enterprise.")
         elif eligible:
             stage, reason = ("None", "Eligible financial-reporting Evidence.")
         else:
@@ -180,7 +180,7 @@ def key_reports_for_enterprise(ent: SemanticEnterprise, twin: SemanticTwin | Non
             semantics.is_company_financial_reporting and subject_match))
     def latest(kind: str) -> KeyReport | None:
         rows = [obj for obj in evidence if _report_kind(obj) == kind and
-                (kind != "company" or evidence_subject_matches_enterprise(obj, ent))]
+                (kind != "company" or evidence_subject_matches_enterprise(obj, ent, twin))]
         if not rows:
             return None
         # Richer extracts win duplicate same-date report references, then the
