@@ -89,9 +89,45 @@ class GovernedIdentityResolutionRepository:
         path = self.path(import_run_id)
         return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
 
+    def confirm_explicit(self, package, fields, actor, rationale, headers):
+        """An authorised owner decision, never a filename-derived identity."""
+        from .promotion import can_approve_blueprint_promotion
+        from .lifecycle import ImportLifecycleService
+        from cios.contracts.flora_blueprint import BlueprintManifest
+        if not can_approve_blueprint_promotion(headers,package.identity.enterprise_id):
+            raise PermissionError('Twin identity decision requires package owner promotion authority')
+        state=ImportLifecycleService().get(package.import_run_id)
+        if state.state in {'promoted','superseded','archived','cancelled','deleted'} or state.canonical_writes:
+            raise ValueError('Accepted or terminal release identity cannot be silently rewritten')
+        if not str(actor).strip() or not str(rationale).strip(): raise ValueError('Identity decision requires actor and rationale')
+        keys=('twin_id','twin_type','primary_subject_id','primary_subject_name','primary_subject_class','governed_scope','canonical_owner')
+        if set(fields)!=set(keys) or any(not isinstance(fields[k],str) or not fields[k].strip() for k in keys):
+            raise ValueError('Supply the complete explicit governed Twin identity')
+        manifest=BlueprintManifest(package_id=package.identity.package_id,package_version=package.identity.package_version,
+            enterprise_id=package.identity.enterprise_id,profile_version=package.identity.profile_version,**fields)
+        if manifest.primary_subject_class!=manifest.twin_type: raise ValueError('Twin type and primary subject class must agree')
+        resolved={key:getattr(manifest,key) for key in keys}
+        row={'import_run_id':package.import_run_id,'actor':actor,'rationale':rationale,'confirmed_at':utc_now(),
+            'source_package':package.identity.package_id,'source_package_checksum':package.package_sha256,
+            'original_package_metadata':package.package_inspection,'resolved_identity':resolved,'decision_type':'explicit_owner_decision'}
+        path=self.path(package.import_run_id);prior=path.read_bytes() if path.exists() else None
+        try:
+            atomic_write_json(path,row);BlueprintImportLedger().append('twin_identity_confirmed',row)
+        except Exception:
+            if prior is None:path.unlink(missing_ok=True)
+            else:
+                from cios.applications.flora.storage import atomic_write_text
+                atomic_write_text(path,prior.decode())
+            raise
+        return row
+
     def confirm_existing(self, package: BlueprintPackageRecord, existing_package_ref: str,
                          actor: str, rationale: str) -> dict[str, Any]:
         """Confirm only an identity backed by an existing governed registry record."""
+        from .lifecycle import ImportLifecycleService
+        state=ImportLifecycleService().get(package.import_run_id)
+        if state.state in {"promoted","superseded","archived","cancelled","deleted"} or state.canonical_writes:
+            raise ValueError("Accepted or terminal release identity cannot be silently rewritten")
         if not actor.strip() or not rationale.strip():
             raise ValueError("Identity confirmation requires an actor and rationale.")
         existing = BlueprintPackageRegistry().get(existing_package_ref)

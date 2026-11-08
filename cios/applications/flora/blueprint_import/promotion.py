@@ -98,6 +98,7 @@ class CanonicalPromotionApproval:
     review_fingerprint: str
     mapping_fingerprint: str
     superseded: bool = False
+    twin_identity_fingerprint: str = ''
     def to_dict(self):
         d=asdict(self); d["approved_expected_effects"]=list(self.approved_expected_effects); d["unresolved_warnings_accepted"]=list(self.unresolved_warnings_accepted); return d
 
@@ -193,6 +194,7 @@ def _approval_id(plan_id: str, approver: str) -> str: return "bpi-approval-"+sha
 class CanonicalPromotionService:
     def __init__(self, registry=None, staging=None, reviews=None, mappings=None, plans=None, repo=None, ledger=None, evidence_repo=None, observation_repo=None, model_repo=None):
         self.registry=registry or BlueprintPackageRegistry(); self.staging=staging or CandidateStagingRepository(); self.reviews=reviews or CandidateReviewRepository(); self.mappings=mappings or ImportMappingRepository(); self.plans=plans or DryRunPlanRepository(); self.repo=repo or CanonicalPromotionRepository(); self.ledger=ledger or BlueprintImportLedger(); self.evidence_repo=evidence_repo or EvidenceRepository(); self.observation_repo=observation_repo or ObservationRepository(); self.contradiction_repo=ContradictionRepository(); self.generic_repos={rc: CanonicalJsonlRepository(rc) for rc in ("unknown", "entity", "relationship", "human_knowledge", "fact", "reasoning_lineage")}
+        self._industry_flags={}
         self.models=model_repo or EnterpriseModelRepository()
         self.memory=ObservationMemoryService(self.observation_repo,self.models)
     def approve_plan(self, import_run_id: str, plan_id: str, approver: str, rationale: str, headers: Any, unresolved_warnings_accepted: tuple[str,...]=(), expiry_or_invalidation_condition: str="invalid if plan, package, review decisions or mappings change"):
@@ -203,7 +205,15 @@ class CanonicalPromotionService:
         if not _plan_reconciles(plan): raise BlueprintPromotionError("Accepted canonical candidates do not reconcile with create, update and unchanged effects")
         self._assert_constructor_valid(import_run_id, plan)
         self._assert_target_ownership(import_run_id, plan, headers)
+        existing=self.repo.load_approval(import_run_id,_approval_id(plan_id,approver))
+        if existing and self.repo.successful_for(import_run_id,plan_id,existing.approval_id):
+            self._assert_still_valid(existing,plan,package.package_sha256)
+            return existing
+        self._validate_evidence_plan(import_run_id,plan,package)
         a=CanonicalPromotionApproval("1.0", _approval_id(plan_id, approver), plan_id, import_run_id, plan["package_ref"], package.package_sha256, approver, utc_now(), rationale, tuple(plan["effects"]), int(plan["expected_canonical_mutation_count"]), unresolved_warnings_accepted, expiry_or_invalidation_condition, _fp(plan), self._reviews_fingerprint(import_run_id), _fp(self.mappings.list(import_run_id)))
+        from dataclasses import replace
+        from .twin_governance import project_twin_identity
+        a=replace(a,twin_identity_fingerprint=_fp(project_twin_identity(package).to_dict()))
         self.repo.save_approval(a); self.ledger.append("canonical_promotion_approved", a.to_dict()); return a
     def execute_approved_plan(self, import_run_id: str, approval_id: str, actor: str, headers: Any) -> CanonicalPromotionResult:
         # Serializes importer threads only; file compensation is not a database
@@ -227,10 +237,17 @@ class CanonicalPromotionService:
             raise BlueprintPromotionError("Actor is not authorised to execute Blueprint canonical promotion")
         self._assert_still_valid(a, plan, package.package_sha256)
         self._assert_target_ownership(import_run_id, plan, headers)
+        from .twin_governance import project_twin_identity
+        if a.twin_identity_fingerprint and a.twin_identity_fingerprint!=_fp(project_twin_identity(package).to_dict()):
+            raise BlueprintPromotionError('Governed Twin identity changed after approval')
         candidates={c["candidate_record_id"]:c for c in self.staging.list_candidates(import_run_id)}
         targets={_record_enterprise(candidates[e["candidate_id"]].get("payload") or {},package)
                  for e in plan["effects"] if e["record_class"]=="observation" and e["effect_type"] in {"create","update"}}
-        paths=self._canonical_paths()+[self.models.path_for(target) for target in targets]+[self.ledger.path]
+        from .lifecycle import ImportLifecycleService,TwinImportLifecycleService
+        lifecycle=ImportLifecycleService();releases=TwinImportLifecycleService()
+        previous_release=releases.current_release(package)
+        paths=self._canonical_paths()+[self.models.path_for(target) for target in targets]+[self.ledger.path,lifecycle.path(import_run_id)]
+        if previous_release: paths.append(lifecycle.path(previous_release.import_run_id))
         if any(Path(str(path)+".bpi_backup").exists() for path in paths):
             raise BlueprintPromotionError("Unrecovered promotion backup exists; single-writer recovery review is required before retry")
         eid=_execution_id(a.approved_plan_id,a.approval_id)
@@ -241,6 +258,7 @@ class CanonicalPromotionService:
                 raise BlueprintPromotionError("Interrupted promotion requires recovery review before retry")
         prior=self.repo.successful_for(import_run_id,a.approved_plan_id,a.approval_id)
         if prior: return CanonicalPromotionResult(**{**prior.to_dict(),"final_execution_status":"repeat_no_change"})
+        bindings=self._validate_evidence_plan(import_run_id,plan,package)
         started=utc_now(); backups=self._backup_paths(paths)
         created=[]; updated=[]; mapped=[]; unchanged=[]; skipped=[]; blocked=[]; observations=[]; projections=[]
         self.repo.save_result(import_run_id,CanonicalPromotionResult("1.0",eid,a.approved_plan_id,a.approval_id,actor,started,"",final_execution_status="running"))
@@ -250,10 +268,13 @@ class CanonicalPromotionService:
                 c=candidates.get(e.candidate_id); d=reviews.get(e.candidate_id); m=maps.get(e.candidate_id)
                 if not c or not d or d.get("decision")!="approve": blocked.append(e.candidate_id); continue
                 if e.effect_type in NON_MUTATING_EFFECTS:
+                    if e.record_class=='evidence' and e.effect_type in {'mapped','unchanged','duplicate'}:
+                        self._retain_evidence_release(e,c,m or {},a,actor)
                     (mapped if e.effect_type=="mapped" else unchanged if e.effect_type in {"unchanged","duplicate"} else skipped).append(e.candidate_id)
                     continue
                 if e.effect_type not in {"create","update"} or e.record_class not in SUPPORTED_PROMOTION_CLASSES:
                     skipped.append(f"{e.record_class}:{e.candidate_id}"); continue
+                c,bound=self._bind_candidate_evidence(c,package,bindings)
                 cid=self._promote(e,c,d,m or {},a,actor)
                 (created if e.effect_type=="create" else updated).append(cid)
                 if e.record_class=="observation": observations.append(cid)
@@ -267,6 +288,8 @@ class CanonicalPromotionService:
             result=CanonicalPromotionResult("1.0",eid,a.approved_plan_id,a.approval_id,actor,started,utc_now(),
                 tuple(created),tuple(updated),tuple(mapped),tuple(unchanged),tuple(skipped),tuple(blocked),(),
                 a.approved_expected_mutation_count,actual,"not_required","succeeded",model_projection_status=projection_status,model_projection_results=tuple(projections))
+            lifecycle.mark_promoted(import_run_id,actor,actual,eid)
+            if previous_release: lifecycle.mark_superseded(previous_release.import_run_id,actor,import_run_id,eid)
             # Receipt and audit errors are promotion errors, not successful
             # reconciliation. Keep these inside the compensated operation.
             self.repo.save_result(import_run_id,result)
@@ -287,6 +310,117 @@ class CanonicalPromotionService:
             raise BlueprintPromotionError(str(exc)+("; recovery review is required" if recovery=='recovery_required' else "")) from exc
         self._discard_backups(backups)
         return result
+
+    def _validate_evidence_plan(self, import_run_id, plan, package):
+        from .review import BlueprintReviewError
+        try: return self._evidence_bindings(import_run_id,plan,package)
+        except BlueprintReviewError as exc: raise BlueprintPromotionError(str(exc)) from exc
+
+    def _evidence_bindings(self, import_run_id, plan, package):
+        from .mapping import (industry_package,governed_source_scope,record_owner,
+                              target_fingerprint,content_fingerprint,evidence_is_current)
+        candidates={c['candidate_record_id']:c for c in self.staging.list_candidates(import_run_id)}
+        maps={m['candidate_id']:m for m in self.mappings.list(import_run_id)}
+        reviews=self.reviews.latest_by_candidate(import_run_id)
+        industrial=industry_package(package)
+        self._industry_flags[package.package_ref]=industrial
+        if industrial: governed_source_scope(package,record_owner({},package),is_industry=True)
+        bindings={}
+        for effect in plan['effects']:
+            if effect['record_class']!='evidence': continue
+            c=candidates[effect['candidate_id']];payload=c.get('payload') or {};m=maps.get(c['candidate_record_id']) or {}
+            owner=record_owner(payload,package)
+            scope=governed_source_scope(package,owner,is_industry=industrial)
+            decision=reviews.get(c['candidate_record_id']) or {}
+            eligible=(c.get('validation_status')=='accepted' and decision.get('decision')=='approve'
+                      and effect['effect_type'] in {'create','update','mapped','unchanged','duplicate'})
+            if effect['effect_type'] in {'unresolved','conflict'}:
+                raise BlueprintPromotionError('Unresolved Evidence identity or source collision blocks acceptance')
+            target=effect['canonical_id'] or payload.get('evidence_id') or c['original_source_id']
+            if eligible:
+                prior=self.evidence_repo.get(target)
+                if not evidence_is_current(payload):
+                    # Enterprise imports already retain explicitly historical
+                    # records for comparison. They remain ineligible to model
+                    # projection/qualified reasoning under the existing checks.
+                    historical=any(str(payload.get(key,'')).casefold() in {'retired','expired','superseded'} for key in ('lifecycle_state','freshness'))
+                    rejected=any(str(payload.get(key,'')).casefold() in {'rejected','quarantined','invalid'} for key in ('status','validation_status','acceptance_state'))
+                    if industrial or rejected or not historical:
+                        raise BlueprintPromotionError('Rejected or inactive Evidence is not eligible for promotion')
+                if prior and (record_owner(prior,package)!=owner or (prior.get('governed_source_scope') and prior['governed_source_scope']!=scope)):
+                    raise BlueprintPromotionError('Evidence target crosses Enterprise or governed source scope')
+                if prior and not evidence_is_current(prior): raise BlueprintPromotionError('Canonical Evidence target is not current accepted support')
+                if m.get('source_scope') and m['source_scope']!=scope: raise BlueprintPromotionError('Evidence scope changed; regenerate mappings')
+                if m.get('source_content_fingerprint') and m['source_content_fingerprint']!=content_fingerprint(payload):
+                    raise BlueprintPromotionError('Source Evidence changed after mapping')
+                if m.get('expected_target_fingerprint') and m['expected_target_fingerprint']!=target_fingerprint(prior):
+                    raise BlueprintPromotionError('Canonical Evidence changed after review; regenerate mapping')
+                if effect['effect_type']=='create' and prior and content_fingerprint(prior)!=content_fingerprint(payload):
+                    raise BlueprintPromotionError('Canonical Evidence target already exists with different content; explicit reconciliation mapping required')
+                if effect['effect_type'] in {'mapped','unchanged','duplicate','update'} and not prior:
+                    raise BlueprintPromotionError('Approved canonical Evidence target does not exist')
+            for ref in {str(v) for v in (c['original_source_id'],payload.get('evidence_id'),payload.get('id')) if v}:
+                key=(owner,ref)
+                binding={'target':target,'eligible':eligible,'source_fingerprint':content_fingerprint(payload)}
+                if key in bindings and bindings[key]!=binding: raise BlueprintPromotionError('Ambiguous source Evidence alias in approved plan')
+                bindings[key]=binding
+        return bindings
+
+    def _bind_candidate_evidence(self, candidate, package, bindings):
+        from copy import deepcopy
+        from .mapping import record_owner,evidence_is_current,industry_package,governed_source_scope
+        owner=record_owner(candidate.get('payload') or {},package);used={};ineligible=[]
+        industrial=self._industry_flags.get(package.package_ref)
+        if industrial is None: industrial=industry_package(package)
+        fields={'supporting_evidence_ids','evidence_refs','evidence_ids','evidence','resolution_evidence_refs','counter_evidence_ids','source_evidence_ids'}
+        def bind(ref):
+            binding=bindings.get((owner,ref))
+            if binding:
+                if not binding['eligible']: raise BlueprintPromotionError('Citation points to rejected or unapproved package Evidence: '+ref)
+                used[ref]=binding['target'];return binding['target']
+            row=self.evidence_repo.get(ref)
+            if row and (record_owner(row,package)!=owner or not evidence_is_current(row)
+                        or (industrial and row.get('governed_source_scope') and row['governed_source_scope']!=governed_source_scope(package,owner,is_industry=True))):
+                if industrial: raise BlueprintPromotionError('Citation points to foreign or inactive canonical Evidence: '+ref)
+                ineligible.append(ref)
+                # Preserve existing partial Enterprise imports for lineage;
+                # model projection/ClaimValidator must reject this support.
+            if not row: ineligible.append(ref)
+            return ref
+        def walk(value,depth=0):
+            if isinstance(value,dict):
+                output={}
+                for key,item in value.items():
+                    if key in {'source_payload','blueprint_import_lineage'}:output[key]=item;continue
+                    reference=key in fields or (depth==0 and key=='evidence_id' and candidate['candidate_object_class']!='evidence')
+                    if reference and isinstance(item,(str,list,tuple)):
+                        refs=_split_refs(item);mapped=[bind(ref) for ref in refs]
+                        output[key]=mapped[0] if isinstance(item,str) and len(mapped)==1 else mapped
+                    elif candidate['candidate_object_class']=='relationship' and depth==0 and key in {'source','target','relationship_source','relationship_target'} and isinstance(item,str):
+                        output[key]=bind(item) if (owner,item) in bindings else item
+                    elif key=='references' and isinstance(item,list):
+                        output[key]=[bind(ref) if isinstance(ref,str) and (owner,ref) in bindings else ref for ref in item]
+                    else: output[key]=walk(item,depth+1)
+                return output
+            if isinstance(value,list):return [walk(item,depth+1) for item in value]
+            return value
+        result=dict(candidate,payload=walk(deepcopy(candidate.get('payload') or {})),approved_evidence_bindings=used,ineligible_evidence_refs=list(dict.fromkeys(ineligible)))
+        return result,used
+
+    def _retain_evidence_release(self, effect, candidate, mapping, approval, actor):
+        from .mapping import governed_source_scope,record_owner,content_fingerprint
+        package=self.registry.get(approval.package_ref)
+        target=effect.canonical_id or mapping.get('canonical_id') or candidate['original_source_id']
+        prior=self.evidence_repo.get(target)
+        if not prior: raise BlueprintPromotionError('Reused Evidence target is unavailable')
+        lineage=self._lineage(effect,candidate,self.reviews.latest_by_candidate(approval.import_run_id)[candidate['candidate_record_id']],mapping,approval,actor)
+        releases=list(prior.get('source_release_provenance') or [])
+        if not any(row.get('package_checksum')==lineage['package_checksum'] and row.get('original_external_id')==lineage['original_external_id'] for row in releases):
+            releases.append(lineage)
+            row={**prior,'source_release_provenance':releases,'source_external_id':prior.get('source_external_id') or candidate['original_source_id'],
+                 'governed_source_scope':governed_source_scope(package,record_owner(candidate.get('payload') or {},package),is_industry=self._industry_flags.get(package.package_ref)),
+                 'source_content_fingerprint':content_fingerprint(candidate.get('payload') or {})}
+            self.evidence_repo.save(row)
 
     def _project_observation(self, canonical_id):
         observation=self.observation_repo.get(canonical_id)
@@ -391,12 +525,17 @@ class CanonicalPromotionService:
         if a.superseded or a.package_sha256 != sha or a.plan_fingerprint != _fp(plan) or a.review_fingerprint != self._reviews_fingerprint(a.import_run_id) or a.mapping_fingerprint != _fp(self.mappings.list(a.import_run_id)):
             raise BlueprintPromotionError("Approved plan is no longer valid")
     def _lineage(self,e,c,d,m,a,actor):
-        return {"package_id": a.package_ref, "package_version": self.registry.get(a.package_ref).identity.package_version, "package_checksum": a.package_sha256, "import_run_id": a.import_run_id, "candidate_id": e.candidate_id, "review_decision_id": d["review_decision_id"], "mapping_id": m.get("mapping_id",""), "dry_run_plan_id": a.approved_plan_id, "approval_id": a.approval_id, "original_external_id": c["original_source_id"], "source_file": c["source_file"], "source_location": c["source_location"], "source_fingerprint": c["source_fingerprint"], "approving_actor": a.approver_identity, "executing_actor": actor, "promotion_timestamp": utc_now()}
+        return {"package_id": a.package_ref, "package_version": self.registry.get(a.package_ref).identity.package_version, "package_checksum": a.package_sha256, "import_run_id": a.import_run_id, "candidate_id": e.candidate_id, "review_decision_id": d["review_decision_id"], "mapping_id": m.get("mapping_id",""), "dry_run_plan_id": a.approved_plan_id, "approval_id": a.approval_id, "original_external_id": c["original_source_id"], "source_file": c["source_file"], "source_location": c["source_location"], "source_fingerprint": c["source_fingerprint"], "approving_actor": a.approver_identity, "executing_actor": actor, "promotion_timestamp": utc_now(),"evidence_id_bindings":c.get('approved_evidence_bindings',{}),"ineligible_evidence_refs":c.get("ineligible_evidence_refs",[])}
     def _promote(self,e,c,d,m,a,actor):
         lineage=self._lineage(e,c,d,m,a,actor); payload=dict(c.get("payload") or {})
         if e.record_class=="evidence":
             eid=e.canonical_id or m.get("canonical_id") or m.get("proposed_canonical_id") or payload.get("evidence_id") or c.get("original_source_id") or "EVID-"+sha256_bytes(e.effect_id.encode())[:16].upper(); prior=self.evidence_repo.get(eid)
-            row={**payload, "enterprise_id": _record_enterprise(payload,self.registry.get(a.package_ref)), "evidence_id": eid, "blueprint_import_lineage": {**lineage, "canonical_id": eid, "prior_canonical_version": prior}}
+            from .mapping import governed_source_scope,content_fingerprint,record_owner
+            package=self.registry.get(a.package_ref)
+            row={**payload, "enterprise_id": _record_enterprise(payload,package), "evidence_id": eid, "blueprint_import_lineage": {**lineage, "canonical_id": eid, "prior_canonical_version": prior},
+                 'source_external_id':c['original_source_id'],'governed_source_scope':governed_source_scope(package,record_owner(payload,package),is_industry=self._industry_flags.get(package.package_ref)),
+                 'source_content_fingerprint':content_fingerprint(payload),
+                 'source_release_provenance':[item for item in (prior or {}).get('source_release_provenance',[]) if not (item.get('package_checksum')==a.package_sha256 and item.get('original_external_id')==c['original_source_id'])]+[lineage]}
             return self.evidence_repo.save(row)["evidence_id"]
         if e.record_class=="observation":
             obs = self._observation_from_payload(e, c, payload, lineage, a)

@@ -52,12 +52,19 @@ class BlueprintReviewPlanCoordinator:
         summary = self.staging.load_summary(import_run_id) or {}
         if candidates is None: candidates = self.staging.list_candidates(import_run_id)
         payload = {"summary": {k: summary.get(k) for k in ("package_sha256","candidate_records_staged","records_accepted_into_staging","records_quarantined","records_rejected","canonical_mutations")}, "candidate_ids": [c.get("candidate_record_id") for c in candidates]}
+        from .mapping import ImportMappingRepository
+        from .review import CandidateReviewRepository
+        from .twin_governance import project_twin_identity
+        package=self.registry.get(str(candidates[0]['source_package_ref'])) if candidates else None
+        payload.update(identity=project_twin_identity(package).to_dict() if package else None,
+                       mappings=ImportMappingRepository().list(import_run_id),
+                       reviews=CandidateReviewRepository().latest_by_candidate(import_run_id))
         return sha256_bytes(json.dumps(payload, sort_keys=True).encode())
     def latest_job(self, import_run_id: str) -> dict[str, Any] | None:
         root = self.job_dir(import_run_id)
         if not root.exists(): return None
-        jobs = sorted(root.glob("*.json"))
-        return json.loads(jobs[-1].read_text()) if jobs else None
+        jobs = [json.loads(path.read_text()) for path in root.glob("*.json")]
+        return max(jobs,key=lambda row:row.get("started_at",0)) if jobs else None
     def completed_summary(self, import_run_id: str, fp: str) -> dict[str, Any] | None:
         path = self.summary_path(import_run_id)
         if not path.exists(): return None
@@ -88,6 +95,7 @@ class BlueprintReviewPlanCoordinator:
     def _run(self, job, actor, headers, ensure_defaults):
         try:
             ensure_defaults()
+            job["staging_fingerprint"]=self.fingerprint(job["import_run_id"])
             for stage in STAGES[1:5]: job.update(stage=stage); self._save_job(job)
             plan = DryRunPlanningService().create_plan(job["import_run_id"], actor, headers)
             effects = [e.to_dict() for e in plan.effects]
@@ -100,7 +108,8 @@ class BlueprintReviewPlanCoordinator:
             support_records = sum(1 for c in candidates.values() if c.get("validation_status") == "accepted" and c.get("candidate_object_class") in SUPPORT_RECORD_CLASSES)
             non_persistable = 0
             collapsed = totals["duplicate"]
-            proposed = {"Creates":totals["create"],"Updates":totals["update"],"Unchanged":totals["unchanged"],"Accepted support records": support_records,"Collapsed/deduplicated candidates": collapsed,"Conflicts":totals["conflict"],"Unresolved references":totals["unresolved"],"Projection-only":totals["projection"], "Ignored":totals["ignored"], "Accepted but non-persistable": non_persistable, "Expected canonical mutations": plan.expected_canonical_mutation_count}
+            reused_evidence=sum(e["effect_type"]=="mapped" and e["record_class"]=="evidence" for e in effects)
+            proposed = {"Creates":totals["create"],"Updates":totals["update"],"Unchanged":totals["unchanged"]+reused_evidence,"Accepted support records": support_records,"Collapsed/deduplicated candidates": collapsed,"Conflicts":totals["conflict"],"Unresolved references":totals["unresolved"],"Projection-only":totals["projection"], "Ignored":totals["ignored"], "Accepted but non-persistable": non_persistable, "Expected canonical mutations": plan.expected_canonical_mutation_count}
             accepted_canonical = sum(1 for c in candidates.values() if c.get("validation_status") == "accepted")
             candidate_actions = proposed["Creates"] + proposed["Updates"] + proposed["Unchanged"] + proposed["Accepted support records"] + proposed["Accepted but non-persistable"] + proposed["Collapsed/deduplicated candidates"]
             unaccounted = accepted_canonical - candidate_actions
