@@ -32,7 +32,22 @@ def enterprise_memory_panel(enterprise_id: str, models: EnterpriseModelRepositor
         assessments=model_pressure_assessments(model,observations=obs_repo)
         pressure_rows=''.join(f"<tr><td>{escape(str(row['pressure_id']))}</td><td>{escape(row['qualification'])}</td><td>{escape(row['condition'])}</td><td>{escape(row['consequence'])}</td><td>{escape(row['reason'])}</td><td>{escape(', '.join(row['evidence_refs']))}</td><td>{escape(', '.join(row['contradiction_refs']))}</td><td>{escape(', '.join(row['unknown_refs']))}</td><td>{escape(row['last_change'])}</td></tr>" for row in assessments)
         pressure_html="<section class='card'><h3>Material Pressure assessments</h3><p>Only QUALIFIED assessments are current Pressure truth. Unresolved and rejected rows are assurance diagnostics; original facts and history remain retained.</p><table><thead><tr><th>Pressure</th><th>Qualification</th><th>Condition</th><th>Enterprise consequence</th><th>Qualification reason</th><th>Evidence</th><th>Contradictions</th><th>Unknowns</th><th>What changed</th></tr></thead><tbody>"+pressure_rows+"</tbody></table></section>"
-    return f"""<section class='card action'><h2>Enterprise Memory</h2><p class='muted'>Maintained Enterprise Model projection rendered from durable Observation memory; reports are views, not memory.</p><table><thead><tr><th>Attribute</th><th>Current value</th><th>Confidence</th><th>Freshness</th><th>Last observed</th><th>State</th><th>Observation lineage</th><th>Evidence lineage</th></tr></thead><tbody>{''.join(rows) or '<tr><td colspan="8">No maintained Enterprise Model state yet.</td></tr>'}</tbody></table><h3>Unknowns</h3><ul>{unknowns}</ul><details><summary><strong>Observation lineage</strong></summary><ul>{''.join(lineage) or '<li>No Observation lineage available.</li>'}</ul></details></section>""" + pressure_html
+    from cios.applications.flora.enterprise_intelligence.change_interpretation import ExternalChangeInterpretationService
+    changes=ExternalChangeInterpretationService(observations=obs_repo,models=models).for_enterprise(enterprise_id)
+    change_html=''
+    if changes:
+        change_rows=[]
+        for change in changes:
+            refs=sorted({ref for values in change['evidence_roles'].values() for ref in values})
+            cells=[change['external_statement'],change['state'],change['explanation'],
+                   '; '.join(change['applicability_explanations']),
+                   '; '.join(change['mechanisms']),'; '.join(change['mitigations']),'; '.join(change['consequences']),
+                   ', '.join(refs),'; '.join(change['contradictions']),', '.join(change['unknown_refs']),
+                   '; '.join(change['evidence_demands']),
+                   ', '.join(change['reassessment_targets']['model_attributes']+change['reassessment_targets']['material_pressures'])]
+            change_rows.append('<tr>'+''.join('<td>'+escape(str(value))+'</td>' for value in cells)+'</tr>')
+        change_html="<section class='card'><h3>External change assessments</h3><p>Transient, Evidence-bounded interpretation. A candidate relationship does not establish Enterprise impact. Reassessment targets preserve existing state; no automatic promotion is performed.</p><table><thead><tr><th>External development</th><th>Applicability</th><th>Explanation</th><th>Applicability basis</th><th>Mechanism</th><th>Mitigation</th><th>Evidenced consequence</th><th>Evidence lineage</th><th>Contradictions</th><th>Unknowns</th><th>Evidence needed</th><th>Reassessment targets</th></tr></thead><tbody>"+''.join(change_rows)+"</tbody></table></section>"
+    return f"""<section class='card action'><h2>Enterprise Memory</h2><p class='muted'>Maintained Enterprise Model projection rendered from durable Observation memory; reports are views, not memory.</p><table><thead><tr><th>Attribute</th><th>Current value</th><th>Confidence</th><th>Freshness</th><th>Last observed</th><th>State</th><th>Observation lineage</th><th>Evidence lineage</th></tr></thead><tbody>{''.join(rows) or '<tr><td colspan="8">No maintained Enterprise Model state yet.</td></tr>'}</tbody></table><h3>Unknowns</h3><ul>{unknowns}</ul><details><summary><strong>Observation lineage</strong></summary><ul>{''.join(lineage) or '<li>No Observation lineage available.</li>'}</ul></details></section>""" + pressure_html + change_html
 
 
 def calibration_inspection_panel(enterprise_id: str, models: EnterpriseModelRepository | None = None, observations: ObservationRepository | None = None) -> str:
