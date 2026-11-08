@@ -16,7 +16,7 @@ FIXTURE = Path("docs/industry-twins/TEL-001_UK_Telecoms_Twin_Wave5_Corrected_Flo
 ENTERPRISES = {"BT Group", "CityFibre", "Openreach", "TalkTalk", "Virgin Media O2", "VodafoneThree"}
 
 
-def test_tel001_canonical_enterprise_conditions_traverse_adr026(monkeypatch, tmp_path):
+def test_tel001_staged_enterprise_conditions_do_not_self_qualify_under_adr026(monkeypatch, tmp_path):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
     monkeypatch.setenv("FLORA_ENVIRONMENT", "pilot")
     package = BlueprintPackageRegistry().receive(FIXTURE.read_bytes(), FIXTURE.name, "pressure-auditor")
@@ -26,14 +26,12 @@ def test_tel001_canonical_enterprise_conditions_traverse_adr026(monkeypatch, tmp
     before = tuple((item.record_id, item.governance, dict(item.attributes)) for item in twin.objects)
     for enterprise in twin.enterprises:
         result = material_pressure_qualification(enterprise)
-        assert result.eligible_input_count == result.candidates_assessed == 1
-        assert result.discovery_state == "ASSESSED_WITH_RESULTS"
-        assessment = result.assessments[0]
-        assert assessment.candidate.canonical_input_type == "canonical_factual_object"
-        assert all(gate == "PASS" for gate in (
-            assessment.applicability, assessment.pressure_semantics, assessment.materiality,
-            assessment.enterprise_consequence, assessment.lineage))
-        assert assessment.candidate.evidence_refs
+        assert result.candidates_assessed>0 and result.eligible_input_count==0
+        assert result.discovery_state == "ASSESSED_NONE_QUALIFIED"
+        assert not result.qualified
+        for assessment in result.assessments:
+            assert assessment.candidate.canonical_input_type == "canonical_factual_object"
+            assert dict(assessment.gate_results)['eligible_input']=='FAIL'
     assert before == tuple((item.record_id, item.governance, dict(item.attributes)) for item in twin.objects)
 
 

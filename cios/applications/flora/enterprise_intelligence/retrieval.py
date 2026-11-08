@@ -89,6 +89,18 @@ class BoundedTwinRetrievalService:
             (programmes if a.domain in {'programme','initiative'} or 'programme' in a.attribute else entities).append(item)
             attribute_dates[a.attribute]=a.last_observed_date
         unknowns=[EvidencePackageItem(u.unknown_id,'unknown',u.question,'unknown',u.priority,'current',tuple(u.related_observation_ids),(),'',enterprise) for u in model.unknowns.values() if u.status=='open']
+        from cios.applications.flora.blueprint_import.material_pressure import model_pressure_assessments
+        pressure_assessments=model_pressure_assessments(model,observations=self.observations,evidence=self.evidence,cutoff=cutoff)
+        pressure_assessments=[row for row in pressure_assessments if _date_ok(row.get('observed_at'),cutoff)
+                              and _date_ok(row.get('effective_at'),cutoff)]
+        for pressure in pressure_assessments[:20]:
+            status=pressure['qualification']
+            if status not in {'QUALIFIED','UNRESOLVED'}: continue
+            item=EvidencePackageItem(pressure['pressure_id'],'material_pressure',pressure['condition']+' → '+pressure['consequence'],
+                'qualified' if status=='QUALIFIED' else 'contradiction','', 'current',
+                tuple(dict.fromkeys((*pressure['evidence_refs'],*pressure['counter_evidence_refs']))),
+                tuple(pressure['observation_refs']),'Enterprise Model pressure assessment',enterprise)
+            (entities if status=='QUALIFIED' else contradictions).append(item)
         obs_items=obs_items[:30]; entities=entities[:25]; programmes=programmes[:15]
         unknowns=unknowns[:20]; contradictions=contradictions[:20]; human=human[:20]
         selected=[*obs_items,*entities,*programmes,*unknowns,*contradictions,*human]
@@ -105,6 +117,7 @@ class BoundedTwinRetrievalService:
                 evidence_items.append(EvidencePackageItem(eid,'evidence',str(ev.get('summary') or ev.get('snippet') or ev.get('claim') or ev.get('cleaned_observation') or ev.get('source_title') or '')[:900], 'contradiction' if eid in contested_evidence else str(ev.get('truth_status') or ev.get('stance') or 'evidence'),ev.get('confidence',''),ev.get('freshness',''),(),(),str(ev.get('source_location') or ev.get('source_locator') or ''),enterprise))
         context={'enterprise_id':enterprise, 'observation_dates':{i.stable_id:dates[i.stable_id] for i in selected if i.stable_id in dates},
                  'model_attribute_dates':{i.stable_id:attribute_dates[i.stable_id] for i in selected if i.stable_id in attribute_dates}}
+        if pressure_assessments: context['material_pressure_assessments']=pressure_assessments[:20]
         package_dict={'enterprise':enterprise,'cutoff':cutoff,'context':context,'items':[i.to_dict() for i in (*selected,*evidence_items)]}
         return EvidencePackageV1('ep-'+stable_hash(package_dict)[:16],enterprise,context,request.twin_version,request.evidence_cut_off,
             'Progressive Assurance accepted',tuple(obs_items+evidence_items),tuple(entities),tuple(programmes),tuple(unknowns),tuple(contradictions),tuple(human),tuple(),tuple(lineage),

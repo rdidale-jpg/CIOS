@@ -1,0 +1,196 @@
+{
+  "baseline_sha": "096c9832df3b67a0970a3a0e1681133110b075a1",
+  "new_regressions": {
+    "baseline": "50 failed, 1 passed",
+    "increment_03": "51 passed",
+    "focused_including_existing_qualifier_and_executive": "60 passed"
+  },
+  "existing_before": [
+    {
+      "file": "test_material_pressure_qualification.py",
+      "exit_code": 0,
+      "summary": "6 passed in 0.39s",
+      "failures": []
+    },
+    {
+      "file": "test_evidence_provenance_applicability.py",
+      "exit_code": 0,
+      "summary": "4 passed in 0.24s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_enterprise_memory.py",
+      "exit_code": 0,
+      "summary": "16 passed in 0.26s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_intelligence_integrity.py",
+      "exit_code": 0,
+      "summary": "44 passed in 0.61s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_import_model_reconciliation.py",
+      "exit_code": 0,
+      "summary": "35 passed in 1.28s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_blueprint_import_promotion.py",
+      "exit_code": 0,
+      "summary": "21 passed in 0.63s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_blueprint_import_review_planning.py",
+      "exit_code": 0,
+      "summary": "4 passed in 0.27s",
+      "failures": []
+    },
+    {
+      "file": "test_enterprise_intelligence_reasoning.py",
+      "exit_code": 0,
+      "summary": "7 passed in 0.35s",
+      "failures": []
+    },
+    {
+      "file": "test_tel001_executive_enterprise_intelligence.py",
+      "exit_code": 0,
+      "summary": "3 passed in 2.47s",
+      "failures": []
+    },
+    {
+      "file": "test_tel001_enterprise_factual_presentation.py",
+      "exit_code": 1,
+      "summary": "1 failed, 2 passed in 1.30s",
+      "failures": [
+        "FAILED tests/test_tel001_enterprise_factual_presentation.py::test_tel001_facts_survive_without_assessment_and_render_on_actual_routes"
+      ]
+    },
+    {
+      "file": "test_flora_enterprise_canvas.py",
+      "exit_code": 1,
+      "summary": "3 failed, 12 passed in 0.91s",
+      "failures": [
+        "FAILED tests/test_flora_enterprise_canvas.py::test_home_page_does_not_expose_synthetic_canvas_route",
+        "FAILED tests/test_flora_enterprise_canvas.py::test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+        "FAILED tests/test_flora_enterprise_canvas.py::test_mod_executive_commercial_canvas_read_model"
+      ]
+    },
+    {
+      "file": "test_flora_enterprise_canvas_feedback.py",
+      "exit_code": 0,
+      "summary": "13 passed in 0.28s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_intelligence_projection.py",
+      "exit_code": 1,
+      "summary": "1 failed, 1 passed in 0.25s",
+      "failures": [
+        "FAILED tests/test_flora_intelligence_projection.py::test_legacy_records_cannot_infer_readiness_from_volume_or_weighted_maturity"
+      ]
+    },
+    {
+      "file": "test_industry_twin_semantic_reconciliation.py",
+      "exit_code": 0,
+      "summary": "2 passed in 0.25s",
+      "failures": []
+    }
+  ],
+  "existing_after": [
+    {
+      "file": "test_material_pressure_qualification.py",
+      "exit_code": 0,
+      "summary": "6 passed in 0.29s",
+      "failures": []
+    },
+    {
+      "file": "test_evidence_provenance_applicability.py",
+      "exit_code": 0,
+      "summary": "4 passed in 0.26s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_enterprise_memory.py",
+      "exit_code": 0,
+      "summary": "16 passed in 0.25s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_intelligence_integrity.py",
+      "exit_code": 0,
+      "summary": "44 passed in 0.60s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_import_model_reconciliation.py",
+      "exit_code": 0,
+      "summary": "35 passed in 1.25s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_blueprint_import_promotion.py",
+      "exit_code": 0,
+      "summary": "21 passed in 0.59s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_blueprint_import_review_planning.py",
+      "exit_code": 0,
+      "summary": "4 passed in 0.31s",
+      "failures": []
+    },
+    {
+      "file": "test_enterprise_intelligence_reasoning.py",
+      "exit_code": 0,
+      "summary": "7 passed in 0.39s",
+      "failures": []
+    },
+    {
+      "file": "test_tel001_executive_enterprise_intelligence.py",
+      "exit_code": 0,
+      "summary": "3 passed in 3.00s",
+      "failures": []
+    },
+    {
+      "file": "test_tel001_enterprise_factual_presentation.py",
+      "exit_code": 1,
+      "summary": "1 failed, 2 passed in 1.80s",
+      "failures": [
+        "FAILED tests/test_tel001_enterprise_factual_presentation.py::test_tel001_facts_survive_without_assessment_and_render_on_actual_routes"
+      ]
+    },
+    {
+      "file": "test_flora_enterprise_canvas.py",
+      "exit_code": 1,
+      "summary": "3 failed, 12 passed in 1.18s",
+      "failures": [
+        "FAILED tests/test_flora_enterprise_canvas.py::test_home_page_does_not_expose_synthetic_canvas_route",
+        "FAILED tests/test_flora_enterprise_canvas.py::test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+        "FAILED tests/test_flora_enterprise_canvas.py::test_mod_executive_commercial_canvas_read_model"
+      ]
+    },
+    {
+      "file": "test_flora_enterprise_canvas_feedback.py",
+      "exit_code": 0,
+      "summary": "13 passed in 0.52s",
+      "failures": []
+    },
+    {
+      "file": "test_flora_intelligence_projection.py",
+      "exit_code": 1,
+      "summary": "1 failed, 1 passed in 0.26s",
+      "failures": [
+        "FAILED tests/test_flora_intelligence_projection.py::test_legacy_records_cannot_infer_readiness_from_volume_or_weighted_maturity"
+      ]
+    },
+    {
+      "file": "test_industry_twin_semantic_reconciliation.py",
+      "exit_code": 0,
+      "summary": "2 passed in 0.31s",
+      "failures": []
+    }
+  ]
+}

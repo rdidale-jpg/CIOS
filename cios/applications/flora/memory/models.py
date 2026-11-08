@@ -156,6 +156,48 @@ class EnterpriseUnknown:
 
 
 @dataclass
+class MaterialPressure:
+    """ADR-026 durable object, owned and stored only by the Enterprise Model."""
+    pressure_id: str
+    enterprise_id: str
+    condition_concept: str
+    condition: str
+    affected_domain: str
+    scope: str
+    time_context: str
+    mechanism: str
+    consequence: str
+    consequence_domain: str
+    qualification: str
+    source_input_id: str
+    source_input_type: str
+    observation_refs: tuple[str, ...] = ()
+    evidence_refs: tuple[str, ...] = ()
+    current_evidence_refs: tuple[str, ...] = ()
+    counter_evidence_refs: tuple[str, ...] = ()
+    unknown_refs: tuple[str, ...] = ()
+    contradiction_refs: tuple[str, ...] = ()
+    confidence: int | str | None = None
+    observed_at: str = ''
+    effective_at: str = ''
+    resolved_at: str = ''
+    resolution_evidence_refs: tuple[str, ...] = ()
+    superseded_by: str = ''
+    superseded_at: str = ''
+    supersedes_pressure_id: str = ''
+    identity_rationale: str = ''
+    assessment_reason: str = ''
+    last_change: str = ''
+    history: tuple[dict[str, Any], ...] = ()
+    updated_at: str = field(default_factory=now_iso)
+
+    def __post_init__(self):
+        for key in ('observation_refs','evidence_refs','current_evidence_refs','counter_evidence_refs',
+                    'unknown_refs','contradiction_refs','resolution_evidence_refs','history'):
+            setattr(self,key,tuple(getattr(self,key)))
+
+
+@dataclass
 class EnterpriseModel:
     enterprise_id: str
     attributes: dict[str, EnterpriseModelAttribute] = field(default_factory=dict)
@@ -163,18 +205,22 @@ class EnterpriseModel:
     schema_version: str = MEMORY_SCHEMA_VERSION
     created_at: str = field(default_factory=now_iso)
     updated_at: str = field(default_factory=now_iso)
+    material_pressures: dict[str, MaterialPressure] = field(default_factory=dict)
+    pressure_assessments: dict[str, dict[str, Any]] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         if self.schema_version != MEMORY_SCHEMA_VERSION:
             raise ValueError(f"Unsupported EnterpriseModel schema_version: {self.schema_version!r}")
 
     def to_dict(self) -> dict[str, Any]:
-        return {"schema_version": self.schema_version, "enterprise_id": self.enterprise_id, "created_at": self.created_at, "updated_at": self.updated_at, "attributes": {k: asdict(v) for k, v in self.attributes.items()}, "unknowns": {k: asdict(v) for k, v in self.unknowns.items()}}
+        return {"schema_version": self.schema_version, "enterprise_id": self.enterprise_id, "created_at": self.created_at, "updated_at": self.updated_at, "attributes": {k: asdict(v) for k, v in self.attributes.items()}, "unknowns": {k: asdict(v) for k, v in self.unknowns.items()},
+                "material_pressures":{k:asdict(v) for k,v in self.material_pressures.items()},"pressure_assessments":self.pressure_assessments}
 
     @classmethod
     def from_dict(cls, row: dict[str, Any]) -> "EnterpriseModel":
         _validate_schema(row, "EnterpriseModel")
-        return cls(row["enterprise_id"], {k: EnterpriseModelAttribute(**v) for k, v in row.get("attributes", {}).items()}, {k: EnterpriseUnknown(**v) for k, v in row.get("unknowns", {}).items()}, row.get("schema_version", MEMORY_SCHEMA_VERSION), row.get("created_at", now_iso()), row.get("updated_at", now_iso()))
+        return cls(row["enterprise_id"], {k: EnterpriseModelAttribute(**v) for k, v in row.get("attributes", {}).items()}, {k: EnterpriseUnknown(**v) for k, v in row.get("unknowns", {}).items()}, row.get("schema_version", MEMORY_SCHEMA_VERSION), row.get("created_at", now_iso()), row.get("updated_at", now_iso()),
+                   material_pressures={k:MaterialPressure(**v) for k,v in row.get('material_pressures',{}).items()},pressure_assessments=row.get('pressure_assessments',{}))
 
 
 @dataclass(frozen=True)
