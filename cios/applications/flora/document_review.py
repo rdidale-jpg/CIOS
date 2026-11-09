@@ -1,6 +1,10 @@
 """AI document-understanding review workflow for Flora financial reports."""
 from __future__ import annotations
 
+from cios.applications.flora.protected_storage import serialized_runtime_writer
+
+from cios.applications.flora.security import verified_service_write, verified_service_read
+
 from cios.applications.flora.storage import PersistenceError, atomic_write_json, data_path, ensure_writable_dir, storage_mode
 
 import hashlib, json, logging, os, re, shutil, sys, threading, time, uuid
@@ -295,13 +299,15 @@ def attach_financial_run_diagnostic(run: dict[str, Any]) -> dict[str, Any]:
     run['support_diagnostic'] = _run_diagnostic(run)
     return run
 
-def financial_intelligence_support_diagnostic_payload(run_id: str) -> dict[str, Any]:
-    run = load_run(run_id)
+@verified_service_read('package.inspect')
+def financial_intelligence_support_diagnostic_payload(run_id: str, *, headers=None) -> dict[str, Any]:
+    run = read_run(run_id, headers=headers)
     return _sanitize_diagnostic_payload(run.get('support_diagnostic') or _run_diagnostic(run))
 
 
 
-def financial_intelligence_safe_support_report_payload(run_id: str) -> dict[str, Any]:
+@verified_service_read('package.inspect')
+def financial_intelligence_safe_support_report_payload(run_id: str, *, headers=None) -> dict[str, Any]:
     """Return the persisted user-safe support report without rebuilding diagnostics.
 
     This download path is intentionally read-only: it loads the saved run record
@@ -309,7 +315,7 @@ def financial_intelligence_safe_support_report_payload(run_id: str) -> dict[str,
     Older runs created before support diagnostics existed receive a friendly
     unavailable payload rather than a reconstructed diagnostic.
     """
-    run = load_run(run_id)
+    run = read_run(run_id, headers=headers)
     support_reference = run.get('support_reference') or _support_reference(run)
     persisted = run.get('support_diagnostic')
     if not persisted:
@@ -343,8 +349,9 @@ def financial_intelligence_support_report_link(run_id: str) -> str:
         f"<p><a class='support-report-link' href='/financial-intelligence/{escape(str(run_id))}/support-report'>Download support report</a></p>"
     )
 
-def financial_intelligence_support_diagnostic_page(run_id: str) -> str:
-    payload = financial_intelligence_support_diagnostic_payload(run_id)
+@verified_service_read('package.inspect')
+def financial_intelligence_support_diagnostic_page(run_id: str, *, headers=None) -> str:
+    payload = financial_intelligence_support_diagnostic_payload(run_id, headers=headers)
     rows = ''.join(f"<tr><th>{escape(str(k))}</th><td>{escape(json.dumps(v) if isinstance(v,(dict,list,tuple)) else str(v))}</td></tr>" for k,v in payload.items())
     body = f"""<section class='hero'><h1>Financial Intelligence support diagnostic</h1><p>Run {escape(run_id)} · Support reference {escape(str(payload.get('support_reference')))}</p><p><a href='/financial-intelligence/{escape(run_id)}/support-diagnostic/download'>Download diagnostic report</a></p></section><section class='card'><table>{rows}</table></section>"""
     return _page('Financial Intelligence support diagnostic', body)
@@ -1403,6 +1410,7 @@ def _active_refresh_run() -> dict[str, Any] | None:
             return run
     return None
 
+@serialized_runtime_writer
 def create_financial_intelligence_progress_run(enterprise_id: str = 'bt-group-plc', extraction_mode: str = 'structured_standard_financials', *, reporting_period: str = BT_RAPID_TWIN_REPORTING_PERIOD, product_surface: str = 'financial_intelligence', ordinary_research: bool = True, explicit_verification: bool = False) -> dict[str, Any]:
     policy = resolve_financial_intelligence_execution_policy(enterprise_id=enterprise_id, reporting_period=reporting_period, product_surface=product_surface, requested_execution_strategy=extraction_mode, ordinary_research=ordinary_research, explicit_verification=explicit_verification)
     active = _active_refresh_run()
@@ -1414,6 +1422,7 @@ def create_financial_intelligence_progress_run(enterprise_id: str = 'bt-group-pl
     threading.Thread(target=_background_refresh, args=(policy['enterprise_id'], run_id, policy['execution_strategy']), daemon=True).start()
     return run
 
+@serialized_runtime_writer
 def _background_refresh(enterprise_id: str, run_id: str, extraction_mode: str = 'structured_standard_financials') -> None:
     try:
         refresh_financial_intelligence(enterprise_id=enterprise_id, run_id=run_id, extraction_mode=extraction_mode, product_surface='background_refresh', ordinary_research=(extraction_mode != BT_STRUCTURED_VERIFICATION_MODE))
@@ -1437,9 +1446,10 @@ def missing_run_status(run_id: str) -> dict[str, Any]:
         'final_result_url': None,
     }
 
-def financial_intelligence_progress_status(run_id: str) -> dict[str, Any]:
+@verified_service_read('package.inspect')
+def financial_intelligence_progress_status(run_id: str, *, headers=None) -> dict[str, Any]:
     try:
-        run = load_run(run_id)
+        run = read_run(run_id, headers=headers)
     except FileNotFoundError:
         print(f"Flora Financial Intelligence requested missing progress run {run_id}; storage mode={storage_mode()['mode']}")
         return missing_run_status(run_id)
@@ -1451,9 +1461,10 @@ def financial_intelligence_progress_status(run_id: str) -> dict[str, Any]:
     pct = int(run.get('progress_percent') or run.get('percent_complete') or (100 if terminal else 0))
     return {'run_id': run_id, 'state': status, 'terminal': terminal, 'progress_percent': 100 if terminal else pct, 'current_stage': run.get('current_stage') or status, 'elapsed_time': elapsed, 'packet_count': run.get('packet_count',0), 'packets_completed': len([p for p in run.get('page_packets_submitted',[]) if p.get('status')]), 'facts_valid': len(run.get('claims',[])), 'facts_quarantined': len(run.get('candidate_exceptions') or run.get('exceptions') or []), 'final_result_url': f'/financial-intelligence/{run_id}' if terminal else None}
 
-def financial_intelligence_progress_page(run_id: str) -> str:
+@verified_service_read('package.inspect')
+def financial_intelligence_progress_page(run_id: str, *, headers=None) -> str:
     try:
-        run = load_run(run_id)
+        run = read_run(run_id, headers=headers)
     except FileNotFoundError:
         return missing_run_page(run_id)
     labels = {'queued': 'Queued', 'retrieving_source': 'Retrieving the financial report', 'selecting_sections': 'Reading the report structure / Finding relevant financial sections', 'estimating_cost': 'Estimating processing cost', 'analysing': 'Analysing financial sections', 'validating': 'Validating financial facts', 'updating_memory': 'Updating the Commercial Digital Twin', 'completed': 'Complete', 'completed_with_exceptions': 'Needs attention', 'completed_with_no_accepted_intelligence': 'No accepted intelligence', 'checking_document_quality': 'Checking document quality', 'document_parsing_failed': 'Checking document quality — Failed', 'section_selection_failed': 'Finding financial sections — Needs attention', 'provider_response_invalid': 'Needs attention', 'provider_request_failed': 'Failed', 'failed': 'Failed'}
@@ -1481,15 +1492,28 @@ def create_upload_run(pdf_path: Path, *, enterprise_id: str = 'bt-group-plc', ti
     _write_json(_run_path(run_id), run)
     return run
 
-def load_run(run_id: str) -> dict[str, Any]: return _read_json(_run_path(run_id))
+def load_run(run_id: str) -> dict[str, Any]:
+    """Internal repository primitive for trusted workers; use read_run at entry points."""
+    return _read_json(_run_path(run_id))
+
+
+@verified_service_read('package.inspect')
+def read_run(run_id: str, *, headers=None) -> dict[str, Any]:
+    """Financial read service: intersect persisted scope, capability and ACL."""
+    from .access import require_financial_run_authority
+    run = load_run(run_id)
+    require_financial_run_authority(headers, 'package.inspect', run)
+    return run
 
 def run_exists(run_id: str) -> bool: return _run_path(run_id).is_file()
 
+@verified_service_write('package.review')
 def update_reviews(run_id: str, form: dict[str, list[str]], *, headers=None) -> dict[str, Any]:
     from cios.applications.flora.access import require_capability, financial_run_enterprise_id
     require_capability(headers, "package.review")
     run = load_run(run_id)
-    require_capability(headers, "package.review", financial_run_enterprise_id(run))
+    from cios.applications.flora.access import require_financial_run_authority
+    require_financial_run_authority(headers, "package.review", run)
     for claim in run['claims']:
         cid = claim['claim_id']; action = (form.get(f'action_{cid}', ['pending'])[0] or 'pending')
         claim['review_state'] = action
@@ -1499,15 +1523,17 @@ def update_reviews(run_id: str, form: dict[str, list[str]], *, headers=None) -> 
     _write_json(_run_path(run_id), run)
     return run
 
+@verified_service_write('candidate.promote')
 def apply_accepted(run_id: str, *, headers=None) -> dict[str, Any]:
     from cios.applications.flora.access import require_capability, financial_run_enterprise_id
     require_capability(headers, "candidate.promote")
     run = load_run(run_id)
-    require_capability(headers, "candidate.promote", financial_run_enterprise_id(run))
+    from cios.applications.flora.access import require_financial_run_authority
+    require_financial_run_authority(headers, "candidate.promote", run)
     svc = ObservationMemoryService(); results=[]; rejected=[]
     for claim in run['claims']:
         if claim.get('review_state') not in {'accept', 'amend'}: continue
-        report = svc.process_evidence(claim_to_evidence(run, claim))
+        report = svc.process_reviewed_evidence(run_id, claim_to_evidence(run, claim), headers=headers)
         results.extend(({**r.__dict__, 'update_result': r.action}) for r in report.results)
         rejected.extend(report.rejected_claims)
     run['status'] = 'applied'; run['applied_at'] = now_iso(); run['applied_results'] = results; run['rejected_on_apply'] = rejected
@@ -1678,22 +1704,25 @@ def missing_run_page(run_id: str) -> str:
     body = f"""<section class='hero'><h1>Financial Intelligence</h1><p>This previous refresh result is no longer available.</p><p>Start a new refresh to collect the latest financial intelligence.</p><form method='post' action='/digital-twins/bt-group-plc/search'><button>Start new refresh</button></form><p><a href='/financial-intelligence'>Return to Financial Intelligence</a></p></section>"""
     return _page('Financial Intelligence result unavailable', body)
 
-def financial_intelligence_run_page(run_id: str) -> str:
+@verified_service_read('package.inspect')
+def financial_intelligence_run_page(run_id: str, *, headers=None) -> str:
     try:
-        return _page('Financial Intelligence outcome', _outcome_summary(load_run(run_id)))
+        return _page('Financial Intelligence outcome', _outcome_summary(read_run(run_id, headers=headers)))
     except FileNotFoundError:
         print(f"Flora Financial Intelligence requested missing run {run_id}; storage mode={storage_mode()['mode']}")
         return missing_run_page(run_id)
 
-def financial_intelligence_run_response(run_id: str, show_support_control: bool = True) -> tuple[str, int]:
+@verified_service_read('package.inspect')
+def financial_intelligence_run_response(run_id: str, show_support_control: bool = True, *, headers=None) -> tuple[str, int]:
     try:
-        return _page('Financial Intelligence outcome', _outcome_summary(load_run(run_id), show_support_control=show_support_control)), 200
+        return _page('Financial Intelligence outcome', _outcome_summary(read_run(run_id, headers=headers), show_support_control=show_support_control)), 200
     except FileNotFoundError:
         print(f"Flora Financial Intelligence requested missing run {run_id}; storage mode={storage_mode()['mode']}")
         return missing_run_page(run_id), 410
 
-def run_page(run_id: str) -> str:
-    run = load_run(run_id)
+@verified_service_read('package.inspect')
+def run_page(run_id: str, *, headers=None) -> str:
+    run = read_run(run_id, headers=headers)
     rows = ''.join(_claim_row(c) for c in run.get('claims', [])) or '<tr><td colspan="7">No claims returned. Check provider status and errors below.</td></tr>'
     applied = ''.join(f"<li>{escape(r.get('observation_id',''))} → {escape(r.get('affected_attribute',''))} ({escape(r.get('update_result',''))})</li>" for r in run.get('applied_results', []))
     body = f"""<section class='hero'><h1>Review extracted factual claims</h1><p>Run {escape(run_id)} · Provider {escape(run.get('provider',''))} · Model {escape(run.get('model',''))} · Status {escape(run.get('provider_status',''))}</p><p class='muted'>{escape('; '.join(run.get('provider_errors') or []))}</p></section><form method='post' action='/ai-financial-report/{escape(run_id)}/review'><section class='card'><table><thead><tr><th>Decision</th><th>Claim</th><th>Amendment</th><th>Type</th><th>Page</th><th>Excerpt</th><th>Confidence</th></tr></thead><tbody>{rows}</tbody></table><p><button>Save review decisions</button></p></section></form><section class='card action'><form method='post' action='/ai-financial-report/{escape(run_id)}/apply'><button>Apply accepted claims to Commercial Digital Twin</button></form><ul>{applied or '<li>No Observations applied yet.</li>'}</ul><p><a href='/digital-twin/bt-group-plc'>Open Commercial Digital Twin</a></p></section>{enterprise_memory_panel(run['document']['enterprise_id'])}"""

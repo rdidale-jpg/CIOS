@@ -46,7 +46,6 @@ class EnterpriseCanvasService:
         enterprise_id = canonical_enterprise_id(enterprise_id) or enterprise_id
         if lens != "organisation":
             raise ValueError("Only the organisation lens is supported in this bounded read model")
-        self._repair_known_blueprint_canvas(enterprise_id, headers)
         if not can_view_enterprise_canvas(headers, enterprise_id):
             raise EnterpriseCanvasAccessError("Actor is not authorised to view this Enterprise Canvas")
         model = self.models.get(enterprise_id)

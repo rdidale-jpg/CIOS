@@ -18,7 +18,7 @@ from cios.applications.flora.blueprint_import.lifecycle import ImportLifecycleSe
 from cios.applications.flora.blueprint_import.views import approve_and_promote
 from cios.applications.flora.memory.repository import EvidenceRepository
 
-HEADERS={'X-Flora-User':'alice','X-Flora-Enterprises':'*','X-Flora-Roles':'blueprint_import_admin'}
+HEADERS={'X-Flora-User':'alice','X-Flora-Enterprises':'*','X-Flora-Roles':'blueprint_import_admin','X-Flora-Active-Workspace':'workspace-a'}
 IDENTITY=dict(twin_id='IND-SYN',twin_type='industry',primary_subject_id='IND-SYN',primary_subject_name='Synthetic industry',primary_subject_class='industry',governed_scope='UK synthetic',canonical_owner='IND-SYN')
 
 @pytest.fixture(autouse=True)
@@ -39,7 +39,7 @@ def receive(records=None,version='1',owner='synthetic-enterprise',identity=None,
     records=records if records is not None else [evidence(),dict(external_id='UNK-1',record_class='unknown',truth_class='unknown',payload={'evidence_ids':['EV-1']})]
     fields=dict(package_version=version+".0",enterprise_id=owner)
     if identity: fields.update(identity)
-    reg=BlueprintPackageRegistry();r=reg.receive(content or pkg(manifest_extra=fields,records=records),'retained-or-synthetic.zip','alice')
+    reg=BlueprintPackageRegistry();r=reg.receive(content or pkg(manifest_extra=fields,records=records),'retained-or-synthetic.zip','alice',HEADERS['X-Flora-Active-Workspace'])
     BlueprintPackageValidator().validate_and_stage(r.package_ref,'alice',HEADERS)
     return reg.get(r.package_ref)
 
@@ -205,7 +205,7 @@ def test_identity_confirmation_requires_authority_and_complete_fields():
 def test_target_changed_after_approval_fails_closed():
     r=receive();job,_=prepare(r);svc=CanonicalPromotionService()
     a=svc.approve_plan(r.import_run_id,job['plan_id'],'alice','test',HEADERS)
-    EvidenceRepository().save({'evidence_id':'EV-1','enterprise_id':'synthetic-enterprise','quote':'Concurrent write'})
+    EvidenceRepository().save({'evidence_id':'EV-1','enterprise_id':'synthetic-enterprise','workspace_id':'workspace-a','quote':'Concurrent write'})
     with pytest.raises(BlueprintPromotionError,match='changed after review'): svc.execute_approved_plan(r.import_run_id,a.approval_id,'alice',HEADERS)
     assert not ImportLifecycleService().get(r.import_run_id).current
 

@@ -257,6 +257,28 @@ class ObservationMemoryService:
         reason = report.rejected_claims[0]["rejection_reason"] if report.rejected_claims else "No factual claims extracted"
         raise ValueError(reason)
 
+    from cios.applications.flora.security import verified_service_write
+
+    @verified_service_write('candidate.promote')
+    def process_reviewed_evidence(self, run_id, item, *, headers=None):
+        """Human-reviewed ingestion: bind the actual destination before any save.
+
+        Other ingestion pipelines use the trusted process_evidence primitive;
+        this boundary reloads authoritative run scope, never a caller context.
+        """
+        from cios.applications.flora.document_review import load_run
+        from cios.applications.flora.access import require_financial_run_authority, require_resource_scope
+        run = load_run(run_id)
+        require_financial_run_authority(headers, 'candidate.promote', run)
+        enterprise = run.get('enterprise_id') or run['document']['enterprise_id']
+        if (canonical_enterprise_id(enterprise) != enterprise
+                or any(item.get(key) != enterprise for key in
+                ('enterprise_id', 'canonical_enterprise_id', 'organisation'))
+                or ('workspace_id' in item and item['workspace_id'] != run['workspace_id'])):
+            raise PermissionError('Canonical destination conflicts with persisted run')
+        require_resource_scope(headers, 'candidate.promote', enterprise, run['workspace_id'])
+        return self.process_evidence(item)
+
     def process_evidence(self, item: dict[str, Any]) -> EvidenceProcessingReport:
         report = EvidenceProcessingReport([], [])
         item = dict(item)

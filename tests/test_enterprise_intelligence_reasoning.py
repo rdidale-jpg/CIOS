@@ -58,6 +58,8 @@ def test_validation_rejects_invalid_ids_and_requires_recommendation_lineage(tmp_
 def test_runtime_fallback_no_canonical_mutation_and_telemetry(tmp_path, monkeypatch):
     models, obs, ev=seed(tmp_path); before=[o.to_dict() for o in obs.list()]
     rt=EnterpriseIntelligenceRuntime(BoundedTwinRetrievalService(models,obs,ev))
+    from tests.flora_security_fixtures import existing_resource_acl
+    existing_resource_acl(enterprise_id='mod',workspace_id='mod',principal_id='alice')
     result=generate_brief(rt,req())
     assert result['audit']['status']=='Failed'
     assert result['audit']['fallback_active'] is True
@@ -112,6 +114,8 @@ def test_successful_reasoning_provider_validation_and_transient_store(tmp_path, 
     payload={'brief_id':'brief-unit','enterprise_id':'mod','twin_version':'accepted','reasoning_profile':'strategic_sales_director_v1','generated_at':'2026-07-10T00:00:00Z','evidence_cut_off':'','executive_summary':{'what_is_happening':'Distinct MOD affordability and readiness themes','why_it_matters':'They shape commercial access'},'material_pressures':[{'title':'Affordability pressure','situation':'MOD affordability pressure is material.','why_now':'Evidence says now','supporting_observation_ids':[oid],'supporting_evidence_ids':[],'linked_unknown_ids':[],'linked_contradiction_ids':[],'confidence':'medium'}],'unknowns':[],'contradictions':[],'recommended_next_moves':[{'action':'Inspect pressure lineage','lineage':[oid]}],'lineage_manifest':{'evidence_package_id':pkg.package_id,'evidence_package_hash':'x','retrieved_object_ids':[oid]},'validation_status':{}}
     provider=RecordingProvider(payload)
     before=[o.to_dict() for o in obs.list()]
+    from tests.flora_security_fixtures import existing_resource_acl
+    existing_resource_acl(enterprise_id=request.enterprise_id,workspace_id=request.workspace_id,principal_id=request.requested_by)
     result=generate_brief(EnterpriseIntelligenceRuntime(BoundedTwinRetrievalService(models,obs,ev), provider=provider),request)
     assert provider.called
     assert result['audit']['status']=='Succeeded'

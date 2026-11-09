@@ -19,7 +19,7 @@ from cios.applications.flora.enterprise_intelligence.retrieval import BoundedTwi
 from cios.applications.flora.enterprise_intelligence.models import ReasoningRequestV1
 from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
 
-HEADERS={'X-Flora-User':'alice','X-Flora-Enterprises':'*','X-Flora-Roles':'blueprint_import_admin'}
+HEADERS={'X-Flora-User':'alice','X-Flora-Enterprises':'*','X-Flora-Roles':'blueprint_import_admin','X-Flora-Active-Workspace':'workspace-a'}
 IDENTITY=dict(twin_id='IND-SYN',twin_type='industry',primary_subject_id='IND-SYN',primary_subject_name='Synthetic industry',primary_subject_class='industry',governed_scope='UK',canonical_owner='IND-SYN')
 CLAIM='Synthetic Enterprise announced a new data platform.'
 
@@ -40,7 +40,7 @@ def rows(claim=CLAIM,**changes):
 
 def receive(content=None,records=None,version='1.0'):
     reg=BlueprintPackageRegistry()
-    r=reg.receive(content or pkg(records=records or rows(),manifest_extra=IDENTITY|{'package_version':version}),'retained.zip','alice')
+    r=reg.receive(content or pkg(records=records or rows(),manifest_extra=IDENTITY|{'package_version':version}),'retained.zip','alice',HEADERS['X-Flora-Active-Workspace'])
     BlueprintPackageValidator().validate_and_stage(r.package_ref,'alice',HEADERS)
     r=reg.get(r.package_ref)
     if content: GovernedIdentityResolutionRepository().confirm_explicit(r,IDENTITY,'alice','Isolated owner identity fixture',HEADERS)
@@ -92,6 +92,9 @@ def assert_consumers(enterprise,statement):
 
 
 def test_governed_handoff_is_separately_reviewed_and_uses_existing_consumers():
+    # Existing target Enterprise binding is independently approved in this scenario.
+    from tests.flora_security_fixtures import existing_resource_acl
+    existing_resource_acl(enterprise_id='ent-one',workspace_id='workspace-a',principal_id='alice')
     r=receive();prepare(r);c=handoff(r)
     assert not ObservationRepository().list() and not EvidenceRepository().list()
     assert not EnterpriseModelRepository().get('ent-one').attributes
@@ -194,6 +197,9 @@ def test_actual_retained_source_to_memory_retrieval_and_view(name):
     path,sha,wrapper,ev=ARTIFACTS[name]
     if not path.exists():pytest.skip('Retained artifact unavailable: '+name)
     content=path.read_bytes();assert hashlib.sha256(content).hexdigest()==sha
+    # Scope the synthetic operator to this exact retained target before handoff.
+    from tests.flora_security_fixtures import existing_resource_acl
+    existing_resource_acl(enterprise_id=wrapper.lower(),workspace_id='workspace-a',principal_id='alice')
     r=receive(content=content);initial,_=prepare(r)
     plan=CanonicalPromotionService()._load_plan(r.import_run_id,initial['plan_id'])
     graph=[e for e in plan['effects'] if e['record_class']=='relationship']
@@ -246,6 +252,9 @@ def test_missing_selected_evidence_after_review_blocks_memory_write():
 
 
 def test_operator_handoff_and_review_actions_do_not_write_canonical_memory():
+    # Existing target Enterprise binding is independently approved in this scenario.
+    from tests.flora_security_fixtures import existing_resource_acl
+    existing_resource_acl(enterprise_id='ent-one',workspace_id='workspace-a',principal_id='alice')
     from cios.applications.flora.blueprint_import import views
     r=receive();prepare(r)
     wrapper=next(c for c in candidates(r) if c['original_source_id']=='ENT-ONE')

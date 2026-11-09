@@ -48,7 +48,7 @@ def test_successful_evidence_create_update_mapping_unchanged_duplicate_and_skips
     ]
     from cios.applications.flora.memory.repository import EvidenceRepository
     monkeypatch.setenv("FLORA_DATA_DIR",str(tmp_path))
-    EvidenceRepository().save({"evidence_id":"EVID-existing","enterprise_id":"synthetic-enterprise","quote":"previous"})
+    EvidenceRepository().save({"evidence_id":"EVID-existing","enterprise_id":"synthetic-enterprise","workspace_id":"synthetic-enterprise","quote":"previous"})
     r, cs, p=_plan_with(monkeypatch,tmp_path,records, [("SRC","map_existing","Source","src-1"),("EV-U","propose_update","Evidence","EVID-existing")])
     approval=CanonicalPromotionService().approve_plan(r.import_run_id,p.plan_id,"alice","ok",PROMOTE_HEADERS)
     result=CanonicalPromotionService().execute_approved_plan(r.import_run_id, approval.approval_id, "alice", PROMOTE_HEADERS)

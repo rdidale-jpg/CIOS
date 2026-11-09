@@ -1,6 +1,8 @@
 """Plain-language Flora Blueprint Import web experience."""
 from __future__ import annotations
 
+from cios.applications.flora.security import verified_service_write
+
 from collections import Counter
 from dataclasses import replace
 import json
@@ -424,7 +426,7 @@ def review_page(import_run_id: str, headers: Any, message: str = "", query: dict
         def defaults(): _ensure_reviews_and_mappings(ctx, headers)
         job = coord.latest_job(import_run_id)
         if not job:
-            return _page("Review preparation required", "<section class='card'><h1>Review preparation required</h1><p>No review plan has been prepared. Preparation requires an authorised state-changing action; opening this page changes no records.</p></section>"), 200
+            return _page("Review preparation required", f"<section class='card'><h1>Review preparation required</h1><p>No review plan has been prepared. Preparation requires an authorised state-changing action; opening this page changes no records.</p><form method='post' action='/blueprint-import/{escape(import_run_id)}/prepare-review'><button type='submit'>Prepare review</button></form></section>"), 200
         LOGGER.info("Blueprint review preparation trace", extra={"correlation_id": correlation_id, "review_job_id": job.get("job_id"), "import_run_id": import_run_id, "stage": job.get("stage"), "records_processed": job.get("records_processed", 0)})
         if job.get("status") == "Failed":
             return _review_failure_page(ctx, job, correlation_id), 200
@@ -443,6 +445,7 @@ def review_page(import_run_id: str, headers: Any, message: str = "", query: dict
         return _review_failure_page(ctx, job, correlation_id), 200
 
 
+@verified_service_write('package.review')
 def prepare_review(import_run_id: str, headers: Any, message: str = "", query=None) -> tuple[str, int]:
     """Explicit candidate workflow mutation, separate from read-only rendering."""
     ctx = _context(import_run_id)
@@ -623,7 +626,8 @@ def cancellation_confirmation_page(import_run_id: str, stage: str, headers: Any)
 def cancel_import(import_run_id: str, form: dict[str,list[str]], headers: Any) -> tuple[str,int]:
     ctx=_context(import_run_id)
     if not ctx or not can_access_enterprise(headers,ctx["package"].identity.enterprise_id,getattr(ctx["package"],"workspace_id","")): return _safe_failure("Import unavailable.","cancellation",False,False,"Return to history."),403
-    try: row=ImportLifecycleService().cancel(import_run_id,authenticated_flora_user(headers),(form.get("stage") or ["inspect"])[0],(form.get("reason") or [""])[0])
+    try: row=ImportLifecycleService().cancel(import_run_id,authenticated_flora_user(headers),(form.get("stage") or ["inspect"])[0],(form.get("reason") or [""])[0],headers=headers)
+    except PermissionError: return _safe_failure("Import unavailable.","cancellation",False,False,"Return to history."),403
     except ValueError as exc: return _safe_failure(str(exc),"cancellation",False,False,"Open the promoted Twin."),409
     return _page("Import cancelled",_workflow_progress(row.stage,import_run_id,"cancelled")+_cancelled_panel(row)),200
 

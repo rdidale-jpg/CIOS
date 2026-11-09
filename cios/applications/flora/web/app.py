@@ -9,6 +9,7 @@ from cios.applications.flora.security import ACCESS_UNAVAILABLE, public_request_
 
 import json
 import os
+import sqlite3
 import re
 import tempfile
 import uuid
@@ -144,9 +145,17 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         except ValueError as exc:
             self.send_error(404, str(exc))
 
-    def do_GET(self) -> None:  # noqa: N802 - stdlib callback name
+    def do_GET(self) -> None:  # noqa: N802
+        from cios.applications.flora.security_web import auth_get, AUTH_PATHS, clean_target, private_read
         parsed = urlparse(self.path)
-        if not self._public_read_request():
+        if parsed.path in AUTH_PATHS and not parsed.query and clean_target(self):
+            auth_get(self, parsed.path)
+            return
+        try:
+            allowed = self._public_read_request() or private_read(self)
+        except PermissionError:
+            allowed = False
+        if not allowed:
             self.send_error(403, ACCESS_UNAVAILABLE)
             return
         try:
@@ -419,10 +428,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(financial_intelligence_admin_health_page())
             elif parsed.path.startswith("/financial-intelligence/progress/") and parsed.path.endswith("/status"):
 
-                status_payload = financial_intelligence_progress_status(parsed.path.removeprefix("/financial-intelligence/progress/").removesuffix("/status"))
+                status_payload = financial_intelligence_progress_status(parsed.path.removeprefix("/financial-intelligence/progress/").removesuffix("/status"), headers=self.headers)
                 self._json(status_payload, status=404 if status_payload.get('status') == 'not_found' else 200)
             elif parsed.path.startswith("/financial-intelligence/progress/"):
-                self._html(financial_intelligence_progress_page(parsed.path.removeprefix("/financial-intelligence/progress/")))
+                self._html(financial_intelligence_progress_page(parsed.path.removeprefix("/financial-intelligence/progress/"), headers=self.headers))
             elif parsed.path == "/financial-reports":
                 self._html(review_home_page())
             elif _is_support_report_path(parsed.path):
@@ -442,7 +451,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                     self.send_error(403, "Financial Intelligence run access denied")
                     return
                 try:
-                    self._download_json(financial_intelligence_safe_support_report_payload(run_id), f"{run_id}-support-report.json")
+                    self._download_json(financial_intelligence_safe_support_report_payload(run_id, headers=self.headers), f"{run_id}-support-report.json")
                 except Exception as exc:
                     self._html(_safe_financial_route_failure_page(run_id, exc), status=200)
             elif parsed.path.startswith("/financial-intelligence/") and parsed.path.endswith("/support-diagnostic/download"):
@@ -450,18 +459,18 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                     self.send_error(403, "Support diagnostic access requires an authorised support user")
                     return
                 run_id = parsed.path.removeprefix("/financial-intelligence/").removesuffix("/support-diagnostic/download")
-                self._download_json(financial_intelligence_support_diagnostic_payload(run_id), f"{run_id}-support-diagnostic.json")
+                self._download_json(financial_intelligence_support_diagnostic_payload(run_id, headers=self.headers), f"{run_id}-support-diagnostic.json")
             elif parsed.path.startswith("/financial-intelligence/") and parsed.path.endswith("/support-diagnostic"):
                 if not _support_authorised(self.headers):
                     self.send_error(403, "Support diagnostic access requires an authorised support user")
                     return
-                self._html(financial_intelligence_support_diagnostic_page(parsed.path.removeprefix("/financial-intelligence/").removesuffix("/support-diagnostic")))
+                self._html(financial_intelligence_support_diagnostic_page(parsed.path.removeprefix("/financial-intelligence/").removesuffix("/support-diagnostic"), headers=self.headers))
             elif parsed.path.startswith("/financial-intelligence/"):
                 run_id = parsed.path.removeprefix("/financial-intelligence/")
                 try:
                     run = load_run(run_id)
                 except FileNotFoundError:
-                    html, status = financial_intelligence_run_response(run_id, show_support_control=False)
+                    html, status = financial_intelligence_run_response(run_id, show_support_control=False, headers=self.headers)
                     self._html(html, status=status)
                     return
                 except Exception as exc:
@@ -471,14 +480,14 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                     self.send_error(403, "Financial Intelligence run access denied")
                     return
                 try:
-                    html, status = financial_intelligence_run_response(run_id, show_support_control=(str(run.get('execution_mode') or run.get('extraction_mode') or '') != 'dual_speed_financial_intelligence'))
+                    html, status = financial_intelligence_run_response(run_id, show_support_control=(str(run.get('execution_mode') or run.get('extraction_mode') or '') != 'dual_speed_financial_intelligence'), headers=self.headers)
                 except Exception as exc:
                     html, status = _safe_financial_route_failure_page(run_id, exc), 200
                 self._html(html, status=status)
             elif parsed.path == "/ai-financial-report":
                 self._html(review_home_page())
             elif parsed.path.startswith("/ai-financial-report/"):
-                self._html(run_page(parsed.path.removeprefix("/ai-financial-report/")))
+                self._html(run_page(parsed.path.removeprefix("/ai-financial-report/"), headers=self.headers))
             elif parsed.path == "/observatory":
                 self._html(observatory_page())
             elif parsed.path == "/observatory/critique":
@@ -512,7 +521,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path == "/settings":
                 self._html(settings_page())
             elif parsed.path == "/settings/general":
-                self._html(general_settings_page())
+                from cios.applications.flora.security_web import scoped_settings_page
+                self._html(scoped_settings_page(self.headers))
             elif parsed.path in {"/configuration", "/config", "/settings/configuration"}:
                 self._redirect("/settings/general")
             elif parsed.path == "/logbook":
@@ -525,6 +535,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(case_page(slug))
             else:
                 self.send_error(404, "Flora web route not found")
+        except PermissionError:
+            self.send_error(403, ACCESS_UNAVAILABLE)
+        except (OSError, sqlite3.Error):
+            self.send_error(503, "Security storage unavailable")
         except ValueError as exc:
             self.send_error(404, str(exc))
         except Exception as exc:
@@ -548,16 +562,49 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self.close_connection = True
                 self._redirect("/workspace/reference?saved=1", set_cookie=reference_resume_cookie())
                 return
-        # No verified session/CSRF boundary exists in 01A. Deny every mutation,
-        # including same-origin requests, before reading an attacker-sized body.
-        # 01B must implement membership, origin and session-bound CSRF validation
-        # before replacing this closed gate. Flags cannot enable it.
-        self.close_connection = True
-        self.send_error(403, ACCESS_UNAVAILABLE)
-        return
+        from cios.applications.flora.security_web import (AUTH_PATHS, auth_post, clean_target,
+            origin_valid, read_form, one, mutation_capability, page)
+        from cios.applications.flora.security_store import SecurityStore
+        from cios.applications.flora.access import require_capability
+        import sqlite3
+        try:
+            if not clean_target(self) or "?" in self.path or not origin_valid(self.headers):
+                raise PermissionError("Request verification failed")
+            if self.path in AUTH_PATHS:
+                auth_post(self, self.path)
+                return
+            capability = mutation_capability(self.path)
+            if not capability:
+                raise PermissionError("Privileged operation unavailable")
+            # Reject anonymous requests before consuming any body.
+            require_capability(self.headers, capability)
+            raw, fields = read_form(self, 32 * 1024 * 1024)
+            from io import BytesIO
+            output = self.wfile
+            pending = BytesIO()
+            self.wfile = pending
+            try:
+                with SecurityStore().mutation(self.headers, one(fields, 'csrf'),
+                        recent=capability in {'candidate.promote', 'storage.recover'}):
+                    require_capability(self.headers, capability)
+                    self.rfile = BytesIO(raw)
+                    self._dispatch_verified_post()
+                    if getattr(self, '_protected_status', 200) >= 400:
+                        raise PermissionError('Protected operation rejected')
+            finally:
+                self.wfile = output
+                self._headers_buffer = []
+            # No success response is observable until data and audit commit.
+            output.write(pending.getvalue())
+        except (PermissionError, ValueError, UnicodeError):
+            self.close_connection = True
+            self._html(page('Access unavailable', '<p>Authentication or request verification failed. Sign in again if your session expired.</p>'), status=403)
+        except (OSError, sqlite3.Error):
+            self.close_connection = True
+            self._html(page('Storage unavailable', '<p>Privileged operations are disabled. Try again when security storage is available.</p>'), status=503)
 
     def _dispatch_verified_post(self) -> None:
-        # Deliberately unreachable until the reviewed 01B boundary is installed.
+        # The verified browser boundary calls this existing domain dispatcher.
         # Defence in depth: direct invocation must also fail closed.
         from cios.applications.flora.security import require_verified_human
         require_verified_human(self.headers)
@@ -636,6 +683,11 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         elif self.path.startswith("/blueprint-import/") and self.path.endswith("/identity"):
             run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/identity")
             html, status = confirm_import_identity(run_id, form, self.headers)
+            self._html(html, status=status)
+        elif self.path.startswith("/blueprint-import/") and self.path.endswith("/prepare-review"):
+            from cios.applications.flora.blueprint_import.views import prepare_review
+            run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/prepare-review")
+            html, status = prepare_review(run_id, self.headers)
             self._html(html, status=status)
         elif self.path.startswith("/blueprint-import/") and self.path.endswith("/mark-reviewed"):
             run_id = self.path.removeprefix("/blueprint-import/").removesuffix("/mark-reviewed")
@@ -750,7 +802,15 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         else:
             self.send_error(404, "Flora web route not found")
 
+    def send_response(self, code, message=None):
+        # Includes stdlib send_error(), so a rejected dispatcher result cannot
+        # accidentally commit/touch its enclosing protected transaction.
+        self._protected_status = code
+        return super().send_response(code, message)
+
     def _html(self, html: str, status: int = 200, set_cookie: str = "") -> None:
+        from cios.applications.flora.security_web import decorate_forms
+        html = decorate_forms(html, self.headers)
         auto_status = pilot_auto_sign_in_status()
         if auto_status.active and resolve_pilot_session(self.headers) and "</body" in html.lower():
             html = re.sub(r"</body\s*>", pilot_banner_html() + "</body>", html, count=1, flags=re.IGNORECASE)
@@ -769,19 +829,31 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def _body(self, body: bytes, content_type: str, status: int, set_cookie: str = "") -> None:
+        self._protected_status = status
+        if self.command == 'GET' and 200 <= status < 400:
+            from cios.applications.flora.security import verified_context
+            from cios.applications.flora.security_store import SecurityStore, cookie_token
+            if verified_context(self.headers) is not None:
+                SecurityStore().resolve(cookie_token(self.headers), touch=True)
         self.send_response(status)
         self.send_header("Content-Type", content_type)
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("Referrer-Policy", "no-referrer")
+        self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("Content-Length", str(len(body)))
         if set_cookie:
-            self.send_header("Set-Cookie", set_cookie)
+            for value in (set_cookie if isinstance(set_cookie, list) else [set_cookie]):
+                self.send_header("Set-Cookie", value)
         self.end_headers()
         self.wfile.write(body)
 
     def _redirect(self, location: str, set_cookie: str = "") -> None:
+        self._protected_status = 303
         self.send_response(303)
         self.send_header("Location", location)
         if set_cookie:
-            self.send_header("Set-Cookie", set_cookie)
+            for value in (set_cookie if isinstance(set_cookie, list) else [set_cookie]):
+                self.send_header("Set-Cookie", value)
         self.end_headers()
 
     def log_message(self, format: str, *args: object) -> None:
@@ -1298,9 +1370,9 @@ def _mode_card(href: str, title: str, subtitle: str, description: str) -> str:
 def _account_context_html(decision) -> str:
     from html import escape
     if decision.user_id:
-        controls = "<a href='/digital-twins'>Enterprise Canvas</a><a href='/blueprint-import'>Import Twin</a><a href='/blueprint-import/history'>Import History</a><a href='/settings' aria-label='Profile and settings'>Controls</a>" if decision.owner_recognised else ""
-        return f"<div class='account' aria-label='Account context'><span>{escape(decision.user_id)}</span><span>{escape(decision.active_workspace or 'No workspace')}</span>{controls}<form method='post' action='/pilot-sign-out'><button type='submit'>Sign out</button></form></div>"
-    return "<div class='account' aria-label='Account context'><span class='pill'>Pilot</span><a href='/pilot-sign-in' aria-label='Profile and settings'>Controls</a></div>"
+        controls = "<a href='/digital-twins'>Enterprise Canvas</a><a href='/blueprint-import'>Import Twin</a><a href='/blueprint-import/history'>Import History</a><a href='/settings/general' aria-label='Profile and settings'>Controls</a>" if decision.owner_recognised else ""
+        return f"<div class='account' aria-label='Account context'><span>{escape(decision.user_id)}</span><span>{escape(decision.active_workspace or 'No workspace')}</span>{controls}<form method='post' action='/auth/sign-out'><button type='submit'>Sign out</button></form></div>"
+    return "<div class='account' aria-label='Account context'><a href='/auth/sign-in'>Sign In</a><a href='/auth/workspace'>Workspace</a><a href='/auth/sign-out'>Sign out</a></div>"
 
 
 def _flora_v2_page(title: str, active: str, body: str, account_html: str, footer: str = "") -> str:

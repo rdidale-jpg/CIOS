@@ -35,9 +35,9 @@ def _mutate_received_registry_record(record, tmp_path, mutate):
     path.write_text(json.dumps(data, indent=2, sort_keys=True), encoding="utf-8")
     return BlueprintPackageRegistry().get(record.package_ref)
 
-def receive(monkeypatch,tmp_path,content=None):
+def receive(monkeypatch,tmp_path,content=None,*,workspace_id=""):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
-    return BlueprintPackageRegistry().receive(content or pkg(), "synthetic.zip", "alice")
+    return BlueprintPackageRegistry().receive(content or pkg(), "synthetic.zip", "alice", workspace_id)
 
 
 def test_valid_package_validation_and_supported_record_staging(monkeypatch,tmp_path):

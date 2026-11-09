@@ -101,7 +101,7 @@ def test_producer_supplied_alias_is_resolved_without_legal_suffix_guessing():
 
 
 def receive(records=None,content=None,industry=True):
-    r=BlueprintPackageRegistry().receive(content or pkg(records=records or [],manifest_extra=IDENTITY if industry else None),'isolated.zip','alice')
+    r=BlueprintPackageRegistry().receive(content or pkg(records=records or [],manifest_extra=IDENTITY if industry else None),'isolated.zip','alice',HEADERS['X-Flora-Active-Workspace'])
     BlueprintPackageValidator().validate_and_stage(r.package_ref,'alice',HEADERS)
     return BlueprintPackageRegistry().get(r.package_ref)
 

@@ -1,0 +1,622 @@
+{
+  "confirmed": 22,
+  "unverified": 0,
+  "register": [
+    {
+      "register_id": "IF-01",
+      "test_id": "tests/test_flora_banking_increment44_executive_navigation.py::test_account_default_opportunities_breadcrumbs_and_evidence_drilldown",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_account_default_opportunities_breadcrumbs_and_evidence_drilldown",
+        "source_expression": "assert \"data-default-opportunities='3'\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "\"data-default-opportunities='3'\""
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_account_default_opportunities_breadcrumbs_and_evidence_drilldown",
+        "source_expression": "assert \"data-default-opportunities='3'\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "\"data-default-opportunities='3'\""
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "0ae5709ee533c1bc91ebf00ec02e28b452e5e744ee2e77b5da0e6519e0085b67",
+      "current_raw_message_sha256": "0ae5709ee533c1bc91ebf00ec02e28b452e5e744ee2e77b5da0e6519e0085b67",
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-02",
+      "test_id": "tests/test_flora_banking_increment44_executive_navigation.py::test_ai_native_reference_model_collapsed_and_separate",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_ai_native_reference_model_collapsed_and_separate",
+        "source_expression": "assert \"Explore capability model\" in top",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Explore capability model'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_ai_native_reference_model_collapsed_and_separate",
+        "source_expression": "assert \"Explore capability model\" in top",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Explore capability model'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "cba68d5ab8c18dc6dfc9d6d5cdd0b4809d848ea376a1fb3d58fa7458a176d289",
+      "current_raw_message_sha256": "cba68d5ab8c18dc6dfc9d6d5cdd0b4809d848ea376a1fb3d58fa7458a176d289",
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-03",
+      "test_id": "tests/test_flora_banking_increment44_executive_navigation.py::test_landing_budget_conclusion_and_signals",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_landing_budget_conclusion_and_signals",
+        "source_expression": "assert html.index(\"UK banks are moving\") < html.index(\"Three industry signals\")",
+        "error_kind": "ValueError",
+        "missing_literal": null
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_landing_budget_conclusion_and_signals",
+        "source_expression": "assert html.index(\"UK banks are moving\") < html.index(\"Three industry signals\")",
+        "error_kind": "ValueError",
+        "missing_literal": null
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "72181a49aa20b9cbae67a6051b779d562ef17d0c159b000e9864db9fc8463ca9",
+      "current_raw_message_sha256": "72181a49aa20b9cbae67a6051b779d562ef17d0c159b000e9864db9fc8463ca9",
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-04",
+      "test_id": "tests/test_flora_banking_increment44_executive_navigation.py::test_pestle_only_outlook_not_landing_or_portfolio",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_pestle_only_outlook_not_landing_or_portfolio",
+        "source_expression": "assert \"UK Banking PESTLE view\" in industry_outlook_page()",
+        "error_kind": "AssertionError",
+        "missing_literal": "'UK Banking PESTLE view'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_pestle_only_outlook_not_landing_or_portfolio",
+        "source_expression": "assert \"UK Banking PESTLE view\" in industry_outlook_page()",
+        "error_kind": "AssertionError",
+        "missing_literal": "'UK Banking PESTLE view'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "a81ad8bd7a8a9e5a3c2da43656cb90c2ae0815e7660f28b8c67a16ee5ea31604",
+      "current_raw_message_sha256": "a81ad8bd7a8a9e5a3c2da43656cb90c2ae0815e7660f28b8c67a16ee5ea31604",
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-05",
+      "test_id": "tests/test_flora_banking_increment451_visual_correction.py::test_featured_subset_has_full_exploration_route_and_counts_match_projection",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_increment451_visual_correction.py",
+        "function": "test_featured_subset_has_full_exploration_route_and_counts_match_projection",
+        "source_expression": "assert \"Featured intelligence\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Featured intelligence'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_increment451_visual_correction.py",
+        "function": "test_featured_subset_has_full_exploration_route_and_counts_match_projection",
+        "source_expression": "assert \"Featured intelligence\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Featured intelligence'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "d48e4455eb7051c7df3c4b1bd8da2da6fa5a31ca591e82ee646d96555ae1d4c4",
+      "current_raw_message_sha256": "d48e4455eb7051c7df3c4b1bd8da2da6fa5a31ca591e82ee646d96555ae1d4c4",
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-06",
+      "test_id": "tests/test_flora_banking_increment45_visual_intelligence.py::test_ai_native_maturity_journey_renders_as_visual_progression",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_increment45_visual_intelligence.py",
+        "function": "test_ai_native_maturity_journey_renders_as_visual_progression",
+        "source_expression": "assert \"AI-native maturity rail\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'AI-native maturity rail'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_increment45_visual_intelligence.py",
+        "function": "test_ai_native_maturity_journey_renders_as_visual_progression",
+        "source_expression": "assert \"AI-native maturity rail\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'AI-native maturity rail'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "fc847c1b52a9ada1b2bb032a427d66d5005a3875565cdf51efcd796435e91aba",
+      "current_raw_message_sha256": "fc847c1b52a9ada1b2bb032a427d66d5005a3875565cdf51efcd796435e91aba",
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-07",
+      "test_id": "tests/test_flora_banking_industry_reinvention_increment42.py::test_financial_behaviour_narrative_has_required_causal_sections",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_financial_behaviour_narrative_has_required_causal_sections",
+        "source_expression": "assert \"What the financial results imply about behaviour\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'What the financial results imply about behaviour'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_financial_behaviour_narrative_has_required_causal_sections",
+        "source_expression": "assert \"What the financial results imply about behaviour\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'What the financial results imply about behaviour'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "89e0ddd1ec08ad6eec25b25afa083d2972807a98d7c07205b4179baf0f63f7e9",
+      "current_raw_message_sha256": "89e0ddd1ec08ad6eec25b25afa083d2972807a98d7c07205b4179baf0f63f7e9",
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-08",
+      "test_id": "tests/test_flora_banking_industry_reinvention_increment42.py::test_heatmap_cells_show_pressure_barrier_supplier_and_whitespace",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_heatmap_cells_show_pressure_barrier_supplier_and_whitespace",
+        "source_expression": "assert term in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Supplier:'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_heatmap_cells_show_pressure_barrier_supplier_and_whitespace",
+        "source_expression": "assert term in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Supplier:'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "c2da1cc5bdb9116a2bc47c1c2a2a631abca1da79cd85a51bc77ef8e5b88555fd",
+      "current_raw_message_sha256": "c2da1cc5bdb9116a2bc47c1c2a2a631abca1da79cd85a51bc77ef8e5b88555fd",
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-09",
+      "test_id": "tests/test_flora_banking_industry_reinvention_increment42.py::test_industry_opportunity_totals_reconcile_to_account_opportunities",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_industry_opportunity_totals_reconcile_to_account_opportunities",
+        "source_expression": "assert f\"Flora working estimate \u00a3{portfolio_mid}m\" in html or f\"Flora working estimate: \u00a3{portfolio_mid}m\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Flora working estimate \u00a3910m'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_industry_opportunity_totals_reconcile_to_account_opportunities",
+        "source_expression": "assert f\"Flora working estimate \u00a3{portfolio_mid}m\" in html or f\"Flora working estimate: \u00a3{portfolio_mid}m\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Flora working estimate \u00a3910m'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "c2535406ac4fc289b62b6908ff9465aa5f343de09676630cdae129b605b6af1a",
+      "current_raw_message_sha256": "c2535406ac4fc289b62b6908ff9465aa5f343de09676630cdae129b605b6af1a",
+      "impact": "Computed totals agree before failure; rendered estimate label differs. Presentation/qualification acceptance unresolved.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-10",
+      "test_id": "tests/test_flora_banking_industry_reinvention_increment42.py::test_pestle_forces_map_to_specific_banks_themes_and_non_generic_outputs",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_pestle_forces_map_to_specific_banks_themes_and_non_generic_outputs",
+        "source_expression": "assert category in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Political'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_pestle_forces_map_to_specific_banks_themes_and_non_generic_outputs",
+        "source_expression": "assert category in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Political'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "d5d3b26886929612909adc9a37e4f490fd45fd6694b6d19457afa9bfdff6c442",
+      "current_raw_message_sha256": "d5d3b26886929612909adc9a37e4f490fd45fd6694b6d19457afa9bfdff6c442",
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-11",
+      "test_id": "tests/test_flora_banking_industry_reinvention_increment42.py::test_rendered_acceptance_artefacts_exist",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_rendered_acceptance_artefacts_exist",
+        "source_expression": "assert artefact in industry",
+        "error_kind": "AssertionError",
+        "missing_literal": "'UK Banking PESTLE view'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_rendered_acceptance_artefacts_exist",
+        "source_expression": "assert artefact in industry",
+        "error_kind": "AssertionError",
+        "missing_literal": "'UK Banking PESTLE view'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "50fc0c3635c1f6d73faf2446bc5962fa202ab6ec4ffd9cbc3ffe85607d6c528a",
+      "current_raw_message_sha256": "50fc0c3635c1f6d73faf2446bc5962fa202ab6ec4ffd9cbc3ffe85607d6c528a",
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-12",
+      "test_id": "tests/test_flora_banking_industry_reinvention_increment42.py::test_supplier_names_render_and_unnamed_labels_are_suppressed_when_names_exist",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_supplier_names_render_and_unnamed_labels_are_suppressed_when_names_exist",
+        "source_expression": "assert \"Google Cloud\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Google Cloud'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_supplier_names_render_and_unnamed_labels_are_suppressed_when_names_exist",
+        "source_expression": "assert \"Google Cloud\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Google Cloud'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "164fa9a52ae464a3823c7497abbac4c0f544c1a0322de26bf255934eb22e5c92",
+      "current_raw_message_sha256": "164fa9a52ae464a3823c7497abbac4c0f544c1a0322de26bf255934eb22e5c92",
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-13",
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_analyst_views_preserve_attribution_without_fake_consensus",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_analyst_views_preserve_attribution_without_fake_consensus",
+        "source_expression": "assert \"What analysts broadly like\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'What analysts broadly like'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_analyst_views_preserve_attribution_without_fake_consensus",
+        "source_expression": "assert \"What analysts broadly like\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'What analysts broadly like'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "24d199ecfeadddf42e5f108a392816351dcf8e7048b25df3048c419d08d42dbe",
+      "current_raw_message_sha256": "24d199ecfeadddf42e5f108a392816351dcf8e7048b25df3048c419d08d42dbe",
+      "impact": "Analyst-section/attribution acceptance is unresolved; later provenance assertions do not execute after the first heading failure.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-14",
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_each_bank_page_uses_executive_structure_and_preserves_inspection",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_each_bank_page_uses_executive_structure_and_preserves_inspection",
+        "source_expression": "assert section in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'1. Account in one minute'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_each_bank_page_uses_executive_structure_and_preserves_inspection",
+        "source_expression": "assert section in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'1. Account in one minute'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "a344ed693f603c40b10791d75bedb93124c8bff9ad5afd167a7e68ac71748bbd",
+      "current_raw_message_sha256": "a344ed693f603c40b10791d75bedb93124c8bff9ad5afd167a7e68ac71748bbd",
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-15",
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_increment_41_pipeline_reconciliation_horizons_and_value_meaning",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_increment_41_pipeline_reconciliation_horizons_and_value_meaning",
+        "source_expression": "assert \"What the financial results are telling us\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'What the financial results are telling us'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_increment_41_pipeline_reconciliation_horizons_and_value_meaning",
+        "source_expression": "assert \"What the financial results are telling us\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'What the financial results are telling us'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "aee398a20a98dd307a09b9817573707045d97fd998d6fc12b38c7eb04e3a19e0",
+      "current_raw_message_sha256": "aee398a20a98dd307a09b9817573707045d97fd998d6fc12b38c7eb04e3a19e0",
+      "impact": "Pipeline display/qualification contract unresolved; initial arithmetic preconditions pass, later rendered qualification assertions are not reached.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-16",
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion",
+        "source_expression": "assert text in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Near-term pipeline'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion",
+        "source_expression": "assert text in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Near-term pipeline'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "03d2e639906394be7d2c0e2d1586bad2dcdcdd9da40434b885b49608a8af644e",
+      "current_raw_message_sha256": "03d2e639906394be7d2c0e2d1586bad2dcdcdd9da40434b885b49608a8af644e",
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-17",
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_increment_41_supplier_traction_is_sourced_or_human_labelled_and_unknown_is_bounded",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_increment_41_supplier_traction_is_sourced_or_human_labelled_and_unknown_is_bounded",
+        "source_expression": "assert \"No reliable view\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'No reliable view'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_increment_41_supplier_traction_is_sourced_or_human_labelled_and_unknown_is_bounded",
+        "source_expression": "assert \"No reliable view\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'No reliable view'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "4d7f98a7365335afa57f0f4c806728f1082c57451285645b173319e82c01c0a5",
+      "current_raw_message_sha256": "4d7f98a7365335afa57f0f4c806728f1082c57451285645b173319e82c01c0a5",
+      "impact": "Supplier metadata preconditions pass; displayed unknown/fallback wording differs. Needs semantic/product contract reconciliation.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-18",
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_opportunities_have_values_feedback_and_preserve_originals",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_opportunities_have_values_feedback_and_preserve_originals",
+        "source_expression": "assert action in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Useful'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_opportunities_have_values_feedback_and_preserve_originals",
+        "source_expression": "assert action in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Useful'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "444eaee7b875f537f9dfe87ea1965a1968a6fc2bc60e1a53912004d9fac15f6f",
+      "current_raw_message_sha256": "444eaee7b875f537f9dfe87ea1965a1968a6fc2bc60e1a53912004d9fac15f6f",
+      "impact": "Feedback controls absent under legacy expectations; do not restore anonymous mutations just to satisfy an old UI assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-19",
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_theme_relevance_ranking_and_pipeline_are_deterministic",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_theme_relevance_ranking_and_pipeline_are_deterministic",
+        "source_expression": "assert theme in first",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Customer experience transformation'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_theme_relevance_ranking_and_pipeline_are_deterministic",
+        "source_expression": "assert theme in first",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Customer experience transformation'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "6538b4b471bc10e301bd2f063547c0bc34581c2bb962b785e69eecde70e2a2f8",
+      "current_raw_message_sha256": "6538b4b471bc10e301bd2f063547c0bc34581c2bb962b785e69eecde70e2a2f8",
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-20",
+      "test_id": "tests/test_flora_enterprise_canvas.py::test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_enterprise_canvas.py",
+        "function": "test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+        "source_expression": "assert \"href='/digital-twins/MOD'>Open Twin\" in home",
+        "error_kind": "AssertionError",
+        "missing_literal": "\"href='/digital-twins/MOD'>Open Twin\""
+      },
+      "current_signature": {
+        "file": "tests/test_flora_enterprise_canvas.py",
+        "function": "test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+        "source_expression": "assert \"href='/digital-twins/MOD'>Open Twin\" in home",
+        "error_kind": "AssertionError",
+        "missing_literal": "\"href='/digital-twins/MOD'>Open Twin\""
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "26217fd3baa75d5e904bf3c8e237a86a9fa67c7380255029ce4f55d999c2039f",
+      "current_raw_message_sha256": "26217fd3baa75d5e904bf3c8e237a86a9fa67c7380255029ce4f55d999c2039f",
+      "impact": "Old direct Open Twin link differs from current Canvas navigation; existing authorized import setup reaches the navigation assertion.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-21",
+      "test_id": "tests/test_flora_enterprise_canvas.py::test_home_page_does_not_expose_synthetic_canvas_route",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_enterprise_canvas.py",
+        "function": "test_home_page_does_not_expose_synthetic_canvas_route",
+        "source_expression": "assert \"/blueprint-import/history\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'/blueprint-import/history'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_enterprise_canvas.py",
+        "function": "test_home_page_does_not_expose_synthetic_canvas_route",
+        "source_expression": "assert \"/blueprint-import/history\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'/blueprint-import/history'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "4751f36d4fdbb8a7ee6c08db99d0a8da15fe5bde9acb84990e6cb8a328a3db76",
+      "current_raw_message_sha256": "4751f36d4fdbb8a7ee6c08db99d0a8da15fe5bde9acb84990e6cb8a328a3db76",
+      "impact": "Anonymous home does not contain the expected import-history link; source-data privacy and anonymous write closure must be preserved when reconciling navigation.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "register_id": "IF-22",
+      "test_id": "tests/test_flora_enterprise_canvas.py::test_mod_executive_commercial_canvas_read_model",
+      "baseline_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+      "baseline_status": "failed",
+      "current_status": "failed",
+      "baseline_signature": {
+        "file": "tests/test_flora_enterprise_canvas.py",
+        "function": "test_mod_executive_commercial_canvas_read_model",
+        "source_expression": "assert \"executive situation briefing\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'executive situation briefing'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_enterprise_canvas.py",
+        "function": "test_mod_executive_commercial_canvas_read_model",
+        "source_expression": "assert \"executive situation briefing\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'executive situation briefing'"
+      },
+      "same_normalized_signature": true,
+      "baseline_raw_message_sha256": "4cfbddac8f5c56d2d8d53ef3910e8a9d83c7a0b510379eaea8be65fa7f293688",
+      "current_raw_message_sha256": "4cfbddac8f5c56d2d8d53ef3910e8a9d83c7a0b510379eaea8be65fa7f293688",
+      "impact": "Authenticated Canvas renders 200 but the old briefing heading is absent; later authority/lineage/read-only assertions in this case are not reached.",
+      "direct_security_failure_demonstrated": false,
+      "independence": "Same first assertion/exception reproduced on original pinned code and current code; later assertions are not inferred to pass.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    }
+  ]
+}

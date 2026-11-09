@@ -1,0 +1,1247 @@
+{
+  "obligations": 19,
+  "satisfied": 19,
+  "outstanding": 0,
+  "new_exceptions": 0,
+  "rows": [
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_blueprint_get_and_post_use_same_signed_session_and_anonymous_denied",
+      "obsolete_expectation": "Shared pilot cookie authorises import GET/POST",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[valid]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[tampered]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[expired]"
+      ],
+      "repair_01b_positive_obligation": "Individual sign-in grants only member/capability/ACL-bound import access",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "PermissionError",
+        "failure_sha256": "e3e0db94d6a9a623d225737090bba566490202a2de700bf1129687c5f404ec3a",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_owner_journey.py::test_complete_isolated_owner_http_journey",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_workspace_boundary.py::test_route_and_direct_service_both_deny_wrong_workspace[apply]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_workspace_boundary.py::test_route_and_direct_service_both_deny_wrong_workspace[review]",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[valid]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[tampered]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[expired]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_cookie_security_attributes_for_https_deployment",
+      "obsolete_expectation": "Legacy shared-secret issuer supplies HTTPS cookie",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/pilot-sign-in]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/upload]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mark-reviewed]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/approve]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/delete]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/identity]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/operations/storage-recovery]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/financial-intelligence/bt-group-plc/refresh]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/apply]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/executive-intelligence-brief/generate]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/canvas/feedback]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mission]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/live/collect/start]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/users]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/roles]"
+      ],
+      "repair_01b_positive_obligation": "Real issuer sets Secure, HttpOnly, SameSite and bounded expiry",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "PermissionError",
+        "failure_sha256": "e3e0db94d6a9a623d225737090bba566490202a2de700bf1129687c5f404ec3a",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_individual_session_restart_and_cookie_lifetime",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/pilot-sign-in]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/upload]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/review]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mark-reviewed]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/approve]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/delete]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/identity]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/operations/storage-recovery]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/financial-intelligence/bt-group-plc/refresh]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/review]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/apply]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/executive-intelligence-brief/generate]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/canvas/feedback]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mission]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/live/collect/start]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/users]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/roles]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_deprecated_auto_sign_in_conflicts_with_canonical_pilot_mode",
+      "obsolete_expectation": "Pilot-mode flags determine automatic sign-in behavior",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTO_SIGN_IN]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_IMPORT_BYPASS]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTH_ENABLED]"
+      ],
+      "repair_01b_positive_obligation": "No automatic/shared actor sign-in under any legacy mode",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "833fabee771d673496721be9fb2a28401f53bad44e26811bcccfbf5a3eb42608",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_legacy_flags_do_not_replace_verified_identity_or_membership",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTO_SIGN_IN]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_IMPORT_BYPASS]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTH_ENABLED]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_persistent_cookie_has_30_day_expiry_survives_restart_and_rejects_expired",
+      "obsolete_expectation": "Thirty-day shared pilot cookie survives restart",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[valid]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[tampered]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[expired]"
+      ],
+      "repair_01b_positive_obligation": "Real sessions obey approved absolute/idle expiry, restart and revocation",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "PermissionError",
+        "failure_sha256": "e3e0db94d6a9a623d225737090bba566490202a2de700bf1129687c5f404ec3a",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_individual_session_restart_and_cookie_lifetime",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[disabled]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[duplicate]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[expired]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[idle]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[removed]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[revoked]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[tampered]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[version]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_owner_sign_in_workspace_rotation_logout",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[valid]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[tampered]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[expired]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_defaults_false_and_refuses_non_pilot",
+      "obsolete_expectation": "Environment pilot configuration can enable automatic identity",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTO_SIGN_IN]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_IMPORT_BYPASS]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTH_ENABLED]"
+      ],
+      "repair_01b_positive_obligation": "Explicit individual sign-in only",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "85c7c2ce6ab35d999fa0045e1e0d72714b08fd272139eab1b906d59b12fc0cb0",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_legacy_flags_do_not_replace_verified_identity_or_membership",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_owner_journey.py::test_complete_isolated_owner_http_journey",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTO_SIGN_IN]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_IMPORT_BYPASS]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTH_ENABLED]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_ROLE-membership]",
+      "obsolete_expectation": "Environment role configuration supplies membership",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[production]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[pilot]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[development]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[]"
+      ],
+      "repair_01b_positive_obligation": "Server membership roles independent of environment configuration",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "576b27b264e8ed9171a9fa9fc2c019abd9681df03882d277d2195c4f9f7c122b",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_admin_policy.py::test_real_administrator_policy_and_service_allow_scoped_promotion",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_legacy_flags_do_not_replace_verified_identity_or_membership",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[production]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[pilot]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[development]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_WORKSPACE-workspace]",
+      "obsolete_expectation": "Environment workspace configuration supplies membership",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[production]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[pilot]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[development]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[]"
+      ],
+      "repair_01b_positive_obligation": "Server membership selection and cross-workspace denial",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "passed"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_owner_journey.py::test_complete_isolated_owner_http_journey",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_wrong_workspace_and_csrf_rejected",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[production]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[pilot]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[development]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_pilot_sign_in_route_accepts_secret_only_by_post_and_sets_cookie",
+      "obsolete_expectation": "POST shared secret issues an authority cookie",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/pilot-sign-in]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/upload]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mark-reviewed]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/approve]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/delete]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/identity]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/operations/storage-recovery]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/financial-intelligence/bt-group-plc/refresh]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/apply]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/executive-intelligence-brief/generate]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/canvas/feedback]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mission]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/live/collect/start]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/users]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/roles]"
+      ],
+      "repair_01b_positive_obligation": "Individual authentication issues protected session; query secrets never accepted",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "1d28609d8fd9c41ba405aed70610dc74ae90e94154440711a4e0342078ab5c1a",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_query_credentials_never_issue_authority[/auth/sign-in]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_query_credentials_never_issue_authority[/pilot-sign-in]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_owner_journey.py::test_complete_isolated_owner_http_journey",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/pilot-sign-in]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/upload]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/review]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mark-reviewed]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/approve]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/delete]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/identity]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/operations/storage-recovery]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/financial-intelligence/bt-group-plc/refresh]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/review]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/apply]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/executive-intelligence-brief/generate]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/canvas/feedback]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mission]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/live/collect/start]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/users]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/roles]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_sign_in_issues_one_cookie_and_browser_reuses_it_for_import_get_and_post",
+      "obsolete_expectation": "Shared pilot cookie is reusable import authority",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[valid]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[tampered]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[expired]"
+      ],
+      "repair_01b_positive_obligation": "One real individual session across authorised import GET/POST and revocation",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "KeyError",
+        "failure_sha256": "9d8b990454221bbe8a30003cc44cb96bb46727a28aa4a55c6e6dc8f35d27ae0e",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_owner_journey.py::test_complete_isolated_owner_http_journey",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[valid]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[tampered]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[expired]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_synthetic_headers_ignored_and_tampered_cookie_rejected",
+      "obsolete_expectation": "Setup creates legacy pilot cookie before testing tamper/header rejection",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[valid]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[tampered]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[expired]"
+      ],
+      "repair_01b_positive_obligation": "Real token integrity and header rejection; preserve sound negative assertions",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "PermissionError",
+        "failure_sha256": "e3e0db94d6a9a623d225737090bba566490202a2de700bf1129687c5f404ec3a",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[disabled]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[duplicate]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[expired]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[idle]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[removed]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[revoked]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[tampered]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_invalidated_sessions_fail_closed[version]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_unverified_claims_never_resolve[claim0]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_unverified_claims_never_resolve[claim1]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_unverified_claims_never_resolve[claim2]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_unverified_claims_never_resolve[claim3]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_unverified_claims_never_resolve[claim4]",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[valid]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[tampered]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[expired]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_unexpected_diagnostic_storage_failure_preserves_denied_context",
+      "obsolete_expectation": "Diagnostic failure journey first issues a shared pilot cookie",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/history]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/private/inspect]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/operations/storage-recovery]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/financial-intelligence/admin/health]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/ai-financial-report/private]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/digital-twin/private]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/digital-twins/private/canvas]"
+      ],
+      "repair_01b_positive_obligation": "Unavailable diagnostic/audit store fails closed without leaking context",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "PermissionError",
+        "failure_sha256": "e3e0db94d6a9a623d225737090bba566490202a2de700bf1129687c5f404ec3a",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_login_audit_failure_rolls_back_session_without_disclosure",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01b.py::test_security_store_failure_and_permissions_deny",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/history]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/private/review]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/private/inspect]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/operations/storage-recovery]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/financial-intelligence/admin/health]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/ai-financial-report/private]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/digital-twin/private]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/digital-twins/private/canvas]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_valid_pilot_session_cookie_resolves_owner_workspace_role_and_policy",
+      "obsolete_expectation": "Pilot cookie resolves owner/workspace/role from configuration",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[production]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[pilot]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[development]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[]"
+      ],
+      "repair_01b_positive_obligation": "Server identity and active membership resolve least-privilege policy",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "PermissionError",
+        "failure_sha256": "e3e0db94d6a9a623d225737090bba566490202a2de700bf1129687c5f404ec3a",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_admin_policy.py::test_real_administrator_policy_and_service_allow_scoped_promotion",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_least_privilege_reviewer_dispositions_do_not_grant_promotion",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[production]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[pilot]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[development]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_blueprint_review.py::test_non_pilot_workspace_and_capability_checks_are_unchanged",
+      "obsolete_expectation": "Browser role/workspace claims satisfy non-pilot capability checks",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[object]",
+        "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[dictionary]",
+        "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[headers]",
+        "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[cookie]",
+        "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[environment]"
+      ],
+      "repair_01b_positive_obligation": "Verified member can review only permitted workspace resources",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "192cfecc0bded619d20267c0ce20745a3e27324d6f54085f1a51340374e2da76",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_least_privilege_reviewer_dispositions_do_not_grant_promotion",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_verified_reviewer_cannot_review_unscoped_or_other_workspace_package[]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_verified_reviewer_cannot_review_unscoped_or_other_workspace_package[other-workspace]",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[object]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[dictionary]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[headers]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[cookie]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[environment]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_blueprint_review.py::test_pilot_upload_review_and_dispositions_do_not_grant_promotion",
+      "obsolete_expectation": "Pilot upload/review/disposition path is authorised by shared actor",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_shared_pilot_cannot_record_human_review"
+      ],
+      "repair_01b_positive_obligation": "Individual review/dispositions attributed correctly, no implicit promotion",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "48baaa632f05319e432248d7b5fb906f9ecfd5e1724c7a1cd520f01a2cf20f61",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_least_privilege_reviewer_dispositions_do_not_grant_promotion",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_shared_pilot_cannot_record_human_review",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_deployment_endpoint_identifies_canonical_import_runtime",
+      "obsolete_expectation": "Public deployment endpoint returns environment-derived runtime metadata",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_review_closure.py::test_public_fingerprint_excludes_environment_configuration"
+      ],
+      "repair_01b_positive_obligation": "Public safe code fingerprint; sensitive diagnostics require scoped authority",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "6b414e611407131d2a6c5c2e02ff59b1afc9ca7e487ab2535fb887e2df69c869",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_settings_and_diagnostics_show_only_authorised_scope",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_review_closure.py::test_public_fingerprint_excludes_environment_configuration",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_review_closure.py::test_public_fingerprint_excludes_environment_configuration",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_form_validation_secure_mode_and_promotion_boundary",
+      "obsolete_expectation": "Anonymous form processing occurs before the authority boundary",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/pilot-sign-in]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/upload]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mark-reviewed]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/approve]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/delete]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/identity]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/operations/storage-recovery]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/financial-intelligence/bt-group-plc/refresh]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/apply]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/executive-intelligence-brief/generate]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/canvas/feedback]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mission]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/live/collect/start]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/users]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/roles]"
+      ],
+      "repair_01b_positive_obligation": "Authorised input validation and separate promotion privilege",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "192cfecc0bded619d20267c0ce20745a3e27324d6f54085f1a51340374e2da76",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_authenticated_archive_and_form_validation_precede_import_mutation[bad-extension]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_authenticated_archive_and_form_validation_precede_import_mutation[invalid-zip]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_authenticated_archive_and_form_validation_precede_import_mutation[unsafe-member]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_least_privilege_reviewer_dispositions_do_not_grant_promotion",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/pilot-sign-in]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/upload]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/review]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mark-reviewed]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/approve]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/delete]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/identity]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/operations/storage-recovery]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/financial-intelligence/bt-group-plc/refresh]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/review]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/apply]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/executive-intelligence-brief/generate]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/canvas/feedback]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mission]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/live/collect/start]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/users]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/roles]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_one_canonical_mode_and_conflicting_legacy_modes_fail",
+      "obsolete_expectation": "Legacy mode flags define a functional pilot authority mode",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTO_SIGN_IN]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_IMPORT_BYPASS]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTH_ENABLED]"
+      ],
+      "repair_01b_positive_obligation": "Mode flags never enable authority",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "267acb3c6aa3d5213349d5306df33e98f7047e1f46af0d503403e3da38192952",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_legacy_flags_do_not_replace_verified_identity_or_membership",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTO_SIGN_IN]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_IMPORT_BYPASS]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTH_ENABLED]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_secure_mode_settings_route_reports_root_authorisation_decision",
+      "obsolete_expectation": "Anonymous settings exposes detailed root authorization context",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/history]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/private/inspect]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/operations/storage-recovery]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/financial-intelligence/admin/health]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/ai-financial-report/private]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/digital-twin/private]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/digital-twins/private/canvas]"
+      ],
+      "repair_01b_positive_obligation": "Authorised settings reveal only scoped diagnostics",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "192cfecc0bded619d20267c0ce20745a3e27324d6f54085f1a51340374e2da76",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_settings_and_diagnostics_show_only_authorised_scope",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/history]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/private/review]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/private/inspect]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/operations/storage-recovery]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/financial-intelligence/admin/health]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/ai-financial-report/private]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/digital-twin/private]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/digital-twins/private/canvas]",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_validation_and_archive_safety_precede_identity",
+      "obsolete_expectation": "Anonymous archive validation precedes verified identity",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/pilot-sign-in]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/upload]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mark-reviewed]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/approve]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/delete]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/identity]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/operations/storage-recovery]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/financial-intelligence/bt-group-plc/refresh]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/apply]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/executive-intelligence-brief/generate]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/canvas/feedback]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mission]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/live/collect/start]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/users]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/roles]"
+      ],
+      "repair_01b_positive_obligation": "Authorised archive safety/validation before import mutation",
+      "classification": "replaced; requires future positive coverage",
+      "current_historical_status": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "dd39cb09ccbff512abf049027fa4398cf63d2293dcbe5cbd5f13859b2de02edd",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "positive_obligation_status": "satisfied in isolated synthetic tests",
+      "positive_tests": [
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_authenticated_archive_and_form_validation_precede_import_mutation[bad-extension]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_authenticated_archive_and_form_validation_precede_import_mutation[invalid-zip]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_legacy_obligations.py::test_authenticated_archive_and_form_validation_precede_import_mutation[unsafe-member]",
+          "status": "passed"
+        }
+      ],
+      "replacement_negative_results": [
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/pilot-sign-in]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/upload]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/review]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mark-reviewed]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/approve]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/delete]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/identity]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/operations/storage-recovery]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/financial-intelligence/bt-group-plc/refresh]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/review]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/apply]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/executive-intelligence-brief/generate]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/canvas/feedback]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mission]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/live/collect/start]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/users]",
+          "status": "passed"
+        },
+        {
+          "test_id": "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/roles]",
+          "status": "passed"
+        }
+      ]
+    }
+  ],
+  "five_preexisting_failures": {
+    "tests/test_flora_pilot_auth.py::test_cios_owner_can_upload_inspect_and_stage_mod_package_without_canonical_mutation": {
+      "status": "failed",
+      "failure": "PermissionError",
+      "failure_sha256": "e3e0db94d6a9a623d225737090bba566490202a2de700bf1129687c5f404ec3a",
+      "failure_details": "Raw diagnostics retained locally; omitted from public output"
+    },
+    "tests/test_flora_pilot_auth.py::test_owner_managed_enterprise_policy_is_case_normalised_and_workspace_bound": {
+      "status": "failed",
+      "failure": "cios.applications.flora.blueprint_import.validator.BlueprintValidationError",
+      "failure_sha256": "a510dcea05287a121af99bd614c28fcb84e7ad6e4ac8913fe4cb336f5962cfa5",
+      "failure_details": "Raw diagnostics retained locally; omitted from public output"
+    },
+    "tests/test_flora_pilot_import_bypass.py::test_configured_module_complete_http_commercial_context_and_twin_map": {
+      "status": "failed",
+      "failure": "AssertionError",
+      "failure_sha256": "a797afdf3ec4427692dd40d78d10aa92030fbe4261d2568f67a4e2b0974e3627",
+      "failure_details": "Raw diagnostics retained locally; omitted from public output"
+    },
+    "tests/test_flora_pilot_import_bypass.py::test_deployed_equivalent_pilot_route_imports_candidate_to_executive_workspace": {
+      "status": "failed",
+      "failure": "AssertionError",
+      "failure_sha256": "0bbc6fc224f708c39172f3c2cf1d93bd24e63f5196a00eaf38112d56e46f0bc5",
+      "failure_details": "Raw diagnostics retained locally; omitted from public output"
+    },
+    "tests/test_flora_pilot_import_bypass.py::test_pilot_configure_save_and_recompose_uses_narrow_actor_scope": {
+      "status": "failed",
+      "failure": "AssertionError",
+      "failure_sha256": "192cfecc0bded619d20267c0ce20745a3e27324d6f54085f1a51340374e2da76",
+      "failure_details": "Raw diagnostics retained locally; omitted from public output"
+    }
+  },
+  "historical_note": "Raw legacy assertions remain unchanged. Retired mechanisms are not restored. Owner/workspace substring changes do not alter active=False; semantic replacement tests assert authority behaviour."
+}

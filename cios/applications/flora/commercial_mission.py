@@ -12,7 +12,8 @@ import os
 from pathlib import Path
 from typing import Any
 
-from cios.applications.flora.access import commercial_context_actor
+from cios.applications.flora.access import commercial_context_actor, require_capability
+from cios.applications.flora.security import verified_service_write, verified_service_read
 from cios.applications.flora.storage import atomic_write_json, data_path
 
 
@@ -38,6 +39,48 @@ def _mission_path() -> Path:
 def _employer_path() -> Path:
     override = os.getenv("FLORA_EMPLOYER_CONTEXTS_FILE")
     return Path(override) if override else data_path("commercial_context", "employer_contexts.json")
+
+
+def _profile_visible(headers, value):
+    try:
+        context = require_capability(headers, 'commercial_context.view')
+        return bool(context.workspace and value.get('workspace_id') == context.workspace)
+    except PermissionError:
+        return False
+
+
+def _profile_authority(headers, path, value, existing=None):
+    """Actor-owned profiles use their persisted workspace, not an Enterprise ACL."""
+    context = require_capability(headers, 'commercial_context.edit')
+    if not context.workspace or context.workspace == '*':
+        raise PermissionError('Commercial profile workspace unavailable')
+    if 'workspace_id' in value and value['workspace_id'] != context.workspace:
+        raise PermissionError('Commercial profile workspace mismatch')
+    if existing is not None and (not isinstance(existing, dict) or existing.get('workspace_id') != context.workspace):
+        raise PermissionError('Commercial profile has unresolved or conflicting workspace')
+    from .security_store import Context
+    if isinstance(context, Context):
+        from .storage import data_root
+        if path.absolute() not in {data_root().absolute()/'commercial_context'/'commercial_missions.json',
+                                 data_root().absolute()/'commercial_context'/'employer_contexts.json'}:
+            raise PermissionError('Commercial profile storage scope unavailable')
+    return context
+
+
+def _profile_audit(headers, path, context, record):
+    from .security_store import Context, SecurityStore
+    # Recheck immediately before persistence, inside the service transaction.
+    from .security import require_active_service_write
+    require_active_service_write(headers, 'commercial_context.edit')
+    current = _profile_authority(headers, path, {}, {'workspace_id': context.workspace})
+    if isinstance(current, Context):
+        with SecurityStore().transaction() as db:
+            from .security_store import canonical, digest
+            SecurityStore().audit(db, 'commercial_profile_mutation', resource_id=path.name+':'+current.user_id,
+                record_digest=digest(canonical(record)),
+                user_id=current.user_id,workspace_id=current.workspace,
+                membership_id=current.membership.membership_id,membership_version=current.membership.version,
+                session_ref=current.session.session_ref)
 
 
 @dataclass(frozen=True)
@@ -118,6 +161,14 @@ class CommercialMission:
 
 
 def resolve_commercial_mission(headers: Any) -> CommercialMission | None:
+    try:
+        return _resolve_commercial_mission(headers)
+    except PermissionError:
+        return None
+
+
+@verified_service_read('commercial_context.view')
+def _resolve_commercial_mission(headers: Any) -> CommercialMission | None:
     """Resolve declared context for the authenticated principal; never infer it."""
     user_id = commercial_context_actor(headers)
     if not user_id:
@@ -128,9 +179,12 @@ def resolve_commercial_mission(headers: Any) -> CommercialMission | None:
     except (FileNotFoundError, json.JSONDecodeError, OSError):
         return None
     value = profiles.get(user_id)
-    return CommercialMission.from_dict(user_id, value) if isinstance(value, dict) else None
+    if not isinstance(value, dict) or not _profile_visible(headers, value):
+        return None
+    return CommercialMission.from_dict(user_id, value)
 
 
+@verified_service_write('commercial_context.edit')
 def save_commercial_mission(headers: Any, value: dict[str, Any]) -> CommercialMission:
     """Atomically persist declared mission context against the existing user ID."""
     user_id = commercial_context_actor(headers)
@@ -143,6 +197,7 @@ def save_commercial_mission(headers: Any, value: dict[str, Any]) -> CommercialMi
         profiles = {}
     if not isinstance(profiles, dict):
         raise ValueError("Commercial Mission profile store must be an object")
+    context = _profile_authority(headers, path, value, profiles.get(user_id))
     mission = CommercialMission.from_dict(user_id, value)
     if not all((mission.executive_role, mission.commercial_objective)):
         raise ValueError("Role and objective are required")
@@ -155,7 +210,13 @@ def save_commercial_mission(headers: Any, value: dict[str, Any]) -> CommercialMi
         "opportunity_horizon", "required_opportunity_maturity", "minimum_evidence_state", "speculative_treatment",
         "show_unvalued_opportunities", "inspection_depth", "authority_status", "supplied_by",
         "context_id", "version")})
+    profiles[user_id]['workspace_id'] = context.workspace
+    _profile_audit(headers, path, context, profiles[user_id])
     atomic_write_json(path, profiles)
+    persisted = json.loads(path.read_text()).get(user_id, {})
+    _profile_authority(headers, path, {}, persisted)
+    if persisted != profiles[user_id]:
+        raise OSError('Commercial profile write verification failed')
     return mission
 
 
@@ -206,6 +267,14 @@ class EmployerContext:
 
 
 def resolve_employer_context(headers: Any) -> EmployerContext | None:
+    try:
+        return _resolve_employer_context(headers)
+    except PermissionError:
+        return None
+
+
+@verified_service_read('commercial_context.view')
+def _resolve_employer_context(headers: Any) -> EmployerContext | None:
     """Resolve supplier-side configuration independently of mission and Twin stores."""
     user_id = commercial_context_actor(headers)
     if not user_id:
@@ -216,11 +285,12 @@ def resolve_employer_context(headers: Any) -> EmployerContext | None:
     except (FileNotFoundError, json.JSONDecodeError, OSError):
         return None
     value = profiles.get(user_id)
-    if not isinstance(value, dict):
+    if not isinstance(value, dict) or not _profile_visible(headers, value):
         return None
     return EmployerContext.from_dict({"context_id": f"employer-context:{user_id}", **value})
 
 
+@verified_service_write('commercial_context.edit')
 def save_employer_context(headers: Any, value: dict[str, Any]) -> EmployerContext:
     """Atomically save explicitly supplied employer context in its own profile store."""
     user_id = commercial_context_actor(headers)
@@ -236,13 +306,20 @@ def save_employer_context(headers: Any, value: dict[str, Any]) -> EmployerContex
         profiles = {}
     if not isinstance(profiles, dict):
         raise ValueError("Employer Context profile store must be an object")
+    authority = _profile_authority(headers, path, value, profiles.get(user_id))
     profiles[user_id] = {name: list(getattr(context, name)) for name in (
         "offer_portfolio", "capabilities", "propositions", "partners", "competitors", "credentials",
         "constraints", "target_sectors", "excluded_offerings")}
     profiles[user_id].update(organisation=context.organisation, description=context.description,
                              authority_status=context.authority_status, field_statuses=context.field_statuses,
                              context_id=context.context_id or f"employer-context:{user_id}", version=context.version)
+    profiles[user_id]['workspace_id'] = authority.workspace
+    _profile_audit(headers, path, authority, profiles[user_id])
     atomic_write_json(path, profiles)
+    persisted = json.loads(path.read_text()).get(user_id, {})
+    _profile_authority(headers, path, {}, persisted)
+    if persisted != profiles[user_id]:
+        raise OSError('Commercial profile write verification failed')
     return EmployerContext.from_dict(profiles[user_id])
 
 
@@ -254,10 +331,19 @@ class ResolvedCommercialContext:
 
 
 def resolve_commercial_context(headers: Any) -> ResolvedCommercialContext:
+    try:
+        return _resolve_commercial_context(headers)
+    except PermissionError:
+        return ResolvedCommercialContext(None, None)
+
+
+@verified_service_read('commercial_context.view')
+def _resolve_commercial_context(headers: Any) -> ResolvedCommercialContext:
     """Resolve both existing authorities without creating another persisted model."""
     return ResolvedCommercialContext(resolve_commercial_mission(headers), resolve_employer_context(headers))
 
 
+@verified_service_write('commercial_context.edit')
 def save_commercial_context(headers: Any, mission_value: dict[str, Any],
                             employer_value: dict[str, Any]) -> tuple[CommercialMission, EmployerContext]:
     """Commit both independently owned profiles as one user save journey.
@@ -269,20 +355,29 @@ def save_commercial_context(headers: Any, mission_value: dict[str, Any],
     user_id = commercial_context_actor(headers)
     if not user_id:
         raise PermissionError("An authenticated Flora user is required")
-    old_mission = resolve_commercial_mission(headers)
-    old_employer = resolve_employer_context(headers)
-    version = max(old_mission.version if old_mission else 0,
-                  old_employer.version if old_employer else 0) + 1
+    versions = []
+    for path, value in [(_mission_path(), mission_value), (_employer_path(), employer_value)]:
+        try:
+            stored = json.loads(path.read_text()).get(user_id)
+        except FileNotFoundError:
+            stored = None
+        _profile_authority(headers, path, value, stored)
+        versions.append(int(stored.get('version', 0)) if stored else 0)
+    version = max(versions) + 1
     mission_payload = {**mission_value, "context_id": f"commercial-mission:{user_id}", "version": version}
     employer_payload = {**employer_value, "context_id": f"employer-context:{user_id}", "version": version}
     mission_path = _mission_path()
     before = mission_path.read_bytes() if mission_path.exists() else None
     try:
         mission = save_commercial_mission(headers, mission_payload)
+    except PermissionError:
+        raise
     except (ValueError, OSError) as exc:
         raise ValueError(f"Commercial Mission failed: {exc}") from exc
     try:
         employer = save_employer_context(headers, employer_payload)
+    except PermissionError:
+        raise
     except (ValueError, OSError) as exc:
         try:
             if before is None:

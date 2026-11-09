@@ -107,6 +107,8 @@ def test_negated_source_does_not_support_positive_procurement(memory):
 def test_invalid_provider_output_is_audited_without_replacing_valid_brief(memory, tmp_path):
     req, pkg, payload = brief(memory)
     runtime = EnterpriseIntelligenceRuntime(provider=StaticJSONProvider(copy.deepcopy(payload)))
+    from tests.flora_security_fixtures import existing_resource_acl
+    existing_resource_acl(enterprise_id=req.enterprise_id,workspace_id=req.workspace_id,principal_id=req.requested_by)
     good = generate_brief(runtime,req)
     assert good['audit']['status'] == 'Succeeded'
     saved = tmp_path / 'enterprise_intelligence' / 'briefs' / (ENTERPRISE + '.json')
@@ -284,6 +286,8 @@ def test_raw_missing_schema_is_provider_success_but_intelligence_rejection(memor
     class MissingSchema:
         def generate_structured(self, **kwargs):
             return LLMResult({'enterprise_id': ENTERPRISE, 'unvalidated': 'raw output'}, 'test', 'test', {}, 0)
+    from tests.flora_security_fixtures import existing_resource_acl
+    existing_resource_acl(enterprise_id=req.enterprise_id,workspace_id=req.workspace_id,principal_id=req.requested_by)
     result = generate_brief(EnterpriseIntelligenceRuntime(provider=MissingSchema()),req)
     assert result['audit']['provider_status'] == 'Succeeded'
     assert result['audit']['status'] == 'Rejected'
@@ -295,6 +299,8 @@ def test_validator_exception_is_fail_closed_and_retains_raw_output(memory):
     class BrokenValidator:
         def validate(self, *args):
             raise ValueError('Synthetic validation failure')
+    from tests.flora_security_fixtures import existing_resource_acl
+    existing_resource_acl(enterprise_id=req.enterprise_id,workspace_id=req.workspace_id,principal_id=req.requested_by)
     result = generate_brief(EnterpriseIntelligenceRuntime(provider=StaticJSONProvider(payload), validator=BrokenValidator()),req)
     assert result['audit']['status'] == 'Rejected'
     assert result['audit']['provider_status'] == 'Succeeded'

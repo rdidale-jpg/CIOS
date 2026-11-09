@@ -1,6 +1,8 @@
 """Dry-run canonical effect planning for reviewed Blueprint candidates."""
 from __future__ import annotations
 
+from cios.applications.flora.security import verified_service_write
+
 import json
 from dataclasses import asdict, dataclass, field
 from typing import Any, Literal
@@ -73,6 +75,7 @@ class DryRunPlanRepository:
 class DryRunPlanningService:
     def __init__(self, registry=None, staging=None, reviews=None, mappings=None, repository=None, ledger=None):
         self.registry=registry or BlueprintPackageRegistry(); self.staging=staging or CandidateStagingRepository(); self.reviews=reviews or CandidateReviewRepository(); self.mappings=mappings or ImportMappingRepository(); self.repository=repository or DryRunPlanRepository(); self.ledger=ledger or BlueprintImportLedger()
+    @verified_service_write('package.review', denial_error=BlueprintReviewError)
     def create_plan(self, import_run_id: str, actor: str, headers: Any) -> DryRunCanonicalEffectPlan:
         candidates = self.staging.list_candidates(import_run_id)
         if not candidates: raise BlueprintReviewError("No staged candidates for import run")

@@ -5,6 +5,8 @@ mutate canonical Evidence, Observations or Enterprise Model state.
 """
 from __future__ import annotations
 
+from cios.applications.flora.security import verified_service_write
+
 import json
 from dataclasses import asdict, dataclass, field
 from typing import Any, Literal
@@ -52,6 +54,7 @@ class ImportHumanReviewRepository:
         return review
 
 
+@verified_service_write('package.review', denial_error=BlueprintReviewError)
 def mark_import_reviewed(import_run_id: str, headers: Any, runtime_fingerprint: str) -> ImportHumanReview:
     """Record the Chief Architect's Review-stage action without mutating truth."""
     package = next((p for p in BlueprintPackageRegistry().list() if p.import_run_id == import_run_id), None)
@@ -66,11 +69,13 @@ def mark_import_reviewed(import_run_id: str, headers: Any, runtime_fingerprint: 
 
 
 def can_review_blueprint_candidate(headers: Any, enterprise_id: str, workspace_id: str = "") -> bool:
-    if not authenticated_flora_user(headers):
+    from cios.applications.flora.access import require_resource_scope
+    try:
+        require_resource_scope(headers, "package.review", enterprise_id, workspace_id, require_acl=False)
+    except PermissionError:
         return False
-    if not can_access_enterprise(headers, enterprise_id, workspace_id):
-        return False
-    return bool(flora_roles(headers) & {"package.review", "blueprint_import_admin"})
+    return True
+
 
 
 @dataclass(frozen=True)
@@ -127,6 +132,7 @@ class CandidateReviewService:
         self.repository = repository or CandidateReviewRepository()
         self.ledger = ledger or BlueprintImportLedger()
 
+    @verified_service_write('package.review', denial_error=BlueprintReviewError)
     def record_decision(self, candidate_id: str, decision: ReviewDecisionValue, reviewer: str, rationale: str, headers: Any, mapped_canonical_target_id: str = "", unresolved_issues: tuple[str, ...] = ()) -> CandidateReviewDecision:
         if not authenticated_flora_user(headers) or reviewer != authenticated_flora_user(headers):
             raise BlueprintReviewError("Reviewer does not match verified authority")
