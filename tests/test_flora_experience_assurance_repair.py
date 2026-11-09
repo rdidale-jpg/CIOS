@@ -6,7 +6,7 @@ from cios.applications.flora.web import app
 from cios.applications.flora.twin_inspection.views import twin_inspection_page
 from cios.applications.flora.memory.repository import EvidenceRepository, ObservationRepository, EnterpriseModelRepository
 
-HEADERS={'X-Flora-User':'alice','X-Flora-Enterprises':'*','X-Flora-Roles':'blueprint_import_admin'}
+HEADERS={'X-Flora-User':'alice','X-Flora-Enterprises':'*','X-Flora-Roles':'blueprint_import_admin','X-Flora-Active-Workspace':'workspace-a'}
 
 class Visible(HTMLParser):
     def __init__(self):super().__init__();self.stack=[];self.parts=[]

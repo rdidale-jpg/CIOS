@@ -7,6 +7,9 @@ research actions.
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
+from contextvars import ContextVar
+from contextlib import contextmanager
+from cios.applications.flora.security import verified_service_write, verified_service_read, require_service_capability
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -16,6 +19,13 @@ from typing import Any
 
 from cios.applications.flora.access import authenticated_flora_user, flora_roles, user_enterprise_access
 from cios.applications.flora.storage import data_path, ensure_parent_writable
+
+_WRITE = ContextVar('flora_feedback_write', default=None)
+SUBMIT_CAPABILITIES = ('package.review', 'feedback.submit', 'canvas.feedback')
+REVIEW_CAPABILITIES = ('package.review', 'feedback.review')
+STANDARD_READ_CAPABILITIES = ('package.review', 'feedback.view', 'feedback.submit', 'canvas.feedback')
+RESTRICTED_READ_CAPABILITIES = ('package.review', 'feedback.review', 'feedback.restricted')
+READ_CAPABILITIES = tuple(dict.fromkeys(STANDARD_READ_CAPABILITIES + RESTRICTED_READ_CAPABILITIES))
 
 FEEDBACK_SCHEMA_VERSION = "flora-enterprise-canvas-feedback-v1"
 ACTIONS = {
@@ -54,6 +64,7 @@ class EnterpriseCanvasFeedback:
     contributor_identity: str
     contributor_role: str
     supplied_at: str
+    workspace_id: str = ""
     status: str = "submitted"
     tile_view_id: str = ""
     displayed_judgement_ref: str = ""
@@ -92,21 +103,54 @@ def _roles(headers: Any) -> set[str]:
     return flora_roles(headers)
 
 
+def require_feedback_authority(headers, enterprise_id, capabilities, workspace_id=None):
+    from .access import EnterpriseCanvasAccessRepository
+    from cios.applications.flora.access import require_resource_scope,require_capability
+    require_service_capability(headers, capabilities)
+    acl = EnterpriseCanvasAccessRepository().get(enterprise_id)
+    if not acl or (workspace_id is not None and (not workspace_id or workspace_id != acl.workspace_id)):
+        raise FeedbackAccessError('Feedback resource unavailable')
+    # Choose through the canonical evaluator, never roles alone.
+    for capability in capabilities:
+        try:
+            require_capability(headers, capability)
+        except PermissionError:
+            continue
+        return require_resource_scope(headers, capability, acl.enterprise_id, acl.workspace_id)
+    raise FeedbackAccessError('Feedback capability unavailable')
+
+
+def _allowed(headers, enterprise_id, capabilities, workspace_id=None):
+    try:
+        require_feedback_authority(headers, enterprise_id, capabilities, workspace_id)
+        return True
+    except PermissionError:
+        return False
+
+
 def can_submit_feedback(headers: Any, enterprise_id: str) -> bool:
-    return bool(authenticated_flora_user(headers)) and ("*" in user_enterprise_access(headers) or enterprise_id in user_enterprise_access(headers)) and bool(_roles(headers) & {"feedback.submit", "package.review", "canvas.feedback"})
+    return _allowed(headers, enterprise_id, SUBMIT_CAPABILITIES)
 
 
 def can_view_feedback(headers: Any, enterprise_id: str, visibility: str = "standard") -> bool:
-    if not (authenticated_flora_user(headers) and ("*" in user_enterprise_access(headers) or enterprise_id in user_enterprise_access(headers))):
+    if visibility not in VISIBILITY:
         return False
-    roles = _roles(headers)
-    if visibility == "standard":
-        return bool(roles & {"feedback.view", "feedback.submit", "package.review", "canvas.feedback"})
-    return bool(roles & {"feedback.review", "feedback.restricted", "package.review"})
+    capabilities = STANDARD_READ_CAPABILITIES if visibility == 'standard' else RESTRICTED_READ_CAPABILITIES
+    return _allowed(headers, enterprise_id, capabilities)
 
 
 def can_review_feedback(headers: Any, enterprise_id: str) -> bool:
-    return bool(authenticated_flora_user(headers)) and ("*" in user_enterprise_access(headers) or enterprise_id in user_enterprise_access(headers)) and bool(_roles(headers) & {"feedback.review", "package.review"})
+    return _allowed(headers, enterprise_id, REVIEW_CAPABILITIES)
+
+
+@contextmanager
+def _write_authority(headers, capabilities, record):
+    token = _WRITE.set((headers, capabilities))
+    try:
+        yield
+        require_feedback_authority(headers, record.enterprise_id, capabilities, record.workspace_id)
+    finally:
+        _WRITE.reset(token)
 
 
 class FeedbackAccessError(PermissionError):
@@ -132,6 +176,27 @@ class EnterpriseCanvasFeedbackRepository:
         return rows
 
     def append(self, record: EnterpriseCanvasFeedback) -> EnterpriseCanvasFeedback:
+        authority = _WRITE.get()
+        if authority is None:
+            raise FeedbackAccessError('Feedback persistence requires the authorised service')
+        headers, capabilities = authority
+        from cios.applications.flora.security import require_active_service_write
+        require_active_service_write(headers, capabilities)
+        context = require_feedback_authority(headers, record.enterprise_id, capabilities, record.workspace_id)
+        if not record.audit_history or record.audit_history[-1].actor_id != context.user_id:
+            raise FeedbackAccessError('Feedback attribution mismatch')
+        from cios.applications.flora.security_store import Context, SecurityStore
+        if isinstance(context, Context):
+            from cios.applications.flora.storage import data_root
+            if self.path.absolute() != data_root().absolute() / 'enterprise_canvas' / 'feedback.jsonl':
+                raise FeedbackAccessError('Feedback storage scope unavailable')
+            with SecurityStore().transaction() as db:
+                from cios.applications.flora.security_store import canonical, digest
+                SecurityStore().audit(db, 'feedback_mutation', resource_id=record.feedback_id,
+                    record_digest=digest(canonical(record.to_dict())), status=record.status, action_type=record.action_type,
+                    enterprise_id=record.enterprise_id, workspace_id=record.workspace_id,
+                    user_id=context.user_id, membership_id=context.membership.membership_id,
+                    membership_version=context.membership.version, session_ref=context.session.session_ref)
         ensure_parent_writable(self.path)
         with self.path.open("a", encoding="utf-8") as handle:
             handle.write(json.dumps(record.to_dict(), ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n")
@@ -146,8 +211,10 @@ class EnterpriseCanvasFeedbackService:
     def __init__(self, repo: EnterpriseCanvasFeedbackRepository | None = None):
         self.repo = repo or EnterpriseCanvasFeedbackRepository()
 
+    @verified_service_write(SUBMIT_CAPABILITIES, denial_error=FeedbackAccessError)
     def submit(self, headers: Any, **payload: Any) -> EnterpriseCanvasFeedback:
         enterprise_id = str(payload.get("enterprise_id") or "").strip()
+        context = require_feedback_authority(headers, enterprise_id, SUBMIT_CAPABILITIES)
         if not can_submit_feedback(headers, enterprise_id):
             raise FeedbackAccessError("Actor is not authorised to submit Enterprise Canvas feedback")
         action = str(payload.get("action_type") or "").strip()
@@ -177,11 +244,19 @@ class EnterpriseCanvasFeedbackService:
         if action == "evidence_request":
             evidence_request = {"evidence_required": statement, "why_it_matters": rationale, "could_strengthen_weaken_or_retire": str(payload.get("supports_weakens_or_contradicts") or "not supplied"), "likely_owner_or_source": str(payload.get("likely_owner_or_source") or "not supplied"), "urgency_or_accountability_event": str(payload.get("urgency_or_accountability_event") or "not supplied")}
         record = EnterpriseCanvasFeedback(
-            feedback_id=str(fid), enterprise_id=enterprise_id, tile_view_id=str(payload.get("tile_view_id") or ""), displayed_judgement_ref=str(payload.get("displayed_judgement_ref") or ""), lineage_ref=str(payload.get("lineage_ref") or ""), related_canonical_refs=tuple(payload.get("related_canonical_refs") or ()), action_type=action, user_statement=statement, rationale=rationale, contributor_identity=contributor, contributor_role=basis, supplied_at=now, human_knowledge_classification=hsk, supports_weakens_or_contradicts=str(payload.get("supports_weakens_or_contradicts") or ""), documentary_evidence_may_exist=str(payload.get("documentary_evidence_may_exist") or "unknown"), expected_consequence=str(payload.get("expected_consequence") or ""), visibility=visibility, review_owner=str(payload.get("review_owner") or ""), linked_unknown_candidate=unknown, linked_contradiction_candidate=contradiction, evidence_request=evidence_request, source_publication_or_package_version=str(payload.get("source_publication_or_package_version") or ""), effective_date=str(payload.get("effective_date") or ""), supersedes_feedback_id=str(payload.get("supersedes_feedback_id") or ""), audit_history=(FeedbackAuditEvent("submitted", contributor, now, "Stored as candidate human knowledge; canonical Twin unchanged.", "submitted", str(payload.get("supersedes_feedback_id") or "")),)
+            feedback_id=str(fid), enterprise_id=enterprise_id, workspace_id=context.workspace, tile_view_id=str(payload.get("tile_view_id") or ""), displayed_judgement_ref=str(payload.get("displayed_judgement_ref") or ""), lineage_ref=str(payload.get("lineage_ref") or ""), related_canonical_refs=tuple(payload.get("related_canonical_refs") or ()), action_type=action, user_statement=statement, rationale=rationale, contributor_identity=contributor, contributor_role=basis, supplied_at=now, human_knowledge_classification=hsk, supports_weakens_or_contradicts=str(payload.get("supports_weakens_or_contradicts") or ""), documentary_evidence_may_exist=str(payload.get("documentary_evidence_may_exist") or "unknown"), expected_consequence=str(payload.get("expected_consequence") or ""), visibility=visibility, review_owner=str(payload.get("review_owner") or ""), linked_unknown_candidate=unknown, linked_contradiction_candidate=contradiction, evidence_request=evidence_request, source_publication_or_package_version=str(payload.get("source_publication_or_package_version") or ""), effective_date=str(payload.get("effective_date") or ""), supersedes_feedback_id=str(payload.get("supersedes_feedback_id") or ""), audit_history=(FeedbackAuditEvent("submitted", contributor, now, "Stored as candidate human knowledge; canonical Twin unchanged.", "submitted", str(payload.get("supersedes_feedback_id") or "")),)
         )
-        return self.repo.append(record)
+        with _write_authority(headers, SUBMIT_CAPABILITIES, record):
+            return self.repo.append(record)
 
     def visible_feedback(self, headers: Any, enterprise_id: str, tile_view_id: str = "", lineage_ref: str = "") -> list[EnterpriseCanvasFeedback]:
+        try:
+            return self._visible_feedback(headers, enterprise_id, tile_view_id, lineage_ref)
+        except PermissionError:
+            return []
+
+    @verified_service_read(READ_CAPABILITIES)
+    def _visible_feedback(self, headers: Any, enterprise_id: str, tile_view_id: str = "", lineage_ref: str = "") -> list[EnterpriseCanvasFeedback]:
         out = []
         for record in self.repo.list_all():
             if record.enterprise_id != enterprise_id:
@@ -190,22 +265,25 @@ class EnterpriseCanvasFeedbackService:
                 continue
             if lineage_ref and record.lineage_ref != lineage_ref:
                 continue
-            if can_view_feedback(headers, enterprise_id, record.visibility):
+            if _allowed(headers, enterprise_id, READ_CAPABILITIES, record.workspace_id) and can_view_feedback(headers, enterprise_id, record.visibility):
                 out.append(record)
         return out
 
+    @verified_service_write(REVIEW_CAPABILITIES, denial_error=FeedbackAccessError)
     def change_status(self, headers: Any, feedback_id: str, status: str, note: str = "") -> EnterpriseCanvasFeedback:
         current = self.repo.get(feedback_id)
         if current is None:
             raise ValueError("Feedback record not found")
         if status not in STATUSES:
             raise ValueError("Unsupported feedback status")
+        require_feedback_authority(headers, current.enterprise_id, REVIEW_CAPABILITIES, current.workspace_id)
         if not can_review_feedback(headers, current.enterprise_id):
             raise FeedbackAccessError("Actor is not authorised to review Enterprise Canvas feedback")
         now = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
         actor = authenticated_flora_user(headers)
         updated = EnterpriseCanvasFeedback.from_dict({**current.to_dict(), "status": status, "audit_history": [*current.to_dict()["audit_history"], asdict(FeedbackAuditEvent("status_changed", actor, now, note, status))]})
-        return self.repo.append(updated)
+        with _write_authority(headers, REVIEW_CAPABILITIES, updated):
+            return self.repo.append(updated)
 
 
 def _feedback_id(enterprise_id: str, action: str, tile_id: str, lineage_ref: str, statement: str, supplied_at: str) -> str:

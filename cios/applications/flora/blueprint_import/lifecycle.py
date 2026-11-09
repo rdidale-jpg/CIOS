@@ -5,6 +5,7 @@ import shutil
 from dataclasses import dataclass, replace
 from cios.applications.flora.storage import atomic_write_json, data_path
 from .ledger import BlueprintImportLedger, utc_now
+from cios.applications.flora.security import verified_service_write
 
 @dataclass(frozen=True)
 class ImportLifecycle:
@@ -46,7 +47,16 @@ class ImportLifecycleService:
         return ImportLifecycle(**data)
     def assert_active(self, run_id):
         if self.get(run_id).state in {"cancelled", "deleted", "superseded", "archived"}: raise ValueError("This import is terminal and cannot be reviewed or promoted.")
-    def cancel(self, run_id, actor, stage, reason=""):
+    @verified_service_write("package.review")
+    def cancel(self, run_id, actor, stage, reason="", *, headers=None):
+        from cios.applications.flora.access import require_resource_scope
+        package = TwinImportLifecycleService().package_for_run(run_id)
+        if package is None:
+            raise PermissionError("Import unavailable")
+        context = require_resource_scope(headers, "package.review", package.identity.enterprise_id,
+                                         package.workspace_id, require_acl=False)
+        if actor != context.user_id:
+            raise PermissionError("Cancellation actor does not match verified authority")
         old=self.get(run_id)
         if old.state == "promoted": raise ValueError("A promoted import cannot be cancelled. Use governed correction or supersession.")
         if old.state == "cancelled": return old
@@ -133,13 +143,14 @@ class TwinImportLifecycleService:
                 "audit_records_retained": "import receipt and deletion tombstone",
                 "canonical_intelligence_affected": False if not promoted else True}
 
+    @verified_service_write("blueprint_import_admin", recent=True)
     def delete_candidate(self, run_id, actor, confirmation, reason="Operator deleted obsolete candidate import", *, headers=None):
-        from cios.applications.flora.access import require_capability
+        from cios.applications.flora.access import require_capability, require_resource_scope
         context = require_capability(headers, "blueprint_import_admin")
         package = self.package_for_run(run_id)
         if not package:
             raise PermissionError("Import unavailable")
-        require_capability(headers, "blueprint_import_admin", package.identity.enterprise_id, package.workspace_id)
+        require_resource_scope(headers, "blueprint_import_admin", package.identity.enterprise_id, package.workspace_id, require_acl=False)
         if actor != context.user_id:
             raise PermissionError("Deletion actor does not match verified authority")
         preview = self.delete_preview(run_id)
@@ -147,7 +158,17 @@ class TwinImportLifecycleService:
             raise ValueError("Promoted/canonical releases cannot be hard-deleted; import a newer release to supersede them.")
         if confirmation != "DELETE CANDIDATE IMPORT":
             raise ValueError("Type DELETE CANDIDATE IMPORT to confirm deletion.")
-        package = self.package_for_run(run_id); removed_files = 0; removed_bytes = 0
+        # The preview may be stale even within a reentrant service transaction.
+        # Recheck current authority and governance immediately before effects.
+        package = self.package_for_run(run_id)
+        if package is None:
+            raise PermissionError("Import unavailable")
+        require_resource_scope(headers, "blueprint_import_admin", package.identity.enterprise_id,
+                               package.workspace_id, require_acl=False)
+        current = self.lifecycle.get(run_id)
+        if current.state in {"promoted", "superseded", "archived"} or current.canonical_writes > 0:
+            raise ValueError("Promoted/canonical releases cannot be hard-deleted")
+        removed_files = 0; removed_bytes = 0
         for name in self.DISPOSABLE_DIRS:
             path = data_path("blueprint_import", name, run_id)
             if path.is_file():
@@ -170,6 +191,17 @@ class TwinImportLifecycleService:
                      "canonical_impact": "none", "recovered_files": removed_files, "recovered_bytes": removed_bytes}
         atomic_write_json(data_path("blueprint_import", "tombstones", f"{run_id}.json"), tombstone)
         BlueprintImportLedger().append("candidate_import_deleted", tombstone)
+        require_resource_scope(headers, "blueprint_import_admin", package.identity.enterprise_id,
+                               package.workspace_id, require_acl=False)
+        from cios.applications.flora.security_store import SecurityStore, Context
+        if isinstance(context, Context):
+            store = SecurityStore()
+            with store.transaction() as db:
+                store.audit(db, 'candidate_import_deleted', import_run_id=run_id,
+                            user_id=context.user_id, workspace_id=context.workspace,
+                            membership_id=context.membership.membership_id,
+                            membership_version=context.membership.version,
+                            session_ref=context.session.session_ref)
         return tombstone
 
     def supersede_previous_after_promotion(self, package, actor):

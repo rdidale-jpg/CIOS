@@ -6,6 +6,8 @@ boundary is one explicitly non-canonical restaging history directory.
 """
 from __future__ import annotations
 
+from cios.applications.flora.security import verified_service_write
+
 import argparse
 import json
 import os
@@ -176,12 +178,60 @@ def _eligible_versions(root: Path, keep_versions: int) -> list[Path]:
 
 def cleanup_superseded_staging_history(root: Path | None = None, *, keep_versions: int = KEEP_STAGING_VERSIONS,
                                        dry_run: bool = True, headers=None) -> dict[str, Any]:
+    if dry_run:
+        return _cleanup_history(root, keep_versions=keep_versions, dry_run=True, headers=headers)
+    return _cleanup_history_write(root, keep_versions=keep_versions, headers=headers)
+
+
+@verified_service_write('storage.recover')
+def _cleanup_history_write(root=None, *, keep_versions=KEEP_STAGING_VERSIONS, headers=None):
+    from .access import require_capability
+    from .security_store import Context, SecurityStore
+    context = require_capability(headers, 'storage.recover')
+    target = (root or data_root()).resolve(strict=False)
+    if isinstance(context, Context) and target != data_root().resolve(strict=False):
+        raise PermissionError('Storage recovery root unavailable')
+    selected = _eligible_versions(target, keep_versions)
+    _require_cleanup_scope(headers, selected)
+    if isinstance(context, Context):
+        with SecurityStore().transaction() as db:
+            SecurityStore().audit(db,'storage_history_cleanup',user_id=context.user_id,
+                workspace_id=context.workspace,resource_ids=[str(p.relative_to(target)) for p in selected],
+                membership_id=context.membership.membership_id,membership_version=context.membership.version,
+                session_ref=context.session.session_ref)
+    result = _cleanup_history(target, keep_versions=keep_versions, dry_run=False, headers=headers)
+    _require_cleanup_scope(headers, selected)
+    return result
+
+
+def _require_cleanup_scope(headers, selected):
+    from .access import require_resource_scope
+    from .blueprint_import.registry import BlueprintPackageRegistry
+    packages = {p.import_run_id: p for p in BlueprintPackageRegistry().list()}
+    for version in selected:
+        package = packages.get(version.parent.name)
+        if not package:
+            raise PermissionError('Storage history has unresolved resource scope')
+        require_resource_scope(headers, 'storage.recover', package.identity.enterprise_id,
+                               package.workspace_id, require_acl=False)
+
+
+def _cleanup_history(root: Path | None = None, *, keep_versions: int = KEEP_STAGING_VERSIONS,
+                                       dry_run: bool = True, headers=None) -> dict[str, Any]:
     """Remove only superseded snapshots outside the retained rollback window."""
     if not dry_run:
-        from cios.applications.flora.access import require_capability
-        require_capability(headers, "storage.recover")
+        from .security import require_active_service_write
+        context = require_active_service_write(headers, 'storage.recover')
+        from .security_store import Context, RECENT
+        import time
+        if isinstance(context, Context) and time.time()-context.session.authenticated_at.timestamp() > RECENT:
+            raise PermissionError('Recent authentication required')
     root = (root or data_root()).resolve(strict=False)
     versions = _eligible_versions(root, keep_versions)
+    if not dry_run:
+        if isinstance(context, Context) and root != data_root().resolve(strict=False):
+            raise PermissionError('Storage recovery root unavailable')
+        _require_cleanup_scope(headers, versions)
     file_count = directory_count = 0
     for version in versions:
         entries = list(_walk(version))
@@ -191,7 +241,9 @@ def cleanup_superseded_staging_history(root: Path | None = None, *, keep_version
     before = filesystem_context(root, operation="storage_recovery_before")
     if not dry_run:
         for version in versions:
+            _require_cleanup_scope(headers, [version])
             shutil.rmtree(version)
+        _require_cleanup_scope(headers, versions)
     after = filesystem_context(root, operation="storage_recovery_after") if not dry_run else before
     return {
         "dry_run": dry_run, "scope": str(DISPOSABLE_HISTORY),
@@ -206,6 +258,7 @@ def cleanup_superseded_staging_history(root: Path | None = None, *, keep_version
     }
 
 
+@verified_service_write('storage.recover')
 def execute_storage_recovery(confirmation: str, root: Path | None = None, *, headers=None) -> dict[str, Any]:
     """Execute confirmed cleanup and run the canonical admission/persistence probes."""
     from cios.applications.flora.access import require_capability

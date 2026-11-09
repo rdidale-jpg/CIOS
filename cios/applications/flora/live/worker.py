@@ -1,6 +1,8 @@
 """Pilot in-process worker for file-backed Flora collection runs."""
 from __future__ import annotations
 
+from cios.applications.flora.protected_storage import serialized_runtime_writer
+
 from concurrent.futures import Future, ThreadPoolExecutor
 from datetime import UTC, datetime, timedelta
 from threading import Lock
@@ -15,6 +17,7 @@ _FUTURE: Future | None = None
 STALE_AFTER = timedelta(minutes=30)
 
 
+@serialized_runtime_writer
 def start_collection_run(organisation: str, *, profile_id: str | None, collection_mode: str | None, passes: list[str] | None) -> dict[str, Any]:
     """Create durable run state and submit exactly one writer to the pilot worker."""
     global _FUTURE
@@ -32,6 +35,7 @@ def start_collection_run(organisation: str, *, profile_id: str | None, collectio
         return state
 
 
+@serialized_runtime_writer
 def _run(organisation: str, profile_id: str | None, collection_mode: str | None, run_id: str, passes: list[str] | None) -> None:
     from cios.applications.flora.live.collect import collect
     try:

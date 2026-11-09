@@ -30,7 +30,7 @@ def records(value=120, eid='EV-1', oid='OBS-1', period='FY26', **changes):
 
 def stage(monkeypatch,tmp_path,rows,version='1',review=True):
     monkeypatch.setenv('FLORA_DATA_DIR',str(tmp_path));monkeypatch.setenv('FLORA_PILOT_DIR',str(tmp_path))
-    package=BlueprintPackageRegistry().receive(pkg(records=rows,manifest_extra={'package_version':version+'.0.0'}), 'synthetic.zip','alice')
+    package=BlueprintPackageRegistry().receive(pkg(records=rows,manifest_extra={'package_version':version+'.0.0'}), 'synthetic.zip','alice',ENT)
     validator=BlueprintPackageValidator();validator.validate_and_stage(package.package_ref,'alice',HEADERS)
     candidates=validator.staging_summary(package.import_run_id)['candidates']
     if review:
@@ -364,7 +364,7 @@ def test_retirement_of_old_claim_does_not_retire_new_current_value(monkeypatch,t
 def test_generic_payload_identifier_collision_is_also_owner_checked(monkeypatch,tmp_path):
     from cios.applications.flora.blueprint_import.promotion import CanonicalJsonlRepository
     monkeypatch.setenv('FLORA_DATA_DIR',str(tmp_path))
-    repo=CanonicalJsonlRepository('entity');repo.save({'canonical_id':'ENTITY-OTHER','entity_id':'ENTITY-OTHER','enterprise_id':'other-enterprise'})
+    repo=CanonicalJsonlRepository('entity');repo.save({'canonical_id':'ENTITY-OTHER','entity_id':'ENTITY-OTHER','enterprise_id':'other-enterprise','workspace_id':ENT})
     before=repo.path.read_bytes()
     rows=[dict(external_id='DIFFERENT-EXTERNAL-ID',record_class='entity',truth_class='entity',payload={'entity_id':'ENTITY-OTHER'})]
     package,plan=stage(monkeypatch,tmp_path,rows)

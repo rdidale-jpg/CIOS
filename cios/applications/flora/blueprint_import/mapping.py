@@ -1,6 +1,8 @@
 """Source external ID to canonical ID mapping records for Blueprint imports."""
 from __future__ import annotations
 
+from cios.applications.flora.security import verified_service_write
+
 import json
 from dataclasses import asdict, dataclass
 from typing import Any, Literal
@@ -62,6 +64,7 @@ class ImportMappingService:
     def __init__(self, registry=None, repository=None, ledger=None):
         self.registry = registry or BlueprintPackageRegistry(); self.repository = repository or ImportMappingRepository(); self.ledger = ledger or BlueprintImportLedger()
         self._industry = {}
+    @verified_service_write('package.review', denial_error=BlueprintReviewError)
     def record_mapping(self, candidate: dict[str, Any], disposition: MappingDisposition, actor: str, headers: Any, canonical_type: str = "", canonical_id: str = "", rationale: str = "", *, automatic=False) -> ImportMappingRecord:
         package = self.registry.get(str(candidate["source_package_ref"]))
         if not package or not can_review_blueprint_candidate(headers, package.identity.enterprise_id, package.workspace_id):

@@ -1,6 +1,8 @@
 """Scalable persisted review-plan preparation for Blueprint imports."""
 from __future__ import annotations
 
+from cios.applications.flora.protected_storage import serialized_runtime_writer
+
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 import json, os, threading, time, traceback
@@ -74,6 +76,7 @@ class BlueprintReviewPlanCoordinator:
             atomic_write_json(path, data)
             return None
         return data if data.get("staging_fingerprint") == fp and data.get("status") == "Ready" else None
+    @serialized_runtime_writer
     def ensure_job(self, import_run_id: str, actor: str, headers: Any, ensure_defaults) -> dict[str, Any]:
         from cios.applications.flora.access import require_capability
         context = require_capability(headers, "package.review")
@@ -96,6 +99,7 @@ class BlueprintReviewPlanCoordinator:
             return job | {"candidate_count": len(candidates)}
         return self._run(job, actor, headers, ensure_defaults) | {"candidate_count": len(candidates)}
     def _save_job(self, job): atomic_write_json(self.job_dir(job["import_run_id"]) / f"{job['job_id']}.json", job)
+    @serialized_runtime_writer
     def _run(self, job, actor, headers, ensure_defaults):
         try:
             ensure_defaults()

@@ -74,7 +74,7 @@ def validate_secret(candidate: str) -> bool:
 
 
 def sign_in_page(error: str = "") -> str:
-    return _page("Owner access unavailable", f"<section class='card'><h1>Owner access unavailable</h1><p>{ACCESS_UNAVAILABLE}</p><p>Public curated intelligence remains readable. Existing intelligence has not been changed.</p></section>")
+    return _page("Owner access unavailable", f"<section class='card'><h1>Owner access unavailable</h1><p>{ACCESS_UNAVAILABLE}</p><p>Public curated intelligence remains readable. Existing intelligence has not been changed.</p><p><a href='/auth/sign-in'>Sign in with your individual account</a></p></section>")
 
 
 def configuration_error_page(failed_condition: str) -> str:

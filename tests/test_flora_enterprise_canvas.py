@@ -13,6 +13,9 @@ HEADERS = {"X-Flora-User": "alice", "X-Flora-Enterprises": "synthetic-enterprise
 
 
 def model(tmp_path):
+    # This scenario is an already approved private Canvas, not a grant on read.
+    from tests.flora_security_fixtures import existing_resource_acl
+    existing_resource_acl(enterprise_id='synthetic-enterprise',workspace_id='synthetic-enterprise',principal_id='alice')
     attrs = {
         "enterprise.name": EnterpriseModelAttribute("enterprise", "name", "Synthetic Health", 95, "2026-06-01", "current", ("obs-name",), ("ev-name",), "evidence-backed"),
         "enterprise.purpose": EnterpriseModelAttribute("enterprise", "purpose", "Improve care outcomes", 90, "2026-06-01", "current", ("obs-purpose",), ("ev-purpose",), "evidence-backed"),
@@ -38,7 +41,7 @@ def stage_projections():
         {"external_id":"resp-1","record_class":"current_response","payload":{"statement":"What Synthetic Health has done so far: expanded community triage","effective_date":"2026-06-21","status":"accepted"}},
         {"external_id":"resid-1","record_class":"residual_pain","payload":{"statement":"What remains unresolved: weekend capacity remains unclear","effective_date":"2026-06-22","status":"accepted"}},
     ])
-    record = BlueprintPackageRegistry().receive(content, "synthetic.zip", "alice")
+    record = BlueprintPackageRegistry().receive(content, "synthetic.zip", "alice", "synthetic-enterprise")
     BlueprintPackageValidator().validate_and_stage(record.package_ref, "alice", HEADERS)
 
 
@@ -80,7 +83,8 @@ def test_enterprise_canvas_read_model_foundation(tmp_path, monkeypatch):
 
 def test_canvas_handles_missing_data_and_blocks_unauthorised_access(tmp_path, monkeypatch):
     monkeypatch.setenv("FLORA_DATA_DIR", str(tmp_path))
-    with pytest.raises(EnterpriseCanvasNotFoundError):
+    # An unbound resource is inaccessible, even if the actor has Enterprise scope.
+    with pytest.raises(EnterpriseCanvasAccessError):
         EnterpriseCanvasService().get_canvas("synthetic-enterprise", HEADERS)
     with pytest.raises(EnterpriseCanvasAccessError):
         EnterpriseCanvasService().get_canvas("synthetic-enterprise", {"X-Flora-User":"mallory","X-Flora-Enterprises":"other"})
@@ -157,10 +161,12 @@ def test_enterprise_canvas_ui_blocks_unauthorised_and_handles_empty(tmp_path, mo
     assert "Access denied" in denied_html
     assert "Care Board" not in denied_html
 
+    from tests.flora_security_fixtures import existing_resource_acl
+    existing_resource_acl(enterprise_id='synthetic-enterprise',workspace_id='synthetic-enterprise',principal_id='alice')
     empty_html, empty_status = enterprise_canvas_page("synthetic-enterprise", HEADERS)
-    assert empty_status == 404
-    assert "Enterprise Canvas not found" in empty_html
-    assert "synthetic-enterprise" in empty_html
+    assert empty_status == 200
+    assert "Enterprise Canvas" in empty_html
+    assert "Care Board" not in empty_html
 
 
 
@@ -169,8 +175,8 @@ def test_missing_canvas_does_not_fall_back_to_synthetic_enterprise(tmp_path, mon
     from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
 
     html, status = enterprise_canvas_page("MOD", {"X-Flora-User":"rob", "X-Flora-Enterprises":"MOD", "X-Flora-Roles":"canvas.view"})
-    assert status == 404
-    assert "Enterprise Canvas not found" in html
+    assert status == 403
+    assert "Access denied" in html
     assert "Synthetic Health" not in html
 
 
@@ -241,7 +247,7 @@ def test_blueprint_owner_canvas_access_repair_preserves_workspace_enterprise_acl
     from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
     import re
 
-    owner = {"X-Flora-User":"rob", "X-Flora-Enterprises":"cios-workspace", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"cios_owner"}
+    owner = {"X-Flora-User":"rob", "X-Flora-Enterprises":"cios-workspace,MOD", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"cios_owner"}
     records=[{"external_id":"PP-MOD-1","record_class":"pain_point","truth_class":"analytical_projection","payload":{"statement":"MOD pressure is visible"}}]
     _, status, target = upload_and_validate_blueprint({"blueprint_zip":pkg(manifest_extra={"enterprise_id":"MOD", "package_id":"MOD-CDT-Blueprint", "package_version":"1.3"}, records=records)}, {"blueprint_zip.filename":"MOD-CDT-v1.3-Flora-Blueprint.zip","blueprint_zip.content_type":"application/zip"}, owner)
     assert status == 200
@@ -281,19 +287,21 @@ def test_existing_blueprint_canvas_is_repaired_not_duplicated_and_no_reimport_re
     from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRepository
     from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
 
-    owner = {"X-Flora-User":"rob", "X-Flora-Enterprises":"cios-workspace", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"cios_owner"}
+    owner = {"X-Flora-User":"rob", "X-Flora-Enterprises":"cios-workspace,MOD", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"cios_owner"}
     content = pkg(manifest_extra={"enterprise_id":"MOD", "package_id":"MOD-CDT-Blueprint", "package_version":"1.3"}, records=[{"external_id":"PP-MOD-2","record_class":"pain_point","truth_class":"analytical_projection","payload":{"statement":"Existing import data remains visible"}}])
     package = BlueprintPackageRegistry().receive(content, "MOD-CDT-v1.3-Flora-Blueprint.zip", "rob", "cios-workspace")
     BlueprintPackageValidator().validate_and_stage(package.package_ref, "rob", owner)
     assert EnterpriseCanvasAccessRepository().list() == []
 
+    from hashlib import sha256
+    before={str(p.relative_to(tmp_path)):sha256(p.read_bytes()).hexdigest() for p in tmp_path.rglob('*') if p.is_file()}
     html, status = enterprise_canvas_page("MOD", owner)
-    assert status == 200
-    assert "Existing import data remains visible" in html
-    records = EnterpriseCanvasAccessRepository().list()
-    assert len(records) == 1
-    assert records[0].import_run_ids == (package.import_run_id,)
+    assert status == 403
+    assert "Existing import data remains visible" not in html
+    assert EnterpriseCanvasAccessRepository().list() == []
     assert len(BlueprintPackageRegistry().list()) == 1
+    after={str(p.relative_to(tmp_path)):sha256(p.read_bytes()).hexdigest() for p in tmp_path.rglob('*') if p.is_file()}
+    assert after == before
 
 
 def test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs(tmp_path, monkeypatch):
@@ -305,7 +313,7 @@ def test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs(tmp_pa
     from cios.applications.flora.enterprise_canvas.views import enterprise_canvas_page
     import re
 
-    owner = {"X-Flora-User":"rob", "X-Flora-Enterprises":"cios-workspace", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"cios_owner"}
+    owner = {"X-Flora-User":"rob", "X-Flora-Enterprises":"cios-workspace,MOD", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"cios_owner"}
     records=[
         {"external_id":"burning_platform-10","record_class":"burning_platform","truth_class":"analytical_projection","payload":{"statement":"MOD delivery pressure is material to leadership decisions","effective_date":"2026-06-30","confidence":"medium"}},
         {"external_id":"SH-MOD-1","record_class":"stakeholder_hot_button","truth_class":"analytical_projection","payload":{"statement":"Leadership and Decision Rights require clearer delivery sequencing","effective_date":"2026-06-30","confidence":"medium"}},
@@ -380,7 +388,7 @@ def test_mod_executive_commercial_canvas_read_model(tmp_path, monkeypatch):
     from cios.applications.flora.memory.repository import EnterpriseModelRepository
     import re
 
-    owner = {"X-Flora-User":"rob", "X-Flora-Enterprises":"cios-workspace", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"cios_owner"}
+    owner = {"X-Flora-User":"rob", "X-Flora-Enterprises":"cios-workspace,MOD", "X-Flora-Active-Workspace":"cios-workspace", "X-Flora-Roles":"cios_owner"}
     records = [
         {"external_id":"OBS-MOD-1","record_class":"observation","truth_class":"observed","payload":{"observation_id":"OBS-MOD-1","atomic_statement":"MOD readiness pressure is linked to portfolio delivery.","type":"fact","affected_entity_relationship":"enterprise.readiness","event_date":"2026-06-30","supporting_evidence_ids":"EVD-MOD-1","confidence":"0.8","linked_unknowns":"UNK-MOD-1"}},
         {"external_id":"EVD-MOD-1","record_class":"evidence","truth_class":"observed","payload":{"evidence_id":"EVD-MOD-1","summary":"Readiness and delivery pressure evidence.","source_title":"MOD public evidence pack","publication_date":"2026-06-30","freshness":"current"}},

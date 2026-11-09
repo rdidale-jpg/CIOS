@@ -122,10 +122,12 @@ def can_access_canvas_record(headers: Any, enterprise_id: str, workspace_id: str
     if not user:
         return False
     record = EnterpriseCanvasAccessRepository().get(enterprise_id)
+    if not record or not record.workspace_id or (workspace_id and workspace_id != record.workspace_id):
+        return False
     effective_workspace = workspace_id or (record.workspace_id if record else "")
     if not can_access_enterprise(headers, enterprise_id, effective_workspace):
         return False
     if not record:
-        return True
+        return False
     principals = {item.get("principal_id") for item in record.acl}
     return user in principals or user in record.enterprise_members or user in record.workspace_members

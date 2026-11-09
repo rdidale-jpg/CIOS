@@ -6,7 +6,7 @@ from tests.test_flora_blueprint_import_validation import pkg, receive
 HEADERS={"X-Flora-User":"alice","X-Flora-Enterprises":"synthetic-enterprise","X-Flora-Roles":"package.review"}
 
 def stage(monkeypatch,tmp_path,records):
-    r=receive(monkeypatch,tmp_path,pkg(records=records))
+    r=receive(monkeypatch,tmp_path,pkg(records=records),workspace_id="synthetic-enterprise")
     from cios.applications.flora.blueprint_import import BlueprintPackageValidator
     BlueprintPackageValidator().validate_and_stage(r.package_ref,"alice")
     return r, BlueprintPackageValidator().staging_summary(r.import_run_id)["candidates"]

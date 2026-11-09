@@ -63,15 +63,14 @@ def active_flora_workspace(headers: Any) -> str:
 
 
 def can_view_financial_intelligence_run(headers: Any, run: dict[str, Any]) -> bool:
-    """Authoritative product-session rule for viewing FI runs and safe reports."""
-    if not authenticated_flora_user(headers):
+    """Boolean form of the same persisted financial read boundary."""
+    if not isinstance(run, dict) or not valid_financial_intelligence_run_id(str(run.get('run_id') or '')):
         return False
-    allowed = user_enterprise_access(headers)
-    if not allowed:
+    try:
+        require_financial_run_authority(headers, 'package.inspect', run)
+        return True
+    except (PermissionError, OSError, ValueError, TypeError):
         return False
-    enterprise_id = financial_run_enterprise_id(run)
-    run_id = str(run.get("run_id") or "")
-    return valid_financial_intelligence_run_id(run_id) and ("*" in allowed or enterprise_id in allowed)
 
 
 BLUEPRINT_UPLOAD_PERMISSION = "package.upload"
@@ -176,10 +175,27 @@ def raw_flora_roles(headers: Any) -> set[str]:
     return set(context.roles) if context else set()
 
 
+def role_capabilities(roles) -> frozenset[str]:
+    """Project the existing owner/admin policy; never establish membership.
+
+    The same projection bounds server snapshots and service role evaluation.
+    Blueprint administrators inherit Blueprint operations, not owner identity,
+    commercial profile administration or the separate storage-recovery grant.
+    """
+    capabilities = set(roles)
+    if capabilities & CANONICAL_OWNER_ROLES:
+        capabilities |= BLUEPRINT_IMPORT_OWNER_PERMISSIONS | PILOT_COMMERCIAL_CONTEXT_CAPABILITIES
+    elif BLUEPRINT_IMPORT_ADMIN_ROLE in capabilities:
+        capabilities |= BLUEPRINT_IMPORT_OWNER_PERMISSIONS
+    return frozenset(capabilities)
+
+
 def flora_roles(headers: Any) -> set[str]:
     roles = raw_flora_roles(headers)
-    if authenticated_flora_user(headers) and active_flora_workspace(headers) and roles & CANONICAL_OWNER_ROLES:
-        roles |= BLUEPRINT_IMPORT_OWNER_PERMISSIONS | {CIOS_OWNER_ROLE}
+    if authenticated_flora_user(headers) and active_workspace_membership(headers):
+        roles |= role_capabilities(roles)
+        if roles & CANONICAL_OWNER_ROLES:
+            roles.add(CIOS_OWNER_ROLE)
     return roles
 
 
@@ -253,27 +269,70 @@ def can_access_enterprise(headers: Any, enterprise_id: str, workspace_id: str = 
     allowed = user_enterprise_access(headers)
     # A resource's explicit workspace boundary is checked before broad enterprise
     # grants. A wildcard does not select or authorise another workspace.
-    if workspace_id and canonical_enterprise_id(workspace_id) != canonical_enterprise_id(active_flora_workspace(headers)):
+    if workspace_id and workspace_id != active_flora_workspace(headers):
         return False
     if "*" in allowed or _contains_id(allowed, enterprise_id):
         return True
-    if not is_cios_owner(headers):
-        return False
-    active_workspace = active_flora_workspace(headers)
-    if not active_workspace:
-        return False
-    if workspace_id and canonical_enterprise_id(workspace_id) != canonical_enterprise_id(active_workspace):
-        return False
-    return _contains_id(allowed, active_workspace)
+    return False
 
 
 def require_capability(headers: Any, capability: str, enterprise_id: str = "", workspace_id: str = ""):
     """Service-entry guard using the existing capability and resource policy."""
     context = require_verified_human(headers)
+    if not context.verified_human or active_workspace_membership(headers) is None:
+        raise PermissionError("Active workspace membership is unavailable")
     roles = flora_roles(headers)
     if (capability not in context.effective_capabilities
-            or (capability not in roles and not (capability == "package.review" and "blueprint_import_admin" in roles))):
+            or (capability not in roles and capability != "storage.recover" and not (capability == "package.review" and "blueprint_import_admin" in roles))):
         raise PermissionError("Required capability is unavailable")
     if enterprise_id and not can_access_enterprise(headers, enterprise_id, workspace_id):
         raise PermissionError("Resource unavailable")
     return context
+
+
+def require_resource_scope(headers: Any, capability: str, enterprise_id: str,
+                           workspace_id: str, *, require_acl: bool = True):
+    """Intersect existing policy with authoritative resource scope and ACL.
+
+    Identifiers here must come from a loaded server record, never a form. This
+    helper supplies missing scope to the existing evaluator; it defines no roles
+    or alternate permission policy. Unscoped historical records remain closed.
+    """
+    context = require_capability(headers, capability)
+    membership = active_workspace_membership(headers)
+    if (not context.verified_human or membership is None
+            or not isinstance(workspace_id, str) or not workspace_id
+            or workspace_id != workspace_id.strip() or workspace_id == '*'
+            or workspace_id != context.workspace
+            or not isinstance(enterprise_id, str) or not enterprise_id
+            or enterprise_id != enterprise_id.strip() or enterprise_id == '*'):
+        raise PermissionError('Resource unavailable')
+    require_capability(headers, capability, enterprise_id, workspace_id)
+    from .enterprise_canvas.access import EnterpriseCanvasAccessRepository, can_access_canvas_record
+    record = EnterpriseCanvasAccessRepository().get(enterprise_id)
+    if (require_acl or record is not None) and not can_access_canvas_record(headers, enterprise_id, workspace_id):
+        raise PermissionError('Resource unavailable')
+    return context
+
+
+def require_financial_run_authority(headers: Any, capability: str, run: dict[str, Any]):
+    """Require one unambiguous persisted workspace and Enterprise binding."""
+    document = run.get('document', {})
+    if not isinstance(document, dict):
+        raise PermissionError('Resource unavailable')
+    workspace = run.get('workspace_id')
+    enterprises = [value for value in (run.get('enterprise_id'), document.get('enterprise_id')) if value is not None]
+    if (not enterprises or any(not isinstance(v, str) or not v for v in enterprises)
+            or len(set(enterprises)) != 1
+            or ('workspace_id' in document and document['workspace_id'] != workspace)):
+        raise PermissionError('Resource unavailable')
+    claims = run.get('claims', [])
+    if not isinstance(claims, list):
+        raise PermissionError('Resource unavailable')
+    for claim in claims:
+        if (not isinstance(claim, dict)
+                or ('workspace_id' in claim and claim['workspace_id'] != workspace)
+                or any(key in claim and claim[key] != enterprises[0]
+                       for key in ('enterprise_id', 'canonical_enterprise_id'))):
+            raise PermissionError('Resource unavailable')
+    return require_resource_scope(headers, capability, enterprises[0], workspace)

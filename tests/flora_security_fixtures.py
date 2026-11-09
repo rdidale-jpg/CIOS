@@ -49,3 +49,16 @@ def generate_brief(runtime, request):
         'X-Flora-User':request.requested_by, 'X-Flora-Active-Workspace':request.workspace_id,
         'X-Flora-Enterprises':request.enterprise_id+','+request.workspace_id,
         'X-Flora-Roles':'package.review'})
+
+
+def existing_resource_acl(*, enterprise_id, workspace_id, principal_id):
+    """Explicit positive-test setup for a pre-approved exact resource ACL.
+
+    Call only from a scenario that already declares this principal's membership
+    and resource scope. Never invoked by authentication or permission evaluation;
+    negative missing-ACL tests do not use this helper.
+    """
+    from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRecord, EnterpriseCanvasAccessRepository
+    record=EnterpriseCanvasAccessRecord('1.0','canvas-'+enterprise_id,enterprise_id,workspace_id,principal_id,
+        acl=({'principal_id':principal_id,'role':'owner','grant_source':'explicit-test-binding'},))
+    return EnterpriseCanvasAccessRepository().save(record)

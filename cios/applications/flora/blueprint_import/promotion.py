@@ -1,6 +1,8 @@
 """Governed canonical promotion for approved Blueprint dry-run plans."""
 from __future__ import annotations
 
+from cios.applications.flora.security import verified_service_write
+
 import json, os, shutil
 from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
@@ -76,8 +78,13 @@ def can_execute_blueprint_promotion(headers: Any, enterprise_id: str) -> bool:
     return _has(headers, enterprise_id, {"candidate.promote", "blueprint_import_admin"})
 
 def _has(headers: Any, enterprise_id: str, roles: set[str]) -> bool:
-    if not authenticated_flora_user(headers): return False
-    return can_access_enterprise(headers, enterprise_id) and bool(flora_roles(headers) & roles)
+    from cios.applications.flora.access import require_capability, require_resource_scope
+    try:
+        context = require_capability(headers, "candidate.promote")
+        require_resource_scope(headers, "candidate.promote", enterprise_id, context.workspace, require_acl=False)
+    except PermissionError:
+        return False
+    return bool(flora_roles(headers) & roles)
 
 @dataclass(frozen=True)
 class CanonicalPromotionApproval:
@@ -198,6 +205,7 @@ class CanonicalPromotionService:
         self._industry_flags={}
         self.models=model_repo or EnterpriseModelRepository()
         self.memory=ObservationMemoryService(self.observation_repo,self.models)
+    @verified_service_write('candidate.promote', denial_error=BlueprintPromotionError)
     def approve_plan(self, import_run_id: str, plan_id: str, approver: str, rationale: str, headers: Any, unresolved_warnings_accepted: tuple[str,...]=(), expiry_or_invalidation_condition: str="invalid if plan, package, review decisions or mappings change"):
         if not authenticated_flora_user(headers) or approver != authenticated_flora_user(headers):
             raise BlueprintPromotionError("Approver does not match verified authority")
@@ -218,6 +226,7 @@ class CanonicalPromotionService:
         from .twin_governance import project_twin_identity
         a=replace(a,twin_identity_fingerprint=_fp(project_twin_identity(package).to_dict()),candidate_fingerprint=_fp(self.staging.list_candidates(import_run_id)))
         self.repo.save_approval(a); self.ledger.append("canonical_promotion_approved", a.to_dict()); return a
+    @verified_service_write('candidate.promote', denial_error=BlueprintPromotionError)
     def execute_approved_plan(self, import_run_id: str, approval_id: str, actor: str, headers: Any) -> CanonicalPromotionResult:
         # Serializes importer threads only; file compensation is not a database
         # transaction and requires the existing single-writer operating model.
@@ -484,14 +493,19 @@ class CanonicalPromotionService:
 
     def _assert_target_ownership(self, import_run_id, plan, headers):
         package=self.registry.get(plan['package_ref'])
+        from cios.applications.flora.access import require_resource_scope
+        if not package:
+            raise BlueprintPromotionError('Resource unavailable')
+        require_resource_scope(headers, 'candidate.promote', package.identity.enterprise_id,
+                               package.workspace_id, require_acl=False)
         candidates={c['candidate_record_id']:c for c in self.staging.list_candidates(import_run_id)}
         for raw in plan['effects']:
             e=ProposedCanonicalEffect(**raw)
             if e.effect_type not in {'create','update'} or e.record_class not in SUPPORTED_PROMOTION_CLASSES: continue
             c=candidates[e.candidate_id]; payload=c.get('payload') or {}
             target=_record_enterprise(payload,package)
-            if not _has(headers,target,{'candidate.promote','blueprint_import_admin'}):
-                raise BlueprintPromotionError("Actor is not authorised for the canonical record's Enterprise")
+            require_resource_scope(headers, 'candidate.promote', target,
+                                   package.workspace_id, require_acl=False)
             if e.record_class=='observation':
                 identifier=_clean(payload.get('observation_id')) or e.canonical_id
                 prior=self.observation_repo.get(identifier) if identifier else None
@@ -504,6 +518,25 @@ class CanonicalPromotionService:
                 identifier=e.canonical_id or payload.get(key) or c.get('original_source_id')
                 prior=self.generic_repos[e.record_class].get(identifier) if e.record_class in self.generic_repos else self.contradiction_repo.get(identifier)
             if prior:
+                # Existing canonical state can carry scope directly or through
+                # its retained promotion package / current resource ACL. Never
+                # overwrite a conflicting scope with the incoming package's.
+                from cios.applications.flora.enterprise_canvas.access import EnterpriseCanvasAccessRepository
+                raw = prior.__dict__ if isinstance(prior, Observation) else prior
+                scopes = []
+                if 'workspace_id' in raw:
+                    scopes.append(raw['workspace_id'])
+                lineage = raw.get('blueprint_import_lineage') or (raw.get('human_provenance') or {}).get('blueprint_import_lineage') or {}
+                if lineage.get('package_id'):
+                    origin = self.registry.get(lineage['package_id'])
+                    if not origin:
+                        raise BlueprintPromotionError('Canonical target has unresolved workspace provenance')
+                    scopes.append(origin.workspace_id)
+                acl = EnterpriseCanvasAccessRepository().get(target)
+                if acl:
+                    scopes.append(acl.workspace_id)
+                if not scopes or any(not isinstance(scope,str) or not scope or scope != package.workspace_id for scope in scopes):
+                    raise BlueprintPromotionError('Canonical target has conflicting or unresolved workspace scope')
                 owner=prior.enterprise_id if isinstance(prior,Observation) else prior.get('enterprise_id') or prior.get('canonical_enterprise_id') or prior.get('organisation')
                 if not owner and isinstance(prior,dict):
                     lineage=prior.get('blueprint_import_lineage') or {}

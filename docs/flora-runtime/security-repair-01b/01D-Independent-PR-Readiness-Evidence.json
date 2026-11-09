@@ -1,0 +1,930 @@
+{
+  "verdict": "REVIEW BLOCKED",
+  "deployment": "DEPLOYMENT NOT APPROVED",
+  "preserved_input_sha256": {
+    "cios/applications/flora/access.py": "5de498b1b01a944c25e117636dc08de5c4dbf122ebf084423f61a260ada5eead",
+    "cios/applications/flora/blueprint_import/mapping.py": "8ca5aecc834cec8f652a62f975031e19ef36482498575c23ad53c0ebfbd2024f",
+    "cios/applications/flora/blueprint_import/planning.py": "cd85ebf142bb13af02bc9f8982d2800f9ead43e5ace2571eb4521608a10cde9a",
+    "cios/applications/flora/blueprint_import/promotion.py": "3cc1f396203addffe92f93b1a8173ad4edb7a9db55b02b7c2308455d40d441c2",
+    "cios/applications/flora/blueprint_import/review.py": "e78e1cd126b781883c378f9bb2c55073dfc861ffcdef6f01ac8e59e8cdc62ad9",
+    "cios/applications/flora/blueprint_import/review_plan.py": "9e5d6d566ba3aeb9827e58bbe3eb2908a30888d4a8abcda7b7e71869d595c111",
+    "cios/applications/flora/blueprint_import/views.py": "4785ee66399b384434bc76a64ff6c691b97b4d3e3d26a2624cbbf50b5b5b3827",
+    "cios/applications/flora/commercial_mission.py": "13e7216d61c97dc3b5faf8d1b94bd83f31fbe56dd6f64a8b9c126f1697d4728d",
+    "cios/applications/flora/document_review.py": "a5f9e7053ab743f927599e9b9170b4b1f06fa77aa7cb4aaae51cc01173ca4bad",
+    "cios/applications/flora/enterprise_canvas/access.py": "c4b51524896144955f51b8b4555e16781a9a0e1fe16e21bd04108b89ec5479fc",
+    "cios/applications/flora/enterprise_canvas/feedback.py": "aa5342714e79e85cdeb640843ed6775648c7fab273e77959245537809f793c8d",
+    "cios/applications/flora/enterprise_canvas/service.py": "b7034770d8a8375e7d2876679d67d9be1d5cb0b5abbc46babd7eb8b853932a00",
+    "cios/applications/flora/enterprise_intelligence/runtime.py": "e5a9cc702d677cf1c69c37ccd0a59f89625bc9ace63c8da08ab749b6e0341cbd",
+    "cios/applications/flora/live/worker.py": "e6ebc603224328da2d56cdafee29ddc4dc1b854361b6fa8911489aec585ce757",
+    "cios/applications/flora/pilot_auth.py": "acb692d420a3c4c652318027d42ff46704782e42dc1e553e34f5001f990a2067",
+    "cios/applications/flora/protected_storage.py": "a69a8c9e9e7159b2ce9c3d301b3af10fa04382d733a73b7c6560780f793a43e1",
+    "cios/applications/flora/security.py": "842a27b71c205ff0ec36ff18e9a0fb2bc52f39106c1ad343c9a0fa093738cf36",
+    "cios/applications/flora/security_operator.py": "837f6cde4aa4c78db9d34ff408a9c216f7cbb46078db75befb0d49bae396bf5c",
+    "cios/applications/flora/security_store.py": "a4ae07eb7057671294c20a4fb99612aa6fcb4f3609044764dc6bf50bc9dccc87",
+    "cios/applications/flora/security_web.py": "b32e6cd26c990eb62c502feaa5f788f6387c05d4c3c9390f6b037a58b42f4e52",
+    "cios/applications/flora/storage_maintenance.py": "4957f1561c3b868fe3c2b32d80ddb32e0498beceae31931f449a447f1f4ac0a9",
+    "cios/applications/flora/web/app.py": "1cc537faeaf06139b696437b36a48613c86fe7293b990315436997ddb0913da4",
+    "docs/flora-runtime/security-repair-01b/01D-Final-Acceptance-Evidence.json": "f32b5e0cd96302534b2e3ae966e9caf96b2b197ac5e62eec84e781e5c57ba6a9",
+    "docs/flora-runtime/security-repair-01b/01D-Final-Acceptance-Report.md": "a7829140e3ac3fc696b456e6ef88b8db38bdb321df6ca4ea5fa57854795e1ce1",
+    "docs/flora-runtime/security-repair-01b/Adversarial-Remediation-Evidence.json": "211933ee976fda2e87ce03707c9f29d0e2d63826d3a274378a5bb9f453b5241b",
+    "docs/flora-runtime/security-repair-01b/Adversarial-Remediation-Report.md": "dc8e48605d449288fe9b18203458852a45f23d9298c3f523baf6432fbe6d4b39",
+    "docs/flora-runtime/security-repair-01b/Completion-Report.md": "58a6eb3ca468fc53498e05b1a67c16930cddce6e874b0bfbed8e76da1a9d1b4d",
+    "docs/flora-runtime/security-repair-01b/Controlled-PR-Proposal.md": "ec6b3b701847cb2ac12580f28bbd0c469510e51713576af8b5ec2a3ab895f0d4",
+    "docs/flora-runtime/security-repair-01b/Failure-Root-Cause-Matrix.json": "fedc66d6c1a2296eadb78fa67dae75aeaafd32715cf938444a37bfbebb8b1627",
+    "docs/flora-runtime/security-repair-01b/Final-Acceptance-Comparison.json": "8c2ac13b690c007870a7a881fabd2164c776dd05ae35bd234f44d86ff728ce5e",
+    "docs/flora-runtime/security-repair-01b/Final-Acceptance-Report.md": "8f4fb139e5dff59892b4377d81f3bac12db9f174f5608b3b29a6a8b0e62568e2",
+    "docs/flora-runtime/security-repair-01b/Independent-Release-Readiness-Evidence.json": "ff98af05689892d2c43db4b16653bbd4b4fc14a13db3e7aa757b8d6e1604ed71",
+    "docs/flora-runtime/security-repair-01b/Independent-Release-Readiness-Review.md": "0e8679b5cc78adbd30591edea4c04a77044d1a5e77a605c7de127c9e014453aa",
+    "docs/flora-runtime/security-repair-01b/Inherited-Failure-Register.json": "381b77f27e5d6c02defb4ff3e99de99061d6fc13d34ae4d56e59b565ffdf6ebe",
+    "docs/flora-runtime/security-repair-01b/Legacy-Positive-Obligation-Reconciliation.json": "fdbb84369e5539c1b051822fd2e533cd44a2a55e7adcd30814548cc04c3c7024",
+    "docs/flora-runtime/security-repair-01b/Regression-Remediation-Comparison.json": "8c2ac13b690c007870a7a881fabd2164c776dd05ae35bd234f44d86ff728ce5e",
+    "docs/flora-runtime/security-repair-01b/Regression-Remediation-Report.md": "b408521c79b0f2e906f00c5ac0283104a2d7204120cce94d2520f4c7942508db",
+    "docs/flora-runtime/security-repair-01b/Regression-Remediation-Source-Manifest.json": "ee14ff5db5983ccee29031bffc896af18adb14fce361611a3e7fc8787a484f23",
+    "docs/flora-runtime/security-repair-01b/Release-Readiness-Evidence.json": "38a04489ea866a2f4ff84dc87c16dd82b84c6459552c5459c0754f8c2930a1b0",
+    "docs/flora-runtime/security-repair-01b/Release-Readiness-Review.md": "1875e917b2dc093702c83b52caeaa663c6be9f394b72e78c716cc91d6faf4210",
+    "docs/flora-runtime/security-repair-01b/Security-Integrity-Remediation-Evidence.json": "99aeb42c57de91eda92270d6c7f26a01a72513dbfcdabead3158594dc2bf3c73",
+    "docs/flora-runtime/security-repair-01b/Security-Integrity-Remediation-Report.md": "11b3309d20cef58b629d23f49b4c2d744efa0134ac5281eafb82035481d4e88e",
+    "docs/flora-runtime/security-repair-01b/Service-Authorisation-Coverage-Matrix.md": "6e59c6816b07cb28a9f1c2c63d0fd12be40d0cf57c4b82eb09e53831ff38103f",
+    "docs/flora-runtime/security-repair-01b/Workspace-Blocker-Resolution-Report.md": "54ef4475d39de2ae31d5398d4b7d905bf064f720bc2b1b30a49776fc69161a70",
+    "docs/flora-runtime/security-repair-01b/history/pre-regression-remediation/Final-Acceptance-Comparison.json": "ac4b6b6abb2d96755a99caa144faeee5dd345ca9fc419b5b71df47c3adfa0734",
+    "docs/flora-runtime/security-repair-01b/history/pre-regression-remediation/Final-Acceptance-Report.md": "2566d842010c30411d914b5bc8dbbdd5dfc49a94c892f4e385eee83d1a9607ec",
+    "docs/flora-runtime/security-repair-01b/history/pre-release-readiness-review/Final-Acceptance-Comparison.json": "8c2ac13b690c007870a7a881fabd2164c776dd05ae35bd234f44d86ff728ce5e",
+    "docs/flora-runtime/security-repair-01b/history/pre-release-readiness-review/Final-Acceptance-Report.md": "d302c96d76a0fe29e7a3304af142429204814d1f11f20cf0d3bf4cee890c4453",
+    "docs/flora-runtime/security-repair-01b/history/pre-release-readiness-review/Regression-Remediation-Report.md": "b408521c79b0f2e906f00c5ac0283104a2d7204120cce94d2520f4c7942508db",
+    "docs/flora-runtime/security-repair-01b/history/pre-security-integrity-remediation/test_flora_security_independent_readiness.py": "81c1bf20de29891e2df0c01e8146c6638a85f7cb9346c81cc7bfc51798169720",
+    "pyproject.toml": "c731a3d00124353db62e9854290491b8bda021206d2ac2ee716e566499b3991f",
+    "requirements.txt": "3d4e54bd27d9d1c3c81770ed594b4369e0ba1df7fe3cea94165a8aee0d26e1de",
+    "tests/flora_security_fixtures.py": "f389e91ca6496a50c8e73b406d9a213d7ed06cf0c73cbc38950147550ca136df",
+    "tests/test_enterprise_intelligence_reasoning.py": "bf1bd9d2e125e99fec4398ee6fe98d284a1df1484e47afb3b5598c678e9673ba",
+    "tests/test_flora_blueprint_import_promotion.py": "dfff748ec2b9474bedd3dd4b0a7dccf5dee0ed619658be65411a75facfe56c1b",
+    "tests/test_flora_blueprint_import_review_planning.py": "8550f30398a65b9b713a73a79353651aefbdf636a5464a9a29864acfd31b37f7",
+    "tests/test_flora_blueprint_import_validation.py": "b2e206d6df04071f4cc961d3308c01a2ac7e1335cdae27b92a66379f9abdb46b",
+    "tests/test_flora_enterprise_canvas.py": "ca6a4ec44bf15ca42fada20ec586e1c75970353e4771576a685cb4c33a159d3b",
+    "tests/test_flora_experience_assurance_repair.py": "6aee7c59f8051d73d8927e7243bf55e2e040699735117064769475a1d141007d",
+    "tests/test_flora_factory_evidence_release_repair.py": "97cb9f1cc7dadfa8729ad653c57d657762f5ed80eeb6cebfcea9456d26cb3477",
+    "tests/test_flora_factory_presentation_repair.py": "dc5bfb12c82a0e948c24bf642e0b03fdf0ac439bdf52f482dadd22d426fb96cb",
+    "tests/test_flora_factory_researcher_model_repair.py": "e30d3eccad996380716f4111890ebfeda982fd6a0adffb0c86b8d8c3ce81ef33",
+    "tests/test_flora_import_model_reconciliation.py": "2caf6999ed0b62ca08c9493dceff929f0bdb4a64980bf6b0f57f1c564556a3ec",
+    "tests/test_flora_intelligence_integrity.py": "2ab39c77ad156819228f81fd0da16866d4386726f88d53104d95cb0c6272ac91",
+    "tests/test_flora_security_01d_final_acceptance.py": "0e547a7f495972a4dd5aef2fd485379d0b88168adbc69fd321737ed99ed6de0b",
+    "tests/test_flora_security_admin_policy.py": "9e461b15345d4601b2754bcfeac5499c207219986c5da5479eea38593ae96c71",
+    "tests/test_flora_security_adversarial_remediation.py": "64353c123d7b9754aea215def6b4a19e38f98e4d0ffa063165d06db89fcc7ac6",
+    "tests/test_flora_security_independent_readiness.py": "4591fc2c5b8db9f00257cc32658652dae5e68fc9dafec7df1e2ed00fea066a0a",
+    "tests/test_flora_security_integrity_repair.py": "0eb6940f575a826bf64400c28a789ff954b6e0d21285b87cb5fcf80770b5611e",
+    "tests/test_flora_security_legacy_obligations.py": "014f99dff14d8fea223670cf8630620f8d057556703a5cf6234839cd170c5ba4",
+    "tests/test_flora_security_owner_journey.py": "ab44c6c0e0ce9fd90d79717a66ef70b6985a80c492f2400edba65f78d0652c0b",
+    "tests/test_flora_security_release_review.py": "1c69117484f1cdd4604ef469c5285aa76110ec05269a5cfd8b48786c48b963e1",
+    "tests/test_flora_security_repair_01b.py": "e07b6a686091d7a7253d5c70abb286aea94312759d84e6b036f7040912434ef1",
+    "tests/test_flora_security_workspace_boundary.py": "75877588578812e294f015a9c758179759d3b9e63d39bf89c5acaec6018c633d"
+  },
+  "existing_source_manifest_matches": true,
+  "security": {
+    "passed": 358,
+    "new_failed": 7,
+    "new_cases": {
+      "tests/test_flora_security_01d_pr_review.py::test_candidate_delete_intersects_persisted_scope_and_existing_acl[denied-resource-acl]": {
+        "status": "failed",
+        "signature": {
+          "file": "tests/test_flora_security_01d_pr_review.py",
+          "function": "test_candidate_delete_intersects_persisted_scope_and_existing_acl",
+          "source_expression": "assert denied and before==after",
+          "error_kind": "AssertionError",
+          "missing_literal": null
+        },
+        "diagnostic_message_sha256": "f64b7862a7186b365ed2428a312bc685b1800de7cb09ec16b82d74d730a6ed9f"
+      },
+      "tests/test_flora_security_01d_pr_review.py::test_candidate_delete_intersects_persisted_scope_and_existing_acl[missing-persisted-workspace]": {
+        "status": "failed",
+        "signature": {
+          "file": "tests/test_flora_security_01d_pr_review.py",
+          "function": "test_candidate_delete_intersects_persisted_scope_and_existing_acl",
+          "source_expression": "assert denied and before==after",
+          "error_kind": "AssertionError",
+          "missing_literal": null
+        },
+        "diagnostic_message_sha256": "f64b7862a7186b365ed2428a312bc685b1800de7cb09ec16b82d74d730a6ed9f"
+      },
+      "tests/test_flora_security_01d_pr_review.py::test_direct_candidate_deletion_cannot_continue_after_committed_revocation": {
+        "status": "failed",
+        "signature": {
+          "file": "tests/test_flora_security_01d_pr_review.py",
+          "function": "test_direct_candidate_deletion_cannot_continue_after_committed_revocation",
+          "source_expression": "assert denied and staging.exists() and service.registry.get(package.package_ref) is not None",
+          "error_kind": "AssertionError",
+          "missing_literal": null
+        },
+        "diagnostic_message_sha256": "f64b7862a7186b365ed2428a312bc685b1800de7cb09ec16b82d74d730a6ed9f"
+      },
+      "tests/test_flora_security_01d_pr_review.py::test_candidate_deletion_audit_failure_preserves_protected_data": {
+        "status": "failed",
+        "signature": {
+          "file": "tests/test_flora_security_01d_pr_review.py",
+          "function": "test_candidate_deletion_audit_failure_preserves_protected_data",
+          "source_expression": "assert before==after",
+          "error_kind": "AssertionError",
+          "missing_literal": null
+        },
+        "diagnostic_message_sha256": "6efa94189e5625b679495f3037fa5395a4c74636408abe7ff3c0e73d931f0d2b"
+      },
+      "tests/test_flora_security_01d_pr_review.py::test_valid_json_manifest_omission_cannot_silently_delete_snapshot_data": {
+        "status": "failed",
+        "signature": {
+          "file": "tests/test_flora_security_01d_pr_review.py",
+          "function": "test_valid_json_manifest_omission_cannot_silently_delete_snapshot_data",
+          "source_expression": "assert victim.exists() and victim.read_text()=='original protected synthetic data'",
+          "error_kind": "AssertionError",
+          "missing_literal": null
+        },
+        "diagnostic_message_sha256": "dc61a1b2c019035bf412ea01ef8bbad83af1b0e3da2e8f324fd9889bccc396f8"
+      },
+      "tests/test_flora_security_01d_pr_review.py::test_completed_promotion_cannot_be_deleted_using_stale_candidate_preview": {
+        "status": "failed",
+        "signature": {
+          "file": "tests/test_flora_security_01d_pr_review.py",
+          "function": "test_completed_promotion_cannot_be_deleted_using_stale_candidate_preview",
+          "source_expression": "assert denied and archive.exists() and present",
+          "error_kind": "AssertionError",
+          "missing_literal": null
+        },
+        "diagnostic_message_sha256": "f64b7862a7186b365ed2428a312bc685b1800de7cb09ec16b82d74d730a6ed9f"
+      },
+      "tests/test_flora_security_01d_pr_review.py::test_financial_apply_validates_actual_canonical_enterprise_target": {
+        "status": "failed",
+        "signature": {
+          "file": "tests/test_flora_security_01d_pr_review.py",
+          "function": "test_financial_apply_validates_actual_canonical_enterprise_target",
+          "source_expression": "assert denied and before==after",
+          "error_kind": "AssertionError",
+          "missing_literal": null
+        },
+        "diagnostic_message_sha256": "f64b7862a7186b365ed2428a312bc685b1800de7cb09ec16b82d74d730a6ed9f"
+      }
+    }
+  },
+  "integrity_comparisons_verified": 128,
+  "audit_digests_verified": 17,
+  "audit_chains_verified": 15,
+  "domain": {
+    "counts": {
+      "passed": 404,
+      "failed": 22,
+      "skipped": 10
+    },
+    "groups": {
+      "Factory": {
+        "case_count": 96,
+        "counts": {
+          "passed": 88,
+          "skipped": 8
+        }
+      },
+      "Experience": {
+        "case_count": 58,
+        "counts": {
+          "passed": 56,
+          "skipped": 2
+        }
+      },
+      "Governance": {
+        "case_count": 157,
+        "counts": {
+          "passed": 157
+        }
+      },
+      "Canvas": {
+        "case_count": 15,
+        "counts": {
+          "failed": 3,
+          "passed": 12
+        }
+      },
+      "Other domain": {
+        "case_count": 110,
+        "counts": {
+          "passed": 91,
+          "failed": 19
+        }
+      }
+    }
+  },
+  "inherited_failures": [
+    {
+      "test_id": "tests/test_flora_banking_increment44_executive_navigation.py::test_account_default_opportunities_breadcrumbs_and_evidence_drilldown",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_account_default_opportunities_breadcrumbs_and_evidence_drilldown",
+        "source_expression": "assert \"data-default-opportunities='3'\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "\"data-default-opportunities='3'\""
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_account_default_opportunities_breadcrumbs_and_evidence_drilldown",
+        "source_expression": "assert \"data-default-opportunities='3'\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "\"data-default-opportunities='3'\""
+      },
+      "same_signature": true,
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_increment44_executive_navigation.py::test_ai_native_reference_model_collapsed_and_separate",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_ai_native_reference_model_collapsed_and_separate",
+        "source_expression": "assert \"Explore capability model\" in top",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Explore capability model'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_ai_native_reference_model_collapsed_and_separate",
+        "source_expression": "assert \"Explore capability model\" in top",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Explore capability model'"
+      },
+      "same_signature": true,
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_increment44_executive_navigation.py::test_landing_budget_conclusion_and_signals",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_landing_budget_conclusion_and_signals",
+        "source_expression": "assert html.index(\"UK banks are moving\") < html.index(\"Three industry signals\")",
+        "error_kind": "ValueError",
+        "missing_literal": null
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_landing_budget_conclusion_and_signals",
+        "source_expression": "assert html.index(\"UK banks are moving\") < html.index(\"Three industry signals\")",
+        "error_kind": "ValueError",
+        "missing_literal": null
+      },
+      "same_signature": true,
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_increment44_executive_navigation.py::test_pestle_only_outlook_not_landing_or_portfolio",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_pestle_only_outlook_not_landing_or_portfolio",
+        "source_expression": "assert \"UK Banking PESTLE view\" in industry_outlook_page()",
+        "error_kind": "AssertionError",
+        "missing_literal": "'UK Banking PESTLE view'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_increment44_executive_navigation.py",
+        "function": "test_pestle_only_outlook_not_landing_or_portfolio",
+        "source_expression": "assert \"UK Banking PESTLE view\" in industry_outlook_page()",
+        "error_kind": "AssertionError",
+        "missing_literal": "'UK Banking PESTLE view'"
+      },
+      "same_signature": true,
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_increment451_visual_correction.py::test_featured_subset_has_full_exploration_route_and_counts_match_projection",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_increment451_visual_correction.py",
+        "function": "test_featured_subset_has_full_exploration_route_and_counts_match_projection",
+        "source_expression": "assert \"Featured intelligence\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Featured intelligence'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_increment451_visual_correction.py",
+        "function": "test_featured_subset_has_full_exploration_route_and_counts_match_projection",
+        "source_expression": "assert \"Featured intelligence\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Featured intelligence'"
+      },
+      "same_signature": true,
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_increment45_visual_intelligence.py::test_ai_native_maturity_journey_renders_as_visual_progression",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_increment45_visual_intelligence.py",
+        "function": "test_ai_native_maturity_journey_renders_as_visual_progression",
+        "source_expression": "assert \"AI-native maturity rail\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'AI-native maturity rail'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_increment45_visual_intelligence.py",
+        "function": "test_ai_native_maturity_journey_renders_as_visual_progression",
+        "source_expression": "assert \"AI-native maturity rail\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'AI-native maturity rail'"
+      },
+      "same_signature": true,
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_industry_reinvention_increment42.py::test_financial_behaviour_narrative_has_required_causal_sections",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_financial_behaviour_narrative_has_required_causal_sections",
+        "source_expression": "assert \"What the financial results imply about behaviour\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'What the financial results imply about behaviour'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_financial_behaviour_narrative_has_required_causal_sections",
+        "source_expression": "assert \"What the financial results imply about behaviour\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'What the financial results imply about behaviour'"
+      },
+      "same_signature": true,
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_industry_reinvention_increment42.py::test_heatmap_cells_show_pressure_barrier_supplier_and_whitespace",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_heatmap_cells_show_pressure_barrier_supplier_and_whitespace",
+        "source_expression": "assert term in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Supplier:'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_heatmap_cells_show_pressure_barrier_supplier_and_whitespace",
+        "source_expression": "assert term in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Supplier:'"
+      },
+      "same_signature": true,
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_industry_reinvention_increment42.py::test_industry_opportunity_totals_reconcile_to_account_opportunities",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_industry_opportunity_totals_reconcile_to_account_opportunities",
+        "source_expression": "assert f\"Flora working estimate \u00a3{portfolio_mid}m\" in html or f\"Flora working estimate: \u00a3{portfolio_mid}m\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Flora working estimate \u00a3910m'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_industry_opportunity_totals_reconcile_to_account_opportunities",
+        "source_expression": "assert f\"Flora working estimate \u00a3{portfolio_mid}m\" in html or f\"Flora working estimate: \u00a3{portfolio_mid}m\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Flora working estimate \u00a3910m'"
+      },
+      "same_signature": true,
+      "impact": "Computed totals agree before failure; rendered estimate label differs. Presentation/qualification acceptance unresolved.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_industry_reinvention_increment42.py::test_pestle_forces_map_to_specific_banks_themes_and_non_generic_outputs",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_pestle_forces_map_to_specific_banks_themes_and_non_generic_outputs",
+        "source_expression": "assert category in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Political'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_pestle_forces_map_to_specific_banks_themes_and_non_generic_outputs",
+        "source_expression": "assert category in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Political'"
+      },
+      "same_signature": true,
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_industry_reinvention_increment42.py::test_rendered_acceptance_artefacts_exist",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_rendered_acceptance_artefacts_exist",
+        "source_expression": "assert artefact in industry",
+        "error_kind": "AssertionError",
+        "missing_literal": "'UK Banking PESTLE view'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_rendered_acceptance_artefacts_exist",
+        "source_expression": "assert artefact in industry",
+        "error_kind": "AssertionError",
+        "missing_literal": "'UK Banking PESTLE view'"
+      },
+      "same_signature": true,
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_industry_reinvention_increment42.py::test_supplier_names_render_and_unnamed_labels_are_suppressed_when_names_exist",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_supplier_names_render_and_unnamed_labels_are_suppressed_when_names_exist",
+        "source_expression": "assert \"Google Cloud\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Google Cloud'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_industry_reinvention_increment42.py",
+        "function": "test_supplier_names_render_and_unnamed_labels_are_suppressed_when_names_exist",
+        "source_expression": "assert \"Google Cloud\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Google Cloud'"
+      },
+      "same_signature": true,
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_analyst_views_preserve_attribution_without_fake_consensus",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_analyst_views_preserve_attribution_without_fake_consensus",
+        "source_expression": "assert \"What analysts broadly like\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'What analysts broadly like'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_analyst_views_preserve_attribution_without_fake_consensus",
+        "source_expression": "assert \"What analysts broadly like\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'What analysts broadly like'"
+      },
+      "same_signature": true,
+      "impact": "Analyst-section/attribution acceptance is unresolved; later provenance assertions do not execute after the first heading failure.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_each_bank_page_uses_executive_structure_and_preserves_inspection",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_each_bank_page_uses_executive_structure_and_preserves_inspection",
+        "source_expression": "assert section in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'1. Account in one minute'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_each_bank_page_uses_executive_structure_and_preserves_inspection",
+        "source_expression": "assert section in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'1. Account in one minute'"
+      },
+      "same_signature": true,
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_increment_41_pipeline_reconciliation_horizons_and_value_meaning",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_increment_41_pipeline_reconciliation_horizons_and_value_meaning",
+        "source_expression": "assert \"What the financial results are telling us\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'What the financial results are telling us'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_increment_41_pipeline_reconciliation_horizons_and_value_meaning",
+        "source_expression": "assert \"What the financial results are telling us\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'What the financial results are telling us'"
+      },
+      "same_signature": true,
+      "impact": "Pipeline display/qualification contract unresolved; initial arithmetic preconditions pass, later rendered qualification assertions are not reached.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion",
+        "source_expression": "assert text in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Near-term pipeline'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion",
+        "source_expression": "assert text in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Near-term pipeline'"
+      },
+      "same_signature": true,
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_increment_41_supplier_traction_is_sourced_or_human_labelled_and_unknown_is_bounded",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_increment_41_supplier_traction_is_sourced_or_human_labelled_and_unknown_is_bounded",
+        "source_expression": "assert \"No reliable view\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'No reliable view'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_increment_41_supplier_traction_is_sourced_or_human_labelled_and_unknown_is_bounded",
+        "source_expression": "assert \"No reliable view\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'No reliable view'"
+      },
+      "same_signature": true,
+      "impact": "Supplier metadata preconditions pass; displayed unknown/fallback wording differs. Needs semantic/product contract reconciliation.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_opportunities_have_values_feedback_and_preserve_originals",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_opportunities_have_values_feedback_and_preserve_originals",
+        "source_expression": "assert action in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Useful'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_opportunities_have_values_feedback_and_preserve_originals",
+        "source_expression": "assert action in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Useful'"
+      },
+      "same_signature": true,
+      "impact": "Feedback controls absent under legacy expectations; do not restore anonymous mutations just to satisfy an old UI assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_theme_relevance_ranking_and_pipeline_are_deterministic",
+      "baseline_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_theme_relevance_ranking_and_pipeline_are_deterministic",
+        "source_expression": "assert theme in first",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Customer experience transformation'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_banking_portfolio_increment3.py",
+        "function": "test_theme_relevance_ranking_and_pipeline_are_deterministic",
+        "source_expression": "assert theme in first",
+        "error_kind": "AssertionError",
+        "missing_literal": "'Customer experience transformation'"
+      },
+      "same_signature": true,
+      "impact": "Presentation/navigation or rendered-content contract differs; no authorization bypass is established by this first assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_enterprise_canvas.py::test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+      "baseline_signature": {
+        "file": "tests/test_flora_enterprise_canvas.py",
+        "function": "test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+        "source_expression": "assert \"href='/digital-twins/MOD'>Open Twin\" in home",
+        "error_kind": "AssertionError",
+        "missing_literal": "\"href='/digital-twins/MOD'>Open Twin\""
+      },
+      "current_signature": {
+        "file": "tests/test_flora_enterprise_canvas.py",
+        "function": "test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+        "source_expression": "assert \"href='/digital-twins/MOD'>Open Twin\" in home",
+        "error_kind": "AssertionError",
+        "missing_literal": "\"href='/digital-twins/MOD'>Open Twin\""
+      },
+      "same_signature": true,
+      "impact": "Old direct Open Twin link differs from current Canvas navigation; existing authorized import setup reaches the navigation assertion.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_enterprise_canvas.py::test_home_page_does_not_expose_synthetic_canvas_route",
+      "baseline_signature": {
+        "file": "tests/test_flora_enterprise_canvas.py",
+        "function": "test_home_page_does_not_expose_synthetic_canvas_route",
+        "source_expression": "assert \"/blueprint-import/history\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'/blueprint-import/history'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_enterprise_canvas.py",
+        "function": "test_home_page_does_not_expose_synthetic_canvas_route",
+        "source_expression": "assert \"/blueprint-import/history\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'/blueprint-import/history'"
+      },
+      "same_signature": true,
+      "impact": "Anonymous home does not contain the expected import-history link; source-data privacy and anonymous write closure must be preserved when reconciling navigation.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    },
+    {
+      "test_id": "tests/test_flora_enterprise_canvas.py::test_mod_executive_commercial_canvas_read_model",
+      "baseline_signature": {
+        "file": "tests/test_flora_enterprise_canvas.py",
+        "function": "test_mod_executive_commercial_canvas_read_model",
+        "source_expression": "assert \"executive situation briefing\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'executive situation briefing'"
+      },
+      "current_signature": {
+        "file": "tests/test_flora_enterprise_canvas.py",
+        "function": "test_mod_executive_commercial_canvas_read_model",
+        "source_expression": "assert \"executive situation briefing\" in html",
+        "error_kind": "AssertionError",
+        "missing_literal": "'executive situation briefing'"
+      },
+      "same_signature": true,
+      "impact": "Authenticated Canvas renders 200 but the old briefing heading is absent; later authority/lineage/read-only assertions in this case are not reached.",
+      "release_classification": "Product-release acceptance hold pending reviewed contract reconciliation or explicit waiver; not waived because inherited."
+    }
+  ],
+  "legacy_positive_mappings_verified": 19,
+  "historical_legacy": {
+    "counts": {
+      "failed": 24,
+      "passed": 3
+    },
+    "five_preexisting": [
+      {
+        "test_id": "tests/test_flora_pilot_auth.py::test_cios_owner_can_upload_inspect_and_stage_mod_package_without_canonical_mutation",
+        "baseline_status": "failed",
+        "current_status": "failed",
+        "baseline_signature": {
+          "file": "tests/test_flora_pilot_auth.py",
+          "function": "test_cios_owner_can_upload_inspect_and_stage_mod_package_without_canonical_mutation",
+          "source_expression": "cookie_headers = headers(issue_session_cookie(secure=False))",
+          "error_kind": "PermissionError",
+          "missing_literal": null
+        },
+        "current_signature": {
+          "file": "tests/test_flora_pilot_auth.py",
+          "function": "test_cios_owner_can_upload_inspect_and_stage_mod_package_without_canonical_mutation",
+          "source_expression": "cookie_headers = headers(issue_session_cookie(secure=False))",
+          "error_kind": "PermissionError",
+          "missing_literal": null
+        }
+      },
+      {
+        "test_id": "tests/test_flora_pilot_auth.py::test_owner_managed_enterprise_policy_is_case_normalised_and_workspace_bound",
+        "baseline_status": "failed",
+        "current_status": "failed",
+        "baseline_signature": {
+          "file": "tests/test_flora_pilot_auth.py",
+          "function": "test_owner_managed_enterprise_policy_is_case_normalised_and_workspace_bound",
+          "source_expression": "staged = BlueprintPackageValidator().validate_and_stage(r.package_ref, \"rob\", owner)",
+          "error_kind": "cios.applications.flora.blueprint_import.validator.BlueprintValidationError",
+          "missing_literal": null
+        },
+        "current_signature": {
+          "file": "tests/test_flora_pilot_auth.py",
+          "function": "test_owner_managed_enterprise_policy_is_case_normalised_and_workspace_bound",
+          "source_expression": "staged = BlueprintPackageValidator().validate_and_stage(r.package_ref, \"rob\", owner)",
+          "error_kind": "cios.applications.flora.blueprint_import.validator.BlueprintValidationError",
+          "missing_literal": null
+        }
+      },
+      {
+        "test_id": "tests/test_flora_pilot_import_bypass.py::test_configured_module_complete_http_commercial_context_and_twin_map",
+        "baseline_status": "failed",
+        "current_status": "failed",
+        "baseline_signature": {
+          "file": "tests/test_flora_pilot_import_bypass.py",
+          "function": "test_configured_module_complete_http_commercial_context_and_twin_map",
+          "source_expression": "assert status == 303",
+          "error_kind": "AssertionError",
+          "missing_literal": null
+        },
+        "current_signature": {
+          "file": "tests/test_flora_pilot_import_bypass.py",
+          "function": "test_configured_module_complete_http_commercial_context_and_twin_map",
+          "source_expression": "assert status == 303",
+          "error_kind": "AssertionError",
+          "missing_literal": null
+        }
+      },
+      {
+        "test_id": "tests/test_flora_pilot_import_bypass.py::test_deployed_equivalent_pilot_route_imports_candidate_to_executive_workspace",
+        "baseline_status": "failed",
+        "current_status": "failed",
+        "baseline_signature": {
+          "file": "tests/test_flora_pilot_import_bypass.py",
+          "function": "test_deployed_equivalent_pilot_route_imports_candidate_to_executive_workspace",
+          "source_expression": "assert status == 200 and \"href='/blueprint-import'>Import Twin\" in landing",
+          "error_kind": "AssertionError",
+          "missing_literal": null
+        },
+        "current_signature": {
+          "file": "tests/test_flora_pilot_import_bypass.py",
+          "function": "test_deployed_equivalent_pilot_route_imports_candidate_to_executive_workspace",
+          "source_expression": "assert status == 200 and \"href='/blueprint-import'>Import Twin\" in landing",
+          "error_kind": "AssertionError",
+          "missing_literal": null
+        }
+      },
+      {
+        "test_id": "tests/test_flora_pilot_import_bypass.py::test_pilot_configure_save_and_recompose_uses_narrow_actor_scope",
+        "baseline_status": "failed",
+        "current_status": "failed",
+        "baseline_signature": {
+          "file": "tests/test_flora_pilot_import_bypass.py",
+          "function": "test_pilot_configure_save_and_recompose_uses_narrow_actor_scope",
+          "source_expression": "assert status == 200",
+          "error_kind": "AssertionError",
+          "missing_literal": null
+        },
+        "current_signature": {
+          "file": "tests/test_flora_pilot_import_bypass.py",
+          "function": "test_pilot_configure_save_and_recompose_uses_narrow_actor_scope",
+          "source_expression": "assert status == 200",
+          "error_kind": "AssertionError",
+          "missing_literal": null
+        }
+      }
+    ],
+    "wording_changes": [
+      {
+        "test_id": "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_OWNER_ID-owner]",
+        "baseline": "passed",
+        "current": "failed",
+        "classification": "Previously recorded diagnostic-wording contract change; not new in 01D acceptance"
+      },
+      {
+        "test_id": "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_WORKSPACE-workspace]",
+        "baseline": "failed",
+        "current": "passed",
+        "classification": "Previously recorded diagnostic-wording contract change; not new in 01D acceptance"
+      }
+    ]
+  },
+  "supplemental": {
+    "passed": 39
+  },
+  "skips": {
+    "tests/test_flora_factory_evidence_release_repair.py::test_retained_tel_w5_w6_reconciliation_and_replay": "Actual retained W6 package unavailable; set FLORA_AUDIT_TEL_W6 / FLORA_AUDIT_BNK_W1",
+    "tests/test_flora_factory_evidence_release_repair.py::test_retained_bnk_same_citation_contract": "Actual retained BNK package unavailable; set FLORA_AUDIT_TEL_W6 / FLORA_AUDIT_BNK_W1",
+    "tests/test_flora_factory_evidence_release_repair.py::test_retained_tel_count_reconciliation_independent_of_citation_assertions": "Actual retained W6 package unavailable; set FLORA_AUDIT_TEL_W6 / FLORA_AUDIT_BNK_W1",
+    "tests/test_flora_factory_presentation_repair.py::test_actual_retained_user_journey_and_honest_promotion[TEL-W6]": "Actual retained artifact not available: TEL-W6",
+    "tests/test_flora_factory_presentation_repair.py::test_actual_retained_user_journey_and_honest_promotion[BNK-W1]": "Actual retained artifact not available: BNK-W1",
+    "tests/test_flora_factory_researcher_model_repair.py::test_actual_retained_source_to_memory_retrieval_and_view[TEL-W6]": "Retained artifact unavailable: TEL-W6",
+    "tests/test_flora_factory_researcher_model_repair.py::test_actual_retained_source_to_memory_retrieval_and_view[BNK-W1]": "Retained artifact unavailable: BNK-W1",
+    "tests/test_flora_factory_researcher_model_repair.py::test_actual_tel_w5_w6_handoff_reuses_observation_and_confidence_history": "Retained artifact unavailable: TEL-W6",
+    "tests/test_flora_experience_discovery_repair.py::test_actual_retained_packages_use_generic_discovery_and_keep_factory_boundaries[TEL-W6]": "Actual retained artifact unavailable: TEL-W6",
+    "tests/test_flora_experience_discovery_repair.py::test_actual_retained_packages_use_generic_discovery_and_keep_factory_boundaries[BNK-W1]": "Actual retained artifact unavailable: BNK-W1"
+  },
+  "concurrency_archive_sha256": "81c1bf20de29891e2df0c01e8146c6638a85f7cb9346c81cc7bfc51798169720",
+  "concurrency_only_changed_function": [
+    "test_undo_cannot_erase_concurrently_accepted_direct_feedback"
+  ],
+  "survival_assertion_preserved": true,
+  "native_contention": {
+    "case_directory": "test_native_sqlite_contention_0",
+    "native_sqlite_busy_observed": true,
+    "actual_feedback_begin_observed": true,
+    "callback_completed_while_lock_held": false,
+    "accepted_feedback_survives": true,
+    "matching_resource_audit": true,
+    "sequence": [
+      "failing_writer_owns_lock",
+      "native_busy_observed",
+      "feedback_native_begin",
+      "rollback_requested",
+      "rollback_complete",
+      "feedback_native_begin",
+      "feedback_native_begin",
+      "feedback_native_begin",
+      "feedback_native_begin",
+      "feedback_native_begin",
+      "feedback_native_begin",
+      "feedback_native_begin",
+      "feedback_native_begin",
+      "feedback_native_begin",
+      "feedback_native_begin",
+      "feedback_native_begin",
+      "feedback_committed"
+    ]
+  },
+  "observations": [
+    {
+      "artifact": "work/security-repair-01d-pr-review/verified-probes-tmp/test_candidate_delete_intersec1/pr-review-observation.json",
+      "facts": {
+        "boundary": "missing-persisted-workspace",
+        "denied": false,
+        "staged_data_preserved": false,
+        "protected_store_unchanged": false
+      }
+    },
+    {
+      "artifact": "work/security-repair-01d-pr-review/verified-probes-tmp/test_candidate_deletion_audit_0/pr-review-observation.json",
+      "facts": {
+        "staged_data_preserved": false,
+        "package_preserved": false,
+        "protected_store_unchanged": false,
+        "before_sha256": {
+          "security/authority.sqlite3": "ee9b7f598279abb9b59979aa2814ab50491547467c27347a46e0617b5d1b2c18",
+          "enterprise_canvas/access.json": "dc6613c9b4d137badf8cb6d7345c65127225335d2258663d28cb3ae678c127a7",
+          "ai_financial_reports/runs/fi-synthetic.json": "80c2a1d88b0e907871a06480e1677bab19ab129518a9445679d8f476fa51005d",
+          "blueprint_import/packages/bpi-pkg-f82213c71e234ab7.json": "af4753caff6516d998e13e8045e010586d89958f73cd083686873dea85091885",
+          "blueprint_import/audit/events.jsonl": "5246f0af279ffe46ea7b89539285a66cc80ead2029642513714470a66b353151",
+          "blueprint_import/runs/bpi-run-f82213c71e234ab7.json": "756105f8800c1ac736b49230496e4a4f91dace37af17a5e88556ac6a03d25c09",
+          "blueprint_import/staging/bpi-run-f82213c71e234ab7/synthetic-staged.json": "1ea57080d86cc5e2ffdb6694fb0477842f8cea052ecb56c0aa203ae4cd23c312",
+          "blueprint_import/archives/f82213c71e234ab737cfd3a3867f2003c37b83810153e2d70914c97ee9d77dd3/synthetic-delete.zip": "f82213c71e234ab737cfd3a3867f2003c37b83810153e2d70914c97ee9d77dd3"
+        },
+        "after_sha256": {
+          "security/authority.sqlite3": "ee9b7f598279abb9b59979aa2814ab50491547467c27347a46e0617b5d1b2c18",
+          "enterprise_canvas/access.json": "dc6613c9b4d137badf8cb6d7345c65127225335d2258663d28cb3ae678c127a7",
+          "ai_financial_reports/runs/fi-synthetic.json": "80c2a1d88b0e907871a06480e1677bab19ab129518a9445679d8f476fa51005d",
+          "blueprint_import/tombstones/bpi-run-f82213c71e234ab7.json": "654ac4f0cb63ee85023b6ed73cd8127a26064a7a5addd21f11793ce13894d144",
+          "blueprint_import/audit/events.jsonl": "5246f0af279ffe46ea7b89539285a66cc80ead2029642513714470a66b353151",
+          "blueprint_import/runs/bpi-run-f82213c71e234ab7.json": "756105f8800c1ac736b49230496e4a4f91dace37af17a5e88556ac6a03d25c09"
+        }
+      }
+    },
+    {
+      "artifact": "work/security-repair-01d-pr-review/verified-probes-tmp/test_valid_json_manifest_omiss0/pr-review-observation.json",
+      "facts": {
+        "original_snapshot_file_preserved": false,
+        "journal_retained": false,
+        "authority_still_valid": true,
+        "protected_store_unchanged": false,
+        "before_sha256": {
+          "synthetic-manifest-victim.json": "9532e0c489c49d73e417b9c6ed8cce1745a87e14d5dee851a94fec28efcd4e9a",
+          "security/authority.sqlite3": "f4e533b216d8318dfdb0bd06c80fa69bb5a5121acb9a3f94a7a474cd2d7e9724",
+          "enterprise_canvas/access.json": "dc6613c9b4d137badf8cb6d7345c65127225335d2258663d28cb3ae678c127a7",
+          "ai_financial_reports/runs/fi-synthetic.json": "c11e0e8d2f6fe1df411724134758bf91abd69c9194d94a8f180d558b7217c39c"
+        },
+        "after_sha256": {
+          "security/authority.sqlite3": "f4e533b216d8318dfdb0bd06c80fa69bb5a5121acb9a3f94a7a474cd2d7e9724",
+          "enterprise_canvas/access.json": "dc6613c9b4d137badf8cb6d7345c65127225335d2258663d28cb3ae678c127a7",
+          "ai_financial_reports/runs/fi-synthetic.json": "c11e0e8d2f6fe1df411724134758bf91abd69c9194d94a8f180d558b7217c39c"
+        }
+      }
+    },
+    {
+      "artifact": "work/security-repair-01d-pr-review/verified-probes-tmp/test_financial_apply_validates0/pr-review-observation.json",
+      "facts": {
+        "run_enterprise": "synthetic-enterprise",
+        "claim_enterprise_alias": "synthetic-enterprise",
+        "actual_canonical_target": "other-enterprise",
+        "target_workspace": "other-workspace",
+        "target_acl_denied": true,
+        "operation_denied": false,
+        "foreign_enterprise_evidence_written": true,
+        "foreign_enterprise_model_changed": true,
+        "protected_store_unchanged": false
+      }
+    },
+    {
+      "artifact": "work/security-repair-01d-pr-review/verified-probes-tmp/test_direct_candidate_deletion0/pr-review-observation.json",
+      "facts": {
+        "denied": false,
+        "revoked_session_resolves": false,
+        "candidate_data_preserved": false,
+        "package_preserved": false
+      }
+    },
+    {
+      "artifact": "work/security-repair-01d-pr-review/verified-probes-tmp/test_completed_promotion_canno0/pr-review-observation.json",
+      "facts": {
+        "promotion_succeeded": true,
+        "canonical_mutation_count": 1,
+        "deletion_denied": false,
+        "source_archive_preserved": false,
+        "package_preserved": false
+      }
+    },
+    {
+      "artifact": "work/security-repair-01d-pr-review/verified-probes-tmp/test_candidate_delete_intersec0/pr-review-observation.json",
+      "facts": {
+        "boundary": "denied-resource-acl",
+        "denied": false,
+        "staged_data_preserved": false,
+        "protected_store_unchanged": false
+      }
+    }
+  ],
+  "dependency": {
+    "url": "https://github.com/rdidale-jpg/CIOS/pull/539",
+    "number": 539,
+    "state": "open",
+    "merged": false,
+    "draft": true,
+    "base": "main",
+    "base_sha": "dc9203e6880f8722e821d39cf53b689732edb0e7",
+    "head": "codex/flora-security-repair-01a",
+    "head_sha": "83aee1aaf5a49b36d8c5e397d75b99624422fac3",
+    "title": "Security Repair 01A: trust boundary hardening"
+  },
+  "evidence_method": "Reparsed retained raw JUnit, file hashes, SQLite audit chains and records. No broad suite rerun; seven distinct new synthetic probes executed.",
+  "new_production_changes": []
+}
