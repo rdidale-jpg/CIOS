@@ -247,7 +247,7 @@ def enterprise_page(slug, headers=None, insights=False):
     nav = f"""<nav class='ex-subnav' aria-label='Enterprise exploration'>
 <a href='{base}' {'aria-current=page' if not insights else ''}>Overview & landscape</a>
 <a href='{base}/insights' {'aria-current=page' if insights else ''}>Strategic insights</a>
-<a href='/flora/banking/{bank.slug}/evidence'>Sources & evidence</a>
+<a href='{base}/opportunities'>Opportunity landscape</a><a href='/flora/sales/pipeline'>Workspace pipeline</a><a href='/flora/banking/{bank.slug}/evidence'>Sources & evidence</a>
 <a href='/digital-twins'>Governed Canvas (requires access)</a>
 </nav>"""
     hero = f"""<section class='ex-hero' id='explorer-content'>
@@ -349,7 +349,7 @@ def _insights(bank):
         rows = ''.join(f'<dt>{label}</dt><dd>{e(value)}</dd>' for label,value in fields)
         cards.append(f"""<article class='ex-card ex-insight' id='{e(opportunity.id)}'>
 <span class='ex-tag hypothesis'>Strategic hypothesis · not a qualified opportunity</span>
-<h2>{e(opportunity.title)}</h2>
+<h2>{e(opportunity.title)}</h2><p><a href='{ROOT}/{bank.slug}/opportunities/{opportunity.id}'>Develop this commercial hypothesis →</a></p>
 <dl>{rows}</dl>
 <div class='ex-evidence'>
 <strong>Evidence &amp; confidence</strong>

@@ -63,6 +63,11 @@ def public_route_catalog():
                 '/market-reaction':'market_reaction_page','/analyst-history':'analyst_history_page',
                 '/event-timeline':'enterprise_event_timeline_page','/research-backlog':'research_backlog_page'}
     for slug, bank in BANKS.items():
+        add((f'/flora/banking/explorer/{slug}/opportunities',), 'discovery_page',
+            'Existing public bank scenario hypotheses; no private pipeline records', ('theme',))
+        for source in bank.opportunities:
+            add((f'/flora/banking/explorer/{slug}/opportunities/{source.id}',), 'opportunity_page',
+                'Exact public hypothesis belonging to this bank; private capture requires verified authority')
         add((f'/flora/banking/explorer/{slug}', f'/flora/banking/explorer/{slug}/insights'),
             'enterprise_page', 'Exact public BANKS fixture; no private Canvas or canonical Evidence resolution')
         for suffix, handler in suffixes.items():

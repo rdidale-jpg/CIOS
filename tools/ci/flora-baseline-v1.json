@@ -4371,6 +4371,90 @@
             ]
           ]
         },
+        "sales_pipeline": {
+          "cases": {
+            "tests/test_flora_sales_pipeline.py::test_active_pursuit_requires_new_confirmation": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_audit_failure_rolls_back_record_and_history": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_audit_tracks_workspace_actor_and_record_digest": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_cannot_remove_qualification_support_from_active_record": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_capture_defaults_provenance_and_persistence": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_closure_requires_outcome_evidence_and_is_excluded_from_open_totals": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_create_manual_hypothesis_and_edit_activity": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_display_text_is_escaped_and_missing_values_visible": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_existing_enterprise_acl_is_still_effective": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_http_capture_edit_qualification_pipeline_journey": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_http_csrf_anonymous_and_scope_override_rejected": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_http_discovery_has_distinct_enterprise_landscapes_and_evidence": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_identity_and_source_scope_cannot_be_overridden": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_known_and_estimated_amounts_currency_and_unknown_totals": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_missing_capability_denies_reads_and_writes": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_money_inputs_reject_fabricated_or_unreferenced_values": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_notes_without_supporting_references_cannot_qualify": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_pipeline_filters_and_priority": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_qualification_readiness_does_not_auto_promote": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_qualified_requires_complete_supported_inputs_review_and_confirmation": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_repeated_capture_is_idempotent": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_revoked_membership_denies_mutation": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_service_permission_and_workspace_boundaries": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_stale_update_leaves_record_and_history_unchanged": {
+              "status": "passed"
+            },
+            "tests/test_flora_sales_pipeline.py::test_unscoped_persisted_record_cannot_be_read_or_updated": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_sales_pipeline.py"
+            ]
+          ]
+        },
         "security": {
           "cases": {
             "tests/test_flora_security_01d_final_acceptance.py::test_concurrent_actor_profiles_preserve_both_keys_in_shared_file": {

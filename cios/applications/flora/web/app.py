@@ -191,6 +191,38 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_flora_research_page(self.headers))
             elif parsed.path in {"/workspace/reference", "/flora/reference"}:
                 self._html(reference_workspace_page(self.headers, saved=parse_qs(parsed.query).get("saved") == ["1"]), set_cookie=reference_resume_cookie())
+            elif parsed.path.startswith("/flora/sales/"):
+                from cios.applications.flora import sales_views
+                from cios.applications.flora.sales_pipeline import SalesValidationError
+                try:
+                    query = parse_qs(parsed.query, keep_blank_values=True)
+                    if any(len(v) != 1 for v in query.values()):
+                        raise SalesValidationError("Use one value per filter.")
+                    if parsed.path == "/flora/sales/pipeline":
+                        allowed = {"industry", "enterprise", "stage", "owner", "confidence", "value_basis", "currency", "min_value", "view"}
+                        if set(query) - allowed:
+                            raise SalesValidationError("Unsupported pipeline filter.")
+                        filters = {k:v[0] for k,v in query.items() if k != "view"}
+                        self._html(sales_views.pipeline_page(self.headers, filters, query.get("view") == ["board"]))
+                    elif parsed.path == "/flora/sales/new":
+                        self._html(sales_views.new_page(query.get("enterprise", ["lloyds"])[0], self.headers))
+                    else:
+                        self._html(sales_views.record_page(parsed.path.rsplit("/", 1)[1], self.headers))
+                except SalesValidationError as exc:
+                    self._html(sales_views.error_page(parsed.path, str(exc), self.headers), status=422)
+            elif parsed.path.startswith("/flora/banking/explorer/") and "/opportunities" in parsed.path:
+                from cios.applications.flora import sales_views
+                parts = parsed.path.removeprefix("/flora/banking/explorer/").split("/")
+                if len(parts) == 2 and parts[1] == "opportunities":
+                    self._html(*sales_views.discovery_page(parts[0], parse_qs(parsed.query).get("theme", [""])[0], self.headers))
+                elif len(parts) == 3 and parts[1] == "opportunities":
+                    from cios.applications.flora.sales_pipeline import SalesValidationError
+                    try:
+                        self._html(sales_views.opportunity_page(parts[0], parts[2], self.headers))
+                    except SalesValidationError:
+                        self.send_error(404, "Opportunity unavailable")
+                else:
+                    self.send_error(404, "Opportunity unavailable")
             elif parsed.path == "/flora/banking/explorer":
                 from cios.applications.flora.banking_explorer import industry_page
                 self._html(industry_page(self.headers))
@@ -577,6 +609,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         from cios.applications.flora.security_store import SecurityStore
         from cios.applications.flora.access import require_capability
         import sqlite3
+        from cios.applications.flora.sales_pipeline import SalesValidationError
         try:
             if not clean_target(self) or "?" in self.path or not origin_valid(self.headers):
                 raise PermissionError("Request verification failed")
@@ -606,6 +639,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._headers_buffer = []
             # No success response is observable until data and audit commit.
             output.write(pending.getvalue())
+        except SalesValidationError as exc:
+            from cios.applications.flora.sales_views import error_page
+            self.close_connection = True
+            self._html(error_page(self.path, str(exc), self.headers, draft=fields), status=422)
         except (PermissionError, ValueError, UnicodeError):
             self.close_connection = True
             self._html(page('Access unavailable', '<p>Authentication or request verification failed. Sign in again if your session expired.</p>'), status=403)
@@ -628,7 +665,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         length = int(self.headers.get("Content-Length", "0"))
         raw_body = self.rfile.read(length)
         form = {} if "multipart/form-data" in self.headers.get("Content-Type", "") else parse_qs(raw_body.decode("utf-8"), keep_blank_values=True)
-        if self.path == "/pilot-sign-in":
+        if self.path.startswith("/flora/sales/"):
+            from cios.applications.flora.sales_views import submit
+            self._redirect(submit(self.path, form, self.headers))
+        elif self.path == "/pilot-sign-in":
             secret = _one(form, "pilot_secret")
             if validate_secret(secret):
                 # Issue exactly one session.  The value verified for the audit
@@ -848,7 +888,8 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         self.send_response(status)
         self.send_header("Content-Type", content_type)
         self.send_header("Cache-Control", "no-store")
-        self.send_header("Referrer-Policy", "no-referrer")
+        # Same-origin form POSTs need a non-null Origin for the existing CSRF boundary.
+        self.send_header("Referrer-Policy", "same-origin")
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("Content-Length", str(len(body)))
         if set_cookie:
