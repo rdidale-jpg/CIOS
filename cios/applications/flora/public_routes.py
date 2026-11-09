@@ -56,12 +56,15 @@ def public_route_catalog():
         add(('/flora/banking'+suffix,), handler, 'Repository banking_portfolio constants and public source scenarios')
     add(('/flora/banking/heatmap',), 'heatmap_page', 'Public source scenario view labels only', ('mode',))
     add(('/flora/banking/heatmap/detail',), 'heatmap_detail_page', 'Public bank/theme scenario lookup only', ('mode','theme','bank'))
+    add(('/flora/banking/explorer',), 'industry_page', 'Repository BANKS public-source fixtures; conceptual ecosystem only')
     from .banking_portfolio import BANKS
     suffixes = {'':'banking_bank_page','/briefing':'banking_bank_page','/evidence':'banking_evidence_page',
                 '/financial-performance':'financial_history_page','/market-analyst-view':'market_reaction_page',
                 '/market-reaction':'market_reaction_page','/analyst-history':'analyst_history_page',
                 '/event-timeline':'enterprise_event_timeline_page','/research-backlog':'research_backlog_page'}
     for slug, bank in BANKS.items():
+        add((f'/flora/banking/explorer/{slug}', f'/flora/banking/explorer/{slug}/insights'),
+            'enterprise_page', 'Exact public BANKS fixture; no private Canvas or canonical Evidence resolution')
         for suffix, handler in suffixes.items():
             add((f'/flora/banking/{slug}{suffix}',), handler, 'Exact public bank slug in repository BANKS; no private Enterprise lookup')
         for opportunity in bank.opportunities:

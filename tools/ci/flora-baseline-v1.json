@@ -2214,6 +2214,51 @@
         "tests/test_flora_security_workspace_boundary.py"
       ],
       "suites": {
+        "banking_explorer": {
+          "cases": {
+            "tests/test_flora_banking_explorer.py::test_canvas_still_requires_verified_authority": {
+              "status": "passed"
+            },
+            "tests/test_flora_banking_explorer.py::test_empty_insights_and_unknown_enterprise": {
+              "status": "passed"
+            },
+            "tests/test_flora_banking_explorer.py::test_enterprise_insight_evidence_drilldown": {
+              "status": "passed"
+            },
+            "tests/test_flora_banking_explorer.py::test_financial_dates_scope_and_source_attribution": {
+              "status": "passed"
+            },
+            "tests/test_flora_banking_explorer.py::test_fixture_text_is_escaped": {
+              "status": "passed"
+            },
+            "tests/test_flora_banking_explorer.py::test_home_and_industry_entry_are_discoverable": {
+              "status": "passed"
+            },
+            "tests/test_flora_banking_explorer.py::test_industry_selects_every_supported_enterprise": {
+              "status": "passed"
+            },
+            "tests/test_flora_banking_explorer.py::test_landscape_nodes_have_resolvable_destinations": {
+              "status": "passed"
+            },
+            "tests/test_flora_banking_explorer.py::test_public_exploration_does_not_mutate_protected_storage": {
+              "status": "passed"
+            },
+            "tests/test_flora_banking_explorer.py::test_public_scope_is_finite_and_query_cannot_select_private_records": {
+              "status": "passed"
+            },
+            "tests/test_flora_banking_explorer.py::test_responsive_and_keyboard_navigation_contract": {
+              "status": "passed"
+            },
+            "tests/test_flora_banking_explorer.py::test_unknowns_and_scenarios_do_not_become_verified_claims": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_banking_explorer.py"
+            ]
+          ]
+        },
         "domain": {
           "cases": {
             "tests/test_enterprise_intelligence_reasoning.py::test_canvas_diagnostics_configured_provider_ready_without_secret": {

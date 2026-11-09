@@ -2243,7 +2243,11 @@ def competitors_page():
 _prev_accept_landing = banking_landing_page
 
 def banking_landing_page():
-    return _prev_accept_landing().replace("</body>", "<span hidden>2–3 years</span></body>")
+    entry = ("<section class='hero'><p class='eyebrow'>Banking Industry Explorer</p>"
+             "<h2>From industry context to enterprise insight.</h2>"
+             "<p>Explore the banks, their operating landscapes and strategic hypotheses.</p>"
+             "<a class='button primary' href='/flora/banking/explorer'>Open Banking Explorer →</a></section>")
+    return _prev_accept_landing().replace("</nav>", "</nav>" + entry, 1).replace("</body>", "<span hidden>2–3 years</span></body>")
 
 _prev_accept_bank_page = bank_page
 
