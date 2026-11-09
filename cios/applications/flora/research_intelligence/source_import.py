@@ -7,7 +7,9 @@ import re
 from urllib.parse import urlsplit
 
 PUBLISHERS = {'www.lloydsbankinggroup.com', 'www.lloydsbank.com',
-              'www.bankofengland.co.uk', 'www.fca.org.uk', 'www.gov.uk'}
+              'www.bankofengland.co.uk', 'www.fca.org.uk', 'www.gov.uk',
+              'www.easyjet.com', 'corporate.easyjet.com', 's203.q4cdn.com',
+              'www.iata.org', 'www.caa.co.uk', 'www.easa.europa.eu', 'www.eurocontrol.int'}
 LIMIT = 16 * 1024 * 1024
 
 

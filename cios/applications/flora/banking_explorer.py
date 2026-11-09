@@ -95,11 +95,11 @@ STYLE = """
 """
 
 
-def _page(title, body, headers=None):
+def _page(title, body, headers=None, *, notice=None):
     # Reuse the product shell and its verified account presentation.
     from .web.app import _flora_v2_page, _account_context_html
     from .access import blueprint_upload_authorisation
-    notice = (f"Curated public-source pilot · snapshot {GENERATED_DATE}. Source dates vary. "
+    notice = notice or (f"Curated public-source pilot · snapshot {GENERATED_DATE}. Source dates vary. "
               "Not accepted canonical intelligence. Figures are historical fixture values; "
               "interpretations and opportunities require validation, not confirmed buying intent.")
     return _flora_v2_page(title, 'intelligence', f"<style>{STYLE}</style><div class='explorer'>"

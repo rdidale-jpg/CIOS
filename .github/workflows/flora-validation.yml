@@ -7,6 +7,7 @@ on:
     paths:
       - 'cios/applications/flora/**'
       - 'enterprise-knowledge/banking/**'
+      - 'enterprise-knowledge/aviation/**'
       - 'tests/**'
       - 'tools/ci/**'
       - 'tools/import_flora_primary_source.py'
@@ -20,6 +21,7 @@ on:
     paths:
       - 'cios/applications/flora/**'
       - 'enterprise-knowledge/banking/**'
+      - 'enterprise-knowledge/aviation/**'
       - 'tests/**'
       - 'tools/ci/**'
       - 'tools/import_flora_primary_source.py'

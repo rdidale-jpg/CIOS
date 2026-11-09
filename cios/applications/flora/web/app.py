@@ -191,6 +191,16 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_flora_research_page(self.headers))
             elif parsed.path in {"/workspace/reference", "/flora/reference"}:
                 self._html(reference_workspace_page(self.headers, saved=parse_qs(parsed.query).get("saved") == ["1"]), set_cookie=reference_resume_cookie())
+            elif parsed.path == "/flora/industries":
+                from cios.applications.flora.research_intelligence.sector_views import catalogue
+                self._html(catalogue(self.headers))
+            elif parsed.path == "/flora/aviation/research" or parsed.path.startswith("/flora/aviation/research/"):
+                from cios.applications.flora.research_intelligence.sector_views import render
+                try:
+                    self._html(render('aviation',parsed.path[len('/flora/aviation/research'):],
+                                      parse_qs(parsed.query).get('lens',['pestle'])[0],self.headers))
+                except ValueError:
+                    self.send_error(404, "Research view unavailable")
             elif parsed.path == "/flora/banking/research" or parsed.path.startswith("/flora/banking/research/"):
                 from cios.applications.flora.research_intelligence import views as research_views
                 try:
@@ -1117,6 +1127,7 @@ def _flora_home_page(headers=None, question_error: str = "") -> str:
       {context_banner}
       <section aria-labelledby='map-title'><div class='section-heading'><div><p class='eyebrow'>Flora Map</p><h2 id='map-title'>Enterprise Intelligence Map</h2></div><p>Choose a domain to inspect its current intelligence and next decision.</p></div><div class='estate-grid'>
         {domain('/flora/banking/explorer','Banking Explorer','Industry → Enterprise → Visual Landscape → Strategic Insights','Explore five curated bank profiles, their operating context and evidence-labelled strategic hypotheses.','Explore Banking')}
+        {domain('/flora/industries','Industry Twins','Banking + Aviation','Explore industry forces, enterprise operating landscapes and evidence-backed commercial research.','Explore Industry Twins')}
         {domain('/intelligence?tab=industries','Industries',industry_metric,'Governed import lifecycle with existing account visibility; partial release is not complete acceptance.','Open industries')}
         {domain('/intelligence?tab=enterprises','Enterprises','Source context and existing Twin views','No estate-wide owner-accepted Enterprise Model count is assessed here.','Open enterprise intelligence')}
         {domain('/opportunities','Opportunities',f"{len(opportunities)} opportunity hypotheses",f"{horizon_counts['horizon_1']} H1 · {horizon_counts['horizon_2']} H2 · {horizon_counts['horizon_3']} H3",'Open opportunity pipeline')}

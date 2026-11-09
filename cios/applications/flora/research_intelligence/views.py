@@ -13,11 +13,12 @@ STYLE="""
 
 
 def href(data, identifier):
+    ROOT=data.get('route_root',globals()['ROOT'])
     if any(r['id']==identifier for r in data['claims']):return ROOT+'/evidence/'+identifier
     if any(r['id']==identifier for r in data['candidates']):return ROOT+'/candidates/'+identifier
     if any(r['id']==identifier for r in data['sources']):return ROOT+'/sources#'+identifier
     if any(r['id']==identifier for r in data['gaps']):return ROOT+'/gaps#'+identifier
-    if identifier==data['enterprise_twin_id']:return ROOT+'/lloyds'
+    if identifier==data['enterprise_twin_id']:return ROOT+'/'+data.get('enterprise_slug','lloyds')
     if identifier==data['industry_twin_id']:return ROOT
     return ROOT+'/nodes/'+identifier
 
@@ -26,7 +27,7 @@ def label(data, identifier):
     for key in ('frameworks','capabilities','suppliers','programmes','candidates','gaps','sources'):
         for item in data[key]:
             if item['id']==identifier:return item.get('title',identifier)
-    return {'BK-ENT-001':data['enterprise_name'],'BK-IND-002':data['industry_name']}.get(identifier,identifier)
+    return {data['enterprise_twin_id']:data['enterprise_name'],data['industry_twin_id']:data['industry_name']}.get(identifier,identifier)
 
 
 def links(data, ids):
@@ -36,13 +37,14 @@ def links(data, ids):
 def shell(title, body, headers=None, data=None):
     data=data or load_assessment();state=freshness(data)
     nav=[(ROOT,'Industry lenses'),(ROOT+'/lloyds','Lloyds deep research'),(ROOT+'/opportunities','Research priorities'),(ROOT+'/sources','Source register'),(ROOT+'/gaps','Research gaps')]
-    controls="<nav class='research-nav' aria-label='Research navigation'>"+''.join(f"<a href='{path}'>{text}</a>" for path,text in nav)+'</nav>'
+    controls="<p><a href='/flora/industries'>← All Industry Twins</a></p><nav class='research-nav' aria-label='Research navigation'>"+''.join(f"<a href='{path}'>{text}</a>" for path,text in nav)+'</nav>'
     warning=f"<aside class='research-warning'><strong>Primary-source re-verification {'pending' if state['primary_verified']==0 else 'partially complete'}.</strong> {state['primary_verified']} reviewed primary-source records ({state['reviewed_excerpts']} short extracts; full originals not archived for extracts). {state['primary_total']-state['primary_verified']} historical citations still require verification. Historical research effective {data['upstream_research_effective_date']}; assessment {data['assessed_at']}. Unknown publication dates stay Unknown. Public disclosures support research, not customer-confirmed demand or accepted canonical Evidence.</aside>"
     crumb=f"<nav class='ex-breadcrumb' aria-label='Breadcrumb'><a href='/flora/banking/explorer'>Banking Explorer</a> / <a href='{ROOT}'>Industry Twin research</a> / <span>{e(title)}</span></nav>"
     return _page(title,f"<style>{STYLE}</style><div class='research'>{crumb}{controls}{warning}{body}</div>",headers)
 
 
 def claims_html(data, ids):
+    ROOT=data.get('route_root',globals()['ROOT'])
     if not ids:return "<p class='ex-empty'>No direct supporting claim is recorded here. Inspect linked research and explicit gaps; absence is not evidence of no need.</p>"
     claims=_index(data['claims']);cards=[]
     for identifier in dict.fromkeys(ids):
