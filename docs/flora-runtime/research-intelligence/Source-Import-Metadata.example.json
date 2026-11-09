@@ -1,0 +1,20 @@
+{
+  "title": "REPLACE: exact document title and version",
+  "publisher": "Lloyds Banking Group",
+  "url": "https://www.lloydsbankinggroup.com/REPLACE-WITH-OFFICIAL-DOCUMENT",
+  "retrieval_url": "https://www.lloydsbankinggroup.com/REPLACE-WITH-RESOLVED-OFFICIAL-URL",
+  "retrieved_at": "REPLACE: actual UTC timestamp, e.g. ISO 8601 ending +00:00",
+  "publication_date": null,
+  "publication_date_evidence": null,
+  "reporting_period": "REPLACE: exact reporting period, separate from publication/retrieval",
+  "reviewed_by": "REPLACE: actual provenance reviewer",
+  "review_notes": "REPLACE: how publisher provenance was verified; extraction/version limitations",
+  "provenance_verified": false,
+  "expected_sha256": "REPLACE: SHA-256 of the verified downloaded original file",
+  "reviewed_quotes": [
+    {
+      "quote": "REPLACE: exact passage supporting the proposed claim",
+      "locator": "REPLACE: PDF page, table or HTML section"
+    }
+  ]
+}

@@ -2,7 +2,9 @@
 
 Assessment: 9 November 2026. Base: `3e703ae99ccfdff46aa1675ae0430f86a9cd52e9`.
 
-## Delivery status and source limitation
+## Original increment status and source limitation
+
+**Subsequent update:** [Lloyds primary-source enrichment](Primary-Enrichment.md) records ten reviewed official-source extracts, appended claims and revised rankings. The counts and limitations below describe the preserved original provisional increment, not the current overlay.
 
 The working Banking/Lloyds research experience and reusable assessment model are implemented. **Current primary-source research is incomplete.** Workspace requests to the Lloyds investor downloads and Bank of England policy pages returned proxy HTTP 403. No new primary document was retrieved. All 12 source records remain `citation_only`; publication dates are unknown. Existing repository research, effective 17 July 2026 (115 days old at assessment), supplies 21 precisely quoted claims. Its historical “Validated/High” frontmatter is not treated as verification of the underlying publisher content.
 

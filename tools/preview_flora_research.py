@@ -29,11 +29,14 @@ def main():
         page.get_by_role('heading',name='Lloyds.').wait_for()
         page.screenshot(path=str(args.output/'lloyds-deep-research.png'),full_page=True)
         page.get_by_role('link',name='Research priorities',exact=True).click()
-        assert page.locator('.research-rank').count()==8
+        assert page.locator('.research-rank').count()==9
         page.locator('a[href$="/candidates/RCO-LBG-001"]').first.click()
         page.get_by_role('link',name='Inspect quotation, dates & provenance',exact=False).first.click()
         page.get_by_role('heading',name='Inspect the evidence boundary.',exact=True).wait_for()
         assert 'not a newly retrieved quotation' in page.locator('main').inner_text()
+        page.goto(base+'/flora/banking/research/evidence/LBG-Q326-CURVE')
+        assert 'Reviewed excerpt from the official publisher' in page.locator('main').inner_text()
+        assert 'full original PDF/HTML bytes were not downloaded' in page.locator('main').inner_text()
         for lens in ['pestle','porter','value-chain']:
             page.goto(base+'/flora/banking/research?lens='+lens)
             assert page.locator('h3').count()>=5

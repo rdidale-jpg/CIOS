@@ -6,7 +6,7 @@
   "assessed_at": "2026-11-09",
   "upstream_research_effective_date": "2026-07-17",
   "authority": "candidate_intelligence",
-  "research_status": "PRIMARY_VERIFICATION_BLOCKED",
+  "research_status": "PRIMARY_EXCERPTS_REVIEWED_COMMERCIAL_VALIDATION_OPEN",
   "network_probes": [
     {
       "url": "https://www.lloydsbankinggroup.com/investors/financial-downloads.html",
@@ -169,6 +169,345 @@
       "primary_content_sha256": null,
       "verification": "citation_only",
       "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+    },
+    {
+      "id": "PR-LBG-Q326",
+      "title": "Lloyds Q3 2026 statement",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-ims.pdf",
+      "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+      "publication_date": "2026-10-29",
+      "publication_date_evidence": "Official investor-news calendar: https://www.lloydsbankinggroup.com/investors/investor-news.html; 29 October 2026 statement entry",
+      "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "46cdb18eb695dafe256090b21c13a118078628ec1b361cc14ee03baf8cce66d9",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-Q326.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn866377view0",
+      "reviewed_by": "Codex source-content review; no independent human review",
+      "review_notes": "Official document content inspected through the web tool. Only short reviewed excerpts retained; original PDF/HTML bytes were not downloaded. ",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+      "excerpts": [
+        {
+          "quote": "Statutory profit before tax of £6.6 billion",
+          "locator": "PDF page 2 / printed page 1, results summary"
+        },
+        {
+          "quote": "Customer deposits of £502.8 billion",
+          "locator": "PDF page 2 / printed page 1, deposits paragraph"
+        },
+        {
+          "quote": "the completed acquisition of Curve",
+          "locator": "PDF page 2 / printed page 1, CET1 paragraph"
+        },
+        {
+          "quote": "plateauing investment",
+          "locator": "PDF page 2 / printed page 1, operating-cost commentary"
+        }
+      ]
+    },
+    {
+      "id": "PR-LBG-AR25",
+      "title": "Lloyds FY2025 report",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2025/q4/2025-lbg-annual-report.pdf",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2025/q4/2025-lbg-annual-report.pdf",
+      "reporting_period": "Year ended 31 December 2025; stated 2026 priorities",
+      "publication_date": "2026-02-13",
+      "publication_date_evidence": "Official publication notice dated 13 February 2026: https://www.lloydsbankinggroup.com/assets/pdfs/investors/investor-news/2026/2026feb13-lbg-annual-report-published.pdf",
+      "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "f655aec6127e46675946e9da094556b896932100dd3a88239121d16da7d10b3f",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-AR25.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn827335view3 / turn665592view2 / turn665592view3",
+      "reviewed_by": "Codex source-content review; no independent human review",
+      "review_notes": "Official document content inspected through the web tool. Only short reviewed excerpts retained; original PDF/HTML bytes were not downloaded. ",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+      "excerpts": [
+        {
+          "quote": "Customer deposits of £496.5 billion",
+          "locator": "Report opening financial summary; printed page 1"
+        },
+        {
+          "quote": "over 30,000 Copilot licences distributed",
+          "locator": "Printed page 17, Change / 2025 progress"
+        },
+        {
+          "quote": "Continue to accelerate legacy app decommissioning and cloud migration",
+          "locator": "Printed page 17, Change / 2026 priorities"
+        }
+      ]
+    },
+    {
+      "id": "PR-LBG-A2030",
+      "title": "Lloyds Accelerate 2030 priorities",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+      "reporting_period": "Strategy for 2027–2030",
+      "publication_date": null,
+      "publication_date_evidence": null,
+      "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "94e38700408b70ce3e659ca08f5de57b5491795aeda3c9c05cef9061000788f9",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-A2030.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn665592view1",
+      "reviewed_by": "Codex source-content review; no independent human review",
+      "review_notes": "Official document content inspected through the web tool. Only short reviewed excerpts retained; original PDF/HTML bytes were not downloaded. Undated maintained strategy page: observation date is known, original publication date remains Unknown. Targets are forward-looking, not achieved outcomes.",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. Undated maintained strategy page: observation date is known, original publication date remains Unknown. Targets are forward-looking, not achieved outcomes.",
+      "excerpts": [
+        {
+          "quote": "Modernised core platforms",
+          "locator": "Strategy page, Simplify priorities"
+        },
+        {
+          "quote": "Data as an AI enabler",
+          "locator": "Strategy page, Simplify priorities"
+        },
+        {
+          "quote": "c.£2 billion gross cost savings",
+          "locator": "Strategy page, Simplify value"
+        },
+        {
+          "quote": "<45% cost:income ratio in 2030",
+          "locator": "Strategy page, 2027–2030 commitments"
+        },
+        {
+          "quote": "New wallet and payments products",
+          "locator": "Strategy page, diversification priorities"
+        }
+      ]
+    },
+    {
+      "id": "PR-LBG-INVEST30",
+      "title": "Lloyds strategy investment discipline",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/assets/pdfs/who-we-are/accelerate-2030/2026-lbg-hy-strategy-presentation.pdf",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/assets/pdfs/who-we-are/accelerate-2030/2026-lbg-hy-strategy-presentation.pdf",
+      "reporting_period": "2027–2030 investment planning",
+      "publication_date": "2026-07-30",
+      "publication_date_evidence": "Official investor-news calendar records half-year results and strategy update on 30 July 2026; linked from strategy page.",
+      "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "e839163e79ff3194c7eb9057b412a0e627175361d6cb940a4792761e4c608741",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-INVEST30.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn497753view5",
+      "reviewed_by": "Codex source-content review; no independent human review",
+      "review_notes": "Official document content inspected through the web tool. Only short reviewed excerpts retained; original PDF/HTML bytes were not downloaded. ",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+      "excerpts": [
+        {
+          "quote": "2027 pick -up;",
+          "locator": "PDF page 30 / presentation slide 50, investment chart"
+        },
+        {
+          "quote": "stability",
+          "locator": "PDF page 30 / presentation slide 50, investment chart"
+        },
+        {
+          "quote": "thereafter",
+          "locator": "PDF page 30 / presentation slide 50, investment chart"
+        },
+        {
+          "quote": "Scaling investment commensurate with opportunity",
+          "locator": "PDF page 30 / presentation slide 50, execution principles"
+        },
+        {
+          "quote": "Disciplined return hurdles",
+          "locator": "PDF page 30 / presentation slide 50, execution principles"
+        }
+      ]
+    },
+    {
+      "id": "PR-LBG-ENVOY",
+      "title": "Lloyds Envoy announcement",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+      "reporting_period": "Announced platform capability; not current effectiveness evidence",
+      "publication_date": "2026-05-01",
+      "publication_date_evidence": "Date stated on official page/document",
+      "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "7c33e25cbe44db91eb174d7b6f305ef101f2b593047f05e2fdb1b9071825294a",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-ENVOY.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn497753view0",
+      "reviewed_by": "Codex source-content review; no independent human review",
+      "review_notes": "Official document content inspected through the web tool. Only short reviewed excerpts retained; original PDF/HTML bytes were not downloaded. HTML date is 1 May 2026; a linked PDF/search result carries 28 April. Retain the HTML date for this HTML source; do not collapse the versions.",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. HTML date is 1 May 2026; a linked PDF/search result carries 28 April. Retain the HTML date for this HTML source; do not collapse the versions.",
+      "excerpts": [
+        {
+          "quote": "Built with Google Cloud",
+          "locator": "Official HTML lines 609–613, platform description"
+        },
+        {
+          "quote": "strong controls, monitoring and oversight",
+          "locator": "Official HTML lines 606–607, announcement highlights"
+        },
+        {
+          "quote": "complete audit trail of activity",
+          "locator": "Official HTML line 622, live-agent monitoring"
+        }
+      ]
+    },
+    {
+      "id": "PR-LBG-BRAND26",
+      "title": "Lloyds Halifax change announcement",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/halifax-rebrand-to-lloyds.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/halifax-rebrand-to-lloyds.html",
+      "reporting_period": "Announced July 2026; branch changes planned through 2027",
+      "publication_date": "2026-07-01",
+      "publication_date_evidence": "Date stated on official page/document",
+      "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "d2a4fff2a18bf79db215f85c79c9644a91b1bc7e1f5775f40b8ad2ecdf6a4158",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-BRAND26.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn497753view2",
+      "reviewed_by": "Codex source-content review; no independent human review",
+      "review_notes": "Official document content inspected through the web tool. Only short reviewed excerpts retained; original PDF/HTML bytes were not downloaded. ",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+      "excerpts": [
+        {
+          "quote": "Throughout 2027, Halifax branches will either rebrand to Lloyds",
+          "locator": "Official HTML line 619, branch timetable"
+        },
+        {
+          "quote": "there are no role reductions as part of today’s announcement",
+          "locator": "Official HTML line 619, workforce boundary"
+        }
+      ]
+    },
+    {
+      "id": "PR-LBG-AI26",
+      "title": "Lloyds AI performance and plans",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/artificial-intelligence.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/artificial-intelligence.html",
+      "reporting_period": "Reported FY2025 value / expected 2026 value",
+      "publication_date": null,
+      "publication_date_evidence": null,
+      "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "a600022c6e585c6fbf257e75c0982b055de92c477dedaf4d77428747de360e77",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-AI26.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn497753view1",
+      "reviewed_by": "Codex source-content review; no independent human review",
+      "review_notes": "Official document content inspected through the web tool. Only short reviewed excerpts retained; original PDF/HTML bytes were not downloaded. Maintained page has undated material and older embedded transcripts. Use the main disclosure, distinguish reported value from forecasts, and do not infer achieved 2026 value.",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. Maintained page has undated material and older embedded transcripts. Use the main disclosure, distinguish reported value from forecasts, and do not infer achieved 2026 value.",
+      "excerpts": [
+        {
+          "quote": "around £50 million of value in 2025",
+          "locator": "Official HTML line 607, reported AI contribution"
+        },
+        {
+          "quote": "over £100 million from next‑generation AI in 2026",
+          "locator": "Official HTML line 607, management expectation"
+        }
+      ]
+    },
+    {
+      "id": "PR-BOE-NOV26",
+      "title": "Bank of England November rate decision",
+      "publisher": "Bank of England",
+      "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+      "retrieval_url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+      "reporting_period": "Meeting ending 4 November 2026",
+      "publication_date": "2026-11-05",
+      "publication_date_evidence": "Date stated on official page/document",
+      "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "2c87189b2a1716249a677409f82aa2ae760170ae98b9cdc77a5298a706b53f23",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-BOE-NOV26.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn971384view3",
+      "reviewed_by": "Codex source-content review; no independent human review",
+      "review_notes": "Official document content inspected through the web tool. Only short reviewed excerpts retained; original PDF/HTML bytes were not downloaded. ",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+      "excerpts": [
+        {
+          "quote": "voted by a majority of 8–1 to increase Bank Rate by 0.25 percentage points, to 4%.",
+          "locator": "Official page line 11, decision"
+        }
+      ]
+    },
+    {
+      "id": "PR-PRA-PS726",
+      "title": "PRA incident and third-party policy",
+      "publisher": "PRA / Bank of England",
+      "url": "https://www.bankofengland.co.uk/prudential-regulation/publication/2026/march/operational-incident-and-third-party-reporting-policy-statement",
+      "retrieval_url": "https://www.bankofengland.co.uk/prudential-regulation/publication/2026/march/operational-incident-and-third-party-reporting-policy-statement",
+      "reporting_period": "Final policy; implementation 18 March 2027",
+      "publication_date": "2026-03-18",
+      "publication_date_evidence": "Date stated on official page/document",
+      "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "4d4528168b4b17dce563c68b38fe7a3f73f006479f9303189112193794d71ab3",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-PRA-PS726.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn971384view2 / turn497753view3",
+      "reviewed_by": "Codex source-content review; no independent human review",
+      "review_notes": "Official document content inspected through the web tool. Only short reviewed excerpts retained; original PDF/HTML bytes were not downloaded. ",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+      "excerpts": [
+        {
+          "quote": "The implementation date for final rules and policy materials reflecting policy changes set out in this PS is 18 March 2027.",
+          "locator": "Official policy paragraph 3.6"
+        }
+      ]
+    },
+    {
+      "id": "PR-FCA-RES26",
+      "title": "FCA resilience and reporting update",
+      "publisher": "FCA",
+      "url": "https://www.fca.org.uk/firms/operational-resilience",
+      "retrieval_url": "https://www.fca.org.uk/firms/operational-resilience",
+      "reporting_period": "Page last updated 15 September 2026; March 2027 reporting commencement",
+      "publication_date": "2017-05-13",
+      "publication_date_evidence": "Date stated on official page/document",
+      "retrieved_at": "2026-11-09T19:35:29.412049+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "1f74cd0a83a2ed752558b385265bb42baa0eb83924adbd35ca93fd85ec703182",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-FCA-RES26.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn971384view4 / turn871697view3",
+      "reviewed_by": "Codex source-content review; no independent human review",
+      "review_notes": "Official document content inspected through the web tool. Only short reviewed excerpts retained; original PDF/HTML bytes were not downloaded. First publication 13 May 2017, last update 15 September 2026. Original publication date is not replaced with update or retrieval date.",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. First publication 13 May 2017, last update 15 September 2026. Original publication date is not replaced with update or retrieval date.",
+      "excerpts": [
+        {
+          "quote": "Firms have 12 months to prepare ahead of the new requirements coming into force on 18 March 2027.",
+          "locator": "Official HTML line 345, new reporting rules"
+        }
+      ],
+      "updated_at": "2026-09-15"
     }
   ],
   "claims": [
@@ -528,6 +867,409 @@
       "metric_unit": null,
       "supersedes": null,
       "entity_scope": "UK industry context"
+    },
+    {
+      "id": "LBG-Q326-PROFIT",
+      "asset_id": "BK-ENT-001",
+      "statement": "Reported nine-month statutory pretax profit: GBP6.6bn. This is not an investment allocation.",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-Q326": "Statutory profit before tax of £6.6 billion"
+      },
+      "quote_locator": "PDF page 2 / printed page 1, results summary",
+      "metric_value": 6.6,
+      "metric_unit": "GBP billion; nine-month statutory pretax profit"
+    },
+    {
+      "id": "LBG-Q326-DEPOSITS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Group customer deposits at September-end: GBP502.8bn; retain the FY2025 balance as a separate historical observation.",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-Q326": "Customer deposits of £502.8 billion"
+      },
+      "quote_locator": "PDF page 2 / printed page 1, deposits paragraph",
+      "metric_value": 502.8,
+      "metric_unit": "GBP billion; balance at 30 September 2026",
+      "updates": "LBG-DEPOSITS"
+    },
+    {
+      "id": "LBG-Q326-CURVE",
+      "asset_id": "BK-ENT-001",
+      "statement": "The Q3 statement treats the Curve acquisition as completed; integration scope and external procurement remain unproven.",
+      "domain": "programmes",
+      "kind": "reported_fact",
+      "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-Q326": "the completed acquisition of Curve"
+      },
+      "quote_locator": "PDF page 2 / printed page 1, CET1 paragraph",
+      "updates": "LBG-CURVE"
+    },
+    {
+      "id": "LBG-Q326-INVESTMENT",
+      "asset_id": "BK-ENT-001",
+      "statement": "Quarterly commentary describes investment levelling as the current strategic cycle ends. Do not assume an unrestricted new supplier budget.",
+      "domain": "investment",
+      "kind": "reported_fact",
+      "reporting_period": "Nine months ended / balance sheet at 30 September 2026",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-Q326"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-Q326": "plateauing investment"
+      },
+      "quote_locator": "PDF page 2 / printed page 1, operating-cost commentary"
+    },
+    {
+      "id": "LBG-AR25-DEPOSITS",
+      "asset_id": "BK-ENT-001",
+      "statement": "FY2025 deposit balance corroborated at GBP496.5bn; it is not the current-quarter balance.",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "reporting_period": "31 December 2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AR25"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-AR25": "Customer deposits of £496.5 billion"
+      },
+      "quote_locator": "Report opening financial summary; printed page 1",
+      "metric_value": 496.5,
+      "metric_unit": "GBP billion; year-end balance",
+      "corroborates": "LBG-DEPOSITS"
+    },
+    {
+      "id": "LBG-AR25-COPILOT",
+      "asset_id": "BK-ENT-001",
+      "statement": "FY2025 deployment exceeded 30,000 Copilot licences. Usage and realised net benefit are not established by this count.",
+      "domain": "technology",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AR25"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-AR25": "over 30,000 Copilot licences distributed"
+      },
+      "quote_locator": "Printed page 17, Change / 2025 progress",
+      "corroborates": "LBG-COPILOT"
+    },
+    {
+      "id": "LBG-AR25-MIGRATION",
+      "asset_id": "BK-ENT-001",
+      "statement": "The annual report names faster application retirement and cloud migration among 2026 priorities.",
+      "domain": "programmes",
+      "kind": "management_commitment",
+      "reporting_period": "2026 management priorities",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AR25"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-AR25": "Continue to accelerate legacy app decommissioning and cloud migration"
+      },
+      "quote_locator": "Printed page 17, Change / 2026 priorities",
+      "corroborates": "LBG-MIGRATION"
+    },
+    {
+      "id": "LBG-A2030-PLATFORMS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Accelerate 2030 explicitly prioritises core-platform renewal.",
+      "domain": "strategy",
+      "kind": "management_commitment",
+      "reporting_period": "Strategy for 2027–2030",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-A2030": "Modernised core platforms"
+      },
+      "quote_locator": "Strategy page, Simplify priorities"
+    },
+    {
+      "id": "LBG-A2030-DATA",
+      "asset_id": "BK-ENT-001",
+      "statement": "The strategy makes enterprise data enablement a stated AI priority.",
+      "domain": "strategy",
+      "kind": "management_commitment",
+      "reporting_period": "Strategy for 2027–2030",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-A2030": "Data as an AI enabler"
+      },
+      "quote_locator": "Strategy page, Simplify priorities"
+    },
+    {
+      "id": "LBG-A2030-SAVINGS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Management projects about GBP2bn gross savings for the strategy; aggregation/run-rate definition needs validation. This is not supplier spend.",
+      "domain": "investment",
+      "kind": "management_expectation",
+      "reporting_period": "Strategy for 2027–2030",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-A2030": "c.£2 billion gross cost savings"
+      },
+      "quote_locator": "Strategy page, Simplify value",
+      "metric_value": 2,
+      "metric_unit": "GBP billion; projected gross cost savings, not procurement"
+    },
+    {
+      "id": "LBG-A2030-CIR",
+      "asset_id": "BK-ENT-001",
+      "statement": "The 2030 efficiency ambition is a cost-to-income ratio below 45%; achievement is not assumed.",
+      "domain": "financials",
+      "kind": "management_expectation",
+      "reporting_period": "Strategy for 2027–2030",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-A2030": "<45% cost:income ratio in 2030"
+      },
+      "quote_locator": "Strategy page, 2027–2030 commitments",
+      "metric_value": 45,
+      "metric_unit": "percent; upper-bound management target for 2030"
+    },
+    {
+      "id": "LBG-A2030-WALLET",
+      "asset_id": "BK-ENT-001",
+      "statement": "New wallet/payment propositions are an explicit strategy priority, providing a specific question for post-acquisition integration research.",
+      "domain": "programmes",
+      "kind": "management_commitment",
+      "reporting_period": "Strategy for 2027–2030",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-A2030": "New wallet and payments products"
+      },
+      "quote_locator": "Strategy page, diversification priorities"
+    },
+    {
+      "id": "LBG-A2030-INVESTMENT",
+      "asset_id": "BK-ENT-001",
+      "statement": "The presentation plans a 2027 investment increase followed by stability, subject to opportunity and return discipline; no candidate allocation is disclosed.",
+      "domain": "investment",
+      "kind": "management_expectation",
+      "reporting_period": "2027–2030 investment planning",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-INVEST30"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-INVEST30": "Scaling investment commensurate with opportunity"
+      },
+      "quote_locator": "PDF page 30 / presentation slide 50, execution principles"
+    },
+    {
+      "id": "LBG-ENVOY-GOOGLE",
+      "asset_id": "BK-ENT-001",
+      "statement": "The bank identifies Google Cloud as an Envoy platform collaborator. Contract value, exclusivity and renewal are not disclosed.",
+      "domain": "supplier_relationships",
+      "kind": "reported_fact",
+      "reporting_period": "Announced platform capability; not current effectiveness evidence",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-ENVOY"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-ENVOY": "Built with Google Cloud"
+      },
+      "quote_locator": "Official HTML lines 609–613, platform description",
+      "relationship": {
+        "subject": "BK-ENT-001",
+        "predicate": "reported_uses",
+        "object": "SUP-GOOGLE"
+      }
+    },
+    {
+      "id": "LBG-ENVOY-CONTROLS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+      "domain": "technology",
+      "kind": "reported_fact",
+      "reporting_period": "Announced platform capability; not current effectiveness evidence",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-ENVOY"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-ENVOY": "strong controls, monitoring and oversight"
+      },
+      "quote_locator": "Official HTML lines 606–607, announcement highlights"
+    },
+    {
+      "id": "LBG-BRAND26-TIMING",
+      "asset_id": "BK-ENT-001",
+      "statement": "The announcement schedules branch-brand changes through 2027. Delivery progress and customer outcomes remain to be checked.",
+      "domain": "programmes",
+      "kind": "management_commitment",
+      "reporting_period": "Announced July 2026; branch changes planned through 2027",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-BRAND26"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-BRAND26": "Throughout 2027, Halifax branches will either rebrand to Lloyds"
+      },
+      "quote_locator": "Official HTML line 619, branch timetable",
+      "corroborates": "LBG-BRAND"
+    },
+    {
+      "id": "LBG-BRAND26-NO-ROLES",
+      "asset_id": "BK-ENT-001",
+      "statement": "The announcement excludes related role reductions. It does not evidence an outsourcing mandate.",
+      "domain": "operating_capabilities",
+      "kind": "reported_fact",
+      "reporting_period": "Announced July 2026; branch changes planned through 2027",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-BRAND26"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-BRAND26": "there are no role reductions as part of today’s announcement"
+      },
+      "quote_locator": "Official HTML line 619, workforce boundary"
+    },
+    {
+      "id": "LBG-AI26-REPORTED",
+      "asset_id": "BK-ENT-001",
+      "statement": "Management reports roughly GBP50m AI contribution for 2025; net incremental benefit has not been independently verified.",
+      "domain": "investment",
+      "kind": "reported_fact",
+      "reporting_period": "FY2025",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AI26"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-AI26": "around £50 million of value in 2025"
+      },
+      "quote_locator": "Official HTML line 607, reported AI contribution",
+      "metric_value": 50,
+      "metric_unit": "GBP million; company-reported value",
+      "corroborates": "LBG-AI-VALUE"
+    },
+    {
+      "id": "LBG-AI26-EXPECTED",
+      "asset_id": "BK-ENT-001",
+      "statement": "Management expects more than GBP100m AI value in 2026. A target is not an achieved benefit or external budget.",
+      "domain": "investment",
+      "kind": "management_expectation",
+      "reporting_period": "2026 expectation",
+      "entity_scope": "Lloyds Banking Group plc, consolidated Group unless stated",
+      "source_ids": [
+        "PR-LBG-AI26"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-AI26": "over £100 million from next‑generation AI in 2026"
+      },
+      "quote_locator": "Official HTML line 607, management expectation",
+      "metric_value": 100,
+      "metric_unit": "GBP million; lower-bound management expectation",
+      "corroborates": "LBG-AI-TARGET"
+    },
+    {
+      "id": "UK-RATE-NOV26",
+      "asset_id": "BK-IND-002",
+      "statement": "The November policy decision raises Bank Rate to 4%. Enterprise deposit sensitivity remains an analytical question, not a proven impact.",
+      "domain": "economic",
+      "kind": "reported_fact",
+      "reporting_period": "Meeting ending 4 November 2026",
+      "entity_scope": "United Kingdom monetary policy; no enterprise-specific outcome inferred",
+      "source_ids": [
+        "PR-BOE-NOV26"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-BOE-NOV26": "voted by a majority of 8–1 to increase Bank Rate by 0.25 percentage points, to 4%."
+      },
+      "quote_locator": "Official page line 11, decision",
+      "metric_value": 4,
+      "metric_unit": "percent; policy rate at decision"
+    },
+    {
+      "id": "UK-PRA-REPORT27",
+      "asset_id": "BK-IND-002",
+      "statement": "PRA incident/third-party reporting changes take effect in March 2027. Confirm each regulated entity’s scope and existing readiness.",
+      "domain": "legal",
+      "kind": "regulatory_requirement",
+      "reporting_period": "Final policy; implementation 18 March 2027",
+      "entity_scope": "UK regulated firms; legal-entity applicability must be confirmed",
+      "source_ids": [
+        "PR-PRA-PS726"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-PRA-PS726": "The implementation date for final rules and policy materials reflecting policy changes set out in this PS is 18 March 2027."
+      },
+      "quote_locator": "Official policy paragraph 3.6"
+    },
+    {
+      "id": "UK-FCA-REPORT27",
+      "asset_id": "BK-IND-002",
+      "statement": "FCA reporting preparation runs to March 2027; a regulatory deadline does not itself prove Lloyds has an unmet need.",
+      "domain": "legal",
+      "kind": "regulatory_requirement",
+      "reporting_period": "Page last updated 15 September 2026; March 2027 reporting commencement",
+      "entity_scope": "UK regulated firms; legal-entity applicability must be confirmed",
+      "source_ids": [
+        "PR-FCA-RES26"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-FCA-RES26": "Firms have 12 months to prepare ahead of the new requirements coming into force on 18 March 2027."
+      },
+      "quote_locator": "Official HTML line 345, new reporting rules"
     }
   ],
   "frameworks": [
@@ -554,11 +1296,12 @@
       "id": "PESTLE-E",
       "lens": "pestle",
       "title": "Economic",
-      "assessment": "Deposit behaviour, structural-hedge income and cost discipline motivate investment questions; income is not earmarked supplier spend.",
+      "assessment": "The November rate increase sharpens deposit pricing and customer-value questions. Quantify each bank’s exposure; the policy decision alone does not prove a bank outcome.",
       "claim_ids": [
         "LBG-DEPOSITS",
         "LBG-HEDGE",
-        "LBG-TECH-COST"
+        "LBG-TECH-COST",
+        "UK-RATE-NOV26"
       ],
       "gap_ids": [
         "G-ALLOCATION"
@@ -594,11 +1337,12 @@
       "id": "PESTLE-T",
       "lens": "pestle",
       "title": "Technological",
-      "assessment": "Reported AI platform adoption and application simplification create candidate delivery/control questions, not confirmed external requirements.",
+      "assessment": "Lloyds supplies an enterprise example of governed agent deployment. One bank’s platform is not proof of an industry-wide adoption pattern.",
       "claim_ids": [
         "LBG-MIGRATION",
         "LBG-VERTEX",
-        "LBG-AI-USE"
+        "LBG-AI-USE",
+        "LBG-ENVOY-CONTROLS"
       ],
       "gap_ids": [
         "G-WORKLOADS",
@@ -615,10 +1359,12 @@
       "id": "PESTLE-L",
       "lens": "pestle",
       "title": "Legal",
-      "assessment": "Consumer-outcome, operational-resilience and third-party obligations require current primary-source applicability checks.",
+      "assessment": "March 2027 reporting changes create a dated readiness question for in-scope entities. Distinguish a legal obligation from an unmet Lloyds requirement.",
       "claim_ids": [
         "UK-CTP",
-        "LBG-SUPPLIER-RISK"
+        "LBG-SUPPLIER-RISK",
+        "UK-PRA-REPORT27",
+        "UK-FCA-REPORT27"
       ],
       "gap_ids": [
         "G-REGULATORY"
@@ -705,10 +1451,11 @@
       "id": "PORTER-SUPPLIER",
       "lens": "porter",
       "title": "Supplier power",
-      "assessment": "A reported Google Cloud relationship supports dependency questions; it does not establish exclusivity, contract scope, renewal dates or bargaining power.",
+      "assessment": "A named bank-platform collaboration improves enterprise specificity; contract scope, switching cost and industry bargaining power remain unmeasured.",
       "claim_ids": [
         "LBG-VERTEX",
-        "LBG-SUPPLIER-RISK"
+        "LBG-SUPPLIER-RISK",
+        "LBG-ENVOY-GOOGLE"
       ],
       "gap_ids": [
         "G-SUPPLIER"
@@ -853,10 +1600,12 @@
       "id": "VC-CONTROL",
       "lens": "value-chain",
       "title": "Risk, compliance & resilience",
-      "assessment": "Map critical-service, third-party and customer-outcome responsibilities across the chain.",
+      "assessment": "Map entity-specific incident and third-party reporting readiness alongside existing resilience controls.",
       "claim_ids": [
         "LBG-SUPPLIER-RISK",
-        "UK-CTP"
+        "UK-CTP",
+        "UK-PRA-REPORT27",
+        "UK-FCA-REPORT27"
       ],
       "gap_ids": [
         "G-REGULATORY"
@@ -871,11 +1620,13 @@
       "id": "VC-ENABLE",
       "lens": "value-chain",
       "title": "Data, platforms & people",
-      "assessment": "Technology and colleague capabilities support the chain; benefits and control ownership need validation.",
+      "assessment": "Use the Lloyds case to inspect data and control dependencies; do not project its operating model onto all banks.",
       "claim_ids": [
         "LBG-VERTEX",
         "LBG-MIGRATION",
-        "LBG-COPILOT"
+        "LBG-COPILOT",
+        "LBG-A2030-DATA",
+        "LBG-ENVOY-CONTROLS"
       ],
       "gap_ids": [
         "G-WORKLOADS"
@@ -969,7 +1720,12 @@
       "intervention": "Assess application dependencies, decommissioning readiness, service risks and benefit ownership.",
       "claim_ids": [
         "LBG-MIGRATION",
-        "LBG-TECH-COST"
+        "LBG-TECH-COST",
+        "LBG-AR25-MIGRATION",
+        "LBG-A2030-PLATFORMS",
+        "LBG-A2030-SAVINGS",
+        "LBG-A2030-INVESTMENT",
+        "LBG-Q326-INVESTMENT"
       ],
       "driver_ids": [
         "PESTLE-T",
@@ -991,13 +1747,35 @@
       "legacy_ids": [
         "COH-LBG-003"
       ],
-      "ranking_change": "Sharpens the broad control-tower hypothesis into an enterprise-specific migration question; not a funded programme.",
+      "ranking_change": "Named platform renewal and cost objectives improve specificity; execution scope is still unknown.",
       "qualification": "Research candidate — not customer-verified demand",
       "estimated_value": null,
       "procurement_date": null,
       "programme_ids": [
         "PROG-LBG-LEGACY"
-      ]
+      ],
+      "review": {
+        "change": "strengthened",
+        "before_claim_ids": [
+          "LBG-MIGRATION",
+          "LBG-TECH-COST"
+        ],
+        "added_claim_ids": [
+          "LBG-AR25-MIGRATION",
+          "LBG-A2030-PLATFORMS",
+          "LBG-A2030-SAVINGS",
+          "LBG-A2030-INVESTMENT",
+          "LBG-Q326-INVESTMENT"
+        ],
+        "summary": "Named platform renewal and cost objectives improve specificity; execution scope is still unknown.",
+        "measurable_outcome": "Application retirement, service continuity and verifiable net savings.",
+        "supplier_signal": "Google Cloud is named for Envoy; contractual and opportunity-specific roles remain unknown.",
+        "funding_signal": "Group-level investment/benefit objectives only; no candidate-specific budget verified.",
+        "procurement_signal": "No current tender, allocated spend, renewal or procurement authority verified.",
+        "buying_signal": "Public strategic relevance; no customer-confirmed demand.",
+        "next_action": "Validate application waves, residual dependencies, return hurdles and accountable benefit owner."
+      },
+      "previous_rank": 2
     },
     {
       "id": "RCO-LBG-002",
@@ -1010,7 +1788,11 @@
       "claim_ids": [
         "LBG-AI-USE",
         "LBG-AI-VALUE",
-        "LBG-AI-TARGET"
+        "LBG-AI-TARGET",
+        "LBG-AI26-REPORTED",
+        "LBG-AI26-EXPECTED",
+        "LBG-A2030-DATA",
+        "LBG-ENVOY-CONTROLS"
       ],
       "driver_ids": [
         "PESTLE-T",
@@ -1032,13 +1814,35 @@
       "legacy_ids": [
         "COH-LBG-003"
       ],
-      "ranking_change": "Separates company-reported benefit and forward expectation from confirmed supplier spend.",
+      "ranking_change": "AI benefit statements now have primary excerpts; the gap is net outcomes and scalable adoption, not a generic AI strategy.",
       "qualification": "Research candidate — not customer-verified demand",
       "estimated_value": null,
       "procurement_date": null,
       "programme_ids": [
         "PROG-LBG-AI"
-      ]
+      ],
+      "review": {
+        "change": "strengthened",
+        "before_claim_ids": [
+          "LBG-AI-USE",
+          "LBG-AI-VALUE",
+          "LBG-AI-TARGET"
+        ],
+        "added_claim_ids": [
+          "LBG-AI26-REPORTED",
+          "LBG-AI26-EXPECTED",
+          "LBG-A2030-DATA",
+          "LBG-ENVOY-CONTROLS"
+        ],
+        "summary": "AI benefit statements now have primary excerpts; the gap is net outcomes and scalable adoption, not a generic AI strategy.",
+        "measurable_outcome": "Use-case-level net benefit, adoption and control cost.",
+        "supplier_signal": "Google Cloud is named for Envoy; contractual and opportunity-specific roles remain unknown.",
+        "funding_signal": "Group-level investment/benefit objectives only; no candidate-specific budget verified.",
+        "procurement_signal": "No current tender, allocated spend, renewal or procurement authority verified.",
+        "buying_signal": "Public strategic relevance; no customer-confirmed demand.",
+        "next_action": "Select use cases and obtain benefit baselines, run costs, adoption evidence and sponsor confirmation."
+      },
+      "previous_rank": 1
     },
     {
       "id": "RCO-LBG-003",
@@ -1046,11 +1850,13 @@
       "enterprise_slug": "lloyds",
       "industry": "Banking",
       "title": "Brand/app migration customer-outcome assurance",
-      "problem": "A reported Halifax/Lloyds change creates testable migration, confusion and service-outcome questions.",
+      "problem": "The published branch-brand timetable raises a customer-outcome assurance question without establishing outsourcing demand.",
       "intervention": "Investigate customer journey mapping, migration communication, vulnerable-customer safeguards and outcome measurement.",
       "claim_ids": [
         "LBG-BRAND",
-        "LBG-PRIMACY-GAP"
+        "LBG-PRIMACY-GAP",
+        "LBG-BRAND26-TIMING",
+        "LBG-BRAND26-NO-ROLES"
       ],
       "driver_ids": [
         "PESTLE-S",
@@ -1072,13 +1878,32 @@
       "legacy_ids": [
         "COH-LBG-001"
       ],
-      "ranking_change": "Replaces a generic outsourcing framing with a specific outcome-validation question; outsourcing workshare remains unknown.",
+      "ranking_change": "A published branch timetable supports outcome-assurance research; the no-role-reduction statement weakens a generic outsourcing rationale.",
       "qualification": "Research candidate — not customer-verified demand",
       "estimated_value": null,
       "procurement_date": null,
       "programme_ids": [
         "PROG-LBG-BRAND"
-      ]
+      ],
+      "review": {
+        "change": "strengthened_but_narrowed",
+        "before_claim_ids": [
+          "LBG-BRAND",
+          "LBG-PRIMACY-GAP"
+        ],
+        "added_claim_ids": [
+          "LBG-BRAND26-TIMING",
+          "LBG-BRAND26-NO-ROLES"
+        ],
+        "summary": "A published branch timetable supports outcome-assurance research; the no-role-reduction statement weakens a generic outsourcing rationale.",
+        "measurable_outcome": "Migration completion, complaint rates and assisted-service outcomes.",
+        "supplier_signal": "No opportunity-specific supplier role verified.",
+        "funding_signal": "Group-level investment/benefit objectives only; no candidate-specific budget verified.",
+        "procurement_signal": "No current tender, allocated spend, renewal or procurement authority verified.",
+        "buying_signal": "Public strategic relevance; no customer-confirmed demand.",
+        "next_action": "Confirm remaining 2027 waves, affected cohorts and unmet outcome needs; do not pitch assumed outsourcing."
+      },
+      "previous_rank": 4
     },
     {
       "id": "RCO-LBG-004",
@@ -1086,11 +1911,14 @@
       "enterprise_slug": "lloyds",
       "industry": "Banking",
       "title": "AI model-platform governance and lineage",
-      "problem": "Reported Vertex AI/model migrations motivate model inventory, lineage and control questions.",
+      "problem": "Existing Envoy controls must be understood before proposing incremental governance; missing controls are not assumed.",
       "intervention": "Explore model lifecycle controls, lineage, accountability and platform transition evidence.",
       "claim_ids": [
         "LBG-VERTEX",
-        "LBG-MODELS"
+        "LBG-MODELS",
+        "LBG-ENVOY-CONTROLS",
+        "LBG-ENVOY-GOOGLE",
+        "LBG-A2030-DATA"
       ],
       "driver_ids": [
         "PESTLE-T",
@@ -1109,17 +1937,37 @@
         "G-SUPPLIER"
       ],
       "family": "ai-enablement",
-      "research_tier": 1,
+      "research_tier": 2,
       "legacy_ids": [
         "COH-LBG-003"
       ],
-      "ranking_change": "Narrows a broad AI/cloud hypothesis; does not infer Google exclusivity or a new procurement.",
+      "ranking_change": "The bank already describes platform controls and monitoring. Retarget to demonstrable effectiveness, lineage and control integration gaps.",
       "qualification": "Research candidate — not customer-verified demand",
       "estimated_value": null,
       "procurement_date": null,
       "programme_ids": [
         "PROG-LBG-AI"
-      ]
+      ],
+      "review": {
+        "change": "weakened_and_retargeted",
+        "before_claim_ids": [
+          "LBG-VERTEX",
+          "LBG-MODELS"
+        ],
+        "added_claim_ids": [
+          "LBG-ENVOY-CONTROLS",
+          "LBG-ENVOY-GOOGLE",
+          "LBG-A2030-DATA"
+        ],
+        "summary": "The bank already describes platform controls and monitoring. Retarget to demonstrable effectiveness, lineage and control integration gaps.",
+        "measurable_outcome": "Control effectiveness and agent/model lineage against the existing platform.",
+        "supplier_signal": "Google Cloud is named for Envoy; contractual and opportunity-specific roles remain unknown.",
+        "funding_signal": "Group-level investment/benefit objectives only; no candidate-specific budget verified.",
+        "procurement_signal": "No current tender, allocated spend, renewal or procurement authority verified.",
+        "buying_signal": "Public strategic relevance; no customer-confirmed demand.",
+        "next_action": "Ask the platform owner what is already covered; test an evidenced gap before proposing additional tooling."
+      },
+      "previous_rank": 3
     },
     {
       "id": "RCO-LBG-005",
@@ -1132,7 +1980,10 @@
       "claim_ids": [
         "LBG-SUPPLIER-RISK",
         "LBG-VERTEX",
-        "UK-CTP"
+        "UK-CTP",
+        "UK-PRA-REPORT27",
+        "UK-FCA-REPORT27",
+        "LBG-ENVOY-GOOGLE"
       ],
       "driver_ids": [
         "PESTLE-L",
@@ -1151,17 +2002,38 @@
         "G-SUPPLIER"
       ],
       "family": "modernisation",
-      "research_tier": 2,
+      "research_tier": 1,
       "legacy_ids": [
         "COH-LBG-003"
       ],
-      "ranking_change": "Creates a bounded risk-led discovery question; industry provider designation is not a Lloyds contract or finding.",
+      "ranking_change": "An explicit reporting deadline improves timing relevance; readiness and uncovered work must be established for each entity.",
       "qualification": "Research candidate — not customer-verified demand",
       "estimated_value": null,
       "procurement_date": null,
       "programme_ids": [
         "PROG-LBG-LEGACY"
-      ]
+      ],
+      "review": {
+        "change": "strengthened",
+        "before_claim_ids": [
+          "LBG-SUPPLIER-RISK",
+          "LBG-VERTEX",
+          "UK-CTP"
+        ],
+        "added_claim_ids": [
+          "UK-PRA-REPORT27",
+          "UK-FCA-REPORT27",
+          "LBG-ENVOY-GOOGLE"
+        ],
+        "summary": "An explicit reporting deadline improves timing relevance; readiness and uncovered work must be established for each entity.",
+        "measurable_outcome": "Accurate material-arrangement inventory and incident reporting readiness.",
+        "supplier_signal": "Google Cloud is named for Envoy; contractual and opportunity-specific roles remain unknown.",
+        "funding_signal": "Group-level investment/benefit objectives only; no candidate-specific budget verified.",
+        "procurement_signal": "No current tender, allocated spend, renewal or procurement authority verified.",
+        "buying_signal": "Public strategic relevance; no customer-confirmed demand.",
+        "next_action": "Confirm legal-entity scope, readiness plan, reporting data lineage and any funded gap before March 2027."
+      },
+      "previous_rank": 5
     },
     {
       "id": "RCO-LBG-006",
@@ -1174,7 +2046,10 @@
       "claim_ids": [
         "LBG-DEPOSITS",
         "LBG-HEDGE",
-        "LBG-PRIMACY-GAP"
+        "LBG-PRIMACY-GAP",
+        "LBG-Q326-DEPOSITS",
+        "LBG-AR25-DEPOSITS",
+        "UK-RATE-NOV26"
       ],
       "driver_ids": [
         "PESTLE-E",
@@ -1196,11 +2071,32 @@
       "legacy_ids": [
         "COH-LBG-002"
       ],
-      "ranking_change": "Economic relevance is strengthened, but customer primacy, spend and timing remain unproven.",
+      "ranking_change": "Period-specific balances and the rate decision improve economic context. They still do not prove lost primacy or a funded analytics need.",
       "qualification": "Research candidate — not customer-verified demand",
       "estimated_value": null,
       "procurement_date": null,
-      "programme_ids": []
+      "programme_ids": [],
+      "review": {
+        "change": "strengthened_context_only",
+        "before_claim_ids": [
+          "LBG-DEPOSITS",
+          "LBG-HEDGE",
+          "LBG-PRIMACY-GAP"
+        ],
+        "added_claim_ids": [
+          "LBG-Q326-DEPOSITS",
+          "LBG-AR25-DEPOSITS",
+          "UK-RATE-NOV26"
+        ],
+        "summary": "Period-specific balances and the rate decision improve economic context. They still do not prove lost primacy or a funded analytics need.",
+        "measurable_outcome": "Customer/cohort retention economics under actual pricing behaviour.",
+        "supplier_signal": "No opportunity-specific supplier role verified.",
+        "funding_signal": "Group-level investment/benefit objectives only; no candidate-specific budget verified.",
+        "procurement_signal": "No current tender, allocated spend, renewal or procurement authority verified.",
+        "buying_signal": "Public strategic relevance; no customer-confirmed demand.",
+        "next_action": "Obtain permissioned cohort economics, relationship definitions and a measurable business problem."
+      },
+      "previous_rank": 6
     },
     {
       "id": "RCO-LBG-007",
@@ -1212,7 +2108,8 @@
       "intervention": "Investigate access assessments, assisted/digital hand-offs and outcome monitoring before shaping service scope.",
       "claim_ids": [
         "LBG-ACCESS",
-        "LBG-BRAND"
+        "LBG-BRAND",
+        "LBG-BRAND26-TIMING"
       ],
       "driver_ids": [
         "PESTLE-S",
@@ -1231,17 +2128,35 @@
         "G-REGULATORY"
       ],
       "family": "channel-outcomes",
-      "research_tier": 2,
+      "research_tier": 3,
       "legacy_ids": [
         "COH-LBG-001"
       ],
-      "ranking_change": "Refocuses channel/service work on evidenced constraints, not an assumed BPO contract.",
+      "ranking_change": "A dated change programme adds context but no local harm, vulnerability or access gap has been demonstrated.",
       "qualification": "Research candidate — not customer-verified demand",
       "estimated_value": null,
       "procurement_date": null,
       "programme_ids": [
         "PROG-LBG-BRAND"
-      ]
+      ],
+      "review": {
+        "change": "unresolved",
+        "before_claim_ids": [
+          "LBG-ACCESS",
+          "LBG-BRAND"
+        ],
+        "added_claim_ids": [
+          "LBG-BRAND26-TIMING"
+        ],
+        "summary": "A dated change programme adds context but no local harm, vulnerability or access gap has been demonstrated.",
+        "measurable_outcome": "Assisted-customer outcomes in specific affected locations.",
+        "supplier_signal": "No opportunity-specific supplier role verified.",
+        "funding_signal": "Group-level investment/benefit objectives only; no candidate-specific budget verified.",
+        "procurement_signal": "No current tender, allocated spend, renewal or procurement authority verified.",
+        "buying_signal": "Public strategic relevance; no customer-confirmed demand.",
+        "next_action": "Research applicable local assessments and customer evidence before recommending a commercial intervention."
+      },
+      "previous_rank": 7
     },
     {
       "id": "RCO-LBG-008",
@@ -1253,7 +2168,9 @@
       "intervention": "Investigate role-based adoption, colleague workflows, control burden and measured benefits.",
       "claim_ids": [
         "LBG-COPILOT",
-        "LBG-AI-VALUE"
+        "LBG-AI-VALUE",
+        "LBG-AR25-COPILOT",
+        "LBG-AI26-REPORTED"
       ],
       "driver_ids": [
         "PESTLE-T",
@@ -1271,17 +2188,90 @@
         "G-AI-BENEFITS"
       ],
       "family": "ai-enablement",
-      "research_tier": 2,
+      "research_tier": 3,
       "legacy_ids": [
         "COH-LBG-003"
       ],
-      "ranking_change": "Separates workforce adoption from platform governance while flagging overlap; no additive deal values.",
+      "ranking_change": "Licence deployment is corroborated, not active use or incremental need. Keep it below outcome-led AI work and avoid duplicate scopes.",
       "qualification": "Research candidate — not customer-verified demand",
       "estimated_value": null,
       "procurement_date": null,
       "programme_ids": [
         "PROG-LBG-COLLEAGUE"
-      ]
+      ],
+      "review": {
+        "change": "weakened_as_standalone",
+        "before_claim_ids": [
+          "LBG-COPILOT",
+          "LBG-AI-VALUE"
+        ],
+        "added_claim_ids": [
+          "LBG-AR25-COPILOT",
+          "LBG-AI26-REPORTED"
+        ],
+        "summary": "Licence deployment is corroborated, not active use or incremental need. Keep it below outcome-led AI work and avoid duplicate scopes.",
+        "measurable_outcome": "Active adoption and incremental productivity after control costs.",
+        "supplier_signal": "No opportunity-specific supplier role verified.",
+        "funding_signal": "Group-level investment/benefit objectives only; no candidate-specific budget verified.",
+        "procurement_signal": "No current tender, allocated spend, renewal or procurement authority verified.",
+        "buying_signal": "Public strategic relevance; no customer-confirmed demand.",
+        "next_action": "Validate workflow usage and ownership; combine with AI-value discovery only if the buyer confirms common scope."
+      },
+      "previous_rank": 8
+    },
+    {
+      "id": "RCO-LBG-009",
+      "enterprise_id": "BK-ENT-001",
+      "enterprise_slug": "lloyds",
+      "industry": "Banking",
+      "title": "Wallet and Curve integration outcome assurance",
+      "problem": "A completed acquisition and an explicit wallet priority justify investigating integration and payment outcomes; no uncovered delivery work is established.",
+      "intervention": "Assess customer journeys, payment dependencies and integration acceptance criteria against the bank’s existing delivery plan.",
+      "claim_ids": [
+        "LBG-Q326-CURVE",
+        "LBG-A2030-WALLET"
+      ],
+      "driver_ids": [
+        "PORTER-SUBSTITUTE",
+        "PESTLE-T"
+      ],
+      "capability_ids": [
+        "CAP-PAYMENTS",
+        "CAP-CHANNEL",
+        "CAP-RISK"
+      ],
+      "programme_ids": [
+        "PROG-LBG-CURVE"
+      ],
+      "programme_signal": "Acquisition completion reported; wallet strategy stated. Delivery ownership, scope and vendor access unknown.",
+      "gap_ids": [
+        "G-CURVE",
+        "G-CUSTOMER-EVIDENCE",
+        "G-ALLOCATION",
+        "G-SUPPLIER"
+      ],
+      "family": "payments-integration",
+      "research_tier": 1,
+      "legacy_ids": [],
+      "ranking_change": "Added after primary evidence resolves the former transaction-status watchlist question; external work is not assumed.",
+      "qualification": "Research candidate — not customer-verified demand",
+      "estimated_value": null,
+      "procurement_date": null,
+      "review": {
+        "change": "added",
+        "before_claim_ids": [],
+        "added_claim_ids": [
+          "LBG-Q326-CURVE",
+          "LBG-A2030-WALLET"
+        ],
+        "summary": "The transaction-status uncertainty is resolved; integration buying evidence is not.",
+        "measurable_outcome": "Agreed wallet/payment journey acceptance and safe integration milestones.",
+        "supplier_signal": "Curve is an acquired business; this does not establish a supplier invitation.",
+        "funding_signal": "No integration budget allocation verified.",
+        "procurement_signal": "No tender or buying window verified.",
+        "buying_signal": "Strategic linkage only; no confirmed customer demand.",
+        "next_action": "Confirm the product/integration owner, existing plan, partner constraints and an unmet outcome before proposing work."
+      }
     }
   ],
   "watchlist": [
@@ -1289,12 +2279,14 @@
       "id": "WATCH-CURVE",
       "title": "Wallet/Curve integration",
       "claim_ids": [
-        "LBG-CURVE"
+        "LBG-CURVE",
+        "LBG-Q326-CURVE"
       ],
       "gap_ids": [
         "G-CURVE"
       ],
-      "reason": "Proposed transaction and completion/approved integration are unverified; not admitted as a current programme opportunity."
+      "reason": "Historical proposal-only state retained. Q3 completion supports RCO-LBG-009; integration buying evidence remains open.",
+      "status": "transaction_status_resolved_candidate_added"
     },
     {
       "id": "WATCH-FRAUD-BPO",
@@ -2321,6 +3313,391 @@
       "claim_ids": [],
       "assertion_kind": "conceptual_model",
       "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-001-LBG-AR25-MIGRATION",
+      "subject": "LBG-AR25-MIGRATION",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-001",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-AR25-MIGRATION"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-001-LBG-A2030-PLATFORMS",
+      "subject": "LBG-A2030-PLATFORMS",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-001",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-A2030-PLATFORMS"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-001-LBG-A2030-SAVINGS",
+      "subject": "LBG-A2030-SAVINGS",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-001",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-A2030-SAVINGS"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-001-LBG-A2030-INVESTMENT",
+      "subject": "LBG-A2030-INVESTMENT",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-001",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-A2030-INVESTMENT"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-001-LBG-Q326-INVESTMENT",
+      "subject": "LBG-Q326-INVESTMENT",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-001",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-Q326-INVESTMENT"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-002-LBG-AI26-REPORTED",
+      "subject": "LBG-AI26-REPORTED",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-002",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-AI26-REPORTED"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-002-LBG-AI26-EXPECTED",
+      "subject": "LBG-AI26-EXPECTED",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-002",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-AI26-EXPECTED"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-002-LBG-A2030-DATA",
+      "subject": "LBG-A2030-DATA",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-002",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-A2030-DATA"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-002-LBG-ENVOY-CONTROLS",
+      "subject": "LBG-ENVOY-CONTROLS",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-002",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-003-LBG-BRAND26-TIMING",
+      "subject": "LBG-BRAND26-TIMING",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-003",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-BRAND26-TIMING"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-003-LBG-BRAND26-NO-ROLES",
+      "subject": "LBG-BRAND26-NO-ROLES",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-003",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-BRAND26-NO-ROLES"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-004-LBG-ENVOY-CONTROLS",
+      "subject": "LBG-ENVOY-CONTROLS",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-004",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-004-LBG-ENVOY-GOOGLE",
+      "subject": "LBG-ENVOY-GOOGLE",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-004",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-ENVOY-GOOGLE"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-004-LBG-A2030-DATA",
+      "subject": "LBG-A2030-DATA",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-004",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-A2030-DATA"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-005-UK-PRA-REPORT27",
+      "subject": "UK-PRA-REPORT27",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-005",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "UK-PRA-REPORT27"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-005-UK-FCA-REPORT27",
+      "subject": "UK-FCA-REPORT27",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-005",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "UK-FCA-REPORT27"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-005-LBG-ENVOY-GOOGLE",
+      "subject": "LBG-ENVOY-GOOGLE",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-005",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-ENVOY-GOOGLE"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-006-LBG-Q326-DEPOSITS",
+      "subject": "LBG-Q326-DEPOSITS",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-006",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-Q326-DEPOSITS"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-006-LBG-AR25-DEPOSITS",
+      "subject": "LBG-AR25-DEPOSITS",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-006",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-AR25-DEPOSITS"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-006-UK-RATE-NOV26",
+      "subject": "UK-RATE-NOV26",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-006",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "UK-RATE-NOV26"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-007-LBG-BRAND26-TIMING",
+      "subject": "LBG-BRAND26-TIMING",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-007",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-BRAND26-TIMING"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-008-LBG-AR25-COPILOT",
+      "subject": "LBG-AR25-COPILOT",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-008",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-AR25-COPILOT"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-008-LBG-AI26-REPORTED",
+      "subject": "LBG-AI26-REPORTED",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-008",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-AI26-REPORTED"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-009-LBG-Q326-CURVE",
+      "subject": "LBG-Q326-CURVE",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-009",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-Q326-CURVE"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-RCO-LBG-009-LBG-A2030-WALLET",
+      "subject": "LBG-A2030-WALLET",
+      "predicate": "informs_reassessment",
+      "object": "RCO-LBG-009",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-A2030-WALLET"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-ENVOY-GOOGLE",
+      "subject": "BK-ENT-001",
+      "predicate": "reported_uses",
+      "object": "SUP-GOOGLE",
+      "assertion_kind": "source_supported_relationship",
+      "claim_ids": [
+        "LBG-ENVOY-GOOGLE"
+      ],
+      "verified": true
+    },
+    {
+      "id": "REV-PESTLE-E-UK-RATE-NOV26",
+      "subject": "UK-RATE-NOV26",
+      "predicate": "informs_industry_assessment",
+      "object": "PESTLE-E",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "UK-RATE-NOV26"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-PESTLE-T-LBG-ENVOY-CONTROLS",
+      "subject": "LBG-ENVOY-CONTROLS",
+      "predicate": "enterprise_case_example_only",
+      "object": "PESTLE-T",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-PESTLE-L-UK-PRA-REPORT27",
+      "subject": "UK-PRA-REPORT27",
+      "predicate": "informs_industry_assessment",
+      "object": "PESTLE-L",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "UK-PRA-REPORT27"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-PESTLE-L-UK-FCA-REPORT27",
+      "subject": "UK-FCA-REPORT27",
+      "predicate": "informs_industry_assessment",
+      "object": "PESTLE-L",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "UK-FCA-REPORT27"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-PORTER-SUPPLIER-LBG-ENVOY-GOOGLE",
+      "subject": "LBG-ENVOY-GOOGLE",
+      "predicate": "enterprise_case_example_only",
+      "object": "PORTER-SUPPLIER",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-ENVOY-GOOGLE"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-VC-CONTROL-UK-PRA-REPORT27",
+      "subject": "UK-PRA-REPORT27",
+      "predicate": "informs_industry_assessment",
+      "object": "VC-CONTROL",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "UK-PRA-REPORT27"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-VC-CONTROL-UK-FCA-REPORT27",
+      "subject": "UK-FCA-REPORT27",
+      "predicate": "informs_industry_assessment",
+      "object": "VC-CONTROL",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "UK-FCA-REPORT27"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-VC-ENABLE-LBG-A2030-DATA",
+      "subject": "LBG-A2030-DATA",
+      "predicate": "enterprise_case_example_only",
+      "object": "VC-ENABLE",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-A2030-DATA"
+      ],
+      "verified": false
+    },
+    {
+      "id": "REV-VC-ENABLE-LBG-ENVOY-CONTROLS",
+      "subject": "LBG-ENVOY-CONTROLS",
+      "predicate": "enterprise_case_example_only",
+      "object": "VC-ENABLE",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "verified": false
     }
   ],
   "gaps": [
@@ -2332,7 +3709,32 @@
       "decision_impact": "All current factual confidence and programme status.",
       "priority": "High",
       "owner_role": "Research owner / account team; named owner not established",
-      "status": "open"
+      "status": "partially_resolved",
+      "resolution": "Ten official-source excerpt records reviewed. Historical citations and uncaptured full original files remain unverified.",
+      "resolved_claim_ids": [
+        "LBG-Q326-PROFIT",
+        "LBG-Q326-DEPOSITS",
+        "LBG-Q326-CURVE",
+        "LBG-Q326-INVESTMENT",
+        "LBG-AR25-DEPOSITS",
+        "LBG-AR25-COPILOT",
+        "LBG-AR25-MIGRATION",
+        "LBG-A2030-PLATFORMS",
+        "LBG-A2030-DATA",
+        "LBG-A2030-SAVINGS",
+        "LBG-A2030-CIR",
+        "LBG-A2030-WALLET",
+        "LBG-A2030-INVESTMENT",
+        "LBG-ENVOY-GOOGLE",
+        "LBG-ENVOY-CONTROLS",
+        "LBG-BRAND26-TIMING",
+        "LBG-BRAND26-NO-ROLES",
+        "LBG-AI26-REPORTED",
+        "LBG-AI26-EXPECTED",
+        "UK-RATE-NOV26",
+        "UK-PRA-REPORT27",
+        "UK-FCA-REPORT27"
+      ]
     },
     {
       "id": "G-CUSTOMER-EVIDENCE",
@@ -2352,7 +3754,12 @@
       "decision_impact": "Do not infer compliance failure or mandatory procurement.",
       "priority": "High",
       "owner_role": "Research owner / account team; named owner not established",
-      "status": "open"
+      "status": "partially_resolved",
+      "resolution": "Reporting commencement confirmed in PRA/FCA sources; regulated-entity applicability and customer readiness remain open.",
+      "resolved_claim_ids": [
+        "UK-PRA-REPORT27",
+        "UK-FCA-REPORT27"
+      ]
     },
     {
       "id": "G-ALLOCATION",
@@ -2422,7 +3829,11 @@
       "decision_impact": "Wallet integration remains watchlist only.",
       "priority": "High",
       "owner_role": "Research owner / account team; named owner not established",
-      "status": "open"
+      "status": "partially_resolved",
+      "resolution": "Acquisition completion established by Q3 excerpt; integration scope, delivery plan and procurement remain unknown.",
+      "resolved_claim_ids": [
+        "LBG-Q326-CURVE"
+      ]
     },
     {
       "id": "G-FRAUD",
@@ -2462,67 +3873,107 @@
       "signal_class": "reported management priority, not a verified work package",
       "claim_ids": [
         "LBG-MIGRATION",
-        "LBG-TECH-COST"
+        "LBG-TECH-COST",
+        "LBG-AR25-MIGRATION",
+        "LBG-A2030-PLATFORMS"
       ],
       "owner": "Unknown",
       "funding": "Unknown",
       "procurement": "Unknown",
-      "current_phase": "Unknown"
+      "current_phase": "2026 commitment / 2027–2030 platform priority; current delivery progress Unknown"
     },
     {
       "id": "PROG-LBG-AI",
       "title": "AI use-case / model-platform enablement",
-      "signal_class": "reported rollout/platform adoption; not a named procurement",
+      "signal_class": "Platform announcement supported; incremental need unverified",
       "claim_ids": [
         "LBG-AI-USE",
         "LBG-VERTEX",
-        "LBG-MODELS"
+        "LBG-MODELS",
+        "LBG-ENVOY-GOOGLE",
+        "LBG-ENVOY-CONTROLS"
       ],
       "owner": "Unknown",
       "funding": "Unknown",
       "procurement": "Unknown",
-      "current_phase": "Current 2026 status unverified"
+      "current_phase": "Envoy announced May 2026; current effectiveness Unknown"
     },
     {
       "id": "PROG-LBG-BRAND",
       "title": "Halifax/Lloyds brand and app change",
-      "signal_class": "repository-reported announcement; primary verification pending",
+      "signal_class": "Announced brand timetable supported by official source",
       "claim_ids": [
-        "LBG-BRAND"
+        "LBG-BRAND",
+        "LBG-BRAND26-TIMING",
+        "LBG-BRAND26-NO-ROLES"
       ],
       "owner": "Unknown",
       "funding": "Unknown",
       "procurement": "Unknown",
-      "current_phase": "Unknown"
+      "current_phase": "Branch changes planned through 2027; current progress Unknown"
     },
     {
       "id": "PROG-LBG-COLLEAGUE",
       "title": "Colleague AI enablement",
-      "signal_class": "reported licences/direction; not a verified programme budget",
+      "signal_class": "FY2025 licence deployment corroborated; no procurement inferred",
       "claim_ids": [
-        "LBG-COPILOT"
+        "LBG-COPILOT",
+        "LBG-AR25-COPILOT"
       ],
       "owner": "Unknown",
       "funding": "Unknown",
       "procurement": "Unknown",
-      "current_phase": "Unknown"
+      "current_phase": "Active usage and net benefit Unknown"
     },
     {
       "id": "PROG-LBG-CURVE",
-      "title": "Proposed Curve transaction",
-      "signal_class": "proposed transaction, not confirmed completion or integration",
+      "title": "Curve acquisition and wallet direction",
+      "signal_class": "Acquisition completion reported; integration demand unverified",
       "claim_ids": [
-        "LBG-CURVE"
+        "LBG-CURVE",
+        "LBG-Q326-CURVE",
+        "LBG-A2030-WALLET"
       ],
       "owner": "Unknown",
       "funding": "Unknown",
       "procurement": "Unknown",
-      "current_phase": "Completion unknown; watchlist only"
+      "current_phase": "Completed acquisition reported in Q3; delivery status Unknown"
     }
   ],
   "industry_name": "UK Banking",
   "enterprise_name": "Lloyds Banking Group",
   "geography": "United Kingdom",
   "knowledge_root": "enterprise-knowledge/banking",
-  "source_base_commit": "3e703ae99ccfdff46aa1675ae0430f86a9cd52e9"
+  "source_base_commit": "3e703ae99ccfdff46aa1675ae0430f86a9cd52e9",
+  "revision": {
+    "previous_commit": "5c62f15aba8c7089fa3065a32d263504a83379ff",
+    "previous_snapshot": "enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json",
+    "previous_sha256": "5a2a0ed623d7d3fbde1e57f10c76abbf7761d8905692ccaec4d5cd8448a90e0a",
+    "reviewed_at": "2026-11-09T19:35:29.412049+00:00",
+    "new_claim_ids": [
+      "LBG-Q326-PROFIT",
+      "LBG-Q326-DEPOSITS",
+      "LBG-Q326-CURVE",
+      "LBG-Q326-INVESTMENT",
+      "LBG-AR25-DEPOSITS",
+      "LBG-AR25-COPILOT",
+      "LBG-AR25-MIGRATION",
+      "LBG-A2030-PLATFORMS",
+      "LBG-A2030-DATA",
+      "LBG-A2030-SAVINGS",
+      "LBG-A2030-CIR",
+      "LBG-A2030-WALLET",
+      "LBG-A2030-INVESTMENT",
+      "LBG-ENVOY-GOOGLE",
+      "LBG-ENVOY-CONTROLS",
+      "LBG-BRAND26-TIMING",
+      "LBG-BRAND26-NO-ROLES",
+      "LBG-AI26-REPORTED",
+      "LBG-AI26-EXPECTED",
+      "UK-RATE-NOV26",
+      "UK-PRA-REPORT27",
+      "UK-FCA-REPORT27"
+    ],
+    "automatic_canonical_acceptance": false
+  }
 }

@@ -53,8 +53,9 @@ def test_existing_twin_ids_and_source_contracts_are_reused():
         assert isinstance(evidence,model.EvidencePackageItem)
         assert segment.content_hash==hashlib.sha256(segment.content.encode()).hexdigest()
         assert '#L' in segment.source_location and claim.source_segment_id==segment.segment_id
-        assert evidence.truth_status=='repository_reported_not_primary_verified'
-        assert claim.authority=='candidate_intelligence' and 'Provisional' in claim.confidence
+        assert evidence.truth_status==('source_supported_public_claim' if item['verification']=='source_supported' else 'repository_reported_not_primary_verified')
+        assert claim.authority=='candidate_intelligence'
+        assert ('Source-supported' if item['verification']=='source_supported' else 'Provisional') in claim.confidence
 
 
 def test_all_six_pestle_five_forces_and_value_activities_are_explicit():
@@ -78,8 +79,8 @@ def test_repository_citations_cannot_be_upgraded_by_status_or_hash_alone():
 
 def test_missing_dates_staleness_and_future_assessment_are_visible():
     data=model.load_assessment();state=model.freshness(data,date(2026,11,9))
-    assert state['primary_verified']==0 and 'stale' in state['status']
-    assert all(s['publication_date'] is None and s['retrieved_at'] is None for s in data['sources'])
+    assert state['primary_verified']==10 and state['upstream_age_days']==115
+    assert all(s['publication_date'] is None and s['retrieved_at'] is None for s in data['sources'] if s['verification']=='citation_only')
     assert model.ranked_candidates(data,date(2026,8,1))==[]
     html=views.sources_page()
     assert 'Publication date:</strong> Unknown' in html and 'Not retrieved' in html
@@ -87,12 +88,13 @@ def test_missing_dates_staleness_and_future_assessment_are_visible():
 
 def test_no_fabricated_budget_dates_or_customer_demand_in_ranked_candidates():
     rows=model.ranked_candidates()
-    assert len(rows)==8 and [r['rank'] for r in rows]==list(range(1,9))
+    assert len(rows)==9 and [r['rank'] for r in rows]==list(range(1,10))
     assert all(r['estimated_value'] is None and r['procurement_date'] is None for r in rows)
-    assert all(r['rank_basis']['primary_supported_claims']==0 for r in rows)
+    assert all(r['rank_basis']['primary_supported_claims']>0 for r in rows)
     assert all(r['readiness']=='Research candidate; customer qualification outstanding' for r in rows)
-    assert {r['family'] for r in rows}=={'ai-enablement','modernisation','channel-outcomes','customer-economics'}
-    assert not any('Curve' in r['title'] or 'fraud' in r['title'].lower() or 'BPO' in r['title'] for r in rows)
+    assert {r['family'] for r in rows}=={'ai-enablement','modernisation','channel-outcomes','customer-economics','payments-integration'}
+    assert not any('fraud' in r['title'].lower() or 'BPO' in r['title'] for r in rows)
+    assert next(r for r in rows if 'Curve' in r['title'])['review']['change']=='added'
 
 
 def test_ranking_changes_and_overlap_are_traceable():
@@ -101,7 +103,7 @@ def test_ranking_changes_and_overlap_are_traceable():
         assert identifier in html
     assert 'BPO/outsourcing demand is not established' in html
     assert 'may compete for the same scope' in html
-    assert 'primary-supported claim count: 0' in html
+    assert 'primary-supported claim count: 22' in html
     for row in model.ranked_candidates():
         assert row['claim_ids'] and row['driver_ids'] and row['capability_ids'] and row['gap_ids']
         assert row['ranking_change']
@@ -111,7 +113,7 @@ def test_supplier_edges_distinguish_reported_relationship_and_unknown_contract()
     data=model.load_assessment();relations={r['id']:r for r in data['relationships']}
     assert relations['REL-LBG-GCP']['assertion_kind']=='repository_reported_relationship'
     assert relations['REL-LBG-AWS']['assertion_kind']=='unknown'
-    assert not any(r['verified'] for r in data['relationships'])
+    assert [r['id'] for r in data['relationships'] if r['verified']]==['REV-ENVOY-GOOGLE']
     changed=deepcopy(data);changed['relationships'][0]['verified']=True
     with pytest.raises(ValueError):model.validate(changed)
     assert 'enterprise contract unknown' in views.node_page('SUP-AWS')
@@ -153,7 +155,8 @@ def test_corroboration_does_not_rewrite_existing_factual_statement():
 
 def test_primary_supported_claim_needs_matching_content_snapshot(tmp_path,monkeypatch):
     # Explicitly synthetic snapshot proof test, not a real publisher retrieval.
-    data=model.load_assessment();original=model.REPO
+    original=model.REPO
+    data=json.loads((original/'enterprise-knowledge/banking/research-model/history/2026-11-09-provisional.json').read_text())
     for path in data['assets'].values():
         target=tmp_path/path;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((original/path).read_bytes())
     source=data['sources'][0]
@@ -161,7 +164,7 @@ def test_primary_supported_claim_needs_matching_content_snapshot(tmp_path,monkey
     relative='enterprise-knowledge/banking/research-model/source-snapshots/synthetic.txt'
     target=tmp_path/relative;target.parent.mkdir(parents=True,exist_ok=True);target.write_text(text)
     source.update(verification='primary_retrieved',retrieved_at='2026-11-09T10:00:00+00:00',retrieval_url=source['url'],
-                  primary_content_sha256=hashlib.sha256(text.encode()).hexdigest(),text_sha256=hashlib.sha256(text.encode()).hexdigest(),text_path=relative)
+                  primary_content_sha256=hashlib.sha256(text.encode()).hexdigest(),text_sha256=hashlib.sha256(text.encode()).hexdigest(),text_path=relative,raw_path=relative)
     item=data['claims'][0];item['verification']='source_supported';item['primary_quotes']={source['id']:text}
     monkeypatch.setattr(model,'REPO',tmp_path)
     assert model.validate(data) and model.primary_claim_supported(data,item)
@@ -175,7 +178,7 @@ def test_date_and_entity_scope_are_not_confused():
     assert claims['LBG-AI-TARGET']['kind']=='management_expectation'
     assert 'not achieved' in claims['LBG-AI-TARGET']['metric_unit']
     assert 'not all Group' in claims['LBG-ACCESS']['entity_scope']
-    assert all(s['publication_date'] is None for s in data['sources'])
+    assert all(s['publication_date'] is None for s in data['sources'] if s['verification']=='citation_only')
     bad=deepcopy(data);bad['sources'][0]['publication_date']='2027-01-01'
     with pytest.raises(ValueError):model.validate(bad)
 
@@ -183,7 +186,7 @@ def test_date_and_entity_scope_are_not_confused():
 def test_public_research_navigation_reaches_all_lenses_claims_and_candidates(web):
     for path in [model.ROOT,model.ROOT+'?lens=porter',model.ROOT+'?lens=value-chain',model.ROOT+'/lloyds',model.ROOT+'/sources',model.ROOT+'/gaps',model.ROOT+'/opportunities']:
         status,html=web(path);assert status==200,path
-        assert 'Primary-source re-verification pending' in html
+        assert 'Primary-source re-verification partially complete' in html
         assert 'name=\'viewport\'' in html
     data=model.load_assessment()
     for item in data['claims']:

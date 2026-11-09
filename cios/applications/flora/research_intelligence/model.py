@@ -10,11 +10,11 @@ import hashlib
 import json
 from pathlib import Path
 import re
-from urllib.parse import urlsplit
 
 from ..enterprise_intelligence.semantic import SourceSegment, CandidateClaim
 from ..enterprise_intelligence.models import EvidencePackageItem, stable_hash
 from ..memory.models import stable_observation_fingerprint
+from .source_import import official_url, provenance
 
 REPO = Path(__file__).resolve().parents[4]
 DATA = REPO / 'enterprise-knowledge/banking/research-model/Assessment-Overlay.json'
@@ -51,6 +51,18 @@ def _asset(data, asset_id):
 
 
 def claim_segment(data, claim):
+    if claim.get('verification') == 'source_supported' and not claim.get('repository_quote'):
+        if not primary_claim_supported(data, claim):
+            raise ValueError('Primary research segment requires reviewed quotation support')
+        ref = claim['source_ids'][0]
+        source = _index(data['sources'])[ref]
+        quote = claim['primary_quotes'][ref]
+        line = primary_text(source).find(quote)
+        line = primary_text(source)[:line].count('\n') + 1 if line >= 0 else 1
+        return SourceSegment(f"{ref}::quote-{_sha(quote)[:16]}", claim['asset_id'],
+                             claim['quote_locator'], quote, _sha(quote),
+                             source['text_path'] + f'#L{line}',
+                             'candidate_intelligence', 'reviewed_primary_excerpt')
     path,text = _asset(data, claim['asset_id'])
     quote = claim['repository_quote']
     offset = text.find(quote)
@@ -66,20 +78,36 @@ def claim_segment(data, claim):
 
 def primary_text(source):
     """Read a reviewed public-source snapshot; a status flag alone proves nothing."""
-    allowed={'www.lloydsbankinggroup.com','www.lloydsbank.com','www.bankofengland.co.uk','www.fca.org.uk','www.gov.uk'}
-    target=urlsplit(source['url'])
-    if target.scheme!='https' or target.hostname not in allowed or target.username or target.password:
-        raise ValueError('Primary snapshot needs an approved public publisher URL')
+    official_url(source['url'])
     snapshot=(REPO/source.get('text_path','')).resolve()
     boundary=REPO/'enterprise-knowledge/banking/research-model/source-snapshots'
     if not snapshot.is_relative_to(boundary) or not snapshot.is_file():
         raise ValueError('Primary snapshot unavailable')
     content=snapshot.read_text()
-    if source.get('text_sha256')!=_sha(content) or not re.fullmatch(r'[a-f0-9]{64}',str(source.get('primary_content_sha256') or '')):
+    if source.get('text_sha256')!=_sha(content):
         raise ValueError('Primary snapshot/content digest mismatch')
+    kind = source.get('content_kind', 'verified_download')
+    if kind == 'reviewed_web_excerpt':
+        provenance(source)
+        if (source.get('primary_content_sha256') is not None
+                or source.get('retrieval_method') != 'approved_web_research_tool'
+                or not source.get('retrieval_reference') or not source.get('excerpts')):
+            raise ValueError('Web extracts cannot claim a hash of unavailable original bytes')
+        for entry in source['excerpts']:
+            if not entry.get('locator') or not entry.get('quote') or entry['quote'] not in content:
+                raise ValueError('Web excerpt must retain its reviewed location and quotation')
+    elif kind == 'verified_download':
+        if not re.fullmatch(r'[a-f0-9]{64}',str(source.get('primary_content_sha256') or '')):
+            raise ValueError('Missing original-file checksum')
+        raw=(REPO/source.get('raw_path','')).resolve()
+        if not raw.is_relative_to(boundary) or not raw.is_file() or hashlib.sha256(raw.read_bytes()).hexdigest()!=source['primary_content_sha256']:
+            raise ValueError('Original source bytes mismatch')
+    else:
+        raise ValueError('Unsupported primary snapshot extent')
     retrieved=datetime.fromisoformat(source.get('retrieved_at','').replace('Z','+00:00'))
-    if retrieved.tzinfo is None or source.get('retrieval_url')!=source['url']:
-        raise ValueError('Dated original-URL retrieval provenance required')
+    official_url(source.get('retrieval_url',''))
+    if retrieved.tzinfo is None:
+        raise ValueError('Dated official-URL retrieval provenance required')
     return content
 
 
@@ -122,13 +150,15 @@ def validate(data):
         elif source.get('retrieved_at') or source.get('primary_content_sha256'):
             raise ValueError('Unretrieved citations cannot claim primary retrieval')
     for claim in claims.values():
-        if not claim['repository_quote'] or not claim['source_ids'] or set(claim['source_ids'])-set(sources):
+        if (claim['asset_id'] not in data['assets'] or not claim['source_ids']
+                or set(claim['source_ids'])-set(sources)
+                or not (claim.get('repository_quote') or claim.get('primary_quotes'))):
             raise ValueError('Claim source lineage is incomplete')
         segment = claim_segment(data,claim)
         # Resolve cited URLs from the existing source asset, not arbitrary caller strings.
         _,text = _asset(data,claim['asset_id'])
         for ref in claim['source_ids']:
-            if sources[ref]['verification']=='citation_only' and sources[ref]['url'] not in text:
+            if claim.get('repository_quote') and sources[ref]['verification']=='citation_only' and sources[ref]['url'] not in text:
                 raise ValueError('Cited primary URL is not present in the preserved research asset')
         if segment.content_hash != _sha(segment.content):
             raise ValueError('Research segment checksum mismatch')
@@ -175,6 +205,7 @@ def freshness(data, as_of=None):
             'eligible':eligible,
             'status':('Future-dated research assessment — excluded' if not eligible else 'Partial primary retrieval; inspect claim-level dates' if verified else 'Primary verification pending; upstream assessment stale' if age>90 else 'Primary verification pending'),
             'primary_verified':verified,'primary_total':len(data['sources']),
+            'reviewed_excerpts':sum(s.get('content_kind')=='reviewed_web_excerpt' for s in data['sources']),
             'limitation':'Twin effective date is not a primary publication date. No current/fresh source claim is inferred from a URL, collection date or local file hash.'}
 
 
@@ -213,7 +244,7 @@ def ranked_candidates(data=None, as_of=None):
         supported=sum(primary_claim_supported(data,claims[c]) for c in row['claim_ids'])
         row['rank_basis']={'research_tier':row['research_tier'],'enterprise_claims':enterprise_claims,
                            'programme_signals':len(row['programme_ids']),'primary_supported_claims':supported}
-        row['confidence']=('Source-supported public signal; customer demand unverified' if supported else 'Provisional — primary-source re-verification blocked')
+        row['confidence']=('Source-supported public signal; customer demand unverified' if supported else 'Provisional — primary-source verification outstanding')
         row['readiness']='Research candidate; customer qualification outstanding'
         row['freshness']=state['status']
         row['reasoning_authority']='derived_runtime_assessment'
@@ -236,8 +267,8 @@ def commercial_capture(slug, identifier):
     refs=list(dict.fromkeys(s for c in row['claim_ids'] for s in claims[c]['source_ids']))
     return {
         'fields':{'title':row['title'],'problem':row['problem'],'solution':row['intervention'],
-                  'next_action':'Research validation first: '+ '; '.join(next(g['question'] for g in data['gaps'] if g['id']==gid) for gid in row['gap_ids'][:3])},
-        'provenance':{'kind':'research_candidate','source_labels':[sources[s]['title']+' (citation only; primary verification pending)' for s in refs],
+                  'next_action':row.get('review',{}).get('next_action') or 'Research validation first: '+ '; '.join(next(g['question'] for g in data['gaps'] if g['id']==gid) for gid in row['gap_ids'][:3])},
+        'provenance':{'kind':'research_candidate','source_labels':[sources[s]['title']+(' (reviewed primary excerpt; customer demand unverified)' if sources[s]['verification']=='primary_retrieved' else ' (citation only; primary verification pending)') for s in refs],
                       'snapshot':data['assessed_at'],'signals':[claims[c]['statement'] for c in row['claim_ids']],
                       'evidence_url':ROOT+'/candidates/'+row['id']+'#evidence','origin_url':ROOT+'/candidates/'+row['id'],
                       'limitations':row['confidence']+'. Not customer-verified demand; no accepted canonical Evidence.',
