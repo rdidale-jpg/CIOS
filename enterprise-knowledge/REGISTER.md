@@ -19,3 +19,13 @@ This register records every governed Enterprise Knowledge asset in the repositor
 | BK-CMP-002 | Four-Bank Mechanism Differential Matrix | Differential Matrix | Banking | Validated | 2.1 | TBD | [banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md](banking/comparisons/Four-Bank-Mechanism-Differential-Matrix.md) |
 | EK-BANK-RHYP-001 | Banking Reinvention Hypotheses v0.1 | Reinvention Hypothesis Register | Banking | Candidate | 0.1 | TBD | [banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md](banking/reinvention/Banking-Reinvention-Hypotheses-v0.1.md) |
 | BK-FLR-001 | Banking Knowledge Register for Flora | Discovery Register | Banking | Validated | 1.0 | TBD | [banking/flora/Banking-Knowledge-Register.md](banking/flora/Banking-Knowledge-Register.md) |
+
+
+## Aviation public research pilot
+
+| Asset | Identity | Status | Location |
+| --- | --- | --- | --- |
+| Commercial Aviation Industry Twin | AV-IND-001 | Research candidate; not canonical acceptance | aviation/Industry-Twin.md |
+| easyJet Enterprise Twin | AV-ENT-001 | Research candidate; no workspace ownership inferred | aviation/easyJet-Enterprise-Twin.md |
+
+Aviation uses the same research overlay, SourceSegment, CandidateClaim, EvidencePackageItem and explicit Pipeline qualification contracts as Banking. See aviation/MANIFEST.yaml.

@@ -8,6 +8,7 @@ from urllib.parse import urlencode
 
 from .banking_explorer import ROOT, _crumb, _map, _page
 from .banking_portfolio import BANKS
+from .research_intelligence.registry import enterprise_reference, landscape_url
 from .sales_pipeline import (STAGES, CRITERIA, hypothesis, qualification, maturity, totals,
                              get_opportunity, list_opportunities)
 
@@ -26,7 +27,7 @@ def _money(value):
 
 
 def page(title, body, headers=None):
-    return _page(title, f'<style>{CSS}</style>'+body, headers)
+    return _page(title, f'<style>{CSS}</style>'+body, headers, active='pipeline')
 
 
 def _input(name, label, value='', kind='text', help_text='', required=False):
@@ -83,7 +84,8 @@ def discovery_page(slug, theme='', headers=None):
 
 
 def capture_controls(slug, origin, headers=None):
-    bank=BANKS[slug]
+    bank=enterprise_reference(slug)
+    if bank is None: raise ValueError('Unknown enterprise')
     action = f'{BASE}/capture'
     from .access import require_capability, require_resource_scope
     try:
@@ -165,16 +167,17 @@ def pipeline_page(headers=None, filters=None, board=False, error=''):
 
 
 def new_page(slug='lloyds', headers=None, error=''):
-    bank=BANKS.get(slug,BANKS['lloyds'])
-    choices=''.join(f"<option value='{b.slug}' {'selected' if b.slug==bank.slug else ''}>{e(b.name)}</option>" for b in BANKS.values())
+    bank=enterprise_reference(slug) or BANKS['lloyds']
+    choices=''.join(f"<option value='{b.slug}' {'selected' if b.slug==bank.slug else ''}>{e(b.name)}</option>" for b in [*BANKS.values(),enterprise_reference('easyjet')])
     fields=_input('title','Opportunity title',required=True)+_input('problem','Business problem',kind='textarea',required=True)+_input('solution','Potential solution',kind='textarea')+_input('next_action','Next action',kind='textarea')
-    body=_crumb(bank)+_demo()+f"<section class='ex-card' id='explorer-content'><h1>Create a demonstration hypothesis</h1><p>Starts at Discovered with unknown value and evidence confidence.</p><p class='sales-error'>{e(error)}</p><form class='sales-grid' method='post' action='{BASE}/create'><div><label>Enterprise<select name='enterprise'>{choices}</select></label>{fields}<button>Create & qualify →</button></div></form></section>"
+    body=_enterprise_crumb(bank)+_demo()+f"<section class='ex-card' id='explorer-content'><h1>Create a demonstration hypothesis</h1><p>Starts at Discovered with unknown value and evidence confidence.</p><p class='sales-error'>{e(error)}</p><form class='sales-grid' method='post' action='{BASE}/create'><div><label>Enterprise<select name='enterprise'>{choices}</select></label>{fields}<button>Create & qualify →</button></div></form></section>"
     return page('Create opportunity',body,headers)
 
 
 def record_page(identifier, headers=None, error='', draft=None):
     r=get_opportunity(identifier,headers=headers)
-    bank=BANKS[r['enterprise_slug']]
+    bank=enterprise_reference(r['enterprise_slug'])
+    if bank is None: raise ValueError('Unknown enterprise')
     from .access import require_capability
     try:
         require_capability(headers, 'commercial_context.edit')
@@ -205,7 +208,7 @@ def record_page(identifier, headers=None, error='', draft=None):
     value_fields=_input('amount','Indicative amount',r['amount'],help_text='Blank when unknown. No inferred budget or automatic scenario import.')+_select('currency','Currency',['GBP','EUR','USD'],r['currency'])+_select('value_basis','Value basis',['Unknown','Estimate','Customer-confirmed amount'],r['value_basis'])+_input('value_reference','Estimate assumptions / customer amount reference',r['value_reference'],'textarea')
     evidence_fields=_select('confidence','User evidence assessment',['Unknown','Low','Moderate','High'],r['confidence'])+_input('confidence_rationale','Evidence assessment rationale',r['confidence_rationale'],'textarea')
     history=''.join(f"<details><summary>{e(_date(h['at']))} · {e(h['actor'])} · v{h['version']} · {e(h['action'])}</summary><pre>{e(json.dumps(h['changes'],indent=2,ensure_ascii=False))}</pre></details>" for h in reversed(r['history']))
-    body=_crumb(bank)+f"<p><a href='{BASE}/pipeline'>← Pipeline</a> · <a href='{ROOT}/{bank.slug}/opportunities'>Opportunity landscape</a></p>"+f"""<section class='ex-hero' id='explorer-content'><p class='eyebrow'>{e(r['stage'])} / Demonstration opportunity</p><h1>{e(r['title'])}</h1><p>{e(maturity(r))} · {e(r['enterprise'])} · {e(r['industry'])}</p></section>{_demo()}
+    body=_enterprise_crumb(bank)+f"<p><a href='{BASE}/pipeline'>← Pipeline</a> · <a href='{landscape_url(bank.slug)}'>Opportunity landscape</a></p>"+f"""<section class='ex-hero' id='explorer-content'><p class='eyebrow'>{e(r['stage'])} / Demonstration opportunity</p><h1>{e(r['title'])}</h1><p>{e(maturity(r))} · {e(r['enterprise'])} · {e(r['industry'])}</p></section>{_demo()}
 {f"<p class='sales-error' role='alert'>{e(error)}</p>" if error else ''}{draft_notice}
 <form method='post' action='{BASE}/{identifier}/save'>{fieldset_open}<input type='hidden' name='version' value='{r['version']}'>
 <div class='sales-grid'><div><section class='ex-section ex-card'><h2>Commercial brief</h2>{edit}<h3>Value & timing discipline</h3>{value_fields}</section>
@@ -262,3 +265,11 @@ def error_page(path, message, headers, draft=None):
     if path.endswith('/save'):
         return record_page(path.split('/')[-2],headers=headers,error=message,draft=draft)
     return page('Opportunity update needs attention',f"<section class='ex-card' id='explorer-content'><h1>Check your opportunity update</h1><p class='sales-error' role='alert'>{e(message)}</p><p>No rejected changes were saved.</p><a href='{BASE}/new'>Create an opportunity</a> · <a href='{ROOT}'>Return to Banking Explorer</a></section>",headers)
+
+
+def _enterprise_crumb(bank):
+    if bank.slug not in ('lloyds','easyjet'):
+        return _crumb(bank)
+    from .research_intelligence.model import load_assessment
+    from .research_intelligence.unified_views import breadcrumb
+    return breadcrumb(True,load_assessment('aviation') if bank.slug=='easyjet' else load_assessment())

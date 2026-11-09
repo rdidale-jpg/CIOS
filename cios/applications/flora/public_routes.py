@@ -57,6 +57,11 @@ def public_route_catalog():
     add(('/flora/banking/heatmap',), 'heatmap_page', 'Public source scenario view labels only', ('mode',))
     add(('/flora/banking/heatmap/detail',), 'heatmap_detail_page', 'Public bank/theme scenario lookup only', ('mode','theme','bank'))
     add(('/flora/banking/explorer',), 'industry_page', 'Repository BANKS public-source fixtures; conceptual ecosystem only')
+    add(('/industries','/enterprises'), 'unified_catalogue', 'Repository-owned public research navigation only')
+    add(('/industries/banking','/industries/aviation'), 'unified_industry', 'Existing public research overlay; no owner records', ('lens',))
+    add(('/industries/banking/visual-specs','/industries/aviation/visual-specs'), 'visual_specs', 'Deterministic visual output of existing public research only')
+    from .banking_portfolio import BANKS as public_banks
+    add(tuple('/enterprises/'+slug for slug in (*public_banks,'easyjet')), 'unified_enterprise', 'Finite public bank references; not Enterprise Model lookup', ('lens',))
     from .research_intelligence.model import load_assessment
     research=load_assessment()
     add(('/flora/banking/research',), 'research_industry_page', 'Existing public repository research with explicit primary-verification gaps', ('lens',))
@@ -69,6 +74,19 @@ def public_route_catalog():
         add(('/flora/banking/research/candidates/'+item['id'],), 'research_candidate_page', 'Exact curated research candidate; saving requires existing verified pipeline authority')
     for identifier in [*research['assets'],*(item['id'] for key in ('frameworks','capabilities','programmes','suppliers') for item in research[key])]:
         add(('/flora/banking/research/nodes/'+identifier,), 'research_node_page', 'Exact public research relationship node; no imported/package/Canvas record selection')
+    add(('/flora/industries',), 'industry_twin_catalogue', 'Finite repository research catalogue; no protected records')
+    from .research_intelligence.registry import DOMAINS
+    for domain, (_, slug, root) in DOMAINS.items():
+        if domain == 'banking':
+            continue  # Existing Banking presentation and finite routes stay compatible.
+        overlay=load_assessment(domain)
+        add((root,), 'industry_twin', 'Registered public candidate intelligence only', ('lens',))
+        add(tuple(root+suffix for suffix in ('/'+slug,'/opportunities','/sources','/gaps')),
+            'research_twin', 'Repository research; never private Canvas, Evidence or pipeline stores')
+        for key, prefix in (('claims','evidence'),('candidates','candidates')):
+            add(tuple(root+'/'+prefix+'/'+r['id'] for r in overlay[key]), 'research_detail', 'Exact public repository identity')
+        identifiers=[*overlay['assets'],*(r['id'] for k in ('frameworks','capabilities','programmes','suppliers') for r in overlay[k])]
+        add(tuple(root+'/nodes/'+i for i in identifiers), 'research_node', 'Exact public graph node only')
     from .banking_portfolio import BANKS
     suffixes = {'':'banking_bank_page','/briefing':'banking_bank_page','/evidence':'banking_evidence_page',
                 '/financial-performance':'financial_history_page','/market-analyst-view':'market_reaction_page',

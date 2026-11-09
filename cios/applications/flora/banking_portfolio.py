@@ -46,7 +46,8 @@ def _page(title, body):
                      ("Medium-term pipeline", "Medium-term scenario sizing")):
         body = body.replace(old, new)
     notice = "" if "data-banking-assurance='pilot'" in body else _pilot_assurance_html()
-    return _workspace_page(title, notice + body)
+    from .navigation import compatibility_body
+    return _workspace_page(title, compatibility_body(notice+body,'/industries/banking','Banking source and scenario intelligence'))
 
 
 def _scenario_sizing_html(opportunity):

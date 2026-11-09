@@ -30,8 +30,14 @@ def test_home_is_enterprise_intelligence_workspace_and_flora_map():
 def test_primary_navigation_uses_five_executive_destinations():
     page = _flora_home_page({"X-Flora-User": "owner", "X-Flora-Roles": "owner", "X-Flora-Active-Workspace": "CIOS", "X-Flora-Enterprises": "CIOS"})
 
-    for label in ("Home", "Intelligence", "Opportunities", "Research", "Governance"):
-        assert f">{label}</a>" in page
+    primary=page.split("aria-label='Primary product navigation'>",1)[1].split('</nav>',1)[0]
+    for label in ("Home", "Industries", "Enterprises", "Opportunities", "Pipeline"):
+        assert f">{label}</a>" in primary
+    assert primary.count('<a ')==5
+    for label in ("Intelligence", "Research", "Governance"):
+        assert f">{label}</a>" not in primary
+    assert "aria-label='Specialist tools'" in page
+    assert "/research" in page and "/governance" in page
     assert ">Explore</a>" not in page
     assert ">Focus</a>" not in page
     assert ">Shape</a>" not in page

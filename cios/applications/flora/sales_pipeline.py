@@ -118,9 +118,10 @@ def _persist(envelope, record, actor, action, changes):
 @verified_service_write('commercial_context.edit')
 def create_opportunity(slug, origin='', values=None, headers=None):
     actor = require_active_service_write(headers, 'commercial_context.edit')
-    bank = BANKS.get(slug)
+    from .research_intelligence.registry import enterprise_reference, landscape_url
+    bank = enterprise_reference(slug)
     if bank is None:
-        raise SalesValidationError('Choose a supported Banking enterprise.')
+        raise SalesValidationError('Choose a supported enterprise.')
     require_resource_scope(headers, 'commercial_context.edit', bank.id, actor.workspace, require_acl=False)
     values = values or {}
     if set(values) - {'title', 'problem', 'solution', 'next_action'}:
@@ -155,13 +156,13 @@ def create_opportunity(slug, origin='', values=None, headers=None):
     else:
         defaults = {'title': '', 'problem': '', 'solution': '', 'next_action': ''}
         provenance = {'kind': 'user_entered_demonstration', 'source_labels': [], 'signals': [],
-                      'snapshot': now(), 'evidence_url': f'/flora/banking/{slug}/evidence',
-                      'origin_url': f'/flora/banking/explorer/{slug}', 'limitations': 'User-entered demonstration hypothesis; not a verified customer requirement.'}
+                      'snapshot': now(), 'evidence_url': f'/flora/banking/{slug}/evidence' if slug in BANKS else landscape_url(slug),
+                      'origin_url': getattr(bank,'origin_url',f'/flora/banking/explorer/{slug}'), 'limitations': 'User-entered demonstration hypothesis; not a verified customer requirement.'}
     fields = {key: _text(values.get(key, value)) for key, value in defaults.items()}
     if not fields['title'] or not fields['problem']:
         raise SalesValidationError('A title and business problem are required.')
     record = {'id': 'opp-'+uuid4().hex, 'workspace_id': actor.workspace, 'enterprise_id': bank.id,
-              'enterprise': bank.name, 'enterprise_slug': slug, 'industry': 'Banking', 'origin_id': origin,
+              'enterprise': bank.name, 'enterprise_slug': slug, 'industry': getattr(bank,'industry','Banking'), 'origin_id': origin,
               'demonstration': True, 'stage': 'Discovered', 'owner': actor.user_id, 'priority': 'Normal',
               'confidence': 'Unknown', 'confidence_rationale': 'Claim-level supporting evidence has not been assessed.',
               'created_at': now(), 'created_by': actor.user_id, 'provenance': provenance,

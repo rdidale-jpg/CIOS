@@ -95,14 +95,14 @@ STYLE = """
 """
 
 
-def _page(title, body, headers=None):
+def _page(title, body, headers=None, *, active=None, notice=None):
     # Reuse the product shell and its verified account presentation.
     from .web.app import _flora_v2_page, _account_context_html
     from .access import blueprint_upload_authorisation
-    notice = (f"Curated public-source pilot · snapshot {GENERATED_DATE}. Source dates vary. "
+    notice = notice or (f"Curated public-source pilot · snapshot {GENERATED_DATE}. Source dates vary. "
               "Not accepted canonical intelligence. Figures are historical fixture values; "
               "interpretations and opportunities require validation, not confirmed buying intent.")
-    return _flora_v2_page(title, 'intelligence', f"<style>{STYLE}</style><div class='explorer'>"
+    return _flora_v2_page(title, active or 'industries', f"<style>{STYLE}</style><div class='explorer'>"
         "<a class='ex-skip' href='#explorer-content'>Skip to explorer content</a>" + body +
         f"<footer class='ex-footer'>{e(notice)}</footer></div>",
         _account_context_html(blueprint_upload_authorisation(headers or {})))
@@ -236,7 +236,8 @@ def industry_page(headers=None):
 </p>
 </div>
 </section>"""
-    return _page('Banking Industry Explorer | FLORA', body, headers)
+    from .navigation import compatibility_body
+    return _page('Banking Industry Explorer | FLORA', compatibility_body(body,'/industries/banking','Banking Explorer context'), headers)
 
 
 def enterprise_page(slug, headers=None, insights=False):
@@ -333,7 +334,11 @@ def enterprise_page(slug, headers=None, insights=False):
 </p>
 <p>Named programme ownership, funding and delivery dates remain unconfirmed. Use the insight cards to identify what evidence is needed next.</p>
 </section>"""
-    return _page(f'{bank.name} | '+('Strategic Insights' if insights else 'Enterprise Explorer'), _crumb(bank,insights)+hero+nav+content, headers),200
+    from .navigation import compatibility_body
+    body=_crumb(bank,insights)+hero+nav+content
+    if not insights:
+        body=compatibility_body(body,'/enterprises/'+slug,'Enterprise Explorer context')
+    return _page(f'{bank.name} | '+('Strategic Insights' if insights else 'Enterprise Explorer'), body, headers),200
 
 
 def _list_links(bank):

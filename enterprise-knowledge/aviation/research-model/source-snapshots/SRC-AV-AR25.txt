@@ -1,0 +1,29 @@
+p32 performance summary
+10,106
+
+p32 headline PBT
+665
+
+p3 fleet at 30 September 2025
+356
+
+p3 network, winter/summer 2025
+1,202
+
+p4 holidays future target
+£450 million
+
+p15 digital efficiency
+self-service disruption
+
+p95 supplier management
+central procurement function
+
+p51 fuel mandates
+fuel suppliers
+
+p129 comparator airlines
+Ryanair
+
+p56 supply-chain assessment
+EcoVadis
