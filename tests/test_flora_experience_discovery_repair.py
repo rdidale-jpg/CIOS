@@ -92,10 +92,18 @@ def test_superseded_release_stays_distinct_and_inspectable():
 
 
 def test_receipt_date_does_not_become_intelligence_update_and_unstaged_is_inspection(monkeypatch):
-    p=receive(stage=False);p=replace(p,received_at='2099-12-31T00:00:00Z');monkeypatch.setattr(BlueprintPackageRegistry,'list',lambda self:[p])
+    # This archive timestamp reproduced the hosted checksum 8a6a20992916cc75.
+    # Opaque receipt/run identifiers may contain "2099" without being dates.
+    with monkeypatch.context() as archive_clock:
+        archive_clock.setattr('zipfile.time.localtime',lambda *_:(2026,11,9,20,7,24,0,0,0))
+        p=receive(stage=False)
+    p=replace(p,received_at='2099-12-31T00:00:00Z');monkeypatch.setattr(BlueprintPackageRegistry,'list',lambda self:[p])
     i=imported(dt.intelligence_discovery(H))[0];assert i.meaningful_update=='Unknown'
     assert i.destination==f'/blueprint-import/{p.import_run_id}/inspect'
-    assert '2099' not in visible(dt.digital_twins_landing_page(H))
+    text=visible(dt.digital_twins_landing_page(H))
+    assert p.package_ref in text and p.import_run_id in text
+    assert 'Last meaningful intelligence update Unknown' in text
+    assert '2099' not in text.replace(p.package_ref,'').replace(p.import_run_id,'')
 
 
 def test_authorised_persisted_model_and_canvas_are_discoverable_but_not_fully_assured():
