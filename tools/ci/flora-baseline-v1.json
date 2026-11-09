@@ -2634,7 +2634,7 @@
                   "test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion",
                   "assert text in html"
                 ],
-                "headline_sha256": "03d2e639906394be7d2c0e2d1586bad2dcdcdd9da40434b885b49608a8af644e"
+                "headline_sha256": "be000f855779a30d8982bdade72b3350369a35f1e2256e870926c86924f56a71"
               },
               "status": "failed"
             },
@@ -2903,7 +2903,7 @@
                   "test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
                   "assert \"href='/digital-twins/MOD'>Open Twin\" in home"
                 ],
-                "headline_sha256": "26217fd3baa75d5e904bf3c8e237a86a9fa67c7380255029ce4f55d999c2039f"
+                "headline_sha256": "61c98a18025b708322cf5914982c865eef21c59ae0070ed31f07661362c4b68e"
               },
               "status": "failed"
             },
@@ -2929,15 +2929,7 @@
               "status": "passed"
             },
             "tests/test_flora_enterprise_canvas.py::test_home_page_does_not_expose_synthetic_canvas_route": {
-              "signature": {
-                "frame": [
-                  "tests/test_flora_enterprise_canvas.py",
-                  "test_home_page_does_not_expose_synthetic_canvas_route",
-                  "assert \"/blueprint-import/history\" in html"
-                ],
-                "headline_sha256": "4751f36d4fdbb8a7ee6c08db99d0a8da15fe5bde9acb84990e6cb8a328a3db76"
-              },
-              "status": "failed"
+              "status": "passed"
             },
             "tests/test_flora_enterprise_canvas.py::test_missing_canvas_does_not_fall_back_to_synthetic_enterprise": {
               "status": "passed"
@@ -2949,7 +2941,7 @@
                   "test_mod_executive_commercial_canvas_read_model",
                   "assert \"executive situation briefing\" in html"
                 ],
-                "headline_sha256": "4cfbddac8f5c56d2d8d53ef3910e8a9d83c7a0b510379eaea8be65fa7f293688"
+                "headline_sha256": "0439732c274114b1d93bcc148f7b895b050241ced0b0f77c4990146568b43d76"
               },
               "status": "failed"
             },
@@ -5963,6 +5955,60 @@
               "tests/test_flora_import_model_reconciliation.py::test_supersession_keeps_old_record_without_reintroducing_old_truth",
               "tests/test_flora_import_model_reconciliation.py::test_supplied_fingerprint_cannot_merge_another_enterprises_observation",
               "tests/test_flora_import_model_reconciliation.py::test_unsupported_mapping_is_canonical_but_explicitly_partial"
+            ]
+          ]
+        },
+        "unified_experience": {
+          "cases": {
+            "tests/test_flora_unified_experience.py::test_all_six_specs_are_derived_from_the_existing_research_contract": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_experience.py::test_canonical_bank_pages_and_other_historical_profiles_are_explicit": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_experience.py::test_canonical_home_industry_enterprise_opportunity_journey": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_experience.py::test_current_historical_and_inferred_evidence_remain_available": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_experience.py::test_generic_sector_configuration_uses_the_same_visual_api_without_banking_routing": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_experience.py::test_industry_lenses_and_enterprise_views_open_each_template": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_experience.py::test_legacy_entry_urls_retain_supporting_content_and_canonical_destinations": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_experience.py::test_primary_navigation_is_consistent_and_specialist_tools_are_contextual": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_experience.py::test_specification_json_endpoint_matches_page_inputs_and_is_public": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_experience.py::test_supplier_visual_preserves_unknown_contracts_and_reported_history": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_experience.py::test_visual_contract_rejects_changed_periods_ratings_or_priorities": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_experience.py::test_visual_contract_rejects_invented_labels_edges_and_claim_upgrades": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_experience.py::test_visual_nodes_only_link_to_existing_finite_public_evidence_and_research": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_experience.py::test_visual_reading_preserves_existing_pipeline_and_qualification": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_experience.py::test_visuals_use_distinct_framework_geometries_and_keyboard_destinations": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_unified_experience.py"
             ]
           ]
         }

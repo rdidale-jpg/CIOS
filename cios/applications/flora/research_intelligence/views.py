@@ -35,7 +35,7 @@ def links(data, ids):
 
 def shell(title, body, headers=None, data=None):
     data=data or load_assessment();state=freshness(data)
-    nav=[(ROOT,'Industry lenses'),(ROOT+'/lloyds','Lloyds deep research'),(ROOT+'/opportunities','Research priorities'),(ROOT+'/sources','Source register'),(ROOT+'/gaps','Research gaps')]
+    nav=[('/industries/banking','Banking Industry Twin'),('/enterprises/lloyds','Lloyds Enterprise Twin'),('/opportunities','Opportunities'),(ROOT+'/sources','Source register'),(ROOT+'/gaps','Research gaps')]
     controls="<nav class='research-nav' aria-label='Research navigation'>"+''.join(f"<a href='{path}'>{text}</a>" for path,text in nav)+'</nav>'
     warning=f"<aside class='research-warning'><strong>Primary-source re-verification {'pending' if state['primary_verified']==0 else 'partially complete'}.</strong> {state['primary_verified']} reviewed primary-source records ({state['reviewed_excerpts']} short extracts; full originals not archived for extracts). {state['primary_total']-state['primary_verified']} historical citations still require verification. Historical research effective {data['upstream_research_effective_date']}; assessment {data['assessed_at']}. Unknown publication dates stay Unknown. Public disclosures support research, not customer-confirmed demand or accepted canonical Evidence.</aside>"
     crumb=f"<nav class='ex-breadcrumb' aria-label='Breadcrumb'><a href='/flora/banking/explorer'>Banking Explorer</a> / <a href='{ROOT}'>Industry Twin research</a> / <span>{e(title)}</span></nav>"
@@ -72,7 +72,8 @@ def industry_page(lens='pestle',headers=None):
         diagram=_map('Interactive '+lens+' research lens','UK Banking',[(r['title'],'Interpretation / research gap',ROOT+'/nodes/'+r['id']) for r in rows])
     cards=''.join(f"<article class='ex-card'><span class='research-badge interpretation'>Working interpretation</span><h3><a href='{ROOT}/nodes/{r['id']}'>{e(r['title'])}</a></h3><p>{e(r['assessment'])}</p><p>{len(r['claim_ids'])} linked research claims · {len(r['gap_ids'])} explicit gaps</p></article>" for r in rows)
     body=hero+tabs+diagram+f"<section class='ex-section'><div class='research-grid'>{cards}</div></section><section class='ex-card'><h2>One research spine, not another duplicate Twin.</h2><p>These lenses reference existing Banking Foundation, Industry Twin and Lloyds Twin identities. Conceptual arrows show analytical relationships, not verified contracts, customer demand or accepted Enterprise Model ownership.</p>{links(data,['BK-IND-001','BK-IND-002','BK-REF-001','BK-ENT-001'])}</section>"
-    return shell('Banking Industry Twin research',body,headers,data)
+    from ..navigation import compatibility_body
+    return shell('Banking Industry Twin research',compatibility_body(body,'/industries/banking','detailed research lenses'),headers,data)
 
 
 def enterprise_page(headers=None):
@@ -85,7 +86,8 @@ def enterprise_page(headers=None):
         sections.append(f"<section class='ex-section' id='{domain}'><p class='ex-kicker'>Enterprise knowledge domain</p><h2>{e(title)}</h2>{claims_html(data,selected)}</section>")
     programme_cards=''.join(f"<article class='ex-card'><span class='research-badge'>{e(p['signal_class'])}</span><h3><a href='{ROOT}/nodes/{p['id']}'>{e(p['title'])}</a></h3><p>Owner: {e(p['owner'])} · Funding: {e(p['funding'])} · Procurement: {e(p['procurement'])}</p><p>{e(p['current_phase'])}</p></article>" for p in data['programmes'])
     body=f"<section class='ex-hero' id='explorer-content'><p class='eyebrow'>Enterprise Twin / {data['enterprise_twin_id']}</p><h1>Lloyds.<br>Connect the economic spine.</h1><p>Deposits, earnings, capital, simplification and customer outcomes: test each link before turning it into a commercial claim.</p><a class='ex-button' href='{ROOT}/opportunities'>Reassess the opportunities →</a></section><section class='ex-section'>{_map('Lloyds research landscape','Lloyds research',nodes)}</section>"+current_evidence_html(data)+''.join(sections)+f"<section class='ex-section'><h2>Programme and investment signals</h2><p>Reported priorities, rollouts and proposed transactions are not interchangeable. No funding, buyer or procurement date is inferred.</p><div class='research-grid'>{programme_cards}</div></section><section class='ex-card'><h2>Continue in existing FLORA views</h2><p><a href='/flora/banking/explorer/lloyds'>Enterprise Explorer</a> · <a href='/flora/banking/explorer/lloyds/opportunities'>Original opportunity landscape</a> · <a href='/digital-twins'>Governed Canvas discovery (requires appropriate access)</a></p><p>Financial values in this research preserve their own reporting periods and source limitations. They do not overwrite the older Explorer fixtures or customer pipeline records.</p></section>"
-    return shell('Lloyds Enterprise Twin research',body,headers,data)
+    from ..navigation import compatibility_body
+    return shell('Lloyds Enterprise Twin research',compatibility_body(body,'/enterprises/lloyds','full Lloyds research dossier'),headers,data)
 
 
 def opportunities_page(headers=None):

@@ -1,0 +1,109 @@
+{
+  "baseline_commit": "ac2861e855257f3f70322bf4c1568434e565945a",
+  "cases": [
+    {
+      "baseline": {
+        "signature": {
+          "frame": [
+            "tests/test_flora_banking_portfolio_increment3.py",
+            "test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion",
+            "assert text in html"
+          ],
+          "headline_sha256": "03d2e639906394be7d2c0e2d1586bad2dcdcdd9da40434b885b49608a8af644e"
+        },
+        "status": "failed"
+      },
+      "candidate": {
+        "signature": {
+          "frame": [
+            "tests/test_flora_banking_portfolio_increment3.py",
+            "test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion",
+            "assert text in html"
+          ],
+          "headline_sha256": "be000f855779a30d8982bdade72b3350369a35f1e2256e870926c86924f56a71"
+        },
+        "status": "failed"
+      },
+      "classification": "Inherited defect unchanged; full rendered-HTML exception fingerprint changes with the reviewed shared menu/footer.",
+      "test_file_sha256": "01a2ed517307575ce3478c24979bcefc38aa85a504e9f9d0ea88bbec36810a07",
+      "test_id": "tests/test_flora_banking_portfolio_increment3.py::test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion",
+      "unchanged_assertion_predicate": "assert 'Near-term pipeline'"
+    },
+    {
+      "baseline": {
+        "signature": {
+          "frame": [
+            "tests/test_flora_enterprise_canvas.py",
+            "test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+            "assert \"href='/digital-twins/MOD'>Open Twin\" in home"
+          ],
+          "headline_sha256": "26217fd3baa75d5e904bf3c8e237a86a9fa67c7380255029ce4f55d999c2039f"
+        },
+        "status": "failed"
+      },
+      "candidate": {
+        "signature": {
+          "frame": [
+            "tests/test_flora_enterprise_canvas.py",
+            "test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+            "assert \"href='/digital-twins/MOD'>Open Twin\" in home"
+          ],
+          "headline_sha256": "61c98a18025b708322cf5914982c865eef21c59ae0070ed31f07661362c4b68e"
+        },
+        "status": "failed"
+      },
+      "classification": "Inherited defect unchanged; full rendered-HTML exception fingerprint changes with the reviewed shared menu/footer.",
+      "test_file_sha256": "ca6a4ec44bf15ca42fada20ec586e1c75970353e4771576a685cb4c33a159d3b",
+      "test_id": "tests/test_flora_enterprise_canvas.py::test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+      "unchanged_assertion_predicate": "assert \"href='/digital-twins/MOD'>Open Twin\""
+    },
+    {
+      "baseline": {
+        "signature": {
+          "frame": [
+            "tests/test_flora_enterprise_canvas.py",
+            "test_home_page_does_not_expose_synthetic_canvas_route",
+            "assert \"/blueprint-import/history\" in html"
+          ],
+          "headline_sha256": "4751f36d4fdbb8a7ee6c08db99d0a8da15fe5bde9acb84990e6cb8a328a3db76"
+        },
+        "status": "failed"
+      },
+      "candidate": {
+        "status": "passed"
+      },
+      "classification": "Fixed: contextual Import History link restored; synthetic Canvas URL remains absent.",
+      "test_file_sha256": "ca6a4ec44bf15ca42fada20ec586e1c75970353e4771576a685cb4c33a159d3b",
+      "test_id": "tests/test_flora_enterprise_canvas.py::test_home_page_does_not_expose_synthetic_canvas_route"
+    },
+    {
+      "baseline": {
+        "signature": {
+          "frame": [
+            "tests/test_flora_enterprise_canvas.py",
+            "test_mod_executive_commercial_canvas_read_model",
+            "assert \"executive situation briefing\" in html"
+          ],
+          "headline_sha256": "4cfbddac8f5c56d2d8d53ef3910e8a9d83c7a0b510379eaea8be65fa7f293688"
+        },
+        "status": "failed"
+      },
+      "candidate": {
+        "signature": {
+          "frame": [
+            "tests/test_flora_enterprise_canvas.py",
+            "test_mod_executive_commercial_canvas_read_model",
+            "assert \"executive situation briefing\" in html"
+          ],
+          "headline_sha256": "0439732c274114b1d93bcc148f7b895b050241ced0b0f77c4990146568b43d76"
+        },
+        "status": "failed"
+      },
+      "classification": "Inherited defect unchanged; full rendered-HTML exception fingerprint changes with the reviewed shared menu/footer.",
+      "test_file_sha256": "ca6a4ec44bf15ca42fada20ec586e1c75970353e4771576a685cb4c33a159d3b",
+      "test_id": "tests/test_flora_enterprise_canvas.py::test_mod_executive_commercial_canvas_read_model",
+      "unchanged_assertion_predicate": "assert 'executive situation briefing'"
+    }
+  ],
+  "method": "Original tests reproduced unchanged in an isolated main worktree and the candidate, using separate disposable stores. No failure normalization or allowlist expansion."
+}

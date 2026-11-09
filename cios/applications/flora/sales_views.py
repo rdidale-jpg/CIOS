@@ -26,7 +26,7 @@ def _money(value):
 
 
 def page(title, body, headers=None):
-    return _page(title, f'<style>{CSS}</style>'+body, headers)
+    return _page(title, f'<style>{CSS}</style>'+body, headers, active='pipeline')
 
 
 def _input(name, label, value='', kind='text', help_text='', required=False):
