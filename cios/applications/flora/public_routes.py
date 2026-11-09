@@ -57,6 +57,18 @@ def public_route_catalog():
     add(('/flora/banking/heatmap',), 'heatmap_page', 'Public source scenario view labels only', ('mode',))
     add(('/flora/banking/heatmap/detail',), 'heatmap_detail_page', 'Public bank/theme scenario lookup only', ('mode','theme','bank'))
     add(('/flora/banking/explorer',), 'industry_page', 'Repository BANKS public-source fixtures; conceptual ecosystem only')
+    from .research_intelligence.model import load_assessment
+    research=load_assessment()
+    add(('/flora/banking/research',), 'research_industry_page', 'Existing public repository research with explicit primary-verification gaps', ('lens',))
+    add(('/flora/banking/research/lloyds','/flora/banking/research/opportunities',
+         '/flora/banking/research/sources','/flora/banking/research/gaps'),
+        'research_page', 'Public research overlay only; no private model, Evidence or sales-record lookup')
+    for item in research['claims']:
+        add(('/flora/banking/research/evidence/'+item['id'],), 'research_evidence_page', 'Exact repository quote and cited public-source metadata; not canonical Evidence')
+    for item in research['candidates']:
+        add(('/flora/banking/research/candidates/'+item['id'],), 'research_candidate_page', 'Exact curated research candidate; saving requires existing verified pipeline authority')
+    for identifier in [*research['assets'],*(item['id'] for key in ('frameworks','capabilities','programmes','suppliers') for item in research[key])]:
+        add(('/flora/banking/research/nodes/'+identifier,), 'research_node_page', 'Exact public research relationship node; no imported/package/Canvas record selection')
     from .banking_portfolio import BANKS
     suffixes = {'':'banking_bank_page','/briefing':'banking_bank_page','/evidence':'banking_evidence_page',
                 '/financial-performance':'financial_history_page','/market-analyst-view':'market_reaction_page',

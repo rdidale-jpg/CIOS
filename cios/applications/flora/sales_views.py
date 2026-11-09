@@ -67,7 +67,8 @@ def discovery_page(slug, theme='', headers=None):
 <p>{e(o.problem)}</p><p><strong>Timing:</strong> Unknown — {e(o.horizon_label)} is a scenario, not a procurement date.</p>
 <p><strong>Value:</strong> Unknown. Existing illustrative sizing is not a customer budget.</p>
 <span class='ex-arrow'>Inspect opportunity & evidence →</span></a>""" for o in selected)
-    body = _crumb(bank)+f"""<section class='ex-hero' id='explorer-content'><p class='eyebrow'>Opportunity discovery / Banking</p>
+    research_link=("<section class='ex-card'><h2>Research-led reassessment</h2><p>Connect the existing Lloyds research to eight provisional commercial questions, source quotations and explicit customer evidence gaps.</p><a href='/flora/banking/research/opportunities'>Inspect new research priorities and changes to these hypotheses →</a></section>" if slug=='lloyds' else '')
+    body = _crumb(bank)+research_link+f"""<section class='ex-hero' id='explorer-content'><p class='eyebrow'>Opportunity discovery / Banking</p>
 <h1>{e(bank.name)}<br>Where could change create value?</h1><p>Start with the business problem. Follow the evidence. Build a proposition worth validating with the customer.</p>
 <a class='ex-button' href='{BASE}/pipeline'>Open your pipeline →</a></section>{_demo()}
 <section class='ex-section'><p class='ex-kicker'>Operating landscape → Commercial hypotheses</p><h2>Explore the opportunity landscape.</h2>
@@ -81,8 +82,8 @@ def discovery_page(slug, theme='', headers=None):
     return page(bank.name+' opportunity landscape',body,headers),200
 
 
-def opportunity_page(slug, origin, headers=None):
-    bank, source = hypothesis(slug, origin)
+def capture_controls(slug, origin, headers=None):
+    bank=BANKS[slug]
     action = f'{BASE}/capture'
     from .access import require_capability, require_resource_scope
     try:
@@ -91,6 +92,13 @@ def opportunity_page(slug, origin, headers=None):
         capture_action = f"<form method='post' action='{action}'><input type='hidden' name='enterprise' value='{slug}'><input type='hidden' name='origin' value='{origin}'><button type='submit'>Add to pipeline & qualify →</button></form>"
     except PermissionError:
         capture_action = "<p>Saving needs a verified identity and an authorised selected workspace.</p><a class='ex-button' href='/auth/sign-in'>Sign in to develop this opportunity</a><p><a href='/auth/workspace'>Select your workspace</a></p>"
+
+    return capture_action
+
+
+def opportunity_page(slug, origin, headers=None):
+    bank, source = hypothesis(slug, origin)
+    capture_action = capture_controls(slug, origin, headers)
 
     body = _crumb(bank)+f"""<p><a href='{ROOT}/{slug}/opportunities'>← Opportunity landscape</a> · <a href='{BASE}/pipeline'>Workspace pipeline</a></p>
 <section class='ex-hero' id='explorer-content'><p class='eyebrow'>Potential opportunity / {e(bank.name)}</p><h1>{e(source.title)}</h1><p>{e(source.problem)}</p></section>

@@ -4371,6 +4371,69 @@
             ]
           ]
         },
+        "research_intelligence": {
+          "cases": {
+            "tests/test_flora_research_intelligence.py::test_all_six_pestle_five_forces_and_value_activities_are_explicit": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_corroboration_does_not_rewrite_existing_factual_statement": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_date_and_entity_scope_are_not_confused": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_existing_twin_assets_and_canonical_intelligence_remain_unchanged": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_existing_twin_ids_and_source_contracts_are_reused": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_graph_rejects_missing_relationships_duplicate_ids_and_false_lineage": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_missing_dates_staleness_and_future_assessment_are_visible": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_no_fabricated_budget_dates_or_customer_demand_in_ranked_candidates": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_primary_supported_claim_needs_matching_content_snapshot": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_public_research_navigation_reaches_all_lenses_claims_and_candidates": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_public_research_never_reads_private_models_or_pipeline": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_ranking_changes_and_overlap_are_traceable": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_repository_citations_cannot_be_upgraded_by_status_or_hash_alone": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_research_capture_keeps_existing_snapshot_on_reassessment": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_research_capture_preserves_lineage_without_qualification_or_auto_writes": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_research_links_and_diagram_nodes_have_destinations": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_research_revision_preserves_established_facts_and_history": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_supplier_edges_distinguish_reported_relationship_and_unknown_contract": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_research_intelligence.py"
+            ]
+          ]
+        },
         "sales_pipeline": {
           "cases": {
             "tests/test_flora_sales_pipeline.py::test_active_pursuit_requires_new_confirmation": {

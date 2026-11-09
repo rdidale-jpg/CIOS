@@ -6,6 +6,7 @@ on:
     types: [opened, synchronize, reopened, ready_for_review, edited]
     paths:
       - 'cios/applications/flora/**'
+      - 'enterprise-knowledge/banking/**'
       - 'tests/**'
       - 'tools/ci/**'
       - 'requirements*.txt'
@@ -17,6 +18,7 @@ on:
     branches: [main]
     paths:
       - 'cios/applications/flora/**'
+      - 'enterprise-knowledge/banking/**'
       - 'tests/**'
       - 'tools/ci/**'
       - 'requirements*.txt'
