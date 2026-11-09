@@ -1,0 +1,2528 @@
+{
+  "schema_version": 1,
+  "assessment_id": "BK-RESEARCH-001",
+  "industry_twin_id": "BK-IND-002",
+  "enterprise_twin_id": "BK-ENT-001",
+  "assessed_at": "2026-11-09",
+  "upstream_research_effective_date": "2026-07-17",
+  "authority": "candidate_intelligence",
+  "research_status": "PRIMARY_VERIFICATION_BLOCKED",
+  "network_probes": [
+    {
+      "url": "https://www.lloydsbankinggroup.com/investors/financial-downloads.html",
+      "checked_at": "2026-11-09",
+      "result": "Workspace proxy CONNECT 403"
+    },
+    {
+      "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes",
+      "checked_at": "2026-11-09",
+      "result": "Workspace proxy CONNECT 403"
+    }
+  ],
+  "assets": {
+    "BK-IND-001": "enterprise-knowledge/banking/industry/Banking-Industry-Foundation.md",
+    "BK-IND-002": "enterprise-knowledge/banking/industry/Banking-Industry-Twin.md",
+    "BK-REF-001": "enterprise-knowledge/banking/industry/Banking-Mechanisms-and-Tensions-Model.md",
+    "BK-ENT-001": "enterprise-knowledge/banking/enterprises/lloyds/Lloyds-Enterprise-Twin.md"
+  },
+  "sources": [
+    {
+      "id": "SRC-LBG-AR",
+      "title": "Lloyds annual report landing page",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/investors/annual-report.html",
+      "reporting_period": "FY2025, as described by the existing Twin; current landing-page version unverified",
+      "publication_date": null,
+      "retrieved_at": null,
+      "primary_content_sha256": null,
+      "verification": "citation_only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+    },
+    {
+      "id": "SRC-LBG-Q1",
+      "title": "Lloyds Q1 2026 interim management statement",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q1/2026-lbg-q1-ims.pdf",
+      "reporting_period": "Q1 2026",
+      "publication_date": null,
+      "retrieved_at": null,
+      "primary_content_sha256": null,
+      "verification": "citation_only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+    },
+    {
+      "id": "SRC-LBG-AI",
+      "title": "AI benefits announcement cited by the existing Twin",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/ai-driven-benefits-2026.html",
+      "reporting_period": "2025 reported benefits / 2026 management expectation",
+      "publication_date": null,
+      "retrieved_at": null,
+      "primary_content_sha256": null,
+      "verification": "citation_only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+    },
+    {
+      "id": "SRC-LBG-GCP",
+      "title": "Google Cloud AI announcement cited by the existing Twin",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html",
+      "reporting_period": "2025 announcement; current relationship status unverified",
+      "publication_date": null,
+      "retrieved_at": null,
+      "primary_content_sha256": null,
+      "verification": "citation_only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+    },
+    {
+      "id": "SRC-LBG-BRAND",
+      "title": "Halifax brand announcement cited by the existing Twin",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/halifax-rebrand-to-lloyds.html",
+      "reporting_period": "2026 announcement; implementation status unverified",
+      "publication_date": null,
+      "retrieved_at": null,
+      "primary_content_sha256": null,
+      "verification": "citation_only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+    },
+    {
+      "id": "SRC-LBG-ACCESS",
+      "title": "Branch closures and local access assessments",
+      "publisher": "Lloyds Bank",
+      "url": "https://www.lloydsbank.com/help-guidance/everyday-banking/banking-near-you/branch-closures.html",
+      "reporting_period": "Rolling local assessments; individual dates not yet captured",
+      "publication_date": null,
+      "retrieved_at": null,
+      "primary_content_sha256": null,
+      "verification": "citation_only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+    },
+    {
+      "id": "SRC-LBG-CURVE",
+      "title": "Proposed Curve acquisition announcement cited by the existing Twin",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/investor-news/2025/2025nov19-lbg-curve-acquisition.pdf",
+      "reporting_period": "Proposed transaction; announcement date inferred from URL is not treated as verified publication date",
+      "publication_date": null,
+      "retrieved_at": null,
+      "primary_content_sha256": null,
+      "verification": "citation_only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+    },
+    {
+      "id": "SRC-HMT-CTP",
+      "title": "Critical third-party safeguards announcement cited by existing research",
+      "publisher": "HM Treasury",
+      "url": "https://www.gov.uk/government/news/uk-financial-system-strengthened-with-new-safeguards-for-major-technology-providers",
+      "reporting_period": "Designation/effective dates require primary verification",
+      "publication_date": null,
+      "retrieved_at": null,
+      "primary_content_sha256": null,
+      "verification": "citation_only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+    },
+    {
+      "id": "SRC-FCA-DUTY",
+      "title": "Consumer Duty focus areas",
+      "publisher": "Financial Conduct Authority",
+      "url": "https://www.fca.org.uk/publications/corporate-documents/consumer-duty-focus-areas",
+      "reporting_period": "Current applicable version and dates require verification",
+      "publication_date": null,
+      "retrieved_at": null,
+      "primary_content_sha256": null,
+      "verification": "citation_only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+    },
+    {
+      "id": "SRC-FCA-MODELS",
+      "title": "Strategic review of retail banking business models",
+      "publisher": "Financial Conduct Authority",
+      "url": "https://www.fca.org.uk/publications/multi-firm-reviews/strategic-review-retail-banking-business-models",
+      "reporting_period": "Historical industry context; not current market-share evidence",
+      "publication_date": null,
+      "retrieved_at": null,
+      "primary_content_sha256": null,
+      "verification": "citation_only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+    },
+    {
+      "id": "SRC-BOE-FSR",
+      "title": "July 2026 Financial Stability Report cited by existing research",
+      "publisher": "Bank of England",
+      "url": "https://www.bankofengland.co.uk/-/media/boe/files/financial-stability-report/2026/financial-stability-report-july-2026.pdf",
+      "reporting_period": "July 2026; latest available version not checked",
+      "publication_date": null,
+      "retrieved_at": null,
+      "primary_content_sha256": null,
+      "verification": "citation_only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+    },
+    {
+      "id": "SRC-CMA-OB",
+      "title": "Retail Banking Market Investigation Order 2017",
+      "publisher": "Competition and Markets Authority",
+      "url": "https://www.gov.uk/government/publications/retail-banking-market-investigation-order-2017",
+      "reporting_period": "2017 instrument; current amendments/applicability need verification",
+      "publication_date": null,
+      "retrieved_at": null,
+      "primary_content_sha256": null,
+      "verification": "citation_only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL."
+    }
+  ],
+  "claims": [
+    {
+      "id": "LBG-DEPOSITS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports Lloyds customer deposits of GBP496.5bn at 2025 year-end.",
+      "repository_quote": "£496.5bn customer deposits",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "reporting_period": "2025 year-end",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": "496.5",
+      "metric_unit": "GBP bn",
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-CUSTOMERS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports 23.6m digitally active customers.",
+      "repository_quote": "23.6m digitally active customers",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "reporting_period": "2025 year-end",
+      "domain": "operating_capabilities",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": "23.6",
+      "metric_unit": "million customers",
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-HEDGE",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports GBP1.6bn structural-hedge income for Q1 2026.",
+      "repository_quote": "£1.6bn income from structural hedge balances in Q1 2026",
+      "source_ids": [
+        "SRC-LBG-Q1"
+      ],
+      "reporting_period": "Q1 2026",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": "1.6",
+      "metric_unit": "GBP bn",
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-TECH-COST",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports c.30% gross reduction in technology run/change costs since 2021.",
+      "repository_quote": "c.30% gross reduction in run and change technology costs since 2021",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "reporting_period": "2021–2025 comparison reported in existing Twin",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": "30",
+      "metric_unit": "percent, gross; not net programme benefit",
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-MIGRATION",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research identifies legacy application decommissioning and cloud migration as 2026 priorities.",
+      "repository_quote": "2026 priorities to accelerate legacy app decommissioning and cloud migration",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "reporting_period": "2026 management priority",
+      "domain": "programmes",
+      "kind": "management_priority",
+      "verification": "repository_reported",
+      "metric_value": null,
+      "metric_unit": null,
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-AI-USE",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports more than 50 AI use cases rolled out in 2025.",
+      "repository_quote": "more than 50 AI use cases rolled out in 2025",
+      "source_ids": [
+        "SRC-LBG-AI"
+      ],
+      "reporting_period": "2025",
+      "domain": "technology",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": "50+",
+      "metric_unit": "use cases",
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-AI-VALUE",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports a company claim of around GBP50m GenAI value in 2025.",
+      "repository_quote": "around £50m of GenAI value in 2025",
+      "source_ids": [
+        "SRC-LBG-AI"
+      ],
+      "reporting_period": "2025",
+      "domain": "investment",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": "50",
+      "metric_unit": "GBP m; company-reported value, not a supplier budget",
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-AI-TARGET",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research records an expectation of additional AI value above GBP100m in 2026; this is not achieved value or procurement budget.",
+      "repository_quote": "expected additional value above £100m in 2026",
+      "source_ids": [
+        "SRC-LBG-AI"
+      ],
+      "reporting_period": "2026 management expectation",
+      "domain": "investment",
+      "kind": "management_expectation",
+      "verification": "repository_reported",
+      "metric_value": "100+",
+      "metric_unit": "GBP m; expectation, not achieved or addressable spend",
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-VERTEX",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports Lloyds use of Google Cloud Vertex AI.",
+      "repository_quote": "Lloyds says it is using Google Cloud Vertex AI",
+      "source_ids": [
+        "SRC-LBG-GCP"
+      ],
+      "reporting_period": "2025 announcement context",
+      "domain": "supplier_relationships",
+      "kind": "reported_relationship",
+      "verification": "repository_reported",
+      "metric_value": null,
+      "metric_unit": null,
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-MODELS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports 15 modelling systems migrated to Vertex AI.",
+      "repository_quote": "has migrated 15 modelling systems from on-premise infrastructure to Vertex AI",
+      "source_ids": [
+        "SRC-LBG-GCP"
+      ],
+      "reporting_period": "2025 announcement context",
+      "domain": "technology",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": "15",
+      "metric_unit": "modelling systems",
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-COPILOT",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research records 30,000 Copilot licences; current usage and net benefit are not established.",
+      "repository_quote": "30,000 Copilot licences, AI use cases and AI Academy direction",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "reporting_period": "Existing Twin FY2025/2026 context; precise effective date unknown",
+      "domain": "technology",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": "30000",
+      "metric_unit": "licences, not active users",
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-BRAND",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports a Halifax-to-Lloyds brand/app migration announcement; current implementation and outcomes need verification.",
+      "repository_quote": "Halifax customers will use the Lloyds app over time",
+      "source_ids": [
+        "SRC-LBG-BRAND"
+      ],
+      "reporting_period": "2026 announcement context",
+      "domain": "programmes",
+      "kind": "reported_programme",
+      "verification": "repository_reported",
+      "metric_value": null,
+      "metric_unit": null,
+      "supersedes": null,
+      "entity_scope": "Lloyds/Halifax brands; legal entity impacts unverified"
+    },
+    {
+      "id": "LBG-ACCESS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research reports branch closures subject to access-to-cash rules and LINK reviews.",
+      "repository_quote": "closures subject to FCA access-to-cash rules and LINK reviews",
+      "source_ids": [
+        "SRC-LBG-ACCESS"
+      ],
+      "reporting_period": "Local assessment periods unknown",
+      "domain": "operating_capabilities",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": null,
+      "metric_unit": null,
+      "supersedes": null,
+      "entity_scope": "Lloyds Bank retail network; not all Group entities"
+    },
+    {
+      "id": "LBG-SUPPLIER-RISK",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research identifies third-party, AI, cyber and technology-failure risk disclosures.",
+      "repository_quote": "operational risks from third-party suppliers, AI, cyber, technological failure",
+      "source_ids": [
+        "SRC-LBG-Q1"
+      ],
+      "reporting_period": "Q1 2026 risk-factor context",
+      "domain": "supplier_relationships",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": null,
+      "metric_unit": null,
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-PRIMACY-GAP",
+      "asset_id": "BK-ENT-001",
+      "statement": "Digital activity is not proof of salary-flow capture, main-bank status or customer primacy.",
+      "repository_quote": "Digitally active and app-using customers are not the same as primary-account customers.",
+      "source_ids": [
+        "SRC-LBG-AR"
+      ],
+      "reporting_period": "Existing research assessment, July 2026",
+      "domain": "strategy",
+      "kind": "interpretation",
+      "verification": "repository_reported",
+      "metric_value": null,
+      "metric_unit": null,
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-BPO-GAP",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research does not establish BPO workshare, contract values, renewals or exit constraints.",
+      "repository_quote": "does not identify Lloyds’ BPO footprint, managed-service workshare, contract values, renewal dates or exit constraints",
+      "source_ids": [
+        "SRC-LBG-Q1"
+      ],
+      "reporting_period": "Existing research gap, July 2026",
+      "domain": "supplier_relationships",
+      "kind": "unknown",
+      "verification": "repository_reported",
+      "metric_value": null,
+      "metric_unit": null,
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-FRAUD-GAP",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research lacks sufficiently granular Lloyds-specific fraud and control-friction evidence.",
+      "repository_quote": "did not find sufficiently granular Lloyds-specific public evidence for APP fraud losses, false positives, reimbursement",
+      "source_ids": [
+        "SRC-LBG-Q1"
+      ],
+      "reporting_period": "Existing research gap, July 2026",
+      "domain": "operating_capabilities",
+      "kind": "unknown",
+      "verification": "repository_reported",
+      "metric_value": null,
+      "metric_unit": null,
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "LBG-CURVE",
+      "asset_id": "BK-ENT-001",
+      "statement": "Existing research records a proposed Curve acquisition subject to regulatory approval; completion is not established.",
+      "repository_quote": "Curve acquisition to broaden digital wallet/payment flexibility; expected completion subject to regulatory approval.",
+      "source_ids": [
+        "SRC-LBG-CURVE"
+      ],
+      "reporting_period": "Proposed transaction; status needs refresh",
+      "domain": "programmes",
+      "kind": "proposed_transaction",
+      "verification": "repository_reported",
+      "metric_value": null,
+      "metric_unit": null,
+      "supersedes": null,
+      "entity_scope": "Lloyds Banking Group; subsidiary/workload coverage unverified"
+    },
+    {
+      "id": "UK-CTP",
+      "asset_id": "BK-REF-001",
+      "statement": "Existing research cites a critical-third-party oversight regime; designation and effective dates are not re-verified.",
+      "repository_quote": "HM Treasury designation of Microsoft, Google Cloud, AWS and Oracle as UK financial-services critical third parties.",
+      "source_ids": [
+        "SRC-HMT-CTP"
+      ],
+      "reporting_period": "Existing industry evidence anchor; dates unverified",
+      "domain": "regulation",
+      "kind": "reported_fact",
+      "verification": "repository_reported",
+      "metric_value": null,
+      "metric_unit": null,
+      "supersedes": null,
+      "entity_scope": "UK industry context"
+    },
+    {
+      "id": "UK-CAPITAL",
+      "asset_id": "BK-IND-001",
+      "statement": "Existing research describes capital and liquidity as constraints on balance-sheet economics.",
+      "repository_quote": "capital and liquidity buffers constrain balance-sheet leverage but protect confidence",
+      "source_ids": [
+        "SRC-BOE-FSR"
+      ],
+      "reporting_period": "Industry mechanism; not a current regulatory threshold",
+      "domain": "economics",
+      "kind": "interpretation",
+      "verification": "repository_reported",
+      "metric_value": null,
+      "metric_unit": null,
+      "supersedes": null,
+      "entity_scope": "UK industry context"
+    },
+    {
+      "id": "UK-VALUE",
+      "asset_id": "BK-IND-001",
+      "statement": "Existing research models customer value through safe money storage, payments, credit, identity, fraud protection and support.",
+      "repository_quote": "customers receive safe storage of money, access to payment rails, credit, cash, identity assurance, fraud protection, business working capital, relationship support and regulated dispute resolution.",
+      "source_ids": [
+        "SRC-FCA-MODELS"
+      ],
+      "reporting_period": "Industry value-system interpretation",
+      "domain": "value_chain",
+      "kind": "interpretation",
+      "verification": "repository_reported",
+      "metric_value": null,
+      "metric_unit": null,
+      "supersedes": null,
+      "entity_scope": "UK industry context"
+    }
+  ],
+  "frameworks": [
+    {
+      "id": "PESTLE-P",
+      "lens": "pestle",
+      "title": "Political",
+      "assessment": "Financial-system stability and service-access expectations shape the permissible transformation envelope. Do not infer a bank procurement from policy direction.",
+      "claim_ids": [
+        "UK-CAPITAL",
+        "LBG-ACCESS"
+      ],
+      "gap_ids": [
+        "G-REGULATORY"
+      ],
+      "capability_ids": [
+        "CAP-RISK",
+        "CAP-SERVICE"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "PESTLE-E",
+      "lens": "pestle",
+      "title": "Economic",
+      "assessment": "Deposit behaviour, structural-hedge income and cost discipline motivate investment questions; income is not earmarked supplier spend.",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-TECH-COST"
+      ],
+      "gap_ids": [
+        "G-ALLOCATION"
+      ],
+      "capability_ids": [
+        "CAP-DEPOSITS",
+        "CAP-FINANCE"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "PESTLE-S",
+      "lens": "pestle",
+      "title": "Social",
+      "assessment": "Digital and assisted-channel changes need customer-outcome and vulnerability evidence; app activity does not establish primacy.",
+      "claim_ids": [
+        "LBG-CUSTOMERS",
+        "LBG-ACCESS",
+        "LBG-PRIMACY-GAP"
+      ],
+      "gap_ids": [
+        "G-OUTCOMES"
+      ],
+      "capability_ids": [
+        "CAP-SERVICE",
+        "CAP-CHANNEL"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "PESTLE-T",
+      "lens": "pestle",
+      "title": "Technological",
+      "assessment": "Reported AI platform adoption and application simplification create candidate delivery/control questions, not confirmed external requirements.",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-VERTEX",
+        "LBG-AI-USE"
+      ],
+      "gap_ids": [
+        "G-WORKLOADS",
+        "G-AI-BENEFITS"
+      ],
+      "capability_ids": [
+        "CAP-TECH",
+        "CAP-DATA"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "PESTLE-L",
+      "lens": "pestle",
+      "title": "Legal",
+      "assessment": "Consumer-outcome, operational-resilience and third-party obligations require current primary-source applicability checks.",
+      "claim_ids": [
+        "UK-CTP",
+        "LBG-SUPPLIER-RISK"
+      ],
+      "gap_ids": [
+        "G-REGULATORY"
+      ],
+      "capability_ids": [
+        "CAP-RISK"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "PESTLE-ENV",
+      "lens": "pestle",
+      "title": "Environmental",
+      "assessment": "Climate/transition exposure is a research gap here. No climate opportunity is admitted without enterprise-specific materiality and current reporting.",
+      "claim_ids": [],
+      "gap_ids": [
+        "G-CLIMATE"
+      ],
+      "capability_ids": [
+        "CAP-RISK",
+        "CAP-LENDING"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "PORTER-RIVALRY",
+      "lens": "porter",
+      "title": "Rivalry",
+      "assessment": "Assess relationship depth, deposit economics and channel outcomes rather than treating mobile features as competitive superiority.",
+      "claim_ids": [
+        "LBG-PRIMACY-GAP",
+        "LBG-DEPOSITS"
+      ],
+      "gap_ids": [
+        "G-PRIMACY"
+      ],
+      "capability_ids": [
+        "CAP-DEPOSITS",
+        "CAP-CHANNEL"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "PORTER-ENTRY",
+      "lens": "porter",
+      "title": "New entrants",
+      "assessment": "Capital, liquidity and control requirements constrain entry. Current market shares, entrant economics and specific threats remain unmeasured.",
+      "claim_ids": [
+        "UK-CAPITAL"
+      ],
+      "gap_ids": [
+        "G-MARKET"
+      ],
+      "capability_ids": [
+        "CAP-RISK",
+        "CAP-FINANCE"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "PORTER-BUYER",
+      "lens": "porter",
+      "title": "Buyer power",
+      "assessment": "Customer switching and multi-banking can affect deposits and economics; Lloyds-specific elasticity and primary-relationship data are missing.",
+      "claim_ids": [
+        "LBG-PRIMACY-GAP",
+        "LBG-DEPOSITS"
+      ],
+      "gap_ids": [
+        "G-PRIMACY"
+      ],
+      "capability_ids": [
+        "CAP-DEPOSITS",
+        "CAP-SERVICE"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "PORTER-SUPPLIER",
+      "lens": "porter",
+      "title": "Supplier power",
+      "assessment": "A reported Google Cloud relationship supports dependency questions; it does not establish exclusivity, contract scope, renewal dates or bargaining power.",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-SUPPLIER-RISK"
+      ],
+      "gap_ids": [
+        "G-SUPPLIER"
+      ],
+      "capability_ids": [
+        "CAP-TECH",
+        "CAP-RISK"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "PORTER-SUBSTITUTE",
+      "lens": "porter",
+      "title": "Substitutes",
+      "assessment": "Wallet and payment propositions motivate customer-moment research. The proposed Curve transaction is not treated as completed or an integration budget.",
+      "claim_ids": [
+        "LBG-CURVE"
+      ],
+      "gap_ids": [
+        "G-CURVE"
+      ],
+      "capability_ids": [
+        "CAP-PAYMENTS",
+        "CAP-CHANNEL"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "VC-PRODUCT",
+      "lens": "value-chain",
+      "title": "Product & strategy",
+      "assessment": "Define customer propositions and economic objectives before selecting technology.",
+      "claim_ids": [
+        "UK-VALUE",
+        "LBG-PRIMACY-GAP"
+      ],
+      "gap_ids": [
+        "G-CUSTOMER-EVIDENCE"
+      ],
+      "capability_ids": [
+        "CAP-STRATEGY"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "VC-ACQUIRE",
+      "lens": "value-chain",
+      "title": "Acquisition & channels",
+      "assessment": "Connect digital acquisition, brands and assisted access to measurable customer outcomes.",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-CUSTOMERS",
+        "LBG-ACCESS"
+      ],
+      "gap_ids": [
+        "G-CUSTOMER-EVIDENCE"
+      ],
+      "capability_ids": [
+        "CAP-CHANNEL",
+        "CAP-SERVICE"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "VC-DEPOSITS",
+      "lens": "value-chain",
+      "title": "Deposits & funding",
+      "assessment": "Connect customer relationships to funding behaviour and structural-hedge economics.",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE"
+      ],
+      "gap_ids": [
+        "G-CUSTOMER-EVIDENCE"
+      ],
+      "capability_ids": [
+        "CAP-DEPOSITS",
+        "CAP-FINANCE"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "VC-LENDING",
+      "lens": "value-chain",
+      "title": "Lending & credit",
+      "assessment": "Credit products consume balance-sheet capacity; current Lloyds underwriting/change evidence remains a gap.",
+      "claim_ids": [
+        "UK-CAPITAL"
+      ],
+      "gap_ids": [
+        "G-CUSTOMER-EVIDENCE"
+      ],
+      "capability_ids": [
+        "CAP-LENDING",
+        "CAP-RISK"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "VC-PAYMENTS",
+      "lens": "value-chain",
+      "title": "Payments & money movement",
+      "assessment": "Examine payment customer moments and fraud/control trade-offs without assuming a live wallet integration.",
+      "claim_ids": [
+        "LBG-CURVE",
+        "LBG-FRAUD-GAP"
+      ],
+      "gap_ids": [
+        "G-CUSTOMER-EVIDENCE"
+      ],
+      "capability_ids": [
+        "CAP-PAYMENTS"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "VC-SERVICE",
+      "lens": "value-chain",
+      "title": "Service & outcomes",
+      "assessment": "Measure customer impact of channel and process change, including assisted/vulnerable customers.",
+      "claim_ids": [
+        "LBG-ACCESS",
+        "LBG-BRAND"
+      ],
+      "gap_ids": [
+        "G-CUSTOMER-EVIDENCE"
+      ],
+      "capability_ids": [
+        "CAP-SERVICE"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "VC-CONTROL",
+      "lens": "value-chain",
+      "title": "Risk, compliance & resilience",
+      "assessment": "Map critical-service, third-party and customer-outcome responsibilities across the chain.",
+      "claim_ids": [
+        "LBG-SUPPLIER-RISK",
+        "UK-CTP"
+      ],
+      "gap_ids": [
+        "G-REGULATORY"
+      ],
+      "capability_ids": [
+        "CAP-RISK"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    },
+    {
+      "id": "VC-ENABLE",
+      "lens": "value-chain",
+      "title": "Data, platforms & people",
+      "assessment": "Technology and colleague capabilities support the chain; benefits and control ownership need validation.",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MIGRATION",
+        "LBG-COPILOT"
+      ],
+      "gap_ids": [
+        "G-WORKLOADS"
+      ],
+      "capability_ids": [
+        "CAP-TECH",
+        "CAP-DATA"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "CAP-STRATEGY",
+      "title": "Strategy & propositions",
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "id": "CAP-CHANNEL",
+      "title": "Digital & assisted channels",
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "id": "CAP-SERVICE",
+      "title": "Customer service & outcomes",
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "id": "CAP-DEPOSITS",
+      "title": "Deposits & customer value",
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "id": "CAP-FINANCE",
+      "title": "Finance & treasury",
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "id": "CAP-LENDING",
+      "title": "Lending & credit",
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "id": "CAP-PAYMENTS",
+      "title": "Payments",
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "id": "CAP-RISK",
+      "title": "Risk, conduct & resilience",
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "id": "CAP-TECH",
+      "title": "Technology & platforms",
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    },
+    {
+      "id": "CAP-DATA",
+      "title": "Data, AI & colleague enablement",
+      "scope": "conceptual capability; ownership and application mapping unverified"
+    }
+  ],
+  "suppliers": [
+    {
+      "id": "SUP-GOOGLE",
+      "title": "Google Cloud"
+    },
+    {
+      "id": "SUP-MICROSOFT",
+      "title": "Microsoft"
+    },
+    {
+      "id": "SUP-AWS",
+      "title": "AWS"
+    },
+    {
+      "id": "SUP-ORACLE",
+      "title": "Oracle"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "RCO-LBG-001",
+      "enterprise_id": "BK-ENT-001",
+      "enterprise_slug": "lloyds",
+      "industry": "Banking",
+      "title": "Legacy decommissioning and migration benefit assurance",
+      "problem": "Reported simplification priorities need dependency-aware sequencing and benefit validation.",
+      "intervention": "Assess application dependencies, decommissioning readiness, service risks and benefit ownership.",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-TECH-COST"
+      ],
+      "driver_ids": [
+        "PESTLE-T",
+        "PESTLE-E"
+      ],
+      "capability_ids": [
+        "CAP-TECH",
+        "CAP-FINANCE"
+      ],
+      "programme_signal": "Management priority; named programme scope unverified",
+      "gap_ids": [
+        "G-PRIMARY",
+        "G-CUSTOMER-EVIDENCE",
+        "G-ALLOCATION",
+        "G-WORKLOADS"
+      ],
+      "family": "modernisation",
+      "research_tier": 1,
+      "legacy_ids": [
+        "COH-LBG-003"
+      ],
+      "ranking_change": "Sharpens the broad control-tower hypothesis into an enterprise-specific migration question; not a funded programme.",
+      "qualification": "Research candidate — not customer-verified demand",
+      "estimated_value": null,
+      "procurement_date": null,
+      "programme_ids": [
+        "PROG-LBG-LEGACY"
+      ]
+    },
+    {
+      "id": "RCO-LBG-002",
+      "enterprise_id": "BK-ENT-001",
+      "enterprise_slug": "lloyds",
+      "industry": "Banking",
+      "title": "AI value realisation and operating controls",
+      "problem": "Reported use cases and claimed value do not establish net outcomes after adoption and control costs.",
+      "intervention": "Validate benefit baselines, service workflows, operational controls and measured adoption.",
+      "claim_ids": [
+        "LBG-AI-USE",
+        "LBG-AI-VALUE",
+        "LBG-AI-TARGET"
+      ],
+      "driver_ids": [
+        "PESTLE-T",
+        "PESTLE-E"
+      ],
+      "capability_ids": [
+        "CAP-DATA",
+        "CAP-SERVICE"
+      ],
+      "programme_signal": "Reported use-case rollout; work packages/buyers unverified",
+      "gap_ids": [
+        "G-PRIMARY",
+        "G-CUSTOMER-EVIDENCE",
+        "G-ALLOCATION",
+        "G-AI-BENEFITS"
+      ],
+      "family": "ai-enablement",
+      "research_tier": 1,
+      "legacy_ids": [
+        "COH-LBG-003"
+      ],
+      "ranking_change": "Separates company-reported benefit and forward expectation from confirmed supplier spend.",
+      "qualification": "Research candidate — not customer-verified demand",
+      "estimated_value": null,
+      "procurement_date": null,
+      "programme_ids": [
+        "PROG-LBG-AI"
+      ]
+    },
+    {
+      "id": "RCO-LBG-003",
+      "enterprise_id": "BK-ENT-001",
+      "enterprise_slug": "lloyds",
+      "industry": "Banking",
+      "title": "Brand/app migration customer-outcome assurance",
+      "problem": "A reported Halifax/Lloyds change creates testable migration, confusion and service-outcome questions.",
+      "intervention": "Investigate customer journey mapping, migration communication, vulnerable-customer safeguards and outcome measurement.",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-PRIMACY-GAP"
+      ],
+      "driver_ids": [
+        "PESTLE-S",
+        "VC-ACQUIRE"
+      ],
+      "capability_ids": [
+        "CAP-CHANNEL",
+        "CAP-SERVICE"
+      ],
+      "programme_signal": "Reported announcement; current implementation status unverified",
+      "gap_ids": [
+        "G-PRIMARY",
+        "G-CUSTOMER-EVIDENCE",
+        "G-ALLOCATION",
+        "G-OUTCOMES"
+      ],
+      "family": "channel-outcomes",
+      "research_tier": 1,
+      "legacy_ids": [
+        "COH-LBG-001"
+      ],
+      "ranking_change": "Replaces a generic outsourcing framing with a specific outcome-validation question; outsourcing workshare remains unknown.",
+      "qualification": "Research candidate — not customer-verified demand",
+      "estimated_value": null,
+      "procurement_date": null,
+      "programme_ids": [
+        "PROG-LBG-BRAND"
+      ]
+    },
+    {
+      "id": "RCO-LBG-004",
+      "enterprise_id": "BK-ENT-001",
+      "enterprise_slug": "lloyds",
+      "industry": "Banking",
+      "title": "AI model-platform governance and lineage",
+      "problem": "Reported Vertex AI/model migrations motivate model inventory, lineage and control questions.",
+      "intervention": "Explore model lifecycle controls, lineage, accountability and platform transition evidence.",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MODELS"
+      ],
+      "driver_ids": [
+        "PESTLE-T",
+        "PORTER-SUPPLIER"
+      ],
+      "capability_ids": [
+        "CAP-DATA",
+        "CAP-RISK"
+      ],
+      "programme_signal": "Reported platform use; delivery/sourcing scope unverified",
+      "gap_ids": [
+        "G-PRIMARY",
+        "G-CUSTOMER-EVIDENCE",
+        "G-ALLOCATION",
+        "G-WORKLOADS",
+        "G-SUPPLIER"
+      ],
+      "family": "ai-enablement",
+      "research_tier": 1,
+      "legacy_ids": [
+        "COH-LBG-003"
+      ],
+      "ranking_change": "Narrows a broad AI/cloud hypothesis; does not infer Google exclusivity or a new procurement.",
+      "qualification": "Research candidate — not customer-verified demand",
+      "estimated_value": null,
+      "procurement_date": null,
+      "programme_ids": [
+        "PROG-LBG-AI"
+      ]
+    },
+    {
+      "id": "RCO-LBG-005",
+      "enterprise_id": "BK-ENT-001",
+      "enterprise_slug": "lloyds",
+      "industry": "Banking",
+      "title": "Critical-service third-party dependency and exit assurance",
+      "problem": "Reported supplier/technology risks require enterprise-specific service and exit mapping before a proposition.",
+      "intervention": "Investigate critical-service dependencies, control responsibilities, exit testing and resilience evidence.",
+      "claim_ids": [
+        "LBG-SUPPLIER-RISK",
+        "LBG-VERTEX",
+        "UK-CTP"
+      ],
+      "driver_ids": [
+        "PESTLE-L",
+        "PORTER-SUPPLIER"
+      ],
+      "capability_ids": [
+        "CAP-RISK",
+        "CAP-TECH"
+      ],
+      "programme_signal": "Risk-disclosure signal; no programme announcement established",
+      "gap_ids": [
+        "G-PRIMARY",
+        "G-CUSTOMER-EVIDENCE",
+        "G-ALLOCATION",
+        "G-REGULATORY",
+        "G-SUPPLIER"
+      ],
+      "family": "modernisation",
+      "research_tier": 2,
+      "legacy_ids": [
+        "COH-LBG-003"
+      ],
+      "ranking_change": "Creates a bounded risk-led discovery question; industry provider designation is not a Lloyds contract or finding.",
+      "qualification": "Research candidate — not customer-verified demand",
+      "estimated_value": null,
+      "procurement_date": null,
+      "programme_ids": [
+        "PROG-LBG-LEGACY"
+      ]
+    },
+    {
+      "id": "RCO-LBG-006",
+      "enterprise_id": "BK-ENT-001",
+      "enterprise_slug": "lloyds",
+      "industry": "Banking",
+      "title": "Deposit/customer-value and balance-sheet analytics",
+      "problem": "Reported franchise/hedge economics need customer-behaviour and elasticity evidence.",
+      "intervention": "Explore segment retention, customer primacy, pricing sensitivity and treasury/customer-value data linkage.",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-PRIMACY-GAP"
+      ],
+      "driver_ids": [
+        "PESTLE-E",
+        "PORTER-BUYER"
+      ],
+      "capability_ids": [
+        "CAP-DEPOSITS",
+        "CAP-FINANCE"
+      ],
+      "programme_signal": "Economic mechanism; no named buying programme",
+      "gap_ids": [
+        "G-PRIMARY",
+        "G-CUSTOMER-EVIDENCE",
+        "G-ALLOCATION",
+        "G-PRIMACY"
+      ],
+      "family": "customer-economics",
+      "research_tier": 2,
+      "legacy_ids": [
+        "COH-LBG-002"
+      ],
+      "ranking_change": "Economic relevance is strengthened, but customer primacy, spend and timing remain unproven.",
+      "qualification": "Research candidate — not customer-verified demand",
+      "estimated_value": null,
+      "procurement_date": null,
+      "programme_ids": []
+    },
+    {
+      "id": "RCO-LBG-007",
+      "enterprise_id": "BK-ENT-001",
+      "enterprise_slug": "lloyds",
+      "industry": "Banking",
+      "title": "Assisted-access service and vulnerability outcomes",
+      "problem": "Local channel changes require evidence of service continuity and vulnerable-customer outcomes.",
+      "intervention": "Investigate access assessments, assisted/digital hand-offs and outcome monitoring before shaping service scope.",
+      "claim_ids": [
+        "LBG-ACCESS",
+        "LBG-BRAND"
+      ],
+      "driver_ids": [
+        "PESTLE-S",
+        "VC-SERVICE"
+      ],
+      "capability_ids": [
+        "CAP-SERVICE",
+        "CAP-CHANNEL"
+      ],
+      "programme_signal": "Local assessment signal; current location-level work unknown",
+      "gap_ids": [
+        "G-PRIMARY",
+        "G-CUSTOMER-EVIDENCE",
+        "G-ALLOCATION",
+        "G-OUTCOMES",
+        "G-REGULATORY"
+      ],
+      "family": "channel-outcomes",
+      "research_tier": 2,
+      "legacy_ids": [
+        "COH-LBG-001"
+      ],
+      "ranking_change": "Refocuses channel/service work on evidenced constraints, not an assumed BPO contract.",
+      "qualification": "Research candidate — not customer-verified demand",
+      "estimated_value": null,
+      "procurement_date": null,
+      "programme_ids": [
+        "PROG-LBG-BRAND"
+      ]
+    },
+    {
+      "id": "RCO-LBG-008",
+      "enterprise_id": "BK-ENT-001",
+      "enterprise_slug": "lloyds",
+      "industry": "Banking",
+      "title": "Colleague AI adoption and productivity controls",
+      "problem": "Licence counts and an AI Academy direction do not establish adoption or realised net productivity.",
+      "intervention": "Investigate role-based adoption, colleague workflows, control burden and measured benefits.",
+      "claim_ids": [
+        "LBG-COPILOT",
+        "LBG-AI-VALUE"
+      ],
+      "driver_ids": [
+        "PESTLE-T",
+        "VC-ENABLE"
+      ],
+      "capability_ids": [
+        "CAP-DATA",
+        "CAP-SERVICE"
+      ],
+      "programme_signal": "Reported enablement signal; current scope unverified",
+      "gap_ids": [
+        "G-PRIMARY",
+        "G-CUSTOMER-EVIDENCE",
+        "G-ALLOCATION",
+        "G-AI-BENEFITS"
+      ],
+      "family": "ai-enablement",
+      "research_tier": 2,
+      "legacy_ids": [
+        "COH-LBG-003"
+      ],
+      "ranking_change": "Separates workforce adoption from platform governance while flagging overlap; no additive deal values.",
+      "qualification": "Research candidate — not customer-verified demand",
+      "estimated_value": null,
+      "procurement_date": null,
+      "programme_ids": [
+        "PROG-LBG-COLLEAGUE"
+      ]
+    }
+  ],
+  "watchlist": [
+    {
+      "id": "WATCH-CURVE",
+      "title": "Wallet/Curve integration",
+      "claim_ids": [
+        "LBG-CURVE"
+      ],
+      "gap_ids": [
+        "G-CURVE"
+      ],
+      "reason": "Proposed transaction and completion/approved integration are unverified; not admitted as a current programme opportunity."
+    },
+    {
+      "id": "WATCH-FRAUD-BPO",
+      "title": "Fraud operations or BPO displacement",
+      "claim_ids": [
+        "LBG-FRAUD-GAP",
+        "LBG-BPO-GAP"
+      ],
+      "gap_ids": [
+        "G-FRAUD",
+        "G-SUPPLIER"
+      ],
+      "reason": "Industry relevance does not establish Lloyds-specific control failure, outsourcing footprint or a buying trigger."
+    }
+  ],
+  "relationships": [
+    {
+      "id": "PESTLE-P-CAP-RISK",
+      "subject": "PESTLE-P",
+      "predicate": "affects",
+      "object": "CAP-RISK",
+      "claim_ids": [
+        "UK-CAPITAL",
+        "LBG-ACCESS"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PESTLE-P-CAP-SERVICE",
+      "subject": "PESTLE-P",
+      "predicate": "affects",
+      "object": "CAP-SERVICE",
+      "claim_ids": [
+        "UK-CAPITAL",
+        "LBG-ACCESS"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PESTLE-E-CAP-DEPOSITS",
+      "subject": "PESTLE-E",
+      "predicate": "affects",
+      "object": "CAP-DEPOSITS",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-TECH-COST"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PESTLE-E-CAP-FINANCE",
+      "subject": "PESTLE-E",
+      "predicate": "affects",
+      "object": "CAP-FINANCE",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-TECH-COST"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PESTLE-S-CAP-SERVICE",
+      "subject": "PESTLE-S",
+      "predicate": "affects",
+      "object": "CAP-SERVICE",
+      "claim_ids": [
+        "LBG-CUSTOMERS",
+        "LBG-ACCESS",
+        "LBG-PRIMACY-GAP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PESTLE-S-CAP-CHANNEL",
+      "subject": "PESTLE-S",
+      "predicate": "affects",
+      "object": "CAP-CHANNEL",
+      "claim_ids": [
+        "LBG-CUSTOMERS",
+        "LBG-ACCESS",
+        "LBG-PRIMACY-GAP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PESTLE-T-CAP-TECH",
+      "subject": "PESTLE-T",
+      "predicate": "affects",
+      "object": "CAP-TECH",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-VERTEX",
+        "LBG-AI-USE"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PESTLE-T-CAP-DATA",
+      "subject": "PESTLE-T",
+      "predicate": "affects",
+      "object": "CAP-DATA",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-VERTEX",
+        "LBG-AI-USE"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PESTLE-L-CAP-RISK",
+      "subject": "PESTLE-L",
+      "predicate": "affects",
+      "object": "CAP-RISK",
+      "claim_ids": [
+        "UK-CTP",
+        "LBG-SUPPLIER-RISK"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PESTLE-ENV-CAP-RISK",
+      "subject": "PESTLE-ENV",
+      "predicate": "affects",
+      "object": "CAP-RISK",
+      "claim_ids": [],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PESTLE-ENV-CAP-LENDING",
+      "subject": "PESTLE-ENV",
+      "predicate": "affects",
+      "object": "CAP-LENDING",
+      "claim_ids": [],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PORTER-RIVALRY-CAP-DEPOSITS",
+      "subject": "PORTER-RIVALRY",
+      "predicate": "affects",
+      "object": "CAP-DEPOSITS",
+      "claim_ids": [
+        "LBG-PRIMACY-GAP",
+        "LBG-DEPOSITS"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PORTER-RIVALRY-CAP-CHANNEL",
+      "subject": "PORTER-RIVALRY",
+      "predicate": "affects",
+      "object": "CAP-CHANNEL",
+      "claim_ids": [
+        "LBG-PRIMACY-GAP",
+        "LBG-DEPOSITS"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PORTER-ENTRY-CAP-RISK",
+      "subject": "PORTER-ENTRY",
+      "predicate": "affects",
+      "object": "CAP-RISK",
+      "claim_ids": [
+        "UK-CAPITAL"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PORTER-ENTRY-CAP-FINANCE",
+      "subject": "PORTER-ENTRY",
+      "predicate": "affects",
+      "object": "CAP-FINANCE",
+      "claim_ids": [
+        "UK-CAPITAL"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PORTER-BUYER-CAP-DEPOSITS",
+      "subject": "PORTER-BUYER",
+      "predicate": "affects",
+      "object": "CAP-DEPOSITS",
+      "claim_ids": [
+        "LBG-PRIMACY-GAP",
+        "LBG-DEPOSITS"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PORTER-BUYER-CAP-SERVICE",
+      "subject": "PORTER-BUYER",
+      "predicate": "affects",
+      "object": "CAP-SERVICE",
+      "claim_ids": [
+        "LBG-PRIMACY-GAP",
+        "LBG-DEPOSITS"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PORTER-SUPPLIER-CAP-TECH",
+      "subject": "PORTER-SUPPLIER",
+      "predicate": "affects",
+      "object": "CAP-TECH",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-SUPPLIER-RISK"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PORTER-SUPPLIER-CAP-RISK",
+      "subject": "PORTER-SUPPLIER",
+      "predicate": "affects",
+      "object": "CAP-RISK",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-SUPPLIER-RISK"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PORTER-SUBSTITUTE-CAP-PAYMENTS",
+      "subject": "PORTER-SUBSTITUTE",
+      "predicate": "affects",
+      "object": "CAP-PAYMENTS",
+      "claim_ids": [
+        "LBG-CURVE"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "PORTER-SUBSTITUTE-CAP-CHANNEL",
+      "subject": "PORTER-SUBSTITUTE",
+      "predicate": "affects",
+      "object": "CAP-CHANNEL",
+      "claim_ids": [
+        "LBG-CURVE"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "VC-PRODUCT-CAP-STRATEGY",
+      "subject": "VC-PRODUCT",
+      "predicate": "affects",
+      "object": "CAP-STRATEGY",
+      "claim_ids": [
+        "UK-VALUE",
+        "LBG-PRIMACY-GAP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "VC-ACQUIRE-CAP-CHANNEL",
+      "subject": "VC-ACQUIRE",
+      "predicate": "affects",
+      "object": "CAP-CHANNEL",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-CUSTOMERS",
+        "LBG-ACCESS"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "VC-ACQUIRE-CAP-SERVICE",
+      "subject": "VC-ACQUIRE",
+      "predicate": "affects",
+      "object": "CAP-SERVICE",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-CUSTOMERS",
+        "LBG-ACCESS"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "VC-DEPOSITS-CAP-DEPOSITS",
+      "subject": "VC-DEPOSITS",
+      "predicate": "affects",
+      "object": "CAP-DEPOSITS",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "VC-DEPOSITS-CAP-FINANCE",
+      "subject": "VC-DEPOSITS",
+      "predicate": "affects",
+      "object": "CAP-FINANCE",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "VC-LENDING-CAP-LENDING",
+      "subject": "VC-LENDING",
+      "predicate": "affects",
+      "object": "CAP-LENDING",
+      "claim_ids": [
+        "UK-CAPITAL"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "VC-LENDING-CAP-RISK",
+      "subject": "VC-LENDING",
+      "predicate": "affects",
+      "object": "CAP-RISK",
+      "claim_ids": [
+        "UK-CAPITAL"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "VC-PAYMENTS-CAP-PAYMENTS",
+      "subject": "VC-PAYMENTS",
+      "predicate": "affects",
+      "object": "CAP-PAYMENTS",
+      "claim_ids": [
+        "LBG-CURVE",
+        "LBG-FRAUD-GAP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "VC-SERVICE-CAP-SERVICE",
+      "subject": "VC-SERVICE",
+      "predicate": "affects",
+      "object": "CAP-SERVICE",
+      "claim_ids": [
+        "LBG-ACCESS",
+        "LBG-BRAND"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "VC-CONTROL-CAP-RISK",
+      "subject": "VC-CONTROL",
+      "predicate": "affects",
+      "object": "CAP-RISK",
+      "claim_ids": [
+        "LBG-SUPPLIER-RISK",
+        "UK-CTP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "VC-ENABLE-CAP-TECH",
+      "subject": "VC-ENABLE",
+      "predicate": "affects",
+      "object": "CAP-TECH",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MIGRATION",
+        "LBG-COPILOT"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "VC-ENABLE-CAP-DATA",
+      "subject": "VC-ENABLE",
+      "predicate": "affects",
+      "object": "CAP-DATA",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MIGRATION",
+        "LBG-COPILOT"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-001-PESTLE-T",
+      "subject": "PESTLE-T",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-001",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-TECH-COST"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-001-PESTLE-E",
+      "subject": "PESTLE-E",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-001",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-TECH-COST"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-001-CAP-TECH",
+      "subject": "CAP-TECH",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-001",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-TECH-COST"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-001-CAP-FINANCE",
+      "subject": "CAP-FINANCE",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-001",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-TECH-COST"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-002-PESTLE-T",
+      "subject": "PESTLE-T",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-002",
+      "claim_ids": [
+        "LBG-AI-USE",
+        "LBG-AI-VALUE",
+        "LBG-AI-TARGET"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-002-PESTLE-E",
+      "subject": "PESTLE-E",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-002",
+      "claim_ids": [
+        "LBG-AI-USE",
+        "LBG-AI-VALUE",
+        "LBG-AI-TARGET"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-002-CAP-DATA",
+      "subject": "CAP-DATA",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-002",
+      "claim_ids": [
+        "LBG-AI-USE",
+        "LBG-AI-VALUE",
+        "LBG-AI-TARGET"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-002-CAP-SERVICE",
+      "subject": "CAP-SERVICE",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-002",
+      "claim_ids": [
+        "LBG-AI-USE",
+        "LBG-AI-VALUE",
+        "LBG-AI-TARGET"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-003-PESTLE-S",
+      "subject": "PESTLE-S",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-003",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-PRIMACY-GAP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-003-VC-ACQUIRE",
+      "subject": "VC-ACQUIRE",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-003",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-PRIMACY-GAP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-003-CAP-CHANNEL",
+      "subject": "CAP-CHANNEL",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-003",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-PRIMACY-GAP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-003-CAP-SERVICE",
+      "subject": "CAP-SERVICE",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-003",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-PRIMACY-GAP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-004-PESTLE-T",
+      "subject": "PESTLE-T",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-004",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MODELS"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-004-PORTER-SUPPLIER",
+      "subject": "PORTER-SUPPLIER",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-004",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MODELS"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-004-CAP-DATA",
+      "subject": "CAP-DATA",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-004",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MODELS"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-004-CAP-RISK",
+      "subject": "CAP-RISK",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-004",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MODELS"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-005-PESTLE-L",
+      "subject": "PESTLE-L",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-005",
+      "claim_ids": [
+        "LBG-SUPPLIER-RISK",
+        "LBG-VERTEX",
+        "UK-CTP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-005-PORTER-SUPPLIER",
+      "subject": "PORTER-SUPPLIER",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-005",
+      "claim_ids": [
+        "LBG-SUPPLIER-RISK",
+        "LBG-VERTEX",
+        "UK-CTP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-005-CAP-RISK",
+      "subject": "CAP-RISK",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-005",
+      "claim_ids": [
+        "LBG-SUPPLIER-RISK",
+        "LBG-VERTEX",
+        "UK-CTP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-005-CAP-TECH",
+      "subject": "CAP-TECH",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-005",
+      "claim_ids": [
+        "LBG-SUPPLIER-RISK",
+        "LBG-VERTEX",
+        "UK-CTP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-006-PESTLE-E",
+      "subject": "PESTLE-E",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-006",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-PRIMACY-GAP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-006-PORTER-BUYER",
+      "subject": "PORTER-BUYER",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-006",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-PRIMACY-GAP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-006-CAP-DEPOSITS",
+      "subject": "CAP-DEPOSITS",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-006",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-PRIMACY-GAP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-006-CAP-FINANCE",
+      "subject": "CAP-FINANCE",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-006",
+      "claim_ids": [
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-PRIMACY-GAP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-007-PESTLE-S",
+      "subject": "PESTLE-S",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-007",
+      "claim_ids": [
+        "LBG-ACCESS",
+        "LBG-BRAND"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-007-VC-SERVICE",
+      "subject": "VC-SERVICE",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-007",
+      "claim_ids": [
+        "LBG-ACCESS",
+        "LBG-BRAND"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-007-CAP-SERVICE",
+      "subject": "CAP-SERVICE",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-007",
+      "claim_ids": [
+        "LBG-ACCESS",
+        "LBG-BRAND"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-007-CAP-CHANNEL",
+      "subject": "CAP-CHANNEL",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-007",
+      "claim_ids": [
+        "LBG-ACCESS",
+        "LBG-BRAND"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-008-PESTLE-T",
+      "subject": "PESTLE-T",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-008",
+      "claim_ids": [
+        "LBG-COPILOT",
+        "LBG-AI-VALUE"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-008-VC-ENABLE",
+      "subject": "VC-ENABLE",
+      "predicate": "motivates_research",
+      "object": "RCO-LBG-008",
+      "claim_ids": [
+        "LBG-COPILOT",
+        "LBG-AI-VALUE"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-008-CAP-DATA",
+      "subject": "CAP-DATA",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-008",
+      "claim_ids": [
+        "LBG-COPILOT",
+        "LBG-AI-VALUE"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-008-CAP-SERVICE",
+      "subject": "CAP-SERVICE",
+      "predicate": "candidate_intervention",
+      "object": "RCO-LBG-008",
+      "claim_ids": [
+        "LBG-COPILOT",
+        "LBG-AI-VALUE"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "REL-LBG-GCP",
+      "subject": "BK-ENT-001",
+      "predicate": "reported_uses",
+      "object": "SUP-GOOGLE",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MODELS"
+      ],
+      "assertion_kind": "repository_reported_relationship",
+      "verified": false
+    },
+    {
+      "id": "REL-LBG-MS",
+      "subject": "BK-ENT-001",
+      "predicate": "reported_licences",
+      "object": "SUP-MICROSOFT",
+      "claim_ids": [
+        "LBG-COPILOT"
+      ],
+      "assertion_kind": "repository_reported_relationship",
+      "verified": false
+    },
+    {
+      "id": "REL-LBG-AWS",
+      "subject": "BK-ENT-001",
+      "predicate": "enterprise_contract_unknown",
+      "object": "SUP-AWS",
+      "claim_ids": [
+        "UK-CTP"
+      ],
+      "assertion_kind": "unknown",
+      "verified": false
+    },
+    {
+      "id": "REL-LBG-ORACLE",
+      "subject": "BK-ENT-001",
+      "predicate": "enterprise_contract_unknown",
+      "object": "SUP-ORACLE",
+      "claim_ids": [
+        "UK-CTP"
+      ],
+      "assertion_kind": "unknown",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-001-PROG-LBG-LEGACY",
+      "subject": "PROG-LBG-LEGACY",
+      "predicate": "motivates_candidate_question",
+      "object": "RCO-LBG-001",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-TECH-COST"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-002-PROG-LBG-AI",
+      "subject": "PROG-LBG-AI",
+      "predicate": "motivates_candidate_question",
+      "object": "RCO-LBG-002",
+      "claim_ids": [
+        "LBG-AI-USE",
+        "LBG-AI-VALUE",
+        "LBG-AI-TARGET"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-003-PROG-LBG-BRAND",
+      "subject": "PROG-LBG-BRAND",
+      "predicate": "motivates_candidate_question",
+      "object": "RCO-LBG-003",
+      "claim_ids": [
+        "LBG-BRAND",
+        "LBG-PRIMACY-GAP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-004-PROG-LBG-AI",
+      "subject": "PROG-LBG-AI",
+      "predicate": "motivates_candidate_question",
+      "object": "RCO-LBG-004",
+      "claim_ids": [
+        "LBG-VERTEX",
+        "LBG-MODELS"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-005-PROG-LBG-LEGACY",
+      "subject": "PROG-LBG-LEGACY",
+      "predicate": "motivates_candidate_question",
+      "object": "RCO-LBG-005",
+      "claim_ids": [
+        "LBG-SUPPLIER-RISK",
+        "LBG-VERTEX",
+        "UK-CTP"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-007-PROG-LBG-BRAND",
+      "subject": "PROG-LBG-BRAND",
+      "predicate": "motivates_candidate_question",
+      "object": "RCO-LBG-007",
+      "claim_ids": [
+        "LBG-ACCESS",
+        "LBG-BRAND"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "RCO-LBG-008-PROG-LBG-COLLEAGUE",
+      "subject": "PROG-LBG-COLLEAGUE",
+      "predicate": "motivates_candidate_question",
+      "object": "RCO-LBG-008",
+      "claim_ids": [
+        "LBG-COPILOT",
+        "LBG-AI-VALUE"
+      ],
+      "assertion_kind": "interpretation",
+      "verified": false
+    },
+    {
+      "id": "LBG-CAP-STRATEGY",
+      "subject": "BK-ENT-001",
+      "predicate": "conceptual_capability",
+      "object": "CAP-STRATEGY",
+      "claim_ids": [],
+      "assertion_kind": "conceptual_model",
+      "verified": false
+    },
+    {
+      "id": "LBG-CAP-CHANNEL",
+      "subject": "BK-ENT-001",
+      "predicate": "conceptual_capability",
+      "object": "CAP-CHANNEL",
+      "claim_ids": [],
+      "assertion_kind": "conceptual_model",
+      "verified": false
+    },
+    {
+      "id": "LBG-CAP-SERVICE",
+      "subject": "BK-ENT-001",
+      "predicate": "conceptual_capability",
+      "object": "CAP-SERVICE",
+      "claim_ids": [],
+      "assertion_kind": "conceptual_model",
+      "verified": false
+    },
+    {
+      "id": "LBG-CAP-DEPOSITS",
+      "subject": "BK-ENT-001",
+      "predicate": "conceptual_capability",
+      "object": "CAP-DEPOSITS",
+      "claim_ids": [],
+      "assertion_kind": "conceptual_model",
+      "verified": false
+    },
+    {
+      "id": "LBG-CAP-FINANCE",
+      "subject": "BK-ENT-001",
+      "predicate": "conceptual_capability",
+      "object": "CAP-FINANCE",
+      "claim_ids": [],
+      "assertion_kind": "conceptual_model",
+      "verified": false
+    },
+    {
+      "id": "LBG-CAP-LENDING",
+      "subject": "BK-ENT-001",
+      "predicate": "conceptual_capability",
+      "object": "CAP-LENDING",
+      "claim_ids": [],
+      "assertion_kind": "conceptual_model",
+      "verified": false
+    },
+    {
+      "id": "LBG-CAP-PAYMENTS",
+      "subject": "BK-ENT-001",
+      "predicate": "conceptual_capability",
+      "object": "CAP-PAYMENTS",
+      "claim_ids": [],
+      "assertion_kind": "conceptual_model",
+      "verified": false
+    },
+    {
+      "id": "LBG-CAP-RISK",
+      "subject": "BK-ENT-001",
+      "predicate": "conceptual_capability",
+      "object": "CAP-RISK",
+      "claim_ids": [],
+      "assertion_kind": "conceptual_model",
+      "verified": false
+    },
+    {
+      "id": "LBG-CAP-TECH",
+      "subject": "BK-ENT-001",
+      "predicate": "conceptual_capability",
+      "object": "CAP-TECH",
+      "claim_ids": [],
+      "assertion_kind": "conceptual_model",
+      "verified": false
+    },
+    {
+      "id": "LBG-CAP-DATA",
+      "subject": "BK-ENT-001",
+      "predicate": "conceptual_capability",
+      "object": "CAP-DATA",
+      "claim_ids": [],
+      "assertion_kind": "conceptual_model",
+      "verified": false
+    }
+  ],
+  "gaps": [
+    {
+      "id": "G-PRIMARY",
+      "title": "Current primary verification",
+      "question": "Which claims are supported by the latest original publications?",
+      "required_evidence": "Retrieve and quote-locate current Lloyds annual, interim and latest trading updates; capture publication dates, periods and content hashes.",
+      "decision_impact": "All current factual confidence and programme status.",
+      "priority": "High",
+      "owner_role": "Research owner / account team; named owner not established",
+      "status": "open"
+    },
+    {
+      "id": "G-CUSTOMER-EVIDENCE",
+      "title": "Customer buying evidence",
+      "question": "Is there a customer-acknowledged problem and a funded decision process?",
+      "required_evidence": "Customer meeting/requirement reference; economic buyer, funding, criteria, process, relationship and mutual next action.",
+      "decision_impact": "Commercial qualification and pursuit; no public-source ranking can replace this.",
+      "priority": "High",
+      "owner_role": "Research owner / account team; named owner not established",
+      "status": "open"
+    },
+    {
+      "id": "G-REGULATORY",
+      "title": "Regulatory applicability",
+      "question": "Which current versions, effective dates and entities are in scope?",
+      "required_evidence": "Retrieve FCA Consumer Duty/resilience publications, PRA/BoE rules and HM Treasury designations.",
+      "decision_impact": "Do not infer compliance failure or mandatory procurement.",
+      "priority": "High",
+      "owner_role": "Research owner / account team; named owner not established",
+      "status": "open"
+    },
+    {
+      "id": "G-ALLOCATION",
+      "title": "Investment allocation",
+      "question": "Which investment capacity is allocated to external addressable work?",
+      "required_evidence": "Approved programme funding and sourcing scope, distinguishing gross savings, benefits and supplier spend.",
+      "decision_impact": "Value and commercial addressability remain Unknown.",
+      "priority": "High",
+      "owner_role": "Research owner / account team; named owner not established",
+      "status": "open"
+    },
+    {
+      "id": "G-OUTCOMES",
+      "title": "Channel/customer outcomes",
+      "question": "What is the impact of brand/app and branch changes?",
+      "required_evidence": "Current local access assessments, complaints, vulnerable-customer outcomes, retention and customer journey measures.",
+      "decision_impact": "Migration and customer-service proposition scope.",
+      "priority": "High",
+      "owner_role": "Research owner / account team; named owner not established",
+      "status": "open"
+    },
+    {
+      "id": "G-PRIMACY",
+      "title": "Deposit and relationship behaviour",
+      "question": "Are digital users primary customers and what is deposit elasticity?",
+      "required_evidence": "Salary-flow/direct-debit concentration, retention, deposit segment and pricing behaviour.",
+      "decision_impact": "Customer-value/treasury proposition validation.",
+      "priority": "High",
+      "owner_role": "Research owner / account team; named owner not established",
+      "status": "open"
+    },
+    {
+      "id": "G-WORKLOADS",
+      "title": "Programme and workload scope",
+      "question": "Which workloads/capabilities have funded migration or control work?",
+      "required_evidence": "Approved roadmap, application dependencies, critical-service mapping, ownership and procurement evidence.",
+      "decision_impact": "Legacy/cloud and resilience delivery scope.",
+      "priority": "High",
+      "owner_role": "Research owner / account team; named owner not established",
+      "status": "open"
+    },
+    {
+      "id": "G-AI-BENEFITS",
+      "title": "Net AI benefits",
+      "question": "Are claimed benefits realised net of adoption/control costs?",
+      "required_evidence": "Benefit baselines, adoption measures, control costs and benefit ownership; distinguish targets from realised results.",
+      "decision_impact": "AI service/governance/colleague propositions.",
+      "priority": "High",
+      "owner_role": "Research owner / account team; named owner not established",
+      "status": "open"
+    },
+    {
+      "id": "G-SUPPLIER",
+      "title": "Supplier contracts and roles",
+      "question": "What is the actual supplier workshare, obligation and renewal/exit position?",
+      "required_evidence": "Current customer or supplier primary disclosure, contract scope and terms where authorised.",
+      "decision_impact": "Do not infer exclusivity, BPO footprint, renewal or displacement.",
+      "priority": "High",
+      "owner_role": "Research owner / account team; named owner not established",
+      "status": "open"
+    },
+    {
+      "id": "G-CURVE",
+      "title": "Transaction and integration status",
+      "question": "Did the proposed Curve transaction complete, and what integration is approved?",
+      "required_evidence": "Completion announcement and customer-approved integration roadmap.",
+      "decision_impact": "Wallet integration remains watchlist only.",
+      "priority": "High",
+      "owner_role": "Research owner / account team; named owner not established",
+      "status": "open"
+    },
+    {
+      "id": "G-FRAUD",
+      "title": "Lloyds-specific fraud evidence",
+      "question": "Which fraud/control problem is material within Lloyds?",
+      "required_evidence": "Lloyds-specific losses, reimbursement, false positives, complaints and funded response.",
+      "decision_impact": "Fraud opportunity not admitted solely from industry statistics.",
+      "priority": "High",
+      "owner_role": "Research owner / account team; named owner not established",
+      "status": "open"
+    },
+    {
+      "id": "G-CLIMATE",
+      "title": "Climate/transition materiality",
+      "question": "Which Lloyds portfolios and programmes have material climate needs?",
+      "required_evidence": "Latest primary sustainability/transition report, financed-emissions scope and portfolio materiality.",
+      "decision_impact": "No climate proposition admitted without enterprise evidence.",
+      "priority": "High",
+      "owner_role": "Research owner / account team; named owner not established",
+      "status": "open"
+    },
+    {
+      "id": "G-MARKET",
+      "title": "Market structure",
+      "question": "What are the latest comparable market shares and entrant economics?",
+      "required_evidence": "FCA/CMA and dated primary enterprise disclosures with consistent market/entity boundaries.",
+      "decision_impact": "Porter assessments remain qualitative, not measured market power.",
+      "priority": "High",
+      "owner_role": "Research owner / account team; named owner not established",
+      "status": "open"
+    }
+  ],
+  "programmes": [
+    {
+      "id": "PROG-LBG-LEGACY",
+      "title": "Application decommissioning & cloud migration",
+      "signal_class": "reported management priority, not a verified work package",
+      "claim_ids": [
+        "LBG-MIGRATION",
+        "LBG-TECH-COST"
+      ],
+      "owner": "Unknown",
+      "funding": "Unknown",
+      "procurement": "Unknown",
+      "current_phase": "Unknown"
+    },
+    {
+      "id": "PROG-LBG-AI",
+      "title": "AI use-case / model-platform enablement",
+      "signal_class": "reported rollout/platform adoption; not a named procurement",
+      "claim_ids": [
+        "LBG-AI-USE",
+        "LBG-VERTEX",
+        "LBG-MODELS"
+      ],
+      "owner": "Unknown",
+      "funding": "Unknown",
+      "procurement": "Unknown",
+      "current_phase": "Current 2026 status unverified"
+    },
+    {
+      "id": "PROG-LBG-BRAND",
+      "title": "Halifax/Lloyds brand and app change",
+      "signal_class": "repository-reported announcement; primary verification pending",
+      "claim_ids": [
+        "LBG-BRAND"
+      ],
+      "owner": "Unknown",
+      "funding": "Unknown",
+      "procurement": "Unknown",
+      "current_phase": "Unknown"
+    },
+    {
+      "id": "PROG-LBG-COLLEAGUE",
+      "title": "Colleague AI enablement",
+      "signal_class": "reported licences/direction; not a verified programme budget",
+      "claim_ids": [
+        "LBG-COPILOT"
+      ],
+      "owner": "Unknown",
+      "funding": "Unknown",
+      "procurement": "Unknown",
+      "current_phase": "Unknown"
+    },
+    {
+      "id": "PROG-LBG-CURVE",
+      "title": "Proposed Curve transaction",
+      "signal_class": "proposed transaction, not confirmed completion or integration",
+      "claim_ids": [
+        "LBG-CURVE"
+      ],
+      "owner": "Unknown",
+      "funding": "Unknown",
+      "procurement": "Unknown",
+      "current_phase": "Completion unknown; watchlist only"
+    }
+  ],
+  "industry_name": "UK Banking",
+  "enterprise_name": "Lloyds Banking Group",
+  "geography": "United Kingdom",
+  "knowledge_root": "enterprise-knowledge/banking",
+  "source_base_commit": "3e703ae99ccfdff46aa1675ae0430f86a9cd52e9"
+}

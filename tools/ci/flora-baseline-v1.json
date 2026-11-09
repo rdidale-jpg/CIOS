@@ -2259,6 +2259,39 @@
             ]
           ]
         },
+        "commercial_assessment": {
+          "cases": {
+            "tests/test_flora_commercial_assessment.py::test_access_process_evidence_does_not_become_open_demand": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_assessment.py::test_commercial_evidence_must_resolve_and_cover_every_candidate_once": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_assessment.py::test_existing_twenty_two_primary_claims_and_all_opportunities_are_preserved": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_assessment.py::test_only_wider_evidence_informs_industry_capability_feedback": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_assessment.py::test_public_shortlist_and_customer_briefs_are_navigable": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_assessment.py::test_reading_shortlist_cannot_create_or_qualify_pipeline_records": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_assessment.py::test_scores_have_anchors_and_no_combined_win_probability": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_assessment.py::test_three_dimensions_remain_separate_and_all_nine_are_assessed": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_commercial_assessment.py"
+            ]
+          ]
+        },
         "domain": {
           "cases": {
             "tests/test_enterprise_intelligence_reasoning.py::test_canvas_diagnostics_configured_provider_ready_without_secret": {
@@ -4368,6 +4401,132 @@
               "tests/test_flora_pilot_auth.py",
               "tests/test_flora_pilot_blueprint_review.py",
               "tests/test_flora_pilot_import_bypass.py"
+            ]
+          ]
+        },
+        "primary_enrichment": {
+          "cases": {
+            "tests/test_flora_primary_enrichment.py::test_all_eight_hypotheses_reassessed_one_specific_new_candidate_and_no_sales_qualification": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_completion_resolves_only_transaction_status_not_customer_integration_need": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_financial_periods_targets_and_publication_dates_remain_distinct": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_import_cli_writes_only_new_scratch_proposal": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_import_keeps_unknown_publication_and_rejects_future_or_undated_retrieval": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_import_rejects_wrong_bytes_unattested_origin_and_missing_quotation": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_industry_links_do_not_promote_bank_facts_to_sector_trends": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_new_primary_claims_require_real_snapshot_quotes_not_a_status_flag": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_offline_import_does_not_invent_official_provenance[http://www.lloydsbankinggroup.com/report]": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_offline_import_does_not_invent_official_provenance[https://unapproved.example/report]": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_offline_import_does_not_invent_official_provenance[https://user:pass@www.lloydsbankinggroup.com/report]": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_old_captured_opportunity_stays_unchanged_after_primary_enrichment": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_previous_claims_sources_and_original_assessment_are_preserved_byte_for_byte": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_public_views_expose_updated_provenance_comparison_and_full_original_limit": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_reviewed_web_excerpts_never_claim_original_binary_integrity": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_verified_download_import_supports_text_html_pdf_without_acceptance[.html]": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_verified_download_import_supports_text_html_pdf_without_acceptance[.pdf]": {
+              "status": "passed"
+            },
+            "tests/test_flora_primary_enrichment.py::test_verified_download_import_supports_text_html_pdf_without_acceptance[.txt]": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_primary_enrichment.py"
+            ]
+          ]
+        },
+        "research_intelligence": {
+          "cases": {
+            "tests/test_flora_research_intelligence.py::test_all_six_pestle_five_forces_and_value_activities_are_explicit": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_corroboration_does_not_rewrite_existing_factual_statement": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_date_and_entity_scope_are_not_confused": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_existing_twin_assets_and_canonical_intelligence_remain_unchanged": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_existing_twin_ids_and_source_contracts_are_reused": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_graph_rejects_missing_relationships_duplicate_ids_and_false_lineage": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_missing_dates_staleness_and_future_assessment_are_visible": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_no_fabricated_budget_dates_or_customer_demand_in_ranked_candidates": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_primary_supported_claim_needs_matching_content_snapshot": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_public_research_navigation_reaches_all_lenses_claims_and_candidates": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_public_research_never_reads_private_models_or_pipeline": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_ranking_changes_and_overlap_are_traceable": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_repository_citations_cannot_be_upgraded_by_status_or_hash_alone": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_research_capture_keeps_existing_snapshot_on_reassessment": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_research_capture_preserves_lineage_without_qualification_or_auto_writes": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_research_links_and_diagram_nodes_have_destinations": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_research_revision_preserves_established_facts_and_history": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence.py::test_supplier_edges_distinguish_reported_relationship_and_unknown_contract": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_research_intelligence.py"
             ]
           ]
         },

@@ -191,6 +191,29 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_flora_research_page(self.headers))
             elif parsed.path in {"/workspace/reference", "/flora/reference"}:
                 self._html(reference_workspace_page(self.headers, saved=parse_qs(parsed.query).get("saved") == ["1"]), set_cookie=reference_resume_cookie())
+            elif parsed.path == "/flora/banking/research" or parsed.path.startswith("/flora/banking/research/"):
+                from cios.applications.flora.research_intelligence import views as research_views
+                try:
+                    if parsed.path == "/flora/banking/research":
+                        self._html(research_views.industry_page(parse_qs(parsed.query).get("lens", ["pestle"])[0], self.headers))
+                    elif parsed.path == "/flora/banking/research/lloyds":
+                        self._html(research_views.enterprise_page(self.headers))
+                    elif parsed.path == "/flora/banking/research/opportunities":
+                        self._html(research_views.opportunities_page(self.headers))
+                    elif parsed.path == "/flora/banking/research/sources":
+                        self._html(research_views.sources_page(self.headers))
+                    elif parsed.path == "/flora/banking/research/gaps":
+                        self._html(research_views.gaps_page(self.headers))
+                    elif parsed.path.startswith("/flora/banking/research/evidence/"):
+                        self._html(research_views.evidence_page(parsed.path.rsplit("/", 1)[1], self.headers))
+                    elif parsed.path.startswith("/flora/banking/research/candidates/"):
+                        self._html(research_views.candidate_page(parsed.path.rsplit("/", 1)[1], self.headers))
+                    elif parsed.path.startswith("/flora/banking/research/nodes/"):
+                        self._html(research_views.node_page(parsed.path.rsplit("/", 1)[1], self.headers))
+                    else:
+                        self.send_error(404, "Research view unavailable")
+                except ValueError:
+                    self.send_error(404, "Research view unavailable")
             elif parsed.path.startswith("/flora/sales/"):
                 from cios.applications.flora import sales_views
                 from cios.applications.flora.sales_pipeline import SalesValidationError

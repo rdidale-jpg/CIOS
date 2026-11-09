@@ -127,19 +127,31 @@ def create_opportunity(slug, origin='', values=None, headers=None):
         raise SalesValidationError('Creation accepts commercial fields only; scope is server controlled.')
     envelope = _load()
     if origin:
-        bank, source = hypothesis(slug, origin)
+        research_capture=None
+        if origin.startswith('RCO-'):
+            from .research_intelligence.model import commercial_capture
+            try:
+                research_capture=commercial_capture(slug,origin)
+            except ValueError as exc:
+                raise SalesValidationError(str(exc)) from exc
+        else:
+            bank, source = hypothesis(slug, origin)
         # Idempotent capture: do not create a second copy in the same workspace.
         existing = next((r for r in envelope['records'].values() if r['workspace_id'] == actor.workspace
                          and r['enterprise_id'] == bank.id and r['origin_id'] == origin), None)
         if existing:
             _scope(headers, existing, 'commercial_context.edit')
             return deepcopy(existing)
-        defaults = {'title': source.title, 'problem': source.problem, 'solution': ', '.join(source.components), 'next_action': source.next_action}
-        provenance = {'kind': 'public_fixture_hypothesis', 'source_labels': list(bank.analyst_sources),
-                      'snapshot': GENERATED_DATE, 'signals': list(source.signals),
-                      'evidence_url': f'/flora/banking/{slug}/evidence',
-                      'origin_url': f'/flora/banking/{slug}/opportunity/{origin}',
-                      'limitations': 'Public scenario context; no claim-level accepted Evidence or confirmed customer requirement.'}
+        if research_capture is not None:
+            defaults=research_capture['fields']
+            provenance=research_capture['provenance']
+        else:
+            defaults = {'title': source.title, 'problem': source.problem, 'solution': ', '.join(source.components), 'next_action': source.next_action}
+            provenance = {'kind': 'public_fixture_hypothesis', 'source_labels': list(bank.analyst_sources),
+                          'snapshot': GENERATED_DATE, 'signals': list(source.signals),
+                          'evidence_url': f'/flora/banking/{slug}/evidence',
+                          'origin_url': f'/flora/banking/{slug}/opportunity/{origin}',
+                          'limitations': 'Public scenario context; no claim-level accepted Evidence or confirmed customer requirement.'}
     else:
         defaults = {'title': '', 'problem': '', 'solution': '', 'next_action': ''}
         provenance = {'kind': 'user_entered_demonstration', 'source_labels': [], 'signals': [],

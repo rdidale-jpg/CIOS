@@ -178,7 +178,7 @@ def industry_page(headers=None):
 <h1>Banking.<br>See the bigger picture.</h1>
 <p>Follow the forces reshaping banking. Explore the enterprises, connect their operating landscapes and discover where evidence points to opportunity.</p>
 <a class='ex-button' href='#enterprises'>Choose an enterprise ↓</a>
-<a href='#ecosystem'>Explore the ecosystem</a>
+<a href='#ecosystem'>Explore the ecosystem</a><p><a href='/flora/banking/research'>Industry Twin research: PESTLE, Five Forces & value chain →</a></p>
 <div class='ex-meta'>
 <div>
 <strong>{len(banks):02}</strong>
@@ -247,7 +247,7 @@ def enterprise_page(slug, headers=None, insights=False):
     nav = f"""<nav class='ex-subnav' aria-label='Enterprise exploration'>
 <a href='{base}' {'aria-current=page' if not insights else ''}>Overview & landscape</a>
 <a href='{base}/insights' {'aria-current=page' if insights else ''}>Strategic insights</a>
-<a href='{base}/opportunities'>Opportunity landscape</a><a href='/flora/sales/pipeline'>Workspace pipeline</a><a href='/flora/banking/{bank.slug}/evidence'>Sources & evidence</a>
+<a href='{base}/opportunities'>Opportunity landscape</a>{"<a href='/flora/banking/research/lloyds'>Enterprise research</a>" if slug=='lloyds' else ''}<a href='/flora/sales/pipeline'>Workspace pipeline</a><a href='/flora/banking/{bank.slug}/evidence'>Sources & evidence</a>
 <a href='/digital-twins'>Governed Canvas (requires access)</a>
 </nav>"""
     hero = f"""<section class='ex-hero' id='explorer-content'>
