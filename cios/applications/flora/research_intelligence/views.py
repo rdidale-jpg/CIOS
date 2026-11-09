@@ -5,7 +5,7 @@ import json
 from ..banking_explorer import _page, _map
 from ..sales_views import capture_controls
 from .model import (ROOT, load_assessment, freshness, ranked_candidates, candidate,
-                    claim_segment, candidate_claim, evidence_item, primary_claim_supported, commercial_candidates, _index)
+                    claim_segment, candidate_claim, evidence_item, primary_claim_supported, commercial_candidates, commercial_dimensions, _index)
 
 STYLE="""
 .research-nav{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}.research-nav a{padding:9px 14px;border:1px solid #bfcebf;border-radius:22px;text-decoration:none}.research-nav a[aria-current]{background:#164d48;color:white}.research-warning{border-left:4px solid #ba7942;background:#fff1df;padding:18px 22px;border-radius:10px;margin:22px 0}.research-badge{display:inline-block;border-radius:5px;padding:4px 8px;font-size:.76rem;background:#fff0df;color:#774322}.research-badge.interpretation{background:#e3ebdf;color:#365d4b}.research-badge.unknown{background:#eeece6;color:#575c55}.research-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.research-grid>*{min-width:0}.research-grid h3{overflow-wrap:anywhere}.research-chain{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.research-chain a{padding:20px;background:#e5eee3;border:1px solid #c3d5c6;border-radius:14px;text-decoration:none}.research-chain span{display:block;font-size:.8rem;margin-bottom:9px;color:#5d7064}.research-chain strong{display:block;font-size:1.15rem}.research-chain em{font-size:.85rem;font-style:normal;font-weight:400}.research-quote{padding:18px;border-left:3px solid #b57a4c;background:#fff8ed;white-space:pre-wrap;overflow-wrap:anywhere}.research-dl{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px}.research-dl dt{font-weight:700;font-size:.85rem}.research-dl dd{margin:0}.research-rank{font-size:2rem;font-weight:800;color:#164d48}.research-links a{display:inline-block;margin:5px 12px 5px 0}.research-edges{display:grid;gap:10px}.research-edge{border:1px solid #d5dfd2;padding:13px;border-radius:10px;background:#fffdf8}.research-table{overflow-x:auto}.research-table table{width:100%;border-collapse:collapse}.research-table th,.research-table td{padding:14px;text-align:left;border-bottom:1px solid #d7e0d3;vertical-align:top}.research-metric{font-size:1.7rem;font-weight:800}.research-source{font-size:.86rem;color:#5f7166}.research details{margin:16px 0}.research summary{cursor:pointer;font-weight:700}.research pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#efeee7;padding:16px}.research a{overflow-wrap:anywhere}@media(max-width:900px){.research-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.research-chain{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:540px){.research-grid,.research-chain,.research-dl{grid-template-columns:1fr}.research-dl dd{margin-bottom:10px}}
@@ -13,11 +13,12 @@ STYLE="""
 
 
 def href(data, identifier):
+    ROOT=data.get('route_root',globals()['ROOT'])
     if any(r['id']==identifier for r in data['claims']):return ROOT+'/evidence/'+identifier
     if any(r['id']==identifier for r in data['candidates']):return ROOT+'/candidates/'+identifier
     if any(r['id']==identifier for r in data['sources']):return ROOT+'/sources#'+identifier
     if any(r['id']==identifier for r in data['gaps']):return ROOT+'/gaps#'+identifier
-    if identifier==data['enterprise_twin_id']:return ROOT+'/lloyds'
+    if identifier==data['enterprise_twin_id']:return ROOT+'/'+data.get('enterprise_slug','lloyds')
     if identifier==data['industry_twin_id']:return ROOT
     return ROOT+'/nodes/'+identifier
 
@@ -26,7 +27,7 @@ def label(data, identifier):
     for key in ('frameworks','capabilities','suppliers','programmes','candidates','gaps','sources'):
         for item in data[key]:
             if item['id']==identifier:return item.get('title',identifier)
-    return {'BK-ENT-001':data['enterprise_name'],'BK-IND-002':data['industry_name']}.get(identifier,identifier)
+    return {data['enterprise_twin_id']:data['enterprise_name'],data['industry_twin_id']:data['industry_name']}.get(identifier,identifier)
 
 
 def links(data, ids):
@@ -35,14 +36,17 @@ def links(data, ids):
 
 def shell(title, body, headers=None, data=None):
     data=data or load_assessment();state=freshness(data)
-    nav=[('/industries/banking','Banking Industry Twin'),('/enterprises/lloyds','Lloyds Enterprise Twin'),('/opportunities','Opportunities'),(ROOT+'/sources','Source register'),(ROOT+'/gaps','Research gaps')]
+    ROOT=data.get('route_root',globals()['ROOT'])
+    domain=data.get('research_domain','banking');slug=data.get('enterprise_slug','lloyds')
+    nav=[('/industries/'+domain,data['industry_name']+' Industry Twin'),('/enterprises/'+slug,data['enterprise_name']+' Enterprise Twin'),('/opportunities','Opportunities'),(ROOT+'/sources','Source register'),(ROOT+'/gaps','Research gaps')]
     controls="<nav class='research-nav' aria-label='Research navigation'>"+''.join(f"<a href='{path}'>{text}</a>" for path,text in nav)+'</nav>'
     warning=f"<aside class='research-warning'><strong>Primary-source re-verification {'pending' if state['primary_verified']==0 else 'partially complete'}.</strong> {state['primary_verified']} reviewed primary-source records ({state['reviewed_excerpts']} short extracts; full originals not archived for extracts). {state['primary_total']-state['primary_verified']} historical citations still require verification. Historical research effective {data['upstream_research_effective_date']}; assessment {data['assessed_at']}. Unknown publication dates stay Unknown. Public disclosures support research, not customer-confirmed demand or accepted canonical Evidence.</aside>"
-    crumb=f"<nav class='ex-breadcrumb' aria-label='Breadcrumb'><a href='/flora/banking/explorer'>Banking Explorer</a> / <a href='{ROOT}'>Industry Twin research</a> / <span>{e(title)}</span></nav>"
+    crumb=f"<nav class='ex-breadcrumb' aria-label='Breadcrumb'><a href='/industries/{domain}'>{e(data['industry_name'])}</a> / <a href='{ROOT}'>Industry Twin research</a> / <span>{e(title)}</span></nav>"
     return _page(title,f"<style>{STYLE}</style><div class='research'>{crumb}{controls}{warning}{body}</div>",headers)
 
 
 def claims_html(data, ids):
+    ROOT=data.get('route_root',globals()['ROOT'])
     if not ids:return "<p class='ex-empty'>No direct supporting claim is recorded here. Inspect linked research and explicit gaps; absence is not evidence of no need.</p>"
     claims=_index(data['claims']);cards=[]
     for identifier in dict.fromkeys(ids):
@@ -104,9 +108,10 @@ def opportunities_page(headers=None):
 
 
 def commercial_brief_html(data, identifier):
+    ROOT=data.get('route_root',globals()['ROOT'])
     row=next((r for r in commercial_candidates(data) if r['id']==identifier),None)
     if row is None:return ''
-    c=row['commercial'];ratings=''.join(f"<dt>{e(d.replace('_',' '))}</dt><dd>{c[d]['score']}/3 — {e(c[d]['reason'])}</dd>" for d in ('strategic_relevance','commercial_accessibility','evidence_maturity'))
+    c=row['commercial'];ratings=''.join(f"<dt>{e(d.replace('_',' '))}</dt><dd>{c[d]['score']}/3 — {e(c[d]['reason'])}</dd>" for d in commercial_dimensions(data))
     fields=[('Business problem',c['business_problem']),('Proposed service',c['proposed_service']),
             ('Potential buyer / decision function','; '.join(c['buyer_functions'])+' — '+c['buyer_status']),
             ('Supplier / competitive position',c['supplier_position']),('Conditional route to market',c['route_to_market']),
@@ -128,7 +133,7 @@ def commercial_landscape_html(data):
     if not context:return ''
     rows=commercial_candidates(data);table=[]
     for row in rows:
-        c=row['commercial'];scores=''.join(f"<td>{c[d]['score']}/3</td>" for d in ('strategic_relevance','commercial_accessibility','evidence_maturity'))
+        c=row['commercial'];scores=''.join(f"<td>{c[d]['score']}/3</td>" for d in commercial_dimensions(data))
         status='Shortlist — discovery only' if c['shortlisted'] else 'Hold / follow-on research'
         table.append(f"<tr><td>{row['commercial_rank']}. <a href='{ROOT}/candidates/{row['id']}'>{e(c['offer'])}</a><p>{e(status)}</p></td>{scores}<td>{e(c['next_commercial_action'])}</td></tr>")
     anchors=''.join(f"<h3>{e(d.replace('_',' '))}</h3><ul>"+''.join(f"<li>{e(k)}: {e(v)}</li>" for k,v in values.items())+'</ul>' for d,values in context['rating_anchors'].items())
@@ -143,7 +148,7 @@ def current_evidence_html(data):
 
 def review_html(data, row):
     review=row.get('review')
-    if not review: return ''
+    if not review or 'summary' not in review: return ''
     fields=[('Evidence change',review['summary']),('Business problem',row['problem']),
             ('Potential solution',row['intervention']),('Measurable outcome to validate',review['measurable_outcome']),
             ('Supplier involvement',review['supplier_signal']),('Funding',review['funding_signal']),
@@ -164,17 +169,19 @@ def comparison_html(data):
     return "<section class='ex-section' id='reassessment'><h2>Before and after primary research</h2><p>All eight earlier hypotheses and their evidence remain available. Rankings order research effort, not deal probability. No hypotheses are merged: shared buyers or funded scopes have not been established. AI candidates overlap and must not be counted as additive deals.</p><div class='research-table'><table><thead><tr><th>Candidate</th><th>Previous → current priority</th><th>Evidence-led change</th></tr></thead><tbody>"+''.join(rows)+"</tbody></table></div></section>"
 
 
-def candidate_page(identifier,headers=None):
-    data=load_assessment();row=candidate(identifier,data)
+def candidate_page(identifier,headers=None,data=None):
+    ROOT=data.get("route_root",globals()["ROOT"]) if data else globals()["ROOT"]
+    data=data or load_assessment();row=candidate(identifier,data)
     if row is None:raise ValueError('Research candidate unavailable')
     basis=''.join(f'<dt>{e(k.replace("_"," "))}</dt><dd>{e(str(v))}</dd>' for k,v in row['rank_basis'].items())
     capture=capture_controls(row['enterprise_slug'],row['id'],headers)
-    body=f"<section class='ex-hero' id='explorer-content'><p class='eyebrow'>Research priority {row['rank']} / Lloyds</p><h1>{e(row['title'])}</h1><p>{e(row['problem'])}</p></section><section class='ex-section ex-split'><article class='ex-card'><span class='research-badge interpretation'>Commercial interpretation / not a confirmed requirement</span><h2>Potential intervention</h2><p>{e(row['intervention'])}</p><h3>Programme signal</h3><p>{e(row['programme_signal'])}</p><p><strong>Estimated deal value:</strong> Unknown · <strong>Procurement date:</strong> Unknown</p><p><strong>Confidence:</strong> {e(row['confidence'])}</p><h3>Rank rationale</h3><dl class='research-dl'>{basis}</dl><p>{e(row['ranking_change'])}</p></article><aside class='ex-card'><h2>Develop with customer evidence.</h2><p>Capture a private research-stage copy using the existing pipeline. It starts Discovered with blank qualification, unknown value and unchanged source limitations. This action does not qualify or activate a pursuit.</p>{capture}<p><a href='/flora/sales/pipeline'>Workspace pipeline</a></p></aside></section>{commercial_brief_html(data,identifier)}{review_html(data,row)}<section class='ex-section'><h2>Industry drivers and capabilities</h2>{links(data,row['driver_ids']+row['capability_ids']+row['programme_ids'])}</section><section class='ex-section' id='evidence'><h2>Supporting research and provenance</h2>{claims_html(data,row['claim_ids'])}</section><section class='ex-section'><h2>Evidence needed before qualification</h2>{links(data,row['gap_ids'])}</section><section class='ex-section'><h2>Trace the relationships</h2>{edges_html(data,identifier)}</section><p><a href='{ROOT}/opportunities'>← Return to research priorities</a> · <a href='{ROOT}/lloyds'>Lloyds Enterprise Twin</a></p>"
+    body=f"<section class='ex-hero' id='explorer-content'><p class='eyebrow'>Research priority {row['rank']} / {e(data['enterprise_name'])}</p><h1>{e(row['title'])}</h1><p>{e(row['problem'])}</p></section><section class='ex-section ex-split'><article class='ex-card'><span class='research-badge interpretation'>Commercial interpretation / not a confirmed requirement</span><h2>Potential intervention</h2><p>{e(row['intervention'])}</p><h3>Programme signal</h3><p>{e(row['programme_signal'])}</p><p><strong>Estimated deal value:</strong> Unknown · <strong>Procurement date:</strong> Unknown</p><p><strong>Confidence:</strong> {e(row['confidence'])}</p><h3>Rank rationale</h3><dl class='research-dl'>{basis}</dl><p>{e(row['ranking_change'])}</p></article><aside class='ex-card'><h2>Develop with customer evidence.</h2><p>Capture a private research-stage copy using the existing pipeline. It starts Discovered with blank qualification, unknown value and unchanged source limitations. This action does not qualify or activate a pursuit.</p>{capture}<p><a href='/flora/sales/pipeline'>Workspace pipeline</a></p></aside></section>{commercial_brief_html(data,identifier)}{review_html(data,row)}<section class='ex-section'><h2>Industry drivers and capabilities</h2>{links(data,row['driver_ids']+row['capability_ids']+row['programme_ids'])}</section><section class='ex-section' id='evidence'><h2>Supporting research and provenance</h2>{claims_html(data,row['claim_ids'])}</section><section class='ex-section'><h2>Evidence needed before qualification</h2>{links(data,row['gap_ids'])}</section><section class='ex-section'><h2>Trace the relationships</h2>{edges_html(data,identifier)}</section><p><a href='{ROOT}/opportunities'>← Return to research priorities</a> · <a href='/enterprises/{data.get('enterprise_slug','lloyds')}'>{e(data['enterprise_name'])} Enterprise Twin</a></p>"
     return shell(row['title'],body,headers,data)
 
 
-def evidence_page(identifier,headers=None):
-    data=load_assessment();item=_index(data['claims']).get(identifier)
+def evidence_page(identifier,headers=None,data=None):
+    ROOT=data.get("route_root",globals()["ROOT"]) if data else globals()["ROOT"]
+    data=data or load_assessment();item=_index(data['claims']).get(identifier)
     if item is None:raise ValueError('Research claim unavailable')
     segment=claim_segment(data,item);claim=candidate_claim(data,item);package=evidence_item(data,item)
     primary=not item.get('repository_quote')
@@ -182,30 +189,33 @@ def evidence_page(identifier,headers=None):
     quote_title='Reviewed excerpt from the official publisher' if primary else 'Verbatim quotation from the preserved repository research'
     quote_boundary='This short primary-source excerpt was inspected via the approved web research tool; full original PDF/HTML bytes were not downloaded. The snapshot digest identifies the retained excerpt, not the original file. Public-source support is not independent validation of outcomes or customer demand.' if primary else 'This is a quotation of the existing research, not a newly retrieved quotation of the primary publication.'
     source_heading='Official sources and verification extent' if primary else 'Cited primary documents — verification still needed'
-    source_cards=''.join(f"<article class='ex-card'><h3>{e(s['title'])}</h3><p>Publisher: {e(s['publisher'])}</p><p>Publication date: {e(s['publication_date'] or 'Unknown')}</p><p>Reporting period: {e(s['reporting_period'])}</p><p>Primary retrieval: {e(s['retrieved_at'] or 'Not retrieved')}</p><p>{e(s['limitation'])}</p><a href='{e(s['url'],quote=True)}'>Open cited primary-source URL ↗</a></article>" for s in data['sources'] if s['id'] in item['source_ids'])
-    body=f"<section class='ex-hero' id='explorer-content'><p class='eyebrow'>Claim-level research lineage / {identifier}</p><h1>Inspect the evidence boundary.</h1><p>{e(item['statement'])}</p></section><section class='ex-card'><h2>{quote_title}</h2><blockquote class='research-quote'>{e(segment.content)}</blockquote><p>{quote_boundary}</p><dl class='research-dl'><dt>Existing Twin / asset</dt><dd>{e(segment.asset_id)}</dd><dt>Source section</dt><dd>{e(segment.section_heading)}</dd><dt>Local provenance</dt><dd>{e(segment.source_location)}</dd><dt>Research claim</dt><dd>{e(claim.claim_id)}</dd><dt>Truth status</dt><dd>{e(package.truth_status)}</dd><dt>Entity scope</dt><dd>{e(item['entity_scope'])}</dd><dt>Reporting period</dt><dd>{e(item['reporting_period'])}</dd><dt>Freshness</dt><dd>{e(package.freshness)}</dd></dl><p><a href='{e(upstream_url,quote=True)}'>Inspect original source →</a></p><details><summary>Segment integrity and reusable contract</summary><p>SHA-256 {e(segment.content_hash)} identifies repository quotation integrity; it does not prove primary-source truth.</p><pre>{e(json.dumps(claim.to_dict(),indent=2,ensure_ascii=False))}</pre></details></section><section class='ex-section'><h2>{source_heading}</h2><div class='research-grid'>{source_cards}</div></section><p><a href='{ROOT}/lloyds'>Return to Lloyds research</a> · <a href='{ROOT}/opportunities'>Opportunity priorities</a></p>"
+    source_cards=''.join(f"<article class='ex-card'><h3>{e(s['title'])}</h3><p>Publisher: {e(s['publisher'])}</p><p>Publication date: {e(s['publication_date'] or 'Unknown')}</p><p>Reporting period: {e(s['reporting_period'])}</p><p>{e(s.get('retrieval_extent',''))}</p><p>Primary retrieval: {e(s['retrieved_at'] or 'Not retrieved')}</p><p>{e(s['limitation'])}</p><a href='{e(s['url'],quote=True)}'>Open cited primary-source URL ↗</a></article>" for s in data['sources'] if s['id'] in item['source_ids'])
+    body=f"<section class='ex-hero' id='explorer-content'><p class='eyebrow'>Claim-level research lineage / {identifier}</p><h1>Inspect the evidence boundary.</h1><p>{e(item['statement'])}</p></section><section class='ex-card'><h2>{quote_title}</h2><p>Locator: {e(item.get('quote_locator',segment.section_heading))}</p><p>Original file SHA256: Unavailable for reviewed web excerpts; retained text digest only.</p><blockquote class='research-quote'>{e(segment.content)}</blockquote><p>{quote_boundary}</p><dl class='research-dl'><dt>Existing Twin / asset</dt><dd>{e(segment.asset_id)}</dd><dt>Source section</dt><dd>{e(segment.section_heading)}</dd><dt>Local provenance</dt><dd>{e(segment.source_location)}</dd><dt>Research claim</dt><dd>{e(claim.claim_id)}</dd><dt>Truth status</dt><dd>{e(package.truth_status)}</dd><dt>Entity scope</dt><dd>{e(item['entity_scope'])}</dd><dt>Reporting period</dt><dd>{e(item['reporting_period'])}</dd><dt>Freshness</dt><dd>{e(package.freshness)}</dd></dl><p><a href='{e(upstream_url,quote=True)}'>Inspect original source →</a></p><details><summary>Segment integrity and reusable contract</summary><p>SHA-256 {e(segment.content_hash)} identifies repository quotation integrity; it does not prove primary-source truth.</p><pre>{e(json.dumps(claim.to_dict(),indent=2,ensure_ascii=False))}</pre></details></section><section class='ex-section'><h2>{source_heading}</h2><div class='research-grid'>{source_cards}</div></section><p><a href='/enterprises/{data.get('enterprise_slug','lloyds')}'>Return to {e(data['enterprise_name'])} research</a> · <a href='{ROOT}/opportunities'>Opportunity priorities</a></p>"
     return shell('Research claim provenance',body,headers,data)
 
 
-def node_page(identifier,headers=None):
-    data=load_assessment();node=None
+def node_page(identifier,headers=None,data=None):
+    ROOT=data.get("route_root",globals()["ROOT"]) if data else globals()["ROOT"]
+    data=data or load_assessment();node=None
     for key in ('frameworks','capabilities','suppliers','programmes'):
         node=next((r for r in data[key] if r['id']==identifier),None)
         if node:break
     if node is None and identifier in data['assets']:
         node={'id':identifier,'title':identifier+' / existing knowledge asset','assessment':'Existing repository-owned research asset; no new canonical owner is created.','claim_ids':[c['id'] for c in data['claims'] if c['asset_id']==identifier]}
     if node is None:raise ValueError('Research node unavailable')
-    detail=node.get('assessment') or node.get('scope') or node.get('signal_class') or 'Supplier relationship scope must be checked at enterprise and contract level.'
+    detail=node.get('assessment') or node.get('scope') or node.get('status') or node.get('signal_class') or 'Supplier relationship scope must be checked at enterprise and contract level.'
     if node.get('commercial_implication'):detail+=' Commercial implication: '+node['commercial_implication']
     body=f"<section class='ex-hero' id='explorer-content'><p class='eyebrow'>Research relationship explorer</p><h1>{e(node['title'])}</h1><p>{e(detail)}</p></section><section class='ex-section'><h2>Supporting research statements</h2>{claims_html(data,node.get('claim_ids',[])) or 'No direct claim; inspect the relationship context.'}</section><section class='ex-section'><h2>Connected capabilities, programmes and questions</h2>{edges_html(data,identifier)}</section><section class='ex-section'><h2>Outstanding research</h2>{links(data,node.get('gap_ids',[]))}</section>"
     return shell(node['title'],body,headers,data)
 
 
-def sources_page(headers=None):
-    data=load_assessment();cards=''.join(f"<article class='ex-card' id='{s['id']}'><span class='research-badge'>{'Primary excerpt reviewed; inspect claim-level verification' if s['verification']=='primary_retrieved' else 'Citation only / primary unverified'}</span><h3>{e(s['title'])}</h3><p>{e(s['publisher'])}</p><p><strong>Publication date:</strong> {e(s['publication_date'] or 'Unknown')}</p><p><strong>Reporting period:</strong> {e(s['reporting_period'])}</p><p><strong>Retrieved:</strong> {e(s['retrieved_at'] or 'Not retrieved')}</p><p>{e(s['limitation'])}</p><a href='{e(s['url'],quote=True)}'>Open original publisher URL →</a></article>" for s in data['sources'])
+def sources_page(headers=None,data=None):
+    ROOT=data.get("route_root",globals()["ROOT"]) if data else globals()["ROOT"]
+    data=data or load_assessment();cards=''.join(f"<article class='ex-card' id='{s['id']}'><span class='research-badge'>{'Primary excerpt reviewed; inspect claim-level verification' if s['verification']=='primary_retrieved' else 'Citation only / primary unverified'}</span><h3>{e(s['title'])}</h3><p>{e(s['publisher'])}</p><p><strong>Publication date:</strong> {e(s['publication_date'] or 'Unknown')}</p><p><strong>Reporting period:</strong> {e(s['reporting_period'])}</p><p><strong>Retrieved:</strong> {e(s['retrieved_at'] or 'Not retrieved')}</p><p>{e(s['limitation'])}</p><a href='{e(s['url'],quote=True)}'>Open original publisher URL →</a></article>" for s in data['sources'])
     return shell('Primary-source register',"<section class='ex-hero' id='explorer-content'><p class='eyebrow'>Evidence discipline</p><h1>Publication dates.<br>Not assumptions.</h1><p>Reviewed official excerpts and historical citations are separate records. Original publication, update and observation dates are not interchangeable; full-file import remains available for further review.</p></section><section class='ex-section'><div class='research-grid'>"+cards+'</div></section>',headers,data)
 
 
-def gaps_page(headers=None):
-    data=load_assessment();cards=''.join(f"<article class='ex-card' id='{g['id']}'><span class='research-badge unknown'>{e(g['priority'])} priority / {e(g.get('status','open').replace('_',' '))}</span><h3>{e(g['title'])}</h3><p>{e(g.get('resolution','No new evidence resolving this question.'))}</p><p>{e(g['question'])}</p><p><strong>Required evidence:</strong> {e(g['required_evidence'])}</p><p><strong>Decision constrained:</strong> {e(g['decision_impact'])}</p><p class='research-source'>{e(g['owner_role'])}</p></article>" for g in data['gaps'])
+def gaps_page(headers=None,data=None):
+    ROOT=data.get("route_root",globals()["ROOT"]) if data else globals()["ROOT"]
+    data=data or load_assessment();cards=''.join(f"<article class='ex-card' id='{g['id']}'><span class='research-badge unknown'>{e(g['priority'])} priority / {e(g.get('status','open').replace('_',' '))}</span><h3>{e(g['title'])}</h3><p>{e(g.get('resolution','No new evidence resolving this question.'))}</p><p>{e(g['question'])}</p><p><strong>Required evidence:</strong> {e(g['required_evidence'])}</p><p><strong>Decision constrained:</strong> {e(g['decision_impact'])}</p><p class='research-source'>{e(g['owner_role'])}</p></article>" for g in data['gaps'])
     return shell('Research gaps and next actions',"<section class='ex-hero' id='explorer-content'><p class='eyebrow'>Research process / next commission</p><h1>Make the unknowns<br>commercially useful.</h1><p>Research gaps constrain decisions. They are not negative evidence and must not be converted into sales claims.</p></section><section class='ex-section'><div class='research-grid'>"+cards+'</div></section>',headers,data)

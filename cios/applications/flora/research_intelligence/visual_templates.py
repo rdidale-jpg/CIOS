@@ -1,5 +1,6 @@
 """Responsive, accessible SVG templates for the shared visual specification."""
 from html import escape as e
+import re
 from math import sin, cos, radians
 from textwrap import wrap, shorten
 from .visual_specs import local_link
@@ -73,7 +74,7 @@ def ecosystem(spec):
     shapes=[f"<rect x='20' y='{center-55}' width='255' height='110' rx='20' fill='{INK}'/>"+text(148,center-12,spec['enterprise']['label'],width=20,color='white',anchor='middle')+text(148,center+34,'Public relationship evidence',size=11,color='#d7e5db',anchor='middle')]
     for i,n in enumerate(nodes):
         y=22+i*100;relations=[r for r in spec['relationships'] if r['object']==n['id'] and r['subject']==spec['enterprise']['id']]
-        verified=any(r['verified'] for r in relations);status='Source-supported / scope unverified' if verified else 'Reported / verify primary' if 'reported relationship' in n['verification'] else 'Relationship unknown'
+        verified=any(r['verified'] for r in relations);status='Announced plan / not yet live' if any('planned' in r['predicate'] for r in relations) else 'Source-supported / scope unverified' if verified else 'Reported / verify primary' if 'reported relationship' in n['verification'] else 'Relationship unknown'
         shapes.append(f"<path d='M275 {center} C360 {center} 350 {y+42} 430 {y+42}' fill='none' stroke='{INK if verified else LINE}' stroke-width='{2 if verified else 1.5}'"+('' if verified else " stroke-dasharray='5 5'")+"/>")
         shapes.append(box(n,430,y,420,84,fill='#e1eddf' if verified else '#f4efe4',subtitle=status))
     return 900,height,''.join(shapes)
@@ -103,6 +104,6 @@ def render_visual(spec):
     elif kind=='ecosystem':w,h,body=ecosystem(spec)
     elif kind=='opportunities':w,h,body=opportunities(nodes)
     else:raise ValueError('Unknown visual template')
-    identifier='vt-'+kind
+    identifier='vt-'+kind+'-'+re.sub(r'[^A-Za-z0-9_-]','-',spec['research_assessment_id'])
     nav="<nav class='vt-links' aria-label='"+e(spec['title'],quote=True)+" destinations'>"+''.join(f"<a href='{e(local_link(n['url']),quote=True)}'>{e(n['label'])}</a>" for n in nodes)+"</nav>"
     return f"<figure class='vt-figure' data-diagram-type='{kind}'><figcaption class='vt-caption'><h3>{e(spec['title'])}</h3><p>{e(spec['summary'])}</p></figcaption><div class='vt-scroll' tabindex='0' aria-label='Scrollable {e(spec['title'],quote=True)}'><svg viewBox='0 0 {w} {h}' role='group' aria-labelledby='{identifier}-title {identifier}-desc'><title id='{identifier}-title'>{e(spec['title'])}</title><desc id='{identifier}-desc'>Linked research nodes. Equivalent text navigation follows. All analytical claims retain their evidence status.</desc>{body}</svg></div>{nav}<p class='vt-meta'>Research assessment updated {e(spec['last_research_update'])}. Source periods differ. {e(spec['verification'])}. <a href='{e(local_link(spec['opportunities_url']),quote=True)}'>Explore commercial hypotheses →</a></p></figure>"

@@ -183,14 +183,16 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_storage_recovery_page())
             elif parsed.path in {"/", "/flora", "/flora/"}:
                 self._html(_flora_home_page(self.headers))
-            elif parsed.path in {"/industries","/enterprises","/industries/banking","/industries/banking/visual-specs"} or parsed.path.startswith("/enterprises/"):
+            elif parsed.path in {"/industries","/enterprises","/industries/banking","/industries/banking/visual-specs","/industries/aviation","/industries/aviation/visual-specs"} or parsed.path.startswith("/enterprises/"):
                 from cios.applications.flora.research_intelligence import unified_views
                 try:
                     lens=parse_qs(parsed.query).get('lens',[''])[0]
                     if parsed.path=='/industries': self._html(unified_views.catalogue(headers=self.headers))
                     elif parsed.path=='/enterprises': self._html(unified_views.catalogue(True,self.headers))
-                    elif parsed.path=='/industries/banking/visual-specs': self._json(unified_views.specs())
-                    elif parsed.path=='/industries/banking': self._html(unified_views.industry_page(lens or 'overview',self.headers))
+                    elif parsed.path.endswith('/visual-specs'):
+                        from cios.applications.flora.research_intelligence.model import load_assessment
+                        self._json(unified_views.specs(load_assessment(parsed.path.split('/')[2])))
+                    elif parsed.path in ('/industries/banking','/industries/aviation'): self._html(unified_views.industry_page(lens or 'overview',self.headers,parsed.path.split('/')[2]))
                     else: self._html(unified_views.enterprise_page(parsed.path.rsplit('/',1)[1],lens or 'operating-model',self.headers))
                 except ValueError:
                     self.send_error(404,'Twin view unavailable')
@@ -202,6 +204,16 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_flora_research_page(self.headers))
             elif parsed.path in {"/workspace/reference", "/flora/reference"}:
                 self._html(reference_workspace_page(self.headers, saved=parse_qs(parsed.query).get("saved") == ["1"]), set_cookie=reference_resume_cookie())
+            elif parsed.path == "/flora/industries":
+                from cios.applications.flora.research_intelligence.sector_views import catalogue
+                self._html(catalogue(self.headers))
+            elif parsed.path == "/flora/aviation/research" or parsed.path.startswith("/flora/aviation/research/"):
+                from cios.applications.flora.research_intelligence.sector_views import render
+                try:
+                    self._html(render('aviation',parsed.path[len('/flora/aviation/research'):],
+                                      parse_qs(parsed.query).get('lens',['pestle'])[0],self.headers))
+                except ValueError:
+                    self.send_error(404, "Research view unavailable")
             elif parsed.path == "/flora/banking/research" or parsed.path.startswith("/flora/banking/research/"):
                 from cios.applications.flora.research_intelligence import views as research_views
                 try:
@@ -1128,6 +1140,7 @@ def _flora_home_page(headers=None, question_error: str = "") -> str:
       {context_banner}
       <section aria-labelledby='map-title'><div class='section-heading'><div><p class='eyebrow'>Flora Map</p><h2 id='map-title'>Enterprise Intelligence Map</h2></div><p>Choose a domain to inspect its current intelligence and next decision.</p></div><div class='estate-grid'>
         {domain('/flora/banking/explorer','Banking Explorer','Industry → Enterprise → Visual Landscape → Strategic Insights','Explore five curated bank profiles, their operating context and evidence-labelled strategic hypotheses.','Explore Banking')}
+        {domain('/flora/industries','Industry Twins','Banking + Aviation','Explore industry forces, enterprise operating landscapes and evidence-backed commercial research.','Explore Industry Twins')}
         {domain('/intelligence?tab=industries','Industries',industry_metric,'Governed import lifecycle with existing account visibility; partial release is not complete acceptance.','Open industries')}
         {domain('/intelligence?tab=enterprises','Enterprises','Source context and existing Twin views','No estate-wide owner-accepted Enterprise Model count is assessed here.','Open enterprise intelligence')}
         {domain('/opportunities','Opportunities',f"{len(opportunities)} opportunity hypotheses",f"{horizon_counts['horizon_1']} H1 · {horizon_counts['horizon_2']} H2 · {horizon_counts['horizon_3']} H3",'Open opportunity pipeline')}

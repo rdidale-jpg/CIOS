@@ -2214,6 +2214,54 @@
         "tests/test_flora_security_workspace_boundary.py"
       ],
       "suites": {
+        "aviation_twin": {
+          "cases": {
+            "tests/test_flora_aviation_twin.py::test_all_four_scores_are_distinct_bounded_rationales_not_win_probabilities": {
+              "status": "passed"
+            },
+            "tests/test_flora_aviation_twin.py::test_all_generated_local_drilldowns_resolve_and_unknown_resources_stay_closed": {
+              "status": "passed"
+            },
+            "tests/test_flora_aviation_twin.py::test_complete_frameworks_and_resolved_force_capability_candidate_links": {
+              "status": "passed"
+            },
+            "tests/test_flora_aviation_twin.py::test_easyjet_capture_needs_its_own_enterprise_access_and_origin_lineage": {
+              "status": "passed"
+            },
+            "tests/test_flora_aviation_twin.py::test_easyjet_http_capture_explicit_qualification_and_return_to_origin": {
+              "status": "passed"
+            },
+            "tests/test_flora_aviation_twin.py::test_evidence_views_show_period_scope_locator_and_original_hash_limit": {
+              "status": "passed"
+            },
+            "tests/test_flora_aviation_twin.py::test_industry_home_navigation_reaches_easyjet_and_existing_banking": {
+              "status": "passed"
+            },
+            "tests/test_flora_aviation_twin.py::test_lenses_svg_keyboard_and_mobile_navigation_open_knowledge_nodes": {
+              "status": "passed"
+            },
+            "tests/test_flora_aviation_twin.py::test_public_reading_and_candidate_capture_do_not_qualify_or_mutate_bank_records": {
+              "status": "passed"
+            },
+            "tests/test_flora_aviation_twin.py::test_same_schema_and_semantic_evidence_contracts_support_both_industries": {
+              "status": "passed"
+            },
+            "tests/test_flora_aviation_twin.py::test_snapshot_tamper_and_cross_sector_source_substitution_are_rejected": {
+              "status": "passed"
+            },
+            "tests/test_flora_aviation_twin.py::test_source_dates_originals_and_index_only_limits_are_honest": {
+              "status": "passed"
+            },
+            "tests/test_flora_aviation_twin.py::test_supplier_edges_preserve_historical_and_planned_scope": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_aviation_twin.py"
+            ]
+          ]
+        },
         "banking_explorer": {
           "cases": {
             "tests/test_flora_banking_explorer.py::test_canvas_still_requires_verified_authority": {
@@ -4393,6 +4441,39 @@
               "tests/test_flora_pilot_auth.py",
               "tests/test_flora_pilot_blueprint_review.py",
               "tests/test_flora_pilot_import_bypass.py"
+            ]
+          ]
+        },
+        "multi_industry_integration": {
+          "cases": {
+            "tests/test_flora_multi_industry_integration.py::test_both_sectors_and_all_supported_enterprises_share_the_canonical_catalogues": {
+              "status": "passed"
+            },
+            "tests/test_flora_multi_industry_integration.py::test_complete_sector_to_evidence_to_confirmed_pipeline_journey[aviation-easyjet-RCO-EJ-001]": {
+              "status": "passed"
+            },
+            "tests/test_flora_multi_industry_integration.py::test_complete_sector_to_evidence_to_confirmed_pipeline_journey[banking-lloyds-RCO-LBG-002]": {
+              "status": "passed"
+            },
+            "tests/test_flora_multi_industry_integration.py::test_every_sector_uses_all_six_shared_templates_and_retains_score_dimensions": {
+              "status": "passed"
+            },
+            "tests/test_flora_multi_industry_integration.py::test_exact_58_to_57_inherited_failure_reconciliation_is_preserved": {
+              "status": "passed"
+            },
+            "tests/test_flora_multi_industry_integration.py::test_finite_public_routes_do_not_grant_enterprise_write_access": {
+              "status": "passed"
+            },
+            "tests/test_flora_multi_industry_integration.py::test_original_research_and_all_six_easyjet_hypotheses_are_byte_preserved": {
+              "status": "passed"
+            },
+            "tests/test_flora_multi_industry_integration.py::test_partial_sources_and_future_supplier_plans_do_not_become_current_verified_contracts": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_multi_industry_integration.py"
             ]
           ]
         },

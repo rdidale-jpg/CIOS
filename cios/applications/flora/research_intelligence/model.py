@@ -33,8 +33,10 @@ def _index(values):
     return result
 
 
-def load_assessment():
-    data = json.loads(DATA.read_text())
+def load_assessment(domain='banking'):
+    from .registry import assessment_path
+    path = DATA if domain == 'banking' else assessment_path(domain)
+    data = json.loads(path.read_text())
     validate(data)
     return data
 
@@ -80,7 +82,8 @@ def primary_text(source):
     """Read a reviewed public-source snapshot; a status flag alone proves nothing."""
     official_url(source['url'])
     snapshot=(REPO/source.get('text_path','')).resolve()
-    boundary=REPO/'enterprise-knowledge/banking/research-model/source-snapshots'
+    from .registry import snapshot_boundary
+    boundary=snapshot_boundary(source.get('research_domain','banking'),REPO)
     if not snapshot.is_relative_to(boundary) or not snapshot.is_file():
         raise ValueError('Primary snapshot unavailable')
     content=snapshot.read_text()
@@ -139,6 +142,8 @@ def validate(data):
             raise ValueError('Research identities collide')
         all_ids.update(indexed)
     for source in sources.values():
+        if source.get('research_domain','banking') != data.get('research_domain','banking'):
+            raise ValueError('Primary sources must stay within their registered research domain')
         if not source['url'].startswith('https://') or source.get('verification') not in {'citation_only','primary_retrieved'}:
             raise ValueError('Unsupported source provenance')
         if source.get('publication_date') is not None:
@@ -202,7 +207,7 @@ def validate(data):
         for row in rows:
             if not row['evidence_claim_ids'] or set(row['evidence_claim_ids'])-set(claims):
                 raise ValueError('Commercial assessment needs resolved evidence')
-            for dimension in ('strategic_relevance','commercial_accessibility','evidence_maturity'):
+            for dimension in commercial_dimensions(data):
                 score=row[dimension]['score']
                 if type(score) is not int or score not in range(4) or not row[dimension]['reason']:
                     raise ValueError('Each commercial dimension needs a bounded rating and rationale')
@@ -232,10 +237,10 @@ def candidate_claim(data, item):
     fingerprint=stable_observation_fingerprint(data['enterprise_twin_id'],item['kind'],item['statement'],item['domain'],item['reporting_period'])
     supported=primary_claim_supported(data,item)
     return CandidateClaim('RC-'+fingerprint.rsplit('-',1)[-1][:16].upper(),item['kind'],item['statement'],
-        item['asset_id'],segment.segment_id,'enterprise' if item['asset_id']=='BK-ENT-001' else 'industry',
-        data['enterprise_twin_id'] if item['asset_id']=='BK-ENT-001' else data['industry_twin_id'],
+        item['asset_id'],segment.segment_id,'enterprise' if item['asset_id']==data['enterprise_twin_id'] else 'industry',
+        data['enterprise_twin_id'] if item['asset_id']==data['enterprise_twin_id'] else data['industry_twin_id'],
         item['domain'],item.get('metric_value') or item['statement'],item['reporting_period'],
-        'UK Banking',data['enterprise_twin_id'] if item['asset_id']=='BK-ENT-001' else '',
+        data['industry_name'],data['enterprise_twin_id'] if item['asset_id']==data['enterprise_twin_id'] else '',
         'Source-supported; commercial verification outstanding' if supported else 'Provisional; primary content unverified','candidate_intelligence','source_supported_candidate' if supported else 'needs_primary_verification',item['source_ids'],[])
 
 
@@ -244,7 +249,7 @@ def evidence_item(data, item):
     return EvidencePackageItem(item['id'],'research_claim_candidate',item['statement'],
         'source_supported_public_claim' if primary_claim_supported(data,item) else 'repository_reported_not_primary_verified','Source-supported public claim' if primary_claim_supported(data,item) else 'Provisional',freshness(data)['status'],
         tuple([segment.segment_id,*item['source_ids']]),(),segment.source_location,
-        data['enterprise_twin_id'] if item['asset_id']=='BK-ENT-001' else '')
+        data['enterprise_twin_id'] if item['asset_id']==data['enterprise_twin_id'] else '')
 
 
 def ranked_candidates(data=None, as_of=None):
@@ -277,6 +282,11 @@ def candidate(identifier, data=None):
     return next((r for r in ranked_candidates(data) if r['id']==identifier),None)
 
 
+def commercial_dimensions(data):
+    dimensions=('strategic_relevance','commercial_accessibility','evidence_maturity')
+    return dimensions + (('seller_fit',) if data.get('seller_profile') else ())
+
+
 def commercial_candidates(data=None, shortlisted_only=False):
     """Read-only account priorities; separate from research rank and Pipeline."""
     data=data or load_assessment()
@@ -287,14 +297,17 @@ def commercial_candidates(data=None, shortlisted_only=False):
             continue
         row=deepcopy(research[entry['candidate_id']]);row['commercial']=deepcopy(entry)
         rows.append(row)
-    dimensions=('strategic_relevance','commercial_accessibility','evidence_maturity')
+    dimensions=commercial_dimensions(data)
     rows.sort(key=lambda r:(*(-r['commercial'][d]['score'] for d in dimensions),r['commercial']['tie_order'],r['id']))
     for position,row in enumerate(rows,1):row['commercial_rank']=position
     return [r for r in rows if r['commercial']['shortlisted']] if shortlisted_only else rows
 
 
 def commercial_capture(slug, identifier):
-    data=load_assessment();row=candidate(identifier,data)
+    from .registry import enterprise_domain
+    domain=enterprise_domain(slug)
+    data=load_assessment() if domain=='banking' else load_assessment(domain)
+    row=candidate(identifier,data)
     if row is None or row['enterprise_slug']!=slug:
         raise ValueError('Research candidate does not belong to this enterprise')
     claims=_index(data['claims']);sources=_index(data['sources'])
@@ -304,7 +317,7 @@ def commercial_capture(slug, identifier):
                   'next_action':row.get('review',{}).get('next_action') or 'Research validation first: '+ '; '.join(next(g['question'] for g in data['gaps'] if g['id']==gid) for gid in row['gap_ids'][:3])},
         'provenance':{'kind':'research_candidate','source_labels':[sources[s]['title']+(' (reviewed primary excerpt; customer demand unverified)' if sources[s]['verification']=='primary_retrieved' else ' (citation only; primary verification pending)') for s in refs],
                       'snapshot':data['assessed_at'],'signals':[claims[c]['statement'] for c in row['claim_ids']],
-                      'evidence_url':ROOT+'/candidates/'+row['id']+'#evidence','origin_url':ROOT+'/candidates/'+row['id'],
+                      'evidence_url':data.get('route_root',ROOT)+'/candidates/'+row['id']+'#evidence','origin_url':data.get('route_root',ROOT)+'/candidates/'+row['id'],
                       'limitations':row['confidence']+'. Not customer-verified demand; no accepted canonical Evidence.',
                       'research_assessment_id':data['assessment_id'],'claim_ids':row['claim_ids'],
                       'source_ids':refs,'assessment_digest':stable_hash(data)},

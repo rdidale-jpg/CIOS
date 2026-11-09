@@ -19,6 +19,7 @@ def local_link(value):
 
 
 def claim_state(data, claim):
+    if any('search-index' in s.get('retrieval_extent','') for s in data['sources'] if s['id'] in claim['source_ids']):return 'official search-index excerpt; original unverified'
     if any(c.get('supersedes')==claim['id'] for c in data['claims']):return 'superseded'
     if any(c.get('updates')==claim['id'] for c in data['claims']):return 'historical'
     if claim['kind'] in {'interpretation','management_expectation','unknown'}:return claim['kind'].replace('_',' ')

@@ -1,0 +1,2750 @@
+{
+  "schema_version": 1,
+  "authority": "candidate_intelligence",
+  "assessment_id": "AV-EJ-2026-11-09",
+  "research_domain": "aviation",
+  "route_root": "/flora/aviation/research",
+  "knowledge_root": "enterprise-knowledge/aviation",
+  "assessed_at": "2026-11-09",
+  "upstream_research_effective_date": "2026-11-09",
+  "industry_twin_id": "AV-IND-001",
+  "enterprise_twin_id": "AV-ENT-001",
+  "enterprise_slug": "easyjet",
+  "enterprise_name": "easyJet",
+  "industry_name": "Commercial Aviation",
+  "assets": {
+    "AV-IND-001": "enterprise-knowledge/aviation/Industry-Twin.md",
+    "AV-ENT-001": "enterprise-knowledge/aviation/easyJet-Enterprise-Twin.md"
+  },
+  "sources": [
+    {
+      "id": "SRC-AV-AR25",
+      "title": "easyJet Annual Report and Accounts 2025",
+      "publisher": "easyJet",
+      "url": "https://s203.q4cdn.com/522538739/files/doc_financials/2025/ar/easyJetARA25_DIGITAL_sm.pdf",
+      "publication_date": null,
+      "publication_date_evidence": "Not established from retrieved content",
+      "reporting_period": "Year ended 30 September 2025",
+      "retrieved_at": "2026-11-09T20:48:24+00:00",
+      "retrieval_url": "https://s203.q4cdn.com/522538739/files/doc_financials/2025/ar/easyJetARA25_DIGITAL_sm.pdf",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-AR25.txt",
+      "text_sha256": "5fefb3d6bc234287136892d079f5e1c1e179c8ebb2523e4ccf346fda6e2912fa",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn688120view0; turn205793view2; turn205793view3; turn630137view0",
+      "excerpts": [
+        {
+          "locator": "p32 performance summary",
+          "quote": "10,106"
+        },
+        {
+          "locator": "p32 headline PBT",
+          "quote": "665"
+        },
+        {
+          "locator": "p3 fleet at 30 September 2025",
+          "quote": "356"
+        },
+        {
+          "locator": "p3 network, winter/summer 2025",
+          "quote": "1,202"
+        },
+        {
+          "locator": "p4 holidays future target",
+          "quote": "£450 million"
+        },
+        {
+          "locator": "p15 digital efficiency",
+          "quote": "self-service disruption"
+        },
+        {
+          "locator": "p95 supplier management",
+          "quote": "central procurement function"
+        },
+        {
+          "locator": "p51 fuel mandates",
+          "quote": "fuel suppliers"
+        },
+        {
+          "locator": "p129 comparator airlines",
+          "quote": "Ryanair"
+        },
+        {
+          "locator": "p56 supply-chain assessment",
+          "quote": "EcoVadis"
+        }
+      ],
+      "retrieval_extent": "Direct official document rendered by approved web research tool",
+      "reviewed_by": "Codex focused primary-source review; no independent human verification",
+      "review_notes": "Short located excerpts, not a full original archive. Hash covers only the retained extract. Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool"
+    },
+    {
+      "id": "SRC-AV-IATA26",
+      "title": "June 2026 global airline outlook",
+      "publisher": "IATA",
+      "url": "https://www.iata.org/en/pressroom/2026-releases/06-07-middle-east-disruptions-high-fuel-prices-halve-airline-industry-profitability",
+      "publication_date": "2026-06-07",
+      "publication_date_evidence": "Publication header on official page",
+      "reporting_period": "2026 global forecast; not actual results",
+      "retrieved_at": "2026-11-09T20:48:24+00:00",
+      "retrieval_url": "https://www.iata.org/en/pressroom/2026-releases/06-07-middle-east-disruptions-high-fuel-prices-halve-airline-industry-profitability",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-IATA26.txt",
+      "text_sha256": "9565fdbba06476c505ebd426e3b37ab9b21fdf353ba37556448d3296362bcfbd",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn825181view0",
+      "excerpts": [
+        {
+          "locator": "Highlights, lines238–245",
+          "quote": "Total industry revenues are expected to reach $1.165 trillion in 2026"
+        }
+      ],
+      "retrieval_extent": "Direct official document rendered by approved web research tool",
+      "reviewed_by": "Codex focused primary-source review; no independent human verification",
+      "review_notes": "Short located excerpts, not a full original archive. Hash covers only the retained extract. Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool"
+    },
+    {
+      "id": "SRC-AV-CAA25",
+      "title": "UK airport passenger journeys 2025",
+      "publisher": "UK Civil Aviation Authority",
+      "url": "https://www.caa.co.uk/newsroom/news/uk-aviation-officially-breaks-records-with-over-300m-passenger-journeys-in-2025/",
+      "publication_date": "2026-02-24",
+      "publication_date_evidence": "Publication header on official page",
+      "reporting_period": "Calendar 2025; UK and Crown Dependency airports",
+      "retrieved_at": "2026-11-09T20:48:24+00:00",
+      "retrieval_url": "https://www.caa.co.uk/newsroom/news/uk-aviation-officially-breaks-records-with-over-300m-passenger-journeys-in-2025/",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-CAA25.txt",
+      "text_sha256": "dfcb43818521fe339585ad024be1d5d09d079d9538fe7c776caf4dadb24ba2a0",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn825181view2",
+      "excerpts": [
+        {
+          "locator": "Data summary, lines28–33",
+          "quote": "302m passengers passed through UK* airports last year"
+        }
+      ],
+      "retrieval_extent": "Direct official document rendered by approved web research tool",
+      "reviewed_by": "Codex focused primary-source review; no independent human verification",
+      "review_notes": "Short located excerpts, not a full original archive. Hash covers only the retained extract. Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool"
+    },
+    {
+      "id": "SRC-AV-SAF",
+      "title": "UK SAF Mandate collection",
+      "publisher": "Department for Transport",
+      "url": "https://www.gov.uk/government/collections/sustainable-aviation-fuel-saf-mandate",
+      "publication_date": "2024-12-19",
+      "publication_date_evidence": "Publication header on official page",
+      "reporting_period": "Policy trajectory from 2025; page updated 13 July 2026",
+      "retrieved_at": "2026-11-09T20:48:24+00:00",
+      "retrieval_url": "https://www.gov.uk/government/collections/sustainable-aviation-fuel-saf-mandate",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-SAF.txt",
+      "text_sha256": "9e9122983fa92f83a5b5d6ce38a6c69366dbbd7187860dabbbb529a8c45b5313",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn825181view3",
+      "excerpts": [
+        {
+          "locator": "Mandate trajectory and registration, lines80–91",
+          "quote": "starts in 2025 at 2% of total UK (United Kingdom) jet fuel demand"
+        }
+      ],
+      "retrieval_extent": "Direct official document rendered by approved web research tool",
+      "reviewed_by": "Codex focused primary-source review; no independent human verification",
+      "review_notes": "Short located excerpts, not a full original archive. Hash covers only the retained extract. Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool"
+    },
+    {
+      "id": "SRC-AV-RIGHTS",
+      "title": "Consumer law for airlines and airports",
+      "publisher": "UK Civil Aviation Authority",
+      "url": "https://www.caa.co.uk/commercial-industry/airlines/guidance-on-consumer-law-for-airlines-and-airports/",
+      "publication_date": null,
+      "publication_date_evidence": "Not established from retrieved content",
+      "reporting_period": "UK flight-specific passenger-rights guidance reviewed 9 November 2026",
+      "retrieved_at": "2026-11-09T20:48:24+00:00",
+      "retrieval_url": "https://www.caa.co.uk/commercial-industry/airlines/guidance-on-consumer-law-for-airlines-and-airports/",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-RIGHTS.txt",
+      "text_sha256": "b7a98b13d7e1f5bc55115ad8d49bb38a7f87cb2bb796b51ea195bba92cddff97",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn134941view3",
+      "excerpts": [
+        {
+          "locator": "UK261, lines33–41",
+          "quote": "passengers must be offered the choice of a refund"
+        }
+      ],
+      "retrieval_extent": "Direct official document rendered by approved web research tool",
+      "reviewed_by": "Codex focused primary-source review; no independent human verification",
+      "review_notes": "Short located excerpts, not a full original archive. Hash covers only the retained extract. Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool"
+    },
+    {
+      "id": "SRC-AV-AI-SAFETY",
+      "title": "Human-centric AI Roadmap 2.0",
+      "publisher": "EASA",
+      "url": "https://www.easa.europa.eu/en/newsroom-and-events/news/easa-artificial-intelligence-roadmap-20-published",
+      "publication_date": "2023-05-10",
+      "publication_date_evidence": "Publication header on official page",
+      "reporting_period": "2023 roadmap; not a current certification approval",
+      "retrieved_at": "2026-11-09T20:48:24+00:00",
+      "retrieval_url": "https://www.easa.europa.eu/en/newsroom-and-events/news/easa-artificial-intelligence-roadmap-20-published",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-AI-SAFETY.txt",
+      "text_sha256": "11d0e4986d69ec1178bb9c877ddd7c57d01a56f784e12dacc2727a89c8974d63",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn134941view2",
+      "excerpts": [
+        {
+          "locator": "Roadmap summary, line32",
+          "quote": "safety, security, AI assurance, human-factors and ethical considerations"
+        }
+      ],
+      "retrieval_extent": "Direct official document rendered by approved web research tool",
+      "reviewed_by": "Codex focused primary-source review; no independent human verification",
+      "review_notes": "Short located excerpts, not a full original archive. Hash covers only the retained extract. Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool"
+    },
+    {
+      "id": "SRC-AV-ICC",
+      "title": "AI-equipped operations control centre",
+      "publisher": "easyJet",
+      "url": "https://www.easyjet.com/en/news/airline/story/easyjet-opens-new-ai-equipped-operations-control-centre",
+      "publication_date": "2024-05-22",
+      "publication_date_evidence": "Publication header on official page",
+      "reporting_period": "Reported launch May 2024; 2026 effectiveness unverified",
+      "retrieved_at": "2026-11-09T20:48:24+00:00",
+      "retrieval_url": "https://www.easyjet.com/en/news/airline/story/easyjet-opens-new-ai-equipped-operations-control-centre",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-ICC.txt",
+      "text_sha256": "6cdd0d89cfadde4bd145d86f249757dae30bcf4046a87a74148a68003f674337",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn205793view1",
+      "excerpts": [
+        {
+          "locator": "Launch, lines41–45",
+          "quote": "a new generative AI tool, Jetstream"
+        }
+      ],
+      "retrieval_extent": "Direct official document rendered by approved web research tool",
+      "reviewed_by": "Codex focused primary-source review; no independent human verification",
+      "review_notes": "Short located excerpts, not a full original archive. Hash covers only the retained extract. Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool"
+    },
+    {
+      "id": "SRC-AV-SFP",
+      "title": "S.Fleet Performance + launch",
+      "publisher": "easyJet",
+      "url": "https://www.easyjet.com/en/news/airline/story/easyjet-is-all-set-to-launch-s-fleet-performance",
+      "publication_date": "2023-11-03",
+      "publication_date_evidence": "Publication header on official page",
+      "reporting_period": "Reported product launch 2023; current commercial scope unknown",
+      "retrieved_at": "2026-11-09T20:48:24+00:00",
+      "retrieval_url": "https://www.easyjet.com/en/news/airline/story/easyjet-is-all-set-to-launch-s-fleet-performance",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-SFP.txt",
+      "text_sha256": "43ac035af08c414507d0acb0f8dfae25eb0270e44937db7fec1bd21ae583cdd8",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn205793view0",
+      "excerpts": [
+        {
+          "locator": "Technical collaboration, line43",
+          "quote": "Skywise Core Platform"
+        }
+      ],
+      "retrieval_extent": "Direct official document rendered by approved web research tool",
+      "reviewed_by": "Codex focused primary-source review; no independent human verification",
+      "review_notes": "Short located excerpts, not a full original archive. Hash covers only the retained extract. Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool"
+    },
+    {
+      "id": "SRC-AV-CHAT26",
+      "title": "ChatGPT flight and holiday integration",
+      "publisher": "easyJet",
+      "url": "https://www.easyjet.com/en/news/airline/story/easyjet-chatgpt-flights-package-holidays",
+      "publication_date": "2026-10-05",
+      "publication_date_evidence": "Publication header on official page",
+      "reporting_period": "October 2026 channel launch",
+      "retrieved_at": "2026-11-09T20:48:24+00:00",
+      "retrieval_url": "https://www.easyjet.com/en/news/airline/story/easyjet-chatgpt-flights-package-holidays",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-CHAT26.txt",
+      "text_sha256": "18407c0d3ee1302b5f870ede4663dd7a062bad8b3a3c0324ebe208ebc33880e9",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn813765view2",
+      "excerpts": [
+        {
+          "locator": "Customer journey, lines39–58",
+          "quote": "Continue to easyJet.com or easyJet.com/holidays to complete their booking"
+        }
+      ],
+      "retrieval_extent": "Direct official document rendered by approved web research tool",
+      "reviewed_by": "Codex focused primary-source review; no independent human verification",
+      "review_notes": "Short located excerpts, not a full original archive. Hash covers only the retained extract. Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool"
+    },
+    {
+      "id": "SRC-AV-WIFI26",
+      "title": "Onboard Wi-Fi rollout announcement",
+      "publisher": "easyJet",
+      "url": "https://www.easyjet.com/en/news/airline/article/easyjet-wifi-onboard-flights",
+      "publication_date": "2026-10-29",
+      "publication_date_evidence": "Publication header on official page",
+      "reporting_period": "Plan: first half 2027 to early 2028; not deployed fleet-wide",
+      "retrieved_at": "2026-11-09T20:48:24+00:00",
+      "retrieval_url": "https://www.easyjet.com/en/news/airline/article/easyjet-wifi-onboard-flights",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-WIFI26.txt",
+      "text_sha256": "a09b3ce3feca236690d9615e39dbaa9ea6ae84de70d0f92f673cb072f2aa2f06",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn813765view1",
+      "excerpts": [
+        {
+          "locator": "Technology and rollout table, lines43–49",
+          "quote": "powered by Starlink from SpaceX"
+        }
+      ],
+      "retrieval_extent": "Direct official document rendered by approved web research tool",
+      "reviewed_by": "Codex focused primary-source review; no independent human verification",
+      "review_notes": "Short located excerpts, not a full original archive. Hash covers only the retained extract. Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool"
+    },
+    {
+      "id": "SRC-AV-HOL26",
+      "title": "Improving the package holiday",
+      "publisher": "easyJet holidays",
+      "url": "https://www.easyjet.com/en/news/holidays/article/easyjet-holidays-is-building-a-better-package-holiday",
+      "publication_date": "2026-11-09",
+      "publication_date_evidence": "Publication header on official page",
+      "reporting_period": "WTM 2026 management description",
+      "retrieved_at": "2026-11-09T20:48:24+00:00",
+      "retrieval_url": "https://www.easyjet.com/en/news/holidays/article/easyjet-holidays-is-building-a-better-package-holiday",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-HOL26.txt",
+      "text_sha256": "86ab9003a3b50a2a2b6fbc3aff09baad3bfc445ef02b6247c3dcd481ac27e990",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn679494search0",
+      "excerpts": [
+        {
+          "locator": "Reinventing the package holiday",
+          "quote": "greater flexibility, digital services and customer protection"
+        }
+      ],
+      "retrieval_extent": "Official publisher search-index excerpt only; direct article fetch unavailable. Reverify original before relying on detailed programme status.",
+      "reviewed_by": "Codex focused primary-source review; no independent human verification",
+      "review_notes": "Short located excerpts, not a full original archive. Hash covers only the retained extract. Official publisher search-index excerpt only; direct article fetch unavailable. Reverify original before relying on detailed programme status.",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Official publisher search-index excerpt only; direct article fetch unavailable. Reverify original before relying on detailed programme status."
+    },
+    {
+      "id": "SRC-AV-OFFER26",
+      "title": "Possible acquisition update",
+      "publisher": "easyJet",
+      "url": "https://www.easyjet.com/en/news/airline/story/acquisition-of-easyjet-updates",
+      "publication_date": "2026-09-07",
+      "publication_date_evidence": "Publication header on official page",
+      "reporting_period": "Reported recommended acquisition; expected completion Q1 calendar 2027, not confirmed",
+      "retrieved_at": "2026-11-09T20:48:24+00:00",
+      "retrieval_url": "https://www.easyjet.com/en/news/airline/story/acquisition-of-easyjet-updates",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-OFFER26.txt",
+      "text_sha256": "5d10b1172b46c175df6917ad52e8080be177af1edfe38a1d7843c3c7ee4cbb98",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn134941view0",
+      "excerpts": [
+        {
+          "locator": "Current status, lines56–57",
+          "quote": "expected to complete by the end of the first calendar quarter of 2027"
+        }
+      ],
+      "retrieval_extent": "Direct official document rendered by approved web research tool",
+      "reviewed_by": "Codex focused primary-source review; no independent human verification",
+      "review_notes": "Short located excerpts, not a full original archive. Hash covers only the retained extract. Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool"
+    },
+    {
+      "id": "SRC-AV-Q326",
+      "title": "FY2026 third-quarter trading update, indexed official excerpt",
+      "publisher": "easyJet",
+      "url": "https://corporate.easyjet.com/investors/reports-and-presentations/default.aspx",
+      "publication_date": null,
+      "publication_date_evidence": "Not established from retrieved content",
+      "reporting_period": "Quarter ended 30 June 2026; not full-year 2026",
+      "retrieved_at": "2026-11-09T20:48:24+00:00",
+      "retrieval_url": "https://corporate.easyjet.com/investors/reports-and-presentations/default.aspx",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-AV-Q326.txt",
+      "text_sha256": "550c6aca2a48e2802f879e9e94ded544b5ae8a7c7445dfc96fb566457a26780c",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn630137search0",
+      "excerpts": [
+        {
+          "locator": "Q3 FY26 headline, official search-index extract",
+          "quote": "Q3 Headline PBT of £85 million"
+        }
+      ],
+      "retrieval_extent": "Official publisher search-index excerpt only; direct page renders an empty financial shell. Full Q3 release, original publication date and FY2026 final results remain import/reverification gaps.",
+      "reviewed_by": "Codex focused primary-source review; no independent human verification",
+      "review_notes": "Short located excerpts, not a full original archive. Hash covers only the retained extract. Official publisher search-index excerpt only; direct page renders an empty financial shell. Full Q3 release, original publication date and FY2026 final results remain import/reverification gaps.",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Official publisher search-index excerpt only; direct page renders an empty financial shell. Full Q3 release, original publication date and FY2026 final results remain import/reverification gaps."
+    },
+    {
+      "id": "SRC-AV-EURO26",
+      "title": "Autumn 2026 flight forecast (retrieval pending)",
+      "publisher": "EUROCONTROL",
+      "url": "https://www.eurocontrol.int/publication/eurocontrol-forecast-2026-2032",
+      "publication_date": null,
+      "reporting_period": "Autumn 2026 forecast",
+      "verification": "citation_only",
+      "retrieved_at": null,
+      "primary_content_sha256": null,
+      "limitation": "Direct fetch returned HTTP503; search index is not archived or used to establish a supported claim.",
+      "research_domain": "aviation"
+    }
+  ],
+  "claims": [
+    {
+      "id": "AV-ECON",
+      "asset_id": "AV-IND-001",
+      "statement": "IATA forecasts global 2026 airline revenue of USD1.165trn, net profit USD23bn and 2.0% net margin; these are June forecasts, not actuals.",
+      "source_ids": [
+        "SRC-AV-IATA26"
+      ],
+      "reporting_period": "2026 global forecast; not actual results",
+      "domain": "economics",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-IATA26": "Total industry revenues are expected to reach $1.165 trillion in 2026"
+      },
+      "quote_locator": "Highlights, lines238–245",
+      "entity_scope": "Commercial aviation / stated geography",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-MARKET",
+      "asset_id": "AV-IND-001",
+      "statement": "CAA records 302m passenger journeys through UK and Crown Dependency airports in 2025; journeys are not unique travellers or easyJet passengers.",
+      "source_ids": [
+        "SRC-AV-CAA25"
+      ],
+      "reporting_period": "Calendar 2025; UK and Crown Dependency airports",
+      "domain": "market",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-CAA25": "302m passengers passed through UK* airports last year"
+      },
+      "quote_locator": "Data summary, lines28–33",
+      "entity_scope": "Commercial aviation / stated geography",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-SAF",
+      "asset_id": "AV-IND-001",
+      "statement": "UK policy raises SAF share from 2% in 2025 to 10% in 2030 and 22% in 2040. Obligations attach to qualifying fuel suppliers, not automatically every airline.",
+      "source_ids": [
+        "SRC-AV-SAF"
+      ],
+      "reporting_period": "Policy trajectory from 2025; page updated 13 July 2026",
+      "domain": "sustainability",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-SAF": "starts in 2025 at 2% of total UK (United Kingdom) jet fuel demand"
+      },
+      "quote_locator": "Mandate trajectory and registration, lines80–91",
+      "entity_scope": "Commercial aviation / stated geography",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-RIGHTS",
+      "asset_id": "AV-IND-001",
+      "statement": "UK261 assistance, refund and re-routing duties depend on flight scope; compensation exceptions do not erase every care obligation.",
+      "source_ids": [
+        "SRC-AV-RIGHTS"
+      ],
+      "reporting_period": "UK flight-specific passenger-rights guidance reviewed 9 November 2026",
+      "domain": "regulation",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-RIGHTS": "passengers must be offered the choice of a refund"
+      },
+      "quote_locator": "UK261, lines33–41",
+      "entity_scope": "Commercial aviation / stated geography",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-SAFETY",
+      "asset_id": "AV-IND-001",
+      "statement": "EASA’s 2023 AI roadmap emphasises human factors and AI assurance. It is guidance direction, not certification of a specific operational use case.",
+      "source_ids": [
+        "SRC-AV-AI-SAFETY"
+      ],
+      "reporting_period": "2023 roadmap; not a current certification approval",
+      "domain": "technology",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-AI-SAFETY": "safety, security, AI assurance, human-factors and ethical considerations"
+      },
+      "quote_locator": "Roadmap summary, line32",
+      "entity_scope": "Commercial aviation / stated geography",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-REVENUE",
+      "asset_id": "AV-ENT-001",
+      "statement": "FY2025 Group revenue: GBP10,106m.",
+      "source_ids": [
+        "SRC-AV-AR25"
+      ],
+      "reporting_period": "Year ended 30 September 2025",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-AR25": "10,106"
+      },
+      "quote_locator": "p32 performance summary",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-PROFIT",
+      "asset_id": "AV-ENT-001",
+      "statement": "FY2025 headline PBT: GBP665m; reported PBT GBP658m. Headline and statutory measures differ.",
+      "source_ids": [
+        "SRC-AV-AR25"
+      ],
+      "reporting_period": "Year ended 30 September 2025",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-AR25": "665"
+      },
+      "quote_locator": "p32 headline PBT",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-FLEET",
+      "asset_id": "AV-ENT-001",
+      "statement": "356 aircraft at 30 September 2025; A319/A320-family fleet. This is a dated snapshot, not the current aircraft count.",
+      "source_ids": [
+        "SRC-AV-AR25"
+      ],
+      "reporting_period": "Year ended 30 September 2025",
+      "domain": "operations",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-AR25": "356"
+      },
+      "quote_locator": "p3 fleet at 30 September 2025",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-NETWORK",
+      "asset_id": "AV-ENT-001",
+      "statement": "Low-cost European point-to-point model. FY2025 network: 1,202 routes, 163 airports and 37 countries; annualised winter/summer definition, not daily operations.",
+      "source_ids": [
+        "SRC-AV-AR25"
+      ],
+      "reporting_period": "Year ended 30 September 2025",
+      "domain": "operating-model",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-AR25": "1,202"
+      },
+      "quote_locator": "p3 network, winter/summer 2025",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-STRATEGY",
+      "asset_id": "AV-ENT-001",
+      "statement": "FY2025 strategy combines network strength, revenue, reliability and low cost; holidays PBT target GBP450m by FY2030 is an ambition.",
+      "source_ids": [
+        "SRC-AV-AR25"
+      ],
+      "reporting_period": "Year ended 30 September 2025",
+      "domain": "strategy",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-AR25": "£450 million"
+      },
+      "quote_locator": "p4 holidays future target",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-DIGITAL",
+      "asset_id": "AV-ENT-001",
+      "statement": "FY2025 report describes multilingual chat and improved disruption self-service; remaining friction is unmeasured here.",
+      "source_ids": [
+        "SRC-AV-AR25"
+      ],
+      "reporting_period": "Year ended 30 September 2025",
+      "domain": "technology",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-AR25": "self-service disruption"
+      },
+      "quote_locator": "p15 digital efficiency",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-PROCUREMENT",
+      "asset_id": "AV-ENT-001",
+      "statement": "FY2025 report describes central procurement and key supplier management. No open tender or seller eligibility established.",
+      "source_ids": [
+        "SRC-AV-AR25"
+      ],
+      "reporting_period": "Year ended 30 September 2025",
+      "domain": "suppliers",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-AR25": "central procurement function"
+      },
+      "quote_locator": "p95 supplier management",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-FUEL",
+      "asset_id": "AV-ENT-001",
+      "statement": "FY2025 report says fuel suppliers face UK/EU SAF mandates and compliant fuel was acquired; no new IT sourcing demand established.",
+      "source_ids": [
+        "SRC-AV-AR25"
+      ],
+      "reporting_period": "Year ended 30 September 2025",
+      "domain": "sustainability",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-AR25": "fuel suppliers"
+      },
+      "quote_locator": "p51 fuel mandates",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-PEERS",
+      "asset_id": "AV-ENT-001",
+      "statement": "FY2025 report’s European airline comparator group includes Ryanair, Lufthansa, Air France-KLM and Wizz Air; not route-level market shares.",
+      "source_ids": [
+        "SRC-AV-AR25"
+      ],
+      "reporting_period": "Year ended 30 September 2025",
+      "domain": "market",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-AR25": "Ryanair"
+      },
+      "quote_locator": "p129 comparator airlines",
+      "entity_scope": "easyJet disclosed European comparator group; not market-wide ranking",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-SUPPLY-RATING",
+      "asset_id": "AV-ENT-001",
+      "statement": "FY2025 report describes EcoVadis supplier sustainability assessment; current scope and contracts unverified.",
+      "source_ids": [
+        "SRC-AV-AR25"
+      ],
+      "reporting_period": "Year ended 30 September 2025",
+      "domain": "suppliers",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-AR25": "EcoVadis"
+      },
+      "quote_locator": "p56 supply-chain assessment",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-ICC",
+      "asset_id": "AV-ENT-001",
+      "statement": "easyJet reported Jetstream and predictive crew-planning support in its Luton ICC in May 2024. Current adoption and residual backlog remain unknown.",
+      "source_ids": [
+        "SRC-AV-ICC"
+      ],
+      "reporting_period": "Reported launch May 2024; 2026 effectiveness unverified",
+      "domain": "technology",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-ICC": "a new generative AI tool, Jetstream"
+      },
+      "quote_locator": "Launch, lines41–45",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-MRO",
+      "asset_id": "AV-ENT-001",
+      "statement": "easyJet reported S.FP+ with the Skywise Core Platform in November 2023. Existing maintenance collaboration precedes this pilot; current workshare unknown.",
+      "source_ids": [
+        "SRC-AV-SFP"
+      ],
+      "reporting_period": "Reported product launch 2023; current commercial scope unknown",
+      "domain": "suppliers",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-SFP": "Skywise Core Platform"
+      },
+      "quote_locator": "Technical collaboration, line43",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null,
+      "relationship": {
+        "subject": "AV-ENT-001",
+        "predicate": "reported_uses",
+        "object": "AV-SUP-AIRBUS"
+      }
+    },
+    {
+      "id": "AV-CHAT",
+      "asset_id": "AV-ENT-001",
+      "statement": "October 2026 launch connects ChatGPT search to easyJet flight/holiday booking sites; booking remains on easyJet sites, not inside ChatGPT.",
+      "source_ids": [
+        "SRC-AV-CHAT26"
+      ],
+      "reporting_period": "October 2026 channel launch",
+      "domain": "technology",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-CHAT26": "Continue to easyJet.com or easyJet.com/holidays to complete their booking"
+      },
+      "quote_locator": "Customer journey, lines39–58",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null,
+      "relationship": {
+        "subject": "AV-ENT-001",
+        "predicate": "reported_uses",
+        "object": "AV-SUP-OPENAI"
+      }
+    },
+    {
+      "id": "AV-WIFI",
+      "asset_id": "AV-ENT-001",
+      "statement": "October 2026 announcement plans Starlink connectivity from H1 2027 to early 2028 for A320/A320neo/A321neo; not yet a fleet-wide live service.",
+      "source_ids": [
+        "SRC-AV-WIFI26"
+      ],
+      "reporting_period": "Plan: first half 2027 to early 2028; not deployed fleet-wide",
+      "domain": "programmes",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-WIFI26": "powered by Starlink from SpaceX"
+      },
+      "quote_locator": "Technology and rollout table, lines43–49",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null,
+      "relationship": {
+        "subject": "AV-ENT-001",
+        "predicate": "announced_planned_connectivity",
+        "object": "AV-SUP-STARLINK"
+      }
+    },
+    {
+      "id": "AV-HOLIDAYS",
+      "asset_id": "AV-ENT-001",
+      "statement": "November 2026 indexed management article links holiday development to digital service, flexibility and hotel/destination partnerships; detailed delivery status requires original verification.",
+      "source_ids": [
+        "SRC-AV-HOL26"
+      ],
+      "reporting_period": "WTM 2026 management description",
+      "domain": "operating-model",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-HOL26": "greater flexibility, digital services and customer protection"
+      },
+      "quote_locator": "Reinventing the package holiday",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-OWNERSHIP",
+      "asset_id": "AV-ENT-001",
+      "statement": "September 2026 update describes a recommended acquisition with expected Q1 2027 completion. Approval/completion and current buying authority are not verified.",
+      "source_ids": [
+        "SRC-AV-OFFER26"
+      ],
+      "reporting_period": "Reported recommended acquisition; expected completion Q1 calendar 2027, not confirmed",
+      "domain": "strategy",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-OFFER26": "expected to complete by the end of the first calendar quarter of 2027"
+      },
+      "quote_locator": "Current status, lines56–57",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null
+    },
+    {
+      "id": "AV-Q3",
+      "asset_id": "AV-ENT-001",
+      "statement": "Official indexed update reports GBP85m headline PBT for the quarter ended 30 June 2026. Direct release and publication date remain unverified; not FY2026 actual profit.",
+      "source_ids": [
+        "SRC-AV-Q326"
+      ],
+      "reporting_period": "Quarter ended 30 June 2026; not full-year 2026",
+      "domain": "financials",
+      "kind": "reported_fact",
+      "verification": "source_supported",
+      "primary_quotes": {
+        "SRC-AV-Q326": "Q3 Headline PBT of £85 million"
+      },
+      "quote_locator": "Q3 FY26 headline, official search-index extract",
+      "entity_scope": "easyJet Group unless otherwise stated",
+      "metric_value": null,
+      "metric_unit": null
+    }
+  ],
+  "frameworks": [
+    {
+      "id": "AV-PESTLE-P",
+      "lens": "pestle",
+      "title": "Political",
+      "assessment": "Airspace access and geopolitical shocks constrain networks; a geopolitical driver is not an enterprise procurement.",
+      "claim_ids": [
+        "AV-ECON"
+      ],
+      "capability_ids": [
+        "AV-CAP-NETWORK",
+        "AV-CAP-OPS"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-PESTLE-E",
+      "lens": "pestle",
+      "title": "Economic",
+      "assessment": "Thin forecast margins amplify fuel exposure and utilisation trade-offs. Market size is not addressable IT spend.",
+      "claim_ids": [
+        "AV-ECON",
+        "AV-Q3"
+      ],
+      "capability_ids": [
+        "AV-CAP-NETWORK",
+        "AV-CAP-OPS"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-PESTLE-S",
+      "lens": "pestle",
+      "title": "Social",
+      "assessment": "High travel volumes coexist with service and accessibility expectations; do not assume willingness to pay for AI.",
+      "claim_ids": [
+        "AV-MARKET",
+        "AV-RIGHTS"
+      ],
+      "capability_ids": [
+        "AV-CAP-SERVICE",
+        "AV-CAP-DIGITAL"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-PESTLE-T",
+      "lens": "pestle",
+      "title": "Technological",
+      "assessment": "Existing operational AI and conversational distribution suggest integration and outcome questions rather than greenfield platforms.",
+      "claim_ids": [
+        "AV-SAFETY",
+        "AV-CHAT",
+        "AV-ICC"
+      ],
+      "capability_ids": [
+        "AV-CAP-DATA",
+        "AV-CAP-DIGITAL"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-PESTLE-L",
+      "lens": "pestle",
+      "title": "Legal",
+      "assessment": "Safety assurance and flight-specific passenger rights constrain automation and disruption workflows.",
+      "claim_ids": [
+        "AV-SAFETY",
+        "AV-RIGHTS"
+      ],
+      "capability_ids": [
+        "AV-CAP-OPS",
+        "AV-CAP-SERVICE"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-PESTLE-ENV",
+      "lens": "pestle",
+      "title": "Environmental",
+      "assessment": "Fuel mandates create chain-of-custody and assurance interfaces; fuel suppliers and airline responsibilities differ.",
+      "claim_ids": [
+        "AV-SAF",
+        "AV-FUEL"
+      ],
+      "capability_ids": [
+        "AV-CAP-SUSTAIN",
+        "AV-CAP-PROCURE"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-FORCE-RIVALRY",
+      "lens": "porter",
+      "title": "Rivalry",
+      "assessment": "Strong: low-cost and network carriers compete on overlapping journeys; no route-level intensity quantified.",
+      "claim_ids": [
+        "AV-PEERS",
+        "AV-ECON"
+      ],
+      "capability_ids": [
+        "AV-CAP-NETWORK"
+      ],
+      "gap_ids": [
+        "AV-G-INDUSTRY"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-FORCE-BUYER",
+      "lens": "porter",
+      "title": "Buyer power",
+      "assessment": "Material: travellers compare offers and service. Actual elasticity and channel switching need evidence.",
+      "claim_ids": [
+        "AV-MARKET",
+        "AV-CHAT"
+      ],
+      "capability_ids": [
+        "AV-CAP-DIGITAL",
+        "AV-CAP-SERVICE"
+      ],
+      "gap_ids": [
+        "AV-G-INDUSTRY"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-FORCE-SUPPLIER",
+      "lens": "porter",
+      "title": "Supplier power",
+      "assessment": "Material dependencies on airframes, fuel, airports and maintenance; named technology relationships need scope confirmation.",
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-MRO",
+        "AV-FUEL"
+      ],
+      "capability_ids": [
+        "AV-CAP-MRO",
+        "AV-CAP-PROCURE"
+      ],
+      "gap_ids": [
+        "AV-G-INDUSTRY"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-FORCE-ENTRY",
+      "lens": "porter",
+      "title": "New entrants",
+      "assessment": "Fleet capital, operational approvals and network access constrain entry; not proof of no new competition.",
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-SAFETY"
+      ],
+      "capability_ids": [
+        "AV-CAP-NETWORK",
+        "AV-CAP-OPS"
+      ],
+      "gap_ids": [
+        "AV-G-INDUSTRY"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-FORCE-SUBSTITUTE",
+      "lens": "porter",
+      "title": "Substitutes",
+      "assessment": "Rail, remote meetings and alternative destinations are plausible substitutes; affected routes and switching remain research gaps.",
+      "claim_ids": [
+        "AV-NETWORK",
+        "AV-MARKET"
+      ],
+      "capability_ids": [
+        "AV-CAP-NETWORK"
+      ],
+      "gap_ids": [
+        "AV-G-INDUSTRY"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-VC-PLAN",
+      "lens": "value-chain",
+      "title": "Plan network & capacity",
+      "assessment": "Conceptual value activity; inspect evidence and dependencies before inferring enterprise ownership or a delivery gap.",
+      "claim_ids": [
+        "AV-NETWORK",
+        "AV-STRATEGY"
+      ],
+      "capability_ids": [
+        "AV-CAP-NETWORK"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-VC-SELL",
+      "lens": "value-chain",
+      "title": "Inspire, price & sell",
+      "assessment": "Conceptual value activity; inspect evidence and dependencies before inferring enterprise ownership or a delivery gap.",
+      "claim_ids": [
+        "AV-CHAT",
+        "AV-HOLIDAYS"
+      ],
+      "capability_ids": [
+        "AV-CAP-DIGITAL",
+        "AV-CAP-HOLIDAYS"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-VC-PREPARE",
+      "lens": "value-chain",
+      "title": "Prepare aircraft & crew",
+      "assessment": "Conceptual value activity; inspect evidence and dependencies before inferring enterprise ownership or a delivery gap.",
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-MRO",
+        "AV-ICC"
+      ],
+      "capability_ids": [
+        "AV-CAP-MRO",
+        "AV-CAP-OPS"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-VC-TURN",
+      "lens": "value-chain",
+      "title": "Airport & turnaround",
+      "assessment": "Conceptual value activity; inspect evidence and dependencies before inferring enterprise ownership or a delivery gap.",
+      "claim_ids": [
+        "AV-NETWORK",
+        "AV-ICC"
+      ],
+      "capability_ids": [
+        "AV-CAP-OPS"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-VC-FLY",
+      "lens": "value-chain",
+      "title": "Operate & recover flights",
+      "assessment": "Conceptual value activity; inspect evidence and dependencies before inferring enterprise ownership or a delivery gap.",
+      "claim_ids": [
+        "AV-ICC",
+        "AV-SAFETY"
+      ],
+      "capability_ids": [
+        "AV-CAP-OPS",
+        "AV-CAP-SERVICE"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-VC-SERVE",
+      "lens": "value-chain",
+      "title": "Care, recover & retain",
+      "assessment": "Conceptual value activity; inspect evidence and dependencies before inferring enterprise ownership or a delivery gap.",
+      "claim_ids": [
+        "AV-RIGHTS",
+        "AV-DIGITAL"
+      ],
+      "capability_ids": [
+        "AV-CAP-SERVICE",
+        "AV-CAP-DIGITAL"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-VC-FULFIL",
+      "lens": "value-chain",
+      "title": "Deliver holiday experience",
+      "assessment": "Conceptual value activity; inspect evidence and dependencies before inferring enterprise ownership or a delivery gap.",
+      "claim_ids": [
+        "AV-HOLIDAYS"
+      ],
+      "capability_ids": [
+        "AV-CAP-HOLIDAYS"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    },
+    {
+      "id": "AV-VC-IMPROVE",
+      "lens": "value-chain",
+      "title": "Measure, assure & improve",
+      "assessment": "Conceptual value activity; inspect evidence and dependencies before inferring enterprise ownership or a delivery gap.",
+      "claim_ids": [
+        "AV-FUEL",
+        "AV-PROCUREMENT"
+      ],
+      "capability_ids": [
+        "AV-CAP-SUSTAIN",
+        "AV-CAP-DATA"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "assertion_kind": "interpretation",
+      "rating": "Analyst interpretation; no calibrated probability"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "AV-CAP-NETWORK",
+      "title": "Network & revenue planning",
+      "scope": "Conceptual capability; actual owner, applications and performance gaps unverified"
+    },
+    {
+      "id": "AV-CAP-DIGITAL",
+      "title": "Customer & digital channels",
+      "scope": "Conceptual capability; actual owner, applications and performance gaps unverified"
+    },
+    {
+      "id": "AV-CAP-HOLIDAYS",
+      "title": "Holiday partner orchestration",
+      "scope": "Conceptual capability; actual owner, applications and performance gaps unverified"
+    },
+    {
+      "id": "AV-CAP-OPS",
+      "title": "Flight & crew operations",
+      "scope": "Conceptual capability; actual owner, applications and performance gaps unverified"
+    },
+    {
+      "id": "AV-CAP-MRO",
+      "title": "Fleet & maintenance",
+      "scope": "Conceptual capability; actual owner, applications and performance gaps unverified"
+    },
+    {
+      "id": "AV-CAP-DATA",
+      "title": "Data, AI & integration",
+      "scope": "Conceptual capability; actual owner, applications and performance gaps unverified"
+    },
+    {
+      "id": "AV-CAP-SERVICE",
+      "title": "Disruption & customer care",
+      "scope": "Conceptual capability; actual owner, applications and performance gaps unverified"
+    },
+    {
+      "id": "AV-CAP-SUSTAIN",
+      "title": "Fuel & sustainability",
+      "scope": "Conceptual capability; actual owner, applications and performance gaps unverified"
+    },
+    {
+      "id": "AV-CAP-PROCURE",
+      "title": "Procurement & supplier governance",
+      "scope": "Conceptual capability; actual owner, applications and performance gaps unverified"
+    }
+  ],
+  "suppliers": [
+    {
+      "id": "AV-SUP-AIRBUS",
+      "title": "Airbus / Skywise",
+      "status": "Reported 2023 relationship; current workshare unverified"
+    },
+    {
+      "id": "AV-SUP-OPENAI",
+      "title": "ChatGPT / OpenAI",
+      "status": "Reported October 2026 integration; contract terms unverified"
+    },
+    {
+      "id": "AV-SUP-STARLINK",
+      "title": "SpaceX / Starlink",
+      "status": "Announced future rollout; installation and commercial workshare unverified"
+    },
+    {
+      "id": "AV-SUP-ECOVADIS",
+      "title": "EcoVadis",
+      "status": "FY2025 supply-chain assessment context; current scope unverified"
+    },
+    {
+      "id": "AV-SUP-AIRPORTS",
+      "title": "Airports & air navigation",
+      "status": "Ecosystem category; no exclusive enterprise supplier inferred"
+    },
+    {
+      "id": "AV-SUP-HOTELS",
+      "title": "Hotels & destination partners",
+      "status": "Partner category; named contractual suppliers unverified"
+    }
+  ],
+  "programmes": [
+    {
+      "id": "AV-PROG-ICC",
+      "title": "Operational AI & disruption workflows",
+      "claim_ids": [
+        "AV-ICC",
+        "AV-DIGITAL"
+      ],
+      "capability_ids": [
+        "AV-CAP-OPS",
+        "AV-CAP-SERVICE",
+        "AV-CAP-DATA"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "signal_class": "Public signal, not a verified external work package",
+      "current_phase": "Reported 2024 launch / FY2025 improvements; current outcomes unknown",
+      "owner": "Unknown",
+      "funding": "Unknown",
+      "procurement": "No tender or committed buying window verified"
+    },
+    {
+      "id": "AV-PROG-CHANNEL",
+      "title": "Conversational commerce",
+      "claim_ids": [
+        "AV-CHAT"
+      ],
+      "capability_ids": [
+        "AV-CAP-DIGITAL",
+        "AV-CAP-DATA"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "signal_class": "Public signal, not a verified external work package",
+      "current_phase": "Reported October 2026 launch; incremental conversion unknown",
+      "owner": "Unknown",
+      "funding": "Unknown",
+      "procurement": "No tender or committed buying window verified"
+    },
+    {
+      "id": "AV-PROG-HOLIDAYS",
+      "title": "Holiday digital experience & partner scale",
+      "claim_ids": [
+        "AV-HOLIDAYS",
+        "AV-STRATEGY"
+      ],
+      "capability_ids": [
+        "AV-CAP-HOLIDAYS",
+        "AV-CAP-DIGITAL"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "signal_class": "Public signal, not a verified external work package",
+      "current_phase": "2026 management direction; no verified work package",
+      "owner": "Unknown",
+      "funding": "Unknown",
+      "procurement": "No tender or committed buying window verified"
+    },
+    {
+      "id": "AV-PROG-FLEET",
+      "title": "Fleet transition & maintenance integration",
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-MRO"
+      ],
+      "capability_ids": [
+        "AV-CAP-MRO",
+        "AV-CAP-DATA"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "signal_class": "Public signal, not a verified external work package",
+      "current_phase": "Historical fleet and supplier context; current delivery backlog unknown",
+      "owner": "Unknown",
+      "funding": "Unknown",
+      "procurement": "No tender or committed buying window verified"
+    },
+    {
+      "id": "AV-PROG-CONNECT",
+      "title": "Onboard connectivity",
+      "claim_ids": [
+        "AV-WIFI"
+      ],
+      "capability_ids": [
+        "AV-CAP-DIGITAL",
+        "AV-CAP-OPS"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "signal_class": "Public signal, not a verified external work package",
+      "current_phase": "Announced H1 2027–early 2028 rollout; future plan",
+      "owner": "Unknown",
+      "funding": "Unknown",
+      "procurement": "No tender or committed buying window verified"
+    },
+    {
+      "id": "AV-PROG-FUEL",
+      "title": "Fuel sustainability data",
+      "claim_ids": [
+        "AV-FUEL",
+        "AV-SAF"
+      ],
+      "capability_ids": [
+        "AV-CAP-SUSTAIN",
+        "AV-CAP-PROCURE"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER"
+      ],
+      "signal_class": "Public signal, not a verified external work package",
+      "current_phase": "Ongoing policy and supplier responsibilities; no new IT programme verified",
+      "owner": "Unknown",
+      "funding": "Unknown",
+      "procurement": "No tender or committed buying window verified"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "RCO-EJ-001",
+      "enterprise_id": "AV-ENT-001",
+      "enterprise_slug": "easyjet",
+      "industry": "Aviation",
+      "title": "Operational AI workflow delivery and benefit assurance",
+      "problem": "Disconnected exception handling could limit the value of existing AI; current failure modes are unknown.",
+      "intervention": "Integrate one approved ICC-to-customer recovery workflow; measure human decisions, contact demand and net recovery time.",
+      "claim_ids": [
+        "AV-ICC",
+        "AV-DIGITAL",
+        "AV-RIGHTS"
+      ],
+      "driver_ids": [
+        "AV-PESTLE-T",
+        "AV-PESTLE-L"
+      ],
+      "capability_ids": [
+        "AV-CAP-OPS",
+        "AV-CAP-DATA",
+        "AV-CAP-SERVICE"
+      ],
+      "programme_ids": [
+        "AV-PROG-ICC"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER",
+        "AV-G-SUPPLIERS",
+        "AV-G-SAFETY"
+      ],
+      "family": "operational-change",
+      "research_tier": 1,
+      "programme_signal": "Public source signal only; no verified external procurement",
+      "legacy_ids": [],
+      "ranking_change": "First cross-industry assessment; no existing customer opportunity overwritten.",
+      "qualification": "Research hypothesis; customer demand unverified",
+      "estimated_value": null,
+      "procurement_date": null,
+      "review": {
+        "next_action": "Ask the operations sponsor for one current exception backlog and measured baseline; test whether external integration capacity is wanted."
+      }
+    },
+    {
+      "id": "RCO-EJ-002",
+      "enterprise_id": "AV-ENT-001",
+      "enterprise_slug": "easyjet",
+      "industry": "Aviation",
+      "title": "Conversational channel integration and conversion assurance",
+      "problem": "A new search channel needs reliable booking handover; incremental conversion and pain are unmeasured.",
+      "intervention": "Instrument search-to-book handoff, availability consistency, accessible fallbacks and service ownership around the existing integration.",
+      "claim_ids": [
+        "AV-CHAT"
+      ],
+      "driver_ids": [
+        "AV-PESTLE-T",
+        "AV-PESTLE-S"
+      ],
+      "capability_ids": [
+        "AV-CAP-DIGITAL",
+        "AV-CAP-DATA"
+      ],
+      "programme_ids": [
+        "AV-PROG-CHANNEL"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER",
+        "AV-G-SUPPLIERS"
+      ],
+      "family": "customer-journey",
+      "research_tier": 1,
+      "programme_signal": "Public source signal only; no verified external procurement",
+      "legacy_ids": [],
+      "ranking_change": "First cross-industry assessment; no existing customer opportunity overwritten.",
+      "qualification": "Research hypothesis; customer demand unverified",
+      "estimated_value": null,
+      "procurement_date": null,
+      "review": {
+        "next_action": "Request channel funnel and handoff-error data from the product owner; offer a bounded diagnostic only if an unresolved problem exists."
+      }
+    },
+    {
+      "id": "RCO-EJ-003",
+      "enterprise_id": "AV-ENT-001",
+      "enterprise_slug": "easyjet",
+      "industry": "Aviation",
+      "title": "Holiday partner and customer journey orchestration",
+      "problem": "Partner scale can create servicing and fulfilment complexity; no measured easyJet gap established.",
+      "intervention": "Integrate partner exceptions, customer status and controlled AI-assisted service across one holiday journey.",
+      "claim_ids": [
+        "AV-HOLIDAYS",
+        "AV-STRATEGY",
+        "AV-CHAT"
+      ],
+      "driver_ids": [
+        "AV-PESTLE-T",
+        "AV-PESTLE-S"
+      ],
+      "capability_ids": [
+        "AV-CAP-HOLIDAYS",
+        "AV-CAP-SERVICE",
+        "AV-CAP-DATA"
+      ],
+      "programme_ids": [
+        "AV-PROG-HOLIDAYS"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER",
+        "AV-G-SUPPLIERS"
+      ],
+      "family": "customer-journey",
+      "research_tier": 1,
+      "programme_signal": "Public source signal only; no verified external procurement",
+      "legacy_ids": [],
+      "ranking_change": "First cross-industry assessment; no existing customer opportunity overwritten.",
+      "qualification": "Research hypothesis; customer demand unverified",
+      "estimated_value": null,
+      "procurement_date": null,
+      "review": {
+        "next_action": "Reverify original November statement, then validate a concrete partner exception and sponsor before proposing a work package."
+      }
+    },
+    {
+      "id": "RCO-EJ-004",
+      "enterprise_id": "AV-ENT-001",
+      "enterprise_slug": "easyjet",
+      "industry": "Aviation",
+      "title": "Connectivity rollout service readiness",
+      "problem": "An announced rollout introduces phased availability and support dependencies; rollout work may already be allocated.",
+      "intervention": "Provide complementary service readiness, customer availability integration and operational observability, if owner confirms an unallocated gap.",
+      "claim_ids": [
+        "AV-WIFI",
+        "AV-PROCUREMENT"
+      ],
+      "driver_ids": [
+        "AV-PESTLE-T"
+      ],
+      "capability_ids": [
+        "AV-CAP-DIGITAL",
+        "AV-CAP-OPS",
+        "AV-CAP-PROCURE"
+      ],
+      "programme_ids": [
+        "AV-PROG-CONNECT"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER",
+        "AV-G-SUPPLIERS",
+        "AV-G-SAFETY"
+      ],
+      "family": "customer-journey",
+      "research_tier": 2,
+      "programme_signal": "Public source signal only; no verified external procurement",
+      "legacy_ids": [],
+      "ranking_change": "First cross-industry assessment; no existing customer opportunity overwritten.",
+      "qualification": "Research hypothesis; customer demand unverified",
+      "estimated_value": null,
+      "procurement_date": null,
+      "review": {
+        "next_action": "Ask the programme owner or authorised prime whether service-transition scope remains open; stop if already covered."
+      }
+    },
+    {
+      "id": "RCO-EJ-005",
+      "enterprise_id": "AV-ENT-001",
+      "enterprise_slug": "easyjet",
+      "industry": "Aviation",
+      "title": "Fleet/MRO data and change readiness",
+      "problem": "Fleet changes can affect maintenance and operational data; Skywise already supports this domain.",
+      "intervention": "Validate data lineage, interfaces and operational change readiness around existing maintenance tools; do not replace certified engineering judgement.",
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-MRO",
+        "AV-SAFETY"
+      ],
+      "driver_ids": [
+        "AV-PESTLE-T",
+        "AV-PESTLE-L"
+      ],
+      "capability_ids": [
+        "AV-CAP-MRO",
+        "AV-CAP-DATA"
+      ],
+      "programme_ids": [
+        "AV-PROG-FLEET"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER",
+        "AV-G-SUPPLIERS",
+        "AV-G-SAFETY"
+      ],
+      "family": "operational-change",
+      "research_tier": 2,
+      "programme_signal": "Public source signal only; no verified external procurement",
+      "legacy_ids": [],
+      "ranking_change": "First cross-industry assessment; no existing customer opportunity overwritten.",
+      "qualification": "Research hypothesis; customer demand unverified",
+      "estimated_value": null,
+      "procurement_date": null,
+      "review": {
+        "next_action": "Confirm current Skywise scope, data permissions and seller aviation credentials; proceed only with engineering-approved residual scope."
+      }
+    },
+    {
+      "id": "RCO-EJ-006",
+      "enterprise_id": "AV-ENT-001",
+      "enterprise_slug": "easyjet",
+      "industry": "Aviation",
+      "title": "Fuel and sustainability evidence reconciliation",
+      "problem": "Airline, fuel supplier and assurance evidence may require reconciliation; an actual control gap is not verified.",
+      "intervention": "Assess chain-of-custody data handoffs and auditable management reporting with responsible suppliers and accredited assurance specialists.",
+      "claim_ids": [
+        "AV-FUEL",
+        "AV-SAF",
+        "AV-SUPPLY-RATING"
+      ],
+      "driver_ids": [
+        "AV-PESTLE-ENV",
+        "AV-PESTLE-L"
+      ],
+      "capability_ids": [
+        "AV-CAP-SUSTAIN",
+        "AV-CAP-PROCURE",
+        "AV-CAP-DATA"
+      ],
+      "programme_ids": [
+        "AV-PROG-FUEL"
+      ],
+      "gap_ids": [
+        "AV-G-CUSTOMER",
+        "AV-G-SUPPLIERS"
+      ],
+      "family": "sustainability-data",
+      "research_tier": 2,
+      "programme_signal": "Public source signal only; no verified external procurement",
+      "legacy_ids": [],
+      "ranking_change": "First cross-industry assessment; no existing customer opportunity overwritten.",
+      "qualification": "Research hypothesis; customer demand unverified",
+      "estimated_value": null,
+      "procurement_date": null,
+      "review": {
+        "next_action": "Map statutory responsibility and current process with fuel procurement; obtain a real reconciliation problem and qualified assurance partner."
+      }
+    }
+  ],
+  "watchlist": [],
+  "gaps": [
+    {
+      "id": "AV-G-CUSTOMER",
+      "title": "Customer demand and seller access",
+      "question": "Will the customer sponsor external delivery for a measured problem? Obtain sponsor confirmation, backlog, sourcing authority, eligibility and incumbent workshare.",
+      "required_evidence": "Will the customer sponsor external delivery for a measured problem? Obtain sponsor confirmation, backlog, sourcing authority, eligibility and incumbent workshare.",
+      "decision_impact": "Commercial access, prioritisation and delivery feasibility",
+      "priority": "High",
+      "owner_role": "Research/account team; named owner unassigned",
+      "status": "open"
+    },
+    {
+      "id": "AV-G-LATEST",
+      "title": "Current results and ownership",
+      "question": "Import original H1/Q3 FY2026 releases and any final-year update; verify publication dates, latest acquisition status and decision rights. Do not treat indexed excerpts as full reports.",
+      "required_evidence": "Import original H1/Q3 FY2026 releases and any final-year update; verify publication dates, latest acquisition status and decision rights. Do not treat indexed excerpts as full reports.",
+      "decision_impact": "Commercial access, prioritisation and delivery feasibility",
+      "priority": "High",
+      "owner_role": "Research/account team; named owner unassigned",
+      "status": "open"
+    },
+    {
+      "id": "AV-G-BASELINE",
+      "title": "Measured operating outcomes",
+      "question": "Obtain current disruption, customer-contact, AI adoption, fleet reliability and service baselines with permissible access.",
+      "required_evidence": "Obtain current disruption, customer-contact, AI adoption, fleet reliability and service baselines with permissible access.",
+      "decision_impact": "Commercial access, prioritisation and delivery feasibility",
+      "priority": "High",
+      "owner_role": "Research/account team; named owner unassigned",
+      "status": "open"
+    },
+    {
+      "id": "AV-G-SUPPLIERS",
+      "title": "Current supplier scope",
+      "question": "Confirm live contracts, integrator workshare, renewal constraints and permissions to partner. Historical announcements do not prove current incumbency.",
+      "required_evidence": "Confirm live contracts, integrator workshare, renewal constraints and permissions to partner. Historical announcements do not prove current incumbency.",
+      "decision_impact": "Commercial access, prioritisation and delivery feasibility",
+      "priority": "High",
+      "owner_role": "Research/account team; named owner unassigned",
+      "status": "open"
+    },
+    {
+      "id": "AV-G-SAFETY",
+      "title": "Safety and sector delivery competence",
+      "question": "Determine operational safety boundary, certified system interfaces, responsible human authority and seller aviation credentials before any design.",
+      "required_evidence": "Determine operational safety boundary, certified system interfaces, responsible human authority and seller aviation credentials before any design.",
+      "decision_impact": "Commercial access, prioritisation and delivery feasibility",
+      "priority": "High",
+      "owner_role": "Research/account team; named owner unassigned",
+      "status": "open"
+    },
+    {
+      "id": "AV-G-FUEL",
+      "title": "Fuel-data responsibilities",
+      "question": "Identify fuel supplier, airline, verifier and regulator responsibilities; verify existing data reconciliation and assurance gaps.",
+      "required_evidence": "Identify fuel supplier, airline, verifier and regulator responsibilities; verify existing data reconciliation and assurance gaps.",
+      "decision_impact": "Commercial access, prioritisation and delivery feasibility",
+      "priority": "High",
+      "owner_role": "Research/account team; named owner unassigned",
+      "status": "open"
+    },
+    {
+      "id": "AV-G-INDUSTRY",
+      "title": "Industry coverage and competition",
+      "question": "Retrieve EUROCONTROL original forecast after HTTP503; obtain current airline/airport shares and route competition. Illustrative participants are not a comprehensive ranked market. ",
+      "required_evidence": "Retrieve EUROCONTROL original forecast after HTTP503; obtain current airline/airport shares and route competition. Illustrative participants are not a comprehensive ranked market. ",
+      "decision_impact": "Commercial access, prioritisation and delivery feasibility",
+      "priority": "High",
+      "owner_role": "Research/account team; named owner unassigned",
+      "status": "open"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "AV-REL-AV-MRO",
+      "subject": "AV-ENT-001",
+      "predicate": "reported_uses",
+      "object": "AV-SUP-AIRBUS",
+      "claim_ids": [
+        "AV-MRO"
+      ],
+      "verified": true,
+      "assertion_kind": "source_supported_relationship",
+      "temporal_scope": "Reported product launch 2023; current commercial scope unknown"
+    },
+    {
+      "id": "AV-REL-AV-CHAT",
+      "subject": "AV-ENT-001",
+      "predicate": "reported_uses",
+      "object": "AV-SUP-OPENAI",
+      "claim_ids": [
+        "AV-CHAT"
+      ],
+      "verified": true,
+      "assertion_kind": "source_supported_relationship",
+      "temporal_scope": "October 2026 channel launch"
+    },
+    {
+      "id": "AV-REL-AV-WIFI",
+      "subject": "AV-ENT-001",
+      "predicate": "announced_planned_connectivity",
+      "object": "AV-SUP-STARLINK",
+      "claim_ids": [
+        "AV-WIFI"
+      ],
+      "verified": true,
+      "assertion_kind": "source_supported_relationship",
+      "temporal_scope": "Plan: first half 2027 to early 2028; not deployed fleet-wide"
+    },
+    {
+      "id": "AV-REL-AV-PESTLE-P-AV-CAP-NETWORK",
+      "subject": "AV-PESTLE-P",
+      "predicate": "may_affect",
+      "object": "AV-CAP-NETWORK",
+      "claim_ids": [
+        "AV-ECON"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-PESTLE-P-AV-CAP-OPS",
+      "subject": "AV-PESTLE-P",
+      "predicate": "may_affect",
+      "object": "AV-CAP-OPS",
+      "claim_ids": [
+        "AV-ECON"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-PESTLE-E-AV-CAP-NETWORK",
+      "subject": "AV-PESTLE-E",
+      "predicate": "may_affect",
+      "object": "AV-CAP-NETWORK",
+      "claim_ids": [
+        "AV-ECON",
+        "AV-Q3"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-PESTLE-E-AV-CAP-OPS",
+      "subject": "AV-PESTLE-E",
+      "predicate": "may_affect",
+      "object": "AV-CAP-OPS",
+      "claim_ids": [
+        "AV-ECON",
+        "AV-Q3"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-PESTLE-S-AV-CAP-SERVICE",
+      "subject": "AV-PESTLE-S",
+      "predicate": "may_affect",
+      "object": "AV-CAP-SERVICE",
+      "claim_ids": [
+        "AV-MARKET",
+        "AV-RIGHTS"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-PESTLE-S-AV-CAP-DIGITAL",
+      "subject": "AV-PESTLE-S",
+      "predicate": "may_affect",
+      "object": "AV-CAP-DIGITAL",
+      "claim_ids": [
+        "AV-MARKET",
+        "AV-RIGHTS"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-PESTLE-T-AV-CAP-DATA",
+      "subject": "AV-PESTLE-T",
+      "predicate": "may_affect",
+      "object": "AV-CAP-DATA",
+      "claim_ids": [
+        "AV-SAFETY",
+        "AV-CHAT",
+        "AV-ICC"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-PESTLE-T-AV-CAP-DIGITAL",
+      "subject": "AV-PESTLE-T",
+      "predicate": "may_affect",
+      "object": "AV-CAP-DIGITAL",
+      "claim_ids": [
+        "AV-SAFETY",
+        "AV-CHAT",
+        "AV-ICC"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-PESTLE-L-AV-CAP-OPS",
+      "subject": "AV-PESTLE-L",
+      "predicate": "may_affect",
+      "object": "AV-CAP-OPS",
+      "claim_ids": [
+        "AV-SAFETY",
+        "AV-RIGHTS"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-PESTLE-L-AV-CAP-SERVICE",
+      "subject": "AV-PESTLE-L",
+      "predicate": "may_affect",
+      "object": "AV-CAP-SERVICE",
+      "claim_ids": [
+        "AV-SAFETY",
+        "AV-RIGHTS"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-PESTLE-ENV-AV-CAP-SUSTAIN",
+      "subject": "AV-PESTLE-ENV",
+      "predicate": "may_affect",
+      "object": "AV-CAP-SUSTAIN",
+      "claim_ids": [
+        "AV-SAF",
+        "AV-FUEL"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-PESTLE-ENV-AV-CAP-PROCURE",
+      "subject": "AV-PESTLE-ENV",
+      "predicate": "may_affect",
+      "object": "AV-CAP-PROCURE",
+      "claim_ids": [
+        "AV-SAF",
+        "AV-FUEL"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-FORCE-RIVALRY-AV-CAP-NETWORK",
+      "subject": "AV-FORCE-RIVALRY",
+      "predicate": "may_affect",
+      "object": "AV-CAP-NETWORK",
+      "claim_ids": [
+        "AV-PEERS",
+        "AV-ECON"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-FORCE-BUYER-AV-CAP-DIGITAL",
+      "subject": "AV-FORCE-BUYER",
+      "predicate": "may_affect",
+      "object": "AV-CAP-DIGITAL",
+      "claim_ids": [
+        "AV-MARKET",
+        "AV-CHAT"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-FORCE-BUYER-AV-CAP-SERVICE",
+      "subject": "AV-FORCE-BUYER",
+      "predicate": "may_affect",
+      "object": "AV-CAP-SERVICE",
+      "claim_ids": [
+        "AV-MARKET",
+        "AV-CHAT"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-FORCE-SUPPLIER-AV-CAP-MRO",
+      "subject": "AV-FORCE-SUPPLIER",
+      "predicate": "may_affect",
+      "object": "AV-CAP-MRO",
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-MRO",
+        "AV-FUEL"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-FORCE-SUPPLIER-AV-CAP-PROCURE",
+      "subject": "AV-FORCE-SUPPLIER",
+      "predicate": "may_affect",
+      "object": "AV-CAP-PROCURE",
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-MRO",
+        "AV-FUEL"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-FORCE-ENTRY-AV-CAP-NETWORK",
+      "subject": "AV-FORCE-ENTRY",
+      "predicate": "may_affect",
+      "object": "AV-CAP-NETWORK",
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-SAFETY"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-FORCE-ENTRY-AV-CAP-OPS",
+      "subject": "AV-FORCE-ENTRY",
+      "predicate": "may_affect",
+      "object": "AV-CAP-OPS",
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-SAFETY"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-FORCE-SUBSTITUTE-AV-CAP-NETWORK",
+      "subject": "AV-FORCE-SUBSTITUTE",
+      "predicate": "may_affect",
+      "object": "AV-CAP-NETWORK",
+      "claim_ids": [
+        "AV-NETWORK",
+        "AV-MARKET"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-VC-PLAN-AV-CAP-NETWORK",
+      "subject": "AV-VC-PLAN",
+      "predicate": "may_affect",
+      "object": "AV-CAP-NETWORK",
+      "claim_ids": [
+        "AV-NETWORK",
+        "AV-STRATEGY"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-VC-SELL-AV-CAP-DIGITAL",
+      "subject": "AV-VC-SELL",
+      "predicate": "may_affect",
+      "object": "AV-CAP-DIGITAL",
+      "claim_ids": [
+        "AV-CHAT",
+        "AV-HOLIDAYS"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-VC-SELL-AV-CAP-HOLIDAYS",
+      "subject": "AV-VC-SELL",
+      "predicate": "may_affect",
+      "object": "AV-CAP-HOLIDAYS",
+      "claim_ids": [
+        "AV-CHAT",
+        "AV-HOLIDAYS"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-VC-PREPARE-AV-CAP-MRO",
+      "subject": "AV-VC-PREPARE",
+      "predicate": "may_affect",
+      "object": "AV-CAP-MRO",
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-MRO",
+        "AV-ICC"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-VC-PREPARE-AV-CAP-OPS",
+      "subject": "AV-VC-PREPARE",
+      "predicate": "may_affect",
+      "object": "AV-CAP-OPS",
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-MRO",
+        "AV-ICC"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-VC-TURN-AV-CAP-OPS",
+      "subject": "AV-VC-TURN",
+      "predicate": "may_affect",
+      "object": "AV-CAP-OPS",
+      "claim_ids": [
+        "AV-NETWORK",
+        "AV-ICC"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-VC-FLY-AV-CAP-OPS",
+      "subject": "AV-VC-FLY",
+      "predicate": "may_affect",
+      "object": "AV-CAP-OPS",
+      "claim_ids": [
+        "AV-ICC",
+        "AV-SAFETY"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-VC-FLY-AV-CAP-SERVICE",
+      "subject": "AV-VC-FLY",
+      "predicate": "may_affect",
+      "object": "AV-CAP-SERVICE",
+      "claim_ids": [
+        "AV-ICC",
+        "AV-SAFETY"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-VC-SERVE-AV-CAP-SERVICE",
+      "subject": "AV-VC-SERVE",
+      "predicate": "may_affect",
+      "object": "AV-CAP-SERVICE",
+      "claim_ids": [
+        "AV-RIGHTS",
+        "AV-DIGITAL"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-VC-SERVE-AV-CAP-DIGITAL",
+      "subject": "AV-VC-SERVE",
+      "predicate": "may_affect",
+      "object": "AV-CAP-DIGITAL",
+      "claim_ids": [
+        "AV-RIGHTS",
+        "AV-DIGITAL"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-VC-FULFIL-AV-CAP-HOLIDAYS",
+      "subject": "AV-VC-FULFIL",
+      "predicate": "may_affect",
+      "object": "AV-CAP-HOLIDAYS",
+      "claim_ids": [
+        "AV-HOLIDAYS"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-VC-IMPROVE-AV-CAP-SUSTAIN",
+      "subject": "AV-VC-IMPROVE",
+      "predicate": "may_affect",
+      "object": "AV-CAP-SUSTAIN",
+      "claim_ids": [
+        "AV-FUEL",
+        "AV-PROCUREMENT"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-AV-VC-IMPROVE-AV-CAP-DATA",
+      "subject": "AV-VC-IMPROVE",
+      "predicate": "may_affect",
+      "object": "AV-CAP-DATA",
+      "claim_ids": [
+        "AV-FUEL",
+        "AV-PROCUREMENT"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-001-AV-CAP-OPS",
+      "subject": "AV-CAP-OPS",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-001",
+      "claim_ids": [
+        "AV-ICC",
+        "AV-DIGITAL",
+        "AV-RIGHTS"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-001-AV-CAP-DATA",
+      "subject": "AV-CAP-DATA",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-001",
+      "claim_ids": [
+        "AV-ICC",
+        "AV-DIGITAL",
+        "AV-RIGHTS"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-001-AV-CAP-SERVICE",
+      "subject": "AV-CAP-SERVICE",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-001",
+      "claim_ids": [
+        "AV-ICC",
+        "AV-DIGITAL",
+        "AV-RIGHTS"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-001-AV-PROG-ICC",
+      "subject": "AV-PROG-ICC",
+      "predicate": "informs_hypothesis",
+      "object": "RCO-EJ-001",
+      "claim_ids": [
+        "AV-ICC",
+        "AV-DIGITAL",
+        "AV-RIGHTS"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-002-AV-CAP-DIGITAL",
+      "subject": "AV-CAP-DIGITAL",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-002",
+      "claim_ids": [
+        "AV-CHAT"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-002-AV-CAP-DATA",
+      "subject": "AV-CAP-DATA",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-002",
+      "claim_ids": [
+        "AV-CHAT"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-002-AV-PROG-CHANNEL",
+      "subject": "AV-PROG-CHANNEL",
+      "predicate": "informs_hypothesis",
+      "object": "RCO-EJ-002",
+      "claim_ids": [
+        "AV-CHAT"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-003-AV-CAP-HOLIDAYS",
+      "subject": "AV-CAP-HOLIDAYS",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-003",
+      "claim_ids": [
+        "AV-HOLIDAYS",
+        "AV-STRATEGY",
+        "AV-CHAT"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-003-AV-CAP-SERVICE",
+      "subject": "AV-CAP-SERVICE",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-003",
+      "claim_ids": [
+        "AV-HOLIDAYS",
+        "AV-STRATEGY",
+        "AV-CHAT"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-003-AV-CAP-DATA",
+      "subject": "AV-CAP-DATA",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-003",
+      "claim_ids": [
+        "AV-HOLIDAYS",
+        "AV-STRATEGY",
+        "AV-CHAT"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-003-AV-PROG-HOLIDAYS",
+      "subject": "AV-PROG-HOLIDAYS",
+      "predicate": "informs_hypothesis",
+      "object": "RCO-EJ-003",
+      "claim_ids": [
+        "AV-HOLIDAYS",
+        "AV-STRATEGY",
+        "AV-CHAT"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-004-AV-CAP-DIGITAL",
+      "subject": "AV-CAP-DIGITAL",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-004",
+      "claim_ids": [
+        "AV-WIFI",
+        "AV-PROCUREMENT"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-004-AV-CAP-OPS",
+      "subject": "AV-CAP-OPS",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-004",
+      "claim_ids": [
+        "AV-WIFI",
+        "AV-PROCUREMENT"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-004-AV-CAP-PROCURE",
+      "subject": "AV-CAP-PROCURE",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-004",
+      "claim_ids": [
+        "AV-WIFI",
+        "AV-PROCUREMENT"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-004-AV-PROG-CONNECT",
+      "subject": "AV-PROG-CONNECT",
+      "predicate": "informs_hypothesis",
+      "object": "RCO-EJ-004",
+      "claim_ids": [
+        "AV-WIFI",
+        "AV-PROCUREMENT"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-005-AV-CAP-MRO",
+      "subject": "AV-CAP-MRO",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-005",
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-MRO",
+        "AV-SAFETY"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-005-AV-CAP-DATA",
+      "subject": "AV-CAP-DATA",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-005",
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-MRO",
+        "AV-SAFETY"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-005-AV-PROG-FLEET",
+      "subject": "AV-PROG-FLEET",
+      "predicate": "informs_hypothesis",
+      "object": "RCO-EJ-005",
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-MRO",
+        "AV-SAFETY"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-006-AV-CAP-SUSTAIN",
+      "subject": "AV-CAP-SUSTAIN",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-006",
+      "claim_ids": [
+        "AV-FUEL",
+        "AV-SAF",
+        "AV-SUPPLY-RATING"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-006-AV-CAP-PROCURE",
+      "subject": "AV-CAP-PROCURE",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-006",
+      "claim_ids": [
+        "AV-FUEL",
+        "AV-SAF",
+        "AV-SUPPLY-RATING"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-006-AV-CAP-DATA",
+      "subject": "AV-CAP-DATA",
+      "predicate": "motivates_research",
+      "object": "RCO-EJ-006",
+      "claim_ids": [
+        "AV-FUEL",
+        "AV-SAF",
+        "AV-SUPPLY-RATING"
+      ],
+      "verified": false,
+      "assertion_kind": "opportunity_hypothesis"
+    },
+    {
+      "id": "AV-REL-RCO-EJ-006-AV-PROG-FUEL",
+      "subject": "AV-PROG-FUEL",
+      "predicate": "informs_hypothesis",
+      "object": "RCO-EJ-006",
+      "claim_ids": [
+        "AV-FUEL",
+        "AV-SAF",
+        "AV-SUPPLY-RATING"
+      ],
+      "verified": false,
+      "assertion_kind": "analyst_interpretation"
+    }
+  ],
+  "seller_profile": {
+    "description": "Unnamed seller: AI-enabled transformation programme delivery, systems integration and associated managed services.",
+    "basis": "Owner-stated capabilities; aviation delivery credentials, platform alliances, eligibility and customer access unverified.",
+    "verified_customer_access": false
+  },
+  "commercial_assessment": {
+    "access_claim_ids": [
+      "AV-PROCUREMENT"
+    ],
+    "assessments": [
+      {
+        "candidate_id": "RCO-EJ-001",
+        "offer": "Operational AI workflow delivery and benefit assurance",
+        "strategic_relevance": {
+          "score": 3,
+          "reason": "Direct public programme relevance"
+        },
+        "commercial_accessibility": {
+          "score": 1,
+          "reason": "Conditional sponsor/prime route; no invitation, budget, eligibility or open procurement verified"
+        },
+        "evidence_maturity": {
+          "score": 2,
+          "reason": "Located public evidence supports the signal, not an unmet need or customer demand"
+        },
+        "seller_fit": {
+          "score": 3,
+          "reason": "AI-enabled delivery fits the stated seller; aviation competence and interfaces must be demonstrated."
+        },
+        "tie_order": 1,
+        "shortlisted": true,
+        "business_problem": "Disconnected exception handling could limit the value of existing AI; current failure modes are unknown.",
+        "proposed_service": "Integrate one approved ICC-to-customer recovery workflow; measure human decisions, contact demand and net recovery time.",
+        "evidence_claim_ids": [
+          "AV-ICC",
+          "AV-DIGITAL",
+          "AV-RIGHTS"
+        ],
+        "buyer_functions": [
+          "Inferred operations transformation owner",
+          "customer operations and data/technology delivery"
+        ],
+        "buyer_status": "Inferred roles, not verified buyers or budget authority",
+        "verified_buyer_names": [],
+        "supplier_position": "Internal ICC/AI teams already exist. Prime integrator and residual scope unknown.",
+        "route_to_market": "Sponsor-led validation, then central procurement or authorised incumbent-prime collaboration. Neither route is an invitation; eligibility and access unverified.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "Source dates and rollout ambitions are context, not a procurement window.",
+        "delivery_and_competition": "Validate existing internal/partner coverage first. No safety-critical autonomous decisions or assumed control defects.",
+        "confidence": "Public relevance only; unqualified, no confirmed supplier demand.",
+        "next_commercial_action": "Ask the operations sponsor for one current exception backlog and measured baseline; test whether external integration capacity is wanted.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      },
+      {
+        "candidate_id": "RCO-EJ-002",
+        "offer": "Conversational channel integration and conversion assurance",
+        "strategic_relevance": {
+          "score": 3,
+          "reason": "Direct public programme relevance"
+        },
+        "commercial_accessibility": {
+          "score": 1,
+          "reason": "Conditional sponsor/prime route; no invitation, budget, eligibility or open procurement verified"
+        },
+        "evidence_maturity": {
+          "score": 2,
+          "reason": "Located public evidence supports the signal, not an unmet need or customer demand"
+        },
+        "seller_fit": {
+          "score": 3,
+          "reason": "Strong systems integration and AI delivery fit; seller platform partnership is unverified."
+        },
+        "tie_order": 2,
+        "shortlisted": true,
+        "business_problem": "A new search channel needs reliable booking handover; incremental conversion and pain are unmeasured.",
+        "proposed_service": "Instrument search-to-book handoff, availability consistency, accessible fallbacks and service ownership around the existing integration.",
+        "evidence_claim_ids": [
+          "AV-CHAT"
+        ],
+        "buyer_functions": [
+          "Inferred digital commerce product owner and technology integration lead"
+        ],
+        "buyer_status": "Inferred roles, not verified buyers or budget authority",
+        "verified_buyer_names": [],
+        "supplier_position": "Existing ChatGPT integration and internal digital team. No platform replacement opportunity established.",
+        "route_to_market": "Sponsor-led validation, then central procurement or authorised incumbent-prime collaboration. Neither route is an invitation; eligibility and access unverified.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "Source dates and rollout ambitions are context, not a procurement window.",
+        "delivery_and_competition": "Validate existing internal/partner coverage first. No safety-critical autonomous decisions or assumed control defects.",
+        "confidence": "Public relevance only; unqualified, no confirmed supplier demand.",
+        "next_commercial_action": "Request channel funnel and handoff-error data from the product owner; offer a bounded diagnostic only if an unresolved problem exists.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      },
+      {
+        "candidate_id": "RCO-EJ-003",
+        "offer": "Holiday partner and customer journey orchestration",
+        "strategic_relevance": {
+          "score": 3,
+          "reason": "Direct public programme relevance"
+        },
+        "commercial_accessibility": {
+          "score": 1,
+          "reason": "Conditional sponsor/prime route; no invitation, budget, eligibility or open procurement verified"
+        },
+        "evidence_maturity": {
+          "score": 1,
+          "reason": "Historical/indexed signal or substantial current delivery evidence gaps"
+        },
+        "seller_fit": {
+          "score": 3,
+          "reason": "Transformation, integration and managed-service fit; travel fulfilment credentials unverified."
+        },
+        "tie_order": 3,
+        "shortlisted": true,
+        "business_problem": "Partner scale can create servicing and fulfilment complexity; no measured easyJet gap established.",
+        "proposed_service": "Integrate partner exceptions, customer status and controlled AI-assisted service across one holiday journey.",
+        "evidence_claim_ids": [
+          "AV-HOLIDAYS",
+          "AV-STRATEGY",
+          "AV-CHAT"
+        ],
+        "buyer_functions": [
+          "Inferred holidays digital/operations owner and supplier management"
+        ],
+        "buyer_status": "Inferred roles, not verified buyers or budget authority",
+        "verified_buyer_names": [],
+        "supplier_position": "Existing holiday platform and hotel/destination partners; delivery partner scope unknown.",
+        "route_to_market": "Sponsor-led validation, then central procurement or authorised incumbent-prime collaboration. Neither route is an invitation; eligibility and access unverified.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "Source dates and rollout ambitions are context, not a procurement window.",
+        "delivery_and_competition": "Validate existing internal/partner coverage first. No safety-critical autonomous decisions or assumed control defects.",
+        "confidence": "Public relevance only; unqualified, no confirmed supplier demand.",
+        "next_commercial_action": "Reverify original November statement, then validate a concrete partner exception and sponsor before proposing a work package.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      },
+      {
+        "candidate_id": "RCO-EJ-004",
+        "offer": "Connectivity rollout service readiness",
+        "strategic_relevance": {
+          "score": 2,
+          "reason": "Relevant dependency, but residual need is inferred"
+        },
+        "commercial_accessibility": {
+          "score": 1,
+          "reason": "Conditional sponsor/prime route; no invitation, budget, eligibility or open procurement verified"
+        },
+        "evidence_maturity": {
+          "score": 2,
+          "reason": "Located public evidence supports the signal, not an unmet need or customer demand"
+        },
+        "seller_fit": {
+          "score": 2,
+          "reason": "Managed services fit, but aviation connectivity credentials and prime access are not established."
+        },
+        "tie_order": 4,
+        "shortlisted": false,
+        "business_problem": "An announced rollout introduces phased availability and support dependencies; rollout work may already be allocated.",
+        "proposed_service": "Provide complementary service readiness, customer availability integration and operational observability, if owner confirms an unallocated gap.",
+        "evidence_claim_ids": [
+          "AV-WIFI",
+          "AV-PROCUREMENT"
+        ],
+        "buyer_functions": [
+          "Inferred connectivity programme owner",
+          "digital service operations and procurement"
+        ],
+        "buyer_status": "Inferred roles, not verified buyers or budget authority",
+        "verified_buyer_names": [],
+        "supplier_position": "SpaceX/Starlink is named; installation and integration prime/workshare not established.",
+        "route_to_market": "Sponsor-led validation, then central procurement or authorised incumbent-prime collaboration. Neither route is an invitation; eligibility and access unverified.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "Source dates and rollout ambitions are context, not a procurement window.",
+        "delivery_and_competition": "Validate existing internal/partner coverage first. No safety-critical autonomous decisions or assumed control defects.",
+        "confidence": "Public relevance only; unqualified, no confirmed supplier demand.",
+        "next_commercial_action": "Ask the programme owner or authorised prime whether service-transition scope remains open; stop if already covered.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      },
+      {
+        "candidate_id": "RCO-EJ-005",
+        "offer": "Fleet/MRO data and change readiness",
+        "strategic_relevance": {
+          "score": 2,
+          "reason": "Relevant dependency, but residual need is inferred"
+        },
+        "commercial_accessibility": {
+          "score": 0,
+          "reason": "Access and delivery permissions not established; research first"
+        },
+        "evidence_maturity": {
+          "score": 1,
+          "reason": "Historical/indexed signal or substantial current delivery evidence gaps"
+        },
+        "seller_fit": {
+          "score": 2,
+          "reason": "Integration skills fit partly; maintenance domain expertise and approved delivery access unknown."
+        },
+        "tie_order": 5,
+        "shortlisted": false,
+        "business_problem": "Fleet changes can affect maintenance and operational data; Skywise already supports this domain.",
+        "proposed_service": "Validate data lineage, interfaces and operational change readiness around existing maintenance tools; do not replace certified engineering judgement.",
+        "evidence_claim_ids": [
+          "AV-FLEET",
+          "AV-MRO",
+          "AV-SAFETY"
+        ],
+        "buyer_functions": [
+          "Inferred technical operations/engineering data owner"
+        ],
+        "buyer_status": "Inferred roles, not verified buyers or budget authority",
+        "verified_buyer_names": [],
+        "supplier_position": "Airbus/Skywise reported 2023. Current agreement and integration rights unknown.",
+        "route_to_market": "Sponsor-led validation, then central procurement or authorised incumbent-prime collaboration. Neither route is an invitation; eligibility and access unverified.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "Source dates and rollout ambitions are context, not a procurement window.",
+        "delivery_and_competition": "Validate existing internal/partner coverage first. No safety-critical autonomous decisions or assumed control defects.",
+        "confidence": "Public relevance only; unqualified, no confirmed supplier demand.",
+        "next_commercial_action": "Confirm current Skywise scope, data permissions and seller aviation credentials; proceed only with engineering-approved residual scope.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      },
+      {
+        "candidate_id": "RCO-EJ-006",
+        "offer": "Fuel and sustainability evidence reconciliation",
+        "strategic_relevance": {
+          "score": 2,
+          "reason": "Relevant dependency, but residual need is inferred"
+        },
+        "commercial_accessibility": {
+          "score": 0,
+          "reason": "Access and delivery permissions not established; research first"
+        },
+        "evidence_maturity": {
+          "score": 1,
+          "reason": "Historical/indexed signal or substantial current delivery evidence gaps"
+        },
+        "seller_fit": {
+          "score": 1,
+          "reason": "Data integration fit, but SAF assurance expertise and verifier eligibility are not evidenced."
+        },
+        "tie_order": 6,
+        "shortlisted": false,
+        "business_problem": "Airline, fuel supplier and assurance evidence may require reconciliation; an actual control gap is not verified.",
+        "proposed_service": "Assess chain-of-custody data handoffs and auditable management reporting with responsible suppliers and accredited assurance specialists.",
+        "evidence_claim_ids": [
+          "AV-FUEL",
+          "AV-SAF",
+          "AV-SUPPLY-RATING"
+        ],
+        "buyer_functions": [
+          "Inferred sustainability reporting",
+          "fuel procurement and finance controls"
+        ],
+        "buyer_status": "Inferred roles, not verified buyers or budget authority",
+        "verified_buyer_names": [],
+        "supplier_position": "Fuel suppliers and EcoVadis context reported; no assurance mandate or IT incumbent displacement established.",
+        "route_to_market": "Sponsor-led validation, then central procurement or authorised incumbent-prime collaboration. Neither route is an invitation; eligibility and access unverified.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "Source dates and rollout ambitions are context, not a procurement window.",
+        "delivery_and_competition": "Validate existing internal/partner coverage first. No safety-critical autonomous decisions or assumed control defects.",
+        "confidence": "Public relevance only; unqualified, no confirmed supplier demand.",
+        "next_commercial_action": "Map statutory responsibility and current process with fuel procurement; obtain a real reconciliation problem and qualified assurance partner.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      }
+    ],
+    "method": "Lexicographic strategic relevance, accessibility, evidence maturity, seller fit; then explicit tie order. Four independent ordinal ratings 0 absent/unknown, 1 weak/conditional, 2 supported/partial, 3 strong. No weighted score or probability.",
+    "seller_fit_basis": "Unnamed seller: AI-enabled transformation programme delivery, systems integration and associated managed services."
+  }
+}
