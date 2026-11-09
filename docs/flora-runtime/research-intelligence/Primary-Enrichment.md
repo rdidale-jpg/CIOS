@@ -1,5 +1,7 @@
 # Lloyds primary-source enrichment
 
+Historical record of commit `97c7de6`. [Current commercial assessment](Lloyds-Commercial-Shortlist.md) adds two supplier-process checks and separate sales-access ratings; the counts below describe the original enrichment increment.
+
 Research reviewed 9 November 2026. Parent: `5c62f15aba8c7089fa3065a32d263504a83379ff`. Feature branch: `codex/flora-lloyds-primary-enrichment`.
 
 ## What is now evidence-backed

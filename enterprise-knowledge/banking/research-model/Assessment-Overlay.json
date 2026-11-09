@@ -508,6 +508,68 @@
         }
       ],
       "updated_at": "2026-09-15"
+    },
+    {
+      "id": "PR-LBG-FSQS",
+      "title": "Lloyds supplier qualification process",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/working-with-suppliers/fsqs.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/who-we-are/working-with-suppliers/fsqs.html",
+      "reporting_period": "Maintained supplier process observed 9 November 2026",
+      "publication_date": null,
+      "publication_date_evidence": null,
+      "retrieved_at": "2026-11-09T19:58:39.631631+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "0a43a538adffbb8d0d58cf5288ae06ad3715affbbdaa2b7b373628d4949f4a80",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-FSQS.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn165398view0",
+      "reviewed_by": "Codex source-content review",
+      "review_notes": "Official process reviewed; publication date not stated. No tender, seller eligibility or customer invitation established. Short excerpts only; original HTML not archived.",
+      "limitation": "Onboarding is not demand, award or access. No approach, registration or outreach performed.",
+      "excerpts": [
+        {
+          "quote": "Qualification is by invitation only.",
+          "locator": "Official page, How suppliers gain qualification"
+        }
+      ]
+    },
+    {
+      "id": "PR-LBG-SOURCING",
+      "title": "Lloyds supplier sourcing FAQ",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/working-with-suppliers/faqs.html",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/who-we-are/working-with-suppliers/faqs.html",
+      "reporting_period": "Maintained supplier process observed 9 November 2026",
+      "publication_date": null,
+      "publication_date_evidence": null,
+      "retrieved_at": "2026-11-09T19:58:39.631631+00:00",
+      "primary_content_sha256": null,
+      "text_sha256": "2fd01db38ebc4d68e5a71b2c3181a01455a652435d0eb6dd4cdfa4fb23ef1daa",
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/PR-LBG-SOURCING.txt",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn141427view0",
+      "reviewed_by": "Codex source-content review",
+      "review_notes": "Official process reviewed; publication date not stated. No tender, seller eligibility or customer invitation established. Short excerpts only; original HTML not archived.",
+      "limitation": "Onboarding is not demand, award or access. No approach, registration or outreach performed.",
+      "excerpts": [
+        {
+          "quote": "register with us on the Ariba Network",
+          "locator": "Official page line 635, registration"
+        },
+        {
+          "quote": "One of our Lloyds Banking Group Sourcing team",
+          "locator": "Official page line 637, sourcing context"
+        },
+        {
+          "quote": "take part in a sourcing activity",
+          "locator": "Official page line 637, sourcing context"
+        }
+      ]
     }
   ],
   "claims": [
@@ -1270,6 +1332,40 @@
         "PR-FCA-RES26": "Firms have 12 months to prepare ahead of the new requirements coming into force on 18 March 2027."
       },
       "quote_locator": "Official HTML line 345, new reporting rules"
+    },
+    {
+      "id": "LBG-FSQS-ACCESS",
+      "asset_id": "BK-ENT-001",
+      "statement": "Supplier assurance qualification is invitation-only; it is not evidence of an available contract.",
+      "domain": "commercial_access",
+      "kind": "procurement_process",
+      "reporting_period": "Published process observed 9 November 2026",
+      "entity_scope": "Lloyds Banking Group supplier process; no candidate-specific invitation",
+      "source_ids": [
+        "PR-LBG-FSQS"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-FSQS": "Qualification is by invitation only."
+      },
+      "quote_locator": "Official page, How suppliers gain qualification"
+    },
+    {
+      "id": "LBG-SOURCING-ACCESS",
+      "asset_id": "BK-ENT-001",
+      "statement": "The published process links Lloyds-specific Ariba registration to Sourcing contact; no invitation for this seller has been established.",
+      "domain": "commercial_access",
+      "kind": "procurement_process",
+      "reporting_period": "Published process observed 9 November 2026",
+      "entity_scope": "Lloyds Banking Group supplier process; no candidate-specific invitation",
+      "source_ids": [
+        "PR-LBG-SOURCING"
+      ],
+      "verification": "source_supported",
+      "primary_quotes": {
+        "PR-LBG-SOURCING": "register with us on the Ariba Network"
+      },
+      "quote_locator": "Official page line 635, registration"
     }
   ],
   "frameworks": [
@@ -1373,7 +1469,8 @@
         "CAP-RISK"
       ],
       "assertion_kind": "interpretation",
-      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead"
+      "rating": "Not numerically rated; evidence coverage and uncertainty shown instead",
+      "commercial_implication": "Sector reporting changes support an entity-specific readiness question; they do not establish an unmet Lloyds need or a market-wide outsourcing trend."
     },
     {
       "id": "PESTLE-ENV",
@@ -3698,6 +3795,30 @@
         "LBG-ENVOY-CONTROLS"
       ],
       "verified": false
+    },
+    {
+      "id": "COMM-IND-UK-PRA-REPORT27",
+      "subject": "BK-IND-002",
+      "predicate": "sector_requirement_informs_capability",
+      "object": "CAP-RISK",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "UK-PRA-REPORT27"
+      ],
+      "verified": false,
+      "scope": "In-scope UK regulated firms; entity applicability and customer readiness unverified"
+    },
+    {
+      "id": "COMM-IND-UK-FCA-REPORT27",
+      "subject": "BK-IND-002",
+      "predicate": "sector_requirement_informs_capability",
+      "object": "CAP-DATA",
+      "assertion_kind": "interpretation",
+      "claim_ids": [
+        "UK-FCA-REPORT27"
+      ],
+      "verified": false,
+      "scope": "In-scope UK regulated firms; entity applicability and customer readiness unverified"
     }
   ],
   "gaps": [
@@ -3975,5 +4096,407 @@
       "UK-FCA-REPORT27"
     ],
     "automatic_canonical_acceptance": false
+  },
+  "commercial_assessment": {
+    "assessed_at": "2026-11-09",
+    "based_on_commit": "97c7de62676d9c103b7e8c8c94a30976188cb5ec",
+    "seller_profile": "Unnamed organisation; owner-stated strengths in AI-enabled transformation programme delivery, systems integration and associated managed services. Partner status, existing Lloyds relationships and supplier eligibility Unknown.",
+    "rating_anchors": {
+      "strategic_relevance": {
+        "0": "No evidenced alignment",
+        "1": "Indirect contextual relevance",
+        "2": "Supported priority/context; specific outcome or urgency incomplete",
+        "3": "Specific evidenced enterprise priority with a measurable outcome to validate"
+      },
+      "commercial_accessibility": {
+        "0": "Uncovered need or plausible entry point not established",
+        "1": "Conditional route identified; demand, invitation and eligibility unverified",
+        "2": "Specific external demand and credible entry evidenced",
+        "3": "Customer-confirmed access and buying process"
+      },
+      "evidence_maturity": {
+        "0": "Unsupported hypothesis",
+        "1": "Sourced context only; opportunity premise unproven",
+        "2": "Specific primary programme/priority evidence; customer validation absent",
+        "3": "Primary sources plus customer corroboration of problem and scope"
+      }
+    },
+    "ranking_policy": "Sort strategic relevance, then commercial accessibility, then evidence maturity (descending); explicit seller-fit tie order resolves equal ratings. No composite score or win probability. Accessibility below 2 cannot be a confirmed sales opportunity.",
+    "access_claim_ids": [
+      "LBG-FSQS-ACCESS",
+      "LBG-SOURCING-ACCESS"
+    ],
+    "route_boundary": "Account development only. Establish an authorised sponsor and an actual uncovered requirement before seeking an invitation. Seller eligibility, prime/partner access, funding and procurement remain unverified. No outreach or registration is performed.",
+    "assessments": [
+      {
+        "candidate_id": "RCO-LBG-002",
+        "offer": "AI-enabled servicing workflow delivery and measurable adoption",
+        "strategic_relevance": {
+          "score": 3,
+          "reason": "Direct fit to AI-enabled transformation, integration and transition into managed operation. Benefit targets do not prove a supplier mandate."
+        },
+        "commercial_accessibility": {
+          "score": 1,
+          "reason": "Conditional route only; no candidate-specific external demand, invitation, allocated budget or seller eligibility verified."
+        },
+        "evidence_maturity": {
+          "score": 2,
+          "reason": "Reviewed public disclosures support relevance; no customer confirmation of pain, scope or purchase."
+        },
+        "tie_order": 1,
+        "shortlisted": true,
+        "business_problem": "Reported use cases and claimed value do not establish net outcomes after adoption and control costs.",
+        "proposed_service": "Connect one approved customer/colleague workflow to existing AI and operational systems; instrument net benefit, human exceptions and control cost.",
+        "evidence_claim_ids": [
+          "LBG-AI26-REPORTED",
+          "LBG-AI26-EXPECTED",
+          "LBG-ENVOY-CONTROLS",
+          "LBG-ENVOY-GOOGLE"
+        ],
+        "buyer_functions": [
+          "AI transformation/value owner",
+          "Servicing business owner",
+          "Technology delivery and Group Sourcing"
+        ],
+        "buyer_status": "Inferred functions; no named buyer or budget authority verified",
+        "verified_buyer_names": [],
+        "supplier_position": "Envoy and Google Cloud are evidenced. Internal AI teams and existing partners may already cover delivery; prime integrators and workshare are unknown.",
+        "route_to_market": "Sponsor-led discovery first. A platform-alliance or incumbent-prime route is conditional on that party accepting collaboration; seller partner status is unknown.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "2026 benefit expectation / 2027–2030 direction are context, not a buying window.",
+        "delivery_and_competition": "Stop a standalone pitch if the existing platform/team already delivers the outcome. Do not replace the bank’s AI platform or sell assumed control gaps.",
+        "confidence": "Public relevance supported; commercial access unverified. Not sales-qualified.",
+        "next_commercial_action": "Select one workflow, obtain the actual backlog and net-benefit baseline, and ask whether incremental external delivery capacity is wanted.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      },
+      {
+        "candidate_id": "RCO-LBG-001",
+        "offer": "Legacy simplification and migration delivery",
+        "strategic_relevance": {
+          "score": 3,
+          "reason": "Strong SI and programme-delivery fit to named platform renewal and application-retirement priorities."
+        },
+        "commercial_accessibility": {
+          "score": 1,
+          "reason": "Conditional route only; no candidate-specific external demand, invitation, allocated budget or seller eligibility verified."
+        },
+        "evidence_maturity": {
+          "score": 2,
+          "reason": "Reviewed public disclosures support relevance; no customer confirmation of pain, scope or purchase."
+        },
+        "tie_order": 2,
+        "shortlisted": true,
+        "business_problem": "Reported simplification priorities need dependency-aware sequencing and benefit validation.",
+        "proposed_service": "Deliver a bounded migration/decommissioning wave, integration remediation and service transition; measure retired run cost, migration defects and net benefit.",
+        "evidence_claim_ids": [
+          "LBG-AR25-MIGRATION",
+          "LBG-A2030-PLATFORMS",
+          "LBG-A2030-SAVINGS",
+          "LBG-A2030-INVESTMENT"
+        ],
+        "buyer_functions": [
+          "Technology platform/transformation owner",
+          "Application portfolio owner",
+          "Finance benefit owner and Group Sourcing"
+        ],
+        "buyer_status": "Inferred functions; no named buyer or budget authority verified",
+        "verified_buyer_names": [],
+        "supplier_position": "Internal technology delivery and unnamed incumbent integrators are alternatives. Google Cloud’s Envoy role does not prove control of this migration scope.",
+        "route_to_market": "Obtain a technology sponsor and a defined wave; validate direct supplier eligibility or an approved prime’s subcontracting route before bidding.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "2026 priorities and 2027–2030 planning horizon; wave dates and procurement timing Unknown.",
+        "delivery_and_competition": "Do not infer outsourced spend from group savings. Managed services require an agreed service boundary, transition, controls and a verified commercial decision.",
+        "confidence": "Public relevance supported; commercial access unverified. Not sales-qualified.",
+        "next_commercial_action": "Request one remaining wave, dependency map, delivery constraints and benefit ownership; propose a scoped discovery only if a delivery gap is acknowledged.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      },
+      {
+        "candidate_id": "RCO-LBG-009",
+        "offer": "Wallet/Curve journey and platform integration",
+        "strategic_relevance": {
+          "score": 3,
+          "reason": "Strong integration fit and a specific acquired-business/strategic-proposition link; external scope remains speculative."
+        },
+        "commercial_accessibility": {
+          "score": 1,
+          "reason": "Conditional route only; no candidate-specific external demand, invitation, allocated budget or seller eligibility verified."
+        },
+        "evidence_maturity": {
+          "score": 2,
+          "reason": "Reviewed public disclosures support relevance; no customer confirmation of pain, scope or purchase."
+        },
+        "tie_order": 3,
+        "shortlisted": true,
+        "business_problem": "A completed acquisition and an explicit wallet priority justify investigating integration and payment outcomes; no uncovered delivery work is established.",
+        "proposed_service": "Integrate payment and customer journeys against the existing product plan; validate acceptance, operational readiness and support handover.",
+        "evidence_claim_ids": [
+          "LBG-Q326-CURVE",
+          "LBG-A2030-WALLET"
+        ],
+        "buyer_functions": [
+          "Wallet/payments product owner",
+          "Acquisition integration delivery owner",
+          "Technology/Risk and Group Sourcing"
+        ],
+        "buyer_status": "Inferred functions; no named buyer or budget authority verified",
+        "verified_buyer_names": [],
+        "supplier_position": "Curve and internal payment teams may own the work. No integration prime, tender, contract allocation or invitation is evidenced.",
+        "route_to_market": "Product/integration sponsor discovery; an existing delivery partner route is conditional, not a known channel or framework entitlement.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "Completion reported in Q3 / forward strategy direction; integration and buying dates Unknown.",
+        "delivery_and_competition": "Do not treat acquisition completion as an open integration contract. Validate data/payment controls and existing partner obligations.",
+        "confidence": "Public relevance supported; commercial access unverified. Not sales-qualified.",
+        "next_commercial_action": "Ask the product owner to identify remaining integration work, decision rights and permitted partner scope before proposing a delivery tranche.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      },
+      {
+        "candidate_id": "RCO-LBG-003",
+        "offer": "Brand/app migration execution and customer-outcome transition",
+        "strategic_relevance": {
+          "score": 3,
+          "reason": "Transformation delivery fit to a dated customer-change programme; no outsourcing rationale is established."
+        },
+        "commercial_accessibility": {
+          "score": 1,
+          "reason": "Conditional route only; no candidate-specific external demand, invitation, allocated budget or seller eligibility verified."
+        },
+        "evidence_maturity": {
+          "score": 2,
+          "reason": "Reviewed public disclosures support relevance; no customer confirmation of pain, scope or purchase."
+        },
+        "tie_order": 4,
+        "shortlisted": false,
+        "business_problem": "The published branch-brand timetable raises a customer-outcome assurance question without establishing outsourcing demand.",
+        "proposed_service": "Support a remaining migration wave and service transition only where existing teams have an acknowledged capacity or outcome gap.",
+        "evidence_claim_ids": [
+          "LBG-BRAND26-TIMING",
+          "LBG-BRAND26-NO-ROLES"
+        ],
+        "buyer_functions": [
+          "Consumer relationships/change owner",
+          "Channel migration/service operations owner",
+          "Conduct and Group Sourcing"
+        ],
+        "buyer_status": "Inferred functions; no named buyer or budget authority verified",
+        "verified_buyer_names": [],
+        "supplier_position": "Internal brand, app and branch teams are the default competitor. Current external delivery partners and work packages are unknown.",
+        "route_to_market": "Ask the programme sponsor which remaining waves are contestable; validate an approved delivery-partner path if direct onboarding is unavailable.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "Announced branch timetable through 2027; no tender or procurement date verified.",
+        "delivery_and_competition": "The announcement excludes related role reductions. Do not use it to infer contact-centre outsourcing or a new managed-service procurement.",
+        "confidence": "Public relevance supported; commercial access unverified. Not sales-qualified.",
+        "next_commercial_action": "Confirm the current 2027 wave plan and customer-outcome measures; ask explicitly whether any work remains open to external delivery.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      },
+      {
+        "candidate_id": "RCO-LBG-005",
+        "offer": "Incident and third-party reporting data integration",
+        "strategic_relevance": {
+          "score": 2,
+          "reason": "Potential data-integration and managed-reporting fit. Regulatory subject expertise and an actual Lloyds readiness gap must be demonstrated."
+        },
+        "commercial_accessibility": {
+          "score": 1,
+          "reason": "Conditional route only; no candidate-specific external demand, invitation, allocated budget or seller eligibility verified."
+        },
+        "evidence_maturity": {
+          "score": 2,
+          "reason": "Reviewed public disclosures support relevance; no customer confirmation of pain, scope or purchase."
+        },
+        "tie_order": 5,
+        "shortlisted": false,
+        "business_problem": "Reported supplier/technology risks require enterprise-specific service and exit mapping before a proposition.",
+        "proposed_service": "Integrate service/supplier inventories, incident data and reporting controls against the existing readiness plan; measure completeness and reporting accuracy.",
+        "evidence_claim_ids": [
+          "UK-PRA-REPORT27",
+          "UK-FCA-REPORT27",
+          "LBG-ENVOY-GOOGLE"
+        ],
+        "buyer_functions": [
+          "Operational resilience/third-party risk owner",
+          "Regulatory reporting owner",
+          "Data integration and Group Sourcing"
+        ],
+        "buyer_status": "Inferred functions; no named buyer or budget authority verified",
+        "verified_buyer_names": [],
+        "supplier_position": "Existing risk tooling, internal compliance teams and incumbent specialists may already cover the requirement. No tool replacement or workshare is evidenced.",
+        "route_to_market": "An entity-specific readiness discussion through the accountable owner; involve qualified regulatory specialists before offering delivery.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "18 March 2027 regulatory commencement; no Lloyds contract or delivery timetable evidenced.",
+        "delivery_and_competition": "A statutory date is not a customer buying window. Do not assert non-compliance or a missing supplier-control capability.",
+        "confidence": "Public relevance supported; commercial access unverified. Not sales-qualified.",
+        "next_commercial_action": "Confirm regulated-entity applicability, completed readiness work and any funded data-integration gap; stop if already covered.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      },
+      {
+        "candidate_id": "RCO-LBG-004",
+        "offer": "Incremental AI lifecycle and lineage integration",
+        "strategic_relevance": {
+          "score": 2,
+          "reason": "Relevant technical capability, but the bank already describes controls; no incremental gap or entry is established."
+        },
+        "commercial_accessibility": {
+          "score": 0,
+          "reason": "Uncovered need and a credible entry point are not established."
+        },
+        "evidence_maturity": {
+          "score": 2,
+          "reason": "Reviewed public disclosures support relevance; no customer confirmation of pain, scope or purchase."
+        },
+        "tie_order": 6,
+        "shortlisted": false,
+        "business_problem": "Existing Envoy controls must be understood before proposing incremental governance; missing controls are not assumed.",
+        "proposed_service": "Test whether a demonstrable cross-platform lineage or operational-control integration gap exists before designing additional services.",
+        "evidence_claim_ids": [
+          "LBG-ENVOY-CONTROLS",
+          "LBG-ENVOY-GOOGLE"
+        ],
+        "buyer_functions": [
+          "AI platform/model lifecycle owner",
+          "Model risk and technology delivery"
+        ],
+        "buyer_status": "Inferred functions; no named buyer or budget authority verified",
+        "verified_buyer_names": [],
+        "supplier_position": "Existing Envoy controls, Google Cloud and internal AI engineering constrain a generic greenfield governance pitch.",
+        "route_to_market": "Discovery only via the existing AI sponsor; possible follow-on to candidate 002, not an additive independent deal.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "No evidenced procurement window.",
+        "delivery_and_competition": "Avoid duplicated tooling and double-counted AI budgets.",
+        "confidence": "Public relevance supported; commercial access unverified. Not sales-qualified.",
+        "next_commercial_action": "Map current controls and one evidenced failure mode. Advance only if the owner confirms a gap, distinct scope and a permitted delivery route.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      },
+      {
+        "candidate_id": "RCO-LBG-008",
+        "offer": "Colleague AI adoption and managed enablement",
+        "strategic_relevance": {
+          "score": 2,
+          "reason": "Capability fit is plausible; licence deployment alone does not prove adoption friction or external demand."
+        },
+        "commercial_accessibility": {
+          "score": 0,
+          "reason": "Uncovered need and a credible entry point are not established."
+        },
+        "evidence_maturity": {
+          "score": 1,
+          "reason": "Evidence supports context, not a distinct intervention or demand."
+        },
+        "tie_order": 7,
+        "shortlisted": false,
+        "business_problem": "Licence counts and an AI Academy direction do not establish adoption or realised net productivity.",
+        "proposed_service": "Assess a specific workflow’s usage and net productivity; combine with candidate 002 only if common customer scope is confirmed.",
+        "evidence_claim_ids": [
+          "LBG-AR25-COPILOT",
+          "LBG-AI26-REPORTED"
+        ],
+        "buyer_functions": [
+          "Colleague technology/adoption owner",
+          "Business operations owner"
+        ],
+        "buyer_status": "Inferred functions; no named buyer or budget authority verified",
+        "verified_buyer_names": [],
+        "supplier_position": "Existing internal enablement and platform teams are alternatives; no new licence or managed-service purchase is evidenced.",
+        "route_to_market": "Use AI-value discovery rather than a separate unvalidated sales pursuit.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "FY2025 deployment context; current buying timing Unknown.",
+        "delivery_and_competition": "Do not count licences as users or assume a fresh managed-service budget.",
+        "confidence": "Public relevance supported; commercial access unverified. Not sales-qualified.",
+        "next_commercial_action": "Establish active use, workflow friction, ownership and the incremental value of external enablement.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      },
+      {
+        "candidate_id": "RCO-LBG-006",
+        "offer": "Deposit/customer-value data integration",
+        "strategic_relevance": {
+          "score": 2,
+          "reason": "Balance-sheet relevance is evidenced; a specific customer-value problem and access to data are not."
+        },
+        "commercial_accessibility": {
+          "score": 0,
+          "reason": "Uncovered need and a credible entry point are not established."
+        },
+        "evidence_maturity": {
+          "score": 1,
+          "reason": "Evidence supports context, not a distinct intervention or demand."
+        },
+        "tie_order": 8,
+        "shortlisted": false,
+        "business_problem": "Reported franchise/hedge economics need customer-behaviour and elasticity evidence.",
+        "proposed_service": "Investigate whether a defined pricing/retention data problem needs integration, with permissioned data and a measurable baseline.",
+        "evidence_claim_ids": [
+          "LBG-Q326-DEPOSITS",
+          "UK-RATE-NOV26"
+        ],
+        "buyer_functions": [
+          "Deposit/customer-value owner",
+          "Finance/treasury analytics owner"
+        ],
+        "buyer_status": "Inferred functions; no named buyer or budget authority verified",
+        "verified_buyer_names": [],
+        "supplier_position": "Internal analytics and existing data suppliers may already cover the need. No account-level incumbent position is verified.",
+        "route_to_market": "Business-problem discovery first; no procurement route can be inferred from deposit scale.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "September/November context, not a project or buying date.",
+        "delivery_and_competition": "Avoid assuming lost primacy or turning deposit balances into a services budget.",
+        "confidence": "Public relevance supported; commercial access unverified. Not sales-qualified.",
+        "next_commercial_action": "Validate the actual retention/pricing problem, permitted data, decision function and outcome before developing a solution.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      },
+      {
+        "candidate_id": "RCO-LBG-007",
+        "offer": "Assisted-service and access transition",
+        "strategic_relevance": {
+          "score": 1,
+          "reason": "Service-transition capability is relevant in principle; local customer/access needs are not established."
+        },
+        "commercial_accessibility": {
+          "score": 0,
+          "reason": "Uncovered need and a credible entry point are not established."
+        },
+        "evidence_maturity": {
+          "score": 1,
+          "reason": "Evidence supports context, not a distinct intervention or demand."
+        },
+        "tie_order": 9,
+        "shortlisted": false,
+        "business_problem": "Local channel changes require evidence of service continuity and vulnerable-customer outcomes.",
+        "proposed_service": "Investigate affected cohorts and local access outcomes before proposing transition or managed support.",
+        "evidence_claim_ids": [
+          "LBG-BRAND26-TIMING"
+        ],
+        "buyer_functions": [
+          "Customer vulnerability/access owner",
+          "Local channel/service operations owner"
+        ],
+        "buyer_status": "Inferred functions; no named buyer or budget authority verified",
+        "verified_buyer_names": [],
+        "supplier_position": "Existing service teams and local access arrangements may suffice. No external scope or supplier position is known.",
+        "route_to_market": "Hold pending specific locality/cohort evidence and sponsor confirmation.",
+        "indicative_contract_value": null,
+        "procurement_date": null,
+        "timing_context": "No buying window verified.",
+        "delivery_and_competition": "Do not turn a generic conduct obligation into customer demand.",
+        "confidence": "Public relevance supported; commercial access unverified. Not sales-qualified.",
+        "next_commercial_action": "Obtain applicable local assessments and customer outcome evidence; advance only if an unmet need is confirmed.",
+        "qualification_state": "Unqualified research hypothesis",
+        "confirmed_supplier_demand": false
+      }
+    ]
   }
 }

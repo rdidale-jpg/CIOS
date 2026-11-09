@@ -97,12 +97,12 @@ def test_previous_claims_sources_and_original_assessment_are_preserved_byte_for_
     assert data['claims'][:len(old['claims'])]==old['claims']
     assert data['sources'][:len(old['sources'])]==old['sources']
     comparison=model.compare_revision(old,data)
-    assert len(comparison['added'])==22 and comparison['not_in_proposed']==[] and comparison['corroborated']==[]
+    assert len(comparison['added'])==24 and comparison['not_in_proposed']==[] and comparison['corroborated']==[]
 
 
 def test_reviewed_web_excerpts_never_claim_original_binary_integrity():
     data=model.load_assessment();sources=[s for s in data['sources'] if s['verification']=='primary_retrieved']
-    assert len(sources)==10 and all(s['content_kind']=='reviewed_web_excerpt' for s in sources)
+    assert len(sources)==12 and all(s['content_kind']=='reviewed_web_excerpt' for s in sources)
     for source in sources:
         assert source['primary_content_sha256'] is None and source['retrieval_reference']
         assert len(model.primary_text(source).split())<=25
@@ -112,7 +112,7 @@ def test_reviewed_web_excerpts_never_claim_original_binary_integrity():
 
 def test_new_primary_claims_require_real_snapshot_quotes_not_a_status_flag():
     data=model.load_assessment();supported=[c for c in data['claims'] if c['verification']=='source_supported']
-    assert len(supported)==22 and all(model.primary_claim_supported(data,c) for c in supported)
+    assert len(supported)==24 and all(model.primary_claim_supported(data,c) for c in supported)
     bad=deepcopy(data);bad['claims'][-1]['primary_quotes']={bad['claims'][-1]['source_ids'][0]:'Unsupported invented quotation'}
     with pytest.raises(ValueError):model.validate(bad)
     bad=deepcopy(data);bad['sources'][-1]['text_sha256']='0'*64
@@ -168,7 +168,7 @@ def test_completion_resolves_only_transaction_status_not_customer_integration_ne
 def test_public_views_expose_updated_provenance_comparison_and_full_original_limit(web):
     for path in ['/lloyds','/opportunities','/candidates/RCO-LBG-009','/evidence/LBG-Q326-CURVE','/sources']:
         status,body=web(model.ROOT+path)
-        assert status==200 and '10 reviewed primary-source records' in body
+        assert status==200 and '12 reviewed primary-source records' in body
     assert 'Before and after primary research' in views.opportunities_page()
     assert 'full original PDF/HTML bytes were not downloaded' in views.evidence_page('LBG-Q326-CURVE')
     assert 'No hypotheses are merged' in views.opportunities_page()

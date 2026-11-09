@@ -192,6 +192,24 @@ def validate(data):
             raise ValueError('Candidate needs enterprise-specific lineage')
         if candidate.get('estimated_value') is not None or candidate.get('procurement_date') is not None:
             raise ValueError('Public research does not establish a deal value or procurement date')
+    commercial=data.get('commercial_assessment')
+    if commercial:
+        rows=commercial['assessments']
+        if len({r['candidate_id'] for r in rows})!=len(rows) or {r['candidate_id'] for r in rows}!={c['id'] for c in data['candidates']}:
+            raise ValueError('Commercial assessment must cover each candidate exactly once')
+        if set(commercial['access_claim_ids'])-set(claims):
+            raise ValueError('Unresolved supplier-process evidence')
+        for row in rows:
+            if not row['evidence_claim_ids'] or set(row['evidence_claim_ids'])-set(claims):
+                raise ValueError('Commercial assessment needs resolved evidence')
+            for dimension in ('strategic_relevance','commercial_accessibility','evidence_maturity'):
+                score=row[dimension]['score']
+                if type(score) is not int or score not in range(4) or not row[dimension]['reason']:
+                    raise ValueError('Each commercial dimension needs a bounded rating and rationale')
+            if row['indicative_contract_value'] is not None or row['procurement_date'] is not None or row['confirmed_supplier_demand'] or row['qualification_state']!='Unqualified research hypothesis':
+                raise ValueError('Public account assessment cannot establish a budget, buying intent or qualification')
+            if row['commercial_accessibility']['score']>=2:
+                raise ValueError('This public-source assessment has no customer-confirmed supplier access')
     return True
 
 
@@ -257,6 +275,22 @@ def ranked_candidates(data=None, as_of=None):
 def candidate(identifier, data=None):
     data=data or load_assessment()
     return next((r for r in ranked_candidates(data) if r['id']==identifier),None)
+
+
+def commercial_candidates(data=None, shortlisted_only=False):
+    """Read-only account priorities; separate from research rank and Pipeline."""
+    data=data or load_assessment()
+    research={r['id']:r for r in ranked_candidates(data)}
+    rows=[]
+    for entry in data.get('commercial_assessment',{}).get('assessments',[]):
+        if entry['candidate_id'] not in research:
+            continue
+        row=deepcopy(research[entry['candidate_id']]);row['commercial']=deepcopy(entry)
+        rows.append(row)
+    dimensions=('strategic_relevance','commercial_accessibility','evidence_maturity')
+    rows.sort(key=lambda r:(*(-r['commercial'][d]['score'] for d in dimensions),r['commercial']['tie_order'],r['id']))
+    for position,row in enumerate(rows,1):row['commercial_rank']=position
+    return [r for r in rows if r['commercial']['shortlisted']] if shortlisted_only else rows
 
 
 def commercial_capture(slug, identifier):

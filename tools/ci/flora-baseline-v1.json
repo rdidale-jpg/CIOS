@@ -2259,6 +2259,39 @@
             ]
           ]
         },
+        "commercial_assessment": {
+          "cases": {
+            "tests/test_flora_commercial_assessment.py::test_access_process_evidence_does_not_become_open_demand": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_assessment.py::test_commercial_evidence_must_resolve_and_cover_every_candidate_once": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_assessment.py::test_existing_twenty_two_primary_claims_and_all_opportunities_are_preserved": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_assessment.py::test_only_wider_evidence_informs_industry_capability_feedback": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_assessment.py::test_public_shortlist_and_customer_briefs_are_navigable": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_assessment.py::test_reading_shortlist_cannot_create_or_qualify_pipeline_records": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_assessment.py::test_scores_have_anchors_and_no_combined_win_probability": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_assessment.py::test_three_dimensions_remain_separate_and_all_nine_are_assessed": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_commercial_assessment.py"
+            ]
+          ]
+        },
         "domain": {
           "cases": {
             "tests/test_enterprise_intelligence_reasoning.py::test_canvas_diagnostics_configured_provider_ready_without_secret": {

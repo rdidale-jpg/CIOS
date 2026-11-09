@@ -79,7 +79,7 @@ def test_repository_citations_cannot_be_upgraded_by_status_or_hash_alone():
 
 def test_missing_dates_staleness_and_future_assessment_are_visible():
     data=model.load_assessment();state=model.freshness(data,date(2026,11,9))
-    assert state['primary_verified']==10 and state['upstream_age_days']==115
+    assert state['primary_verified']==12 and state['upstream_age_days']==115
     assert all(s['publication_date'] is None and s['retrieved_at'] is None for s in data['sources'] if s['verification']=='citation_only')
     assert model.ranked_candidates(data,date(2026,8,1))==[]
     html=views.sources_page()
@@ -103,7 +103,7 @@ def test_ranking_changes_and_overlap_are_traceable():
         assert identifier in html
     assert 'BPO/outsourcing demand is not established' in html
     assert 'may compete for the same scope' in html
-    assert 'primary-supported claim count: 22' in html
+    assert 'primary-supported claim count: 24' in html
     for row in model.ranked_candidates():
         assert row['claim_ids'] and row['driver_ids'] and row['capability_ids'] and row['gap_ids']
         assert row['ranking_change']
