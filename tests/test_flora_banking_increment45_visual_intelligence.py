@@ -96,3 +96,8 @@ def test_visual_elements_link_to_drill_down_and_are_deterministic():
     assert "/flora/banking/lloyds/opportunity/" in bank_page("lloyds")[0]
     assert "What Flora sees" in first
     assert "generic banking illustration" not in first.lower()
+
+import pytest
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

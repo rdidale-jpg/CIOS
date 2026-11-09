@@ -18,57 +18,20 @@ PREVIEW_URL_ENV = "FLORA_PREVIEW_URL"
 class FloraWorkspaceHandler(BaseHTTPRequestHandler):
     """Small standard-library HTTP handler for local pilot use."""
 
-    def do_HEAD(self) -> None:  # noqa: N802 - stdlib callback name
-        parsed = urlparse(self.path)
-        try:
-            if parsed.path in {"/", "/logbook", "/settings"} or parsed.path.startswith("/case/"):
-                self.send_response(200)
-                self.send_header("Content-Type", "text/html; charset=utf-8")
-                self.end_headers()
-            else:
-                self.send_error(404, "Flora workspace route not found")
-        except ValueError as exc:
-            self.send_error(404, str(exc))
+    def do_HEAD(self) -> None:
+        from cios.applications.flora.security import ACCESS_UNAVAILABLE
+        self.close_connection = True
+        self.send_error(403, ACCESS_UNAVAILABLE)
 
-    def do_GET(self) -> None:  # noqa: N802 - stdlib callback name
-        parsed = urlparse(self.path)
-        try:
-            if parsed.path == "/":
-                self._html(landing_page())
-            elif parsed.path.startswith("/case/"):
-                self._html(case_page(parsed.path.removeprefix("/case/")))
-            elif parsed.path == "/logbook":
-                self._html(logbook_page(saved=parse_qs(parsed.query).get("saved") == ["1"]))
-            elif parsed.path == "/settings":
-                self._html(settings_page())
-            else:
-                self.send_error(404, "Flora workspace route not found")
-        except ValueError as exc:
-            self.send_error(404, str(exc))
+    def do_GET(self) -> None:
+        from cios.applications.flora.security import ACCESS_UNAVAILABLE
+        self.close_connection = True
+        self.send_error(403, ACCESS_UNAVAILABLE)
 
-    def do_POST(self) -> None:  # noqa: N802 - stdlib callback name
-        length = int(self.headers.get("Content-Length", "0"))
-        form = parse_qs(self.rfile.read(length).decode("utf-8"), keep_blank_values=True)
-        if self.path == "/feedback":
-            create_feedback_record(
-                organisation=_one(form, "organisation"),
-                action_text=_one(form, "action_text"),
-                feedback_type=_one(form, "feedback_type"),
-                optional_comment=_one(form, "optional_comment"),
-                source_page=_one(form, "source_page"),
-            )
-            self._redirect(_one(form, "source_page") or "/")
-        elif self.path == "/logbook":
-            create_logbook_record(
-                biggest_insight=_one(form, "biggest_insight"),
-                biggest_miss=_one(form, "biggest_miss"),
-                action_taken=_one(form, "action_taken"),
-                flora_should_learn=_one(form, "flora_should_learn"),
-                value_score=int(_one(form, "value_score") or 0),
-            )
-            self._redirect("/logbook?saved=1")
-        else:
-            self.send_error(404, "Flora workspace route not found")
+    def do_POST(self) -> None:
+        from cios.applications.flora.security import ACCESS_UNAVAILABLE
+        self.close_connection = True
+        self.send_error(403, ACCESS_UNAVAILABLE)
 
     def _html(self, html: str, status: int = 200) -> None:
         body = html.encode("utf-8")

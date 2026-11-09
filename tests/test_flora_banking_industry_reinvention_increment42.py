@@ -89,3 +89,8 @@ def test_rendered_acceptance_artefacts_exist():
         assert artefact in industry
     for artefact in ("What the financial results imply about behaviour", "Reinvention pressure", "Reinvention barriers", "Reinvention opportunities"):
         assert artefact in lloyds
+
+import pytest
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

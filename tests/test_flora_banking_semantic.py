@@ -55,3 +55,6 @@ def test_banking_interpretation_quality_invariants(tmp_path):
     unknowns=run.stages['semantic_context']['unknowns']
     assert any('utilisation' in u['evidence_required'] for u in unknowns if u['unknown_id']=='UNK-SHARED-ACCESS-ECONOMICS')
     assert any('organisational accountability' in u['evidence_required'] for u in unknowns if u['unknown_id']=='UNK-NAMED-EXECUTIVE-OWNERSHIP')
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

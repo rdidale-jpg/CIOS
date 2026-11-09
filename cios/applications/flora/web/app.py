@@ -5,6 +5,8 @@ can be deployed without adding framework, LLM, crawler, or database dependencies
 """
 from __future__ import annotations
 
+from cios.applications.flora.security import ACCESS_UNAVAILABLE, public_request_target
+
 import json
 import os
 import re
@@ -78,9 +80,9 @@ def import_deployment_fingerprint() -> dict[str, str]:
     """Return non-secret facts that identify the deployed import implementation."""
     mode = pilot_import_mode()
     return {
-        "commit_sha": application_revision(),
+        "commit_sha": _public_code_revision(),
         "application_module": APPLICATION_MODULE,
-        "pilot_import_mode": "conflict" if mode.conflict else ("active" if mode.enabled else "inactive"),
+        "pilot_import_mode": "conflict" if mode.conflict else "disabled-security-repair-01a",
         "import_route_owner": IMPORT_ROUTE_OWNER,
         "import_route_implementation": IMPORT_ROUTE_IMPLEMENTATION,
         "twin_map_route_owner": EXECUTIVE_TWIN_ROUTE_OWNER,
@@ -88,19 +90,19 @@ def import_deployment_fingerprint() -> dict[str, str]:
         "executive_twin_implementation": EXECUTIVE_TWIN_IMPLEMENTATION,
     }
 
+def _public_code_revision() -> str:
+    # Reuse repository runtime proof, not arbitrary environment-derived labels,
+    # commands or an unchecked value claiming to be a deployment SHA.
+    from cios.applications.flora.blueprint_import.runtime_proof import _repository_commit
+    revision = _repository_commit()
+    return revision if re.fullmatch(r"[0-9a-fA-F]{40,64}", revision) else "Unavailable"
+
+
 def deployment_payload() -> dict[str, str]:
-    auto_status = pilot_auto_sign_in_status()
-    payload = {"service": "flora", **deployment_metadata(), **import_deployment_fingerprint()}
-    if auto_status.requested:
-        payload.update({
-            "pilot_auto_sign_in": "active" if auto_status.active else "refused",
-            "pilot_environment": auto_status.environment or "unconfigured",
-            "pilot_security_warning": "Pilot auto-sign-in grants the configured pilot identity to anyone able to reach this service.",
-            "service_access_restriction": "trusted-proxy-headers-enabled" if os.getenv("FLORA_TRUST_PROXY_HEADERS", "0").lower() in {"1", "true", "yes", "on"} else "not-configured-by-Flora",
-        })
-        if auto_status.failed_condition:
-            payload["pilot_failed_condition"] = auto_status.failed_condition
-    return payload
+    """Public code fingerprint only; no account/service/configuration metadata."""
+    return {"service": "flora", **import_deployment_fingerprint(),
+            "privileged_access": "disabled-security-repair-01a"}
+
 CASE_SLUGS = {"ThamesWater", "NationalGrid", "BT", "Vodafone"}
 
 
@@ -120,8 +122,17 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 
     storage_status: dict = {"ready": True}
 
+    def _public_read_request(self) -> bool:
+        # Validate the original request target as well as the stdlib-parsed
+        # path. Reject parser-normalised forms (including a leading //).
+        words = self.requestline.split()
+        return len(words) == 3 and words[1] == self.path and public_request_target(self.path)
+
     def do_HEAD(self) -> None:  # noqa: N802 - stdlib callback name
         parsed = urlparse(self.path)
+        if not self._public_read_request():
+            self.send_error(403, ACCESS_UNAVAILABLE)
+            return
         try:
             content_type = _content_type_for_path(parsed.path)
             if content_type is None:
@@ -135,6 +146,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:  # noqa: N802 - stdlib callback name
         parsed = urlparse(self.path)
+        if not self._public_read_request():
+            self.send_error(403, ACCESS_UNAVAILABLE)
+            return
         try:
             pilot_mode = pilot_import_mode()
             recovery_routes = {"/operations/storage-recovery", "/pilot-sign-in"}
@@ -168,7 +182,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_flora_research_page(self.headers))
             elif parsed.path in {"/workspace/reference", "/flora/reference"}:
                 self._html(reference_workspace_page(self.headers, saved=parse_qs(parsed.query).get("saved") == ["1"]), set_cookie=reference_resume_cookie())
-            elif parsed.path == "/flora/banking":
+            elif parsed.path in {"/flora/banking", "/flora/banking/"}:
                 self._html(banking_landing_page())
             elif parsed.path == "/flora/banking/portfolio":
                 self._html(banking_portfolio_page())
@@ -520,6 +534,33 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             raise
 
     def do_POST(self) -> None:  # noqa: N802 - stdlib callback name
+        if self.path == VALIDATION_PATH:
+            # Public reference-navigation preference only; never an identity,
+            # role, membership or intelligence mutation. Browser Origin cannot
+            # be supplied by a cross-origin page. No configured origin => deny.
+            from urllib.parse import urlsplit
+            origin = os.getenv("FLORA_PUBLIC_ORIGIN", "")
+            parsed_origin = urlsplit(origin)
+            safe_origin = bool(origin and not parsed_origin.username and not parsed_origin.password
+                               and parsed_origin.path in {"", "/"} and not parsed_origin.query and not parsed_origin.fragment
+                               and (parsed_origin.scheme == "https" or (parsed_origin.scheme == "http" and parsed_origin.hostname in {"127.0.0.1", "localhost"})))
+            if safe_origin and self.headers.get("Origin", "") == origin.rstrip("/"):
+                self.close_connection = True
+                self._redirect("/workspace/reference?saved=1", set_cookie=reference_resume_cookie())
+                return
+        # No verified session/CSRF boundary exists in 01A. Deny every mutation,
+        # including same-origin requests, before reading an attacker-sized body.
+        # 01B must implement membership, origin and session-bound CSRF validation
+        # before replacing this closed gate. Flags cannot enable it.
+        self.close_connection = True
+        self.send_error(403, ACCESS_UNAVAILABLE)
+        return
+
+    def _dispatch_verified_post(self) -> None:
+        # Deliberately unreachable until the reviewed 01B boundary is installed.
+        # Defence in depth: direct invocation must also fail closed.
+        from cios.applications.flora.security import require_verified_human
+        require_verified_human(self.headers)
         pilot_mode = pilot_import_mode()
         if not self.storage_status.get("ready") and self.path not in {"/operations/storage-recovery", "/pilot-sign-in", "/pilot-sign-out"}:
             self._html(_storage_unavailable_page(), status=503)
@@ -553,7 +594,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             if confirmation != RECOVERY_CONFIRMATION or _one(form, "canonical_acknowledgement") != "no-canonical-data":
                 self._html(_storage_recovery_page(error="Explicit confirmation is required; no cleanup was performed."), status=400)
                 return
-            result = execute_storage_recovery(confirmation)
+            result = execute_storage_recovery(confirmation, headers=self.headers)
             self.storage_status = result["health"]
             self.__class__.storage_status = result["health"]
             self._html(_storage_recovery_page(result=result))
@@ -628,8 +669,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             self._html(html, status=status)
         elif self.path.startswith("/digital-twins/") and self.path.endswith("/executive-intelligence-brief/generate"):
             enterprise_id = [part for part in self.path.split('/') if part][1]
-            req = ReasoningRequestV1.create(enterprise_id=enterprise_id, workspace_id=self.headers.get('X-Flora-Active-Workspace') or enterprise_id, requested_by=self.headers.get('X-Flora-User') or 'unknown')
-            EnterpriseIntelligenceRuntime().generate(req)
+            from cios.applications.flora.access import active_flora_workspace, authenticated_flora_user
+            req = ReasoningRequestV1.create(enterprise_id=enterprise_id, workspace_id=active_flora_workspace(self.headers), requested_by=authenticated_flora_user(self.headers))
+            EnterpriseIntelligenceRuntime().generate(req, headers=self.headers)
             self._redirect(f"/digital-twins/{enterprise_id}/canvas#executive-intelligence-brief")
         elif self.path == "/flora/bt-digital-twin":
             start_bt_digital_twin()
@@ -660,11 +702,11 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             self._redirect(f"/ai-financial-report/{run['run_id']}")
         elif self.path.startswith("/ai-financial-report/") and self.path.endswith("/review"):
             run_id = self.path.removeprefix("/ai-financial-report/").removesuffix("/review")
-            update_reviews(run_id, form)
+            update_reviews(run_id, form, headers=self.headers)
             self._redirect(f"/ai-financial-report/{run_id}")
         elif self.path.startswith("/ai-financial-report/") and self.path.endswith("/apply"):
             run_id = self.path.removeprefix("/ai-financial-report/").removesuffix("/apply")
-            apply_accepted(run_id)
+            apply_accepted(run_id, headers=self.headers)
             self._redirect(f"/ai-financial-report/{run_id}")
         elif self.path == "/live/collect/start":
             profile_id = _one(form, "profile_id") or "bt-group-plc"
@@ -1212,7 +1254,7 @@ def _flora_shape_page(headers=None, query=None) -> str:
 
 def _flora_governance_page(headers=None) -> str:
     from html import escape
-    revision = escape(application_revision())
+    revision = escape(_public_code_revision())
     decision = blueprint_upload_authorisation(headers or {})
     upload = "allowed" if decision.decision == "allowed" else "denied"
     body = f"""
@@ -1323,12 +1365,9 @@ def _safe_financial_route_failure_page(run_id: str, exc: Exception) -> str:
 
 
 def _support_authorised(headers) -> bool:
-    expected = os.environ.get("FLORA_SUPPORT_TOKEN") or os.environ.get("FLORA_ADMIN_TOKEN")
-    if not expected:
-        return False
-    auth = headers.get("Authorization", "")
-    cookie = headers.get("Cookie", "")
-    return auth == f"Bearer {expected}" or cookie_value(headers, "flora_support_token") == expected
+    # Shared support tokens are not a verified, revocable human membership.
+    return False
+
 
 def _redirects_to_flora(path: str) -> bool:
     if path in {"/morning-edition", "/live", "/evidence", "/portfolio", "/radar", "/scoring", "/reasoning-model", "/observatory", "/observatory/critique", "/settings", "/logbook", "/digital-twins", "/digital-twins/bt-group-plc", "/financial-intelligence", "/financial-reports", "/ai-financial-report"}:
@@ -1504,7 +1543,7 @@ def run(host: str | None = None, port: int | None = None) -> None:
             "Flora pilot auto-sign-in "
             f"status={'active' if auto_status.active else 'refused'} "
             f"environment={auto_status.environment or 'unconfigured'} "
-            f"service_access_restriction={'trusted-proxy-headers-enabled' if os.getenv('FLORA_TRUST_PROXY_HEADERS', '0').lower() in {'1', 'true', 'yes', 'on'} else 'not-configured-by-Flora'}"
+            "service_access_restriction=privileged-operations-disabled-security-repair-01a"
             + (f" failed_condition={auto_status.failed_condition}" if auto_status.failed_condition else ""),
             flush=True,
         )

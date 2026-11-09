@@ -8,7 +8,7 @@ import pytest
 from tests.test_flora_blueprint_import_validation import pkg
 from cios.applications.flora.blueprint_import import BlueprintPackageRegistry, BlueprintPackageValidator, CandidateReviewService
 from cios.applications.flora.blueprint_import import researcher_profile_adapter as adapter
-from cios.applications.flora.blueprint_import.views import review_page, approve_and_promote
+from cios.applications.flora.blueprint_import.views import approve_and_promote
 from cios.applications.flora.blueprint_import.promotion import CanonicalPromotionService, CanonicalJsonlRepository, BlueprintPromotionError
 from cios.applications.flora.blueprint_import.review_plan import BlueprintReviewPlanCoordinator
 from cios.applications.flora.blueprint_import.mapping import ImportMappingRepository
@@ -51,7 +51,7 @@ def candidates(r):return BlueprintPackageValidator().staging_summary(r.import_ru
 
 
 def prepare(r):
-    html,status=review_page(r.import_run_id,HEADERS);assert status==200
+    html,status=prepare_review(r.import_run_id,HEADERS);assert status==200
     job=BlueprintReviewPlanCoordinator().latest_job(r.import_run_id)
     assert job['status'] in {'Ready','Not ready'},job
     return job,html
@@ -355,3 +355,8 @@ def test_existing_entity_owner_resolves_through_accepted_import_lineage():
     CanonicalJsonlRepository('entity').save({'canonical_id':'ENTITY-B','enterprise_id':'synthetic-enterprise'})
     prepare(r);promote(r)
     assert len(CanonicalJsonlRepository('relationship').list())==1
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")
+
+from tests.flora_security_fixtures import prepare_review

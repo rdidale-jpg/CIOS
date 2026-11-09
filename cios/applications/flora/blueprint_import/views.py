@@ -129,8 +129,13 @@ def _status_badge(status: str) -> str:
 
 
 def _pilot_change_record_section(headers: Any) -> str:
+    if not authenticated_flora_user(headers):
+        return "<section class='card'><h2>Import operations unavailable</h2><p>Verified workspace access is required to inspect import history and operational evidence.</p></section>"
     change = current_pilot_change()
-    records = BlueprintPackageRegistry().list()
+    from cios.applications.flora.access import active_flora_workspace, canonical_enterprise_id
+    records = [record for record in BlueprintPackageRegistry().list()
+               if canonical_enterprise_id(record.workspace_id) == canonical_enterprise_id(active_flora_workspace(headers))
+               and can_inspect_blueprint_package(headers, record)]
     latest = _latest_tel001_record(records)
     imported_at = getattr(latest, "received_at", "") if latest else "No Twin import recorded"
     current_fingerprint = __import__('cios.applications.flora.blueprint_import.canonical_factual_projection', fromlist=['runtime_fingerprint']).runtime_fingerprint()
@@ -196,7 +201,7 @@ def import_blueprint_entry_page(headers: Any, message: str = "") -> tuple[str, i
     authorisation = "<p><span class='pill'>PILOT</span></p>" if bypass else _authorisation_context(decision)
     body = _workflow_progress("upload") + authorisation + access_notice + f"""{_notice(message)}
     {_pilot_change_record_section(headers)}
-    {proof_html()}
+    {proof_html() if authenticated_flora_user(headers) else ""}
     <style>.twin-import-form{{display:flex;max-width:34rem;flex-direction:column;align-items:stretch;gap:1rem}}.twin-import-field{{display:flex;flex-direction:column;gap:.4rem}}.twin-import-field label{{font-weight:700}}.twin-import-field input[type='file'],.twin-import-field select{{box-sizing:border-box;width:100%;position:static;pointer-events:auto;opacity:1}}.twin-import-field input[type='file']:focus-visible,.twin-import-field select:focus-visible{{outline:3px solid #185c4d;outline-offset:2px}}.twin-import-actions{{margin:0}}</style>
     <header class='hero'><h1>Import Twin</h1></header><section class='card'><p><strong>Please choose the import type and file.</strong> Commercial Mission or an existing Twin selection is not required.</p><form class='twin-import-form' method='post' action='/blueprint-import/upload' enctype='multipart/form-data'><div class='twin-import-field'><label for='expected_type'>Twin type</label><select id='expected_type' name='expected_type' required>{''.join(f"<option value='{t}'>{escape(t.replace('_',' ').title())}</option>" for t in TWIN_TYPES)}</select></div><div class='twin-import-field'><label for='twin-package'>Twin package</label><input id='twin-package' name='blueprint_zip' type='file' accept='.zip,application/zip' required></div><p class='twin-import-actions'><button type='submit'>Upload Twin</button></p><p class='muted'>Packages may contain confidential candidate intelligence. Upload only packages you are authorised to use. Imported records remain candidates and are never promoted automatically.</p><p><a href='/digital-twins'>Cancel</a></p></form></section>
     <section class='card'><h2>Import history</h2><p><a href='/blueprint-import/history'>View previous package imports</a></p></section>"""
@@ -396,6 +401,8 @@ def restage_progress_page(import_run_id: str, headers: Any, job: dict[str, Any] 
     html = _page("Blueprint restage progress", body); return html if direct_render else (html, 200)
 
 def review_page(import_run_id: str, headers: Any, message: str = "", query: dict[str, list[str]] | None = None) -> tuple[str, int]:
+    if not authenticated_flora_user(headers):
+        return _page("Review unavailable", "<p>Verified review authority is required.</p>"), 403
     correlation_id = f"bpi-review-{uuid4().hex[:12]}"
     try:
         query = query or {}
@@ -415,7 +422,9 @@ def review_page(import_run_id: str, headers: Any, message: str = "", query: dict
             return _page("Review Blueprint proposed changes", body), 200
         coord = BlueprintReviewPlanCoordinator()
         def defaults(): _ensure_reviews_and_mappings(ctx, headers)
-        job = coord.ensure_job(import_run_id, authenticated_flora_user(headers), headers, defaults)
+        job = coord.latest_job(import_run_id)
+        if not job:
+            return _page("Review preparation required", "<section class='card'><h1>Review preparation required</h1><p>No review plan has been prepared. Preparation requires an authorised state-changing action; opening this page changes no records.</p></section>"), 200
         LOGGER.info("Blueprint review preparation trace", extra={"correlation_id": correlation_id, "review_job_id": job.get("job_id"), "import_run_id": import_run_id, "stage": job.get("stage"), "records_processed": job.get("records_processed", 0)})
         if job.get("status") == "Failed":
             return _review_failure_page(ctx, job, correlation_id), 200
@@ -432,6 +441,17 @@ def review_page(import_run_id: str, headers: Any, message: str = "", query: dict
         job = {"diagnostic_reference": correlation_id, "stage": "Blueprint review route", "records_processed": 0, "records_total": 0, "error_category": type(exc).__name__, "status": "Failed", "job_id": correlation_id, "plan_persisted": False}
         ctx = locals().get("ctx") or {}
         return _review_failure_page(ctx, job, correlation_id), 200
+
+
+def prepare_review(import_run_id: str, headers: Any, message: str = "", query=None) -> tuple[str, int]:
+    """Explicit candidate workflow mutation, separate from read-only rendering."""
+    ctx = _context(import_run_id)
+    if not ctx or not can_review_blueprint_candidate(headers, ctx["package"].identity.enterprise_id, ctx["package"].workspace_id):
+        return _page("Review unavailable", "<p>Verified review authority is required.</p>"), 403
+    BlueprintReviewPlanCoordinator().ensure_job(
+        import_run_id, authenticated_flora_user(headers), headers,
+        lambda: _ensure_reviews_and_mappings(ctx, headers))
+    return review_page(import_run_id, headers, message, query)
 
 
 def record_import_human_review(import_run_id: str, headers: Any) -> tuple[str, int]:
@@ -664,7 +684,7 @@ def history_page(headers: Any) -> tuple[str, int]:
     rows = []
     allowed = user_enterprise_access(headers)
     for p in BlueprintPackageRegistry().list():
-        if not can_access_enterprise(headers, p.identity.enterprise_id, getattr(p, "workspace_id", "")): continue
+        if not can_inspect_blueprint_package(headers, p): continue
         summary = BlueprintPackageValidator().staging_summary(p.import_run_id) or {}
         plans = DryRunPlanRepository().list(p.import_run_id)
         promo = _latest_promotion_status(p.import_run_id)
@@ -679,16 +699,8 @@ def history_page(headers: Any) -> tuple[str, int]:
             actions += f" · <a href='/blueprint-import?update_twin={escape(identity.twin_id or '')}'>Import newer release</a> · <a href='/blueprint-import/{escape(p.import_run_id)}/archive'>Archive/Supersede</a>"
         else: actions = f"<a href='/blueprint-import/{escape(p.import_run_id)}/staging-history'>View history</a> · Archive state"
         rows.append(f"<tr><td>{escape(identity.twin_id or p.identity.enterprise_id)}</td><td>{escape(identity.primary_subject_name or _package_name(p))}</td><td>{escape(p.identity.package_id)}</td><td>{escape(identity.package_version)}</td><td>{escape(p.received_at)}</td><td>{escape(lifecycle.state)}</td><td>{'promoted' if promoted else 'candidate'}</td><td>{escape(canonical)}</td><td>{'complete' if summary else p.status}</td><td>{escape(promo)}</td><td>{actions}</td></tr>")
-    # The pre-importer Banking Twin is an existing canonical Enterprise
-    # Knowledge release, not a candidate package.  Surface that actual owner
-    # state rather than inventing an import record or offering hard deletion.
-    banking_source = Path(__file__).resolve().parents[4] / 'enterprise-knowledge' / 'banking' / 'industry' / 'Banking-Industry-Twin.md'
-    if banking_source.exists() and not any('BK-IND-002' in row for row in rows):
-        rows.append("<tr><td>BK-IND-002</td><td>Banking Industry Twin</td><td>Enterprise Knowledge legacy release</td><td>1.0</td><td>18 July 2026</td><td>promoted</td><td>promoted</td><td>current</td><td>Validated</td><td>canonical</td><td><a href='/blueprint-import?update_twin=BNK-001'>Import newer release</a> · Archive/Supersede</td></tr>")
-    tombroot = data_path('blueprint_import','tombstones')
-    if tombroot.exists():
-        for path in sorted(tombroot.glob('*.json')):
-            t=json.loads(path.read_text()); rows.append(f"<tr><td>{escape(str(t.get('twin_id','')))}</td><td>Deleted candidate</td><td>{escape(str(t.get('package_id','')))}</td><td>{escape(str(t.get('release','')))}</td><td>{escape(str(t.get('deleted_at','')))}</td><td>deleted</td><td>candidate</td><td>not canonical</td><td>audit retained</td><td>none</td><td>View history</td></tr>")
+    # Historical tombstones predate verified workspace bindings. Preserve their
+    # bytes for offline operator reconciliation; do not enumerate them globally.
     table = "<table><thead><tr><th>Twin ID</th><th>Industry / name</th><th>Package ID</th><th>Release/version</th><th>Imported at</th><th>Lifecycle state</th><th>Candidate / promoted</th><th>Current / superseded</th><th>Validation state</th><th>Canonical state</th><th>Available actions</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table>"
     return _page("Blueprint import history", f"<section class='hero'><h1>Blueprint import history</h1><p><a href='/digital-twins'>Back to Digital Twins</a></p></section><section class='card'>{table}</section>"), 200
 
@@ -708,7 +720,7 @@ def delete_candidate_preview_page(import_run_id: str, headers: Any) -> tuple[str
 def delete_candidate_import(import_run_id: str, form: dict[str,list[str]], headers: Any) -> tuple[str,int]:
     service=TwinImportLifecycleService(); package=service.package_for_run(import_run_id)
     if not package or not can_access_enterprise(headers,package.identity.enterprise_id,getattr(package,'workspace_id','')): return _safe_failure("Import unavailable.","delete",False,False,"Return to history."),403
-    try: result=service.delete_candidate(import_run_id,authenticated_flora_user(headers),(form.get('confirmation') or [''])[0],(form.get('reason') or ['Operator deleted obsolete candidate import'])[0])
+    try: result=service.delete_candidate(import_run_id,authenticated_flora_user(headers),(form.get('confirmation') or [''])[0],(form.get('reason') or ['Operator deleted obsolete candidate import'])[0],headers=headers)
     except ValueError as exc: return _safe_failure(str(exc),"delete",False,False,"Return to delete preview."),409
     return _page("Candidate import deleted",f"<section class='card'><h1>Candidate import deleted</h1><p>Canonical intelligence affected: <strong>NO</strong></p><p>Recovered files/inodes: {result['recovered_files']}; bytes: {result['recovered_bytes']}.</p><p>Import history and audit tombstone retained.</p><a href='/blueprint-import/history'>Return to history</a></section>"),200
 

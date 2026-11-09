@@ -140,3 +140,8 @@ def test_increment_41_analyst_rendering_quality_gates():
     assert "analyst-view" in html
     executive = html.split("12. Detailed inspection", 1)[0]
     assert "BK-ENT-" not in executive
+
+import pytest
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

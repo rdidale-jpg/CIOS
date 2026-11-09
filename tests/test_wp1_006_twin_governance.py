@@ -117,3 +117,8 @@ def test_stable_id_dependency_creates_idempotent_review_without_dependent_mutati
     # A name-only candidate is deliberately insufficient.
     monkeypatch.setattr("cios.applications.flora.blueprint_import.twin_governance.CandidateStagingRepository.list_candidates", lambda self, run: source_rows if run == "run-source" else [{"payload": {"name": "Genius Sports"}}])
     assert TwinDependencyService().discover(source) == []
+
+import pytest
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

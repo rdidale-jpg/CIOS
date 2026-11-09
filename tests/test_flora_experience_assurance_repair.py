@@ -152,3 +152,6 @@ def test_unreadable_import_status_is_unavailable_not_a_false_zero(monkeypatch):
     text=visible(app._flora_home_page(HEADERS))
     assert 'Industry import status unavailable' in text
     assert '0 candidate imports' not in text
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

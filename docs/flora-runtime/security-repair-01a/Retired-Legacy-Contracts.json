@@ -1,0 +1,365 @@
+{
+  "case_count": 27,
+  "before": {
+    "passed": 22,
+    "failed": 5
+  },
+  "after": {
+    "failed": 24,
+    "passed": 3
+  },
+  "new_failures": [
+    "tests/test_flora_pilot_auth.py::test_blueprint_get_and_post_use_same_signed_session_and_anonymous_denied",
+    "tests/test_flora_pilot_auth.py::test_cookie_security_attributes_for_https_deployment",
+    "tests/test_flora_pilot_auth.py::test_deprecated_auto_sign_in_conflicts_with_canonical_pilot_mode",
+    "tests/test_flora_pilot_auth.py::test_persistent_cookie_has_30_day_expiry_survives_restart_and_rejects_expired",
+    "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_defaults_false_and_refuses_non_pilot",
+    "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_ROLE-membership]",
+    "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_WORKSPACE-workspace]",
+    "tests/test_flora_pilot_auth.py::test_pilot_sign_in_route_accepts_secret_only_by_post_and_sets_cookie",
+    "tests/test_flora_pilot_auth.py::test_sign_in_issues_one_cookie_and_browser_reuses_it_for_import_get_and_post",
+    "tests/test_flora_pilot_auth.py::test_synthetic_headers_ignored_and_tampered_cookie_rejected",
+    "tests/test_flora_pilot_auth.py::test_unexpected_diagnostic_storage_failure_preserves_denied_context",
+    "tests/test_flora_pilot_auth.py::test_valid_pilot_session_cookie_resolves_owner_workspace_role_and_policy",
+    "tests/test_flora_pilot_blueprint_review.py::test_non_pilot_workspace_and_capability_checks_are_unchanged",
+    "tests/test_flora_pilot_blueprint_review.py::test_pilot_upload_review_and_dispositions_do_not_grant_promotion",
+    "tests/test_flora_pilot_import_bypass.py::test_deployment_endpoint_identifies_canonical_import_runtime",
+    "tests/test_flora_pilot_import_bypass.py::test_form_validation_secure_mode_and_promotion_boundary",
+    "tests/test_flora_pilot_import_bypass.py::test_one_canonical_mode_and_conflicting_legacy_modes_fail",
+    "tests/test_flora_pilot_import_bypass.py::test_secure_mode_settings_route_reports_root_authorisation_decision",
+    "tests/test_flora_pilot_import_bypass.py::test_validation_and_archive_safety_precede_identity"
+  ],
+  "cases": [
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_blueprint_get_and_post_use_same_signed_session_and_anonymous_denied",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "PermissionError",
+        "failure_sha256": "01c7eaf96b10db33d007e93f8895b9f1da6c08509de5458774c14cbfac1c4a8b",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_cios_owner_can_upload_inspect_and_stage_mod_package_without_canonical_mutation",
+      "before": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "4ea25cee76a61667b6320c746ad5936f4929c3d4e747dc6d4cccab605955a93e",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "PermissionError",
+        "failure_sha256": "01c7eaf96b10db33d007e93f8895b9f1da6c08509de5458774c14cbfac1c4a8b",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_cookie_security_attributes_for_https_deployment",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "PermissionError",
+        "failure_sha256": "01c7eaf96b10db33d007e93f8895b9f1da6c08509de5458774c14cbfac1c4a8b",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_deprecated_auto_sign_in_conflicts_with_canonical_pilot_mode",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "833fabee771d673496721be9fb2a28401f53bad44e26811bcccfbf5a3eb42608",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_owner_managed_enterprise_policy_is_case_normalised_and_workspace_bound",
+      "before": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "cf105e98c10b6a4b29419cfe7e8cc2f22b2e57cc5f40030e1183e6c73d60cb9c",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "cios.applications.flora.blueprint_import.validator.BlueprintValidationError",
+        "failure_sha256": "a510dcea05287a121af99bd614c28fcb84e7ad6e4ac8913fe4cb336f5962cfa5",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_persistent_cookie_has_30_day_expiry_survives_restart_and_rejects_expired",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "PermissionError",
+        "failure_sha256": "01c7eaf96b10db33d007e93f8895b9f1da6c08509de5458774c14cbfac1c4a8b",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_defaults_false_and_refuses_non_pilot",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "ceb45134546f11ab9afc298a282360c11022e99cb12ba5e772b94a97b379e3b2",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_OWNER_ID-owner]",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "passed"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_ROLE-membership]",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "aec949dbc53e49c097e3b3a52b0d0331e12adefc07c4625f5b35e4b8d2ed96e0",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_WORKSPACE-workspace]",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "f47f94e915578ee02cf3e5613c18a8dfc74d1040757e187623f997768b9f44e4",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_pilot_sign_in_route_accepts_secret_only_by_post_and_sets_cookie",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "220bb750bdd5aec1c60b9efcf5cd4272a1eeebd1a94cb9d4de3129b3de7fe985",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_sign_in_issues_one_cookie_and_browser_reuses_it_for_import_get_and_post",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "KeyError",
+        "failure_sha256": "9d8b990454221bbe8a30003cc44cb96bb46727a28aa4a55c6e6dc8f35d27ae0e",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_sign_out_clears_persistent_cookie",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "passed"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_synthetic_headers_ignored_and_tampered_cookie_rejected",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "PermissionError",
+        "failure_sha256": "01c7eaf96b10db33d007e93f8895b9f1da6c08509de5458774c14cbfac1c4a8b",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_unexpected_diagnostic_storage_failure_preserves_denied_context",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "PermissionError",
+        "failure_sha256": "01c7eaf96b10db33d007e93f8895b9f1da6c08509de5458774c14cbfac1c4a8b",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_valid_pilot_session_cookie_resolves_owner_workspace_role_and_policy",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "PermissionError",
+        "failure_sha256": "01c7eaf96b10db33d007e93f8895b9f1da6c08509de5458774c14cbfac1c4a8b",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_blueprint_review.py::test_non_pilot_workspace_and_capability_checks_are_unchanged",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "192cfecc0bded619d20267c0ce20745a3e27324d6f54085f1a51340374e2da76",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_blueprint_review.py::test_pilot_upload_review_and_dispositions_do_not_grant_promotion",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "48baaa632f05319e432248d7b5fb906f9ecfd5e1724c7a1cd520f01a2cf20f61",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_configured_module_complete_http_commercial_context_and_twin_map",
+      "before": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "71034ef3ad62f1479cc7c28e36cc9319b018915c7bac9b7b2d5777304fe70873",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "a797afdf3ec4427692dd40d78d10aa92030fbe4261d2568f67a4e2b0974e3627",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_deployed_equivalent_pilot_route_imports_candidate_to_executive_workspace",
+      "before": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "d69f7467d9120eefb8482d8c448b342bceab1d6c85051bad54cb384a7f1e74d9",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "0bbc6fc224f708c39172f3c2cf1d93bd24e63f5196a00eaf38112d56e46f0bc5",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_deployment_endpoint_identifies_canonical_import_runtime",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "e065e7b59e6c8ce60bc89ebf8f56e31c5c48bdd18fa047dc530635d0dfe4b1c2",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_form_validation_secure_mode_and_promotion_boundary",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "192cfecc0bded619d20267c0ce20745a3e27324d6f54085f1a51340374e2da76",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_one_canonical_mode_and_conflicting_legacy_modes_fail",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "267acb3c6aa3d5213349d5306df33e98f7047e1f46af0d503403e3da38192952",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_pilot_configure_save_and_recompose_uses_narrow_actor_scope",
+      "before": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "5b433eadaadb40b8e571720f5f996d74d37f7b21c66cbc03e513c6583cf2cd29",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "192cfecc0bded619d20267c0ce20745a3e27324d6f54085f1a51340374e2da76",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_secure_mode_commercial_context_remains_denied_with_diagnostic",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "passed"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_secure_mode_settings_route_reports_root_authorisation_decision",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "192cfecc0bded619d20267c0ce20745a3e27324d6f54085f1a51340374e2da76",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_validation_and_archive_safety_precede_identity",
+      "before": {
+        "status": "passed"
+      },
+      "after": {
+        "status": "failed",
+        "failure": "AssertionError",
+        "failure_sha256": "dd39cb09ccbff512abf049027fa4398cf63d2293dcbe5cbd5f13859b2de02edd",
+        "failure_details": "Raw diagnostics retained locally; omitted from public output"
+      }
+    }
+  ],
+  "classification": "Historical permissive pilot contracts, intentionally incompatible with the authorised 01A closed transition. Not counted as passing or inherited."
+}

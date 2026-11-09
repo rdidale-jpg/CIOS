@@ -247,3 +247,6 @@ def test_unreadable_owner_state_is_generic_unavailable_not_raw_metadata(monkeypa
     html=dt.render_intelligence_discovery(s)
     assert 'details unavailable' in html and 'private-source-sentinel' not in html
     assert 'Source-curated' in visible(html)
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

@@ -383,3 +383,6 @@ def test_empty_cached_summary_is_revalidated_to_populate_canonical_trace_store(m
     refreshed=BlueprintPackageValidator().validate_and_stage(r.package_ref,'alice')
     assert refreshed.execution_trace
     assert CandidateStagingRepository().load_summary(r.import_run_id)['execution_trace']
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

@@ -112,3 +112,8 @@ def test_page_budgets_and_existing_intelligence_preserved():
     html = evidence_page("lloyds")[0] + ai_native_capability_model_page()
     assert "Lineage key" in html
     assert "Customer experience" in html and "Innovation and change delivery" in html
+
+import pytest
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

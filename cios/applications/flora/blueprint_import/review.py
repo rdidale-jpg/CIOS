@@ -128,6 +128,8 @@ class CandidateReviewService:
         self.ledger = ledger or BlueprintImportLedger()
 
     def record_decision(self, candidate_id: str, decision: ReviewDecisionValue, reviewer: str, rationale: str, headers: Any, mapped_canonical_target_id: str = "", unresolved_issues: tuple[str, ...] = ()) -> CandidateReviewDecision:
+        if not authenticated_flora_user(headers) or reviewer != authenticated_flora_user(headers):
+            raise BlueprintReviewError("Reviewer does not match verified authority")
         candidate = self._candidate(candidate_id)
         package = self.registry.get(str(candidate["source_package_ref"]))
         if not package or not can_review_blueprint_candidate(headers, package.identity.enterprise_id, package.workspace_id):

@@ -1,0 +1,289 @@
+{
+  "retired_count": 19,
+  "rows": [
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_blueprint_get_and_post_use_same_signed_session_and_anonymous_denied",
+      "obsolete_expectation": "Shared pilot cookie authorises import GET/POST",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[valid]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[tampered]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[expired]"
+      ],
+      "repair_01b_positive_obligation": "Individual sign-in grants only member/capability/ACL-bound import access",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_cookie_security_attributes_for_https_deployment",
+      "obsolete_expectation": "Legacy shared-secret issuer supplies HTTPS cookie",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/pilot-sign-in]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/upload]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mark-reviewed]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/approve]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/delete]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/identity]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/operations/storage-recovery]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/financial-intelligence/bt-group-plc/refresh]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/apply]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/executive-intelligence-brief/generate]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/canvas/feedback]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mission]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/live/collect/start]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/users]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/roles]"
+      ],
+      "repair_01b_positive_obligation": "Real issuer sets Secure, HttpOnly, SameSite and bounded expiry",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_deprecated_auto_sign_in_conflicts_with_canonical_pilot_mode",
+      "obsolete_expectation": "Pilot-mode flags determine automatic sign-in behavior",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTO_SIGN_IN]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_IMPORT_BYPASS]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTH_ENABLED]"
+      ],
+      "repair_01b_positive_obligation": "No automatic/shared actor sign-in under any legacy mode",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_persistent_cookie_has_30_day_expiry_survives_restart_and_rejects_expired",
+      "obsolete_expectation": "Thirty-day shared pilot cookie survives restart",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[valid]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[tampered]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[expired]"
+      ],
+      "repair_01b_positive_obligation": "Real sessions obey approved absolute/idle expiry, restart and revocation",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_defaults_false_and_refuses_non_pilot",
+      "obsolete_expectation": "Environment pilot configuration can enable automatic identity",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTO_SIGN_IN]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_IMPORT_BYPASS]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTH_ENABLED]"
+      ],
+      "repair_01b_positive_obligation": "Explicit individual sign-in only",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_ROLE-membership]",
+      "obsolete_expectation": "Environment role configuration supplies membership",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[production]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[pilot]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[development]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[]"
+      ],
+      "repair_01b_positive_obligation": "Server membership roles independent of environment configuration",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_WORKSPACE-workspace]",
+      "obsolete_expectation": "Environment workspace configuration supplies membership",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[production]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[pilot]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[development]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[]"
+      ],
+      "repair_01b_positive_obligation": "Server membership selection and cross-workspace denial",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_pilot_sign_in_route_accepts_secret_only_by_post_and_sets_cookie",
+      "obsolete_expectation": "POST shared secret issues an authority cookie",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/pilot-sign-in]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/upload]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mark-reviewed]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/approve]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/delete]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/identity]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/operations/storage-recovery]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/financial-intelligence/bt-group-plc/refresh]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/apply]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/executive-intelligence-brief/generate]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/canvas/feedback]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mission]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/live/collect/start]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/users]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/roles]"
+      ],
+      "repair_01b_positive_obligation": "Individual authentication issues protected session; query secrets never accepted",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_sign_in_issues_one_cookie_and_browser_reuses_it_for_import_get_and_post",
+      "obsolete_expectation": "Shared pilot cookie is reusable import authority",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[valid]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[tampered]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[expired]"
+      ],
+      "repair_01b_positive_obligation": "One real individual session across authorised import GET/POST and revocation",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_synthetic_headers_ignored_and_tampered_cookie_rejected",
+      "obsolete_expectation": "Setup creates legacy pilot cookie before testing tamper/header rejection",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[valid]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[tampered]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_signed_sessions_have_no_authority[expired]"
+      ],
+      "repair_01b_positive_obligation": "Real token integrity and header rejection; preserve sound negative assertions",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_unexpected_diagnostic_storage_failure_preserves_denied_context",
+      "obsolete_expectation": "Diagnostic failure journey first issues a shared pilot cookie",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/history]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/private/inspect]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/operations/storage-recovery]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/financial-intelligence/admin/health]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/ai-financial-report/private]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/digital-twin/private]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/digital-twins/private/canvas]"
+      ],
+      "repair_01b_positive_obligation": "Unavailable diagnostic/audit store fails closed without leaking context",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_auth.py::test_valid_pilot_session_cookie_resolves_owner_workspace_role_and_policy",
+      "obsolete_expectation": "Pilot cookie resolves owner/workspace/role from configuration",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[production]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[pilot]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[development]",
+        "tests/test_flora_security_repair_01a.py::test_unverified_claims_never_resolve_authority[]"
+      ],
+      "repair_01b_positive_obligation": "Server identity and active membership resolve least-privilege policy",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_blueprint_review.py::test_non_pilot_workspace_and_capability_checks_are_unchanged",
+      "obsolete_expectation": "Browser role/workspace claims satisfy non-pilot capability checks",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[object]",
+        "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[dictionary]",
+        "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[headers]",
+        "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[cookie]",
+        "tests/test_flora_security_review_closure.py::test_arbitrary_objects_and_claims_cannot_supply_context[environment]"
+      ],
+      "repair_01b_positive_obligation": "Verified member can review only permitted workspace resources",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_blueprint_review.py::test_pilot_upload_review_and_dispositions_do_not_grant_promotion",
+      "obsolete_expectation": "Pilot upload/review/disposition path is authorised by shared actor",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_shared_pilot_cannot_record_human_review"
+      ],
+      "repair_01b_positive_obligation": "Individual review/dispositions attributed correctly, no implicit promotion",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_deployment_endpoint_identifies_canonical_import_runtime",
+      "obsolete_expectation": "Public deployment endpoint returns environment-derived runtime metadata",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_review_closure.py::test_public_fingerprint_excludes_environment_configuration"
+      ],
+      "repair_01b_positive_obligation": "Public safe code fingerprint; sensitive diagnostics require scoped authority",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_form_validation_secure_mode_and_promotion_boundary",
+      "obsolete_expectation": "Anonymous form processing occurs before the authority boundary",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/pilot-sign-in]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/upload]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mark-reviewed]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/approve]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/delete]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/identity]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/operations/storage-recovery]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/financial-intelligence/bt-group-plc/refresh]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/apply]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/executive-intelligence-brief/generate]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/canvas/feedback]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mission]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/live/collect/start]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/users]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/roles]"
+      ],
+      "repair_01b_positive_obligation": "Authorised input validation and separate promotion privilege",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_one_canonical_mode_and_conflicting_legacy_modes_fail",
+      "obsolete_expectation": "Legacy mode flags define a functional pilot authority mode",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTO_SIGN_IN]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_IMPORT_BYPASS]",
+        "tests/test_flora_security_repair_01a.py::test_legacy_flags_cannot_enable_authority_or_break_public_reads[FLORA_PILOT_AUTH_ENABLED]"
+      ],
+      "repair_01b_positive_obligation": "Mode flags never enable authority",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_secure_mode_settings_route_reports_root_authorisation_decision",
+      "obsolete_expectation": "Anonymous settings exposes detailed root authorization context",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/history]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/blueprint-import/private/inspect]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/operations/storage-recovery]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/financial-intelligence/admin/health]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/ai-financial-report/private]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/digital-twin/private]",
+        "tests/test_flora_security_repair_01a.py::test_protected_gets_deny_without_disclosure[/digital-twins/private/canvas]"
+      ],
+      "repair_01b_positive_obligation": "Authorised settings reveal only scoped diagnostics",
+      "classification": "replaced; requires future positive coverage"
+    },
+    {
+      "test_id": "tests/test_flora_pilot_import_bypass.py::test_validation_and_archive_safety_precede_identity",
+      "obsolete_expectation": "Anonymous archive validation precedes verified identity",
+      "replacement_negative_tests": [
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/pilot-sign-in]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/upload]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mark-reviewed]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/approve]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/delete]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/identity]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/operations/storage-recovery]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/financial-intelligence/bt-group-plc/refresh]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/review]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/ai-financial-report/private/apply]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/executive-intelligence-brief/generate]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/digital-twins/private/canvas/feedback]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/blueprint-import/private/mission]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/live/collect/start]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/users]",
+        "tests/test_flora_security_repair_01a.py::test_mutating_http_routes_closed_before_dispatch[/workspace/roles]"
+      ],
+      "repair_01b_positive_obligation": "Authorised archive safety/validation before import mutation",
+      "classification": "replaced; requires future positive coverage"
+    }
+  ],
+  "preexisting_failure_count": 5,
+  "preexisting_failures": [
+    "tests/test_flora_pilot_auth.py::test_cios_owner_can_upload_inspect_and_stage_mod_package_without_canonical_mutation",
+    "tests/test_flora_pilot_auth.py::test_owner_managed_enterprise_policy_is_case_normalised_and_workspace_bound",
+    "tests/test_flora_pilot_import_bypass.py::test_configured_module_complete_http_commercial_context_and_twin_map",
+    "tests/test_flora_pilot_import_bypass.py::test_deployed_equivalent_pilot_route_imports_candidate_to_executive_workspace",
+    "tests/test_flora_pilot_import_bypass.py::test_pilot_configure_save_and_recompose_uses_narrow_actor_scope"
+  ]
+}

@@ -199,6 +199,8 @@ class CanonicalPromotionService:
         self.models=model_repo or EnterpriseModelRepository()
         self.memory=ObservationMemoryService(self.observation_repo,self.models)
     def approve_plan(self, import_run_id: str, plan_id: str, approver: str, rationale: str, headers: Any, unresolved_warnings_accepted: tuple[str,...]=(), expiry_or_invalidation_condition: str="invalid if plan, package, review decisions or mappings change"):
+        if not authenticated_flora_user(headers) or approver != authenticated_flora_user(headers):
+            raise BlueprintPromotionError("Approver does not match verified authority")
         plan=self._load_plan(import_run_id, plan_id); package=self.registry.get(plan["package_ref"])
         if not package or not can_approve_blueprint_promotion(headers, package.identity.enterprise_id): raise BlueprintPromotionError("Actor is not authorised to approve Blueprint canonical promotion")
         if not str(rationale or "").strip(): raise BlueprintPromotionError("Promotion approval requires a rationale")
@@ -231,6 +233,8 @@ class CanonicalPromotionService:
             _PROMOTION_LOCK.release()
 
     def _execute_approved_plan(self, import_run_id, approval_id, actor, headers):
+        if not authenticated_flora_user(headers) or actor != authenticated_flora_user(headers):
+            raise BlueprintPromotionError("Executor does not match verified authority")
         a=self.repo.load_approval(import_run_id, approval_id)
         if not a: raise BlueprintPromotionError("Unknown promotion approval")
         plan=self._load_plan(import_run_id, a.approved_plan_id); package=self.registry.get(a.package_ref)

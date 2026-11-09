@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 from typing import Any
 
-from cios.applications.flora.access import authenticated_flora_user, cookie_value, user_enterprise_access
+from cios.applications.flora.access import authenticated_flora_user, flora_roles, user_enterprise_access
 from cios.applications.flora.storage import data_path, ensure_parent_writable
 
 FEEDBACK_SCHEMA_VERSION = "flora-enterprise-canvas-feedback-v1"
@@ -89,8 +89,7 @@ class EnterpriseCanvasFeedback:
 
 
 def _roles(headers: Any) -> set[str]:
-    raw = headers.get("X-Flora-Roles") or cookie_value(headers, "flora_roles")
-    return {item.strip() for item in str(raw or "").replace("|", ",").split(",") if item.strip()}
+    return flora_roles(headers)
 
 
 def can_submit_feedback(headers: Any, enterprise_id: str) -> bool:
@@ -166,7 +165,7 @@ class EnterpriseCanvasFeedbackService:
             raise ValueError("Unsupported visibility classification")
         now = str(payload.get("supplied_at") or datetime.now(timezone.utc).replace(microsecond=0).isoformat())
         contributor = authenticated_flora_user(headers)
-        basis = str(payload.get("contributor_role") or headers.get("X-Flora-Role-Label") or "authorised contributor")
+        basis = ", ".join(sorted(flora_roles(headers)))
         fid = payload.get("feedback_id") or _feedback_id(enterprise_id, action, payload.get("tile_view_id", ""), payload.get("lineage_ref", ""), statement, now)
         unknown = {}
         contradiction = {}

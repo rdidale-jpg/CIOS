@@ -175,8 +175,11 @@ def _eligible_versions(root: Path, keep_versions: int) -> list[Path]:
 
 
 def cleanup_superseded_staging_history(root: Path | None = None, *, keep_versions: int = KEEP_STAGING_VERSIONS,
-                                       dry_run: bool = True) -> dict[str, Any]:
+                                       dry_run: bool = True, headers=None) -> dict[str, Any]:
     """Remove only superseded snapshots outside the retained rollback window."""
+    if not dry_run:
+        from cios.applications.flora.access import require_capability
+        require_capability(headers, "storage.recover")
     root = (root or data_root()).resolve(strict=False)
     versions = _eligible_versions(root, keep_versions)
     file_count = directory_count = 0
@@ -203,11 +206,13 @@ def cleanup_superseded_staging_history(root: Path | None = None, *, keep_version
     }
 
 
-def execute_storage_recovery(confirmation: str, root: Path | None = None) -> dict[str, Any]:
+def execute_storage_recovery(confirmation: str, root: Path | None = None, *, headers=None) -> dict[str, Any]:
     """Execute confirmed cleanup and run the canonical admission/persistence probes."""
+    from cios.applications.flora.access import require_capability
+    require_capability(headers, "storage.recover")
     if confirmation != RECOVERY_CONFIRMATION:
         raise ValueError("Explicit storage recovery confirmation did not match")
-    result = cleanup_superseded_staging_history(root, dry_run=False)
+    result = cleanup_superseded_staging_history(root, dry_run=False, headers=headers)
     health = startup_storage_status()
     facts = health.get("diagnostics", {})
     total = int(facts.get("total_inodes") or 0)

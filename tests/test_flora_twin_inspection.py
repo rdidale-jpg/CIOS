@@ -62,3 +62,8 @@ def test_candidate_context_is_visually_distinct(monkeypatch):
     assert "Candidate intelligence — not accepted or governed" in html
     assert "Inspection cannot promote or mutate canonical state" in html
     assert "candidate proposal" in html
+
+import pytest
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

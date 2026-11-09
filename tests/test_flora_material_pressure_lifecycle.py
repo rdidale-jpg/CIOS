@@ -443,3 +443,6 @@ def test_future_effective_source_provenance_cannot_support_historical_pressure(m
     memory.observations._rewrite([obs])
     result=qualify_candidates((candidate(obs),),cutoff='2026-11-08')
     assert not result.qualified and dict(result.assessments[0].gate_results)['eligible_input']=='FAIL'
+
+# Domain tests use an explicit fixture identity provider, never HTTP trust.
+pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")
