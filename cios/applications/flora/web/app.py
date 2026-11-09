@@ -191,6 +191,16 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_flora_research_page(self.headers))
             elif parsed.path in {"/workspace/reference", "/flora/reference"}:
                 self._html(reference_workspace_page(self.headers, saved=parse_qs(parsed.query).get("saved") == ["1"]), set_cookie=reference_resume_cookie())
+            elif parsed.path == "/flora/banking/explorer":
+                from cios.applications.flora.banking_explorer import industry_page
+                self._html(industry_page(self.headers))
+            elif parsed.path.startswith("/flora/banking/explorer/"):
+                from cios.applications.flora.banking_explorer import enterprise_page
+                parts = parsed.path.removeprefix("/flora/banking/explorer/").split("/")
+                if len(parts) == 1 or (len(parts) == 2 and parts[1] == "insights"):
+                    self._html(*enterprise_page(parts[0], self.headers, insights=len(parts) == 2))
+                else:
+                    self._html("Explorer page not found", 404)
             elif parsed.path in {"/flora/banking", "/flora/banking/"}:
                 self._html(banking_landing_page())
             elif parsed.path == "/flora/banking/portfolio":
@@ -1042,6 +1052,7 @@ def _flora_home_page(headers=None, question_error: str = "") -> str:
       <section class='workspace-heading'><p class='eyebrow'>Flora Map</p><h1>Enterprise Intelligence Workspace</h1><p class='lead'>See the intelligence estate, decide what matters and move directly to the evidence.</p></section>
       {context_banner}
       <section aria-labelledby='map-title'><div class='section-heading'><div><p class='eyebrow'>Flora Map</p><h2 id='map-title'>Enterprise Intelligence Map</h2></div><p>Choose a domain to inspect its current intelligence and next decision.</p></div><div class='estate-grid'>
+        {domain('/flora/banking/explorer','Banking Explorer','Industry → Enterprise → Visual Landscape → Strategic Insights','Explore five curated bank profiles, their operating context and evidence-labelled strategic hypotheses.','Explore Banking')}
         {domain('/intelligence?tab=industries','Industries',industry_metric,'Governed import lifecycle with existing account visibility; partial release is not complete acceptance.','Open industries')}
         {domain('/intelligence?tab=enterprises','Enterprises','Source context and existing Twin views','No estate-wide owner-accepted Enterprise Model count is assessed here.','Open enterprise intelligence')}
         {domain('/opportunities','Opportunities',f"{len(opportunities)} opportunity hypotheses",f"{horizon_counts['horizon_1']} H1 · {horizon_counts['horizon_2']} H2 · {horizon_counts['horizon_3']} H3",'Open opportunity pipeline')}
