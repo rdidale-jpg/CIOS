@@ -1,0 +1,609 @@
+{
+  "version": 1,
+  "profile_id": "VI-AVIATION-1",
+  "domain": "aviation",
+  "industry_title": "Aviation, as a system.",
+  "industry_summary": "Demand becomes a schedule. A schedule becomes a flight. Explore the network of people, assets and dependencies that makes that possible.",
+  "enterprise_title": "How easyJet works.",
+  "enterprise_summary": "Explore the airline operating system, from a customer’s booking to the next aircraft turnaround — and the evidence behind its changing economics.",
+  "geography": "European airline reference; global / UK measures retain their own scope",
+  "illustration": "aviation",
+  "structure_notice": "Illustrative airline activity sequence with easyJet-specific evidence overlays; not a verified systems topology, flight plan or supplier contract map.",
+  "actors": [
+    {
+      "id": "VI-AV-EASYJET",
+      "label": "easyJet",
+      "category": "Enterprise",
+      "claim_refs": [
+        "AV-NETWORK"
+      ],
+      "enterprise_slug": "easyjet",
+      "resource_id": null,
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-AV-RYANAIR",
+      "label": "Ryanair",
+      "category": "FY2025 comparator",
+      "claim_refs": [
+        "AV-PEERS"
+      ],
+      "enterprise_slug": null,
+      "resource_id": null,
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-AV-LUFTHANSA",
+      "label": "Lufthansa",
+      "category": "FY2025 comparator",
+      "claim_refs": [
+        "AV-PEERS"
+      ],
+      "enterprise_slug": null,
+      "resource_id": null,
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-AV-AFKLM",
+      "label": "Air France–KLM",
+      "category": "FY2025 comparator",
+      "claim_refs": [
+        "AV-PEERS"
+      ],
+      "enterprise_slug": null,
+      "resource_id": null,
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-AV-WIZZ",
+      "label": "Wizz Air",
+      "category": "FY2025 comparator",
+      "claim_refs": [
+        "AV-PEERS"
+      ],
+      "enterprise_slug": null,
+      "resource_id": null,
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-AV-AIRBUS",
+      "label": "Airbus / Skywise",
+      "category": "Aircraft & maintenance",
+      "claim_refs": [
+        "AV-MRO"
+      ],
+      "enterprise_slug": null,
+      "resource_id": "AV-SUP-AIRBUS",
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-AV-AIRPORTS",
+      "label": "Airports & air navigation",
+      "category": "Infrastructure roles",
+      "claim_refs": [],
+      "enterprise_slug": null,
+      "resource_id": "AV-SUP-AIRPORTS",
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-AV-REG",
+      "label": "CAA / EASA",
+      "category": "Policy & oversight",
+      "claim_refs": [
+        "AV-RIGHTS",
+        "AV-SAFETY"
+      ],
+      "enterprise_slug": null,
+      "resource_id": null,
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-AV-DISTRIBUTION",
+      "label": "Booking & discovery",
+      "category": "Distribution channels",
+      "claim_refs": [
+        "AV-CHAT"
+      ],
+      "enterprise_slug": null,
+      "resource_id": "AV-CAP-DIGITAL",
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-AV-AI-ENTRANTS",
+      "label": "AI-native entrants",
+      "category": "Research gap",
+      "claim_refs": [],
+      "enterprise_slug": null,
+      "resource_id": null,
+      "presentation_state": "unknown"
+    }
+  ],
+  "activities": [
+    {
+      "id": "VI-EJ-BOOK",
+      "label": "Discover & book",
+      "purpose": "Connect customer needs to routes, prices and bookings. Current conversational discovery returns users to easyJet booking sites.",
+      "category": "Customer & proposition",
+      "icon": "ticket",
+      "resource_ids": [
+        "AV-CAP-DIGITAL",
+        "AV-CAP-HOLIDAYS"
+      ],
+      "claim_refs": [
+        "AV-CHAT",
+        "AV-HOLIDAYS"
+      ],
+      "programme_ids": [
+        "AV-PROG-CHANNEL"
+      ],
+      "supplier_ids": [],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-EJ-PLAN",
+      "label": "Network & pricing",
+      "purpose": "Match the route schedule, capacity and revenue model to demand; route-level market shares remain unknown.",
+      "category": "Revenue mechanism",
+      "icon": "network",
+      "resource_ids": [
+        "AV-CAP-NETWORK"
+      ],
+      "claim_refs": [
+        "AV-NETWORK",
+        "AV-PEERS"
+      ],
+      "programme_ids": [],
+      "supplier_ids": [],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-EJ-FLEET",
+      "label": "Aircraft & crew",
+      "purpose": "Prepare and allocate aircraft and people for the schedule; enabling tools are not proof of utilisation or causal benefits.",
+      "category": "Core operation",
+      "icon": "plane",
+      "resource_ids": [
+        "AV-CAP-OPS",
+        "AV-CAP-MRO"
+      ],
+      "claim_refs": [
+        "AV-FLEET",
+        "AV-ICC"
+      ],
+      "programme_ids": [
+        "AV-PROG-ICC",
+        "AV-PROG-FLEET"
+      ],
+      "supplier_ids": [],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-EJ-TURN",
+      "label": "Airport & turnaround",
+      "purpose": "Coordinate airports, ground activity and aircraft availability. Exact provider workshare and operational interfaces remain unknown.",
+      "category": "Core operation",
+      "icon": "terminal",
+      "resource_ids": [
+        "AV-CAP-OPS"
+      ],
+      "claim_refs": [
+        "AV-NETWORK"
+      ],
+      "programme_ids": [],
+      "supplier_ids": [
+        "AV-SUP-AIRPORTS"
+      ],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-EJ-MRO",
+      "label": "Maintenance & engineering",
+      "purpose": "Anticipate and resolve aircraft defects. Historical Skywise / S.FP+ context must not become assumed current contract scope.",
+      "category": "Technology dependency",
+      "icon": "wrench",
+      "resource_ids": [
+        "AV-CAP-MRO",
+        "AV-CAP-DATA"
+      ],
+      "claim_refs": [
+        "AV-MRO",
+        {
+          "review_source": "V3-EJ-MRO"
+        }
+      ],
+      "programme_ids": [
+        "AV-PROG-FLEET"
+      ],
+      "supplier_ids": [
+        "AV-SUP-AIRBUS"
+      ],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-EJ-RECOVER",
+      "label": "Disruption & recovery",
+      "purpose": "Manage flight/crew disruption and customer care. Obtain adoption, deflection and disruption-mix baselines before attributing outcomes to AI.",
+      "category": "Supporting capability",
+      "icon": "tower",
+      "resource_ids": [
+        "AV-CAP-OPS",
+        "AV-CAP-SERVICE"
+      ],
+      "claim_refs": [
+        "AV-ICC",
+        "AV-DIGITAL",
+        {
+          "review_source": "V3-EJ-H126",
+          "contains": "On-time"
+        }
+      ],
+      "programme_ids": [
+        "AV-PROG-ICC"
+      ],
+      "supplier_ids": [],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-EJ-DATA",
+      "label": "Data & digital platforms",
+      "purpose": "Connect customer and operational workflows. Jetstream and conversational interfaces have different scope and dates.",
+      "category": "Technology dependency",
+      "icon": "cloud",
+      "resource_ids": [
+        "AV-CAP-DATA",
+        "AV-CAP-DIGITAL"
+      ],
+      "claim_refs": [
+        "AV-CHAT",
+        {
+          "review_source": "V3-EJ-ICC"
+        }
+      ],
+      "programme_ids": [
+        "AV-PROG-CHANNEL"
+      ],
+      "supplier_ids": [
+        "AV-SUP-OPENAI"
+      ],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-EJ-FUEL",
+      "label": "Fuel, cost & sustainability",
+      "purpose": "Manage cost and environmental pressures. Separate supplier obligations, airline roles, forecasts and measured performance.",
+      "category": "Risk & control",
+      "icon": "leaf",
+      "resource_ids": [
+        "AV-CAP-SUSTAIN",
+        "AV-CAP-PROCURE"
+      ],
+      "claim_refs": [
+        "AV-FUEL",
+        "AV-SAF",
+        {
+          "review_source": "V3-UK-SAF"
+        }
+      ],
+      "programme_ids": [
+        "AV-PROG-FUEL"
+      ],
+      "supplier_ids": [],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-EJ-OUTCOMES",
+      "label": "Service & economic outcomes",
+      "purpose": "Inspect dated operating and financial measures. A half-year result is not a full-year comparator or an AI attribution study.",
+      "category": "Measured outcomes",
+      "icon": "chart",
+      "resource_ids": [
+        "AV-CAP-SERVICE",
+        "AV-CAP-NETWORK"
+      ],
+      "claim_refs": [
+        {
+          "review_source": "V3-EJ-H126"
+        },
+        "AV-PROFIT"
+      ],
+      "programme_ids": [
+        "AV-PROG-HOLIDAYS"
+      ],
+      "supplier_ids": [],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    }
+  ],
+  "metrics": {
+    "industry": [
+      {
+        "id": "VI-AV-REVENUE",
+        "label": "Global airline revenue forecast",
+        "claim_refs": [
+          "AV-ECON"
+        ],
+        "measure": "quote",
+        "pattern": "\\$(?P<value>[0-9]+(?:\\.[0-9]+)?) trillion",
+        "unit": "USD trillion revenue forecast",
+        "scope": "Global airlines; forecast, not actual"
+      },
+      {
+        "id": "VI-AV-JOURNEYS",
+        "label": "Airport passenger journeys",
+        "claim_refs": [
+          "AV-MARKET"
+        ],
+        "measure": "quote",
+        "pattern": "(?P<value>[0-9]+(?:\\.[0-9]+)?)m passengers",
+        "unit": "million passenger journeys",
+        "scope": "UK + Crown Dependency airports; not unique people"
+      }
+    ],
+    "enterprise": [
+      {
+        "id": "VI-EJ-OTP",
+        "label": "On-time performance",
+        "claim_refs": [
+          {
+            "review_source": "V3-EJ-H126",
+            "contains": "On-time"
+          }
+        ],
+        "measure": "quote",
+        "pattern": "On-time performance: (?P<value>[0-9]+(?:\\.[0-9]+)?)%",
+        "unit": "% on-time performance",
+        "scope": "easyJet H1 FY2026; not AI causal impact"
+      },
+      {
+        "id": "VI-EJ-LOSS",
+        "label": "Headline loss before tax",
+        "claim_refs": [
+          {
+            "review_source": "V3-EJ-H126",
+            "contains": "headline"
+          }
+        ],
+        "measure": "quote",
+        "pattern": "£\\((?P<value>[0-9,]+(?:\\.[0-9]+)?)\\) million",
+        "unit": "GBP million headline loss",
+        "scope": "H1 FY2026; do not compare with full-year profit"
+      }
+    ]
+  },
+  "events": [
+    {
+      "id": "VI-EJ-SAF",
+      "label": "SAF policy trajectory",
+      "lane": "Regulation",
+      "claim_refs": [
+        "AV-SAF"
+      ],
+      "temporal_kind": "announced commitment",
+      "date_basis": "claim-years",
+      "date_selector": "AV-SAF",
+      "date_needle": "2030",
+      "affected_ids": [
+        "AV-CAP-SUSTAIN"
+      ],
+      "readiness": "Not established",
+      "consequence": "UK fuel-supply policy context. Determine the applicable legal entity, ownership/supply threshold and reporting boundary; no airline non-compliance is asserted."
+    },
+    {
+      "id": "VI-EJ-ECON",
+      "label": "H1 operating / financial baseline",
+      "lane": "Economics",
+      "claim_refs": [
+        {
+          "review_source": "V3-EJ-H126"
+        }
+      ],
+      "temporal_kind": "historical fact",
+      "date_basis": "claim-date",
+      "date_selector": {
+        "review_source": "V3-EJ-H126",
+        "contains": "headline"
+      },
+      "date_needle": "31 March 2026",
+      "affected_ids": [
+        "AV-CAP-NETWORK",
+        "AV-CAP-SERVICE"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    },
+    {
+      "id": "VI-EJ-ICC",
+      "label": "AI-equipped ICC announcement",
+      "lane": "Technology",
+      "claim_refs": [
+        "AV-ICC"
+      ],
+      "temporal_kind": "historical disclosure",
+      "date_basis": "publication",
+      "date_selector": "SRC-AV-ICC",
+      "date_needle": null,
+      "affected_ids": [
+        "AV-CAP-OPS",
+        "AV-PROG-ICC"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    },
+    {
+      "id": "VI-EJ-OFFER",
+      "label": "Proposed acquisition timetable",
+      "lane": "Competition",
+      "claim_refs": [
+        "AV-OWNERSHIP"
+      ],
+      "temporal_kind": "announced commitment",
+      "date_basis": "claim-years",
+      "date_selector": "AV-OWNERSHIP",
+      "date_needle": "Q1 calendar 2027",
+      "affected_ids": [
+        "AV-CAP-PROCURE"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    },
+    {
+      "id": "VI-EJ-CHAT",
+      "label": "Conversational discovery announcement",
+      "lane": "AI disruption",
+      "claim_refs": [
+        "AV-CHAT"
+      ],
+      "temporal_kind": "historical disclosure",
+      "date_basis": "publication",
+      "date_selector": "SRC-AV-CHAT26",
+      "date_needle": null,
+      "affected_ids": [
+        "AV-CAP-DIGITAL"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    },
+    {
+      "id": "VI-EJ-WIFI",
+      "label": "Connectivity rollout plan",
+      "lane": "Transformation",
+      "claim_refs": [
+        "AV-WIFI"
+      ],
+      "temporal_kind": "announced commitment",
+      "date_basis": "claim-years",
+      "date_selector": "AV-WIFI",
+      "date_needle": "first half 2027 to early 2028",
+      "affected_ids": [
+        "AV-PROG-CONNECT"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    },
+    {
+      "id": "VI-EJ-MRO-EVENT",
+      "label": "S.FP+ launch-customer disclosure",
+      "lane": "Suppliers & contracts",
+      "claim_refs": [
+        "AV-MRO"
+      ],
+      "temporal_kind": "historical disclosure",
+      "date_basis": "publication",
+      "date_selector": "SRC-AV-SFP",
+      "date_needle": null,
+      "affected_ids": [
+        "AV-CAP-MRO",
+        "AV-SUP-AIRBUS"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    },
+    {
+      "id": "VI-EJ-EXPIRY",
+      "label": "Contract expiry / workshare",
+      "lane": "Suppliers & contracts",
+      "claim_refs": [],
+      "temporal_kind": "unknown",
+      "date_basis": "unknown",
+      "date_selector": null,
+      "date_needle": null,
+      "affected_ids": [
+        "AV-SUP-AIRBUS"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    },
+    {
+      "id": "VI-EJ-AI-FUTURE",
+      "label": "Discovery disintermediation",
+      "lane": "AI disruption",
+      "claim_refs": [
+        "AV-CHAT"
+      ],
+      "temporal_kind": "scenario",
+      "date_basis": "unknown",
+      "date_selector": null,
+      "date_needle": null,
+      "affected_ids": [
+        "AV-CAP-DIGITAL"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    }
+  ],
+  "ai_scenarios": [
+    {
+      "id": "VI-AV-AI-DISCOVERY",
+      "label": "From search to customer relationship",
+      "purpose": "Conversational discovery may change distribution economics. Current ChatGPT discovery is evidence, not proof of disintermediation or a competing airline.",
+      "claim_refs": [
+        "AV-CHAT"
+      ],
+      "affected_ids": [
+        "AV-CAP-DIGITAL",
+        "AV-CAP-HOLIDAYS"
+      ],
+      "defence": "Brand, network, booking and fulfilment remain relevant; relative advantage and customer migration are unverified."
+    },
+    {
+      "id": "VI-AV-AI-OPS",
+      "label": "More responsive operations?",
+      "purpose": "Predictive and generative tools may change operational economics. Separate aggregate performance from causal AI contribution.",
+      "claim_refs": [
+        "AV-ICC",
+        {
+          "review_source": "V3-EJ-H126",
+          "contains": "On-time"
+        }
+      ],
+      "affected_ids": [
+        "AV-CAP-OPS",
+        "AV-CAP-SERVICE"
+      ],
+      "defence": "Existing ICC, maintenance and crew capabilities are not a greenfield opportunity; residual problems need validation."
+    }
+  ],
+  "activity_flows": [
+    {
+      "source": "VI-EJ-BOOK",
+      "target": "VI-EJ-PLAN",
+      "label": "Booking demand informs network and pricing decisions in the conceptual airline model",
+      "state": "Conceptual activity relationship; not verified enterprise topology",
+      "illustrated": true
+    },
+    {
+      "source": "VI-EJ-PLAN",
+      "target": "VI-EJ-FLEET",
+      "label": "Schedule choices shape aircraft and crew requirements",
+      "state": "Conceptual activity relationship; not verified enterprise topology",
+      "illustrated": true
+    },
+    {
+      "source": "VI-EJ-FLEET",
+      "target": "VI-EJ-MRO",
+      "label": "Aircraft availability depends on maintenance; supplier implementation remains source-specific",
+      "state": "Conceptual activity relationship; not verified enterprise topology",
+      "illustrated": true
+    },
+    {
+      "source": "VI-EJ-BOOK",
+      "target": "VI-EJ-TURN",
+      "label": "Passengers move from booking into airport and departure activities",
+      "state": "Conceptual activity relationship; not verified enterprise topology",
+      "illustrated": true
+    },
+    {
+      "source": "VI-EJ-DATA",
+      "target": "VI-EJ-RECOVER",
+      "label": "Data capabilities may support disruption recovery; no causal outcome is asserted",
+      "state": "Conceptual activity relationship; not verified enterprise topology",
+      "illustrated": false
+    },
+    {
+      "source": "VI-EJ-RECOVER",
+      "target": "VI-EJ-OUTCOMES",
+      "label": "Recovery affects service experience; measured enterprise impact remains unknown",
+      "state": "Conceptual activity relationship; not verified enterprise topology",
+      "illustrated": false
+    }
+  ]
+}

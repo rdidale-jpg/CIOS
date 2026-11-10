@@ -129,3 +129,9 @@ def validate_visual_spec(spec, data, routes, priorities=None):
     for r in spec['relationships']:
         if r!=expected_edges.get(r['id']):raise ValueError('Invented or upgraded visual relationship')
     return True
+
+
+def build_intelligence_specs(data, review=None, profile=None, as_of=None):
+    """Opt-in derived visual extension; the original six-spec contract is unchanged."""
+    from .visual_intelligence_specs import build_intelligence_specs as build
+    return build(data, review, profile, as_of)

@@ -247,7 +247,7 @@
                 "frame": [
                   "tests/test_flora_banking_industry_reinvention_increment42.py",
                   "test_industry_opportunity_totals_reconcile_to_account_opportunities",
-                  "assert f\"Flora working estimate £{portfolio_mid}m\" in html or f\"Flora working estimate: £{portfolio_mid}m\" in html"
+                  "assert f\"Flora working estimate \u00a3{portfolio_mid}m\" in html or f\"Flora working estimate: \u00a3{portfolio_mid}m\" in html"
                 ],
                 "headline_sha256": "6e107ffbf087de6295ebe4094573d241d885786a86b9db9fc8d3a66fb2b88344"
               },
@@ -2579,7 +2579,7 @@
                 "frame": [
                   "tests/test_flora_banking_industry_reinvention_increment42.py",
                   "test_industry_opportunity_totals_reconcile_to_account_opportunities",
-                  "assert f\"Flora working estimate £{portfolio_mid}m\" in html or f\"Flora working estimate: £{portfolio_mid}m\" in html"
+                  "assert f\"Flora working estimate \u00a3{portfolio_mid}m\" in html or f\"Flora working estimate: \u00a3{portfolio_mid}m\" in html"
                 ],
                 "headline_sha256": "6e107ffbf087de6295ebe4094573d241d885786a86b9db9fc8d3a66fb2b88344"
               },
@@ -6312,6 +6312,111 @@
           "selections": [
             [
               "tests/test_flora_enterprise_understanding.py"
+            ]
+          ]
+        },
+        "visual_intelligence": {
+          "cases": {
+            "tests/test_flora_visual_intelligence.py::test_pinned_specs_are_reproducible_and_inputs_are_read_only[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_pinned_specs_are_reproducible_and_inputs_are_read_only[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_all_flagship_pages_and_ai_lens_keep_canonical_navigation[banking-lloyds]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_all_flagship_pages_and_ai_lens_keep_canonical_navigation[aviation-easyjet]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_every_family_reaches_actual_evidence_and_resolvable_fragment[banking-lloyds]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_every_family_reaches_actual_evidence_and_resolvable_fragment[aviation-easyjet]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_original_six_spec_api_and_explicit_lenses_are_preserved": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_metrics_do_not_mix_enterprise_and_industry_or_forecast_and_actual": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_numeric_data_without_matching_passage_is_not_rendered": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_index_only_or_unreviewed_evidence_cannot_supply_a_metric": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_seven_lanes_preserve_unknown_dates_and_scenario_uncertainty[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_seven_lanes_preserve_unknown_dates_and_scenario_uncertainty[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_timeline_does_not_turn_publication_dates_or_plans_into_go_live": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_missing_date_support_does_not_keep_a_profile_authored_date": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_supplier_activity_associations_do_not_claim_incumbency_or_causality[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_supplier_activity_associations_do_not_claim_incumbency_or_causality[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_documented_historical_supplier_keeps_period_and_unknown_current_scope": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_contradictions_are_visible_not_erased": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_new_supplier_renders_without_drawing_changes_and_without_verified_relationship": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_research_review_change_alters_visual_status_without_renderer_edits": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_principal_data_states_remain_inspectable[sparse]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_principal_data_states_remain_inspectable[dense]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_principal_data_states_remain_inspectable[missing-evidence]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_principal_data_states_remain_inspectable[no-dates]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_principal_data_states_remain_inspectable[competing]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_spec_validator_rejects_tampered_dates[start_year-2099]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_spec_validator_rejects_tampered_dates[date_label-Invented 2099]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_spec_validator_rejects_tampered_metric_and_unsupported_flow": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_ai_lens_never_asserts_entrant_names_displacement_or_predicted_dates[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_ai_lens_never_asserts_entrant_names_displacement_or_predicted_dates[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_accessible_text_navigation_escaping_and_no_write_script": {
+              "status": "passed"
+            },
+            "tests/test_flora_visual_intelligence.py::test_invalid_profile_or_future_snapshot_is_rejected": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_visual_intelligence.py"
             ]
           ]
         }
