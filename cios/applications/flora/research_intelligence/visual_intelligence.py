@@ -5,6 +5,7 @@ comes from the generated spec, never from a bitmap or facts embedded in drawing 
 """
 from html import escape as e
 import re
+from textwrap import wrap
 from .visual_templates import text
 
 STYLE="""
@@ -80,8 +81,11 @@ def _pick(spec,n,x,y,w,h,icon=True):
     target=_id(spec,n);short='Scope unresolved' if n['conflict_ids'] else 'Conceptual activity' if n['category']=='Activity' else n['category']
     body=f"<rect class='vi-card' x='{x}' y='{y}' width='{w}' height='{h}' rx='15' fill='#fffdf8' stroke='#b5c7b8'/>"
     if icon:body+=_icon(n['icon'],x+14,y+18,.8)
-    body+=text(x+(50 if icon else 16),y+28,n['label'],width=int((w-(64 if icon else 30))/8),size=15)
-    body+=text(x+(50 if icon else 16),y+h-15,short,width=int((w-60)/6),size=10,color='#5a6f61',bold=False)
+    lines=wrap(n['label'],width=int((w-(64 if icon else 30))/8),break_long_words=True,break_on_hyphens=False) or ['']
+    labels=lines[:2]
+    if len(lines)>2:labels[-1]=labels[-1].rstrip()+'…'
+    body+=''.join(text(x+(50 if icon else 16),y+28+i*20,label,width=1000,size=15) for i,label in enumerate(labels))
+    body+=text(x+(50 if icon else 16),y+h-14,short,width=int((w-40)/6),size=11,color='#5a6f61',bold=False)
     return f"<a class='vi-node' data-node-id='{e(n['id'],quote=True)}' data-state='{e(n['state'],quote=True)}' data-vi-pick='{target}' data-label='{e(n['label'],quote=True)}' href='#{target}' aria-controls='{target}' aria-label='{e(n['label']+' — inspect purpose and evidence',quote=True)}'><title>{e(n['label'])} · {e(n['state'])}</title>{body}</a>"
 
 
@@ -107,9 +111,9 @@ def _scene(spec):
     else:
         shapes=_art(spec['illustration'],ns)
         for i,n in enumerate(spec['nodes']):
-            x=25+(i%5)*250;y=325+(i//5)*89
-            shapes+=_pick(spec,n,x,y,230,72,False)
-        height=345+((len(spec['nodes'])+4)//5)*89
+            x=25+(i%5)*250;y=325+(i//5)*104
+            shapes+=_pick(spec,n,x,y,230,88,False)
+        height=345+((len(spec['nodes'])+4)//5)*104
     return (f"<div class='vi-scene' tabindex='0' aria-label='Pan {e(spec['title'],quote=True)}; equivalent text links follow'><svg viewBox='0 0 1280 {height}' role='group' aria-labelledby='{ns}-title {ns}-desc' style='color:#234f41'><title id='{ns}-title'>{e(spec['title'])}</title><desc id='{ns}-desc'>Conceptual sector illustration with selectable research-backed roles. Marker sizes are equal, not a market ranking. No implied ownership or causal connections.</desc><rect width='1280' height='{height}' fill='#f6f3e8'/>{shapes}</svg></div>")
 
 

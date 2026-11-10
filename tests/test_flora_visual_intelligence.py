@@ -254,6 +254,10 @@ def test_accessible_text_navigation_escaping_and_no_write_script():
     assert 'prefers-reduced-motion:reduce' in html and ':focus-visible' in html
     assert 'aria-live' in html and 'innerHTML' not in html and 'fetch(' not in html
     assert 'tabindex=' in html and 'data-vi-pick' in html
+    p['actors'][0]['label']='A very long synthetic research participant name needing bounded labels'
+    html=render_intelligence(build_intelligence_specs(d,r,p,ASOF)['industry-signature'])
+    assert p['actors'][0]['label']+' — inspect purpose and evidence' in html
+    assert '<title>'+p['actors'][0]['label'] in html and '…' in html
 
 
 def test_invalid_profile_or_future_snapshot_is_rejected():
