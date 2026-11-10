@@ -6419,6 +6419,102 @@
               "tests/test_flora_visual_intelligence.py"
             ]
           ]
+        },
+        "living_industry_maps": {
+          "cases": {
+            "tests/test_flora_living_industry_maps.py::test_map_is_pinned_repeatable_read_only_and_canonical_ids_retained[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_map_is_pinned_repeatable_read_only_and_canonical_ids_retained[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_each_layer_uses_one_map_and_contextual_inspection_with_original_routes[overview-banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_each_layer_uses_one_map_and_contextual_inspection_with_original_routes[overview-aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_each_layer_uses_one_map_and_contextual_inspection_with_original_routes[ai-disruption-banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_each_layer_uses_one_map_and_contextual_inspection_with_original_routes[ai-disruption-aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_each_layer_uses_one_map_and_contextual_inspection_with_original_routes[regulation-banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_each_layer_uses_one_map_and_contextual_inspection_with_original_routes[regulation-aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_every_major_activity_has_meaningful_scoped_content_and_evidence_link[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_every_major_activity_has_meaningful_scoped_content_and_evidence_link[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_banking_and_aviation_express_different_mechanics": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_industry_metrics_keep_definition_scope_and_period_without_false_market_size": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_enterprise_metric_cannot_become_industry_scale": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_unreviewed_or_missing_measurement_does_not_become_zero_or_verified": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_flows_and_role_placement_never_prove_contracts_or_causality[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_flows_and_role_placement_never_prove_contracts_or_causality[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_dated_supplier_relationship_is_specific_historical_and_not_current_incumbency": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_reviewed_relationship_changes_update_marker_without_drawing_edits": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_conflicts_remain_visible_and_are_not_erased_by_the_industry_model": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_ai_and_regulation_are_exposure_mappings_with_real_timeline_links_only[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_ai_and_regulation_are_exposure_mappings_with_real_timeline_links_only[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_presentation_mapping_cannot_invent_authoritative_topology_or_invalid_state[scope]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_presentation_mapping_cannot_invent_authoritative_topology_or_invalid_state[flow]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_presentation_mapping_cannot_invent_authoritative_topology_or_invalid_state[position]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_presentation_mapping_cannot_invent_authoritative_topology_or_invalid_state[duplicate]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_presentation_mapping_cannot_invent_authoritative_topology_or_invalid_state[empty]": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_complete_derived_spec_drift_is_rejected": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_labels_are_escaped_and_accessible_interaction_and_print_are_explicit": {
+              "status": "passed"
+            },
+            "tests/test_flora_living_industry_maps.py::test_history_is_append_only_and_existing_enterprise_visual_profiles_unchanged": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_living_industry_maps.py"
+            ]
+          ]
         }
       }
     }

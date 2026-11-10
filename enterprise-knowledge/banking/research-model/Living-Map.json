@@ -1,0 +1,219 @@
+{
+  "version": 2,
+  "domain": "banking",
+  "title": "The banking system.",
+  "subtitle": "Money becomes funding, credit and payments. Controls and infrastructure make the system work.",
+  "activities": [
+    {
+      "id": "VI-LBG-CHANNELS",
+      "label": "Customers & distribution",
+      "position": [
+        180,
+        230
+      ],
+      "illustration": "people",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Help customers discover, access and use propositions across digital and assisted channels.",
+      "pressure": "Funding, credit losses and control obligations constrain value creation; magnitude and enterprise readiness require evidence.",
+      "regulatory": false
+    },
+    {
+      "id": "VI-LBG-SAVE",
+      "label": "Deposits & funding",
+      "position": [
+        560,
+        210
+      ],
+      "illustration": "vault",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Safeguard balances and connect customer relationships to the funding model; the mix and economics need evidence.",
+      "pressure": "Funding, credit losses and control obligations constrain value creation; magnitude and enterprise readiness require evidence.",
+      "regulatory": false
+    },
+    {
+      "id": "VI-LBG-LEND",
+      "label": "Lending & credit",
+      "position": [
+        1000,
+        230
+      ],
+      "illustration": "home",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Assess risk and provide credit; product profitability and current decisions are not inferred from the activity map.",
+      "pressure": "Funding, credit losses and control obligations constrain value creation; magnitude and enterprise readiness require evidence.",
+      "regulatory": false
+    },
+    {
+      "id": "VI-LBG-PAY",
+      "label": "Payments & settlement",
+      "position": [
+        1190,
+        510
+      ],
+      "illustration": "transfer",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Move money reliably across customer journeys; transaction-system ownership remains to be mapped.",
+      "pressure": "Funding, credit losses and control obligations constrain value creation; magnitude and enterprise readiness require evidence.",
+      "regulatory": true
+    },
+    {
+      "id": "VI-LBG-CONTROL",
+      "label": "Risk, fraud & compliance",
+      "position": [
+        990,
+        780
+      ],
+      "illustration": "shield",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Protect customers and the bank through risk decisions, fraud controls and governance.",
+      "pressure": "Funding, credit losses and control obligations constrain value creation; magnitude and enterprise readiness require evidence.",
+      "regulatory": true
+    },
+    {
+      "id": "VI-LBG-RESILIENCE",
+      "label": "Service & resilience",
+      "position": [
+        650,
+        770
+      ],
+      "illustration": "tower",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Keep important services available and meet applicable obligations; entity readiness is not established by an industry deadline.",
+      "pressure": "Funding, credit losses and control obligations constrain value creation; magnitude and enterprise readiness require evidence.",
+      "regulatory": true
+    },
+    {
+      "id": "VI-LBG-PLATFORMS",
+      "label": "Core platforms",
+      "position": [
+        670,
+        470
+      ],
+      "illustration": "server",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Enable the banking activities through core systems and modernisation. Exact application populations and dependencies remain unresolved.",
+      "pressure": "Funding, credit losses and control obligations constrain value creation; magnitude and enterprise readiness require evidence.",
+      "regulatory": true
+    },
+    {
+      "id": "VI-LBG-DATA",
+      "label": "Data, cloud & AI",
+      "position": [
+        280,
+        590
+      ],
+      "illustration": "cloud",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Support decisions, controls and customer journeys. Platform presence does not prove adoption, causal benefit or an unmet requirement.",
+      "pressure": "Funding, credit losses and control obligations constrain value creation; magnitude and enterprise readiness require evidence.",
+      "regulatory": false
+    },
+    {
+      "id": "VI-LBG-CHANGE",
+      "label": "People & operating change",
+      "position": [
+        210,
+        820
+      ],
+      "illustration": "spark",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Translate strategy into operational change; ownership, allocation and net outcomes need validation.",
+      "pressure": "Funding, credit losses and control obligations constrain value creation; magnitude and enterprise readiness require evidence.",
+      "regulatory": false
+    }
+  ],
+  "flows": [
+    {
+      "id": "LM-banking-FLOW-1",
+      "source": "VI-LBG-CHANNELS",
+      "target": "VI-LBG-SAVE",
+      "kind": "Money",
+      "label": "Deposits and funding enter the banking system",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    },
+    {
+      "id": "LM-banking-FLOW-2",
+      "source": "VI-LBG-SAVE",
+      "target": "VI-LBG-LEND",
+      "kind": "Money",
+      "label": "Funding supports credit subject to capital and liquidity constraints",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    },
+    {
+      "id": "LM-banking-FLOW-3",
+      "source": "VI-LBG-CHANNELS",
+      "target": "VI-LBG-PAY",
+      "kind": "Services",
+      "label": "Customers initiate payments and service requests",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    },
+    {
+      "id": "LM-banking-FLOW-4",
+      "source": "VI-LBG-LEND",
+      "target": "VI-LBG-CONTROL",
+      "kind": "Risk",
+      "label": "Credit exposure creates risk and control requirements",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    },
+    {
+      "id": "LM-banking-FLOW-5",
+      "source": "VI-LBG-PLATFORMS",
+      "target": "VI-LBG-PAY",
+      "kind": "Information",
+      "label": "Platforms support transaction processing in the conceptual model",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    },
+    {
+      "id": "LM-banking-FLOW-6",
+      "source": "VI-LBG-DATA",
+      "target": "VI-LBG-PLATFORMS",
+      "kind": "Information",
+      "label": "Data supports decisions and platform services",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    },
+    {
+      "id": "LM-banking-FLOW-7",
+      "source": "VI-LBG-CONTROL",
+      "target": "VI-LBG-RESILIENCE",
+      "kind": "Control",
+      "label": "Control and resilience obligations constrain service delivery",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    }
+  ],
+  "participant_roles": {
+    "VI-BK-LLOYDS": "VI-LBG-LEND",
+    "VI-BK-BARCLAYS": "VI-LBG-LEND",
+    "VI-BK-NATWEST": "VI-LBG-LEND",
+    "VI-BK-HSBC": "VI-LBG-LEND",
+    "VI-BK-SANTANDER": "VI-LBG-LEND",
+    "VI-BK-OVERSIGHT": "VI-LBG-CONTROL",
+    "VI-BK-TECH": "VI-LBG-PLATFORMS",
+    "VI-BK-CUSTOMERS": "VI-LBG-CHANNELS",
+    "VI-BK-RAILS": "VI-LBG-PAY",
+    "VI-BK-CHALLENGERS": "VI-LBG-LEND"
+  },
+  "metrics": [
+    {
+      "id": "LM-UK-RWA",
+      "label": "UK banking risk-weighted assets",
+      "claim_refs": [
+        {
+          "review_source": "VI2-BOE-CAPITAL-Q226",
+          "contains": "risk-weighted"
+        }
+      ],
+      "measure": "quote",
+      "pattern": "to £(?P<value>[0-9,]+) billion",
+      "unit": "GBP billion · regulatory risk-weighted exposure",
+      "scope": "Total UK banking sector, 2026 Q2; not total assets, market value or revenue"
+    }
+  ],
+  "scale_gaps": "Banking-only employment, GVA, market shares and comparable current actor sizes remain unverified.",
+  "weighting": "Activity/illustration areas show distinct business roles, not measured importance. Participant labels use equal typography; there is no quantitative ranking.",
+  "participant_locations": {
+    "VI-BK-OVERSIGHT": [
+      1130,
+      105
+    ]
+  }
+}

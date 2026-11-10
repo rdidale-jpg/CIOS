@@ -97,23 +97,26 @@ def enterprise_cards(data):
 
 
 def industry_page(lens='overview',headers=None,domain='banking'):
-    choices=[('overview','Overview'),('pestle','PESTLE'),('porter','Five Forces'),('value-chain','Value chain'),('ai-disruption','AI disruption')]
+    choices=[('overview','Overview'),('pestle','PESTLE'),('porter','Five Forces'),('value-chain','Value chain'),('ai-disruption','AI disruption'),('regulation','Regulation & resilience')]
     if lens not in dict(choices):raise ValueError('Unknown industry lens')
     d=load_assessment() if domain=='banking' else load_assessment(domain);r=routes_for(d);root=r['evidence'].rsplit('/',1)[0]
     nav="<nav class='ux-tabs' aria-label='Industry views'>"+''.join(f"<a href='{r['industry']}?lens={k}' {'aria-current=page' if k==lens else ''}>{label}</a>" for k,label in choices)+"</nav>"
     short=d['industry_name'].replace('UK ','').replace('Commercial ','')
     body=breadcrumb(data=d)+f"<section class='ux-hero' id='content'><p class='eyebrow'>{e(d['industry_name'])} / Industry Twin</p><h1>{e(short)}.<br>From forces to commercial relevance.</h1><p>One view of industry structure, supported disclosures and the enterprise questions they create.</p><a href='{r['enterprise']}'>Explore {e(d['enterprise_name'].replace(' Banking Group',''))} →</a><a href='/opportunities#opportunities-{domain}'>Find opportunity hypotheses →</a></section>"+nav
-    if lens in ('overview','ai-disruption'):
-        from .visual_intelligence import render_intelligence
-        from .visual_specs import build_intelligence_specs
-        body=breadcrumb(data=d)+f"<header class='vi-page-head' id='content'><p class='ux-kicker'>Industry Twin / {e(d['industry_name'])}</p><h1>{e(short)}. The whole landscape.</h1><p>Understand the participants, explore the structural forces, investigate the evidence.</p></header>"+nav+render_intelligence(build_intelligence_specs(d)['industry-signature'],lens)
+    living=lens in ('overview','ai-disruption','regulation')
+    if living:
+        from .living_map import render_living_map
+        from .living_map_specs import build_living_map
+        body=breadcrumb(data=d)+f"<header class='lm-page-head' id='content'><p class='ux-kicker'>Industry Twin / {e(d['industry_name'])}</p><h1>{e(short)}</h1></header>"+nav+render_living_map(build_living_map(d),lens)
+        body+="<details class='lm-support'><summary>03 / Investigate — frameworks, findings, enterprises & commercial research</summary>"
     if lens=='overview':body+="<div class='ux-section-head'><h2>Key findings</h2><span>Supported disclosures · retain their reporting periods</span></div>"+claim_cards(d,d['industry_twin_id'])
     body+="<p class='ux-disclosure'>Analyst interpretation · conceptual frameworks, not verified enterprise ownership or buying demand.</p>"
-    kind={'overview':'pestle','pestle':'pestle','porter':'five-forces','value-chain':'value-chain','ai-disruption':'pestle'}[lens];body+=("<details><summary>Existing PESTLE diagram</summary>"+render_visual(specs(d)[kind])+"</details>" if lens in ('overview','ai-disruption') else render_visual(specs(d)[kind]))
-    rows=[f for f in d['frameworks'] if f['lens']=={'overview':'pestle','pestle':'pestle','porter':'porter','value-chain':'value-chain','ai-disruption':'pestle'}[lens]]
+    kind={'overview':'pestle','pestle':'pestle','porter':'five-forces','value-chain':'value-chain','ai-disruption':'pestle','regulation':'pestle'}[lens];body+=("<details><summary>Existing PESTLE diagram</summary>"+render_visual(specs(d)[kind])+"</details>" if living else render_visual(specs(d)[kind]))
+    rows=[f for f in d['frameworks'] if f['lens']=={'overview':'pestle','pestle':'pestle','porter':'porter','value-chain':'value-chain','ai-disruption':'pestle','regulation':'pestle'}[lens]]
     body+="<details class='ux-fold'><summary>Interpretation, affected capabilities & evidence</summary>"+''.join(f"<article class='ux-claim'><h3>{e(f['title'])}</h3><p>{e(f['assessment'])}</p><a href='{r['nodes']}/{f['id']}'>Follow capabilities, evidence & opportunities →</a></article>" for f in rows)+"</details>"
     body+="<div class='ux-section-head'><h2>Enterprise landscape</h2><a href='/enterprises'>All enterprises →</a></div>"+enterprise_cards(d)+"<h2>Commercial implications</h2>"+opportunity_cards(d)+provenance_notice(d)+research_fold(d,d['industry_twin_id'])
     body+=f"<details><summary>Supporting research & legacy intelligence</summary><p><a href='{root}'>Detailed research entry</a> · <a href='{r['industry']}/visual-specs'>Structured visual specifications (JSON)</a></p>"+("<p><a href='/flora/banking'>Historical Banking portfolio</a> · <a href='/flora/banking/explorer'>Earlier Explorer</a></p>" if domain=='banking' else '')+"</details>"
+    if living:body+='</details>'
     return page(d['industry_name']+' Industry Twin',body,headers,canonical=r['industry'])
 
 
