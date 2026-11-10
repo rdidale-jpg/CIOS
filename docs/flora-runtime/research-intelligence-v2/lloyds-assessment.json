@@ -600,7 +600,45 @@
     "Contract award / renewal / expiry",
     "Measured programme-to-business outcome"
   ],
-  "new_evidence_acquired": false,
+  "new_evidence_acquired": true,
   "canonical_mutation": false,
-  "automatic_qualification": false
+  "automatic_qualification": false,
+  "reviewed_cycle_proposal": {
+    "id": "RP-410b2c55f55dd7e30455d45e",
+    "task_id": "G-AI-BENEFITS",
+    "proposed_effect": "new",
+    "target_claim_id": null,
+    "rationale": "Adds a scoped company-reported Athena search-time metric from the existing announcement. These do not prove net Group-wide realised benefits, incremental external spend or customer demand.",
+    "source_id": "RS-4bcf311a6c32bfe80807",
+    "equivalent_existing_source_ids": [
+      "SRC-LBG-AI"
+    ],
+    "original_bytes_archived": false,
+    "text_sha256": "fb258968a2968cbf42d3a99d453eb9a5744bc80118128b10909e241904c03f55",
+    "raw_sha256": null,
+    "status": "Review required; no automatic finding change",
+    "remaining_checks": [
+      "Enterprise/scope/period entailment",
+      "Atomic observation and contrary evidence",
+      "Source authorship and independence",
+      "Governed Evidence acceptance before Observation persistence"
+    ],
+    "source": {
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/ai-driven-benefits-2026.html",
+      "publication_date": "2026-01-29",
+      "retrieved_at": "2026-11-10T08:20:00+00:00",
+      "retrieval_reference": "turn777827view0",
+      "retrieval_extent": "Located passages from directly opened official webpage; original bytes not archived",
+      "limitation": "No customer buying intent, contract, budget or procurement commitment. Publication date unknown where not shown; collection date does not establish publication date."
+    },
+    "passages": [
+      {
+        "segment_id": "RS-4bcf311a6c32bfe80807::199b52456c008eff",
+        "content_hash": "2869616a1253cbc1bdbae8d308f364090fa52eb85cca885b238d6ef0d292e6c6",
+        "source_location": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/ai-driven-benefits-2026.html [Article line621, Athena reported metric]"
+      }
+    ]
+  },
+  "coverage_changed": false,
+  "gaps_closed": []
 }

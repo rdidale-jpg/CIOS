@@ -1,0 +1,29 @@
+{
+  "id": "SRC-V2-EJ-MODEL-20261110",
+  "title": "Business model and customer disruption self-service",
+  "publisher": "easyJet",
+  "url": "https://corporate.easyjet.com/about/business-model/default.aspx",
+  "publication_date": null,
+  "publication_date_evidence": null,
+  "reporting_period": "Undated business-model webpage, observed 2026-11-10",
+  "retrieved_at": "2026-11-10T08:20:00+00:00",
+  "retrieval_url": "https://corporate.easyjet.com/about/business-model/default.aspx",
+  "research_domain": "aviation",
+  "verification": "primary_retrieved",
+  "primary_content_sha256": null,
+  "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/SRC-V2-EJ-MODEL-20261110.txt",
+  "text_sha256": "fa783d06489a132cba8d2035ea5e81f63dd0a8a3bb7e8f42c8f8a857b3f082cd",
+  "content_kind": "reviewed_web_excerpt",
+  "retrieval_method": "approved_web_research_tool",
+  "retrieval_reference": "turn777827view1",
+  "excerpts": [
+    {
+      "locator": "Business model / Customer, line114",
+      "quote": "Disruption management self- service tool (SSDM)"
+    }
+  ],
+  "retrieval_extent": "Located passages from directly opened official webpage; original bytes not archived",
+  "reviewed_by": "Codex focused source review; no independent human review",
+  "review_notes": "Short located excerpts only. No hash of original page bytes is claimed. Company assertions are not independently verified outcomes.",
+  "limitation": "No customer buying intent, contract, budget or procurement commitment. Publication date unknown where not shown; collection date does not establish publication date."
+}

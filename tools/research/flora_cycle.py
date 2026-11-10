@@ -7,7 +7,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-from cios.applications.flora.research_intelligence.cycle import research_plan, run_cycle
+from cios.applications.flora.research_intelligence.cycle import research_plan, run_cycle, acquire
 from cios.applications.flora.research_intelligence.model import load_assessment
 from cios.applications.flora.research_intelligence.registry import enterprise_domain
 from cios.applications.flora.research_intelligence.mission_adapter import manifest, mission_owner
@@ -28,10 +28,9 @@ def main(argv=None):
     plan = research_plan(data, args.as_of, args.limit)
     if not isinstance(submissions, list) or len(submissions) > args.limit:
         raise ValueError('Submissions must be an array within the task budget')
-    from cios.applications.flora.research_intelligence.source_import import import_proposal
-    originals = [import_proposal(s['path'], s['metadata']) for s in submissions]
+    originals = [acquire(s, data) for s in submissions]
     checkpoint = run_cycle(data, args.as_of, submissions, args.limit, previous)
-    if [p['raw_sha256'] for p in checkpoint['waves'][-1]['proposals']] != [s['primary_content_sha256'] for s in originals]:
+    if [(p['raw_sha256'], p['text_sha256']) for p in checkpoint['waves'][-1]['proposals']] != [(s['primary_content_sha256'], s['text_sha256']) for s in originals]:
         raise ValueError('Source changed during acquisition')
     commission = manifest(data, args.as_of, args.limit)
     # Export resume-selected tasks instead of silently commissioning the first wave again.
@@ -52,7 +51,10 @@ def main(argv=None):
     if submissions:
         sources = args.output / 'sources'; sources.mkdir()
         for acquired in originals:
-            (sources / acquired['primary_content_sha256']).write_bytes(acquired['raw'])
+            if acquired['raw'] is not None:
+                (sources / acquired['primary_content_sha256']).write_bytes(acquired['raw'])
+            else:
+                (sources / (acquired['text_sha256'] + '.excerpt.txt')).write_text(acquired['text'])
     print(f"{args.enterprise}: {len(plan['tasks'])} tasks; {len(checkpoint['waves'][-1]['proposals'])} review proposals; CONTINUE. Local output: {args.output}")
     return 0
 

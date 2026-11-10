@@ -14,7 +14,7 @@ from ..enterprise_intelligence.semantic import CandidateClaim, SourceSegment
 from ..memory.models import stable_observation_fingerprint
 from .diagnostic import assess
 from .model import (validate, primary_claim_supported, claim_segment, candidate_claim,
-                    evidence_item)
+                    evidence_item, primary_text)
 from .source_import import import_proposal
 
 # §5.2 of the existing High-Fidelity contract. These selectors detect deficiencies;
@@ -201,6 +201,21 @@ def _checkpoint(previous, data, as_of):
     return deepcopy(previous['waves'])
 
 
+def acquire(submission, data):
+    """Reuse both existing provenance routes without inventing original-file bytes."""
+    if 'source' not in submission:
+        return import_proposal(submission['path'], submission['metadata'])
+    source = deepcopy(submission['source'])
+    if (source.get('research_domain') != data.get('research_domain', 'banking')
+            or source.get('verification') != 'primary_retrieved'
+            or source.get('content_kind') != 'reviewed_web_excerpt'):
+        raise ValueError('Expected same-domain reviewed web excerpt provenance')
+    text = primary_text(source)  # Existing confined path, checksum and provenance validation.
+    return {'metadata': {**source, 'reviewed_quotes': source['excerpts']},
+            'text': text, 'raw': None, 'primary_content_sha256': None,
+            'text_sha256': source['text_sha256']}
+
+
 def run_cycle(data, as_of, submissions=(), limit=3, previous=None):
     """Acquire supplied permitted source files, extract exact passages, propose review.
 
@@ -222,7 +237,7 @@ def run_cycle(data, as_of, submissions=(), limit=3, previous=None):
         if task_id not in selected or task_id in seen_tasks:
             raise ValueError('Evidence must address one selected task per submission')
         seen_tasks.add(task_id)
-        imported = import_proposal(submission['path'], submission['metadata'])
+        imported = acquire(submission, data)
         meta = imported['metadata']
         if date.fromisoformat(meta['retrieved_at'][:10]) > date.fromisoformat(as_of):
             raise ValueError('Acquisition follows research cut-off')
@@ -236,7 +251,7 @@ def run_cycle(data, as_of, submissions=(), limit=3, previous=None):
             raise ValueError('Existing-finding effects require explicit target lineage')
         if effect == 'invalidate' and meta['reporting_period'] != claims[target]['reporting_period']:
             raise ValueError('Incompatible periods cannot invalidate a historical finding')
-        fingerprint = digest({'raw': imported['primary_content_sha256'], 'task': task_id,
+        fingerprint = digest({'raw': imported['primary_content_sha256'], 'text': imported['text_sha256'], 'task': task_id,
                               'target': target, 'effect': effect, 'rationale': submission['rationale'], 'metadata': meta})
         if not 1 <= len(meta['reviewed_quotes']) <= 8:
             raise ValueError('Wave accepts at most eight reviewed passages per source')
@@ -245,10 +260,10 @@ def run_cycle(data, as_of, submissions=(), limit=3, previous=None):
             text = quote['quote']
             if not 20 <= len(text.strip()) <= 4000:
                 raise ValueError('Candidate passages need 20–4000 characters of context')
-            sid = 'RS-' + digest({'url': meta['url'], 'hash': imported['primary_content_sha256']})[:20]
+            sid = 'RS-' + digest({'url': meta['url'], 'hash': imported['primary_content_sha256'] or imported['text_sha256']})[:20]
             segment = SourceSegment(sid + '::' + digest(quote)[:16], sid,
                 quote['locator'], text, hashlib.sha256(text.encode()).hexdigest(),
-                meta['url'] + ' [' + quote['locator'] + ']', 'candidate_intelligence', 'reviewed_supplied_file')
+                meta['url'] + ' [' + quote['locator'] + ']', 'candidate_intelligence', meta.get('content_kind', 'reviewed_supplied_file'))
             obs = stable_observation_fingerprint(data['enterprise_twin_id'], 'research_excerpt', text,
                                                  tasks[task_id]['topic'], meta['reporting_period'])
             candidate = CandidateClaim('RC-' + obs.rsplit('-', 1)[-1][:20], 'research_excerpt', text,
@@ -261,8 +276,10 @@ def run_cycle(data, as_of, submissions=(), limit=3, previous=None):
                 'observation_fingerprint': obs, 'accepted_observation': False})
         proposals.append({'id': 'RP-' + fingerprint[:24], 'task_id': task_id,
             'target_claim_id': target, 'proposed_effect': effect, 'rationale': submission['rationale'],
-            'source_id': sid, 'source_metadata': meta, 'raw_sha256': imported['primary_content_sha256'],
-            'text_sha256': imported['text_sha256'], 'candidates': observations,
+            'source_id': sid, 'equivalent_existing_source_ids': sorted(s['id'] for s in data['sources'] if s['url'] == meta['url']),
+            'source_metadata': meta, 'raw_sha256': imported['primary_content_sha256'],
+            'text_sha256': imported['text_sha256'],
+            'original_bytes_archived': imported['raw'] is not None, 'candidates': observations,
             'supersession': {'predecessor_claim_id': target, 'state': 'Proposed; predecessor retained',
                 'target_reporting_period': claims[target]['reporting_period'] if target else None,
                 'new_reporting_period': meta['reporting_period'],
@@ -271,7 +288,7 @@ def run_cycle(data, as_of, submissions=(), limit=3, previous=None):
             'remaining_checks': ['Enterprise/scope/period entailment', 'Atomic observation and contrary evidence',
                 'Source authorship and independence', 'Governed Evidence acceptance before Observation persistence']})
     wave = {'as_of': as_of, 'selected_task_ids': selected, 'proposals': proposals,
-            'acquisition_status': 'Supplied file(s) reviewed' if proposals else 'Awaiting permitted source imports; no new evidence acquired',
+            'acquisition_status': 'Supplied file(s) or retained web excerpts reviewed' if proposals else 'Awaiting permitted source imports; no new evidence acquired',
             'retained_unknowns': deepcopy(data['gaps']),
             'retained_contradictions': [deepcopy(c) for c in data['claims'] if c['kind'] == 'contradiction'],
             'retained_claim_ids': sorted(claims),
@@ -290,3 +307,17 @@ def run_cycle(data, as_of, submissions=(), limit=3, previous=None):
         'remaining_tasks': [t for t in plan['tasks'] if t['id'] not in attempted | seen_tasks]}
     checkpoint['checkpoint_digest'] = digest(checkpoint)
     return checkpoint
+
+
+def reference_submission(data):
+    """Finite public acquisition example, distinct from changing the Twin overlay."""
+    from .registry import assessment_path
+    source = json.loads((assessment_path(data.get('research_domain', 'banking')).parent /
+                         'Research-Cycle-v2-Source.json').read_text())
+    banking = data['enterprise_twin_id'] == 'BK-ENT-001'
+    return {'task_id': 'G-AI-BENEFITS' if banking else 'AV-G-BASELINE', 'source': source,
+            'effect': 'new', 'target_claim_id': None,
+            'rationale': ('Adds a scoped company-reported Athena search-time metric from the existing announcement. '
+                          'These do not prove net Group-wide realised benefits, incremental external spend or customer demand.'
+                          if banking else 'Official description confirms a self-service response already exists. '
+                          'It does not quantify deflection, disruption cost or improvement; the measured-outcomes gap remains open.')}

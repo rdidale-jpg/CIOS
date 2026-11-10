@@ -212,3 +212,41 @@ def test_html_output_escapes_research_content():
 def test_cutoff_validation_rejects_future_and_prebaseline_research():
     with pytest.raises(ValueError): cycle.coverage(load_assessment(), '2999-01-01')
     with pytest.raises(ValueError): cycle.coverage(load_assessment(), '2020-01-01')
+
+
+@pytest.mark.parametrize('domain', ['banking', 'aviation'])
+def test_real_reference_excerpt_produces_candidate_without_inventing_original_bytes(domain):
+    data = load_assessment(domain); item = cycle.reference_submission(data)
+    result = cycle.run_cycle(data, AS_OF, [item]); proposal = result['waves'][0]['proposals'][0]
+    assert proposal['raw_sha256'] is None and not proposal['original_bytes_archived']
+    assert proposal['source_metadata']['retrieval_method'] == 'approved_web_research_tool'
+    assert proposal['source_metadata']['retrieval_reference']
+    assert proposal['source_metadata']['primary_content_sha256'] is None
+    assert proposal['source_metadata']['text_sha256'] == proposal['text_sha256']
+    assert result['retained_history'] == data
+    assert result['waves'][0]['retained_unknowns'] == data['gaps']
+    assert 'Latest retained primary-source review' in render(data, AS_OF)
+    if domain == 'banking': assert 'SRC-LBG-AI' in proposal['equivalent_existing_source_ids']
+
+
+def test_excerpt_acquisition_rejects_cross_domain_changed_text_and_fake_original_hash():
+    data = load_assessment(); item = cycle.reference_submission(data)
+    for change in ({'research_domain': 'aviation'}, {'text_sha256': '0'*64},
+                   {'primary_content_sha256': '0'*64}, {'text_path': '/etc/passwd'},
+                   {'verification': 'citation_only'}):
+        broken = deepcopy(item); broken['source'].update(change)
+        with pytest.raises(ValueError): cycle.run_cycle(data, AS_OF, [broken])
+
+
+def test_cli_archives_excerpt_as_excerpt_without_fabricated_original_hash(tmp_path):
+    data = load_assessment(); item = cycle.reference_submission(data)
+    submitted = tmp_path / 'submitted.json'; submitted.write_text(json.dumps([item]))
+    output = tmp_path / 'web-excerpt-bundle'
+    proc = subprocess.run([sys.executable, 'tools/research/flora_cycle.py', '--enterprise', 'lloyds',
+        '--as-of', AS_OF, '--submissions', str(submitted), '--output', str(output)], cwd=REPO, capture_output=True, text=True)
+    assert proc.returncode == 0, proc.stderr
+    expected = item['source']['text_sha256']
+    assert [p.name for p in (output / 'sources').iterdir()] == [expected + '.excerpt.txt']
+    assert hashlib.sha256((output / 'sources' / (expected + '.excerpt.txt')).read_bytes()).hexdigest() == expected
+    proposal = json.loads((output / 'checkpoint.json').read_text())['waves'][0]['proposals'][0]
+    assert proposal['raw_sha256'] is None

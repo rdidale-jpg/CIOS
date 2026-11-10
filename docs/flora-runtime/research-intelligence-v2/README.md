@@ -40,7 +40,7 @@ Priority is a transparent research-effort rule, not truth confidence or deal lik
 
 The committed [Lloyds mission](lloyds-mission.json) / [commission](lloyds-commission.md) and [easyJet mission](easyjet-mission.json) / [commission](easyjet-commission.md) are reproducibly generated from the current existing evidence. They are draft research work orders, not issued authority or a new research architecture.
 
-**No new external source was acquired in this increment.** Current executor policy does not permit the primary-publisher domains. No restriction was bypassed and no old source was presented as a new retrieval. Existing reviewed excerpts remain unchanged. The importer supports permitted, reviewer-verified downloaded sources; it does not silently substitute historical material. Strengthen/weaken/invalidate behaviour is demonstrated with explicitly synthetic test files, not invented Lloyds/easyJet findings.
+**Acquisition update:** direct shell networking remains restricted, but the approved web-research tool successfully opened two official pages on 10 November 2026. The real reference cycle now retains a short located Lloyds Athena metric and easyJet SSDM reference as proposed observations. The Lloyds article was published 29 January 2026; easyJet’s page has no verified publication date. These are newly reviewed excerpts, not new publication claims or full original archives. Original page bytes are unavailable and their hashes remain null. Existing snapshots and overlays are unchanged. No network restriction was bypassed. Four proposed-effect behaviours remain explicitly synthetic tests, not invented customer findings.
 
 ## Repeatable local cycle
 
@@ -49,7 +49,7 @@ python tools/research/flora_cycle.py --enterprise lloyds --as-of 2026-11-10 --ou
 python tools/research/flora_cycle.py --enterprise easyjet --as-of 2026-11-10 --output /tmp/easyjet-wave-1
 ```
 
-Use a **new** local output directory each time. Output: `plan.json`, `checkpoint.json`, `mission.json` and generated `commission.md`. No runtime store, environment flag or production configuration is used. Limit is 1–10 tasks (default three), with at most eight located passages of 20–4000 characters per supplied source.
+Use a **new** local output directory each time. The page also exposes a retained public source review, its publication/retrieval distinction and proposed implications. Output: `plan.json`, `checkpoint.json`, `mission.json` and generated `commission.md`. No runtime store, environment flag or production configuration is used. Limit is 1–10 tasks (default three), with at most eight located passages of 20–4000 characters per supplied source.
 
 For acquisition, pass `--submissions /LOCAL/submissions.json`. Its JSON array has one entry per selected task:
 
@@ -59,7 +59,9 @@ For acquisition, pass `--submissions /LOCAL/submissions.json`. Its JSON array ha
 - `effect`: `strengthen`, `weaken`, `invalidate`, or `new`; `target_claim_id` must name an existing **same-enterprise** claim for the first three, and be null for new findings.
 - `rationale`: explicit reviewer reasoning; semantic entailment, atomicity, author authenticity and contrary evidence remain review requirements.
 
-Original supplied bytes are retained under the explicit **local** `sources/` output with content-addressed names. Metadata and located excerpts remain in the checkpoint. Do not commit private research bundles. File hashes establish consistency, not publisher authenticity. A supplied file must not claim a hash of original bytes that are unavailable. Index-only excerpts stay limited until original-source re-verification.
+Alternatively, an entry may supply `source`: the existing reviewed-web-excerpt descriptor (same registered industry, confined public snapshot path, text checksum, official retrieval URL/reference, dated provenance and located `excerpts`). The cycle reuses `model.primary_text`; it rejects cross-domain paths, changed text or a fabricated original-byte hash. The two committed `enterprise-knowledge/{banking,aviation}/research-model/Research-Cycle-v2-Source.json` receipts are working examples. These are candidate acquisition receipts, not additions to the canonical source registry.
+
+Original supplied bytes are retained under the explicit **local** `sources/` output with content-addressed names. Retained web excerpts are archived with an explicit `.excerpt.txt` suffix and null original-byte checksum. Metadata and located excerpts remain in the checkpoint. Same-document receipts retain matching existing source IDs rather than replacing them. Do not commit private research bundles. File hashes establish consistency, not publisher authenticity. A supplied file must not claim a hash of original bytes that are unavailable. Index-only excerpts stay limited until original-source re-verification.
 
 Resume with `--resume /LOCAL/prior/checkpoint.json --output /LOCAL/new-wave`. Previously acquired tasks remain explicitly pending review while the acquisition queue advances; no task or Unknown is automatically declared closed. Prior waves and full original overlay remain retained; altered checkpoint digests, another enterprise, changed baseline or backwards cut-off fail. On a changed baseline, explicitly review/rebase instead of overwriting history. Checkpoint hashes are integrity checks, not authentication. Preserve previous bundles so earlier acquired original files remain addressable.
 
@@ -67,10 +69,12 @@ A new passage produces stable candidate IDs, exact quote hashes/locations, targe
 
 ## Verification and next increment
 
-- Focused cycle tests: 21 identities, including both enterprises, four proposed effects, provenance/quote/cross-scope rejection, bound enforcement, checkpoints/resume, semantic reuse, canonical mission generation, CLI export and existing HTTP routes.
+- Focused cycle tests: 25 identities, including both enterprises, four proposed effects, provenance/quote/cross-scope rejection, bound enforcement, checkpoints/resume, semantic reuse, canonical mission generation, CLI export and existing HTTP routes.
 - An initial full-gate attempt correctly failed on a malformed new-suite selection (pytest received a filename character rather than the required selection list). The list configuration was corrected; no test assertion or inherited exception was relaxed.
 - The CI baseline adds only mandatory passing v2 identities; all pre-existing failure signatures and ten original skip identities/reasons remain unchanged. The runner and strict security comparator are unchanged.
-- Final local established gate: **PASS — 1,012 passed, 57 matched inherited failures, ten original skips; 1,079 unique identities.** All 388 security tests, 21 cycle tests and four diagnostic tests pass. Separately, all 25 CI-policy tests and actionlint pass. Actual draft-candidate hosted status is reported in the PR, not inferred from this local result.
+- Final local established gate: **PASS before the four additional excerpt tests — 1,012 passed, 57 matched inherited failures, ten original skips; 1,079 unique identities.** The final focused suite has 25 cycle tests and four diagnostic tests. The final-candidate full gate is rerun and reported in the PR; no earlier result is attributed to later code. Separately, all 25 CI-policy tests and actionlint pass. Actual draft-candidate hosted status is reported in the PR, not inferred from this local result.
+
+The real reference review adds detail but closes no material gap: Lloyds’ Athena measure is a product-specific company report, not proof of net Group-wide AI benefit; easyJet names an existing disruption self-service response but supplies no measured deflection or cost baseline. No customer budget, supplier award or buying intent follows.
 
 Next: obtain verified original documents for the three selected tasks per enterprise, run those imports, inspect opposing evidence and adjudicate the proposed observations through the existing governed Evidence workflow. Deepen programme→capability→supplier/contract→measured-outcome relationships only when supported. Assign a research operator and integrate these operational exports into an existing authorised Mission Workspace before claiming persistent autonomous RG-002 operation. No extra commercial candidates are needed to demonstrate progress.
 

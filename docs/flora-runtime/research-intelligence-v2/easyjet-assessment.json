@@ -520,7 +520,43 @@
     "Contract award / renewal / expiry",
     "Measured programme-to-business outcome"
   ],
-  "new_evidence_acquired": false,
+  "new_evidence_acquired": true,
   "canonical_mutation": false,
-  "automatic_qualification": false
+  "automatic_qualification": false,
+  "reviewed_cycle_proposal": {
+    "id": "RP-5435cf5f12de48f1c4d6e98e",
+    "task_id": "AV-G-BASELINE",
+    "proposed_effect": "new",
+    "target_claim_id": null,
+    "rationale": "Official description confirms a self-service response already exists. It does not quantify deflection, disruption cost or improvement; the measured-outcomes gap remains open.",
+    "source_id": "RS-36cb85afc612738ebdc9",
+    "equivalent_existing_source_ids": [],
+    "original_bytes_archived": false,
+    "text_sha256": "fa783d06489a132cba8d2035ea5e81f63dd0a8a3bb7e8f42c8f8a857b3f082cd",
+    "raw_sha256": null,
+    "status": "Review required; no automatic finding change",
+    "remaining_checks": [
+      "Enterprise/scope/period entailment",
+      "Atomic observation and contrary evidence",
+      "Source authorship and independence",
+      "Governed Evidence acceptance before Observation persistence"
+    ],
+    "source": {
+      "url": "https://corporate.easyjet.com/about/business-model/default.aspx",
+      "publication_date": null,
+      "retrieved_at": "2026-11-10T08:20:00+00:00",
+      "retrieval_reference": "turn777827view1",
+      "retrieval_extent": "Located passages from directly opened official webpage; original bytes not archived",
+      "limitation": "No customer buying intent, contract, budget or procurement commitment. Publication date unknown where not shown; collection date does not establish publication date."
+    },
+    "passages": [
+      {
+        "segment_id": "RS-36cb85afc612738ebdc9::c8fc8104fbc8bf08",
+        "content_hash": "c9a4f46221c6cca53dc53de96d7a8905c85f35092c88f276074435304b45e4ab",
+        "source_location": "https://corporate.easyjet.com/about/business-model/default.aspx [Business model / Customer, line114]"
+      }
+    ]
+  },
+  "coverage_changed": false,
+  "gaps_closed": []
 }
