@@ -1,0 +1,185 @@
+{
+  "baseline": "5e93023df8b9410fef22a0340095f94530d6e8ad",
+  "browser": "Chromium / Playwright",
+  "data": "Existing public research, disposable local stores, no accounts or demo seeding",
+  "motion": "Reduced motion enabled",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "path": "/industries/banking",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "not applicable"
+    },
+    {
+      "viewport": "desktop",
+      "path": "/industries/aviation",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "not applicable"
+    },
+    {
+      "viewport": "desktop",
+      "path": "/enterprises/lloyds",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "not applicable"
+    },
+    {
+      "viewport": "desktop",
+      "path": "/enterprises/easyjet",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "not applicable"
+    },
+    {
+      "viewport": "desktop",
+      "path": "/enterprises/lloyds?lens=timeline",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "passed"
+    },
+    {
+      "viewport": "desktop",
+      "path": "/enterprises/easyjet?lens=timeline",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "passed"
+    },
+    {
+      "viewport": "tablet",
+      "path": "/industries/banking",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "not applicable"
+    },
+    {
+      "viewport": "tablet",
+      "path": "/industries/aviation",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "not applicable"
+    },
+    {
+      "viewport": "tablet",
+      "path": "/enterprises/lloyds",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "not applicable"
+    },
+    {
+      "viewport": "tablet",
+      "path": "/enterprises/easyjet",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "not applicable"
+    },
+    {
+      "viewport": "tablet",
+      "path": "/enterprises/lloyds?lens=timeline",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "passed"
+    },
+    {
+      "viewport": "tablet",
+      "path": "/enterprises/easyjet?lens=timeline",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "passed"
+    },
+    {
+      "viewport": "narrow",
+      "path": "/industries/banking",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "not applicable"
+    },
+    {
+      "viewport": "narrow",
+      "path": "/industries/aviation",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "not applicable"
+    },
+    {
+      "viewport": "narrow",
+      "path": "/enterprises/lloyds",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "not applicable"
+    },
+    {
+      "viewport": "narrow",
+      "path": "/enterprises/easyjet",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "not applicable"
+    },
+    {
+      "viewport": "narrow",
+      "path": "/enterprises/lloyds?lens=timeline",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "passed"
+    },
+    {
+      "viewport": "narrow",
+      "path": "/enterprises/easyjet?lens=timeline",
+      "status": 200,
+      "no_page_overflow": true,
+      "keyboard_disclosure": true,
+      "evidence_navigation": true,
+      "timeline_filters": "passed"
+    }
+  ],
+  "ai_lenses": "Two scenario cards and capability links per sector across all three viewports",
+  "javascript_disabled": "Native disclosure and equivalent text navigation passed",
+  "console_errors": [],
+  "comprehension_results": "Unmeasured; no human participants",
+  "synthetic_state_checks": {
+    "viewport": "1180 \u00d7 820",
+    "states": [
+      "sparse",
+      "dense",
+      "missing-evidence",
+      "no-dates",
+      "competing"
+    ],
+    "result": "All passed; no page overflow; empty-state text, dense actor count and undated events checked. In-memory synthetic fixtures only, not stored application records."
+  }
+}

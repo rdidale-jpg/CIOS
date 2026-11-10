@@ -1,0 +1,544 @@
+{
+  "version": 1,
+  "profile_id": "VI-BANKING-1",
+  "domain": "banking",
+  "industry_title": "Banking, in perspective.",
+  "industry_summary": "An economy of trust, money and risk. Explore the institutions, activities and pressures that connect savers, borrowers and businesses.",
+  "enterprise_title": "How Lloyds works.",
+  "enterprise_summary": "Follow the banking value loop, then examine the systems, controls and transformation evidence beneath it.",
+  "geography": "United Kingdom",
+  "illustration": "banking",
+  "structure_notice": "Illustrative banking activity model with Lloyds-specific evidence overlays; not a verified organisation chart, architecture or supplier inventory.",
+  "actors": [
+    {
+      "id": "VI-BK-LLOYDS",
+      "label": "Lloyds",
+      "category": "Enterprise",
+      "claim_refs": [
+        "LBG-Q326-DEPOSITS"
+      ],
+      "enterprise_slug": "lloyds",
+      "resource_id": null,
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-BK-BARCLAYS",
+      "label": "Barclays",
+      "category": "Enterprise",
+      "claim_refs": [],
+      "enterprise_slug": "barclays",
+      "resource_id": null,
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-BK-NATWEST",
+      "label": "NatWest",
+      "category": "Enterprise",
+      "claim_refs": [],
+      "enterprise_slug": "natwest",
+      "resource_id": null,
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-BK-HSBC",
+      "label": "HSBC UK",
+      "category": "Enterprise",
+      "claim_refs": [],
+      "enterprise_slug": "hsbc-uk",
+      "resource_id": null,
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-BK-SANTANDER",
+      "label": "Santander UK",
+      "category": "Enterprise",
+      "claim_refs": [],
+      "enterprise_slug": "santander-uk",
+      "resource_id": null,
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-BK-OVERSIGHT",
+      "label": "PRA / FCA",
+      "category": "Policy & oversight",
+      "claim_refs": [
+        "UK-PRA-REPORT27",
+        "UK-FCA-REPORT27"
+      ],
+      "enterprise_slug": null,
+      "resource_id": null,
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-BK-TECH",
+      "label": "Technology providers",
+      "category": "Supplier ecosystem",
+      "claim_refs": [
+        "LBG-ENVOY-GOOGLE",
+        "LBG-AR25-COPILOT"
+      ],
+      "enterprise_slug": null,
+      "resource_id": "SUP-GOOGLE",
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-BK-CUSTOMERS",
+      "label": "Households & businesses",
+      "category": "Customer roles",
+      "claim_refs": [],
+      "enterprise_slug": null,
+      "resource_id": "VC-ACQUIRE",
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-BK-RAILS",
+      "label": "Money movement",
+      "category": "Infrastructure role",
+      "claim_refs": [],
+      "enterprise_slug": null,
+      "resource_id": "VC-PAYMENTS",
+      "presentation_state": "context"
+    },
+    {
+      "id": "VI-BK-CHALLENGERS",
+      "label": "Challengers / AI-native entrants",
+      "category": "Research gap",
+      "claim_refs": [],
+      "enterprise_slug": null,
+      "resource_id": null,
+      "presentation_state": "unknown"
+    }
+  ],
+  "activities": [
+    {
+      "id": "VI-LBG-CHANNELS",
+      "label": "Acquire & serve",
+      "purpose": "Help customers discover, access and use propositions across digital and assisted channels.",
+      "category": "Customer & proposition",
+      "icon": "people",
+      "resource_ids": [
+        "CAP-CHANNEL",
+        "CAP-SERVICE"
+      ],
+      "claim_refs": [
+        "LBG-CUSTOMERS",
+        "LBG-BRAND26-NO-ROLES"
+      ],
+      "programme_ids": [
+        "PROG-LBG-BRAND"
+      ],
+      "supplier_ids": [],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-LBG-SAVE",
+      "label": "Deposits & funding",
+      "purpose": "Safeguard balances and connect customer relationships to the funding model; the mix and economics need evidence.",
+      "category": "Revenue mechanism",
+      "icon": "vault",
+      "resource_ids": [
+        "CAP-DEPOSITS"
+      ],
+      "claim_refs": [
+        "LBG-Q326-DEPOSITS",
+        "LBG-PRIMACY-GAP"
+      ],
+      "programme_ids": [],
+      "supplier_ids": [],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-LBG-LEND",
+      "label": "Lending & credit",
+      "purpose": "Assess risk and provide credit; product profitability and current decisions are not inferred from the activity map.",
+      "category": "Core operation",
+      "icon": "home",
+      "resource_ids": [
+        "CAP-LENDING",
+        "CAP-FINANCE"
+      ],
+      "claim_refs": [
+        "LBG-Q326-PROFIT"
+      ],
+      "programme_ids": [],
+      "supplier_ids": [],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-LBG-PAY",
+      "label": "Payments & transactions",
+      "purpose": "Move money reliably across customer journeys; transaction-system ownership remains to be mapped.",
+      "category": "Core operation",
+      "icon": "transfer",
+      "resource_ids": [
+        "CAP-PAYMENTS"
+      ],
+      "claim_refs": [
+        "LBG-A2030-WALLET"
+      ],
+      "programme_ids": [
+        "PROG-LBG-CURVE"
+      ],
+      "supplier_ids": [],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-LBG-CONTROL",
+      "label": "Credit, fraud & controls",
+      "purpose": "Protect customers and the bank through risk decisions, fraud controls and governance.",
+      "category": "Risk & control",
+      "icon": "shield",
+      "resource_ids": [
+        "CAP-RISK"
+      ],
+      "claim_refs": [
+        "LBG-FRAUD-GAP",
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "programme_ids": [],
+      "supplier_ids": [],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-LBG-RESILIENCE",
+      "label": "Service & resilience",
+      "purpose": "Keep important services available and meet applicable obligations; entity readiness is not established by an industry deadline.",
+      "category": "Supporting capability",
+      "icon": "tower",
+      "resource_ids": [
+        "CAP-SERVICE",
+        "CAP-RISK"
+      ],
+      "claim_refs": [
+        "UK-PRA-REPORT27",
+        "UK-FCA-REPORT27"
+      ],
+      "programme_ids": [],
+      "supplier_ids": [],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-LBG-PLATFORMS",
+      "label": "Core platforms",
+      "purpose": "Enable the banking activities through core systems and modernisation. Exact application populations and dependencies remain unresolved.",
+      "category": "Technology dependency",
+      "icon": "server",
+      "resource_ids": [
+        "CAP-TECH"
+      ],
+      "claim_refs": [
+        "LBG-A2030-PLATFORMS",
+        {
+          "review_source": "V3-LBG-TECH"
+        },
+        {
+          "review_source": "V3-LBG-STRATEGY"
+        }
+      ],
+      "programme_ids": [
+        "PROG-LBG-LEGACY"
+      ],
+      "supplier_ids": [],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-LBG-DATA",
+      "label": "Data, cloud & AI",
+      "purpose": "Support decisions, controls and customer journeys. Platform presence does not prove adoption, causal benefit or an unmet requirement.",
+      "category": "Technology dependency",
+      "icon": "cloud",
+      "resource_ids": [
+        "CAP-DATA"
+      ],
+      "claim_refs": [
+        "LBG-ENVOY-GOOGLE",
+        "LBG-ENVOY-CONTROLS",
+        "LBG-AI26-EXPECTED"
+      ],
+      "programme_ids": [
+        "PROG-LBG-AI"
+      ],
+      "supplier_ids": [
+        "SUP-GOOGLE",
+        "SUP-MICROSOFT"
+      ],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    },
+    {
+      "id": "VI-LBG-CHANGE",
+      "label": "People & transformation",
+      "purpose": "Translate strategy into operational change; ownership, allocation and net outcomes need validation.",
+      "category": "Transformation",
+      "icon": "spark",
+      "resource_ids": [
+        "CAP-STRATEGY",
+        "CAP-DATA"
+      ],
+      "claim_refs": [
+        "LBG-A2030-INVESTMENT",
+        "LBG-AR25-COPILOT"
+      ],
+      "programme_ids": [
+        "PROG-LBG-COLLEAGUE"
+      ],
+      "supplier_ids": [],
+      "structure": "Illustrative activity; enterprise-specific facts and dependencies require their own evidence."
+    }
+  ],
+  "metrics": {
+    "industry": [
+      {
+        "id": "VI-BK-SIZE",
+        "label": "Industry economic size",
+        "claim_refs": [],
+        "missing": "Comparable market size / GVA not established"
+      },
+      {
+        "id": "VI-BK-JOBS",
+        "label": "Employment significance",
+        "claim_refs": [],
+        "missing": "Current industry employment not established"
+      }
+    ],
+    "enterprise": [
+      {
+        "id": "VI-LBG-DEPOSITS",
+        "label": "Customer deposits",
+        "claim_refs": [
+          "LBG-Q326-DEPOSITS"
+        ],
+        "measure": "typed",
+        "scope": "Lloyds Group; not UK market size"
+      },
+      {
+        "id": "VI-LBG-PROFIT",
+        "label": "Statutory pre-tax profit",
+        "claim_refs": [
+          "LBG-Q326-PROFIT"
+        ],
+        "measure": "typed",
+        "scope": "Lloyds Group; nine months, not a supplier budget"
+      }
+    ]
+  },
+  "events": [
+    {
+      "id": "VI-LBG-REG",
+      "label": "Incident / third-party reporting",
+      "lane": "Regulation",
+      "claim_refs": [
+        "UK-PRA-REPORT27",
+        "UK-FCA-REPORT27"
+      ],
+      "temporal_kind": "announced commitment",
+      "date_basis": "claim-date",
+      "date_selector": "UK-PRA-REPORT27",
+      "date_needle": "18 March 2027",
+      "affected_ids": [
+        "CAP-RISK"
+      ],
+      "readiness": "Not established",
+      "consequence": "Industry rule for applicable entities. Confirm affected processes, readiness and legal-entity scope; no enterprise failure or penalty is asserted."
+    },
+    {
+      "id": "VI-LBG-RESULTS",
+      "label": "Quarter-end economic context",
+      "lane": "Economics",
+      "claim_refs": [
+        "LBG-Q326-PROFIT",
+        "LBG-Q326-DEPOSITS"
+      ],
+      "temporal_kind": "historical fact",
+      "date_basis": "claim-date",
+      "date_selector": "LBG-Q326-DEPOSITS",
+      "date_needle": "30 September 2026",
+      "affected_ids": [
+        "CAP-FINANCE"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    },
+    {
+      "id": "VI-LBG-ENVOY",
+      "label": "Envoy platform disclosure",
+      "lane": "Technology",
+      "claim_refs": [
+        "LBG-ENVOY-GOOGLE",
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "temporal_kind": "historical disclosure",
+      "date_basis": "publication",
+      "date_selector": "PR-LBG-ENVOY",
+      "date_needle": null,
+      "affected_ids": [
+        "CAP-DATA"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    },
+    {
+      "id": "VI-LBG-CURVE",
+      "label": "Curve completion reported",
+      "lane": "Competition",
+      "claim_refs": [
+        "LBG-Q326-CURVE"
+      ],
+      "temporal_kind": "historical disclosure",
+      "date_basis": "publication",
+      "date_selector": "PR-LBG-Q326",
+      "date_needle": null,
+      "affected_ids": [
+        "CAP-PAYMENTS",
+        "PROG-LBG-CURVE"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    },
+    {
+      "id": "VI-LBG-STRATEGY",
+      "label": "Core-platform renewal commitment",
+      "lane": "Transformation",
+      "claim_refs": [
+        "LBG-A2030-PLATFORMS",
+        "LBG-A2030-DATA"
+      ],
+      "temporal_kind": "announced commitment",
+      "date_basis": "claim-years",
+      "date_selector": "LBG-A2030-PLATFORMS",
+      "date_needle": "2027–2030",
+      "affected_ids": [
+        "CAP-TECH",
+        "CAP-DATA"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    },
+    {
+      "id": "VI-LBG-BRAND",
+      "label": "Brand-change planning horizon",
+      "lane": "Transformation",
+      "claim_refs": [
+        "LBG-BRAND26-TIMING"
+      ],
+      "temporal_kind": "announced commitment",
+      "date_basis": "claim-years",
+      "date_selector": "LBG-BRAND26-TIMING",
+      "date_needle": "2027",
+      "affected_ids": [
+        "CAP-CHANNEL"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    },
+    {
+      "id": "VI-LBG-AI-RISK",
+      "label": "AI-mediated customer relationship",
+      "lane": "AI disruption",
+      "claim_refs": [
+        "LBG-A2030-DATA",
+        "LBG-AI26-EXPECTED"
+      ],
+      "temporal_kind": "scenario",
+      "date_basis": "unknown",
+      "date_selector": null,
+      "date_needle": null,
+      "affected_ids": [
+        "CAP-CHANNEL",
+        "CAP-DATA"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    },
+    {
+      "id": "VI-LBG-CONTRACT",
+      "label": "Contract expiry / renewal",
+      "lane": "Suppliers & contracts",
+      "claim_refs": [
+        "LBG-BPO-GAP"
+      ],
+      "temporal_kind": "unknown",
+      "date_basis": "unknown",
+      "date_selector": null,
+      "date_needle": null,
+      "affected_ids": [
+        "CAP-TECH"
+      ],
+      "readiness": "Not established",
+      "consequence": "Validate materiality and enterprise applicability before commercial action."
+    }
+  ],
+  "ai_scenarios": [
+    {
+      "id": "VI-BK-AI-DISCOVERY",
+      "label": "Who owns the customer interface?",
+      "purpose": "AI assistants may mediate discovery and advice. Actual displacement, named entrants and customer behaviour are unverified.",
+      "claim_refs": [
+        "LBG-A2030-WALLET",
+        "LBG-A2030-DATA"
+      ],
+      "affected_ids": [
+        "CAP-CHANNEL",
+        "CAP-STRATEGY"
+      ],
+      "defence": "Existing customer relationships, regulated trust and service capabilities; relative strength is not scored."
+    },
+    {
+      "id": "VI-BK-AI-ECON",
+      "label": "Automation without assumed economics",
+      "purpose": "Agentic tools may change the cost of serving customers. Net incremental benefits and risk-adjusted outcomes need evidence.",
+      "claim_refs": [
+        "LBG-ENVOY-CONTROLS",
+        "LBG-AI26-EXPECTED"
+      ],
+      "affected_ids": [
+        "CAP-DATA",
+        "CAP-SERVICE"
+      ],
+      "defence": "Existing control and platform investments are relevant context, not proof of a winning position."
+    }
+  ],
+  "activity_flows": [
+    {
+      "source": "VI-LBG-CHANNELS",
+      "target": "VI-LBG-SAVE",
+      "label": "Customer needs shape propositions and funding access",
+      "state": "Conceptual activity relationship; not verified enterprise topology",
+      "illustrated": true
+    },
+    {
+      "source": "VI-LBG-SAVE",
+      "target": "VI-LBG-LEND",
+      "label": "Funding supports lending capacity; no Lloyds-specific balance-sheet allocation is asserted",
+      "state": "Conceptual activity relationship; not verified enterprise topology",
+      "illustrated": true
+    },
+    {
+      "source": "VI-LBG-LEND",
+      "target": "VI-LBG-CONTROL",
+      "label": "Credit activity requires risk and control capabilities",
+      "state": "Conceptual activity relationship; not verified enterprise topology",
+      "illustrated": true
+    },
+    {
+      "source": "VI-LBG-CHANNELS",
+      "target": "VI-LBG-PAY",
+      "label": "Customers initiate payments and service requests",
+      "state": "Conceptual activity relationship; not verified enterprise topology",
+      "illustrated": true
+    },
+    {
+      "source": "VI-LBG-PLATFORMS",
+      "target": "VI-LBG-PAY",
+      "label": "Platform capabilities can support transaction processing; actual system topology remains unverified",
+      "state": "Conceptual activity relationship; not verified enterprise topology",
+      "illustrated": false
+    },
+    {
+      "source": "VI-LBG-DATA",
+      "target": "VI-LBG-RESILIENCE",
+      "label": "Data and AI may support resilience; causal improvement is not established",
+      "state": "Conceptual activity relationship; not verified enterprise topology",
+      "illustrated": false
+    }
+  ]
+}
