@@ -247,7 +247,7 @@
                 "frame": [
                   "tests/test_flora_banking_industry_reinvention_increment42.py",
                   "test_industry_opportunity_totals_reconcile_to_account_opportunities",
-                  "assert f\"Flora working estimate \u00a3{portfolio_mid}m\" in html or f\"Flora working estimate: \u00a3{portfolio_mid}m\" in html"
+                  "assert f\"Flora working estimate £{portfolio_mid}m\" in html or f\"Flora working estimate: £{portfolio_mid}m\" in html"
                 ],
                 "headline_sha256": "6e107ffbf087de6295ebe4094573d241d885786a86b9db9fc8d3a66fb2b88344"
               },
@@ -2579,7 +2579,7 @@
                 "frame": [
                   "tests/test_flora_banking_industry_reinvention_increment42.py",
                   "test_industry_opportunity_totals_reconcile_to_account_opportunities",
-                  "assert f\"Flora working estimate \u00a3{portfolio_mid}m\" in html or f\"Flora working estimate: \u00a3{portfolio_mid}m\" in html"
+                  "assert f\"Flora working estimate £{portfolio_mid}m\" in html or f\"Flora working estimate: £{portfolio_mid}m\" in html"
                 ],
                 "headline_sha256": "6e107ffbf087de6295ebe4094573d241d885786a86b9db9fc8d3a66fb2b88344"
               },
@@ -6090,6 +6090,27 @@
           "selections": [
             [
               "tests/test_flora_unified_experience.py"
+            ]
+          ]
+        },
+        "research_diagnostic": {
+          "cases": {
+            "tests/test_flora_research_intelligence_diagnostic.py::test_diagnostic_available_for_exact_registered_enterprises_only": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence_diagnostic.py::test_banking_and_aviation_report_evidence_not_fake_maturity_scores": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence_diagnostic.py::test_gap_order_and_html_safety": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_intelligence_diagnostic.py::test_diagnostic_does_not_mutate_research_overlay": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_research_intelligence_diagnostic.py"
             ]
           ]
         }
