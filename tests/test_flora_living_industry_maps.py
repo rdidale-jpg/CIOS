@@ -90,7 +90,7 @@ def test_unreviewed_or_missing_measurement_does_not_become_zero_or_verified():
     d,r,m=inputs();m['metrics'][0]['claim_refs']=['MISSING']
     assert build_living_map(d,r,m,ASOF)['metrics'][0]['value'] is None
     m=load_mapping('banking')
-    cr=next(c for c in r['claim_reviews'] if c['claim_id']==r['observations'][-1]['candidate']['claim_id'])
+    cr=next(c for c in r['claim_reviews'] if any(link['source_id']==m['metrics'][0]['claim_refs'][0]['review_source'] for link in c['links']))
     cr['links'][0]['locator']='Not the official passage'
     s=build_living_map(d,r,m,ASOF);assert s['metrics'][0]['value'] is None
     assert '3118' not in render_living_map(s)
@@ -175,11 +175,15 @@ def test_history_is_append_only_and_existing_enterprise_visual_profiles_unchange
     from pathlib import Path
     root=Path(__file__).resolve().parents[1]
     relative='enterprise-knowledge/banking/research-model/Understanding-Review.json'
-    old=json.loads(subprocess.check_output(['git','show','650b92c:'+relative],cwd=root));new=json.loads((root/relative).read_text())
+    old=json.loads(subprocess.check_output(['git','show','adf205993cc0857183d77766ce4882bf48326fb4:'+relative],cwd=root));new=json.loads((root/relative).read_text())
     for key in old:
-        if key in ('sources','observations','claim_reviews'):assert new[key][:len(old[key])]==old[key]
+        if key in ('sources','observations','claim_reviews','relationships'):assert new[key][:len(old[key])]==old[key]
         else:assert new[key]==old[key]
-    assert len(new['sources'])==len(old['sources'])+1
+    assert {s['id'] for s in new['sources'][len(old['sources']):]}=={'DEPTH-LBG-AI','DEPTH-LBG-LEGACY','DEPTH-LBG-WALLET','DEPTH-LBG-CURVE'}
+    assert len(new['sources'])==len(old['sources'])+4
+    assert len(new['observations'])==len(old['observations'])+4
+    assert len(new['claim_reviews'])==len(old['claim_reviews'])+4
+    assert [r['id'] for r in new['relationships'][len(old['relationships']):]]==['DEPTH-LBG-VERTEX']
     for domain in ('banking','aviation'):
         p=f'enterprise-knowledge/{domain}/research-model/Visual-Profile.json'
         assert (root/p).read_bytes()==subprocess.check_output(['git','show','650b92c:'+p],cwd=root)

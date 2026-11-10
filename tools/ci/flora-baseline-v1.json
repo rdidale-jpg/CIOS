@@ -6680,6 +6680,75 @@
               "tests/test_flora_commercial_usability_v31.py"
             ]
           ]
+        },
+        "intelligence_depth": {
+          "cases": {
+            "tests/test_flora_intelligence_depth.py::test_current_candidate_review_is_reproducible_and_does_not_accept_or_mutate": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_primary_passages_retain_exact_scope_dates_locator_and_unaccepted_observation[AI]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_primary_passages_retain_exact_scope_dates_locator_and_unaccepted_observation[LEGACY]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_primary_passages_retain_exact_scope_dates_locator_and_unaccepted_observation[WALLET]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_primary_passages_retain_exact_scope_dates_locator_and_unaccepted_observation[CURVE]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_priority_hypotheses_show_specific_question_options_scope_and_unknown_money[RCO-LBG-002]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_priority_hypotheses_show_specific_question_options_scope_and_unknown_money[RCO-LBG-001]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_priority_hypotheses_show_specific_question_options_scope_and_unknown_money[RCO-LBG-009]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_old_coverage_and_historical_cloud_conflict_are_not_resolved_by_new_retrieval": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_frameworks_show_pressure_direction_and_questions_without_arbitrary_scores[pestle]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_frameworks_show_pressure_direction_and_questions_without_arbitrary_scores[porter]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_frameworks_show_pressure_direction_and_questions_without_arbitrary_scores[value-chain]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_single_source_projection_preserves_nine_and_six_candidates": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_historical_snapshot_does_not_receive_mismatched_current_depth_annotations": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_executive_print_is_separate_cited_and_restores_original_page": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_public_depth_inspection_never_creates_or_reads_private_pipeline": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_text_escapes_untrusted_display_values": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_support_is_source_owned_snapshot_bound_and_captured_immutably[RCO-LBG-002]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_support_is_source_owned_snapshot_bound_and_captured_immutably[RCO-LBG-001]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_support_is_source_owned_snapshot_bound_and_captured_immutably[RCO-LBG-009]": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_intelligence_depth.py"
+            ]
+          ]
         }
       }
     }

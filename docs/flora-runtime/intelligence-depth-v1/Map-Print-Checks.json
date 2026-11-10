@@ -1,0 +1,20 @@
+[
+  {
+    "view": "Banking commercial map",
+    "version": "before",
+    "mode": "appendix",
+    "pages": 38
+  },
+  {
+    "view": "Banking commercial map",
+    "version": "after",
+    "mode": "executive",
+    "pages": 1
+  },
+  {
+    "view": "Banking commercial map",
+    "version": "after",
+    "mode": "appendix",
+    "pages": 40
+  }
+]

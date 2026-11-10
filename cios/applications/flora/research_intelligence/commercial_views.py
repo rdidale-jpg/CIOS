@@ -77,6 +77,8 @@ def candidate_overview(data,row,projection,headers=None):
     current_status=c['confidence'] if row['context_supported'] else 'Current source support missing — retained historical hypothesis; verify evidence before advancement.'
     body+=f"<header class='cv-header' id='explorer-content'>{_badge('Unqualified commercial hypothesis')}<p class='cv-kicker'>{e(enterprise['label'])} / {row['id']}</p><h1>{e(row['title'])}</h1><p>{e(c['offer'])}</p><p>{e(current_status)}</p></header>"
     body+=executive_summary(row)
+    from .intelligence_depth import hypothesis_depth
+    body+=hypothesis_depth(data,row)
     body+="<nav class='cv-links' aria-label='Hypothesis inspection'>"+link('#commercial-support','Inspect supporting context')+link('#commercial-counterevidence','Inspect counterevidence')+link('#commercial-capture','Review create/link & qualification →',True)+'</nav>'
     body+="<p class='cv-warning'>Research exploration is read-only. No confirmed customer requirement, allocated budget, named buyer authority, tender or current supplier contract is established by this hypothesis. Missing information is not evidence of a problem.</p>"
     sections=[('01','Potential business problem / outcome',c['business_problem']+' Potential outcome: '+row.get('review',{}).get('measurable_outcome','Define a customer-owned measurable outcome before advancing.')),

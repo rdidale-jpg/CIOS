@@ -1,0 +1,54 @@
+{
+  "checks": [
+    {
+      "viewport": "desktop",
+      "new_pages": 4,
+      "both_industries": true,
+      "overflow": false,
+      "keyboard_or_touch": true,
+      "reduced_motion": true
+    },
+    {
+      "viewport": "tablet",
+      "new_pages": 4,
+      "both_industries": true,
+      "overflow": false,
+      "keyboard_or_touch": true,
+      "reduced_motion": true
+    },
+    {
+      "viewport": "mobile",
+      "new_pages": 4,
+      "both_industries": true,
+      "overflow": false,
+      "keyboard_or_touch": true,
+      "reduced_motion": true
+    }
+  ],
+  "print": [
+    {
+      "page": "enterprise",
+      "mode": "executive",
+      "pages": 1
+    },
+    {
+      "page": "enterprise",
+      "mode": "appendix",
+      "pages": 29
+    },
+    {
+      "page": "hypothesis",
+      "mode": "executive",
+      "pages": 1
+    },
+    {
+      "page": "hypothesis",
+      "mode": "appendix",
+      "pages": 17
+    }
+  ],
+  "page_script_errors": [],
+  "capture": "Three deliberate captures and idempotent links, all Discovered; no customer validation or qualification",
+  "no_javascript": "Enterprise \u2192 hypothesis passed; native full-page print fallback documented",
+  "measurement": "Human time-to-understand and decision quality unmeasured; no inference from automated navigation"
+}

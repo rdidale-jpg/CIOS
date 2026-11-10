@@ -173,6 +173,154 @@
       "entity_ids": [
         "BK-IND-002"
       ]
+    },
+    {
+      "id": "DEPTH-LBG-AI",
+      "title": "Lloyds Google Cloud platform announcement",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html",
+      "publication_date": "2025-04-09",
+      "publication_date_evidence": "Dated 09 April 2025 on official announcement",
+      "reporting_period": "April 2025 announcement; current delivery and contract scope unverified",
+      "retrieved_at": "2026-11-10T19:03:08.544040+00:00",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html",
+      "research_domain": "banking",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-AI.txt",
+      "text_sha256": "1091b57d5014e8509ff3d277b5eb8e52ca29c6608ae17b22d1478aa41dc639bd",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn152830view0; turn266601view0",
+      "excerpts": [
+        {
+          "locator": "Embracing cloud technology, line604",
+          "quote": "building a new machine learning (ML) and Generative AI (GenAI) platform using Google Cloud’s Vertex AI."
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Bounded 2026-11-10 primary-page re-verification. Retain only located excerpt; not evidence of buying demand.",
+      "limitation": "April 2025 announcement; current delivery and contract scope unverified. Short directly opened primary excerpt, no original byte archive or independent outcome verification.",
+      "assertion_origin": "Lloyds management",
+      "entity_ids": [
+        "BK-ENT-001"
+      ],
+      "hypothesis_ids": [
+        "RCO-LBG-002"
+      ],
+      "assessment_digest": "b6de7f7d40130a71c2169cbb7a0d3677cd7ea6c51774e5b0951eb26d703abe92"
+    },
+    {
+      "id": "DEPTH-LBG-LEGACY",
+      "title": "Lloyds technology simplification page",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html",
+      "publication_date": null,
+      "publication_date_evidence": "Publication date not established; 2026 in article title is not a publication date",
+      "reporting_period": "Undated simplification statement retrieved 2026-11-10; no retirement inventory or benefit baseline",
+      "retrieved_at": "2026-11-10T19:03:08.544320+00:00",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html",
+      "research_domain": "banking",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-LEGACY.txt",
+      "text_sha256": "e387e2f8b37215e7046f3c914ef1d0ee930acd434617a8d94df167f14e61f83e",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn152830view1; turn266601view1",
+      "excerpts": [
+        {
+          "locator": "Technology, line615",
+          "quote": "We’re simplifying our systems, so one system can do the job of many"
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Bounded 2026-11-10 primary-page re-verification. Retain only located excerpt; not evidence of buying demand.",
+      "limitation": "Undated simplification statement retrieved 2026-11-10; no retirement inventory or benefit baseline. Short directly opened primary excerpt, no original byte archive or independent outcome verification.",
+      "assertion_origin": "Lloyds management",
+      "entity_ids": [
+        "BK-ENT-001"
+      ],
+      "hypothesis_ids": [
+        "RCO-LBG-001"
+      ],
+      "assessment_digest": "b6de7f7d40130a71c2169cbb7a0d3677cd7ea6c51774e5b0951eb26d703abe92"
+    },
+    {
+      "id": "DEPTH-LBG-WALLET",
+      "title": "Lloyds 2026 performance and wallet outlook",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/insights/how-is-lloyds-banking-group-performing-2026.html",
+      "publication_date": null,
+      "publication_date_evidence": "Publication date not established; 2026 in article title is not a publication date",
+      "reporting_period": "2026 management outlook; launch intention, not verified launch completion or Curve integration topology",
+      "retrieved_at": "2026-11-10T19:03:08.544490+00:00",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/insights/how-is-lloyds-banking-group-performing-2026.html",
+      "research_domain": "banking",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-WALLET.txt",
+      "text_sha256": "445b237cbdc111bb790301632d4eb388d960d052f7b9ac367e08e787f7f1f9a7",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn152830view2; turn266601view2",
+      "excerpts": [
+        {
+          "locator": "Accelerate 2030, line723",
+          "quote": "we’re launching Lloyds Smart Wallet – a new type of UK digital wallet providing enhanced payments options and flexibility"
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Bounded 2026-11-10 primary-page re-verification. Retain only located excerpt; not evidence of buying demand.",
+      "limitation": "2026 management outlook; launch intention, not verified launch completion or Curve integration topology. Short directly opened primary excerpt, no original byte archive or independent outcome verification.",
+      "assertion_origin": "Lloyds management",
+      "entity_ids": [
+        "BK-ENT-001"
+      ],
+      "hypothesis_ids": [
+        "RCO-LBG-009"
+      ],
+      "assessment_digest": "b6de7f7d40130a71c2169cbb7a0d3677cd7ea6c51774e5b0951eb26d703abe92"
+    },
+    {
+      "id": "DEPTH-LBG-CURVE",
+      "title": "Lloyds proposed Curve acquisition",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/investor-news/2025/2025nov19-lbg-curve-acquisition.pdf",
+      "publication_date": "2025-11-19",
+      "publication_date_evidence": "Dated 19 November 2025 on official PDF page 1",
+      "reporting_period": "19 November 2025 forward-looking acquisition announcement; expected H1 2026 completion is not verified completion",
+      "retrieved_at": "2026-11-10T19:09:50.170911+00:00",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/investor-news/2025/2025nov19-lbg-curve-acquisition.pdf",
+      "research_domain": "banking",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-CURVE.txt",
+      "text_sha256": "77556258b687ba14f3fa2d78ff217a2bb81100fbb1dc16a33c244fc87d7a6cca",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn226987view0",
+      "excerpts": [
+        {
+          "locator": "PDF page 1, line23",
+          "quote": "The acquisition is expected to complete in the first half of 2026, subject to regulatory approval."
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Bounded 2026-11-10 primary-page re-verification. Retain only located excerpt; not evidence of buying demand.",
+      "limitation": "19 November 2025 forward-looking acquisition announcement; expected H1 2026 completion is not verified completion. Short directly opened primary excerpt, no original byte archive or independent outcome verification.",
+      "assertion_origin": "Lloyds management",
+      "entity_ids": [
+        "BK-ENT-001"
+      ],
+      "hypothesis_ids": [
+        "RCO-LBG-009"
+      ],
+      "assessment_digest": "b6de7f7d40130a71c2169cbb7a0d3677cd7ea6c51774e5b0951eb26d703abe92"
     }
   ],
   "observations": [
@@ -391,6 +539,150 @@
       "observation_fingerprint": "obs-v1-92d51766e21d8a145ecf7552d57034d4bc5b9f9bd40c3280de02a6151d393559",
       "accepted_observation": false,
       "source_id": "VI2-BOE-CAPITAL-Q226"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-DEPTH-LBG-AI",
+        "claim_type": "research_excerpt",
+        "statement": "building a new machine learning (ML) and Generative AI (GenAI) platform using Google Cloud’s Vertex AI.",
+        "source_asset_id": "DEPTH-LBG-AI",
+        "source_segment_id": "DEPTH-LBG-AI::passage",
+        "scope": "enterprise",
+        "subject": "BK-ENT-001",
+        "predicate": "operations",
+        "object": "building a new machine learning (ML) and Generative AI (GenAI) platform using Google Cloud’s Vertex AI.",
+        "time_scope": "April 2025 announcement; current delivery and contract scope unverified",
+        "participant_scope": "UK Banking",
+        "enterprise_scope": "BK-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "DEPTH-LBG-AI"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "DEPTH-LBG-AI::passage",
+        "asset_id": "DEPTH-LBG-AI",
+        "section_heading": "Embracing cloud technology, line604",
+        "content": "building a new machine learning (ML) and Generative AI (GenAI) platform using Google Cloud’s Vertex AI.",
+        "content_hash": "9fee46f38701f84e173f0df45221936e9264515ff25c4aac7fa12d0ac47f432e",
+        "source_location": "https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html [Embracing cloud technology, line604]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-depth-AI",
+      "accepted_observation": false,
+      "source_id": "DEPTH-LBG-AI"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-DEPTH-LBG-LEGACY",
+        "claim_type": "research_excerpt",
+        "statement": "We’re simplifying our systems, so one system can do the job of many",
+        "source_asset_id": "DEPTH-LBG-LEGACY",
+        "source_segment_id": "DEPTH-LBG-LEGACY::passage",
+        "scope": "enterprise",
+        "subject": "BK-ENT-001",
+        "predicate": "operations",
+        "object": "We’re simplifying our systems, so one system can do the job of many",
+        "time_scope": "Undated simplification statement retrieved 2026-11-10; no retirement inventory or benefit baseline",
+        "participant_scope": "UK Banking",
+        "enterprise_scope": "BK-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "DEPTH-LBG-LEGACY"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "DEPTH-LBG-LEGACY::passage",
+        "asset_id": "DEPTH-LBG-LEGACY",
+        "section_heading": "Technology, line615",
+        "content": "We’re simplifying our systems, so one system can do the job of many",
+        "content_hash": "60d3ff4acec3a1e5d58a14282360dfe658a5ec935c0e075d308efd1804057b1f",
+        "source_location": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html [Technology, line615]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-depth-LEGACY",
+      "accepted_observation": false,
+      "source_id": "DEPTH-LBG-LEGACY"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-DEPTH-LBG-WALLET",
+        "claim_type": "research_excerpt",
+        "statement": "we’re launching Lloyds Smart Wallet – a new type of UK digital wallet providing enhanced payments options and flexibility",
+        "source_asset_id": "DEPTH-LBG-WALLET",
+        "source_segment_id": "DEPTH-LBG-WALLET::passage",
+        "scope": "enterprise",
+        "subject": "BK-ENT-001",
+        "predicate": "operations",
+        "object": "we’re launching Lloyds Smart Wallet – a new type of UK digital wallet providing enhanced payments options and flexibility",
+        "time_scope": "2026 management outlook; launch intention, not verified launch completion or Curve integration topology",
+        "participant_scope": "UK Banking",
+        "enterprise_scope": "BK-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "DEPTH-LBG-WALLET"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "DEPTH-LBG-WALLET::passage",
+        "asset_id": "DEPTH-LBG-WALLET",
+        "section_heading": "Accelerate 2030, line723",
+        "content": "we’re launching Lloyds Smart Wallet – a new type of UK digital wallet providing enhanced payments options and flexibility",
+        "content_hash": "9de21f5e4ae4ef0a7cb59f18b94b8d655c1281f0ac9c6d67c804e853862929d3",
+        "source_location": "https://www.lloydsbankinggroup.com/insights/how-is-lloyds-banking-group-performing-2026.html [Accelerate 2030, line723]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-depth-WALLET",
+      "accepted_observation": false,
+      "source_id": "DEPTH-LBG-WALLET"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-DEPTH-LBG-CURVE",
+        "claim_type": "research_excerpt",
+        "statement": "The acquisition is expected to complete in the first half of 2026, subject to regulatory approval.",
+        "source_asset_id": "DEPTH-LBG-CURVE",
+        "source_segment_id": "DEPTH-LBG-CURVE::passage",
+        "scope": "enterprise",
+        "subject": "BK-ENT-001",
+        "predicate": "operations",
+        "object": "The acquisition is expected to complete in the first half of 2026, subject to regulatory approval.",
+        "time_scope": "19 November 2025 forward-looking acquisition announcement; expected H1 2026 completion is not verified completion",
+        "participant_scope": "UK Banking",
+        "enterprise_scope": "BK-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "DEPTH-LBG-CURVE"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "DEPTH-LBG-CURVE::passage",
+        "asset_id": "DEPTH-LBG-CURVE",
+        "section_heading": "PDF page 1, line23",
+        "content": "The acquisition is expected to complete in the first half of 2026, subject to regulatory approval.",
+        "content_hash": "2bace86958a523eb90728890e05724da0611d58c61d46f4c8a0ce2b63909dfe5",
+        "source_location": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/investor-news/2025/2025nov19-lbg-curve-acquisition.pdf [PDF page 1, line23]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-depth-CURVE",
+      "accepted_observation": false,
+      "source_id": "DEPTH-LBG-CURVE"
     }
   ],
   "cycle_receipts": [
@@ -556,6 +848,94 @@
       "domains": [
         "financials"
       ]
+    },
+    {
+      "claim_id": "RC-DEPTH-LBG-AI",
+      "assertion_digest": "3c34f064e84db14c66eeaf7e0033425fff0f376dda1637c55fe152dab17f15b5",
+      "entity_id": "BK-ENT-001",
+      "period": "April 2025 announcement; current delivery and contract scope unverified",
+      "links": [
+        {
+          "source_id": "DEPTH-LBG-AI",
+          "quote": "building a new machine learning (ML) and Generative AI (GenAI) platform using Google Cloud’s Vertex AI.",
+          "locator": "Embracing cloud technology, line604",
+          "support": "direct",
+          "reason": "Exact short passage supports only the attributed company statement, not customer demand, completion or current contract scope.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "3c34f064e84db14c66eeaf7e0033425fff0f376dda1637c55fe152dab17f15b5"
+        }
+      ],
+      "domains": [
+        "technology",
+        "operations"
+      ]
+    },
+    {
+      "claim_id": "RC-DEPTH-LBG-LEGACY",
+      "assertion_digest": "4e41f10040ed5a0644f7b4311ba193338a1d536c8f22aafa070b673949f06100",
+      "entity_id": "BK-ENT-001",
+      "period": "Undated simplification statement retrieved 2026-11-10; no retirement inventory or benefit baseline",
+      "links": [
+        {
+          "source_id": "DEPTH-LBG-LEGACY",
+          "quote": "We’re simplifying our systems, so one system can do the job of many",
+          "locator": "Technology, line615",
+          "support": "direct",
+          "reason": "Exact short passage supports only the attributed company statement, not customer demand, completion or current contract scope.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "4e41f10040ed5a0644f7b4311ba193338a1d536c8f22aafa070b673949f06100"
+        }
+      ],
+      "domains": [
+        "technology",
+        "operations"
+      ]
+    },
+    {
+      "claim_id": "RC-DEPTH-LBG-WALLET",
+      "assertion_digest": "260e11af324a24eb618832062dcbc33d09ee24d0d68a9c876377e13ab860a53f",
+      "entity_id": "BK-ENT-001",
+      "period": "2026 management outlook; launch intention, not verified launch completion or Curve integration topology",
+      "links": [
+        {
+          "source_id": "DEPTH-LBG-WALLET",
+          "quote": "we’re launching Lloyds Smart Wallet – a new type of UK digital wallet providing enhanced payments options and flexibility",
+          "locator": "Accelerate 2030, line723",
+          "support": "direct",
+          "reason": "Exact short passage supports only the attributed company statement, not customer demand, completion or current contract scope.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "260e11af324a24eb618832062dcbc33d09ee24d0d68a9c876377e13ab860a53f"
+        }
+      ],
+      "domains": [
+        "technology",
+        "operations"
+      ]
+    },
+    {
+      "claim_id": "RC-DEPTH-LBG-CURVE",
+      "assertion_digest": "aad34c4eeaba3adc15c5c52d5a46f8622dc9c1b0824f0f79d358f549d11cfa22",
+      "entity_id": "BK-ENT-001",
+      "period": "19 November 2025 forward-looking acquisition announcement; expected H1 2026 completion is not verified completion",
+      "links": [
+        {
+          "source_id": "DEPTH-LBG-CURVE",
+          "quote": "The acquisition is expected to complete in the first half of 2026, subject to regulatory approval.",
+          "locator": "PDF page 1, line23",
+          "support": "direct",
+          "reason": "Exact short passage supports only the attributed company statement, not customer demand, completion or current contract scope.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "aad34c4eeaba3adc15c5c52d5a46f8622dc9c1b0824f0f79d358f549d11cfa22"
+        }
+      ],
+      "domains": [
+        "technology",
+        "operations"
+      ]
     }
   ],
   "relationships": [
@@ -684,6 +1064,30 @@
         ],
         "scope_note": "No new project allocation, accountable procurement decision or committed buying event established.",
         "edge_digest": "90d24a5f423c943ee5f2989dd28d10eaec4d186f884c9ddac13c1bd5ae86b113"
+      }
+    },
+    {
+      "id": "DEPTH-LBG-VERTEX",
+      "subject": "BK-ENT-001",
+      "predicate": "reports_vertex_ai_platform",
+      "object": "SUP-GOOGLE",
+      "claim_ids": [
+        "RC-DEPTH-LBG-AI"
+      ],
+      "temporal_scope": "April 2025 company announcement",
+      "verified": false,
+      "assertion_kind": "candidate_relationship_assessment",
+      "assessment": {
+        "status": "inference",
+        "entity_id": "BK-ENT-001",
+        "causal": false,
+        "reason": "Attributed platform association supported by the company passage; no current contract topology or measured outcome follows.",
+        "missing_evidence": [
+          "Current implementation and brand scope",
+          "Contract breadth, value, expiry and exclusivity",
+          "Independent outcome verification"
+        ],
+        "edge_digest": "b4ffcec8009a4f744e04f18337a18b37f5f5007d9799abcaad6c7f3dea6ab40c"
       }
     }
   ],
