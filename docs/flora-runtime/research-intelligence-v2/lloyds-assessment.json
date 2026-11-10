@@ -1,0 +1,606 @@
+{
+  "enterprise_id": "BK-ENT-001",
+  "as_of": "2026-11-10",
+  "baseline_digest": "b6de7f7d40130a71c2169cbb7a0d3677cd7ea6c51774e5b0951eb26d703abe92",
+  "authority": "candidate_intelligence",
+  "diagnostic_counts": {
+    "claim_count": 45,
+    "supported_claim_count": 24,
+    "source_count": 24,
+    "verified_relationship_count": 1,
+    "relationship_count": 123,
+    "high_priority_gap_count": 13
+  },
+  "dossier": [
+    {
+      "id": "corporate",
+      "label": "Corporate identity and structure",
+      "importance": 3,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "leadership",
+      "label": "Leadership and governance",
+      "importance": 3,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "strategy",
+      "label": "Strategy",
+      "importance": 3,
+      "claim_ids": [
+        "LBG-A2030-DATA",
+        "LBG-A2030-PLATFORMS"
+      ],
+      "supported_claim_ids": [
+        "LBG-A2030-DATA",
+        "LBG-A2030-PLATFORMS"
+      ],
+      "source_ids": [
+        "PR-LBG-A2030"
+      ],
+      "publishers": [
+        "Lloyds Banking Group"
+      ],
+      "period_labels": [
+        "Strategy for 2027–2030"
+      ],
+      "deficiencies": [
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "financials",
+      "label": "Financial intelligence",
+      "importance": 4,
+      "claim_ids": [
+        "LBG-A2030-CIR",
+        "LBG-AR25-DEPOSITS",
+        "LBG-DEPOSITS",
+        "LBG-HEDGE",
+        "LBG-Q326-DEPOSITS",
+        "LBG-Q326-PROFIT",
+        "LBG-TECH-COST"
+      ],
+      "supported_claim_ids": [
+        "LBG-A2030-CIR",
+        "LBG-AR25-DEPOSITS",
+        "LBG-Q326-DEPOSITS",
+        "LBG-Q326-PROFIT"
+      ],
+      "source_ids": [
+        "PR-LBG-A2030",
+        "PR-LBG-AR25",
+        "PR-LBG-Q326",
+        "SRC-LBG-AR",
+        "SRC-LBG-Q1"
+      ],
+      "publishers": [
+        "Lloyds Banking Group"
+      ],
+      "period_labels": [
+        "2021–2025 comparison reported in existing Twin",
+        "2025 year-end",
+        "31 December 2025",
+        "Nine months ended / balance sheet at 30 September 2026",
+        "Q1 2026",
+        "Strategy for 2027–2030"
+      ],
+      "deficiencies": [
+        "Independent/source-family corroboration not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "products",
+      "label": "Products, services and offers",
+      "importance": 3,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "technology",
+      "label": "Technology and digital estate",
+      "importance": 3,
+      "claim_ids": [
+        "LBG-AI-USE",
+        "LBG-AR25-COPILOT",
+        "LBG-COPILOT",
+        "LBG-ENVOY-CONTROLS",
+        "LBG-MODELS"
+      ],
+      "supported_claim_ids": [
+        "LBG-AR25-COPILOT",
+        "LBG-ENVOY-CONTROLS"
+      ],
+      "source_ids": [
+        "PR-LBG-AR25",
+        "PR-LBG-ENVOY",
+        "SRC-LBG-AI",
+        "SRC-LBG-AR",
+        "SRC-LBG-GCP"
+      ],
+      "publishers": [
+        "Lloyds Banking Group"
+      ],
+      "period_labels": [
+        "2025",
+        "2025 announcement context",
+        "Announced platform capability; not current effectiveness evidence",
+        "Existing Twin FY2025/2026 context; precise effective date unknown",
+        "FY2025"
+      ],
+      "deficiencies": [
+        "Independent/source-family corroboration not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "operations",
+      "label": "Operating model",
+      "importance": 4,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "customers",
+      "label": "Customers and markets",
+      "importance": 3,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "suppliers",
+      "label": "Suppliers and ecosystem",
+      "importance": 3,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "procurement",
+      "label": "Procurement and buying",
+      "importance": 3,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "transformation",
+      "label": "Transformation",
+      "importance": 4,
+      "claim_ids": [
+        "LBG-A2030-WALLET",
+        "LBG-AR25-MIGRATION",
+        "LBG-BRAND",
+        "LBG-BRAND26-TIMING",
+        "LBG-CURVE",
+        "LBG-MIGRATION",
+        "LBG-Q326-CURVE"
+      ],
+      "supported_claim_ids": [
+        "LBG-A2030-WALLET",
+        "LBG-AR25-MIGRATION",
+        "LBG-BRAND26-TIMING",
+        "LBG-Q326-CURVE"
+      ],
+      "source_ids": [
+        "PR-LBG-A2030",
+        "PR-LBG-AR25",
+        "PR-LBG-BRAND26",
+        "PR-LBG-Q326",
+        "SRC-LBG-AR",
+        "SRC-LBG-BRAND",
+        "SRC-LBG-CURVE"
+      ],
+      "publishers": [
+        "Lloyds Banking Group"
+      ],
+      "period_labels": [
+        "2026 announcement context",
+        "2026 management priorities",
+        "2026 management priority",
+        "Announced July 2026; branch changes planned through 2027",
+        "Nine months ended / balance sheet at 30 September 2026",
+        "Proposed transaction; status needs refresh",
+        "Strategy for 2027–2030"
+      ],
+      "deficiencies": [
+        "Independent/source-family corroboration not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "events",
+      "label": "Events and analyst intelligence",
+      "importance": 3,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "opportunities",
+      "label": "Opportunity reasoning",
+      "importance": 1,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Research hypotheses do not establish customer demand",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "uncertainty",
+      "label": "Evidence and uncertainty",
+      "importance": 3,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Open Unknowns and Contradictions require explicit treatment",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    }
+  ],
+  "selected_tasks": [
+    {
+      "id": "R-BK-ENT-001-operations",
+      "topic": "operations",
+      "title": "Operating model",
+      "priority_score": 49,
+      "rationale": "No mapped enterprise factual claim; inspect full dossier; Independent/source-family corroboration not established; Comparable multi-period history not established; Causal depth and complete dossier fields not assessed automatically",
+      "question": "What dated, enterprise-specific evidence establishes operating model for Lloyds Banking Group, and what contradicts the current account?",
+      "target_claim_ids": [],
+      "source_families": [
+        "filing",
+        "independent"
+      ],
+      "source_routes": [],
+      "closure_test": "Located primary passage, explicit scope/period, contrary evidence search and complete applicable dossier fields; separate governed review required.",
+      "search_queries": [
+        "Lloyds Banking Group Operating model official disclosure 2026",
+        "Lloyds Banking Group Operating model delay cancellation risk contrary evidence"
+      ]
+    },
+    {
+      "id": "G-AI-BENEFITS",
+      "topic": "registered-gap",
+      "title": "Net AI benefits",
+      "priority_score": 48,
+      "rationale": "AI service/governance/colleague propositions.",
+      "question": "Are claimed benefits realised net of adoption/control costs?",
+      "target_claim_ids": [],
+      "source_families": [
+        "filing",
+        "regulator",
+        "independent"
+      ],
+      "source_routes": [],
+      "closure_test": "Benefit baselines, adoption measures, control costs and benefit ownership; distinguish targets from realised results.",
+      "search_queries": [
+        "Lloyds Banking Group Net AI benefits official disclosure 2026",
+        "Lloyds Banking Group Net AI benefits delay cancellation risk contrary evidence"
+      ]
+    },
+    {
+      "id": "G-ALLOCATION",
+      "topic": "registered-gap",
+      "title": "Investment allocation",
+      "priority_score": 48,
+      "rationale": "Value and commercial addressability remain Unknown.",
+      "question": "Which investment capacity is allocated to external addressable work?",
+      "target_claim_ids": [],
+      "source_families": [
+        "filing",
+        "regulator",
+        "independent"
+      ],
+      "source_routes": [],
+      "closure_test": "Approved programme funding and sourcing scope, distinguishing gross savings, benefits and supplier spend.",
+      "search_queries": [
+        "Lloyds Banking Group Investment allocation official disclosure 2026",
+        "Lloyds Banking Group Investment allocation delay cancellation risk contrary evidence"
+      ]
+    }
+  ],
+  "remaining_task_count": 22,
+  "source_review": [
+    {
+      "source_id": "SRC-LBG-AR",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Citation only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-LBG-Q1",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Citation only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-LBG-AI",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Citation only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-LBG-GCP",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Citation only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-LBG-BRAND",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Citation only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-LBG-ACCESS",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Citation only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-LBG-CURVE",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Citation only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-HMT-CTP",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Citation only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-FCA-DUTY",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Citation only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-FCA-MODELS",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Citation only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-BOE-FSR",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Citation only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-CMA-OB",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Citation only",
+      "limitation": "URL cited by existing repository research. Primary content not retrieved or re-verified in this increment; publication date is not assumed from its URL.",
+      "original_verified": false
+    },
+    {
+      "source_id": "PR-LBG-Q326",
+      "age_days": 12,
+      "date_status": "Within 90-day review window",
+      "extent": "reviewed_web_excerpt",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+      "original_verified": false
+    },
+    {
+      "source_id": "PR-LBG-AR25",
+      "age_days": 270,
+      "date_status": "Review due (>90 days)",
+      "extent": "reviewed_web_excerpt",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+      "original_verified": false
+    },
+    {
+      "source_id": "PR-LBG-A2030",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "reviewed_web_excerpt",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. Undated maintained strategy page: observation date is known, original publication date remains Unknown. Targets are forward-looking, not achieved outcomes.",
+      "original_verified": false
+    },
+    {
+      "source_id": "PR-LBG-INVEST30",
+      "age_days": 103,
+      "date_status": "Review due (>90 days)",
+      "extent": "reviewed_web_excerpt",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+      "original_verified": false
+    },
+    {
+      "source_id": "PR-LBG-ENVOY",
+      "age_days": 193,
+      "date_status": "Review due (>90 days)",
+      "extent": "reviewed_web_excerpt",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. HTML date is 1 May 2026; a linked PDF/search result carries 28 April. Retain the HTML date for this HTML source; do not collapse the versions.",
+      "original_verified": false
+    },
+    {
+      "source_id": "PR-LBG-BRAND26",
+      "age_days": 132,
+      "date_status": "Review due (>90 days)",
+      "extent": "reviewed_web_excerpt",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+      "original_verified": false
+    },
+    {
+      "source_id": "PR-LBG-AI26",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "reviewed_web_excerpt",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. Maintained page has undated material and older embedded transcripts. Use the main disclosure, distinguish reported value from forecasts, and do not infer achieved 2026 value.",
+      "original_verified": false
+    },
+    {
+      "source_id": "PR-BOE-NOV26",
+      "age_days": 5,
+      "date_status": "Within 90-day review window",
+      "extent": "reviewed_web_excerpt",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+      "original_verified": false
+    },
+    {
+      "source_id": "PR-PRA-PS726",
+      "age_days": 237,
+      "date_status": "Review due (>90 days)",
+      "extent": "reviewed_web_excerpt",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. ",
+      "original_verified": false
+    },
+    {
+      "source_id": "PR-FCA-RES26",
+      "age_days": 3468,
+      "date_status": "Review due (>90 days)",
+      "extent": "reviewed_web_excerpt",
+      "limitation": "Reviewed excerpts, not a full original-file archive. Publisher statements are not independently audited commercial demand. First publication 13 May 2017, last update 15 September 2026. Original publication date is not replaced with update or retrieval date.",
+      "original_verified": false
+    },
+    {
+      "source_id": "PR-LBG-FSQS",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "reviewed_web_excerpt",
+      "limitation": "Onboarding is not demand, award or access. No approach, registration or outreach performed.",
+      "original_verified": false
+    },
+    {
+      "source_id": "PR-LBG-SOURCING",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "reviewed_web_excerpt",
+      "limitation": "Onboarding is not demand, award or access. No approach, registration or outreach performed.",
+      "original_verified": false
+    }
+  ],
+  "unmodelled_relationship_classes": [
+    "Contract award / renewal / expiry",
+    "Measured programme-to-business outcome"
+  ],
+  "new_evidence_acquired": false,
+  "canonical_mutation": false,
+  "automatic_qualification": false
+}

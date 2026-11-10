@@ -1,0 +1,132 @@
+{
+  "schema_id": "CIOS-Research-Mission-Manifest",
+  "schema_version": "1.1.0",
+  "mission_id": "AV-ENT-001-research-2026-11-10",
+  "mission_name": "easyJet evidence-led deepening",
+  "mission_type": "targeted-evidence-closure",
+  "mission_template_id": "targeted-evidence-closure",
+  "mission_template_version": "1.0.0",
+  "parent_twin_id": "AV-ENT-001",
+  "baseline_release": "AV-EJ-2026-11-09",
+  "created_date": "2026-11-10",
+  "generated_date": "2026-11-10T00:00:00Z",
+  "owner": "Research owner unassigned",
+  "governance_state": "DRAFT",
+  "scope": {
+    "industry": "Commercial Aviation",
+    "geography": [
+      "Source-specific geography; enterprise and industry boundaries require review"
+    ],
+    "included_domains": [
+      "Measured operating outcomes",
+      "Fuel-data responsibilities",
+      "Industry coverage and competition"
+    ],
+    "excluded_domains": [
+      "Automatic canonical updates",
+      "Sales qualification"
+    ],
+    "material_subject_criteria": "Deepen the existing reference enterprise; preserve industry scope boundaries",
+    "research_period": "Historical baseline through cut-off",
+    "evidence_cut_off": "2026-11-10",
+    "current_checkpoint": "7cbb6c3e09b759d03f2a107157f43aa4ffbe268a086fcdadb46f4b391bd400a0",
+    "complete_scope_rule": "Selected evidence demands need governed review; no automatic completion."
+  },
+  "profile_pins": {
+    "industry-overview": "1.0.0",
+    "enterprise-dossier": "1.0.0",
+    "market-participant": "1.0.0",
+    "programme": "1.0.0",
+    "opportunity": "1.0.0"
+  },
+  "relationship_profile_versions": {
+    "industry-membership": "1.0.0"
+  },
+  "evidence_uncertainty_profile_versions": {
+    "evidence": "EI-012",
+    "unknown": "IT-001",
+    "contradiction": "IT-001"
+  },
+  "release_manifest_version": "2.0.0",
+  "research_priorities": {
+    "priority_outcomes": [
+      "Improve evidence quality and connected understanding"
+    ],
+    "current_governed_gaps": [
+      "Candidate overlay task (not accepted canonical gap): AV-G-BASELINE: Obtain current disruption, customer-contact, AI adoption, fleet reliability and service baselines with permissible access.",
+      "Candidate overlay task (not accepted canonical gap): AV-G-FUEL: Identify fuel supplier, airline, verifier and regulator responsibilities; verify existing data reconciliation and assurance gaps.",
+      "Candidate overlay task (not accepted canonical gap): AV-G-INDUSTRY: Retrieve EUROCONTROL original forecast after HTTP503; obtain current airline/airport shares and route competition. Illustrative participants are not a comprehensive ranked market."
+    ],
+    "named_closure_targets": [
+      "AV-G-BASELINE: Obtain current disruption, customer-contact, AI adoption, fleet reliability and service baselines with permissible access.",
+      "AV-G-FUEL: Identify fuel supplier, airline, verifier and regulator responsibilities; verify existing data reconciliation and assurance gaps.",
+      "AV-G-INDUSTRY: Retrieve EUROCONTROL original forecast after HTTP503; obtain current airline/airport shares and route competition. Illustrative participants are not a comprehensive ranked market."
+    ],
+    "monitoring_targets": [
+      "Dated source changes and contrary evidence"
+    ],
+    "current_object_counts": {
+      "candidate_claims": 22
+    },
+    "current_unknowns": [
+      "AV-G-CUSTOMER: Will the customer sponsor external delivery for a measured problem? Obtain sponsor confirmation, backlog, sourcing authority, eligibility and incumbent workshare.",
+      "AV-G-LATEST: Import original H1/Q3 FY2026 releases and any final-year update; verify publication dates, latest acquisition status and decision rights. Do not treat indexed excerpts as full reports.",
+      "AV-G-BASELINE: Obtain current disruption, customer-contact, AI adoption, fleet reliability and service baselines with permissible access.",
+      "AV-G-SUPPLIERS: Confirm live contracts, integrator workshare, renewal constraints and permissions to partner. Historical announcements do not prove current incumbency.",
+      "AV-G-SAFETY: Determine operational safety boundary, certified system interfaces, responsible human authority and seller aviation credentials before any design.",
+      "AV-G-FUEL: Identify fuel supplier, airline, verifier and regulator responsibilities; verify existing data reconciliation and assurance gaps.",
+      "AV-G-INDUSTRY: Retrieve EUROCONTROL original forecast after HTTP503; obtain current airline/airport shares and route competition. Illustrative participants are not a comprehensive ranked market."
+    ],
+    "current_contradictions": [
+      "No complete structured contradiction register in overlay; inspect source history"
+    ]
+  },
+  "evidence_policy": {
+    "preferred_source_types": [
+      "filing",
+      "independent",
+      "regulator"
+    ],
+    "primary_source_expectation": "Located primary passages; reviewer-attested supplied files; original bytes retained",
+    "evidence_exhaustion_policy": "Network restrictions are an escalation, not evidence exhaustion. Continue other permitted routes.",
+    "closure_classifications": [
+      "CLOSED",
+      "PARTIAL",
+      "EVIDENCE_EXHAUSTED",
+      "OPEN"
+    ],
+    "freshness_rules": "Keep publication, effective, reporting and retrieval dates distinct",
+    "review_period": "90 days"
+  },
+  "estimation_policy": {
+    "permitted_estimate_types": [],
+    "retain_underlying_unknown": true
+  },
+  "outputs": {
+    "required_object_classes": [
+      "governed-records"
+    ],
+    "required_registers": [
+      "contradiction-register",
+      "evidence-register",
+      "governed-records",
+      "unknown-register",
+      "validation-report"
+    ],
+    "required_reports": [
+      "change-log",
+      "executive-checkpoint"
+    ],
+    "required_package_name": "AV-ENT-001-research-2026-11-10-candidate",
+    "release_manifest_requirement": true,
+    "checksums": true,
+    "change_log": true,
+    "executive_checkpoint": true
+  },
+  "outcome_states": [
+    "COMPLETE",
+    "CONTINUE",
+    "EVIDENCE_EXHAUSTED"
+  ],
+  "pack_version": "2.8.0"
+}

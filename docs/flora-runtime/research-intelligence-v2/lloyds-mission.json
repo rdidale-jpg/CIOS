@@ -1,0 +1,138 @@
+{
+  "schema_id": "CIOS-Research-Mission-Manifest",
+  "schema_version": "1.1.0",
+  "mission_id": "BK-ENT-001-research-2026-11-10",
+  "mission_name": "Lloyds Banking Group evidence-led deepening",
+  "mission_type": "targeted-evidence-closure",
+  "mission_template_id": "targeted-evidence-closure",
+  "mission_template_version": "1.0.0",
+  "parent_twin_id": "BK-ENT-001",
+  "baseline_release": "BK-RESEARCH-001",
+  "created_date": "2026-11-10",
+  "generated_date": "2026-11-10T00:00:00Z",
+  "owner": "Research owner unassigned",
+  "governance_state": "DRAFT",
+  "scope": {
+    "industry": "UK Banking",
+    "geography": [
+      "United Kingdom"
+    ],
+    "included_domains": [
+      "Operating model",
+      "Net AI benefits",
+      "Investment allocation"
+    ],
+    "excluded_domains": [
+      "Automatic canonical updates",
+      "Sales qualification"
+    ],
+    "material_subject_criteria": "Deepen the existing reference enterprise; preserve industry scope boundaries",
+    "research_period": "Historical baseline through cut-off",
+    "evidence_cut_off": "2026-11-10",
+    "current_checkpoint": "b6de7f7d40130a71c2169cbb7a0d3677cd7ea6c51774e5b0951eb26d703abe92",
+    "complete_scope_rule": "Selected evidence demands need governed review; no automatic completion."
+  },
+  "profile_pins": {
+    "industry-overview": "1.0.0",
+    "enterprise-dossier": "1.0.0",
+    "market-participant": "1.0.0",
+    "programme": "1.0.0",
+    "opportunity": "1.0.0"
+  },
+  "relationship_profile_versions": {
+    "industry-membership": "1.0.0"
+  },
+  "evidence_uncertainty_profile_versions": {
+    "evidence": "EI-012",
+    "unknown": "IT-001",
+    "contradiction": "IT-001"
+  },
+  "release_manifest_version": "2.0.0",
+  "research_priorities": {
+    "priority_outcomes": [
+      "Improve evidence quality and connected understanding"
+    ],
+    "current_governed_gaps": [
+      "Candidate overlay task (not accepted canonical gap): R-BK-ENT-001-operations: What dated, enterprise-specific evidence establishes operating model for Lloyds Banking Group, and what contradicts the current account?",
+      "Candidate overlay task (not accepted canonical gap): G-AI-BENEFITS: Are claimed benefits realised net of adoption/control costs?",
+      "Candidate overlay task (not accepted canonical gap): G-ALLOCATION: Which investment capacity is allocated to external addressable work?"
+    ],
+    "named_closure_targets": [
+      "R-BK-ENT-001-operations: What dated, enterprise-specific evidence establishes operating model for Lloyds Banking Group, and what contradicts the current account?",
+      "G-AI-BENEFITS: Are claimed benefits realised net of adoption/control costs?",
+      "G-ALLOCATION: Which investment capacity is allocated to external addressable work?"
+    ],
+    "monitoring_targets": [
+      "Dated source changes and contrary evidence"
+    ],
+    "current_object_counts": {
+      "candidate_claims": 45
+    },
+    "current_unknowns": [
+      "G-PRIMARY: Which claims are supported by the latest original publications?",
+      "G-CUSTOMER-EVIDENCE: Is there a customer-acknowledged problem and a funded decision process?",
+      "G-REGULATORY: Which current versions, effective dates and entities are in scope?",
+      "G-ALLOCATION: Which investment capacity is allocated to external addressable work?",
+      "G-OUTCOMES: What is the impact of brand/app and branch changes?",
+      "G-PRIMACY: Are digital users primary customers and what is deposit elasticity?",
+      "G-WORKLOADS: Which workloads/capabilities have funded migration or control work?",
+      "G-AI-BENEFITS: Are claimed benefits realised net of adoption/control costs?",
+      "G-SUPPLIER: What is the actual supplier workshare, obligation and renewal/exit position?",
+      "G-CURVE: Did the proposed Curve transaction complete, and what integration is approved?",
+      "G-FRAUD: Which fraud/control problem is material within Lloyds?",
+      "G-CLIMATE: Which Lloyds portfolios and programmes have material climate needs?",
+      "G-MARKET: What are the latest comparable market shares and entrant economics?"
+    ],
+    "current_contradictions": [
+      "No complete structured contradiction register in overlay; inspect source history"
+    ]
+  },
+  "evidence_policy": {
+    "preferred_source_types": [
+      "filing",
+      "independent",
+      "regulator"
+    ],
+    "primary_source_expectation": "Located primary passages; reviewer-attested supplied files; original bytes retained",
+    "evidence_exhaustion_policy": "Network restrictions are an escalation, not evidence exhaustion. Continue other permitted routes.",
+    "closure_classifications": [
+      "CLOSED",
+      "PARTIAL",
+      "EVIDENCE_EXHAUSTED",
+      "OPEN"
+    ],
+    "freshness_rules": "Keep publication, effective, reporting and retrieval dates distinct",
+    "review_period": "90 days"
+  },
+  "estimation_policy": {
+    "permitted_estimate_types": [],
+    "retain_underlying_unknown": true
+  },
+  "outputs": {
+    "required_object_classes": [
+      "governed-records"
+    ],
+    "required_registers": [
+      "contradiction-register",
+      "evidence-register",
+      "governed-records",
+      "unknown-register",
+      "validation-report"
+    ],
+    "required_reports": [
+      "change-log",
+      "executive-checkpoint"
+    ],
+    "required_package_name": "BK-ENT-001-research-2026-11-10-candidate",
+    "release_manifest_requirement": true,
+    "checksums": true,
+    "change_log": true,
+    "executive_checkpoint": true
+  },
+  "outcome_states": [
+    "COMPLETE",
+    "CONTINUE",
+    "EVIDENCE_EXHAUSTED"
+  ],
+  "pack_version": "2.8.0"
+}
