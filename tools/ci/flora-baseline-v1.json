@@ -6605,6 +6605,81 @@
               "tests/test_flora_commercial_visual_v3.py"
             ]
           ]
+        },
+        "commercial_usability_v31": {
+          "cases": {
+            "tests/test_flora_commercial_usability_v31.py::test_optional_summary_preserves_ids_mapped_activities_and_source_maturity[banking-9]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_optional_summary_preserves_ids_mapped_activities_and_source_maturity[aviation-6]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_empty_and_unsupported_summary_never_invents_support": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_executive_summary_and_progressive_investigation_keep_counterevidence_visible[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_executive_summary_and_progressive_investigation_keep_counterevidence_visible[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_stage_or_forged_references_cannot_establish_customer_or_pursuit_validation[Discovered]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_stage_or_forged_references_cannot_establish_customer_or_pursuit_validation[Researching]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_stage_or_forged_references_cannot_establish_customer_or_pursuit_validation[Validating]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_stage_or_forged_references_cannot_establish_customer_or_pursuit_validation[Qualified]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_stage_or_forged_references_cannot_establish_customer_or_pursuit_validation[Pursuit]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_stage_or_forged_references_cannot_establish_customer_or_pursuit_validation[Proposal]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_stage_or_forged_references_cannot_establish_customer_or_pursuit_validation[Negotiation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_stage_or_forged_references_cannot_establish_customer_or_pursuit_validation[Won]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_stage_or_forged_references_cannot_establish_customer_or_pursuit_validation[Lost]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_internal_research_readiness_requires_all_inputs_and_boolean_review": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_maturity_cannot_be_posted_or_written_directly_and_denial_keeps_hash[evidence_maturity]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_maturity_cannot_be_posted_or_written_directly_and_denial_keeps_hash[customer_validated]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_maturity_cannot_be_posted_or_written_directly_and_denial_keeps_hash[pursuit_qualified]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_research_readiness_does_not_advance_stage_or_rewrite_provenance": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_saved_evidence_status_does_not_use_rejected_unsaved_fields": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_pipeline_register_compact_fields_filters_and_empty_state": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_usability_v31.py::test_public_summary_does_not_lookup_private_records": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_commercial_usability_v31.py"
+            ]
+          ]
         }
       }
     }

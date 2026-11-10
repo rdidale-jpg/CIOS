@@ -2,7 +2,7 @@ name: FLORA validation
 
 on:
   pull_request:
-    branches: [main, codex/flora-security-repair-01a, codex/flora-security-repair-01b, codex/flora-living-industry-maps-v2]
+    branches: [main, codex/flora-security-repair-01a, codex/flora-security-repair-01b, codex/flora-living-industry-maps-v2, codex/flora-commercial-visual-intelligence-v3]
     types: [opened, synchronize, reopened, ready_for_review, edited]
     paths:
       - 'cios/applications/flora/**'
