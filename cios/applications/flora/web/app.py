@@ -183,6 +183,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_storage_recovery_page())
             elif parsed.path in {"/", "/flora", "/flora/"}:
                 self._html(_flora_home_page(self.headers))
+            elif parsed.path in ("/enterprises/lloyds/understanding", "/enterprises/easyjet/understanding"):
+                from cios.applications.flora.research_intelligence.understanding_views import understanding_page
+                self._html(understanding_page(parsed.path.split("/")[2], self.headers))
             elif parsed.path in ("/enterprises/lloyds/research-diagnostic", "/enterprises/easyjet/research-diagnostic"):
                 from cios.applications.flora.research_intelligence import unified_views
                 from cios.applications.flora.research_intelligence.model import load_assessment

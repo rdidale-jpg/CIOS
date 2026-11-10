@@ -1,0 +1,741 @@
+{
+  "version": 1,
+  "authority": "candidate_intelligence",
+  "baseline_digest": "b6de7f7d40130a71c2169cbb7a0d3677cd7ea6c51774e5b0951eb26d703abe92",
+  "enterprise_id": "BK-ENT-001",
+  "as_of": "2026-11-10",
+  "sources": [
+    {
+      "id": "V3-LBG-TECH",
+      "title": "LBG TECH — located research extract",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html",
+      "publication_date": null,
+      "publication_date_evidence": "Publication date not established",
+      "reporting_period": "Undated page, reviewed 2026-11-10",
+      "retrieved_at": "2026-11-10T09:03:13+00:00",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html",
+      "research_domain": "banking",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/V3-LBG-TECH.txt",
+      "text_sha256": "90e568f680af60af2dfdf2b488864d952c013167748232d8cd1eb9da326ad919",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn132119view0; turn154346view0",
+      "excerpts": [
+        {
+          "locator": "Technology, line615",
+          "quote": "50% of our applications are on the cloud and we’ve reduced data centres by 40%."
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Retained exact passage with source/date/scope. Company claims remain company claims; no causal attribution or buying intent is inferred.",
+      "limitation": "Current implementation, contract scope, measured net benefits and independent outcome verification remain unproven.",
+      "assertion_origin": "Lloyds management",
+      "entity_ids": [
+        "BK-ENT-001"
+      ]
+    },
+    {
+      "id": "V3-LBG-STRATEGY",
+      "title": "LBG STRATEGY — located research extract",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+      "publication_date": null,
+      "publication_date_evidence": "Publication date not established",
+      "reporting_period": "2022–2026 strategy progress as described on undated page",
+      "retrieved_at": "2026-11-10T09:03:13+00:00",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html",
+      "research_domain": "banking",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/V3-LBG-STRATEGY.txt",
+      "text_sha256": "ea4d93548d612e350bca3d6840fdd156cadb8732a39e29a713ffedba759e50a1",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn132119view1; turn154346view1",
+      "excerpts": [
+        {
+          "locator": "2022–2026 progress, line647",
+          "quote": "reducing data centres by more than 50% and migrating more than 60% of applications to the cloud"
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Retained exact passage with source/date/scope. Company claims remain company claims; no causal attribution or buying intent is inferred.",
+      "limitation": "Current implementation, contract scope, measured net benefits and independent outcome verification remain unproven.",
+      "assertion_origin": "Lloyds management",
+      "entity_ids": [
+        "BK-ENT-001"
+      ]
+    },
+    {
+      "id": "V3-LBG-ENVOY",
+      "title": "LBG ENVOY — located research extract",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+      "publication_date": "2026-05-01",
+      "publication_date_evidence": "Official HTML article header line602: Published on 01 May 2026. Related PDF date is not substituted.",
+      "reporting_period": "Platform announcement, May 2026",
+      "retrieved_at": "2026-11-10T09:21:50+00:00",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html",
+      "research_domain": "banking",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/V3-LBG-ENVOY.txt",
+      "text_sha256": "99152ab327c545fd1ba7d31a8e244cb468afd3736f43037cb2c644f43683141e",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn132119view2; turn154346view2; turn261789view0",
+      "excerpts": [
+        {
+          "locator": "Envoy platform, line613",
+          "quote": "Built with Google Cloud"
+        },
+        {
+          "locator": "Safety/control, line620",
+          "quote": "Envoy has strong controls built in from the start."
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Retained exact passage with source/date/scope. Company claims remain company claims; no causal attribution or buying intent is inferred.",
+      "limitation": "Current implementation, contract scope, measured net benefits and independent outcome verification remain unproven.",
+      "assertion_origin": "Lloyds management",
+      "entity_ids": [
+        "BK-ENT-001"
+      ]
+    },
+    {
+      "id": "V3-LBG-SECONDARY",
+      "title": "LBG SECONDARY — located research extract",
+      "publisher": "The Guardian",
+      "url": "https://www.theguardian.com/business/2026/jul/30/lloyds-bank-cut-2bn-costs-part-ai-powered-strategy",
+      "publication_date": "2026-07-30",
+      "publication_date_evidence": "Article header line58; last modified 6 August 2026",
+      "reporting_period": "Management strategy announced July 2026",
+      "retrieved_at": "2026-11-10T09:03:13+00:00",
+      "retrieval_url": "https://www.theguardian.com/business/2026/jul/30/lloyds-bank-cut-2bn-costs-part-ai-powered-strategy",
+      "research_domain": "banking",
+      "verification": "secondary_reviewed",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/V3-LBG-SECONDARY.txt",
+      "text_sha256": "58bb046ed5f7d3624b542a7af686c92def997516ef245f9f11213bf5f93c7da2",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn400666view0",
+      "excerpts": [
+        {
+          "locator": "Management attribution, line65",
+          "quote": "would involve investing £13bn"
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Retained exact passage with source/date/scope. Company claims remain company claims; no causal attribution or buying intent is inferred.",
+      "limitation": "Current implementation, contract scope, measured net benefits and independent outcome verification remain unproven.",
+      "assertion_origin": "Lloyds management",
+      "entity_ids": [
+        "BK-ENT-001"
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "candidate": {
+        "claim_id": "RC-9a68e9e88d443203a9e8",
+        "claim_type": "research_excerpt",
+        "statement": "50% of our applications are on the cloud and we’ve reduced data centres by 40%.",
+        "source_asset_id": "RS-17dfed753254598c1fa1",
+        "source_segment_id": "RS-17dfed753254598c1fa1::a8349a99e3ad72d7",
+        "scope": "enterprise",
+        "subject": "BK-ENT-001",
+        "predicate": "operations",
+        "object": "50% of our applications are on the cloud and we’ve reduced data centres by 40%.",
+        "time_scope": "Undated page, reviewed 2026-11-10",
+        "participant_scope": "UK Banking",
+        "enterprise_scope": "BK-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-17dfed753254598c1fa1"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-17dfed753254598c1fa1::a8349a99e3ad72d7",
+        "asset_id": "RS-17dfed753254598c1fa1",
+        "section_heading": "Technology, line615",
+        "content": "50% of our applications are on the cloud and we’ve reduced data centres by 40%.",
+        "content_hash": "93d821d0392943e7be3dfb2c8acc52afbe691e865dd139872854b08f3b604e8d",
+        "source_location": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html [Technology, line615]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-v1-9a68e9e88d443203a9e8bdff8b7c0c397f24486af28fc92807b1d591c3bea553",
+      "accepted_observation": false,
+      "source_id": "V3-LBG-TECH"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-fa02679099efd4edf41f",
+        "claim_type": "research_excerpt",
+        "statement": "Built with Google Cloud",
+        "source_asset_id": "RS-4be11d772ed7e1ac4974",
+        "source_segment_id": "RS-4be11d772ed7e1ac4974::772f38d6efbee768",
+        "scope": "enterprise",
+        "subject": "BK-ENT-001",
+        "predicate": "registered-gap",
+        "object": "Built with Google Cloud",
+        "time_scope": "Platform announcement, May 2026",
+        "participant_scope": "UK Banking",
+        "enterprise_scope": "BK-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-4be11d772ed7e1ac4974"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-4be11d772ed7e1ac4974::772f38d6efbee768",
+        "asset_id": "RS-4be11d772ed7e1ac4974",
+        "section_heading": "Envoy platform, line613",
+        "content": "Built with Google Cloud",
+        "content_hash": "0362ac08b4514de3ae137ef8629a0edcbec7e19c780c55c0546dcd0468c85e50",
+        "source_location": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html [Envoy platform, line613]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-v1-fa02679099efd4edf41f0d27946ea44032e055fa71bab033a81c0132b2683d24",
+      "accepted_observation": false,
+      "source_id": "V3-LBG-ENVOY"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-b28db7dca6a57f657fbf",
+        "claim_type": "research_excerpt",
+        "statement": "Envoy has strong controls built in from the start.",
+        "source_asset_id": "RS-4be11d772ed7e1ac4974",
+        "source_segment_id": "RS-4be11d772ed7e1ac4974::d8a497ee83ba4ae3",
+        "scope": "enterprise",
+        "subject": "BK-ENT-001",
+        "predicate": "registered-gap",
+        "object": "Envoy has strong controls built in from the start.",
+        "time_scope": "Platform announcement, May 2026",
+        "participant_scope": "UK Banking",
+        "enterprise_scope": "BK-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-4be11d772ed7e1ac4974"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-4be11d772ed7e1ac4974::d8a497ee83ba4ae3",
+        "asset_id": "RS-4be11d772ed7e1ac4974",
+        "section_heading": "Safety/control, line620",
+        "content": "Envoy has strong controls built in from the start.",
+        "content_hash": "ecacfa5990b9bd0b69304feba923462490ecc31ba7b90f0607202c6581b4ef15",
+        "source_location": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html [Safety/control, line620]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-v1-b28db7dca6a57f657fbfb9da96fa4171d0b4278470a2b24e96e03273742d9ffe",
+      "accepted_observation": false,
+      "source_id": "V3-LBG-ENVOY"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-bafd3d5516248387f084",
+        "claim_type": "research_excerpt",
+        "statement": "would involve investing £13bn",
+        "source_asset_id": "RS-a7376d5ccd93bbf2dfd4",
+        "source_segment_id": "RS-a7376d5ccd93bbf2dfd4::4adac7996179dca3",
+        "scope": "enterprise",
+        "subject": "BK-ENT-001",
+        "predicate": "registered-gap",
+        "object": "would involve investing £13bn",
+        "time_scope": "Management strategy announced July 2026",
+        "participant_scope": "UK Banking",
+        "enterprise_scope": "BK-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-a7376d5ccd93bbf2dfd4"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-a7376d5ccd93bbf2dfd4::4adac7996179dca3",
+        "asset_id": "RS-a7376d5ccd93bbf2dfd4",
+        "section_heading": "Management attribution, line65",
+        "content": "would involve investing £13bn",
+        "content_hash": "deccbaceceade9a08743056312c387f058ebbd6c07d2fed24fe3025f8eeceb8d",
+        "source_location": "https://www.theguardian.com/business/2026/jul/30/lloyds-bank-cut-2bn-costs-part-ai-powered-strategy [Management attribution, line65]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-v1-bafd3d5516248387f0849d5f19cbdd7b7e74528562b8018a8b5ad706a57d65b2",
+      "accepted_observation": false,
+      "source_id": "V3-LBG-SECONDARY"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-3508e63fc114227406a1",
+        "claim_type": "research_excerpt",
+        "statement": "reducing data centres by more than 50% and migrating more than 60% of applications to the cloud",
+        "source_asset_id": "RS-fa0078e21f2524980248",
+        "source_segment_id": "RS-fa0078e21f2524980248::9ee87d379dfc5572",
+        "scope": "enterprise",
+        "subject": "BK-ENT-001",
+        "predicate": "operations",
+        "object": "reducing data centres by more than 50% and migrating more than 60% of applications to the cloud",
+        "time_scope": "2022–2026 strategy progress as described on undated page",
+        "participant_scope": "UK Banking",
+        "enterprise_scope": "BK-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-fa0078e21f2524980248"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-fa0078e21f2524980248::9ee87d379dfc5572",
+        "asset_id": "RS-fa0078e21f2524980248",
+        "section_heading": "2022–2026 progress, line647",
+        "content": "reducing data centres by more than 50% and migrating more than 60% of applications to the cloud",
+        "content_hash": "d88d60345b10e2b3864ee4802e574cf95d962797f1ba3f34c41623c11729cbc3",
+        "source_location": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html [2022–2026 progress, line647]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-v1-3508e63fc114227406a10bbaf2ceecc05c979241889476c183dc1eebd0269458",
+      "accepted_observation": false,
+      "source_id": "V3-LBG-STRATEGY"
+    }
+  ],
+  "cycle_receipts": [
+    {
+      "id": "RW-9185137e984102c10744b6d3",
+      "selected_task_ids": [
+        "R-BK-ENT-001-operations",
+        "G-AI-BENEFITS",
+        "G-ALLOCATION"
+      ],
+      "revisit_task_ids": [],
+      "proposal_ids": [
+        "RP-185900175897f9efabe75e77",
+        "RP-3f0e601e987eebcd44403325",
+        "RP-112907f8e3065962f483aec0"
+      ]
+    },
+    {
+      "id": "RW-03f7c261249a466872b5051a",
+      "selected_task_ids": [
+        "R-BK-ENT-001-operations",
+        "G-CLIMATE",
+        "G-CURVE"
+      ],
+      "revisit_task_ids": [
+        "R-BK-ENT-001-operations"
+      ],
+      "proposal_ids": [
+        "RP-fbbadcdf254fd16b77470f92"
+      ]
+    }
+  ],
+  "claim_reviews": [
+    {
+      "claim_id": "RC-9a68e9e88d443203a9e8",
+      "assertion_digest": "a28006f8878351f2e02473ec62c215d1fb84b2593554ef47947d00670dc28332",
+      "entity_id": "BK-ENT-001",
+      "period": "Undated page, reviewed 2026-11-10",
+      "links": [
+        {
+          "source_id": "V3-LBG-TECH",
+          "quote": "50% of our applications are on the cloud and we’ve reduced data centres by 40%.",
+          "locator": "Technology, line615",
+          "support": "direct",
+          "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "a28006f8878351f2e02473ec62c215d1fb84b2593554ef47947d00670dc28332"
+        }
+      ],
+      "domains": [
+        "operations",
+        "technology"
+      ]
+    },
+    {
+      "claim_id": "RC-fa02679099efd4edf41f",
+      "assertion_digest": "aa1a8d07a038aac587ef19424db5eabff1599d479e3fbed6c0ccaf85758ae6d0",
+      "entity_id": "BK-ENT-001",
+      "period": "Platform announcement, May 2026",
+      "links": [
+        {
+          "source_id": "V3-LBG-ENVOY",
+          "quote": "Built with Google Cloud",
+          "locator": "Envoy platform, line613",
+          "support": "direct",
+          "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "aa1a8d07a038aac587ef19424db5eabff1599d479e3fbed6c0ccaf85758ae6d0"
+        }
+      ],
+      "domains": [
+        "technology",
+        "suppliers",
+        "transformation"
+      ]
+    },
+    {
+      "claim_id": "RC-b28db7dca6a57f657fbf",
+      "assertion_digest": "d10e15b8190c8318a05f66561bf623f1befbb65ebb308db77f4a084e67af63db",
+      "entity_id": "BK-ENT-001",
+      "period": "Platform announcement, May 2026",
+      "links": [
+        {
+          "source_id": "V3-LBG-ENVOY",
+          "quote": "Envoy has strong controls built in from the start.",
+          "locator": "Safety/control, line620",
+          "support": "direct",
+          "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "d10e15b8190c8318a05f66561bf623f1befbb65ebb308db77f4a084e67af63db"
+        }
+      ],
+      "domains": [
+        "technology",
+        "suppliers",
+        "transformation"
+      ]
+    },
+    {
+      "claim_id": "RC-bafd3d5516248387f084",
+      "assertion_digest": "2e69c5badd9d812842b0d15ff5ee697183e9e7c8f98d4779a152fc9a6a664aba",
+      "entity_id": "BK-ENT-001",
+      "period": "Management strategy announced July 2026",
+      "links": [
+        {
+          "source_id": "V3-LBG-SECONDARY",
+          "quote": "would involve investing £13bn",
+          "locator": "Management attribution, line65",
+          "support": "direct",
+          "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "2e69c5badd9d812842b0d15ff5ee697183e9e7c8f98d4779a152fc9a6a664aba"
+        }
+      ],
+      "domains": [
+        "financials",
+        "transformation"
+      ]
+    },
+    {
+      "claim_id": "RC-3508e63fc114227406a1",
+      "assertion_digest": "9971231ce8b406b959cf623804f1772bfce0851cb569f98dc9f6d427163b2f36",
+      "entity_id": "BK-ENT-001",
+      "period": "2022–2026 strategy progress as described on undated page",
+      "links": [
+        {
+          "source_id": "V3-LBG-STRATEGY",
+          "quote": "reducing data centres by more than 50% and migrating more than 60% of applications to the cloud",
+          "locator": "2022–2026 progress, line647",
+          "support": "direct",
+          "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "9971231ce8b406b959cf623804f1772bfce0851cb569f98dc9f6d427163b2f36"
+        }
+      ],
+      "domains": [
+        "strategy",
+        "operations"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "V3-LBG-GOOGLE",
+      "subject": "BK-ENT-001",
+      "predicate": "reports_envoy_collaboration",
+      "object": "SUP-GOOGLE",
+      "claim_ids": [
+        "RC-fa02679099efd4edf41f"
+      ],
+      "temporal_scope": "May 2026 announcement",
+      "verified": false,
+      "assertion_kind": "candidate_relationship_assessment",
+      "assessment": {
+        "status": "factual",
+        "reason": "Company explicitly names Google Cloud for Envoy only; not every Group programme or an evidenced exclusive contract.",
+        "entity_id": "BK-ENT-001",
+        "causal": false,
+        "missing_evidence": [
+          "Current contract scope/value/renewal",
+          "Independent implementation verification"
+        ],
+        "scope_note": "Company explicitly names Google Cloud for Envoy only; not every Group programme or an evidenced exclusive contract.",
+        "explicit_relationship": {
+          "subject": "BK-ENT-001",
+          "predicate": "reports_envoy_collaboration",
+          "object": "SUP-GOOGLE"
+        },
+        "edge_digest": "a6356a1bcf5f66e5b31dab8f1a71be4b51bc2ea9aba6336722c0ef6634678d39"
+      }
+    },
+    {
+      "id": "V3-LBG-ESTATE",
+      "subject": "CAP-TECH",
+      "predicate": "maps_to_modernisation",
+      "object": "PROG-LBG-LEGACY",
+      "claim_ids": [
+        "RC-9a68e9e88d443203a9e8",
+        "RC-3508e63fc114227406a1"
+      ],
+      "temporal_scope": "Source pages undated; strategy describes 2022–2026",
+      "verified": false,
+      "assertion_kind": "candidate_relationship_assessment",
+      "assessment": {
+        "status": "inference",
+        "reason": "Application/cloud and data-centre change maps to technology modernisation; mapping is analytical, not causation.",
+        "entity_id": "BK-ENT-001",
+        "causal": false,
+        "missing_evidence": [
+          "Comparable denominator and effective date",
+          "Platform dependency inventory and migration ownership"
+        ],
+        "scope_note": "Application/cloud and data-centre change maps to technology modernisation; mapping is analytical, not causation.",
+        "edge_digest": "9aaacc38a0f608712c53c76aea607f55ab668d39debee4d1a91ed509b69f3208"
+      }
+    },
+    {
+      "id": "V3-LBG-AI-DEPENDENCY",
+      "subject": "PROG-LBG-AI",
+      "predicate": "may_depend_on",
+      "object": "SUP-GOOGLE",
+      "claim_ids": [
+        "RC-fa02679099efd4edf41f",
+        "RC-b28db7dca6a57f657fbf"
+      ],
+      "temporal_scope": "May 2026 Envoy scope",
+      "verified": false,
+      "assertion_kind": "candidate_relationship_assessment",
+      "assessment": {
+        "status": "inference",
+        "reason": "Envoy suggests a relevant platform dependency within AI enablement, not proof all AI delivery depends on one supplier.",
+        "entity_id": "BK-ENT-001",
+        "causal": false,
+        "missing_evidence": [
+          "Programme-specific dependency boundary",
+          "Other suppliers and exit/portability conditions"
+        ],
+        "scope_note": "Envoy suggests a relevant platform dependency within AI enablement, not proof all AI delivery depends on one supplier.",
+        "edge_digest": "1842caedf68d6f8d05193c95890f230198b50540ba9c4a7cf83c9c886cd504ba"
+      }
+    },
+    {
+      "id": "V3-LBG-OUTCOME",
+      "subject": "PROG-LBG-AI",
+      "predicate": "outcome_not_established",
+      "object": "G-AI-BENEFITS",
+      "claim_ids": [
+        "RC-fa02679099efd4edf41f",
+        "RC-b28db7dca6a57f657fbf",
+        "RC-bafd3d5516248387f084"
+      ],
+      "temporal_scope": "No measured attribution period",
+      "verified": false,
+      "assertion_kind": "candidate_relationship_assessment",
+      "assessment": {
+        "status": "unknown",
+        "reason": "Platform capability and investment intentions do not establish net realised AI benefits.",
+        "entity_id": "BK-ENT-001",
+        "causal": false,
+        "missing_evidence": [
+          "Net benefit baseline",
+          "Adoption, cost allocation, counterfactual and independent measurement"
+        ],
+        "scope_note": "Platform capability and investment intentions do not establish net realised AI benefits.",
+        "edge_digest": "5de08af2bea986316012eed2c9de4747174b9a4d5e09fc0d1cba815088ca6efd"
+      }
+    },
+    {
+      "id": "V3-LBG-OWNER",
+      "subject": "PROG-LBG-LEGACY",
+      "predicate": "procurement_owner_unknown",
+      "object": "G-ALLOCATION",
+      "claim_ids": [],
+      "temporal_scope": "Unknown",
+      "verified": false,
+      "assertion_kind": "candidate_relationship_assessment",
+      "assessment": {
+        "status": "unknown",
+        "reason": "No new project allocation, accountable procurement decision or committed buying event established.",
+        "entity_id": "BK-ENT-001",
+        "causal": false,
+        "missing_evidence": [
+          "Named accountable function",
+          "Programme allocation and sourcing evidence"
+        ],
+        "scope_note": "No new project allocation, accountable procurement decision or committed buying event established.",
+        "edge_digest": "90d24a5f423c943ee5f2989dd28d10eaec4d186f884c9ddac13c1bd5ae86b113"
+      }
+    }
+  ],
+  "conclusions": [
+    {
+      "id": "LBG-UNDERSTAND-ESTATE",
+      "title": "Modernisation is real; the estate baseline is unresolved",
+      "statement": "The company describes operating-estate change on two pages, but their cloud/data-centre measures cannot be merged into a comparable current baseline.",
+      "kind": "inference",
+      "entity_id": "BK-ENT-001",
+      "claim_ids": [
+        "RC-9a68e9e88d443203a9e8",
+        "RC-3508e63fc114227406a1"
+      ],
+      "relationship_ids": [
+        "V3-LBG-ESTATE"
+      ],
+      "missing_evidence": [
+        "Effective dates, application populations, data-centre denominator and retirement versus migration definition"
+      ],
+      "change_from_v2": "V2 had a missing mapped operating-model screen; v3 supplies specific estate observations and exposes a scope/time tension instead of choosing the larger figure.",
+      "causation_proven": false
+    },
+    {
+      "id": "LBG-UNDERSTAND-ENVOY",
+      "title": "Existing platform and controls constrain a greenfield assumption",
+      "statement": "Envoy is already described with Google Cloud and built-in controls. Missing control effectiveness or integration demand needs evidence, rather than assuming no platform exists.",
+      "kind": "inference",
+      "entity_id": "BK-ENT-001",
+      "claim_ids": [
+        "RC-fa02679099efd4edf41f",
+        "RC-b28db7dca6a57f657fbf"
+      ],
+      "relationship_ids": [
+        "V3-LBG-GOOGLE",
+        "V3-LBG-AI-DEPENDENCY"
+      ],
+      "missing_evidence": [
+        "Current deployment/adoption",
+        "Effectiveness, assurance, contract boundaries and residual workflow issues"
+      ],
+      "change_from_v2": "Adds exact platform/control passages and an explicitly bounded relationship review; it does not create a new supplier contract or need.",
+      "causation_proven": false
+    },
+    {
+      "id": "LBG-UNDERSTAND-BENEFITS",
+      "title": "Investment plans are not measured net benefits",
+      "statement": "The secondary report repeats a management investment intention; its separate publisher does not independently establish the economic outcome of Envoy or Group-wide AI.",
+      "kind": "inference",
+      "entity_id": "BK-ENT-001",
+      "claim_ids": [
+        "RC-bafd3d5516248387f084",
+        "RC-fa02679099efd4edf41f",
+        "RC-b28db7dca6a57f657fbf"
+      ],
+      "relationship_ids": [
+        "V3-LBG-OUTCOME"
+      ],
+      "missing_evidence": [
+        "Independent outcomes, realised versus target benefits, attributable costs and adoption"
+      ],
+      "change_from_v2": "New source-family diversity is useful context, but independent outcome corroboration remains zero.",
+      "causation_proven": false
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "LBG-CLOUD-SCOPE-TENSION",
+      "claim_ids": [
+        "RC-9a68e9e88d443203a9e8",
+        "RC-3508e63fc114227406a1"
+      ],
+      "status": "Unresolved scope/time tension, not proven same-period contradiction",
+      "treatment": "Retain both measures; do not average, select the newest-looking page or silently supersede. Obtain dated comparable estate definitions.",
+      "effect": "No single current cloud/data-centre baseline is authorised."
+    }
+  ],
+  "source_limitations": [
+    {
+      "url": "https://www.reuters.com/business/finance/lloyds-reports-first-half-profit-up-23-outlines-new-strategy-2026-07-30/",
+      "status": "Direct Reuters retrieval unavailable; index is not original content"
+    }
+  ],
+  "stage_ids": [
+    "LBG-A2030-PLATFORMS",
+    "G-AI-BENEFITS",
+    "CAP-TECH",
+    "SUP-GOOGLE",
+    "PROG-LBG-AI",
+    "SUP-GOOGLE",
+    "G-AI-BENEFITS"
+  ],
+  "source_task_ids": {
+    "V3-LBG-TECH": "R-BK-ENT-001-operations",
+    "V3-LBG-STRATEGY": "R-BK-ENT-001-operations",
+    "V3-LBG-ENVOY": "G-AI-BENEFITS",
+    "V3-LBG-SECONDARY": "G-ALLOCATION"
+  },
+  "acquisition_plan": [
+    {
+      "source_ids": [
+        "V3-LBG-TECH",
+        "V3-LBG-ENVOY",
+        "V3-LBG-SECONDARY"
+      ],
+      "revisit_task_ids": []
+    },
+    {
+      "source_ids": [
+        "V3-LBG-STRATEGY"
+      ],
+      "revisit_task_ids": [
+        "R-BK-ENT-001-operations"
+      ]
+    }
+  ],
+  "follow_up_tasks": [
+    {
+      "task_id": "R-BK-ENT-001-operations",
+      "question": "Reconcile cloud and data-centre measures using dated estate populations, denominators and migration/retirement definitions.",
+      "reason": "Two attributable pages differ; a larger figure is not automatically the current baseline.",
+      "claim_ids": [
+        "RC-9a68e9e88d443203a9e8",
+        "RC-3508e63fc114227406a1"
+      ]
+    },
+    {
+      "task_id": "G-AI-BENEFITS",
+      "question": "Obtain workload adoption, attributable operating costs and net-benefit baselines; test effects against counterfactuals and existing controls.",
+      "reason": "Envoy capability and controls are described; achieved incremental economics remain unverified.",
+      "claim_ids": [
+        "RC-fa02679099efd4edf41f",
+        "RC-b28db7dca6a57f657fbf"
+      ]
+    },
+    {
+      "task_id": "G-ALLOCATION",
+      "question": "Verify programme allocation, accountable ownership, current contract boundaries and permitted sourcing routes before treating investment plans as external spend.",
+      "reason": "The secondary article reports management intent, not supplier eligibility or a contract.",
+      "claim_ids": [
+        "RC-bafd3d5516248387f084"
+      ]
+    }
+  ]
+}
