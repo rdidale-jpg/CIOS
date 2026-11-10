@@ -2,7 +2,7 @@
 from html import escape as e
 import re
 from textwrap import wrap
-from .visual_intelligence import _icon,_sources,_badge
+from .visual_intelligence import _icon,_sources,_badge,STYLE as EVIDENCE_STYLE
 from .visual_templates import text
 
 STYLE='''
@@ -146,7 +146,7 @@ def render_living_map(spec,lens='overview'):
         scale=f"<span class='lm-kicker'>{e(m['label'])}</span><strong>{e(str(m['value'])) if m['value'] is not None else 'Not established'}</strong><small>{e(m['unit'] or m['limitation'])}<br>{e(m['scope_note'])}<br>{e(m['period'] or 'Period not established')}</small>"+(''.join(f"<a href='{e(p['url'],quote=True)}'>Inspect measurement & source →</a>" for p in m['evidence'][:1]))
     root=spec['industry']['url']
     toolbar=''.join(f"<a href='{root}?lens={k}' {'aria-current=page' if k==lens else ''}>{label}</a>" for k,label in [('overview','Operating system'),('ai-disruption','AI disruption'),('regulation','Regulation & resilience')])
-    body=f"<style>{STYLE}</style><section class='lm' data-ready='false' data-visual-family='industry-signature' data-living-map='2' data-snapshot='{e(spec['snapshot_digest'],quote=True)}'><div class='lm-frame'><header class='lm-intro'><div><span class='lm-kicker'>01 / Understand · {e(spec['industry']['label'])}</span><h2>{e(spec['title'])}</h2><p>{e(spec['summary'])}</p></div><aside class='lm-scale'>{scale}</aside></header><nav class='lm-toolbar' aria-label='Living industry layers'>{toolbar}<button class='lm-zoom' type='button' aria-pressed='false' hidden>Inspect at larger scale</button></nav>"
+    body=f"<style>{EVIDENCE_STYLE}{STYLE}</style><section class='lm' data-ready='false' data-visual-family='industry-signature' data-living-map='2' data-snapshot='{e(spec['snapshot_digest'],quote=True)}'><div class='lm-frame'><header class='lm-intro'><div><span class='lm-kicker'>01 / Understand · {e(spec['industry']['label'])}</span><h2>{e(spec['title'])}</h2><p>{e(spec['summary'])}</p></div><aside class='lm-scale'>{scale}</aside></header><nav class='lm-toolbar' aria-label='Living industry layers'>{toolbar}<button class='lm-zoom' type='button' aria-pressed='false' hidden>Inspect at larger scale</button></nav>"
     body+=f"<div class='lm-pan' tabindex='0' data-zoom='fit' aria-label='Pan the industry system; equivalent text navigation follows'>{_scene(spec,lens)}</div>"
     body+="<div class='lm-legend'><b>Dashed → conceptual money / passenger / service flow</b><span>◇ Unknown provider / scope</span><span>■ Dated reference-company relationship — inspect period</span><span>Rust outline: challenged finding</span><span>Plum: AI scenario</span><span>Amber: regulatory exposure to investigate</span></div>"
     body+=f"<p class='lm-note'>{e(spec['weighting'])} {e(spec['scale_gaps'])}</p>"
