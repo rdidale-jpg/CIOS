@@ -183,6 +183,14 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_storage_recovery_page())
             elif parsed.path in {"/", "/flora", "/flora/"}:
                 self._html(_flora_home_page(self.headers))
+            elif parsed.path in ("/enterprises/lloyds/research-diagnostic", "/enterprises/easyjet/research-diagnostic"):
+                from cios.applications.flora.research_intelligence import unified_views
+                from cios.applications.flora.research_intelligence.model import load_assessment
+                from cios.applications.flora.research_intelligence.diagnostic import render
+                domain = "banking" if "/lloyds/" in parsed.path else "aviation"
+                data = load_assessment(domain)
+                body = unified_views.breadcrumb(True, data) + render(data)
+                self._html(unified_views.page(data['enterprise_name'] + " Research Diagnostic", body, self.headers, "enterprises", parsed.path))
             elif parsed.path in {"/industries","/enterprises","/industries/banking","/industries/banking/visual-specs","/industries/aviation","/industries/aviation/visual-specs"} or parsed.path.startswith("/enterprises/"):
                 from cios.applications.flora.research_intelligence import unified_views
                 try:
