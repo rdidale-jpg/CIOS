@@ -1,0 +1,29 @@
+{
+  "id": "SRC-V2-LBG-AI-20261110",
+  "title": "AI benefit announcement",
+  "publisher": "Lloyds Banking Group",
+  "url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/ai-driven-benefits-2026.html",
+  "publication_date": "2026-01-29",
+  "publication_date_evidence": "Published on: 29 January 2026, article header line602",
+  "reporting_period": "2026 expectation; 2025 reported benefits",
+  "retrieved_at": "2026-11-10T08:20:00+00:00",
+  "retrieval_url": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/ai-driven-benefits-2026.html",
+  "research_domain": "banking",
+  "verification": "primary_retrieved",
+  "primary_content_sha256": null,
+  "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/SRC-V2-LBG-AI-20261110.txt",
+  "text_sha256": "fb258968a2968cbf42d3a99d453eb9a5744bc80118128b10909e241904c03f55",
+  "content_kind": "reviewed_web_excerpt",
+  "retrieval_method": "approved_web_research_tool",
+  "retrieval_reference": "turn777827view0",
+  "excerpts": [
+    {
+      "locator": "Article line621, Athena reported metric",
+      "quote": "reduced search times by 66% on average"
+    }
+  ],
+  "retrieval_extent": "Located passages from directly opened official webpage; original bytes not archived",
+  "reviewed_by": "Codex focused source review; no independent human review",
+  "review_notes": "Short located excerpts only. No hash of original page bytes is claimed. Company assertions are not independently verified outcomes.",
+  "limitation": "No customer buying intent, contract, budget or procurement commitment. Publication date unknown where not shown; collection date does not establish publication date."
+}

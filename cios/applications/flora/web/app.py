@@ -189,7 +189,11 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 from cios.applications.flora.research_intelligence.diagnostic import render
                 domain = "banking" if "/lloyds/" in parsed.path else "aviation"
                 data = load_assessment(domain)
-                body = unified_views.breadcrumb(True, data) + render(data)
+                from cios.applications.flora.research_intelligence.cycle_views import render as render_cycle
+                from datetime import date
+                body = (unified_views.breadcrumb(True, data) + render_cycle(data, date.today().isoformat())
+                        + "<details><summary>Original Research Intelligence Diagnostic — inventory and registered gaps</summary>"
+                        + render(data) + "</details>")
                 self._html(unified_views.page(data['enterprise_name'] + " Research Diagnostic", body, self.headers, "enterprises", parsed.path))
             elif parsed.path in {"/industries","/enterprises","/industries/banking","/industries/banking/visual-specs","/industries/aviation","/industries/aviation/visual-specs"} or parsed.path.startswith("/enterprises/"):
                 from cios.applications.flora.research_intelligence import unified_views

@@ -1,0 +1,562 @@
+{
+  "enterprise_id": "AV-ENT-001",
+  "as_of": "2026-11-10",
+  "baseline_digest": "7cbb6c3e09b759d03f2a107157f43aa4ffbe268a086fcdadb46f4b391bd400a0",
+  "authority": "candidate_intelligence",
+  "diagnostic_counts": {
+    "claim_count": 22,
+    "supported_claim_count": 22,
+    "source_count": 14,
+    "verified_relationship_count": 3,
+    "relationship_count": 58,
+    "high_priority_gap_count": 7
+  },
+  "dossier": [
+    {
+      "id": "corporate",
+      "label": "Corporate identity and structure",
+      "importance": 3,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "leadership",
+      "label": "Leadership and governance",
+      "importance": 3,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "strategy",
+      "label": "Strategy",
+      "importance": 3,
+      "claim_ids": [
+        "AV-OWNERSHIP",
+        "AV-STRATEGY"
+      ],
+      "supported_claim_ids": [
+        "AV-OWNERSHIP",
+        "AV-STRATEGY"
+      ],
+      "source_ids": [
+        "SRC-AV-AR25",
+        "SRC-AV-OFFER26"
+      ],
+      "publishers": [
+        "easyJet"
+      ],
+      "period_labels": [
+        "Reported recommended acquisition; expected completion Q1 calendar 2027, not confirmed",
+        "Year ended 30 September 2025"
+      ],
+      "deficiencies": [
+        "Independent/source-family corroboration not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "financials",
+      "label": "Financial intelligence",
+      "importance": 4,
+      "claim_ids": [
+        "AV-PROFIT",
+        "AV-Q3",
+        "AV-REVENUE"
+      ],
+      "supported_claim_ids": [
+        "AV-PROFIT",
+        "AV-REVENUE"
+      ],
+      "source_ids": [
+        "SRC-AV-AR25",
+        "SRC-AV-Q326"
+      ],
+      "publishers": [
+        "easyJet"
+      ],
+      "period_labels": [
+        "Quarter ended 30 June 2026; not full-year 2026",
+        "Year ended 30 September 2025"
+      ],
+      "deficiencies": [
+        "Independent/source-family corroboration not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "products",
+      "label": "Products, services and offers",
+      "importance": 3,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "technology",
+      "label": "Technology and digital estate",
+      "importance": 3,
+      "claim_ids": [
+        "AV-CHAT",
+        "AV-DIGITAL",
+        "AV-ICC"
+      ],
+      "supported_claim_ids": [
+        "AV-CHAT",
+        "AV-DIGITAL",
+        "AV-ICC"
+      ],
+      "source_ids": [
+        "SRC-AV-AR25",
+        "SRC-AV-CHAT26",
+        "SRC-AV-ICC"
+      ],
+      "publishers": [
+        "easyJet"
+      ],
+      "period_labels": [
+        "October 2026 channel launch",
+        "Reported launch May 2024; 2026 effectiveness unverified",
+        "Year ended 30 September 2025"
+      ],
+      "deficiencies": [
+        "Independent/source-family corroboration not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "operations",
+      "label": "Operating model",
+      "importance": 4,
+      "claim_ids": [
+        "AV-FLEET",
+        "AV-HOLIDAYS",
+        "AV-NETWORK"
+      ],
+      "supported_claim_ids": [
+        "AV-FLEET",
+        "AV-NETWORK"
+      ],
+      "source_ids": [
+        "SRC-AV-AR25",
+        "SRC-AV-HOL26"
+      ],
+      "publishers": [
+        "easyJet",
+        "easyJet holidays"
+      ],
+      "period_labels": [
+        "WTM 2026 management description",
+        "Year ended 30 September 2025"
+      ],
+      "deficiencies": [
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "customers",
+      "label": "Customers and markets",
+      "importance": 3,
+      "claim_ids": [
+        "AV-PEERS"
+      ],
+      "supported_claim_ids": [
+        "AV-PEERS"
+      ],
+      "source_ids": [
+        "SRC-AV-AR25"
+      ],
+      "publishers": [
+        "easyJet"
+      ],
+      "period_labels": [
+        "Year ended 30 September 2025"
+      ],
+      "deficiencies": [
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "suppliers",
+      "label": "Suppliers and ecosystem",
+      "importance": 3,
+      "claim_ids": [
+        "AV-MRO",
+        "AV-PROCUREMENT",
+        "AV-SUPPLY-RATING"
+      ],
+      "supported_claim_ids": [
+        "AV-MRO",
+        "AV-PROCUREMENT",
+        "AV-SUPPLY-RATING"
+      ],
+      "source_ids": [
+        "SRC-AV-AR25",
+        "SRC-AV-SFP"
+      ],
+      "publishers": [
+        "easyJet"
+      ],
+      "period_labels": [
+        "Reported product launch 2023; current commercial scope unknown",
+        "Year ended 30 September 2025"
+      ],
+      "deficiencies": [
+        "Independent/source-family corroboration not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "procurement",
+      "label": "Procurement and buying",
+      "importance": 3,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "transformation",
+      "label": "Transformation",
+      "importance": 4,
+      "claim_ids": [
+        "AV-WIFI"
+      ],
+      "supported_claim_ids": [
+        "AV-WIFI"
+      ],
+      "source_ids": [
+        "SRC-AV-WIFI26"
+      ],
+      "publishers": [
+        "easyJet"
+      ],
+      "period_labels": [
+        "Plan: first half 2027 to early 2028; not deployed fleet-wide"
+      ],
+      "deficiencies": [
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "events",
+      "label": "Events and analyst intelligence",
+      "importance": 3,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "opportunities",
+      "label": "Opportunity reasoning",
+      "importance": 1,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Research hypotheses do not establish customer demand",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    },
+    {
+      "id": "uncertainty",
+      "label": "Evidence and uncertainty",
+      "importance": 3,
+      "claim_ids": [],
+      "supported_claim_ids": [],
+      "source_ids": [],
+      "publishers": [],
+      "period_labels": [],
+      "deficiencies": [
+        "No mapped enterprise factual claim; inspect full dossier",
+        "Independent/source-family corroboration not established",
+        "Comparable multi-period history not established",
+        "Open Unknowns and Contradictions require explicit treatment",
+        "Causal depth and complete dossier fields not assessed automatically"
+      ],
+      "maturity": "Not certified"
+    }
+  ],
+  "selected_tasks": [
+    {
+      "id": "AV-G-BASELINE",
+      "topic": "registered-gap",
+      "title": "Measured operating outcomes",
+      "priority_score": 48,
+      "rationale": "Commercial access, prioritisation and delivery feasibility",
+      "question": "Obtain current disruption, customer-contact, AI adoption, fleet reliability and service baselines with permissible access.",
+      "target_claim_ids": [],
+      "source_families": [
+        "filing",
+        "regulator",
+        "independent"
+      ],
+      "source_routes": [],
+      "closure_test": "Obtain current disruption, customer-contact, AI adoption, fleet reliability and service baselines with permissible access.",
+      "search_queries": [
+        "easyJet Measured operating outcomes official disclosure 2026",
+        "easyJet Measured operating outcomes delay cancellation risk contrary evidence"
+      ]
+    },
+    {
+      "id": "AV-G-FUEL",
+      "topic": "registered-gap",
+      "title": "Fuel-data responsibilities",
+      "priority_score": 48,
+      "rationale": "Commercial access, prioritisation and delivery feasibility",
+      "question": "Identify fuel supplier, airline, verifier and regulator responsibilities; verify existing data reconciliation and assurance gaps.",
+      "target_claim_ids": [],
+      "source_families": [
+        "filing",
+        "regulator",
+        "independent"
+      ],
+      "source_routes": [],
+      "closure_test": "Identify fuel supplier, airline, verifier and regulator responsibilities; verify existing data reconciliation and assurance gaps.",
+      "search_queries": [
+        "easyJet Fuel-data responsibilities official disclosure 2026",
+        "easyJet Fuel-data responsibilities delay cancellation risk contrary evidence"
+      ]
+    },
+    {
+      "id": "AV-G-INDUSTRY",
+      "topic": "registered-gap",
+      "title": "Industry coverage and competition",
+      "priority_score": 48,
+      "rationale": "Commercial access, prioritisation and delivery feasibility",
+      "question": "Retrieve EUROCONTROL original forecast after HTTP503; obtain current airline/airport shares and route competition. Illustrative participants are not a comprehensive ranked market. ",
+      "target_claim_ids": [],
+      "source_families": [
+        "filing",
+        "regulator",
+        "independent"
+      ],
+      "source_routes": [],
+      "closure_test": "Retrieve EUROCONTROL original forecast after HTTP503; obtain current airline/airport shares and route competition. Illustrative participants are not a comprehensive ranked market. ",
+      "search_queries": [
+        "easyJet Industry coverage and competition official disclosure 2026",
+        "easyJet Industry coverage and competition delay cancellation risk contrary evidence"
+      ]
+    }
+  ],
+  "remaining_task_count": 16,
+  "source_review": [
+    {
+      "source_id": "SRC-AV-AR25",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-AV-IATA26",
+      "age_days": 156,
+      "date_status": "Review due (>90 days)",
+      "extent": "Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-AV-CAA25",
+      "age_days": 259,
+      "date_status": "Review due (>90 days)",
+      "extent": "Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-AV-SAF",
+      "age_days": 691,
+      "date_status": "Review due (>90 days)",
+      "extent": "Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-AV-RIGHTS",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-AV-AI-SAFETY",
+      "age_days": 1280,
+      "date_status": "Review due (>90 days)",
+      "extent": "Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-AV-ICC",
+      "age_days": 902,
+      "date_status": "Review due (>90 days)",
+      "extent": "Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-AV-SFP",
+      "age_days": 1103,
+      "date_status": "Review due (>90 days)",
+      "extent": "Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-AV-CHAT26",
+      "age_days": 36,
+      "date_status": "Within 90-day review window",
+      "extent": "Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-AV-WIFI26",
+      "age_days": 12,
+      "date_status": "Within 90-day review window",
+      "extent": "Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-AV-HOL26",
+      "age_days": 1,
+      "date_status": "Within 90-day review window",
+      "extent": "Official publisher search-index excerpt only; direct article fetch unavailable. Reverify original before relying on detailed programme status.",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Official publisher search-index excerpt only; direct article fetch unavailable. Reverify original before relying on detailed programme status.",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-AV-OFFER26",
+      "age_days": 64,
+      "date_status": "Within 90-day review window",
+      "extent": "Direct official document rendered by approved web research tool",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Direct official document rendered by approved web research tool",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-AV-Q326",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Official publisher search-index excerpt only; direct page renders an empty financial shell. Full Q3 release, original publication date and FY2026 final results remain import/reverification gaps.",
+      "limitation": "Public disclosure; no customer-confirmed demand, contract scope, supplier exclusivity or sales qualification. Official publisher search-index excerpt only; direct page renders an empty financial shell. Full Q3 release, original publication date and FY2026 final results remain import/reverification gaps.",
+      "original_verified": false
+    },
+    {
+      "source_id": "SRC-AV-EURO26",
+      "age_days": null,
+      "date_status": "Publication date unknown",
+      "extent": "Citation only",
+      "limitation": "Direct fetch returned HTTP503; search index is not archived or used to establish a supported claim.",
+      "original_verified": false
+    }
+  ],
+  "unmodelled_relationship_classes": [
+    "Contract award / renewal / expiry",
+    "Measured programme-to-business outcome"
+  ],
+  "new_evidence_acquired": true,
+  "canonical_mutation": false,
+  "automatic_qualification": false,
+  "reviewed_cycle_proposal": {
+    "id": "RP-5435cf5f12de48f1c4d6e98e",
+    "task_id": "AV-G-BASELINE",
+    "proposed_effect": "new",
+    "target_claim_id": null,
+    "rationale": "Official description confirms a self-service response already exists. It does not quantify deflection, disruption cost or improvement; the measured-outcomes gap remains open.",
+    "source_id": "RS-36cb85afc612738ebdc9",
+    "equivalent_existing_source_ids": [],
+    "original_bytes_archived": false,
+    "text_sha256": "fa783d06489a132cba8d2035ea5e81f63dd0a8a3bb7e8f42c8f8a857b3f082cd",
+    "raw_sha256": null,
+    "status": "Review required; no automatic finding change",
+    "remaining_checks": [
+      "Enterprise/scope/period entailment",
+      "Atomic observation and contrary evidence",
+      "Source authorship and independence",
+      "Governed Evidence acceptance before Observation persistence"
+    ],
+    "source": {
+      "url": "https://corporate.easyjet.com/about/business-model/default.aspx",
+      "publication_date": null,
+      "retrieved_at": "2026-11-10T08:20:00+00:00",
+      "retrieval_reference": "turn777827view1",
+      "retrieval_extent": "Located passages from directly opened official webpage; original bytes not archived",
+      "limitation": "No customer buying intent, contract, budget or procurement commitment. Publication date unknown where not shown; collection date does not establish publication date."
+    },
+    "passages": [
+      {
+        "segment_id": "RS-36cb85afc612738ebdc9::c8fc8104fbc8bf08",
+        "content_hash": "c9a4f46221c6cca53dc53de96d7a8905c85f35092c88f276074435304b45e4ab",
+        "source_location": "https://corporate.easyjet.com/about/business-model/default.aspx [Business model / Customer, line114]"
+      }
+    ]
+  },
+  "coverage_changed": false,
+  "gaps_closed": []
+}

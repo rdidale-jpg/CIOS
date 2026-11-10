@@ -6113,6 +6113,90 @@
               "tests/test_flora_research_intelligence_diagnostic.py"
             ]
           ]
+        },
+        "research_cycle": {
+          "cases": {
+            "tests/test_flora_research_cycle.py::test_checkpoint_resume_preserves_wave_and_selects_next_work": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_claim_scope_effect_and_budget_validation": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_cli_archives_excerpt_as_excerpt_without_fabricated_original_hash": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_cli_exports_reproducible_local_bundle_and_refuses_overwrite": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_connected_context_keeps_verified_and_interpretive_edges_distinct": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_cutoff_validation_rejects_future_and_prebaseline_research": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_excerpt_acquisition_rejects_cross_domain_changed_text_and_fake_original_hash": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_existing_diagnostic_route_renders_research_cycle_and_evidence_links[easyjet]": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_existing_diagnostic_route_renders_research_cycle_and_evidence_links[lloyds]": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_html_output_escapes_research_content": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_industry_evidence_and_index_only_sources_do_not_fill_enterprise_dossier": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_invalid_source_provenance_and_unlocated_passages_are_rejected": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_mission_uses_existing_researcher_schema_profiles_and_generator[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_mission_uses_existing_researcher_schema_profiles_and_generator[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_new_evidence_proposes_effects_with_exact_passage_and_retained_history[invalidate]": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_new_evidence_proposes_effects_with_exact_passage_and_retained_history[new]": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_new_evidence_proposes_effects_with_exact_passage_and_retained_history[strengthen]": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_new_evidence_proposes_effects_with_exact_passage_and_retained_history[weaken]": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_real_reference_excerpt_produces_candidate_without_inventing_original_bytes[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_real_reference_excerpt_produces_candidate_without_inventing_original_bytes[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_reproducible_coverage_and_material_deficiency_plan[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_reproducible_coverage_and_material_deficiency_plan[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_semantic_reuse_preserves_identities_and_excludes_canonical_authority": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_unacquired_evidence_is_not_claimed_and_history_is_unchanged[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_research_cycle.py::test_unacquired_evidence_is_not_claimed_and_history_is_unchanged[banking]": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_research_cycle.py"
+            ]
+          ]
         }
       }
     }
