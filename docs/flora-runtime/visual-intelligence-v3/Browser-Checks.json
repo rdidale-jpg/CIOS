@@ -1,0 +1,189 @@
+{
+  "baseline": "e03b2fff29a0236d69fad4e522654d3a2a557990",
+  "browser": "Chromium / Playwright",
+  "data": "Public repository research; private journey uses one disposable synthetic identity/workspace and user-entered SYNTHETIC qualification references. No initial commercial records; no production or demo seeding tool.",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "industry": "banking",
+      "lens": "overview",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "desktop",
+      "industry": "banking",
+      "lens": "ai-disruption",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "desktop",
+      "industry": "banking",
+      "lens": "regulation",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "desktop",
+      "industry": "banking",
+      "lens": "commercial",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "desktop",
+      "industry": "aviation",
+      "lens": "overview",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "desktop",
+      "industry": "aviation",
+      "lens": "ai-disruption",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "desktop",
+      "industry": "aviation",
+      "lens": "regulation",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "desktop",
+      "industry": "aviation",
+      "lens": "commercial",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "tablet",
+      "industry": "banking",
+      "lens": "overview",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "tablet",
+      "industry": "banking",
+      "lens": "ai-disruption",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "tablet",
+      "industry": "banking",
+      "lens": "regulation",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "tablet",
+      "industry": "banking",
+      "lens": "commercial",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "tablet",
+      "industry": "aviation",
+      "lens": "overview",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "tablet",
+      "industry": "aviation",
+      "lens": "ai-disruption",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "tablet",
+      "industry": "aviation",
+      "lens": "regulation",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "tablet",
+      "industry": "aviation",
+      "lens": "commercial",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "mobile",
+      "industry": "banking",
+      "lens": "overview",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "mobile",
+      "industry": "banking",
+      "lens": "ai-disruption",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "mobile",
+      "industry": "banking",
+      "lens": "regulation",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "mobile",
+      "industry": "banking",
+      "lens": "commercial",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "mobile",
+      "industry": "aviation",
+      "lens": "overview",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "mobile",
+      "industry": "aviation",
+      "lens": "ai-disruption",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "mobile",
+      "industry": "aviation",
+      "lens": "regulation",
+      "status": 200,
+      "no_page_overflow": true
+    },
+    {
+      "viewport": "mobile",
+      "industry": "aviation",
+      "lens": "commercial",
+      "status": 200,
+      "no_page_overflow": true
+    }
+  ],
+  "keyboard": "Desktop Banking \u2192 Core Platforms \u2192 Lloyds \u2192 RCO-LBG-001 \u2192 counterevidence \u2192 original map activity passed",
+  "touch": "Tablet/mobile use the automatically opened equivalent text targets; same journey passed",
+  "qualified_journey": "Deliberate capture, incomplete-stage rejection, ten synthetic note/reference pairs, evidence review + explicit confirmation, one Qualified record, idempotent relink to same ID",
+  "reduced_motion": "Enabled for layout checks",
+  "javascript_disabled": "Native activity disclosure and hypothesis navigation passed",
+  "console_errors": [],
+  "human_comprehension": "Unmeasured",
+  "additional_states": {
+    "dense": "Actual Service & resilience activity with >=5 mapped hypotheses; no page overflow",
+    "disputed": "Core Platforms exposes retained challenged/scope-unresolved findings",
+    "print_state": "Public map, hypothesis and private synthetic record restore every details state after print"
+  },
+  "empty_unsupported_states": "Passed static in-memory presentation fixtures at 1180 \u00d7 820: zero hypotheses and index-only/unreviewed context with no invented cards/source-backed status or page overflow.",
+  "private_mobile": "Authenticated synthetic Qualified Pipeline and qualification form checked at 390 \u00d7 844 with touch, no page-wide overflow, screenshots captured. No additional records or updates."
+}

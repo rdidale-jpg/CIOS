@@ -174,8 +174,15 @@ def candidate_page(identifier,headers=None,data=None):
     data=data or load_assessment();row=candidate(identifier,data)
     if row is None:raise ValueError('Research candidate unavailable')
     basis=''.join(f'<dt>{e(k.replace("_"," "))}</dt><dd>{e(str(v))}</dd>' for k,v in row['rank_basis'].items())
-    capture=capture_controls(row['enterprise_slug'],row['id'],headers)
+    capture="<p>Use the reviewed capture action above. No automatic qualification.</p>"
     body=f"<section class='ex-hero' id='explorer-content'><p class='eyebrow'>Research priority {row['rank']} / {e(data['enterprise_name'])}</p><h1>{e(row['title'])}</h1><p>{e(row['problem'])}</p></section><section class='ex-section ex-split'><article class='ex-card'><span class='research-badge interpretation'>Commercial interpretation / not a confirmed requirement</span><h2>Potential intervention</h2><p>{e(row['intervention'])}</p><h3>Programme signal</h3><p>{e(row['programme_signal'])}</p><p><strong>Estimated deal value:</strong> Unknown · <strong>Procurement date:</strong> Unknown</p><p><strong>Confidence:</strong> {e(row['confidence'])}</p><h3>Rank rationale</h3><dl class='research-dl'>{basis}</dl><p>{e(row['ranking_change'])}</p></article><aside class='ex-card'><h2>Develop with customer evidence.</h2><p>Capture a private research-stage copy using the existing pipeline. It starts Discovered with blank qualification, unknown value and unchanged source limitations. This action does not qualify or activate a pursuit.</p>{capture}<p><a href='/flora/sales/pipeline'>Workspace pipeline</a></p></aside></section>{commercial_brief_html(data,identifier)}{review_html(data,row)}<section class='ex-section'><h2>Industry drivers and capabilities</h2>{links(data,row['driver_ids']+row['capability_ids']+row['programme_ids'])}</section><section class='ex-section' id='evidence'><h2>Supporting research and provenance</h2>{claims_html(data,row['claim_ids'])}</section><section class='ex-section'><h2>Evidence needed before qualification</h2>{links(data,row['gap_ids'])}</section><section class='ex-section'><h2>Trace the relationships</h2>{edges_html(data,identifier)}</section><p><a href='{ROOT}/opportunities'>← Return to research priorities</a> · <a href='/enterprises/{data.get('enterprise_slug','lloyds')}'>{e(data['enterprise_name'])} Enterprise Twin</a></p>"
+    from .commercial_intelligence import commercial_projection
+    from .commercial_views import candidate_overview
+    projection=commercial_projection(data)
+    inspected=next((r for r in projection['candidates'] if r['id']==identifier),None)
+    if inspected is not None:
+        legacy=body.replace("id='explorer-content'","id='legacy-candidate-content'",1)
+        body=candidate_overview(data,inspected,projection,headers)+"<details class='cv-legacy'><summary>Original research dossier, claim-level provenance and prior assessments</summary>"+legacy+'</details>'
     return shell(row['title'],body,headers,data)
 
 

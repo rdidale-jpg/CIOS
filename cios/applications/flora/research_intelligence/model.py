@@ -312,7 +312,7 @@ def commercial_capture(slug, identifier):
         raise ValueError('Research candidate does not belong to this enterprise')
     claims=_index(data['claims']);sources=_index(data['sources'])
     refs=list(dict.fromkeys(s for c in row['claim_ids'] for s in claims[c]['source_ids']))
-    return {
+    result={
         'fields':{'title':row['title'],'problem':row['problem'],'solution':row['intervention'],
                   'next_action':row.get('review',{}).get('next_action') or 'Research validation first: '+ '; '.join(next(g['question'] for g in data['gaps'] if g['id']==gid) for gid in row['gap_ids'][:3])},
         'provenance':{'kind':'research_candidate','source_labels':[sources[s]['title']+(' (reviewed primary excerpt; customer demand unverified)' if sources[s]['verification']=='primary_retrieved' else ' (citation only; primary verification pending)') for s in refs],
@@ -322,6 +322,16 @@ def commercial_capture(slug, identifier):
                       'research_assessment_id':data['assessment_id'],'claim_ids':row['claim_ids'],
                       'source_ids':refs,'assessment_digest':stable_hash(data)},
     }
+
+    from .commercial_intelligence import commercial_projection,frozen_review
+    from .understanding import load_review
+    from .cycle import digest
+    review=load_review(domain)
+    # Historical snapshots keep their own provenance; never attach a newer review.
+    if review.get('baseline_digest')==digest(data):
+        inspected=next((r for r in commercial_projection(data,review)['candidates'] if r['id']==identifier),None)
+        if inspected is not None:result['provenance']['commercial_review']=frozen_review(inspected)
+    return result
 
 
 def compare_revision(previous, proposed):

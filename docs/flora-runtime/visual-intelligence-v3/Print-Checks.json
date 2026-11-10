@@ -1,0 +1,18 @@
+{
+  "banking-commercial": {
+    "pages": 35,
+    "source_context_retained": true,
+    "all_nine_primary_activities_on_page_one": true
+  },
+  "lloyds-hypothesis": {
+    "pages": 10,
+    "source_context_retained": true,
+    "counterevidence_scope_and_unknowns": true
+  },
+  "qualification-synthetic": {
+    "pages": 6,
+    "source_context_retained": true,
+    "synthetic_qualification_references_visible": true
+  },
+  "note": "Public research or explicitly synthetic private records only. No session/CSRF token in extracted PDF text. Print/PDF checks are separate from interactive browser checks."
+}

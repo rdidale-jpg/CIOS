@@ -97,22 +97,26 @@ def enterprise_cards(data):
 
 
 def industry_page(lens='overview',headers=None,domain='banking'):
-    choices=[('overview','Overview'),('pestle','PESTLE'),('porter','Five Forces'),('value-chain','Value chain'),('ai-disruption','AI disruption'),('regulation','Regulation & resilience')]
+    choices=[('overview','Overview'),('pestle','PESTLE'),('porter','Five Forces'),('value-chain','Value chain'),('ai-disruption','AI disruption'),('regulation','Regulation & resilience'),('commercial','Commercial Opportunities')]
     if lens not in dict(choices):raise ValueError('Unknown industry lens')
     d=load_assessment() if domain=='banking' else load_assessment(domain);r=routes_for(d);root=r['evidence'].rsplit('/',1)[0]
     nav="<nav class='ux-tabs' aria-label='Industry views'>"+''.join(f"<a href='{r['industry']}?lens={k}' {'aria-current=page' if k==lens else ''}>{label}</a>" for k,label in choices)+"</nav>"
     short=d['industry_name'].replace('UK ','').replace('Commercial ','')
     body=breadcrumb(data=d)+f"<section class='ux-hero' id='content'><p class='eyebrow'>{e(d['industry_name'])} / Industry Twin</p><h1>{e(short)}.<br>From forces to commercial relevance.</h1><p>One view of industry structure, supported disclosures and the enterprise questions they create.</p><a href='{r['enterprise']}'>Explore {e(d['enterprise_name'].replace(' Banking Group',''))} →</a><a href='/opportunities#opportunities-{domain}'>Find opportunity hypotheses →</a></section>"+nav
-    living=lens in ('overview','ai-disruption','regulation')
+    living=lens in ('overview','ai-disruption','regulation','commercial')
     if living:
         from .living_map import render_living_map
         from .living_map_specs import build_living_map
-        body=breadcrumb(data=d)+f"<header class='lm-page-head' id='content'><p class='ux-kicker'>Industry Twin / {e(d['industry_name'])}</p><h1>{e(short)}</h1></header>"+nav+render_living_map(build_living_map(d),lens)
+        scene=build_living_map(d)
+        if lens=='commercial':
+            from .commercial_intelligence import commercial_projection,commercial_map
+            scene=commercial_map(scene,commercial_projection(d))
+        body=breadcrumb(data=d)+f"<header class='lm-page-head' id='content'><p class='ux-kicker'>Industry Twin / {e(d['industry_name'])}</p><h1>{e(short)}</h1></header>"+nav+render_living_map(scene,lens)
         body+="<details class='lm-support'><summary>03 / Investigate — frameworks, findings, enterprises & commercial research</summary>"
     if lens=='overview':body+="<div class='ux-section-head'><h2>Key findings</h2><span>Supported disclosures · retain their reporting periods</span></div>"+claim_cards(d,d['industry_twin_id'])
     body+="<p class='ux-disclosure'>Analyst interpretation · conceptual frameworks, not verified enterprise ownership or buying demand.</p>"
-    kind={'overview':'pestle','pestle':'pestle','porter':'five-forces','value-chain':'value-chain','ai-disruption':'pestle','regulation':'pestle'}[lens];body+=("<details><summary>Existing PESTLE diagram</summary>"+render_visual(specs(d)[kind])+"</details>" if living else render_visual(specs(d)[kind]))
-    rows=[f for f in d['frameworks'] if f['lens']=={'overview':'pestle','pestle':'pestle','porter':'porter','value-chain':'value-chain','ai-disruption':'pestle','regulation':'pestle'}[lens]]
+    kind={'overview':'pestle','pestle':'pestle','porter':'five-forces','value-chain':'value-chain','ai-disruption':'pestle','regulation':'pestle','commercial':'pestle'}[lens];body+=("<details><summary>Existing PESTLE diagram</summary>"+render_visual(specs(d)[kind])+"</details>" if living else render_visual(specs(d)[kind]))
+    rows=[f for f in d['frameworks'] if f['lens']=={'overview':'pestle','pestle':'pestle','porter':'porter','value-chain':'value-chain','ai-disruption':'pestle','regulation':'pestle','commercial':'pestle'}[lens]]
     body+="<details class='ux-fold'><summary>Interpretation, affected capabilities & evidence</summary>"+''.join(f"<article class='ux-claim'><h3>{e(f['title'])}</h3><p>{e(f['assessment'])}</p><a href='{r['nodes']}/{f['id']}'>Follow capabilities, evidence & opportunities →</a></article>" for f in rows)+"</details>"
     body+="<div class='ux-section-head'><h2>Enterprise landscape</h2><a href='/enterprises'>All enterprises →</a></div>"+enterprise_cards(d)+"<h2>Commercial implications</h2>"+opportunity_cards(d)+provenance_notice(d)+research_fold(d,d['industry_twin_id'])
     body+=f"<details><summary>Supporting research & legacy intelligence</summary><p><a href='{root}'>Detailed research entry</a> · <a href='{r['industry']}/visual-specs'>Structured visual specifications (JSON)</a></p>"+("<p><a href='/flora/banking'>Historical Banking portfolio</a> · <a href='/flora/banking/explorer'>Earlier Explorer</a></p>" if domain=='banking' else '')+"</details>"
@@ -124,11 +128,15 @@ def enterprise_page(slug='lloyds',lens='operating-model',headers=None):
     from .registry import enterprise_domain,enterprise_reference
     bank=enterprise_reference(slug)
     if bank is None:raise ValueError('Unknown enterprise')
-    if lens not in ('operating-model','ecosystem','opportunities','timeline'):raise ValueError('Unknown enterprise lens')
+    if lens not in ('operating-model','ecosystem','opportunities','timeline','commercial'):raise ValueError('Unknown enterprise lens')
     if slug in BANKS and slug!='lloyds':
         return page(bank.name,breadcrumb()+f"<section class='ux-hero' id='content'><p class='eyebrow'>Historical supporting profile</p><h1>{e(bank.name)}</h1><p>{e(bank.description)}</p><a href='/flora/banking/explorer/{slug}'>Open existing profile & historical sources →</a></section><p>Deep primary-source research, capabilities and current supplier relationships are incomplete. No new facts are inferred.</p>",headers,'enterprises','/enterprises/'+slug)
     domain=enterprise_domain(slug);d=load_assessment() if domain=='banking' else load_assessment(domain);r=routes_for(d);root=r['evidence'].rsplit('/',1)[0]
-    tabs="<nav class='ux-tabs' aria-label='Enterprise views'>"+''.join(f"<a href='{r['enterprise']}?lens={k}' {'aria-current=page' if lens==k else ''}>{label}</a>" for k,label in [('operating-model','How it works'),('timeline','Strategic timeline'),('ecosystem','Supplier & technology ecosystem'),('opportunities','Opportunity landscape')])+"</nav>"
+    tabs="<nav class='ux-tabs' aria-label='Enterprise views'>"+''.join(f"<a href='{r['enterprise']}?lens={k}' {'aria-current=page' if lens==k else ''}>{label}</a>" for k,label in [('operating-model','How it works'),('timeline','Strategic timeline'),('ecosystem','Supplier & technology ecosystem'),('opportunities','Opportunity landscape'),('commercial','Commercial Opportunities')])+"</nav>"
+    if lens=='commercial':
+        from .commercial_intelligence import commercial_projection
+        from .commercial_views import enterprise_body
+        return page(d['enterprise_name']+' Commercial Intelligence',breadcrumb(True,d)+tabs+enterprise_body(commercial_projection(d)),headers,'enterprises',r['enterprise'])
     body=breadcrumb(True,d)+f"<section class='ux-hero' id='content'><p class='eyebrow'>{e(d['enterprise_name'])} / Enterprise Twin</p><h1>{e(d['enterprise_name'].replace(' Banking Group',''))}.<br>Connect strategy to a credible opening.</h1><p>Follow supported disclosures through capabilities, transformation priorities and evidence-led commercial hypotheses.</p><a href='/opportunities#opportunities-{domain}'>Inspect commercial priorities →</a></section>"+tabs
     from .visual_intelligence import render_intelligence
     from .visual_specs import build_intelligence_specs
