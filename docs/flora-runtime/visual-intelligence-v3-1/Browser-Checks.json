@@ -1,0 +1,95 @@
+{
+  "browser": "Chromium / Playwright",
+  "viewports": [
+    {
+      "viewport": "desktop",
+      "industry": "banking",
+      "optional_list": true,
+      "focus_and_highlight": true,
+      "focus_target": "SVG activity",
+      "overflow": false
+    },
+    {
+      "viewport": "desktop",
+      "industry": "aviation",
+      "optional_list": true,
+      "focus_and_highlight": true,
+      "focus_target": "SVG activity",
+      "overflow": false
+    },
+    {
+      "viewport": "tablet",
+      "industry": "banking",
+      "optional_list": true,
+      "focus_and_highlight": true,
+      "focus_target": "SVG activity",
+      "overflow": false
+    },
+    {
+      "viewport": "tablet",
+      "industry": "aviation",
+      "optional_list": true,
+      "focus_and_highlight": true,
+      "focus_target": "SVG activity",
+      "overflow": false
+    },
+    {
+      "viewport": "mobile",
+      "industry": "banking",
+      "optional_list": true,
+      "focus_and_highlight": true,
+      "focus_target": "SVG activity",
+      "overflow": false
+    },
+    {
+      "viewport": "mobile",
+      "industry": "aviation",
+      "optional_list": true,
+      "focus_and_highlight": true,
+      "focus_target": "SVG activity",
+      "overflow": false
+    },
+    {
+      "javascript_disabled": "list \u2192 hypothesis \u2192 full investigation/counterevidence passed"
+    }
+  ],
+  "first_record_position": [
+    {
+      "viewport": "desktop",
+      "version": "before",
+      "first_record_y": 1484
+    },
+    {
+      "viewport": "desktop",
+      "version": "after",
+      "first_record_y": 709
+    },
+    {
+      "viewport": "tablet",
+      "version": "before",
+      "first_record_y": 1455
+    },
+    {
+      "viewport": "tablet",
+      "version": "after",
+      "first_record_y": 705
+    },
+    {
+      "viewport": "mobile",
+      "version": "before",
+      "first_record_y": 1870
+    },
+    {
+      "viewport": "mobile",
+      "version": "after",
+      "first_record_y": 1013
+    }
+  ],
+  "print": "Map/hypothesis/private qualification PDF captured; exact disclosure states restored",
+  "data": "Disposable synthetic sessions and explicitly synthetic manual qualification inputs only. No demo seed tool. Public repository research unchanged.",
+  "page_script_errors": [],
+  "limitations": [
+    "Physical iPad/Safari and screen-reader user testing unmeasured",
+    "No real customer evaluation or verification"
+  ]
+}

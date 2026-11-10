@@ -94,6 +94,25 @@ def maturity(record):
     return 'Opportunity hypothesis'
 
 
+def evidence_maturity(record):
+    """Read-only, backward-compatible evidence view, independent of sales stage.
+
+    Existing free-text references and review attestations establish input
+    completeness only. There is no customer verification authority in this
+    workflow, so neither a reference nor an advanced stage can confer it.
+    No persisted field, migration or automatic promotion is introduced.
+    """
+    ready = not qualification(record)['missing'] and record.get('evidence_reviewed') is True
+    return {
+        'research': 'Research-qualified · internal review only' if ready else 'Research hypothesis · inputs incomplete or unreviewed',
+        'customer': 'Customer-validated · not established',
+        'pursuit': 'Pursuit-qualified · not established',
+        'limitation': 'Research-qualified means all ten notes/references supplied and reviewed internally. '
+                      'References are user assertions, not independent verification. Buyer authority, budget and customer demand '
+                      'are not established by this workflow. Pipeline stage is managed separately; no automatic advancement.',
+    }
+
+
 def _scope(headers, record, capability):
     # The persisted workspace and enterprise are immutable, not payload overrides.
     return require_resource_scope(headers, capability, record.get('enterprise_id', ''), record.get('workspace_id', ''), require_acl=False)
