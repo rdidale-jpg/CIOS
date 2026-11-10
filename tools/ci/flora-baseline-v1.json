@@ -6515,6 +6515,96 @@
               "tests/test_flora_living_industry_maps.py"
             ]
           ]
+        },
+        "commercial_visual_v3": {
+          "cases": {
+            "tests/test_flora_commercial_visual_v3.py::test_projection_is_reproducible_read_only_and_preserves_existing_identities[banking-9]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_projection_is_reproducible_read_only_and_preserves_existing_identities[aviation-6]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_core_platforms_exposes_existing_lloyds_hypothesis_and_coverage_is_not_ownership": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_zero_signal_activity_is_valid_and_does_not_invent_content": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_withdrawn_or_index_only_support_leaves_authored_ratings_historical_and_context_unknown": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_core_platform_counterevidence_keeps_exact_source_scope_and_lineage": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_ten_questions_unknowns_and_explainable_separate_ratings[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_ten_questions_unknowns_and_explainable_separate_ratings[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_historical_supplier_context_and_current_contract_uncertainty_are_preserved": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_public_commercial_routes_and_other_lenses_remain_available[banking-lloyds]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_public_commercial_routes_and_other_lenses_remain_available[aviation-easyjet]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_exploration_never_reads_or_creates_private_pipeline_records": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_complete_http_banking_lloyds_hypothesis_capture_qualification_pipeline_and_link": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_aviation_can_capture_existing_hypothesis_without_inventing_a_new_record_model": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_rejected_http_capture_keeps_business_store_hash_unchanged[anonymous]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_rejected_http_capture_keeps_business_store_hash_unchanged[csrf]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_rejected_http_capture_keeps_business_store_hash_unchanged[workspace_override]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_rejected_http_capture_keeps_business_store_hash_unchanged[foreign_origin]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_existing_membership_workspace_capability_session_boundary_blocks_direct_service[read_only]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_existing_membership_workspace_capability_session_boundary_blocks_direct_service[revoked]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_existing_membership_workspace_capability_session_boundary_blocks_direct_service[wrong_workspace]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_existing_membership_workspace_capability_session_boundary_blocks_direct_service[expired]": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_existing_acl_and_forged_browser_identity_cannot_capture": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_review_snapshot_is_immutable_and_duplicate_link_does_not_rewrite_prior_capture": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_public_ui_has_finite_return_navigation_print_and_accessible_controls": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_projection_cannot_be_attached_to_another_industry_map": {
+              "status": "passed"
+            },
+            "tests/test_flora_commercial_visual_v3.py::test_no_existing_research_history_or_source_identity_is_changed": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_commercial_visual_v3.py"
+            ]
+          ]
         }
       }
     }

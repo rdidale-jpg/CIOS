@@ -225,6 +225,8 @@ def record_page(identifier, headers=None, error='', draft=None):
 <p><button type='submit'>Save opportunity & activity</button></p><p class='ex-notice'>Qualified and active stages require all ten evidence-supported inputs and explicit confirmation. No automatic promotion.</p>
 <p>Version {r['version']} · Updated {e(_date(r['updated_at']))}</p></section></aside></div></fieldset></form>
 <section class='ex-section ex-card sales-history'><h2>Traceable change history</h2><p>Source provenance and workspace are immutable. Each substantive update records actor, UTC timestamp, version and before/after fields.</p>{history}</section>"""
+    from .research_intelligence.commercial_views import pipeline_context
+    body=pipeline_context(r)+body
     return page(r['title']+' | Qualification workspace',body,headers)
 
 
