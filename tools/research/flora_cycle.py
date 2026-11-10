@@ -20,6 +20,7 @@ def main(argv=None):
     parser.add_argument('--limit', type=int, default=3)
     parser.add_argument('--submissions', type=Path, help='JSON array: task_id, path, metadata, effect, target_claim_id, rationale')
     parser.add_argument('--resume', type=Path)
+    parser.add_argument('--revisit-task', action='append', default=[], help='Previously acquired task; submission must explain revisit_reason')
     parser.add_argument('--output', type=Path, required=True, help='New local directory; existing directories are never overwritten')
     args = parser.parse_args(argv)
     data = load_assessment(enterprise_domain(args.enterprise))
@@ -29,7 +30,7 @@ def main(argv=None):
     if not isinstance(submissions, list) or len(submissions) > args.limit:
         raise ValueError('Submissions must be an array within the task budget')
     originals = [acquire(s, data) for s in submissions]
-    checkpoint = run_cycle(data, args.as_of, submissions, args.limit, previous)
+    checkpoint = run_cycle(data, args.as_of, submissions, args.limit, previous, args.revisit_task)
     if [(p['raw_sha256'], p['text_sha256']) for p in checkpoint['waves'][-1]['proposals']] != [(s['primary_content_sha256'], s['text_sha256']) for s in originals]:
         raise ValueError('Source changed during acquisition')
     commission = manifest(data, args.as_of, args.limit)

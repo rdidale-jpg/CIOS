@@ -26,9 +26,9 @@ def official_url(value):
     return value
 
 
-def provenance(metadata):
-    official_url(metadata['url'])
-    official_url(metadata['retrieval_url'])
+def provenance(metadata, url_validator=official_url):
+    url_validator(metadata['url'])
+    url_validator(metadata['retrieval_url'])
     retrieved = datetime.fromisoformat(metadata['retrieved_at'].replace('Z', '+00:00'))
     if retrieved.tzinfo is None or retrieved.date() > date.today():
         raise ValueError('Timezone-aware, non-future retrieval date required')
@@ -96,3 +96,33 @@ def import_proposal(path, metadata):
             'primary_content_sha256': sha(raw), 'text_sha256': sha(text.encode()),
             'status': 'review_ready_not_accepted', 'canonical_mutation': False,
             'automatic_claim_verification': False, 'automatic_qualification': False}
+
+
+def secondary_url(value):
+    """Finite secondary publisher policy; never eligible as an official primary URL."""
+    target = urlsplit(value)
+    if (target.scheme != 'https' or target.hostname != 'www.theguardian.com'
+            or target.username or target.password or target.port not in (None, 443) or target.fragment):
+        raise ValueError('Expected a registered secondary-publisher HTTPS URL')
+    return value
+
+
+def secondary_excerpt(source, repo):
+    """Read a confined candidate secondary extract without relabelling it primary."""
+    from .registry import snapshot_boundary
+    provenance(source, secondary_url)
+    boundary = snapshot_boundary(source['research_domain'], repo)
+    path = (repo / source.get('text_path', '')).resolve()
+    if (not path.is_relative_to(boundary) or not path.is_file()
+            or path.stat().st_size > LIMIT or source.get('verification') != 'secondary_reviewed'
+            or source.get('content_kind') != 'reviewed_web_excerpt'
+            or source.get('primary_content_sha256') is not None
+            or source.get('retrieval_method') != 'approved_web_research_tool'
+            or not source.get('retrieval_reference')):
+        raise ValueError('Secondary excerpt needs confined, dated and correctly typed provenance')
+    text = path.read_text()
+    if sha(text.encode()) != source.get('text_sha256'):
+        raise ValueError('Secondary excerpt checksum mismatch')
+    if not source.get('excerpts') or any(not e.get('locator') or not e.get('quote') or e['quote'] not in text for e in source['excerpts']):
+        raise ValueError('Secondary excerpt requires located retained quotations')
+    return text

@@ -1,0 +1,5 @@
+ICC tools, line43
+tools to help predict standby crew requirements
+
+Jetstream deployment paragraph, line47
+We have provided teams with a new generative AI tool called Jetstream

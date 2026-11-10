@@ -14,8 +14,8 @@ from ..enterprise_intelligence.semantic import CandidateClaim, SourceSegment
 from ..memory.models import stable_observation_fingerprint
 from .diagnostic import assess
 from .model import (validate, primary_claim_supported, claim_segment, candidate_claim,
-                    evidence_item, primary_text)
-from .source_import import import_proposal
+                    evidence_item, primary_text, REPO)
+from .source_import import import_proposal, secondary_excerpt
 
 # §5.2 of the existing High-Fidelity contract. These selectors detect deficiencies;
 # they do not replace its dossier fields, IT-001 tiers or 22-dimension maturity gate.
@@ -207,16 +207,17 @@ def acquire(submission, data):
         return import_proposal(submission['path'], submission['metadata'])
     source = deepcopy(submission['source'])
     if (source.get('research_domain') != data.get('research_domain', 'banking')
-            or source.get('verification') != 'primary_retrieved'
+            or source.get('verification') not in ('primary_retrieved', 'secondary_reviewed')
             or source.get('content_kind') != 'reviewed_web_excerpt'):
         raise ValueError('Expected same-domain reviewed web excerpt provenance')
-    text = primary_text(source)  # Existing confined path, checksum and provenance validation.
+    text = (secondary_excerpt(source, REPO) if source['verification'] == 'secondary_reviewed'
+            else primary_text(source))  # Existing primary policy stays intact.
     return {'metadata': {**source, 'reviewed_quotes': source['excerpts']},
             'text': text, 'raw': None, 'primary_content_sha256': None,
             'text_sha256': source['text_sha256']}
 
 
-def run_cycle(data, as_of, submissions=(), limit=3, previous=None):
+def run_cycle(data, as_of, submissions=(), limit=3, previous=None, revisit_task_ids=()):
     """Acquire supplied permitted source files, extract exact passages, propose review.
 
     Reviewer effects are proposed judgements, NOT automatic semantic entailment,
@@ -226,7 +227,10 @@ def run_cycle(data, as_of, submissions=(), limit=3, previous=None):
     history = _checkpoint(previous, data, as_of)
     tasks = {t['id']: t for t in plan['tasks']}
     attempted = {p['task_id'] for w in history for p in w['proposals']}
-    selected = [t['id'] for t in plan['tasks'] if t['id'] not in attempted][:limit]
+    revisits = list(revisit_task_ids)
+    if len(set(revisits)) != len(revisits) or len(revisits) > limit or any(t not in attempted for t in revisits):
+        raise ValueError('Revisits must name previously acquired tasks within the wave budget')
+    selected = revisits + [t['id'] for t in plan['tasks'] if t['id'] not in attempted][:limit-len(revisits)]
     if len(submissions) > limit:
         raise ValueError('Wave exceeds selected task budget')
     proposals = []
@@ -236,7 +240,12 @@ def run_cycle(data, as_of, submissions=(), limit=3, previous=None):
         task_id = submission['task_id']
         if task_id not in selected or task_id in seen_tasks:
             raise ValueError('Evidence must address one selected task per submission')
+        if task_id in revisits and not submission.get('revisit_reason'):
+            raise ValueError('Corroboration/revalidation revisits require a reason')
         seen_tasks.add(task_id)
+        subject = submission.get('subject_id', data['enterprise_twin_id'])
+        if subject not in (data['enterprise_twin_id'], data['industry_twin_id']):
+            raise ValueError('Research subject must be this enterprise or its registered industry')
         imported = acquire(submission, data)
         meta = imported['metadata']
         if date.fromisoformat(meta['retrieved_at'][:10]) > date.fromisoformat(as_of):
@@ -245,7 +254,7 @@ def run_cycle(data, as_of, submissions=(), limit=3, previous=None):
         effect = submission['effect']
         if effect not in ('strengthen', 'weaken', 'invalidate', 'new') or not submission.get('rationale'):
             raise ValueError('Explicit proposed effect and review rationale required')
-        if target and (target not in claims or claims[target]['asset_id'] != data['enterprise_twin_id']):
+        if target and (target not in claims or claims[target]['asset_id'] != subject):
             raise ValueError('Change target must be an existing same-enterprise claim')
         if (effect == 'new') != (target is None):
             raise ValueError('Existing-finding effects require explicit target lineage')
@@ -264,12 +273,12 @@ def run_cycle(data, as_of, submissions=(), limit=3, previous=None):
             segment = SourceSegment(sid + '::' + digest(quote)[:16], sid,
                 quote['locator'], text, hashlib.sha256(text.encode()).hexdigest(),
                 meta['url'] + ' [' + quote['locator'] + ']', 'candidate_intelligence', meta.get('content_kind', 'reviewed_supplied_file'))
-            obs = stable_observation_fingerprint(data['enterprise_twin_id'], 'research_excerpt', text,
+            obs = stable_observation_fingerprint(subject, 'research_excerpt', text,
                                                  tasks[task_id]['topic'], meta['reporting_period'])
             candidate = CandidateClaim('RC-' + obs.rsplit('-', 1)[-1][:20], 'research_excerpt', text,
-                sid, segment.segment_id, 'enterprise', data['enterprise_twin_id'],
+                sid, segment.segment_id, 'enterprise' if subject == data['enterprise_twin_id'] else 'industry', subject,
                 tasks[task_id]['topic'], text, meta['reporting_period'], data['industry_name'],
-                data['enterprise_twin_id'], 'Provenance reviewed; semantic scope and atomicity pending',
+                data['enterprise_twin_id'] if subject == data['enterprise_twin_id'] else '', 'Provenance reviewed; semantic scope and atomicity pending',
                 'candidate_intelligence', 'needs_governed_observation_review', [sid],
                 [target] if target and effect in ('weaken', 'invalidate') else [])
             observations.append({'candidate': candidate.to_dict(), 'segment': segment.to_dict(),
@@ -288,6 +297,7 @@ def run_cycle(data, as_of, submissions=(), limit=3, previous=None):
             'remaining_checks': ['Enterprise/scope/period entailment', 'Atomic observation and contrary evidence',
                 'Source authorship and independence', 'Governed Evidence acceptance before Observation persistence']})
     wave = {'as_of': as_of, 'selected_task_ids': selected, 'proposals': proposals,
+            'revisit_task_ids': revisits,
             'acquisition_status': 'Supplied file(s) or retained web excerpts reviewed' if proposals else 'Awaiting permitted source imports; no new evidence acquired',
             'retained_unknowns': deepcopy(data['gaps']),
             'retained_contradictions': [deepcopy(c) for c in data['claims'] if c['kind'] == 'contradiction'],

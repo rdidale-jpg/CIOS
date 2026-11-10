@@ -6197,6 +6197,123 @@
               "tests/test_flora_research_cycle.py"
             ]
           ]
+        },
+        "enterprise_understanding": {
+          "cases": {
+            "tests/test_flora_enterprise_understanding.py::test_all_evidence_classes_and_secondary_never_relabelled_primary": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_arbitrary_factual_conclusion_cannot_borrow_true_support": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_assessments_are_reproducible_scoped_and_read_only[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_assessments_are_reproducible_scoped_and_read_only[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_before_after_distinguishes_understanding_from_record_counts[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_before_after_distinguishes_understanding_from_record_counts[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_checkpoint_replay_and_cli_export_are_reproducible": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_contradiction_and_supersession_keep_predecessor_and_counterevidence": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_contradictory_passage_is_retained_without_automatic_invalidation": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_cross_enterprise_source_and_baseline_replacement_are_rejected": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_cycle_revisit_preserves_history_and_requires_bound_reason": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_fabricated_corroboration_cannot_inflate_evidence[future]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_fabricated_corroboration_cannot_inflate_evidence[missing_basis]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_fabricated_corroboration_cannot_inflate_evidence[same_content]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_fabricated_corroboration_cannot_inflate_evidence[same_document]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_fabricated_corroboration_cannot_inflate_evidence[same_origin]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_fabricated_corroboration_cannot_inflate_evidence[same_publisher]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_fabricated_corroboration_cannot_inflate_evidence[wrong_quote]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_factual_supplier_edge_is_explicit_historical_and_not_causal": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_finite_public_understanding_route_and_navigation[easyjet]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_finite_public_understanding_route_and_navigation[lloyds]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_future_and_index_only_passages_never_establish_exact_support": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_genuinely_reviewed_independent_origins_can_be_reported_without_acceptance": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_html_safety_and_conclusion_lineage_are_enforced": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_independent_publisher_repeating_management_is_not_independent_outcome_verification": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_industry_material_cannot_become_enterprise_proof": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_inference_needs_real_passages_not_context_flags": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_missing_and_foreign_endpoints_are_unknown_not_fabricated_nodes": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_query_variants_and_publisher_names_cannot_create_independence": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_shared_context_and_two_evidenced_endpoints_do_not_prove_causation": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_source_supersession_retains_history_without_current_corroboration": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_support_review_cannot_be_reused_for_other_scope_or_assertion[assertion_digest-wrong]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_support_review_cannot_be_reused_for_other_scope_or_assertion[entity_id-AV-ENT-001]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_support_review_cannot_be_reused_for_other_scope_or_assertion[period-Another period]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_unverified_counterevidence_cannot_mark_relationship_contradicted": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_understanding.py::test_wrong_locator_and_tampered_passage_are_not_direct_support": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_enterprise_understanding.py"
+            ]
+          ]
         }
       }
     }

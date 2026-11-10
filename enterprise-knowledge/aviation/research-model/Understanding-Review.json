@@ -1,0 +1,995 @@
+{
+  "version": 1,
+  "authority": "candidate_intelligence",
+  "baseline_digest": "7cbb6c3e09b759d03f2a107157f43aa4ffbe268a086fcdadb46f4b391bd400a0",
+  "enterprise_id": "AV-ENT-001",
+  "as_of": "2026-11-10",
+  "sources": [
+    {
+      "id": "V3-EJ-ICC",
+      "title": "EJ ICC — located research extract",
+      "publisher": "easyJet",
+      "url": "https://www.easyjet.com/en/news/airline/story/easyjet-opens-new-ai-equipped-operations-control-centre",
+      "publication_date": "2024-05-22",
+      "publication_date_evidence": "Published 22 May 2024, line37",
+      "reporting_period": "ICC announcement, May 2024",
+      "retrieved_at": "2026-11-10T09:03:13+00:00",
+      "retrieval_url": "https://www.easyjet.com/en/news/airline/story/easyjet-opens-new-ai-equipped-operations-control-centre",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-EJ-ICC.txt",
+      "text_sha256": "c34f5999916619ffaf597ea1ce75ccbb66bdc92b00925fbe2c58f5084c087247",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn132119view3; turn808765search0; turn261789view1",
+      "excerpts": [
+        {
+          "locator": "ICC tools, line43",
+          "quote": "tools to help predict standby crew requirements"
+        },
+        {
+          "locator": "Jetstream deployment paragraph, line47",
+          "quote": "We have provided teams with a new generative AI tool called Jetstream"
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Retained exact passage with source/date/scope. Company claims remain company claims; no causal attribution or buying intent is inferred.",
+      "limitation": "Current implementation, contract scope, measured net benefits and independent outcome verification remain unproven.",
+      "assertion_origin": "easyJet management",
+      "entity_ids": [
+        "AV-ENT-001"
+      ]
+    },
+    {
+      "id": "V3-EJ-OUTCOMES",
+      "title": "EJ OUTCOMES — located research extract",
+      "publisher": "easyJet",
+      "url": "https://www.easyjet.com/en/news/airline/story/easyjet-listed-as-the-one-of-europes-most-innovative-companies-in-the-fortune-2026-list",
+      "publication_date": "2026-06-22",
+      "publication_date_evidence": "Published 22 June 2026, line37",
+      "reporting_period": "Qualitative year-on-year company statement, June 2026",
+      "retrieved_at": "2026-11-10T09:03:13+00:00",
+      "retrieval_url": "https://www.easyjet.com/en/news/airline/story/easyjet-listed-as-the-one-of-europes-most-innovative-companies-in-the-fortune-2026-list",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-EJ-OUTCOMES.txt",
+      "text_sha256": "457af8d1d8e18b571cebeaa5651352a1f0aa8539636c88420b4f2de04bd25200",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn400666view1; turn460194view3",
+      "excerpts": [
+        {
+          "locator": "ICC company performance statement, line49",
+          "quote": "significant year-on-year improvements in resilience and operational performance"
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Retained exact passage with source/date/scope. Company claims remain company claims; no causal attribution or buying intent is inferred.",
+      "limitation": "Current implementation, contract scope, measured net benefits and independent outcome verification remain unproven.",
+      "assertion_origin": "easyJet management",
+      "entity_ids": [
+        "AV-ENT-001"
+      ]
+    },
+    {
+      "id": "V3-EJ-MRO",
+      "title": "EJ MRO — located research extract",
+      "publisher": "easyJet",
+      "url": "https://www.easyjet.com/en/news/airline/story/easyjet-is-all-set-to-launch-s-fleet-performance",
+      "publication_date": "2023-11-03",
+      "publication_date_evidence": "Published 3 November 2023, line37",
+      "reporting_period": "Maintenance platform launch, November 2023",
+      "retrieved_at": "2026-11-10T09:03:13+00:00",
+      "retrieval_url": "https://www.easyjet.com/en/news/airline/story/easyjet-is-all-set-to-launch-s-fleet-performance",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-EJ-MRO.txt",
+      "text_sha256": "10b3113e95e047fb272ff0377a7f6bd05328c64e4c22d810d0e504826bdc6ff8",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn132119view4; turn154346view3",
+      "excerpts": [
+        {
+          "locator": "Platform dependencies, line43",
+          "quote": "Skywise Core Platform"
+        },
+        {
+          "locator": "Airbus launch customer, line54",
+          "quote": "becoming the launch customer of S. Fleet Performance +"
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Retained exact passage with source/date/scope. Company claims remain company claims; no causal attribution or buying intent is inferred.",
+      "limitation": "Current implementation, contract scope, measured net benefits and independent outcome verification remain unproven.",
+      "assertion_origin": "easyJet management",
+      "entity_ids": [
+        "AV-ENT-001"
+      ]
+    },
+    {
+      "id": "V3-UK-SAF",
+      "title": "UK SAF — located research extract",
+      "publisher": "Department for Transport",
+      "url": "https://www.gov.uk/government/collections/sustainable-aviation-fuel-saf-mandate",
+      "publication_date": "2024-12-19",
+      "publication_date_evidence": "Published 19 December 2024; collection last updated 13 July 2026, lines61–64",
+      "reporting_period": "UK supply obligation; collection updated July 2026",
+      "retrieved_at": "2026-11-10T09:03:13+00:00",
+      "retrieval_url": "https://www.gov.uk/government/collections/sustainable-aviation-fuel-saf-mandate",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-UK-SAF.txt",
+      "text_sha256": "1d3162246e4e1acb6de0f8b30f594ee390e604d73e97f6a4758c4e6d0d322933",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn400666view3; turn460194view0",
+      "excerpts": [
+        {
+          "locator": "Registration supply threshold, line91",
+          "quote": "owns and supplies 15.9 terajoules or more of relevant aviation turbine fuel"
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Retained exact passage with source/date/scope. Company claims remain company claims; no causal attribution or buying intent is inferred.",
+      "limitation": "Current implementation, contract scope, measured net benefits and independent outcome verification remain unproven.",
+      "assertion_origin": "UK policy",
+      "entity_ids": [
+        "AV-IND-001"
+      ]
+    },
+    {
+      "id": "V3-EJ-H126",
+      "title": "easyJet H1 FY2026 results — dated operating and financial measures",
+      "publisher": "easyJet",
+      "url": "https://s203.q4cdn.com/522538739/files/doc_financials/2026/q2/1-HY26-Combined-RNS-FINAL.pdf",
+      "publication_date": "2026-05-21",
+      "publication_date_evidence": "PDF page1 header, 21 May 2026",
+      "reporting_period": "Six months ended 31 March 2026; H1 FY25 comparator",
+      "retrieved_at": "2026-11-10T09:09:58+00:00",
+      "retrieval_url": "https://s203.q4cdn.com/522538739/files/doc_financials/2026/q2/1-HY26-Combined-RNS-FINAL.pdf",
+      "research_domain": "aviation",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/aviation/research-model/source-snapshots/V3-EJ-H126.txt",
+      "text_sha256": "1c80ba9954539238ffb71e05dd64e1801c991befbfb39541a1e3fef28fe8a155",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn934712view0",
+      "excerpts": [
+        {
+          "locator": "PDF p1 / line7, headline measure and same-period comparator",
+          "quote": "H1 FY26 headline loss before tax1: £(552) million (H1 FY25: £(394) million)"
+        },
+        {
+          "locator": "PDF p1 / line16, Group reported on-time performance",
+          "quote": "On-time performance: 78%, +1ppt YoY"
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Retained exact passage with source/date/scope. Company claims remain company claims; no causal attribution or buying intent is inferred.",
+      "limitation": "Current implementation, contract scope, measured net benefits and independent outcome verification remain unproven.",
+      "assertion_origin": "easyJet management",
+      "entity_ids": [
+        "AV-ENT-001"
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "candidate": {
+        "claim_id": "RC-56374d003b09340d7372",
+        "claim_type": "research_excerpt",
+        "statement": "tools to help predict standby crew requirements",
+        "source_asset_id": "RS-889cae9117a692fafe0e",
+        "source_segment_id": "RS-889cae9117a692fafe0e::a94a123fce4a8f4f",
+        "scope": "enterprise",
+        "subject": "AV-ENT-001",
+        "predicate": "registered-gap",
+        "object": "tools to help predict standby crew requirements",
+        "time_scope": "ICC announcement, May 2024",
+        "participant_scope": "Commercial Aviation",
+        "enterprise_scope": "AV-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-889cae9117a692fafe0e"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-889cae9117a692fafe0e::a94a123fce4a8f4f",
+        "asset_id": "RS-889cae9117a692fafe0e",
+        "section_heading": "ICC tools, line43",
+        "content": "tools to help predict standby crew requirements",
+        "content_hash": "ca52cbfa61a92e7c7dd07b8dafba79e9c84d526a4e9e54d22902d15f22716a37",
+        "source_location": "https://www.easyjet.com/en/news/airline/story/easyjet-opens-new-ai-equipped-operations-control-centre [ICC tools, line43]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-v1-56374d003b09340d73725c1d29d29239a95aa4d76d5120b5d36a5b6232f13faa",
+      "accepted_observation": false,
+      "source_id": "V3-EJ-ICC"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-388455ecff31896735f0",
+        "claim_type": "research_excerpt",
+        "statement": "We have provided teams with a new generative AI tool called Jetstream",
+        "source_asset_id": "RS-889cae9117a692fafe0e",
+        "source_segment_id": "RS-889cae9117a692fafe0e::5e7955999be4d606",
+        "scope": "enterprise",
+        "subject": "AV-ENT-001",
+        "predicate": "registered-gap",
+        "object": "We have provided teams with a new generative AI tool called Jetstream",
+        "time_scope": "ICC announcement, May 2024",
+        "participant_scope": "Commercial Aviation",
+        "enterprise_scope": "AV-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-889cae9117a692fafe0e"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-889cae9117a692fafe0e::5e7955999be4d606",
+        "asset_id": "RS-889cae9117a692fafe0e",
+        "section_heading": "Jetstream deployment paragraph, line47",
+        "content": "We have provided teams with a new generative AI tool called Jetstream",
+        "content_hash": "7905d5a2d8f54a00cc37a02f505a8e863e5829d2a507d58228b222c25af32bfb",
+        "source_location": "https://www.easyjet.com/en/news/airline/story/easyjet-opens-new-ai-equipped-operations-control-centre [Jetstream deployment paragraph, line47]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-v1-388455ecff31896735f0d15033b0e70d0af04d209af1396c317c5e93668e1d44",
+      "accepted_observation": false,
+      "source_id": "V3-EJ-ICC"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-74a1783c73a3a9397160",
+        "claim_type": "research_excerpt",
+        "statement": "Skywise Core Platform",
+        "source_asset_id": "RS-f5f7bdf5ea552ed84a60",
+        "source_segment_id": "RS-f5f7bdf5ea552ed84a60::9a8d2d6a4f4da173",
+        "scope": "enterprise",
+        "subject": "AV-ENT-001",
+        "predicate": "registered-gap",
+        "object": "Skywise Core Platform",
+        "time_scope": "Maintenance platform launch, November 2023",
+        "participant_scope": "Commercial Aviation",
+        "enterprise_scope": "AV-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-f5f7bdf5ea552ed84a60"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-f5f7bdf5ea552ed84a60::9a8d2d6a4f4da173",
+        "asset_id": "RS-f5f7bdf5ea552ed84a60",
+        "section_heading": "Platform dependencies, line43",
+        "content": "Skywise Core Platform",
+        "content_hash": "284ab3aa2d833e83b4bcf11ef789a444952c96cc89aed47062b6b3f680010730",
+        "source_location": "https://www.easyjet.com/en/news/airline/story/easyjet-is-all-set-to-launch-s-fleet-performance [Platform dependencies, line43]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-v1-74a1783c73a3a9397160f8a7d1cafa28dcf82d7de18106bb99d4331586dc8f92",
+      "accepted_observation": false,
+      "source_id": "V3-EJ-MRO"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-e480c6bd1e1034b6f383",
+        "claim_type": "research_excerpt",
+        "statement": "becoming the launch customer of S. Fleet Performance +",
+        "source_asset_id": "RS-f5f7bdf5ea552ed84a60",
+        "source_segment_id": "RS-f5f7bdf5ea552ed84a60::f85dd7b39c6bbcf9",
+        "scope": "enterprise",
+        "subject": "AV-ENT-001",
+        "predicate": "registered-gap",
+        "object": "becoming the launch customer of S. Fleet Performance +",
+        "time_scope": "Maintenance platform launch, November 2023",
+        "participant_scope": "Commercial Aviation",
+        "enterprise_scope": "AV-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-f5f7bdf5ea552ed84a60"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-f5f7bdf5ea552ed84a60::f85dd7b39c6bbcf9",
+        "asset_id": "RS-f5f7bdf5ea552ed84a60",
+        "section_heading": "Airbus launch customer, line54",
+        "content": "becoming the launch customer of S. Fleet Performance +",
+        "content_hash": "1148701aa3b2a0f3dc2f989c323062d447239d6034e46fb09add16f666102066",
+        "source_location": "https://www.easyjet.com/en/news/airline/story/easyjet-is-all-set-to-launch-s-fleet-performance [Airbus launch customer, line54]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-v1-e480c6bd1e1034b6f3837f019287eb76de4328cc546b357bc5fe447ea23f7d96",
+      "accepted_observation": false,
+      "source_id": "V3-EJ-MRO"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-0fd9815a2165c9f6a50c",
+        "claim_type": "research_excerpt",
+        "statement": "owns and supplies 15.9 terajoules or more of relevant aviation turbine fuel",
+        "source_asset_id": "RS-7a8f52d01ab300ee6d17",
+        "source_segment_id": "RS-7a8f52d01ab300ee6d17::158315e4abc2e1cb",
+        "scope": "industry",
+        "subject": "AV-IND-001",
+        "predicate": "registered-gap",
+        "object": "owns and supplies 15.9 terajoules or more of relevant aviation turbine fuel",
+        "time_scope": "UK supply obligation; collection updated July 2026",
+        "participant_scope": "Commercial Aviation",
+        "enterprise_scope": "",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-7a8f52d01ab300ee6d17"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-7a8f52d01ab300ee6d17::158315e4abc2e1cb",
+        "asset_id": "RS-7a8f52d01ab300ee6d17",
+        "section_heading": "Registration supply threshold, line91",
+        "content": "owns and supplies 15.9 terajoules or more of relevant aviation turbine fuel",
+        "content_hash": "26c272c20c2004b4fa708238fc31b788e507c3c2af616b03506cefb227eda251",
+        "source_location": "https://www.gov.uk/government/collections/sustainable-aviation-fuel-saf-mandate [Registration supply threshold, line91]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-v1-0fd9815a2165c9f6a50ce8cd4e282c40a05b188dd2a2c990055c657295f382a1",
+      "accepted_observation": false,
+      "source_id": "V3-UK-SAF"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-40a07c81d346f3525a4d",
+        "claim_type": "research_excerpt",
+        "statement": "significant year-on-year improvements in resilience and operational performance",
+        "source_asset_id": "RS-1c2459d6ac299df8e8d5",
+        "source_segment_id": "RS-1c2459d6ac299df8e8d5::e4fc7e81778d9ba7",
+        "scope": "enterprise",
+        "subject": "AV-ENT-001",
+        "predicate": "registered-gap",
+        "object": "significant year-on-year improvements in resilience and operational performance",
+        "time_scope": "Qualitative year-on-year company statement, June 2026",
+        "participant_scope": "Commercial Aviation",
+        "enterprise_scope": "AV-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-1c2459d6ac299df8e8d5"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-1c2459d6ac299df8e8d5::e4fc7e81778d9ba7",
+        "asset_id": "RS-1c2459d6ac299df8e8d5",
+        "section_heading": "ICC company performance statement, line49",
+        "content": "significant year-on-year improvements in resilience and operational performance",
+        "content_hash": "e8d4ee8ba9ae0fe9fa3a5aab9967a871e63ce571b80c9fbcb8750e2ba05aa3a6",
+        "source_location": "https://www.easyjet.com/en/news/airline/story/easyjet-listed-as-the-one-of-europes-most-innovative-companies-in-the-fortune-2026-list [ICC company performance statement, line49]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-v1-40a07c81d346f3525a4d52fb64f50e5a028747aef5ad36c1f79be8acb2b65425",
+      "accepted_observation": false,
+      "source_id": "V3-EJ-OUTCOMES"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-81dbc35a0963e713e550",
+        "claim_type": "research_excerpt",
+        "statement": "H1 FY26 headline loss before tax1: £(552) million (H1 FY25: £(394) million)",
+        "source_asset_id": "RS-90890d779eb11e315299",
+        "source_segment_id": "RS-90890d779eb11e315299::3ec84a7900960b7e",
+        "scope": "enterprise",
+        "subject": "AV-ENT-001",
+        "predicate": "registered-gap",
+        "object": "H1 FY26 headline loss before tax1: £(552) million (H1 FY25: £(394) million)",
+        "time_scope": "Six months ended 31 March 2026; H1 FY25 comparator",
+        "participant_scope": "Commercial Aviation",
+        "enterprise_scope": "AV-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-90890d779eb11e315299"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-90890d779eb11e315299::3ec84a7900960b7e",
+        "asset_id": "RS-90890d779eb11e315299",
+        "section_heading": "PDF p1 / line7, headline measure and same-period comparator",
+        "content": "H1 FY26 headline loss before tax1: £(552) million (H1 FY25: £(394) million)",
+        "content_hash": "532fb22e7db2652bc2f77a51606cbdaad88d391ee5a6734ad9bbef243e8d87fd",
+        "source_location": "https://s203.q4cdn.com/522538739/files/doc_financials/2026/q2/1-HY26-Combined-RNS-FINAL.pdf [PDF p1 / line7, headline measure and same-period comparator]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-v1-81dbc35a0963e713e55004efb49a44a1e51422e2dbc8cea9cd0477cb0a3151fd",
+      "accepted_observation": false,
+      "source_id": "V3-EJ-H126"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-19c6c169b003c88e7bac",
+        "claim_type": "research_excerpt",
+        "statement": "On-time performance: 78%, +1ppt YoY",
+        "source_asset_id": "RS-90890d779eb11e315299",
+        "source_segment_id": "RS-90890d779eb11e315299::7dab0be91a2d2b9f",
+        "scope": "enterprise",
+        "subject": "AV-ENT-001",
+        "predicate": "registered-gap",
+        "object": "On-time performance: 78%, +1ppt YoY",
+        "time_scope": "Six months ended 31 March 2026; H1 FY25 comparator",
+        "participant_scope": "Commercial Aviation",
+        "enterprise_scope": "AV-ENT-001",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-90890d779eb11e315299"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-90890d779eb11e315299::7dab0be91a2d2b9f",
+        "asset_id": "RS-90890d779eb11e315299",
+        "section_heading": "PDF p1 / line16, Group reported on-time performance",
+        "content": "On-time performance: 78%, +1ppt YoY",
+        "content_hash": "6e983d7eaf38ad4bd674bda815b836c5098e2ac5450537462aab235293c2a4cb",
+        "source_location": "https://s203.q4cdn.com/522538739/files/doc_financials/2026/q2/1-HY26-Combined-RNS-FINAL.pdf [PDF p1 / line16, Group reported on-time performance]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-v1-19c6c169b003c88e7bac6320320ef0ba48415943274e9bdb2d1f85ca7d0df22e",
+      "accepted_observation": false,
+      "source_id": "V3-EJ-H126"
+    }
+  ],
+  "cycle_receipts": [
+    {
+      "id": "RW-34b4580941707aafcb459026",
+      "selected_task_ids": [
+        "AV-G-BASELINE",
+        "AV-G-FUEL",
+        "AV-G-INDUSTRY"
+      ],
+      "revisit_task_ids": [],
+      "proposal_ids": [
+        "RP-f1e8f1e21f8986d981cd1ca9",
+        "RP-0def7da73d67f612b080ff27",
+        "RP-a642a7073b6ee9be96f9a8bd"
+      ]
+    },
+    {
+      "id": "RW-4d04916dbcfc042928d07007",
+      "selected_task_ids": [
+        "AV-G-BASELINE",
+        "AV-G-LATEST",
+        "AV-G-SAFETY"
+      ],
+      "revisit_task_ids": [
+        "AV-G-BASELINE"
+      ],
+      "proposal_ids": [
+        "RP-b7a4141cf9862a7d31d5ad25"
+      ]
+    },
+    {
+      "id": "RW-dd101bce329628dfe94d1658",
+      "selected_task_ids": [
+        "AV-G-BASELINE",
+        "AV-G-LATEST",
+        "AV-G-SAFETY"
+      ],
+      "revisit_task_ids": [
+        "AV-G-BASELINE"
+      ],
+      "proposal_ids": [
+        "RP-3af273e266291863bb6c1d63"
+      ]
+    }
+  ],
+  "claim_reviews": [
+    {
+      "claim_id": "RC-56374d003b09340d7372",
+      "assertion_digest": "e0a1ab6a54e0fd43873d246b408540475529c6be8f55b28ec96be5489fb8873b",
+      "entity_id": "AV-ENT-001",
+      "period": "ICC announcement, May 2024",
+      "links": [
+        {
+          "source_id": "V3-EJ-ICC",
+          "quote": "tools to help predict standby crew requirements",
+          "locator": "ICC tools, line43",
+          "support": "direct",
+          "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "e0a1ab6a54e0fd43873d246b408540475529c6be8f55b28ec96be5489fb8873b"
+        }
+      ],
+      "domains": [
+        "operations",
+        "technology"
+      ]
+    },
+    {
+      "claim_id": "RC-388455ecff31896735f0",
+      "assertion_digest": "a55abc3d4ef2edb77b30ac70e585b263d7bc6440c6db7ec7253437c23d9f5d2e",
+      "entity_id": "AV-ENT-001",
+      "period": "ICC announcement, May 2024",
+      "links": [
+        {
+          "source_id": "V3-EJ-ICC",
+          "quote": "We have provided teams with a new generative AI tool called Jetstream",
+          "locator": "Jetstream deployment paragraph, line47",
+          "support": "direct",
+          "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "a55abc3d4ef2edb77b30ac70e585b263d7bc6440c6db7ec7253437c23d9f5d2e"
+        }
+      ],
+      "domains": [
+        "operations",
+        "technology"
+      ]
+    },
+    {
+      "claim_id": "RC-74a1783c73a3a9397160",
+      "assertion_digest": "e3fafda620b671be6928eef0112be99a0b72ebbf9618ada8d5273af28785cbe6",
+      "entity_id": "AV-ENT-001",
+      "period": "Maintenance platform launch, November 2023",
+      "links": [
+        {
+          "source_id": "V3-EJ-MRO",
+          "quote": "Skywise Core Platform",
+          "locator": "Platform dependencies, line43",
+          "support": "direct",
+          "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "e3fafda620b671be6928eef0112be99a0b72ebbf9618ada8d5273af28785cbe6"
+        }
+      ],
+      "domains": [
+        "suppliers",
+        "technology"
+      ]
+    },
+    {
+      "claim_id": "RC-e480c6bd1e1034b6f383",
+      "assertion_digest": "00ec9a46b45c796ca0899fba975363f9e1c318a8a76d9b4927633f8a019a4cea",
+      "entity_id": "AV-ENT-001",
+      "period": "Maintenance platform launch, November 2023",
+      "links": [
+        {
+          "source_id": "V3-EJ-MRO",
+          "quote": "becoming the launch customer of S. Fleet Performance +",
+          "locator": "Airbus launch customer, line54",
+          "support": "direct",
+          "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "00ec9a46b45c796ca0899fba975363f9e1c318a8a76d9b4927633f8a019a4cea"
+        }
+      ],
+      "domains": [
+        "suppliers",
+        "technology"
+      ]
+    },
+    {
+      "claim_id": "RC-0fd9815a2165c9f6a50c",
+      "assertion_digest": "ae0eeeee2e414b37adce632405ae578063bd224e255bd764c81f0da7ea31883c",
+      "entity_id": "AV-IND-001",
+      "period": "UK supply obligation; collection updated July 2026",
+      "links": [
+        {
+          "source_id": "V3-UK-SAF",
+          "quote": "owns and supplies 15.9 terajoules or more of relevant aviation turbine fuel",
+          "locator": "Registration supply threshold, line91",
+          "support": "direct",
+          "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "ae0eeeee2e414b37adce632405ae578063bd224e255bd764c81f0da7ea31883c"
+        }
+      ],
+      "domains": [
+        "uncertainty"
+      ]
+    },
+    {
+      "claim_id": "RC-40a07c81d346f3525a4d",
+      "assertion_digest": "f4600c90ee327510019b24eba74a0b241fcd795abe8cb336fa95e402e47e9045",
+      "entity_id": "AV-ENT-001",
+      "period": "Qualitative year-on-year company statement, June 2026",
+      "links": [
+        {
+          "source_id": "V3-EJ-OUTCOMES",
+          "quote": "significant year-on-year improvements in resilience and operational performance",
+          "locator": "ICC company performance statement, line49",
+          "support": "direct",
+          "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "f4600c90ee327510019b24eba74a0b241fcd795abe8cb336fa95e402e47e9045"
+        }
+      ],
+      "domains": [
+        "operations",
+        "customers"
+      ]
+    },
+    {
+      "claim_id": "RC-81dbc35a0963e713e550",
+      "assertion_digest": "cf3149bc2af8b5e8504937784b1fb38c6b496ab7b8748116c343a9796596ebde",
+      "entity_id": "AV-ENT-001",
+      "period": "Six months ended 31 March 2026; H1 FY25 comparator",
+      "domains": [
+        "financials"
+      ],
+      "outcome_class": null,
+      "links": [
+        {
+          "source_id": "V3-EJ-H126",
+          "quote": "H1 FY26 headline loss before tax1: £(552) million (H1 FY25: £(394) million)",
+          "locator": "PDF p1 / line7, headline measure and same-period comparator",
+          "support": "direct",
+          "reason": "Exact company-reported H1 measure; comparator is H1, not the prior full-year period. No AI attribution.",
+          "reviewed_by": "Codex source review; not independent human validation",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "cf3149bc2af8b5e8504937784b1fb38c6b496ab7b8748116c343a9796596ebde"
+        }
+      ]
+    },
+    {
+      "claim_id": "RC-19c6c169b003c88e7bac",
+      "assertion_digest": "886af7ebfe4394dedc560020fa704be82f2931676ebc303e3005873d01a9e577",
+      "entity_id": "AV-ENT-001",
+      "period": "Six months ended 31 March 2026; H1 FY25 comparator",
+      "domains": [
+        "operations",
+        "customers"
+      ],
+      "outcome_class": "company_reported_operational_metric",
+      "links": [
+        {
+          "source_id": "V3-EJ-H126",
+          "quote": "On-time performance: 78%, +1ppt YoY",
+          "locator": "PDF p1 / line16, Group reported on-time performance",
+          "support": "direct",
+          "reason": "Exact company-reported H1 measure; comparator is H1, not the prior full-year period. No AI attribution.",
+          "reviewed_by": "Codex source review; not independent human validation",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "886af7ebfe4394dedc560020fa704be82f2931676ebc303e3005873d01a9e577"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "V3-EJ-MRO-FACT",
+      "subject": "AV-ENT-001",
+      "predicate": "reported_SFP_launch_customer",
+      "object": "AV-SUP-AIRBUS",
+      "claim_ids": [
+        "RC-e480c6bd1e1034b6f383"
+      ],
+      "temporal_scope": "November 2023 launch",
+      "verified": false,
+      "assertion_kind": "candidate_relationship_assessment",
+      "assessment": {
+        "status": "factual",
+        "reason": "Company explicitly reports launch-customer relationship for S.FP+; historical, not proof of current workshare or exclusive supply.",
+        "entity_id": "AV-ENT-001",
+        "causal": false,
+        "missing_evidence": [
+          "Current scope, term, ownership, renewal and value"
+        ],
+        "scope_note": "Company explicitly reports launch-customer relationship for S.FP+; historical, not proof of current workshare or exclusive supply.",
+        "explicit_relationship": {
+          "subject": "AV-ENT-001",
+          "predicate": "reported_SFP_launch_customer",
+          "object": "AV-SUP-AIRBUS"
+        },
+        "edge_digest": "8775a3542ba59541a3b4254adfee916ab7ad3d0be642f4ff73342647ce9b3c1d"
+      }
+    },
+    {
+      "id": "V3-EJ-ICC-MAP",
+      "subject": "AV-CAP-OPS",
+      "predicate": "maps_to",
+      "object": "AV-PROG-ICC",
+      "claim_ids": [
+        "RC-56374d003b09340d7372",
+        "RC-388455ecff31896735f0"
+      ],
+      "temporal_scope": "May 2024 announcement",
+      "verified": false,
+      "assertion_kind": "candidate_relationship_assessment",
+      "assessment": {
+        "status": "inference",
+        "reason": "Standby crew prediction and Jetstream are operational enabling tools; capability mapping is interpretation.",
+        "entity_id": "AV-ENT-001",
+        "causal": false,
+        "missing_evidence": [
+          "Adoption/utilisation",
+          "Observed workflow performance and failure modes"
+        ],
+        "scope_note": "Standby crew prediction and Jetstream are operational enabling tools; capability mapping is interpretation.",
+        "edge_digest": "f426299e04ce7a2ff3984149d2a9e3b183c291d37a5bb54d9a47374c5ceff5ad"
+      }
+    },
+    {
+      "id": "V3-EJ-MRO-DEPENDENCY",
+      "subject": "AV-PROG-FLEET",
+      "predicate": "may_depend_on",
+      "object": "AV-SUP-AIRBUS",
+      "claim_ids": [
+        "RC-74a1783c73a3a9397160",
+        "RC-e480c6bd1e1034b6f383"
+      ],
+      "temporal_scope": "November 2023 product scope",
+      "verified": false,
+      "assertion_kind": "candidate_relationship_assessment",
+      "assessment": {
+        "status": "inference",
+        "reason": "The Skywise/S.FP+ reference is a relevant technology dependency for maintenance analysis, not a statement about every fleet programme.",
+        "entity_id": "AV-ENT-001",
+        "causal": false,
+        "missing_evidence": [
+          "Current data feeds/integration",
+          "Measured maintenance outcome and contract scope"
+        ],
+        "scope_note": "The Skywise/S.FP+ reference is a relevant technology dependency for maintenance analysis, not a statement about every fleet programme.",
+        "edge_digest": "b0dbdad7da3b1070a725fba72dc81bd53e97d872eb02032ff0b8765fbb8307ab"
+      }
+    },
+    {
+      "id": "V3-EJ-OUTCOME",
+      "subject": "AV-PROG-ICC",
+      "predicate": "causal_outcome_unmeasured",
+      "object": "AV-G-BASELINE",
+      "claim_ids": [
+        "RC-56374d003b09340d7372",
+        "RC-388455ecff31896735f0",
+        "RC-40a07c81d346f3525a4d",
+        "RC-81dbc35a0963e713e550",
+        "RC-19c6c169b003c88e7bac"
+      ],
+      "temporal_scope": "2024 launch / 2026 qualitative statement",
+      "verified": false,
+      "assertion_kind": "candidate_relationship_assessment",
+      "assessment": {
+        "status": "unknown",
+        "reason": "Later company performance language is not quantified causal attribution to ICC AI.",
+        "entity_id": "AV-ENT-001",
+        "causal": false,
+        "missing_evidence": [
+          "Metric and denominator",
+          "Comparable control period",
+          "Disruption mix, crew constraints and causal evaluation"
+        ],
+        "scope_note": "Later company performance language is not quantified causal attribution to ICC AI.",
+        "edge_digest": "7c4efd7d58c730fa3a55cb592ad06b2387225e4ddb2a6a0f2b583aa1136664b8"
+      }
+    },
+    {
+      "id": "V3-EJ-SAF-APPLICABILITY",
+      "subject": "AV-IND-001",
+      "predicate": "possible_applicability",
+      "object": "AV-CAP-SUSTAIN",
+      "claim_ids": [
+        "RC-0fd9815a2165c9f6a50c"
+      ],
+      "temporal_scope": "UK policy; collection updated July 2026",
+      "verified": false,
+      "assertion_kind": "candidate_relationship_assessment",
+      "assessment": {
+        "status": "hypothesis",
+        "reason": "Industry fuel-supply conditions cannot automatically be assigned to the airline legal entity.",
+        "entity_id": "AV-ENT-001",
+        "causal": false,
+        "missing_evidence": [
+          "Legal entity role, ownership and fuel-supply threshold",
+          "Supplier/airline responsibility and assurance boundary"
+        ],
+        "scope_note": "Industry fuel-supply conditions cannot automatically be assigned to the airline legal entity.",
+        "edge_digest": "7d9edb9e235cb699e85ea42b5fd1db6f2c3c65498220a559802ac4e9ee36e466"
+      }
+    }
+  ],
+  "conclusions": [
+    {
+      "id": "EJ-UNDERSTAND-ICC",
+      "title": "Operational tools exist; measured AI impact remains unknown",
+      "statement": "ICC crew-prediction support and Jetstream were announced in 2024. A 2026 company statement describes improvement without establishing quantified attribution to those tools.",
+      "kind": "inference",
+      "entity_id": "AV-ENT-001",
+      "claim_ids": [
+        "RC-56374d003b09340d7372",
+        "RC-388455ecff31896735f0",
+        "RC-40a07c81d346f3525a4d"
+      ],
+      "relationship_ids": [
+        "V3-EJ-ICC-MAP",
+        "V3-EJ-OUTCOME"
+      ],
+      "missing_evidence": [
+        "Utilisation, cancellation/delay/deflection baselines",
+        "Costs, counterfactuals and independent outcome evidence"
+      ],
+      "change_from_v2": "V3 connects a dated deployment account with a later qualitative statement while keeping the measured-outcome gap open.",
+      "causation_proven": false
+    },
+    {
+      "id": "EJ-UNDERSTAND-MRO",
+      "title": "Maintenance analysis starts with an existing ecosystem",
+      "statement": "The 2023 S.FP+/Skywise launch-customer reference establishes historical supplier context. It does not establish current incumbency across all maintenance, an available replacement contract or a new procurement event.",
+      "kind": "inference",
+      "entity_id": "AV-ENT-001",
+      "claim_ids": [
+        "RC-74a1783c73a3a9397160",
+        "RC-e480c6bd1e1034b6f383"
+      ],
+      "relationship_ids": [
+        "V3-EJ-MRO-FACT",
+        "V3-EJ-MRO-DEPENDENCY"
+      ],
+      "missing_evidence": [
+        "Current product scope and contract boundaries",
+        "Reliability, AOG and maintenance-cost outcomes"
+      ],
+      "change_from_v2": "Adds located product/dependency evidence and a bounded supplier relationship, instead of assuming a blank-slate maintenance platform.",
+      "causation_proven": false
+    },
+    {
+      "id": "EJ-UNDERSTAND-SAF",
+      "title": "Fuel regulation needs entity-specific responsibility mapping",
+      "statement": "The official registration condition is industry context. Determine the relevant fuel-supply role before assigning a compliance responsibility or transformation need to easyJet.",
+      "kind": "inference",
+      "entity_id": "AV-ENT-001",
+      "claim_ids": [
+        "RC-0fd9815a2165c9f6a50c"
+      ],
+      "relationship_ids": [
+        "V3-EJ-SAF-APPLICABILITY"
+      ],
+      "missing_evidence": [
+        "Applicable easyJet legal entity and fuel-supply activities",
+        "Supply contracts, reporting and assurance responsibility"
+      ],
+      "change_from_v2": "V3 explicitly keeps policy context at Industry scope and makes the missing enterprise applicability relationship visible.",
+      "causation_proven": false
+    },
+    {
+      "id": "EJ-UNDERSTAND-H126",
+      "title": "A dated outcome baseline adds context, not AI causality",
+      "statement": "H1 FY2026 disclosure provides a half-year financial comparator and an on-time performance measure. Use these bounded outcomes alongside operating context; do not compare a seasonal half-year loss with FY2025 full-year profit or attribute OTP to ICC AI.",
+      "kind": "inference",
+      "entity_id": "AV-ENT-001",
+      "claim_ids": [
+        "RC-81dbc35a0963e713e550",
+        "RC-19c6c169b003c88e7bac"
+      ],
+      "relationship_ids": [
+        "V3-EJ-OUTCOME"
+      ],
+      "missing_evidence": [
+        "Later FY2026 results and period comparability",
+        "Metric definition, disruption mix and independent causal assessment"
+      ],
+      "change_from_v2": "Adds a directly retrieved H1 report where the previous current-results landing page yielded only a shell; establishes an operating metric while leaving Q3 original-release verification outstanding.",
+      "causation_proven": false
+    }
+  ],
+  "contradictions": [],
+  "source_limitations": [
+    {
+      "url": "https://corporate.easyjet.com/investors/reports-and-presentations/",
+      "status": "Direct page returns a financial shell, not the underlying Q3 release; index-only limitation preserved"
+    }
+  ],
+  "stage_ids": [
+    "AV-STRATEGY",
+    "AV-G-BASELINE",
+    "AV-CAP-OPS",
+    "RC-388455ecff31896735f0",
+    "AV-PROG-ICC",
+    "AV-SUP-AIRBUS",
+    "AV-G-BASELINE"
+  ],
+  "source_task_ids": {
+    "V3-EJ-ICC": "AV-G-BASELINE",
+    "V3-EJ-OUTCOMES": "AV-G-BASELINE",
+    "V3-EJ-H126": "AV-G-BASELINE",
+    "V3-EJ-MRO": "AV-G-INDUSTRY",
+    "V3-UK-SAF": "AV-G-FUEL"
+  },
+  "acquisition_plan": [
+    {
+      "source_ids": [
+        "V3-EJ-ICC",
+        "V3-EJ-MRO",
+        "V3-UK-SAF"
+      ],
+      "revisit_task_ids": []
+    },
+    {
+      "source_ids": [
+        "V3-EJ-OUTCOMES"
+      ],
+      "revisit_task_ids": [
+        "AV-G-BASELINE"
+      ]
+    },
+    {
+      "source_ids": [
+        "V3-EJ-H126"
+      ],
+      "revisit_task_ids": [
+        "AV-G-BASELINE"
+      ]
+    }
+  ],
+  "follow_up_tasks": [
+    {
+      "task_id": "AV-G-BASELINE",
+      "question": "Use dated H1 OTP as a bounded baseline; obtain disruption mix, utilisation, ICC/Jetstream adoption and comparable periods before attributing outcomes to AI.",
+      "reason": "A measured OTP level and qualitative ICC improvement now exist, but attribution and later-period validity do not.",
+      "claim_ids": [
+        "RC-81dbc35a0963e713e550",
+        "RC-19c6c169b003c88e7bac",
+        "RC-40a07c81d346f3525a4d"
+      ]
+    },
+    {
+      "task_id": "AV-G-FUEL",
+      "question": "Identify the applicable legal entity, fuel ownership/supply role, supplier contracts and reporting/assurance boundaries before assigning a fuel-mandate responsibility.",
+      "reason": "The policy condition is industry context; enterprise applicability is still missing.",
+      "claim_ids": [
+        "RC-0fd9815a2165c9f6a50c"
+      ]
+    },
+    {
+      "task_id": "AV-G-INDUSTRY",
+      "question": "Retrieve the original Q3 release and independent market/regulator comparators; separate seasonal H1 performance and historical maintenance dependencies from industry-wide conclusions.",
+      "reason": "The H1 source improves enterprise context; it cannot fill every current-results, supplier or industry-comparison gap.",
+      "claim_ids": [
+        "RC-74a1783c73a3a9397160",
+        "RC-e480c6bd1e1034b6f383",
+        "RC-81dbc35a0963e713e550",
+        "RC-19c6c169b003c88e7bac"
+      ]
+    }
+  ]
+}
