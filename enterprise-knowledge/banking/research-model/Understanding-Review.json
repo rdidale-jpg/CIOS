@@ -140,6 +140,39 @@
       "entity_ids": [
         "BK-ENT-001"
       ]
+    },
+    {
+      "id": "VI2-BOE-CAPITAL-Q226",
+      "title": "Banking sector regulatory capital — 2026 Q2",
+      "publisher": "Bank of England",
+      "url": "https://www.bankofengland.co.uk/statistics/banking-sector-regulatory-capital/2026/2026-q2",
+      "publication_date": "2026-09-30",
+      "publication_date_evidence": "Page heading: Published on 30 September 2026",
+      "reporting_period": "2026 Q2; total UK banking sector, transitional regulatory capital dataset",
+      "retrieved_at": "2026-11-10T12:28:35+00:00",
+      "retrieval_url": "https://www.bankofengland.co.uk/statistics/banking-sector-regulatory-capital/2026/2026-q2",
+      "research_domain": "banking",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/VI2-BOE-CAPITAL-Q226.txt",
+      "text_sha256": "7323c78caf11ab5541efae1d3a0b89db3db56e9aa4931c9f80e461addfb7e03e",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn295451view0 lines2–8 and52–59",
+      "excerpts": [
+        {
+          "quote": "The level of total risk-weighted assets increased by 1.9% from £3,059 billion to £3,118 billion this quarter.",
+          "locator": "Key points for 2026 Q2, third bullet"
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Direct official release, exact bounded passage reviewed by Codex. Not independent human approval or canonical acceptance.",
+      "limitation": "Short reviewed excerpt, not original byte archive. Risk-weighted assets are not total balance-sheet assets, market value, revenue, GVA, employment or Lloyds-specific exposure.",
+      "assertion_origin": "Bank of England statistical reporting",
+      "entity_ids": [
+        "BK-IND-002"
+      ]
     }
   ],
   "observations": [
@@ -322,6 +355,42 @@
       "observation_fingerprint": "obs-v1-3508e63fc114227406a10bbaf2ceecc05c979241889476c183dc1eebd0269458",
       "accepted_observation": false,
       "source_id": "V3-LBG-STRATEGY"
+    },
+    {
+      "candidate": {
+        "claim_id": "RC-92d51766e21d8a145ecf",
+        "claim_type": "research_excerpt",
+        "statement": "The level of total risk-weighted assets increased by 1.9% from £3,059 billion to £3,118 billion this quarter.",
+        "source_asset_id": "RS-79845e7ac4920fb8d67a",
+        "source_segment_id": "RS-79845e7ac4920fb8d67a::c91de72c6cd1c44e",
+        "scope": "industry",
+        "subject": "BK-IND-002",
+        "predicate": "economics",
+        "object": "The level of total risk-weighted assets increased by 1.9% from £3,059 billion to £3,118 billion this quarter.",
+        "time_scope": "2026 Q2; total UK banking sector, transitional regulatory capital dataset",
+        "participant_scope": "UK Banking",
+        "enterprise_scope": "",
+        "confidence": "Provenance reviewed; semantic scope and atomicity pending",
+        "authority": "candidate_intelligence",
+        "status": "needs_governed_observation_review",
+        "supporting_ids": [
+          "RS-79845e7ac4920fb8d67a"
+        ],
+        "contradicting_ids": []
+      },
+      "segment": {
+        "segment_id": "RS-79845e7ac4920fb8d67a::c91de72c6cd1c44e",
+        "asset_id": "RS-79845e7ac4920fb8d67a",
+        "section_heading": "Key points for 2026 Q2, third bullet",
+        "content": "The level of total risk-weighted assets increased by 1.9% from £3,059 billion to £3,118 billion this quarter.",
+        "content_hash": "7ffc46c7dd73eab29ac05b8fcd37a40af7e387432251184bb1c5aa3fd249a85d",
+        "source_location": "https://www.bankofengland.co.uk/statistics/banking-sector-regulatory-capital/2026/2026-q2 [Key points for 2026 Q2, third bullet]",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_web_excerpt"
+      },
+      "observation_fingerprint": "obs-v1-92d51766e21d8a145ecf7552d57034d4bc5b9f9bd40c3280de02a6151d393559",
+      "accepted_observation": false,
+      "source_id": "VI2-BOE-CAPITAL-Q226"
     }
   ],
   "cycle_receipts": [
@@ -465,6 +534,27 @@
       "domains": [
         "strategy",
         "operations"
+      ]
+    },
+    {
+      "claim_id": "RC-92d51766e21d8a145ecf",
+      "assertion_digest": "192333b3b8c610affcddb9f4b62389f65f2add8f589ec3cb53bf0693c2d078b5",
+      "entity_id": "BK-IND-002",
+      "period": "2026 Q2; total UK banking sector, transitional regulatory capital dataset",
+      "links": [
+        {
+          "source_id": "VI2-BOE-CAPITAL-Q226",
+          "quote": "The level of total risk-weighted assets increased by 1.9% from £3,059 billion to £3,118 billion this quarter.",
+          "locator": "Key points for 2026 Q2, third bullet",
+          "support": "direct",
+          "reason": "Supports the reported total UK banking risk-weighted exposure and quarterly change only. Not total assets or an enterprise fact.",
+          "reviewed_by": "Codex source review; not canonical acceptance",
+          "reviewed_at": "2026-11-10",
+          "assertion_digest": "192333b3b8c610affcddb9f4b62389f65f2add8f589ec3cb53bf0693c2d078b5"
+        }
+      ],
+      "domains": [
+        "financials"
       ]
     }
   ],

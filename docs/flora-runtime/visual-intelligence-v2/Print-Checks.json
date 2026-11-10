@@ -1,0 +1,21 @@
+{
+  "banking": {
+    "pages": 23,
+    "page_mm": [
+      297,
+      420
+    ],
+    "missing_primary_activity_labels_on_first_page": [],
+    "full_document_contains_source_periods": true
+  },
+  "aviation": {
+    "pages": 24,
+    "page_mm": [
+      297,
+      420
+    ],
+    "missing_primary_activity_labels_on_first_page": [],
+    "full_document_contains_source_periods": true
+  },
+  "note": "PDF fit is verified separately from browser overflow and zoom. Supporting contextual research prints on subsequent pages; all public source context retained."
+}

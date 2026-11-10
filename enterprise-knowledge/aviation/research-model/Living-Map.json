@@ -1,0 +1,224 @@
+{
+  "version": 2,
+  "domain": "aviation",
+  "title": "From demand to departure.",
+  "subtitle": "A passenger becomes a booking, a schedule, a flight — and a service outcome.",
+  "activities": [
+    {
+      "id": "VI-EJ-BOOK",
+      "label": "Passengers & booking",
+      "position": [
+        160,
+        230
+      ],
+      "illustration": "ticket",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Connect customer needs to routes, prices and bookings. Current conversational discovery returns users to easyJet booking sites.",
+      "pressure": "Capacity, aircraft availability, fuel and service recovery affect operating economics; no cost share or causal benefit is estimated.",
+      "regulatory": false
+    },
+    {
+      "id": "VI-EJ-PLAN",
+      "label": "Network & pricing",
+      "position": [
+        490,
+        180
+      ],
+      "illustration": "network",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Match the route schedule, capacity and revenue model to demand; route-level market shares remain unknown.",
+      "pressure": "Capacity, aircraft availability, fuel and service recovery affect operating economics; no cost share or causal benefit is estimated.",
+      "regulatory": false
+    },
+    {
+      "id": "VI-EJ-FLEET",
+      "label": "Aircraft & crew",
+      "position": [
+        880,
+        200
+      ],
+      "illustration": "plane",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Prepare and allocate aircraft and people for the schedule; enabling tools are not proof of utilisation or causal benefits.",
+      "pressure": "Capacity, aircraft availability, fuel and service recovery affect operating economics; no cost share or causal benefit is estimated.",
+      "regulatory": true
+    },
+    {
+      "id": "VI-EJ-TURN",
+      "label": "Airports & flight operations",
+      "position": [
+        1200,
+        510
+      ],
+      "illustration": "terminal",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Coordinate airports, ground activity and aircraft availability. Exact provider workshare and operational interfaces remain unknown.",
+      "pressure": "Capacity, aircraft availability, fuel and service recovery affect operating economics; no cost share or causal benefit is estimated.",
+      "regulatory": true
+    },
+    {
+      "id": "VI-EJ-MRO",
+      "label": "Maintenance & engineering",
+      "position": [
+        1000,
+        790
+      ],
+      "illustration": "wrench",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Anticipate and resolve aircraft defects. Historical Skywise / S.FP+ context must not become assumed current contract scope.",
+      "pressure": "Capacity, aircraft availability, fuel and service recovery affect operating economics; no cost share or causal benefit is estimated.",
+      "regulatory": true
+    },
+    {
+      "id": "VI-EJ-RECOVER",
+      "label": "Disruption & recovery",
+      "position": [
+        650,
+        770
+      ],
+      "illustration": "tower",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Manage flight/crew disruption and customer care. Obtain adoption, deflection and disruption-mix baselines before attributing outcomes to AI.",
+      "pressure": "Capacity, aircraft availability, fuel and service recovery affect operating economics; no cost share or causal benefit is estimated.",
+      "regulatory": false
+    },
+    {
+      "id": "VI-EJ-DATA",
+      "label": "Data & digital systems",
+      "position": [
+        250,
+        565
+      ],
+      "illustration": "cloud",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Connect customer and operational workflows. Jetstream and conversational interfaces have different scope and dates.",
+      "pressure": "Capacity, aircraft availability, fuel and service recovery affect operating economics; no cost share or causal benefit is estimated.",
+      "regulatory": false
+    },
+    {
+      "id": "VI-EJ-FUEL",
+      "label": "Fuel & sustainability",
+      "position": [
+        1230,
+        200
+      ],
+      "illustration": "leaf",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Manage cost and environmental pressures. Separate supplier obligations, airline roles, forecasts and measured performance.",
+      "pressure": "Capacity, aircraft availability, fuel and service recovery affect operating economics; no cost share or causal benefit is estimated.",
+      "regulatory": true
+    },
+    {
+      "id": "VI-EJ-OUTCOMES",
+      "label": "Service & travel outcomes",
+      "position": [
+        210,
+        820
+      ],
+      "illustration": "chart",
+      "role": "Conceptual industry operating activity",
+      "purpose": "Inspect dated operating and financial measures. A half-year result is not a full-year comparator or an AI attribution study.",
+      "pressure": "Capacity, aircraft availability, fuel and service recovery affect operating economics; no cost share or causal benefit is estimated.",
+      "regulatory": false
+    }
+  ],
+  "flows": [
+    {
+      "id": "LM-aviation-FLOW-1",
+      "source": "VI-EJ-BOOK",
+      "target": "VI-EJ-PLAN",
+      "kind": "Demand",
+      "label": "Bookings inform network and pricing decisions",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    },
+    {
+      "id": "LM-aviation-FLOW-2",
+      "source": "VI-EJ-PLAN",
+      "target": "VI-EJ-FLEET",
+      "kind": "Resources",
+      "label": "Schedules require aircraft and crew capacity",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    },
+    {
+      "id": "LM-aviation-FLOW-3",
+      "source": "VI-EJ-FLEET",
+      "target": "VI-EJ-TURN",
+      "kind": "Passengers",
+      "label": "Fleet and crew support flights through airports",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    },
+    {
+      "id": "LM-aviation-FLOW-4",
+      "source": "VI-EJ-TURN",
+      "target": "VI-EJ-RECOVER",
+      "kind": "Service",
+      "label": "Operational disruption can require recovery",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    },
+    {
+      "id": "LM-aviation-FLOW-5",
+      "source": "VI-EJ-MRO",
+      "target": "VI-EJ-FLEET",
+      "kind": "Availability",
+      "label": "Maintenance supports aircraft availability",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    },
+    {
+      "id": "LM-aviation-FLOW-6",
+      "source": "VI-EJ-FUEL",
+      "target": "VI-EJ-FLEET",
+      "kind": "Resources",
+      "label": "Fuel and sustainability requirements constrain operations",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    },
+    {
+      "id": "LM-aviation-FLOW-7",
+      "source": "VI-EJ-DATA",
+      "target": "VI-EJ-RECOVER",
+      "kind": "Information",
+      "label": "Operational data can support recovery decisions",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    },
+    {
+      "id": "LM-aviation-FLOW-8",
+      "source": "VI-EJ-RECOVER",
+      "target": "VI-EJ-OUTCOMES",
+      "kind": "Service",
+      "label": "Recovery shapes the customer journey",
+      "state": "Conceptual industry flow; not verified enterprise topology"
+    }
+  ],
+  "participant_roles": {
+    "VI-AV-EASYJET": "VI-EJ-PLAN",
+    "VI-AV-RYANAIR": "VI-EJ-PLAN",
+    "VI-AV-LUFTHANSA": "VI-EJ-PLAN",
+    "VI-AV-AFKLM": "VI-EJ-PLAN",
+    "VI-AV-WIZZ": "VI-EJ-PLAN",
+    "VI-AV-AIRBUS": "VI-EJ-MRO",
+    "VI-AV-AIRPORTS": "VI-EJ-TURN",
+    "VI-AV-REG": "VI-EJ-FLEET",
+    "VI-AV-DISTRIBUTION": "VI-EJ-BOOK",
+    "VI-AV-AI-ENTRANTS": "VI-EJ-PLAN"
+  },
+  "metrics": [
+    {
+      "id": "VI-AV-JOURNEYS",
+      "label": "Airport passenger journeys",
+      "claim_refs": [
+        "AV-MARKET"
+      ],
+      "measure": "quote",
+      "pattern": "(?P<value>[0-9]+(?:\\.[0-9]+)?)m passengers",
+      "unit": "million passenger journeys",
+      "scope": "UK + Crown Dependency airports; not unique people"
+    }
+  ],
+  "scale_gaps": "Comparable current airline shares, industry employment and GVA remain unverified; airport journeys are not unique people.",
+  "weighting": "Activity/illustration areas show distinct business roles, not measured importance. Participant labels use equal typography; there is no quantitative ranking.",
+  "participant_locations": {
+    "VI-AV-REG": [
+      1280,
+      105
+    ]
+  }
+}

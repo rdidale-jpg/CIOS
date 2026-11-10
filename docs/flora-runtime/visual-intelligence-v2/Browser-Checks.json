@@ -1,0 +1,168 @@
+{
+  "baseline": "650b92c377b7295a01cb59deec7195fae21e8a93",
+  "browser": "Chromium via Playwright",
+  "data": "Public research, disposable local stores, no accounts or synthetic application seeding",
+  "checks": [
+    {
+      "industry": "banking",
+      "viewport": "desktop",
+      "lens": "overview",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "All nine activity keyboard disclosures, single-panel state, evidence/enterprise/timeline navigation and flow/zoom"
+    },
+    {
+      "industry": "banking",
+      "viewport": "desktop",
+      "lens": "ai-disruption",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "Exposure highlights and responsive render"
+    },
+    {
+      "industry": "banking",
+      "viewport": "desktop",
+      "lens": "regulation",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "Exposure highlights and responsive render"
+    },
+    {
+      "industry": "aviation",
+      "viewport": "desktop",
+      "lens": "overview",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "All nine activity keyboard disclosures, single-panel state, evidence/enterprise/timeline navigation and flow/zoom"
+    },
+    {
+      "industry": "aviation",
+      "viewport": "desktop",
+      "lens": "ai-disruption",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "Exposure highlights and responsive render"
+    },
+    {
+      "industry": "aviation",
+      "viewport": "desktop",
+      "lens": "regulation",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "Exposure highlights and responsive render"
+    },
+    {
+      "industry": "banking",
+      "viewport": "tablet",
+      "lens": "overview",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "All nine activity keyboard disclosures, single-panel state, evidence/enterprise/timeline navigation and flow/zoom"
+    },
+    {
+      "industry": "banking",
+      "viewport": "tablet",
+      "lens": "ai-disruption",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "Exposure highlights and responsive render"
+    },
+    {
+      "industry": "banking",
+      "viewport": "tablet",
+      "lens": "regulation",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "Exposure highlights and responsive render"
+    },
+    {
+      "industry": "aviation",
+      "viewport": "tablet",
+      "lens": "overview",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "All nine activity keyboard disclosures, single-panel state, evidence/enterprise/timeline navigation and flow/zoom"
+    },
+    {
+      "industry": "aviation",
+      "viewport": "tablet",
+      "lens": "ai-disruption",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "Exposure highlights and responsive render"
+    },
+    {
+      "industry": "aviation",
+      "viewport": "tablet",
+      "lens": "regulation",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "Exposure highlights and responsive render"
+    },
+    {
+      "industry": "banking",
+      "viewport": "narrow",
+      "lens": "overview",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "All nine activity keyboard disclosures, single-panel state, evidence/enterprise/timeline navigation and flow/zoom"
+    },
+    {
+      "industry": "banking",
+      "viewport": "narrow",
+      "lens": "ai-disruption",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "Exposure highlights and responsive render"
+    },
+    {
+      "industry": "banking",
+      "viewport": "narrow",
+      "lens": "regulation",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "Exposure highlights and responsive render"
+    },
+    {
+      "industry": "aviation",
+      "viewport": "narrow",
+      "lens": "overview",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "All nine activity keyboard disclosures, single-panel state, evidence/enterprise/timeline navigation and flow/zoom"
+    },
+    {
+      "industry": "aviation",
+      "viewport": "narrow",
+      "lens": "ai-disruption",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "Exposure highlights and responsive render"
+    },
+    {
+      "industry": "aviation",
+      "viewport": "narrow",
+      "lens": "regulation",
+      "status": 200,
+      "no_page_overflow": true,
+      "checks": "Exposure highlights and responsive render"
+    }
+  ],
+  "geometry_pixels": {
+    "banking-desktop": 2183,
+    "aviation-desktop": 2146,
+    "banking-tablet": 2183,
+    "aviation-tablet": 2146,
+    "banking-narrow": 2136,
+    "aviation-narrow": 2075,
+    "banking-before-desktop": 5251,
+    "banking-after-desktop": 2183,
+    "aviation-before-desktop": 5333,
+    "aviation-after-desktop": 2146
+  },
+  "javascript_disabled": "Native disclosure passed; unavailable enhancement hidden",
+  "reduced_motion": "Enabled for viewport checks",
+  "console_errors": [],
+  "print": "A3 portrait, fit-to-page CSS with all research disclosures included; PDF content checked separately",
+  "comprehension": "Unmeasured; no human participants"
+}
