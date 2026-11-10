@@ -1,0 +1,21 @@
+{
+  "main": "adf205993cc0857183d77766ce4882bf48326fb4",
+  "checks": [
+    {
+      "industry": "banking",
+      "six_original_contracts": true,
+      "enterprise_understanding": true,
+      "activity_enterprise_hypothesis_click_journey": true,
+      "source_and_return_navigation": true,
+      "coarse_target_min44": true
+    },
+    {
+      "industry": "aviation",
+      "six_original_contracts": true,
+      "enterprise_understanding": true,
+      "activity_enterprise_hypothesis_click_journey": true,
+      "source_and_return_navigation": true,
+      "coarse_target_min44": true
+    }
+  ]
+}
