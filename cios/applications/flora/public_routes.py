@@ -58,6 +58,7 @@ def public_route_catalog():
     add(('/flora/banking/heatmap/detail',), 'heatmap_detail_page', 'Public bank/theme scenario lookup only', ('mode','theme','bank'))
     add(('/flora/banking/explorer',), 'industry_page', 'Repository BANKS public-source fixtures; conceptual ecosystem only')
     add(('/industries','/enterprises'), 'unified_catalogue', 'Repository-owned public research navigation only')
+    add(('/enterprises/lloyds/research-diagnostic','/enterprises/easyjet/research-diagnostic'), 'research_diagnostic', 'Read-only finite public research assessment overlay; no protected stores')
     add(('/industries/banking','/industries/aviation'), 'unified_industry', 'Existing public research overlay; no owner records', ('lens',))
     add(('/industries/banking/visual-specs','/industries/aviation/visual-specs'), 'visual_specs', 'Deterministic visual output of existing public research only')
     from .banking_portfolio import BANKS as public_banks
