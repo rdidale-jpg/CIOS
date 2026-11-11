@@ -1,0 +1,855 @@
+{
+  "schema_version": 1,
+  "id": "FLORA-GLOBAL-MACRO-V1",
+  "as_of": "2026-11-11",
+  "authority": "candidate_intelligence",
+  "previous_version": null,
+  "sources": [
+    {
+      "id": "GM-SOCIAL",
+      "title": "PPN 026: Social Value Model",
+      "publisher": "Cabinet Office",
+      "url": "https://www.gov.uk/government/publications/ppn-026-the-social-value-model/ppn-026-the-social-value-model-html",
+      "retrieval_url": "https://www.gov.uk/government/publications/ppn-026-the-social-value-model/ppn-026-the-social-value-model-html",
+      "publication_date": "2026-08-05",
+      "publication_date_evidence": "Official page publication/document version metadata",
+      "reporting_period": "Covered UK central-government procurements valued at £1m inclusive of VAT or above; new tender notices from 2027-01-01. Private utilities and primarily overseas delivery excluded; transitions/framework rules require review.",
+      "retrieved_at": "2026-11-11T12:05:22Z",
+      "reviewed_by": "Codex automated primary-passage review; no independent human approval",
+      "review_notes": "Read directly through approved web research tool. Narrow excerpt retained; full original bytes and legal instruments are not archived.",
+      "research_domain": "macro",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn754602view0",
+      "retrieval_extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+      "limitation": "UK covered central-government procurement; new tender notices from 2027-01-01; thresholds, exclusions and transitional framework rules require review. Short passage supports its stated scope only; no automatic enterprise applicability.",
+      "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-SOCIAL.txt",
+      "text_sha256": "e1807f1224b707b5f92f3caba5becfb7a4341a1de1ccd992a7c29a0d10d22d47",
+      "primary_content_sha256": null,
+      "excerpts": [
+        {
+          "quote": "This Procurement Policy Note (PPN) applies only to central government departments, their executive agencies and non-departmental public bodies.",
+          "locator": "Dissemination and scope, paragraph 4; timing paragraphs 10–11; action paragraph 13"
+        }
+      ],
+      "supported_force_kinds": [
+        "policy_priority"
+      ]
+    },
+    {
+      "id": "GM-SRS",
+      "title": "PS26/19: listed issuers and UK SRS",
+      "publisher": "Financial Conduct Authority",
+      "url": "https://www.fca.org.uk/publications/policy-statements/ps26-19-aligning-listed-issuers-sustainability-disclosures-international-standards",
+      "retrieval_url": "https://www.fca.org.uk/publications/policy-statements/ps26-19-aligning-listed-issuers-sustainability-disclosures-international-standards",
+      "publication_date": "2026-09-30",
+      "publication_date_evidence": "Official page publication/document version metadata",
+      "reporting_period": "Specified listing categories; comply-or-explain UK SRS; transitional relief. Exact issuer/category and accounting period must be established.",
+      "retrieved_at": "2026-11-11T12:05:22Z",
+      "reviewed_by": "Codex automated primary-passage review; no independent human approval",
+      "review_notes": "Read directly through approved web research tool. Narrow excerpt retained; full original bytes and legal instruments are not archived.",
+      "research_domain": "macro",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn754602view1",
+      "retrieval_extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+      "limitation": "Specified listing categories; comply-or-explain UK SRS; transitional relief. Exact issuer/category and accounting period must be established. Short passage supports its stated scope only; no automatic enterprise applicability.",
+      "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-SRS.txt",
+      "text_sha256": "f0984727e0e290fb1b939f8c64cc7c2561d46f89d726cea16c0924960419ecf2",
+      "primary_content_sha256": null,
+      "excerpts": [
+        {
+          "quote": "The new rules apply to accounting periods starting on or after 1 January 2027, with first reporting in 2028.",
+          "locator": "Next steps; Who this is for"
+        }
+      ],
+      "supported_force_kinds": [
+        "regulatory_rule"
+      ]
+    },
+    {
+      "id": "GM-BILL",
+      "title": "Cyber Security and Resilience Bill stages",
+      "publisher": "UK Parliament",
+      "url": "https://bills.parliament.uk/bills/4035/stages",
+      "retrieval_url": "https://bills.parliament.uk/bills/4035/stages",
+      "publication_date": null,
+      "publication_date_evidence": null,
+      "reporting_period": "Status reviewed 2026-11-11; Lords third reading 2026-11-02, Commons carry-over 2026-11-04. Proposed legislation; not proof of Royal Assent.",
+      "retrieved_at": "2026-11-11T12:05:22Z",
+      "reviewed_by": "Codex automated primary-passage review; no independent human approval",
+      "review_notes": "Read directly through approved web research tool. Narrow excerpt retained; full original bytes and legal instruments are not archived.",
+      "research_domain": "macro",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn754602view2",
+      "retrieval_extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+      "limitation": "Status reviewed 2026-11-11; Lords third reading 2026-11-02, Commons carry-over 2026-11-04. Proposed legislation; not proof of Royal Assent. Short passage supports its stated scope only; no automatic enterprise applicability.",
+      "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-BILL.txt",
+      "text_sha256": "d1789f10b9037537b481daf55998f913b7b161796c9250ff485ad8d974c46c34",
+      "primary_content_sha256": null,
+      "excerpts": [
+        {
+          "quote": "Consideration of Lords amendments Date to be announced Commons",
+          "locator": "Session 2026–27: Commons consideration of Lords amendments"
+        }
+      ],
+      "supported_force_kinds": [
+        "proposed_legislation"
+      ]
+    },
+    {
+      "id": "GM-CYBER-FR",
+      "title": "Panorama de la cybermenace 2025",
+      "publisher": "ANSSI / CERT-FR",
+      "url": "https://www.cert.cyber.gouv.fr/cti/CERTFR-2026-CTI-002/",
+      "retrieval_url": "https://www.cert.cyber.gouv.fr/cti/CERTFR-2026-CTI-002/",
+      "publication_date": "2026-03-11",
+      "publication_date_evidence": "Official page publication/document version metadata",
+      "reporting_period": "France threat review, observation year 2025; not a finding of vulnerability at a named enterprise.",
+      "retrieved_at": "2026-11-11T12:05:22Z",
+      "reviewed_by": "Codex automated primary-passage review; no independent human approval",
+      "review_notes": "Read directly through approved web research tool. Narrow excerpt retained; full original bytes and legal instruments are not archived.",
+      "research_domain": "macro",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn465011view0",
+      "retrieval_extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+      "limitation": "France threat review, observation year 2025; not a finding of vulnerability at a named enterprise. Short passage supports its stated scope only; no automatic enterprise applicability.",
+      "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CYBER-FR.txt",
+      "text_sha256": "0bdaa127c45bc7dac95e077592281ac9811fb345c5fa8448839928afbd47355c",
+      "primary_content_sha256": null,
+      "excerpts": [
+        {
+          "quote": "Pour atteindre leurs objectifs, les attaquants exploitent toujours des vulnérabilités, massivement et opportunistement",
+          "locator": "Introduction, paragraph beginning Pour atteindre leurs objectifs"
+        }
+      ],
+      "supported_force_kinds": [
+        "threat_or_scenario"
+      ]
+    },
+    {
+      "id": "GM-CSRD",
+      "title": "Sustainability reporting: Omnibus 1 process",
+      "publisher": "ESMA",
+      "url": "https://www.esma.europa.eu/esmas-activities/sustainable-finance/sustainability-reporting",
+      "retrieval_url": "https://www.esma.europa.eu/esmas-activities/sustainable-finance/sustainability-reporting",
+      "publication_date": null,
+      "publication_date_evidence": null,
+      "reporting_period": "Supervisor describes enacted EU amendment (Directive 2026/470), effective 2026-03-18; national transposition and entity-specific thresholds differ.",
+      "retrieved_at": "2026-11-11T12:05:22Z",
+      "reviewed_by": "Codex automated primary-passage review; no independent human approval",
+      "review_notes": "Read directly through approved web research tool. Narrow excerpt retained; full original bytes and legal instruments are not archived.",
+      "research_domain": "macro",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn465011view1",
+      "retrieval_extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+      "limitation": "Supervisor describes enacted EU amendment (Directive 2026/470), effective 2026-03-18; national transposition and entity-specific thresholds differ. Short passage supports its stated scope only; no automatic enterprise applicability.",
+      "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CSRD.txt",
+      "text_sha256": "08982030c80bc9c58dfe208e0bb8f60f1b1e10360074f8867f9d5a2ab1888498",
+      "primary_content_sha256": null,
+      "excerpts": [
+        {
+          "quote": "Member States must transpose the parts relating to the CSRD by 19 March 2027.",
+          "locator": "Our input to European standard-setting / Omnibus 1 process"
+        }
+      ],
+      "supported_force_kinds": [
+        "enacted_law"
+      ]
+    },
+    {
+      "id": "GM-CSRD-FR",
+      "title": "CSRD: obligations and French transposition",
+      "publisher": "French government / Portail RSE",
+      "url": "https://portail-rse.beta.gouv.fr/fiches-reglementaires/rapport-de-durabilite-csrd/",
+      "retrieval_url": "https://portail-rse.beta.gouv.fr/fiches-reglementaires/rapport-de-durabilite-csrd/",
+      "publication_date": null,
+      "publication_date_evidence": null,
+      "reporting_period": "French guidance last checked official texts 2026-09-02; warns new thresholds require French transposition. Not a fresh legal opinion or verified company determination.",
+      "retrieved_at": "2026-11-11T12:05:22Z",
+      "reviewed_by": "Codex automated primary-passage review; no independent human approval",
+      "review_notes": "Read directly through approved web research tool. Narrow excerpt retained; full original bytes and legal instruments are not archived.",
+      "research_domain": "macro",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn465011view2",
+      "retrieval_extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+      "limitation": "French guidance last checked official texts 2026-09-02; warns new thresholds require French transposition. Not a fresh legal opinion or verified company determination. Short passage supports its stated scope only; no automatic enterprise applicability.",
+      "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CSRD-FR.txt",
+      "text_sha256": "673cf39fe05cc3c6ebf7bfefee0e2b71672dab872770c2a4f906039f177751f3",
+      "primary_content_sha256": null,
+      "excerpts": [
+        {
+          "quote": "Ces nouveaux seuils ne s'appliqueront qu'après transposition en droit français, attendue au plus tard le 19 mars 2027.",
+          "locator": "Opening notice; last official-text check 2 September 2026"
+        }
+      ],
+      "supported_force_kinds": [
+        "enacted_law"
+      ]
+    },
+    {
+      "id": "GM-CYBER-GB",
+      "title": "Cyber security breaches survey 2025/2026",
+      "publisher": "UK government / DSIT",
+      "url": "https://www.gov.uk/government/statistics/cyber-security-breaches-survey-20252026/cyber-security-breaches-survey-20252026",
+      "retrieval_url": "https://www.gov.uk/government/statistics/cyber-security-breaches-survey-20252026/cyber-security-breaches-survey-20252026",
+      "publication_date": "2026-04-30",
+      "publication_date_evidence": "Official page publication/document version metadata",
+      "reporting_period": "UK businesses/charities, August–December 2025 fieldwork; aggregate survey, not bank/airline-specific prevalence or enterprise incident evidence.",
+      "retrieved_at": "2026-11-11T12:05:22Z",
+      "reviewed_by": "Codex automated primary-passage review; no independent human approval",
+      "review_notes": "Read directly through approved web research tool. Narrow excerpt retained; full original bytes and legal instruments are not archived.",
+      "research_domain": "macro",
+      "verification": "primary_retrieved",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn183804view0",
+      "retrieval_extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+      "limitation": "UK businesses/charities, August–December 2025 fieldwork; aggregate survey, not bank/airline-specific prevalence or enterprise incident evidence. Short passage supports its stated scope only; no automatic enterprise applicability. Identified and self-reported attacks only; hidden attacks may be missed.",
+      "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CYBER-GB.txt",
+      "text_sha256": "e669f409fabad08f4ecb5f0341ec2c8171a6ef8aac4db1cdef7e17ef6f4016fc",
+      "primary_content_sha256": null,
+      "excerpts": [
+        {
+          "quote": "Overall prevalence of cyber breaches or attacks has remained in line with last year",
+          "locator": "Summary / Identification of cyber security breaches and attacks, trend comparison"
+        }
+      ],
+      "supported_force_kinds": [
+        "threat_or_scenario",
+        "observed_trend"
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "source_id": "GM-SOCIAL",
+      "segment": {
+        "segment_id": "GM-SOCIAL::quote-93407bb79b0e388e",
+        "asset_id": "GM-SOCIAL",
+        "section_heading": "Dissemination and scope, paragraph 4; timing paragraphs 10–11; action paragraph 13",
+        "content": "This Procurement Policy Note (PPN) applies only to central government departments, their executive agencies and non-departmental public bodies.",
+        "content_hash": "93407bb79b0e388e8067da3826b5f278c62a0f7bb05db543ff80e4160af0c9a9",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/GM-SOCIAL.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "GM-CLAIM-SOCIAL",
+        "claim_type": "procurement_policy_scope",
+        "statement": "This Procurement Policy Note (PPN) applies only to central government departments, their executive agencies and non-departmental public bodies.",
+        "source_asset_id": "GM-SOCIAL",
+        "source_segment_id": "GM-SOCIAL::quote-93407bb79b0e388e",
+        "scope": "Covered UK central-government procurements valued at £1m inclusive of VAT or above; new tender notices from 2027-01-01. Private utilities and primarily overseas delivery excluded; transitions/framework rules require review.",
+        "subject": "GM-SOCIAL",
+        "predicate": "reports",
+        "object": "This Procurement Policy Note (PPN) applies only to central government departments, their executive agencies and non-departmental public bodies.",
+        "time_scope": "Covered UK central-government procurements valued at £1m inclusive of VAT or above; new tender notices from 2027-01-01. Private utilities and primarily overseas delivery excluded; transitions/framework rules require review.",
+        "participant_scope": "source scope only",
+        "enterprise_scope": "",
+        "confidence": "Passage reviewed; enterprise applicability unverified",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "GM-SOCIAL::quote-93407bb79b0e388e"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    },
+    {
+      "source_id": "GM-SRS",
+      "segment": {
+        "segment_id": "GM-SRS::quote-3c896839029ce569",
+        "asset_id": "GM-SRS",
+        "section_heading": "Next steps; Who this is for",
+        "content": "The new rules apply to accounting periods starting on or after 1 January 2027, with first reporting in 2028.",
+        "content_hash": "3c896839029ce569db454fa2528d63bb0329e27dacada723e1e62279f391e2ae",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/GM-SRS.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "GM-CLAIM-SRS",
+        "claim_type": "regulatory_rule_scope",
+        "statement": "The new rules apply to accounting periods starting on or after 1 January 2027, with first reporting in 2028.",
+        "source_asset_id": "GM-SRS",
+        "source_segment_id": "GM-SRS::quote-3c896839029ce569",
+        "scope": "Specified listing categories; comply-or-explain UK SRS; transitional relief. Exact issuer/category and accounting period must be established.",
+        "subject": "GM-SRS",
+        "predicate": "reports",
+        "object": "The new rules apply to accounting periods starting on or after 1 January 2027, with first reporting in 2028.",
+        "time_scope": "Specified listing categories; comply-or-explain UK SRS; transitional relief. Exact issuer/category and accounting period must be established.",
+        "participant_scope": "source scope only",
+        "enterprise_scope": "",
+        "confidence": "Passage reviewed; enterprise applicability unverified",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "GM-SRS::quote-3c896839029ce569"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    },
+    {
+      "source_id": "GM-BILL",
+      "segment": {
+        "segment_id": "GM-BILL::quote-2090fad70683ff91",
+        "asset_id": "GM-BILL",
+        "section_heading": "Session 2026–27: Commons consideration of Lords amendments",
+        "content": "Consideration of Lords amendments Date to be announced Commons",
+        "content_hash": "2090fad70683ff91a13ca780dde681d3897d444f7b5e11c6b6ec1adf542b999c",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/GM-BILL.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "GM-CLAIM-BILL",
+        "claim_type": "proposed_legislation_status",
+        "statement": "Consideration of Lords amendments Date to be announced Commons",
+        "source_asset_id": "GM-BILL",
+        "source_segment_id": "GM-BILL::quote-2090fad70683ff91",
+        "scope": "Status reviewed 2026-11-11; Lords third reading 2026-11-02, Commons carry-over 2026-11-04. Proposed legislation; not proof of Royal Assent.",
+        "subject": "GM-BILL",
+        "predicate": "reports",
+        "object": "Consideration of Lords amendments Date to be announced Commons",
+        "time_scope": "Status reviewed 2026-11-11; Lords third reading 2026-11-02, Commons carry-over 2026-11-04. Proposed legislation; not proof of Royal Assent.",
+        "participant_scope": "source scope only",
+        "enterprise_scope": "",
+        "confidence": "Passage reviewed; enterprise applicability unverified",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "GM-BILL::quote-2090fad70683ff91"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    },
+    {
+      "source_id": "GM-CYBER-FR",
+      "segment": {
+        "segment_id": "GM-CYBER-FR::quote-626e379816aaefda",
+        "asset_id": "GM-CYBER-FR",
+        "section_heading": "Introduction, paragraph beginning Pour atteindre leurs objectifs",
+        "content": "Pour atteindre leurs objectifs, les attaquants exploitent toujours des vulnérabilités, massivement et opportunistement",
+        "content_hash": "626e379816aaefdaff4e977729480064a60a5aa9383dac77510a98598e7e598b",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CYBER-FR.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "GM-CLAIM-CYBER-FR",
+        "claim_type": "reported_threat",
+        "statement": "Pour atteindre leurs objectifs, les attaquants exploitent toujours des vulnérabilités, massivement et opportunistement",
+        "source_asset_id": "GM-CYBER-FR",
+        "source_segment_id": "GM-CYBER-FR::quote-626e379816aaefda",
+        "scope": "France threat review, observation year 2025; not a finding of vulnerability at a named enterprise.",
+        "subject": "GM-CYBER-FR",
+        "predicate": "reports",
+        "object": "Pour atteindre leurs objectifs, les attaquants exploitent toujours des vulnérabilités, massivement et opportunistement",
+        "time_scope": "France threat review, observation year 2025; not a finding of vulnerability at a named enterprise.",
+        "participant_scope": "source scope only",
+        "enterprise_scope": "",
+        "confidence": "Passage reviewed; enterprise applicability unverified",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "GM-CYBER-FR::quote-626e379816aaefda"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    },
+    {
+      "source_id": "GM-CSRD",
+      "segment": {
+        "segment_id": "GM-CSRD::quote-45b62211afa3fe34",
+        "asset_id": "GM-CSRD",
+        "section_heading": "Our input to European standard-setting / Omnibus 1 process",
+        "content": "Member States must transpose the parts relating to the CSRD by 19 March 2027.",
+        "content_hash": "45b62211afa3fe3463f0d7e1697043ec5c401c7cacdec93b8e243a9b737e0c62",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CSRD.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "GM-CLAIM-CSRD",
+        "claim_type": "enacted_instrument_transposition_deadline",
+        "statement": "Member States must transpose the parts relating to the CSRD by 19 March 2027.",
+        "source_asset_id": "GM-CSRD",
+        "source_segment_id": "GM-CSRD::quote-45b62211afa3fe34",
+        "scope": "Supervisor describes enacted EU amendment (Directive 2026/470), effective 2026-03-18; national transposition and entity-specific thresholds differ.",
+        "subject": "GM-CSRD",
+        "predicate": "reports",
+        "object": "Member States must transpose the parts relating to the CSRD by 19 March 2027.",
+        "time_scope": "Supervisor describes enacted EU amendment (Directive 2026/470), effective 2026-03-18; national transposition and entity-specific thresholds differ.",
+        "participant_scope": "source scope only",
+        "enterprise_scope": "",
+        "confidence": "Passage reviewed; enterprise applicability unverified",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "GM-CSRD::quote-45b62211afa3fe34"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    },
+    {
+      "source_id": "GM-CSRD-FR",
+      "segment": {
+        "segment_id": "GM-CSRD-FR::quote-80831ced24fc925c",
+        "asset_id": "GM-CSRD-FR",
+        "section_heading": "Opening notice; last official-text check 2 September 2026",
+        "content": "Ces nouveaux seuils ne s'appliqueront qu'après transposition en droit français, attendue au plus tard le 19 mars 2027.",
+        "content_hash": "80831ced24fc925c7db11e3bbaff4f1e761bd3927a5adbb090e156c7e0a5e1d3",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CSRD-FR.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "GM-CLAIM-CSRD-FR",
+        "claim_type": "national_implementation_notice",
+        "statement": "Ces nouveaux seuils ne s'appliqueront qu'après transposition en droit français, attendue au plus tard le 19 mars 2027.",
+        "source_asset_id": "GM-CSRD-FR",
+        "source_segment_id": "GM-CSRD-FR::quote-80831ced24fc925c",
+        "scope": "French guidance last checked official texts 2026-09-02; warns new thresholds require French transposition. Not a fresh legal opinion or verified company determination.",
+        "subject": "GM-CSRD-FR",
+        "predicate": "reports",
+        "object": "Ces nouveaux seuils ne s'appliqueront qu'après transposition en droit français, attendue au plus tard le 19 mars 2027.",
+        "time_scope": "French guidance last checked official texts 2026-09-02; warns new thresholds require French transposition. Not a fresh legal opinion or verified company determination.",
+        "participant_scope": "source scope only",
+        "enterprise_scope": "",
+        "confidence": "Passage reviewed; enterprise applicability unverified",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "GM-CSRD-FR::quote-80831ced24fc925c"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    },
+    {
+      "source_id": "GM-CYBER-GB",
+      "segment": {
+        "segment_id": "GM-CYBER-GB::quote-ae6c5214d1819bfc",
+        "asset_id": "GM-CYBER-GB",
+        "section_heading": "Summary / Identification of cyber security breaches and attacks, trend comparison",
+        "content": "Overall prevalence of cyber breaches or attacks has remained in line with last year",
+        "content_hash": "ae6c5214d1819bfc491da16f26f51906fbe87bb598903501d40df415e842eadf",
+        "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CYBER-GB.txt",
+        "authority": "candidate_intelligence",
+        "status": "reviewed_primary_excerpt"
+      },
+      "candidate": {
+        "claim_id": "GM-CLAIM-CYBER-GB",
+        "claim_type": "observed_trend",
+        "statement": "Overall prevalence of cyber breaches or attacks has remained in line with last year",
+        "source_asset_id": "GM-CYBER-GB",
+        "source_segment_id": "GM-CYBER-GB::quote-ae6c5214d1819bfc",
+        "scope": "UK businesses/charities, August–December 2025 fieldwork; aggregate survey, not bank/airline-specific prevalence or enterprise incident evidence.",
+        "subject": "GM-CYBER-GB",
+        "predicate": "reports",
+        "object": "Overall prevalence of cyber breaches or attacks has remained in line with last year",
+        "time_scope": "UK businesses/charities, August–December 2025 fieldwork; aggregate survey, not bank/airline-specific prevalence or enterprise incident evidence.",
+        "participant_scope": "source scope only",
+        "enterprise_scope": "",
+        "confidence": "Passage reviewed; enterprise applicability unverified",
+        "authority": "candidate_intelligence",
+        "status": "review_ready_not_accepted",
+        "supporting_ids": [
+          "GM-CYBER-GB::quote-ae6c5214d1819bfc"
+        ],
+        "contradicting_ids": []
+      },
+      "accepted_observation": false,
+      "supersedes": null
+    }
+  ],
+  "areas": [
+    {
+      "id": "WORLD",
+      "kind": "world",
+      "label": "Global",
+      "members": [
+        "EUROPE"
+      ],
+      "membership_kind": "navigation_only"
+    },
+    {
+      "id": "EUROPE",
+      "kind": "geographic_region",
+      "label": "Europe",
+      "members": [
+        "GB",
+        "FR"
+      ],
+      "membership_kind": "bounded_navigation_subset_not_complete_region"
+    },
+    {
+      "id": "GB",
+      "kind": "country",
+      "code_system": "ISO-3166-1-alpha-2",
+      "label": "United Kingdom",
+      "members": []
+    },
+    {
+      "id": "FR",
+      "kind": "country",
+      "code_system": "ISO-3166-1-alpha-2",
+      "label": "France",
+      "members": []
+    }
+  ],
+  "jurisdictions": [
+    {
+      "id": "UK-CENTRAL",
+      "label": "UK central-government procurement",
+      "scope": "Covered authority and specific procurement; not all UK organisations"
+    },
+    {
+      "id": "UK-LISTED",
+      "label": "FCA specified listed issuers",
+      "scope": "Exact listed legal entity, listing category and accounting period"
+    },
+    {
+      "id": "UK-PROPOSED-NIS",
+      "label": "UK proposed NIS reform",
+      "scope": "Bill status only; no enacted enterprise duty inferred"
+    },
+    {
+      "id": "EU-CSRD",
+      "label": "EU sustainability reporting",
+      "scope": "Instrument, entity thresholds, reporting wave and national transposition"
+    },
+    {
+      "id": "FR-CSRD",
+      "label": "French reporting implementation",
+      "scope": "French entity and currently transposed national law must be checked"
+    }
+  ],
+  "legal_entity_scopes": [
+    {
+      "id": "ENTITY-SCOPE-LBG",
+      "enterprise_id": "BK-ENT-001",
+      "legal_entity_id": null,
+      "registry_id": null,
+      "legal_name": null,
+      "parent_id": null,
+      "status": "unknown",
+      "evidence_ids": []
+    },
+    {
+      "id": "ENTITY-SCOPE-EJ",
+      "enterprise_id": "AV-ENT-001",
+      "legal_entity_id": null,
+      "registry_id": null,
+      "legal_name": null,
+      "parent_id": null,
+      "status": "unknown",
+      "evidence_ids": []
+    }
+  ],
+  "categories": [
+    {
+      "id": "cyber",
+      "label": "Cyber & Resilience"
+    },
+    {
+      "id": "sustainability",
+      "label": "Sustainability & Social Value"
+    },
+    {
+      "id": "technology",
+      "label": "AI & Technology"
+    },
+    {
+      "id": "economy",
+      "label": "Economy & Geopolitics"
+    },
+    {
+      "id": "society",
+      "label": "Demographics & Society"
+    },
+    {
+      "id": "policy",
+      "label": "Policy & Regulation"
+    }
+  ],
+  "forces": [
+    {
+      "id": "cyber",
+      "label": "Resilience across connected services",
+      "kind": "threat_or_scenario",
+      "category_ids": [
+        "cyber"
+      ],
+      "country_ids": [
+        "GB",
+        "FR"
+      ],
+      "jurisdiction_ids": [],
+      "source_ids": [
+        "GM-CYBER-GB",
+        "GM-CYBER-FR"
+      ],
+      "effective_from": null,
+      "what": "Cyber risk crosses markets; the exposure belongs to a specific service and entity.",
+      "why": "Operational dependencies can transmit disruption across suppliers, channels and critical services.",
+      "next": "Ask which critical service, recovery objective and supplier dependency needs customer validation.",
+      "counter": "Aggregate threat evidence does not establish an enterprise incident, control weakness or external services gap.",
+      "pestle": [
+        "Technological",
+        "Legal"
+      ],
+      "capabilities": {
+        "banking": [
+          "CAP-RISK",
+          "CAP-TECH"
+        ],
+        "aviation": [
+          "AV-CAP-OPS",
+          "AV-CAP-DATA"
+        ]
+      },
+      "candidate_ids": {
+        "banking": [
+          "RCO-LBG-005"
+        ],
+        "aviation": []
+      },
+      "seller_tags": [
+        "cyber",
+        "ai-delivery"
+      ],
+      "country_source_ids": {
+        "GB": [
+          "GM-CYBER-GB"
+        ],
+        "FR": [
+          "GM-CYBER-FR"
+        ]
+      }
+    },
+    {
+      "id": "cyber-bill",
+      "label": "UK cyber reform: a proposal, not a duty",
+      "kind": "proposed_legislation",
+      "category_ids": [
+        "cyber",
+        "policy"
+      ],
+      "country_ids": [
+        "GB"
+      ],
+      "jurisdiction_ids": [
+        "UK-PROPOSED-NIS"
+      ],
+      "source_ids": [
+        "GM-BILL"
+      ],
+      "effective_from": null,
+      "what": "Parliamentary stages still show consideration of Lords amendments pending at this review.",
+      "why": "Possible changes merit monitoring; proposal wording cannot prove current non-compliance.",
+      "next": "Recheck parliamentary status and final entity/activity scope before making a legal applicability claim.",
+      "counter": "No Royal Assent or final enterprise applicability is established by this reviewed passage.",
+      "pestle": [
+        "Legal",
+        "Political"
+      ],
+      "capabilities": {
+        "banking": [
+          "CAP-RISK"
+        ],
+        "aviation": [
+          "AV-CAP-OPS"
+        ]
+      },
+      "candidate_ids": {
+        "banking": [],
+        "aviation": []
+      },
+      "seller_tags": [
+        "cyber"
+      ],
+      "country_source_ids": {
+        "GB": [
+          "GM-BILL"
+        ]
+      }
+    },
+    {
+      "id": "social-value",
+      "label": "Social value in covered UK tenders",
+      "kind": "policy_priority",
+      "category_ids": [
+        "sustainability",
+        "policy",
+        "society"
+      ],
+      "country_ids": [
+        "GB"
+      ],
+      "jurisdiction_ids": [
+        "UK-CENTRAL"
+      ],
+      "source_ids": [
+        "GM-SOCIAL"
+      ],
+      "effective_from": "2027-01-01",
+      "what": "From 1 January 2027, PPN 026 covers specified central-government procurements of £1m or more, inclusive of VAT; framework and transition rules matter.",
+      "why": "This can affect bid design and delivery commitments; it need not create a standalone revenue opportunity.",
+      "next": "Identify the contracting authority, tender notice date, total contract value, framework and actual award criteria.",
+      "counter": "Private utilities and primarily overseas delivery are excluded; transitions and framework/call-off rules require review. French procurements do not inherit this policy.",
+      "pestle": [
+        "Political",
+        "Social",
+        "Legal"
+      ],
+      "capabilities": {
+        "banking": [],
+        "aviation": [
+          "AV-CAP-PROCURE"
+        ]
+      },
+      "candidate_ids": {
+        "banking": [],
+        "aviation": []
+      },
+      "seller_tags": [
+        "ai-delivery",
+        "reporting"
+      ],
+      "country_source_ids": {
+        "GB": [
+          "GM-SOCIAL"
+        ]
+      }
+    },
+    {
+      "id": "uk-srs",
+      "label": "UK listed-issuer sustainability reporting",
+      "kind": "regulatory_rule",
+      "category_ids": [
+        "sustainability",
+        "policy"
+      ],
+      "country_ids": [
+        "GB"
+      ],
+      "jurisdiction_ids": [
+        "UK-LISTED"
+      ],
+      "source_ids": [
+        "GM-SRS"
+      ],
+      "effective_from": "2027-01-01",
+      "what": "FCA final rules introduce comply-or-explain UK SRS reporting for specified listing categories, for accounting periods starting from 1 January 2027.",
+      "why": "Reporting data, controls and assurance may need investigation; group location does not determine scope.",
+      "next": "Verify exact issuer, listing category, accounting period and transitional relief before discussing a work package.",
+      "counter": "First reporting is in 2028; reliefs and scope matter. Existing internal teams or advisers may already cover the work.",
+      "pestle": [
+        "Legal",
+        "Environmental"
+      ],
+      "capabilities": {
+        "banking": [
+          "CAP-FINANCE"
+        ],
+        "aviation": [
+          "AV-CAP-SUSTAIN"
+        ]
+      },
+      "candidate_ids": {
+        "banking": [],
+        "aviation": [
+          "RCO-EJ-006"
+        ]
+      },
+      "seller_tags": [
+        "reporting",
+        "ai-delivery"
+      ],
+      "country_source_ids": {
+        "GB": [
+          "GM-SRS"
+        ]
+      }
+    },
+    {
+      "id": "eu-csrd",
+      "label": "France: reporting law and transposition differ",
+      "kind": "enacted_law",
+      "category_ids": [
+        "sustainability",
+        "policy"
+      ],
+      "country_ids": [
+        "FR"
+      ],
+      "jurisdiction_ids": [
+        "EU-CSRD",
+        "FR-CSRD"
+      ],
+      "source_ids": [
+        "GM-CSRD",
+        "GM-CSRD-FR"
+      ],
+      "effective_from": "2026-03-18",
+      "what": "ESMA describes the EU Omnibus amendment as in force, while French guidance distinguishes national transposition.",
+      "why": "EU adoption, national effective rules and an entity’s reporting wave are separate questions.",
+      "next": "Check the current French implementing text, reporting wave and exact legal entity; do not apply proposed thresholds early.",
+      "counter": "French guidance last checked texts on 2 September 2026; this is not a complete current-law or enterprise applicability determination.",
+      "pestle": [
+        "Legal",
+        "Environmental"
+      ],
+      "capabilities": {
+        "banking": [
+          "CAP-FINANCE"
+        ],
+        "aviation": [
+          "AV-CAP-SUSTAIN"
+        ]
+      },
+      "candidate_ids": {
+        "banking": [],
+        "aviation": []
+      },
+      "seller_tags": [
+        "reporting"
+      ],
+      "country_source_ids": {
+        "FR": [
+          "GM-CSRD",
+          "GM-CSRD-FR"
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "Only UK/France reference contexts are researched; blank markets are unresearched, not safe or compliant.",
+    "No legal-entity identity, parent/subsidiary footprint, buying authority, budget or supplier demand is verified by this prototype.",
+    "Industry archetypes are reused; French supplier, competition and operating-market facts are not populated.",
+    "Seller offering is an ephemeral declared relevance filter, not a private profile, territorial permission or customer qualification."
+  ]
+}

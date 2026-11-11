@@ -18,6 +18,8 @@ def assessment_path(domain):
 
 
 def snapshot_boundary(domain, repo=None):
+    if domain=='macro':
+        return (repo or REPO)/'enterprise-knowledge/macro/research-model/source-snapshots'
     relative=assessment_path(domain).relative_to(REPO)
     return ((repo or REPO)/relative).parent / 'source-snapshots'
 

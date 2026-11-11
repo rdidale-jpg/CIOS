@@ -1,0 +1,44 @@
+[
+  {
+    "file": "cyber-executive.pdf",
+    "pages": 1,
+    "source_urls_present": true,
+    "located_passages_checked": false,
+    "sha256": "bbdec8bfdc77eba1b4a0f7e7169a2512a93d3ef7a8025d509ad766edefcf7cbe"
+  },
+  {
+    "file": "cyber-appendix.pdf",
+    "pages": 6,
+    "source_urls_present": true,
+    "located_passages_checked": true,
+    "sha256": "9f36ca7073c84e0b08f266e8c8baca4a9248f015973c35e36e777e0bdaee212a"
+  },
+  {
+    "file": "france-executive.pdf",
+    "pages": 1,
+    "source_urls_present": true,
+    "located_passages_checked": false,
+    "sha256": "0736d7dec039783b2c950feab2be7e494675b021b979e807622745c96d9991a4"
+  },
+  {
+    "file": "social-executive.pdf",
+    "pages": 1,
+    "source_urls_present": true,
+    "located_passages_checked": false,
+    "sha256": "4959c795f8af887da650625f21149e268fce47cf7c0d310c5f74237ff446901d"
+  },
+  {
+    "file": "france-appendix.pdf",
+    "pages": 7,
+    "source_urls_present": true,
+    "located_passages_checked": true,
+    "sha256": "a459c2f365abf9cfdf76d27fda09fe45d39d156d0642c891ab97fdef98377abb"
+  },
+  {
+    "file": "social-appendix.pdf",
+    "pages": 6,
+    "source_urls_present": true,
+    "located_passages_checked": true,
+    "sha256": "26d3758bbf2df0eb702360fc48361bd9fe639640a52e3b38d009e9aa068ebeb7"
+  }
+]

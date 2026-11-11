@@ -399,6 +399,15 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(source_effectiveness_page())
             elif parsed.path == "/live/evidence":
                 self._html(evidence_page())
+            elif parsed.path in ('/macro','/macro/evidence','/macro/spec'):
+                from cios.applications.flora.research_intelligence import macro_views, macro_intelligence
+                try:
+                    if parsed.path=='/macro/spec':
+                        self._json(macro_intelligence.context_spec(macro_intelligence.selection(parsed.query)))
+                    else:
+                        self._html(macro_views.render(parsed.query,self.headers,evidence=parsed.path=='/macro/evidence'))
+                except (ValueError, KeyError):
+                    self._html('<h1>Macro context unavailable</h1><p>Select a supported reference market and force.</p>',status=400)
             elif parsed.path == "/digital-twins":
                 self._html(_with_import_deployment_fingerprint(digital_twins_landing_page(self.headers)))
             elif parsed.path in {"/industries/uk-banking", "/flora/banking/inspect"}:
