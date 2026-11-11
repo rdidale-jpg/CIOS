@@ -135,4 +135,73 @@ Each phase requires draft PR, test evidence, screenshots, preserved existing Ban
 - **Commercial:** Can a user distinguish a macro trend from a customer-validated opportunity and proceed only through authorised capture?
 - **Design:** Is the visual memorable and genuinely interactive, with concise insight rather than a long scroll of accordions?
 
+## 12. Global extensibility — geography as a first-class dimension (proposed amendment, 11 Nov 2026)
+
+### Architectural decision
+**Design globally; populate market-by-market.** Geographic context is an **orthogonal, many-to-many dimension**, not a rigid parent-child chain `World → Continent → Country → Industry`. FLORA may visually navigate that sequence, but macro forces can affect multiple countries, firms can span multiple markets, and the governing scope of a rule may not match a geographic region.
+
+A region used for navigation (e.g. Europe) is **not** a legal jurisdiction (e.g. EU). Neither should be assumed to include identical country memberships or regulatory reach. UK, France, Germany and the US are possible country contexts, not proof of populated research.
+
+### Core location and applicability concepts
+- `GeographicArea`: immutable identifier, display label, **kind** (`world`, `continent`, `statistical_region`, `country`, `subnational`, `custom_market`), authoritative code where applicable, optional local names and effective membership relations. ISO 3166-1 alpha-2 is a useful country key, ISO 3166-2 for supported subdivisions, and UN M49 for statistical grouping. Codes identify places; **they do not determine legal applicability**. All codes/memberships must be versioned or reference-dated where needed.
+- `Jurisdiction`: legal or supervisory rule-making/applicability authority and separately defined territorial, entity-class and activity scope (e.g. EU-wide law, UK central-government procurement, specified listed issuers). A regulation can apply extraterritorially, have exemptions or transition provisions, or differ across legal entities in one group.
+- `MarketContext`: scoped analytical combination of geography, industry/domain, date and optionally segment (e.g. `GB × Banking × 2026-11-11`). This is a **view/context identity**, not an independent duplicate banking research dossier.
+- `EnterpriseFootprint`: dated, sourced relationships between global group, **legal entity** and operating country/region, business unit and capability. Registered office, operating presence, client market, reporting perimeter, supplier delivery location and commercial territory are distinct fields. No ownership or regulated status may be inferred from location alone.
+- `OpportunityTerritory`: potential delivery/buyer/beneficiary locations and the authorised seller's commercial coverage, separately from enterprise registration, regulated jurisdiction, contractual delivery constraints, and customer-validated buying authority.
+- `SellerCoverage`: explicit, permissioned user/workspace settings for countries/regions, offerings, relationships and delivery eligibility. A topical match outside the seller's territory may be visible as research but not represented as authorised pursuit eligibility.
+
+**Mandatory contextual fields for a new force/impact/exposure link:** `scope_type` and IDs, jurisdictional applicability, effective/observed date (as distinct from publication/retrieval), organisation/legal-entity scope, evidence/reference with precise passage where known, `verified | interpreted | unknown | conflicting` status, and limitations. Unknown is a valid, reviewable state. Avoid defaulting unknown country, entity, force or effective date to UK.
+
+### Separation of identities
+- Maintain a *single* canonical macro force or legal instrument identity with distinct, versioned impacts by `industry × market × time × entity/segment` when warranted.
+- Maintain reusable **industry structural models** with *market-scoped differences* for regulation, competitors, value chains, economic conditions and enterprise applicability. Do not duplicate a whole Banking Industry Twin for France or assume a UK model applies unchanged.
+- Global enterprise group and local legal entities require independent IDs. Corporate group programmes are not automatically local subsidiary mandates.
+- Opportunity hypotheses can connect to multiple markets/entities, with one **primary business-owner scope if verified** and many relevant delivery/customer contexts. Business owner ≠ procurement owner.
+- A continent is not the default governing authority for any regulation; legal applicability must be assessed at the relevant instrument, entity, territory and time.
+
+### Illustrative graph paths
+```text
+GLOBAL CYBER THREAT (one source-owned macro force)
+  ├─ interpreted effect → GB / Banking / critical-service activities
+  │     └─ applies? → Lloyds group or exact in-scope entity: UNKNOWN until evidence
+  └─ interpreted effect → FR / Aviation / airline-critical systems
+        └─ applies? → named legal entity: UNKNOWN until evidence
+
+UK PUBLIC SOCIAL VALUE PROCUREMENT POLICY
+  → particular UK contracting-authority / procurement context
+  → potential supplier bid condition (not automatically a standalone deal)
+  ✗ NOT an automatic requirement for every French or US public contract
+
+SELLER OFFERS CYBER SERVICES IN UK ONLY
+  → highlight researched UK cyber-service hypotheses
+  → show French opportunity as outside confirmed seller coverage
+  ✗ NO automatic Pipeline eligibility or customer demand
+```
+
+### UX: geographic awareness without six forced clicks
+- Keep the three natural product entry points: **What's changing?** (macro), **Who is affected?** (industry/enterprise), **Where can I sell?** (offer and territory). Every entry can open a global, regional, country or enterprise context without traversing irrelevant levels.
+- A compact **market selector** should explicitly show current geography and effective/as-of date, plus **unknown or unresearched** states. It filters or scopes a visual; it does not rewrite evidence or transfer regulations to other countries.
+- Country, region and world visualisations should display **research coverage and confidence** separately from **force impact and commercial relevance**. Blank countries are **not researched** (never “no threat”, “zero opportunity” or “compliant”).
+- Reverse navigation should preserve a path such as `Macro force → Banking (GB) → named enterprise entity → hypothesis`, with alternate country comparison available only where comparable data and definitions exist.
+- Use a map only when geographic reasoning materially improves understanding; a regional comparison or enterprise network diagram may be better. An attractive, empty world heat map would mislead users.
+- Localisation is independent of market applicability: locale/language and currency are presentation settings; original financial reporting currency, exchange-rate date/source and legal wording must be preserved. No silent currency conversion or translation of binding legal terms.
+
+### International pilot and acceptance
+- **UK** remains the evidence-rich reference country (Banking and Aviation). Do not interrupt draft PR #561's Lloyds work.
+- **France** is proposed as a **minimal counterexample**, not a comprehensive launch market: add only a small set of primary-source-scoped banking/aviation examples and the relevant EU/French applicability distinctions. If no enterprise-scoped evidence, stop at industry and mark enterprise exposure Unknown.
+- Verify that `GB × Banking` and `FR × Banking` can reuse the same structural industry archetype while holding distinct regulatory, supplier, competitive and source contexts; `EU` and `Europe` must not collapse to one jurisdiction.
+- Prove that a global cyber threat fans out into two separately evidenced or explicitly interpreted country-sector exposures **without duplicating the force record**; the UK social-value policy must **not** propagate to French procurement.
+- Verify an enterprise's parent and local subsidiary do not inherit each other's regulatory duties, business owners, budgets or opportunities merely from group ownership.
+- Test seller territorial permissions, navigation, no-results/unknown coverage, keyboard/screen-reader, tablet and print, source/claim consistency, date scope, and immutable Pipeline capture.
+- Provide a **versioned proposal and migration analysis** before changing IDs, persisted schemas, search indexes or access rules. No geography values should be fabricated to make a screen appear populated.
+
+### Release sequencing
+**Now:** accept/revise this conceptual contract and create a tiny UK/France proof-of-portability fixture in a *future separate draft PR*.
+
+**Next:** prove the cross-border force → country-sector → enterprise exposure trace in Banking/Aviation with real primary references and honest unknowns; test visual navigation.
+
+**Later:** permissioned seller territory/offering preferences, true multi-market enterprise coverage, optional multilingual/localised UI, and evidence-dense regional comparisons.
+
+**Not now:** continents-worth of scraped research, a universal regulatory compliance engine, an automatically scored global sales heatmap, or new Pipeline stores.
+
 **Decision pending:** architecture/UX owner review, including nomenclature for the proposed Macro Intelligence navigation layer; no claim of adopted architecture or implemented features.
