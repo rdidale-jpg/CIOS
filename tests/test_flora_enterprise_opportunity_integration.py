@@ -74,7 +74,7 @@ def test_priority_hypotheses_put_visual_story_and_cockpit_before_one_full_resear
         assert 'Understand where this opportunity could sit' in html
         assert 'Full research & evidence' in html
         assert html.index('Understand where this opportunity could sit') < html.index('Opportunity development / read-only preview') < html.index('Full research & evidence')
-        assert html.count('id=\\'full-research-evidence\\'')==1
+        assert html.count("id='full-research-evidence'")==1
         assert '#commercial-capture' in html
         assert 'Business owner, addressable spend, budget, demand and procurement: Unknown' in html
         assert 'Executive hypothesis summary' in html
