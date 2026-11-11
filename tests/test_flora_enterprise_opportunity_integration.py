@@ -55,3 +55,27 @@ def test_html_escapes_untrusted_capability_labels():
     data=model.load_assessment(); data['capabilities'][0]['title']='<script>alert(1)</script>'
     html=enterprise_overlay(data,commercial_projection(model.load_assessment(),as_of='2026-11-11'))
     assert '<script>alert(1)</script>' not in html
+
+
+def test_default_lloyds_operating_model_preserves_illustration_and_adds_context_overlay():
+    html=unified_views.enterprise_page('lloyds','operating-model')
+    assert 'Enterprise capability landscape' in html
+    assert 'Research capability · not organisation ownership' in html
+    assert 'How the business works' in html
+
+
+def test_priority_hypotheses_put_visual_story_and_cockpit_before_one_full_research_choice():
+    from cios.applications.flora.research_intelligence.commercial_views import candidate_overview
+    from cios.applications.flora.research_intelligence.enterprise_opportunity import opportunity_story
+    data=model.load_assessment();projection=commercial_projection(data,as_of='2026-11-11')
+    for cid in ('RCO-LBG-002','RCO-LBG-001','RCO-LBG-009'):
+        row=next(r for r in projection['candidates'] if r['id']==cid)
+        html=candidate_overview(data,row,projection)
+        assert 'Understand where this opportunity could sit' in html
+        assert 'Full research & evidence' in html
+        assert html.index('Understand where this opportunity could sit') < html.index('Opportunity development / read-only preview') < html.index('Full research & evidence')
+        assert html.count('id=\\'full-research-evidence\\'')==1
+        assert '#commercial-capture' in html
+        assert 'Business owner, addressable spend, budget, demand and procurement: Unknown' in html
+        assert 'Executive hypothesis summary' in html
+        assert 'Counterevidence, contradictions' in html
