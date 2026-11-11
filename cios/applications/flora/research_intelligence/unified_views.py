@@ -155,6 +155,10 @@ def enterprise_page(slug='lloyds',lens='operating-model',headers=None):
             from .intelligence_depth import operating_depth
             body+=operating_depth(d)
         body+=render_intelligence(build_intelligence_specs(d)['enterprise-story' if lens=='operating-model' else 'strategic-timeline'])
+        if slug=='lloyds' and lens=='operating-model':
+            from .commercial_intelligence import commercial_projection
+            from .enterprise_opportunity import enterprise_overlay
+            body+=enterprise_overlay(d,commercial_projection(d))
         if lens=='operating-model':body+="<details><summary>Existing capability map</summary>"+render_visual(specs(d)['operating-model'])+"</details>"
     else:body+=render_visual(specs(d)[lens])
     body+="<h2>Key findings & important changes</h2>"+claim_cards(d,d['enterprise_twin_id'])+provenance_notice(d)+"<h2>Where to validate next</h2>"+opportunity_cards(d,compact=True)
