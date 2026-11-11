@@ -79,3 +79,15 @@ def test_priority_hypotheses_put_visual_story_and_cockpit_before_one_full_resear
         assert 'Business owner, addressable spend, budget, demand and procurement: Unknown' in html
         assert 'Executive hypothesis summary' in html
         assert 'Counterevidence, contradictions' in html
+
+
+def test_unmapped_hypothesis_stays_discoverable_without_fake_capability():
+    data=model.load_assessment(); projection=commercial_projection(data,as_of='2026-11-11')
+    from copy import deepcopy
+    p=deepcopy(projection)
+    p['candidates'][0]['capability_ids']=['MISSING-SYNTHETIC-CAPABILITY']
+    html=unescape(enterprise_overlay(data,p))
+    assert 'Capability not yet mapped' in html
+    assert p['candidates'][0]['url'] in html
+    assert 'Business owner: Unknown' in html
+    assert 'data-eo-choice' in html
