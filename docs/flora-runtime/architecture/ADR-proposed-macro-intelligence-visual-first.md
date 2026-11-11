@@ -71,7 +71,7 @@ Stable IDs; subject/object IDs; relationship predicate; explicit entity and geog
 
 ## 5. Example: social value → public sector
 
-At 11 Nov 2026, UK Cabinet Office PPN 026 (published 28 Oct 2026) specifies a new Social Value Model for *in-scope* central-government bodies and new covered procurements of £1m+ from 1 Jan 2027, with framework/transitional considerations. This is a **specific procurement-policy force**, not generic mandatory ESG for all firms or bids.
+At 11 Nov 2026, UK Cabinet Office PPN 026 (first published 5 Aug 2026; supporting guidance added/updated 28 Oct 2026) specifies a new Social Value Model for *in-scope* central-government bodies and new covered procurements of £1m+ from 1 Jan 2027, with framework/transitional considerations. This is a **specific procurement-policy force**, not generic mandatory ESG for all firms or bids.
 Primary URL: https://www.gov.uk/government/publications/ppn-026-the-social-value-model/guidance-on-using-ppn-026-the-social-value-model-html
 
 Proposed trace (must be investigated for each organisation and procurement): macro policy → public-sector PESTLE (Political / Legal / Social) → procurement evaluation processes / supplier deliverables → a specific in-scope authority and contract framework → customer/procurement requirements and evidence → potential *seller* service or bid differentiation. This may be a **win requirement** rather than a standalone revenue opportunity. Do not infer legal duty for every buyer or a new project budget.
