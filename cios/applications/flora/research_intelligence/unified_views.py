@@ -145,7 +145,7 @@ def enterprise_page(slug='lloyds',lens='operating-model',headers=None):
     if lens=='opportunities' and slug=='lloyds':
         from .commercial_intelligence import commercial_projection
         from .enterprise_opportunity import enterprise_overlay
-        return page(d['enterprise_name']+' Opportunities',breadcrumb(True,d)+tabs+enterprise_overlay(d,commercial_projection(d)),headers,'enterprises',r['enterprise'])
+        return page(d['enterprise_name']+' Opportunities',breadcrumb(True,d)+tabs+enterprise_overlay(d,commercial_projection(d),comparison_visual=render_visual(specs(d)['opportunities'])),headers,'enterprises',r['enterprise'])
     body=breadcrumb(True,d)+f"<section class='ux-hero' id='content'><p class='eyebrow'>{e(d['enterprise_name'])} / Enterprise Twin</p><h1>{e(d['enterprise_name'].replace(' Banking Group',''))}.<br>Connect strategy to a credible opening.</h1><p>Follow supported disclosures through capabilities, transformation priorities and evidence-led commercial hypotheses.</p><a href='/opportunities#opportunities-{domain}'>Inspect commercial priorities →</a></section>"+tabs
     from .visual_intelligence import render_intelligence
     from .visual_specs import build_intelligence_specs
@@ -161,11 +161,14 @@ def enterprise_page(slug='lloyds',lens='operating-model',headers=None):
             body+=enterprise_overlay(d,commercial_projection(d))
         if lens=='operating-model':body+="<details><summary>Existing capability map</summary>"+render_visual(specs(d)['operating-model'])+"</details>"
     else:body+=render_visual(specs(d)[lens])
+    if slug=='lloyds' and lens=='operating-model':
+        body+="<details class='ux-fold'><summary>Full enterprise research, findings & programme evidence</summary>"
     body+="<h2>Key findings & important changes</h2>"+claim_cards(d,d['enterprise_twin_id'])+provenance_notice(d)+"<h2>Where to validate next</h2>"+opportunity_cards(d,compact=True)
     programme=''.join(f"<article class='ux-claim'><h3>{e(p['title'])}</h3><p>{e(p['current_phase'])}</p><p>Owner: {e(p['owner'])} · Funding: {e(p['funding'])} · Procurement: {e(p['procurement'])}</p><a href='{r['nodes']}/{p['id']}'>Programme evidence and commercial questions →</a></article>" for p in d['programmes'])
     body+=f"<p><a href='/enterprises/{slug}/understanding'>Enterprise Understanding — evidence quality and explainable relationships →</a></p>"
     body+=f"<p><a href='/enterprises/{slug}/research-diagnostic'>Research Intelligence Diagnostic — evidence coverage and prioritised gaps →</a></p>"
     body+=f"<details class='ux-fold'><summary>Programmes & investment signals</summary><p>Reported management priorities are not customer-verified buying demand.</p>{programme}</details>"+research_fold(d,d['enterprise_twin_id'])+f"<details><summary>Supporting research & specialist analysis</summary><p><a href='{root}/{slug}'>Full research dossier</a> · <a href='/digital-twins'>Governed Canvas (destination permissions apply)</a></p></details>"
+    if slug=='lloyds' and lens=='operating-model':body+='</details>'
     return page(d['enterprise_name']+' Enterprise Twin',body,headers,'enterprises',r['enterprise'])
 
 

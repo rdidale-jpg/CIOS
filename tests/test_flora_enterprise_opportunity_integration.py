@@ -107,3 +107,67 @@ def test_programme_only_association_is_visible_but_not_a_claim_of_ownership():
     assert target['url'] in html
     assert 'Business owner: Unknown' in html
     assert 'not organisation ownership' in html
+
+
+import pytest
+from tests.test_flora_sales_pipeline import actor, web
+from tests.test_flora_security_repair_01b import authority
+import re
+
+
+@pytest.mark.parametrize('cid',['RCO-LBG-002','RCO-LBG-001','RCO-LBG-009'])
+def test_priority_route_has_one_principal_dossier_and_visible_controlled_capture(web,cid):
+    status,html,_=web('/flora/banking/research/candidates/'+cid,authenticated=False)
+    assert status==200
+    assert "id='full-research-evidence'" in html
+    assert "class='cv-full-research' id='full-research-evidence' open" not in html
+    assert html.index("id='full-research-evidence'") < html.index("class='cv-legacy'") < html.index("id='commercial-capture'")
+    assert html.count("class='eo-story-node'")==4
+    assert html.count("class='eo-module'")==8
+    controls=re.findall("aria-controls='(eo-(?:module|story)-[^']+)'",html)
+    assert len(controls)==len(set(controls))==12
+    assert "data-depth-print='executive'" in html
+    financials=re.search("id='eo-module-financials'>(.*?)</article>",html,re.S).group(1)
+    owner=re.search("id='eo-module-owner'>(.*?)</article>",html,re.S).group(1)
+    assert 'Unknown' in financials and 'unverified' in owner
+    capture=html.split("id='commercial-capture'",1)[1].split('</section>',1)[0]
+    assert '<form' not in capture
+
+
+def test_overlay_candidate_inspectors_preserve_all_identities_and_separate_ratings():
+    data=model.load_assessment();p=commercial_projection(data,as_of='2026-11-11')
+    html=enterprise_overlay(data,p)
+    for row in p['candidates']:
+        inspector=re.search("id='eo-candidate-"+row['id']+"'>(.*?)</article>",html,re.S).group(1)
+        assert row['url'] in inspector
+        assert inspector.count('<dt>')==len(row['dimensions'])
+        assert row['commercial']['next_commercial_action'] in unescape(inspector)
+    assert 'counts overlap' in unescape(html)
+    # No inferred organisational ownership or synthetic relation is stored.
+    assert 'not organisation ownership' in unescape(html)
+
+
+def test_missing_context_does_not_gain_a_source_claim_or_qualification():
+    data=model.load_assessment();p=commercial_projection(data,as_of='2026-11-11')
+    row=p['candidates'][0];row['context_supported']=False
+    for proof in row['support']:proof['supported']=False
+    html=unescape(enterprise_overlay(data,p))
+    node=re.search("id='eo-candidate-"+row['id']+"'>(.*?)</article>",html,re.S).group(1)
+    assert 'Current source support missing' in node
+    assert 'Inspect exact passage' not in node
+    assert 'unverified' in node
+
+
+@pytest.mark.parametrize('cid',['RCO-LBG-002','RCO-LBG-001','RCO-LBG-009'])
+def test_inspection_preserves_existing_private_capture_and_immutable_provenance(web,actor,cid):
+    from cios.applications.flora import sales_pipeline as sales
+    record=sales.create_opportunity('lloyds',cid,headers=actor[3])
+    before=store_hash();snapshot=deepcopy(record)
+    for path in ['/enterprises/lloyds','/enterprises/lloyds?lens=opportunities','/flora/banking/research/candidates/'+cid]:
+        assert web(path)[0]==200
+    assert store_hash()==before
+    assert sales.get_opportunity(record['id'],headers=actor[3])==snapshot
+    assert sales.create_opportunity('lloyds',cid,headers=actor[3])==snapshot
+    with pytest.raises(sales.SalesValidationError):
+        sales.update_opportunity(record['id'],record['version'],{'stage':'Qualified','confirm':'yes'},headers=actor[3])
+    assert store_hash()==before
