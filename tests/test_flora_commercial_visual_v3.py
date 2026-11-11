@@ -249,5 +249,24 @@ def test_projection_cannot_be_attached_to_another_industry_map():
 
 def test_no_existing_research_history_or_source_identity_is_changed():
     root=Path(__file__).resolve().parents[1]
-    result=subprocess.run(['git','diff','--quiet','e03b2ff','--','enterprise-knowledge'],cwd=root)
+    # Preserve every historical file byte-for-byte. Macro v1 is an explicitly
+    # reviewed additive context, not permission to rewrite or exclude a sector.
+    historical=subprocess.check_output(['git','ls-tree','-r','--name-only','e03b2ff','--','enterprise-knowledge'],cwd=root,text=True).splitlines()
+    assert historical
+    result=subprocess.run(['git','diff','--quiet','e03b2ff','--',*historical],cwd=root)
     assert result.returncode==0
+    approved={
+        'enterprise-knowledge/macro/research-model/Global-Context-Contracts-v1.schema.json',
+        'enterprise-knowledge/macro/research-model/Macro-Context-v1.json',
+        *('enterprise-knowledge/macro/research-model/source-snapshots/'+name+'.txt'
+          for name in ('GM-BILL','GM-CSRD-FR','GM-CSRD','GM-CYBER-FR','GM-CYBER-GB','GM-SOCIAL','GM-SRS')),
+    }
+    diff=subprocess.check_output(['git','diff','--name-status','--no-renames','e03b2ff','--','enterprise-knowledge'],cwd=root,text=True)
+    additions=set()
+    for line in diff.splitlines():
+        status,path=line.split('\t')
+        assert status=='A' and path in approved,(status,path)
+        additions.add(path)
+    untracked=subprocess.check_output(['git','ls-files','--others','--exclude-standard','--','enterprise-knowledge'],cwd=root,text=True).splitlines()
+    assert set(untracked)<=approved
+    assert additions|set(untracked)==approved
