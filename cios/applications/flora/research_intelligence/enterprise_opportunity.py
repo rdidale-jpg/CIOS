@@ -71,9 +71,17 @@ def enterprise_overlay(data,projection):
     """Only actual candidate capability_ids become map edges; group names are capabilities, not org chart."""
     by_cap=defaultdict(list)
     cap_labels={c['id']:c.get('title') or c['id'] for c in data.get('capabilities',[])}
+    unmapped=[]
     for row in projection['candidates']:
-        for cid in row.get('capability_ids',[]):
-            if cid in cap_labels:by_cap[cid].append(row)
+        mapped_ids=list(dict.fromkeys(cid for cid in row.get('capability_ids',[]) if cid in cap_labels))
+        if not mapped_ids:
+            unmapped.append(row)
+        for cid in mapped_ids:
+            by_cap[cid].append(row)
+    if unmapped:
+        # Preserve candidate discoverability without inventing a capability or reporting line.
+        cap_labels['UNMAPPED-RESEARCH']='Capability not yet mapped'
+        by_cap['UNMAPPED-RESEARCH']=unmapped
     if not by_cap:
         return _shell("<div class='eo-hero'><h2>Enterprise opportunity overlay</h2><p>No verified capability-to-hypothesis associations in this research snapshot. Do not infer reporting lines.</p></div>")
     cap_ids=list(by_cap)
@@ -82,7 +90,7 @@ def enterprise_overlay(data,projection):
         key='cap-'+str(ix);rows=by_cap[cid]
         nodes.append("<button type='button' class='eo-node' data-eo-choice='"+key+"' aria-controls='eo-panel-"+key+"' aria-pressed='false'><strong>"+e(cap_labels[cid])+"</strong><small>"+str(len(rows))+" linked research hypotheses</small></button>")
         links="".join("<li><a href='"+e(row['url'],quote=True)+"'>"+e(row['title'])+"</a></li>" for row in rows)
-        panels.append("<div data-eo-panel='"+key+"' id='eo-panel-"+key+"'><span class='eo-label'>Research capability · not organisation ownership</span><h3>"+e(cap_labels[cid])+"</h3><p class='eo-unknown'>Business owner: Unknown</p><p>Canonical research links to "+str(len(rows))+" hypothesis/hypotheses. This does not establish business-unit accountability, procurement, funding, or actual technology delivery dependency.</p><ul>"+links+"</ul><p class='eo-warning'>Validate the customer business owner and accountable outcome before advancing any opportunity.</p></div>")
+        panels.append("<div data-eo-panel='"+key+"' id='eo-panel-"+key+"'><span class='eo-label'>Research capability · not organisation ownership</span><h3>"+e(cap_labels[cid])+"</h3><p class='eo-unknown'>Business owner: Unknown</p><p>Research links to "+str(len(rows))+" hypothesis/hypotheses. A capability association is not business-unit accountability, procurement, funding, or a verified technology delivery dependency.</p><ul>"+links+"</ul><p class='eo-warning'>Validate the customer business owner and accountable outcome before advancing any opportunity.</p></div>")
     fallback="<details class='eo-fallback'><summary>Accessible capability and opportunity links</summary><ul>"+"".join("<li>"+e(cap_labels[cid])+": "+", ".join("<a href='"+e(row['url'],quote=True)+"'>"+e(row['title'])+"</a>" for row in by_cap[cid])+"</li>" for cid in cap_ids)+"</ul></details>"
     return _shell("<div class='eo-hero'><span class='eo-kicker'>Enterprise Twin / Opportunity overlay</span><h2>Locate the possibility in the business.</h2><p>Select a mapped research capability to see hypotheses, and distinguish capability context from unverified organisation ownership.</p></div><div class='eo-grid'><div class='eo-map'><h3>Enterprise capability landscape</h3><div class='eo-node-grid'>"+"".join(nodes)+"</div></div><aside class='eo-inspector' aria-live='polite'>"+"".join(panels)+"</aside></div>"+fallback)
 
