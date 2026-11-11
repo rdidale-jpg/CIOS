@@ -91,3 +91,19 @@ def test_unmapped_hypothesis_stays_discoverable_without_fake_capability():
     assert p['candidates'][0]['url'] in html
     assert 'Business owner: Unknown' in html
     assert 'data-eo-choice' in html
+
+
+def test_programme_only_association_is_visible_but_not_a_claim_of_ownership():
+    data=model.load_assessment(); projection=commercial_projection(data,as_of='2026-11-11')
+    from copy import deepcopy
+    p=deepcopy(projection)
+    assert data['programmes'], 'Fixture must include programme records'
+    target=p['candidates'][0]
+    target['capability_ids']=[]
+    target['programme_ids']=[data['programmes'][0]['id']]
+    html=unescape(enterprise_overlay(data,p))
+    assert 'Programme signal' in html
+    assert data['programmes'][0]['title'] in html
+    assert target['url'] in html
+    assert 'Business owner: Unknown' in html
+    assert 'not organisation ownership' in html
