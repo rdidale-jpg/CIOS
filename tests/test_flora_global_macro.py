@@ -73,8 +73,9 @@ def test_uk_instruments_do_not_propagate_to_french_procurement_or_enterprises(in
     spec=m.context_spec(chosen)
     assert not spec['edges'] and not spec['candidates']
     html=unescape(views.render(__import__('urllib.parse',fromlist=['urlencode']).urlencode(chosen.model_dump())))
-    assert 'Outside the reviewed instrument territory' in html
-    assert 'Supplier nationality and buyer jurisdiction are different questions' in html
+    assert 'Outside reviewed country coverage' in html
+    assert 'Country coverage is not a legal applicability decision' in html
+    if force=='social-value':assert 'Supplier nationality and buyer jurisdiction are different questions' in html
     assert 'Unknown' in html
 
 
@@ -212,3 +213,13 @@ def test_fr_category_defaults_to_local_evidence_without_transferring_uk_policy()
     chosen=choose(market='FR',category='sustainability')
     assert chosen.force=='eu-csrd'
     assert m.context_spec(chosen)['force']['country_ids']==['FR']
+
+
+def test_french_reference_switched_to_uk_retains_unknown_scope_and_correct_explanation():
+    chosen=choose(market='GB',category='sustainability',force='eu-csrd',view='enterprise')
+    spec=m.context_spec(chosen)
+    assert not spec['edges'] and not spec['candidates']
+    html=unescape(views.render('market=GB&category=sustainability&force=eu-csrd&view=enterprise'))
+    assert 'evidence for France does not establish applicability in the selected United Kingdom view' in html
+    assert 'Cross-border reach, listing status, entity and activity scope need separate evidence' in html
+    assert 'this UK rule/policy' not in html and 'Unknown' in html

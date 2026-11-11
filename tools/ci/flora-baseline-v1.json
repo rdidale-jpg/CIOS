@@ -6849,6 +6849,9 @@
             },
             "tests/test_flora_global_macro.py::test_fr_category_defaults_to_local_evidence_without_transferring_uk_policy": {
               "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_french_reference_switched_to_uk_retains_unknown_scope_and_correct_explanation": {
+              "status": "passed"
             }
           }
         }

@@ -31,7 +31,7 @@ Force kinds separate observed trends, threats/scenarios, procurement policy, pro
 
 1. One cross-market cyber force fans out to separately sourced UK and French edges. UK survey observations are not transferred into French prevalence or incident claims.
 2. An enacted EU amendment and French national implementation are separate questions. The pilot does not calculate an entity’s legal obligations.
-3. UK social-value policy is not propagated to French procurement. A French supplier bidding into covered UK procurement is a different scope question; nationality is not eligibility.
+3. Force country IDs record reviewed context coverage; they are not a complete legal territorial-applicability model. Unresearched cross-border reach remains Unknown. UK social-value policy is not propagated to French procurement. A French supplier bidding into covered UK procurement is a different scope question; nationality is not eligibility.
 4. Global means a bounded reference-country view, not complete world coverage. Empty categories/countries are unresearched; counts denote reviewed themes rather than severity or market attractiveness.
 5. Declared seller offering is an ephemeral URL view preference. It does not become a public seller profile, workspace setting, territorial permission or customer-confirmed need.
 6. Existing UK group hypotheses may be explored as thematic research; they are not transplanted into France. Only Lloyds `RCO-LBG-005` and easyJet `RCO-EJ-006` have narrow, interpreted associations in this pilot. Empty hypothesis results are retained honestly.

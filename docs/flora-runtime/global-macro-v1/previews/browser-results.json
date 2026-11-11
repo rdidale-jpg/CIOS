@@ -55,6 +55,12 @@
       "overflow": false
     },
     {
+      "page": "reverse-france-uk",
+      "viewport": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
       "page": "atlas",
       "viewport": "tablet",
       "status": 200,
@@ -109,6 +115,12 @@
       "overflow": false
     },
     {
+      "page": "reverse-france-uk",
+      "viewport": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
       "page": "atlas",
       "viewport": "mobile",
       "status": 200,
@@ -158,6 +170,12 @@
     },
     {
       "page": "coverage-gap",
+      "viewport": "mobile",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "reverse-france-uk",
       "viewport": "mobile",
       "status": 200,
       "overflow": false

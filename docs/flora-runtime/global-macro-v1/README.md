@@ -31,12 +31,12 @@ All three paths were exercised in Chromium at desktop, tablet and phone sizes. T
 ## Actual validation
 
 - Python compilation, `actionlint`, dependency consistency and **25 CI-policy tests passed**.
-- **54 focused Macro tests passed**: shared model identity, country-specific provenance, legal/entity non-inheritance, proposal status, source hashes and scope, strict selectors, single inspector, no private Pipeline enumeration and immutable capture/qualification behaviour.
-- Complete local strict gate: **1,216 passed; 57 exact inherited failures; 10 original skips; 1,283 unique identities; zero comparison issues**. Includes **388 passing security tests** and **25 Pipeline tests**. Integrity: **146 unchanged comparisons, 15 audit chains, 17 audit-record digests, one cleanup audit**.
-- All previous suite selections, test identities, failure signatures and skip reasons remain unchanged. Only 54 passing Macro identities are added. Inherited failures remain 21 domain, 12 financial diagnostic and 24 historical legacy; skips remain the ten unavailable retained-artifact cases.
-- Actual browser automation: **27 page/viewport checks**, **nine persona/device journeys**, keyboard Enter, no-JS country/theme/PESTLE/evidence navigation, no horizontal overflow or JavaScript errors. Selector context and offering survive return from existing hypotheses.
+- **55 focused Macro tests passed**: shared model identity, country-specific provenance, legal/entity non-inheritance, proposal status, source hashes and scope, strict selectors, single inspector, no private Pipeline enumeration and immutable capture/qualification behaviour.
+- Initial complete local strict gate (before adding the reverse-country-coverage regression test): **1,216 passed; 57 exact inherited failures; 10 original skips; 1,283 unique identities; zero comparison issues**. Includes **388 passing security tests** and **25 Pipeline tests**. Integrity: **146 unchanged comparisons, 15 audit chains, 17 audit-record digests, one cleanup audit**.
+- All previous suite selections, test identities, failure signatures and skip reasons remain unchanged. Only 55 passing Macro identities are added; all 54 initial identities remain, with one additional reverse-coverage check. Inherited failures remain 21 domain, 12 financial diagnostic and 24 historical legacy; skips remain the ten unavailable retained-artifact cases.
+- Actual browser automation: **30 page/viewport checks**, **nine persona/device journeys**, keyboard Enter, no-JS country/theme/PESTLE/evidence navigation, no horizontal overflow or JavaScript errors. Selector context and offering survive return from existing hypotheses.
 - Six actual PDFs checked: cyber/social/France executive briefs **1 page each**; full evidence **6/6/7 pages**. Full appendices contain every selected located quotation, source URLs and the typed relationship manifest. An initial blank executive overflow page was found and corrected.
-- Hosted validation of the published candidate is tracked in the draft PR checks and final delivery evidence. No hosted result is predicted by this document.
+- Final full validation after the reverse-coverage correction and hosted validation of the published candidate is tracked in the draft PR checks and final delivery evidence. No hosted result is predicted by this document.
 
 Commands:
 

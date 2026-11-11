@@ -26,6 +26,7 @@ Gold marks interpreted pressure, not a verified enterprise effect. An enacted EU
 | UK sustainability → easyJet research hypothesis | [View](previews/easyjet-reporting-desktop.png) | No asserted mandate or confirmed demand |
 | France sustainability / transposition | [View](previews/france-reporting-desktop.png) | [Tablet](previews/france-reporting-tablet-visual.png) · [Phone](previews/france-reporting-mobile-visual.png) |
 | France cyber → Aviation / unknown entity | [View](previews/france-cyber-desktop.png) | No French customer opportunity is invented |
+| French reporting theme compared in the UK | [View](previews/reverse-france-uk-desktop.png) | [Phone](previews/reverse-france-uk-mobile-visual.png) · coverage is not a legal exemption decision |
 | Proposed cyber legislation | [View](previews/proposed-bill-desktop.png) | Proposal status remains visible |
 | Unresearched category | [View](previews/coverage-gap-desktop.png) | Blank does not mean safe, compliant or no opportunity |
 

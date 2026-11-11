@@ -103,8 +103,12 @@ def inspector(chosen,spec,data):
         body+="<nav class='mi-themes' aria-label='Reviewed themes'>"+''.join(nav(chosen,short[f['id']],force=f['id'],factor='',capability='').replace('<a data-macro-nav',"<a class='mi-pill'"+(" aria-current='true'" if f['id']==force['id'] else '')+' data-macro-nav',1) for f in themes)+'</nav>'
     eligible=any(country['country_id'] in force['country_ids'] for country in spec['markets'])
     if not eligible:
-        what='Outside the reviewed instrument territory: this UK rule/policy does not establish a French procurement or reporting requirement.'
-        why='Cross-border suppliers may encounter UK tender conditions when bidding into a covered UK procurement. Supplier nationality and buyer jurisdiction are different questions.'
+        reference=', '.join('United Kingdom' if country=='GB' else 'France' for country in force['country_ids'])
+        target='United Kingdom' if chosen.market=='GB' else 'France'
+        what='Outside reviewed country coverage: evidence for '+reference+' does not establish applicability in the selected '+target+' view.'
+        why='Country coverage is not a legal applicability decision. Cross-border reach, listing status, entity and activity scope need separate evidence.'
+        if force['id']=='social-value':
+            why+=' Cross-border suppliers may encounter UK tender conditions when bidding into a covered UK procurement. Supplier nationality and buyer jurisdiction are different questions.'
     else:what=force['what'];why=force['why']
     selected=chosen.factor if chosen.view=='industry' else chosen.capability if chosen.view=='enterprise' else ''
     if selected:

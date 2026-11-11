@@ -22,7 +22,8 @@ def main():
         ('easyjet-reporting','market=GB&industry=aviation&category=sustainability&force=uk-srs&view=enterprise'),
         ('france-reporting','market=FR&category=sustainability&force=eu-csrd&view=industry'),
         ('france-cyber','market=FR&industry=aviation&view=enterprise'),
-        ('proposed-bill','market=GB&force=cyber-bill'),('coverage-gap','category=economy')]
+        ('proposed-bill','market=GB&force=cyber-bill'),('coverage-gap','category=economy'),
+        ('reverse-france-uk','market=GB&category=sustainability&force=eu-csrd&view=enterprise')]
     with sync_playwright() as p:
         browser=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
         for device,w,h in [('desktop',1440,1080),('tablet',1024,768),('mobile',390,844)]:
@@ -35,6 +36,7 @@ def main():
                 assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),(name,device)
                 if name in ('lloyds-context','easyjet-reporting','france-cyber'):assert 'Unknown' in page.locator('#macro-inspector').inner_text()
                 if name=='proposed-bill':assert 'Proposed legislation' in page.locator('#macro-inspector').inner_text()
+                if name=='reverse-france-uk':assert 'evidence for France does not establish applicability in the selected United Kingdom view' in page.locator('#macro-inspector').inner_text()
                 if name=='coverage-gap':assert 'Not researched yet' in page.locator('#macro-inspector').inner_text()
                 page.screenshot(path=str(out/f'{name}-{device}.png'))
                 if device!='desktop':
@@ -69,7 +71,7 @@ def main():
             page.goto(base+'/macro?market=GB&category=sustainability&force=social-value&mode=explore')
             page.locator('[name=market]').select_option('FR');page.get_by_role('button',name='Apply context →',exact=True).click()
             page.wait_for_url('**market=FR**')
-            assert 'Outside the reviewed instrument territory' in page.locator('#macro-inspector').inner_text()
+            assert 'Outside reviewed country coverage' in page.locator('#macro-inspector').inner_text()
             assert page.locator('[name=force]').input_value()=='social-value'
             page.get_by_role('link',name='Trace industry impact →',exact=True).click();page.wait_for_url('**view=industry**')
             assert 'No reviewed impact mechanism' in page.locator('#macro-inspector').inner_text()
