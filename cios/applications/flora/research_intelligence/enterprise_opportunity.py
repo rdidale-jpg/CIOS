@@ -108,3 +108,39 @@ def pursuit_preview(row):
         if key=='competition':value=row['commercial'].get('supplier_position',known)+" "+known
         panels.append("<article class='eo-panel' data-eo-panel='"+e(key)+"' id='eo-module-"+e(key)+"'><span class='eo-label'>"+e(sub)+"</span><h3>"+e(label)+"</h3><p>"+e(value)+"</p><p class='eo-label'>Next qualification action</p><p>"+e(next_step)+"</p><p class='eo-warning'>No public-source assessment is a customer-validated or private Pipeline fact.</p></article>")
     return _shell("<div class='eo-hero'><span class='eo-kicker'>Opportunity development / read-only preview</span><h2>Build the commercial case. Then earn the pursuit.</h2><p>"+e(row['title'])+" · Select a development dimension. Actual customer facts belong in an authorised workspace.</p></div><div class='eo-module-grid'>"+"".join(nodes)+"</div>"+"".join(panels)+"<p><a class='eo-action' href='#commercial-capture'>Review controlled Pipeline capture →</a></p><p class='eo-warning'>Business owner, stakeholder motivations, funding, procurement and customer demand remain unverified. No standalone CRM record is created here.</p>")
+
+# A structured story with interpreted rather than asserted causal connections.
+STORY_STYLE = """
+.eo-story{border:1px solid #c6d6c9;border-radius:22px;background:radial-gradient(circle at 55% 30%,#e8f0e5,#f7f5eb 75%);padding:22px;margin:18px 0}
+.eo-story h2{font:600 clamp(1.5rem,3vw,2.3rem)/1.15 Georgia,serif;margin:6px 0}
+.eo-story-intro{max-width:700px;font-size:.9rem}
+.eo-story-path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:24px 0}
+.eo-story-node{min-width:0;border:1px solid #b8cbb9;border-radius:16px;background:#fffefa;padding:17px 12px;position:relative}
+.eo-story-node:not(:last-child):after{content:"→";position:absolute;right:-13px;top:40%;color:#a78650;font-size:18px;z-index:2;background:#eef1e7;border-radius:50%}
+.eo-story-node strong{display:block;font-size:.95rem;line-height:1.2}
+.eo-story-node p{font-size:.78rem;color:#50695b;overflow-wrap:anywhere;margin:8px 0}
+.eo-story-status{display:inline-block;font-size:.67rem;color:#856438;font-weight:750;margin-bottom:9px}
+.eo-story-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:20px}
+.eo-story-actions a{border-radius:22px;border:1px solid #bdd0be;padding:11px 16px;text-decoration:none;font-size:.9rem;color:#174d3f}
+.eo-story-actions a:first-child{background:#174d3f;color:white}
+.eo-story-foot{font-size:.75rem;color:#66796a}
+.cv-full-research{background:#fffdf7;border:1px solid #bfcfbf;border-radius:18px;padding:18px 22px;margin:22px 0}
+.cv-full-research>summary{font-weight:750;font-size:1.05rem;cursor:pointer;min-height:44px}
+@media(max-width:680px){.eo-story-path{grid-template-columns:repeat(2,minmax(0,1fr))}.eo-story-node:nth-child(2):after{display:none}}
+@media print{.eo-story-path{grid-template-columns:repeat(2,1fr)}}
+"""
+
+def opportunity_story(data,row):
+    """First-screen narrative. Evidence links and decisions remain in the canonical dossier."""
+    capabilities={c['id']:c.get('title',c['id']) for c in data.get('capabilities',[])}
+    names=[capabilities[i] for i in row.get('capability_ids',[]) if i in capabilities]
+    context='; '.join(names) if names else 'Capability association not established'
+    commercial=row['commercial']
+    story=[
+      ('01 / Enterprise anchor','Research association',context),
+      ('02 / Business challenge','Analyst interpretation',commercial.get('business_problem') or 'Business outcome to validate'),
+      ('03 / Possible service','Unqualified proposition',commercial.get('proposed_service') or 'No service defined'),
+      ('04 / Buying gap','Customer validation required','Business owner, addressable spend, budget, demand and procurement: Unknown')
+    ]
+    nodes=''.join("<article class='eo-story-node'><span class='eo-story-status'>"+e(state)+"</span><strong>"+e(title)+"</strong><p>"+e(value)+"</p></article>" for title,state,value in story)
+    return "<style>"+STORY_STYLE+"</style><section class='eo-story' aria-label='Visual commercial opportunity story'><span class='eo-kicker'>Enterprise → Opportunity → Pursuit</span><h2>Understand where this opportunity could sit.</h2><p class='eo-story-intro'>A visual research hypothesis, not a proven customer programme or buying decision. Business ownership is separate from procurement.</p><div class='eo-story-path'>"+nodes+"</div><p class='eo-story-foot'>Arrows show the analyst's investigation sequence, not established dependencies, contract relationships or buyer authority.</p><div class='eo-story-actions'><a href='#commercial-capture'>Develop in authorised Pipeline →</a><a href='/enterprises/lloyds?lens=opportunities'>Back to Enterprise opportunity overlay →</a><a href='#full-research-evidence'>Full research and evidence ↓</a></div><p class='eo-label'>Next customer validation</p><p>"+e(commercial.get('next_commercial_action') or 'Verify business owner and requirement')+"</p></section>"
