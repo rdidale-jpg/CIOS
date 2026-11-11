@@ -142,6 +142,10 @@ def enterprise_page(slug='lloyds',lens='operating-model',headers=None):
         from .commercial_intelligence import commercial_projection
         from .commercial_views import enterprise_body
         return page(d['enterprise_name']+' Commercial Intelligence',breadcrumb(True,d)+tabs+enterprise_body(commercial_projection(d)),headers,'enterprises',r['enterprise'])
+    if lens=='opportunities' and slug=='lloyds':
+        from .commercial_intelligence import commercial_projection
+        from .enterprise_opportunity import enterprise_overlay
+        return page(d['enterprise_name']+' Opportunities',breadcrumb(True,d)+tabs+enterprise_overlay(d,commercial_projection(d)),headers,'enterprises',r['enterprise'])
     body=breadcrumb(True,d)+f"<section class='ux-hero' id='content'><p class='eyebrow'>{e(d['enterprise_name'])} / Enterprise Twin</p><h1>{e(d['enterprise_name'].replace(' Banking Group',''))}.<br>Connect strategy to a credible opening.</h1><p>Follow supported disclosures through capabilities, transformation priorities and evidence-led commercial hypotheses.</p><a href='/opportunities#opportunities-{domain}'>Inspect commercial priorities →</a></section>"+tabs
     from .visual_intelligence import render_intelligence
     from .visual_specs import build_intelligence_specs
