@@ -1,0 +1,56 @@
+{
+  "tested_commit": "3fc0e4e",
+  "original_test_identity": "tests/test_flora_commercial_visual_v3.py::test_no_existing_research_history_or_source_identity_is_changed",
+  "cases": [
+    {
+      "case": "approved_integrated_cut",
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "case": "historical_change",
+      "exit_code": 1,
+      "expected": 1
+    },
+    {
+      "case": "depth_change",
+      "exit_code": 1,
+      "expected": 1
+    },
+    {
+      "case": "macro_v1_change",
+      "exit_code": 1,
+      "expected": 1
+    },
+    {
+      "case": "macro_v2_change",
+      "exit_code": 1,
+      "expected": 1
+    },
+    {
+      "case": "old_review_change",
+      "exit_code": 1,
+      "expected": 1
+    },
+    {
+      "case": "deletion",
+      "exit_code": 1,
+      "expected": 1
+    },
+    {
+      "case": "unknown_addition",
+      "exit_code": 1,
+      "expected": 1
+    },
+    {
+      "case": "ignored_addition",
+      "exit_code": 1,
+      "expected": 1
+    },
+    {
+      "case": "restored_integrated_cut",
+      "exit_code": 0,
+      "expected": 0
+    }
+  ]
+}

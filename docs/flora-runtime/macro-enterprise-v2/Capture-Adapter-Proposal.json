@@ -1,0 +1,59 @@
+{
+  "reference": {
+    "schema_version": 1,
+    "trace_id": "MT-GB-RESILIENCE-20261112",
+    "force_id": "cyber",
+    "instrument_id": "PRA-SS1-21-MARCH2022",
+    "country_id": "GB",
+    "jurisdiction_ids": [
+      "UK-PRA"
+    ],
+    "entity_scope": {
+      "schema_version": 1,
+      "id": "MT-LLOYDS-BANK-PLC",
+      "enterprise_id": "BK-ENT-001",
+      "legal_entity_id": "GB-COH-00002065",
+      "registry_id": "00002065",
+      "legal_name": "LLOYDS BANK PLC",
+      "parent_id": null,
+      "status": "verified",
+      "evidence_ids": [
+        "MT-UK-REGISTER"
+      ]
+    },
+    "applicability": "unknown",
+    "context_edge_ids": [
+      "MT-GB-RESILIENCE-20261112::ENTITY_IDENTIFICATION",
+      "MT-GB-RESILIENCE-20261112::INSTRUMENT_STATUS",
+      "MT-GB-RESILIENCE-20261112::FORMAL_APPLICABILITY",
+      "MT-GB-RESILIENCE-20261112::BUSINESS_CONSEQUENCE",
+      "MT-GB-RESILIENCE-20261112::CUSTOMER_RESPONSE",
+      "MT-GB-RESILIENCE-20261112::SUPPLIER_OPPORTUNITY"
+    ],
+    "claim_ids": [
+      "GM-CLAIM-CYBER-GB",
+      "MT-UK-BANK::claim-1",
+      "MT-UK-REGISTER::claim-1",
+      "MT-UK-SS121::claim-1"
+    ],
+    "assessment_digest": "23057bf8983db3a8b6853505729bffc2a71f746f01dc360e37294d92c2f43e40",
+    "review_digest": "60ff89ca4bd84d73e427115ab455c03b762db0db5edb9b9c99bcdb5c4e8146cb",
+    "research_assessment_digest": "a94b1c4a38d80d86659df70785a44c67ef42029a359df8ba7d87426d17dd46e7",
+    "research_review_digest": "23a2fbdcc605e65f3ac2db6bb5d92453303bca4f5a67bc11a76fc05610c8c7fd",
+    "source_context_digest": "fe61349bb18fd5fe707f58a64e9e5d7f4d41ebe2868660bf59b9c14d279202ff",
+    "assessed_at": "2026-11-12",
+    "instrument_effective_from": "2022-03-31",
+    "limitations": [
+      "Not a legal opinion or compliance certification.",
+      "No customer-confirmed gap, buying authority, budget, procurement or current supplier contract."
+    ],
+    "contradictions": [
+      "A regulatory expectation does not establish unmet demand."
+    ],
+    "original_hypothesis_id": "RCO-LBG-005"
+  },
+  "reference_digest": "c47238bd3eb2355849d68baa19fcb126c1d324b3b9f296ab8e96940147d81f79",
+  "persistence_supported": false,
+  "qualification_changed": false,
+  "reason": "Existing authorised capture accepts commercial fields only. Integrate via its owner after #557/#561 reconciliation; no persistence change in this sprint."
+}

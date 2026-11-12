@@ -1,0 +1,151 @@
+{
+  "pages": [
+    {
+      "case": "uk",
+      "revision": "before",
+      "device": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "case": "uk",
+      "revision": "after",
+      "device": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "case": "france",
+      "revision": "before",
+      "device": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "case": "france",
+      "revision": "after",
+      "device": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "case": "uk",
+      "revision": "before",
+      "device": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "case": "uk",
+      "revision": "after",
+      "device": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "case": "france",
+      "revision": "before",
+      "device": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "case": "france",
+      "revision": "after",
+      "device": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "case": "uk",
+      "revision": "before",
+      "device": "mobile",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "case": "uk",
+      "revision": "after",
+      "device": "mobile",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "case": "france",
+      "revision": "before",
+      "device": "mobile",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "case": "france",
+      "revision": "after",
+      "device": "mobile",
+      "status": 200,
+      "overflow": false
+    }
+  ],
+  "journeys": [
+    {
+      "case": "uk",
+      "device": "desktop",
+      "keyboard_evidence_and_back": "passed"
+    },
+    {
+      "case": "france",
+      "device": "desktop",
+      "keyboard_evidence_and_back": "passed"
+    },
+    {
+      "case": "uk",
+      "device": "tablet",
+      "keyboard_evidence_and_back": "passed"
+    },
+    {
+      "case": "france",
+      "device": "tablet",
+      "keyboard_evidence_and_back": "passed"
+    },
+    {
+      "case": "uk",
+      "device": "mobile",
+      "keyboard_evidence_and_back": "passed"
+    },
+    {
+      "case": "france",
+      "device": "mobile",
+      "keyboard_evidence_and_back": "passed"
+    }
+  ],
+  "pdfs": [
+    {
+      "file": "uk-executive.pdf",
+      "pages": 2,
+      "sha256": "12347c67722586d860dcb6d01b7fc7bdc37bad021312d49ce68aef2240e4d250",
+      "located_text_verified": true
+    },
+    {
+      "file": "uk-appendix.pdf",
+      "pages": 15,
+      "sha256": "54494b746314f23c629c7b4e27b742a875a0585b70440ee5e1954919bd5c3e9f",
+      "located_text_verified": true
+    },
+    {
+      "file": "france-executive.pdf",
+      "pages": 2,
+      "sha256": "9d8daa9153c3cc3346eedb610bb8c8124b5f77fdfdcc0acb58a7714645004992",
+      "located_text_verified": true
+    },
+    {
+      "file": "france-appendix.pdf",
+      "pages": 11,
+      "sha256": "49b01a726f60b95b989a027f127a938273719fb54e5ca454c8402a00f0cb92a3",
+      "located_text_verified": true
+    }
+  ],
+  "errors": [],
+  "no_javascript": "passed: enterprise \u2192 exact-source dossier",
+  "limitations": [
+    "No physical Safari/iPad, screen-reader or human comprehension test performed."
+  ]
+}

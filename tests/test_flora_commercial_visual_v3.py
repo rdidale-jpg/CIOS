@@ -248,6 +248,7 @@ def test_projection_cannot_be_attached_to_another_industry_map():
 
 
 def test_no_existing_research_history_or_source_identity_is_changed():
-    root=Path(__file__).resolve().parents[1]
-    result=subprocess.run(['git','diff','--quiet','e03b2ff','--','enterprise-knowledge'],cwd=root)
-    assert result.returncode==0
+    # Both stacks are approved additions; their exact source bytes and original
+    # records remain protected. Unknown paths and modifications still fail.
+    from tools.research.history_integrity import verify_history
+    verify_history(Path(__file__).resolve().parents[1])

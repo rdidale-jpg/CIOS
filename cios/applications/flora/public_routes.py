@@ -34,6 +34,9 @@ def public_route_catalog():
     add(('/blueprint-import',), 'import_blueprint_entry_page', 'Public closed setup; no protected registry enumeration')
     add(('/pilot-sign-in',), 'sign_in_page', 'Fixed closed-access notice; no credential issuer')
     add(('/opportunities',), '_flora_opportunities_page', 'Repository Banking scenario pipeline', ('tab',))
+    add(('/macro','/macro/evidence','/macro/spec'), 'macro_intelligence',
+        'Finite repository macro research; no private stores or authority; bounded market view only',
+        ('market','category','force','industry','offering','view','factor','capability','mode'))
     add(('/research',), '_flora_research_page', 'Fixed navigation; no research/import records')
     add(('/workspace/reference', '/flora/reference'), 'reference_workspace_page', 'Repository source pipeline and non-authority preference cookie', ('saved',))
     add(('/explore',), '_flora_explore_page', 'Repository Banking pipeline')

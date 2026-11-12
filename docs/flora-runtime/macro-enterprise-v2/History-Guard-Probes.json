@@ -1,0 +1,22 @@
+[
+  {
+    "case": "approved corpus",
+    "exit_code": 0,
+    "expected": 0
+  },
+  {
+    "case": "v1 source modification rejected",
+    "exit_code": 1,
+    "expected": 1
+  },
+  {
+    "case": "unlisted addition rejected",
+    "exit_code": 1,
+    "expected": 1
+  },
+  {
+    "case": "restored approved corpus",
+    "exit_code": 0,
+    "expected": 0
+  }
+]

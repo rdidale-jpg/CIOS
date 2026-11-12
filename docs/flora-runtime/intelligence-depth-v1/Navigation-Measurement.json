@@ -1,0 +1,25 @@
+{
+  "viewport": "1440x1080",
+  "measurements": [
+    {
+      "state": "before",
+      "visible_direct_hypothesis_links": {
+        "RCO-LBG-001": 1,
+        "RCO-LBG-002": 1,
+        "RCO-LBG-009": 1
+      }
+    },
+    {
+      "state": "after",
+      "visible_direct_hypothesis_links": {
+        "RCO-LBG-001": 3,
+        "RCO-LBG-002": 3,
+        "RCO-LBG-009": 3
+      }
+    }
+  ],
+  "current_verified_clicks_from_enterprise_to_each_priority": 1,
+  "human_time_to_understand": "Unmeasured",
+  "decision_quality": "Unmeasured; evaluation protocol required",
+  "baseline_full_click_count": "Not instrumented; visible direct-link counts are not total task clicks"
+}

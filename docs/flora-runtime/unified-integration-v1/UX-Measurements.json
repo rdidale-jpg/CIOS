@@ -1,0 +1,78 @@
+{
+  "viewport": "1440x1080",
+  "measurements": [
+    {
+      "revision": "before #566",
+      "view": "enterprise",
+      "page_height": 4236,
+      "visible_h1": 1,
+      "open_details": 0,
+      "default_open_full_dossier": 0,
+      "overflow": false
+    },
+    {
+      "revision": "before #566",
+      "view": "overlay",
+      "page_height": 3565,
+      "visible_h1": 1,
+      "open_details": 0,
+      "default_open_full_dossier": 0,
+      "overflow": false
+    },
+    {
+      "revision": "before #566",
+      "view": "ai",
+      "page_height": 3128,
+      "visible_h1": 1,
+      "open_details": 0,
+      "default_open_full_dossier": 0,
+      "overflow": false
+    },
+    {
+      "revision": "before #566",
+      "view": "cyber",
+      "page_height": 3690,
+      "visible_h1": 1,
+      "open_details": 0,
+      "default_open_full_dossier": 0,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "enterprise",
+      "page_height": 5667,
+      "visible_h1": 1,
+      "open_details": 0,
+      "default_open_full_dossier": 0,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "overlay",
+      "page_height": 1440,
+      "visible_h1": 1,
+      "open_details": 0,
+      "default_open_full_dossier": 0,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "ai",
+      "page_height": 3486,
+      "visible_h1": 1,
+      "open_details": 0,
+      "default_open_full_dossier": 0,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "cyber",
+      "page_height": 3559,
+      "visible_h1": 1,
+      "open_details": 0,
+      "default_open_full_dossier": 0,
+      "overflow": false
+    }
+  ],
+  "limitations": "Structural browser measurements only, not human comprehension or task speed."
+}

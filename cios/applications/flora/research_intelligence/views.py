@@ -182,7 +182,8 @@ def candidate_page(identifier,headers=None,data=None):
     inspected=next((r for r in projection['candidates'] if r['id']==identifier),None)
     if inspected is not None:
         legacy=body.replace("id='explorer-content'","id='legacy-candidate-content'",1)
-        body=candidate_overview(data,inspected,projection,headers)+"<details class='cv-legacy'><summary>Original research dossier, claim-level provenance and prior assessments</summary>"+legacy+'</details>'
+        historical="<details class='cv-legacy'><summary>Original research dossier, claim-level provenance and prior assessments</summary>"+legacy+'</details>'
+        body=candidate_overview(data,inspected,projection,headers,legacy_dossier=historical)
     return shell(row['title'],body,headers,data)
 
 

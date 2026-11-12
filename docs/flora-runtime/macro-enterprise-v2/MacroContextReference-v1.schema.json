@@ -1,0 +1,225 @@
+{
+  "$defs": {
+    "LegalEntityScope": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "enterprise_id": {
+          "title": "Enterprise Id",
+          "type": "string"
+        },
+        "legal_entity_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Legal Entity Id"
+        },
+        "registry_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Registry Id"
+        },
+        "legal_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Legal Name"
+        },
+        "parent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Id"
+        },
+        "status": {
+          "default": "unknown",
+          "enum": [
+            "unknown",
+            "interpreted",
+            "verified",
+            "conflicting"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "enterprise_id"
+      ],
+      "title": "LegalEntityScope",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Version 1 immutable adapter proposal; not a writable Pipeline payload.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "trace_id": {
+      "title": "Trace Id",
+      "type": "string"
+    },
+    "force_id": {
+      "title": "Force Id",
+      "type": "string"
+    },
+    "instrument_id": {
+      "title": "Instrument Id",
+      "type": "string"
+    },
+    "country_id": {
+      "enum": [
+        "GB",
+        "FR"
+      ],
+      "title": "Country Id",
+      "type": "string"
+    },
+    "jurisdiction_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Jurisdiction Ids",
+      "type": "array"
+    },
+    "entity_scope": {
+      "$ref": "#/$defs/LegalEntityScope"
+    },
+    "applicability": {
+      "const": "unknown",
+      "title": "Applicability",
+      "type": "string"
+    },
+    "context_edge_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Context Edge Ids",
+      "type": "array"
+    },
+    "claim_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Claim Ids",
+      "type": "array"
+    },
+    "assessment_digest": {
+      "title": "Assessment Digest",
+      "type": "string"
+    },
+    "review_digest": {
+      "title": "Review Digest",
+      "type": "string"
+    },
+    "research_assessment_digest": {
+      "title": "Research Assessment Digest",
+      "type": "string"
+    },
+    "research_review_digest": {
+      "title": "Research Review Digest",
+      "type": "string"
+    },
+    "source_context_digest": {
+      "title": "Source Context Digest",
+      "type": "string"
+    },
+    "assessed_at": {
+      "format": "date",
+      "title": "Assessed At",
+      "type": "string"
+    },
+    "instrument_effective_from": {
+      "format": "date",
+      "title": "Instrument Effective From",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "contradictions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Contradictions",
+      "type": "array"
+    },
+    "original_hypothesis_id": {
+      "title": "Original Hypothesis Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "trace_id",
+    "force_id",
+    "instrument_id",
+    "country_id",
+    "jurisdiction_ids",
+    "entity_scope",
+    "applicability",
+    "context_edge_ids",
+    "claim_ids",
+    "assessment_digest",
+    "review_digest",
+    "research_assessment_digest",
+    "research_review_digest",
+    "source_context_digest",
+    "assessed_at",
+    "instrument_effective_from",
+    "limitations",
+    "contradictions",
+    "original_hypothesis_id"
+  ],
+  "title": "MacroContextReference",
+  "type": "object"
+}

@@ -13,6 +13,15 @@ def commercial_projection(data,review=None,as_of=None):
     as_of=as_of or date.today().isoformat();scene=build_living_map(data,review,as_of=as_of)
     candidates=commercial_candidates(data);profile=load_profile(domain)
     refs=list(dict.fromkeys(c for row in candidates for c in row['claim_ids']+row['commercial']['evidence_claim_ids']))
+    # Explicit source-owned hypothesis links are bound to the assessed snapshot.
+    linked={c['id']:[] for c in candidates}
+    sources={s['id']:s for s in data['sources']+review.get('sources',[])}
+    for observation in review.get('observations',[]):
+        source=sources[observation['source_id']]
+        if source.get('assessment_digest')==digest(data) and observation['candidate']['subject']==data['enterprise_twin_id']:
+            for cid in source.get('hypothesis_ids',[]):
+                if cid in linked:linked[cid].append(observation['candidate']['claim_id'])
+    refs+=list(dict.fromkeys(cid for values in linked.values() for cid in values))
     refs+=list(dict.fromkeys(c for conflict in scene['conflicts'] for c in conflict['claim_ids']))
     # A transient presentation selection reuses the existing exact source resolver.
     # It is never a canonical actor or persisted research record.
@@ -30,7 +39,7 @@ def commercial_projection(data,review=None,as_of=None):
         activities=[a for a in scene['map_nodes'] if set(a['canonical_ids']) & set(n['capability_ids']) or {p['id'] for p in a['programme_links']} & set(n.get('programme_ids',[]))]
         conflict_ids={c for a in activities for c in a['conflict_ids']}
         conflicts=[deepcopy(c) for c in scene['conflicts'] if c['id'] in conflict_ids or set(c['claim_ids']) & set(n['claim_ids'])]
-        n['support']=[deepcopy(evidence[c]) for c in dict.fromkeys(n['claim_ids']+commercial['evidence_claim_ids']) if c in evidence]
+        n['support']=[deepcopy(evidence[c]) for c in dict.fromkeys(n['claim_ids']+commercial['evidence_claim_ids']+linked[n['id']]) if c in evidence]
         n['conflicts']=conflicts
         n['counterevidence']=[deepcopy(evidence[c]) for c in dict.fromkeys(c for conflict in conflicts for c in conflict['claim_ids']) if c in evidence]
         n['context_supported']=any(p['supported'] for p in n['support'])

@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "repository": "rdidale-jpg/CIOS",
+  "baseline_main": "adf205993cc0857183d77766ce4882bf48326fb4",
+  "implementation_order": [
+    557,
+    561,
+    564,
+    566
+  ],
+  "implementation": [
+    {
+      "pr": 557,
+      "head": "6988ba50d29c1f238293fc7fe110d6182f055e68",
+      "branch": "codex/flora-intelligence-depth-v1",
+      "base": "main",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "hosted_runs": [
+        {
+          "id": 42890075327,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/rdidale-jpg/CIOS/actions/runs/42890075327"
+        }
+      ]
+    },
+    {
+      "pr": 561,
+      "head": "5fa5d2f197893a6fd64b3344354c039eaad629f7",
+      "branch": "codex/flora-enterprise-opportunity-integration-v1",
+      "base": "codex/flora-intelligence-depth-v1",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "hosted_runs": [
+        {
+          "id": 43013989194,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/rdidale-jpg/CIOS/actions/runs/43013989194"
+        }
+      ]
+    },
+    {
+      "pr": 564,
+      "head": "4c374ac2d326639245b60967aa64e934e0c1d7a3",
+      "branch": "codex/flora-global-macro-intelligence-v1",
+      "base": "main",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "hosted_runs": [
+        {
+          "id": 43028295178,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/rdidale-jpg/CIOS/actions/runs/43028295178"
+        }
+      ]
+    },
+    {
+      "pr": 566,
+      "head": "111600a56ca0edba0d47d1a8a0c92068060d83a8",
+      "branch": "codex/flora-macro-enterprise-intelligence-v2",
+      "base": "codex/flora-global-macro-intelligence-v1",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "hosted_runs": [
+        {
+          "id": 43179189969,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/rdidale-jpg/CIOS/actions/runs/43179189969"
+        }
+      ]
+    }
+  ],
+  "design_references": [
+    {
+      "pr": 559,
+      "head": "386ae2b7ecc52b00b2e2eee979984520c0d6bbdc",
+      "implementation_dependency": false,
+      "approved_architecture": false
+    },
+    {
+      "pr": 563,
+      "head": "5c35ede369e8cc5294da6a462728b595c6efdf8b",
+      "implementation_dependency": false,
+      "approved_architecture": false
+    }
+  ],
+  "original_prs_modified": false,
+  "production_modified": false
+}

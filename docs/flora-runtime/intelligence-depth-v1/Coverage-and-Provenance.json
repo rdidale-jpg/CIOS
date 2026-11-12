@@ -1,0 +1,3775 @@
+{
+  "baseline": "adf205993cc0857183d77766ce4882bf48326fb4",
+  "authority": "candidate_intelligence",
+  "before": {
+    "source_records": 29,
+    "candidate_claims": 51,
+    "relationships": 128,
+    "coverage": [
+      {
+        "id": "corporate",
+        "label": "Corporate identity and structure",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "leadership",
+        "label": "Leadership and governance",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "strategy",
+        "label": "Strategy",
+        "importance": 3,
+        "claim_ids": [
+          "LBG-A2030-DATA",
+          "LBG-A2030-PLATFORMS"
+        ],
+        "supported_claim_ids": [
+          "LBG-A2030-DATA",
+          "LBG-A2030-PLATFORMS"
+        ],
+        "source_ids": [
+          "PR-LBG-A2030"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "Strategy for 2027–2030"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-3508e63fc114227406a1"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "financials",
+        "label": "Financial intelligence",
+        "importance": 4,
+        "claim_ids": [
+          "LBG-A2030-CIR",
+          "LBG-AR25-DEPOSITS",
+          "LBG-DEPOSITS",
+          "LBG-HEDGE",
+          "LBG-Q326-DEPOSITS",
+          "LBG-Q326-PROFIT",
+          "LBG-TECH-COST"
+        ],
+        "supported_claim_ids": [
+          "LBG-A2030-CIR",
+          "LBG-AR25-DEPOSITS",
+          "LBG-Q326-DEPOSITS",
+          "LBG-Q326-PROFIT"
+        ],
+        "source_ids": [
+          "PR-LBG-A2030",
+          "PR-LBG-AR25",
+          "PR-LBG-Q326",
+          "SRC-LBG-AR",
+          "SRC-LBG-Q1"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "2021–2025 comparison reported in existing Twin",
+          "2025 year-end",
+          "31 December 2025",
+          "Nine months ended / balance sheet at 30 September 2026",
+          "Q1 2026",
+          "Strategy for 2027–2030"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-bafd3d5516248387f084"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "products",
+        "label": "Products, services and offers",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "technology",
+        "label": "Technology and digital estate",
+        "importance": 3,
+        "claim_ids": [
+          "LBG-AI-USE",
+          "LBG-AR25-COPILOT",
+          "LBG-COPILOT",
+          "LBG-ENVOY-CONTROLS",
+          "LBG-MODELS"
+        ],
+        "supported_claim_ids": [
+          "LBG-AR25-COPILOT",
+          "LBG-ENVOY-CONTROLS"
+        ],
+        "source_ids": [
+          "PR-LBG-AR25",
+          "PR-LBG-ENVOY",
+          "SRC-LBG-AI",
+          "SRC-LBG-AR",
+          "SRC-LBG-GCP"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "2025",
+          "2025 announcement context",
+          "Announced platform capability; not current effectiveness evidence",
+          "Existing Twin FY2025/2026 context; precise effective date unknown",
+          "FY2025"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-9a68e9e88d443203a9e8",
+          "RC-b28db7dca6a57f657fbf",
+          "RC-fa02679099efd4edf41f"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "operations",
+        "label": "Operating model",
+        "importance": 4,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-3508e63fc114227406a1",
+          "RC-9a68e9e88d443203a9e8"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "customers",
+        "label": "Customers and markets",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "suppliers",
+        "label": "Suppliers and ecosystem",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-b28db7dca6a57f657fbf",
+          "RC-fa02679099efd4edf41f"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "procurement",
+        "label": "Procurement and buying",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "transformation",
+        "label": "Transformation",
+        "importance": 4,
+        "claim_ids": [
+          "LBG-A2030-WALLET",
+          "LBG-AR25-MIGRATION",
+          "LBG-BRAND",
+          "LBG-BRAND26-TIMING",
+          "LBG-CURVE",
+          "LBG-MIGRATION",
+          "LBG-Q326-CURVE"
+        ],
+        "supported_claim_ids": [
+          "LBG-A2030-WALLET",
+          "LBG-AR25-MIGRATION",
+          "LBG-BRAND26-TIMING",
+          "LBG-Q326-CURVE"
+        ],
+        "source_ids": [
+          "PR-LBG-A2030",
+          "PR-LBG-AR25",
+          "PR-LBG-BRAND26",
+          "PR-LBG-Q326",
+          "SRC-LBG-AR",
+          "SRC-LBG-BRAND",
+          "SRC-LBG-CURVE"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "2026 announcement context",
+          "2026 management priorities",
+          "2026 management priority",
+          "Announced July 2026; branch changes planned through 2027",
+          "Nine months ended / balance sheet at 30 September 2026",
+          "Proposed transaction; status needs refresh",
+          "Strategy for 2027–2030"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-b28db7dca6a57f657fbf",
+          "RC-bafd3d5516248387f084",
+          "RC-fa02679099efd4edf41f"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "events",
+        "label": "Events and analyst intelligence",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "opportunities",
+        "label": "Opportunity reasoning",
+        "importance": 1,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Research hypotheses do not establish customer demand",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "uncertainty",
+        "label": "Evidence and uncertainty",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Open Unknowns and Contradictions require explicit treatment",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      }
+    ],
+    "coverage_classification": [
+      {
+        "id": "corporate",
+        "label": "Corporate identity and structure",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      },
+      {
+        "id": "leadership",
+        "label": "Leadership and governance",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      },
+      {
+        "id": "strategy",
+        "label": "Strategy",
+        "importance": 3,
+        "claim_ids": [
+          "LBG-A2030-DATA",
+          "LBG-A2030-PLATFORMS"
+        ],
+        "supported_claim_ids": [
+          "LBG-A2030-DATA",
+          "LBG-A2030-PLATFORMS"
+        ],
+        "source_ids": [
+          "PR-LBG-A2030"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "Strategy for 2027–2030"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-3508e63fc114227406a1"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Source-backed candidate; inspect scope/date; Conflicting scope/period retained",
+        "claims": [
+          {
+            "id": "LBG-A2030-DATA",
+            "statement": "The strategy makes enterprise data enablement a stated AI priority.",
+            "subject": "BK-ENT-001",
+            "period": "Strategy for 2027–2030",
+            "kind": "management_commitment",
+            "source_ids": [
+              "PR-LBG-A2030"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-A2030-PLATFORMS",
+            "statement": "Accelerate 2030 explicitly prioritises core-platform renewal.",
+            "subject": "BK-ENT-001",
+            "period": "Strategy for 2027–2030",
+            "kind": "management_commitment",
+            "source_ids": [
+              "PR-LBG-A2030"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-3508e63fc114227406a1",
+            "statement": "reducing data centres by more than 50% and migrating more than 60% of applications to the cloud",
+            "subject": "BK-ENT-001",
+            "period": "2022–2026 strategy progress as described on undated page",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-STRATEGY"
+            ],
+            "segment_id": "RS-fa0078e21f2524980248::9ee87d379dfc5572",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-STRATEGY",
+                "quote": "reducing data centres by more than 50% and migrating more than 60% of applications to the cloud",
+                "locator": "2022–2026 progress, line647",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "9971231ce8b406b959cf623804f1772bfce0851cb569f98dc9f6d427163b2f36",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "ea4d93548d612e350bca3d6840fdd156cadb8732a39e29a713ffedba759e50a1",
+                "document_key": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          }
+        ]
+      },
+      {
+        "id": "financials",
+        "label": "Financial intelligence",
+        "importance": 4,
+        "claim_ids": [
+          "LBG-A2030-CIR",
+          "LBG-AR25-DEPOSITS",
+          "LBG-DEPOSITS",
+          "LBG-HEDGE",
+          "LBG-Q326-DEPOSITS",
+          "LBG-Q326-PROFIT",
+          "LBG-TECH-COST"
+        ],
+        "supported_claim_ids": [
+          "LBG-A2030-CIR",
+          "LBG-AR25-DEPOSITS",
+          "LBG-Q326-DEPOSITS",
+          "LBG-Q326-PROFIT"
+        ],
+        "source_ids": [
+          "PR-LBG-A2030",
+          "PR-LBG-AR25",
+          "PR-LBG-Q326",
+          "SRC-LBG-AR",
+          "SRC-LBG-Q1"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "2021–2025 comparison reported in existing Twin",
+          "2025 year-end",
+          "31 December 2025",
+          "Nine months ended / balance sheet at 30 September 2026",
+          "Q1 2026",
+          "Strategy for 2027–2030"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-bafd3d5516248387f084"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Source-backed candidate; inspect scope/date",
+        "claims": [
+          {
+            "id": "LBG-A2030-CIR",
+            "statement": "The 2030 efficiency ambition is a cost-to-income ratio below 45%; achievement is not assumed.",
+            "subject": "BK-ENT-001",
+            "period": "Strategy for 2027–2030",
+            "kind": "management_expectation",
+            "source_ids": [
+              "PR-LBG-A2030"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-AR25-DEPOSITS",
+            "statement": "FY2025 deposit balance corroborated at GBP496.5bn; it is not the current-quarter balance.",
+            "subject": "BK-ENT-001",
+            "period": "31 December 2025",
+            "kind": "reported_fact",
+            "source_ids": [
+              "PR-LBG-AR25"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-DEPOSITS",
+            "statement": "Existing research reports Lloyds customer deposits of GBP496.5bn at 2025 year-end.",
+            "subject": "BK-ENT-001",
+            "period": "2025 year-end",
+            "kind": "reported_fact",
+            "source_ids": [
+              "SRC-LBG-AR"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-HEDGE",
+            "statement": "Existing research reports GBP1.6bn structural-hedge income for Q1 2026.",
+            "subject": "BK-ENT-001",
+            "period": "Q1 2026",
+            "kind": "reported_fact",
+            "source_ids": [
+              "SRC-LBG-Q1"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-Q326-DEPOSITS",
+            "statement": "Group customer deposits at September-end: GBP502.8bn; retain the FY2025 balance as a separate historical observation.",
+            "subject": "BK-ENT-001",
+            "period": "Nine months ended / balance sheet at 30 September 2026",
+            "kind": "reported_fact",
+            "source_ids": [
+              "PR-LBG-Q326"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": "LBG-DEPOSITS",
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-Q326-PROFIT",
+            "statement": "Reported nine-month statutory pretax profit: GBP6.6bn. This is not an investment allocation.",
+            "subject": "BK-ENT-001",
+            "period": "Nine months ended / balance sheet at 30 September 2026",
+            "kind": "reported_fact",
+            "source_ids": [
+              "PR-LBG-Q326"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-TECH-COST",
+            "statement": "Existing research reports c.30% gross reduction in technology run/change costs since 2021.",
+            "subject": "BK-ENT-001",
+            "period": "2021–2025 comparison reported in existing Twin",
+            "kind": "reported_fact",
+            "source_ids": [
+              "SRC-LBG-AR"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-bafd3d5516248387f084",
+            "statement": "would involve investing £13bn",
+            "subject": "BK-ENT-001",
+            "period": "Management strategy announced July 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-SECONDARY"
+            ],
+            "segment_id": "RS-a7376d5ccd93bbf2dfd4::4adac7996179dca3",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-SECONDARY",
+                "quote": "would involve investing £13bn",
+                "locator": "Management attribution, line65",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "2e69c5badd9d812842b0d15ff5ee697183e9e7c8f98d4779a152fc9a6a664aba",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Independent-publisher secondary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Guardian",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "58bb046ed5f7d3624b542a7af686c92def997516ef245f9f11213bf5f93c7da2",
+                "document_key": "https://www.theguardian.com/business/2026/jul/30/lloyds-bank-cut-2bn-costs-part-ai-powered-strategy"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          }
+        ]
+      },
+      {
+        "id": "products",
+        "label": "Products, services and offers",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      },
+      {
+        "id": "technology",
+        "label": "Technology and digital estate",
+        "importance": 3,
+        "claim_ids": [
+          "LBG-AI-USE",
+          "LBG-AR25-COPILOT",
+          "LBG-COPILOT",
+          "LBG-ENVOY-CONTROLS",
+          "LBG-MODELS"
+        ],
+        "supported_claim_ids": [
+          "LBG-AR25-COPILOT",
+          "LBG-ENVOY-CONTROLS"
+        ],
+        "source_ids": [
+          "PR-LBG-AR25",
+          "PR-LBG-ENVOY",
+          "SRC-LBG-AI",
+          "SRC-LBG-AR",
+          "SRC-LBG-GCP"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "2025",
+          "2025 announcement context",
+          "Announced platform capability; not current effectiveness evidence",
+          "Existing Twin FY2025/2026 context; precise effective date unknown",
+          "FY2025"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-9a68e9e88d443203a9e8",
+          "RC-b28db7dca6a57f657fbf",
+          "RC-fa02679099efd4edf41f"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Source-backed candidate; inspect scope/date; Conflicting scope/period retained",
+        "claims": [
+          {
+            "id": "LBG-AI-USE",
+            "statement": "Existing research reports more than 50 AI use cases rolled out in 2025.",
+            "subject": "BK-ENT-001",
+            "period": "2025",
+            "kind": "reported_fact",
+            "source_ids": [
+              "SRC-LBG-AI"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-AR25-COPILOT",
+            "statement": "FY2025 deployment exceeded 30,000 Copilot licences. Usage and realised net benefit are not established by this count.",
+            "subject": "BK-ENT-001",
+            "period": "FY2025",
+            "kind": "reported_fact",
+            "source_ids": [
+              "PR-LBG-AR25"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-COPILOT",
+            "statement": "Existing research records 30,000 Copilot licences; current usage and net benefit are not established.",
+            "subject": "BK-ENT-001",
+            "period": "Existing Twin FY2025/2026 context; precise effective date unknown",
+            "kind": "reported_fact",
+            "source_ids": [
+              "SRC-LBG-AR"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-ENVOY-CONTROLS",
+            "statement": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+            "subject": "BK-ENT-001",
+            "period": "Announced platform capability; not current effectiveness evidence",
+            "kind": "reported_fact",
+            "source_ids": [
+              "PR-LBG-ENVOY"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-MODELS",
+            "statement": "Existing research reports 15 modelling systems migrated to Vertex AI.",
+            "subject": "BK-ENT-001",
+            "period": "2025 announcement context",
+            "kind": "reported_fact",
+            "source_ids": [
+              "SRC-LBG-GCP"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-9a68e9e88d443203a9e8",
+            "statement": "50% of our applications are on the cloud and we’ve reduced data centres by 40%.",
+            "subject": "BK-ENT-001",
+            "period": "Undated page, reviewed 2026-11-10",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-TECH"
+            ],
+            "segment_id": "RS-17dfed753254598c1fa1::a8349a99e3ad72d7",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-TECH",
+                "quote": "50% of our applications are on the cloud and we’ve reduced data centres by 40%.",
+                "locator": "Technology, line615",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "a28006f8878351f2e02473ec62c215d1fb84b2593554ef47947d00670dc28332",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "90e568f680af60af2dfdf2b488864d952c013167748232d8cd1eb9da326ad919",
+                "document_key": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-b28db7dca6a57f657fbf",
+            "statement": "Envoy has strong controls built in from the start.",
+            "subject": "BK-ENT-001",
+            "period": "Platform announcement, May 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-ENVOY"
+            ],
+            "segment_id": "RS-4be11d772ed7e1ac4974::d8a497ee83ba4ae3",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-ENVOY",
+                "quote": "Envoy has strong controls built in from the start.",
+                "locator": "Safety/control, line620",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "d10e15b8190c8318a05f66561bf623f1befbb65ebb308db77f4a084e67af63db",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "99152ab327c545fd1ba7d31a8e244cb468afd3736f43037cb2c644f43683141e",
+                "document_key": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-fa02679099efd4edf41f",
+            "statement": "Built with Google Cloud",
+            "subject": "BK-ENT-001",
+            "period": "Platform announcement, May 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-ENVOY"
+            ],
+            "segment_id": "RS-4be11d772ed7e1ac4974::772f38d6efbee768",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-ENVOY",
+                "quote": "Built with Google Cloud",
+                "locator": "Envoy platform, line613",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "aa1a8d07a038aac587ef19424db5eabff1599d479e3fbed6c0ccaf85758ae6d0",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "99152ab327c545fd1ba7d31a8e244cb468afd3736f43037cb2c644f43683141e",
+                "document_key": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          }
+        ]
+      },
+      {
+        "id": "operations",
+        "label": "Operating model",
+        "importance": 4,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-3508e63fc114227406a1",
+          "RC-9a68e9e88d443203a9e8"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Source-backed candidate; inspect scope/date; Conflicting scope/period retained",
+        "claims": [
+          {
+            "id": "RC-3508e63fc114227406a1",
+            "statement": "reducing data centres by more than 50% and migrating more than 60% of applications to the cloud",
+            "subject": "BK-ENT-001",
+            "period": "2022–2026 strategy progress as described on undated page",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-STRATEGY"
+            ],
+            "segment_id": "RS-fa0078e21f2524980248::9ee87d379dfc5572",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-STRATEGY",
+                "quote": "reducing data centres by more than 50% and migrating more than 60% of applications to the cloud",
+                "locator": "2022–2026 progress, line647",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "9971231ce8b406b959cf623804f1772bfce0851cb569f98dc9f6d427163b2f36",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "ea4d93548d612e350bca3d6840fdd156cadb8732a39e29a713ffedba759e50a1",
+                "document_key": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-9a68e9e88d443203a9e8",
+            "statement": "50% of our applications are on the cloud and we’ve reduced data centres by 40%.",
+            "subject": "BK-ENT-001",
+            "period": "Undated page, reviewed 2026-11-10",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-TECH"
+            ],
+            "segment_id": "RS-17dfed753254598c1fa1::a8349a99e3ad72d7",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-TECH",
+                "quote": "50% of our applications are on the cloud and we’ve reduced data centres by 40%.",
+                "locator": "Technology, line615",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "a28006f8878351f2e02473ec62c215d1fb84b2593554ef47947d00670dc28332",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "90e568f680af60af2dfdf2b488864d952c013167748232d8cd1eb9da326ad919",
+                "document_key": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          }
+        ]
+      },
+      {
+        "id": "customers",
+        "label": "Customers and markets",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      },
+      {
+        "id": "suppliers",
+        "label": "Suppliers and ecosystem",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-b28db7dca6a57f657fbf",
+          "RC-fa02679099efd4edf41f"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Source-backed candidate; inspect scope/date",
+        "claims": [
+          {
+            "id": "RC-b28db7dca6a57f657fbf",
+            "statement": "Envoy has strong controls built in from the start.",
+            "subject": "BK-ENT-001",
+            "period": "Platform announcement, May 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-ENVOY"
+            ],
+            "segment_id": "RS-4be11d772ed7e1ac4974::d8a497ee83ba4ae3",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-ENVOY",
+                "quote": "Envoy has strong controls built in from the start.",
+                "locator": "Safety/control, line620",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "d10e15b8190c8318a05f66561bf623f1befbb65ebb308db77f4a084e67af63db",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "99152ab327c545fd1ba7d31a8e244cb468afd3736f43037cb2c644f43683141e",
+                "document_key": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-fa02679099efd4edf41f",
+            "statement": "Built with Google Cloud",
+            "subject": "BK-ENT-001",
+            "period": "Platform announcement, May 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-ENVOY"
+            ],
+            "segment_id": "RS-4be11d772ed7e1ac4974::772f38d6efbee768",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-ENVOY",
+                "quote": "Built with Google Cloud",
+                "locator": "Envoy platform, line613",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "aa1a8d07a038aac587ef19424db5eabff1599d479e3fbed6c0ccaf85758ae6d0",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "99152ab327c545fd1ba7d31a8e244cb468afd3736f43037cb2c644f43683141e",
+                "document_key": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          }
+        ]
+      },
+      {
+        "id": "procurement",
+        "label": "Procurement and buying",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      },
+      {
+        "id": "transformation",
+        "label": "Transformation",
+        "importance": 4,
+        "claim_ids": [
+          "LBG-A2030-WALLET",
+          "LBG-AR25-MIGRATION",
+          "LBG-BRAND",
+          "LBG-BRAND26-TIMING",
+          "LBG-CURVE",
+          "LBG-MIGRATION",
+          "LBG-Q326-CURVE"
+        ],
+        "supported_claim_ids": [
+          "LBG-A2030-WALLET",
+          "LBG-AR25-MIGRATION",
+          "LBG-BRAND26-TIMING",
+          "LBG-Q326-CURVE"
+        ],
+        "source_ids": [
+          "PR-LBG-A2030",
+          "PR-LBG-AR25",
+          "PR-LBG-BRAND26",
+          "PR-LBG-Q326",
+          "SRC-LBG-AR",
+          "SRC-LBG-BRAND",
+          "SRC-LBG-CURVE"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "2026 announcement context",
+          "2026 management priorities",
+          "2026 management priority",
+          "Announced July 2026; branch changes planned through 2027",
+          "Nine months ended / balance sheet at 30 September 2026",
+          "Proposed transaction; status needs refresh",
+          "Strategy for 2027–2030"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-b28db7dca6a57f657fbf",
+          "RC-bafd3d5516248387f084",
+          "RC-fa02679099efd4edf41f"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Source-backed candidate; inspect scope/date",
+        "claims": [
+          {
+            "id": "LBG-A2030-WALLET",
+            "statement": "New wallet/payment propositions are an explicit strategy priority, providing a specific question for post-acquisition integration research.",
+            "subject": "BK-ENT-001",
+            "period": "Strategy for 2027–2030",
+            "kind": "management_commitment",
+            "source_ids": [
+              "PR-LBG-A2030"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-AR25-MIGRATION",
+            "statement": "The annual report names faster application retirement and cloud migration among 2026 priorities.",
+            "subject": "BK-ENT-001",
+            "period": "2026 management priorities",
+            "kind": "management_commitment",
+            "source_ids": [
+              "PR-LBG-AR25"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-BRAND",
+            "statement": "Existing research reports a Halifax-to-Lloyds brand/app migration announcement; current implementation and outcomes need verification.",
+            "subject": "BK-ENT-001",
+            "period": "2026 announcement context",
+            "kind": "reported_programme",
+            "source_ids": [
+              "SRC-LBG-BRAND"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-BRAND26-TIMING",
+            "statement": "The announcement schedules branch-brand changes through 2027. Delivery progress and customer outcomes remain to be checked.",
+            "subject": "BK-ENT-001",
+            "period": "Announced July 2026; branch changes planned through 2027",
+            "kind": "management_commitment",
+            "source_ids": [
+              "PR-LBG-BRAND26"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-CURVE",
+            "statement": "Existing research records a proposed Curve acquisition subject to regulatory approval; completion is not established.",
+            "subject": "BK-ENT-001",
+            "period": "Proposed transaction; status needs refresh",
+            "kind": "proposed_transaction",
+            "source_ids": [
+              "SRC-LBG-CURVE"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-MIGRATION",
+            "statement": "Existing research identifies legacy application decommissioning and cloud migration as 2026 priorities.",
+            "subject": "BK-ENT-001",
+            "period": "2026 management priority",
+            "kind": "management_priority",
+            "source_ids": [
+              "SRC-LBG-AR"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-Q326-CURVE",
+            "statement": "The Q3 statement treats the Curve acquisition as completed; integration scope and external procurement remain unproven.",
+            "subject": "BK-ENT-001",
+            "period": "Nine months ended / balance sheet at 30 September 2026",
+            "kind": "reported_fact",
+            "source_ids": [
+              "PR-LBG-Q326"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": "LBG-CURVE",
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-b28db7dca6a57f657fbf",
+            "statement": "Envoy has strong controls built in from the start.",
+            "subject": "BK-ENT-001",
+            "period": "Platform announcement, May 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-ENVOY"
+            ],
+            "segment_id": "RS-4be11d772ed7e1ac4974::d8a497ee83ba4ae3",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-ENVOY",
+                "quote": "Envoy has strong controls built in from the start.",
+                "locator": "Safety/control, line620",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "d10e15b8190c8318a05f66561bf623f1befbb65ebb308db77f4a084e67af63db",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "99152ab327c545fd1ba7d31a8e244cb468afd3736f43037cb2c644f43683141e",
+                "document_key": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-bafd3d5516248387f084",
+            "statement": "would involve investing £13bn",
+            "subject": "BK-ENT-001",
+            "period": "Management strategy announced July 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-SECONDARY"
+            ],
+            "segment_id": "RS-a7376d5ccd93bbf2dfd4::4adac7996179dca3",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-SECONDARY",
+                "quote": "would involve investing £13bn",
+                "locator": "Management attribution, line65",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "2e69c5badd9d812842b0d15ff5ee697183e9e7c8f98d4779a152fc9a6a664aba",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Independent-publisher secondary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Guardian",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "58bb046ed5f7d3624b542a7af686c92def997516ef245f9f11213bf5f93c7da2",
+                "document_key": "https://www.theguardian.com/business/2026/jul/30/lloyds-bank-cut-2bn-costs-part-ai-powered-strategy"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-fa02679099efd4edf41f",
+            "statement": "Built with Google Cloud",
+            "subject": "BK-ENT-001",
+            "period": "Platform announcement, May 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-ENVOY"
+            ],
+            "segment_id": "RS-4be11d772ed7e1ac4974::772f38d6efbee768",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-ENVOY",
+                "quote": "Built with Google Cloud",
+                "locator": "Envoy platform, line613",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "aa1a8d07a038aac587ef19424db5eabff1599d479e3fbed6c0ccaf85758ae6d0",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "99152ab327c545fd1ba7d31a8e244cb468afd3736f43037cb2c644f43683141e",
+                "document_key": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          }
+        ]
+      },
+      {
+        "id": "events",
+        "label": "Events and analyst intelligence",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      },
+      {
+        "id": "opportunities",
+        "label": "Opportunity reasoning",
+        "importance": 1,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Research hypotheses do not establish customer demand",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      },
+      {
+        "id": "uncertainty",
+        "label": "Evidence and uncertainty",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Open Unknowns and Contradictions require explicit treatment",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      }
+    ],
+    "distinct_document_urls": 26
+  },
+  "after": {
+    "source_records": 33,
+    "candidate_claims": 55,
+    "relationships": 129,
+    "coverage": [
+      {
+        "id": "corporate",
+        "label": "Corporate identity and structure",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "leadership",
+        "label": "Leadership and governance",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "strategy",
+        "label": "Strategy",
+        "importance": 3,
+        "claim_ids": [
+          "LBG-A2030-DATA",
+          "LBG-A2030-PLATFORMS"
+        ],
+        "supported_claim_ids": [
+          "LBG-A2030-DATA",
+          "LBG-A2030-PLATFORMS"
+        ],
+        "source_ids": [
+          "PR-LBG-A2030"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "Strategy for 2027–2030"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-3508e63fc114227406a1"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "financials",
+        "label": "Financial intelligence",
+        "importance": 4,
+        "claim_ids": [
+          "LBG-A2030-CIR",
+          "LBG-AR25-DEPOSITS",
+          "LBG-DEPOSITS",
+          "LBG-HEDGE",
+          "LBG-Q326-DEPOSITS",
+          "LBG-Q326-PROFIT",
+          "LBG-TECH-COST"
+        ],
+        "supported_claim_ids": [
+          "LBG-A2030-CIR",
+          "LBG-AR25-DEPOSITS",
+          "LBG-Q326-DEPOSITS",
+          "LBG-Q326-PROFIT"
+        ],
+        "source_ids": [
+          "PR-LBG-A2030",
+          "PR-LBG-AR25",
+          "PR-LBG-Q326",
+          "SRC-LBG-AR",
+          "SRC-LBG-Q1"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "2021–2025 comparison reported in existing Twin",
+          "2025 year-end",
+          "31 December 2025",
+          "Nine months ended / balance sheet at 30 September 2026",
+          "Q1 2026",
+          "Strategy for 2027–2030"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-bafd3d5516248387f084"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "products",
+        "label": "Products, services and offers",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "technology",
+        "label": "Technology and digital estate",
+        "importance": 3,
+        "claim_ids": [
+          "LBG-AI-USE",
+          "LBG-AR25-COPILOT",
+          "LBG-COPILOT",
+          "LBG-ENVOY-CONTROLS",
+          "LBG-MODELS"
+        ],
+        "supported_claim_ids": [
+          "LBG-AR25-COPILOT",
+          "LBG-ENVOY-CONTROLS"
+        ],
+        "source_ids": [
+          "PR-LBG-AR25",
+          "PR-LBG-ENVOY",
+          "SRC-LBG-AI",
+          "SRC-LBG-AR",
+          "SRC-LBG-GCP"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "2025",
+          "2025 announcement context",
+          "Announced platform capability; not current effectiveness evidence",
+          "Existing Twin FY2025/2026 context; precise effective date unknown",
+          "FY2025"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-9a68e9e88d443203a9e8",
+          "RC-DEPTH-LBG-AI",
+          "RC-DEPTH-LBG-CURVE",
+          "RC-DEPTH-LBG-LEGACY",
+          "RC-DEPTH-LBG-WALLET",
+          "RC-b28db7dca6a57f657fbf",
+          "RC-fa02679099efd4edf41f"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "operations",
+        "label": "Operating model",
+        "importance": 4,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-3508e63fc114227406a1",
+          "RC-9a68e9e88d443203a9e8",
+          "RC-DEPTH-LBG-AI",
+          "RC-DEPTH-LBG-CURVE",
+          "RC-DEPTH-LBG-LEGACY",
+          "RC-DEPTH-LBG-WALLET"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "customers",
+        "label": "Customers and markets",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "suppliers",
+        "label": "Suppliers and ecosystem",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-b28db7dca6a57f657fbf",
+          "RC-fa02679099efd4edf41f"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "procurement",
+        "label": "Procurement and buying",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "transformation",
+        "label": "Transformation",
+        "importance": 4,
+        "claim_ids": [
+          "LBG-A2030-WALLET",
+          "LBG-AR25-MIGRATION",
+          "LBG-BRAND",
+          "LBG-BRAND26-TIMING",
+          "LBG-CURVE",
+          "LBG-MIGRATION",
+          "LBG-Q326-CURVE"
+        ],
+        "supported_claim_ids": [
+          "LBG-A2030-WALLET",
+          "LBG-AR25-MIGRATION",
+          "LBG-BRAND26-TIMING",
+          "LBG-Q326-CURVE"
+        ],
+        "source_ids": [
+          "PR-LBG-A2030",
+          "PR-LBG-AR25",
+          "PR-LBG-BRAND26",
+          "PR-LBG-Q326",
+          "SRC-LBG-AR",
+          "SRC-LBG-BRAND",
+          "SRC-LBG-CURVE"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "2026 announcement context",
+          "2026 management priorities",
+          "2026 management priority",
+          "Announced July 2026; branch changes planned through 2027",
+          "Nine months ended / balance sheet at 30 September 2026",
+          "Proposed transaction; status needs refresh",
+          "Strategy for 2027–2030"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-b28db7dca6a57f657fbf",
+          "RC-bafd3d5516248387f084",
+          "RC-fa02679099efd4edf41f"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "events",
+        "label": "Events and analyst intelligence",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "opportunities",
+        "label": "Opportunity reasoning",
+        "importance": 1,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Research hypotheses do not establish customer demand",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      },
+      {
+        "id": "uncertainty",
+        "label": "Evidence and uncertainty",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Open Unknowns and Contradictions require explicit treatment",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth"
+      }
+    ],
+    "coverage_classification": [
+      {
+        "id": "corporate",
+        "label": "Corporate identity and structure",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      },
+      {
+        "id": "leadership",
+        "label": "Leadership and governance",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      },
+      {
+        "id": "strategy",
+        "label": "Strategy",
+        "importance": 3,
+        "claim_ids": [
+          "LBG-A2030-DATA",
+          "LBG-A2030-PLATFORMS"
+        ],
+        "supported_claim_ids": [
+          "LBG-A2030-DATA",
+          "LBG-A2030-PLATFORMS"
+        ],
+        "source_ids": [
+          "PR-LBG-A2030"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "Strategy for 2027–2030"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-3508e63fc114227406a1"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Source-backed candidate; inspect scope/date; Conflicting scope/period retained",
+        "claims": [
+          {
+            "id": "LBG-A2030-DATA",
+            "statement": "The strategy makes enterprise data enablement a stated AI priority.",
+            "subject": "BK-ENT-001",
+            "period": "Strategy for 2027–2030",
+            "kind": "management_commitment",
+            "source_ids": [
+              "PR-LBG-A2030"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-A2030-PLATFORMS",
+            "statement": "Accelerate 2030 explicitly prioritises core-platform renewal.",
+            "subject": "BK-ENT-001",
+            "period": "Strategy for 2027–2030",
+            "kind": "management_commitment",
+            "source_ids": [
+              "PR-LBG-A2030"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-3508e63fc114227406a1",
+            "statement": "reducing data centres by more than 50% and migrating more than 60% of applications to the cloud",
+            "subject": "BK-ENT-001",
+            "period": "2022–2026 strategy progress as described on undated page",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-STRATEGY"
+            ],
+            "segment_id": "RS-fa0078e21f2524980248::9ee87d379dfc5572",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-STRATEGY",
+                "quote": "reducing data centres by more than 50% and migrating more than 60% of applications to the cloud",
+                "locator": "2022–2026 progress, line647",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "9971231ce8b406b959cf623804f1772bfce0851cb569f98dc9f6d427163b2f36",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "ea4d93548d612e350bca3d6840fdd156cadb8732a39e29a713ffedba759e50a1",
+                "document_key": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          }
+        ]
+      },
+      {
+        "id": "financials",
+        "label": "Financial intelligence",
+        "importance": 4,
+        "claim_ids": [
+          "LBG-A2030-CIR",
+          "LBG-AR25-DEPOSITS",
+          "LBG-DEPOSITS",
+          "LBG-HEDGE",
+          "LBG-Q326-DEPOSITS",
+          "LBG-Q326-PROFIT",
+          "LBG-TECH-COST"
+        ],
+        "supported_claim_ids": [
+          "LBG-A2030-CIR",
+          "LBG-AR25-DEPOSITS",
+          "LBG-Q326-DEPOSITS",
+          "LBG-Q326-PROFIT"
+        ],
+        "source_ids": [
+          "PR-LBG-A2030",
+          "PR-LBG-AR25",
+          "PR-LBG-Q326",
+          "SRC-LBG-AR",
+          "SRC-LBG-Q1"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "2021–2025 comparison reported in existing Twin",
+          "2025 year-end",
+          "31 December 2025",
+          "Nine months ended / balance sheet at 30 September 2026",
+          "Q1 2026",
+          "Strategy for 2027–2030"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-bafd3d5516248387f084"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Source-backed candidate; inspect scope/date",
+        "claims": [
+          {
+            "id": "LBG-A2030-CIR",
+            "statement": "The 2030 efficiency ambition is a cost-to-income ratio below 45%; achievement is not assumed.",
+            "subject": "BK-ENT-001",
+            "period": "Strategy for 2027–2030",
+            "kind": "management_expectation",
+            "source_ids": [
+              "PR-LBG-A2030"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-AR25-DEPOSITS",
+            "statement": "FY2025 deposit balance corroborated at GBP496.5bn; it is not the current-quarter balance.",
+            "subject": "BK-ENT-001",
+            "period": "31 December 2025",
+            "kind": "reported_fact",
+            "source_ids": [
+              "PR-LBG-AR25"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-DEPOSITS",
+            "statement": "Existing research reports Lloyds customer deposits of GBP496.5bn at 2025 year-end.",
+            "subject": "BK-ENT-001",
+            "period": "2025 year-end",
+            "kind": "reported_fact",
+            "source_ids": [
+              "SRC-LBG-AR"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-HEDGE",
+            "statement": "Existing research reports GBP1.6bn structural-hedge income for Q1 2026.",
+            "subject": "BK-ENT-001",
+            "period": "Q1 2026",
+            "kind": "reported_fact",
+            "source_ids": [
+              "SRC-LBG-Q1"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-Q326-DEPOSITS",
+            "statement": "Group customer deposits at September-end: GBP502.8bn; retain the FY2025 balance as a separate historical observation.",
+            "subject": "BK-ENT-001",
+            "period": "Nine months ended / balance sheet at 30 September 2026",
+            "kind": "reported_fact",
+            "source_ids": [
+              "PR-LBG-Q326"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": "LBG-DEPOSITS",
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-Q326-PROFIT",
+            "statement": "Reported nine-month statutory pretax profit: GBP6.6bn. This is not an investment allocation.",
+            "subject": "BK-ENT-001",
+            "period": "Nine months ended / balance sheet at 30 September 2026",
+            "kind": "reported_fact",
+            "source_ids": [
+              "PR-LBG-Q326"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-TECH-COST",
+            "statement": "Existing research reports c.30% gross reduction in technology run/change costs since 2021.",
+            "subject": "BK-ENT-001",
+            "period": "2021–2025 comparison reported in existing Twin",
+            "kind": "reported_fact",
+            "source_ids": [
+              "SRC-LBG-AR"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-bafd3d5516248387f084",
+            "statement": "would involve investing £13bn",
+            "subject": "BK-ENT-001",
+            "period": "Management strategy announced July 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-SECONDARY"
+            ],
+            "segment_id": "RS-a7376d5ccd93bbf2dfd4::4adac7996179dca3",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-SECONDARY",
+                "quote": "would involve investing £13bn",
+                "locator": "Management attribution, line65",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "2e69c5badd9d812842b0d15ff5ee697183e9e7c8f98d4779a152fc9a6a664aba",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Independent-publisher secondary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Guardian",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "58bb046ed5f7d3624b542a7af686c92def997516ef245f9f11213bf5f93c7da2",
+                "document_key": "https://www.theguardian.com/business/2026/jul/30/lloyds-bank-cut-2bn-costs-part-ai-powered-strategy"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          }
+        ]
+      },
+      {
+        "id": "products",
+        "label": "Products, services and offers",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      },
+      {
+        "id": "technology",
+        "label": "Technology and digital estate",
+        "importance": 3,
+        "claim_ids": [
+          "LBG-AI-USE",
+          "LBG-AR25-COPILOT",
+          "LBG-COPILOT",
+          "LBG-ENVOY-CONTROLS",
+          "LBG-MODELS"
+        ],
+        "supported_claim_ids": [
+          "LBG-AR25-COPILOT",
+          "LBG-ENVOY-CONTROLS"
+        ],
+        "source_ids": [
+          "PR-LBG-AR25",
+          "PR-LBG-ENVOY",
+          "SRC-LBG-AI",
+          "SRC-LBG-AR",
+          "SRC-LBG-GCP"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "2025",
+          "2025 announcement context",
+          "Announced platform capability; not current effectiveness evidence",
+          "Existing Twin FY2025/2026 context; precise effective date unknown",
+          "FY2025"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-9a68e9e88d443203a9e8",
+          "RC-DEPTH-LBG-AI",
+          "RC-DEPTH-LBG-CURVE",
+          "RC-DEPTH-LBG-LEGACY",
+          "RC-DEPTH-LBG-WALLET",
+          "RC-b28db7dca6a57f657fbf",
+          "RC-fa02679099efd4edf41f"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Source-backed candidate; inspect scope/date; Conflicting scope/period retained; Includes historical evidence",
+        "claims": [
+          {
+            "id": "LBG-AI-USE",
+            "statement": "Existing research reports more than 50 AI use cases rolled out in 2025.",
+            "subject": "BK-ENT-001",
+            "period": "2025",
+            "kind": "reported_fact",
+            "source_ids": [
+              "SRC-LBG-AI"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-AR25-COPILOT",
+            "statement": "FY2025 deployment exceeded 30,000 Copilot licences. Usage and realised net benefit are not established by this count.",
+            "subject": "BK-ENT-001",
+            "period": "FY2025",
+            "kind": "reported_fact",
+            "source_ids": [
+              "PR-LBG-AR25"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-COPILOT",
+            "statement": "Existing research records 30,000 Copilot licences; current usage and net benefit are not established.",
+            "subject": "BK-ENT-001",
+            "period": "Existing Twin FY2025/2026 context; precise effective date unknown",
+            "kind": "reported_fact",
+            "source_ids": [
+              "SRC-LBG-AR"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-ENVOY-CONTROLS",
+            "statement": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+            "subject": "BK-ENT-001",
+            "period": "Announced platform capability; not current effectiveness evidence",
+            "kind": "reported_fact",
+            "source_ids": [
+              "PR-LBG-ENVOY"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-MODELS",
+            "statement": "Existing research reports 15 modelling systems migrated to Vertex AI.",
+            "subject": "BK-ENT-001",
+            "period": "2025 announcement context",
+            "kind": "reported_fact",
+            "source_ids": [
+              "SRC-LBG-GCP"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-9a68e9e88d443203a9e8",
+            "statement": "50% of our applications are on the cloud and we’ve reduced data centres by 40%.",
+            "subject": "BK-ENT-001",
+            "period": "Undated page, reviewed 2026-11-10",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-TECH"
+            ],
+            "segment_id": "RS-17dfed753254598c1fa1::a8349a99e3ad72d7",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-TECH",
+                "quote": "50% of our applications are on the cloud and we’ve reduced data centres by 40%.",
+                "locator": "Technology, line615",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "a28006f8878351f2e02473ec62c215d1fb84b2593554ef47947d00670dc28332",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "90e568f680af60af2dfdf2b488864d952c013167748232d8cd1eb9da326ad919",
+                "document_key": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-DEPTH-LBG-AI",
+            "statement": "building a new machine learning (ML) and Generative AI (GenAI) platform using Google Cloud’s Vertex AI.",
+            "subject": "BK-ENT-001",
+            "period": "April 2025 announcement; current delivery and contract scope unverified",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "DEPTH-LBG-AI"
+            ],
+            "segment_id": "DEPTH-LBG-AI::passage",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "DEPTH-LBG-AI",
+                "quote": "building a new machine learning (ML) and Generative AI (GenAI) platform using Google Cloud’s Vertex AI.",
+                "locator": "Embracing cloud technology, line604",
+                "support": "direct",
+                "reason": "Exact short passage supports only the attributed company statement, not customer demand, completion or current contract scope.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "3c34f064e84db14c66eeaf7e0033425fff0f376dda1637c55fe152dab17f15b5",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "1091b57d5014e8509ff3d277b5eb8e52ca29c6608ae17b22d1478aa41dc639bd",
+                "document_key": "https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-DEPTH-LBG-CURVE",
+            "statement": "The acquisition is expected to complete in the first half of 2026, subject to regulatory approval.",
+            "subject": "BK-ENT-001",
+            "period": "19 November 2025 forward-looking acquisition announcement; expected H1 2026 completion is not verified completion",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "DEPTH-LBG-CURVE"
+            ],
+            "segment_id": "DEPTH-LBG-CURVE::passage",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "DEPTH-LBG-CURVE",
+                "quote": "The acquisition is expected to complete in the first half of 2026, subject to regulatory approval.",
+                "locator": "PDF page 1, line23",
+                "support": "direct",
+                "reason": "Exact short passage supports only the attributed company statement, not customer demand, completion or current contract scope.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "aad34c4eeaba3adc15c5c52d5a46f8622dc9c1b0824f0f79d358f549d11cfa22",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "77556258b687ba14f3fa2d78ff217a2bb81100fbb1dc16a33c244fc87d7a6cca",
+                "document_key": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/investor-news/2025/2025nov19-lbg-curve-acquisition.pdf"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-DEPTH-LBG-LEGACY",
+            "statement": "We’re simplifying our systems, so one system can do the job of many",
+            "subject": "BK-ENT-001",
+            "period": "Undated simplification statement retrieved 2026-11-10; no retirement inventory or benefit baseline",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "DEPTH-LBG-LEGACY"
+            ],
+            "segment_id": "DEPTH-LBG-LEGACY::passage",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "DEPTH-LBG-LEGACY",
+                "quote": "We’re simplifying our systems, so one system can do the job of many",
+                "locator": "Technology, line615",
+                "support": "direct",
+                "reason": "Exact short passage supports only the attributed company statement, not customer demand, completion or current contract scope.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "4e41f10040ed5a0644f7b4311ba193338a1d536c8f22aafa070b673949f06100",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "e387e2f8b37215e7046f3c914ef1d0ee930acd434617a8d94df167f14e61f83e",
+                "document_key": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-DEPTH-LBG-WALLET",
+            "statement": "we’re launching Lloyds Smart Wallet – a new type of UK digital wallet providing enhanced payments options and flexibility",
+            "subject": "BK-ENT-001",
+            "period": "2026 management outlook; launch intention, not verified launch completion or Curve integration topology",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "DEPTH-LBG-WALLET"
+            ],
+            "segment_id": "DEPTH-LBG-WALLET::passage",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "DEPTH-LBG-WALLET",
+                "quote": "we’re launching Lloyds Smart Wallet – a new type of UK digital wallet providing enhanced payments options and flexibility",
+                "locator": "Accelerate 2030, line723",
+                "support": "direct",
+                "reason": "Exact short passage supports only the attributed company statement, not customer demand, completion or current contract scope.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "260e11af324a24eb618832062dcbc33d09ee24d0d68a9c876377e13ab860a53f",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "445b237cbdc111bb790301632d4eb388d960d052f7b9ac367e08e787f7f1f9a7",
+                "document_key": "https://www.lloydsbankinggroup.com/insights/how-is-lloyds-banking-group-performing-2026.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-b28db7dca6a57f657fbf",
+            "statement": "Envoy has strong controls built in from the start.",
+            "subject": "BK-ENT-001",
+            "period": "Platform announcement, May 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-ENVOY"
+            ],
+            "segment_id": "RS-4be11d772ed7e1ac4974::d8a497ee83ba4ae3",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-ENVOY",
+                "quote": "Envoy has strong controls built in from the start.",
+                "locator": "Safety/control, line620",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "d10e15b8190c8318a05f66561bf623f1befbb65ebb308db77f4a084e67af63db",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "99152ab327c545fd1ba7d31a8e244cb468afd3736f43037cb2c644f43683141e",
+                "document_key": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-fa02679099efd4edf41f",
+            "statement": "Built with Google Cloud",
+            "subject": "BK-ENT-001",
+            "period": "Platform announcement, May 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-ENVOY"
+            ],
+            "segment_id": "RS-4be11d772ed7e1ac4974::772f38d6efbee768",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-ENVOY",
+                "quote": "Built with Google Cloud",
+                "locator": "Envoy platform, line613",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "aa1a8d07a038aac587ef19424db5eabff1599d479e3fbed6c0ccaf85758ae6d0",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "99152ab327c545fd1ba7d31a8e244cb468afd3736f43037cb2c644f43683141e",
+                "document_key": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          }
+        ]
+      },
+      {
+        "id": "operations",
+        "label": "Operating model",
+        "importance": 4,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-3508e63fc114227406a1",
+          "RC-9a68e9e88d443203a9e8",
+          "RC-DEPTH-LBG-AI",
+          "RC-DEPTH-LBG-CURVE",
+          "RC-DEPTH-LBG-LEGACY",
+          "RC-DEPTH-LBG-WALLET"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Source-backed candidate; inspect scope/date; Conflicting scope/period retained; Includes historical evidence",
+        "claims": [
+          {
+            "id": "RC-3508e63fc114227406a1",
+            "statement": "reducing data centres by more than 50% and migrating more than 60% of applications to the cloud",
+            "subject": "BK-ENT-001",
+            "period": "2022–2026 strategy progress as described on undated page",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-STRATEGY"
+            ],
+            "segment_id": "RS-fa0078e21f2524980248::9ee87d379dfc5572",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-STRATEGY",
+                "quote": "reducing data centres by more than 50% and migrating more than 60% of applications to the cloud",
+                "locator": "2022–2026 progress, line647",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "9971231ce8b406b959cf623804f1772bfce0851cb569f98dc9f6d427163b2f36",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "ea4d93548d612e350bca3d6840fdd156cadb8732a39e29a713ffedba759e50a1",
+                "document_key": "https://www.lloydsbankinggroup.com/who-we-are/our-strategy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-9a68e9e88d443203a9e8",
+            "statement": "50% of our applications are on the cloud and we’ve reduced data centres by 40%.",
+            "subject": "BK-ENT-001",
+            "period": "Undated page, reviewed 2026-11-10",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-TECH"
+            ],
+            "segment_id": "RS-17dfed753254598c1fa1::a8349a99e3ad72d7",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-TECH",
+                "quote": "50% of our applications are on the cloud and we’ve reduced data centres by 40%.",
+                "locator": "Technology, line615",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "a28006f8878351f2e02473ec62c215d1fb84b2593554ef47947d00670dc28332",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "90e568f680af60af2dfdf2b488864d952c013167748232d8cd1eb9da326ad919",
+                "document_key": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-DEPTH-LBG-AI",
+            "statement": "building a new machine learning (ML) and Generative AI (GenAI) platform using Google Cloud’s Vertex AI.",
+            "subject": "BK-ENT-001",
+            "period": "April 2025 announcement; current delivery and contract scope unverified",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "DEPTH-LBG-AI"
+            ],
+            "segment_id": "DEPTH-LBG-AI::passage",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "DEPTH-LBG-AI",
+                "quote": "building a new machine learning (ML) and Generative AI (GenAI) platform using Google Cloud’s Vertex AI.",
+                "locator": "Embracing cloud technology, line604",
+                "support": "direct",
+                "reason": "Exact short passage supports only the attributed company statement, not customer demand, completion or current contract scope.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "3c34f064e84db14c66eeaf7e0033425fff0f376dda1637c55fe152dab17f15b5",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "1091b57d5014e8509ff3d277b5eb8e52ca29c6608ae17b22d1478aa41dc639bd",
+                "document_key": "https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-DEPTH-LBG-CURVE",
+            "statement": "The acquisition is expected to complete in the first half of 2026, subject to regulatory approval.",
+            "subject": "BK-ENT-001",
+            "period": "19 November 2025 forward-looking acquisition announcement; expected H1 2026 completion is not verified completion",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "DEPTH-LBG-CURVE"
+            ],
+            "segment_id": "DEPTH-LBG-CURVE::passage",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "DEPTH-LBG-CURVE",
+                "quote": "The acquisition is expected to complete in the first half of 2026, subject to regulatory approval.",
+                "locator": "PDF page 1, line23",
+                "support": "direct",
+                "reason": "Exact short passage supports only the attributed company statement, not customer demand, completion or current contract scope.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "aad34c4eeaba3adc15c5c52d5a46f8622dc9c1b0824f0f79d358f549d11cfa22",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "77556258b687ba14f3fa2d78ff217a2bb81100fbb1dc16a33c244fc87d7a6cca",
+                "document_key": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/investor-news/2025/2025nov19-lbg-curve-acquisition.pdf"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-DEPTH-LBG-LEGACY",
+            "statement": "We’re simplifying our systems, so one system can do the job of many",
+            "subject": "BK-ENT-001",
+            "period": "Undated simplification statement retrieved 2026-11-10; no retirement inventory or benefit baseline",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "DEPTH-LBG-LEGACY"
+            ],
+            "segment_id": "DEPTH-LBG-LEGACY::passage",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "DEPTH-LBG-LEGACY",
+                "quote": "We’re simplifying our systems, so one system can do the job of many",
+                "locator": "Technology, line615",
+                "support": "direct",
+                "reason": "Exact short passage supports only the attributed company statement, not customer demand, completion or current contract scope.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "4e41f10040ed5a0644f7b4311ba193338a1d536c8f22aafa070b673949f06100",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "e387e2f8b37215e7046f3c914ef1d0ee930acd434617a8d94df167f14e61f83e",
+                "document_key": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-DEPTH-LBG-WALLET",
+            "statement": "we’re launching Lloyds Smart Wallet – a new type of UK digital wallet providing enhanced payments options and flexibility",
+            "subject": "BK-ENT-001",
+            "period": "2026 management outlook; launch intention, not verified launch completion or Curve integration topology",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "DEPTH-LBG-WALLET"
+            ],
+            "segment_id": "DEPTH-LBG-WALLET::passage",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "DEPTH-LBG-WALLET",
+                "quote": "we’re launching Lloyds Smart Wallet – a new type of UK digital wallet providing enhanced payments options and flexibility",
+                "locator": "Accelerate 2030, line723",
+                "support": "direct",
+                "reason": "Exact short passage supports only the attributed company statement, not customer demand, completion or current contract scope.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "260e11af324a24eb618832062dcbc33d09ee24d0d68a9c876377e13ab860a53f",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "445b237cbdc111bb790301632d4eb388d960d052f7b9ac367e08e787f7f1f9a7",
+                "document_key": "https://www.lloydsbankinggroup.com/insights/how-is-lloyds-banking-group-performing-2026.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          }
+        ]
+      },
+      {
+        "id": "customers",
+        "label": "Customers and markets",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      },
+      {
+        "id": "suppliers",
+        "label": "Suppliers and ecosystem",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-b28db7dca6a57f657fbf",
+          "RC-fa02679099efd4edf41f"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Source-backed candidate; inspect scope/date",
+        "claims": [
+          {
+            "id": "RC-b28db7dca6a57f657fbf",
+            "statement": "Envoy has strong controls built in from the start.",
+            "subject": "BK-ENT-001",
+            "period": "Platform announcement, May 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-ENVOY"
+            ],
+            "segment_id": "RS-4be11d772ed7e1ac4974::d8a497ee83ba4ae3",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-ENVOY",
+                "quote": "Envoy has strong controls built in from the start.",
+                "locator": "Safety/control, line620",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "d10e15b8190c8318a05f66561bf623f1befbb65ebb308db77f4a084e67af63db",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "99152ab327c545fd1ba7d31a8e244cb468afd3736f43037cb2c644f43683141e",
+                "document_key": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-fa02679099efd4edf41f",
+            "statement": "Built with Google Cloud",
+            "subject": "BK-ENT-001",
+            "period": "Platform announcement, May 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-ENVOY"
+            ],
+            "segment_id": "RS-4be11d772ed7e1ac4974::772f38d6efbee768",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-ENVOY",
+                "quote": "Built with Google Cloud",
+                "locator": "Envoy platform, line613",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "aa1a8d07a038aac587ef19424db5eabff1599d479e3fbed6c0ccaf85758ae6d0",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "99152ab327c545fd1ba7d31a8e244cb468afd3736f43037cb2c644f43683141e",
+                "document_key": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          }
+        ]
+      },
+      {
+        "id": "procurement",
+        "label": "Procurement and buying",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      },
+      {
+        "id": "transformation",
+        "label": "Transformation",
+        "importance": 4,
+        "claim_ids": [
+          "LBG-A2030-WALLET",
+          "LBG-AR25-MIGRATION",
+          "LBG-BRAND",
+          "LBG-BRAND26-TIMING",
+          "LBG-CURVE",
+          "LBG-MIGRATION",
+          "LBG-Q326-CURVE"
+        ],
+        "supported_claim_ids": [
+          "LBG-A2030-WALLET",
+          "LBG-AR25-MIGRATION",
+          "LBG-BRAND26-TIMING",
+          "LBG-Q326-CURVE"
+        ],
+        "source_ids": [
+          "PR-LBG-A2030",
+          "PR-LBG-AR25",
+          "PR-LBG-BRAND26",
+          "PR-LBG-Q326",
+          "SRC-LBG-AR",
+          "SRC-LBG-BRAND",
+          "SRC-LBG-CURVE"
+        ],
+        "publishers": [
+          "Lloyds Banking Group"
+        ],
+        "period_labels": [
+          "2026 announcement context",
+          "2026 management priorities",
+          "2026 management priority",
+          "Announced July 2026; branch changes planned through 2027",
+          "Nine months ended / balance sheet at 30 September 2026",
+          "Proposed transaction; status needs refresh",
+          "Strategy for 2027–2030"
+        ],
+        "deficiencies": [
+          "Independent/source-family corroboration not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [
+          "RC-b28db7dca6a57f657fbf",
+          "RC-bafd3d5516248387f084",
+          "RC-fa02679099efd4edf41f"
+        ],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Source-backed candidate; inspect scope/date",
+        "claims": [
+          {
+            "id": "LBG-A2030-WALLET",
+            "statement": "New wallet/payment propositions are an explicit strategy priority, providing a specific question for post-acquisition integration research.",
+            "subject": "BK-ENT-001",
+            "period": "Strategy for 2027–2030",
+            "kind": "management_commitment",
+            "source_ids": [
+              "PR-LBG-A2030"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-AR25-MIGRATION",
+            "statement": "The annual report names faster application retirement and cloud migration among 2026 priorities.",
+            "subject": "BK-ENT-001",
+            "period": "2026 management priorities",
+            "kind": "management_commitment",
+            "source_ids": [
+              "PR-LBG-AR25"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-BRAND",
+            "statement": "Existing research reports a Halifax-to-Lloyds brand/app migration announcement; current implementation and outcomes need verification.",
+            "subject": "BK-ENT-001",
+            "period": "2026 announcement context",
+            "kind": "reported_programme",
+            "source_ids": [
+              "SRC-LBG-BRAND"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-BRAND26-TIMING",
+            "statement": "The announcement schedules branch-brand changes through 2027. Delivery progress and customer outcomes remain to be checked.",
+            "subject": "BK-ENT-001",
+            "period": "Announced July 2026; branch changes planned through 2027",
+            "kind": "management_commitment",
+            "source_ids": [
+              "PR-LBG-BRAND26"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-CURVE",
+            "statement": "Existing research records a proposed Curve acquisition subject to regulatory approval; completion is not established.",
+            "subject": "BK-ENT-001",
+            "period": "Proposed transaction; status needs refresh",
+            "kind": "proposed_transaction",
+            "source_ids": [
+              "SRC-LBG-CURVE"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-MIGRATION",
+            "statement": "Existing research identifies legacy application decommissioning and cloud migration as 2026 priorities.",
+            "subject": "BK-ENT-001",
+            "period": "2026 management priority",
+            "kind": "management_priority",
+            "source_ids": [
+              "SRC-LBG-AR"
+            ],
+            "previous_verification": "repository_reported",
+            "supersedes": null,
+            "updates": null,
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "LBG-Q326-CURVE",
+            "statement": "The Q3 statement treats the Curve acquisition as completed; integration scope and external procurement remain unproven.",
+            "subject": "BK-ENT-001",
+            "period": "Nine months ended / balance sheet at 30 September 2026",
+            "kind": "reported_fact",
+            "source_ids": [
+              "PR-LBG-Q326"
+            ],
+            "previous_verification": "source_supported",
+            "supersedes": null,
+            "updates": "LBG-CURVE",
+            "quality_state": "Exact assertion support not established",
+            "links": [],
+            "direct_support_reviewed": false,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-b28db7dca6a57f657fbf",
+            "statement": "Envoy has strong controls built in from the start.",
+            "subject": "BK-ENT-001",
+            "period": "Platform announcement, May 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-ENVOY"
+            ],
+            "segment_id": "RS-4be11d772ed7e1ac4974::d8a497ee83ba4ae3",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-ENVOY",
+                "quote": "Envoy has strong controls built in from the start.",
+                "locator": "Safety/control, line620",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "d10e15b8190c8318a05f66561bf623f1befbb65ebb308db77f4a084e67af63db",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "99152ab327c545fd1ba7d31a8e244cb468afd3736f43037cb2c644f43683141e",
+                "document_key": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-bafd3d5516248387f084",
+            "statement": "would involve investing £13bn",
+            "subject": "BK-ENT-001",
+            "period": "Management strategy announced July 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-SECONDARY"
+            ],
+            "segment_id": "RS-a7376d5ccd93bbf2dfd4::4adac7996179dca3",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-SECONDARY",
+                "quote": "would involve investing £13bn",
+                "locator": "Management attribution, line65",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "2e69c5badd9d812842b0d15ff5ee697183e9e7c8f98d4779a152fc9a6a664aba",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Independent-publisher secondary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Guardian",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "58bb046ed5f7d3624b542a7af686c92def997516ef245f9f11213bf5f93c7da2",
+                "document_key": "https://www.theguardian.com/business/2026/jul/30/lloyds-bank-cut-2bn-costs-part-ai-powered-strategy"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          },
+          {
+            "id": "RC-fa02679099efd4edf41f",
+            "statement": "Built with Google Cloud",
+            "subject": "BK-ENT-001",
+            "period": "Platform announcement, May 2026",
+            "kind": "candidate_observation",
+            "source_ids": [
+              "V3-LBG-ENVOY"
+            ],
+            "segment_id": "RS-4be11d772ed7e1ac4974::772f38d6efbee768",
+            "quality_state": "Exact passage support reviewed; candidate only",
+            "links": [
+              {
+                "source_id": "V3-LBG-ENVOY",
+                "quote": "Built with Google Cloud",
+                "locator": "Envoy platform, line613",
+                "support": "direct",
+                "reason": "Attributable passage supports this bounded statement only. Company assertion, period and entity scope retained.",
+                "reviewed_by": "Codex source review; not canonical acceptance",
+                "reviewed_at": "2026-11-10",
+                "assertion_digest": "aa1a8d07a038aac587ef19424db5eabff1599d479e3fbed6c0ccaf85758ae6d0",
+                "passage_present": true,
+                "exact_support_reviewed": true,
+                "source_kind": "Reviewed primary excerpt",
+                "eligible_at_cutoff": true,
+                "publisher_group": "Lloyds",
+                "assertion_origin": "Lloyds management",
+                "content_digest": "99152ab327c545fd1ba7d31a8e244cb468afd3736f43037cb2c644f43683141e",
+                "document_key": "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/lloyds-banking-group-unveils-envoy.html"
+              }
+            ],
+            "direct_support_reviewed": true,
+            "independent_corroboration": false,
+            "independent_pairs": [],
+            "contradictory_source_ids": [],
+            "limitation": "Review binds scope/period to a passage; it is not proof of causal truth or accepted canonical Evidence."
+          }
+        ]
+      },
+      {
+        "id": "events",
+        "label": "Events and analyst intelligence",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      },
+      {
+        "id": "opportunities",
+        "label": "Opportunity reasoning",
+        "importance": 1,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Research hypotheses do not establish customer demand",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      },
+      {
+        "id": "uncertainty",
+        "label": "Evidence and uncertainty",
+        "importance": 3,
+        "claim_ids": [],
+        "supported_claim_ids": [],
+        "source_ids": [],
+        "publishers": [],
+        "period_labels": [],
+        "deficiencies": [
+          "No mapped enterprise factual claim; inspect full dossier",
+          "Independent/source-family corroboration not established",
+          "Comparable multi-period history not established",
+          "Open Unknowns and Contradictions require explicit treatment",
+          "Causal depth and complete dossier fields not assessed automatically"
+        ],
+        "maturity": "Not certified",
+        "reviewed_candidate_ids": [],
+        "completion": "Not certified; candidate passages do not establish full dossier depth",
+        "classification": "Missing / interpreted; not certified",
+        "claims": []
+      }
+    ],
+    "distinct_document_urls": 27
+  },
+  "new_sources": [
+    {
+      "id": "DEPTH-LBG-AI",
+      "title": "Lloyds Google Cloud platform announcement",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html",
+      "publication_date": "2025-04-09",
+      "publication_date_evidence": "Dated 09 April 2025 on official announcement",
+      "reporting_period": "April 2025 announcement; current delivery and contract scope unverified",
+      "retrieved_at": "2026-11-10T19:03:08.544040+00:00",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/media/press-releases/2025/lloyds-banking-group-2025/lloyds-banking-group-accelerates-ai-innovation-with-google-cloud.html",
+      "research_domain": "banking",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-AI.txt",
+      "text_sha256": "1091b57d5014e8509ff3d277b5eb8e52ca29c6608ae17b22d1478aa41dc639bd",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn152830view0; turn266601view0",
+      "excerpts": [
+        {
+          "locator": "Embracing cloud technology, line604",
+          "quote": "building a new machine learning (ML) and Generative AI (GenAI) platform using Google Cloud’s Vertex AI."
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Bounded 2026-11-10 primary-page re-verification. Retain only located excerpt; not evidence of buying demand.",
+      "limitation": "April 2025 announcement; current delivery and contract scope unverified. Short directly opened primary excerpt, no original byte archive or independent outcome verification.",
+      "assertion_origin": "Lloyds management",
+      "entity_ids": [
+        "BK-ENT-001"
+      ],
+      "hypothesis_ids": [
+        "RCO-LBG-002"
+      ],
+      "assessment_digest": "b6de7f7d40130a71c2169cbb7a0d3677cd7ea6c51774e5b0951eb26d703abe92"
+    },
+    {
+      "id": "DEPTH-LBG-LEGACY",
+      "title": "Lloyds technology simplification page",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html",
+      "publication_date": null,
+      "publication_date_evidence": "Publication date not established; 2026 in article title is not a publication date",
+      "reporting_period": "Undated simplification statement retrieved 2026-11-10; no retirement inventory or benefit baseline",
+      "retrieved_at": "2026-11-10T19:03:08.544320+00:00",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/who-we-are/group-overview/tech-and-transformation.html",
+      "research_domain": "banking",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-LEGACY.txt",
+      "text_sha256": "e387e2f8b37215e7046f3c914ef1d0ee930acd434617a8d94df167f14e61f83e",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn152830view1; turn266601view1",
+      "excerpts": [
+        {
+          "locator": "Technology, line615",
+          "quote": "We’re simplifying our systems, so one system can do the job of many"
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Bounded 2026-11-10 primary-page re-verification. Retain only located excerpt; not evidence of buying demand.",
+      "limitation": "Undated simplification statement retrieved 2026-11-10; no retirement inventory or benefit baseline. Short directly opened primary excerpt, no original byte archive or independent outcome verification.",
+      "assertion_origin": "Lloyds management",
+      "entity_ids": [
+        "BK-ENT-001"
+      ],
+      "hypothesis_ids": [
+        "RCO-LBG-001"
+      ],
+      "assessment_digest": "b6de7f7d40130a71c2169cbb7a0d3677cd7ea6c51774e5b0951eb26d703abe92"
+    },
+    {
+      "id": "DEPTH-LBG-WALLET",
+      "title": "Lloyds 2026 performance and wallet outlook",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/insights/how-is-lloyds-banking-group-performing-2026.html",
+      "publication_date": null,
+      "publication_date_evidence": "Publication date not established; 2026 in article title is not a publication date",
+      "reporting_period": "2026 management outlook; launch intention, not verified launch completion or Curve integration topology",
+      "retrieved_at": "2026-11-10T19:03:08.544490+00:00",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/insights/how-is-lloyds-banking-group-performing-2026.html",
+      "research_domain": "banking",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-WALLET.txt",
+      "text_sha256": "445b237cbdc111bb790301632d4eb388d960d052f7b9ac367e08e787f7f1f9a7",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn152830view2; turn266601view2",
+      "excerpts": [
+        {
+          "locator": "Accelerate 2030, line723",
+          "quote": "we’re launching Lloyds Smart Wallet – a new type of UK digital wallet providing enhanced payments options and flexibility"
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Bounded 2026-11-10 primary-page re-verification. Retain only located excerpt; not evidence of buying demand.",
+      "limitation": "2026 management outlook; launch intention, not verified launch completion or Curve integration topology. Short directly opened primary excerpt, no original byte archive or independent outcome verification.",
+      "assertion_origin": "Lloyds management",
+      "entity_ids": [
+        "BK-ENT-001"
+      ],
+      "hypothesis_ids": [
+        "RCO-LBG-009"
+      ],
+      "assessment_digest": "b6de7f7d40130a71c2169cbb7a0d3677cd7ea6c51774e5b0951eb26d703abe92"
+    },
+    {
+      "id": "DEPTH-LBG-CURVE",
+      "title": "Lloyds proposed Curve acquisition",
+      "publisher": "Lloyds Banking Group",
+      "url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/investor-news/2025/2025nov19-lbg-curve-acquisition.pdf",
+      "publication_date": "2025-11-19",
+      "publication_date_evidence": "Dated 19 November 2025 on official PDF page 1",
+      "reporting_period": "19 November 2025 forward-looking acquisition announcement; expected H1 2026 completion is not verified completion",
+      "retrieved_at": "2026-11-10T19:09:50.170911+00:00",
+      "retrieval_url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/investor-news/2025/2025nov19-lbg-curve-acquisition.pdf",
+      "research_domain": "banking",
+      "verification": "primary_retrieved",
+      "primary_content_sha256": null,
+      "text_path": "enterprise-knowledge/banking/research-model/source-snapshots/DEPTH-LBG-CURVE.txt",
+      "text_sha256": "77556258b687ba14f3fa2d78ff217a2bb81100fbb1dc16a33c244fc87d7a6cca",
+      "content_kind": "reviewed_web_excerpt",
+      "retrieval_method": "approved_web_research_tool",
+      "retrieval_reference": "turn226987view0",
+      "excerpts": [
+        {
+          "locator": "PDF page 1, line23",
+          "quote": "The acquisition is expected to complete in the first half of 2026, subject to regulatory approval."
+        }
+      ],
+      "retrieval_extent": "Directly opened page; short located excerpts only; no original byte archive",
+      "reviewed_by": "Codex source review; no independent human review",
+      "review_notes": "Bounded 2026-11-10 primary-page re-verification. Retain only located excerpt; not evidence of buying demand.",
+      "limitation": "19 November 2025 forward-looking acquisition announcement; expected H1 2026 completion is not verified completion. Short directly opened primary excerpt, no original byte archive or independent outcome verification.",
+      "assertion_origin": "Lloyds management",
+      "entity_ids": [
+        "BK-ENT-001"
+      ],
+      "hypothesis_ids": [
+        "RCO-LBG-009"
+      ],
+      "assessment_digest": "b6de7f7d40130a71c2169cbb7a0d3677cd7ea6c51774e5b0951eb26d703abe92"
+    }
+  ],
+  "unresolved": "All new sources are company-origin passages; no independent outcome corroboration, current supplier contract or customer buying intent. Retrieval freshness does not make the old publication current."
+}
