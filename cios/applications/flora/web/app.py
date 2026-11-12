@@ -215,6 +215,12 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(_flora_intelligence_page(self.headers, parse_qs(parsed.query)))
             elif parsed.path == "/opportunities":
                 self._html(_flora_opportunities_page(self.headers, parse_qs(parsed.query)))
+            elif parsed.path == "/research/programmes/uk-technology":
+                from cios.applications.flora.research_intelligence.foundation.views import render
+                try:
+                    self._html(render(parsed.query,self.headers))
+                except ValueError:
+                    self.send_error(404,'Research programme unavailable')
             elif parsed.path == "/research":
                 self._html(_flora_research_page(self.headers))
             elif parsed.path in {"/workspace/reference", "/flora/reference"}:

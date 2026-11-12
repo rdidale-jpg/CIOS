@@ -1,0 +1,414 @@
+{
+  "job_id": "RJ-2b0d2e54f3d15daa8c4a2c40",
+  "receipts": [
+    {
+      "collector_id": "foundation-researcher-v1",
+      "effective_date": null,
+      "excerpt_sha256": "73b6895f96adb1b5928104a6d976cc3ee613d533cd1fd1620b8ea862fbb8e799",
+      "execution_kind": "live_web_bridge",
+      "extent": "reviewed_web_excerpt",
+      "locator": "First four supplier headings in displayed catalogue order",
+      "primary_content_sha256": null,
+      "publication_date": null,
+      "request_id": "ACQ-4e86cbf5daf7be627cae4fb81c0895ab",
+      "retrieved_at": "2026-11-12T10:43:56.917033Z",
+      "role": "researcher",
+      "schema_version": 1,
+      "source_id": "TECH-CLOUD",
+      "tool_reference": "turn830034view1",
+      "url": "https://www.gca.gov.uk/agreements/RM6292/suppliers",
+      "visibility": "public"
+    },
+    {
+      "collector_id": "foundation-verifier-v1",
+      "effective_date": null,
+      "excerpt_sha256": "73b6895f96adb1b5928104a6d976cc3ee613d533cd1fd1620b8ea862fbb8e799",
+      "execution_kind": "live_web_bridge",
+      "extent": "reviewed_web_excerpt",
+      "locator": "First four supplier headings in displayed catalogue order",
+      "primary_content_sha256": null,
+      "publication_date": null,
+      "request_id": "ACQ-ce4bf1372e9fabcedaf4bba8379c8f0d",
+      "retrieved_at": "2026-11-12T10:44:18.060052Z",
+      "role": "verifier",
+      "schema_version": 1,
+      "source_id": "TECH-CLOUD",
+      "tool_reference": "turn448024view1",
+      "url": "https://www.gca.gov.uk/agreements/RM6292/suppliers",
+      "visibility": "public"
+    },
+    {
+      "collector_id": "foundation-researcher-v1",
+      "effective_date": null,
+      "excerpt_sha256": "a29633077854af086bea86f326a6ed1acd69750ff78b5148a78ffeb5c5fc16d6",
+      "execution_kind": "live_web_bridge",
+      "extent": "reviewed_web_excerpt",
+      "locator": "First four supplier headings in displayed catalogue order",
+      "primary_content_sha256": null,
+      "publication_date": null,
+      "request_id": "ACQ-c92599ce8372f14f73ad63c116af7323",
+      "retrieved_at": "2026-11-12T10:43:56.919315Z",
+      "role": "researcher",
+      "schema_version": 1,
+      "source_id": "TECH-CYBER",
+      "tool_reference": "turn830034view2",
+      "url": "https://www.gca.gov.uk/agreements/RM3764.3/suppliers",
+      "visibility": "public"
+    },
+    {
+      "collector_id": "foundation-verifier-v1",
+      "effective_date": null,
+      "excerpt_sha256": "a29633077854af086bea86f326a6ed1acd69750ff78b5148a78ffeb5c5fc16d6",
+      "execution_kind": "live_web_bridge",
+      "extent": "reviewed_web_excerpt",
+      "locator": "First four supplier headings in displayed catalogue order",
+      "primary_content_sha256": null,
+      "publication_date": null,
+      "request_id": "ACQ-9fbe104854d360c2261c15a6bd78b9da",
+      "retrieved_at": "2026-11-12T10:44:18.061885Z",
+      "role": "verifier",
+      "schema_version": 1,
+      "source_id": "TECH-CYBER",
+      "tool_reference": "turn448024view2",
+      "url": "https://www.gca.gov.uk/agreements/RM3764.3/suppliers",
+      "visibility": "public"
+    },
+    {
+      "collector_id": "foundation-researcher-v1",
+      "effective_date": null,
+      "excerpt_sha256": "1544542826eb377be26c7fd341bc6402313412c2fd54a0c63094fd088d444720",
+      "execution_kind": "live_web_bridge",
+      "extent": "reviewed_web_excerpt",
+      "locator": "Supplier heading and selected catalogue labels",
+      "primary_content_sha256": null,
+      "publication_date": null,
+      "request_id": "ACQ-d4b1c3af1d3419f520b6e9e7fb002e4e",
+      "retrieved_at": "2026-11-12T10:43:56.923206Z",
+      "role": "researcher",
+      "schema_version": 1,
+      "source_id": "TECH-PROVIDER",
+      "tool_reference": "turn830034view4",
+      "url": "https://www.gca.gov.uk/suppliers/6512/advania-uk-ccs-limited",
+      "visibility": "public"
+    },
+    {
+      "collector_id": "foundation-verifier-v1",
+      "effective_date": null,
+      "excerpt_sha256": "1544542826eb377be26c7fd341bc6402313412c2fd54a0c63094fd088d444720",
+      "execution_kind": "live_web_bridge",
+      "extent": "reviewed_web_excerpt",
+      "locator": "Supplier heading and selected catalogue labels",
+      "primary_content_sha256": null,
+      "publication_date": null,
+      "request_id": "ACQ-a3cc3349ae5b9a1e4dc508600f643ee7",
+      "retrieved_at": "2026-11-12T10:44:18.065504Z",
+      "role": "verifier",
+      "schema_version": 1,
+      "source_id": "TECH-PROVIDER",
+      "tool_reference": "turn448024view4",
+      "url": "https://www.gca.gov.uk/suppliers/6512/advania-uk-ccs-limited",
+      "visibility": "public"
+    },
+    {
+      "collector_id": "foundation-researcher-v1",
+      "effective_date": null,
+      "excerpt_sha256": "b65a030d7cbcd8f13c0d1389025e9b11c6d4674e630a77b32cef9be65ec77549",
+      "execution_kind": "live_web_bridge",
+      "extent": "reviewed_web_excerpt",
+      "locator": "First four supplier headings in displayed catalogue order",
+      "primary_content_sha256": null,
+      "publication_date": null,
+      "request_id": "ACQ-ff006933503044c472a305217fc27b36",
+      "retrieved_at": "2026-11-12T10:43:56.921251Z",
+      "role": "researcher",
+      "schema_version": 1,
+      "source_id": "TECH-SERVICES",
+      "tool_reference": "turn830034view3",
+      "url": "https://www.gca.gov.uk/agreements/RM6190:1/lot-suppliers",
+      "visibility": "public"
+    },
+    {
+      "collector_id": "foundation-verifier-v1",
+      "effective_date": null,
+      "excerpt_sha256": "b65a030d7cbcd8f13c0d1389025e9b11c6d4674e630a77b32cef9be65ec77549",
+      "execution_kind": "live_web_bridge",
+      "extent": "reviewed_web_excerpt",
+      "locator": "First four supplier headings in displayed catalogue order",
+      "primary_content_sha256": null,
+      "publication_date": null,
+      "request_id": "ACQ-96ced903792d9c906dc365d36f2214fe",
+      "retrieved_at": "2026-11-12T10:44:18.063595Z",
+      "role": "verifier",
+      "schema_version": 1,
+      "source_id": "TECH-SERVICES",
+      "tool_reference": "turn448024view3",
+      "url": "https://www.gca.gov.uk/agreements/RM6190:1/lot-suppliers",
+      "visibility": "public"
+    },
+    {
+      "collector_id": "foundation-researcher-v1",
+      "effective_date": null,
+      "excerpt_sha256": "38688744a1e5ff3106e7d1d7c4644de9a28257f781333af1b584cc28529f9245",
+      "execution_kind": "live_web_bridge",
+      "extent": "reviewed_web_excerpt",
+      "locator": "First four supplier headings in displayed catalogue order",
+      "primary_content_sha256": null,
+      "publication_date": null,
+      "request_id": "ACQ-887e018832468a80bf4a87106753868d",
+      "retrieved_at": "2026-11-12T10:43:56.910995Z",
+      "role": "researcher",
+      "schema_version": 1,
+      "source_id": "TECH-SOFTWARE",
+      "tool_reference": "turn830034view0",
+      "url": "https://www.gca.gov.uk/agreements/RM6098:3/lot-suppliers",
+      "visibility": "public"
+    },
+    {
+      "collector_id": "foundation-verifier-v1",
+      "effective_date": null,
+      "excerpt_sha256": "38688744a1e5ff3106e7d1d7c4644de9a28257f781333af1b584cc28529f9245",
+      "execution_kind": "live_web_bridge",
+      "extent": "reviewed_web_excerpt",
+      "locator": "First four supplier headings in displayed catalogue order",
+      "primary_content_sha256": null,
+      "publication_date": null,
+      "request_id": "ACQ-306e305cc97b8220ba58d405bf74c1a6",
+      "retrieved_at": "2026-11-12T10:44:18.057262Z",
+      "role": "verifier",
+      "schema_version": 1,
+      "source_id": "TECH-SOFTWARE",
+      "tool_reference": "turn448024view0",
+      "url": "https://www.gca.gov.uk/agreements/RM6098:3/lot-suppliers",
+      "visibility": "public"
+    }
+  ],
+  "assurance": [
+    {
+      "source_id": "TECH-SOFTWARE",
+      "outcome": "publish_supported_factual_content",
+      "names_extracted": [
+        "ACADEMIA LIMITED",
+        "ADVANIA UK (CCS) LIMITED",
+        "Akhter Computers Limited (Team Akhter Consortium)"
+      ],
+      "checks": {
+        "verifier": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "separate request/tool reference, same exact located excerpt"
+        },
+        "entity_checker": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "catalogue name only; legal identity, HQ, jurisdictional applicability not inferred"
+        },
+        "challenger": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "same publisher family counted once; membership does not prove importance, contract or adoption"
+        },
+        "synthesis_reviewer": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "only literal publisher-reported entries; all semantic synthesis withheld"
+        },
+        "publication_reviewer": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "bounded licensed excerpt, no contacts, sensitive data or private context"
+        },
+        "release_controller": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "versioned candidate research release; canonical/Pipeline owners untouched"
+        }
+      },
+      "model_semantic_assessment": "not implemented; inferred claims withheld",
+      "source_family": "GCA-published-catalogue"
+    },
+    {
+      "source_id": "TECH-CLOUD",
+      "outcome": "publish_supported_factual_content",
+      "names_extracted": [
+        "ADVANIA UK LIMITED",
+        "AGILE SOLUTIONS (GB) LTD",
+        "AKER SYSTEMS LIMITED",
+        "AMAZON WEB SERVICES EMEA SARL"
+      ],
+      "checks": {
+        "verifier": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "separate request/tool reference, same exact located excerpt"
+        },
+        "entity_checker": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "catalogue name only; legal identity, HQ, jurisdictional applicability not inferred"
+        },
+        "challenger": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "same publisher family counted once; membership does not prove importance, contract or adoption"
+        },
+        "synthesis_reviewer": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "only literal publisher-reported entries; all semantic synthesis withheld"
+        },
+        "publication_reviewer": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "bounded licensed excerpt, no contacts, sensitive data or private context"
+        },
+        "release_controller": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "versioned candidate research release; canonical/Pipeline owners untouched"
+        }
+      },
+      "model_semantic_assessment": "not implemented; inferred claims withheld",
+      "source_family": "GCA-published-catalogue"
+    },
+    {
+      "source_id": "TECH-CYBER",
+      "outcome": "publish_supported_factual_content",
+      "names_extracted": [
+        "123 DIGITALLY LTD",
+        "2-sec Limited",
+        "2I LIMITED",
+        "2T SECURITY LTD"
+      ],
+      "checks": {
+        "verifier": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "separate request/tool reference, same exact located excerpt"
+        },
+        "entity_checker": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "catalogue name only; legal identity, HQ, jurisdictional applicability not inferred"
+        },
+        "challenger": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "same publisher family counted once; membership does not prove importance, contract or adoption"
+        },
+        "synthesis_reviewer": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "only literal publisher-reported entries; all semantic synthesis withheld"
+        },
+        "publication_reviewer": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "bounded licensed excerpt, no contacts, sensitive data or private context"
+        },
+        "release_controller": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "versioned candidate research release; canonical/Pipeline owners untouched"
+        }
+      },
+      "model_semantic_assessment": "not implemented; inferred claims withheld",
+      "source_family": "GCA-published-catalogue"
+    },
+    {
+      "source_id": "TECH-SERVICES",
+      "outcome": "publish_supported_factual_content",
+      "names_extracted": [
+        "3B DATA SECURITY LTD",
+        "4C STRATEGIES LIMITED",
+        "4THOUGHTDIGITAL LTD",
+        "ABTEC COMPUTER SOLUTIONS LTD"
+      ],
+      "checks": {
+        "verifier": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "separate request/tool reference, same exact located excerpt"
+        },
+        "entity_checker": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "catalogue name only; legal identity, HQ, jurisdictional applicability not inferred"
+        },
+        "challenger": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "same publisher family counted once; membership does not prove importance, contract or adoption"
+        },
+        "synthesis_reviewer": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "only literal publisher-reported entries; all semantic synthesis withheld"
+        },
+        "publication_reviewer": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "bounded licensed excerpt, no contacts, sensitive data or private context"
+        },
+        "release_controller": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "versioned candidate research release; canonical/Pipeline owners untouched"
+        }
+      },
+      "model_semantic_assessment": "not implemented; inferred claims withheld",
+      "source_family": "GCA-published-catalogue"
+    },
+    {
+      "source_id": "TECH-PROVIDER",
+      "outcome": "publish_supported_factual_content",
+      "names_extracted": [
+        "ADVANIA UK (CCS) LIMITED"
+      ],
+      "checks": {
+        "verifier": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "separate request/tool reference, same exact located excerpt"
+        },
+        "entity_checker": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "catalogue name only; legal identity, HQ, jurisdictional applicability not inferred"
+        },
+        "challenger": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "same publisher family counted once; membership does not prove importance, contract or adoption"
+        },
+        "synthesis_reviewer": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "only literal publisher-reported entries; all semantic synthesis withheld"
+        },
+        "publication_reviewer": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "bounded licensed excerpt, no contacts, sensitive data or private context"
+        },
+        "release_controller": {
+          "method": "deterministic",
+          "outcome": "pass",
+          "basis": "versioned candidate research release; canonical/Pipeline owners untouched"
+        }
+      },
+      "model_semantic_assessment": "not implemented; inferred claims withheld",
+      "source_family": "GCA-published-catalogue"
+    }
+  ],
+  "measurement": {
+    "id": "RJ-2b0d2e54f3d15daa8c4a2c40",
+    "state": "assessed",
+    "cancelled": false,
+    "logical_source_requests": 10,
+    "retained_excerpt_bytes": 980,
+    "model_cost": null,
+    "cost_status": "Not measured; no paid client configured",
+    "network_bytes": null,
+    "programme_digest": "1a459291a1b76c1d84fd61933e115f92a27d07f640bf66e6fbbc94d44f601647"
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "schema_id": "CIOS-Research-Mission-Manifest",
+  "schema_version": "1.1.0",
+  "mission_id": "UK-TECHNOLOGY-ESTABLISH-V1-2026-11-12",
+  "mission_name": "Establish comparable UK technology coverage and one literal-source provider baseline; preserve gaps rather than manufacture intelligence.",
+  "mission_type": "targeted-evidence-closure",
+  "mission_template_id": "targeted-evidence-closure",
+  "mission_template_version": "1.0.0",
+  "parent_twin_id": "UK-TECHNOLOGY",
+  "baseline_release": "unestablished-research-programme-v1",
+  "created_date": "2026-11-12",
+  "generated_date": "2026-11-12T00:00:00Z",
+  "owner": "Automated bounded research controller; product direction remains owner-managed",
+  "governance_state": "DRAFT",
+  "scope": {
+    "industry": "UK-TECHNOLOGY",
+    "geography": [
+      "GB",
+      "UK reference market; exact legal applicability not inferred"
+    ],
+    "included_domains": [
+      "Industry structure",
+      "Economics and comparable scale",
+      "Value chain",
+      "Capabilities",
+      "Ecosystem roles",
+      "Change forces",
+      "Proposed key-enterprise population / UK relevance",
+      "Enterprise business model",
+      "Divisions and legal-entity structure",
+      "Strategy",
+      "Published operating context",
+      "Evidence-linked opportunity hypotheses (unqualified; no commercialisation)"
+    ],
+    "excluded_domains": [
+      "Commercialisation",
+      "Canonical promotion",
+      "Pipeline qualification",
+      "Unattended monitoring"
+    ],
+    "material_subject_criteria": "Documented catalogue discovery, UK relevance and scale/importance gaps; no automatic key-company ranking",
+    "research_period": "Historical context through dated cut-off",
+    "evidence_cut_off": "2026-11-12",
+    "current_checkpoint": "1a459291a1b76c1d84fd61933e115f92a27d07f640bf66e6fbbc94d44f601647",
+    "complete_scope_rule": "Literal publisher entries only; unanswered baseline dimensions remain Unknown"
+  },
+  "profile_pins": {
+    "industry-overview": "1.0.0",
+    "enterprise-dossier": "1.0.0",
+    "market-participant": "1.0.0",
+    "programme": "1.0.0",
+    "opportunity": "1.0.0"
+  },
+  "relationship_profile_versions": {
+    "industry-membership": "1.0.0"
+  },
+  "evidence_uncertainty_profile_versions": {
+    "evidence": "EI-012",
+    "unknown": "IT-001",
+    "contradiction": "IT-001"
+  },
+  "release_manifest_version": "2.0.0",
+  "research_priorities": {
+    "priority_outcomes": [
+      "Comparable evidence-backed industry and provider baseline"
+    ],
+    "current_governed_gaps": [
+      "Industry structure",
+      "Economics and comparable scale",
+      "Value chain",
+      "Capabilities",
+      "Ecosystem roles",
+      "Change forces",
+      "Proposed key-enterprise population / UK relevance",
+      "Enterprise business model",
+      "Divisions and legal-entity structure",
+      "Strategy",
+      "Published operating context",
+      "Evidence-linked opportunity hypotheses (unqualified; no commercialisation)"
+    ],
+    "named_closure_targets": [
+      "Industry structure",
+      "Economics and comparable scale",
+      "Value chain",
+      "Capabilities",
+      "Ecosystem roles",
+      "Change forces",
+      "Proposed key-enterprise population / UK relevance",
+      "Enterprise business model",
+      "Divisions and legal-entity structure",
+      "Strategy",
+      "Published operating context",
+      "Evidence-linked opportunity hypotheses (unqualified; no commercialisation)"
+    ],
+    "monitoring_targets": [
+      "Not scheduled in v1"
+    ],
+    "current_object_counts": {
+      "candidate_claims": 0
+    },
+    "current_unknowns": [
+      "Industry structure",
+      "Economics and comparable scale",
+      "Value chain",
+      "Capabilities",
+      "Ecosystem roles",
+      "Change forces",
+      "Proposed key-enterprise population / UK relevance",
+      "Enterprise business model",
+      "Divisions and legal-entity structure",
+      "Strategy",
+      "Published operating context",
+      "Evidence-linked opportunity hypotheses (unqualified; no commercialisation)"
+    ],
+    "current_contradictions": [
+      "Not yet researched; no absence assertion"
+    ]
+  },
+  "evidence_policy": {
+    "preferred_source_types": [
+      "Government catalogues",
+      "Official registers",
+      "Enterprise publications",
+      "Regulators",
+      "Government statistics"
+    ],
+    "primary_source_expectation": "Located permitted excerpts, separate retrieval receipts; original bytes not claimed",
+    "evidence_exhaustion_policy": "Bounded failed acquisition creates a gap, not routine owner factual review",
+    "closure_classifications": [
+      "CLOSED",
+      "PARTIAL",
+      "EVIDENCE_EXHAUSTED",
+      "OPEN"
+    ],
+    "freshness_rules": "Publication/effectivity/retrieval distinct; unknown publication date disclosed",
+    "review_period": "90 days"
+  },
+  "estimation_policy": {
+    "permitted_estimate_types": [],
+    "retain_underlying_unknown": true
+  },
+  "outputs": {
+    "required_object_classes": [
+      "governed-records"
+    ],
+    "required_registers": [
+      "contradiction-register",
+      "evidence-register",
+      "governed-records",
+      "unknown-register",
+      "validation-report"
+    ],
+    "required_reports": [
+      "change-log",
+      "executive-checkpoint"
+    ],
+    "required_package_name": "UK-TECHNOLOGY-ESTABLISH-V1-2026-11-12-candidate",
+    "release_manifest_requirement": true,
+    "checksums": true,
+    "change_log": true,
+    "executive_checkpoint": true
+  },
+  "outcome_states": [
+    "COMPLETE",
+    "CONTINUE",
+    "EVIDENCE_EXHAUSTED"
+  ],
+  "pack_version": "2.8.0"
+}

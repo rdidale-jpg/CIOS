@@ -1,0 +1,221 @@
+{
+  "id": "UK-TECHNOLOGY-ESTABLISH-V1",
+  "objective": "Establish comparable UK technology coverage and one literal-source provider baseline; preserve gaps rather than manufacture intelligence.",
+  "mode": "establish",
+  "as_of": "2026-11-12",
+  "country": "GB",
+  "jurisdictions": [
+    "UK reference market; exact legal applicability not inferred"
+  ],
+  "industry_id": "UK-TECHNOLOGY",
+  "audience": "shared_public",
+  "taxonomy": [
+    {
+      "id": "software",
+      "label": "Software & applications",
+      "boundary": "Products/platforms are not legal enterprises; catalogue supplier may be a reseller."
+    },
+    {
+      "id": "infrastructure",
+      "label": "Cloud, infrastructure & connectivity",
+      "boundary": "Hosting/provider role is distinct from software ownership or named-customer deployment."
+    },
+    {
+      "id": "data-ai",
+      "label": "Data & AI",
+      "boundary": "A cross-cutting capability tag; AI catalogue membership is not an implementation."
+    },
+    {
+      "id": "cyber",
+      "label": "Cybersecurity & resilience",
+      "boundary": "Service/capability taxonomy, not evidence of customer vulnerability."
+    },
+    {
+      "id": "services",
+      "label": "Consulting, integration, outsourcing & managed services",
+      "boundary": "Primary operating-model segment; managed services can cross technology categories."
+    },
+    {
+      "id": "channels",
+      "label": "Channels, distribution & partnerships",
+      "boundary": "Ecosystem role tag; alliance/accreditation is not a contract or implementation."
+    },
+    {
+      "id": "emerging",
+      "label": "Emerging technology",
+      "boundary": "Cross-cutting research tag; unresearched coverage remains a gap."
+    }
+  ],
+  "baseline_requirements": [
+    "Industry structure",
+    "Economics and comparable scale",
+    "Value chain",
+    "Capabilities",
+    "Ecosystem roles",
+    "Change forces",
+    "Proposed key-enterprise population / UK relevance",
+    "Enterprise business model",
+    "Divisions and legal-entity structure",
+    "Strategy",
+    "Published operating context",
+    "Evidence-linked opportunity hypotheses (unqualified; no commercialisation)"
+  ],
+  "dependencies": [
+    "CIOS Researcher mission contracts v1.1.0",
+    "SourceSegment / CandidateClaim / SemanticTwin",
+    "Existing canonical promotion and Pipeline qualification owners"
+  ],
+  "assurance_gates": [
+    "independent-acquisition",
+    "schema-date-identity-locator",
+    "operation-rights",
+    "contradiction-source-family",
+    "sensitive-publication",
+    "release-controller"
+  ],
+  "roles": {
+    "researcher": "foundation-researcher-v1",
+    "verifier": "foundation-verifier-v1",
+    "entity_checker": "foundation-entity_checker-v1",
+    "challenger": "foundation-challenger-v1",
+    "synthesis_reviewer": "foundation-synthesis_reviewer-v1",
+    "publication_reviewer": "foundation-publication_reviewer-v1",
+    "release_controller": "foundation-release_controller-v1"
+  },
+  "caps": {
+    "requests": 12,
+    "bytes": 16000,
+    "attempts_per_source": 2,
+    "monetary_cost": 0
+  },
+  "sources": [
+    {
+      "source_id": "TECH-SOFTWARE",
+      "url": "https://www.gca.gov.uk/agreements/RM6098:3/lot-suppliers",
+      "family_id": "GCA-published-catalogue",
+      "licence_url": "https://www.gca.gov.uk/terms-and-conditions",
+      "licence_locator": "Using our content, paragraphs corresponding to rendered lines 102–116; Crown-owned catalogue fields only, not contacts/logos/third-party documents",
+      "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: Government Commercial Agency. No endorsement.",
+      "decisions": {
+        "acquisition": "allowed",
+        "deterministic_extraction": "allowed",
+        "model_processing": "unknown",
+        "retention": "allowed",
+        "quotation": "allowed",
+        "indexing": "allowed",
+        "redistribution": "allowed"
+      },
+      "allowed_extent": "short_crown_factual_excerpt",
+      "max_quote_words": 25,
+      "exclusions": [
+        "Personal contact details, logos, DUNS/third-party datasets and supplier-authored attachments",
+        "No model processing until separately assessed; deterministic extraction only",
+        "Full original source bytes not retained; short located web excerpts only"
+      ]
+    },
+    {
+      "source_id": "TECH-CLOUD",
+      "url": "https://www.gca.gov.uk/agreements/RM6292/suppliers",
+      "family_id": "GCA-published-catalogue",
+      "licence_url": "https://www.gca.gov.uk/terms-and-conditions",
+      "licence_locator": "Using our content, paragraphs corresponding to rendered lines 102–116; Crown-owned catalogue fields only, not contacts/logos/third-party documents",
+      "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: Government Commercial Agency. No endorsement.",
+      "decisions": {
+        "acquisition": "allowed",
+        "deterministic_extraction": "allowed",
+        "model_processing": "unknown",
+        "retention": "allowed",
+        "quotation": "allowed",
+        "indexing": "allowed",
+        "redistribution": "allowed"
+      },
+      "allowed_extent": "short_crown_factual_excerpt",
+      "max_quote_words": 25,
+      "exclusions": [
+        "Personal contact details, logos, DUNS/third-party datasets and supplier-authored attachments",
+        "No model processing until separately assessed; deterministic extraction only",
+        "Full original source bytes not retained; short located web excerpts only"
+      ]
+    },
+    {
+      "source_id": "TECH-CYBER",
+      "url": "https://www.gca.gov.uk/agreements/RM3764.3/suppliers",
+      "family_id": "GCA-published-catalogue",
+      "licence_url": "https://www.gca.gov.uk/terms-and-conditions",
+      "licence_locator": "Using our content, paragraphs corresponding to rendered lines 102–116; Crown-owned catalogue fields only, not contacts/logos/third-party documents",
+      "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: Government Commercial Agency. No endorsement.",
+      "decisions": {
+        "acquisition": "allowed",
+        "deterministic_extraction": "allowed",
+        "model_processing": "unknown",
+        "retention": "allowed",
+        "quotation": "allowed",
+        "indexing": "allowed",
+        "redistribution": "allowed"
+      },
+      "allowed_extent": "short_crown_factual_excerpt",
+      "max_quote_words": 25,
+      "exclusions": [
+        "Personal contact details, logos, DUNS/third-party datasets and supplier-authored attachments",
+        "No model processing until separately assessed; deterministic extraction only",
+        "Full original source bytes not retained; short located web excerpts only"
+      ]
+    },
+    {
+      "source_id": "TECH-SERVICES",
+      "url": "https://www.gca.gov.uk/agreements/RM6190:1/lot-suppliers",
+      "family_id": "GCA-published-catalogue",
+      "licence_url": "https://www.gca.gov.uk/terms-and-conditions",
+      "licence_locator": "Using our content, paragraphs corresponding to rendered lines 102–116; Crown-owned catalogue fields only, not contacts/logos/third-party documents",
+      "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: Government Commercial Agency. No endorsement.",
+      "decisions": {
+        "acquisition": "allowed",
+        "deterministic_extraction": "allowed",
+        "model_processing": "unknown",
+        "retention": "allowed",
+        "quotation": "allowed",
+        "indexing": "allowed",
+        "redistribution": "allowed"
+      },
+      "allowed_extent": "short_crown_factual_excerpt",
+      "max_quote_words": 25,
+      "exclusions": [
+        "Personal contact details, logos, DUNS/third-party datasets and supplier-authored attachments",
+        "No model processing until separately assessed; deterministic extraction only",
+        "Full original source bytes not retained; short located web excerpts only"
+      ]
+    },
+    {
+      "source_id": "TECH-PROVIDER",
+      "url": "https://www.gca.gov.uk/suppliers/6512/advania-uk-ccs-limited",
+      "family_id": "GCA-published-catalogue",
+      "licence_url": "https://www.gca.gov.uk/terms-and-conditions",
+      "licence_locator": "Using our content, paragraphs corresponding to rendered lines 102–116; Crown-owned catalogue fields only, not contacts/logos/third-party documents",
+      "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: Government Commercial Agency. No endorsement.",
+      "decisions": {
+        "acquisition": "allowed",
+        "deterministic_extraction": "allowed",
+        "model_processing": "unknown",
+        "retention": "allowed",
+        "quotation": "allowed",
+        "indexing": "allowed",
+        "redistribution": "allowed"
+      },
+      "allowed_extent": "short_crown_factual_excerpt",
+      "max_quote_words": 25,
+      "exclusions": [
+        "Personal contact details, logos, DUNS/third-party datasets and supplier-authored attachments",
+        "No model processing until separately assessed; deterministic extraction only",
+        "Full original source bytes not retained; short located web excerpts only"
+      ]
+    }
+  ],
+  "publication_limitations": [
+    "Bounded first-page catalogue discovery, not exhaustive coverage or a market ranking.",
+    "Only literal publisher-reported catalogue facts are accepted for research publication, not canonical Enterprise Model state.",
+    "UK catalogue relevance is not proof of headquarters, significant operations, scale, customer adoption or buying demand.",
+    "All sources belong to one publisher family; independent acquisition is not independent source corroboration.",
+    "No model semantic verification performed. Unresolved interpretations/scenarios and programme coverage requirements are withheld or gaps.",
+    "Private workspaces, contacts and production stores are excluded; no automatic Pipeline creation/qualification."
+  ]
+}

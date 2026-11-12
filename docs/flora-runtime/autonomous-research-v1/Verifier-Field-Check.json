@@ -1,0 +1,36 @@
+{
+  "method": "Every retained field checked against the separate approved verifier-tool response, grouped by source URL; not model semantic assurance",
+  "source_response_retained": false,
+  "checks": [
+    {
+      "source_id": "TECH-PROVIDER",
+      "tool_reference": "turn448024view4",
+      "permitted_fields_matched": 5,
+      "exact_selected_fields_supported": true
+    },
+    {
+      "source_id": "TECH-SERVICES",
+      "tool_reference": "turn448024view3",
+      "permitted_fields_matched": 4,
+      "exact_selected_fields_supported": true
+    },
+    {
+      "source_id": "TECH-CYBER",
+      "tool_reference": "turn448024view2",
+      "permitted_fields_matched": 4,
+      "exact_selected_fields_supported": true
+    },
+    {
+      "source_id": "TECH-CLOUD",
+      "tool_reference": "turn448024view1",
+      "permitted_fields_matched": 4,
+      "exact_selected_fields_supported": true
+    },
+    {
+      "source_id": "TECH-SOFTWARE",
+      "tool_reference": "turn448024view0",
+      "permitted_fields_matched": 4,
+      "exact_selected_fields_supported": true
+    }
+  ]
+}
