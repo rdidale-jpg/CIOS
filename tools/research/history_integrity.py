@@ -34,6 +34,14 @@ def approved_history(root):
         for path in additions:
             assert path not in expected, 'Existing identity cannot become an addition'
             expected[path]=_git(root,'show',ref+':'+path)
+    # Fixed, code-reviewed addition hashes; every previous source byte remains pinned.
+    from cios.applications.flora.research_intelligence.foundation.snapshot import PINS
+    import hashlib
+    for path,checksum in PINS.items():
+        assert path not in expected, 'Research identity reuse denied'
+        content=(Path(root)/path).read_bytes()
+        assert hashlib.sha256(content).hexdigest()==checksum, 'Unreviewed foundation source change: '+path
+        expected[path]=content
     return expected
 
 
@@ -51,6 +59,7 @@ def verify_history(root):
     assert not any(p.is_symlink() for p in files), 'Research symlink is not a reviewed source'
     actual={str(p.relative_to(root)):p.read_bytes() for p in files if p.is_file()}
     compare_history(expected,actual)
-    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS),
+    from cios.applications.flora.research_intelligence.foundation.snapshot import PINS
+    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(PINS),
             'depth_additions':len(DEPTH_ADDITIONS),'macro_additions':len(MACRO_ADDITIONS),
-            'total':len(expected),'old_review_records_retained':True}
+            'foundation_additions':len(PINS),'total':len(expected),'old_review_records_retained':True}

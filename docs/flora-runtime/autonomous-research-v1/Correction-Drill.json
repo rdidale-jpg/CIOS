@@ -1,0 +1,33 @@
+{
+  "execution_kind": "synthetic_fixture_correction_drill",
+  "real_catalogue_correction": false,
+  "canonical_or_pipeline_writes": false,
+  "before": {
+    "version": 1,
+    "claim_count": 1,
+    "release_digest": "4093b5f041d9f7493745a360999c3217bd175c221284bf52f8c783305ad72d2f"
+  },
+  "after": {
+    "version": 2,
+    "claim_count": 0,
+    "release_digest": "dca4f80aabfcd3fa50f5d4f112bb13340e47274475e33c80fe39359681cf07b9"
+  },
+  "invalidated": [
+    "HYP-fixture",
+    "IDX-RC-c598a9f09221551a9ce0d13b",
+    "RC-c598a9f09221551a9ce0d13b",
+    "REL-fixture",
+    "VIS-RC-c598a9f09221551a9ce0d13b",
+    "VIS-fixture"
+  ],
+  "current_object_states": {
+    "HYP-fixture": "invalidated",
+    "IDX-RC-c598a9f09221551a9ce0d13b": "invalidated",
+    "RC-c598a9f09221551a9ce0d13b": "withdrawn",
+    "REL-fixture": "invalidated",
+    "VIS-RC-c598a9f09221551a9ce0d13b": "invalidated",
+    "VIS-fixture": "invalidated"
+  },
+  "prior_release_payload_digest_unchanged": true,
+  "rebuild_active_claims": 0
+}

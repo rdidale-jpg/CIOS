@@ -48,6 +48,8 @@ def catalogue(enterprises=False,headers=None):
     for domain,(name,slug,root) in DOMAINS.items():
         d=load_assessment(domain)
         cards.append(f"<article class='ux-card'><span class='ux-status'>Public research / qualification outstanding</span><h2>{e(d['enterprise_name'] if enterprises else name)}</h2><p>{e(name)} · industry forces, capabilities and evidence-led opportunities.</p><a href='{'/enterprises/'+slug if enterprises else '/industries/'+domain}'>Explore {e(d['enterprise_name'] if enterprises else name.replace('UK ','').replace('Commercial ',''))} →</a><details><summary>Supporting research</summary><a href='{root}'>Earlier research entry</a></details></article>")
+    if not enterprises:
+        cards.append("<article class='ux-card'><span class='ux-status uncertain'>Research foundation / partial coverage</span><h2>UK Technology</h2><p>Explore a bounded coverage programme, independently reacquired catalogue evidence and an explicit provider-baseline gap register.</p><a href='/research/programmes/uk-technology'>Explore technology research →</a></article>")
     if enterprises:
         for slug,b in BANKS.items():
             if slug=='lloyds':continue

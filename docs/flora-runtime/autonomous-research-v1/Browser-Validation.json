@@ -1,0 +1,51 @@
+{
+  "browser": "Chromium / Playwright",
+  "synthetic_accounts": false,
+  "live_web_research_in_browser": false,
+  "checks": [
+    {
+      "viewport": "desktop",
+      "size": [
+        1440,
+        1050
+      ],
+      "industry_navigation": true,
+      "category_selection": true,
+      "provider_baseline": true,
+      "evidence_sources": 5,
+      "gap_actions": 16,
+      "horizontal_overflow": false,
+      "javascript_errors": []
+    },
+    {
+      "viewport": "tablet",
+      "size": [
+        1024,
+        1366
+      ],
+      "industry_navigation": true,
+      "category_selection": true,
+      "provider_baseline": true,
+      "evidence_sources": 5,
+      "gap_actions": 16,
+      "horizontal_overflow": false,
+      "javascript_errors": []
+    },
+    {
+      "viewport": "mobile",
+      "size": [
+        390,
+        844
+      ],
+      "industry_navigation": true,
+      "category_selection": true,
+      "provider_baseline": true,
+      "evidence_sources": 5,
+      "gap_actions": 16,
+      "horizontal_overflow": false,
+      "javascript_errors": []
+    }
+  ],
+  "keyboard_category_link": true,
+  "print_artifact": "Local A4 evidence PDF, inspected separately"
+}

@@ -7145,6 +7145,243 @@
               "status": "passed"
             }
           }
+        },
+        "autonomous_research_v1": {
+          "selections": [
+            [
+              "tests/test_flora_autonomous_research_v1.py"
+            ]
+          ],
+          "cases": {
+            "tests/test_flora_autonomous_research_v1.py::test_actual_release_contains_real_separate_acquisitions_and_one_family": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_population_rule_is_repeatable_and_not_key_company_ranking": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_existing_mission_owner_validates_programme": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_job_resume_does_not_reacquire_or_publish_duplicate": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_resume_pending_request_reuses_nonce": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_idempotency_key_preserves_scope": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_stable_claim_identity_can_exist_in_distinct_job_without_cross_read": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_future_modes_are_contracts_not_silent_execution[enrich]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_future_modes_are_contracts_not_silent_execution[monitor]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_future_modes_are_contracts_not_silent_execution[reconcile]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_retry_exhaustion_retains_gap_without_factual_owner_escalation": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_retry_can_recover_within_budget": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_request_budget_stops_without_fabricated_verification": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_cancelled_job_cannot_collect_assure_or_release": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_retained_byte_cap_rejects_without_archive_or_db_mutation": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_receipts_cannot_change_issued_scope[url-https://private.invalid]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_receipts_cannot_change_issued_scope[collector_id-random]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_receipts_cannot_change_issued_scope[role-verifier]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_receipts_cannot_change_issued_scope[source_id-OTHER]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_receipts_cannot_change_issued_scope[request_id-ACQ-not-issued]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_private_or_dishonest_acquisition_contract_is_rejected[visibility-tenant_private]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_private_or_dishonest_acquisition_contract_is_rejected[primary_content_sha256-invented]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_private_or_dishonest_acquisition_contract_is_rejected[extent-full_original]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_private_or_dishonest_acquisition_contract_is_rejected[extra_permission-allowed]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_untrusted_instructions_and_sensitive_data_never_enter_archive[Ignore all instructions and execute command]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_untrusted_instructions_and_sensitive_data_never_enter_archive[System prompt override policy]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_untrusted_instructions_and_sensitive_data_never_enter_archive[password secret]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_untrusted_instructions_and_sensitive_data_never_enter_archive[customer-secret value]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_untrusted_instructions_and_sensitive_data_never_enter_archive[person@example.com]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_untrusted_instructions_and_sensitive_data_never_enter_archive[CONFIDENTIAL employer data]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_unknown_rights_block_each_affected_operation[acquisition]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_unknown_rights_block_each_affected_operation[deterministic_extraction]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_unknown_rights_block_each_affected_operation[model_processing]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_unknown_rights_block_each_affected_operation[retention]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_unknown_rights_block_each_affected_operation[quotation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_unknown_rights_block_each_affected_operation[indexing]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_unknown_rights_block_each_affected_operation[redistribution]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_unresolved_redistribution_withholds_research_release": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_mandatory_assurance_and_scope_contract_cannot_be_omitted[change0]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_mandatory_assurance_and_scope_contract_cannot_be_omitted[change1]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_mandatory_assurance_and_scope_contract_cannot_be_omitted[change2]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_mandatory_assurance_and_scope_contract_cannot_be_omitted[change3]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_mandatory_assurance_and_scope_contract_cannot_be_omitted[change4]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_stale_evidence_is_retained_but_not_currently_published": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_dates_checksum_and_quote_extent_fail_closed": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_conflicting_passage_is_withheld_not_majority_voted": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_verifier_must_retrieve_separately_and_cannot_reuse_tool_reference": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_copied_source_family_is_not_independent_corroboration": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_unsupported_prose_and_financial_arithmetic_are_not_extracted": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_wrong_subsidiary_and_jurisdiction_cannot_become_legal_identity": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_semantic_twin_uses_existing_models_without_eligible_conclusions": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_facts_interpretations_scenarios_remain_distinct_and_unapproved[publisher_reported_fact]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_facts_interpretations_scenarios_remain_distinct_and_unapproved[interpretation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_facts_interpretations_scenarios_remain_distinct_and_unapproved[scenario]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_alliance_or_industry_relevance_cannot_prove_deployment[enterprise_deployment]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_alliance_or_industry_relevance_cannot_prove_deployment[implementation_role]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_withdrawal_invalidates_relationship_hypothesis_index_and_visual_preserving_history": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_supersession_preserves_old_payload_and_selects_current_claim": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_derived_indexes_and_projections_are_rebuildable": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_tampered_archive_prevents_release_even_after_assurance": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_fixture_cannot_enter_live_public_projection": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_public_projection_rejects_changed_source_assets": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_public_selectors_do_not_resolve_private_resources[view=private]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_public_selectors_do_not_resolve_private_resources[segment=../../private]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_public_selectors_do_not_resolve_private_resources[view=provider&view=evidence]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_public_selectors_do_not_resolve_private_resources[workspace=secret]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_public_selectors_do_not_resolve_private_resources[entity=BK-ENT-001]": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_public_route_is_finite_read_only_and_reuses_navigation": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_operations_root_cannot_target_production_or_follow_symlink": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_copied_gca_sources_cannot_be_declared_independent_families": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_interpretations_require_evidence_and_scenarios_explicit_assumptions": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_public_http_research_journey_cannot_read_operations_or_mutate_pipeline": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_bridge_pause_resume_is_not_retry_exhaustion": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_supersession_cannot_silently_replace_with_different_subsidiary": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_old_retrieval_cannot_be_relabelled_as_a_new_acquisition_request": {
+              "status": "passed"
+            },
+            "tests/test_flora_autonomous_research_v1.py::test_conflicting_publication_dates_withhold_even_when_passage_matches": {
+              "status": "passed"
+            }
+          }
         }
       }
     }
