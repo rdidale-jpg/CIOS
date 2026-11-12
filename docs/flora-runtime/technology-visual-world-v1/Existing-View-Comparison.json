@@ -1,0 +1,106 @@
+{
+  "base": "20637fefcbdb799e405b06d3eb5ca7abffc435d0",
+  "candidate_source_sha256": {
+    "cios/applications/flora/research_intelligence/technology_scene.py": "06a32c99e8f72065f8144cf37b065479dfdadc17be82d7a0cc16c2d3e56a3d50",
+    "cios/applications/flora/research_intelligence/technology_views.py": "16cf2221eef49688f7bfd3710194de81aeb075a720202db24b00056a7a32acea",
+    "cios/applications/flora/public_routes.py": "41c1a87a58da3adf0da003a7670ceae711cb892cb34c5e1898c8d524870e6101"
+  },
+  "rows": [
+    {
+      "path": "/industries/banking",
+      "width": 1440,
+      "height": 1100,
+      "base_sha256": "c1cfdf88b6e303789972d3df7550b7fbe7613459a59def4e9ff0cc2327b58805",
+      "candidate_sha256": "c1cfdf88b6e303789972d3df7550b7fbe7613459a59def4e9ff0cc2327b58805",
+      "identical": true
+    },
+    {
+      "path": "/industries/aviation",
+      "width": 1440,
+      "height": 1100,
+      "base_sha256": "7d3d305bd9c370dee55de1cab980dcdb686852ecd0577fac7e198e7a06993418",
+      "candidate_sha256": "7d3d305bd9c370dee55de1cab980dcdb686852ecd0577fac7e198e7a06993418",
+      "identical": true
+    },
+    {
+      "path": "/enterprises/lloyds",
+      "width": 1440,
+      "height": 1100,
+      "base_sha256": "b1f99a30d1373a6e96b5b4444fd68ac69ce11d59091d0a25a7a749faf2eabe52",
+      "candidate_sha256": "b1f99a30d1373a6e96b5b4444fd68ac69ce11d59091d0a25a7a749faf2eabe52",
+      "identical": true
+    },
+    {
+      "path": "/enterprises/easyjet",
+      "width": 1440,
+      "height": 1100,
+      "base_sha256": "747028b87b611b935b035baac2d144bacff9a74c963735b34bf791007702011e",
+      "candidate_sha256": "747028b87b611b935b035baac2d144bacff9a74c963735b34bf791007702011e",
+      "identical": true
+    },
+    {
+      "path": "/industries/banking",
+      "width": 1024,
+      "height": 900,
+      "base_sha256": "f5f4e18b71f8acedb1e66992398eabdda7ccde02005b198e9f81166e828e2245",
+      "candidate_sha256": "f5f4e18b71f8acedb1e66992398eabdda7ccde02005b198e9f81166e828e2245",
+      "identical": true
+    },
+    {
+      "path": "/industries/aviation",
+      "width": 1024,
+      "height": 900,
+      "base_sha256": "1a1bd7d1da282a8f4131d4501c185946b5cc486b2709cbff9a4c17a9cf8f1553",
+      "candidate_sha256": "1a1bd7d1da282a8f4131d4501c185946b5cc486b2709cbff9a4c17a9cf8f1553",
+      "identical": true
+    },
+    {
+      "path": "/enterprises/lloyds",
+      "width": 1024,
+      "height": 900,
+      "base_sha256": "daf54f631d0e3edaf4ef091085768ec2355d9edc8e46c6685d5c55e22aedec86",
+      "candidate_sha256": "daf54f631d0e3edaf4ef091085768ec2355d9edc8e46c6685d5c55e22aedec86",
+      "identical": true
+    },
+    {
+      "path": "/enterprises/easyjet",
+      "width": 1024,
+      "height": 900,
+      "base_sha256": "ceb787d4487dbaf32de33b87dcdf7b006008877ba061b869321f7a1b50fe8765",
+      "candidate_sha256": "ceb787d4487dbaf32de33b87dcdf7b006008877ba061b869321f7a1b50fe8765",
+      "identical": true
+    },
+    {
+      "path": "/industries/banking",
+      "width": 390,
+      "height": 844,
+      "base_sha256": "d50c3a30d960adae93f8ff463302395e0521e4775d6a19a8fed744685087d350",
+      "candidate_sha256": "d50c3a30d960adae93f8ff463302395e0521e4775d6a19a8fed744685087d350",
+      "identical": true
+    },
+    {
+      "path": "/industries/aviation",
+      "width": 390,
+      "height": 844,
+      "base_sha256": "6415cce3883f4e35b543740c2ae7d47a466ec8a9e8baeffdd3d12b15ff3c223a",
+      "candidate_sha256": "6415cce3883f4e35b543740c2ae7d47a466ec8a9e8baeffdd3d12b15ff3c223a",
+      "identical": true
+    },
+    {
+      "path": "/enterprises/lloyds",
+      "width": 390,
+      "height": 844,
+      "base_sha256": "9c380d2b488763acbd36a1280221f4f78a780dfb688562e8c5b3701e6d78c8bf",
+      "candidate_sha256": "9c380d2b488763acbd36a1280221f4f78a780dfb688562e8c5b3701e6d78c8bf",
+      "identical": true
+    },
+    {
+      "path": "/enterprises/easyjet",
+      "width": 390,
+      "height": 844,
+      "base_sha256": "95ccd5fb3605e66b2fc02f442cac4691ddb853c7fd5068a4f04d4abba0e5f7f4",
+      "candidate_sha256": "95ccd5fb3605e66b2fc02f442cac4691ddb853c7fd5068a4f04d4abba0e5f7f4",
+      "identical": true
+    }
+  ]
+}

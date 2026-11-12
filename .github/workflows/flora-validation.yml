@@ -2,7 +2,7 @@ name: FLORA validation
 
 on:
   pull_request:
-    branches: [main, codex/flora-security-repair-01a, codex/flora-security-repair-01b, codex/flora-living-industry-maps-v2, codex/flora-commercial-visual-intelligence-v3, codex/flora-global-macro-intelligence-v1, codex/flora-intelligence-depth-v1]
+    branches: [main, codex/flora-security-repair-01a, codex/flora-security-repair-01b, codex/flora-living-industry-maps-v2, codex/flora-commercial-visual-intelligence-v3, codex/flora-global-macro-intelligence-v1, codex/flora-intelligence-depth-v1, codex/flora-uk-technology-visual-foundation-v1]
     types: [opened, synchronize, reopened, ready_for_review, edited]
     paths:
       - 'cios/applications/flora/**'
@@ -17,6 +17,7 @@ on:
       - 'pyproject.toml'
       - 'docs/flora-runtime/security-repair-01*/**'
       - 'docs/flora-runtime/technology-visual-foundation/**'
+      - 'docs/flora-runtime/technology-visual-world-v1/**'
       - 'docs/flora-runtime/experience-repair-02/run_regressions.py'
       - '.github/workflows/flora-validation.yml'
   push:
@@ -34,6 +35,7 @@ on:
       - 'pyproject.toml'
       - 'docs/flora-runtime/security-repair-01*/**'
       - 'docs/flora-runtime/technology-visual-foundation/**'
+      - 'docs/flora-runtime/technology-visual-world-v1/**'
       - 'docs/flora-runtime/experience-repair-02/run_regressions.py'
       - '.github/workflows/flora-validation.yml'
   workflow_dispatch:

@@ -7271,6 +7271,87 @@
               "status": "passed"
             }
           }
+        },
+        "technology_visual_world_v1": {
+          "selections": [
+            [
+              "tests/test_flora_technology_visual_world.py"
+            ]
+          ],
+          "cases": {
+            "tests/test_flora_technology_visual_world.py::test_primary_lenses_are_navigable_svg_scenes_with_no_card_grid[how]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_primary_lenses_are_navigable_svg_scenes_with_no_card_grid[uses]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_primary_lenses_are_navigable_svg_scenes_with_no_card_grid[work]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_every_district_is_a_native_link_with_an_accessible_name[False]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_every_district_is_a_native_link_with_an_accessible_name[True]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[applications]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[cloud]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[ai]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[cyber]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[services]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[channels]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[infrastructure]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_role_selection_keeps_the_scene_and_uses_existing_provider_navigation[frontier]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_all_six_hypotheses_are_seams_and_retain_evidence_alternatives_and_questions": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_all_programme_ribbons_retain_exact_record_scope_and_evidence": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_provider_drill_retains_scene_and_partial_identity_instead_of_creating_an_enterprise": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_scene_rejects_unknown_selection_instead_of_falling_back[selection0]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_scene_rejects_unknown_selection_instead_of_falling_back[selection1]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_scene_rejects_unknown_selection_instead_of_falling_back[selection2]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_scene_rejects_unknown_selection_instead_of_falling_back[selection3]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_scene_rejects_unknown_selection_instead_of_falling_back[selection4]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_new_theme_selector_remains_finite_and_cannot_request_private_state": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_research_data_and_all_acceptance_navigation_owners_are_byte_preserved": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_visual_world.py::test_svg_escapes_research_text_without_interpreting_it_as_markup": {
+              "status": "passed"
+            }
+          }
         }
       }
     }

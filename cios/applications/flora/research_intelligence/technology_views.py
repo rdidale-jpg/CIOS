@@ -76,48 +76,16 @@ def source_detail(r):
 
 def header(lens):
     nav=''.join(link(url(lens=k),f'{n:02} &nbsp; {label}',**({'aria_current':'page'} if lens==k else {})) for n,(k,label) in enumerate((('how','How it works'),('uses','Who uses what'),('work','Where work may emerge')),1))
-    return f"<nav class='crumb' aria-label='Breadcrumb'><a href='/industries'>Industries</a> / UK Technology</nav><header class='tech-hero' id='content'><div><p class='eyebrow'>UK Technology / Industry intelligence</p><h1>The systems behind<br>the next change.</h1><p>Understand how technology is built, delivered and used. Follow the evidence into the businesses it supports.</p></div><aside class='tech-count'><strong>80</strong><span>selected provider views · 8 population groups</span><p><span class='tech-badge'>Research foundation · 12 Nov 2026</span></p></aside></header><nav class='tech-nav' aria-label='Technology lenses'>{nav}</nav>"
+    return f"<nav class='crumb' aria-label='Breadcrumb'><a href='/industries'>Industries</a> / UK Technology</nav><header class='tech-hero' id='content'><div><p class='eyebrow'>UK Technology / Industry intelligence</p><h1>Technology, connected.</h1><p>A living map of the capabilities, dependencies and decisions behind UK technology. Explore the picture; inspect what sits beneath it.</p></div><aside class='tech-count'><strong>80</strong><span>selected provider views · 8 population groups</span><p><span class='tech-badge'>Research foundation · 12 Nov 2026</span></p></aside></header><nav class='tech-nav' aria-label='Technology lenses'>{nav}</nav>"
 
 
 def supporting():
     return "<nav class='tech-support' aria-label='Technology supporting views'>"+' · '.join(link(url(p),e(label)) for p,label in (('/providers','Provider directory'),('/models','Reference operating models'),('/timeline','Strategic timeline'),('/evidence','Evidence & Unknowns'),('/handoff','Candidate handoff JSON')))+'</nav>'
 
 
-def landscape(data, selected):
-    nodes=''
-    for key in t.SEGMENTS:
-        count=sum(key in r['memberships'] for r in data['providers'])
-        attrs={'class':f'tech-node {key}','style':f'grid-area:{key}'}
-        if key==selected:attrs['aria_current']='true'
-        icon=f"<svg viewBox='0 0 70 60' aria-hidden='true'>{ICONS[key]}</svg>"
-        nodes+=link(url(lens='how',segment=key)+'#landscape',icon+f"<div><strong>{LABELS[key]}</strong><small>{count} selected role memberships</small></div>",**attrs)
-    providers=[r for r in data['providers'] if selected in r['memberships']]
-    links=''.join(link(url('/providers',provider=r['key']),e(r['label'])) for r in providers[:7])
-    role=next((r for r in data['segments'] if r['key']==selected),None)
-    inspector=f"<aside class='tech-inspector' aria-live='polite'><p class='eyebrow'>Selected role / conceptual model</p><h2>{LABELS[selected]}</h2><p>{DESCRIPTIONS[selected]}</p><p class='tech-note'>{e(role['economics']) if role else 'Capacity, IP and research economics differ. No common market-size denominator.'}</p><div class='tech-provider-links'>{links}</div><p>{link(url('/providers',segment=selected),f'Explore all {len(providers)} views →')}</p><p class='tech-note'>Memberships overlap. Placement and equal-sized symbols explain roles; they do not encode importance, market share or customer deployments.</p></aside>"
-    return f"<section class='tech-stage' id='landscape' aria-label='Industry operating landscape'><div class='tech-landscape'><p>Build → enable → deliver → operate</p><svg class='tech-connectors' viewBox='0 0 700 500' preserveAspectRatio='none' aria-hidden='true'><path d='M80 100H620M80 280H620M240 70V390M460 70V390M80 100V410H620V100'/></svg><div class='tech-nodes'>{nodes}</div><p class='tech-note' style='margin-top:20px'>Conceptual dependencies · select a role to inspect its economics and providers</p></div>{inspector}</section>"
-
-
 def economics(data, blocks):
     values=[('£158bn','D&T GVA · UK · 2024','Novel Digital and Technologies definition; £408bn turnover, 1.33m employees. Do not add to the separate Digital Sector series.',data['economic_blocks'][0]),('£177.2bn','Digital Sector GVA · UK · 2024','Provisional, 6.8% of UK GVA. Different statistical boundary from D&T.',data['economic_blocks'][1]),('£14.7bn','Cyber sector revenue · 2026 study','2,603 firms; 69,600 FTEs. Study estimates; overlapping populations are not additive.',data['economic_blocks'][2])]
     return "<section class='tech-section'><p class='eyebrow'>Scale / separate definitions</p><div class='tech-measures'>"+''.join(f"<article class='tech-measure'><strong>{v}</strong><p><b>{title}</b></p><p>{note}</p>{block_link(b,'Definition, period & source →')}</article>" for v,title,note,b in values)+"</div><details class='tech-fold'><summary>Value chain, capabilities, PESTLE & competition</summary><p>Analytical reference models, not a named enterprise’s confidential architecture.</p>"+''.join(prose(blocks[x]['markdown']) for x in data['value_chain_blocks'])+''.join(prose(blocks[data[k]]['markdown']) for k in ('pestle_block','competition_block'))+'</details></section>'
-
-
-def uses(data, key):
-    rows=data['relationships']; r=next((r for r in rows if r['key']==key),rows[4])
-    choices=''.join(link(url(lens='uses',relationship=x['key'])+'#programme',e(x['customer'])+f"<small>{e(x['participants'])}</small>",**({'aria_current':'true'} if x==r else {})) for x in rows)
-    reference=t.existing_navigation(r)
-    jump=link('/enterprises/'+reference.slug,'Open existing '+e(reference.name)+' enterprise →') if reference else 'Enterprise identity remains unbound; no duplicate enterprise created.'
-    return f"<section class='tech-explorer' id='programme'><nav class='tech-programme-list' aria-label='Evidenced programmes'>{choices}</nav><article class='tech-programme'><p class='eyebrow'>One programme / exact roles retained</p><h2>{e(r['customer'])}</h2><span class='tech-badge'>{e(r['attribution'])}</span><div class='tech-chain'><article><small>Customer / participant</small><strong>{e(r['customer'])}</strong></article><div class='arrow' aria-hidden='true'>→</div><article><small>Product / capability / stated programme</small><strong>{e(r['offering'])}</strong></article></div><p class='eyebrow'>Provider, hosting & delivery roles</p><p>{e(r['participants'])}</p><dl><dt>Temporal status</dt><dd>{e(r['temporal_status'])}</dd><dt>Scope and alternative inference</dt><dd>{inline(r['boundary'])}</dd><dd>{e(r.get('role_boundary','Roles apply only to this cited programme; no exclusive supplier or all-enterprise scope is inferred.'))}</dd></dl><p>{jump}</p>{source_detail(r)}</article></section>"
-
-
-def work(data, blocks):
-    cards=''
-    for n,r in enumerate(data['themes'],1):
-        support=''.join('<li>'+link(url(lens='uses',relationship=k),e(next(x['customer']+' — '+x['offering'] for x in data['relationships'] if x['key']==k)))+'</li>' for k in r['relationship_keys'])
-        support+=''.join('<li>'+block_link(k,'Supporting research passage')+'</li>' for k in r['support_blocks'][1:])
-        cards+=f"<article class='tech-theme' id='{r['key']}'><span class='number'>{n:02}</span><p class='eyebrow'>Unqualified research hypothesis</p><h2>{e(r['title'])}</h2><p>{e(r['consequence'])}</p><details><summary>Evidence, alternatives & questions</summary><dl><dt>Possible intervention</dt><dd>{e(r['intervention'])}</dd><dt>Alternative explanation</dt><dd>{e(r['alternative'])}</dd><dt>Qualification question</dt><dd>{e(r['qualification'])}</dd></dl><ul>{support}</ul><p>Budget, buyer mandate and procurement: Unknown. No Pipeline record created.</p></details></article>"
-    return "<p class='tech-note'>Six themes to investigate. Research priority is separate from buying intent, market attractiveness and sales qualification.</p><section class='tech-grid' aria-label='Unqualified commercial themes'>"+cards+'</section>'
 
 
 def directory(data, provider, segment):
@@ -159,20 +127,71 @@ def evidence(data, blocks):
     return body
 
 
+
+def role_context(data,key):
+    rows=[r for r in data['providers'] if key in r['memberships']]
+    links=''.join(link(url('/providers',provider=r['key'])+'#provider',e(r['label'])) for r in rows[:8])
+    role=next((r for r in data['segments'] if r['key']==key),None)
+    side=' world-detail-left' if key in ('cyber','services','channels') else ''
+    return f"<aside class='world-detail tech-inspector{side}' aria-label='Selected industry role'><a class='world-close' href='{url(lens='how')}#landscape'>Back to the landscape ×</a><p class='eyebrow'>Conceptual role / partial research</p><h2>{LABELS[key]}</h2><p>{DESCRIPTIONS[key]}</p><p>{e(role['economics']) if role else 'Capacity, IP and research economics differ; no common market-size denominator.'}</p><div class='tech-provider-links'>{links}</div><p>{link(url('/providers',segment=key),f'Explore all {len(rows)} provider views →')}</p><p>Memberships overlap. Position is explanatory, never market share, importance or proof of customer deployment.</p></aside>"
+
+
+def programme_context(data,r):
+    reference=t.existing_navigation(r)
+    jump=link('/enterprises/'+reference.slug,'Open existing '+e(reference.name)+' enterprise →') if reference else 'Enterprise identity remains unbound; no duplicate enterprise created.'
+    return f"<aside class='world-detail tech-programme' id='programme' aria-label='Selected programme evidence'><a class='world-close' href='{url(lens='uses')}#landscape'>Return to the programme map ×</a><p class='eyebrow'>Attributed research / exact programme</p><h2>{e(r['customer'])}</h2><p><b>{e(r['offering'])}</b></p><p>{e(r['participants'])}</p><details><summary>Temporal status, scope & roles</summary><p>{e(r['temporal_status'])}</p><p>{inline(r['boundary'])}</p><p>{e(r.get('role_boundary','Roles apply only to this cited programme; no exclusive supplier or whole-enterprise scope is inferred.'))}</p></details><p>{jump}</p>{source_detail(r)}</aside>"
+
+
+def theme_context(data,r):
+    support=''.join('<li>'+link(url(lens='uses',relationship=k)+'#programme',e(next(x['customer']+' — '+x['offering'] for x in data['relationships'] if x['key']==k)))+'</li>' for k in r['relationship_keys'])
+    support+=''.join('<li>'+block_link(k,'Supporting research passage')+'</li>' for k in r['support_blocks'][1:])
+    side=' world-detail-left' if r['key'] in ('theme-3','theme-4') else ''
+    return f"<aside class='world-detail world-hypothesis{side}' id='{r['key']}' aria-label='Unqualified commercial hypothesis'><a class='world-close' href='{url(lens='work')}#landscape'>Return to the seams ×</a><p class='eyebrow'>Unqualified research hypothesis</p><h2>{e(r['title'])}</h2><p>{e(r['consequence'])}</p><details open><summary>Evidence, alternatives & questions</summary><dl><dt>Possible intervention</dt><dd>{e(r['intervention'])}</dd><dt>Alternative explanation</dt><dd>{e(r['alternative'])}</dd><dt>Qualification question</dt><dd>{e(r['qualification'])}</dd></dl><ul>{support}</ul><p>Budget, buyer mandate and procurement: Unknown. No Pipeline record created.</p></details></aside>"
+
+
+def provider_context(r):
+    profile=''.join("<details><summary>"+e(x['text'].split('. ')[0][:90])+"</summary><div class='tech-prose'>"+prose(x['text'])+block_link(x['block'])+'</div></details>' for x in r['profile'])
+    side=' world-detail-left' if r['memberships'][0] in ('cyber','services','channels') else ''
+    return f"<aside class='world-detail{side}' id='provider' aria-label='Provider research overlay'><a class='world-close' href='{url('/providers')}#landscape'>Return to provider landscape ×</a><p class='eyebrow'>{e(r['profile_status'])} / identity unbound</p><h2>{e(r['label'])}</h2><p>{e(r['identity_note'])}</p><p>Roles: {e(', '.join(LABELS[k] for k in r['memberships']))}</p>{profile}<p><b>Unknowns / acceptance boundary</b></p><ul>"+''.join('<li>'+e(g)+'</li>' for g in r['gaps'])+'</ul></aside>'
+
+
+def world(data,lens,selected='',relationship='',theme='',provider=''):
+    from . import technology_scene as scene
+    detail='';picker=''
+    if provider:
+        r=next(r for r in data['providers'] if r['key']==provider);selected=r['memberships'][0];detail=provider_context(r)
+    elif lens=='how' and selected:detail=role_context(data,selected)
+    elif lens=='uses':
+        r=scene.programme(data,relationship)
+        if relationship:detail=programme_context(data,r)
+        choices=''.join(f"<option value='{x['key']}'"+(' selected' if x==r else '')+'>'+e(x['customer']+' — '+x['participants'][:70])+'</option>' for x in data['relationships'])
+        picker=f"<form class='world-programme-pick' action='{t.BASE}'><input type='hidden' name='lens' value='uses'><label for='world-programme-select'>Follow one published programme</label><select id='world-programme-select' name='relationship'>{choices}</select><button>Follow programme →</button></form>"
+    elif lens=='work' and theme:
+        detail=theme_context(data,next(r for r in data['themes'] if r['key']==theme))
+    title={'how':'An operating landscape','uses':'One programme, its ecosystem','work':'Seams where work may emerge'}[lens]
+    textnav=''.join('<li>'+link(url(lens='how',segment=k)+'#landscape',e(v))+'</li>' for k,v in LABELS.items())
+    if lens=='work':textnav=''.join('<li>'+link(url(lens='work',theme=r['key'])+'#'+r['key'],e(r['title']))+'</li>' for r in data['themes'])
+    note={'how':'Select an illustrated district. Follow the flows from silicon and infrastructure to data, applications, controls and delivery.','uses':'Blue ribbons follow one attributed programme, not an all-enterprise architecture. Select either end to inspect exact roles, dates and source limits.','work':'Amber seams mark six unqualified hypotheses. Select a seam for evidence, an alternative explanation and the customer qualification question.'}[lens]
+    return f"<div class='world-mast'><strong>{title}</strong><span class='world-status'>Partial research · 80 selected provider views · 12 Nov 2026</span></div>{picker}<section class='world-stage' id='landscape' aria-label='Technology visual world'>{scene.scene(data,lens,selected,relationship,theme,provider)}{detail}</section><div class='world-key'><span><i></i>Conceptual dependency</span><span><i class='report'></i>Attributed programme</span><span><i class='hypothesis'></i>Unqualified hypothesis</span></div><p class='world-bottom-note'>{note} No visual position encodes provider importance.</p><p class='world-mobile-hint world-bottom-note' style='display:none'>Scroll the landscape to explore. Text navigation is also available below.</p><details class='world-textnav'><summary>Navigate by text instead</summary><ol>{textnav}</ol></details>"
+
+
 def render(path, query, headers=None):
-    data, blocks=t.load(); lens=query.get('lens','how'); segment=query.get('segment','applications')
-    if lens not in ('how','uses','work') or segment not in ('',*t.SEGMENTS):raise ValueError('Unknown Technology lens or role')
-    provider=query.get('provider',''); relationship=query.get('relationship',''); model=query.get('model','')
+    from . import technology_scene as scene
+    data,blocks=t.load();lens=query.get('lens','how');selected=query.get('segment','');provider=query.get('provider','');relationship=query.get('relationship','');theme=query.get('theme','');model=query.get('model','')
+    if lens not in ('how','uses','work') or selected not in ('',*t.SEGMENTS):raise ValueError('Unknown Technology lens or role')
     if provider and provider not in {r['key'] for r in data['providers']}:raise ValueError('Unknown provider')
     if relationship and relationship not in {r['key'] for r in data['relationships']}:raise ValueError('Unknown programme')
+    if theme and theme not in {r['key'] for r in data['themes']}:raise ValueError('Unknown theme')
     if model and model not in ('1','2','3','4','5'):raise ValueError('Unknown reference model')
     suffix=path.removeprefix(t.BASE)
-    if suffix=='':body=landscape(data,segment or 'applications')+economics(data,blocks) if lens=='how' else uses(data,relationship) if lens=='uses' else work(data,blocks)
-    elif suffix=='/providers':body=directory(data,provider,query.get('segment',''))
+    if suffix=='':
+        body=world(data,lens,selected,relationship,theme)
+        if lens=='how':body+="<details class='world-textnav'><summary>Industry economics, capabilities & strategic context</summary>"+economics(data,blocks)+'</details>'
+    elif suffix=='/providers':body=world(data,'how',selected,provider=provider)+"<details class='world-textnav'"+('' if provider else ' open')+"><summary>Provider directory / all 80 selected views</summary>"+directory(data,'',selected)+'</details>'
     elif suffix=='/models':body=models(data,model)
     elif suffix=='/timeline':body=timeline(data)
     elif suffix=='/evidence':body=evidence(data,blocks)
     else:raise ValueError('Unknown Technology view')
-    footer="<footer class='tech-footer'>Recovered research · 12 November 2026 · profiles and source permissions remain partial. No accepted enterprise facts, automatic Pipeline records or current-contract assurance. "+link(t.PAGE_URL,'Research Page')+"</footer>"
+    footer="<footer class='tech-footer'>Partial research · source rights and identities remain unresolved. No accepted enterprise facts, automatic Pipeline records or current-contract assurance. "+link(t.PAGE_URL,'Research Page')+'</footer>'
     script="<script>document.querySelectorAll('.tech details[id]').forEach(function(d){if('#'+d.id===location.hash)d.open=true});addEventListener('hashchange',function(){var d=document.getElementById(location.hash.slice(1));if(d&&d.tagName==='DETAILS')d.open=true});</script>"
-    return page('UK Technology — FLORA',f"<style>{STYLE}</style><div class='tech'>{header(lens)}{supporting()}{body}{footer}</div>{script}",headers,'industries',t.BASE)
+    return page('UK Technology — FLORA',f"<style>{STYLE}{scene.STYLE}</style><div class='tech world-page'>{header(lens)}{body}{supporting()}{footer}</div>{script}",headers,'industries',t.BASE)
