@@ -1,0 +1,500 @@
+{
+  "pages": [
+    {
+      "revision": "integrated",
+      "view": "global",
+      "device": "desktop",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "before #566",
+      "view": "macro",
+      "device": "desktop",
+      "state": "first viewport",
+      "status": 200
+    },
+    {
+      "revision": "integrated",
+      "view": "macro",
+      "device": "desktop",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "banking",
+      "device": "desktop",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "before #566",
+      "view": "enterprise",
+      "device": "desktop",
+      "state": "first viewport",
+      "status": 200
+    },
+    {
+      "revision": "integrated",
+      "view": "enterprise",
+      "device": "desktop",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "overlay",
+      "device": "desktop",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "before #566",
+      "view": "ai",
+      "device": "desktop",
+      "state": "first viewport",
+      "status": 200
+    },
+    {
+      "revision": "integrated",
+      "view": "ai",
+      "device": "desktop",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "cyber",
+      "device": "desktop",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "cockpit",
+      "device": "desktop",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "global",
+      "device": "tablet",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "before #566",
+      "view": "macro",
+      "device": "tablet",
+      "state": "first viewport",
+      "status": 200
+    },
+    {
+      "revision": "integrated",
+      "view": "macro",
+      "device": "tablet",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "banking",
+      "device": "tablet",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "before #566",
+      "view": "enterprise",
+      "device": "tablet",
+      "state": "first viewport",
+      "status": 200
+    },
+    {
+      "revision": "integrated",
+      "view": "enterprise",
+      "device": "tablet",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "overlay",
+      "device": "tablet",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "before #566",
+      "view": "ai",
+      "device": "tablet",
+      "state": "first viewport",
+      "status": 200
+    },
+    {
+      "revision": "integrated",
+      "view": "ai",
+      "device": "tablet",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "cyber",
+      "device": "tablet",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "cockpit",
+      "device": "tablet",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "global",
+      "device": "mobile",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "before #566",
+      "view": "macro",
+      "device": "mobile",
+      "state": "first viewport",
+      "status": 200
+    },
+    {
+      "revision": "integrated",
+      "view": "macro",
+      "device": "mobile",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "banking",
+      "device": "mobile",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "before #566",
+      "view": "enterprise",
+      "device": "mobile",
+      "state": "first viewport",
+      "status": 200
+    },
+    {
+      "revision": "integrated",
+      "view": "enterprise",
+      "device": "mobile",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "overlay",
+      "device": "mobile",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "before #566",
+      "view": "ai",
+      "device": "mobile",
+      "state": "first viewport",
+      "status": 200
+    },
+    {
+      "revision": "integrated",
+      "view": "ai",
+      "device": "mobile",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "cyber",
+      "device": "mobile",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "revision": "integrated",
+      "view": "cockpit",
+      "device": "mobile",
+      "states": [
+        "first viewport",
+        "selected inspector"
+      ],
+      "status": 200,
+      "overflow": false
+    }
+  ],
+  "personas": [
+    {
+      "persona": "A / new industry seller",
+      "device": "desktop",
+      "result": "Macro \u2192 PESTLE \u2192 scoped entity \u2192 existing Enterprise Twin \u2192 capability \u2192 original cyber hypothesis \u2192 eight modules; Back restores offering/context"
+    },
+    {
+      "persona": "B / industry expert",
+      "device": "desktop",
+      "result": "Direct enterprise \u2192 capability \u2192 AI hypothesis \u2192 exact source \u2192 complete dossier; no mandatory Macro introduction"
+    },
+    {
+      "persona": "C / intermediate seller",
+      "device": "desktop",
+      "result": "UK/France same-force comparison \u2192 scoped PESTLE \u2192 unresolved entity \u2192 national source \u2192 Back; no false legal exemption or French opportunity"
+    },
+    {
+      "persona": "A / new industry seller",
+      "device": "tablet",
+      "result": "Macro \u2192 PESTLE \u2192 scoped entity \u2192 existing Enterprise Twin \u2192 capability \u2192 original cyber hypothesis \u2192 eight modules; Back restores offering/context"
+    },
+    {
+      "persona": "B / industry expert",
+      "device": "tablet",
+      "result": "Direct enterprise \u2192 capability \u2192 AI hypothesis \u2192 exact source \u2192 complete dossier; no mandatory Macro introduction"
+    },
+    {
+      "persona": "C / intermediate seller",
+      "device": "tablet",
+      "result": "UK/France same-force comparison \u2192 scoped PESTLE \u2192 unresolved entity \u2192 national source \u2192 Back; no false legal exemption or French opportunity"
+    },
+    {
+      "persona": "A / new industry seller",
+      "device": "mobile",
+      "result": "Macro \u2192 PESTLE \u2192 scoped entity \u2192 existing Enterprise Twin \u2192 capability \u2192 original cyber hypothesis \u2192 eight modules; Back restores offering/context"
+    },
+    {
+      "persona": "B / industry expert",
+      "device": "mobile",
+      "result": "Direct enterprise \u2192 capability \u2192 AI hypothesis \u2192 exact source \u2192 complete dossier; no mandatory Macro introduction"
+    },
+    {
+      "persona": "C / intermediate seller",
+      "device": "mobile",
+      "result": "UK/France same-force comparison \u2192 scoped PESTLE \u2192 unresolved entity \u2192 national source \u2192 Back; no false legal exemption or French opportunity"
+    }
+  ],
+  "pdfs": [
+    {
+      "file": "macro-executive.pdf",
+      "pages": 2,
+      "sha256": "3bf796ffec2fd2ecc45816272a835afdb3b3406b031ff7788726d114e7477570",
+      "text_and_restoration": "passed"
+    },
+    {
+      "file": "macro-appendix.pdf",
+      "pages": 15,
+      "sha256": "e48bb3a58d4279c668cdace5645cfd7a83cd7ccdcd8fbf9f9834804b6152bcd8",
+      "text_and_restoration": "passed"
+    },
+    {
+      "file": "france-executive.pdf",
+      "pages": 2,
+      "sha256": "329cb165a9cfad658f046409123c3d296e71eb4cc645ac14fa2791059584ec8e",
+      "text_and_restoration": "passed"
+    },
+    {
+      "file": "france-appendix.pdf",
+      "pages": 11,
+      "sha256": "53186f6672fdc605b9e0788e9a99b4b9433342a40ad4a7cb8371f7ba0f227789",
+      "text_and_restoration": "passed"
+    },
+    {
+      "file": "ai-executive.pdf",
+      "pages": 1,
+      "sha256": "23ccf509e8876fcb77f7694ca9f508914e91085ae271b288c7094d55524ce438",
+      "text_and_restoration": "passed"
+    },
+    {
+      "file": "ai-appendix.pdf",
+      "pages": 22,
+      "sha256": "c127942831f072dc3ad71f117af7f8053bfa7082c253abdae32e3304c0ac122f",
+      "text_and_restoration": "passed"
+    },
+    {
+      "file": "cyber-executive.pdf",
+      "pages": 1,
+      "sha256": "9e8f3fe5bc7c735c44e7d06a37833ebf2eef4e131a8e8d17f80c54f8e5a2e253",
+      "text_and_restoration": "passed"
+    },
+    {
+      "file": "cyber-appendix.pdf",
+      "pages": 20,
+      "sha256": "080ee4a355db061b294bf912ec52f3dd3c2a858191b13075f7d5b3f5bd3a2653",
+      "text_and_restoration": "passed"
+    },
+    {
+      "file": "banking-executive.pdf",
+      "pages": 1,
+      "sha256": "a56c527a60d23a4805755092d8e1202a83fbb4218c6fa95699a9349db3d72bb3",
+      "text_and_restoration": "passed"
+    },
+    {
+      "file": "banking-appendix.pdf",
+      "pages": 24,
+      "sha256": "4fade07057191fae7cd2c9446b1381f77fa65390ece7cb80c97223e99a591a8a",
+      "text_and_restoration": "passed"
+    },
+    {
+      "file": "enterprise-executive.pdf",
+      "pages": 1,
+      "sha256": "082b6da933e6f839c0ee11b9566c7263ac279167f5343524f970d198dac94a9d",
+      "text_and_restoration": "passed"
+    },
+    {
+      "file": "enterprise-appendix.pdf",
+      "pages": 40,
+      "sha256": "63a81cfc949a8025c6a0a66c9f839422382cf3240a79517493a2c33359670ab9",
+      "text_and_restoration": "passed"
+    }
+  ],
+  "errors": [],
+  "pipeline": [
+    {
+      "device": "desktop",
+      "stage": "Discovered",
+      "customer_qualified": false,
+      "rejected_qualification_status": 422,
+      "before": null,
+      "after_capture": "d5124b3ee5c9e40d157cb629f59789a389b4eeb26712e99a4181e1cfd10e7b25",
+      "after_rejection_and_duplicate": "d5124b3ee5c9e40d157cb629f59789a389b4eeb26712e99a4181e1cfd10e7b25",
+      "unchanged_after_rejection_and_duplicate": true,
+      "qualification_inputs": 10,
+      "provenance_unchanged": true,
+      "synthetic_test_workspace_only": true
+    },
+    {
+      "device": "tablet",
+      "stage": "Discovered",
+      "customer_qualified": false,
+      "rejected_qualification_status": 422,
+      "before": "d5124b3ee5c9e40d157cb629f59789a389b4eeb26712e99a4181e1cfd10e7b25",
+      "after_capture": "d5124b3ee5c9e40d157cb629f59789a389b4eeb26712e99a4181e1cfd10e7b25",
+      "after_rejection_and_duplicate": "d5124b3ee5c9e40d157cb629f59789a389b4eeb26712e99a4181e1cfd10e7b25",
+      "unchanged_after_rejection_and_duplicate": true,
+      "qualification_inputs": 10,
+      "provenance_unchanged": true,
+      "synthetic_test_workspace_only": true
+    },
+    {
+      "device": "mobile",
+      "stage": "Discovered",
+      "customer_qualified": false,
+      "rejected_qualification_status": 422,
+      "before": "d5124b3ee5c9e40d157cb629f59789a389b4eeb26712e99a4181e1cfd10e7b25",
+      "after_capture": "d5124b3ee5c9e40d157cb629f59789a389b4eeb26712e99a4181e1cfd10e7b25",
+      "after_rejection_and_duplicate": "d5124b3ee5c9e40d157cb629f59789a389b4eeb26712e99a4181e1cfd10e7b25",
+      "unchanged_after_rejection_and_duplicate": true,
+      "qualification_inputs": 10,
+      "provenance_unchanged": true,
+      "synthetic_test_workspace_only": true
+    }
+  ],
+  "no_javascript": "passed: Macro \u2192 Enterprise \u2192 accessible opportunity comparison \u2192 cyber cockpit \u2192 full evidence",
+  "unperformed": [
+    "Physical iPad/Safari",
+    "Screen-reader evaluation",
+    "Human comprehension and owner acceptance"
+  ]
+}

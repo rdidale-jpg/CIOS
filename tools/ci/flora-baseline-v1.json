@@ -7091,6 +7091,60 @@
               "tests/test_flora_macro_enterprise_v2.py"
             ]
           ]
+        },
+        "unified_integration_v1": {
+          "selections": [
+            [
+              "tests/test_flora_unified_integration.py"
+            ]
+          ],
+          "cases": {
+            "tests/test_flora_unified_integration.py::test_both_reviewed_workstreams_remain_ancestors_with_exact_source_cuts": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_integration.py::test_history_guard_rejects_every_unapproved_change[historical_byte]": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_integration.py::test_history_guard_rejects_every_unapproved_change[approved_macro_byte]": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_integration.py::test_history_guard_rejects_every_unapproved_change[approved_depth_byte]": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_integration.py::test_history_guard_rejects_every_unapproved_change[old_review_record]": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_integration.py::test_history_guard_rejects_every_unapproved_change[missing]": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_integration.py::test_history_guard_rejects_every_unapproved_change[unknown]": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_integration.py::test_history_guard_rejects_every_unapproved_change[ignored_unknown]": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_integration.py::test_baseline_union_keeps_original_cases_signatures_and_skip_reasons": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_integration.py::test_cyber_reuses_one_visual_story_cockpit_and_deliberate_full_evidence": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_integration.py::test_macro_to_enterprise_link_preserves_separate_identity_and_unknown_applicability": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_integration.py::test_integrated_public_journey_cannot_enumerate_or_modify_private_pipeline": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_integration.py::test_deliberate_capture_preserves_original_identity_review_and_stage_gate[RCO-LBG-002]": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_integration.py::test_deliberate_capture_preserves_original_identity_review_and_stage_gate[RCO-LBG-005]": {
+              "status": "passed"
+            },
+            "tests/test_flora_unified_integration.py::test_all_original_hypothesis_identities_are_retained": {
+              "status": "passed"
+            }
+          }
         }
       }
     }

@@ -77,12 +77,20 @@ def candidate_overview(data,row,projection,headers=None,legacy_dossier=''):
     current_status=c['confidence'] if row['context_supported'] else 'Current source support missing — retained historical hypothesis; verify evidence before advancement.'
     body+=f"<header class='cv-header' id='explorer-content'>{_badge('Unqualified commercial hypothesis')}<p class='cv-kicker'>{e(enterprise['label'])} / {row['id']}</p><h1>{e(row['title'])}</h1><p>{e(c['offer'])}</p><p>{e(current_status)}</p></header>"
     snapshot=f"<details class='cv-snapshot'><summary>Inspection snapshot and authority boundary</summary><p>Review {row['review_digest']}; inspection {row['inspection_digest']}; authored assessment {row['assessment_date']}. Public candidate intelligence only; no automatic acceptance or qualification.</p></details>"
-    visual_first = row['id'] in ('RCO-LBG-002','RCO-LBG-001','RCO-LBG-009') and data.get('research_domain','banking')=='banking'
+    visual_first = row['id'] in ('RCO-LBG-002','RCO-LBG-001','RCO-LBG-009','RCO-LBG-005') and data.get('research_domain','banking')=='banking'
     if visual_first:
         from .enterprise_opportunity import opportunity_story,pursuit_preview
         body+=opportunity_story(data,row)+pursuit_preview(row)
         body+="<details class='cv-full-research' id='full-research-evidence'><summary>Full research & evidence — inspect complete dossier, source periods, limitations and original assessments</summary>"
-    body+=executive_summary(row)
+    summary=executive_summary(row)
+    if visual_first and row['id']=='RCO-LBG-005':
+        # Reuse the established executive/appendix print owner; no new research.
+        from .intelligence_depth import STYLE as print_style, SCRIPT as print_script
+        sources={source['id']:source for source in data['sources']}
+        refs=list(dict.fromkeys(sid for proof in row['support'] if proof['supported'] for sid in proof['source_ids']))
+        citations=''.join('<small>'+e(sources[sid]['title'])+' · '+e(sources[sid]['reporting_period'])+' · '+e(sources[sid]['url'])+'</small>' for sid in refs)
+        body+="<style>"+print_style+"</style><script>"+print_script+"</script><div class='depth-executive'>"+summary+"<div class='depth-print-citations'>"+citations+"</div></div>"
+    else:body+=summary
     from .intelligence_depth import hypothesis_depth
     body+=hypothesis_depth(data,row)
     body+="<nav class='cv-links' aria-label='Hypothesis inspection'>"+link('#commercial-support','Inspect supporting context')+link('#commercial-counterevidence','Inspect counterevidence')+link('#commercial-capture','Review create/link & qualification →',True)+'</nav>'

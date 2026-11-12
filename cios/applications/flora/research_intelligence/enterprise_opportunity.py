@@ -9,7 +9,7 @@ STYLE = """
 .eo{--eo:#174d3f;--eo-gold:#b58a4b;margin:18px 0;color:#174d3f}
 .eo *{box-sizing:border-box}
 .eo-hero{background:linear-gradient(125deg,#153d33,#276252);border-radius:22px;padding:27px;color:white}
-.eo-hero h2{font:600 clamp(1.55rem,3vw,2.2rem)/1.15 Georgia,serif;color:white;margin:9px 0}
+.eo-hero h1,.eo-hero h2{font:600 clamp(1.55rem,3vw,2.2rem)/1.15 Georgia,serif;color:white;margin:9px 0}
 .eo-hero p{color:#d4e6db;max-width:720px}
 .eo-kicker{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800}
 .eo-grid{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(280px,1fr);gap:17px;margin:17px 0}
@@ -67,7 +67,7 @@ SCRIPT = """
 def _shell(content):
     return "<style>"+STYLE+"</style><section class='eo' data-eo-root>"+content+"<script>"+SCRIPT+"</script></section>"
 
-def enterprise_overlay(data,projection,comparison_visual=''):
+def enterprise_overlay(data,projection,comparison_visual='',page_heading=False):
     """Inspect canonical capability and programme associations, never implied org ownership."""
     groups=defaultdict(list)
     cap_labels={c['id']:c.get('title') or c['id'] for c in data.get('capabilities',[])}
@@ -106,7 +106,8 @@ def enterprise_overlay(data,projection,comparison_visual=''):
         panels.append("<article data-eo-panel='candidate-"+e(row['id'])+"' id='eo-candidate-"+e(row['id'])+"'><span class='eo-label'>Unqualified research hypothesis · "+e(row['id'])+"</span><h3>"+e(row['title'])+"</h3><p>"+e(row['commercial']['business_problem'])+"</p><dl class='eo-ratings'>"+ratings+"</dl><small>Authored "+e(row['assessment_date'])+"; separate assessments, not win probability.</small>"+evidence+"<p class='eo-warning'>Existing internal delivery or an incumbent may remove the service gap. Buyer, budget and external demand remain unverified.</p><p><strong>Next:</strong> "+e(row['commercial']['next_commercial_action'])+"</p><a class='eo-action' href='"+e(row['url'],quote=True)+"'>Develop hypothesis & inspect dossier →</a></article>")
     fallback="<details class='eo-fallback'><summary>Compare all "+str(len(all_rows))+" hypotheses · accessible text alternative</summary><div class='eo-comparison'><table><caption>Authored assessments; source context is not customer demand. Counts are not additive.</caption><thead><tr><th scope='col'>Hypothesis</th><th scope='col'>Research capability association</th><th scope='col'>Separate assessments</th></tr></thead><tbody>"+''.join("<tr><th scope='row'><a href='"+e(row['url'],quote=True)+"'>"+e(row['title'])+"</a></th><td>"+e('; '.join(cap_labels[cid] for cid in row.get('capability_ids',[]) if cid in cap_labels) or 'Capability not yet mapped')+"</td><td>"+'<br>'.join(e(d['label'])+': '+str(d['score'])+' / 3' for d in row['dimensions'])+"</td></tr>" for row in all_rows)+"</tbody></table></div>"+comparison_visual+"</details>"
 
-    return _shell("<div class='eo-hero'><span class='eo-kicker'>Enterprise opportunity overlay</span><h2>Locate the possibility in the business.</h2><p>Select a capability, then a hypothesis in the inspector. These associations are not verified organisation ownership or delivery dependencies.</p></div><div class='eo-grid'><div class='eo-map'><h3>Enterprise capability landscape</h3><p class='eo-map-key'>● Hypotheses associated with this capability · counts overlap</p><div class='eo-node-grid'><svg class='eo-landmark' viewBox='360 120 560 220' role='img' aria-label='Conceptual banking illustration; not an organisational map'>"+_art('banking','eo-bank',True)+"</svg>"+"".join(nodes)+"</div></div><aside class='eo-inspector' aria-live='polite'>"+"".join(panels)+"</aside></div>"+fallback)
+    heading="h1" if page_heading else "h2"
+    return _shell("<div class='eo-hero'><span class='eo-kicker'>Enterprise opportunity overlay</span><"+heading+">Locate the possibility in the business.</"+heading+"><p>Select a capability, then a hypothesis in the inspector. These associations are not verified organisation ownership or delivery dependencies.</p></div><div class='eo-grid'><div class='eo-map'><h3>Enterprise capability landscape</h3><p class='eo-map-key'>● Hypotheses associated with this capability · counts overlap</p><div class='eo-node-grid'><svg class='eo-landmark' viewBox='360 120 560 220' role='img' aria-label='Conceptual banking illustration; not an organisational map'>"+_art('banking','eo-bank',True)+"</svg>"+"".join(nodes)+"</div></div><aside class='eo-inspector' aria-live='polite'>"+"".join(panels)+"</aside></div>"+fallback)
 
 
 MODULES=[

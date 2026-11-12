@@ -128,6 +128,7 @@ def trace_inspector(chosen, spec, trace):
     if trace['hypothesis_id']:
         row=next(c for c in spec['candidates'] if c['id']==trace['hypothesis_id'])
         body += "<p><a href='"+e(row['url'],quote=True)+"'>Existing research hypothesis →</a></p>"
+    body += "<p><a href='/enterprises/"+e(spec['enterprise']['slug'],quote=True)+"'>Explore existing Enterprise Twin →</a></p>"
     body += nav(chosen,'← Industry consequence',view='industry',factor=trace['pestle'],capability='')
     body += "<p><a href='#macro-visual'>← Back to visual</a></p></aside>"
     return body
