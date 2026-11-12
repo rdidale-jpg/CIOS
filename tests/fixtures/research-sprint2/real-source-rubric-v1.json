@@ -1,0 +1,25 @@
+{
+  "version": "real-source-rubric-v1",
+  "frozen_before_evaluation": true,
+  "reference_owner": "Implementation author source-reading and reproducible scope checks; not externally blinded adjudication",
+  "classes": {
+    "supported": "The cited passage entails the complete source-reported dated proposition within its entity/geography/state scope",
+    "unsupported_as_cited": "A material claim element is absent, contradicted, changed, or attributed to the wrong entity/time/scope; does not mean false in the world",
+    "indeterminate": "Interpretation, missing context, unresolved conflict/supersession or independent corroboration prevents a defensible decision"
+  },
+  "decision_mapping": {
+    "publish_source_reported": "accepted",
+    "publish_labelled_interpretation": "accepted",
+    "reject": "rejected",
+    "withhold": "unresolved",
+    "not_executed": "not_executed"
+  },
+  "strict_release": "No reference label or fixture may authorise production/canonical publication",
+  "freeze_order": "References and rubric written and hashed before executing calibration; dataset/reference changes require a new version",
+  "limits": [
+    "Small authored sample; development author also authors references",
+    "Held-out cases are separated from adapter development but not externally blinded",
+    "Selected authority passages are source reports, not independent proof of real-world outcomes",
+    "Freshness, rights and policy checks may withhold a source-supported claim; report separately"
+  ]
+}

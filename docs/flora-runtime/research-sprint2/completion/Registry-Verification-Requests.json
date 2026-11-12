@@ -1,0 +1,92 @@
+[
+  {
+    "company_number": "04771037",
+    "request_id": "REG-VERIFY-ab60d19ef9ad4c0afe21cd72",
+    "issued_at": "2026-11-12T13:23:27.682756+00:00",
+    "role": "verifier"
+  },
+  {
+    "company_number": "04418144",
+    "request_id": "REG-VERIFY-379335c53a21876044359436",
+    "issued_at": "2026-11-12T13:23:27.682768+00:00",
+    "role": "verifier"
+  },
+  {
+    "company_number": "03645998",
+    "request_id": "REG-VERIFY-dbebb3bc0b27f6f7e4f7e300",
+    "issued_at": "2026-11-12T13:23:27.682771+00:00",
+    "role": "verifier"
+  },
+  {
+    "company_number": "02253061",
+    "request_id": "REG-VERIFY-1912415be5d3d02343f2df54",
+    "issued_at": "2026-11-12T13:23:27.682773+00:00",
+    "role": "verifier"
+  },
+  {
+    "company_number": "08997297",
+    "request_id": "REG-VERIFY-90ddc884470d73387fc15501",
+    "issued_at": "2026-11-12T13:23:27.682775+00:00",
+    "role": "verifier"
+  },
+  {
+    "company_number": "10161344",
+    "request_id": "REG-VERIFY-8758e08ace8593f57f98e04b",
+    "issued_at": "2026-11-12T13:23:27.682776+00:00",
+    "role": "verifier"
+  },
+  {
+    "company_number": "07800173",
+    "request_id": "REG-VERIFY-3e41beb66660fc9174de76b6",
+    "issued_at": "2026-11-12T13:23:27.682778+00:00",
+    "role": "verifier"
+  },
+  {
+    "company_number": "SC293432",
+    "request_id": "REG-VERIFY-feb2e87bc107737bcf58548d",
+    "issued_at": "2026-11-12T13:23:27.682779+00:00",
+    "role": "verifier"
+  },
+  {
+    "company_number": "08549332",
+    "request_id": "REG-VERIFY-bbe02e6e4e7ae0d5ee737aa7",
+    "issued_at": "2026-11-12T13:23:27.682781+00:00",
+    "role": "verifier"
+  },
+  {
+    "company_number": "10353328",
+    "request_id": "REG-VERIFY-c10b335e0ebf3d6f2aaff3fd",
+    "issued_at": "2026-11-12T13:23:27.682783+00:00",
+    "role": "verifier"
+  },
+  {
+    "company_number": "03599593",
+    "request_id": "REG-VERIFY-f0d679e5663c570222982607",
+    "issued_at": "2026-11-12T13:23:27.682784+00:00",
+    "role": "verifier"
+  },
+  {
+    "company_number": "01584718",
+    "request_id": "REG-VERIFY-ba4655b2cb3030faeb4e21c8",
+    "issued_at": "2026-11-12T13:23:27.682786+00:00",
+    "role": "verifier"
+  },
+  {
+    "company_number": "01691472",
+    "request_id": "REG-VERIFY-f31f7268f5e9dfa6fe61a193",
+    "issued_at": "2026-11-12T13:23:27.682787+00:00",
+    "role": "verifier"
+  },
+  {
+    "company_number": "11795789",
+    "request_id": "REG-VERIFY-c740808d2d4e65fca1989a69",
+    "issued_at": "2026-11-12T13:23:27.682789+00:00",
+    "role": "verifier"
+  },
+  {
+    "company_number": "13264637",
+    "request_id": "REG-VERIFY-89598554ea47159205c33821",
+    "issued_at": "2026-11-12T13:23:27.682790+00:00",
+    "role": "verifier"
+  }
+]

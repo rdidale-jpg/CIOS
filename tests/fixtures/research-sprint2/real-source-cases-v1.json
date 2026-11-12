@@ -1,0 +1,562 @@
+{
+  "version": "real-source-cases-v1",
+  "sources": "Completion-v2 runtime registry; stable hashes",
+  "development": [
+    "REAL-aws-plan",
+    "REAL-aws-outcome"
+  ],
+  "cases": [
+    {
+      "id": "REAL-aws-plan",
+      "split": "development",
+      "source_ids": [
+        "AWS-PLAN"
+      ],
+      "claim": {
+        "id": "REAL-aws-plan",
+        "statement": "In September 2024 HMT reported a planned five-year £8bn AWS investment in the UK.",
+        "entity_id": "Amazon Web Services",
+        "geography": "UK",
+        "reporting_period": "five-year plan (endpoints unspecified)",
+        "truth_class": "source_reported_fact",
+        "state": "historical",
+        "segment_ids": [
+          "AWS-PLAN-EXCERPT"
+        ]
+      },
+      "reference": "supported",
+      "reference_reason": "Selected source explicitly calls the five-year investment planned.",
+      "source_locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+      "source_sha256": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070"
+    },
+    {
+      "id": "REAL-aws-outcome",
+      "split": "development",
+      "source_ids": [
+        "AWS-PLAN"
+      ],
+      "claim": {
+        "id": "REAL-aws-outcome",
+        "statement": "AWS completed £8bn UK investment in September 2024.",
+        "entity_id": "Amazon Web Services",
+        "geography": "UK",
+        "reporting_period": "five-year plan (endpoints unspecified)",
+        "truth_class": "source_reported_fact",
+        "state": "actual",
+        "segment_ids": [
+          "AWS-PLAN-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "Plan/announcement is not completed investment.",
+      "source_locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+      "source_sha256": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070"
+    },
+    {
+      "id": "REAL-ms-proposal",
+      "split": "held_out",
+      "source_ids": [
+        "MS-SOFTWARE"
+      ],
+      "claim": {
+        "id": "REAL-ms-proposal",
+        "statement": "The CMA proposed strategic market status designation for Microsoft’s business software ecosystem in October 2026.",
+        "entity_id": "Microsoft",
+        "geography": "UK",
+        "reporting_period": "2026-10-16",
+        "truth_class": "source_reported_fact",
+        "state": "announced",
+        "segment_ids": [
+          "MS-SOFTWARE-EXCERPT"
+        ]
+      },
+      "reference": "supported",
+      "reference_reason": "Proposal is explicit, limited to business software.",
+      "source_locator": "Summary and findings, lines 56 and 77-79",
+      "source_sha256": "31937069fa5002a87fef397b7d3ead35e5698f2ecebb77bf1add5f3ef3893c76"
+    },
+    {
+      "id": "REAL-ms-enacted",
+      "split": "held_out",
+      "source_ids": [
+        "MS-SOFTWARE"
+      ],
+      "claim": {
+        "id": "REAL-ms-enacted",
+        "statement": "The CMA imposed final legally effective remedies on Microsoft in October 2026.",
+        "entity_id": "Microsoft",
+        "geography": "UK",
+        "reporting_period": "2026-10-16",
+        "truth_class": "source_reported_fact",
+        "state": "actual",
+        "segment_ids": [
+          "MS-SOFTWARE-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "Proposed designation does not establish final remedies.",
+      "source_locator": "Summary and findings, lines 56 and 77-79",
+      "source_sha256": "31937069fa5002a87fef397b7d3ead35e5698f2ecebb77bf1add5f3ef3893c76"
+    },
+    {
+      "id": "REAL-ms-ai-role",
+      "split": "held_out",
+      "source_ids": [
+        "MS-OPENAI-2025"
+      ],
+      "claim": {
+        "id": "REAL-ms-ai-role",
+        "statement": "The March 2025 CMA summary describes Azure compute supporting foundation-model training and downstream model access.",
+        "entity_id": "Microsoft Corporation",
+        "geography": "global",
+        "reporting_period": "2025-03-05",
+        "truth_class": "source_reported_fact",
+        "state": "historical",
+        "segment_ids": [
+          "MS-OPENAI-2025-EXCERPT"
+        ]
+      },
+      "reference": "supported",
+      "reference_reason": "Paragraph 3 expressly describes both functions.",
+      "source_locator": "Summary paragraphs 2,3,15; selected non-contiguous sentences; historical decision",
+      "source_sha256": "f02a0f6bc039a4a4c47dfddce555df6d216366aac5dd052bb4374a723ef245b8"
+    },
+    {
+      "id": "REAL-ms-ownership",
+      "split": "held_out",
+      "source_ids": [
+        "MS-OPENAI-2025"
+      ],
+      "claim": {
+        "id": "REAL-ms-ownership",
+        "statement": "The CMA found Microsoft had full legal ownership and de facto control of OpenAI in March 2025.",
+        "entity_id": "Microsoft Corporation",
+        "geography": "global",
+        "reporting_period": "2025-03-05",
+        "truth_class": "source_reported_fact",
+        "state": "historical",
+        "segment_ids": [
+          "MS-OPENAI-2025-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "Paragraph 2 explicitly rejects a change from material influence to de facto control.",
+      "source_locator": "Summary paragraphs 2,3,15; selected non-contiguous sentences; historical decision",
+      "source_sha256": "f02a0f6bc039a4a4c47dfddce555df6d216366aac5dd052bb4374a723ef245b8"
+    },
+    {
+      "id": "REAL-ms-no-concerns",
+      "split": "held_out",
+      "source_ids": [
+        "MS-OPENAI-2025"
+      ],
+      "claim": {
+        "id": "REAL-ms-no-concerns",
+        "statement": "The CMA found no competition concerns arise from the partnership.",
+        "entity_id": "Microsoft Corporation",
+        "geography": "global",
+        "reporting_period": "2025-03-05",
+        "truth_class": "source_reported_fact",
+        "state": "historical",
+        "segment_ids": [
+          "MS-OPENAI-2025-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "Paragraph 15 warns non-qualification is not such a finding.",
+      "source_locator": "Summary paragraphs 2,3,15; selected non-contiguous sentences; historical decision",
+      "source_sha256": "f02a0f6bc039a4a4c47dfddce555df6d216366aac5dd052bb4374a723ef245b8"
+    },
+    {
+      "id": "REAL-ms-customer-delivery",
+      "split": "held_out",
+      "source_ids": [
+        "MS-OPENAI-2025"
+      ],
+      "claim": {
+        "id": "REAL-ms-customer-delivery",
+        "statement": "Microsoft delivered a contracted OpenAI transformation programme to Lloyds.",
+        "entity_id": "Microsoft Corporation",
+        "geography": "global",
+        "reporting_period": "2025-03-05",
+        "truth_class": "source_reported_fact",
+        "state": "historical",
+        "segment_ids": [
+          "MS-OPENAI-2025-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "General platform role and alliance do not evidence named-customer delivery.",
+      "source_locator": "Summary paragraphs 2,3,15; selected non-contiguous sentences; historical decision",
+      "source_sha256": "f02a0f6bc039a4a4c47dfddce555df6d216366aac5dd052bb4374a723ef245b8"
+    },
+    {
+      "id": "REAL-wrong-subsidiary",
+      "split": "held_out",
+      "source_ids": [
+        "AWS-PLAN"
+      ],
+      "claim": {
+        "id": "REAL-wrong-subsidiary",
+        "statement": "HMT confirmed AMAZON WEB SERVICES EMEA SARL completed the investment.",
+        "entity_id": "AMAZON WEB SERVICES EMEA SARL",
+        "geography": "UK",
+        "reporting_period": "five-year plan (endpoints unspecified)",
+        "truth_class": "source_reported_fact",
+        "state": "historical",
+        "segment_ids": [
+          "AWS-PLAN-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "Business-brand announcement does not establish subsidiary attribution or completion.",
+      "source_locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+      "source_sha256": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070"
+    },
+    {
+      "id": "REAL-wrong-period",
+      "split": "held_out",
+      "source_ids": [
+        "AWS-PLAN"
+      ],
+      "claim": {
+        "id": "REAL-wrong-period",
+        "statement": "The £8bn investment period was precisely 2024–2028.",
+        "entity_id": "Amazon Web Services",
+        "geography": "UK",
+        "reporting_period": "2024–2028",
+        "truth_class": "source_reported_fact",
+        "state": "historical",
+        "segment_ids": [
+          "AWS-PLAN-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "Those endpoints belong to the GDP estimate, not the five-year plan.",
+      "source_locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+      "source_sha256": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070"
+    },
+    {
+      "id": "REAL-wrong-geography",
+      "split": "held_out",
+      "source_ids": [
+        "AWS-PLAN"
+      ],
+      "claim": {
+        "id": "REAL-wrong-geography",
+        "statement": "The planned £8bn investment was in France.",
+        "entity_id": "Amazon Web Services",
+        "geography": "France",
+        "reporting_period": "five-year plan (endpoints unspecified)",
+        "truth_class": "source_reported_fact",
+        "state": "historical",
+        "segment_ids": [
+          "AWS-PLAN-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "Announcement concerns the UK.",
+      "source_locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+      "source_sha256": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070"
+    },
+    {
+      "id": "REAL-numeric-scale",
+      "split": "held_out",
+      "source_ids": [
+        "CYBER-UK"
+      ],
+      "claim": {
+        "id": "REAL-numeric-scale",
+        "statement": "Darktrace employed approximately 31 people in the UK.",
+        "entity_id": "Darktrace",
+        "geography": "UK",
+        "reporting_period": "2025 sector analysis",
+        "truth_class": "source_reported_fact",
+        "state": "historical",
+        "segment_ids": [
+          "CYBER-UK-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "31 is the approximate cohort of dedicated firms, not one company’s employment.",
+      "source_locator": "Section 7, AI security providers, line 1028",
+      "source_sha256": "7c8611a9f9b2bc2fa1b44b14114622f38bab11b34f78341d80b83932770af4b9"
+    },
+    {
+      "id": "REAL-industry-to-adoption",
+      "split": "held_out",
+      "source_ids": [
+        "CYBER-UK"
+      ],
+      "claim": {
+        "id": "REAL-industry-to-adoption",
+        "statement": "easyJet adopted Darktrace to secure its AI services.",
+        "entity_id": "Darktrace",
+        "geography": "UK",
+        "reporting_period": "2025 sector analysis",
+        "truth_class": "source_reported_fact",
+        "state": "historical",
+        "segment_ids": [
+          "CYBER-UK-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "Sector listing does not evidence easyJet adoption.",
+      "source_locator": "Section 7, AI security providers, line 1028",
+      "source_sha256": "7c8611a9f9b2bc2fa1b44b14114622f38bab11b34f78341d80b83932770af4b9"
+    },
+    {
+      "id": "REAL-quantum-conditions",
+      "split": "held_out",
+      "source_ids": [
+        "QUANTUM-ORDER"
+      ],
+      "claim": {
+        "id": "REAL-quantum-conditions",
+        "statement": "The September 2025 order conditions require UK-hosted Oxford Ionics trapped-ion hardware for independent assessment on request.",
+        "entity_id": "Oxford Ionics Limited",
+        "geography": "UK",
+        "reporting_period": "2025-09-11",
+        "truth_class": "source_reported_fact",
+        "state": "conditional",
+        "segment_ids": [
+          "QUANTUM-ORDER-EXCERPT"
+        ]
+      },
+      "reference": "supported",
+      "reference_reason": "Quoted order condition; no compliance asserted.",
+      "source_locator": "Final order paragraph 5(ii), line 83",
+      "source_sha256": "482d69e742ed99946deccdde4c524eb1c8387551cd2daa65cbb522f33bbd45b1"
+    },
+    {
+      "id": "REAL-quantum-compliance",
+      "split": "held_out",
+      "source_ids": [
+        "QUANTUM-ORDER"
+      ],
+      "claim": {
+        "id": "REAL-quantum-compliance",
+        "statement": "Oxford Ionics has fulfilled all order conditions and the acquisition completed.",
+        "entity_id": "Oxford Ionics Limited",
+        "geography": "UK",
+        "reporting_period": "2025-09-11",
+        "truth_class": "source_reported_fact",
+        "state": "actual",
+        "segment_ids": [
+          "QUANTUM-ORDER-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "Conditions do not evidence compliance or completion.",
+      "source_locator": "Final order paragraph 5(ii), line 83",
+      "source_sha256": "482d69e742ed99946deccdde4c524eb1c8387551cd2daa65cbb522f33bbd45b1"
+    },
+    {
+      "id": "REAL-catalogue-listed",
+      "split": "held_out",
+      "source_ids": [
+        "COMPUTACENTER-CATALOGUE"
+      ],
+      "claim": {
+        "id": "REAL-catalogue-listed",
+        "statement": "The undated GCA Computacenter listing includes Professional Services.",
+        "entity_id": "COMPUTACENTER (UK) LIMITED",
+        "geography": "UK",
+        "reporting_period": "undated catalogue",
+        "truth_class": "source_reported_fact",
+        "state": "unknown",
+        "segment_ids": [
+          "COMPUTACENTER-CATALOGUE-EXCERPT"
+        ]
+      },
+      "reference": "supported",
+      "reference_reason": "Supplier heading and lot label support only catalogue presence.",
+      "source_locator": "Supplier heading and selected lot names, lines 59,63,77,146",
+      "source_sha256": "c59430ad0970583321bb45d1c4d73aab02413141ed6335488e237e1058743adb"
+    },
+    {
+      "id": "REAL-catalogue-contract",
+      "split": "held_out",
+      "source_ids": [
+        "COMPUTACENTER-CATALOGUE"
+      ],
+      "claim": {
+        "id": "REAL-catalogue-contract",
+        "statement": "Computacenter won and delivered a £100m managed-services contract for Lloyds.",
+        "entity_id": "COMPUTACENTER (UK) LIMITED",
+        "geography": "UK",
+        "reporting_period": "undated catalogue",
+        "truth_class": "source_reported_fact",
+        "state": "unknown",
+        "segment_ids": [
+          "COMPUTACENTER-CATALOGUE-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "No award, customer, value or delivery evidence in the listing.",
+      "source_locator": "Supplier heading and selected lot names, lines 59,63,77,146",
+      "source_sha256": "c59430ad0970583321bb45d1c4d73aab02413141ed6335488e237e1058743adb"
+    },
+    {
+      "id": "REAL-global-to-uk",
+      "split": "held_out",
+      "source_ids": [
+        "DISTRIBUTION-EC"
+      ],
+      "claim": {
+        "id": "REAL-global-to-uk",
+        "statement": "Tech Data’s UK revenue was £10bn in 2021.",
+        "entity_id": "Tech Data",
+        "geography": "UK",
+        "reporting_period": "2021-07-23",
+        "truth_class": "source_reported_fact",
+        "state": "historical",
+        "segment_ids": [
+          "DISTRIBUTION-EC-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "Global wholesale role is not numerical UK revenue.",
+      "source_locator": "Page 2 / paragraph 2, lines 39-40",
+      "source_sha256": "a528f422494bf52b4428571949af162416524e28b729adbc04c59eda23c273af"
+    },
+    {
+      "id": "REAL-causal",
+      "split": "held_out",
+      "source_ids": [
+        "MS-SOFTWARE"
+      ],
+      "claim": {
+        "id": "REAL-causal",
+        "statement": "Switching to alternative software will reduce every bank’s costs by 30%.",
+        "entity_id": "Microsoft",
+        "geography": "UK",
+        "reporting_period": "2026-10-16",
+        "truth_class": "source_reported_fact",
+        "state": "announced",
+        "segment_ids": [
+          "MS-SOFTWARE-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "Qualitative barriers do not establish universal causal savings.",
+      "source_locator": "Summary and findings, lines 56 and 77-79",
+      "source_sha256": "31937069fa5002a87fef397b7d3ead35e5698f2ecebb77bf1add5f3ef3893c76"
+    },
+    {
+      "id": "REAL-superseded-current",
+      "split": "held_out",
+      "source_ids": [
+        "CLOUD-SCOPE"
+      ],
+      "claim": {
+        "id": "REAL-superseded-current",
+        "statement": "The January 2025 provisional recommendation is the current final CMA position in November 2026.",
+        "entity_id": "AWS and Microsoft",
+        "geography": "UK",
+        "reporting_period": "2025-01-28",
+        "truth_class": "source_reported_fact",
+        "state": "actual",
+        "segment_ids": [
+          "CLOUD-SCOPE-EXCERPT"
+        ]
+      },
+      "reference": "indeterminate",
+      "reference_reason": "Known final decision supersedes provisional evidence; obtain current final scope.",
+      "source_locator": "Provisional decision summary; superseded by final decision dated 31 July 2025",
+      "source_sha256": "d95551ee9304590c928beb683d215168c80b1e0a21641fa7beeeefab5829a364"
+    },
+    {
+      "id": "REAL-copied-corroboration",
+      "split": "held_out",
+      "source_ids": [
+        "AWS-PLAN"
+      ],
+      "claim": {
+        "id": "REAL-copied-corroboration",
+        "statement": "Two copies of this government announcement independently prove actual completed spending.",
+        "entity_id": "Amazon Web Services",
+        "geography": "UK",
+        "reporting_period": "five-year plan (endpoints unspecified)",
+        "truth_class": "source_reported_fact",
+        "state": "historical",
+        "segment_ids": [
+          "AWS-PLAN-EXCERPT"
+        ]
+      },
+      "reference": "unsupported_as_cited",
+      "reference_reason": "One assertion origin and an announced plan; copied evidence is not independent corroboration.",
+      "source_locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+      "source_sha256": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070"
+    },
+    {
+      "id": "REAL-commercial-inference",
+      "split": "held_out",
+      "source_ids": [
+        "MS-SOFTWARE"
+      ],
+      "claim": {
+        "id": "REAL-commercial-inference",
+        "statement": "Portability constraints may create transformation-service relevance; no customer demand has been established.",
+        "entity_id": "Microsoft",
+        "geography": "UK",
+        "reporting_period": "2026-10-16",
+        "truth_class": "interpretation",
+        "state": "announced",
+        "segment_ids": [
+          "MS-SOFTWARE-EXCERPT"
+        ]
+      },
+      "reference": "indeterminate",
+      "reference_reason": "Plausible labelled interpretation; customer-specific applicability remains unknown.",
+      "source_locator": "Summary and findings, lines 56 and 77-79",
+      "source_sha256": "31937069fa5002a87fef397b7d3ead35e5698f2ecebb77bf1add5f3ef3893c76"
+    },
+    {
+      "id": "REAL-scenario",
+      "split": "held_out",
+      "source_ids": [
+        "QUANTUM-ORDER"
+      ],
+      "claim": {
+        "id": "REAL-scenario",
+        "statement": "If validated for a suitable workload, quantum evaluation could inform a future airline optimisation study.",
+        "entity_id": "Oxford Ionics Limited",
+        "geography": "UK",
+        "reporting_period": "2025-09-11",
+        "truth_class": "scenario",
+        "state": "historical",
+        "segment_ids": [
+          "QUANTUM-ORDER-EXCERPT"
+        ]
+      },
+      "reference": "indeterminate",
+      "reference_reason": "Scenario needs workload and technical validation; not observed adoption.",
+      "source_locator": "Final order paragraph 5(ii), line 83",
+      "source_sha256": "482d69e742ed99946deccdde4c524eb1c8387551cd2daa65cbb522f33bbd45b1"
+    },
+    {
+      "id": "REAL-conflicting-evidence",
+      "split": "held_out",
+      "source_ids": [
+        "MS-OPENAI-2025"
+      ],
+      "claim": {
+        "id": "REAL-conflicting-evidence",
+        "statement": "A conflicting unsourced assertion overrides the dated CMA conclusion.",
+        "entity_id": "Microsoft Corporation",
+        "geography": "global",
+        "reporting_period": "2025-03-05",
+        "truth_class": "source_reported_fact",
+        "state": "historical",
+        "segment_ids": [
+          "MS-OPENAI-2025-EXCERPT"
+        ]
+      },
+      "reference": "indeterminate",
+      "reference_reason": "Conflicting claim is a challenge fixture, not a newly discovered official contradiction.",
+      "source_locator": "Summary paragraphs 2,3,15; selected non-contiguous sentences; historical decision",
+      "source_sha256": "f02a0f6bc039a4a4c47dfddce555df6d216366aac5dd052bb4374a723ef245b8"
+    }
+  ]
+}

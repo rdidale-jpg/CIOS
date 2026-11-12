@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-11-12T13:32:56.269747+00:00",
+  "evaluated_yet": false,
+  "files": {
+    "tests/fixtures/research-sprint2/real-source-rubric-v1.json": "bf4cf26da49946c4ae9c8a1c713f02b638921a58eda0759ed1cb9b47aa8bc11d",
+    "tests/fixtures/research-sprint2/real-source-cases-v1.json": "33b86f546e74f3f540bea3ba77522b8abe25dc78191e9e6e4df287df3a7952ee"
+  },
+  "reference_dependence": "Authored source-support labels, not externally adjudicated ground truth. Runtime outputs were not used."
+}

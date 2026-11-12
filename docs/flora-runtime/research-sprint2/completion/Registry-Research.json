@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "company_number": "04771037",
+      "legal_name": "ACADEMIA LIMITED",
+      "status": "Active",
+      "sic_codes": [],
+      "sic_extent": "not present in retrieved extent; unknown",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/04771037",
+      "first_reference": "turn126057view0",
+      "verification_reference": "turn611550view0",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    },
+    {
+      "company_number": "04418144",
+      "legal_name": "ADVANIA UK (CCS) LIMITED",
+      "status": "Active",
+      "sic_codes": [],
+      "sic_extent": "not present in retrieved extent; unknown",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/04418144",
+      "first_reference": "turn126057view1",
+      "verification_reference": "turn611550view1",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    },
+    {
+      "company_number": "03645998",
+      "legal_name": "ADVANIA UK LIMITED",
+      "status": "Active",
+      "sic_codes": [],
+      "sic_extent": "not present in retrieved extent; unknown",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/03645998",
+      "first_reference": "turn126057view2",
+      "verification_reference": "turn611550view2",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    },
+    {
+      "company_number": "02253061",
+      "legal_name": "AKHTER COMPUTERS LIMITED",
+      "status": "Active",
+      "sic_codes": [],
+      "sic_extent": "not present in retrieved extent; unknown",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/02253061",
+      "first_reference": "turn126057view3",
+      "verification_reference": "turn611550view3",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    },
+    {
+      "company_number": "08997297",
+      "legal_name": "AGILE SOLUTIONS (GB) LTD",
+      "status": "Active",
+      "sic_codes": [],
+      "sic_extent": "not present in retrieved extent; unknown",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/08997297",
+      "first_reference": "turn126057view4",
+      "verification_reference": "turn611550view4",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    },
+    {
+      "company_number": "10161344",
+      "legal_name": "AKER SYSTEMS LIMITED",
+      "status": "Active",
+      "sic_codes": [
+        "62090 - Other information technology service activities"
+      ],
+      "sic_extent": "selected page excerpt",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/10161344",
+      "first_reference": "turn126057view5",
+      "verification_reference": "turn611550view5",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    },
+    {
+      "company_number": "07800173",
+      "legal_name": "2-SEC LIMITED",
+      "status": "Active",
+      "sic_codes": [],
+      "sic_extent": "not present in retrieved extent; unknown",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/07800173",
+      "first_reference": "turn126057view7",
+      "verification_reference": "turn611550view6",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    },
+    {
+      "company_number": "SC293432",
+      "legal_name": "2I LIMITED",
+      "status": "Active",
+      "sic_codes": [],
+      "sic_extent": "not present in retrieved extent; unknown",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/SC293432",
+      "first_reference": "turn126057view8",
+      "verification_reference": "turn611550view7",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    },
+    {
+      "company_number": "08549332",
+      "legal_name": "2T SECURITY LTD",
+      "status": "Active",
+      "sic_codes": [
+        "62020 - Information technology consultancy activities"
+      ],
+      "sic_extent": "selected page excerpt",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/08549332",
+      "first_reference": "turn126057view9",
+      "verification_reference": "turn611550view8",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    },
+    {
+      "company_number": "10353328",
+      "legal_name": "3B DATA SECURITY LTD",
+      "status": "Active",
+      "sic_codes": [],
+      "sic_extent": "not present in retrieved extent; unknown",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/10353328",
+      "first_reference": "turn126057view10",
+      "verification_reference": "turn611550view9",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    },
+    {
+      "company_number": "03599593",
+      "legal_name": "4C STRATEGIES LIMITED",
+      "status": "Active",
+      "sic_codes": [
+        "61900 - Other telecommunications activities"
+      ],
+      "sic_extent": "selected page excerpt",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/03599593",
+      "first_reference": "turn126057view11",
+      "verification_reference": "turn611550view10",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    },
+    {
+      "company_number": "01584718",
+      "legal_name": "COMPUTACENTER (UK) LIMITED",
+      "status": "Active",
+      "sic_codes": [],
+      "sic_extent": "not present in retrieved extent; unknown",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/01584718",
+      "first_reference": "turn126057view12",
+      "verification_reference": "turn611550view11",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    },
+    {
+      "company_number": "01691472",
+      "legal_name": "TD SYNNEX UK LIMITED",
+      "status": "Active",
+      "sic_codes": [],
+      "sic_extent": "not present in retrieved extent; unknown",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/01691472",
+      "first_reference": "turn126057view13",
+      "verification_reference": "turn611550view12",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    },
+    {
+      "company_number": "11795789",
+      "legal_name": "OXFORD IONICS LIMITED",
+      "status": "Active",
+      "sic_codes": [
+        "26200 - Manufacture of computers and peripheral equipment",
+        "27900 - Manufacture of other electrical equipment",
+        "71129 - Other engineering activities"
+      ],
+      "sic_extent": "selected page excerpt",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/11795789",
+      "first_reference": "turn126057view14",
+      "verification_reference": "turn611550view13",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    },
+    {
+      "company_number": "13264637",
+      "legal_name": "DARKTRACE LIMITED",
+      "status": "Active",
+      "sic_codes": [],
+      "sic_extent": "not present in retrieved extent; unknown",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/13264637",
+      "first_reference": "turn126057view15",
+      "verification_reference": "turn611550view14",
+      "retrieved_date": "2026-11-12",
+      "scope": "UK legal registration; not headquarters, parent, trading scale or customer delivery",
+      "canonical_action": "proposed exact legal-name link only; no canonical mutation"
+    }
+  ],
+  "policy": {
+    "rights_basis": "CH-produced presentation and selected non-personal factual identifiers only; not blanket third-party filing rights. Factual legal metadata is source-reported, not independently guaranteed.",
+    "url": "https://www.gov.uk/government/publications/companies-house-accreditation-to-information-fair-traders-scheme/public-task-copyright-and-crown-copyright",
+    "reference": "turn559096view3",
+    "sections": "2.1,2.2,3",
+    "review_date": "2026-11-12",
+    "excluded": "Officer/PSC, addresses, accounts/filing documents, insignia and third-party copyrighted bodies"
+  },
+  "remaining_unknowns": [
+    "123 DIGITALLY exact legal identity",
+    "4Thought Digital exact legal identity",
+    "ABTEC exact legal identity",
+    "AWS EMEA foreign legal identity and UK relationship",
+    "Akhter company membership does not resolve Team Akhter Consortium identity",
+    "Current group parents/brand links remain unknown"
+  ]
+}

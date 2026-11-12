@@ -1,0 +1,60 @@
+"""Substantive research drafts within the existing UK Technology programme."""
+from html import escape as e
+from urllib.parse import parse_qsl
+from .snapshot import assets,completion
+from ...unified_views import page
+from ...visual_templates import text
+
+ROUTE='/research/programmes/uk-technology'
+STYLE='''.s2-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:start}.s2-card{background:#fffdf7;border:1px solid #ccd9cb;border-radius:22px;padding:24px;min-width:0;overflow-wrap:anywhere}.s2-card p{line-height:1.65}.s2-label{font-size:.75rem;color:#775429;background:#f4ead7;padding:6px 9px;border-radius:8px;display:inline-block}.s2-map svg{width:100%;height:auto;display:block}.s2-map a:focus rect,.s2-map a:hover rect{stroke:#9d753b;stroke-width:3}.s2-map a:focus-visible{outline:3px solid #805bc2}.s2-source{border-top:1px solid #ccd9cb;padding:18px 0}.s2-source blockquote{margin:12px 0;padding-left:14px;border-left:3px solid #a9884c;white-space:pre-line;font-size:.95rem}.s2-pills{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.s2-pills a{padding:10px;border:1px solid #cbd8c6;border-radius:15px;min-height:44px}.s2-proof{padding:16px;border-radius:15px;background:#e6eddf}.s2-mobile{display:none}@media(max-width:950px){.s2-grid{grid-template-columns:1fr}}@media(max-width:600px){.s2-map svg{display:none}.s2-mobile{display:flex;flex-wrap:wrap;gap:8px}.s2-card{padding:18px}.s2-mobile a{padding:12px;border:1px solid #cbd8c6;border-radius:12px;min-height:44px}}@media print{.s2-grid{display:block}.s2-card{border:0;padding:10px}.s2-pills,.s2-mobile{display:none}.s2-source{break-inside:avoid}}'''
+
+
+def render(query,headers=None):
+    current=completion();data=assets();d=data['Research-v1.json'];proof=data['Assurance-v1.json'];pairs=parse_qsl(query,strict_parsing=True,max_num_fields=3);p=dict(pairs)
+    if len(p)!=len(pairs) or set(p)-{'view','provider','segment'}:raise ValueError('Invalid research selector')
+    view=p.get('view','research')
+    if view not in ('research','briefings','journeys','assurance'):raise ValueError('Unknown research view')
+    profiles={x['id']:x for x in d['profiles']};selected=p.get('provider','microsoft')
+    if selected not in profiles:raise ValueError('Unknown provider')
+    if 'segment' in p and p['segment'] not in ('software','infrastructure','data-ai','cyber','services','channels','emerging'):raise ValueError('Unknown segment')
+    nav=''.join(f"<a href='{ROUTE}?view={v}#research-detail'>{label}</a>" for v,label in [('research','Industry & coverage'),('briefings','Provider baselines'),('journeys','Banking & Aviation'),('assurance','Evidence & assurance')])
+    nodes=[];links=[]
+    for i,row in enumerate(d['profiles']):
+        x=30+(i%2)*340;y=30+(i//2)*150;href=ROUTE+'?view=briefings&provider='+row['id']+'#research-detail'
+        nodes.append(f"<a href='{href}' aria-label='{e(row['name'])}'><title>{e(row['name'])} / partial research baseline</title><rect x='{x}' y='{y}' width='310' height='125' rx='18' fill='#e6eddf' stroke='#aabbab'/>{text(x+18,y+34,row['name'],width=24,size=18)}{text(x+18,y+94,' / '.join(row['segments']),width=39,size=12,bold=False)}</a>")
+        links.append(f"<a href='{href}'>{e(row['name'])}</a>")
+    diagram="<svg viewBox='0 0 710 500' role='img' aria-label='Technology ecosystem research coverage'><path d='M190 150V455M530 150V455M190 240H530M190 390H530' fill='none' stroke='#becab9' stroke-width='2'/>"+''.join(nodes)+text(30,492,'Research coverage; connectors are not verified customer or supplier relationships.',width=100,size=11,bold=False)+"</svg>"
+    title='Understand the technology ecosystem';panel="<span class='s2-label'>Industry research / incomplete</span><p>Software and infrastructure provide reusable platforms. Security and integration services help organisations operate them; distribution connects vendors and resellers. Emerging technologies need separate maturity and applicability evidence.</p><p><strong>Six distinct drafts cover seven segments.</strong> Microsoft spans software and Data/AI; it is counted once. These role descriptions remain research synthesis, not verified enterprise operating models.</p><p>Regulator findings, sector analysis, procurement catalogues, legal conditions and historical merger evidence now provide more context than supplier labels alone.</p><h3>Population and evidence gaps</h3><p>The 15 original candidates are preserved alongside six scoped research leads. Exact legal-name records now support ten original labels, plus one company component of a consortium. Four original labels and current group/brand mappings remain unresolved. Comparable UK scale and importance are unknown. This is not an exhaustive population or key-company ranking.</p><ul>"+''.join('<li>'+e(x)+'</li>' for x in d['selection_rules'])+"</ul>"
+    if view=='research':
+        panel+="<details><summary>Inspect legal identities and remaining scope gaps</summary><p>15 separately re-retrieved non-personal registry records. Proposals only; no canonical merges. Registration is not scale, headquarters or ownership.</p>"
+        for item in current['population']:
+            legal=item['legal_record'];panel+="<article class='s2-source'><h3>"+e(item['name'])+"</h3><p>"+e(item['identity_resolution'])+"</p>"
+            if legal:panel+="<p><a href='"+e(legal['url'],quote=True)+"'>"+e(legal['legal_name'])+" / "+e(legal['company_number'])+" ↗</a> · "+e(legal['status'])+"</p>"
+            panel+="<p>Parent: Unknown · UK scale: Unknown</p></article>"
+        panel+="</details><p class='s2-proof'>Six expanded partial baselines cover seven segments. Current operating structures and rights-cleared disclosures are still incomplete; this is not the completed UK industry.</p>"
+    if view=='briefings':
+        row=profiles[selected];title=row['name'];panel=f"<span class='s2-label'>{e(row['status'])}</span><p>{e(row['summary'])}</p><p class='rf-small'>{e(row['kind'])}</p>"
+        for key,label in [('business_model','Business model'),('structure','Operating structure'),('products','Products & capabilities'),('uk_context','UK relevance & scale'),('change','Strategy, change & freshness'),('ecosystem','Ecosystem relationships'),('pressure','Interpretation / business pressures')]:panel+=f"<h3>{label}</h3><p>{e(row[key])}</p>"
+        panel+="<h3>Unqualified research question</h3><p>"+e(row['hypothesis'])+"</p><h3>Still unknown</h3><ul>"+''.join('<li>'+e(x)+'</li>' for x in row['gaps'])+"</ul><p>Evidence: "+e(' · '.join(row['source_ids']))+f" · <a href='{ROUTE}?view=assurance#research-detail'>Inspect passages and rights →</a></p>"
+        update=current['profile_updates'][selected]
+        panel+="<h3>Completion research / source-reported and interpreted</h3>"
+        for key,label in [('legal_scope','Legal identity and scope'),('change','What the evidence changes'),('ecosystem','Ecosystem boundaries'),('implication','Interpretation / not customer demand'),('critical_gap','Next high-value research gap')]:panel+="<h3>"+label+"</h3><p>"+e(update[key])+"</p>"
+        if update['new_source_ids']:panel+="<p>Additional evidence: "+e(' · '.join(update['new_source_ids']))+"</p>"
+    elif view=='journeys':
+        title='From evidence to a research question';panel="<span class='s2-label'>Interpretations / no verified customer adoption</span>"
+        for row in d['journeys']:
+            panel+=f"<h3>{e(row['industry'])} → {e(row['enterprise'])}</h3><p><strong>Evidence:</strong> {e(row['technology_source'])} + existing {e(row['enterprise_claim_id'])}</p><p><strong>Capability:</strong> {e(row['capability'])}</p><p><strong>Business consequence:</strong> {e(row['business_consequence'])}</p><p><strong>Hypothesis:</strong> {e(row['hypothesis'])}</p><p class='s2-label'>Buyer, budget, procurement and deployment: Unknown</p><p><a href='{e(row['target'],quote=True)}'>Explore existing enterprise opportunities →</a></p>"
+    elif view=='assurance':
+        title='What does the evidence actually support?';decision=proof['decision']
+        panel="<div class='s2-proof'><strong>Historical bounded source-support proof</strong><p>The retained government passage supports a historical planned investment. Five counterfactual scope/outcome/amount claims were rejected. It proves neither completed spending nor realised GDP, customer adoption or buying intent.</p><p>General natural-language semantic verification is unavailable. Provider synthesis remains provisional/withheld from verified release.</p></div>"
+        panel+="<div class='s2-proof'><h3>Completion acceptance</h3><p>Live semantic verification: BLOCKED. The existing model integration now has a bounded research adapter, but configuration, reviewed spending limits and permitted egress are absent. No live model call or autonomous release is claimed.</p><p>Controlled synthetic regression: 5 supported / 19 unsupported-as-cited / 11 indeterminate. False acceptance 0/19; false rejection 0/5; unresolved 11/35; decision coverage 24/35. These are not real-world accuracy estimates.</p><p>Real-source calibration: 24 frozen cases, including 22 held-out. All not executed; semantic accuracy unmeasured. Software fixtures do not authorise publication.</p></div>"
+        for s in current['new_sources']:
+            panel+="<article class='s2-completion-source'><h3>"+e(s['id'])+" / historical source report</h3><blockquote>"+e(s['excerpt'])+"</blockquote><p>Published "+e(s['publication_date'])+" · "+e(s['locator'])+"</p><p><a href='"+e(s['url'],quote=True)+"'>CMA summary ↗</a> · <a href='"+e(s['licence_url'],quote=True)+"'>Selected Crown text / OGL ↗</a></p><p>"+e(s['attribution'])+"</p><p>Semantic verification not executed. Historical terms cannot establish current ownership.</p></article>"
+        panel+="<details><summary>Operation-specific source policy</summary>"
+        for policy in current['source_policies']:
+            panel+="<h3>"+e(policy['source_id'])+"</h3><p>"+e(' · '.join(k+': '+v for k,v in policy['operations'].items()))+"</p><p>"+e(policy['extent'])+"</p><p>"+e(policy['basis'])+"</p>"
+        panel+="</details>"
+        for s in d['sources']:
+            panel+=f"<article class='s2-source'><h3>{e(s['id'])}</h3><span class='s2-label'>Source-reported evidence / semantic review pending</span><blockquote>{e(s['excerpt'])}</blockquote><p>Published: {e(s['publication_date'] or 'Unknown')} · effective date: Unknown · retrieved {e(s['retrieved_at'][:10])}</p><p>Origin: {e(s['origin_id'])}</p><p>Scope: {e(s['locator'])}</p><p>Separate acquisition references: {e(s['researcher_tool_reference'])}; {e(' / '.join(s['verifier_tool_references']))}</p><p><a href='{e(s['url'],quote=True)}' rel='noreferrer'>Official source ↗</a> · <a href='{e(s['licence_url'],quote=True)}'>Reuse terms ↗</a></p><p class='rf-small'>{e(s['attribution'])}</p><p class='rf-small'>Excerpt SHA-256: {e(s['excerpt_sha256'])}</p></article>"
+    body=f"<style>{STYLE}</style><nav class='ux-breadcrumb'><a href='/industries'>Industries</a> / <a href='{ROUTE}'>UK Technology</a> / Research depth</nav><section class='ux-hero' id='content'><p class='eyebrow'>UK Technology / Research intelligence</p><h1>Know the role.<br>Question the implication.</h1><p>Explore enterprise context, trace evidence and distinguish an announced ambition from a delivered outcome.</p></section><nav class='s2-pills'>{nav}</nav><div class='s2-grid'><figure class='s2-card s2-map'>{diagram}<nav class='s2-mobile' aria-label='Provider research baselines'>{''.join(links)}</nav><p>Coverage roles and source limitations. No customer deployments or delivery relationships are implied.</p></figure><section class='s2-card' id='research-detail' tabindex='-1'><h2>{e(title)}</h2>{panel}</section></div><p class='ux-disclosure'>Research drafts and controlled semantic proofs. No independent human security review or general model-based factual verification is claimed. Canonical identities and Pipeline remain unchanged.</p>"
+    return page('UK Technology research depth',body,headers,'industries',ROUTE)

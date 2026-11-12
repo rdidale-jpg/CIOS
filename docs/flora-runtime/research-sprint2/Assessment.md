@@ -1,0 +1,13 @@
+# Sprint 2 — foundation assessment and implementation boundary
+
+Verified #568: open draft, head b4a2c2c680d21bc252f3bc7e365c7eb08af178d3; main c3b818cbae7a2f88930d26bcd65b2dab7263e19f. Isolated branch codex/flora-uk-technology-semantic-sprint2 builds on #568 and the new draft targets its branch. No original PR modification or merge.
+
+The actual foundation has durable isolated jobs, nonce/role/date/rights gates, independent acquisition receipts, immutable research releases, dependency invalidation and public pinned projections. Its extractor recognises catalogue-name lines. Matching a located passage, a second retrieval and a source hash do not establish complete-claim entailment. Legal identity, original assertion dependence, reporting periods, ambitions/outcomes, financial/causal inference and substantive baselines remain unproven. The role check records are deterministic responsibilities, not independent model reviewers. Its 15 labels are proposed research candidates, not a market population ranking.
+
+Reuse SourceSegment, CandidateClaim, SemanticTwin, existing Researcher manifests, operation permission contracts and the protected Pipeline owners. Add a bounded semantic preflight/release envelope, source audit and research projections, not another canonical database or qualification engine. Preserve all five foundation assets and every earlier historical source byte.
+
+Implement a conservative three-way semantic decision with complete claim facets, independently acquired passages, source origins, temporal/modality/identity checks and structured decision receipts. A deterministic controlled-language extractor can demonstrate bounded meaning distinctions; arbitrary natural-language assertions require a separately configured semantic verifier. Do not relabel lexical matching as general semantic assurance or model-authored evaluation references as independent truth.
+
+Environment observations: network restricted/enforced; no configured secrets, model-service bindings or outbound identities. Approved web research tool is available for official sources. A new model API or paid client will not be provisioned. Complete independent implementation/research/browser/testing work; report missing model assurance and source rights precisely. All non-supported semantic conclusions remain withheld, without routine product-owner fact checking.
+
+Evaluation: freeze the evaluator before generating the held-out cases; separate development examples. Use explicit source-backed rubrics and report confusion counts/denominators and unresolved outcomes by type. Controlled counterfactual checks do not measure open-world research accuracy. Keep model-assisted curated profiles distinguishable from independently assured publications.

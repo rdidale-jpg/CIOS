@@ -1,0 +1,41 @@
+# Sprint 2 completion evidence
+
+Continues draft [#569](https://github.com/rdidale-jpg/CIOS/pull/569), based on draft #568. No new sprint, canonical model, Pipeline engine, paid service or unattended monitor is created. **Full Sprint 2 acceptance remains BLOCKED**. This is the completed independent work plus a precise live-verification/coverage gap register, not a claim that the original mission has passed.
+
+## What changed
+
+- Existing OpenAI integration reused through a bounded research adapter, strict source collector, three-role one-claim cycle and explicit single-case calibration path. Existing SDK/schema/provider selection/call guard are reused; tenant document/raw-response workflows are not invoked.
+- Corrected selective-decision metrics preserve the original 35-case synthetic suite and frozen evaluator byte-for-byte. The old “0/30 false acceptance” pooled 19 unsupported-as-cited with 11 indeterminate references; the corrected result is **0/19**, false rejection **0/5**, unresolved **11/35**, decision coverage **24/35 (68.57%)**. Unresolved cases overlap the old 30-case pool; the three numbers are not disjoint populations. Confusion rows and claim-type denominators are in [Controlled-Matrix-v2.json](Controlled-Matrix-v2.json). These are authored logical support references, not real-world truth/accuracy.
+- Twenty-four real-source cases are separated into two development and 22 held-out cases. Cases/rubric hashes were frozen before evaluation. [Real-Source-Results-v1.json](Real-Source-Results-v1.json) records every case as **not executed**, with zero execution/decision coverage and null false-acceptance/rejection/abstention rates. Not-executed is not model abstention or a successful rejection. No verifier output supplied the reference labels.
+- Fifteen selected non-personal Companies House records were separately retrieved twice. Ten of the original 15 labels match exact legal names (case-insensitive exact spelling); Akhter's company component does not resolve the consortium. Four original labels remain unresolved. The four additional records concern Computacenter (UK), TD SYNNEX UK, Oxford Ionics and Darktrace; group/brand relationships are not silently merged. All 21 inventory labels and original claim IDs remain preserved; canonical links are proposals only.
+- Six existing provider drafts cover seven segments, counting Microsoft once across software and Data/AI. Expanded identity/role/temporal/ecosystem distinctions and gaps are integrated into the same programme views. **Complete current substantive baselines are not achieved**: current operating structures, UK scale, group ownership, offerings and strategy still require permitted evidence in several segments. This small biased sample is not the completed UK technology industry or a key-provider ranking.
+- One new historical CMA Microsoft/OpenAI excerpt distinguishes material influence, de facto control and Azure platform roles. It is dated March 2025, not evidence of current 2026 control or customer delivery. Fifteen legal metadata records support name/number/status only, with selected SIC where actually present. No addresses, directors, PSCs, signed URLs, filing bodies or issuer attachments are retained.
+- Per-source operation decisions cover eight authority excerpts, 15 register metadata selections and one withheld current issuer source. Public availability does not clear third-party copyright. Register presentation/factual metadata is distinguished from third-party filed accounts. The discovered Computacenter issuer-results body is withheld, including model processing, quotation, indexing and redistribution, pending rights clarification.
+
+## Inspectable artifacts
+
+[Runtime diagnosis and exact safe configuration](Runtime-Diagnosis.md) · [Actual readiness](Runtime-Readiness.json) · [Actual connectivity](Connectivity-Result.json) · [Frozen references](Calibration-Freeze-v1.json) · [Registry evidence](Registry-Research.json).
+
+The hash-pinned [Completion-v2 projection](../../../../enterprise-knowledge/technology/research-sprint2/Completion-v2.json) contains the complete identity/coverage matrix, source operation decisions and passage registry. It is a reviewed read-only projection, not a competing canonical store. Original `Research-v1` / `Assurance-v1`, all 167 previous corpus files, all provider/enterprise/opportunity identities and historical source bytes remain unchanged. The exact corpus inventory extends to 168 through one named hash-pinned addition, with no directory-wide exception.
+
+Source policy judgments are scoped, not legal certainty. Crown/EU authored selected factual excerpts are treated under OGL/CC BY with attribution; no blanket permission for official attachments or party submissions. Companies House's public-task/copyright guidance explicitly distinguishes Crown presentation from third-party filings. Remaining unresolved questions include issuer text permission, current ownership/group linkage, current operating detail and processing/retention approval for the existing model account. The registry metadata scope should not be expanded into personal records or filing content through this policy.
+
+## Real-source calibration limits
+
+The source set covers plans versus achievements, wrong subsidiary/geography/period, proposal versus final obligation, ownership versus alliance, platform relevance versus customer delivery, cohort versus provider scale, causal/numerical overreach, historical/superseded context and copied assertion origins. Conflicting-evidence and copied-corroboration mutations are evaluation constructions, not newly discovered official contradictions or independent corroboration. References use located passages and explicit rationale; same-author source interpretation remains a judgment dependency. No externally blinded adjudication or model-family independence is claimed. Larger stratified and independently adjudicated coverage remains necessary before accuracy claims.
+
+## Separate integration recommendations
+
+| Boundary | Recommendation | Conditions and residual limits |
+|---|---|---|
+| A — #568 foundation infrastructure | Consider separately for its bounded catalogue/correction infrastructure, subject to actual repository requirements and current CI. Keep draft as instructed. | Establish workflow only; catalogue selection bias, single publisher family, no autonomous semantic truth guarantee. No merge is authorised by this report. |
+| B — #569 research UI/content | Suitable for draft review as clearly labelled partial research and adapter work, **not completed Sprint 2 acceptance**. | Current-candidate CI/browser evidence must pass. Legal/brand mappings and several substantive baselines remain incomplete. Runtime metadata/secrets are not exposed by the public route. |
+| C — autonomous semantic publication | **BLOCKED**. | Missing authorised runtime configuration, reviewed spend/pricing, endpoint/source egress; no live held-out semantic results, no provider processing-setting verification, and no newly scoped semantic release/correction demonstration. Software fixtures and passing CI cannot waive these. |
+
+Rob chooses priority and judges usefulness. He is not the routine factual checker. The next bounded action is administrator configuration of the existing development integration, then explicitly budgeted live source cases and a governed existing-owner handoff, plus permitted current provider disclosures. Do not enable unattended monitoring or production publication.
+
+## User walkthrough
+
+Industries → UK Technology → Industry research → inspect legal identities, choose a provider, inspect “Completion research”, then Evidence & assurance for corrected metrics, the historical CMA excerpt and operation policies. Banking/Lloyds and Aviation/easyJet journeys remain labelled capability interpretations and unqualified questions; customer adoption, budgets, buyers and procurement remain Unknown. Existing Pipeline controls and immutable records are unchanged.
+
+Actual local/hosted validation, inherited-identity comparison, changed-view previews and remaining limitations are recorded in [Validation.md](Validation.md). No merge, deployment, production change, new paid commitment or routine human fact-review process occurred.

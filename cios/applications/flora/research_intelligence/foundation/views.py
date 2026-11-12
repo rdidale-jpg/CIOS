@@ -30,6 +30,9 @@ def evidence(claims,receipts):
 
 
 def render(query='',headers=None):
+    if dict(parse_qsl(query,keep_blank_values=True)).get('view') in ('research','briefings','journeys','assurance'):
+        from .sprint2.views import render as render_research
+        return render_research(query,headers)
     data=assets();p=data['Programme.json'];release=data['Release-v1.json'];content=release['content'];pop=data['Population-v1.json'];receipts=data['Acquisition-Receipts-v1.json']['receipts']
     view,segment=selection(query,p['taxonomy']);claims=content['claims'];count=len(pop['records'])
     short_labels={'infrastructure':'Cloud & infrastructure','services':'Consulting & managed services','channels':'Channels & partnerships'}
@@ -58,6 +61,6 @@ def render(query='',headers=None):
     elif view=='gaps':
         title='What should research do next?'
         panel="<p>Baseline breadth is specified, not falsely marked complete. Fresh retrieval does not make an undated publication current.</p><ol>"+''.join(f"<li>{e(step)}</li>" for step in pop['next_population_increment'])+"</ol><h3>Comparable baseline still required</h3><ul>"+''.join(f"<li>{e(g['requirement'])}</li>" for g in content['gaps'])+"</ul><p>No opportunity has been created, captured or qualified by this programme.</p>"
-    tabs=''.join(f"<a href='{ROUTE}?view={v}#research-panel' {'aria-current=page' if view==v and not segment else ''}>{label}</a>" for v,label in [('overview','Programme'),('provider','Provider baseline'),('evidence','Evidence & assurance'),('gaps','Gaps & next actions')])
+    tabs=''.join(f"<a href='{ROUTE}?view={v}#research-panel' {'aria-current=page' if view==v and not segment else ''}>{label}</a>" for v,label in [('research','Industry research'),('overview','Programme'),('provider','Provider baseline'),('evidence','Evidence & assurance'),('gaps','Gaps & next actions')])
     body=f"<style>{STYLE}</style><nav class='ux-breadcrumb' aria-label='Breadcrumb'><a href='/'>Home</a> / <a href='/industries'>Industries</a> / UK technology research</nav><section class='ux-hero' id='content'><p class='eyebrow'>FLORA / Research foundation</p><h1>Understand the UK<br>technology ecosystem.</h1><p>Build evidence before conclusions. Explore coverage, inspect a provider and see exactly what remains unknown.</p></section><div class='rf-metrics'><span><b>7</b>coverage categories</span><span><b>{count}</b>population candidates</span><span><b>1</b>publisher family</span><span><b>0</b>automatic promotions</span></div><nav class='ux-tabs' aria-label='Research views'>{tabs}</nav><div class='rf-layout'><figure class='rf-map'>{svg}<nav class='rf-links' aria-label='Research coverage categories'>{''.join(links)}</nav></figure><section class='rf-panel' id='research-panel' tabindex='-1' aria-labelledby='panel-title'><p class='ux-kicker'>As of {e(content['as_of'])} / release {release['version']}</p><h2 id='panel-title'>{e(title)}</h2>{panel}</section></div><p class='ux-disclosure'>Accepted for bounded research publication. Candidate intelligence; canonical facts and Pipeline authority remain with their existing owners. No private workspace data is read here.</p>"
     return page('UK technology research programme',body,headers,'industries',ROUTE)

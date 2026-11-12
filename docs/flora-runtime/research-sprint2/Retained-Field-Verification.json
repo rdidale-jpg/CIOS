@@ -1,0 +1,40 @@
+{
+  "method": "Every final retained excerpt field was checked against separate actual verifier retrievals. Source-body/meaning accuracy is not established by this operation.",
+  "checks": [
+    {
+      "source_id": "AWS-PLAN",
+      "retained_fields": 3,
+      "missing": []
+    },
+    {
+      "source_id": "MS-SOFTWARE",
+      "retained_fields": 4,
+      "missing": []
+    },
+    {
+      "source_id": "CYBER-UK",
+      "retained_fields": 1,
+      "missing": []
+    },
+    {
+      "source_id": "QUANTUM-ORDER",
+      "retained_fields": 2,
+      "missing": []
+    },
+    {
+      "source_id": "COMPUTACENTER-CATALOGUE",
+      "retained_fields": 4,
+      "missing": []
+    },
+    {
+      "source_id": "DISTRIBUTION-EC",
+      "retained_fields": 1,
+      "missing": []
+    },
+    {
+      "source_id": "CLOUD-SCOPE",
+      "retained_fields": 1,
+      "missing": []
+    }
+  ]
+}

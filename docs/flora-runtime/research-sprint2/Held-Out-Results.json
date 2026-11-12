@@ -1,0 +1,484 @@
+{
+  "schema_version": 1,
+  "split": "held_out_after_evaluator_freeze",
+  "evaluator_sha256": "2a719a6cbfccce016f7f1bfff0ecc6892d8b7e0dbedbe43b67263818da833e3a",
+  "held_out_sha256": "9665cb503a762adc7e320d7116383f1a9a87c569a4a627b11b6195c534297247",
+  "reference_method": "Explicit authored synthetic source propositions and logical rubrics; references are not independent human/model ground truth or empirical research accuracy.",
+  "calibration_limit": "Same development author; no external blinded annotation, no representative real-world corpus; claims of general semantic accuracy are not supported.",
+  "cases": [
+    {
+      "id": "H-subsidiary",
+      "claim_type": "subsidiary",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-country",
+      "claim_type": "country",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-achieved",
+      "claim_type": "achieved",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-number",
+      "claim_type": "number",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-currency",
+      "claim_type": "currency",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-period",
+      "claim_type": "period",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-ownership",
+      "claim_type": "ownership",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-alliance",
+      "claim_type": "alliance",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-delivery",
+      "claim_type": "delivery",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-adoption",
+      "claim_type": "adoption",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-causation",
+      "claim_type": "causation",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-relevance",
+      "claim_type": "relevance",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-positive-scope",
+      "claim_type": "bounded_fact",
+      "reference": "accept_bounded",
+      "observed": "accept_bounded",
+      "matches_rubric": true,
+      "reasons": [
+        "Only a reported plan is supported; no achieved outcome, causal benefit, adoption or budget qualification inferred"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-supported-subject",
+      "claim_type": "bounded_fact",
+      "reference": "accept_bounded",
+      "observed": "accept_bounded",
+      "matches_rubric": true,
+      "reasons": [
+        "Only a reported plan is supported; no achieved outcome, causal benefit, adoption or budget qualification inferred"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-supported-geography",
+      "claim_type": "bounded_fact",
+      "reference": "accept_bounded",
+      "observed": "accept_bounded",
+      "matches_rubric": true,
+      "reasons": [
+        "Only a reported plan is supported; no achieved outcome, causal benefit, adoption or budget qualification inferred"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-supported-amount",
+      "claim_type": "bounded_fact",
+      "reference": "accept_bounded",
+      "observed": "accept_bounded",
+      "matches_rubric": true,
+      "reasons": [
+        "Only a reported plan is supported; no achieved outcome, causal benefit, adoption or budget qualification inferred"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-stale",
+      "claim_type": "freshness",
+      "reference": "unresolved",
+      "observed": "unresolved",
+      "matches_rubric": true,
+      "reasons": [
+        "Stale support; refresh or explicitly assess historical statement"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-conflicting-date",
+      "claim_type": "contradiction",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Conflicting source content/date/scope metadata"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-conflicting-official",
+      "claim_type": "contradiction",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Conflicting source content/date/scope metadata"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-copied-verification",
+      "claim_type": "source_independence",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Independent retrieval/run identity failed"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-superseded",
+      "claim_type": "supersession",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Superseded passage cannot authorise a current conclusion"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-injection",
+      "claim_type": "publication_safety",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Unsafe/sensitive source material quarantined"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-sensitive",
+      "claim_type": "publication_safety",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Unsafe/sensitive source material quarantined"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-private",
+      "claim_type": "publication_safety",
+      "reference": "reject",
+      "observed": "reject",
+      "matches_rubric": true,
+      "reasons": [
+        "Unsafe/sensitive source material quarantined"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-rights-acquisition",
+      "claim_type": "rights",
+      "reference": "unresolved",
+      "observed": "unresolved",
+      "matches_rubric": true,
+      "reasons": [
+        "Required operation rights unresolved/restricted"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-rights-deterministic_extraction",
+      "claim_type": "rights",
+      "reference": "unresolved",
+      "observed": "unresolved",
+      "matches_rubric": true,
+      "reasons": [
+        "Required operation rights unresolved/restricted"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-rights-retention",
+      "claim_type": "rights",
+      "reference": "unresolved",
+      "observed": "unresolved",
+      "matches_rubric": true,
+      "reasons": [
+        "Required operation rights unresolved/restricted"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-rights-quotation",
+      "claim_type": "rights",
+      "reference": "unresolved",
+      "observed": "unresolved",
+      "matches_rubric": true,
+      "reasons": [
+        "Required operation rights unresolved/restricted"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-rights-indexing",
+      "claim_type": "rights",
+      "reference": "unresolved",
+      "observed": "unresolved",
+      "matches_rubric": true,
+      "reasons": [
+        "Required operation rights unresolved/restricted"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-rights-redistribution",
+      "claim_type": "rights",
+      "reference": "unresolved",
+      "observed": "unresolved",
+      "matches_rubric": true,
+      "reasons": [
+        "Required operation rights unresolved/restricted"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-interpretation",
+      "claim_type": "interpretation",
+      "reference": "unresolved",
+      "observed": "unresolved",
+      "matches_rubric": true,
+      "reasons": [
+        "Interpretation/scenario needs independent semantic assurance and explicit assumptions"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-scenario",
+      "claim_type": "scenario",
+      "reference": "unresolved",
+      "observed": "unresolved",
+      "matches_rubric": true,
+      "reasons": [
+        "Interpretation/scenario needs independent semantic assurance and explicit assumptions"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-free-prose",
+      "claim_type": "unsupported_interpretation",
+      "reference": "unresolved",
+      "observed": "unresolved",
+      "matches_rubric": true,
+      "reasons": [
+        "Arbitrary prose cannot be proved by the controlled semantic renderer"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-alliance-prose",
+      "claim_type": "unsupported_natural_language",
+      "reference": "unresolved",
+      "observed": "unresolved",
+      "matches_rubric": true,
+      "reasons": [
+        "Full passage outside bounded grammar; independent natural-language assurance required"
+      ],
+      "source_family_count": 1
+    },
+    {
+      "id": "H-copied-source-origins",
+      "claim_type": "source_independence",
+      "reference": "accept_bounded",
+      "observed": "accept_bounded",
+      "matches_rubric": true,
+      "reasons": [
+        "Only a reported plan is supported; no achieved outcome, causal benefit, adoption or budget qualification inferred"
+      ],
+      "source_family_count": 1
+    }
+  ],
+  "by_claim_type": {
+    "subsidiary": {
+      "reject -> reject": 1
+    },
+    "country": {
+      "reject -> reject": 1
+    },
+    "achieved": {
+      "reject -> reject": 1
+    },
+    "number": {
+      "reject -> reject": 1
+    },
+    "currency": {
+      "reject -> reject": 1
+    },
+    "period": {
+      "reject -> reject": 1
+    },
+    "ownership": {
+      "reject -> reject": 1
+    },
+    "alliance": {
+      "reject -> reject": 1
+    },
+    "delivery": {
+      "reject -> reject": 1
+    },
+    "adoption": {
+      "reject -> reject": 1
+    },
+    "causation": {
+      "reject -> reject": 1
+    },
+    "relevance": {
+      "reject -> reject": 1
+    },
+    "bounded_fact": {
+      "accept_bounded -> accept_bounded": 4
+    },
+    "freshness": {
+      "unresolved -> unresolved": 1
+    },
+    "contradiction": {
+      "reject -> reject": 2
+    },
+    "source_independence": {
+      "reject -> reject": 1,
+      "accept_bounded -> accept_bounded": 1
+    },
+    "supersession": {
+      "reject -> reject": 1
+    },
+    "publication_safety": {
+      "reject -> reject": 3
+    },
+    "rights": {
+      "unresolved -> unresolved": 6
+    },
+    "interpretation": {
+      "unresolved -> unresolved": 1
+    },
+    "scenario": {
+      "unresolved -> unresolved": 1
+    },
+    "unsupported_interpretation": {
+      "unresolved -> unresolved": 1
+    },
+    "unsupported_natural_language": {
+      "unresolved -> unresolved": 1
+    }
+  },
+  "false_acceptance": {
+    "count": 0,
+    "denominator": 30,
+    "rate": 0.0
+  },
+  "false_rejection": {
+    "count": 0,
+    "denominator": 5,
+    "rate": 0.0
+  },
+  "unresolved": {
+    "count": 11,
+    "denominator": 35,
+    "rate": 0.3142857142857143
+  },
+  "mismatches": [],
+  "general_semantic_accuracy": "not measured; controlled synthetic support benchmark only"
+}

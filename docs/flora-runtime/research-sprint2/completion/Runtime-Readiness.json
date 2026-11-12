@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "adapter": "research-semantic-runtime-v1",
+  "provider": "openai",
+  "model": null,
+  "endpoint_host": "api.openai.com",
+  "key_present": false,
+  "ready_for_bounded_generation": false,
+  "blockers": [
+    "existing_openai_reasoning_provider_not_configured_or_fixture_only",
+    "model_endpoint_egress_not_allowlisted",
+    "explicit_spend_and_reviewed_pricing_configuration_missing",
+    "positive_finite_budget_and_rates_required"
+  ],
+  "model_calls": 0,
+  "network_calls": 0,
+  "configured_cost_limit": null,
+  "pricing_version": null,
+  "cost_notice": "Existing account token usage can incur charges; no new service commitment is created. No live call occurs in readiness.",
+  "required_names": [
+    "FLORA_REASONING_PROVIDER",
+    "FLORA_REASONING_MODEL",
+    "FLORA_REASONING_API_KEY (or OPENAI_API_KEY)",
+    "FLORA_RESEARCH_MAX_RUN_COST_USD",
+    "FLORA_RESEARCH_PRICING_VERSION",
+    "FLORA_FINANCIAL_INTELLIGENCE_INPUT_COST_PER_1M",
+    "FLORA_FINANCIAL_INTELLIGENCE_OUTPUT_COST_PER_1M"
+  ]
+}
