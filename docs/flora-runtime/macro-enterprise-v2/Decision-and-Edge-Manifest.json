@@ -1,0 +1,943 @@
+[
+  {
+    "id": "MT-GB-RESILIENCE-20261112",
+    "country_id": "GB",
+    "industry_id": "banking",
+    "force_id": "cyber",
+    "instrument_id": "PRA-SS1-21-MARCH2022",
+    "instrument_status": "Current supervisory expectations; binding rule applicability not established",
+    "instrument_effective_from": "2022-03-31",
+    "implementation_milestone": "2025-03-31",
+    "enterprise_id": "BK-ENT-001",
+    "entity": {
+      "id": "MT-LLOYDS-BANK-PLC",
+      "enterprise_id": "BK-ENT-001",
+      "legal_entity_id": "GB-COH-00002065",
+      "registry_id": "00002065",
+      "legal_name": "LLOYDS BANK PLC",
+      "parent_id": null,
+      "status": "verified",
+      "evidence_ids": [
+        "MT-UK-REGISTER"
+      ]
+    },
+    "applicability": "unknown",
+    "scope_reason": "Exact registry identity established; UK bank supervisory category supported by publisher disclosure. Binding Rulebook, regulator-register cross-check and institution-specific application remain unverified. Group ownership is not transferred into duties.",
+    "pestle": "Legal",
+    "capability_ids": [
+      "CAP-RISK",
+      "CAP-TECH"
+    ],
+    "consequence": "Investigate whether critical-service dependency maps and recovery/exit exercises still demonstrate tolerances after technology or supplier changes. This is ongoing assurance, not evidence of a Lloyds deficiency.",
+    "hypothesis_id": "RCO-LBG-005",
+    "question": "Which important service and legal entity, if any, has an evidenced dependency-testing gap that existing teams and suppliers cannot close? Ask the accountable resilience owner for current test outcomes before proposing work.",
+    "source_ids": [
+      "GM-CYBER-GB",
+      "MT-UK-REGISTER",
+      "MT-UK-BANK",
+      "MT-UK-SS121"
+    ],
+    "alternatives": [
+      {
+        "interpretation": "Existing internal capability may already satisfy the need",
+        "status": "unverified",
+        "test": "Inspect current dependency maps, scenario tests and self-assessment; no deficient control is alleged.",
+        "source_ids": [
+          "MT-UK-SS121"
+        ]
+      },
+      {
+        "interpretation": "Ongoing maintenance may require no external contract",
+        "status": "unverified",
+        "test": "Check internal delivery and existing supplier coverage before suggesting procurement; the 2025 milestone has already passed.",
+        "source_ids": [
+          "MT-UK-SS121"
+        ]
+      }
+    ],
+    "limitations": [
+      "Not a legal opinion or compliance certification.",
+      "No customer-confirmed gap, buying authority, budget, procurement or current supplier contract."
+    ],
+    "contradictions": [
+      "A regulatory expectation does not establish unmet demand."
+    ],
+    "supersedes": null,
+    "as_of": "2026-11-12",
+    "edges": [
+      {
+        "id": "MT-GB-RESILIENCE-20261112::ENTITY_IDENTIFICATION",
+        "subject": "cyber",
+        "predicate": "ENTITY_IDENTIFICATION",
+        "object": "GB-COH-00002065",
+        "status": "verified",
+        "country_id": "GB",
+        "instrument_id": "PRA-SS1-21-MARCH2022",
+        "entity_scope_id": "MT-LLOYDS-BANK-PLC",
+        "source_ids": [
+          "MT-UK-REGISTER"
+        ],
+        "claim_ids": [
+          "MT-UK-REGISTER::claim-1"
+        ],
+        "assessed_at": "2026-11-12",
+        "effective_from": "2022-03-31",
+        "limitations": [
+          "Not a legal opinion or compliance certification.",
+          "No customer-confirmed gap, buying authority, budget, procurement or current supplier contract."
+        ],
+        "supersedes": null
+      },
+      {
+        "id": "MT-GB-RESILIENCE-20261112::INSTRUMENT_STATUS",
+        "subject": "cyber",
+        "predicate": "INSTRUMENT_STATUS",
+        "object": "PRA-SS1-21-MARCH2022",
+        "status": "source_supported",
+        "country_id": "GB",
+        "instrument_id": "PRA-SS1-21-MARCH2022",
+        "entity_scope_id": "MT-LLOYDS-BANK-PLC",
+        "source_ids": [
+          "GM-CYBER-GB",
+          "MT-UK-REGISTER",
+          "MT-UK-BANK",
+          "MT-UK-SS121"
+        ],
+        "claim_ids": [
+          "GM-CLAIM-CYBER-GB",
+          "MT-UK-REGISTER::claim-1",
+          "MT-UK-BANK::claim-1",
+          "MT-UK-SS121::claim-1"
+        ],
+        "assessed_at": "2026-11-12",
+        "effective_from": "2022-03-31",
+        "limitations": [
+          "Not a legal opinion or compliance certification.",
+          "No customer-confirmed gap, buying authority, budget, procurement or current supplier contract."
+        ],
+        "supersedes": null
+      },
+      {
+        "id": "MT-GB-RESILIENCE-20261112::FORMAL_APPLICABILITY",
+        "subject": "cyber",
+        "predicate": "FORMAL_APPLICABILITY",
+        "object": "MT-LLOYDS-BANK-PLC",
+        "status": "unknown",
+        "country_id": "GB",
+        "instrument_id": "PRA-SS1-21-MARCH2022",
+        "entity_scope_id": "MT-LLOYDS-BANK-PLC",
+        "source_ids": [
+          "GM-CYBER-GB",
+          "MT-UK-REGISTER",
+          "MT-UK-BANK",
+          "MT-UK-SS121"
+        ],
+        "claim_ids": [
+          "GM-CLAIM-CYBER-GB",
+          "MT-UK-REGISTER::claim-1",
+          "MT-UK-BANK::claim-1",
+          "MT-UK-SS121::claim-1"
+        ],
+        "assessed_at": "2026-11-12",
+        "effective_from": "2022-03-31",
+        "limitations": [
+          "Not a legal opinion or compliance certification.",
+          "No customer-confirmed gap, buying authority, budget, procurement or current supplier contract."
+        ],
+        "supersedes": null
+      },
+      {
+        "id": "MT-GB-RESILIENCE-20261112::BUSINESS_CONSEQUENCE",
+        "subject": "cyber",
+        "predicate": "BUSINESS_CONSEQUENCE",
+        "object": "CAP-RISK",
+        "status": "interpreted",
+        "country_id": "GB",
+        "instrument_id": "PRA-SS1-21-MARCH2022",
+        "entity_scope_id": "MT-LLOYDS-BANK-PLC",
+        "source_ids": [
+          "GM-CYBER-GB",
+          "MT-UK-REGISTER",
+          "MT-UK-BANK",
+          "MT-UK-SS121"
+        ],
+        "claim_ids": [
+          "GM-CLAIM-CYBER-GB",
+          "MT-UK-REGISTER::claim-1",
+          "MT-UK-BANK::claim-1",
+          "MT-UK-SS121::claim-1"
+        ],
+        "assessed_at": "2026-11-12",
+        "effective_from": "2022-03-31",
+        "limitations": [
+          "Not a legal opinion or compliance certification.",
+          "No customer-confirmed gap, buying authority, budget, procurement or current supplier contract."
+        ],
+        "supersedes": null
+      },
+      {
+        "id": "MT-GB-RESILIENCE-20261112::CUSTOMER_RESPONSE",
+        "subject": "cyber",
+        "predicate": "CUSTOMER_RESPONSE",
+        "object": "BK-ENT-001",
+        "status": "unknown",
+        "country_id": "GB",
+        "instrument_id": "PRA-SS1-21-MARCH2022",
+        "entity_scope_id": "MT-LLOYDS-BANK-PLC",
+        "source_ids": [
+          "GM-CYBER-GB",
+          "MT-UK-REGISTER",
+          "MT-UK-BANK",
+          "MT-UK-SS121"
+        ],
+        "claim_ids": [
+          "GM-CLAIM-CYBER-GB",
+          "MT-UK-REGISTER::claim-1",
+          "MT-UK-BANK::claim-1",
+          "MT-UK-SS121::claim-1"
+        ],
+        "assessed_at": "2026-11-12",
+        "effective_from": "2022-03-31",
+        "limitations": [
+          "Not a legal opinion or compliance certification.",
+          "No customer-confirmed gap, buying authority, budget, procurement or current supplier contract."
+        ],
+        "supersedes": null
+      },
+      {
+        "id": "MT-GB-RESILIENCE-20261112::SUPPLIER_OPPORTUNITY",
+        "subject": "cyber",
+        "predicate": "SUPPLIER_OPPORTUNITY",
+        "object": "RCO-LBG-005",
+        "status": "unknown",
+        "country_id": "GB",
+        "instrument_id": "PRA-SS1-21-MARCH2022",
+        "entity_scope_id": "MT-LLOYDS-BANK-PLC",
+        "source_ids": [
+          "GM-CYBER-GB",
+          "MT-UK-REGISTER",
+          "MT-UK-BANK",
+          "MT-UK-SS121"
+        ],
+        "claim_ids": [
+          "GM-CLAIM-CYBER-GB",
+          "MT-UK-REGISTER::claim-1",
+          "MT-UK-BANK::claim-1",
+          "MT-UK-SS121::claim-1"
+        ],
+        "assessed_at": "2026-11-12",
+        "effective_from": "2022-03-31",
+        "limitations": [
+          "Not a legal opinion or compliance certification.",
+          "No customer-confirmed gap, buying authority, budget, procurement or current supplier contract."
+        ],
+        "supersedes": null
+      }
+    ],
+    "sources": [
+      {
+        "id": "GM-CYBER-GB",
+        "title": "Cyber security breaches survey 2025/2026",
+        "publisher": "UK government / DSIT",
+        "url": "https://www.gov.uk/government/statistics/cyber-security-breaches-survey-20252026/cyber-security-breaches-survey-20252026",
+        "retrieval_url": "https://www.gov.uk/government/statistics/cyber-security-breaches-survey-20252026/cyber-security-breaches-survey-20252026",
+        "publication_date": "2026-04-30",
+        "publication_date_evidence": "Official page publication/document version metadata",
+        "reporting_period": "UK businesses/charities, August–December 2025 fieldwork; aggregate survey, not bank/airline-specific prevalence or enterprise incident evidence.",
+        "retrieved_at": "2026-11-11T12:05:22Z",
+        "reviewed_by": "Codex automated primary-passage review; no independent human approval",
+        "review_notes": "Read directly through approved web research tool. Narrow excerpt retained; full original bytes and legal instruments are not archived.",
+        "research_domain": "macro",
+        "verification": "primary_retrieved",
+        "content_kind": "reviewed_web_excerpt",
+        "retrieval_method": "approved_web_research_tool",
+        "retrieval_reference": "turn183804view0",
+        "retrieval_extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+        "limitation": "UK businesses/charities, August–December 2025 fieldwork; aggregate survey, not bank/airline-specific prevalence or enterprise incident evidence. Short passage supports its stated scope only; no automatic enterprise applicability. Identified and self-reported attacks only; hidden attacks may be missed.",
+        "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CYBER-GB.txt",
+        "text_sha256": "e669f409fabad08f4ecb5f0341ec2c8171a6ef8aac4db1cdef7e17ef6f4016fc",
+        "primary_content_sha256": null,
+        "excerpts": [
+          {
+            "quote": "Overall prevalence of cyber breaches or attacks has remained in line with last year",
+            "locator": "Summary / Identification of cyber security breaches and attacks, trend comparison"
+          }
+        ],
+        "supported_force_kinds": [
+          "threat_or_scenario",
+          "observed_trend"
+        ]
+      },
+      {
+        "id": "MT-UK-REGISTER",
+        "title": "Lloyds Bank plc register identity",
+        "publisher": "Companies House",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/00002065",
+        "retrieval_url": "https://find-and-update.company-information.service.gov.uk/company/00002065",
+        "publication_date": null,
+        "publication_date_evidence": null,
+        "reporting_period": "Current register display reviewed 12 November 2026; filed information is not checked for accuracy by Companies House. Identity only.",
+        "retrieved_at": "2026-11-12T07:49:43Z",
+        "reviewed_by": "Codex automated primary-passage review; no independent human approval",
+        "review_notes": "Current register display reviewed 12 November 2026; filed information is not checked for accuracy by Companies House. Identity only.",
+        "research_domain": "macro",
+        "verification": "primary_retrieved",
+        "content_kind": "reviewed_web_excerpt",
+        "retrieval_method": "approved_web_research_tool",
+        "retrieval_reference": "turn931597view0",
+        "retrieval_extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+        "limitation": "Current register display reviewed 12 November 2026; filed information is not checked for accuracy by Companies House. Identity only.",
+        "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/MT-UK-REGISTER.txt",
+        "text_sha256": "142d2af85272450cce076f3f0017c04c273f1a6c4296b06bd376e5fb53c1848a",
+        "primary_content_sha256": null,
+        "excerpts": [
+          {
+            "quote": "LLOYDS BANK PLC\nCompany number 00002065",
+            "locator": "Company overview, heading and company number; active status; SIC 64191"
+          }
+        ],
+        "supported_force_kinds": []
+      },
+      {
+        "id": "MT-UK-BANK",
+        "title": "Lloyds Bank authorisation disclosure",
+        "publisher": "Lloyds Bank",
+        "url": "https://www.lloydsbank.com/About-Us.html",
+        "retrieval_url": "https://www.lloydsbank.com/About-Us.html",
+        "publication_date": null,
+        "publication_date_evidence": null,
+        "reporting_period": "Publisher disclosure; FCA number 119278 is disclosed in the same footer, not independently checked against the regulator register. Other group companies provide some products.",
+        "retrieved_at": "2026-11-12T07:49:43Z",
+        "reviewed_by": "Codex automated primary-passage review; no independent human approval",
+        "review_notes": "Publisher disclosure; FCA number 119278 is disclosed in the same footer, not independently checked against the regulator register. Other group companies provide some products.",
+        "research_domain": "macro",
+        "verification": "primary_retrieved",
+        "content_kind": "reviewed_web_excerpt",
+        "retrieval_method": "approved_web_research_tool",
+        "retrieval_reference": "turn905191view2",
+        "retrieval_extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+        "limitation": "Publisher disclosure; FCA number 119278 is disclosed in the same footer, not independently checked against the regulator register. Other group companies provide some products.",
+        "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/MT-UK-BANK.txt",
+        "text_sha256": "ee3c98c12a2720a105f40024f286c8682da281124e1be83d3f701e8099f8d2bf",
+        "primary_content_sha256": null,
+        "excerpts": [
+          {
+            "quote": "Lloyds Bank plc is authorised by the Prudential Regulation Authority",
+            "locator": "Footer, legal disclosure, registration number"
+          }
+        ],
+        "supported_force_kinds": []
+      },
+      {
+        "id": "MT-UK-SS121",
+        "title": "SS1/21 operational resilience, March 2022",
+        "publisher": "Bank of England / PRA",
+        "url": "https://www.bankofengland.co.uk/-/media/boe/files/prudential-regulation/supervisory-statement/2021/ss121-march-22.pdf",
+        "retrieval_url": "https://www.bankofengland.co.uk/-/media/boe/files/prudential-regulation/supervisory-statement/2021/ss121-march-22.pdf",
+        "publication_date": "2022-03-11",
+        "publication_date_evidence": "PDF printed page 1 paragraph 1.3; printed pages 7–8 paragraphs 4.12–4.16; printed page 9 section 5",
+        "reporting_period": "March 2022 supervisory expectations effective 31 March 2022; implementation milestone 31 March 2025, then ongoing maintenance. Not an unfulfilled new deadline. Binding Rulebook unavailable. Proportionality, actual services and institution-specific circumstances require review.",
+        "retrieved_at": "2026-11-12T07:49:43Z",
+        "reviewed_by": "Codex automated primary-passage review; no independent human approval",
+        "review_notes": "March 2022 supervisory expectations effective 31 March 2022; implementation milestone 31 March 2025, then ongoing maintenance. Not an unfulfilled new deadline. Binding Rulebook unavailable. Proportionality, actual services and institution-specific circumstances require review.",
+        "research_domain": "macro",
+        "verification": "primary_retrieved",
+        "content_kind": "reviewed_web_excerpt",
+        "retrieval_method": "approved_web_research_tool",
+        "retrieval_reference": "turn905191view0",
+        "retrieval_extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+        "limitation": "March 2022 supervisory expectations effective 31 March 2022; implementation milestone 31 March 2025, then ongoing maintenance. Not an unfulfilled new deadline. Binding Rulebook unavailable. Proportionality, actual services and institution-specific circumstances require review.",
+        "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/MT-UK-SS121.txt",
+        "text_sha256": "33f6d5e16021973d6aacad9a1c7c691df816b77ea56c4441669e69cba37f7efd",
+        "primary_content_sha256": null,
+        "excerpts": [
+          {
+            "quote": "UK banks, building societies, PRA-designated investment firms",
+            "locator": "PDF printed page 1 paragraph 1.3; printed pages 7–8 paragraphs 4.12–4.16; printed page 9 section 5"
+          }
+        ],
+        "supported_force_kinds": []
+      }
+    ],
+    "observations": [
+      {
+        "source_id": "GM-CYBER-GB",
+        "segment": {
+          "segment_id": "GM-CYBER-GB::quote-ae6c5214d1819bfc",
+          "asset_id": "GM-CYBER-GB",
+          "section_heading": "Summary / Identification of cyber security breaches and attacks, trend comparison",
+          "content": "Overall prevalence of cyber breaches or attacks has remained in line with last year",
+          "content_hash": "ae6c5214d1819bfc491da16f26f51906fbe87bb598903501d40df415e842eadf",
+          "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CYBER-GB.txt",
+          "authority": "candidate_intelligence",
+          "status": "reviewed_primary_excerpt"
+        },
+        "candidate": {
+          "claim_id": "GM-CLAIM-CYBER-GB",
+          "claim_type": "observed_trend",
+          "statement": "Overall prevalence of cyber breaches or attacks has remained in line with last year",
+          "source_asset_id": "GM-CYBER-GB",
+          "source_segment_id": "GM-CYBER-GB::quote-ae6c5214d1819bfc",
+          "scope": "UK businesses/charities, August–December 2025 fieldwork; aggregate survey, not bank/airline-specific prevalence or enterprise incident evidence.",
+          "subject": "GM-CYBER-GB",
+          "predicate": "reports",
+          "object": "Overall prevalence of cyber breaches or attacks has remained in line with last year",
+          "time_scope": "UK businesses/charities, August–December 2025 fieldwork; aggregate survey, not bank/airline-specific prevalence or enterprise incident evidence.",
+          "participant_scope": "source scope only",
+          "enterprise_scope": "",
+          "confidence": "Passage reviewed; enterprise applicability unverified",
+          "authority": "candidate_intelligence",
+          "status": "review_ready_not_accepted",
+          "supporting_ids": [
+            "GM-CYBER-GB::quote-ae6c5214d1819bfc"
+          ],
+          "contradicting_ids": []
+        },
+        "accepted_observation": false,
+        "supersedes": null
+      },
+      {
+        "source_id": "MT-UK-REGISTER",
+        "segment": {
+          "segment_id": "MT-UK-REGISTER::quote-8b7d9162e3a1f897",
+          "asset_id": "MT-UK-REGISTER",
+          "section_heading": "Company overview, heading and company number; active status; SIC 64191",
+          "content": "LLOYDS BANK PLC\nCompany number 00002065",
+          "content_hash": "8b7d9162e3a1f897e33dc7873e6401bf1263abba094edd7418c3dc1f9219d756",
+          "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/MT-UK-REGISTER.txt",
+          "authority": "candidate_intelligence",
+          "status": "reviewed_primary_excerpt"
+        },
+        "candidate": {
+          "claim_id": "MT-UK-REGISTER::claim-1",
+          "claim_type": "source_observation",
+          "statement": "LLOYDS BANK PLC\nCompany number 00002065",
+          "source_asset_id": "MT-UK-REGISTER",
+          "source_segment_id": "MT-UK-REGISTER::quote-8b7d9162e3a1f897",
+          "scope": "Current register display reviewed 12 November 2026; filed information is not checked for accuracy by Companies House. Identity only.",
+          "subject": "MT-UK-REGISTER",
+          "predicate": "reports",
+          "object": "LLOYDS BANK PLC\nCompany number 00002065",
+          "time_scope": "Current register display reviewed 12 November 2026; filed information is not checked for accuracy by Companies House. Identity only.",
+          "participant_scope": "source scope only",
+          "enterprise_scope": "Lloyds Bank plc identity only",
+          "confidence": "Passage reviewed; enterprise applicability unverified",
+          "authority": "candidate_intelligence",
+          "status": "review_ready_not_accepted",
+          "supporting_ids": [],
+          "contradicting_ids": []
+        },
+        "accepted_observation": false,
+        "supersedes": null
+      },
+      {
+        "source_id": "MT-UK-BANK",
+        "segment": {
+          "segment_id": "MT-UK-BANK::quote-cb5c994dd06e0ca8",
+          "asset_id": "MT-UK-BANK",
+          "section_heading": "Footer, legal disclosure, registration number",
+          "content": "Lloyds Bank plc is authorised by the Prudential Regulation Authority",
+          "content_hash": "cb5c994dd06e0ca8af431fc01d38fe040eb4a3b5439fdecaece559454ba1bd88",
+          "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/MT-UK-BANK.txt",
+          "authority": "candidate_intelligence",
+          "status": "reviewed_primary_excerpt"
+        },
+        "candidate": {
+          "claim_id": "MT-UK-BANK::claim-1",
+          "claim_type": "source_observation",
+          "statement": "Lloyds Bank plc is authorised by the Prudential Regulation Authority",
+          "source_asset_id": "MT-UK-BANK",
+          "source_segment_id": "MT-UK-BANK::quote-cb5c994dd06e0ca8",
+          "scope": "Publisher disclosure; FCA number 119278 is disclosed in the same footer, not independently checked against the regulator register. Other group companies provide some products.",
+          "subject": "MT-UK-BANK",
+          "predicate": "reports",
+          "object": "Lloyds Bank plc is authorised by the Prudential Regulation Authority",
+          "time_scope": "Publisher disclosure; FCA number 119278 is disclosed in the same footer, not independently checked against the regulator register. Other group companies provide some products.",
+          "participant_scope": "source scope only",
+          "enterprise_scope": "No enterprise applicability established",
+          "confidence": "Passage reviewed; enterprise applicability unverified",
+          "authority": "candidate_intelligence",
+          "status": "review_ready_not_accepted",
+          "supporting_ids": [],
+          "contradicting_ids": []
+        },
+        "accepted_observation": false,
+        "supersedes": null
+      },
+      {
+        "source_id": "MT-UK-SS121",
+        "segment": {
+          "segment_id": "MT-UK-SS121::quote-9c7a819095eefda9",
+          "asset_id": "MT-UK-SS121",
+          "section_heading": "PDF printed page 1 paragraph 1.3; printed pages 7–8 paragraphs 4.12–4.16; printed page 9 section 5",
+          "content": "UK banks, building societies, PRA-designated investment firms",
+          "content_hash": "9c7a819095eefda905a87a340abab1337d966d5e3b88edde75447498381b56f9",
+          "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/MT-UK-SS121.txt",
+          "authority": "candidate_intelligence",
+          "status": "reviewed_primary_excerpt"
+        },
+        "candidate": {
+          "claim_id": "MT-UK-SS121::claim-1",
+          "claim_type": "source_observation",
+          "statement": "UK banks, building societies, PRA-designated investment firms",
+          "source_asset_id": "MT-UK-SS121",
+          "source_segment_id": "MT-UK-SS121::quote-9c7a819095eefda9",
+          "scope": "March 2022 supervisory expectations effective 31 March 2022; implementation milestone 31 March 2025, then ongoing maintenance. Not an unfulfilled new deadline. Binding Rulebook unavailable. Proportionality, actual services and institution-specific circumstances require review.",
+          "subject": "MT-UK-SS121",
+          "predicate": "reports",
+          "object": "UK banks, building societies, PRA-designated investment firms",
+          "time_scope": "March 2022 supervisory expectations effective 31 March 2022; implementation milestone 31 March 2025, then ongoing maintenance. Not an unfulfilled new deadline. Binding Rulebook unavailable. Proportionality, actual services and institution-specific circumstances require review.",
+          "participant_scope": "source scope only",
+          "enterprise_scope": "No enterprise applicability established",
+          "confidence": "Passage reviewed; enterprise applicability unverified",
+          "authority": "candidate_intelligence",
+          "status": "review_ready_not_accepted",
+          "supporting_ids": [],
+          "contradicting_ids": []
+        },
+        "accepted_observation": false,
+        "supersedes": null
+      }
+    ],
+    "assessment_digest": "23057bf8983db3a8b6853505729bffc2a71f746f01dc360e37294d92c2f43e40",
+    "review_digest": "60ff89ca4bd84d73e427115ab455c03b762db0db5edb9b9c99bcdb5c4e8146cb",
+    "source_context_digest": "fe61349bb18fd5fe707f58a64e9e5d7f4d41ebe2868660bf59b9c14d279202ff",
+    "automatic_capture": false,
+    "automatic_qualification": false
+  },
+  {
+    "id": "MT-FR-REPORTING-20261112",
+    "country_id": "FR",
+    "industry_id": "banking",
+    "force_id": "eu-csrd",
+    "instrument_id": "FR-COMMERCE-L233-28-4-MAY2025",
+    "instrument_status": "Published national code provision; EU amendments and national implementation are separate",
+    "instrument_effective_from": "2025-05-03",
+    "implementation_milestone": null,
+    "enterprise_id": "BK-ENT-001",
+    "entity": {
+      "id": "MT-FR-UNRESOLVED",
+      "enterprise_id": "BK-ENT-001",
+      "status": "unknown",
+      "legal_entity_id": null,
+      "registry_id": null,
+      "legal_name": null,
+      "parent_id": null,
+      "evidence_ids": []
+    },
+    "applicability": "unknown",
+    "scope_reason": "French legal entity, consolidation perimeter, turnover/size thresholds, reporting phase and exemption are unresolved. No French Lloyds subsidiary or duty inferred. Official register acquisition blocked.",
+    "pestle": "Environmental",
+    "capability_ids": [
+      "CAP-RISK"
+    ],
+    "consequence": "Industry-only investigation: reporting teams may need reconciled consolidation-perimeter and sustainability data lineage. Group inclusion can exempt a consolidating group under V; no Lloyds effect established.",
+    "hypothesis_id": null,
+    "question": "Acquire an exact French register identity and accounts, then resolve current national thresholds, phase-in and consolidation exemption before asking any enterprise-specific commercial question.",
+    "source_ids": [
+      "GM-CSRD",
+      "GM-CSRD-FR",
+      "MT-FR-CODE"
+    ],
+    "alternatives": [
+      {
+        "interpretation": "Consolidated group reporting may remove a separate obligation",
+        "status": "supported_possibility",
+        "test": "Check controlling group inclusion and exemption conditions under V.",
+        "source_ids": [
+          "MT-FR-CODE"
+        ]
+      },
+      {
+        "interpretation": "Unproven entity or phase-in may mean no applicable reporting project",
+        "status": "unverified",
+        "test": "Obtain register identity, size and reporting period; do not infer from a group brand or country selection.",
+        "source_ids": [
+          "GM-CSRD-FR",
+          "MT-FR-CODE"
+        ]
+      }
+    ],
+    "limitations": [
+      "Industry-only trace, not a French Enterprise Twin or compliance decision.",
+      "EU 2026 amendment thresholds cannot be automatically substituted for current national law.",
+      "No existing UK hypothesis transplanted into France."
+    ],
+    "contradictions": [
+      "Consolidation exemption and pending amended thresholds counter a blanket reporting-demand claim."
+    ],
+    "supersedes": null,
+    "as_of": "2026-11-12",
+    "edges": [
+      {
+        "id": "MT-FR-REPORTING-20261112::ENTITY_IDENTIFICATION",
+        "subject": "eu-csrd",
+        "predicate": "ENTITY_IDENTIFICATION",
+        "object": "MT-FR-UNRESOLVED",
+        "status": "unknown",
+        "country_id": "FR",
+        "instrument_id": "FR-COMMERCE-L233-28-4-MAY2025",
+        "entity_scope_id": "MT-FR-UNRESOLVED",
+        "source_ids": [],
+        "claim_ids": [],
+        "assessed_at": "2026-11-12",
+        "effective_from": "2025-05-03",
+        "limitations": [
+          "Industry-only trace, not a French Enterprise Twin or compliance decision.",
+          "EU 2026 amendment thresholds cannot be automatically substituted for current national law.",
+          "No existing UK hypothesis transplanted into France."
+        ],
+        "supersedes": null
+      },
+      {
+        "id": "MT-FR-REPORTING-20261112::INSTRUMENT_STATUS",
+        "subject": "eu-csrd",
+        "predicate": "INSTRUMENT_STATUS",
+        "object": "FR-COMMERCE-L233-28-4-MAY2025",
+        "status": "source_supported",
+        "country_id": "FR",
+        "instrument_id": "FR-COMMERCE-L233-28-4-MAY2025",
+        "entity_scope_id": "MT-FR-UNRESOLVED",
+        "source_ids": [
+          "GM-CSRD",
+          "GM-CSRD-FR",
+          "MT-FR-CODE"
+        ],
+        "claim_ids": [
+          "GM-CLAIM-CSRD",
+          "GM-CLAIM-CSRD-FR",
+          "MT-FR-CODE::claim-1"
+        ],
+        "assessed_at": "2026-11-12",
+        "effective_from": "2025-05-03",
+        "limitations": [
+          "Industry-only trace, not a French Enterprise Twin or compliance decision.",
+          "EU 2026 amendment thresholds cannot be automatically substituted for current national law.",
+          "No existing UK hypothesis transplanted into France."
+        ],
+        "supersedes": null
+      },
+      {
+        "id": "MT-FR-REPORTING-20261112::FORMAL_APPLICABILITY",
+        "subject": "eu-csrd",
+        "predicate": "FORMAL_APPLICABILITY",
+        "object": "MT-FR-UNRESOLVED",
+        "status": "unknown",
+        "country_id": "FR",
+        "instrument_id": "FR-COMMERCE-L233-28-4-MAY2025",
+        "entity_scope_id": "MT-FR-UNRESOLVED",
+        "source_ids": [
+          "GM-CSRD",
+          "GM-CSRD-FR",
+          "MT-FR-CODE"
+        ],
+        "claim_ids": [
+          "GM-CLAIM-CSRD",
+          "GM-CLAIM-CSRD-FR",
+          "MT-FR-CODE::claim-1"
+        ],
+        "assessed_at": "2026-11-12",
+        "effective_from": "2025-05-03",
+        "limitations": [
+          "Industry-only trace, not a French Enterprise Twin or compliance decision.",
+          "EU 2026 amendment thresholds cannot be automatically substituted for current national law.",
+          "No existing UK hypothesis transplanted into France."
+        ],
+        "supersedes": null
+      },
+      {
+        "id": "MT-FR-REPORTING-20261112::BUSINESS_CONSEQUENCE",
+        "subject": "eu-csrd",
+        "predicate": "BUSINESS_CONSEQUENCE",
+        "object": "CAP-RISK",
+        "status": "interpreted",
+        "country_id": "FR",
+        "instrument_id": "FR-COMMERCE-L233-28-4-MAY2025",
+        "entity_scope_id": "MT-FR-UNRESOLVED",
+        "source_ids": [
+          "GM-CSRD",
+          "GM-CSRD-FR",
+          "MT-FR-CODE"
+        ],
+        "claim_ids": [
+          "GM-CLAIM-CSRD",
+          "GM-CLAIM-CSRD-FR",
+          "MT-FR-CODE::claim-1"
+        ],
+        "assessed_at": "2026-11-12",
+        "effective_from": "2025-05-03",
+        "limitations": [
+          "Industry-only trace, not a French Enterprise Twin or compliance decision.",
+          "EU 2026 amendment thresholds cannot be automatically substituted for current national law.",
+          "No existing UK hypothesis transplanted into France."
+        ],
+        "supersedes": null
+      },
+      {
+        "id": "MT-FR-REPORTING-20261112::CUSTOMER_RESPONSE",
+        "subject": "eu-csrd",
+        "predicate": "CUSTOMER_RESPONSE",
+        "object": "BK-ENT-001",
+        "status": "unknown",
+        "country_id": "FR",
+        "instrument_id": "FR-COMMERCE-L233-28-4-MAY2025",
+        "entity_scope_id": "MT-FR-UNRESOLVED",
+        "source_ids": [
+          "GM-CSRD",
+          "GM-CSRD-FR",
+          "MT-FR-CODE"
+        ],
+        "claim_ids": [
+          "GM-CLAIM-CSRD",
+          "GM-CLAIM-CSRD-FR",
+          "MT-FR-CODE::claim-1"
+        ],
+        "assessed_at": "2026-11-12",
+        "effective_from": "2025-05-03",
+        "limitations": [
+          "Industry-only trace, not a French Enterprise Twin or compliance decision.",
+          "EU 2026 amendment thresholds cannot be automatically substituted for current national law.",
+          "No existing UK hypothesis transplanted into France."
+        ],
+        "supersedes": null
+      },
+      {
+        "id": "MT-FR-REPORTING-20261112::SUPPLIER_OPPORTUNITY",
+        "subject": "eu-csrd",
+        "predicate": "SUPPLIER_OPPORTUNITY",
+        "object": "not-established",
+        "status": "unknown",
+        "country_id": "FR",
+        "instrument_id": "FR-COMMERCE-L233-28-4-MAY2025",
+        "entity_scope_id": "MT-FR-UNRESOLVED",
+        "source_ids": [
+          "GM-CSRD",
+          "GM-CSRD-FR",
+          "MT-FR-CODE"
+        ],
+        "claim_ids": [
+          "GM-CLAIM-CSRD",
+          "GM-CLAIM-CSRD-FR",
+          "MT-FR-CODE::claim-1"
+        ],
+        "assessed_at": "2026-11-12",
+        "effective_from": "2025-05-03",
+        "limitations": [
+          "Industry-only trace, not a French Enterprise Twin or compliance decision.",
+          "EU 2026 amendment thresholds cannot be automatically substituted for current national law.",
+          "No existing UK hypothesis transplanted into France."
+        ],
+        "supersedes": null
+      }
+    ],
+    "sources": [
+      {
+        "id": "GM-CSRD",
+        "title": "Sustainability reporting: Omnibus 1 process",
+        "publisher": "ESMA",
+        "url": "https://www.esma.europa.eu/esmas-activities/sustainable-finance/sustainability-reporting",
+        "retrieval_url": "https://www.esma.europa.eu/esmas-activities/sustainable-finance/sustainability-reporting",
+        "publication_date": null,
+        "publication_date_evidence": null,
+        "reporting_period": "Supervisor describes enacted EU amendment (Directive 2026/470), effective 2026-03-18; national transposition and entity-specific thresholds differ.",
+        "retrieved_at": "2026-11-11T12:05:22Z",
+        "reviewed_by": "Codex automated primary-passage review; no independent human approval",
+        "review_notes": "Read directly through approved web research tool. Narrow excerpt retained; full original bytes and legal instruments are not archived.",
+        "research_domain": "macro",
+        "verification": "primary_retrieved",
+        "content_kind": "reviewed_web_excerpt",
+        "retrieval_method": "approved_web_research_tool",
+        "retrieval_reference": "turn465011view1",
+        "retrieval_extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+        "limitation": "Supervisor describes enacted EU amendment (Directive 2026/470), effective 2026-03-18; national transposition and entity-specific thresholds differ. Short passage supports its stated scope only; no automatic enterprise applicability.",
+        "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CSRD.txt",
+        "text_sha256": "08982030c80bc9c58dfe208e0bb8f60f1b1e10360074f8867f9d5a2ab1888498",
+        "primary_content_sha256": null,
+        "excerpts": [
+          {
+            "quote": "Member States must transpose the parts relating to the CSRD by 19 March 2027.",
+            "locator": "Our input to European standard-setting / Omnibus 1 process"
+          }
+        ],
+        "supported_force_kinds": [
+          "enacted_law"
+        ]
+      },
+      {
+        "id": "GM-CSRD-FR",
+        "title": "CSRD: obligations and French transposition",
+        "publisher": "French government / Portail RSE",
+        "url": "https://portail-rse.beta.gouv.fr/fiches-reglementaires/rapport-de-durabilite-csrd/",
+        "retrieval_url": "https://portail-rse.beta.gouv.fr/fiches-reglementaires/rapport-de-durabilite-csrd/",
+        "publication_date": null,
+        "publication_date_evidence": null,
+        "reporting_period": "French guidance last checked official texts 2026-09-02; warns new thresholds require French transposition. Not a fresh legal opinion or verified company determination.",
+        "retrieved_at": "2026-11-11T12:05:22Z",
+        "reviewed_by": "Codex automated primary-passage review; no independent human approval",
+        "review_notes": "Read directly through approved web research tool. Narrow excerpt retained; full original bytes and legal instruments are not archived.",
+        "research_domain": "macro",
+        "verification": "primary_retrieved",
+        "content_kind": "reviewed_web_excerpt",
+        "retrieval_method": "approved_web_research_tool",
+        "retrieval_reference": "turn465011view2",
+        "retrieval_extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+        "limitation": "French guidance last checked official texts 2026-09-02; warns new thresholds require French transposition. Not a fresh legal opinion or verified company determination. Short passage supports its stated scope only; no automatic enterprise applicability.",
+        "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CSRD-FR.txt",
+        "text_sha256": "673cf39fe05cc3c6ebf7bfefee0e2b71672dab872770c2a4f906039f177751f3",
+        "primary_content_sha256": null,
+        "excerpts": [
+          {
+            "quote": "Ces nouveaux seuils ne s'appliqueront qu'après transposition en droit français, attendue au plus tard le 19 mars 2027.",
+            "locator": "Opening notice; last official-text check 2 September 2026"
+          }
+        ],
+        "supported_force_kinds": [
+          "enacted_law"
+        ]
+      },
+      {
+        "id": "MT-FR-CODE",
+        "title": "Code de commerce L233-28-4, consolidated sustainability",
+        "publisher": "Légifrance",
+        "url": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000005634379/LEGISCTA000006161295/",
+        "retrieval_url": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000005634379/LEGISCTA000006161295/",
+        "publication_date": null,
+        "publication_date_evidence": null,
+        "reporting_period": "Reviewed rendering uses apostrophe in original as retained below. Consolidating large-group scope and consolidation exemption V are distinct. EU amendment, national transposition, thresholds, phase-in and exact entity must be separately established. No complete statutory analysis.",
+        "retrieved_at": "2026-11-12T07:49:43Z",
+        "reviewed_by": "Codex automated primary-passage review; no independent human approval",
+        "review_notes": "Reviewed rendering uses apostrophe in original as retained below. Consolidating large-group scope and consolidation exemption V are distinct. EU amendment, national transposition, thresholds, phase-in and exact entity must be separately established. No complete statutory analysis.",
+        "research_domain": "macro",
+        "verification": "primary_retrieved",
+        "content_kind": "reviewed_web_excerpt",
+        "retrieval_method": "approved_web_research_tool",
+        "retrieval_reference": "turn942876view2",
+        "retrieval_extent": "Directly reviewed primary web excerpt; original bytes unavailable",
+        "limitation": "Reviewed rendering uses apostrophe in original as retained below. Consolidating large-group scope and consolidation exemption V are distinct. EU amendment, national transposition, thresholds, phase-in and exact entity must be separately established. No complete statutory analysis.",
+        "text_path": "enterprise-knowledge/macro/research-model/source-snapshots/MT-FR-CODE.txt",
+        "text_sha256": "d8a4aa886f3593ea667f6994581354ee0e5cd02028e8517cd3fd3e13dadcbf6f",
+        "primary_content_sha256": null,
+        "excerpts": [
+          {
+            "quote": "Toute société consolidante d'un grand groupe",
+            "locator": "Article L233-28-4 I and V; version since 3 May 2025; page shows version 10 November 2026"
+          }
+        ],
+        "supported_force_kinds": []
+      }
+    ],
+    "observations": [
+      {
+        "source_id": "GM-CSRD",
+        "segment": {
+          "segment_id": "GM-CSRD::quote-45b62211afa3fe34",
+          "asset_id": "GM-CSRD",
+          "section_heading": "Our input to European standard-setting / Omnibus 1 process",
+          "content": "Member States must transpose the parts relating to the CSRD by 19 March 2027.",
+          "content_hash": "45b62211afa3fe3463f0d7e1697043ec5c401c7cacdec93b8e243a9b737e0c62",
+          "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CSRD.txt",
+          "authority": "candidate_intelligence",
+          "status": "reviewed_primary_excerpt"
+        },
+        "candidate": {
+          "claim_id": "GM-CLAIM-CSRD",
+          "claim_type": "enacted_instrument_transposition_deadline",
+          "statement": "Member States must transpose the parts relating to the CSRD by 19 March 2027.",
+          "source_asset_id": "GM-CSRD",
+          "source_segment_id": "GM-CSRD::quote-45b62211afa3fe34",
+          "scope": "Supervisor describes enacted EU amendment (Directive 2026/470), effective 2026-03-18; national transposition and entity-specific thresholds differ.",
+          "subject": "GM-CSRD",
+          "predicate": "reports",
+          "object": "Member States must transpose the parts relating to the CSRD by 19 March 2027.",
+          "time_scope": "Supervisor describes enacted EU amendment (Directive 2026/470), effective 2026-03-18; national transposition and entity-specific thresholds differ.",
+          "participant_scope": "source scope only",
+          "enterprise_scope": "",
+          "confidence": "Passage reviewed; enterprise applicability unverified",
+          "authority": "candidate_intelligence",
+          "status": "review_ready_not_accepted",
+          "supporting_ids": [
+            "GM-CSRD::quote-45b62211afa3fe34"
+          ],
+          "contradicting_ids": []
+        },
+        "accepted_observation": false,
+        "supersedes": null
+      },
+      {
+        "source_id": "GM-CSRD-FR",
+        "segment": {
+          "segment_id": "GM-CSRD-FR::quote-80831ced24fc925c",
+          "asset_id": "GM-CSRD-FR",
+          "section_heading": "Opening notice; last official-text check 2 September 2026",
+          "content": "Ces nouveaux seuils ne s'appliqueront qu'après transposition en droit français, attendue au plus tard le 19 mars 2027.",
+          "content_hash": "80831ced24fc925c7db11e3bbaff4f1e761bd3927a5adbb090e156c7e0a5e1d3",
+          "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/GM-CSRD-FR.txt",
+          "authority": "candidate_intelligence",
+          "status": "reviewed_primary_excerpt"
+        },
+        "candidate": {
+          "claim_id": "GM-CLAIM-CSRD-FR",
+          "claim_type": "national_implementation_notice",
+          "statement": "Ces nouveaux seuils ne s'appliqueront qu'après transposition en droit français, attendue au plus tard le 19 mars 2027.",
+          "source_asset_id": "GM-CSRD-FR",
+          "source_segment_id": "GM-CSRD-FR::quote-80831ced24fc925c",
+          "scope": "French guidance last checked official texts 2026-09-02; warns new thresholds require French transposition. Not a fresh legal opinion or verified company determination.",
+          "subject": "GM-CSRD-FR",
+          "predicate": "reports",
+          "object": "Ces nouveaux seuils ne s'appliqueront qu'après transposition en droit français, attendue au plus tard le 19 mars 2027.",
+          "time_scope": "French guidance last checked official texts 2026-09-02; warns new thresholds require French transposition. Not a fresh legal opinion or verified company determination.",
+          "participant_scope": "source scope only",
+          "enterprise_scope": "",
+          "confidence": "Passage reviewed; enterprise applicability unverified",
+          "authority": "candidate_intelligence",
+          "status": "review_ready_not_accepted",
+          "supporting_ids": [
+            "GM-CSRD-FR::quote-80831ced24fc925c"
+          ],
+          "contradicting_ids": []
+        },
+        "accepted_observation": false,
+        "supersedes": null
+      },
+      {
+        "source_id": "MT-FR-CODE",
+        "segment": {
+          "segment_id": "MT-FR-CODE::quote-287c06c447de7255",
+          "asset_id": "MT-FR-CODE",
+          "section_heading": "Article L233-28-4 I and V; version since 3 May 2025; page shows version 10 November 2026",
+          "content": "Toute société consolidante d'un grand groupe",
+          "content_hash": "287c06c447de725589b1447be46b237dcec90533e43883d1ce6b0e0430de71e2",
+          "source_location": "enterprise-knowledge/macro/research-model/source-snapshots/MT-FR-CODE.txt",
+          "authority": "candidate_intelligence",
+          "status": "reviewed_primary_excerpt"
+        },
+        "candidate": {
+          "claim_id": "MT-FR-CODE::claim-1",
+          "claim_type": "source_observation",
+          "statement": "Toute société consolidante d'un grand groupe",
+          "source_asset_id": "MT-FR-CODE",
+          "source_segment_id": "MT-FR-CODE::quote-287c06c447de7255",
+          "scope": "Reviewed rendering uses apostrophe in original as retained below. Consolidating large-group scope and consolidation exemption V are distinct. EU amendment, national transposition, thresholds, phase-in and exact entity must be separately established. No complete statutory analysis.",
+          "subject": "MT-FR-CODE",
+          "predicate": "reports",
+          "object": "Toute société consolidante d'un grand groupe",
+          "time_scope": "Reviewed rendering uses apostrophe in original as retained below. Consolidating large-group scope and consolidation exemption V are distinct. EU amendment, national transposition, thresholds, phase-in and exact entity must be separately established. No complete statutory analysis.",
+          "participant_scope": "source scope only",
+          "enterprise_scope": "No enterprise applicability established",
+          "confidence": "Passage reviewed; enterprise applicability unverified",
+          "authority": "candidate_intelligence",
+          "status": "review_ready_not_accepted",
+          "supporting_ids": [],
+          "contradicting_ids": []
+        },
+        "accepted_observation": false,
+        "supersedes": null
+      }
+    ],
+    "assessment_digest": "23057bf8983db3a8b6853505729bffc2a71f746f01dc360e37294d92c2f43e40",
+    "review_digest": "cf1b94eafb08153fc51477d0e51095ffb4ce7ad7ff64cf9cbf12ea52e5c02790",
+    "source_context_digest": "fe61349bb18fd5fe707f58a64e9e5d7f4d41ebe2868660bf59b9c14d279202ff",
+    "automatic_capture": false,
+    "automatic_qualification": false
+  }
+]

@@ -6854,6 +6854,114 @@
               "status": "passed"
             }
           }
+        },
+        "macro_enterprise_v2": {
+          "cases": {
+            "tests/test_flora_macro_enterprise_v2.py::test_caller_modified_reference_rejected[assessment_digest]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_caller_modified_reference_rejected[claim_ids]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_caller_modified_reference_rejected[entity_scope]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_caller_modified_reference_rejected[original_hypothesis_id]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_caller_modified_reference_rejected[review_digest]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_france_has_national_text_but_no_entity_or_transplanted_candidate": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_new_cut_retains_source_truth_and_reuses_semantic_owner": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_one_concise_panel_and_deliberate_full_dossier[FR-eu-csrd-sustainability]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_one_concise_panel_and_deliberate_full_dossier[GB-cyber-cyber]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_original_opportunity_identities_and_scope_stay_intact": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_public_trace_cannot_read_private_records_or_rewrite_capture": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_reference_does_not_create_unreviewed_hypothesis_links[FR-RCO-LBG-005]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_reference_does_not_create_unreviewed_hypothesis_links[GB-RCO-LBG-001]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_reference_does_not_create_unreviewed_hypothesis_links[global-RCO-LBG-005]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_reference_is_deterministic_server_derived_and_not_a_persistence_payload": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_separate_edge_decisions_do_not_collapse_identity_into_demand[FR-eu-csrd-sustainability]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_separate_edge_decisions_do_not_collapse_identity_into_demand[GB-cyber-cyber]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[accepted]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[applicability]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[claim_scope]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[duplicate]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[hypothesis]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[identity]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[prior_digest]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[registry]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[source]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[source_digest]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_uk_investigates_ongoing_resilience_not_new_deadline_or_bank_deficiency": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_unreviewed_context_does_not_inherit_entity_or_trace[]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_unreviewed_context_does_not_inherit_entity_or_trace[market=FR]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_unreviewed_context_does_not_inherit_entity_or_trace[market=GB&category=sustainability&force=eu-csrd]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_unreviewed_context_does_not_inherit_entity_or_trace[market=GB&force=cyber-bill]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_unreviewed_context_does_not_inherit_entity_or_trace[market=GB&industry=aviation]": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_macro_enterprise_v2.py"
+            ]
+          ]
         }
       }
     }

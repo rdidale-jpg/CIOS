@@ -261,6 +261,15 @@ def test_no_existing_research_history_or_source_identity_is_changed():
         *('enterprise-knowledge/macro/research-model/source-snapshots/'+name+'.txt'
           for name in ('GM-BILL','GM-CSRD-FR','GM-CSRD','GM-CYBER-FR','GM-CYBER-GB','GM-SOCIAL','GM-SRS')),
     }
+    approved.update({'enterprise-knowledge/macro/research-model/Entity-Traces-v2.json',
+        *('enterprise-knowledge/macro/research-model/source-snapshots/'+name+'.txt'
+          for name in ('MT-UK-REGISTER','MT-UK-BANK','MT-UK-SS121','MT-FR-CODE'))})
+    # V1 source bytes are historical too; v2 may only append the named cut.
+    assert subprocess.run(['git','diff','--quiet','4c374ac','--',
+        'enterprise-knowledge/macro/research-model/Macro-Context-v1.json',
+        'enterprise-knowledge/macro/research-model/Global-Context-Contracts-v1.schema.json',
+        *('enterprise-knowledge/macro/research-model/source-snapshots/'+name+'.txt'
+          for name in ('GM-BILL','GM-CSRD-FR','GM-CSRD','GM-CYBER-FR','GM-CYBER-GB','GM-SOCIAL','GM-SRS'))],cwd=root).returncode==0
     diff=subprocess.check_output(['git','diff','--name-status','--no-renames','e03b2ff','--','enterprise-knowledge'],cwd=root,text=True)
     additions=set()
     for line in diff.splitlines():

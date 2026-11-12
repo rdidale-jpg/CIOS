@@ -1,0 +1,12 @@
+{
+  "before": "4c374ac2d326639245b60967aa64e934e0c1d7a3",
+  "rendered_source_sha256": {
+    "cios/applications/flora/research_intelligence/macro_intelligence.py": "82d6b9831f46646e4f7fd831c2a534c5ee5feb6cee007a97063f303b82bd56a3",
+    "cios/applications/flora/research_intelligence/macro_trace.py": "1e56a5a3c7d5df4e9f216c9d780cb1339828b60857119ebb3fd986cbc624a6c3",
+    "cios/applications/flora/research_intelligence/macro_views.py": "c5bff30775f71dc2ea812e30812a5f83f2f2e661e23225bf9c65683d59495361",
+    "cios/applications/flora/research_intelligence/source_import.py": "e851f66a9c4540f538881e60ae451b0ad7c889d20cdd2ae5f4789d6490f7ebc7",
+    "enterprise-knowledge/macro/research-model/Entity-Traces-v2.json": "4aa9d1f7f790234d6e6460b3121f3bf2601d6a3b5e5bc2ebd19f945e7ed3908d"
+  },
+  "after_commit": "See containing Git commit; hashes identify rendered content without a self-referential SHA.",
+  "test_storage": "Disposable localhost, no seeding or production credentials."
+}

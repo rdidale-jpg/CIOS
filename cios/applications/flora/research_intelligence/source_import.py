@@ -11,7 +11,8 @@ PUBLISHERS = {'www.lloydsbankinggroup.com', 'www.lloydsbank.com',
               'www.easyjet.com', 'corporate.easyjet.com', 's203.q4cdn.com',
               'www.iata.org', 'www.caa.co.uk', 'www.easa.europa.eu', 'www.eurocontrol.int',
               'bills.parliament.uk', 'www.cert.cyber.gouv.fr', 'www.esma.europa.eu',
-              'portail-rse.beta.gouv.fr'}
+              'portail-rse.beta.gouv.fr', 'find-and-update.company-information.service.gov.uk',
+              'www.legifrance.gouv.fr'}
 LIMIT = 16 * 1024 * 1024
 
 

@@ -246,7 +246,8 @@ def context_spec(chosen, data=None):
                 base['claim_ids']=base['claim_ids']+row['claim_ids']
                 base['source_ids']=base['source_ids']+sorted({sid for claim in industry['claims'] if claim['id'] in row['claim_ids'] for sid in claim['source_ids']})
                 edges.append(ContextEdge(id=f"GM-{force['id']}-{row['id']}",subject=force['id'],predicate='MOTIVATES_INVESTIGATION',object=row['id'],status='interpreted',**base).model_dump(mode='json'))
-    return {'schema_version':1,'authority':'candidate_intelligence','as_of':data['as_of'],'selection':chosen.model_dump(),
+    from .macro_trace import trace_projection
+    return {'enterprise_trace':trace_projection(chosen),'schema_version':1,'authority':'candidate_intelligence','as_of':data['as_of'],'selection':chosen.model_dump(),
         'markets':markets,'force':force,'industry_model_id':industry['assessment_id'],'industry_id':chosen.industry,
         'enterprise':{'id':industry['enterprise_twin_id'],'name':industry['enterprise_name'],'slug':('lloyds' if chosen.industry=='banking' else 'easyjet'),'legal_entity_scope':deepcopy(scope),'applicability':'unknown'},
         'edges':edges,'candidates':candidates,'seller_relevance':{'declared_offering':chosen.offering,'match':'potential thematic fit only' if force and chosen.offering!='none' and chosen.offering in force['seller_tags'] else 'not established','territory_permission':'unverified','customer_demand':'unverified','pipeline_eligibility':'not assessed'},

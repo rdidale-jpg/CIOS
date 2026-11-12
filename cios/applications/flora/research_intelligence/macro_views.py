@@ -74,7 +74,7 @@ def industry_visual(chosen,spec):
         attr=" data-related='interpreted'" if related else ''
         selected=node['label']==chosen.factor if key=='pestle' else node['id']==chosen.capability
         shapes=shapes.replace("<a href='"+e(node['url'],quote=True)+"'", "<a data-macro-nav"+attr+(" aria-current='true'" if selected else '')+" href='"+e(destinations[node['id']],quote=True)+"'",1)
-    banner=("<p class='mi-stage-title'>"+e(spec['enterprise']['name'] if chosen.view=='enterprise' else ('Banking' if chosen.industry=='banking' else 'Commercial aviation'))+" · "+('Group reference; local entity Unknown' if chosen.view=='enterprise' else 'Interpreted PESTLE pressure')+"</p>")
+    banner=("<p class='mi-stage-title'>"+e(spec['enterprise']['name'] if chosen.view=='enterprise' else ('Banking' if chosen.industry=='banking' else 'Commercial aviation'))+" · "+(('Lloyds Bank plc identity verified; duty Unknown' if spec.get('enterprise_trace') and spec['enterprise_trace']['entity']['status']=='verified' else 'Group reference; local entity Unknown') if chosen.view=='enterprise' else 'Interpreted PESTLE pressure')+"</p>")
     if key!='pestle':banner+="<svg viewBox='360 120 560 220' style='height:130px' aria-hidden='true'>"+_art('banking' if chosen.industry=='banking' else 'aviation','mi-enterprise',True)+"</svg>"
     if key=='pestle':shapes+="<circle cx='450' cy='240' r='75' fill='#e4ecdc'/>"+_icon('bank' if chosen.industry=='banking' else 'plane',422,205,1.8)+text(450,280,'CONTEXT',size=10,anchor='middle',color='#63785e')
     return banner+f"<svg class='mi-portable' data-shared-template='{key}' viewBox='0 0 {w} {h}' role='group' aria-label='{e(key+' · interpreted macro pressure',quote=True)}'>{shapes}</svg><nav class='mi-mobile-nav' aria-label='Equivalent {key} destinations'>"+''.join(mobile)+"</nav>"
@@ -92,7 +92,55 @@ def controls(chosen):
     return "<form class='mi-context' id='macro-controls' action='/macro' method='get'>"+hidden+''.join(fields)+"<button type='submit'>Apply context →</button></form>"
 
 
+def trace_inspector(chosen, spec, trace):
+    entity = trace['entity']
+    identified = entity['status'] == 'verified'
+    title = 'Lloyds Bank plc · resilience assurance' if identified else 'France · reporting perimeter'
+    body = "<aside class='mi-inspector' id='macro-inspector' aria-label='Contextual intelligence panel'>"
+    body += "<span class='mi-kind'>Entity trace · candidate research</span><h2 tabindex='-1'>"+e(title)+"</h2>"
+    body += "<p class='mi-compact'>"+e(trace['instrument_id'])+" · reviewed "+e(trace['as_of'])+"</p>"
+    body += "<h3>What matters</h3><p>"+e(trace['consequence'])+"</p>"
+    body += "<h3>What we know</h3><p class='mi-unknown'>"+e(
+        'Identity verified: '+entity['legal_name']+' / '+entity['registry_id']+'. Formal applicability: Unknown. Bank category supported; binding rule and regulator-register cross-check outstanding.'
+        if identified else 'Exact French legal entity and formal applicability: Unknown. National code exists; amended EU thresholds, phase-in and consolidation exemption require separate review.')+"</p>"
+    body += "<h3>Why a sale may not follow</h3><p>"+e(
+        'Existing teams or suppliers may already meet the need. The 2025 milestone is past; ongoing maintenance need does not prove an external contract.'
+        if identified else 'Group reporting can remove a separate obligation. No Lloyds French mandate or UK hypothesis is transferred here.')+"</p>"
+    body += "<h3>What next</h3><p>"+e(trace['question'])+"</p>"
+    if chosen.capability and chosen.capability not in trace['capability_ids']:
+        body += "<p class='mi-unknown'>Selected capability has no reviewed mechanism in this trace.</p>"
+    body += "<p class='mi-compact'>Customer demand and territorial eligibility: Unverified. Buyer, budget and supplier opportunity remain unverified.</p>"
+    sources={source['id']:source for source in trace['sources']}
+    direct=['MT-UK-REGISTER','MT-UK-SS121'] if identified else ['MT-FR-CODE']
+    body += "<div class='mi-next'>"+''.join("<a href='"+e(sources[sid]['url'],quote=True)+"'>"+('Entity register' if sid=='MT-UK-REGISTER' else 'Official instrument')+" →</a>" for sid in direct)
+    body += "<a href='"+e(url(chosen,'/macro/evidence')+'#entity-trace',quote=True)+"'>Decision & evidence dossier →</a></div>"
+    if trace['hypothesis_id']:
+        row=next(c for c in spec['candidates'] if c['id']==trace['hypothesis_id'])
+        body += "<p><a href='"+e(row['url'],quote=True)+"'>Existing research hypothesis →</a></p>"
+    body += nav(chosen,'← Industry consequence',view='industry',factor=trace['pestle'],capability='')
+    body += "<p><a href='#macro-visual'>← Back to visual</a></p></aside>"
+    return body
+
+
+def trace_dossier(chosen, trace):
+    import json
+    body="<article id='entity-trace'><h2>Entity / instrument decision</h2><p>"+e(trace['scope_reason'])+"</p>"
+    body+="<p>Instrument: "+e(trace['instrument_status'])+" · version effective "+e(trace['instrument_effective_from'])+" · implementation milestone "+e(trace['implementation_milestone'] or 'Not established')+". These dates do not establish this enterprise’s legal duty.</p>"
+    body+="<h3>Separate decisions</h3><ul>"+''.join("<li>"+e(edge['predicate'].replace('_',' ').title())+": <strong>"+e(edge['status'])+"</strong> · "+e(edge['object'])+"</li>" for edge in trace['edges'])+"</ul>"
+    body+="<h3>Counter-tests</h3><ul>"+''.join("<li>"+e(alt['interpretation'])+" — "+e(alt['status'])+". "+e(alt['test'])+"</li>" for alt in trace['alternatives'])+"</ul>"
+    for source in trace['sources']:
+        if not source['id'].startswith('MT-'):continue
+        body+="<article id='"+e(source['id'])+"'><h3>"+e(source['title'])+"</h3><blockquote>"+e(source['excerpts'][0]['quote'])+"</blockquote><p>Locator: "+e(source['excerpts'][0]['locator'])+"</p><p>Published/version: "+e(source['publication_date'] or 'Unknown')+" · Retrieved: "+e(source['retrieved_at'])+"</p><p>"+e(source['limitation'])+"</p><a href='"+e(source['url'],quote=True)+"'>Official source →</a><p class='mi-compact'>Excerpt SHA-256 "+e(source['text_sha256'])+" · original bytes not archived; candidate observation, not accepted Evidence.</p></article>"
+    body+="<h3>Versioned edge manifest</h3><pre>"+e(json.dumps(trace['edges'],ensure_ascii=False,indent=2))+"</pre>"
+    if trace['hypothesis_id']:
+        from .macro_trace import capture_reference
+        body+="<h3>MacroContextReference · design only</h3><p>Not saved to Pipeline. Existing immutable provenance, original opportunity identity and qualification gates remain unchanged.</p><pre>"+e(json.dumps(capture_reference(chosen,trace['hypothesis_id']),indent=2))+"</pre>"
+    return body+"</article>"
+
+
 def inspector(chosen,spec,data):
+    if chosen.view=='enterprise' and spec.get('enterprise_trace'):
+        return trace_inspector(chosen,spec,spec['enterprise_trace'])
     force=spec['force'];body="<aside class='mi-inspector' id='macro-inspector' aria-label='Contextual intelligence panel'>"
     if not force:
         return body+"<span class='mi-kind'>Research coverage gap</span><h2 tabindex='-1'>Not researched yet.</h2><p>This category is available for navigation, but this bounded pilot has no reviewed theme here. Blank does not mean no risk or opportunity.</p><h3>Next research action</h3><p>Select a high-value question and an official source family before adding an observation. Do not manufacture coverage.</p>"+nav(chosen,'Return to cyber reference journey',category='cyber',force='cyber',view='atlas')+'</aside>'
@@ -148,6 +196,7 @@ def evidence_report(chosen,spec,data):
         from .understanding import source_quality
         quality=source_quality(source,data['as_of'])
         body+=f"<article id='{e(source['id'])}'><p class='mi-kicker'>{e(source['publisher'])} · {e(source['id'])}</p><h3>{e(source['title'])}</h3><blockquote>{e(observation['segment']['content'])}</blockquote><p>Locator: {e(observation['segment']['section_heading'])}</p><p>Published: {e(source['publication_date'] or 'Unknown')} · Retrieved: {e(source['retrieved_at'])}</p><p>Scope / period: {e(source['reporting_period'])}</p><p>{e(source['review_notes'])}</p><p>Existing freshness review: {e(quality['currentness'])}. Review date is not the effective or publication date.</p><a href='{e(source['url'],quote=True)}'>Open official primary source →</a><p class='mi-compact'>Claim {e(observation['candidate']['claim_id'])} · excerpt SHA-256 {e(source['text_sha256'])} · original checksum unavailable. No accepted observation.</p></article>"
+    if spec.get('enterprise_trace'):body+=trace_dossier(chosen,spec['enterprise_trace'])
     body+="<h3>Traceable relationship projection</h3><p>Every edge below retains its market, period, status and evidence references. Enterprise applicability remains Unknown.</p><pre>"+e(__import__('json').dumps(spec['edges'],ensure_ascii=False,indent=2))+"</pre><h3>Open research actions</h3><ul><li>Resolve exact legal entity and register identity without inheriting parent duties.</li><li>Check live instrument and French transposition text; retain contrary evidence and supersession lineage.</li><li>Obtain customer-verified need, owner, buying route and delivery gap through the existing qualification process.</li></ul></section>"
     return body
 
