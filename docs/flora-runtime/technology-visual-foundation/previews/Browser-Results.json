@@ -1,0 +1,262 @@
+{
+  "base": "http://127.0.0.1:8792",
+  "results": [
+    {
+      "path": "/industries/technology?lens=how",
+      "width": 1440,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=uses",
+      "width": 1440,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1440,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology",
+      "width": 1440,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=uses&relationship=programme-67-5",
+      "width": 1440,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=uses&relationship=programme-202-1",
+      "width": 1440,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1440,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=how",
+      "width": 1024,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=uses",
+      "width": 1024,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 1024,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology/providers?provider=tcs-diligenta",
+      "width": 1024,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology/models?model=2",
+      "width": 1024,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology/timeline",
+      "width": 1024,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology/evidence",
+      "width": 1024,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/banking",
+      "width": 1024,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/aviation",
+      "width": 1024,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/enterprises/lloyds",
+      "width": 1024,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/enterprises/easyjet",
+      "width": 1024,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=how",
+      "width": 768,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=uses",
+      "width": 768,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 768,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology/providers?provider=tcs-diligenta",
+      "width": 768,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology/models?model=2",
+      "width": 768,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology/timeline",
+      "width": 768,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology/evidence",
+      "width": 768,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/banking",
+      "width": 768,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/aviation",
+      "width": 768,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/enterprises/lloyds",
+      "width": 768,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/enterprises/easyjet",
+      "width": 768,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=how",
+      "width": 390,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=uses",
+      "width": 390,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=work",
+      "width": 390,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology/providers?provider=tcs-diligenta",
+      "width": 390,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology/models?model=2",
+      "width": 390,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology/timeline",
+      "width": 390,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology/evidence",
+      "width": 390,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/banking",
+      "width": 390,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/aviation",
+      "width": 390,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/enterprises/lloyds",
+      "width": 390,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/enterprises/easyjet",
+      "width": 390,
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "path": "/industries/technology?lens=uses&relationship=programme-222-4",
+      "width": 1440,
+      "status": 200,
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "keyboardRoleSelection": true,
+  "providerDrill": true,
+  "existingLloydsAndEasyjetNavigation": true,
+  "themeProgrammeEvidenceDrill": true,
+  "noJavaScriptRoleSelection": true,
+  "printGenerated": true,
+  "limitations": [
+    "Chromium only; physical iPad/Safari and assistive-technology user testing not performed",
+    "No owner comprehension or independent source-factuality acceptance claimed"
+  ]
+}

@@ -16,6 +16,7 @@ on:
       - 'requirements*.txt'
       - 'pyproject.toml'
       - 'docs/flora-runtime/security-repair-01*/**'
+      - 'docs/flora-runtime/technology-visual-foundation/**'
       - 'docs/flora-runtime/experience-repair-02/run_regressions.py'
       - '.github/workflows/flora-validation.yml'
   push:
@@ -32,6 +33,7 @@ on:
       - 'requirements*.txt'
       - 'pyproject.toml'
       - 'docs/flora-runtime/security-repair-01*/**'
+      - 'docs/flora-runtime/technology-visual-foundation/**'
       - 'docs/flora-runtime/experience-repair-02/run_regressions.py'
       - '.github/workflows/flora-validation.yml'
   workflow_dispatch:

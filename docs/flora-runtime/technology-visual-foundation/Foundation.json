@@ -1,0 +1,3795 @@
+{
+  "version": 1,
+  "authority": "candidate_intelligence",
+  "as_of": "2026-11-12",
+  "page_id": "page_61a0dab9a9708191a323c9b0e048e523",
+  "page_sequence": 11,
+  "research_page_sha256": "e7f0bad8a7451cbb10f65a84b786c8ba4c1b5d634540fd02b660d46c57285b11",
+  "segments": [
+    {
+      "key": "applications",
+      "label": "Software and applications",
+      "role": "Support enterprise and industry processes",
+      "economics": "Subscription, licence, maintenance and consumption"
+    },
+    {
+      "key": "cloud",
+      "label": "Cloud and infrastructure",
+      "role": "Compute, storage, hosting and connectivity",
+      "economics": "Usage, committed capacity and recurring infrastructure services"
+    },
+    {
+      "key": "ai",
+      "label": "Data and AI",
+      "role": "Data management, analytics and decision support",
+      "economics": "Platform subscriptions, usage and implementation"
+    },
+    {
+      "key": "cyber",
+      "label": "Cybersecurity",
+      "role": "Protect, detect, respond and assure",
+      "economics": "Software, managed services and specialist projects"
+    },
+    {
+      "key": "services",
+      "label": "Technology services",
+      "role": "Design, build, integrate, transform and run",
+      "economics": "Projects, capacity and managed-service contracts"
+    },
+    {
+      "key": "channels",
+      "label": "Channels and distribution",
+      "role": "Route technology to customers and partners",
+      "economics": "Sourcing margin, vendor programmes and services"
+    },
+    {
+      "key": "frontier",
+      "label": "Emerging technologies",
+      "role": "Develop frontier capabilities",
+      "economics": "IP, hardware, research collaborations and early services"
+    }
+  ],
+  "providers": [
+    {
+      "key": "microsoft",
+      "label": "Microsoft",
+      "primary_group": "Software and applications",
+      "memberships": [
+        "applications",
+        "cloud",
+        "ai",
+        "cyber"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "eea8bc49-80d0-4789-9e73-a7e804c3c119",
+          "text": "Microsoft’s FY2026 annual report describes productivity/business applications, cloud/server offerings and personal-computing businesses. Microsoft 365, Dynamics and Azure serve different capabilities; a Microsoft customer relationship cannot establish use of the whole portfolio. The segment descriptions are tied to the reported financial year and should not be assumed to describe later reorganisations. [FY2026 annual report](https://www.microsoft.com/investor/reports/ar26/)."
+        },
+        {
+          "block": "aa3b439a-e6ba-4e28-a3cd-098814fbf857",
+          "text": "UK adoption evidence includes customer-authored Lloyds and Sainsbury’s disclosures in the relationship register. Model Microsoft both as product/platform owner and ecosystem participant. Gaps: UK entity/financial reconciliation, current segment updates and customer-specific delivery partners."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "sap",
+      "label": "SAP",
+      "primary_group": "Software and applications",
+      "memberships": [
+        "applications"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "0679ead9-aea4-4636-ac68-ebf3b23aa910",
+          "text": "Model: enterprise applications and cloud subscriptions with implementation, extension, resale and managed-service partners. 2025 global revenue was €36.8bn, including €21.023bn cloud revenue; these are not UK figures. [Annual filing](https://www.sec.gov/Archives/edgar/data/1000184/000110465926020058/sap-20251231x20f.htm)."
+        },
+        {
+          "block": "5659c314-203a-4fc2-afaf-11278922d410",
+          "text": "The partner model distinguishes ISVs, selling partners, services/system integrators and managed-service/technology partners. [Partner-role disclosure](https://www.sec.gov/Archives/edgar/data/1000184/000110465926024381/tm2529416d2_ex99-1.htm). UK presence is explicitly described by SAP. [UK company page](https://www.sap.com/uk/about.html)."
+        },
+        {
+          "block": "9b884f4d-596b-4c05-b168-2ff68d8a56ad",
+          "text": "Customer: Centrica; see dated relationship register. Gaps: UK scale, product-level local footprint, current implementation partners and completion evidence."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "oracle",
+      "label": "Oracle",
+      "primary_group": "Software and applications",
+      "memberships": [
+        "applications",
+        "cloud"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "9cbfac95-6e6e-41d1-9d64-dcd7a75f676a",
+          "text": "Lloyds’ March 2025 announcement supports a multicloud database relationship spanning Database@Azure and Exadata Cloud@Customer. Distinguish database vendor, hosting location and customer-operated environment. The named Azure context does not imply a Microsoft implementation contract. [Lloyds announcement](https://www.oracle.com/news/announcement/lloyds-banking-group-expands-collaboration-with-oracle-to-support-tech-transformation-2025-03-20/)."
+        },
+        {
+          "block": "ed6307be-6d4c-4ea9-a0d1-0c24e0fd589f",
+          "text": "NHS SBS confirms Oracle Fusion application use in its own announcement. Keep the customer-supported capability claim separate from the supplier's additional partner-role assertions. See the corroboration section and relationship record below."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "salesforce",
+      "label": "Salesforce",
+      "primary_group": "Software and applications",
+      "memberships": [
+        "applications"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "e8901b6a-b9d7-4b75-ae58-864eec076821",
+          "text": "Heathrow’s supplier case study describes Customer 360 for passenger communications and commercial experiences, dated August 2023. It does not establish use of every Salesforce product, a current Agentforce deployment, or airport operational-control systems. [Heathrow story](https://www.salesforce.com/news/stories/heathrow-airport-customer/)."
+        },
+        {
+          "block": "8a507851-9795-4ad2-a88f-6a9cac26254c",
+          "text": "Subscription/support is central to the global financial model, but UK deployment and group-scale measures need separate reconciliation. [Issuer financial results](https://investor.salesforce.com/financials/quarterly-results/default.aspx). Gaps: UK operating profile, product-level relationships and current customer corroboration."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "servicenow",
+      "label": "ServiceNow",
+      "primary_group": "Software and applications",
+      "memberships": [
+        "applications"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "c9adcfad-0f29-4d17-82a5-ce27ceb6488a",
+          "text": "Its own description spans IT service/operations management and employee/customer workflows. BT’s 2024 announcement supplies stronger customer-authored evidence for service management, Service Bridge and a Now Assist pilot. Product breadth is distinct from BT’s evidenced scope. [Offering overview](https://www.servicenow.com/uk/blogs/2023/what-does-servicenow-do), [BT announcement](https://newsroom.bt.com/bt-group-expands-strategic-relationship-with-servicenow-to-improve-customer-and-employee-experiences/)."
+        },
+        {
+          "block": "b87eb95c-06e4-4cf5-8f9c-6b1f3c8e3324",
+          "text": "Gaps: UK financial/operating model, current BT rollout milestones, partner attribution and wider customer population."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "sage",
+      "label": "Sage",
+      "primary_group": "Software and applications",
+      "memberships": [
+        "applications"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "3714edc7-224f-4060-841b-c6421e2bf65d",
+          "text": "Sage supplies accounting, payroll, HR and financial-management software through an ecosystem of accountants, resellers and ISVs. Its published strategy emphasises cloud expansion, Sage Intacct and AI-assisted workflows. The global FY25 financial table reports statutory revenue of £2,513m; its separate KPIs report 97% recurring-revenue penetration and 83% subscription penetration. UK & Ireland, UKIA and group measures must remain distinct. These FY25 figures are not a UK-only or FY26 revenue estimate. [Financial performance, investment case and FY25 columns](https://www.sage.com/investors/financial-information/financial-performance/)."
+        },
+        {
+          "block": "e9a6fa88-d683-4dd9-87cd-32783ef343ec",
+          "text": "Gaps: comparable UK economics, specific customer/product case extraction and current operating structure."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "workday",
+      "label": "Workday",
+      "primary_group": "Software and applications",
+      "memberships": [
+        "applications"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK-facing finance, HR and planning cloud applications; Kainos supplies an evidenced UK ecosystem connection | Product/platform provider; deployments and extensions involve services partners | Keep Workday software separate from Kainos services and Workday-related products. [Company](https://www.workday.com/en-gb/company/about-workday.html), [Kainos practice](https://www.kainosworksmart.com/workday)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "pega",
+      "label": "Pega",
+      "primary_group": "Software and applications",
+      "memberships": [
+        "applications"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Do not join by name to PEGA LIMITED. Ownership/domain evidence and registry reconciliation remain unresolved.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK office listed at Reading; decisioning and workflow automation | Platform owner, with application design and implementation ecosystem | Do not join to a Companies House company merely named PEGA LIMITED without corroborating ownership/domain evidence. [Company](https://www.pega.com/about), [offices](https://www.pega.com/about/office-locations)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "access-group",
+      "label": "Access Group",
+      "primary_group": "Software and applications",
+      "memberships": [
+        "applications"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK-headquartered business-management software, with ERP/payroll category identified by investor Hg | Software portfolio serving commercial and non-profit organisations | Investor description supports the group baseline; it does not resolve product-specific deployment or local revenue. Headcount differs across public descriptions, so no count is adopted. [Investor portfolio](https://hgcapital.com/portfolio/access)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "oneadvanced",
+      "label": "OneAdvanced",
+      "primary_group": "Software and applications",
+      "memberships": [
+        "applications"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Page records ONEADVANCED LIMITED name change, company 03214465; registry citation is not canonical binding.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "Sector software, including health, care, legal, education and finance/workforce functions | Software provider with a separate managed-services offering | Product catalogue availability is distinct from a named customer's deployment. Companies House records a name change from Advanced Business Software and Solutions Limited to ONEADVANCED LIMITED on 1 May 2025. [Company](https://www.oneadvanced.com/about-us/), [registry](https://find-and-update.company-information.service.gov.uk/company/03214465)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "adobe",
+      "label": "Adobe",
+      "primary_group": "Software and applications",
+      "memberships": [
+        "applications"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "Creative, document and customer-experience software, including Creative Cloud, Acrobat and Firefly | UK-facing enterprise offering; capability presence does not establish named UK customer use | [Company](https://www.adobe.com/uk/about-adobe.html)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "autodesk",
+      "label": "Autodesk",
+      "primary_group": "Software and applications",
+      "memberships": [
+        "applications"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "Design/make software across construction, manufacturing and media | UK company registry; horizontal technology supporting several other industries | [Company](https://www.autodesk.com/company), [UK registry](https://find-and-update.company-information.service.gov.uk/company/01839239)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "aveva",
+      "label": "AVEVA",
+      "primary_group": "Software and applications",
+      "memberships": [
+        "applications",
+        "frontier"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Schneider Electric group ownership reported; brand/group/local contracting entity remain distinct.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "Industrial software across engineering design, capital projects, operations, monitoring and optimisation | Cambridge group address; Schneider Electric ownership; declares Microsoft, AWS and NVIDIA technology relationships | [Company and ownership](https://www.aveva.com/en/about/)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "aws",
+      "label": "AWS",
+      "primary_group": "Cloud and data platforms",
+      "memberships": [
+        "cloud",
+        "ai"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "837342f2-4432-4ab4-97ed-66404ae5fa7a",
+          "text": "AWS has evidenced UK infrastructure operations and an announced multiyear investment programme. Amazon-wide investment includes non-AWS activities and must not be presented as AWS spending. Planned investment and modelled economic benefits are not realised revenue or jobs. [UK commitment](https://www.aboutamazon.co.uk/news/job-creation-and-investment/learn-about-awss-long-term-commitment-to-the-uk), [AWS investment plan](https://www.aboutamazon.co.uk/news/job-creation-and-investment/aws-plans-to-invest-8-billion-in-the-uk)."
+        },
+        {
+          "block": "c8d707d0-a813-4dc0-9035-4437a8cf7b9e",
+          "text": "The Dojo reference supports historical customer use, not the whole AWS estate. Gaps: current UK offering map, named customer-authored cases, partner responsibilities and UK economics."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "google-cloud",
+      "label": "Google Cloud",
+      "primary_group": "Cloud and data platforms",
+      "memberships": [
+        "cloud",
+        "ai"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Provider view within Google/Alphabet; distinct from Google DeepMind, not an additional independent corporate group.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "edb33742-2b1e-46d0-a838-a81ffac1fdce",
+          "text": "Lloyds provides customer-authored AI infrastructure evidence. A Google Cloud article describes John Lewis’ e-commerce modernisation using Google Kubernetes Engine and a platform-engineering approach. This supports a retail relationship with a specific offering, not a claim that all John Lewis Partnership systems or Waitrose use that architecture. [John Lewis platform engineering](https://cloud.google.com/blog/products/application-development/simplifying-platform-engineering-at-john-lewis-part-one)."
+        },
+        {
+          "block": "9347d6bd-3d07-475b-b8da-baa6441fb901",
+          "text": "Gaps: current UK scale and legal identity, comparative service economics, current architecture and delivery responsibility."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "snowflake",
+      "label": "Snowflake",
+      "primary_group": "Cloud and data platforms",
+      "memberships": [
+        "cloud",
+        "ai"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK office and Aviva reference | Data platform, usage economics and professional services; partner NextPathway identified in Aviva delivery | Aviva case describes Snowflake on AWS; this does not establish that all Aviva workloads left Oracle. [Customer case](https://www.snowflake.com/en/customers/all-customers/case-study/aviva/), [UK office](https://www.snowflake.com/en/contact/)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "databricks",
+      "label": "Databricks",
+      "primary_group": "Cloud and data platforms",
+      "memberships": [
+        "cloud",
+        "ai"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "Rolls-Royce Civil Aerospace reference | Data and AI platform; partner-led integration also evidenced through Deloitte's separate AiRR account | Engine-monitoring case and AiRR are separate supported use cases and must not be merged into one project. [Engine-monitoring case](https://www.databricks.com/customers/rolls-royce), [AiRR](https://www.deloitte.com/uk/en/about/story/impact/driving-ai-powered-integration-rolls-royce.html)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "ovhcloud",
+      "label": "OVHcloud",
+      "primary_group": "Cloud and data platforms",
+      "memberships": [
+        "cloud"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "Public/private cloud, dedicated servers and hosting | UK-facing cloud offering; global facilities and certifications must not be assumed to apply to every UK service | [Company](https://www.ovhcloud.com/en-gb/about-us/)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "rackspace",
+      "label": "Rackspace",
+      "primary_group": "Cloud and data platforms",
+      "memberships": [
+        "cloud",
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "Integration and ongoing operation across cloud, infrastructure, data and AI | UK operating presence described on its company site; provider's accountability/sovereignty claims need customer-specific terms | [Company](https://www.rackspace.com/en-gb/about/)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "quantexa",
+      "label": "Quantexa",
+      "primary_group": "AI and decision intelligence",
+      "memberships": [
+        "ai"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "94e1767f-6952-48d3-8529-5887fb152143",
+          "text": "Model: Decision Intelligence platform connecting data and entities for investigation and business decisions. Its own publication describes HSBC and Standard Chartered using it for financial-crime-related work. These support supplier-reported named relationships; precise deployment geography, dates and customer-confirmed outcomes require further work. [Financial-crime evidence](https://www.quantexa.com/resources/holistic-view-of-financial-crime/)."
+        },
+        {
+          "block": "a7414c87-2c87-4bdb-9982-4a3a95bbb5da",
+          "text": "Gaps: revenue model, UK scale, ownership, current platform modules, implementation partners and customer-authored corroboration."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "faculty",
+      "label": "Faculty",
+      "primary_group": "AI and decision intelligence",
+      "memberships": [
+        "ai"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "a39cd005-a5ec-4a91-9489-fcd86896ea7b",
+          "text": "Faculty describes applied AI work in health and care, including forecasting, operational capacity and responsible deployment. Its health page identifies NHS forecasting work and links named Cera and Hywel Dda University Health Board stories. These are provider-reported relationships, not independently validated clinical outcomes. [Health and care](https://faculty.ai/en-gb/industries/health-and-care)."
+        },
+        {
+          "block": "6ed208b3-2bd3-432b-9a63-85b4ce2f6b44",
+          "text": "Do not promote the page’s life-saving or hospitalisation-reduction claims without a defined evaluation, population and counterfactual. Individual NHS entities and historic NHS England/NHS Improvement naming must be resolved by event date."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "nvidia",
+      "label": "NVIDIA",
+      "primary_group": "AI and decision intelligence",
+      "memberships": [
+        "ai",
+        "infrastructure",
+        "frontier"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK compute/research ecosystem participation | Accelerated-computing technology and cloud-partner ecosystem | October 2026 announcement is a five-year compute-access commitment. Provider selection, architecture and commercial terms were still to be agreed; it is not completed spending or a procurement award. [Announcement](https://nvidianews.nvidia.com/news/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "openai",
+      "label": "OpenAI",
+      "primary_group": "AI and decision intelligence",
+      "memberships": [
+        "ai"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "AI research and deployment organisation; AI products and developer platform | London office announced 28 June 2023; NatWest customer-authored collaboration. UK office does not establish the contracting entity for every service | [London](https://openai.com/index/introducing-openai-london/), [NatWest](https://www.natwestgroup.com/news-and-insights/latest-stories/ai-and-data/2025/mar/accelerating-our-ai-transformation-in-banking-with-openai.html)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "anthropic",
+      "label": "Anthropic",
+      "primary_group": "AI and decision intelligence",
+      "memberships": [
+        "ai"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "Frontier-model research and products including Claude; partner-enabled deployment | UK company registry and London operation; Barclays supplier-reported deployment; TCS/Diligenta announced adoption | [Company](https://www.anthropic.com/company), [UK entity](https://find-and-update.company-information.service.gov.uk/company/14604577), [Barclays](https://www.anthropic.com/news/barclays-scales-claude), [TCS](https://www.anthropic.com/news/tcs-anthropic-partnership)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "google-deepmind",
+      "label": "Google DeepMind",
+      "primary_group": "AI and decision intelligence",
+      "memberships": [
+        "ai"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Research organisation within Google/Alphabet; shared group with Google Cloud. No separate independent-group count.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "Research and model development, including Gemini and scientific AI | UK government MoU and research presence; part of Google's organisation, not an independent supplier group additional to Alphabet | [Company](https://deepmind.google/about/), [government MoU](https://www.gov.uk/government/publications/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "ncc-group",
+      "label": "NCC Group",
+      "primary_group": "Cybersecurity",
+      "memberships": [
+        "cyber"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Escode sale completed 29 May 2026; Escode is historical ownership, not a current division.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "420cb2ed-8e3f-41b0-8319-e899d426a0fc",
+          "text": "Correction to the initial 2025 description: Escode is no longer a current NCC division. NCC confirms completion of its sale to TDR-managed funds. June 2026 issuer interim reporting identifies completion on 29 May 2026. NCC now describes its focus as cybersecurity and resilience. Preserve the historical ownership relationship and the disposal event. [Completion announcement](https://www.nccgroup.com/newsroom/ncc-group-completes-sale-of-escode/), [June 2026 interim report](https://www.nccgroup.com/media/fvle0btz/ncc-interims-h1-fy26-110626.pdf)."
+        },
+        {
+          "block": "8ba36d93-0c8e-46d9-8afa-3ba26eada69a",
+          "text": "Gaps: updated segment economics, named customers, partner roles and current operating-model detail."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "sophos",
+      "label": "Sophos",
+      "primary_group": "Cybersecurity",
+      "memberships": [
+        "cyber"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Secureworks acquisition completed 3 February 2025; historical independent-group boundary is superseded.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "e8170ced-ee3f-4122-9a53-a7ebfdf55963",
+          "text": "Model under investigation: cybersecurity technology and managed detection/response delivered with channel partners, MSPs and MSSPs. Sophos completed Secureworks acquisition on 3 February 2025; do not retain Secureworks as an independent group without dating the relationship. [Sophos announcement](https://www.sophos.com/en-us/partner-news/sophos-completes-secureworks-acquisition), [transaction filing](https://www.sec.gov/Archives/edgar/data/1468666/000095014225000239/eh250585750_8k.htm)."
+        },
+        {
+          "block": "6c595faf-bf2f-4997-a50a-4416df50e34f",
+          "text": "Gaps: UK business scope, product integration, customer deployments and distinct direct/partner delivery responsibilities."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "darktrace",
+      "label": "Darktrace",
+      "primary_group": "Cybersecurity",
+      "memberships": [
+        "cyber"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "2024 Thoma Bravo acquisition completed; historical listed-company data is not current ownership.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2263c018-31f4-4538-9012-f8ff1b4ce92d",
+          "text": "Thoma Bravo confirms completion of its Darktrace acquisition in 2024. Ownership history and delisting must be reflected rather than treating historical public-company reporting as current. [Acquisition completion](https://www.thomabravo.com/press-releases/thoma-bravo-completes-acquisition-of-darktrace)."
+        },
+        {
+          "block": "24fa2b06-fe36-4451-bb91-8f83dc5cb63d",
+          "text": "Its customer portal includes both named and anonymous stories. Anonymous organisations remain anonymous; relationship breadth requires actual case extraction. [Customer portal](https://www.darktrace.com/customers). Gaps: current UK economics, named UK customer confirmation, product lifecycle and delivery roles."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "palo-alto-networks",
+      "label": "Palo Alto Networks",
+      "primary_group": "Cybersecurity",
+      "memberships": [
+        "cyber"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK-facing network-security offering | Security technology/platform provider | The cited page supports firewall/application-control capability; it does not establish UK market share, effectiveness or a named customer. [Offering](https://www.paloaltonetworks.co.uk/company/what-we-do)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "crowdstrike",
+      "label": "CrowdStrike",
+      "primary_group": "Cybersecurity",
+      "memberships": [
+        "cyber"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK entity appears in the NCSC organisation directory; Berkeley Group is a named UK customer reference | Endpoint/security platform, managed services and security automation | Berkeley case identifies Falcon Fusion SOAR. Performance figures remain attributed supplier claims, not independent assurance. [NCSC directory](https://www.ncsc.gov.uk/organisation/crowdstrike-uk-limited), [case](https://www.crowdstrike.com/en-us/resources/customer-stories/berkeley-group/)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "fortinet",
+      "label": "Fortinet",
+      "primary_group": "Cybersecurity",
+      "memberships": [
+        "cyber"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK corporate site and UK company registry record | Networking/security technology, with channel delivery | Security Fabric/FortiOS capability and channel relationships are distinct from a particular customer installation. [Company](https://www.fortinet.com/uk/corporate/about-us/about-us), [UK registry](https://find-and-update.company-information.service.gov.uk/company/04570027)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "rubrik",
+      "label": "Rubrik",
+      "primary_group": "Cybersecurity",
+      "memberships": [
+        "cyber"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "London EMEA headquarters announced July 2026, alongside UK customer references | Data protection and cyber-resilience platform, expanding into AI-operation controls | Five-year UK investment is a plan. Harbour Energy, Manchester City Council and Scottish Government are supplier-named customers, with product-level scope unresolved. [Announcement](https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "accenture",
+      "label": "Accenture",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "b9e9ef6c-d087-44cc-aad6-ee7f26d157cd",
+          "text": "Official strategic-supplier records support UK public-sector relevance. Accenture has a customer-authored Bank of England delivery appointment and subsequent RT2 go-live evidence, recorded above. Neither provider’s full operating model or current UK economics is complete here. [Strategic suppliers](https://www.gov.uk/government/publications/strategic-suppliers/crown-representatives-and-strategic-suppliers), [Accenture issuer reporting](https://www.accenture.com/en/about/company/integrated-reporting)."
+        },
+        {
+          "block": "2c5c228e-cf48-49a7-81d5-296443fb0c7f",
+          "text": "Gaps: comparable services/managed-services descriptions, segment and territory scope, current entity identities, partners and broader named customers."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "ibm",
+      "label": "IBM",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services",
+        "applications",
+        "cloud",
+        "ai",
+        "infrastructure"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "71397392-675f-4b75-aeb2-73f6b01e3e39",
+          "text": "IBM describes Software, Consulting, Infrastructure and Financing, tied to hybrid cloud and AI. Its software description includes Red Hat, watsonx, Apptio and HashiCorp capabilities; Consulting designs, implements and operates technology/business processes using IBM and ecosystem technologies. Ownership, implementation and hosting must be separate relationships. [Business segments](https://www.ibm.com/responsibility/governance/business-segments-innovation)."
+        },
+        {
+          "block": "fa3b6b63-a012-494c-86e4-b7f1016a918a",
+          "text": "UK relevance has official strategic-supplier evidence. Gaps: customer-authored UK case studies, entity/scale reconciliation and actual product-level partner delivery. An industry-awards case mentioning Lloyds was discovered but is outside the initial official-source acceptance boundary until followed to an enterprise source."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "capgemini",
+      "label": "Capgemini",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "f1daff1c-bd7a-4104-b1bf-a46f24838744",
+          "text": "Its UK corporate description groups services into strategy/transformation, applications/technology, engineering and operations. This is broader than application implementation alone. [What Capgemini does](https://www.capgemini.com/gb-en/about-us/who-we-are/what-we-do/)."
+        },
+        {
+          "block": "bc4921fa-ada6-48ea-80d6-c96040a1ccef",
+          "text": "The Bentley June 2026 announcement provides a named UK manufacturing transformation relationship, with digital infrastructure, systems integration and data/AI scope. It is supplier-reported delivery intent, not proof of completed benefits. Gaps: UK financial model, customer-authored corroboration and named platform responsibilities."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "sopra-steria",
+      "label": "Sopra Steria",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "f2dc0440-33da-445c-88fe-3fd8f2c7cb96",
+          "text": "The group key-figures page reports €5.6bn global 2025 revenue but also contains a revenue breakdown explicitly dated 2022. Do not apply the old UK percentage or service mix to 2025 revenue. [Group figures](https://www.soprasteria.com/investors/sopra-steria-overview_/key-figures)."
+        },
+        {
+          "block": "3eaf5241-a244-4005-8d70-9136ce392b65",
+          "text": "The UK partner page declares relationships with Microsoft, AWS, IBM, Oracle, Google and Salesforce. Those are alliance statements; they do not establish named customer deployments. [UK technology partners](https://www.soprasteria.co.uk/about-us/technology-partners)."
+        },
+        {
+          "block": "a0c0e925-3cd5-4b26-99c4-24b357b91648",
+          "text": "Gaps: current UK operating and financial scope; customer/partner role verification; shared-service joint-venture identity relationships."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "dxc",
+      "label": "DXC",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "b9e9ef6c-d087-44cc-aad6-ee7f26d157cd",
+          "text": "Official strategic-supplier records support UK public-sector relevance. Accenture has a customer-authored Bank of England delivery appointment and subsequent RT2 go-live evidence, recorded above. Neither provider’s full operating model or current UK economics is complete here. [Strategic suppliers](https://www.gov.uk/government/publications/strategic-suppliers/crown-representatives-and-strategic-suppliers), [Accenture issuer reporting](https://www.accenture.com/en/about/company/integrated-reporting)."
+        },
+        {
+          "block": "2c5c228e-cf48-49a7-81d5-296443fb0c7f",
+          "text": "Gaps: comparable services/managed-services descriptions, segment and territory scope, current entity identities, partners and broader named customers."
+        },
+        {
+          "block": "5b79f850-4e6e-407e-8af4-7e7984846f65",
+          "text": "DXC’s February 2026 London Customer Experience Center announcement supports a specific UK operating presence for AI/customer co-creation work. Its customer index references Post Office modernisation; the index is discovery evidence only until the underlying story and customer source are checked. [London announcement](https://investors.dxc.com/investor-news/news-details/2026/DXC-Launches-London-Customer-Experience-Center-to-Help-Unlock-AI-Value/default.aspx), [customer index](https://dxc.com/insights/customer-stories)."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "kainos",
+      "label": "Kainos",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services",
+        "applications"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2678abd1-456b-4ab2-83bc-0dad90fd8c6a",
+          "text": "Model: Digital Services, Workday Services and Workday Products. These represent custom delivery, platform-related services and proprietary product activities. Its Workday practice explicitly states that Kainos itself is a Workday customer, separately from its partner role. [Investor overview](https://www.kainos.com/investor-relations), [Workday practice](https://www.kainosworksmart.com/workday)."
+        },
+        {
+          "block": "fc96a2b7-4e68-46eb-9ade-42c5f656304a",
+          "text": "The investor results library should provide current disclosures. A November 2026 LSE results page encountered recipient/use restrictions; its search excerpts are not accepted as full-source evidence for this pack. [Issuer results library](https://www.kainos.com/investor-relations/results-and-presentations)."
+        },
+        {
+          "block": "4b21581f-f5d2-4643-88cc-a8518b14fed5",
+          "text": "Gaps: current issuer-hosted results extraction, product-specific named customers, UK/global revenue reconciliation and customer-authored delivery references."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "tcs-diligenta",
+      "label": "TCS / Diligenta",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Composite selection view: TCS parent, Diligenta delivery subsidiary and BaNCS product remain distinct. No single contracting entity bound.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "373d8d16-6df6-4e2c-a226-ec8523ba77eb",
+          "text": "UK enterprise services plus regulated subsidiary delivery | TCS BaNCS, policy administration, digital services | Aviva; TCS announcement 18 December 2025 identifies Diligenta delivery and platform role; announced expansion rather than all policies already migrated"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "infosys",
+      "label": "Infosys",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "373d8d16-6df6-4e2c-a226-ec8523ba77eb",
+          "text": "UK public-sector service page and bp engagement | Application development, modernisation, management and maintenance | bp; May 2023 source is an MoU recording intended primary-partner role, not proof of a concluded exclusive contract"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "cognizant",
+      "label": "Cognizant",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "373d8d16-6df6-4e2c-a226-ec8523ba77eb",
+          "text": "UK/Ireland company page and UK offices | Technology modernisation, processes and digital experience | Page describes Zone, Inawisdom, Netcentric and New Signature roles; historic acquisition text needs event-dated handling"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "ntt-data",
+      "label": "NTT DATA",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "373d8d16-6df6-4e2c-a226-ec8523ba77eb",
+          "text": "UK offices and UK partner disclosures | IT/business services, data, applications and integration | Declared SAP, Salesforce, Microsoft, Snowflake and Google Cloud relationships; no inferred customer deployment"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "equal-experts",
+      "label": "Equal Experts",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "373d8d16-6df6-4e2c-a226-ec8523ba77eb",
+          "text": "UK teams and named HMRC technical story | Product engineering, data and AI adoption | HMRC GAILZ; provider-reported product/onboarding/cost-control support; sovereignty and performance claims require separate assurance"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "version-1",
+      "label": "Version 1",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "373d8d16-6df6-4e2c-a226-ec8523ba77eb",
+          "text": "UK/Ireland delivery and partner disclosures | Cloud, applications, managed services, software-asset management | Declared AWS, Microsoft, Oracle, Anthropic, Databricks, Red Hat and Snowflake roles; badges not customer contract proof"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "netcompany",
+      "label": "Netcompany",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "373d8d16-6df6-4e2c-a226-ec8523ba77eb",
+          "text": "UK presence in annual reporting; regulated/public digital services | Design, build and operate digital infrastructure | Named UK customer scope not yet accepted; company-level service role supported"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "cgi",
+      "label": "CGI",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK services organisation | Consulting, systems integration, managed IT and business-process services, with proprietary IP | Its UK page includes global FY2024 figures. These are neither current FY2026 nor UK-only revenue. [Operating model](https://www.cgi.com/uk/en-gb/about-us/cgi-at-a-glance)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "fujitsu",
+      "label": "Fujitsu",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK operating page names MOD, Environment Agency, NatWest and Network Rail | Applications, cloud/platforms, data/AI, workplace, networks and support | These are supplier-listed relationships; the page does not resolve contract dates, product scope or current procurement eligibility. [UK operations](https://global.fujitsu/en-UK/local/about)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "hcltech",
+      "label": "HCLTech",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "Official UK operation page | Digital, engineering and cloud delivery; UK research/skills ecosystem | The overview contains age-relative figures and older recognition items. Do not treat every embedded number as a 2026 metric. [UK operations](https://www.hcltech.com/geo-presence/united-kingdom)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "wipro",
+      "label": "Wipro",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK and Ireland operating page | Cloud, AI, applications, infrastructure, cyber, business processes and engineering | UK&I workforce figures cannot be represented as UK-only. Aggreko finance/procurement work is a supplier-described customer lead. [UK and Ireland](https://www.wipro.com/en-UKI/)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "tech-mahindra",
+      "label": "Tech Mahindra",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "Official UK offices and UK establishment registry | Application modernisation, AI, business processes, cloud, engineering, experience, networks and testing | Model UK establishment and global parent separately; capability list is not evidence of an enterprise deployment. [Capabilities](https://www.techmahindra.com/our-capabilities/), [offices](https://www.techmahindra.com/contact-us/), [UK establishment](https://find-and-update.company-information.service.gov.uk/company/BR023076)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "atos-eviden",
+      "label": "Atos / Eviden",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Composite brand/group view; current service/product perimeter and local entities require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK entities identified in group filing and registry | Managed/digital services and distinct Eviden product activities | Eviden currently describes mission-critical systems, vision AI and cybersecurity. Do not carry forward a historic brand/segment perimeter uncritically; current group/service allocation remains a reconciliation item. [Eviden](https://eviden.com/), [UK entity](https://find-and-update.company-information.service.gov.uk/company/02017873), [dated group filing](https://www.atosgroup.com/sites/default/files/2026-01/atos-universal-registration-document-en-2024.pdf)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "valtech",
+      "label": "Valtech",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK footprint strengthened through completed Kin + Carta acquisition, 29 April 2024 | Experience design, commerce, digital engineering, data and AI services | Kin + Carta is an acquired business, not an additional independent group in population totals. Acquisition-year workforce/revenue descriptions are historical. [Completion](https://www.valtech.com/newsroom/valtech-completes-acquisition-of-kin-carta/)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "deloitte",
+      "label": "Deloitte",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Professional-services network and UK practice differ; global network economics are not UK figures.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK professional-services practice and named Rolls-Royce technology delivery account | Consulting and implementation; partner Databricks in AiRR | Deloitte is a professional-services network; UK practice and global network financials must remain separate. [UK services](https://www.deloitte.com/uk/en/services.html), [AiRR](https://www.deloitte.com/uk/en/about/story/impact/driving-ai-powered-integration-rolls-royce.html)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "node4",
+      "label": "Node4",
+      "primary_group": "Technology services",
+      "memberships": [
+        "services",
+        "cloud",
+        "cyber"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Site-declared England and Wales company 04759927; canonical reconciliation still required.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+          "text": "UK infrastructure and registered company identified in site footer | Microsoft applications/data expertise, cloud infrastructure, network/security and managed operations | Declares Microsoft, Fortinet, Cisco, Nerdio and VMware/Broadcom relationships. Sovereignty and rank assertions are provider claims requiring contract-specific verification. [Company](https://node4.co.uk/about-us), [delivery locations](https://node4.co.uk/why-node4)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "computacenter",
+      "label": "Computacenter",
+      "primary_group": "Channels and distribution",
+      "memberships": [
+        "channels",
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "2ceaebba-7bac-4fc8-a40d-45aced700154",
+          "text": "Model: technology sourcing, professional services and managed services. The UK segment reported H1 2026 revenue of £1,512.7m, gross invoiced income of £2,294.2m and gross profit of £160.1m. UK services revenue was £244.1m, comprising £103.5m professional and £140.6m managed services. These are six-month, unaudited interim measures, not full-year or group totals. Internal CRM, service-desk, service-management and ERP initiatives remain disclosed changes rather than open procurements. [H1 2026 results, United Kingdom table](https://investors.computacenter.com/news-releases/news-release-details/computacenter-2026-half-year-results)."
+        },
+        {
+          "block": "88ef4444-fa4e-4dc6-8c5d-71906f56ba00",
+          "text": "Customer role: Genesys publishes a Computacenter service-desk story. Treat downstream customers as unnamed unless separately evidenced. [Genesys reference](https://www.genesys.com/en-gb/customer-stories/computacenter)."
+        },
+        {
+          "block": "71d7f39b-c585-4d60-9d83-cdc97ce4d1cc",
+          "text": "Gaps: current full vendor map, named delivery-customer portfolio, subsidiary/contracting-entity mapping and current milestone updates. A scoped UK segment financial anchor is now available above; it does not replace entity-level accounts."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "softcat",
+      "label": "Softcat",
+      "primary_group": "Channels and distribution",
+      "memberships": [
+        "channels"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "3b47bba8-2540-40d5-8793-d7677240683b",
+          "text": "Softcat’s website describes workspace, licensing, cloud, data-centre, networking and security offerings, with declared vendor relationships including Apple, Samsung, Rubrik and Fortinet. Treat those as supplier-declared relationships. [Softcat](https://www.softcat.com/), [issuer results](https://www.softcat.com/about-us/investor-centre/results-centre)."
+        },
+        {
+          "block": "80dbce3a-148e-412e-901a-86bf4f015a74",
+          "text": "TD SYNNEX identifies a UK distributor/solution-aggregator role; its main page was not text-readable in this pass. Ingram Micro’s UK company page establishes local operations but does not by itself complete a distribution/business-model profile. [TD SYNNEX UK](https://uk.tdsynnex.com/), [Ingram Micro UK](https://uk-corp.ingrammicro.com/discover/company)."
+        },
+        {
+          "block": "058c483e-b14a-4ec3-926c-f085a418ad62",
+          "text": "Gaps: comparable UK financial scale, current vendor authorisations, service responsibilities and accepted customer examples. SCC and distributor operating-role baselines are included below."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "scc",
+      "label": "SCC",
+      "primary_group": "Channels and distribution",
+      "memberships": [
+        "channels",
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "SCC and Rigby Group remain separate entities; group financials are not SCC UK financials.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "aef4b393-9d9e-4964-8bf9-b09221242d76",
+          "text": "SCC’s corporate page describes a family-owned technology business within Rigby Group, connecting customers, vendors and solutions. Its service site includes managed IT, engineering and staff augmentation. Preserve SCC and Rigby Group as separate entities linked through an evidenced ownership relationship. The group’s financial scale must not become SCC UK revenue. [Corporate structure](https://www.scc.com/about-scc/), [offerings](https://www.scc.com/)."
+        },
+        {
+          "block": "31bb9eda-bf25-4e2a-af5d-5a8521da5917",
+          "text": "Provider claims about sovereignty and competitors on the same page are marketing/legal assertions, not accepted legal conclusions. Specific jurisdictions, contracts and technical controls require separate evidence. Named customer contracts and comparable UK financials remain unverified."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "td-synnex",
+      "label": "TD SYNNEX",
+      "primary_group": "Channels and distribution",
+      "memberships": [
+        "channels"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "3b47bba8-2540-40d5-8793-d7677240683b",
+          "text": "Softcat’s website describes workspace, licensing, cloud, data-centre, networking and security offerings, with declared vendor relationships including Apple, Samsung, Rubrik and Fortinet. Treat those as supplier-declared relationships. [Softcat](https://www.softcat.com/), [issuer results](https://www.softcat.com/about-us/investor-centre/results-centre)."
+        },
+        {
+          "block": "80dbce3a-148e-412e-901a-86bf4f015a74",
+          "text": "TD SYNNEX identifies a UK distributor/solution-aggregator role; its main page was not text-readable in this pass. Ingram Micro’s UK company page establishes local operations but does not by itself complete a distribution/business-model profile. [TD SYNNEX UK](https://uk.tdsynnex.com/), [Ingram Micro UK](https://uk-corp.ingrammicro.com/discover/company)."
+        },
+        {
+          "block": "058c483e-b14a-4ec3-926c-f085a418ad62",
+          "text": "Gaps: comparable UK financial scale, current vendor authorisations, service responsibilities and accepted customer examples. SCC and distributor operating-role baselines are included below."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "ingram-micro",
+      "label": "Ingram Micro",
+      "primary_group": "Channels and distribution",
+      "memberships": [
+        "channels"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "3b47bba8-2540-40d5-8793-d7677240683b",
+          "text": "Softcat’s website describes workspace, licensing, cloud, data-centre, networking and security offerings, with declared vendor relationships including Apple, Samsung, Rubrik and Fortinet. Treat those as supplier-declared relationships. [Softcat](https://www.softcat.com/), [issuer results](https://www.softcat.com/about-us/investor-centre/results-centre)."
+        },
+        {
+          "block": "80dbce3a-148e-412e-901a-86bf4f015a74",
+          "text": "TD SYNNEX identifies a UK distributor/solution-aggregator role; its main page was not text-readable in this pass. Ingram Micro’s UK company page establishes local operations but does not by itself complete a distribution/business-model profile. [TD SYNNEX UK](https://uk.tdsynnex.com/), [Ingram Micro UK](https://uk-corp.ingrammicro.com/discover/company)."
+        },
+        {
+          "block": "058c483e-b14a-4ec3-926c-f085a418ad62",
+          "text": "Gaps: comparable UK financial scale, current vendor authorisations, service responsibilities and accepted customer examples. SCC and distributor operating-role baselines are included below."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "equinix",
+      "label": "Equinix",
+      "primary_group": "Physical infrastructure and connectivity",
+      "memberships": [
+        "infrastructure"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "3cfdb972-1aae-4e5d-aa73-39168dc82b3f",
+          "text": "Model: recurring colocation, interconnection and managed infrastructure services. Its 2025 annual filing explains network effects from customer and partner proximity; the UK page reports 14 centres across London and Manchester. Do not equate colocation with ownership or operation of customer applications. [Annual filing](https://investor.equinix.com/sec-filings/all-sec-filings/content/0001101239-26-000032/eqix-20251231.htm), [UK operations](https://www.equinix.com/data-centers/europe-colocation/united-kingdom-colocation)."
+        },
+        {
+          "block": "b636c614-ffcf-4065-82af-458c582dacf5",
+          "text": "Customer: Dojo, from a 2022 supplier case study. Gaps: comparable UK financial scale, dated site/capacity verification and current deployment confirmation."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "telehouse",
+      "label": "Telehouse",
+      "primary_group": "Physical infrastructure and connectivity",
+      "memberships": [
+        "infrastructure"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Site declares Telehouse International Corporation of Europe Ltd, 2138407; parent/local binding remains unaccepted.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "5567d425-b697-4f2d-94a4-d45a20a51dfe",
+          "text": "Telehouse’s UK page supports London colocation, interconnection and managed-service capabilities, with a LINX relationship. Its footer identifies Telehouse International Corporation of Europe Ltd, registered in England number 2138407. The undated page's facility count and “recent launch” wording are not treated as a freshly dated 2026 capacity inventory. Hosting infrastructure does not imply ownership of customer applications. [UK operations, company description and footer](https://www.telehouse.net/data-centre-services/uk/)."
+        },
+        {
+          "block": "0952371c-1e7a-45f7-976b-5a4a079a4c33",
+          "text": "Gaps: parent/subsidiary reconciliation, comparable UK economics, dated site/capacity inventory and accepted named customer cases. The site's declared local company identity is recorded above; canonical binding is still separate."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "bt",
+      "label": "BT",
+      "primary_group": "Physical infrastructure and connectivity",
+      "memberships": [
+        "infrastructure",
+        "services"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "7907df13-813d-448f-b373-6026dd997254",
+          "text": "Model: communications/network infrastructure and services, with organisational and legal distinctions including Openreach. Current strategy emphasises simplification and modernisation. November 2026 results name Ministry of Justice, Cabinet Office, Scottish Water and Royal Mail contract activity without establishing individual product scope. These are supplier-reported relationship leads. [Latest first-half statement](https://newsroom.bt.com/bt-delivered-a-strong-first-half-with-further-strategic-momentum/), [business structure](https://www.bt.com/about/bt/our-company/group-businesses)."
+        },
+        {
+          "block": "6dc2fce2-9450-4ef9-b2c6-e7a7049e73ed",
+          "text": "BT is also a ServiceNow customer. Gaps: current group perimeter reconciliation, contract-level evidence, named products and UK-only financial baselines."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "pulsant",
+      "label": "Pulsant",
+      "primary_group": "Physical infrastructure and connectivity",
+      "memberships": [
+        "infrastructure"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "373d8d16-6df6-4e2c-a226-ec8523ba77eb",
+          "text": "UK regional infrastructure and 14 interconnected centres reported | platformEDGE, colocation, private cloud/IaaS and connectivity | No named deployment accepted from company overview; geographic role distinguishes it from London-only coverage"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "digital-realty",
+      "label": "Digital Realty",
+      "primary_group": "Physical infrastructure and connectivity",
+      "memberships": [
+        "infrastructure"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "373d8d16-6df6-4e2c-a226-ec8523ba77eb",
+          "text": "Official London-area facility directory | Data-centre and interconnection infrastructure | Provider footprint supported; customer-specific operating responsibilities not inferred"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "virtus",
+      "label": "VIRTUS",
+      "primary_group": "Physical infrastructure and connectivity",
+      "memberships": [
+        "infrastructure"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "373d8d16-6df6-4e2c-a226-ec8523ba77eb",
+          "text": "UK locations and operator disclosures | Colocation, build-to-suit, AI/HPC facilities | Supplier superlatives not accepted as market-share rankings"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "cisco",
+      "label": "Cisco",
+      "primary_group": "Physical infrastructure and connectivity",
+      "memberships": [
+        "infrastructure",
+        "cyber"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "373d8d16-6df6-4e2c-a226-ec8523ba77eb",
+          "text": "UK presence supported by Ofcom submission; provider customer material | Networking, security, observability and collaboration | easyJet case URL redirected to index; retain as discovery lead rather than full case verification"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "hpe",
+      "label": "HPE",
+      "primary_group": "Physical infrastructure and connectivity",
+      "memberships": [
+        "infrastructure",
+        "cloud"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "373d8d16-6df6-4e2c-a226-ec8523ba77eb",
+          "text": "Government procurement case naming DWP | GreenLake consumption-based infrastructure | August 2023 source describes modelled potential savings over 60 months, not verified realised savings"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "dell",
+      "label": "Dell",
+      "primary_group": "Physical infrastructure and connectivity",
+      "memberships": [
+        "infrastructure"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "373d8d16-6df6-4e2c-a226-ec8523ba77eb",
+          "text": "UK official customer site and supplier-authored CCS Media profile | End-user devices and infrastructure sourcing | CCS Media customer reference is provider-reported; wider NHS logo/employee discount pages do not prove an NHS deployment"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "broadcom-vmware",
+      "label": "Broadcom / VMware",
+      "primary_group": "Physical infrastructure and connectivity",
+      "memberships": [
+        "infrastructure"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Acquired brand/platform view; vendor, reseller and operator are separate roles. No extra independent group inferred.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "VMware Cloud Foundation integrates compute, storage, networks, Kubernetes and management for private cloud | UK ecosystem connection through Node4's declared VMware/Broadcom role; keep platform vendor, reseller and operating partner separate | [Platform](https://www.vmware.com/products/cloud-infrastructure/vmware-cloud-foundation), [Node4](https://node4.co.uk/about-us)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "lenovo",
+      "label": "Lenovo",
+      "primary_group": "Physical infrastructure and connectivity",
+      "memberships": [
+        "infrastructure"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "Devices, computing infrastructure and associated services | UK-facing provider; OEM/product role is distinct from channel sourcing and managed operation | [Company](https://www.lenovo.com/gb/en/about/who-we-are/)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "vodafonethree",
+      "label": "VodafoneThree",
+      "primary_group": "Physical infrastructure and connectivity",
+      "memberships": [
+        "infrastructure"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Combined UK organisation; Vodafone and Three trading brands are not additional independent groups.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "Mobile/fixed connectivity and business services | Combined UK organisation; Vodafone and Three trading brands are not three independent groups when counted with VodafoneThree | [Company](https://www.vodafonethree.com/about/)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "virgin-media-o2",
+      "label": "Virgin Media O2",
+      "primary_group": "Physical infrastructure and connectivity",
+      "memberships": [
+        "infrastructure"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "Fixed/mobile connectivity and related business services | UK business organisation combines Virgin Media Business and O2 Business; historic coverage statistics remain date-bound | [Business organisation](https://www.virginmediao2business.co.uk/about-us/)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "cityfibre",
+      "label": "CityFibre",
+      "primary_group": "Physical infrastructure and connectivity",
+      "memberships": [
+        "infrastructure"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "Fibre network infrastructure and wholesale access | Network operator distinguishes its role from the retail service provider holding the customer's account/contract | [Company and role boundary](https://cityfibre.com/about-us)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "arm",
+      "label": "Arm",
+      "primary_group": "Semiconductors and quantum",
+      "memberships": [
+        "frontier",
+        "infrastructure"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "659a4511-6752-4aa1-a321-b3854994fb93",
+          "text": "Model: IP access/licensing plus royalties on chips incorporating its designs. Important 2026 update: Arm’s annual filing also describes expansion into Arm-designed silicon, with Arm AGI CPU production expected by calendar year-end 2026. A description claiming Arm only licenses designs would therefore be incomplete; expected production is not completed production. [FY2026 filing](https://www.sec.gov/Archives/edgar/data/1973239/000197323926000097/arm-20260331.htm)."
+        },
+        {
+          "block": "ad96723c-d301-40d0-a187-630b608e34d5",
+          "text": "Its economic exposure includes cloud, devices and other end markets. Gaps: current licensee/customer evidence, UK operation versus global group economics and production milestone validation."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "intel",
+      "label": "Intel",
+      "primary_group": "Semiconductors and quantum",
+      "memberships": [
+        "frontier"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "Computing semiconductor technology | Intel itself identifies Intel Corporation (UK) Limited; no UK manufacturing claim inferred | [UK entity notice](https://www.intel.com/content/www/us/en/content-details/868923/new-registered-address-for-intel-corporation-uk-limited.html)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "amd",
+      "label": "AMD",
+      "primary_group": "Semiconductors and quantum",
+      "memberships": [
+        "frontier"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+          "text": "Processors, accelerators, graphics and adaptive computing | Official locations list UK offices, including Cambridge and Belfast; global product scope is not a UK revenue measure | [Company](https://www.amd.com/en/corporate.html), [locations](https://www.amd.com/en/corporate/locations.html)"
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "oqc",
+      "label": "OQC",
+      "primary_group": "Semiconductors and quantum",
+      "memberships": [
+        "frontier"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "50b8e38c-15db-4329-82eb-45683397e449",
+          "text": "OQC describes quantum hardware, quantum-compute access and collaboration with data-centre, HPC, cloud and research organisations. Its current company page separates delivered systems from future commercial-advantage ambitions. Do not present aspirations as achieved business advantage. [OQC company](https://oqc.tech/company/). British Business Bank’s June 2026 publication provides explicit UK-company investment evidence. [Investment announcement](https://www.british-business-bank.co.uk/news-and-events/news/british-business-bank-commits-ps100m-oxford-quantum-circuits)."
+        },
+        {
+          "block": "72a25481-6192-4d24-8473-583585f4271d",
+          "text": "Gaps: named commercial users, contractual model and measured production-use maturity. Comparative Riverlane, Quantinuum and Nu Quantum baselines are included in the follow-up section."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "riverlane",
+      "label": "Riverlane",
+      "primary_group": "Semiconductors and quantum",
+      "memberships": [
+        "frontier"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "5ba64a56-3c6c-43b3-96a9-7e2202838e10",
+          "text": "Riverlane describes a quantum error-correction stack. Its July 2026 collaboration with Quantinuum, Rolls-Royce and EPCC gives specific ecosystem roles: Riverlane contributes error correction and algorithms; Quantinuum systems/software access; Rolls-Royce industrial use cases; EPCC supercomputing and hybrid integration. This is research collaboration, not proof of production quantum advantage or a customer purchase. [Riverlane](https://www.riverlane.com/about-us), [joint announcement](https://ir.quantinuum.com/news-releases/news-release-details/quantinuum-rolls-royce-riverlane-and-university-edinburgh-sign)."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "quantinuum",
+      "label": "Quantinuum",
+      "primary_group": "Semiconductors and quantum",
+      "memberships": [
+        "frontier"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "69e08f67-8957-45f2-84b6-87f3835c0fc6",
+          "text": "The same dated announcement identifies quantum systems and software access as Quantinuum’s role in exploring industrial design and simulation. Preserve the July 14, 2026 event and participant roles. Future systems and fault-tolerant applications remain planned research. [Collaboration](https://ir.quantinuum.com/news-releases/news-release-details/quantinuum-rolls-royce-riverlane-and-university-edinburgh-sign)."
+        },
+        {
+          "block": "55a3064c-acf0-4784-b61c-edd4a42f584c",
+          "text": "This supports a frontier-technology baseline but not a complete UK legal, commercial or financial profile."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    },
+    {
+      "key": "nu-quantum",
+      "label": "Nu Quantum",
+      "primary_group": "Semiconductors and quantum",
+      "memberships": [
+        "frontier"
+      ],
+      "selection_block": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "canonical_enterprise_id": null,
+      "identity_status": "unbound",
+      "identity_note": "Selected provider/brand view; group, UK legal entity, contracting scope and current UK scale require reconciliation.",
+      "profile_status": "partial profile",
+      "profile": [
+        {
+          "block": "ae778ff6-c7e5-4c5b-af2a-c795f6c9c46e",
+          "text": "Nu Quantum describes quantum networking technologies, including qubit-photon interfaces and networking units. Its company page identifies a Cambridge University spin-out origin in 2018 and Cambridge laboratories. This is a different ecosystem role from building an entire quantum processor or supplying error correction. [Company](https://www.nu-quantum.com/about-us), [technology](https://www.nu-quantum.com/technology)."
+        },
+        {
+          "block": "68579eab-def9-4e0c-b3e7-63025c29595f",
+          "text": "Commercial customer adoption, recurring revenue model and measured production value remain unestablished; do not fill those gaps with projected market demand."
+        }
+      ],
+      "gaps": [
+        "Canonical identity unbound",
+        "Comparable UK financial/operating baseline incomplete",
+        "Passage coverage and source-operation rights not accepted"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "key": "programme-67-1",
+      "customer": "BT Group",
+      "participants": "ServiceNow",
+      "offering": "Service management, Service Bridge, Now Assist for TSM",
+      "boundary": "Customer publication 20 June 2024: prior Digital-unit consolidation, wider rollout and initial pilot distinguished. [Source](https://newsroom.bt.com/bt-group-expands-strategic-relationship-with-servicenow-to-improve-customer-and-employee-experiences/)",
+      "source_block": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "source_row": 1,
+      "source_text": "BT Group | ServiceNow | Service management, Service Bridge, Now Assist for TSM | Customer publication 20 June 2024: prior Digital-unit consolidation, wider rollout and initial pilot distinguished. [Source](https://newsroom.bt.com/bt-group-expands-strategic-relationship-with-servicenow-to-improve-customer-and-employee-experiences/)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://newsroom.bt.com/bt-group-expands-strategic-relationship-with-servicenow-to-improve-customer-and-employee-experiences/"
+        }
+      ],
+      "publication_date": "2024-06-20",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "customer-authored",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-67-2",
+      "customer": "Dojo",
+      "participants": "Equinix; Oracle Cloud, AWS, Google Cloud referenced",
+      "offering": "Payments infrastructure / cloud connectivity",
+      "boundary": "Supplier case study 8 September 2022; historical, current deployment not confirmed. [Source](https://blog.equinix.com/blog/2022/09/08/delivering-fast-reliable-and-secure-credit-card-payments/)",
+      "source_block": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "source_row": 2,
+      "source_text": "Dojo | Equinix; Oracle Cloud, AWS, Google Cloud referenced | Payments infrastructure / cloud connectivity | Supplier case study 8 September 2022; historical, current deployment not confirmed. [Source](https://blog.equinix.com/blog/2022/09/08/delivering-fast-reliable-and-secure-credit-card-payments/)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://blog.equinix.com/blog/2022/09/08/delivering-fast-reliable-and-secure-credit-card-payments/"
+        }
+      ],
+      "publication_date": "2022-09-08",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-67-3",
+      "customer": "Rolls-Royce",
+      "participants": "Deloitte; Databricks",
+      "offering": "AiRR engineering-data and AI platform",
+      "boundary": "Delivery-partner report; date and legal deployment scope unresolved. [Source](https://www.deloitte.com/uk/en/about/story/impact/driving-ai-powered-integration-rolls-royce.html)",
+      "source_block": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "source_row": 3,
+      "source_text": "Rolls-Royce | Deloitte; Databricks | AiRR engineering-data and AI platform | Delivery-partner report; date and legal deployment scope unresolved. [Source](https://www.deloitte.com/uk/en/about/story/impact/driving-ai-powered-integration-rolls-royce.html)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.deloitte.com/uk/en/about/story/impact/driving-ai-powered-integration-rolls-royce.html"
+        }
+      ],
+      "publication_date": null,
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-67-4",
+      "customer": "Computacenter",
+      "participants": "Genesys",
+      "offering": "Service-desk interaction platform and AI",
+      "boundary": "Supplier report referencing 2026 award; downstream customers not identified. [Source](https://www.genesys.com/en-gb/customer-stories/computacenter)",
+      "source_block": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "source_row": 4,
+      "source_text": "Computacenter | Genesys | Service-desk interaction platform and AI | Supplier report referencing 2026 award; downstream customers not identified. [Source](https://www.genesys.com/en-gb/customer-stories/computacenter)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.genesys.com/en-gb/customer-stories/computacenter"
+        }
+      ],
+      "publication_date": null,
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-67-5",
+      "customer": "Lloyds Banking Group",
+      "participants": "Microsoft; Google Cloud",
+      "offering": "Copilot, Copilot Studio, generative-AI infrastructure",
+      "boundary": "Customer publication 24 July 2025. [Source](https://www.lloydsbankinggroup.com/insights/reimagining-the-future-how-ai-is-transforming-lloyds-banking-group.html)",
+      "source_block": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "source_row": 5,
+      "source_text": "Lloyds Banking Group | Microsoft; Google Cloud | Copilot, Copilot Studio, generative-AI infrastructure | Customer publication 24 July 2025. [Source](https://www.lloydsbankinggroup.com/insights/reimagining-the-future-how-ai-is-transforming-lloyds-banking-group.html)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.lloydsbankinggroup.com/insights/reimagining-the-future-how-ai-is-transforming-lloyds-banking-group.html"
+        }
+      ],
+      "publication_date": "2025-07-24",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "customer-authored",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": "lloyds",
+      "canonical_identity_status": "unbound; navigation reference only",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-67-6",
+      "customer": "Lloyds Banking Group",
+      "participants": "Oracle; Microsoft Azure infrastructure referenced",
+      "offering": "Database@Azure; Exadata Cloud@Customer",
+      "boundary": "Supplier announcement 20 March 2025, with customer quotation; multiyear migration, not proof all databases migrated. [Source](https://www.oracle.com/news/announcement/lloyds-banking-group-expands-collaboration-with-oracle-to-support-tech-transformation-2025-03-20/)",
+      "source_block": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "source_row": 6,
+      "source_text": "Lloyds Banking Group | Oracle; Microsoft Azure infrastructure referenced | Database@Azure; Exadata Cloud@Customer | Supplier announcement 20 March 2025, with customer quotation; multiyear migration, not proof all databases migrated. [Source](https://www.oracle.com/news/announcement/lloyds-banking-group-expands-collaboration-with-oracle-to-support-tech-transformation-2025-03-20/)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.oracle.com/news/announcement/lloyds-banking-group-expands-collaboration-with-oracle-to-support-tech-transformation-2025-03-20/"
+        }
+      ],
+      "publication_date": "2025-03-20",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": "lloyds",
+      "canonical_identity_status": "unbound; navigation reference only",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-67-7",
+      "customer": "Sainsbury’s",
+      "participants": "Microsoft",
+      "offering": "Copilot",
+      "boundary": "Customer reports rollout to around 3,000 colleagues; publication date unresolved. [Source](https://corporate.sainsburys.co.uk/purpose-in-action/ai-in-action-at-sainsbury-s-people-at-the-heart/)",
+      "source_block": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "source_row": 7,
+      "source_text": "Sainsbury’s | Microsoft | Copilot | Customer reports rollout to around 3,000 colleagues; publication date unresolved. [Source](https://corporate.sainsburys.co.uk/purpose-in-action/ai-in-action-at-sainsbury-s-people-at-the-heart/)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://corporate.sainsburys.co.uk/purpose-in-action/ai-in-action-at-sainsbury-s-people-at-the-heart/"
+        }
+      ],
+      "publication_date": null,
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "customer-authored",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-67-8",
+      "customer": "Centrica",
+      "participants": "SAP; Microsoft referenced",
+      "offering": "Business Data Cloud; RISE with SAP; Business AI",
+      "boundary": "Supplier announcement 27 May 2026 reports February data-platform go-live but schedules RISE for July. Completion needs later evidence. Unnamed integrators remain unnamed. [Source](https://news.sap.com/uk/2026/05/centrica-adopts-rise-with-sap-to-support-ai-driven-transformation/)",
+      "source_block": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "source_row": 8,
+      "source_text": "Centrica | SAP; Microsoft referenced | Business Data Cloud; RISE with SAP; Business AI | Supplier announcement 27 May 2026 reports February data-platform go-live but schedules RISE for July. Completion needs later evidence. Unnamed integrators remain unnamed. [Source](https://news.sap.com/uk/2026/05/centrica-adopts-rise-with-sap-to-support-ai-driven-transformation/)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://news.sap.com/uk/2026/05/centrica-adopts-rise-with-sap-to-support-ai-driven-transformation/"
+        }
+      ],
+      "publication_date": "2026-05-27",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "planned / collaboration",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-67-9",
+      "customer": "Bank of England",
+      "participants": "Accenture",
+      "offering": "RTGS renewal delivery",
+      "boundary": "Customer appointment 30 July 2020; RT2 go-live 28 April 2025 separately confirmed. Not proof of current outsourcing. [Appointment](https://www.bankofengland.co.uk/news/2020/July/boe-appoints-accenture-as-the-technology-delivery-partner-for-the-rtgs-service-renewal-programme), [go-live](https://www.bankofengland.co.uk/news/2025/april/renewed-rtgs-service)",
+      "source_block": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "source_row": 9,
+      "source_text": "Bank of England | Accenture | RTGS renewal delivery | Customer appointment 30 July 2020; RT2 go-live 28 April 2025 separately confirmed. Not proof of current outsourcing. [Appointment](https://www.bankofengland.co.uk/news/2020/July/boe-appoints-accenture-as-the-technology-delivery-partner-for-the-rtgs-service-renewal-programme), [go-live](https://www.bankofengland.co.uk/news/2025/april/renewed-rtgs-service)",
+      "source_links": [
+        {
+          "label": "Appointment",
+          "url": "https://www.bankofengland.co.uk/news/2020/July/boe-appoints-accenture-as-the-technology-delivery-partner-for-the-rtgs-service-renewal-programme"
+        },
+        {
+          "label": "go-live",
+          "url": "https://www.bankofengland.co.uk/news/2025/april/renewed-rtgs-service"
+        }
+      ],
+      "publication_date": "2020-07-30",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "customer-authored",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished",
+      "role_boundary": "Appointment 30 July 2020; RT2 go-live 28 April 2025 separately sourced. Not a current outsourcing claim."
+    },
+    {
+      "key": "programme-67-10",
+      "customer": "Heathrow",
+      "participants": "Salesforce",
+      "offering": "Customer 360; passenger communications and commercial experience",
+      "boundary": "Supplier report 30 August 2023; historical use. [Source](https://www.salesforce.com/news/stories/heathrow-airport-customer/)",
+      "source_block": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "source_row": 10,
+      "source_text": "Heathrow | Salesforce | Customer 360; passenger communications and commercial experience | Supplier report 30 August 2023; historical use. [Source](https://www.salesforce.com/news/stories/heathrow-airport-customer/)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.salesforce.com/news/stories/heathrow-airport-customer/"
+        }
+      ],
+      "publication_date": "2023-08-30",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-67-11",
+      "customer": "HSBC",
+      "participants": "Quantexa",
+      "offering": "Entity/data connections for investigation",
+      "boundary": "Supplier report; deployment geography and date unresolved. [Source](https://www.quantexa.com/resources/holistic-view-of-financial-crime/)",
+      "source_block": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "source_row": 11,
+      "source_text": "HSBC | Quantexa | Entity/data connections for investigation | Supplier report; deployment geography and date unresolved. [Source](https://www.quantexa.com/resources/holistic-view-of-financial-crime/)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.quantexa.com/resources/holistic-view-of-financial-crime/"
+        }
+      ],
+      "publication_date": null,
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-67-12",
+      "customer": "Standard Chartered",
+      "participants": "Quantexa",
+      "offering": "Financial-crime decision intelligence",
+      "boundary": "Supplier report; deployment geography and date unresolved. [Source](https://www.quantexa.com/resources/holistic-view-of-financial-crime/)",
+      "source_block": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "source_row": 12,
+      "source_text": "Standard Chartered | Quantexa | Financial-crime decision intelligence | Supplier report; deployment geography and date unresolved. [Source](https://www.quantexa.com/resources/holistic-view-of-financial-crime/)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.quantexa.com/resources/holistic-view-of-financial-crime/"
+        }
+      ],
+      "publication_date": null,
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-67-13",
+      "customer": "Bentley Motors",
+      "participants": "Capgemini",
+      "offering": "Digital infrastructure, integration, data and AI",
+      "boundary": "Supplier announcement 29 June 2026, forward delivery scope; not completed outcomes. [Source](https://www.capgemini.com/news/press-releases/capgemini-supports-bentley-motors-in-the-acceleration-of-its-future-digital-strategy/)",
+      "source_block": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "source_row": 13,
+      "source_text": "Bentley Motors | Capgemini | Digital infrastructure, integration, data and AI | Supplier announcement 29 June 2026, forward delivery scope; not completed outcomes. [Source](https://www.capgemini.com/news/press-releases/capgemini-supports-bentley-motors-in-the-acceleration-of-its-future-digital-strategy/)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.capgemini.com/news/press-releases/capgemini-supports-bentley-motors-in-the-acceleration-of-its-future-digital-strategy/"
+        }
+      ],
+      "publication_date": "2026-06-29",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "planned / collaboration",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-202-1",
+      "customer": "easyJet",
+      "participants": "Microsoft",
+      "offering": "Dynamics 365 Contact Centre; supplier article 21 October 2026",
+      "boundary": "Supplier-reported deployment; independent customer confirmation pending",
+      "source_block": "73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+      "source_row": 1,
+      "source_text": "easyJet | Microsoft | Dynamics 365 Contact Centre; supplier article 21 October 2026 | Supplier-reported deployment; independent customer confirmation pending",
+      "source_links": [
+        {
+          "label": "easyJet",
+          "url": "https://ukstories.microsoft.com/features/easyjets-new-ai-powered-customer-service-platform-takes-flight/"
+        }
+      ],
+      "publication_date": "2026-10-21",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": "easyjet",
+      "canonical_identity_status": "unbound; navigation reference only",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-202-2",
+      "customer": "Aviva",
+      "participants": "TCS / Diligenta",
+      "offering": "BaNCS-based life/pensions administration expansion, 18 December 2025",
+      "boundary": "Announcement distinguishes parent, delivery subsidiary and technology",
+      "source_block": "73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+      "source_row": 2,
+      "source_text": "Aviva | TCS / Diligenta | BaNCS-based life/pensions administration expansion, 18 December 2025 | Announcement distinguishes parent, delivery subsidiary and technology",
+      "source_links": [
+        {
+          "label": "Aviva",
+          "url": "https://www.tcs.com/who-we-are/newsroom/press-release/tcs-strengthens-partnership-aviva-uk-enhance-life-pensions-customer-experience"
+        }
+      ],
+      "publication_date": "2025-12-18",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "planned / collaboration",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-202-3",
+      "customer": "bp",
+      "participants": "Infosys",
+      "offering": "MoU announced 16 May 2023 following signature 10 May",
+      "boundary": "Intent to deepen application services; not a current exclusive contract assertion",
+      "source_block": "73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+      "source_row": 3,
+      "source_text": "bp | Infosys | MoU announced 16 May 2023 following signature 10 May | Intent to deepen application services; not a current exclusive contract assertion",
+      "source_links": [
+        {
+          "label": "bp",
+          "url": "https://www.infosys.com/newsroom/press-releases/2023/relationship-transform-digital-application-landscape.html"
+        }
+      ],
+      "publication_date": "2023-05-16",
+      "event_date": "2023-05-10",
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "planned / collaboration",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-202-4",
+      "customer": "HMRC",
+      "participants": "Equal Experts",
+      "offering": "GAILZ adoption, product/onboarding and cost-control work",
+      "boundary": "Provider-reported; publication date unresolved; infrastructure/security assertions not adopted as fact",
+      "source_block": "73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+      "source_row": 4,
+      "source_text": "HMRC | Equal Experts | GAILZ adoption, product/onboarding and cost-control work | Provider-reported; publication date unresolved; infrastructure/security assertions not adopted as fact",
+      "source_links": [
+        {
+          "label": "HMRC",
+          "url": "https://www.equalexperts.com/case-study/how-equal-experts-helped-hmrc-safely-deepen-its-use-of-ai-with-built-in-cost-control/"
+        }
+      ],
+      "publication_date": null,
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-202-5",
+      "customer": "DWP Digital",
+      "participants": "HPE",
+      "offering": "GreenLake case published 3 August 2023",
+      "boundary": "Procurement-body case; potential savings derived from modelling, not realised outcome",
+      "source_block": "73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+      "source_row": 5,
+      "source_text": "DWP Digital | HPE | GreenLake case published 3 August 2023 | Procurement-body case; potential savings derived from modelling, not realised outcome",
+      "source_links": [
+        {
+          "label": "DWP",
+          "url": "https://www.gca.gov.uk/news/dwp-digital-make-savings-on-digital-transformation-with-pay-as-you-use-model"
+        }
+      ],
+      "publication_date": "2023-08-03",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "procurement-body case",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-202-6",
+      "customer": "CCS Media",
+      "participants": "Dell",
+      "offering": "PC-as-a-Service profile",
+      "boundary": "Supplier report; underlying event date/current scope unresolved",
+      "source_block": "73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+      "source_row": 6,
+      "source_text": "CCS Media | Dell | PC-as-a-Service profile | Supplier report; underlying event date/current scope unresolved",
+      "source_links": [
+        {
+          "label": "Dell CCS Media profile",
+          "url": "https://www.delltechnologies.com/asset/en-gb/solutions/business-solutions/customer-stories-case-studies/ccs-media-written-case-study.pdf"
+        }
+      ],
+      "publication_date": null,
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-213-1",
+      "customer": "Aviva",
+      "participants": "Snowflake platform; AWS hosting; Snowflake Professional Services and NextPathway delivery",
+      "offering": "Data-estate migration, including claims/fraud workloads",
+      "boundary": "Publication/event date Unknown. Supplier case reports deployment; no whole-estate migration inference. [Source](https://www.snowflake.com/en/customers/all-customers/case-study/aviva/)",
+      "source_block": "e505e833-42c0-4505-87f3-6d9635398617",
+      "source_row": 1,
+      "source_text": "Aviva | Snowflake platform; AWS hosting; Snowflake Professional Services and NextPathway delivery | Data-estate migration, including claims/fraud workloads | Publication/event date Unknown. Supplier case reports deployment; no whole-estate migration inference. [Source](https://www.snowflake.com/en/customers/all-customers/case-study/aviva/)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.snowflake.com/en/customers/all-customers/case-study/aviva/"
+        }
+      ],
+      "publication_date": null,
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-213-2",
+      "customer": "Rolls-Royce Civil Aerospace",
+      "participants": "Databricks platform",
+      "offering": "Engine-monitoring data and analytics",
+      "boundary": "Date Unknown; supplier case; do not merge with the separate Deloitte AiRR programme. [Source](https://www.databricks.com/customers/rolls-royce)",
+      "source_block": "e505e833-42c0-4505-87f3-6d9635398617",
+      "source_row": 2,
+      "source_text": "Rolls-Royce Civil Aerospace | Databricks platform | Engine-monitoring data and analytics | Date Unknown; supplier case; do not merge with the separate Deloitte AiRR programme. [Source](https://www.databricks.com/customers/rolls-royce)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.databricks.com/customers/rolls-royce"
+        }
+      ],
+      "publication_date": null,
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-213-3",
+      "customer": "Berkeley Group",
+      "participants": "CrowdStrike security platform",
+      "offering": "Falcon Fusion SOAR",
+      "boundary": "Date Unknown; supplier-hosted customer account; results are attributed. [Source](https://www.crowdstrike.com/en-us/resources/customer-stories/berkeley-group/)",
+      "source_block": "e505e833-42c0-4505-87f3-6d9635398617",
+      "source_row": 3,
+      "source_text": "Berkeley Group | CrowdStrike security platform | Falcon Fusion SOAR | Date Unknown; supplier-hosted customer account; results are attributed. [Source](https://www.crowdstrike.com/en-us/resources/customer-stories/berkeley-group/)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://www.crowdstrike.com/en-us/resources/customer-stories/berkeley-group/"
+        }
+      ],
+      "publication_date": null,
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-213-4",
+      "customer": "Harbour Energy",
+      "participants": "Rubrik, supplier-reported customer",
+      "offering": "Cyber resilience",
+      "boundary": "Announcement 9 July 2026; exact product, deployment boundary and contract date Unknown. [Source](https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx)",
+      "source_block": "e505e833-42c0-4505-87f3-6d9635398617",
+      "source_row": 4,
+      "source_text": "Harbour Energy | Rubrik, supplier-reported customer | Cyber resilience | Announcement 9 July 2026; exact product, deployment boundary and contract date Unknown. [Source](https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx"
+        }
+      ],
+      "publication_date": "2026-07-09",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-213-5",
+      "customer": "Manchester City Council",
+      "participants": "Rubrik, supplier-reported customer",
+      "offering": "Cyber resilience",
+      "boundary": "Same July announcement; do not generalise to all council workloads.",
+      "source_block": "e505e833-42c0-4505-87f3-6d9635398617",
+      "source_row": 5,
+      "source_text": "Manchester City Council | Rubrik, supplier-reported customer | Cyber resilience | Same July announcement; do not generalise to all council workloads.",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx"
+        }
+      ],
+      "publication_date": "2026-07-09",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-213-6",
+      "customer": "Scottish Government",
+      "participants": "Rubrik, supplier-reported customer",
+      "offering": "Cyber resilience",
+      "boundary": "Same July announcement; individual agency/product deployment unresolved.",
+      "source_block": "e505e833-42c0-4505-87f3-6d9635398617",
+      "source_row": 6,
+      "source_text": "Scottish Government | Rubrik, supplier-reported customer | Cyber resilience | Same July announcement; individual agency/product deployment unresolved.",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx"
+        }
+      ],
+      "publication_date": "2026-07-09",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-213-7",
+      "customer": "Imperial College London; BOLD; SOFAIR",
+      "participants": "NVIDIA compute-access commitment",
+      "offering": "Agentic safety/security research",
+      "boundary": "13 October 2026; planned research support, not a commercial customer contract. [Source](https://nvidianews.nvidia.com/news/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years)",
+      "source_block": "e505e833-42c0-4505-87f3-6d9635398617",
+      "source_row": 7,
+      "source_text": "Imperial College London; BOLD; SOFAIR | NVIDIA compute-access commitment | Agentic safety/security research | 13 October 2026; planned research support, not a commercial customer contract. [Source](https://nvidianews.nvidia.com/news/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years"
+        }
+      ],
+      "publication_date": "2026-10-13",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "planned / collaboration",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-213-8",
+      "customer": "Ministry of Defence; Environment Agency; NatWest; Network Rail",
+      "participants": "Fujitsu supplier-listed relationships",
+      "offering": "UK technology services, product-specific scope Unknown",
+      "boundary": "Undated overview; discovery relationships only, not dated contract assurances. [Source](https://global.fujitsu/en-UK/local/about)",
+      "source_block": "e505e833-42c0-4505-87f3-6d9635398617",
+      "source_row": 8,
+      "source_text": "Ministry of Defence; Environment Agency; NatWest; Network Rail | Fujitsu supplier-listed relationships | UK technology services, product-specific scope Unknown | Undated overview; discovery relationships only, not dated contract assurances. [Source](https://global.fujitsu/en-UK/local/about)",
+      "source_links": [
+        {
+          "label": "Source",
+          "url": "https://global.fujitsu/en-UK/local/about"
+        }
+      ],
+      "publication_date": null,
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "programme-222-1",
+      "customer": "NatWest",
+      "participants": "OpenAI — collaboration",
+      "offering": "Digital assistants, fraud/scam and colleague-tool development; plans",
+      "boundary": "All described use cases live, realised benefits, procurement value or exclusive model use",
+      "source_block": "48a40e84-375f-43dc-904e-f74d8283934d",
+      "source_row": 1,
+      "source_text": "NatWest → OpenAI | Customer-authored collaboration | 2025 article describes planned digital-assistant, fraud/scam and colleague-tool development; exact publication day not established from the retrieved article | All described use cases live, realised benefits, procurement value or exclusive model use",
+      "source_links": [
+        {
+          "label": "NatWest",
+          "url": "https://www.natwestgroup.com/news-and-insights/latest-stories/ai-and-data/2025/mar/accelerating-our-ai-transformation-in-banking-with-openai.html"
+        }
+      ],
+      "publication_date": null,
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "customer-authored",
+      "temporal_status": "planned / collaboration",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": "natwest",
+      "canonical_identity_status": "unbound; navigation reference only",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished",
+      "role_boundary": "Customer collaboration, not every use case live"
+    },
+    {
+      "key": "programme-222-2",
+      "customer": "Barclays",
+      "participants": "Anthropic — Claude model/product provider",
+      "offering": "Claude knowledge assistant; future wider developer adoption",
+      "boundary": "Target adoption achieved, independent outcome assurance or all-bank deployment",
+      "source_block": "48a40e84-375f-43dc-904e-f74d8283934d",
+      "source_row": 2,
+      "source_text": "Barclays → Anthropic | Supplier-reported Claude use and expansion | 1 October 2026; knowledge assistant reported live since 2025; wider developer adoption explicitly forward-looking | Target adoption achieved, independent outcome assurance or all-bank deployment",
+      "source_links": [
+        {
+          "label": "Barclays",
+          "url": "https://www.anthropic.com/news/barclays-scales-claude"
+        }
+      ],
+      "publication_date": "2026-10-01",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "reported / date-bound; current contract unconfirmed",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": "barclays",
+      "canonical_identity_status": "unbound; navigation reference only",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished",
+      "role_boundary": "Knowledge assistant live since 2025; developer rollout planned"
+    },
+    {
+      "key": "programme-222-3",
+      "customer": "TCS",
+      "participants": "Anthropic — partnership and internal adoption",
+      "offering": "Claude; TCS customer-zero and partner network",
+      "boundary": "Announced employee rollout complete",
+      "source_block": "48a40e84-375f-43dc-904e-f74d8283934d",
+      "source_row": 3,
+      "source_text": "TCS → Anthropic | Announced product/services partnership and internal adoption | 12 June 2026; TCS described as customer zero and joining the partner network | Announced employee rollout complete",
+      "source_links": [
+        {
+          "label": "TCS",
+          "url": "https://www.anthropic.com/news/tcs-anthropic-partnership"
+        }
+      ],
+      "publication_date": "2026-06-12",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "planned / collaboration",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished",
+      "role_boundary": "Partnership and internal adoption announcement; not completed rollout"
+    },
+    {
+      "key": "programme-222-4",
+      "customer": "Diligenta",
+      "participants": "Anthropic — planned Claude use",
+      "offering": "Claude planned adoption in UK life/pensions business",
+      "boundary": "Every underlying insurer or policyholder is a direct Anthropic customer",
+      "source_block": "48a40e84-375f-43dc-904e-f74d8283934d",
+      "source_row": 4,
+      "source_text": "Diligenta → Anthropic | Planned Claude adoption within UK life/pensions business | Same June announcement; maintain separate Diligenta and parent TCS identities | Every underlying insurer or policyholder is a direct Anthropic customer",
+      "source_links": [
+        {
+          "label": "TCS",
+          "url": "https://www.anthropic.com/news/tcs-anthropic-partnership"
+        }
+      ],
+      "publication_date": "2026-06-12",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "supplier/participant report",
+      "temporal_status": "planned / collaboration",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished",
+      "role_boundary": "Diligenta and TCS distinct; not every insurer a direct customer"
+    },
+    {
+      "key": "programme-222-5",
+      "customer": "DSIT ↔ Google DeepMind",
+      "participants": "DSIT ↔ Google DeepMind — non-binding collaboration",
+      "offering": "Research and public-sector AI opportunities/security",
+      "boundary": "A procurement award, commercial customer contract or completed deployment",
+      "source_block": "48a40e84-375f-43dc-904e-f74d8283934d",
+      "source_row": 5,
+      "source_text": "DSIT ↔ Google DeepMind | Non-binding research/public-sector collaboration MoU | Published 11 December 2025; text expressly creates no financial commitment or obligation to pursue a commercial agreement | A procurement award, commercial customer contract or completed deployment",
+      "source_links": [
+        {
+          "label": "government MoU",
+          "url": "https://www.gov.uk/government/publications/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security"
+        }
+      ],
+      "publication_date": "2025-12-11",
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Exact deployment jurisdiction not resolved; UK relevance does not establish all-group scope",
+      "attribution": "government MoU",
+      "temporal_status": "planned / collaboration",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished",
+      "role_boundary": "No financial commitment or obligation to procure"
+    },
+    {
+      "key": "nhs-sbs-oracle",
+      "customer": "NHS Shared Business Services",
+      "participants": "Oracle application/infrastructure provider",
+      "offering": "Oracle Fusion Cloud Applications; finance ERP/EPM and OCI-related infrastructure",
+      "boundary": "Record the customer’s reported benefits as attributed claims, not audited causal outcomes. Do not assume every NHS trust uses every Oracle module. The general product list at the bottom of the release is not proof of NHS SBS adoption of all listed modules.",
+      "source_block": "569b4378-278e-441a-8cf1-cb4d537f61af",
+      "source_row": null,
+      "source_text": "NHS Shared Business Services itself confirms use of Oracle Fusion Cloud Applications, including finance ERP/EPM and OCI-related infrastructure, and describes its public/private joint venture with Sopra Steria. This closes the earlier absence of a customer-authored source for the core Oracle relationship. It does not independently corroborate every partner role, metric or legal claim on Oracle’s separate page. [Customer announcement](https://www.sbs.nhs.uk/news/nhs-shared-business-services-instils-financial-excellence-across-the-nhs-with-oracle-fusion-cloud-applications/).",
+      "source_links": [
+        {
+          "label": "Customer announcement",
+          "url": "https://www.sbs.nhs.uk/news/nhs-shared-business-services-instils-financial-excellence-across-the-nhs-with-oracle-fusion-cloud-applications/"
+        }
+      ],
+      "publication_date": null,
+      "event_date": null,
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "NHS SBS programme; not every NHS trust",
+      "attribution": "customer-authored",
+      "temporal_status": "reported use; publication Unknown",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    },
+    {
+      "key": "quantum-collaboration",
+      "customer": "Rolls-Royce; industrial use-case participant",
+      "participants": "Quantinuum systems/software; Riverlane error correction/algorithms; EPCC hybrid/HPC expertise",
+      "offering": "Explore future industrial design and simulation workflows",
+      "boundary": "Research collaboration, not customer procurement or production quantum advantage.",
+      "source_block": "5ba64a56-3c6c-43b3-96a9-7e2202838e10",
+      "source_row": null,
+      "source_text": "Riverlane describes a quantum error-correction stack. Its July 2026 collaboration with Quantinuum, Rolls-Royce and EPCC gives specific ecosystem roles: Riverlane contributes error correction and algorithms; Quantinuum systems/software access; Rolls-Royce industrial use cases; EPCC supercomputing and hybrid integration. This is research collaboration, not proof of production quantum advantage or a customer purchase. [Riverlane](https://www.riverlane.com/about-us), [joint announcement](https://ir.quantinuum.com/news-releases/news-release-details/quantinuum-rolls-royce-riverlane-and-university-edinburgh-sign).",
+      "source_links": [
+        {
+          "label": "Participant announcement",
+          "url": "https://ir.quantinuum.com/news-releases/news-release-details/quantinuum-rolls-royce-riverlane-and-university-edinburgh-sign"
+        }
+      ],
+      "publication_date": "2026-07-14",
+      "event_date": "2026-07-14",
+      "retrieval_date": "2026-11-12",
+      "retrieved_at": null,
+      "geography": "Named collaboration; no all-Rolls-Royce deployment assertion",
+      "attribution": "participant announcement",
+      "temporal_status": "research collaboration / future workflows",
+      "evidence_status": "research draft · not accepted Evidence",
+      "existing_enterprise_slug": null,
+      "canonical_identity_status": "unbound",
+      "original_document_sha256": null,
+      "source_reuse_permission": "unestablished"
+    }
+  ],
+  "themes": [
+    {
+      "key": "theme-1",
+      "title": "AI adoption and controls",
+      "consequence": "Lloyds, Sainsbury's and Barclays publish different stages of AI adoption. Expanding access creates questions about workflow design, controls and value measurement",
+      "intervention": "Adoption, evaluation, knowledge/data preparation, security and operating-model services",
+      "alternative": "The enterprise may already have adequate controls and a fully resourced delivery team",
+      "qualification": "Named business owner, measured unresolved gap, agreed scope, mandate and procurement route",
+      "relationship_keys": [
+        "programme-67-5",
+        "programme-67-7",
+        "programme-222-2"
+      ],
+      "support_blocks": [
+        "6573f495-f4a3-412f-b800-6e8b958a36eb"
+      ],
+      "status": "Unqualified research hypothesis",
+      "pipeline_record_id": null,
+      "budget": null,
+      "procurement_date": null
+    },
+    {
+      "key": "theme-2",
+      "title": "Data and application change",
+      "consequence": "Aviva/Snowflake and Centrica/SAP show programmes spanning data, applications and platforms",
+      "intervention": "Migration assurance, integration, data quality and service transition",
+      "alternative": "The reported migration may be complete and follow-on work already contracted",
+      "qualification": "Current remaining work, delivery responsibilities, completion evidence and sourcing decision",
+      "relationship_keys": [
+        "programme-213-1",
+        "programme-67-8"
+      ],
+      "support_blocks": [
+        "6573f495-f4a3-412f-b800-6e8b958a36eb"
+      ],
+      "status": "Unqualified research hypothesis",
+      "pipeline_record_id": null,
+      "budget": null,
+      "procurement_date": null
+    },
+    {
+      "key": "theme-3",
+      "title": "Cyber recovery and service assurance",
+      "consequence": "Rubrik UK references, CrowdStrike/Berkeley and the DWP infrastructure case illustrate distinct resilience and operating concerns",
+      "intervention": "Recovery testing, control integration, service accountability and managed assurance",
+      "alternative": "New technology may have closed the identified gap; a product announcement is not evidence of a residual problem",
+      "qualification": "Customer-owned risk, recovery objectives, test evidence and accountable buyer",
+      "relationship_keys": [
+        "programme-213-3",
+        "programme-213-4",
+        "programme-202-5"
+      ],
+      "support_blocks": [
+        "6573f495-f4a3-412f-b800-6e8b958a36eb"
+      ],
+      "status": "Unqualified research hypothesis",
+      "pipeline_record_id": null,
+      "budget": null,
+      "procurement_date": null
+    },
+    {
+      "key": "theme-4",
+      "title": "Provider internal transformation",
+      "consequence": "Computacenter's disclosed internal initiatives and TCS's customer-zero announcement show suppliers themselves are technology buyers",
+      "intervention": "Internal workflow/data modernisation and value assurance",
+      "alternative": "Work may be intentionally in-house or part of an existing strategic partnership",
+      "qualification": "Explicit external-sourcing intent, owner, timing and route to market",
+      "relationship_keys": [
+        "programme-67-4",
+        "programme-222-3"
+      ],
+      "support_blocks": [
+        "6573f495-f4a3-412f-b800-6e8b958a36eb",
+        "2ceaebba-7bac-4fc8-a40d-45aced700154"
+      ],
+      "status": "Unqualified research hypothesis",
+      "pipeline_record_id": null,
+      "budget": null,
+      "procurement_date": null
+    },
+    {
+      "key": "theme-5",
+      "title": "Cloud portability and infrastructure",
+      "consequence": "CMA's historical findings and multicloud customer cases support questions about dependency and cost/control trade-offs",
+      "intervention": "Architecture/contract assessment, FinOps, workload placement and integration",
+      "alternative": "Switching may be uneconomic and current supplier choice rational",
+      "qualification": "Workload-specific economics, rights/terms, operational risk and customer decision criteria",
+      "relationship_keys": [
+        "programme-67-2",
+        "programme-67-6"
+      ],
+      "support_blocks": [
+        "6573f495-f4a3-412f-b800-6e8b958a36eb",
+        "7481438e-761a-40e8-8290-6c7c729ecc09"
+      ],
+      "status": "Unqualified research hypothesis",
+      "pipeline_record_id": null,
+      "budget": null,
+      "procurement_date": null
+    },
+    {
+      "key": "theme-6",
+      "title": "Industrial and frontier adoption",
+      "consequence": "AVEVA's industrial lifecycle and the Rolls-Royce/quantum collaboration connect engineering to newer technologies",
+      "intervention": "Industrial-data integration, use-case evaluation and controlled prototypes",
+      "alternative": "Research value may not translate into a near-term production purchase",
+      "qualification": "Technical readiness, validated use case, industrial sponsor and staged investment decision",
+      "relationship_keys": [
+        "quantum-collaboration"
+      ],
+      "support_blocks": [
+        "6573f495-f4a3-412f-b800-6e8b958a36eb",
+        "312a7a3b-8076-4019-88bf-07d9089b42e6",
+        "5ba64a56-3c6c-43b3-96a9-7e2202838e10",
+        "69e08f67-8957-45f2-84b6-87f3835c0fc6"
+      ],
+      "status": "Unqualified research hypothesis",
+      "pipeline_record_id": null,
+      "budget": null,
+      "procurement_date": null
+    }
+  ],
+  "atomic_references": [
+    {
+      "reference": "E01",
+      "claim": "easyJet is reported using Dynamics 365 Contact Centre",
+      "passage_and_locator": [
+        "“Microsoft Dynamics 365 Contact Centre”",
+        "Microsoft easyJet story, opening paragraph, retrieved lines 12–19; publication 21 October 2026; supplier report"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 1,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E02",
+      "claim": "DWP’s cited savings were modelled potential savings",
+      "passage_and_locator": [
+        "“potential savings of over £7 million”",
+        "GCA DWP story, Benefits section, line 86; publication 3 August 2023"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 2,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E03",
+      "claim": "Infosys/bp announcement describes an MoU",
+      "passage_and_locator": [
+        "“Memorandum of Understanding (MoU)”",
+        "Infosys bp release, opening paragraph, line 211; publication 16 May 2023"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 3,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E04",
+      "claim": "Diligenta is the stated Aviva policy-service delivery entity",
+      "passage_and_locator": [
+        "“to be managed by TCS’ FCA-regulated subsidiary, Diligenta UK”",
+        "TCS Aviva release, opening paragraph, line 771; publication 18 December 2025; forward expansion"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 4,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E05",
+      "claim": "NTT DATA declares a UK Salesforce partnership",
+      "passage_and_locator": [
+        "“a strategic partner of Salesforce in the UK”",
+        "NTT DATA partners, Salesforce section, line 178; publication Unknown"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 5,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E06",
+      "claim": "Version 1 declares Oracle transformation services",
+      "passage_and_locator": [
+        "“Fusion Cloud Applications, OCI and managed services”",
+        "Version 1 Partners, Oracle description, line 185; publication Unknown"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 6,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E07",
+      "claim": "Pulsant describes 14 interconnected centres",
+      "passage_and_locator": [
+        "“14 interconnected data centres”",
+        "Pulsant About Us, platformEDGE description; publication Unknown; supplier count"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 7,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E08",
+      "claim": "Nu Quantum describes a Cambridge spin-out origin",
+      "passage_and_locator": [
+        "“a spin-out of the University of Cambridge”",
+        "Nu Quantum About Us, opening company description, line 54; founded 2018"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 8,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E09",
+      "claim": "The quantum collaboration has a research objective",
+      "passage_and_locator": [
+        "“explore the quantum computing capabilities needed in future industrial workflows”",
+        "Quantinuum July 14, 2026 announcement, opening body, line 24"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 9,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E10",
+      "claim": "NHS SBS itself confirms Oracle application use",
+      "passage_and_locator": [
+        "“is using Oracle Fusion Cloud Applications”",
+        "NHS SBS finance-platform announcement, line 153; publication date unresolved"
+      ],
+      "source_block": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "source_row": 10,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E11",
+      "claim": "Aviva's supplier case describes “Snowflake on Amazon Web Services (AWS)”",
+      "passage_and_locator": [
+        "[Aviva case](https://www.snowflake.com/en/customers/all-customers/case-study/aviva/), transformation highlights, retrieved line 49",
+        "Reported deployment; no all-Aviva estate assertion; publication Unknown"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 11,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E12",
+      "claim": "The same case names “AI Data Cloud Services Partner NextPathway”",
+      "passage_and_locator": [
+        "Same source, migration/operating-model paragraph, line 69",
+        "Named delivery support for this programme; no general exclusive-partner assertion"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 12,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E13",
+      "claim": "Rolls-Royce case identifies “Rolls-Royce Civil Aerospace”",
+      "passage_and_locator": [
+        "[Databricks case](https://www.databricks.com/customers/rolls-royce), title and opening description, lines 14–19",
+        "Specific business/use case; date Unknown; supplier report"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 13,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E14",
+      "claim": "Berkeley's named solution is “Falcon Fusion SOAR”",
+      "passage_and_locator": [
+        "[CrowdStrike case](https://www.crowdstrike.com/en-us/resources/customer-stories/berkeley-group/), CrowdStrike Solutions, lines 254–256",
+        "Product-level supplier report; date Unknown"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 14,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E15",
+      "claim": "Rubrik lists “Harbour Energy, Manchester City Council and the Scottish Government”",
+      "passage_and_locator": [
+        "[UK announcement](https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx), UK business paragraph, line 40",
+        "Supplier-named customers, 9 July 2026; contract/product boundary Unknown"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 15,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E16",
+      "claim": "NVIDIA says “Provider selection, technical architecture and commercial terms are to be agreed”",
+      "passage_and_locator": [
+        "[Compute announcement](https://nvidianews.nvidia.com/news/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years), compute-delivery paragraph, line 65",
+        "Plan, 13 October 2026; no supplier award or completed infrastructure assertion"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 16,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E17",
+      "claim": "AVEVA says “AVEVA is now a member of the Schneider Electric group”",
+      "passage_and_locator": [
+        "[Company](https://www.aveva.com/en/about/), ownership footer, line 96",
+        "Ownership boundary; page publication Unknown"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 17,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E18",
+      "claim": "CityFibre tells retail users “your contract is with them”",
+      "passage_and_locator": [
+        "[Company](https://cityfibre.com/about-us), service-support footer, line 204",
+        "Refers to the user's retail provider; separates network ownership from retail account"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 18,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E19",
+      "claim": "Government MoU “does not create any financial commitments”",
+      "passage_and_locator": [
+        "[DSIT/DeepMind MoU](https://www.gov.uk/government/publications/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security), Nature of the MoU, line 104",
+        "Published 11 December 2025; collaboration, not procurement or spend"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 19,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E20",
+      "claim": "Barclays article says the knowledge capability “has been live since 2025”",
+      "passage_and_locator": [
+        "[Anthropic/Barclays](https://www.anthropic.com/news/barclays-scales-claude), knowledge-assistance section, line 49",
+        "Supplier report published 1 October 2026; distinct from future developer rollout"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 20,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E21",
+      "claim": "Diligenta “will use Claude”",
+      "passage_and_locator": [
+        "[Anthropic/TCS](https://www.anthropic.com/news/tcs-anthropic-partnership), use-case list, line 43",
+        "Forward adoption statement, 12 June 2026; not completed rollout or a direct contract with every underlying insurer"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 21,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E22",
+      "claim": "OpenAI announced a “new office in London, United Kingdom”",
+      "passage_and_locator": [
+        "[London announcement](https://openai.com/index/introducing-openai-london/), opening paragraph, line 18",
+        "28 June 2023 event; not current workforce or revenue evidence"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 22,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E23",
+      "claim": "CMA footnote says “The geographic scope of our markets is UK+EEA”",
+      "passage_and_locator": [
+        "[Final cloud summary](https://assets.publishing.service.gov.uk/media/688b20e6ff8c05468cb7b120/summary_of_final_decision.pdf), page 2, footnote 1",
+        "Provider-share geography must not be relabelled UK-only; 31 July 2025 findings"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 23,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    },
+    {
+      "reference": "E24",
+      "claim": "Node4 footer says “Registered in England and Wales No. 04759927”",
+      "passage_and_locator": [
+        "[Company](https://node4.co.uk/about-us), legal footer, line 152",
+        "Site-declared company identity; canonical mapping still needs registry reconciliation"
+      ],
+      "source_block": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "source_row": 24,
+      "status": "withheld",
+      "canonical_identity": null,
+      "original_document_sha256": null,
+      "retrieved_at": null,
+      "retrieval_date": "2026-11-12",
+      "rights": "unestablished"
+    }
+  ],
+  "reference_models": [
+    {
+      "title": "Application or model provider",
+      "value": "Reusable software/models support customer workflows",
+      "commercial": "Subscription, licence, usage and support are different arrangements; contract needed to identify the actual one",
+      "dependencies": "Engineering, training/data rights, compute, distribution, adoption and controls",
+      "question": "Is adoption producing measured business value? Who owns operating risk and integration?",
+      "source_block": "659ae5e6-1fd5-401d-9262-2e5f97b76215"
+    },
+    {
+      "title": "Infrastructure provider",
+      "value": "Capacity, availability and interconnection support workloads",
+      "commercial": "Asset ownership, colocation, dedicated capacity, public-cloud consumption and managed operation are different",
+      "dependencies": "Power, buildings, networks, equipment, skills and supplier concentration",
+      "question": "Is capacity genuinely constrained? What trade-off exists between cost, control and portability?",
+      "source_block": "659ae5e6-1fd5-401d-9262-2e5f97b76215"
+    },
+    {
+      "title": "Delivery and managed-service provider",
+      "value": "Skills and operating processes integrate technology with business change",
+      "commercial": "Project scope, capacity, milestones, recurring operation and outcome commitments differ",
+      "dependencies": "Workforce, platform vendors, delivery partners, client access and governance",
+      "question": "Where are delivery bottlenecks, transition risks or service boundaries?",
+      "source_block": "659ae5e6-1fd5-401d-9262-2e5f97b76215"
+    },
+    {
+      "title": "Distributor or reseller",
+      "value": "Product access, finance, configuration and logistics simplify buying",
+      "commercial": "Gross invoicing, recognised revenue, margin and recurring services must not be mixed",
+      "dependencies": "OEM authorisations, credit, supply chain and channel partners",
+      "question": "Where can lifecycle services, rationalisation or commercial control improve value?",
+      "source_block": "659ae5e6-1fd5-401d-9262-2e5f97b76215"
+    },
+    {
+      "title": "Frontier-technology developer",
+      "value": "Converts research/IP into tested technology and accessible systems",
+      "commercial": "Research collaboration, grant, prototype, IP access and commercial service have different maturity",
+      "dependencies": "Research talent, fabrication/compute, capital, test users and standards",
+      "question": "What evidence demonstrates readiness for the proposed use case?",
+      "source_block": "659ae5e6-1fd5-401d-9262-2e5f97b76215"
+    }
+  ],
+  "capabilities": [
+    {
+      "layer": "Direction and economics",
+      "capabilities": "Strategy, market selection, product portfolio, investment and financial control",
+      "evidence": "Dated plans, filings and comparable period/geography measures"
+    },
+    {
+      "layer": "Build and supply",
+      "capabilities": "Research, product engineering, sourcing, security engineering and infrastructure",
+      "evidence": "Product descriptions, ownership and supplier roles"
+    },
+    {
+      "layer": "Sell and deliver",
+      "capabilities": "Channels, solution design, implementation, integration and organisational adoption",
+      "evidence": "Named partner and customer cases, scope and event dates"
+    },
+    {
+      "layer": "Run and improve",
+      "capabilities": "Service operations, resilience, data/model governance, optimisation and retirement",
+      "evidence": "Reported operational changes, measured outcomes and unresolved risks"
+    }
+  ],
+  "economic_blocks": [
+    "9ded3f81-a17a-48c0-b2bd-04e625ba4d83",
+    "b7eb7712-820f-4312-936c-8ee0bb66d73d",
+    "dcf9552a-e02e-487c-82a9-1241ec5a780c",
+    "7481438e-761a-40e8-8290-6c7c729ecc09"
+  ],
+  "pestle_block": "e042aba4-b7c0-4a23-8b4a-c9a83fd23a8b",
+  "competition_block": "982de63a-f70a-4c8f-af3e-661ae636c25b",
+  "value_chain_blocks": [
+    "67b9a5b0-841c-4068-8ac1-a34a0b798602",
+    "dca42ac2-0dc7-4e12-8279-66fb85d1b197",
+    "947c6a18-9f56-443e-8352-51bf3b415845",
+    "56730447-c03e-456d-875c-feb582684f33",
+    "82aa2785-070c-4bc4-8fe9-14eb489befa9",
+    "b183f7d3-9cf6-4876-beeb-5e4ff97fd721",
+    "0645c9f0-1fca-4028-9d1d-03bf517b8de5",
+    "7bccee13-5b27-4ad5-a578-14b5d3942a47",
+    "040cdd16-4d70-4541-be9b-9e9e30642d3f"
+  ],
+  "timeline": [
+    {
+      "date": "2025-02-03",
+      "status": "completed acquisition",
+      "title": "Sophos / Secureworks",
+      "block": "e8170ced-ee3f-4122-9a53-a7ebfdf55963",
+      "date_basis": "reported completion date"
+    },
+    {
+      "date": "2025-04-28",
+      "status": "reported go-live",
+      "title": "Bank of England RT2",
+      "block": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "date_basis": "reported go-live date; appointment separately sourced"
+    },
+    {
+      "date": "2025-07-31",
+      "status": "historical finding",
+      "title": "CMA cloud decision; UK+EEA share scope",
+      "block": "7481438e-761a-40e8-8290-6c7c729ecc09",
+      "date_basis": "regulatory publication date; historical findings"
+    },
+    {
+      "date": "2025-12-11",
+      "status": "non-binding MoU",
+      "title": "DSIT / Google DeepMind; no financial commitment",
+      "block": "48a40e84-375f-43dc-904e-f74d8283934d",
+      "date_basis": "MoU publication date"
+    },
+    {
+      "date": "2026-05-29",
+      "status": "completed disposal",
+      "title": "NCC / Escode",
+      "block": "420cb2ed-8e3f-41b0-8319-e899d426a0fc",
+      "date_basis": "reported disposal completion date"
+    },
+    {
+      "date": "2026-07-14",
+      "status": "research collaboration",
+      "title": "Quantinuum / Rolls-Royce / Riverlane / EPCC",
+      "block": "69e08f67-8957-45f2-84b6-87f3835c0fc6",
+      "date_basis": "dated collaboration announcement"
+    },
+    {
+      "date": "2026-10-13",
+      "status": "planned commitment",
+      "title": "NVIDIA compute access; selection/terms unresolved",
+      "block": "e505e833-42c0-4505-87f3-6d9635398617",
+      "date_basis": "commitment announcement date; delivery/terms unresolved"
+    },
+    {
+      "date": "2026-10-21",
+      "status": "supplier-reported deployment",
+      "title": "easyJet Dynamics 365 Contact Centre",
+      "block": "73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+      "date_basis": "supplier article publication date; exact deployment date unresolved"
+    },
+    {
+      "date": null,
+      "status": "proposal / stage to recheck",
+      "title": "Cyber Security and Resilience Bill; not commenced duties",
+      "block": "0ba2c660-3d49-4fb1-8419-e9c5195a325d",
+      "date_basis": "stage/date not established in recovered Page"
+    }
+  ],
+  "gaps_blocks": [
+    "97e60a87-aa59-4f8d-8d35-e5a86f1e4a6d",
+    "924a6722-325d-45eb-9434-18ecf30b4dee",
+    "d75a39c8-268b-4615-8a48-6734ac8f87a4",
+    "26ac1641-7878-4344-a3cb-fff2076b4a41",
+    "42d13d6f-c4c8-408e-90e6-393a7095ffe8",
+    "bf5e3b8f-5e1d-49cf-8d02-6838bf336863",
+    "a33b431f-dcc5-4e54-b1e3-ab3b1a7289cd",
+    "36ec3aa8-cb9e-4b43-9a53-82879f92eabc",
+    "f015864c-ed59-45eb-9467-5f808365bc17",
+    "791ed949-7bcd-4bb6-af17-46e6386ade24",
+    "b142c198-bee1-4874-bc76-419ef481bc7c",
+    "3d402fa5-f152-46c1-be70-77bcbd4afc8f",
+    "1e23f10d-0010-4ec9-a461-f7b9959609d8",
+    "e5e5cd4e-6ee9-4e71-8c70-0517e80b66a4",
+    "58da3d4f-64d6-4ec8-9399-4ed71ad908c2",
+    "dafb7323-75cb-4fce-b9e5-ab6ae0f279d1"
+  ],
+  "canonical_accepted_count": 0,
+  "eligible_import_count": 0
+}

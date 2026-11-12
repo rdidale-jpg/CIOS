@@ -52,9 +52,11 @@ def catalogue(enterprises=False,headers=None):
         for slug,b in BANKS.items():
             if slug=='lloyds':continue
             cards.append(f"<article class='ux-card'><span class='ux-status uncertain'>Historical profile; deep research incomplete</span><h2>{e(b.name)}</h2><p>{e(b.description)}</p><a href='/enterprises/{slug}'>Explore enterprise →</a></article>")
+    else:
+        cards.append("<article class='ux-card'><span class='ux-status uncertain'>Research foundation / governed import outstanding</span><h2>UK Technology</h2><p>Explore the industry operating landscape, 80 selected provider views, dated customer programmes and six unqualified commercial themes.</p><a href='/industries/technology'>Explore Technology →</a></article>")
     title='Enterprises' if enterprises else 'Industries'
     hero="Start with the enterprise." if enterprises else "See the forces.<br>Follow the implications."
-    return page(title,f"<section class='ux-hero' id='content'><p class='eyebrow'>{title} / FLORA</p><h1>{hero}</h1><p>Banking and Aviation. One visual research framework, with source limitations and sector terminology preserved.</p></section><div class='ux-grid {'ux-industry-catalogue' if not enterprises else ''}'>{''.join(cards)}</div>",headers,'enterprises' if enterprises else 'industries','/enterprises' if enterprises else '/industries')
+    return page(title,f"<section class='ux-hero' id='content'><p class='eyebrow'>{title} / FLORA</p><h1>{hero}</h1><p>Banking and Aviation, with a UK Technology research foundation. Source limitations and sector terminology remain visible.</p></section><div class='ux-grid {'ux-industry-catalogue' if not enterprises else ''}'>{''.join(cards)}</div>",headers,'enterprises' if enterprises else 'industries','/enterprises' if enterprises else '/industries')
 
 
 def provenance_notice(data):

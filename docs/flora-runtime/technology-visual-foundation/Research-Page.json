@@ -1,0 +1,1329 @@
+{
+  "page_id": "page_61a0dab9a9708191a323c9b0e048e523",
+  "title": "UK Technology Industry Foundational Research",
+  "sequence": 11,
+  "updated_at": "2026-11-12T16:18:36.396480Z",
+  "url": "https://chatgpt.com/space/page_61a0dab9a9708191a323c9b0e048e523",
+  "blocks": [
+    {
+      "id": "5300c780-3cea-43b3-9f65-e1c9647a2cec",
+      "hash": "92501dee8b812f3a29f708b8789b8f150a9377d6e9c8a9a4715401390cbdff4d",
+      "markdown": "Research as of 12 November 2026. UK technology landscape, selected provider baselines, public customer/partner references and evidence-linked opportunity briefs for Flora. The selected landscape contains 80 provider views. Depth and evidence readiness vary; this is not a census, a supplier ranking or a validated canonical import."
+    },
+    {
+      "id": "53013734-28f9-4668-b2f8-d9a544a199f9",
+      "hash": "13af8e3137dca8119efe450efd6c80348fd0f7cd091f9497c7d620c9a74d658c",
+      "markdown": "# Delivery correction and acceptance criteria"
+    },
+    {
+      "id": "04ce8ed0-b5a8-401f-be82-89b6cdf78bf7",
+      "hash": "b241dfc44beca253d45c62eb730687a17b749592575c154282411e2745cb7adf",
+      "markdown": "The deliverable is one coherent UK Technology foundation, not a sequence of research updates. The current document is a working evidence collection. Profile headings and source links are not completed enterprise baselines. The earlier approximate completion percentages are retired until requirements are auditable."
+    },
+    {
+      "id": "b9cbb35f-185d-42a8-889a-2d642088327b",
+      "hash": "6150940f4b2fa79daef5182e1e84d489a18876732908b8bdffd7e356c76d1505",
+      "markdown": "Research completion and software integration are separate gates. Research can be complete while an import implementation is pending. Conversely, a technically valid import cannot make incomplete research complete."
+    },
+    {
+      "id": "75832be7-a051-401b-a7d9-6ff5466e7ce5",
+      "hash": "b9c3ba14c2adf976b91eb19c130e238fada975dae03c421c71bf2b275254589a",
+      "markdown": "| Gate | Required completed output |\n| --- | --- |\n| Industry understanding | Scope, segments, economic boundaries, value chain, capabilities, operating models and competitive structure |\n| Population | Documented key-enterprise selection across every agreed segment, exclusions and overlap resolution |\n| Enterprise understanding | A consistent baseline for each selected enterprise: identity, UK role, business/operating model, offerings, ecosystem, strategy and material change, each sourced or explicitly unavailable |\n| Relationships | Products, partners and named customers with typed roles, scope, evidence attribution and dates/Unknowns |\n| Opportunities | Evidence-linked business consequences, alternative explanations, potential interventions and validation questions |\n| Evidence assurance | Atomic claims, source passages/locators, dates, scope, contradictions, permissions status and historical/current distinctions |\n| Handover | Consolidated research, coverage matrix, open gaps and candidate import mapping without invented canonical IDs |"
+    },
+    {
+      "id": "c2a4e215-842f-4879-bcb6-719127a5e6b1",
+      "hash": "356c0c0288cc518ec4b927e19e8d20056747228040e54d26141443d835efae53",
+      "markdown": "A field may close as unavailable only after an actual documented search; an unperformed task does not close as Unknown. No fabricated budgets, deployment status, private architecture or customer identity is allowed."
+    },
+    {
+      "id": "c148d2e9-d52f-4941-be43-ae39e91258dc",
+      "hash": "1fb86e64df923ba0802cb0ee88e7b88d515a965e74676753550ab2fd84276a65",
+      "markdown": "## Confirmed integration dependency"
+    },
+    {
+      "id": "97e60a87-aa59-4f8d-8d35-e5a86f1e4a6d",
+      "hash": "433f8d2020910e94ca653420620a1ce933b2f9518a4cae765e63f065b7ec3458",
+      "markdown": "The inspected main-snapshot importer has a finite official-publisher allowlist that does not include most technology-provider domains. Therefore provider-page records cannot currently be called validated imports through that route. A later Codex integration task must review source-policy expansion, technology-domain registration and canonical identities through existing owners; this research task does not authorise weakening the gate."
+    },
+    {
+      "id": "924a6722-325d-45eb-9434-18ecf30b4dee",
+      "hash": "929d60335f0b7bcc54dc20455cacb1c1f928b46b125dffbcd2adbb31247a1765",
+      "markdown": "The importer also requires actual source bytes/checksums or the separately supported honest reviewed-excerpt path. A Page link or prose paraphrase does not satisfy that contract. Source references gathered here must be converted into located atomic candidate records before technical validation."
+    },
+    {
+      "id": "4c5f1871-ef4f-480c-a9d6-0d09e8565186",
+      "hash": "337564ae4b9b0721e2ede3e721e347f4bced5942fc380f5f5435fef59a3a2392",
+      "markdown": "[Inspected source importer](https://github.com/rdidale-jpg/CIOS/blob/c3b818cbae7a2f88930d26bcd65b2dab7263e19f/cios/applications/flora/research_intelligence/source_import.py)."
+    },
+    {
+      "id": "6ecd259b-c89c-4880-a028-1c8abd895f13",
+      "hash": "a50c1063205148a56786ea8cd7c154ceb408ca55f525a1cf4217fb84629545da",
+      "markdown": "## Current assessment"
+    },
+    {
+      "id": "d75a39c8-268b-4615-8a48-6734ac8f87a4",
+      "hash": "b530c96f548fb83817bf8bd3d929260a2e734dbef4acda624f1c13b074ef3e20",
+      "markdown": "Industry structure, an expanded 80-view selection, reference operating models and opportunity briefs are assembled below. The remaining acceptance work concerns comparable enterprise depth, claim-level evidence coverage and canonical import preparation. Routine factual checking belongs to the research workflow; Rob is not being asked to validate individual industry facts."
+    },
+    {
+      "id": "ee8fedbe-e2c1-4731-be63-8311d9d1112f",
+      "hash": "5957eb7c08e87a98a12fe4a0c75da6cf0710fd102fac239b21df38f2ef95e214",
+      "markdown": "# Scope and completion requirements"
+    },
+    {
+      "id": "9d06852b-ca68-4594-a1b6-7bbf0e756c68",
+      "hash": "c7ea1e35805d6d718d892fc885f5d701967ed295a8764eccc454633b36762971",
+      "markdown": "Cover UK-headquartered providers and international providers with evidenced UK operations. The foundation requires industry structure and economics; a justified key-enterprise population; comparable business/operating models; applications, technologies and partner links; dated customer relationships; change forces and opportunity hypotheses; and an evidence-backed import pack. Completion requires substantive coverage across these areas, not simply mentioning each segment. Unknown private facts are legitimate gaps; incomplete research is not completion."
+    },
+    {
+      "id": "669916c1-1230-481c-9e6e-d384af79709f",
+      "hash": "bb9e475cc8bf59ec21cd459705a1ec40c47ea5d412eb5330c1a6609efb64ac6d",
+      "markdown": "The earlier 20% was an approximate planning judgement, not a measured score. No defensible 100% completion claim is made here."
+    },
+    {
+      "id": "6447345b-ad6d-4429-ae57-6342ebe04a08",
+      "hash": "4de3b07fb15a98df0b1ca619a7aab267d5e38f0af1a1c2ffffce35d04e85e952",
+      "markdown": "# Industry structure"
+    },
+    {
+      "id": "c54b9411-7cfc-436d-921d-086ee91dff99",
+      "hash": "42caeb112e2113217054cfd43a709b68d1ae9d2a9e090703ebcacf09afaaddad",
+      "markdown": "| Segment | Role | Typical economic model to investigate |\n| --- | --- | --- |\n| Software and applications | Support enterprise and industry processes | Subscription, licence, maintenance and consumption |\n| Cloud and infrastructure | Compute, storage, hosting and connectivity | Usage, committed capacity and recurring infrastructure services |\n| Data and AI | Data management, analytics and decision support | Platform subscriptions, usage and implementation |\n| Cybersecurity | Protect, detect, respond and assure | Software, managed services and specialist projects |\n| Technology services | Design, build, integrate, transform and run | Projects, capacity and managed-service contracts |\n| Channels and distribution | Route technology to customers and partners | Sourcing margin, vendor programmes and services |\n| Emerging technologies | Develop frontier capabilities | IP, hardware, research collaborations and early services |"
+    },
+    {
+      "id": "99f42a1c-ab6e-44da-a7de-90313d3dfe0a",
+      "hash": "0e8551b7cdae1ddf55bf9abb7f0576c10d78afe3fe27f822cdcdc9285f9cc9c8",
+      "markdown": "These are analytical categories with overlapping enterprise membership. Connectivity and semiconductor design require distinct subsegments within infrastructure/frontier coverage. Engineering biology is present in the government's D&T boundary but is not yet a developed FLORA research segment."
+    },
+    {
+      "id": "999b32ff-f458-4676-8ecc-974d238be94d",
+      "hash": "026e9beb07e440970fb7ab84dc83c2bb5d5af30a7ffcde27f8891e212f70271e",
+      "markdown": "# Economic anchors and measurement boundaries"
+    },
+    {
+      "id": "9ded3f81-a17a-48c0-b2bd-04e625ba4d83",
+      "hash": "08480c59886a95cab476592d5eb3f3f0cc572c9eeb35858db092be3ee59c6ba4",
+      "markdown": "The government’s June 2026 Digital and Technologies release estimates 107,082 companies, £408bn turnover, 1.33m employees and £158bn GVA for 2024. It uses a novel methodology and explicitly warns against treating it as the Digital Sector, the wider Digital Economy or a basis for direct international/SIC-sector comparison. Small firms account for most companies while large firms contribute most turnover. [D&T economic statistics](https://www.gov.uk/government/publications/digital-and-technologies-sector-statistics-volume-1-economic-statistics/digital-and-technologies-sector-economic-statistics)."
+    },
+    {
+      "id": "b7eb7712-820f-4312-936c-8ee0bb66d73d",
+      "hash": "4674bf8b4c1854d4d5d0586a7782e7257e59a0fe1d6d55c11aa4d13fb4d5877f",
+      "markdown": "The separate Digital Sector statistical series provisionally estimates £177.2bn GVA in 2024, 6.8% of UK GVA. This is a different definition, not an amount to add to the D&T measure. [Digital Sector statistics](https://www.gov.uk/government/statistics/economic-estimates-digital-sector-annual-2010-to-2024-and-regional-2010-to-2022-gross-value-added/economic-estimates-digital-sector-annual-2010-to-2024-and-regional-2010-to-2022-gross-value-added)."
+    },
+    {
+      "id": "dcf9552a-e02e-487c-82a9-1241ec5a780c",
+      "hash": "60fb56dd032038d8f6f03964eaed14d9f11dbddea41d62e90c66f0a77d4d4df4",
+      "markdown": "The 2026 cyber study estimates 2,603 firms, £14.7bn annual sector revenue and 69,600 FTEs. AI, cyber, cloud and software populations overlap and must not be summed. [Cyber study](https://www.gov.uk/government/publications/cyber-security-sectoral-analysis-2026/cyber-security-sectoral-analysis-2026)."
+    },
+    {
+      "id": "62a4a9ec-b748-449f-b1ca-c9c36c22584b",
+      "hash": "b9726b1c721e954b1e1dadad90c18024025e1295692d8b7f56e163eee1221b14",
+      "markdown": "# Enterprise discovery and selection"
+    },
+    {
+      "id": "51ba8440-7026-49bd-a12f-82aec1f82fac",
+      "hash": "a179b3e2cc4a3cedae5daf433ca2371904c811d0c17a99abd2301a00332bd85d",
+      "markdown": "Select providers for UK relevance, strategic importance, segment representation and ecosystem role. Distinguish global group, UK subsidiary, trading brand, product and acquired company. Neither a registry entry nor framework membership establishes UK scale or a current customer deployment."
+    },
+    {
+      "id": "782b8a9e-58c6-4b5d-8d73-3151fcc6b569",
+      "hash": "f3381658f7cad2218538021a564e2f75ec1e58e6f6f4f9bceebe21ae96d3af96",
+      "markdown": "| Primary placement | Selected provider views | Count |\n| --- | --- | --- |\n| Software and applications | Microsoft; SAP; Oracle; Salesforce; ServiceNow; Sage; Workday; Pega; Access Group; OneAdvanced; Adobe; Autodesk; AVEVA | 13 |\n| Cloud and data platforms | AWS; Google Cloud; Snowflake; Databricks; OVHcloud; Rackspace | 6 |\n| AI and decision intelligence | Quantexa; Faculty; NVIDIA; OpenAI; Anthropic; Google DeepMind | 6 |\n| Cybersecurity | NCC Group; Sophos; Darktrace; Palo Alto Networks; CrowdStrike; Fortinet; Rubrik | 7 |\n| Technology services | Accenture; IBM; Capgemini; Sopra Steria; DXC; Kainos; TCS / Diligenta; Infosys; Cognizant; NTT DATA; Equal Experts; Version 1; Netcompany; CGI; Fujitsu; HCLTech; Wipro; Tech Mahindra; Atos / Eviden; Valtech; Deloitte; Node4 | 22 |\n| Channels and distribution | Computacenter; Softcat; SCC; TD SYNNEX; Ingram Micro | 5 |\n| Physical infrastructure and connectivity | Equinix; Telehouse; BT; Pulsant; Digital Realty; VIRTUS; Cisco; HPE; Dell; Broadcom / VMware; Lenovo; VodafoneThree; Virgin Media O2; CityFibre | 14 |\n| Semiconductors and quantum | Arm; Intel; AMD; OQC; Riverlane; Quantinuum; Nu Quantum | 7 |\n| Total | Each provider view counted once in this index | 80 |"
+    },
+    {
+      "id": "77ba49a5-0600-4f3e-bb18-8846c580d48a",
+      "hash": "f29a3e95fb43d4a6cc9e8802a00f488f6dcb12aa37550e7c3e0b75b7ba006922",
+      "markdown": "This version selects providers for one or more of four reasons: a major platform/application dependency visible in cross-industry work; a substantial UK delivery, channel or infrastructure role; distinctive UK-origin technology; or a frontier capability needed to explain future options. Placement is for navigation only: Microsoft spans applications, cloud, AI and cyber, for example. The eight index rows roll up to the seven industry segments; physical infrastructure and semiconductors are explicit subsegments rather than additional economic totals."
+    },
+    {
+      "id": "49966d92-f5c5-429f-a347-bdb74a587a8d",
+      "hash": "94e3b95a7d9e468a7ec5258b78b6b7b1aa2515097816da53706956a3e62b44f2",
+      "markdown": "Official discovery anchors: [government strategic suppliers](https://www.gov.uk/government/publications/strategic-suppliers/crown-representatives-and-strategic-suppliers), [government technology investment overview](https://www.business.gov.uk/invest-in-uk/sectors/technology/), [AI sector study](https://www.gov.uk/government/publications/artificial-intelligence-sector-study-2025/artificial-intelligence-sector-study-2025-web-version), [GCA channel supplier list](https://www.gca.gov.uk/agreements/RM6098%3A4/lot-suppliers)."
+    },
+    {
+      "id": "762c8c19-6689-466f-af2c-4a4aff89ffe9",
+      "hash": "81391b599d52011385da7b8dc092473cbb01d229e3a915d82e7ab6812b6cec64",
+      "markdown": "# Initial enterprise baselines"
+    },
+    {
+      "id": "d64e2cbc-1244-42f6-a0e1-4c9a6776d6a2",
+      "hash": "3d9f1de2dbd2b0fc8c477c5c4f3c82c9cb7796a3b2b32a77d66bbd59e6277506",
+      "markdown": "## Computacenter"
+    },
+    {
+      "id": "2ceaebba-7bac-4fc8-a40d-45aced700154",
+      "hash": "e1de474b5555581b79158c9119b9bae732afce4b7238e7e4b48e187cfe503eda",
+      "markdown": "Model: technology sourcing, professional services and managed services. The UK segment reported H1 2026 revenue of £1,512.7m, gross invoiced income of £2,294.2m and gross profit of £160.1m. UK services revenue was £244.1m, comprising £103.5m professional and £140.6m managed services. These are six-month, unaudited interim measures, not full-year or group totals. Internal CRM, service-desk, service-management and ERP initiatives remain disclosed changes rather than open procurements. [H1 2026 results, United Kingdom table](https://investors.computacenter.com/news-releases/news-release-details/computacenter-2026-half-year-results)."
+    },
+    {
+      "id": "88ef4444-fa4e-4dc6-8c5d-71906f56ba00",
+      "hash": "b3da82e31ee2c329682f7a21fce06a082a9f0b0935551602e80be280a9887697",
+      "markdown": "Customer role: Genesys publishes a Computacenter service-desk story. Treat downstream customers as unnamed unless separately evidenced. [Genesys reference](https://www.genesys.com/en-gb/customer-stories/computacenter)."
+    },
+    {
+      "id": "71d7f39b-c585-4d60-9d83-cdc97ce4d1cc",
+      "hash": "5329ab0f3c6a4c159b4d6571d9188b909f6e03b12247aadae60f6687ca457d8a",
+      "markdown": "Gaps: current full vendor map, named delivery-customer portfolio, subsidiary/contracting-entity mapping and current milestone updates. A scoped UK segment financial anchor is now available above; it does not replace entity-level accounts."
+    },
+    {
+      "id": "7b29f5f9-8f66-4c5f-9ffb-e77033dbecfe",
+      "hash": "66d0b31d258b9d1c7a3148a9386bed038f96cf7bb79d62699e5c4d2616073e6b",
+      "markdown": "## SAP"
+    },
+    {
+      "id": "0679ead9-aea4-4636-ac68-ebf3b23aa910",
+      "hash": "b63b67b9b5c4029d338ed6437ed46f1e144208811aa3e5b1c4b50f46709da30d",
+      "markdown": "Model: enterprise applications and cloud subscriptions with implementation, extension, resale and managed-service partners. 2025 global revenue was €36.8bn, including €21.023bn cloud revenue; these are not UK figures. [Annual filing](https://www.sec.gov/Archives/edgar/data/1000184/000110465926020058/sap-20251231x20f.htm)."
+    },
+    {
+      "id": "5659c314-203a-4fc2-afaf-11278922d410",
+      "hash": "838d2d96be229f69a8a70b5e3922c28b86bd075a59bfc4b26afb5c3522f72a02",
+      "markdown": "The partner model distinguishes ISVs, selling partners, services/system integrators and managed-service/technology partners. [Partner-role disclosure](https://www.sec.gov/Archives/edgar/data/1000184/000110465926024381/tm2529416d2_ex99-1.htm). UK presence is explicitly described by SAP. [UK company page](https://www.sap.com/uk/about.html)."
+    },
+    {
+      "id": "9b884f4d-596b-4c05-b168-2ff68d8a56ad",
+      "hash": "34aff51d69fa1d451994ec038ad46b58f4097b992a13379b22649827d0de9b51",
+      "markdown": "Customer: Centrica; see dated relationship register. Gaps: UK scale, product-level local footprint, current implementation partners and completion evidence."
+    },
+    {
+      "id": "b639df5d-b8dc-4a0d-ad39-fcfd38c176d9",
+      "hash": "7724a1518386efa03568a0633a9007c05b310b5acfafdd493400888d4a22be22",
+      "markdown": "## Equinix"
+    },
+    {
+      "id": "3cfdb972-1aae-4e5d-aa73-39168dc82b3f",
+      "hash": "8536dbfe1b728e6ca9231a715806d4e1bd0dd80def6e3a0a6e428ab9f25d545a",
+      "markdown": "Model: recurring colocation, interconnection and managed infrastructure services. Its 2025 annual filing explains network effects from customer and partner proximity; the UK page reports 14 centres across London and Manchester. Do not equate colocation with ownership or operation of customer applications. [Annual filing](https://investor.equinix.com/sec-filings/all-sec-filings/content/0001101239-26-000032/eqix-20251231.htm), [UK operations](https://www.equinix.com/data-centers/europe-colocation/united-kingdom-colocation)."
+    },
+    {
+      "id": "b636c614-ffcf-4065-82af-458c582dacf5",
+      "hash": "5dba300e90ad1655c8b7ca6c18788d3b70a91dae50e633e81524f0e8ecb6f585",
+      "markdown": "Customer: Dojo, from a 2022 supplier case study. Gaps: comparable UK financial scale, dated site/capacity verification and current deployment confirmation."
+    },
+    {
+      "id": "5d8089ce-236d-4ada-85e4-fa305c2a418b",
+      "hash": "b25c9f1c90cd57c2ca51ee40f30d2507544a68a8337c219c0c7373a50b67f8bb",
+      "markdown": "## Kainos"
+    },
+    {
+      "id": "2678abd1-456b-4ab2-83bc-0dad90fd8c6a",
+      "hash": "04f2613c89048cc8cdf05070e99410e0106188e94ca35f6488a19f7fd1c23d46",
+      "markdown": "Model: Digital Services, Workday Services and Workday Products. These represent custom delivery, platform-related services and proprietary product activities. Its Workday practice explicitly states that Kainos itself is a Workday customer, separately from its partner role. [Investor overview](https://www.kainos.com/investor-relations), [Workday practice](https://www.kainosworksmart.com/workday)."
+    },
+    {
+      "id": "fc96a2b7-4e68-46eb-9ade-42c5f656304a",
+      "hash": "304fed5e9356240853a79e4cd1bffe4d111ebcb0f9fa4390030f6150e75837e0",
+      "markdown": "The investor results library should provide current disclosures. A November 2026 LSE results page encountered recipient/use restrictions; its search excerpts are not accepted as full-source evidence for this pack. [Issuer results library](https://www.kainos.com/investor-relations/results-and-presentations)."
+    },
+    {
+      "id": "4b21581f-f5d2-4643-88cc-a8518b14fed5",
+      "hash": "eaf64b9d9117e1efb188883a50cbbdd1f0cd7a8e10092408bc409cec591aab5f",
+      "markdown": "Gaps: current issuer-hosted results extraction, product-specific named customers, UK/global revenue reconciliation and customer-authored delivery references."
+    },
+    {
+      "id": "b81d8bda-d038-4a04-bc59-546fad4a54a2",
+      "hash": "c6b598db6a6ccb408ca413051838fed2da80a2f9cf570dd7d6c007f404ff07d1",
+      "markdown": "## NCC Group"
+    },
+    {
+      "id": "420cb2ed-8e3f-41b0-8319-e899d426a0fc",
+      "hash": "fab14e6e4ea54bd4b68cca619ce70074a9175cf5aa2cc8d72471b7b09001c253",
+      "markdown": "Correction to the initial 2025 description: Escode is no longer a current NCC division. NCC confirms completion of its sale to TDR-managed funds. June 2026 issuer interim reporting identifies completion on 29 May 2026. NCC now describes its focus as cybersecurity and resilience. Preserve the historical ownership relationship and the disposal event. [Completion announcement](https://www.nccgroup.com/newsroom/ncc-group-completes-sale-of-escode/), [June 2026 interim report](https://www.nccgroup.com/media/fvle0btz/ncc-interims-h1-fy26-110626.pdf)."
+    },
+    {
+      "id": "8ba36d93-0c8e-46d9-8afa-3ba26eada69a",
+      "hash": "62c5ef302c181ce7713074c3685de4a10f83bb1b9de6c5f43e7b334f19b3dd2f",
+      "markdown": "Gaps: updated segment economics, named customers, partner roles and current operating-model detail."
+    },
+    {
+      "id": "671ea8db-f7f3-48cd-b3f6-0abeb8d05800",
+      "hash": "66ab67c8d46fec0dc6b8306857ca3699077912d77683a9f58b343ca88d5e1c3c",
+      "markdown": "## Sophos"
+    },
+    {
+      "id": "e8170ced-ee3f-4122-9a53-a7ebfdf55963",
+      "hash": "13584223f3b6286c16673e8fc01a1a395b411154f5f606bf82fc428939d12aeb",
+      "markdown": "Model under investigation: cybersecurity technology and managed detection/response delivered with channel partners, MSPs and MSSPs. Sophos completed Secureworks acquisition on 3 February 2025; do not retain Secureworks as an independent group without dating the relationship. [Sophos announcement](https://www.sophos.com/en-us/partner-news/sophos-completes-secureworks-acquisition), [transaction filing](https://www.sec.gov/Archives/edgar/data/1468666/000095014225000239/eh250585750_8k.htm)."
+    },
+    {
+      "id": "6c595faf-bf2f-4997-a50a-4416df50e34f",
+      "hash": "1120a77c0965820a6c16bb808cc1e4103fc6fbcde536f1a4e486b4dfee1ebc9f",
+      "markdown": "Gaps: UK business scope, product integration, customer deployments and distinct direct/partner delivery responsibilities."
+    },
+    {
+      "id": "5178483b-2e2b-44fe-9d7d-6b6855cf5db5",
+      "hash": "67b3e19346826a2dc14ab560a30f9fa3a392d63b54437c468aa12697122e7064",
+      "markdown": "## BT"
+    },
+    {
+      "id": "7907df13-813d-448f-b373-6026dd997254",
+      "hash": "b09b3ff6946bc3e8fe155c2d10cdb3ebba1cb2a5cc37a37c8b0e810531e761f1",
+      "markdown": "Model: communications/network infrastructure and services, with organisational and legal distinctions including Openreach. Current strategy emphasises simplification and modernisation. November 2026 results name Ministry of Justice, Cabinet Office, Scottish Water and Royal Mail contract activity without establishing individual product scope. These are supplier-reported relationship leads. [Latest first-half statement](https://newsroom.bt.com/bt-delivered-a-strong-first-half-with-further-strategic-momentum/), [business structure](https://www.bt.com/about/bt/our-company/group-businesses)."
+    },
+    {
+      "id": "6dc2fce2-9450-4ef9-b2c6-e7a7049e73ed",
+      "hash": "e627404470e3018f8c1a6a678268ddc1342aaa47bcbeac2fb652510488074c87",
+      "markdown": "BT is also a ServiceNow customer. Gaps: current group perimeter reconciliation, contract-level evidence, named products and UK-only financial baselines."
+    },
+    {
+      "id": "cfce9b60-7a9e-415f-a04b-c9e61f8bb830",
+      "hash": "19da41581759a0d1e30c106f077396e23c776952b817b0aa0ee24ef513d8e682",
+      "markdown": "## Arm"
+    },
+    {
+      "id": "659a4511-6752-4aa1-a321-b3854994fb93",
+      "hash": "91372de6d8402936f3edabb3ab22ea8f0a9075604dc6c887db66e014c99aff22",
+      "markdown": "Model: IP access/licensing plus royalties on chips incorporating its designs. Important 2026 update: Arm’s annual filing also describes expansion into Arm-designed silicon, with Arm AGI CPU production expected by calendar year-end 2026. A description claiming Arm only licenses designs would therefore be incomplete; expected production is not completed production. [FY2026 filing](https://www.sec.gov/Archives/edgar/data/1973239/000197323926000097/arm-20260331.htm)."
+    },
+    {
+      "id": "ad96723c-d301-40d0-a187-630b608e34d5",
+      "hash": "151c463a5534bad30801922dc5800a6357b7987e8f7594f4c164fb72593d044c",
+      "markdown": "Its economic exposure includes cloud, devices and other end markets. Gaps: current licensee/customer evidence, UK operation versus global group economics and production milestone validation."
+    },
+    {
+      "id": "28c2e2f6-42f9-4e47-a2a8-71d1bcc0f105",
+      "hash": "84f54621f3e2053f8d6fecfc6a17c53b32be3354714923ca054bebe09a42932d",
+      "markdown": "## Quantexa"
+    },
+    {
+      "id": "94e1767f-6952-48d3-8529-5887fb152143",
+      "hash": "d6aeda7a975d4ac6f21a3d01438c06c14c23b605a42959f4a2d302c53eda38c5",
+      "markdown": "Model: Decision Intelligence platform connecting data and entities for investigation and business decisions. Its own publication describes HSBC and Standard Chartered using it for financial-crime-related work. These support supplier-reported named relationships; precise deployment geography, dates and customer-confirmed outcomes require further work. [Financial-crime evidence](https://www.quantexa.com/resources/holistic-view-of-financial-crime/)."
+    },
+    {
+      "id": "a7414c87-2c87-4bdb-9982-4a3a95bbb5da",
+      "hash": "baba423389a7b1ae91b580c9c73cd18844d380ba6bfba70e7a328a83c7d65d5a",
+      "markdown": "Gaps: revenue model, UK scale, ownership, current platform modules, implementation partners and customer-authored corroboration."
+    },
+    {
+      "id": "eabd5193-d608-4165-9893-7c773f86adb2",
+      "hash": "3b8e0894240fd401c2e7b7792dbc1af43043df9f4f626bd851d7876e882c7251",
+      "markdown": "## Softcat and channel providers"
+    },
+    {
+      "id": "3b47bba8-2540-40d5-8793-d7677240683b",
+      "hash": "9080e814236134c254a64907ff4bb97d005813a05de1070beea93fc948c7402c",
+      "markdown": "Softcat’s website describes workspace, licensing, cloud, data-centre, networking and security offerings, with declared vendor relationships including Apple, Samsung, Rubrik and Fortinet. Treat those as supplier-declared relationships. [Softcat](https://www.softcat.com/), [issuer results](https://www.softcat.com/about-us/investor-centre/results-centre)."
+    },
+    {
+      "id": "80dbce3a-148e-412e-901a-86bf4f015a74",
+      "hash": "f910a2e91802c34e7f44637f6b14028722566a3d8b5b76245d1659501cb1bda4",
+      "markdown": "TD SYNNEX identifies a UK distributor/solution-aggregator role; its main page was not text-readable in this pass. Ingram Micro’s UK company page establishes local operations but does not by itself complete a distribution/business-model profile. [TD SYNNEX UK](https://uk.tdsynnex.com/), [Ingram Micro UK](https://uk-corp.ingrammicro.com/discover/company)."
+    },
+    {
+      "id": "058c483e-b14a-4ec3-926c-f085a418ad62",
+      "hash": "252299a036c802754fc4b2d9d182e21ccbe64b198c5c9708a19b80ce3cbcdc09",
+      "markdown": "Gaps: comparable UK financial scale, current vendor authorisations, service responsibilities and accepted customer examples. SCC and distributor operating-role baselines are included below."
+    },
+    {
+      "id": "a3e34c2e-c2a0-4e2b-aa8f-e2e649615712",
+      "hash": "662e5040c8b7783b6710d7a09c9cd94b6b8cd7bb6c194a9acce76d7460142354",
+      "markdown": "## OQC and frontier research"
+    },
+    {
+      "id": "50b8e38c-15db-4329-82eb-45683397e449",
+      "hash": "a7b3114b0f3755bb80959c810416055ace99afb61de20f7b3f27661a7f3d8b24",
+      "markdown": "OQC describes quantum hardware, quantum-compute access and collaboration with data-centre, HPC, cloud and research organisations. Its current company page separates delivered systems from future commercial-advantage ambitions. Do not present aspirations as achieved business advantage. [OQC company](https://oqc.tech/company/). British Business Bank’s June 2026 publication provides explicit UK-company investment evidence. [Investment announcement](https://www.british-business-bank.co.uk/news-and-events/news/british-business-bank-commits-ps100m-oxford-quantum-circuits)."
+    },
+    {
+      "id": "72a25481-6192-4d24-8473-583585f4271d",
+      "hash": "a182d80f7bde5c60ebeb164a9852959dd5794685d1b7b9250388d45e3edd5d6f",
+      "markdown": "Gaps: named commercial users, contractual model and measured production-use maturity. Comparative Riverlane, Quantinuum and Nu Quantum baselines are included in the follow-up section."
+    },
+    {
+      "id": "4e49f4d2-c48d-4b2a-8173-984b9e831dca",
+      "hash": "c94d80dc3a82beaf2bf98ea926661e3c56806eb2e49acaf3942dad371c2c4c76",
+      "markdown": "# Customer and delivery relationship register"
+    },
+    {
+      "id": "53307d2c-dad0-4882-88db-a66e7b3fb324",
+      "hash": "cc228715d3ced024279001e9742ff29b53ef89596d8b5988873b8612730b1207",
+      "markdown": "All relationships are public-source references, not current contract assurances. Record retrieval as 12 November 2026; Unknown means the relevant date or scope has not been established."
+    },
+    {
+      "id": "210d82ac-8085-4060-85df-5b69ff911b9f",
+      "hash": "099ae8961716f6ac1a6bb18254b179ed613a772fd3748bc696f14e3f03731639",
+      "markdown": "| Customer | Provider or partner | Offering / capability | Event and source status |\n| --- | --- | --- | --- |\n| BT Group | ServiceNow | Service management, Service Bridge, Now Assist for TSM | Customer publication 20 June 2024: prior Digital-unit consolidation, wider rollout and initial pilot distinguished. [Source](https://newsroom.bt.com/bt-group-expands-strategic-relationship-with-servicenow-to-improve-customer-and-employee-experiences/) |\n| Dojo | Equinix; Oracle Cloud, AWS, Google Cloud referenced | Payments infrastructure / cloud connectivity | Supplier case study 8 September 2022; historical, current deployment not confirmed. [Source](https://blog.equinix.com/blog/2022/09/08/delivering-fast-reliable-and-secure-credit-card-payments/) |\n| Rolls-Royce | Deloitte; Databricks | AiRR engineering-data and AI platform | Delivery-partner report; date and legal deployment scope unresolved. [Source](https://www.deloitte.com/uk/en/about/story/impact/driving-ai-powered-integration-rolls-royce.html) |\n| Computacenter | Genesys | Service-desk interaction platform and AI | Supplier report referencing 2026 award; downstream customers not identified. [Source](https://www.genesys.com/en-gb/customer-stories/computacenter) |\n| Lloyds Banking Group | Microsoft; Google Cloud | Copilot, Copilot Studio, generative-AI infrastructure | Customer publication 24 July 2025. [Source](https://www.lloydsbankinggroup.com/insights/reimagining-the-future-how-ai-is-transforming-lloyds-banking-group.html) |\n| Lloyds Banking Group | Oracle; Microsoft Azure infrastructure referenced | Database@Azure; Exadata Cloud@Customer | Supplier announcement 20 March 2025, with customer quotation; multiyear migration, not proof all databases migrated. [Source](https://www.oracle.com/news/announcement/lloyds-banking-group-expands-collaboration-with-oracle-to-support-tech-transformation-2025-03-20/) |\n| Sainsbury’s | Microsoft | Copilot | Customer reports rollout to around 3,000 colleagues; publication date unresolved. [Source](https://corporate.sainsburys.co.uk/purpose-in-action/ai-in-action-at-sainsbury-s-people-at-the-heart/) |\n| Centrica | SAP; Microsoft referenced | Business Data Cloud; RISE with SAP; Business AI | Supplier announcement 27 May 2026 reports February data-platform go-live but schedules RISE for July. Completion needs later evidence. Unnamed integrators remain unnamed. [Source](https://news.sap.com/uk/2026/05/centrica-adopts-rise-with-sap-to-support-ai-driven-transformation/) |\n| Bank of England | Accenture | RTGS renewal delivery | Customer appointment 30 July 2020; RT2 go-live 28 April 2025 separately confirmed. Not proof of current outsourcing. [Appointment](https://www.bankofengland.co.uk/news/2020/July/boe-appoints-accenture-as-the-technology-delivery-partner-for-the-rtgs-service-renewal-programme), [go-live](https://www.bankofengland.co.uk/news/2025/april/renewed-rtgs-service) |\n| Heathrow | Salesforce | Customer 360; passenger communications and commercial experience | Supplier report 30 August 2023; historical use. [Source](https://www.salesforce.com/news/stories/heathrow-airport-customer/) |\n| HSBC | Quantexa | Entity/data connections for investigation | Supplier report; deployment geography and date unresolved. [Source](https://www.quantexa.com/resources/holistic-view-of-financial-crime/) |\n| Standard Chartered | Quantexa | Financial-crime decision intelligence | Supplier report; deployment geography and date unresolved. [Source](https://www.quantexa.com/resources/holistic-view-of-financial-crime/) |\n| Bentley Motors | Capgemini | Digital infrastructure, integration, data and AI | Supplier announcement 29 June 2026, forward delivery scope; not completed outcomes. [Source](https://www.capgemini.com/news/press-releases/capgemini-supports-bentley-motors-in-the-acceleration-of-its-future-digital-strategy/) |"
+    },
+    {
+      "id": "31b9c939-737f-4601-8695-5bf7d068dcb0",
+      "hash": "533bacd46d596ab50a26d1eb719c48f9d1a70c0f968d03cd3364b5e5dd24d46c",
+      "markdown": "NHS Shared Business Services itself corroborates Oracle Fusion application use; the customer-authored record is included below. The Oracle supplier page remains useful for partner discovery, but its questionable incidental Cerner acquisition year is excluded. [Customer source](https://www.sbs.nhs.uk/news/nhs-shared-business-services-instils-financial-excellence-across-the-nhs-with-oracle-fusion-cloud-applications/), [supplier source](https://www.oracle.com/uk/customers/nhssbs/)."
+    },
+    {
+      "id": "26ac1641-7878-4344-a3cb-fff2076b4a41",
+      "hash": "12f0ad5718707e44e80e19e4490b21c7f282681a1f44ef74fe2c23706de1e051",
+      "markdown": "Microsoft/McLaren remains withheld: original case-study URL returned 404. Anonymous bank case studies are not mapped to guessed enterprises."
+    },
+    {
+      "id": "f6e4aace-52d4-4ae8-a023-a7be663d3cc5",
+      "hash": "3d0a8c2165403a2437548acaaa3d042336c75b176d9242db2c74d9e505872877",
+      "markdown": "# Competitive structure and opportunity hypotheses"
+    },
+    {
+      "id": "e7835563-e2d6-40f4-998f-58cf25bb6c42",
+      "hash": "6b96e171f23b037db2c832dfc9b44faa21bf40a4b68befc871ad54469ef751b7",
+      "markdown": "The following are analytical interpretations, not verified buying opportunities."
+    },
+    {
+      "id": "5ef01384-37cf-4d8a-a5ab-fac0f3db0be1",
+      "hash": "587ef2a1be43d2d746624aa6888a96d16fb9fa69b88d1c38051c132b5fc255c6",
+      "markdown": "| Structural feature | Interpretation | Research / customer validation question |\n| --- | --- | --- |\n| Applications depend on data, infrastructure and implementation | Buying and delivery responsibility may span multiple providers | Who owns integration, operation and outcome accountability? |\n| Technology firms are also technology buyers | Provider profiles can expose their own transformation needs | Which disclosed change programme has an unresolved requirement? |\n| Multi-platform AI appears in customer disclosures | Governance and interoperability may matter alongside model choice | Where are data, controls and value measurement fragmented? |\n| Sourcing revenue and service economics differ | High revenue growth may not imply stronger margins | Which segment and profit measures reflect economic value? |\n| Acquisitions and disposals change provider boundaries | Historical relationships need effective dates | Is the named supplier still in the same group and delivery role? |\n| Channel partners offer overlapping capabilities | Rivalry and collaboration can coexist | Is the relationship resale, implementation, operation or joint development? |"
+    },
+    {
+      "id": "93fcd2ce-ef56-47e6-a727-078074fec4e1",
+      "hash": "3c32540afd3f5c686ff5e512b8f2ca82ce7632796356c3ecd1cbee6e750c43f6",
+      "markdown": "Prioritise hypotheses by evidence strength, business materiality, change timing, capability fit and unresolved validation needs. Do not score fictional budgets or infer procurement intent."
+    },
+    {
+      "id": "cc826bbc-ba75-4679-b910-b278833a4dd9",
+      "hash": "293b98a0cf7b185902e17f31bf86472fe89b83bf585f6c50105dd6b3e8f54c74",
+      "markdown": "# Change forces and timeline"
+    },
+    {
+      "id": "0ba2c660-3d49-4fb1-8419-e9c5195a325d",
+      "hash": "63cd64b8c097e780d600ab30a4c9f8c5c24cfd16cb17c914ae58d132181a23fc",
+      "markdown": "| Force | Evidence | Potential consequence to investigate |\n| --- | --- | --- |\n| Cloud/software competition | CMA cloud investigation and October 2026 provisional Microsoft software action | Portability, licensing, interoperability and supplier concentration |\n| AI infrastructure growth | Government AI Growth Zones policy | Power, planning, location and infrastructure dependencies |\n| Cyber regulation | Cyber Security and Resilience Bill parliamentary stages as checked 12 November 2026 | Possible expanded obligations for managed services/data centres; do not present uncommenced proposals as duties |\n| Skills and adoption | Government Digital and Technologies Jobs Plan | Skills, workforce transition and adoption services |\n| Sustainability | Data Centre Covenant | Energy/water transparency, responsible development and community effects |"
+    },
+    {
+      "id": "2ff7b97d-c2ce-4f8a-a69e-69d5fa37e28e",
+      "hash": "321c6c90748227f43c764656e5c6e7675b6ba88aabc92bbb3939d7f122f70a22",
+      "markdown": "Sources: [CMA software proposal](https://www.gov.uk/government/news/cma-takes-first-steps-to-ensure-choice-in-business-software), [AI Growth Zones](https://www.gov.uk/government/publications/delivering-ai-growth-zones/delivering-ai-growth-zones), [Bill stages](https://bills.parliament.uk/bills/4035/stages), [Jobs Plan](https://www.gov.uk/government/publications/digital-and-technologies-jobs-plan/digital-and-technologies-jobs-plan), [Data Centre Covenant](https://www.gov.uk/government/publications/data-centre-covenant/the-data-centre-covenant)."
+    },
+    {
+      "id": "73293c93-dee1-4464-a9c4-1dd8eb7a1534",
+      "hash": "f30aa056c8e243fe1c3c0fe8a47073a02e611ac08d46d37f91b63cf4a36c6561",
+      "markdown": "Publication dates, proposal dates, commencement and reported benefits are distinct. Recheck legal status before any enterprise-applicability conclusion."
+    },
+    {
+      "id": "01a87a7d-e07b-4297-9eb5-c0684e1864aa",
+      "hash": "4f8d6fb2d2da6829c870ea31c1bcf04b6ffc9e1bf609299e331d78135c20f9a0",
+      "markdown": "# FLORA modelling and import contract"
+    },
+    {
+      "id": "919df4dd-86c7-4a9a-81a8-c6c01637ecd0",
+      "hash": "c7f0f3616c143a687b4346c8fb1c96d05081264769f90215417369555e9c0ea9",
+      "markdown": "Represent provider, legal entity, product, technology category, business capability, partner, customer and dated event separately. Each relationship carries source URL, passage locator, publication/event/retrieval dates, geography, fact/inference/scenario type, supplier/customer attribution, status and gaps. Acquisition relationships require effective dates."
+    },
+    {
+      "id": "471c4659-df41-4ce1-8bda-1a26318464e7",
+      "hash": "8e7b72631072285aa6b170be39ebe9480c3bd917bb6741af31058ea865885464",
+      "markdown": "Suggested relationship types: owns product, supports capability, declares alliance, implements, operates, resells, uses product, selected, announced rollout, reported go-live, historically owned and potentially relevant to. Do not collapse potential relevance into deployed use."
+    },
+    {
+      "id": "036fe807-3a54-4f9e-b52b-603cf649d991",
+      "hash": "1da82920791417f97f4a0e4bec9a71cbc16ea47424347f5c1cc48b6df098a960",
+      "markdown": "Views: industry landscape; enterprise operating model; provider/customer ecosystem; change timeline; ranked opportunity hypotheses. Public-source models must visibly distinguish published and inferred edges. Hypothetical architectures remain separate scenarios."
+    },
+    {
+      "id": "ec68711a-e828-4484-802c-75c43f2c3710",
+      "hash": "7f83f30aef3824880201d9ed24ba7af65d5d072b5b60082146d26558aef91166",
+      "markdown": "This Page is a research working pack, not a machine-validated import. Source-operation permissions and current canonical IDs must be reconciled before ingestion. No production or Pipeline records have been modified."
+    },
+    {
+      "id": "671655d2-cd47-455f-a73c-ac7eaebdc82d",
+      "hash": "f59d795d0384385dcff16b5063135c0174e44082daa40bb261b0fc650aa020c7",
+      "markdown": "# Remaining foundation work"
+    },
+    {
+      "id": "42d13d6f-c4c8-408e-90e6-393a7095ffe8",
+      "hash": "992a5a8da94b2d047b2e70d0e6f10a9ef76fb9205ee41dbfe0f53d7dbf530727",
+      "markdown": "- Reconcile the 80 selected provider views against group, brand and UK contracting-entity identities; complete the remaining comparable enterprise fields."
+    },
+    {
+      "id": "bf5e3b8f-5e1d-49cf-8d02-6838bf336863",
+      "hash": "614c57d54f0cd60204abb7771299a24b7a2e17131dc52fdad1349972521d3b6c",
+      "markdown": "- Complete comparable profiles for the identified software, cloud, services, cyber and infrastructure population; resolve legal entities and UK/global financial scopes."
+    },
+    {
+      "id": "a33b431f-dcc5-4e54-b1e3-ab3b1a7289cd",
+      "hash": "5b29755fd80b2d492c84dd896e800bdaf0a6756faccd475e0828b56e20df91af",
+      "markdown": "- Expand customer-authored corroboration, product-level partner roles, missing dates and current-use checks."
+    },
+    {
+      "id": "36ec3aa8-cb9e-4b43-9a53-82879f92eabc",
+      "hash": "1bceccf139ad2e4d197dee7e9086c2b065633816559fb9246d7898a1cc5b21d5",
+      "markdown": "- Reconcile the completed qualitative industry/reference models and six opportunity briefs to Flora's controlled vocabulary; extend quantitative competition only where comparable segment evidence supports it."
+    },
+    {
+      "id": "f015864c-ed59-45eb-9467-5f808365bc17",
+      "hash": "fcc75ac83f76016c857eda28cc9c9b556172c906d6ac7997f388bc1df117b5d7",
+      "markdown": "- Build the claim-level source/rights register, structured import records and validation results."
+    },
+    {
+      "id": "1c139a34-1ea5-46e5-9a67-458fd00dafc2",
+      "hash": "5ccc4159cf8b409f266b44ccf4d9911e0c1672cf943fa69e929742c62672c1eb",
+      "markdown": "- Produce the visual specifications and reconcile against existing FLORA identities without restarting paused agent work."
+    },
+    {
+      "id": "1f0f29db-ceda-4193-b722-92fd78b97590",
+      "hash": "3870337339594803c7c5c1481f9a287953eb2d3e4c6061a16c6e9d9011817093",
+      "markdown": "These are outstanding tasks, not a request for Rob to fact-check the research. Progress cannot yet be labelled 100%."
+    },
+    {
+      "id": "18d0656f-704e-4e39-9164-baaf4a5d4453",
+      "hash": "395902669f7bedae6420a2369ea4aad5f00cec14df36d6e6c0609aef9d5cb980",
+      "markdown": "# Additional provider baselines"
+    },
+    {
+      "id": "c0cb160f-8b94-4e05-8650-6d73dcd12d41",
+      "hash": "1f9b071e41381e8627cd85b7d032412d41ff52c3cf362d6e888f1bc24a1175ce",
+      "markdown": "## Microsoft"
+    },
+    {
+      "id": "eea8bc49-80d0-4789-9e73-a7e804c3c119",
+      "hash": "735320eda8a8f0a5b0e7d0f435f28b2800114d7cd5cf849f2f8206cc272d839d",
+      "markdown": "Microsoft’s FY2026 annual report describes productivity/business applications, cloud/server offerings and personal-computing businesses. Microsoft 365, Dynamics and Azure serve different capabilities; a Microsoft customer relationship cannot establish use of the whole portfolio. The segment descriptions are tied to the reported financial year and should not be assumed to describe later reorganisations. [FY2026 annual report](https://www.microsoft.com/investor/reports/ar26/)."
+    },
+    {
+      "id": "aa3b439a-e6ba-4e28-a3cd-098814fbf857",
+      "hash": "3aeac00b97b554bca7ee5e4cef52e6a126a3b012b889842c86e447178227f964",
+      "markdown": "UK adoption evidence includes customer-authored Lloyds and Sainsbury’s disclosures in the relationship register. Model Microsoft both as product/platform owner and ecosystem participant. Gaps: UK entity/financial reconciliation, current segment updates and customer-specific delivery partners."
+    },
+    {
+      "id": "cb4e0907-6400-4d92-a9ed-3a2a6f83b67f",
+      "hash": "1dc5d7d1b06777f826e3f0731f51fcd40ec5c44c0e530cbe427276229e30a548",
+      "markdown": "## AWS"
+    },
+    {
+      "id": "837342f2-4432-4ab4-97ed-66404ae5fa7a",
+      "hash": "71336ae35f8e75d760e85db6a2c9cc713b9c29abb5d741660ab3906217b645ab",
+      "markdown": "AWS has evidenced UK infrastructure operations and an announced multiyear investment programme. Amazon-wide investment includes non-AWS activities and must not be presented as AWS spending. Planned investment and modelled economic benefits are not realised revenue or jobs. [UK commitment](https://www.aboutamazon.co.uk/news/job-creation-and-investment/learn-about-awss-long-term-commitment-to-the-uk), [AWS investment plan](https://www.aboutamazon.co.uk/news/job-creation-and-investment/aws-plans-to-invest-8-billion-in-the-uk)."
+    },
+    {
+      "id": "c8d707d0-a813-4dc0-9035-4437a8cf7b9e",
+      "hash": "48e90163e3940b21870b460026ad8a0310424300d260a4c3f1a7b22d2e32491e",
+      "markdown": "The Dojo reference supports historical customer use, not the whole AWS estate. Gaps: current UK offering map, named customer-authored cases, partner responsibilities and UK economics."
+    },
+    {
+      "id": "f725704f-83fa-452f-82d0-11408ab4e8ca",
+      "hash": "46ce9ebc90887fcee7734c2bac2f06447d065a89a6b0656c183dec82367235b5",
+      "markdown": "## Google Cloud"
+    },
+    {
+      "id": "edb33742-2b1e-46d0-a838-a81ffac1fdce",
+      "hash": "275ba0f93d2e91ad464064add6ad6294570679fc0cc3d0dd67eb6186e9c0d5b1",
+      "markdown": "Lloyds provides customer-authored AI infrastructure evidence. A Google Cloud article describes John Lewis’ e-commerce modernisation using Google Kubernetes Engine and a platform-engineering approach. This supports a retail relationship with a specific offering, not a claim that all John Lewis Partnership systems or Waitrose use that architecture. [John Lewis platform engineering](https://cloud.google.com/blog/products/application-development/simplifying-platform-engineering-at-john-lewis-part-one)."
+    },
+    {
+      "id": "9347d6bd-3d07-475b-b8da-baa6441fb901",
+      "hash": "6b238e1086173650f73b198cb7ce6be375a76d92c5f5441079c5698e7eb49777",
+      "markdown": "Gaps: current UK scale and legal identity, comparative service economics, current architecture and delivery responsibility."
+    },
+    {
+      "id": "762991a1-da5c-417d-ac80-9388c8c33d04",
+      "hash": "7ff91958c17315b73ac8274d5c34f86eb8f9fc1134d677a9f4a3e71136fd4fb0",
+      "markdown": "## Oracle"
+    },
+    {
+      "id": "9cbfac95-6e6e-41d1-9d64-dcd7a75f676a",
+      "hash": "d35880a2bd4b70a5b94a23da224de2d8d0f58bd4e6e77c2280eaf51a05f20e6b",
+      "markdown": "Lloyds’ March 2025 announcement supports a multicloud database relationship spanning Database@Azure and Exadata Cloud@Customer. Distinguish database vendor, hosting location and customer-operated environment. The named Azure context does not imply a Microsoft implementation contract. [Lloyds announcement](https://www.oracle.com/news/announcement/lloyds-banking-group-expands-collaboration-with-oracle-to-support-tech-transformation-2025-03-20/)."
+    },
+    {
+      "id": "ed6307be-6d4c-4ea9-a0d1-0c24e0fd589f",
+      "hash": "e9b63451fb91040f482c68cfcbaa36c2b3ebeb7c851426a91e1597aac6cc4e77",
+      "markdown": "NHS SBS confirms Oracle Fusion application use in its own announcement. Keep the customer-supported capability claim separate from the supplier's additional partner-role assertions. See the corroboration section and relationship record below."
+    },
+    {
+      "id": "f0bcf9f6-8e87-49a3-87c7-b00a8ad71909",
+      "hash": "5a5221aec1e1ed8b48e41e15a113165b737881562aa8edf6d23d5d43d3689b48",
+      "markdown": "## Salesforce"
+    },
+    {
+      "id": "e8901b6a-b9d7-4b75-ae58-864eec076821",
+      "hash": "13b47f385224fb4d177b46e18ae2646900c83e6ff73a2a490f2e51c1275f9da4",
+      "markdown": "Heathrow’s supplier case study describes Customer 360 for passenger communications and commercial experiences, dated August 2023. It does not establish use of every Salesforce product, a current Agentforce deployment, or airport operational-control systems. [Heathrow story](https://www.salesforce.com/news/stories/heathrow-airport-customer/)."
+    },
+    {
+      "id": "8a507851-9795-4ad2-a88f-6a9cac26254c",
+      "hash": "215498ee8dc863723c00cea3249e7a10de9487faa84de60325ae2c938935d20e",
+      "markdown": "Subscription/support is central to the global financial model, but UK deployment and group-scale measures need separate reconciliation. [Issuer financial results](https://investor.salesforce.com/financials/quarterly-results/default.aspx). Gaps: UK operating profile, product-level relationships and current customer corroboration."
+    },
+    {
+      "id": "81fe9285-4b2f-40f7-b3a5-18554b6cc60c",
+      "hash": "27b7aded01993f10ae6e59c11ca31a31385f829d9ed34682337c169aaf35756a",
+      "markdown": "## ServiceNow"
+    },
+    {
+      "id": "c9adcfad-0f29-4d17-82a5-ce27ceb6488a",
+      "hash": "4fd99c95d70babb6e5d1d3afed0e1b8b0db8e23233a50b7dcaeaaccd637e4280",
+      "markdown": "Its own description spans IT service/operations management and employee/customer workflows. BT’s 2024 announcement supplies stronger customer-authored evidence for service management, Service Bridge and a Now Assist pilot. Product breadth is distinct from BT’s evidenced scope. [Offering overview](https://www.servicenow.com/uk/blogs/2023/what-does-servicenow-do), [BT announcement](https://newsroom.bt.com/bt-group-expands-strategic-relationship-with-servicenow-to-improve-customer-and-employee-experiences/)."
+    },
+    {
+      "id": "b87eb95c-06e4-4cf5-8f9c-6b1f3c8e3324",
+      "hash": "1db6e2b528d977922647a19c110df9a059748fd668a76f0d476c9711081eebc8",
+      "markdown": "Gaps: UK financial/operating model, current BT rollout milestones, partner attribution and wider customer population."
+    },
+    {
+      "id": "2bf746a9-3601-4092-9b0a-f46e283f5b6c",
+      "hash": "ad44424435569aed87526e64efb54d60049755d07590f4fc94555a5794802aaa",
+      "markdown": "## Sage"
+    },
+    {
+      "id": "3714edc7-224f-4060-841b-c6421e2bf65d",
+      "hash": "ae74314063c65f39440fd0ba6ff0c0232ee89bdefc1e24f193a6151de58828c7",
+      "markdown": "Sage supplies accounting, payroll, HR and financial-management software through an ecosystem of accountants, resellers and ISVs. Its published strategy emphasises cloud expansion, Sage Intacct and AI-assisted workflows. The global FY25 financial table reports statutory revenue of £2,513m; its separate KPIs report 97% recurring-revenue penetration and 83% subscription penetration. UK & Ireland, UKIA and group measures must remain distinct. These FY25 figures are not a UK-only or FY26 revenue estimate. [Financial performance, investment case and FY25 columns](https://www.sage.com/investors/financial-information/financial-performance/)."
+    },
+    {
+      "id": "e9a6fa88-d683-4dd9-87cd-32783ef343ec",
+      "hash": "1fee62cde42b2ad4bfe55b35904a99c864f9856a54e2b8976b10fe78e027c4e0",
+      "markdown": "Gaps: comparable UK economics, specific customer/product case extraction and current operating structure."
+    },
+    {
+      "id": "248742f0-ee67-4be2-af0d-9e0a630c53ab",
+      "hash": "22705f9321aa237ab4e501d3aa182f00d2fc1448728d24a42b9c9534d75c2f9d",
+      "markdown": "## IBM"
+    },
+    {
+      "id": "71397392-675f-4b75-aeb2-73f6b01e3e39",
+      "hash": "849cf9723f4829ae5f3097a00e21f07caacfb15b380439fe92c947830719a584",
+      "markdown": "IBM describes Software, Consulting, Infrastructure and Financing, tied to hybrid cloud and AI. Its software description includes Red Hat, watsonx, Apptio and HashiCorp capabilities; Consulting designs, implements and operates technology/business processes using IBM and ecosystem technologies. Ownership, implementation and hosting must be separate relationships. [Business segments](https://www.ibm.com/responsibility/governance/business-segments-innovation)."
+    },
+    {
+      "id": "fa3b6b63-a012-494c-86e4-b7f1016a918a",
+      "hash": "7c9e85222309cef791969073fcc57149a88c9d5043f8de871221ba8d094a6296",
+      "markdown": "UK relevance has official strategic-supplier evidence. Gaps: customer-authored UK case studies, entity/scale reconciliation and actual product-level partner delivery. An industry-awards case mentioning Lloyds was discovered but is outside the initial official-source acceptance boundary until followed to an enterprise source."
+    },
+    {
+      "id": "231a3a73-1d9f-4b6e-9c63-93ebd8abc16e",
+      "hash": "a6b6e50189f993241ec6514df077664a51aea299bfb46e6b638be62589b1b898",
+      "markdown": "## Capgemini"
+    },
+    {
+      "id": "f1daff1c-bd7a-4104-b1bf-a46f24838744",
+      "hash": "460d97e2985cdf30a53e608145958ba71a105402b41f9aab8355a0f4c756a3c8",
+      "markdown": "Its UK corporate description groups services into strategy/transformation, applications/technology, engineering and operations. This is broader than application implementation alone. [What Capgemini does](https://www.capgemini.com/gb-en/about-us/who-we-are/what-we-do/)."
+    },
+    {
+      "id": "bc4921fa-ada6-48ea-80d6-c96040a1ccef",
+      "hash": "d8701e389d98f6fc56db6b89e99794d0d64bc1fdc8a9bdc524fd7fe0dfcb69b3",
+      "markdown": "The Bentley June 2026 announcement provides a named UK manufacturing transformation relationship, with digital infrastructure, systems integration and data/AI scope. It is supplier-reported delivery intent, not proof of completed benefits. Gaps: UK financial model, customer-authored corroboration and named platform responsibilities."
+    },
+    {
+      "id": "ddb3dedf-7b96-45df-981e-c716341a7b9c",
+      "hash": "744787518a9668e444734f0076fae5b458fbc1a6d51964864ddfbdcd162710b9",
+      "markdown": "## Sopra Steria"
+    },
+    {
+      "id": "f2dc0440-33da-445c-88fe-3fd8f2c7cb96",
+      "hash": "82f97c328c49526091a6b6ce2b00dc0d34675a13b88000f7d01ac46a4b96a926",
+      "markdown": "The group key-figures page reports €5.6bn global 2025 revenue but also contains a revenue breakdown explicitly dated 2022. Do not apply the old UK percentage or service mix to 2025 revenue. [Group figures](https://www.soprasteria.com/investors/sopra-steria-overview_/key-figures)."
+    },
+    {
+      "id": "3eaf5241-a244-4005-8d70-9136ce392b65",
+      "hash": "5adf6a6cb9aa9c22779da77de17bc5f56ad09ad7c69f61825bb4668635795418",
+      "markdown": "The UK partner page declares relationships with Microsoft, AWS, IBM, Oracle, Google and Salesforce. Those are alliance statements; they do not establish named customer deployments. [UK technology partners](https://www.soprasteria.co.uk/about-us/technology-partners)."
+    },
+    {
+      "id": "a0c0e925-3cd5-4b26-99c4-24b357b91648",
+      "hash": "8347081f8129fa1dcd7fb9bef14f0ea43dbd396edb7971b837d2f27321bf1975",
+      "markdown": "Gaps: current UK operating and financial scope; customer/partner role verification; shared-service joint-venture identity relationships."
+    },
+    {
+      "id": "ce9d70d6-e81b-4c1d-a72e-bacaac33cd0d",
+      "hash": "22bc062b3c25b741eeeeaa5f027e21ab3b4b2e0bb2d0243287cae4e40e84d60a",
+      "markdown": "## Accenture and DXC"
+    },
+    {
+      "id": "b9e9ef6c-d087-44cc-aad6-ee7f26d157cd",
+      "hash": "b95c443065cfbf39220641b2f55bc2fe56cbb4f92c6debed6426f90bfb73e972",
+      "markdown": "Official strategic-supplier records support UK public-sector relevance. Accenture has a customer-authored Bank of England delivery appointment and subsequent RT2 go-live evidence, recorded above. Neither provider’s full operating model or current UK economics is complete here. [Strategic suppliers](https://www.gov.uk/government/publications/strategic-suppliers/crown-representatives-and-strategic-suppliers), [Accenture issuer reporting](https://www.accenture.com/en/about/company/integrated-reporting)."
+    },
+    {
+      "id": "2c5c228e-cf48-49a7-81d5-296443fb0c7f",
+      "hash": "33f0bff0012c065e57f42ec5f8d20c6dd8b33af2b70e817c347bf0da3a1b419a",
+      "markdown": "Gaps: comparable services/managed-services descriptions, segment and territory scope, current entity identities, partners and broader named customers."
+    },
+    {
+      "id": "6d10c16a-0c62-4c53-b13a-80ac6b1800f2",
+      "hash": "121086d6ae2597e9b8c45172945438b6c07141e7a816c7d5e20e251e72a515a7",
+      "markdown": "## Darktrace"
+    },
+    {
+      "id": "2263c018-31f4-4538-9012-f8ff1b4ce92d",
+      "hash": "ac101f605f768675380e5248c03dce2e5981c2b12f910fd06aea4dcff6535482",
+      "markdown": "Thoma Bravo confirms completion of its Darktrace acquisition in 2024. Ownership history and delisting must be reflected rather than treating historical public-company reporting as current. [Acquisition completion](https://www.thomabravo.com/press-releases/thoma-bravo-completes-acquisition-of-darktrace)."
+    },
+    {
+      "id": "24fa2b06-fe36-4451-bb91-8f83dc5cb63d",
+      "hash": "c78e34ab8c01cf567a2aabfa8cfb18d8d9c3ffe8788b42cd044fc976fa686dfd",
+      "markdown": "Its customer portal includes both named and anonymous stories. Anonymous organisations remain anonymous; relationship breadth requires actual case extraction. [Customer portal](https://www.darktrace.com/customers). Gaps: current UK economics, named UK customer confirmation, product lifecycle and delivery roles."
+    },
+    {
+      "id": "0fc73d50-0e66-4732-a354-b6b7765e6c30",
+      "hash": "fe2e376f30b869ba8059ac7c9590817162c308f05cb7a6f54c8cb136b1abdda7",
+      "markdown": "## Telehouse"
+    },
+    {
+      "id": "5567d425-b697-4f2d-94a4-d45a20a51dfe",
+      "hash": "ce20cb63bf62a7746987f2b43f78dd05b55b72c0a2a789d26b7ed0b891041d71",
+      "markdown": "Telehouse’s UK page supports London colocation, interconnection and managed-service capabilities, with a LINX relationship. Its footer identifies Telehouse International Corporation of Europe Ltd, registered in England number 2138407. The undated page's facility count and “recent launch” wording are not treated as a freshly dated 2026 capacity inventory. Hosting infrastructure does not imply ownership of customer applications. [UK operations, company description and footer](https://www.telehouse.net/data-centre-services/uk/)."
+    },
+    {
+      "id": "0952371c-1e7a-45f7-976b-5a4a079a4c33",
+      "hash": "e2ff94b8ff67cf95984cbfe92e3778b2852af501c9be88c1cc385fc3c046a90f",
+      "markdown": "Gaps: parent/subsidiary reconciliation, comparable UK economics, dated site/capacity inventory and accepted named customer cases. The site's declared local company identity is recorded above; canonical binding is still separate."
+    },
+    {
+      "id": "dc51584f-d947-4433-bfb9-edcdcd1fc59f",
+      "hash": "de8ffe2cddb033c232fc25776d7a368c9266e0edce38f2792329807f08e31d0a",
+      "markdown": "# Industry value chain and capability model"
+    },
+    {
+      "id": "d40ecc59-4fe6-40fd-82fb-b09853d12555",
+      "hash": "c7206a797be9ee88fe745ca5db5e01bcf38f4bf791b25aaa73197762dddf3a2f",
+      "markdown": "This is a hypothetical reference model assembled for explanation, not any named enterprise’s internal architecture."
+    },
+    {
+      "id": "67b9a5b0-841c-4068-8ac1-a34a0b798602",
+      "hash": "de4717b2659e27635d0fe59cfa70604f465fc793cbf8d3aa3ac267cfa52aabfe",
+      "markdown": "1. Research, design and intellectual property: architectures, algorithms, product engineering and standards."
+    },
+    {
+      "id": "dca42ac2-0dc7-4e12-8279-66fb85d1b197",
+      "hash": "15e29cc26904cd07fdec480469acbc907d287a7af5274620673d41fb12d91bad",
+      "markdown": "2. Technology production: hardware, software and platforms, with third-party dependencies."
+    },
+    {
+      "id": "947c6a18-9f56-443e-8352-51bf3b415845",
+      "hash": "f701390823f4c9060747ff6f004f29a8724b7975b3ec0c6497e88ba8cd933830",
+      "markdown": "3. Infrastructure provision: facilities, energy, networks and cloud capacity."
+    },
+    {
+      "id": "56730447-c03e-456d-875c-feb582684f33",
+      "hash": "99238af39ef9622807a14be56f559a3ef2b873ee57755ab5dfae4452b228f0fa",
+      "markdown": "4. Commercial access: direct sales, marketplaces, distribution and resale."
+    },
+    {
+      "id": "82aa2785-070c-4bc4-8fe9-14eb489befa9",
+      "hash": "6e0e387bc6b9e2e5c23c81e5b51d5c071c4681a83f32e131ee6161d7f55cce63",
+      "markdown": "5. Solution delivery: design, implementation, integration, migration and organisational adoption."
+    },
+    {
+      "id": "b183f7d3-9cf6-4876-beeb-5e4ff97fd721",
+      "hash": "a1ce92d07eac147e23e60f526d3845f3f3dd68bff079d04b76b30ab0a5232c02",
+      "markdown": "6. Ongoing operation: managed services, support, security, observability and lifecycle management."
+    },
+    {
+      "id": "0645c9f0-1fca-4028-9d1d-03bf517b8de5",
+      "hash": "93aa81ef37d350b26139ceb10205e5f49a98d10c71187fab6d3d6d594bd297c6",
+      "markdown": "7. Renewal and improvement: optimisation, product updates, retirement and replacement."
+    },
+    {
+      "id": "7bccee13-5b27-4ad5-a578-14b5d3942a47",
+      "hash": "d3bf1263965901d8024e4e0279e8ff0065cb9cbd49bcc89e57889be1b31f8c5b",
+      "markdown": "Capabilities cut across these stages: workforce and skills; finance/commercial management; procurement and vendor management; data governance; cybersecurity; service management; customer success; regulatory assurance; sustainability and resilience."
+    },
+    {
+      "id": "040cdd16-4d70-4541-be9b-9e9e30642d3f",
+      "hash": "212e3d91c7db33dbd61a6677860922f2c523a3771ed7bfd3198e52d6f3eb84f2",
+      "markdown": "A provider may participate at several stages. Revenue, delivery accountability and intellectual-property ownership should therefore be separate graph dimensions."
+    },
+    {
+      "id": "7430680e-5091-4b36-9e4d-407ba2f7f5ca",
+      "hash": "ec04bdf0d846a256779ede7a77418a6217d88a741b8de8138a7c4727895797a4",
+      "markdown": "# PESTLE and competitive analysis"
+    },
+    {
+      "id": "51445a2a-554c-47e6-9008-ad7fcdebff06",
+      "hash": "291f0eefdeb2902016fe853c97d26cf0d99063d2122c598e4c6a47600d68c4c9",
+      "markdown": "The following is analytical interpretation grounded in the source landscape, not additional factual market-size estimates."
+    },
+    {
+      "id": "e042aba4-b7c0-4a23-8b4a-c9a83fd23a8b",
+      "hash": "58d9d4cd32c2f8be2783d3a59b6384f6e2cfe3637bc8b24af611e10c0a4cbcbf",
+      "markdown": "| Lens | Research implication | Evidence anchor |\n| --- | --- | --- |\n| Political | Sovereign capability, public procurement and industrial strategy influence priorities | Government sector plan and AI Growth Zones |\n| Economic | Capital-intensive infrastructure differs from labour-intensive services and scalable software | Provider filings and D&T statistics |\n| Social | Skills and workforce adoption affect execution and value | Government Jobs Plan and customer AI-adoption disclosures |\n| Technological | AI, hybrid/multicloud, data integration and platform engineering create interdependencies | Lloyds, John Lewis, Arm, Equinix and provider disclosures |\n| Legal | Competition, data rights and cyber proposals require precise applicability and stage tracking | CMA and parliamentary sources |\n| Environmental | Energy, water and infrastructure location affect growth decisions | Data Centre Covenant and Growth Zones |"
+    },
+    {
+      "id": "982de63a-f70a-4c8f-af3e-661ae636c25b",
+      "hash": "b571abf72cb7c4a230f85a168f0aa607731f73ff3cba69fcb5bda744806c10c3",
+      "markdown": "| Competitive force | Evidence-led interpretation | Practical limit |\n| --- | --- | --- |\n| Rivalry | Cloud infrastructure is concentrated in the CMA's 2025 findings; delivery firms and application vendors compete within different capability markets | No single rivalry score or combined share across technology segments |\n| Supplier power | Cloud capital requirements, platform dependencies and partner distribution can constrain alternatives | Strength depends on the workload and contract; historical findings are not current enterprise terms |\n| Buyer power | Large customers can coordinate multiple suppliers, as the Aviva and NHS SBS examples illustrate | Multiple suppliers do not by themselves prove buyer bargaining power |\n| New entrants | Infrastructure requires capital/scale, while specialist delivery and applied AI can enter at narrower capability layers | No unsupported start-up success probability or current funding estimate |\n| Substitution | Internal delivery, alternative platforms and AI automation can change the make/buy decision | Substitution remains a hypothesis until measured in a particular business process |"
+    },
+    {
+      "id": "9524a64b-8ad2-47f7-99f3-6fa9894b14da",
+      "hash": "439cafcac4278d580cc3323fd05d0e594424d2dccda889db5da9704f1170e10e",
+      "markdown": "The Five Forces assessment is qualitative. CMA evidence supports the cloud layer; provider disclosures and named cases support role/dependency observations elsewhere. No numerical cross-segment competition score is asserted."
+    },
+    {
+      "id": "53483f0c-147d-47ce-a889-4552ddb3d88f",
+      "hash": "d653a687f7d364bd6193504268f3eb9ab7436d6225677988b5659fe4965f0e99",
+      "markdown": "# Opportunity landscape for validation"
+    },
+    {
+      "id": "2e4eda6f-c9f4-43b7-b243-eb0c20ace1b1",
+      "hash": "59a3b9deacb70662175981c347fdb0626355b4ca73fa95134f0065dd42a8a602",
+      "markdown": "| Priority theme | Why investigate | Candidate capabilities / providers | Required qualification evidence |\n| --- | --- | --- | --- |\n| AI value and operating controls | Disclosed adoption spans technology, people and governance | Microsoft, Google Cloud, IBM; consulting and specialist partners | Customer pain, measured value gap, owner and change mandate |\n| Data and application modernisation | Published cloud and ERP programmes cross system boundaries | SAP, Oracle, Microsoft and integrators | Current scope, remaining work and procurement route |\n| Cyber resilience and managed operations | Cyber risks and proposed supply-chain regulation affect service ecosystems | NCC, Sophos, Darktrace and delivery partners | Applicable duties, exposure, service gap and customer intent |\n| Infrastructure and cloud connectivity | AI and hybrid workloads depend on capacity and integration | Equinix, Telehouse, BT, AWS and cloud platforms | Workload, capacity, timing, responsibility and funding |\n| Platform engineering | John Lewis illustrates product-team/platform changes | Google Cloud and engineering partners | Customer bottlenecks, developer outcomes and investment decision |\n| Provider internal transformation | Technology suppliers disclose their own change initiatives | Computacenter and other providers as buyers | Actual requirement, external sourcing intent and buying authority |"
+    },
+    {
+      "id": "e45a340c-2ee5-46da-9fa0-6d28a375612f",
+      "hash": "2c238d0e4ef81b438384e09685128866813b1f06087fc63c3abd1138a2d61c53",
+      "markdown": "These themes are unqualified research hypotheses, not Pipeline opportunities. Their order is a research priority, not a market-attractiveness score."
+    },
+    {
+      "id": "68147ea5-13cf-453c-9e7e-e4c2bae92dd6",
+      "hash": "9015a3c3f040c72ca941b7f27e1f2a4be62a2c7ac7f844163bba2c012d091163",
+      "markdown": "# Additional relationship candidates and quality checks"
+    },
+    {
+      "id": "46736038-bd2f-43d1-81ad-c342f3561eff",
+      "hash": "16eccffef3f0a3ccb3f6819c8a41a0a55c351cc9e1a38afdf094ec5642985c5d",
+      "markdown": "- John Lewis → Google Cloud / Google Kubernetes Engine: supplier-hosted technical story; do not automatically generalise to Waitrose."
+    },
+    {
+      "id": "c79c45aa-d097-4178-945b-aa48b9b984d6",
+      "hash": "d2480d1ec2b60f4b7cd21c4c605ba7bf9b62f64a13f33c2004129963a65f933d",
+      "markdown": "- Softcat → Apple, Samsung, Rubrik and Fortinet: supplier-declared partner roles; customer deployments need separate evidence."
+    },
+    {
+      "id": "397d812d-79cb-457f-8897-cf0512a3a86d",
+      "hash": "f852767995ae6f874edb07b20e7bdc0d701df9bf03e32b8322fb1997156bf384",
+      "markdown": "- BT → Ministry of Justice, Cabinet Office, Scottish Water and Royal Mail: November 2026 supplier-reported contracts; product and contractual scope unresolved."
+    },
+    {
+      "id": "a0db7323-d8aa-4de8-94f8-a0dc1eda2832",
+      "hash": "72bb92aac204bb4bf31258f9569ec3596814d503f121dfe7348f3487edf89d37",
+      "markdown": "- Arm → Arm-designed silicon: 2026 strategic expansion disclosure; expected production is not an observed go-live."
+    },
+    {
+      "id": "efe62e1b-c45a-4b55-92d1-c94a9f4ead2b",
+      "hash": "81c180a8ce53a598af1244f05b9b203ae0f5d7328388c0e48258c712df12dcc7",
+      "markdown": "- NCC → Escode: historical ownership superseded by completed disposal."
+    },
+    {
+      "id": "fa3e27c2-c939-4383-9d0e-71ed595a90dd",
+      "hash": "dc2afe90022b577b5bba7f9371e3420c6abf5bc0f2aa3bb31e5888d44d1fbd25",
+      "markdown": "- Oracle → NHS SBS partner names: source candidate for Sopra Steria, Mastek and Project Eidos roles; resolve incidental source error and corroborate before canonical import."
+    },
+    {
+      "id": "019bf90f-038e-493f-9d90-234aeb2a98b2",
+      "hash": "a682e88af795e7ceaa07f54bb458c9fed212b363171d1103444a702b03399ed1",
+      "markdown": "# Completed follow-up checks"
+    },
+    {
+      "id": "abb62635-5246-480b-bf0d-a14247cc39ec",
+      "hash": "97c23d3ef1eb23bf225b50320356ca6040f6ee6978339a78aad2eaa6262d332b",
+      "markdown": "## SCC"
+    },
+    {
+      "id": "aef4b393-9d9e-4964-8bf9-b09221242d76",
+      "hash": "0598ec2436752c1c5c11384028deaa8d666edf0d24f1b7f2d0fb3bebf14fcd95",
+      "markdown": "SCC’s corporate page describes a family-owned technology business within Rigby Group, connecting customers, vendors and solutions. Its service site includes managed IT, engineering and staff augmentation. Preserve SCC and Rigby Group as separate entities linked through an evidenced ownership relationship. The group’s financial scale must not become SCC UK revenue. [Corporate structure](https://www.scc.com/about-scc/), [offerings](https://www.scc.com/)."
+    },
+    {
+      "id": "31bb9eda-bf25-4e2a-af5d-5a8521da5917",
+      "hash": "ffef8f72229d655bd3379a5528d685a663b792d8a067a8369f9ff296baf01642",
+      "markdown": "Provider claims about sovereignty and competitors on the same page are marketing/legal assertions, not accepted legal conclusions. Specific jurisdictions, contracts and technical controls require separate evidence. Named customer contracts and comparable UK financials remain unverified."
+    },
+    {
+      "id": "3670b389-564f-409b-b5a8-ec3e5c30c2d2",
+      "hash": "6053dc4eb47cff47a620d6d9325400d197e4117d2d0ecf07afbd761fb46b247d",
+      "markdown": "## Faculty"
+    },
+    {
+      "id": "a39cd005-a5ec-4a91-9489-fcd86896ea7b",
+      "hash": "0859e984866da9bb7da2acbbbac4fe9998a829f2e271efb4b27f4d173f6dca58",
+      "markdown": "Faculty describes applied AI work in health and care, including forecasting, operational capacity and responsible deployment. Its health page identifies NHS forecasting work and links named Cera and Hywel Dda University Health Board stories. These are provider-reported relationships, not independently validated clinical outcomes. [Health and care](https://faculty.ai/en-gb/industries/health-and-care)."
+    },
+    {
+      "id": "6ed208b3-2bd3-432b-9a63-85b4ce2f6b44",
+      "hash": "06cc80bfccaf38a19fa61fcc5e0aa6bb5596de094e424288001ab163b0862b99",
+      "markdown": "Do not promote the page’s life-saving or hospitalisation-reduction claims without a defined evaluation, population and counterfactual. Individual NHS entities and historic NHS England/NHS Improvement naming must be resolved by event date."
+    },
+    {
+      "id": "18cf4d3b-e6b7-43aa-9094-3f560efac7e0",
+      "hash": "6f0d47d4ca19b847aeeedbfb48b5a81551e0ac92af34bf5b8a1545543bbe6490",
+      "markdown": "## Riverlane"
+    },
+    {
+      "id": "5ba64a56-3c6c-43b3-96a9-7e2202838e10",
+      "hash": "9bea2108dbc845a84e1336d9d5085bdc804a1d1b8a5dfcbe1af077d70a2f5442",
+      "markdown": "Riverlane describes a quantum error-correction stack. Its July 2026 collaboration with Quantinuum, Rolls-Royce and EPCC gives specific ecosystem roles: Riverlane contributes error correction and algorithms; Quantinuum systems/software access; Rolls-Royce industrial use cases; EPCC supercomputing and hybrid integration. This is research collaboration, not proof of production quantum advantage or a customer purchase. [Riverlane](https://www.riverlane.com/about-us), [joint announcement](https://ir.quantinuum.com/news-releases/news-release-details/quantinuum-rolls-royce-riverlane-and-university-edinburgh-sign)."
+    },
+    {
+      "id": "11fc9dc7-628c-4c39-90d4-17858c4f1716",
+      "hash": "ab5db6aa76f1f824ed20bb277878f8df6d1bfd2eb9dbee20a44dc164d83c91bb",
+      "markdown": "## Quantinuum"
+    },
+    {
+      "id": "69e08f67-8957-45f2-84b6-87f3835c0fc6",
+      "hash": "7ab0e72b46f6d30be0e41c783405bc196eaba09733d327f6464be9721d90f1ae",
+      "markdown": "The same dated announcement identifies quantum systems and software access as Quantinuum’s role in exploring industrial design and simulation. Preserve the July 14, 2026 event and participant roles. Future systems and fault-tolerant applications remain planned research. [Collaboration](https://ir.quantinuum.com/news-releases/news-release-details/quantinuum-rolls-royce-riverlane-and-university-edinburgh-sign)."
+    },
+    {
+      "id": "55a3064c-acf0-4784-b61c-edd4a42f584c",
+      "hash": "a74c7db1f1767feb78903bec45139c15c7ae9df9c4752ac69067f4d778e5d552",
+      "markdown": "This supports a frontier-technology baseline but not a complete UK legal, commercial or financial profile."
+    },
+    {
+      "id": "4b20bc62-4e01-4c4e-9b8e-8002033a7d04",
+      "hash": "068e0815c40b53cc423404d682ba75a9adc2147cd0fe65c827904defda4207a1",
+      "markdown": "## Nu Quantum"
+    },
+    {
+      "id": "ae778ff6-c7e5-4c5b-af2a-c795f6c9c46e",
+      "hash": "be8c370bb07522b40b693a7dc472d31c0d501a7958bf460b2a4ce8b04e0a94e2",
+      "markdown": "Nu Quantum describes quantum networking technologies, including qubit-photon interfaces and networking units. Its company page identifies a Cambridge University spin-out origin in 2018 and Cambridge laboratories. This is a different ecosystem role from building an entire quantum processor or supplying error correction. [Company](https://www.nu-quantum.com/about-us), [technology](https://www.nu-quantum.com/technology)."
+    },
+    {
+      "id": "68579eab-def9-4e0c-b3e7-63025c29595f",
+      "hash": "0e6446de67dbe9174dc86e3cbc4de1fc7cef47efd8ea7f40098de889c63d6c07",
+      "markdown": "Commercial customer adoption, recurring revenue model and measured production value remain unestablished; do not fill those gaps with projected market demand."
+    },
+    {
+      "id": "92dc2a63-49d0-4827-99e4-6092a12c435e",
+      "hash": "d1b49f28a1243ef15bceb223016ce08de9991aa8875653b3a3f5538f0fe4bcc8",
+      "markdown": "## DXC"
+    },
+    {
+      "id": "5b79f850-4e6e-407e-8af4-7e7984846f65",
+      "hash": "ea4a702ab8484a29d0149d52efd89e2843fad4c14069c974bffc90bb80453009",
+      "markdown": "DXC’s February 2026 London Customer Experience Center announcement supports a specific UK operating presence for AI/customer co-creation work. Its customer index references Post Office modernisation; the index is discovery evidence only until the underlying story and customer source are checked. [London announcement](https://investors.dxc.com/investor-news/news-details/2026/DXC-Launches-London-Customer-Experience-Center-to-Help-Unlock-AI-Value/default.aspx), [customer index](https://dxc.com/insights/customer-stories)."
+    },
+    {
+      "id": "021f3dee-4bdf-4ea2-bdaf-fa4a1d46b80e",
+      "hash": "2735bf7a6234b7050a4cf7841f6f2cae88d5f5eee6accea9cef5fb5456bb5530",
+      "markdown": "# Customer corroboration update"
+    },
+    {
+      "id": "569b4378-278e-441a-8cf1-cb4d537f61af",
+      "hash": "a310289cdc1d40402f9cc75281fb84c7cb3dfd723763bc1b5b0152b218097119",
+      "markdown": "NHS Shared Business Services itself confirms use of Oracle Fusion Cloud Applications, including finance ERP/EPM and OCI-related infrastructure, and describes its public/private joint venture with Sopra Steria. This closes the earlier absence of a customer-authored source for the core Oracle relationship. It does not independently corroborate every partner role, metric or legal claim on Oracle’s separate page. [Customer announcement](https://www.sbs.nhs.uk/news/nhs-shared-business-services-instils-financial-excellence-across-the-nhs-with-oracle-fusion-cloud-applications/)."
+    },
+    {
+      "id": "0efce58e-d2bc-4046-aa23-5eaaee926c20",
+      "hash": "b93b7c106a37cfcb37b2810a60a45153def3b3b9631ac867d95ea6c37affd56a",
+      "markdown": "Record the customer’s reported benefits as attributed claims, not audited causal outcomes. Do not assume every NHS trust uses every Oracle module. The general product list at the bottom of the release is not proof of NHS SBS adoption of all listed modules."
+    },
+    {
+      "id": "f6702b7c-7f41-41c4-a646-dd841871ef4b",
+      "hash": "dbf842149f42f9fb6013b3d0443037a6d24911a7405c504de06c318b6eb8c527",
+      "markdown": "| Event | Participants and roles | Evidence status |\n| --- | --- | --- |\n| NHS finance platform | NHS SBS customer; Oracle application/infrastructure provider | Customer-authored adoption evidence; publication date still requires verification |\n| Quantum industrial-design exploration, 14 July 2026 | Quantinuum systems/software; Rolls-Royce domain use cases; Riverlane error correction; EPCC hybrid/HPC expertise | Participant-authored collaboration announcement; not a contract-award or production-benefit claim |\n| Faculty healthcare work | NHS forecasting; named Cera and Hywel Dda story links | Provider disclosure and candidate stories; outcomes require deeper validation |"
+    },
+    {
+      "id": "6ea19330-563c-414d-8153-de4323b3739e",
+      "hash": "84cdeb355f22c4fecfdeacfe00df061b046c03a30d05606ac595ee70a096ddf5",
+      "markdown": "# Actual FLORA import requirements"
+    },
+    {
+      "id": "36661c72-2145-4754-af90-8b24ca85cff2",
+      "hash": "be4f3fc37deb8f27a9142e2210bdc41ee80db8fba815436c339623513ca44c9d",
+      "markdown": "Repository inspection at main snapshot `c3b818cbae7a2f88930d26bcd65b2dab7263e19f` confirms that research overlays reuse SourceSegment, CandidateClaim and EvidencePackageItem. These Pages must not invent accepted Evidence IDs, Twin IDs or canonical enterprise identities."
+    },
+    {
+      "id": "093dc6b2-5e22-4226-a3ad-c62c8bb60cfd",
+      "hash": "6ed2ff6b81895ada26223580f2ea1165f7cf2eac4c5ffed6267723256ddfbfd5",
+      "markdown": "[Existing model](https://github.com/rdidale-jpg/CIOS/blob/c3b818cbae7a2f88930d26bcd65b2dab7263e19f/cios/applications/flora/research_intelligence/model.py) and [existing import/cycle documentation](https://github.com/rdidale-jpg/CIOS/blob/c3b818cbae7a2f88930d26bcd65b2dab7263e19f/docs/flora-runtime/research-intelligence-v2/README.md) establish:"
+    },
+    {
+      "id": "a28be86f-6089-442c-b115-e9cf05ee364b",
+      "hash": "30814cf89f72eec05d690d93c3e3c323e935036168036fe599028e2f734608cb",
+      "markdown": "- Exact quotations and locators are required for passage-supported candidate claims."
+    },
+    {
+      "id": "1f8d3802-74a3-4b9f-8c19-6c27270640ab",
+      "hash": "55cab948792d3c3e067bc1cee53b56938de791b048d2b5a77ed1b3e7267bd7c1",
+      "markdown": "- Reviewed web excerpts are distinct from complete original documents; unavailable original bytes must have a null original-byte hash."
+    },
+    {
+      "id": "a9d53874-5e0f-46c7-9ee7-4d56566a89f4",
+      "hash": "39ef6ebdf0e57a4c72d26b16e335b260b527c3b4e322f1375dd525c4e6ad7029",
+      "markdown": "- Source metadata includes publisher, official/retrieval URL, dates or explicit Unknown, provenance and reviewed passages."
+    },
+    {
+      "id": "c641abe1-fcbe-4034-a211-6df975286a7d",
+      "hash": "65a6541682f314be1baaf8a805e1825cc42389b97250c47a974bf27da224036d",
+      "markdown": "- Source/claim scope must match the registered domain and existing identity boundaries."
+    },
+    {
+      "id": "3999a347-f732-49db-9822-37e490572bcc",
+      "hash": "f672dbb14dcc49316054758319893ca85d69af8ae5f1300d9ea5b788acd340fe",
+      "markdown": "- Existing observations require accepted Evidence identities; importing a quote does not establish semantic acceptance."
+    },
+    {
+      "id": "861e3c81-a85c-406f-b1c9-d80add20fa92",
+      "hash": "43cfacb4fc2bfa631c061435352017b802364cc268aa1d441dc7008da9cd6f16",
+      "markdown": "- New domains and enterprises must be reconciled through existing registry/identity owners rather than name-based joins."
+    },
+    {
+      "id": "4d66a5e4-b816-4a56-980b-adeec47159a2",
+      "hash": "26a327b4f599ef8b9960f0834743735fde3245735369cd28b7621f24ff0a7373",
+      "markdown": "- Candidate research does not qualify Pipeline opportunities or automatically close Unknowns."
+    },
+    {
+      "id": "791ed949-7bcd-4bb6-af17-46e6386ade24",
+      "hash": "d10ecab947a1257de77af59cb3dfc8ee33030635ec47825799ac05202db26aeb",
+      "markdown": "Consequently, the prose pack is not yet a validated import. Preparing that import requires exact-passage acquisition, source-policy review and schema/registry reconciliation. This is a genuine remaining delivery item, not a cosmetic export step."
+    },
+    {
+      "id": "ee3ce132-5db9-4217-a26b-a06ea5a3509a",
+      "hash": "e69875ef68974435e50ff274390ab00501999c8180497ada2659486ad011a3d2",
+      "markdown": "# Foundation completion checklist"
+    },
+    {
+      "id": "b142c198-bee1-4874-bc76-419ef481bc7c",
+      "hash": "8da27c5e1a80823c5b71d3c55ea120b79587a67cf4451b0cb5c53e998ce848b9",
+      "markdown": "| Requirement | Current evidence | Acceptance state |\n| --- | --- | --- |\n| Industry explanation | Seven segments, economic boundaries, qualitative competition, value chain and capability/reference operating models | Assembled; quantitative comparisons retain explicit period/geography limits |\n| Selected population | 80 distinct provider views; inclusion rationale, exclusions and shared-group rules | Versioned selection assembled; not an exhaustive census or market-share ranking |\n| Enterprise baselines | Profiles and comparative role tables for the selected views | Partial: identity/UK scope, operating/financial fields and strategy depth remain uneven |\n| Customers and partners | Named references with roles, source attribution and temporal qualifications | Research register assembled; some dates, products, current-use status and legal boundaries remain unresolved |\n| Opportunities | Six evidence-linked briefs with consequences, interventions, alternative explanations and qualification questions | Complete as unqualified hypotheses; no buying intent or Pipeline qualification asserted |\n| Evidence assurance | 24 bounded passage examples plus narrative source links and explicit correction/withholding rules | Partial: examples do not cover every narrative claim; no independently calibrated full-release accuracy claim |\n| Visual handover | Landscape, operating-model, ecosystem, timeline and opportunity view specifications | Specifications assembled; implemented Flora views and rendered Page layout not inspected |\n| Storage and country replication | Entity/claim/source/view separation, correction lineage and country-specific reuse strategy | Documented design; no storage/schema implementation performed |\n| Governed import | Existing repository contract and publisher allowlist inspected; neutral candidate example | Not validated: complete passages/provenance, source-operation decisions and canonical registry/schema mapping required |\n| Production publication | No canonical research acceptance, production mutation or automatic publication | Not performed |"
+    },
+    {
+      "id": "9e8fd418-d59d-44a1-a5a9-5be4f605893e",
+      "hash": "ce3f34811bad4370fead023519fa9c5a0d114fc57f6513319fb7b621c08b54ee",
+      "markdown": "No 100% completion claim is justified while population, comparable baselines and import validation are open. Missing confidential information is acceptable; unperformed checks are not counted as completed."
+    },
+    {
+      "id": "243144f8-49ef-477a-83df-ebb121ad6605",
+      "hash": "a064fc9332deea768e2db274dd5a4ad26f90096399b6442d34191645955063c5",
+      "markdown": "# Expanded population and comparable operating roles"
+    },
+    {
+      "id": "9a34ee3d-9327-439b-a59f-15c356e3c108",
+      "hash": "efa63613c4d9faf0adeb792b401e0a8ee010d073cb66c829a943a835bdf63a26",
+      "markdown": "The following additions address omissions in infrastructure and delivery. Inclusion is based on evidenced UK operation, a distinct ecosystem role or a named cross-industry relationship. It does not establish a ranking or exhaustiveness."
+    },
+    {
+      "id": "373d8d16-6df6-4e2c-a226-ec8523ba77eb",
+      "hash": "ce61392e15e1b6a20c359c7285ca19f922b949fd7c8ac4163bf37b3ac45c4b62",
+      "markdown": "| Enterprise | UK evidence and operating role | Offerings / capability | Named relationship and limitation |\n| --- | --- | --- | --- |\n| TCS / Diligenta | UK enterprise services plus regulated subsidiary delivery | TCS BaNCS, policy administration, digital services | Aviva; TCS announcement 18 December 2025 identifies Diligenta delivery and platform role; announced expansion rather than all policies already migrated |\n| Infosys | UK public-sector service page and bp engagement | Application development, modernisation, management and maintenance | bp; May 2023 source is an MoU recording intended primary-partner role, not proof of a concluded exclusive contract |\n| Cognizant | UK/Ireland company page and UK offices | Technology modernisation, processes and digital experience | Page describes Zone, Inawisdom, Netcentric and New Signature roles; historic acquisition text needs event-dated handling |\n| NTT DATA | UK offices and UK partner disclosures | IT/business services, data, applications and integration | Declared SAP, Salesforce, Microsoft, Snowflake and Google Cloud relationships; no inferred customer deployment |\n| Equal Experts | UK teams and named HMRC technical story | Product engineering, data and AI adoption | HMRC GAILZ; provider-reported product/onboarding/cost-control support; sovereignty and performance claims require separate assurance |\n| Version 1 | UK/Ireland delivery and partner disclosures | Cloud, applications, managed services, software-asset management | Declared AWS, Microsoft, Oracle, Anthropic, Databricks, Red Hat and Snowflake roles; badges not customer contract proof |\n| Netcompany | UK presence in annual reporting; regulated/public digital services | Design, build and operate digital infrastructure | Named UK customer scope not yet accepted; company-level service role supported |\n| Pulsant | UK regional infrastructure and 14 interconnected centres reported | platformEDGE, colocation, private cloud/IaaS and connectivity | No named deployment accepted from company overview; geographic role distinguishes it from London-only coverage |\n| Digital Realty | Official London-area facility directory | Data-centre and interconnection infrastructure | Provider footprint supported; customer-specific operating responsibilities not inferred |\n| VIRTUS | UK locations and operator disclosures | Colocation, build-to-suit, AI/HPC facilities | Supplier superlatives not accepted as market-share rankings |\n| Cisco | UK presence supported by Ofcom submission; provider customer material | Networking, security, observability and collaboration | easyJet case URL redirected to index; retain as discovery lead rather than full case verification |\n| HPE | Government procurement case naming DWP | GreenLake consumption-based infrastructure | August 2023 source describes modelled potential savings over 60 months, not verified realised savings |\n| Dell | UK official customer site and supplier-authored CCS Media profile | End-user devices and infrastructure sourcing | CCS Media customer reference is provider-reported; wider NHS logo/employee discount pages do not prove an NHS deployment |"
+    },
+    {
+      "id": "22522209-3c87-4b5e-8ff3-d1b5cae5b770",
+      "hash": "4f18900c8254d8f9994aa4f07999e65f522fc36440b5565c2e377ee3aff466a1",
+      "markdown": "Sources: [TCS/Aviva](https://www.tcs.com/who-we-are/newsroom/press-release/tcs-strengthens-partnership-aviva-uk-enhance-life-pensions-customer-experience), [Infosys/bp](https://www.infosys.com/newsroom/press-releases/2023/relationship-transform-digital-application-landscape.html), [Cognizant UK](https://www.cognizant.com/uk/en/about-cognizant), [NTT DATA UK](https://uk.nttdata.com/about-us), [NTT partner roles](https://uk.nttdata.com/about-us/our-partners), [Equal Experts UK](https://www.equalexperts.com/contact-us/uk/), [HMRC story](https://www.equalexperts.com/case-study/how-equal-experts-helped-hmrc-safely-deepen-its-use-of-ai-with-built-in-cost-control/), [Version 1 partners](https://www.version1.com/about-us/partners/), [Netcompany](https://netcompany.com/about-us/), [Netcompany reporting](https://campaign.netcompany.com/investor/annual-report/), [Pulsant](https://www.pulsant.com/about-us), [Digital Realty](https://www.digitalrealty.com/data-centers/emea/london), [VIRTUS](https://virtusdatacentres.com/about-virtus), [Cisco/BT](https://newsroom.cisco.com/c/r/newsroom/en/us/a/y2025/m02/cisco-and-bt-group-a-partnership-fit-for-future-challenges.html), [DWP/GreenLake](https://www.gca.gov.uk/news/dwp-digital-make-savings-on-digital-transformation-with-pay-as-you-use-model), [Dell/CCS Media](https://www.delltechnologies.com/asset/en-gb/solutions/business-solutions/customer-stories-case-studies/ccs-media-written-case-study.pdf)."
+    },
+    {
+      "id": "65869c9d-c7be-434b-92c5-62e6208ab9a8",
+      "hash": "fa2a37fbb7f792714be977a837bc68c8e3bf4124d6b8083e752de19ae1ea9921",
+      "markdown": "## Population boundary and exclusions"
+    },
+    {
+      "id": "ebd29a56-fd10-4932-b1e5-e87ff8f09b12",
+      "hash": "7776230c15c701225233ba1ff7eac901aa774af0898a991a9a2b9100f3b9a83b",
+      "markdown": "The selected version contains 80 provider views, including UK-origin specialists, multinational delivery firms, regional infrastructure, industrial software, foundation-model providers and connectivity. This is an editorial foundation selection, not a quantified market-share ranking. Shared-group and acquired-brand boundaries are retained explicitly."
+    },
+    {
+      "id": "51ebe8f2-5ba4-4b15-89bc-9a5001abe8bf",
+      "hash": "2ec2557ae4cace9219ba38ac4e667a214ebbe34cd5a4cbf159608222101996ee",
+      "markdown": "Adjacent exclusions for this foundation: consumer media/gaming content businesses, online marketplaces, generic electronics retail, engineering biology and the long tail of local service firms. Connectivity infrastructure and enterprise technology are included; consumer products are discussed only where they explain a provider's business boundary. Apple and Samsung remain vendor ecosystem references rather than standalone profiles in this enterprise-technology selection. This leaves a substantial enrichment queue and must not be described as every UK technology enterprise."
+    },
+    {
+      "id": "b3eb1c7d-febe-4e31-9ace-94bb643ac5b0",
+      "hash": "3db44c67d5fe632517904d4e55d84979e0626dd7ac693ef9fedda3c69b9b8d96",
+      "markdown": "Subsequent population enrichment should test sector-specific software, additional regional MSPs, specialist engineering firms, model/application start-ups and further semiconductor/network suppliers. A new material omission should create a dated population revision rather than silently altering the denominator."
+    },
+    {
+      "id": "df23d856-c03e-4ea2-88c2-366f7a7db406",
+      "hash": "95f6eeb035dee2c8aad3e43161a9e4da2ed4d4f61fdc0023fc88a7db5558bee1",
+      "markdown": "# Additional dated relationship records"
+    },
+    {
+      "id": "73baf7c9-a380-4f6e-ba31-9b1f15b765f4",
+      "hash": "b8f5d6ab62dc3863b33ad10c74ed3cdb9fba2b48f5980cf922bebf42b5215fe6",
+      "markdown": "| Customer / participant | Provider | Offering and event | Status |\n| --- | --- | --- | --- |\n| easyJet | Microsoft | Dynamics 365 Contact Centre; supplier article 21 October 2026 | Supplier-reported deployment; independent customer confirmation pending |\n| Aviva | TCS / Diligenta | BaNCS-based life/pensions administration expansion, 18 December 2025 | Announcement distinguishes parent, delivery subsidiary and technology |\n| bp | Infosys | MoU announced 16 May 2023 following signature 10 May | Intent to deepen application services; not a current exclusive contract assertion |\n| HMRC | Equal Experts | GAILZ adoption, product/onboarding and cost-control work | Provider-reported; publication date unresolved; infrastructure/security assertions not adopted as fact |\n| DWP Digital | HPE | GreenLake case published 3 August 2023 | Procurement-body case; potential savings derived from modelling, not realised outcome |\n| CCS Media | Dell | PC-as-a-Service profile | Supplier report; underlying event date/current scope unresolved |"
+    },
+    {
+      "id": "8260b6bb-9540-430a-8e4e-cbf5dc911b8a",
+      "hash": "4c91e737cf81760a2c000583d7ed161b5f5b4144919c0bbfbaa434097e538550",
+      "markdown": "[easyJet](https://ukstories.microsoft.com/features/easyjets-new-ai-powered-customer-service-platform-takes-flight/), [Aviva](https://www.tcs.com/who-we-are/newsroom/press-release/tcs-strengthens-partnership-aviva-uk-enhance-life-pensions-customer-experience), [bp](https://www.infosys.com/newsroom/press-releases/2023/relationship-transform-digital-application-landscape.html), [HMRC](https://www.equalexperts.com/case-study/how-equal-experts-helped-hmrc-safely-deepen-its-use-of-ai-with-built-in-cost-control/), [DWP](https://www.gca.gov.uk/news/dwp-digital-make-savings-on-digital-transformation-with-pay-as-you-use-model)."
+    },
+    {
+      "id": "b98b940c-07b5-44b6-9839-f3253bc3a991",
+      "hash": "77148a3c53977d37f8e87b56512d552d1d02c535da2b34cd550134dedd037689",
+      "markdown": "# Atomic evidence sample"
+    },
+    {
+      "id": "ef4f527f-f076-457c-886a-a4d79c9b8f5f",
+      "hash": "cc7e8d7484b94f6dabeff7a41f0a57f510587ef0a9932584a27d3ae695e21296",
+      "markdown": "These are local research references, not FLORA canonical IDs. Locator lines refer to the retrieved web-text view on 12 November 2026; stable headings and source URLs accompany them. No original-byte hashes are asserted. Quotation text is deliberately short."
+    },
+    {
+      "id": "2f5d05b2-bd95-4c90-8a12-5baccc03573a",
+      "hash": "16006f576ab36e410caa4e8c3dd2cbcf988b97002ffd9449cd4cdb2b1d3591f2",
+      "markdown": "| Reference | Atomic supported claim | Short supporting passage | Locator and temporal limitation |\n| --- | --- | --- | --- |\n| E01 | easyJet is reported using Dynamics 365 Contact Centre | “Microsoft Dynamics 365 Contact Centre” | Microsoft easyJet story, opening paragraph, retrieved lines 12–19; publication 21 October 2026; supplier report |\n| E02 | DWP’s cited savings were modelled potential savings | “potential savings of over £7 million” | GCA DWP story, Benefits section, line 86; publication 3 August 2023 |\n| E03 | Infosys/bp announcement describes an MoU | “Memorandum of Understanding (MoU)” | Infosys bp release, opening paragraph, line 211; publication 16 May 2023 |\n| E04 | Diligenta is the stated Aviva policy-service delivery entity | “to be managed by TCS’ FCA-regulated subsidiary, Diligenta UK” | TCS Aviva release, opening paragraph, line 771; publication 18 December 2025; forward expansion |\n| E05 | NTT DATA declares a UK Salesforce partnership | “a strategic partner of Salesforce in the UK” | NTT DATA partners, Salesforce section, line 178; publication Unknown |\n| E06 | Version 1 declares Oracle transformation services | “Fusion Cloud Applications, OCI and managed services” | Version 1 Partners, Oracle description, line 185; publication Unknown |\n| E07 | Pulsant describes 14 interconnected centres | “14 interconnected data centres” | Pulsant About Us, platformEDGE description; publication Unknown; supplier count |\n| E08 | Nu Quantum describes a Cambridge spin-out origin | “a spin-out of the University of Cambridge” | Nu Quantum About Us, opening company description, line 54; founded 2018 |\n| E09 | The quantum collaboration has a research objective | “explore the quantum computing capabilities needed in future industrial workflows” | Quantinuum July 14, 2026 announcement, opening body, line 24 |\n| E10 | NHS SBS itself confirms Oracle application use | “is using Oracle Fusion Cloud Applications” | NHS SBS finance-platform announcement, line 153; publication date unresolved |"
+    },
+    {
+      "id": "3d402fa5-f152-46c1-be70-77bcbd4afc8f",
+      "hash": "f5b8bb68dacfaf711dca4473e7c0206e49551b0ce29e286a80960e0044ca094f",
+      "markdown": "Exact full-source content, permissions, identity mapping and domain registration remain necessary before importer validation. The sample is not a substitute for completing the claim register across every profile."
+    },
+    {
+      "id": "d2558f99-bb96-4f6d-8170-5cd885e17872",
+      "hash": "9166d6efe53d838f9241f018ffc4a614990e82eaec6b802415e8322b98f99bde",
+      "markdown": "# Further software data security and delivery baselines"
+    },
+    {
+      "id": "e91a77e4-0e2f-4f95-9425-45756e65f67a",
+      "hash": "a70cbbd88508c78103e5df187792d50d1f3253c7690394525966e974cf1bfc1d",
+      "markdown": "Retrieved 12 November 2026. These are enterprise brand/group baselines; a localised website is not a verified contracting-entity identity. Commercial models below describe the offering architecture, not customer-specific prices or commitments."
+    },
+    {
+      "id": "2d3f3807-cc93-4dfb-a5de-ee31c84a24fb",
+      "hash": "7ddbb15a9e3f988e4103e960a7032774941c2f02b76a3e6a9c42c710cf5824ba",
+      "markdown": "| Enterprise | UK relevance and offering | Operating and ecosystem role | Material distinction and evidence |\n| --- | --- | --- | --- |\n| Workday | UK-facing finance, HR and planning cloud applications; Kainos supplies an evidenced UK ecosystem connection | Product/platform provider; deployments and extensions involve services partners | Keep Workday software separate from Kainos services and Workday-related products. [Company](https://www.workday.com/en-gb/company/about-workday.html), [Kainos practice](https://www.kainosworksmart.com/workday) |\n| Pega | UK office listed at Reading; decisioning and workflow automation | Platform owner, with application design and implementation ecosystem | Do not join to a Companies House company merely named PEGA LIMITED without corroborating ownership/domain evidence. [Company](https://www.pega.com/about), [offices](https://www.pega.com/about/office-locations) |\n| Access Group | UK-headquartered business-management software, with ERP/payroll category identified by investor Hg | Software portfolio serving commercial and non-profit organisations | Investor description supports the group baseline; it does not resolve product-specific deployment or local revenue. Headcount differs across public descriptions, so no count is adopted. [Investor portfolio](https://hgcapital.com/portfolio/access) |\n| OneAdvanced | Sector software, including health, care, legal, education and finance/workforce functions | Software provider with a separate managed-services offering | Product catalogue availability is distinct from a named customer's deployment. Companies House records a name change from Advanced Business Software and Solutions Limited to ONEADVANCED LIMITED on 1 May 2025. [Company](https://www.oneadvanced.com/about-us/), [registry](https://find-and-update.company-information.service.gov.uk/company/03214465) |\n| Snowflake | UK office and Aviva reference | Data platform, usage economics and professional services; partner NextPathway identified in Aviva delivery | Aviva case describes Snowflake on AWS; this does not establish that all Aviva workloads left Oracle. [Customer case](https://www.snowflake.com/en/customers/all-customers/case-study/aviva/), [UK office](https://www.snowflake.com/en/contact/) |\n| Databricks | Rolls-Royce Civil Aerospace reference | Data and AI platform; partner-led integration also evidenced through Deloitte's separate AiRR account | Engine-monitoring case and AiRR are separate supported use cases and must not be merged into one project. [Engine-monitoring case](https://www.databricks.com/customers/rolls-royce), [AiRR](https://www.deloitte.com/uk/en/about/story/impact/driving-ai-powered-integration-rolls-royce.html) |\n| NVIDIA | UK compute/research ecosystem participation | Accelerated-computing technology and cloud-partner ecosystem | October 2026 announcement is a five-year compute-access commitment. Provider selection, architecture and commercial terms were still to be agreed; it is not completed spending or a procurement award. [Announcement](https://nvidianews.nvidia.com/news/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years) |\n| Palo Alto Networks | UK-facing network-security offering | Security technology/platform provider | The cited page supports firewall/application-control capability; it does not establish UK market share, effectiveness or a named customer. [Offering](https://www.paloaltonetworks.co.uk/company/what-we-do) |\n| CrowdStrike | UK entity appears in the NCSC organisation directory; Berkeley Group is a named UK customer reference | Endpoint/security platform, managed services and security automation | Berkeley case identifies Falcon Fusion SOAR. Performance figures remain attributed supplier claims, not independent assurance. [NCSC directory](https://www.ncsc.gov.uk/organisation/crowdstrike-uk-limited), [case](https://www.crowdstrike.com/en-us/resources/customer-stories/berkeley-group/) |\n| Fortinet | UK corporate site and UK company registry record | Networking/security technology, with channel delivery | Security Fabric/FortiOS capability and channel relationships are distinct from a particular customer installation. [Company](https://www.fortinet.com/uk/corporate/about-us/about-us), [UK registry](https://find-and-update.company-information.service.gov.uk/company/04570027) |\n| Rubrik | London EMEA headquarters announced July 2026, alongside UK customer references | Data protection and cyber-resilience platform, expanding into AI-operation controls | Five-year UK investment is a plan. Harbour Energy, Manchester City Council and Scottish Government are supplier-named customers, with product-level scope unresolved. [Announcement](https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx) |\n| CGI | UK services organisation | Consulting, systems integration, managed IT and business-process services, with proprietary IP | Its UK page includes global FY2024 figures. These are neither current FY2026 nor UK-only revenue. [Operating model](https://www.cgi.com/uk/en-gb/about-us/cgi-at-a-glance) |\n| Fujitsu | UK operating page names MOD, Environment Agency, NatWest and Network Rail | Applications, cloud/platforms, data/AI, workplace, networks and support | These are supplier-listed relationships; the page does not resolve contract dates, product scope or current procurement eligibility. [UK operations](https://global.fujitsu/en-UK/local/about) |\n| HCLTech | Official UK operation page | Digital, engineering and cloud delivery; UK research/skills ecosystem | The overview contains age-relative figures and older recognition items. Do not treat every embedded number as a 2026 metric. [UK operations](https://www.hcltech.com/geo-presence/united-kingdom) |\n| Wipro | UK and Ireland operating page | Cloud, AI, applications, infrastructure, cyber, business processes and engineering | UK&I workforce figures cannot be represented as UK-only. Aggreko finance/procurement work is a supplier-described customer lead. [UK and Ireland](https://www.wipro.com/en-UKI/) |\n| Tech Mahindra | Official UK offices and UK establishment registry | Application modernisation, AI, business processes, cloud, engineering, experience, networks and testing | Model UK establishment and global parent separately; capability list is not evidence of an enterprise deployment. [Capabilities](https://www.techmahindra.com/our-capabilities/), [offices](https://www.techmahindra.com/contact-us/), [UK establishment](https://find-and-update.company-information.service.gov.uk/company/BR023076) |\n| Atos and Eviden | UK entities identified in group filing and registry | Managed/digital services and distinct Eviden product activities | Eviden currently describes mission-critical systems, vision AI and cybersecurity. Do not carry forward a historic brand/segment perimeter uncritically; current group/service allocation remains a reconciliation item. [Eviden](https://eviden.com/), [UK entity](https://find-and-update.company-information.service.gov.uk/company/02017873), [dated group filing](https://www.atosgroup.com/sites/default/files/2026-01/atos-universal-registration-document-en-2024.pdf) |\n| Valtech | UK footprint strengthened through completed Kin + Carta acquisition, 29 April 2024 | Experience design, commerce, digital engineering, data and AI services | Kin + Carta is an acquired business, not an additional independent group in population totals. Acquisition-year workforce/revenue descriptions are historical. [Completion](https://www.valtech.com/newsroom/valtech-completes-acquisition-of-kin-carta/) |\n| Deloitte | UK professional-services practice and named Rolls-Royce technology delivery account | Consulting and implementation; partner Databricks in AiRR | Deloitte is a professional-services network; UK practice and global network financials must remain separate. [UK services](https://www.deloitte.com/uk/en/services.html), [AiRR](https://www.deloitte.com/uk/en/about/story/impact/driving-ai-powered-integration-rolls-royce.html) |\n| Node4 | UK infrastructure and registered company identified in site footer | Microsoft applications/data expertise, cloud infrastructure, network/security and managed operations | Declares Microsoft, Fortinet, Cisco, Nerdio and VMware/Broadcom relationships. Sovereignty and rank assertions are provider claims requiring contract-specific verification. [Company](https://node4.co.uk/about-us), [delivery locations](https://node4.co.uk/why-node4) |"
+    },
+    {
+      "id": "348fa547-4314-478d-a06b-469edcdde0a9",
+      "hash": "00a7ebd17788035172b253912dc9e05bd0475cee27908c36e42a6fd7b762f3cd",
+      "markdown": "TD SYNNEX and Ingram Micro are distributors/solution aggregators rather than interchangeable end-customer systems integrators. TD SYNNEX describes training, finance, logistics and technical enablement; Ingram's UK page describes vendor/reseller support plus configuration, cloud, professional and lifecycle services. Global customer and employee counts are not UK measures. [TD SYNNEX operating role](https://trustedadvisor.tdsynnex.co.uk/about-us/), [Ingram UK operating role](https://uk.ingrammicro.eu/discover/company)."
+    },
+    {
+      "id": "cacbf2b1-8c60-4abf-8ba9-1ee9f23d2113",
+      "hash": "6ebbc758def5c2dbf9415dca644c0204fbbdce953611fe90343c9d93520f0d5b",
+      "markdown": "# Additional reusable customer and partner records"
+    },
+    {
+      "id": "e505e833-42c0-4505-87f3-6d9635398617",
+      "hash": "ec1fbe2adcbb91d39c4eae1586fc54b66ae5a544d1bd550f905b2376d5e3ecf4",
+      "markdown": "| Customer or participant | Provider and typed role | Offering or scope | Date and evidence boundary |\n| --- | --- | --- | --- |\n| Aviva | Snowflake platform; AWS hosting; Snowflake Professional Services and NextPathway delivery | Data-estate migration, including claims/fraud workloads | Publication/event date Unknown. Supplier case reports deployment; no whole-estate migration inference. [Source](https://www.snowflake.com/en/customers/all-customers/case-study/aviva/) |\n| Rolls-Royce Civil Aerospace | Databricks platform | Engine-monitoring data and analytics | Date Unknown; supplier case; do not merge with the separate Deloitte AiRR programme. [Source](https://www.databricks.com/customers/rolls-royce) |\n| Berkeley Group | CrowdStrike security platform | Falcon Fusion SOAR | Date Unknown; supplier-hosted customer account; results are attributed. [Source](https://www.crowdstrike.com/en-us/resources/customer-stories/berkeley-group/) |\n| Harbour Energy | Rubrik, supplier-reported customer | Cyber resilience | Announcement 9 July 2026; exact product, deployment boundary and contract date Unknown. [Source](https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx) |\n| Manchester City Council | Rubrik, supplier-reported customer | Cyber resilience | Same July announcement; do not generalise to all council workloads. |\n| Scottish Government | Rubrik, supplier-reported customer | Cyber resilience | Same July announcement; individual agency/product deployment unresolved. |\n| Imperial College London; BOLD; SOFAIR | NVIDIA compute-access commitment | Agentic safety/security research | 13 October 2026; planned research support, not a commercial customer contract. [Source](https://nvidianews.nvidia.com/news/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years) |\n| Ministry of Defence; Environment Agency; NatWest; Network Rail | Fujitsu supplier-listed relationships | UK technology services, product-specific scope Unknown | Undated overview; discovery relationships only, not dated contract assurances. [Source](https://global.fujitsu/en-UK/local/about) |"
+    },
+    {
+      "id": "5080e342-dc7a-4812-88de-5058b59e0c0f",
+      "hash": "2466dd85f374be271098ff19cbaf8ff0cd160909fdd198d598ffc763a3a2e6f1",
+      "markdown": "# Cloud competition evidence and segment implications"
+    },
+    {
+      "id": "7481438e-761a-40e8-8290-6c7c729ecc09",
+      "hash": "23acdfdad913fee35cb8a5bf6d75415ee3aa00162a226a9f1e373d14658aa28c",
+      "markdown": "The CMA's final cloud investigation decision was published on 31 July 2025. Its summary reports £10.5bn of customer spending in 2024 and identifies significant barriers to entry, switching and expansion. Its provider-share ranges have a UK-plus-EEA geographic scope in the footnote and must not be labelled UK-only market shares. These are historical regulatory findings, not a 2026 supplier ranking. [Final summary, paragraphs 3–6 and 17–21](https://assets.publishing.service.gov.uk/media/688b20e6ff8c05468cb7b120/summary_of_final_decision.pdf)."
+    },
+    {
+      "id": "11cbe445-a0fd-4120-9fe0-8b77ce1003a4",
+      "hash": "932472ee580585750598a081376beba2fdfcf994d45f522dcc5a21ad3581f114",
+      "markdown": "The foundation therefore distinguishes three forms of competition. Infrastructure platforms compete through service breadth, capital investment and ecosystem dependencies. Software vendors compete within business capabilities while depending on platforms and implementation partners. Delivery firms compete for transformation and operations work but can partner with those same vendors and with each other. This is an interpretation supported by the CMA investigation, declared partner roles and the named multivendor customer cases; it is not a calculated market-share model."
+    },
+    {
+      "id": "a0f7024d-06a1-47a0-9db2-bff3b78168c0",
+      "hash": "c99f2cb87dccc7518a3935484ccdcdc3deffde9925c4c6e89f9fd23c12d81c24",
+      "markdown": "For Flora, the practical unit of analysis is the business capability and dated change programme. “Uses cloud” is too broad. “Aviva reports a claims/fraud data migration to Snowflake on AWS, with named delivery support” allows a defensible discussion of data operations, assurance and adoption without inventing its architecture or procurement intent."
+    },
+    {
+      "id": "09e9d8cc-cbba-4602-a52e-d2aaee890781",
+      "hash": "e8ee49356ff9e55b3fd4389168030f8a66c3d17685921c3eb6f0585f9208b601",
+      "markdown": "# Model providers industrial software and connectivity"
+    },
+    {
+      "id": "312a7a3b-8076-4019-88bf-07d9089b42e6",
+      "hash": "6dff97fbfe23df92c2e68ebbc02e319cf1922cfa03564ae7ffb125b643d69907",
+      "markdown": "| Enterprise | Role and offering | UK connection and ecosystem boundary | Source |\n| --- | --- | --- | --- |\n| OpenAI | AI research and deployment organisation; AI products and developer platform | London office announced 28 June 2023; NatWest customer-authored collaboration. UK office does not establish the contracting entity for every service | [London](https://openai.com/index/introducing-openai-london/), [NatWest](https://www.natwestgroup.com/news-and-insights/latest-stories/ai-and-data/2025/mar/accelerating-our-ai-transformation-in-banking-with-openai.html) |\n| Anthropic | Frontier-model research and products including Claude; partner-enabled deployment | UK company registry and London operation; Barclays supplier-reported deployment; TCS/Diligenta announced adoption | [Company](https://www.anthropic.com/company), [UK entity](https://find-and-update.company-information.service.gov.uk/company/14604577), [Barclays](https://www.anthropic.com/news/barclays-scales-claude), [TCS](https://www.anthropic.com/news/tcs-anthropic-partnership) |\n| Google DeepMind | Research and model development, including Gemini and scientific AI | UK government MoU and research presence; part of Google's organisation, not an independent supplier group additional to Alphabet | [Company](https://deepmind.google/about/), [government MoU](https://www.gov.uk/government/publications/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security) |\n| AVEVA | Industrial software across engineering design, capital projects, operations, monitoring and optimisation | Cambridge group address; Schneider Electric ownership; declares Microsoft, AWS and NVIDIA technology relationships | [Company and ownership](https://www.aveva.com/en/about/) |\n| Autodesk | Design/make software across construction, manufacturing and media | UK company registry; horizontal technology supporting several other industries | [Company](https://www.autodesk.com/company), [UK registry](https://find-and-update.company-information.service.gov.uk/company/01839239) |\n| Adobe | Creative, document and customer-experience software, including Creative Cloud, Acrobat and Firefly | UK-facing enterprise offering; capability presence does not establish named UK customer use | [Company](https://www.adobe.com/uk/about-adobe.html) |\n| Broadcom / VMware | VMware Cloud Foundation integrates compute, storage, networks, Kubernetes and management for private cloud | UK ecosystem connection through Node4's declared VMware/Broadcom role; keep platform vendor, reseller and operating partner separate | [Platform](https://www.vmware.com/products/cloud-infrastructure/vmware-cloud-foundation), [Node4](https://node4.co.uk/about-us) |\n| Lenovo | Devices, computing infrastructure and associated services | UK-facing provider; OEM/product role is distinct from channel sourcing and managed operation | [Company](https://www.lenovo.com/gb/en/about/who-we-are/) |\n| Intel | Computing semiconductor technology | Intel itself identifies Intel Corporation (UK) Limited; no UK manufacturing claim inferred | [UK entity notice](https://www.intel.com/content/www/us/en/content-details/868923/new-registered-address-for-intel-corporation-uk-limited.html) |\n| AMD | Processors, accelerators, graphics and adaptive computing | Official locations list UK offices, including Cambridge and Belfast; global product scope is not a UK revenue measure | [Company](https://www.amd.com/en/corporate.html), [locations](https://www.amd.com/en/corporate/locations.html) |\n| OVHcloud | Public/private cloud, dedicated servers and hosting | UK-facing cloud offering; global facilities and certifications must not be assumed to apply to every UK service | [Company](https://www.ovhcloud.com/en-gb/about-us/) |\n| Rackspace | Integration and ongoing operation across cloud, infrastructure, data and AI | UK operating presence described on its company site; provider's accountability/sovereignty claims need customer-specific terms | [Company](https://www.rackspace.com/en-gb/about/) |\n| VodafoneThree | Mobile/fixed connectivity and business services | Combined UK organisation; Vodafone and Three trading brands are not three independent groups when counted with VodafoneThree | [Company](https://www.vodafonethree.com/about/) |\n| Virgin Media O2 | Fixed/mobile connectivity and related business services | UK business organisation combines Virgin Media Business and O2 Business; historic coverage statistics remain date-bound | [Business organisation](https://www.virginmediao2business.co.uk/about-us/) |\n| CityFibre | Fibre network infrastructure and wholesale access | Network operator distinguishes its role from the retail service provider holding the customer's account/contract | [Company and role boundary](https://cityfibre.com/about-us) |"
+    },
+    {
+      "id": "22aee612-4575-41a0-8ec3-4e8a5733262e",
+      "hash": "39d94de54a41bc3e51981f75ef3fc6560a1260b7fafc820c0f281ff77088f8d9",
+      "markdown": "The foundation deliberately separates model development, product packaging, hosting, implementation and operation. A bank's use of a model does not identify its cloud route, integrator or contractual counterparty unless the source explicitly does so. An industrial-software alliance similarly does not prove deployment at an energy or manufacturing customer."
+    },
+    {
+      "id": "e00a68f2-d9be-41d6-949f-ae1105d9de31",
+      "hash": "67cb78e5f0ef5a8c4adb721163ca6da82a75b27abaffab2401357e8ae4cf29b4",
+      "markdown": "## Additional AI relationship records"
+    },
+    {
+      "id": "48a40e84-375f-43dc-904e-f74d8283934d",
+      "hash": "54be12caa1942fda0524df2229e7097b29345f8a1146e120d88a84acaab5f8e4",
+      "markdown": "| Participant | Relationship | Event and evidence | What cannot be inferred |\n| --- | --- | --- | --- |\n| NatWest → OpenAI | Customer-authored collaboration | 2025 article describes planned digital-assistant, fraud/scam and colleague-tool development; exact publication day not established from the retrieved article | All described use cases live, realised benefits, procurement value or exclusive model use |\n| Barclays → Anthropic | Supplier-reported Claude use and expansion | 1 October 2026; knowledge assistant reported live since 2025; wider developer adoption explicitly forward-looking | Target adoption achieved, independent outcome assurance or all-bank deployment |\n| TCS → Anthropic | Announced product/services partnership and internal adoption | 12 June 2026; TCS described as customer zero and joining the partner network | Announced employee rollout complete |\n| Diligenta → Anthropic | Planned Claude adoption within UK life/pensions business | Same June announcement; maintain separate Diligenta and parent TCS identities | Every underlying insurer or policyholder is a direct Anthropic customer |\n| DSIT ↔ Google DeepMind | Non-binding research/public-sector collaboration MoU | Published 11 December 2025; text expressly creates no financial commitment or obligation to pursue a commercial agreement | A procurement award, commercial customer contract or completed deployment |"
+    },
+    {
+      "id": "a67b4a8f-ca05-4f8a-81ce-0ff651c79330",
+      "hash": "da20e87cf556d90439027fef901d7e3c9a1b7c73bcb3564d24d7c8254553ed95",
+      "markdown": "Sources are the enterprise and government links in the profile table above."
+    },
+    {
+      "id": "25b49515-3524-459b-aa5c-1ae8e62fccb9",
+      "hash": "01e18ddf180060675e766346fdd89316b73cc6d9c55cbfcfdbfea4426b22e143",
+      "markdown": "# Reference operating models"
+    },
+    {
+      "id": "9664b1ba-b4dd-4d0f-bcc2-9e32893edf7f",
+      "hash": "8737f0ba3edd2e128ae43b268e5d8af5145ebb293e50dcb32122b03950529eb5",
+      "markdown": "These are hypothetical reference models for explaining the industry. They must never be displayed as a reconstruction of an enterprise's confidential organisation or architecture."
+    },
+    {
+      "id": "659ae5e6-1fd5-401d-9262-2e5f97b76215",
+      "hash": "4192425a700cb32a88b279539e993fe29bcc2ae46079f3c46e1d86e7368c8a9a",
+      "markdown": "| Archetype | How value is created | Commercial mechanism to distinguish | Principal dependencies | Opportunity questions |\n| --- | --- | --- | --- | --- |\n| Application or model provider | Reusable software/models support customer workflows | Subscription, licence, usage and support are different arrangements; contract needed to identify the actual one | Engineering, training/data rights, compute, distribution, adoption and controls | Is adoption producing measured business value? Who owns operating risk and integration? |\n| Infrastructure provider | Capacity, availability and interconnection support workloads | Asset ownership, colocation, dedicated capacity, public-cloud consumption and managed operation are different | Power, buildings, networks, equipment, skills and supplier concentration | Is capacity genuinely constrained? What trade-off exists between cost, control and portability? |\n| Delivery and managed-service provider | Skills and operating processes integrate technology with business change | Project scope, capacity, milestones, recurring operation and outcome commitments differ | Workforce, platform vendors, delivery partners, client access and governance | Where are delivery bottlenecks, transition risks or service boundaries? |\n| Distributor or reseller | Product access, finance, configuration and logistics simplify buying | Gross invoicing, recognised revenue, margin and recurring services must not be mixed | OEM authorisations, credit, supply chain and channel partners | Where can lifecycle services, rationalisation or commercial control improve value? |\n| Frontier-technology developer | Converts research/IP into tested technology and accessible systems | Research collaboration, grant, prototype, IP access and commercial service have different maturity | Research talent, fabrication/compute, capital, test users and standards | What evidence demonstrates readiness for the proposed use case? |"
+    },
+    {
+      "id": "2580af07-9c3e-4d50-944d-8a43e2e957b6",
+      "hash": "6532a3664edabbc55c23ae642e3a83737a4333ded9c25d1e046e63ac79fd1b29",
+      "markdown": "## Capability map for Flora"
+    },
+    {
+      "id": "707db168-ef2c-4135-b102-07d34ea8c89f",
+      "hash": "2b8427a52d3cab4c225b720b7e69fcd53dc2f8f8df96a68cc3bf2811c4f7f362",
+      "markdown": "| Business layer | Capabilities to explain | Typical evidence objects |\n| --- | --- | --- |\n| Direction and economics | Strategy, market selection, product portfolio, investment and financial control | Dated plans, filings and comparable period/geography measures |\n| Build and supply | Research, product engineering, sourcing, security engineering and infrastructure | Product descriptions, ownership and supplier roles |\n| Sell and deliver | Channels, solution design, implementation, integration and organisational adoption | Named partner and customer cases, scope and event dates |\n| Run and improve | Service operations, resilience, data/model governance, optimisation and retirement | Reported operational changes, measured outcomes and unresolved risks |"
+    },
+    {
+      "id": "7ff32b9a-bbe6-4c7a-9ae7-cd012022d7f2",
+      "hash": "fe71fad20cf9bb0eabc603068e67e6b17f0df556ebbff7b9367dbd976d0c5c69",
+      "markdown": "# Evidence linked opportunity briefs"
+    },
+    {
+      "id": "77095ae5-5143-4220-8b3b-558f6fdca1aa",
+      "hash": "1e1b27419b942b80de65cc7c2fbf387d1c77d59e0103dfe07cb470651f31659f",
+      "markdown": "These are priorities for investigation, not qualified sales opportunities. Their order reflects evidence specificity and proximity to an identifiable business change; it does not imply budget, buying intent or supplier preference."
+    },
+    {
+      "id": "6573f495-f4a3-412f-b800-6e8b958a36eb",
+      "hash": "1ee0a6cc476401801bb22bd400cc2ad66b4fde47245b528fa42ba2ba6ce965e5",
+      "markdown": "| Priority | Evidence and business consequence | Potential intervention | Alternative explanation | Qualification needed |\n| --- | --- | --- | --- | --- |\n| 1 AI adoption and controls | Lloyds, Sainsbury's and Barclays publish different stages of AI adoption. Expanding access creates questions about workflow design, controls and value measurement | Adoption, evaluation, knowledge/data preparation, security and operating-model services | The enterprise may already have adequate controls and a fully resourced delivery team | Named business owner, measured unresolved gap, agreed scope, mandate and procurement route |\n| 2 Data and application change | Aviva/Snowflake and Centrica/SAP show programmes spanning data, applications and platforms | Migration assurance, integration, data quality and service transition | The reported migration may be complete and follow-on work already contracted | Current remaining work, delivery responsibilities, completion evidence and sourcing decision |\n| 3 Cyber recovery and service assurance | Rubrik UK references, CrowdStrike/Berkeley and the DWP infrastructure case illustrate distinct resilience and operating concerns | Recovery testing, control integration, service accountability and managed assurance | New technology may have closed the identified gap; a product announcement is not evidence of a residual problem | Customer-owned risk, recovery objectives, test evidence and accountable buyer |\n| 4 Provider internal transformation | Computacenter's disclosed internal initiatives and TCS's customer-zero announcement show suppliers themselves are technology buyers | Internal workflow/data modernisation and value assurance | Work may be intentionally in-house or part of an existing strategic partnership | Explicit external-sourcing intent, owner, timing and route to market |\n| 5 Cloud portability and infrastructure | CMA's historical findings and multicloud customer cases support questions about dependency and cost/control trade-offs | Architecture/contract assessment, FinOps, workload placement and integration | Switching may be uneconomic and current supplier choice rational | Workload-specific economics, rights/terms, operational risk and customer decision criteria |\n| 6 Industrial and frontier adoption | AVEVA's industrial lifecycle and the Rolls-Royce/quantum collaboration connect engineering to newer technologies | Industrial-data integration, use-case evaluation and controlled prototypes | Research value may not translate into a near-term production purchase | Technical readiness, validated use case, industrial sponsor and staged investment decision |"
+    },
+    {
+      "id": "146522f4-67cb-487e-ab7d-2e8f77de2a3b",
+      "hash": "5bc0567eb4dad8f20811a34dadb8c7c2a3de4545c167930ee02ce020da822122",
+      "markdown": "Opportunity evidence links are the named customer registers and provider profiles in this Page. Each brief must carry those underlying relationships when transferred to Flora; a theme label alone is insufficient."
+    },
+    {
+      "id": "b9aa2bec-04e2-4455-a9fd-c34ea2593cab",
+      "hash": "14efec8a504319738635c44c3ace7e1795fe4e364fa7c1747dcfe2358b658982",
+      "markdown": "# Research visual specifications"
+    },
+    {
+      "id": "d44fcf1a-b2a7-4aa3-8e14-d2a94d1109d1",
+      "hash": "c4a7444ce57d13703c800af7f0284dc58ffb6740be1066da0a872066387d30dd",
+      "markdown": "Lead with a signature industry system map. Applications and data/AI sit above cloud/infrastructure, while security, delivery services and channels visibly span those layers. Emerging technology sits alongside the established system as an innovation source. This is a conceptual explanation of industry roles, not an enterprise architecture or a market-share chart."
+    },
+    {
+      "id": "c090a6e5-11e5-40be-aa46-48534d8329d9",
+      "hash": "45d5f508960dce66d967ec36de1888460c144439d4a53cfdfea5edcf0eb2dffa",
+      "markdown": "Use three linked lenses: **How it works** explains the industry; **Who uses what** follows one evidenced programme into another industry; **Where work may emerge** connects a published change to an explicit qualification question and an alternative explanation. Keep the full provider directory as a drill-down, with multiple role memberships rather than 80 logos on the opening scene."
+    },
+    {
+      "id": "a256e4f6-e736-4b78-8333-639d6d0a89ff",
+      "hash": "c0c570031c04434acbfc74ce2d3159a88c15245d3b54f58c04f4a1cfe2db36ba",
+      "markdown": "Show economic scale in a separate dated measurement strip once the geography, definition and period are established. Never encode provider importance through unsourced logo sizes or treat overlapping segments as additive market shares. Add geography only for verified footprints; use the timeline for evidenced events rather than invented contract expiries."
+    },
+    {
+      "id": "b729a75a-b30b-4406-9c9b-c77fe940f6ad",
+      "hash": "0702316b56af0ca75980302625fb434a704dd6fcca55a18ae2acd981dede091b",
+      "markdown": "| View | Required composition | Controls |\n| --- | --- | --- |\n| Industry landscape | Seven main segments, with connectivity, semiconductors and quantum as explicit subsegments; selected providers positioned by role | No market-size bubbles without a common geographic/period denominator; multiple roles allowed |\n| Enterprise operating model | Select the appropriate reference archetype, then attach only published enterprise-specific overlays | Label hypothetical base separately from published facts; source every overlay |\n| Customer technology ecosystem | Customer → capability → product → provider, with hosting and delivery partners attached to the particular evidenced programme | Do not connect every named partner to every named customer |\n| Change timeline | Dated acquisition, disposal, appointment, plan and reported go-live markers | Different marker types for announced, planned, completed and date-unknown events |\n| Opportunity landscape | Six briefs above, visible evidence, uncertainty and next qualification question | No automatic Pipeline capture or qualification |"
+    },
+    {
+      "id": "bb476d05-00a7-4601-a8db-d42e1f1ace5c",
+      "hash": "efed2f714e1d853bde2b41e32287e869d201c4f019d57410db3ffc84eb61a7ab",
+      "markdown": "The interactive design concept below uses selected research examples, with public-source attribution and uncertainty retained. It is a design prototype, not an implemented Flora page or a validated research import. Static structure and JavaScript syntax checks passed. Browser rendering and interaction checks could not run in this session because Chromium startup was blocked by the execution environment's socket restriction; tablet, mobile and dark-mode presentation remain visually unverified. Flora integration, canonical evidence navigation and Pipeline permissions still require implementation and testing."
+    },
+    {
+      "id": "dbc2ca75-cc32-4ab7-9119-49558fd9dd11",
+      "hash": "4fd8c36b3ce9be9d0bbda464d78f3bd40ef5591e47c891d86e1903a7e34759c2",
+      "markdown": "![UK Technology industry visual concept](visualize:fde1_bGliZmlsZV9pUXBYQXNQMmV6YWoxMTliNHg0QXJB_FileDrive_a6153a9f1c3c8191b854452744ac6f92)"
+    },
+    {
+      "id": "a342e267-f7e4-4081-aeb2-7be8c173ce2e",
+      "hash": "96cbed483363fbaf3283bb2431fb3c0c5432494afee394ee49906e851c9f5808",
+      "markdown": "# Research handover and storage boundaries"
+    },
+    {
+      "id": "36131129-6114-49b2-93fa-3cac3ba6fb7a",
+      "hash": "1a0cecfd4f841256a1f9f9e796c22e78f35cd56406681f79e2708d61f35332a6",
+      "markdown": "Preserve reusable entities separately from claims. Enterprise/group, UK legal entity, product, capability, country and industry each need their own identity. A dated relationship connects them and carries provenance. Google Cloud and Google DeepMind can be distinct organisational/provider views while remaining linked to their shared group; the landscape count is not a count of independent corporate groups."
+    },
+    {
+      "id": "ea48344c-e1c8-446b-9067-75803a74141f",
+      "hash": "4d7f183b14733f246808b59c4f485f40a2552b3ec0509e70f284bd3b9714f018",
+      "markdown": "Keep original source material or an honest reviewed excerpt separate from normalised claims and from explanatory views. Each claim needs publisher, source/retrieval URL, retrieved timestamp, publication/event date or Unknown, passage/locator, geography, attribution, rights status and acceptance history. Correct a claim through supersession/correction lineage rather than silently rewriting its prior accepted version."
+    },
+    {
+      "id": "1e23f10d-0010-4ec9-a461-f7b9959609d8",
+      "hash": "b09055a7bb33af1484cd5b034ff36c8d7c74acbb7b7c0c99d5155a652f674b69",
+      "markdown": "The Page is the consolidated research narrative. It is not a substitute for Flora's canonical registry, evidence store or importer. Candidate mapping should reuse SourceSegment → CandidateClaim → EvidencePackageItem, then accepted Evidence/Observation only after the existing gates. Canonical IDs stay unbound until actual registry reconciliation. No provider domain should be added to the allowlist merely because this Page cites it."
+    },
+    {
+      "id": "dc96d519-d4bb-4e4b-8a8b-b687db17f17a",
+      "hash": "13943d9f37e0c0a9d3185266104f052b6e9883dae0718821c69d036b6db0873c",
+      "markdown": "For another country, reuse the taxonomy, capability model and entity identities. Create a country-specific economic boundary, official-source register and enterprise/local-entity selection; preserve global facts once and attach local operations and customer evidence by geography. Country population is a governed versioned selection, not a duplicate of every global enterprise."
+    },
+    {
+      "id": "e5e5cd4e-6ee9-4e71-8c70-0517e80b66a4",
+      "hash": "2cf84583a4d760f9d113bc9fcfdc4e2b085c3828f90e0c8346e3e458fa9f5d07",
+      "markdown": "Source rights remain operation-specific. Government publications can have Open Government Licence terms and exceptions; provider pages are public to read but do not automatically grant redistribution, bulk storage or commercial reuse. Record unestablished permissions as unresolved, retain concise attributed research, and require the relevant source-operation decision before automated collection or wider publication."
+    },
+    {
+      "id": "4bc5d825-ec8f-488f-9ffc-9386525f5200",
+      "hash": "ff67038bfb506cf53d13a09bea38ca42f0078ffb5aa9d0ac86df9c6bf7652b4a",
+      "markdown": "The public-source explanation to an enterprise should be factual: Flora uses identified public publications, preserves attribution and dates, labels analytical reference models, and supports correction. It should never promise that an enterprise endorses every inference or could not object. No confidential enterprise architecture, unpublished deployment or commercial intention is inferred from the available sources."
+    },
+    {
+      "id": "653fe1ce-2d33-4852-b20c-a7668e458bef",
+      "hash": "8127c1e122f6bddc3c1ebe9fa7e0df02c446a30688d8d1f41f91def291dcf762",
+      "markdown": "# Additional claim level evidence"
+    },
+    {
+      "id": "9f527bbc-5d33-4d43-a33b-3748a5a262e9",
+      "hash": "39a7f121eece4c161aa446ad260dc188bff943d733fe82f52c87f01e39b5b0a9",
+      "markdown": "These local references support bounded claims in the narrative. They do not assign canonical Flora identities. Publication Unknown means that the retrieved source did not establish the publication date; retrieval was 12 November 2026. Provider statements are recorded as provider statements."
+    },
+    {
+      "id": "95fca87f-b5e2-4cf9-92de-1517127d5587",
+      "hash": "26b12d74f0dcc45ad155fbd5243781007399158df3a9304c02ebed8eb15572aa",
+      "markdown": "| Reference | Claim and source passage | Locator | Scope and status |\n| --- | --- | --- | --- |\n| E11 | Aviva's supplier case describes “Snowflake on Amazon Web Services (AWS)” | [Aviva case](https://www.snowflake.com/en/customers/all-customers/case-study/aviva/), transformation highlights, retrieved line 49 | Reported deployment; no all-Aviva estate assertion; publication Unknown |\n| E12 | The same case names “AI Data Cloud Services Partner NextPathway” | Same source, migration/operating-model paragraph, line 69 | Named delivery support for this programme; no general exclusive-partner assertion |\n| E13 | Rolls-Royce case identifies “Rolls-Royce Civil Aerospace” | [Databricks case](https://www.databricks.com/customers/rolls-royce), title and opening description, lines 14–19 | Specific business/use case; date Unknown; supplier report |\n| E14 | Berkeley's named solution is “Falcon Fusion SOAR” | [CrowdStrike case](https://www.crowdstrike.com/en-us/resources/customer-stories/berkeley-group/), CrowdStrike Solutions, lines 254–256 | Product-level supplier report; date Unknown |\n| E15 | Rubrik lists “Harbour Energy, Manchester City Council and the Scottish Government” | [UK announcement](https://ir.rubrik.com/news-events/press-releases/news-details/2026/Rubrik-Announces-375-Million-UK-Investment-and-Names-London-as-EMEA-Headquarters/default.aspx), UK business paragraph, line 40 | Supplier-named customers, 9 July 2026; contract/product boundary Unknown |\n| E16 | NVIDIA says “Provider selection, technical architecture and commercial terms are to be agreed” | [Compute announcement](https://nvidianews.nvidia.com/news/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years), compute-delivery paragraph, line 65 | Plan, 13 October 2026; no supplier award or completed infrastructure assertion |\n| E17 | AVEVA says “AVEVA is now a member of the Schneider Electric group” | [Company](https://www.aveva.com/en/about/), ownership footer, line 96 | Ownership boundary; page publication Unknown |\n| E18 | CityFibre tells retail users “your contract is with them” | [Company](https://cityfibre.com/about-us), service-support footer, line 204 | Refers to the user's retail provider; separates network ownership from retail account |\n| E19 | Government MoU “does not create any financial commitments” | [DSIT/DeepMind MoU](https://www.gov.uk/government/publications/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security/memorandum-of-understanding-between-the-uk-and-google-deepmind-on-ai-opportunities-and-security), Nature of the MoU, line 104 | Published 11 December 2025; collaboration, not procurement or spend |\n| E20 | Barclays article says the knowledge capability “has been live since 2025” | [Anthropic/Barclays](https://www.anthropic.com/news/barclays-scales-claude), knowledge-assistance section, line 49 | Supplier report published 1 October 2026; distinct from future developer rollout |\n| E21 | Diligenta “will use Claude” | [Anthropic/TCS](https://www.anthropic.com/news/tcs-anthropic-partnership), use-case list, line 43 | Forward adoption statement, 12 June 2026; not completed rollout or a direct contract with every underlying insurer |\n| E22 | OpenAI announced a “new office in London, United Kingdom” | [London announcement](https://openai.com/index/introducing-openai-london/), opening paragraph, line 18 | 28 June 2023 event; not current workforce or revenue evidence |\n| E23 | CMA footnote says “The geographic scope of our markets is UK+EEA” | [Final cloud summary](https://assets.publishing.service.gov.uk/media/688b20e6ff8c05468cb7b120/summary_of_final_decision.pdf), page 2, footnote 1 | Provider-share geography must not be relabelled UK-only; 31 July 2025 findings |\n| E24 | Node4 footer says “Registered in England and Wales No. 04759927” | [Company](https://node4.co.uk/about-us), legal footer, line 152 | Site-declared company identity; canonical mapping still needs registry reconciliation |"
+    },
+    {
+      "id": "4894f4b1-c0bd-4364-9837-ce60a453fa10",
+      "hash": "bca50b56cde29961cae53e1a4c83dd71538d1042fc2c8494f0c24ce53d945f17",
+      "markdown": "## Candidate record boundary"
+    },
+    {
+      "id": "a14e0a6a-edf6-4889-8483-8c2f6055eed8",
+      "hash": "9f09407cc3a1833194ab8c4e0df51dfb4cec7bb3d8518fc4d45ae68e425fee78",
+      "markdown": "A research candidate must preserve the asserted relationship rather than the whole marketing story. For example:"
+    },
+    {
+      "id": "53cd9eb6-fe22-4b02-b95b-29313640d12a",
+      "hash": "433d1bbaca00b6d199250f490c192b1beb3d4c8762f535f2054b912edf3f1411",
+      "markdown": "```json\n{\n  \"research_reference\": \"E21\",\n  \"subject_label\": \"Diligenta\",\n  \"predicate\": \"announced_planned_use\",\n  \"object_label\": \"Claude\",\n  \"provider_label\": \"Anthropic\",\n  \"claim\": \"Anthropic announced that Diligenta would use Claude.\",\n  \"source_url\": \"https://www.anthropic.com/news/tcs-anthropic-partnership\",\n  \"publisher\": \"Anthropic\",\n  \"publication_date\": \"2026-06-12\",\n  \"event_date\": null,\n  \"retrieval_date\": \"2026-11-12\",\n  \"passage_quote\": \"will use Claude\",\n  \"passage_locator\": \"How TCS is using Claude; Diligenta bullet\",\n  \"geography\": \"UK business\",\n  \"attribution\": \"supplier_report\",\n  \"temporal_status\": \"planned\",\n  \"original_document_sha256\": null,\n  \"canonical_identity_status\": \"unbound\",\n  \"source_reuse_permission\": \"unestablished\",\n  \"acceptance_status\": \"research_candidate\"\n}\n```"
+    },
+    {
+      "id": "58da3d4f-64d6-4ec8-9399-4ed71ad908c2",
+      "hash": "54ad42886c6b7bc504a906f3b795c7dee330f8d3a02bc7a3c2771367f0d01e7d",
+      "markdown": "This is a neutral research staging example, not an assertion that the current repository accepts this JSON schema. Import mapping must preserve its distinctions and supply the actual provenance and registry fields. An unknown event date is not replaced with the publication date. A date-only retrieval record is not silently converted into a fabricated exact timestamp."
+    },
+    {
+      "id": "ece61fbb-f73c-4bd0-8474-94787ccf27b2",
+      "hash": "c53c53e84d34e1388c7d4b48291c9610ed6e1937aaf6c8d2c102a5221f24c6e0",
+      "markdown": "## Quality controls applied"
+    },
+    {
+      "id": "396eaaf6-40f3-4482-82d7-6aab4f5fa5cc",
+      "hash": "0b3b948ad2a9dd29617ab12a92227d585efbb73e3e2bcf1cffe6f1e49b82eb99",
+      "markdown": "- Separated global, UK, UK&I and UK-plus-EEA measures; no cross-definition market-size addition."
+    },
+    {
+      "id": "e807de2b-ffb3-4014-b7e1-a4cf38c6a6bd",
+      "hash": "332c9cab8df6f415adfc0db57db3400920164a37ac1470a6145264cd54904aee",
+      "markdown": "- Separated supplier-authored reports, customer-authored reports, registry facts, plans and analytical reference models."
+    },
+    {
+      "id": "c3a9017d-326f-4b10-8a4d-bcc98eaea2f8",
+      "hash": "c2b24b8b75add6d898b54b8ae260cb83eefdeea07b635236cb2fb417d4642aba",
+      "markdown": "- Removed unsupported deployment joins from alliances, logo pages, anonymous stories and redirected case URLs."
+    },
+    {
+      "id": "25c5fa00-0641-4004-a668-56ee4ad2c2a8",
+      "hash": "83087362498b3eacb5f16315c652f06b7da6b48f94a51b26f68351c33f6ab9ed",
+      "markdown": "- Preserved completed ownership changes and distinguished acquired brands from independent groups."
+    },
+    {
+      "id": "cbd38e5f-d4a6-4cc0-93e7-04a016a5640c",
+      "hash": "14101a43d5379058cd2d89bf456d92964b6aaca66bea6aed24f94e9dcc901de3",
+      "markdown": "- Kept targets, modelled savings and future rollout statements separate from achieved outcomes."
+    },
+    {
+      "id": "4d29cd45-3c81-4ff7-8723-02ba9de2a6c7",
+      "hash": "9ff356a1d032a0755c8e47d6413bb083a4838de47e06b3285ace38efc3999ccd",
+      "markdown": "- Checked the selected population for duplicate labels: 80 distinct provider views, with shared-group caveats."
+    },
+    {
+      "id": "cd7be25e-c9b4-474b-8346-4be968a239eb",
+      "hash": "8d44fb37d7abbdd1d05ffc0d33825d21c21baa57f64872b964a2b46711d84069",
+      "markdown": "- Retained explicit uncertainty instead of turning a missing date, product scope or contract term into an assumed fact."
+    },
+    {
+      "id": "d60d8e72-e2c3-42f4-802c-dc2dfc131285",
+      "hash": "a0b18677fe22b0bfc5b8995b75d3625f1b52db19d34766055a0c11a31ddb1743",
+      "markdown": "## Acceptance limit"
+    },
+    {
+      "id": "dafb7323-75cb-4fce-b9e5-ab6ae0f279d1",
+      "hash": "b7e696e4540fd5e2b733937ba69556ac60f05c278ea768e9bb3b98cf0443df07",
+      "markdown": "The checks above improve the research but do not establish a fully verified release. Twenty-four bounded claim examples do not cover every claim in the 80-provider narrative. Complete passage coverage, comparable profile fields, permissions decisions and canonical/schema reconciliation remain open. The research must not be labelled 100% accepted or autonomously published until those gates are satisfied.\n"
+    }
+  ]
+}
