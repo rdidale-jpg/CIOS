@@ -1,0 +1,9 @@
+{
+  "base_sha": "adf205993cc0857183d77766ce4882bf48326fb4",
+  "source_sha256": {
+    "cios/applications/flora/research_intelligence/macro_intelligence.py": "2a370e330c154122c3893f011708e7cd5df09a43a2fa6b0419906c8df48c2561",
+    "cios/applications/flora/research_intelligence/macro_views.py": "14327a3f9cbba61f152f2485b5daf49c31f51172adbcc64ab27946f02d2fbf26",
+    "enterprise-knowledge/macro/research-model/Macro-Context-v1.json": "32cc5401a40e6d26e7bdac20b98d69698ce84b88dddd696045f26e42ee5517a9",
+    "tools/preview_flora_macro.py": "9357fcfd5995ecf891dc94c57f94ab1a18d8f43b4f265be4a7a6f4bd57391bd1"
+  }
+}

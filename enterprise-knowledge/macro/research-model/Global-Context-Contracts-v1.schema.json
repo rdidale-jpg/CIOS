@@ -1,0 +1,438 @@
+{
+  "$defs": {
+    "ContextEdge": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "subject": {
+          "title": "Subject",
+          "type": "string"
+        },
+        "predicate": {
+          "enum": [
+            "INTERPRETED_PESTLE_IMPACT",
+            "INTERPRETED_CAPABILITY_PRESSURE",
+            "ENTERPRISE_APPLICABILITY",
+            "MOTIVATES_INVESTIGATION"
+          ],
+          "title": "Predicate",
+          "type": "string"
+        },
+        "object": {
+          "title": "Object",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "interpreted",
+            "unknown",
+            "verified",
+            "conflicting"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "country_id": {
+          "enum": [
+            "GB",
+            "FR"
+          ],
+          "title": "Country Id",
+          "type": "string"
+        },
+        "jurisdiction_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Jurisdiction Ids",
+          "type": "array"
+        },
+        "entity_scope_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Entity Scope Id"
+        },
+        "effective_from": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Effective From"
+        },
+        "observed_period": {
+          "title": "Observed Period",
+          "type": "string"
+        },
+        "assessed_at": {
+          "format": "date",
+          "title": "Assessed At",
+          "type": "string"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Ids",
+          "type": "array"
+        },
+        "claim_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Claim Ids",
+          "type": "array"
+        },
+        "limitations": {
+          "title": "Limitations",
+          "type": "string"
+        },
+        "supersedes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supersedes"
+        }
+      },
+      "required": [
+        "id",
+        "subject",
+        "predicate",
+        "object",
+        "status",
+        "country_id",
+        "jurisdiction_ids",
+        "entity_scope_id",
+        "effective_from",
+        "observed_period",
+        "assessed_at",
+        "source_ids",
+        "claim_ids",
+        "limitations"
+      ],
+      "title": "ContextEdge",
+      "type": "object"
+    },
+    "GeographicArea": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "world",
+            "geographic_region",
+            "country"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "members": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Members",
+          "type": "array"
+        },
+        "code_system": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Code System"
+        },
+        "membership_kind": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Membership Kind"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "label"
+      ],
+      "title": "GeographicArea",
+      "type": "object"
+    },
+    "Jurisdiction": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "scope"
+      ],
+      "title": "Jurisdiction",
+      "type": "object"
+    },
+    "LegalEntityScope": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "enterprise_id": {
+          "title": "Enterprise Id",
+          "type": "string"
+        },
+        "legal_entity_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Legal Entity Id"
+        },
+        "registry_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Registry Id"
+        },
+        "legal_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Legal Name"
+        },
+        "parent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Id"
+        },
+        "status": {
+          "default": "unknown",
+          "enum": [
+            "unknown",
+            "interpreted",
+            "verified",
+            "conflicting"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "enterprise_id"
+      ],
+      "title": "LegalEntityScope",
+      "type": "object"
+    },
+    "MarketContext": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "country_id": {
+          "enum": [
+            "GB",
+            "FR"
+          ],
+          "title": "Country Id",
+          "type": "string"
+        },
+        "industry_id": {
+          "enum": [
+            "banking",
+            "aviation"
+          ],
+          "title": "Industry Id",
+          "type": "string"
+        },
+        "industry_model_id": {
+          "title": "Industry Model Id",
+          "type": "string"
+        },
+        "as_of": {
+          "format": "date",
+          "title": "As Of",
+          "type": "string"
+        },
+        "coverage": {
+          "title": "Coverage",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "country_id",
+        "industry_id",
+        "industry_model_id",
+        "as_of",
+        "coverage"
+      ],
+      "title": "MarketContext",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Reusable presentation context contracts only; not canonical evidence, legal applicability or workspace authority. Existing SourceSegment/CandidateClaim/EvidencePackageItem remain evidence owners.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "areas": {
+      "items": {
+        "$ref": "#/$defs/GeographicArea"
+      },
+      "title": "Areas",
+      "type": "array"
+    },
+    "jurisdictions": {
+      "items": {
+        "$ref": "#/$defs/Jurisdiction"
+      },
+      "title": "Jurisdictions",
+      "type": "array"
+    },
+    "legal_entity_scopes": {
+      "items": {
+        "$ref": "#/$defs/LegalEntityScope"
+      },
+      "title": "Legal Entity Scopes",
+      "type": "array"
+    },
+    "market_contexts": {
+      "items": {
+        "$ref": "#/$defs/MarketContext"
+      },
+      "title": "Market Contexts",
+      "type": "array"
+    },
+    "relationships": {
+      "items": {
+        "$ref": "#/$defs/ContextEdge"
+      },
+      "title": "Relationships",
+      "type": "array"
+    }
+  },
+  "required": [
+    "areas",
+    "jurisdictions",
+    "legal_entity_scopes",
+    "market_contexts",
+    "relationships"
+  ],
+  "title": "GlobalContextContracts",
+  "type": "object",
+  "$id": "urn:cios:flora:global-context:1"
+}

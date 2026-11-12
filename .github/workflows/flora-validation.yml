@@ -2,12 +2,13 @@ name: FLORA validation
 
 on:
   pull_request:
-    branches: [main, codex/flora-security-repair-01a, codex/flora-security-repair-01b, codex/flora-living-industry-maps-v2, codex/flora-commercial-visual-intelligence-v3, codex/flora-intelligence-depth-v1]
+    branches: [main, codex/flora-security-repair-01a, codex/flora-security-repair-01b, codex/flora-living-industry-maps-v2, codex/flora-commercial-visual-intelligence-v3, codex/flora-global-macro-intelligence-v1, codex/flora-intelligence-depth-v1]
     types: [opened, synchronize, reopened, ready_for_review, edited]
     paths:
       - 'cios/applications/flora/**'
       - 'enterprise-knowledge/banking/**'
       - 'enterprise-knowledge/aviation/**'
+      - 'enterprise-knowledge/macro/**'
       - 'tests/**'
       - 'tools/ci/**'
       - 'tools/import_flora_primary_source.py'
@@ -23,6 +24,7 @@ on:
       - 'cios/applications/flora/**'
       - 'enterprise-knowledge/banking/**'
       - 'enterprise-knowledge/aviation/**'
+      - 'enterprise-knowledge/macro/**'
       - 'tests/**'
       - 'tools/ci/**'
       - 'tools/import_flora_primary_source.py'

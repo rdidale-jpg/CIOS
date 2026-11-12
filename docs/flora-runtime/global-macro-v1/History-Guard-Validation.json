@@ -1,0 +1,36 @@
+{
+  "historical_files": 142,
+  "approved_new_files": 9,
+  "scenarios": [
+    {
+      "scenario": "nine-approved-additions",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "result": "passed"
+    },
+    {
+      "scenario": "historical-content-modification",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "result": "rejected as required"
+    },
+    {
+      "scenario": "historical-file-deletion",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "result": "rejected as required"
+    },
+    {
+      "scenario": "unapproved-addition",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "result": "rejected as required"
+    },
+    {
+      "scenario": "restored-approved-tree",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "result": "passed"
+    }
+  ]
+}

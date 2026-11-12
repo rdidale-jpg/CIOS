@@ -1,0 +1,13 @@
+{
+  "main": "adf205993cc0857183d77766ce4882bf48326fb4",
+  "macro_head": "4c374ac2d326639245b60967aa64e934e0c1d7a3",
+  "enterprise_head": "5fa5d2f197893a6fd64b3344354c039eaad629f7",
+  "synthetic_tree": "2e51481429c84a74ea5b721ff582a39c044e04b5",
+  "conflicts": [
+    "tests/test_flora_commercial_visual_v3.py",
+    "tools/ci/flora-baseline-v1.json"
+  ],
+  "application_compilation": "passed",
+  "combined_strict_gate": "not run: unresolved controls; no combined acceptance claimed",
+  "branches_modified": false
+}

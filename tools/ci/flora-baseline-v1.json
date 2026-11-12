@@ -6809,6 +6809,288 @@
               "status": "passed"
             }
           }
+        },
+        "global_macro": {
+          "selections": [
+            [
+              "tests/test_flora_global_macro.py"
+            ]
+          ],
+          "cases": {
+            "tests/test_flora_global_macro.py::test_seven_primary_excerpts_reuse_unaccepted_semantic_and_evidence_contracts": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_gb_and_fr_reuse_one_industry_model_without_copying_or_mutating_research[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_gb_and_fr_reuse_one_industry_model_without_copying_or_mutating_research[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_global_cyber_is_one_force_with_separately_scoped_country_edges": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_navigation_region_is_not_legal_jurisdiction": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_uk_instruments_do_not_propagate_to_french_procurement_or_enterprises[social-value-banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_uk_instruments_do_not_propagate_to_french_procurement_or_enterprises[social-value-aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_uk_instruments_do_not_propagate_to_french_procurement_or_enterprises[uk-srs-banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_uk_instruments_do_not_propagate_to_french_procurement_or_enterprises[uk-srs-aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_uk_instruments_do_not_propagate_to_french_procurement_or_enterprises[cyber-bill-banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_uk_instruments_do_not_propagate_to_french_procurement_or_enterprises[cyber-bill-aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_fr_sustainability_retains_eu_enactment_vs_national_transposition_unknown[banking]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_fr_sustainability_retains_eu_enactment_vs_national_transposition_unknown[aviation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_parent_identity_never_proves_child_identity_or_inherits_an_obligation": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_verified_entity_identity_requires_explicit_evidence[registry_id]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_verified_entity_identity_requires_explicit_evidence[legal_name]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_verified_entity_identity_requires_explicit_evidence[evidence_ids]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_proposed_bill_cannot_be_upgraded_to_enacted_duty[effective_date]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_proposed_bill_cannot_be_upgraded_to_enacted_duty[legal_kind]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_source_passage_identity_and_digest_cannot_drift[content_hash]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_source_passage_identity_and_digest_cannot_drift[asset_id]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_source_passage_identity_and_digest_cannot_drift[source_location]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_ambiguous_or_unregistered_contexts_fail_closed[market=DE]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_ambiguous_or_unregistered_contexts_fail_closed[market=FR&market=GB]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_ambiguous_or_unregistered_contexts_fail_closed[workspace_id=private]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_ambiguous_or_unregistered_contexts_fail_closed[force=made-up]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_ambiguous_or_unregistered_contexts_fail_closed[category=cyber&force=uk-srs]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_ambiguous_or_unregistered_contexts_fail_closed[industry=private]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_ambiguous_or_unregistered_contexts_fail_closed[capability=PRIVATE-RESOURCE]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_ambiguous_or_unregistered_contexts_fail_closed[factor=made-up]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_ambiguous_or_unregistered_contexts_fail_closed[mode=admin]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_public_macro_catalogue_never_accepts_private_selectors_or_prefixes[/macro/private]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_public_macro_catalogue_never_accepts_private_selectors_or_prefixes[/macro/../evidence]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_public_macro_catalogue_never_accepts_private_selectors_or_prefixes[/macro//]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_public_macro_catalogue_never_accepts_private_selectors_or_prefixes[/macro%2fspec]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_public_macro_catalogue_never_accepts_private_selectors_or_prefixes[/macro?workspace_id=secret]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_public_macro_catalogue_never_accepts_private_selectors_or_prefixes[/macro?market=GB&market=FR]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_public_macro_catalogue_never_accepts_private_selectors_or_prefixes[/macro/spec?account_id=other]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_all_three_macro_routes_are_explicitly_public_and_bound_to_repo_data": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_seller_fit_is_ephemeral_not_customer_demand_or_territorial_permission[none]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_seller_fit_is_ephemeral_not_customer_demand_or_territorial_permission[cyber]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_seller_fit_is_ephemeral_not_customer_demand_or_territorial_permission[ai-delivery]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_seller_fit_is_ephemeral_not_customer_demand_or_territorial_permission[reporting]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_unsupported_category_is_an_explicit_research_gap_not_zero_risk": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_existing_hypotheses_are_only_thematic_associations_with_evidence_and_no_new_ids[banking-cyber-cyber-expected0]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_existing_hypotheses_are_only_thematic_associations_with_evidence_and_no_new_ids[aviation-uk-srs-sustainability-expected1]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_existing_hypotheses_are_only_thematic_associations_with_evidence_and_no_new_ids[banking-social-value-sustainability-expected2]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_generated_contract_schema_matches_the_reusable_models": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_public_journeys_do_not_enumerate_or_modify_private_pipeline": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_invalid_public_context_is_a_controlled_error_not_server_failure[market=DE]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_invalid_public_context_is_a_controlled_error_not_server_failure[force=made-up]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_invalid_public_context_is_a_controlled_error_not_server_failure[factor=private]": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_selected_page_has_one_inspector_and_keeps_deep_research_on_demand": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_fr_category_defaults_to_local_evidence_without_transferring_uk_policy": {
+              "status": "passed"
+            },
+            "tests/test_flora_global_macro.py::test_french_reference_switched_to_uk_retains_unknown_scope_and_correct_explanation": {
+              "status": "passed"
+            }
+          }
+        },
+        "macro_enterprise_v2": {
+          "cases": {
+            "tests/test_flora_macro_enterprise_v2.py::test_caller_modified_reference_rejected[assessment_digest]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_caller_modified_reference_rejected[claim_ids]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_caller_modified_reference_rejected[entity_scope]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_caller_modified_reference_rejected[original_hypothesis_id]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_caller_modified_reference_rejected[review_digest]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_france_has_national_text_but_no_entity_or_transplanted_candidate": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_new_cut_retains_source_truth_and_reuses_semantic_owner": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_one_concise_panel_and_deliberate_full_dossier[FR-eu-csrd-sustainability]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_one_concise_panel_and_deliberate_full_dossier[GB-cyber-cyber]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_original_opportunity_identities_and_scope_stay_intact": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_public_trace_cannot_read_private_records_or_rewrite_capture": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_reference_does_not_create_unreviewed_hypothesis_links[FR-RCO-LBG-005]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_reference_does_not_create_unreviewed_hypothesis_links[GB-RCO-LBG-001]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_reference_does_not_create_unreviewed_hypothesis_links[global-RCO-LBG-005]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_reference_is_deterministic_server_derived_and_not_a_persistence_payload": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_separate_edge_decisions_do_not_collapse_identity_into_demand[FR-eu-csrd-sustainability]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_separate_edge_decisions_do_not_collapse_identity_into_demand[GB-cyber-cyber]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[accepted]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[applicability]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[claim_scope]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[duplicate]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[hypothesis]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[identity]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[prior_digest]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[registry]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[source]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_trace_and_source_tampering_fails_closed[source_digest]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_uk_investigates_ongoing_resilience_not_new_deadline_or_bank_deficiency": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_unreviewed_context_does_not_inherit_entity_or_trace[]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_unreviewed_context_does_not_inherit_entity_or_trace[market=FR]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_unreviewed_context_does_not_inherit_entity_or_trace[market=GB&category=sustainability&force=eu-csrd]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_unreviewed_context_does_not_inherit_entity_or_trace[market=GB&force=cyber-bill]": {
+              "status": "passed"
+            },
+            "tests/test_flora_macro_enterprise_v2.py::test_unreviewed_context_does_not_inherit_entity_or_trace[market=GB&industry=aviation]": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_macro_enterprise_v2.py"
+            ]
+          ]
         }
       }
     }

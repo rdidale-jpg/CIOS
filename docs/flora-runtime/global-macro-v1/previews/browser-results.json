@@ -1,0 +1,241 @@
+{
+  "pages": [
+    {
+      "page": "atlas",
+      "viewport": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "cyber-pestle",
+      "viewport": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "lloyds-context",
+      "viewport": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "social-value",
+      "viewport": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "easyjet-reporting",
+      "viewport": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "france-reporting",
+      "viewport": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "france-cyber",
+      "viewport": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "proposed-bill",
+      "viewport": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "coverage-gap",
+      "viewport": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "reverse-france-uk",
+      "viewport": "desktop",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "atlas",
+      "viewport": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "cyber-pestle",
+      "viewport": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "lloyds-context",
+      "viewport": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "social-value",
+      "viewport": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "easyjet-reporting",
+      "viewport": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "france-reporting",
+      "viewport": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "france-cyber",
+      "viewport": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "proposed-bill",
+      "viewport": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "coverage-gap",
+      "viewport": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "reverse-france-uk",
+      "viewport": "tablet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "atlas",
+      "viewport": "mobile",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "cyber-pestle",
+      "viewport": "mobile",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "lloyds-context",
+      "viewport": "mobile",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "social-value",
+      "viewport": "mobile",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "easyjet-reporting",
+      "viewport": "mobile",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "france-reporting",
+      "viewport": "mobile",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "france-cyber",
+      "viewport": "mobile",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "proposed-bill",
+      "viewport": "mobile",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "coverage-gap",
+      "viewport": "mobile",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "page": "reverse-france-uk",
+      "viewport": "mobile",
+      "status": 200,
+      "overflow": false
+    }
+  ],
+  "journeys": [
+    {
+      "persona": "new seller",
+      "device": "desktop",
+      "result": "passed; relevance not customer demand"
+    },
+    {
+      "persona": "experienced seller",
+      "device": "desktop",
+      "result": "passed; source/date/transposition inspected directly"
+    },
+    {
+      "persona": "intermediate seller",
+      "device": "desktop",
+      "result": "passed; country/force retained, no policy transfer"
+    },
+    {
+      "persona": "new seller",
+      "device": "tablet",
+      "result": "passed; relevance not customer demand"
+    },
+    {
+      "persona": "experienced seller",
+      "device": "tablet",
+      "result": "passed; source/date/transposition inspected directly"
+    },
+    {
+      "persona": "intermediate seller",
+      "device": "tablet",
+      "result": "passed; country/force retained, no policy transfer"
+    },
+    {
+      "persona": "new seller",
+      "device": "mobile",
+      "result": "passed; relevance not customer demand"
+    },
+    {
+      "persona": "experienced seller",
+      "device": "mobile",
+      "result": "passed; source/date/transposition inspected directly"
+    },
+    {
+      "persona": "intermediate seller",
+      "device": "mobile",
+      "result": "passed; country/force retained, no policy transfer"
+    }
+  ],
+  "pdfs": [
+    "cyber-executive.pdf",
+    "cyber-appendix.pdf",
+    "social-executive.pdf",
+    "social-appendix.pdf",
+    "france-executive.pdf",
+    "france-appendix.pdf"
+  ],
+  "errors": [],
+  "no_javascript": "passed; country \u2192 theme \u2192 PESTLE \u2192 exact source"
+}
