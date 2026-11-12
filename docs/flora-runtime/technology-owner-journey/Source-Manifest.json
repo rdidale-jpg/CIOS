@@ -1,0 +1,16 @@
+{
+  "parent": "22b8527ba1ce111e366f3b326895a32b7a55140c",
+  "files": {
+    ".github/workflows/flora-validation.yml": "80e85bbff0a05911e83c1db158efc380de89337257e89db060b31a6d96b8a7f4",
+    "cios/applications/flora/public_routes.py": "c127051771e762b043509255ae74d2ea0812342d37cef0d4a687bcd923329a0b",
+    "cios/applications/flora/research_intelligence/technology_experience.py": "16fb9944c75f70d28b8a6d2c056d1dae209b975c7e235300b07c8c07db3759f7",
+    "cios/applications/flora/research_intelligence/technology_experience_assets/experience.css": "d66998c57b5d60d7b7c4518dc9784a4ebb60d8d2998094edea5bb08472db3779",
+    "cios/applications/flora/research_intelligence/technology_experience_assets/experience.js": "a280e56e6852ac5ac0c30d2339b587d949f8c456575be49a72bc93f3f935fef9",
+    "cios/applications/flora/research_intelligence/technology_experience_assets/uk-technology.webp": "194ff4b1bdfd1899988c5c7b1ed89240d1ef0ef4115670742552120fed8601fe",
+    "cios/applications/flora/research_intelligence/technology_views.py": "3942536c9541198c6233f54747bb64a55c3973ebd1badb6fd857dec315c24ff4",
+    "cios/applications/flora/research_intelligence/unified_views.py": "101a93501d80653b6685f488b5fe3a6c611ec6f12dc9a00a48f2a18d9c147371",
+    "cios/applications/flora/web/app.py": "26c09e45e31cb08f0826fd4d72d193edde7e8df4953936e0b62a1afc1b617141",
+    "tests/test_flora_technology_owner_journey.py": "3ccfd26d11072a238e8d5a160a4a314699e5da100160b400c94086402b8a1775",
+    "tools/research/check_technology_owner_journey.cjs": "704192f06c504e6d2948e1e00a152b77c88c6e496838c97a9e1e5a0d4c7266de"
+  }
+}

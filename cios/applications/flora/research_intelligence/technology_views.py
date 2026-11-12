@@ -185,7 +185,7 @@ def render(path, query, headers=None):
     if model and model not in ('1','2','3','4','5'):raise ValueError('Unknown reference model')
     suffix=path.removeprefix(t.BASE)
     if suffix=='':
-        body=world(data,lens,selected,relationship,theme)
+        body="<p><a href='/industries/technology/experience'>Open the new visual experience →</a></p>"+world(data,lens,selected,relationship,theme)
         if lens=='how':body+="<details class='world-textnav'><summary>Industry economics, capabilities & strategic context</summary>"+economics(data,blocks)+'</details>'
     elif suffix=='/providers':body=world(data,'how',selected,provider=provider)+"<details class='world-textnav'"+('' if provider else ' open')+"><summary>Provider directory / all 80 selected views</summary>"+directory(data,'',selected)+'</details>'
     elif suffix=='/models':body=models(data,model)
