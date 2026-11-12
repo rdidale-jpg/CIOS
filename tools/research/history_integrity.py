@@ -42,6 +42,12 @@ def approved_history(root):
         content=(Path(root)/path).read_bytes()
         assert hashlib.sha256(content).hexdigest()==checksum, 'Unreviewed foundation source change: '+path
         expected[path]=content
+    from cios.applications.flora.research_intelligence.foundation.sprint2.snapshot import PINS as S2_PINS
+    for path,checksum in S2_PINS.items():
+        assert path not in expected, 'Research identity reuse denied'
+        content=(Path(root)/path).read_bytes()
+        assert hashlib.sha256(content).hexdigest()==checksum, 'Unreviewed sprint2 source change: '+path
+        expected[path]=content
     return expected
 
 
@@ -60,6 +66,7 @@ def verify_history(root):
     actual={str(p.relative_to(root)):p.read_bytes() for p in files if p.is_file()}
     compare_history(expected,actual)
     from cios.applications.flora.research_intelligence.foundation.snapshot import PINS
-    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(PINS),
+    from cios.applications.flora.research_intelligence.foundation.sprint2.snapshot import PINS as S2_PINS
+    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(PINS)-len(S2_PINS),
             'depth_additions':len(DEPTH_ADDITIONS),'macro_additions':len(MACRO_ADDITIONS),
-            'foundation_additions':len(PINS),'total':len(expected),'old_review_records_retained':True}
+            'foundation_additions':len(PINS),'sprint2_additions':len(S2_PINS),'total':len(expected),'old_review_records_retained':True}

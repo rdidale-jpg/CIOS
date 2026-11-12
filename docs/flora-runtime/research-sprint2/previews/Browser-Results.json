@@ -1,0 +1,40 @@
+{
+  "browser": "Chromium / Playwright",
+  "desktop_keyboard_svg_activation": true,
+  "results": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "height": 1050,
+      "programme_navigation": true,
+      "provider_drill_down": true,
+      "journeys": 2,
+      "source_drill_throughs": 7,
+      "no_overflow": true,
+      "javascript_errors": []
+    },
+    {
+      "viewport": "tablet",
+      "width": 1024,
+      "height": 1366,
+      "programme_navigation": true,
+      "provider_drill_down": true,
+      "journeys": 2,
+      "source_drill_throughs": 7,
+      "no_overflow": true,
+      "javascript_errors": []
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "height": 844,
+      "programme_navigation": true,
+      "provider_drill_down": true,
+      "journeys": 2,
+      "source_drill_throughs": 7,
+      "no_overflow": true,
+      "javascript_errors": []
+    }
+  ],
+  "limitation": "Automated functional/rendering validation; owner comprehension/usefulness not evaluated"
+}

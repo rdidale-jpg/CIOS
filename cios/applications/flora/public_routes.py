@@ -37,7 +37,7 @@ def public_route_catalog():
     add(('/macro','/macro/evidence','/macro/spec'), 'macro_intelligence',
         'Finite repository macro research; no private stores or authority; bounded market view only',
         ('market','category','force','industry','offering','view','factor','capability','mode'))
-    add(('/research/programmes/uk-technology',), 'foundation_research_programme', 'Pinned public repository research release only; no operational/private stores', ('view','segment'))
+    add(('/research/programmes/uk-technology',), 'foundation_research_programme', 'Pinned public repository research release only; no operational/private stores', ('view','segment','provider'))
     add(('/research',), '_flora_research_page', 'Fixed navigation; no research/import records')
     add(('/workspace/reference', '/flora/reference'), 'reference_workspace_page', 'Repository source pipeline and non-authority preference cookie', ('saved',))
     add(('/explore',), '_flora_explore_page', 'Repository Banking pipeline')

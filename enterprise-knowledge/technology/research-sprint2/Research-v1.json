@@ -1,0 +1,849 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-12",
+  "programme": "UK Technology / Sprint 2",
+  "audience": "shared_public",
+  "status": "partial research demonstration; full acceptance incomplete",
+  "source_policy": "Crown/EU short factual excerpts v2; operation-specific rights; no third-party quotations or personal/contact records",
+  "sources": [
+    {
+      "id": "AWS-PLAN",
+      "url": "https://www.gov.uk/government/news/chancellor-announces-8-billion-amazon-web-services-investment-as-she-vows-to-make-every-part-of-britain-better-off",
+      "publication_date": "2024-09-11",
+      "effective_date": null,
+      "retrieved_at": "2026-11-12T12:10:21.850130+00:00",
+      "origin_id": "HMT-report-of-AWS-announcement",
+      "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+      "researcher_tool_reference": "turn514417view0",
+      "excerpt": "The Chancellor Rachel Reeves has today [11 September] confirmed an £8 billion investment from Amazon Web Services which is estimated to support thousands of jobs across the UK. The Chancellor secured the planned five-year investment last week at a meeting with Amazon Web Services. AWS estimates that these investments in the UK will contribute £14 billion to the UK’s total Gross Domestic Product (GDP) from 2024 to 2028.",
+      "excerpt_sha256": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+      "original_bytes_sha256": null,
+      "rights": {
+        "acquisition": "allowed",
+        "deterministic_extraction": "allowed",
+        "model_processing": "allowed",
+        "retention": "allowed",
+        "quotation": "allowed",
+        "indexing": "allowed",
+        "redistribution": "allowed"
+      },
+      "rights_basis": "Crown-owned selected factual fields / OGL v3; third-party quotations, logos, contacts and attachments excluded",
+      "licence_url": "https://www.gov.uk/help/terms-conditions",
+      "attribution": "Contains public sector information licensed under OGL v3. Source: named UK public authority. No endorsement.",
+      "assurance_state": "model_assisted_research_draft_not_independently_semantically_verified",
+      "limitations": [
+        "Selected text only, no original bytes; source statements and legal conditions are not independent proof of real-world outcomes.",
+        "Fresh retrieval is not fresh publication."
+      ],
+      "verifier_tool_references": [
+        "turn867338view0"
+      ],
+      "verifier_recorded_at": "2026-11-12T12:12:38.553345+00:00",
+      "retrieval_field_check": "separately_retrieved_fields_match; semantic entailment not implied"
+    },
+    {
+      "id": "MS-SOFTWARE",
+      "url": "https://www.gov.uk/government/news/cma-takes-first-steps-to-ensure-choice-in-business-software",
+      "publication_date": "2026-10-16",
+      "effective_date": null,
+      "retrieved_at": "2026-11-12T12:10:21.850130+00:00",
+      "origin_id": "CMA-business-software-investigation",
+      "locator": "Summary and findings, lines 56 and 77-79",
+      "researcher_tool_reference": "turn950338view1",
+      "excerpt": "CMA proposes to designate Microsoft with strategic market status in its business software ecosystem.\nMicrosoft’s strength in business software comes from the barriers customers face when switching, limiting their choice and weakening the constraints of other software developers\nMicrosoft has a strong position across each of the 5 areas of digital activity that the CMA investigated (personal computer operating systems, productivity software suites, security software, server operating systems and relational database management systems)\nAssessing whether customers can freely choose the best AI tools and functionalities for their needs, and whether alternative AI providers have a level playing field to compete with Microsoft’s Copilot",
+      "excerpt_sha256": "31937069fa5002a87fef397b7d3ead35e5698f2ecebb77bf1add5f3ef3893c76",
+      "original_bytes_sha256": null,
+      "rights": {
+        "acquisition": "allowed",
+        "deterministic_extraction": "allowed",
+        "model_processing": "allowed",
+        "retention": "allowed",
+        "quotation": "allowed",
+        "indexing": "allowed",
+        "redistribution": "allowed"
+      },
+      "rights_basis": "Crown-owned selected factual fields / OGL v3; third-party quotations, logos, contacts and attachments excluded",
+      "licence_url": "https://www.gov.uk/help/terms-conditions",
+      "attribution": "Contains public sector information licensed under OGL v3. Source: named UK public authority. No endorsement.",
+      "assurance_state": "model_assisted_research_draft_not_independently_semantically_verified",
+      "limitations": [
+        "Selected text only, no original bytes; source statements and legal conditions are not independent proof of real-world outcomes.",
+        "Fresh retrieval is not fresh publication."
+      ],
+      "verifier_tool_references": [
+        "turn867338view1",
+        "turn914454view0"
+      ],
+      "verifier_recorded_at": "2026-11-12T12:12:38.553359+00:00",
+      "retrieval_field_check": "separately_retrieved_fields_match; semantic entailment not implied"
+    },
+    {
+      "id": "CYBER-UK",
+      "url": "https://www.gov.uk/government/publications/cyber-security-sectoral-analysis-2025/cyber-security-sectoral-analysis-2025",
+      "publication_date": "2025-03-10",
+      "effective_date": null,
+      "retrieved_at": "2026-11-12T12:10:21.850130+00:00",
+      "origin_id": "DSIT-commissioned-sector-study",
+      "locator": "Section 7, AI security providers, line 1028",
+      "researcher_tool_reference": "turn950338view2",
+      "excerpt": "We find evidence of (c. 31) dedicated cyber security firms operating in the UK that have offer some form of cyber security for AI product or service to their customers. This includes several dedicated UK headquartered security specialists such as Tessian, Darktrace, and Mimecast.",
+      "excerpt_sha256": "7c8611a9f9b2bc2fa1b44b14114622f38bab11b34f78341d80b83932770af4b9",
+      "original_bytes_sha256": null,
+      "rights": {
+        "acquisition": "allowed",
+        "deterministic_extraction": "allowed",
+        "model_processing": "allowed",
+        "retention": "allowed",
+        "quotation": "allowed",
+        "indexing": "allowed",
+        "redistribution": "allowed"
+      },
+      "rights_basis": "Crown-owned selected factual fields / OGL v3; third-party quotations, logos, contacts and attachments excluded",
+      "licence_url": "https://www.gov.uk/help/terms-conditions",
+      "attribution": "Contains public sector information licensed under OGL v3. Source: named UK public authority. No endorsement.",
+      "assurance_state": "model_assisted_research_draft_not_independently_semantically_verified",
+      "limitations": [
+        "Selected text only, no original bytes; source statements and legal conditions are not independent proof of real-world outcomes.",
+        "Fresh retrieval is not fresh publication."
+      ],
+      "verifier_tool_references": [
+        "turn867338view2"
+      ],
+      "verifier_recorded_at": "2026-11-12T12:12:38.553362+00:00",
+      "retrieval_field_check": "separately_retrieved_fields_match; semantic entailment not implied"
+    },
+    {
+      "id": "QUANTUM-ORDER",
+      "url": "https://www.gov.uk/government/publications/acquisition-of-oxford-ionics-limited-by-ionq-inc-notice-of-final-order/acquisition-of-oxford-ionics-limited-by-ionq-inc-notice-of-final-order",
+      "publication_date": "2025-09-11",
+      "effective_date": null,
+      "retrieved_at": "2026-11-12T12:10:21.850130+00:00",
+      "origin_id": "UK-NSI-final-order",
+      "locator": "Final order paragraph 5(ii), line 83",
+      "researcher_tool_reference": "turn514417view1",
+      "excerpt": "host current and future generations of Oxford Ionics’ trapped-ion quantum computing hardware in the UK to allow for its independent assessment and validation on request as part of current or future government programmes or contracts; and\nmaintain Oxford Ionics’ science, engineering and infrastructure functions in the UK, including suitably qualified and experienced personnel, tangible and intangible assets and manufacturing capacity related to the development of trapped-ion quantum computing hardware.",
+      "excerpt_sha256": "482d69e742ed99946deccdde4c524eb1c8387551cd2daa65cbb522f33bbd45b1",
+      "original_bytes_sha256": null,
+      "rights": {
+        "acquisition": "allowed",
+        "deterministic_extraction": "allowed",
+        "model_processing": "allowed",
+        "retention": "allowed",
+        "quotation": "allowed",
+        "indexing": "allowed",
+        "redistribution": "allowed"
+      },
+      "rights_basis": "Crown-owned selected factual fields / OGL v3; third-party quotations, logos, contacts and attachments excluded",
+      "licence_url": "https://www.gov.uk/help/terms-conditions",
+      "attribution": "Contains public sector information licensed under OGL v3. Source: named UK public authority. No endorsement.",
+      "assurance_state": "model_assisted_research_draft_not_independently_semantically_verified",
+      "limitations": [
+        "Selected text only, no original bytes; source statements and legal conditions are not independent proof of real-world outcomes.",
+        "Fresh retrieval is not fresh publication."
+      ],
+      "verifier_tool_references": [
+        "turn867338view3"
+      ],
+      "verifier_recorded_at": "2026-11-12T12:12:38.553389+00:00",
+      "retrieval_field_check": "separately_retrieved_fields_match; semantic entailment not implied"
+    },
+    {
+      "id": "COMPUTACENTER-CATALOGUE",
+      "url": "https://www.gca.gov.uk/suppliers/328/computacenter",
+      "publication_date": null,
+      "effective_date": null,
+      "retrieved_at": "2026-11-12T12:10:21.850130+00:00",
+      "origin_id": "GCA-published-catalogue",
+      "locator": "Supplier heading and selected lot names, lines 59,63,77,146",
+      "researcher_tool_reference": "turn766529view0",
+      "excerpt": "COMPUTACENTER (UK) LIMITED Trading as Computacenter\nCloud Compute 2\nProfessional Services\nSoftware",
+      "excerpt_sha256": "c59430ad0970583321bb45d1c4d73aab02413141ed6335488e237e1058743adb",
+      "original_bytes_sha256": null,
+      "rights": {
+        "acquisition": "allowed",
+        "deterministic_extraction": "allowed",
+        "model_processing": "allowed",
+        "retention": "allowed",
+        "quotation": "allowed",
+        "indexing": "allowed",
+        "redistribution": "allowed"
+      },
+      "rights_basis": "Crown-owned selected factual fields / OGL v3; third-party quotations, logos, contacts and attachments excluded",
+      "licence_url": "https://www.gca.gov.uk/terms-and-conditions",
+      "attribution": "Contains public sector information licensed under OGL v3. Source: named UK public authority. No endorsement.",
+      "assurance_state": "model_assisted_research_draft_not_independently_semantically_verified",
+      "limitations": [
+        "Selected text only, no original bytes; source statements and legal conditions are not independent proof of real-world outcomes.",
+        "Fresh retrieval is not fresh publication."
+      ],
+      "verifier_tool_references": [
+        "turn867338view4"
+      ],
+      "verifier_recorded_at": "2026-11-12T12:12:38.553390+00:00",
+      "retrieval_field_check": "separately_retrieved_fields_match; semantic entailment not implied"
+    },
+    {
+      "id": "DISTRIBUTION-EC",
+      "url": "https://ec.europa.eu/competition/mergers/cases1/202131/m10268_106_3.pdf",
+      "publication_date": "2021-07-23",
+      "effective_date": null,
+      "retrieved_at": "2026-11-12T12:10:21.850130+00:00",
+      "origin_id": "EC-competition-M10268",
+      "locator": "Page 2 / paragraph 2, lines 39-40",
+      "researcher_tool_reference": "turn766529view1",
+      "excerpt": "for Tech Data: wholesale distribution of technology products and solutions to resellers on a global basis.",
+      "excerpt_sha256": "a528f422494bf52b4428571949af162416524e28b729adbc04c59eda23c273af",
+      "original_bytes_sha256": null,
+      "rights": {
+        "acquisition": "allowed",
+        "deterministic_extraction": "allowed",
+        "model_processing": "allowed",
+        "retention": "allowed",
+        "quotation": "allowed",
+        "indexing": "allowed",
+        "redistribution": "allowed"
+      },
+      "rights_basis": "EU-owned decision text / CC BY 4.0; no trademarks/logos/third-party works",
+      "licence_url": "https://commission.europa.eu/legal-notice_en",
+      "attribution": "European Union, decision M.10268, 2021; selected excerpt; CC BY 4.0",
+      "assurance_state": "model_assisted_research_draft_not_independently_semantically_verified",
+      "limitations": [
+        "Selected text only, no original bytes; source statements and legal conditions are not independent proof of real-world outcomes.",
+        "Fresh retrieval is not fresh publication."
+      ],
+      "verifier_tool_references": [
+        "turn867338view5"
+      ],
+      "verifier_recorded_at": "2026-11-12T12:12:38.553392+00:00",
+      "retrieval_field_check": "separately_retrieved_fields_match; semantic entailment not implied"
+    },
+    {
+      "id": "CLOUD-SCOPE",
+      "url": "https://www.gov.uk/government/news/cma-independent-inquiry-group-publishes-provisional-findings-in-cloud-services-market-investigation",
+      "publication_date": "2025-01-28",
+      "effective_date": null,
+      "retrieved_at": "2026-11-12T12:10:21.850130+00:00",
+      "origin_id": "CMA-cloud-market-investigation",
+      "locator": "Provisional decision summary; superseded by final decision dated 31 July 2025",
+      "researcher_tool_reference": "turn766529view3",
+      "excerpt": "The inquiry group’s report provisionally recommends that the CMA board considers investigating AWS and Microsoft’s cloud service activities using new digital markets powers.",
+      "excerpt_sha256": "d95551ee9304590c928beb683d215168c80b1e0a21641fa7beeeefab5829a364",
+      "original_bytes_sha256": null,
+      "rights": {
+        "acquisition": "allowed",
+        "deterministic_extraction": "allowed",
+        "model_processing": "allowed",
+        "retention": "allowed",
+        "quotation": "allowed",
+        "indexing": "allowed",
+        "redistribution": "allowed"
+      },
+      "rights_basis": "Crown-owned selected factual fields / OGL v3; third-party quotations, logos, contacts and attachments excluded",
+      "licence_url": "https://www.gov.uk/help/terms-conditions",
+      "attribution": "Contains public sector information licensed under OGL v3. Source: named UK public authority. No endorsement.",
+      "assurance_state": "model_assisted_research_draft_not_independently_semantically_verified",
+      "limitations": [
+        "Selected text only, no original bytes; source statements and legal conditions are not independent proof of real-world outcomes.",
+        "Fresh retrieval is not fresh publication.",
+        "Provisional findings superseded; historical context only."
+      ],
+      "verifier_tool_references": [
+        "turn867338view6"
+      ],
+      "verifier_recorded_at": "2026-11-12T12:12:38.553393+00:00",
+      "retrieval_field_check": "separately_retrieved_fields_match; semantic entailment not implied"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "microsoft",
+      "name": "Microsoft",
+      "segments": [
+        "software",
+        "data-ai"
+      ],
+      "kind": "multinational enterprise group / brand; UK legal entity not resolved",
+      "source_ids": [
+        "MS-SOFTWARE",
+        "CLOUD-SCOPE"
+      ],
+      "summary": "Business software and cloud/AI ecosystem, examined through current UK competition findings. The CMA proposal concerns market status, not a final designation.",
+      "business_model": "Regulator analysis concerns software ecosystem integration, licensing and switching barriers; licence economics differ from a customer-specific contract.",
+      "structure": "Five activity areas are identified by the CMA: PC operating systems, productivity suites, security software, server operating systems and relational databases. Corporate divisions and their UK revenue are not established here.",
+      "products": "The CMA identifies Copilot in its AI-tool choice investigation; ownership of other named third-party AI products must not be inferred from partnership.",
+      "uk_context": "UK regulator investigating effects on businesses and public sector organisations; UK-specific revenue/headcount unknown.",
+      "change": "16 October 2026 proposal and investigation roadmap; consultation is not an enacted remedy or completed transformation.",
+      "ecosystem": "Integration advantages and licensing are regulator findings. No customer deployment, exclusive partner contract or delivery responsibility is established.",
+      "pressure": "Interpretation: portability and licence dependencies may constrain technical choices; enterprise-specific exposure requires evidence.",
+      "status": "provisional research baseline / partial; independent semantic assurance outstanding",
+      "gaps": [
+        "Current enterprise-owned annual/strategy disclosures with reviewed processing/reuse rights",
+        "Exact legal identity and UK operating scope",
+        "Comparable UK revenue/employment and divisions",
+        "Verified product/capability/delivery relationships",
+        "Contrary evidence and independently assured semantic synthesis"
+      ],
+      "hypothesis": "Research question only: validate the business capability and operating context before proposing any commercial opportunity."
+    },
+    {
+      "id": "aws",
+      "name": "Amazon Web Services",
+      "segments": [
+        "infrastructure"
+      ],
+      "kind": "multinational service business / brand; distinct from the EMEA SARL catalogue label",
+      "source_ids": [
+        "AWS-PLAN",
+        "CLOUD-SCOPE"
+      ],
+      "summary": "Cloud infrastructure provider with a dated announced UK investment plan. Planned spending and estimated economic effects are distinct from realised investment or supplier demand.",
+      "business_model": "Public cloud infrastructure context; this research does not establish product-level prices, contract terms or UK margins.",
+      "structure": "AWS business scope is distinct from Amazon group activities and legal subsidiaries; group/UK legal structure remains a gap.",
+      "products": "Infrastructure/cloud capability is supported as context; exact service ownership, processing locations and supported configurations need primary service documentation.",
+      "uk_context": "Government reported a planned £8bn investment in September 2024. Do not use global Amazon revenue as UK scale or GDP estimates as AWS revenue.",
+      "change": "Five-year plan is a historical announced ambition. Actual completed spending and current status are unverified.",
+      "ecosystem": "The government reports planned investment and estimated economic effects. No named supplier, customer adoption, procurement window or available budget is established.",
+      "pressure": "Interpretation: resilience, interoperability and capacity constraints merit investigation; they do not establish a purchase.",
+      "status": "provisional research baseline / partial; independent semantic assurance outstanding",
+      "gaps": [
+        "Current enterprise-owned annual/strategy disclosures with reviewed processing/reuse rights",
+        "Exact legal identity and UK operating scope",
+        "Comparable UK revenue/employment and divisions",
+        "Verified product/capability/delivery relationships",
+        "Contrary evidence and independently assured semantic synthesis"
+      ],
+      "hypothesis": "Research question only: validate the business capability and operating context before proposing any commercial opportunity."
+    },
+    {
+      "id": "darktrace",
+      "name": "Darktrace",
+      "segments": [
+        "cyber"
+      ],
+      "kind": "enterprise brand; parent/operating legal entities require current verification",
+      "source_ids": [
+        "CYBER-UK"
+      ],
+      "summary": "DSIT includes Darktrace among UK-headquartered security specialists in its 2025 AI-security discussion. This supports a dated market-role lead, not a complete current enterprise dossier.",
+      "business_model": "Cybersecurity for AI is the government study’s scope; exact subscription, services and revenue mix remain unknown.",
+      "structure": "Current divisions, legal subsidiaries and post-transaction governance are not established by the retained passage.",
+      "products": "Specific product ownership, efficacy and deployment architecture remain unverified.",
+      "uk_context": "2025 study identifies UK-headquartered specialist status; current UK employment and revenue are not provided.",
+      "change": "The source is historical and needs a refreshed primary enterprise publication.",
+      "ecosystem": "No customer, alliance-to-delivery transition or contract is asserted.",
+      "pressure": "Interpretation: AI adoption changes security requirements; concrete exposure and achievable benefits need evidence.",
+      "status": "provisional research baseline / partial; independent semantic assurance outstanding",
+      "gaps": [
+        "Current enterprise-owned annual/strategy disclosures with reviewed processing/reuse rights",
+        "Exact legal identity and UK operating scope",
+        "Comparable UK revenue/employment and divisions",
+        "Verified product/capability/delivery relationships",
+        "Contrary evidence and independently assured semantic synthesis"
+      ],
+      "hypothesis": "Research question only: validate the business capability and operating context before proposing any commercial opportunity."
+    },
+    {
+      "id": "computacenter",
+      "name": "Computacenter",
+      "segments": [
+        "services"
+      ],
+      "kind": "GCA supplier label COMPUTACENTER (UK) LIMITED trading as Computacenter; registry link pending",
+      "source_ids": [
+        "COMPUTACENTER-CATALOGUE"
+      ],
+      "summary": "Government catalogue links the named UK supplier label to cloud ancillary/professional services and technology products. Catalogue eligibility is not evidence of delivered contracts.",
+      "business_model": "Research interpretation: the listed products/services suggest a supply-and-services ecosystem role. Actual resale, integration and managed-service revenue mix needs company filings.",
+      "structure": "The trading label does not establish parent/group structure or divisions.",
+      "products": "Cloud Compute 2 professional services and software lots are evidenced catalogue categories; no proprietary software ownership is inferred.",
+      "uk_context": "Named UK procurement participant; significant operational scale is unquantified.",
+      "change": "Catalogue publication/effective date unknown; fresh retrieval alone does not establish current contract eligibility.",
+      "ecosystem": "Government procurement catalogue relationship; no manufacturer accreditation, named enterprise delivery or incumbent status proved.",
+      "pressure": "Interpretation: cloud migration and operating-service integration are relevant research questions, not confirmed demand.",
+      "status": "provisional research baseline / partial; independent semantic assurance outstanding",
+      "gaps": [
+        "Current enterprise-owned annual/strategy disclosures with reviewed processing/reuse rights",
+        "Exact legal identity and UK operating scope",
+        "Comparable UK revenue/employment and divisions",
+        "Verified product/capability/delivery relationships",
+        "Contrary evidence and independently assured semantic synthesis"
+      ],
+      "hypothesis": "Research question only: validate the business capability and operating context before proposing any commercial opportunity."
+    },
+    {
+      "id": "td-synnex",
+      "name": "TD SYNNEX / Tech Data context",
+      "segments": [
+        "channels"
+      ],
+      "kind": "historical global undertakings; UK legal entity lead separate",
+      "source_ids": [
+        "DISTRIBUTION-EC"
+      ],
+      "summary": "The European Commission described Tech Data’s global wholesale distribution activity in a July 2021 merger decision. It supplies historical ecosystem context rather than a current UK-scale claim.",
+      "business_model": "Historical wholesale distribution of technology products and solutions to resellers, distinct from product manufacture or end-customer implementation.",
+      "structure": "2021 undertakings SYNNEX and Tech Data must remain distinct from later brands and the UK subsidiary unless current identity links are evidenced.",
+      "products": "Distribution of third-party technology does not prove ownership of those products.",
+      "uk_context": "The retained decision states global scope; UK subsidiary register is a research lead, not sufficient evidence of UK operating scale.",
+      "change": "A proposed merger and regulatory non-opposition do not themselves prove completion, today’s corporate structure or current strategy.",
+      "ecosystem": "Supplier-to-reseller channel role is historically described; individual vendor alliances and end-client responsibilities remain unknown.",
+      "pressure": "Interpretation: channel aggregation and delivery responsibility need separate evidence; a reseller relationship is not a customer contract.",
+      "status": "provisional research baseline / partial; independent semantic assurance outstanding",
+      "gaps": [
+        "Current enterprise-owned annual/strategy disclosures with reviewed processing/reuse rights",
+        "Exact legal identity and UK operating scope",
+        "Comparable UK revenue/employment and divisions",
+        "Verified product/capability/delivery relationships",
+        "Contrary evidence and independently assured semantic synthesis"
+      ],
+      "hypothesis": "Research question only: validate the business capability and operating context before proposing any commercial opportunity."
+    },
+    {
+      "id": "oxford-ionics",
+      "name": "Oxford Ionics",
+      "segments": [
+        "emerging"
+      ],
+      "kind": "Oxford Ionics Limited named in UK final order; group completion link unverified",
+      "source_ids": [
+        "QUANTUM-ORDER"
+      ],
+      "summary": "The September 2025 final order allows IonQ’s acquisition subject to UK hardware-assessment and operating-function conditions. Permission and conditions are not proof of completion or compliance.",
+      "business_model": "Trapped-ion quantum-computing hardware development is described in the order. Product pricing, recurring services and commercial revenue are unknown.",
+      "structure": "Oxford Ionics Limited and IonQ Inc. are named separately. The notice alone does not prove the acquisition completed.",
+      "products": "Trapped-ion hardware is the evidenced technology category; no named product delivery or performance claim is accepted.",
+      "uk_context": "UK science, engineering, infrastructure and manufacturing-capacity conditions are explicit. They are legal conditions, not independently inspected operational facts.",
+      "change": "Order effective 11 September 2025; present compliance and subsequent publications require investigation.",
+      "ecosystem": "Government assessment/validation and possible programmes are described; no Banking/Aviation adoption, contract or buyer intent is inferred.",
+      "pressure": "Scenario: error correction, integration and workforce needs may matter; evidence of actual programmes is required.",
+      "status": "provisional research baseline / partial; independent semantic assurance outstanding",
+      "gaps": [
+        "Current enterprise-owned annual/strategy disclosures with reviewed processing/reuse rights",
+        "Exact legal identity and UK operating scope",
+        "Comparable UK revenue/employment and divisions",
+        "Verified product/capability/delivery relationships",
+        "Contrary evidence and independently assured semantic synthesis"
+      ],
+      "hypothesis": "Research question only: validate the business capability and operating context before proposing any commercial opportunity."
+    }
+  ],
+  "inventory": [
+    {
+      "name": "123 DIGITALLY LTD",
+      "kind": "catalogue_entity_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "cyber"
+      ],
+      "claim_ids": [
+        "RC-5b5de49b7a3d6c7e0d750cfe"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "2-sec Limited",
+      "kind": "catalogue_entity_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "cyber"
+      ],
+      "claim_ids": [
+        "RC-ca783ea535fc44e164cfc451"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "2I LIMITED",
+      "kind": "catalogue_entity_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "cyber"
+      ],
+      "claim_ids": [
+        "RC-2f9b66160b93507c7b7a2491"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "2T SECURITY LTD",
+      "kind": "catalogue_entity_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "cyber"
+      ],
+      "claim_ids": [
+        "RC-2f55e57cc0a7b88d21b3a6db"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "3B DATA SECURITY LTD",
+      "kind": "catalogue_entity_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "services"
+      ],
+      "claim_ids": [
+        "RC-38aeedc792fb462504f7a7f4"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "4C STRATEGIES LIMITED",
+      "kind": "catalogue_entity_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "services"
+      ],
+      "claim_ids": [
+        "RC-4be86990105cd635af369da8"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "4THOUGHTDIGITAL LTD",
+      "kind": "catalogue_entity_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "services"
+      ],
+      "claim_ids": [
+        "RC-e8fe9dd06275c5698b9daf6b"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "ABTEC COMPUTER SOLUTIONS LTD",
+      "kind": "catalogue_entity_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "services"
+      ],
+      "claim_ids": [
+        "RC-228dde4b789c64c3a6bbdf7f"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "ACADEMIA LIMITED",
+      "kind": "catalogue_entity_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "software"
+      ],
+      "claim_ids": [
+        "RC-7373793d3b940a84c9ed320c"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "ADVANIA UK (CCS) LIMITED",
+      "kind": "catalogue_entity_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "software"
+      ],
+      "claim_ids": [
+        "RC-dc99780d897c78cf066f01cb"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "ADVANIA UK LIMITED",
+      "kind": "catalogue_entity_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "infrastructure"
+      ],
+      "claim_ids": [
+        "RC-4af0d4633a543400d38d06a0"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "AGILE SOLUTIONS (GB) LTD",
+      "kind": "catalogue_entity_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "infrastructure"
+      ],
+      "claim_ids": [
+        "RC-82e8e1cd5b21d5a406ee5b31"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "AKER SYSTEMS LIMITED",
+      "kind": "catalogue_entity_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "infrastructure"
+      ],
+      "claim_ids": [
+        "RC-71e9720a35e0c66c8deb6938"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "Akhter Computers Limited (Team Akhter Consortium)",
+      "kind": "consortium_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "software"
+      ],
+      "claim_ids": [
+        "RC-4e02bd0e3105f108fa7d1ac6"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "AMAZON WEB SERVICES EMEA SARL",
+      "kind": "catalogue_entity_label",
+      "legal_entity_id": null,
+      "primary_cohorts": [
+        "infrastructure"
+      ],
+      "claim_ids": [
+        "RC-d1c72abd211e0320f1062fc0"
+      ],
+      "criteria": {
+        "UK_relevance": "UK government procurement catalogue participation evidenced; significant UK operations/headquarters unverified",
+        "scale": "Unknown; no comparable revenue/employment evidence retained",
+        "strategic_importance": "Unknown; procurement eligibility is not market importance",
+        "ecosystem_role": "Catalogue participant; manufacturer/reseller/implementation role unverified"
+      },
+      "selection_state": "research_candidate_not_confirmed_key_enterprise",
+      "identity_resolution": "unresolved; exact legal registry evidence/rights review required; no fuzzy merger",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "Microsoft",
+      "kind": "multinational enterprise group / brand; UK legal entity not resolved",
+      "profile_id": "microsoft",
+      "primary_cohorts": [
+        "software",
+        "data-ai"
+      ],
+      "identity_resolution": "source-scoped group/brand/undertaking context; canonical merge withheld",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "Amazon Web Services",
+      "kind": "multinational service business / brand; distinct from the EMEA SARL catalogue label",
+      "profile_id": "aws",
+      "primary_cohorts": [
+        "infrastructure"
+      ],
+      "identity_resolution": "source-scoped group/brand/undertaking context; canonical merge withheld",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "Darktrace",
+      "kind": "enterprise brand; parent/operating legal entities require current verification",
+      "profile_id": "darktrace",
+      "primary_cohorts": [
+        "cyber"
+      ],
+      "identity_resolution": "source-scoped group/brand/undertaking context; canonical merge withheld",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "Computacenter",
+      "kind": "GCA supplier label COMPUTACENTER (UK) LIMITED trading as Computacenter; registry link pending",
+      "profile_id": "computacenter",
+      "primary_cohorts": [
+        "services"
+      ],
+      "identity_resolution": "source-scoped group/brand/undertaking context; canonical merge withheld",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "TD SYNNEX / Tech Data context",
+      "kind": "historical global undertakings; UK legal entity lead separate",
+      "profile_id": "td-synnex",
+      "primary_cohorts": [
+        "channels"
+      ],
+      "identity_resolution": "source-scoped group/brand/undertaking context; canonical merge withheld",
+      "canonical_identity_changed": false
+    },
+    {
+      "name": "Oxford Ionics",
+      "kind": "Oxford Ionics Limited named in UK final order; group completion link unverified",
+      "profile_id": "oxford-ionics",
+      "primary_cohorts": [
+        "emerging"
+      ],
+      "identity_resolution": "source-scoped group/brand/undertaking context; canonical merge withheld",
+      "canonical_identity_changed": false
+    }
+  ],
+  "selection_rules": [
+    "Preserve all 15 original candidates; no automatic legal/brand/group merges.",
+    "Choose official-source research leads by segment representation and specific dated role evidence; not familiarity or ease alone.",
+    "Compare regulator, sector-study, procurement and legal-order source types; track original assertion origins rather than host count.",
+    "Six unique profiles cover seven segments; Microsoft overlaps software/data-AI and is counted once.",
+    "UK scale, significance and current identity remain eligibility gates, not inferred from global figures."
+  ],
+  "coverage_limitations": [
+    "Not exhaustive; original first-page procurement bias persists.",
+    "All original candidate legal identities remain unresolved; register leads are not accepted automatic matches.",
+    "Provider baseline completeness is NOT achieved in every segment; current primary rights and independent semantic assurance remain blockers."
+  ],
+  "journeys": [
+    {
+      "industry": "Banking",
+      "enterprise": "Lloyds",
+      "enterprise_claim_id": "LBG-AR25-MIGRATION",
+      "technology_source": "MS-SOFTWARE",
+      "capability": "Cloud portability and licence-dependency assessment",
+      "business_consequence": "Interpretation: switching constraints may affect the cost and resilience of a migration programme; exposure and benefit are unquantified.",
+      "hypothesis": "Investigate whether existing migration governance assesses portability, concentration and licence constraints. No verified Microsoft deployment or unmet supplier demand is established.",
+      "truth_class": "interpretation",
+      "deployment": "unknown",
+      "buyer_budget_procurement": "unknown",
+      "target": "/enterprises/lloyds?lens=opportunities"
+    },
+    {
+      "industry": "Aviation",
+      "enterprise": "easyJet",
+      "enterprise_claim_id": "AV-DIGITAL",
+      "technology_source": "CYBER-UK",
+      "capability": "AI-security assessment for digital self-service",
+      "business_consequence": "Interpretation: customer-facing disruption services may need security assurance; no breach, weak control or supplier gap is asserted.",
+      "hypothesis": "Investigate the applicable digital-service threat model and controls before inferring a service need. Darktrace/easyJet deployment is unknown.",
+      "truth_class": "interpretation",
+      "deployment": "unknown",
+      "buyer_budget_procurement": "unknown",
+      "target": "/enterprises/easyjet?lens=opportunities"
+    }
+  ],
+  "registry_leads": [
+    {
+      "label": "ADVANIA UK (CCS) LIMITED",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/04418144",
+      "retrieval_reference": "turn182421view0",
+      "status": "Observed registry lead; processing/publication scope not cleared; record body not retained or canonicalised"
+    },
+    {
+      "label": "TD SYNNEX UK LIMITED",
+      "url": "https://find-and-update.company-information.service.gov.uk/company/01691472",
+      "retrieval_reference": "turn182421view1",
+      "status": "Observed registry lead; group mapping and processing rights unresolved; record body not retained"
+    }
+  ],
+  "canonical_promotion": false,
+  "pipeline_changes": false
+}

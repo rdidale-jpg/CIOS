@@ -1,0 +1,52 @@
+{
+  "checks": [
+    {
+      "source_id": "AWS-PLAN",
+      "tool_reference": "turn867338view0",
+      "supported": true,
+      "missing_fields": []
+    },
+    {
+      "source_id": "MS-SOFTWARE",
+      "tool_references": [
+        "turn867338view1",
+        "turn914454view0"
+      ],
+      "supported": true,
+      "missing_fields": [],
+      "attempts": 2
+    },
+    {
+      "source_id": "CYBER-UK",
+      "tool_reference": "turn867338view2",
+      "supported": true,
+      "missing_fields": []
+    },
+    {
+      "source_id": "QUANTUM-ORDER",
+      "tool_reference": "turn867338view3",
+      "supported": true,
+      "missing_fields": []
+    },
+    {
+      "source_id": "COMPUTACENTER-CATALOGUE",
+      "tool_reference": "turn867338view4",
+      "supported": true,
+      "missing_fields": []
+    },
+    {
+      "source_id": "DISTRIBUTION-EC",
+      "tool_reference": "turn867338view5",
+      "supported": true,
+      "missing_fields": []
+    },
+    {
+      "source_id": "CLOUD-SCOPE",
+      "tool_reference": "turn867338view6",
+      "supported": true,
+      "missing_fields": []
+    }
+  ],
+  "semantic_assurance": false,
+  "limitation": "Separate acquisition and located field checks; not independently established real-world truth or general semantic entailment."
+}

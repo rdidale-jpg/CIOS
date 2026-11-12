@@ -1,0 +1,364 @@
+{
+  "schema_version": 1,
+  "scope": "One bounded historical plan proof; general semantic verification not demonstrated",
+  "proposal": {
+    "schema_version": 1,
+    "id": "TECH-S2-AWS-HISTORICAL-PLAN",
+    "meaning": {
+      "schema_version": 1,
+      "subject": "Amazon Web Services",
+      "predicate": "investment",
+      "object": "investment",
+      "geography": "GB",
+      "modality": "planned",
+      "reporting_period": "five-year plan (endpoints unspecified)",
+      "amount": "8000000000",
+      "currency": "GBP",
+      "truth_class": "publisher_reported_fact",
+      "assumptions": []
+    },
+    "statement": "Amazon Web Services | investment | investment | GB | planned | five-year plan (endpoints unspecified) | 8E+9 GBP | publisher_reported_fact",
+    "source_ids": [
+      "AWS-PLAN"
+    ],
+    "source_segments": [
+      "S2-AWS-RESEARCH",
+      "S2-AWS-VERIFY"
+    ],
+    "period_use": "historical"
+  },
+  "passages": [
+    {
+      "schema_version": 1,
+      "id": "S2-AWS-RESEARCH",
+      "source_id": "AWS-PLAN",
+      "url": "https://www.gov.uk/government/news/chancellor-announces-8-billion-amazon-web-services-investment-as-she-vows-to-make-every-part-of-britain-better-off",
+      "origin_id": "HMT-report-of-AWS-announcement",
+      "role": "researcher",
+      "collector_id": "sprint2-researcher",
+      "request_id": "source-reconnaissance-turn514417view0",
+      "tool_reference": "turn514417view0",
+      "retrieved_at": "2026-11-12T12:10:21.850130Z",
+      "publication_date": "2024-09-11",
+      "effective_date": null,
+      "reporting_period": "five-year plan (endpoints unspecified)",
+      "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+      "text": "The Chancellor Rachel Reeves has today [11 September] confirmed an £8 billion investment from Amazon Web Services which is estimated to support thousands of jobs across the UK. The Chancellor secured the planned five-year investment last week at a meeting with Amazon Web Services. AWS estimates that these investments in the UK will contribute £14 billion to the UK’s total Gross Domestic Product (GDP) from 2024 to 2028.",
+      "sha256": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+      "rights": {
+        "acquisition": "allowed",
+        "deterministic_extraction": "allowed",
+        "model_processing": "allowed",
+        "retention": "allowed",
+        "quotation": "allowed",
+        "indexing": "allowed",
+        "redistribution": "allowed"
+      },
+      "rights_basis": "Crown-owned selected factual fields / OGL v3; third-party quotations, logos, contacts and attachments excluded",
+      "visibility": "public_non_personal",
+      "execution_kind": "live_web_bridge",
+      "supersedes": []
+    },
+    {
+      "schema_version": 1,
+      "id": "S2-AWS-VERIFY",
+      "source_id": "AWS-PLAN",
+      "url": "https://www.gov.uk/government/news/chancellor-announces-8-billion-amazon-web-services-investment-as-she-vows-to-make-every-part-of-britain-better-off",
+      "origin_id": "HMT-report-of-AWS-announcement",
+      "role": "verifier",
+      "collector_id": "sprint2-independent-retrieval",
+      "request_id": "S2-VERIFY-2bff7c1bc2cf72102360b09d",
+      "tool_reference": "turn867338view0",
+      "retrieved_at": "2026-11-12T12:12:38.553345Z",
+      "publication_date": "2024-09-11",
+      "effective_date": null,
+      "reporting_period": "five-year plan (endpoints unspecified)",
+      "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+      "text": "The Chancellor Rachel Reeves has today [11 September] confirmed an £8 billion investment from Amazon Web Services which is estimated to support thousands of jobs across the UK. The Chancellor secured the planned five-year investment last week at a meeting with Amazon Web Services. AWS estimates that these investments in the UK will contribute £14 billion to the UK’s total Gross Domestic Product (GDP) from 2024 to 2028.",
+      "sha256": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+      "rights": {
+        "acquisition": "allowed",
+        "deterministic_extraction": "allowed",
+        "model_processing": "allowed",
+        "retention": "allowed",
+        "quotation": "allowed",
+        "indexing": "allowed",
+        "redistribution": "allowed"
+      },
+      "rights_basis": "Crown-owned selected factual fields / OGL v3; third-party quotations, logos, contacts and attachments excluded",
+      "visibility": "public_non_personal",
+      "execution_kind": "live_web_bridge",
+      "supersedes": []
+    }
+  ],
+  "decision": {
+    "schema_version": 1,
+    "policy": "uk-tech-semantic-preflight-v1",
+    "rule_version": "controlled-investment-plan-v1",
+    "run_id": "UKTECH-S2-LIVE-20261112",
+    "verifier_id": "sprint2-independent-retrieval",
+    "claim_id": "TECH-S2-AWS-HISTORICAL-PLAN",
+    "claim_digest": "277f60ac2feea9632a9eeb399835ec0691781aa5574f136309538fb4f531796d",
+    "outcome": "accept_bounded",
+    "reasons": [
+      "Only a reported plan is supported; no achieved outcome, causal benefit, adoption or budget qualification inferred"
+    ],
+    "checks": [
+      "complete proposition",
+      "independent passage re-extraction",
+      "temporal scope",
+      "rights",
+      "source origin",
+      "no unproved free prose"
+    ],
+    "passage_refs": [
+      {
+        "id": "S2-AWS-RESEARCH",
+        "hash": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+        "source_id": "AWS-PLAN",
+        "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+        "retrieval": "turn514417view0",
+        "origin_id": "HMT-report-of-AWS-announcement"
+      },
+      {
+        "id": "S2-AWS-VERIFY",
+        "hash": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+        "source_id": "AWS-PLAN",
+        "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+        "retrieval": "turn867338view0",
+        "origin_id": "HMT-report-of-AWS-announcement"
+      }
+    ],
+    "source_family_count": 1,
+    "assurance": "deterministic controlled-meaning proof; general natural-language semantic verifier unavailable",
+    "attempt_cap": 2,
+    "attempts_used": 1,
+    "canonical_promotion": false,
+    "pipeline_qualification": false,
+    "decision_reasoning": "Concise rule decisions only; no private model reasoning retained"
+  },
+  "canonical_promotion": false,
+  "provider_synthesis_release": "withheld_independent_semantic_assurance_unavailable",
+  "counterfactual_support_checks": [
+    {
+      "mutation": "modality",
+      "value": "achieved",
+      "decision": {
+        "schema_version": 1,
+        "policy": "uk-tech-semantic-preflight-v1",
+        "rule_version": "controlled-investment-plan-v1",
+        "run_id": "UKTECH-S2-LIVE-COUNTERFACTUAL-20261112",
+        "verifier_id": "sprint2-independent-retrieval",
+        "claim_id": "TECH-S2-AWS-HISTORICAL-PLAN-FALSE-modality",
+        "claim_digest": "1e21f6361bedf8fd472fc7053a79a9c98c38848b479f8a0329aaba3d992f3a8b",
+        "outcome": "reject",
+        "reasons": [
+          "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+        ],
+        "checks": [],
+        "passage_refs": [
+          {
+            "id": "S2-AWS-RESEARCH",
+            "hash": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+            "source_id": "AWS-PLAN",
+            "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+            "retrieval": "turn514417view0",
+            "origin_id": "HMT-report-of-AWS-announcement"
+          },
+          {
+            "id": "S2-AWS-VERIFY",
+            "hash": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+            "source_id": "AWS-PLAN",
+            "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+            "retrieval": "turn867338view0",
+            "origin_id": "HMT-report-of-AWS-announcement"
+          }
+        ],
+        "source_family_count": 1,
+        "assurance": "deterministic controlled-meaning proof; general natural-language semantic verifier unavailable",
+        "attempt_cap": 2,
+        "attempts_used": 1,
+        "canonical_promotion": false,
+        "pipeline_qualification": false,
+        "decision_reasoning": "Concise rule decisions only; no private model reasoning retained"
+      },
+      "purpose": "Counterfactual support test against real retained evidence; no assertion about absolute real-world truth"
+    },
+    {
+      "mutation": "amount",
+      "value": "14000000000",
+      "decision": {
+        "schema_version": 1,
+        "policy": "uk-tech-semantic-preflight-v1",
+        "rule_version": "controlled-investment-plan-v1",
+        "run_id": "UKTECH-S2-LIVE-COUNTERFACTUAL-20261112",
+        "verifier_id": "sprint2-independent-retrieval",
+        "claim_id": "TECH-S2-AWS-HISTORICAL-PLAN-FALSE-amount",
+        "claim_digest": "bb797dd6b7cd6024708d53ec793c41ed2405fe395a1361a51239ea0f38e6a4c8",
+        "outcome": "reject",
+        "reasons": [
+          "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+        ],
+        "checks": [],
+        "passage_refs": [
+          {
+            "id": "S2-AWS-RESEARCH",
+            "hash": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+            "source_id": "AWS-PLAN",
+            "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+            "retrieval": "turn514417view0",
+            "origin_id": "HMT-report-of-AWS-announcement"
+          },
+          {
+            "id": "S2-AWS-VERIFY",
+            "hash": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+            "source_id": "AWS-PLAN",
+            "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+            "retrieval": "turn867338view0",
+            "origin_id": "HMT-report-of-AWS-announcement"
+          }
+        ],
+        "source_family_count": 1,
+        "assurance": "deterministic controlled-meaning proof; general natural-language semantic verifier unavailable",
+        "attempt_cap": 2,
+        "attempts_used": 1,
+        "canonical_promotion": false,
+        "pipeline_qualification": false,
+        "decision_reasoning": "Concise rule decisions only; no private model reasoning retained"
+      },
+      "purpose": "Counterfactual support test against real retained evidence; no assertion about absolute real-world truth"
+    },
+    {
+      "mutation": "geography",
+      "value": "FR",
+      "decision": {
+        "schema_version": 1,
+        "policy": "uk-tech-semantic-preflight-v1",
+        "rule_version": "controlled-investment-plan-v1",
+        "run_id": "UKTECH-S2-LIVE-COUNTERFACTUAL-20261112",
+        "verifier_id": "sprint2-independent-retrieval",
+        "claim_id": "TECH-S2-AWS-HISTORICAL-PLAN-FALSE-geography",
+        "claim_digest": "56b37b82696a1c3358c151f6a7a8dc12a311e1bef6754de736bcb3be10c341e4",
+        "outcome": "reject",
+        "reasons": [
+          "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+        ],
+        "checks": [],
+        "passage_refs": [
+          {
+            "id": "S2-AWS-RESEARCH",
+            "hash": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+            "source_id": "AWS-PLAN",
+            "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+            "retrieval": "turn514417view0",
+            "origin_id": "HMT-report-of-AWS-announcement"
+          },
+          {
+            "id": "S2-AWS-VERIFY",
+            "hash": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+            "source_id": "AWS-PLAN",
+            "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+            "retrieval": "turn867338view0",
+            "origin_id": "HMT-report-of-AWS-announcement"
+          }
+        ],
+        "source_family_count": 1,
+        "assurance": "deterministic controlled-meaning proof; general natural-language semantic verifier unavailable",
+        "attempt_cap": 2,
+        "attempts_used": 1,
+        "canonical_promotion": false,
+        "pipeline_qualification": false,
+        "decision_reasoning": "Concise rule decisions only; no private model reasoning retained"
+      },
+      "purpose": "Counterfactual support test against real retained evidence; no assertion about absolute real-world truth"
+    },
+    {
+      "mutation": "predicate",
+      "value": "deployment",
+      "decision": {
+        "schema_version": 1,
+        "policy": "uk-tech-semantic-preflight-v1",
+        "rule_version": "controlled-investment-plan-v1",
+        "run_id": "UKTECH-S2-LIVE-COUNTERFACTUAL-20261112",
+        "verifier_id": "sprint2-independent-retrieval",
+        "claim_id": "TECH-S2-AWS-HISTORICAL-PLAN-FALSE-predicate",
+        "claim_digest": "bf1393b7b4463db80768537a0d27c325db4246bef8d70ad796dcdb85c7545385",
+        "outcome": "reject",
+        "reasons": [
+          "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+        ],
+        "checks": [],
+        "passage_refs": [
+          {
+            "id": "S2-AWS-RESEARCH",
+            "hash": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+            "source_id": "AWS-PLAN",
+            "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+            "retrieval": "turn514417view0",
+            "origin_id": "HMT-report-of-AWS-announcement"
+          },
+          {
+            "id": "S2-AWS-VERIFY",
+            "hash": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+            "source_id": "AWS-PLAN",
+            "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+            "retrieval": "turn867338view0",
+            "origin_id": "HMT-report-of-AWS-announcement"
+          }
+        ],
+        "source_family_count": 1,
+        "assurance": "deterministic controlled-meaning proof; general natural-language semantic verifier unavailable",
+        "attempt_cap": 2,
+        "attempts_used": 1,
+        "canonical_promotion": false,
+        "pipeline_qualification": false,
+        "decision_reasoning": "Concise rule decisions only; no private model reasoning retained"
+      },
+      "purpose": "Counterfactual support test against real retained evidence; no assertion about absolute real-world truth"
+    },
+    {
+      "mutation": "subject",
+      "value": "Amazon Web Services EMEA SARL",
+      "decision": {
+        "schema_version": 1,
+        "policy": "uk-tech-semantic-preflight-v1",
+        "rule_version": "controlled-investment-plan-v1",
+        "run_id": "UKTECH-S2-LIVE-COUNTERFACTUAL-20261112",
+        "verifier_id": "sprint2-independent-retrieval",
+        "claim_id": "TECH-S2-AWS-HISTORICAL-PLAN-FALSE-subject",
+        "claim_digest": "0284f112903144021edf533d02312fa1038df76d5bea3343ba2a24f01325f42b",
+        "outcome": "reject",
+        "reasons": [
+          "Complete proposition mismatch: entity/geography/modality/period/amount/predicate/truth class"
+        ],
+        "checks": [],
+        "passage_refs": [
+          {
+            "id": "S2-AWS-RESEARCH",
+            "hash": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+            "source_id": "AWS-PLAN",
+            "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+            "retrieval": "turn514417view0",
+            "origin_id": "HMT-report-of-AWS-announcement"
+          },
+          {
+            "id": "S2-AWS-VERIFY",
+            "hash": "546a1bf545bfe2ea9cb0de94396c4b57b33dc62086538721213c69c428b5c070",
+            "source_id": "AWS-PLAN",
+            "locator": "paragraphs 69, first sentence 70, 71 (non-contiguous selected sentences)",
+            "retrieval": "turn867338view0",
+            "origin_id": "HMT-report-of-AWS-announcement"
+          }
+        ],
+        "source_family_count": 1,
+        "assurance": "deterministic controlled-meaning proof; general natural-language semantic verifier unavailable",
+        "attempt_cap": 2,
+        "attempts_used": 1,
+        "canonical_promotion": false,
+        "pipeline_qualification": false,
+        "decision_reasoning": "Concise rule decisions only; no private model reasoning retained"
+      },
+      "purpose": "Counterfactual support test against real retained evidence; no assertion about absolute real-world truth"
+    }
+  ]
+}

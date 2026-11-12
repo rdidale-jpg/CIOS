@@ -1,0 +1,27 @@
+{
+  "execution_kind": "synthetic_fixture",
+  "real_source_withdrawal": false,
+  "before_release_digest": "56b6bdd5443bb380296a1464e52ec10870586a75a5b99ac939aa7e86e4f0a26e",
+  "after_release_digest": "9490dde1102bf6c6e701c7f467559015d42549c09efd04a5f0aa05084460d738",
+  "after_claim_count": 0,
+  "invalidated": [
+    "IDX-RC-7373793d3b940a84c9ed320c",
+    "RC-7373793d3b940a84c9ed320c",
+    "SEM-HYP",
+    "SEM-REL",
+    "SEM-VIS",
+    "SEM-d55046c5a1f7c3f9b8c2f171",
+    "VIS-RC-7373793d3b940a84c9ed320c"
+  ],
+  "object_states": {
+    "IDX-RC-7373793d3b940a84c9ed320c": "invalidated",
+    "RC-7373793d3b940a84c9ed320c": "withdrawn",
+    "SEM-HYP": "invalidated",
+    "SEM-REL": "invalidated",
+    "SEM-VIS": "invalidated",
+    "SEM-d55046c5a1f7c3f9b8c2f171": "invalidated",
+    "VIS-RC-7373793d3b940a84c9ed320c": "invalidated"
+  },
+  "prior_release_preserved": true,
+  "canonical_or_pipeline_writes": false
+}

@@ -7382,6 +7382,195 @@
               "status": "passed"
             }
           }
+        },
+        "technology_semantic_sprint2": {
+          "selections": [
+            [
+              "tests/test_flora_technology_semantic_sprint2.py"
+            ]
+          ],
+          "cases": {
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-subsidiary]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-country]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-achieved]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-number]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-currency]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-period]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-ownership]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-alliance]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-delivery]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-adoption]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-causation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-relevance]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-positive-scope]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-supported-subject]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-supported-geography]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-supported-amount]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-stale]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-conflicting-date]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-conflicting-official]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-copied-verification]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-superseded]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-injection]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-sensitive]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-private]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-rights-acquisition]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-rights-deterministic_extraction]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-rights-retention]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-rights-quotation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-rights-indexing]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-rights-redistribution]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-interpretation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-scenario]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-free-prose]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-alliance-prose]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_frozen_heldout_support_rubric[H-copied-source-origins]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_evaluation_denominators_and_calibration_limits_are_explicit": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_original_foundation_assets_and_all_prior_identities_are_preserved": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_actual_source_pairs_support_only_bounded_historical_plan": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_stale_live_plan_cannot_be_silently_relabelled_current": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_uncontrolled_prose_is_not_proven_by_matching_words": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_nonfinite_or_negative_financial_claims_are_invalid[NaN]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_nonfinite_or_negative_financial_claims_are_invalid[Infinity]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_nonfinite_or_negative_financial_claims_are_invalid[-1]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_sensitive_private_passage_contract_rejects_visibility_override": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_located_passage_hash_and_date_cannot_be_fabricated": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_source_content_has_no_permission_or_tool_policy_channel": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_model_processing_unknown_does_not_enable_a_model_client": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_retry_cap_is_bounded_and_decisions_have_no_model_reasoning": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_scope_evidence_ids_must_belong_to_the_proposal": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_candidate_handoff_uses_existing_models_and_stays_withheld": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_seven_segment_coverage_does_not_double_count_enterprises": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_source_origins_and_legal_temporal_limitations_remain_visible": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_banking_aviation_journeys_preserve_unknown_deployment_and_buying_intent": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_public_selectors_cannot_find_private_records[view=research&provider=private]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_public_selectors_cannot_find_private_records[view=briefings&provider=../../private]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_public_selectors_cannot_find_private_records[view=assurance&workspace=other]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_public_selectors_cannot_find_private_records[view=research&view=briefings]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_public_selectors_cannot_find_private_records[view=research&segment=unknown]": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_views_reuse_existing_programme_and_have_no_mutation_form": {
+              "status": "passed"
+            },
+            "tests/test_flora_technology_semantic_sprint2.py::test_semantic_decision_withdrawal_propagates_in_existing_scoped_ledger": {
+              "status": "passed"
+            }
+          }
         }
       }
     }

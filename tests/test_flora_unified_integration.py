@@ -20,7 +20,7 @@ def test_both_reviewed_workstreams_remain_ancestors_with_exact_source_cuts():
     for head in ('6988ba50d29c1f238293fc7fe110d6182f055e68','5fa5d2f197893a6fd64b3344354c039eaad629f7',
                  '4c374ac2d326639245b60967aa64e934e0c1d7a3','111600a56ca0edba0d47d1a8a0c92068060d83a8'):
         assert subprocess.run(['git','merge-base','--is-ancestor',head,'HEAD'],cwd=ROOT).returncode==0
-    assert verify_history(ROOT)=={'historical_files':142,'depth_additions':4,'macro_additions':14,'foundation_additions':5,'total':165,'old_review_records_retained':True}
+    assert verify_history(ROOT)=={'historical_files':142,'depth_additions':4,'macro_additions':14,'foundation_additions':5,'sprint2_additions':2,'total':167,'old_review_records_retained':True}
 
 
 @pytest.mark.parametrize('change',['historical_byte','approved_macro_byte','approved_depth_byte','old_review_record','missing','unknown','ignored_unknown'])
