@@ -1,0 +1,45 @@
+{
+  "browser": "Chromium / Playwright",
+  "results": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "height": 1050,
+      "changed_views": 3,
+      "legal_identity_keyboard_disclosure": true,
+      "historical_and_new_source_cards": 8,
+      "public_runtime_secrets_exposed": false,
+      "enterprise_journeys": 2,
+      "print_unknowns_preserved": true,
+      "no_horizontal_overflow": true,
+      "javascript_errors": []
+    },
+    {
+      "viewport": "tablet",
+      "width": 1024,
+      "height": 1366,
+      "changed_views": 3,
+      "legal_identity_keyboard_disclosure": true,
+      "historical_and_new_source_cards": 8,
+      "public_runtime_secrets_exposed": false,
+      "enterprise_journeys": 2,
+      "print_unknowns_preserved": true,
+      "no_horizontal_overflow": true,
+      "javascript_errors": []
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "height": 844,
+      "changed_views": 3,
+      "legal_identity_keyboard_disclosure": true,
+      "historical_and_new_source_cards": 8,
+      "public_runtime_secrets_exposed": false,
+      "enterprise_journeys": 2,
+      "print_unknowns_preserved": true,
+      "no_horizontal_overflow": true,
+      "javascript_errors": []
+    }
+  ],
+  "limits": "Functional/render checks only; no owner usefulness assessment or live semantic verification. Screenshots only for changed research, Microsoft briefing and assurance views."
+}

@@ -7571,6 +7571,141 @@
               "status": "passed"
             }
           }
+        },
+        "technology_sprint2_completion": {
+          "selections": [
+            [
+              "tests/test_flora_sprint2_completion.py"
+            ]
+          ],
+          "cases": {
+            "tests/test_flora_sprint2_completion.py::test_configuration_absence_is_zero_call_and_no_fake_semantic_result": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_real_source_reference_freeze_and_no_execution_metrics": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_controlled_denominators_and_overlap_reconciled_without_changing_history": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_unexecuted_reference_never_dilutes_error_rate": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_fixture_verification_is_separate_from_challenge_and_cannot_release[supported-no_material_issue_identified-publish_source_reported]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_fixture_verification_is_separate_from_challenge_and_cannot_release[unsupported-no_material_issue_identified-reject]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_fixture_verification_is_separate_from_challenge_and_cannot_release[uncertain-no_material_issue_identified-withhold]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_fixture_verification_is_separate_from_challenge_and_cannot_release[supported-material_issue-withhold]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_fixture_verification_is_separate_from_challenge_and_cannot_release[supported-uncertain-withhold]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_three_stage_cycle_uses_fresh_acquisition_per_role": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_model_agreement_cannot_override_deterministic_scope[entity_id-wrong subsidiary]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_model_agreement_cannot_override_deterministic_scope[geography-France]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_model_agreement_cannot_override_deterministic_scope[reporting_period-2024\\u20132028]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_model_agreement_cannot_override_deterministic_scope[state-actual]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_semantic_support_cannot_bypass_citation_or_uncertainty_gates[quote]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_semantic_support_cannot_bypass_citation_or_uncertainty_gates[hash]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_semantic_support_cannot_bypass_citation_or_uncertainty_gates[open-question]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_semantic_support_cannot_bypass_citation_or_uncertainty_gates[contradiction]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_semantic_support_cannot_bypass_citation_or_uncertainty_gates[entity-not-applicable]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_copied_or_conflicting_retrieval_fails_closed[request_id-copied]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_copied_or_conflicting_retrieval_fails_closed[role-researcher]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_copied_or_conflicting_retrieval_fails_closed[collector_id-fixture-researcher]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_copied_or_conflicting_retrieval_fails_closed[tool_reference-fixture-original]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_copied_or_conflicting_retrieval_fails_closed[retrieved_at-2020-01-01T00:00:00+00:00]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_copied_or_conflicting_retrieval_fails_closed[entity_id-wrong]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_changed_source_is_withheld_before_model_call": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_operation_specific_permission_cannot_be_inferred_from_public_url[acquisition]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_operation_specific_permission_cannot_be_inferred_from_public_url[model_processing]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_operation_specific_permission_cannot_be_inferred_from_public_url[retention]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_operation_specific_permission_cannot_be_inferred_from_public_url[quotation]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_operation_specific_permission_cannot_be_inferred_from_public_url[indexing]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_operation_specific_permission_cannot_be_inferred_from_public_url[redistribution]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_private_instructional_or_corrupt_passages_cannot_enter_model[private]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_private_instructional_or_corrupt_passages_cannot_enter_model[injection]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_private_instructional_or_corrupt_passages_cannot_enter_model[hash]": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_explicit_source_conflict_and_current_supersession_withhold_without_model": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_existing_provider_strict_schema_budget_no_tools_and_no_raw_reasoning": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_redirect_and_unapproved_source_fail_before_transport": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_collector_reuses_extractor_without_persisting_raw_bodies": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_identity_scope_and_current_segment_gaps_are_explicit": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_view_is_static_public_projection_without_runtime_secret_metadata": {
+              "status": "passed"
+            },
+            "tests/test_flora_sprint2_completion.py::test_all_historical_source_bytes_and_frozen_evaluator_preserved": {
+              "status": "passed"
+            }
+          }
         }
       }
     }

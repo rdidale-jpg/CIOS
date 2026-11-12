@@ -1,0 +1,1592 @@
+{
+  "schema_version": 2,
+  "legacy_report_preserved": true,
+  "matrix": {
+    "reference_by_decision": {
+      "supported": {
+        "accepted": 5,
+        "rejected": 0,
+        "unresolved": 0,
+        "not_executed": 0
+      },
+      "unsupported_as_cited": {
+        "accepted": 0,
+        "rejected": 19,
+        "unresolved": 0,
+        "not_executed": 0
+      },
+      "indeterminate": {
+        "accepted": 0,
+        "rejected": 0,
+        "unresolved": 11,
+        "not_executed": 0
+      }
+    },
+    "total": 35,
+    "executed": 35,
+    "not_executed": 0,
+    "false_acceptance": {
+      "count": 0,
+      "executed_reference_denominator": 19,
+      "rate": 0.0
+    },
+    "false_rejection": {
+      "count": 0,
+      "executed_reference_denominator": 5,
+      "rate": 0.0
+    },
+    "supported_unresolved": 0,
+    "indeterminate_release": {
+      "count": 0,
+      "executed_reference_denominator": 11,
+      "rate": 0.0
+    },
+    "abstention": {
+      "count": 11,
+      "executed_denominator": 35,
+      "rate": 0.3142857142857143
+    },
+    "decision_coverage": {
+      "count": 24,
+      "total_denominator": 35,
+      "rate": 0.6857142857142857
+    },
+    "execution_coverage": {
+      "count": 35,
+      "total_denominator": 35,
+      "rate": 1.0
+    },
+    "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+  },
+  "by_claim_type": {
+    "achieved": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 1,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 1,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "adoption": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 1,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 1,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "alliance": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 1,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 1,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "bounded_fact": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 4,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 4,
+      "executed": 4,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 4,
+        "rate": 0.0
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 4,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 4,
+        "total_denominator": 4,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 4,
+        "total_denominator": 4,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "causation": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 1,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 1,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "contradiction": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 2,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 2,
+      "executed": 2,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 2,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 2,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 2,
+        "total_denominator": 2,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 2,
+        "total_denominator": 2,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "country": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 1,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 1,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "currency": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 1,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 1,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "delivery": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 1,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 1,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "freshness": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 1,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "abstention": {
+        "count": 1,
+        "executed_denominator": 1,
+        "rate": 1.0
+      },
+      "decision_coverage": {
+        "count": 0,
+        "total_denominator": 1,
+        "rate": 0.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "interpretation": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 1,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "abstention": {
+        "count": 1,
+        "executed_denominator": 1,
+        "rate": 1.0
+      },
+      "decision_coverage": {
+        "count": 0,
+        "total_denominator": 1,
+        "rate": 0.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "number": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 1,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 1,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "ownership": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 1,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 1,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "period": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 1,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 1,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "publication_safety": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 3,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 3,
+      "executed": 3,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 3,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 3,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 3,
+        "total_denominator": 3,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 3,
+        "total_denominator": 3,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "relevance": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 1,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 1,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "rights": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 6,
+          "not_executed": 0
+        }
+      },
+      "total": 6,
+      "executed": 6,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 6,
+        "rate": 0.0
+      },
+      "abstention": {
+        "count": 6,
+        "executed_denominator": 6,
+        "rate": 1.0
+      },
+      "decision_coverage": {
+        "count": 0,
+        "total_denominator": 6,
+        "rate": 0.0
+      },
+      "execution_coverage": {
+        "count": 6,
+        "total_denominator": 6,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "scenario": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 1,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "abstention": {
+        "count": 1,
+        "executed_denominator": 1,
+        "rate": 1.0
+      },
+      "decision_coverage": {
+        "count": 0,
+        "total_denominator": 1,
+        "rate": 0.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "source_independence": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 1,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 1,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 2,
+      "executed": 2,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 2,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 2,
+        "total_denominator": 2,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 2,
+        "total_denominator": 2,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "subsidiary": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 1,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 1,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "supersession": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 1,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 1,
+        "rate": 0.0
+      },
+      "decision_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "unsupported_interpretation": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 1,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "abstention": {
+        "count": 1,
+        "executed_denominator": 1,
+        "rate": 1.0
+      },
+      "decision_coverage": {
+        "count": 0,
+        "total_denominator": 1,
+        "rate": 0.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "unsupported_natural_language": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 1,
+          "not_executed": 0
+        }
+      },
+      "total": 1,
+      "executed": 1,
+      "not_executed": 0,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 1,
+        "rate": 0.0
+      },
+      "abstention": {
+        "count": 1,
+        "executed_denominator": 1,
+        "rate": 1.0
+      },
+      "decision_coverage": {
+        "count": 0,
+        "total_denominator": 1,
+        "rate": 0.0
+      },
+      "execution_coverage": {
+        "count": 1,
+        "total_denominator": 1,
+        "rate": 1.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    }
+  },
+  "legacy_0_over_30_explanation": "30 combines 19 unsupported-as-cited and 11 indeterminate references. It is a conservative non-acceptance-policy pool, not a factual false-positive denominator. The 11 unresolved outcomes overlap that pool.",
+  "corrected_false_acceptance": "0/19 unsupported-as-cited references",
+  "corrected_false_rejection": "0/5 supported references",
+  "unresolved": "11/35 executed cases",
+  "decision_coverage": "24/35 (68.57%)",
+  "reference_limits": "Same development author; no external blinded annotation, no representative real-world corpus; claims of general semantic accuracy are not supported.",
+  "records": [
+    {
+      "id": "H-subsidiary",
+      "claim_type": "subsidiary",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-country",
+      "claim_type": "country",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-achieved",
+      "claim_type": "achieved",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-number",
+      "claim_type": "number",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-currency",
+      "claim_type": "currency",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-period",
+      "claim_type": "period",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-ownership",
+      "claim_type": "ownership",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-alliance",
+      "claim_type": "alliance",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-delivery",
+      "claim_type": "delivery",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-adoption",
+      "claim_type": "adoption",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-causation",
+      "claim_type": "causation",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-relevance",
+      "claim_type": "relevance",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-positive-scope",
+      "claim_type": "bounded_fact",
+      "reference": "supported",
+      "decision": "accepted"
+    },
+    {
+      "id": "H-supported-subject",
+      "claim_type": "bounded_fact",
+      "reference": "supported",
+      "decision": "accepted"
+    },
+    {
+      "id": "H-supported-geography",
+      "claim_type": "bounded_fact",
+      "reference": "supported",
+      "decision": "accepted"
+    },
+    {
+      "id": "H-supported-amount",
+      "claim_type": "bounded_fact",
+      "reference": "supported",
+      "decision": "accepted"
+    },
+    {
+      "id": "H-stale",
+      "claim_type": "freshness",
+      "reference": "indeterminate",
+      "decision": "unresolved"
+    },
+    {
+      "id": "H-conflicting-date",
+      "claim_type": "contradiction",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-conflicting-official",
+      "claim_type": "contradiction",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-copied-verification",
+      "claim_type": "source_independence",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-superseded",
+      "claim_type": "supersession",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-injection",
+      "claim_type": "publication_safety",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-sensitive",
+      "claim_type": "publication_safety",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-private",
+      "claim_type": "publication_safety",
+      "reference": "unsupported_as_cited",
+      "decision": "rejected"
+    },
+    {
+      "id": "H-rights-acquisition",
+      "claim_type": "rights",
+      "reference": "indeterminate",
+      "decision": "unresolved"
+    },
+    {
+      "id": "H-rights-deterministic_extraction",
+      "claim_type": "rights",
+      "reference": "indeterminate",
+      "decision": "unresolved"
+    },
+    {
+      "id": "H-rights-retention",
+      "claim_type": "rights",
+      "reference": "indeterminate",
+      "decision": "unresolved"
+    },
+    {
+      "id": "H-rights-quotation",
+      "claim_type": "rights",
+      "reference": "indeterminate",
+      "decision": "unresolved"
+    },
+    {
+      "id": "H-rights-indexing",
+      "claim_type": "rights",
+      "reference": "indeterminate",
+      "decision": "unresolved"
+    },
+    {
+      "id": "H-rights-redistribution",
+      "claim_type": "rights",
+      "reference": "indeterminate",
+      "decision": "unresolved"
+    },
+    {
+      "id": "H-interpretation",
+      "claim_type": "interpretation",
+      "reference": "indeterminate",
+      "decision": "unresolved"
+    },
+    {
+      "id": "H-scenario",
+      "claim_type": "scenario",
+      "reference": "indeterminate",
+      "decision": "unresolved"
+    },
+    {
+      "id": "H-free-prose",
+      "claim_type": "unsupported_interpretation",
+      "reference": "indeterminate",
+      "decision": "unresolved"
+    },
+    {
+      "id": "H-alliance-prose",
+      "claim_type": "unsupported_natural_language",
+      "reference": "indeterminate",
+      "decision": "unresolved"
+    },
+    {
+      "id": "H-copied-source-origins",
+      "claim_type": "source_independence",
+      "reference": "supported",
+      "decision": "accepted"
+    }
+  ]
+}

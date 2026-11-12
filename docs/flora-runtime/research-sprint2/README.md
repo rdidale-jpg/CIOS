@@ -1,5 +1,7 @@
 # UK Technology Sprint 2 — controlled semantic assurance and research depth
 
+> Current completion evidence: [runtime diagnosis, corrected metrics, real-source calibration, identity/rights matrix and separate A/B/C readiness](completion/README.md). The original reports below are retained as historical evidence; their pooled 0/30 label is superseded by the corrected 0/19 unsupported-as-cited denominator. Full acceptance remains blocked.
+
 **Delivery status: PARTIAL / full Sprint 2 acceptance INCOMPLETE.** This draft implements a bounded semantic preflight, expands official-source context and provides usable provider/industry research views. It does not establish general independent semantic verification, a resolved key-enterprise population or complete substantive baselines in every segment.
 
 ## Architecture and foundation assessment

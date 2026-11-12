@@ -13,3 +13,13 @@ def assets():
         if hashlib.sha256(content).hexdigest()!=expected:raise ValueError('Unreviewed research projection')
         result[path.name]=json.loads(content)
     return result
+
+COMPLETION_PINS = {'enterprise-knowledge/technology/research-sprint2/Completion-v2.json': 'e4ec59634e7465e86993167a050c2620f5c62fd469d9f02a7054e6b40ab6a4e0'}
+
+def completion():
+    for name,expected in COMPLETION_PINS.items():
+        path=REPO/name
+        if path.is_symlink() or any(p.is_symlink() for p in path.parents):raise ValueError("Symlink completion source denied")
+        content=path.read_bytes()
+        if hashlib.sha256(content).hexdigest()!=expected:raise ValueError("Unreviewed completion projection")
+        return json.loads(content)

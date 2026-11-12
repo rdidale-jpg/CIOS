@@ -1,0 +1,6 @@
+{
+  "status": "blocked",
+  "reason": "existing_reasoning_provider_not_configured",
+  "model_calls": 0,
+  "network_calls": 0
+}

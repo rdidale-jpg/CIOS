@@ -1,0 +1,761 @@
+{
+  "schema_version": 1,
+  "actual_base": {
+    "pr": 569,
+    "head": "cb21f641ae246fbe2e9c33f301994d7e5e104f59",
+    "hosted_merge_checkout": "ea10458490cb3d36402712c29fb828bb6b51e2ea",
+    "run_id": 43219889732,
+    "run_url": "https://github.com/rdidale-jpg/CIOS/actions/runs/43219889732",
+    "artifact_id": 13945549235,
+    "artifact_zip_sha256": "deb2d06622e7d5e5ab0e221c95d4c403b1179fd09cc19df8f3c042066c30009d",
+    "unique_ids": 1505
+  },
+  "local_candidate": {
+    "gate": "PASS",
+    "local_head_before_completion_commit": "cb21f641ae246fbe2e9c33f301994d7e5e104f59",
+    "implementation": "Reviewed staged completion on cb21; final commit and current hosted result will be linked in PR checks/final validation comment",
+    "unique_ids": 1547,
+    "counts": {
+      "passed": 1480,
+      "failed": 57,
+      "skipped": 10
+    },
+    "new_passing_ids": [
+      "tests/test_flora_sprint2_completion.py::test_all_historical_source_bytes_and_frozen_evaluator_preserved",
+      "tests/test_flora_sprint2_completion.py::test_changed_source_is_withheld_before_model_call",
+      "tests/test_flora_sprint2_completion.py::test_collector_reuses_extractor_without_persisting_raw_bodies",
+      "tests/test_flora_sprint2_completion.py::test_configuration_absence_is_zero_call_and_no_fake_semantic_result",
+      "tests/test_flora_sprint2_completion.py::test_controlled_denominators_and_overlap_reconciled_without_changing_history",
+      "tests/test_flora_sprint2_completion.py::test_copied_or_conflicting_retrieval_fails_closed[collector_id-fixture-researcher]",
+      "tests/test_flora_sprint2_completion.py::test_copied_or_conflicting_retrieval_fails_closed[entity_id-wrong]",
+      "tests/test_flora_sprint2_completion.py::test_copied_or_conflicting_retrieval_fails_closed[request_id-copied]",
+      "tests/test_flora_sprint2_completion.py::test_copied_or_conflicting_retrieval_fails_closed[retrieved_at-2020-01-01T00:00:00+00:00]",
+      "tests/test_flora_sprint2_completion.py::test_copied_or_conflicting_retrieval_fails_closed[role-researcher]",
+      "tests/test_flora_sprint2_completion.py::test_copied_or_conflicting_retrieval_fails_closed[tool_reference-fixture-original]",
+      "tests/test_flora_sprint2_completion.py::test_existing_provider_strict_schema_budget_no_tools_and_no_raw_reasoning",
+      "tests/test_flora_sprint2_completion.py::test_explicit_source_conflict_and_current_supersession_withhold_without_model",
+      "tests/test_flora_sprint2_completion.py::test_fixture_verification_is_separate_from_challenge_and_cannot_release[supported-material_issue-withhold]",
+      "tests/test_flora_sprint2_completion.py::test_fixture_verification_is_separate_from_challenge_and_cannot_release[supported-no_material_issue_identified-publish_source_reported]",
+      "tests/test_flora_sprint2_completion.py::test_fixture_verification_is_separate_from_challenge_and_cannot_release[supported-uncertain-withhold]",
+      "tests/test_flora_sprint2_completion.py::test_fixture_verification_is_separate_from_challenge_and_cannot_release[uncertain-no_material_issue_identified-withhold]",
+      "tests/test_flora_sprint2_completion.py::test_fixture_verification_is_separate_from_challenge_and_cannot_release[unsupported-no_material_issue_identified-reject]",
+      "tests/test_flora_sprint2_completion.py::test_identity_scope_and_current_segment_gaps_are_explicit",
+      "tests/test_flora_sprint2_completion.py::test_model_agreement_cannot_override_deterministic_scope[entity_id-wrong subsidiary]",
+      "tests/test_flora_sprint2_completion.py::test_model_agreement_cannot_override_deterministic_scope[geography-France]",
+      "tests/test_flora_sprint2_completion.py::test_model_agreement_cannot_override_deterministic_scope[reporting_period-2024\\u20132028]",
+      "tests/test_flora_sprint2_completion.py::test_model_agreement_cannot_override_deterministic_scope[state-actual]",
+      "tests/test_flora_sprint2_completion.py::test_operation_specific_permission_cannot_be_inferred_from_public_url[acquisition]",
+      "tests/test_flora_sprint2_completion.py::test_operation_specific_permission_cannot_be_inferred_from_public_url[indexing]",
+      "tests/test_flora_sprint2_completion.py::test_operation_specific_permission_cannot_be_inferred_from_public_url[model_processing]",
+      "tests/test_flora_sprint2_completion.py::test_operation_specific_permission_cannot_be_inferred_from_public_url[quotation]",
+      "tests/test_flora_sprint2_completion.py::test_operation_specific_permission_cannot_be_inferred_from_public_url[redistribution]",
+      "tests/test_flora_sprint2_completion.py::test_operation_specific_permission_cannot_be_inferred_from_public_url[retention]",
+      "tests/test_flora_sprint2_completion.py::test_private_instructional_or_corrupt_passages_cannot_enter_model[hash]",
+      "tests/test_flora_sprint2_completion.py::test_private_instructional_or_corrupt_passages_cannot_enter_model[injection]",
+      "tests/test_flora_sprint2_completion.py::test_private_instructional_or_corrupt_passages_cannot_enter_model[private]",
+      "tests/test_flora_sprint2_completion.py::test_real_source_reference_freeze_and_no_execution_metrics",
+      "tests/test_flora_sprint2_completion.py::test_redirect_and_unapproved_source_fail_before_transport",
+      "tests/test_flora_sprint2_completion.py::test_semantic_support_cannot_bypass_citation_or_uncertainty_gates[contradiction]",
+      "tests/test_flora_sprint2_completion.py::test_semantic_support_cannot_bypass_citation_or_uncertainty_gates[entity-not-applicable]",
+      "tests/test_flora_sprint2_completion.py::test_semantic_support_cannot_bypass_citation_or_uncertainty_gates[hash]",
+      "tests/test_flora_sprint2_completion.py::test_semantic_support_cannot_bypass_citation_or_uncertainty_gates[open-question]",
+      "tests/test_flora_sprint2_completion.py::test_semantic_support_cannot_bypass_citation_or_uncertainty_gates[quote]",
+      "tests/test_flora_sprint2_completion.py::test_three_stage_cycle_uses_fresh_acquisition_per_role",
+      "tests/test_flora_sprint2_completion.py::test_unexecuted_reference_never_dilutes_error_rate",
+      "tests/test_flora_sprint2_completion.py::test_view_is_static_public_projection_without_runtime_secret_metadata"
+    ]
+  },
+  "comparison": {
+    "all_1505_base_case_records_identical": true,
+    "new_failures": [],
+    "fixed_failures": [],
+    "missing_base_ids": [],
+    "unexpected_skips": [],
+    "security_selection_unchanged": true
+  },
+  "inherited_failures": {
+    "tests/test_flora_banking_increment44_executive_navigation.py::test_landing_budget_conclusion_and_signals": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_increment44_executive_navigation.py",
+          "test_landing_budget_conclusion_and_signals",
+          "assert html.index(\"UK banks are moving\") < html.index(\"Three industry signals\")"
+        ],
+        "headline_sha256": "72181a49aa20b9cbae67a6051b779d562ef17d0c159b000e9864db9fc8463ca9"
+      }
+    },
+    "tests/test_flora_banking_increment44_executive_navigation.py::test_pestle_only_outlook_not_landing_or_portfolio": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_increment44_executive_navigation.py",
+          "test_pestle_only_outlook_not_landing_or_portfolio",
+          "assert \"UK Banking PESTLE view\" in industry_outlook_page()"
+        ],
+        "headline_sha256": "65555e19364dda883be83552e2601f922b9fc58c1a63b84b297866f098176d73"
+      }
+    },
+    "tests/test_flora_banking_increment44_executive_navigation.py::test_ai_native_reference_model_collapsed_and_separate": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_increment44_executive_navigation.py",
+          "test_ai_native_reference_model_collapsed_and_separate",
+          "assert \"Explore capability model\" in top"
+        ],
+        "headline_sha256": "cba68d5ab8c18dc6dfc9d6d5cdd0b4809d848ea376a1fb3d58fa7458a176d289"
+      }
+    },
+    "tests/test_flora_banking_increment44_executive_navigation.py::test_account_default_opportunities_breadcrumbs_and_evidence_drilldown": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_increment44_executive_navigation.py",
+          "test_account_default_opportunities_breadcrumbs_and_evidence_drilldown",
+          "assert \"data-default-opportunities='3'\" in html"
+        ],
+        "headline_sha256": "0ae5709ee533c1bc91ebf00ec02e28b452e5e744ee2e77b5da0e6519e0085b67"
+      }
+    },
+    "tests/test_flora_banking_increment451_visual_correction.py::test_featured_subset_has_full_exploration_route_and_counts_match_projection": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_increment451_visual_correction.py",
+          "test_featured_subset_has_full_exploration_route_and_counts_match_projection",
+          "assert \"Featured intelligence\" in html"
+        ],
+        "headline_sha256": "d48e4455eb7051c7df3c4b1bd8da2da6fa5a31ca591e82ee646d96555ae1d4c4"
+      }
+    },
+    "tests/test_flora_banking_increment45_visual_intelligence.py::test_ai_native_maturity_journey_renders_as_visual_progression": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_increment45_visual_intelligence.py",
+          "test_ai_native_maturity_journey_renders_as_visual_progression",
+          "assert \"AI-native maturity rail\" in html"
+        ],
+        "headline_sha256": "fc847c1b52a9ada1b2bb032a427d66d5005a3875565cdf51efcd796435e91aba"
+      }
+    },
+    "tests/test_flora_banking_industry_reinvention_increment42.py::test_financial_behaviour_narrative_has_required_causal_sections": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_industry_reinvention_increment42.py",
+          "test_financial_behaviour_narrative_has_required_causal_sections",
+          "assert \"What the financial results imply about behaviour\" in html"
+        ],
+        "headline_sha256": "89e0ddd1ec08ad6eec25b25afa083d2972807a98d7c07205b4179baf0f63f7e9"
+      }
+    },
+    "tests/test_flora_banking_industry_reinvention_increment42.py::test_pestle_forces_map_to_specific_banks_themes_and_non_generic_outputs": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_industry_reinvention_increment42.py",
+          "test_pestle_forces_map_to_specific_banks_themes_and_non_generic_outputs",
+          "assert category in html"
+        ],
+        "headline_sha256": "d5d3b26886929612909adc9a37e4f490fd45fd6694b6d19457afa9bfdff6c442"
+      }
+    },
+    "tests/test_flora_banking_industry_reinvention_increment42.py::test_supplier_names_render_and_unnamed_labels_are_suppressed_when_names_exist": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_industry_reinvention_increment42.py",
+          "test_supplier_names_render_and_unnamed_labels_are_suppressed_when_names_exist",
+          "assert \"Google Cloud\" in html"
+        ],
+        "headline_sha256": "164fa9a52ae464a3823c7497abbac4c0f544c1a0322de26bf255934eb22e5c92"
+      }
+    },
+    "tests/test_flora_banking_industry_reinvention_increment42.py::test_heatmap_cells_show_pressure_barrier_supplier_and_whitespace": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_industry_reinvention_increment42.py",
+          "test_heatmap_cells_show_pressure_barrier_supplier_and_whitespace",
+          "assert term in html"
+        ],
+        "headline_sha256": "c2da1cc5bdb9116a2bc47c1c2a2a631abca1da79cd85a51bc77ef8e5b88555fd"
+      }
+    },
+    "tests/test_flora_banking_industry_reinvention_increment42.py::test_industry_opportunity_totals_reconcile_to_account_opportunities": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_industry_reinvention_increment42.py",
+          "test_industry_opportunity_totals_reconcile_to_account_opportunities",
+          "assert f\"Flora working estimate \u00a3{portfolio_mid}m\" in html or f\"Flora working estimate: \u00a3{portfolio_mid}m\" in html"
+        ],
+        "headline_sha256": "6e107ffbf087de6295ebe4094573d241d885786a86b9db9fc8d3a66fb2b88344"
+      }
+    },
+    "tests/test_flora_banking_industry_reinvention_increment42.py::test_rendered_acceptance_artefacts_exist": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_industry_reinvention_increment42.py",
+          "test_rendered_acceptance_artefacts_exist",
+          "assert artefact in industry"
+        ],
+        "headline_sha256": "50fc0c3635c1f6d73faf2446bc5962fa202ab6ec4ffd9cbc3ffe85607d6c528a"
+      }
+    },
+    "tests/test_flora_banking_portfolio_increment3.py::test_each_bank_page_uses_executive_structure_and_preserves_inspection": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_portfolio_increment3.py",
+          "test_each_bank_page_uses_executive_structure_and_preserves_inspection",
+          "assert section in html"
+        ],
+        "headline_sha256": "a344ed693f603c40b10791d75bedb93124c8bff9ad5afd167a7e68ac71748bbd"
+      }
+    },
+    "tests/test_flora_banking_portfolio_increment3.py::test_analyst_views_preserve_attribution_without_fake_consensus": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_portfolio_increment3.py",
+          "test_analyst_views_preserve_attribution_without_fake_consensus",
+          "assert \"What analysts broadly like\" in html"
+        ],
+        "headline_sha256": "24d199ecfeadddf42e5f108a392816351dcf8e7048b25df3048c419d08d42dbe"
+      }
+    },
+    "tests/test_flora_banking_portfolio_increment3.py::test_theme_relevance_ranking_and_pipeline_are_deterministic": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_portfolio_increment3.py",
+          "test_theme_relevance_ranking_and_pipeline_are_deterministic",
+          "assert theme in first"
+        ],
+        "headline_sha256": "6538b4b471bc10e301bd2f063547c0bc34581c2bb962b785e69eecde70e2a2f8"
+      }
+    },
+    "tests/test_flora_banking_portfolio_increment3.py::test_opportunities_have_values_feedback_and_preserve_originals": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_portfolio_increment3.py",
+          "test_opportunities_have_values_feedback_and_preserve_originals",
+          "assert action in html"
+        ],
+        "headline_sha256": "444eaee7b875f537f9dfe87ea1965a1968a6fc2bc60e1a53912004d9fac15f6f"
+      }
+    },
+    "tests/test_flora_banking_portfolio_increment3.py::test_increment_41_pipeline_reconciliation_horizons_and_value_meaning": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_portfolio_increment3.py",
+          "test_increment_41_pipeline_reconciliation_horizons_and_value_meaning",
+          "assert \"What the financial results are telling us\" in html"
+        ],
+        "headline_sha256": "aee398a20a98dd307a09b9817573707045d97fd998d6fc12b38c7eb04e3a19e0"
+      }
+    },
+    "tests/test_flora_banking_portfolio_increment3.py::test_increment_41_supplier_traction_is_sourced_or_human_labelled_and_unknown_is_bounded": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_portfolio_increment3.py",
+          "test_increment_41_supplier_traction_is_sourced_or_human_labelled_and_unknown_is_bounded",
+          "assert \"No reliable view\" in html"
+        ],
+        "headline_sha256": "4d7f98a7365335afa57f0f4c806728f1082c57451285645b173319e82c01c0a5"
+      }
+    },
+    "tests/test_flora_banking_portfolio_increment3.py::test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_banking_portfolio_increment3.py",
+          "test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion",
+          "assert text in html"
+        ],
+        "headline_sha256": "be000f855779a30d8982bdade72b3350369a35f1e2256e870926c86924f56a71"
+      }
+    },
+    "tests/test_flora_enterprise_canvas.py::test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_enterprise_canvas.py",
+          "test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs",
+          "assert \"href='/digital-twins/MOD'>Open Twin\" in home"
+        ],
+        "headline_sha256": "61c98a18025b708322cf5914982c865eef21c59ae0070ed31f07661362c4b68e"
+      }
+    },
+    "tests/test_flora_enterprise_canvas.py::test_mod_executive_commercial_canvas_read_model": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_enterprise_canvas.py",
+          "test_mod_executive_commercial_canvas_read_model",
+          "assert \"executive situation briefing\" in html"
+        ],
+        "headline_sha256": "0439732c274114b1d93bcc148f7b895b050241ced0b0f77c4990146568b43d76"
+      }
+    },
+    "tests/test_flora_ai_financial_report_review.py::test_ai_financial_report_review_applies_accepted_claim": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_ai_financial_report_review.py",
+          "test_ai_financial_report_review_applies_accepted_claim",
+          "update_reviews(run['run_id'], {f\"action_{run['claims'][0]['claim_id']}\": ['accept']})"
+        ],
+        "headline_sha256": "b233df2d05a3b6d7f79b04530f4807bc086de2cf9691c8deea19c7557b21284f"
+      }
+    },
+    "tests/test_flora_ai_financial_report_review.py::test_review_page_exposes_accept_amend_reject": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_ai_financial_report_review.py",
+          "test_review_page_exposes_accept_amend_reject",
+          "html = ai_review.run_page(run['run_id'])"
+        ],
+        "headline_sha256": "b233df2d05a3b6d7f79b04530f4807bc086de2cf9691c8deea19c7557b21284f"
+      }
+    },
+    "tests/test_flora_ai_financial_report_review.py::test_financial_intelligence_records_source_retrieval_failure": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_ai_financial_report_review.py",
+          "test_financial_intelligence_records_source_retrieval_failure",
+          "assert run['status'] == 'source_retrieval_failed'"
+        ],
+        "headline_sha256": "44430bdfa7828a95c17d5c01b34ed3d5dfd1141852599ad4ac1af001070236a6"
+      }
+    },
+    "tests/test_flora_ai_financial_report_review.py::test_financial_intelligence_records_provider_not_configured": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_ai_financial_report_review.py",
+          "test_financial_intelligence_records_provider_not_configured",
+          "assert run['provider_status'] == 'not_executed'"
+        ],
+        "headline_sha256": "8be596e817bed06e3f883f70060e037b48ad92151617a63a23bcd5c62249e186"
+      }
+    },
+    "tests/test_flora_ai_financial_report_review.py::test_financial_intelligence_refresh_creates_missing_nested_directories": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_ai_financial_report_review.py",
+          "test_financial_intelligence_refresh_creates_missing_nested_directories",
+          "assert run['status'] == 'completed'"
+        ],
+        "headline_sha256": "009d1ea2b403b30ca7d48a6631422b3b9b42195928da6edb0729da542ede5bad"
+      }
+    },
+    "tests/test_flora_ai_financial_report_review.py::test_financial_intelligence_persistence_failure_is_not_provider_failure": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_ai_financial_report_review.py",
+          "test_financial_intelligence_persistence_failure_is_not_provider_failure",
+          "assert run['status'] == 'persistence_failed'"
+        ],
+        "headline_sha256": "550c7f8d86415906ac3426ba76d3bcada2ffdb3e127f57461a920c665614b237"
+      }
+    },
+    "tests/test_flora_ai_financial_report_review.py::test_provider_request_failures_remain_classified": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_ai_financial_report_review.py",
+          "test_provider_request_failures_remain_classified",
+          "assert run['status'] == 'provider_request_failed'"
+        ],
+        "headline_sha256": "61189066ac2e85b71d27d9c88c8934a8859500c8526b6dce1bf33dca5fcc320e"
+      }
+    },
+    "tests/test_flora_ai_financial_report_review.py::test_missing_financial_intelligence_run_returns_usable_page": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_ai_financial_report_review.py",
+          "test_missing_financial_intelligence_run_returns_usable_page",
+          "html, status = review.financial_intelligence_run_response('fi-0304783822cb')"
+        ],
+        "headline_sha256": "b233df2d05a3b6d7f79b04530f4807bc086de2cf9691c8deea19c7557b21284f"
+      }
+    },
+    "tests/test_flora_ai_financial_report_review.py::test_old_financial_intelligence_url_does_not_raise": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_ai_financial_report_review.py",
+          "test_old_financial_intelligence_url_does_not_raise",
+          "html = review.financial_intelligence_run_page('fi-old-missing')"
+        ],
+        "headline_sha256": "b233df2d05a3b6d7f79b04530f4807bc086de2cf9691c8deea19c7557b21284f"
+      }
+    },
+    "tests/test_flora_ai_financial_report_review.py::test_flora_data_dir_defaults_to_render_persistent_pilot_storage": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_ai_financial_report_review.py",
+          "test_flora_data_dir_defaults_to_render_persistent_pilot_storage",
+          "assert status['ready'] is True"
+        ],
+        "headline_sha256": "73b5e9020dc6335f5a8d156167cb739a86e1945f1d31c1095d944e7d0bb35b2e"
+      }
+    },
+    "tests/test_flora_ai_financial_report_review.py::test_provider_timeout_is_distinct_and_records_safe_diagnostic": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_ai_financial_report_review.py",
+          "test_provider_timeout_is_distinct_and_records_safe_diagnostic",
+          "assert run['status'] == 'provider_timeout'"
+        ],
+        "headline_sha256": "44661ac4e778c4ff93c58a0bd84ea28227b3865c41a41a101f139333796a5b49"
+      }
+    },
+    "tests/test_flora_ai_financial_report_review.py::test_progress_run_deduplicates_refresh_clicks": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_ai_financial_report_review.py",
+          "test_progress_run_deduplicates_refresh_clicks",
+          "html = review.financial_intelligence_progress_page(first['run_id'])"
+        ],
+        "headline_sha256": "b233df2d05a3b6d7f79b04530f4807bc086de2cf9691c8deea19c7557b21284f"
+      }
+    },
+    "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_defaults_false_and_refuses_non_pilot": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_auth.py",
+          "test_pilot_auto_sign_in_defaults_false_and_refuses_non_pilot",
+          "assert \"environment\" in status.failed_condition"
+        ],
+        "headline_sha256": "5c3ab7c633ab0ef75b7da69ff3c2788f45b25546c6e7c7d2f6ff5d2e833e2c80"
+      }
+    },
+    "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_OWNER_ID-owner]": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_auth.py",
+          "test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely",
+          "assert expected in status.failed_condition"
+        ],
+        "headline_sha256": "c00741b3a14cfc28cd8fd5dec947e6a6c02849670d12de0debf636e12f9eeb99"
+      }
+    },
+    "tests/test_flora_pilot_auth.py::test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely[FLORA_PILOT_ROLE-membership]": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_auth.py",
+          "test_pilot_auto_sign_in_missing_canonical_configuration_fails_safely",
+          "assert expected in status.failed_condition"
+        ],
+        "headline_sha256": "71919b0d753015b146848ec0b96f30e5fedb15610f561c95df68a884cccba921"
+      }
+    },
+    "tests/test_flora_pilot_auth.py::test_deprecated_auto_sign_in_conflicts_with_canonical_pilot_mode": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_auth.py",
+          "test_deprecated_auto_sign_in_conflicts_with_canonical_pilot_mode",
+          "assert \"FLORA_PILOT_AUTO_SIGN_IN\" in status.conflict"
+        ],
+        "headline_sha256": "3816290d1ad8cb43dda53850744b3c91156efb46b5dc597baf46eab4b0b451d3"
+      }
+    },
+    "tests/test_flora_pilot_auth.py::test_valid_pilot_session_cookie_resolves_owner_workspace_role_and_policy": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_auth.py",
+          "test_valid_pilot_session_cookie_resolves_owner_workspace_role_and_policy",
+          "cookie = issue_session_cookie(secure=False)"
+        ],
+        "headline_sha256": "e3e0db94d6a9a623d225737090bba566490202a2de700bf1129687c5f404ec3a"
+      }
+    },
+    "tests/test_flora_pilot_auth.py::test_cookie_security_attributes_for_https_deployment": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_auth.py",
+          "test_cookie_security_attributes_for_https_deployment",
+          "cookie = issue_session_cookie(secure=True)"
+        ],
+        "headline_sha256": "e3e0db94d6a9a623d225737090bba566490202a2de700bf1129687c5f404ec3a"
+      }
+    },
+    "tests/test_flora_pilot_auth.py::test_synthetic_headers_ignored_and_tampered_cookie_rejected": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_auth.py",
+          "test_synthetic_headers_ignored_and_tampered_cookie_rejected",
+          "cookie = issue_session_cookie(secure=False).split(\";\", 1)[0] + \"tamper\""
+        ],
+        "headline_sha256": "e3e0db94d6a9a623d225737090bba566490202a2de700bf1129687c5f404ec3a"
+      }
+    },
+    "tests/test_flora_pilot_auth.py::test_blueprint_get_and_post_use_same_signed_session_and_anonymous_denied": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_auth.py",
+          "test_blueprint_get_and_post_use_same_signed_session_and_anonymous_denied",
+          "cookie_headers = headers(issue_session_cookie(secure=False))"
+        ],
+        "headline_sha256": "e3e0db94d6a9a623d225737090bba566490202a2de700bf1129687c5f404ec3a"
+      }
+    },
+    "tests/test_flora_pilot_auth.py::test_pilot_sign_in_route_accepts_secret_only_by_post_and_sets_cookie": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_auth.py",
+          "test_pilot_sign_in_route_accepts_secret_only_by_post_and_sets_cookie",
+          "assert response.status == 200"
+        ],
+        "headline_sha256": "192cfecc0bded619d20267c0ce20745a3e27324d6f54085f1a51340374e2da76"
+      }
+    },
+    "tests/test_flora_pilot_auth.py::test_sign_in_issues_one_cookie_and_browser_reuses_it_for_import_get_and_post": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_auth.py",
+          "test_sign_in_issues_one_cookie_and_browser_reuses_it_for_import_get_and_post",
+          "cookie = dict(response.getheaders())[\"Set-Cookie\"]"
+        ],
+        "headline_sha256": "9d8b990454221bbe8a30003cc44cb96bb46727a28aa4a55c6e6dc8f35d27ae0e"
+      }
+    },
+    "tests/test_flora_pilot_auth.py::test_unexpected_diagnostic_storage_failure_preserves_denied_context": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_auth.py",
+          "test_unexpected_diagnostic_storage_failure_preserves_denied_context",
+          "cookie_headers = headers(issue_session_cookie(secure=False))"
+        ],
+        "headline_sha256": "e3e0db94d6a9a623d225737090bba566490202a2de700bf1129687c5f404ec3a"
+      }
+    },
+    "tests/test_flora_pilot_auth.py::test_persistent_cookie_has_30_day_expiry_survives_restart_and_rejects_expired": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_auth.py",
+          "test_persistent_cookie_has_30_day_expiry_survives_restart_and_rejects_expired",
+          "cookie = issue_session_cookie(secure=False)"
+        ],
+        "headline_sha256": "e3e0db94d6a9a623d225737090bba566490202a2de700bf1129687c5f404ec3a"
+      }
+    },
+    "tests/test_flora_pilot_auth.py::test_cios_owner_can_upload_inspect_and_stage_mod_package_without_canonical_mutation": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_auth.py",
+          "test_cios_owner_can_upload_inspect_and_stage_mod_package_without_canonical_mutation",
+          "cookie_headers = headers(issue_session_cookie(secure=False))"
+        ],
+        "headline_sha256": "e3e0db94d6a9a623d225737090bba566490202a2de700bf1129687c5f404ec3a"
+      }
+    },
+    "tests/test_flora_pilot_auth.py::test_owner_managed_enterprise_policy_is_case_normalised_and_workspace_bound": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_auth.py",
+          "test_owner_managed_enterprise_policy_is_case_normalised_and_workspace_bound",
+          "staged = BlueprintPackageValidator().validate_and_stage(r.package_ref, \"rob\", owner)"
+        ],
+        "headline_sha256": "a510dcea05287a121af99bd614c28fcb84e7ad6e4ac8913fe4cb336f5962cfa5"
+      }
+    },
+    "tests/test_flora_pilot_blueprint_review.py::test_pilot_upload_review_and_dispositions_do_not_grant_promotion": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_blueprint_review.py",
+          "test_pilot_upload_review_and_dispositions_do_not_grant_promotion",
+          "assert upload.decision == \"allowed\""
+        ],
+        "headline_sha256": "dc904075bee6fc537214a781f481efd59e418e061a869fa686ad29512114a6f9"
+      }
+    },
+    "tests/test_flora_pilot_blueprint_review.py::test_non_pilot_workspace_and_capability_checks_are_unchanged": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_blueprint_review.py",
+          "test_non_pilot_workspace_and_capability_checks_are_unchanged",
+          "assert status == 200"
+        ],
+        "headline_sha256": "192cfecc0bded619d20267c0ce20745a3e27324d6f54085f1a51340374e2da76"
+      }
+    },
+    "tests/test_flora_pilot_import_bypass.py::test_configured_module_complete_http_commercial_context_and_twin_map": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_import_bypass.py",
+          "test_configured_module_complete_http_commercial_context_and_twin_map",
+          "assert status == 303"
+        ],
+        "headline_sha256": "a797afdf3ec4427692dd40d78d10aa92030fbe4261d2568f67a4e2b0974e3627"
+      }
+    },
+    "tests/test_flora_pilot_import_bypass.py::test_one_canonical_mode_and_conflicting_legacy_modes_fail": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_import_bypass.py",
+          "test_one_canonical_mode_and_conflicting_legacy_modes_fail",
+          "assert pilot_import_bypass_enabled() is True"
+        ],
+        "headline_sha256": "73b5e9020dc6335f5a8d156167cb739a86e1945f1d31c1095d944e7d0bb35b2e"
+      }
+    },
+    "tests/test_flora_pilot_import_bypass.py::test_deployed_equivalent_pilot_route_imports_candidate_to_executive_workspace": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_import_bypass.py",
+          "test_deployed_equivalent_pilot_route_imports_candidate_to_executive_workspace",
+          "assert status == 200 and \"href='/blueprint-import'>Import Twin\" in landing"
+        ],
+        "headline_sha256": "0bbc6fc224f708c39172f3c2cf1d93bd24e63f5196a00eaf38112d56e46f0bc5"
+      }
+    },
+    "tests/test_flora_pilot_import_bypass.py::test_deployment_endpoint_identifies_canonical_import_runtime": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_import_bypass.py",
+          "test_deployment_endpoint_identifies_canonical_import_runtime",
+          "assert payload[\"commit_sha\"] == \"abc123deployed\""
+        ],
+        "headline_sha256": "0b7a04be26d4d2c86be87cce86678d8601549de4b67737f0985518fb98c04141"
+      }
+    },
+    "tests/test_flora_pilot_import_bypass.py::test_pilot_configure_save_and_recompose_uses_narrow_actor_scope": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_import_bypass.py",
+          "test_pilot_configure_save_and_recompose_uses_narrow_actor_scope",
+          "assert status == 200"
+        ],
+        "headline_sha256": "192cfecc0bded619d20267c0ce20745a3e27324d6f54085f1a51340374e2da76"
+      }
+    },
+    "tests/test_flora_pilot_import_bypass.py::test_secure_mode_settings_route_reports_root_authorisation_decision": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_import_bypass.py",
+          "test_secure_mode_settings_route_reports_root_authorisation_decision",
+          "assert status == 200"
+        ],
+        "headline_sha256": "192cfecc0bded619d20267c0ce20745a3e27324d6f54085f1a51340374e2da76"
+      }
+    },
+    "tests/test_flora_pilot_import_bypass.py::test_validation_and_archive_safety_precede_identity": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_import_bypass.py",
+          "test_validation_and_archive_safety_precede_identity",
+          "assert status == 400 and \"Stage failed: Package received\" in html"
+        ],
+        "headline_sha256": "dd39cb09ccbff512abf049027fa4398cf63d2293dcbe5cbd5f13859b2de02edd"
+      }
+    },
+    "tests/test_flora_pilot_import_bypass.py::test_form_validation_secure_mode_and_promotion_boundary": {
+      "status": "failed",
+      "signature": {
+        "frame": [
+          "tests/test_flora_pilot_import_bypass.py",
+          "test_form_validation_secure_mode_and_promotion_boundary",
+          "assert status == 200"
+        ],
+        "headline_sha256": "192cfecc0bded619d20267c0ce20745a3e27324d6f54085f1a51340374e2da76"
+      }
+    }
+  },
+  "original_skips": {
+    "tests/test_flora_experience_discovery_repair.py::test_actual_retained_packages_use_generic_discovery_and_keep_factory_boundaries[TEL-W6]": {
+      "status": "skipped",
+      "reason": "Actual retained artifact unavailable: TEL-W6"
+    },
+    "tests/test_flora_experience_discovery_repair.py::test_actual_retained_packages_use_generic_discovery_and_keep_factory_boundaries[BNK-W1]": {
+      "status": "skipped",
+      "reason": "Actual retained artifact unavailable: BNK-W1"
+    },
+    "tests/test_flora_factory_evidence_release_repair.py::test_retained_tel_w5_w6_reconciliation_and_replay": {
+      "status": "skipped",
+      "reason": "Actual retained W6 package unavailable; set FLORA_AUDIT_TEL_W6 / FLORA_AUDIT_BNK_W1"
+    },
+    "tests/test_flora_factory_evidence_release_repair.py::test_retained_bnk_same_citation_contract": {
+      "status": "skipped",
+      "reason": "Actual retained BNK package unavailable; set FLORA_AUDIT_TEL_W6 / FLORA_AUDIT_BNK_W1"
+    },
+    "tests/test_flora_factory_evidence_release_repair.py::test_retained_tel_count_reconciliation_independent_of_citation_assertions": {
+      "status": "skipped",
+      "reason": "Actual retained W6 package unavailable; set FLORA_AUDIT_TEL_W6 / FLORA_AUDIT_BNK_W1"
+    },
+    "tests/test_flora_factory_presentation_repair.py::test_actual_retained_user_journey_and_honest_promotion[TEL-W6]": {
+      "status": "skipped",
+      "reason": "Actual retained artifact not available: TEL-W6"
+    },
+    "tests/test_flora_factory_presentation_repair.py::test_actual_retained_user_journey_and_honest_promotion[BNK-W1]": {
+      "status": "skipped",
+      "reason": "Actual retained artifact not available: BNK-W1"
+    },
+    "tests/test_flora_factory_researcher_model_repair.py::test_actual_retained_source_to_memory_retrieval_and_view[TEL-W6]": {
+      "status": "skipped",
+      "reason": "Retained artifact unavailable: TEL-W6"
+    },
+    "tests/test_flora_factory_researcher_model_repair.py::test_actual_retained_source_to_memory_retrieval_and_view[BNK-W1]": {
+      "status": "skipped",
+      "reason": "Retained artifact unavailable: BNK-W1"
+    },
+    "tests/test_flora_factory_researcher_model_repair.py::test_actual_tel_w5_w6_handoff_reuses_observation_and_confidence_history": {
+      "status": "skipped",
+      "reason": "Retained artifact unavailable: TEL-W6"
+    }
+  },
+  "integrity": {
+    "unchanged_comparisons": 146,
+    "counts": {
+      "hash-comparison.json": 52,
+      "01c-integrity.json": 9,
+      "01d-integrity.json": 62,
+      "acceptance-integrity.json": 5,
+      "01e-integrity.json": 18
+    },
+    "audit_chains": 15,
+    "audit_record_digests": 17,
+    "cleanup_audits": 1
+  },
+  "baseline_policy": "Only a new 42-passing-case suite added; no old exception identity, failure signature, skip reason or security selection changed. Exact corpus guard adds one named hash-pinned projection and retains all 167 earlier source bytes."
+}

@@ -1,0 +1,498 @@
+{
+  "schema_version": 1,
+  "status": "not_executed",
+  "configuration": {
+    "schema_version": 1,
+    "adapter": "research-semantic-runtime-v1",
+    "provider": "openai",
+    "model": null,
+    "endpoint_host": "api.openai.com",
+    "key_present": false,
+    "ready_for_bounded_generation": false,
+    "blockers": [
+      "existing_openai_reasoning_provider_not_configured_or_fixture_only",
+      "model_endpoint_egress_not_allowlisted",
+      "explicit_spend_and_reviewed_pricing_configuration_missing",
+      "positive_finite_budget_and_rates_required"
+    ],
+    "model_calls": 0,
+    "network_calls": 0,
+    "configured_cost_limit": null,
+    "pricing_version": null,
+    "cost_notice": "Existing account token usage can incur charges; no new service commitment is created. No live call occurs in readiness.",
+    "required_names": [
+      "FLORA_REASONING_PROVIDER",
+      "FLORA_REASONING_MODEL",
+      "FLORA_REASONING_API_KEY (or OPENAI_API_KEY)",
+      "FLORA_RESEARCH_MAX_RUN_COST_USD",
+      "FLORA_RESEARCH_PRICING_VERSION",
+      "FLORA_FINANCIAL_INTELLIGENCE_INPUT_COST_PER_1M",
+      "FLORA_FINANCIAL_INTELLIGENCE_OUTPUT_COST_PER_1M"
+    ]
+  },
+  "model_calls": 0,
+  "network_calls": 0,
+  "reference_hashes": {
+    "tests/fixtures/research-sprint2/real-source-rubric-v1.json": "bf4cf26da49946c4ae9c8a1c713f02b638921a58eda0759ed1cb9b47aa8bc11d",
+    "tests/fixtures/research-sprint2/real-source-cases-v1.json": "33b86f546e74f3f540bea3ba77522b8abe25dc78191e9e6e4df287df3a7952ee"
+  },
+  "reference_dependence": "Authored source-support labels, not externally adjudicated ground truth. Runtime outputs were not used.",
+  "all_cases": {
+    "reference_by_decision": {
+      "supported": {
+        "accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "not_executed": 5
+      },
+      "unsupported_as_cited": {
+        "accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "not_executed": 15
+      },
+      "indeterminate": {
+        "accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "not_executed": 4
+      }
+    },
+    "total": 24,
+    "executed": 0,
+    "not_executed": 24,
+    "false_acceptance": {
+      "count": 0,
+      "executed_reference_denominator": 0,
+      "rate": null
+    },
+    "false_rejection": {
+      "count": 0,
+      "executed_reference_denominator": 0,
+      "rate": null
+    },
+    "supported_unresolved": 0,
+    "indeterminate_release": {
+      "count": 0,
+      "executed_reference_denominator": 0,
+      "rate": null
+    },
+    "abstention": {
+      "count": 0,
+      "executed_denominator": 0,
+      "rate": null
+    },
+    "decision_coverage": {
+      "count": 0,
+      "total_denominator": 24,
+      "rate": 0.0
+    },
+    "execution_coverage": {
+      "count": 0,
+      "total_denominator": 24,
+      "rate": 0.0
+    },
+    "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+  },
+  "held_out": {
+    "reference_by_decision": {
+      "supported": {
+        "accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "not_executed": 4
+      },
+      "unsupported_as_cited": {
+        "accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "not_executed": 14
+      },
+      "indeterminate": {
+        "accepted": 0,
+        "rejected": 0,
+        "unresolved": 0,
+        "not_executed": 4
+      }
+    },
+    "total": 22,
+    "executed": 0,
+    "not_executed": 22,
+    "false_acceptance": {
+      "count": 0,
+      "executed_reference_denominator": 0,
+      "rate": null
+    },
+    "false_rejection": {
+      "count": 0,
+      "executed_reference_denominator": 0,
+      "rate": null
+    },
+    "supported_unresolved": 0,
+    "indeterminate_release": {
+      "count": 0,
+      "executed_reference_denominator": 0,
+      "rate": null
+    },
+    "abstention": {
+      "count": 0,
+      "executed_denominator": 0,
+      "rate": null
+    },
+    "decision_coverage": {
+      "count": 0,
+      "total_denominator": 22,
+      "rate": 0.0
+    },
+    "execution_coverage": {
+      "count": 0,
+      "total_denominator": 22,
+      "rate": 0.0
+    },
+    "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+  },
+  "by_claim_type": {
+    "interpretation": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 1
+        }
+      },
+      "total": 1,
+      "executed": 0,
+      "not_executed": 1,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 0,
+        "rate": null
+      },
+      "decision_coverage": {
+        "count": 0,
+        "total_denominator": 1,
+        "rate": 0.0
+      },
+      "execution_coverage": {
+        "count": 0,
+        "total_denominator": 1,
+        "rate": 0.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "scenario": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 0
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 1
+        }
+      },
+      "total": 1,
+      "executed": 0,
+      "not_executed": 1,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 0,
+        "rate": null
+      },
+      "decision_coverage": {
+        "count": 0,
+        "total_denominator": 1,
+        "rate": 0.0
+      },
+      "execution_coverage": {
+        "count": 0,
+        "total_denominator": 1,
+        "rate": 0.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    },
+    "source_reported_fact": {
+      "reference_by_decision": {
+        "supported": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 4
+        },
+        "unsupported_as_cited": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 14
+        },
+        "indeterminate": {
+          "accepted": 0,
+          "rejected": 0,
+          "unresolved": 0,
+          "not_executed": 2
+        }
+      },
+      "total": 20,
+      "executed": 0,
+      "not_executed": 20,
+      "false_acceptance": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "false_rejection": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "supported_unresolved": 0,
+      "indeterminate_release": {
+        "count": 0,
+        "executed_reference_denominator": 0,
+        "rate": null
+      },
+      "abstention": {
+        "count": 0,
+        "executed_denominator": 0,
+        "rate": null
+      },
+      "decision_coverage": {
+        "count": 0,
+        "total_denominator": 20,
+        "rate": 0.0
+      },
+      "execution_coverage": {
+        "count": 0,
+        "total_denominator": 20,
+        "rate": 0.0
+      },
+      "limitations": "Rates describe reference support decisions, not absolute real-world truth. Not-executed is not a semantic rejection or model abstention."
+    }
+  },
+  "records": [
+    {
+      "id": "REAL-aws-plan",
+      "split": "development",
+      "claim_type": "source_reported_fact",
+      "reference": "supported",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-aws-outcome",
+      "split": "development",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-ms-proposal",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "supported",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-ms-enacted",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-ms-ai-role",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "supported",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-ms-ownership",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-ms-no-concerns",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-ms-customer-delivery",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-wrong-subsidiary",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-wrong-period",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-wrong-geography",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-numeric-scale",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-industry-to-adoption",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-quantum-conditions",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "supported",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-quantum-compliance",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-catalogue-listed",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "supported",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-catalogue-contract",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-global-to-uk",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-causal",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-superseded-current",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "indeterminate",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-copied-corroboration",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "unsupported_as_cited",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-commercial-inference",
+      "split": "held_out",
+      "claim_type": "interpretation",
+      "reference": "indeterminate",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-scenario",
+      "split": "held_out",
+      "claim_type": "scenario",
+      "reference": "indeterminate",
+      "decision": "not_executed"
+    },
+    {
+      "id": "REAL-conflicting-evidence",
+      "split": "held_out",
+      "claim_type": "source_reported_fact",
+      "reference": "indeterminate",
+      "decision": "not_executed"
+    }
+  ],
+  "limitation": "This is a frozen evaluation plan and honest not-executed register, not a live result or accuracy estimate. Controlled fixture tests are separate."
+}
