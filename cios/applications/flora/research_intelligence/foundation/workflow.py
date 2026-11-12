@@ -42,7 +42,8 @@ def establish(operations, job_id, collector):
                 break
     if operations.status(job_id)['state']=='exhausted':return {'status':operations.status(job_id),'release':None}
     assurance=operations.assure(job_id)
-    return {'status':operations.status(job_id),'assurance':assurance,'release':operations.release(job_id)}
+    release=operations.release(job_id)
+    return {'status':operations.status(job_id),'assurance':assurance,'release':release}
 
 
 def mission_manifest(programme):

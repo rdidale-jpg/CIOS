@@ -70,6 +70,8 @@ def test_job_resume_does_not_reacquire_or_publish_duplicate(job):
     reopened=Operations(o.root)
     result=establish(reopened,j,lambda r:pytest.fail('Completed checkpoint reacquired'))
     assert result['release']==r and reopened.status(j)['logical_source_requests']==2
+    assert reopened.status(j)['state']=='released'
+    assert result['status']['state']=='released'
     assert o.status(j)['retained_excerpt_bytes']==before['retained_excerpt_bytes']
 
 

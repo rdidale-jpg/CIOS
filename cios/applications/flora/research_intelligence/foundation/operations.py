@@ -283,7 +283,9 @@ class Operations:
                      'canonical_mutation':False,'automatic_pipeline_capture':False,'automatic_qualification':False,
                      'limitations':p.publication_limitations,'correction_events':[json.loads(e['payload']) for e in db.execute("SELECT payload FROM events WHERE job=? AND event='correction' ORDER BY seq",(jid,))]}
             latest=db.execute('SELECT * FROM releases WHERE job=? ORDER BY version DESC',(jid,)).fetchone()
-            if latest and json.loads(latest['payload'])['content']==payload:return json.loads(latest['payload'])
+            if latest and json.loads(latest['payload'])['content']==payload:
+                db.execute("UPDATE jobs SET state='released' WHERE id=?",(jid,))
+                return json.loads(latest['payload'])
             version=latest['version']+1 if latest else 1
             result={'id':'REL-'+digest([jid,version,payload])[:24],'version':version,'digest':digest(payload),'content':payload}
             db.execute('INSERT INTO releases VALUES(?,?,?,?)',(result['id'],jid,version,json.dumps(result,sort_keys=True)))

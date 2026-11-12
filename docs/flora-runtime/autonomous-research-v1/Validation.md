@@ -30,3 +30,5 @@ python tools/research/validate_flora_foundation_ui.py \
 ```
 
 The browser runner requires Playwright and Chromium; it does not start a service, provision identities, seed data or contact production. Raw test stores, SQLite ledgers, source-tool responses with contact fields, local logs and the unused initial operational directory are not part of the PR. No production changes, canonical promotions, Pipeline qualifications, unattended monitoring, merge or deployment occur.
+
+A targeted post-gate checkpoint replay found that returning an existing release left the job's status as `assessed`. The follow-up correction restores `released` in the same transaction; the existing resume test now asserts that state as well as unchanged release, acquisition count and retained bytes. No test identity or inherited baseline entry changes. The initial full candidate gate passed; final hosted/local evidence must identify the subsequent corrected commit explicitly.
