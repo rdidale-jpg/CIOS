@@ -79,10 +79,12 @@ def research_fold(data,asset):
     return f"<details class='ux-fold'><summary>Evidence, historical observations & research gaps ({len(rows)} claims)</summary><p>Observation period and publication date remain distinct. Historical and superseded intelligence is preserved; inferred relationships never become verified facts.</p>{body}<p><a href='{root}/sources'>Source register</a> · <a href='{root}/gaps'>Research gaps & next actions</a></p></details>"
 
 
-def opportunity_cards(data,limit=3):
+def opportunity_cards(data,limit=3,compact=False):
     from .model import commercial_dimensions
     r=routes_for(data);rows=commercial_candidates(data)[:limit]
     labels={'strategic_relevance':'Relevance','commercial_accessibility':'Access','evidence_maturity':'Evidence','seller_fit':'Seller fit'}
+    if compact:
+        return '<ul>'+''.join(f"<li><a href='{r['candidates']}/{row['id']}'>{e(row['title'])} → decision and evidence</a></li>" for row in rows)+'</ul>'
     cards=[]
     for row in rows:
         c=row['commercial'];ratings=' · '.join(f"{labels[k]} {c[k]['score']}/3" for k in commercial_dimensions(data))
@@ -116,9 +118,12 @@ def industry_page(lens='overview',headers=None,domain='banking'):
     if lens=='overview':body+="<div class='ux-section-head'><h2>Key findings</h2><span>Supported disclosures · retain their reporting periods</span></div>"+claim_cards(d,d['industry_twin_id'])
     body+="<p class='ux-disclosure'>Analyst interpretation · conceptual frameworks, not verified enterprise ownership or buying demand.</p>"
     kind={'overview':'pestle','pestle':'pestle','porter':'five-forces','value-chain':'value-chain','ai-disruption':'pestle','regulation':'pestle','commercial':'pestle'}[lens];body+=("<details><summary>Existing PESTLE diagram</summary>"+render_visual(specs(d)[kind])+"</details>" if living else render_visual(specs(d)[kind]))
+    from .intelligence_depth import framework_depth,executive
+    if domain=='banking':body=body.replace(nav,nav+executive(d,industry=True),1)
     rows=[f for f in d['frameworks'] if f['lens']=={'overview':'pestle','pestle':'pestle','porter':'porter','value-chain':'value-chain','ai-disruption':'pestle','regulation':'pestle','commercial':'pestle'}[lens]]
+    if lens in ('pestle','porter','value-chain'):body+=framework_depth(d,rows)
     body+="<details class='ux-fold'><summary>Interpretation, affected capabilities & evidence</summary>"+''.join(f"<article class='ux-claim'><h3>{e(f['title'])}</h3><p>{e(f['assessment'])}</p><a href='{r['nodes']}/{f['id']}'>Follow capabilities, evidence & opportunities →</a></article>" for f in rows)+"</details>"
-    body+="<div class='ux-section-head'><h2>Enterprise landscape</h2><a href='/enterprises'>All enterprises →</a></div>"+enterprise_cards(d)+"<h2>Commercial implications</h2>"+opportunity_cards(d)+provenance_notice(d)+research_fold(d,d['industry_twin_id'])
+    body+="<div class='ux-section-head'><h2>Enterprise landscape</h2><a href='/enterprises'>All enterprises →</a></div>"+enterprise_cards(d)+"<h2>Commercial implications</h2>"+opportunity_cards(d,compact=True)+provenance_notice(d)+research_fold(d,d['industry_twin_id'])
     body+=f"<details><summary>Supporting research & legacy intelligence</summary><p><a href='{root}'>Detailed research entry</a> · <a href='{r['industry']}/visual-specs'>Structured visual specifications (JSON)</a></p>"+("<p><a href='/flora/banking'>Historical Banking portfolio</a> · <a href='/flora/banking/explorer'>Earlier Explorer</a></p>" if domain=='banking' else '')+"</details>"
     if living:body+='</details>'
     return page(d['industry_name']+' Industry Twin',body,headers,canonical=r['industry'])
@@ -137,19 +142,33 @@ def enterprise_page(slug='lloyds',lens='operating-model',headers=None):
         from .commercial_intelligence import commercial_projection
         from .commercial_views import enterprise_body
         return page(d['enterprise_name']+' Commercial Intelligence',breadcrumb(True,d)+tabs+enterprise_body(commercial_projection(d)),headers,'enterprises',r['enterprise'])
+    if lens=='opportunities' and slug=='lloyds':
+        from .commercial_intelligence import commercial_projection
+        from .enterprise_opportunity import enterprise_overlay
+        return page(d['enterprise_name']+' Opportunities',breadcrumb(True,d)+tabs+enterprise_overlay(d,commercial_projection(d),comparison_visual=render_visual(specs(d)['opportunities'])),headers,'enterprises',r['enterprise'])
     body=breadcrumb(True,d)+f"<section class='ux-hero' id='content'><p class='eyebrow'>{e(d['enterprise_name'])} / Enterprise Twin</p><h1>{e(d['enterprise_name'].replace(' Banking Group',''))}.<br>Connect strategy to a credible opening.</h1><p>Follow supported disclosures through capabilities, transformation priorities and evidence-led commercial hypotheses.</p><a href='/opportunities#opportunities-{domain}'>Inspect commercial priorities →</a></section>"+tabs
     from .visual_intelligence import render_intelligence
     from .visual_specs import build_intelligence_specs
     if lens in ('operating-model','timeline'):
         body=breadcrumb(True,d)+f"<header class='vi-page-head' id='content'><p class='ux-kicker'>Enterprise Twin / {e(d['industry_name'])}</p><h1>{e(d['enterprise_name'])}.</h1><p>How the business works. What is changing. Where the evidence leads.</p></header>"+tabs
+        if slug=='lloyds' and lens=='operating-model':
+            from .intelligence_depth import operating_depth
+            body+=operating_depth(d)
         body+=render_intelligence(build_intelligence_specs(d)['enterprise-story' if lens=='operating-model' else 'strategic-timeline'])
+        if slug=='lloyds' and lens=='operating-model':
+            from .commercial_intelligence import commercial_projection
+            from .enterprise_opportunity import enterprise_overlay
+            body+=enterprise_overlay(d,commercial_projection(d))
         if lens=='operating-model':body+="<details><summary>Existing capability map</summary>"+render_visual(specs(d)['operating-model'])+"</details>"
     else:body+=render_visual(specs(d)[lens])
-    body+="<h2>Key findings & important changes</h2>"+claim_cards(d,d['enterprise_twin_id'])+provenance_notice(d)+"<h2>Where to validate next</h2>"+opportunity_cards(d)
+    if slug=='lloyds' and lens=='operating-model':
+        body+="<details class='ux-fold'><summary>Full enterprise research, findings & programme evidence</summary>"
+    body+="<h2>Key findings & important changes</h2>"+claim_cards(d,d['enterprise_twin_id'])+provenance_notice(d)+"<h2>Where to validate next</h2>"+opportunity_cards(d,compact=True)
     programme=''.join(f"<article class='ux-claim'><h3>{e(p['title'])}</h3><p>{e(p['current_phase'])}</p><p>Owner: {e(p['owner'])} · Funding: {e(p['funding'])} · Procurement: {e(p['procurement'])}</p><a href='{r['nodes']}/{p['id']}'>Programme evidence and commercial questions →</a></article>" for p in d['programmes'])
     body+=f"<p><a href='/enterprises/{slug}/understanding'>Enterprise Understanding — evidence quality and explainable relationships →</a></p>"
     body+=f"<p><a href='/enterprises/{slug}/research-diagnostic'>Research Intelligence Diagnostic — evidence coverage and prioritised gaps →</a></p>"
     body+=f"<details class='ux-fold'><summary>Programmes & investment signals</summary><p>Reported management priorities are not customer-verified buying demand.</p>{programme}</details>"+research_fold(d,d['enterprise_twin_id'])+f"<details><summary>Supporting research & specialist analysis</summary><p><a href='{root}/{slug}'>Full research dossier</a> · <a href='/digital-twins'>Governed Canvas (destination permissions apply)</a></p></details>"
+    if slug=='lloyds' and lens=='operating-model':body+='</details>'
     return page(d['enterprise_name']+' Enterprise Twin',body,headers,'enterprises',r['enterprise'])
 
 
@@ -159,6 +178,8 @@ def opportunities_body(domain=None):
     blocks=[]
     for key in ([domain] if domain else DOMAINS):
         d=load_assessment() if key=='banking' else load_assessment(key);r=routes_for(d)
-        blocks.append(f"<section id='opportunities-{key}'><h2>{e(d['industry_name'])} / {e(d['enterprise_name'])}</h2><p>Within-enterprise research rank; no cross-industry aggregate score.</p>{opportunity_cards(d)}<details class='ux-fold'><summary>Full ranked opportunity landscape ({len(d['candidates'])} hypotheses)</summary>{render_visual(specs(d)['opportunities'])}</details><p><a href='{r['enterprise']}'>Return to {e(d['enterprise_name'])} →</a> · <a href='{r['evidence'].rsplit('/',1)[0]}/gaps'>Qualification and research gaps</a></p></section>")
+        from .intelligence_depth import decision_register
+        cards=decision_register(d) if key=='banking' else opportunity_cards(d)
+        blocks.append(f"<section id='opportunities-{key}'><h2>{e(d['industry_name'])} / {e(d['enterprise_name'])}</h2><p>Within-enterprise research rank; no cross-industry aggregate score.</p>{cards}<details class='ux-fold'><summary>Full ranked opportunity landscape ({len(d['candidates'])} hypotheses)</summary>{render_visual(specs(d)['opportunities'])}</details><p><a href='{r['enterprise']}'>Return to {e(d['enterprise_name'])} →</a> · <a href='{r['evidence'].rsplit('/',1)[0]}/gaps'>Qualification and research gaps</a></p></section>")
     tabs="<nav class='ux-tabs' aria-label='Opportunity sectors'>"+''.join(f"<a href='#opportunities-{k}'>{e(DOMAINS[k][0])}</a>" for k in ([domain] if domain else DOMAINS))+"</nav>"
     return f"<style>{STYLE}{VISUAL_STYLE}</style><div class='ux'><section class='ux-hero' id='content'><p class='eyebrow'>Commercial opportunity discovery</p><h1>Prioritise the question.<br>Earn the qualification.</h1><p>Public research supports relevance. Customer evidence establishes need, access and a qualified opportunity. No budget or buying intent is inferred.</p><a href='/flora/sales/pipeline'>Open authorised Pipeline →</a></section>{tabs}{''.join(blocks)}</div>"

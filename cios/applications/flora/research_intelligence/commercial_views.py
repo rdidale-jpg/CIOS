@@ -67,7 +67,7 @@ def executive_summary(row):
     return body+"<p class='cv-provenance'>Enterprise-specific source scope and periods apply. Summary is abbreviated; full dimensions and exact passages follow. No confirmed external supplier demand.</p></section>"
 
 
-def candidate_overview(data,row,projection,headers=None):
+def candidate_overview(data,row,projection,headers=None,legacy_dossier=''):
     from ..sales_views import capture_controls
     c=row['commercial'];enterprise=projection['enterprise'];root=projection['industry']['url']+'?lens=commercial'
     choices={a['id']:{**a,'enterprise_url':row['enterprise_url']+'#activity-'+a['id']} for a in row['activities']}
@@ -76,7 +76,15 @@ def candidate_overview(data,row,projection,headers=None):
     body=f"<style>{EVIDENCE_STYLE}{STYLE}</style><section class='cv' data-cv-ready='false'><script type='application/json' data-cv-returns>{payload}</script><nav class='cv-links'>"+link(default['url'],'← Back to '+default['label']+' · commercial map',class_name='cv-return')+link(default['enterprise_url'],enterprise['label']+' commercial intelligence',class_name='cv-enterprise-return')+'</nav>'
     current_status=c['confidence'] if row['context_supported'] else 'Current source support missing — retained historical hypothesis; verify evidence before advancement.'
     body+=f"<header class='cv-header' id='explorer-content'>{_badge('Unqualified commercial hypothesis')}<p class='cv-kicker'>{e(enterprise['label'])} / {row['id']}</p><h1>{e(row['title'])}</h1><p>{e(c['offer'])}</p><p>{e(current_status)}</p></header>"
+    snapshot=f"<details class='cv-snapshot'><summary>Inspection snapshot and authority boundary</summary><p>Review {row['review_digest']}; inspection {row['inspection_digest']}; authored assessment {row['assessment_date']}. Public candidate intelligence only; no automatic acceptance or qualification.</p></details>"
+    visual_first = row['id'] in ('RCO-LBG-002','RCO-LBG-001','RCO-LBG-009') and data.get('research_domain','banking')=='banking'
+    if visual_first:
+        from .enterprise_opportunity import opportunity_story,pursuit_preview
+        body+=opportunity_story(data,row)+pursuit_preview(row)
+        body+="<details class='cv-full-research' id='full-research-evidence'><summary>Full research & evidence — inspect complete dossier, source periods, limitations and original assessments</summary>"
     body+=executive_summary(row)
+    from .intelligence_depth import hypothesis_depth
+    body+=hypothesis_depth(data,row)
     body+="<nav class='cv-links' aria-label='Hypothesis inspection'>"+link('#commercial-support','Inspect supporting context')+link('#commercial-counterevidence','Inspect counterevidence')+link('#commercial-capture','Review create/link & qualification →',True)+'</nav>'
     body+="<p class='cv-warning'>Research exploration is read-only. No confirmed customer requirement, allocated budget, named buyer authority, tender or current supplier contract is established by this hypothesis. Missing information is not evidence of a problem.</p>"
     sections=[('01','Potential business problem / outcome',c['business_problem']+' Potential outcome: '+row.get('review',{}).get('measurable_outcome','Define a customer-owned measurable outcome before advancing.')),
@@ -94,11 +102,13 @@ def candidate_overview(data,row,projection,headers=None):
     body+="<details class='cv-investigation'><summary>Commercial gaps and separate assessments · dimensions 08–09</summary><section class='cv-card'><h2>08 / Missing commercial information</h2><p class='cv-unknown'>Deal value: Unknown · Customer budget: Unknown · Procurement date: Unknown · Confirmed decision-maker: Unknown</p><ul>"+''.join(f"<li><strong>{e(g['title'])}</strong>: {e(g['question'])}<br>Needed: {e(g['required_evidence'])}</li>" for g in row['gaps'])+'</ul></section>'
     body+=f"<section class='cv-card'><h2>09 / Attractiveness and actionability — separate assessments</h2><p>Authored assessment {e(row['assessment_date'])}. {e(row['assessment_limitation'])}</p><div class='cv-ratings'>"+''.join(f"<article class='cv-rating'><span>{e(d['label'])}</span><strong>{d['score']} / 3</strong><small>{e(d['anchor'])}</small><p>{e(d['reason'])}</p></article>" for d in row['dimensions'])+'</div><p>No combined score, win probability or automatic qualification. '+('Current source context supports investigation.' if row['context_supported'] else 'Current source support is missing; historic authored scores are not recalculated into commercial certainty.')+'</p></section>'
     body+='</details>'
+    if visual_first:
+        body+=legacy_dossier+snapshot+'</details>' # Retain the historical dossier within the primary research disclosure.
     capture=capture_controls(row['enterprise_slug'],row['id'],headers).replace('Add to pipeline & qualify →','Create or link record → qualification')
     body+=f"<section class='cv-card cv-capture' id='commercial-capture'><p class='cv-step'>Review → deliberate capture/link → private qualification</p><h2>Develop the hypothesis in your workspace</h2><p>By choosing Create or link, you request a private <strong>Discovered</strong> research-stage record. Duplicate capture returns the existing workspace record without rewriting its provenance. All ten qualification inputs, evidence review and explicit stage confirmation remain required to advance.</p>{capture}<p>The existing Pipeline remains demonstration-marked. Public research is never promoted to an established fact or qualified deal by this action.</p>{link('/flora/sales/pipeline','Open authorised Pipeline')}</section>"
     body+="<div class='cv-links'>"+''.join(link(a['url'],'Back to '+a['label']) for a in row['activities'])+'</div>'
-    body+=f"<details class='cv-snapshot'><summary>Inspection snapshot and authority boundary</summary><p>Review {row['review_digest']}; inspection {row['inspection_digest']}; authored assessment {row['assessment_date']}. Public candidate intelligence only; no automatic acceptance or qualification.</p></details><script>{SCRIPT}</script></section>"
-    return body
+    body+=(snapshot if not visual_first else '')+f"<script>{SCRIPT}</script></section>"
+    return body+(legacy_dossier if not visual_first else '')
 
 
 def pipeline_context(record):

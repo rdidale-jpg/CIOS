@@ -6680,6 +6680,135 @@
               "tests/test_flora_commercial_usability_v31.py"
             ]
           ]
+        },
+        "intelligence_depth": {
+          "cases": {
+            "tests/test_flora_intelligence_depth.py::test_current_candidate_review_is_reproducible_and_does_not_accept_or_mutate": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_primary_passages_retain_exact_scope_dates_locator_and_unaccepted_observation[AI]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_primary_passages_retain_exact_scope_dates_locator_and_unaccepted_observation[LEGACY]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_primary_passages_retain_exact_scope_dates_locator_and_unaccepted_observation[WALLET]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_primary_passages_retain_exact_scope_dates_locator_and_unaccepted_observation[CURVE]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_priority_hypotheses_show_specific_question_options_scope_and_unknown_money[RCO-LBG-002]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_priority_hypotheses_show_specific_question_options_scope_and_unknown_money[RCO-LBG-001]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_priority_hypotheses_show_specific_question_options_scope_and_unknown_money[RCO-LBG-009]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_old_coverage_and_historical_cloud_conflict_are_not_resolved_by_new_retrieval": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_frameworks_show_pressure_direction_and_questions_without_arbitrary_scores[pestle]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_frameworks_show_pressure_direction_and_questions_without_arbitrary_scores[porter]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_frameworks_show_pressure_direction_and_questions_without_arbitrary_scores[value-chain]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_single_source_projection_preserves_nine_and_six_candidates": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_historical_snapshot_does_not_receive_mismatched_current_depth_annotations": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_executive_print_is_separate_cited_and_restores_original_page": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_public_depth_inspection_never_creates_or_reads_private_pipeline": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_text_escapes_untrusted_display_values": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_support_is_source_owned_snapshot_bound_and_captured_immutably[RCO-LBG-002]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_support_is_source_owned_snapshot_bound_and_captured_immutably[RCO-LBG-001]": {
+              "status": "passed"
+            },
+            "tests/test_flora_intelligence_depth.py::test_new_support_is_source_owned_snapshot_bound_and_captured_immutably[RCO-LBG-009]": {
+              "status": "passed"
+            }
+          },
+          "selections": [
+            [
+              "tests/test_flora_intelligence_depth.py"
+            ]
+          ]
+        },
+        "enterprise_opportunity": {
+          "selections": [
+            [
+              "tests/test_flora_enterprise_opportunity_integration.py"
+            ]
+          ],
+          "cases": {
+            "tests/test_flora_enterprise_opportunity_integration.py::test_overlay_only_uses_canonical_capability_links_and_retains_unknown_business_owner": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_priority_cockpit_is_read_only_with_eight_modules_and_unknowns": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_public_rendering_does_not_modify_pipeline_or_canonical_record": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_aviation_route_remains_existing_visual_and_no_pursuit_overlay": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_html_escapes_untrusted_capability_labels": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_default_lloyds_operating_model_preserves_illustration_and_adds_context_overlay": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_priority_hypotheses_put_visual_story_and_cockpit_before_one_full_research_choice": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_unmapped_hypothesis_stays_discoverable_without_fake_capability": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_programme_only_association_is_visible_but_not_a_claim_of_ownership": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_priority_route_has_one_principal_dossier_and_visible_controlled_capture[RCO-LBG-002]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_priority_route_has_one_principal_dossier_and_visible_controlled_capture[RCO-LBG-001]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_priority_route_has_one_principal_dossier_and_visible_controlled_capture[RCO-LBG-009]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_overlay_candidate_inspectors_preserve_all_identities_and_separate_ratings": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_missing_context_does_not_gain_a_source_claim_or_qualification": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_inspection_preserves_existing_private_capture_and_immutable_provenance[RCO-LBG-002]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_inspection_preserves_existing_private_capture_and_immutable_provenance[RCO-LBG-001]": {
+              "status": "passed"
+            },
+            "tests/test_flora_enterprise_opportunity_integration.py::test_inspection_preserves_existing_private_capture_and_immutable_provenance[RCO-LBG-009]": {
+              "status": "passed"
+            }
+          }
         }
       }
     }

@@ -1,0 +1,223 @@
+{
+  "viewports": [
+    {
+      "stage": "before",
+      "viewport": "desktop",
+      "page": "overlay",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "before",
+      "viewport": "desktop",
+      "page": "ai",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "before",
+      "viewport": "desktop",
+      "page": "legacy",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "before",
+      "viewport": "desktop",
+      "page": "wallet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "before",
+      "viewport": "desktop",
+      "page": "enterprise",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "before",
+      "viewport": "tablet",
+      "page": "overlay",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "before",
+      "viewport": "tablet",
+      "page": "ai",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "before",
+      "viewport": "tablet",
+      "page": "legacy",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "before",
+      "viewport": "tablet",
+      "page": "wallet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "before",
+      "viewport": "tablet",
+      "page": "enterprise",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "before",
+      "viewport": "mobile",
+      "page": "overlay",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "before",
+      "viewport": "mobile",
+      "page": "ai",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "before",
+      "viewport": "mobile",
+      "page": "legacy",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "before",
+      "viewport": "mobile",
+      "page": "wallet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "before",
+      "viewport": "mobile",
+      "page": "enterprise",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "desktop",
+      "page": "overlay",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "desktop",
+      "page": "ai",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "desktop",
+      "page": "legacy",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "desktop",
+      "page": "wallet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "desktop",
+      "page": "enterprise",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "tablet",
+      "page": "overlay",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "tablet",
+      "page": "ai",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "tablet",
+      "page": "legacy",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "tablet",
+      "page": "wallet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "tablet",
+      "page": "enterprise",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "mobile",
+      "page": "overlay",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "mobile",
+      "page": "ai",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "mobile",
+      "page": "legacy",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "mobile",
+      "page": "wallet",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "stage": "after",
+      "viewport": "mobile",
+      "page": "enterprise",
+      "status": 200,
+      "overflow": false
+    }
+  ],
+  "pdfs": [
+    "ai-executive.pdf",
+    "ai-appendix.pdf",
+    "legacy-executive.pdf",
+    "legacy-appendix.pdf",
+    "wallet-executive.pdf",
+    "wallet-appendix.pdf"
+  ],
+  "errors": []
+}

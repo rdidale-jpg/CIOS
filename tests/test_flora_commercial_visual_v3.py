@@ -249,5 +249,16 @@ def test_projection_cannot_be_attached_to_another_industry_map():
 
 def test_no_existing_research_history_or_source_identity_is_changed():
     root=Path(__file__).resolve().parents[1]
-    result=subprocess.run(['git','diff','--quiet','e03b2ff','--','enterprise-knowledge'],cwd=root)
-    assert result.returncode==0
+    # Intelligence Depth may append new reviewed candidates; every historical
+    # record and original snapshot must remain byte/structure identical.
+    prefix='enterprise-knowledge/'
+    review='enterprise-knowledge/banking/research-model/Understanding-Review.json'
+    paths=subprocess.check_output(['git','ls-tree','-r','--name-only','adf205993cc0857183d77766ce4882bf48326fb4','--',prefix],cwd=root).decode().splitlines()
+    for path in paths:
+        old=subprocess.check_output(['git','show','adf205993cc0857183d77766ce4882bf48326fb4:'+path],cwd=root)
+        if path==review:
+            original=json.loads(old);current=json.loads((root/path).read_text())
+            assert set(current)==set(original)
+            for key,value in original.items():
+                assert (current[key][:len(value)]==value if isinstance(value,list) else current[key]==value),key
+        else:assert (root/path).read_bytes()==old,path

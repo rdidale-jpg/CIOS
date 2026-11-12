@@ -1,0 +1,38 @@
+[
+  {
+    "stage": "before",
+    "candidate": "RCO-LBG-002",
+    "default_height": 3315,
+    "visible_disclosures": 4
+  },
+  {
+    "stage": "before",
+    "candidate": "RCO-LBG-001",
+    "default_height": 3365,
+    "visible_disclosures": 4
+  },
+  {
+    "stage": "before",
+    "candidate": "RCO-LBG-009",
+    "default_height": 3345,
+    "visible_disclosures": 4
+  },
+  {
+    "stage": "after",
+    "candidate": "RCO-LBG-002",
+    "default_height": 3486,
+    "visible_disclosures": 2
+  },
+  {
+    "stage": "after",
+    "candidate": "RCO-LBG-001",
+    "default_height": 3537,
+    "visible_disclosures": 2
+  },
+  {
+    "stage": "after",
+    "candidate": "RCO-LBG-009",
+    "default_height": 3559,
+    "visible_disclosures": 2
+  }
+]

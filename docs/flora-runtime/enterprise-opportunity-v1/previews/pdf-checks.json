@@ -1,0 +1,44 @@
+[
+  {
+    "file": "ai-executive.pdf",
+    "pages": 1,
+    "sha256": "6c8a9f21889813f5f3a01a41935de435657ff0b6fef2f07f98d08b4096b8669b",
+    "characters": 1714,
+    "unknowns_and_source_urls_present": true
+  },
+  {
+    "file": "wallet-executive.pdf",
+    "pages": 1,
+    "sha256": "69c8f1ebcad2e8c40980ac598f967338c0de5adc54997f00433595b06f4e7a3a",
+    "characters": 2462,
+    "unknowns_and_source_urls_present": true
+  },
+  {
+    "file": "legacy-appendix.pdf",
+    "pages": 22,
+    "sha256": "bcc5551e11d9fa9d5c045daaf03e1531c7bde6887a525215ff90c3cef7139534",
+    "characters": 28490,
+    "unknowns_and_source_urls_present": true
+  },
+  {
+    "file": "wallet-appendix.pdf",
+    "pages": 20,
+    "sha256": "8239ddc627688139072e4538ca6d31b80c0cbe03c13c432fb2765149a97d4c7d",
+    "characters": 24864,
+    "unknowns_and_source_urls_present": true
+  },
+  {
+    "file": "ai-appendix.pdf",
+    "pages": 22,
+    "sha256": "a785816215a600a09a96696d3fce01429c0f8b173104af6c6d7be17d272615d0",
+    "characters": 27964,
+    "unknowns_and_source_urls_present": true
+  },
+  {
+    "file": "legacy-executive.pdf",
+    "pages": 1,
+    "sha256": "559ee7a61d887370101954e65a51d5ba185f6ff76831e0c6096dc1a492bc928f",
+    "characters": 1628,
+    "unknowns_and_source_urls_present": true
+  }
+]

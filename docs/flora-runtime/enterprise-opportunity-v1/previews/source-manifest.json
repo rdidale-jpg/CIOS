@@ -1,0 +1,10 @@
+{
+  "before_sha": "f281e554be72c1955b7813a3975db865159a1ad5",
+  "dependency_sha": "6988ba50d29c1f238293fc7fe110d6182f055e68",
+  "rendered_source_sha256": {
+    "cios/applications/flora/research_intelligence/enterprise_opportunity.py": "c262e7467387173391a15663d92bb7de237a136d38b92628ae3d85da7ed43028",
+    "cios/applications/flora/research_intelligence/commercial_views.py": "cbe588f582db70c34ccfe83bbe4d6dfc40b4be35b5ecacf39e377f95883f3586",
+    "cios/applications/flora/research_intelligence/unified_views.py": "56c07db32b4b8c76e46d5068f28c28603294c2eae614c442c477a841f77e5b83",
+    "cios/applications/flora/research_intelligence/views.py": "ab14dfcdd8a329d2953dee4fcbcfdd56f0a2fb0540f07bc1bb691d20e07ffc48"
+  }
+}
