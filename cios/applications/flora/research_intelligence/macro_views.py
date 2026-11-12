@@ -16,6 +16,17 @@ STYLE='''
 @media(prefers-reduced-motion:reduce){.mi *{scroll-behavior:auto!important;transition:none!important}}
 @media print{.shell{max-width:none!important;padding:0!important}.mi-intro>a,.mi-themes,.shell>footer{display:none!important}.mi-intro{margin-bottom:8px}.mi h1{font-size:26pt}.mi-context,.mi-steps,.mi-controls,.mi-next,.mi-mobile-nav,.topbar,.context-tools{display:none!important}.mi-grid{display:block}.mi-inspector{position:static}.mi-stage{box-shadow:none;break-inside:avoid}.mi-atlas,.mi-portable{display:block!important}.mi-report article{break-inside:avoid}.mi-print-only{display:block}html[data-macro-print=executive] .mi-report{display:none}html[data-macro-print=executive] .mi-stage svg{max-height:95mm}html[data-macro-print=executive] .mi-inspector{padding:10px;border:0}html[data-macro-print=executive] .mi-inspector h3{margin:9px 0 3px}html[data-macro-print=executive] .mi-inspector p{font-size:9pt}html[data-macro-print=executive] .mi-grid{display:grid;grid-template-columns:1.3fr 1fr}@page{size:A4;margin:12mm}}
 '''
+STYLE += """
+@media print{
+ html[data-macro-print=executive] .mi:has([data-entity-trace]) .mi-grid{display:block}
+ html[data-macro-print=executive] .mi:has([data-entity-trace]) .mi-stage>svg:not(.mi-portable){display:none!important}
+ html[data-macro-print=executive] .mi:has([data-entity-trace]) .mi-portable{max-height:55mm!important}
+ html[data-macro-print=executive] .mi:has([data-entity-trace]) .mi-stage-title{font-size:11pt;padding:3px 8px}
+ html[data-macro-print=executive] .mi:has([data-entity-trace]) .mi-inspector h2{margin:5px 0;font-size:15pt}
+ html[data-macro-print=executive] .mi:has([data-entity-trace]) .mi-inspector p{margin:4px 0}
+ html[data-macro-print=executive] .mi:has([data-entity-trace]) .mi-print-only{font-size:7pt;line-height:1.2;overflow-wrap:anywhere}
+}
+"""
 SCRIPT='''
 (function(){if(window.floraMacroReady)return;window.floraMacroReady=true;var generation=0;
  async function navigate(url,push){var ticket=++generation;var root=document.getElementById('macro-root');if(!root)return;root.setAttribute('aria-busy','true');try{var response=await fetch(url,{credentials:'same-origin'});if(!response.ok)throw Error('Unavailable');var doc=new DOMParser().parseFromString(await response.text(),'text/html'),next=doc.getElementById('macro-root');if(!next)throw Error('Unavailable');if(ticket!==generation)return;root.replaceWith(next);if(push)history.pushState({},'',url);document.title=doc.title;var heading=document.querySelector('#macro-inspector h2');if(heading){heading.focus({preventScroll:true});if(matchMedia('(max-width:1100px)').matches)heading.scrollIntoView({block:'start',behavior:'auto'});}}catch(error){if(ticket===generation)location.assign(url);}}
@@ -96,7 +107,7 @@ def trace_inspector(chosen, spec, trace):
     entity = trace['entity']
     identified = entity['status'] == 'verified'
     title = 'Lloyds Bank plc · resilience assurance' if identified else 'France · reporting perimeter'
-    body = "<aside class='mi-inspector' id='macro-inspector' aria-label='Contextual intelligence panel'>"
+    body = "<aside data-entity-trace='true' class='mi-inspector' id='macro-inspector' aria-label='Contextual intelligence panel'>"
     body += "<span class='mi-kind'>Entity trace · candidate research</span><h2 tabindex='-1'>"+e(title)+"</h2>"
     body += "<p class='mi-compact'>"+e(trace['instrument_id'])+" · reviewed "+e(trace['as_of'])+"</p>"
     body += "<h3>What matters</h3><p>"+e(trace['consequence'])+"</p>"
@@ -211,5 +222,6 @@ def render(query='',headers=None,evidence=False):
     intro=intro.replace('</header>',quick+'</header>')
     body="<style>"+STYLE+"</style><div class='mi' id='macro-root'>"+intro+controls(chosen)+stepnav+"<div class='mi-grid'><section class='mi-stage' id='macro-visual' aria-label='Interactive intelligence visual'>"+stage+"<div class='mi-legend'>Green / selected context · gold / interpreted pressure · dotted / unresolved. Schematic layout, not impact severity or verified enterprise dependency.</div></section>"+inspector(chosen,spec,data)+"</div><p class='mi-footer'>"+('France reuses the same industry structure; French market facts and enterprise footprint remain incomplete. ' if chosen.market=='FR' else '')+"Seller match is not demand. Location is not legal applicability. No Pipeline record is created.</p><div class='mi-controls'><button type='button' data-macro-print='executive'>Print executive view</button><a class='mi-pill' href='"+e(url(chosen,'/macro/evidence')+'#macro-evidence',quote=True)+"'>Open full evidence / print appendix →</a></div>"
     if evidence:body+=evidence_report(chosen,spec,data)+"<p>"+nav(chosen,'← Return to selected visual context')+"</p><div class='mi-controls'><button type='button' data-macro-print='appendix'>Print full evidence</button></div>"
-    body+="<p class='mi-print-only'>Primary sources and exact passages: "+''.join("<br>"+e(s['url']) for s in data['sources'] if not spec['force'] or s['id'] in spec['force']['source_ids'])+"</p></div><script>"+SCRIPT+'</script>'
+    print_sources=spec['enterprise_trace']['sources'] if spec.get('enterprise_trace') else [s for s in data['sources'] if not spec['force'] or s['id'] in spec['force']['source_ids']]
+    body+="<p class='mi-print-only'>Primary sources and exact passages: "+''.join("<br>"+e(s['url']) for s in print_sources)+"</p></div><script>"+SCRIPT+'</script>'
     return page('FLORA Global & Macro Intelligence',body,headers,'industries','/macro')

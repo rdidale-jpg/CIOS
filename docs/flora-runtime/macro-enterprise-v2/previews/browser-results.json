@@ -121,25 +121,25 @@
     {
       "file": "uk-executive.pdf",
       "pages": 2,
-      "sha256": "30719f961a06cecacd0b011536a36fe91499d4d0b53b3d4e05e29992f06267e6",
+      "sha256": "12347c67722586d860dcb6d01b7fc7bdc37bad021312d49ce68aef2240e4d250",
       "located_text_verified": true
     },
     {
       "file": "uk-appendix.pdf",
       "pages": 15,
-      "sha256": "d26790d6d68c0dc99091952d9133bf742ee184fe88628ea2998ebf3761182f54",
+      "sha256": "54494b746314f23c629c7b4e27b742a875a0585b70440ee5e1954919bd5c3e9f",
       "located_text_verified": true
     },
     {
       "file": "france-executive.pdf",
       "pages": 2,
-      "sha256": "f1c9e6613e915534b32af9748d097cea586397ee3fe8105bd1571cd6f4c800e8",
+      "sha256": "9d8daa9153c3cc3346eedb610bb8c8124b5f77fdfdcc0acb58a7714645004992",
       "located_text_verified": true
     },
     {
       "file": "france-appendix.pdf",
       "pages": 11,
-      "sha256": "c322a07e9a0bcac68b807e289b4cf0ad226cf7cfbf96a9763223d0559f0930e2",
+      "sha256": "49b01a726f60b95b989a027f127a938273719fb54e5ca454c8402a00f0cb92a3",
       "located_text_verified": true
     }
   ],

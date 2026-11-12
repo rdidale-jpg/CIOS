@@ -122,6 +122,8 @@ def test_one_concise_panel_and_deliberate_full_dossier(market,force,category):
     html=unescape(v.render(q));full=unescape(v.render(q,evidence=True))
     assert html.count("class='mi-inspector'")==1
     assert 'What next' in html
+    footer=html.split("class='mi-print-only'")[1]
+    assert ('company/00002065' in footer and 'ss121-march-22.pdf' in footer) if market=='GB' else 'legifrance.gouv.fr' in footer
     assert ('Formal applicability: Unknown' if market=='GB' else 'formal applicability: Unknown') in html
     assert 'Decision & evidence dossier' in html and "id='entity-trace'" not in html
     assert "id='entity-trace'" in full and 'Counter-tests' in full and 'Versioned edge manifest' in full
