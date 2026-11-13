@@ -28,7 +28,7 @@ def public_route_catalog():
             routes[path] = PublicRoute(handler, source, frozenset(keys))
     add(('/health',), 'health_response', 'Fixed service availability; no owner records')
     add(('/deployment',), 'deployment_payload', 'Allowlisted public code fingerprint only')
-    add(('/', '/flora', '/flora/'), '_flora_home_page', 'Repository Banking pipeline; private discovery short-circuits without authority')
+    add(('/', '/flora', '/flora/'), '_flora_visual_home_page', 'Finite UK public statistical presentation; authenticated account controls retain existing authority')
     add(('/design-system/assets/styles','/design-system/assets/interactions'), 'design_system_asset', 'Exact local presentation assets only; no data or authority')
     add(('/visual-v2',), 'visual_v2_economy', 'Finite UK public statistical presentation only; no private owners or canonical promotion', ('market',))
     add(('/pestle','/visual-v2/pestle'), 'visual_v2_pestle', 'UK-only existing macro source adapter; no enterprise applicability or mutation', ('market','factor'))

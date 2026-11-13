@@ -22,6 +22,8 @@ The unchanged 01b gate enforces **1,432 identities**: normally 1,365 pass, **57 
 
 The first frozen candidate exposed a real specialist route regression: the flagship-only enterprise registry did not include every legacy bank. The presentation parent now uses the explorer’s existing Banking/Aviation scope, preserving Barclays and other bank discovery without broadening access. Targeted specialist tests pass. Canonical Home assertions are adapted to the approved industry destinations.
 
+Two strict security checks additionally caught missing established owner Controls/sign-out presentation and an obsolete declared Home handler. The shared header now uses the existing authorised account presenter; the finite public catalogue declares the actual read-only canonical Home handler. Both original, unchanged security tests pass. Responsive screenshots and all **687 browser checks** were regenerated after these corrections. The living-map assertion now checks its retained accessible contextual-inspection label instead of the removed decorative numbered heading; node IDs, protected-route denials and every layer assertion remain.
+
 The full comparator also detects changed signatures for inherited failures whose rendered-HTML exception text changed with the shared shell. The original failing assertions remain; these are not automatically accepted as equivalent failures. The comparator, baseline and exception records remain unchanged. This is a **NO-GO for integration** until the exact-head gate passes or a separately reviewed baseline reconciliation establishes equivalence. Do not merge or deploy this draft. Final local and hosted outcomes are reported in the PR and handoff.
 
 ## Presentation-test adaptations

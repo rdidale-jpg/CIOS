@@ -86,10 +86,9 @@ def section_scale(sic):
 
 def header(active='home', account_html='', headers=None):
     if not account_html:
-        from .security import verified_context
-        actor = verified_context(headers)
-        account_html = ('<p class="workspace-name">' + e(actor.workspace) + '</p><a href="/auth/workspace">Switch workspace</a><form method="post" action="/auth/sign-out"><button type="submit">Sign out</button></form>'
-                        if actor else '<a href="/auth/sign-in">Sign in</a>')
+        from .access import blueprint_upload_authorisation
+        from .web.app import _account_context_html
+        account_html = _account_context_html(blueprint_upload_authorisation(headers or {}))
     state = _view.get() or {'sources': [], 'context': []}
     label = 'Explore'
     menu = ''; seen = {'/', '/pestle?market=GB'}

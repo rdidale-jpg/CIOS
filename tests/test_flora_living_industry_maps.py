@@ -36,7 +36,7 @@ def test_map_is_pinned_repeatable_read_only_and_canonical_ids_retained(domain):
 def test_each_layer_uses_one_map_and_contextual_inspection_with_original_routes(web,domain,lens):
     status,h=web(f'/industries/{domain}?lens={lens}');assert status==200
     assert h.count("data-living-map='2'")==1
-    assert "class='lm-inspector'" in h and '03 / Investigate' in h
+    assert "class='lm-inspector'" in h and "aria-label='Contextual intelligence inspection'" in h
     ids=Links(h).ids
     assert all('lm-'+domain+'-'+n['id'] in ids for n in spec(domain)['map_nodes'])
     assert public_request_target(f'/industries/{domain}?lens={lens}')

@@ -200,7 +200,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                     self._html(visual_v2.render(parsed.path, parse_qs(parsed.query, keep_blank_values=True), self.headers))
             elif parsed.path in {"/", "/flora", "/flora/"}:
                 from cios.applications.flora import visual_v2
-                self._html(visual_v2.render(visual_v2.BASE, {}, self.headers))
+                self._html(_flora_visual_home_page(self.headers))
             elif parsed.path in ("/enterprises/lloyds/understanding", "/enterprises/easyjet/understanding"):
                 from cios.applications.flora.research_intelligence.understanding_views import understanding_page
                 self._html(understanding_page(parsed.path.split("/")[2], self.headers))
@@ -1138,6 +1138,12 @@ def _industry_import_counts(headers, discovery=None):
     candidates = sum(i.population == 'industry_import' and i.owner_state == 'received' for i in snapshot.items)
     partial = sum(i.population == 'industry_import' and i.owner_state == 'promoted' and i.current for i in snapshot.items)
     return candidates, partial
+
+
+def _flora_visual_home_page(headers=None) -> str:
+    """Declared canonical read-only UK landscape handler."""
+    from cios.applications.flora import visual_v2
+    return visual_v2.render(visual_v2.BASE, {}, headers)
 
 
 def _flora_home_page(headers=None, question_error: str = "") -> str:

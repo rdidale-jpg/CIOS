@@ -8,10 +8,10 @@
     "cios/applications/flora/banking_explorer.py": "f531a516f1bb5e7c52f7ba337017ac2b726349aa515858ae948d6fdaddf7ab7f",
     "cios/applications/flora/design_assets/design.css": "0762392b48596b6108a3e7671d0d5bebb73ded8fb5bbbb59c143114afb9d28eb",
     "cios/applications/flora/design_assets/design.js": "7f268e68681619ada7a1443b8624b602dd2e71eece6bb550f660eaaa343357f8",
-    "cios/applications/flora/design_system.py": "d1321c6cb4090884c77ced6ddf26ef8b06dba9b6bd319fa029db6c2bbe6f25a8",
+    "cios/applications/flora/design_system.py": "cc2f9d8aa743ac3b8bcbf445717fef16acfc76388c9134a434e035e7df38fd44",
     "cios/applications/flora/navigation.py": "ec27c3f6e3a431e459bd602821fe5939cca29466d7eb78e7de7dc91033f2b62e",
     "cios/applications/flora/offers_views.py": "e018a8d95a9bd00f318bba3b4312c9dd68962badd570e9d6dd2623cf862e7825",
-    "cios/applications/flora/public_routes.py": "3d01022f4af6fb632fd63b773734b35ef4ba0d64fc1a5a6d6fac1f234bb5a239",
+    "cios/applications/flora/public_routes.py": "78969f60f5b7d7ce70d8dc2e3a9a07b6017ae185e1ebbaea6cfbdf9b34c0fe0a",
     "cios/applications/flora/research_intelligence/living_map.py": "db0366bc1c8ca44ca95a3c16414d0f1325d9c0045e547412deb0d8d698f2d1b4",
     "cios/applications/flora/research_intelligence/technology_commercial_views.py": "58137fb4fbe89d4cbb2601ae7957caf56f0cdc3a47d04fa3b014e2508e4a961f",
     "cios/applications/flora/research_intelligence/technology_experience.py": "55acef0a9c7e5c997944a5419651648a27be3407242de3ff5562e0d3d3653d0b",
@@ -19,7 +19,7 @@
     "cios/applications/flora/research_intelligence/visual_intelligence.py": "9af32be4dac8d57933ec018795c901cb36682a72f2e112e501dacb72cdf7e519",
     "cios/applications/flora/sales_views.py": "9cf502bc06fecf62bf97a20015f2ac9b61ab779e01ffb7cde349fedc1ce77f9c",
     "cios/applications/flora/visual_v2.py": "f956707e6a36243ea10740793f10a7e0702a81ce14946ac611d04a0bce956ec1",
-    "cios/applications/flora/web/app.py": "ed76f350cc002e4be8a577f55b36faf82bd835f61d32a206f0237eab064b42f8",
+    "cios/applications/flora/web/app.py": "f9536173938fb0031e7b66fbeac7b3ac95c7031c5cc97285c74d620abd9a7d6a",
     "cios/applications/flora/workspace/views.py": "9b3b15719948b7a8c80af60c8fb031ee9d5e3d2babba42ef55a285f7333cb67c",
     "tests/test_flora_design_system_585.py": "bab8afb6f8e31787306e7972be4e3ad8ae2c28a8c54cd72c04b5109410295a96",
     "tests/test_flora_technology_owner_journey.py": "afa54eed102e69dd7986335d07723a27e71af53400867577f632c8e647d677ce",
@@ -31,6 +31,7 @@
     "tools/ci/flora_design_system_preview.cjs": "6e53f32f54e96df89244af0067643ba9249dede2770d67eccf15d02e0f0ef12e",
     "tools/ci/flora_design_system_preview.py": "bbf30cf6d7b689a7db7cfed35aa0a4c5bb20a3622fc64b3dec0c5221000286fe",
     "tests/test_flora_aviation_twin.py": "07bc3444b9a7864416dfc74c16780f0909d67353f32ee31282056a4612b9d328",
-    "tests/test_flora_banking_explorer.py": "6b1f895bb6105e1c16ddcfa0edb096f4878b5c80207d2b598efcaba545a3c1a6"
+    "tests/test_flora_banking_explorer.py": "6b1f895bb6105e1c16ddcfa0edb096f4878b5c80207d2b598efcaba545a3c1a6",
+    "tests/test_flora_living_industry_maps.py": "2d4b71a3befd1abd280adff8136eb7ad2d69cbdd568735c23a649b29e6d2a7a8"
   }
 }
