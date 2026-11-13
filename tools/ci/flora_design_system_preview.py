@@ -47,15 +47,15 @@ def worker(config_file):
             pre,csrf=store.preauth();token,csrf=store.login(user,config['password'],pre,csrf);token,csrf=store.select(token,csrf,'preview-workspace')
             headers[user]={'Cookie':f'{COOKIE}={token}; {CSRF_COOKIE}={csrf}'}
         owner,seller,reviewer=(headers[u] for u in users)
-        save_employer_context(owner,{'organisation':'Synthetic UK services company','capabilities':['SYNTHETIC diagnostics only']})
-        binding=offers.bind_employer(list(users),['preview-reviewer'],'SYNTHETIC fixture approval',headers=owner)
+        save_employer_context(owner,{'organisation':'Example UK services company','capabilities':['Example diagnostics — illustration only']})
+        binding=offers.bind_employer(list(users),['preview-reviewer'],'Example employer setup — preview only',headers=owner)
         for h in headers.values():offers.select_employer(binding['id'],headers=h)
-        record=offers.save_offer(offers.TEMPLATES['service']|{'name':'Synthetic service diagnostic','evidence':'SYNTHETIC proof reference; not actual corporate capability'},headers=seller)
+        record=offers.save_offer(offers.TEMPLATES['service']|{'name':'Example offer — service diagnostic','evidence':'Example proof reference — illustration only; no actual corporate capability established'},headers=seller)
         record=offers.transition(record['id'],record['version'],'submit',headers=seller)
-        record=offers.transition(record['id'],record['version'],'approve','SYNTHETIC independent fixture review',headers=reviewer)
-        private=offers.save_offer({'name':'PRIVATE fixture variation','entry_play':'SYNTHETIC private context'},parent_id=record['id'],parent_version=record['version'],headers=seller)
-        save_commercial_mission(seller,{'executive_role':'Synthetic client partner','commercial_objective':'Synthetic service discovery only','priority_accounts':['Lloyds Banking Group'],'geography':['United Kingdom','France']})
-        pipeline=sales_pipeline.create_opportunity('lloyds',values={'title':'Synthetic service discovery','problem':'SYNTHETIC unvalidated service scenario','next_action':'Ask a test-only qualification question'},headers=seller)
+        record=offers.transition(record['id'],record['version'],'approve','Example independent review — preview only',headers=reviewer)
+        private=offers.save_offer({'name':'Example private offer variation','entry_play':'Example private context — illustration only'},parent_id=record['id'],parent_version=record['version'],headers=seller)
+        save_commercial_mission(seller,{'executive_role':'Client partner','commercial_objective':'Example service discovery — illustration only','priority_accounts':['Lloyds Banking Group'],'geography':['United Kingdom','France']})
+        pipeline=sales_pipeline.create_opportunity('lloyds',values={'title':'Example opportunity — service discovery','problem':'Example unvalidated service scenario','next_action':'Validate the opportunity with the customer'},headers=seller)
         tracked=[offers._path(), Path(os.environ['FLORA_DATA_DIR'])/'sales_pipeline'/'opportunities.json']
         hashes={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in tracked}
         from cios.applications.flora.web.app import FloraWebHandler

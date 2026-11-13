@@ -90,7 +90,7 @@ jobs:
       - name: Test separate two-screen Visual Experience v2
         run: python -m pytest tests/test_flora_visual_v2_583.py -q
       - name: Test unified visual system and protected source ownership
-        run: python -m pytest tests/test_flora_design_system_585.py tests/test_flora_v2_information_architecture.py::test_primary_navigation_uses_five_executive_destinations tests/test_flora_web.py::test_home_accessibility_basics -q
+        run: python -m pytest tests/test_flora_design_system_585.py tests/test_flora_release_candidate_586.py tests/test_flora_v2_information_architecture.py::test_primary_navigation_uses_five_executive_destinations tests/test_flora_web.py::test_home_accessibility_basics -q
       - name: Publish sanitized job summary
         if: always()
         run: |

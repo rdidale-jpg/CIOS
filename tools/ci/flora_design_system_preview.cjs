@@ -47,7 +47,7 @@ function check(v,label){assert(v,label);checks.push(label);}
        const s=getComputedStyle(e),lum=c=>{const a=c.match(/[\d.]+/g).slice(0,3).map(x=>{const v=+x/255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4});return .2126*a[0]+.7152*a[1]+.0722*a[2]};
        const a=lum(s.color),b=lum(s.backgroundColor);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5;
       })),device+': researched Home labels retain readable contrast');
-      check(!(await p.content()).includes('Synthetic UK services company'),device+': public Home has no employer data');
+      check(!(await p.content()).includes('Example UK services company'),device+': public Home has no employer data');
      }
      if(after&&name==='technology'){
       check(await p.locator('[data-district]').count()===8,device+': eight industry anchors');
@@ -96,11 +96,20 @@ function check(v,label){assert(v,label);checks.push(label);}
     for(const [name,route] of Object.entries(privateRoutes)){
      const r=await seller.goto(server.base+route);check(r.status()===200,phase+' '+device+' '+name+': authorised workspace');await layout(seller,phase+' '+device+' '+name,after);await screenshot(seller,device+'-'+name+'-'+phase);
      if(device==='desktop')metrics[phase][name]=await measure(seller);
+     if(after){
+      check(!/synthetic/i.test(await seller.locator('body').innerText()),device+': '+name+' uses business example wording');
+      if(name==='offers')check((await seller.locator('main').innerText()).includes('Example offer'),device+': clearly labelled example offer');
+      if(name==='pipeline'||name==='qualification')check((await seller.locator('main').innerText()).includes('Example opportunity'),device+': clearly labelled example opportunity');
+      if(name==='pipeline')check(await seller.locator('a.ex-button[href="/flora/sales/new"]').evaluate(e=>{
+       const s=getComputedStyle(e),lum=c=>{const a=c.match(/[\d.]+/g).slice(0,3).map(x=>{const v=+x/255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4});return .2126*a[0]+.7152*a[1]+.0722*a[2]};
+       const a=lum(s.color),b=lum(s.backgroundColor);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5;
+      }),device+': Pipeline create action has readable contrast');
+     }
      if(after&&name==='discovery'){
       check(await seller.locator('[data-assessment-id]').count()>0,device+': existing matcher result');check(await seller.locator('main a[href="/flora/sales/new?enterprise=lloyds"]').count()>0,device+': explicit manual qualification route');
       check(await seller.locator('main a[href="/flora/sales/pipeline"]').count()===0,device+': repeated Pipeline shortcut removed');
       check(await seller.locator('main .source-list').count()===0,device+': private lineage in one source disclosure');
-      await seller.locator('.sources-menu>summary').click();check((await seller.locator('.source-sheet').innerText()).includes('SYNTHETIC proof'),device+': authorised offer proof still accessible');await seller.locator('.sources-menu>summary').click();
+      await seller.locator('.sources-menu>summary').click();check((await seller.locator('.source-sheet').innerText()).includes('Example proof reference'),device+': authorised offer proof still accessible');await seller.locator('.sources-menu>summary').click();
      }
      if(after&&name==='qualification'){
       check(await seller.locator('form[action="/flora/sales/'+server.pipeline_id+'/save"]').count()===1,device+': original edit form retained');

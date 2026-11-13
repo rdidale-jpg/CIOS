@@ -1,0 +1,46 @@
+{
+  "pr": 586,
+  "production_decision": "NO-GO",
+  "reason": "Required authenticated Render production prerequisites are unverified",
+  "owner_confirmed_origin": "https://flora-current.onrender.com",
+  "render_authenticated_connection": false,
+  "observed_service_id": null,
+  "actual_configured_branch": null,
+  "actual_auto_deploy_policy": null,
+  "deployed_sha": null,
+  "rollback_sha": null,
+  "backup_and_restore_verified": false,
+  "persistent_disk_observed": false,
+  "production_authentication_verified": false,
+  "public_probes": {
+    "/health": "unavailable (URLError); no readiness inference",
+    "/deployment": "unavailable (URLError); no release identity inferred"
+  },
+  "integration_refs": {
+    "main": "854a783b3c5f83d6ee3604f49a76772529b7339a",
+    "574": "867e11809dd13058648b891387038948ccd978a1",
+    "575": "667ce1b3d1f77d4c7d66b20e21c595e7b4882cbb",
+    "577": "ad0b3d4c781178e6fb02271f3f8373fd3b23c339",
+    "580": "34e34570c52847e16eb5f0d00579ca923983af7c",
+    "584": "19ab36d241dbca2099ffb9b5d519c68c493a914a",
+    "582": "9aaaa692e5200681bfa69d55a6d13aa483cc1837"
+  },
+  "included_refs": [
+    "main",
+    "574",
+    "575",
+    "577",
+    "580",
+    "584"
+  ],
+  "excluded_refs": [
+    "582"
+  ],
+  "terminology_scope": "Example fixture display names and escaped presentation of exact internal seeded marker; original research/permission/Pipeline records unchanged",
+  "final_sha_evidence": "PR #586 pinned handoff / exact-head hosted Actions; merge-generated SHA requires full revalidation",
+  "production_mutations_performed": [],
+  "unchanged_observatory_engine_sha256": "f0afd8140dbdab3c7e2965ffe373c638d8d639e733d24aa245d12677181e2b11",
+  "existing_protected_owner_count": 198,
+  "approved_artwork_and_statistical_asset_count": 5,
+  "responsive_browser_checks_passed": 732
+}

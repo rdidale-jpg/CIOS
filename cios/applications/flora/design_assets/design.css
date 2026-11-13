@@ -12,3 +12,6 @@
 /* Preserve approved dark research pills against the shared anchor reset. */
 .ds-page.visual-world .researched{color:var(--paper)}
 @media(forced-colors:active){.ds-page.visual-world .researched{color:CanvasText}}
+/* Keep the existing Pipeline action readable under the shared anchor reset. */
+.ds-page .sales-compact a.ex-button{color:#fff}
+@media(forced-colors:active){.ds-page .sales-compact a.ex-button{color:LinkText}}

@@ -61,28 +61,28 @@
       "bodyNavigation": 1,
       "bodyGlobalLinks": 1,
       "sourcePrompts": 0,
-      "visibleWords": 97
+      "visibleWords": 100
     },
     "discovery": {
       "primaryNavigations": 1,
       "bodyNavigation": 1,
       "bodyGlobalLinks": 3,
       "sourcePrompts": 0,
-      "visibleWords": 281
+      "visibleWords": 287
     },
     "pipeline": {
       "primaryNavigations": 1,
       "bodyNavigation": 2,
       "bodyGlobalLinks": 1,
       "sourcePrompts": 0,
-      "visibleWords": 155
+      "visibleWords": 158
     },
     "qualification": {
       "primaryNavigations": 1,
       "bodyNavigation": 1,
       "bodyGlobalLinks": 3,
       "sourcePrompts": 0,
-      "visibleWords": 552
+      "visibleWords": 554
     }
   },
   "after": {
@@ -147,28 +147,28 @@
       "bodyNavigation": 0,
       "bodyGlobalLinks": 0,
       "sourcePrompts": 0,
-      "visibleWords": 81
+      "visibleWords": 84
     },
     "discovery": {
       "primaryNavigations": 1,
       "bodyNavigation": 0,
       "bodyGlobalLinks": 0,
       "sourcePrompts": 0,
-      "visibleWords": 244
+      "visibleWords": 250
     },
     "pipeline": {
       "primaryNavigations": 1,
       "bodyNavigation": 0,
       "bodyGlobalLinks": 1,
       "sourcePrompts": 0,
-      "visibleWords": 119
+      "visibleWords": 122
     },
     "qualification": {
       "primaryNavigations": 1,
       "bodyNavigation": 0,
       "bodyGlobalLinks": 1,
       "sourcePrompts": 0,
-      "visibleWords": 515
+      "visibleWords": 517
     }
   }
 }

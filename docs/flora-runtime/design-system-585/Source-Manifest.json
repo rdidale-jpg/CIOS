@@ -4,9 +4,9 @@
   "integration_ancestor": "34e34570c52847e16eb5f0d00579ca923983af7c",
   "rejected_home_v1_not_in_ancestry": true,
   "source_files_sha256": {
-    ".github/workflows/flora-validation.yml": "5ec22e57b840b77cd7ad2d96ebb1130a74de09af733961185a3e53573cd680e8",
+    ".github/workflows/flora-validation.yml": "abdcf6d1ecf8061d92c1df924621b382fc74ea0efbdca7c2aed97401e44da243",
     "cios/applications/flora/banking_explorer.py": "f531a516f1bb5e7c52f7ba337017ac2b726349aa515858ae948d6fdaddf7ab7f",
-    "cios/applications/flora/design_assets/design.css": "6c6f5db8126553d8aee3fc0315ac11ef9338bbeb7d20f0deffb5b15e8e33d781",
+    "cios/applications/flora/design_assets/design.css": "6f92d2127ca5cd06becf916f2578858f15b0e2db54ad4661527bebeacd9e1f61",
     "cios/applications/flora/design_assets/design.js": "7f268e68681619ada7a1443b8624b602dd2e71eece6bb550f660eaaa343357f8",
     "cios/applications/flora/design_system.py": "cc2f9d8aa743ac3b8bcbf445717fef16acfc76388c9134a434e035e7df38fd44",
     "cios/applications/flora/navigation.py": "ec27c3f6e3a431e459bd602821fe5939cca29466d7eb78e7de7dc91033f2b62e",
@@ -28,8 +28,8 @@
     "tests/test_flora_v2_information_architecture.py": "c2b5c839edbd5d39d7c73b8abdc884c4ef7e5c3f77ed9fe3f557fbc68c1553fa",
     "tests/test_flora_visual_v2_583.py": "67280721a10b3f436c5c2e0414eb8eb1a59c7dc1ae032451d09f8b508e91d233",
     "tests/test_flora_web.py": "c7d59b5729295bda90f227d8dcf16e98cb56855cd74b49a83b2fe6967c436cf8",
-    "tools/ci/flora_design_system_preview.cjs": "942fd2f0f525e13c3e0f154fdfe6673c45476c53117224c4770545f92de55132",
-    "tools/ci/flora_design_system_preview.py": "bbf30cf6d7b689a7db7cfed35aa0a4c5bb20a3622fc64b3dec0c5221000286fe",
+    "tools/ci/flora_design_system_preview.cjs": "d2290182065f4923c45be7b3ae57ac7eaa7a4f6bf19696775da57239bc082a61",
+    "tools/ci/flora_design_system_preview.py": "c71eeed71b1ddd849a8ee03f08c6f6db9f84b587de8b660148699ab0a1f86568",
     "tests/test_flora_aviation_twin.py": "07bc3444b9a7864416dfc74c16780f0909d67353f32ee31282056a4612b9d328",
     "tests/test_flora_banking_explorer.py": "6b1f895bb6105e1c16ddcfa0edb096f4878b5c80207d2b598efcaba545a3c1a6",
     "tests/test_flora_living_industry_maps.py": "2d4b71a3befd1abd280adff8136eb7ad2d69cbdd568735c23a649b29e6d2a7a8",
@@ -40,6 +40,8 @@
     "tests/test_flora_banking_industry_reinvention_increment42.py": "5af10c80311071c22a936ffa38d45a3da15cb6f645d2b9a5aa1dd73e28740f09",
     "tests/test_flora_banking_portfolio_increment3.py": "97441d4e5737e27ac9482b054387442f675960bfb8725144a0943bf52574143e",
     "tests/test_flora_enterprise_canvas.py": "730ca00728a84b80f49439ef9901be29438ace062116bf82931c224863a1f62f",
-    "tests/test_flora_pilot_import_bypass.py": "1a5129264a3c30b999fcde153be1ddfd3cfcbce5bd01124312383cd260469f7d"
+    "tests/test_flora_pilot_import_bypass.py": "1a5129264a3c30b999fcde153be1ddfd3cfcbce5bd01124312383cd260469f7d",
+    "cios/applications/flora/observatory/views.py": "11e1b0b6f51ab64179d86168003e28f86f6b2ba3f0f757975189d92120313568",
+    "tests/test_flora_release_candidate_586.py": "6984425eb1f787e24c23a475fb5c9ec8d3123df69f736b50748806d2dd35f727"
   }
 }
