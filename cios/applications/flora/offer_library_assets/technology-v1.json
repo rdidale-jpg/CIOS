@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "flora-technology-commercial-library",
-  "version": 1,
+  "version": 2,
   "reviewed_on": "2026-11-13",
   "boundary": "Authored illustrative methods informed by public product and service categories; no participant capability, account need, buying event, seller accreditation or commercial result is established. No runtime research or model calls.",
   "classification_crosswalk": {
@@ -11,7 +11,7 @@
   "subindustries": [
     {
       "id": "consulting",
-      "label": "IT consulting & systems integration",
+      "label": "Digital Transformation & Consulting",
       "districts": [
         "services"
       ],
@@ -260,6 +260,61 @@
       "rights": "Public link and original paraphrase only; no vendor text, logo or delivery rights transferred",
       "content_hash": null,
       "boundary": "Taxonomy vocabulary only; playbooks are FLORA-authored hypotheses, not vendor recommendations or seller proof"
+    },
+    {
+      "id": "gds-standard",
+      "title": "GOV.UK Service Standard",
+      "url": "https://www.gov.uk/service-manual/service-standard",
+      "supports": "Customer needs, joined-up services, multidisciplinary delivery and measuring success; UK government service guidance, not a universal private-sector obligation",
+      "reviewed_on": "2026-11-13",
+      "published_on": null,
+      "rights": "Public link and original paraphrase only; no standard text copied or professional certification rights implied",
+      "content_hash": null,
+      "boundary": "Taxonomy and method reference only; authored playbooks are hypotheses, not seller proof, customer demand or legal advice"
+    },
+    {
+      "id": "nist-ai-rmf",
+      "title": "NIST AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "supports": "AI risk-management vocabulary and accountable evaluation; voluntary framework, not UK legal certification",
+      "reviewed_on": "2026-11-13",
+      "published_on": null,
+      "rights": "Public link and original paraphrase only; no standard text copied or professional certification rights implied",
+      "content_hash": null,
+      "boundary": "Taxonomy and method reference only; authored playbooks are hypotheses, not seller proof, customer demand or legal advice"
+    },
+    {
+      "id": "ncsc-caf",
+      "title": "NCSC Cyber Assessment Framework",
+      "url": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework",
+      "supports": "Outcome-oriented cyber resilience and assurance vocabulary; applicability and regulatory obligations require organisation-specific review",
+      "reviewed_on": "2026-11-13",
+      "published_on": null,
+      "rights": "Public link and original paraphrase only; no standard text copied or professional certification rights implied",
+      "content_hash": null,
+      "boundary": "Taxonomy and method reference only; authored playbooks are hypotheses, not seller proof, customer demand or legal advice"
+    },
+    {
+      "id": "ppn002",
+      "title": "Cabinet Office PPN 002 social value",
+      "url": "https://www.gov.uk/government/publications/ppn-002-taking-account-of-social-value-in-the-award-of-contracts",
+      "supports": "Social value in in-scope central government contract awards; not all UK procurement, private contracts or devolved jurisdictions",
+      "reviewed_on": "2026-11-13",
+      "published_on": null,
+      "rights": "Public link and original paraphrase only; no standard text copied or professional certification rights implied",
+      "content_hash": null,
+      "boundary": "Taxonomy and method reference only; authored playbooks are hypotheses, not seller proof, customer demand or legal advice"
+    },
+    {
+      "id": "ghg-corporate",
+      "title": "GHG Protocol Corporate Standard",
+      "url": "https://ghgprotocol.org/corporate-standard",
+      "supports": "Organisational greenhouse-gas inventory boundaries and accounting vocabulary; inventory is not proof of emissions reduction, legal compliance or assurance",
+      "reviewed_on": "2026-11-13",
+      "published_on": null,
+      "rights": "Public link and original paraphrase only; no standard text copied or professional certification rights implied",
+      "content_hash": null,
+      "boundary": "Taxonomy and method reference only; authored playbooks are hypotheses, not seller proof, customer demand or legal advice"
     }
   ],
   "offers": [
@@ -10208,12 +10263,1700 @@
         "No seller delivery rights, customer request or budget established"
       ],
       "taxonomy_version": 1
+    },
+    {
+      "id": "tech-strategic-digital-transformation",
+      "version": 1,
+      "taxonomy_version": 2,
+      "name": "Enterprise Digital Transformation",
+      "parent_id": "tech-family-consulting",
+      "family": "consulting",
+      "subindustries": [
+        "consulting",
+        "engineering",
+        "software",
+        "data",
+        "managed"
+      ],
+      "districts": [
+        "services",
+        "applications",
+        "ai"
+      ],
+      "stage": "deep",
+      "status": "active",
+      "strategic_priority": 1,
+      "synonyms": [
+        "Digital transformation",
+        "Enterprise business transformation",
+        "Business operating-model transformation",
+        "Customer journey transformation"
+      ],
+      "capability_tags": [
+        "Enterprise Digital Transformation",
+        "Digital transformation",
+        "Enterprise business transformation",
+        "Business operating-model transformation",
+        "Customer journey transformation"
+      ],
+      "source_ids": [
+        "ibm",
+        "gds-standard"
+      ],
+      "source_lineage": [
+        {
+          "id": "ibm",
+          "title": "IBM Consulting",
+          "url": "https://www.ibm.com/consulting",
+          "supports": "Consulting, integration, modernisation and managed-service vocabulary",
+          "reviewed_on": "2026-11-13",
+          "published_on": null,
+          "rights": "Public link and original paraphrase only; no vendor text, logo or delivery rights transferred",
+          "content_hash": null,
+          "boundary": "Taxonomy vocabulary only; playbooks are FLORA-authored hypotheses, not vendor recommendations or seller proof"
+        },
+        {
+          "id": "gds-standard",
+          "title": "GOV.UK Service Standard",
+          "url": "https://www.gov.uk/service-manual/service-standard",
+          "supports": "Customer needs, joined-up services, multidisciplinary delivery and measuring success; UK government service guidance, not a universal private-sector obligation",
+          "reviewed_on": "2026-11-13",
+          "published_on": null,
+          "rights": "Public link and original paraphrase only; no standard text copied or professional certification rights implied",
+          "content_hash": null,
+          "boundary": "Taxonomy and method reference only; authored playbooks are hypotheses, not seller proof, customer demand or legal advice"
+        }
+      ],
+      "jurisdiction": {
+        "territories": [
+          "GB"
+        ],
+        "base_method": "Country-neutral enterprise method; GB is the initial reviewed discovery overlay, not a delivery entitlement",
+        "overlays": {
+          "GB": {
+            "status": "Initial discovery context; legal, procurement and data applicability require review"
+          }
+        },
+        "applicability": "Customer-specific rights, residency, sector regulation and procurement scope must be established",
+        "excluded": "No automatic cross-border delivery, professional certification or universal legal-duty claim"
+      },
+      "owner": "FLORA authored commercial methods; owner-priority coverage",
+      "reviewed_on": "2026-11-13",
+      "classification": "illustrative general commercial archetype; not company capability or customer demand",
+      "revision_history": [
+        {
+          "version": 1,
+          "date": "2026-11-13",
+          "change": "Initial owner-priority enterprise playbook; existing narrower Offer IDs remain unchanged"
+        }
+      ],
+      "outcome": "Redesign an end-to-end business service and its operating model so an accountable enterprise sponsor can realise and sustain measurable customer and operational value.",
+      "ideal_customer_profile": "Large or multi-business enterprises with cross-functional customer journeys, fragmented process and technology ownership, an executive sponsor and an identifiable service outcome; not an isolated platform purchase.",
+      "target_segments": [
+        "Multi-business regulated enterprises",
+        "Multi-channel customer-service organisations",
+        "Enterprises coordinating several change programmes"
+      ],
+      "target_sectors": [
+        "Technology",
+        "Banking",
+        "Aviation"
+      ],
+      "buyer_roles": [
+        "CEO / COO transformation sponsor",
+        "CFO / benefits owner",
+        "Business service or customer-experience owner",
+        "CIO / enterprise architect",
+        "Change and workforce lead"
+      ],
+      "buying_roles": [
+        {
+          "role": "CEO / COO transformation sponsor",
+          "context": "Executive sponsor hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "CFO / benefits owner",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "Business service or customer-experience owner",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "CIO / enterprise architect",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "Change and workforce lead",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        }
+      ],
+      "affected_functions": [
+        "CEO / COO transformation sponsor",
+        "CFO / benefits owner",
+        "Business service or customer-experience owner",
+        "CIO / enterprise architect",
+        "Change and workforce lead"
+      ],
+      "required_capabilities": [
+        "Business service and operating-model design",
+        "Customer research and benefits measurement",
+        "Enterprise architecture and optional systems integration",
+        "Workforce adoption and programme governance"
+      ],
+      "delivery_model": "Customer-owned discovery and value case → options/design → separately authorised implementation waves → operating adoption and benefits review",
+      "delivery_specialisms": [
+        "systems-integration"
+      ],
+      "commercial_model": "Gated enterprise transformation programme with a customer-owned benefits case; discovery, design, delivery and adoption scopes contracted separately",
+      "constraints": [
+        "No transformation savings, customer growth or delivery capacity asserted",
+        "Customer sponsorship, data rights, workforce participation and transition approvals required",
+        "Systems Integration is one possible delivery specialism, not the customer outcome"
+      ],
+      "exclusions": [
+        "No material service gap, no accountable benefit owner, or a simpler process-only change has a better evidenced value case",
+        "No seller capability, account demand, access, funding or procurement approval established"
+      ],
+      "differentiation_to_validate": [
+        "Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+        "Can the seller substantiate relevant enterprise-scale delivery, rights, capacity and independent review for this scope?"
+      ],
+      "seller_validation": {
+        "proof_required": [
+          "Permissioned comparable delivery reference and measured outcome with limitations",
+          "Named enterprise programme, domain and transition/adoption capacity",
+          "Verified IP, data, partner and professional rights; declared subcontractor dependencies",
+          "Independent review of claims, scope, conflicts and commercial assumptions"
+        ],
+        "approval": "Separate employer reviewer validates seller delivery and rights; public method references are not proof"
+      },
+      "adjacent_offer_ids": [
+        "tech-consulting-01",
+        "tech-consulting-02",
+        "tech-engineering-02",
+        "tech-software-02"
+      ],
+      "follow_on_opportunities": [
+        {
+          "name": "Service and operating-model redesign",
+          "condition": "Validated cross-functional outcome and accountable benefits owner",
+          "offer_id": "tech-consulting-01",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        },
+        {
+          "name": "Integration delivery",
+          "condition": "Approved dependency change and verified IP/interface access",
+          "offer_id": "tech-engineering-02",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        },
+        {
+          "name": "Customer-service platform adoption",
+          "condition": "Platform change wins against process-only and incumbent options",
+          "offer_id": "tech-software-02",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        }
+      ],
+      "economic_value": {
+        "mechanisms": [
+          "Less avoidable journey rework and failure demand",
+          "Improved service completion and customer experience",
+          "More effective allocation of change investment"
+        ],
+        "measures": [
+          "End-to-end service completion and time-to-serve",
+          "Repeat contacts and avoidable rework",
+          "Sustained adoption and benefits-owner acceptance"
+        ],
+        "method": "Compare customer-approved baseline and future-state service outcomes; monetise only evidenced volume × attributable unit-cost change, less implementation, transition and recurring operating costs. Avoid double counting with other programmes.",
+        "costs": [
+          "Change delivery and integration",
+          "Workforce adoption and service transition",
+          "Ongoing platform and operating costs"
+        ],
+        "disconfirmation": "No material service gap, no accountable benefit owner, or a simpler process-only change has a better evidenced value case",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established",
+        "amount": null
+      },
+      "disconfirming_evidence": [
+        "The service may be deliberately federated and meeting its objectives",
+        "The benefits may already be governed effectively by existing programmes",
+        "A strategy announcement may be aspirational without an active programme",
+        "The change may be handled by an incumbent programme without external support",
+        "No material service gap, no accountable benefit owner, or a simpler process-only change has a better evidenced value case"
+      ],
+      "legacy_pattern": "change-value",
+      "research_context_claim_ids": [
+        "LBG-AR25-MIGRATION",
+        "AV-DIGITAL"
+      ],
+      "structural_triggers": [
+        {
+          "id": "tech-strategic-digital-transformation:structural:1",
+          "kind": "structural",
+          "condition": "Business outcomes span disconnected process, data and technology owners",
+          "observable": "Trace a customer journey across teams; compare hand-off, quality and value measures",
+          "rival_explanation": "The service may be deliberately federated and meeting its objectives",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Revalidate the operating baseline after service, ownership or solution changes; no numeric half-life",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        },
+        {
+          "id": "tech-strategic-digital-transformation:structural:2",
+          "kind": "structural",
+          "condition": "Technology investment is not connected to owned, sustained business benefits",
+          "observable": "Review approved investment cases, benefit ownership and post-release operating measures",
+          "rival_explanation": "The benefits may already be governed effectively by existing programmes",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Revalidate the operating baseline after service, ownership or solution changes; no numeric half-life",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        }
+      ],
+      "event_triggers": [
+        {
+          "id": "tech-strategic-digital-transformation:event:1",
+          "kind": "event",
+          "condition": "Customer confirms a board-sponsored business or service transformation mandate",
+          "observable": "Dated mandate, named accountable sponsor, bounded outcomes and decision rights",
+          "rival_explanation": "A strategy announcement may be aspirational without an active programme",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Reconfirm dated catalyst, scope and current decision window; an announcement can expire or already be addressed",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        },
+        {
+          "id": "tech-strategic-digital-transformation:event:2",
+          "kind": "event",
+          "condition": "Customer confirms an acquisition, channel redesign or operating-model decision affecting a service",
+          "observable": "Dated service scope and approved decision with dependency owners",
+          "rival_explanation": "The change may be handled by an incumbent programme without external support",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Reconfirm dated catalyst, scope and current decision window; an announcement can expire or already be addressed",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        }
+      ],
+      "entry_plays": [
+        {
+          "id": "tech-strategic-digital-transformation:play:1",
+          "name": "Outcome-to-operating-model value map",
+          "buyer": "Business service owner and CFO benefits partner",
+          "point_of_view": "Start from a customer outcome, not the next technology platform.",
+          "conversation": "Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+          "workshop_or_proof": "Map one authorised journey, baseline its pain points and compare process-only, incumbent and technology-enabled options.",
+          "evidence_needed": [
+            "Customer-permitted scope and baseline",
+            "End-to-end service completion and time-to-serve",
+            "Repeat contacts and avoidable rework",
+            "Sustained adoption and benefits-owner acceptance",
+            "Permissioned seller delivery, rights and capacity evidence"
+          ],
+          "disconfirming_question": "Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+          "follow_on": "A customer-owned service blueprint, benefits map and gated transformation roadmap",
+          "stop_conditions": [
+            "No accountable service outcome or baseline",
+            "incumbent plan already meets the outcome"
+          ]
+        },
+        {
+          "id": "tech-strategic-digital-transformation:play:2",
+          "name": "Programme value and adoption rehearsal",
+          "buyer": "COO transformation sponsor and workforce lead",
+          "point_of_view": "A delivered system creates no value unless the operating model and behaviours change.",
+          "conversation": "How will teams adopt the new service and demonstrate sustained value rather than technical go-live?",
+          "workshop_or_proof": "Rehearse a bounded future-state service with representative users, operational controls and benefits owners.",
+          "evidence_needed": [
+            "Customer-permitted scope and baseline",
+            "End-to-end service completion and time-to-serve",
+            "Repeat contacts and avoidable rework",
+            "Sustained adoption and benefits-owner acceptance",
+            "Permissioned seller delivery, rights and capacity evidence"
+          ],
+          "disconfirming_question": "Does the expected value survive adoption effort, transition cost and the simpler alternative?",
+          "follow_on": "Separately sponsored implementation increments with adoption, assurance and benefits gates",
+          "stop_conditions": [
+            "No workforce participation, transition capacity or benefits accountability"
+          ]
+        }
+      ],
+      "validation_tests": [
+        {
+          "test": "Map one authorised journey, baseline its pain points and compare process-only, incumbent and technology-enabled options.",
+          "acceptance": "Customer approves decision-grade evidence and comparison against end-to-end service completion and time-to-serve; no invented numeric threshold",
+          "failure_action": "Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme? Stop or prefer the simpler option if disconfirmed."
+        },
+        {
+          "test": "Rehearse a bounded future-state service with representative users, operational controls and benefits owners.",
+          "acceptance": "Customer approves decision-grade evidence and comparison against end-to-end service completion and time-to-serve; no invented numeric threshold",
+          "failure_action": "Does the expected value survive adoption effort, transition cost and the simpler alternative? Stop or prefer the simpler option if disconfirmed."
+        }
+      ]
+    },
+    {
+      "id": "tech-strategic-ai-first-transformation",
+      "version": 1,
+      "taxonomy_version": 2,
+      "name": "AI-first Business Transformation",
+      "parent_id": "tech-family-data",
+      "family": "data",
+      "subindustries": [
+        "data",
+        "consulting",
+        "engineering",
+        "software",
+        "managed"
+      ],
+      "districts": [
+        "ai",
+        "services",
+        "applications"
+      ],
+      "stage": "deep",
+      "status": "active",
+      "strategic_priority": 2,
+      "synonyms": [
+        "AI-first transformation",
+        "AI business transformation",
+        "AI-enabled operating model",
+        "AI-led process redesign"
+      ],
+      "capability_tags": [
+        "AI-first Business Transformation",
+        "AI-first transformation",
+        "AI business transformation",
+        "AI-enabled operating model",
+        "AI-led process redesign"
+      ],
+      "source_ids": [
+        "ibm",
+        "nist-ai-rmf"
+      ],
+      "source_lineage": [
+        {
+          "id": "ibm",
+          "title": "IBM Consulting",
+          "url": "https://www.ibm.com/consulting",
+          "supports": "Consulting, integration, modernisation and managed-service vocabulary",
+          "reviewed_on": "2026-11-13",
+          "published_on": null,
+          "rights": "Public link and original paraphrase only; no vendor text, logo or delivery rights transferred",
+          "content_hash": null,
+          "boundary": "Taxonomy vocabulary only; playbooks are FLORA-authored hypotheses, not vendor recommendations or seller proof"
+        },
+        {
+          "id": "nist-ai-rmf",
+          "title": "NIST AI Risk Management Framework",
+          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "supports": "AI risk-management vocabulary and accountable evaluation; voluntary framework, not UK legal certification",
+          "reviewed_on": "2026-11-13",
+          "published_on": null,
+          "rights": "Public link and original paraphrase only; no standard text copied or professional certification rights implied",
+          "content_hash": null,
+          "boundary": "Taxonomy and method reference only; authored playbooks are hypotheses, not seller proof, customer demand or legal advice"
+        }
+      ],
+      "jurisdiction": {
+        "territories": [
+          "GB"
+        ],
+        "base_method": "Country-neutral enterprise method; GB is the initial reviewed discovery overlay, not a delivery entitlement",
+        "overlays": {
+          "GB": {
+            "status": "Initial discovery context; legal, procurement and data applicability require review"
+          }
+        },
+        "applicability": "Customer-specific rights, residency, sector regulation and procurement scope must be established",
+        "excluded": "No automatic cross-border delivery, professional certification or universal legal-duty claim"
+      },
+      "owner": "FLORA authored commercial methods; owner-priority coverage",
+      "reviewed_on": "2026-11-13",
+      "classification": "illustrative general commercial archetype; not company capability or customer demand",
+      "revision_history": [
+        {
+          "version": 1,
+          "date": "2026-11-13",
+          "change": "Initial owner-priority enterprise playbook; existing narrower Offer IDs remain unchanged"
+        }
+      ],
+      "outcome": "Redesign a business process, roles and controls around a justified AI-enabled operating model, with measurable benefits, human accountability and sustained organisational adoption.",
+      "ideal_customer_profile": "Enterprises with a repeatable high-value process, accountable business and risk sponsors, lawful data access and capacity for operating-model change; distinct from a standalone model experiment or generic chatbot rollout.",
+      "target_segments": [
+        "Knowledge-intensive regulated services",
+        "High-volume assisted service operations",
+        "Enterprises with a governed data and AI strategy"
+      ],
+      "target_sectors": [
+        "Technology",
+        "Banking",
+        "Aviation"
+      ],
+      "buyer_roles": [
+        "COO / business process sponsor",
+        "Chief data or AI officer",
+        "CFO / benefits owner",
+        "CISO / privacy and model-risk owner",
+        "HR / workforce and adoption lead"
+      ],
+      "buying_roles": [
+        {
+          "role": "COO / business process sponsor",
+          "context": "Executive sponsor hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "Chief data or AI officer",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "CFO / benefits owner",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "CISO / privacy and model-risk owner",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "HR / workforce and adoption lead",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        }
+      ],
+      "affected_functions": [
+        "COO / business process sponsor",
+        "Chief data or AI officer",
+        "CFO / benefits owner",
+        "CISO / privacy and model-risk owner",
+        "HR / workforce and adoption lead"
+      ],
+      "required_capabilities": [
+        "Business process and workforce redesign",
+        "Data protection and model-risk management",
+        "AI evaluation against non-AI alternatives",
+        "Enterprise integration and operational support",
+        "Benefits attribution and adoption design"
+      ],
+      "delivery_model": "Customer-owned discovery and value case → options/design → separately authorised implementation waves → operating adoption and benefits review",
+      "delivery_specialisms": [
+        "systems-integration"
+      ],
+      "commercial_model": "Enterprise AI-enabled transformation programme with business, risk and adoption gates; runtime and platform spend require separate authorisation",
+      "constraints": [
+        "No autonomous decisions, paid model calls or external data transfers authorised by FLORA selection",
+        "AI, data, IP, workforce and production approvals remain separate",
+        "No guaranteed productivity uplift, headcount saving or model accuracy"
+      ],
+      "exclusions": [
+        "AI does not beat the simpler baseline, review effort offsets gains, or an acceptable accountable operating model cannot be established",
+        "No seller capability, account demand, access, funding or procurement approval established"
+      ],
+      "differentiation_to_validate": [
+        "Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+        "Can the seller substantiate relevant enterprise-scale delivery, rights, capacity and independent review for this scope?"
+      ],
+      "seller_validation": {
+        "proof_required": [
+          "Permissioned comparable delivery reference and measured outcome with limitations",
+          "Named enterprise programme, domain and transition/adoption capacity",
+          "Verified IP, data, partner and professional rights; declared subcontractor dependencies",
+          "Independent review of claims, scope, conflicts and commercial assumptions"
+        ],
+        "approval": "Separate employer reviewer validates seller delivery and rights; public method references are not proof"
+      },
+      "adjacent_offer_ids": [
+        "tech-data-02",
+        "tech-data-01",
+        "tech-engineering-02",
+        "tech-managed-02"
+      ],
+      "follow_on_opportunities": [
+        {
+          "name": "Bounded experiment",
+          "condition": "One use case has lawful data rights, an agreed baseline and explicit stop criteria",
+          "offer_id": "tech-data-02",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        },
+        {
+          "name": "Data product readiness",
+          "condition": "A demonstrated data-quality or ownership gap constrains the chosen process",
+          "offer_id": "tech-data-01",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        },
+        {
+          "name": "Application integration and support",
+          "condition": "A proven outcome has separate production, rights and support approval",
+          "offer_id": "tech-engineering-02",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        }
+      ],
+      "economic_value": {
+        "mechanisms": [
+          "Improved quality or throughput of a bounded business process",
+          "Less avoidable handling and rework where demonstrated",
+          "More effective human review and decision support"
+        ],
+        "measures": [
+          "Task quality and exception/rework rates",
+          "Human review effort and service completion",
+          "Observed adoption, unit operating cost and evaluation drift"
+        ],
+        "method": "Value only observed process improvements against a non-AI baseline; subtract data preparation, change, model/runtime, integration, review and ongoing control costs. Capacity released is not automatically a cash saving.",
+        "costs": [
+          "Data and integration readiness",
+          "Workforce redesign, training and adoption",
+          "Runtime, evaluation, human review and control operations"
+        ],
+        "disconfirmation": "AI does not beat the simpler baseline, review effort offsets gains, or an acceptable accountable operating model cannot be established",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established",
+        "amount": null
+      },
+      "disconfirming_evidence": [
+        "Process simplification, search or rules may outperform AI",
+        "The organisation may intentionally be learning before scaling and have no transformation need",
+        "A public AI strategy does not establish a funded change programme",
+        "The pilot may show that a non-AI alternative is preferable",
+        "AI does not beat the simpler baseline, review effort offsets gains, or an acceptable accountable operating model cannot be established"
+      ],
+      "legacy_pattern": "ai-change",
+      "research_context_claim_ids": [
+        "LBG-A2030-DATA",
+        "AV-ICC"
+      ],
+      "structural_triggers": [
+        {
+          "id": "tech-strategic-ai-first-transformation:structural:1",
+          "kind": "structural",
+          "condition": "A repeatable business process has a measurable decision or knowledge-work constraint",
+          "observable": "Owner-approved process baseline, exception categories and current human control points",
+          "rival_explanation": "Process simplification, search or rules may outperform AI",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Revalidate the operating baseline after service, ownership or solution changes; no numeric half-life",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        },
+        {
+          "id": "tech-strategic-ai-first-transformation:structural:2",
+          "kind": "structural",
+          "condition": "AI pilots are disconnected from operating ownership, adoption and accountable controls",
+          "observable": "Map pilots to process owners, evaluation methods, human review and operating costs",
+          "rival_explanation": "The organisation may intentionally be learning before scaling and have no transformation need",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Revalidate the operating baseline after service, ownership or solution changes; no numeric half-life",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        }
+      ],
+      "event_triggers": [
+        {
+          "id": "tech-strategic-ai-first-transformation:event:1",
+          "kind": "event",
+          "condition": "Customer confirms an executive-sponsored AI operating-model programme",
+          "observable": "Dated business mandate, process scope, accountable sponsor and risk approval path",
+          "rival_explanation": "A public AI strategy does not establish a funded change programme",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Reconfirm dated catalyst, scope and current decision window; an announcement can expire or already be addressed",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        },
+        {
+          "id": "tech-strategic-ai-first-transformation:event:2",
+          "kind": "event",
+          "condition": "Customer authorises a scale, redesign or stop decision after a governed AI pilot",
+          "observable": "Dated evaluation results, adoption feedback and a documented decision gate",
+          "rival_explanation": "The pilot may show that a non-AI alternative is preferable",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Reconfirm dated catalyst, scope and current decision window; an announcement can expire or already be addressed",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        }
+      ],
+      "entry_plays": [
+        {
+          "id": "tech-strategic-ai-first-transformation:play:1",
+          "name": "Process and role redesign value case",
+          "buyer": "Business process sponsor, workforce and risk partners",
+          "point_of_view": "The opportunity is a better business process, not more AI usage.",
+          "conversation": "Which process outcome warrants changing work allocation, controls and accountability?",
+          "workshop_or_proof": "Map tasks and exceptions, compare process-only, rules and AI alternatives; specify human review, data rights and an owner-agreed evaluation.",
+          "evidence_needed": [
+            "Customer-permitted scope and baseline",
+            "Task quality and exception/rework rates",
+            "Human review effort and service completion",
+            "Observed adoption, unit operating cost and evaluation drift",
+            "Permissioned seller delivery, rights and capacity evidence"
+          ],
+          "disconfirming_question": "Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+          "follow_on": "A gated AI-enabled operating-model and benefits proposal",
+          "stop_conditions": [
+            "No lawful data access, accountable process owner, workforce participation or safe non-AI baseline"
+          ]
+        },
+        {
+          "id": "tech-strategic-ai-first-transformation:play:2",
+          "name": "From pilot to governed operating model",
+          "buyer": "Chief AI officer and COO adoption sponsor",
+          "point_of_view": "A successful demonstration is not evidence of sustainable enterprise value.",
+          "conversation": "What must change in skills, oversight, service support and process ownership before scaling?",
+          "workshop_or_proof": "Review permitted pilot evidence and rehearse operating roles, fallback, evaluation drift checks and staged adoption.",
+          "evidence_needed": [
+            "Customer-permitted scope and baseline",
+            "Task quality and exception/rework rates",
+            "Human review effort and service completion",
+            "Observed adoption, unit operating cost and evaluation drift",
+            "Permissioned seller delivery, rights and capacity evidence"
+          ],
+          "disconfirming_question": "Do observed error rates, review effort or adoption resistance eliminate the case for scaling?",
+          "follow_on": "Separately authorised phased adoption, integration and evaluation service",
+          "stop_conditions": [
+            "Pilot does not beat the baseline, human accountability is absent, or ongoing operating costs are unowned"
+          ]
+        }
+      ],
+      "validation_tests": [
+        {
+          "test": "Map tasks and exceptions, compare process-only, rules and AI alternatives; specify human review, data rights and an owner-agreed evaluation.",
+          "acceptance": "Customer approves decision-grade evidence and comparison against task quality and exception/rework rates; no invented numeric threshold",
+          "failure_action": "Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost? Stop or prefer the simpler option if disconfirmed."
+        },
+        {
+          "test": "Review permitted pilot evidence and rehearse operating roles, fallback, evaluation drift checks and staged adoption.",
+          "acceptance": "Customer approves decision-grade evidence and comparison against task quality and exception/rework rates; no invented numeric threshold",
+          "failure_action": "Do observed error rates, review effort or adoption resistance eliminate the case for scaling? Stop or prefer the simpler option if disconfirmed."
+        }
+      ]
+    },
+    {
+      "id": "tech-strategic-cybersecurity-resilience",
+      "version": 1,
+      "taxonomy_version": 2,
+      "name": "Enterprise Cybersecurity & Resilience",
+      "parent_id": "tech-family-cyber",
+      "family": "cyber",
+      "subindustries": [
+        "cyber",
+        "consulting",
+        "managed",
+        "cloud",
+        "network"
+      ],
+      "districts": [
+        "cyber",
+        "services",
+        "infrastructure"
+      ],
+      "stage": "deep",
+      "status": "active",
+      "strategic_priority": 3,
+      "synonyms": [
+        "Cybersecurity transformation",
+        "Cyber resilience",
+        "Enterprise security assurance",
+        "Cyber security",
+        "Operational resilience"
+      ],
+      "capability_tags": [
+        "Enterprise Cybersecurity & Resilience",
+        "Cybersecurity transformation",
+        "Cyber resilience",
+        "Enterprise security assurance",
+        "Cyber security",
+        "Operational resilience"
+      ],
+      "source_ids": [
+        "ncsc-caf",
+        "ncsc",
+        "microsoft"
+      ],
+      "source_lineage": [
+        {
+          "id": "microsoft",
+          "title": "Microsoft Security",
+          "url": "https://www.microsoft.com/en-us/security",
+          "supports": "Identity, detection and security product categories",
+          "reviewed_on": "2026-11-13",
+          "published_on": null,
+          "rights": "Public link and original paraphrase only; no vendor text, logo or delivery rights transferred",
+          "content_hash": null,
+          "boundary": "Taxonomy vocabulary only; playbooks are FLORA-authored hypotheses, not vendor recommendations or seller proof"
+        },
+        {
+          "id": "ncsc",
+          "title": "NCSC cloud security principles",
+          "url": "https://www.ncsc.gov.uk/collection/cloud/the-cloud-security-principles",
+          "supports": "Security considerations; not seller assurance",
+          "reviewed_on": "2026-11-13",
+          "published_on": null,
+          "rights": "Public link and original paraphrase only; no vendor text, logo or delivery rights transferred",
+          "content_hash": null,
+          "boundary": "Taxonomy vocabulary only; playbooks are FLORA-authored hypotheses, not vendor recommendations or seller proof"
+        },
+        {
+          "id": "ncsc-caf",
+          "title": "NCSC Cyber Assessment Framework",
+          "url": "https://www.ncsc.gov.uk/collection/cyber-assessment-framework",
+          "supports": "Outcome-oriented cyber resilience and assurance vocabulary; applicability and regulatory obligations require organisation-specific review",
+          "reviewed_on": "2026-11-13",
+          "published_on": null,
+          "rights": "Public link and original paraphrase only; no standard text copied or professional certification rights implied",
+          "content_hash": null,
+          "boundary": "Taxonomy and method reference only; authored playbooks are hypotheses, not seller proof, customer demand or legal advice"
+        }
+      ],
+      "jurisdiction": {
+        "territories": [
+          "GB"
+        ],
+        "base_method": "Country-neutral enterprise method; GB is the initial reviewed discovery overlay, not a delivery entitlement",
+        "overlays": {
+          "GB": {
+            "status": "Initial discovery context; legal, procurement and data applicability require review"
+          }
+        },
+        "applicability": "Customer-specific rights, residency, sector regulation and procurement scope must be established",
+        "excluded": "No automatic cross-border delivery, professional certification or universal legal-duty claim"
+      },
+      "owner": "FLORA authored commercial methods; owner-priority coverage",
+      "reviewed_on": "2026-11-13",
+      "classification": "illustrative general commercial archetype; not company capability or customer demand",
+      "revision_history": [
+        {
+          "version": 1,
+          "date": "2026-11-13",
+          "change": "Initial owner-priority enterprise playbook; existing narrower Offer IDs remain unchanged"
+        }
+      ],
+      "outcome": "Improve an enterprise’s ability to protect and recover a critical business service through a prioritised, evidenced cyber control, resilience and assurance programme.",
+      "ideal_customer_profile": "Enterprises with critical-service dependencies, multi-provider controls and a CISO/business owner mandate; existing monitoring and identity controls must be assessed rather than presumed absent.",
+      "target_segments": [
+        "Critical-service and regulated enterprises",
+        "Multi-cloud or multi-supplier operating estates",
+        "Enterprises seeking independent control and recovery assurance"
+      ],
+      "target_sectors": [
+        "Technology",
+        "Banking",
+        "Aviation"
+      ],
+      "buyer_roles": [
+        "CISO / enterprise risk sponsor",
+        "Critical business-service owner",
+        "COO / resilience and continuity lead",
+        "Audit / assurance and legal partners",
+        "CIO / infrastructure and identity owners"
+      ],
+      "buying_roles": [
+        {
+          "role": "CISO / enterprise risk sponsor",
+          "context": "Executive sponsor hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "Critical business-service owner",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "COO / resilience and continuity lead",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "Audit / assurance and legal partners",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "CIO / infrastructure and identity owners",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        }
+      ],
+      "affected_functions": [
+        "CISO / enterprise risk sponsor",
+        "Critical business-service owner",
+        "COO / resilience and continuity lead",
+        "Audit / assurance and legal partners",
+        "CIO / infrastructure and identity owners"
+      ],
+      "required_capabilities": [
+        "Enterprise security and critical-service risk architecture",
+        "Operational resilience and recovery facilitation",
+        "Independent control assurance with declared conflicts",
+        "Multi-supplier remediation and identity/security engineering"
+      ],
+      "delivery_model": "Customer-owned discovery and value case → options/design → separately authorised implementation waves → operating adoption and benefits review",
+      "delivery_specialisms": [],
+      "commercial_model": "Scoped enterprise risk, resilience and assurance programme; independent assessment, remediation and recurring operations contracted with clear conflicts and rights",
+      "constraints": [
+        "No intrusive testing, live access or incident handling without written authority",
+        "No certification, regulator acceptance, absent-control or zero-breach claim",
+        "Existing controls and incumbents are counter-evidence to a greenfield pitch"
+      ],
+      "exclusions": [
+        "Current controls demonstrably meet risk and recovery objectives, or proposed changes do not improve the customer-approved scenario",
+        "No seller capability, account demand, access, funding or procurement approval established"
+      ],
+      "differentiation_to_validate": [
+        "Do the existing controls and recovery evidence already address the scenario adequately?",
+        "Can the seller substantiate relevant enterprise-scale delivery, rights, capacity and independent review for this scope?"
+      ],
+      "seller_validation": {
+        "proof_required": [
+          "Permissioned comparable delivery reference and measured outcome with limitations",
+          "Named enterprise programme, domain and transition/adoption capacity",
+          "Verified IP, data, partner and professional rights; declared subcontractor dependencies",
+          "Independent review of claims, scope, conflicts and commercial assumptions"
+        ],
+        "approval": "Separate employer reviewer validates seller delivery and rights; public method references are not proof"
+      },
+      "adjacent_offer_ids": [
+        "tech-cyber-01",
+        "tech-cyber-02",
+        "tech-managed-01",
+        "tech-cloud-01"
+      ],
+      "follow_on_opportunities": [
+        {
+          "name": "Detection and response",
+          "condition": "An authorised scenario exposes a monitoring/response gap and seller delivery rights are verified",
+          "offer_id": "tech-cyber-01",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        },
+        {
+          "name": "Privileged identity",
+          "condition": "Evidence identifies an ownership or lifecycle-control gap",
+          "offer_id": "tech-cyber-02",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        },
+        {
+          "name": "Managed service escalation",
+          "condition": "A critical hand-off remains unresolved after incumbent review",
+          "offer_id": "tech-managed-01",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        }
+      ],
+      "economic_value": {
+        "mechanisms": [
+          "Lower exposure to consequential service disruption where controls are shown to improve",
+          "Less duplicated assurance and remediation effort",
+          "More defensible risk prioritisation and recovery decisions"
+        ],
+        "measures": [
+          "Tested recovery and escalation completion",
+          "Critical dependency/control ownership coverage",
+          "Evidence-backed remediation closure and assurance rework"
+        ],
+        "method": "Use owner-approved risk and service-impact scenarios; quantify only supported exposure and control costs, with assumptions and ranges if later evidenced. Do not turn an unobserved breach probability or avoided fine into a promised saving.",
+        "costs": [
+          "Control and service engineering",
+          "Assurance and recovery exercises",
+          "Ongoing security operations and supplier coordination"
+        ],
+        "disconfirmation": "Current controls demonstrably meet risk and recovery objectives, or proposed changes do not improve the customer-approved scenario",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established",
+        "amount": null
+      },
+      "disconfirming_evidence": [
+        "Existing controls and assurance may already address the material risks",
+        "An existing risk programme may already prioritise and test the right outcomes",
+        "A public incident or audit does not establish missing controls or supplier demand",
+        "The existing security team or incumbent may cover the change within its remit",
+        "Current controls demonstrably meet risk and recovery objectives, or proposed changes do not improve the customer-approved scenario"
+      ],
+      "legacy_pattern": "service-dependencies",
+      "research_context_claim_ids": [
+        "LBG-ENVOY-CONTROLS",
+        "AV-ICC"
+      ],
+      "variants": [
+        {
+          "id": "cyber-transformation",
+          "name": "Cyber transformation",
+          "focus": "Prioritised control and operating-model change"
+        },
+        {
+          "id": "operational-resilience",
+          "name": "Operational resilience",
+          "focus": "Critical-service dependencies, recovery and supplier hand-offs"
+        },
+        {
+          "id": "control-assurance",
+          "name": "Control assurance",
+          "focus": "Evidence-based independent challenge, conflicts and scoped retesting"
+        }
+      ],
+      "structural_triggers": [
+        {
+          "id": "tech-strategic-cybersecurity-resilience:structural:1",
+          "kind": "structural",
+          "condition": "Critical-service control and recovery accountability spans several providers",
+          "observable": "Permitted service maps, control ownership, existing assurance and recovery obligations",
+          "rival_explanation": "Existing controls and assurance may already address the material risks",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Revalidate the operating baseline after service, ownership or solution changes; no numeric half-life",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        },
+        {
+          "id": "tech-strategic-cybersecurity-resilience:structural:2",
+          "kind": "structural",
+          "condition": "Security coverage is measured as tooling rather than tested business-service resilience",
+          "observable": "Review recovery exercises, dependency assumptions and owner-approved control evidence",
+          "rival_explanation": "An existing risk programme may already prioritise and test the right outcomes",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Revalidate the operating baseline after service, ownership or solution changes; no numeric half-life",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        }
+      ],
+      "event_triggers": [
+        {
+          "id": "tech-strategic-cybersecurity-resilience:event:1",
+          "kind": "event",
+          "condition": "Customer authorises a review after an incident, exercise or assurance finding",
+          "observable": "Dated, permitted finding with materiality, existing controls and an accountable remediation owner",
+          "rival_explanation": "A public incident or audit does not establish missing controls or supplier demand",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Reconfirm dated catalyst, scope and current decision window; an announcement can expire or already be addressed",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        },
+        {
+          "id": "tech-strategic-cybersecurity-resilience:event:2",
+          "kind": "event",
+          "condition": "Customer confirms a material service, supplier or operating-environment change",
+          "observable": "Dated change scope, affected critical services and agreed risk decision",
+          "rival_explanation": "The existing security team or incumbent may cover the change within its remit",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Reconfirm dated catalyst, scope and current decision window; an announcement can expire or already be addressed",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        }
+      ],
+      "entry_plays": [
+        {
+          "id": "tech-strategic-cybersecurity-resilience:play:1",
+          "name": "Critical-service resilience challenge",
+          "buyer": "Business-service owner and CISO",
+          "point_of_view": "Protect the service outcome; do not start by assuming another security tool is needed.",
+          "conversation": "Which authorised scenario could impair this service despite the controls already in place?",
+          "workshop_or_proof": "Map one service’s controls and dependencies, then run a consented tabletop against recovery and escalation obligations.",
+          "evidence_needed": [
+            "Customer-permitted scope and baseline",
+            "Tested recovery and escalation completion",
+            "Critical dependency/control ownership coverage",
+            "Evidence-backed remediation closure and assurance rework",
+            "Permissioned seller delivery, rights and capacity evidence"
+          ],
+          "disconfirming_question": "Do the existing controls and recovery evidence already address the scenario adequately?",
+          "follow_on": "Prioritised, owner-approved resilience and control improvement programme",
+          "stop_conditions": [
+            "No material residual risk, no written exercise scope or no authorised access to existing control evidence"
+          ]
+        },
+        {
+          "id": "tech-strategic-cybersecurity-resilience:play:2",
+          "name": "Control assurance and remediation roadmap",
+          "buyer": "Audit assurance partner and enterprise risk sponsor",
+          "point_of_view": "An assurance opinion must be supported by scoped evidence and independent challenge.",
+          "conversation": "Which control outcome lacks decision-grade evidence, rather than merely a new dashboard?",
+          "workshop_or_proof": "Review a redacted evidence sample; compare control design, operation and recovery observations without live exploitation.",
+          "evidence_needed": [
+            "Customer-permitted scope and baseline",
+            "Tested recovery and escalation completion",
+            "Critical dependency/control ownership coverage",
+            "Evidence-backed remediation closure and assurance rework",
+            "Permissioned seller delivery, rights and capacity evidence"
+          ],
+          "disconfirming_question": "Would better use or verification of incumbent controls remove the gap without a transformation programme?",
+          "follow_on": "Separately authorised control engineering, identity, monitoring or retest package",
+          "stop_conditions": [
+            "Conflicts impair independence, evidence access is denied, or testing rights cannot be established"
+          ]
+        }
+      ],
+      "validation_tests": [
+        {
+          "test": "Map one service’s controls and dependencies, then run a consented tabletop against recovery and escalation obligations.",
+          "acceptance": "Customer approves decision-grade evidence and comparison against tested recovery and escalation completion; no invented numeric threshold",
+          "failure_action": "Do the existing controls and recovery evidence already address the scenario adequately? Stop or prefer the simpler option if disconfirmed."
+        },
+        {
+          "test": "Review a redacted evidence sample; compare control design, operation and recovery observations without live exploitation.",
+          "acceptance": "Customer approves decision-grade evidence and comparison against tested recovery and escalation completion; no invented numeric threshold",
+          "failure_action": "Would better use or verification of incumbent controls remove the gap without a transformation programme? Stop or prefer the simpler option if disconfirmed."
+        }
+      ]
+    },
+    {
+      "id": "tech-strategic-complex-legacy-modernisation",
+      "version": 1,
+      "taxonomy_version": 2,
+      "name": "Complex Legacy Application Modernisation",
+      "parent_id": "tech-family-engineering",
+      "family": "engineering",
+      "subindustries": [
+        "engineering",
+        "consulting",
+        "cloud",
+        "managed",
+        "software"
+      ],
+      "districts": [
+        "applications",
+        "cloud",
+        "services"
+      ],
+      "stage": "deep",
+      "status": "active",
+      "strategic_priority": 4,
+      "synonyms": [
+        "Complex legacy modernisation",
+        "Legacy modernization",
+        "Application estate transformation",
+        "Multi-vendor application modernisation",
+        "Legacy replacement strategy"
+      ],
+      "capability_tags": [
+        "Complex Legacy Application Modernisation",
+        "Complex legacy modernisation",
+        "Legacy modernization",
+        "Application estate transformation",
+        "Multi-vendor application modernisation",
+        "Legacy replacement strategy"
+      ],
+      "source_ids": [
+        "ibm",
+        "aws"
+      ],
+      "source_lineage": [
+        {
+          "id": "ibm",
+          "title": "IBM Consulting",
+          "url": "https://www.ibm.com/consulting",
+          "supports": "Consulting, integration, modernisation and managed-service vocabulary",
+          "reviewed_on": "2026-11-13",
+          "published_on": null,
+          "rights": "Public link and original paraphrase only; no vendor text, logo or delivery rights transferred",
+          "content_hash": null,
+          "boundary": "Taxonomy vocabulary only; playbooks are FLORA-authored hypotheses, not vendor recommendations or seller proof"
+        },
+        {
+          "id": "aws",
+          "title": "AWS products",
+          "url": "https://aws.amazon.com/products/",
+          "supports": "Cloud infrastructure, data, AI and migration categories",
+          "reviewed_on": "2026-11-13",
+          "published_on": null,
+          "rights": "Public link and original paraphrase only; no vendor text, logo or delivery rights transferred",
+          "content_hash": null,
+          "boundary": "Taxonomy vocabulary only; playbooks are FLORA-authored hypotheses, not vendor recommendations or seller proof"
+        }
+      ],
+      "jurisdiction": {
+        "territories": [
+          "GB"
+        ],
+        "base_method": "Country-neutral enterprise method; GB is the initial reviewed discovery overlay, not a delivery entitlement",
+        "overlays": {
+          "GB": {
+            "status": "Initial discovery context; legal, procurement and data applicability require review"
+          }
+        },
+        "applicability": "Customer-specific rights, residency, sector regulation and procurement scope must be established",
+        "excluded": "No automatic cross-border delivery, professional certification or universal legal-duty claim"
+      },
+      "owner": "FLORA authored commercial methods; owner-priority coverage",
+      "reviewed_on": "2026-11-13",
+      "classification": "illustrative general commercial archetype; not company capability or customer demand",
+      "revision_history": [
+        {
+          "version": 1,
+          "date": "2026-11-13",
+          "change": "Initial owner-priority enterprise playbook; existing narrower Offer IDs remain unchanged"
+        }
+      ],
+      "outcome": "Modernise a complex application estate through a defensible retain, retire, rehost, replatform, refactor or replace strategy while preserving critical-service continuity and accountable value.",
+      "ideal_customer_profile": "Large enterprises with interdependent applications, legacy runtimes, multiple vendors, constrained change windows and significant transition risk; an isolated interface upgrade belongs in the existing narrow modernisation playbook.",
+      "target_segments": [
+        "Regulated multi-platform application estates",
+        "Enterprises with mainframe and distributed dependencies",
+        "Multi-vendor programmes coordinating retirement, migration and replacement"
+      ],
+      "target_sectors": [
+        "Technology",
+        "Banking",
+        "Aviation"
+      ],
+      "buyer_roles": [
+        "CIO / CTO programme sponsor",
+        "Business application and critical-service owners",
+        "Enterprise architect / application estate lead",
+        "CFO / portfolio benefits owner",
+        "Vendor management, security and transition leads"
+      ],
+      "buying_roles": [
+        {
+          "role": "CIO / CTO programme sponsor",
+          "context": "Executive sponsor hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "Business application and critical-service owners",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "Enterprise architect / application estate lead",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "CFO / portfolio benefits owner",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "Vendor management, security and transition leads",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        }
+      ],
+      "affected_functions": [
+        "CIO / CTO programme sponsor",
+        "Business application and critical-service owners",
+        "Enterprise architect / application estate lead",
+        "CFO / portfolio benefits owner",
+        "Vendor management, security and transition leads"
+      ],
+      "required_capabilities": [
+        "Complex estate and multi-vendor architecture",
+        "Legacy engineering and systems integration",
+        "Migration, reconciliation, cutover and rollback testing",
+        "Contract/IP diligence and service transition",
+        "Programme value and continuity governance"
+      ],
+      "delivery_model": "Customer-owned discovery and value case → options/design → separately authorised implementation waves → operating adoption and benefits review",
+      "delivery_specialisms": [
+        "systems-integration"
+      ],
+      "commercial_model": "Multi-stage estate modernisation programme with option, rights, engineering and transition gates; each wave separately authorised against continuity and value criteria",
+      "constraints": [
+        "No production writes, migration or cutover authorised by library selection",
+        "Source-code, data, vendor, licence and support rights must be established",
+        "No universal rewrite, retirement savings or vendor replacement recommendation"
+      ],
+      "exclusions": [
+        "Retention or a smaller upgrade has better evidenced whole-life value, or continuity and rights cannot be established",
+        "No seller capability, account demand, access, funding or procurement approval established"
+      ],
+      "differentiation_to_validate": [
+        "Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+        "Can the seller substantiate relevant enterprise-scale delivery, rights, capacity and independent review for this scope?"
+      ],
+      "seller_validation": {
+        "proof_required": [
+          "Permissioned comparable delivery reference and measured outcome with limitations",
+          "Named enterprise programme, domain and transition/adoption capacity",
+          "Verified IP, data, partner and professional rights; declared subcontractor dependencies",
+          "Independent review of claims, scope, conflicts and commercial assumptions"
+        ],
+        "approval": "Separate employer reviewer validates seller delivery and rights; public method references are not proof"
+      },
+      "adjacent_offer_ids": [
+        "tech-engineering-01",
+        "tech-consulting-02",
+        "tech-cloud-01",
+        "tech-managed-02"
+      ],
+      "follow_on_opportunities": [
+        {
+          "name": "Bounded legacy increment",
+          "condition": "One dependency cluster has approved rights, test scope and reversible treatment",
+          "offer_id": "tech-engineering-01",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        },
+        {
+          "name": "Integration sequencing",
+          "condition": "A cross-system dependency requires an owned architecture decision",
+          "offer_id": "tech-consulting-02",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        },
+        {
+          "name": "Application managed support",
+          "condition": "The target service is supportable with documented rights and handover",
+          "offer_id": "tech-managed-02",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        }
+      ],
+      "economic_value": {
+        "mechanisms": [
+          "Retire demonstrably unnecessary run and support cost",
+          "Improve change capacity and remove measured dependency friction",
+          "Reduce supported obsolescence and transition exposure"
+        ],
+        "measures": [
+          "Verified retired run/support costs and contract obligations",
+          "Service parity, reconciliation and recovery observations",
+          "Lead time and dependency/ownership closure"
+        ],
+        "method": "Compare whole-life retain and change options including support extensions, licences, vendor/IP rights, dual run, migration, reconciliation, exit and support. Count retired cost only when obligations actually end; avoid blanket cloud or rewrite savings.",
+        "costs": [
+          "Assessment, engineering and data transition",
+          "Dual run, support extensions and contractual exit",
+          "Operational readiness, rollback and long-term maintenance"
+        ],
+        "disconfirmation": "Retention or a smaller upgrade has better evidenced whole-life value, or continuity and rights cannot be established",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established",
+        "amount": null
+      },
+      "disconfirming_evidence": [
+        "A supported upgrade or managed retention strategy may remain the best option",
+        "Existing portfolio governance may already sequence the work safely",
+        "A published ambition may already be covered by incumbent delivery",
+        "Extended support, renegotiation or a bounded upgrade may be more valuable than replacement",
+        "Retention or a smaller upgrade has better evidenced whole-life value, or continuity and rights cannot be established"
+      ],
+      "legacy_pattern": "change-value",
+      "research_context_claim_ids": [
+        "LBG-AR25-MIGRATION"
+      ],
+      "structural_triggers": [
+        {
+          "id": "tech-strategic-complex-legacy-modernisation:structural:1",
+          "kind": "structural",
+          "condition": "Application dependencies and vendor/IP obligations prevent safe estate change",
+          "observable": "Authorised estate inventory, interface map, data lineage, code/support rights and supplier contracts",
+          "rival_explanation": "A supported upgrade or managed retention strategy may remain the best option",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Revalidate the operating baseline after service, ownership or solution changes; no numeric half-life",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        },
+        {
+          "id": "tech-strategic-complex-legacy-modernisation:structural:2",
+          "kind": "structural",
+          "condition": "Several modernisation programmes compete for service, data and transition capacity",
+          "observable": "Map cross-programme milestones, risk decisions, business ownership and cutover constraints",
+          "rival_explanation": "Existing portfolio governance may already sequence the work safely",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Revalidate the operating baseline after service, ownership or solution changes; no numeric half-life",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        }
+      ],
+      "event_triggers": [
+        {
+          "id": "tech-strategic-complex-legacy-modernisation:event:1",
+          "kind": "event",
+          "condition": "Customer confirms application retirement or estate migration priorities",
+          "observable": "Dated customer-approved priorities with affected services, not an inferred open tender",
+          "rival_explanation": "A published ambition may already be covered by incumbent delivery",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Reconfirm dated catalyst, scope and current decision window; an announcement can expire or already be addressed",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        },
+        {
+          "id": "tech-strategic-complex-legacy-modernisation:event:2",
+          "kind": "event",
+          "condition": "Customer confirms a vendor support, contract exit or platform replacement decision",
+          "observable": "Verified component/version, rights, support dates, decision owner and continuity obligations",
+          "rival_explanation": "Extended support, renegotiation or a bounded upgrade may be more valuable than replacement",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Reconfirm dated catalyst, scope and current decision window; an announcement can expire or already be addressed",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        }
+      ],
+      "entry_plays": [
+        {
+          "id": "tech-strategic-complex-legacy-modernisation:play:1",
+          "name": "Estate options and dependency decision case",
+          "buyer": "CIO sponsor, enterprise architect and service owner",
+          "point_of_view": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite.",
+          "conversation": "Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+          "workshop_or_proof": "Compare retain/retire/rehost/replatform/refactor/replace for one representative dependency cluster with service impact, cost ownership and IP rights.",
+          "evidence_needed": [
+            "Customer-permitted scope and baseline",
+            "Verified retired run/support costs and contract obligations",
+            "Service parity, reconciliation and recovery observations",
+            "Lead time and dependency/ownership closure",
+            "Permissioned seller delivery, rights and capacity evidence"
+          ],
+          "disconfirming_question": "Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+          "follow_on": "A sequenced estate roadmap with customer-owned option decisions and vendor obligations",
+          "stop_conditions": [
+            "Missing application ownership or code rights",
+            "no supported transition path",
+            "replacement is an assumed conclusion"
+          ]
+        },
+        {
+          "id": "tech-strategic-complex-legacy-modernisation:play:2",
+          "name": "Multi-vendor transition and rollback rehearsal",
+          "buyer": "Transition lead, application owners and vendor management",
+          "point_of_view": "Technical equivalence is insufficient if the business service cannot survive the transition.",
+          "conversation": "How will suppliers, operations and data owners prove continuity and reverse an unsafe cutover?",
+          "workshop_or_proof": "Rehearse a non-production migration slice, data reconciliation, service hand-offs and rollback with representative vendor participation.",
+          "evidence_needed": [
+            "Customer-permitted scope and baseline",
+            "Verified retired run/support costs and contract obligations",
+            "Service parity, reconciliation and recovery observations",
+            "Lead time and dependency/ownership closure",
+            "Permissioned seller delivery, rights and capacity evidence"
+          ],
+          "disconfirming_question": "Do dependencies, reconciliation or operational readiness make this transition uneconomic or unsafe?",
+          "follow_on": "Separately authorised modernisation increments and operational handover gates",
+          "stop_conditions": [
+            "Rollback or reconciliation fails, incumbent rights are unresolved, or business continuity cannot be demonstrated"
+          ]
+        }
+      ],
+      "validation_tests": [
+        {
+          "test": "Compare retain/retire/rehost/replatform/refactor/replace for one representative dependency cluster with service impact, cost ownership and IP rights.",
+          "acceptance": "Customer approves decision-grade evidence and comparison against verified retired run/support costs and contract obligations; no invented numeric threshold",
+          "failure_action": "Can a supported upgrade, retention or retirement remove the constraint with less transition risk? Stop or prefer the simpler option if disconfirmed."
+        },
+        {
+          "test": "Rehearse a non-production migration slice, data reconciliation, service hand-offs and rollback with representative vendor participation.",
+          "acceptance": "Customer approves decision-grade evidence and comparison against verified retired run/support costs and contract obligations; no invented numeric threshold",
+          "failure_action": "Do dependencies, reconciliation or operational readiness make this transition uneconomic or unsafe? Stop or prefer the simpler option if disconfirmed."
+        }
+      ]
+    },
+    {
+      "id": "tech-strategic-social-value-esg",
+      "version": 1,
+      "taxonomy_version": 2,
+      "name": "Social Value & ESG Transformation",
+      "parent_id": "tech-family-consulting",
+      "family": "consulting",
+      "subindustries": [
+        "consulting",
+        "advisory",
+        "data",
+        "managed",
+        "channel"
+      ],
+      "districts": [
+        "services",
+        "ai",
+        "channels"
+      ],
+      "stage": "deep",
+      "status": "active",
+      "strategic_priority": 5,
+      "synonyms": [
+        "Social value",
+        "ESG transformation",
+        "Environmental social governance",
+        "Sustainability transformation",
+        "Carbon measurement",
+        "Community outcomes"
+      ],
+      "capability_tags": [
+        "Social Value & ESG Transformation",
+        "Social value",
+        "ESG transformation",
+        "Environmental social governance",
+        "Sustainability transformation",
+        "Carbon measurement",
+        "Community outcomes"
+      ],
+      "source_ids": [
+        "ppn002",
+        "ghg-corporate"
+      ],
+      "source_lineage": [
+        {
+          "id": "ppn002",
+          "title": "Cabinet Office PPN 002 social value",
+          "url": "https://www.gov.uk/government/publications/ppn-002-taking-account-of-social-value-in-the-award-of-contracts",
+          "supports": "Social value in in-scope central government contract awards; not all UK procurement, private contracts or devolved jurisdictions",
+          "reviewed_on": "2026-11-13",
+          "published_on": null,
+          "rights": "Public link and original paraphrase only; no standard text copied or professional certification rights implied",
+          "content_hash": null,
+          "boundary": "Taxonomy and method reference only; authored playbooks are hypotheses, not seller proof, customer demand or legal advice"
+        },
+        {
+          "id": "ghg-corporate",
+          "title": "GHG Protocol Corporate Standard",
+          "url": "https://ghgprotocol.org/corporate-standard",
+          "supports": "Organisational greenhouse-gas inventory boundaries and accounting vocabulary; inventory is not proof of emissions reduction, legal compliance or assurance",
+          "reviewed_on": "2026-11-13",
+          "published_on": null,
+          "rights": "Public link and original paraphrase only; no standard text copied or professional certification rights implied",
+          "content_hash": null,
+          "boundary": "Taxonomy and method reference only; authored playbooks are hypotheses, not seller proof, customer demand or legal advice"
+        }
+      ],
+      "jurisdiction": {
+        "territories": [
+          "GB"
+        ],
+        "base_method": "Country-neutral enterprise method; GB is the initial reviewed discovery overlay, not a delivery entitlement",
+        "overlays": {
+          "GB": {
+            "status": "Initial discovery context; legal, procurement and data applicability require review"
+          }
+        },
+        "applicability": "Customer-specific rights, residency, sector regulation and procurement scope must be established",
+        "excluded": "No automatic cross-border delivery, professional certification or universal legal-duty claim"
+      },
+      "owner": "FLORA authored commercial methods; owner-priority coverage",
+      "reviewed_on": "2026-11-13",
+      "classification": "illustrative general commercial archetype; not company capability or customer demand",
+      "revision_history": [
+        {
+          "version": 1,
+          "date": "2026-11-13",
+          "change": "Initial owner-priority enterprise playbook; existing narrower Offer IDs remain unchanged"
+        }
+      ],
+      "outcome": "Turn material social and environmental commitments into owned, measurable delivery and reporting practices with defensible boundaries, attribution and stakeholder accountability.",
+      "ideal_customer_profile": "Enterprises with material social/environmental outcomes or explicitly applicable customer procurement requirements, a responsible sponsor and lawful measurement access; not a generic ESG badge, offset claim or assumed bid-winning service.",
+      "target_segments": [
+        "Suppliers evaluating in-scope central government social-value commitments",
+        "Enterprises improving material environmental inventory and accountability",
+        "Organisations with supplier/community outcome delivery responsibilities"
+      ],
+      "target_sectors": [
+        "Technology",
+        "Banking",
+        "Aviation"
+      ],
+      "buyer_roles": [
+        "Chief sustainability / social-value sponsor",
+        "Procurement and contract-delivery owner",
+        "CFO / reporting and assurance partner",
+        "HR / community-outcomes lead",
+        "Data governance and supplier-management leads"
+      ],
+      "buying_roles": [
+        {
+          "role": "Chief sustainability / social-value sponsor",
+          "context": "Executive sponsor hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "Procurement and contract-delivery owner",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "CFO / reporting and assurance partner",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "HR / community-outcomes lead",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        },
+        {
+          "role": "Data governance and supplier-management leads",
+          "context": "Business, financial, technical or risk influencer hypothesis",
+          "named_person": null
+        }
+      ],
+      "affected_functions": [
+        "Chief sustainability / social-value sponsor",
+        "Procurement and contract-delivery owner",
+        "CFO / reporting and assurance partner",
+        "HR / community-outcomes lead",
+        "Data governance and supplier-management leads"
+      ],
+      "required_capabilities": [
+        "Social-value outcome and stakeholder design",
+        "Environmental inventory and data-quality methods",
+        "Procurement/jurisdiction applicability review with qualified advisers",
+        "Supplier/community delivery governance and consent",
+        "Measurement, attribution and assurance coordination"
+      ],
+      "delivery_model": "Customer-owned discovery and value case → options/design → separately authorised implementation waves → operating adoption and benefits review",
+      "delivery_specialisms": [],
+      "commercial_model": "Scoped social/environmental outcome and operating-model transformation with separate delivery, measurement and assurance responsibilities; no contingent bid-win or guaranteed carbon/financial return",
+      "constraints": [
+        "PPN 002 is not a universal UK, private-sector or devolved-procurement duty; verify the actual contracting authority, scope, documents and applicable policy",
+        "GHG inventory, ESG reporting, social value and actual emissions reduction are different claims",
+        "No legal opinion, accreditation, carbon neutrality, bid access or customer demand asserted",
+        "No personal/community data collection, offsets or environmental claims without separate rights and review"
+      ],
+      "exclusions": [
+        "Policy is out of scope, outcomes are not additional/material, existing reporting suffices, or attribution/measurement cannot withstand review",
+        "No seller capability, account demand, access, funding or procurement approval established"
+      ],
+      "differentiation_to_validate": [
+        "Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+        "Can the seller substantiate relevant enterprise-scale delivery, rights, capacity and independent review for this scope?"
+      ],
+      "seller_validation": {
+        "proof_required": [
+          "Permissioned comparable delivery reference and measured outcome with limitations",
+          "Named enterprise programme, domain and transition/adoption capacity",
+          "Verified IP, data, partner and professional rights; declared subcontractor dependencies",
+          "Independent review of claims, scope, conflicts and commercial assumptions"
+        ],
+        "approval": "Separate employer reviewer validates seller delivery and rights; public method references are not proof"
+      },
+      "adjacent_offer_ids": [
+        "tech-advisory-07",
+        "tech-data-01",
+        "tech-channel-02",
+        "tech-consulting-01"
+      ],
+      "follow_on_opportunities": [
+        {
+          "name": "Sustainable IT measurement",
+          "condition": "A technology-specific environmental boundary and decision need are established; catalogue-only follow-on requires a new authored scope",
+          "offer_id": "tech-advisory-07",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        },
+        {
+          "name": "Governed data product",
+          "condition": "A demonstrated quality/ownership gap affects a material outcome",
+          "offer_id": "tech-data-01",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        },
+        {
+          "name": "Responsible asset disposition",
+          "condition": "An authorised retirement cohort and downstream rights are verified",
+          "offer_id": "tech-channel-02",
+          "status": "Conditional hypothesis; not customer request or approved cross-sell"
+        }
+      ],
+      "economic_value": {
+        "mechanisms": [
+          "More credible delivery of material social and environmental commitments",
+          "Less avoidable reporting rework and unclear supplier accountability",
+          "Better decisions about evidenced environmental improvements and delivery costs"
+        ],
+        "measures": [
+          "Verified additional social outcomes within a stated contract/boundary",
+          "Inventory coverage, factor provenance and reconciliation exceptions",
+          "Observed delivery cost, reporting effort and attributable absolute environmental change"
+        ],
+        "method": "Measure social, environmental and financial outcomes separately against an owned baseline. Compare delivery and reporting costs where evidenced; monetise social/carbon outcomes only with an explicitly approved, transparent method. Do not infer contract wins, automatic carbon savings or regulatory acceptance.",
+        "costs": [
+          "Outcome delivery and partner coordination",
+          "Data collection, consent, measurement and verification",
+          "Operating/reporting controls and any separately scoped technology"
+        ],
+        "disconfirmation": "Policy is out of scope, outcomes are not additional/material, existing reporting suffices, or attribution/measurement cannot withstand review",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established",
+        "amount": null
+      },
+      "disconfirming_evidence": [
+        "Existing social-value delivery and reporting may already be credible and sufficient",
+        "A narrower boundary or better existing process may meet the need without a platform programme",
+        "The policy may not apply, the procurement may be closed, or another supplier may own delivery",
+        "A new report or pledge does not establish a transformation need or regulatory obligation",
+        "Policy is out of scope, outcomes are not additional/material, existing reporting suffices, or attribution/measurement cannot withstand review"
+      ],
+      "legacy_pattern": "structural-review",
+      "research_context_claim_ids": [],
+      "structural_triggers": [
+        {
+          "id": "tech-strategic-social-value-esg:structural:1",
+          "kind": "structural",
+          "condition": "Social or environmental commitments lack delivery ownership, boundaries and verifiable baselines",
+          "observable": "Review permitted commitments, stakeholders, activity boundaries, measurement methods and accountable owners",
+          "rival_explanation": "Existing social-value delivery and reporting may already be credible and sufficient",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Revalidate the operating baseline after service, ownership or solution changes; no numeric half-life",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        },
+        {
+          "id": "tech-strategic-social-value-esg:structural:2",
+          "kind": "structural",
+          "condition": "Supplier and business-unit data cannot support an agreed material reporting or delivery outcome",
+          "observable": "Inspect consented data lineage, coverage, exclusions and assurance gaps",
+          "rival_explanation": "A narrower boundary or better existing process may meet the need without a platform programme",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Revalidate the operating baseline after service, ownership or solution changes; no numeric half-life",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        }
+      ],
+      "event_triggers": [
+        {
+          "id": "tech-strategic-social-value-esg:event:1",
+          "kind": "event",
+          "condition": "Customer confirms a procurement requirement whose social-value policy scope has been checked",
+          "observable": "Dated tender/contract documents, contracting authority, jurisdiction, evaluation scope and approved access",
+          "rival_explanation": "The policy may not apply, the procurement may be closed, or another supplier may own delivery",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Reconfirm dated catalyst, scope and current decision window; an announcement can expire or already be addressed",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        },
+        {
+          "id": "tech-strategic-social-value-esg:event:2",
+          "kind": "event",
+          "condition": "Customer authorises a material commitment, inventory or reporting-method review",
+          "observable": "Dated board/contract mandate, reporting boundary, stakeholder needs and accountable review decision",
+          "rival_explanation": "A new report or pledge does not establish a transformation need or regulatory obligation",
+          "importance": "Customer-owned materiality and value must be established; no automatic score, deadline or buying urgency",
+          "decay": "Reconfirm dated catalyst, scope and current decision window; an announcement can expire or already be addressed",
+          "evaluation": "Not observed; authored pattern to test, not an account fact"
+        }
+      ],
+      "entry_plays": [
+        {
+          "id": "tech-strategic-social-value-esg:play:1",
+          "name": "Commitment-to-delivery social-value map",
+          "buyer": "Procurement/contract owner and social-value sponsor",
+          "point_of_view": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge.",
+          "conversation": "Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+          "workshop_or_proof": "Map permitted commitments to delivery owners, partners, consented evidence and an attribution/verification plan; check policy and jurisdiction first.",
+          "evidence_needed": [
+            "Customer-permitted scope and baseline",
+            "Verified additional social outcomes within a stated contract/boundary",
+            "Inventory coverage, factor provenance and reconciliation exceptions",
+            "Observed delivery cost, reporting effort and attributable absolute environmental change",
+            "Permissioned seller delivery, rights and capacity evidence"
+          ],
+          "disconfirming_question": "Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+          "follow_on": "Separately scoped social-value delivery and outcome-verification programme",
+          "stop_conditions": [
+            "No applicable requirement or stakeholder outcome",
+            "no delivery/partner rights",
+            "additionality cannot be evidenced"
+          ]
+        },
+        {
+          "id": "tech-strategic-social-value-esg:play:2",
+          "name": "Environmental boundary and decision baseline",
+          "buyer": "Sustainability lead and CFO reporting partner",
+          "point_of_view": "An emissions inventory supports decisions but is not proof of decarbonisation or legal compliance.",
+          "conversation": "What organisational/activity boundary and decision require better environmental measurement?",
+          "workshop_or_proof": "Review a permitted sample of activity data, emissions factors, ownership, uncertainty and reconciliation; distinguish absolute change, intensity and boundary changes.",
+          "evidence_needed": [
+            "Customer-permitted scope and baseline",
+            "Verified additional social outcomes within a stated contract/boundary",
+            "Inventory coverage, factor provenance and reconciliation exceptions",
+            "Observed delivery cost, reporting effort and attributable absolute environmental change",
+            "Permissioned seller delivery, rights and capacity evidence"
+          ],
+          "disconfirming_question": "Would a transparent correction of existing data and boundaries meet the need without new technology or a reduction claim?",
+          "follow_on": "Gated data ownership, measurement controls and separately authorised environmental improvement programme",
+          "stop_conditions": [
+            "No lawful data access, unsupported factors, double counting or an unreviewed green/reduction claim"
+          ]
+        }
+      ],
+      "validation_tests": [
+        {
+          "test": "Map permitted commitments to delivery owners, partners, consented evidence and an attribution/verification plan; check policy and jurisdiction first.",
+          "acceptance": "Customer approves decision-grade evidence and comparison against verified additional social outcomes within a stated contract/boundary; no invented numeric threshold",
+          "failure_action": "Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity? Stop or prefer the simpler option if disconfirmed."
+        },
+        {
+          "test": "Review a permitted sample of activity data, emissions factors, ownership, uncertainty and reconciliation; distinguish absolute change, intensity and boundary changes.",
+          "acceptance": "Customer approves decision-grade evidence and comparison against verified additional social outcomes within a stated contract/boundary; no invented numeric threshold",
+          "failure_action": "Would a transparent correction of existing data and boundaries meet the need without new technology or a reduction claim? Stop or prefer the simpler option if disconfirmed."
+        }
+      ]
     }
   ],
   "families": [
     {
       "id": "tech-family-consulting",
-      "name": "IT consulting & systems integration",
+      "name": "Digital Transformation & Consulting",
       "subindustry_id": "consulting",
       "parent_id": null
     },
@@ -10283,5 +12026,59 @@
       "subindustry_id": "advisory",
       "parent_id": null
     }
+  ],
+  "revision_history": [
+    {
+      "version": 1,
+      "change": "84 types / 24 developed; retained without changing any existing row or ID"
+    },
+    {
+      "version": 2,
+      "date": "2026-11-13",
+      "change": "Five owner-priority strategic programmes; customer-facing Consulting label and separate Systems Integration delivery specialism"
+    }
+  ],
+  "delivery_specialisms": [
+    {
+      "id": "systems-integration",
+      "label": "Systems Integration",
+      "classification": "Delivery specialism; seller preference, not verified company capability",
+      "scope": "Architecture, interfaces, data migration, multi-vendor orchestration and controlled transition; can support several customer-facing Offer categories"
+    }
+  ],
+  "offer_delivery_specialisms": {
+    "tech-consulting-02": [
+      "systems-integration"
+    ],
+    "tech-engineering-01": [
+      "systems-integration"
+    ],
+    "tech-engineering-02": [
+      "systems-integration"
+    ],
+    "tech-software-01": [
+      "systems-integration"
+    ],
+    "tech-cloud-01": [
+      "systems-integration"
+    ],
+    "tech-strategic-digital-transformation": [
+      "systems-integration"
+    ],
+    "tech-strategic-ai-first-transformation": [
+      "systems-integration"
+    ],
+    "tech-strategic-cybersecurity-resilience": [],
+    "tech-strategic-complex-legacy-modernisation": [
+      "systems-integration"
+    ],
+    "tech-strategic-social-value-esg": []
+  },
+  "strategic_priorities": [
+    "tech-strategic-digital-transformation",
+    "tech-strategic-ai-first-transformation",
+    "tech-strategic-cybersecurity-resilience",
+    "tech-strategic-complex-legacy-modernisation",
+    "tech-strategic-social-value-esg"
   ]
 }

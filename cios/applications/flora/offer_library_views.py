@@ -8,6 +8,11 @@ def playbook_details(row):
     """Original authored method, distinct from editable seller declarations."""
     body = '<details><summary>See the sales playbook</summary>'
     body += '<p>' + e(row['ideal_customer_profile']) + '</p><p><strong>Delivery & commercial model</strong> · ' + e(row['delivery_model'] + '. ' + row['commercial_model']) + '</p>'
+    if row.get('economic_value'):
+        value = row['economic_value']
+        body += '<h3>Economic value to validate</h3><p>' + e('; '.join(value['mechanisms'])) + '</p><p>Measure: ' + e('; '.join(value['measures'])) + '</p><p>' + e(value['method']) + '</p><p>Include costs: ' + e('; '.join(value['costs'])) + '</p><p>Disconfirm if: ' + e(value['disconfirmation']) + '</p>'
+    if row.get('variants'):
+        body += '<h3>Programme variants</h3><ul>' + ''.join('<li>' + e(v['name'] + ' · ' + v['focus']) + '</li>' for v in row['variants']) + '</ul>'
     for key, label in (('structural_triggers', 'Structural conditions to validate'), ('event_triggers', 'Buying events to verify')):
         body += '<h3>' + label + '</h3><ul>'
         for p in row[key]:
@@ -18,6 +23,8 @@ def playbook_details(row):
         body += '<section><h4>' + e(p['name']) + '</h4><p>' + e(p['buyer'] + ' · ' + p['point_of_view']) + '</p><p>' + e(p['conversation']) + '</p><p>' + e(p['workshop_or_proof']) + '</p><p><strong>Test the fit</strong> · ' + e(p['disconfirming_question']) + '</p><p>Evidence needed: ' + e('; '.join(p['evidence_needed'])) + '</p><p>Stop if: ' + e('; '.join(p['stop_conditions'])) + '</p><p>' + e(p['follow_on']) + '</p></section>'
     body += '<h3>Differentiate with proof</h3><ul>' + ''.join('<li>' + e(t) + '</li>' for t in row['differentiation_to_validate']) + '</ul>'
     body += '<p>Seller proof required: ' + e('; '.join(row['seller_validation']['proof_required'])) + '</p><p>Constraints: ' + e('; '.join(row['constraints'])) + '</p><p>Do not claim: ' + e('; '.join(row['exclusions'])) + '</p>'
+    if row.get('follow_on_opportunities'):
+        body += '<h3>Conditional follow-on opportunities</h3><ul>' + ''.join('<li>' + e(f["name"] + ' · ' + f["condition"] + ' · ' + f["status"]) + '</li>' for f in row['follow_on_opportunities']) + '</ul>'
     return body + '</details>'
 
 
@@ -39,15 +46,19 @@ def onboarding(state, q, headers):
     if selected:
         selected = library.categories(selected)
     data = library.catalogue()
+    specialisms = list(mission.technology_delivery_specialisms) if selected else []
+    specialisms = library.specialisms(specialisms)
     common = hidden('employer_id', employer['id']) + hidden('employer_version', employer['version']) + hidden('mission_version', mission.version if mission else 0)
     options = ('<option value="">Choose a category</option>' if not selected else '') + ''.join('<option value="' + e(c['id']) + '" ' + ('selected' if selected and selected[0] == c['id'] else '') + '>' + e(c['label']) + '</option>' for c in data['subindustries'])
     checks = ''.join('<label class="library-check"><input type="checkbox" name="additional" value="' + e(c['id']) + '" ' + ('checked' if c['id'] in selected[1:] else '') + '><span>' + e(c['label']) + '</span></label>' for c in data['subindustries'])
-    category_form = form('/onboard-preferences', common + '<label>Primary technology category<select name="primary" required>' + options + '</select></label><details><summary>Also work in other categories?</summary>' + checks + '</details>', 'Find relevant offers')
+    delivery_checks = ''.join('<label class="library-check"><input type="checkbox" name="specialisms" value="' + e(c['id']) + '" ' + ('checked' if c['id'] in specialisms else '') + '><span>' + e(c['label']) + '</span></label>' for c in data['delivery_specialisms'])
+    delivery_controls = '<details><summary>Delivery specialism (optional)</summary>' + delivery_checks + '<p>A private preference; delivery capability and rights still require proof.</p></details>'
+    category_form = form('/onboard-preferences', common + '<label>Primary technology category<select name="primary" required>' + options + '</select></label><details><summary>Also work in other categories?</summary>' + checks + '</details>' + delivery_controls, 'Find relevant offers')
     if not selected:
         return '<p class="eyebrow">1 · Your business</p><p>Choose what your company works on. You can select more than one category.</p>' + category_form
     body = '<p class="eyebrow">2 · Choose your starting points</p><p>Select examples to shape into your own offers. Add delivery proof before independent company review.</p><details><summary>Change business categories</summary>' + category_form + '</details>'
     body += '<form method="get" action="' + url('/start') + '"><label>Find an offer<input name="search" maxlength="120" value="' + e(q.get('search', ''), quote=True) + '" type="search"></label><button class="quiet" type="submit">Search</button></form>'
-    rows = library.suggestions(selected, q.get('search', ''))
+    rows = library.suggestions(selected, q.get('search', ''), specialisms)
     register_sources(rows)
     cards = ''
     family_labels = {c['id']: c['label'] for c in data['subindustries']}
@@ -58,7 +69,9 @@ def onboarding(state, q, headers):
         body += form('/onboard-adopt', common + '<div class="offer-grid">' + cards + '</div><label class="library-check"><input type="checkbox" name="confirmed" value="yes" required><span>I will validate these private examples against my company’s capabilities and rights.</span></label>', 'Create my private example offers')
     else:
         body += '<p>No developed playbook matches that search. Try a broader term or another business category.</p>'
-    body += '<details><summary>Full library · 84 offer types, 24 developed playbooks</summary><p>Catalogue-only types are shown for coverage and cannot yet be adopted. Each developed playbook appears once, even when it spans categories.</p>'
+    total = len(data['offers'])
+    deep = sum(r['stage'] == 'deep' for r in data['offers'])
+    body += f'<details><summary>Full library · {total} offer types, {deep} developed playbooks</summary><p>Catalogue-only types are shown for coverage and cannot yet be adopted. Each developed playbook appears once, even when it spans categories.</p>'
     for category in data['subindustries']:
         body += '<h3>' + e(category['label']) + '</h3><ul>' + ''.join('<li>' + e(r['name']) + (' · developed' if r['stage'] == 'deep' else ' · catalogue only') + '</li>' for r in data['offers'] if r['family'] == category['id']) + '</ul>'
     return body + '</details>'
@@ -66,10 +79,10 @@ def onboarding(state, q, headers):
 
 def submit(suffix, values, headers):
     from .offers_views import url
-    schemas = {'/onboard-company': {'employer_id'}, '/onboard-preferences': {'employer_id', 'employer_version', 'mission_version', 'primary', 'additional'}, '/onboard-adopt': {'employer_id', 'employer_version', 'mission_version', 'templates', 'confirmed'}}
+    schemas = {'/onboard-company': {'employer_id'}, '/onboard-preferences': {'employer_id', 'employer_version', 'mission_version', 'primary', 'additional', 'specialisms'}, '/onboard-adopt': {'employer_id', 'employer_version', 'mission_version', 'templates', 'confirmed'}}
     if suffix not in schemas or set(values) - (schemas[suffix] | {'csrf'}):
         raise ValueError('Unsupported onboarding fields')
-    multiple = {'additional'} if suffix == '/onboard-preferences' else ({'templates'} if suffix == '/onboard-adopt' else set())
+    multiple = {'additional', 'specialisms'} if suffix == '/onboard-preferences' else ({'templates'} if suffix == '/onboard-adopt' else set())
     if any(not isinstance(v, list) or not 1 <= len(v) <= (12 if k in multiple else 1) or any(not isinstance(x, str) or len(x) > 240 for x in v) for k, v in values.items()):
         raise ValueError('Invalid or duplicate onboarding fields')
     def one(k):
@@ -83,7 +96,7 @@ def submit(suffix, values, headers):
         primary = one('primary')
         additional = values.get('additional', [])
         if len(set(additional)) != len(additional): raise ValueError('Duplicate business category')
-        offers.configure_library([primary] + [v for v in additional if v != primary], *args, headers=headers)
+        offers.configure_library([primary] + [v for v in additional if v != primary], *args, delivery_specialisms=values.get('specialisms', []), headers=headers)
         return url('/start')
     refs = []
     for token in values.get('templates', []):

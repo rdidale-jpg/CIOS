@@ -2,13 +2,17 @@
 
 Issue [#587](https://github.com/rdidale-jpg/CIOS/issues/587), based directly on validated main `3b8bd2c5e5177c012826658f820eeeb4ea2705f5`. **Draft review only; no merge or deployment.**
 
-**84 distinct commercial offer types across 12 families; 24 developed playbooks, two per family.** Each developed offer has two structural patterns, two event patterns and two entry plays, including observable signals, alternatives, proof, disconfirming questions, stops and delivery/rights constraints. The other 60 types have distinct outcomes and honest catalogue-only labels, and cannot yet be adopted.
+**89 distinct commercial offer types across 12 families; 29 developed playbooks.** The original 84 types / 24 methods are retained, with five owner-priority enterprise programmes added. Each developed offer has two structural patterns, two event patterns and two entry plays, including observable signals, alternatives, proof, disconfirming questions, stops and delivery/rights constraints. The other 60 types have distinct outcomes and honest catalogue-only labels, and cannot yet be adopted.
 
 The existing Offers workspace now supports authorised company → multiple business categories → ranked/searchable examples → private versioned portfolio → existing discovery and independent employer review. Examples establish neither company capability nor customer demand. Original library bibliography is separate from private seller proof. Existing custom offers, retirement and protected variations remain available.
 
 [Complete coverage and per-playbook assessment](Coverage.md) · [Primary-source bibliography](Sources.md) · [Architecture, controls and rollback](Architecture.md) · [Validation and reproduction](Validation.md)
 
-## Before / after gallery
+[**Updated five-priority coverage, complete playbooks, matches and desktop/iPad/mobile gallery**](strategic-priorities/README.md)
+
+The current category is **Digital Transformation & Consulting**, with separately selectable **Systems Integration** delivery specialism. Original Offer IDs and existing approved snapshots remain valid.
+
+## Original Sprint A before / after gallery
 
 Before images use an isolated checkout of the exact validated main release. After images use example-only employers, sellers, proof and independent reviewers. No actual company proposition, customer lead or production data is depicted.
 

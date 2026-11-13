@@ -37,7 +37,7 @@ def template(identifier, version=None):
 
 def source_ref(row):
     return {'id': row['id'], 'version': row['version'], 'digest': fingerprint(row),
-            'taxonomy_version': catalogue()['version'], 'classification': 'seller-declared adoption of a general commercial method'}
+            'taxonomy_version': row['taxonomy_version'], 'classification': 'seller-declared adoption of a general commercial method'}
 
 
 def current(ref):
@@ -47,15 +47,33 @@ def current(ref):
         return False
 
 
-def suggestions(selected, search=''):
+def specialisms(values):
+    if not isinstance(values, (list, tuple)) or any(type(v) is not str for v in values):
+        raise ValueError('Choose supported delivery specialisms')
+    allowed = {r['id'] for r in catalogue().get('delivery_specialisms', [])}
+    if len(values) > len(allowed) or len(set(values)) != len(values) or not set(values) <= allowed:
+        raise ValueError('Choose distinct supported delivery specialisms')
+    return list(values)
+
+
+def suggestions(selected, search='', delivery_specialisms=()):
     selected = categories(selected)
+    delivery_specialisms = specialisms(delivery_specialisms)
     if not isinstance(search, str) or len(search) > 120:
         raise ValueError('Use a short offer search')
     q = search.casefold().strip()
-    rows = [r for r in catalogue()['offers'] if r['stage'] == 'deep' and r['status'] == 'active'
-            and set(selected) & set(r['subindustries'])
-            and (not q or q in ' '.join([r['name'], r['outcome'], *r['synonyms'], *r['capability_tags']]).casefold())]
-    return sorted(rows, key=lambda r: (selected[0] not in r['subindustries'], -len(set(selected) & set(r['subindustries'])), r['family'], r['name']))
+    data = catalogue()
+    crosswalk = data.get('offer_delivery_specialisms', {})
+    labels = {r['id']: r['label'] for r in data.get('delivery_specialisms', [])}
+    def searchable(row):
+        return ' '.join([row['name'], row['outcome'], *row['synonyms'], *row['capability_tags'],
+                         *(labels[s] for s in crosswalk.get(row['id'], []))]).casefold()
+    rows = [r for r in data['offers'] if r['stage'] == 'deep' and r['status'] == 'active'
+            and set(selected) & set(r['subindustries']) and (not q or q in searchable(r))]
+    return sorted(rows, key=lambda r: (r.get('strategic_priority', 100),
+        selected[0] not in r['subindustries'],
+        not bool(set(delivery_specialisms) & set(crosswalk.get(r['id'], []))),
+        -len(set(selected) & set(r['subindustries'])), r['family'], r['name']))
 
 
 def offer_content(row):

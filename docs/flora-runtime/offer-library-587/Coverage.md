@@ -1,27 +1,27 @@
 # Commercial taxonomy coverage and playbook assessment
 
-84 distinct types; 24 developed examples across all 12 families. Stable IDs refer to shared library archetypes, not canonical participant capabilities. All deep examples have 2 structural patterns, 2 event patterns, 2 entry plays, a bounded validation test and explicit seller proof/rights constraints. Catalogue-only rows cannot be adopted.
+**89 distinct types; 29 developed playbooks.** The original 84 types / 24 methods remain unchanged; [five strategic priorities](strategic-priorities/README.md) add enterprise programme coverage. Sixty catalogue-only types remain unavailable for adoption. No seller capability, customer demand or unsupported market/value figure is implied.
 
 ## Family / visual district crosswalk
 
-The eight existing Technology districts are a presentation lens, not exclusive supplier classification. Every developed example spans at least two supplier categories; each remains one ID. Parent family IDs are explicit in the asset. Existing industry research, 80-provider directory and research status are untouched.
+Customer-facing category `consulting` is now **Digital Transformation & Consulting**. **Systems Integration** is an optional overlapping delivery specialism, not an exclusive supplier category or verified capability. All original category IDs and eight visual districts remain; no SIC/NAICS or research reclassification.
 
 | Family | Primary district | Types | Developed |
 |---|---|---:|---:|
-| IT consulting & systems integration | services | 7 | 2 |
+| Digital Transformation & Consulting | services | 9 | 4 |
 | Managed IT & outsourcing | services | 7 | 2 |
-| Software engineering & application modernisation | applications | 7 | 2 |
+| Software engineering & application modernisation | applications | 8 | 3 |
 | Enterprise software & platforms | applications | 7 | 2 |
 | Cloud, data centres & infrastructure | cloud | 7 | 2 |
-| Cybersecurity, resilience & identity | cyber | 7 | 2 |
-| Data, analytics, AI & automation | ai | 7 | 2 |
+| Cybersecurity, resilience & identity | cyber | 8 | 3 |
+| Data, analytics, AI & automation | ai | 8 | 3 |
 | Networking, telecoms & connectivity | infrastructure | 7 | 2 |
 | Hardware, devices & digital workplace | infrastructure | 7 | 2 |
 | Semiconductors, advanced compute & frontier technology | frontier | 7 | 2 |
 | Distribution, channel, procurement & lifecycle | channels | 7 | 2 |
 | Technology advisory & specialist engineering | services | 7 | 2 |
 
-## All 84 types
+## All 89 types
 
 | Stable library ID | Name | Customer outcome | Stage |
 |---|---|---|---|
@@ -109,12 +109,17 @@ The eight existing Technology districts are a presentation lens, not exclusive s
 | `tech-advisory-05` | Independent programme assurance | Provide independent challenge to a technology programme decision and its evidence | Catalogue only |
 | `tech-advisory-06` | Safety-related software process review | Review safety-related software processes without claiming product certification | Catalogue only |
 | `tech-advisory-07` | Sustainable IT measurement advisory | Measure an agreed IT environmental boundary with transparent data limitations | Catalogue only |
+| `tech-strategic-digital-transformation` | Enterprise Digital Transformation | Redesign an end-to-end business service and its operating model so an accountable enterprise sponsor can realise and sustain measurable customer and operational value. | Developed / adoptable example |
+| `tech-strategic-ai-first-transformation` | AI-first Business Transformation | Redesign a business process, roles and controls around a justified AI-enabled operating model, with measurable benefits, human accountability and sustained organisational adoption. | Developed / adoptable example |
+| `tech-strategic-cybersecurity-resilience` | Enterprise Cybersecurity & Resilience | Improve an enterprise’s ability to protect and recover a critical business service through a prioritised, evidenced cyber control, resilience and assurance programme. | Developed / adoptable example |
+| `tech-strategic-complex-legacy-modernisation` | Complex Legacy Application Modernisation | Modernise a complex application estate through a defensible retain, retire, rehost, replatform, refactor or replace strategy while preserving critical-service continuity and accountable value. | Developed / adoptable example |
+| `tech-strategic-social-value-esg` | Social Value & ESG Transformation | Turn material social and environmental commitments into owned, measurable delivery and reporting practices with defensible boundaries, attribution and stakeholder accountability. | Developed / adoptable example |
 
-## Individual deep-playbook quality assessment
+## Individual developed-playbook quality assessment
 
-This is a scoped implementation/content review, not independent verification of company delivery ability or customer demand. Each row identifies the differentiating commercial question and a specific proof. Common governance wording is intentionally shared; the customer outcome, buying conditions, rivals, artefact, buyer and first disconfirming test differ. No invented financial estimates or performance guarantees.
+Scoped content review, not independent verification of seller delivery or buyer demand. Each method has two structural and two event patterns, two entry plays and rights/stop constraints. The original 24 have one bounded validation proof; the five strategic programmes each have two tests and a distinct whole-programme economic method.
 
-| Playbook | Specific first proof / artefact | Disconfirming question | Commercial shape |
+| Playbook | First bounded proof | Disconfirming question | Commercial shape |
 |---|---|---|---|
 | `tech-consulting-01` · Technology operating-model diagnostic | Facilitated decision simulation using one authorised service case | Which decision is actually blocked by ownership rather than capacity? | Fixed-scope advisory with separately agreed facilitation days |
 | `tech-consulting-02` · Integration roadmap advisory | Architecture trade-off workshop comparing retain, adapt and replace | Is sequencing the constraint, or is there no sponsored programme? | Milestone-based advisory; implementation requires a separate statement of work |
@@ -140,11 +145,14 @@ This is a scoped implementation/content review, not independent verification of 
 | `tech-channel-02` · IT asset disposition | Review a bounded sample custody record and accredited processing evidence | Can assets be lawfully redeployed rather than disposed of? | Per-asset disposition after verified chain-of-custody and downstream rights |
 | `tech-advisory-01` · Technology due diligence | Review a permitted document sample and interview authorised owners | Which investment decision would change if this technical risk were confirmed? | Fixed-scope diligence with declared reliance and confidentiality limits |
 | `tech-advisory-02` · Digital accessibility audit | Manual keyboard and assistive-technology test of a consented journey | Are the barriers already covered by an active remediation plan? | Scoped audit and optional separately gated remediation retest |
+| `tech-strategic-digital-transformation` · Enterprise Digital Transformation | Map one authorised journey, baseline its pain points and compare process-only, incumbent and technology-enabled options. | Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme? | Gated enterprise transformation programme with a customer-owned benefits case; discovery, design, delivery and adoption scopes contracted separately |
+| `tech-strategic-ai-first-transformation` · AI-first Business Transformation | Map tasks and exceptions, compare process-only, rules and AI alternatives; specify human review, data rights and an owner-agreed evaluation. | Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost? | Enterprise AI-enabled transformation programme with business, risk and adoption gates; runtime and platform spend require separate authorisation |
+| `tech-strategic-cybersecurity-resilience` · Enterprise Cybersecurity & Resilience | Map one service’s controls and dependencies, then run a consented tabletop against recovery and escalation obligations. | Do the existing controls and recovery evidence already address the scenario adequately? | Scoped enterprise risk, resilience and assurance programme; independent assessment, remediation and recurring operations contracted with clear conflicts and rights |
+| `tech-strategic-complex-legacy-modernisation` · Complex Legacy Application Modernisation | Compare retain/retire/rehost/replatform/refactor/replace for one representative dependency cluster with service impact, cost ownership and IP rights. | Can a supported upgrade, retention or retirement remove the constraint with less transition risk? | Multi-stage estate modernisation programme with option, rights, engineering and transition gates; each wave separately authorised against continuity and value criteria |
+| `tech-strategic-social-value-esg` · Social Value & ESG Transformation | Map permitted commitments to delivery owners, partners, consented evidence and an attribution/verification plan; check policy and jurisdiction first. | Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity? | Scoped social/environmental outcome and operating-model transformation with separate delivery, measurement and assurance responsibilities; no contingent bid-win or guaranteed carbon/financial return |
 
-## Gaps and prioritisation
+## Gaps and acceptance limits
 
-The 60 catalogue-only types have distinct outcomes, family/buyer context and source-category references, but no complete commercial playbook. They are intentionally unavailable for adoption. Frontier, OT and regulated specialist work requires especially careful IP, safety, spectrum, accreditation and delivery-rights checks. Subscription/resale/outsourcing terms are commercial models to validate, not asserted seller entitlements.
+The 60 catalogue-only types are coverage, not complete playbooks. Follow-on Sustainable IT measurement remains catalogue-only; adopting a broad ESG programme does not silently deepen or approve that type. All programme economic cases are hypotheses until customer baselines, attribution, costs and rights are established. No ROI, price, win rate, budget, procurement date or contract value is prefilled.
 
-All 24 methods initially target broadly applicable Technology/Banking/Aviation contexts, with narrower operating-profile ICPs and exclusions in the full playbooks. Account-specific materiality, size, fit, buyer, access, funding and delivery remain unqualified. No automatic company capability inference is made from a participant record or annual report.
-
-The first subsequent content work should deepen catalogue types requested by actual authorised sellers, then collect permissioned delivery proof and country overlays. Sprint B event detection and Sprint C deliberate Pipeline qualification are outside this implementation.
+Existing governed Lloyds, easyJet and Equinix context supports limited research questions, not buyer need. ESG has no matching account-specific signal in those adapters and remains research only. See [15 differentiated examples](strategic-priorities/previews/Sample-Matches.json). Country expansion and actual seller delivery/partner proof require separate review. Full baseline, strict security, approval, provenance and Pipeline boundaries remain mandatory.

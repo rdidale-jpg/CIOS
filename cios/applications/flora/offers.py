@@ -188,7 +188,7 @@ def select_employer(employer_id, *, headers=None):
 
 
 @verified_service_write('commercial_context.edit')
-def configure_library(selected, employer_id, employer_version, mission_version, *, headers=None):
+def configure_library(selected, employer_id, employer_version, mission_version, *, delivery_specialisms=None, headers=None):
     """Private supplier categories, separate from target customer sectors and IAM."""
     context = _actor(headers, True)
     employer = _selected(_load(), context)
@@ -200,7 +200,12 @@ def configure_library(selected, employer_id, employer_version, mission_version, 
         raise ValueError('Commercial preferences changed; reload setup')
     value = asdict(mission) if mission else {
         'executive_role': 'Seller', 'commercial_objective': 'Explore declared technology offers'}
-    value.update(technology_subindustries=selected, offer_library_employer_id=employer_id,
+    if delivery_specialisms is None:
+        delivery_specialisms = (mission.technology_delivery_specialisms
+            if mission and mission.offer_library_employer_id == employer_id else ())
+    delivery_specialisms = library.specialisms(delivery_specialisms)
+    value.update(technology_subindustries=selected, technology_delivery_specialisms=delivery_specialisms,
+                 offer_library_employer_id=employer_id,
                  version=mission_version + 1)
     return save_commercial_mission(headers, value)
 
@@ -580,6 +585,10 @@ def assess_fit(seller, offer, enterprise, evidence_cutoff, policy=POLICY):
             'status': 'Authored patterns only; account context is not an observed buying trigger',
             'seller_proof': 'Required; taxonomy bibliography does not validate seller capability',
             'source_ids': list(playbook['source_ids'])}
+        if playbook.get('economic_value'):
+            result['economic_value_hypothesis'] = deepcopy(playbook['economic_value'])
+            result['library_context']['disconfirming_evidence'] = deepcopy(playbook['disconfirming_evidence'])
+            result['library_context']['follow_on_opportunities'] = deepcopy(playbook['follow_on_opportunities'])
     return result
 
 

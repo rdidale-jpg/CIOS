@@ -119,6 +119,7 @@ class CommercialMission:
     context_id: str = ""
     version: int = 1
     technology_subindustries: tuple[str, ...] = ()
+    technology_delivery_specialisms: tuple[str, ...] = ()
     offer_library_employer_id: str = ""
 
     @property
@@ -150,7 +151,7 @@ class CommercialMission:
                  ("industries", "enterprises", "offer_portfolio", "competitors", "partners", "geography",
                   "interests", "named_accounts", "campaigns", "target_customers", "priority_accounts",
                   "excluded_accounts", "relevant_business_units", "objectives", "strategic_propositions",
-                  "delivery_constraints", "technology_subindustries")}
+                  "delivery_constraints", "technology_subindustries", "technology_delivery_specialisms")}
         return cls(user_id=user_id, **scalar, **lists,
                    **{k: str(value.get(k) or "") for k in ("mission_name", "account_focus", "commercial_horizon",
                       "opportunity_horizon", "required_opportunity_maturity", "minimum_evidence_state", "speculative_treatment")},
@@ -204,13 +205,13 @@ def save_commercial_mission(headers: Any, value: dict[str, Any]) -> CommercialMi
     # Older profile forms do not submit Sprint A supplier preferences. Preserve
     # those additive fields unless a caller explicitly replaces them.
     previous = profiles.get(user_id) or {}
-    value = {**{k: previous[k] for k in ('technology_subindustries', 'offer_library_employer_id')
+    value = {**{k: previous[k] for k in ('technology_subindustries', 'technology_delivery_specialisms', 'offer_library_employer_id')
                 if k in previous}, **value}
     mission = CommercialMission.from_dict(user_id, value)
     if not all((mission.executive_role, mission.commercial_objective)):
         raise ValueError("Role and objective are required")
     profiles[user_id] = {name: list(getattr(mission, name)) for name in (
-        "industries", "enterprises", "geography", "technology_subindustries",
+        "industries", "enterprises", "geography", "technology_subindustries", "technology_delivery_specialisms",
         "offer_portfolio", "competitors", "partners", "strategic_propositions", "delivery_constraints",
         "interests", "named_accounts", "campaigns", "target_customers", "priority_accounts",
         "excluded_accounts", "relevant_business_units", "objectives")}

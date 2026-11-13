@@ -92,7 +92,7 @@ jobs:
       - name: Test controlled Offers pilot
         run: python -m pytest tests/test_flora_offers_v1.py -q
       - name: Test technology library, seller onboarding and protected owner compatibility
-        run: python -m pytest tests/test_flora_offer_library_587.py -q
+        run: python -m pytest tests/test_flora_offer_library_587.py tests/test_flora_strategic_offers_588.py -q
       - name: Test separate two-screen Visual Experience v2
         run: python -m pytest tests/test_flora_visual_v2_583.py -q
       - name: Test unified visual system and protected source ownership

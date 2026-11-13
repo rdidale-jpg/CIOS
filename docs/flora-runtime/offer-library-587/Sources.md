@@ -26,3 +26,13 @@ ONS UK SIC2026 is a statistical-classification reference. It is not retroactivel
 Rights: public links and original paraphrase only. No copied vendor product text, logos, private research, copyrighted full documents or asserted transfer of distribution/delivery rights. Seller proof, certification, IP, resale, partner and customer-access rights must be supplied and independently reviewed in existing private Offers. Library bibliography is never automatically placed in that evidence field.
 
 Each adopted draft retains the original reviewed reference entries inside its immutable playbook snapshot. Existing account evidence stays with its existing governed research owner and original classification/cutoff; contextual relevance is not a detected trigger. No runtime network, model enrichment or paid research is introduced.
+
+## Owner-priority method references (library v2)
+
+Reviewed 13 November 2026; original methods only, no copied standards, seller credentials, universal legal-duty claims or enterprise ESG research.
+
+- [GOV.UK Service Standard](https://www.gov.uk/service-manual/service-standard): Customer needs, joined-up services, multidisciplinary delivery and measuring success; UK government service guidance, not a universal private-sector obligation.
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework): AI risk-management vocabulary and accountable evaluation; voluntary framework, not UK legal certification.
+- [NCSC Cyber Assessment Framework](https://www.ncsc.gov.uk/collection/cyber-assessment-framework): Outcome-oriented cyber resilience and assurance vocabulary; applicability and regulatory obligations require organisation-specific review.
+- [Cabinet Office PPN 002 social value](https://www.gov.uk/government/publications/ppn-002-taking-account-of-social-value-in-the-award-of-contracts): Social value in in-scope central government contract awards; not all UK procurement, private contracts or devolved jurisdictions.
+- [GHG Protocol Corporate Standard](https://ghgprotocol.org/corporate-standard): Organisational greenhouse-gas inventory boundaries and accounting vocabulary; inventory is not proof of emissions reduction, legal compliance or assurance.

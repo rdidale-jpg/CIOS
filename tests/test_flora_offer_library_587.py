@@ -32,15 +32,16 @@ def adopt(pilot, *ids, who='seller', **kw):
 
 def test_coverage_sources_and_all_playbooks_have_distinct_commercial_logic():
     d=library.catalogue();rows=d['offers'];deep=[r for r in rows if r['stage']=='deep']
-    assert len(rows)==84 and len(deep)==24 and len({r['id'] for r in rows})==84
-    assert len({r['name'].casefold() for r in rows})==84
+    assert len(rows)==89 and len(deep)==29 and len({r['id'] for r in rows})==89
+    assert len({r['name'].casefold() for r in rows})==89
     assert len(d['subindustries'])==12
     districts={district for r in rows for district in r['districts']}
     assert districts=={'applications','cloud','ai','cyber','services','channels','infrastructure','frontier'}
     ids={r['id'] for r in rows};source_ids={s['id'] for s in d['sources']}
     for c in d['subindustries']:
-        assert sum(r['family']==c['id'] for r in rows)==7
-        assert sum(r['family']==c['id'] for r in deep)==2
+        additional = {'consulting': 2, 'data': 1, 'cyber': 1, 'engineering': 1}.get(c['id'], 0)
+        assert sum(r['family']==c['id'] for r in rows)==7+additional
+        assert sum(r['family']==c['id'] for r in deep)==2+additional
     for r in deep:
         assert library.current(library.source_ref(r))
         assert len(r['structural_triggers'])>=2 and len(r['event_triggers'])>=2
@@ -55,8 +56,8 @@ def test_coverage_sources_and_all_playbooks_have_distinct_commercial_logic():
             assert all(p[k] for k in ['buyer','conversation','workshop_or_proof','evidence_needed','disconfirming_question','follow_on','stop_conditions'])
         assert library.offer_content(r)['evidence']==''
     for k in ['outcome','ideal_customer_profile','commercial_model']:
-        assert len({r[k] for r in deep})==24
-    assert len({r['entry_plays'][0]['disconfirming_question'] for r in deep})==24
+        assert len({r[k] for r in deep})==29
+    assert len({r['entry_plays'][0]['disconfirming_question'] for r in deep})==29
     assert all(s['url'].startswith('https://') and s['rights'] and 'Taxonomy' in s['boundary'] for s in d['sources'])
 
 
@@ -215,7 +216,7 @@ def test_http_onboarding_csrf_origin_strict_input_and_accessible_read_only_get(p
     for inp in html.split('<input ')[1:]:
         tag=inp.split('>',1)[0]
         if 'name="templates"' in tag:assert 'checked' not in tag
-    assert '84 offer types, 24 developed playbooks' in html and html.count('Sources & method</summary>')==1
+    assert '89 offer types, 29 developed playbooks' in html and html.count('Sources & method</summary>')==1
     ref=library.source_ref(library.template('tech-engineering-01'))
     payload={'employer_id':e['id'],'employer_version':e['version'],'mission_version':1,'templates':f"{ref['id']}:{ref['version']}:{ref['digest']}",'confirmed':'yes'}
     assert web('/flora/offers/onboard-adopt',payload)[0]==303

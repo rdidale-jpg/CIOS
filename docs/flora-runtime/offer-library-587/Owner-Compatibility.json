@@ -5,11 +5,11 @@
   "functional_owner_revisions": {
     "cios/applications/flora/offers.py": {
       "baseline_sha256": "ed9021312b666a7b7f331a214f295cc67d9875860e99a08fec9b39f1c41973a9",
-      "candidate_sha256": "b2374863064bed4d5bb29605e155a77ab2024d3c824a6648142fb1e2e03fc28a"
+      "candidate_sha256": "75e496f4a3783ae8811c3c54e608a16ebb14af5b7f3ecb05e111b51ac389b11d"
     },
     "cios/applications/flora/commercial_mission.py": {
       "baseline_sha256": "13e7216d61c97dc3b5faf8d1b94bd83f31fbe56dd6f64a8b9c126f1697d4728d",
-      "candidate_sha256": "8d42ca093ef26459dd4b3831e9b1b74cb0cd5d8ef783a54794621b48f7cd3740"
+      "candidate_sha256": "28e62c145d510584cce5891c2c706a3a6eab59ecc7c822c1dd53005bf716071b"
     }
   },
   "unchanged_control_functions": {

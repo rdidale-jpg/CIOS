@@ -225,6 +225,8 @@ def discovery(state, q, headers):
     for r in results:
         offer = next(o for o in eligible if o['id'] == r['offer_id'])
         body += f'<article class="pair" id="{e(r["assessment_id"])}" data-assessment-id="{e(r["assessment_id"])}"><p class="eyebrow">{e(r["recommended_posture"])} · hypothesis to test</p><h2>{e(r["enterprise_name"])} × {e(offer["content"]["name"])}</h2><div class="split"><div><p><strong>Why this customer</strong><br>{e(r["why_account"])}</p><p><strong>Why this offer</strong><br>{e(r["why_offer"])}</p><p><strong>Why now</strong><br>{e(r["why_now"])}</p></div><div class="explanation"><h3>First move</h3><p>{e(r["entry_play"])}</p><p><strong>Test next</strong><br>{e(r["next_validation_action"])}</p></div></div>'
+        if r.get('economic_value_hypothesis'):
+            body += '<p><strong>Value to validate</strong> · ' + e('; '.join(r['economic_value_hypothesis']['mechanisms'])) + '</p>'
         if r.get('entry_plays'):
             second = r['entry_plays'][1]
             body += '<details><summary>Another way to start · compare the alternative</summary><p>' + e(second['conversation']) + '</p><p>' + e(second['workshop_or_proof']) + '</p><p>' + e(second['disconfirming_question']) + '</p><p>Stop if: ' + e('; '.join(second['stop_conditions'])) + '</p></details>'
