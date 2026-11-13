@@ -539,3 +539,149 @@ Do not assume all users pay for the same feed. A sector research user may need o
 Proposed commercial diligence per provider: legal entity/contract; geographic coverage; exact endpoints; onboarding time; schema documentation; limits; availability/SLA; commercial and free quotas; retention/caching/export/redistribution/derived-work/AI clauses; consent/privacy and right to erase; costs at 100/1,000/10,000 active users; attribution; cancellation/rollback; independence of core FLORA.
 
 **Recommendation:** Do not delay Offer-to-Sales Sprint A. In parallel, preserve this option in the Roles strategy paper; later select one public-source connector and one user-authorised connector as pilot before building a broad marketplace.
+
+
+## Appendix C — Ask FLORA: context-aware intelligence, user overlays and actions (proposed 13 November 2026)
+
+### C1. Thesis: images first, answers on demand
+
+Ask FLORA is proposed as the universal conversational interaction between beautiful, minimal, image-led FLORA views and the complex intelligence underneath. Default pages foreground **one coherent scene, relevant economic scale and a few meaningful interactions**. Users request richer explanations, evidence, comparisons, personalised analyses and controlled actions rather than enduring permanently visible research panels.
+
+**Product principle:** *Show the world. Let users ask for detail. Help them act.*
+
+Do not add an always-open chat pane that consumes the image. A single accessible Ask FLORA control in the top header (and optionally a compact contextual affordance on a selected visual element) opens an unobtrusive overlay/drawer/voice or keyboard input; dismissal returns the user to the same underlying view/selection. A result can appear anchored within the illustration, as an ephemeral overlay, or as an expressly requested saved view. No duplicate navigation, universal prompt-wall or permanently expanding chatbot transcript beneath each page.
+
+### C2. Four functions, different trust and price/cost boundaries
+
+| Mode | User intent | Behaviour | Safe default |
+|---|---|---|---|
+| **Explain** | “Tell me more about this company / factor.” | Short contextual answer anchored to current market, industry, enterprise, selection, role and source cutoff | Read-only sourced answer; uncertainty not invented |
+| **Investigate** | “Show me evidence / challenge this / what changed?” | Read-only citations, methods, dates, counter-evidence, source comparison and provenance via canonical owners | Evidence only on demand; source rights/ACL intact |
+| **Visualise / Analyse** | “Overlay UK revenue”, “Compare these three”, “Show suppliers and dependencies.” | Scoped client-side visual transformation or permissioned read-model; comparisons label units, geography, year and EST | Reversible, temporary layer; never mutate accepted data |
+| **Act / Save** | “Save this view”, “Watch this company”, “Add to target accounts”, “Prepare an entry play.” | Explicit action plan with permission/policy checks, human confirmation and audited domain-owner write | No write on question interpretation alone; protected approval and Pipeline qualification retained |
+
+A fifth **Research** mode may be offered to entitled users: bounded and cost-controlled search for new evidence, producing candidate findings subject to the existing research acceptance process. It is **not** an automatic promotion of new facts.
+
+### C3. Context contract
+
+Each invocation receives a **server-resolved minimal context envelope** (not user-controlled authority):
+- authenticated actor, active workspace and authorised entities;
+- active experience purpose and thematic interests;
+- viewed route, selected country, industry, enterprise, programme or opportunity ID and current illustrated element;
+- source snapshot/evidence cutoff, data version and applicable market/statistical unit;
+- permitted tool/function scopes and paid/free usage quota (future), using the actual entitlement service;
+- optional user-selected, authorised private overlay layers and the overlay's consent/revision.
+
+The model must not acquire permissions from request text, an HTML route, a query string, a user's self-declared role or a third-party document. Revalidate server-side before **every** read of private records and every write. Different workspaces, markets and user overlays never mingle through caches or prompted conversation memory.
+
+The default query should be contextual: “Which companies matter here?” on a UK banking industry view refers to the selected sector and scope, whereas the same question on the user's approved Offers view includes the seller's authorised Offer portfolio. A user can visibly switch scope where appropriate.
+
+### C4. Ask FLORA by professional experience
+
+| Experience | Natural questions | New persistent object or outcome |
+|---|---|---|
+| **Business Development & Sales** | “Which three UK banks best fit my cloud offer?”, “Why would easyJet buy?”, “Show the underlying trigger”, “Prepare a sponsor-discovery play.” | Seller-confirmed account priority, saved entry-play draft, reviewed opportunity hypothesis → only authorised Pipeline capture |
+| **Account / Client Director** | “Where might our footprint expand?”, “Show renewal timing and relationship risks.” | Account growth plan and verified renewal watch items |
+| **Educator** | “Explain this value chain to a 16-year-old”, “Create a question using real financial data”, “Compare aviation and banking.” | Lesson plan, case study, class-safe quiz and source references |
+| **Student** | “What is GVA?”, “Quiz me on the five forces of this industry.” | Progress and learning feedback, not inferred academic grades |
+| **Researcher** | “Challenge this thesis”, “Show sources and contradictions since the last review.” | Research notebook, referenced evidence comparison and watchlist |
+| **Technologist** | “Show the dependencies behind this architecture”, “Compare Azure and AWS for this stated requirement.” | Option assessment, decision log with assumptions and constraints |
+| **Founder / Product strategist** | “What unsolved problems are appearing in this segment?”, “What would invalidate this market hypothesis?” | Saved market/customer validation experiment |
+| **Investor** | “Compare revenue forecasts and realised performance”, “Which assumption drives the valuation?”, “Show Socrates versus consensus if licensed.” | Versioned investment thesis, watchlist and scenarios; no guaranteed forecasts or investment advice |
+| **Clean Energy** | “Overlay electricity carbon intensity”, “How would this transition option alter the baseline?” | Transition scenario and impact assumptions, distinguishing measured vs forecast |
+| **Social Value** | “Show workforce and skills impacts”, “Compare the evidence supporting this programme.” | Impact assessment and source-backed report |
+| **Policy / Procurement** | “What is the operative regulation?”, “Which suppliers have evidence for this category?” | Policy analysis/sourcing dossier; proposal not treated as law |
+| **Job Seeker / Career** | “Who do I know here?” when user has opted in to their contacts, “Show live vacancies and recent company results.” | Career dossier, personal relationship notes and job watchlist |
+| **Regional Development** | “Which industries contribute most locally?”, “Show grants or jobs signals.” | Regional briefing or investment project watchlist |
+
+Role changes the **question suggestions, default scope, tools and work-product**, never the evidence truth. Unimplemented capabilities must not appear as functional controls; mark future functions as planned in product design, not as live features.
+
+### C5. Local Data: private generated overlays
+
+**Recommendation: make “My Data” a first-class private overlay mechanism, not a replacement for canonical industry/enterprise intelligence.** “Local” should mean *owned or scoped to the user/workspace*, not necessarily stored only on the device. A separate offline-device storage mode is a future privacy/product decision, and should not be implied.
+
+Potential overlay inputs:
+1. **Personal inputs:** uploaded CSV/XLSX, notes, declared assumptions, private research, contact exports and watchlists.
+2. **Connected accounts:** user-authorised CRM, contacts, licensed financial data, calendars and other provider feeds, with provenance and retention restrictions.
+3. **FLORA-derived personal analysis:** user-requested models, estimates, annotations, scenario results and comparison layers based on cited or user-supplied inputs.
+4. **Team/shared workspace layers:** explicitly promoted, permissioned overlays with owner approval and collaborative versioning; never automatically public.
+5. **Temporary exploratory layers:** on-screen analyses not stored by default; user can deliberately save, rename, edit, export or delete.
+
+Example overlays:
+- UK economy: visualise user's selected targets by sector; show sourced sector GVA versus *their* potential account value without conflating units.
+- Technology industry: overlay an authorised seller's selected Offers, match candidates and privately imported contact relationships.
+- NVIDIA enterprise: overlay a personal financial thesis, market-data estimates (licensed), partner mapping and explicitly sourced customer references.
+- PESTLE: overlay one user's jurisdiction/sector exposures or custom scenario assumptions, not claim they apply universally.
+- Educator: overlay lesson annotations, key terms and class exercises.
+- Investor: overlay bull/base/bear scenarios, forecast provider names, methodology and source cutoff.
+
+**Visual handling:** clearly distinguish **FLORA baseline**, **External licensed source**, **My data**, **Team data**, and **My estimate (EST)** via discreet layer controls, subtle colour/line treatment and a compact legend available when overlays are active. The underlying image remains beautiful; toggling a layer must be reversible with one action. On-image insight reveals should have legible mobile/iPad/keyboard equivalents. No visually implied false numeric ranking from scene geometry.
+
+### C6. Private overlay object contract (candidate)
+
+Fields: stable `overlay_id`, owner principal and workspace/tenant, optional team sharing scope, attached entity/industry/market references, dataset source and legal rights, created/updated/snapshot timestamps, model/prompt version when generated, input references, geographic scope, currency/unit/period, data quality, uncertainty/EST basis, visibility level, content/data schema and format, version/history, retention/deletion/consent/revocation state, allowed exports and lineage to source records or user uploads.
+
+**Persistence:** prefer a separate, encrypted/protected operational store or adapter under existing verified service boundary; do not write user overlays into canonical Source, Evidence, Observation, Twin or industry statistics. Promotion or cross-tenant sharing requires explicit owner review and existing canonical acceptance; a user private assumption can never become an independently verified market fact merely because an AI assistant summarised it.
+
+### C7. Proposed implementation architecture
+
+```text
+FLORA image-native view + selected object / user experience
+      ↓ single Ask FLORA entry
+Server-authorised Context Resolver (scope, identity, source cutoff, role/entitlement, tenant)
+      ↓
+Intent Router (Explain | Investigate | Visualise | Save/Act | bounded Research)
+      ↓
+Tool Allowlist + Evidence Retrieval + Cost/Consent Policy
+      ↓
+Structured result (answer + citations + visualization specification + proposed action)
+      ↓
+Read-only on-image overlay / optional details / user-confirmed save
+      ↓ only upon explicit confirmation
+Existing authorised domain service / private overlay owner / reviewed Pipeline writer
+```
+
+Possible response types should be structured and bounded: `answer`, `source_refs`, `visual_overlay_spec`, `recommended_questions`, `action_proposal`, `permission_state`, `estimated_cost`, `error`. The renderer sanitises model outputs and cannot treat generated arbitrary HTML or URLs as authority. A prompt should not execute scripts, create links to private records or infer write permissions.
+
+**Answer provenance:** show a concise answer first with one “Sources & method” control, but preserve full lineage to precise source claims and both positive/negative evidence. Distinguish external-feed forecasts, FLORA interpretations, user assumptions and measured numbers; attach visible **EST** to defensible numerical estimates, leave unsupported values blank.
+
+**Security:** verified sessions/workspace, signed user scope, CSRF/origin on state writes, canonical privilege checks, source-licence policy, external connector consent, per-tool isolation, abuse/rate limits, revocation, data minimisation, injection resistance and auditing of consequential actions. The assistant cannot access or act outside its allowlist even if a retrieved source says it should. Do not send private documents to third-party models without appropriate user consent and provider contract.
+
+### C8. Commercial implications
+
+The core **Explain** mode can be broadly accessible, with rate/compute limits, and may be a powerful reason to try FLORA. Premium tiers monetise deep private connected context, more intensive research, saved overlays and scenarios, recurring monitoring, collaboration and professional **Act** workflows.
+
+Candidate packaging:
+- **Discover/Education Free:** basic contextual explanations, bounded evidence view and limited read-only visual interactions; clear usage limits.
+- **Research Pro:** deep evidence comparisons, persistent notebooks, advanced saved overlays, exports and monitored research questions.
+- **Sales Pro:** seller/private CRM and network overlays, offer-to-account assessments, entry-play generation and authorised Pipeline workflow.
+- **Investor/Specialist Pro:** licensed external feeds, scenario/valuation/technology/impact overlays, saved decision history.
+- **Enterprise:** multi-seat permissioned overlays, SSO/administration, collaborative work products, cost governance and vendor connections.
+- **Usage-based add-on:** expensive AI model/research calls only by explicit user choice, quota and cost controls.
+
+Avoid paywalling basic source transparency on any claim the user is permitted to see. Source inspection is a trust feature, not a premium-only privilege. No hidden paid calls in free role switching.
+
+### C9. Pilot and metrics
+
+**Pilot 1: explain and evidence, no AI autonomy.** Implement one lightweight contextual Ask FLORA for the **UK Technology or Banking industry**, one enterprise and image-native PESTLE. Use existing retrieved evidence and bounded model answers; test a deterministic alternative as baseline. User can ask “tell me more” and “show me evidence”; return concise sourced answer, on-image reveal and safe fallback. No user data uploads or writes initially.
+
+**Pilot 2: one private overlay.** Authorised sales user adds a small private target-account list or a researcher adds a watchlist/notes; Ask FLORA overlays it on an existing industry scene and permits one deliberate Save/Remove action. Compare view before/after, accessibility, tenancy, data deletion and no canonical mutation.
+
+**Pilot 3: role-specific work product.** Educator asks for a case-study lesson; Sales user asks for a trigger-led entry play; save only through their respective authorised user/project services. Demonstrate identical source facts but different permitted actions.
+
+**Later:** licensed connector context, longitudinal monitoring, voice mode, multi-step actions, team shared overlays, internationalisation and multi-modal explanation, only when evidence licensing, costs and security are ready.
+
+Measure: task completion, time-to-useful-answer, source accuracy, hallucination/material error rate, source inspection availability, privacy violations (target zero), repeated re-ask due to poor context, overlay usefulness, user-confirmed saved work, cost per successful interaction, role retention at natural cadence and willingness-to-pay.
+
+### C10. Architectural decisions to settle later
+
+1. **Assistant placement:** fixed header Ask FLORA control with contextual overlay vs optional image-selection entry. Recommend single header control, with selected visual elements pre-populating context.
+2. **Default persistence:** ephemeral conversation with deliberate Save; opt-in history and explicit retention/deletion. Do not assume chat history is permanent canonical memory.
+3. **Local semantics:** private FLORA-hosted workspace overlays first; encrypted device-local/offline mode only if users have a demonstrable need.
+4. **Overlay authorisation:** private by default, explicit team sharing and permissioned institutional/corporate publication; no cross-user leak.
+5. **Cost model:** basic explanation under quota; research/large model/connector calls separately authorised and metered.
+6. **Navigation style:** answers in situ where possible; no new page/card wall for every follow-up, but open a specialist full-page view when analytical complexity genuinely warrants it.
+7. **Generated insights:** structured, explainable candidate interpretation with version and source cutoff, not accepted facts; user may challenge and correct.
+8. **Trigger actions:** reversible read-only effects first; deliberate user confirmation for any save/write, and independent approvals for employer catalogue/publication and formal Pipeline capture.
+
+**Strategic position:** Ask FLORA is not a separate chatbot bolted onto an illustrated site; it is the shared **interaction and orchestration layer** for all role-specific experiences, their data integrations and user-owned work products. The visible product can remain beautifully minimal while functionality deepens.
