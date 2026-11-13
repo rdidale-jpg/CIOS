@@ -18,12 +18,18 @@ from cios.applications.flora.banking_portfolio import (
 
 
 def test_ai_native_maturity_journey_renders_as_visual_progression():
+    from tests.flora_html_contract import Document
+    from cios.applications.flora.banking_portfolio import AI_NATIVE_COMPARISON
     html = ai_native_page()
-    assert "AI-native maturity rail" in html
-    for stage in ["Legacy constrained", "Digitally enabled", "Integrated and data-led", "AI-assisted enterprise", "AI-native bank"]:
-        assert stage in html
-    assert "maturity-rail" in html
-    assert html.count("<details class='maturity-stage'") == 5
+    doc = Document(html)
+    assert 'Today versus AI-native' in doc.headings
+    assert len(AI_NATIVE_COMPARISON) == 9
+    for dimension, today, future in AI_NATIVE_COMPARISON:
+        assert dimension in doc.text and today in doc.text and future in doc.text
+        assert today != future
+    for heading in ('Day in the life: customer', 'Day in the life: employee', 'What shrinks, grows and remains human', 'Major barriers'):
+        assert heading in doc.headings
+    assert '/flora/banking/ai-native/capability-model' in doc.hrefs
 
 
 def test_all_five_banks_appear_on_shared_time_axis_with_ranges():

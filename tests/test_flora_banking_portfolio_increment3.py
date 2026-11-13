@@ -15,19 +15,27 @@ def test_all_five_bank_accounts_have_commercial_snapshots():
 
 
 def test_each_bank_page_uses_executive_structure_and_preserves_inspection():
+    # Current executive overview replaces the numbered, thirteen-section brief.
+    from tests.flora_html_contract import Document
+    from cios.applications.flora.banking_portfolio import GENERATED_DATE, evidence_page
     for slug, bank in BANKS.items():
         html, status = bank_page(slug, briefing=True)
+        doc = Document(html)
         assert status == 200
-        for section in ["1. Account in one minute", "2. Financial snapshot", "5. Analyst view", "8. Recommended opportunities", "9. Estimated pipeline", "12. Why Flora believes this", "13. Detailed inspection"]:
-            assert section in html
-        assert "Current to 2026-07-19" in html
-        assert "Estimated contract value" in html
-        assert "Flora working estimate" in html
-        assert "Valuation method" in html
-        assert bank.id in html  # only Level 3
+        for section in ["What the financial results imply", "Working reinvention-pressure interpretation",
+                        "Top opportunities", "Supplier and competitor position", "What should be investigated next"]:
+            assert section in doc.headings
+        assert GENERATED_DATE in doc.text
+        for opportunity in bank.opportunities[:3]:
+            assert f"/flora/banking/{slug}/opportunity/{opportunity.id}" in doc.hrefs
+            assert opportunity.title in doc.text
+        assert f"/flora/banking/{slug}/evidence" in doc.hrefs
+        inspection, status = evidence_page(slug)
+        assert status == 200 and bank.name in Document(inspection).text
+        assert 'canonical Evidence IDs / accepted Observation mappings / source locators: Not supplied' in Document(inspection).text
+        assert 'Illustrative, unverified commercial scenario' in doc.text
     html, status = bank_page("unknown-bank")
-    assert status == 200
-    assert "Flora does not yet have a reliable view" in html
+    assert status == 404 and 'No governed bank route is available' in html
 
 
 def test_financial_metrics_render_and_missing_metrics_not_fabricated():
@@ -39,38 +47,66 @@ def test_financial_metrics_render_and_missing_metrics_not_fabricated():
 
 
 def test_analyst_views_preserve_attribution_without_fake_consensus():
-    for slug in BANKS:
-        html, _ = bank_page(slug)
-        assert "What analysts broadly like" in html
-        assert "No single analyst view is presented as consensus" in html
-        assert "Analyst synthesis preserves attribution" in html
+    from tests.flora_html_contract import Document
+    from cios.applications.flora.banking_portfolio import analyst_history_page
+    for slug, bank in BANKS.items():
+        overview = Document(bank_page(slug)[0])
+        assert f'/flora/banking/{slug}/analyst-history' in overview.hrefs
+        analysis = Document(analyst_history_page(slug))
+        assert 'Analyst interpretation' in analysis.headings
+        for statement in bank.analyst_like + bank.analyst_question:
+            assert statement in analysis.text
+        from cios.applications.flora.banking_portfolio import evidence_page
+        sources = Document(evidence_page(slug)[0])
+        for source in bank.analyst_sources or bank.sources:
+            assert source in sources.text
+        assert 'Generic source labels above are not accepted claim citations' in sources.text
+        assert 'not calibrated Evidence confidence' in analysis.text
+        assert 'analyst consensus' not in analysis.text.lower()
 
 
 def test_theme_relevance_ranking_and_pipeline_are_deterministic():
+    from tests.flora_html_contract import Document
+    from cios.applications.flora.banking_portfolio import COMPARE_MODES, heatmap_page
     first = compare_page()
-    second = compare_page()
-    assert first == second
+    assert first == compare_page()
+    comparison = Document(first)
+    for mode in COMPARE_MODES:
+        assert mode in comparison.headings
+    # Theme-by-bank cells live in the dedicated heatmap, not the six-mode summary.
+    heatmap = Document(heatmap_page('theme-relevance'))
     for theme in THEMES:
-        assert theme in first
-    assert "Most relevant bank" in first
-    assert "Highest-value associated opportunity" in first
-    assert "probability of winning" in first
-    assert "safe-unavailable" not in first
+        assert theme in heatmap.text
+    for bank in BANKS.values():
+        assert f'/flora/banking/{bank.slug}' in comparison.hrefs
+    assert 'every other mode is non-monetary' in comparison.text
+    assert 'not customer-confirmed budget or qualified commercial pipeline' in comparison.text
+    assert 'safe-unavailable' not in first
 
 
 def test_opportunities_have_values_feedback_and_preserve_originals():
+    from copy import deepcopy
+    from tests.flora_html_contract import Document
+    from cios.applications.flora.banking_portfolio import opportunity_page, _opportunity_html
     opps = pipeline()
+    before = deepcopy(opps)
     assert len(opps) >= 15
     for o in opps:
-        assert o.id
-        assert o.value.low < o.value.midpoint < o.value.high
+        assert o.id and o.value.low < o.value.midpoint < o.value.high
         assert o.value.low % 5 == 0 and o.value.high % 5 == 0 and o.value.midpoint % 5 == 0
-        assert o.value.method
-        assert o.assumptions
-    html, _ = bank_page("lloyds")
-    for action in FEEDBACK_ACTIONS:
-        assert action in html
-    assert "preserves the original Recommendation and estimate" in html
+        assert o.value.method and o.assumptions
+    for o in BANKS['lloyds'].opportunities:
+        html, status = opportunity_page('lloyds', o.id)
+        assert status == 200
+        assert o.title in Document(html).text
+        assert 'Customer-confirmed budget: Unknown' in Document(html).text
+    # Unwired legacy feedback buttons are no longer a capture workflow.
+    component_html = _opportunity_html(opps[0])
+    component = Document(component_html)
+    assert not component.buttons and '<form' not in component_html
+    assert opps[0].title in component.text
+    assert 'Useful' in FEEDBACK_ACTIONS and 'Validated with customer' in FEEDBACK_ACTIONS
+    assert pipeline() == before
 
 
 def test_pipeline_totals_calculate_correctly_and_no_probability_of_winning():
@@ -85,52 +121,75 @@ def test_pipeline_totals_calculate_correctly_and_no_probability_of_winning():
 
 
 def test_increment_41_pipeline_reconciliation_horizons_and_value_meaning():
+    from tests.flora_html_contract import Document
+    from cios.applications.flora.banking_portfolio import financial_history_page, opportunity_page
     for bank in BANKS.values():
         lo, hi, mid = totals(list(bank.opportunities))
         assert lo == sum(o.value.low for o in bank.opportunities)
         assert hi == sum(o.value.high for o in bank.opportunities)
         assert mid == sum(o.value.midpoint for o in bank.opportunities)
-        assert bank.financial_interpretation
-        assert bank.likely_accelerate and bank.likely_buying_posture
-        html, _ = bank_page(bank.slug)
-        assert "What the financial results are telling us" in html
-        assert "Gross addressable pipeline" in html
-        assert "Overlap-adjusted pipeline" in html
-        assert "Qualified pipeline" in html
-        assert "User-validated pipeline" in html
-        assert "Confirmed CRM pipeline" in html
-        assert "not probability-weighted" in html
-        assert "Near-term total" in html and "Medium-term total" in html and "Longer-term total" in html
+        assert bank.financial_interpretation and bank.likely_accelerate and bank.likely_buying_posture
+        overview = Document(bank_page(bank.slug)[0])
+        assert 'What the financial results imply' in overview.headings
+        assert f'/flora/banking/{bank.slug}/financial-performance' in overview.hrefs
+        assert Document(financial_history_page(bank.slug)).headings
+        assert f'Illustrative, unverified commercial scenario sum: £{mid}m' in overview.text
+        assert 'not customer-confirmed budget or qualified commercial pipeline' in overview.text
         for o in bank.opportunities:
-            assert o.horizon_label in ("Immediate: 0–12 months", "Near term: 12–24 months", "Medium term: 24–36 months", "Longer term: 36–60 months", "Monitor", "Unclear")
+            assert o.horizon_label in ('Immediate: 0–12 months', 'Near term: 12–24 months', 'Medium term: 24–36 months', 'Longer term: 36–60 months', 'Monitor', 'Unclear')
             assert o.earliest_entry and o.buying_window and o.programme_start and o.contract_duration
-            assert o.horizon_rationale and o.accelerate_signal and o.delay_signal
-            assert o.supplier_position
+            assert o.horizon_rationale and o.accelerate_signal and o.delay_signal and o.supplier_position
             if not o.supplier_entries:
-                assert o.supplier_position == "No reliable view"
+                assert o.supplier_position == 'No reliable view'
+            detail, status = opportunity_page(bank.slug, o.id)
+            assert status == 200
+            assert 'Confirmed procurement dates / customer milestones / buying triggers: Unknown' in Document(detail).text
 
 
 def test_increment_41_supplier_traction_is_sourced_or_human_labelled_and_unknown_is_bounded():
-    allowed = {"Strong incumbent position", "Gaining traction", "Established relationship", "Competitive field", "Early signal", "No reliable view"}
+    from tests.flora_html_contract import Document
+    from cios.applications.flora.banking_portfolio import opportunity_page
+    allowed = {'Strong incumbent position', 'Gaining traction', 'Established relationship', 'Competitive field', 'Early signal', 'No reliable view'}
     for o in pipeline():
         assert o.supplier_position in allowed
-        for e in o.supplier_entries:
-            assert e.supplier_name and e.source_date and e.supporting_rationale
-            assert e.insight_basis in ("confirmed", "inferred", "human-supplied")
-            assert e.traction_label in allowed
-    html, _ = bank_page("santander-uk")
-    assert "No reliable view" in html
+        for entry in o.supplier_entries:
+            assert entry.supplier_name and entry.source_date and entry.supporting_rationale
+            assert entry.insight_basis in ('confirmed', 'inferred', 'human-supplied')
+            assert entry.traction_label in allowed
+    overview = Document(bank_page('santander-uk')[0])
+    assert '/flora/banking/competitors' in overview.hrefs
+    assert 'general market presence does not establish incumbency, renewal or displacement' in overview.text
+    for opportunity in BANKS['santander-uk'].opportunities:
+        if not opportunity.supplier_entries:
+            assert opportunity.supplier_position == 'No reliable view'
+        detail, status = opportunity_page('santander-uk', opportunity.id)
+        assert status == 200
+        if not opportunity.supplier_entries:
+            assert 'No reliable view' in Document(detail).text
+        else:
+            for entry in opportunity.supplier_entries:
+                assert entry.supplier_name in Document(detail).text and 'Inferred supplier position' in Document(detail).text
 
 
 def test_increment_41_portfolio_cards_and_heatmap_are_scannable_with_expansion():
-    html = portfolio_page()
-    for text in ("Near-term pipeline", "Medium-term pipeline", "Supplier signal", "Timing trigger", "Next commercial action"):
-        assert text in html
-    compare = compare_page()
-    assert "Commercial heatmap" in compare
-    assert "Supplier field:" in compare
-    assert "<details><summary>Expand</summary>" in compare
-    assert "Commercial driver:" not in compare
+    from tests.flora_html_contract import Document
+    from cios.applications.flora.banking_portfolio import heatmap_page
+    portfolio = Document(portfolio_page())
+    for bank in BANKS.values():
+        assert bank.name in portfolio.text
+        assert f'/flora/banking/{bank.slug}' in portfolio.hrefs
+    # A scenario sum is not a confirmed pipeline; the full table is on demand.
+    assert 'Scenario sizing assumptions and limits' in portfolio.headings
+    for opportunity in pipeline():
+        assert opportunity.title in portfolio.text
+        assert opportunity.value.label in portfolio.text
+    comparison = Document(heatmap_page('opportunity-value'))
+    assert 'Compare UK banks' in comparison.headings
+    assert '<table' in heatmap_page('opportunity-value')
+    for bank in BANKS.values():
+        assert bank.name in comparison.text
+    assert 'Scenario sizing assumptions and limits' in comparison.headings
+    assert 'qualified commercial pipeline' in comparison.text
 
 
 def test_increment_41_analyst_rendering_quality_gates():

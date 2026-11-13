@@ -10,6 +10,8 @@ import sys
 import threading
 import time
 import zipfile
+
+import pytest
 from http.client import HTTPConnection
 from http.server import ThreadingHTTPServer
 from pathlib import Path
@@ -126,50 +128,53 @@ def test_one_canonical_mode_and_conflicting_legacy_modes_fail(monkeypatch):
     assert "conflicting deprecated pilot mode" in pilot_import_mode().conflict
 
 
-def test_deployed_equivalent_pilot_route_imports_candidate_to_executive_workspace(monkeypatch, tmp_path):
+@pytest.mark.real_security_boundary
+def test_deployed_equivalent_pilot_route_imports_candidate_to_executive_workspace(monkeypatch, tmp_path, authority, browser):
+    """Candidate import requires real membership/session/CSRF even in pilot mode."""
+    from tests.flora_html_contract import Document
+    from tests.test_flora_security_owner_journey import authenticate, multipart as secure_multipart
+    from tests.test_flora_security_workspace_boundary import hashes
     import cios.applications.flora.web.app as web_app
     import cios.applications.flora.blueprint_import.views as import_views
-    pilot(monkeypatch, tmp_path)
+    from cios.applications.flora.memory.repository import EnterpriseModelRepository
+    monkeypatch.setenv('FLORA_ENVIRONMENT', 'pilot')
+    monkeypatch.setenv('FLORA_PILOT_IMPORT_BYPASS', '1')
     repository = str(Path(__file__).resolve().parents[1])
     assert str(web_app.__file__).startswith(repository)
     assert str(import_views.__file__).startswith(repository)
-    server = ThreadingHTTPServer(("127.0.0.1", 0), web_app.FloraWebHandler)
-    thread = threading.Thread(target=server.serve_forever, daemon=True); thread.start()
-    try:
-        status, _, landing = request(server, "GET", "/digital-twins")
-        assert status == 200 and "href='/blueprint-import'>Import Twin" in landing
-        assert landing.count("href='/blueprint-import'") == 1
-        assert "Import a Twin package to create a candidate for review" in landing
-        assert "application_module=cios.applications.flora.web.app" in landing
-        assert "pilot_import_mode=active" in landing
-        assert "import_route_owner=cios.applications.flora.digital_twins.digital_twins_landing_page" in landing
-        assert "import_route_implementation=pilot-candidate-import-v1" in landing
-        status, _, form = request(server, "GET", "/blueprint-import")
-        assert status == 200 and 'name="expected_type"' not in form  # templates use canonical single quotes
-        assert "name='expected_type'" in form and "Industry" in form and "name='blueprint_zip'" in form
-        assert "method='post' action='/blueprint-import/upload' enctype='multipart/form-data'" in form
-        assert "flora-import-deployment:" in form
-        body, boundary = multipart(pkg())
-        status, headers, _ = request(server, "POST", "/blueprint-import/upload", body, {
-            "Content-Type": f"multipart/form-data; boundary={boundary}", "Content-Length": str(len(body))})
-        assert status == 303
-        target = headers["Location"]
-        assert target.startswith("/blueprint-import/bpi-run-")
-        status, _, workspace = request(server, "GET", target)
-        assert status == 200 and "Executive Intelligence" in workspace
-        assert "Twin Map" in workspace and "/review" in workspace
-    finally:
-        server.shutdown(); server.server_close(); thread.join()
-
+    root = authority[0].path.parent.parent
+    before = hashes(root)
+    status, _, landing = browser.request('GET', '/digital-twins')
+    assert status == 200 and '/blueprint-import' not in Document(landing).hrefs
+    status, _, denied = browser.request('GET', '/blueprint-import')
+    assert status == 200 and 'Workspace and upload access required' in Document(denied).headings
+    raw, kind = secure_multipart({'csrf': 'invalid', 'expected_type': 'industry'}, 'synthetic.zip', pkg())
+    assert browser.request('POST', '/blueprint-import/upload', raw=raw, content_type=kind)[0] == 403
+    assert hashes(root) == before
+    csrf = authenticate(authority, tmp_path, browser)
+    status, _, landing = browser.request('GET', '/digital-twins')
+    assert status == 200 and '/blueprint-import' in Document(landing).hrefs
+    status, _, form = browser.request('GET', '/blueprint-import')
+    assert status == 200 and "name='expected_type'" in form and "name='blueprint_zip'" in form
+    content = pkg()
+    raw, kind = secure_multipart({'csrf': csrf, 'expected_type': 'industry'}, 'synthetic.zip', content)
+    status, headers, _ = browser.request('POST', '/blueprint-import/upload', raw=raw, content_type=kind)
+    assert status == 303 and headers['Location'].startswith('/blueprint-import/bpi-run-')
+    target = headers['Location']
+    status, _, workspace = browser.request('GET', target)
+    assert status == 200 and target + '/review' in Document(workspace).hrefs
     record = BlueprintPackageRegistry().list()[0]
-    summary = json.loads((tmp_path / "blueprint_import" / "staging" / record.import_run_id / "summary.json").read_text())
-    assert record.byte_count == len(pkg()) and record.received_by == PILOT_IMPORT_ACTOR
-    assert record.workspace_id == PILOT_IMPORT_WORKSPACE
-    assert record.package_inspection["authentication_mode"] == "pilot"
-    assert summary["files_inspected"] and summary["candidate_records_staged"] > 0
-    assert not (tmp_path / "memory" / "observations.jsonl").exists()
-    events = (tmp_path / "blueprint_import" / "audit" / "events.jsonl").read_text()
-    assert "package_received" in events and "pilot_import_bypass_result" in events
+    assert record.byte_count == len(content) and record.received_by == 'synthetic-human'
+    assert record.workspace_id == 'synthetic-workspace'
+    summary = json.loads((root / 'blueprint_import' / 'staging' / record.import_run_id / 'summary.json').read_text())
+    assert summary['files_inspected'] and summary['candidate_records_staged'] > 0
+    assert list(EnterpriseModelRepository().directory.glob('*.json')) == []
+    assert not (root / 'memory' / 'observations.jsonl').exists()
+    # Membership, not the deprecated mode, grants candidate-only access.
+    assert not pilot_import_bypass_enabled()
+    with authority[0].transaction() as db:
+        db.execute('UPDATE memberships SET active=0,version=version+1')
+    assert browser.request('GET', target)[0] == 403
 
 
 def test_deployment_endpoint_identifies_canonical_import_runtime(monkeypatch, tmp_path):
@@ -324,3 +329,7 @@ def test_form_validation_secure_mode_and_promotion_boundary(monkeypatch, tmp_pat
     monkeypatch.setenv("FLORA_ENVIRONMENT", "production")
     _, status, _ = upload_and_validate_blueprint({"blueprint_zip": pkg()}, FIELDS, {})
     assert status == 403
+
+# Real producer fixtures are opt-in for the reconciled candidate-import case.
+from tests.test_flora_security_repair_01b import authority
+from tests.test_flora_security_owner_journey import browser

@@ -327,6 +327,8 @@ def test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs(tmp_pa
     done, done_status = approve_and_promote(run_id, {"plan_id":[plan_id],"confirm_plan":["yes"],"confirm_mutations":["yes"],"rationale":["owner approved"]}, owner)
     assert done_status == 200
 
+    from tests.test_flora_security_workspace_boundary import hashes
+    before_discovery = hashes(tmp_path)
     home = digital_twins_landing_page(owner)
     hist, hist_status = history_page(owner)
     registry = governed_twin_list(owner)
@@ -335,11 +337,15 @@ def test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs(tmp_pa
     assert registry[0].enterprise_id == "MOD"
     assert registry[0].canvas_id == "canvas-mod"
     assert "MOD" in home and "BT Group" not in home
-    assert "href='/digital-twins/MOD'>Open Twin" in home
-    assert f"/blueprint-import/{run_id}" in home
-    assert "<table" not in home and "Details" not in home
-    assert "Open Twin" in home and "View validation" in home and "View import record" in home
-    assert "View import record" in hist
+    from tests.flora_html_contract import Document
+    discovery = Document(home)
+    assert '/digital-twins/mod/canvas' in discovery.hrefs
+    assert 'Open Enterprise Canvas / Commercial Digital Twin view' in discovery.text
+    assert '/blueprint-import/history' in discovery.hrefs
+    assert f'/blueprint-import/{run_id}' in Document(hist).hrefs
+    assert any(a.get('data-population') == 'enterprise_canvas' for _, a in discovery.nodes)
+    assert not any(a.get('data-population') == 'industry_import' for _, a in discovery.nodes)
+    assert hashes(tmp_path) == before_discovery
 
     canvas, canvas_status = enterprise_canvas_page("MOD", owner)
     assert canvas_status == 200 and "Enterprise Canvas" in canvas and "MOD" in canvas
@@ -347,14 +353,18 @@ def test_digital_twins_home_uses_governed_registry_and_import_breadcrumbs(tmp_pa
     assert "burning_platform-10" not in canvas
     assert "Imported Twin intelligence" not in canvas
     assert "Leadership and Decision Rights" in canvas
-    assert "Twin version</dt><dd>1.3" in canvas
-    assert "Progressive Assurance accepted" in canvas
-    assert "Unknown" not in canvas.split("Twin version</dt>", 1)[1].split("</dl>", 1)[0]
+    assert 'Executive Intelligence Brief unavailable' in canvas
+    assert 'executive situation briefing' not in canvas
+    from cios.applications.flora.enterprise_canvas.service import EnterpriseCanvasService
+    read_model = EnterpriseCanvasService().get_canvas('MOD', owner)
+    assert read_model.header.twin_version == '1.3'
+    assert read_model.header.maturity_or_acceptance_state == 'Candidate-only import context — durable model intelligence unavailable'
+    assert 'Progressive Assurance accepted' not in canvas
+    assert hashes(tmp_path) == before_discovery
     detail, detail_status = validation_result_page(run_id, owner)
     assert detail_status == 200
-    assert "Digital Twins</a> &gt;" in detail
-    assert "Back to Digital Twins" in detail
-    assert "Back to MOD Twin" in detail
+    assert '/digital-twins' in Document(detail).hrefs
+    assert f'/blueprint-import/{run_id}' in Document(hist).hrefs
 
     assert len(EnterpriseCanvasAccessRepository().list()) == 1
     assert len([t for t in governed_twin_list(owner) if t.enterprise_id == "MOD"]) == 1
@@ -411,6 +421,14 @@ def test_mod_executive_commercial_canvas_read_model(tmp_path, monkeypatch):
     html, canvas_status = enterprise_canvas_page("MOD", owner)
 
     assert canvas_status == 200
+    assert 'Executive Intelligence Brief unavailable' in html
+    assert 'executive situation briefing' not in html
+    # This case tests the governed read-model projection, not provider success.
+    # Request the existing diagnostic overview explicitly; never invent a valid result.
+    from cios.applications.flora.enterprise_canvas.service import EnterpriseCanvasService
+    from cios.applications.flora.enterprise_canvas.views import _executive_canvas
+    canvas = EnterpriseCanvasService().get_canvas('MOD', owner)
+    html = _executive_canvas(canvas, owner, include_reasoning=False, force_overview=True)
     assert "executive situation briefing" in html
     assert html.index("Overview") < html.index("Model Explorer")
     assert "Governed records in this lens" not in html

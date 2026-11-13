@@ -65,14 +65,21 @@ def test_competitor_assessments_are_separate_and_insufficient_view_has_no_meter(
 
 
 def test_featured_subset_has_full_exploration_route_and_counts_match_projection():
-    html = banking_landing_page()
-    assert "Featured intelligence" in html
-    assert "Available intelligence" in html
-    assert f"Explore all industry signals ({len(INDUSTRY_SIGNALS)})" in html
-    assert f"View all opportunities ({len(pipeline())})" in html
+    from tests.flora_html_contract import Document
+    doc = Document(banking_landing_page())
+    assert 'Three featured industry signals' in doc.headings
+    assert '/flora/banking/signals' in doc.hrefs
+    assert '/flora/banking/pipeline' in doc.hrefs
+    assert f'Explore all {len(INDUSTRY_SIGNALS)} industry signals' in doc.text
+    signals = Document(industry_signal_explorer_page())
+    for signal in INDUSTRY_SIGNALS:
+        assert signal[0] in signals.text
+    opportunities = Document(pipeline_page())
+    for opportunity in pipeline():
+        assert opportunity.title in opportunities.text
     inv = intelligence_inventory()
-    assert inv["Industry signals"] == len(INDUSTRY_SIGNALS)
-    assert inv["Opportunity hypotheses"] == len(pipeline())
+    assert inv['Industry signals'] == len(INDUSTRY_SIGNALS)
+    assert inv['Opportunity hypotheses'] == len(pipeline())
 
 
 def test_industry_signal_explorer_reaches_every_underlying_signal():

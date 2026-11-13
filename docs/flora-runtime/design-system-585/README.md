@@ -55,3 +55,5 @@ PYTHONPATH=. python tools/ci/flora_design_system_preview.py --baseline-root /pat
 ```
 
 Owner review applies to this complete candidate before promotion. Release #578 remains separate: reconcile the final base, validate the exact release commit and complete its production checks/approval process. No merge, Render deployment or production data change is included.
+
+[PR #586 — all 21 inherited-failure cases, original/candidate headlines and individual corrections](Reconciliation-586.md). Baseline/comparator and production code remain unchanged by this reconciliation.

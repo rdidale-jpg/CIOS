@@ -32,6 +32,14 @@
     "tools/ci/flora_design_system_preview.py": "bbf30cf6d7b689a7db7cfed35aa0a4c5bb20a3622fc64b3dec0c5221000286fe",
     "tests/test_flora_aviation_twin.py": "07bc3444b9a7864416dfc74c16780f0909d67353f32ee31282056a4612b9d328",
     "tests/test_flora_banking_explorer.py": "6b1f895bb6105e1c16ddcfa0edb096f4878b5c80207d2b598efcaba545a3c1a6",
-    "tests/test_flora_living_industry_maps.py": "2d4b71a3befd1abd280adff8136eb7ad2d69cbdd568735c23a649b29e6d2a7a8"
+    "tests/test_flora_living_industry_maps.py": "2d4b71a3befd1abd280adff8136eb7ad2d69cbdd568735c23a649b29e6d2a7a8",
+    "tests/flora_html_contract.py": "035e5fed31635dcda3cdc7b1973511b626efdaa03490263840c71fa5adf332c1",
+    "tests/test_flora_banking_increment44_executive_navigation.py": "4f924c4826934da8dea0fe0e5a4388a793fe82dbac299042d19c577c6d25b593",
+    "tests/test_flora_banking_increment451_visual_correction.py": "3d9a421e2befc9dc07f3ae3a1709c2bff555fd7b79ef94b8cea10273410721af",
+    "tests/test_flora_banking_increment45_visual_intelligence.py": "ec36a2f6214497b37a8f451add23696d3b277eab56bf4c18d11a1c08279eebfc",
+    "tests/test_flora_banking_industry_reinvention_increment42.py": "5af10c80311071c22a936ffa38d45a3da15cb6f645d2b9a5aa1dd73e28740f09",
+    "tests/test_flora_banking_portfolio_increment3.py": "97441d4e5737e27ac9482b054387442f675960bfb8725144a0943bf52574143e",
+    "tests/test_flora_enterprise_canvas.py": "730ca00728a84b80f49439ef9901be29438ace062116bf82931c224863a1f62f",
+    "tests/test_flora_pilot_import_bypass.py": "1a5129264a3c30b999fcde153be1ddfd3cfcbce5bd01124312383cd260469f7d"
   }
 }

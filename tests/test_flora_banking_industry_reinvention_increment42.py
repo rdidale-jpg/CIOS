@@ -2,15 +2,24 @@ from cios.applications.flora.banking_portfolio import BANKS, PESTLE_FORCES, bank
 
 
 def test_financial_behaviour_narrative_has_required_causal_sections():
+    from tests.flora_html_contract import Document
+    from cios.applications.flora.banking_portfolio import financial_history_page
     for bank in BANKS.values():
         html, status = bank_page(bank.slug)
-        assert status == 200
-        assert "What the financial results imply about behaviour" in html
-        for heading in ("Financial position", "Management pressure", "Likely behaviour", "Buying posture", "What would change the view"):
-            assert heading in html
-        assert bank.management_pressure
-        assert bank.likely_behaviour
-        assert bank.buying_posture_detail
+        overview = Document(html)
+        assert status == 200 and 'What the financial results imply' in overview.headings
+        assert bank.buying_posture_detail in overview.text
+        assert bank.visible_response in overview.text and bank.unresolved_pressure in overview.text
+        assert f'/flora/banking/{bank.slug}/financial-performance' in overview.hrefs
+        history = Document(financial_history_page(bank.slug))
+        if bank.slug == 'lloyds':
+            for heading in ('Income', 'Profit', 'Costs', 'Capital'):
+                assert heading in history.headings
+            for causal_part in ('What changed:', 'Management pressure:', 'Likely behaviour:', 'Commercial implication:'):
+                assert causal_part in history.text
+        else:
+            assert 'unavailable metrics are not fabricated' in history.text
+        assert bank.management_pressure and bank.likely_behaviour and bank.buying_posture_detail
 
 
 def test_every_bank_has_reinvention_pressure_independent_of_priority():
@@ -31,25 +40,39 @@ def test_every_major_opportunity_has_explicit_barrier_and_supplier_effect():
 
 
 def test_pestle_forces_map_to_specific_banks_themes_and_non_generic_outputs():
-    html = compare_page()
+    from tests.flora_html_contract import Document
+    from cios.applications.flora.banking_portfolio import industry_outlook_page
+    # Forces have their own outlook, rather than being repeated in comparisons.
+    comparison = Document(compare_page())
+    assert '/flora/banking' in comparison.hrefs
+    from cios.applications.flora.banking_portfolio import banking_landing_page
+    assert any(h.split('#')[0] == '/flora/banking/outlook' for h in Document(banking_landing_page()).hrefs)
+    outlook = Document(industry_outlook_page())
     for category, force in PESTLE_FORCES.items():
-        assert category in html
-        assert force["force"] in html
-        assert force["banks"]
-        assert force["themes"]
-        for bank in force["banks"]:
-            assert bank in html
-    assert "does not affect all banks equally" in html
-    assert "generic" not in html.lower()
+        assert category in outlook.text and force['force'] in outlook.text
+        assert force['banks'] and force['themes']
+        for bank in force['banks']:
+            assert bank in outlook.text
+    assert 'not an enterprise-specific qualified Material Pressure' in outlook.text
 
 
 def test_supplier_names_render_and_unnamed_labels_are_suppressed_when_names_exist():
-    html = compare_page()
-    assert "Google Cloud" in html
-    assert "Microsoft" in html
-    assert "Supplier: Google Cloud" in html or "Google Cloud —" in html
-    google_cell_start = html.index("Google Cloud")
-    assert "No reliable view" not in html[max(0, google_cell_start-80):google_cell_start+180]
+    from tests.flora_html_contract import Document
+    from cios.applications.flora.banking_portfolio import opportunity_page
+    named = set()
+    for bank in BANKS.values():
+        for opportunity in bank.opportunities:
+            html, status = opportunity_page(bank.slug, opportunity.id)
+            assert status == 200
+            text = Document(html).text
+            for entry in opportunity.supplier_entries:
+                named.add(entry.supplier_name)
+                assert entry.supplier_name in text
+                assert entry.supporting_rationale in text
+                assert 'Basis (' + entry.insight_basis + ')' in text
+            if not opportunity.supplier_entries:
+                assert 'No reliable view' in text
+    assert {'Google Cloud', 'Microsoft'} <= named
 
 
 def test_supplier_relationships_are_source_backed_or_human_labelled():
@@ -62,17 +85,37 @@ def test_supplier_relationships_are_source_backed_or_human_labelled():
 
 
 def test_heatmap_cells_show_pressure_barrier_supplier_and_whitespace():
-    html = compare_page()
-    for term in ("Pressure:", "Supplier:", "Barrier:", "Whitespace:", "Financial behaviour link", "Next commercial action"):
-        assert term in html
+    from tests.flora_html_contract import Document
+    from cios.applications.flora.banking_portfolio import COMPARE_MODES, opportunity_page
+    comparison = Document(compare_page())
+    for mode in COMPARE_MODES:
+        assert mode in comparison.headings
+    # Substantial causal detail is in each opportunity, not repeated in every cell.
+    for bank in BANKS.values():
+        for opportunity in bank.opportunities:
+            detail, status = opportunity_page(bank.slug, opportunity.id)
+            doc = Document(detail)
+            assert status == 200
+            for heading in ('Current barrier', 'Supplier landscape', 'Competitive whitespace', 'Recommended next action'):
+                assert heading in doc.headings
+            assert opportunity.barrier in doc.text
+            assert opportunity.whitespace in doc.text
+            assert opportunity.next_action in doc.text
 
 
 def test_industry_opportunity_totals_reconcile_to_account_opportunities():
-    html = compare_page()
+    from tests.flora_html_contract import Document
+    html = Document(compare_page())
     _, _, portfolio_mid = totals()
-    force_total = sum(opportunity.value.midpoint for opportunity in pipeline())
-    assert force_total == portfolio_mid
-    assert f"Flora working estimate £{portfolio_mid}m" in html or f"Flora working estimate: £{portfolio_mid}m" in html
+    assert sum(opportunity.value.midpoint for opportunity in pipeline()) == portfolio_mid
+    account_totals = []
+    for bank in BANKS.values():
+        total = sum(opportunity.value.midpoint for opportunity in bank.opportunities)
+        account_totals.append(total)
+        assert f'Illustrative, unverified commercial scenario sum: £{total}m' in html.text
+    assert sum(account_totals) == portfolio_mid == 910
+    assert 'Scenarios may overlap; their sum does not establish additive funded demand' in html.text
+    assert 'not customer-confirmed budget or qualified commercial pipeline' in html.text
 
 
 def test_existing_opportunity_values_remain_unchanged_and_internal_codes_excluded_from_executive_views():
@@ -83,12 +126,26 @@ def test_existing_opportunity_values_remain_unchanged_and_internal_codes_exclude
 
 
 def test_rendered_acceptance_artefacts_exist():
-    lloyds, _ = bank_page("lloyds")
-    industry = compare_page()
-    for artefact in ("UK Banking PESTLE view", "Industry reinvention map", "What is happening in UK Banking", "Commercial heatmap", "Supplier landscape", "Whitespace analysis", "Industry opportunity roll-up"):
-        assert artefact in industry
-    for artefact in ("What the financial results imply about behaviour", "Reinvention pressure", "Reinvention barriers", "Reinvention opportunities"):
-        assert artefact in lloyds
+    from tests.flora_html_contract import Document
+    from cios.applications.flora.banking_portfolio import industry_outlook_page, heatmap_page, competitors_page, opportunity_page
+    comparison = Document(compare_page())
+    # Current dedicated destinations preserve information without a single long page.
+    for route in ('/flora/banking', '/flora/banking/compare', '/flora/banking/competitors'):
+        assert route in comparison.hrefs
+    assert 'Prioritised industry-force board' in Document(industry_outlook_page()).headings
+    assert '<table' in heatmap_page('opportunity-value')
+    for bank in BANKS.values():
+        assert bank.name in Document(heatmap_page('opportunity-value')).text
+    competitors, status = competitors_page()
+    assert status == 200 and 'Competitor capability landscape' in Document(competitors).headings
+    assert 'Scenario sizing assumptions and limits' in comparison.headings
+    lloyds = Document(bank_page('lloyds')[0])
+    assert 'Working reinvention-pressure interpretation' in lloyds.headings
+    for opportunity in BANKS['lloyds'].opportunities:
+        assert f'/flora/banking/lloyds/opportunity/{opportunity.id}' in lloyds.hrefs
+        detail, status = opportunity_page('lloyds', opportunity.id)
+        assert status == 200
+        assert all(h in Document(detail).headings for h in ('Current barrier','Competitive whitespace'))
 
 import pytest
 

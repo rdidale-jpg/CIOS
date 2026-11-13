@@ -18,7 +18,7 @@ The unchanged 01b gate enforces **1,432 identities**: normally 1,365 pass, **57 
 
 `Protected-Owners.json` fingerprints **198 unchanged files** including research/model data, security/permissions and their tests, employer context, Offers engine, Pipeline writer, CI comparator/baseline and release helpers. Five approved artwork/statistical assets are separately pinned. Three presentation-owner exceptions to the older #584 guard are explicit: Offers views, unified views and the navigation registry. All other protected owners remain byte-identical.
 
-## Readiness blocker discovered by the full gate
+## Historical blocker and individual reconciliation
 
 The first frozen candidate exposed a real specialist route regression: the flagship-only enterprise registry did not include every legacy bank. The presentation parent now uses the explorer’s existing Banking/Aviation scope, preserving Barclays and other bank discovery without broadening access. Targeted specialist tests pass. Canonical Home assertions are adapted to the approved industry destinations.
 
@@ -26,7 +26,7 @@ Two strict security checks additionally caught missing established owner Control
 
 Visual inspection of the refreshed Home caught the shared anchor reset overriding the approved dark research-pill foreground. A scoped colour rule restores readable labels; five new computed browser contrast checks cover all three links at every viewport. All **692 checks pass** and the full preview pack is regenerated.
 
-The full comparator also detects changed signatures for inherited failures whose rendered-HTML exception text changed with the shared shell. The original failing assertions remain; these are not automatically accepted as equivalent failures. The comparator, baseline and exception records remain unchanged. This is a **NO-GO for integration** until the exact-head gate passes or a separately reviewed baseline reconciliation establishes equivalence. Do not merge or deploy this draft. Final local and hosted outcomes are reported in the PR and handoff.
+The initial frozen candidate’s full comparator detected changed signatures for inherited failures whose rendered-HTML exception text changed with the shared shell. The original failing assertions remain; these are not automatically accepted as equivalent failures. The comparator, baseline and exception records remain unchanged. That candidate was **NO-GO for integration**. The [individual PR #586 reconciliation](Reconciliation-586.md) now corrects all 21 obsolete assertions/fixtures; the unchanged comparator must report them `fixed`, not accept changed signatures. The baseline and all approved failure/skip records remain intact. The remaining 36 inherited failures must retain their original signatures, and all ten skips their reasons. Final corrected-head local/hosted outcomes are recorded in the PR handoff; no green result is claimed in advance. Do not merge or deploy this draft. Final local and hosted outcomes are reported in the PR and handoff.
 
 ## Presentation-test adaptations
 
