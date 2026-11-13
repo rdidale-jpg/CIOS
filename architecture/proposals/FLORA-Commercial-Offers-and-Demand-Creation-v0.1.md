@@ -160,10 +160,23 @@ Seller: a UK technology-services company, identity and offer portfolio explicitl
 
 1. **Identity:** Is a user able to represent one employer at a time, or multiple seller organisations/roles (advisor, channel partner, portfolio career)? Recommend many authorised identities but one active Commercial Mission at a time.
 2. **Offer creation:** Should a seller be able to create personal Offers immediately, with a separate approval state for organisation-wide publication? Recommend yes.
-3. **Targeting mode:** Offer-led search, account-led assessment or both? Recommend both; one shared fit engine.
+3. **Targeting mode — OWNER DECISION CONFIRMED (13 Nov 2026):** Support both offer-led discovery and account-led discovery with **one shared Offer–Enterprise matching engine**. This is a required product/architecture contract, not a future option.
 4. **Composite proposals:** Opt-in exploratory mode only, with no external or contractual claims until seller approval.
 5. **Scoring:** Show explainable prioritisation, not pseudo-exact win probabilities.
 6. **Pipeline threshold:** Require account problem, relevant buyer/access route, explicit seller fit, qualified commercial action and user approval before promotion.
+
+## 11A. Confirmed decision: symmetric discovery, one matching engine
+
+**Owner confirmation: 13 November 2026.** FLORA must support both:
+
+- **Offer-led:** seller selects one or more authorised Offers → shared engine evaluates eligible enterprises against each offer → ranks commercially useful enterprise/offer matches and proposes trigger interpretation, entry play and next action.
+- **Account-led:** seller selects an enterprise → the same engine evaluates the seller's authorised Offer portfolio against it → ranks relevant offers, with trigger evidence, recommended entry play and next action.
+
+The two journeys MUST call the same assessment contract `assess_fit(seller_context, offer_id, enterprise_id, evidence_cutoff, policy_context)` or a functionally equivalent service. Selection only changes candidate retrieval and result grouping, **not assessment dimensions, evidence standards, status, confidence, access control or pipeline eligibility**.
+
+**Invariance rule:** For a given seller context, Offer, enterprise, source cutoff and assessment/policy version, offer-led and account-led exploration yield the same underlying fit assessment and recommendation identity, independent of the journey path. Stable IDs and deduplication prevent duplicated opportunities. Both journeys allow a concise explanation of *why this customer / why this offer / why now / recommended first move*.
+
+**Pilot acceptance:** Test the same Offer–Enterprise pairs through both journeys, assert identical reasoning inputs and assessment outcomes, check ranking remains context-sensitive, inspect source/EST presentation, and verify neither route writes Pipeline or bypasses existing authorisation.
 
 ## 12. Acceptance criteria
 
