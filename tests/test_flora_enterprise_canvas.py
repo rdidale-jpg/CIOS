@@ -416,6 +416,18 @@ def test_mod_executive_commercial_canvas_read_model(tmp_path, monkeypatch):
     plan_id = re.search(r"name='plan_id' value='([^']+)'", review).group(1)
     done, done_status = approve_and_promote(run_id, {"plan_id":[plan_id],"confirm_plan":["yes"],"confirm_mutations":["yes"],"rationale":["owner approved"]}, owner)
     assert done_status == 200
+    # A missing legacy model is a transient default with fresh timestamps on
+    # every read. Freeze only that model clock; preserve the full equality
+    # assertion and additionally verify the persisted file is byte-unchanged.
+    from datetime import datetime, timezone
+    from cios.applications.flora.memory import models as memory_models
+    class ReadModelClock:
+        @classmethod
+        def now(cls, tz=None):
+            return datetime(2026, 11, 13, tzinfo=timezone.utc).astimezone(tz)
+    monkeypatch.setattr(memory_models, "datetime", ReadModelClock)
+    model_path = EnterpriseModelRepository().path_for("MOD")
+    persisted_before = model_path.read_bytes() if model_path.exists() else None
     before = EnterpriseModelRepository().get("MOD").to_dict()
 
     html, canvas_status = enterprise_canvas_page("MOD", owner)
@@ -450,6 +462,7 @@ def test_mod_executive_commercial_canvas_read_model(tmp_path, monkeypatch):
     assert "strategic sales director" not in html.lower() or "commercial" in html.lower()
     after = EnterpriseModelRepository().get("MOD").to_dict()
     assert before == after
+    assert (model_path.read_bytes() if model_path.exists() else None) == persisted_before
 
 # Domain tests use an explicit fixture identity provider, never HTTP trust.
 pytestmark = pytest.mark.usefixtures("verified_flora_test_authority")

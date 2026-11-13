@@ -47,7 +47,7 @@ def _record(state, offer_id):
 
 @ds.view_scope
 def render(path, query, headers):
-    allowed = {'offer', 'parent', 'template', 'mode', 'selected', 'cutoff', 'search', 'enterprise', 'shortlist'}
+    allowed = {'offer', 'parent', 'template', 'mode', 'selected', 'cutoff', 'search', 'enterprise', 'shortlist', 'candidate'}
     if set(query) - allowed or any(len(v) != 1 for v in query.values()):
         raise ValueError('Unsupported offer selector')
     q = {k: v[0] for k, v in query.items()}
@@ -62,6 +62,9 @@ def render(path, query, headers):
         title, body = 'My company', company(state, headers)
     elif not state['selected']:
         title, body = 'Choose your company', '<p>Select an authorised employer before creating or discovering offers.</p>' + company(state, headers)
+    elif path == url('/development'):
+        from .seller_development_views import body as development_body
+        title,body=development_body(current,state,q,headers)
     elif path in {url('/triggers'),url('/trigger-detail'),url('/shortlists')}:
         from .buying_trigger_views import body as trigger_body
         title,body=trigger_body(current,state,q,headers)
@@ -77,6 +80,7 @@ def render(path, query, headers):
         title, body = 'What can you help customers achieve?', catalogue(state)
     ds.context_link(url('/triggers'),'Discover customers')
     ds.context_link(url('/shortlists'),'Reviewed shortlists')
+    ds.context_link(url('/development'),'My development')
     company_name = state['selected']['organisation'] if state['selected'] else 'Your commercial workspace'
     content = f'<style>{CSS}</style><section class="offers" id="offers-content" aria-label="Offers workspace"><p class="eyebrow">{e(company_name)}</p><h1>{e(title)}</h1>{body}</section>'
     return page('Offers — ' + title, content, headers, 'offers', path)
@@ -281,6 +285,9 @@ def studio(state, headers):
 
 
 def submit(path, form_values, headers):
+    if path.removeprefix(offers.BASE).startswith('/development-'):
+        from .seller_development_views import submit as development_submit
+        return development_submit(path,form_values,headers)
     suffix = path.removeprefix(offers.BASE)
     if suffix == '/shortlist-save':
         from .buying_trigger_views import submit as save_review

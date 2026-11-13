@@ -25,8 +25,8 @@ PATTERNS = {
     'ai-change': ('AI and data change', ('LBG-A2030-DATA',)),
 }
 BASE = '/flora/offers'
-READ_PATHS = frozenset(BASE + s for s in ('', '/company', '/edit', '/review', '/discover', '/studio', '/start', '/triggers', '/trigger-detail', '/shortlists'))
-WRITE_PATHS = frozenset(BASE + s for s in ('/profile', '/bind', '/select', '/save', '/transition', '/studio-toggle', '/compose', '/revoke', '/onboard-company', '/onboard-preferences', '/onboard-adopt', '/shortlist-save'))
+READ_PATHS = frozenset(BASE + s for s in ('', '/company', '/edit', '/review', '/discover', '/studio', '/start', '/triggers', '/trigger-detail', '/shortlists', '/development'))
+WRITE_PATHS = frozenset(BASE + s for s in ('/profile', '/bind', '/select', '/save', '/transition', '/studio-toggle', '/compose', '/revoke', '/onboard-company', '/onboard-preferences', '/onboard-adopt', '/shortlist-save', '/development-create', '/development-save', '/development-reassess', '/development-handoff'))
 FIELDS = ('name', 'outcome', 'icp', 'buyers', 'trigger', 'entry_play', 'next_test',
           'capabilities', 'partners', 'constraints', 'evidence', 'exclusions', 'trigger_pattern')
 VARIATION_FIELDS = frozenset({'name', 'icp', 'buyers', 'entry_play', 'next_test'})

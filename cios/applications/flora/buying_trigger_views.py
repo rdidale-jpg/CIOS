@@ -44,7 +44,12 @@ def body(path,state,q,headers):
         if not records:content+='<p>No reviewed shortlists yet.</p>'
         for r in records:
             content+='<article class="pair"><h2>Reviewed shortlist · v'+str(r['version'])+'</h2><p>As of '+e(r['source_cutoff'])+' · '+('Inputs changed — refresh before use' if r['stale'] else 'Retained reviewed research snapshot')+'</p><p>'+e(r['note'])+'</p><ul>'
-            for entry in r['entries']:content+='<li>'+e(entry['enterprise_name']+' · '+entry['tier']+' · '+entry['why'])+'</li>'
+            for entry in r['entries']:
+                content+='<li>'+e(entry['enterprise_name']+' · '+entry['tier']+' · '+entry['why'])
+                if not r['stale'] and entry['tier']!='Research only':
+                    content+=form('/development-create',hidden('shortlist',r['id'])+hidden('version',r['version'])+hidden('assessment',entry['assessment_id'])+hidden('confirmed','yes'),'Develop opportunity')
+                else:content+=link('/triggers','Continue research',mode='offer',selected=r['offer_id'])
+                content+='</li>'
             content+='</ul>'+link('/triggers','Refresh assessment',mode='offer',selected=r['offer_id'],cutoff=r['source_cutoff'])+'</article>'
         return 'Reviewed shortlists',extra+content
     choices=_offers(state)
@@ -58,6 +63,7 @@ def body(path,state,q,headers):
         chosen=next((r for r in results if r['enterprise_slug']==q.get('enterprise')),None)
         if not chosen:raise PermissionError('Offer/account assessment unavailable')
         row=next(r for r in choices if r['id']==chosen['offer_id']);b=chosen['buying_trigger'];sources([chosen])
+        review=next((r for r in offers.shortlist_snapshot(headers=headers) if not r['stale'] and r['offer_id']==chosen['offer_id'] and any(x['assessment_id']==chosen['assessment_id'] for x in r['entries'])),None)
         content='<article class="trigger-brief"><p class="eyebrow">'+e(row['content']['name'])+'</p><h2>'+e(chosen['enterprise_name'])+'</h2><p class="trigger-tier">'+e(b['tier']+' · '+b['stage'])+'</p><p>'+e(chosen['why_account'])+'</p>'
         content+='<h3>A useful first conversation</h3><p>'+e(chosen['entry_play'])+'</p><h3>The deciding question</h3><p>'+e(chosen['next_validation_action'])+'</p>'
         if b.get('entry_play_detail'):content+='<p><strong>Stop condition:</strong> '+e(b['entry_play_detail']['stop'])+'</p>'
@@ -67,6 +73,9 @@ def body(path,state,q,headers):
             content+='<li><strong>'+e(f['publication_date'] or 'Publication date unknown')+'</strong> · '+e(f['statement'])+'<br><small>'+e(f['effective_period'] or 'Effective date unknown')+' · '+e(f['freshness'])+'</small></li>'
         if not b['timeline']:content+='<li>No current Offer-specific signal found in the reviewed sources.</li>'
         content+='</ol><details><summary>Alternatives and remaining questions</summary><p>'+e('; '.join(chosen['contradictions']) or 'No specific counter-evidence retained; this does not establish absence of an incumbent solution.')+'</p><p>'+e('; '.join(b['reasons']))+'</p><p>Next evidence task: '+e(b['next_evidence_task'])+'</p><p>Unknown: '+e('; '.join(b['unknowns']))+'</p><p>'+e(b['research_completeness'])+'</p></details></article>'
+        if review and b['tier']!='Research only':
+            content+=form('/development-create',hidden('shortlist',review['id'])+hidden('version',review['version'])+hidden('assessment',chosen['assessment_id'])+hidden('confirmed','yes'),'Develop opportunity')
+        else:content+=link('/triggers','Continue research',selected=chosen['offer_id'],cutoff=cutoff)
         return 'Offer fit',extra+content
     selected=q.get('selected') or (choices[0]['id'] if mode=='offer' else ('lloyds' if 'lloyds' in targets else next(iter(targets),'')))
     results=offers.discover(mode,selected,cutoff,intelligence=True,headers=headers);sources(results)
