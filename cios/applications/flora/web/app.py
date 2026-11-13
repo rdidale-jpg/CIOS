@@ -181,6 +181,9 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                     self.send_error(403, "Storage recovery requires an authorised Flora owner")
                     return
                 self._html(_storage_recovery_page())
+            elif parsed.path in {"/flora/offers", "/flora/offers/company", "/flora/offers/edit", "/flora/offers/review", "/flora/offers/discover", "/flora/offers/studio"}:
+                from cios.applications.flora.offers_views import render
+                self._html(render(parsed.path, parse_qs(parsed.query, keep_blank_values=True), self.headers))
             elif parsed.path in {"/", "/flora", "/flora/"}:
                 self._html(_flora_home_page(self.headers))
             elif parsed.path in ("/enterprises/lloyds/understanding", "/enterprises/easyjet/understanding"):
@@ -761,7 +764,10 @@ class FloraWebHandler(BaseHTTPRequestHandler):
         length = int(self.headers.get("Content-Length", "0"))
         raw_body = self.rfile.read(length)
         form = {} if "multipart/form-data" in self.headers.get("Content-Type", "") else parse_qs(raw_body.decode("utf-8"), keep_blank_values=True)
-        if self.path.startswith("/flora/sales/"):
+        if self.path in {"/flora/offers/bind", "/flora/offers/select", "/flora/offers/save", "/flora/offers/transition", "/flora/offers/studio-toggle", "/flora/offers/compose", "/flora/offers/revoke"}:
+            from cios.applications.flora.offers_views import submit
+            self._redirect(submit(self.path, form, self.headers))
+        elif self.path.startswith("/flora/sales/"):
             from cios.applications.flora.sales_views import submit
             self._redirect(submit(self.path, form, self.headers))
         elif self.path == "/pilot-sign-in":
@@ -1239,6 +1245,7 @@ def _flora_opportunities_page(headers=None, query=None) -> str:
     body = f"<section class='workspace-heading'><p class='eyebrow'>Opportunities</p><h1>Commercial Pipeline Workspace</h1><p class='lead'>Understand the customer problem, commercial timing and evidence behind every Horizon decision.</p></section>{_workspace_tabs(requested, tabs)}<div class='priority-grid'>{cards}</div>"
     from cios.applications.flora.research_intelligence.unified_views import opportunities_body
     body=opportunities_body()+"<details class='context-tools'"+(" open" if query and query.get('tab') else "")+"><summary>Historical Horizon scenarios & supporting views</summary>"+body+"</details>"
+    body = "<section class='card'><h2>Start with your offer</h2><p>Explore seller offers and account fit in the controlled pilot.</p><a href='/flora/offers'>Open My offers →</a></section>" + body
     return _flora_v2_page("Opportunities", "opportunities", body, _account_context_html(blueprint_upload_authorisation(headers or {})))
 
 
