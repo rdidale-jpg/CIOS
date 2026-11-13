@@ -24,6 +24,7 @@ on:
       - 'docs/flora-runtime/integration-578/**'
       - 'docs/flora-runtime/visual-v2-583/**'
       - 'docs/flora-runtime/design-system-585/**'
+      - 'docs/flora-runtime/offer-library-587/**'
       - 'docs/flora-runtime/experience-repair-02/run_regressions.py'
       - '.github/workflows/flora-validation.yml'
       - '.github/workflows/flora-release-preflight.yml'
@@ -49,6 +50,7 @@ on:
       - 'docs/flora-runtime/integration-578/**'
       - 'docs/flora-runtime/visual-v2-583/**'
       - 'docs/flora-runtime/design-system-585/**'
+      - 'docs/flora-runtime/offer-library-587/**'
       - 'docs/flora-runtime/experience-repair-02/run_regressions.py'
       - '.github/workflows/flora-validation.yml'
       - '.github/workflows/flora-release-preflight.yml'
@@ -69,6 +71,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          # Validate the candidate itself, including draft PRs, rather than a synthetic merge ref.
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
           fetch-depth: 0
       - uses: actions/setup-python@v5
@@ -87,6 +91,8 @@ jobs:
         run: python -m pytest tests/test_flora_technology_owner_journey.py tests/test_flora_ux_refinement_573.py tests/test_flora_integration_578.py -q
       - name: Test controlled Offers pilot
         run: python -m pytest tests/test_flora_offers_v1.py -q
+      - name: Test technology library, seller onboarding and protected owner compatibility
+        run: python -m pytest tests/test_flora_offer_library_587.py tests/test_flora_strategic_offers_588.py -q
       - name: Test separate two-screen Visual Experience v2
         run: python -m pytest tests/test_flora_visual_v2_583.py -q
       - name: Test unified visual system and protected source ownership

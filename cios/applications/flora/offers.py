@@ -9,8 +9,9 @@ from datetime import date, datetime, timezone
 import json
 from uuid import uuid4
 
+from . import offer_library as library
 from .access import require_capability, is_cios_owner
-from .commercial_mission import resolve_commercial_mission, resolve_employer_context, save_employer_context
+from .commercial_mission import resolve_commercial_mission, resolve_employer_context, save_employer_context, save_commercial_mission
 from .security import verified_service_read, verified_service_write, require_active_service_write
 from .security_store import SecurityStore, canonical, digest
 from .storage import data_path, atomic_write_json
@@ -23,8 +24,8 @@ PATTERNS = {
     'ai-change': ('AI and data change', ('LBG-A2030-DATA',)),
 }
 BASE = '/flora/offers'
-READ_PATHS = frozenset(BASE + s for s in ('', '/company', '/edit', '/review', '/discover', '/studio'))
-WRITE_PATHS = frozenset(BASE + s for s in ('/profile', '/bind', '/select', '/save', '/transition', '/studio-toggle', '/compose', '/revoke'))
+READ_PATHS = frozenset(BASE + s for s in ('', '/company', '/edit', '/review', '/discover', '/studio', '/start'))
+WRITE_PATHS = frozenset(BASE + s for s in ('/profile', '/bind', '/select', '/save', '/transition', '/studio-toggle', '/compose', '/revoke', '/onboard-company', '/onboard-preferences', '/onboard-adopt'))
 FIELDS = ('name', 'outcome', 'icp', 'buyers', 'trigger', 'entry_play', 'next_test',
           'capabilities', 'partners', 'constraints', 'evidence', 'exclusions', 'trigger_pattern')
 VARIATION_FIELDS = frozenset({'name', 'icp', 'buyers', 'entry_play', 'next_test'})
@@ -185,6 +186,79 @@ def select_employer(employer_id, *, headers=None):
     _persist(envelope, headers, 'employer_selected', employer_id)
 
 
+
+@verified_service_write('commercial_context.edit')
+def configure_library(selected, employer_id, employer_version, mission_version, *, delivery_specialisms=None, headers=None):
+    """Private supplier categories, separate from target customer sectors and IAM."""
+    context = _actor(headers, True)
+    employer = _selected(_load(), context)
+    if employer['id'] != employer_id or employer['version'] != employer_version:
+        raise ValueError('Employer authorisation changed; reload setup')
+    selected = library.categories(selected)
+    mission = resolve_commercial_mission(headers)
+    if (mission.version if mission else 0) != mission_version:
+        raise ValueError('Commercial preferences changed; reload setup')
+    value = asdict(mission) if mission else {
+        'executive_role': 'Seller', 'commercial_objective': 'Explore declared technology offers'}
+    if delivery_specialisms is None:
+        delivery_specialisms = (mission.technology_delivery_specialisms
+            if mission and mission.offer_library_employer_id == employer_id else ())
+    delivery_specialisms = library.specialisms(delivery_specialisms)
+    value.update(technology_subindustries=selected, technology_delivery_specialisms=delivery_specialisms,
+                 offer_library_employer_id=employer_id,
+                 version=mission_version + 1)
+    return save_commercial_mission(headers, value)
+
+
+@verified_service_write('commercial_context.edit')
+def adopt_library(references, employer_id, employer_version, mission_version, confirmed=False, *, headers=None):
+    """Atomic, explicitly selected private drafts in the existing offer journal.
+
+    Validate the whole selection first. No capability assertion, approval, matching
+    write or Pipeline capture is implied. Repeated selection is idempotent.
+    """
+    context = _actor(headers, True)
+    envelope = _load()
+    employer = _selected(envelope, context)
+    mission = resolve_commercial_mission(headers)
+    if (employer['id'] != employer_id or employer['version'] != employer_version or not mission
+            or mission.offer_library_employer_id != employer_id or mission.version != mission_version):
+        raise ValueError('Company or preferences changed; reload setup')
+    selected = library.categories(mission.technology_subindustries)
+    if confirmed is not True:
+        raise ValueError('Confirm these are private examples requiring seller proof and independent review')
+    if not isinstance(references, (list, tuple)) or not 1 <= len(references) <= 12:
+        raise ValueError('Select between one and twelve developed offers')
+    rows = []
+    for ref in references:
+        if not isinstance(ref, dict) or set(ref) != {'id', 'version', 'digest'}:
+            raise ValueError('Invalid library reference')
+        row = library.template(ref['id'], ref['version'])
+        if library.fingerprint(row) != ref['digest'] or not set(row['subindustries']) & set(selected):
+            raise ValueError('Library selection changed or does not match your business categories')
+        rows.append(row)
+    if len({r['id'] for r in rows}) != len(rows):
+        raise ValueError('Select each offer only once')
+    result = []
+    for row in rows:
+        source = library.source_ref(row)
+        existing = next((versions[-1] for versions in envelope['offers'].values()
+            if versions[-1]['author'] == context.user_id and versions[-1]['employer_id'] == employer_id
+            and versions[-1]['workspace_id'] == context.workspace and versions[-1]['state'] != 'retired'
+            and versions[-1].get('template_source') == source), None)
+        if existing:
+            result.append(deepcopy(existing))
+            continue
+        record = save_offer(library.offer_content(row), headers=headers)
+        envelope = _load()
+        stored = envelope['offers'][record['id']][-1]
+        stored['template_source'] = source
+        stored['library_playbook'] = deepcopy(row)
+        stored['classification'] = 'private example offer; seller capability and customer demand unverified'
+        _persist(envelope, headers, 'library_example_adopted', record['id'])
+        result.append(deepcopy(stored))
+    return result
+
 def _visible(record, context, employer):
     return (record['workspace_id'] == context.workspace and record['employer_id'] == employer['id']
         and (record['author'] == context.user_id or record['state'] == 'employer_approved'
@@ -202,6 +276,8 @@ def _record(envelope, context, employer, offer_id, version=None):
 def _eligible(envelope, record):
     versions = envelope['offers'][record['id']]
     if record is not versions[-1] or record['state'] not in {'private_draft', 'employer_approved'}:
+        return False
+    if record.get('template_source') and not library.current(record['template_source']):
         return False
     if record.get('parent'):
         parent = record['parent']
@@ -280,10 +356,10 @@ def save_offer(values, offer_id='', expected_version=0, parent_id='', parent_ver
         'kind': prior['kind'] if prior else ('variation' if parent else 'seller'),
         'created_at': datetime.now(timezone.utc).isoformat(), 'canonical_offer_ref': None,
         'classification': prior['classification'] if prior else 'human-supplied operational context', 'review': None}
-    if prior:
-        for key in ('target_context', 'composition_review'):
-            if key in prior:
-                record[key] = deepcopy(prior[key])
+    lineage_owner = prior or (master if parent else {})
+    for key in ('target_context', 'composition_review', 'template_source', 'library_playbook'):
+        if key in lineage_owner:
+            record[key] = deepcopy(lineage_owner[key])
     envelope['offers'].setdefault(identifier, []).append(record)
     _persist(envelope, headers, 'offer_version_saved', identifier)
     return deepcopy(record)
@@ -297,6 +373,10 @@ def transition(offer_id, expected_version, action, approval_reference='', *, hea
     record = _record(envelope, context, employer, offer_id)
     if record['version'] != expected_version:
         raise ValueError('Offer changed; reload before review')
+    if action in {'submit', 'approve'} and record.get('template_source') and not library.current(record['template_source']):
+        raise ValueError('Library version changed or withdrawn; adopt and review the current playbook explicitly')
+    if action == 'approve' and record.get('template_source') and not record['content']['evidence']:
+        raise ValueError('Seller delivery proof and rights references are required; library sources are not seller evidence')
     author = record['author'] == context.user_id
     permitted = ((action == 'submit' and author and record['state'] in {'private_draft', 'changes_requested'})
         or (action in {'approve', 'reject', 'changes'} and record['state'] == 'submitted_for_review'
@@ -448,7 +528,9 @@ def assess_fit(seller, offer, enterprise, evidence_cutoff, policy=POLICY):
         sector_fit = False
     approved = offer['state'] == 'employer_approved'
     pattern = offer['content'].get('trigger_pattern', 'structural-review')
-    indicators = [r for r in lineage if r['claim_id'] in PATTERNS[pattern][1]]
+    playbook = offer.get('library_playbook')
+    context_ids = playbook['research_context_claim_ids'] if playbook else PATTERNS[pattern][1]
+    indicators = [r for r in lineage if r['claim_id'] in context_ids]
     posture = 'deprioritise' if excluded or not sector_fit else ('validate' if indicators else 'research')
     if indicators and not excluded and sector_fit and offer['content']['partners']:
         posture = 'partner'
@@ -460,7 +542,7 @@ def assess_fit(seller, offer, enterprise, evidence_cutoff, policy=POLICY):
         'statement': 'Test whether ' + offer['content']['outcome'].rstrip('.') + ' is relevant to ' + enterprise['name'] + '.',
         'supporting_evidence': [r['claim_id'] for r in lineage], 'contradictory_evidence': enterprise['counter_indicators'] if available else [],
         'validation_question': offer['content']['next_test']}]
-    return {'assessment_id': assessment_id, 'offer_id': offer['id'], 'offer_version': offer['version'],
+    result = {'assessment_id': assessment_id, 'offer_id': offer['id'], 'offer_version': offer['version'],
         'enterprise_id': enterprise['id'], 'enterprise_name': enterprise['name'], 'enterprise_slug': enterprise['slug'],
         'source_cut_off': evidence_cutoff, 'policy_version': policy, 'status': 'pilot_interpretation_not_accepted_APPA',
         'account_twin_id': None if enterprise['id'].startswith('presentation:') else enterprise['id'],
@@ -490,6 +572,24 @@ def assess_fit(seller, offer, enterprise, evidence_cutoff, policy=POLICY):
         'evidence_lineage': lineage, 'observation_lineage': deepcopy(enterprise['observation_lineage']),
         'hypothesis_lineage': hypotheses, 'offer_evidence': offer['content']['evidence'],
         'limitations': deepcopy(enterprise['limitations']), 'pipeline_eligible': False}
+    if playbook:
+        result['trigger_evaluation'] = ('Authored example patterns; existing account context may inform validation. '
+            'Structural and event patterns are not observed buying triggers. No buying event or urgency established.')
+        result['material_pressure'] = 'Pattern to validate: ' + result['material_pressure']
+        result['entry_plays'] = deepcopy(playbook['entry_plays'])
+        result['library_context'] = {
+            'pattern_policy': 'technology-archetype-context-v1',
+            'template_source': deepcopy(offer['template_source']),
+            'structural_patterns': deepcopy(playbook['structural_triggers']),
+            'event_patterns': deepcopy(playbook['event_triggers']),
+            'status': 'Authored patterns only; account context is not an observed buying trigger',
+            'seller_proof': 'Required; taxonomy bibliography does not validate seller capability',
+            'source_ids': list(playbook['source_ids'])}
+        if playbook.get('economic_value'):
+            result['economic_value_hypothesis'] = deepcopy(playbook['economic_value'])
+            result['library_context']['disconfirming_evidence'] = deepcopy(playbook['disconfirming_evidence'])
+            result['library_context']['follow_on_opportunities'] = deepcopy(playbook['follow_on_opportunities'])
+    return result
 
 
 @verified_service_read('commercial_context.view')

@@ -206,7 +206,19 @@ def test_signed_out_private_routes_and_real_forms_keep_access_csrf_and_no_store(
 def test_protected_intelligence_security_permissions_matching_and_pipeline_bytes():
     root=Path(__file__).resolve().parents[1]
     manifest=json.loads((root/'docs/flora-runtime/design-system-585/Protected-Owners.json').read_text())
-    for path,digest in manifest['unchanged_files'].items():assert hashlib.sha256((root/path).read_bytes()).hexdigest()==digest,path
+    # #585 was presentation-only. #587 explicitly authorises two operational
+    # owners to grow; retain the historical byte record and pin their reviewed
+    # replacements separately. All other 196 protected owners stay byte-exact.
+    revisions=json.loads((root/'docs/flora-runtime/offer-library-587/Owner-Compatibility.json').read_text())
+    assert revisions['base_sha']=='3b8bd2c5e5177c012826658f820eeeb4ea2705f5'
+    assert set(revisions['functional_owner_revisions'])=={
+        'cios/applications/flora/offers.py','cios/applications/flora/commercial_mission.py'}
+    for path,digest in manifest['unchanged_files'].items():
+        revision=revisions['functional_owner_revisions'].get(path)
+        if revision:
+            assert revision['baseline_sha256']==digest,path
+            digest=revision['candidate_sha256']
+        assert hashlib.sha256((root/path).read_bytes()).hexdigest()==digest,path
     assert manifest['base_sha']=='19ab36d241dbca2099ffb9b5d519c68c493a914a'
 
 

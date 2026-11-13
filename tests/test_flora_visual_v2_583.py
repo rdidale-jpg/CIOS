@@ -191,7 +191,16 @@ def test_runtime_source_preserves_canonical_home_and_domain_owners():
     manifest = json.loads((root/'docs/flora-runtime/visual-v2-583/Protected-Owners.json').read_text())
     # #585 is authorised to change presentation owners, not their intelligence/security inputs.
     unified = json.loads((root/'docs/flora-runtime/design-system-585/Protected-Owners.json').read_text())
+    # #587 also authorises two functional owners. Preserve the historical
+    # record and verify old/new pins rather than silently refreshing it.
+    revisions = json.loads((root/'docs/flora-runtime/offer-library-587/Owner-Compatibility.json').read_text())
+    assert set(revisions['functional_owner_revisions']) == {
+        'cios/applications/flora/offers.py', 'cios/applications/flora/commercial_mission.py'}
     for name,digest in manifest['unchanged_files'].items():
+        revision = revisions['functional_owner_revisions'].get(name)
+        if revision:
+            assert revision['baseline_sha256'] == digest, name
+            digest = revision['candidate_sha256']
         if name in unified['presentation_exceptions']:
             assert name.endswith(('offers_views.py','banking_explorer.py','unified_views.py','visual_intelligence.py','living_map.py','sales_views.py','workspace/views.py','navigation.py'))
             continue

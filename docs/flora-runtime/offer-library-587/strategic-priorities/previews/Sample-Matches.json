@@ -1,0 +1,651 @@
+{
+  "source_cutoff": "2026-11-13",
+  "policy": "offers-pilot-v1",
+  "samples": [
+    {
+      "library_id": "tech-strategic-digital-transformation",
+      "offer": "Enterprise Digital Transformation",
+      "enterprise": "Lloyds Banking Group",
+      "enterprise_slug": "lloyds",
+      "why_account": "The annual report names faster application retirement and cloud migration among 2026 priorities.",
+      "why_offer": "Redesign an end-to-end business service and its operating model so an accountable enterprise sponsor can realise and sustain measurable customer and operational value.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "next_test": "Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "posture": "validate",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Change delivery and integration",
+          "Workforce adoption and service transition",
+          "Ongoing platform and operating costs"
+        ],
+        "disconfirmation": "No material service gap, no accountable benefit owner, or a simpler process-only change has a better evidenced value case",
+        "measures": [
+          "End-to-end service completion and time-to-serve",
+          "Repeat contacts and avoidable rework",
+          "Sustained adoption and benefits-owner acceptance"
+        ],
+        "mechanisms": [
+          "Less avoidable journey rework and failure demand",
+          "Improved service completion and customer experience",
+          "More effective allocation of change investment"
+        ],
+        "method": "Compare customer-approved baseline and future-state service outcomes; monetise only evidenced volume \u00d7 attributable unit-cost change, less implementation, transition and recurring operating costs. Avoid double counting with other programmes.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Employer-approved proposition; delivery proof still requires review.",
+      "source_claim_ids": [
+        "LBG-AR25-MIGRATION",
+        "LBG-A2030-DATA",
+        "LBG-ENVOY-CONTROLS",
+        "LBG-SOURCING-ACCESS"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    },
+    {
+      "library_id": "tech-strategic-ai-first-transformation",
+      "offer": "AI-first Business Transformation",
+      "enterprise": "Lloyds Banking Group",
+      "enterprise_slug": "lloyds",
+      "why_account": "The strategy makes enterprise data enablement a stated AI priority.",
+      "why_offer": "Redesign a business process, roles and controls around a justified AI-enabled operating model, with measurable benefits, human accountability and sustained organisational adoption.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "next_test": "Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+      "posture": "validate",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Data and integration readiness",
+          "Workforce redesign, training and adoption",
+          "Runtime, evaluation, human review and control operations"
+        ],
+        "disconfirmation": "AI does not beat the simpler baseline, review effort offsets gains, or an acceptable accountable operating model cannot be established",
+        "measures": [
+          "Task quality and exception/rework rates",
+          "Human review effort and service completion",
+          "Observed adoption, unit operating cost and evaluation drift"
+        ],
+        "mechanisms": [
+          "Improved quality or throughput of a bounded business process",
+          "Less avoidable handling and rework where demonstrated",
+          "More effective human review and decision support"
+        ],
+        "method": "Value only observed process improvements against a non-AI baseline; subtract data preparation, change, model/runtime, integration, review and ongoing control costs. Capacity released is not automatically a cash saving.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Private seller declaration; no employer approval.",
+      "source_claim_ids": [
+        "LBG-AR25-MIGRATION",
+        "LBG-A2030-DATA",
+        "LBG-ENVOY-CONTROLS",
+        "LBG-SOURCING-ACCESS"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    },
+    {
+      "library_id": "tech-strategic-cybersecurity-resilience",
+      "offer": "Enterprise Cybersecurity & Resilience",
+      "enterprise": "Lloyds Banking Group",
+      "enterprise_slug": "lloyds",
+      "why_account": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation.",
+      "why_offer": "Improve an enterprise\u2019s ability to protect and recover a critical business service through a prioritised, evidenced cyber control, resilience and assurance programme.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "next_test": "Do the existing controls and recovery evidence already address the scenario adequately?",
+      "posture": "validate",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Control and service engineering",
+          "Assurance and recovery exercises",
+          "Ongoing security operations and supplier coordination"
+        ],
+        "disconfirmation": "Current controls demonstrably meet risk and recovery objectives, or proposed changes do not improve the customer-approved scenario",
+        "measures": [
+          "Tested recovery and escalation completion",
+          "Critical dependency/control ownership coverage",
+          "Evidence-backed remediation closure and assurance rework"
+        ],
+        "mechanisms": [
+          "Lower exposure to consequential service disruption where controls are shown to improve",
+          "Less duplicated assurance and remediation effort",
+          "More defensible risk prioritisation and recovery decisions"
+        ],
+        "method": "Use owner-approved risk and service-impact scenarios; quantify only supported exposure and control costs, with assumptions and ranges if later evidenced. Do not turn an unobserved breach probability or avoided fine into a promised saving.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Private seller declaration; no employer approval.",
+      "source_claim_ids": [
+        "LBG-AR25-MIGRATION",
+        "LBG-A2030-DATA",
+        "LBG-ENVOY-CONTROLS",
+        "LBG-SOURCING-ACCESS"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    },
+    {
+      "library_id": "tech-strategic-complex-legacy-modernisation",
+      "offer": "Complex Legacy Application Modernisation",
+      "enterprise": "Lloyds Banking Group",
+      "enterprise_slug": "lloyds",
+      "why_account": "The annual report names faster application retirement and cloud migration among 2026 priorities.",
+      "why_offer": "Modernise a complex application estate through a defensible retain, retire, rehost, replatform, refactor or replace strategy while preserving critical-service continuity and accountable value.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "next_test": "Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "posture": "validate",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Assessment, engineering and data transition",
+          "Dual run, support extensions and contractual exit",
+          "Operational readiness, rollback and long-term maintenance"
+        ],
+        "disconfirmation": "Retention or a smaller upgrade has better evidenced whole-life value, or continuity and rights cannot be established",
+        "measures": [
+          "Verified retired run/support costs and contract obligations",
+          "Service parity, reconciliation and recovery observations",
+          "Lead time and dependency/ownership closure"
+        ],
+        "mechanisms": [
+          "Retire demonstrably unnecessary run and support cost",
+          "Improve change capacity and remove measured dependency friction",
+          "Reduce supported obsolescence and transition exposure"
+        ],
+        "method": "Compare whole-life retain and change options including support extensions, licences, vendor/IP rights, dual run, migration, reconciliation, exit and support. Count retired cost only when obligations actually end; avoid blanket cloud or rewrite savings.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Private seller declaration; no employer approval.",
+      "source_claim_ids": [
+        "LBG-AR25-MIGRATION",
+        "LBG-A2030-DATA",
+        "LBG-ENVOY-CONTROLS",
+        "LBG-SOURCING-ACCESS"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    },
+    {
+      "library_id": "tech-strategic-social-value-esg",
+      "offer": "Social Value & ESG Transformation",
+      "enterprise": "Lloyds Banking Group",
+      "enterprise_slug": "lloyds",
+      "why_account": "No account-specific indicator for this pattern at the selected cutoff; research the fit first.",
+      "why_offer": "Turn material social and environmental commitments into owned, measurable delivery and reporting practices with defensible boundaries, attribution and stakeholder accountability.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "next_test": "Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+      "posture": "research",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Outcome delivery and partner coordination",
+          "Data collection, consent, measurement and verification",
+          "Operating/reporting controls and any separately scoped technology"
+        ],
+        "disconfirmation": "Policy is out of scope, outcomes are not additional/material, existing reporting suffices, or attribution/measurement cannot withstand review",
+        "measures": [
+          "Verified additional social outcomes within a stated contract/boundary",
+          "Inventory coverage, factor provenance and reconciliation exceptions",
+          "Observed delivery cost, reporting effort and attributable absolute environmental change"
+        ],
+        "mechanisms": [
+          "More credible delivery of material social and environmental commitments",
+          "Less avoidable reporting rework and unclear supplier accountability",
+          "Better decisions about evidenced environmental improvements and delivery costs"
+        ],
+        "method": "Measure social, environmental and financial outcomes separately against an owned baseline. Compare delivery and reporting costs where evidenced; monetise social/carbon outcomes only with an explicitly approved, transparent method. Do not infer contract wins, automatic carbon savings or regulatory acceptance.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Private seller declaration; no employer approval.",
+      "source_claim_ids": [
+        "LBG-AR25-MIGRATION",
+        "LBG-A2030-DATA",
+        "LBG-ENVOY-CONTROLS",
+        "LBG-SOURCING-ACCESS"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    },
+    {
+      "library_id": "tech-strategic-digital-transformation",
+      "offer": "Enterprise Digital Transformation",
+      "enterprise": "easyJet",
+      "enterprise_slug": "easyjet",
+      "why_account": "FY2025 report describes multilingual chat and improved disruption self-service; remaining friction is unmeasured here.",
+      "why_offer": "Redesign an end-to-end business service and its operating model so an accountable enterprise sponsor can realise and sustain measurable customer and operational value.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "next_test": "Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "posture": "validate",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Change delivery and integration",
+          "Workforce adoption and service transition",
+          "Ongoing platform and operating costs"
+        ],
+        "disconfirmation": "No material service gap, no accountable benefit owner, or a simpler process-only change has a better evidenced value case",
+        "measures": [
+          "End-to-end service completion and time-to-serve",
+          "Repeat contacts and avoidable rework",
+          "Sustained adoption and benefits-owner acceptance"
+        ],
+        "mechanisms": [
+          "Less avoidable journey rework and failure demand",
+          "Improved service completion and customer experience",
+          "More effective allocation of change investment"
+        ],
+        "method": "Compare customer-approved baseline and future-state service outcomes; monetise only evidenced volume \u00d7 attributable unit-cost change, less implementation, transition and recurring operating costs. Avoid double counting with other programmes.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Employer-approved proposition; delivery proof still requires review.",
+      "source_claim_ids": [
+        "AV-DIGITAL",
+        "AV-ICC",
+        "AV-MRO",
+        "AV-PROCUREMENT"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    },
+    {
+      "library_id": "tech-strategic-ai-first-transformation",
+      "offer": "AI-first Business Transformation",
+      "enterprise": "easyJet",
+      "enterprise_slug": "easyjet",
+      "why_account": "easyJet reported Jetstream and predictive crew-planning support in its Luton ICC in May 2024. Current adoption and residual backlog remain unknown.",
+      "why_offer": "Redesign a business process, roles and controls around a justified AI-enabled operating model, with measurable benefits, human accountability and sustained organisational adoption.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "next_test": "Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+      "posture": "validate",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Data and integration readiness",
+          "Workforce redesign, training and adoption",
+          "Runtime, evaluation, human review and control operations"
+        ],
+        "disconfirmation": "AI does not beat the simpler baseline, review effort offsets gains, or an acceptable accountable operating model cannot be established",
+        "measures": [
+          "Task quality and exception/rework rates",
+          "Human review effort and service completion",
+          "Observed adoption, unit operating cost and evaluation drift"
+        ],
+        "mechanisms": [
+          "Improved quality or throughput of a bounded business process",
+          "Less avoidable handling and rework where demonstrated",
+          "More effective human review and decision support"
+        ],
+        "method": "Value only observed process improvements against a non-AI baseline; subtract data preparation, change, model/runtime, integration, review and ongoing control costs. Capacity released is not automatically a cash saving.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Private seller declaration; no employer approval.",
+      "source_claim_ids": [
+        "AV-DIGITAL",
+        "AV-ICC",
+        "AV-MRO",
+        "AV-PROCUREMENT"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    },
+    {
+      "library_id": "tech-strategic-cybersecurity-resilience",
+      "offer": "Enterprise Cybersecurity & Resilience",
+      "enterprise": "easyJet",
+      "enterprise_slug": "easyjet",
+      "why_account": "easyJet reported Jetstream and predictive crew-planning support in its Luton ICC in May 2024. Current adoption and residual backlog remain unknown.",
+      "why_offer": "Improve an enterprise\u2019s ability to protect and recover a critical business service through a prioritised, evidenced cyber control, resilience and assurance programme.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "next_test": "Do the existing controls and recovery evidence already address the scenario adequately?",
+      "posture": "validate",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Control and service engineering",
+          "Assurance and recovery exercises",
+          "Ongoing security operations and supplier coordination"
+        ],
+        "disconfirmation": "Current controls demonstrably meet risk and recovery objectives, or proposed changes do not improve the customer-approved scenario",
+        "measures": [
+          "Tested recovery and escalation completion",
+          "Critical dependency/control ownership coverage",
+          "Evidence-backed remediation closure and assurance rework"
+        ],
+        "mechanisms": [
+          "Lower exposure to consequential service disruption where controls are shown to improve",
+          "Less duplicated assurance and remediation effort",
+          "More defensible risk prioritisation and recovery decisions"
+        ],
+        "method": "Use owner-approved risk and service-impact scenarios; quantify only supported exposure and control costs, with assumptions and ranges if later evidenced. Do not turn an unobserved breach probability or avoided fine into a promised saving.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Private seller declaration; no employer approval.",
+      "source_claim_ids": [
+        "AV-DIGITAL",
+        "AV-ICC",
+        "AV-MRO",
+        "AV-PROCUREMENT"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    },
+    {
+      "library_id": "tech-strategic-complex-legacy-modernisation",
+      "offer": "Complex Legacy Application Modernisation",
+      "enterprise": "easyJet",
+      "enterprise_slug": "easyjet",
+      "why_account": "No account-specific indicator for this pattern at the selected cutoff; research the fit first.",
+      "why_offer": "Modernise a complex application estate through a defensible retain, retire, rehost, replatform, refactor or replace strategy while preserving critical-service continuity and accountable value.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "next_test": "Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "posture": "research",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Assessment, engineering and data transition",
+          "Dual run, support extensions and contractual exit",
+          "Operational readiness, rollback and long-term maintenance"
+        ],
+        "disconfirmation": "Retention or a smaller upgrade has better evidenced whole-life value, or continuity and rights cannot be established",
+        "measures": [
+          "Verified retired run/support costs and contract obligations",
+          "Service parity, reconciliation and recovery observations",
+          "Lead time and dependency/ownership closure"
+        ],
+        "mechanisms": [
+          "Retire demonstrably unnecessary run and support cost",
+          "Improve change capacity and remove measured dependency friction",
+          "Reduce supported obsolescence and transition exposure"
+        ],
+        "method": "Compare whole-life retain and change options including support extensions, licences, vendor/IP rights, dual run, migration, reconciliation, exit and support. Count retired cost only when obligations actually end; avoid blanket cloud or rewrite savings.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Private seller declaration; no employer approval.",
+      "source_claim_ids": [
+        "AV-DIGITAL",
+        "AV-ICC",
+        "AV-MRO",
+        "AV-PROCUREMENT"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    },
+    {
+      "library_id": "tech-strategic-social-value-esg",
+      "offer": "Social Value & ESG Transformation",
+      "enterprise": "easyJet",
+      "enterprise_slug": "easyjet",
+      "why_account": "No account-specific indicator for this pattern at the selected cutoff; research the fit first.",
+      "why_offer": "Turn material social and environmental commitments into owned, measurable delivery and reporting practices with defensible boundaries, attribution and stakeholder accountability.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "next_test": "Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+      "posture": "research",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Outcome delivery and partner coordination",
+          "Data collection, consent, measurement and verification",
+          "Operating/reporting controls and any separately scoped technology"
+        ],
+        "disconfirmation": "Policy is out of scope, outcomes are not additional/material, existing reporting suffices, or attribution/measurement cannot withstand review",
+        "measures": [
+          "Verified additional social outcomes within a stated contract/boundary",
+          "Inventory coverage, factor provenance and reconciliation exceptions",
+          "Observed delivery cost, reporting effort and attributable absolute environmental change"
+        ],
+        "mechanisms": [
+          "More credible delivery of material social and environmental commitments",
+          "Less avoidable reporting rework and unclear supplier accountability",
+          "Better decisions about evidenced environmental improvements and delivery costs"
+        ],
+        "method": "Measure social, environmental and financial outcomes separately against an owned baseline. Compare delivery and reporting costs where evidenced; monetise social/carbon outcomes only with an explicitly approved, transparent method. Do not infer contract wins, automatic carbon savings or regulatory acceptance.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Private seller declaration; no employer approval.",
+      "source_claim_ids": [
+        "AV-DIGITAL",
+        "AV-ICC",
+        "AV-MRO",
+        "AV-PROCUREMENT"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    },
+    {
+      "library_id": "tech-strategic-digital-transformation",
+      "offer": "Enterprise Digital Transformation",
+      "enterprise": "Equinix",
+      "enterprise_slug": "equinix",
+      "why_account": "No account-specific indicator for this pattern at the selected cutoff; research the fit first.",
+      "why_offer": "Redesign an end-to-end business service and its operating model so an accountable enterprise sponsor can realise and sustain measurable customer and operational value.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "next_test": "Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "posture": "research",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Change delivery and integration",
+          "Workforce adoption and service transition",
+          "Ongoing platform and operating costs"
+        ],
+        "disconfirmation": "No material service gap, no accountable benefit owner, or a simpler process-only change has a better evidenced value case",
+        "measures": [
+          "End-to-end service completion and time-to-serve",
+          "Repeat contacts and avoidable rework",
+          "Sustained adoption and benefits-owner acceptance"
+        ],
+        "mechanisms": [
+          "Less avoidable journey rework and failure demand",
+          "Improved service completion and customer experience",
+          "More effective allocation of change investment"
+        ],
+        "method": "Compare customer-approved baseline and future-state service outcomes; monetise only evidenced volume \u00d7 attributable unit-cost change, less implementation, transition and recurring operating costs. Avoid double counting with other programmes.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Employer-approved proposition; delivery proof still requires review.",
+      "source_claim_ids": [
+        "presentation:equinix-annual-report"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    },
+    {
+      "library_id": "tech-strategic-ai-first-transformation",
+      "offer": "AI-first Business Transformation",
+      "enterprise": "Equinix",
+      "enterprise_slug": "equinix",
+      "why_account": "No account-specific indicator for this pattern at the selected cutoff; research the fit first.",
+      "why_offer": "Redesign a business process, roles and controls around a justified AI-enabled operating model, with measurable benefits, human accountability and sustained organisational adoption.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "next_test": "Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+      "posture": "research",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Data and integration readiness",
+          "Workforce redesign, training and adoption",
+          "Runtime, evaluation, human review and control operations"
+        ],
+        "disconfirmation": "AI does not beat the simpler baseline, review effort offsets gains, or an acceptable accountable operating model cannot be established",
+        "measures": [
+          "Task quality and exception/rework rates",
+          "Human review effort and service completion",
+          "Observed adoption, unit operating cost and evaluation drift"
+        ],
+        "mechanisms": [
+          "Improved quality or throughput of a bounded business process",
+          "Less avoidable handling and rework where demonstrated",
+          "More effective human review and decision support"
+        ],
+        "method": "Value only observed process improvements against a non-AI baseline; subtract data preparation, change, model/runtime, integration, review and ongoing control costs. Capacity released is not automatically a cash saving.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Private seller declaration; no employer approval.",
+      "source_claim_ids": [
+        "presentation:equinix-annual-report"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    },
+    {
+      "library_id": "tech-strategic-cybersecurity-resilience",
+      "offer": "Enterprise Cybersecurity & Resilience",
+      "enterprise": "Equinix",
+      "enterprise_slug": "equinix",
+      "why_account": "No account-specific indicator for this pattern at the selected cutoff; research the fit first.",
+      "why_offer": "Improve an enterprise\u2019s ability to protect and recover a critical business service through a prioritised, evidenced cyber control, resilience and assurance programme.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "next_test": "Do the existing controls and recovery evidence already address the scenario adequately?",
+      "posture": "research",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Control and service engineering",
+          "Assurance and recovery exercises",
+          "Ongoing security operations and supplier coordination"
+        ],
+        "disconfirmation": "Current controls demonstrably meet risk and recovery objectives, or proposed changes do not improve the customer-approved scenario",
+        "measures": [
+          "Tested recovery and escalation completion",
+          "Critical dependency/control ownership coverage",
+          "Evidence-backed remediation closure and assurance rework"
+        ],
+        "mechanisms": [
+          "Lower exposure to consequential service disruption where controls are shown to improve",
+          "Less duplicated assurance and remediation effort",
+          "More defensible risk prioritisation and recovery decisions"
+        ],
+        "method": "Use owner-approved risk and service-impact scenarios; quantify only supported exposure and control costs, with assumptions and ranges if later evidenced. Do not turn an unobserved breach probability or avoided fine into a promised saving.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Private seller declaration; no employer approval.",
+      "source_claim_ids": [
+        "presentation:equinix-annual-report"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    },
+    {
+      "library_id": "tech-strategic-complex-legacy-modernisation",
+      "offer": "Complex Legacy Application Modernisation",
+      "enterprise": "Equinix",
+      "enterprise_slug": "equinix",
+      "why_account": "No account-specific indicator for this pattern at the selected cutoff; research the fit first.",
+      "why_offer": "Modernise a complex application estate through a defensible retain, retire, rehost, replatform, refactor or replace strategy while preserving critical-service continuity and accountable value.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "next_test": "Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "posture": "research",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Assessment, engineering and data transition",
+          "Dual run, support extensions and contractual exit",
+          "Operational readiness, rollback and long-term maintenance"
+        ],
+        "disconfirmation": "Retention or a smaller upgrade has better evidenced whole-life value, or continuity and rights cannot be established",
+        "measures": [
+          "Verified retired run/support costs and contract obligations",
+          "Service parity, reconciliation and recovery observations",
+          "Lead time and dependency/ownership closure"
+        ],
+        "mechanisms": [
+          "Retire demonstrably unnecessary run and support cost",
+          "Improve change capacity and remove measured dependency friction",
+          "Reduce supported obsolescence and transition exposure"
+        ],
+        "method": "Compare whole-life retain and change options including support extensions, licences, vendor/IP rights, dual run, migration, reconciliation, exit and support. Count retired cost only when obligations actually end; avoid blanket cloud or rewrite savings.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Private seller declaration; no employer approval.",
+      "source_claim_ids": [
+        "presentation:equinix-annual-report"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    },
+    {
+      "library_id": "tech-strategic-social-value-esg",
+      "offer": "Social Value & ESG Transformation",
+      "enterprise": "Equinix",
+      "enterprise_slug": "equinix",
+      "why_account": "No account-specific indicator for this pattern at the selected cutoff; research the fit first.",
+      "why_offer": "Turn material social and environmental commitments into owned, measurable delivery and reporting practices with defensible boundaries, attribution and stakeholder accountability.",
+      "why_now": "Explore timing with the owner; no urgency inferred.",
+      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "next_test": "Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+      "posture": "research",
+      "economics": null,
+      "value_case": {
+        "amount": null,
+        "costs": [
+          "Outcome delivery and partner coordination",
+          "Data collection, consent, measurement and verification",
+          "Operating/reporting controls and any separately scoped technology"
+        ],
+        "disconfirmation": "Policy is out of scope, outcomes are not additional/material, existing reporting suffices, or attribution/measurement cannot withstand review",
+        "measures": [
+          "Verified additional social outcomes within a stated contract/boundary",
+          "Inventory coverage, factor provenance and reconciliation exceptions",
+          "Observed delivery cost, reporting effort and attributable absolute environmental change"
+        ],
+        "mechanisms": [
+          "More credible delivery of material social and environmental commitments",
+          "Less avoidable reporting rework and unclear supplier accountability",
+          "Better decisions about evidenced environmental improvements and delivery costs"
+        ],
+        "method": "Measure social, environmental and financial outcomes separately against an owned baseline. Compare delivery and reporting costs where evidenced; monetise social/carbon outcomes only with an explicitly approved, transparent method. Do not infer contract wins, automatic carbon savings or regulatory acceptance.",
+        "status": "Unvalued until customer baseline, attribution, costs and approval are established"
+      },
+      "pipeline_eligible": false,
+      "seller_status": "Private seller declaration; no employer approval.",
+      "source_claim_ids": [
+        "presentation:equinix-annual-report"
+      ],
+      "matching_modes_identical": true,
+      "classification": "Example seller hypothesis using existing reviewed account context; not customer demand"
+    }
+  ]
+}
