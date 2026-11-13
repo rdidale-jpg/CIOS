@@ -19,6 +19,7 @@ on:
       - 'docs/flora-runtime/technology-visual-foundation/**'
       - 'docs/flora-runtime/technology-visual-world-v1/**'
       - 'docs/flora-runtime/technology-owner-journey/**'
+      - 'docs/flora-runtime/ux-refinement-573/**'
       - 'docs/flora-runtime/experience-repair-02/run_regressions.py'
       - '.github/workflows/flora-validation.yml'
   push:
@@ -38,6 +39,7 @@ on:
       - 'docs/flora-runtime/technology-visual-foundation/**'
       - 'docs/flora-runtime/technology-visual-world-v1/**'
       - 'docs/flora-runtime/technology-owner-journey/**'
+      - 'docs/flora-runtime/ux-refinement-573/**'
       - 'docs/flora-runtime/experience-repair-02/run_regressions.py'
       - '.github/workflows/flora-validation.yml'
   workflow_dispatch:
@@ -72,7 +74,7 @@ jobs:
         id: validation
         run: python tools/ci/flora_ci.py --output "$RUNNER_TEMP/flora-ci"
       - name: Test approved Technology owner journey
-        run: python -m pytest tests/test_flora_technology_owner_journey.py -q
+        run: python -m pytest tests/test_flora_technology_owner_journey.py tests/test_flora_ux_refinement_573.py -q
       - name: Publish sanitized job summary
         if: always()
         run: |

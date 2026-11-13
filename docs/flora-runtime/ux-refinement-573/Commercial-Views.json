@@ -1,0 +1,584 @@
+{
+  "version": 1,
+  "as_of": "2026-11-13",
+  "authority": "candidate_intelligence",
+  "canonical_accepted_count": 0,
+  "pipeline_mutation": false,
+  "sources": {
+    "NV-10K": {
+      "id": "NV-10K",
+      "title": "NVIDIA FY2026 Form 10-K",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+      "publication_date": "2026-02-25",
+      "reporting_period": "FY2026 ended 2026-01-25 · global",
+      "locator": "Business: Manufacturing, Human Capital; Risk Factors; Note 2 customer concentration",
+      "reviewed_at": "2026-11-13",
+      "retrieval_extent": "Reviewed public web passage; original publisher bytes not archived",
+      "excerpt": "We utilize foundries, such as Taiwan Semiconductor Manufacturing Company Limited, or TSMC, and Samsung Electronics Co., Ltd., or Samsung, to produce our semiconductor wafers.",
+      "rights": "unestablished",
+      "authority": "candidate_intelligence",
+      "accepted": false
+    },
+    "NV-FY26": {
+      "id": "NV-FY26",
+      "title": "NVIDIA FY2026 results",
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Fourth-Quarter-and-Fiscal-2026/",
+      "publication_date": "2026-02-25",
+      "reporting_period": "FY2026 ended 2026-01-25 · global · USD",
+      "locator": "Fiscal 2026 Summary: GAAP; Data Center highlights",
+      "reviewed_at": "2026-11-13",
+      "retrieval_extent": "Reviewed public web passage; original publisher bytes not archived",
+      "excerpt": "For fiscal 2026, revenue was $215.9 billion, up 65% from a year ago.",
+      "rights": "unestablished",
+      "authority": "candidate_intelligence",
+      "accepted": false
+    },
+    "NV-Q227": {
+      "id": "NV-Q227",
+      "title": "NVIDIA Q2 FY2027 results",
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2027/",
+      "publication_date": "2026-08-26",
+      "reporting_period": "Quarter ended 2026-07-26 · global · USD",
+      "locator": "Q2 Fiscal 2027 Summary and Data Center highlights",
+      "reviewed_at": "2026-11-13",
+      "retrieval_extent": "Reviewed public web passage; original publisher bytes not archived",
+      "excerpt": "Revenue of $96.2 billion, up 106% from a year ago",
+      "rights": "unestablished",
+      "authority": "candidate_intelligence",
+      "accepted": false
+    },
+    "NV-UK26": {
+      "id": "NV-UK26",
+      "title": "NVIDIA UK research compute commitment",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years",
+      "publication_date": "2026-10-13",
+      "reporting_period": "Five-year announced UK programme; not revenue or completed spend",
+      "locator": "News Summary and programme terms",
+      "reviewed_at": "2026-11-13",
+      "retrieval_extent": "Reviewed public web passage; original publisher bytes not archived",
+      "excerpt": "NVIDIA announces a compute donation valued at $250 million over five years to support U.K. agentic safety and security research.",
+      "rights": "unestablished",
+      "authority": "candidate_intelligence",
+      "accepted": false
+    },
+    "NV-UK25": {
+      "id": "NV-UK25",
+      "title": "NVIDIA UK infrastructure ecosystem",
+      "url": "https://investor.nvidia.com/news/press-release-details/2025/NVIDIA-and-United-Kingdom-Build-Nations-AI-Infrastructure-and-Ecosystem-to-Fuel-Innovation-Economic-Growth-and-Jobs/",
+      "publication_date": "2025-09-16",
+      "reporting_period": "UK ecosystem announcement; individual programme dates differ",
+      "locator": "Opening announcement and Isambard-AI paragraph",
+      "reviewed_at": "2026-11-13",
+      "retrieval_extent": "Reviewed public web passage; original publisher bytes not archived",
+      "excerpt": "working with partners including CoreWeave, Microsoft and Nscale to build the nation’s next generation of AI infrastructure",
+      "rights": "unestablished",
+      "authority": "candidate_intelligence",
+      "accepted": false
+    },
+    "NEBIUS-UK": {
+      "id": "NEBIUS-UK",
+      "title": "Nebius UK deployment announcement",
+      "url": "https://nebius.com/newsroom/nebius-ai-cloud-arrives-in-uk-with-one-of-the-country-s-first-advanced-nvidia-ai-infrastructure-deployments",
+      "publication_date": "2025-11-06",
+      "reporting_period": "UK deployment reported November 2025",
+      "locator": "Opening deployment paragraph",
+      "reviewed_at": "2026-11-13",
+      "retrieval_extent": "Reviewed public web passage; original publisher bytes not archived",
+      "excerpt": "Nebius today unveiled its first deployment of NVIDIA Blackwell Ultra AI infrastructure in the UK.",
+      "rights": "unestablished",
+      "authority": "candidate_intelligence",
+      "accepted": false
+    },
+    "CC-FY25": {
+      "id": "CC-FY25",
+      "title": "Computacenter 2025 final results",
+      "url": "https://investors.computacenter.com/news-releases/news-release-details/computacenter-final-results-2025",
+      "publication_date": null,
+      "reporting_period": "FY2025 ended 2025-12-31 · UK segment · GBP",
+      "locator": "Trading reviews by geography: United Kingdom, Total revenue",
+      "reviewed_at": "2026-11-13",
+      "retrieval_extent": "Reviewed public web passage; original publisher bytes not archived",
+      "excerpt": "Total revenue 1,419.2 1,158.1 22.5%",
+      "rights": "unestablished",
+      "authority": "candidate_intelligence",
+      "accepted": false
+    },
+    "CC-AR25": {
+      "id": "CC-AR25",
+      "title": "Computacenter Annual Report 2025",
+      "url": "https://investors.computacenter.com/static-files/cef18bb9-9750-4d16-adbe-39bbeb650da4",
+      "publication_date": null,
+      "reporting_period": "FY2025 ended 2025-12-31 · UK segment",
+      "locator": "Note 9 Employee costs, printed page 176 / PDF page 178",
+      "reviewed_at": "2026-11-13",
+      "retrieval_extent": "Reviewed public web passage; original publisher bytes not archived",
+      "excerpt": "The table below shows the average monthly number of employees (including Executive Directors) by Segment during the year: UK 4,357 4,446",
+      "rights": "unestablished",
+      "authority": "candidate_intelligence",
+      "accepted": false
+    },
+    "EQ-10K": {
+      "id": "EQ-10K",
+      "title": "Equinix FY2025 Form 10-K",
+      "url": "https://investor.equinix.com/sec-filings/all-sec-filings/content/0001101239-26-000032/eqix-20251231.htm",
+      "publication_date": "2026-02-11",
+      "reporting_period": "FY2025 ended 2025-12-31 · global · USD",
+      "locator": "Consolidated Statements of Operations; Note 18",
+      "reviewed_at": "2026-11-13",
+      "retrieval_extent": "Reviewed public web passage; original publisher bytes not archived",
+      "excerpt": "Total revenues: $9,217 million; colocation: $6,475 million; interconnection: $1,655 million.",
+      "rights": "unestablished",
+      "authority": "candidate_intelligence",
+      "accepted": false
+    }
+  },
+  "participants": {
+    "nvidia": {
+      "role": "Accelerated computing",
+      "specialty": "GPUs, networking & AI software",
+      "signal": {
+        "title": "UK compute-access programme",
+        "text": "Five-year UK research compute commitment.",
+        "kind": "observation",
+        "source_ids": [
+          "NV-UK26"
+        ]
+      }
+    },
+    "computacenter": {
+      "role": "Sourcing & services",
+      "specialty": "Technology sourcing, professional & managed services",
+      "uk_revenue": {
+        "value": 1419200000,
+        "unit": "GBP",
+        "period": "FY2025",
+        "scope": "UK segment",
+        "kind": "reported",
+        "source_ids": [
+          "CC-FY25"
+        ],
+        "basis": "Reported revenue; not gross invoiced income.",
+        "range": null,
+        "canonical_accepted": false
+      },
+      "uk_workforce": {
+        "value": 4357,
+        "unit": "people",
+        "period": "FY2025",
+        "scope": "UK segment",
+        "kind": "reported",
+        "source_ids": [
+          "CC-AR25"
+        ],
+        "basis": "Average monthly employees including executive directors; not year-end headcount.",
+        "range": null,
+        "canonical_accepted": false
+      },
+      "signal": {
+        "title": "UK professional-services growth",
+        "text": "UK professional-services revenue grew 27.6% in FY2025.",
+        "kind": "observation",
+        "source_ids": [
+          "CC-FY25"
+        ]
+      }
+    },
+    "equinix": {
+      "role": "Digital infrastructure",
+      "specialty": "Colocation & interconnection",
+      "signal": {
+        "title": "Capacity expansion",
+        "text": "FY2025 revenue growth included completed expansion projects.",
+        "kind": "observation",
+        "source_ids": [
+          "EQ-10K"
+        ]
+      }
+    },
+    "arm": {
+      "role": "Semiconductor technology",
+      "specialty": "Processor IP and Arm-designed silicon",
+      "foundation_blocks": [
+        "659a4511-6752-4aa1-a321-b3854994fb93"
+      ]
+    },
+    "microsoft": {
+      "role": "Platforms & applications",
+      "specialty": "Azure, Microsoft 365 & Dynamics",
+      "foundation_blocks": [
+        "eea8bc49-80d0-4789-9e73-a7e804c3c119"
+      ]
+    },
+    "aws": {
+      "role": "Cloud infrastructure",
+      "specialty": "Compute, storage & cloud services",
+      "foundation_blocks": [
+        "837342f2-4432-4ab4-97ed-66404ae5fa7a"
+      ]
+    },
+    "google-cloud": {
+      "role": "Cloud & data platforms",
+      "specialty": "Cloud, data & AI platforms",
+      "foundation_blocks": [
+        "edb33742-2b1e-46d0-a838-a81ffac1fdce"
+      ]
+    },
+    "digital-realty": {
+      "role": "Digital infrastructure",
+      "specialty": "Data centres & interconnection"
+    },
+    "virtus": {
+      "role": "Digital infrastructure",
+      "specialty": "Colocation and AI/HPC facilities"
+    },
+    "telehouse": {
+      "role": "Digital infrastructure",
+      "specialty": "Colocation & connectivity"
+    },
+    "pulsant": {
+      "role": "Digital infrastructure",
+      "specialty": "Regional edge & private cloud"
+    }
+  },
+  "profiles": {
+    "nvidia": {
+      "key": "nvidia",
+      "name": "NVIDIA",
+      "district": "ai",
+      "subtitle": "Accelerated computing, networking and AI platforms",
+      "summary": {
+        "title": "Commercial perspective",
+        "text": "Full-stack AI infrastructure connects chip design, systems, networking and software to a global partner ecosystem.",
+        "kind": "observation",
+        "source_ids": [
+          "NV-Q227"
+        ]
+      },
+      "metrics": {
+        "revenue": {
+          "value": 215938000000,
+          "unit": "USD",
+          "period": "FY2026",
+          "scope": "Global group",
+          "kind": "reported",
+          "source_ids": [
+            "NV-FY26"
+          ],
+          "basis": "",
+          "range": null,
+          "canonical_accepted": false
+        },
+        "net_income": {
+          "value": 120067000000,
+          "unit": "USD",
+          "period": "FY2026",
+          "scope": "Global group · GAAP",
+          "kind": "reported",
+          "source_ids": [
+            "NV-FY26"
+          ],
+          "basis": "",
+          "range": null,
+          "canonical_accepted": false
+        },
+        "gross_margin": {
+          "value": 71.1,
+          "unit": "percent",
+          "period": "FY2026",
+          "scope": "Global group · GAAP",
+          "kind": "reported",
+          "source_ids": [
+            "NV-FY26"
+          ],
+          "basis": "",
+          "range": null,
+          "canonical_accepted": false
+        },
+        "data_center": {
+          "value": 193700000000,
+          "unit": "USD",
+          "period": "FY2026",
+          "scope": "Global Data Center",
+          "kind": "reported",
+          "source_ids": [
+            "NV-FY26"
+          ],
+          "basis": "",
+          "range": null,
+          "canonical_accepted": false
+        },
+        "workforce": {
+          "value": 42000,
+          "unit": "people",
+          "period": "FY2026 year-end",
+          "scope": "Global group",
+          "kind": "reported",
+          "source_ids": [
+            "NV-10K"
+          ],
+          "basis": "",
+          "range": null,
+          "canonical_accepted": false,
+          "approximate": true
+        },
+        "latest_quarter": {
+          "value": 96221000000,
+          "unit": "USD",
+          "period": "Q2 FY2027",
+          "scope": "Global group",
+          "kind": "reported",
+          "source_ids": [
+            "NV-Q227"
+          ],
+          "basis": "",
+          "range": null,
+          "canonical_accepted": false
+        }
+      },
+      "strategy": [
+        {
+          "title": "Full-stack platforms",
+          "text": "Vera Rubin systems, networking and software extend the AI infrastructure platform.",
+          "kind": "observation",
+          "source_ids": [
+            "NV-Q227"
+          ]
+        },
+        {
+          "title": "UK research ecosystem",
+          "text": "A $250m, five-year compute-access donation supports UK agentic-safety research through UK cloud partners.",
+          "kind": "observation",
+          "source_ids": [
+            "NV-UK26"
+          ]
+        },
+        {
+          "title": "Partner-led reach",
+          "text": "UK infrastructure collaboration includes CoreWeave, Microsoft and Nscale.",
+          "kind": "observation",
+          "source_ids": [
+            "NV-UK25"
+          ]
+        }
+      ],
+      "pressures": [
+        {
+          "title": "Manufacturing dependencies",
+          "text": "Wafer production and memory supply depend on specialist manufacturers.",
+          "kind": "observation",
+          "source_ids": [
+            "NV-10K"
+          ]
+        },
+        {
+          "title": "Customer concentration",
+          "text": "Two direct customers represented 22% and 14% of FY2026 revenue.",
+          "kind": "observation",
+          "source_ids": [
+            "NV-10K"
+          ],
+          "boundary": "The filing does not name these direct customers; they must not be matched to named ecosystem participants."
+        },
+        {
+          "title": "Export controls",
+          "text": "FY2027 Q3 guidance excludes Data Center compute revenue from China.",
+          "kind": "observation",
+          "source_ids": [
+            "NV-Q227"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "name": "Nebius",
+          "role": "Deployment operator",
+          "category": "Customers & deployed use",
+          "scope": "UK · November 2025",
+          "text": "Reported a UK Blackwell Ultra deployment.",
+          "source_ids": [
+            "NEBIUS-UK"
+          ],
+          "kind": "observation",
+          "boundary": "Deployment evidence does not identify the contracting route or prove a direct purchase from NVIDIA."
+        },
+        {
+          "name": "University of Bristol",
+          "role": "Research deployment user",
+          "category": "Customers & deployed use",
+          "scope": "UK · July 2025 launch reported",
+          "text": "Isambard-AI uses NVIDIA Grace Hopper systems.",
+          "source_ids": [
+            "NV-UK25"
+          ],
+          "kind": "observation",
+          "boundary": "Research use, not an inferred direct sales contract."
+        },
+        {
+          "name": "CoreWeave",
+          "role": "UK infrastructure partner",
+          "category": "Partners",
+          "scope": "UK · September 2025 announcement",
+          "text": "Named in NVIDIA’s UK ecosystem announcement.",
+          "source_ids": [
+            "NV-UK25"
+          ],
+          "kind": "observation",
+          "boundary": "Announcement scope only; no exclusive partnership or whole-enterprise deployment inferred."
+        },
+        {
+          "name": "Microsoft",
+          "role": "UK infrastructure partner",
+          "category": "Partners",
+          "scope": "UK · September 2025 announcement",
+          "text": "Named in NVIDIA’s UK ecosystem announcement.",
+          "source_ids": [
+            "NV-UK25"
+          ],
+          "kind": "observation",
+          "boundary": "Announcement scope only; no exclusive partnership or whole-enterprise deployment inferred."
+        },
+        {
+          "name": "Nscale",
+          "role": "UK infrastructure partner",
+          "category": "Partners",
+          "scope": "UK · September 2025 announcement",
+          "text": "Named in NVIDIA’s UK ecosystem announcement.",
+          "source_ids": [
+            "NV-UK25"
+          ],
+          "kind": "observation",
+          "boundary": "Announcement scope only; no exclusive partnership or whole-enterprise deployment inferred."
+        },
+        {
+          "name": "TSMC",
+          "role": "Wafer foundry",
+          "category": "Suppliers",
+          "scope": "Global · FY2026 filing",
+          "text": "Produces semiconductor wafers.",
+          "source_ids": [
+            "NV-10K"
+          ],
+          "kind": "observation",
+          "boundary": "Published supply role; no contract value, exclusivity or current UK delivery allocation inferred."
+        },
+        {
+          "name": "Samsung",
+          "role": "Foundry & memory supplier",
+          "category": "Suppliers",
+          "scope": "Global · FY2026 filing",
+          "text": "Provides wafer manufacturing and memory.",
+          "source_ids": [
+            "NV-10K"
+          ],
+          "kind": "observation",
+          "boundary": "Published supply role; no contract value, exclusivity or current UK delivery allocation inferred."
+        },
+        {
+          "name": "SK hynix",
+          "role": "Memory supplier",
+          "category": "Suppliers",
+          "scope": "Global · FY2026 filing",
+          "text": "Supplies memory.",
+          "source_ids": [
+            "NV-10K"
+          ],
+          "kind": "observation",
+          "boundary": "Published supply role; no contract value, exclusivity or current UK delivery allocation inferred."
+        },
+        {
+          "name": "Micron",
+          "role": "Memory supplier",
+          "category": "Suppliers",
+          "scope": "Global · FY2026 filing",
+          "text": "Supplies memory.",
+          "source_ids": [
+            "NV-10K"
+          ],
+          "kind": "observation",
+          "boundary": "Published supply role; no contract value, exclusivity or current UK delivery allocation inferred."
+        }
+      ],
+      "programmes": [
+        {
+          "title": "UK agentic-safety research compute",
+          "value": "$250m",
+          "period": "Five years · announced 13 Oct 2026",
+          "text": "A five-year compute-access donation for the UK research community, including BOLD, SOFAIR and Imperial College London.",
+          "status": "Announced commitment",
+          "source_ids": [
+            "NV-UK26"
+          ],
+          "kind": "observation",
+          "boundary": "Not UK revenue, completed expenditure, or a procurement award. Provider selection, architecture and commercial terms were to be agreed."
+        },
+        {
+          "title": "UK Blackwell Ultra deployment",
+          "value": "",
+          "period": "Reported live · 6 Nov 2025",
+          "text": "Nebius’s London-area deployment combines compute, networking, cooling and on-site power.",
+          "status": "Operator-reported deployment",
+          "source_ids": [
+            "NEBIUS-UK"
+          ],
+          "kind": "observation",
+          "boundary": "Historical deployment report; later capacity and current commercial terms require event-specific corroboration."
+        }
+      ],
+      "opportunities": [
+        {
+          "id": "uk-readiness",
+          "title": "UK AI deployment readiness",
+          "kind": "hypothesis",
+          "text": "Infrastructure rollout may create integration, workload-onboarding and operational-readiness work.",
+          "buyer": "UK infrastructure operators and delivery partners",
+          "basis": "Nebius reports UK deployment; NVIDIA has announced UK research compute access.",
+          "source_ids": [
+            "NEBIUS-UK",
+            "NV-UK26"
+          ],
+          "macro": [
+            "technology",
+            "sustainability"
+          ],
+          "qualification": "Identify a specific facility or programme, delivery owner, funded scope and external sourcing route.",
+          "countercase": "Existing operator teams or contracted partners may already cover delivery."
+        },
+        {
+          "id": "supply-visibility",
+          "title": "Supply-chain planning & visibility",
+          "kind": "hypothesis",
+          "text": "Specialist manufacturing dependencies may support scenario planning and supply-chain data integration.",
+          "buyer": "Operations and supply-chain teams",
+          "basis": "The annual filing describes specialist foundry and memory suppliers.",
+          "source_ids": [
+            "NV-10K"
+          ],
+          "macro": [
+            "economy",
+            "technology"
+          ],
+          "qualification": "Confirm the planning bottleneck, internal tooling, decision owner and accessible work package.",
+          "countercase": "Existing systems and supplier agreements may already address the requirement."
+        },
+        {
+          "id": "research-enablement",
+          "title": "Research platform enablement",
+          "kind": "hypothesis",
+          "text": "A multi-year research compute programme may need onboarding, usage controls and safety-evaluation support.",
+          "buyer": "Programme delivery partners and research organisations",
+          "basis": "The October 2026 UK programme is an announced compute-access commitment.",
+          "source_ids": [
+            "NV-UK26"
+          ],
+          "macro": [
+            "technology",
+            "cyber"
+          ],
+          "qualification": "Establish the delivery architecture, participating provider, intended users and procurement route.",
+          "countercase": "Delivery design and commercial terms may leave no externally accessible services work."
+        }
+      ]
+    }
+  },
+  "source_policy": "Presentation-only reviewed passages; existing importer, identity, acceptance and rights owners retain authority. No original publisher bytes or accepted Evidence records are created."
+}

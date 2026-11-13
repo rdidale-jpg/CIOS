@@ -200,6 +200,7 @@ class FloraWebHandler(BaseHTTPRequestHandler):
                 self._html(unified_views.page(data['enterprise_name'] + " Research Diagnostic", body, self.headers, "enterprises", parsed.path))
             elif parsed.path in {
                 '/industries/technology/experience', '/industries/technology/experience/district',
+                '/industries/technology/experience/participants',
                 '/industries/technology/experience/enterprise', '/industries/technology/experience/operating-model',
                 '/industries/technology/experience/pipeline', '/industries/technology/experience/opportunity',
                 '/industries/technology/experience/assets/artwork',

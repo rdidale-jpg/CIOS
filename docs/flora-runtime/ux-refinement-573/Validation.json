@@ -1,0 +1,67 @@
+{
+  "issue": 573,
+  "as_of": "2026-11-13",
+  "status": "draft_owner_review",
+  "source_binding": "Source-Manifest.json pins tested implementation content; no hosted test result is claimed here.",
+  "focused_tests": {
+    "passed": 137,
+    "failed": 0,
+    "skipped": 0,
+    "errors": 0,
+    "includes_all_80_participant_profile_routes": true
+  },
+  "ci_policy_tests": {
+    "passed": 25
+  },
+  "regression_gate": {
+    "passed": true,
+    "unique_ids": 1432,
+    "passed_tests": 1365,
+    "inherited_failures": 57,
+    "unchanged_skips": 10,
+    "issues": [],
+    "security_passed": 388,
+    "report": "Regression-Gate.json"
+  },
+  "browser": {
+    "responsive_checks": 63,
+    "retained_owner_journey_checks": 60,
+    "keyboard_district_activations": 32,
+    "parity_capture_matches": 15,
+    "page_errors": [],
+    "network_writes": [],
+    "external_requests": []
+  },
+  "coverage": {
+    "participant_views": 80,
+    "reviewed_uk_revenue_cells": 1,
+    "reviewed_uk_workforce_cells": 1,
+    "estimate_cells": 0,
+    "first_enriched_profile": "NVIDIA",
+    "public_source_records": 9,
+    "profile_opportunity_hypotheses": 3,
+    "original_relationship_records": 34,
+    "original_commercial_themes": 6
+  },
+  "preservation": {
+    "protected_files_unchanged": 21,
+    "canonical_accepted_count": 0,
+    "eligible_imports": 0,
+    "live_pipeline_mutations": 0,
+    "runtime_paid_model_or_agent_calls": 0
+  },
+  "review_boundary": {
+    "draft_pr": true,
+    "merged": false,
+    "deployed": false,
+    "hosted_ci": "Pending separate PR run; consult the current check before integration"
+  },
+  "limitations": [
+    "Chromium simulated viewports; physical iPad/Safari and assistive-technology user acceptance outstanding",
+    "Most UK numeric cells remain blank rather than inferred from global or UK-and-Ireland measures",
+    "NVIDIA is the first fully enriched profile; other profiles reuse available research",
+    "Rights and canonical identities remain unresolved internally; presentation candidates are not accepted imports",
+    "Banking/Aviation UX differences are audited, not redesigned or claimed uniformly aligned",
+    "Pipeline changes remain a browser-tab-only illustrative preview"
+  ]
+}

@@ -29,7 +29,7 @@ def test_journey_http_views_are_public_and_native_links_are_finite(web, suffix):
     for tag, a in dom.nodes:
         if tag == 'a' and a.get('href','').startswith(x.BASE):
             assert public_request_target(a['href'].split('#')[0]), a['href']
-    assert 'No canonical promotion or live Pipeline writes.' in html
+    assert '/industries/technology/evidence' in html  # Specialist provenance remains addressable; default views stay commercial.
 
 
 def test_asset_urls_follow_existing_extension_free_route_guard():
@@ -93,9 +93,9 @@ def test_enterprise_model_is_explicitly_conceptual_not_a_disclosed_org_chart(web
 def test_equnix_scope_does_not_seed_a_research_hypothesis_as_a_sales_record(web):
     assert all(r['enterprise'] != 'Equinix' for r in x.DEMO_ROWS)
     _, html = web(x.BASE + '/pipeline?scope=equinix')
-    assert 'No illustrative opportunities in this scope' in html
-    assert 'No research hypothesis has been promoted' in html
-    assert '<tbody id="pipeline-rows"><tr><td colspan="8">No illustrative' in html
+    assert 'Add an illustrative opportunity to explore this scope.' in html
+    assert not any(r.get('scopeEnterprise') == 'equinix' for r in x.DEMO_ROWS)
+    assert '<tbody id="pipeline-rows"><tr><td colspan="8">Add an illustrative' in html
 
 
 def test_journey_reads_do_not_invoke_private_pipeline_or_model_clients(web, monkeypatch):
