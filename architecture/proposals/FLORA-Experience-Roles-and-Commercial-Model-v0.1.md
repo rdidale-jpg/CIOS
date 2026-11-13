@@ -405,3 +405,137 @@ Avoid optimising primarily for daily-active-user counts. Prefer:
 - quality: evidence traceability, material error rate, user correction, abandoned work and trust metrics.
 
 **Architecture rule:** every profession-specific tool must identify the shared FLORA intelligence objects it reuses, new durable user work artifacts it owns, who may access them and a clear outcome metric. If it cannot specify these, it is a navigation lens rather than a separate product.
+
+
+## Appendix B — Integration ecosystem and API commercialisation strategy (research dated 13 November 2026)
+
+### B1. Strategic thesis
+
+FLORA should **orchestrate authorised external intelligence and work tools**, rather than replicate them. Its differentiated asset is the joint interpretation of `country → industry → enterprise → people/technology/financial signal → role-specific decision or action`.
+
+Each integration must have a clearly articulated recurring job, permission/licence model, data scope, operating cost, update frequency and paying audience. An available API is not automatically a right to resell or redistribute its data.
+
+Three separate acquisition patterns:
+1. **Open/public-data connectors:** authoritative statistical, research, corporate-registry, procurement and energy data; verify source licence, attribution, limits and historical revisions.
+2. **Licensed commercial intelligence feeds:** stock fundamentals, forecasts, financial prices and specialist vendor insights; negotiate redistribution, caching, display, end-user entitlements and geographic coverage explicitly.
+3. **User-/organisation-authorised app connections:** CRM, Microsoft 365, teaching platforms, calendar and personal contacts; OAuth, narrow delegated scopes, workspace segregation, revocation, audit and no unauthorised cross-user inference.
+
+### B2. Provider availability assessment — official sources
+
+| Provider/source | Data/capability of interest | Public access assessment | FLORA potential | Constraints / official source |
+|---|---|---|---|---|
+| **LinkedIn** | User identity, LinkedIn career/profile context, connections, Sales Navigator-related workflow | Self-service developer scopes generally sign-in/profile/email and approved sharing; connections/Contacts and many Sales/Talent APIs **restricted** | Job seeker: known contacts around a target employer; Sales: relationship access | Ordinary Premium membership does not grant developer connection access. Partner approval, user consent and data restrictions required. https://learn.microsoft.com/en-us/linkedin/shared/authentication/getting-access and https://learn.microsoft.com/en-us/linkedin/shared/integrations/people/connections-api |
+| **LinkedIn member data export** | User-supplied connections and messages for personal analysis | Data import workflow rather than live authorised LinkedIn API | Near-term user-controlled relationship graph, links back to LinkedIn profiles, update on re-import | Validate privacy, export terms, retention and identity matching; **do not** scrape, automate private LinkedIn pages or infer other members' permission. No promise of live updates |
+| **Microsoft Graph** | Outlook contacts, email, events, shared contacts with delegated permissions | Documented delegated APIs | Sales relationship continuity, calendar/meeting context, job-seeker network, follow-up | Explicit OAuth consent; application vs delegated permissions differ; narrow scopes; tenant admin can restrict. https://learn.microsoft.com/en-us/graph/api/user-list-contacts?view=graph-rest-1.0 |
+| **HubSpot** | Company, contact, deal, activity and relationship context | Official APIs and generally available hosted MCP interface (2026) | Bidirectional, permissioned CRM-connected Pipeline intelligence | Per-account approval and permissions; no unauthorised writeback. https://developers.hubspot.com/changelog/remote-hubspot-mcp-server-is-now-generally-available |
+| **Salesforce** | CRM account/contact/opportunity objects | Established enterprise API offering; separately validate exact product scope and licence | Sales account plans, contacts, pipeline sync | Tenant permissions, API quota, data residency, CRM ownership, duplicate handling. Confirm latest official docs at https://developer.salesforce.com |
+| **Investing.com / InvestingPro** | Equity prices, forecasts, fundamentals and other market information | **No public API** as explicitly stated by Investing.com; official embeds/widgets and commercial contact path | Investor visual reference or negotiated licensed access | Widgets are not unrestricted data APIs; check display and redistribution rights. https://www.investing-support.com/hc/en-us/articles/115005473825-Do-You-Offer-API-Access-at-Investing-com |
+| **Armstrong Economics — Socrates Platform / Ask-Socrates** | Proprietary cyclical, capital-flow and market commentary/forecasts | **Public API unverified** despite published platform/member documentation | Distinctive investor research overlays; high differentiation if licensed | Contact provider about official feed, user-level entitlement, forecasting rights, derivative display and licensing. Do **not** confuse with Answer Socrates search-keyword API. https://www.ask-socrates.com/mkc/Content/MembersGuide.pdf |
+| **Answer Socrates (separate provider)** | Keyword research, rising topics, trend indicators | Published API/MCP | Product-strategy and marketing demand research, not Armstrong market analysis | Commercial tiers and quotas. https://answersocrates.com/docs/api |
+| **Alpha Vantage** | Time series, company fundamentals, earnings, analyst estimates, macro and commodities | Documented API, free key and premium endpoints | Investor and enterprise finance snapshots, earnings expectation overlays | Pricing/freshness/asset coverage and redistribution differ by endpoint. https://www.alphavantage.co/documentation/ |
+| **Financial Modeling Prep (FMP)** | Public company financial statements, analyst revenue/EPS estimates | Documented paid/limited-access APIs | Comparable company financials, forecast-vs-actual analysis | Licence global/UK coverage, currency, analyst consensus methodology and display rights. https://site.financialmodelingprep.com/developer/docs |
+| **Massive (formerly Polygon.io)** | Market ticks, quotes, bars, reference/fundamentals, streamed prices | Documented REST, WebSocket and bulk APIs | Investor market charts and catalyst awareness | Feed/exchange redistribution and real-time entitlements; may be too costly for free tier. https://www.massive.com/stocks |
+| **UK Companies House** | Legal company identity, filings, registered details | Official live REST API with developer registration | Enterprise entity resolution and UK corporate facts | Company registered identity ≠ operating scale. Source filing periods and ownership must be reconciled. https://developer.company-information.service.gov.uk/ |
+| **ONS** | UK economic sector, labour, regional and other official statistics | Open, unrestricted **v1 beta API** for supported datasets; no API key for core access | Country/industry GVA, labour and sector scale | Versioning, statistical definitions, breaking beta changes and historic category compatibility. https://developer.ons.gov.uk/ |
+| **World Bank Indicators** | International economy, employment, development and macro time series | Public Indicators v2 API without API key | Global/country macro comparisons and policy views | Coverage, methodology and lag differ by country/indicator. https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api |
+| **Eurostat** | EU economic, labour, social and environmental statistics | Public REST Statistics, SDMX and catalogue APIs | European market and country comparisons, including France | Units, revisions, geography and comparable source periods. https://ec.europa.eu/eurostat/en/web/user-guides/data-browser/api-data-access/api-getting-started |
+| **OpenAlex** | Scholarly works, authors, institutions, research topics and networks | Documented API, limited free use; free key recommended for larger-scale queries | Researcher, technologist, educator, scientific collaboration ecosystems | Coverage and identity quality; pay-as-you-go for heavier use, check budget. https://help.openalex.org/api/ |
+| **Crossref** | Scholarly publication/DOI metadata, funding, updates | Open public REST API without signup | Research papers, dated source trails and bibliographies | Metadata does not equal a licence to reproduce full papers; rate/attribution norms. https://www.crossref.org/documentation/retrieve-metadata/rest-api/ |
+| **UK Find a Tender** | Procurement notices and structured release/record data | Official OCDS JSON APIs and OGL data | Sales bid triggers, buyer renewal/award context and public-policy analysis | Tender notice ≠ evidence of seller fit or award outcome; record notice dates, stage and licensing. https://www.find-tender.service.gov.uk/Developer/Documentation |
+| **Adzuna** | Job adverts, salary/vacancy trends and sector skills demand | Published developer REST API with keys | Job seeker role matching, enterprise hiring indicators and workforce analysis | Job ads do not prove committed headcount or actual employer demand; check licensing and quotas. https://developer.adzuna.com/overview |
+| **Jooble** | Job vacancies by country | Documented REST API; regional keys and published free daily request limit | Job seeker discovery and company/hiring signals | Separate keys for countries; validate dedup, freshness and source display rights. https://jooblehelpcenter.freshdesk.com/en/support/solutions/articles/60001448238-rest-api-documentation |
+| **Google Classroom** | Teacher coursework, materials, assignments, submissions | Official Classroom API with OAuth and institutional authorisation | Educator case-study delivery, assignment workflows | Student privacy, school admin, learning-data retention and age requirements. https://developers.google.com/workspace/classroom/guides/coursework-integration |
+| **GB Carbon Intensity API (NESO)** | Grid carbon intensity, generation mix and regional forecasts | Official public API; CC BY 4.0 published | Clean energy, environmental and educational visual analytics | Grid intensity is not an enterprise's carbon footprint; forecast uncertainty/timezone must be shown. https://api.carbonintensity.org.uk/ |
+
+**Commercial terms and status are time-sensitive.** The above confirms documentation/API availability only, not approval to use, the pricing for production, redistribution rights, supplier partnership or full endpoint suitability. Re-check each before procurement or implementation.
+
+### B3. The two exemplar integrations
+
+**Career and relationships — “Who do I know at this company?”**
+
+1. User opens an enterprise (e.g. target employer) and opts into a **Career/Networking** lens.
+2. FLORA resolves the company's validated identity and group/subsidiary scope.
+3. If user-approved LinkedIn export is present, it matches known first-degree connections conservatively to the selected company; exposes last-known employment date, confidence and one-click opening of the person's LinkedIn profile, not an invented current role.
+4. If permitted, complement with Microsoft Graph contacts and user-authorised CRM records, tracking source, consent and recency separately.
+5. Adzuna/Jooble provides available vacancies and hiring-context metrics where licensed; no profile scraping.
+6. User saves an interview/research dossier, personal networking action and optional reminder. Do not send contact messages automatically.
+7. LinkedIn's restricted APIs are a **partnership opportunity**, not the initial technical assumption.
+
+**Investor — “What is changing, and what do forecasts imply?”**
+
+1. User opens an enterprise; FLORA verifies its legal entity, exchange ticker, listing/currency and financial period.
+2. Public reported financials are separated from forward analyst consensus (FMP/Alpha Vantage) and market prices (Massive/other licensed feed).
+3. An investment-thesis view shows revenue/EPS history, consensus growth estimates, earnings revisions, sourced catalysts, bull/base/bear assumptions and forecast-vs-actual history where licences permit.
+4. Proprietary Socrates cyclical indicators, if licensed, appear as **a named external model perspective**, never FLORA's accepted prediction and never conflated with analyst consensus. Distinguish forecasts, technical targets, observed market levels and user assumptions.
+5. Users save/watch theses and are notified only on material changes with authorised, bounded monitoring.
+6. No guaranteed returns, opaque win probabilities, trade execution or regulated investment advice.
+
+### B4. High-leverage cross-role integration ideas
+
+- **Sales:** CRM + Contacts/Calendar + public tender notices + Companies House + enterprise change → qualified account growth plans. Highest willingness-to-pay hypothesis; strongest dependence on permissions.
+- **Job seeker:** saved employer + vacancies + opt-in LinkedIn exports/Graph contacts + company financial research → job matching and personalised introductions.
+- **Researcher:** OpenAlex/Crossref + official economic data + company disclosures → living notebooks and documented comparisons.
+- **Educator:** industry/enterprise visuals + ONS/World Bank + Classroom → living lessons with assignments and source-updated case studies.
+- **Technologist:** enterprise technology ecosystems + authorised GitHub organisation/project metadata + technical research → decision records, architecture alternatives and lifecycle alerts.
+- **Investor:** licensed fundamentals/estimates/price feed + official macro + earnings calendar → living valuation/thesis, explicit estimate boundaries.
+- **Clean Energy:** NESO/Eurostat + sector energy/impact sources → modelled transition options, never substituting grid carbon intensity for company-level measured emissions.
+- **Social Value/Public Policy:** ONS/World Bank + tender policy/procurement events → opportunity and impact planning, with direct source support and outcome tracking.
+
+### B5. Integration architecture — proposal, not an implementation
+
+```text
+FLORA User (role, mission, country, tenant)
+           |
+   Experience / Entitlement / IAM checks
+           |
+ External Connections Catalogue (approval, OAuth, revocation)
+           |
+ Provider Adapters (public API | paid API | user-authorised personal API | user-supplied export)
+           |
+ Scope/Identity Resolver (legal entity; person consent; ticker; country)
+           |
+ Rights & Data Quality Envelope (provider, licence, source URL, retrieved/published/effective dates,
+                usage constraints, geography, confidence, schema version, cache/expiry)
+           |
+ Governed Candidate Data / Existing Evidence+Observation Owners
+           |
+ Shared Industry/Enterprise Intelligence + Role-Specific Read-Only Views
+           |
+ Durable User Work Product (Pipeline | Research Notebook | Learning Case | Investment Thesis)
+```
+
+Strict boundaries:
+1. **No integration may create an authorised employer, workspace membership, offer approval or Pipeline write.** Existing human and domain gates apply.
+2. **OAuth consent and API entitlement are not data redistribution rights.** Per-provider licence matrix distinguishes personal, internal use, paid redistribution, caching, persistence, AI training, exports and onward sharing.
+3. **No external raw member/contact data in public HTML, previews, logs or other tenants.** Separate public intelligence from private user and company accounts; expire/revoke on disconnect where required.
+4. **Do not assume cross-service identity equality.** LinkedIn employer name, Companies House legal entity, stock ticker and CRM account require explicit grounded matching/version.
+5. **Keep forecasts and derived estimations visible as such**, with model, period, source, update and range where applicable. No buying trigger inferred from a job ad or analyst estimate alone.
+6. **Bound cost and rate:** quota, caching, retry/backoff, licensing, tenant-level budget, source availability and disconnected fallback before scheduled monitoring.
+7. **Do not scrape protected services or bypass partner limits**. If an API is unavailable (LinkedIn network, Investing.com, Armstrong Socrates), pursue legal data export, provider contact or an alternative licensed source.
+8. **Start read-only:** no outbound contact, auto-CRM write, automatic investment action or third-party changes without separate authorisation and approval.
+9. **Data deletion/portability:** handle user revocation, account deletion, GDPR/UK GDPR and provider retention obligations as first-class connector lifecycle events.
+
+### B6. Business development and monetisation
+
+Integration models to test:
+- **Bring your own account:** user connects an existing service; FLORA charges for orchestration, interpretation and work-product tools, subject to provider terms.
+- **FLORA-provided licensed data:** bundle a permitted subset of market/company/industry feeds into paid Professional or Enterprise tiers.
+- **Premium connector packs:** Sales CRM/networking; Investor data/consensus; Educator institution; Energy impact data.
+- **Team/workspace subscriptions:** cross-user sharing where data owner/tenant permissions and supplier licences permit.
+- **Partner or distribution agreements:** potential co-sell/referral and negotiated source API access; treat as future business development, not built-in rights.
+
+Do not assume all users pay for the same feed. A sector research user may need only public-data access, while a live market-data user may create expensive per-seat/exchange obligations. Track **contribution margin by connected provider and role**, not simply aggregate subscription revenue.
+
+### B7. Delivery priority and due diligence
+
+| Phase | Candidate integrations | Why |
+|---|---|---|
+| **0 — catalogue and rights audit** | API/entitlement registry, object mapping, restricted-source contract, cost/licence checks | Avoid vendor lock-in and unlicensed redistribution |
+| **1 — low-friction public sources** | Companies House, ONS, World Bank, Eurostat, OpenAlex, Crossref, Find a Tender, NESO | Documented APIs; boost economic and industry context quickly |
+| **2 — role-specific pilot** | Microsoft Graph or HubSpot (authorised), Adzuna, one financial data API such as FMP/Alpha Vantage | Test sales/career/investor value, consent and unit economics |
+| **3 — negotiated sources** | LinkedIn connections/Sales Navigator, Investing.com specialist arrangement, Armstrong Socrates | May be valuable but access is uncertain, partner approval/licence costs matter |
+| **4 — packaged recurring products** | Integration-powered Opportunity Factory, Career Network Map, Investor Thesis, Educator Case Studio | Monetise outcomes, not connector count |
+
+Proposed commercial diligence per provider: legal entity/contract; geographic coverage; exact endpoints; onboarding time; schema documentation; limits; availability/SLA; commercial and free quotas; retention/caching/export/redistribution/derived-work/AI clauses; consent/privacy and right to erase; costs at 100/1,000/10,000 active users; attribution; cancellation/rollback; independence of core FLORA.
+
+**Recommendation:** Do not delay Offer-to-Sales Sprint A. In parallel, preserve this option in the Roles strategy paper; later select one public-source connector and one user-authorised connector as pilot before building a broad marketplace.
