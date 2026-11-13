@@ -43,6 +43,10 @@ function check(v,label){assert(v,label);checks.push(label);}
      if(after&&name==='home'){
       check(await p.locator('[data-sic]').count()===20,device+': approved complete UK landscape');check(await p.locator('[data-research]').count()===3,device+': only researched Home regions');
       check(await p.locator('main section,main article').count()===0,device+': no old Home content modules');
+      check(await p.locator('[data-research]').evaluateAll(nodes=>nodes.every(e=>{
+       const s=getComputedStyle(e),lum=c=>{const a=c.match(/[\d.]+/g).slice(0,3).map(x=>{const v=+x/255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4});return .2126*a[0]+.7152*a[1]+.0722*a[2]};
+       const a=lum(s.color),b=lum(s.backgroundColor);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5;
+      })),device+': researched Home labels retain readable contrast');
       check(!(await p.content()).includes('Synthetic UK services company'),device+': public Home has no employer data');
      }
      if(after&&name==='technology'){

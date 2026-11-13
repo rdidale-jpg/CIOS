@@ -28,7 +28,7 @@ Each cell links actual browser captures from the clean #584 baseline and this ca
 | Banking living system | [Before](previews/desktop-banking-before.jpg) · [After](previews/desktop-banking-after.jpg) | [Before](previews/ipad-portrait-banking-before.jpg) · [After](previews/ipad-portrait-banking-after.jpg) | [Before](previews/mobile-banking-before.jpg) · [After](previews/mobile-banking-after.jpg) |
 | Aviation living system | [Before](previews/desktop-aviation-before.jpg) · [After](previews/desktop-aviation-after.jpg) | [Before](previews/ipad-portrait-aviation-before.jpg) · [After](previews/ipad-portrait-aviation-after.jpg) | [Before](previews/mobile-aviation-before.jpg) · [After](previews/mobile-aviation-after.jpg) |
 
-[Home print](previews/home-print.pdf) · [NVIDIA print](previews/nvidia-print.pdf) · [687 browser checks](previews/Browser-Checks.json) · [Measured editorial comparison](previews/Editorial-Comparison.json)
+[Home print](previews/home-print.pdf) · [NVIDIA print](previews/nvidia-print.pdf) · [692 browser checks](previews/Browser-Checks.json) · [Measured editorial comparison](previews/Editorial-Comparison.json)
 
 [Design-system contract](Design-System.md) · [Changed/retained route matrix](Route-Matrix.md) · [Visual assessment and link reductions](Visual-Assessment.md) · [Validation/reproduction](Validation.md) · [Later sales-engine recommendation](Next-Sales-Sprint.md)
 

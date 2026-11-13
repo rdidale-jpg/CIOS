@@ -1,5 +1,5 @@
 {
-  "passed": 687,
+  "passed": 692,
   "failed": 0,
   "viewports": {
     "desktop": {
@@ -86,6 +86,7 @@
     "desktop: approved complete UK landscape",
     "desktop: only researched Home regions",
     "desktop: no old Home content modules",
+    "desktop: researched Home labels retain readable contrast",
     "desktop: public Home has no employer data",
     "after desktop technology: available",
     "after desktop technology: no page overflow",
@@ -190,6 +191,7 @@
     "ipad-landscape: approved complete UK landscape",
     "ipad-landscape: only researched Home regions",
     "ipad-landscape: no old Home content modules",
+    "ipad-landscape: researched Home labels retain readable contrast",
     "ipad-landscape: public Home has no employer data",
     "after ipad-landscape technology: available",
     "after ipad-landscape technology: no page overflow",
@@ -276,6 +278,7 @@
     "ipad-portrait: approved complete UK landscape",
     "ipad-portrait: only researched Home regions",
     "ipad-portrait: no old Home content modules",
+    "ipad-portrait: researched Home labels retain readable contrast",
     "ipad-portrait: public Home has no employer data",
     "after ipad-portrait technology: available",
     "after ipad-portrait technology: no page overflow",
@@ -380,6 +383,7 @@
     "mobile: approved complete UK landscape",
     "mobile: only researched Home regions",
     "mobile: no old Home content modules",
+    "mobile: researched Home labels retain readable contrast",
     "mobile: public Home has no employer data",
     "after mobile technology: available",
     "after mobile technology: no page overflow",
@@ -484,6 +488,7 @@
     "mobile-320: approved complete UK landscape",
     "mobile-320: only researched Home regions",
     "mobile-320: no old Home content modules",
+    "mobile-320: researched Home labels retain readable contrast",
     "mobile-320: public Home has no employer data",
     "after mobile-320 technology: available",
     "after mobile-320 technology: no page overflow",
