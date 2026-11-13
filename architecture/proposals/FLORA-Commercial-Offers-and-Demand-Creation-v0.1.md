@@ -161,7 +161,7 @@ Seller: a UK technology-services company, identity and offer portfolio explicitl
 1. **Identity:** Is a user able to represent one employer at a time, or multiple seller organisations/roles (advisor, channel partner, portfolio career)? Recommend many authorised identities but one active Commercial Mission at a time.
 2. **Offer ownership — OWNER DECISION CONFIRMED (13 Nov 2026):** Support both employer-managed Offers and seller-defined Offers, including seller-specific variations, with separate organisational approval. Seller drafts remain private to an authorised scope until explicitly approved for organisation-wide publication.
 3. **Targeting mode — OWNER DECISION CONFIRMED (13 Nov 2026):** Support both offer-led discovery and account-led discovery with **one shared Offer–Enterprise matching engine**. This is a required product/architecture contract, not a future option.
-4. **Composite proposals:** Opt-in exploratory mode only, with no external or contractual claims until seller approval.
+4. **Composite proposals — OWNER DECISION CONFIRMED (13 Nov 2026):** Opt-in Creative Offers / Offer Studio mode. Disabled by default, permissioned and seller-initiated. FLORA may propose new Offer combinations from evidenced seller capabilities, partnerships and enterprise needs; proposals are private drafts until the necessary seller and organisational approvals. No automatic publication, outreach, pricing commitment or Pipeline creation.
 5. **Scoring:** Show explainable prioritisation, not pseudo-exact win probabilities.
 6. **Pipeline threshold:** Require account problem, relevant buyer/access route, explicit seller fit, qualified commercial action and user approval before promotion.
 
@@ -204,6 +204,19 @@ The two journeys MUST call the same assessment contract `assess_fit(seller_conte
 **Invariance rule:** For a given seller context, Offer, enterprise, source cutoff and assessment/policy version, offer-led and account-led exploration yield the same underlying fit assessment and recommendation identity, independent of the journey path. Stable IDs and deduplication prevent duplicated opportunities. Both journeys allow a concise explanation of *why this customer / why this offer / why now / recommended first move*.
 
 **Pilot acceptance:** Test the same Offer–Enterprise pairs through both journeys, assert identical reasoning inputs and assessment outcomes, check ranking remains context-sensitive, inspect source/EST presentation, and verify neither route writes Pipeline or bypasses existing authorisation.
+
+## 11C. Confirmed decision: optional Creative Offers mode
+
+**Owner confirmation: 13 November 2026.** FLORA shall provide an **opt-in exploratory Creative Offers mode** alongside the normal offer-led and account-led matching workflows. The mode is **off by default**.
+
+- Activation is explicit, permissioned, user-scoped and reversible. Normal pipeline development does not invoke creative proposition generation or paid models.
+- Starting inputs: seller-owned/approved capabilities, authorised partnerships, market and enterprise intelligence, seller objectives and commercial constraints. Public facts, seller declarations and hypotheses stay distinct.
+- Suggested combinations are represented as **private Composite Offer Drafts**, explicitly linked to component Offer versions, required partner capabilities, rights, delivery dependencies and value hypotheses.
+- Every draft explains the problem it addresses, why this supplier combination could matter, suggested triggers, first entry play, potential customer segments, differentiation and disconfirming questions. It must consider simpler alternatives and existing approved Offers before inventing a new combination.
+- A seller may edit, reject or save a private draft. Only the authorised employer approval path can publish the Offer in an employer catalogue. Seller approval alone does not authorise company-wide claims, partner endorsements, guaranteed results or contractual terms.
+- Creative mode may be implemented deterministically first; any optional paid AI generation requires explicit activation, budget cap, audit, bounded evidence inputs and controlled outputs. No autonomous contacting, procurement assertions, external claims or Pipeline writes.
+- Evaluation should record relevance, novelty, differentiability, capability feasibility, risk, buyer relevance and measurable validation test, without relying on an opaque single score.
+- Test default-disabled behaviour, scope isolation, provenance, partner rights, private draft lifecycle, approval separation, no automatic Pipeline activity, and cost controls.
 
 ## 12. Acceptance criteria
 
