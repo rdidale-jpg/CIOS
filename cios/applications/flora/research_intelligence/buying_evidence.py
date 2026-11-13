@@ -141,7 +141,8 @@ def accounts(base):
             'limitations':['Bounded public-source candidate research; no canonical acceptance or seller access.'],
             'counter_indicators':[], 'url':'/enterprises/'+slug if row['industry']=='banking' else '/industries/technology/experience/enterprise?enterprise='+slug}))
         facts=[_projection(f,row,sources) for f in data['facts'] if f['enterprise_slug']==slug]
-        current['trigger_research']={'version':data['version'],'registry_digest':DATA_SHA256,'identity':deepcopy(row),'facts':facts,'policy':deepcopy(data['policy'])}
+        from ..buying_entry_plays import REVISION as entry_play_revision
+        current['trigger_research']={'entry_play_revision':entry_play_revision,'version':data['version'],'registry_digest':DATA_SHA256,'identity':deepcopy(row),'facts':facts,'policy':deepcopy(data['policy'])}
         package=EvidencePackageV1('BTI-'+fingerprint([slug,DATA_SHA256])[:20],row['permission_id'],{'scope':row['scope'],'identity_state':row['canonical_identity_gap']},'candidate_only',data['as_of'],'bounded public first-party candidate passages',
             selected_observations=tuple(EvidencePackageItem(**f['evidence_package_item']) for f in facts),lineage_manifest=tuple(f['source_id'] for f in facts),freshness='Claim dates retained; current residual need unverified',retrieval_notes=('No runtime collection, accepted Evidence promotion or canonical writes.',))
         current['trigger_research']['evidence_package']=package.to_dict()

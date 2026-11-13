@@ -635,11 +635,19 @@ def assess_fit(seller, offer, enterprise, evidence_cutoff, policy=POLICY):
         result['why_now'] = ('Reported ' + reported_dates[-1] + '; current decision window and seller access require validation.' if reported_dates else 'No dated current catalyst established; research timing with the owner.')
         result['entry_play'] = playbook['entry_plays'][0]['point_of_view'] + ' ' + playbook['entry_plays'][0]['conversation']
         result['next_validation_action'] = enterprise['name'] + ': ' + playbook['entry_plays'][0]['disconfirming_question']
+        from . import buying_entry_plays
+        tailored = buying_entry_plays.resolve(offer['template_source']['id'], enterprise['slug'], facts, [f['id'] for f in positive]) if not excluded and sector_fit else None
+        if tailored:
+            result['entry_play'] = tailored['conversation'] + ' ' + tailored['diagnostic']
+            result['next_validation_action'] = tailored['question']
+        elif tier == 'Research only':
+            result['entry_play'] = 'Before proposing ' + offer['content']['name'] + ' to ' + enterprise['name'] + ', obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.'
         result['contradictions'] = [f['statement'] + ' ' + f['interpretation_limit'] for f in counters]
         result['evidence_lineage'] = [{'claim_id':f['id'],'statement':f['statement'],'classification':'candidate_source_reference_not_accepted',
             'period':f['effective_period'],'segment_id':f['source_segment']['segment_id'], 'content_sha256':f['source_segment']['content_hash'],
             'source_refs':[{'id':f['source_id'],'title':f['source_title'],'url':f['source_url'],'verification':f['candidate_claim']['status'],'limitation':f['interpretation_limit']}]} for f in facts]
         result['buying_trigger'] = {'policy': TRIGGER_POLICY, 'tier': tier, 'stage': stage,
+            'entry_play_detail': tailored, 'entry_play_revision': buying_entry_plays.REVISION,
             'dimension': dimension, 'interpretation': 'Source-supported candidate assessment; not accepted APPA or customer buying intent',
             'structural_pressures': [f['id'] for f in positive if f['kind']=='structural'],
             'observed_dated_catalysts': [f['id'] for f in catalysts], 'reported_programmes': [f['id'] for f in programmes],

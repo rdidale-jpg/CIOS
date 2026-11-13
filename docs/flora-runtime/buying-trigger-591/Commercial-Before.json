@@ -1,0 +1,632 @@
+{
+  "source_sha": "a884a6fcf639bc4653072d873781c71eceb0bd05",
+  "source_matrix_sha256": "4a79775027ac03042d301dd4625ebe83d56eae05cdbd97010137ef7946b4db7f",
+  "samples": [
+    {
+      "offer_id": "tech-strategic-digital-transformation",
+      "offer_name": "Enterprise Digital Transformation",
+      "enterprise": "Santander UK",
+      "enterprise_slug": "santander-uk",
+      "tier": "Prioritise",
+      "stage": "Announced programme / conditional plan; buying unknown",
+      "why": "The release describes continuing integration and planned customer migration to Santander UK systems, platforms and channels in H2 2027 after any approved transfer.",
+      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "deciding_question": "Santander UK: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "counter_evidence": [
+        "The source explicitly says the two banks remain separate legal entities. The programme can justify prioritising validation, but seller access, contracting entity, procurement and external scope remain unknown."
+      ]
+    },
+    {
+      "offer_id": "tech-strategic-digital-transformation",
+      "offer_name": "Enterprise Digital Transformation",
+      "enterprise": "BT Group",
+      "enterprise_slug": "bt",
+      "tier": "Investigate",
+      "stage": "Programme activity reported; buying unknown",
+      "why": "BT reports an ongoing transformation programme and continued simplification and modernisation.",
+      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "deciding_question": "BT Group: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-digital-transformation",
+      "offer_name": "Enterprise Digital Transformation",
+      "enterprise": "Computacenter",
+      "enterprise_slug": "computacenter",
+      "tier": "Investigate",
+      "stage": "Programme activity reported; buying unknown",
+      "why": "Computacenter reports its service-management tool upgrade as underway.",
+      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "deciding_question": "Computacenter: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "counter_evidence": [
+        "Computacenter reports its CRM rollout as completed. Do not pitch a greenfield CRM rollout or assume the completed programme is open to this seller."
+      ]
+    },
+    {
+      "offer_id": "tech-strategic-digital-transformation",
+      "offer_name": "Enterprise Digital Transformation",
+      "enterprise": "Lloyds Banking Group",
+      "enterprise_slug": "lloyds",
+      "tier": "Investigate",
+      "stage": "Announced programme / conditional plan; buying unknown",
+      "why": "The Q3 call describes continued strategic delivery while preparing Accelerate 2030.",
+      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "deciding_question": "Lloyds Banking Group: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-digital-transformation",
+      "offer_name": "Enterprise Digital Transformation",
+      "enterprise": "NatWest Group",
+      "enterprise_slug": "natwest",
+      "tier": "Investigate",
+      "stage": "Programme activity reported; buying unknown",
+      "why": "NatWest reports ongoing structural simplification and technology-platform investment.",
+      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "deciding_question": "NatWest Group: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-digital-transformation",
+      "offer_name": "Enterprise Digital Transformation",
+      "enterprise": "Arm",
+      "enterprise_slug": "arm",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "Arm describes development of production silicon products and related operating risks. This is context, not an evidenced buying programme.",
+      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "deciding_question": "Arm: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-digital-transformation",
+      "offer_name": "Enterprise Digital Transformation",
+      "enterprise": "Barclays",
+      "enterprise_slug": "barclays",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "The Barclays PLC report describes an existing AI-assisted contact-centre capability. Residual need is not established.",
+      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "deciding_question": "Barclays: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "counter_evidence": [
+        "The Barclays PLC report describes an existing AI-assisted contact-centre capability. Do not infer UK-only application, a new buying event, an enterprise role redesign or absent customer-service capability. Source publication date remains unverified."
+      ]
+    },
+    {
+      "offer_id": "tech-strategic-digital-transformation",
+      "offer_name": "Enterprise Digital Transformation",
+      "enterprise": "Equinix",
+      "enterprise_slug": "equinix",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "The existing commercial source reports completed expansion projects contributing to growth. Residual need is not established.",
+      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "deciding_question": "Equinix: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "counter_evidence": [
+        "The existing commercial source reports completed expansion projects contributing to growth. Facility expansion is not evidence of an unmet enterprise operating-model or application-estate requirement."
+      ]
+    },
+    {
+      "offer_id": "tech-strategic-digital-transformation",
+      "offer_name": "Enterprise Digital Transformation",
+      "enterprise": "NVIDIA",
+      "enterprise_slug": "nvidia",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "deciding_question": "NVIDIA: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-digital-transformation",
+      "offer_name": "Enterprise Digital Transformation",
+      "enterprise": "easyJet",
+      "enterprise_slug": "easyjet",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "FY2025 report describes multilingual chat and improved disruption self-service; remaining friction is unmeasured here. Residual need is not established.",
+      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "deciding_question": "easyJet: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "counter_evidence": [
+        "FY2025 report describes multilingual chat and improved disruption self-service; remaining friction is unmeasured here. Already reported self-service improvements do not prove a residual journey problem.",
+        "easyJet reported launching a customer search integration for flights and holidays. A launched channel feature is counter-evidence to an unimplemented-channel pitch and does not establish enterprise AI-first process/role change."
+      ]
+    },
+    {
+      "offer_id": "tech-strategic-ai-first-transformation",
+      "offer_name": "AI-first Business Transformation",
+      "enterprise": "Lloyds Banking Group",
+      "enterprise_slug": "lloyds",
+      "tier": "Investigate",
+      "stage": "Programme activity reported; buying unknown",
+      "why": "The Q3 call reports extending AI use cases across the Group. Enterprise process/role redesign and available external scope are not established.",
+      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "deciding_question": "Lloyds Banking Group: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-ai-first-transformation",
+      "offer_name": "AI-first Business Transformation",
+      "enterprise": "Arm",
+      "enterprise_slug": "arm",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "Arm describes development of production silicon products and related operating risks. This is context, not an evidenced buying programme.",
+      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "deciding_question": "Arm: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-ai-first-transformation",
+      "offer_name": "AI-first Business Transformation",
+      "enterprise": "BT Group",
+      "enterprise_slug": "bt",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "deciding_question": "BT Group: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-ai-first-transformation",
+      "offer_name": "AI-first Business Transformation",
+      "enterprise": "Barclays",
+      "enterprise_slug": "barclays",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "The Barclays PLC report describes an existing AI-assisted contact-centre capability. Residual need is not established.",
+      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "deciding_question": "Barclays: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+      "counter_evidence": [
+        "The Barclays PLC report describes an existing AI-assisted contact-centre capability. Do not infer UK-only application, a new buying event, an enterprise role redesign or absent customer-service capability. Source publication date remains unverified."
+      ]
+    },
+    {
+      "offer_id": "tech-strategic-ai-first-transformation",
+      "offer_name": "AI-first Business Transformation",
+      "enterprise": "Computacenter",
+      "enterprise_slug": "computacenter",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "deciding_question": "Computacenter: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-ai-first-transformation",
+      "offer_name": "AI-first Business Transformation",
+      "enterprise": "Equinix",
+      "enterprise_slug": "equinix",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "deciding_question": "Equinix: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-ai-first-transformation",
+      "offer_name": "AI-first Business Transformation",
+      "enterprise": "NVIDIA",
+      "enterprise_slug": "nvidia",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "NVIDIA announces a multi-year UK research compute contribution. This is context, not an evidenced buying programme.",
+      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "deciding_question": "NVIDIA: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-ai-first-transformation",
+      "offer_name": "AI-first Business Transformation",
+      "enterprise": "NatWest Group",
+      "enterprise_slug": "natwest",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "NatWest reports a live AI fraud-triage agent; this demonstrates an existing deployment, not an enterprise AI-first operating-model mandate. Residual need is not established.",
+      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "deciding_question": "NatWest Group: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+      "counter_evidence": [
+        "NatWest reports a live AI fraud-triage agent; this demonstrates an existing deployment, not an enterprise AI-first operating-model mandate. Do not infer enterprise process/role transformation, absent fraud controls or new supplier demand from a deployed tool."
+      ]
+    },
+    {
+      "offer_id": "tech-strategic-ai-first-transformation",
+      "offer_name": "AI-first Business Transformation",
+      "enterprise": "Santander UK",
+      "enterprise_slug": "santander-uk",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "deciding_question": "Santander UK: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-ai-first-transformation",
+      "offer_name": "AI-first Business Transformation",
+      "enterprise": "easyJet",
+      "enterprise_slug": "easyjet",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "easyJet reported Jetstream and predictive crew-planning support in its Luton ICC in May 2024. Current adoption and residual backlog remain unknown. Residual need is not established.",
+      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "deciding_question": "easyJet: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+      "counter_evidence": [
+        "easyJet reported Jetstream and predictive crew-planning support in its Luton ICC in May 2024. Current adoption and residual backlog remain unknown. A May 2024 deployment is historical; it is not a fresh enterprise AI-first buying programme.",
+        "easyJet reported launching a customer search integration for flights and holidays. A launched channel feature is counter-evidence to an unimplemented-channel pitch and does not establish enterprise AI-first process/role change."
+      ]
+    },
+    {
+      "offer_id": "tech-strategic-cybersecurity-resilience",
+      "offer_name": "Enterprise Cybersecurity & Resilience",
+      "enterprise": "Computacenter",
+      "enterprise_slug": "computacenter",
+      "tier": "Investigate",
+      "stage": "Programme activity reported; buying unknown",
+      "why": "Computacenter reports continuing investment in its cybersecurity framework.",
+      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "deciding_question": "Computacenter: Do the existing controls and recovery evidence already address the scenario adequately?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-cybersecurity-resilience",
+      "offer_name": "Enterprise Cybersecurity & Resilience",
+      "enterprise": "Arm",
+      "enterprise_slug": "arm",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "deciding_question": "Arm: Do the existing controls and recovery evidence already address the scenario adequately?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-cybersecurity-resilience",
+      "offer_name": "Enterprise Cybersecurity & Resilience",
+      "enterprise": "BT Group",
+      "enterprise_slug": "bt",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "deciding_question": "BT Group: Do the existing controls and recovery evidence already address the scenario adequately?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-cybersecurity-resilience",
+      "offer_name": "Enterprise Cybersecurity & Resilience",
+      "enterprise": "Barclays",
+      "enterprise_slug": "barclays",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "deciding_question": "Barclays: Do the existing controls and recovery evidence already address the scenario adequately?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-cybersecurity-resilience",
+      "offer_name": "Enterprise Cybersecurity & Resilience",
+      "enterprise": "Equinix",
+      "enterprise_slug": "equinix",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "deciding_question": "Equinix: Do the existing controls and recovery evidence already address the scenario adequately?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-cybersecurity-resilience",
+      "offer_name": "Enterprise Cybersecurity & Resilience",
+      "enterprise": "Lloyds Banking Group",
+      "enterprise_slug": "lloyds",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation. Residual need is not established.",
+      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "deciding_question": "Lloyds Banking Group: Do the existing controls and recovery evidence already address the scenario adequately?",
+      "counter_evidence": [
+        "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation. Existing controls weaken a missing-control pitch; effectiveness still needs validation."
+      ]
+    },
+    {
+      "offer_id": "tech-strategic-cybersecurity-resilience",
+      "offer_name": "Enterprise Cybersecurity & Resilience",
+      "enterprise": "NVIDIA",
+      "enterprise_slug": "nvidia",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "NVIDIA announces a multi-year UK research compute contribution. This is context, not an evidenced buying programme.",
+      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "deciding_question": "NVIDIA: Do the existing controls and recovery evidence already address the scenario adequately?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-cybersecurity-resilience",
+      "offer_name": "Enterprise Cybersecurity & Resilience",
+      "enterprise": "NatWest Group",
+      "enterprise_slug": "natwest",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "NatWest reports a live AI fraud-triage agent; this demonstrates an existing deployment, not an enterprise AI-first operating-model mandate. Residual need is not established.",
+      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "deciding_question": "NatWest Group: Do the existing controls and recovery evidence already address the scenario adequately?",
+      "counter_evidence": [
+        "NatWest reports a live AI fraud-triage agent; this demonstrates an existing deployment, not an enterprise AI-first operating-model mandate. Do not infer enterprise process/role transformation, absent fraud controls or new supplier demand from a deployed tool."
+      ]
+    },
+    {
+      "offer_id": "tech-strategic-cybersecurity-resilience",
+      "offer_name": "Enterprise Cybersecurity & Resilience",
+      "enterprise": "Santander UK",
+      "enterprise_slug": "santander-uk",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "deciding_question": "Santander UK: Do the existing controls and recovery evidence already address the scenario adequately?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-cybersecurity-resilience",
+      "offer_name": "Enterprise Cybersecurity & Resilience",
+      "enterprise": "easyJet",
+      "enterprise_slug": "easyjet",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "FY2025 report describes central procurement and key supplier management. No open tender or seller eligibility established. This is context, not an evidenced buying programme.",
+      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "deciding_question": "easyJet: Do the existing controls and recovery evidence already address the scenario adequately?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-complex-legacy-modernisation",
+      "offer_name": "Complex Legacy Application Modernisation",
+      "enterprise": "Santander UK",
+      "enterprise_slug": "santander-uk",
+      "tier": "Prioritise",
+      "stage": "Announced programme / conditional plan; buying unknown",
+      "why": "The release describes continuing integration and planned customer migration to Santander UK systems, platforms and channels in H2 2027 after any approved transfer.",
+      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "deciding_question": "Santander UK: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "counter_evidence": [
+        "The source explicitly says the two banks remain separate legal entities. The programme can justify prioritising validation, but seller access, contracting entity, procurement and external scope remain unknown."
+      ]
+    },
+    {
+      "offer_id": "tech-strategic-complex-legacy-modernisation",
+      "offer_name": "Complex Legacy Application Modernisation",
+      "enterprise": "Computacenter",
+      "enterprise_slug": "computacenter",
+      "tier": "Investigate",
+      "stage": "Programme activity reported; buying unknown",
+      "why": "Computacenter reports design work for upgrading its existing ERP to a cloud-based version.",
+      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "deciding_question": "Computacenter: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-complex-legacy-modernisation",
+      "offer_name": "Complex Legacy Application Modernisation",
+      "enterprise": "Lloyds Banking Group",
+      "enterprise_slug": "lloyds",
+      "tier": "Investigate",
+      "stage": "Structural opportunity; current activity unknown",
+      "why": "The annual report names faster application retirement and cloud migration among 2026 priorities.",
+      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "deciding_question": "Lloyds Banking Group: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-complex-legacy-modernisation",
+      "offer_name": "Complex Legacy Application Modernisation",
+      "enterprise": "Arm",
+      "enterprise_slug": "arm",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "deciding_question": "Arm: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-complex-legacy-modernisation",
+      "offer_name": "Complex Legacy Application Modernisation",
+      "enterprise": "BT Group",
+      "enterprise_slug": "bt",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "deciding_question": "BT Group: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-complex-legacy-modernisation",
+      "offer_name": "Complex Legacy Application Modernisation",
+      "enterprise": "Barclays",
+      "enterprise_slug": "barclays",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "deciding_question": "Barclays: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-complex-legacy-modernisation",
+      "offer_name": "Complex Legacy Application Modernisation",
+      "enterprise": "Equinix",
+      "enterprise_slug": "equinix",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "deciding_question": "Equinix: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-complex-legacy-modernisation",
+      "offer_name": "Complex Legacy Application Modernisation",
+      "enterprise": "NVIDIA",
+      "enterprise_slug": "nvidia",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "deciding_question": "NVIDIA: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-complex-legacy-modernisation",
+      "offer_name": "Complex Legacy Application Modernisation",
+      "enterprise": "NatWest Group",
+      "enterprise_slug": "natwest",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "deciding_question": "NatWest Group: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-complex-legacy-modernisation",
+      "offer_name": "Complex Legacy Application Modernisation",
+      "enterprise": "easyJet",
+      "enterprise_slug": "easyjet",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "easyJet reported S.FP+ with the Skywise Core Platform in November 2023. Existing maintenance collaboration precedes this pilot; current workshare unknown. This is context, not an evidenced buying programme.",
+      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "deciding_question": "easyJet: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-social-value-esg",
+      "offer_name": "Social Value & ESG Transformation",
+      "enterprise": "Arm",
+      "enterprise_slug": "arm",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "deciding_question": "Arm: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-social-value-esg",
+      "offer_name": "Social Value & ESG Transformation",
+      "enterprise": "BT Group",
+      "enterprise_slug": "bt",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "BT reports lower network energy usage as an operating-efficiency result. Residual need is not established.",
+      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "deciding_question": "BT Group: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+      "counter_evidence": [
+        "BT reports lower network energy usage as an operating-efficiency result. An achieved energy-efficiency measure is not a social-value mandate, unmet ESG reporting need or buying programme."
+      ]
+    },
+    {
+      "offer_id": "tech-strategic-social-value-esg",
+      "offer_name": "Social Value & ESG Transformation",
+      "enterprise": "Barclays",
+      "enterprise_slug": "barclays",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "deciding_question": "Barclays: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-social-value-esg",
+      "offer_name": "Social Value & ESG Transformation",
+      "enterprise": "Computacenter",
+      "enterprise_slug": "computacenter",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "deciding_question": "Computacenter: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-social-value-esg",
+      "offer_name": "Social Value & ESG Transformation",
+      "enterprise": "Equinix",
+      "enterprise_slug": "equinix",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "deciding_question": "Equinix: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-social-value-esg",
+      "offer_name": "Social Value & ESG Transformation",
+      "enterprise": "Lloyds Banking Group",
+      "enterprise_slug": "lloyds",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "deciding_question": "Lloyds Banking Group: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-social-value-esg",
+      "offer_name": "Social Value & ESG Transformation",
+      "enterprise": "NVIDIA",
+      "enterprise_slug": "nvidia",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "deciding_question": "NVIDIA: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-social-value-esg",
+      "offer_name": "Social Value & ESG Transformation",
+      "enterprise": "NatWest Group",
+      "enterprise_slug": "natwest",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "deciding_question": "NatWest Group: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-social-value-esg",
+      "offer_name": "Social Value & ESG Transformation",
+      "enterprise": "Santander UK",
+      "enterprise_slug": "santander-uk",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
+      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "deciding_question": "Santander UK: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+      "counter_evidence": []
+    },
+    {
+      "offer_id": "tech-strategic-social-value-esg",
+      "offer_name": "Social Value & ESG Transformation",
+      "enterprise": "easyJet",
+      "enterprise_slug": "easyjet",
+      "tier": "Research only",
+      "stage": "No current trigger found",
+      "why": "FY2025 report describes central procurement and key supplier management. No open tender or seller eligibility established. This is context, not an evidenced buying programme.",
+      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "deciding_question": "easyJet: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
+      "counter_evidence": []
+    }
+  ]
+}

@@ -10,8 +10,39 @@
       "tier": "Prioritise",
       "stage": "Announced programme / conditional plan; buying unknown",
       "why": "The release describes continuing integration and planned customer migration to Santander UK systems, platforms and channels in H2 2027 after any approved transfer.",
-      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
-      "deciding_question": "Santander UK: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "entry_play": "For Santander UK, use the 10 November transfer announcement to ask which customer-service outcomes would need protecting if the conditional H2 2027 migration proceeds, while Santander UK and TSB remain separate legal entities. If the programme owner confirms an unresolved service question, offer a customer-journey continuity diagnostic: choose one owner-identified journey, map pre/post-transfer responsibilities and exception handling, and agree service acceptance measures. Confirm the relevant entity and permission before reviewing any customer information.",
+      "entry_play_detail": {
+        "required": [
+          "BTI-TSB-MIGRATION",
+          "BTI-TSB-LEGAL"
+        ],
+        "positive": [
+          "BTI-TSB-MIGRATION"
+        ],
+        "conversation": "For Santander UK, use the 10 November transfer announcement to ask which customer-service outcomes would need protecting if the conditional H2 2027 migration proceeds, while Santander UK and TSB remain separate legal entities.",
+        "diagnostic": "If the programme owner confirms an unresolved service question, offer a customer-journey continuity diagnostic: choose one owner-identified journey, map pre/post-transfer responsibilities and exception handling, and agree service acceptance measures. Confirm the relevant entity and permission before reviewing any customer information.",
+        "question": "Which customer journey has an unresolved outcome or accountable benefits owner beyond the existing integration plan, and could the internal programme close it without external help?",
+        "stop": "Stop if the conditional plan changes, the existing integration team already owns and resolves the journey, or no authorised external diagnostic scope is confirmed.",
+        "revision": "c914b52fcced5db3e35ff1a32701d42a01b7dce21e5de2f5c42c6b05255053df",
+        "classification": "Evidence-led conversation hypothesis; not customer demand or agreed scope",
+        "evidence": [
+          {
+            "fact_id": "BTI-TSB-MIGRATION",
+            "source_id": "BTI-TSB-TRANSFER",
+            "publication_date": "2026-11-10",
+            "last_verified": "2026-11-13T19:34:33+00:00",
+            "source_url": "https://www.tsb.co.uk/news-releases/Santander-UK-and-TSB-apply-to-transfer-the-TSB-business-to-Santander-UK.html"
+          },
+          {
+            "fact_id": "BTI-TSB-LEGAL",
+            "source_id": "BTI-TSB-TRANSFER",
+            "publication_date": "2026-11-10",
+            "last_verified": "2026-11-13T19:34:33+00:00",
+            "source_url": "https://www.tsb.co.uk/news-releases/Santander-UK-and-TSB-apply-to-transfer-the-TSB-business-to-Santander-UK.html"
+          }
+        ]
+      },
+      "deciding_question": "Which customer journey has an unresolved outcome or accountable benefits owner beyond the existing integration plan, and could the internal programme close it without external help?",
       "economic_value_hypothesis": {
         "amount": null,
         "costs": [
@@ -106,8 +137,31 @@
       "tier": "Investigate",
       "stage": "Programme activity reported; buying unknown",
       "why": "BT reports an ongoing transformation programme and continued simplification and modernisation.",
-      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
-      "deciding_question": "BT Group: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "entry_play": "For BT, use the 5 November report of continuing simplification and modernisation to ask which customer-service outcome, if any, still crosses unresolved organisational or process boundaries within the existing transformation programme. If a continuing-operations owner identifies a gap, offer a simplification decision diagnostic: select one service, map process and responsibility boundaries, compare removing steps with adding technology, and define a customer acceptance measure. Establish UK workshare and already committed delivery before any proposal.",
+      "entry_play_detail": {
+        "required": [
+          "BTI-BT-TRANSFORM"
+        ],
+        "positive": [
+          "BTI-BT-TRANSFORM"
+        ],
+        "conversation": "For BT, use the 5 November report of continuing simplification and modernisation to ask which customer-service outcome, if any, still crosses unresolved organisational or process boundaries within the existing transformation programme.",
+        "diagnostic": "If a continuing-operations owner identifies a gap, offer a simplification decision diagnostic: select one service, map process and responsibility boundaries, compare removing steps with adding technology, and define a customer acceptance measure. Establish UK workshare and already committed delivery before any proposal.",
+        "question": "Can a confirmed continuing-operations service owner show a residual problem that process simplification and BT's current transformation teams cannot already resolve?",
+        "stop": "Stop if no distinct residual outcome is evidenced or the work is already owned; reported modernisation is not proof of an external delivery requirement.",
+        "revision": "c914b52fcced5db3e35ff1a32701d42a01b7dce21e5de2f5c42c6b05255053df",
+        "classification": "Evidence-led conversation hypothesis; not customer demand or agreed scope",
+        "evidence": [
+          {
+            "fact_id": "BTI-BT-TRANSFORM",
+            "source_id": "BTI-BT-H127",
+            "publication_date": "2026-11-05",
+            "last_verified": "2026-11-13T19:34:33+00:00",
+            "source_url": "https://newsroom.bt.com/bt-delivered-a-strong-first-half-with-further-strategic-momentum/"
+          }
+        ]
+      },
+      "deciding_question": "Can a confirmed continuing-operations service owner show a residual problem that process simplification and BT's current transformation teams cannot already resolve?",
       "economic_value_hypothesis": {
         "amount": null,
         "costs": [
@@ -178,8 +232,39 @@
       "tier": "Investigate",
       "stage": "Programme activity reported; buying unknown",
       "why": "Computacenter reports its service-management tool upgrade as underway.",
-      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
-      "deciding_question": "Computacenter: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "entry_play": "For Computacenter, start from the 8 September distinction between the completed CRM rollout and the service-management upgrade under way: ask whether any business-service hand-off remains unresolved, rather than pitching a fresh CRM implementation. Only if the owner confirms such a hand-off, propose a service-transition diagnostic for one selected workflow: test CRM-to-service ownership, exception routing and acceptance measures against the upgrade plan. First establish the relevant business unit and UK workshare; the group disclosure does not supply either.",
+      "entry_play_detail": {
+        "required": [
+          "BTI-CC-SERVICE",
+          "BTI-CC-CRM"
+        ],
+        "positive": [
+          "BTI-CC-SERVICE"
+        ],
+        "conversation": "For Computacenter, start from the 8 September distinction between the completed CRM rollout and the service-management upgrade under way: ask whether any business-service hand-off remains unresolved, rather than pitching a fresh CRM implementation.",
+        "diagnostic": "Only if the owner confirms such a hand-off, propose a service-transition diagnostic for one selected workflow: test CRM-to-service ownership, exception routing and acceptance measures against the upgrade plan. First establish the relevant business unit and UK workshare; the group disclosure does not supply either.",
+        "question": "Does the service-management upgrade leave a demonstrable workflow or ownership gap after CRM completion, and is it outside existing internal or incumbent delivery scope?",
+        "stop": "Stop if the upgrade already resolves the workflow, or UK/entity scope and permission for outside work cannot be confirmed.",
+        "revision": "c914b52fcced5db3e35ff1a32701d42a01b7dce21e5de2f5c42c6b05255053df",
+        "classification": "Evidence-led conversation hypothesis; not customer demand or agreed scope",
+        "evidence": [
+          {
+            "fact_id": "BTI-CC-SERVICE",
+            "source_id": "BTI-CC-H126",
+            "publication_date": "2026-09-08",
+            "last_verified": "2026-11-13T19:34:33+00:00",
+            "source_url": "https://investors.computacenter.com/news-releases/news-release-details/computacenter-2026-half-year-results"
+          },
+          {
+            "fact_id": "BTI-CC-CRM",
+            "source_id": "BTI-CC-H126",
+            "publication_date": "2026-09-08",
+            "last_verified": "2026-11-13T19:34:33+00:00",
+            "source_url": "https://investors.computacenter.com/news-releases/news-release-details/computacenter-2026-half-year-results"
+          }
+        ]
+      },
+      "deciding_question": "Does the service-management upgrade leave a demonstrable workflow or ownership gap after CRM completion, and is it outside existing internal or incumbent delivery scope?",
       "economic_value_hypothesis": {
         "amount": null,
         "costs": [
@@ -263,8 +348,39 @@
       "tier": "Investigate",
       "stage": "Announced programme / conditional plan; buying unknown",
       "why": "The Q3 call describes continued strategic delivery while preparing Accelerate 2030.",
-      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
-      "deciding_question": "Lloyds Banking Group: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "entry_play": "For Lloyds, ask how the service outcomes of the existing migration priorities would be carried into Accelerate 2030 preparation described on 29 October, rather than proposing another technology roadmap. If an accountable business owner identifies a remaining gap, propose a benefits-continuity diagnostic for one migration-linked service: trace the intended customer outcome to process hand-offs, adoption measures and post-change ownership; separate existing delivery commitments from decisions still open.",
+      "entry_play_detail": {
+        "required": [
+          "BTI-LBG-STRATEGY",
+          "LBG-AR25-MIGRATION"
+        ],
+        "positive": [
+          "BTI-LBG-STRATEGY"
+        ],
+        "conversation": "For Lloyds, ask how the service outcomes of the existing migration priorities would be carried into Accelerate 2030 preparation described on 29 October, rather than proposing another technology roadmap.",
+        "diagnostic": "If an accountable business owner identifies a remaining gap, propose a benefits-continuity diagnostic for one migration-linked service: trace the intended customer outcome to process hand-offs, adoption measures and post-change ownership; separate existing delivery commitments from decisions still open.",
+        "question": "Is there an evidenced service or adoption gap between current migration delivery and the next strategy phase, or do existing benefits owners and delivery plans already cover it?",
+        "stop": "Stop if no residual outcome gap is established; a future strategy phase alone is not a new change mandate or supplier invitation.",
+        "revision": "c914b52fcced5db3e35ff1a32701d42a01b7dce21e5de2f5c42c6b05255053df",
+        "classification": "Evidence-led conversation hypothesis; not customer demand or agreed scope",
+        "evidence": [
+          {
+            "fact_id": "BTI-LBG-STRATEGY",
+            "source_id": "BTI-LBG-Q326",
+            "publication_date": "2026-10-29",
+            "last_verified": "2026-11-13T19:34:33+00:00",
+            "source_url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-presentation-transcript.pdf"
+          },
+          {
+            "fact_id": "LBG-AR25-MIGRATION",
+            "source_id": "PR-LBG-AR25",
+            "publication_date": "2026-02-13",
+            "last_verified": "2026-11-09T19:35:29.412049+00:00",
+            "source_url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2025/q4/2025-lbg-annual-report.pdf"
+          }
+        ]
+      },
+      "deciding_question": "Is there an evidenced service or adoption gap between current migration delivery and the next strategy phase, or do existing benefits owners and delivery plans already cover it?",
       "economic_value_hypothesis": {
         "amount": null,
         "costs": [
@@ -346,8 +462,31 @@
       "tier": "Investigate",
       "stage": "Programme activity reported; buying unknown",
       "why": "NatWest reports ongoing structural simplification and technology-platform investment.",
-      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
-      "deciding_question": "NatWest Group: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
+      "entry_play": "For NatWest, ask where the structural simplification and platform investment reported on 30 October still needs a business-service decision: which customer outcome would demonstrate simplification beyond a platform milestone? If a benefits owner identifies a service with unresolved cross-functional hand-offs, propose an outcome-to-investment diagnostic: map the service outcome to platform dependencies, process changes and benefits accountability; compare a process-only intervention with further technology change. Treat any candidate workflow as a question, not a discovered defect.",
+      "entry_play_detail": {
+        "required": [
+          "BTI-NWG-SIMPLIFY"
+        ],
+        "positive": [
+          "BTI-NWG-SIMPLIFY"
+        ],
+        "conversation": "For NatWest, ask where the structural simplification and platform investment reported on 30 October still needs a business-service decision: which customer outcome would demonstrate simplification beyond a platform milestone?",
+        "diagnostic": "If a benefits owner identifies a service with unresolved cross-functional hand-offs, propose an outcome-to-investment diagnostic: map the service outcome to platform dependencies, process changes and benefits accountability; compare a process-only intervention with further technology change. Treat any candidate workflow as a question, not a discovered defect.",
+        "question": "Is there an attributable customer-service or benefits-accountability gap outside the current simplification plan, or would the existing plan deliver the same outcome?",
+        "stop": "Stop if current teams already cover the outcome, or no separately authorised diagnostic scope exists.",
+        "revision": "c914b52fcced5db3e35ff1a32701d42a01b7dce21e5de2f5c42c6b05255053df",
+        "classification": "Evidence-led conversation hypothesis; not customer demand or agreed scope",
+        "evidence": [
+          {
+            "fact_id": "BTI-NWG-SIMPLIFY",
+            "source_id": "BTI-NWG-Q326",
+            "publication_date": "2026-10-30",
+            "last_verified": "2026-11-13T19:34:33+00:00",
+            "source_url": "https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/30102026/nwg-q3-2026-results.pdf"
+          }
+        ]
+      },
+      "deciding_question": "Is there an attributable customer-service or benefits-accountability gap outside the current simplification plan, or would the existing plan deliver the same outcome?",
       "economic_value_hypothesis": {
         "amount": null,
         "costs": [
@@ -418,7 +557,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "Arm describes development of production silicon products and related operating risks. This is context, not an evidenced buying programme.",
-      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "entry_play": "Before proposing Enterprise Digital Transformation to Arm, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Arm: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -490,7 +630,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "The Barclays PLC report describes an existing AI-assisted contact-centre capability. Residual need is not established.",
-      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "entry_play": "Before proposing Enterprise Digital Transformation to Barclays, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Barclays: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -564,7 +705,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "The existing commercial source reports completed expansion projects contributing to growth. Residual need is not established.",
-      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "entry_play": "Before proposing Enterprise Digital Transformation to Equinix, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Equinix: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -638,7 +780,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "entry_play": "Before proposing Enterprise Digital Transformation to NVIDIA, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "NVIDIA: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -698,7 +841,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "FY2025 report describes multilingual chat and improved disruption self-service; remaining friction is unmeasured here. Residual need is not established.",
-      "entry_play": "Start from a customer outcome, not the next technology platform. Which end-to-end service outcome is materially constrained, and who owns the benefits after launch?",
+      "entry_play": "Before proposing Enterprise Digital Transformation to easyJet, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "easyJet: Would process simplification and clearer ownership achieve the outcome without an enterprise technology programme?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -795,8 +939,31 @@
       "tier": "Investigate",
       "stage": "Programme activity reported; buying unknown",
       "why": "The Q3 call reports extending AI use cases across the Group. Enterprise process/role redesign and available external scope are not established.",
-      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
-      "deciding_question": "Lloyds Banking Group: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
+      "entry_play": "For Lloyds, distinguish the AI-use-case expansion reported on 29 October from an AI-first operating-model mandate: ask whether any named-by-the-owner process is actually being redesigned across roles, controls and adoption, rather than merely gaining another AI tool. If process redesign is confirmed, propose a process-and-role diagnostic for one owner-selected use case: compare the non-AI baseline with the proposed workflow, identify human decision and exception responsibilities, and test control, adoption and cost assumptions. No new model build or access to customer data is implied.",
+      "entry_play_detail": {
+        "required": [
+          "BTI-LBG-AI-SCALE"
+        ],
+        "positive": [
+          "BTI-LBG-AI-SCALE"
+        ],
+        "conversation": "For Lloyds, distinguish the AI-use-case expansion reported on 29 October from an AI-first operating-model mandate: ask whether any named-by-the-owner process is actually being redesigned across roles, controls and adoption, rather than merely gaining another AI tool.",
+        "diagnostic": "If process redesign is confirmed, propose a process-and-role diagnostic for one owner-selected use case: compare the non-AI baseline with the proposed workflow, identify human decision and exception responsibilities, and test control, adoption and cost assumptions. No new model build or access to customer data is implied.",
+        "question": "Is enterprise process and role redesign genuinely in scope, and what evidence would show that a non-AI change or the existing AI team is sufficient?",
+        "stop": "Stop at Research only if this remains point-tool expansion; an unconfirmed external role or available budget cannot be assumed.",
+        "revision": "c914b52fcced5db3e35ff1a32701d42a01b7dce21e5de2f5c42c6b05255053df",
+        "classification": "Evidence-led conversation hypothesis; not customer demand or agreed scope",
+        "evidence": [
+          {
+            "fact_id": "BTI-LBG-AI-SCALE",
+            "source_id": "BTI-LBG-Q326",
+            "publication_date": "2026-10-29",
+            "last_verified": "2026-11-13T19:34:33+00:00",
+            "source_url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2026/q3/2026-lbg-q3-presentation-transcript.pdf"
+          }
+        ]
+      },
+      "deciding_question": "Is enterprise process and role redesign genuinely in scope, and what evidence would show that a non-AI change or the existing AI team is sufficient?",
       "economic_value_hypothesis": {
         "amount": null,
         "costs": [
@@ -878,7 +1045,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "Arm describes development of production silicon products and related operating risks. This is context, not an evidenced buying programme.",
-      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "entry_play": "Before proposing AI-first Business Transformation to Arm, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Arm: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -950,7 +1118,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "entry_play": "Before proposing AI-first Business Transformation to BT Group, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "BT Group: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -1010,7 +1179,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "The Barclays PLC report describes an existing AI-assisted contact-centre capability. Residual need is not established.",
-      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "entry_play": "Before proposing AI-first Business Transformation to Barclays, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Barclays: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -1084,7 +1254,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "entry_play": "Before proposing AI-first Business Transformation to Computacenter, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Computacenter: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -1144,7 +1315,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "entry_play": "Before proposing AI-first Business Transformation to Equinix, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Equinix: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -1204,7 +1376,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "NVIDIA announces a multi-year UK research compute contribution. This is context, not an evidenced buying programme.",
-      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "entry_play": "Before proposing AI-first Business Transformation to NVIDIA, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "NVIDIA: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -1276,7 +1449,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "NatWest reports a live AI fraud-triage agent; this demonstrates an existing deployment, not an enterprise AI-first operating-model mandate. Residual need is not established.",
-      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "entry_play": "Before proposing AI-first Business Transformation to NatWest Group, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "NatWest Group: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -1350,7 +1524,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "entry_play": "Before proposing AI-first Business Transformation to Santander UK, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Santander UK: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -1410,7 +1585,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "easyJet reported Jetstream and predictive crew-planning support in its Luton ICC in May 2024. Current adoption and residual backlog remain unknown. Residual need is not established.",
-      "entry_play": "The opportunity is a better business process, not more AI usage. Which process outcome warrants changing work allocation, controls and accountability?",
+      "entry_play": "Before proposing AI-first Business Transformation to easyJet, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "easyJet: Would a rules-based or process-only alternative achieve the same outcome with lower total risk and cost?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -1507,8 +1683,31 @@
       "tier": "Investigate",
       "stage": "Programme activity reported; buying unknown",
       "why": "Computacenter reports continuing investment in its cybersecurity framework.",
-      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
-      "deciding_question": "Computacenter: Do the existing controls and recovery evidence already address the scenario adequately?",
+      "entry_play": "For Computacenter, acknowledge the cybersecurity-framework investment reported on 8 September and ask whether its current assurance plan leaves any owner-confirmed critical-service question; do not begin with an assertion that controls are missing. Only with the security and service owners' permission, propose an assurance-coverage diagnostic: choose one critical service, map the existing framework evidence and recovery/response responsibilities, and identify whether any test is actually uncovered. Confirm group versus UK scope and incumbent responsibilities before considering independent assurance.",
+      "entry_play_detail": {
+        "required": [
+          "BTI-CC-CYBER"
+        ],
+        "positive": [
+          "BTI-CC-CYBER"
+        ],
+        "conversation": "For Computacenter, acknowledge the cybersecurity-framework investment reported on 8 September and ask whether its current assurance plan leaves any owner-confirmed critical-service question; do not begin with an assertion that controls are missing.",
+        "diagnostic": "Only with the security and service owners' permission, propose an assurance-coverage diagnostic: choose one critical service, map the existing framework evidence and recovery/response responsibilities, and identify whether any test is actually uncovered. Confirm group versus UK scope and incumbent responsibilities before considering independent assurance.",
+        "question": "Is there a specific assurance question that existing internal or incumbent tests do not answer, or does the current framework investment already provide sufficient evidence?",
+        "stop": "Stop if existing assurance closes the question, or no authorised independent scope is established; framework investment alone does not show a control failure.",
+        "revision": "c914b52fcced5db3e35ff1a32701d42a01b7dce21e5de2f5c42c6b05255053df",
+        "classification": "Evidence-led conversation hypothesis; not customer demand or agreed scope",
+        "evidence": [
+          {
+            "fact_id": "BTI-CC-CYBER",
+            "source_id": "BTI-CC-H126",
+            "publication_date": "2026-09-08",
+            "last_verified": "2026-11-13T19:34:33+00:00",
+            "source_url": "https://investors.computacenter.com/news-releases/news-release-details/computacenter-2026-half-year-results"
+          }
+        ]
+      },
+      "deciding_question": "Is there a specific assurance question that existing internal or incumbent tests do not answer, or does the current framework investment already provide sufficient evidence?",
       "economic_value_hypothesis": {
         "amount": null,
         "costs": [
@@ -1579,7 +1778,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "entry_play": "Before proposing Enterprise Cybersecurity & Resilience to Arm, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Arm: Do the existing controls and recovery evidence already address the scenario adequately?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -1639,7 +1839,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "entry_play": "Before proposing Enterprise Cybersecurity & Resilience to BT Group, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "BT Group: Do the existing controls and recovery evidence already address the scenario adequately?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -1699,7 +1900,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "entry_play": "Before proposing Enterprise Cybersecurity & Resilience to Barclays, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Barclays: Do the existing controls and recovery evidence already address the scenario adequately?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -1759,7 +1961,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "entry_play": "Before proposing Enterprise Cybersecurity & Resilience to Equinix, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Equinix: Do the existing controls and recovery evidence already address the scenario adequately?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -1819,7 +2022,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "Lloyds describes built-in Envoy controls and monitoring. A missing-control or greenfield-platform pitch is weakened; effectiveness needs customer validation. Residual need is not established.",
-      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "entry_play": "Before proposing Enterprise Cybersecurity & Resilience to Lloyds Banking Group, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Lloyds Banking Group: Do the existing controls and recovery evidence already address the scenario adequately?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -1893,7 +2097,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "NVIDIA announces a multi-year UK research compute contribution. This is context, not an evidenced buying programme.",
-      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "entry_play": "Before proposing Enterprise Cybersecurity & Resilience to NVIDIA, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "NVIDIA: Do the existing controls and recovery evidence already address the scenario adequately?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -1965,7 +2170,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "NatWest reports a live AI fraud-triage agent; this demonstrates an existing deployment, not an enterprise AI-first operating-model mandate. Residual need is not established.",
-      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "entry_play": "Before proposing Enterprise Cybersecurity & Resilience to NatWest Group, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "NatWest Group: Do the existing controls and recovery evidence already address the scenario adequately?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -2039,7 +2245,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "entry_play": "Before proposing Enterprise Cybersecurity & Resilience to Santander UK, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Santander UK: Do the existing controls and recovery evidence already address the scenario adequately?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -2099,7 +2306,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "FY2025 report describes central procurement and key supplier management. No open tender or seller eligibility established. This is context, not an evidenced buying programme.",
-      "entry_play": "Protect the service outcome; do not start by assuming another security tool is needed. Which authorised scenario could impair this service despite the controls already in place?",
+      "entry_play": "Before proposing Enterprise Cybersecurity & Resilience to easyJet, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "easyJet: Do the existing controls and recovery evidence already address the scenario adequately?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -2171,8 +2379,39 @@
       "tier": "Prioritise",
       "stage": "Announced programme / conditional plan; buying unknown",
       "why": "The release describes continuing integration and planned customer migration to Santander UK systems, platforms and channels in H2 2027 after any approved transfer.",
-      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
-      "deciding_question": "Santander UK: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "entry_play": "For Santander UK, ask which estate-transition decisions would remain open under the conditional H2 2027 migration described on 10 November; keep the separate Santander UK and TSB entities explicit and avoid treating the transfer as approved. If the authorised integration owner identifies an undecided dependency, offer a migration-treatment diagnostic: map one service's interfaces, reconciliation, vendor/licence rights and continuity gates; compare retain, upgrade and retire options and ask what rollback evidence each requires. Do not assume a cloud move, rewrite or vacant supplier role.",
+      "entry_play_detail": {
+        "required": [
+          "BTI-TSB-MIGRATION",
+          "BTI-TSB-LEGAL"
+        ],
+        "positive": [
+          "BTI-TSB-MIGRATION"
+        ],
+        "conversation": "For Santander UK, ask which estate-transition decisions would remain open under the conditional H2 2027 migration described on 10 November; keep the separate Santander UK and TSB entities explicit and avoid treating the transfer as approved.",
+        "diagnostic": "If the authorised integration owner identifies an undecided dependency, offer a migration-treatment diagnostic: map one service's interfaces, reconciliation, vendor/licence rights and continuity gates; compare retain, upgrade and retire options and ask what rollback evidence each requires. Do not assume a cloud move, rewrite or vacant supplier role.",
+        "question": "Which dependency or reconciliation decision is still open beyond the existing integration plan, and could retention or a supported upgrade remove the constraint with less transition risk?",
+        "stop": "Stop if the transfer conditions or programme direction change, decisions are already resolved, or entity authority and external scope are not established.",
+        "revision": "c914b52fcced5db3e35ff1a32701d42a01b7dce21e5de2f5c42c6b05255053df",
+        "classification": "Evidence-led conversation hypothesis; not customer demand or agreed scope",
+        "evidence": [
+          {
+            "fact_id": "BTI-TSB-MIGRATION",
+            "source_id": "BTI-TSB-TRANSFER",
+            "publication_date": "2026-11-10",
+            "last_verified": "2026-11-13T19:34:33+00:00",
+            "source_url": "https://www.tsb.co.uk/news-releases/Santander-UK-and-TSB-apply-to-transfer-the-TSB-business-to-Santander-UK.html"
+          },
+          {
+            "fact_id": "BTI-TSB-LEGAL",
+            "source_id": "BTI-TSB-TRANSFER",
+            "publication_date": "2026-11-10",
+            "last_verified": "2026-11-13T19:34:33+00:00",
+            "source_url": "https://www.tsb.co.uk/news-releases/Santander-UK-and-TSB-apply-to-transfer-the-TSB-business-to-Santander-UK.html"
+          }
+        ]
+      },
+      "deciding_question": "Which dependency or reconciliation decision is still open beyond the existing integration plan, and could retention or a supported upgrade remove the constraint with less transition risk?",
       "economic_value_hypothesis": {
         "amount": null,
         "costs": [
@@ -2267,8 +2506,31 @@
       "tier": "Investigate",
       "stage": "Programme activity reported; buying unknown",
       "why": "Computacenter reports design work for upgrading its existing ERP to a cloud-based version.",
-      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
-      "deciding_question": "Computacenter: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "entry_play": "For Computacenter, start with the existing ERP-to-cloud-version design work reported on 8 September: ask which upgrade, interface or transition decision is still genuinely undecided, rather than pitching wholesale ERP replacement. If the ERP owner confirms a remaining design choice, propose an upgrade-design diagnostic: compare the supported upgrade with selective retention or replacement, trace one critical interface and data-reconciliation path, and review vendor rights, dual-run and rollback assumptions. Establish the legal entity, UK workshare and incumbent design responsibilities first.",
+      "entry_play_detail": {
+        "required": [
+          "BTI-CC-ERP"
+        ],
+        "positive": [
+          "BTI-CC-ERP"
+        ],
+        "conversation": "For Computacenter, start with the existing ERP-to-cloud-version design work reported on 8 September: ask which upgrade, interface or transition decision is still genuinely undecided, rather than pitching wholesale ERP replacement.",
+        "diagnostic": "If the ERP owner confirms a remaining design choice, propose an upgrade-design diagnostic: compare the supported upgrade with selective retention or replacement, trace one critical interface and data-reconciliation path, and review vendor rights, dual-run and rollback assumptions. Establish the legal entity, UK workshare and incumbent design responsibilities first.",
+        "question": "Is an ERP interface, rights or transition decision still open and outside existing design ownership, or is the supported upgrade already sufficient?",
+        "stop": "Stop if the design is settled or existing teams cover it; group ERP design work does not establish a UK external modernisation purchase.",
+        "revision": "c914b52fcced5db3e35ff1a32701d42a01b7dce21e5de2f5c42c6b05255053df",
+        "classification": "Evidence-led conversation hypothesis; not customer demand or agreed scope",
+        "evidence": [
+          {
+            "fact_id": "BTI-CC-ERP",
+            "source_id": "BTI-CC-H126",
+            "publication_date": "2026-09-08",
+            "last_verified": "2026-11-13T19:34:33+00:00",
+            "source_url": "https://investors.computacenter.com/news-releases/news-release-details/computacenter-2026-half-year-results"
+          }
+        ]
+      },
+      "deciding_question": "Is an ERP interface, rights or transition decision still open and outside existing design ownership, or is the supported upgrade already sufficient?",
       "economic_value_hypothesis": {
         "amount": null,
         "costs": [
@@ -2339,8 +2601,31 @@
       "tier": "Investigate",
       "stage": "Structural opportunity; current activity unknown",
       "why": "The annual report names faster application retirement and cloud migration among 2026 priorities.",
-      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
-      "deciding_question": "Lloyds Banking Group: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
+      "entry_play": "For Lloyds, revisit the annual-report migration priorities as structural context, not a new event: ask which estate-treatment or service-continuity decision, if any, remains unresolved in the current programme. If a residual decision is confirmed, propose a legacy-treatment diagnostic for one owner-selected service: map multi-vendor dependencies, support and licence obligations, reconciliation and rollback needs; compare retaining or upgrading with retiring or replacing. Reconfirm current status before discussing delivery.",
+      "entry_play_detail": {
+        "required": [
+          "LBG-AR25-MIGRATION"
+        ],
+        "positive": [
+          "LBG-AR25-MIGRATION"
+        ],
+        "conversation": "For Lloyds, revisit the annual-report migration priorities as structural context, not a new event: ask which estate-treatment or service-continuity decision, if any, remains unresolved in the current programme.",
+        "diagnostic": "If a residual decision is confirmed, propose a legacy-treatment diagnostic for one owner-selected service: map multi-vendor dependencies, support and licence obligations, reconciliation and rollback needs; compare retaining or upgrading with retiring or replacing. Reconfirm current status before discussing delivery.",
+        "question": "Does the migration programme still contain an unresolved continuity or treatment decision, or do existing teams and supported upgrade paths already remove the constraint?",
+        "stop": "Stop if the historical priority is complete or no residual decision exists; an annual-report priority is neither new procurement nor available supplier scope.",
+        "revision": "c914b52fcced5db3e35ff1a32701d42a01b7dce21e5de2f5c42c6b05255053df",
+        "classification": "Evidence-led conversation hypothesis; not customer demand or agreed scope",
+        "evidence": [
+          {
+            "fact_id": "LBG-AR25-MIGRATION",
+            "source_id": "PR-LBG-AR25",
+            "publication_date": "2026-02-13",
+            "last_verified": "2026-11-09T19:35:29.412049+00:00",
+            "source_url": "https://www.lloydsbankinggroup.com/assets/pdfs/investors/financial-performance/lloyds-banking-group-plc/2025/q4/2025-lbg-annual-report.pdf"
+          }
+        ]
+      },
+      "deciding_question": "Does the migration programme still contain an unresolved continuity or treatment decision, or do existing teams and supported upgrade paths already remove the constraint?",
       "economic_value_hypothesis": {
         "amount": null,
         "costs": [
@@ -2411,7 +2696,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "entry_play": "Before proposing Complex Legacy Application Modernisation to Arm, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Arm: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -2471,7 +2757,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "entry_play": "Before proposing Complex Legacy Application Modernisation to BT Group, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "BT Group: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -2531,7 +2818,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "entry_play": "Before proposing Complex Legacy Application Modernisation to Barclays, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Barclays: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -2591,7 +2879,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "entry_play": "Before proposing Complex Legacy Application Modernisation to Equinix, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Equinix: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -2651,7 +2940,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "entry_play": "Before proposing Complex Legacy Application Modernisation to NVIDIA, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "NVIDIA: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -2711,7 +3001,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "entry_play": "Before proposing Complex Legacy Application Modernisation to NatWest Group, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "NatWest Group: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -2771,7 +3062,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "easyJet reported S.FP+ with the Skywise Core Platform in November 2023. Existing maintenance collaboration precedes this pilot; current workshare unknown. This is context, not an evidenced buying programme.",
-      "entry_play": "The valuable decision is where to retain, retire or change the estate safely, not a blanket rewrite. Which business services and supplier dependencies constrain the programme, and what evidence would justify each treatment option?",
+      "entry_play": "Before proposing Complex Legacy Application Modernisation to easyJet, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "easyJet: Can a supported upgrade, retention or retirement remove the constraint with less transition risk?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -2854,7 +3146,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "entry_play": "Before proposing Social Value & ESG Transformation to Arm, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Arm: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -2914,7 +3207,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "BT reports lower network energy usage as an operating-efficiency result. Residual need is not established.",
-      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "entry_play": "Before proposing Social Value & ESG Transformation to BT Group, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "BT Group: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -2988,7 +3282,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "entry_play": "Before proposing Social Value & ESG Transformation to Barclays, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Barclays: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -3048,7 +3343,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "entry_play": "Before proposing Social Value & ESG Transformation to Computacenter, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Computacenter: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -3108,7 +3404,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "entry_play": "Before proposing Social Value & ESG Transformation to Equinix, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Equinix: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -3168,7 +3465,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "entry_play": "Before proposing Social Value & ESG Transformation to Lloyds Banking Group, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Lloyds Banking Group: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -3228,7 +3526,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "entry_play": "Before proposing Social Value & ESG Transformation to NVIDIA, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "NVIDIA: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -3288,7 +3587,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "entry_play": "Before proposing Social Value & ESG Transformation to NatWest Group, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "NatWest Group: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -3348,7 +3648,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "No current Offer-specific trigger found in the bounded reviewed sources.",
-      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "entry_play": "Before proposing Social Value & ESG Transformation to Santander UK, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "Santander UK: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
       "economic_value_hypothesis": {
         "amount": null,
@@ -3408,7 +3709,8 @@
       "tier": "Research only",
       "stage": "No current trigger found",
       "why": "FY2025 report describes central procurement and key supplier management. No open tender or seller eligibility established. This is context, not an evidenced buying programme.",
-      "entry_play": "A credible commitment needs attributable additional delivery, not an attractive corporate pledge. Which contract-specific social outcome is material, deliverable and additional to the existing baseline?",
+      "entry_play": "Before proposing Social Value & ESG Transformation to easyJet, obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.",
+      "entry_play_detail": null,
       "deciding_question": "easyJet: Does the procurement requirement actually apply, and are the proposed outcomes additional rather than relabelled existing activity?",
       "economic_value_hypothesis": {
         "amount": null,

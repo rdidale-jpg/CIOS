@@ -224,3 +224,58 @@ def test_matcher_and_source_adapter_have_no_network_or_canonical_write(pilot,mon
     row=selected_offer(pilot);before=offers._path().read_bytes()
     assert offers.discover('offer',row['id'],intelligence=True,headers=pilot['seller'])
     assert offers._path().read_bytes()==before and not offers.snapshot(headers=pilot['seller'])['studio_enabled']
+
+
+@pytest.mark.parametrize('identifier,slug',[
+    (list(research.OFFER_DIMENSIONS)[i],s) for i,slugs in [(0,['santander-uk','lloyds','computacenter','bt','natwest']),(1,['lloyds']),(2,['computacenter']),(3,['santander-uk','lloyds','computacenter'])] for s in slugs])
+def test_enterprise_entry_plays_require_their_retained_positive_basis(grounded,identifier,slug):
+    from cios.applications.flora import buying_entry_plays as plays
+    result=fit(grounded,identifier,slug);detail=result['buying_trigger']['entry_play_detail']
+    assert detail and detail['conversation'] in result['entry_play'] and detail['diagnostic'] in result['entry_play']
+    assert result['next_validation_action']==detail['question'] and detail['stop']
+    timeline={f['id']:f for f in result['buying_trigger']['timeline']}
+    for ref in detail['evidence']:
+        f=timeline[ref['fact_id']]
+        assert ref['source_id']==f['source_id'] and ref['publication_date']==f['publication_date'] and ref['source_url']==f['source_url']
+    assert detail['revision']==plays.REVISION and 'not customer demand' in detail['classification']
+    for removed in detail['required']:
+        altered=deepcopy(grounded)
+        next(f for f in altered[slug]['trigger_research']['facts'] if f['id']==removed)['status']='withdrawn'
+        assert fit(altered,identifier,slug)['buying_trigger']['entry_play_detail'] is None
+    assert fit(grounded,identifier,slug,'2027-03-01')['buying_trigger']['entry_play_detail'] is None
+    assert fit(grounded,identifier,slug,seller={'excluded_accounts':[slug]})['buying_trigger']['entry_play_detail'] is None
+
+
+def test_diagnostics_are_substantively_distinct_and_do_not_upgrade_research_only(grounded):
+    from cios.applications.flora import buying_entry_plays as plays
+    before=json.loads((Path(__file__).resolve().parents[1]/'docs/flora-runtime/buying-trigger-591/Commercial-Before.json').read_text())
+    assert before['source_sha']=='a884a6fcf639bc4653072d873781c71eceb0bd05'
+    expected={(r['offer_id'],r['enterprise_slug']):r for r in before['samples']}
+    tailored=[]
+    for identifier in research.OFFER_DIMENSIONS:
+        for slug in grounded:
+            r=fit(grounded,identifier,slug);old=expected[identifier,slug];b=r['buying_trigger']
+            assert (b['tier'],b['stage'],r['why_account'],r['contradictions'])==(old['tier'],old['stage'],old['why'],old['counter_evidence'])
+            if b['entry_play_detail']:tailored.append(b['entry_play_detail'])
+            if b['tier']=='Research only':
+                assert b['entry_play_detail'] is None and 'No programme diagnostic is recommended' in r['entry_play']
+    assert len(tailored)==10 and len({p['diagnostic'] for p in tailored})==10
+    assert len({p['question'] for p in tailored})==10
+    assert 'separate legal entities' in plays.PLAYS[plays.D,'santander-uk']['conversation']
+    assert 'completed CRM' in plays.PLAYS[plays.D,'computacenter']['conversation']
+    assert 'non-AI baseline' in plays.PLAYS[plays.A,'lloyds']['diagnostic']
+    assert 'supported upgrade' in plays.PLAYS[plays.L,'computacenter']['diagnostic']
+
+
+def test_changed_entry_play_revision_invalidates_saved_review_without_pipeline_write(pilot,monkeypatch):
+    from cios.applications.flora import buying_entry_plays as plays
+    full_scope(pilot);row=selected_offer(pilot)
+    results=offers.discover('offer',row['id'],intelligence=True,headers=pilot['seller'])
+    save(pilot,row,results);before=offers._path().read_bytes()
+    monkeypatch.setattr(plays,'REVISION','example-test-only-new-commercial-revision')
+    assert offers.shortlist_snapshot(headers=pilot['seller'])[0]['stale']
+    new=offers.discover('offer',row['id'],intelligence=True,headers=pilot['seller'])
+    assert {r['assessment_id'] for r in results}.isdisjoint(r['assessment_id'] for r in new)
+    with pytest.raises(ValueError,match='Assessment changed'):
+        save(pilot,row,results,expected_version=1)
+    assert offers._path().read_bytes()==before and not data_path('sales_pipeline','opportunities.json').exists()

@@ -5,7 +5,7 @@
   "functional_owner_revisions": {
     "cios/applications/flora/offers.py": {
       "baseline_sha256": "ed9021312b666a7b7f331a214f295cc67d9875860e99a08fec9b39f1c41973a9",
-      "candidate_sha256": "5e5d30424d4d45b78f6c972f3d688aefcdc2c5a98fca76fb85e30167725d1953"
+      "candidate_sha256": "0cd9c6b53e6e168bc1520da8918ced531b814a5b5cf456570eaa026c8ff9af16"
     },
     "cios/applications/flora/commercial_mission.py": {
       "baseline_sha256": "13e7216d61c97dc3b5faf8d1b94bd83f31fbe56dd6f64a8b9c126f1697d4728d",

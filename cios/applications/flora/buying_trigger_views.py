@@ -60,6 +60,7 @@ def body(path,state,q,headers):
         row=next(r for r in choices if r['id']==chosen['offer_id']);b=chosen['buying_trigger'];sources([chosen])
         content='<article class="trigger-brief"><p class="eyebrow">'+e(row['content']['name'])+'</p><h2>'+e(chosen['enterprise_name'])+'</h2><p class="trigger-tier">'+e(b['tier']+' · '+b['stage'])+'</p><p>'+e(chosen['why_account'])+'</p>'
         content+='<h3>A useful first conversation</h3><p>'+e(chosen['entry_play'])+'</p><h3>The deciding question</h3><p>'+e(chosen['next_validation_action'])+'</p>'
+        if b.get('entry_play_detail'):content+='<p><strong>Stop condition:</strong> '+e(b['entry_play_detail']['stop'])+'</p>'
         content+='<h3>Value to validate</h3><p>'+e('; '.join(chosen['economic_value_hypothesis']['mechanisms']))+'</p><p>'+e(chosen['economic_value_hypothesis']['method'])+'</p>'
         content+='<h3>Reported timeline</h3><ol class="trigger-timeline">'
         for f in b['timeline']:

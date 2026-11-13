@@ -18,7 +18,14 @@ function check(value,label){assert(value,label);checks.push(label);}
     legacy:base+'/trigger-detail?offer='+legacy+'&enterprise=santander-uk',
     ai:base+'/trigger-detail?offer='+ai+'&enterprise=lloyds',
     cyber:base+'/trigger-detail?offer='+cyber+'&enterprise=lloyds',
-    esg:base+'/triggers?selected='+esg
+    esg:base+'/triggers?selected='+esg,
+    santander:base+'/trigger-detail?offer='+digital+'&enterprise=santander-uk',
+    lloyds:base+'/trigger-detail?offer='+digital+'&enterprise=lloyds',
+    computacenter:base+'/trigger-detail?offer='+digital+'&enterprise=computacenter',
+    'cc-legacy':base+'/trigger-detail?offer='+legacy+'&enterprise=computacenter',
+    'cc-cyber':base+'/trigger-detail?offer='+cyber+'&enterprise=computacenter',
+    bt:base+'/trigger-detail?offer='+digital+'&enterprise=bt',
+    natwest:base+'/trigger-detail?offer='+digital+'&enterprise=natwest'
    }:{discovery:base+'/discover?mode=offer&selected='+digital,portfolio:base};
    for(const [device,size] of Object.entries(sizes)){
     await p.setViewportSize(size);
@@ -40,6 +47,7 @@ function check(value,label){assert(value,label);checks.push(label);}
       }else{
        check((await p.locator('main').innerText()).includes('The deciding question'),device+' '+name+': one primary disconfirming question');
        check(await p.getByRole('heading',{name:'Reported timeline',exact:true}).count()===1,device+' '+name+': dated timeline');
+       if(name!=='cyber')check((await p.locator('main').innerText()).includes('Stop condition:'),device+' '+name+': bounded enterprise diagnostic and stop condition');
        if(name==='legacy'){check((await p.locator('main').innerText()).includes('2026-11-10'),device+': real reported catalyst date');check((await p.locator('main').innerText()).includes('conditional'),device+': planned migration remains conditional');}
        if(name==='cyber')check((await p.locator('main').innerText()).includes('Envoy'),device+': existing controls remain counter-evidence');
        await p.locator('.sources-menu>summary').click();check((await p.locator('.source-sheet').innerText()).includes('Retained excerpt'),device+' '+name+': original source passages on demand');await p.locator('.sources-menu>summary').click();
@@ -71,6 +79,9 @@ function check(value,label){assert(value,label);checks.push(label);}
   }
   const data=JSON.parse(fs.readFileSync(path.join(cfg.output,'Assessment-Matrix.json'),'utf8'));
   check(data.samples.length===50&&data.samples.every(r=>r.both_modes_identical&&r.economics===null&&!r.pipeline_eligible),'Fifty source-backed assessments; same matcher, no values or Pipeline eligibility');
+  const tailored=data.samples.filter(r=>r.entry_play_detail);
+  check(tailored.length===10&&new Set(tailored.map(r=>r.entry_play_detail.diagnostic)).size===10,'Ten distinct evidence-linked diagnostics for supported pairs');
+  check(data.samples.filter(r=>r.tier==='Research only').every(r=>!r.entry_play_detail&&r.entry_play.includes('No programme diagnostic is recommended')),'Research-only cases do not become diagnostic mandates');
   check(data.samples.filter(r=>r.offer_id==='tech-strategic-social-value-esg').every(r=>r.tier==='Research only'),'All ESG unknowns retained; no manufactured positive case');
   fs.writeFileSync(path.join(cfg.output,'Browser-Checks.json'),JSON.stringify({fixture:'Local example seller and explicit fixture approvals; no real company capability or live opportunity asserted',javascript:false,passed:checks.length,checks,viewports:sizes},null,2)+'\n');console.log('Passed '+checks.length+' buying-trigger browser checks');
  }finally{await browser.close();}
