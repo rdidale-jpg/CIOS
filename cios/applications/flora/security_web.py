@@ -137,6 +137,10 @@ def private_read(handler):
     if path in {'/flora/sales/pipeline', '/flora/sales/new'} or re.fullmatch(r'/flora/sales/opp-[a-f0-9]{32}', path):
         require_capability(handler.headers, 'commercial_context.view')
         return True
+    from .offers import READ_PATHS
+    if path in READ_PATHS:
+        require_capability(handler.headers, 'commercial_context.view')
+        return True
     if path == '/settings/general':
         require_capability(handler.headers,'package.inspect')
         return True
@@ -147,6 +151,8 @@ def private_read(handler):
 
 
 def mutation_capability(path):
+    from .offers import WRITE_PATHS
+    if path in WRITE_PATHS: return 'commercial_context.edit'
     ident=r'[A-Za-z0-9][A-Za-z0-9_.:@-]{0,127}'
     if path in {'/flora/sales/capture', '/flora/sales/create'} or re.fullmatch(r'/flora/sales/opp-[a-f0-9]{32}/save', path): return 'commercial_context.edit'
     if path=='/operations/storage-recovery': return 'storage.recover'
