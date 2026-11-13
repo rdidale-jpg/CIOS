@@ -1,0 +1,20 @@
+{
+  "artworks": {
+    "GB": {
+      "asset": "cios/applications/flora/home_assets/uk-world.webp",
+      "sha256": "1b1c87474a25df0da97829bb27df6e7e446a5bb5867c6d070bed11b0953f493c",
+      "bytes": 505936,
+      "original_png_sha256": "50b792ab30cf2a9bb4eb65397db9518d595f012830bca64adfc52ea87fd855e2",
+      "origin": "Design-time generated conceptual illustration; static local WebP encoding. No runtime model call.",
+      "authority": "Presentation artwork only; not research, GIS, canonical intelligence, facility identity or relationship evidence."
+    },
+    "FR": {
+      "asset": "cios/applications/flora/home_assets/fr-world.webp",
+      "sha256": "a2f48eae21c98ab9bea9983afa7a8cc9c3c26e7f0f28d3af6d185f46476114b4",
+      "bytes": 501040,
+      "original_png_sha256": "ec851312efda672517661bcee0fb4c924069f607899331dcac1c8beb8cafc971",
+      "origin": "Design-time generated conceptual illustration; static local WebP encoding. No runtime model call.",
+      "authority": "Presentation artwork only; not research, GIS, canonical intelligence, facility identity or relationship evidence."
+    }
+  }
+}

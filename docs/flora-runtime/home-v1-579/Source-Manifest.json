@@ -1,0 +1,18 @@
+{
+  "integration_base_sha": "34e34570c52847e16eb5f0d00579ca923983af7c",
+  "issue": 579,
+  "source_files_sha256": {
+    ".github/workflows/flora-validation.yml": "cbab5ff01db761fc063bca97b2dfcc2e0b50fe9141556d6818c5d1002083a6ac",
+    "cios/applications/flora/home_assets/fr-world.webp": "a2f48eae21c98ab9bea9983afa7a8cc9c3c26e7f0f28d3af6d185f46476114b4",
+    "cios/applications/flora/home_assets/home.css": "08bc9635c1ad41a8f29d1aaede6309b42bdbfaa816bf3a79ecf8ef4822d5f496",
+    "cios/applications/flora/home_assets/uk-world.webp": "1b1c87474a25df0da97829bb27df6e7e446a5bb5867c6d070bed11b0953f493c",
+    "cios/applications/flora/home_v1.py": "a2d4d1275030c98f2022cb8b831b5cb1ba34127a0df1898a995713a88c4d7b36",
+    "cios/applications/flora/offers_views.py": "0cf217ba0d234bce3888b7ac9e977da9fdcecc6ed9085993c78adae069f69c85",
+    "cios/applications/flora/public_routes.py": "59a5211a381a8d1bec7e26f3e146d4cb7bbfdceda969ff17cb6b8636889ea215",
+    "cios/applications/flora/web/app.py": "09216fc0af5741ba379407c8e519279a16096d62dbcc8dfe9387766abe989d31",
+    "tests/test_flora_home_v1_579.py": "ba9067e0ebd8fa222047154ee18f2c5fade9c4ee93fb84ed3bb63c090eae1bf3",
+    "tools/ci/flora_home_preview.cjs": "d82580186edca2fba459f77a033d7fcaa98b2d10b8b700a9f7aa9788d6b939d1",
+    "tools/ci/flora_home_preview.py": "7ee01bdf1d84d979ce657d5bea1b65d470a3dc4458730242188011191b51cf2a"
+  },
+  "note": "Exact review head and checkout SHAs are available on the stacked draft PR and current CI artifacts. Original integration branch is unchanged."
+}

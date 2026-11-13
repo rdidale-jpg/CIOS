@@ -208,7 +208,7 @@ def discovery(state, q, headers):
     results = offers.discover(mode, selected, cutoff, headers=headers)
     for r in results:
         offer = next(o for o in eligible if o['id'] == r['offer_id'])
-        body += f'<article class="pair" data-assessment-id="{e(r["assessment_id"])}"><p class="eyebrow">{e(r["recommended_posture"])} · hypothesis to test</p><h2>{e(r["enterprise_name"])} × {e(offer["content"]["name"])}</h2><div class="split"><div><p><strong>Why this customer</strong><br>{e(r["why_account"])}</p><p><strong>Why this offer</strong><br>{e(r["why_offer"])}</p><p><strong>Why now</strong><br>{e(r["why_now"])}</p></div><div class="explanation"><h3>First move</h3><p>{e(r["entry_play"])}</p><p><strong>Test next</strong><br>{e(r["next_validation_action"])}</p></div></div>'
+        body += f'<article class="pair" id="{e(r["assessment_id"])}" data-assessment-id="{e(r["assessment_id"])}"><p class="eyebrow">{e(r["recommended_posture"])} · hypothesis to test</p><h2>{e(r["enterprise_name"])} × {e(offer["content"]["name"])}</h2><div class="split"><div><p><strong>Why this customer</strong><br>{e(r["why_account"])}</p><p><strong>Why this offer</strong><br>{e(r["why_offer"])}</p><p><strong>Why now</strong><br>{e(r["why_now"])}</p></div><div class="explanation"><h3>First move</h3><p>{e(r["entry_play"])}</p><p><strong>Test next</strong><br>{e(r["next_validation_action"])}</p></div></div>'
         body += '<p class="muted">Access and delivery fit need validation. No buying intent or funding established.</p>'
         body += '<details><summary>Assessment, uncertainty and sources</summary>'
         for k in ('capability_fit', 'credibility', 'relationship_access', 'trigger_evaluation', 'delivery_risk'):

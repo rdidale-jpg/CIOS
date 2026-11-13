@@ -184,6 +184,13 @@ class FloraWebHandler(BaseHTTPRequestHandler):
             elif parsed.path in {"/flora/offers", "/flora/offers/company", "/flora/offers/edit", "/flora/offers/review", "/flora/offers/discover", "/flora/offers/studio"}:
                 from cios.applications.flora.offers_views import render
                 self._html(render(parsed.path, parse_qs(parsed.query, keep_blank_values=True), self.headers))
+            elif parsed.path in {"/home", "/home/global-forces", "/home/assets/styles", "/home/assets/uk-artwork", "/home/assets/fr-artwork"}:
+                from cios.applications.flora import home_v1
+                if parsed.path.startswith("/home/assets/"):
+                    body, mime = home_v1.asset(parsed.path.rsplit('/', 1)[-1])
+                    self._body(body, mime, 200)
+                else:
+                    self._html(home_v1.render(parsed.path, parse_qs(parsed.query, keep_blank_values=True), self.headers))
             elif parsed.path in {"/", "/flora", "/flora/"}:
                 self._html(_flora_home_page(self.headers))
             elif parsed.path in ("/enterprises/lloyds/understanding", "/enterprises/easyjet/understanding"):
