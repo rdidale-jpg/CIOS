@@ -47,7 +47,7 @@ def _record(state, offer_id):
 
 @ds.view_scope
 def render(path, query, headers):
-    allowed = {'offer', 'parent', 'template', 'mode', 'selected', 'cutoff', 'search'}
+    allowed = {'offer', 'parent', 'template', 'mode', 'selected', 'cutoff', 'search', 'enterprise', 'shortlist'}
     if set(query) - allowed or any(len(v) != 1 for v in query.values()):
         raise ValueError('Unsupported offer selector')
     q = {k: v[0] for k, v in query.items()}
@@ -62,6 +62,9 @@ def render(path, query, headers):
         title, body = 'My company', company(state, headers)
     elif not state['selected']:
         title, body = 'Choose your company', '<p>Select an authorised employer before creating or discovering offers.</p>' + company(state, headers)
+    elif path in {url('/triggers'),url('/trigger-detail'),url('/shortlists')}:
+        from .buying_trigger_views import body as trigger_body
+        title,body=trigger_body(current,state,q,headers)
     elif path == url('/edit'):
         title, body = 'Shape an offer', editor(state, q)
     elif path == url('/review'):
@@ -72,6 +75,8 @@ def render(path, query, headers):
         title, body = 'Creative Offers Studio', studio(state, headers)
     else:
         title, body = 'What can you help customers achieve?', catalogue(state)
+    ds.context_link(url('/triggers'),'Discover customers')
+    ds.context_link(url('/shortlists'),'Reviewed shortlists')
     company_name = state['selected']['organisation'] if state['selected'] else 'Your commercial workspace'
     content = f'<style>{CSS}</style><section class="offers" id="offers-content" aria-label="Offers workspace"><p class="eyebrow">{e(company_name)}</p><h1>{e(title)}</h1>{body}</section>'
     return page('Offers — ' + title, content, headers, 'offers', path)
@@ -119,7 +124,9 @@ def catalogue(state):
             highlights = '<p class="eyebrow">Example offer</p><p><strong>When to explore</strong> · ' + e(r['library_playbook']['structural_triggers'][0]['condition']) + '</p><p><strong>First move</strong> · ' + e(content['entry_play']) + '</p>'
         cards += f'<article class="offer-card"><span class="status">{e(status)} · v{r["version"]}</span><h2>{e(content["name"])}</h2><p>{e(content["outcome"])}</p><p class="muted">{e(content["buyers"])}</p>{highlights}<p>{controls}</p></article>'
     body = '<p>Start with the outcome. Choose an offer, explore a customer, then test the fit.</p>'
-    if any(r.get('library_playbook') for r in records):
+    if any(r.get('library_playbook', {}).get('strategic_priority') for r in records):
+        body += '<p>' + link('/triggers', 'Discover customers') + '</p>'
+    elif any(r.get('library_playbook') for r in records):
         body += '<p>' + link('/discover', 'Continue to discovery') + '</p>'
     body += '<div class="actions">' + link('/start', 'Set up my offers') + ' · ' + link('/edit', 'Create private offer') + '</div>'
     if cards:
@@ -275,6 +282,9 @@ def studio(state, headers):
 
 def submit(path, form_values, headers):
     suffix = path.removeprefix(offers.BASE)
+    if suffix == '/shortlist-save':
+        from .buying_trigger_views import submit as save_review
+        return save_review(form_values, headers)
     if suffix in {'/onboard-company', '/onboard-preferences', '/onboard-adopt'}:
         from .offer_library_views import submit as onboarding_submit
         return onboarding_submit(suffix, form_values, headers)

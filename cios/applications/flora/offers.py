@@ -17,6 +17,7 @@ from .security_store import SecurityStore, canonical, digest
 from .storage import data_path, atomic_write_json
 
 POLICY = 'offers-pilot-v1'
+TRIGGER_POLICY = 'offers-trigger-intelligence-v1'
 PATTERNS = {
     'structural-review': ('Structural review', ()),
     'service-dependencies': ('Changing service dependencies', ('LBG-AR25-MIGRATION', 'AV-ICC')),
@@ -24,8 +25,8 @@ PATTERNS = {
     'ai-change': ('AI and data change', ('LBG-A2030-DATA',)),
 }
 BASE = '/flora/offers'
-READ_PATHS = frozenset(BASE + s for s in ('', '/company', '/edit', '/review', '/discover', '/studio', '/start'))
-WRITE_PATHS = frozenset(BASE + s for s in ('/profile', '/bind', '/select', '/save', '/transition', '/studio-toggle', '/compose', '/revoke', '/onboard-company', '/onboard-preferences', '/onboard-adopt'))
+READ_PATHS = frozenset(BASE + s for s in ('', '/company', '/edit', '/review', '/discover', '/studio', '/start', '/triggers', '/trigger-detail', '/shortlists'))
+WRITE_PATHS = frozenset(BASE + s for s in ('/profile', '/bind', '/select', '/save', '/transition', '/studio-toggle', '/compose', '/revoke', '/onboard-company', '/onboard-preferences', '/onboard-adopt', '/shortlist-save'))
 FIELDS = ('name', 'outcome', 'icp', 'buyers', 'trigger', 'entry_play', 'next_test',
           'capabilities', 'partners', 'constraints', 'evidence', 'exclusions', 'trigger_pattern')
 VARIATION_FIELDS = frozenset({'name', 'icp', 'buyers', 'entry_play', 'next_test'})
@@ -518,7 +519,7 @@ def accounts():
 def assess_fit(seller, offer, enterprise, evidence_cutoff, policy=POLICY):
     """The ONLY matcher: no IO, writes, clock, random ID, journey or paid calls."""
     cutoff = date.fromisoformat(evidence_cutoff)
-    if policy != POLICY:
+    if policy not in {POLICY, TRIGGER_POLICY}:
         raise ValueError('Unsupported assessment policy')
     available = date.fromisoformat(enterprise['knowledge_date']) <= cutoff
     lineage = deepcopy(enterprise['lineage']) if available else []
@@ -589,11 +590,87 @@ def assess_fit(seller, offer, enterprise, evidence_cutoff, policy=POLICY):
             result['economic_value_hypothesis'] = deepcopy(playbook['economic_value'])
             result['library_context']['disconfirming_evidence'] = deepcopy(playbook['disconfirming_evidence'])
             result['library_context']['follow_on_opportunities'] = deepcopy(playbook['follow_on_opportunities'])
+    if policy == TRIGGER_POLICY:
+        from .research_intelligence import buying_evidence as research
+        if not playbook or offer.get('template_source', {}).get('id') not in research.OFFER_DIMENSIONS or not enterprise.get('trigger_research'):
+            raise ValueError('Choose a strategic Offer and a reviewed research account')
+        dimension = research.OFFER_DIMENSIONS[offer['template_source']['id']]
+        bundle = enterprise['trigger_research']
+        facts = [f for f in research.available_facts(bundle, evidence_cutoff)
+                 if dimension in f['dimensions'] or not f['dimensions']]
+        closed = {f['programme_id'] for f in facts if f['kind'] == 'closed'
+                  or (f['kind'] == 'counter' and f.get('counter_scope') == 'programme' and f['dated_current'])}
+        positive = [f for f in facts if f['kind'] in {'structural', 'catalyst', 'programme'}
+                    and f['programme_id'] not in closed and (f['dated_current'] or f['kind'] == 'structural')
+                    and f['review_age_days'] <= bundle['policy']['catalyst_review_days']]
+        programmes = [f for f in positive if f['kind'] == 'programme' and f['dated_current']]
+        catalysts = [f for f in positive if f['kind'] == 'catalyst' and f['dated_current']]
+        linked = [f for f in programmes if f['scope_confirmed'] and any(c['programme_id'] == f['programme_id'] for c in catalysts)]
+        counters = [f for f in facts if f['kind'] in {'counter', 'completed', 'closed'}]
+        positive.sort(key=lambda f: ({'programme': 0, 'catalyst': 1, 'structural': 2}[f['kind']], f['publication_date'] or '', f['id']))
+        lead = positive[0] if positive else None
+        tier = 'Prioritise' if linked and approved and bundle['identity']['identity_allows_priority'] else 'Investigate' if positive else 'Research only'
+        if excluded or not sector_fit: tier = 'Research only'
+        planned = any(f.get('programme_state') in {'announced_future_phase','planned_conditional_migration'} for f in programmes)
+        stage = ('Announced programme / conditional plan; buying unknown' if programmes and planned else
+                 'Programme activity reported; buying unknown' if programmes else
+                 'Dated catalyst reported; programme scope unknown' if catalysts else
+                 'Structural opportunity; current activity unknown' if positive else
+                 'No current trigger found')
+        reasons = []
+        if not positive: reasons.append('Insufficient current, Offer-relevant evidence; completed work and product/sector context do not establish a buying trigger.')
+        if not bundle['identity']['identity_allows_priority']: reasons.append('Identity/UK workshare boundary prevents a Prioritise recommendation.')
+        if not approved: reasons.append('Private Offer; independent employer approval is not established.')
+        if excluded: reasons.append('Excluded by the seller mission.')
+        if not sector_fit: reasons.append('Outside the declared Offer target sectors or account scope.')
+        if tier == 'Prioritise': reasons.append('A dated catalyst and a current programme are linked by the same programme reference; prioritise validation, not a sales pursuit.')
+        if tier == 'Investigate': reasons.append('Reported relevant pressure or programme warrants a bounded question; buying need and external scope remain unverified.')
+        reported_dates = sorted({f['publication_date'] for f in positive if f['publication_date']})
+        why = (lead['statement'] if lead else counters[0]['statement'] + ' Residual need is not established.' if counters else
+               facts[0]['statement'] + ' This is context, not an evidenced buying programme.' if facts else
+               'No current Offer-specific trigger found in the bounded reviewed sources.')
+        result['recommended_posture'] = 'deprioritise' if excluded or not sector_fit else ('validate' if positive else 'research')
+        result['appa_posture'] = 'validate' if positive and not excluded and sector_fit else 'learn'
+        result['why_account'] = why
+        result['why_now'] = ('Reported ' + reported_dates[-1] + '; current decision window and seller access require validation.' if reported_dates else 'No dated current catalyst established; research timing with the owner.')
+        result['entry_play'] = playbook['entry_plays'][0]['point_of_view'] + ' ' + playbook['entry_plays'][0]['conversation']
+        result['next_validation_action'] = enterprise['name'] + ': ' + playbook['entry_plays'][0]['disconfirming_question']
+        from . import buying_entry_plays
+        tailored = buying_entry_plays.resolve(offer['template_source']['id'], enterprise['slug'], facts, [f['id'] for f in positive]) if not excluded and sector_fit else None
+        if tailored:
+            result['entry_play'] = tailored['conversation'] + ' ' + tailored['diagnostic']
+            result['next_validation_action'] = tailored['question']
+        elif tier == 'Research only':
+            result['entry_play'] = 'Before proposing ' + offer['content']['name'] + ' to ' + enterprise['name'] + ', obtain attributable current evidence of an unresolved customer outcome. No programme diagnostic is recommended from the retained evidence.'
+        result['contradictions'] = [f['statement'] + ' ' + f['interpretation_limit'] for f in counters]
+        result['evidence_lineage'] = [{'claim_id':f['id'],'statement':f['statement'],'classification':'candidate_source_reference_not_accepted',
+            'period':f['effective_period'],'segment_id':f['source_segment']['segment_id'], 'content_sha256':f['source_segment']['content_hash'],
+            'source_refs':[{'id':f['source_id'],'title':f['source_title'],'url':f['source_url'],'verification':f['candidate_claim']['status'],'limitation':f['interpretation_limit']}]} for f in facts]
+        result['buying_trigger'] = {'policy': TRIGGER_POLICY, 'tier': tier, 'stage': stage,
+            'entry_play_detail': tailored, 'entry_play_revision': buying_entry_plays.REVISION,
+            'dimension': dimension, 'interpretation': 'Source-supported candidate assessment; not accepted APPA or customer buying intent',
+            'structural_pressures': [f['id'] for f in positive if f['kind']=='structural'],
+            'observed_dated_catalysts': [f['id'] for f in catalysts], 'reported_programmes': [f['id'] for f in programmes],
+            'active_buying_programme': 'Not established',
+            'programme_states': [{'fact_id':f['id'],'state':f.get('programme_state','unknown')} for f in programmes],
+            'procurement_observed': False, 'buyer_intent': 'Unknown', 'funding': 'Unknown', 'seller_access': 'Unknown',
+            'materiality': 'A stated programme/pressure is decision context; customer impact and residual need require validation' if lead else 'Not established',
+            'signal_strength': 'Reviewed primary candidate passages; not accepted Evidence or confirmed buying need' if lead else 'Insufficient relevant evidence',
+            'quality_boundary': 'Bounded first-party review; source rights and canonical identity limits retained; source verification is not commercial qualification',
+            'offer_relevance': 'Source-backed candidate relevance' if lead else 'Insufficient evidence',
+            'timing': stage, 'residual_need': 'Unknown', 'research_completeness': bundle['identity']['research_completeness'],
+            'identity_scope': deepcopy(bundle['identity']), 'reasons': reasons,
+            'next_evidence_task': lead['next_evidence_task'] if lead else 'Obtain an attributable, current enterprise-specific problem, owner and decision context before recommending a programme.',
+            'timeline': facts, 'counter_evidence': [f['id'] for f in counters], 'unknowns': deepcopy(bundle['policy']['unknown_fields']),
+            'source_registry_digest': bundle['registry_digest'], 'research_digest': digest(canonical(bundle)),
+            'source_cutoff': evidence_cutoff, 'source_reference_ids': sorted({f['source_id'] for f in facts}),
+            'shortlist_eligible': not excluded and sector_fit,
+            'rank_key': [{'Prioritise':0,'Investigate':1,'Research only':2}[tier], 0 if programmes else 1 if catalysts else 2 if positive else 3]}
     return result
 
 
 @verified_service_read('commercial_context.view')
-def discover(mode='offer', selected='', evidence_cutoff='2026-11-13', *, headers=None):
+def discover(mode='offer', selected='', evidence_cutoff='2026-11-13', *, intelligence=False, headers=None):
     if mode not in {'offer', 'account'}:
         raise ValueError('Choose offer-led or account-led discovery')
     if date.fromisoformat(evidence_cutoff) > date.today():
@@ -609,11 +686,17 @@ def discover(mode='offer', selected='', evidence_cutoff='2026-11-13', *, headers
         'excluded_accounts': list(mission.excluded_accounts) if mission else []}
     eligible = [versions[-1] for versions in envelope['offers'].values()
                 if _visible(versions[-1], context, employer) and _eligible(envelope, versions[-1])]
+    if type(intelligence) is not bool: raise ValueError('Explicit intelligence mode required')
     targets = accounts()
+    if intelligence:
+        from .research_intelligence import buying_evidence as research
+        targets = research.accounts(targets)
+        eligible = [r for r in eligible if r.get('template_source', {}).get('id') in research.OFFER_DIMENSIONS]
     if selected and mode == 'offer':
         chosen = _record(envelope, context, employer, selected)
         if not _eligible(envelope, chosen):
             raise ValueError('Offer needs current review')
+        if intelligence and chosen not in eligible: raise ValueError('Select one of the five strategic Offers')
         eligible = [chosen]
     if selected and mode == 'account':
         if selected not in targets:
@@ -627,5 +710,66 @@ def discover(mode='offer', selected='', evidence_cutoff='2026-11-13', *, headers
                 require_capability(headers, 'commercial_context.view', enterprise['id'], context.workspace)
             except PermissionError:
                 continue
-        results.extend(assess_fit(seller, offer, enterprise, evidence_cutoff) for offer in eligible)
+        results.extend(assess_fit(seller, offer, enterprise, evidence_cutoff, TRIGGER_POLICY if intelligence else POLICY) for offer in eligible)
+    if intelligence:
+        return sorted(results, key=lambda r: (*r['buying_trigger']['rank_key'], r['enterprise_name'], r['offer_id']))
     return sorted(results, key=lambda r: ({'validate': 0, 'partner': 1, 'research': 2, 'deprioritise': 3}[r['recommended_posture']], r['enterprise_name'], r['offer_id']))
+
+
+@verified_service_read('commercial_context.view')
+def shortlist_snapshot(*, headers=None):
+    context=_actor(headers);envelope=_load();employer=_selected(envelope,context)
+    from .research_intelligence import buying_evidence as research
+    research.load()
+    registry=research.DATA_SHA256
+    targets=research.accounts(accounts())
+    records=[]
+    for versions in envelope['users'].get(_key(context),{}).get('shortlists',{}).values():
+        record=deepcopy(versions[-1])
+        if record['workspace_id']!=context.workspace or record['employer_id']!=employer['id']:continue
+        latest=envelope['offers'].get(record['offer_id'],[])
+        record['stale']=(record['source_registry_digest']!=registry or not latest or latest[-1]['version']!=record['offer_version'] or not _eligible(envelope,latest[-1]))
+        permitted=True
+        for entry in record['entries']:
+            if not entry['enterprise_id'].startswith('presentation:'):
+                try:require_capability(headers,'commercial_context.view',entry['enterprise_id'],context.workspace)
+                except PermissionError:permitted=False;break
+            target=targets.get(entry['enterprise_slug'])
+            if not target or digest(canonical(target['trigger_research']))!=entry['research_digest']:record['stale']=True
+        if permitted:records.append(record)
+    return records
+
+
+@verified_service_write('commercial_context.edit')
+def save_shortlist(offer_id, expected_offer_version, expected_employer_version, cutoff, registry_digest, assessment_ids, note,
+                   expected_version=0, confirmed=False, *, headers=None):
+    """Actor-private, reviewed operational snapshots; never Pipeline or Evidence."""
+    context=_actor(headers,True);envelope=_load();employer=_selected(envelope,context)
+    record=_record(envelope,context,employer,offer_id)
+    if record['version']!=expected_offer_version or employer['version']!=expected_employer_version:
+        raise ValueError('Offer or employer authorisation changed; reload before review')
+    if confirmed is not True:raise ValueError('Explicit shortlist review required')
+    if not isinstance(assessment_ids,(list,tuple)) or not 1<=len(assessment_ids)<=12 or any(type(v) is not str for v in assessment_ids) or len(set(assessment_ids))!=len(assessment_ids):
+        raise ValueError('Choose one to twelve distinct reviewed assessments')
+    results=discover('offer',offer_id,cutoff,intelligence=True,headers=headers)
+    from .research_intelligence import buying_evidence as research
+    if registry_digest!=research.DATA_SHA256:raise ValueError('Research changed; refresh before saving')
+    available={r['assessment_id']:r for r in results if r['buying_trigger']['shortlist_eligible']}
+    if not set(assessment_ids)<=set(available):raise ValueError('Assessment changed, unavailable or excluded; refresh before saving')
+    identifier='shortlist-'+digest(canonical([context.workspace,context.user_id,employer['id'],offer_id,cutoff]))[:28]
+    private=envelope['users'].setdefault(_key(context),{}).setdefault('shortlists',{})
+    if identifier not in private and len(private)>=20:raise ValueError('Pilot limit: twenty private shortlist histories')
+    versions=private.setdefault(identifier,[])
+    if len(versions)>=100:raise ValueError('Pilot limit: one hundred reviews per shortlist')
+    if (versions[-1]['version'] if versions else 0)!=expected_version:raise ValueError('Shortlist review changed; reload before saving')
+    saved={'id':identifier,'version':expected_version+1,'workspace_id':context.workspace,'employer_id':employer['id'],
+        'author':context.user_id,'offer_id':offer_id,'offer_version':record['version'],'source_cutoff':cutoff,
+        'source_registry_digest':registry_digest,'reviewed_at':datetime.now(timezone.utc).isoformat(),
+        'note':_text(note,1000),'classification':'Private reviewed research shortlist; not qualified Pipeline',
+        'entries':[{'assessment_id':key,'enterprise_id':available[key]['enterprise_id'],'enterprise_name':available[key]['enterprise_name'],
+            'enterprise_slug':available[key]['enterprise_slug'],'tier':available[key]['buying_trigger']['tier'],
+            'stage':available[key]['buying_trigger']['stage'],'research_digest':available[key]['buying_trigger']['research_digest'],
+            'source_ids':available[key]['buying_trigger']['source_reference_ids'],'why':available[key]['why_account']} for key in assessment_ids],
+        'pipeline_mutation':False,'canonical_mutation':False}
+    versions.append(saved);_persist(envelope,headers,'research_shortlist_reviewed',identifier)
+    return deepcopy(saved)

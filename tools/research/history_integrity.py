@@ -1,4 +1,5 @@
 """Exact reviewed research cuts; no automatic approval of future corpus changes."""
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -6,6 +7,9 @@ import subprocess
 MAIN = 'adf205993cc0857183d77766ce4882bf48326fb4'
 DEPTH = '6988ba50d29c1f238293fc7fe110d6182f055e68'
 MACRO = '111600a56ca0edba0d47d1a8a0c92068060d83a8'
+# #591 owner-authorised candidate-only addition; every earlier byte remains pinned.
+TRIGGER_SHA256 = '2aa6062fba5ec016e77dbcca81989a318793c3b1746df08031da32e36a7e8927'
+TRIGGER_ADDITIONS = ('enterprise-knowledge/technology/research-model/Buying-Trigger-Pilot.json',)
 REVIEW = 'enterprise-knowledge/banking/research-model/Understanding-Review.json'
 DEPTH_ADDITIONS = tuple('enterprise-knowledge/banking/research-model/source-snapshots/'+name+'.txt'
                         for name in ('DEPTH-LBG-AI','DEPTH-LBG-LEGACY','DEPTH-LBG-WALLET','DEPTH-LBG-CURVE'))
@@ -34,6 +38,12 @@ def approved_history(root):
         for path in additions:
             assert path not in expected, 'Existing identity cannot become an addition'
             expected[path]=_git(root,'show',ref+':'+path)
+    candidate=Path(root)/TRIGGER_ADDITIONS[0]
+    assert not candidate.is_symlink(), 'Candidate source symlink is not approved'
+    content=candidate.read_bytes()
+    assert hashlib.sha256(content).hexdigest()==TRIGGER_SHA256, 'Approved candidate source changed'
+    assert TRIGGER_ADDITIONS[0] not in expected, 'Existing identity cannot become an addition'
+    expected[TRIGGER_ADDITIONS[0]]=content
     return expected
 
 
@@ -51,6 +61,6 @@ def verify_history(root):
     assert not any(p.is_symlink() for p in files), 'Research symlink is not a reviewed source'
     actual={str(p.relative_to(root)):p.read_bytes() for p in files if p.is_file()}
     compare_history(expected,actual)
-    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS),
+    return {'historical_files':len(expected)-len(DEPTH_ADDITIONS)-len(MACRO_ADDITIONS)-len(TRIGGER_ADDITIONS),
             'depth_additions':len(DEPTH_ADDITIONS),'macro_additions':len(MACRO_ADDITIONS),
-            'total':len(expected),'old_review_records_retained':True}
+            'trigger_candidate_additions':len(TRIGGER_ADDITIONS),'total':len(expected),'old_review_records_retained':True}
